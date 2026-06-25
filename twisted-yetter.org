@@ -1,0 +1,950 @@
+#+TITLE: 帶 H_2 標記的 Yetter–Crane–Yetter 不變量：Kirby 公式、decorated stabilization 與 exotic 4-manifold 搜尋計畫
+#+SUBTITLE: 給後續研究代理的可執行工作文件
+#+AUTHOR: OpenAI
+#+DATE: 2026-06-25
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:3 num:t ^:nil
+#+TODO: TODO(t) NEXT(n) VERIFY(v) BLOCKED(b) | DONE(d) CANCELED(c)
+#+STARTUP: overview
+#+PROPERTY: Effort_ALL 0:30 1:00 2:00 4:00 1d 2d 1w 2w 1m
+
+* 給執行代理的最短指示
+
+本計畫要回答的核心問題是：David Yetter 在 1993 年定義的 homologically twisted Crane–Yetter invariant
+
+\[
+F_{\mathcal C,X}(\alpha)=Z_{\mathcal C}(X,\alpha),
+\qquad
+\alpha\in H_2(X;A),
+\qquad
+A=\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\mathcal C}),
+\]
+
+是否可能在適當的 H_2 marking 下區分 homeomorphic but non-diffeomorphic 的 smooth 4-manifolds；以及是否能把它改寫成只使用 Kirby diagram 中 1-handles 與 2-handles 的可計算公式。
+
+立即執行順序如下：
+
+1. 先重建 Yetter 原文的精確定義、normalization 與 \(\mathbb Z/2\) surgical formula；不要先做 triangulation。
+2. 把一般 premodular/ribbon fusion category 的候選 twisted Kirby color
+   \[
+   \Omega_a=\sum_{i\in\operatorname{Irr}(\mathcal C)}d_i\,\lambda_i(a)\,X_i
+   \]
+   當作「待證命題」，逐一證明 handle-slide、1/2 cancellation、2/3 cancellation 與 basis-change 規則；不要把 \(\mathbb Z/2\) 的直覺直接外推。
+3. 同時研究 Reutter 證明是否可延伸到 \(K(A,2)\)-decorated bordism category。這是整個計畫的主要 go/no-go 分岔。
+4. 第一個 closed exotic pair 使用 Dolgachev surface \(E(1)_{2,3}\) 與 \(E(1)=\mathbb{CP}^2\#9\overline{\mathbb{CP}}{}^2\)。兩邊都有不含 1-、3-handles 的 explicit handlebody，且有 cork 所給的自然 H_2 identification。
+5. 第一個 category 使用低 rank 的 \(SU(2)_2\) 作 negative control 與軟體驗證；不要預期它一定偵測 exotic smoothness。
+
+* 專案狀態與研究目標
+
+** 狀態
+
+- 目前已有清楚的概念路線，但尚未完成一般 Kirby 公式的嚴格證明，也尚未完成任何 exotic pair 的實際數值計算。
+- 初步文獻檢索未找到 Yetter 所說「正在計算 Gompf examples」的已出版結果。這只能視為待確認的文獻缺口，不能宣稱後續工作不存在。
+- 本文件刻意把「已知結果」、「合理推論」與「待證猜想」分開。
+
+** 最終研究目標
+
+建立並測試一個可重現的 invariant package：
+
+\[
+\mathfrak F_{\mathcal C}(X)
+=
+\left[H_2(X;A),\;F_{\mathcal C,X}:H_2(X;A)\to k\right],
+\]
+
+其中方括號表示要除以適當的 marking change／homeomorphism action。最強目標是找到 exotic pair \((X,X')\)，使兩者的 total decorated functions 即使經過所有允許的 H_2 isometries 仍不相同。
+
+較弱但仍有價值的目標是：
+
+- 在由共同 cork complement 所決定的 canonical marking 下得到 pointwise 差異；
+- 證明所有 semisimple decorated theories 仍受某個 decorated Reutter theorem 限制；
+- 或證明特定 category 的 twisted invariant 只依賴 intersection form、signature、Pontryagin square、\(w_2\) 等 classical data。
+
+* 核心背景與記號
+
+** Category-side 記號
+
+令 \(\mathcal C\) 為有限半單、spherical、ribbon／premodular category，simple objects 為 \(X_i\)，quantum dimensions 為 \(d_i\)。
+
+Yetter 的「grading group」可用現代 universal grading group 記為
+
+\[
+U(\mathcal C)
+=
+\langle u_i\mid u_k=u_i u_j\text{ whenever }N_{ij}^k>0\rangle.
+\]
+
+令
+
+\[
+A=\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\mathcal C}).
+\]
+
+對每個 \(a\in A\) 與 simple \(X_i\)，Schur lemma 給出 scalar
+
+\[
+a_{X_i}=\lambda_i(a)\operatorname{id}_{X_i}.
+\]
+
+在適當基域上，Yetter 的 Proposition 4 給出
+
+\[
+A\cong \operatorname{Hom}(U(\mathcal C),k^\times).
+\]
+
+注意：Yetter 原文的 \(\mathrm{Gr}\mathcal C\) 記號在摘要與正文容易造成混淆。後續工作一律使用 \(U(\mathcal C)\) 表示 universal grading group，使用 \(A\) 表示 tensor automorphism group。
+
+** Manifold-side 記號
+
+對 closed oriented 4-manifold \(X\)，Yetter 的 decoration 可寫為
+
+\[
+\alpha\in H_2(X;A)\cong H^2(X;A),
+\]
+
+後一個同構由 Poincaré duality 給出。若要把理論提升成 homotopy TQFT/HQFT，應把 \(\alpha\) 視為 homotopy class of maps
+
+\[
+X\longrightarrow K(A,2).
+\]
+
+定義 total function
+
+\[
+F_{\mathcal C,X}:H_2(X;A)\longrightarrow k,
+\qquad
+\alpha\longmapsto Z_{\mathcal C}(X,\alpha).
+\]
+
+** Exotic pair 的比較準則
+
+僅比較某一個任意選定的 \(H_2\) basis 不足以宣稱偵測 smooth structure。至少要區分下列層次：
+
+1. *Marked distinction*：已固定一個自然 identification \(\phi:H_2(X;A)\to H_2(X';A)\)，且存在 \(\alpha\) 使
+   \[
+   F_X(\alpha)\neq F_{X'}(\phi(\alpha)).
+   \]
+2. *Cork-canonical distinction*：\(X=N\cup_{\mathrm{id}}C\)、\(X'=N\cup_\tau C\)，由 contractible cork 的共同 complement \(N\) 給出 identification。
+3. *Unmarked total-function distinction*：不存在任何 orientation-preserving homeomorphism 所誘導的 \(H_2\) isomorphism 使兩個 functions 相等。
+4. *Orbit/multiset distinction*：即使忘記 marking，只保留 \(\{F_X(\alpha)\}_{\alpha}\) 或按 intersection-form automorphism group 分 orbit 後的資料，兩邊仍不同。
+
+論文中必須明確說明得到的是哪一個層次。
+
+* 已建立事實、合理推論與待證命題
+
+** 已建立事實 [ESTABLISHED]
+
+- Yetter 定義了依賴 \(H_2(X;A)\) 的 twisted Crane–Yetter state sum，並證明它與 triangulation 及 cycle representative 無關。
+- 在 \(\operatorname{Rep}(U_q\mathfrak{sl}_2)\) 的 \(A=\mathbb Z/2\) 情形，Yetter 給出 simply connected 4-manifold 的 surgical version：
+  \[
+  \omega=\sum_i\Delta_i i,
+  \qquad
+  \theta=\sum_i(-1)^i\Delta_i i.
+  \]
+  代表 decoration 的 2-handle components 標 \(\theta\)，其餘 components 標 \(\omega\)。
+- Yetter 證明在 \(\mathbb Z/2\) 情形，滑過 \(\theta\)-component 會交換 \(\omega\leftrightarrow\theta\)，正好對應 homology basis change。
+- Reutter 證明 ordinary semisimple oriented 4D TQFT 對 \(S^2\times S^2\)-stable diffeomorphism 不變，因此 ordinary Crane–Yetter–Kauffman theory 不能區分 closed exotic smooth structures。
+- Reutter 的 theorem statement 位於 undecorated oriented bordism category；原文沒有直接處理以 \(K(A,2)\) background 標記的 bordisms。
+- Akbulut 給出 \(E(1)_{2,3}\) 不含 1-、3-handles 的 explicit handlebody，並把它表示成 \(E(1)\) 的 cork twist。
+- Wakamaki 給出 exotic \(R_8\) 與 \(\mathbb{CP}^2\#8\overline{\mathbb{CP}}{}^2\) 的 explicit cork picture，且此 pair 經一次 \(S^2\times S^2\) stabilization 後 diffeomorphic。
+- Beliakova–De Renzi 已建立帶 \(H^2(W,\partial W;G)\) decoration 的 4-dimensional 2-handlebody invariants，提供現代 decorated Kirby calculus 的重要模板；但其 equivalence relation 與完整 closed 4D TQFT 問題需分開處理。
+
+** 合理推論 [INFERENCE]
+
+- Yetter twist 可能逃離 Reutter 原 theorem 的直接適用範圍，但這不表示它真的能偵測 exotic smoothness。
+- 正確的理論問題應是「decorated/marked stable diffeomorphism」而不是 ordinary stable diffeomorphism。
+- modular category 的 twisted theory很可能只產生 finite 2-form gauge theory／quadratic refinement 型資料，因此應先當 negative control。
+- explicit cork pair 比任意 exotic pair 更適合，因為共同 complement 提供自然 marking 並可能把計算局部化到 boundary state space。
+
+** 待證命題 [CONJECTURAL UNTIL PROVED]
+
+- 對一般 \(a\in A\)，2-handle 的 twisted Kirby color 應為
+  \[
+  \Omega_a=\sum_i d_i\lambda_i(a)X_i.
+  \]
+- 一般 finite abelian \(A\) 下的 handle-slide rule 應由 decoration coordinates 的 basis change 控制；確切是左乘、右乘、inverse 或 contragredient action 必須從 orientation convention 推導，不能猜。
+- 一般 premodular category 的 Kirby formula 與 Yetter state sum 應在適當 normalization 下相等。
+- cork decomposition 可能給出
+  \[
+  Z(X,\alpha)-Z(X^\tau,\alpha)
+  =\langle Z(N,\alpha),(1-\tau_*)Z(C,0)\rangle,
+  \]
+  但必須先建立 decorated gluing theory 與 boundary state spaces。
+
+* 精確研究問題
+
+** RQ1：一般 twisted Kirby formula 是否成立？
+
+目標：從 category data 與 Kirby diagram 直接定義 \(Z_{\mathcal C}(X,\alpha)\)，並證明所有必要 Kirby moves 下不變。
+
+** RQ2：Kirby formula 是否等於 Yetter 的 triangulation state sum？
+
+目標：建立 chain-mail／handle decomposition 證明，並完整追蹤 normalization、signature anomaly、nullity 與 1-handle factors。
+
+** RQ3：Reutter 的 no-go theorem 是否有 decorated 版本？
+
+目標：研究 symmetric monoidal functor
+
+\[
+Z:\operatorname{Bord}^{SO}_4(K(A,2))\longrightarrow\mathrm{Vect}_k
+\]
+
+的 semisimplicity 與 stabilization cancellation。判斷何種條件下
+
+\[
+(X,\alpha)\sim_{\mathrm{stable}}(X',\alpha')
+\Longrightarrow
+Z(X,\alpha)=Z(X',\alpha').
+\]
+
+** RQ4：哪些 category 最有機會產生非 classical 的 decorated data？
+
+目標：建立 algebraic screening，不要直接在大型 exotic diagram 上盲算。
+
+** RQ5：哪一組 exotic pair 是第一個可行實驗？
+
+目標：在 diagram size、H_2 marking、known stabilization 與計算複雜度之間最佳化。
+
+** RQ6：如何把指數爆炸降到可計算？
+
+目標：使用 universal-grading sectors、finite Fourier transform、fusion constraints、memoization 與 tensor-network contraction，而不是逐 decoration、逐 coloring 重算。
+
+* 主要 go/no-go 決策樹
+
+** 分支 A：證明 decorated Reutter theorem
+
+若能證明下列組合：
+
+1. Yetter theory 確實延伸為 semisimple \(K(A,2)\)-HQFT；
+2. 相關 decorated stabilization operator 可逆；
+3. 所需的 H_2 marking 可由 stable diffeomorphism 實現；
+
+則 semisimple closed-theory 路線大概率無法偵測 exotic smoothness。此時專案應轉向：
+
+- non-semisimple ribbon categories；
+- 僅對 2-handlebodies／2-deformations 定義的 invariants；
+- boundary state／cork action；
+- skein-lasagna 或其他不延伸成 ordinary full semisimple TQFT 的模型。
+
+** 分支 B：decorated stabilization 留下真正障礙
+
+若 ordinary stable diffeomorphism 無法在 stabilization 後保持指定 \(\alpha\oplus0\)，或某些 decorated stabilizer amplitudes 不可逆／為零，則進入 explicit exotic-pair 計算。
+
+** 分支 C：category screening 顯示 invariant 完全 classical
+
+若對某 category 可證
+
+\[
+F_X(\alpha)=f\bigl(\chi(X),\sigma(X),Q_X,\mathfrak P(\alpha),w_2(X)\smile\alpha,\ldots\bigr),
+\]
+
+則把該 category 標為 negative control，不再用它做大型 exotic 計算；改測非模、slightly-degenerate 或 non-semisimple input。
+
+* 工作包 WP0：文獻與原始定義重建
+
+** NEXT WP0.1 建立 claim matrix
+:PROPERTIES:
+:ID: WP0.1
+:OUTPUT: literature/claim-matrix.org
+:END:
+
+逐條記錄以下命題的精確來源、頁碼、假設與記號：
+
+- universal grading group 與 tensor automorphisms；
+- twisted state-sum definition；
+- cycle-representative invariance；
+- \(\mathbb Z/2\) surgical formula；
+- Kirby move proof；
+- twisted Broda 與 twisted Crane–Yetter 的 normalization relation；
+- Yetter 所稱 Gompf examples 的確切流形。
+
+驗收：任何後續公式都能連回原文頁碼，且不混用 \(U(\mathcal C)\) 與 \(A\)。
+
+** TODO WP0.2 尋找 Yetter 後續計算
+:PROPERTIES:
+:ID: WP0.2
+:END:
+
+搜尋：
+
+- Yetter 的後續論文、會議錄、未出版 preprint；
+- 引用 hep-th/9311082 且包含 Gompf、Broda、homological twist 的文章；
+- Gompf 1991 nuclei 中最可能是 Yetter 指涉的 pair；
+- 作者網頁、MathSciNet、zbMATH、Inspire、Google Scholar citation graph。
+
+若無結果，記錄搜尋式與資料庫，結論只寫「未找到」，不要寫「不存在」。
+
+** TODO WP0.3 建立相鄰文獻地圖
+
+至少涵蓋：
+
+- Crane–Kauffman–Yetter chain-mail/surgery formula；
+- Roberts refinement 與 Fourier-transform viewpoint；
+- observables in Crane–Yetter；
+- dichromatic invariants；
+- homotopy/HQFT 與 \(K(A,2)\) backgrounds；
+- Beliakova–De Renzi refined 2-handlebody invariants；
+- non-semisimple 4D skein TQFT；
+- recent skein-lasagna detection of exotic knot traces。
+
+* 工作包 WP1：decorated bordism 與 Reutter 分析
+
+** NEXT WP1.1 精確定義 decorated bordism category
+:PROPERTIES:
+:ID: WP1.1
+:OUTPUT: theory/decorated-bordism-definition.tex
+:END:
+
+定義 objects、morphisms、gluing 與 monoidal product：
+
+- object：closed oriented 3-manifold \(Y\) 加 map \(Y\to K(A,2)\)；
+- morphism：oriented 4-bordism \(W\) 加 map \(W\to K(A,2)\)，限制到 boundary data；
+- equivalence：relative-boundary diffeomorphism respecting background up to homotopy。
+
+確認 Yetter state sum 是否自然給出此 category 上的 functor，而不只是 closed-pair invariant。
+
+** NEXT WP1.2 逐步重跑 Reutter 證明
+:PROPERTIES:
+:ID: WP1.2
+:DEPENDS: WP1.1
+:OUTPUT: theory/decorated-reutter-audit.org
+:END:
+
+對 Reutter 證明中的每一步標記：
+
+- 完全不受 background 影響；
+- 需要 background 為零；
+- 需要 decorated Frobenius algebra；
+- 需要某個 stabilization amplitude 可逆；
+- 需要 diffeomorphism 保持 marking。
+
+特別計算
+
+\[
+Z(S^2\times S^2,\beta),
+\qquad
+\beta\in H^2(S^2\times S^2;A),
+\]
+
+而不只計算 \(\beta=0\)。
+
+** TODO WP1.3 marked stable diffeomorphism 問題
+:PROPERTIES:
+:ID: WP1.3
+:END:
+
+對 homeomorphic simply connected \(X,X'\) 與指定 \(\phi:H_2(X;A)\to H_2(X';A)\)，研究是否存在
+
+\[
+\Phi:X\#n(S^2\times S^2)\to X'\#n(S^2\times S^2)
+\]
+
+使
+
+\[
+\Phi_*(\alpha\oplus0)=\phi(\alpha)\oplus0.
+\]
+
+需要查明：
+
+- Wall stable diffeomorphism theorem 對 induced H_2 isometry 的控制程度；
+- stabilization summands 上的 hyperbolic automorphisms 是否可把 background 移回原 summand；
+- characteristic/non-characteristic classes、divisibility、self-intersection 與 mod-\(n\) reductions 是否形成障礙；
+- cork-induced canonical marking 是否在 stabilization diffeomorphism 下保留。
+
+** TODO WP1.4 計算 invertible decorated theories 的 bordism group
+
+使用 Atiyah–Hirzebruch spectral sequence 初步分析
+
+\[
+\Omega^{SO}_4(K(A,2)).
+\]
+
+目的不是直接分類所有非可逆 HQFT，而是辨識 modular/invertible 部分最多能看到哪些 classical cohomology operations，作為 no-go 的基準線。
+
+* 工作包 WP2：一般 twisted Kirby calculus
+
+** NEXT WP2.1 固定 conventions
+:PROPERTIES:
+:ID: WP2.1
+:OUTPUT: theory/kirby-conventions.org
+:END:
+
+必須固定：
+
+- framed-link orientation；
+- dotted circle convention；
+- 2-handle basis 在 slide 下的矩陣；
+- decoration 採 homology coordinates 或 Poincaré-dual cohomology coordinates；
+- component orientation reversal 對 \(a\) 是否給 \(a^{-1}\)；
+- linking matrix、signature、nullity 與 normalization 的符號。
+
+** NEXT WP2.2 推導 twisted Kirby element
+:PROPERTIES:
+:ID: WP2.2
+:DEPENDS: WP2.1
+:OUTPUT: theory/twisted-kirby-element.tex
+:END:
+
+候選定義：
+
+\[
+\Omega_a
+=
+\sum_{i\in\operatorname{Irr}(\mathcal C)}d_i\lambda_i(a)X_i.
+\]
+
+需要證明或否證：
+
+- \(\Omega_1\) 是 ordinary Kirby color；
+- fusion／encircling identities 如何被 \(a\) 修正；
+- 滑動一個 \(\Omega_b\)-component 越過 \(\Omega_a\)-component 後，label 的確切轉換；
+- transparent objects 與 degenerate S-matrix 是否破壞所需 identity；
+- 左、右 dual 與 pivotal structure 的影響。
+
+** NEXT WP2.3 用 handle chain complex 編碼 decoration
+:PROPERTIES:
+:ID: WP2.3
+:DEPENDS: WP2.1
+:OUTPUT: theory/handle-chain-decoration.org
+:END:
+
+對 handle decomposition
+
+\[
+0\to C_4\xrightarrow{\partial_4}C_3\xrightarrow{\partial_3}C_2
+\xrightarrow{\partial_2}C_1\xrightarrow{\partial_1}C_0\to0,
+\]
+
+把 component labels \((a_1,\ldots,a_m)\) 與
+
+\[
+H_2(X;A)=\ker\partial_2/\operatorname{im}\partial_3
+\]
+
+精確對應。
+
+重點：
+
+- 有 1-handles 時，\(\partial_2\) 由 attaching maps 的 abelianized exponent sums 決定，不可只憑肉眼 linking 猜測；
+- 有 3-handles 時，必須證明 formula 對 \(\operatorname{im}\partial_3\) 的代表改變不敏感；
+- 無 1-、3-handles 時，2-handle components 可直接作為 H_2 basis，這正是 Dolgachev pair 的優勢。
+
+** TODO WP2.4 證明 Kirby moves
+:PROPERTIES:
+:ID: WP2.4
+:DEPENDS: WP2.2 WP2.3
+:OUTPUT: theory/decorated-kirby-invariance.tex
+:END:
+
+逐項處理：
+
+1. ambient isotopy；
+2. 2-handle slide；
+3. dotted-circle/1-handle slide；
+4. canceling 1/2 pair；
+5. canceling 2/3 pair；
+6. handle orientation reversal；
+7. blow-up/down 或等價的 signature normalization；
+8. decoration representative／basis change；
+9. disconnected diagrams 與 connected sum。
+
+每一 move 都要附 algebraic identity 與 coordinate-change matrix。
+
+** TODO WP2.5 與 Yetter state sum 建立等價
+:PROPERTIES:
+:ID: WP2.5
+:DEPENDS: WP2.4
+:OUTPUT: theory/state-sum-kirby-equivalence.tex
+:END:
+
+優先使用 chain-mail 或 shadow/dichromatic 路線，避免直接展開完整 Pachner-move proof。驗收條件：在 \(SU(2)\)、\(A=\mathbb Z/2\) 時退化為 Yetter 的 \(\omega/\theta\) 公式與 Proposition 12 normalization。
+
+* 工作包 WP3：category 篩選
+
+** NEXT WP3.1 建立 category scorecard
+:PROPERTIES:
+:ID: WP3.1
+:OUTPUT: categories/scorecard.org
+:END:
+
+每個候選 category 記錄：
+
+- rank；
+- \(U(\mathcal C)\)；
+- \(A=\operatorname{Aut}_\otimes(\operatorname{Id})\)；
+- Müger center；
+- modular／premodular／slightly-degenerate；
+- twisted Kirby colors 是否線性獨立；
+- \(Z(S^2\times S^2,\beta)\) 是否非零／可逆；
+- 是否已知等價於 finite gauge theory 或 quadratic-form theory；
+- computational cost。
+
+** NEXT WP3.2 第一批 negative controls
+
+依序計算：
+
+1. \(SU(2)_1\)：pointed、最簡單，應顯示 quadratic/cohomological 行為；
+2. \(SU(2)_2\)：rank 3，\(A\cong\mathbb Z/2\)，作主要軟體單元測試；
+3. \(SU(2)_k\) 的低 levels：確認 parity grading 與 level dependence；
+4. 一個 symmetric category，例如小型 \(\operatorname{Rep}(G)\)，測試 finite-gauge reduction。
+
+** TODO WP3.3 尋找較有希望的 semisimple categories
+
+篩選原則：
+
+- rank 儘量小；
+- \(A\neq0\)；
+- non-pointed grading sectors；
+- premodular 但非 modular；
+- Müger center 與 universal grading 非單純 direct-product factorization；
+- 某些 decorated stabilization amplitudes 可能為零或非可逆。
+
+先查 rank \(\leq 8\) 的已知 premodular categories，再決定是否值得實算。
+
+** TODO WP3.4 non-semisimple 備援路線
+
+若 WP1 得到 semisimple no-go，研究：
+
+- restricted/small quantum \(\mathfrak{sl}_2\)；
+- non-semisimple skein \((3+1)\)-TQFT；
+- Beliakova–De Renzi 的 refined 2-handlebody invariants；
+- 不可延伸成 ordinary full TQFT、且 stabilization value 可能為零的模型。
+
+* 工作包 WP4：計算引擎
+
+** NEXT WP4.1 資料模型
+:PROPERTIES:
+:ID: WP4.1
+:OUTPUT: src/data-model.md
+:END:
+
+輸入：
+
+- category data：simples、duals、fusion、\(F\)-symbols、\(R\)-symbols、twists、dimensions、grading；
+- Kirby link：PD code／braid word、component IDs、framings、dotted status；
+- decoration vector 與 handle-chain constraints；
+- basis-change matrices。
+
+輸出：
+
+- exact cyclotomic value；
+- grading-sector table；
+- 所有有效 \(\alpha\) 的 total function；
+- normalization audit；
+- move-invariance test report。
+
+** NEXT WP4.2 exact arithmetic
+
+首選 SageMath cyclotomic fields；探索階段可用高精度 numerical checks，但任何正式差異必須回到 exact arithmetic 或可證的 minimal polynomial comparison。
+
+** NEXT WP4.3 link evaluation backend
+
+兩條可並行路線：
+
+1. Temperley–Lieb recoupling，專攻 \(SU(2)_k\)；
+2. 一般 ribbon-category tensor network，供後續 categories 使用。
+
+優先把 Kirby link 轉成 braid／planar tensor network，使用 fusion-tree basis、memoization 與 treewidth-aware contraction。
+
+** NEXT WP4.4 finite Fourier transform
+
+對 \(A=\mathbb Z/2\)，先按 universal-grading sector 聚合：
+
+\[
+S_b
+=
+\sum_{\deg(X_j)=b_j}
+\Bigl(\prod_j d_{X_j}\Bigr)\operatorname{RT}(L;X_1,\ldots,X_m),
+\qquad
+b\in(\mathbb Z/2)^m.
+\]
+
+再一次性做 Walsh–Hadamard transform：
+
+\[
+F(a)=\sum_b(-1)^{\langle a,b\rangle}S_b.
+\]
+
+一般 finite abelian \(A\) 使用 character Fourier transform。只對滿足 handle-cycle constraints 的 decorations 輸出結果。
+
+對 rank-3 的 \(SU(2)_2\) 與 10 個 2-handles，naive component-label count 為
+
+\[
+3^{10}=59049,
+\]
+
+可作第一個可行 benchmark；真正成本仍取決於 crossings 與 contraction width。
+
+** NEXT WP4.5 單元測試
+
+至少包括：
+
+- \(S^4\)；
+- \(\mathbb{CP}^2\)、\(\overline{\mathbb{CP}}{}^2\)；
+- \(S^2\times S^2\) 的所有低階 decorations；
+- connected-sum multiplicativity；
+- orientation reversal；
+- 同一 manifold 的兩張 Kirby diagrams；
+- 一次 2-handle slide；
+- canceling 1/2 pair；
+- Yetter \(\omega/\theta\) 的 label-flip law；
+- \(\alpha=0\) 回到 ordinary invariant；
+- Fourier transform 與直接 summation 相符。
+
+* 工作包 WP5：Kirby diagram 資料集與 marking 追蹤
+
+** NEXT WP5.1 Dolgachev pair
+:PROPERTIES:
+:ID: WP5.1
+:OUTPUT: data/dolgachev/
+:END:
+
+資料來源：Akbulut, /The Dolgachev Surface/，尤其 final no-1/no-3 handle diagrams 與 cork decomposition。
+
+工作：
+
+1. 將 \(E(1)\) 與 \(E(1)_{2,3}\) 的 final framed links digitize 成 PD code／braid word；
+2. 驗證 component 數為 \(b_2=10\)；
+3. 計算 linking matrices，驗證 rank、signature 與 odd unimodular form；
+4. 重建從 cork-complement basis 到兩張 final diagram basis 的整數矩陣；
+5. 保留完整 handle-slide log，避免 marking 在簡化過程中遺失。
+
+驗收：可由資料檔自動重建 intersection form，且兩邊的 canonical H_2 identification 有明確 matrix。
+
+** TODO WP5.2 R_8 pair
+:PROPERTIES:
+:ID: WP5.2
+:OUTPUT: data/R8/
+:END:
+
+工作：
+
+- digitize Wakamaki 的 \(R_8\) 與 standard \(\mathbb{CP}^2\#8\overline{\mathbb{CP}}{}^2\) diagrams；
+- 追蹤 dot–zero exchange cork；
+- 記錄一次 \(S^2\times S^2\) stabilization diffeomorphism 對 H_2 的作用；
+- 測試哪些 decorations 可在該 diffeomorphism 下保持為 \(\alpha\oplus0\)。
+
+此 pair 的主要角色是測試 decorated Reutter mechanism，不一定是第一個數值計算。
+
+** TODO WP5.3 Akhmedov–Park 小 \(b_2\) pair
+
+目標 pair：exotic \(\mathbb{CP}^2\#2\overline{\mathbb{CP}}{}^2\) 與 standard rational surface。
+
+優點：\(b_2=3\)，若 \(A=\mathbb Z/2\)，只有 8 個 H_2 decorations。
+缺點：handle diagram 的實際 link complexity 可能遠大於 \(b_2\)，且 marking 追蹤較難。
+
+** TODO WP5.4 exotic knot traces
+
+使用 Yasui 的 framed-knot families或已被其他 invariants 區分的 exotic knot traces：
+
+\[
+X_n(K)=B^4\cup_K h^2,
+\qquad
+H_2(X_n(K))\cong\mathbb Z.
+\]
+
+用途：
+
+- 測試一個 2-handle 的 relative invariant；
+- 驗證 boundary state／gluing；
+- 檢查 twisted color 是否在最小 diagram 上已有非平凡資訊。
+
+注意：這是 compact-with-boundary 問題；結果不可直接冒充 closed 4-manifold scalar invariant。
+
+** TODO WP5.5 找回 Yetter 原先的 Gompf target
+
+從 Gompf, /Nuclei of elliptic surfaces/ 中辨識：
+
+- 哪些 homeomorphic but non-diffeomorphic examples 有最簡單 surgery descriptions；
+- H_2 與 boundary；
+- 是否能用一個或少數 2-handles表示；
+- 是否比現代 Dolgachev diagram 更適合作為歷史上的第一個測試。
+
+* 候選 exotic pairs 排序
+
+| 優先度 | Pair | \(b_2\) | Handle 優勢 | H_2 marking | 主要用途 | 主要風險 |
+|--------+------+---------+-------------+--------------+----------+----------|
+| 0 | Exotic framed-knot traces | 1 | 單一 2-handle | 通常自然 | 公式與軟體單元測試 | 有 boundary，只給 relative data |
+| 1 | \(E(1)_{2,3}\) vs. \(E(1)\) | 10 | 兩邊可無 1、3-handles | cork complement | 第一個 closed 實算 | link crossing complexity、basis tracking |
+| 2 | \(R_8\) vs. \(\mathbb{CP}^2\#8\overline{\mathbb{CP}}{}^2\) | 9 | explicit cork；一次 stabilization | cork complement | decorated stabilization 壓力測試 | diagram 較複雜 |
+| 3 | Akhmedov–Park exotic \(\mathbb{CP}^2\#2\overline{\mathbb{CP}}{}^2\) | 3 | decoration space 最小 | 需重建 | 第二階段 exotic test | Kirby diagram 不因低 \(b_2\) 而簡單 |
+| H | Gompf nuclei examples | 待確認 | Yetter 原始目標、可能有簡單 surgery | 待確認 | 歷史與可能捷徑 | 先要辨識確切 pair |
+
+不建議一開始投入：未知 exotic \(S^4\)（且 \(H_2=0\)）、未知 exotic \(\mathbb{CP}^2\)、或沒有 explicit Kirby marking 的大型 geography examples。
+
+* 工作包 WP6：實驗順序
+
+** NEXT WP6.1 標準流形 negative controls
+:PROPERTIES:
+:ID: WP6.1
+:DEPENDS: WP2.4 WP4.5
+:END:
+
+計算 \(F_X\) 於：
+
+- \(S^4\)；
+- \(\mathbb{CP}^2\)、\(\overline{\mathbb{CP}}{}^2\)；
+- \(S^2\times S^2\)；
+- \(\mathbb{CP}^2\#n\overline{\mathbb{CP}}{}^2\) 的小 \(n\)。
+
+判斷 function 是否只依賴 \(\alpha^2\)、characteristic class、Pontryagin square 或 mod-2 intersection data。
+
+** NEXT WP6.2 exotic knot-trace smoke test
+:PROPERTIES:
+:ID: WP6.2
+:DEPENDS: WP4.5 WP5.4
+:END:
+
+先確認 relative invariant 是否對已知 exotic traces 有任何差異。若完全相同，仍可作 normalization 與 gluing 測試。
+
+** NEXT WP6.3 Dolgachev pair 全函數計算
+:PROPERTIES:
+:ID: WP6.3
+:DEPENDS: WP3.2 WP4.4 WP5.1 WP6.1
+:OUTPUT: results/dolgachev-SU2_2.org
+:END:
+
+步驟：
+
+1. 用 \(SU(2)_2\) 計算 grading-sector amplitudes；
+2. 一次性 Fourier transform 得到所有 \(\alpha\in H_2(-;\mathbb Z/2)\)；
+3. 先在 cork-canonical marking 下逐點比較；
+4. 再按 intersection-form automorphism group 的 image 分 orbit；
+5. 比較 value histogram、orbit-wise values 與完整 function；
+6. 以 exact arithmetic 輸出差異證書。
+
+若無差異，不視為失敗；把結果歸類為對 modular negative control 的證據，再換 category。
+
+** TODO WP6.4 R_8 decorated-stabilization test
+:PROPERTIES:
+:ID: WP6.4
+:DEPENDS: WP1.3 WP5.2
+:END:
+
+不用先計算完整 quantum invariant。先純拓撲地求一次 stabilization diffeomorphism 對
+
+\[
+H_2(R_8\#S^2\times S^2;A)
+\]
+
+的矩陣，判斷 \(\alpha\oplus0\) 是否能與 standard side 的對應 class 匹配。這可直接決定 Reutter-style cancellation 是否有機會套用。
+
+** TODO WP6.5 擴大 category
+
+依 WP3 scorecard 選擇下一個 category。優先順序：
+
+1. 小 rank、nonmodular premodular；
+2. slightly-degenerate；
+3. non-semisimple／2-handlebody invariant。
+
+每換 category 都先重做 WP6.1，不要直接投入 Dolgachev 大圖。
+
+* Cork-local 計算策略
+
+若能建立 decorated boundary state space，對
+
+\[
+X=N\cup_{\mathrm{id}}C,
+\qquad
+X^\tau=N\cup_\tau C
+\]
+
+應嘗試寫成
+
+\[
+Z(X,\alpha)=\langle Z(N,\alpha),Z(C,0)\rangle,
+\]
+
+\[
+Z(X^\tau,\alpha)=\langle Z(N,\alpha),\tau_*Z(C,0)\rangle.
+\]
+
+此路線把大型 closed link 計算拆成：
+
+1. 求 cork boundary 的 state space；
+2. 求 involution \(\tau_*\) 的矩陣；
+3. 求 complement state 隨 \(\alpha\) 的變化；
+4. 測試 complement state 是否投影到 \((1-\tau_*)\) 的非零部分。
+
+若成功，這可能比直接評估兩張完整 Kirby links 更有效，也能清楚定位 exotic smoothness 的來源。
+
+* Homeomorphism-group 與 orbit 比較
+
+對 simply connected indefinite odd unimodular form，需計算 integral intersection-form automorphism group 在 \(H_2(X;A)\) 上的 image。對 \(A=\mathbb Z/2\)，至少記錄：
+
+- \(\alpha\cdot\alpha\bmod2\)；
+- \(\alpha\) 是否 characteristic；
+- pairing with \(w_2\)；
+- integral lift 的 divisibility（若 decoration group 不是純 mod 2）；
+- canonical class／fiber class 等 pair-specific structures是否由 marking 固定。
+
+結果報告分三層：
+
+1. raw basis coordinates；
+2. cork-canonical marking；
+3. quotient by all known homeomorphism-induced automorphisms。
+
+只有第 3 層的差異才接近「unmarked exotic smooth structure detection」。
+
+* 複雜度控制與工程原則
+
+- 不使用 4D triangulation 作第一方案。
+- 不對每個 \(\alpha\) 重算 link evaluation；先求 sector amplitudes，再 Fourier transform。
+- 不對所有 simple labels 盲目枚舉；先使用 fusion admissibility、parity grading 與 local recoupling pruning。
+- 使用 exact cache key：subtangle、boundary fusion labels、framing contribution。
+- 保存每次 handle slide 的 integer basis matrix。
+- 圖形資料與 category data 必須 machine-readable，不能只存在 notebook 圖片中。
+- 數值近似只能用於除錯；正式「不相等」必須有 exact certificate。
+
+建議 repository 結構：
+
+#+begin_example
+project/
+  literature/
+  theory/
+  categories/
+  data/
+    standard/
+    dolgachev/
+    R8/
+    knot-traces/
+  src/
+    category/
+    kirby/
+    rt_eval/
+    fourier/
+  tests/
+  results/
+  notebooks/
+#+end_example
+
+* 驗收標準
+
+** 理論驗收
+
+- 所有 decoration conventions 清楚且在 handle slides 下可機械檢查。
+- 一般 Kirby formula 的適用假設明確：modular、premodular、spherical、semisimple、有限 \(A\) 等不能含糊。
+- 2/3 cancellation 與 implicit 3-handles 被真正處理；不能只證 2-handlebody invariance 卻宣稱 closed 4-manifold invariant。
+- 與 Yetter \(\mathbb Z/2\) formula 精確相符。
+- 對 Reutter theorem 的任何「逃脫」或「延伸」都指出缺失的 hypothesis。
+
+** 計算驗收
+
+- standard manifolds 的已知 ordinary values 可重現。
+- handle-slide 前後 exact equality。
+- Fourier 與 direct computation 在小例子相符。
+- Dolgachev/R_8 diagram 的 linking matrix、signature、Euler characteristic 正確。
+- H_2 identification matrix 可審計。
+- 結果可由單一命令重跑。
+
+** 宣稱 exotic detection 的最低標準
+
+至少滿足：
+
+1. pair 已知 orientation-preservingly homeomorphic but not diffeomorphic；
+2. decoration correspondence 有明確拓撲來源；
+3. exact values 不同；
+4. 已排除 normalization 與 basis artifact；
+5. 清楚說明差異是否在 homeomorphism-group quotient 後仍存在。
+
+* 主要風險與緩解方式
+
+| 風險 | 後果 | 緩解方式 |
+|------+------|----------|
+| 一般 \(\Omega_a\) slide identity 不成立 | 無一般 Kirby formula | 限制 category class；改用 explicit \(SU(2)\) skein proof；或退回 2-handlebody setting |
+| 2/3 move 無法控制 | 只得到 2-deformation invariant | 明確改寫研究問題，結合 Beliakova–De Renzi，而不誤稱 closed invariant |
+| Decorated Reutter theorem 成立 | semisimple 路線無 exotic detection | 轉 non-semisimple、vanishing stabilizer、boundary/cork action |
+| Modular examples只給 classical data | exotic pair 全部相同 | 把 modular categories保留為 negative controls，轉 nonmodular input |
+| Kirby link evaluation 過大 | 無法完成 Dolgachev | cork-localization、tensor-network treewidth、sector aggregation、較小 knot traces |
+| H_2 marking 在 handle slides 中遺失 | 偽差異 | 每一步保存 GL(m,\mathbb Z) matrix 與 component lineage |
+| 浮點誤差 | 偽不等 | cyclotomic exact arithmetic 與 minimal-polynomial certificate |
+| 找到的只是 marked difference | 無法宣稱 unmarked exotic detection | 另外計算 homeomorphism/isometry group orbits，分級報告結果 |
+
+* 第一個研究衝刺：可直接開始的任務
+
+** NEXT Sprint-1A：原文重建
+
+- 下載 Yetter hep-th/9311082 source/PDF。
+- 將 Definitions 1、3、6、10，Proposition 4、12，Theorems 8、11 逐字轉成現代記號。
+- 建立 normalization table。
+- 寫出 \(\omega/\theta\) slide 的圖形證明。
+
+** NEXT Sprint-1B：一般 slide lemma
+
+- 在 abstract ribbon fusion category 中寫 \(\Omega_a\)。
+- 對一個 Hopf link／handle slide 圖計算兩邊。
+- 先在 \(SU(2)_2\) 明算，再抽象化。
+- 確定 component basis change 與 label multiplication 的方向。
+
+** NEXT Sprint-1C：最小程式原型
+
+- 實作 \(SU(2)_2\) category data。
+- 實作單 component framed unknot、Hopf link、unlink。
+- 實作 \(\Omega_0,\Omega_1\) evaluation。
+- 驗證 \(\mathbb{CP}^2\)、\(S^2\times S^2\) 與一個 2-handle slide。
+
+** NEXT Sprint-1D：Dolgachev data extraction
+
+- 從 Akbulut final figures 重畫 \(E(1)\) 與 \(E(1)_{2,3}\) links。
+- 計算 linking matrices。
+- 建立 component ID 與 H_2 basis table。
+- 找出 cork complement 在 final diagrams 中的 basis map。
+
+** NEXT Sprint-1E：decorated Reutter audit
+
+- 列出 Reutter Theorem A 證明使用的每一個 bordism identity。
+- 在每張圖上加入 background map 後檢查是否仍成立。
+- 第一個具體輸出是 \(S^2\times S^2\) 所有 decorations 的 operator/value table。
+
+* 建議論文結構（若計畫成功）
+
+1. Introduction：Yetter twist、Reutter gap、主要結果。
+2. Universal grading 與 tensor automorphisms。
+3. Decorated Crane–Yetter state sum。
+4. General twisted Kirby colors。
+5. Decorated Kirby calculus 與 state-sum equivalence。
+6. Decorated stabilization theorem 或 obstruction。
+7. Computational algorithm 與 Fourier sector decomposition。
+8. Standard-manifold tests。
+9. Exotic pair calculation。
+10. Cork-local interpretation。
+11. Limitations、marked vs unmarked distinction、future non-semisimple directions。
+
+* 參考文獻種子
+
+以下只作起始清單；執行代理需建立完整 BibTeX 並核對最新版與出版資訊。
+
+1. David N. Yetter, /Homologically Twisted Invariants Related to (2+1)- and (3+1)-Dimensional State-Sum Topological Quantum Field Theories/, arXiv:hep-th/9311082.
+   https://arxiv.org/abs/hep-th/9311082
+2. David Reutter, /Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure/, arXiv:2001.02288; Journal of Topology 16 (2023).
+   https://arxiv.org/abs/2001.02288
+3. Louis Crane, Louis H. Kauffman, David N. Yetter, /State-sum invariants of four-manifolds, I/, arXiv:hep-th/9409167.
+   https://arxiv.org/abs/hep-th/9409167
+4. John W. Barrett, J. Manuel García-Islas, João Faria Martins, /Observables in the Turaev–Viro and Crane–Yetter models/, arXiv:math/0411281.
+   https://arxiv.org/abs/math/0411281
+5. Manuel Bärenz, John W. Barrett, /Dichromatic state sum models for four-manifolds from pivotal functors/, arXiv:1601.03580.
+   https://arxiv.org/abs/1601.03580
+6. Anna Beliakova, Marco De Renzi, /Refined Bobtcheva–Messia Invariants of 4-Dimensional 2-Handlebodies/, arXiv:2205.11385.
+   https://arxiv.org/abs/2205.11385
+7. Selman Akbulut, /The Dolgachev Surface/, arXiv:0805.1524.
+   https://arxiv.org/abs/0805.1524
+8. Yohei Wakamaki, /A cork of the rational surface with the second Betti number 9/, arXiv:2307.16454.
+   https://arxiv.org/abs/2307.16454
+9. Selman Akbulut, /The Akhmedov–Park exotic \(\mathbb{CP}^2\#2\overline{\mathbb{CP}}{}^2\)/, arXiv:1107.3073.
+   https://arxiv.org/abs/1107.3073
+10. Kouichi Yasui, /Corks, exotic 4-manifolds and knot concordance/, arXiv:1505.02551.
+    https://arxiv.org/abs/1505.02551
+11. Robert E. Gompf, /Nuclei of elliptic surfaces/, Topology 30 (1991), 479–511.
+12. Francesco Costantino, Nathan Geer, Benjamin Haïoun, Bertrand Patureau-Mirand, /Skein (3+1)-TQFTs from Non-Semisimple Ribbon Categories/, arXiv:2306.03225.
+    https://arxiv.org/abs/2306.03225
+13. Qiuyu Ren et al., /Khovanov homology and exotic 4-manifolds/, arXiv:2402.10452.
+    https://arxiv.org/abs/2402.10452
+
+* 最後的研究原則
+
+- 先證明「我們到底在算什麼」，再追求 exotic example。
+- 把 decorated Reutter 問題與 Kirby 計算同時推進；任何一邊都可能提前決定研究方向。
+- 第一個 positive result 不必是 unmarked closed exotic detection；一個嚴格的 marked cork distinction、一般 Kirby theorem、或 decorated no-go theorem 都足以構成重要結果。
+- 對 negative computation 保留完整 sector data；它可能揭示 invariant 僅依賴何種 classical cohomology operation。
+- 不把「Reutter 原文沒有涵蓋」誤寫成「Reutter theorem 被繞過」。真正需要證明的是 decorated theory 的 stabilization behavior。
