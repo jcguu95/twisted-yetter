@@ -38,7 +38,9 @@ This step adds meta/ctl-kernel/, wiki/, pyproject.toml, and .gitignore.
 - =meta/ctl-kernel/vectors/=
 - =meta/ctl-kernel/tests/test_reference.py=
 - =meta/ctl-kernel/tests/test_mutations.py=
+- =meta/ctl-kernel/tests/test_round8_conformance.py=
 - =meta/ctl-kernel/conformance-report-2026-06-26.org=
+- =meta/ctl-kernel/round8-response-2026-06-26.org=
 - =meta/ctl-kernel/run-reference-tests.txt=
 - =meta/ctl-kernel/README.org=
 - =pyproject.toml=
@@ -51,8 +53,7 @@ This step adds meta/ctl-kernel/, wiki/, pyproject.toml, and .gitignore.
 uv lock
 cd meta/ctl-kernel
 uv run python -m py_compile reference/ctl_ref.py
-uv run python reference/ctl_ref.py generate-vectors vectors
-uv run python reference/ctl_ref.py check-vectors vectors
+uv run python reference/ctl_ref.py verify-vectors vectors
 uv run python reference/ctl_recompute.py vectors
 uv run python -m unittest discover -s tests
 #+end_src
@@ -66,7 +67,7 @@ meta/ctl-kernel/run-reference-tests.txt
 Current transcript records:
 
 #+begin_example
-Ran 12 tests
+Ran 21 tests
 #+end_example
 
 * Interpretation

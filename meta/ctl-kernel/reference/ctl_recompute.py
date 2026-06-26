@@ -34,6 +34,13 @@ def check_vectors(root: Path) -> None:
         manifest = json.loads(case_file.read_text(encoding="utf-8"))
         for expected_cid, obj in manifest["object_values"].items():
             assert cid(obj) == expected_cid, f"{case_file}: {expected_cid}"
+        if manifest.get("expect") == "valid":
+            root_cid = manifest["expected_root_cid"]
+            root_obj = manifest["object_values"][root_cid]
+            assert cid(root_obj) == root_cid, f"{case_file}: expected root CID"
+            assert canonical_bytes(root_obj).hex() == manifest["expected_root_canonical_hex"], (
+                f"{case_file}: expected root bytes"
+            )
     print("recompute: valid")
 
 
@@ -45,4 +52,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

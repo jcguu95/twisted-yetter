@@ -21,6 +21,7 @@ prose review -> executable conformance / adversarial tests
 - =vectors/*/case.json=
 - =tests/test_reference.py=
 - =tests/test_mutations.py=
+- =tests/test_round8_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -53,6 +54,18 @@ Mutation tests cover:
 - forged root transition rejected by chain replay
 - evidence targeted at the wrong binding op
 
+Round 8 conformance tests additionally cover:
+
+- candidate policy containing an unsupported evidence basis
+- invalid parent root dominating unsupported profile
+- Gregorian timestamp parsing
+- canonical object size over 1 MiB
+- JSON nesting depth over 64
+- logical id over 256 bytes
+- principal role binding count over 64
+- fake run receipt evidence using a RoleBinding CID
+- malformed binding op returning =InvalidHistory= instead of a host exception
+
 * Reproduction
 
 From repo root:
@@ -62,7 +75,7 @@ uv lock
 cd meta/ctl-kernel
 uv run python -m py_compile reference/ctl_ref.py
 uv run python reference/ctl_ref.py generate-vectors vectors
-uv run python reference/ctl_ref.py check-vectors vectors
+uv run python reference/ctl_ref.py verify-vectors vectors
 uv run python reference/ctl_recompute.py vectors
 uv run python -m unittest discover -s tests
 #+end_src
@@ -94,4 +107,3 @@ meta/ctl-kernel/run-reference-tests.txt
 - additional domain-specific object types。
 
 這些可進 =v0.1.2 backlog=。
-

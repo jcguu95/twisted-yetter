@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import datetime as dt
 import hashlib
 import json
 import re
@@ -44,6 +45,9 @@ RESOURCE_SELECTOR_KEYS = {
 
 MAX_AUTHORIZATION_MATCH_WORK = 1_048_576
 MAX_PREDICATE_WORK = 65_536
+MAX_CANONICAL_OBJECT_BYTES = 1_048_576
+MAX_JSON_DEPTH = 64
+MAX_ID_BYTES = 256
 
 
 class InvalidHistory(Exception):
@@ -94,14 +98,16 @@ def unique_sorted_objects(values: list[dict[str, Any]], label: str) -> None:
 
 
 def is_id(value: Any) -> bool:
-    return isinstance(value, str) and ID_RE.fullmatch(value) is not None
+    return isinstance(value, str) and len(value.encode("utf-8")) <= MAX_ID_BYTES and ID_RE.fullmatch(value) is not None
 
 
 def is_cid(value: Any) -> bool:
     return isinstance(value, str) and CID_RE.fullmatch(value) is not None
 
 
-def _check_json_value(value: Any) -> None:
+def _check_json_value(value: Any, depth: int = 0, enforce_depth: bool = False) -> None:
+    if enforce_depth:
+        die_unless(depth <= MAX_JSON_DEPTH, "JSON nesting too deep")
     if value is None or isinstance(value, bool):
         return
     if isinstance(value, int):
@@ -117,15 +123,31 @@ def _check_json_value(value: Any) -> None:
     if isinstance(value, list):
         die_unless(len(value) <= 16384, "array too large")
         for item in value:
-            _check_json_value(item)
+            _check_json_value(item, depth + 1, enforce_depth)
         return
     if isinstance(value, dict):
         die_unless(len(value) <= 8192, "object has too many keys")
         for key, item in value.items():
             die_unless(isinstance(key, str), "object key must be string")
-            _check_json_value(item)
+            for ch in key:
+                die_unless(not (0xD800 <= ord(ch) <= 0xDFFF), "lone surrogate in object key")
+            die_unless(len(key.encode("utf-8")) <= 262144, "object key too large")
+            _check_json_value(item, depth + 1, enforce_depth)
         return
     raise InvalidHistory(f"unsupported JSON value: {type(value).__name__}")
+
+
+def check_canonical_object_size(value: Any) -> None:
+    die_unless(len(canonical_bytes(value)) <= MAX_CANONICAL_OBJECT_BYTES, "canonical object too large")
+
+
+def check_timestamp(value: Any) -> None:
+    die_unless(isinstance(value, str) and TS_RE.fullmatch(value) is not None, "bad timestamp")
+    try:
+        parsed = dt.datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+    except ValueError as exc:
+        raise InvalidHistory("bad timestamp") from exc
+    die_unless(parsed.strftime("%Y-%m-%dT%H:%M:%SZ") == value, "bad timestamp")
 
 
 def load_json_strict(path: Path) -> Any:
@@ -155,6 +177,7 @@ class Store:
         self.objects: dict[str, dict[str, Any]] = {}
 
     def add(self, obj: dict[str, Any]) -> str:
+        check_canonical_object_size(obj)
         cid = object_cid(obj)
         old = self.objects.get(cid)
         if old is not None and canonical_bytes(old) != canonical_bytes(obj):
@@ -172,6 +195,8 @@ class Store:
 
 
 def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> None:
+    _check_json_value(rev, enforce_depth=True)
+    check_canonical_object_size(rev)
     if cid is not None:
         die_unless(object_cid(rev) == cid, "revision CID mismatch")
     check_keys(
@@ -203,7 +228,7 @@ def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> Non
     unique_sorted_scalars(rev["parents"], "parents")
     die_unless(is_id(rev["payload_profile"]), "bad payload_profile")
     die_unless(isinstance(rev["payload"], dict), "payload must be object")
-    die_unless(isinstance(rev["created_at"], str) and TS_RE.fullmatch(rev["created_at"]), "bad timestamp")
+    check_timestamp(rev["created_at"])
     check_keys(rev["created_by"], {"actor_id"})
     die_unless(is_id(rev["created_by"]["actor_id"]), "bad created_by actor")
 
@@ -268,6 +293,14 @@ def validate_policy_payload(payload: dict[str, Any]) -> None:
             die_unless(is_id(basis), "bad basis id")
 
 
+def unsupported_policy_basis(policy: dict[str, Any]) -> str | None:
+    for rule in policy["payload"]["rules"]:
+        for basis in rule["required_evidence_basis"]:
+            if basis not in SUPPORTED_EVIDENCE_BASIS:
+                return basis
+    return None
+
+
 def validate_role_binding_revision(rev: dict[str, Any]) -> None:
     die_unless(rev["logical_id"].startswith("role-binding:"), "role binding namespace")
     payload = rev["payload"]
@@ -306,6 +339,7 @@ def extend_role_binding_identities(
 
 
 def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    check_canonical_object_size(batch)
     check_keys(
         batch,
         {
@@ -325,6 +359,8 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     die_unless(batch["kernel_profile"] == "ctl-kernel/1", "bad batch kernel")
     die_unless(is_id(batch["project_id"]), "bad batch project")
     die_unless(batch["parent_root"] is None or is_cid(batch["parent_root"]), "bad parent root")
+    die_unless(isinstance(batch["recorded_revisions"], list), "recorded_revisions must be array")
+    die_unless(isinstance(batch["binding_ops"], list), "binding_ops must be array")
     die_unless(batch["recorded_revisions"] or batch["binding_ops"], "empty batch")
     die_unless(len(batch["recorded_revisions"]) <= 4096, "too many recorded revisions")
     die_unless(all(is_cid(x) for x in batch["recorded_revisions"]), "bad recorded CID")
@@ -339,29 +375,24 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
         recorded.append((cid, rev))
 
     die_unless(len(batch["binding_ops"]) <= 1024, "too many binding ops")
-    die_unless(isinstance(batch["binding_ops"], list), "binding_ops must be array")
-    die_unless(
-        [op.get("logical_id") for op in batch["binding_ops"]]
-        == sorted([op.get("logical_id") for op in batch["binding_ops"]], key=lambda x: x.encode("utf-8")),
-        "binding_ops not sorted",
-    )
-    die_unless(
-        len({op.get("logical_id") for op in batch["binding_ops"]}) == len(batch["binding_ops"]),
-        "duplicate binding op logical_id",
-    )
     binding_ids = set()
+    binding_logical_ids: list[str] = []
     for op in batch["binding_ops"]:
         die_unless(isinstance(op, dict), "binding op must be object")
+        die_unless("logical_id" in op, "missing binding logical_id")
         die_unless(op.get("op") in {"set", "remove"}, "bad op")
         die_unless(is_id(op.get("logical_id")), "bad binding logical_id")
         die_unless(not op["logical_id"].startswith("sys:") or op["logical_id"] == "sys:policy", "reserved sys binding op")
         binding_ids.add(op["logical_id"])
+        binding_logical_ids.append(op["logical_id"])
         check_expected(op.get("expected"))
         if op["op"] == "set":
             check_keys(op, {"op", "logical_id", "expected", "new_cid"})
             die_unless(is_cid(op["new_cid"]), "bad new_cid")
         else:
             check_keys(op, {"op", "logical_id", "expected"})
+    die_unless(binding_logical_ids == sort_scalars(binding_logical_ids), "binding_ops not sorted")
+    die_unless(len(set(binding_logical_ids)) == len(binding_logical_ids), "duplicate binding op logical_id")
 
     die_unless(isinstance(batch["evidence"], list), "evidence must be array")
     die_unless(len(batch["evidence"]) <= 4096, "too many evidence entries")
@@ -388,11 +419,12 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     check_keys(batch["principal_claim"], {"actor_id", "role_bindings"}, {"authentication_assurance"})
     die_unless(is_id(batch["principal_claim"]["actor_id"]), "bad principal actor")
     die_unless(isinstance(batch["principal_claim"]["role_bindings"], list), "principal roles array")
+    die_unless(len(batch["principal_claim"]["role_bindings"]) <= 64, "too many principal role bindings")
     die_unless(all(is_cid(x) for x in batch["principal_claim"]["role_bindings"]), "bad principal role CID")
     unique_sorted_scalars(batch["principal_claim"]["role_bindings"], "principal role_bindings")
     check_keys(batch["submitted_by"], {"actor_id"})
     die_unless(is_id(batch["submitted_by"]["actor_id"]), "bad submitted_by")
-    die_unless(isinstance(batch["admitted_at"], str) and TS_RE.fullmatch(batch["admitted_at"]), "bad admitted_at")
+    check_timestamp(batch["admitted_at"])
 
     recorded_map = dict(recorded)
     for _cid, rev in recorded:
@@ -623,8 +655,12 @@ def selector_matches(store: Store, selector: dict[str, Any], req: dict[str, Any]
 
 
 def evidence_passes(store: Store, evidence_cid: str) -> bool:
-    store.resolve(evidence_cid)
-    return True
+    evidence = store.resolve(evidence_cid)
+    return (
+        evidence.get("profile") == "ctl/revision/1"
+        and evidence.get("revision_kind") == "run-receipt"
+        and evidence.get("payload_profile") == "agent/run-receipt/1"
+    )
 
 
 def rule_subject_action_resource_matches(
@@ -755,10 +791,7 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
         validate_revision(store, cid, rev)
     policy = recorded_map[bindings["sys:policy"]]
     validate_policy_revision(policy)
-    for rule in policy["payload"]["rules"]:
-        for basis in rule["required_evidence_basis"]:
-            if basis not in SUPPORTED_EVIDENCE_BASIS:
-                raise UnsupportedProfile(basis)
+    unsupported_basis = unsupported_policy_basis(policy)
     root = {
         "profile": "ctl/project-state-root/1",
         "kernel_profile": batch["kernel_profile"],
@@ -779,15 +812,17 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
         "role_binding_identities": role_binding_identities,
     }
     die_unless(future_policy_update_possible(store, state), "genesis lacks future policy path")
+    if unsupported_basis is not None:
+        raise UnsupportedProfile(unsupported_basis)
     return state
 
 
 def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> dict[str, Any]:
     batch = store.resolve(batch_cid)
-    recorded = validate_batch_common(store, batch)
     die_unless(batch["parent_root"] == state["root_cid"], "parent root mismatch")
     die_unless(batch["project_id"] == state["project_id"], "project mismatch")
     die_unless(batch["kernel_profile"] == state["kernel_profile"], "kernel mismatch")
+    recorded = validate_batch_common(store, batch)
     recorded_set = set(state["recorded"]) | set(batch["recorded_revisions"])
     die_unless(not (set(batch["recorded_revisions"]) & set(state["recorded"])), "already recorded")
     current_role_binding_identities = state.get("role_binding_identities")
@@ -839,6 +874,7 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
         validate_revision(store, cid, rev)
     candidate_policy = store.resolve(bindings["sys:policy"])
     validate_policy_revision(candidate_policy)
+    unsupported_candidate_basis = unsupported_policy_basis(candidate_policy)
     if changing_policy:
         die_unless(old_policy_cid in candidate_policy["parents"], "policy fast-forward violation")
     root = {
@@ -861,6 +897,8 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
         "role_binding_identities": role_binding_identities,
     }
     die_unless(future_policy_update_possible(store, child), "future policy update impossible")
+    if unsupported_candidate_basis is not None:
+        raise UnsupportedProfile(unsupported_candidate_basis)
     return child
 
 
@@ -1172,7 +1210,7 @@ def build_case(case: str) -> tuple[Store, dict[str, Any]]:
             "kind": "unsupported-basis",
             "objects": {"policy": bad_policy_cid, "role": role_cid, "genesis_batch": bad_genesis_cid},
             "genesis_batch": bad_genesis_cid,
-            "expect": "unsupported",
+            "expect": "invalid",
         }
     if case == "genesis-parent-outside":
         store = Store()
@@ -1371,6 +1409,12 @@ def write_case(root: Path, case: str, dirname: str) -> None:
     out_dir = root / dirname
     out_dir.mkdir(parents=True, exist_ok=True)
     manifest = dict(manifest)
+    if manifest["expect"] == "valid":
+        state = derive_genesis(store, manifest["genesis_batch"])
+        if "transition_batch" in manifest:
+            state = validate_transition(store, state, manifest["transition_batch"])
+        manifest["expected_root_cid"] = state["root_cid"]
+        manifest["expected_root_canonical_hex"] = canonical_bytes(state["root"]).hex()
     manifest["object_values"] = {cid: obj for cid, obj in sorted(store.objects.items())}
     (out_dir / "case.json").write_text(canonical_text(manifest), encoding="utf-8")
 
@@ -1428,13 +1472,19 @@ def check_case(path: Path) -> str:
     try:
         state = derive_genesis(store, manifest["genesis_batch"])
         if "transition_batch" in manifest:
-            validate_transition(store, state, manifest["transition_batch"])
+            state = validate_transition(store, state, manifest["transition_batch"])
         result = "valid"
     except UnsupportedProfile:
         result = "unsupported"
     except InvalidHistory:
         result = "invalid"
     die_unless(result == expect, f"{path}: expected {expect}, got {result}")
+    if result == "valid":
+        die_unless(state["root_cid"] == manifest["expected_root_cid"], f"{path}: expected root CID mismatch")
+        die_unless(
+            canonical_bytes(state["root"]).hex() == manifest["expected_root_canonical_hex"],
+            f"{path}: expected root bytes mismatch",
+        )
     return result
 
 
@@ -1471,7 +1521,7 @@ def check_vectors(root: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", nargs="?", choices=["generate-vectors", "check-vectors"])
+    parser.add_argument("command", nargs="?", choices=["generate-vectors", "check-vectors", "verify-vectors"])
     parser.add_argument("path", nargs="?", type=Path)
     parser.add_argument("--write-vectors", type=Path)
     parser.add_argument("--check-vectors", type=Path)
@@ -1480,7 +1530,7 @@ def main() -> None:
         die_unless(args.path is not None, "generate-vectors requires path")
         write_vectors(args.path)
         return
-    if args.command == "check-vectors":
+    if args.command in {"check-vectors", "verify-vectors"}:
         die_unless(args.path is not None, "check-vectors requires path")
         check_vectors(args.path)
         return

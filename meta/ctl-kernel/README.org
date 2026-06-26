@@ -57,7 +57,7 @@ uv venv
 uv run python -m py_compile meta/ctl-kernel/reference/ctl_ref.py
 cd meta/ctl-kernel
 uv run python reference/ctl_ref.py generate-vectors vectors
-uv run python reference/ctl_ref.py check-vectors vectors
+uv run python reference/ctl_ref.py verify-vectors vectors
 uv run python reference/ctl_recompute.py vectors
 uv run python -m unittest discover -s tests
 #+end_src
@@ -68,7 +68,7 @@ uv run python -m unittest discover -s tests
 cd meta/ctl-kernel
 python3 -m py_compile reference/ctl_ref.py
 python3 reference/ctl_ref.py generate-vectors vectors
-python3 reference/ctl_ref.py check-vectors vectors
+python3 reference/ctl_ref.py verify-vectors vectors
 python3 reference/ctl_recompute.py vectors
 python3 -m unittest discover -s tests
 #+end_src
