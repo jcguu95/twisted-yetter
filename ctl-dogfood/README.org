@@ -1,0 +1,75 @@
+#+TITLE: Twisted Yetter CTL Dogfood Store
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Scope
+
+這是 twisted-yetter 專案自己的 project-local CTL dogfood store。
+
+它使用 sibling repo 的 CTL Meta implementation：
+
+#+begin_example
+/Users/jin/data/local/projects/ctl-meta
+#+end_example
+
+但 store 本身存在本 repo：
+
+#+begin_example
+/Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
+#+end_example
+
+這裡只記錄 research planning / governance metadata；不修改 CTL Kernel protocol，也不把
+=ctl-meta= 的 source code 複製進本 repo。
+
+* Pinned Provider
+
+目前 pinned provider：
+
+#+begin_example
+ctl-meta commit:              a52af635dc832bea8dbd13652355d5820dddd407
+ctl-kernel freeze tag:        ctl-kernel-v0.1.1-experimental
+ctl-kernel freeze commit:     be3785695d60f9f125df31cc0013a580bc658651
+#+end_example
+
+這些值也保存在：
+
+#+begin_example
+manifests/bootstrap-2026-06-26.json
+decisions/twisted-yetter-computation-first-plan-2026-06-26.json
+#+end_example
+
+* Current Admitted Plan
+
+第一個 admitted claim 是：
+
+#+begin_example
+claim:twisted-yetter-computation-first-plan
+#+end_example
+
+它記錄目前研究策略：
+
+- 先做 example computation engine。
+- 第一個 category 使用 =SU(2)_2= 與 =A = Z/2=。
+- 優先測 presentation invariance、handle-slide toy examples、=alpha=0= ordinary check。
+- no-go / decorated Reutter 分析先 defer。
+- exotic pair 等 toy examples 通過後再碰。
+
+* Reproduce
+
+日常驗證：
+
+#+begin_src sh
+cd ctl-dogfood
+uv run python scripts/verify.py
+#+end_src
+
+從零重建 bootstrap snapshot：
+
+#+begin_src sh
+cd ctl-dogfood
+uv run python scripts/bootstrap.py --force
+uv run python scripts/verify.py
+#+end_src
+
+=bootstrap.py= 預設拒絕覆寫既有 store；只有 =--force= 會重建 snapshot。

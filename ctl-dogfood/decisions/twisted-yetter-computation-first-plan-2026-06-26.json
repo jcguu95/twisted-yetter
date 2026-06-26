@@ -1,0 +1,79 @@
+{
+  "schema": "twisted-yetter/research-plan/1",
+  "status": "accepted",
+  "decision": "adopt computation-first Twisted Yetter research plan",
+  "source_repo": {
+    "path": "/Users/jin/data/local/projects/twisted-yetter",
+    "commit_at_decision": "ec17ca9e56a59e60584acd66b2f355b198984d12",
+    "files": [
+      "AGENTS.md",
+      "twisted-yetter.org",
+      "wiki/index.org"
+    ]
+  },
+  "ctl_meta_provider": {
+    "path": "/Users/jin/data/local/projects/ctl-meta",
+    "commit_at_decision": "a52af635dc832bea8dbd13652355d5820dddd407",
+    "kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental",
+    "kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+    "reference_import": "meta/ctl-kernel/reference/ctl_ref.py",
+    "relationship": "twisted-yetter uses ctl-meta as an external protocol/tooling provider; this store is project-local"
+  },
+  "understanding": {
+    "primary_strategy": "build a trustworthy example computation engine before no-go analysis",
+    "intuition": "the no-go issue is probably not the immediate blocker; direct computation should give early signal",
+    "deferred": [
+      "decorated Reutter audit",
+      "general K(A,2)-bordism theory",
+      "general premodular proof",
+      "non-semisimple route",
+      "full unmarked exotic-pair orbit comparison"
+    ]
+  },
+  "computation_first_plan": {
+    "first_category": "SU(2)_2 with A = Z/2",
+    "first_formula_family": "Yetter omega/theta surgical formula",
+    "initial_examples": [
+      "S^4",
+      "CP^2",
+      "anti-CP^2",
+      "S^2 x S^2",
+      "CP^2 # anti-CP^2",
+      "CP^2 # CP^2"
+    ],
+    "required_checks": [
+      "alpha=0 returns ordinary invariant",
+      "different Kirby presentations of the same manifold agree",
+      "pure 2-handle slide tests agree after decoration basis transformation",
+      "normalization and signature conventions are explicit",
+      "outputs are exact rather than floating point"
+    ],
+    "first_engine_modules": [
+      "src/twisted_yetter/su2_level2.py",
+      "src/twisted_yetter/linking_matrix.py",
+      "src/twisted_yetter/invariant.py"
+    ],
+    "first_tests": [
+      "tests/test_su2_level2.py",
+      "tests/test_matrix_presentations.py"
+    ]
+  },
+  "gate_to_exotic_pairs": {
+    "enter_when": [
+      "toy examples have exact invariant tables",
+      "presentation invariance tests pass",
+      "decoration convention is fixed and documented",
+      "SU(2)_2 negative-control behavior is understood enough to avoid convention bugs"
+    ],
+    "first_exotic_target": "Dolgachev E(1)_{2,3} vs E(1)",
+    "first_comparison_level": "marked or presentation-level total function, not full orbit comparison"
+  },
+  "migration_and_reproducibility_policy": {
+    "project_local_store": "ctl-dogfood/",
+    "do_not_modify_ctl_meta_protocol": true,
+    "pin_ctl_meta_commit": true,
+    "pin_ctl_kernel_freeze_commit": true,
+    "canonical_objects_avoid_current_HEAD": true,
+    "future_ctl_meta_updates": "record as new project-local admission, do not rewrite existing objects"
+  }
+}
