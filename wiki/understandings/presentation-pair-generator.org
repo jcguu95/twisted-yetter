@@ -1,0 +1,53 @@
+#+TITLE: Presentation Pair Generator
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 狀態
+
+狀態標籤：=n45-presentation-pair-generator= / =implemented fixture helper= /
+=matrix-level only= / =computed evidence=
+
+本頁記錄 =src/twisted_yetter/presentation_moves.py= 的最小 presentation-pair
+fixtures。這些 fixtures 只處理 =KirbyMatrixPresentation= 的 GL(n,Z) basis change，
+不處理 link diagram handle-slide parser，也不做 invariant evaluation。
+
+* Certificate fields
+
+=PresentationPair= 保存：
+
+- =source= 與 =target= matrix presentations；
+- exact integer =basis_matrix=，其 columns 是 target basis vectors written in source
+  coordinates；
+- exact integer =inverse_basis_matrix=；
+- =decoration_transform_mod2=，即 =basis_matrix^{-1}= reduced modulo 2；
+- =metadata=，含 =node: n45-presentation-pair-generator= 與 matrix-level scope。
+
+* Machine checks
+
+=PresentationPair.assert_valid()= 檢查：
+
+- =basis_matrix= 是 unimodular；
+- recorded inverse 與 actual inverse 相同；
+- recorded mod-2 decoration transform 等於 inverse basis matrix mod 2；
+- =target.matrix= 與 =source.change_basis(basis_matrix)= 的 matrix 相同；
+- =target.decorations_mod2= 與 =source.change_basis(basis_matrix)= 的 decorations 相同；
+- rank、determinant、signature triple 沒有改變。
+
+這是 =n45= acceptance 的 certificate-level observation：generated pair records exact
+basis matrix，intersection forms before and after are equivalent by recorded congruence，
+and decoration transformation is machine-checkable.
+
+* Built-in fixtures
+
+=small_presentation_pairs()= 目前提供三個 small fixtures：
+
+- =hyperbolic-shear=：=S2xS2= hyperbolic form，basis =((1, 1), (0, 1))=；
+- =odd-indefinite-swap=：=CP2#anti-CP2=，basis swap =((0, 1), (1, 0))=；
+- =odd-positive-shear=：=CP2#CP2=，basis =((1, 1), (0, 1))=。
+
+* Trust boundary
+
+這些 artifacts 不聲稱任何 closed 4-manifold invariant 已實作，也不聲稱 decorated
+Kirby formula 已證明。它們只是後續 =n50-presentation-invariance-gate= 可使用的
+matrix-level presentation-pair fixtures。
