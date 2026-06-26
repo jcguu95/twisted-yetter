@@ -814,8 +814,6 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
         rev = recorded_map[cid]
         die_unless(rev["logical_id"] == logical_id, "genesis binding logical mismatch")
         validate_revision_envelope(store, cid, rev)
-    if unsupported_profiles:
-        raise UnsupportedProfile(unsupported_profiles[0])
     policy = recorded_map[bindings["sys:policy"]]
     validate_policy_revision(policy)
     unsupported_basis = unsupported_policy_basis(policy)
@@ -841,6 +839,8 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
     die_unless(future_policy_update_possible(store, state), "genesis lacks future policy path")
     if unsupported_basis is not None:
         raise UnsupportedProfile(unsupported_basis)
+    if unsupported_profiles:
+        raise UnsupportedProfile(unsupported_profiles[0])
     return state
 
 

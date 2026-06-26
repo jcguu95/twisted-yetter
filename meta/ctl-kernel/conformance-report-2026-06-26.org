@@ -26,6 +26,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round10_conformance.py=
 - =tests/test_round11_conformance.py=
 - =tests/test_round12_conformance.py=
+- =tests/test_round13_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -96,6 +97,10 @@ Round 12 conformance tests additionally cover:
 - unsupported recorded payload profile does not mask deterministic policy denial
 - unsupported evidence basis does not mask future-policy-update liveness failure
 - unsupported recorded payload profile does not mask future-policy-update liveness failure
+
+Round 13 conformance tests additionally cover:
+
+- genesis unsupported recorded payload profile does not mask future-policy-update liveness failure
 
 * Reproduction
 
