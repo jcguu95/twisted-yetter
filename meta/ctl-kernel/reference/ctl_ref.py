@@ -444,9 +444,11 @@ def validate_batch_common(
         check_keys(target, {"kind"}, {"cid", "logical_id"})
         if target["kind"] == "recorded_revision":
             check_keys(target, {"kind", "cid"})
+            die_unless(is_cid(target["cid"]), "bad evidence target cid")
             die_unless(target["cid"] in recorded_set, "evidence target not recorded in batch")
         elif target["kind"] == "binding_op":
             check_keys(target, {"kind", "logical_id"})
+            die_unless(is_id(target["logical_id"]), "bad evidence target logical_id")
             die_unless(target["logical_id"] in binding_ids, "evidence target not binding op")
         else:
             raise InvalidHistory("bad evidence target kind")

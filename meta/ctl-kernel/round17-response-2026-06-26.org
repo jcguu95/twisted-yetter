@@ -1,0 +1,127 @@
+#+TITLE: CTL Kernel v0.1.1 Round 17 Response
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Summary
+
+本輪只處理 Round 17 final gate 指出的 strict-schema / host-exception 問題。
+
+核心架構維持 frozen：
+
+#+begin_example
+Revision
+AdmissionBatch
+ProjectStateRoot
+
+Mandatory governance:
+  PolicySetRevision
+  RoleBindingRevision
+  fixed pure evaluator
+#+end_example
+
+沒有新增 signatures、multi-parent root、capability runtime、治理 ontology 或 Chronicle full
+compatibility。
+
+* Fixed Issue
+
+Round 17 指出的問題是：=AdmissionBatch.evidence[].target= 在欄位型別確認之前做 set
+membership 檢查，因此 malformed JSON value 會逃成 Python host exception。
+
+這次修掉的四個 regression cases：
+
+- =target.kind = "recorded_revision"= 且 =target.cid = []=
+- =target.kind = "recorded_revision"= 且 =target.cid = {}=
+- =target.kind = "binding_op"= 且 =target.logical_id = []=
+- =target.kind = "binding_op"= 且 =target.logical_id = {}=
+
+修正後，上述 cases 都回：
+
+#+begin_example
+InvalidHistory
+#+end_example
+
+而不是：
+
+#+begin_example
+host:TypeError
+#+end_example
+
+* Implementation Note
+
+在 =reference/ctl_ref.py= 的 =validate_batch_common= 中，membership check 之前先做 type /
+grammar validation：
+
+#+begin_example
+recorded_revision target:
+  die_unless(is_cid(target["cid"]), "bad evidence target cid")
+
+binding_op target:
+  die_unless(is_id(target["logical_id"]), "bad evidence target logical_id")
+#+end_example
+
+這保持既有 result lattice：
+
+#+begin_example
+InvalidHistory > UnsupportedProfile > Valid
+#+end_example
+
+Malformed protocol input 不應逃成 host-language exception。
+
+* Added Regression Tests
+
+新增：
+
+#+begin_example
+tests/test_round17_conformance.py
+#+end_example
+
+覆蓋：
+
+- recorded-revision evidence target CID 為 array/object；
+- binding-op evidence target logical ID 為 array/object；
+- 四者都必須分類為 =InvalidHistory=。
+
+* Verification
+
+本機重跑：
+
+#+begin_src sh
+cd meta/ctl-kernel
+uv run python -m py_compile reference/ctl_ref.py reference/ctl_recompute.py
+uv run python reference/ctl_ref.py verify-vectors vectors
+uv run python reference/ctl_recompute.py vectors
+uv run python -m unittest discover -s tests -v
+#+end_src
+
+結果：
+
+#+begin_example
+verify-vectors: all listed vector categories matched
+recompute: valid
+Ran 47 tests OK
+#+end_example
+
+完整 transcript：
+
+#+begin_example
+run-reference-tests.txt
+#+end_example
+
+* Freeze Gate Judgment
+
+我同意這輪仍然不應重開架構。若下一輪 final gate 沒有新的 P0/P1，例如：
+
+- 未授權 state change；
+- candidate policy self-authorization；
+- RoleBinding authority hijack；
+- evidence bypass / evidence reuse；
+- root / CID divergence；
+- supported-history validator disagreement；
+- malformed bounded input 逃成 host exception；
+
+則可以考慮進入：
+
+#+begin_example
+CTL Kernel v0.1.1 Experimental Freeze
+#+end_example

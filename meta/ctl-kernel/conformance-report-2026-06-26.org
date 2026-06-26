@@ -30,6 +30,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round14_conformance.py=
 - =tests/test_round15_conformance.py=
 - =tests/test_round16_conformance.py=
+- =tests/test_round17_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -118,6 +119,11 @@ Round 15 conformance tests additionally cover:
 Round 16 conformance tests additionally cover:
 
 - malformed =agent/run-receipt/1.status= arrays/objects return =InvalidHistory= instead of host exceptions
+
+Round 17 conformance tests additionally cover:
+
+- malformed =AdmissionBatch.evidence[].target= recorded-revision CIDs return =InvalidHistory= instead of host exceptions
+- malformed =AdmissionBatch.evidence[].target= binding-op logical IDs return =InvalidHistory= instead of host exceptions
 
 * Reproduction
 
