@@ -1,0 +1,466 @@
+{
+  "schema": "twisted-yetter/decision-graph/1",
+  "status": "accepted",
+  "graph_identity": {
+    "graph_id": "graph:twisted-yetter:computation-first-v1",
+    "graph_namespace": "graph:twisted-yetter:research-roadmap",
+    "family": "twisted-yetter-computation-first",
+    "version": 1,
+    "title": "Computation-first Twisted Yetter roadmap"
+  },
+  "source_of_truth": {
+    "normative_form": "CTL revision payload admitted at claim:graph:computation-first-v1",
+    "human_projection_policy": "Human-readable org or diagrams may be generated later, but they are projections, not source of truth.",
+    "payload_file_role": "This JSON file is an admission preimage; after admission, the CTL object is normative."
+  },
+  "split_policy": {
+    "store_strategy": "same project-local ctl-dogfood store for now",
+    "portable_split_key": "graph:twisted-yetter:computation-first-v1",
+    "separation_fields": [
+      "graph_identity.graph_namespace",
+      "graph_identity.graph_id",
+      "node_id",
+      "edge_id"
+    ],
+    "future_split_rule": "If graph volume or governance diverges, move all objects whose graph_id or portable_split_key matches this graph into a graph-specific store and preserve original CIDs as external references."
+  },
+  "scope": {
+    "research_project": "twisted-yetter",
+    "primary_goal": "Build a trustworthy exact example-computation engine before no-go analysis.",
+    "excluded_for_v1": [
+      "full decorated Reutter no-go program",
+      "production security boundary for CTL",
+      "full Chronicle compatibility",
+      "cryptographic actor authentication",
+      "confidential sub-agent access control"
+    ]
+  },
+  "execution_policy": {
+    "default_subagent_effort": "medium",
+    "subagent_ready_when": [
+      "node has explicit inputs",
+      "node has deterministic acceptance criteria",
+      "node does not require global architecture redesign"
+    ],
+    "recording_rule": "Each completed node should append a CTL claim or lab-note object with commands, outputs, exact artifacts, and pass/fail status.",
+    "routing_rule": "When a node fails by a listed failure condition, follow the matching edge without re-planning from scratch."
+  },
+  "active": {
+    "current_node_ids": [
+      "n00-repro-env"
+    ],
+    "entry_node_id": "n00-repro-env",
+    "terminal_node_ids": [
+      "n90-positive-exotic-signal",
+      "n91-negative-evidence-report",
+      "n92-theory-blocker"
+    ]
+  },
+  "nodes": [
+    {
+      "node_id": "n00-repro-env",
+      "kind": "setup",
+      "goal": "Create minimal reproducible Python environment and exact arithmetic scaffolding.",
+      "inputs": [
+        "AGENTS.md",
+        "twisted-yetter.org",
+        "pyproject.toml"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter package exists",
+        "tests directory exists",
+        "uv test command documented",
+        "wiki/env/reproducibility.org updated"
+      ],
+      "acceptance": [
+        "uv run python -m pytest passes or reports no tests only during bootstrap",
+        "environment commands are recorded",
+        "no floating-point-only exact invariant path is introduced"
+      ],
+      "failure_conditions": [
+        "dependency unavailable",
+        "exact arithmetic backend unclear",
+        "test command cannot run locally"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n10-su2-level2-data",
+      "kind": "implementation",
+      "goal": "Implement SU(2)_2 category data needed by the first invariant engine.",
+      "inputs": [
+        "SU(2)_2 simple objects",
+        "quantum dimensions",
+        "twists or theta-sector conventions"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/su2_level2.py",
+        "tests/test_su2_level2.py"
+      ],
+      "acceptance": [
+        "simple object labels are explicit",
+        "dimensions are exact",
+        "global dimension and basic sanity checks pass"
+      ],
+      "failure_conditions": [
+        "normalization ambiguity",
+        "category data source missing",
+        "exact representation inadequate"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n20-linking-matrix-engine",
+      "kind": "implementation",
+      "goal": "Represent small Kirby presentations by integer linking matrices and decoration vectors.",
+      "inputs": [
+        "component ids",
+        "framings",
+        "off-diagonal linking numbers",
+        "H2 decoration group A = Z/2"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/linking_matrix.py",
+        "tests/test_matrix_presentations.py"
+      ],
+      "acceptance": [
+        "intersection form, signature, rank, and determinant checks are exact",
+        "basis changes over GL(n,Z) are represented",
+        "decoration pullback/pushforward convention is documented"
+      ],
+      "failure_conditions": [
+        "basis convention inconsistent",
+        "signature convention inconsistent",
+        "Kirby data cannot express first toy examples"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n30-invariant-formula-v0",
+      "kind": "implementation",
+      "goal": "Implement the first exact twisted Yetter / omega-theta matrix formula for small examples.",
+      "inputs": [
+        "SU(2)_2 data",
+        "linking matrix engine",
+        "candidate omega/theta formula"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/invariant.py",
+        "exact invariant table for initial toy examples"
+      ],
+      "acceptance": [
+        "alpha=0 recovers ordinary invariant path",
+        "outputs are exact symbolic values",
+        "normalization and signature correction are explicit"
+      ],
+      "failure_conditions": [
+        "formula underspecified",
+        "ordinary invariant mismatch",
+        "normalization ambiguity blocks comparison"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n40-toy-manifold-suite",
+      "kind": "computation",
+      "goal": "Compute initial examples before any exotic pair.",
+      "inputs": [
+        "S4",
+        "CP2",
+        "anti-CP2",
+        "S2xS2",
+        "CP2#anti-CP2",
+        "CP2#CP2"
+      ],
+      "expected_outputs": [
+        "experiments/results/toy-suite/*.json",
+        "sanity summary claim in CTL dogfood"
+      ],
+      "acceptance": [
+        "all initial examples produce exact outputs",
+        "trivial and nontrivial decorations are distinguished in the output schema",
+        "artifact metadata includes command, git commit, dirty flag, and tool versions"
+      ],
+      "failure_conditions": [
+        "calculation timeout",
+        "artifact schema insufficient",
+        "unexpected equality or zero needs convention audit"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n50-presentation-invariance-gate",
+      "kind": "gate",
+      "goal": "Check that different presentations of the same manifold give the same invariant after basis transformation.",
+      "inputs": [
+        "toy-suite outputs",
+        "basis-change matrices",
+        "handle-slide toy examples"
+      ],
+      "expected_outputs": [
+        "experiments/results/presentation-gate/*.json",
+        "pass/fail CTL claim"
+      ],
+      "acceptance": [
+        "handle-slide tests agree after decoration basis transformation",
+        "same-manifold matrix presentations agree",
+        "ordinary alpha=0 path remains stable"
+      ],
+      "failure_conditions": [
+        "basis-change mismatch",
+        "handle-slide mismatch",
+        "alpha=0 mismatch",
+        "only presentation-level object was computed"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n60-convention-audit",
+      "kind": "repair",
+      "goal": "Repair formula, normalization, basis, or category-data conventions when gates fail.",
+      "inputs": [
+        "failed gate artifact",
+        "run logs",
+        "source references"
+      ],
+      "expected_outputs": [
+        "minimal failing example",
+        "patched convention note or code change",
+        "new regression test"
+      ],
+      "acceptance": [
+        "the failing case is reduced",
+        "the cause is classified as code bug, formula bug, or theory ambiguity",
+        "a regression test prevents silent recurrence"
+      ],
+      "failure_conditions": [
+        "cannot classify failure",
+        "formula appears not presentation-invariant",
+        "requires theory work before computation can continue"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n70-exotic-pair-input",
+      "kind": "data",
+      "goal": "Prepare the first exotic-pair input only after toy presentation gates pass.",
+      "inputs": [
+        "Dolgachev E(1)_{2,3}",
+        "E(1)",
+        "Kirby or handlebody data",
+        "H2 identification or marked comparison"
+      ],
+      "expected_outputs": [
+        "machine-readable exotic-pair presentations",
+        "intersection-form and H2 identification checks",
+        "reference records"
+      ],
+      "acceptance": [
+        "both sides have auditable Kirby or matrix data",
+        "homeomorphic comparison level is stated",
+        "marking and basis conventions are explicit"
+      ],
+      "failure_conditions": [
+        "diagram data unavailable",
+        "H2 marking unclear",
+        "comparison only meaningful up to unresolved orbit"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n80-exotic-computation",
+      "kind": "computation",
+      "goal": "Compute the invariant for the first exotic-pair candidate.",
+      "inputs": [
+        "accepted exotic-pair input",
+        "passed invariant engine",
+        "comparison marking"
+      ],
+      "expected_outputs": [
+        "exact invariant artifacts for both sides",
+        "comparison certificate",
+        "CTL result claim"
+      ],
+      "acceptance": [
+        "comparison uses exact values",
+        "marking and normalization are identical on both sides",
+        "result is classified as different, same, or inconclusive"
+      ],
+      "failure_conditions": [
+        "calculation too large",
+        "comparison marking insufficient",
+        "values equal across tested markings",
+        "engine assumption not valid for exotic input"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n90-positive-exotic-signal",
+      "kind": "terminal",
+      "goal": "Record a candidate positive signal that twisted Yetter distinguishes an exotic pair.",
+      "inputs": [
+        "comparison certificate",
+        "exact artifacts"
+      ],
+      "expected_outputs": [
+        "claim with certificate-level status",
+        "list of remaining proof obligations"
+      ],
+      "acceptance": [
+        "difference is not caused by normalization, marking, basis, or presentation artifact",
+        "statement level is explicitly marked"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n91-negative-evidence-report",
+      "kind": "terminal",
+      "goal": "Record systematic negative evidence after many correct computations agree.",
+      "inputs": [
+        "multiple exotic-pair computations",
+        "toy gate records"
+      ],
+      "expected_outputs": [
+        "negative evidence summary",
+        "next theory question list"
+      ],
+      "acceptance": [
+        "negative evidence does not overclaim no-go theorem",
+        "tested categories and markings are explicit"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n92-theory-blocker",
+      "kind": "terminal",
+      "goal": "Record that computation is blocked by a theory ambiguity requiring non-computational work.",
+      "inputs": [
+        "minimal failing example",
+        "formula audit"
+      ],
+      "expected_outputs": [
+        "theory blocker claim",
+        "suggested no-go or formula-proof route"
+      ],
+      "acceptance": [
+        "blocker is not merely missing code",
+        "next mathematical proof obligation is explicit"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e00-pass",
+      "from": "n00-repro-env",
+      "to": "n10-su2-level2-data",
+      "condition": "environment bootstrap passes"
+    },
+    {
+      "edge_id": "e10-pass",
+      "from": "n10-su2-level2-data",
+      "to": "n20-linking-matrix-engine",
+      "condition": "SU(2)_2 data tests pass"
+    },
+    {
+      "edge_id": "e20-pass",
+      "from": "n20-linking-matrix-engine",
+      "to": "n30-invariant-formula-v0",
+      "condition": "linking matrix and basis-change tests pass"
+    },
+    {
+      "edge_id": "e30-pass",
+      "from": "n30-invariant-formula-v0",
+      "to": "n40-toy-manifold-suite",
+      "condition": "formula implementation passes ordinary and exactness sanity checks"
+    },
+    {
+      "edge_id": "e30-fail-theory",
+      "from": "n30-invariant-formula-v0",
+      "to": "n92-theory-blocker",
+      "condition": "candidate formula is underspecified or not a closed 4-manifold invariant"
+    },
+    {
+      "edge_id": "e40-pass",
+      "from": "n40-toy-manifold-suite",
+      "to": "n50-presentation-invariance-gate",
+      "condition": "toy suite computes exact artifacts"
+    },
+    {
+      "edge_id": "e40-fail-repair",
+      "from": "n40-toy-manifold-suite",
+      "to": "n60-convention-audit",
+      "condition": "toy computation exposes convention mismatch, timeout, or artifact-schema gap"
+    },
+    {
+      "edge_id": "e50-pass",
+      "from": "n50-presentation-invariance-gate",
+      "to": "n70-exotic-pair-input",
+      "condition": "presentation invariance gate passes"
+    },
+    {
+      "edge_id": "e50-fail-repair",
+      "from": "n50-presentation-invariance-gate",
+      "to": "n60-convention-audit",
+      "condition": "presentation invariance gate fails"
+    },
+    {
+      "edge_id": "e60-repaired",
+      "from": "n60-convention-audit",
+      "to": "n30-invariant-formula-v0",
+      "condition": "repair changes formula or invariant code"
+    },
+    {
+      "edge_id": "e60-data-repair",
+      "from": "n60-convention-audit",
+      "to": "n20-linking-matrix-engine",
+      "condition": "repair changes matrix or basis representation"
+    },
+    {
+      "edge_id": "e60-theory-block",
+      "from": "n60-convention-audit",
+      "to": "n92-theory-blocker",
+      "condition": "failure cannot be repaired without a mathematical proof or no-go audit"
+    },
+    {
+      "edge_id": "e70-pass",
+      "from": "n70-exotic-pair-input",
+      "to": "n80-exotic-computation",
+      "condition": "exotic-pair input is machine-readable and marked comparison is explicit"
+    },
+    {
+      "edge_id": "e70-fail-negative-scope",
+      "from": "n70-exotic-pair-input",
+      "to": "n91-negative-evidence-report",
+      "condition": "first target unavailable, but enough lower-risk computations already support a negative-evidence report"
+    },
+    {
+      "edge_id": "e80-different",
+      "from": "n80-exotic-computation",
+      "to": "n90-positive-exotic-signal",
+      "condition": "exact comparison gives different values under accepted marking"
+    },
+    {
+      "edge_id": "e80-same-more",
+      "from": "n80-exotic-computation",
+      "to": "n70-exotic-pair-input",
+      "condition": "values agree; choose next exotic pair or marking before theory no-go"
+    },
+    {
+      "edge_id": "e80-inconclusive-repair",
+      "from": "n80-exotic-computation",
+      "to": "n60-convention-audit",
+      "condition": "comparison is inconclusive due to marking, normalization, or scalability issue"
+    }
+  ],
+  "invariants": [
+    "No exotic-pair computation before n50-presentation-invariance-gate passes.",
+    "No terminal positive claim without exact artifact comparison.",
+    "No no-go conclusion from low-rank negative controls alone.",
+    "Every completed node must produce a reproducible artifact or a CTL lab-note claim.",
+    "Human-readable projections of this graph are non-normative."
+  ]
+}

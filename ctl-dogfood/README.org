@@ -55,12 +55,57 @@ claim:twisted-yetter-computation-first-plan
 - no-go / decorated Reutter 分析先 defer。
 - exotic pair 等 toy examples 通過後再碰。
 
+* Current Admitted Graph
+
+decision graph 和 lab-note / plan claim 暫時使用同一個 project-local store；差別用
+logical namespace 與 payload 欄位分開，而不是另建一套平行真相來源。
+
+目前 graph claim 是：
+
+#+begin_example
+claim:graph:computation-first-v1
+#+end_example
+
+graph payload 的來源 preimage 是：
+
+#+begin_example
+graphs/computation-first-v1.json
+#+end_example
+
+但 admission 之後，normative source 是 CTL object store 裡對應的
+=ctl/revision/1= object；human-readable Org / Mermaid graph 若之後產生，都只算 projection。
+
+為了之後容易拆分，graph payload 明確保存：
+
+- =graph_identity.graph_namespace=
+- =graph_identity.graph_id=
+- =split_policy.portable_split_key=
+- node / edge ids
+
+若未來 graph 變多或 governance 需要分離，可以依這些欄位把同一 graph 的 objects 搬到
+graph-specific store，同時保留原 CID 作為外部 reference。
+
 * Reproduce
 
 日常驗證：
 
 #+begin_src sh
 cd ctl-dogfood
+uv run python scripts/verify.py
+#+end_src
+
+若本機 sandbox 不允許寫入預設 =uv= cache，可使用 repo-local cache：
+
+#+begin_src sh
+cd ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src
+
+append decision graph：
+
+#+begin_src sh
+cd ctl-dogfood
+uv run python scripts/admit_graph.py
 uv run python scripts/verify.py
 #+end_src
 
