@@ -1,0 +1,51 @@
+#+TITLE: Experiment Artifacts
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:nil num:nil
+
+* Artifact Certificate Schema
+
+狀態標籤：=n25-artifact-schema= / =working understanding= / =schema scaffold=
+
+本目錄保留 generated experiment artifacts。n25 只定義 JSON certificate envelope；
+不在此產生大型 computation result。
+
+每個 certificate 應通過 =twisted_yetter.artifacts.validate_certificate=，並在頂層保存：
+
+- =schema=: 目前為 =twisted-yetter.certificate.v1=
+- =status=: =pass=、=fail=、或 =inconclusive=
+- =command= 與 =argv=
+- =git.commit= 與 =git.dirty=
+- =tool_versions=
+- =input_hash=
+- =exact_output=
+- =log_references=: 大型 stdout/stderr 或 run log 的路徑、sha256、byte count
+- 建議欄位：=generator_script=、=reproduce_command=、UTC start/finish、elapsed seconds、
+  =repo_root=
+
+大型 log 不應直接塞進 certificate；改以 =log_references= 指向
+=experiments/results/*.log= 或其他 repo-local artifact。
+
+* Minimal Example Shape
+
+#+begin_src json
+{
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "command": "uv run python experiments/example.py",
+  "argv": ["experiments/example.py", "--case", "toy"],
+  "git": {"commit": "0000000000000000000000000000000000000000", "dirty": true},
+  "tool_versions": {"python": "3.11.0"},
+  "input_hash": "sha256-of-canonical-input-json",
+  "exact_output": {
+    "value": {"kind": "rational", "numerator": 1, "denominator": 2},
+    "sanity_checks": [{"name": "alpha_zero_matches_ordinary", "status": "pass"}]
+  },
+  "log_references": [
+    {
+      "path": "experiments/results/example.log",
+      "sha256": "sha256-of-log",
+      "bytes": 1234
+    }
+  ]
+}
+#+end_src

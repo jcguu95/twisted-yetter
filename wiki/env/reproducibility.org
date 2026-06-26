@@ -70,6 +70,17 @@ repo-local exact algebra module。n00 不引入這些較重 dependency。
 若未來引入 coverage、Hypothesis、Sage 或 compiled artifacts，應在新增工具時同步更新
 =.gitignore= 與本頁。
 
+* Artifact Certificate Schema
+
+狀態標籤：=n25-artifact-schema= / =working understanding= / =schema scaffold=
+
+Generated computation certificates use =twisted-yetter.certificate.v1= as implemented in
+=src/twisted_yetter/artifacts.py=.  Certificate JSON must record =command=, =argv=,
+=git.commit=, =git.dirty=, =tool_versions=, =input_hash=, =exact_output=, and
+=status= equal to =pass=, =fail=, or =inconclusive=.  Large stdout/stderr or run logs
+should be stored as separate files and referenced through =log_references= with path,
+sha256, and byte count, rather than embedded into the certificate body.
+
 * CTL Provider Pin
 
 n00 不修改 =ctl-dogfood/objects/*=、CTL admission state、或 provider pin。
@@ -87,3 +98,25 @@ Verification command:
 cd /Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
 UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
 #+end_src
+
+* n10 Exact Algebra Backend Note
+
+狀態標籤：=n10-exact-algebra-backend= / =working understanding= / =implemented=
+
+n10 的最小 exact backend 已採用 repo-local Python stdlib implementation：
+
+- Module: =src/twisted_yetter/exact.py=
+- Official scalar primitives: Python =int= 與 =fractions.Fraction=
+- Floats: 在 exact scalar boundary 與 exact JSON output boundary 均拒絕
+- Equality: 使用 Python arbitrary-precision integer / =Fraction= exact equality
+- JSON representation: =to_jsonable(...)= 產生 canonical object payload，=dumps(...)= 使用
+  =sort_keys=True= 與 compact separators，確保 deterministic serialization
+
+Reproduce command:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+Current n10 scope 不引入 SageMath、SymPy、cyclotomic field、或 SU(2)_2 category data；這些保留給
+後續 graph node（例如 =n15-su2-level2-certificate=）在既有 exact JSON contract 上擴充。
