@@ -1,0 +1,74 @@
+#+TITLE: SU(2)_2 Category Data Certificate
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n15-su2-level2-certificate=
+- status: =computed evidence= / =working understanding=
+- implementation: =src/twisted_yetter/su2_level2.py=
+- tests: =tests/test_su2_level2.py=
+- convention ledger: =wiki/understandings/formula-conventions.org=
+
+This note records the minimal category-side certificate implemented for =SU(2)_2=.
+It does not implement a Yetter / Crane-Yetter invariant formula.
+
+* Certificate-Level Data
+
+The implemented simple labels are:
+
+#+begin_src text
+0, 1, 2
+#+end_src
+
+The quantum dimensions are represented exactly in =Q(sqrt(2))=:
+
+#+begin_src text
+d_0 = 1
+d_1 = sqrt(2)
+d_2 = 1
+#+end_src
+
+The fusion rules encoded in the test suite are:
+
+#+begin_src text
+0 x i = i
+1 x 1 = 0 + 2
+1 x 2 = 2 x 1 = 1
+2 x 2 = 0
+#+end_src
+
+The global dimension sanity check is exact:
+
+#+begin_src text
+sum_i d_i^2 = 1^2 + (sqrt(2))^2 + 1^2 = 4
+#+end_src
+
+* Omega / Theta Convention Status
+
+The implementation cites =wiki/understandings/formula-conventions.org= for the current
+=omega/theta= ledger:
+
+#+begin_src text
+omega = sum_i Delta_i i
+theta = sum_i (-1)^i Delta_i i
+#+end_src
+
+However, numeric =omega/theta= coefficients are explicitly absent from the certificate because
+the ledger marks both =Delta_i= versus quantum dimension and the parity convention as
+=SOURCE NEEDED=.  This module therefore records the convention status only; it does not treat
+the working formula as a theorem.
+
+* Explicitly Unsupported Data
+
+The following are intentionally absent rather than guessed:
+
+- twists
+- braiding / =R=-symbols
+- =F=-symbols
+- invariant formula
+- numeric =omega/theta= coefficients
+
+This is sufficient for n15's internal category-data checks, but it is not sufficient for a later
+Kirby formula node without a source audit.
