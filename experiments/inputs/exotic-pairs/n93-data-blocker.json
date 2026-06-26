@@ -1,0 +1,81 @@
+{
+  "argv": [
+    "manual-node-worker",
+    "n93-data-blocker"
+  ],
+  "command": "record terminal data blocker from n65 and n70 exotic input audits",
+  "exact_output": {
+    "blocker": "auditable exotic pair input data is missing",
+    "decision_graph_node": "n93-data-blocker",
+    "minimum_next_task_contract": {
+      "diagram_digitization_backlog": [
+        "component ids",
+        "framings",
+        "dotted status",
+        "orientation",
+        "component lineage",
+        "PD code, braid word, or equivalent machine-readable link representation",
+        "integer linking matrix reconstruction",
+        "rank, determinant/parity, signature, Euler characteristic, and intersection-form sanity checks",
+        "basis-change matrices when source basis differs from final diagram basis"
+      ],
+      "h2_marking_backlog": [
+        "comparison level declaration: marked, cork-canonical, orbit, multiset, or inconclusive",
+        "H2 identification or comparison matrix",
+        "basis tracking statement for both sides",
+        "alpha=0 ordinary-control routing check after diagrams exist"
+      ],
+      "source_capture": {
+        "first_target": "dolgachev-e1-23-vs-e1",
+        "required_fields": [
+          "source id",
+          "bibliographic metadata",
+          "local snapshot path or canonical locator",
+          "content hash or git blob hash",
+          "capture time",
+          "exact page and figure ids",
+          "theorem, proposition, or lemma ids for source-backed claims",
+          "separation of proved-in-source claims from project inference"
+        ],
+        "tentative_reference_id": "akbulut-dolgachev-surface"
+      }
+    },
+    "non_claims": [
+      "not a formula failure",
+      "not an invariant engine failure",
+      "not a toy/control gate failure",
+      "not an exotic negative result"
+    ],
+    "recommended_next_node": "n72-dolgachev-source-capture",
+    "route": {
+      "edge_id": "e70-fail-data",
+      "from": "n70-exotic-input-certification",
+      "to": "n93-data-blocker"
+    },
+    "source_nodes": [
+      "n65-exotic-input-scout",
+      "n70-exotic-input-certification"
+    ],
+    "verdict": "data-blocked-terminal"
+  },
+  "generator_script": null,
+  "git": {
+    "commit": "a37664797417fb015ecc676981fd36f5c05b7517",
+    "dirty": false
+  },
+  "input_hash": "de4cb8c62c16589c930e1120f69dd1666c2bb9b9a734f23e869df2e930240ba9",
+  "log_references": [],
+  "notes": [
+    "This terminal node records a data availability blocker only.",
+    "It is based on existing n65 and n70 files and does not perform network search.",
+    "The invariant engine and toy/control gates are not classified as failed by this certificate."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "PYTHONPATH=src python -c 'import json; from pathlib import Path; from src.twisted_yetter.artifacts import validate_certificate; validate_certificate(json.loads(Path(\"experiments/inputs/exotic-pairs/n93-data-blocker.json\").read_text()))'",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-06-26T22:44:24Z",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.12.13"
+  }
+}
