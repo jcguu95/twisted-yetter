@@ -1,0 +1,89 @@
+#+TITLE: Reproducibility Environment
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 狀態
+
+狀態標籤：=n00-repro-env= / =working understanding= / =environment scaffold=
+
+本頁記錄目前最小可重現研究環境。這不是數學結果，也不宣稱任何
+twisted Yetter formula 已被實作；它只固定初始 Python/uv 測試入口與 exact
+arithmetic policy。
+
+* Repo 與工具
+
+- Repo root: =/Users/jin/data/local/projects/twisted-yetter=
+- Python requirement: =>=3.11=，見 =pyproject.toml=
+- Dependency manager: =uv=
+- Repo-local uv cache policy:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache
+#+end_src
+
+* Default Test Command
+
+n00 的 default test command 是：
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+等價的短形式（若外部環境允許使用預設 uv cache）：
+
+#+begin_src sh
+uv run python -m pytest
+#+end_src
+
+目前 pytest 只包含 environment sanity tests：
+
+- =tests/test_environment.py= 確認 =src/twisted_yetter= 可 import。
+- 同檔用 Python stdlib =fractions.Fraction= 檢查 exact rational arithmetic。
+
+* Exact Arithmetic Backend Policy
+
+n00 的 exact arithmetic dependency choice 是「先使用 Python stdlib exact
+arithmetic」：
+
+- 任意精度整數：Python =int=
+- 有理數：Python =fractions.Fraction=
+
+正式計算不得使用 floating point 作為 certificate-level evidence。之後若
+=SU(2)_2= 或 cyclotomic/minimal-polynomial comparison 需要更強 backend，應由
+=n10-exact-algebra-backend= 另行決定並記錄，例如 SageMath、SymPy，或
+repo-local exact algebra module。n00 不引入這些較重 dependency。
+
+* Generated Cache Policy
+
+目前 generated caches 應忽略於 git，見 =.gitignore=：
+
+- =.venv/=
+- =__pycache__/=
+- =*.py[cod]=
+- =.pytest_cache/=
+- =.mypy_cache/=
+- =.ruff_cache/=
+- =.sage/=
+- =.uv-cache/=
+
+若未來引入 coverage、Hypothesis、Sage 或 compiled artifacts，應在新增工具時同步更新
+=.gitignore= 與本頁。
+
+* CTL Provider Pin
+
+n00 不修改 =ctl-dogfood/objects/*=、CTL admission state、或 provider pin。
+
+目前 CTL provider pin 仍以 =ctl-dogfood/manifests/bootstrap-2026-06-26.json= 與
+=ctl-dogfood/README.org= 為準：
+
+- =ctl_meta_commit=: =a52af635dc832bea8dbd13652355d5820dddd407=
+- =ctl_kernel_freeze_tag=: =ctl-kernel-v0.1.1-experimental=
+- =ctl_kernel_freeze_commit=: =be3785695d60f9f125df31cc0013a580bc658651=
+
+Verification command:
+
+#+begin_src sh
+cd /Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src
