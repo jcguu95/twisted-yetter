@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-06-26T18:20:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "sys:policy",
+  "parents": [],
+  "payload": {
+    "default": "deny",
+    "rules": [
+      {
+        "actions": [
+          "binding.remove",
+          "binding.set",
+          "policy.replace",
+          "revision.record"
+        ],
+        "effect": "allow",
+        "required_evidence_basis": [],
+        "resources": [
+          {
+            "logical_id": "sys:policy"
+          },
+          {
+            "logical_id_prefix": "claim:"
+          },
+          {
+            "logical_id_prefix": "role-binding:"
+          },
+          {
+            "payload_profile": "ctl-data/opaque-json/1"
+          }
+        ],
+        "subject": {
+          "role_id": "role:owner"
+        }
+      }
+    ],
+    "version": 1
+  },
+  "payload_profile": "ctl-governance/policy-set/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter-meta",
+  "revision_kind": "policy-set"
+}

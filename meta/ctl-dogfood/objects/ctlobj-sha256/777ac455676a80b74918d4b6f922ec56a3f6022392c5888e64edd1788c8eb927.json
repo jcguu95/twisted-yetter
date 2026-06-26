@@ -1,0 +1,51 @@
+{
+  "created_at": "2026-06-26T18:20:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:ctl-kernel-v0.1.1-experimental-freeze-accepted",
+  "parents": [],
+  "payload": {
+    "accepted_scope": [
+      "Revision",
+      "AdmissionBatch",
+      "ProjectStateRoot",
+      "PolicySetRevision",
+      "RoleBindingRevision",
+      "fixed pure governance evaluator",
+      "reference validator behavior",
+      "golden vectors",
+      "current P0/P1 adversarial regression corpus"
+    ],
+    "caveats": [
+      "not a production security boundary",
+      "not full Chronicle compatibility",
+      "no cryptographic actor authentication",
+      "no confidential compartments",
+      "no agent read capability enforcement",
+      "no sandbox or tool-call mediation",
+      "no raw filesystem crash recovery or rollback detection",
+      "agent/run-receipt/1 remains a weak structural predicate"
+    ],
+    "decision": "accept CTL Kernel v0.1.1 Experimental Freeze and begin shadow-mode dogfood",
+    "dogfood_mode": "shadow",
+    "evidence_artifacts": [
+      "meta/ctl-kernel/experimental-freeze-2026-06-26.org",
+      "meta/ctl-kernel/reviews/round18-final-freeze-review-2026-06-26.org",
+      "meta/ctl-kernel/run-reference-tests.txt",
+      "meta/ctl-kernel/fuzz/round18-final-gate-fuzz-output.txt"
+    ],
+    "freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+    "freeze_tag": "ctl-kernel-v0.1.1-experimental",
+    "kernel_profile": "ctl-kernel/1",
+    "next_gate": "dogfood 5-10 low-risk meta decisions before admitting twisted-Yetter research claims",
+    "schema": "ctl-dogfood/freeze-acceptance/1",
+    "self_reference_policy": "canonical bootstrap objects intentionally avoid current HEAD",
+    "status": "accepted"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter-meta",
+  "revision_kind": "claim"
+}
