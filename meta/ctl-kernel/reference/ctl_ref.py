@@ -894,12 +894,12 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
         die_unless(new_policy_cid in batch["recorded_revisions"], "policy replacement must be recorded atomically")
     for entry in batch["evidence"]:
         die_unless(entry["cid"] in recorded_set, "evidence CID not recorded")
+    roles = role_bindings_for_principal(store, state, batch["principal_claim"])
     unsupported_evidence_basis = find_unsupported_evidence_basis(batch)
     if unsupported_evidence_basis is not None:
         raise UnsupportedProfile(unsupported_evidence_basis)
     if unsupported_profiles:
         raise UnsupportedProfile(unsupported_profiles[0])
-    roles = role_bindings_for_principal(store, state, batch["principal_claim"])
     requests = make_requests(store, state, batch, recorded)
     die_unless(len(requests) <= 5121, "too many requests")
     authorization_match_work(old_policy, requests)

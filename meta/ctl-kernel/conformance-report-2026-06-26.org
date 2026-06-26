@@ -24,6 +24,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round8_conformance.py=
 - =tests/test_round9_conformance.py=
 - =tests/test_round10_conformance.py=
+- =tests/test_round11_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -82,6 +83,11 @@ Round 10 conformance tests additionally cover:
 - unsupported recorded payload profile does not mask malformed evidence schema
 - missing transition =parent_root= returns =InvalidHistory= instead of a host exception
 - genesis =parent_root != null= dominates unsupported recorded payload profile
+
+Round 11 conformance tests additionally cover:
+
+- unsupported recorded payload profile does not mask inactive principal RoleBinding
+- unsupported evidence basis does not mask inactive principal RoleBinding
 
 * Reproduction
 

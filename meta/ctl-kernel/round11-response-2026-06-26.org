@@ -1,0 +1,79 @@
+#+TITLE: CTL Kernel v0.1.1 Round 11 Response
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Summary
+
+Round 11 繼續針對同一個 result lattice 問題：
+
+#+begin_example
+InvalidHistory > UnsupportedProfile > Valid
+#+end_example
+
+這一輪沒有重開核心架構，也沒有新增 ontology。修補範圍只限 =validate_transition=
+的 phase ordering。
+
+* Fixed Cases
+
+新增：
+
+#+begin_example
+tests/test_round11_conformance.py
+#+end_example
+
+覆蓋兩個 adversarial cases：
+
+#+begin_example
+unsupported recorded profile + inactive principal RoleBinding
+  -> InvalidHistory
+
+unsupported evidence basis + inactive principal RoleBinding
+  -> InvalidHistory
+#+end_example
+
+* Implementation Change
+
+上一輪已經把 recorded payload profile unsupported 改成先累積，但 =validate_transition=
+仍然在檢查 principal role active / actor / scope 前就回報 unsupported。
+
+本輪調整為：
+
+#+begin_example
+deterministic transition checks
+principal role active / actor / scope
+unsupported evidence basis / unsupported recorded profile classification
+policy and evidence predicate evaluation
+#+end_example
+
+具體來說，=role_bindings_for_principal= 現在位於 unsupported evidence/profile
+classification 之前。這讓 inactive RoleBinding 這種不需理解未知 profile / predicate 的
+明確 invalidity 先被分類為 =InvalidHistory=。
+
+* Verification
+
+最新 transcript：
+
+#+begin_example
+meta/ctl-kernel/run-reference-tests.txt
+#+end_example
+
+本輪結果：
+
+#+begin_example
+verify-vectors: all expected categories matched
+recompute: valid
+unittest: Ran 32 tests OK
+#+end_example
+
+* Freeze Judgment
+
+我的判斷仍然是：
+
+- architecture freeze: yes
+- executable reference package: yes
+- result-lattice conformance: improved, but should receive one final P0/P1 audit
+- v0.1.1 experimental freeze: after final adversarial audit if no new P0/P1
+
+下一輪不應擴 spec；只應看 authority bypass、root forgery、evidence bypass、
+canonical CID/root uniqueness、以及 supported-history validator disagreement。
