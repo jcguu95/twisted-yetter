@@ -1,11 +1,19 @@
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
-2026-06-26T06:12:31Z
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
+UTC 2026-06-26T06:32:41Z
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
+a3abe3f3928d133fa14cfe026704f4fada0a25b0
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
+ M meta/ctl-kernel/conformance-report-2026-06-26.org
+ M meta/ctl-kernel/reference/ctl_ref.py
+ M meta/ctl-kernel/run-reference-tests.txt
+?? meta/ctl-kernel/round9-response-2026-06-26.org
+?? meta/ctl-kernel/tests/test_round9_conformance.py
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
 uv 0.11.11 (aarch64-apple-darwin)
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
 Python 3.11.15
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
 genesis: valid
 non-genesis: valid
 role-binding-selector-pass: valid
@@ -23,11 +31,37 @@ sys-namespace-invalid: invalid
 sys-policy-opaque-invalid: invalid
 role-binding-lineage-change: invalid
 encoding: valid
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
 recompute: valid
-[2m---------------------- [ 20260626-001231 ] ----------------------[0m
-.....................
+[2m---------------------- [ 20260626-003241 ] ----------------------[0m
+test_evidence_cannot_target_another_binding_op (test_mutations.MutationTests.test_evidence_cannot_target_another_binding_op) ... ok
+test_object_cid_tamper_is_rejected (test_mutations.MutationTests.test_object_cid_tamper_is_rejected) ... ok
+test_policy_replacement_must_be_atomic (test_mutations.MutationTests.test_policy_replacement_must_be_atomic) ... ok
+test_policy_replacement_must_fast_forward (test_mutations.MutationTests.test_policy_replacement_must_fast_forward) ... ok
+test_root_transition_forgery_is_rejected_by_chain_replay (test_mutations.MutationTests.test_root_transition_forgery_is_rejected_by_chain_replay) ... ok
+test_transition_set_target_must_be_recorded (test_mutations.MutationTests.test_transition_set_target_must_be_recorded) ... ok
+test_new_round7_vectors_have_expected_results (test_reference.ReferenceTests.test_new_round7_vectors_have_expected_results) ... ok
+test_validate_chain_rejects_kernel_mismatch (test_reference.ReferenceTests.test_validate_chain_rejects_kernel_mismatch) ... ok
+test_validate_chain_rejects_project_mismatch (test_reference.ReferenceTests.test_validate_chain_rejects_project_mismatch) ... ok
+test_validate_chain_rejects_unknown_root_field_before_traversal (test_reference.ReferenceTests.test_validate_chain_rejects_unknown_root_field_before_traversal) ... ok
+test_validate_chain_replays_to_target (test_reference.ReferenceTests.test_validate_chain_replays_to_target) ... ok
+test_validate_chain_requires_pinned_genesis (test_reference.ReferenceTests.test_validate_chain_requires_pinned_genesis) ... ok
+test_candidate_policy_with_unsupported_basis_is_unsupported (test_round8_conformance.Round8ConformanceTests.test_candidate_policy_with_unsupported_basis_is_unsupported) ... ok
+test_canonical_object_over_one_mib_is_rejected (test_round8_conformance.Round8ConformanceTests.test_canonical_object_over_one_mib_is_rejected) ... ok
+test_invalid_gregorian_timestamp_is_rejected (test_round8_conformance.Round8ConformanceTests.test_invalid_gregorian_timestamp_is_rejected) ... ok
+test_invalid_parent_root_dominates_unsupported_profile (test_round8_conformance.Round8ConformanceTests.test_invalid_parent_root_dominates_unsupported_profile) ... ok
+test_logical_id_over_256_bytes_is_rejected (test_round8_conformance.Round8ConformanceTests.test_logical_id_over_256_bytes_is_rejected) ... ok
+test_malformed_binding_op_returns_invalid_not_python_exception (test_round8_conformance.Round8ConformanceTests.test_malformed_binding_op_returns_invalid_not_python_exception) ... ok
+test_nesting_depth_65_is_rejected (test_round8_conformance.Round8ConformanceTests.test_nesting_depth_65_is_rejected) ... ok
+test_principal_role_bindings_over_64_is_rejected (test_round8_conformance.Round8ConformanceTests.test_principal_role_bindings_over_64_is_rejected) ... ok
+test_role_binding_cannot_satisfy_run_receipt_basis (test_round8_conformance.Round8ConformanceTests.test_role_binding_cannot_satisfy_run_receipt_basis) ... ok
+test_bad_admitted_at_dominates_unsupported_recorded_profile (test_round9_conformance.Round9ConformanceTests.test_bad_admitted_at_dominates_unsupported_recorded_profile) ... ok
+test_invalid_binding_target_dominates_unsupported_evidence_basis (test_round9_conformance.Round9ConformanceTests.test_invalid_binding_target_dominates_unsupported_evidence_basis) ... ok
+test_malformed_policy_selector_returns_invalid_not_host_exception (test_round9_conformance.Round9ConformanceTests.test_malformed_policy_selector_returns_invalid_not_host_exception) ... ok
+test_principal_authentication_assurance_must_be_id (test_round9_conformance.Round9ConformanceTests.test_principal_authentication_assurance_must_be_id) ... ok
+test_supported_run_receipt_profile_has_minimal_structural_validation (test_round9_conformance.Round9ConformanceTests.test_supported_run_receipt_profile_has_minimal_structural_validation) ... ok
+
 ----------------------------------------------------------------------
-Ran 21 tests in 0.214s
+Ran 26 tests in 0.553s
 
 OK

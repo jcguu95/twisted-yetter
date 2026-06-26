@@ -22,6 +22,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_reference.py=
 - =tests/test_mutations.py=
 - =tests/test_round8_conformance.py=
+- =tests/test_round9_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -65,6 +66,14 @@ Round 8 conformance tests additionally cover:
 - principal role binding count over 64
 - fake run receipt evidence using a RoleBinding CID
 - malformed binding op returning =InvalidHistory= instead of a host exception
+
+Round 9 conformance tests additionally cover:
+
+- invalid binding target dominating unsupported evidence basis
+- invalid =admitted_at= dominating unsupported recorded payload profile
+- =principal_claim.authentication_assurance= must be an =id= when present
+- malformed policy selector returning =InvalidHistory= instead of a host exception
+- minimal structural validation for supported =agent/run-receipt/1= payload profile
 
 * Reproduction
 

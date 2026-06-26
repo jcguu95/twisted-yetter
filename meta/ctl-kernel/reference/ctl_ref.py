@@ -24,6 +24,7 @@ TS_RE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$")
 
 OBJ_DOMAIN = b"ctl-object-v1\0"
 SUPPORTED_PAYLOAD_PROFILES = {
+    "agent/run-receipt/1",
     "ctl-governance/policy-set/1",
     "ctl-governance/role-binding/1",
     "ctl-data/opaque-json/1",
@@ -245,6 +246,8 @@ def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> Non
         validate_role_binding_revision(rev)
     elif profile == "ctl-data/opaque-json/1":
         pass
+    elif profile == "agent/run-receipt/1":
+        validate_run_receipt_revision(rev)
     else:
         raise UnsupportedProfile(profile)
 
@@ -276,6 +279,7 @@ def validate_policy_payload(payload: dict[str, Any]) -> None:
         die_unless(len(rule["resources"]) <= 256, "too many resources")
         unique_sorted_objects(rule["resources"], "resources")
         for selector in rule["resources"]:
+            die_unless(isinstance(selector, dict), "selector must be object")
             die_unless(set(selector.keys()) <= RESOURCE_SELECTOR_KEYS, "unknown selector")
             die_unless(len(selector) == 1, "selector must have exactly one field")
             key, value = next(iter(selector.items()))
@@ -301,6 +305,13 @@ def unsupported_policy_basis(policy: dict[str, Any]) -> str | None:
     return None
 
 
+def find_unsupported_evidence_basis(batch: dict[str, Any]) -> str | None:
+    for entry in batch["evidence"]:
+        if entry["basis"] not in SUPPORTED_EVIDENCE_BASIS:
+            return entry["basis"]
+    return None
+
+
 def validate_role_binding_revision(rev: dict[str, Any]) -> None:
     die_unless(rev["logical_id"].startswith("role-binding:"), "role binding namespace")
     payload = rev["payload"]
@@ -309,6 +320,20 @@ def validate_role_binding_revision(rev: dict[str, Any]) -> None:
     die_unless(is_id(payload["role_id"]), "bad role id")
     check_keys(payload["scope"], {"project_id"})
     die_unless(is_id(payload["scope"]["project_id"]), "bad role scope")
+
+
+def validate_run_receipt_revision(rev: dict[str, Any]) -> None:
+    die_unless(rev["revision_kind"] == "run-receipt", "run receipt kind")
+    payload = rev["payload"]
+    check_keys(payload, {"status"}, {"command", "started_at", "finished_at"})
+    die_unless(payload["status"] in {"failed", "ok"}, "bad run receipt status")
+    if "command" in payload:
+        die_unless(isinstance(payload["command"], list), "run receipt command must be array")
+        die_unless(all(isinstance(part, str) for part in payload["command"]), "bad run receipt command")
+    if "started_at" in payload:
+        check_timestamp(payload["started_at"])
+    if "finished_at" in payload:
+        check_timestamp(payload["finished_at"])
 
 
 def is_role_binding_revision(rev: dict[str, Any]) -> bool:
@@ -366,6 +391,18 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     die_unless(all(is_cid(x) for x in batch["recorded_revisions"]), "bad recorded CID")
     unique_sorted_scalars(batch["recorded_revisions"], "recorded_revisions")
 
+    check_keys(batch["principal_claim"], {"actor_id", "role_bindings"}, {"authentication_assurance"})
+    die_unless(is_id(batch["principal_claim"]["actor_id"]), "bad principal actor")
+    if "authentication_assurance" in batch["principal_claim"]:
+        die_unless(is_id(batch["principal_claim"]["authentication_assurance"]), "bad authentication assurance")
+    die_unless(isinstance(batch["principal_claim"]["role_bindings"], list), "principal roles array")
+    die_unless(len(batch["principal_claim"]["role_bindings"]) <= 64, "too many principal role bindings")
+    die_unless(all(is_cid(x) for x in batch["principal_claim"]["role_bindings"]), "bad principal role CID")
+    unique_sorted_scalars(batch["principal_claim"]["role_bindings"], "principal role_bindings")
+    check_keys(batch["submitted_by"], {"actor_id"})
+    die_unless(is_id(batch["submitted_by"]["actor_id"]), "bad submitted_by")
+    check_timestamp(batch["admitted_at"])
+
     recorded: list[tuple[str, dict[str, Any]]] = []
     for cid in batch["recorded_revisions"]:
         rev = store.resolve(cid)
@@ -398,12 +435,9 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     die_unless(len(batch["evidence"]) <= 4096, "too many evidence entries")
     unique_sorted_objects(batch["evidence"], "evidence")
     recorded_set = set(batch["recorded_revisions"])
-    unsupported_basis: str | None = None
     for entry in batch["evidence"]:
         check_keys(entry, {"target", "basis", "cid"})
         die_unless(is_id(entry["basis"]), "bad evidence basis")
-        if entry["basis"] not in SUPPORTED_EVIDENCE_BASIS:
-            unsupported_basis = entry["basis"]
         die_unless(is_cid(entry["cid"]), "bad evidence cid")
         target = entry["target"]
         check_keys(target, {"kind"}, {"cid", "logical_id"})
@@ -416,16 +450,6 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
         else:
             raise InvalidHistory("bad evidence target kind")
 
-    check_keys(batch["principal_claim"], {"actor_id", "role_bindings"}, {"authentication_assurance"})
-    die_unless(is_id(batch["principal_claim"]["actor_id"]), "bad principal actor")
-    die_unless(isinstance(batch["principal_claim"]["role_bindings"], list), "principal roles array")
-    die_unless(len(batch["principal_claim"]["role_bindings"]) <= 64, "too many principal role bindings")
-    die_unless(all(is_cid(x) for x in batch["principal_claim"]["role_bindings"]), "bad principal role CID")
-    unique_sorted_scalars(batch["principal_claim"]["role_bindings"], "principal role_bindings")
-    check_keys(batch["submitted_by"], {"actor_id"})
-    die_unless(is_id(batch["submitted_by"]["actor_id"]), "bad submitted_by")
-    check_timestamp(batch["admitted_at"])
-
     recorded_map = dict(recorded)
     for _cid, rev in recorded:
         for parent in rev["parents"]:
@@ -433,8 +457,6 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
                 validate_parent_relation(rev, recorded_map[parent])
     assert_no_parent_cycle(recorded_map)
     extend_role_binding_identities({}, recorded)
-    if unsupported_basis is not None:
-        raise UnsupportedProfile(unsupported_basis)
 
     return recorded
 
@@ -858,6 +880,9 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
         die_unless(new_policy_cid in batch["recorded_revisions"], "policy replacement must be recorded atomically")
     for entry in batch["evidence"]:
         die_unless(entry["cid"] in recorded_set, "evidence CID not recorded")
+    unsupported_evidence_basis = find_unsupported_evidence_basis(batch)
+    if unsupported_evidence_basis is not None:
+        raise UnsupportedProfile(unsupported_evidence_basis)
     roles = role_bindings_for_principal(store, state, batch["principal_claim"])
     requests = make_requests(store, state, batch, recorded)
     die_unless(len(requests) <= 5121, "too many requests")
