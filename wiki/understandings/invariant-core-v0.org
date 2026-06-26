@@ -1,0 +1,85 @@
+#+TITLE: Invariant Core v0
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n35-invariant-core=
+- verdict: =pass= as an =experimental matrix-level v0= core
+- claim level: =experimental-matrix-statistic= / =working understanding=
+- formula contract: =wiki/understandings/formula-contract-v0.org=
+- git commit when implemented: =1425bc8df272579fadbcd3940140e2e4c7956b7b=
+- dirty status after implementation: new files
+  =src/twisted_yetter/invariant.py=,
+  =tests/test_invariant_core.py=,
+  =wiki/understandings/invariant-core-v0.org=
+
+This is not a theorem-level closed 4-manifold invariant implementation.
+
+* Implemented Scope
+
+=src/twisted_yetter/invariant.py= implements the minimal deterministic core
+allowed by n30:
+
+- formal =omega/theta= sector records for one =Z/2= decoration vector;
+- deterministic decoration aggregation in lexicographic =mod 2= order;
+- exact JSON-compatible matrix sanity data: size, rank, determinant, parity,
+  signature triple, and =alpha^T Q alpha mod 2=;
+- exact canonical comparison of official JSON-compatible outputs;
+- artifact-v1 certificate wrapping with status =inconclusive=;
+- explicit unsupported errors for non-v0 claim levels, non-current category
+  certificates, altered formula-convention records, and numerical invariant
+  evaluation.
+
+The normalization and signature correction are recorded only by name:
+
+- =experimental-yetter-surgery-normalization-v0=
+- =experimental-signature-correction-v0=
+
+* Unsupported / Inconclusive Items
+
+Numerical invariant values remain unsupported because n30 leaves the following
+items =SOURCE NEEDED=:
+
+- exact =omega/theta= coefficients;
+- whether =Delta_i= equals quantum dimension in the source convention;
+- parity convention;
+- closed twisted invariant normalization;
+- signature phase / anomaly convention;
+- Kirby move proof and treatment of 1-/3-handles.
+
+Therefore sector records have =value_status: inconclusive=.  This is deliberate
+contract behavior, not a computation failure.
+
+* Verification
+
+Reproduction command:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+Observed result on 2026-06-26:
+
+#+begin_src text
+48 passed
+#+end_src
+
+Tool versions observed:
+
+- =uv 0.11.11 (aarch64-apple-darwin)=
+- pytest runtime reported =Python 3.11.15=
+- shell =python -V= reported =Python 3.12.13=
+
+* n35 Acceptance Mapping
+
+- sector amplitudes can be inspected separately: =PASS=, as formal
+  =FormalSectorAmplitude= records.
+- Fourier or decoration aggregation is deterministic: =PASS=, current v0
+  implements deterministic decoration aggregation; no Fourier transform is
+  claimed.
+- all official comparisons are exact: =PASS=, =compare_exact_outputs= rejects
+  floats and compares canonical JSON.
+- unsupported formula features raise explicit errors: =PASS=,
+  =UnsupportedFormulaFeature= is raised for out-of-contract requests.
