@@ -23,11 +23,11 @@ PROJECT_ID = "project:twisted-yetter"
 KERNEL_PROFILE = "ctl-kernel/1"
 ACTOR_ID = "actor:jin"
 SUBMITTED_BY = "actor:codex"
-CREATED_AT = "2026-06-26T19:10:00Z"
-ADMITTED_AT = "2026-06-26T19:11:00Z"
+CREATED_AT = "2026-06-26T22:58:00Z"
+ADMITTED_AT = "2026-06-26T22:59:00Z"
 GRAPH_LOGICAL_ID = "claim:graph:computation-first-v1"
-GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v2.json"
-MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v2-2026-06-26.json"
+GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v3.json"
+MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v3-2026-06-26.json"
 
 
 def run_git(root: Path, args: list[str]) -> str:
@@ -212,7 +212,7 @@ def main() -> int:
             "kernel_profile": KERNEL_PROFILE,
             "logical_id": GRAPH_LOGICAL_ID,
             "payload_file": str(GRAPH_FILE.relative_to(REPO_ROOT)),
-            "source_repo_commit_before_admission": "919a9325cd2afa560ebddce85ee5327560833f17",
+            "source_repo_commit_before_admission": run_git(REPO_ROOT, ["rev-parse", "HEAD"]),
             "ctl_meta_commit_at_admission": run_git(CTL_META_ROOT, ["rev-parse", "HEAD"]),
             "parent_root_cid": state["root_cid"],
             "genesis_root_cid": ref["genesis_root_cid"],

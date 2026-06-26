@@ -1,0 +1,1212 @@
+{
+  "active": {
+    "current_node_ids": [
+      "n12-kirby-diagram-schema",
+      "n18-colored-framed-link-evaluator"
+    ],
+    "entry_node_id": "n00-repro-env",
+    "priority_node_id": "n18-colored-framed-link-evaluator",
+    "terminal_node_ids": [
+      "n90-positive-exotic-signal",
+      "n91-systematic-negative-evidence",
+      "n92-theory-blocker",
+      "n93-data-blocker"
+    ]
+  },
+  "edges": [
+    {
+      "condition": "environment command exists",
+      "edge_id": "e00-parallel-reference",
+      "from": "n00-repro-env",
+      "to": "n05-source-convention-ledger"
+    },
+    {
+      "condition": "environment command exists",
+      "edge_id": "e00-parallel-exact",
+      "from": "n00-repro-env",
+      "to": "n10-exact-algebra-backend"
+    },
+    {
+      "condition": "environment command exists",
+      "edge_id": "e00-parallel-diagram-schema",
+      "from": "n00-repro-env",
+      "to": "n12-kirby-diagram-schema"
+    },
+    {
+      "condition": "environment command exists",
+      "edge_id": "e00-parallel-artifact",
+      "from": "n00-repro-env",
+      "to": "n25-artifact-schema"
+    },
+    {
+      "condition": "environment command exists",
+      "edge_id": "e00-parallel-exotic-scout",
+      "from": "n00-repro-env",
+      "to": "n65-exotic-input-scout"
+    },
+    {
+      "condition": "source ledger gives category/link conventions and exact backend exists",
+      "edge_id": "e05-or-e10-to-su2",
+      "from": "n05-source-convention-ledger",
+      "to": "n15-su2-level2-certificate"
+    },
+    {
+      "condition": "diagram schema can derive linking matrices for sanity checks",
+      "edge_id": "e12-to-matrix-shadow",
+      "from": "n12-kirby-diagram-schema",
+      "to": "n20-kirby-matrix-model"
+    },
+    {
+      "condition": "diagram schema, exact backend, source ledger, and category data are complete",
+      "edge_id": "e15-ready-link-evaluator",
+      "from": "n15-su2-level2-certificate",
+      "to": "n18-colored-framed-link-evaluator"
+    },
+    {
+      "condition": "colored framed link controls pass",
+      "edge_id": "e18-pass",
+      "from": "n18-colored-framed-link-evaluator",
+      "to": "n24-kirby-color-surgery-sum"
+    },
+    {
+      "condition": "link evaluator cannot match known link controls",
+      "edge_id": "e18-fail-triage",
+      "from": "n18-colored-framed-link-evaluator",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "ordinary surgery controls are exact and source-classified",
+      "edge_id": "e24-pass",
+      "from": "n24-kirby-color-surgery-sum",
+      "to": "n30-formula-contract"
+    },
+    {
+      "condition": "ordinary Kirby-color/surgery layer fails",
+      "edge_id": "e24-fail-triage",
+      "from": "n24-kirby-color-surgery-sum",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "link-backed formula contract accepted",
+      "edge_id": "e30-pass",
+      "from": "n30-formula-contract",
+      "to": "n35-twisted-decorated-core"
+    },
+    {
+      "condition": "no meaningful link-backed computation contract can be stated",
+      "edge_id": "e30-fail-theory",
+      "from": "n30-formula-contract",
+      "to": "n92-theory-blocker"
+    },
+    {
+      "condition": "decorated core unit tests pass without matrix fallback",
+      "edge_id": "e35-pass",
+      "from": "n35-twisted-decorated-core",
+      "to": "n40-ordinary-control-gate"
+    },
+    {
+      "condition": "decorated core cannot compute toy diagrams exactly",
+      "edge_id": "e35-fail-triage",
+      "from": "n35-twisted-decorated-core",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "ordinary alpha=0 control passes and Kirby fixtures exist",
+      "edge_id": "e40-pass",
+      "from": "n40-ordinary-control-gate",
+      "to": "n50-kirby-move-invariance-gate"
+    },
+    {
+      "condition": "ordinary control fails",
+      "edge_id": "e40-fail-triage",
+      "from": "n40-ordinary-control-gate",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "valid Kirby presentation fixtures exist",
+      "edge_id": "e45-ready",
+      "from": "n45-kirby-presentation-pair-generator",
+      "to": "n50-kirby-move-invariance-gate"
+    },
+    {
+      "condition": "Kirby move invariance gate passes",
+      "edge_id": "e50-pass",
+      "from": "n50-kirby-move-invariance-gate",
+      "to": "n55-toy-closed-suite"
+    },
+    {
+      "condition": "Kirby move invariance gate fails",
+      "edge_id": "e50-fail-triage",
+      "from": "n50-kirby-move-invariance-gate",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "toy closed suite has exact link-backed artifacts and exotic scout has candidate",
+      "edge_id": "e55-pass",
+      "from": "n55-toy-closed-suite",
+      "to": "n70-exotic-input-certification"
+    },
+    {
+      "condition": "toy suite cannot produce exact link-backed artifacts",
+      "edge_id": "e55-fail-triage",
+      "from": "n55-toy-closed-suite",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "root cause is colored link evaluator implementation",
+      "edge_id": "e60-code-repair",
+      "from": "n60-failure-triage",
+      "to": "n18-colored-framed-link-evaluator"
+    },
+    {
+      "condition": "root cause is Kirby-color or surgery summation",
+      "edge_id": "e60-surgery-repair",
+      "from": "n60-failure-triage",
+      "to": "n24-kirby-color-surgery-sum"
+    },
+    {
+      "condition": "root cause is diagram representation",
+      "edge_id": "e60-diagram-repair",
+      "from": "n60-failure-triage",
+      "to": "n12-kirby-diagram-schema"
+    },
+    {
+      "condition": "root cause is category data or convention",
+      "edge_id": "e60-category-repair",
+      "from": "n60-failure-triage",
+      "to": "n15-su2-level2-certificate"
+    },
+    {
+      "condition": "root cause is formula contract or normalization",
+      "edge_id": "e60-formula-repair",
+      "from": "n60-failure-triage",
+      "to": "n30-formula-contract"
+    },
+    {
+      "condition": "failure is mathematical rather than code or data",
+      "edge_id": "e60-theory-block",
+      "from": "n60-failure-triage",
+      "to": "n92-theory-blocker"
+    },
+    {
+      "condition": "no auditable exotic input path exists",
+      "edge_id": "e65-no-data",
+      "from": "n65-exotic-input-scout",
+      "to": "n93-data-blocker"
+    },
+    {
+      "condition": "first exotic input is certified",
+      "edge_id": "e70-pass",
+      "from": "n70-exotic-input-certification",
+      "to": "n75-scalability-dry-run"
+    },
+    {
+      "condition": "candidate lacks data or marking certification",
+      "edge_id": "e70-fail-data",
+      "from": "n70-exotic-input-certification",
+      "to": "n93-data-blocker"
+    },
+    {
+      "condition": "dry run says exact computation is feasible",
+      "edge_id": "e75-pass",
+      "from": "n75-scalability-dry-run",
+      "to": "n80-exotic-computation"
+    },
+    {
+      "condition": "engine must be optimized or input simplified",
+      "edge_id": "e75-fail-triage",
+      "from": "n75-scalability-dry-run",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "exotic computation finished with exact artifacts",
+      "edge_id": "e80-pass",
+      "from": "n80-exotic-computation",
+      "to": "n82-result-classification"
+    },
+    {
+      "condition": "exotic computation fails or is inconclusive",
+      "edge_id": "e80-fail-triage",
+      "from": "n80-exotic-computation",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "exact values differ at an accepted claim level",
+      "edge_id": "e82-different",
+      "from": "n82-result-classification",
+      "to": "n90-positive-exotic-signal"
+    },
+    {
+      "condition": "exact values agree",
+      "edge_id": "e82-same",
+      "from": "n82-result-classification",
+      "to": "n85-next-target-or-category"
+    },
+    {
+      "condition": "result depends on unresolved convention, data, or scalability issue",
+      "edge_id": "e82-inconclusive",
+      "from": "n82-result-classification",
+      "to": "n60-failure-triage"
+    },
+    {
+      "condition": "another candidate can be certified faster than changing category",
+      "edge_id": "e85-next-exotic",
+      "from": "n85-next-target-or-category",
+      "to": "n70-exotic-input-certification"
+    },
+    {
+      "condition": "current category repeatedly agrees and another small category is the fastest next computation",
+      "edge_id": "e85-next-category",
+      "from": "n85-next-target-or-category",
+      "to": "n15-su2-level2-certificate"
+    },
+    {
+      "condition": "many certified computations agree and no fast next computation remains",
+      "edge_id": "e85-negative-evidence",
+      "from": "n85-next-target-or-category",
+      "to": "n91-systematic-negative-evidence"
+    }
+  ],
+  "execution_policy": {
+    "anti_overthinking_rule": "Do not begin no-go analysis merely because a first small example is boring; compute more examples or another category unless a gate says the formula is not meaningful.",
+    "default_subagent_effort": "medium",
+    "recording_rule": "Each completed node appends a CTL claim or lab-note object with commands, outputs, exact artifacts, status, and next edge.",
+    "routing_rule": "When a node fails by a listed failure condition, follow the matching edge instead of re-planning from scratch.",
+    "subagent_ready_when": [
+      "node dependencies are complete",
+      "node has explicit inputs",
+      "node has deterministic acceptance criteria",
+      "node can output artifact paths or a CTL claim"
+    ]
+  },
+  "graph_identity": {
+    "family": "twisted-yetter-computation-first",
+    "graph_id": "graph:twisted-yetter:computation-first",
+    "graph_namespace": "graph:twisted-yetter:research-roadmap",
+    "title": "Kirby-link-first Twisted Yetter roadmap",
+    "version": 3
+  },
+  "invariants": [
+    "No result may be called a twisted Yetter calculator output unless it is derived from machine-readable Kirby/link diagram input through the colored framed link evaluator.",
+    "Matrix/intersection-form statistics are auxiliary sanity checks only and cannot satisfy link-evaluator, surgery, or exotic-computation gates.",
+    "No exotic-pair computation before link controls, ordinary-control, and Kirby-move/presentation-invariance gates pass.",
+    "No terminal positive claim without exact artifact comparison and certified input marking.",
+    "No no-go conclusion from low-rank negative controls alone.",
+    "Equal values on a first exotic pair route to more computation, not theory no-go.",
+    "Every completed node must produce a reproducible artifact or a CTL lab-note claim.",
+    "Human-readable projections of this graph are non-normative.",
+    "Graph changes are append-only at CTL object level: new graph revisions parent the prior active graph revision."
+  ],
+  "nodes": [
+    {
+      "acceptance": [
+        "uv run python -m pytest is the default test command",
+        "exact arithmetic dependency choice is recorded",
+        "generated caches are ignored",
+        "CTL provider pin remains unchanged"
+      ],
+      "dependencies": [],
+      "expected_outputs": [
+        "src/twisted_yetter package skeleton",
+        "tests directory",
+        "wiki/env/reproducibility.org",
+        "single documented test command"
+      ],
+      "failure_conditions": [
+        "uv cannot run",
+        "dependency cannot be installed without changing research scope",
+        "exact backend is not available"
+      ],
+      "goal": "Create the minimal reproducible research environment and test command.",
+      "inputs": [
+        "AGENTS.md",
+        "pyproject.toml",
+        "uv.lock",
+        "ctl-dogfood current root"
+      ],
+      "kind": "setup",
+      "node_id": "n00-repro-env",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "colored framed link input and output convention are stated",
+        "Kirby color and surgery normalization obligations are separated from link evaluation",
+        "closed 4-manifold versus 2-handlebody status is explicit",
+        "unknowns are labeled as assumptions, not facts"
+      ],
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "expected_outputs": [
+        "wiki/understandings/formula-conventions.org or CTL claim",
+        "reference records with theorem or definition labels",
+        "list of link normalization, framing, Kirby color, signature, orientation, and handle assumptions"
+      ],
+      "failure_conditions": [
+        "source link invariant convention cannot be identified",
+        "Kirby color normalization ambiguity blocks even ordinary examples",
+        "the intended formula is only a presentation statistic"
+      ],
+      "goal": "Extract the exact link, Kirby-color, surgery, framing, normalization, and decoration conventions needed for the first real calculator.",
+      "inputs": [
+        "Yetter / Crane-Yetter formula references",
+        "Reshetikhin-Turaev or Kauffman-bracket link invariant conventions",
+        "Reutter reference for ordinary invariant caution",
+        "twisted-yetter.org"
+      ],
+      "kind": "reference",
+      "node_id": "n05-source-convention-ledger",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "no float is needed for official outputs",
+        "equality is exact",
+        "JSON serialization of exact values is deterministic"
+      ],
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/exact.py",
+        "tests/test_exact.py"
+      ],
+      "failure_conditions": [
+        "symbolic equality unavailable",
+        "serialization is ambiguous",
+        "backend choice requires Sage or Nix before minimal examples"
+      ],
+      "goal": "Build exact arithmetic primitives for link and surgery examples.",
+      "inputs": [
+        "rational integers",
+        "square roots or cyclotomic symbols needed by SU(2)_2",
+        "finite abelian group A = Z/2"
+      ],
+      "kind": "implementation",
+      "node_id": "n10-exact-algebra-backend",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "unknot, framed unknot, Hopf link, unlink, S4, CP2, and S2xS2 toy diagrams are representable",
+        "diagram validation rejects malformed crossings and missing framings",
+        "linking matrix can be derived from the diagram as a check, not as the primary input",
+        "diagram artifacts record component ids and orientations"
+      ],
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/link_diagram.py",
+        "tests/test_link_diagram.py",
+        "examples/diagrams/*.json or experiments/inputs/toy-diagrams/*.json"
+      ],
+      "failure_conditions": [
+        "cannot represent framed oriented links",
+        "diagram-to-linking-matrix sanity check disagrees on small links",
+        "schema cannot distinguish dotted and ordinary components when needed"
+      ],
+      "goal": "Define the machine-readable Kirby/link diagram input format before any invariant computation is called a calculator.",
+      "inputs": [
+        "oriented link diagrams or PD codes",
+        "component ids",
+        "framings",
+        "dotted status",
+        "orientation",
+        "crossing signs",
+        "component lineage metadata"
+      ],
+      "kind": "implementation",
+      "node_id": "n12-kirby-diagram-schema",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "simple object labels and dimensions are exact",
+        "global dimension sanity check passes",
+        "twist/framing conventions cite the ledger",
+        "the data needed by the first link evaluator is present or the evaluator scope is explicitly restricted"
+      ],
+      "dependencies": [
+        "n05-source-convention-ledger",
+        "n10-exact-algebra-backend"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/su2_level2.py",
+        "tests/test_su2_level2.py",
+        "category-data certificate artifact"
+      ],
+      "failure_conditions": [
+        "category data source missing",
+        "twist convention conflicts with formula ledger",
+        "link evaluation requires F/R/bracket data not yet recorded"
+      ],
+      "goal": "Implement SU(2)_2 data with enough internal checks to evaluate colored framed links in the chosen convention.",
+      "inputs": [
+        "simple objects",
+        "fusion rules",
+        "quantum dimensions",
+        "twists or braiding data required by the selected link formula",
+        "any F/R or bracket data required for nontrivial links"
+      ],
+      "kind": "implementation",
+      "node_id": "n15-su2-level2-certificate",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "unknot values match quantum dimensions in the selected convention",
+        "disjoint union multiplicativity is tested",
+        "framed unknot twist/framing behavior matches the ledger",
+        "Hopf or another nontrivial link control is exact and source-backed",
+        "official outputs are exact and artifacted"
+      ],
+      "dependencies": [
+        "n05-source-convention-ledger",
+        "n10-exact-algebra-backend",
+        "n12-kirby-diagram-schema",
+        "n15-su2-level2-certificate"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/link_invariant.py",
+        "tests/test_link_invariant.py",
+        "experiments/results/link-controls/*.json"
+      ],
+      "failure_conditions": [
+        "only linking matrix data is used",
+        "known link values disagree with source convention",
+        "framing behavior is ambiguous",
+        "nontrivial link evaluation requires unrecorded category data"
+      ],
+      "goal": "Implement the first real calculator layer: exact colored framed link invariant evaluation from machine-readable link/Kirby diagrams.",
+      "inputs": [
+        "machine-readable link diagrams",
+        "component color labels",
+        "framings",
+        "SU(2)_2 category data",
+        "source link convention ledger"
+      ],
+      "kind": "implementation",
+      "node_id": "n18-colored-framed-link-evaluator",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "signature, rank, determinant, and parity are exact",
+        "GL(n,Z) basis changes are represented for sanity checks",
+        "decoration transformation convention is documented",
+        "matrix outputs are labeled auxiliary and cannot satisfy link-evaluator gates"
+      ],
+      "dependencies": [
+        "n12-kirby-diagram-schema"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/linking_matrix.py",
+        "tests/test_matrix_presentations.py"
+      ],
+      "failure_conditions": [
+        "basis convention inconsistent",
+        "signature convention inconsistent",
+        "small examples cannot be encoded",
+        "matrix output is used as a substitute for link evaluation"
+      ],
+      "goal": "Keep exact linking/intersection matrix tools as sanity checks derived from diagrams, not as the invariant calculator.",
+      "inputs": [
+        "integer linking matrices derived from diagrams",
+        "component ids",
+        "framings",
+        "orientation labels",
+        "decoration vectors in H2 with A = Z/2"
+      ],
+      "kind": "auxiliary",
+      "node_id": "n20-kirby-matrix-model",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "S4 and at least one nontrivial framed-link ordinary control are computed from diagrams",
+        "normalization/signature factors are applied only when source-backed or explicitly experimental",
+        "alpha=0 route uses the same link evaluator as nonzero decorations will use",
+        "matrix sanity checks are recorded separately"
+      ],
+      "dependencies": [
+        "n18-colored-framed-link-evaluator",
+        "n20-kirby-matrix-model",
+        "n25-artifact-schema"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/surgery.py",
+        "tests/test_surgery.py",
+        "experiments/results/ordinary-surgery-controls/*.json"
+      ],
+      "failure_conditions": [
+        "ordinary known examples disagree",
+        "Kirby color coefficients are not source-backed",
+        "normalization/signature factor cannot be stated",
+        "calculation silently falls back to matrix statistics"
+      ],
+      "goal": "Use the link evaluator to implement Kirby-color / surgery summations for ordinary closed examples before twisted decorations.",
+      "inputs": [
+        "colored framed link evaluator",
+        "Kirby color coefficients",
+        "ordinary surgery formula conventions",
+        "toy Kirby diagrams"
+      ],
+      "kind": "implementation",
+      "node_id": "n24-kirby-color-surgery-sum",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "artifacts store command, argv, git commit, dirty flag, tool versions, input hash, and exact output",
+        "schema can represent pass, fail, and inconclusive",
+        "large run logs can be referenced without polluting context"
+      ],
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/artifacts.py",
+        "tests/test_artifacts.py",
+        "experiments/results schema example"
+      ],
+      "failure_conditions": [
+        "artifact metadata incomplete",
+        "schema cannot store exact values",
+        "schema cannot represent failed computations"
+      ],
+      "goal": "Define the JSON certificate schema before running computations.",
+      "inputs": [
+        "AGENTS.md artifact metadata rules",
+        "CTL dogfood recording rule"
+      ],
+      "kind": "infrastructure",
+      "node_id": "n25-artifact-schema",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "the invariant input type is Kirby diagram plus decoration/background data",
+        "normalization and signature correction are named and tied to source controls",
+        "alpha=0 expected behavior is stated from the surgery layer",
+        "matrix-only computations are explicitly invalid claim levels"
+      ],
+      "dependencies": [
+        "n05-source-convention-ledger",
+        "n18-colored-framed-link-evaluator",
+        "n24-kirby-color-surgery-sum",
+        "n25-artifact-schema"
+      ],
+      "expected_outputs": [
+        "CTL formula-contract claim",
+        "explicit accepted assumptions",
+        "list of invalid claim levels"
+      ],
+      "failure_conditions": [
+        "formula underspecified",
+        "normalization cannot be chosen",
+        "contract would allow false closed-manifold claims",
+        "contract bypasses the link evaluator"
+      ],
+      "goal": "Freeze the minimal 4D formula contract only after the link evaluator and ordinary surgery layer exist.",
+      "inputs": [
+        "formula convention ledger",
+        "link evaluator controls",
+        "ordinary surgery controls",
+        "artifact schema"
+      ],
+      "kind": "gate",
+      "node_id": "n30-formula-contract",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "sector amplitudes are link-evaluation-backed",
+        "Fourier or decoration aggregation is deterministic",
+        "all official comparisons are exact",
+        "matrix-only requests raise explicit unsupported errors"
+      ],
+      "dependencies": [
+        "n30-formula-contract",
+        "n18-colored-framed-link-evaluator",
+        "n24-kirby-color-surgery-sum"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/invariant.py",
+        "tests/test_invariant_core.py",
+        "experiments/results/decorated-controls/*.json"
+      ],
+      "failure_conditions": [
+        "implementation requires unrecorded formula assumption",
+        "exact equality not decidable",
+        "computation explodes on toy diagrams",
+        "decorated core bypasses link evaluation"
+      ],
+      "goal": "Implement the decorated/twisted Kirby-diagram evaluator on top of the link evaluator, not on top of a matrix proxy.",
+      "inputs": [
+        "formula contract",
+        "machine-readable Kirby diagrams",
+        "decorations/background fields",
+        "colored framed link evaluator",
+        "Kirby-color surgery layer"
+      ],
+      "kind": "implementation",
+      "node_id": "n35-twisted-decorated-core",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "alpha=0 is stable across all toy diagram inputs",
+        "computed ordinary values match the selected source convention or are explicitly marked experimental",
+        "orientation reversal behavior is recorded",
+        "normalization mismatch is either absent or classified"
+      ],
+      "dependencies": [
+        "n35-twisted-decorated-core"
+      ],
+      "expected_outputs": [
+        "experiments/results/ordinary-control/*.json",
+        "CTL gate claim"
+      ],
+      "failure_conditions": [
+        "alpha=0 mismatch",
+        "orientation convention mismatch",
+        "ordinary output depends on presentation",
+        "known ordinary value disagrees with paper convention"
+      ],
+      "goal": "Verify alpha=0 and ordinary-control behavior from Kirby diagrams before nontrivial decorations.",
+      "inputs": [
+        "S4 Kirby diagram",
+        "CP2 Kirby diagram",
+        "anti-CP2 Kirby diagram",
+        "S2xS2 Kirby diagram",
+        "ordinary alpha=0 path"
+      ],
+      "kind": "gate",
+      "node_id": "n40-ordinary-control-gate",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "each generated pair records exact move lineage",
+        "derived linking/intersection forms before and after are equivalent when appropriate",
+        "decoration transformation is machine-checkable",
+        "fixtures remain machine-readable Kirby diagrams"
+      ],
+      "dependencies": [
+        "n12-kirby-diagram-schema",
+        "n18-colored-framed-link-evaluator"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/presentation_moves.py",
+        "tests/test_presentation_moves.py",
+        "Kirby-diagram presentation-pair fixtures"
+      ],
+      "failure_conditions": [
+        "generated pair lacks lineage",
+        "move is not representable in diagram schema",
+        "move changes the encoded manifold accidentally"
+      ],
+      "goal": "Generate small equivalent Kirby diagrams and their decoration/basis transformations for Kirby-move tests.",
+      "inputs": [
+        "handle slides",
+        "blow-up/blow-down toy moves when allowed",
+        "small Kirby diagrams",
+        "component lineage"
+      ],
+      "kind": "implementation",
+      "node_id": "n45-kirby-presentation-pair-generator",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "pure handle-slide tests agree",
+        "same-manifold toy Kirby diagrams agree",
+        "alpha=0 remains stable",
+        "failure examples include minimal diagrams and move lineage"
+      ],
+      "dependencies": [
+        "n40-ordinary-control-gate",
+        "n45-kirby-presentation-pair-generator"
+      ],
+      "expected_outputs": [
+        "experiments/results/presentation-gate/*.json",
+        "pass or fail CTL claim"
+      ],
+      "failure_conditions": [
+        "basis-change mismatch",
+        "handle-slide mismatch",
+        "alpha=0 regression",
+        "presentation-pair fixture invalid",
+        "link evaluator disagrees under a known Kirby move"
+      ],
+      "goal": "Check that equivalent Kirby diagrams agree after recorded Kirby moves and decoration transformations.",
+      "inputs": [
+        "Kirby-diagram presentation-pair fixtures",
+        "twisted decorated core",
+        "ordinary-control outputs"
+      ],
+      "kind": "gate",
+      "node_id": "n50-kirby-move-invariance-gate",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "all outputs are exact",
+        "trivial and nontrivial decorations are visible in the artifact schema",
+        "computed equalities and differences are classified without overclaiming",
+        "every result is traceable to diagram-level link evaluation"
+      ],
+      "dependencies": [
+        "n50-kirby-move-invariance-gate"
+      ],
+      "expected_outputs": [
+        "experiments/results/toy-suite/*.json",
+        "CTL toy-suite summary claim"
+      ],
+      "failure_conditions": [
+        "calculation timeout on toy input",
+        "unexpected zero or equality needs convention audit",
+        "artifact schema cannot express result",
+        "calculation falls back to matrix-only output"
+      ],
+      "goal": "Compute the small closed-example suite from Kirby diagrams with nontrivial decorations.",
+      "inputs": [
+        "S4",
+        "CP2",
+        "anti-CP2",
+        "S2xS2",
+        "CP2#anti-CP2",
+        "CP2#CP2"
+      ],
+      "kind": "computation",
+      "node_id": "n55-toy-closed-suite",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "failure is classified as code, data, formula, convention, scalability, or theory",
+        "repair target is the earliest responsible node",
+        "a regression test or blocker claim is recorded"
+      ],
+      "dependencies": [],
+      "expected_outputs": [
+        "failure classification claim",
+        "new regression test or theory blocker",
+        "next edge decision"
+      ],
+      "failure_conditions": [
+        "failure cannot be minimized",
+        "root cause cannot be classified",
+        "repair would require changing project goal"
+      ],
+      "goal": "Turn any gate failure into either a small repair task or a theory blocker.",
+      "inputs": [
+        "failed gate artifact",
+        "minimal example",
+        "run log",
+        "source convention ledger"
+      ],
+      "kind": "repair",
+      "node_id": "n60-failure-triage",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "at least one first candidate is ranked by input availability",
+        "Dolgachev E(1)_{2,3} vs E(1) is assessed",
+        "fallback candidates are listed if first target lacks usable data"
+      ],
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "expected_outputs": [
+        "ranked candidate list",
+        "reference records",
+        "data availability status"
+      ],
+      "failure_conditions": [
+        "no candidate has machine-readable input path",
+        "all candidates require major diagram reconstruction",
+        "marking information unavailable"
+      ],
+      "goal": "Scout exotic-pair candidates in parallel while the real Kirby-link engine is being built.",
+      "inputs": [
+        "known exotic 4-manifold references",
+        "available Kirby diagrams or handle decompositions",
+        "H2 marking information"
+      ],
+      "kind": "data",
+      "node_id": "n65-exotic-input-scout",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "both sides have machine-readable Kirby inputs",
+        "Euler characteristic, signature, and intersection form checks are recorded from diagrams",
+        "comparison level is marked, cork-canonical, orbit, or inconclusive",
+        "normalization and orientation choices match the toy suite"
+      ],
+      "dependencies": [
+        "n55-toy-closed-suite",
+        "n65-exotic-input-scout"
+      ],
+      "expected_outputs": [
+        "experiments/inputs/exotic-pairs/*.json",
+        "diagram-derived intersection-form checks",
+        "H2 identification or marked comparison certificate"
+      ],
+      "failure_conditions": [
+        "diagram data unavailable",
+        "H2 marking unclear",
+        "pair cannot be compared at the chosen claim level",
+        "input size exceeds current engine"
+      ],
+      "goal": "Certify the first exotic-pair Kirby input before running the invariant.",
+      "inputs": [
+        "ranked candidate",
+        "machine-readable Kirby diagrams",
+        "homeomorphism or marking comparison"
+      ],
+      "kind": "gate",
+      "node_id": "n70-exotic-input-certification",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "sector count is explicit",
+        "link-evaluation cost is estimated",
+        "memory and time risk are classified",
+        "if too large, a smaller comparable target or optimization node is selected"
+      ],
+      "dependencies": [
+        "n70-exotic-input-certification"
+      ],
+      "expected_outputs": [
+        "cost estimate artifact",
+        "partial-sector dry-run artifact"
+      ],
+      "failure_conditions": [
+        "sector count too large",
+        "exact arithmetic bottleneck",
+        "input simplification needed",
+        "link evaluator cannot handle diagram complexity"
+      ],
+      "goal": "Estimate whether the certified exotic Kirby input is computable with the current exact link engine.",
+      "inputs": [
+        "certified exotic input",
+        "link crossing/component count",
+        "sector count",
+        "category data",
+        "decoration group size"
+      ],
+      "kind": "computation",
+      "node_id": "n75-scalability-dry-run",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "comparison uses exact values",
+        "marking and normalization are identical on both sides",
+        "result is classified as different, same, or inconclusive",
+        "all commands and hashes are recorded"
+      ],
+      "dependencies": [
+        "n75-scalability-dry-run"
+      ],
+      "expected_outputs": [
+        "exact invariant artifacts for both sides",
+        "comparison certificate",
+        "CTL result claim"
+      ],
+      "failure_conditions": [
+        "calculation too large",
+        "comparison marking insufficient",
+        "values equal across tested markings",
+        "engine assumption not valid for exotic input"
+      ],
+      "goal": "Compute the invariant for the first certified exotic-pair candidate from Kirby diagrams.",
+      "inputs": [
+        "certified exotic-pair Kirby inputs",
+        "passed link-backed invariant engine",
+        "comparison marking"
+      ],
+      "kind": "computation",
+      "node_id": "n80-exotic-computation",
+      "subagent_suitable": true
+    },
+    {
+      "acceptance": [
+        "different values route to positive signal only if presentation and marking gates are satisfied",
+        "same values route to next target or category, not immediate no-go",
+        "inconclusive values route to the earliest blocking node"
+      ],
+      "dependencies": [
+        "n80-exotic-computation"
+      ],
+      "expected_outputs": [
+        "result-classification CTL claim"
+      ],
+      "failure_conditions": [
+        "claim level mismatch",
+        "artifact missing",
+        "result depends on unresolved convention"
+      ],
+      "goal": "Classify the exotic computation without overclaiming.",
+      "inputs": [
+        "comparison certificate",
+        "formula contract",
+        "input certification"
+      ],
+      "kind": "gate",
+      "node_id": "n82-result-classification",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "prefer another already-certified exotic input before theory no-go",
+        "if multiple exotic pairs agree, consider another small category before no-go",
+        "no negative theorem is claimed from low-rank data alone"
+      ],
+      "dependencies": [
+        "n82-result-classification"
+      ],
+      "expected_outputs": [
+        "next candidate or next category decision claim"
+      ],
+      "failure_conditions": [
+        "no certified candidates remain",
+        "current category is provably uninformative for the tested scope",
+        "all next steps require theory work"
+      ],
+      "goal": "Choose the fastest next computation when the first exotic pair does not distinguish.",
+      "inputs": [
+        "result-classification claim",
+        "candidate list",
+        "category limitations"
+      ],
+      "kind": "routing",
+      "node_id": "n85-next-target-or-category",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "difference is not caused by normalization, marking, basis, or presentation artifact",
+        "statement level is explicit",
+        "reproduction command is recorded"
+      ],
+      "dependencies": [
+        "n82-result-classification"
+      ],
+      "expected_outputs": [
+        "certificate-level CTL claim",
+        "remaining proof obligations"
+      ],
+      "failure_conditions": [],
+      "goal": "Record a candidate positive signal that twisted Yetter distinguishes an exotic pair.",
+      "inputs": [
+        "comparison certificate",
+        "exact artifacts",
+        "input certification"
+      ],
+      "kind": "terminal",
+      "node_id": "n90-positive-exotic-signal",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "negative evidence does not overclaim a no-go theorem",
+        "tested categories, pairs, and markings are explicit",
+        "future theory route is separated from computed evidence"
+      ],
+      "dependencies": [
+        "n85-next-target-or-category"
+      ],
+      "expected_outputs": [
+        "negative-evidence CTL claim",
+        "next theory questions"
+      ],
+      "failure_conditions": [],
+      "goal": "Record systematic negative evidence after many correct computations agree.",
+      "inputs": [
+        "multiple exotic-pair computations",
+        "toy gate records",
+        "category and marking scope"
+      ],
+      "kind": "terminal",
+      "node_id": "n91-systematic-negative-evidence",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "blocker is not merely missing code or data",
+        "the next mathematical proof obligation is explicit"
+      ],
+      "dependencies": [
+        "n60-failure-triage"
+      ],
+      "expected_outputs": [
+        "theory-blocker CTL claim",
+        "suggested proof or no-go audit route"
+      ],
+      "failure_conditions": [],
+      "goal": "Record that computation is blocked by a mathematical ambiguity or likely no-go issue.",
+      "inputs": [
+        "minimal failing example",
+        "formula audit",
+        "triage claim"
+      ],
+      "kind": "terminal",
+      "node_id": "n92-theory-blocker",
+      "subagent_suitable": false
+    },
+    {
+      "acceptance": [
+        "missing data is specified",
+        "the invariant engine status remains separate from data availability"
+      ],
+      "dependencies": [
+        "n65-exotic-input-scout"
+      ],
+      "expected_outputs": [
+        "data-blocker CTL claim",
+        "data reconstruction backlog"
+      ],
+      "failure_conditions": [],
+      "goal": "Record that exotic computation is blocked by lack of auditable input data rather than invariant theory.",
+      "inputs": [
+        "candidate scout report",
+        "failed input certification"
+      ],
+      "kind": "terminal",
+      "node_id": "n93-data-blocker",
+      "subagent_suitable": false
+    }
+  ],
+  "revision_of": {
+    "previous_graph_cid": "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9",
+    "previous_graph_version": 2,
+    "reason": "v2 incorrectly let a matrix-level statistic occupy the main calculator path. v3 makes the Kirby diagram to colored framed link invariant evaluator the first real computation engine; matrix presentations are only auxiliary sanity data."
+  },
+  "schema": "twisted-yetter/decision-graph/1",
+  "scope": {
+    "excluded_for_v2": [
+      "full decorated Reutter no-go program before computations",
+      "production CTL security boundary",
+      "full Chronicle compatibility",
+      "cryptographic actor authentication",
+      "confidential sub-agent access control"
+    ],
+    "excluded_for_v3": [
+      "full decorated Reutter no-go program before computations",
+      "production CTL security boundary",
+      "full Chronicle compatibility",
+      "cryptographic actor authentication",
+      "confidential sub-agent access control",
+      "treating intersection-matrix statistics as a substitute for link evaluation",
+      "starting exotic computation before the Kirby-link evaluator passes paper-known controls"
+    ],
+    "first_category": "SU(2)_2 with A = Z/2",
+    "first_formula_scope": "machine-readable Kirby diagrams and exact colored framed link evaluation first; matrix-level presentations are auxiliary sanity checks, not the calculator",
+    "primary_goal": "Build a Kirby-diagram-based twisted Yetter calculator: first evaluate colored framed links correctly, then Kirby-color/surgery formulas on known examples, then decorated examples, then exotic pairs.",
+    "research_project": "twisted-yetter"
+  },
+  "source_of_truth": {
+    "human_projection_policy": "Human-readable org or diagrams may be generated later, but they are projections, not source of truth.",
+    "logical_id_note": "The logical id keeps the v1 suffix for compatibility with the first admitted graph lane; graph_identity.version is the actual graph revision.",
+    "normative_form": "CTL revision payload admitted at claim:graph:computation-first-v1",
+    "payload_file_role": "This JSON file is an admission preimage for graph v3; after admission, the CTL object is normative."
+  },
+  "speed_policy": {
+    "auxiliary_not_calculator": [
+      "n20-kirby-matrix-model",
+      "matrix-level statistics from v2 commits"
+    ],
+    "critical_path": [
+      "n00-repro-env",
+      "n05-source-convention-ledger",
+      "n10-exact-algebra-backend",
+      "n15-su2-level2-certificate",
+      "n12-kirby-diagram-schema",
+      "n18-colored-framed-link-evaluator",
+      "n24-kirby-color-surgery-sum",
+      "n30-formula-contract",
+      "n35-twisted-decorated-core",
+      "n40-ordinary-control-gate",
+      "n45-kirby-presentation-pair-generator",
+      "n50-kirby-move-invariance-gate",
+      "n55-toy-closed-suite",
+      "n70-exotic-input-certification",
+      "n80-exotic-computation"
+    ],
+    "do_not_wait_for": [
+      "complete no-go theory",
+      "all possible categories",
+      "full unmarked orbit comparison",
+      "large-scale diagram automation",
+      "certified exotic data before the link evaluator is built"
+    ],
+    "minimum_exotic_entry_gate": [
+      "colored framed link evaluator passes paper-known link controls",
+      "Kirby-color ordinary surgery evaluator passes known ordinary examples",
+      "twisted decorated core is explicitly tied to the link evaluator, not a matrix proxy",
+      "ordinary alpha=0 control passes from Kirby diagrams",
+      "at least one nontrivial Kirby-move/presentation invariance gate passes",
+      "exotic input has auditable marking level"
+    ],
+    "parallel_after_entry": [
+      "n05-source-convention-ledger",
+      "n10-exact-algebra-backend",
+      "n12-kirby-diagram-schema",
+      "n25-artifact-schema",
+      "n65-exotic-input-scout"
+    ]
+  },
+  "split_policy": {
+    "future_split_rule": "If graph volume or governance diverges, move objects whose graph_id or portable_split_key matches this graph into a graph-specific store and preserve original CIDs as external references.",
+    "portable_split_key": "graph:twisted-yetter:computation-first",
+    "separation_fields": [
+      "graph_identity.graph_namespace",
+      "graph_identity.graph_id",
+      "node_id",
+      "edge_id"
+    ],
+    "store_strategy": "same project-local ctl-dogfood store for now"
+  },
+  "status": "accepted",
+  "v1_assessment": {
+    "kept": [
+      "computation-first before no-go analysis",
+      "exact arithmetic before exotic claims",
+      "toy examples before exotic pairs",
+      "same dogfood store with split keys"
+    ],
+    "problems_fixed": [
+      "formula contract, implementation, and sanity checks were one large node",
+      "ordinary alpha=0 controls were not a separate gate",
+      "presentation invariance had too little structure",
+      "exotic input discovery started too late",
+      "artifact schema and exact certificate requirements were implicit",
+      "equal exotic values did not specify the next fast path"
+    ],
+    "verdict": "directionally correct but too coarse for fast low-ad-hoc execution"
+  },
+  "v2_assessment": {
+    "kept": [
+      "reproducible environment and exact arithmetic first",
+      "SU(2)_2 category certificate as first small category",
+      "artifact certificates and CTL append-only recording",
+      "ordinary controls and presentation invariance before exotic claims",
+      "exotic input certification before exotic computation"
+    ],
+    "problems_fixed": [
+      "matrix-level formal statistic was treated like the invariant core",
+      "machine-readable Kirby diagrams were not a first-class input type",
+      "colored framed link evaluation was missing from the critical path",
+      "paper-known link and ordinary surgery controls were not required before toy closed examples",
+      "exotic-data blocker could be mistaken for the only remaining blocker"
+    ],
+    "verdict": "useful scaffolding but wrong main computational priority"
+  }
+}

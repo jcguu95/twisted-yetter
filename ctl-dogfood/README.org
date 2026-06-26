@@ -69,12 +69,18 @@ claim:graph:computation-first-v1
 graph payload 的來源 preimage 是：
 
 #+begin_example
-graphs/computation-first-v2.json
+graphs/computation-first-v3.json
 #+end_example
 
-舊的 =graphs/computation-first-v1.json= 仍保留，因為它是第一個 admitted graph revision
-的 preimage。admission 之後，normative source 是 CTL object store 裡對應的
-=ctl/revision/1= object；human-readable Org / Mermaid graph 若之後產生，都只算 projection。
+舊的 =graphs/computation-first-v1.json= 與 =graphs/computation-first-v2.json= 仍保留，
+因為它們是先前 admitted graph revisions 的 preimage。admission 之後，normative source 是
+CTL object store 裡對應的 =ctl/revision/1= object；human-readable Org / Mermaid graph
+若之後產生，都只算 projection。
+
+v3 修正 v2 的一個重要方向錯誤：真正的計算主線必須先建立
+machine-readable Kirby diagram 與 colored framed link invariant evaluator。舊的
+matrix-level statistic 只保留為 auxiliary sanity check，不能再被視為 twisted Yetter
+calculator。
 
 為了之後容易拆分，graph payload 明確保存：
 
