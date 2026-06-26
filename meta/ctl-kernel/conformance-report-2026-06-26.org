@@ -31,6 +31,9 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round15_conformance.py=
 - =tests/test_round16_conformance.py=
 - =tests/test_round17_conformance.py=
+- =fuzz/round18_final_gate_fuzz.py=
+- =fuzz/round18-final-gate-fuzz-output.txt=
+- =reviews/round18-final-freeze-review-2026-06-26.org=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -124,6 +127,14 @@ Round 17 conformance tests additionally cover:
 
 - malformed =AdmissionBatch.evidence[].target= recorded-revision CIDs return =InvalidHistory= instead of host exceptions
 - malformed =AdmissionBatch.evidence[].target= binding-op logical IDs return =InvalidHistory= instead of host exceptions
+
+Round 18 final-gate fuzz additionally covers:
+
+- batch container/leaf malformed values
+- =PolicySet= container/leaf malformed values
+- =RoleBinding= container/leaf malformed values
+- =agent/run-receipt/1= container/leaf malformed values
+- observed host exception count is zero across these paths
 
 * Reproduction
 

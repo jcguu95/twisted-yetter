@@ -7,7 +7,17 @@
 
 這個目錄是本 repo 的 object-first lab note / governance kernel 原型，不是 twisted Yetter 數學計算本身。
 
-目前目標不是再擴寫 spec，而是把 CTL Kernel v0.1.1 的核心規則變成可重跑的 conformance evidence：
+截至 2026-06-26，=CTL Kernel v0.1.1= 已進入：
+
+#+begin_example
+Experimental Freeze
+#+end_example
+
+這不是 production security release；意思是核心架構、reference validator behavior、golden
+vectors，以及目前 P0/P1 adversarial regression corpus 已足夠作為 repo-local canonical
+admission kernel 進行低風險 dogfood。
+
+目前目標不再是 prose-level protocol review，而是保持可重跑的 conformance evidence：
 
 - canonical encoding
 - object CID generation
@@ -23,6 +33,12 @@
 
 #+begin_example
 meta/ctl-kernel/spec/ctl-kernel-v0.1.1.org
+#+end_example
+
+Freeze declaration 在：
+
+#+begin_example
+meta/ctl-kernel/experimental-freeze-2026-06-26.org
 #+end_example
 
 * 為什麼現在要有這個目錄
@@ -75,7 +91,7 @@ python3 -m unittest discover -s tests
 
 * Freeze Gate
 
-v0.1.1 experimental freeze 之前，只讓以下類型阻擋：
+v0.1.1 experimental freeze 已通過。之後若要打 v0.1.1 patch release，只讓以下類型阻擋：
 
 ** P0
 
@@ -108,6 +124,8 @@ v0.1.1 experimental freeze 之前，只讓以下類型阻擋：
 
 * 下一步
 
-1. 把 spec prose 與 =reference/ctl_ref.py= 的每條核心 invariant 建立互相引用。
-2. 擴充 property / mutation tests，特別是 authority bypass、replay forgery、resource-limit pressure。
-3. 把 lab note artifact 從 human-readable Org 漸進搬到 CTL object/vectors 裡。
+1. 用 tag =ctl-kernel-v0.1.1-experimental= 作為 freeze anchor。
+2. 先拿 CTL Kernel / ResearchCTL 自己的設計文件 dogfood，不要直接套到高風險研究記憶。
+3. 若出現 P0/P1 conformance 或 authority bug，做 v0.1.1 patch。
+4. stronger evidence、signatures、raw local-store robustness、capability runtime、richer profiles
+   進 =v0.1.2+= backlog。

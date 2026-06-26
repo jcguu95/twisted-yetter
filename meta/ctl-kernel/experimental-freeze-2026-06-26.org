@@ -1,0 +1,117 @@
+#+TITLE: CTL Kernel v0.1.1 Experimental Freeze
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Declaration
+
+本 repo 宣告：
+
+#+begin_example
+CTL Kernel v0.1.1 Experimental Freeze
+#+end_example
+
+Freeze commit 以 git tag target 為準：
+
+#+begin_example
+git rev-parse ctl-kernel-v0.1.1-experimental
+#+end_example
+
+預期 tag：
+
+#+begin_example
+ctl-kernel-v0.1.1-experimental
+#+end_example
+
+* Frozen Scope
+
+本 freeze 固定以下範圍：
+
+- =Revision=
+- =AdmissionBatch=
+- =ProjectStateRoot=
+- mandatory governance profiles:
+  - =PolicySetRevision=
+  - =RoleBindingRevision=
+  - fixed pure governance evaluator
+- reference validator behavior in =reference/ctl_ref.py=
+- recomputation helper in =reference/ctl_recompute.py=
+- golden vectors in =vectors/=
+- current P0/P1 adversarial regression corpus in =tests/=
+
+本 freeze 的意思是：
+
+#+begin_quote
+v0.1.1 足以開始作為 repo-local canonical admission kernel 進行低風險 dogfood。
+#+end_quote
+
+它不是：
+
+#+begin_quote
+production-grade Chronicle、agent execution security boundary、或完整 local-store durability implementation。
+#+end_quote
+
+* Final Gate Evidence
+
+Round 17 response package 本機驗證：
+
+#+begin_example
+verify-vectors: all listed vector categories matched
+recompute: valid
+Ran 47 tests OK
+#+end_example
+
+Round 18 final-gate fuzz pass 結果：
+
+#+begin_example
+batch container+leaf paths 22 host issues 0
+policy paths 34 host issues 0
+role paths 16 host issues 0
+receipt paths 17 host issues 0
+#+end_example
+
+Repo-local fuzz script：
+
+#+begin_example
+fuzz/round18_final_gate_fuzz.py
+#+end_example
+
+Reviewer final-freeze review：
+
+#+begin_example
+reviews/round18-final-freeze-review-2026-06-26.org
+#+end_example
+
+* Caveats
+
+這個 freeze 保留以下 caveat：
+
+- 沒有 cryptographic actor authentication。
+- 沒有 confidential compartments。
+- 沒有 agent read capability enforcement。
+- 沒有 sandbox / tool-call mediation。
+- 沒有 raw filesystem crash recovery / fsync / rollback detection。
+- 沒有 remote append-only anchoring。
+- 沒有 full Chronicle compatibility。
+- =agent/run-receipt/1= 只是 weak structural predicate。
+
+=agent/run-receipt/1= 目前只證明 evidence CID 指向一個 structurally valid minimal
+run-receipt Revision；它不證明 run success、fresh context、independent review、
+target-specific review 或 reproduction。
+
+* Post-Freeze Routing
+
+Freeze 後變更路由如下：
+
+- P0/P1 conformance 或 authority bug：v0.1.1 patch release。
+- stronger evidence semantics：v0.1.2+。
+- signatures / cryptographic actor authentication：v0.1.2+。
+- raw local-store durability：v0.1.2+。
+- capability runtime / sandbox mediation：v0.1.2+。
+- multi-parent roots：v0.1.2+ 或更晚。
+- richer research/company/software profiles：profile layer，不回頭修改 kernel core。
+
+* Immediate Dogfood Target
+
+建議第一個低風險 dogfood 目標是 CTL Kernel / ResearchCTL 自己的設計文件，而不是 twisted
+Yetter 數學主線或高價值研究記憶。
