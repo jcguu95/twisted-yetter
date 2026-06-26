@@ -1,0 +1,180 @@
+#+TITLE: n70 Exotic Input Certification
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n70-exotic-input-certification=
+- verdict: =data-blocked=
+- recommended route: =n93-data-blocker= or a narrowly scoped data/literature acquisition node before any exotic-pair computation
+- claim level: =working understanding= / =negative certification result=
+- artifact: =experiments/inputs/exotic-pairs/n70-exotic-input-certification.json=
+- git commit at audit start: =462c2b6d7617f9b2c66912c19c2154a5a3a677a7=
+- dirty state at audit start: clean
+
+This node checks only whether the current repository already contains enough
+machine-readable and auditable exotic-pair input to proceed to twisted Yetter
+calculation.  It does not judge whether the candidate literature ultimately has
+such data, and it does not reopen the invariant architecture.
+
+* Inputs Read
+
+- =AGENTS.md=
+- =twisted-yetter.org=
+- =wiki/roadmaps/exotic-input-scout.org=
+- =wiki/references/exotic-input-candidates-2026-06-26.org=
+- =wiki/understandings/toy-closed-suite.org=
+- current repo file listing under =experiments/=
+
+Combined input hash for this certification pass:
+
+#+begin_src text
+c3023b7477cd3b5b0989ca4ea7700c7d329fb263d299ddfcd28f353b94a9e403
+#+end_src
+
+* Certification Criteria
+
+To route from candidate selection into exotic-pair computation, one selected
+pair must have all of the following repo-local artifacts.
+
+1. Source reference records with canonical metadata, locator, capture time, and
+   content hash or git blob hash.
+2. Exact page, theorem, proposition, or figure references for every diagram,
+   handle move, cork twist, and no-1/no-3-handle claim used.
+3. Machine-readable Kirby or handle data for both sides: component ids,
+   framings, dotted status, orientation, PD code or braid/link representation,
+   and component lineage.
+4. Integer linking matrix or equivalent presentation data sufficient to
+   recompute rank, determinant, parity, signature, Euler characteristic, and
+   expected intersection form.
+5. Explicit =H_2= identification or comparison certificate: marked,
+   cork-canonical, orbit, multiset, or explicitly inconclusive.
+6. Basis-change matrices from source/cork basis to final diagram basis, when
+   the final diagram is not already the comparison basis.
+7. Sanity-check log showing that ordinary structural checks pass and that
+   =alpha=0= is routed through the ordinary-control path.
+
+Without these items, any exotic calculation would depend on ad hoc human
+interpretation of diagrams or unstated marking choices.
+
+* Candidate Audit
+
+** Dolgachev \(E(1)_{2,3}\) vs \(E(1)\)
+
+Scout status: first-ranked promising input path.
+
+Certification result: =not certified=.
+
+Repo-local evidence currently available:
+
+- Project plan says Akbulut gives an explicit no-1/no-3-handle route and cork
+  twist description.
+- n65 records this as promising but =SOURCE NEEDED=.
+- No machine-readable diagram or handle data exists under =experiments/inputs/=.
+- No captured source metadata, PDF hash, figure/page record, or component
+  lineage certificate exists in =wiki/references/=.
+
+Missing before computation:
+
+- source capture for Akbulut's Dolgachev surface paper;
+- exact figure/page ids for final diagrams and handle cancellations;
+- digitized diagrams for both \(E(1)_{2,3}\) and \(E(1)\);
+- integer linking matrices and expected \(E_8\oplus H\)-style sanity checks
+  appropriate to the selected presentations;
+- cork-canonical or marked \(H_2\) comparison matrix.
+
+** \(R_8\) vs \(\mathbb{CP}^2\#8\overline{\mathbb{CP}}{}^2\)
+
+Scout status: fallback candidate.
+
+Certification result: =not certified=.
+
+Repo-local evidence currently available:
+
+- n65 records a Wakamaki cork route as promising fallback.
+- Existing reference entry is only a stub.
+- No repo-local diagram, linking matrix, standard-side presentation, or marking
+  certificate exists.
+
+Missing before computation:
+
+- source capture and exact page/figure references;
+- digitized \(R_8\) and standard-side diagrams;
+- cork-twist and stabilization statements separated into proved-in-source
+  versus project inference;
+- \(H_2\) comparison data.
+
+** Akhmedov--Park exotic \(\mathbb{CP}^2\#2\overline{\mathbb{CP}}{}^2\)
+
+Scout status: second fallback.
+
+Certification result: =not certified=.
+
+Repo-local evidence currently available:
+
+- Only a candidate source stub exists.
+- The marking route is explicitly unclear in current notes.
+
+Missing before computation:
+
+- captured source, exact diagram references, machine-readable input, and a
+  defensible homeomorphism or marking comparison route.
+
+** Exotic knot traces / Yasui-style families
+
+Scout status: relative or boundary-sensitive fallback.
+
+Certification result: =not certified for closed-pair computation=.
+
+Repo-local evidence currently available:
+
+- Only a candidate source stub exists.
+- Closed comparison level and closure choices are not specified.
+
+Missing before computation:
+
+- selected closed-pair construction or explicit statement that the project is
+  pivoting to relative/boundary computation;
+- machine-readable diagrams and comparison data for that selected target.
+
+* Interaction With Toy Suite
+
+The =n55= toy closed suite passes as exact formal matrix-level evidence for
+small standard examples.  It does not discharge exotic input requirements:
+
+- it contains no exotic pair diagrams;
+- it records =value_status: inconclusive= for numerical twisted Yetter values;
+- it does not provide source-backed \(H_2\) marking comparison for any exotic
+  pair.
+
+Therefore passing n55 plus n65 does not imply n70 pass.  It only means the
+computation pipeline has enough toy scaffolding to consume certified inputs
+once those inputs exist.
+
+* Verdict
+
+=n70= verdict is =data-blocked=.
+
+The repository is not ready to compute twisted Yetter values on an exotic pair.
+The correct next action is not to guess a diagram or choose a basis manually.
+The manager should route to a data/literature acquisition and digitization node,
+with Dolgachev \(E(1)_{2,3}\) vs \(E(1)\) as the first target unless a source
+audit shows it is unusable.
+
+* Recommended Next Node Contract
+
+Suggested next node: =n93-data-blocker= or =n72-dolgachev-source-capture=.
+
+Minimum output of that node should be:
+
+- upgraded reference record for =akbulut-dolgachev-surface=;
+- exact source page/figure identifiers;
+- local source snapshot hash or locator if snapshot is not stored;
+- a structured task list for diagram digitization;
+- explicit decision whether Dolgachev remains first target or whether to switch
+  to \(R_8\).
+
+Only after those artifacts exist should the graph route to a diagram
+digitization / linking-matrix certification node, and only after that should it
+route to exotic twisted Yetter computation.
