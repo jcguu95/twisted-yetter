@@ -88,6 +88,7 @@ def sort_objects(values: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def unique_sorted_scalars(values: list[str], label: str) -> None:
+    die_unless(all(isinstance(value, str) for value in values), f"{label} entries must be strings")
     die_unless(values == sort_scalars(values), f"{label} not sorted")
     die_unless(len(values) == len(set(values)), f"{label} not unique")
 
@@ -267,7 +268,7 @@ def validate_policy_revision(rev: dict[str, Any]) -> None:
 
 def validate_policy_payload(payload: dict[str, Any]) -> None:
     check_keys(payload, {"version", "default", "rules"})
-    die_unless(payload["version"] == 1, "policy version")
+    die_unless(type(payload["version"]) is int and payload["version"] == 1, "policy version")
     die_unless(payload["default"] == "deny", "policy default")
     die_unless(isinstance(payload["rules"], list), "rules must be array")
     die_unless(len(payload["rules"]) <= 1024, "too many policy rules")
@@ -411,7 +412,9 @@ def validate_batch_common(
     for op in batch["binding_ops"]:
         die_unless(isinstance(op, dict), "binding op must be object")
         die_unless("logical_id" in op, "missing binding logical_id")
-        die_unless(op.get("op") in {"set", "remove"}, "bad op")
+        op_kind = op.get("op")
+        die_unless(isinstance(op_kind, str), "bad op")
+        die_unless(op_kind in {"set", "remove"}, "bad op")
         die_unless(is_id(op.get("logical_id")), "bad binding logical_id")
         die_unless(not op["logical_id"].startswith("sys:") or op["logical_id"] == "sys:policy", "reserved sys binding op")
         binding_ids.add(op["logical_id"])

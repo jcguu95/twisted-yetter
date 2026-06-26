@@ -1,0 +1,94 @@
+#+TITLE: CTL Kernel v0.1.1 Round 15 Response
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Summary
+
+Round 15 found three malformed-input conformance bugs. These are strict schema hardening issues, not architecture
+changes.
+
+* Fixed Cases
+
+新增：
+
+#+begin_example
+tests/test_round15_conformance.py
+#+end_example
+
+覆蓋：
+
+#+begin_example
+PolicySet.payload.version = true
+  -> InvalidHistory
+
+PolicySet.rules[].actions = [123]
+  -> InvalidHistory, not host AttributeError
+
+binding_op.op = []
+  -> InvalidHistory, not host TypeError
+#+end_example
+
+* Implementation Change
+
+** Exact integer check
+
+=PolicySet.payload.version= 現在必須滿足：
+
+#+begin_src python
+type(version) is int and version == 1
+#+end_src
+
+這避免 Python =True == 1= 的陷阱。
+
+** Scalar sorting helper hardening
+
+=unique_sorted_scalars= 現在會先確認每個元素都是 string，才呼叫 =sort_scalars=。Malformed array
+entries 因此會回 =InvalidHistory=，不會從 =.encode()= 冒出 =AttributeError=。
+
+** Binding op kind type check
+
+=binding_op.op= 現在先確認是 string，再做 membership check：
+
+#+begin_example
+set | remove
+#+end_example
+
+因此 unhashable malformed values 會回 =InvalidHistory=，不會冒出 =TypeError=。
+
+* Verification
+
+最新 transcript：
+
+#+begin_example
+meta/ctl-kernel/run-reference-tests.txt
+#+end_example
+
+本輪結果：
+
+#+begin_example
+verify-vectors: all expected categories matched
+recompute: valid
+unittest: Ran 41 tests OK
+#+end_example
+
+* Freeze Judgment
+
+我的判斷：Round 15 的 strict-schema failures 已修掉。若下一次 final gate 沒有新的 P0/P1，
+應進入：
+
+#+begin_example
+CTL Kernel v0.1.1 Experimental Freeze
+#+end_example
+
+仍可阻擋 freeze 的類型只應是：
+
+- unauthorized state change；
+- policy self-authorization；
+- RoleBinding authority hijack；
+- evidence bypass / reuse；
+- root reconstruction or CID uniqueness failure；
+- supported-history validator disagreement；
+- host exception escaping from malformed protocol input。
+
+其他改善進 v0.1.2 backlog。

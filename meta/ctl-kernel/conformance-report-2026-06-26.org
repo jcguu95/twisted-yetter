@@ -28,6 +28,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round12_conformance.py=
 - =tests/test_round13_conformance.py=
 - =tests/test_round14_conformance.py=
+- =tests/test_round15_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -106,6 +107,12 @@ Round 13 conformance tests additionally cover:
 Round 14 conformance tests additionally cover:
 
 - every evidence basis in an accepted AdmissionBatch is normative, even when not consumed by policy
+
+Round 15 conformance tests additionally cover:
+
+- JSON =true= is not accepted as integer policy version =1=
+- malformed policy action entries return =InvalidHistory= instead of host exceptions
+- malformed binding op kind returns =InvalidHistory= instead of host exceptions
 
 * Reproduction
 
