@@ -1,0 +1,1010 @@
+{
+  "schema": "twisted-yetter/decision-graph/1",
+  "status": "accepted",
+  "graph_identity": {
+    "graph_id": "graph:twisted-yetter:computation-first",
+    "graph_namespace": "graph:twisted-yetter:research-roadmap",
+    "family": "twisted-yetter-computation-first",
+    "version": 2,
+    "title": "Computation-first Twisted Yetter roadmap"
+  },
+  "revision_of": {
+    "previous_graph_cid": "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb",
+    "previous_graph_version": 1,
+    "reason": "v1 had the correct computation-first direction but left too much ad hoc judgment in the formula, control, and exotic-input stages."
+  },
+  "source_of_truth": {
+    "normative_form": "CTL revision payload admitted at claim:graph:computation-first-v1",
+    "human_projection_policy": "Human-readable org or diagrams may be generated later, but they are projections, not source of truth.",
+    "payload_file_role": "This JSON file is an admission preimage; after admission, the CTL object is normative.",
+    "logical_id_note": "The logical id keeps the v1 suffix for compatibility with the first admitted graph lane; graph_identity.version is the actual graph revision."
+  },
+  "v1_assessment": {
+    "verdict": "directionally correct but too coarse for fast low-ad-hoc execution",
+    "kept": [
+      "computation-first before no-go analysis",
+      "exact arithmetic before exotic claims",
+      "toy examples before exotic pairs",
+      "same dogfood store with split keys"
+    ],
+    "problems_fixed": [
+      "formula contract, implementation, and sanity checks were one large node",
+      "ordinary alpha=0 controls were not a separate gate",
+      "presentation invariance had too little structure",
+      "exotic input discovery started too late",
+      "artifact schema and exact certificate requirements were implicit",
+      "equal exotic values did not specify the next fast path"
+    ]
+  },
+  "split_policy": {
+    "store_strategy": "same project-local ctl-dogfood store for now",
+    "portable_split_key": "graph:twisted-yetter:computation-first",
+    "separation_fields": [
+      "graph_identity.graph_namespace",
+      "graph_identity.graph_id",
+      "node_id",
+      "edge_id"
+    ],
+    "future_split_rule": "If graph volume or governance diverges, move objects whose graph_id or portable_split_key matches this graph into a graph-specific store and preserve original CIDs as external references."
+  },
+  "scope": {
+    "research_project": "twisted-yetter",
+    "primary_goal": "Compute twisted Yetter examples correctly and quickly, then evaluate known exotic pairs with enough confidence that equal or different values are meaningful.",
+    "first_category": "SU(2)_2 with A = Z/2",
+    "first_formula_scope": "minimal exact Kirby-matrix / omega-theta computation for small closed examples, with any unproved closed-manifold assumptions explicitly marked",
+    "excluded_for_v2": [
+      "full decorated Reutter no-go program before computations",
+      "production CTL security boundary",
+      "full Chronicle compatibility",
+      "cryptographic actor authentication",
+      "confidential sub-agent access control"
+    ]
+  },
+  "speed_policy": {
+    "critical_path": [
+      "n00-repro-env",
+      "n05-source-convention-ledger",
+      "n30-formula-contract",
+      "n35-invariant-core",
+      "n40-ordinary-control-gate",
+      "n50-presentation-invariance-gate",
+      "n55-toy-closed-suite",
+      "n70-exotic-input-certification",
+      "n80-exotic-computation"
+    ],
+    "parallel_after_entry": [
+      "n05-source-convention-ledger",
+      "n10-exact-algebra-backend",
+      "n20-kirby-matrix-model",
+      "n25-artifact-schema",
+      "n65-exotic-input-scout"
+    ],
+    "do_not_wait_for": [
+      "complete no-go theory",
+      "all possible categories",
+      "full unmarked orbit comparison",
+      "large-scale diagram automation"
+    ],
+    "minimum_exotic_entry_gate": [
+      "formula contract accepted or explicitly labeled experimental",
+      "ordinary alpha=0 control passes",
+      "at least one nontrivial presentation-invariance gate passes",
+      "exotic input has auditable marking level"
+    ]
+  },
+  "execution_policy": {
+    "default_subagent_effort": "medium",
+    "subagent_ready_when": [
+      "node dependencies are complete",
+      "node has explicit inputs",
+      "node has deterministic acceptance criteria",
+      "node can output artifact paths or a CTL claim"
+    ],
+    "recording_rule": "Each completed node appends a CTL claim or lab-note object with commands, outputs, exact artifacts, status, and next edge.",
+    "routing_rule": "When a node fails by a listed failure condition, follow the matching edge instead of re-planning from scratch.",
+    "anti_overthinking_rule": "Do not begin no-go analysis merely because a first small example is boring; compute more examples or another category unless a gate says the formula is not meaningful."
+  },
+  "active": {
+    "current_node_ids": [
+      "n00-repro-env"
+    ],
+    "entry_node_id": "n00-repro-env",
+    "terminal_node_ids": [
+      "n90-positive-exotic-signal",
+      "n91-systematic-negative-evidence",
+      "n92-theory-blocker",
+      "n93-data-blocker"
+    ]
+  },
+  "nodes": [
+    {
+      "node_id": "n00-repro-env",
+      "kind": "setup",
+      "dependencies": [],
+      "goal": "Create the minimal reproducible research environment and test command.",
+      "inputs": [
+        "AGENTS.md",
+        "pyproject.toml",
+        "uv.lock",
+        "ctl-dogfood current root"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter package skeleton",
+        "tests directory",
+        "wiki/env/reproducibility.org",
+        "single documented test command"
+      ],
+      "acceptance": [
+        "uv run python -m pytest is the default test command",
+        "exact arithmetic dependency choice is recorded",
+        "generated caches are ignored",
+        "CTL provider pin remains unchanged"
+      ],
+      "failure_conditions": [
+        "uv cannot run",
+        "dependency cannot be installed without changing research scope",
+        "exact backend is not available"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n05-source-convention-ledger",
+      "kind": "reference",
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "goal": "Extract the exact conventions needed for the first formula, without trying to solve the full no-go problem.",
+      "inputs": [
+        "Yetter / Crane-Yetter formula references",
+        "Reutter reference for ordinary invariant caution",
+        "twisted-yetter.org"
+      ],
+      "expected_outputs": [
+        "wiki/understandings/formula-conventions.org or CTL claim",
+        "reference records with theorem or definition labels",
+        "list of normalization, signature, orientation, and handle assumptions"
+      ],
+      "acceptance": [
+        "formula inputs and output domain are stated",
+        "closed 4-manifold versus 2-handlebody status is explicit",
+        "unknowns are labeled as assumptions, not facts"
+      ],
+      "failure_conditions": [
+        "source formula cannot be identified",
+        "normalization ambiguity blocks even toy computation",
+        "the intended formula is only a presentation statistic"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n10-exact-algebra-backend",
+      "kind": "implementation",
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "goal": "Build exact arithmetic primitives for the first examples.",
+      "inputs": [
+        "rational integers",
+        "square roots or cyclotomic symbols needed by SU(2)_2",
+        "finite abelian group A = Z/2"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/exact.py",
+        "tests/test_exact.py"
+      ],
+      "acceptance": [
+        "no float is needed for official outputs",
+        "equality is exact",
+        "JSON serialization of exact values is deterministic"
+      ],
+      "failure_conditions": [
+        "symbolic equality unavailable",
+        "serialization is ambiguous",
+        "backend choice requires Sage or Nix before minimal examples"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n15-su2-level2-certificate",
+      "kind": "implementation",
+      "dependencies": [
+        "n05-source-convention-ledger",
+        "n10-exact-algebra-backend"
+      ],
+      "goal": "Implement SU(2)_2 data with enough internal checks to avoid category convention bugs.",
+      "inputs": [
+        "simple objects",
+        "fusion rules",
+        "quantum dimensions",
+        "twists or braiding data required by the selected formula"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/su2_level2.py",
+        "tests/test_su2_level2.py",
+        "category-data certificate artifact"
+      ],
+      "acceptance": [
+        "simple object labels and dimensions are exact",
+        "global dimension sanity check passes",
+        "twist or theta conventions cite the ledger",
+        "unsupported data is explicitly absent rather than guessed"
+      ],
+      "failure_conditions": [
+        "category data source missing",
+        "twist convention conflicts with formula ledger",
+        "formula requires F or R symbols not yet recorded"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n20-kirby-matrix-model",
+      "kind": "implementation",
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "goal": "Represent the small Kirby data needed for matrix-level computation and basis changes.",
+      "inputs": [
+        "integer linking matrices",
+        "component ids",
+        "framings",
+        "orientation labels",
+        "decoration vectors in H2 with A = Z/2"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/linking_matrix.py",
+        "tests/test_matrix_presentations.py"
+      ],
+      "acceptance": [
+        "signature, rank, determinant, and parity are exact",
+        "GL(n,Z) basis changes are represented",
+        "decoration transformation convention is documented",
+        "S4, CP2, anti-CP2, S2xS2, CP2#anti-CP2, CP2#CP2 can be encoded"
+      ],
+      "failure_conditions": [
+        "basis convention inconsistent",
+        "signature convention inconsistent",
+        "small examples cannot be encoded"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n25-artifact-schema",
+      "kind": "infrastructure",
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "goal": "Define the JSON certificate schema before running computations.",
+      "inputs": [
+        "AGENTS.md artifact metadata rules",
+        "CTL dogfood recording rule"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/artifacts.py",
+        "tests/test_artifacts.py",
+        "experiments/results schema example"
+      ],
+      "acceptance": [
+        "artifacts store command, argv, git commit, dirty flag, tool versions, input hash, and exact output",
+        "schema can represent pass, fail, and inconclusive",
+        "large run logs can be referenced without polluting context"
+      ],
+      "failure_conditions": [
+        "artifact metadata incomplete",
+        "schema cannot store exact values",
+        "schema cannot represent failed computations"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n30-formula-contract",
+      "kind": "gate",
+      "dependencies": [
+        "n05-source-convention-ledger",
+        "n15-su2-level2-certificate",
+        "n20-kirby-matrix-model",
+        "n25-artifact-schema"
+      ],
+      "goal": "Freeze the minimal formula contract for v0 computation before coding the invariant core.",
+      "inputs": [
+        "formula convention ledger",
+        "SU(2)_2 certificate",
+        "Kirby matrix model",
+        "artifact schema"
+      ],
+      "expected_outputs": [
+        "CTL formula-contract claim",
+        "explicit accepted assumptions",
+        "list of invalid claim levels"
+      ],
+      "acceptance": [
+        "the invariant input type is exactly stated",
+        "normalization and signature correction are named",
+        "alpha=0 expected behavior is stated",
+        "closed-manifold claim level is either accepted or explicitly experimental"
+      ],
+      "failure_conditions": [
+        "formula underspecified",
+        "normalization cannot be chosen",
+        "contract would allow false closed-manifold claims"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n35-invariant-core",
+      "kind": "implementation",
+      "dependencies": [
+        "n30-formula-contract",
+        "n10-exact-algebra-backend",
+        "n15-su2-level2-certificate",
+        "n20-kirby-matrix-model"
+      ],
+      "goal": "Implement the minimal exact invariant core for the contracted formula.",
+      "inputs": [
+        "formula contract",
+        "category data",
+        "linking matrices",
+        "decoration vectors"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/invariant.py",
+        "tests/test_invariant_core.py"
+      ],
+      "acceptance": [
+        "sector amplitudes can be inspected separately",
+        "Fourier or decoration aggregation is deterministic",
+        "all official comparisons are exact",
+        "unsupported formula features raise explicit errors"
+      ],
+      "failure_conditions": [
+        "implementation requires unrecorded formula assumption",
+        "exact equality not decidable",
+        "computation explodes on toy examples"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n40-ordinary-control-gate",
+      "kind": "gate",
+      "dependencies": [
+        "n35-invariant-core"
+      ],
+      "goal": "Verify alpha=0 and ordinary-control behavior before nontrivial decorations.",
+      "inputs": [
+        "S4",
+        "CP2",
+        "anti-CP2",
+        "S2xS2",
+        "ordinary alpha=0 path"
+      ],
+      "expected_outputs": [
+        "experiments/results/ordinary-control/*.json",
+        "CTL gate claim"
+      ],
+      "acceptance": [
+        "alpha=0 is stable across all toy inputs",
+        "orientation reversal behavior is recorded",
+        "normalization mismatch is either absent or classified"
+      ],
+      "failure_conditions": [
+        "alpha=0 mismatch",
+        "orientation convention mismatch",
+        "ordinary output depends on presentation"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n45-presentation-pair-generator",
+      "kind": "implementation",
+      "dependencies": [
+        "n20-kirby-matrix-model"
+      ],
+      "goal": "Generate small equivalent matrix presentations and their decoration basis transformations.",
+      "inputs": [
+        "small GL(n,Z) basis changes",
+        "handle-slide matrices",
+        "toy linking matrices"
+      ],
+      "expected_outputs": [
+        "src/twisted_yetter/presentation_moves.py",
+        "tests/test_presentation_moves.py",
+        "presentation-pair fixtures"
+      ],
+      "acceptance": [
+        "each generated pair records the exact basis matrix",
+        "intersection forms before and after are equivalent",
+        "decoration transformation is machine-checkable"
+      ],
+      "failure_conditions": [
+        "generated pair lacks lineage",
+        "basis matrix not unimodular",
+        "move changes the encoded manifold accidentally"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n50-presentation-invariance-gate",
+      "kind": "gate",
+      "dependencies": [
+        "n40-ordinary-control-gate",
+        "n45-presentation-pair-generator"
+      ],
+      "goal": "Check that equivalent presentations agree after the recorded basis transformation.",
+      "inputs": [
+        "presentation-pair fixtures",
+        "invariant core",
+        "ordinary-control outputs"
+      ],
+      "expected_outputs": [
+        "experiments/results/presentation-gate/*.json",
+        "pass or fail CTL claim"
+      ],
+      "acceptance": [
+        "pure handle-slide tests agree",
+        "same-manifold toy presentations agree",
+        "alpha=0 remains stable",
+        "failure examples include minimal matrices"
+      ],
+      "failure_conditions": [
+        "basis-change mismatch",
+        "handle-slide mismatch",
+        "alpha=0 regression",
+        "presentation-pair fixture invalid"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n55-toy-closed-suite",
+      "kind": "computation",
+      "dependencies": [
+        "n50-presentation-invariance-gate"
+      ],
+      "goal": "Compute the small closed-example suite with nontrivial decorations.",
+      "inputs": [
+        "S4",
+        "CP2",
+        "anti-CP2",
+        "S2xS2",
+        "CP2#anti-CP2",
+        "CP2#CP2"
+      ],
+      "expected_outputs": [
+        "experiments/results/toy-suite/*.json",
+        "CTL toy-suite summary claim"
+      ],
+      "acceptance": [
+        "all outputs are exact",
+        "trivial and nontrivial decorations are visible in the artifact schema",
+        "computed equalities and differences are classified without overclaiming"
+      ],
+      "failure_conditions": [
+        "calculation timeout on toy input",
+        "unexpected zero or equality needs convention audit",
+        "artifact schema cannot express result"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n60-failure-triage",
+      "kind": "repair",
+      "dependencies": [],
+      "goal": "Turn any gate failure into either a small repair task or a theory blocker.",
+      "inputs": [
+        "failed gate artifact",
+        "minimal example",
+        "run log",
+        "source convention ledger"
+      ],
+      "expected_outputs": [
+        "failure classification claim",
+        "new regression test or theory blocker",
+        "next edge decision"
+      ],
+      "acceptance": [
+        "failure is classified as code, data, formula, convention, scalability, or theory",
+        "repair target is the earliest responsible node",
+        "a regression test or blocker claim is recorded"
+      ],
+      "failure_conditions": [
+        "failure cannot be minimized",
+        "root cause cannot be classified",
+        "repair would require changing project goal"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n65-exotic-input-scout",
+      "kind": "data",
+      "dependencies": [
+        "n00-repro-env"
+      ],
+      "goal": "Scout exotic-pair candidates in parallel while the engine is being built.",
+      "inputs": [
+        "known exotic 4-manifold references",
+        "available Kirby diagrams or handle decompositions",
+        "H2 marking information"
+      ],
+      "expected_outputs": [
+        "ranked candidate list",
+        "reference records",
+        "data availability status"
+      ],
+      "acceptance": [
+        "at least one first candidate is ranked by input availability",
+        "Dolgachev E(1)_{2,3} vs E(1) is assessed",
+        "fallback candidates are listed if first target lacks usable data"
+      ],
+      "failure_conditions": [
+        "no candidate has machine-readable input path",
+        "all candidates require major diagram reconstruction",
+        "marking information unavailable"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n70-exotic-input-certification",
+      "kind": "gate",
+      "dependencies": [
+        "n55-toy-closed-suite",
+        "n65-exotic-input-scout"
+      ],
+      "goal": "Certify the first exotic-pair input before running the invariant.",
+      "inputs": [
+        "ranked candidate",
+        "machine-readable Kirby or matrix data",
+        "homeomorphism or marking comparison"
+      ],
+      "expected_outputs": [
+        "experiments/inputs/exotic-pairs/*.json",
+        "intersection-form checks",
+        "H2 identification or marked comparison certificate"
+      ],
+      "acceptance": [
+        "both sides have machine-readable inputs",
+        "Euler characteristic, signature, and intersection form checks are recorded",
+        "comparison level is marked, cork-canonical, orbit, or inconclusive",
+        "normalization and orientation choices match the toy suite"
+      ],
+      "failure_conditions": [
+        "diagram data unavailable",
+        "H2 marking unclear",
+        "pair cannot be compared at the chosen claim level",
+        "input size exceeds current engine"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n75-scalability-dry-run",
+      "kind": "computation",
+      "dependencies": [
+        "n70-exotic-input-certification"
+      ],
+      "goal": "Estimate whether the certified exotic input is computable with the current exact engine.",
+      "inputs": [
+        "certified exotic input",
+        "sector count",
+        "category data",
+        "decoration group size"
+      ],
+      "expected_outputs": [
+        "cost estimate artifact",
+        "partial-sector dry-run artifact"
+      ],
+      "acceptance": [
+        "sector count is explicit",
+        "memory and time risk are classified",
+        "if too large, a smaller comparable target or optimization node is selected"
+      ],
+      "failure_conditions": [
+        "sector count too large",
+        "exact arithmetic bottleneck",
+        "input simplification needed"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n80-exotic-computation",
+      "kind": "computation",
+      "dependencies": [
+        "n75-scalability-dry-run"
+      ],
+      "goal": "Compute the invariant for the first certified exotic-pair candidate.",
+      "inputs": [
+        "certified exotic-pair input",
+        "passed invariant engine",
+        "comparison marking"
+      ],
+      "expected_outputs": [
+        "exact invariant artifacts for both sides",
+        "comparison certificate",
+        "CTL result claim"
+      ],
+      "acceptance": [
+        "comparison uses exact values",
+        "marking and normalization are identical on both sides",
+        "result is classified as different, same, or inconclusive",
+        "all commands and hashes are recorded"
+      ],
+      "failure_conditions": [
+        "calculation too large",
+        "comparison marking insufficient",
+        "values equal across tested markings",
+        "engine assumption not valid for exotic input"
+      ],
+      "subagent_suitable": true
+    },
+    {
+      "node_id": "n82-result-classification",
+      "kind": "gate",
+      "dependencies": [
+        "n80-exotic-computation"
+      ],
+      "goal": "Classify the exotic computation without overclaiming.",
+      "inputs": [
+        "comparison certificate",
+        "formula contract",
+        "input certification"
+      ],
+      "expected_outputs": [
+        "result-classification CTL claim"
+      ],
+      "acceptance": [
+        "different values route to positive signal only if presentation and marking gates are satisfied",
+        "same values route to next target or category, not immediate no-go",
+        "inconclusive values route to the earliest blocking node"
+      ],
+      "failure_conditions": [
+        "claim level mismatch",
+        "artifact missing",
+        "result depends on unresolved convention"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n85-next-target-or-category",
+      "kind": "routing",
+      "dependencies": [
+        "n82-result-classification"
+      ],
+      "goal": "Choose the fastest next computation when the first exotic pair does not distinguish.",
+      "inputs": [
+        "result-classification claim",
+        "candidate list",
+        "category limitations"
+      ],
+      "expected_outputs": [
+        "next candidate or next category decision claim"
+      ],
+      "acceptance": [
+        "prefer another already-certified exotic input before theory no-go",
+        "if multiple exotic pairs agree, consider another small category before no-go",
+        "no negative theorem is claimed from low-rank data alone"
+      ],
+      "failure_conditions": [
+        "no certified candidates remain",
+        "current category is provably uninformative for the tested scope",
+        "all next steps require theory work"
+      ],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n90-positive-exotic-signal",
+      "kind": "terminal",
+      "dependencies": [
+        "n82-result-classification"
+      ],
+      "goal": "Record a candidate positive signal that twisted Yetter distinguishes an exotic pair.",
+      "inputs": [
+        "comparison certificate",
+        "exact artifacts",
+        "input certification"
+      ],
+      "expected_outputs": [
+        "certificate-level CTL claim",
+        "remaining proof obligations"
+      ],
+      "acceptance": [
+        "difference is not caused by normalization, marking, basis, or presentation artifact",
+        "statement level is explicit",
+        "reproduction command is recorded"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n91-systematic-negative-evidence",
+      "kind": "terminal",
+      "dependencies": [
+        "n85-next-target-or-category"
+      ],
+      "goal": "Record systematic negative evidence after many correct computations agree.",
+      "inputs": [
+        "multiple exotic-pair computations",
+        "toy gate records",
+        "category and marking scope"
+      ],
+      "expected_outputs": [
+        "negative-evidence CTL claim",
+        "next theory questions"
+      ],
+      "acceptance": [
+        "negative evidence does not overclaim a no-go theorem",
+        "tested categories, pairs, and markings are explicit",
+        "future theory route is separated from computed evidence"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n92-theory-blocker",
+      "kind": "terminal",
+      "dependencies": [
+        "n60-failure-triage"
+      ],
+      "goal": "Record that computation is blocked by a mathematical ambiguity or likely no-go issue.",
+      "inputs": [
+        "minimal failing example",
+        "formula audit",
+        "triage claim"
+      ],
+      "expected_outputs": [
+        "theory-blocker CTL claim",
+        "suggested proof or no-go audit route"
+      ],
+      "acceptance": [
+        "blocker is not merely missing code or data",
+        "the next mathematical proof obligation is explicit"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    },
+    {
+      "node_id": "n93-data-blocker",
+      "kind": "terminal",
+      "dependencies": [
+        "n65-exotic-input-scout"
+      ],
+      "goal": "Record that exotic computation is blocked by lack of auditable input data rather than invariant theory.",
+      "inputs": [
+        "candidate scout report",
+        "failed input certification"
+      ],
+      "expected_outputs": [
+        "data-blocker CTL claim",
+        "data reconstruction backlog"
+      ],
+      "acceptance": [
+        "missing data is specified",
+        "the invariant engine status remains separate from data availability"
+      ],
+      "failure_conditions": [],
+      "subagent_suitable": false
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e00-parallel-reference",
+      "from": "n00-repro-env",
+      "to": "n05-source-convention-ledger",
+      "condition": "environment command exists"
+    },
+    {
+      "edge_id": "e00-parallel-exact",
+      "from": "n00-repro-env",
+      "to": "n10-exact-algebra-backend",
+      "condition": "environment command exists"
+    },
+    {
+      "edge_id": "e00-parallel-matrix",
+      "from": "n00-repro-env",
+      "to": "n20-kirby-matrix-model",
+      "condition": "environment command exists"
+    },
+    {
+      "edge_id": "e00-parallel-artifact",
+      "from": "n00-repro-env",
+      "to": "n25-artifact-schema",
+      "condition": "environment command exists"
+    },
+    {
+      "edge_id": "e00-parallel-exotic-scout",
+      "from": "n00-repro-env",
+      "to": "n65-exotic-input-scout",
+      "condition": "environment command exists"
+    },
+    {
+      "edge_id": "e05-or-e10-to-su2",
+      "from": "n05-source-convention-ledger",
+      "to": "n15-su2-level2-certificate",
+      "condition": "source ledger gives category conventions and exact backend exists"
+    },
+    {
+      "edge_id": "e30-ready",
+      "from": "n15-su2-level2-certificate",
+      "to": "n30-formula-contract",
+      "condition": "category, matrix, artifact, and source dependencies are complete"
+    },
+    {
+      "edge_id": "e30-pass",
+      "from": "n30-formula-contract",
+      "to": "n35-invariant-core",
+      "condition": "formula contract accepted"
+    },
+    {
+      "edge_id": "e30-fail-theory",
+      "from": "n30-formula-contract",
+      "to": "n92-theory-blocker",
+      "condition": "no meaningful toy computation contract can be stated"
+    },
+    {
+      "edge_id": "e35-pass",
+      "from": "n35-invariant-core",
+      "to": "n40-ordinary-control-gate",
+      "condition": "invariant core unit tests pass"
+    },
+    {
+      "edge_id": "e35-fail-triage",
+      "from": "n35-invariant-core",
+      "to": "n60-failure-triage",
+      "condition": "core cannot compute toy inputs exactly"
+    },
+    {
+      "edge_id": "e40-pass",
+      "from": "n40-ordinary-control-gate",
+      "to": "n50-presentation-invariance-gate",
+      "condition": "ordinary alpha=0 control passes and presentation fixtures exist"
+    },
+    {
+      "edge_id": "e40-fail-triage",
+      "from": "n40-ordinary-control-gate",
+      "to": "n60-failure-triage",
+      "condition": "ordinary control fails"
+    },
+    {
+      "edge_id": "e45-ready",
+      "from": "n45-presentation-pair-generator",
+      "to": "n50-presentation-invariance-gate",
+      "condition": "valid presentation fixtures exist"
+    },
+    {
+      "edge_id": "e50-pass",
+      "from": "n50-presentation-invariance-gate",
+      "to": "n55-toy-closed-suite",
+      "condition": "presentation invariance gate passes"
+    },
+    {
+      "edge_id": "e50-fail-triage",
+      "from": "n50-presentation-invariance-gate",
+      "to": "n60-failure-triage",
+      "condition": "presentation invariance gate fails"
+    },
+    {
+      "edge_id": "e55-pass",
+      "from": "n55-toy-closed-suite",
+      "to": "n70-exotic-input-certification",
+      "condition": "toy closed suite has exact artifacts and exotic scout has candidate"
+    },
+    {
+      "edge_id": "e55-fail-triage",
+      "from": "n55-toy-closed-suite",
+      "to": "n60-failure-triage",
+      "condition": "toy suite cannot produce exact artifacts"
+    },
+    {
+      "edge_id": "e60-code-repair",
+      "from": "n60-failure-triage",
+      "to": "n35-invariant-core",
+      "condition": "root cause is invariant implementation"
+    },
+    {
+      "edge_id": "e60-category-repair",
+      "from": "n60-failure-triage",
+      "to": "n15-su2-level2-certificate",
+      "condition": "root cause is category data or convention"
+    },
+    {
+      "edge_id": "e60-matrix-repair",
+      "from": "n60-failure-triage",
+      "to": "n20-kirby-matrix-model",
+      "condition": "root cause is matrix, basis, or decoration representation"
+    },
+    {
+      "edge_id": "e60-formula-repair",
+      "from": "n60-failure-triage",
+      "to": "n30-formula-contract",
+      "condition": "root cause is formula contract or normalization"
+    },
+    {
+      "edge_id": "e60-theory-block",
+      "from": "n60-failure-triage",
+      "to": "n92-theory-blocker",
+      "condition": "failure is mathematical rather than code or data"
+    },
+    {
+      "edge_id": "e65-no-data",
+      "from": "n65-exotic-input-scout",
+      "to": "n93-data-blocker",
+      "condition": "no auditable exotic input path exists"
+    },
+    {
+      "edge_id": "e70-pass",
+      "from": "n70-exotic-input-certification",
+      "to": "n75-scalability-dry-run",
+      "condition": "first exotic input is certified"
+    },
+    {
+      "edge_id": "e70-fail-data",
+      "from": "n70-exotic-input-certification",
+      "to": "n93-data-blocker",
+      "condition": "candidate lacks data or marking certification"
+    },
+    {
+      "edge_id": "e75-pass",
+      "from": "n75-scalability-dry-run",
+      "to": "n80-exotic-computation",
+      "condition": "dry run says exact computation is feasible"
+    },
+    {
+      "edge_id": "e75-fail-triage",
+      "from": "n75-scalability-dry-run",
+      "to": "n60-failure-triage",
+      "condition": "engine must be optimized or input simplified"
+    },
+    {
+      "edge_id": "e80-pass",
+      "from": "n80-exotic-computation",
+      "to": "n82-result-classification",
+      "condition": "exotic computation finished with exact artifacts"
+    },
+    {
+      "edge_id": "e80-fail-triage",
+      "from": "n80-exotic-computation",
+      "to": "n60-failure-triage",
+      "condition": "exotic computation fails or is inconclusive"
+    },
+    {
+      "edge_id": "e82-different",
+      "from": "n82-result-classification",
+      "to": "n90-positive-exotic-signal",
+      "condition": "exact values differ at an accepted claim level"
+    },
+    {
+      "edge_id": "e82-same",
+      "from": "n82-result-classification",
+      "to": "n85-next-target-or-category",
+      "condition": "exact values agree"
+    },
+    {
+      "edge_id": "e82-inconclusive",
+      "from": "n82-result-classification",
+      "to": "n60-failure-triage",
+      "condition": "result depends on unresolved convention, data, or scalability issue"
+    },
+    {
+      "edge_id": "e85-next-exotic",
+      "from": "n85-next-target-or-category",
+      "to": "n70-exotic-input-certification",
+      "condition": "another candidate can be certified faster than changing category"
+    },
+    {
+      "edge_id": "e85-next-category",
+      "from": "n85-next-target-or-category",
+      "to": "n15-su2-level2-certificate",
+      "condition": "current category repeatedly agrees and another small category is the fastest next computation"
+    },
+    {
+      "edge_id": "e85-negative-evidence",
+      "from": "n85-next-target-or-category",
+      "to": "n91-systematic-negative-evidence",
+      "condition": "many certified computations agree and no fast next computation remains"
+    }
+  ],
+  "invariants": [
+    "No exotic-pair computation before ordinary-control and presentation-invariance gates pass.",
+    "No terminal positive claim without exact artifact comparison and certified input marking.",
+    "No no-go conclusion from low-rank negative controls alone.",
+    "Equal values on a first exotic pair route to more computation, not theory no-go.",
+    "Every completed node must produce a reproducible artifact or a CTL lab-note claim.",
+    "Human-readable projections of this graph are non-normative.",
+    "Graph changes are append-only at CTL object level: new graph revisions parent the prior active graph revision."
+  ]
+}

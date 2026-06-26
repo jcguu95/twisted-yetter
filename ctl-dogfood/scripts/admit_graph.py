@@ -23,11 +23,11 @@ PROJECT_ID = "project:twisted-yetter"
 KERNEL_PROFILE = "ctl-kernel/1"
 ACTOR_ID = "actor:jin"
 SUBMITTED_BY = "actor:codex"
-CREATED_AT = "2026-06-26T19:05:00Z"
-ADMITTED_AT = "2026-06-26T19:06:00Z"
+CREATED_AT = "2026-06-26T19:10:00Z"
+ADMITTED_AT = "2026-06-26T19:11:00Z"
 GRAPH_LOGICAL_ID = "claim:graph:computation-first-v1"
-GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v1.json"
-MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v1-2026-06-26.json"
+GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v2.json"
+MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v2-2026-06-26.json"
 
 
 def run_git(root: Path, args: list[str]) -> str:
@@ -132,7 +132,8 @@ def find_active_owner_role(state: dict[str, Any], store: ctl_ref.Store) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Append the computation-first decision graph to CTL dogfood.")
-    parser.add_argument("--force", action="store_true", help="overwrite this graph admission if already present")
+    parser.add_argument("--update", action="store_true", help="append a new revision when the graph payload changed")
+    parser.add_argument("--force", action="store_true", help="deprecated alias for --update")
     args = parser.parse_args()
 
     ref_path = DOGFOOD_ROOT / "refs" / "main.json"
@@ -162,8 +163,8 @@ def main() -> int:
                 )
             )
             return 0
-        if not args.force:
-            raise SystemExit(f"{GRAPH_LOGICAL_ID} already admitted with different payload; pass --force to update it")
+        if not (args.update or args.force):
+            raise SystemExit(f"{GRAPH_LOGICAL_ID} already admitted with different payload; pass --update to append a new revision")
 
     graph_claim = revision(
         GRAPH_LOGICAL_ID,
@@ -211,7 +212,7 @@ def main() -> int:
             "kernel_profile": KERNEL_PROFILE,
             "logical_id": GRAPH_LOGICAL_ID,
             "payload_file": str(GRAPH_FILE.relative_to(REPO_ROOT)),
-            "source_repo_commit_before_admission": "4e5fb621d71939f2ea7447468e3fb678c70113ec",
+            "source_repo_commit_before_admission": "919a9325cd2afa560ebddce85ee5327560833f17",
             "ctl_meta_commit_at_admission": run_git(CTL_META_ROOT, ["rev-parse", "HEAD"]),
             "parent_root_cid": state["root_cid"],
             "genesis_root_cid": ref["genesis_root_cid"],
@@ -226,7 +227,7 @@ def main() -> int:
             "graph_namespace": graph_payload["graph_identity"]["graph_namespace"],
             "reproduce": [
                 "cd ctl-dogfood",
-                "uv run python scripts/admit_graph.py",
+                "uv run python scripts/admit_graph.py --update",
                 "uv run python scripts/verify.py",
             ],
         },
