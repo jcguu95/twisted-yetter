@@ -1,0 +1,35 @@
+#+TITLE: Current Graph Projection
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:nil num:nil
+
+* Status
+
+working understanding
+
+* Observation
+
+On 2026-06-26, the repo-local current graph projection command:
+
+#+begin_src sh
+cd /Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/show_current_graph.py
+#+end_src
+
+displayed the active graph as version 5:
+
+- Current graph: Current-view and Kirby-link-first Twisted Yetter roadmap
+- Version: 5
+- Priority node: =n01-show-current-graph=
+
+The default human-readable output lists the current nodes, critical path, and
+invariants. It also states that older graph revisions are hidden by default, and
+that =--json= should be used only when an agent needs the exact current
+projection payload.
+
+* Scope
+
+This current-view tool may eventually belong in =ctl-meta=, because multiple CTL
+dogfood projects will likely need the same projection pattern. For now it is a
+repo-local tool under =ctl-dogfood/scripts/show_current_graph.py=. Do not modify
+=ctl-meta= or CTL objects merely to satisfy this local projection node.
