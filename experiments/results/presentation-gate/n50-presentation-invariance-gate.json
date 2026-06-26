@@ -1,0 +1,247 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "tests/test_presentation_invariance_gate.py"
+  ],
+  "command": "uv run python -m pytest tests/test_presentation_invariance_gate.py",
+  "exact_output": {
+    "claim_boundary": "presentation gate for experimental matrix-level formal outputs only; no theorem-level closed 4-manifold invariant is claimed",
+    "failure_examples": [
+      {
+        "classification": "raw-presentation-payload-mismatch",
+        "explanation": "Full n35 JSON includes basis-dependent matrix, component_ids, coordinate decoration, sector_id, and component color metadata. n50 therefore compares the documented gate projection, not raw full artifacts.",
+        "gate_projected_outputs_equal": true,
+        "minimal_source_decoration_mod2": [
+          0,
+          1
+        ],
+        "minimal_source_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "minimal_target_decoration_mod2": [
+          1,
+          1
+        ],
+        "minimal_target_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "pair_id": "hyperbolic-shear",
+        "raw_full_outputs_equal": false
+      }
+    ],
+    "node_id": "n50-presentation-invariance-gate",
+    "pair_cases": [
+      {
+        "alpha_zero_stable": true,
+        "basis_matrix": [
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "decorations_checked": [
+          {
+            "source": [
+              1,
+              0
+            ],
+            "target": [
+              1,
+              0
+            ]
+          },
+          {
+            "source": [
+              0,
+              1
+            ],
+            "target": [
+              1,
+              1
+            ]
+          },
+          {
+            "source": [
+              1,
+              1
+            ],
+            "target": [
+              0,
+              1
+            ]
+          }
+        ],
+        "determinant": -1,
+        "pair_id": "hyperbolic-shear",
+        "projected_outputs_equal": true,
+        "signature": 0,
+        "source_form": "S2xS2 hyperbolic"
+      },
+      {
+        "alpha_zero_stable": true,
+        "basis_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "decorations_checked": [
+          {
+            "source": [
+              1,
+              0
+            ],
+            "target": [
+              0,
+              1
+            ]
+          },
+          {
+            "source": [
+              0,
+              1
+            ],
+            "target": [
+              1,
+              0
+            ]
+          },
+          {
+            "source": [
+              1,
+              1
+            ],
+            "target": [
+              1,
+              1
+            ]
+          }
+        ],
+        "determinant": -1,
+        "pair_id": "odd-indefinite-swap",
+        "projected_outputs_equal": true,
+        "signature": 0,
+        "source_form": "CP2#anti-CP2"
+      },
+      {
+        "alpha_zero_stable": true,
+        "basis_matrix": [
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "decorations_checked": [
+          {
+            "source": [
+              1,
+              0
+            ],
+            "target": [
+              1,
+              0
+            ]
+          },
+          {
+            "source": [
+              0,
+              1
+            ],
+            "target": [
+              1,
+              1
+            ]
+          },
+          {
+            "source": [
+              1,
+              1
+            ],
+            "target": [
+              0,
+              1
+            ]
+          }
+        ],
+        "determinant": 1,
+        "pair_id": "odd-positive-shear",
+        "projected_outputs_equal": true,
+        "signature": 2,
+        "source_form": "CP2#CP2"
+      }
+    ],
+    "projection_policy": {
+      "classification": "compare basis-invariant formal fields after recorded decoration transform",
+      "excluded_basis_dependent_fields": [
+        "presentation.matrix",
+        "presentation.component_ids",
+        "presentation.framings",
+        "decoration_mod2 coordinates",
+        "sector_id",
+        "aggregation.sector_order",
+        "component_colors",
+        "theta_component_count"
+      ],
+      "included_fields": [
+        "status",
+        "claim_level",
+        "claim_boundary",
+        "category",
+        "formula_convention_record",
+        "ordinary_path_selected",
+        "aggregation mode, value_status, and unsupported_reason",
+        "presentation size/rank/determinant/signature/parity",
+        "formal alpha_q_alpha_mod2 and value_status"
+      ]
+    },
+    "route": "allow-n55-toy-closed-suite",
+    "value_status": "inconclusive",
+    "verdict": "pass"
+  },
+  "git": {
+    "commit": "2b572af224020d941d01f9a0aac902c77a2859ad",
+    "dirty": true
+  },
+  "input_hash": "cff7f2fb2295113303f34489fb26bfdcc5965097010191f90d9acd740d80d6ed",
+  "log_references": [],
+  "notes": [
+    "n50 checks exact agreement of projected formal outputs after recorded GL(n,Z) decoration transforms.",
+    "The n35 value_status remains inconclusive; this pass is not a theorem-level presentation invariance result.",
+    "Raw full artifacts are intentionally not used as the gate comparison because they contain basis-dependent presentation payload."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
