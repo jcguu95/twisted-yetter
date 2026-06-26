@@ -1,0 +1,102 @@
+#+TITLE: CTL Kernel v0.1.1 Round 12 Response
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Summary
+
+Round 12 是 result-lattice conformance 的 final-audit style 修補：
+
+#+begin_example
+InvalidHistory > UnsupportedProfile > Valid
+#+end_example
+
+本輪仍不重開核心架構，不新增 ontology、不新增 signatures、不新增 multi-parent root。
+
+* Fixed Cases
+
+新增：
+
+#+begin_example
+tests/test_round12_conformance.py
+#+end_example
+
+覆蓋四個 adversarial cases：
+
+#+begin_example
+unsupported evidence basis + deterministic policy denial
+  -> InvalidHistory
+
+unsupported recorded profile + deterministic policy denial
+  -> InvalidHistory
+
+unsupported evidence basis + future-policy-update liveness failure
+  -> InvalidHistory
+
+unsupported recorded profile + future-policy-update liveness failure
+  -> InvalidHistory
+#+end_example
+
+* Implementation Change
+
+** Unsupported evidence 不再全域 short-circuit
+
+之前 transition path 只要在 batch evidence 中看到 unsupported basis，就會先回
+=UnsupportedProfile=。
+
+這是不對的，因為某個 evidence entry 可能完全不被 matching policy rule 使用；它不應遮蔽
+policy denial 或 child liveness failure。
+
+本輪移除 transition-level global unsupported-evidence check。Unsupported evidence basis
+現在只會在 supported policy evaluation 中，當 matching rule 的 required basis 本身 unsupported
+時，透過 =policy_allows= 回報。
+
+** Unsupported recorded / active profiles 延後到 child checks 之後
+
+Recorded Revision 的 unsupported payload profile 仍會被累積，但不會在：
+
+- request derivation；
+- deterministic policy denial；
+- child binding construction；
+- future-policy-update liveness；
+
+之前 short-circuit。
+
+Active bindings 也改成先檢查 Revision envelope；若 active target payload profile unsupported，
+先累積，等 deterministic child-state checks 完成後才回 =UnsupportedProfile=。
+
+* Verification
+
+最新 transcript：
+
+#+begin_example
+meta/ctl-kernel/run-reference-tests.txt
+#+end_example
+
+本輪結果：
+
+#+begin_example
+verify-vectors: all expected categories matched
+recompute: valid
+unittest: Ran 36 tests OK
+#+end_example
+
+* Freeze Judgment
+
+我的判斷：
+
+- architecture freeze: yes
+- executable reference package: yes
+- result-lattice conformance: substantially improved
+- v0.1.1 experimental freeze: suitable after one final no-new-P0/P1 audit
+
+下一輪若還有 review，應只允許 P0/P1：
+
+- unauthorized state change；
+- policy self-authorization；
+- RoleBinding authority hijack；
+- evidence bypass / reuse；
+- root reconstruction or CID uniqueness failure；
+- supported-history validator disagreement。
+
+其他改善進 v0.1.2 backlog。

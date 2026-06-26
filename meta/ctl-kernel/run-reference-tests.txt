@@ -1,17 +1,17 @@
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
-UTC 2026-06-26T13:07:23Z
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
-b22b94c0c0889d1a2467acaf84ef40def8966ebb
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+[2m---------------------- [ 20260626-075541 ] ----------------------[0m
+UTC 2026-06-26T13:55:41Z
+[2m---------------------- [ 20260626-075541 ] ----------------------[0m
+17bd96bc4c69c1dfd7b20a5b8fc9dd2c08ffbfa7
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
  M meta/ctl-kernel/reference/ctl_ref.py
  M meta/ctl-kernel/run-reference-tests.txt
-?? meta/ctl-kernel/tests/test_round11_conformance.py
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+?? meta/ctl-kernel/tests/test_round12_conformance.py
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
 uv 0.11.11 (aarch64-apple-darwin)
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
 Python 3.11.15
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
 genesis: valid
 non-genesis: valid
 role-binding-selector-pass: valid
@@ -29,9 +29,9 @@ sys-namespace-invalid: invalid
 sys-policy-opaque-invalid: invalid
 role-binding-lineage-change: invalid
 encoding: valid
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
 recompute: valid
-[2m---------------------- [ 20260626-070723 ] ----------------------[0m
+[2m---------------------- [ 20260626-075542 ] ----------------------[0m
 test_evidence_cannot_target_another_binding_op (test_mutations.MutationTests.test_evidence_cannot_target_another_binding_op) ... ok
 test_object_cid_tamper_is_rejected (test_mutations.MutationTests.test_object_cid_tamper_is_rejected) ... ok
 test_policy_replacement_must_be_atomic (test_mutations.MutationTests.test_policy_replacement_must_be_atomic) ... ok
@@ -50,6 +50,10 @@ test_unsupported_recorded_profile_does_not_mask_malformed_evidence (test_round10
 test_unsupported_recorded_profile_does_not_mask_unrecorded_binding_target (test_round10_conformance.Round10ConformanceTests.test_unsupported_recorded_profile_does_not_mask_unrecorded_binding_target) ... ok
 test_unsupported_evidence_basis_does_not_mask_inactive_principal_role (test_round11_conformance.Round11ConformanceTests.test_unsupported_evidence_basis_does_not_mask_inactive_principal_role) ... ok
 test_unsupported_recorded_profile_does_not_mask_inactive_principal_role (test_round11_conformance.Round11ConformanceTests.test_unsupported_recorded_profile_does_not_mask_inactive_principal_role) ... ok
+test_unsupported_evidence_basis_does_not_mask_policy_denial (test_round12_conformance.Round12ConformanceTests.test_unsupported_evidence_basis_does_not_mask_policy_denial) ... ok
+test_unsupported_evidence_basis_does_not_mask_policy_liveness_failure (test_round12_conformance.Round12ConformanceTests.test_unsupported_evidence_basis_does_not_mask_policy_liveness_failure) ... ok
+test_unsupported_recorded_profile_does_not_mask_policy_denial (test_round12_conformance.Round12ConformanceTests.test_unsupported_recorded_profile_does_not_mask_policy_denial) ... ok
+test_unsupported_recorded_profile_does_not_mask_policy_liveness_failure (test_round12_conformance.Round12ConformanceTests.test_unsupported_recorded_profile_does_not_mask_policy_liveness_failure) ... ok
 test_candidate_policy_with_unsupported_basis_is_unsupported (test_round8_conformance.Round8ConformanceTests.test_candidate_policy_with_unsupported_basis_is_unsupported) ... ok
 test_canonical_object_over_one_mib_is_rejected (test_round8_conformance.Round8ConformanceTests.test_canonical_object_over_one_mib_is_rejected) ... ok
 test_invalid_gregorian_timestamp_is_rejected (test_round8_conformance.Round8ConformanceTests.test_invalid_gregorian_timestamp_is_rejected) ... ok
@@ -66,6 +70,6 @@ test_principal_authentication_assurance_must_be_id (test_round9_conformance.Roun
 test_supported_run_receipt_profile_has_minimal_structural_validation (test_round9_conformance.Round9ConformanceTests.test_supported_run_receipt_profile_has_minimal_structural_validation) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 0.259s
+Ran 36 tests in 0.266s
 
 OK

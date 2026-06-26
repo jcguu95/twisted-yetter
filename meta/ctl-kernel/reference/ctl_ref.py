@@ -312,13 +312,6 @@ def unsupported_policy_basis(policy: dict[str, Any]) -> str | None:
     return None
 
 
-def find_unsupported_evidence_basis(batch: dict[str, Any]) -> str | None:
-    for entry in batch["evidence"]:
-        if entry["basis"] not in SUPPORTED_EVIDENCE_BASIS:
-            return entry["basis"]
-    return None
-
-
 def validate_role_binding_revision(rev: dict[str, Any]) -> None:
     die_unless(rev["logical_id"].startswith("role-binding:"), "role binding namespace")
     payload = rev["payload"]
@@ -895,11 +888,6 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
     for entry in batch["evidence"]:
         die_unless(entry["cid"] in recorded_set, "evidence CID not recorded")
     roles = role_bindings_for_principal(store, state, batch["principal_claim"])
-    unsupported_evidence_basis = find_unsupported_evidence_basis(batch)
-    if unsupported_evidence_basis is not None:
-        raise UnsupportedProfile(unsupported_evidence_basis)
-    if unsupported_profiles:
-        raise UnsupportedProfile(unsupported_profiles[0])
     requests = make_requests(store, state, batch, recorded)
     die_unless(len(requests) <= 5121, "too many requests")
     authorization_match_work(old_policy, requests)
@@ -908,11 +896,16 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
         die_unless(policy_allows(store, old_policy, roles, req), f"policy denied {req['action']} {req['logical_id']}")
     bindings = apply_binding_ops(state["bindings"], batch["binding_ops"])
     die_unless("sys:policy" in bindings, "missing sys:policy")
+    active_unsupported_profiles: list[str] = []
     for logical_id, cid in bindings.items():
         die_unless(cid in recorded_set, "active target not recorded")
         rev = store.resolve(cid)
         die_unless(rev["logical_id"] == logical_id, "active logical mismatch")
-        validate_revision(store, cid, rev)
+        validate_revision_envelope(store, cid, rev)
+        if rev["payload_profile"] in SUPPORTED_PAYLOAD_PROFILES:
+            validate_revision_payload(rev)
+        else:
+            active_unsupported_profiles.append(rev["payload_profile"])
     candidate_policy = store.resolve(bindings["sys:policy"])
     validate_policy_revision(candidate_policy)
     unsupported_candidate_basis = unsupported_policy_basis(candidate_policy)
@@ -940,6 +933,10 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
     die_unless(future_policy_update_possible(store, child), "future policy update impossible")
     if unsupported_candidate_basis is not None:
         raise UnsupportedProfile(unsupported_candidate_basis)
+    if unsupported_profiles:
+        raise UnsupportedProfile(unsupported_profiles[0])
+    if active_unsupported_profiles:
+        raise UnsupportedProfile(active_unsupported_profiles[0])
     return child
 
 
