@@ -23,11 +23,11 @@ PROJECT_ID = "project:twisted-yetter"
 KERNEL_PROFILE = "ctl-kernel/1"
 ACTOR_ID = "actor:jin"
 SUBMITTED_BY = "actor:codex"
-CREATED_AT = "2026-06-26T22:58:00Z"
-ADMITTED_AT = "2026-06-26T22:59:00Z"
+CREATED_AT = "2026-06-26T23:16:00Z"
+ADMITTED_AT = "2026-06-26T23:17:00Z"
 GRAPH_LOGICAL_ID = "claim:graph:computation-first-v1"
-GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v3.json"
-MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v3-2026-06-26.json"
+GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v5.json"
+MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v5-2026-06-26.json"
 
 
 def run_git(root: Path, args: list[str]) -> str:
