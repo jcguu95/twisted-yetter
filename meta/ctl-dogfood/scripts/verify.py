@@ -33,7 +33,7 @@ def load_store() -> ctl_ref.Store:
 def main() -> int:
     store = load_store()
     ref = load_json(DOGFOOD_ROOT / "refs" / "main.json")
-    manifest = load_json(DOGFOOD_ROOT / "manifests" / "bootstrap-2026-06-26.json")
+    bootstrap_manifest = load_json(DOGFOOD_ROOT / "manifests" / "bootstrap-2026-06-26.json")
     ctl_ref.check_keys(
         ref,
         {
@@ -57,8 +57,13 @@ def main() -> int:
     }
     state = ctl_ref.validate_chain(store, ref["root_cid"], trust_anchor)
     ctl_ref.die_unless(state["root_cid"] == ref["root_cid"], "ref root replay mismatch")
-    ctl_ref.die_unless(manifest["current_root_cid"] == ref["root_cid"], "manifest/ref root mismatch")
-    ctl_ref.die_unless(manifest["genesis_root_cid"] == ref["genesis_root_cid"], "manifest/ref genesis mismatch")
+    ctl_ref.die_unless(bootstrap_manifest["genesis_root_cid"] == ref["genesis_root_cid"], "manifest/ref genesis mismatch")
+    current_manifests = []
+    for path in sorted((DOGFOOD_ROOT / "manifests").glob("*.json")):
+        manifest = load_json(path)
+        if manifest.get("current_root_cid") == ref["root_cid"]:
+            current_manifests.append(str(path.relative_to(DOGFOOD_ROOT)))
+    ctl_ref.die_unless(current_manifests != [], "no manifest points at current ref root")
     print(
         json.dumps(
             {
@@ -67,6 +72,7 @@ def main() -> int:
                 "root_cid": ref["root_cid"],
                 "genesis_root_cid": ref["genesis_root_cid"],
                 "object_count": len(store.objects),
+                "current_manifests": current_manifests,
             },
             sort_keys=True,
         )

@@ -1,0 +1,30 @@
+{
+  "schema": "ctl-dogfood/meta-decision/1",
+  "status": "accepted",
+  "decision": "continue CTL dogfood in shadow mode before admitting twisted-Yetter research claims",
+  "reason": "This separates kernel dogfood risk, ResearchCTL profile design risk, and mathematical research-memory migration risk.",
+  "policy": {
+    "source_of_truth": "existing org/wiki and repo files remain human-readable source of truth",
+    "ctl_role": "record canonical admission metadata for low-risk meta decisions",
+    "no_direct_research_migration_yet": true
+  },
+  "graduation_gate": {
+    "minimum_low_risk_meta_decisions": 5,
+    "preferred_low_risk_meta_decisions": 10,
+    "must_replay_current_root": true,
+    "must_have_minimal_researchctl_profile_schema": true,
+    "must_list_v0_1_2_patch_or_migration_needs": true
+  },
+  "allowed_shadow_targets": [
+    "CTL Kernel dogfood policy",
+    "ResearchCTL profile design",
+    "v0.1.2 backlog decisions",
+    "migration gates",
+    "low-risk meta review outcomes"
+  ],
+  "blocked_until_graduation": [
+    "twisted-Yetter mathematical claims",
+    "exotic-pair computation results",
+    "high-value research-memory source of truth"
+  ]
+}

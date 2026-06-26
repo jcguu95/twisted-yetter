@@ -42,7 +42,10 @@ shadow mode
 objects/ctlobj-sha256/*.json
 refs/main.json
 manifests/bootstrap-2026-06-26.json
+manifests/admission-*.json
+decisions/*.json
 scripts/bootstrap.py
+scripts/admit_decision.py
 scripts/verify.py
 #+end_example
 
@@ -56,6 +59,19 @@ uv run python scripts/verify.py
 #+end_src
 
 =verify.py= 只從已寫入的 objects / refs / manifest 重新載入、重算 CID、replay chain。
+
+日常追加低風險 meta decision 時，使用：
+
+#+begin_src sh
+cd meta/ctl-dogfood
+uv run python scripts/admit_decision.py \
+  --logical-id claim:example \
+  --payload-file decisions/example.json \
+  --created-at 2026-06-26T18:30:00Z \
+  --admitted-at 2026-06-26T18:31:00Z \
+  --expected-root "$(python3 -c 'import json; print(json.load(open("refs/main.json"))["root_cid"])')"
+uv run python scripts/verify.py
+#+end_src
 
 若要從零重建 bootstrap snapshot，才使用：
 
@@ -91,6 +107,13 @@ manifests/bootstrap-2026-06-26.json
 #+end_quote
 
 這不是把 CTL 當成 production security boundary，也不是把 twisted-Yetter 主線研究正式搬入 CTL。
+
+第二個 transition 記錄：
+
+#+begin_quote
+在至少 5-10 個低風險 meta decisions 可 replay 前，維持 shadow mode，不把 twisted-Yetter
+主線研究 claim / computation result 當成 CTL source of truth。
+#+end_quote
 
 * Graduation Gate
 
