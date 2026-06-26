@@ -29,6 +29,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round13_conformance.py=
 - =tests/test_round14_conformance.py=
 - =tests/test_round15_conformance.py=
+- =tests/test_round16_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -113,6 +114,10 @@ Round 15 conformance tests additionally cover:
 - JSON =true= is not accepted as integer policy version =1=
 - malformed policy action entries return =InvalidHistory= instead of host exceptions
 - malformed binding op kind returns =InvalidHistory= instead of host exceptions
+
+Round 16 conformance tests additionally cover:
+
+- malformed =agent/run-receipt/1.status= arrays/objects return =InvalidHistory= instead of host exceptions
 
 * Reproduction
 

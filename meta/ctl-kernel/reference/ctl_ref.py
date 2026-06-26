@@ -327,6 +327,7 @@ def validate_run_receipt_revision(rev: dict[str, Any]) -> None:
     die_unless(rev["revision_kind"] == "run-receipt", "run receipt kind")
     payload = rev["payload"]
     check_keys(payload, {"status"}, {"command", "started_at", "finished_at"})
+    die_unless(isinstance(payload["status"], str), "bad run receipt status")
     die_unless(payload["status"] in {"failed", "ok"}, "bad run receipt status")
     if "command" in payload:
         die_unless(isinstance(payload["command"], list), "run receipt command must be array")

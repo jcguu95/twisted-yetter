@@ -1848,6 +1848,7 @@ Every validator MUST declare its supported semantic surface:
     "ctl-governance/role-binding/1"
   ],
   "supported_payload_profiles": [
+    "agent/run-receipt/1",
     "ctl-governance/policy-set/1",
     "ctl-governance/role-binding/1",
     "ctl-data/opaque-json/1"
@@ -2333,6 +2334,8 @@ Examples of future basis identifiers:
 - =researchctl/reproduction/1=
 
 v0.1.1 only requires the registry mechanism; concrete project profiles may define additional supported basis predicates。
+
+For the reference implementation, =agent/run-receipt/1= is a weak structural predicate. It only asserts that the evidence CID resolves to a Revision whose =revision_kind= is =run-receipt= and whose =payload_profile= is =agent/run-receipt/1=. It does not assert success, fresh context, independence, target-specific review, or reproduction. Policies that require those stronger meanings MUST use stronger basis identifiers in a later profile.
 
 ** Static evidence predicate work
 
