@@ -1,0 +1,102 @@
+#+TITLE: Toy Closed Suite
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n55-toy-closed-suite=
+- verdict: =pass=
+- route: do not route to =n60-failure-triage=
+- claim level: =computed evidence= for exact formal toy-suite outputs only
+- artifact: =experiments/results/toy-suite/n55-toy-closed-suite.json=
+- input core: =wiki/understandings/invariant-core-v0.org=
+- upstream gates:
+  - =wiki/understandings/ordinary-control-gate.org=
+  - =wiki/understandings/presentation-invariance-gate.org=
+
+This note does not claim a numerical twisted Yetter invariant.  The current
+n35 core still has =value_status: inconclusive= because the n30 formula
+contract leaves the numerical coefficients, closed normalization, and signature
+phase =SOURCE NEEDED=.
+
+* Inputs Read
+
+- =AGENTS.md=
+- =ctl-dogfood/graphs/computation-first-v2.json=, node
+  =n55-toy-closed-suite=
+- =wiki/understandings/formula-contract-v0.org=
+- =wiki/understandings/invariant-core-v0.org=
+- =wiki/understandings/ordinary-control-gate.org=
+- =wiki/understandings/presentation-invariance-gate.org=
+- =src/twisted_yetter/invariant.py=
+- =src/twisted_yetter/linking_matrix.py=
+
+* Suite Scope
+
+The n55 suite evaluates the current exact formal n35 matrix statistic on:
+
+- =S4=
+- =CP2=
+- =anti-CP2=
+- =S2xS2=
+- =CP2#anti-CP2=
+- =CP2#CP2=
+
+For each presentation, all mod-2 decorations in the current 2-handle basis are
+generated in lexicographic order.  The all-zero decoration is visible as the
+ordinary formal path.  Nonzero decorations are visible through:
+
+- =decoration_mod2=
+- =ordinary_path_selected: false=
+- =theta= entries in =component_colors=
+- positive =theta_component_count=
+- exact =alpha_q_alpha_mod2=
+
+All official outputs are JSON exact: no floating point values are used.
+
+* Computed Classifications
+
+The artifact records the following exact formal comparisons:
+
+- =CP2= versus =anti-CP2= at =alpha=0= differ as recorded presentation
+  metadata: signature and framing sign differ.  This remains numerical-value
+  unsupported.
+- The two single-axis nontrivial decorations on =S2xS2= have equal formal
+  projections in this v0 schema.  This is not an unmarked closed invariant
+  claim.
+- The two single-axis nontrivial decorations on =CP2#anti-CP2= have equal
+  formal projections because =alpha^T Q alpha mod 2= sees both axes equally.
+- On =CP2#CP2=, a single-axis decoration and the diagonal decoration differ in
+  the formal projection: =theta_component_count= and =alpha_q_alpha_mod2=
+  differ.
+
+These are =experimental matrix-level= classifications, not theorem-level
+Kirby-invariant statements and not exotic detection evidence.
+
+* Acceptance Mapping
+
+- all outputs are exact: =PASS=
+- trivial and nontrivial decorations are visible in the artifact schema:
+  =PASS=
+- computed equalities and differences are classified without overclaiming:
+  =PASS=
+
+The absence of numerical invariant values is not an n55 failure under the n30
+and n35 contract.  The suite passes as a formal exact toy suite with
+=value_status: inconclusive=.
+
+* Reproduction
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+The artifact records the intended n55 claim.  The full pytest run is the
+acceptance check for this node.
+
+Observed result on 2026-06-26:
+
+#+begin_src text
+61 passed
+#+end_src

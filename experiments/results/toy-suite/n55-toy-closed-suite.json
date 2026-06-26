@@ -1,0 +1,265 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "tests/test_toy_closed_suite.py"
+  ],
+  "command": "uv run python -m pytest tests/test_toy_closed_suite.py",
+  "exact_output": {
+    "claim_boundary": "exact formal toy-suite outputs only; no numerical twisted Yetter closed 4-manifold invariant is claimed",
+    "comparisons": [
+      {
+        "case_id": "CP2-vs-anti-CP2-alpha0",
+        "classification": "recorded-presentation-metadata-difference; numerical value unsupported",
+        "equal": false,
+        "left": {
+          "case_id": "CP2",
+          "decoration_mod2": [
+            0
+          ],
+          "signature": 1
+        },
+        "right": {
+          "case_id": "anti-CP2",
+          "decoration_mod2": [
+            0
+          ],
+          "signature": -1
+        }
+      },
+      {
+        "case_id": "S2xS2-axis-decorations",
+        "classification": "formal-projection-equality; not an unmarked closed invariant claim",
+        "equal": true,
+        "left": {
+          "alpha_q_alpha_mod2": 0,
+          "decoration_mod2": [
+            0,
+            1
+          ],
+          "theta_component_count": 1
+        },
+        "right": {
+          "alpha_q_alpha_mod2": 0,
+          "decoration_mod2": [
+            1,
+            0
+          ],
+          "theta_component_count": 1
+        }
+      },
+      {
+        "case_id": "CP2#anti-CP2-axis-decorations",
+        "classification": "formal-projection-equality; mod-2 alpha_q_alpha sees both axes equally",
+        "equal": true,
+        "left": {
+          "alpha_q_alpha_mod2": 1,
+          "decoration_mod2": [
+            1,
+            0
+          ],
+          "theta_component_count": 1
+        },
+        "right": {
+          "alpha_q_alpha_mod2": 1,
+          "decoration_mod2": [
+            0,
+            1
+          ],
+          "theta_component_count": 1
+        }
+      },
+      {
+        "case_id": "CP2#CP2-axis-vs-diagonal",
+        "classification": "formal-projection-difference; experimental matrix-level signal only",
+        "equal": false,
+        "left": {
+          "alpha_q_alpha_mod2": 1,
+          "decoration_mod2": [
+            1,
+            0
+          ],
+          "theta_component_count": 1
+        },
+        "right": {
+          "alpha_q_alpha_mod2": 0,
+          "decoration_mod2": [
+            1,
+            1
+          ],
+          "theta_component_count": 2
+        }
+      }
+    ],
+    "node_id": "n55-toy-closed-suite",
+    "route": "do-not-route-to-n60",
+    "toy_cases": [
+      {
+        "all_outputs_exact": true,
+        "case_id": "S4",
+        "decoration_count": 1,
+        "decorations_mod2": [
+          []
+        ],
+        "determinant": 1,
+        "nontrivial_decorations_visible": false,
+        "parity": "even",
+        "rank": 0,
+        "signature": 0,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      },
+      {
+        "all_outputs_exact": true,
+        "case_id": "CP2",
+        "decoration_count": 2,
+        "decorations_mod2": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "determinant": 1,
+        "nontrivial_decorations_visible": true,
+        "parity": "odd",
+        "rank": 1,
+        "signature": 1,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      },
+      {
+        "all_outputs_exact": true,
+        "case_id": "anti-CP2",
+        "decoration_count": 2,
+        "decorations_mod2": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "determinant": -1,
+        "nontrivial_decorations_visible": true,
+        "parity": "odd",
+        "rank": 1,
+        "signature": -1,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      },
+      {
+        "all_outputs_exact": true,
+        "case_id": "S2xS2",
+        "decoration_count": 4,
+        "decorations_mod2": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "determinant": -1,
+        "nontrivial_decorations_visible": true,
+        "parity": "even",
+        "rank": 2,
+        "signature": 0,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      },
+      {
+        "all_outputs_exact": true,
+        "case_id": "CP2#anti-CP2",
+        "decoration_count": 4,
+        "decorations_mod2": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "determinant": -1,
+        "nontrivial_decorations_visible": true,
+        "parity": "odd",
+        "rank": 2,
+        "signature": 0,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      },
+      {
+        "all_outputs_exact": true,
+        "case_id": "CP2#CP2",
+        "decoration_count": 4,
+        "decorations_mod2": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "determinant": 1,
+        "nontrivial_decorations_visible": true,
+        "parity": "odd",
+        "rank": 2,
+        "signature": 2,
+        "trivial_decoration_visible": true,
+        "value_status": "inconclusive"
+      }
+    ],
+    "value_status": "inconclusive",
+    "verdict": "pass"
+  },
+  "git": {
+    "commit": "e3017d00a0a88eced462264695eca6fe5b6d2384",
+    "dirty": true
+  },
+  "input_hash": "4882722b08e874e4c962189a9057735462b22d91788cb52f9346c1edf586fcaf",
+  "log_references": [],
+  "notes": [
+    "n55 computes exact formal toy-suite outputs for the current n35 matrix-level core.",
+    "All numerical invariant values remain unsupported/inconclusive under the n30 contract.",
+    "The recorded equalities and differences are experimental formal classifications only."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
