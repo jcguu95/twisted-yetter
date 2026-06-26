@@ -1,0 +1,3536 @@
+#+TITLE: CTL Kernel v0.1.1 Protocol Freeze Candidate
+#+AUTHOR: Codex
+#+DATE: 2026-06-25
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 摘要
+
+這份文件把原本暫稱為 =ResearchCTL= 的系統重新分層，並吸收 Chronicle-side 對 exact bytes、exact authority、exact transition 的審查意見。
+
+核心修正是：
+
+#+begin_quote
+=ResearchCTL= 不應該是 kernel 的名字。
+
+真正的核心是一個 domain-neutral 的 =CTL Kernel=。
+
+=ResearchCTL= 只是建立在這個 kernel 上的一個 research profile。
+#+end_quote
+
+本文仍把這個核心稱為 Chronicle-aligned，意思是它可作為未來完整 Chronicle protocol 的 bootstrap substrate；它不是完整 Chronicle protocol 本身。
+
+這個 kernel 不只適用於研究，也適用於軟體工程、公司治理、法遵、產品決策、個人知識管理、多 agent 協作、長期任務紀錄等場景。
+
+它真正想解決的不是「研究筆記怎麼寫」，而是：
+
+- 如何把工作狀態封裝成 immutable objects。
+- 如何讓正式狀態只能透過可驗證的 admission transition 改變。
+- 如何區分「已記錄」、「目前有效」、「被拒絕」、「只是引用」。
+- 如何用 policy / authority / binding / review evidence 降低 agent 自己說了算的風險。
+- 如何讓 context selection 由 admitted state 投影出來，而不是靠 agent 記憶或 prompt 善意。
+
+本文件目前是 =v0.1.1 Protocol Freeze Candidate=。它的目標不是功能完整，而是把最小可實作、可測試、可 dogfood 的核心語義釘住。正式 freeze 前仍需要 golden bytes / golden CID / reference validator fixtures。
+
+* 命名與分層
+
+** Kernel 名稱
+
+本文建議 general core 的 protocol 名稱稱為：
+
+#+begin_example
+CTL Kernel
+#+end_example
+
+其中：
+
+- =CTL= 強調 control layer、context/task/state control。
+- =Kernel= 表示它只定義最小共同語義，不承擔特定領域 ontology。
+- =Chronicle-aligned= 表示它遵守 immutable record、provenance、audit trail 的方向，但不宣稱自己已經是完整 Chronicle。
+
+進入 hashed bytes 的 machine identifiers MUST NOT 使用還在變動的 branding。
+
+v0.1.1 固定：
+
+#+begin_example
+kernel_profile:       ctl-kernel/1
+Revision profile:     ctl/revision/1
+AdmissionBatch:       ctl/admission-batch/1
+ProjectStateRoot:     ctl/project-state-root/1
+object domain:        "ctl-object-v1\0"
+blob domain:          "ctl-blob-v1\0"
+#+end_example
+
+** ResearchCTL 的位置
+
+=ResearchCTL= 應該改成 profile 或 application layer：
+
+#+begin_example
+CTL Kernel
+  ├─ Mandatory Governance Profile
+  ├─ ResearchCTL Profile
+  ├─ Software Project Profile
+  ├─ Company Operations Profile
+  ├─ Personal Knowledge Profile
+  └─ Agent Coordination Profile
+#+end_example
+
+其中 =ResearchCTL Profile= 可以定義：
+
+- Claim
+- Lemma
+- Experiment
+- Literature Note
+- Negative Result
+- Candidate Pair
+- Computation Run
+- Reproducibility Contract
+- Lab Note Snapshot
+
+但這些都不是 kernel primitive。
+
+=Mandatory Governance Profile= 是例外中的例外：它不是 structural kernel primitive，但 v0.1.1 validator MUST 實作它，否則無法對 AdmissionBatch 的 authority 做出跨實作一致判斷。
+
+** Twisted-Yetter 專案的位置
+
+目前的 twisted-yetter 專案應該是：
+
+#+begin_example
+CTL Kernel
+  └─ ResearchCTL Profile
+      └─ Twisted-Yetter Project Profile
+#+end_example
+
+Twisted-Yetter Project Profile 才需要知道：
+
+- Kirby diagram
+- 4-manifold pair
+- exotic pair
+- Crane-Yetter / Yetter invariant
+- homological twisting
+- modular tensor category
+- exact arithmetic
+- normalization convention
+
+Kernel 不應該知道這些詞。
+
+** 為什麼這個修正重要
+
+如果 kernel 被命名與設計成 =ResearchCTL=，會產生兩個問題：
+
+1. 它看起來只服務研究專案，導致 software/company/legal/product use case 被誤排除。
+2. 它會誘惑我們把 research ontology 放進 protocol core，讓 core 越來越肥，越來越難驗證。
+
+因此 v0.1.1 應明確採用：
+
+#+begin_quote
+domain-neutral kernel + domain-specific profiles
+#+end_quote
+
+* 規範語言
+
+本文使用以下規範詞：
+
+- MUST：實作或資料必須滿足，否則不合規。
+- MUST NOT：實作或資料不得如此，否則不合規。
+- SHOULD：強烈建議；若不遵守，實作必須能解釋理由。
+- SHOULD NOT：強烈不建議。
+- MAY：允許但非必要。
+
+中文敘述中的「必須」、「不得」、「應該」、「可以」分別對應以上語氣。
+
+* Scope
+
+** Kernel 負責的事
+
+Kernel MUST 定義：
+
+- canonical object encoding
+- CID 計算規則
+- immutable object / revision 的基本格式
+- ProjectStateRoot
+- AdmissionBatch
+- binding semantics
+- recorded semantics
+- policy truth source
+- minimal transition function
+- validation invariants
+- canonical control directory 的基本寫入權責
+- mandatory governance evaluator interface
+
+** Kernel 不負責的事
+
+Kernel MUST NOT 定義：
+
+- research claim ontology
+- software issue workflow
+- company department structure
+- legal evidence taxonomy
+- mathematical proof standard
+- UI layout
+- natural language summary policy
+- agent personality
+- LLM prompt strategy
+- filesystem confidentiality
+- execution sandbox enforcement
+
+這些都屬於 profile 或 application layer。
+
+** Profile 負責的事
+
+Profile MAY 定義：
+
+- domain object types
+- domain-specific payload validation rules
+- domain-specific review criteria
+- view projection rules
+- recommended context selection
+- CLI subcommands
+- report templates
+- migration utilities
+
+Profile MUST NOT 修改 kernel 的 CID、recorded、bindings、admission、state transition semantics。
+
+Profile MUST NOT 修改 mandatory governance evaluator 的 rule combination semantics。
+
+Profile MAY provide versioned evidence-basis predicates。
+
+Profile MUST NOT add resource selector types beyond those enumerated by =ctl-governance/policy-set/1= in this spec。Future selector types require a new Governance Profile version。
+
+* 核心問題
+
+CTL Kernel 的核心問題可以寫成：
+
+#+begin_quote
+給定一個專案目前正式狀態 =R0=，以及一個 admission batch =B=，
+如何純函數式地判斷 =B= 是否可以被接受，並產生新的正式狀態 =R1=？
+#+end_quote
+
+因此 v0.1.1 的中心 API 是：
+
+#+begin_src text
+validate_transition(env, resolver, validated_parent_state, B) -> child_state | ValidationResult
+#+end_src
+
+其中 child root MUST be byte-deterministic：相同的 =ValidationEnvironment= semantics、相同的 validated parent state、相同的 canonical =B= bytes、相同的 resolver CID mapping，在所有合規實作中 MUST 產生 byte-identical child root。
+
+=ValidationEnvironment= 是 validation 的 semantic input，不是 ambient process state。它至少包含 validator capability declaration、payload-profile validator registry、evidence-basis predicate registry。它的細節見下文。
+
+本機 publish 不是純函數，應另有：
+
+#+begin_src text
+commit_transition(expected_root, proposal_or_batch_draft, authenticated_local_context) -> R1 | CommitError
+#+end_src
+
+=commit_transition= 負責建立 final AdmissionBatch、lock、local actor context、寫入 object store、更新 =refs/main=。
+
+* Threat Model 與 Enforcement 邊界
+
+** 能防什麼
+
+v0.1.1 目標防止：
+
+- agent 憑自然語言宣稱「我做了 X」但沒有 object evidence。
+- agent 偷偷改 active state 而沒有 AdmissionBatch。
+- policy truth source 混亂。
+- recorded / active / referenced 混淆。
+- reviewer 的自然語言意見被誤當成 governance decision。
+- context view 自行生成策略而非投影 admitted state。
+- 同一 logical_id 在同一 batch 中被多次修改。
+- unknown policy/action 被 permissive fallback 接受。
+- non-canonical object encoding 導致 CID 不穩定。
+
+** 不能防什麼
+
+v0.1.1 不保證防止：
+
+- 惡意使用者直接改 filesystem 並刪除歷史。
+- OS-level rollback。
+- Git history rewrite。
+- hardware compromise。
+- LLM 在非受控工具外的幻覺。
+- reviewer collusion。
+- policy 本身設計錯誤。
+- ambient filesystem access。
+- prompt/context confidentiality。
+- model/tool execution attestation。
+
+這些需要 signature、remote append-only log、transparency service、backup、attestation、capability runner 或更強執行沙盒；它們不屬於 v0.1.1。
+
+v0.1.1 controls canonical admission, not ambient read access。
+
+ContextManifest is not an access-control boundary unless an external runner enforces it。
+
+** Lock 的語義
+
+Filesystem lock 只防止 concurrent writers race。
+
+Lock MUST NOT 被描述成 rollback protection。
+
+Rollback protection 是另外一層問題。
+
+* Object-First 原則
+
+** 人類格式不是 source of truth
+
+Org / Markdown / Typst / PDF / HTML MAY 作為：
+
+- report rendering
+- human-readable attachment
+- exported view
+- legacy snapshot
+- explanation artifact
+
+但它們 SHOULD NOT 是正式狀態的 source of truth。
+
+正式狀態應該來自 admitted objects。
+
+** 所有重要資訊都應物件化
+
+以下資訊 SHOULD 被 object 化：
+
+- 誰做了什麼
+- 在什麼環境做
+- 用了哪些 input
+- 產生哪些 output
+- 假設是什麼
+- 哪些檔案被讀取
+- 哪些工具被執行
+- 哪些 review 發生
+- 哪些 policy 當時 active
+- 哪些 state binding 被改變
+- 哪些 context 被 materialized
+
+** Append-only-ish
+
+系統的 ideal 是 append-only。
+
+但 v0.1.1 承認普通 filesystem/Git repo 不是真正 append-only storage。
+
+因此 v0.1.1 的語義是：
+
+- objects immutable by CID
+- state root 只透過 AdmissionBatch 前進
+- refs/main 由 =ctl admit= 寫入
+- conforming commands MUST NOT overwrite an existing CID path with different bytes
+- check command MUST 能偵測 object CID mismatch
+
+真正的 append-only guarantee 延後到後續版本。
+
+* Canonical Encoding
+
+** Encoding 格式
+
+v0.1.1 使用 CTL Canonical JSON Profile 作為 stored object encoding。這個 profile 以 JSON 為基礎，但不是「任意 JSON parser 的輸出」。
+
+Authoring input MAY be pretty-printed or non-canonical JSON. =ctl seal= MAY parse such input as a semantic value and emit canonical bytes。
+
+Stored object bytes MUST already be exact canonical bytes。
+
+JSON examples in this document are semantic examples, not wire bytes, unless explicitly labeled as golden canonical bytes。
+
+合規 encoder/decoder MUST 滿足：
+
+- Input bytes MUST be UTF-8 without BOM。
+- JSON object keys MUST be unique；duplicate keys MUST be rejected before canonicalization。
+- Structural schemas MUST be closed；unknown top-level fields MUST be rejected unless a schema explicitly provides a =metadata= map。
+- Object keys MUST be sorted by UTF-8 byte lexical order of the key string。
+- Strings MUST contain Unicode scalar values only；lone surrogate MUST be rejected。
+- Unicode normalization MUST NOT be applied by the encoder。
+- Canonical string output MUST use shortest JSON escapes required for validity；solidus =/= MUST NOT be escaped。
+- Escape table is fixed:
+  - =U+0022= MUST encode as =\"=。
+  - =U+005C= MUST encode as =\\=。
+  - =U+0008= MUST encode as =\b=。
+  - =U+000C= MUST encode as =\f=。
+  - =U+000A= MUST encode as =\n=。
+  - =U+000D= MUST encode as =\r=。
+  - =U+0009= MUST encode as =\t=。
+  - Other =U+0000..U+001F= MUST encode as lowercase =\u00xx=。
+  - Other Unicode scalar values MUST be emitted as UTF-8, not escaped。
+- Numbers MUST be integers only。
+- Integer grammar MUST be =0 | -?[1-9][0-9]*=。
+- =-0= MUST be rejected。
+- Leading zero, plus sign, exponent notation, decimal point, NaN, and Infinity MUST be rejected。
+- JSON integers MUST be within =[-9007199254740991, 9007199254740991]=。
+- Protocol-level exact arithmetic values outside that range MUST be encoded as decimal strings or tagged objects in profile payloads, not as JSON numbers。
+- Timestamps MUST use exact UTC grammar =YYYY-MM-DDTHH:MM:SSZ= when they appear；fractional seconds and offsets other than =Z= are invalid in v0.1.1。
+- Timestamp year MUST be in =0001..9999=。
+- Timestamp date MUST be valid proleptic Gregorian calendar date。
+- Timestamp hour MUST be =00..23=, minute =00..59=, second =00..59=。
+- Leap second value =60= is invalid in v0.1.1。
+- Insignificant whitespace MUST NOT appear in canonical bytes。
+- Canonical bytes MUST NOT end with a trailing newline。
+- Kernel cannot mechanically detect arbitrary binary-looking strings. Profile-defined artifact fields MUST represent binary artifacts through blob descriptors rather than base64 or raw binary-in-string encodings。
+
+** Array ordering
+
+JSON array order is meaningful by default。
+
+但若某欄位語義是 set，該欄位規格 MUST 明確要求 sorted unique。
+
+例如：
+
+- =parents= MUST be sorted unique by CID。
+- =recorded_revisions= MUST be sorted unique by CID。
+- =binding_ops= MUST be sorted by =logical_id=。
+- =evidence= MUST be sorted unique by each full evidence entry's canonical bytes。
+
+Comparator rules:
+
+- strings sort by UTF-8 byte lexical order。
+- CIDs sort by their ASCII string bytes。
+- objects in sorted arrays sort by their full canonical bytes。
+- =binding_ops= sort by =logical_id= UTF-8 bytes; duplicate =logical_id= is invalid。
+
+** CID
+
+Object CID MUST be computed from canonical bytes。
+
+Structural objects MUST NOT contain a field that claims to store the object's own CID, such as =self_cid= or =revision_id=。
+
+Typed references MAY use fields named =cid= when the schema says they point to another object。
+
+CID computation MUST include the object domain separator：
+
+#+begin_example
+domain_separator = ASCII bytes for "ctl-object-v1" followed by one NUL byte 0x00
+cid = "ctlobj-sha256:" + hex(SHA256(domain_separator || canonical_bytes))
+#+end_example
+
+CID strings MUST be:
+
+#+begin_example
+"ctlobj-sha256:" + exactly 64 lowercase hexadecimal characters
+#+end_example
+
+Blob CID strings MUST be:
+
+#+begin_example
+"ctlblob-sha256:" + exactly 64 lowercase hexadecimal characters
+#+end_example
+
+Examples in this prose may use placeholder strings such as =ctlobj-sha256:policy-cid= for readability; golden vectors MUST use valid CID strings。
+
+v0.1.1 MAY later replace the string format with multihash/CIDv1, but that would require an explicit kernel migration protocol。
+
+** CID 自參照禁止
+
+Core structural schemas are closed, so self-CID fields are mechanically invalid rather than semantically guessed。
+
+允許 references to other CIDs。
+
+若需要在 human view 中顯示 object 的 CID，該 CID 是 projection metadata，不是 hashed object payload。
+
+** Resource limits
+
+Kernel profile publishes protocol limits so validators do not disagree about validity。
+
+v0.1.1 constants：
+
+- maximum canonical object bytes: 1,048,576
+- maximum nesting depth: 64
+- maximum object keys per JSON object: 8,192
+- maximum ProjectStateRoot active bindings: 4,096
+- maximum array length: 16,384
+- maximum string UTF-8 bytes: 262,144
+- maximum =project_id= bytes: 128
+- maximum =logical_id= bytes: 256
+- maximum actor / role / basis identifier bytes: 256
+- maximum =recorded_revisions= per batch: 4,096
+- maximum =binding_ops= per batch: 1,024
+- maximum =evidence= entries per batch: 4,096
+- maximum =principal_claim.role_bindings= entries: 64
+- maximum PolicySet rules: 1,024
+- maximum actions per rule: 16
+- maximum resource selectors per rule: 256
+- maximum required evidence basis entries per rule: 64
+- maximum derived AuthorizationRequests per batch: 5,121
+- maximum static authorization match work per batch: 1,048,576
+- maximum static evidence predicate work per batch: 65,536
+
+Implementation MAY refuse larger workloads earlier as local-resource-refusal, but MUST distinguish that from protocol-invalid。
+
+The 5,121 AuthorizationRequest limit is derived from:
+
+- 4,096 =revision.record= requests
+- 1,024 binding operation requests
+- 1 =policy.replace= request
+
+Evidence predicate work is a protocol-level static measure, not the number of predicate function calls an implementation happens to make after short-circuiting。
+
+Depth calculation:
+
+- scalar value depth is 0。
+- array/object depth is 1 plus maximum child depth。
+- empty array/object depth is 1。
+- depth is measured on decoded JSON value before canonical emission。
+
+** ID grammar
+
+All protocol identifiers including =project_id=, =logical_id=, =actor_id=, =role_id=, =basis=, =profile=, =kernel_profile=, and =payload_profile= MUST use ASCII URI-like identifiers:
+
+#+begin_example
+[a-z0-9][a-z0-9._:/-]*
+#+end_example
+
+Kernel-reserved logical ids use the =sys:= prefix。
+
+** Versioned protocol identifiers
+
+The following identifiers are semantic protocol identifiers and MUST be exact registered versioned identifiers:
+
+- =profile=
+- =kernel_profile=
+- =payload_profile=
+- =basis=
+
+v0.1.1 accepts the general =id= grammar as lexical syntax, but semantic registries MUST NOT treat unversioned aliases such as =review=, =fresh=, or =vendor/foo= as supported profile or basis identifiers。
+
+Recommended registered identifier shape is:
+
+#+begin_example
+<namespace>/<name>/<positive-decimal-version>
+#+end_example
+
+Examples:
+
+- =ctl/revision/1=
+- =ctl-kernel/1=
+- =ctl-governance/policy-set/1=
+- =agent/run-receipt/1=
+
+* Kernel Object Types
+
+v0.1.1 kernel 只有少數 structural object types。
+
+** 必要 object types
+
+Kernel MUST define：
+
+- =Revision=
+- =AdmissionBatch=
+- =ProjectStateRoot=
+
+** Raw blob identity
+
+v0.1.1 does not introduce BlobDescriptor or ExternalRef as structural object types。
+
+For binary artifacts, profiles MAY use a Revision payload containing a canonical descriptor with raw blob digest:
+
+#+begin_src json
+{
+  "blob_cid": "ctlblob-sha256:...",
+  "size": 12345,
+  "media_type": "application/pdf"
+}
+#+end_src
+
+The raw blob CID is computed as:
+
+#+begin_example
+blob_cid = "ctlblob-sha256:" + hex(SHA256(ASCII "ctl-blob-v1" || 0x00 || raw_bytes))
+#+end_example
+
+Location hints MUST live in local sidecar/index data, not in canonical artifact descriptor payloads, unless the location itself is the evidence subject。
+
+** 非 kernel primitive
+
+以下不屬於 kernel primitive：
+
+- Claim
+- Review
+- Plan
+- RunStart
+- RunReceipt
+- ContextManifest
+- View
+- AlternativeSet
+- RoleBinding
+- PolicySet
+- BlobDescriptor
+- ExternalRef
+
+但它們可以作為 profile-level Revision payload。
+
+注意：=PolicySet= 與 =RoleBinding= 雖然是 authority evaluation 所需資料，但它們仍然是 Revision payload，不是 structural object type。
+
+* Normative Schema Conventions
+
+** Closed schemas
+
+All schemas in v0.1.1 are closed by default。
+
+Unknown fields MUST be rejected unless the schema explicitly defines a =metadata= object。
+
+=metadata=, when present, is hashed payload data but MUST NOT affect kernel semantics。
+
+** Nullability
+
+Fields are non-null unless explicitly marked nullable。
+
+Optional fields MAY be absent。
+
+If a field is optional, =null= is still invalid unless explicitly marked nullable。
+
+** Common scalar types
+
+=object_cid=:
+
+#+begin_example
+ctlobj-sha256:<64 lowercase hex chars>
+#+end_example
+
+=blob_cid=:
+
+#+begin_example
+ctlblob-sha256:<64 lowercase hex chars>
+#+end_example
+
+=timestamp=:
+
+#+begin_example
+YYYY-MM-DDTHH:MM:SSZ
+#+end_example
+
+=id=:
+
+#+begin_example
+[a-z0-9][a-z0-9._:/-]*
+#+end_example
+
+** Revision schema
+
+Required fields：
+
+- =profile=: exactly =ctl/revision/1=
+- =kernel_profile=: exactly supported =ctl-kernel/1= in v0.1.1
+- =project_id=: id
+- =logical_id=: id
+- =revision_kind=: id
+- =parents=: sorted unique array of object_cid
+- =payload_profile=: id
+- =payload=: canonical JSON object
+- =created_at=: timestamp
+- =created_by=: object with required =actor_id=
+
+Optional fields：
+
+- none in structural schema
+
+Rules：
+
+- =parents= array MAY be empty。
+- =payload= MAY have profile-defined closed schema。
+- =created_by.actor_id= is provenance, not authority。
+
+** ProjectStateRoot schema
+
+Required fields：
+
+- =profile=: exactly =ctl/project-state-root/1=
+- =kernel_profile=: exactly supported =ctl-kernel/1= in v0.1.1
+- =project_id=: id
+- =parent=: nullable object_cid
+- =bindings=: object map from logical_id to object_cid
+- =transition=: object_cid
+
+Optional fields：
+
+- none
+
+Forbidden fields include：
+
+- =created_at=
+- =created_by=
+- =implementation_version=
+- =active_policy=
+- =active_heads=
+
+Rules：
+
+- =parent= MUST be null only for genesis root。
+- =bindings= keys MUST be sorted by canonical JSON object ordering。
+- =bindings= MUST contain =sys:policy= for every accepted state。
+
+** AdmissionBatch schema
+
+Required fields：
+
+- =profile=: exactly =ctl/admission-batch/1=
+- =kernel_profile=: exactly supported =ctl-kernel/1= in v0.1.1
+- =project_id=: id
+- =parent_root=: nullable object_cid
+- =recorded_revisions=: sorted unique array of object_cid
+- =binding_ops=: sorted unique array by =logical_id=
+- =evidence=: sorted unique array by full canonical evidence entry bytes
+- =principal_claim=: PrincipalClaim object
+- =submitted_by=: SubmittedBy object
+- =admitted_at=: timestamp
+
+Optional fields：
+
+- none
+
+Rules：
+
+- =recorded_revisions= and =binding_ops= MUST NOT both be empty。
+- =parent_root= MUST be null only for genesis batch。
+- =admission_request= is not a core field in v0.1.1；proposal links belong in evidence or profile payloads。
+
+** Binding operation schemas
+
+Set operation required fields：
+
+- =op=: exactly =set=
+- =logical_id=: id
+- =expected=: Expected object
+- =new_cid=: object_cid
+
+Set operation rules：
+
+- If =expected.state = bound=, =new_cid= MUST differ from =expected.cid=。
+- A binding =set= that leaves the binding map unchanged is an invalid no-op。
+
+Remove operation required fields：
+
+- =op=: exactly =remove=
+- =logical_id=: id
+- =expected=: Expected object
+
+Remove operation forbidden fields：
+
+- =new_cid=
+
+** Expected schema
+
+Absent expected：
+
+#+begin_src json
+{
+  "state": "absent"
+}
+#+end_src
+
+Bound expected：
+
+#+begin_src json
+{
+  "state": "bound",
+  "cid": "ctlobj-sha256:..."
+}
+#+end_src
+
+Rules：
+
+- =state= enum is =absent | bound=。
+- =cid= is required iff =state = bound=。
+- =cid= is forbidden iff =state = absent=。
+
+** Evidence entry schema
+
+Required fields：
+
+- =target=: EvidenceTarget object
+- =basis=: id
+- =cid=: object_cid
+
+Optional fields：
+
+- none
+
+Allowed targets：
+
+#+begin_src json
+{
+  "kind": "recorded_revision",
+  "cid": "ctlobj-sha256:..."
+}
+#+end_src
+
+#+begin_src json
+{
+  "kind": "binding_op",
+  "logical_id": "claim:example"
+}
+#+end_src
+
+Rules：
+
+- =target.kind = batch= is not allowed in v0.1.1。
+- If the same evidence object supports multiple operations, the AdmissionBatch MUST repeat the evidence entry once per target。
+
+** PrincipalClaim schema
+
+Required fields：
+
+- =actor_id=: id
+- =role_bindings=: sorted unique array of object_cid
+
+Optional fields：
+
+- =authentication_assurance=: id
+
+Rules：
+
+- =authentication_assurance= is non-semantic provenance。
+- Mandatory Governance Profile MUST NOT use =authentication_assurance= to determine historical validity。
+- In non-genesis AdmissionBatch validation, every listed role binding MUST be active in parent state。
+- An empty non-genesis =role_bindings= array is syntactically valid but authorizes no ordinary rule unless a later governance profile explicitly changes subject semantics。
+- In a Genesis AdmissionBatch, =role_bindings= MUST be =[]=。Genesis authority comes only from local external trust acceptance, not ordinary active bindings。
+- Invalid or inactive listed role binding MUST fail closed；it MUST NOT be ignored。
+
+** SubmittedBy schema
+
+Required fields：
+
+- =actor_id=: id
+
+Optional fields：
+
+- none
+
+Rules：
+
+- =submitted_by= is provenance only。
+
+** PolicySet payload schema
+
+Required fields：
+
+- =version=: integer exactly =1=
+- =default=: exactly =deny=
+- =rules=: sorted unique array of PolicyRule objects by full canonical rule bytes
+
+Optional fields：
+
+- none
+
+Forbidden fields：
+
+- =implementation_version=
+- =validated_by=
+
+Rules：
+
+- PolicySet payload is closed schema。
+- Implementation provenance belongs in Revision envelope or receipts, not PolicySet payload。
+
+** PolicyRule schema
+
+Required fields：
+
+- =effect=: exactly =allow=
+- =subject=: PolicySubject object
+- =actions=: sorted unique array of action ids
+- =resources=: sorted unique array of ResourceSelector objects by full canonical selector bytes
+- =required_evidence_basis=: sorted unique array of basis ids
+
+Optional fields：
+
+- none
+
+Allowed actions：
+
+- =revision.record=
+- =binding.set=
+- =binding.remove=
+- =policy.replace=
+
+** PolicySubject schema
+
+Required fields：
+
+- =role_id=: id
+
+Optional fields：
+
+- none
+
+** ResourceSelector schema
+
+Each ResourceSelector MUST use exactly one of：
+
+- =logical_id=
+- =logical_id_prefix=
+- =payload_profile=
+- =revision_kind=
+- =role_binding=
+
+=logical_id=, =logical_id_prefix=, =payload_profile=, and =revision_kind= values are ids。
+
+=role_binding= value is a closed object:
+
+#+begin_src json
+{
+  "role_id": "role:reviewer",
+  "actor_id": "actor:alice"
+}
+#+end_src
+
+Required fields:
+
+- =role_id=: id
+
+Optional fields:
+
+- =actor_id=: id
+
+Rules:
+
+- =role_binding= selector matches only a RoleBinding Revision resource。
+- =role_id= MUST equal the target RoleBinding payload's =role_id=。
+- If present, =actor_id= MUST equal the target RoleBinding payload's =actor_id=。
+- This is the only payload-aware selector in =ctl-governance/policy-set/1=。
+- It exists to prevent authority rules over the =role-binding:= logical-id namespace from granting unintended roles through RoleBinding payloads。
+
+Unknown selector fields are invalid。
+
+** RoleBinding payload schema
+
+Required fields：
+
+- =actor_id=: id
+- =role_id=: id
+- =scope=: object with required =project_id=
+
+Optional fields：
+
+- none
+
+Scope rule：
+
+- v0.1.1 scope covers a project iff =scope.project_id == ProjectStateRoot.project_id=。
+
+** Mandatory governance Revision envelope invariants
+
+Full static validation of a mandatory governance profile includes both Revision envelope invariants and payload schema validation。
+
+#+begin_example
+PolicySet Revision:
+  logical_id      == "sys:policy"
+  revision_kind   == "policy-set"
+  payload_profile == "ctl-governance/policy-set/1"
+
+RoleBinding Revision:
+  logical_id      starts with "role-binding:"
+  revision_kind   == "role-binding"
+  payload_profile == "ctl-governance/role-binding/1"
+#+end_example
+
+The RoleBinding namespace invariant is bidirectional in v0.1.1:
+
+#+begin_example
+Revision.payload_profile == "ctl-governance/role-binding/1"
+  iff Revision.logical_id starts with "role-binding:"
+
+Revision.revision_kind == "role-binding"
+  iff Revision.payload_profile == "ctl-governance/role-binding/1"
+#+end_example
+
+Therefore:
+
+- A RoleBinding MUST NOT be hidden under =claim:= or any other non-=role-binding:= logical-id namespace。
+- A non-RoleBinding Revision MUST NOT use the =role-binding:= namespace。
+- A low-authority rule granting =logical_id_prefix = "claim:"= authority cannot create active RoleBinding authority objects。
+
+RoleBinding assignment identity is a global invariant for a RoleBinding logical object, not only a parent-lineage invariant.
+
+Define:
+
+#+begin_example
+role_binding_identity(R) =
+  (
+    R.payload.actor_id,
+    R.payload.role_id,
+    R.payload.scope.project_id
+  )
+#+end_example
+
+For every newly recorded RoleBinding Revision =R=, and for every previously recorded or same-batch RoleBinding Revision =Q= with:
+
+#+begin_example
+Q.logical_id == R.logical_id
+#+end_example
+
+the following MUST hold:
+
+#+begin_example
+role_binding_identity(Q) == role_binding_identity(R)
+#+end_example
+
+Equivalently, a RoleBinding =logical_id= names one stable assignment slot.  It cannot be reused to point at a different assignee actor, a different role, or a different project scope.
+
+Validators MAY cache the derived map:
+
+#+begin_example
+role_binding_identity_by_logical_id:
+  logical_id -> (actor_id, role_id, scope.project_id)
+#+end_example
+
+in validated state.  This cache is not a wire field and MUST be derived from validated recorded Revisions.
+
+The ordinary parent-lineage rule remains:
+
+#+begin_example
+For every RoleBinding child Revision with parents:
+  child.payload.actor_id         == every parent.payload.actor_id
+  child.payload.role_id          == every parent.payload.role_id
+  child.payload.scope.project_id == every parent.payload.scope.project_id
+#+end_example
+
+Changing a principal from one role to another MUST be represented as a new RoleBinding logical object plus a separately authorized binding change, not as an in-place lineage update of the same RoleBinding logical id。
+
+Active RoleBinding updates are also fast-forward-only.  For every =binding.set= operation whose =logical_id= starts with =role-binding:= and whose expected old state is bound, the old active CID MUST appear directly in the new target Revision's =parents= array.  A RoleBinding slot cannot be replaced by an unrelated same-logical-id Revision with =parents = []=, even if the new payload would otherwise be authorized by a =role_binding= resource selector。
+
+** Opaque JSON payload schema
+
+v0.1.1 defines one universal uninterpreted-data payload profile:
+
+#+begin_example
+ctl-data/opaque-json/1
+#+end_example
+
+Rules:
+
+- The Revision =payload= MUST be a finite canonical JSON object。
+- The profile makes no domain claim beyond canonical object well-formedness。
+- All conforming validators MUST be able to statically validate this profile。
+- An opaque Revision MAY be recorded or activated only if active policy authorizes the corresponding request for =payload_profile = "ctl-data/opaque-json/1"=。
+- A validator MUST NOT silently reinterpret any other unknown profile as opaque data。
+- To migrate opaque legacy data into a typed object, create a new typed Revision that references the opaque Revision；do not reinterpret the same CID after the fact。
+
+* Revision
+
+** 語義
+
+Revision 是 immutable object。
+
+它描述某個 logical object 的一個版本，或某次 run/review/claim/policy/report 的一個版本。
+
+Revision 被 recorded 不代表 active。
+
+Revision 被 referenced 不代表 recorded。
+
+Revision 被 active binding 指到，才是目前 active state 的一部分。
+
+=parents= 只表示同一 logical object 的 revision lineage，不表示任意 dependency。
+
+** 基本格式
+
+#+begin_src json
+{
+  "profile": "ctl/revision/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:example",
+  "logical_id": "claim:example",
+  "revision_kind": "profile-defined-kind",
+  "parents": [
+    "ctlobj-sha256:..."
+  ],
+  "payload_profile": "example/profile/1",
+  "payload": {
+    "profile_defined": "data"
+  },
+  "created_at": "2026-06-25T23:00:00Z",
+  "created_by": {
+    "actor_id": "agent:codex"
+  }
+}
+#+end_src
+
+** Field rules
+
+=profile= MUST be =ctl/revision/1=。
+
+=kernel_profile= MUST be an implementation-recognized kernel profile。
+
+Project configuration MUST NOT define or override =kernel_profile=。
+
+=project_id= MUST match the project state root。
+
+=logical_id= MUST be stable across revisions of the same logical object。
+
+=revision_kind= is profile-defined data。
+
+=parents= MUST be sorted unique CIDs。
+
+Parent CIDs MUST NOT form a cycle。
+
+Every parent CID MUST resolve to a Revision with:
+
+- same =project_id=
+- same =kernel_profile=
+- same =logical_id=
+
+Every parent CID MUST already be recorded in parent root or be included in the same AdmissionBatch's =recorded_revisions=。
+
+Cross-project dependencies MUST use profile-defined typed references such as =source_document=, =depends_on=, =evidence=, or =derived_from= inside payload, not =parents=。
+
+=payload_profile= declares the profile responsible for interpreting =payload=。
+
+=payload= MUST be a finite canonical JSON object。
+
+=created_at= MUST be timestamp using the CTL timestamp grammar。
+
+Timestamp is provenance, not semantic authority。
+
+=created_by= is provenance, not authority by itself。
+
+Authority MUST be evaluated by active policy during admission。
+
+* ProjectStateRoot
+
+** 語義
+
+ProjectStateRoot 是專案某一刻的正式狀態 root。
+
+它不是 lab note。
+
+它不是 ledger。
+
+它是 current accepted state 的 content-addressed snapshot。
+
+** 基本格式
+
+#+begin_src json
+{
+  "profile": "ctl/project-state-root/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:example",
+  "parent": "ctlobj-sha256:parent-root-cid",
+  "bindings": {
+    "sys:policy": "ctlobj-sha256:policy-revision-cid",
+    "claim:example": "ctlobj-sha256:claim-revision-cid"
+  },
+  "transition": "ctlobj-sha256:admission-batch-cid"
+}
+#+end_src
+
+For genesis root, =parent= MAY be =null=.
+
+Non-genesis root MUST have non-null =parent=.
+
+=transition= MUST be the AdmissionBatch that produced this root。
+
+ProjectStateRoot MUST NOT contain timestamps, author fields, implementation version, or other non-deterministic provenance。
+
+All such provenance belongs in AdmissionBatch or receipts。
+
+A valid root MUST be exactly reconstructible:
+
+#+begin_src text
+validate_chain(env, resolver, CID(R), trust_anchor).root_canonical_bytes == canonical_bytes(R)
+#+end_src
+
+** bindings
+
+=bindings= is the only active truth map。
+
+There MUST NOT be a separate =active_policy= field。
+
+There MUST NOT be a separate =active_heads= field。
+
+The active policy is:
+
+#+begin_example
+bindings["sys:policy"]
+#+end_example
+
+=sys:= prefix is kernel-reserved。
+
+Profile-level logical ids MUST NOT use =sys:= unless explicitly reserved by the kernel。
+
+v0.1.1 reserves exactly one =sys:= logical id:
+
+#+begin_example
+sys:policy
+#+end_example
+
+Any Revision, binding key, or binding operation whose =logical_id= starts with =sys:= but is not exactly =sys:policy= is invalid in v0.1.1。
+
+If a Revision =logical_id= is exactly =sys:policy=, then:
+
+#+begin_example
+revision_kind   == "policy-set"
+payload_profile == "ctl-governance/policy-set/1"
+#+end_example
+
+Thus an opaque or profile-defined Revision cannot occupy the =sys:policy= logical id, even if it is never activated。
+
+** binding semantics
+
+If =bindings[L] = C=, then logical id =L= is currently bound to object CID =C=。
+
+The CID =C= MUST be recorded in the state root's recorded set。
+
+The CID =C= MUST resolve to a Revision whose =logical_id= equals =L=。
+
+Therefore bindings are logical object head mappings, not arbitrary named slots。
+
+For =sys:policy=, the target Revision MUST have:
+
+#+begin_example
+logical_id = "sys:policy"
+revision_kind = "policy-set"
+payload_profile = "ctl-governance/policy-set/1"
+#+end_example
+
+Removing a binding does not delete the revision。
+
+It only makes that logical id inactive。
+
+** root chain
+
+ProjectStateRoot forms a parent chain。
+
+Each root points to exactly one parent, except genesis root。
+
+v0.1.1 does not define multi-parent state roots。
+
+Forking is MAY at storage level but not part of canonical =refs/main= semantics。
+
+* AdmissionBatch
+
+** 語義
+
+AdmissionBatch 是唯一可以讓 ProjectStateRoot 前進的 transition object。
+
+它同時做兩件事：
+
+1. record revisions
+2. update bindings
+
+但這兩件事必須分開表示。
+
+** 基本格式
+
+#+begin_src json
+{
+  "profile": "ctl/admission-batch/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:example",
+  "parent_root": "ctlobj-sha256:parent-root-cid-or-null-for-genesis",
+  "recorded_revisions": [
+    "ctlobj-sha256:new-revision-cid"
+  ],
+  "binding_ops": [
+    {
+      "op": "set",
+      "logical_id": "claim:example",
+      "expected": {
+        "state": "absent"
+      },
+      "new_cid": "ctlobj-sha256:new-revision-cid"
+    }
+  ],
+  "evidence": [
+    {
+      "target": {
+        "kind": "binding_op",
+        "logical_id": "claim:example"
+      },
+      "basis": "agent/run-receipt/1",
+      "cid": "ctlobj-sha256:receipt-revision-cid"
+    }
+  ],
+  "principal_claim": {
+    "actor_id": "actor:jin",
+    "role_bindings": [
+      "ctlobj-sha256:active-role-binding-cid"
+    ],
+    "authentication_assurance": "local-operator"
+  },
+  "submitted_by": {
+    "actor_id": "agent:codex"
+  },
+  "admitted_at": "2026-06-25T23:00:00Z"
+}
+#+end_src
+
+** recorded_revisions
+
+=recorded_revisions= MUST be sorted unique。
+
+Every CID in =recorded_revisions= MUST resolve to a valid =Revision=。
+
+=recorded_revisions= MUST NOT contain CIDs already in =recorded(parent_root)=。
+
+In v0.1.1, ordinary dependency references inside those revisions DO NOT become recorded automatically。
+
+=recorded_revisions= and =binding_ops= MUST NOT both be empty。
+
+** binding_ops
+
+=binding_ops= MUST be sorted by =logical_id=。
+
+Each =logical_id= MUST appear at most once per AdmissionBatch。
+
+Allowed ops:
+
+- =set=
+- =remove=
+
+Unknown ops are static schema violations and therefore =InvalidHistory=。
+
+*** set op
+
+#+begin_src json
+{
+  "op": "set",
+  "logical_id": "claim:example",
+  "expected": {
+    "state": "absent"
+  },
+  "new_cid": "ctlobj-sha256:new-cid"
+}
+#+end_src
+
+or:
+
+#+begin_src json
+{
+  "op": "set",
+  "logical_id": "claim:example",
+  "expected": {
+    "state": "bound",
+    "cid": "ctlobj-sha256:old-cid"
+  },
+  "new_cid": "ctlobj-sha256:new-cid"
+}
+#+end_src
+
+Rules:
+
+- =new_cid= MUST be present。
+- =new_cid= MUST be recorded in parent root or this batch。
+- =new_cid= MUST resolve to a Revision。
+- target Revision =project_id= MUST equal =B.project_id=。
+- target Revision =kernel_profile= MUST equal =B.kernel_profile=。
+- target Revision =logical_id= MUST equal =binding_op.logical_id=。
+- =expected= MUST strict-compare against parent bindings。
+- If parent has no binding, =expected.state= MUST be =absent=。
+- If parent has binding, =expected.state= MUST be =bound= and =expected.cid= MUST equal parent binding CID。
+
+*** remove op
+
+#+begin_src json
+{
+  "op": "remove",
+  "logical_id": "claim:example",
+  "expected": {
+    "state": "bound",
+    "cid": "ctlobj-sha256:old-cid"
+  }
+}
+#+end_src
+
+Rules:
+
+- =new_cid= field MUST be absent。
+- =expected.state= MUST be =bound=。
+- =expected.cid= MUST equal parent binding CID。
+- Removing absent binding MUST fail in v0.1.1。
+
+** evidence
+
+AdmissionBatch =evidence= MUST cite concrete CIDs。
+
+It MUST NOT merely contain natural-language claims。
+
+For example:
+
+#+begin_src json
+{
+  "target": {
+    "kind": "binding_op",
+    "logical_id": "claim:example"
+  },
+  "basis": "agent/run-receipt/1",
+  "cid": "ctlobj-sha256:receipt-revision-cid"
+}
+#+end_src
+
+Allowed targets:
+
+#+begin_example
+{ "kind": "recorded_revision", "cid": "ctlobj-sha256:..." }
+{ "kind": "binding_op", "logical_id": "claim:example" }
+#+end_example
+
+Allowed =basis= values MUST be defined by a validator-supported, versioned evidence predicate profile。
+
+Malformed basis identifiers are =InvalidHistory=。Well-formed but unsupported basis identifiers are =UnsupportedProfile=。PolicySet MUST NOT create new evidence semantics by mentioning an arbitrary string。
+
+Evidence CID MUST be either:
+
+- already recorded in parent root, or
+- included in this batch's =recorded_revisions=。
+
+=evidence= MUST be sorted unique by full canonical evidence entry bytes。
+
+Policy evaluator MUST evaluate evidence predicates per operation。
+
+If one receipt supports three operations, AdmissionBatch MUST list three evidence entries with the same =cid= and different targets。
+
+** principal_claim 與 submitted_by
+
+=principal_claim= is the logical authority claim to be evaluated by the mandatory governance profile。
+
+=submitted_by= is provenance describing who or what prepared the batch or proposal。
+
+Neither field provides cryptographic authentication in v0.1.1。
+
+=authentication_assurance=, if present in =principal_claim=, is non-semantic provenance and MUST NOT affect historical validity。
+
+In a local non-signature implementation, =ctl admit= MUST construct a fresh final AdmissionBatch using =authenticated_local_context=。It MUST NOT modify an already sealed AdmissionBatch。
+
+Recommended workflow:
+
+#+begin_example
+agent creates AdmissionRequestRevision or draft data
+human/trusted ctl admit combines draft + local authenticated context
+ctl admit creates final AdmissionBatch value
+ctl admit fills principal_claim from local authenticated operator context
+#+end_example
+
+v0.1.1 provides logical authorization consistency, not cryptographic actor authentication。
+
+* recorded 與 bindings 的純函數
+
+** recorded
+
+Define:
+
+#+begin_src text
+recorded(null) = ∅
+recorded(R) =
+  recorded(R.parent) ∪ batch(R.transition).recorded_revisions
+#+end_src
+
+where =R.transition= is the AdmissionBatch that produced =R=。
+
+Important:
+
+#+begin_quote
+Recorded does not follow arbitrary graph reachability.
+#+end_quote
+
+If revision A references revision B, B is not recorded unless B appears in an accepted AdmissionBatch's =recorded_revisions=。
+
+** bindings
+
+Define:
+
+#+begin_src text
+bindings(null) = {}
+bindings(R) = R.bindings
+#+end_src
+
+For validation:
+
+#+begin_src text
+bindings(R1) = apply_binding_ops(bindings(R0), B.binding_ops)
+#+end_src
+
+** apply_binding_ops
+
+=apply_binding_ops= is a pure deterministic function:
+
+#+begin_src text
+apply_binding_ops(M, ops):
+  M1 = shallow copy of M
+  for op in ops in canonical logical_id order:
+    if op.op == "set":
+      M1[op.logical_id] = op.new_cid
+    if op.op == "remove":
+      delete M1[op.logical_id]
+  return M1
+#+end_src
+
+Preconditions:
+
+- =ops= is sorted by =logical_id= UTF-8 bytes。
+- =ops= contains no duplicate =logical_id=。
+- Each op's =expected= value has already strict-compared equal to the pre-state map。
+- For =remove=, the pre-state MUST contain the removed key。
+- For =set= with =expected.state = bound=, =op.new_cid != expected.cid=。
+
+Because duplicate logical ids are invalid, the loop order is still specified for byte-for-byte cross-implementation clarity rather than for conflict resolution。
+
+** Active CIDs invariant
+
+For every ProjectStateRoot =R=：
+
+#+begin_src text
+values(bindings(R)) ⊆ recorded(R)
+#+end_src
+
+** Policy binding invariant
+
+For every non-empty accepted state =R=：
+
+#+begin_src text
+"sys:policy" ∈ keys(bindings(R))
+bindings(R)["sys:policy"] ∈ recorded(R)
+#+end_src
+
+Genesis details are below。
+
+* Common AdmissionBatch validation
+
+Genesis and non-genesis validation share a common pure helper:
+
+#+begin_src text
+validate_batch_common(env, resolver, B) -> pass | ValidationResult
+#+end_src
+
+This helper MUST perform every check that does not require a non-null parent state:
+
+1. Canonical-validate =B= and enforce all resource limits。
+2. Verify closed AdmissionBatch schema。
+3. Verify =B.profile == "ctl/admission-batch/1"=。
+4. Verify =B.kernel_profile= is supported by =env.capabilities=。
+5. Verify =B.recorded_revisions= and =B.binding_ops= are not both empty。
+6. Verify =recorded_revisions= sorted unique by CID。
+7. Resolve every =recorded_revisions= CID as canonical Revision bytes and verify CID equality。
+8. Verify every recorded Revision has =project_id == B.project_id= and =kernel_profile == B.kernel_profile=。
+9. Dispatch =validate_revision_profile(env, resolver, revision)= for every recorded Revision。
+10. Verify lineage among recorded Revisions whose parents are inside the same batch: same =project_id=, same =kernel_profile=, same =logical_id=。
+11. Verify the directed parent graph induced by same-batch parent edges has no cycle。This check MUST be performed for genesis and ordinary batches alike。Implementations SHOULD use an iterative color-marking or Kahn-style algorithm；recursive DFS is non-normative and MUST NOT make validity depend on host recursion limits。
+12. Verify same-batch RoleBinding assignment identity: if two same-batch RoleBinding Revisions have the same =logical_id=, their =role_binding_identity= values MUST match。
+13. Verify =binding_ops= closed schema, sorted by =logical_id=, and unique by =logical_id=。
+14. For every =set= op, verify =new_cid= names a recorded Revision in =B.recorded_revisions= or a CID that may be supplied by the parent-specific recorded set。
+15. For every =remove= op, verify no =new_cid= field exists。
+16. Verify every evidence entry has closed schema, valid target shape, sorted-unique ordering, and syntactically valid versioned =basis=。
+17. Verify every evidence target names either a recorded Revision in this batch or a binding op logical id in this batch。
+18. Verify every evidence CID is either in =B.recorded_revisions= or may be supplied by the parent-specific recorded set。
+19. Record every unsupported evidence =basis= as =UnsupportedProfile= according to the result aggregation algorithm；it MUST NOT mask deterministic =InvalidHistory= findings from the same batch。
+
+Parent-specific validation must refine steps 14 and 18 by checking membership in =parent_state.recorded=。Genesis validation must refine them by requiring all referenced CIDs be in =B.recorded_revisions=。
+
+The common helper is intentionally strict about evidence basis support:
+
+#+begin_quote
+Every evidence basis appearing in the final AdmissionBatch is a normative dependency, even if no allow rule ultimately consumes it。
+#+end_quote
+
+=validate_batch_common= SHOULD return normalized resolved data for later validation:
+
+#+begin_src text
+ValidatedBatchCommon {
+  batch
+  recorded_revision_map
+  set_target_cids_needing_parent_membership_check
+  evidence_cids_needing_parent_membership_check
+  referenced_profile_ids
+  referenced_basis_ids
+  role_binding_identity_by_logical_id_for_this_batch
+}
+#+end_src
+
+This is not a wire object. It prevents later validation steps from re-decoding the same CIDs through a different code path。
+
+Mandatory governance validation MUST occur only at exact validation sites:
+
+- every recorded Revision: common step 9
+- every =binding.set= target: transition/genesis activation-time static validation
+- old active policy: transition step 7
+- every =principal_claim.role_bindings= CID: PrincipalContext derivation
+- candidate policy: candidate-policy validation
+- active RoleBindings used by liveness: liveness scan
+
+Kernel validators MUST NOT follow arbitrary profile payload CID graphs to search for "referenced governance objects"。
+
+* validate_transition
+
+** Function signature
+
+#+begin_src text
+validate_transition(env, resolver, parent_state, B) -> child_state | ValidationResult
+#+end_src
+
+=resolver= is a deterministic object resolver:
+
+#+begin_src text
+resolve_object(object_cid) -> canonical bytes
+resolve_revision(object_cid) -> Revision
+resolve_batch(object_cid) -> AdmissionBatch
+resolve_root(object_cid) -> ProjectStateRoot
+#+end_src
+
+Resolver MUST verify CID bytes against canonical bytes before returning decoded objects。
+
+=parent_state= is already validated and includes:
+
+- parent root object and CID
+- recorded set
+- bindings
+- project_id
+- kernel_profile
+- derived =role_binding_identity_by_logical_id=
+
+=validate_transition= MUST NOT recursively validate =parent_state=。
+
+Deterministic claim:
+
+#+begin_quote
+Given the same =ValidationEnvironment= semantics, the same validated parent state, the same AdmissionBatch canonical bytes, and the same resolver mapping for referenced CIDs, all conforming validators MUST produce byte-identical child root bytes for valid input. For invalid input, all conforming validators MUST return the same result category among =Valid=, =InvalidHistory=, and =UnsupportedProfile=；human diagnostic code is not part of the v0.1.1 normative protocol。
+#+end_quote
+
+** Non-genesis algorithm
+
+Given =parent_state S0= and AdmissionBatch =B=：
+
+1. Run =validate_batch_common(env, resolver, B)=。
+2. Verify =B.project_id == S0.project_id=。
+3. Verify =B.kernel_profile == S0.kernel_profile=。
+4. Verify =B.parent_root == S0.root_cid=。
+5. Verify =B.recorded_revisions= is disjoint from =S0.recorded=。
+6. Resolve old policy =S0.bindings["sys:policy"]=。
+7. Verify old policy is recorded in =S0.recorded= and resolves to a supported =ctl-governance/policy-set/1= Revision。
+8. Verify newly recorded Revision lineage rules: every parent is recorded in =S0.recorded= or this batch, and every parent has same =project_id=, =kernel_profile=, and =logical_id=。
+9. Verify global RoleBinding assignment identity for every newly recorded RoleBinding Revision against both same-batch RoleBinding Revisions and all previously recorded RoleBinding Revisions in =S0.recorded= with the same =logical_id=。
+10. Verify every binding op expected value strict-compares against =S0.bindings=。
+11. For every =set= op, verify =new_cid ∈ S0.recorded ∪ B.recorded_revisions=。
+12. For every =set= op, resolve =new_cid= and verify it is a Revision whose =project_id=, =kernel_profile=, and =logical_id= match the operation。
+13. For every =set= op whose =logical_id= starts with =role-binding:= and whose old state is bound, verify the old active CID appears directly in the target Revision's =parents= array。
+14. For every =set= op, run activation-time profile validation:
+    - require target =payload_profile= is supported by =env.payload_profile_registry=
+    - run =validate_revision_profile(env, resolver, target_revision)=
+    - profile-specific activation hooks do not exist in v0.1.1；activation authority is decided only by policy evaluation
+15. For every =set= op with =expected.state = bound=, verify =new_cid != expected.cid=。
+16. For every =remove= op, verify no =new_cid= field exists and the expected bound key exists in =S0.bindings=。
+17. Verify every evidence CID is in =S0.recorded ∪ B.recorded_revisions=。
+18. Verify every evidence target refers to an operation or recorded revision in this batch。
+19. Record unsupported evidence basis identifiers according to the result aggregation algorithm。
+20. If =sys:policy= changes to =P1=, verify =P1 ∈ B.recorded_revisions=。
+21. Build per-operation authorization requests:
+    - =revision.record= for each newly recorded Revision
+    - =binding.set= for each set op
+    - =binding.remove= for each remove op
+    - =policy.replace= if =sys:policy= changes
+22. Derive =ApplicableEvidence= for every request from =B.evidence=。
+23. Compute =authorization_match_work(old_policy, requests)= and verify it is at most 1,048,576 before policy matching。
+24. Compute =predicate_work(B, old_policy, requests)= and verify it is at most 65,536 before running evidence predicates。
+25. Evaluate old policy using Mandatory Governance Profile v1 against every request。
+26. Candidate bindings = =apply_binding_ops(S0.bindings, B.binding_ops)=。
+27. Verify candidate bindings include =sys:policy=。
+28. Verify =candidate_bindings= has at most 4,096 entries。
+29. Resolve candidate policy and verify it is a supported, statically valid =ctl-governance/policy-set/1= Revision。
+30. If =sys:policy= changes from =P0= to =P1=, verify =P0 ∈ P1.parents=。
+31. Verify =values(candidate_bindings) ⊆ S0.recorded ∪ B.recorded_revisions=。
+32. Verify every active binding target Revision's =logical_id= equals the binding key。
+33. Verify every active binding target passes activation-time profile validation。
+34. Verify =future_policy_update_possible(env, resolver, candidate_state)= and its liveness work bound。
+35. Construct deterministic =R1= with exactly:
+    - =profile = "ctl/project-state-root/1"=
+    - =kernel_profile = S0.kernel_profile=
+    - =project_id = S0.project_id=
+    - =parent = S0.root_cid=
+    - =bindings = candidate_bindings=
+    - =transition = CID(B)=
+36. Validate =R1= against full ProjectStateRoot schema, resource limits, binding limits, and canonical object byte limit。
+37. Return child_state containing =R1=, =CID(R1)=, =S0.recorded ∪ B.recorded_revisions=, =candidate_bindings=, and updated derived =role_binding_identity_by_logical_id=。
+
+** Genesis derivation
+
+Genesis is not magic trust forever。
+
+Genesis structural validity MUST be separated from local trust acceptance。
+
+Genesis admission MUST produce the first root through the same ProjectStateRoot and AdmissionBatch mechanism。
+
+Pure function:
+
+#+begin_src text
+derive_genesis(env, resolver, B) -> genesis_state | ValidationResult
+#+end_src
+
+For =parent_state = null=：
+
+1. Run =validate_batch_common(env, resolver, B)=。
+2. Verify =B.parent_root = null=。
+3. Verify =B.principal_claim.role_bindings = []=。
+4. Verify =B.recorded_revisions= and =B.binding_ops= are not both empty。
+5. Verify =B.evidence = []=。
+6. Verify every recorded Revision parent is also in =B.recorded_revisions=。
+7. Verify recorded Revision parents form no cycle。The common helper already performs same-batch cycle detection, but genesis MUST still enforce full parent closure inside the batch。
+8. Verify same-batch global RoleBinding assignment identity for every genesis RoleBinding logical id。
+9. Verify every =set= op has =expected.state = absent=。
+10. Verify =B= records an initial PolicySet Revision whose =logical_id= is =sys:policy=, =revision_kind= is =policy-set=, and =payload_profile= is =ctl-governance/policy-set/1=。
+11. Verify the initial PolicySet Revision passes full PolicySet envelope + payload validation。
+12. Verify every =required_evidence_basis= appearing in the initial PolicySet is supported by =env.evidence_basis_registry=。
+13. Verify =B.binding_ops= sets =sys:policy= to that initial PolicySet Revision。
+14. Verify =B= records and activates at least one RoleBinding Revision。
+15. Verify all genesis RoleBinding Revisions pass full RoleBinding envelope + payload validation。
+16. Verify all genesis binding targets are recorded Revision CIDs whose =logical_id= equals the binding key。
+17. Verify every active binding target passes full static profile validation。
+18. Verify candidate genesis bindings have at most 4,096 entries。
+19. Construct first ProjectStateRoot with exactly:
+   - =profile = "ctl/project-state-root/1"=
+   - =kernel_profile = B.kernel_profile=
+   - =project_id = B.project_id=
+   - =parent = null=
+   - =bindings = apply_binding_ops({}, B.binding_ops)=
+   - =transition = CID(B)=。
+20. Validate the constructed root against full ProjectStateRoot schema, root resource limits, binding limits, canonical object byte limit, and =sys:policy= presence。
+21. Verify =future_policy_update_possible(env, resolver, genesis_state)= and its liveness work bound。
+22. Return genesis_state, including derived =role_binding_identity_by_logical_id=。
+
+Genesis AdmissionBatch MUST NOT use =evidence=。Bootstrap provenance, operator notes, or import receipts SHOULD be recorded as ordinary Revisions in =B.recorded_revisions= if they must become part of history。
+
+Local trust acceptance:
+
+#+begin_src text
+accept_genesis(genesis_root_cid, authenticated_local_context) -> trust_anchor
+#+end_src
+
+=accept_genesis= is a local operator decision, not protocol structural validity。
+
+After acceptance, the trust anchor MUST pin:
+
+- =project_id=
+- =kernel_profile=
+- =genesis_root_cid=
+
+=ctl check= MUST validate history from the pinned trust anchor and MUST NOT re-read mutable operator mapping to decide whether old genesis is trusted。
+
+Genesis trust comes only from =accept_genesis(... authenticated_local_context)=。The Genesis AdmissionBatch's =principal_claim.actor_id= MAY be kept as bootstrap provenance, but =principal_claim.role_bindings= MUST be empty and MUST NOT self-authorize the genesis transition。
+
+After genesis, future admissions MUST be governed by active policy at =sys:policy=。
+
+** Authority path invariant
+
+Every accepted transition MUST retain at least one future policy-update authority path。
+
+In v0.1.1 this invariant is deliberately narrow。
+
+Define:
+
+#+begin_src text
+future_policy_update_possible(env, resolver, S) =
+  let P = current sys:policy Revision in S
+  let H = AuthorizationProbe:
+    logical_id      = "sys:policy"
+    payload_profile = "ctl-governance/policy-set/1"
+    revision_kind   = "policy-set"
+    applicable_evidence = []
+  exists actor A
+  and active RoleBindingRevision set RB owned by A
+  such that policy(S) allows, with required_evidence_basis = []:
+    revision.record  for H
+    binding.set      for logical_id sys:policy to H
+    policy.replace   for logical_id sys:policy to H
+#+end_src
+
+Active RoleBindings are grouped by actor. The same actor's active roles MAY jointly satisfy these three requests。
+
+Roles belonging to different actors MUST NOT be combined into one principal path。
+
+The liveness probe does not invent a future CID, timestamp, created_by, or full payload。
+
+Before evaluating liveness probes, validators MUST compute a deterministic liveness match-work bound:
+
+#+begin_src text
+liveness_match_work(S, P) =
+  distinct_active_actors(S) * 3 *
+  sum over PolicyRules R in P.rules
+    (1 + len(R.actions) + len(R.resources))
+#+end_src
+
+The factor =3= is for the three required policy-update probes: =revision.record=, =binding.set=, and =policy.replace=。
+
+The state is protocol-invalid if:
+
+#+begin_example
+liveness_match_work(S, P) > 1,048,576
+#+end_example
+
+Implementations MUST use bounded or saturating arithmetic；integer overflow MUST NOT change validity。
+
+=AuthorizationProbe= is an abstract policy-match resource used only by =future_policy_update_possible=:
+
+#+begin_src text
+AuthorizationProbe {
+  action
+  logical_id
+  payload_profile
+  revision_kind
+  applicable_evidence = []
+}
+#+end_src
+
+It is not an =AuthorizationRequest= and is not subject to =old_cid/new_cid= nullability rules。
+
+The liveness evaluator MUST reuse the ordinary Mandatory Governance Profile matching semantics for:
+
+- subject matching
+- action membership
+- resource selector matching
+- required-evidence logic
+
+However, only rules with =required_evidence_basis = []= may establish a future policy-update path. A rule requiring evidence cannot prove liveness, because there is no concrete future operation or evidence object yet。
+
+The ordinary policy fast-forward invariant separately requires any real future =sys:policy= replacement to have the current policy CID directly in its =parents=。
+
+The algorithm does not prove the human behind actor =A= is currently present. It only proves the admitted governance state has not locked itself out at the logical policy layer。
+
+v0.1.1 MUST NOT introduce terminal states。
+
+v0.1.1 MUST NOT mention emergency recovery transition as an invariant unless a later version defines an explicit =emergency.recover= action。
+
+* validate_root
+
+** Purpose
+
+=validate_root= validates a single root object shape。
+
+It does not recursively validate the entire history。
+
+History validation is handled by =validate_chain=。
+
+** Algorithm
+
+For a root =R=：
+
+1. Canonical-validate =R=。
+2. Verify =R.profile == "ctl/project-state-root/1"=。
+3. Verify =R= contains no unknown structural fields。
+4. Verify =R= contains no =created_at=, =created_by=, implementation version, or other non-deterministic provenance fields。
+5. Verify exact closed schema。
+6. Verify canonical object byte size, nesting depth, object key count, array length, and string byte limits。
+7. Verify =bindings= is an object map from =logical_id= strings to =object_cid= strings。
+8. Verify =bindings= has at most 4,096 entries。
+9. Verify every binding key and value passes scalar grammar checks。
+10. Verify =transition= has object CID shape。
+11. Verify =parent= is either null or an object CID。
+12. Verify =sys:policy= is present for every accepted root。
+13. Verify no forbidden fields such as =active_policy=, =active_heads=, =created_at=, =created_by=, or =implementation_version= appear。
+
+=validate_root= does not prove the active binding targets are recorded or that =transition= produced the root；those are history checks performed by =validate_chain=。
+
+** validate_chain
+
+#+begin_src text
+validate_chain(env, resolver, target_root_cid, trust_anchor) -> validated_state | ValidationResult
+#+end_src
+
+Algorithm:
+
+1. Resolve =target_root_cid= and run =validate_root= before reading =parent= or =transition=。
+2. Verify the target root's =project_id= and =kernel_profile= equal the pinned trust anchor values。
+3. Follow =parent= links from =target_root_cid= to the pinned =trust_anchor.genesis_root_cid=。
+4. For every stored root encountered, run =validate_root= before reading =parent= or =transition=。
+5. Reject if any stored root's =project_id= or =kernel_profile= differs from the trust anchor。
+6. Reject if the chain does not terminate at the pinned genesis root。
+7. Reject if any cycle appears。
+8. Derive =genesis_state= from the genesis batch using =derive_genesis(env, resolver, batch(genesis_root.transition))= and require its root bytes equal the stored genesis root bytes。
+9. Iteratively apply =validate_transition(env, resolver, previous_state, batch(root.transition))= for each child root。
+10. At each step run =validate_root= on the stored child root and require computed child root canonical bytes equal stored child root canonical bytes。
+11. Return final validated_state。
+
+Validators MAY memoize validated roots, but memoization MUST NOT change results。
+
+* Validation Result Semantics
+
+** ValidatorCapabilities
+
+Every validator MUST declare its supported semantic surface:
+
+#+begin_src json
+{
+  "kernel_profiles": [
+    "ctl-kernel/1"
+  ],
+  "mandatory_governance_profiles": [
+    "ctl-governance/policy-set/1",
+    "ctl-governance/role-binding/1"
+  ],
+  "supported_payload_profiles": [
+    "ctl-governance/policy-set/1",
+    "ctl-governance/role-binding/1",
+    "ctl-data/opaque-json/1"
+  ],
+  "supported_evidence_basis_ids": [
+    "agent/run-receipt/1"
+  ]
+}
+#+end_src
+
+Validator MUST accept every valid input within its declared support surface。
+
+If a history requires a well-formed profile or evidence basis outside that support surface, validator MUST return =UnsupportedProfile= rather than =InvalidHistory=。
+
+Validator MUST NOT claim support for a profile unless it implements that profile's full static validation and semantic predicates required by this spec。
+
+v0.1.1 freezes accept/reject semantics, not diagnostic taxonomy。
+
+Conforming validators MUST:
+
+- accept every valid input and produce byte-identical root bytes where a root is produced
+- reject every protocol-invalid input
+- distinguish =UnsupportedProfile= from =InvalidHistory=
+
+=UnsupportedProfile= means the validator lacks a required supported profile or evidence predicate to establish validity。
+
+=InvalidHistory= means the validator has enough supported semantics to determine that the input violates protocol rules。
+
+Commit commands MUST fail closed on both =UnsupportedProfile= and =InvalidHistory=。
+
+Human-facing diagnostic codes, precedence among multiple simultaneous errors, and exact error messages are non-normative in v0.1.1。
+
+** Result aggregation
+
+v0.1.1 result categories use this lattice:
+
+#+begin_example
+InvalidHistory > UnsupportedProfile > Valid
+#+end_example
+
+Normative rule:
+
+- If any determinable protocol violation exists, the result is =InvalidHistory=。
+- Else if required semantics are unsupported, the result is =UnsupportedProfile=。
+- Else the result is =Valid=。
+
+Validators MUST NOT allow an earlier =UnsupportedProfile= discovery to mask an already-determinable structural or governance violation。
+
+This does not require a validator to inspect the internal schema of an unsupported payload profile. It only requires validators to continue applying deterministic checks that do not depend on unsupported semantics, or to aggregate known errors if their implementation detects multiple conditions。
+
+Normative algorithm:
+
+#+begin_src text
+ValidationAccumulator {
+  invalid_found: bool
+  unsupported_found: bool
+}
+
+Phase A: Structural scan
+  - canonical-decode every root, batch, and recorded Revision needed by the validation target
+  - verify CIDs before reading semantic fields
+  - run closed-schema checks, scalar grammar, ordering, resource limits, parent-root shape, recorded membership checks, sys namespace checks, and same-batch cycle checks
+  - record unsupported profile/basis identifiers without dispatching into their unsupported semantics
+
+Phase B: Supported semantic checks
+  - run every supported mandatory governance validator
+  - run supported evidence predicates
+  - run authorization, fast-forward, RoleBinding identity, liveness, and replay checks whose inputs are available
+  - keep recording InvalidHistory and UnsupportedProfile discoveries in the accumulator
+
+Phase C: Result
+  if invalid_found:
+    return InvalidHistory
+  else if unsupported_found:
+    return UnsupportedProfile
+  else:
+    return Valid
+#+end_src
+
+An implementation MAY fail fast only after it has not observed, and cannot still observe within the required validation target, a higher-priority result category.  In particular:
+
+- a genesis batch with non-empty =evidence= is =InvalidHistory= even if one of those evidence entries also uses an unsupported basis；
+- a batch containing an invalid =sys:*= Revision is =InvalidHistory= even if another field contains an unsupported but well-formed profile or basis；
+- an unsupported payload profile does not require parsing that profile's private payload schema, but it also does not stop checks over structural fields such as =logical_id=, =revision_kind=, =parents=, =project_id=, =kernel_profile=, and =sys:= reservation。
+
+** ValidationEnvironment
+
+=ValidationEnvironment= is the complete semantic environment for deterministic validation:
+
+#+begin_src text
+ValidationEnvironment {
+  capabilities: ValidatorCapabilities
+  payload_profile_registry: exact map profile_id -> profile validator
+  evidence_basis_registry: exact map basis_id -> evidence predicate
+}
+#+end_src
+
+It MUST be treated as explicit validation input。Validators MUST NOT read additional profile/evidence semantics from mutable project config, filesystem paths, environment variables, network services, current time, or dynamically loaded code while evaluating a history。
+
+Two validation environments have the same semantics iff they declare the same supported kernel profiles, payload profiles, evidence basis identifiers, and their registered pure validators/predicates produce the same results for all inputs within those declared profiles。
+
+For optional payload profiles and evidence predicates, declaring support also requires a conformance identity:
+
+- versioned profile or basis identifier
+- normative profile document identifier
+- conformance vector-set identifier or digest
+- pure validator/predicate contract
+- resolver-read, recursion, and work bounds
+
+Mandatory governance profile semantics are identified by this CTL Kernel spec and its reference vectors。
+
+** Profile validation dispatch
+
+For every Revision admitted or activated, validator dispatches by =payload_profile=:
+
+- =ctl-governance/policy-set/1=: MUST run full PolicySet static validation。
+- =ctl-governance/role-binding/1=: MUST run full RoleBinding static validation。
+- =ctl-data/opaque-json/1=: MUST run opaque JSON static validation。
+- supported optional profile: MUST run that profile's full static validator。
+- unknown optional profile: MUST return =UnsupportedProfile=。It MUST NOT be silently accepted as opaque。
+
+A Revision declaring a known mandatory profile MUST NOT fall back to opaque handling when malformed。
+
+Malformed known profile returns =InvalidHistory=。
+
+Well-formed but unsupported optional profile returns =UnsupportedProfile= whenever the Revision is recorded, activated, or otherwise needed to validate a history。
+
+Profile validator interface:
+
+#+begin_src text
+validate_revision_profile(env, resolver, revision) -> pass | invalid | unsupported
+#+end_src
+
+Profile validators MUST be pure:
+
+- deterministic
+- no filesystem reads
+- no network reads
+- no current time reads
+- no environment-variable reads
+- no mutable configuration reads
+- no arbitrary code execution
+- no dependency on data not represented by explicit inputs or resolver CIDs
+- any typed reference resolution MUST go through =resolver= and be determined by canonical CID bytes
+
+Activation-time rule:
+
+#+begin_quote
+Every =binding.set= target CID MUST pass profile validation at activation time, even if that Revision was recorded in an earlier accepted state。
+#+end_quote
+
+* Mandatory Governance Profile v1
+
+** 為什麼它是 mandatory
+
+Structural kernel can stay tiny, but AdmissionBatch validity depends on authority semantics。
+
+Therefore every conforming v0.1.1 validator MUST implement Mandatory Governance Profile v1。
+
+This profile does not make PolicySet or RoleBinding structural kernel primitives. They remain ordinary Revisions, but their payload profiles have fixed semantics。
+
+** Required payload profiles
+
+Mandatory Governance Profile v1 defines:
+
+- =ctl-governance/policy-set/1=
+- =ctl-governance/role-binding/1=
+
+Future versions MAY add RoleDefinitionRevision or PrincipalDefinitionRevision, but v0.1.1 does not require them。
+
+** PolicySet Revision
+
+Project-defined PolicySet MUST NOT redefine kernel semantics。
+
+PolicySet MUST be stored as a Revision with:
+
+#+begin_example
+logical_id = "sys:policy"
+revision_kind = "policy-set"
+payload_profile = "ctl-governance/policy-set/1"
+#+end_example
+
+Its CID is active via:
+
+#+begin_example
+bindings["sys:policy"]
+#+end_example
+
+** Policy language
+
+PolicySet MUST be a finite data language。
+
+It MUST NOT contain arbitrary executable code。
+
+It MUST be declarative JSON with closed schema。
+
+Unknown fields/actions in PolicySet are static validation failures unless a future profile explicitly marks a field as non-semantic metadata。
+
+Minimum shape:
+
+#+begin_src json
+{
+  "version": 1,
+  "default": "deny",
+  "rules": [
+    {
+      "effect": "allow",
+      "subject": {
+        "role_id": "role:owner"
+      },
+      "actions": [
+        "binding.remove",
+        "binding.set",
+        "policy.replace",
+        "revision.record"
+      ],
+      "resources": [
+        {
+          "logical_id": "sys:policy"
+        },
+        {
+          "logical_id_prefix": "claim:"
+        },
+        {
+          "logical_id_prefix": "role-binding:"
+        }
+      ],
+      "required_evidence_basis": []
+    }
+  ]
+}
+#+end_src
+
+** Actions
+
+v0.1.1 actions are:
+
+- =revision.record=
+- =binding.set=
+- =binding.remove=
+- =policy.replace=
+
+Unknown action inside a PolicySet Revision is a static validation failure and therefore =InvalidHistory= for any history that records or activates that PolicySet。
+
+Kernel code MUST NOT generate unknown internal request actions。If an implementation constructs an unknown internal request action, it is an implementation error and MUST fail closed。
+
+=policy.replace= is required whenever a binding op changes =sys:policy=。
+
+** Subjects
+
+v0.1.1 authorizes through active RoleBinding Revisions。
+
+RoleBinding MUST be stored as a Revision with:
+
+#+begin_example
+logical_id starts with "role-binding:"
+revision_kind = "role-binding"
+payload_profile = "ctl-governance/role-binding/1"
+#+end_example
+
+A RoleBinding Revision payload has minimum shape:
+
+#+begin_src json
+{
+  "actor_id": "actor:jin",
+  "role_id": "role:owner",
+  "scope": {
+    "project_id": "project:demo"
+  }
+}
+#+end_src
+
+Here =payload.actor_id= is the assignee actor receiving the role, not the actor submitting the AdmissionBatch and not necessarily the evaluating principal actor except when the RoleBinding CID appears in that principal's =principal_claim.role_bindings=。
+
+A =principal_claim.role_bindings= CID is usable only if:
+
+- the array is sorted unique
+- the CID is active in parent state's =bindings=
+- it resolves to a Revision with =payload_profile = "ctl-governance/role-binding/1"=
+- the payload =actor_id= equals =principal_claim.actor_id=
+- the payload scope covers the project
+
+All role bindings used for one AuthorizationRequest MUST belong to the same =principal_claim.actor_id=。
+
+Different actors' roles MUST NOT be combined。
+
+The same actor's active roles MAY jointly satisfy different requests in the same batch。
+
+Invalid, inactive, duplicate, or actor-mismatched role binding MUST fail closed。
+
+Genesis MAY use external bootstrap principal, but after genesis authorization MUST flow through active RoleBinding Revisions in v0.1.1。
+
+** Resource selectors
+
+Allowed resource selectors:
+
+- exact =logical_id=
+- =logical_id_prefix=
+- =payload_profile=
+- =revision_kind=
+- =role_binding=
+
+Unknown selector MUST invalidate the policy。
+
+** AuthorizationRequest
+
+Every AdmissionBatch is converted into standard requests before policy evaluation。
+
+These are abstract evaluator values, not stored objects and not hashed objects。
+
+For rule matching, each AuthorizationRequest also has a deterministic request resource Revision:
+
+- =revision.record=: the newly recorded Revision。
+- =binding.set=: the Revision at =new_cid=。
+- =binding.remove=: the old active Revision at =old_cid=。
+- =policy.replace=: the new =sys:policy= Revision。
+
+This resource Revision is resolved once during request derivation through =resolver=, after ordinary Revision validation for the relevant activation/recording site.  Implementations MAY store it in an internal normalized request value, but it is not a stored wire field and is not hashed as part of the request。
+
+Selector semantics such as =role_binding= MUST consume this already validated resource Revision, or an equivalent =ValidatedResourceRevision= marker from the same validation path.  A selector MUST NOT re-resolve a different object graph or use an unvalidated payload copy。
+
+PrincipalContext:
+
+#+begin_src text
+PrincipalContext {
+  actor_id
+  role_id_set
+  validated_role_bindings: [
+    {
+      cid
+      actor_id
+      role_id
+      scope.project_id
+    }
+  ]
+}
+#+end_src
+
+PrincipalContext is derived from =principal_claim= plus active RoleBinding Revisions in parent state。
+
+All role bindings in one PrincipalContext MUST belong to the same actor。
+
+Shape:
+
+#+begin_src json
+{
+  "action": "binding.set",
+  "logical_id": "claim:example",
+  "old_cid": null,
+  "new_cid": "ctlobj-sha256:new-cid",
+  "payload_profile": "researchctl/claim/1",
+  "revision_kind": "claim",
+  "applicable_evidence": [
+    {
+      "basis": "agent/fresh-context-review/1",
+      "cid": "ctlobj-sha256:review-cid"
+    }
+  ]
+}
+#+end_src
+
+ApplicableEvidence is a separate abstract evaluator value:
+
+#+begin_src text
+ApplicableEvidence {
+  basis: id
+  cid: object_cid
+}
+#+end_src
+
+It is derived from stored =EvidenceEntry= values, but it is not itself stored or hashed。
+
+AuthorizationRequest field rules:
+
+- =action= is required。
+- =logical_id= is required。
+- =old_cid= is nullable object_cid。
+- =new_cid= is nullable object_cid。
+- =payload_profile= is required。
+- =revision_kind= is required。
+- =applicable_evidence= is sorted unique by full =ApplicableEvidence= canonical bytes。
+
+Nullability by action:
+
+- =revision.record=: =old_cid = null=, =new_cid= non-null。
+- =binding.set=: =old_cid= nullable, =new_cid= non-null。
+- =binding.remove=: =old_cid= non-null, =new_cid = null=。
+- =policy.replace=: =old_cid= non-null, =new_cid= non-null。
+
+Derivation by action:
+
+=revision.record=:
+
+- Created once for each CID in =B.recorded_revisions=。
+- Resource Revision = the newly recorded Revision。
+- =logical_id= = resource Revision =logical_id=。
+- =old_cid= = null。
+- =new_cid= = recorded Revision CID。
+- =payload_profile= = resource Revision =payload_profile=。
+- =revision_kind= = resource Revision =revision_kind=。
+- Evidence target MUST be ={"kind":"recorded_revision","cid":new_cid}=。
+
+=binding.set=:
+
+- Created once for each =set= binding op。
+- Resource Revision = target Revision at =new_cid=。
+- =logical_id= = binding op =logical_id=。
+- =old_cid= = previous active CID if any, else null。
+- =new_cid= = binding op =new_cid=。
+- =payload_profile= = target Revision =payload_profile=。
+- =revision_kind= = target Revision =revision_kind=。
+- Evidence target MUST be ={"kind":"binding_op","logical_id":logical_id}=。
+
+=binding.remove=:
+
+- Created once for each =remove= binding op。
+- Resource Revision = old active Revision being removed。
+- =logical_id= = binding op =logical_id=。
+- =old_cid= = removed active CID。
+- =new_cid= = null。
+- =payload_profile= = old active Revision =payload_profile=。
+- =revision_kind= = old active Revision =revision_kind=。
+- Evidence target MUST be ={"kind":"binding_op","logical_id":logical_id}=。
+
+=policy.replace=:
+
+- Created iff =sys:policy= changes。
+- Resource Revision = new =sys:policy= Revision。
+- =logical_id= = =sys:policy=。
+- =old_cid= = old policy CID。
+- =new_cid= = new policy CID。
+- =payload_profile= = =ctl-governance/policy-set/1=。
+- =revision_kind= = =policy-set=。
+- Evidence target MUST be ={"kind":"binding_op","logical_id":"sys:policy"}=。
+
+Only evidence entries whose =target= matches the request are included in =applicable_evidence=。
+
+Derivation of =applicable_evidence=:
+
+1. Select =B.evidence= entries whose =target= exactly matches the request target。
+2. Drop the =target= field。
+3. Convert each remaining pair to =ApplicableEvidence { basis, cid }=。
+4. Sort by complete =ApplicableEvidence= canonical bytes。
+5. Deduplicate exact duplicate =ApplicableEvidence= values。
+
+** Evidence basis registry
+
+Every evidence basis identifier MUST be implemented by a validator-supported predicate。
+
+Predicate interface:
+
+#+begin_src text
+check_evidence_basis(env, resolver, basis_id, evidence_cid, request, parent_state, batch) -> pass | fail | unsupported
+#+end_src
+
+PolicySet may require basis identifiers, but it cannot define their semantics。
+
+Predicate MUST be pure:
+
+- MUST NOT read filesystem。
+- MUST NOT read network。
+- MUST NOT read current time。
+- MUST NOT read environment variables。
+- MUST NOT read mutable project config。
+- MUST use only canonical objects resolved by CID and explicit function inputs。
+
+Malformed basis identifier means =InvalidHistory=。
+
+Well-formed but unsupported basis identifier means =UnsupportedProfile=。
+
+Supported predicate that evaluates false means =InvalidHistory=。
+
+Predicate profile unsupported by this validator means the validator cannot establish validity and MUST report =UnsupportedProfile=, not =InvalidHistory=。
+
+Commit MUST fail closed on =UnsupportedProfile=。
+
+Before a PolicySet Revision can become active, the admitting validator MUST support every basis identifier appearing in that PolicySet's =required_evidence_basis= arrays。
+
+Examples of future basis identifiers:
+
+- =agent/run-receipt/1=
+- =agent/fresh-context-review/1=
+- =researchctl/reproduction/1=
+
+v0.1.1 only requires the registry mechanism; concrete project profiles may define additional supported basis predicates。
+
+** Static evidence predicate work
+
+Protocol validity MUST NOT depend on evaluator short-circuit behavior。
+
+Before evaluating policy rules, validators MUST compute:
+
+#+begin_src text
+authorization_match_work(P, requests) =
+  sum over AuthorizationRequests Q in requests
+  sum over PolicyRules R in P.rules
+    (1 + len(R.actions) + len(R.resources))
+#+end_src
+
+The batch is protocol-invalid if:
+
+#+begin_example
+authorization_match_work(P, requests) > 1,048,576
+#+end_example
+
+Implementations MUST use bounded or saturating arithmetic for this calculation；integer overflow MUST NOT change validity。
+
+Before evaluating evidence predicates, validators MUST compute:
+
+#+begin_src text
+predicate_work(B, P, requests) =
+  sum over AuthorizationRequests Q in requests
+  sum over PolicyRules R in P.rules whose subject/action/resource portions match Q
+  sum over basis b in R.required_evidence_basis
+    count(Q.applicable_evidence entries whose basis == b)
+#+end_src
+
+The =subject/action/resource portions= means rule matching steps 1 through 3, before running evidence predicates。
+
+The batch is protocol-invalid if:
+
+#+begin_example
+predicate_work(B, P, requests) > 65,536
+#+end_example
+
+Implementations MAY still short-circuit actual predicate evaluation after the static work check passes, but accept/reject semantics MUST NOT depend on how many predicate calls were actually executed。
+
+Each supported optional payload profile and evidence predicate MUST publish its own resolver-read, recursion, and work bounds。The kernel's predicate call limit does not bound arbitrary work inside a predicate。
+
+** Rule combination
+
+Policy evaluation MUST default deny。
+
+v0.1.1 uses allow-only rules。
+
+Every rule =effect= MUST be =allow=。
+
+Any other =effect= value MUST invalidate the policy。
+
+Deny rules MAY be introduced in a later profile version with explicit deny-overrides semantics。
+
+If a policy rule cannot be parsed, resolved, or evaluated, admission MUST fail。
+
+Rules MUST NOT read filesystem, network, current time, environment variables, or mutable project config。
+
+** Rule matching algorithm
+
+A rule matches an AuthorizationRequest iff all conditions hold:
+
+1. The request principal has at least one active usable RoleBinding whose =role_id= equals =rule.subject.role_id=。
+2. =request.action= is a member of =rule.actions=。
+3. At least one selector in =rule.resources= matches the request resource。
+4. Every basis in =rule.required_evidence_basis= is satisfied by at least one applicable evidence entry whose predicate passes。
+
+Resource selector semantics:
+
+- =logical_id= matches exact equality。
+- =logical_id_prefix= matches byte-string prefix。
+- =payload_profile= matches request payload profile equality。
+- =revision_kind= matches request revision kind equality。
+- =role_binding= matches only if the request resource Revision is a valid =ctl-governance/role-binding/1= Revision, the selector =role_id= equals the resource payload =role_id=, and, when selector =actor_id= is present, it equals the resource payload =actor_id=。
+
+If multiple fields ever appear in a selector object, schema validation MUST reject it in v0.1.1；there is no implicit OR/AND ambiguity。
+
+Request is allowed iff at least one allow rule matches。
+
+No matching rule means deny。
+
+** Policy replacement
+
+If =sys:policy= changes:
+
+1. The new =sys:policy= CID =P1= MUST appear in this batch's =B.recorded_revisions=。
+2. Old policy MUST authorize =revision.record= for =P1=。
+3. Old policy MUST authorize =binding.set= for =sys:policy=。
+4. Old policy MUST authorize =policy.replace= on =sys:policy=。
+5. New policy MUST pass full static PolicySet envelope + payload validation。
+6. Validator MUST NOT use candidate policy to authorize any operation in the batch that introduces that candidate policy。
+7. The resulting state MUST satisfy =future_policy_update_possible(env, resolver, R1)= under the new policy。
+
+v0.1.1 chooses atomic introduction for policy replacement。A previously recorded candidate policy cannot later be activated as =sys:policy= directly。If a project wants a policy proposal workflow, it SHOULD record a separate =policy-proposal:= Revision and then create the formal =sys:policy= successor Revision in the activation batch。
+
+Fast-forward rule:
+
+#+begin_quote
+If =sys:policy= changes from =P0= to =P1=, =P0= MUST appear directly in =P1.parents=。
+#+end_quote
+
+To revert to older policy contents, create a new policy Revision whose parent is the current policy and whose payload copies the desired older contents。
+
+The semantic authority is the protocol + active policy data + validator conformance。
+
+* ReviewEvidence
+
+** Review 不做 governance decision
+
+Review objects may express:
+
+- approval opinion
+- rejection opinion
+- concerns
+- checked criteria
+- evidence basis
+- reviewer identity
+- independence metadata
+
+But Review itself does not change state。
+
+Only AdmissionBatch changes state。
+
+** basis 必須引用 evidence CID
+
+A review claim such as「我跑過測試」is insufficient。
+
+ReviewEvidence SHOULD cite concrete receipts：
+
+#+begin_src json
+{
+  "basis": "agent/run-receipt/1",
+  "cid": "ctlobj-sha256:receipt-revision-cid",
+  "claim": "tests_passed"
+}
+#+end_src
+
+** Independence 是 policy question
+
+Review independence may include dimensions such as：
+
+- different actor
+- different model
+- different machine
+- different dependency lock
+- no shared mutable context
+- no author/reviewer same role
+
+Kernel does not decide which dimensions matter。
+
+Active policy decides。
+
+* RunStart / RunReceipt
+
+** 不可變 run lifecycle
+
+Run records SHOULD be split into separate immutable revisions：
+
+- ContextManifestRevision
+- RunStartRevision
+- OutputRevision
+- RunReceiptRevision
+
+This avoids mutating one run object after completion。
+
+** ContextManifestRevision
+
+ContextManifestRevision is a pre-run plan。
+
+It SHOULD record：
+
+- declared inputs
+- intended exclusions
+- optional-read budget
+- intended tools
+- context ordering
+- admitted source root CID
+- recorded proposal CIDs, if any
+- run-local operator input digest, if any
+
+Every context entry SHOULD declare one source class:
+
+- =admitted_state=
+- =recorded_proposal=
+- =sealed_unrecorded_object=
+- =run_local_operator_input=
+
+=run_local_operator_input= MUST store exact bytes or digest plus provenance, but it does not need to be admitted before the run begins。
+
+It MUST NOT claim observed reads or reported reads。
+
+** RunStartRevision
+
+RunStart SHOULD record：
+
+- actor
+- role
+- intended command/tool
+- working directory
+- environment snapshot or reference
+- declared inputs
+- declared expected outputs
+- active root CID at start
+- active policy CID at start
+- context manifest CID if any
+- actual materialized CIDs
+- materializer version
+- workspace identifier
+- sandbox/context scope
+- whether context enforcement is expected
+- wall-clock start timestamp
+
+** RunReceiptRevision
+
+RunReceipt SHOULD record：
+
+- RunStart CID
+- command/tool actually executed
+- exit status
+- stdout/stderr digest or captured artifact refs
+- output artifact CIDs or blob descriptors
+- agent-reported reads
+- tool-observed reads if available
+- enforcement result if available
+- observed environment differences
+- wall-clock end timestamp
+- resource usage if available
+
+** Time semantics
+
+Timestamps are provenance。
+
+They SHOULD be recorded, but kernel MUST NOT rely on local wall-clock time for authority unless policy explicitly defines a time-based condition and trusted clock source。
+
+* ContextManifest
+
+** Context is controlled projection
+
+ContextManifest describes what a human or agent is expected to load or attend to before a run。
+
+ContextManifest entries SHOULD be derived from admitted state, recorded proposal objects, sealed unrecorded objects, or run-local operator input with exact digest。
+
+It SHOULD NOT rely on implicit memory。
+
+** 時間層次
+
+The following concepts MUST NOT be collapsed into one mutable object：
+
+- declared
+- materialized
+- reported
+- observed
+- enforced
+
+Definitions:
+
+- declared：ContextManifestRevision 裡的預期 context。
+- materialized：RunStartRevision 或 materialization receipt 裡的實際 materialized CIDs。
+- reported：RunReceiptRevision 裡 agent 自述使用了哪些 context。
+- observed：RunReceiptRevision 或 tool receipt 裡可佐證的實際讀取。
+- enforced：RunStart / RunReceipt 裡 runtime 實際宣告或回報的限制。
+
+In Codex Desktop mode, ContextManifest is usually a selection/audit mechanism, not a confidentiality or capability boundary。
+
+** 不污染 attention
+
+大型 object store 不應直接污染 context window。
+
+View / ContextManifest 的任務是從 admitted state 產生小而明確的 current focus。
+
+* View
+
+** View 是 projection，不是決策者
+
+View MUST NOT invent new strategy。
+
+View MAY render：
+
+- admitted Plan
+- admitted RouteProposal
+- active bindings
+- current status
+- recommended next objects
+- blocked objects
+- stale objects
+
+But if a strategy was not admitted as an object, View MUST NOT present it as authoritative。
+
+** Source pinning
+
+Every materialized view SHOULD record：
+
+#+begin_src json
+{
+  "source_root": "ctlobj-sha256:...",
+  "view_spec": "ctlobj-sha256:...",
+  "generator": {
+    "name": "ctl-view",
+    "version": "0.1.1"
+  },
+  "project_projection": {},
+  "diagnostics": {}
+}
+#+end_src
+
+=project_projection= may render admitted state。
+
+=diagnostics= are not project claims。
+
+LLM-generated narrative summary MAY appear as non-authoritative rendering, but MUST NOT be treated as canonical context truth。
+
+** Diagnostics 分離
+
+View diagnostics SHOULD be separate from projection。
+
+例如：
+
+- missing referenced CID
+- stale context
+- active binding points to deprecated profile
+- policy cannot be rendered
+
+這些 diagnostics 可以幫助人或 agent 修正，但不能自己改 state。
+
+* Canonical Control Directory
+
+** Directory 名稱
+
+建議使用：
+
+#+begin_example
+.ctl/
+#+end_example
+
+或若要強調 Chronicle-aligned：
+
+#+begin_example
+.chronicle-ctl/
+#+end_example
+
+本 spec 使用 =.ctl/= 作為 non-normative 簡短建議。
+
+** Suggested layout
+
+#+begin_example
+.ctl/
+  objects/
+    ctlobj-sha256/
+      ab/
+        cd...
+  blobs/
+    ctlblob-sha256/
+  refs/
+    main
+  locks/
+    refs-main.lock
+  config/
+    project.json
+    bootstrap.json
+  views/
+    current.json
+  receipts/
+  tmp/
+#+end_example
+
+** refs/main
+
+=refs/main= MUST contain exactly one canonical ProjectStateRoot CID, followed by at most one newline。
+
+Only =ctl admit= MUST write =refs/main= during normal operation。
+
+Other commands MAY write objects, drafts, receipts, or views, but MUST NOT advance canonical state。
+
+Object store rule:
+
+- If CID path does not exist, command MAY create it atomically。
+- If CID path exists with identical bytes, command MUST treat it as idempotent success。
+- If CID path exists with different bytes, command MUST report fatal store corruption or hash collision。
+
+** Worktree rule
+
+In multi-worktree environments such as Codex desktop app, there SHOULD be one canonical control directory for admission。
+
+Secondary worktrees MAY:
+
+- begin runs
+- create draft revisions
+- seal objects
+- produce receipts
+- request review
+
+But secondary worktrees SHOULD NOT admit to canonical =refs/main= unless they use the same locked canonical control directory or an explicitly configured shared Git common dir。
+
+v0.1.1 implementation SHOULD resolve a single project control path, preferably under Git common directory or an explicitly configured absolute canonical control directory。
+
+=ctl admit= MUST refuse if it cannot prove it is using the configured canonical control directory。
+
+Simplest local policy:
+
+#+begin_quote
+Only commands using the canonical shared control directory can run =ctl admit=。
+#+end_quote
+
+This is policy and tooling, not a cryptographic guarantee。
+
+** Crash-safe publish sequence
+
+=ctl admit= MUST publish in a crash-safe order:
+
+1. Acquire exclusive =refs/main= lock。
+2. Reread =refs/main=。
+3. Compare with expected parent root。
+4. Validate batch。
+5. Atomic-create all new immutable objects。
+6. fsync objects and containing directories where supported。
+7. Write ProjectStateRoot object。
+8. fsync root object and containing directory。
+9. Write =refs/main.tmp=。
+10. fsync temp file。
+11. Atomic rename to =refs/main=。
+12. fsync refs directory where supported。
+13. Release lock。
+
+Crash may leave unreachable objects, but MUST NOT leave =refs/main= pointing to a missing root。
+
+* CLI Semantics
+
+** Commands
+
+Suggested v0.1.1 CLI:
+
+#+begin_example
+ctl init
+ctl begin
+ctl seal
+ctl finish
+ctl review
+ctl admit
+ctl admit --dry-run
+ctl admit --explain-policy
+ctl view rebuild
+ctl check
+ctl check --root <cid>
+ctl inspect --raw <cid>
+#+end_example
+
+** ctl init
+
+=ctl init= creates local control directory and bootstrap config。
+
+It MUST NOT silently create trusted policy without operator acknowledgement。
+
+** ctl begin
+
+=ctl begin= materializes exact workspace/context, seals ContextManifestRevision if needed, seals RunStartRevision, and returns RunStart CID。
+
+It MAY write objects or draft files。
+
+It MUST NOT update =refs/main=。
+
+Agent work SHOULD begin only after RunStart CID is sealed。
+
+** ctl seal
+
+=ctl seal= canonicalizes and stores object(s) by CID。
+
+It MUST verify object CID matches canonical bytes。
+
+It MUST NOT update =refs/main=。
+
+** ctl finish
+
+=ctl finish= seals RunReceiptRevision and closes a run。
+
+It SHOULD record output CIDs, reported reads, observed reads if available, exit status, and enforcement result if available。
+
+It MUST NOT update =refs/main=。
+
+** ctl review
+
+=ctl review= creates Review-related revision(s)。
+
+It MAY internally use =begin -> seal review output -> finish=。
+
+It MUST NOT update =refs/main=。
+
+** ctl admit
+
+=ctl admit= validates AdmissionBatch and writes new ProjectStateRoot。
+
+It is the only normal command allowed to update =refs/main=。
+
+It MUST use lock around read-current-root / validate / write-new-root。
+
+It MUST fail if =refs/main= changed during admission。
+
+It MUST construct the final AdmissionBatch from draft/proposal data plus authenticated local context unless a later signature/attestation profile is enabled。
+
+It MUST NOT rewrite an already sealed AdmissionBatch。
+
+=ctl admit --dry-run= MUST run validation without writing =refs/main=。
+
+=ctl admit --explain-policy= SHOULD report which request/action/resource/evidence predicate passed or failed。
+
+** ctl view rebuild
+
+=ctl view rebuild= projects admitted state into human/agent-readable views。
+
+It MUST NOT update =refs/main=。
+
+It MAY write files under =views/=。
+
+** ctl check
+
+=ctl check= validates:
+
+- object canonical encoding
+- CID correctness
+- root chain
+- recorded semantics
+- bindings invariant
+- policy presence
+- admission batch validity
+- view staleness
+- refs/main consistency
+- deterministic root reconstruction
+- local config not participating in semantic validity
+
+It MUST NOT repair silently。
+
+* Profile System
+
+** Kernel profile
+
+=kernel_profile= identifies protocol semantics implemented by validator。
+
+It is not project-defined。
+
+If validator does not recognize =kernel_profile=, it MUST fail。
+
+Kernel profile migration is unsupported in v0.1.1。
+
+All objects participating in one transition MUST use the same recognized =kernel_profile=。
+
+Future kernel migration MUST be a special protocol, not an ordinary AdmissionBatch side effect。
+
+** Payload profiles
+
+=payload_profile= identifies domain-level interpretation。
+
+Examples:
+
+#+begin_example
+researchctl/claim/1
+researchctl/experiment/1
+software/patch/1
+company/approval/1
+agent/run-start/1
+agent/run-receipt/1
+ctl-governance/policy-set/1
+ctl-governance/role-binding/1
+ctl-data/opaque-json/1
+#+end_example
+
+Unknown payload profile MUST return =UnsupportedProfile= when a Revision declaring it is recorded, activated, or needed to validate a history。
+
+Uninterpreted JSON MUST use the explicit =ctl-data/opaque-json/1= profile。
+
+Unknown payload profile MUST NOT become active via binding and MUST NOT become =sys:policy=。
+
+** Profile conformance
+
+Mutable local project config MAY declare UI preferences, paths, cache settings, operator mapping, or default commands。
+
+Mutable project config MUST NOT affect canonical semantic validity。
+
+Semantic profile configuration, if needed, MUST be represented as recorded Revision data and pinned by active bindings or active policy。
+
+v0.1.1 may operate without dynamic profile registry: supported payload profile IDs are declared by ValidatorCapabilities and implemented by the validator。
+
+* General Use Cases
+
+** Research
+
+ResearchCTL profile can model：
+
+- claim lifecycle
+- proof attempts
+- computation runs
+- negative results
+- literature records
+- environment reproducibility
+- reviewed theorem statements
+- current research focus
+
+** Software Engineering
+
+Software Project Profile can model：
+
+- issue
+- design proposal
+- patch
+- test receipt
+- code review
+- release decision
+- rollback decision
+- migration plan
+
+** Company Governance
+
+Company Operations Profile can model：
+
+- department
+- role
+- authority delegation
+- approval request
+- incident report
+- SOP revision
+- audit packet
+
+** Legal / Compliance
+
+Compliance Profile can model：
+
+- policy revision
+- evidence packet
+- reviewer attestation
+- exception request
+- expiration and renewal
+
+** Personal Knowledge / Life OS
+
+Personal Profile can model：
+
+- goal
+- commitment
+- decision
+- reflection
+- task
+- recurring review
+- memory item
+
+** Multi-Agent Coordination
+
+Agent Coordination Profile can model：
+
+- agent role
+- allowed tools
+- context manifest
+- run receipt
+- critique
+- handoff
+- admission request
+
+* ResearchCTL Profile Sketch
+
+This section is non-normative。
+
+** ClaimRevision
+
+Research claim payload might include：
+
+- statement
+- epistemic_assessment
+- assumptions
+- dependencies
+- evidence
+- counterevidence
+- confidence
+- reviewer requirements
+
+** ExperimentRevision
+
+Experiment payload might include：
+
+- hypothesis
+- input artifacts
+- command plan
+- environment
+- expected outputs
+- actual receipt links
+- result interpretation
+
+** LiteratureRevision
+
+Literature payload might include：
+
+- bibliographic ref
+- source hash or DOI
+- extracted claims
+- relevance
+- open questions
+- reliability notes
+
+** RouteProposalRevision
+
+RouteProposal payload might include：
+
+- current goal
+- recommended next objects
+- do-not-read-by-default
+- blockers
+- stale assumptions
+- decision points
+
+View may render RouteProposal, but View must not invent it。
+
+* Twisted-Yetter Project Profile Sketch
+
+This section is non-normative。
+
+Possible domain objects：
+
+- =ty:category-model=
+- =ty:kirby-diagram=
+- =ty:four-manifold-pair=
+- =ty:normalization-convention=
+- =ty:invariant-definition=
+- =ty:computation-run=
+- =ty:exotic-pair-candidate=
+- =ty:negative-control=
+- =ty:go-no-go-criterion=
+
+Important active bindings might include：
+
+#+begin_example
+sys:policy
+ty:current-main-plan
+ty:normalization-convention
+ty:active-candidate-pair
+ty:negative-control-suite
+ty:current-context-route
+#+end_example
+
+But all of this is profile data。
+
+Kernel only sees logical ids and CIDs。
+
+* Validation Fixtures and Golden Vectors
+
+v0.1.1 implementation MUST include invalid fixtures and golden vectors。
+
+Protocol freeze requires fixtures with：
+
+- exact input bytes
+- exact expected CID
+- exact expected accept / reject / UnsupportedProfile category
+- exact expected deterministic =R1= bytes for accepted transitions
+- exact expected =refs/main= behavior for stale-root publish attempts
+
+Human diagnostic error code MAY be included in fixtures, but is not normative in v0.1.1。
+
+** Encoding fixtures
+
+Invalid:
+
+- duplicate JSON keys
+- float numbers
+- NaN/Infinity
+- non-canonical key order
+- forbidden structural field such as =cid=, =self_cid=, or =revision_id=
+- uppercase CID hex
+- UTF-8 BOM
+- lone surrogate
+- integer leading zero
+- =-0=
+- unknown structural field
+
+** Revision fixtures
+
+Invalid:
+
+- parent cycle
+- unsorted parents
+- duplicate parents
+- project_id mismatch
+- unknown kernel_profile
+- parent logical_id mismatch
+- parent project_id mismatch
+- parent not recorded
+- cross-project direct parent CID
+- target Revision wrong object type
+
+** Admission fixtures
+
+Invalid:
+
+- recorded_revisions unsorted
+- duplicate recorded CID
+- recorded_revisions contains non-Revision CID
+- recorded_revisions repeats already recorded CID
+- binding_ops unsorted
+- duplicate logical_id in binding_ops
+- set op with =new: null=
+- set op with old =new.logical_id= wrapper
+- set op with new CID not recorded
+- set op where target Revision =logical_id= does not equal binding key
+- set op where target Revision =project_id= does not equal batch project
+- set op where target Revision =kernel_profile= does not equal batch kernel profile
+- remove op with =new_cid= field
+- expected absent but parent bound
+- expected bound but parent absent
+- expected bound to wrong CID
+- evidence CID not recorded
+- evidence target missing
+- evidence supports claim A but policy requirement is for claim B
+- malformed evidence basis id
+- well-formed but unsupported evidence basis id returns UnsupportedProfile
+- supported evidence predicate returns false
+- principal_claim role binding not active
+- principal_claim actor mismatch
+- old policy does not authorize new policy
+- new policy malformed
+- new policy removes all future policy-update authority
+
+** Root fixtures
+
+Invalid:
+
+- active binding points to unrecorded CID
+- active binding target =logical_id= mismatch
+- missing =sys:policy=
+- separate =active_policy= field
+- separate =active_heads= field
+- root contains =created_at=
+- transition does not point to producing batch
+- parent_root mismatch
+- canonical bytes of root do not equal deterministic result of =validate_chain=
+
+** Policy fixtures
+
+Invalid:
+
+- arbitrary code in PolicySet
+- unknown action allowed by fallback
+- malformed rule silently ignored
+- policy transition removes all future authority
+- unknown resource selector
+- RoleBinding payload grants a role not allowed by =role_binding= selector
+- policy rule using =logical_id_prefix = "role-binding:reviewer:"= without payload-aware restriction is insufficient to constrain granted =role_id=
+- RoleBinding child Revision changes =actor_id=, =role_id=, or =scope.project_id= from its parent
+- mutable project config changes semantic validity
+- non-allow =effect= accepted in v0.1.1
+
+** Cross-language vectors
+
+The suite MUST include:
+
+- one canonical object whose CID is checked in Python, Rust, and TypeScript
+- one genesis transition with exact root bytes
+- one non-genesis transition with exact root bytes
+- one stale worktree expected-root failure
+- one =sys:policy= replacement accepted by old policy and checked by new policy liveness
+- one =sys:policy= replacement rejected because future authority disappears
+- one unsupported evidence basis vector returning =UnsupportedProfile=
+- one RoleBinding selector pass vector where a lead may grant =role:reviewer=
+- one RoleBinding payload-escalation vector where the same lead attempts to grant =role:owner= and is rejected
+- one genesis parent-outside-batch vector
+- one genesis non-empty evidence vector
+- one reserved =sys:*= namespace vector
+- one =sys:policy= non-PolicySet vector
+- one RoleBinding lineage assignment-change vector
+- one RoleBinding slot-hijack vector with no parent edge, expected =InvalidHistory=
+- one RoleBinding non-fast-forward vector where identity matches but the active old CID is not a direct parent, expected =InvalidHistory=
+- one mixed invalid-plus-unsupported vector, expected =InvalidHistory=
+- one genesis non-empty-evidence plus unsupported-basis vector, expected =InvalidHistory=
+- one root unknown-field / malformed stored-root vector for =validate_chain=
+- one trust-anchor project mismatch vector
+- one trust-anchor kernel mismatch vector
+- one chain-not-terminating-at-pinned-genesis vector
+
+** Reference artifacts
+
+Formal v0.1.1 Protocol Freeze requires executable reference artifacts:
+
+#+begin_example
+reference/ctl_ref.py
+reference/README.md
+reference/ctl_recompute.py
+vectors/encoding.jsonl
+vectors/genesis/
+vectors/non-genesis/
+vectors/role-binding-selector-pass/
+vectors/role-binding-payload-escalation/
+vectors/role-binding-slot-hijack-no-parent/
+vectors/role-binding-non-fast-forward/
+vectors/policy-replace-pass/
+vectors/policy-replace-liveness-fail/
+vectors/unsupported-basis/
+vectors/invalid-plus-unsupported/
+vectors/genesis-evidence-plus-unsupported/
+vectors/genesis-parent-outside/
+vectors/genesis-evidence-nonempty/
+vectors/sys-namespace-invalid/
+vectors/sys-policy-opaque-invalid/
+vectors/role-binding-lineage-change/
+tests/
+run-reference-tests.txt
+#+end_example
+
+The reference validator MUST implement:
+
+- canonical encoder
+- object/blob CID calculation
+- schema validation
+- profile validation dispatch
+- Mandatory Governance Profile evaluator
+- evidence predicate registry mechanism
+- =derive_genesis=
+- =validate_chain=
+- =validate_transition=
+- golden vector runner
+
+After this point, protocol review SHOULD compare prose spec, reference implementation, and golden vectors rather than reopen architecture。
+
+* Dogfood Plan
+
+Implementation SHOULD dogfood in this order：
+
+** 1. Synthetic fixture project
+
+Create tiny fake project with：
+
+- genesis policy
+- one claim revision
+- one review receipt
+- one admission
+- one active binding update
+- one view rebuild
+- one invalid fixture suite
+
+Goal：validate protocol mechanics without domain complexity。
+
+** 2. Chronicle/CTL design docs
+
+Convert the current design discussion itself into objects：
+
+- design proposal revisions
+- Chronicle review revisions
+- response revisions
+- active protocol draft binding
+
+Goal：test whether the meta project can govern itself。
+
+** 3. Twisted-Yetter legacy snapshot
+
+Import current =twisted-yetter.org= and related notes as legacy snapshot objects。
+
+Do not attempt fine-grained ontology first。
+
+Goal：preserve provenance and establish first current view。
+
+** 4. ResearchCTL profile
+
+Only after kernel mechanics work, add research-specific objects。
+
+Goal：avoid confusing kernel bugs with research ontology design。
+
+* Deferred
+
+The following are explicitly deferred from v0.1.1：
+
+- terminal state
+- AlternativeSetRevision as kernel concept
+- true append-only remote log
+- cryptographic signatures
+- hardware attestation
+- encrypted object store
+- multi-parent state roots
+- CRDT merge semantics
+- distributed consensus
+- rich UI
+- natural language proof checker
+- arbitrary plugin execution
+
+AlternativeSetRevision MAY be a profile object later, but not kernel primitive now。
+
+* Open Questions
+
+** Name
+
+Possible names：
+
+- CTL Kernel
+- ObjectCTL Kernel
+- ProvenanceCTL Kernel
+- Chronicle-aligned CTL Kernel
+
+My current recommendation：
+
+#+begin_quote
+Use =CTL Kernel= for the machine protocol,
+describe it as Chronicle-aligned bootstrap substrate,
+and reserve =ResearchCTL= for the research profile.
+#+end_quote
+
+** Control directory name
+
+Options：
+
+- =.ctl/=
+- =.chronicle-ctl/=
+- =.chronicle/=
+
+My current recommendation：
+
+#+begin_quote
+Use =.ctl/= for short local tooling, with an implementation option to store the canonical control directory under Git common dir.
+#+end_quote
+
+** Normative document split
+
+This file still mixes normative protocol, implementation guide, and profile sketches。
+
+Before final freeze, split into：
+
+#+begin_example
+01-ctl-kernel-wire-v1.org
+02-ctl-governance-profile-v1.org
+03-ctl-local-store-v1.org
+04-researchctl-profile-and-dogfood.org
+#+end_example
+
+This split is documentation hygiene, not a semantic change。
+
+** Signatures
+
+Not v0.1.1。
+
+But object schema should not block future signatures。
+
+Possible future approach：
+
+- signed admission batches
+- signed reviews
+- signed roots
+- transparency log inclusion proof
+
+* Minimal Example
+
+** Initial Policy Revision
+
+#+begin_src json
+{
+  "profile": "ctl/revision/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:demo",
+  "logical_id": "sys:policy",
+  "revision_kind": "policy-set",
+  "parents": [],
+  "payload_profile": "ctl-governance/policy-set/1",
+  "payload": {
+    "version": 1,
+    "default": "deny",
+    "rules": [
+      {
+        "effect": "allow",
+        "subject": {
+          "role_id": "role:owner"
+        },
+        "actions": [
+          "binding.remove",
+          "binding.set",
+          "policy.replace",
+          "revision.record"
+        ],
+        "resources": [
+          {
+            "logical_id": "sys:policy"
+          },
+          {
+            "logical_id_prefix": "claim:"
+          },
+          {
+            "logical_id_prefix": "role-binding:"
+          }
+        ],
+        "required_evidence_basis": []
+      }
+    ]
+  },
+  "created_at": "2026-06-25T23:00:00Z",
+  "created_by": {
+    "actor_id": "operator:local"
+  }
+}
+#+end_src
+
+** Initial RoleBinding Revision
+
+#+begin_src json
+{
+  "profile": "ctl/revision/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:demo",
+  "logical_id": "role-binding:operator",
+  "revision_kind": "role-binding",
+  "parents": [],
+  "payload_profile": "ctl-governance/role-binding/1",
+  "payload": {
+    "actor_id": "actor:jin",
+    "role_id": "role:owner",
+    "scope": {
+      "project_id": "project:demo"
+    }
+  },
+  "created_at": "2026-06-25T23:00:00Z",
+  "created_by": {
+    "actor_id": "operator:local"
+  }
+}
+#+end_src
+
+** Genesis AdmissionBatch
+
+#+begin_src json
+{
+  "profile": "ctl/admission-batch/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:demo",
+  "parent_root": null,
+  "recorded_revisions": [
+    "ctlobj-sha256:policy-cid",
+    "ctlobj-sha256:role-binding-cid"
+  ],
+  "binding_ops": [
+    {
+      "op": "set",
+      "logical_id": "role-binding:operator",
+      "expected": {
+        "state": "absent"
+      },
+      "new_cid": "ctlobj-sha256:role-binding-cid"
+    },
+    {
+      "op": "set",
+      "logical_id": "sys:policy",
+      "expected": {
+        "state": "absent"
+      },
+      "new_cid": "ctlobj-sha256:policy-cid"
+    }
+  ],
+  "evidence": [],
+  "principal_claim": {
+    "actor_id": "actor:jin",
+    "role_bindings": [],
+    "authentication_assurance": "bootstrap-local-operator"
+  },
+  "submitted_by": {
+    "actor_id": "operator:local"
+  },
+  "admitted_at": "2026-06-25T23:01:00Z"
+}
+#+end_src
+
+** Genesis ProjectStateRoot
+
+#+begin_src json
+{
+  "profile": "ctl/project-state-root/1",
+  "kernel_profile": "ctl-kernel/1",
+  "project_id": "project:demo",
+  "parent": null,
+  "bindings": {
+    "role-binding:operator": "ctlobj-sha256:role-binding-cid",
+    "sys:policy": "ctlobj-sha256:policy-cid"
+  },
+  "transition": "ctlobj-sha256:genesis-batch-cid"
+}
+#+end_src
+
+* 最後結論
+
+這個系統不應該被導向「只有 research 可以用」。
+
+Research 是第一個也是非常好的 dogfood domain，因為它長期、複雜、證據密集、容易被 context 污染，也需要嚴格 provenance。
+
+但 kernel 的真正本質是：
+
+#+begin_quote
+Object-first, policy-governed, admission-controlled, context-projection-aware state protocol.
+#+end_quote
+
+因此我建議下一步把工作名稱固定成：
+
+#+begin_example
+CTL Kernel v0.1.1
+#+end_example
+
+然後把：
+
+#+begin_example
+ResearchCTL
+#+end_example
+
+保留給 research profile。
+
+這樣可以同時保留 Chronicle agent 長期思考的 generality，也保留我們在 twisted-yetter 專案中真正需要的 research ergonomics。

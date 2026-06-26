@@ -1,0 +1,112 @@
+#+TITLE: CTL Kernel Conformance Scaffold
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 狀態
+
+這個目錄是本 repo 的 object-first lab note / governance kernel 原型，不是 twisted Yetter 數學計算本身。
+
+目前目標不是再擴寫 spec，而是把 CTL Kernel v0.1.1 的核心規則變成可重跑的 conformance evidence：
+
+- canonical encoding
+- object CID generation
+- genesis derivation
+- ordinary transition
+- mandatory governance evaluator
+- RoleBinding escalation / slot hijack regression tests
+- root-chain replay
+- UnsupportedProfile / InvalidHistory result aggregation fixtures
+
+目前 spec snapshot 在：
+
+#+begin_example
+meta/ctl-kernel/spec/ctl-kernel-v0.1.1.org
+#+end_example
+
+* 為什麼現在要有這個目錄
+
+前幾輪 prose review 已經讓核心架構收斂到：
+
+#+begin_example
+Revision
+AdmissionBatch
+ProjectStateRoot
+
+Mandatory governance:
+  PolicySetRevision
+  RoleBindingRevision
+  fixed pure evaluator
+#+end_example
+
+接下來的 blocker 不應該再是「是否能想出更漂亮的 ontology」，而是：
+
+- reference implementation 是否能重跑；
+- vectors 是否能重建；
+- 同一 bytes 是否得到同一 CID/root；
+- authority bypass 是否有 failing test；
+- 合規 validator 是否會對支援範圍內的同一 history 分歧。
+
+* 重現指令
+
+目前只使用 Python standard library。建議用 =uv= 建立環境，但不需要第三方 dependency。
+
+#+begin_src sh
+uv venv
+uv run python -m py_compile meta/ctl-kernel/reference/ctl_ref.py
+cd meta/ctl-kernel
+uv run python reference/ctl_ref.py generate-vectors vectors
+uv run python reference/ctl_ref.py check-vectors vectors
+uv run python reference/ctl_recompute.py vectors
+uv run python -m unittest discover -s tests
+#+end_src
+
+不用 =uv= 時也可直接：
+
+#+begin_src sh
+cd meta/ctl-kernel
+python3 -m py_compile reference/ctl_ref.py
+python3 reference/ctl_ref.py generate-vectors vectors
+python3 reference/ctl_ref.py check-vectors vectors
+python3 reference/ctl_recompute.py vectors
+python3 -m unittest discover -s tests
+#+end_src
+
+* Freeze Gate
+
+v0.1.1 experimental freeze 之前，只讓以下類型阻擋：
+
+** P0
+
+- 未授權 principal 可以改變 canonical state。
+- 同一 canonical input 可以產生不同 CID/root。
+- 歷史可以被接受但無法由 parent + batch 重建。
+- candidate policy 可以批准自己的 introduction。
+- 不同合規 validator 對支援範圍內的同一 history 一個判 =Valid=，一個判 =InvalidHistory=。
+
+** P1
+
+- 可以破壞既有 authority assignment。
+- 可以把未 recorded object 變成 active。
+- evidence 可以被錯誤重用到另一個 operation。
+- 合法且符合 limits 的 input 可造成不受控計算。
+- crash-safe publish 可能讓 =refs/main= 指向不完整 state。
+
+** 不阻擋 v0.1.1
+
+- 更漂亮的角色 ontology。
+- 多 parent root。
+- signatures。
+- encrypted compartments。
+- remote append-only log。
+- 更豐富的 selector。
+- UI。
+- 完整 Chronicle compatibility。
+
+這些若重要，進 =v0.1.2 backlog=。
+
+* 下一步
+
+1. 把 spec prose 與 =reference/ctl_ref.py= 的每條核心 invariant 建立互相引用。
+2. 加 property / mutation tests，特別是 authority bypass 與 replay forgery。
+3. 把 lab note artifact 從 human-readable Org 漸進搬到 CTL object/vectors 裡。

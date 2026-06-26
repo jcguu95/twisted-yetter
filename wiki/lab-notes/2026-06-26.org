@@ -1,0 +1,80 @@
+#+TITLE: Lab Note 2026-06-26
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Purpose
+
+把 CTL / Chronicle meta project 從 prose review phase 推進到 executable conformance phase。
+
+Working understanding：
+
+- 前幾輪 review 已經讓核心架構收斂。
+- 繼續只用 prose 找漏洞的邊際效益開始下降。
+- 下一步應該把 invariant 變成 reference implementation、golden vectors、tests、mutation fixtures。
+
+* Repo State
+
+當下基準 commit：
+
+#+begin_example
+6d8a53b Initial twisted Yetter notes
+#+end_example
+
+當下已知 dirty / untracked：
+
+#+begin_example
+AGENTS.md was already untracked before this step.
+This step adds meta/ctl-kernel/, wiki/, pyproject.toml, and .gitignore.
+#+end_example
+
+* Actions
+
+新增：
+
+- =meta/ctl-kernel/spec/ctl-kernel-v0.1.1.org=
+- =meta/ctl-kernel/reference/ctl_ref.py=
+- =meta/ctl-kernel/reference/ctl_recompute.py=
+- =meta/ctl-kernel/vectors/=
+- =meta/ctl-kernel/tests/test_reference.py=
+- =meta/ctl-kernel/run-reference-tests.txt=
+- =meta/ctl-kernel/README.org=
+- =pyproject.toml=
+- =uv.lock=
+- =wiki/index.org=
+
+* Reproduction
+
+#+begin_src sh
+uv lock
+cd meta/ctl-kernel
+uv run python -m py_compile reference/ctl_ref.py
+uv run python reference/ctl_ref.py generate-vectors vectors
+uv run python reference/ctl_ref.py check-vectors vectors
+uv run python reference/ctl_recompute.py vectors
+uv run python -m unittest discover -s tests
+#+end_src
+
+Recorded transcript:
+
+#+begin_example
+meta/ctl-kernel/run-reference-tests.txt
+#+end_example
+
+* Interpretation
+
+這一步不是宣稱 CTL Kernel 已 final freeze。
+
+它只表示我們把下一輪 review 的媒介從：
+
+#+begin_example
+prose counterexample
+#+end_example
+
+切換成：
+
+#+begin_example
+executable invariant + golden vector + replay test
+#+end_example
+
+未來新增的批評應優先變成 failing test，然後再改 spec/reference。
