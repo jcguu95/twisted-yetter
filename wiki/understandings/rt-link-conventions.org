@@ -1,0 +1,133 @@
+#+TITLE: RT/Kauffman Link Convention Ledger for First Framed Link Evaluator
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:3 num:t ^:nil
+
+* Status
+
+- decision graph node: =n14-rt-convention-source-capture=
+- status: =working understanding= / =reference convention ledger=
+- scope: ordinary colored framed link evaluator conventions only.
+- companion reference record: =ref:rt-or-kauffman-link-source=
+- related repo ledgers:
+  - =wiki/understandings/formula-conventions.org=
+  - =wiki/understandings/su2-level2-certificate.org=
+
+This note pins what the first colored framed link evaluator must know before it is used by any
+Kirby-color or 4D surgery formula.  It does not implement code and does not certify any closed
+4-manifold invariant.
+
+* Boundary: Link Evaluator Versus 4D Surgery Normalization
+
+The first evaluator should compute ordinary colored framed link values in a fixed RT or
+Kauffman-bracket convention.  Its output is a link-evaluation building block.
+
+It must not silently include:
+
+- Kirby color sums such as \(\omega=\sum_i d_i X_i\) or decorated variants such as
+  \(\Omega_a=\sum_i d_i\lambda_i(a)X_i\);
+- 4D handle-count normalization;
+- signature / anomaly corrections;
+- Broda, Crane-Yetter, or Yetter closed-manifold normalization;
+- 1-/3-handle or dotted-circle conventions.
+
+Those belong to later ordinary/twisted surgery nodes.  Using them inside the link evaluator would
+make it hard to audit whether a discrepancy comes from RT link conventions or from 4D
+normalization.
+
+* Required Convention Fields
+
+** Labels and coefficient field
+
+- =WORKING UNDERSTANDING=: the evaluator input labels components by simple objects of the chosen
+  ribbon / modular category.
+- =WORKING UNDERSTANDING=: for the current =SU(2)_2= control category the simple labels are
+  \(0,1,2\), with dimensions recorded in
+  =wiki/understandings/su2-level2-certificate.org=.
+- =SOURCE NEEDED=: primary source for the exact RT or Kauffman-bracket label indexing convention
+  intended for the first evaluator.
+- =SOURCE NEEDED=: coefficient field / root-of-unity convention for exact values.
+
+** Colored unknot value
+
+The first evaluator must decide the value of a 0-framed unknot colored by a simple object \(i\).
+
+- =WORKING TARGET=: \(\langle U_0(i)\rangle=d_i\), the quantum dimension of \(i\).
+- =SOURCE NEEDED=: page / definition / proposition source for this normalization in the selected
+  RT or Kauffman-bracket reference.
+- =SOURCE NEEDED=: whether the source writes this as \(d_i\), \(\Delta_i\), bracket-theoretic
+  \((-1)^i[n]\), or another convention.
+- =WARNING=: until the source is pinned, do not identify \(\Delta_i\) from Yetter's
+  \(\omega,\theta\) notation with \(d_i\) at theorem level.
+
+** Framed unknot twist
+
+The evaluator must decide how integer framing changes the colored unknot value.
+
+- =WORKING TARGET=: \(\langle U_f(i)\rangle=\theta_i^f d_i\), where \(\theta_i\) is the ribbon
+  twist eigenvalue of simple object \(i\).
+- =SOURCE NEEDED=: sign convention for positive framing / right-handed full twist.
+- =SOURCE NEEDED=: exact \(\theta_i\) values for =SU(2)_2= in the selected convention.
+- =SOURCE NEEDED=: whether the Kauffman-bracket convention uses \(A^{i(i+2)}\),
+  \((-1)^i A^{i(i+2)}\), its inverse, or another twist factor.
+
+** Unlink multiplicativity
+
+The evaluator must decide how disjoint union is normalized.
+
+- =WORKING TARGET=: the colored value of a split unlink is multiplicative:
+  \[
+  \langle L\sqcup U_0(i)\rangle=\langle L\rangle d_i.
+  \]
+- =SOURCE NEEDED=: source label for multiplicativity / monoidal normalization.
+- =SOURCE NEEDED=: whether there is an overall empty-link normalization distinct from \(1\).
+- =WARNING=: this is an RT link-evaluation convention, not the Kirby-color multiplicativity after
+  summing over labels.
+
+** Hopf link / S-matrix values
+
+The evaluator needs a known nontrivial two-component control, preferably the Hopf link.
+
+- =WORKING TARGET=: for a positively oriented, 0-framed Hopf link colored \(i,j\), use a convention
+  compatible with the modular \(S\)-matrix, such as
+  \[
+  \langle H_+(i,j)\rangle = \frac{S_{ij}}{S_{00}}
+  \]
+  if the selected RT convention normalizes the 0-framed unknot by \(d_i=S_{0i}/S_{00}\).
+- =SOURCE NEEDED=: source page / proposition for the exact Hopf-link-to-\(S\)-matrix formula.
+- =SOURCE NEEDED=: orientation convention for \(H_+\) versus \(H_-\), and whether \(S\) or
+  \(S^{-1}\) / complex conjugate appears.
+- =SOURCE NEEDED=: exact =SU(2)_2= \(S\)-matrix in the same root-of-unity convention.
+
+** Kauffman bracket expected controls
+
+If the first evaluator is bracket-first rather than abstract RT-first, it must instead pin
+bracket controls.
+
+- =WORKING TARGET=: record the bracket value of a colored 0-framed unknot, framed twist, split
+  unlink, and Hopf link in one consistent \(A\)-convention.
+- =SOURCE NEEDED=: Jones-Wenzl idempotent normalization for the colored unknot.
+- =SOURCE NEEDED=: Kauffman bracket skein relation, loop value, and root-of-unity specialization.
+- =SOURCE NEEDED=: conversion between bracket labels and =SU(2)_k= simple-object labels.
+- =WARNING=: do not mix bracket \(A\)-powers with RT twist/S-matrix values unless the conversion is
+  explicitly recorded.
+
+* First-Evaluator Acceptance Checklist
+
+Before =n18-colored-framed-link-evaluator-gate= treats output as convention-pinned, the repo needs:
+
+- colored 0-framed unknot value with source label;
+- integer framed unknot twist factor with sign convention and source label;
+- split unlink multiplicativity and empty-link value with source label;
+- Hopf link / \(S\)-matrix expected values, or bracket-equivalent Hopf controls, with source label;
+- exact =SU(2)_2= dimensions, twists, and \(S\)-matrix in one convention;
+- explicit statement that no Kirby color, surgery normalization, or 4D invariant normalization is
+  included in the ordinary link evaluator.
+
+* Current n14 Result
+
+- Boundary between RT/Kauffman link convention and 4D Kirby-color/surgery normalization:
+  =PASS= at working-understanding level.
+- Required evaluator convention list: =PASS=.
+- Theorem-level source audit: =NOT COMPLETE=; multiple entries remain =SOURCE NEEDED= in
+  =ref:rt-or-kauffman-link-source=.

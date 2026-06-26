@@ -1,0 +1,76 @@
+#+TITLE: Reference Stub: RT or Kauffman Bracket Link Convention Source
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Metadata
+
+- ref id: =ref:rt-or-kauffman-link-source=
+- status: =reference stub= / =SOURCE NEEDED=
+- created by node: =n14-rt-convention-source-capture=
+- purpose: identify the source audit needed for the first ordinary colored framed link evaluator.
+- capture state: no external PDF/web capture performed in this pass.
+- local PDF/source snapshot: =SOURCE NEEDED=
+- content hash: =SOURCE NEEDED=
+
+* Candidate Source Families
+
+This record intentionally does not choose a theorem-level source yet.  A later source-audit pass
+should upgrade one or more of these candidates to full reference records with locator, capture
+time, content hash, and exact page / definition / proposition labels.
+
+| Candidate id | Possible use | Needed verification |
+|--------------+--------------+---------------------|
+| =turaev-rt-ribbon-categories= | RT colored framed link invariant, twists, quantum dimensions, \(S\)-matrix normalization | SOURCE NEEDED: edition, locator, pages for framed link invariant, unknot value, twist/framing rule, disjoint union, Hopf/S-matrix formula |
+| =kauffman-lins-temperley-lieb= | Kauffman bracket / Temperley-Lieb =SU(2)_k= conventions and recoupling controls | SOURCE NEEDED: edition, locator, pages for bracket skein relation, loop value, Jones-Wenzl idempotents, colored unknot, twist, Hopf link |
+| =bakalov-kirillov-tensor-categories= | modular category \(S\)-matrix, twists, RT link controls | SOURCE NEEDED: edition, locator, pages for ribbon twist, categorical trace, Hopf link, \(S_{ij}/S_{00}\) normalization |
+| =yetter-1993-homologically-twisted= | relationship to later Kirby colors \(\omega,\theta\), if it states link conventions directly | SOURCE NEEDED: exact pages; current repo record remains a placeholder |
+
+* Claim Labels Needed
+
+The first evaluator must not promote the following to theorem-level until this section is filled.
+
+- Colored 0-framed unknot value:
+  - expected working target: \(\langle U_0(i)\rangle=d_i\).
+  - source label: =SOURCE NEEDED=.
+- Framed unknot twist:
+  - expected working target: \(\langle U_f(i)\rangle=\theta_i^f d_i\).
+  - source label: =SOURCE NEEDED=.
+  - positive-framing sign convention: =SOURCE NEEDED=.
+- Split unlink multiplicativity:
+  - expected working target:
+    \(\langle L\sqcup U_0(i)\rangle=\langle L\rangle d_i\).
+  - empty-link value: =SOURCE NEEDED=.
+  - source label: =SOURCE NEEDED=.
+- Hopf link / \(S\)-matrix:
+  - expected working target:
+    \(\langle H_+(i,j)\rangle=S_{ij}/S_{00}\), subject to orientation and normalization.
+  - source label: =SOURCE NEEDED=.
+  - positive versus negative Hopf convention: =SOURCE NEEDED=.
+- Kauffman bracket alternative:
+  - skein relation and loop value: =SOURCE NEEDED=.
+  - Jones-Wenzl idempotent normalization: =SOURCE NEEDED=.
+  - colored unknot and twist formulas: =SOURCE NEEDED=.
+  - bracket-to-RT conversion: =SOURCE NEEDED=.
+
+* Use In This Repo
+
+Use this record only as a convention-source checklist.  It is not proof of a formula.
+
+The paired working ledger is =wiki/understandings/rt-link-conventions.org=.  Later nodes may cite
+=ref:rt-or-kauffman-link-source= to explain why the evaluator still needs page-level source audit,
+but not as theorem-level evidence for the RT or Kauffman bracket formulas until the missing labels
+above are filled.
+
+* Boundary Note
+
+This source record concerns ordinary colored framed link evaluation.  It does not source:
+
+- Yetter's homologically twisted closed 4-manifold invariant;
+- Kirby color sums \(\omega,\theta,\Omega_a\);
+- Crane-Yetter / Broda normalization;
+- signature correction or 4D handle-count normalization;
+- decorated \(K(A,2)\) stabilization behavior.
+
+Those items belong to =ref:yetter-1993-homologically-twisted=,
+=ref:cky-1994-state-sum-i=, and later surgery-normalization records.
