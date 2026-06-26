@@ -1,0 +1,84 @@
+#+TITLE: Ordinary Control Gate
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n40-ordinary-control-gate=
+- verdict: =pass=
+- route: allow later nontrivial-decoration gates; do not route to =n60-failure-triage=
+- claim level: =computed evidence= for formal metadata behavior only
+- artifact: =experiments/results/ordinary-control/n40-ordinary-control-gate.json=
+
+This note is an ordinary-control gate record, not a proof or numerical
+calculation of the ordinary Crane-Yetter/Yetter invariant.
+
+* Inputs Read
+
+- =AGENTS.md=
+- =ctl-dogfood/graphs/computation-first-v2.json=, node =n40-ordinary-control-gate=
+- =wiki/understandings/formula-contract-v0.org=
+- =wiki/understandings/invariant-core-v0.org=
+- =src/twisted_yetter/invariant.py=
+- =src/twisted_yetter/linking_matrix.py=
+- =src/twisted_yetter/artifacts.py=
+
+* Gate Scope
+
+n40 checks the =alpha=0= formal path and metadata behavior of the n35 core.
+It does not verify a numerical ordinary invariant value, because n35 is an
+=experimental= / =inconclusive= matrix-level core and still refuses numerical
+evaluation until the source-needed formula data are audited.
+
+The toy inputs are:
+
+- =S4=, empty matrix =[]= with decoration =()=.
+- =CP2=, matrix =[[1]]= with decoration =(0)=.
+- =anti-CP2=, matrix =[[-1]]= with decoration =(0)=.
+- =S2xS2=, hyperbolic matrix =[[0,1],[1,0]]= with decoration =(0,0)=.
+
+* Acceptance Mapping
+
+- =alpha=0 is stable across all toy inputs=: =PASS=.
+  Each toy output has =ordinary_path_selected: true=, all component colors
+  =omega=, =theta_component_count: 0=, and =alpha_q_alpha_mod2: 0=.
+- =orientation reversal behavior is recorded=: =PASS=.
+  The =CP2= and =anti-CP2= formal outputs differ exactly because the recorded
+  presentation data differ: signature =+1= versus =-1= and framing sign
+  reversal.  This is classified as recorded metadata behavior with numerical
+  ordinary value still unsupported.
+- =normalization mismatch is either absent or classified=: =PASS=.
+  All toy outputs use the same metadata names:
+  =experimental-yetter-surgery-normalization-v0= and
+  =experimental-signature-correction-v0=.  No mismatch was observed.
+
+* Trust Boundary
+
+The gate verdict is only:
+
+#+begin_src text
+alpha=0 ordinary formal path and metadata gate passes
+#+end_src
+
+Do not restate this as:
+
+- a verified ordinary Crane-Yetter/Yetter numerical invariant;
+- a theorem-level closed 4-manifold invariant;
+- presentation independence;
+- evidence for exotic smooth-structure detection.
+
+* Reproduction
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+At the time of writing, the artifact records the intended n40 claim.  The full
+pytest run should be used as the acceptance check for this node.
+
+Observed result on 2026-06-26:
+
+#+begin_src text
+52 passed
+#+end_src

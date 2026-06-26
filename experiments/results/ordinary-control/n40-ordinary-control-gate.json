@@ -1,0 +1,84 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "tests/test_ordinary_control_gate.py"
+  ],
+  "command": "uv run python -m pytest tests/test_ordinary_control_gate.py",
+  "exact_output": {
+    "claim_boundary": "alpha=0 ordinary formal path and metadata gate only; no numerical ordinary invariant value is claimed",
+    "node_id": "n40-ordinary-control-gate",
+    "normalization_mismatch": {
+      "classification": "absent",
+      "normalization_name": "experimental-yetter-surgery-normalization-v0",
+      "signature_correction_name": "experimental-signature-correction-v0"
+    },
+    "orientation_reversal_behavior": {
+      "anti_cp2_signature": -1,
+      "classification": "recorded-signature-and-framing-sign-change; numerical ordinary value unsupported",
+      "cp2_signature": 1,
+      "exact_output_equal": false
+    },
+    "route": "allow-nontrivial-decoration-gates",
+    "toy_cases": [
+      {
+        "alpha_zero_stable": true,
+        "case_id": "S4",
+        "decoration_mod2": [],
+        "ordinary_path_selected": true,
+        "sector_id": "alpha-empty",
+        "theta_component_count": 0
+      },
+      {
+        "alpha_zero_stable": true,
+        "case_id": "CP2",
+        "decoration_mod2": [
+          0
+        ],
+        "ordinary_path_selected": true,
+        "sector_id": "alpha-0",
+        "theta_component_count": 0
+      },
+      {
+        "alpha_zero_stable": true,
+        "case_id": "anti-CP2",
+        "decoration_mod2": [
+          0
+        ],
+        "ordinary_path_selected": true,
+        "sector_id": "alpha-0",
+        "theta_component_count": 0
+      },
+      {
+        "alpha_zero_stable": true,
+        "case_id": "S2xS2",
+        "decoration_mod2": [
+          0,
+          0
+        ],
+        "ordinary_path_selected": true,
+        "sector_id": "alpha-00",
+        "theta_component_count": 0
+      }
+    ],
+    "verdict": "pass"
+  },
+  "git": {
+    "commit": "4bda528e52bf8e98f25b4217c7cfc2338f8050f2",
+    "dirty": true
+  },
+  "input_hash": "3ad3fdbbb44864563ef8fa04561a9feb9cb5af4739972293ae7fd3ca90b8192a",
+  "log_references": [],
+  "notes": [
+    "n40 checks alpha=0 ordinary formal path selection and metadata names only.",
+    "The n35 core remains an experimental matrix-level formal core; ordinary numerical invariant values remain unsupported."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
