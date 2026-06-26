@@ -1,0 +1,94 @@
+#+TITLE: CTL Kernel v0.1.1 Round 14 Response
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Summary
+
+Round 14 found a narrow spec/reference divergence:
+
+#+begin_quote
+Every evidence basis appearing in the final AdmissionBatch is a normative dependency,
+even if no allow rule ultimately consumes it.
+#+end_quote
+
+The reference previously ignored unsupported evidence basis identifiers when no matching policy rule consumed them.
+That could make a spec-faithful validator return =UnsupportedProfile= while the reference returned =Valid=.
+
+* Fixed Case
+
+新增：
+
+#+begin_example
+tests/test_round14_conformance.py
+#+end_example
+
+覆蓋：
+
+#+begin_example
+valid transition + irrelevant unsupported evidence basis
+  -> UnsupportedProfile
+#+end_example
+
+* Implementation Change
+
+=validate_batch_common= 現在回傳三個 accumulator：
+
+#+begin_example
+recorded
+unsupported_profiles
+unsupported_evidence_basis
+#+end_example
+
+所有 evidence entry 仍先做 deterministic shape checks：
+
+- target shape；
+- basis id grammar；
+- cid shape；
+- target membership。
+
+若 basis id well-formed 但不在 =SUPPORTED_EVIDENCE_BASIS=，會加入
+=unsupported_evidence_basis=。Genesis 和 ordinary transition 都在 deterministic invalidity checks
+後才分類此 accumulator，以保持：
+
+#+begin_example
+InvalidHistory > UnsupportedProfile > Valid
+#+end_example
+
+因此 genesis non-empty evidence 仍是 =InvalidHistory=，即使 evidence basis unsupported。
+
+* Verification
+
+最新 transcript：
+
+#+begin_example
+meta/ctl-kernel/run-reference-tests.txt
+#+end_example
+
+本輪結果：
+
+#+begin_example
+verify-vectors: all expected categories matched
+recompute: valid
+unittest: Ran 38 tests OK
+#+end_example
+
+* Freeze Judgment
+
+我的判斷：這輪修掉 reviewer 指出的 final conformance blocker。若下一次 final gate 沒有新的
+P0/P1，應進入：
+
+#+begin_example
+CTL Kernel v0.1.1 Experimental Freeze
+#+end_example
+
+仍可阻擋 freeze 的類型只應是：
+
+- unauthorized state change；
+- policy self-authorization；
+- RoleBinding authority hijack；
+- evidence bypass / reuse；
+- root reconstruction or CID uniqueness failure；
+- supported-history validator disagreement。
+
+其他改善進 v0.1.2 backlog。

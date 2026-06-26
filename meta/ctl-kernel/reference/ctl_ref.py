@@ -363,7 +363,9 @@ def extend_role_binding_identities(
     return out
 
 
-def validate_batch_common(store: Store, batch: dict[str, Any]) -> tuple[list[tuple[str, dict[str, Any]]], list[str]]:
+def validate_batch_common(
+    store: Store, batch: dict[str, Any]
+) -> tuple[list[tuple[str, dict[str, Any]]], list[str], list[str]]:
     check_canonical_object_size(batch)
     check_keys(
         batch,
@@ -427,9 +429,12 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> tuple[list[tup
     die_unless(len(batch["evidence"]) <= 4096, "too many evidence entries")
     unique_sorted_objects(batch["evidence"], "evidence")
     recorded_set = set(batch["recorded_revisions"])
+    unsupported_evidence_basis: list[str] = []
     for entry in batch["evidence"]:
         check_keys(entry, {"target", "basis", "cid"})
         die_unless(is_id(entry["basis"]), "bad evidence basis")
+        if entry["basis"] not in SUPPORTED_EVIDENCE_BASIS:
+            unsupported_evidence_basis.append(entry["basis"])
         die_unless(is_cid(entry["cid"]), "bad evidence cid")
         target = entry["target"]
         check_keys(target, {"kind"}, {"cid", "logical_id"})
@@ -463,7 +468,7 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> tuple[list[tup
     assert_no_parent_cycle(recorded_map)
     extend_role_binding_identities({}, recorded)
 
-    return recorded, unsupported_profiles
+    return recorded, unsupported_profiles, unsupported_evidence_basis
 
 
 def check_expected(expected: Any) -> None:
@@ -793,7 +798,7 @@ def future_policy_update_possible(store: Store, state: dict[str, Any]) -> bool:
 
 def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
     batch = store.resolve(batch_cid)
-    recorded, unsupported_profiles = validate_batch_common(store, batch)
+    recorded, unsupported_profiles, unsupported_evidence_basis = validate_batch_common(store, batch)
     die_unless(batch["parent_root"] is None, "genesis parent_root must be null")
     die_unless(batch["principal_claim"]["role_bindings"] == [], "genesis principal roles must be empty")
     die_unless(batch["evidence"] == [], "genesis evidence must be empty")
@@ -839,6 +844,8 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
     die_unless(future_policy_update_possible(store, state), "genesis lacks future policy path")
     if unsupported_basis is not None:
         raise UnsupportedProfile(unsupported_basis)
+    if unsupported_evidence_basis:
+        raise UnsupportedProfile(unsupported_evidence_basis[0])
     if unsupported_profiles:
         raise UnsupportedProfile(unsupported_profiles[0])
     return state
@@ -846,7 +853,7 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
 
 def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> dict[str, Any]:
     batch = store.resolve(batch_cid)
-    recorded, unsupported_profiles = validate_batch_common(store, batch)
+    recorded, unsupported_profiles, unsupported_evidence_basis = validate_batch_common(store, batch)
     die_unless(batch["parent_root"] == state["root_cid"], "parent root mismatch")
     die_unless(batch["project_id"] == state["project_id"], "project mismatch")
     die_unless(batch["kernel_profile"] == state["kernel_profile"], "kernel mismatch")
@@ -933,6 +940,8 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
     die_unless(future_policy_update_possible(store, child), "future policy update impossible")
     if unsupported_candidate_basis is not None:
         raise UnsupportedProfile(unsupported_candidate_basis)
+    if unsupported_evidence_basis:
+        raise UnsupportedProfile(unsupported_evidence_basis[0])
     if unsupported_profiles:
         raise UnsupportedProfile(unsupported_profiles[0])
     if active_unsupported_profiles:

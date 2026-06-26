@@ -27,6 +27,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_round11_conformance.py=
 - =tests/test_round12_conformance.py=
 - =tests/test_round13_conformance.py=
+- =tests/test_round14_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -101,6 +102,10 @@ Round 12 conformance tests additionally cover:
 Round 13 conformance tests additionally cover:
 
 - genesis unsupported recorded payload profile does not mask future-policy-update liveness failure
+
+Round 14 conformance tests additionally cover:
+
+- every evidence basis in an accepted AdmissionBatch is normative, even when not consumed by policy
 
 * Reproduction
 
