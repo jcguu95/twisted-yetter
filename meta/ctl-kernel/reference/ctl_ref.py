@@ -195,7 +195,7 @@ class Store:
         return obj
 
 
-def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> None:
+def validate_revision_envelope(store: Store, cid: str | None, rev: dict[str, Any]) -> None:
     _check_json_value(rev, enforce_depth=True)
     check_canonical_object_size(rev)
     if cid is not None:
@@ -239,6 +239,8 @@ def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> Non
     die_unless(is_role_ns == is_role_profile, "RoleBinding namespace/profile invariant")
     die_unless(is_role_kind == is_role_profile, "RoleBinding kind/profile invariant")
 
+
+def validate_revision_payload(rev: dict[str, Any]) -> None:
     profile = rev["payload_profile"]
     if profile == "ctl-governance/policy-set/1":
         validate_policy_revision(rev)
@@ -250,6 +252,11 @@ def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> Non
         validate_run_receipt_revision(rev)
     else:
         raise UnsupportedProfile(profile)
+
+
+def validate_revision(store: Store, cid: str | None, rev: dict[str, Any]) -> None:
+    validate_revision_envelope(store, cid, rev)
+    validate_revision_payload(rev)
 
 
 def validate_policy_revision(rev: dict[str, Any]) -> None:
@@ -363,7 +370,7 @@ def extend_role_binding_identities(
     return out
 
 
-def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+def validate_batch_common(store: Store, batch: dict[str, Any]) -> tuple[list[tuple[str, dict[str, Any]]], list[str]]:
     check_canonical_object_size(batch)
     check_keys(
         batch,
@@ -402,14 +409,6 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     check_keys(batch["submitted_by"], {"actor_id"})
     die_unless(is_id(batch["submitted_by"]["actor_id"]), "bad submitted_by")
     check_timestamp(batch["admitted_at"])
-
-    recorded: list[tuple[str, dict[str, Any]]] = []
-    for cid in batch["recorded_revisions"]:
-        rev = store.resolve(cid)
-        validate_revision(store, cid, rev)
-        die_unless(rev["project_id"] == batch["project_id"], "recorded project mismatch")
-        die_unless(rev["kernel_profile"] == batch["kernel_profile"], "recorded kernel mismatch")
-        recorded.append((cid, rev))
 
     die_unless(len(batch["binding_ops"]) <= 1024, "too many binding ops")
     binding_ids = set()
@@ -450,6 +449,19 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
         else:
             raise InvalidHistory("bad evidence target kind")
 
+    recorded: list[tuple[str, dict[str, Any]]] = []
+    unsupported_profiles: list[str] = []
+    for cid in batch["recorded_revisions"]:
+        rev = store.resolve(cid)
+        validate_revision_envelope(store, cid, rev)
+        if rev["payload_profile"] in SUPPORTED_PAYLOAD_PROFILES:
+            validate_revision_payload(rev)
+        else:
+            unsupported_profiles.append(rev["payload_profile"])
+        die_unless(rev["project_id"] == batch["project_id"], "recorded project mismatch")
+        die_unless(rev["kernel_profile"] == batch["kernel_profile"], "recorded kernel mismatch")
+        recorded.append((cid, rev))
+
     recorded_map = dict(recorded)
     for _cid, rev in recorded:
         for parent in rev["parents"]:
@@ -458,7 +470,7 @@ def validate_batch_common(store: Store, batch: dict[str, Any]) -> list[tuple[str
     assert_no_parent_cycle(recorded_map)
     extend_role_binding_identities({}, recorded)
 
-    return recorded
+    return recorded, unsupported_profiles
 
 
 def check_expected(expected: Any) -> None:
@@ -788,9 +800,7 @@ def future_policy_update_possible(store: Store, state: dict[str, Any]) -> bool:
 
 def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
     batch = store.resolve(batch_cid)
-    if isinstance(batch, dict) and batch.get("evidence") not in (None, []):
-        raise InvalidHistory("genesis evidence must be empty")
-    recorded = validate_batch_common(store, batch)
+    recorded, unsupported_profiles = validate_batch_common(store, batch)
     die_unless(batch["parent_root"] is None, "genesis parent_root must be null")
     die_unless(batch["principal_claim"]["role_bindings"] == [], "genesis principal roles must be empty")
     die_unless(batch["evidence"] == [], "genesis evidence must be empty")
@@ -810,7 +820,9 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
         die_unless(cid in recorded_map, "genesis binding target not recorded")
         rev = recorded_map[cid]
         die_unless(rev["logical_id"] == logical_id, "genesis binding logical mismatch")
-        validate_revision(store, cid, rev)
+        validate_revision_envelope(store, cid, rev)
+    if unsupported_profiles:
+        raise UnsupportedProfile(unsupported_profiles[0])
     policy = recorded_map[bindings["sys:policy"]]
     validate_policy_revision(policy)
     unsupported_basis = unsupported_policy_basis(policy)
@@ -841,10 +853,10 @@ def derive_genesis(store: Store, batch_cid: str) -> dict[str, Any]:
 
 def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> dict[str, Any]:
     batch = store.resolve(batch_cid)
+    recorded, unsupported_profiles = validate_batch_common(store, batch)
     die_unless(batch["parent_root"] == state["root_cid"], "parent root mismatch")
     die_unless(batch["project_id"] == state["project_id"], "project mismatch")
     die_unless(batch["kernel_profile"] == state["kernel_profile"], "kernel mismatch")
-    recorded = validate_batch_common(store, batch)
     recorded_set = set(state["recorded"]) | set(batch["recorded_revisions"])
     die_unless(not (set(batch["recorded_revisions"]) & set(state["recorded"])), "already recorded")
     current_role_binding_identities = state.get("role_binding_identities")
@@ -871,7 +883,9 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
             target = store.resolve(op["new_cid"])
             die_unless(target["logical_id"] == op["logical_id"], "set logical mismatch")
             die_unless(target["project_id"] == batch["project_id"], "set project mismatch")
-            validate_revision(store, op["new_cid"], target)
+            validate_revision_envelope(store, op["new_cid"], target)
+            if target["payload_profile"] in SUPPORTED_PAYLOAD_PROFILES:
+                validate_revision_payload(target)
             if op["logical_id"].startswith("role-binding:") and op["logical_id"] in state["bindings"]:
                 die_unless(state["bindings"][op["logical_id"]] in target["parents"], "role binding fast-forward violation")
     changing_policy = any(op["op"] == "set" and op["logical_id"] == "sys:policy" for op in batch["binding_ops"])
@@ -883,6 +897,8 @@ def validate_transition(store: Store, state: dict[str, Any], batch_cid: str) -> 
     unsupported_evidence_basis = find_unsupported_evidence_basis(batch)
     if unsupported_evidence_basis is not None:
         raise UnsupportedProfile(unsupported_evidence_basis)
+    if unsupported_profiles:
+        raise UnsupportedProfile(unsupported_profiles[0])
     roles = role_bindings_for_principal(store, state, batch["principal_claim"])
     requests = make_requests(store, state, batch, recorded)
     die_unless(len(requests) <= 5121, "too many requests")

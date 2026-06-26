@@ -23,6 +23,7 @@ prose review -> executable conformance / adversarial tests
 - =tests/test_mutations.py=
 - =tests/test_round8_conformance.py=
 - =tests/test_round9_conformance.py=
+- =tests/test_round10_conformance.py=
 - =run-reference-tests.txt=
 
 * Current Executable Coverage
@@ -74,6 +75,13 @@ Round 9 conformance tests additionally cover:
 - =principal_claim.authentication_assurance= must be an =id= when present
 - malformed policy selector returning =InvalidHistory= instead of a host exception
 - minimal structural validation for supported =agent/run-receipt/1= payload profile
+
+Round 10 conformance tests additionally cover:
+
+- unsupported recorded payload profile does not mask unrecorded binding target
+- unsupported recorded payload profile does not mask malformed evidence schema
+- missing transition =parent_root= returns =InvalidHistory= instead of a host exception
+- genesis =parent_root != null= dominates unsupported recorded payload profile
 
 * Reproduction
 
