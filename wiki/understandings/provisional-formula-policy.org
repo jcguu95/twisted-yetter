@@ -9,7 +9,10 @@
 - status: =policy-active= / =gating certificate=
 - implementation: =src/twisted_yetter/provisional_formula_policy.py=
 - tests: =tests/test_provisional_formula_policy.py=
+- artifact: =experiments/results/provisional-formula-policy/n30-policy-certificate.json=
 - upstream blocker: =n24-ordinary-surgery-gate= is explicitly =blocked=
+- upstream blocker artifact: =experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json=
+- upstream blocker accepted as blocker at commit =bbc48b2=
 - upstream blocker note: =wiki/understandings/ordinary-surgery-gate.org=
 - source confidence ledger: =wiki/understandings/source-confidence-ledger.org=
 - formula convention ledger: =wiki/understandings/formula-conventions.org=
@@ -33,8 +36,12 @@ twisted-yetter.provisional-formula-policy.v1
 The certificate records:
 
 - =status= as =policy-active=;
-- inherited =n24-ordinary-surgery-gate= status =blocked=;
+- inherited =n24-ordinary-surgery-gate= status =blocked= and manager-accepted blocker
+  commit =bbc48b2=;
+- inherited n24 artifact path =experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json=;
 - inherited n24 blocker reason ids and blocked source slots;
+- formula status ledger for Yetter =Z/2=, general finite =A= =Omega_a=, and the n24
+  blocker;
 - allowed artifact claim levels;
 - required artifact fields;
 - rejected high-claim types;
@@ -53,10 +60,44 @@ n24 is not passed.  Its certificate says:
 - =closed_4_manifold_claim_allowed=false=;
 - =claim_supporting_closed_invariant_allowed=false=;
 - ordinary Kirby-color / surgery source slots remain =SOURCE NEEDED=;
-- the S2xS2 Hopf/crossing ordinary control is blocked by the current no-crossing scaffold.
+- S2xS2 Hopf ordinary control data are local-convention regression data only, not
+  closed ordinary invariant values.
 
 n30 therefore does not authorize any closed ordinary 4D invariant claim.  It only gives a
 controlled route for provisional/candidate downstream work.
+
+Any later artifact that mentions a closed value, a decorated/twisted computation, or an exotic
+comparison must cite the n24 blocker artifact while this gate remains blocked.  That citation is
+a guardrail, not a route around n24.
+
+* Formula Status Ledger
+
+** Yetter Z/2 surgical formula
+
+- status: =provisional-low-confidence=
+- allowed next work: =n31-yetter-z2-surgical-source-capture=
+
+The =Z/2= surgical formula may be source-captured and checked.  It cannot support a
+theorem-level decorated formula, closed 4D invariant value, or exotic result until the exact
+source audit and independent checks pass.
+
+** General finite A Omega-a candidate
+
+- display: =Omega_a = sum_i d_i lambda_i(a) X_i=
+- status: =candidate-experimental=
+- allowed next work: =n32-general-a-candidate-contract=
+
+The general finite =A= formula remains a candidate/local experiment until proof/source and
+many-case validation are available.  Implementations under =n33= must preserve this
+candidate status in artifacts.
+
+** n24 ordinary surgery blocker
+
+- status: =blocked executable gate certificate=
+- accepted as blocker at commit: =bbc48b2=
+- artifact: =experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json=
+
+This blocker must be cited in closed-value, decorated/twisted, and exotic-related artifacts.
 
 * Allowed Artifact Claim Levels
 
@@ -80,6 +121,7 @@ are allowed only while explicitly carrying the inherited =n24 blocked= boundary.
 The policy rejects:
 
 - =claim-supporting closed 4D invariant=
+- =closed homologically twisted Yetter invariant value=
 - =decorated/twisted formula theorem=
 - =exotic detection claim=
 - =Reutter escape/no-go conclusion=
@@ -123,6 +165,9 @@ It must not treat the general finite =A= candidate as a sourced theorem.
 n33 may implement exact candidate scaffolding for supported finite =A= data.  It must expose
 candidate status in artifacts and must not certify a homologically twisted Kirby color.
 
+It also must not claim a closed homologically twisted Yetter invariant value while n24 remains
+blocked.
+
 ** n35 decorated core experiments
 
 - decision: =allowed-with-blocked-ordinary-gate=
@@ -143,5 +188,6 @@ cannot support exotic detection.
 - Candidate/provisional experiment statuses are allowed: =PASS=.
 - High theorem/exotic/Reutter claims are rejected: =PASS=.
 - n31/n32/n33/n35 decisions are recorded: =PASS=.
+- n24 blocker artifact and =bbc48b2= manager acceptance are recorded: =PASS=.
 - No mathematical formula was added here: =PASS=.
 - No external source audit was performed here: =PASS=.

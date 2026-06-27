@@ -1,0 +1,223 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.provisional_formula_policy",
+    "--write",
+    "experiments/results/provisional-formula-policy/n30-policy-certificate.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.provisional_formula_policy --write experiments/results/provisional-formula-policy/n30-policy-certificate.json",
+  "exact_output": {
+    "allowed_artifact_claim_levels": [
+      "candidate-experimental",
+      "provisional-low-confidence",
+      "schema-test-safe",
+      "computed evidence scaffold"
+    ],
+    "claim_decisions": [
+      {
+        "allowed": false,
+        "claim_type": "claim-supporting closed 4D invariant",
+        "decision": "rejected",
+        "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+        "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+      },
+      {
+        "allowed": false,
+        "claim_type": "closed homologically twisted Yetter invariant value",
+        "decision": "rejected",
+        "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+        "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+      },
+      {
+        "allowed": false,
+        "claim_type": "decorated/twisted formula theorem",
+        "decision": "rejected",
+        "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+        "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+      },
+      {
+        "allowed": false,
+        "claim_type": "exotic detection claim",
+        "decision": "rejected",
+        "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+        "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+      },
+      {
+        "allowed": false,
+        "claim_type": "Reutter escape/no-go conclusion",
+        "decision": "rejected",
+        "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+        "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+      }
+    ],
+    "claim_level": "policy/gating certificate",
+    "downstream_policy_decisions": [
+      {
+        "allowed_activity": "source capture for the Yetter Z/2 surgical formula",
+        "allowed_claim_levels": [
+          "schema-test-safe",
+          "provisional-low-confidence"
+        ],
+        "claim_boundary": "source capture may record locators, page labels, and missing slots, but it must not promote the Z/2 surgical formula to a decorated/twisted theorem while independent checks remain open",
+        "decision": "allowed",
+        "node_id": "n31-yetter-z2-surgical-source-capture",
+        "required_artifact_fields": [
+          "claim_level",
+          "source_status"
+        ],
+        "source_status_required": true
+      },
+      {
+        "allowed_activity": "candidate contract for the general finite A color",
+        "allowed_claim_levels": [
+          "candidate-experimental",
+          "schema-test-safe"
+        ],
+        "claim_boundary": "the general finite A contract may state falsification criteria and expected specializations, but only as a candidate contract",
+        "decision": "allowed",
+        "node_id": "n32-general-a-candidate-contract",
+        "required_artifact_fields": [
+          "claim_level",
+          "source_status"
+        ],
+        "source_status_required": true
+      },
+      {
+        "allowed_activity": "finite A candidate-color implementation scaffold",
+        "allowed_claim_levels": [
+          "candidate-experimental",
+          "schema-test-safe"
+        ],
+        "claim_boundary": "implementation artifacts may compute exact candidate coefficients for supported finite A data, but must expose candidate status and must not certify a homologically twisted Kirby color",
+        "decision": "allowed",
+        "node_id": "n33-omega-a-implementation",
+        "required_artifact_fields": [
+          "claim_level",
+          "source_status"
+        ],
+        "source_status_required": true
+      },
+      {
+        "allowed_activity": "decorated core experiments from diagram-backed data",
+        "allowed_claim_levels": [
+          "computed evidence scaffold",
+          "provisional-low-confidence",
+          "candidate-experimental"
+        ],
+        "claim_boundary": "decorated core outputs are computed evidence scaffolds only while n24 is blocked; they cannot be closed 4D invariant values or exotic-detection evidence",
+        "decision": "allowed-with-blocked-ordinary-gate",
+        "node_id": "n35-twisted-decorated-core",
+        "required_artifact_fields": [
+          "claim_level",
+          "source_status",
+          "ordinary_surgery_gate_status"
+        ],
+        "source_status_required": true
+      }
+    ],
+    "formula_status_ledger": [
+      {
+        "allowed_next_node": "n31-yetter-z2-surgical-source-capture",
+        "formula_id": "yetter-z2-surgical-formula",
+        "policy": "Yetter Z/2 surgical formula may be source-captured and checked, but cannot support theorem-level closed/decorated claims until source audit and independent checks pass",
+        "status": "provisional-low-confidence"
+      },
+      {
+        "allowed_next_node": "n32-general-a-candidate-contract",
+        "display": "Omega_a = sum_i d_i lambda_i(a) X_i",
+        "formula_id": "general-finite-a-omega-a",
+        "policy": "general finite A Omega_a may be used only as a candidate/local experiment until proof/source and many-case validation are available",
+        "status": "candidate-experimental"
+      },
+      {
+        "accepted_commit": "bbc48b213409a5b034357ba91405f980006e6a05",
+        "artifact": "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json",
+        "formula_id": "ordinary-surgery-gate-blocker",
+        "policy": "n24 must be cited in any closed-value, decorated/twisted, or exotic-related artifact while it remains blocked",
+        "status": "blocked executable gate certificate"
+      }
+    ],
+    "global_policy": {
+      "downstream_twisted_outputs_must_be_provisional": true,
+      "failures_must_be_recorded": true,
+      "may_run_many_examples": true,
+      "must_cite_n24_for_closed_or_exotic_artifacts": true,
+      "must_not_implement_formula_here": true,
+      "must_not_source_audit_external_references_here": true,
+      "must_preserve_source_status_fields": true,
+      "passing_examples_are_proof": false
+    },
+    "ledger_note": "wiki/understandings/provisional-formula-policy.org",
+    "node_id": "n30-provisional-formula-policy",
+    "ordinary_surgery_gate_dependency": {
+      "accepted_as_blocker_at_commit": "bbc48b213409a5b034357ba91405f980006e6a05",
+      "accepted_as_blocker_at_commit_short": "bbc48b2",
+      "artifact": "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json",
+      "blocked_reason_ids": [
+        "n21-source-slots-unfilled",
+        "n22-local-convention-only",
+        "n23-ordinary-controls-local-only",
+        "closed-claim-refused"
+      ],
+      "blocked_source_slots": [
+        "kirby_color_coefficients",
+        "global_dimension_and_normalization",
+        "signature_anomaly_framing_convention",
+        "handle_slide_invariance_proof_scope",
+        "one_two_cancellation_treatment",
+        "two_three_cancellation_treatment",
+        "closed_4_manifold_vs_2_handlebody_distinction"
+      ],
+      "claim_supporting_closed_invariant_allowed": false,
+      "closed_4_manifold_claim_allowed": false,
+      "node_id": "n24-ordinary-surgery-gate",
+      "schema": "twisted-yetter.ordinary-surgery-gate.v1",
+      "status": "blocked"
+    },
+    "rejected_claim_types": [
+      "claim-supporting closed 4D invariant",
+      "closed homologically twisted Yetter invariant value",
+      "decorated/twisted formula theorem",
+      "exotic detection claim",
+      "Reutter escape/no-go conclusion"
+    ],
+    "required_artifact_fields": [
+      "claim_level",
+      "source_status"
+    ],
+    "schema": "twisted-yetter.provisional-formula-policy.v1",
+    "status": "policy-active",
+    "still_blocked": [
+      "claim-supporting closed 4D invariant",
+      "closed homologically twisted Yetter invariant value",
+      "decorated/twisted formula theorem",
+      "exotic detection claim",
+      "Reutter escape/no-go conclusion"
+    ],
+    "unblocks": [
+      "n31-yetter-z2-surgical-source-capture as source-capture work",
+      "n32-general-a-candidate-contract as candidate contract work",
+      "n33-omega-a-implementation as candidate implementation scaffold",
+      "n35-twisted-decorated-core as computed evidence scaffold"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/provisional_formula_policy.py",
+  "git": {
+    "commit": "bbc48b213409a5b034357ba91405f980006e6a05",
+    "dirty": true
+  },
+  "input_hash": "1e8b14ea0fee826a8d5d31e7fa80ad838e2e9e11a48b5f035ae587630c25bb23",
+  "log_references": [],
+  "notes": [
+    "n30 is a policy/guardrail ledger, not a formula implementation.",
+    "n24 remains a blocked executable gate certificate and must be cited downstream."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.provisional_formula_policy --write experiments/results/provisional-formula-policy/n30-policy-certificate.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
