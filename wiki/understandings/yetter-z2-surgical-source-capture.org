@@ -8,10 +8,17 @@
 - decision graph node: =n31-yetter-z2-surgical-source-capture=
 - status: =provisional-low-confidence= / =SOURCE NEEDED= / =source-capture ledger=
 - claim level: source-audit planning only; not a theorem proof and not an implementation.
-- git commit when written: =31032e37142484b1d52a7d001e810bb3bed776f4=
-- dirty state before this node: clean.
-- current graph CID when read:
-  =ctlobj-sha256:01422d62d62b354c1e75e6cc43a5666c2054e7a1e276b032e88586e02abc2bcc=
+- original ledger snapshot mentioned git commit:
+  =31032e37142484b1d52a7d001e810bb3bed776f4=.
+- current reinforcement pass: after manager-accepted commit =792574a= for
+  =n30-provisional-formula-policy=.
+- graph update in this pass: =ctl-dogfood/graphs/computation-first-v15.json= records
+  =n30= accepted at =792574a= and advances current priority to
+  =n31-yetter-z2-surgical-source-capture=.
+- certificate artifact:
+  =experiments/results/yetter-z2-source-capture/n31-source-capture.json=.
+- current graph CID before this pass:
+  =ctlobj-sha256:c8583b0c9488252acef66487366a908a0b848c37c0b18016bc98d4378bb79566=.
 - companion records:
   - =wiki/understandings/source-confidence-ledger.org=
   - =wiki/understandings/provisional-formula-policy.org=
@@ -19,11 +26,16 @@
   - =wiki/understandings/ordinary-kirby-color-source-capture.org=
   - =wiki/references/yetter-1993-homologically-twisted.org=
   - =wiki/references/yetter-z2-surgical-source.org=
+  - =experiments/results/yetter-z2-source-capture/n31-source-capture.json=
 
 This ledger records the source slots that must be audited for the remembered / project-plan
 =Z/2= omega-theta surgical formula.  It does not capture the external source itself, does not
 quote Yetter's formula from memory, and does not promote any decorated or twisted Kirby formula to
 theorem status.
+
+The JSON certificate records the same boundary at certificate level: =claim_level= remains
+=provisional-low-confidence=, =source_status= remains =SOURCE NEEDED=, and the output explicitly
+cites the =n30= policy gate and the =n24= ordinary surgery blocker.
 
 * n30 Policy Boundary
 

@@ -1,0 +1,159 @@
+{
+  "argv": [
+    "manual-source-capture-ledger",
+    "experiments/results/yetter-z2-source-capture/n31-source-capture.json"
+  ],
+  "command": "manual source-capture ledger assembly; no formula implementation or external source fetch",
+  "exact_output": {
+    "claim_level": "provisional-low-confidence",
+    "compatibility_checks": [
+      {
+        "against": "n22-ordinary-kirby-color-implementation",
+        "check": "omega SOURCE slot must crosswalk to local ordinary Kirby color coefficients before reuse",
+        "status": "required-later"
+      },
+      {
+        "against": "n23-known-ordinary-4d-controls",
+        "check": "alpha=0 and local ordinary controls remain regression data, not closed values",
+        "status": "required-later"
+      },
+      {
+        "against": "n24-ordinary-surgery-gate",
+        "check": "normalization/signature and closed-vs-presentation slots inherit n24 blocked status",
+        "status": "blocked-boundary-active"
+      }
+    ],
+    "future_source_capture_artifacts_required": [
+      "canonical citation/version and locator",
+      "capture time UTC",
+      "local snapshot path or stable external snapshot record",
+      "SHA-256 or git blob hash",
+      "page/theorem/proposition/definition/equation labels for every slot",
+      "copyright-safe excerpts plus paraphrases for longer text",
+      "convention crosswalk to RT/Kauffman, ordinary Kirby color, n22/n23/n24, and formula-conventions notes",
+      "remaining SOURCE NEEDED list after capture"
+    ],
+    "n32_may_assume": [
+      "there is a repo-local Z/2 source-capture ledger with explicit SOURCE NEEDED slots",
+      "Z/2 matching may be used only as a falsification/specialization target",
+      "claim_level and source_status fields are mandatory in candidate artifacts"
+    ],
+    "n32_n33_must_not_claim": [
+      "Yetter Z/2 surgical formula is source-audited",
+      "general finite A Omega_a is a theorem",
+      "closed homologically twisted Yetter invariant value is computed",
+      "decorated Kirby invariance is proved",
+      "exotic detection or Reutter escape/no-go conclusion follows"
+    ],
+    "node_id": "n31-yetter-z2-surgical-source-capture",
+    "notes": [
+      "This artifact intentionally does not implement or evaluate any Yetter formula.",
+      "The existing source-capture note and reference stub remain the human-readable ledger."
+    ],
+    "policy_citations": {
+      "n24": {
+        "accepted_blocker_commit": "bbc48b2",
+        "artifact": "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json",
+        "boundary": "no closed ordinary/twisted 4D invariant claim while blocked",
+        "node_id": "n24-ordinary-surgery-gate",
+        "status": "blocked"
+      },
+      "n30": {
+        "accepted_commit": "792574a",
+        "artifact": "experiments/results/provisional-formula-policy/n30-policy-certificate.json",
+        "ctl_verify": "status ok",
+        "node_id": "n30-provisional-formula-policy",
+        "note": "wiki/understandings/provisional-formula-policy.org",
+        "pytest": "229 passed"
+      }
+    },
+    "required_source_slots": [
+      {
+        "requires": [
+          "summation index set",
+          "coefficient symbol meaning",
+          "simple-object labels",
+          "parity/sign convention"
+        ],
+        "slot_id": "exact-formula-summation-variables",
+        "status": "SOURCE NEEDED"
+      },
+      {
+        "requires": [
+          "page/equation for omega",
+          "relation to n21 ordinary Kirby color",
+          "RT/Kauffman convention crosswalk"
+        ],
+        "slot_id": "ordinary-color-omega",
+        "status": "SOURCE NEEDED"
+      },
+      {
+        "requires": [
+          "page/equation for theta",
+          "sign or parity rule",
+          "hypotheses for SU(2) or broader category"
+        ],
+        "slot_id": "decorated-color-theta",
+        "status": "SOURCE NEEDED"
+      },
+      {
+        "requires": [
+          "domain H_2/H^2/K(Z/2,2)",
+          "component-decoration rule",
+          "basis-change or handle-slide action"
+        ],
+        "slot_id": "h2-k-a-2-background",
+        "status": "SOURCE NEEDED"
+      },
+      {
+        "requires": [
+          "normalization constant",
+          "global-dimension exponent",
+          "signature anomaly convention",
+          "handle-count dependence"
+        ],
+        "slot_id": "normalization-and-signature",
+        "status": "SOURCE NEEDED"
+      },
+      {
+        "requires": [
+          "n24 blocker citation",
+          "closed-vs-presentation distinction",
+          "no closed invariant claim while ordinary surgery gate is blocked"
+        ],
+        "slot_id": "ordinary-gate-dependence",
+        "status": "blocked-by-n24"
+      },
+      {
+        "requires": [
+          "page labels",
+          "theorem/proposition/definition/equation IDs",
+          "copyright-safe quote/paraphrase boundaries"
+        ],
+        "slot_id": "source-page-theorem-definition-ids",
+        "status": "SOURCE NEEDED"
+      }
+    ],
+    "schema": "twisted-yetter.yetter-z2-source-capture-ledger.v1",
+    "source_capture_scope": "ledger only; no external PDF/page capture and no formula implementation",
+    "source_status": "SOURCE NEEDED",
+    "status": "pass"
+  },
+  "generator_script": "manual source-capture ledger; no formula implementation module",
+  "git": {
+    "commit": "792574a0f45e63d4dc191afbda1753cbd1f64a24",
+    "dirty": true
+  },
+  "input_hash": "e52492b00c5b621215495df655f9c64b0534e1c2269404f1e4f189cfb1009700",
+  "log_references": [],
+  "notes": [
+    "n31 is source capture only; source_status remains SOURCE NEEDED."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nfrom twisted_yetter.artifacts import validate_certificate\\nvalidate_certificate(json.loads(Path('experiments/results/yetter-z2-source-capture/n31-source-capture.json').read_text()))\\nPY",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.12.13"
+  }
+}

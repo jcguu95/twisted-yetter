@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "a52af635dc832bea8dbd13652355d5820dddd407",
+  "current_root_cid": "ctlobj-sha256:9823ebc1940e6a4e53d707e7d3899d80be9b875287b2862e6bde5fcda93f35aa",
+  "generated_at": "2026-06-27T06:26:00Z",
+  "generator": "ctl-dogfood/scripts/admit_graph.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "graph_namespace": "graph:twisted-yetter:research-roadmap",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:graph:computation-first-v1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:9823ebc1940e6a4e53d707e7d3899d80be9b875287b2862e6bde5fcda93f35aa",
+    "graph_claim": "ctlobj-sha256:8ba9df31cc2c244d3d57bb739fe2e8d67f28dc9d7baaa93bffe424840c3e9200",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:ce2b90fdd592ebf891130b1e54bb172ee438b562c931c20c8ab313b8688e3df0"
+  },
+  "parent_root_cid": "ctlobj-sha256:d5786d5b250a7cccc988fb54106bb1bc236d3d0743cdca76d1f008b79b18640d",
+  "payload_file": "ctl-dogfood/graphs/computation-first-v15.json",
+  "portable_split_key": "graph:twisted-yetter:computation-first",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "uv run python scripts/admit_graph.py --update",
+    "uv run python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "792574a0f45e63d4dc191afbda1753cbd1f64a24"
+}
