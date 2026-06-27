@@ -7,258 +7,359 @@
   ],
   "command": "uv run python -m pytest tests/test_toy_closed_suite.py",
   "exact_output": {
-    "claim_boundary": "exact formal toy-suite outputs only; no numerical twisted Yetter closed 4-manifold invariant is claimed",
-    "comparisons": [
+    "all_cases_have_decorated_core_metadata": true,
+    "all_cases_have_diagram_metadata": true,
+    "all_cases_have_pair_metadata": false,
+    "blocked_claims": [
+      "closed 4-manifold invariant value",
+      "ordinary surgery theorem claim",
+      "decorated Kirby theorem claim",
+      "exotic detection claim"
+    ],
+    "case_count": 8,
+    "claim_boundary": "this is a machine-readable blocked ledger, not a closed 4-manifold invariant calculator",
+    "claim_level": "blocked ledger/certificate",
+    "closed_4_manifold_invariant_claim_allowed": false,
+    "decorated_kirby_theorem_claim_allowed": false,
+    "exotic_detection_claim_allowed": false,
+    "final_closed_suite_passed": false,
+    "global_blocker_reason_ids": [
+      "n24-ordinary-surgery-gate-blocked",
+      "n50-decorated-kirby-move-gate-blocked"
+    ],
+    "global_blockers": [
       {
-        "case_id": "CP2-vs-anti-CP2-alpha0",
-        "classification": "recorded-presentation-metadata-difference; numerical value unsupported",
-        "equal": false,
-        "left": {
-          "case_id": "CP2",
-          "decoration_mod2": [
-            0
-          ],
-          "signature": 1
-        },
-        "right": {
-          "case_id": "anti-CP2",
-          "decoration_mod2": [
-            0
-          ],
-          "signature": -1
-        }
+        "claim_boundary": "toy closed cases cannot be promoted to closed 4-manifold invariant values while ordinary surgery is blocked",
+        "observed": "blocked",
+        "reason_id": "n24-ordinary-surgery-gate-blocked",
+        "required": "pass",
+        "source_node": "n24-ordinary-surgery-gate",
+        "status": "blocked",
+        "upstream_blocker_reason_ids": [
+          "n21-source-slots-unfilled",
+          "n22-local-convention-only",
+          "n23-s2xs2-crossing-blocked",
+          "closed-claim-refused"
+        ],
+        "upstream_schema": "twisted-yetter.ordinary-surgery-gate.v1"
       },
       {
-        "case_id": "S2xS2-axis-decorations",
-        "classification": "formal-projection-equality; not an unmarked closed invariant claim",
-        "equal": true,
-        "left": {
-          "alpha_q_alpha_mod2": 0,
-          "decoration_mod2": [
-            0,
-            1
-          ],
-          "theta_component_count": 1
-        },
-        "right": {
-          "alpha_q_alpha_mod2": 0,
-          "decoration_mod2": [
-            1,
-            0
-          ],
-          "theta_component_count": 1
-        }
-      },
-      {
-        "case_id": "CP2#anti-CP2-axis-decorations",
-        "classification": "formal-projection-equality; mod-2 alpha_q_alpha sees both axes equally",
-        "equal": true,
-        "left": {
-          "alpha_q_alpha_mod2": 1,
-          "decoration_mod2": [
-            1,
-            0
-          ],
-          "theta_component_count": 1
-        },
-        "right": {
-          "alpha_q_alpha_mod2": 1,
-          "decoration_mod2": [
-            0,
-            1
-          ],
-          "theta_component_count": 1
-        }
-      },
-      {
-        "case_id": "CP2#CP2-axis-vs-diagonal",
-        "classification": "formal-projection-difference; experimental matrix-level signal only",
-        "equal": false,
-        "left": {
-          "alpha_q_alpha_mod2": 1,
-          "decoration_mod2": [
-            1,
-            0
-          ],
-          "theta_component_count": 1
-        },
-        "right": {
-          "alpha_q_alpha_mod2": 0,
-          "decoration_mod2": [
-            1,
-            1
-          ],
-          "theta_component_count": 2
-        }
+        "claim_boundary": "toy closed cases cannot be used as decorated Kirby invariance evidence while n50 is blocked",
+        "observed": "blocked",
+        "reason_id": "n50-decorated-kirby-move-gate-blocked",
+        "required": "pass",
+        "source_node": "n50-decorated-kirby-move-gate",
+        "status": "blocked",
+        "upstream_pair_blocker_reason_ids": [
+          "missing-basis-matrix-certificate",
+          "missing-component-lineage-certificate",
+          "missing-decorated-move-certificate",
+          "missing-source-proof",
+          "ordinary-surgery-gate-blocked",
+          "presentation-pair-candidate-dry-run"
+        ],
+        "upstream_schema": "twisted-yetter.decorated-kirby-gate.v1"
       }
     ],
+    "input_schemas": {
+      "candidate_validation_suite": "twisted-yetter.many-case-candidate-validation-suite.v1",
+      "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v1",
+      "ordinary_surgery_gate": "twisted-yetter.ordinary-surgery-gate.v1",
+      "presentation_pair_registry": "twisted-yetter.kirby-presentation-pair-registry.v1"
+    },
+    "input_statuses": {
+      "candidate_validation_suite": "pass",
+      "decorated_kirby_gate": "blocked",
+      "ordinary_surgery_gate": "blocked",
+      "presentation_pair_registry": "pass"
+    },
+    "input_validations": {
+      "candidate_validation_suite": {
+        "blocked_claims_ok": true,
+        "case_list_ok": true,
+        "missing_required_fields": [],
+        "scope": "suite metadata validation only; no link evaluation",
+        "valid": true
+      },
+      "decorated_kirby_gate": {
+        "blocked_claims_ok": true,
+        "missing_required_fields": [],
+        "pair_list_ok": true,
+        "scope": "decorated Kirby move gate scaffold only; no theorem proof",
+        "valid": true
+      },
+      "presentation_pair_registry": {
+        "blocked_claims_ok": true,
+        "does_not_prove_ok": true,
+        "missing_required_fields": [],
+        "pair_list_ok": true,
+        "scope": "presentation-pair dry-run metadata only; no Kirby move proof",
+        "valid": true
+      }
+    },
+    "ledger_note": "wiki/understandings/toy-closed-suite.org",
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "case_list_ok": true,
+      "input_schemas_ok": true,
+      "missing_required_fields": [],
+      "scope": "blocked ledger only; no closed 4-manifold invariant values",
+      "valid": true
+    },
     "node_id": "n55-toy-closed-suite",
-    "route": "do-not-route-to-n60",
+    "ordinary_surgery_theorem_claim_allowed": false,
+    "required_unblock_artifacts": [
+      "n24 ordinary surgery gate pass certificate with sourced surgery formula support",
+      "n50 decorated Kirby move gate pass certificate with machine-checkable move data",
+      "accepted presentation-pair metadata for every toy closed case intended for final n55",
+      "stable exact closed-suite artifact that still refuses exotic claims unless n70/n80 are reached"
+    ],
+    "schema": "twisted-yetter.toy-closed-suite-ledger.v1",
+    "source_status": "n55 consumes n36/n45/n50/n24 metadata as a blocked ledger; it does not evaluate or output closed 4-manifold invariant values",
+    "status": "blocked",
     "toy_cases": [
       {
-        "all_outputs_exact": true,
-        "case_id": "S4",
-        "decoration_count": 1,
-        "decorations_mod2": [
-          []
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked"
         ],
-        "determinant": 1,
-        "nontrivial_decorations_visible": false,
-        "parity": "even",
-        "rank": 0,
-        "signature": 0,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "cp2-z2-nonzero",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "1"
+        ],
+        "decoration_by_component": {
+          "cp2_h": "1"
+        },
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "presentation_pair_refs": [
+          "identity-cp2-z2-nonzero"
+        ],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": true
+        },
+        "zero_decoration": false
       },
       {
-        "all_outputs_exact": true,
-        "case_id": "CP2",
-        "decoration_count": 2,
-        "decorations_mod2": [
-          [
-            0
-          ],
-          [
-            1
-          ]
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked"
         ],
-        "determinant": 1,
-        "nontrivial_decorations_visible": true,
-        "parity": "odd",
-        "rank": 1,
-        "signature": 1,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "cp2-z2-zero",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "0"
+        ],
+        "decoration_by_component": {
+          "cp2_h": "0"
+        },
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "presentation_pair_refs": [
+          "identity-cp2-z2-zero"
+        ],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": true
+        },
+        "zero_decoration": true
       },
       {
-        "all_outputs_exact": true,
-        "case_id": "anti-CP2",
-        "decoration_count": 2,
-        "decorations_mod2": [
-          [
-            0
-          ],
-          [
-            1
-          ]
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked",
+          "missing-presentation-pair-metadata"
         ],
-        "determinant": -1,
-        "nontrivial_decorations_visible": true,
-        "parity": "odd",
-        "rank": 1,
-        "signature": -1,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "s2xs2-hopf-z2-mixed-01",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "0",
+          "1"
+        ],
+        "decoration_by_component": {
+          "s2_a": "0",
+          "s2_b": "1"
+        },
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "presentation_pair_refs": [],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": false
+        },
+        "zero_decoration": false
       },
       {
-        "all_outputs_exact": true,
-        "case_id": "S2xS2",
-        "decoration_count": 4,
-        "decorations_mod2": [
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            1
-          ]
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked",
+          "missing-presentation-pair-metadata"
         ],
-        "determinant": -1,
-        "nontrivial_decorations_visible": true,
-        "parity": "even",
-        "rank": 2,
-        "signature": 0,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "s2xs2-hopf-z2-mixed-10",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "1",
+          "0"
+        ],
+        "decoration_by_component": {
+          "s2_a": "1",
+          "s2_b": "0"
+        },
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "presentation_pair_refs": [],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": false
+        },
+        "zero_decoration": false
       },
       {
-        "all_outputs_exact": true,
-        "case_id": "CP2#anti-CP2",
-        "decoration_count": 4,
-        "decorations_mod2": [
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            1
-          ]
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked"
         ],
-        "determinant": -1,
-        "nontrivial_decorations_visible": true,
-        "parity": "odd",
-        "rank": 2,
-        "signature": 0,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "s4-trivial-zero",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [],
+        "decoration_by_component": {},
+        "diagram_id": "s4-empty-kirby-diagram",
+        "finite_group_id": "trivial",
+        "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+        "presentation_pair_refs": [
+          "identity-s4-trivial-zero"
+        ],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": true
+        },
+        "zero_decoration": true
       },
       {
-        "all_outputs_exact": true,
-        "case_id": "CP2#CP2",
-        "decoration_count": 4,
-        "decorations_mod2": [
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            1
-          ]
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked"
         ],
-        "determinant": 1,
-        "nontrivial_decorations_visible": true,
-        "parity": "odd",
-        "rank": 2,
-        "signature": 2,
-        "trivial_decoration_visible": true,
-        "value_status": "inconclusive"
+        "case_id": "unlink-two-component-z2-mixed",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "1",
+          "0"
+        ],
+        "decoration_by_component": {
+          "u1": "1",
+          "u2": "0"
+        },
+        "diagram_id": "unlink-2",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "presentation_pair_refs": [
+          "component-order-unlink-z2-mixed-dry-run"
+        ],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": true
+        },
+        "zero_decoration": false
+      },
+      {
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked",
+          "missing-presentation-pair-metadata"
+        ],
+        "case_id": "unlink-two-component-z2-nonzero",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "1",
+          "1"
+        ],
+        "decoration_by_component": {
+          "u1": "1",
+          "u2": "1"
+        },
+        "diagram_id": "unlink-2",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "presentation_pair_refs": [],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": false
+        },
+        "zero_decoration": false
+      },
+      {
+        "blocked_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked",
+          "missing-presentation-pair-metadata"
+        ],
+        "case_id": "unlink-two-component-z2-zero",
+        "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
+        "component_sector_ids": [
+          "0",
+          "0"
+        ],
+        "decoration_by_component": {
+          "u1": "0",
+          "u2": "0"
+        },
+        "diagram_id": "unlink-2",
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "presentation_pair_refs": [],
+        "status": "blocked",
+        "upstream_readiness": {
+          "decorated_core_metadata": true,
+          "diagram_metadata": true,
+          "presentation_pair_metadata": false
+        },
+        "zero_decoration": true
       }
     ],
-    "value_status": "inconclusive",
-    "verdict": "pass"
+    "upstream_nodes": [
+      "n24-ordinary-surgery-gate",
+      "n36-many-case-candidate-validation-suite",
+      "n45-kirby-presentation-pair-generator",
+      "n50-decorated-kirby-move-gate"
+    ]
   },
   "git": {
-    "commit": "e3017d00a0a88eced462264695eca6fe5b6d2384",
+    "commit": "ad9fc37a653640c07b17d014ddf48d1611d060f1",
     "dirty": true
   },
-  "input_hash": "4882722b08e874e4c962189a9057735462b22d91788cb52f9346c1edf586fcaf",
+  "input_hash": "868d4c2276e93649e8f4b6fe3e070b85e27c3328d58d7414831704f3bc040649",
   "log_references": [],
   "notes": [
-    "n55 computes exact formal toy-suite outputs for the current n35 matrix-level core.",
-    "All numerical invariant values remain unsupported/inconclusive under the n30 contract.",
-    "The recorded equalities and differences are experimental formal classifications only."
+    "n55 is currently a blocked ledger, not a closed invariant calculator.",
+    "The blocker includes n24 ordinary surgery and n50 decorated Kirby gate status.",
+    "No closed 4-manifold invariant, decorated Kirby theorem, or exotic detection claim is made."
   ],
   "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
   "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest",
   "schema": "twisted-yetter.certificate.v1",
-  "status": "pass",
+  "status": "inconclusive",
   "tool_versions": {
     "python": "3.11.15"
   }

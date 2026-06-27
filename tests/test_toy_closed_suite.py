@@ -1,64 +1,37 @@
 import json
 from pathlib import Path
-from typing import Any
+
+import pytest
 
 from twisted_yetter.artifacts import validate_certificate
-from twisted_yetter.invariant import (
-    UNSUPPORTED_NUMERIC_VALUE_REASON,
-    compare_exact_outputs,
-    decoration_aggregation,
-    evaluate_matrix_statistic,
+from twisted_yetter.decorated_kirby_gate import (
+    DECORATED_MOVE_CERT_BLOCKER_ID,
+    ORDINARY_SURGERY_BLOCKER_ID,
 )
-from twisted_yetter.linking_matrix import (
-    KirbyMatrixPresentation,
-    anti_cp2,
-    cp2,
-    cp2_sum_anti_cp2,
-    cp2_sum_cp2,
-    s2x_s2,
-    s4,
+from twisted_yetter.ordinary_surgery_gate import (
+    CLOSED_CLAIM_BLOCKER_ID,
+    N22_BLOCKER_ID,
+    N23_BLOCKER_ID,
+    SOURCE_BLOCKER_ID,
+)
+from twisted_yetter.toy_closed_suite import (
+    BLOCKED_CLAIMS,
+    MISSING_PAIR_METADATA_BLOCKER_ID,
+    N24_GATE_BLOCKER_ID,
+    N50_GATE_BLOCKER_ID,
+    NODE_ID,
+    TOY_CLOSED_SUITE_SCHEMA,
+    stable_toy_closed_suite_ledger_json,
+    toy_closed_suite_ledger_artifact,
+    validate_toy_closed_suite_ledger_artifact,
 )
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SUITE_ARTIFACT = REPO_ROOT / "experiments/results/toy-suite/n55-toy-closed-suite.json"
 
-TOY_INPUTS = (
-    ("S4", s4()),
-    ("CP2", cp2()),
-    ("anti-CP2", anti_cp2()),
-    ("S2xS2", s2x_s2()),
-    ("CP2#anti-CP2", cp2_sum_anti_cp2()),
-    ("CP2#CP2", cp2_sum_cp2()),
-)
 
-
-def _formal_projection(output: dict[str, Any]) -> dict[str, Any]:
-    sector = output["sector_amplitudes"][0]
-    presentation = output["presentation"]
-    return {
-        "status": output["status"],
-        "claim_level": output["claim_level"],
-        "ordinary_path_selected": output["ordinary_path_selected"],
-        "value_status": output["aggregation"]["value_status"],
-        "unsupported_reason": output["aggregation"]["unsupported_reason"],
-        "presentation_invariants": {
-            "size": presentation["size"],
-            "rank": presentation["rank"],
-            "determinant": presentation["determinant"],
-            "signature_triple": presentation["signature_triple"],
-            "signature": presentation["signature"],
-            "parity": presentation["parity"],
-        },
-        "formal_decoration_invariants": {
-            "theta_component_count": sector["theta_component_count"],
-            "alpha_q_alpha_mod2": sector["alpha_q_alpha_mod2"],
-            "value_status": sector["value_status"],
-        },
-    }
-
-
-def _assert_no_float(value: Any) -> None:
+def _assert_no_float(value: object) -> None:
     if isinstance(value, float):
         raise AssertionError(f"unexpected float value: {value!r}")
     if isinstance(value, dict):
@@ -69,155 +42,148 @@ def _assert_no_float(value: Any) -> None:
             _assert_no_float(item)
 
 
-def _output(
-    presentation: KirbyMatrixPresentation,
-    decoration: tuple[int, ...],
-) -> dict[str, Any]:
-    return evaluate_matrix_statistic(
-        presentation,
-        decoration,
-        claim_level="experimental-matrix-statistic",
-    )
+def test_n55_ledger_consumes_current_upstream_gates_and_blocks_final_suite() -> None:
+    artifact = toy_closed_suite_ledger_artifact()
 
-
-def test_all_n55_toy_suite_outputs_are_exact_and_formal() -> None:
-    for name, presentation in TOY_INPUTS:
-        aggregation = decoration_aggregation(
-            presentation,
-            claim_level="experimental-matrix-statistic",
-        )
-
-        _assert_no_float(aggregation)
-
-        assert aggregation["mode"] == "decoration-aggregation", name
-        assert aggregation["ordering"] == "lexicographic-mod2-vectors", name
-        assert len(aggregation["decorations"]) == 2**presentation.size, name
-
-        for output in aggregation["decorations"]:
-            assert output["status"] == "inconclusive", name
-            assert output["claim_boundary"] == (
-                "experimental matrix-level statistic; not a closed 4-manifold invariant"
-            )
-            assert output["aggregation"]["value_status"] == "inconclusive", name
-            assert output["aggregation"]["unsupported_reason"] == (
-                UNSUPPORTED_NUMERIC_VALUE_REASON
-            )
-            assert output["sector_amplitudes"][0]["value_status"] == "inconclusive", name
-            assert output["sector_amplitudes"][0]["unsupported_reason"] == (
-                UNSUPPORTED_NUMERIC_VALUE_REASON
-            )
-
-
-def test_trivial_and_nontrivial_decorations_are_visible_in_schema() -> None:
-    for name, presentation in TOY_INPUTS:
-        decorations = decoration_aggregation(
-            presentation,
-            claim_level="experimental-matrix-statistic",
-        )["decorations"]
-
-        assert decorations[0]["decoration_mod2"] == [0 for _ in range(presentation.size)]
-        assert decorations[0]["ordinary_path_selected"] is True
-        assert decorations[0]["sector_amplitudes"][0]["theta_component_count"] == 0
-        assert all(
-            color["color"] == "omega"
-            for color in decorations[0]["sector_amplitudes"][0]["component_colors"]
-        )
-
-        if presentation.size == 0:
-            assert len(decorations) == 1, name
-            continue
-
-        nontrivial = [item for item in decorations if any(item["decoration_mod2"])]
-        assert nontrivial, name
-        assert all(item["ordinary_path_selected"] is False for item in nontrivial), name
-        assert all(
-            item["sector_amplitudes"][0]["theta_component_count"] > 0
-            for item in nontrivial
-        ), name
-        assert any(
-            any(color["color"] == "theta" for color in item["sector_amplitudes"][0]["component_colors"])
-            for item in nontrivial
-        ), name
-
-
-def test_formal_equalities_and_differences_are_classified_without_overclaiming() -> None:
-    cp2_zero = _output(cp2(), (0,))
-    anti_zero = _output(anti_cp2(), (0,))
-    s2_a = _output(s2x_s2(), (0, 1))
-    s2_b = _output(s2x_s2(), (1, 0))
-    indefinite_a = _output(cp2_sum_anti_cp2(), (1, 0))
-    indefinite_b = _output(cp2_sum_anti_cp2(), (0, 1))
-    positive_axis = _output(cp2_sum_cp2(), (1, 0))
-    positive_diagonal = _output(cp2_sum_cp2(), (1, 1))
-
-    assert compare_exact_outputs(cp2_zero, anti_zero).equal is False
-    assert compare_exact_outputs(_formal_projection(s2_a), _formal_projection(s2_b)).equal is True
-    assert (
-        compare_exact_outputs(
-            _formal_projection(indefinite_a),
-            _formal_projection(indefinite_b),
-        ).equal
-        is True
-    )
-    assert (
-        compare_exact_outputs(
-            _formal_projection(positive_axis),
-            _formal_projection(positive_diagonal),
-        ).equal
-        is False
-    )
-
-    classifications = {
-        "CP2-vs-anti-CP2-alpha0": (
-            "recorded-presentation-metadata-difference; numerical value unsupported"
-        ),
-        "S2xS2-axis-decorations": (
-            "formal-projection-equality; not an unmarked closed invariant claim"
-        ),
-        "CP2#anti-CP2-axis-decorations": (
-            "formal-projection-equality; mod-2 alpha_q_alpha sees both axes equally"
-        ),
-        "CP2#CP2-axis-vs-diagonal": (
-            "formal-projection-difference; experimental matrix-level signal only"
-        ),
+    assert artifact["schema"] == TOY_CLOSED_SUITE_SCHEMA
+    assert artifact["status"] == "blocked"
+    assert artifact["node_id"] == NODE_ID
+    assert artifact["claim_level"] == "blocked ledger/certificate"
+    assert artifact["input_statuses"] == {
+        "ordinary_surgery_gate": "blocked",
+        "candidate_validation_suite": "pass",
+        "presentation_pair_registry": "pass",
+        "decorated_kirby_gate": "blocked",
     }
-    assert all("numerical invariant" not in value for value in classifications.values())
-    assert all("exotic" not in value for value in classifications.values())
+    assert artifact["global_blocker_reason_ids"] == [
+        N24_GATE_BLOCKER_ID,
+        N50_GATE_BLOCKER_ID,
+    ]
+    assert artifact["final_closed_suite_passed"] is False
+    assert artifact["metadata_validation"]["valid"] is True
 
 
-def test_n55_toy_suite_certificate_records_pass_and_inconclusive_boundary() -> None:
+def test_n55_global_blockers_include_n24_and_n50_reason_ids() -> None:
+    artifact = toy_closed_suite_ledger_artifact()
+    blockers = {blocker["reason_id"]: blocker for blocker in artifact["global_blockers"]}
+
+    n24 = blockers[N24_GATE_BLOCKER_ID]
+    assert n24["observed"] == "blocked"
+    assert n24["required"] == "pass"
+    assert set(n24["upstream_blocker_reason_ids"]) == {
+        SOURCE_BLOCKER_ID,
+        N22_BLOCKER_ID,
+        N23_BLOCKER_ID,
+        CLOSED_CLAIM_BLOCKER_ID,
+    }
+    assert "closed 4-manifold invariant values" in n24["claim_boundary"]
+
+    n50 = blockers[N50_GATE_BLOCKER_ID]
+    assert n50["observed"] == "blocked"
+    assert n50["required"] == "pass"
+    assert ORDINARY_SURGERY_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
+    assert DECORATED_MOVE_CERT_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
+    assert "decorated Kirby invariance evidence" in n50["claim_boundary"]
+
+
+def test_toy_cases_record_upstream_readiness_and_case_refs() -> None:
+    artifact = toy_closed_suite_ledger_artifact()
+    cases = {case["case_id"]: case for case in artifact["toy_cases"]}
+
+    assert set(cases) == {
+        "s4-trivial-zero",
+        "cp2-z2-zero",
+        "cp2-z2-nonzero",
+        "s2xs2-hopf-z2-mixed-10",
+        "s2xs2-hopf-z2-mixed-01",
+        "unlink-two-component-z2-zero",
+        "unlink-two-component-z2-mixed",
+        "unlink-two-component-z2-nonzero",
+    }
+    assert artifact["all_cases_have_diagram_metadata"] is True
+    assert artifact["all_cases_have_decorated_core_metadata"] is True
+    assert artifact["all_cases_have_pair_metadata"] is False
+
+    paired = cases["cp2-z2-zero"]
+    assert paired["upstream_readiness"] == {
+        "diagram_metadata": True,
+        "decorated_core_metadata": True,
+        "presentation_pair_metadata": True,
+    }
+    assert paired["presentation_pair_refs"] == ["identity-cp2-z2-zero"]
+    assert paired["blocked_reason_ids"] == [
+        N24_GATE_BLOCKER_ID,
+        N50_GATE_BLOCKER_ID,
+    ]
+
+    unpaired = cases["s2xs2-hopf-z2-mixed-10"]
+    assert unpaired["upstream_readiness"]["diagram_metadata"] is True
+    assert unpaired["upstream_readiness"]["decorated_core_metadata"] is True
+    assert unpaired["upstream_readiness"]["presentation_pair_metadata"] is False
+    assert unpaired["presentation_pair_refs"] == []
+    assert unpaired["blocked_reason_ids"] == [
+        N24_GATE_BLOCKER_ID,
+        N50_GATE_BLOCKER_ID,
+        MISSING_PAIR_METADATA_BLOCKER_ID,
+    ]
+
+
+def test_n55_refuses_closed_decorated_and_exotic_claim_promoters() -> None:
+    artifact = toy_closed_suite_ledger_artifact()
+
+    assert artifact["closed_4_manifold_invariant_claim_allowed"] is False
+    assert artifact["ordinary_surgery_theorem_claim_allowed"] is False
+    assert artifact["decorated_kirby_theorem_claim_allowed"] is False
+    assert artifact["exotic_detection_claim_allowed"] is False
+    assert artifact["blocked_claims"] == list(BLOCKED_CLAIMS)
+    assert "closed 4-manifold invariant calculator" in artifact["claim_boundary"]
+
+    with pytest.raises(ValueError, match="refuses closed 4-manifold invariant"):
+        toy_closed_suite_ledger_artifact(claim_closed_invariant=True)
+    with pytest.raises(ValueError, match="refuses closed 4-manifold invariant"):
+        toy_closed_suite_ledger_artifact(claim_decorated_kirby_theorem=True)
+    with pytest.raises(ValueError, match="refuses closed 4-manifold invariant"):
+        toy_closed_suite_ledger_artifact(claim_exotic_detection=True)
+
+
+def test_n55_ledger_json_is_stable_exact_and_float_free() -> None:
+    first = toy_closed_suite_ledger_artifact()
+    second = toy_closed_suite_ledger_artifact()
+
+    first_json = stable_toy_closed_suite_ledger_json(first)
+    second_json = stable_toy_closed_suite_ledger_json(second)
+    assert first_json == second_json
+    assert first_json == json.dumps(first, indent=2, sort_keys=True)
+    assert json.loads(first_json) == first
+    assert ".0" not in first_json
+    _assert_no_float(first)
+
+
+def test_validator_rejects_missing_required_fields() -> None:
+    validation = validate_toy_closed_suite_ledger_artifact(
+        {"schema": TOY_CLOSED_SUITE_SCHEMA}
+    )
+
+    assert validation["valid"] is False
+    assert "toy_cases" in validation["missing_required_fields"]
+
+
+def test_checked_in_n55_certificate_records_blocked_ledger() -> None:
     certificate = json.loads(SUITE_ARTIFACT.read_text())
 
     validate_certificate(certificate)
 
     exact_output = certificate["exact_output"]
-    assert certificate["status"] == "pass"
-    assert exact_output["node_id"] == "n55-toy-closed-suite"
-    assert exact_output["verdict"] == "pass"
-    assert exact_output["route"] == "do-not-route-to-n60"
-    assert exact_output["value_status"] == "inconclusive"
-    assert exact_output["claim_boundary"] == (
-        "exact formal toy-suite outputs only; no numerical twisted Yetter "
-        "closed 4-manifold invariant is claimed"
-    )
-    assert {case["case_id"] for case in exact_output["toy_cases"]} == {
-        "S4",
-        "CP2",
-        "anti-CP2",
-        "S2xS2",
-        "CP2#anti-CP2",
-        "CP2#CP2",
-    }
-    assert all(case["all_outputs_exact"] is True for case in exact_output["toy_cases"])
-    assert all(case["value_status"] == "inconclusive" for case in exact_output["toy_cases"])
-
-    nonempty_cases = [case for case in exact_output["toy_cases"] if case["rank"] > 0]
-    assert all(case["trivial_decoration_visible"] is True for case in nonempty_cases)
-    assert all(case["nontrivial_decorations_visible"] is True for case in nonempty_cases)
-
-    assert {item["classification"] for item in exact_output["comparisons"]} == {
-        "recorded-presentation-metadata-difference; numerical value unsupported",
-        "formal-projection-equality; not an unmarked closed invariant claim",
-        "formal-projection-equality; mod-2 alpha_q_alpha sees both axes equally",
-        "formal-projection-difference; experimental matrix-level signal only",
-    }
+    assert certificate["status"] == "inconclusive"
+    assert exact_output["schema"] == TOY_CLOSED_SUITE_SCHEMA
+    assert exact_output["status"] == "blocked"
+    assert exact_output["node_id"] == NODE_ID
+    assert exact_output["final_closed_suite_passed"] is False
+    assert exact_output["global_blocker_reason_ids"] == [
+        N24_GATE_BLOCKER_ID,
+        N50_GATE_BLOCKER_ID,
+    ]
+    assert exact_output["metadata_validation"]["valid"] is True
+    assert exact_output["closed_4_manifold_invariant_claim_allowed"] is False
+    assert exact_output["decorated_kirby_theorem_claim_allowed"] is False
+    assert exact_output["exotic_detection_claim_allowed"] is False
