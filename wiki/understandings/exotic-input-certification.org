@@ -8,15 +8,23 @@
 - decision graph node: =n70-exotic-input-certification=
 - verdict: =data-blocked=
 - recommended route: =n93-data-blocker= or a narrowly scoped data/literature acquisition node before any exotic-pair computation
-- claim level: =working understanding= / =negative certification result=
+- claim level: =executable gate/blocked ledger=
+- implementation: =src/twisted_yetter/exotic_input_certification.py=
+- tests: =tests/test_exotic_input_certification.py=
 - artifact: =experiments/inputs/exotic-pairs/n70-exotic-input-certification.json=
 - git commit at audit start: =462c2b6d7617f9b2c66912c19c2154a5a3a677a7=
 - dirty state at audit start: clean
 
-This node checks only whether the current repository already contains enough
-machine-readable and auditable exotic-pair input to proceed to twisted Yetter
-calculation.  It does not judge whether the candidate literature ultimately has
-such data, and it does not reopen the invariant architecture.
+This node now has an executable Python gate.  It checks only whether the
+current repository already contains enough machine-readable and auditable
+exotic-pair input to proceed to twisted Yetter calculation.  It does not judge
+whether the candidate literature ultimately has such data, and it does not
+reopen the invariant architecture.
+
+The checked-in JSON artifact is intentionally a =fail= certificate at the
+outer artifact-envelope level, with inner exact output
+=status: data-blocked=.  In graph terms this means: =n70= did not pass and
+must not route to =n80-exotic-computation=.
 
 * Inputs Read
 
@@ -25,6 +33,9 @@ such data, and it does not reopen the invariant architecture.
 - =wiki/roadmaps/exotic-input-scout.org=
 - =wiki/references/exotic-input-candidates-2026-06-26.org=
 - =wiki/understandings/toy-closed-suite.org=
+- =src/twisted_yetter/ordinary_surgery_gate.py=
+- =src/twisted_yetter/decorated_kirby_gate.py=
+- =src/twisted_yetter/toy_closed_suite.py=
 - current repo file listing under =experiments/=
 
 Combined input hash for this certification pass:
@@ -32,6 +43,34 @@ Combined input hash for this certification pass:
 #+begin_src text
 c3023b7477cd3b5b0989ca4ea7700c7d329fb263d299ddfcd28f353b94a9e403
 #+end_src
+
+Current executable ledger input hash:
+
+#+begin_src text
+808bc6d81af9b0f7c6862142b37c5e83209912b658f80e3d9890de98eee87098
+#+end_src
+
+The executable gate consumes current upstream statuses:
+
+| Upstream node | Current status consumed by n70 | Effect |
+|---------------+--------------------------------+--------|
+| =n24-ordinary-surgery-gate= | =blocked= | ordinary closed 4D surgery support is not available |
+| =n50-decorated-kirby-move-gate= | =blocked= | decorated Kirby move/presentation evidence is not available |
+| =n55-toy-closed-suite= | =blocked= | toy closed metadata cannot be promoted to exotic closed-invariant evidence |
+| =n65-exotic-input-scout= | scout only | candidate ranking exists, but no candidate is certified for computation |
+
+* Executable Blocker IDs
+
+The gate records these stable blocker reason ids:
+
+- =missing-machine-readable-exotic-kirby-diagrams=
+- =missing-source-page-capture=
+- =missing-h2-homeomorphism-marking-certificate=
+- =n55-toy-closed-suite-blocked=
+- =n24-n50-upstream-blocked=
+
+These ids are part of the test surface.  They are not theorem statements; they
+are repo-local certification blockers.
 
 * Certification Criteria
 
@@ -140,17 +179,19 @@ Missing before computation:
 
 * Interaction With Toy Suite
 
-The =n55= toy closed suite passes as exact formal matrix-level evidence for
-small standard examples.  It does not discharge exotic input requirements:
+The =n55= toy closed suite is itself currently a blocked ledger.  It records
+toy-case metadata and upstream blockers; it does not discharge exotic input
+requirements:
 
 - it contains no exotic pair diagrams;
-- it records =value_status: inconclusive= for numerical twisted Yetter values;
+- it depends on =n24= and =n50=, which are both blocked;
 - it does not provide source-backed \(H_2\) marking comparison for any exotic
   pair.
 
-Therefore passing n55 plus n65 does not imply n70 pass.  It only means the
-computation pipeline has enough toy scaffolding to consume certified inputs
-once those inputs exist.
+Therefore n55 plus n65 does not imply n70 pass.  It only means the computation
+pipeline has some toy scaffolding and candidate-ranking notes that could
+consume certified inputs once those inputs exist and once the upstream gates
+pass.
 
 * Verdict
 
@@ -161,6 +202,18 @@ The correct next action is not to guess a diagram or choose a basis manually.
 The manager should route to a data/literature acquisition and digitization node,
 with Dolgachev \(E(1)_{2,3}\) vs \(E(1)\) as the first target unless a source
 audit shows it is unusable.
+
+The executable gate explicitly blocks:
+
+- =n80-exotic-computation= route;
+- exotic smooth-structure detection claim;
+- marked distinction claim;
+- cork-canonical distinction claim;
+- unmarked total-function distinction claim;
+- closed 4-manifold invariant claim.
+
+This note and its JSON artifact are therefore not an exotic input pass and not
+a statement that any machine-readable exotic-pair diagrams have been obtained.
 
 * Recommended Next Node Contract
 
