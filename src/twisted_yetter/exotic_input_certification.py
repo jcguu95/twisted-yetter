@@ -15,6 +15,11 @@ from twisted_yetter.decorated_kirby_gate import (
     decorated_kirby_gate_artifact,
     validate_decorated_kirby_gate_artifact,
 )
+from twisted_yetter.exotic_input_scout import (
+    CANDIDATE_SCOUT_ROWS,
+    EXOTIC_INPUT_REFERENCE_STUB,
+    EXOTIC_INPUT_SCOUT_ROADMAP as EXOTIC_INPUT_SCOUT_NOTE,
+)
 from twisted_yetter.ordinary_surgery_gate import (
     ORDINARY_SURGERY_GATE_SCHEMA,
     ordinary_surgery_gate_certificate,
@@ -30,10 +35,6 @@ EXOTIC_INPUT_CERTIFICATION_SCHEMA: Final = (
 )
 EXOTIC_INPUT_CERTIFICATION_NOTE: Final = (
     "wiki/understandings/exotic-input-certification.org"
-)
-EXOTIC_INPUT_SCOUT_NOTE: Final = "wiki/roadmaps/exotic-input-scout.org"
-EXOTIC_INPUT_REFERENCE_STUB: Final = (
-    "wiki/references/exotic-input-candidates-2026-06-26.org"
 )
 EXOTIC_INPUT_CERTIFICATION_ARTIFACT: Final = (
     "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json"
@@ -63,68 +64,6 @@ BLOCKED_CLAIMS: Final = (
     "unmarked total-function distinction claim",
     "closed 4-manifold invariant claim",
 )
-
-CANDIDATE_SCOUT_ROWS: Final = (
-    {
-        "candidate_id": "dolgachev-e1-23-vs-e1",
-        "scout_rank": 1,
-        "scout_status": "promising input path; SOURCE NEEDED",
-        "certification_status": "not-certified",
-        "comparison_level": "not-certified",
-        "reference_stub_ids": ["akbulut-dolgachev-surface"],
-        "missing_artifacts": [
-            "captured source reference with hash or canonical locator",
-            "exact source figure/page ids",
-            "machine-readable Kirby or handle data for both sides",
-            "component ids, framings, dotted status, orientation, and lineage",
-            "integer linking matrices and intersection-form sanity checks",
-            "explicit H2 comparison or cork-canonical marking matrix",
-        ],
-    },
-    {
-        "candidate_id": "r8-vs-cp2-8bar",
-        "scout_rank": 2,
-        "scout_status": "promising fallback; SOURCE NEEDED",
-        "certification_status": "not-certified",
-        "comparison_level": "not-certified",
-        "reference_stub_ids": ["wakamaki-r8-cork"],
-        "missing_artifacts": [
-            "captured source reference with hash or canonical locator",
-            "exact source figure/page ids",
-            "machine-readable diagrams for exotic and standard sides",
-            "cork-twist and stabilization source separation",
-            "explicit H2 comparison data",
-        ],
-    },
-    {
-        "candidate_id": "akhmedov-park-cp2-2bar",
-        "scout_rank": 3,
-        "scout_status": "possible fallback; SOURCE NEEDED",
-        "certification_status": "not-certified",
-        "comparison_level": "not-certified",
-        "reference_stub_ids": ["akbulut-akhmedov-park"],
-        "missing_artifacts": [
-            "captured source reference",
-            "usable diagram references",
-            "machine-readable input",
-            "homeomorphism or marking comparison route",
-        ],
-    },
-    {
-        "candidate_id": "yasui-style-traces",
-        "scout_rank": 4,
-        "scout_status": "relative or boundary-sensitive fallback; SOURCE NEEDED",
-        "certification_status": "not-certified-for-closed-pair-computation",
-        "comparison_level": "not-selected",
-        "reference_stub_ids": ["yasui-corks-knot-concordance"],
-        "missing_artifacts": [
-            "selected closed-pair construction or explicit relative-computation pivot",
-            "machine-readable diagrams",
-            "comparison-level declaration",
-        ],
-    },
-)
-
 
 def exotic_input_certification_ledger_artifact(
     *,

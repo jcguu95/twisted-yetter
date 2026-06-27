@@ -1,0 +1,98 @@
+#+TITLE: n65 Exotic Input Scout
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n65-exotic-input-scout=
+- current status: =scout-data-blocked=
+- claim level: =candidate inventory/scouting ledger=
+- implementation: =src/twisted_yetter/exotic_input_scout.py=
+- tests: =tests/test_exotic_input_scout.py=
+- artifact: =experiments/results/exotic-input-scout/n65-exotic-input-scout.json=
+- reference stub: =ref:exotic-input-candidates-2026-06-26=
+- older roadmap note: =wiki/roadmaps/exotic-input-scout.org=
+- current git commit during generation: =fe48f86fb7e0fbce1c746b12ba88ab2fb1384eff=
+
+n65 現在是 executable scouting ledger，不是 =n70-exotic-input-certification=，
+不是 =n80-exotic-computation=，也不是 exotic detection evidence。它只把 repo-local
+candidate metadata、source-needed 狀態、data requirements、以及 blocking claims
+整理成可重生 JSON certificate。
+
+* Candidate Inventory
+
+目前 inventory 有四個候選，全部都是 =source-needed= 且
+=certified_for_n70: false= / =certified_for_n80: false=。
+
+| Rank | Candidate id | Scout status | Main gap |
+|------+--------------+--------------+----------|
+| 1 | =dolgachev-e1-23-vs-e1= | promising input path; =SOURCE NEEDED= | source capture、exact figures/pages、machine-readable diagrams、\(H_2\) / cork-canonical marking matrix |
+| 2 | =r8-vs-cp2-8bar= | promising fallback; =SOURCE NEEDED= | source capture、standard/exotic diagrams、cork twist and stabilization separation、\(H_2\) comparison |
+| 3 | =akhmedov-park-cp2-2bar= | possible fallback; =SOURCE NEEDED= | source diagrams、machine-readable input、homeomorphism/marking route |
+| 4 | =yasui-style-traces= | relative or boundary-sensitive fallback; =SOURCE NEEDED= | closed-pair construction or explicit relative-computation pivot、machine-readable diagrams、comparison-level declaration |
+
+Dolgachev \(E(1)_{2,3}\) vs \(E(1)\) remains the first source-capture target,
+but only as candidate metadata.  The current repo does not contain audited
+source pages, local PDF/hash records, digitized Kirby diagrams, component
+lineage, or an \(H_2\) comparison certificate for it.
+
+* Required Artifacts Before n70
+
+n70 input certification needs at least:
+
+1. source reference records with canonical metadata, locator, capture time, and
+   content hash or git blob hash;
+2. exact page, figure, theorem, or proposition ids for every selected input
+   claim;
+3. machine-readable Kirby or handle data for both sides of one selected exotic
+   pair;
+4. component ids, framings, dotted status, orientation, and lineage for both
+   sides;
+5. integer linking matrices and topological sanity checks for both sides;
+6. \(H_2\) / homeomorphism comparison or marking certificate with basis-change
+   matrices;
+7. upstream pass certificates for =n24=, =n50=, and =n55= before any closed
+   exotic computation claim.
+
+* Blockers
+
+The artifact records these stable blocker ids:
+
+- =source-needed-for-candidate-claims=
+- =missing-machine-readable-exotic-kirby-diagrams=
+- =missing-h2-homeomorphism-marking-certificate=
+- =n24-n50-n55-upstream-blocked=
+
+The last blocker matters even if a candidate source route looks promising:
+=n24-ordinary-surgery-gate= is still =blocked=, =n50-decorated-kirby-move-gate=
+is still =blocked=, and =n55-toy-closed-suite= is still =blocked=.  Therefore
+candidate scouting cannot be promoted into closed twisted Yetter values or any
+exotic smooth-structure comparison.
+
+* Claims Explicitly Refused
+
+n65 explicitly refuses:
+
+- certified exotic input claim;
+- =n70= exotic input certification pass;
+- =n80= exotic computation route;
+- exotic smooth-structure detection claim;
+- marked distinction claim;
+- cork-canonical distinction claim;
+- unmarked total-function distinction claim;
+- closed 4-manifold invariant claim.
+
+The code also has claim-promoter flags that raise =ValueError= if a caller tries
+to use the scout ledger as certification or computation.
+
+* Reproduction
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_input_scout --write experiments/results/exotic-input-scout/n65-exotic-input-scout.json
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+cd ctl-dogfood && UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src
+
+Expected node result: =scout-data-blocked=.  Recommended next data route:
+=n72-dolgachev-source-capture=, not =n80-exotic-computation=.

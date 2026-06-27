@@ -1,0 +1,329 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.exotic_input_scout",
+    "--write",
+    "experiments/results/exotic-input-scout/n65-exotic-input-scout.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.exotic_input_scout --write experiments/results/exotic-input-scout/n65-exotic-input-scout.json",
+  "exact_output": {
+    "any_candidate_certified": false,
+    "any_machine_readable_exotic_input": false,
+    "artifact_path": "experiments/results/exotic-input-scout/n65-exotic-input-scout.json",
+    "blocked_claims": [
+      "certified exotic input claim",
+      "n70 exotic input certification pass",
+      "n80 exotic computation route",
+      "exotic smooth-structure detection claim",
+      "marked distinction claim",
+      "cork-canonical distinction claim",
+      "unmarked total-function distinction claim",
+      "closed 4-manifold invariant claim"
+    ],
+    "blocker_reason_ids": [
+      "source-needed-for-candidate-claims",
+      "missing-machine-readable-exotic-kirby-diagrams",
+      "missing-h2-homeomorphism-marking-certificate",
+      "n24-n50-n55-upstream-blocked"
+    ],
+    "blockers": [
+      {
+        "observed": "candidate source stubs only",
+        "reason_id": "source-needed-for-candidate-claims",
+        "reference_stub": "wiki/references/exotic-input-candidates-2026-06-26.org",
+        "required": "source records with canonical metadata, exact page/figure ids, capture time, locator, and content hash or git blob hash",
+        "source_node": "n65-exotic-input-scout",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "candidate inventory cannot serve as n70/n80 input",
+        "observed": "no certified exotic-pair machine-readable diagrams",
+        "reason_id": "missing-machine-readable-exotic-kirby-diagrams",
+        "required": "machine-readable PD code, braid word, or equivalent Kirby/handle data for both sides of one selected exotic pair",
+        "source_node": "n65-exotic-input-scout",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "marked, cork-canonical, orbit, multiset, and unmarked distinction claims are all refused",
+        "observed": "no H2/homeomorphism marking certificate",
+        "reason_id": "missing-h2-homeomorphism-marking-certificate",
+        "required": "explicit comparison level plus integer H2 identification or basis-change matrix",
+        "source_node": "n65-exotic-input-scout",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "even a promising candidate inventory cannot route to exotic computation while ordinary surgery, decorated Kirby, and toy closed-suite gates are blocked",
+        "observed": {
+          "n24": "blocked",
+          "n50": "blocked",
+          "n55": "blocked"
+        },
+        "reason_id": "n24-n50-n55-upstream-blocked",
+        "required": {
+          "n24": "pass",
+          "n50": "pass",
+          "n55": "pass"
+        },
+        "source_node": "n24, n50, and n55",
+        "status": "blocked",
+        "upstream_schemas": {
+          "n24": "twisted-yetter.ordinary-surgery-gate.v1",
+          "n50": "twisted-yetter.decorated-kirby-gate.v2",
+          "n55": "twisted-yetter.toy-closed-suite-ledger.v1"
+        }
+      }
+    ],
+    "candidate_count": 4,
+    "candidate_inventory": [
+      {
+        "blocked_reason_ids": [
+          "source-needed-for-candidate-claims",
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-h2-homeomorphism-marking-certificate"
+        ],
+        "candidate_family": "Dolgachev surface / rational elliptic surface",
+        "candidate_id": "dolgachev-e1-23-vs-e1",
+        "certification_status": "not-certified",
+        "certified_for_n70": false,
+        "certified_for_n80": false,
+        "claim_boundary": "candidate remains source-needed metadata only and cannot be used as certified machine-readable exotic input",
+        "comparison_level": "not-certified",
+        "data_requirements": [
+          "captured source reference with hash or canonical locator",
+          "exact source page, figure, theorem, or proposition ids",
+          "machine-readable Kirby or handle data for both sides",
+          "component ids, framings, dotted status, orientation, and lineage",
+          "integer linking matrices and intersection-form sanity checks",
+          "explicit H2 comparison or cork-canonical marking matrix"
+        ],
+        "digitization_route": "n73-exotic-diagram-digitization",
+        "display_name": "Dolgachev E(1)_{2,3} vs E(1)",
+        "marking_route": "n74-exotic-h2-marking-certification",
+        "missing_artifacts": [
+          "captured source reference with hash or canonical locator",
+          "exact source figure/page ids",
+          "machine-readable Kirby or handle data for both sides",
+          "component ids, framings, dotted status, orientation, and lineage",
+          "integer linking matrices and intersection-form sanity checks",
+          "explicit H2 comparison or cork-canonical marking matrix"
+        ],
+        "reference_stub_ids": [
+          "akbulut-dolgachev-surface"
+        ],
+        "scout_decision": "first source-capture target, but not an n70-certified input",
+        "scout_rank": 1,
+        "scout_status": "promising input path; SOURCE NEEDED",
+        "source_capture_route": "n72-dolgachev-source-capture",
+        "source_status": "source-needed",
+        "status": "scout-data-blocked"
+      },
+      {
+        "blocked_reason_ids": [
+          "source-needed-for-candidate-claims",
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-h2-homeomorphism-marking-certificate"
+        ],
+        "candidate_family": "rational surface cork route",
+        "candidate_id": "r8-vs-cp2-8bar",
+        "certification_status": "not-certified",
+        "certified_for_n70": false,
+        "certified_for_n80": false,
+        "claim_boundary": "candidate remains source-needed metadata only and cannot be used as certified machine-readable exotic input",
+        "comparison_level": "not-certified",
+        "data_requirements": [
+          "captured source reference with hash or canonical locator",
+          "exact source page, figure, theorem, or proposition ids",
+          "machine-readable diagrams for exotic and standard sides",
+          "cork-twist and stabilization source separation",
+          "explicit H2 comparison data"
+        ],
+        "digitization_route": "future-diagram-digitization",
+        "display_name": "R8 vs CP2#8bar",
+        "marking_route": "future-h2-marking-certification",
+        "missing_artifacts": [
+          "captured source reference with hash or canonical locator",
+          "exact source figure/page ids",
+          "machine-readable diagrams for exotic and standard sides",
+          "cork-twist and stabilization source separation",
+          "explicit H2 comparison data"
+        ],
+        "reference_stub_ids": [
+          "wakamaki-r8-cork"
+        ],
+        "scout_decision": "fallback if Dolgachev source capture stalls",
+        "scout_rank": 2,
+        "scout_status": "promising fallback; SOURCE NEEDED",
+        "source_capture_route": "future-source-capture",
+        "source_status": "source-needed",
+        "status": "scout-data-blocked"
+      },
+      {
+        "blocked_reason_ids": [
+          "source-needed-for-candidate-claims",
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-h2-homeomorphism-marking-certificate"
+        ],
+        "candidate_family": "small-b2 rational surface",
+        "candidate_id": "akhmedov-park-cp2-2bar",
+        "certification_status": "not-certified",
+        "certified_for_n70": false,
+        "certified_for_n80": false,
+        "claim_boundary": "candidate remains source-needed metadata only and cannot be used as certified machine-readable exotic input",
+        "comparison_level": "not-certified",
+        "data_requirements": [
+          "captured source reference",
+          "usable diagram references",
+          "machine-readable input",
+          "homeomorphism or marking comparison route"
+        ],
+        "digitization_route": "future-diagram-digitization",
+        "display_name": "Akhmedov-Park exotic CP2#2bar",
+        "marking_route": "future-h2-marking-certification",
+        "missing_artifacts": [
+          "captured source reference",
+          "usable diagram references",
+          "machine-readable input",
+          "homeomorphism or marking comparison route"
+        ],
+        "reference_stub_ids": [
+          "akbulut-akhmedov-park"
+        ],
+        "scout_decision": "keep as lower-rank fallback; do not assume lower b2 is easier",
+        "scout_rank": 3,
+        "scout_status": "possible fallback; SOURCE NEEDED",
+        "source_capture_route": "future-source-capture",
+        "source_status": "source-needed",
+        "status": "scout-data-blocked"
+      },
+      {
+        "blocked_reason_ids": [
+          "source-needed-for-candidate-claims",
+          "missing-machine-readable-exotic-kirby-diagrams"
+        ],
+        "candidate_family": "relative or boundary-sensitive cork route",
+        "candidate_id": "yasui-style-traces",
+        "certification_status": "not-certified-for-closed-pair-computation",
+        "certified_for_n70": false,
+        "certified_for_n80": false,
+        "claim_boundary": "candidate remains source-needed metadata only and cannot be used as certified machine-readable exotic input",
+        "comparison_level": "not-selected",
+        "data_requirements": [
+          "selected closed-pair construction or explicit relative-computation pivot",
+          "machine-readable diagrams",
+          "comparison-level declaration"
+        ],
+        "digitization_route": "future-diagram-digitization",
+        "display_name": "Yasui-style traces and cork families",
+        "marking_route": "future-h2-marking-certification-or-relative-computation-pivot",
+        "missing_artifacts": [
+          "selected closed-pair construction or explicit relative-computation pivot",
+          "machine-readable diagrams",
+          "comparison-level declaration"
+        ],
+        "reference_stub_ids": [
+          "yasui-corks-knot-concordance"
+        ],
+        "scout_decision": "use only after choosing a closed-pair or relative-computation scope",
+        "scout_rank": 4,
+        "scout_status": "relative or boundary-sensitive fallback; SOURCE NEEDED",
+        "source_capture_route": "future-source-capture",
+        "source_status": "source-needed",
+        "status": "scout-data-blocked"
+      }
+    ],
+    "certified_exotic_input_claim_allowed": false,
+    "claim_boundary": "this is a scouting inventory, not source-audited exotic input certification and not a twisted Yetter computation",
+    "claim_level": "candidate inventory/scouting ledger",
+    "closed_4_manifold_invariant_claim_allowed": false,
+    "cork_canonical_distinction_claim_allowed": false,
+    "exotic_detection_claim_allowed": false,
+    "first_candidate_id": "dolgachev-e1-23-vs-e1",
+    "input_schemas": {
+      "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v2",
+      "ordinary_surgery_gate": "twisted-yetter.ordinary-surgery-gate.v1",
+      "toy_closed_suite": "twisted-yetter.toy-closed-suite-ledger.v1"
+    },
+    "input_statuses": {
+      "decorated_kirby_gate": "blocked",
+      "ordinary_surgery_gate": "blocked",
+      "toy_closed_suite": "blocked"
+    },
+    "input_validations": {
+      "toy_closed_suite": {
+        "blocked_claims_ok": true,
+        "blockers_ok": true,
+        "case_list_ok": true,
+        "decorated_gate_inventory_ok": true,
+        "input_schemas_ok": true,
+        "missing_required_fields": [],
+        "scope": "blocked ledger only; no closed 4-manifold invariant values",
+        "valid": true
+      }
+    },
+    "ledger_note": "wiki/understandings/exotic-input-scout.org",
+    "marked_distinction_claim_allowed": false,
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "candidate_list_ok": true,
+      "input_schemas_ok": true,
+      "missing_required_fields": [],
+      "ranking_ok": true,
+      "scope": "candidate scouting inventory only; no certified exotic input",
+      "valid": true
+    },
+    "n70_exotic_input_certification_pass_allowed": false,
+    "n80_exotic_computation_route_allowed": false,
+    "node_id": "n65-exotic-input-scout",
+    "ranked_candidate_ids": [
+      "dolgachev-e1-23-vs-e1",
+      "r8-vs-cp2-8bar",
+      "akhmedov-park-cp2-2bar",
+      "yasui-style-traces"
+    ],
+    "recommended_next_route": "n72-dolgachev-source-capture",
+    "reference_stub": "wiki/references/exotic-input-candidates-2026-06-26.org",
+    "required_unblock_artifacts": [
+      "source reference records with canonical metadata, locator, capture time, and hash",
+      "exact page, figure, theorem, or proposition ids for the selected input claims",
+      "machine-readable Kirby or handle data for both sides of one selected exotic pair",
+      "component ids, framings, dotted status, orientation, and lineage for both sides",
+      "integer linking matrices and topological sanity checks for both sides",
+      "H2/homeomorphism comparison or marking certificate with basis-change matrices",
+      "n24 ordinary surgery gate pass certificate",
+      "n50 decorated Kirby move gate pass certificate",
+      "n55 toy closed suite pass certificate"
+    ],
+    "roadmap_note": "wiki/roadmaps/exotic-input-scout.org",
+    "schema": "twisted-yetter.exotic-input-scout.v1",
+    "selected_n70_target": null,
+    "source_status": "Repo-local candidate metadata and source-needed scaffolding only; no network search, source capture, diagram digitization, H2 marking certification, or exotic invariant computation is performed",
+    "status": "scout-data-blocked",
+    "unmarked_total_function_distinction_claim_allowed": false,
+    "upstream_nodes": [
+      "n24-ordinary-surgery-gate",
+      "n50-decorated-kirby-move-gate",
+      "n55-toy-closed-suite"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/exotic_input_scout.py",
+  "git": {
+    "commit": "fe48f86fb7e0fbce1c746b12ba88ab2fb1384eff",
+    "dirty": true
+  },
+  "input_hash": "65451549d7761067bae2ecf7bae1b4752c3df6290aa79f70935c9a8fef84b988",
+  "log_references": [],
+  "notes": [
+    "n65 is a source-needed candidate inventory, not n70 certification.",
+    "No candidate has machine-readable exotic Kirby input or H2 marking certification.",
+    "n24, n50, and n55 blockers still prevent closed exotic computation claims."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_input_scout --write experiments/results/exotic-input-scout/n65-exotic-input-scout.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
