@@ -1,0 +1,254 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.exotic_diagram_digitization",
+    "--write",
+    "experiments/results/diagram-digitization/n73-exotic-diagram-digitization.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.exotic_diagram_digitization --write experiments/results/diagram-digitization/n73-exotic-diagram-digitization.json",
+  "exact_output": {
+    "artifact_path": "experiments/results/diagram-digitization/n73-exotic-diagram-digitization.json",
+    "blocked_by_n72_fields": [
+      "local source/PDF/web snapshot path",
+      "content hash or git blob hash",
+      "exact diagram page/figure ids",
+      "machine-readable Kirby/handle data for both sides",
+      "component ids, framings, dotted status, orientation, and lineage"
+    ],
+    "blocked_claims": [
+      "machine-readable Dolgachev diagram exists",
+      "Dolgachev Kirby components are digitized",
+      "both exotic-pair sides validate under diagram schema",
+      "derived matrix sanity checks match source expectations",
+      "H2/homeomorphism marking certification can start",
+      "n70 exotic input certification pass",
+      "n80 exotic computation route",
+      "exotic smooth-structure detection claim"
+    ],
+    "blocker_reason_ids": [
+      "digitization-source-snapshot-needed",
+      "digitization-page-figure-needed",
+      "digitization-diagram-encoding-needed",
+      "digitization-component-lineage-needed",
+      "digitization-sanity-targets-needed"
+    ],
+    "blockers": [
+      {
+        "observed": "n72 source capture has no local PDF/web snapshot",
+        "reason_id": "digitization-source-snapshot-needed",
+        "required": "captured source artifact with content sha256 or git blob hash",
+        "status": "blocked"
+      },
+      {
+        "observed": "n72 source capture has no exact page/figure ids",
+        "reason_id": "digitization-page-figure-needed",
+        "required": "page/figure/crop ids for both sides before any visual transcription",
+        "status": "blocked"
+      },
+      {
+        "observed": "no crossing, PD-code, braid-word, or equivalent input exists",
+        "reason_id": "digitization-diagram-encoding-needed",
+        "required": "machine-readable link/handle encoding tied to source locators",
+        "status": "blocked"
+      },
+      {
+        "observed": "no source-backed handle slide, cancellation, or component lineage",
+        "reason_id": "digitization-component-lineage-needed",
+        "required": "component lineage and integer basis matrices for all simplifications",
+        "status": "blocked"
+      },
+      {
+        "observed": "no source-backed linking/intersection/signature/handle-count targets",
+        "reason_id": "digitization-sanity-targets-needed",
+        "required": "integer sanity targets before n74 marking or n70 certification",
+        "status": "blocked"
+      }
+    ],
+    "candidate_id": "dolgachev-e1-23-vs-e1",
+    "claim_boundary": "n73 fixes the future digitization schema and blocker inventory only. Because n72 has n73_ready=false and no captured source snapshot, page/figure ids, or diagram input, this artifact contains no machine-readable Dolgachev Kirby diagram.",
+    "claim_level": "blocked digitization gate/schema checklist",
+    "diagram_exists_claim_allowed": false,
+    "diagram_payload_status": "not-produced",
+    "digitized_components_claim_allowed": false,
+    "exotic_detection_claim_allowed": false,
+    "ledger_note": "wiki/understandings/exotic-diagram-digitization.org",
+    "machine_readable_diagrams": [],
+    "matrix_sanity_claim_allowed": false,
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "missing_required_fields": [],
+      "required_schema_fields_ok": true,
+      "scope": "blocked digitization checklist only; no machine-readable diagram",
+      "side_records_ok": true,
+      "valid": true
+    },
+    "n70_exotic_input_certification_pass_allowed": false,
+    "n74_marking_certification_ready": false,
+    "n80_exotic_computation_route_allowed": false,
+    "node_id": "n73-exotic-diagram-digitization",
+    "page_figure_status": "missing",
+    "recommended_next_route": "manual/offline source acquisition and exact page/figure capture",
+    "reference_id": "akbulut-dolgachev-surface",
+    "required_schema_fields": {
+      "component_fields": [
+        {
+          "field": "side_id",
+          "required": "stable id for each side of the candidate pair",
+          "status": "blocked"
+        },
+        {
+          "field": "component_id",
+          "required": "stable component id matching the source figure",
+          "status": "blocked"
+        },
+        {
+          "field": "handle_role",
+          "required": "1-handle/dotted component or 2-handle/framed component role",
+          "status": "blocked"
+        },
+        {
+          "field": "framing",
+          "required": "integer framing for every 2-handle component",
+          "status": "blocked"
+        },
+        {
+          "field": "dotted_status",
+          "required": "explicit dotted/undotted status for 1-handle components",
+          "status": "blocked"
+        },
+        {
+          "field": "orientation",
+          "required": "component orientation convention or explicit unoriented justification",
+          "status": "blocked"
+        }
+      ],
+      "encoding_fields": [
+        {
+          "field": "crossings",
+          "required": "signed crossings with incident half-edge/component labels",
+          "status": "blocked"
+        },
+        {
+          "field": "pd_code",
+          "required": "PD-code equivalent, if crossing list is not the primary encoding",
+          "status": "blocked"
+        },
+        {
+          "field": "braid_word",
+          "required": "braid-word equivalent, if braid input is the primary encoding",
+          "status": "blocked"
+        },
+        {
+          "field": "source_locator",
+          "required": "page/figure/crop locator for every encoded feature",
+          "status": "blocked"
+        }
+      ],
+      "lineage_fields": [
+        {
+          "field": "component_lineage",
+          "required": "source component to final component lineage through slides/cancellations",
+          "status": "blocked"
+        },
+        {
+          "field": "handle_move_sequence",
+          "required": "ordered move ids with source citation for each handle slide/cancellation",
+          "status": "blocked"
+        },
+        {
+          "field": "basis_change_matrices",
+          "required": "integer matrices for every basis change and simplification",
+          "status": "blocked"
+        }
+      ],
+      "sanity_targets": [
+        {
+          "field": "linking_matrix",
+          "required": "integer linking matrix target derived from the source diagram",
+          "status": "blocked"
+        },
+        {
+          "field": "intersection_form",
+          "required": "intersection form target after dotted-handle elimination if used",
+          "status": "blocked"
+        },
+        {
+          "field": "handle_counts",
+          "required": "0/1/2/3/4-handle counts or explicit source-backed unknowns",
+          "status": "blocked"
+        },
+        {
+          "field": "euler_characteristic",
+          "required": "Euler characteristic target with handle-count convention",
+          "status": "blocked"
+        },
+        {
+          "field": "signature",
+          "required": "signature target with orientation convention",
+          "status": "blocked"
+        },
+        {
+          "field": "h2_basis_comparison",
+          "required": "basis labels needed by n74 marking certification",
+          "status": "blocked"
+        }
+      ]
+    },
+    "required_side_records": [
+      {
+        "display_name": "Dolgachev E(1)_{2,3}",
+        "required": "source-backed Kirby/handle diagram before encoding",
+        "side_id": "dolgachev-e1-23",
+        "status": "blocked"
+      },
+      {
+        "display_name": "E(1) comparison side",
+        "required": "source-backed comparison diagram or construction before encoding",
+        "side_id": "comparison-e1",
+        "status": "blocked"
+      }
+    ],
+    "schema": "twisted-yetter.exotic-diagram-digitization.v1",
+    "schema_validated_claim_allowed": false,
+    "source_inventory": {
+      "proved_in_source_diagram_claims": [],
+      "reference_stub": "wiki/references/akbulut-dolgachev-surface.org",
+      "source_capture_artifact": "experiments/results/source-capture/n72-dolgachev-source-capture.json",
+      "source_capture_blockers": [
+        "dolgachev-source-artifact-needed",
+        "dolgachev-exact-page-figure-theorem-needed",
+        "dolgachev-digitization-input-needed",
+        "dolgachev-h2-marking-source-needed"
+      ],
+      "source_capture_schema": "twisted-yetter.dolgachev-source-capture.v1"
+    },
+    "source_snapshot_status": "missing",
+    "status": "blocked",
+    "upstream_artifact": "experiments/results/source-capture/n72-dolgachev-source-capture.json",
+    "upstream_n73_ready": false,
+    "upstream_node": "n72-dolgachev-source-capture",
+    "upstream_schema": "twisted-yetter.dolgachev-source-capture.v1",
+    "upstream_status": "blocked"
+  },
+  "generator_script": "src/twisted_yetter/exotic_diagram_digitization.py",
+  "git": {
+    "commit": "22a54a671cc4d0f42e1d37c9b6d937db53117c6b",
+    "dirty": true
+  },
+  "input_hash": "9d875de22072a8b587159012177e98a7bba3dab6fa534bcf8328197a38b15a3f",
+  "log_references": [],
+  "notes": [
+    "No network search, PDF capture, visual digitization, or diagram encoding was performed.",
+    "n72 reports n73_ready=false and no exact page/figure source for the Dolgachev target.",
+    "This artifact is a blocked digitization schema/checklist, not an exotic-pair input."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_diagram_digitization --write experiments/results/diagram-digitization/n73-exotic-diagram-digitization.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
