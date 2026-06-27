@@ -9,8 +9,10 @@
 - status: =SOURCE NEEDED= / =audit incomplete= / =implementation-planning ledger=
 - scope: ordinary Kirby color and closed 4D surgery normalization source slots before =n22= and
   =n24=.
-- git commit when written: =a7b3fb4d97842ee0a8ecc9a53f80cfebc592ac8d=
-- dirty state when written: clean before this node's files were added.
+- original git commit when written: =a7b3fb4d97842ee0a8ecc9a53f80cfebc592ac8d=
+- updated after accepted link-evaluator gate: =2cf77a5= (=pytest=: 220 passed; CTL verify:
+  status ok)
+- dirty state for this update: source-capture note / CTL graph update only.
 - companion records:
   - =wiki/understandings/source-confidence-ledger.org=
   - =wiki/understandings/rt-link-conventions.org=
@@ -25,9 +27,24 @@ to =claim-supporting= status.
 
 * Boundary From n18
 
-=n18-colored-framed-link-evaluator-gate= has passed at
-=computed evidence/schema-test-safe= level.  That means the repo has a deterministic exact control
-certificate for a narrow set of machine-readable colored framed link fixtures.
+=n18-colored-framed-link-evaluator-gate= has passed at commit =2cf77a5= with =pytest=: 220
+passed and CTL verify status ok.  It accepts the restricted bare =SU(2)_2= colored framed link
+evaluator core as a deterministic exact calculator layer for the supported machine-readable link
+fixtures.
+
+The boundary exposed to =n22= is the evaluator entry point
+=evaluate_su2_level2_link(LinkDiagram, labels_by_component)= and the gate contract recorded in
+=wiki/understandings/colored-framed-link-evaluator-gate.org=.  Ordinary Kirby-color code must call
+that accepted core for supported colored sectors; it must not re-use fixture expected values, matrix
+statistics, or a separate shortcut evaluator.
+
+Accepted n18 scope available as upstream machinery:
+
+- empty link, split unlink, framed unknot, and positive Hopf controls through the same restricted
+  evaluator entry point;
+- exact =QuadraticSurd= / =RootOfUnityPower= values serialized as =coefficient_times_twist=;
+- structured blockers for unsupported general crossing diagrams and dotted components;
+- claim level =computed evidence/restricted-evaluator-core-gate=.
 
 This does not imply any of the following:
 
@@ -42,6 +59,30 @@ This does not imply any of the following:
 For =n22=, n18 only supplies a link-control baseline that Kirby-color experiments may call after
 they label their outputs as local-convention / experimental.  For =n24=, n18 is necessary but far
 from sufficient.
+
+* SU(2)_2 Local Convention Versus Source Needed
+
+The following may be used by =n22= as explicit local convention for the current toy
+=SU(2)_2= scaffold, provided every artifact says =experimental/local-convention= and carries the
+source-status map:
+
+- labels =0,1,2= from the existing =SU(2)_2= toy data;
+- local quantum-dimension coefficients =1, sqrt(2), 1= as software convention for
+  =experimental-ordinary-omega-v0=;
+- finite summation over simple labels on each ordinary no-dotted component;
+- exact arithmetic and deterministic JSON inherited from the accepted evaluator core;
+- refusal or blocker propagation when a sector diagram exceeds the restricted evaluator scope.
+
+The following remain =SOURCE NEEDED= and cannot support theorem-level claims:
+
+- page-level ordinary Kirby color definition and notation mapping to \(d_i\) or \(\Delta_i\);
+- page-level proof that the selected coefficients are the handle-slide Kirby color for the source
+  category and convention;
+- global dimension / total quantum dimension and any power used for closed 4D normalization;
+- signature anomaly, central charge, twist/framing sign, and blow-up/down correction;
+- handle count, \(S^4\) normalization, implicit 3-/4-handle treatment, and 2/3 cancellation;
+- dotted 1-handle / 1/2 cancellation treatment;
+- theorem connecting the framed-link expression to an ordinary closed 4-manifold invariant.
 
 * Precise Source Slots Required Before Claim-Level Use
 
@@ -90,6 +131,10 @@ An experimental =n22= implementation may store a field named
 =experimental_global_dimension_convention=, but no output using that field may support a closed
 4-manifold invariant claim until this slot is sourced.
 
+For the current toy convention, =sum_i d_i^2 = 4= may be recorded only as a local
+=SU(2)_2= sanity check.  It is not yet the sourced global normalization for a closed 4D surgery
+formula.
+
 ** Signature anomaly / framing convention
 
 Needed source data:
@@ -106,6 +151,10 @@ Claim boundary:
 
 It is unsafe to compare values for \(CP^2\) and \(\overline{CP^2}\), or to treat a blow-up/down
 move as normalized, until this slot is page-level sourced or proved in repo.
+
+The accepted link evaluator has a framed-unknot twist convention for colored link evaluation.  A
+future ordinary surgery layer still needs a source crosswalk from that twist convention to the
+signature anomaly / central charge factor, if the selected formula uses one.
 
 ** Handle-slide invariance proof scope
 
@@ -219,6 +268,30 @@ n22 should refuse or clearly mark unsupported cases:
 - diagrams whose handle scope exceeds the serialized =handle_scope=;
 - requests for =closed_4_manifold_claim=true= while any source slot remains =SOURCE NEEDED=;
 - comparisons where unresolved normalization factors differ.
+
+** Acceptance checklist for the next medium worker
+
+To accept =n22-ordinary-kirby-color-implementation= as an experimental/local-convention scaffold,
+the next worker should verify all of the following without upgrading any =SOURCE NEEDED= slot:
+
+- every sector term is generated by a transparent finite coloring expansion over ordinary
+  components;
+- every supported sector calls =evaluate_su2_level2_link(LinkDiagram, labels_by_component)= from
+  the accepted n18 core;
+- sector records include labels, coefficient product, evaluator value, exact contribution, and
+  deterministic ordering;
+- the output records =kirby_color_convention=, =handle_scope=, =claim_level=,
+  =normalization_status=, and =source_status_by_slot=;
+- =closed_4_manifold_claim=True= is refused while any source slot remains =SOURCE NEEDED=;
+- dotted components and diagrams outside the restricted evaluator scope produce structured
+  blockers rather than guessed values;
+- empty diagram, 0-framed unknot, +1-framed unknot, and split unlink controls have exact regression
+  expectations stated as local convention only;
+- Hopf / \(S^2 \times S^2\) ordinary controls are either supported through the accepted evaluator
+  or explicitly blocked with the unresolved source/implementation reason;
+- no ordinary surgery normalization, signature correction, handle cancellation theorem, twisted
+  formula, decorated formula, exotic input, or general crossing evaluator is implemented as part of
+  n22.
 
 * Minimum Metadata For Source Records
 
