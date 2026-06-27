@@ -1,0 +1,86 @@
+#+TITLE: n72 Dolgachev Source-Capture Ledger
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n72-dolgachev-source-capture=
+- current status: =blocked= / =source-needed=
+- claim level: =source-capture checklist/source-needed blocker=
+- implementation: =src/twisted_yetter/dolgachev_source_capture.py=
+- tests: =tests/test_dolgachev_source_capture.py=
+- artifact: =experiments/results/source-capture/n72-dolgachev-source-capture.json=
+- selected candidate: =dolgachev-e1-23-vs-e1=
+- reference id: =ref:akbulut-dolgachev-surface=
+- upstream scout artifact: =experiments/results/exotic-input-scout/n65-exotic-input-scout.json=
+
+This note records a negative/offline source-capture result: under the "no
+network" restriction, repo-local data contains only the n65 bibliographic stub
+for the Dolgachev target.  It does not contain a captured PDF/web snapshot,
+content hash, exact page/figure ids, machine-readable Kirby diagram, or
+\(H_2\)/homeomorphism marking certificate.
+
+* What Was Found
+
+Repo-local records currently contain:
+
+- =wiki/references/exotic-input-candidates-2026-06-26.org=, with stub id
+  =akbulut-dolgachev-surface=.
+- n65 candidate metadata ranking =dolgachev-e1-23-vs-e1= first.
+
+These are =source-needed= records only.  They are not
+=proved in source= references and cannot support Dolgachev diagram,
+homeomorphism, non-diffeomorphism, handle decomposition, or marking claims.
+
+* Missing Source Slots
+
+n72 requires the following before any n73/n74/n70 route:
+
+1. canonical bibliographic metadata and locator;
+2. local PDF/web snapshot path;
+3. content sha256 or git blob hash;
+4. capture time in UTC;
+5. exact page/figure ids for the \(E(1)_{2,3}\) diagram;
+6. exact page/figure ids for the \(E(1)\) comparison side;
+7. theorem/proposition/page ids for homeomorphism and non-diffeomorphism claims;
+8. page/figure/proposition ids for cork decomposition, cork twist, handle
+   simplification, and any no-1/no-3-handle claim if used.
+
+* Digitization Input Requirements
+
+No machine-readable diagram exists yet.  The future n73 input must include:
+
+- component ids for both sides;
+- framings for each 2-handle component;
+- dotted status for 1-handle components;
+- orientation conventions;
+- crossing data, PD code, braid word, or equivalent;
+- component lineage through every handle slide or cancellation;
+- integer linking matrix and intersection-form sanity targets;
+- handle count, Euler characteristic, and signature sanity targets;
+- basis-change matrices for simplification and \(H_2\) comparison.
+
+* Claim Boundary
+
+n72 explicitly refuses:
+
+- Dolgachev source captured claim;
+- Dolgachev proved-in-source diagram claim;
+- machine-readable Dolgachev Kirby diagram exists;
+- Dolgachev \(H_2\)/homeomorphism marking certified;
+- =n70= exotic input certification pass;
+- =n80= exotic computation route;
+- exotic smooth-structure detection claim.
+
+The correct next step is manual/offline source acquisition and page/figure
+capture.  Do not route to =n73= unless the source snapshot and exact diagram
+citations are present.
+
+* Reproduction
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.dolgachev_source_capture --write experiments/results/source-capture/n72-dolgachev-source-capture.json
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+cd ctl-dogfood && UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src

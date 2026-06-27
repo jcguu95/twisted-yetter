@@ -1,0 +1,219 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.dolgachev_source_capture",
+    "--write",
+    "experiments/results/source-capture/n72-dolgachev-source-capture.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.dolgachev_source_capture --write experiments/results/source-capture/n72-dolgachev-source-capture.json",
+  "exact_output": {
+    "artifact_path": "experiments/results/source-capture/n72-dolgachev-source-capture.json",
+    "blocked_claims": [
+      "Dolgachev source captured claim",
+      "Dolgachev proved-in-source diagram claim",
+      "machine-readable Dolgachev Kirby diagram exists",
+      "Dolgachev H2/homeomorphism marking certified",
+      "n70 exotic input certification pass",
+      "n80 exotic computation route",
+      "exotic smooth-structure detection claim"
+    ],
+    "blocker_reason_ids": [
+      "dolgachev-source-artifact-needed",
+      "dolgachev-exact-page-figure-theorem-needed",
+      "dolgachev-digitization-input-needed",
+      "dolgachev-h2-marking-source-needed"
+    ],
+    "blockers": [
+      {
+        "observed": "repo-local bibliographic stub only",
+        "reason_id": "dolgachev-source-artifact-needed",
+        "required": "canonical source metadata, capture time, locator, and content sha256 or git blob hash",
+        "status": "blocked"
+      },
+      {
+        "observed": "no exact page, figure, theorem, or proposition ids",
+        "reason_id": "dolgachev-exact-page-figure-theorem-needed",
+        "required": "exact source citations for diagrams, handle claims, and homeomorphic/non-diffeomorphic comparison claims",
+        "status": "blocked"
+      },
+      {
+        "observed": "no machine-readable Kirby/handle input",
+        "reason_id": "dolgachev-digitization-input-needed",
+        "required": "component ids, framings, dotted status, orientations, crossings or PD/braid data, and lineage for both sides",
+        "status": "blocked"
+      },
+      {
+        "observed": "no source-backed H2/homeomorphism marking data",
+        "reason_id": "dolgachev-h2-marking-source-needed",
+        "required": "comparison level plus integer H2 identification, basis-change matrix, or cork-canonical marking source",
+        "status": "blocked"
+      }
+    ],
+    "candidate_display_name": "Dolgachev E(1)_{2,3} vs E(1)",
+    "candidate_id": "dolgachev-e1-23-vs-e1",
+    "claim_boundary": "n72 found only repo-local stubs and source-needed slots; it is a blocked source-capture checklist, not a source audit, not diagram digitization, and not exotic input certification",
+    "claim_level": "source-capture checklist/source-needed blocker",
+    "digitization_input_requirements": [
+      "component ids for both sides",
+      "framings for each 2-handle component",
+      "dotted status for 1-handle components",
+      "orientation conventions for link components",
+      "crossing or PD-code/braid-word equivalent input",
+      "component lineage through every handle slide or cancellation",
+      "integer linking matrix and intersection-form sanity targets",
+      "handle count and Euler characteristic sanity targets",
+      "signature sanity target",
+      "basis-change matrices for simplification and H2 comparison"
+    ],
+    "exotic_detection_claim_allowed": false,
+    "h2_marking_certified_claim_allowed": false,
+    "ledger_note": "wiki/understandings/dolgachev-source-capture.org",
+    "machine_readable_diagram_claim_allowed": false,
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "missing_required_fields": [],
+      "n70_blockers_ok": true,
+      "reference_inventory_ok": true,
+      "required_slots_ok": true,
+      "scope": "blocked source-capture checklist only; no Dolgachev source claims",
+      "valid": true
+    },
+    "missing_fields": [
+      "local source/PDF/web snapshot path",
+      "content hash or git blob hash",
+      "capture time",
+      "exact diagram page/figure ids",
+      "exact theorem/proposition/page ids for comparison claims",
+      "machine-readable Kirby/handle data for both sides",
+      "component ids, framings, dotted status, orientation, and lineage",
+      "integer linking matrix, signature, Euler characteristic, and handle-count sanity targets",
+      "H2/homeomorphism comparison or cork-canonical marking matrix"
+    ],
+    "n70_blocker_ids_addressed": [
+      "source-needed-for-candidate-claims",
+      "missing-machine-readable-exotic-kirby-diagrams",
+      "missing-h2-homeomorphism-marking-certificate"
+    ],
+    "n70_exotic_input_certification_pass_allowed": false,
+    "n73_ready": false,
+    "n74_ready": false,
+    "n80_exotic_computation_route_allowed": false,
+    "needed_kirby_handle_diagram_fields": [
+      "component ids for both sides",
+      "framings for each 2-handle component",
+      "dotted status for 1-handle components",
+      "orientation conventions for link components",
+      "crossing or PD-code/braid-word equivalent input",
+      "component lineage through every handle slide or cancellation",
+      "integer linking matrix and intersection-form sanity targets",
+      "handle count and Euler characteristic sanity targets",
+      "signature sanity target",
+      "basis-change matrices for simplification and H2 comparison"
+    ],
+    "needed_page_figure_theorem_ids": [
+      "page/figure id for the E(1)_{2,3} Kirby or handle diagram",
+      "page/figure id for the E(1) comparison diagram or construction",
+      "theorem/proposition/page id for the homeomorphism claim",
+      "theorem/proposition/page id for the non-diffeomorphism claim",
+      "page/figure/proposition id for any cork decomposition or cork twist used",
+      "page/proposition id for any no-1/no-3-handle or closed-manifold handle claim used",
+      "page/figure ids for every handle-slide/simplification step used for digitization"
+    ],
+    "needed_snapshot_fields": [
+      "canonical metadata payload",
+      "capture time in UTC",
+      "locator URL or local source path",
+      "content sha256 or git blob hash",
+      "license/access note if relevant"
+    ],
+    "node_id": "n72-dolgachev-source-capture",
+    "recommended_next_route": "manual/offline source acquisition before n73",
+    "reference_inventory": [
+      {
+        "capture_time_status": "missing",
+        "claim_boundary": "this record is not a captured paper/PDF and cannot support diagram, marking, homeomorphism, or exotic computation claims",
+        "content_hash_status": "missing",
+        "known_repo_locator": "wiki/references/exotic-input-candidates-2026-06-26.org",
+        "locator_status": "bibliographic pointer only; no local snapshot",
+        "parent_stub": "wiki/references/exotic-input-candidates-2026-06-26.org",
+        "project_inference_only": [
+          "candidate was selected as n65 rank-1 source-capture target",
+          "Dolgachev route is promising only as source-needed metadata"
+        ],
+        "proved_in_source_claims": [],
+        "record_path": "wiki/references/akbulut-dolgachev-surface.org",
+        "record_status": "stub/source-needed",
+        "reference_id": "akbulut-dolgachev-surface"
+      }
+    ],
+    "reference_stub": "wiki/references/akbulut-dolgachev-surface.org",
+    "required_exact_source_slots": [
+      {
+        "current_repo_evidence": "only n65 candidate stub text",
+        "current_status": "source-needed",
+        "required": "canonical title, author list, version/date, publication/arXiv identifier, and locator",
+        "slot_id": "bibliographic-metadata"
+      },
+      {
+        "current_repo_evidence": "no local source/PDF/snapshot found",
+        "current_status": "missing",
+        "required": "local PDF/web snapshot path with sha256 or git blob hash",
+        "slot_id": "source-snapshot-hash"
+      },
+      {
+        "current_repo_evidence": "no exact page or figure ids in repo-local records",
+        "current_status": "missing",
+        "required": "exact page and figure ids for diagrams of E(1)_{2,3} and the comparison E(1) side",
+        "slot_id": "diagram-page-figure-ids"
+      },
+      {
+        "current_repo_evidence": "no source-backed theorem/page ids captured",
+        "current_status": "missing",
+        "required": "exact theorem/proposition/page ids for handle decomposition, no-1/no-3-handle claims if used, and any simplification sequence",
+        "slot_id": "handle-claim-citations"
+      },
+      {
+        "current_repo_evidence": "comparison remains n65 scout metadata only",
+        "current_status": "missing",
+        "required": "exact source ids for homeomorphic/non-diffeomorphic comparison and whether the comparison is marked, cork-canonical, or unmarked",
+        "slot_id": "comparison-claim-citations"
+      }
+    ],
+    "roadmap_note": "wiki/roadmaps/dolgachev-source-capture.org",
+    "schema": "twisted-yetter.dolgachev-source-capture.v1",
+    "source_captured_claim_allowed": false,
+    "source_status": "source-needed",
+    "status": "blocked",
+    "upstream_artifact": "experiments/results/exotic-input-scout/n65-exotic-input-scout.json",
+    "upstream_node": "n65-exotic-input-scout",
+    "upstream_schema": "twisted-yetter.exotic-input-scout.v1",
+    "upstream_selected_candidate_status": {
+      "certified_for_n70": false,
+      "certified_for_n80": false,
+      "comparison_level": "not-certified",
+      "source_status": "source-needed"
+    },
+    "upstream_status": "scout-data-blocked"
+  },
+  "generator_script": "src/twisted_yetter/dolgachev_source_capture.py",
+  "git": {
+    "commit": "1681dd38af596b66404da406871bd048f6a97edb",
+    "dirty": true
+  },
+  "input_hash": "eccefab53a604baeab17ebc6ef12acdb7cf21f9cd64e55d8112a32fb1f2501aa",
+  "log_references": [],
+  "notes": [
+    "No network search or external source capture was performed.",
+    "Repo-local records contain only an n65 bibliographic stub for the Dolgachev target.",
+    "n72 remains blocked before n73 digitization, n74 marking certification, n70 input certification, and n80 computation."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.dolgachev_source_capture --write experiments/results/source-capture/n72-dolgachev-source-capture.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
