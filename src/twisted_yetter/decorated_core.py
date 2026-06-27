@@ -8,10 +8,21 @@ Kirby moves, compute a closed invariant, or compare exotic smooth structures.
 
 from __future__ import annotations
 
+import argparse
+import itertools
 import json
+from pathlib import Path
 from typing import Final, Mapping
 
-from twisted_yetter.finite_groups import FiniteAbelianGroup
+from twisted_yetter.artifacts import (
+    default_tool_versions,
+    dumps_certificate,
+    git_metadata,
+    hash_json,
+    make_certificate,
+)
+from twisted_yetter.exact import from_jsonable
+from twisted_yetter.finite_groups import TRIVIAL_GROUP, Z2_GROUP, FiniteAbelianGroup
 from twisted_yetter.h2_marking import h2_component_decoration_certificate
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.omega_a import omega_a_candidate_certificate
@@ -20,9 +31,19 @@ from twisted_yetter.provisional_formula_policy import (
     N30_DOWNSTREAM_DECISIONS,
     claim_policy_decision,
 )
+from twisted_yetter.su2_level2 import SIMPLE_LABELS, QuadraticSurd
 
 DECORATED_CORE_SCHEMA: Final = "twisted-yetter.decorated-core-input.v1"
 DECORATED_CORE_NOTE: Final = "wiki/understandings/twisted-decorated-core.org"
+DECORATED_CORE_ARTIFACT: Final = (
+    "experiments/results/twisted-decorated-core/n35-core-scaffold.json"
+)
+DEFAULT_TOY_FIXTURE_DIR: Final = Path("experiments/inputs/toy-diagrams")
+DEFAULT_BASIS_KWARGS: Final = {
+    "basis_id": "toy-kirby-component-order",
+    "basis_status": "Kirby component order only",
+    "basis_source_status": "schema-test-safe / not certified H2 marking",
+}
 
 CLAIM_LEVEL: Final = "computed evidence scaffold"
 SOURCE_STATUS: Final = (
@@ -122,6 +143,17 @@ def decorated_core_input_artifact(
             for item in h2_certificate["decoration_vector"]
         ],
         "all_components_have_candidate_sector": True,
+        "link_evaluator_call_plan": {
+            "status": "planned-only",
+            "entry_point": (
+                "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link"
+            ),
+            "restricted_gate_ref": (
+                "wiki/understandings/colored-framed-link-evaluator-gate.org"
+            ),
+            "does_execute_link_evaluator": False,
+            "terms": [],
+        },
         "theorem_claim_allowed": False,
         "closed_4_manifold_claim_allowed": False,
         "exotic_detection_claim_allowed": False,
@@ -132,6 +164,9 @@ def decorated_core_input_artifact(
         "n35_policy_decision": _n35_policy_decision(),
         "ledger_note": DECORATED_CORE_NOTE,
     }
+    artifact["link_evaluator_call_plan"] = _link_evaluator_call_plan(
+        artifact["component_sector_metadata"]  # type: ignore[arg-type]
+    )
     artifact["metadata_validation"] = validate_decorated_core_artifact_metadata(
         artifact
     )
@@ -152,6 +187,7 @@ def validate_decorated_core_artifact_metadata(
         "finite_group_id",
         "decoration_by_component",
         "candidate_coefficient_certificate",
+        "link_evaluator_call_plan",
     }
     missing = sorted(field for field in required if field not in artifact)
     blocked_claims_ok = all(
@@ -181,6 +217,74 @@ def stable_decorated_core_json(certificate: Mapping[str, object]) -> str:
     return json.dumps(certificate, indent=2, sort_keys=True)
 
 
+def decorated_core_artifact_certificate(
+    *,
+    repo_root: str | Path = ".",
+) -> dict[str, object]:
+    """Return a reproducible artifact envelope for the n35 scaffold."""
+
+    root = Path(repo_root)
+    exact_output = {
+        "schema": "twisted-yetter.decorated-core-scaffold-bundle.v1",
+        "status": "pass",
+        "node_id": "n35-twisted-decorated-core",
+        "claim_level": CLAIM_LEVEL,
+        "source_status": SOURCE_STATUS,
+        "ordinary_surgery_gate_status": "blocked",
+        "examples": _default_example_artifacts(root),
+        "claim_boundary": (
+            "decorated-core scaffold only: component decorations are aligned "
+            "to candidate Omega_a sectors and exact planned restricted-link "
+            "evaluator calls, but no link evaluation, Kirby sum, closed "
+            "invariant, theorem, exotic comparison, or Reutter conclusion is "
+            "computed"
+        ),
+        "blocked_high_claims": list(BLOCKED_HIGH_CLAIMS),
+        "does_not_compute": list(DOES_NOT_COMPUTE),
+    }
+    return make_certificate(
+        status="pass",
+        command=(
+            "PYTHONPATH=src uv run python -m twisted_yetter.decorated_core "
+            f"--write {DECORATED_CORE_ARTIFACT}"
+        ),
+        argv=[
+            "python",
+            "-m",
+            "twisted_yetter.decorated_core",
+            "--write",
+            DECORATED_CORE_ARTIFACT,
+        ],
+        git=git_metadata(root),
+        tool_versions=default_tool_versions(),
+        input_hash=hash_json(
+            {
+                "node_id": "n35-twisted-decorated-core",
+                "fixtures": [
+                    "s4-empty.json",
+                    "cp2-plus-one-framed-unknot.json",
+                    "s2x-s2-hopf-zero-framed.json",
+                ],
+                "groups": ["trivial", "Z/2"],
+                "ordinary_surgery_gate_status": "blocked",
+            }
+        ),
+        exact_output=exact_output,
+        generator_script="src/twisted_yetter/decorated_core.py",
+        reproduce_command=(
+            "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache "
+            "PYTHONPATH=src uv run python -m twisted_yetter.decorated_core "
+            "--write experiments/results/twisted-decorated-core/n35-core-scaffold.json"
+        ),
+        repo_root=str(root.resolve()),
+        notes=[
+            "n35 plans exact restricted link-evaluator calls but does not execute them.",
+            "candidate Omega_a coefficients remain candidate-experimental.",
+            "ordinary_surgery_gate_status remains blocked; no closed 4D invariant claim is made.",
+        ],
+    )
+
+
 def _component_sector_payload(
     decoration_payload: Mapping[str, object],
     sectors_by_id: Mapping[str, object],
@@ -203,6 +307,142 @@ def _component_sector_payload(
         "coefficient_certificate_ref": "candidate_coefficient_certificate",
         "source_status": "sector metadata copied from n33 candidate Omega_a scaffold",
     }
+
+
+def _link_evaluator_call_plan(
+    component_sector_metadata: object,
+) -> dict[str, object]:
+    if not isinstance(component_sector_metadata, list):
+        raise TypeError("component_sector_metadata must be a list")
+    terms: list[dict[str, object]] = []
+    component_ids = [
+        str(component["component_id"])
+        for component in component_sector_metadata
+        if isinstance(component, Mapping)
+    ]
+
+    for index, labels in enumerate(
+        itertools.product(SIMPLE_LABELS, repeat=len(component_ids))
+    ):
+        labels_by_component = dict(zip(component_ids, labels))
+        coefficient = QuadraticSurd(1)
+        coefficient_factors: list[dict[str, object]] = []
+        for component, label in zip(component_sector_metadata, labels):
+            if not isinstance(component, Mapping):
+                raise TypeError("component sector entries must be objects")
+            candidate_coefficients = component["candidate_coefficients"]
+            if not isinstance(candidate_coefficients, list):
+                raise TypeError("candidate_coefficients must be a list")
+            coefficient_payload = _coefficient_for_label(candidate_coefficients, label)
+            factor = _quadratic_surd_from_json(
+                coefficient_payload["candidate_coefficient"]
+            )
+            coefficient *= factor
+            coefficient_factors.append(
+                {
+                    "component_id": component["component_id"],
+                    "label": label,
+                    "candidate_sector_id": component["candidate_sector_id"],
+                    "candidate_coefficient": coefficient_payload[
+                        "candidate_coefficient"
+                    ],
+                }
+            )
+        terms.append(
+            {
+                "term_index": index,
+                "labels_by_component": dict(sorted(labels_by_component.items())),
+                "coefficient_factors": coefficient_factors,
+                "coefficient_product": coefficient.to_jsonable(),
+                "planned_call": {
+                    "function": (
+                        "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link"
+                    ),
+                    "labels_by_component": dict(sorted(labels_by_component.items())),
+                },
+            }
+        )
+    return {
+        "status": "planned-only",
+        "entry_point": "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link",
+        "restricted_gate_ref": (
+            "wiki/understandings/colored-framed-link-evaluator-gate.org"
+        ),
+        "does_execute_link_evaluator": False,
+        "simple_label_set": list(SIMPLE_LABELS),
+        "term_count": len(terms),
+        "terms": terms,
+        "source_status": (
+            "finite expansion plan only; coefficients are candidate Omega_a "
+            "metadata and link evaluator results are not computed by n35"
+        ),
+    }
+
+
+def _coefficient_for_label(
+    candidate_coefficients: list[object],
+    label: str,
+) -> Mapping[str, object]:
+    matches = [
+        coefficient
+        for coefficient in candidate_coefficients
+        if isinstance(coefficient, Mapping) and coefficient.get("label") == label
+    ]
+    if len(matches) != 1:
+        raise ValueError(f"expected exactly one candidate coefficient for label {label!r}")
+    return matches[0]
+
+
+def _quadratic_surd_from_json(payload: object) -> QuadraticSurd:
+    if not isinstance(payload, Mapping) or payload.get("kind") != "Q(sqrt2)":
+        raise TypeError("expected Q(sqrt2) coefficient JSON")
+    return QuadraticSurd(
+        from_jsonable(payload["rational"]),
+        from_jsonable(payload["sqrt2"]),
+    )
+
+
+def _default_example_artifacts(root: Path) -> list[dict[str, object]]:
+    fixture_dir = root / DEFAULT_TOY_FIXTURE_DIR
+    return [
+        {
+            "case_id": "s4-trivial-zero",
+            "fixture_path": (DEFAULT_TOY_FIXTURE_DIR / "s4-empty.json").as_posix(),
+            "core_artifact": decorated_core_input_artifact(
+                _load_fixture(fixture_dir / "s4-empty.json"),
+                TRIVIAL_GROUP,
+                **DEFAULT_BASIS_KWARGS,
+            ),
+        },
+        {
+            "case_id": "cp2-z2-nonzero",
+            "fixture_path": (
+                DEFAULT_TOY_FIXTURE_DIR / "cp2-plus-one-framed-unknot.json"
+            ).as_posix(),
+            "core_artifact": decorated_core_input_artifact(
+                _load_fixture(fixture_dir / "cp2-plus-one-framed-unknot.json"),
+                Z2_GROUP,
+                decoration_by_component={"cp2_h": (1,)},
+                **DEFAULT_BASIS_KWARGS,
+            ),
+        },
+        {
+            "case_id": "s2xs2-hopf-z2-mixed-10",
+            "fixture_path": (
+                DEFAULT_TOY_FIXTURE_DIR / "s2x-s2-hopf-zero-framed.json"
+            ).as_posix(),
+            "core_artifact": decorated_core_input_artifact(
+                _load_fixture(fixture_dir / "s2x-s2-hopf-zero-framed.json"),
+                Z2_GROUP,
+                decoration_by_component={"s2_a": (1,), "s2_b": (0,)},
+                **DEFAULT_BASIS_KWARGS,
+            ),
+        },
+    ]
+
+
+def _load_fixture(path: Path) -> LinkDiagram:
+    return LinkDiagram.from_json(json.loads(path.read_text()))
 
 
 def _h2_summary(certificate: Mapping[str, object]) -> dict[str, object]:
@@ -263,6 +503,24 @@ def _n35_policy_decision() -> dict[str, object]:
     raise RuntimeError("n35 policy decision missing from n30")
 
 
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Emit the n35 decorated-core scaffold artifact."
+    )
+    parser.add_argument("--write", type=Path, help="write certificate JSON to this path")
+    args = parser.parse_args(argv)
+
+    certificate = decorated_core_artifact_certificate()
+    encoded = dumps_certificate(certificate)
+    if args.write is None:
+        print(encoded, end="")
+        return 0
+
+    args.write.parent.mkdir(parents=True, exist_ok=True)
+    args.write.write_text(encoded)
+    return 0
+
+
 __all__ = [
     "ALLOWED_CLAIM_LEVELS",
     "BLOCKED_HIGH_CLAIMS",
@@ -270,7 +528,12 @@ __all__ = [
     "DECORATED_CORE_SCHEMA",
     "DOES_NOT_COMPUTE",
     "SOURCE_STATUS",
+    "decorated_core_artifact_certificate",
     "decorated_core_input_artifact",
     "stable_decorated_core_json",
     "validate_decorated_core_artifact_metadata",
 ]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -7,6 +7,7 @@ from twisted_yetter.decorated_core import (
     BLOCKED_HIGH_CLAIMS,
     DECORATED_CORE_SCHEMA,
     DOES_NOT_COMPUTE,
+    decorated_core_artifact_certificate,
     decorated_core_input_artifact,
     stable_decorated_core_json,
     validate_decorated_core_artifact_metadata,
@@ -37,6 +38,10 @@ def test_empty_s4_trivial_artifact_is_explicit_and_metadata_only() -> None:
     assert artifact["finite_group_id"] == "trivial"
     assert artifact["decoration_by_component"] == {}
     assert artifact["component_sector_metadata"] == []
+    assert artifact["link_evaluator_call_plan"]["status"] == "planned-only"
+    assert artifact["link_evaluator_call_plan"]["does_execute_link_evaluator"] is False
+    assert artifact["link_evaluator_call_plan"]["term_count"] == 1
+    assert artifact["link_evaluator_call_plan"]["terms"][0]["labels_by_component"] == {}
     assert artifact["zero_decoration"] is True
     assert artifact["metadata_validation"]["valid"] is True
 
@@ -90,6 +95,17 @@ def test_cp2_z2_nonzero_decoration_references_nontrivial_sector() -> None:
         "candidate_coefficient_certificate"
     )
 
+    plan = artifact["link_evaluator_call_plan"]
+    assert plan["status"] == "planned-only"
+    assert plan["does_execute_link_evaluator"] is False
+    assert plan["term_count"] == 3
+    assert [
+        term["labels_by_component"] for term in plan["terms"]
+    ] == [{"cp2_h": "0"}, {"cp2_h": "1"}, {"cp2_h": "2"}]
+    assert [
+        term["coefficient_product"]["sqrt2"]["value"] for term in plan["terms"]
+    ] == ["0", "-1", "0"]
+
 
 def test_s2xs2_hopf_component_decorations_align_to_component_order() -> None:
     diagram = _load_fixture("s2x-s2-hopf-zero-framed.json")
@@ -111,6 +127,14 @@ def test_s2xs2_hopf_component_decorations_align_to_component_order() -> None:
         entry["candidate_sector_id"] for entry in artifact["component_sector_metadata"]
     ] == ["1", "0"]
     assert artifact["basis"]["basis_id"] == BASIS_KWARGS["basis_id"]
+
+    plan = artifact["link_evaluator_call_plan"]
+    assert plan["term_count"] == 9
+    assert plan["terms"][0]["planned_call"]["function"] == (
+        "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link"
+    )
+    assert plan["terms"][0]["labels_by_component"] == {"s2_a": "0", "s2_b": "0"}
+    assert plan["terms"][-1]["labels_by_component"] == {"s2_a": "2", "s2_b": "2"}
 
 
 def test_json_is_stable_exact_and_has_no_float_markers() -> None:
@@ -158,6 +182,35 @@ def test_required_fields_and_scope_boundaries_are_explicit() -> None:
     )
     assert validation["valid"] is False
     assert "diagram_id" in validation["missing_required_fields"]
+
+
+def test_artifact_bundle_records_reproducible_n35_examples() -> None:
+    certificate = decorated_core_artifact_certificate()
+    exact_output = certificate["exact_output"]
+    examples = {example["case_id"]: example for example in exact_output["examples"]}
+
+    assert certificate["schema"] == "twisted-yetter.certificate.v1"
+    assert certificate["status"] == "pass"
+    assert certificate["generator_script"] == "src/twisted_yetter/decorated_core.py"
+    assert exact_output["node_id"] == "n35-twisted-decorated-core"
+    assert exact_output["ordinary_surgery_gate_status"] == "blocked"
+    assert set(examples) == {
+        "s4-trivial-zero",
+        "cp2-z2-nonzero",
+        "s2xs2-hopf-z2-mixed-10",
+    }
+    assert (
+        examples["cp2-z2-nonzero"]["core_artifact"]["link_evaluator_call_plan"][
+            "term_count"
+        ]
+        == 3
+    )
+    assert (
+        examples["s2xs2-hopf-z2-mixed-10"]["core_artifact"][
+            "link_evaluator_call_plan"
+        ]["term_count"]
+        == 9
+    )
 
 
 def test_high_claims_and_unknown_claim_levels_are_refused() -> None:

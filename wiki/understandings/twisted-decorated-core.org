@@ -9,6 +9,7 @@
 - status: =computed evidence scaffold= / =metadata only=
 - implementation: =src/twisted_yetter/decorated_core.py=
 - tests: =tests/test_decorated_core.py=
+- artifact: =experiments/results/twisted-decorated-core/n35-core-scaffold.json=
 - upstream component schema: =src/twisted_yetter/link_diagram.py=
 - upstream H2/component decoration schema: =src/twisted_yetter/h2_marking.py=
 - upstream candidate coefficients: =src/twisted_yetter/omega_a.py=
@@ -25,6 +26,12 @@ candidate-validation work.  It aligns:
 It is not a theorem, not a link evaluator, not a Kirby color sum, not a
 decorated Kirby-move proof, not a closed invariant, and not an exotic-pair
 computation.
+
+The artifact also contains an exact =link_evaluator_call_plan=.  This plan is
+only a scaffold: it enumerates the finite list of labels and coefficient
+products that would be sent to the accepted restricted
+=evaluate_su2_level2_link= entry point.  It deliberately records
+=does_execute_link_evaluator: false=.
 
 * Artifact Schema
 
@@ -51,6 +58,8 @@ The artifact also records:
 - =basis= copied from the n34 component-decoration artifact;
 - =h2_decoration_certificate_summary=;
 - =component_sector_metadata=, one record per link component;
+- =link_evaluator_call_plan=, an exact planned-only expansion into restricted
+  link-evaluator calls;
 - =zero_decoration=;
 - =does_not_compute=;
 - explicit booleans refusing theorem, closed-invariant, decorated Kirby-move,
@@ -71,6 +80,23 @@ This is a candidate coefficient metadata alignment only.  The coefficient
 certificate remains =candidate-experimental / NOT PROVED IN REPO / SOURCE
 NEEDED= and does not certify a homologically twisted Kirby color.
 
+* Expansion Plan
+
+For a diagram with \(k\) components, n35 forms the \(3^k\) formal
+=SU(2)_2= label assignments over simple labels =0,1,2=.  Each term records:
+
+- =labels_by_component=, the labels that would be passed to the restricted
+  colored framed link evaluator;
+- =coefficient_factors= copied from the component's candidate \(\Omega_a\)
+  sector;
+- =coefficient_product= in exact \(Q(\sqrt 2)\) JSON;
+- =planned_call.function= set to
+  =twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link=.
+
+This is a finite expansion scaffold, not an evaluated sum.  A later node may
+consume it to call the restricted evaluator and then decide whether a sector
+passes or is blocked.  n35 itself never treats a planned term as a link value.
+
 * Toy Fixtures Covered
 
 Tests cover:
@@ -83,6 +109,13 @@ Tests cover:
 
 The tests also check deterministic JSON round-trip serialization and the
 absence of float markers such as =.0= in the serialized artifact.
+
+The reproducible artifact bundle currently records:
+
+- empty \(S^4\) with trivial \(A\), term count \(1\);
+- \(CP^2\) with \(A=Z/2\), nonzero decoration, term count \(3\);
+- \(S^2 \times S^2\) Hopf toy diagram with mixed \(Z/2\) decorations, term
+  count \(9\).
 
 * Trust Boundary
 
@@ -117,7 +150,7 @@ Still blocked:
 
 - source-audited Yetter \(Z/2\) decoration rule;
 - general finite \(A\) theorem-level \(\Omega_a\) formula;
-- link evaluation and Kirby color summation for decorated inputs;
+- actual link evaluation and Kirby color summation for decorated inputs;
 - handle-slide / basis-change / decorated Kirby-move proof;
 - ordinary surgery gate =n24=;
 - toy closed suite =n55=;
