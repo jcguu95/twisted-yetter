@@ -1,17 +1,25 @@
 import json
+from pathlib import Path
 
 import pytest
 
+from twisted_yetter.artifacts import validate_certificate
 from twisted_yetter.ordinary_kirby_color import SOURCE_STATUS_BY_SLOT
 from twisted_yetter.ordinary_surgery_gate import (
     CLOSED_CLAIM_BLOCKER_ID,
     N22_BLOCKER_ID,
     N23_BLOCKER_ID,
+    NODE_ID,
+    ORDINARY_SURGERY_GATE_ARTIFACT,
     ORDINARY_SURGERY_GATE_SCHEMA,
     SOURCE_BLOCKER_ID,
+    ordinary_surgery_gate_artifact_certificate,
     ordinary_surgery_gate_certificate,
     stable_ordinary_surgery_gate_json,
 )
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+N24_ARTIFACT = REPO_ROOT / ORDINARY_SURGERY_GATE_ARTIFACT
 
 
 def test_ordinary_surgery_gate_returns_blocked_certificate() -> None:
@@ -19,7 +27,7 @@ def test_ordinary_surgery_gate_returns_blocked_certificate() -> None:
 
     assert certificate["schema"] == ORDINARY_SURGERY_GATE_SCHEMA
     assert certificate["status"] == "blocked"
-    assert certificate["node_id"] == "n24-ordinary-surgery-gate"
+    assert certificate["node_id"] == NODE_ID
     assert certificate["ordinary_surgery_claim_allowed"] is False
     assert certificate["closed_4_manifold_claim_allowed"] is False
     assert certificate["claim_supporting_closed_invariant_allowed"] is False
@@ -87,7 +95,42 @@ def test_gate_does_not_support_exotic_decorated_or_twisted_claims() -> None:
     certificate = ordinary_surgery_gate_certificate()
     unsupported = certificate["does_not_unblock"]
 
+    assert "claim-supporting ordinary closed 4D invariant value" in unsupported
     assert "decorated formula claim" in unsupported
     assert "twisted formula claim" in unsupported
     assert "exotic smooth-structure detection claim" in unsupported
     assert all("exotic" not in item for item in certificate["unblocks"])
+
+
+def test_gate_cannot_be_used_as_ordinary_closed_4d_invariant() -> None:
+    certificate = ordinary_surgery_gate_certificate()
+
+    assert certificate["closed_4_manifold_claim_allowed"] is False
+    assert certificate["ordinary_surgery_claim_allowed"] is False
+    assert certificate["upstream"]["n23"]["closed_4_manifold_claim_allowed"] is False
+    assert certificate["upstream"]["n22"]["normalization_status"] == "SOURCE NEEDED"
+    assert certificate["claim_level"] == "executable blocker/certificate"
+
+
+def test_artifact_certificate_wraps_exact_blocked_gate() -> None:
+    artifact = ordinary_surgery_gate_artifact_certificate(repo_root=REPO_ROOT)
+    validate_certificate(artifact)
+
+    assert artifact["status"] == "inconclusive"
+    assert artifact["exact_output"] == ordinary_surgery_gate_certificate()
+    assert artifact["exact_output"]["status"] == "blocked"
+    assert artifact["exact_output"]["node_id"] == NODE_ID
+    assert artifact["generator_script"] == "src/twisted_yetter/ordinary_surgery_gate.py"
+
+
+def test_checked_in_n24_artifact_matches_core_generator_output() -> None:
+    certificate = json.loads(N24_ARTIFACT.read_text())
+    validate_certificate(certificate)
+
+    assert certificate["status"] == "inconclusive"
+    assert certificate["exact_output"] == ordinary_surgery_gate_certificate()
+    assert certificate["exact_output"]["status"] == "blocked"
+    assert certificate["exact_output"]["closed_4_manifold_claim_allowed"] is False
+    assert certificate["exact_output"]["blocked_source_slots"] == list(
+        SOURCE_STATUS_BY_SLOT
+    )

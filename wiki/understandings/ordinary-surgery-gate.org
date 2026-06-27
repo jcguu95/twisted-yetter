@@ -9,6 +9,8 @@
 - status: =blocked= / =executable blocker/certificate=
 - implementation: =src/twisted_yetter/ordinary_surgery_gate.py=
 - tests: =tests/test_ordinary_surgery_gate.py=
+- artifact: =experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json=
+- CTL graph: v13 priority =n24-ordinary-surgery-gate=, after n23 acceptance at commit =94152e2=
 - upstream ledgers:
   - =wiki/understandings/ordinary-kirby-color-source-capture.org=
   - =wiki/understandings/ordinary-kirby-color-implementation.org=
@@ -42,6 +44,17 @@ ordinary_surgery_gate_certificate(claim_supporting_closed_invariant=True)
 #+end_src
 
 raises a refusal instead of producing a misleading certificate.
+
+The checked-in artifact wraps the exact gate output in the repo certificate envelope:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache \
+  PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate \
+  --write experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json
+#+end_src
+
+The envelope status is =inconclusive= because the artifact schema has =pass/fail/inconclusive=,
+while the domain-level =exact_output.status= is the actual n24 result: =blocked=.
 
 * Blocked Reasons
 
@@ -105,6 +118,7 @@ It does not unblock:
 * Reproduce
 
 #+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate --write experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json
 UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest tests/test_ordinary_surgery_gate.py
 UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
 cd ctl-dogfood && UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py

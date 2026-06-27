@@ -1,0 +1,169 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.ordinary_surgery_gate",
+    "--write",
+    "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate --write experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json",
+  "exact_output": {
+    "blocked_reasons": [
+      {
+        "blocked_source_slots": [
+          "kirby_color_coefficients",
+          "global_dimension_and_normalization",
+          "signature_anomaly_framing_convention",
+          "handle_slide_invariance_proof_scope",
+          "one_two_cancellation_treatment",
+          "two_three_cancellation_treatment",
+          "closed_4_manifold_vs_2_handlebody_distinction"
+        ],
+        "claim_boundary": "ordinary surgery cannot support closed 4D claims while Kirby color, normalization, signature/framing, handle-move, cancellation, and closed-scope source slots remain SOURCE NEEDED",
+        "reason_id": "n21-source-slots-unfilled",
+        "source_node": "n21-ordinary-kirby-color-source-capture",
+        "source_status_by_slot": {
+          "closed_4_manifold_vs_2_handlebody_distinction": "SOURCE NEEDED",
+          "global_dimension_and_normalization": "SOURCE NEEDED",
+          "handle_slide_invariance_proof_scope": "SOURCE NEEDED",
+          "kirby_color_coefficients": "SOURCE NEEDED",
+          "one_two_cancellation_treatment": "SOURCE NEEDED",
+          "signature_anomaly_framing_convention": "SOURCE NEEDED",
+          "two_three_cancellation_treatment": "SOURCE NEEDED"
+        },
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "n22 is an experimental/local-convention no-dotted 2-handle framed-link scaffold, not a sourced surgery formula",
+        "n22_claim_level": "experimental/local-convention",
+        "n22_handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+        "n22_normalization_status": "SOURCE NEEDED",
+        "reason_id": "n22-local-convention-only",
+        "source_node": "n22-ordinary-kirby-color-implementation",
+        "status": "blocked"
+      },
+      {
+        "case_id": "S2xS2-hopf",
+        "claim_boundary": "known ordinary controls, including S2xS2 as a Hopf fixture, are local-convention regression data only until ordinary surgery source and normalization slots are filled",
+        "crossing_count": 2,
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "linking_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "n22_can_compute": true,
+        "n22_certificate_summary": {
+          "claim_level": "experimental/local-convention",
+          "closed_4_manifold_claim_allowed": false,
+          "handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+          "normalization_status": "SOURCE NEEDED",
+          "schema": "twisted-yetter.experimental-ordinary-kirby-color.v1",
+          "sector_count": 9,
+          "total_value": {
+            "kind": "Q(sqrt2)[zeta_16]_sparse_sum",
+            "terms": [
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "4"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 0
+              }
+            ]
+          }
+        },
+        "ordinary_scaffold_status": "computed scaffold",
+        "reason_id": "n23-ordinary-controls-local-only",
+        "source_node": "n23-known-ordinary-4d-controls",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "the gate returns a blocker certificate and refuses claim_supporting_closed_invariant=True",
+        "claim_supporting_closed_invariant_allowed": false,
+        "reason_id": "closed-claim-refused",
+        "source_node": "n24-ordinary-surgery-gate",
+        "status": "blocked"
+      }
+    ],
+    "blocked_source_slots": [
+      "kirby_color_coefficients",
+      "global_dimension_and_normalization",
+      "signature_anomaly_framing_convention",
+      "handle_slide_invariance_proof_scope",
+      "one_two_cancellation_treatment",
+      "two_three_cancellation_treatment",
+      "closed_4_manifold_vs_2_handlebody_distinction"
+    ],
+    "claim_level": "executable blocker/certificate",
+    "claim_supporting_closed_invariant_allowed": false,
+    "closed_4_manifold_claim_allowed": false,
+    "does_not_unblock": [
+      "claim-supporting ordinary closed 4D invariant value",
+      "decorated formula claim",
+      "twisted formula claim",
+      "exotic smooth-structure detection claim"
+    ],
+    "ledger_note": "wiki/understandings/ordinary-surgery-gate.org",
+    "node_id": "n24-ordinary-surgery-gate",
+    "ordinary_surgery_claim_allowed": false,
+    "schema": "twisted-yetter.ordinary-surgery-gate.v1",
+    "source_status_by_slot": {
+      "closed_4_manifold_vs_2_handlebody_distinction": "SOURCE NEEDED",
+      "global_dimension_and_normalization": "SOURCE NEEDED",
+      "handle_slide_invariance_proof_scope": "SOURCE NEEDED",
+      "kirby_color_coefficients": "SOURCE NEEDED",
+      "one_two_cancellation_treatment": "SOURCE NEEDED",
+      "signature_anomaly_framing_convention": "SOURCE NEEDED",
+      "two_three_cancellation_treatment": "SOURCE NEEDED"
+    },
+    "status": "blocked",
+    "unblocks": [
+      "n30-provisional-formula-policy may cite an explicit ordinary-surgery blocker"
+    ],
+    "upstream": {
+      "n21": "wiki/understandings/ordinary-kirby-color-source-capture.org",
+      "n22": {
+        "claim_level": "experimental/local-convention",
+        "handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+        "normalization_status": "SOURCE NEEDED"
+      },
+      "n23": {
+        "closed_4_manifold_claim_allowed": false,
+        "s2xs2_status": "computed scaffold",
+        "schema": "twisted-yetter.known-ordinary-4d-controls-ledger.v1",
+        "status": "pass"
+      }
+    }
+  },
+  "generator_script": "src/twisted_yetter/ordinary_surgery_gate.py",
+  "git": {
+    "commit": "94152e2c1f603eeed37152799f5eb3ed84b55228",
+    "dirty": true
+  },
+  "input_hash": "01b7b2998d1b235f362a10bc148f7cdc19ecf46a3dcbf2261570cb0f1a328dc2",
+  "log_references": [],
+  "notes": [
+    "n24 is intentionally blocked; this certificate is the gate output.",
+    "closed_4_manifold_claim and claim_supporting_closed_invariant remain refused."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate --write experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

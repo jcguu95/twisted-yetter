@@ -8,9 +8,18 @@ deterministic certificate so downstream nodes can depend on an auditable
 
 from __future__ import annotations
 
+import argparse
 import json
+from pathlib import Path
 from typing import Final, Mapping
 
+from twisted_yetter.artifacts import (
+    default_tool_versions,
+    dumps_certificate,
+    git_metadata,
+    hash_json,
+    make_certificate,
+)
 from twisted_yetter.ordinary_control_gate import known_ordinary_control_ledger
 from twisted_yetter.ordinary_kirby_color import (
     CLAIM_LEVEL,
@@ -23,6 +32,10 @@ ORDINARY_SURGERY_GATE_SCHEMA: Final = "twisted-yetter.ordinary-surgery-gate.v1"
 ORDINARY_SURGERY_GATE_NOTE: Final = (
     "wiki/understandings/ordinary-surgery-gate.org"
 )
+ORDINARY_SURGERY_GATE_ARTIFACT: Final = (
+    "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json"
+)
+NODE_ID: Final = "n24-ordinary-surgery-gate"
 
 SOURCE_BLOCKER_ID: Final = "n21-source-slots-unfilled"
 N22_BLOCKER_ID: Final = "n22-local-convention-only"
@@ -121,7 +134,7 @@ def ordinary_surgery_gate_certificate(
     return {
         "schema": ORDINARY_SURGERY_GATE_SCHEMA,
         "status": "blocked",
-        "node_id": "n24-ordinary-surgery-gate",
+        "node_id": NODE_ID,
         "claim_level": "executable blocker/certificate",
         "ordinary_surgery_claim_allowed": False,
         "claim_supporting_closed_invariant_allowed": False,
@@ -153,20 +166,94 @@ def ordinary_surgery_gate_certificate(
     }
 
 
+def ordinary_surgery_gate_artifact_certificate(
+    *,
+    repo_root: str | Path = ".",
+) -> dict[str, object]:
+    """Return a certificate envelope for the current n24 blocker gate."""
+
+    root = Path(repo_root)
+    exact_output = ordinary_surgery_gate_certificate()
+    return make_certificate(
+        status="inconclusive",
+        command=(
+            "PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate "
+            f"--write {ORDINARY_SURGERY_GATE_ARTIFACT}"
+        ),
+        argv=[
+            "python",
+            "-m",
+            "twisted_yetter.ordinary_surgery_gate",
+            "--write",
+            ORDINARY_SURGERY_GATE_ARTIFACT,
+        ],
+        git=git_metadata(root),
+        tool_versions=default_tool_versions(),
+        input_hash=hash_json(
+            {
+                "node_id": NODE_ID,
+                "blocked_source_slots": exact_output["blocked_source_slots"],
+                "blocked_reason_ids": [
+                    reason["reason_id"]
+                    for reason in exact_output["blocked_reasons"]
+                    if isinstance(reason, Mapping) and "reason_id" in reason
+                ],
+                "upstream": exact_output["upstream"],
+                "closed_4_manifold_claim_allowed": exact_output[
+                    "closed_4_manifold_claim_allowed"
+                ],
+            }
+        ),
+        exact_output=exact_output,
+        generator_script="src/twisted_yetter/ordinary_surgery_gate.py",
+        reproduce_command=(
+            "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache "
+            "PYTHONPATH=src uv run python -m twisted_yetter.ordinary_surgery_gate "
+            "--write experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json"
+        ),
+        repo_root=str(root.resolve()),
+        notes=[
+            "n24 is intentionally blocked; this certificate is the gate output.",
+            "closed_4_manifold_claim and claim_supporting_closed_invariant remain refused.",
+        ],
+    )
+
+
 def stable_ordinary_surgery_gate_json(certificate: Mapping[str, object]) -> str:
     """Serialize an n24 gate certificate deterministically."""
 
     return json.dumps(certificate, indent=2, sort_keys=True)
 
 
+def _main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--write", type=Path, help="write the n24 certificate JSON")
+    args = parser.parse_args()
+
+    certificate = ordinary_surgery_gate_artifact_certificate(repo_root=Path.cwd())
+    output = dumps_certificate(certificate)
+    if args.write is None:
+        print(output, end="")
+        return
+    args.write.parent.mkdir(parents=True, exist_ok=True)
+    args.write.write_text(output, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    _main()
+
+
 __all__ = [
     "CLOSED_CLAIM_BLOCKER_ID",
     "N22_BLOCKER_ID",
     "N23_BLOCKER_ID",
+    "NODE_ID",
+    "ORDINARY_SURGERY_GATE_ARTIFACT",
     "ORDINARY_SURGERY_GATE_NOTE",
     "ORDINARY_SURGERY_GATE_SCHEMA",
     "SOURCE_BLOCKER_ID",
     "UNSUPPORTED_CLAIMS",
+    "ordinary_surgery_gate_artifact_certificate",
     "ordinary_surgery_gate_certificate",
     "stable_ordinary_surgery_gate_json",
 ]
