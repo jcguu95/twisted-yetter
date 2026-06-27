@@ -1,0 +1,121 @@
+#+TITLE: H2 Label and Basis Component Schema
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:3 num:t ^:nil
+
+* Status
+
+- decision graph node: =n34-h2-label-and-basis-schema=
+- status: =schema-test-safe= / =metadata only=
+- implementation: =src/twisted_yetter/h2_marking.py=
+- tests: =tests/test_h2_marking.py=
+- upstream component schema: =src/twisted_yetter/link_diagram.py=
+- upstream finite groups: =src/twisted_yetter/finite_groups.py=
+- upstream candidate sectors: =src/twisted_yetter/omega_a.py=
+
+This node creates deterministic JSON-ready metadata for aligning finite \(A\)
+decoration choices with machine-readable Kirby/link components.  It does not
+compute a decorated invariant, does not prove handle-slide or basis-change
+invariance, and does not certify an \(H_2\) marking or homeomorphism comparison.
+
+* Artifact Schema
+
+The schema id is:
+
+#+begin_src text
+twisted-yetter.h2-component-decoration.v1
+#+end_src
+
+The required top-level fields include:
+
+- =claim_level=: currently =schema-test-safe=.
+- =source_status=: records that this is Kirby-basis/component metadata only.
+- =basis_id=, =basis_status=, =basis_source_status=: required basis metadata.
+- =finite_group_id=: currently =trivial= or =Z/2=.
+- =component_ids=: copied from the =LinkDiagram= component order.
+- =decoration_vector=: explicit list in component order, with =component_id=,
+  =element_id=, and coordinate =element=.
+- =decoration_by_component=: deterministic component-id map to finite-group
+  element labels.
+- =zero_decoration=: true exactly when every component has the group identity.
+- =all_trivial_decoration_explicit=: true, including for empty =S4= diagrams.
+- =ordinary_surgery_gate_status= and explanation: inherited from =n24=.
+
+The implementation also records:
+
+- =certified_h2_marking_claim_allowed = false=.
+- =homeomorphism_marking_claim_allowed = false=.
+- =closed_4_manifold_claim_allowed = false=.
+- =exotic_detection_claim_allowed = false=.
+
+* Supported Inputs
+
+Supported finite groups:
+
+- =trivial=, via =twisted_yetter.finite_groups:TRIVIAL_GROUP=.
+- =Z/2=, via =twisted_yetter.finite_groups:Z2_GROUP=.
+
+Decorations may be supplied as either:
+
+- a vector of finite-group elements in =diagram.component_ids= order; or
+- a mapping from component id to finite-group element.
+
+The mapping path is canonicalized back to diagram component order.  This is the
+piece n35 needs to align finite \(A\) sector choices with the machine-readable
+Kirby components without guessing component order.
+
+* Sanity Checks
+
+The schema layer checks:
+
+- decoration vector length matches the number of diagram components;
+- mapping keys match the diagram component ids exactly;
+- every decoration value is an element of the selected finite group;
+- =basis_id=, =basis_status=, and =basis_source_status= are present;
+- zero / all-trivial decoration is represented explicitly;
+- stable JSON serialization is deterministic and contains no float markers.
+
+Toy fixture coverage:
+
+- =experiments/inputs/toy-diagrams/s4-empty.json=:
+  empty component list and explicit zero decoration.
+- =experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json=:
+  =cp2_h= aligned with the zero =Z/2= element.
+- =experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json=:
+  =s2_a= and =s2_b= aligned with nontrivial / trivial =Z/2= choices in
+  component order.
+
+* Trust Boundary
+
+This node deliberately refuses:
+
+- certified \(H_2\) marking claims;
+- homeomorphism marking comparison claims;
+- decorated core evaluation;
+- handle-slide or basis-change proof;
+- closed 4-manifold invariant claims;
+- exotic smooth-structure detection claims.
+
+API calls with =claim_certified_h2_marking=True= or
+=claim_homeomorphism_marking=True= raise an error.  This is intentional:
+component-level Kirby metadata is a necessary alignment record, not a
+certificate that a class in \(H_2(X;A)\), \(H^2(X;A)\), or a \(K(A,2)\)
+background has been identified invariantly across presentations.
+
+* Unblocks and Remaining Blockers
+
+Unblocks:
+
+- =n35-twisted-decorated-core= can consume deterministic
+  =component_id -> finite-group element= metadata and does not need to infer
+  order from ad hoc vectors.
+- later candidate-validation nodes can record zero and nonzero decorations in
+  stable JSON without upgrading the claim level.
+
+Still blocked:
+
+- source-audited Yetter \(Z/2\) component decoration rule;
+- decorated Kirby move / basis-change proof;
+- ordinary surgery gate =n24=;
+- certified \(H_2\) or homeomorphism marking for exotic input;
+- any closed twisted Yetter invariant or exotic-detection claim.
