@@ -1,0 +1,219 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "tests/test_su2_link_evaluator.py"
+  ],
+  "command": "uv run python -m pytest tests/test_su2_link_evaluator.py",
+  "exact_output": {
+    "claim": {
+      "claim_level": "computed evidence/restricted-source-backed-core",
+      "ledgers": [
+        "wiki/understandings/rt-link-conventions.org",
+        "wiki/understandings/elementary-link-controls.org",
+        "wiki/understandings/hopf-and-crossing-controls.org"
+      ],
+      "not_scope": "Kirby color, twisted color, ordinary surgery normalization, closed 4D invariant, exotic-pair data, or general planar RT recoupling evaluator",
+      "restriction_reason": "LinkDiagram currently records signed over/under crossings but not full planar adjacency, F-symbol gauge, or R-symbol convention data.",
+      "scope": "bare SU(2)_2 colored framed link values for empty links, no-crossing split links, and positive Hopf-shaped crossing controls",
+      "source_boundary": "SOURCE NEEDED/local-convention controls inherited from n14/n16/n17",
+      "source_record": "wiki/references/rt-or-kauffman-link-source.org"
+    },
+    "node_id": "n18b-su2-2-link-evaluator-core",
+    "result_count": 6,
+    "results": [
+      {
+        "diagram_id": "s4-empty-kirby-diagram",
+        "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {},
+        "status": "pass",
+        "supported_kind": "empty",
+        "value": {
+          "coefficient": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "kind": "coefficient_times_twist",
+          "twist": {
+            "exponent": 0,
+            "kind": "root_of_unity_power",
+            "order": 16,
+            "symbol": "zeta_16"
+          }
+        }
+      },
+      {
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {
+          "cp2_h": "2"
+        },
+        "status": "pass",
+        "supported_kind": "split_no_crossing",
+        "value": {
+          "coefficient": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "kind": "coefficient_times_twist",
+          "twist": {
+            "exponent": 8,
+            "kind": "root_of_unity_power",
+            "order": 16,
+            "symbol": "zeta_16"
+          }
+        }
+      },
+      {
+        "diagram_id": "unlink-2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {
+          "u1": "1",
+          "u2": "1"
+        },
+        "status": "pass",
+        "supported_kind": "split_no_crossing",
+        "value": {
+          "coefficient": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "2"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "kind": "coefficient_times_twist",
+          "twist": {
+            "exponent": 0,
+            "kind": "root_of_unity_power",
+            "order": 16,
+            "symbol": "zeta_16"
+          }
+        }
+      },
+      {
+        "diagram_id": "hopf-linking-1",
+        "fixture_path": "experiments/inputs/toy-diagrams/hopf-link.json",
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {
+          "h1": "1",
+          "h2": "2"
+        },
+        "status": "pass",
+        "supported_kind": "positive_hopf",
+        "value": {
+          "coefficient": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "0"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "-1"
+            }
+          },
+          "kind": "coefficient_times_twist",
+          "twist": {
+            "exponent": 0,
+            "kind": "root_of_unity_power",
+            "order": 16,
+            "symbol": "zeta_16"
+          }
+        }
+      },
+      {
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {
+          "s2_a": "2",
+          "s2_b": "2"
+        },
+        "status": "pass",
+        "supported_kind": "positive_hopf",
+        "value": {
+          "coefficient": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "kind": "coefficient_times_twist",
+          "twist": {
+            "exponent": 0,
+            "kind": "root_of_unity_power",
+            "order": 16,
+            "symbol": "zeta_16"
+          }
+        }
+      },
+      {
+        "blocker": {
+          "message": "Hopf controls require exactly two components",
+          "reason_id": "general-crossing-diagram-unsupported",
+          "required": "positive Hopf-shaped crossing record or future planar adjacency plus F/R-symbol evaluator",
+          "status": "blocked"
+        },
+        "diagram_id": "three-component-crossing-not-planar-evaluable",
+        "fixture_path": null,
+        "framing_twist_convention": "multiply by theta_label^framing for each component; theta table is zeta_16 exponents 0:0, 1:3, 2:8; positive framing sign remains SOURCE NEEDED/local-convention",
+        "labels_by_component": {
+          "a": "0",
+          "b": "1",
+          "c": "2"
+        },
+        "status": "blocked"
+      }
+    ],
+    "schema": "twisted-yetter.su2-level2-link-evaluator-core.v1",
+    "status": "restricted-pass-with-structured-blocker",
+    "supported": "empty, no-crossing split links, positive 0-framed Hopf-shaped controls",
+    "unsupported": "general crossing diagrams without planar adjacency/F/R data, dotted Kirby components, Kirby colors, twisted colors, ordinary surgery, closed 4D invariants"
+  },
+  "generator_script": "manual deterministic evaluator payload from src/twisted_yetter/su2_link_evaluator.py",
+  "git": {
+    "commit": "487c9a16d5db9fe64e3bc25d8c0fddd30a74107c",
+    "dirty": true
+  },
+  "input_hash": "00f5ea6d3ecc326a4c55b7a57242b4c36730f5ea31e7ab079cee9ca852354b21",
+  "log_references": [],
+  "notes": [
+    "n18b restricted SU(2)_2 framed colored link evaluator core; no Kirby color, twisted color, ordinary surgery, closed 4D invariant, or exotic claim.",
+    "All exact values are JSON-ready symbolic Q(sqrt2) coefficients times zeta_16 twist powers; no floats are used.",
+    "The final unsupported crossing case is intentionally blocked to document the current schema boundary."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest tests/test_su2_link_evaluator.py",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11"
+  }
+}
