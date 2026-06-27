@@ -1,0 +1,103 @@
+#+TITLE: Kirby Presentation Pair Generator
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:3 num:t ^:nil
+
+* Status
+
+- decision graph node: =n45-kirby-presentation-pair-generator=
+- status: =computed evidence scaffold= / =candidate/dry-run metadata registry=
+- implementation: =src/twisted_yetter/presentation_pairs.py=
+- tests: =tests/test_presentation_pairs.py=
+- upstream decorated-core summaries: =src/twisted_yetter/candidate_validation_suite.py=
+- downstream consumer: =n50-decorated-kirby-move-gate=
+- inherited blocker: =n24-ordinary-surgery-gate= remains =blocked=
+
+This node builds deterministic Kirby/link presentation-pair metadata for later
+decorated Kirby move gates.  It is not a Kirby move proof, not handle-slide
+algebra, not a basis-change certificate, not link evaluation, not a Kirby color
+sum, not a closed invariant, and not exotic-pair evidence.
+
+* Registry Schema
+
+The schema id is:
+
+#+begin_src text
+twisted-yetter.kirby-presentation-pair-registry.v1
+#+end_src
+
+The registry records:
+
+- =claim_level= =computed evidence scaffold=;
+- =source_status= identifying this as n45 deterministic dry-run metadata;
+- inherited =ordinary_surgery_gate_status= from n24;
+- one entry per fixed toy pair;
+- deterministic JSON stability and no-float-marker checks;
+- explicit =does_not_prove= barriers for equivalence, move proof, invariant, and exotic claims.
+
+Each pair records at least:
+
+- =pair_id=;
+- =left= and =right= side summaries with fixture path, diagram id, component ids,
+  finite group, decoration summary, and candidate sector ids;
+- =relation_type=;
+- =relation_status= =candidate/dry-run=;
+- =component_lineage= with placeholder status;
+- =basis_map= with placeholder status and =claim_certified: false=;
+- =decorated_core_case_refs= and embedded =decorated_core_cases= summaries from n36;
+- =claim_level=, =source_status=, and =does_not_prove=.
+
+* Built-In Toy Pairs
+
+Current default pairs:
+
+- =identity-s4-trivial-zero=: empty \(S^4\) toy fixture paired with itself,
+  using the trivial group case.
+- =identity-cp2-z2-zero=: =CP^2= +1-framed unknot toy fixture paired with
+  itself, with zero \(Z/2\) decoration.
+- =identity-cp2-z2-nonzero=: the same =CP^2= toy fixture paired with itself,
+  with nonzero \(Z/2\) decoration.
+- =component-order-unlink-z2-mixed-dry-run=: two-component unlink toy fixture
+  paired with itself while recording a swap-shaped component-lineage placeholder.
+  The right fixture is not a transformed diagram, and this pair is explicitly
+  only field-coverage metadata for n50.
+
+All pairs have =relation_status= =candidate/dry-run=.  None asserts that the two
+presentations are Kirby equivalent.
+
+* Trust Boundary
+
+Passing the registry tests means:
+
+- n50 can see required pair fields in deterministic JSON;
+- toy identity, zero-decoration, nonzero \(Z/2\), and component-order dry-run
+  shapes are represented;
+- associated decorated-core case summaries come from n36 metadata;
+- JSON serialization is stable;
+- serialized JSON contains no float marker such as =.0=.
+
+Passing the registry tests does not prove:
+
+- presentation equivalence;
+- Kirby move correctness;
+- decorated Kirby move invariance;
+- basis-change correctness;
+- link evaluation correctness;
+- closed 4-manifold invariant status;
+- exotic smooth-structure distinction.
+
+* Unblocks and Remaining Blockers
+
+Unblocks:
+
+- =n50-decorated-kirby-move-gate= can consume a stable pair metadata shape before
+  attempting any decorated move comparison logic.
+
+Still blocked:
+
+- actual handle-slide / component-order transformation certificates;
+- certified component lineage and integer basis matrices;
+- =n24-ordinary-surgery-gate=;
+- source-audited Yetter \(Z/2\) surgical formula;
+- theorem-level general finite \(A\) \(\Omega_a\) formula;
+- closed invariant and exotic-pair computation claims.
