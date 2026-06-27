@@ -103,8 +103,16 @@ def omega_a_candidate_certificate(
         "candidate_formula_display": "Omega_a = sum_i d_i lambda_i(a) X_i",
         "finite_group_id": _finite_group_id(group),
         "character_table_source": _character_table_source(group),
+        "character_data_source_status": (
+            "exact finite character table inherited from n11; "
+            "label-to-character assignment remains candidate/local"
+        ),
         "character_table_certificate": finite_group_certificate_payload(group),
         "character_orthogonality_status": "pass/exact inherited from n11",
+        "marking_basis_status": (
+            "not-in-scope: coefficient-sector metadata only; no H2 basis, "
+            "basis-change action, or closed marking comparison is computed"
+        ),
         "category_id": CATEGORY_ID,
         "simple_labels": list(SIMPLE_LABELS),
         "ordinary_kirby_color_convention": KIRBY_COLOR_CONVENTION,

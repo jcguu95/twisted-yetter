@@ -37,6 +37,8 @@ REQUIRED_ARTIFACT_FIELDS: Final = (
     "candidate_formula_id",
     "finite_group_id",
     "character_table_source",
+    "character_data_source_status",
+    "marking_basis_status",
 )
 
 ORDINARY_SURGERY_GATE_ONE_OF_FIELDS: Final = (
@@ -82,6 +84,51 @@ SPECIALIZATION_CHECKS: Final = (
     },
 )
 
+REQUIRED_SOURCE_PROOF_SLOTS: Final = (
+    {
+        "slot_id": "formula-source-or-proof",
+        "status": "SOURCE NEEDED / PROOF NEEDED",
+        "description": (
+            "A page-level source, theorem, proposition, or repo-local proof is "
+            "needed before the display can be promoted beyond a candidate."
+        ),
+    },
+    {
+        "slot_id": "lambda-action-source",
+        "status": "SOURCE NEEDED / CONVENTION NEEDED",
+        "description": (
+            "The meaning of lambda_i(a) must be tied to an exact character, "
+            "tensor automorphism, grading, or other stated categorical action."
+        ),
+    },
+    {
+        "slot_id": "kirby-move-proof-scope",
+        "status": "PROOF NEEDED",
+        "description": (
+            "Handle slides, handle cancellations, orientation conventions, "
+            "normalization, signature anomaly, and implicit 3-handles must be "
+            "covered before any closed-invariant claim."
+        ),
+    },
+    {
+        "slot_id": "ordinary-specialization-boundary",
+        "status": "INHERITS n22/n24 BOUNDARY",
+        "description": (
+            "Trivial A or trivial decoration may reduce only to the current "
+            "ordinary omega/local n22 behavior inside the n24 blocked surgery "
+            "boundary."
+        ),
+    },
+    {
+        "slot_id": "z2-specialization-source",
+        "status": "INHERITS n31 PROVISIONAL TARGET",
+        "description": (
+            "A = Z/2 may specialize to the n31 omega/theta target only as a "
+            "provisional falsification target until source slots are filled."
+        ),
+    },
+)
+
 FALSIFICATION_CRITERIA: Final = (
     {
         "criterion_id": "toy-examples-inconsistent",
@@ -112,6 +159,46 @@ FALSIFICATION_CRITERIA: Final = (
             "floating approximations, or fails exact character orthogonality."
         ),
     },
+    {
+        "criterion_id": "marking-or-basis-mismatch",
+        "description": (
+            "A basis or H2-marking change is guessed, omitted, or produces "
+            "different candidate sectors without an explicit recorded matrix "
+            "and marking interpretation."
+        ),
+    },
+    {
+        "criterion_id": "failed-example-recorded-against-candidate",
+        "description": (
+            "Any exact failed example must be recorded as evidence against "
+            "the candidate formula, the local convention, or the code path; "
+            "it must not be silently discarded as noise."
+        ),
+    },
+)
+
+MARKING_REQUIREMENTS: Final = (
+    {
+        "requirement_id": "represent-h2-basis",
+        "description": (
+            "Artifacts that attach sectors to decorations must record the "
+            "Kirby/H2 basis or explicitly state why no marking is in scope."
+        ),
+    },
+    {
+        "requirement_id": "record-basis-change-action",
+        "description": (
+            "Basis changes and handle-slide lineage must be represented by "
+            "explicit integer matrices or structured blockers, not guessed."
+        ),
+    },
+    {
+        "requirement_id": "separate-marked-from-unmarked-claims",
+        "description": (
+            "Candidate evidence must distinguish marked distinctions, orbit "
+            "or multiset distinctions, and unsupported unmarked claims."
+        ),
+    },
 )
 
 N33_REQUIREMENTS: Final = (
@@ -133,7 +220,8 @@ N33_REQUIREMENTS: Final = (
         "requirement_id": "cite-character-table-source",
         "description": (
             "n33 must identify the exact finite_group_id and "
-            "character_table_source used for sector metadata."
+            "character_table_source used for sector metadata, and annotate "
+            "the character_data_source_status for lambda_i(a)."
         ),
     },
     {
@@ -260,9 +348,23 @@ def omega_a_candidate_contract_certificate() -> dict[str, object]:
         "character_table_requirement": {
             "finite_group_id_required": True,
             "character_table_source_required": True,
+            "character_data_source_status_required": True,
             "exact_character_orthogonality_required": True,
             "floating_point_allowed": False,
+            "lambda_i_a_exact_required": True,
+            "source_status_annotation_required": True,
         },
+        "marking_requirement": {
+            "marking_basis_status_required": True,
+            "basis_and_h2_effects_must_be_represented": True,
+            "basis_and_h2_effects_must_not_be_guessed": True,
+            "requirements": [
+                dict(requirement) for requirement in MARKING_REQUIREMENTS
+            ],
+        },
+        "required_source_proof_slots": [
+            dict(slot) for slot in REQUIRED_SOURCE_PROOF_SLOTS
+        ],
         "specialization_checks": [
             dict(check) for check in SPECIALIZATION_CHECKS
         ],
@@ -312,12 +414,14 @@ def stable_omega_a_contract_json(certificate: Mapping[str, object]) -> str:
 __all__ = [
     "ALLOWED_CONTRACT_CLAIM_LEVELS",
     "FALSIFICATION_CRITERIA",
+    "MARKING_REQUIREMENTS",
     "N33_REQUIREMENTS",
     "OMEGA_A_CANDIDATE_FORMULA_ID",
     "OMEGA_A_CONTRACT_NOTE",
     "OMEGA_A_CONTRACT_SCHEMA",
     "ORDINARY_SURGERY_GATE_ONE_OF_FIELDS",
     "REQUIRED_ARTIFACT_FIELDS",
+    "REQUIRED_SOURCE_PROOF_SLOTS",
     "SOURCE_STATUS_OPTIONS",
     "SPECIALIZATION_CHECKS",
     "omega_a_candidate_contract_certificate",

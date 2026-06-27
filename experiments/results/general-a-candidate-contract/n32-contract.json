@@ -1,0 +1,263 @@
+{
+  "allowed_claim_levels": [
+    "candidate-experimental",
+    "schema-test-safe"
+  ],
+  "candidate_formula_claim_boundary": "formula display is a candidate target for experiments and falsification, not a theorem or source-audited Kirby color",
+  "candidate_formula_display": "Omega_a = sum_i d_i lambda_i(a) X_i",
+  "candidate_formula_id": "omega-a-character-weighted-kirby-color-v0",
+  "character_table_requirement": {
+    "character_data_source_status_required": true,
+    "character_table_source_required": true,
+    "exact_character_orthogonality_required": true,
+    "finite_group_id_required": true,
+    "floating_point_allowed": false,
+    "lambda_i_a_exact_required": true,
+    "source_status_annotation_required": true
+  },
+  "claim_decisions": [
+    {
+      "allowed": true,
+      "claim_boundary": "metadata-only candidate contract",
+      "claim_type": "candidate-experimental",
+      "decision": "allowed",
+      "node_id": "n32-general-a-candidate-contract",
+      "ordinary_surgery_gate_one_of_fields": [
+        "ordinary_surgery_gate_status",
+        "ordinary_surgery_gate_status_explanation"
+      ],
+      "required_artifact_fields": [
+        "claim_level",
+        "source_status",
+        "candidate_formula_id",
+        "finite_group_id",
+        "character_table_source",
+        "character_data_source_status",
+        "marking_basis_status"
+      ]
+    },
+    {
+      "allowed": true,
+      "claim_boundary": "metadata-only candidate contract",
+      "claim_type": "schema-test-safe",
+      "decision": "allowed",
+      "node_id": "n32-general-a-candidate-contract",
+      "ordinary_surgery_gate_one_of_fields": [
+        "ordinary_surgery_gate_status",
+        "ordinary_surgery_gate_status_explanation"
+      ],
+      "required_artifact_fields": [
+        "claim_level",
+        "source_status",
+        "candidate_formula_id",
+        "finite_group_id",
+        "character_table_source",
+        "character_data_source_status",
+        "marking_basis_status"
+      ]
+    },
+    {
+      "allowed": false,
+      "claim_type": "provisional-low-confidence",
+      "decision": "rejected-by-n32-contract",
+      "node_id": "n32-general-a-candidate-contract",
+      "reason": "n32 accepts only candidate-experimental or schema-test-safe artifact levels, even if n30 allows other provisional work"
+    },
+    {
+      "allowed": false,
+      "claim_type": "decorated/twisted formula theorem",
+      "contract_reason": "n32 inherits the n30 refusal for theorem, closed invariant, exotic, and Reutter-style claims",
+      "decision": "rejected",
+      "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+      "node_id": "n32-general-a-candidate-contract",
+      "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+    },
+    {
+      "allowed": false,
+      "claim_type": "claim-supporting closed 4D invariant",
+      "contract_reason": "n32 inherits the n30 refusal for theorem, closed invariant, exotic, and Reutter-style claims",
+      "decision": "rejected",
+      "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+      "node_id": "n32-general-a-candidate-contract",
+      "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+    },
+    {
+      "allowed": false,
+      "claim_type": "exotic detection claim",
+      "contract_reason": "n32 inherits the n30 refusal for theorem, closed invariant, exotic, and Reutter-style claims",
+      "decision": "rejected",
+      "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+      "node_id": "n32-general-a-candidate-contract",
+      "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+    },
+    {
+      "allowed": false,
+      "claim_type": "Reutter escape/no-go conclusion",
+      "contract_reason": "n32 inherits the n30 refusal for theorem, closed invariant, exotic, and Reutter-style claims",
+      "decision": "rejected",
+      "inherited_blocker": "n24-ordinary-surgery-gate:blocked",
+      "node_id": "n32-general-a-candidate-contract",
+      "reason": "n30 permits only provisional/candidate experiments while n24-ordinary-surgery-gate is blocked"
+    }
+  ],
+  "claim_level": "candidate-experimental",
+  "does_not_implement": [
+    "Omega_a coefficients",
+    "colored framed link evaluation",
+    "decorated Kirby move proof",
+    "closed 4-manifold invariant"
+  ],
+  "falsification_criteria": [
+    {
+      "criterion_id": "toy-examples-inconsistent",
+      "description": "Exact toy examples violate stated specialization checks or change under accepted local controls."
+    },
+    {
+      "criterion_id": "z2-mismatch-after-source-capture",
+      "description": "After n31 fills the Z/2 source slots and conventions, the candidate's nontrivial sector disagrees with the sourced theta formula."
+    },
+    {
+      "criterion_id": "handle-slide-or-presentation-mismatch",
+      "description": "The candidate gives incompatible values for presentations that later decorated Kirby-move gates certify as equivalent."
+    },
+    {
+      "criterion_id": "exact-arithmetic-inconsistency",
+      "description": "The same input produces nonidentical exact certificates, uses floating approximations, or fails exact character orthogonality."
+    },
+    {
+      "criterion_id": "marking-or-basis-mismatch",
+      "description": "A basis or H2-marking change is guessed, omitted, or produces different candidate sectors without an explicit recorded matrix and marking interpretation."
+    },
+    {
+      "criterion_id": "failed-example-recorded-against-candidate",
+      "description": "Any exact failed example must be recorded as evidence against the candidate formula, the local convention, or the code path; it must not be silently discarded as noise."
+    }
+  ],
+  "ledger_note": "wiki/understandings/general-a-candidate-contract.org",
+  "marking_requirement": {
+    "basis_and_h2_effects_must_be_represented": true,
+    "basis_and_h2_effects_must_not_be_guessed": true,
+    "marking_basis_status_required": true,
+    "requirements": [
+      {
+        "description": "Artifacts that attach sectors to decorations must record the Kirby/H2 basis or explicitly state why no marking is in scope.",
+        "requirement_id": "represent-h2-basis"
+      },
+      {
+        "description": "Basis changes and handle-slide lineage must be represented by explicit integer matrices or structured blockers, not guessed.",
+        "requirement_id": "record-basis-change-action"
+      },
+      {
+        "description": "Candidate evidence must distinguish marked distinctions, orbit or multiset distinctions, and unsupported unmarked claims.",
+        "requirement_id": "separate-marked-from-unmarked-claims"
+      }
+    ]
+  },
+  "n33_requirements": [
+    {
+      "description": "Every n33 artifact must include the n32 required fields and one ordinary-surgery gate status field or explanation.",
+      "requirement_id": "preserve-contract-metadata"
+    },
+    {
+      "description": "n33 outputs may use only candidate-experimental or schema-test-safe claim levels for this contract.",
+      "requirement_id": "keep-candidate-claim-level"
+    },
+    {
+      "description": "n33 must identify the exact finite_group_id and character_table_source used for sector metadata, and annotate the character_data_source_status for lambda_i(a).",
+      "requirement_id": "cite-character-table-source"
+    },
+    {
+      "description": "n33 must refuse decorated theorem, closed invariant, exotic detection, and Reutter escape/no-go claims.",
+      "requirement_id": "no-theorem-or-exotic-claim"
+    },
+    {
+      "description": "n32 itself supplies no Omega_a coefficient implementation; n33 must keep any later coefficient scaffold visibly experimental.",
+      "requirement_id": "no-coefficient-claim-without-later-implementation"
+    }
+  ],
+  "node_id": "n32-general-a-candidate-contract",
+  "ordinary_surgery_gate_requirement": {
+    "closed_4_manifold_claim_allowed": false,
+    "inherited_status": "blocked",
+    "one_of": [
+      "ordinary_surgery_gate_status",
+      "ordinary_surgery_gate_status_explanation"
+    ],
+    "ordinary_surgery_claim_allowed": false
+  },
+  "required_artifact_fields": [
+    "claim_level",
+    "source_status",
+    "candidate_formula_id",
+    "finite_group_id",
+    "character_table_source",
+    "character_data_source_status",
+    "marking_basis_status"
+  ],
+  "required_source_proof_slots": [
+    {
+      "description": "A page-level source, theorem, proposition, or repo-local proof is needed before the display can be promoted beyond a candidate.",
+      "slot_id": "formula-source-or-proof",
+      "status": "SOURCE NEEDED / PROOF NEEDED"
+    },
+    {
+      "description": "The meaning of lambda_i(a) must be tied to an exact character, tensor automorphism, grading, or other stated categorical action.",
+      "slot_id": "lambda-action-source",
+      "status": "SOURCE NEEDED / CONVENTION NEEDED"
+    },
+    {
+      "description": "Handle slides, handle cancellations, orientation conventions, normalization, signature anomaly, and implicit 3-handles must be covered before any closed-invariant claim.",
+      "slot_id": "kirby-move-proof-scope",
+      "status": "PROOF NEEDED"
+    },
+    {
+      "description": "Trivial A or trivial decoration may reduce only to the current ordinary omega/local n22 behavior inside the n24 blocked surgery boundary.",
+      "slot_id": "ordinary-specialization-boundary",
+      "status": "INHERITS n22/n24 BOUNDARY"
+    },
+    {
+      "description": "A = Z/2 may specialize to the n31 omega/theta target only as a provisional falsification target until source slots are filled.",
+      "slot_id": "z2-specialization-source",
+      "status": "INHERITS n31 PROVISIONAL TARGET"
+    }
+  ],
+  "schema": "twisted-yetter.omega-a-candidate-contract.v1",
+  "source_status": "NOT PROVED IN REPO / SOURCE NEEDED",
+  "source_status_options": [
+    "candidate-experimental",
+    "SOURCE NEEDED",
+    "NOT PROVED IN REPO"
+  ],
+  "specialization_checks": [
+    {
+      "check_id": "trivial-a-recovers-ordinary-omega-candidate",
+      "claim_level": "candidate-experimental",
+      "description": "For the trivial finite group A, the candidate contract expects the only sector to specialize to the ordinary omega candidate, while still carrying ordinary-surgery gate metadata."
+    },
+    {
+      "check_id": "z2-nontrivial-sector-aligns-with-theta-target-if-sourced",
+      "claim_level": "candidate-experimental",
+      "description": "For A = Z/2, the nontrivial character sector is expected to align with the theta target only after n31 source capture and convention reconciliation confirm that target."
+    },
+    {
+      "check_id": "character-orthogonality-and-exactness",
+      "claim_level": "schema-test-safe",
+      "description": "Finite-A character data must pass exact row and column orthogonality checks with no floating-point approximations."
+    },
+    {
+      "check_id": "zero-and-all-trivial-decorations",
+      "claim_level": "schema-test-safe",
+      "description": "Zero / all-trivial decorations must be represented explicitly and must route to the ordinary candidate sector, not to an unstated decorated formula."
+    }
+  ],
+  "status": "contract-active",
+  "still_blocked": [
+    "theorem-level general finite A Omega_a formula",
+    "closed homologically twisted Yetter invariant claim",
+    "exotic detection claim",
+    "decorated Reutter escape/no-go conclusion"
+  ],
+  "unblocks": [
+    "n33-omega-a-implementation as candidate implementation scaffold"
+  ]
+}
