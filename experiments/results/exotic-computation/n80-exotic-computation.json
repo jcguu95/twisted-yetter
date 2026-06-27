@@ -1,0 +1,205 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.exotic_computation",
+    "--write",
+    "experiments/results/exotic-computation/n80-exotic-computation.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.exotic_computation --write experiments/results/exotic-computation/n80-exotic-computation.json",
+  "exact_output": {
+    "artifact_path": "experiments/results/exotic-computation/n80-exotic-computation.json",
+    "blocked_claims": [
+      "exotic invariant value claim",
+      "exotic pair exact comparison claim",
+      "marked exotic distinction claim",
+      "cork-canonical exotic distinction claim",
+      "unmarked or orbit exotic distinction claim",
+      "real exotic input benchmark claim",
+      "n82 result-classification route"
+    ],
+    "blocked_reason_ids": [
+      "n70-no-certified-exotic-input",
+      "n70-no-selected-computation-target",
+      "n75-dry-run-blocked",
+      "no-invariant-input-available",
+      "no-benchmark-input-available"
+    ],
+    "blockers": [
+      {
+        "claim_boundary": "n80 cannot run an invariant without a certified input",
+        "observed": 0,
+        "reason_id": "n70-no-certified-exotic-input",
+        "required": "at least one certified exotic pair input",
+        "source_node": "n70-exotic-input-certification",
+        "status": "blocked",
+        "upstream_artifact": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
+        "upstream_blocker_reason_ids": [
+          "source-snapshot-needed",
+          "exact-citations-needed",
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-source-page-capture",
+          "missing-h2-homeomorphism-marking-certificate",
+          "n72-source-capture-blocked",
+          "n73-diagram-digitization-blocked",
+          "n74-h2-marking-certification-blocked",
+          "n55-toy-closed-suite-blocked",
+          "n24-n50-upstream-blocked"
+        ]
+      },
+      {
+        "claim_boundary": "n80 cannot compare values when no pair is selected",
+        "observed": null,
+        "reason_id": "n70-no-selected-computation-target",
+        "required": "selected_computation_target must name a certified pair",
+        "source_node": "n70-exotic-input-certification",
+        "status": "blocked",
+        "upstream_artifact": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json"
+      },
+      {
+        "claim_boundary": "n75 dry-run-blocked status cannot route to n80 pass work",
+        "observed": "dry-run-blocked",
+        "reason_id": "n75-dry-run-blocked",
+        "required": "pass for the certified real input",
+        "source_node": "n75-scalability-dry-run",
+        "status": "blocked",
+        "upstream_artifact": "experiments/results/scalability/n75-scalability-dry-run.json",
+        "upstream_blocked_reason_ids": [
+          "n70-exotic-input-certification-blocked",
+          "n55-toy-closed-suite-blocked",
+          "n50-decorated-kirby-move-gate-blocked",
+          "n24-ordinary-surgery-gate-blocked",
+          "no-real-exotic-input-size-observed"
+        ]
+      },
+      {
+        "claim_boundary": "no exotic invariant value or comparison certificate is produced",
+        "observed": "no machine-readable certified exotic diagrams or H2 marking",
+        "reason_id": "no-invariant-input-available",
+        "required": "certified diagrams, markings, normalization, and formula confidence",
+        "source_node": "n80-exotic-computation",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "no performance benchmark or scalability result is produced",
+        "observed": "no certified real exotic size data",
+        "reason_id": "no-benchmark-input-available",
+        "required": "n75 pass artifact for a real certified target",
+        "source_node": "n80-exotic-computation",
+        "status": "blocked"
+      }
+    ],
+    "claim_boundary": "This is a machine-readable terminal blocked verdict for n80.  It proves only that current repo-local dependency statuses do not authorize exotic computation; it is not exotic evidence, not a benchmark, and not a no-go theorem.",
+    "claim_level": "terminal blocked computation gate verdict",
+    "computation_policy": {
+      "benchmark_allowed": false,
+      "comparison_certificate_allowed": false,
+      "core_evaluator_change_allowed": false,
+      "exotic_values_allowed": false,
+      "invariant_run_allowed": false,
+      "n82_result_classification_route_allowed": false,
+      "network_allowed": false,
+      "source_guess_allowed": false
+    },
+    "computation_run_summary": {
+      "benchmarks": [],
+      "did_run_computation": false,
+      "engine_invocations": [],
+      "exotic_values": [],
+      "invariant_runs": [],
+      "reason": "n70 certified_input_count=0 and selected_computation_target=null; n75 status=dry-run-blocked",
+      "source_fetches": []
+    },
+    "dependency_statuses": {
+      "n70_any_candidate_certified": false,
+      "n70_candidate_count": 4,
+      "n70_certified_input_count": 0,
+      "n70_n80_route_allowed": false,
+      "n70_selected_computation_target": null,
+      "n70_source_status": "source-needed",
+      "n70_status": "blocked",
+      "n75_n80_route_allowed": false,
+      "n75_readiness_status": "dry-run-blocked",
+      "n75_real_benchmark_available": false,
+      "n75_status": "dry-run-blocked"
+    },
+    "dependency_validations": {
+      "exotic_input_certification": {
+        "blocked_claims_ok": true,
+        "blockers_ok": true,
+        "candidate_list_ok": true,
+        "dependency_statuses_ok": true,
+        "input_schemas_ok": true,
+        "missing_required_fields": [],
+        "pass_conditions_ok": true,
+        "route_ok": true,
+        "scope": "blocked exotic input ledger only; no certified input and no n80 route",
+        "valid": true
+      },
+      "scalability_dry_run": {
+        "blocked_claims_ok": true,
+        "blockers_ok": true,
+        "input_schemas_ok": true,
+        "missing_required_fields": [],
+        "readiness_summary_ok": true,
+        "routes_ok": true,
+        "scope": "n75 dry-run/readiness ledger only; no n80 computation or benchmark",
+        "toy_scale_inventory_ok": true,
+        "valid": true
+      }
+    },
+    "input_artifacts": {
+      "n70_exotic_input_certification": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
+      "n75_scalability_dry_run": "experiments/results/scalability/n75-scalability-dry-run.json"
+    },
+    "input_schemas": {
+      "exotic_input_certification": "twisted-yetter.exotic-input-certification.v1",
+      "scalability_dry_run": "twisted-yetter.scalability-dry-run.v1"
+    },
+    "ledger_note": "wiki/understandings/exotic-computation.org",
+    "metadata_validation": {
+      "blockers_ok": true,
+      "computation_policy_ok": true,
+      "computation_run_summary_ok": true,
+      "dependency_statuses_ok": true,
+      "input_schemas_ok": true,
+      "missing_required_fields": [],
+      "scope": "n80 terminal blocked verdict only; no invariant computation or benchmark",
+      "valid": true
+    },
+    "next_steps": [
+      "offline/source acquisition for n72",
+      "rerun n72-dolgachev-source-capture after source records exist",
+      "rerun n73-exotic-diagram-digitization after exact page/figure data exist",
+      "rerun n74-exotic-h2-marking-certification after machine-readable diagrams exist",
+      "rerun n70-exotic-input-certification until one certified target is selected",
+      "rerun n75-scalability-dry-run only after n70 has a pass artifact"
+    ],
+    "node_id": "n80-exotic-computation",
+    "schema": "twisted-yetter.exotic-computation.v1",
+    "source_status": "n80 consumes n70/n75 status only and emits a terminal blocked verdict; no invariant, exotic-value, benchmark, source-fetch, or Dolgachev calculation is run",
+    "status": "blocked",
+    "upstream_nodes": [
+      "n70-exotic-input-certification",
+      "n75-scalability-dry-run"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/exotic_computation.py",
+  "git": {
+    "commit": "0d9803648ddc2c63002f194031592da2ad3f4755",
+    "dirty": true
+  },
+  "input_hash": "c7db6b1b6909723646c2b64b6420ab675596345261c3e75083632e9dfd61edb4",
+  "log_references": [],
+  "notes": [
+    "n80 is blocked because n70 has no certified exotic input target.",
+    "n75 is dry-run-blocked, so no invariant computation or benchmark is run."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_computation --write experiments/results/exotic-computation/n80-exotic-computation.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
