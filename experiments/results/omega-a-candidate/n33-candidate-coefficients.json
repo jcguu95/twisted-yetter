@@ -1,0 +1,637 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.omega_a",
+    "--write",
+    "experiments/results/omega-a-candidate/n33-candidate-coefficients.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.omega_a --write experiments/results/omega-a-candidate/n33-candidate-coefficients.json",
+  "exact_output": {
+    "candidate_formula_id": "omega-a-character-weighted-kirby-color-v0",
+    "claim_boundary": "candidate coefficient scaffold only; no decorated Kirby/link values, no closed invariant, no exotic comparison, and no Reutter conclusion",
+    "claim_level": "candidate-experimental",
+    "groups": {
+      "Z/2": {
+        "blocked_high_claims": [
+          "decorated/twisted formula theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim",
+          "Reutter escape/no-go conclusion"
+        ],
+        "candidate_formula_display": "Omega_a = sum_i d_i lambda_i(a) X_i",
+        "candidate_formula_id": "omega-a-character-weighted-kirby-color-v0",
+        "category_id": "SU(2)_2-local-certificate",
+        "character_data_source_status": "exact finite character table inherited from n11; label-to-character assignment remains candidate/local",
+        "character_orthogonality_status": "pass/exact inherited from n11",
+        "character_table_certificate": {
+          "character_table": {
+            "chi_0": {
+              "0": {
+                "type": "integer",
+                "value": "1"
+              },
+              "1": {
+                "type": "integer",
+                "value": "1"
+              }
+            },
+            "chi_1": {
+              "0": {
+                "type": "integer",
+                "value": "1"
+              },
+              "1": {
+                "type": "integer",
+                "value": "-1"
+              }
+            }
+          },
+          "group": {
+            "characters": [
+              "chi_0",
+              "chi_1"
+            ],
+            "elements": [
+              "0",
+              "1"
+            ],
+            "invariant_factors": [
+              2
+            ],
+            "name": "Z/2",
+            "order": 2
+          },
+          "node_id": "n11-finite-a-character-data",
+          "schema": "twisted-yetter.finite-abelian-character-data.v1",
+          "status": "pass"
+        },
+        "character_table_source": "twisted_yetter.finite_groups:Z2_GROUP",
+        "claim_level": "candidate-experimental",
+        "closed_4_manifold_claim_allowed": false,
+        "does_not_compute": [
+          "colored framed link evaluation",
+          "Kirby color sum over diagrams",
+          "decorated Kirby move proof",
+          "closed 4-manifold invariant",
+          "exotic smooth-structure detection evidence"
+        ],
+        "exotic_detection_claim_allowed": false,
+        "finite_group_id": "Z/2",
+        "label_character_assignment": {
+          "assignment": {
+            "0": "chi_0",
+            "1": "chi_1",
+            "2": "chi_0"
+          },
+          "finite_group_id": "Z/2",
+          "interpretation": "For Z/2 this local scaffold assigns the middle SU(2)_2 label 1 to the sign character and labels 0,2 to the trivial character; this realizes the sign-weighted theta-style target only as a candidate/local convention.",
+          "source_status": "candidate/local assignment; not sourced as a Yetter theorem",
+          "status": "candidate/local"
+        },
+        "ledger_note": "wiki/understandings/omega-a-implementation.org",
+        "marking_basis_status": "not-in-scope: coefficient-sector metadata only; no H2 basis, basis-change action, or closed marking comparison is computed",
+        "metadata_validation": {
+          "candidate_formula_id_matches": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "metadata-only candidate contract",
+            "claim_type": "candidate-experimental",
+            "decision": "allowed",
+            "node_id": "n32-general-a-candidate-contract",
+            "ordinary_surgery_gate_one_of_fields": [
+              "ordinary_surgery_gate_status",
+              "ordinary_surgery_gate_status_explanation"
+            ],
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status",
+              "candidate_formula_id",
+              "finite_group_id",
+              "character_table_source",
+              "character_data_source_status",
+              "marking_basis_status"
+            ]
+          },
+          "does_not_validate_formula_coefficients": true,
+          "missing_fields": [],
+          "schema": "twisted-yetter.omega-a-candidate-contract.v1.metadata-validation",
+          "valid": true
+        },
+        "node_id": "n33-omega-a-implementation",
+        "ordinary_kirby_color_convention": "experimental-ordinary-omega-v0",
+        "ordinary_omega_coefficients": {
+          "0": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "1": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "0"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "1"
+            }
+          },
+          "2": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          }
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "ordinary_surgery_gate_status_explanation": "n33 is coefficient metadata only and inherits the blocked n24 ordinary surgery gate; no closed invariant claim is allowed",
+        "schema": "twisted-yetter.omega-a-candidate-coefficients.v1",
+        "sectors": [
+          {
+            "coefficients": [
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "chi_0",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "0",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "1"
+                  }
+                },
+                "character_label": "chi_1",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "1",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "1"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "chi_0",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "2",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              }
+            ],
+            "element": [
+              0
+            ],
+            "sector_id": "0"
+          },
+          {
+            "coefficients": [
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "chi_0",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "0",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "-1"
+                  }
+                },
+                "character_label": "chi_1",
+                "character_value": {
+                  "type": "integer",
+                  "value": "-1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "1",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "1"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "chi_0",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "2",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              }
+            ],
+            "element": [
+              1
+            ],
+            "sector_id": "1"
+          }
+        ],
+        "simple_labels": [
+          "0",
+          "1",
+          "2"
+        ],
+        "source_status": "candidate-experimental / NOT PROVED IN REPO / SOURCE NEEDED",
+        "status": "pass",
+        "theorem_claim_allowed": false
+      },
+      "trivial": {
+        "blocked_high_claims": [
+          "decorated/twisted formula theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim",
+          "Reutter escape/no-go conclusion"
+        ],
+        "candidate_formula_display": "Omega_a = sum_i d_i lambda_i(a) X_i",
+        "candidate_formula_id": "omega-a-character-weighted-kirby-color-v0",
+        "category_id": "SU(2)_2-local-certificate",
+        "character_data_source_status": "exact finite character table inherited from n11; label-to-character assignment remains candidate/local",
+        "character_orthogonality_status": "pass/exact inherited from n11",
+        "character_table_certificate": {
+          "character_table": {
+            "trivial": {
+              "e": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "group": {
+            "characters": [
+              "trivial"
+            ],
+            "elements": [
+              "e"
+            ],
+            "invariant_factors": [],
+            "name": "trivial",
+            "order": 1
+          },
+          "node_id": "n11-finite-a-character-data",
+          "schema": "twisted-yetter.finite-abelian-character-data.v1",
+          "status": "pass"
+        },
+        "character_table_source": "twisted_yetter.finite_groups:TRIVIAL_GROUP",
+        "claim_level": "candidate-experimental",
+        "closed_4_manifold_claim_allowed": false,
+        "does_not_compute": [
+          "colored framed link evaluation",
+          "Kirby color sum over diagrams",
+          "decorated Kirby move proof",
+          "closed 4-manifold invariant",
+          "exotic smooth-structure detection evidence"
+        ],
+        "exotic_detection_claim_allowed": false,
+        "finite_group_id": "trivial",
+        "label_character_assignment": {
+          "assignment": {
+            "0": "trivial",
+            "1": "trivial",
+            "2": "trivial"
+          },
+          "finite_group_id": "trivial",
+          "interpretation": "For Z/2 this local scaffold assigns the middle SU(2)_2 label 1 to the sign character and labels 0,2 to the trivial character; this realizes the sign-weighted theta-style target only as a candidate/local convention.",
+          "source_status": "candidate/local assignment; not sourced as a Yetter theorem",
+          "status": "candidate/local"
+        },
+        "ledger_note": "wiki/understandings/omega-a-implementation.org",
+        "marking_basis_status": "not-in-scope: coefficient-sector metadata only; no H2 basis, basis-change action, or closed marking comparison is computed",
+        "metadata_validation": {
+          "candidate_formula_id_matches": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "metadata-only candidate contract",
+            "claim_type": "candidate-experimental",
+            "decision": "allowed",
+            "node_id": "n32-general-a-candidate-contract",
+            "ordinary_surgery_gate_one_of_fields": [
+              "ordinary_surgery_gate_status",
+              "ordinary_surgery_gate_status_explanation"
+            ],
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status",
+              "candidate_formula_id",
+              "finite_group_id",
+              "character_table_source",
+              "character_data_source_status",
+              "marking_basis_status"
+            ]
+          },
+          "does_not_validate_formula_coefficients": true,
+          "missing_fields": [],
+          "schema": "twisted-yetter.omega-a-candidate-contract.v1.metadata-validation",
+          "valid": true
+        },
+        "node_id": "n33-omega-a-implementation",
+        "ordinary_kirby_color_convention": "experimental-ordinary-omega-v0",
+        "ordinary_omega_coefficients": {
+          "0": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          },
+          "1": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "0"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "1"
+            }
+          },
+          "2": {
+            "kind": "Q(sqrt2)",
+            "rational": {
+              "type": "integer",
+              "value": "1"
+            },
+            "sqrt2": {
+              "type": "integer",
+              "value": "0"
+            }
+          }
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "ordinary_surgery_gate_status_explanation": "n33 is coefficient metadata only and inherits the blocked n24 ordinary surgery gate; no closed invariant claim is allowed",
+        "schema": "twisted-yetter.omega-a-candidate-coefficients.v1",
+        "sectors": [
+          {
+            "coefficients": [
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "trivial",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "0",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "1"
+                  }
+                },
+                "character_label": "trivial",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "1",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "0"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "1"
+                  }
+                }
+              },
+              {
+                "candidate_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "character_label": "trivial",
+                "character_value": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "coefficient_formula": "d_i * lambda_i(a)",
+                "label": "2",
+                "ordinary_dimension_coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                }
+              }
+            ],
+            "element": [],
+            "sector_id": "e"
+          }
+        ],
+        "simple_labels": [
+          "0",
+          "1",
+          "2"
+        ],
+        "source_status": "candidate-experimental / NOT PROVED IN REPO / SOURCE NEEDED",
+        "status": "pass",
+        "theorem_claim_allowed": false
+      }
+    },
+    "node_id": "n33-omega-a-implementation",
+    "ordinary_surgery_gate_status": "blocked",
+    "schema": "twisted-yetter.omega-a-candidate-artifact-bundle.v1",
+    "source_status": "candidate-experimental / NOT PROVED IN REPO / SOURCE NEEDED",
+    "status": "pass"
+  },
+  "generator_script": "src/twisted_yetter/omega_a.py",
+  "git": {
+    "commit": "5c409708d5155e83965cb8fdc528e472209edd7a",
+    "dirty": true
+  },
+  "input_hash": "b4d0b9b3234d95d4aaf9b2b6e4d05ae8273e5f8cbfc9fb2d8a62fb4d8ec79f7e",
+  "log_references": [],
+  "notes": [
+    "n33 is candidate coefficient metadata only.",
+    "ordinary_surgery_gate_status remains blocked; no closed 4D invariant claim is made."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.omega_a --write experiments/results/omega-a-candidate/n33-candidate-coefficients.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

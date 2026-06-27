@@ -12,9 +12,18 @@ not a link evaluator, not a decorated Kirby formula, and not a closed
 
 from __future__ import annotations
 
+import argparse
 import json
+from pathlib import Path
 from typing import Final, Mapping
 
+from twisted_yetter.artifacts import (
+    default_tool_versions,
+    dumps_certificate,
+    git_metadata,
+    hash_json,
+    make_certificate,
+)
 from twisted_yetter.finite_groups import (
     TRIVIAL_GROUP,
     Z2_GROUP,
@@ -39,6 +48,9 @@ from twisted_yetter.su2_level2 import SIMPLE_LABELS
 OMEGA_A_SCHEMA: Final = "twisted-yetter.omega-a-candidate-coefficients.v1"
 OMEGA_A_IMPLEMENTATION_NOTE: Final = (
     "wiki/understandings/omega-a-implementation.org"
+)
+OMEGA_A_ARTIFACT: Final = (
+    "experiments/results/omega-a-candidate/n33-candidate-coefficients.json"
 )
 CLAIM_LEVEL: Final = "candidate-experimental"
 SOURCE_STATUS: Final = "candidate-experimental / NOT PROVED IN REPO / SOURCE NEEDED"
@@ -147,6 +159,70 @@ def stable_omega_a_json(certificate: Mapping[str, object]) -> str:
     """Serialize an n33 candidate coefficient certificate deterministically."""
 
     return json.dumps(certificate, indent=2, sort_keys=True)
+
+
+def omega_a_candidate_artifact_certificate(
+    *,
+    repo_root: str | Path = ".",
+) -> dict[str, object]:
+    """Return a reproducible artifact envelope for supported n33 data."""
+
+    root = Path(repo_root)
+    exact_output = {
+        "schema": "twisted-yetter.omega-a-candidate-artifact-bundle.v1",
+        "status": "pass",
+        "node_id": "n33-omega-a-implementation",
+        "claim_level": CLAIM_LEVEL,
+        "source_status": SOURCE_STATUS,
+        "candidate_formula_id": OMEGA_A_CANDIDATE_FORMULA_ID,
+        "ordinary_surgery_gate_status": "blocked",
+        "groups": {
+            "trivial": omega_a_candidate_certificate(TRIVIAL_GROUP),
+            "Z/2": omega_a_candidate_certificate(Z2_GROUP),
+        },
+        "claim_boundary": (
+            "candidate coefficient scaffold only; no decorated Kirby/link "
+            "values, no closed invariant, no exotic comparison, and no "
+            "Reutter conclusion"
+        ),
+    }
+    return make_certificate(
+        status="pass",
+        command=(
+            "PYTHONPATH=src uv run python -m twisted_yetter.omega_a "
+            f"--write {OMEGA_A_ARTIFACT}"
+        ),
+        argv=[
+            "python",
+            "-m",
+            "twisted_yetter.omega_a",
+            "--write",
+            OMEGA_A_ARTIFACT,
+        ],
+        git=git_metadata(root),
+        tool_versions=default_tool_versions(),
+        input_hash=hash_json(
+            {
+                "node_id": "n33-omega-a-implementation",
+                "formula_id": OMEGA_A_CANDIDATE_FORMULA_ID,
+                "supported_groups": ["trivial", "Z/2"],
+                "z2_assignment": DEFAULT_Z2_LABEL_CHARACTER_ASSIGNMENT,
+                "ordinary_surgery_gate_status": "blocked",
+            }
+        ),
+        exact_output=exact_output,
+        generator_script="src/twisted_yetter/omega_a.py",
+        reproduce_command=(
+            "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache "
+            "PYTHONPATH=src uv run python -m twisted_yetter.omega_a "
+            "--write experiments/results/omega-a-candidate/n33-candidate-coefficients.json"
+        ),
+        repo_root=str(root.resolve()),
+        notes=[
+            "n33 is candidate coefficient metadata only.",
+            "ordinary_surgery_gate_status remains blocked; no closed 4D invariant claim is made.",
+        ],
+    )
 
 
 def _normalized_assignment(
@@ -269,6 +345,24 @@ def _exact_integer_payload(value: object) -> dict[str, str]:
     return {"type": "integer", "value": str(value)}
 
 
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Emit the n33 candidate Omega_a coefficient artifact."
+    )
+    parser.add_argument("--write", type=Path, help="write certificate JSON to this path")
+    args = parser.parse_args(argv)
+
+    certificate = omega_a_candidate_artifact_certificate()
+    encoded = dumps_certificate(certificate)
+    if args.write is None:
+        print(encoded, end="")
+        return 0
+
+    args.write.parent.mkdir(parents=True, exist_ok=True)
+    args.write.write_text(encoded)
+    return 0
+
+
 __all__ = [
     "BLOCKED_HIGH_CLAIMS",
     "CATEGORY_ID",
@@ -276,9 +370,15 @@ __all__ = [
     "DEFAULT_Z2_LABEL_CHARACTER_ASSIGNMENT",
     "DOES_NOT_COMPUTE",
     "LABEL_CHARACTER_ASSIGNMENT_SOURCE_STATUS",
+    "OMEGA_A_ARTIFACT",
     "OMEGA_A_IMPLEMENTATION_NOTE",
     "OMEGA_A_SCHEMA",
     "SOURCE_STATUS",
+    "omega_a_candidate_artifact_certificate",
     "omega_a_candidate_certificate",
     "stable_omega_a_json",
 ]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -8,9 +8,11 @@ from twisted_yetter.omega_a import (
     DEFAULT_Z2_LABEL_CHARACTER_ASSIGNMENT,
     DOES_NOT_COMPUTE,
     OMEGA_A_SCHEMA,
+    omega_a_candidate_artifact_certificate,
     omega_a_candidate_certificate,
     stable_omega_a_json,
 )
+from twisted_yetter.artifacts import dumps_certificate
 from twisted_yetter.omega_a_contract import OMEGA_A_CANDIDATE_FORMULA_ID
 from twisted_yetter.ordinary_kirby_color import omega_coefficients
 from twisted_yetter.su2_level2 import SQRT2, QuadraticSurd
@@ -95,6 +97,28 @@ def test_certificate_json_is_stable_and_has_no_float_markers() -> None:
     assert stable_omega_a_json(first) == stable_omega_a_json(second)
     assert json.loads(stable_omega_a_json(first)) == first
     assert ".0" not in stable_omega_a_json(first)
+
+
+def test_artifact_bundle_preserves_n32_metadata_for_supported_groups() -> None:
+    artifact = omega_a_candidate_artifact_certificate()
+    exact_output = artifact["exact_output"]
+    groups = exact_output["groups"]
+
+    assert artifact["schema"] == "twisted-yetter.certificate.v1"
+    assert artifact["status"] == "pass"
+    assert exact_output["node_id"] == "n33-omega-a-implementation"
+    assert exact_output["claim_level"] == "candidate-experimental"
+    assert exact_output["candidate_formula_id"] == OMEGA_A_CANDIDATE_FORMULA_ID
+    assert exact_output["ordinary_surgery_gate_status"] == "blocked"
+    assert set(groups) == {"trivial", "Z/2"}
+    for certificate in groups.values():
+        assert certificate["metadata_validation"]["valid"] is True
+        assert certificate["marking_basis_status"].startswith("not-in-scope")
+        assert certificate["ordinary_surgery_gate_status"] == "blocked"
+
+    encoded = dumps_certificate(artifact)
+    assert json.loads(encoded) == artifact
+    assert ".0" not in encoded
 
 
 def test_high_claims_are_blocked_or_absent_from_n33_artifact() -> None:
