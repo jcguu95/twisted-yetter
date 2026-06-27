@@ -26,7 +26,7 @@ ORDINARY_SURGERY_GATE_NOTE: Final = (
 
 SOURCE_BLOCKER_ID: Final = "n21-source-slots-unfilled"
 N22_BLOCKER_ID: Final = "n22-local-convention-only"
-N23_BLOCKER_ID: Final = "n23-s2xs2-crossing-blocked"
+N23_BLOCKER_ID: Final = "n23-ordinary-controls-local-only"
 CLOSED_CLAIM_BLOCKER_ID: Final = "closed-claim-refused"
 
 UNSUPPORTED_CLAIMS: Final = (
@@ -44,8 +44,8 @@ def ordinary_surgery_gate_certificate(
     """Return the deterministic n24 ordinary surgery gate certificate.
 
     ``claim_supporting_closed_invariant=True`` is refused because this API is
-    not a claim-promoter while n21 source slots remain unfilled and n23 still
-    blocks the S2xS2 Hopf/crossing control.
+    not a claim-promoter while n21 source slots remain unfilled and n23
+    ordinary controls remain local-convention regression data only.
     """
 
     if claim_supporting_closed_invariant:
@@ -94,15 +94,17 @@ def ordinary_surgery_gate_certificate(
             "source_node": "n23-known-ordinary-4d-controls",
             "status": "blocked",
             "claim_boundary": (
-                "the first crossing ordinary 4D control, S2xS2 as a Hopf "
-                "fixture, is blocked by the current n22 no-crossing scaffold"
+                "known ordinary controls, including S2xS2 as a Hopf fixture, "
+                "are local-convention regression data only until ordinary "
+                "surgery source and normalization slots are filled"
             ),
             "case_id": s2xs2_case["case_id"],
             "fixture_path": s2xs2_case["fixture_path"],
             "crossing_count": s2xs2_case["crossing_count"],
             "linking_matrix": s2xs2_case["linking_matrix"],
             "ordinary_scaffold_status": s2xs2_case["ordinary_scaffold_status"],
-            "blocked_reason": s2xs2_case["blocked_reason"],
+            "n22_can_compute": s2xs2_case["n22_can_compute"],
+            "n22_certificate_summary": s2xs2_case["n22_certificate_summary"],
         },
         {
             "reason_id": CLOSED_CLAIM_BLOCKER_ID,

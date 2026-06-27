@@ -1,8 +1,8 @@
-"""Experimental ordinary Kirby-color summation over no-crossing fixtures.
+"""Experimental ordinary Kirby-color summation over restricted core sectors.
 
 This module implements only the n22 local-convention scaffold:
 ``omega = sum_i d_i X_i`` for SU(2)_2 labels, evaluated through the existing
-elementary no-crossing framed-link controls.  It is not a closed 4-manifold
+restricted colored framed link evaluator core.  It is not a closed 4-manifold
 invariant, not a sourced surgery formula, and not a twisted/decorated formula.
 """
 
@@ -13,8 +13,9 @@ import json
 from pathlib import Path
 from typing import Final, Mapping
 
-from twisted_yetter.link_controls import ElementaryLinkValue, elementary_expected_value
+from twisted_yetter.exact import from_jsonable
 from twisted_yetter.link_diagram import LinkDiagram
+from twisted_yetter.su2_link_evaluator import evaluate_su2_level2_link
 from twisted_yetter.su2_level2 import (
     QUANTUM_DIMENSIONS,
     RT_LINK_LEDGER_REFERENCE,
@@ -26,7 +27,7 @@ ORDINARY_KIRBY_COLOR_SCHEMA: Final = (
     "twisted-yetter.experimental-ordinary-kirby-color.v1"
 )
 KIRBY_COLOR_CONVENTION: Final = "experimental-ordinary-omega-v0"
-HANDLE_SCOPE: Final = "no-dotted-2-handle-framed-link-only"
+HANDLE_SCOPE: Final = "restricted-core-supported-no-dotted-2-handle-framed-link-only"
 CLAIM_LEVEL: Final = "experimental/local-convention"
 NORMALIZATION_STATUS: Final = "SOURCE NEEDED"
 
@@ -50,8 +51,8 @@ CLAIM_BOUNDARY: Final = {
     "rt_link_ledger": RT_LINK_LEDGER_REFERENCE,
     "not_scope": (
         "ordinary Crane-Yetter/Yetter invariant, closed 4-manifold invariant, "
-        "signature normalization, dotted handles, crossing/Hopf Kirby-color "
-        "evaluation, twisted formula, decorated formula, or exotic claim"
+        "signature normalization, dotted handles, general planar RT evaluation, "
+        "twisted formula, decorated formula, or exotic claim"
     ),
 }
 
@@ -62,31 +63,44 @@ def omega_coefficients() -> dict[str, QuadraticSurd]:
     return {label: QUANTUM_DIMENSIONS[label] for label in SIMPLE_LABELS}
 
 
-def evaluate_ordinary_kirby_color(
+def evaluate_su2_level2_ordinary_kirby_color(
     diagram: LinkDiagram,
     *,
     closed_4_manifold_claim: bool = False,
 ) -> dict[str, object]:
-    """Return a deterministic exact n22 certificate for a supported diagram.
+    """Return a deterministic exact n22 certificate for a restricted diagram.
 
-    Supported means no crossings and no dotted components.  The
-    ``closed_4_manifold_claim`` flag is intentionally refused while source
-    slots remain missing.
+    Every label sector is sent through
+    :func:`evaluate_su2_level2_link`.  If the restricted core blocks any sector,
+    this function returns a structured blocked certificate instead of guessing
+    the Kirby-color sum.  The ``closed_4_manifold_claim`` flag is intentionally
+    refused while source slots remain missing.
     """
 
     _refuse_closed_claim_if_needed(closed_4_manifold_claim)
-    _check_supported_scope(diagram)
 
     omega = omega_coefficients()
     sectors: list[dict[str, object]] = []
     total_by_exponent: dict[int, QuadraticSurd] = {}
+    blocked_sectors: list[dict[str, object]] = []
 
     for labels in itertools.product(SIMPLE_LABELS, repeat=len(diagram.components)):
         labels_by_component = dict(zip(diagram.component_ids, labels))
         omega_coefficient = _omega_assignment_coefficient(labels, omega)
-        link_value = elementary_expected_value(diagram, labels_by_component)
-        term_coefficient = omega_coefficient * link_value.dimension
-        exponent = link_value.twist.exponent
+        core_result = evaluate_su2_level2_link(diagram, labels_by_component)
+
+        if core_result["status"] == "blocked":
+            sector = _blocked_sector_payload(
+                labels_by_component=labels_by_component,
+                omega_coefficient=omega_coefficient,
+                core_result=core_result,
+            )
+            sectors.append(sector)
+            blocked_sectors.append(sector)
+            continue
+
+        link_coefficient, exponent = _core_value_parts(core_result)
+        term_coefficient = omega_coefficient * link_coefficient
         total_by_exponent[exponent] = (
             total_by_exponent.get(exponent, QuadraticSurd(0)) + term_coefficient
         )
@@ -94,19 +108,20 @@ def evaluate_ordinary_kirby_color(
             _sector_payload(
                 labels_by_component=labels_by_component,
                 omega_coefficient=omega_coefficient,
-                link_value=link_value,
+                core_result=core_result,
                 term_coefficient=term_coefficient,
                 exponent=exponent,
             )
         )
 
-    return {
+    payload = {
         "schema": ORDINARY_KIRBY_COLOR_SCHEMA,
-        "status": "pass",
+        "status": "blocked" if blocked_sectors else "pass",
         "node_id": "n22-ordinary-kirby-color-implementation",
         "diagram_id": diagram.diagram_id,
         "component_ids": list(diagram.component_ids),
         "framings": list(diagram.framings),
+        "crossing_count": len(diagram.crossings),
         "kirby_color_convention": KIRBY_COLOR_CONVENTION,
         "kirby_color_formula": "omega = sum_i d_i X_i",
         "kirby_color_coefficients": {
@@ -123,6 +138,38 @@ def evaluate_ordinary_kirby_color(
         "closed_4_manifold_claim_allowed": False,
         "claim_boundary": CLAIM_BOUNDARY,
     }
+    if blocked_sectors:
+        payload["blocker"] = {
+            "status": "blocked",
+            "reason_id": "restricted-core-sector-blocked",
+            "message": (
+                "ordinary Kirby-color sector summation is blocked because at "
+                "least one colored sector is outside the accepted restricted "
+                "SU(2)_2 link evaluator core"
+            ),
+            "blocked_sector_count": len(blocked_sectors),
+            "blocked_sectors": [
+                {
+                    "labels_by_component": sector["labels_by_component"],
+                    "core_blocker": sector["core_blocker"],
+                }
+                for sector in blocked_sectors
+            ],
+        }
+    return payload
+
+
+def evaluate_ordinary_kirby_color(
+    diagram: LinkDiagram,
+    *,
+    closed_4_manifold_claim: bool = False,
+) -> dict[str, object]:
+    """Backward-compatible alias for the n22 public entry point."""
+
+    return evaluate_su2_level2_ordinary_kirby_color(
+        diagram,
+        closed_4_manifold_claim=closed_4_manifold_claim,
+    )
 
 
 def load_fixture_certificate(
@@ -133,7 +180,7 @@ def load_fixture_certificate(
     """Load a link-diagram fixture and evaluate the n22 local convention."""
 
     diagram = LinkDiagram.from_json(json.loads(Path(fixture_path).read_text()))
-    certificate = evaluate_ordinary_kirby_color(
+    certificate = evaluate_su2_level2_ordinary_kirby_color(
         diagram,
         closed_4_manifold_claim=closed_4_manifold_claim,
     )
@@ -157,15 +204,6 @@ def _refuse_closed_claim_if_needed(closed_4_manifold_claim: bool) -> None:
         )
 
 
-def _check_supported_scope(diagram: LinkDiagram) -> None:
-    if any(component.dotted for component in diagram.components):
-        raise NotImplementedError("ordinary Kirby-color scaffold does not cover dotted handles")
-    if diagram.crossings:
-        raise NotImplementedError(
-            "ordinary Kirby-color scaffold only covers no-crossing elementary fixtures"
-        )
-
-
 def _omega_assignment_coefficient(
     labels: tuple[str, ...],
     omega: Mapping[str, QuadraticSurd],
@@ -176,18 +214,44 @@ def _omega_assignment_coefficient(
     return coefficient
 
 
+def _core_value_parts(core_result: Mapping[str, object]) -> tuple[QuadraticSurd, int]:
+    value = core_result["value"]  # type: ignore[index]
+    if not isinstance(value, dict):
+        raise TypeError("core evaluator pass result must contain value object")
+    coefficient = _quadratic_surd_from_json(value["coefficient"])  # type: ignore[index]
+    twist = value["twist"]  # type: ignore[index]
+    if not isinstance(twist, dict) or twist.get("order") != 16:
+        raise ValueError("ordinary Kirby-color scaffold expects zeta_16 core twists")
+    exponent = twist["exponent"]
+    if isinstance(exponent, bool) or not isinstance(exponent, int):
+        raise TypeError("core twist exponent must be an integer")
+    return coefficient, exponent
+
+
+def _quadratic_surd_from_json(payload: object) -> QuadraticSurd:
+    if not isinstance(payload, dict) or payload.get("kind") != "Q(sqrt2)":
+        raise TypeError("expected Q(sqrt2) coefficient JSON")
+    return QuadraticSurd(
+        from_jsonable(payload["rational"]),
+        from_jsonable(payload["sqrt2"]),
+    )
+
+
 def _sector_payload(
     *,
     labels_by_component: Mapping[str, str],
     omega_coefficient: QuadraticSurd,
-    link_value: ElementaryLinkValue,
+    core_result: Mapping[str, object],
     term_coefficient: QuadraticSurd,
     exponent: int,
 ) -> dict[str, object]:
     return {
+        "status": "pass",
         "labels_by_component": dict(sorted(labels_by_component.items())),
         "omega_coefficient": omega_coefficient.to_jsonable(),
-        "link_value": link_value.to_jsonable(),
+        "core_evaluator_status": core_result["status"],
+        "core_supported_kind": core_result["supported_kind"],
+        "link_value": core_result["value"],
         "term": {
             "kind": "Q(sqrt2)_times_root_of_unity",
             "coefficient": term_coefficient.to_jsonable(),
@@ -198,6 +262,22 @@ def _sector_payload(
                 "exponent": exponent,
             },
         },
+    }
+
+
+def _blocked_sector_payload(
+    *,
+    labels_by_component: Mapping[str, str],
+    omega_coefficient: QuadraticSurd,
+    core_result: Mapping[str, object],
+) -> dict[str, object]:
+    return {
+        "status": "blocked",
+        "labels_by_component": dict(sorted(labels_by_component.items())),
+        "omega_coefficient": omega_coefficient.to_jsonable(),
+        "core_evaluator_status": core_result["status"],
+        "core_blocker": core_result["blocker"],
+        "term": None,
     }
 
 
@@ -228,6 +308,7 @@ __all__ = [
     "ORDINARY_KIRBY_COLOR_SCHEMA",
     "SOURCE_STATUS_BY_SLOT",
     "evaluate_ordinary_kirby_color",
+    "evaluate_su2_level2_ordinary_kirby_color",
     "load_fixture_certificate",
     "omega_coefficients",
     "stable_ordinary_kirby_color_json",

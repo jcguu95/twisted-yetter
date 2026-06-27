@@ -2,7 +2,7 @@
 
 This n23 layer classifies the current S4, CP2, and S2xS2 toy controls against
 the n22 ordinary Kirby-color scaffold.  It records what can be computed as a
-local no-crossing experiment and what remains blocked before any closed
+local restricted-core experiment and what remains blocked before any closed
 ordinary 4D invariant claim.
 """
 
@@ -64,8 +64,9 @@ KNOWN_ORDINARY_CONTROLS: Final = (
         fixture_path="experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
         ordinary_control_role="0-framed Hopf-pair ordinary closed-control sanity target",
         source_needed_expectation=(
-            "source audit and a crossing/Hopf-capable ordinary Kirby-color "
-            "evaluation are both required before this can be used as an S2xS2 value"
+            "source audit must identify ordinary surgery normalization, "
+            "signature/anomaly behavior, and closed-scope treatment before "
+            "the local Hopf sector sum can be used as an S2xS2 value"
         ),
     ),
 )
@@ -106,7 +107,6 @@ def known_ordinary_control_ledger(
         ],
         "does_not_unblock": [
             "claim-supporting ordinary closed 4D invariant values",
-            "Hopf/S2xS2 ordinary Kirby-color calculation",
             "decorated or twisted formula claims",
             "exotic-pair computation claims",
         ],

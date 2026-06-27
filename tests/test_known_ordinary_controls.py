@@ -8,7 +8,7 @@ from twisted_yetter.ordinary_control_gate import (
 from twisted_yetter.su2_level2 import QuadraticSurd
 
 
-def test_known_ordinary_controls_classify_n22_supported_and_blocked_cases() -> None:
+def test_known_ordinary_controls_classify_n22_supported_local_cases() -> None:
     ledger = known_ordinary_control_ledger()
     cases = {case["case_id"]: case for case in ledger["cases"]}
 
@@ -41,12 +41,14 @@ def test_known_ordinary_controls_classify_n22_supported_and_blocked_cases() -> N
         )
     )
 
-    assert cases["S2xS2-hopf"]["status"] == "blocked"
-    assert cases["S2xS2-hopf"]["n22_can_compute"] is False
+    assert cases["S2xS2-hopf"]["status"] == "computed scaffold"
+    assert cases["S2xS2-hopf"]["n22_can_compute"] is True
     assert cases["S2xS2-hopf"]["crossing_count"] == 2
     assert cases["S2xS2-hopf"]["linking_matrix"] == [[0, 1], [1, 0]]
-    assert "no-crossing" in cases["S2xS2-hopf"]["blocked_reason"]
-    assert cases["S2xS2-hopf"]["n22_certificate_summary"] is None
+    assert cases["S2xS2-hopf"]["n22_certificate_summary"]["sector_count"] == 9
+    assert cases["S2xS2-hopf"]["n22_certificate_summary"]["total_value"] == _sparse_sum(
+        [(0, QuadraticSurd(4))]
+    )
 
 
 def test_known_ordinary_controls_refuse_closed_claims() -> None:

@@ -54,8 +54,10 @@ def test_blocked_reasons_cover_n21_n22_n23_and_closed_claim_refusal() -> None:
     assert n23_reason["case_id"] == "S2xS2-hopf"
     assert n23_reason["crossing_count"] == 2
     assert n23_reason["linking_matrix"] == [[0, 1], [1, 0]]
-    assert n23_reason["ordinary_scaffold_status"] == "blocked"
-    assert "no-crossing" in n23_reason["blocked_reason"]
+    assert n23_reason["ordinary_scaffold_status"] == "computed scaffold"
+    assert n23_reason["n22_can_compute"] is True
+    assert n23_reason["n22_certificate_summary"]["sector_count"] == 9
+    assert "local-convention regression data" in n23_reason["claim_boundary"]
 
     assert reasons[CLOSED_CLAIM_BLOCKER_ID][
         "claim_supporting_closed_invariant_allowed"

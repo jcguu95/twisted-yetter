@@ -64,22 +64,24 @@ Therefore the gate cannot support a theorem-level ordinary closed 4-manifold inv
 n22 is still =experimental/local-convention= with handle scope:
 
 #+begin_src text
-no-dotted-2-handle-framed-link-only
+restricted-core-supported-no-dotted-2-handle-framed-link-only
 #+end_src
 
 Its normalization status is =SOURCE NEEDED=.  It is useful as exact regression scaffold evidence,
 not as a sourced surgery formula.
 
-** n23 S2xS2 crossing control blocked
+** n23 ordinary controls local only
 
-n23 records =S2xS2-hopf= as =blocked=.  The Hopf fixture has two crossings and linking matrix:
+n23 records =S2xS2-hopf= as a computed local scaffold through the accepted Hopf core.  The Hopf
+fixture has two crossings and linking matrix:
 
 #+begin_src text
 [[0, 1], [1, 0]]
 #+end_src
 
-The current n22 ordinary Kirby-color scaffold refuses crossing/Hopf diagrams, so the first known
-ordinary 4D control requiring a crossing-capable ordinary layer is not available.
+This improves the regression suite but does not turn the value into a closed ordinary invariant.
+The ordinary surgery gate remains blocked by the unsourced Kirby-color, normalization,
+signature/anomaly, handle-move, cancellation, and closed-scope slots.
 
 ** Closed claim refusal
 

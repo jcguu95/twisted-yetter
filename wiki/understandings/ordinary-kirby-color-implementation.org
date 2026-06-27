@@ -14,9 +14,10 @@
   - =wiki/understandings/ordinary-kirby-color-source-capture.org=
   - =wiki/understandings/colored-framed-link-evaluator-gate.org=
 
-This node implements the smallest useful ordinary Kirby-color scaffold for local experiments.  It
-does not prove or claim an ordinary Crane-Yetter/Yetter invariant, does not implement 4D surgery
-normalization, and does not enter the twisted / decorated formula.
+This node implements the smallest useful ordinary Kirby-color sector summation for local
+experiments.  It calls the accepted restricted =SU(2)_2= colored framed link evaluator core for
+every sector.  It does not prove or claim an ordinary Crane-Yetter/Yetter invariant, does not
+implement 4D surgery normalization, and does not enter the twisted / decorated formula.
 
 * Implemented Local Convention
 
@@ -41,7 +42,8 @@ therefore a deterministic software convention, not a theorem-level source claim.
 Accepted input:
 
 - machine-readable =LinkDiagram=;
-- no crossings;
+- empty, split no-crossing, and positive Hopf-shaped crossing controls supported by
+  =evaluate_su2_level2_link(LinkDiagram, labels_by_component)=;
 - no dotted components;
 - no-dotted 2-handle framed link fixtures only;
 - exact arithmetic through =Q(sqrt2)= and symbolic =zeta_16= powers.
@@ -49,14 +51,15 @@ Accepted input:
 Refused input:
 
 - =closed_4_manifold_claim=True= while any source slot remains =SOURCE NEEDED=;
-- dotted handles;
-- Hopf / crossing diagrams;
+- dotted handles, reported as structured sector blockers inherited from the core;
+- general crossing diagrams outside the accepted restricted core, reported as structured sector
+  blockers;
 - signature normalization or global surgery normalization requests.
 
 The serialized handle scope is:
 
 #+begin_src text
-no-dotted-2-handle-framed-link-only
+restricted-core-supported-no-dotted-2-handle-framed-link-only
 #+end_src
 
 * Certificate Shape
@@ -73,7 +76,10 @@ Every certificate records:
 - =normalization_status= as =SOURCE NEEDED=;
 - =source_status_by_slot= with every ordinary Kirby-color / surgery slot still =SOURCE NEEDED=;
 - =closed_4_manifold_claim_allowed=false=;
-- exact sector terms and total value as a sparse \(Q(\sqrt{2})[\zeta_{16}]\) sum.
+- exact sector terms and total value as a sparse \(Q(\sqrt{2})[\zeta_{16}]\) sum when all sectors
+  pass;
+- =status=blocked= plus per-sector core blockers when any sector is outside the accepted
+  restricted evaluator core.
 
 * Current Controls
 
@@ -83,9 +89,16 @@ Computed exact local-convention controls:
 - 0-framed unknot: total \(4\), the local =sum_i d_i^2= check only;
 - +1-framed unknot: total \(1 + 2\zeta_{16}^3 + \zeta_{16}^8\);
 - split two-component 0-framed unlink: total \(16\).
+- positive Hopf fixture: total \(4\), as a local sector sum over the accepted Hopf control core.
 
 These are regression controls for the implementation.  They are not normalized closed 4-manifold
 values.
+
+Generated artifact:
+
+- =experiments/results/ordinary-kirby-color/su2-level2-local-convention.json=
+
+The artifact includes supported controls and explicit dotted/general-crossing blocked examples.
 
 * Unblocks
 
