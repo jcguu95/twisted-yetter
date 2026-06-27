@@ -4,15 +4,21 @@ import pytest
 
 from twisted_yetter.su2_level2 import (
     GLOBAL_DIMENSION,
+    LINK_DATA_CLAIM_LEVELS,
     OMEGA_THETA_CONVENTION,
     QUANTUM_DIMENSIONS,
+    S_MATRIX,
     SIMPLE_LABELS,
     SQRT2,
+    TWIST_VALUES,
     UNSUPPORTED_DATA,
     QuadraticSurd,
+    RootOfUnityPower,
     certificate_payload,
     fusion,
     global_dimension_from_simples,
+    hopf_control_entry,
+    s_matrix_entry,
     validate_certificate,
 )
 
@@ -45,6 +51,67 @@ def test_global_dimension_sanity_check_passes() -> None:
     validate_certificate()
 
 
+def test_s_matrix_is_exact_symmetric_and_recovers_dimensions() -> None:
+    assert S_MATRIX == (
+        (QuadraticSurd("1/2"), QuadraticSurd(0, "1/2"), QuadraticSurd("1/2")),
+        (QuadraticSurd(0, "1/2"), QuadraticSurd(0), QuadraticSurd(0, "-1/2")),
+        (QuadraticSurd("1/2"), QuadraticSurd(0, "-1/2"), QuadraticSurd("1/2")),
+    )
+
+    for left in SIMPLE_LABELS:
+        for right in SIMPLE_LABELS:
+            assert s_matrix_entry(left, right) == s_matrix_entry(right, left)
+            assert (
+                s_matrix_entry("0", right)
+                == s_matrix_entry("0", "0") * QUANTUM_DIMENSIONS[right]
+            )
+
+
+def test_s_matrix_square_is_identity_for_self_dual_labels() -> None:
+    for row, left in enumerate(SIMPLE_LABELS):
+        for column, right in enumerate(SIMPLE_LABELS):
+            total = sum(
+                S_MATRIX[row][middle] * S_MATRIX[middle][column]
+                for middle in range(len(SIMPLE_LABELS))
+            )
+            assert total == (QuadraticSurd(1) if left == right else QuadraticSurd(0))
+
+
+def test_hopf_control_uses_s_over_s00_without_evaluating_links() -> None:
+    assert hopf_control_entry("0", "0") == QuadraticSurd(1)
+    assert hopf_control_entry("0", "1") == SQRT2
+    assert hopf_control_entry("1", "1") == QuadraticSurd(0)
+    assert hopf_control_entry("1", "2") == -SQRT2
+    assert hopf_control_entry("2", "2") == QuadraticSurd(1)
+
+
+def test_twists_are_exact_symbolic_local_convention_values() -> None:
+    assert TWIST_VALUES == {
+        "0": RootOfUnityPower(16, 0),
+        "1": RootOfUnityPower(16, 3),
+        "2": RootOfUnityPower(16, 8),
+    }
+    assert TWIST_VALUES["1"].to_jsonable() == {
+        "kind": "root_of_unity_power",
+        "symbol": "zeta_16",
+        "order": 16,
+        "exponent": 3,
+    }
+
+
+def test_link_data_claim_levels_keep_source_needed_boundary() -> None:
+    assert (
+        LINK_DATA_CLAIM_LEVELS["fusion_dimension_algebra"]["claim_level"]
+        == "computed evidence/schema-test-safe"
+    )
+    assert LINK_DATA_CLAIM_LEVELS["s_matrix"]["claim_level"].startswith("SOURCE NEEDED")
+    assert LINK_DATA_CLAIM_LEVELS["hopf_control"]["claim_level"].startswith(
+        "SOURCE NEEDED"
+    )
+    assert LINK_DATA_CLAIM_LEVELS["twists"]["claim_level"].startswith("SOURCE NEEDED")
+    assert LINK_DATA_CLAIM_LEVELS["twists"]["positive_framing_sign"] == "SOURCE NEEDED"
+
+
 def test_omega_theta_convention_cites_ledger_and_stays_source_needed() -> None:
     assert OMEGA_THETA_CONVENTION["status"] == "source-needed/working"
     assert (
@@ -55,7 +122,6 @@ def test_omega_theta_convention_cites_ledger_and_stays_source_needed() -> None:
 
 
 def test_unsupported_data_is_explicitly_absent() -> None:
-    assert "twists" in UNSUPPORTED_DATA
     assert "f_symbols" in UNSUPPORTED_DATA
     assert "r_symbols" in UNSUPPORTED_DATA
     assert "invariant_formula" in UNSUPPORTED_DATA
@@ -68,10 +134,22 @@ def test_certificate_payload_is_stable_json_data() -> None:
 
     assert payload["schema"] == "twisted-yetter.su2-level2-category-data.v1"
     assert payload["status"] == "pass"
+    assert payload["node_id"] == "n15-su2-level2-link-data"
     assert payload["simple_labels"] == ["0", "1", "2"]
     assert payload["quantum_dimensions"]["1"] == {
         "kind": "Q(sqrt2)",
         "rational": {"type": "integer", "value": "0"},
         "sqrt2": {"type": "integer", "value": "1"},
     }
-    assert '"twists": "absent:' in encoded
+    assert payload["twists"]["1"] == {
+        "kind": "root_of_unity_power",
+        "symbol": "zeta_16",
+        "order": 16,
+        "exponent": 3,
+    }
+    assert payload["hopf_control"]["1,2"] == {
+        "kind": "Q(sqrt2)",
+        "rational": {"type": "integer", "value": "0"},
+        "sqrt2": {"type": "integer", "value": "-1"},
+    }
+    assert '"positive_framing_sign": "SOURCE NEEDED"' in encoded

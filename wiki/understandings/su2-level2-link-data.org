@@ -1,0 +1,136 @@
+#+TITLE: SU(2)_2 Exact Link-Data Contract
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n15-su2-level2-link-data=
+- status: =working understanding= / =schema/test-safe= link-data contract
+- implementation: =src/twisted_yetter/su2_level2.py=
+- tests: =tests/test_su2_level2.py=
+- current graph version when executed: =5=
+- git commit before local edits: =a5a2efa41a0d492c6cc08c8fb627776352b4dfac=
+- UTC note time: =2026-06-27T00:57:01Z=
+- source ledgers:
+  - =wiki/understandings/source-confidence-ledger.org=
+  - =wiki/understandings/rt-link-conventions.org=
+  - =wiki/references/rt-or-kauffman-link-source.org=
+
+This note records the exact category/link data made available for the later ordinary colored
+framed link evaluator gate.  It is not a link evaluator, does not implement a Kirby color, and
+does not compute a 4-manifold invariant.
+
+* Fusion / Dimension Algebra Controls
+
+Claim level: =computed evidence/schema-test-safe= for local software checks.
+
+The simple labels remain:
+
+#+begin_src text
+0, 1, 2
+#+end_src
+
+The exact quantum dimensions are represented in =Q(sqrt(2))=:
+
+#+begin_src text
+d_0 = 1
+d_1 = sqrt(2)
+d_2 = 1
+#+end_src
+
+The implemented fusion controls are:
+
+#+begin_src text
+0 x i = i
+1 x 1 = 0 + 2
+1 x 2 = 2 x 1 = 1
+2 x 2 = 0
+#+end_src
+
+Sanity check:
+
+#+begin_src text
+sum_i d_i^2 = 4
+#+end_src
+
+These controls support exact unit tests and later evaluator input validation.  They do not
+identify an =omega= or decorated Kirby color.
+
+* S-Matrix / Hopf Controls
+
+Claim level: =SOURCE NEEDED/local-convention=.
+
+The local working target now records the exact matrix
+
+#+begin_src text
+S = 1/2 * [[1, sqrt(2), 1],
+           [sqrt(2), 0, -sqrt(2)],
+           [1, -sqrt(2), 1]]
+#+end_src
+
+Unit tests check:
+
+- symmetry;
+- =S_00 = 1/2=;
+- =S_0i = S_00 d_i=, equivalently =d_i = S_0i / S_00=;
+- =S^2 = I= for these self-dual labels;
+- Hopf-control table entries defined by the n14 working target =S_ij / S_00=.
+
+This is a contract for later controls such as a Hopf-link regression test.  The repo still needs
+page-level source audit before using the Hopf formula as theorem-level RT/Kauffman evidence.
+
+* Twist / Framing Controls
+
+Claim level: =SOURCE NEEDED/local-convention=.
+
+The twist table is represented exactly and symbolically as powers of =zeta_16=:
+
+#+begin_src text
+theta_0 = zeta_16^0
+theta_1 = zeta_16^3
+theta_2 = zeta_16^8
+#+end_src
+
+The implementation deliberately records this as root-of-unity metadata, not as floats.  The
+positive-framing sign convention remains =SOURCE NEEDED= in the payload, because
+=ref:rt-or-kauffman-link-source= has not yet been upgraded to a page-level source record.
+
+* Explicit Boundaries
+
+The module still does not provide:
+
+- braiding or =R=-symbols;
+- =F=-symbols or a recoupling gauge;
+- a bracket skein evaluator;
+- Kirby color coefficients;
+- Yetter / Crane-Yetter normalization;
+- a closed 4-manifold invariant value.
+
+The later evaluator should either use the S/Hopf and twist local targets under this source-needed
+claim level, or first upgrade =ref:rt-or-kauffman-link-source= with exact pages / theorem labels.
+
+* Reproduction
+
+Commands used for this node:
+
+#+begin_src sh
+cd /Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/show_current_graph.py
+
+cd /Users/jin/data/local/projects/twisted-yetter
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest tests/test_su2_level2.py
+#+end_src
+
+Final full-suite and CTL verification commands are recorded in the worker's final report.
+
+* Downstream Effect
+
+This node unblocks exact data-contract work for:
+
+- =n16-elementary-link-controls=: labels, dimensions, symbolic twists, and framing metadata are now
+  available, with positive-framing sign still source-needed.
+- =n17-hopf-and-crossing-controls=: S/Hopf expected values are available exactly as local working
+  targets.
+- =n18-colored-framed-link-evaluator-gate=: evaluator input can depend on an exact SU(2)_2
+  data payload, but theorem-level source audit remains incomplete.
