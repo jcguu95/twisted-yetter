@@ -1,0 +1,101 @@
+#+TITLE: Hopf and Crossing Controls
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 狀態
+
+- decision graph node: =n17-hopf-and-crossing-controls=
+- status: =working understanding= / =schema-test-safe local controls=
+- implementation: =src/twisted_yetter/hopf_controls.py=
+- tests: =tests/test_hopf_controls.py=
+- input fixtures:
+  - =experiments/inputs/toy-diagrams/hopf-link.json=
+  - =experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json=
+- source ledgers:
+  - =wiki/understandings/source-confidence-ledger.org=
+  - =wiki/understandings/su2-level2-link-data.org=
+  - =wiki/understandings/rt-link-conventions.org=
+  - =wiki/references/rt-or-kauffman-link-source.org=
+
+本 node 建立 Hopf-specific control baseline，供 =n18-colored-framed-link-evaluator-gate=
+檢查 evaluator 至少能對照一個 crossing-bearing fixture。這仍然不是 general colored
+framed link evaluator。
+
+* Exact Hopf Target
+
+Claim level: =SOURCE NEEDED/local-convention/schema-test-safe=。
+
+目前使用 =SU(2)_2= local S-matrix convention：
+
+#+begin_src text
+hopf_control_entry(i,j) = S_ij / S_00
+#+end_src
+
+其中 =S= 來自 =src/twisted_yetter/su2_level2.py=，並已在
+=wiki/understandings/su2-level2-link-data.org= 標示為
+=SOURCE NEEDED/local-convention=。這裡只把該 convention 轉成 exact regression target；
+它不是 theorem-level source-audited RT/Kauffman Hopf result。
+
+實作使用 =QuadraticSurd=，因此 target 完全在 \(Q(\sqrt 2)\) 中，不使用 float。
+
+* Fixture Sanity Gate
+
+接受的 diagram shape 很窄：
+
+- exactly two components；
+- framings = =(0 0)=；
+- no dotted components；
+- exactly two crossings；
+- crossing signs = =(1 1)=；
+- every crossing is inter-component；
+- schema-derived linking matrix = =((0 1) (1 0))=。
+
+這些 sanity checks 直接從 machine-readable =LinkDiagram= fixture 讀取，不用圖像、
+手寫矩陣或 notebook 狀態替代。
+
+* 明確拒絕
+
+=src/twisted_yetter/hopf_controls.py= 會拒絕：
+
+- empty / unlink / no-crossing diagrams；
+- nonzero-framed Hopf diagrams；
+- negative Hopf / linking number =-1= fixtures；
+- self-crossing 或非兩條 component 的 crossing diagrams；
+- label mapping 不完整、額外 component label、未知 =SU(2)_2= simple label。
+
+這是刻意設計：本 node 只提供 Hopf fixture control，不假裝已經有一般 crossing link
+evaluator、skein evaluator、RT recoupling evaluator 或 framed colored link evaluator。
+
+* Boundary
+
+本 node 不處理：
+
+- Kirby color；
+- 4D surgery normalization；
+- signature anomaly；
+- handle cancellation；
+- twisted / decorated formula；
+- closed 4-manifold invariant；
+- exotic-pair distinction。
+
+* Reproduction
+
+#+begin_src sh
+cd /Users/jin/data/local/projects/twisted-yetter
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+
+cd /Users/jin/data/local/projects/twisted-yetter/ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src
+
+* Downstream Effect
+
+此 node unblock：
+
+- =n18-colored-framed-link-evaluator-gate=：可要求下一個 evaluator gate 從
+  machine-readable Hopf fixtures 讀入，通過 crossing/sign/linking sanity，並對照 exact
+  =S_ij/S_00= local target。
+
+它不 unblock Kirby-color、ordinary surgery gate、twisted decorated core，或任何 exotic
+computation claim。
