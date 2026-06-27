@@ -9,8 +9,17 @@ decorated Kirby move gates pass.
 from __future__ import annotations
 
 import json
+import argparse
+from pathlib import Path
 from typing import Final, Mapping
 
+from twisted_yetter.artifacts import (
+    default_tool_versions,
+    dumps_certificate,
+    git_metadata,
+    hash_json,
+    make_certificate,
+)
 from twisted_yetter.candidate_validation_suite import (
     CANDIDATE_VALIDATION_SUITE_SCHEMA,
     many_case_candidate_validation_suite_artifact,
@@ -34,6 +43,9 @@ from twisted_yetter.presentation_pairs import (
 
 TOY_CLOSED_SUITE_SCHEMA: Final = "twisted-yetter.toy-closed-suite-ledger.v1"
 TOY_CLOSED_SUITE_NOTE: Final = "wiki/understandings/toy-closed-suite.org"
+TOY_CLOSED_SUITE_ARTIFACT: Final = (
+    "experiments/results/toy-suite/n55-toy-closed-suite.json"
+)
 
 NODE_ID: Final = "n55-toy-closed-suite"
 CLAIM_LEVEL: Final = "blocked ledger/certificate"
@@ -100,6 +112,7 @@ def toy_closed_suite_ledger_artifact(
     pair_classifications = n50.get("pair_classifications", [])
     pair_list = pair_classifications if isinstance(pair_classifications, list) else []
     pair_ids_by_case = _pair_ids_by_case(pair_list)
+    decorated_gate_inventory = _decorated_gate_inventory(n50, pair_list)
 
     cases = suite.get("cases", [])
     case_list = cases if isinstance(cases, list) else []
@@ -139,6 +152,15 @@ def toy_closed_suite_ledger_artifact(
                 "observed": n50.get("status", "missing"),
                 "required": "pass",
                 "upstream_schema": n50.get("schema"),
+                "classification_status_counts": decorated_gate_inventory[
+                    "classification_status_counts"
+                ],
+                "pair_count": decorated_gate_inventory["pair_count"],
+                "diagram_pair_count": decorated_gate_inventory["diagram_pair_count"],
+                "matrix_pair_count": decorated_gate_inventory["matrix_pair_count"],
+                "evaluator_comparison_input_pair_ids": decorated_gate_inventory[
+                    "evaluator_comparison_input_pair_ids"
+                ],
                 "upstream_pair_blocker_reason_ids": sorted(
                     {
                         str(reason_id)
@@ -190,6 +212,7 @@ def toy_closed_suite_ledger_artifact(
             ),
             "decorated_kirby_gate": validate_decorated_kirby_gate_artifact(n50),
         },
+        "decorated_gate_inventory": decorated_gate_inventory,
         "case_count": len(toy_cases),
         "toy_cases": toy_cases,
         "all_cases_have_diagram_metadata": all(
@@ -232,6 +255,75 @@ def toy_closed_suite_ledger_artifact(
     return artifact
 
 
+def toy_closed_suite_certificate(
+    *,
+    repo_root: str | Path = ".",
+) -> dict[str, object]:
+    """Return a reproducible certificate envelope for the n55 blocked ledger."""
+
+    root = Path(repo_root)
+    ordinary_gate = ordinary_surgery_gate_certificate()
+    suite = many_case_candidate_validation_suite_artifact()
+    registry = presentation_pair_registry_artifact()
+    decorated_gate = decorated_kirby_gate_artifact(registry)
+    exact_output = toy_closed_suite_ledger_artifact(
+        candidate_suite=suite,
+        pair_registry=registry,
+        ordinary_gate=ordinary_gate,
+        decorated_gate=decorated_gate,
+    )
+    return make_certificate(
+        status="inconclusive",
+        command=(
+            "PYTHONPATH=src uv run python -m twisted_yetter.toy_closed_suite "
+            f"--write {TOY_CLOSED_SUITE_ARTIFACT}"
+        ),
+        argv=[
+            "python",
+            "-m",
+            "twisted_yetter.toy_closed_suite",
+            "--write",
+            TOY_CLOSED_SUITE_ARTIFACT,
+        ],
+        git=git_metadata(root),
+        tool_versions=default_tool_versions(),
+        input_hash=hash_json(
+            {
+                "node_id": NODE_ID,
+                "ordinary_surgery_gate_status": ordinary_gate.get("status"),
+                "candidate_validation_suite_case_ids": [
+                    case.get("case_id")
+                    for case in suite.get("cases", [])
+                    if isinstance(case, Mapping)
+                ],
+                "presentation_pair_registry_schema": registry.get("schema"),
+                "decorated_kirby_gate_schema": decorated_gate.get("schema"),
+                "decorated_kirby_gate_status": decorated_gate.get("status"),
+                "decorated_gate_pair_count": decorated_gate.get("pair_count"),
+                "decorated_gate_status_counts": decorated_gate.get(
+                    "classification_status_counts"
+                ),
+                "decorated_gate_evaluator_input_pair_ids": decorated_gate.get(
+                    "evaluator_comparison_input_pair_ids"
+                ),
+            }
+        ),
+        exact_output=exact_output,
+        generator_script="src/twisted_yetter/toy_closed_suite.py",
+        reproduce_command=(
+            "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache "
+            "PYTHONPATH=src uv run python -m twisted_yetter.toy_closed_suite "
+            "--write experiments/results/toy-suite/n55-toy-closed-suite.json"
+        ),
+        repo_root=str(root.resolve()),
+        notes=[
+            "n55 is currently a blocked ledger, not a closed invariant calculator.",
+            "It consumes the n50 classification inventory but n50 has zero pass pairs.",
+            "No closed 4-manifold invariant value, ordinary surgery theorem, decorated Kirby theorem, Reutter/no-go, or exotic claim is made.",
+        ],
+    )
+
+
 def validate_toy_closed_suite_ledger_artifact(
     artifact: Mapping[str, object],
 ) -> dict[str, object]:
@@ -244,6 +336,7 @@ def validate_toy_closed_suite_ledger_artifact(
         "claim_level",
         "input_schemas",
         "input_statuses",
+        "decorated_gate_inventory",
         "toy_cases",
         "global_blocker_reason_ids",
         "global_blockers",
@@ -278,6 +371,17 @@ def validate_toy_closed_suite_ledger_artifact(
         "presentation_pair_registry": PRESENTATION_PAIR_REGISTRY_SCHEMA,
         "decorated_kirby_gate": DECORATED_KIRBY_GATE_SCHEMA,
     }
+    decorated_gate_inventory = artifact.get("decorated_gate_inventory", {})
+    decorated_gate_inventory_ok = (
+        isinstance(decorated_gate_inventory, Mapping)
+        and decorated_gate_inventory.get("status") == "blocked"
+        and decorated_gate_inventory.get("pair_count") == 8
+        and decorated_gate_inventory.get("classification_status_counts", {}).get(
+            "pass"
+        )
+        == 0
+        and decorated_gate_inventory.get("evaluator_comparison_input_pair_ids") == []
+    )
     return {
         "valid": (
             not missing
@@ -286,12 +390,14 @@ def validate_toy_closed_suite_ledger_artifact(
             and artifact.get("node_id") == NODE_ID
             and artifact.get("claim_level") == CLAIM_LEVEL
             and input_schemas_ok
+            and decorated_gate_inventory_ok
             and case_list_ok
             and blockers_ok
             and blocked_claims_ok
         ),
         "missing_required_fields": missing,
         "input_schemas_ok": input_schemas_ok,
+        "decorated_gate_inventory_ok": decorated_gate_inventory_ok,
         "case_list_ok": case_list_ok,
         "blockers_ok": blockers_ok,
         "blocked_claims_ok": blocked_claims_ok,
@@ -303,6 +409,38 @@ def stable_toy_closed_suite_ledger_json(certificate: Mapping[str, object]) -> st
     """Serialize an n55 ledger artifact deterministically."""
 
     return json.dumps(certificate, indent=2, sort_keys=True)
+
+
+def _decorated_gate_inventory(
+    decorated_gate: Mapping[str, object],
+    pair_classifications: list[object],
+) -> dict[str, object]:
+    evaluator_pair_ids = decorated_gate.get("evaluator_comparison_input_pair_ids", [])
+    return {
+        "source_node": "n50-decorated-kirby-move-gate",
+        "schema": decorated_gate.get("schema"),
+        "status": decorated_gate.get("status"),
+        "classification_status_counts": decorated_gate.get(
+            "classification_status_counts", {}
+        ),
+        "pair_count": decorated_gate.get("pair_count", len(pair_classifications)),
+        "diagram_pair_count": decorated_gate.get("diagram_pair_count", 0),
+        "matrix_pair_count": decorated_gate.get("matrix_pair_count", 0),
+        "evaluator_comparison_input_pair_ids": (
+            list(evaluator_pair_ids) if isinstance(evaluator_pair_ids, list) else []
+        ),
+        "all_pairs_blocked_or_metadata_only": decorated_gate.get(
+            "all_pairs_blocked_or_metadata_only"
+        ),
+        "all_pairs_have_structured_blockers": decorated_gate.get(
+            "all_pairs_have_structured_blockers"
+        ),
+        "claim_boundary": (
+            "n55 may consume this classification inventory, but zero n50 "
+            "pass pairs means no evaluator comparison inputs and no closed "
+            "decorated invariant values"
+        ),
+    }
 
 
 def _case_readiness(
@@ -392,6 +530,24 @@ def _case_readiness_is_valid(case: object) -> bool:
     )
 
 
+def _main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--write", type=Path, help="write the n55 certificate JSON")
+    args = parser.parse_args()
+
+    certificate = toy_closed_suite_certificate(repo_root=Path.cwd())
+    output = dumps_certificate(certificate)
+    if args.write is None:
+        print(output, end="")
+        return
+    args.write.parent.mkdir(parents=True, exist_ok=True)
+    args.write.write_text(output, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    _main()
+
+
 __all__ = [
     "BLOCKED_CLAIMS",
     "CLAIM_LEVEL",
@@ -399,9 +555,11 @@ __all__ = [
     "N24_GATE_BLOCKER_ID",
     "N50_GATE_BLOCKER_ID",
     "NODE_ID",
+    "TOY_CLOSED_SUITE_ARTIFACT",
     "TOY_CLOSED_SUITE_NOTE",
     "TOY_CLOSED_SUITE_SCHEMA",
     "stable_toy_closed_suite_ledger_json",
+    "toy_closed_suite_certificate",
     "toy_closed_suite_ledger_artifact",
     "validate_toy_closed_suite_ledger_artifact",
 ]

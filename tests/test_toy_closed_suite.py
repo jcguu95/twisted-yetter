@@ -6,6 +6,9 @@ import pytest
 from twisted_yetter.artifacts import validate_certificate
 from twisted_yetter.decorated_kirby_gate import (
     DECORATED_MOVE_CERT_BLOCKER_ID,
+    MATRIX_LEVEL_ONLY_BLOCKER_ID,
+    N35_PLANNED_CALLS_BLOCKER_ID,
+    NOT_GENERATED_LINK_MOVE_BLOCKER_ID,
     ORDINARY_SURGERY_BLOCKER_ID,
 )
 from twisted_yetter.ordinary_surgery_gate import (
@@ -81,9 +84,52 @@ def test_n55_global_blockers_include_n24_and_n50_reason_ids() -> None:
     n50 = blockers[N50_GATE_BLOCKER_ID]
     assert n50["observed"] == "blocked"
     assert n50["required"] == "pass"
+    assert n50["upstream_schema"] == "twisted-yetter.decorated-kirby-gate.v2"
+    assert n50["classification_status_counts"] == {
+        "blocked": 5,
+        "metadata-only": 3,
+        "not-applicable": 0,
+        "pass": 0,
+    }
+    assert n50["pair_count"] == 8
+    assert n50["diagram_pair_count"] == 5
+    assert n50["matrix_pair_count"] == 3
+    assert n50["evaluator_comparison_input_pair_ids"] == []
     assert ORDINARY_SURGERY_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
     assert DECORATED_MOVE_CERT_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
+    assert MATRIX_LEVEL_ONLY_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
+    assert N35_PLANNED_CALLS_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
+    assert NOT_GENERATED_LINK_MOVE_BLOCKER_ID in n50["upstream_pair_blocker_reason_ids"]
     assert "decorated Kirby invariance evidence" in n50["claim_boundary"]
+
+
+def test_n55_records_n50_classification_inventory_without_evaluator_inputs() -> None:
+    artifact = toy_closed_suite_ledger_artifact()
+    inventory = artifact["decorated_gate_inventory"]
+
+    assert inventory == {
+        "source_node": "n50-decorated-kirby-move-gate",
+        "schema": "twisted-yetter.decorated-kirby-gate.v2",
+        "status": "blocked",
+        "classification_status_counts": {
+            "blocked": 5,
+            "metadata-only": 3,
+            "not-applicable": 0,
+            "pass": 0,
+        },
+        "pair_count": 8,
+        "diagram_pair_count": 5,
+        "matrix_pair_count": 3,
+        "evaluator_comparison_input_pair_ids": [],
+        "all_pairs_blocked_or_metadata_only": True,
+        "all_pairs_have_structured_blockers": True,
+        "claim_boundary": (
+            "n55 may consume this classification inventory, but zero n50 "
+            "pass pairs means no evaluator comparison inputs and no closed "
+            "decorated invariant values"
+        ),
+    }
+    assert artifact["metadata_validation"]["decorated_gate_inventory_ok"] is True
 
 
 def test_toy_cases_record_upstream_readiness_and_case_refs() -> None:
@@ -189,6 +235,18 @@ def test_checked_in_n55_certificate_records_blocked_ledger() -> None:
         N24_GATE_BLOCKER_ID,
         N50_GATE_BLOCKER_ID,
     ]
+    assert exact_output["decorated_gate_inventory"]["pair_count"] == 8
+    assert exact_output["decorated_gate_inventory"][
+        "classification_status_counts"
+    ] == {
+        "blocked": 5,
+        "metadata-only": 3,
+        "not-applicable": 0,
+        "pass": 0,
+    }
+    assert exact_output["decorated_gate_inventory"][
+        "evaluator_comparison_input_pair_ids"
+    ] == []
     assert exact_output["metadata_validation"]["valid"] is True
     assert exact_output["closed_4_manifold_invariant_claim_allowed"] is False
     assert exact_output["decorated_kirby_theorem_claim_allowed"] is False

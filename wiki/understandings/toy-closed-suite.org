@@ -11,6 +11,8 @@
 - artifact: =experiments/results/toy-suite/n55-toy-closed-suite.json=
 - implementation: =src/twisted_yetter/toy_closed_suite.py=
 - tests: =tests/test_toy_closed_suite.py=
+- upstream n50 accepted evidence: commit =900ab71=, manager accepted,
+  =240 passed=, CTL verify ok
 
 n55 目前完成的是 toy closed suite 的 machine-readable blocked ledger，不是
 closed 4-manifold invariant calculator。它不輸出 closed invariant value，
@@ -29,6 +31,22 @@ n55 目前只彙整下列上游 metadata / gate status：
   =src/twisted_yetter/presentation_pairs.py=
 - =n50-decorated-kirby-move-gate=：
   =src/twisted_yetter/decorated_kirby_gate.py=
+
+The current n50 input is the v2 decorated Kirby gate inventory:
+
+- schema: =twisted-yetter.decorated-kirby-gate.v2=
+- status: =blocked=
+- classification count: =8=
+- diagram-pair classifications: =5=
+- matrix-pair classifications: =3=
+- status counts: =blocked: 5=, =metadata-only: 3=, =pass: 0=,
+  =not-applicable: 0=
+- =evaluator_comparison_input_pair_ids: []=
+
+This is exactly why n55 remains =blocked/inconclusive=: it may consume the
+classification inventory, but it has zero n50 pass pairs and therefore zero
+decorated evaluator comparison inputs.  No closed decorated invariant value is
+claimed.
 
 The checked-in JSON certificate stores an outer certificate status
 =inconclusive= because the certificate schema does not have a =blocked=
@@ -61,6 +79,18 @@ refs receive the stable blocker reason id
 blockers.  This is an inventory/readiness signal only; it is not evidence for
 closed 4-manifold invariance.
 
+Current case-level presentation-pair readiness:
+
+| case | pair refs | status |
+| =s4-trivial-zero= | =identity-s4-trivial-zero= | metadata present, globally blocked |
+| =cp2-z2-zero= | =identity-cp2-z2-zero= | metadata present, globally blocked |
+| =cp2-z2-nonzero= | =identity-cp2-z2-nonzero= | metadata present, globally blocked |
+| =s2xs2-hopf-z2-mixed-10= | =component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run= | metadata present, globally blocked |
+| =s2xs2-hopf-z2-mixed-01= | =component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run= | metadata present, globally blocked |
+| =unlink-two-component-z2-mixed= | =component-order-unlink-z2-mixed-dry-run= | metadata present, globally blocked |
+| =unlink-two-component-z2-zero= | none | missing pair metadata plus global blockers |
+| =unlink-two-component-z2-nonzero= | none | missing pair metadata plus global blockers |
+
 * Blocking Reasons
 
 n55 is globally blocked by:
@@ -76,6 +106,21 @@ The n50 blocker currently expands to missing decorated Kirby move certificates,
 uncertified component lineage, missing integer basis matrices, inherited
 ordinary surgery blockage, and missing source/proof records for the decorated
 move rule.
+
+More specifically, n50 v2 adds that matrix-pair entries are
+=metadata-only=: exact =GL(n,Z)= consistency is retained as auxiliary metadata
+but is not a link-diagram Kirby move proof and is not an evaluator input.
+The n50 pair blocker inventory includes:
+
+- =presentation-pair-candidate-dry-run=
+- =not-generated-link-diagram-move=
+- =missing-decorated-move-certificate=
+- =missing-component-lineage-certificate=
+- =missing-basis-matrix-certificate=
+- =n35-decorated-core-planned-calls-only=
+- =matrix-level-only-not-link-diagram-proof=
+- =ordinary-surgery-gate-blocked=
+- =missing-source-proof=
 
 * Claims Explicitly Refused
 
@@ -117,6 +162,7 @@ exotic detection result by itself.
 * Reproduction
 
 #+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.toy_closed_suite --write experiments/results/toy-suite/n55-toy-closed-suite.json
 UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
 cd ctl-dogfood && UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
 #+end_src

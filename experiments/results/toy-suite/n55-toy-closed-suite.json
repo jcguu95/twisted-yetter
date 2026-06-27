@@ -2,10 +2,11 @@
   "argv": [
     "python",
     "-m",
-    "pytest",
-    "tests/test_toy_closed_suite.py"
+    "twisted_yetter.toy_closed_suite",
+    "--write",
+    "experiments/results/toy-suite/n55-toy-closed-suite.json"
   ],
-  "command": "uv run python -m pytest tests/test_toy_closed_suite.py",
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.toy_closed_suite --write experiments/results/toy-suite/n55-toy-closed-suite.json",
   "exact_output": {
     "all_cases_have_decorated_core_metadata": true,
     "all_cases_have_diagram_metadata": true,
@@ -20,6 +21,24 @@
     "claim_boundary": "this is a machine-readable blocked ledger, not a closed 4-manifold invariant calculator",
     "claim_level": "blocked ledger/certificate",
     "closed_4_manifold_invariant_claim_allowed": false,
+    "decorated_gate_inventory": {
+      "all_pairs_blocked_or_metadata_only": true,
+      "all_pairs_have_structured_blockers": true,
+      "claim_boundary": "n55 may consume this classification inventory, but zero n50 pass pairs means no evaluator comparison inputs and no closed decorated invariant values",
+      "classification_status_counts": {
+        "blocked": 5,
+        "metadata-only": 3,
+        "not-applicable": 0,
+        "pass": 0
+      },
+      "diagram_pair_count": 5,
+      "evaluator_comparison_input_pair_ids": [],
+      "matrix_pair_count": 3,
+      "pair_count": 8,
+      "schema": "twisted-yetter.decorated-kirby-gate.v2",
+      "source_node": "n50-decorated-kirby-move-gate",
+      "status": "blocked"
+    },
     "decorated_kirby_theorem_claim_allowed": false,
     "exotic_detection_claim_allowed": false,
     "final_closed_suite_passed": false,
@@ -38,34 +57,47 @@
         "upstream_blocker_reason_ids": [
           "n21-source-slots-unfilled",
           "n22-local-convention-only",
-          "n23-s2xs2-crossing-blocked",
+          "n23-ordinary-controls-local-only",
           "closed-claim-refused"
         ],
         "upstream_schema": "twisted-yetter.ordinary-surgery-gate.v1"
       },
       {
         "claim_boundary": "toy closed cases cannot be used as decorated Kirby invariance evidence while n50 is blocked",
+        "classification_status_counts": {
+          "blocked": 5,
+          "metadata-only": 3,
+          "not-applicable": 0,
+          "pass": 0
+        },
+        "diagram_pair_count": 5,
+        "evaluator_comparison_input_pair_ids": [],
+        "matrix_pair_count": 3,
         "observed": "blocked",
+        "pair_count": 8,
         "reason_id": "n50-decorated-kirby-move-gate-blocked",
         "required": "pass",
         "source_node": "n50-decorated-kirby-move-gate",
         "status": "blocked",
         "upstream_pair_blocker_reason_ids": [
+          "matrix-level-only-not-link-diagram-proof",
           "missing-basis-matrix-certificate",
           "missing-component-lineage-certificate",
           "missing-decorated-move-certificate",
           "missing-source-proof",
+          "n35-decorated-core-planned-calls-only",
+          "not-generated-link-diagram-move",
           "ordinary-surgery-gate-blocked",
           "presentation-pair-candidate-dry-run"
         ],
-        "upstream_schema": "twisted-yetter.decorated-kirby-gate.v1"
+        "upstream_schema": "twisted-yetter.decorated-kirby-gate.v2"
       }
     ],
     "input_schemas": {
       "candidate_validation_suite": "twisted-yetter.many-case-candidate-validation-suite.v1",
-      "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v1",
+      "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v2",
       "ordinary_surgery_gate": "twisted-yetter.ordinary-surgery-gate.v1",
-      "presentation_pair_registry": "twisted-yetter.kirby-presentation-pair-registry.v1"
+      "presentation_pair_registry": "twisted-yetter.kirby-presentation-pair-registry.v2"
     },
     "input_statuses": {
       "candidate_validation_suite": "pass",
@@ -91,9 +123,10 @@
       "presentation_pair_registry": {
         "blocked_claims_ok": true,
         "does_not_prove_ok": true,
+        "matrix_pair_list_ok": true,
         "missing_required_fields": [],
         "pair_list_ok": true,
-        "scope": "presentation-pair dry-run metadata only; no Kirby move proof",
+        "scope": "presentation-pair registry metadata plus matrix-level basis-change fixtures only; no link-diagram Kirby move proof",
         "valid": true
       }
     },
@@ -102,6 +135,7 @@
       "blocked_claims_ok": true,
       "blockers_ok": true,
       "case_list_ok": true,
+      "decorated_gate_inventory_ok": true,
       "input_schemas_ok": true,
       "missing_required_fields": [],
       "scope": "blocked ledger only; no closed 4-manifold invariant values",
@@ -176,8 +210,7 @@
       {
         "blocked_reason_ids": [
           "n24-ordinary-surgery-gate-blocked",
-          "n50-decorated-kirby-move-gate-blocked",
-          "missing-presentation-pair-metadata"
+          "n50-decorated-kirby-move-gate-blocked"
         ],
         "case_id": "s2xs2-hopf-z2-mixed-01",
         "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
@@ -192,20 +225,21 @@
         "diagram_id": "s2x-s2-hopf-zero-framed",
         "finite_group_id": "Z/2",
         "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
-        "presentation_pair_refs": [],
+        "presentation_pair_refs": [
+          "component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run"
+        ],
         "status": "blocked",
         "upstream_readiness": {
           "decorated_core_metadata": true,
           "diagram_metadata": true,
-          "presentation_pair_metadata": false
+          "presentation_pair_metadata": true
         },
         "zero_decoration": false
       },
       {
         "blocked_reason_ids": [
           "n24-ordinary-surgery-gate-blocked",
-          "n50-decorated-kirby-move-gate-blocked",
-          "missing-presentation-pair-metadata"
+          "n50-decorated-kirby-move-gate-blocked"
         ],
         "case_id": "s2xs2-hopf-z2-mixed-10",
         "claim_boundary": "case metadata is inventory/readiness evidence only and does not support a closed invariant value",
@@ -220,12 +254,14 @@
         "diagram_id": "s2x-s2-hopf-zero-framed",
         "finite_group_id": "Z/2",
         "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
-        "presentation_pair_refs": [],
+        "presentation_pair_refs": [
+          "component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run"
+        ],
         "status": "blocked",
         "upstream_readiness": {
           "decorated_core_metadata": true,
           "diagram_metadata": true,
-          "presentation_pair_metadata": false
+          "presentation_pair_metadata": true
         },
         "zero_decoration": false
       },
@@ -345,19 +381,20 @@
       "n50-decorated-kirby-move-gate"
     ]
   },
+  "generator_script": "src/twisted_yetter/toy_closed_suite.py",
   "git": {
-    "commit": "ad9fc37a653640c07b17d014ddf48d1611d060f1",
+    "commit": "900ab7143f80c4550dd8d1af02485434c0e10837",
     "dirty": true
   },
-  "input_hash": "868d4c2276e93649e8f4b6fe3e070b85e27c3328d58d7414831704f3bc040649",
+  "input_hash": "7b99df3a5028af3c2a47e432020b4b073eef89f1c2450bc5800efbfbea7099f8",
   "log_references": [],
   "notes": [
     "n55 is currently a blocked ledger, not a closed invariant calculator.",
-    "The blocker includes n24 ordinary surgery and n50 decorated Kirby gate status.",
-    "No closed 4-manifold invariant, decorated Kirby theorem, or exotic detection claim is made."
+    "It consumes the n50 classification inventory but n50 has zero pass pairs.",
+    "No closed 4-manifold invariant value, ordinary surgery theorem, decorated Kirby theorem, Reutter/no-go, or exotic claim is made."
   ],
   "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
-  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.toy_closed_suite --write experiments/results/toy-suite/n55-toy-closed-suite.json",
   "schema": "twisted-yetter.certificate.v1",
   "status": "inconclusive",
   "tool_versions": {
