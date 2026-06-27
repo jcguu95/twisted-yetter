@@ -26,8 +26,8 @@ SUBMITTED_BY = "actor:codex"
 CREATED_AT = "2026-06-27T06:09:00Z"
 ADMITTED_AT = "2026-06-27T06:10:00Z"
 GRAPH_LOGICAL_ID = "claim:graph:computation-first-v1"
-GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v26.json"
-MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v26-2026-06-27.json"
+GRAPH_FILE = DOGFOOD_ROOT / "graphs" / "computation-first-v27.json"
+MANIFEST_FILE = DOGFOOD_ROOT / "manifests" / "graph-computation-first-v27-2026-06-27.json"
 
 
 def run_git(root: Path, args: list[str]) -> str:

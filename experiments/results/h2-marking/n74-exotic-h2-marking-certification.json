@@ -1,0 +1,272 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.exotic_h2_marking_certification",
+    "--write",
+    "experiments/results/h2-marking/n74-exotic-h2-marking-certification.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.exotic_h2_marking_certification --write experiments/results/h2-marking/n74-exotic-h2-marking-certification.json",
+  "exact_output": {
+    "allowed_comparison_levels": [
+      "marked",
+      "cork-canonical",
+      "orbit",
+      "multiset",
+      "unmarked",
+      "inconclusive"
+    ],
+    "artifact_path": "experiments/results/h2-marking/n74-exotic-h2-marking-certification.json",
+    "blocked_by_upstream_fields": [
+      "no captured source/PDF/web snapshot",
+      "no exact page/figure ids for the exotic-pair diagrams",
+      "no machine-readable Kirby diagrams for both sides",
+      "no source-backed component-to-H2 lineage",
+      "no source-backed H2 bases or homeomorphism identification matrix"
+    ],
+    "blocked_claims": [
+      "H2 marking certified",
+      "homeomorphism comparison certified",
+      "marked distinction claim",
+      "cork-canonical distinction claim",
+      "orbit/multiset distinction claim",
+      "unmarked total-function distinction claim",
+      "n70 exotic input certification pass",
+      "n80 exotic computation route",
+      "exotic smooth-structure detection claim"
+    ],
+    "blocker_reason_ids": [
+      "marking-machine-diagram-needed",
+      "marking-source-citation-needed",
+      "marking-h2-basis-needed",
+      "marking-intersection-matrix-needed",
+      "marking-homeomorphism-identification-needed",
+      "marking-component-lineage-needed",
+      "marking-cork-twist-data-needed",
+      "marking-sanity-checks-needed"
+    ],
+    "blockers": [
+      {
+        "observed": "n73 has no machine-readable diagrams and n74_marking_certification_ready=false",
+        "reason_id": "marking-machine-diagram-needed",
+        "required": "both exotic-pair sides digitized with source locators before H2 lineage can be certified",
+        "status": "blocked"
+      },
+      {
+        "observed": "n72 has no source snapshot, content hash, or exact page/figure ids",
+        "reason_id": "marking-source-citation-needed",
+        "required": "ref ids plus page/theorem/figure/crop locators for every marking claim",
+        "status": "blocked"
+      },
+      {
+        "observed": "no source-backed H2 basis exists for either side",
+        "reason_id": "marking-h2-basis-needed",
+        "required": "explicit basis labels, coordinate convention, and source for both sides",
+        "status": "blocked"
+      },
+      {
+        "observed": "no exact intersection matrices are certified in source-backed bases",
+        "reason_id": "marking-intersection-matrix-needed",
+        "required": "integer symmetric matrices with rank/signature/determinant checks",
+        "status": "blocked"
+      },
+      {
+        "observed": "no homeomorphism or basis identification matrix is available",
+        "reason_id": "marking-homeomorphism-identification-needed",
+        "required": "integer matrix preserving the intersection form, or a source-backed reason for absence",
+        "status": "blocked"
+      },
+      {
+        "observed": "no component-to-H2 lineage through slides/cancellations exists",
+        "reason_id": "marking-component-lineage-needed",
+        "required": "component lineage and GL(n,Z) basis-change matrices from diagram components to H2 bases",
+        "status": "blocked"
+      },
+      {
+        "observed": "no cork twist marking/action data has been captured",
+        "reason_id": "marking-cork-twist-data-needed",
+        "required": "cork boundary/action data if the comparison level is cork-canonical",
+        "status": "blocked"
+      },
+      {
+        "observed": "rank, form-preservation, alpha=0, and matrix sanity checks cannot be run",
+        "reason_id": "marking-sanity-checks-needed",
+        "required": "exact sanity checks after diagram, basis, lineage, and identification data exist",
+        "status": "blocked"
+      }
+    ],
+    "candidate_id": "dolgachev-e1-23-vs-e1",
+    "certified_h2_marking_claim_allowed": false,
+    "claim_boundary": "n74 fixes the future H2/homeomorphism marking certification schema only. Because n73 has no machine-readable diagrams and n72 has no source snapshot or exact page/figure locator, this artifact certifies no H2 marking, no homeomorphism comparison, no n70 input, and no n80 route.",
+    "claim_level": "blocked H2/homeomorphism marking certification checklist",
+    "comparison_level": "inconclusive",
+    "comparison_level_status": "inconclusive-source-blocked",
+    "cork_canonical_distinction_claim_allowed": false,
+    "exotic_detection_claim_allowed": false,
+    "h2_schema_dependency": "twisted-yetter.h2-component-decoration.v1",
+    "homeomorphism_comparison_claim_allowed": false,
+    "ledger_note": "wiki/understandings/exotic-h2-marking-certification.org",
+    "marked_distinction_claim_allowed": false,
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "comparison_level_ok": true,
+      "missing_required_fields": [],
+      "required_fields_ok": true,
+      "scope": "blocked H2/homeomorphism marking checklist only; no certification",
+      "side_records_ok": true,
+      "valid": true
+    },
+    "n70_exotic_input_certification_pass_allowed": false,
+    "n80_exotic_computation_route_allowed": false,
+    "node_id": "n74-exotic-h2-marking-certification",
+    "orbit_multiset_distinction_claim_allowed": false,
+    "recommended_next_route": "manual/offline source acquisition, exact page/figure capture, then n73 diagram digitization",
+    "reference_id": "akbulut-dolgachev-surface",
+    "required_fields": {
+      "marking_fields": [
+        {
+          "field": "comparison_level",
+          "required": "one of marked, cork-canonical, orbit, multiset, unmarked, or inconclusive",
+          "status": "blocked"
+        },
+        {
+          "field": "side_h2_bases",
+          "required": "source-backed H2 basis labels for both sides",
+          "status": "blocked"
+        },
+        {
+          "field": "intersection_matrices",
+          "required": "exact integer intersection matrices in the recorded bases",
+          "status": "blocked"
+        },
+        {
+          "field": "homeomorphism_basis_identification_matrix",
+          "required": "exact integer matrix identifying the two H2 bases, or a source-backed reason for absence",
+          "status": "blocked"
+        },
+        {
+          "field": "component_to_h2_lineage",
+          "required": "Kirby component lineage to each H2 basis vector through slides/cancellations",
+          "status": "blocked"
+        },
+        {
+          "field": "cork_twist_marking",
+          "required": "cork twist marking/action data when the comparison level is cork-canonical",
+          "status": "blocked"
+        },
+        {
+          "field": "source_citations",
+          "required": "ref ids plus page/theorem/figure/crop locators for every marking and comparison claim",
+          "status": "blocked"
+        },
+        {
+          "field": "sanity_checks",
+          "required": "rank, determinant, signature, Euler characteristic, form-preservation, and alpha=0 checks",
+          "status": "blocked"
+        }
+      ],
+      "sanity_checks": [
+        {
+          "field": "rank_agreement",
+          "required": "both side H2 ranks agree with diagrams and source claims",
+          "status": "blocked"
+        },
+        {
+          "field": "matrix_symmetry_integrality",
+          "required": "intersection and identification matrices are exact integer data",
+          "status": "blocked"
+        },
+        {
+          "field": "form_preservation",
+          "required": "P^T Q_left P = Q_right or the documented orientation convention equivalent",
+          "status": "blocked"
+        },
+        {
+          "field": "determinant_signature_euler",
+          "required": "determinant, signature, and Euler characteristic match source and diagram targets",
+          "status": "blocked"
+        },
+        {
+          "field": "alpha_zero_route",
+          "required": "zero decoration remains aligned with the ordinary route",
+          "status": "blocked"
+        },
+        {
+          "field": "basis_change_unimodularity",
+          "required": "all basis-change and handle-slide matrices lie in GL(n,Z)",
+          "status": "blocked"
+        }
+      ],
+      "side_fields": [
+        {
+          "field": "side_id",
+          "required": "stable side id matching the digitized diagram side",
+          "status": "blocked"
+        },
+        {
+          "field": "h2_basis_id",
+          "required": "stable id for the H2 basis used on that side",
+          "status": "blocked"
+        },
+        {
+          "field": "h2_basis_vectors",
+          "required": "basis vectors with coordinate convention and source locator",
+          "status": "blocked"
+        },
+        {
+          "field": "component_lineage",
+          "required": "component ids and integer basis changes producing each basis vector",
+          "status": "blocked"
+        },
+        {
+          "field": "intersection_matrix",
+          "required": "exact integer symmetric matrix in this side basis",
+          "status": "blocked"
+        }
+      ]
+    },
+    "required_side_records": [
+      {
+        "display_name": "Dolgachev E(1)_{2,3}",
+        "required": "source-backed diagram, H2 basis, intersection matrix, and component lineage",
+        "side_id": "dolgachev-e1-23",
+        "status": "blocked"
+      },
+      {
+        "display_name": "E(1) comparison side",
+        "required": "source-backed comparison basis and homeomorphism identification data",
+        "side_id": "comparison-e1",
+        "status": "blocked"
+      }
+    ],
+    "schema": "twisted-yetter.exotic-h2-marking-certification.v1",
+    "status": "blocked",
+    "unmarked_total_function_distinction_claim_allowed": false,
+    "upstream_artifact": "experiments/results/diagram-digitization/n73-exotic-diagram-digitization.json",
+    "upstream_machine_readable_diagrams": [],
+    "upstream_n74_ready": false,
+    "upstream_node": "n73-exotic-diagram-digitization",
+    "upstream_schema": "twisted-yetter.exotic-diagram-digitization.v1",
+    "upstream_status": "blocked"
+  },
+  "generator_script": "src/twisted_yetter/exotic_h2_marking_certification.py",
+  "git": {
+    "commit": "c7b04acf4b52741c04ee0c81d38778cd4dbc3da6",
+    "dirty": true
+  },
+  "input_hash": "94fc8bf804b3c5c68450d49105a118dd41507dee65e2a8d7063bc71cb9f2af92",
+  "log_references": [],
+  "notes": [
+    "No H2 marking, homeomorphism matrix, cork action, or exotic input was certified.",
+    "n73 reports n74_marking_certification_ready=false and no machine-readable diagrams.",
+    "This artifact is a blocked certification schema/checklist, not a marking certificate."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_h2_marking_certification --write experiments/results/h2-marking/n74-exotic-h2-marking-certification.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
