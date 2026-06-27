@@ -8,11 +8,19 @@ closed invariant, and no exotic-smooth claim.
 
 from __future__ import annotations
 
+import argparse
 from dataclasses import dataclass
 import json
 from pathlib import Path
 from typing import Final, Mapping, Sequence
 
+from twisted_yetter.artifacts import (
+    default_tool_versions,
+    dumps_certificate,
+    git_metadata,
+    hash_json,
+    make_certificate,
+)
 from twisted_yetter.decorated_core import (
     decorated_core_input_artifact,
     stable_decorated_core_json,
@@ -27,6 +35,9 @@ CANDIDATE_VALIDATION_SUITE_SCHEMA: Final = (
 )
 CANDIDATE_VALIDATION_SUITE_NOTE: Final = (
     "wiki/understandings/many-case-candidate-validation-suite.org"
+)
+CANDIDATE_VALIDATION_SUITE_ARTIFACT: Final = (
+    "experiments/results/candidate-validation-suite/n36-many-case-validation.json"
 )
 
 CLAIM_LEVEL: Final = "computed evidence scaffold"
@@ -225,6 +236,76 @@ def stable_candidate_validation_suite_json(certificate: Mapping[str, object]) ->
     return json.dumps(certificate, indent=2, sort_keys=True)
 
 
+def candidate_validation_suite_artifact_certificate(
+    *,
+    repo_root: str | Path = ".",
+) -> dict[str, object]:
+    """Return a reproducible artifact envelope for the n36 suite."""
+
+    root = Path(repo_root)
+    exact_output = many_case_candidate_validation_suite_artifact(
+        fixture_dir=root / DEFAULT_TOY_FIXTURE_DIR
+    )
+    return make_certificate(
+        status="pass",
+        command=(
+            "PYTHONPATH=src uv run python -m "
+            "twisted_yetter.candidate_validation_suite "
+            f"--write {CANDIDATE_VALIDATION_SUITE_ARTIFACT}"
+        ),
+        argv=[
+            "python",
+            "-m",
+            "twisted_yetter.candidate_validation_suite",
+            "--write",
+            CANDIDATE_VALIDATION_SUITE_ARTIFACT,
+        ],
+        git=git_metadata(root),
+        tool_versions=default_tool_versions(),
+        input_hash=hash_json(
+            {
+                "node_id": "n36-many-case-candidate-validation-suite",
+                "case_specs": [
+                    {
+                        "case_id": spec.case_id,
+                        "fixture_path": spec.fixture_path,
+                        "finite_group": spec.group.name,
+                        "decoration_by_component": {
+                            component_id: list(element)
+                            for component_id, element in sorted(
+                                spec.decoration_by_component.items()
+                            )
+                        },
+                    }
+                    for spec in DEFAULT_CASE_SPECS
+                ],
+                "upstream_nodes": [
+                    "n24-ordinary-surgery-gate",
+                    "n33-omega-a-implementation",
+                    "n34-h2-label-and-basis-schema",
+                    "n35-twisted-decorated-core",
+                ],
+                "ordinary_surgery_gate_status": "blocked",
+            }
+        ),
+        exact_output=exact_output,
+        generator_script="src/twisted_yetter/candidate_validation_suite.py",
+        reproduce_command=(
+            "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache "
+            "PYTHONPATH=src uv run python -m "
+            "twisted_yetter.candidate_validation_suite "
+            "--write experiments/results/candidate-validation-suite/"
+            "n36-many-case-validation.json"
+        ),
+        repo_root=str(root.resolve()),
+        notes=[
+            "n36 validates many decorated-core metadata cases only.",
+            "All passing cases are computed evidence / sanity validation, not theorem-level proof.",
+            "ordinary_surgery_gate_status remains blocked; no closed 4D invariant or exotic claim is made.",
+        ],
+    )
+
+
 def _case_summary(
     spec: CandidateValidationCaseSpec,
     *,
@@ -307,15 +388,39 @@ def _sha256_hex(payload: str) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Emit the n36 many-case candidate validation suite artifact."
+    )
+    parser.add_argument("--write", type=Path, help="write certificate JSON to this path")
+    args = parser.parse_args(argv)
+
+    certificate = candidate_validation_suite_artifact_certificate()
+    encoded = dumps_certificate(certificate)
+    if args.write is None:
+        print(encoded, end="")
+        return 0
+
+    args.write.parent.mkdir(parents=True, exist_ok=True)
+    args.write.write_text(encoded)
+    return 0
+
+
 __all__ = [
     "BLOCKED_HIGH_CLAIMS",
+    "CANDIDATE_VALIDATION_SUITE_ARTIFACT",
     "CANDIDATE_VALIDATION_SUITE_SCHEMA",
     "CLAIM_LEVEL",
     "DEFAULT_CASE_SPECS",
     "DOES_NOT_COMPUTE",
     "SOURCE_STATUS",
     "CandidateValidationCaseSpec",
+    "candidate_validation_suite_artifact_certificate",
     "many_case_candidate_validation_suite_artifact",
     "stable_candidate_validation_suite_json",
     "validate_candidate_validation_suite_metadata",
 ]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

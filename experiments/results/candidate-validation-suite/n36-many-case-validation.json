@@ -1,0 +1,520 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.candidate_validation_suite",
+    "--write",
+    "experiments/results/candidate-validation-suite/n36-many-case-validation.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.candidate_validation_suite --write experiments/results/candidate-validation-suite/n36-many-case-validation.json",
+  "exact_output": {
+    "all_cases_exact_json_no_float_markers": true,
+    "all_cases_json_stable": true,
+    "all_cases_pass_metadata_validation": true,
+    "blocked_high_claims": [
+      "decorated/twisted formula theorem",
+      "claim-supporting closed 4D invariant",
+      "exotic detection claim",
+      "Reutter escape/no-go conclusion"
+    ],
+    "case_count": 8,
+    "cases": [
+      {
+        "case_id": "cp2-z2-nonzero",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "1"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "1",
+            "component_id": "cp2_h",
+            "decoration_element_id": "1"
+          }
+        ],
+        "decoration_by_component": {
+          "cp2_h": "1"
+        },
+        "diagram_component_ids": [
+          "cp2_h"
+        ],
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "b7421689cddd17149f481a54ec024dd32e550e36dd38fada96b91b0b7212a6bf",
+        "zero_decoration": false
+      },
+      {
+        "case_id": "cp2-z2-zero",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "0"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "0",
+            "component_id": "cp2_h",
+            "decoration_element_id": "0"
+          }
+        ],
+        "decoration_by_component": {
+          "cp2_h": "0"
+        },
+        "diagram_component_ids": [
+          "cp2_h"
+        ],
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "f7bf7089ad380f7d3c41adaa21ba3e65988b164e98029992e98cc2692039e8da",
+        "zero_decoration": true
+      },
+      {
+        "case_id": "s2xs2-hopf-z2-mixed-01",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "0",
+          "1"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "0",
+            "component_id": "s2_a",
+            "decoration_element_id": "0"
+          },
+          {
+            "candidate_sector_id": "1",
+            "component_id": "s2_b",
+            "decoration_element_id": "1"
+          }
+        ],
+        "decoration_by_component": {
+          "s2_a": "0",
+          "s2_b": "1"
+        },
+        "diagram_component_ids": [
+          "s2_a",
+          "s2_b"
+        ],
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "74f95d2658f0fe2d65279dc334db93b8e8890411368f830f657774b418b3b073",
+        "zero_decoration": false
+      },
+      {
+        "case_id": "s2xs2-hopf-z2-mixed-10",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "1",
+          "0"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "1",
+            "component_id": "s2_a",
+            "decoration_element_id": "1"
+          },
+          {
+            "candidate_sector_id": "0",
+            "component_id": "s2_b",
+            "decoration_element_id": "0"
+          }
+        ],
+        "decoration_by_component": {
+          "s2_a": "1",
+          "s2_b": "0"
+        },
+        "diagram_component_ids": [
+          "s2_a",
+          "s2_b"
+        ],
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "2e07833422fb1bae63497a6c593556bf31ee040aa23aa60650561fecd52d0d54",
+        "zero_decoration": false
+      },
+      {
+        "case_id": "s4-trivial-zero",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [],
+        "component_sector_metadata": [],
+        "decoration_by_component": {},
+        "diagram_component_ids": [],
+        "diagram_id": "s4-empty-kirby-diagram",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "trivial",
+        "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "1ba7ed32fb1534a91eed8eff4e27879993fef1101c257f4baf1e9cefcb3bfa4a",
+        "zero_decoration": true
+      },
+      {
+        "case_id": "unlink-two-component-z2-mixed",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "1",
+          "0"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "1",
+            "component_id": "u1",
+            "decoration_element_id": "1"
+          },
+          {
+            "candidate_sector_id": "0",
+            "component_id": "u2",
+            "decoration_element_id": "0"
+          }
+        ],
+        "decoration_by_component": {
+          "u1": "1",
+          "u2": "0"
+        },
+        "diagram_component_ids": [
+          "u1",
+          "u2"
+        ],
+        "diagram_id": "unlink-2",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "0df904351445af1b4f850ac767e216af3433f0edf24095ca1ed720385dd6e117",
+        "zero_decoration": false
+      },
+      {
+        "case_id": "unlink-two-component-z2-nonzero",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "1",
+          "1"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "1",
+            "component_id": "u1",
+            "decoration_element_id": "1"
+          },
+          {
+            "candidate_sector_id": "1",
+            "component_id": "u2",
+            "decoration_element_id": "1"
+          }
+        ],
+        "decoration_by_component": {
+          "u1": "1",
+          "u2": "1"
+        },
+        "diagram_component_ids": [
+          "u1",
+          "u2"
+        ],
+        "diagram_id": "unlink-2",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "7b3dc125d0871cd14684dab64b9f2cf29cbe2cb91e515dc184d6fce70065026a",
+        "zero_decoration": false
+      },
+      {
+        "case_id": "unlink-two-component-z2-zero",
+        "claim_level": "computed evidence scaffold",
+        "component_sector_ids": [
+          "0",
+          "0"
+        ],
+        "component_sector_metadata": [
+          {
+            "candidate_sector_id": "0",
+            "component_id": "u1",
+            "decoration_element_id": "0"
+          },
+          {
+            "candidate_sector_id": "0",
+            "component_id": "u2",
+            "decoration_element_id": "0"
+          }
+        ],
+        "decoration_by_component": {
+          "u1": "0",
+          "u2": "0"
+        },
+        "diagram_component_ids": [
+          "u1",
+          "u2"
+        ],
+        "diagram_id": "unlink-2",
+        "does_not_compute": [
+          "link evaluation",
+          "Kirby color sum",
+          "decorated Kirby move proof",
+          "closed invariant",
+          "exotic detection"
+        ],
+        "exact_json_no_float_markers": true,
+        "finite_group_id": "Z/2",
+        "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+        "metadata_validation": {
+          "blocked_claims_ok": true,
+          "claim_decision": {
+            "allowed": true,
+            "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+            "claim_type": "computed evidence scaffold",
+            "decision": "allowed",
+            "required_artifact_fields": [
+              "claim_level",
+              "source_status"
+            ]
+          },
+          "missing_required_fields": [],
+          "scope": "decorated-core input metadata only; no link evaluation",
+          "valid": true
+        },
+        "ordinary_surgery_gate_status": "blocked",
+        "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+        "stable_json_roundtrip": true,
+        "stable_json_sha256": "f40152b7121ad01ee043d7304a9284d2a0336edebce92ec5eca6007fb5f3bfe7",
+        "zero_decoration": true
+      }
+    ],
+    "claim_boundary": "passing this suite is computed evidence for n35/n33 metadata consistency only; it is not proof of a formula or invariant",
+    "claim_level": "computed evidence scaffold",
+    "closed_4_manifold_claim_allowed": false,
+    "decorated_kirby_move_proof_claim_allowed": false,
+    "does_not_compute": [
+      "link evaluation",
+      "Kirby color sum",
+      "decorated Kirby move proof",
+      "closed invariant",
+      "exotic detection"
+    ],
+    "exotic_detection_claim_allowed": false,
+    "ledger_note": "wiki/understandings/many-case-candidate-validation-suite.org",
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "case_list_ok": true,
+      "missing_required_fields": [],
+      "scope": "suite metadata validation only; no link evaluation",
+      "valid": true
+    },
+    "node_id": "n36-many-case-candidate-validation-suite",
+    "ordinary_surgery_gate_status": "blocked",
+    "ordinary_surgery_gate_status_explanation": "n36 validates deterministic decorated-core metadata only and inherits the blocked n24 ordinary surgery gate",
+    "proof_claim_allowed": false,
+    "schema": "twisted-yetter.many-case-candidate-validation-suite.v1",
+    "source_status": "n36 deterministic decorated-core metadata validation suite; consumes n35 artifacts and remains candidate/computed evidence only",
+    "status": "pass",
+    "upstream_nodes": [
+      "n24-ordinary-surgery-gate",
+      "n33-omega-a-implementation",
+      "n34-h2-label-and-basis-schema",
+      "n35-twisted-decorated-core"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/candidate_validation_suite.py",
+  "git": {
+    "commit": "75d54d4600646abc62ba150f92cf58f12fc18bf0",
+    "dirty": true
+  },
+  "input_hash": "e6acaaf78050bbb38ee61e6e4596b906dab9d4e01c34b4912799282016a94815",
+  "log_references": [],
+  "notes": [
+    "n36 validates many decorated-core metadata cases only.",
+    "All passing cases are computed evidence / sanity validation, not theorem-level proof.",
+    "ordinary_surgery_gate_status remains blocked; no closed 4D invariant or exotic claim is made."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.candidate_validation_suite --write experiments/results/candidate-validation-suite/n36-many-case-validation.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

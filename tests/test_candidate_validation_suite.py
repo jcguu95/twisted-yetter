@@ -2,9 +2,11 @@ import json
 
 from twisted_yetter.candidate_validation_suite import (
     BLOCKED_HIGH_CLAIMS,
+    CANDIDATE_VALIDATION_SUITE_ARTIFACT,
     CANDIDATE_VALIDATION_SUITE_SCHEMA,
     DEFAULT_CASE_SPECS,
     DOES_NOT_COMPUTE,
+    candidate_validation_suite_artifact_certificate,
     many_case_candidate_validation_suite_artifact,
     stable_candidate_validation_suite_json,
     validate_candidate_validation_suite_metadata,
@@ -130,6 +132,36 @@ def test_source_claim_fields_are_present_and_high_claims_remain_blocked() -> Non
         assert "source_status" in case
         assert case["source_status"]
         assert case["ordinary_surgery_gate_status"] == "blocked"
+
+
+def test_reproducible_artifact_envelope_records_n36_contract() -> None:
+    certificate = candidate_validation_suite_artifact_certificate()
+    exact_output = certificate["exact_output"]
+
+    assert certificate["schema"] == "twisted-yetter.certificate.v1"
+    assert certificate["status"] == "pass"
+    assert certificate["generator_script"] == (
+        "src/twisted_yetter/candidate_validation_suite.py"
+    )
+    assert certificate["argv"] == [
+        "python",
+        "-m",
+        "twisted_yetter.candidate_validation_suite",
+        "--write",
+        CANDIDATE_VALIDATION_SUITE_ARTIFACT,
+    ]
+    assert CANDIDATE_VALIDATION_SUITE_ARTIFACT in certificate["command"]
+    assert CANDIDATE_VALIDATION_SUITE_ARTIFACT in certificate["reproduce_command"]
+
+    assert exact_output["schema"] == CANDIDATE_VALIDATION_SUITE_SCHEMA
+    assert exact_output["node_id"] == "n36-many-case-candidate-validation-suite"
+    assert exact_output["status"] == "pass"
+    assert exact_output["case_count"] == len(DEFAULT_CASE_SPECS)
+    assert exact_output["all_cases_pass_metadata_validation"] is True
+    assert exact_output["ordinary_surgery_gate_status"] == "blocked"
+    assert exact_output["closed_4_manifold_claim_allowed"] is False
+    assert exact_output["exotic_detection_claim_allowed"] is False
+    assert "not theorem-level proof" in " ".join(certificate["notes"])
 
 
 def test_suite_metadata_validator_rejects_missing_required_fields() -> None:

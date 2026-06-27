@@ -9,6 +9,7 @@
 - status: =computed evidence scaffold= / =metadata validation suite=
 - implementation: =src/twisted_yetter/candidate_validation_suite.py=
 - tests: =tests/test_candidate_validation_suite.py=
+- artifact: =experiments/results/candidate-validation-suite/n36-many-case-validation.json=
 - upstream decorated-core input: =src/twisted_yetter/decorated_core.py=
 - inherited blocker: =n24-ordinary-surgery-gate= remains =blocked=
 
@@ -16,6 +17,12 @@ This node builds a deterministic many-case summary over n35 decorated-core
 input artifacts.  It is not a proof, not link evaluation, not a Kirby color sum,
 not a decorated Kirby-move proof, not a closed invariant, and not exotic-pair
 evidence.
+
+Reproduce the artifact with:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.candidate_validation_suite --write experiments/results/candidate-validation-suite/n36-many-case-validation.json
+#+end_src
 
 * Suite Schema
 
@@ -51,19 +58,29 @@ Each case summary records at least:
 
 Current default cases:
 
-- =s4-trivial-zero= using =s4-empty.json= and trivial \(A\);
+- =s4-trivial-zero= using =s4-empty.json= and trivial \(A\): metadata =pass=;
 - =cp2-z2-zero= using =cp2-plus-one-framed-unknot.json= and \(Z/2\) decoration
-  \(0\);
+  \(0\): metadata =pass=;
 - =cp2-z2-nonzero= using the same CP2 toy fixture and \(Z/2\) decoration \(1\);
-- =s2xs2-hopf-z2-mixed-10= with component sectors \(1,0\);
-- =s2xs2-hopf-z2-mixed-01= with component sectors \(0,1\);
-- =unlink-two-component-z2-zero= with sectors \(0,0\);
-- =unlink-two-component-z2-mixed= with sectors \(1,0\);
-- =unlink-two-component-z2-nonzero= with sectors \(1,1\).
+  metadata =pass=;
+- =s2xs2-hopf-z2-mixed-10= with component sectors \(1,0\): metadata =pass=;
+- =s2xs2-hopf-z2-mixed-01= with component sectors \(0,1\): metadata =pass=;
+- =unlink-two-component-z2-zero= with sectors \(0,0\): metadata =pass=;
+- =unlink-two-component-z2-mixed= with sectors \(1,0\): metadata =pass=;
+- =unlink-two-component-z2-nonzero= with sectors \(1,1\): metadata =pass=.
 
 These are deterministic decorated-core input summaries only.  They check that
 component decorations route to candidate Omega_a sector ids consistently across
 several toy fixtures.
+
+Blocked / not attempted in n36:
+
+- source-backed Yetter \(Z/2\) numerical examples are not checked here;
+- ordinary-specialization equality is not claimed as a closed invariant check,
+  because n24 remains =blocked=;
+- decorated Kirby moves, basis-change invariance, and presentation invariance
+  are routed to n50;
+- toy closed 4-manifold values are routed to n55.
 
 * Trust Boundary
 
