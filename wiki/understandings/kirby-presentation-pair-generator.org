@@ -6,17 +6,25 @@
 * Status
 
 - decision graph node: =n45-kirby-presentation-pair-generator=
-- status: =computed evidence scaffold= / =candidate/dry-run metadata registry=
+- status: =computed evidence scaffold= / deterministic fixture registry
 - implementation: =src/twisted_yetter/presentation_pairs.py=
 - tests: =tests/test_presentation_pairs.py=
 - upstream decorated-core summaries: =src/twisted_yetter/candidate_validation_suite.py=
+- matrix-level basis fixtures: =src/twisted_yetter/presentation_moves.py=
+- artifact: =experiments/results/presentation-pairs/n45-presentation-pair-generator.json=
 - downstream consumer: =n50-decorated-kirby-move-gate=
 - inherited blocker: =n24-ordinary-surgery-gate= remains =blocked=
 
 This node builds deterministic Kirby/link presentation-pair metadata for later
-decorated Kirby move gates.  It is not a Kirby move proof, not handle-slide
-algebra, not a basis-change certificate, not link evaluation, not a Kirby color
-sum, not a closed invariant, and not exotic-pair evidence.
+decorated Kirby move gates.  It now has two explicitly separated trust levels:
+
+- diagram/decorated-core pairs: candidate/dry-run registry metadata only;
+- matrix-level pairs: machine-checkable =GL(n,Z)= basis-change fixtures for
+  recorded intersection forms only.
+
+It is not a link-diagram Kirby move proof, not a decorated Kirby move theorem,
+not link evaluation, not a Kirby color sum, not a closed invariant, and not
+exotic-pair evidence.
 
 * Registry Schema
 
@@ -26,26 +34,48 @@ The schema id is:
 twisted-yetter.kirby-presentation-pair-registry.v1
 #+end_src
 
+For the current n45 cleanup the live schema is:
+
+#+begin_src text
+twisted-yetter.kirby-presentation-pair-registry.v2
+#+end_src
+
 The registry records:
 
 - =claim_level= =computed evidence scaffold=;
 - =source_status= identifying this as n45 deterministic dry-run metadata;
 - inherited =ordinary_surgery_gate_status= from n24;
 - one entry per fixed toy pair;
+- a separate =matrix_presentation_pairs= section for matrix-level basis-change
+  fixtures;
 - deterministic JSON stability and no-float-marker checks;
 - explicit =does_not_prove= barriers for equivalence, move proof, invariant, and exotic claims.
 
 Each pair records at least:
 
 - =pair_id=;
+- =pair_kind=;
 - =left= and =right= side summaries with fixture path, diagram id, component ids,
   finite group, decoration summary, and candidate sector ids;
 - =relation_type=;
 - =relation_status= =candidate/dry-run=;
 - =component_lineage= with placeholder status;
+- =move_metadata= with operation class and dry-run notes;
 - =basis_map= with placeholder status and =claim_certified: false=;
 - =decorated_core_case_refs= and embedded =decorated_core_cases= summaries from n36;
-- =claim_level=, =source_status=, and =does_not_prove=.
+- =claim_level=, =claim_boundary=, =source_status=, and =does_not_prove=.
+
+Matrix-level pairs record:
+
+- =source= and =target= matrix presentations;
+- exact =basis_map.matrix= and =basis_map.inverse_matrix=;
+- =decoration_transform_mod2=;
+- transformed decoration vectors;
+- component lineage between recorded source/target basis labels;
+- =machine_checked_matrix_equivalence: true=.
+
+This machine-checks only the matrix presentation relation.  It does not certify
+that a machine-readable link diagram was transformed by a Kirby handle slide.
 
 * Built-In Toy Pairs
 
@@ -61,9 +91,43 @@ Current default pairs:
   paired with itself while recording a swap-shaped component-lineage placeholder.
   The right fixture is not a transformed diagram, and this pair is explicitly
   only field-coverage metadata for n50.
+- =component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run=: the two existing n36
+  mixed Hopf cases =10= and =01= are paired with swap-shaped component lineage.
+  This is component-relabel shape metadata, not a generated relabel operation.
 
-All pairs have =relation_status= =candidate/dry-run=.  None asserts that the two
-presentations are Kirby equivalent.
+All diagram/decorated-core pairs have =relation_status= =candidate/dry-run=.
+None asserts that the two presentations are Kirby equivalent.
+
+Current matrix-level pairs from =presentation_moves.py=:
+
+- =hyperbolic-shear=: =S^2 x S^2= hyperbolic matrix with elementary shear.
+- =odd-indefinite-swap=: =CP^2 # \overline{CP^2}= matrix with basis swap.
+- =odd-positive-shear=: =CP^2 # CP^2= matrix with elementary shear.
+
+These have =relation_status= =matrix-level-certified= and exact =GL(n,Z)= data.
+Their claim boundary remains: matrix-level basis-change fixture only; not a
+link-diagram handle-slide proof or closed invariant.
+
+* Reproducible Artifact
+
+Artifact path:
+
+#+begin_src text
+experiments/results/presentation-pairs/n45-presentation-pair-generator.json
+#+end_src
+
+Reproduce command:
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache \
+PYTHONPATH=src uv run python -m twisted_yetter.presentation_pairs \
+  --write experiments/results/presentation-pairs/n45-presentation-pair-generator.json
+#+end_src
+
+The artifact envelope records git commit, dirty flag, command/argv,
+tool versions, input hash, exact output, and claim-boundary notes.  The artifact
+generated during n45 cleanup was produced from commit =787eef0= with dirty flag
+=true= because the worker was instructed not to commit.
 
 * Trust Boundary
 
@@ -72,6 +136,9 @@ Passing the registry tests means:
 - n50 can see required pair fields in deterministic JSON;
 - toy identity, zero-decoration, nonzero \(Z/2\), and component-order dry-run
   shapes are represented;
+- the Hopf mixed-label relabel dry-run shape is represented;
+- matrix-level handle-slide/swap/shear fixtures are present with exact
+  =GL(n,Z)= basis and inverse matrices;
 - associated decorated-core case summaries come from n36 metadata;
 - JSON serialization is stable;
 - serialized JSON contains no float marker such as =.0=.
@@ -81,7 +148,7 @@ Passing the registry tests does not prove:
 - presentation equivalence;
 - Kirby move correctness;
 - decorated Kirby move invariance;
-- basis-change correctness;
+- link-diagram basis-change correctness;
 - link evaluation correctness;
 - closed 4-manifold invariant status;
 - exotic smooth-structure distinction.

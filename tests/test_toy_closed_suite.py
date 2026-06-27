@@ -119,13 +119,19 @@ def test_toy_cases_record_upstream_readiness_and_case_refs() -> None:
     unpaired = cases["s2xs2-hopf-z2-mixed-10"]
     assert unpaired["upstream_readiness"]["diagram_metadata"] is True
     assert unpaired["upstream_readiness"]["decorated_core_metadata"] is True
-    assert unpaired["upstream_readiness"]["presentation_pair_metadata"] is False
-    assert unpaired["presentation_pair_refs"] == []
+    assert unpaired["upstream_readiness"]["presentation_pair_metadata"] is True
+    assert unpaired["presentation_pair_refs"] == [
+        "component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run"
+    ]
     assert unpaired["blocked_reason_ids"] == [
         N24_GATE_BLOCKER_ID,
         N50_GATE_BLOCKER_ID,
-        MISSING_PAIR_METADATA_BLOCKER_ID,
     ]
+
+    still_unpaired = cases["unlink-two-component-z2-zero"]
+    assert still_unpaired["upstream_readiness"]["presentation_pair_metadata"] is False
+    assert still_unpaired["presentation_pair_refs"] == []
+    assert MISSING_PAIR_METADATA_BLOCKER_ID in still_unpaired["blocked_reason_ids"]
 
 
 def test_n55_refuses_closed_decorated_and_exotic_claim_promoters() -> None:

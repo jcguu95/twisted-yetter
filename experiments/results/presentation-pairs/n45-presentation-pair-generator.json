@@ -1,0 +1,1272 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.presentation_pairs",
+    "--write",
+    "experiments/results/presentation-pairs/n45-presentation-pair-generator.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.presentation_pairs --write experiments/results/presentation-pairs/n45-presentation-pair-generator.json",
+  "exact_output": {
+    "all_matrix_pairs_machine_checked": true,
+    "all_pairs_exact_json_no_float_markers": true,
+    "all_pairs_json_stable": true,
+    "all_pairs_relation_status": "candidate/dry-run",
+    "blocked_high_claims": [
+      "presentation equivalence theorem",
+      "decorated Kirby move proof",
+      "claim-supporting closed 4D invariant",
+      "exotic detection claim"
+    ],
+    "claim_boundary": "passing n45 means deterministic pair metadata exists for n50 dry runs; it is not evidence of equivalence, invariance, or exotic distinction",
+    "claim_level": "computed evidence scaffold",
+    "closed_4_manifold_claim_allowed": false,
+    "decorated_kirby_move_proof_claim_allowed": false,
+    "diagram_pair_count": 5,
+    "does_not_prove": [
+      "presentation equivalence",
+      "Kirby move proof",
+      "decorated Kirby move proof",
+      "basis-change proof",
+      "link evaluation",
+      "Kirby color sum",
+      "closed invariant",
+      "exotic claims"
+    ],
+    "downstream_consumer_nodes": [
+      "n50-decorated-kirby-move-gate"
+    ],
+    "exotic_detection_claim_allowed": false,
+    "ledger_note": "wiki/understandings/kirby-presentation-pair-generator.org",
+    "matrix_pair_count": 3,
+    "matrix_presentation_pairs": [
+      {
+        "basis_map": {
+          "claim_certified": true,
+          "determinant_abs": 1,
+          "inverse_matrix": [
+            [
+              1,
+              -1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "matrix": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "status": "exact GL(n,Z) basis matrix for matrix presentation only"
+        },
+        "claim_boundary": "machine-checkable matrix-level GL(n,Z) basis-change fixture only; not a link-diagram handle-slide proof or closed invariant",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "a": "a",
+            "b": "a+b"
+          },
+          "status": "component ids recorded from source to target matrix bases"
+        },
+        "decoration_transform_mod2": [
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "machine_checked_matrix_equivalence": true,
+        "metadata": {
+          "move": "elementary shear",
+          "node": "n45-presentation-pair-generator",
+          "scope": "matrix-level basis change fixture",
+          "source_form": "S2xS2 hyperbolic"
+        },
+        "pair_id": "hyperbolic-shear",
+        "pair_kind": "matrix-basis-change-pair",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "elementary shear",
+        "source": {
+          "component_ids": [
+            "a",
+            "b"
+          ],
+          "decorations_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "determinant": -1,
+          "matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "parity": "even",
+          "rank": 2,
+          "signature_triple": [
+            1,
+            1,
+            0
+          ]
+        },
+        "source_status": "presentation_moves.py matrix-level GL(n,Z) fixture; not a machine-readable link-diagram move",
+        "stable_json_roundtrip": true,
+        "target": {
+          "component_ids": [
+            "a",
+            "a+b"
+          ],
+          "decorations_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "determinant": -1,
+          "matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "parity": "even",
+          "rank": 2,
+          "signature_triple": [
+            1,
+            1,
+            0
+          ]
+        },
+        "transformed_decorations_mod2": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "basis_map": {
+          "claim_certified": true,
+          "determinant_abs": 1,
+          "inverse_matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "matrix": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "status": "exact GL(n,Z) basis matrix for matrix presentation only"
+        },
+        "claim_boundary": "machine-checkable matrix-level GL(n,Z) basis-change fixture only; not a link-diagram handle-slide proof or closed invariant",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "minus": "plus",
+            "plus": "minus"
+          },
+          "status": "component ids recorded from source to target matrix bases"
+        },
+        "decoration_transform_mod2": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "machine_checked_matrix_equivalence": true,
+        "metadata": {
+          "move": "basis swap",
+          "node": "n45-presentation-pair-generator",
+          "scope": "matrix-level basis change fixture",
+          "source_form": "CP2#anti-CP2"
+        },
+        "pair_id": "odd-indefinite-swap",
+        "pair_kind": "matrix-basis-change-pair",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "basis swap",
+        "source": {
+          "component_ids": [
+            "plus",
+            "minus"
+          ],
+          "decorations_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "determinant": -1,
+          "matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "parity": "odd",
+          "rank": 2,
+          "signature_triple": [
+            1,
+            1,
+            0
+          ]
+        },
+        "source_status": "presentation_moves.py matrix-level GL(n,Z) fixture; not a machine-readable link-diagram move",
+        "stable_json_roundtrip": true,
+        "target": {
+          "component_ids": [
+            "minus",
+            "plus"
+          ],
+          "decorations_mod2": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "determinant": -1,
+          "matrix": [
+            [
+              -1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "parity": "odd",
+          "rank": 2,
+          "signature_triple": [
+            1,
+            1,
+            0
+          ]
+        },
+        "transformed_decorations_mod2": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      {
+        "basis_map": {
+          "claim_certified": true,
+          "determinant_abs": 1,
+          "inverse_matrix": [
+            [
+              1,
+              -1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "matrix": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "status": "exact GL(n,Z) basis matrix for matrix presentation only"
+        },
+        "claim_boundary": "machine-checkable matrix-level GL(n,Z) basis-change fixture only; not a link-diagram handle-slide proof or closed invariant",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "x": "x",
+            "y": "x+y"
+          },
+          "status": "component ids recorded from source to target matrix bases"
+        },
+        "decoration_transform_mod2": [
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "machine_checked_matrix_equivalence": true,
+        "metadata": {
+          "move": "elementary shear",
+          "node": "n45-presentation-pair-generator",
+          "scope": "matrix-level basis change fixture",
+          "source_form": "CP2#CP2"
+        },
+        "pair_id": "odd-positive-shear",
+        "pair_kind": "matrix-basis-change-pair",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "elementary shear",
+        "source": {
+          "component_ids": [
+            "x",
+            "y"
+          ],
+          "decorations_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "determinant": 1,
+          "matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "parity": "odd",
+          "rank": 2,
+          "signature_triple": [
+            2,
+            0,
+            0
+          ]
+        },
+        "source_status": "presentation_moves.py matrix-level GL(n,Z) fixture; not a machine-readable link-diagram move",
+        "stable_json_roundtrip": true,
+        "target": {
+          "component_ids": [
+            "x",
+            "x+y"
+          ],
+          "decorations_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "determinant": 1,
+          "matrix": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "parity": "odd",
+          "rank": 2,
+          "signature_triple": [
+            2,
+            0,
+            0
+          ]
+        },
+        "transformed_decorations_mod2": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "does_not_prove_ok": true,
+      "matrix_pair_list_ok": true,
+      "missing_required_fields": [],
+      "pair_list_ok": true,
+      "scope": "presentation-pair registry metadata plus matrix-level basis-change fixtures only; no link-diagram Kirby move proof",
+      "valid": true
+    },
+    "node_id": "n45-kirby-presentation-pair-generator",
+    "ordinary_surgery_gate_status": "blocked",
+    "ordinary_surgery_gate_status_explanation": "n45 records presentation-pair metadata only and inherits the blocked n24 ordinary surgery gate",
+    "pair_count": 5,
+    "pair_kinds": [
+      "component-relabel-dry-run",
+      "matrix-basis-change-pair",
+      "presentation-sanity-pair"
+    ],
+    "pairs": [
+      {
+        "basis_map": {
+          "claim_certified": false,
+          "matrix": null,
+          "status": "swap-shaped placeholder; no component-order operation has been applied or proved"
+        },
+        "claim_boundary": "component lineage/relabel shape metadata only; the right side is not a generated transformed diagram",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "u1": "u2",
+            "u2": "u1"
+          },
+          "status": "recorded swap-shaped lineage for downstream field coverage only; the right fixture is not a transformed diagram"
+        },
+        "decorated_core_case_refs": [
+          "unlink-two-component-z2-mixed",
+          "unlink-two-component-z2-mixed"
+        ],
+        "decorated_core_cases": [
+          {
+            "case_id": "unlink-two-component-z2-mixed",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "1",
+              "0"
+            ],
+            "decoration_by_component": {
+              "u1": "1",
+              "u2": "0"
+            },
+            "diagram_id": "unlink-2",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          },
+          {
+            "case_id": "unlink-two-component-z2-mixed",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "1",
+              "0"
+            ],
+            "decoration_by_component": {
+              "u1": "1",
+              "u2": "0"
+            },
+            "diagram_id": "unlink-2",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          }
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "left": {
+          "component_ids": [
+            "u1",
+            "u2"
+          ],
+          "component_sector_ids": [
+            "1",
+            "0"
+          ],
+          "decorated_core_case_id": "unlink-two-component-z2-mixed",
+          "decoration_by_component": {
+            "u1": "1",
+            "u2": "0"
+          },
+          "diagram_id": "unlink-2",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+          "role": "left",
+          "zero_decoration": false
+        },
+        "move_metadata": {
+          "lineage_shape": "swap",
+          "move_class": "component-order-placeholder",
+          "operation_count": 0
+        },
+        "n50_required_fields_present": true,
+        "pair_id": "component-order-unlink-z2-mixed-dry-run",
+        "pair_kind": "component-relabel-dry-run",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "component-order-placeholder",
+        "right": {
+          "component_ids": [
+            "u1",
+            "u2"
+          ],
+          "component_sector_ids": [
+            "1",
+            "0"
+          ],
+          "decorated_core_case_id": "unlink-two-component-z2-mixed",
+          "decoration_by_component": {
+            "u1": "1",
+            "u2": "0"
+          },
+          "diagram_id": "unlink-2",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/unlink-two-component.json",
+          "role": "right",
+          "zero_decoration": false
+        },
+        "source_status": "schema/test-safe component-order dry-run; intentionally not a handle-slide or basis-change certificate",
+        "stable_json_roundtrip": true
+      },
+      {
+        "basis_map": {
+          "claim_certified": false,
+          "matrix": null,
+          "status": "swap-shaped placeholder; no H2 marking, GL(n,Z), or diagram operation is certified"
+        },
+        "claim_boundary": "component lineage/relabel shape metadata only; the right side is not a generated transformed diagram",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "s2_a": "s2_b",
+            "s2_b": "s2_a"
+          },
+          "status": "recorded swap-shaped lineage between two existing n36 cases; no diagram relabel operation is generated or certified"
+        },
+        "decorated_core_case_refs": [
+          "s2xs2-hopf-z2-mixed-10",
+          "s2xs2-hopf-z2-mixed-01"
+        ],
+        "decorated_core_cases": [
+          {
+            "case_id": "s2xs2-hopf-z2-mixed-10",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "1",
+              "0"
+            ],
+            "decoration_by_component": {
+              "s2_a": "1",
+              "s2_b": "0"
+            },
+            "diagram_id": "s2x-s2-hopf-zero-framed",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          },
+          {
+            "case_id": "s2xs2-hopf-z2-mixed-01",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "0",
+              "1"
+            ],
+            "decoration_by_component": {
+              "s2_a": "0",
+              "s2_b": "1"
+            },
+            "diagram_id": "s2x-s2-hopf-zero-framed",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          }
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "left": {
+          "component_ids": [
+            "s2_a",
+            "s2_b"
+          ],
+          "component_sector_ids": [
+            "1",
+            "0"
+          ],
+          "decorated_core_case_id": "s2xs2-hopf-z2-mixed-10",
+          "decoration_by_component": {
+            "s2_a": "1",
+            "s2_b": "0"
+          },
+          "diagram_id": "s2x-s2-hopf-zero-framed",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+          "role": "left",
+          "zero_decoration": false
+        },
+        "move_metadata": {
+          "decoration_shape": "Z/2 labels exchanged across component names",
+          "lineage_shape": "swap",
+          "move_class": "component-relabel-placeholder",
+          "operation_count": 0
+        },
+        "n50_required_fields_present": true,
+        "pair_id": "component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run",
+        "pair_kind": "component-relabel-dry-run",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "component-relabel-placeholder",
+        "right": {
+          "component_ids": [
+            "s2_a",
+            "s2_b"
+          ],
+          "component_sector_ids": [
+            "0",
+            "1"
+          ],
+          "decorated_core_case_id": "s2xs2-hopf-z2-mixed-01",
+          "decoration_by_component": {
+            "s2_a": "0",
+            "s2_b": "1"
+          },
+          "diagram_id": "s2x-s2-hopf-zero-framed",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+          "role": "right",
+          "zero_decoration": false
+        },
+        "source_status": "schema/test-safe relabel dry-run across two n36 Hopf cases; not a handle-slide, closed-equivalence, or exotic certificate",
+        "stable_json_roundtrip": true
+      },
+      {
+        "basis_map": {
+          "claim_certified": false,
+          "matrix": null,
+          "status": "1x1 identity placeholder; not a Kirby proof"
+        },
+        "claim_boundary": "same-fixture presentation sanity metadata only; useful for plumbing downstream comparisons but not a closed invariant claim",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "cp2_h": "cp2_h"
+          },
+          "status": "identity component lineage placeholder"
+        },
+        "decorated_core_case_refs": [
+          "cp2-z2-nonzero",
+          "cp2-z2-nonzero"
+        ],
+        "decorated_core_cases": [
+          {
+            "case_id": "cp2-z2-nonzero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "1"
+            ],
+            "decoration_by_component": {
+              "cp2_h": "1"
+            },
+            "diagram_id": "cp2-plus-one-framed-unknot",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          },
+          {
+            "case_id": "cp2-z2-nonzero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "1"
+            ],
+            "decoration_by_component": {
+              "cp2_h": "1"
+            },
+            "diagram_id": "cp2-plus-one-framed-unknot",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": false
+          }
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "left": {
+          "component_ids": [
+            "cp2_h"
+          ],
+          "component_sector_ids": [
+            "1"
+          ],
+          "decorated_core_case_id": "cp2-z2-nonzero",
+          "decoration_by_component": {
+            "cp2_h": "1"
+          },
+          "diagram_id": "cp2-plus-one-framed-unknot",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+          "role": "left",
+          "zero_decoration": false
+        },
+        "move_metadata": {
+          "move_class": "identity",
+          "operation_count": 0
+        },
+        "n50_required_fields_present": true,
+        "pair_id": "identity-cp2-z2-nonzero",
+        "pair_kind": "presentation-sanity-pair",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity/nonzero-Z2-decoration",
+        "right": {
+          "component_ids": [
+            "cp2_h"
+          ],
+          "component_sector_ids": [
+            "1"
+          ],
+          "decorated_core_case_id": "cp2-z2-nonzero",
+          "decoration_by_component": {
+            "cp2_h": "1"
+          },
+          "diagram_id": "cp2-plus-one-framed-unknot",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+          "role": "right",
+          "zero_decoration": false
+        },
+        "source_status": "schema/test-safe dry-run fixture metadata",
+        "stable_json_roundtrip": true
+      },
+      {
+        "basis_map": {
+          "claim_certified": false,
+          "matrix": null,
+          "status": "1x1 identity placeholder; not a Kirby proof"
+        },
+        "claim_boundary": "same-fixture presentation sanity metadata only; useful for plumbing downstream comparisons but not a closed invariant claim",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {
+            "cp2_h": "cp2_h"
+          },
+          "status": "identity component lineage placeholder"
+        },
+        "decorated_core_case_refs": [
+          "cp2-z2-zero",
+          "cp2-z2-zero"
+        ],
+        "decorated_core_cases": [
+          {
+            "case_id": "cp2-z2-zero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "0"
+            ],
+            "decoration_by_component": {
+              "cp2_h": "0"
+            },
+            "diagram_id": "cp2-plus-one-framed-unknot",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": true
+          },
+          {
+            "case_id": "cp2-z2-zero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [
+              "0"
+            ],
+            "decoration_by_component": {
+              "cp2_h": "0"
+            },
+            "diagram_id": "cp2-plus-one-framed-unknot",
+            "finite_group_id": "Z/2",
+            "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": true
+          }
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "left": {
+          "component_ids": [
+            "cp2_h"
+          ],
+          "component_sector_ids": [
+            "0"
+          ],
+          "decorated_core_case_id": "cp2-z2-zero",
+          "decoration_by_component": {
+            "cp2_h": "0"
+          },
+          "diagram_id": "cp2-plus-one-framed-unknot",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+          "role": "left",
+          "zero_decoration": true
+        },
+        "move_metadata": {
+          "move_class": "identity",
+          "operation_count": 0
+        },
+        "n50_required_fields_present": true,
+        "pair_id": "identity-cp2-z2-zero",
+        "pair_kind": "presentation-sanity-pair",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity/zero-decoration",
+        "right": {
+          "component_ids": [
+            "cp2_h"
+          ],
+          "component_sector_ids": [
+            "0"
+          ],
+          "decorated_core_case_id": "cp2-z2-zero",
+          "decoration_by_component": {
+            "cp2_h": "0"
+          },
+          "diagram_id": "cp2-plus-one-framed-unknot",
+          "finite_group_id": "Z/2",
+          "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+          "role": "right",
+          "zero_decoration": true
+        },
+        "source_status": "schema/test-safe dry-run fixture metadata",
+        "stable_json_roundtrip": true
+      },
+      {
+        "basis_map": {
+          "claim_certified": false,
+          "matrix": null,
+          "status": "empty identity placeholder; no H2 marking is certified"
+        },
+        "claim_boundary": "same-fixture presentation sanity metadata only; useful for plumbing downstream comparisons but not a closed invariant claim",
+        "claim_level": "computed evidence scaffold",
+        "component_lineage": {
+          "left_to_right": {},
+          "status": "identity on the empty component set; still not a closed invariant claim"
+        },
+        "decorated_core_case_refs": [
+          "s4-trivial-zero",
+          "s4-trivial-zero"
+        ],
+        "decorated_core_cases": [
+          {
+            "case_id": "s4-trivial-zero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [],
+            "decoration_by_component": {},
+            "diagram_id": "s4-empty-kirby-diagram",
+            "finite_group_id": "trivial",
+            "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": true
+          },
+          {
+            "case_id": "s4-trivial-zero",
+            "claim_level": "computed evidence scaffold",
+            "component_sector_ids": [],
+            "decoration_by_component": {},
+            "diagram_id": "s4-empty-kirby-diagram",
+            "finite_group_id": "trivial",
+            "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+            "metadata_validation": {
+              "blocked_claims_ok": true,
+              "claim_decision": {
+                "allowed": true,
+                "claim_boundary": "allowed only as non-theorem experimental or schema metadata",
+                "claim_type": "computed evidence scaffold",
+                "decision": "allowed",
+                "required_artifact_fields": [
+                  "claim_level",
+                  "source_status"
+                ]
+              },
+              "missing_required_fields": [],
+              "scope": "decorated-core input metadata only; no link evaluation",
+              "valid": true
+            },
+            "source_status": "computed evidence scaffold from n33/n34 metadata; candidate coefficients are NOT PROVED IN REPO and ordinary surgery gate remains blocked",
+            "zero_decoration": true
+          }
+        ],
+        "does_not_prove": [
+          "presentation equivalence",
+          "Kirby move proof",
+          "decorated Kirby move proof",
+          "basis-change proof",
+          "link evaluation",
+          "Kirby color sum",
+          "closed invariant",
+          "exotic claims"
+        ],
+        "exact_json_no_float_markers": true,
+        "left": {
+          "component_ids": [],
+          "component_sector_ids": [],
+          "decorated_core_case_id": "s4-trivial-zero",
+          "decoration_by_component": {},
+          "diagram_id": "s4-empty-kirby-diagram",
+          "finite_group_id": "trivial",
+          "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+          "role": "left",
+          "zero_decoration": true
+        },
+        "move_metadata": {
+          "move_class": "identity",
+          "operation_count": 0
+        },
+        "n50_required_fields_present": true,
+        "pair_id": "identity-s4-trivial-zero",
+        "pair_kind": "presentation-sanity-pair",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity",
+        "right": {
+          "component_ids": [],
+          "component_sector_ids": [],
+          "decorated_core_case_id": "s4-trivial-zero",
+          "decoration_by_component": {},
+          "diagram_id": "s4-empty-kirby-diagram",
+          "finite_group_id": "trivial",
+          "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+          "role": "right",
+          "zero_decoration": true
+        },
+        "source_status": "schema/test-safe dry-run fixture metadata",
+        "stable_json_roundtrip": true
+      }
+    ],
+    "presentation_equivalence_claim_allowed": false,
+    "proof_claim_allowed": false,
+    "schema": "twisted-yetter.kirby-presentation-pair-registry.v2",
+    "source_status": "n45 deterministic Kirby/link presentation-pair registry; diagram pairs are candidate metadata, while matrix pairs certify only recorded GL(n,Z) basis changes",
+    "status": "pass",
+    "upstream_nodes": [
+      "n35-twisted-decorated-core",
+      "n36-many-case-candidate-validation-suite"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/presentation_pairs.py",
+  "git": {
+    "commit": "787eef054ac87039bef2db36aee222b66f9adebf",
+    "dirty": true
+  },
+  "input_hash": "c97030f925874de51917b11751e10e2a58f03c4009e8af0c14207295c7c0162d",
+  "log_references": [],
+  "notes": [
+    "n45 records deterministic presentation-pair fixture metadata for n50.",
+    "Diagram/decorated-core pairs are candidate dry-run metadata only.",
+    "Matrix pairs certify only GL(n,Z) matrix-level basis changes, not link-diagram Kirby moves.",
+    "ordinary_surgery_gate_status remains blocked; no closed invariant or exotic claim is made."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.presentation_pairs --write experiments/results/presentation-pairs/n45-presentation-pair-generator.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

@@ -280,8 +280,8 @@ def validate_scalability_dry_run_artifact(
     inventory_ok = (
         isinstance(inventory, Mapping)
         and inventory.get("n36_case_count") == 8
-        and inventory.get("n45_pair_count") == 4
-        and inventory.get("n50_pair_classification_count") == 4
+        and inventory.get("n45_pair_count") == 5
+        and inventory.get("n50_pair_classification_count") == 5
         and inventory.get("n55_toy_case_count") == 8
         and inventory.get("n70_candidate_count") == 4
         and inventory.get("real_exotic_input_count") == 0
