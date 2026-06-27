@@ -17,7 +17,7 @@
       "closed 4-manifold invariant value claim"
     ],
     "blocked_reason_ids": [
-      "n70-exotic-input-certification-data-blocked",
+      "n70-exotic-input-certification-blocked",
       "n55-toy-closed-suite-blocked",
       "n50-decorated-kirby-move-gate-blocked",
       "n24-ordinary-surgery-gate-blocked",
@@ -25,17 +25,22 @@
     ],
     "blockers": [
       {
-        "claim_boundary": "n75 cannot route into n80 while n70 is data-blocked",
-        "observed": "data-blocked",
-        "reason_id": "n70-exotic-input-certification-data-blocked",
+        "claim_boundary": "n75 cannot route into n80 while n70 is blocked/source-needed",
+        "observed": "blocked",
+        "reason_id": "n70-exotic-input-certification-blocked",
         "required": "pass with one certified n80 target",
         "source_node": "n70-exotic-input-certification",
         "status": "blocked",
         "upstream_artifact": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
         "upstream_blocker_reason_ids": [
+          "source-snapshot-needed",
+          "exact-citations-needed",
           "missing-machine-readable-exotic-kirby-diagrams",
           "missing-source-page-capture",
           "missing-h2-homeomorphism-marking-certificate",
+          "n72-source-capture-blocked",
+          "n73-diagram-digitization-blocked",
+          "n74-h2-marking-certification-blocked",
           "n55-toy-closed-suite-blocked",
           "n24-n50-upstream-blocked"
         ]
@@ -101,7 +106,7 @@
     "input_statuses": {
       "candidate_validation_suite": "pass",
       "decorated_kirby_gate": "blocked",
-      "exotic_input_certification": "data-blocked",
+      "exotic_input_certification": "blocked",
       "ordinary_surgery_gate": "blocked",
       "presentation_pair_registry": "pass",
       "toy_closed_suite": "blocked"
@@ -125,10 +130,12 @@
         "blocked_claims_ok": true,
         "blockers_ok": true,
         "candidate_list_ok": true,
+        "dependency_statuses_ok": true,
         "input_schemas_ok": true,
         "missing_required_fields": [],
+        "pass_conditions_ok": true,
         "route_ok": true,
-        "scope": "data-blocked exotic input ledger only; no n80 computation route",
+        "scope": "blocked exotic input ledger only; no certified input and no n80 route",
         "valid": true
       },
       "presentation_pair_registry": {
@@ -171,7 +178,8 @@
         "n24": "blocked",
         "n50": "blocked",
         "n55": "blocked",
-        "n70": "data-blocked"
+        "n70": "blocked",
+        "n70_source_status": "source-needed"
       },
       "n80-exotic-computation": "blocked",
       "real_exotic_scaling_benchmark": "blocked",
@@ -220,13 +228,13 @@
   },
   "generator_script": "src/twisted_yetter/scalability_dry_run.py",
   "git": {
-    "commit": "900ab7143f80c4550dd8d1af02485434c0e10837",
+    "commit": "19bd25bc91a775d922c0dcaddabaa2fb6e4f708a",
     "dirty": true
   },
-  "input_hash": "b025b163b58230b5508c9cbe860781ace77ba6cad2afb669fdb0b2e29c32020f",
+  "input_hash": "10b39a8bb66e3b2a0ffeaf61e400316a39a386514018eddb79fcaead09fbc0e0",
   "log_references": [],
   "notes": [
-    "n75 is dry-run-blocked because n70 is data-blocked.",
+    "n75 is dry-run-blocked because n70 is blocked/source-needed.",
     "No real exotic input computation, download, or benchmark is performed."
   ],
   "repo_root": "/Users/jin/data/local/projects/twisted-yetter",

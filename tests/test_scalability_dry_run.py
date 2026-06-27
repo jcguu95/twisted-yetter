@@ -49,7 +49,7 @@ def test_n75_records_dry_run_blocked_status_and_upstream_statuses() -> None:
         "presentation_pair_registry": "pass",
         "decorated_kirby_gate": "blocked",
         "toy_closed_suite": "blocked",
-        "exotic_input_certification": "data-blocked",
+        "exotic_input_certification": "blocked",
     }
     assert artifact["metadata_validation"]["valid"] is True
 
@@ -109,7 +109,7 @@ def test_n75_blockers_reference_n70_n55_n50_and_n24() -> None:
     assert artifact["blocked_reason_ids"] == expected
     blockers = {blocker["reason_id"]: blocker for blocker in artifact["blockers"]}
     assert set(blockers) == set(expected)
-    assert blockers[N70_DATA_BLOCKED_BLOCKER_ID]["observed"] == "data-blocked"
+    assert blockers[N70_DATA_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
     assert blockers[N55_TOY_CLOSED_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
     assert blockers[N50_DECORATED_GATE_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
     assert blockers[N24_ORDINARY_SURGERY_BLOCKED_BLOCKER_ID]["observed"] == "blocked"

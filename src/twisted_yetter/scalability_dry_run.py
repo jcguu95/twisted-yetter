@@ -59,7 +59,7 @@ SCALABILITY_DRY_RUN_NOTE: Final = "wiki/understandings/scalability-dry-run.org"
 NODE_ID: Final = "n75-scalability-dry-run"
 CLAIM_LEVEL: Final = "dry-run/readiness ledger"
 
-N70_DATA_BLOCKED_BLOCKER_ID: Final = "n70-exotic-input-certification-data-blocked"
+N70_DATA_BLOCKED_BLOCKER_ID: Final = "n70-exotic-input-certification-blocked"
 N55_TOY_CLOSED_BLOCKED_BLOCKER_ID: Final = "n55-toy-closed-suite-blocked"
 N50_DECORATED_GATE_BLOCKED_BLOCKER_ID: Final = "n50-decorated-kirby-move-gate-blocked"
 N24_ORDINARY_SURGERY_BLOCKED_BLOCKER_ID: Final = "n24-ordinary-surgery-gate-blocked"
@@ -373,7 +373,7 @@ def scalability_dry_run_certificate(
         ),
         repo_root=str(root.resolve()),
         notes=[
-            "n75 is dry-run-blocked because n70 is data-blocked.",
+            "n75 is dry-run-blocked because n70 is blocked/source-needed.",
             "No real exotic input computation, download, or benchmark is performed.",
         ],
     )
@@ -462,6 +462,7 @@ def _readiness_routes(
             "n50": decorated_gate.get("status"),
             "n55": toy_suite.get("status"),
             "n70": exotic_gate.get("status"),
+            "n70_source_status": exotic_gate.get("source_status"),
         },
         "claim_boundary": (
             "only metadata-size/readiness counting is available; real exotic "
@@ -486,7 +487,9 @@ def _blockers(
             "required": "pass with one certified n80 target",
             "upstream_artifact": EXOTIC_INPUT_CERTIFICATION_ARTIFACT,
             "upstream_blocker_reason_ids": exotic_gate.get("blocker_reason_ids", []),
-            "claim_boundary": "n75 cannot route into n80 while n70 is data-blocked",
+            "claim_boundary": (
+                "n75 cannot route into n80 while n70 is blocked/source-needed"
+            ),
         },
         {
             "reason_id": N55_TOY_CLOSED_BLOCKED_BLOCKER_ID,

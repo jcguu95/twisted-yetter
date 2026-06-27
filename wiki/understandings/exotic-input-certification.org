@@ -1,19 +1,24 @@
 #+TITLE: n70 Exotic Input Certification
-#+DATE: 2026-06-26
+#+DATE: 2026-06-27
 #+LANGUAGE: zh-TW
 #+OPTIONS: toc:2 num:t ^:nil
 
 * Status
 
 - decision graph node: =n70-exotic-input-certification=
-- verdict: =data-blocked=
-- recommended route: =n93-data-blocker= or a narrowly scoped data/literature acquisition node before any exotic-pair computation
+- verdict: =blocked=
+- source status: =source-needed=
+- recommended route: manual/offline source acquisition, then rerun =n72=, =n73=, and =n74= before =n70=
 - claim level: =executable gate/blocked ledger=
 - implementation: =src/twisted_yetter/exotic_input_certification.py=
 - tests: =tests/test_exotic_input_certification.py=
 - artifact: =experiments/inputs/exotic-pairs/n70-exotic-input-certification.json=
-- git commit at audit start: =462c2b6d7617f9b2c66912c19c2154a5a3a677a7=
-- dirty state at audit start: clean
+- upstream accepted context:
+  - =n65= accepted at commit =1681dd3=
+  - =n72= accepted at commit =22a54a6=
+  - =n73= accepted at commit =c7b04ac=
+  - =n74= accepted at commit =19bd25b=
+- current worker instruction: do not commit
 
 This node now has an executable Python gate.  It checks only whether the
 current repository already contains enough machine-readable and auditable
@@ -23,49 +28,53 @@ reopen the invariant architecture.
 
 The checked-in JSON artifact is intentionally a =fail= certificate at the
 outer artifact-envelope level, with inner exact output
-=status: data-blocked=.  In graph terms this means: =n70= did not pass and
-must not route to =n80-exotic-computation=.
+=status: blocked= and =source_status: source-needed=.  In graph terms this
+means: =n70= did not pass, certified no exotic input, and must not route to
+=n80-exotic-computation=.
 
 * Inputs Read
 
 - =AGENTS.md=
 - =twisted-yetter.org=
-- =wiki/roadmaps/exotic-input-scout.org=
-- =wiki/references/exotic-input-candidates-2026-06-26.org=
-- =wiki/understandings/toy-closed-suite.org=
+- =src/twisted_yetter/exotic_input_scout.py= / =n65=
+- =src/twisted_yetter/dolgachev_source_capture.py= / =n72=
+- =src/twisted_yetter/exotic_diagram_digitization.py= / =n73=
+- =src/twisted_yetter/exotic_h2_marking_certification.py= / =n74=
 - =src/twisted_yetter/ordinary_surgery_gate.py=
 - =src/twisted_yetter/decorated_kirby_gate.py=
 - =src/twisted_yetter/toy_closed_suite.py=
 - current repo file listing under =experiments/=
 
-Combined input hash for this certification pass:
-
-#+begin_src text
-c3023b7477cd3b5b0989ca4ea7700c7d329fb263d299ddfcd28f353b94a9e403
-#+end_src
-
 Current executable ledger input hash:
 
 #+begin_src text
-808bc6d81af9b0f7c6862142b37c5e83209912b658f80e3d9890de98eee87098
+recorded in =experiments/inputs/exotic-pairs/n70-exotic-input-certification.json=
 #+end_src
 
 The executable gate consumes current upstream statuses:
 
 | Upstream node | Current status consumed by n70 | Effect |
 |---------------+--------------------------------+--------|
+| =n65-exotic-input-scout= | =scout-data-blocked= | candidate inventory only; no candidate certified |
+| =n72-dolgachev-source-capture= | =blocked= / =source-needed= | source snapshot and exact citations missing |
+| =n73-exotic-diagram-digitization= | =blocked= | no machine-readable diagrams for either side |
+| =n74-exotic-h2-marking-certification= | =blocked= | no H2/homeomorphism marking certificate |
 | =n24-ordinary-surgery-gate= | =blocked= | ordinary closed 4D surgery support is not available |
 | =n50-decorated-kirby-move-gate= | =blocked= | decorated Kirby move/presentation evidence is not available |
 | =n55-toy-closed-suite= | =blocked= | toy closed metadata cannot be promoted to exotic closed-invariant evidence |
-| =n65-exotic-input-scout= | scout only | candidate ranking exists, but no candidate is certified for computation |
 
 * Executable Blocker IDs
 
 The gate records these stable blocker reason ids:
 
+- =source-snapshot-needed=
+- =exact-citations-needed=
 - =missing-machine-readable-exotic-kirby-diagrams=
 - =missing-source-page-capture=
 - =missing-h2-homeomorphism-marking-certificate=
+- =n72-source-capture-blocked=
+- =n73-diagram-digitization-blocked=
+- =n74-h2-marking-certification-blocked=
 - =n55-toy-closed-suite-blocked=
 - =n24-n50-upstream-blocked=
 
@@ -107,9 +116,13 @@ Certification result: =not certified=.
 
 Repo-local evidence currently available:
 
-- Project plan says Akbulut gives an explicit no-1/no-3-handle route and cork
-  twist description.
 - n65 records this as promising but =SOURCE NEEDED=.
+- n72 records only a source-needed reference checklist; no captured
+  PDF/snapshot/hash/page/figure/theorem ids exist.
+- n73 records a blocked digitization schema; no machine-readable diagram,
+  component id list, PD code, braid word, or component lineage exists.
+- n74 records a blocked H2/homeomorphism marking checklist; no basis,
+  intersection matrix, identification matrix, or cork action is certified.
 - No machine-readable diagram or handle data exists under =experiments/inputs/=.
 - No captured source metadata, PDF hash, figure/page record, or component
   lineage certificate exists in =wiki/references/=.
@@ -195,13 +208,14 @@ pass.
 
 * Verdict
 
-=n70= verdict is =data-blocked=.
+=n70= verdict is =blocked= with =source_status: source-needed=.
 
 The repository is not ready to compute twisted Yetter values on an exotic pair.
 The correct next action is not to guess a diagram or choose a basis manually.
-The manager should route to a data/literature acquisition and digitization node,
-with Dolgachev \(E(1)_{2,3}\) vs \(E(1)\) as the first target unless a source
-audit shows it is unusable.
+The manager should route to offline source acquisition and then rerun the
+already explicit =n72 -> n73 -> n74 -> n70= data path, with Dolgachev
+\(E(1)_{2,3}\) vs \(E(1)\) as the first target unless the source audit shows
+it is unusable.
 
 The executable gate explicitly blocks:
 
@@ -215,9 +229,10 @@ The executable gate explicitly blocks:
 This note and its JSON artifact are therefore not an exotic input pass and not
 a statement that any machine-readable exotic-pair diagrams have been obtained.
 
-* Recommended Next Node Contract
+* Recommended Next Data Contract
 
-Suggested next node: =n93-data-blocker= or =n72-dolgachev-source-capture=.
+Suggested next work: source acquisition / reference capture, then rerun
+=n72-dolgachev-source-capture=.
 
 Minimum output of that node should be:
 
