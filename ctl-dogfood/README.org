@@ -69,12 +69,12 @@ claim:graph:computation-first-v1
 graph payload 的來源 preimage 是：
 
 #+begin_example
-graphs/computation-first-v7.json
+graphs/computation-first-v8.json
 #+end_example
 
 舊的 =graphs/computation-first-v1.json=、=graphs/computation-first-v2.json= 與
 =graphs/computation-first-v3.json=、=graphs/computation-first-v4.json=、=graphs/computation-first-v5.json=、
-=graphs/computation-first-v6.json=
+=graphs/computation-first-v6.json=、=graphs/computation-first-v7.json=
 仍保留，因為它們是
 先前 admitted graph revisions 的 preimage。admission 之後，normative source 是 CTL object store 裡對應的
 =ctl/revision/1= object；human-readable Org / Mermaid graph 若之後產生，都只算 projection。
@@ -106,6 +106,13 @@ guardrail / blocked ledger，卻還沒有真正 hard implementation node 來產�
 =n18b-su2-2-link-evaluator-core= 並設為 current priority；=n18= 退回 evaluator
 acceptance gate。Kirby color、twisted/decorated colors、closed suite 與 exotic data
 工作仍是必要下游，但不能再替代 bare link evaluator core。
+
+v8 記錄 =n18b= 已由 commit =137d449= 驗收（=pytest=: 219 passed；CTL verify:
+status ok），並把 current priority 推進到 =n18-colored-framed-link-evaluator-gate=。
+這個 gate 仍是 restricted core gate：它只驗收 empty / unlink / framed unknot /
+positive Hopf controls 走同一個 evaluator entry point，並要求 general crossings 與
+dotted components structured block；它不宣稱 general planar RT evaluator、Kirby color、
+twisted formula 或 exotic input。
 
 * Current Graph Projection
 
