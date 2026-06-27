@@ -1,0 +1,102 @@
+#+TITLE: Many-Case Candidate Validation Suite
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:3 num:t ^:nil
+
+* Status
+
+- decision graph node: =n36-many-case-candidate-validation-suite=
+- status: =computed evidence scaffold= / =metadata validation suite=
+- implementation: =src/twisted_yetter/candidate_validation_suite.py=
+- tests: =tests/test_candidate_validation_suite.py=
+- upstream decorated-core input: =src/twisted_yetter/decorated_core.py=
+- inherited blocker: =n24-ordinary-surgery-gate= remains =blocked=
+
+This node builds a deterministic many-case summary over n35 decorated-core
+input artifacts.  It is not a proof, not link evaluation, not a Kirby color sum,
+not a decorated Kirby-move proof, not a closed invariant, and not exotic-pair
+evidence.
+
+* Suite Schema
+
+The schema id is:
+
+#+begin_src text
+twisted-yetter.many-case-candidate-validation-suite.v1
+#+end_src
+
+The suite records:
+
+- =claim_level= =computed evidence scaffold=;
+- =source_status= identifying this as an n36 metadata-validation suite;
+- inherited =ordinary_surgery_gate_status= from n24;
+- one summary per fixed toy case;
+- deterministic JSON stability and no-float-marker checks;
+- explicit blocked high claims.
+
+Each case summary records at least:
+
+- =case_id=;
+- =fixture_path=;
+- =diagram_id=;
+- =finite_group_id=;
+- =decoration_by_component=;
+- =zero_decoration=;
+- =component_sector_ids=;
+- =component_sector_metadata=;
+- =metadata_validation=;
+- =claim_level= and =source_status=.
+
+* Cases Covered
+
+Current default cases:
+
+- =s4-trivial-zero= using =s4-empty.json= and trivial \(A\);
+- =cp2-z2-zero= using =cp2-plus-one-framed-unknot.json= and \(Z/2\) decoration
+  \(0\);
+- =cp2-z2-nonzero= using the same CP2 toy fixture and \(Z/2\) decoration \(1\);
+- =s2xs2-hopf-z2-mixed-10= with component sectors \(1,0\);
+- =s2xs2-hopf-z2-mixed-01= with component sectors \(0,1\);
+- =unlink-two-component-z2-zero= with sectors \(0,0\);
+- =unlink-two-component-z2-mixed= with sectors \(1,0\);
+- =unlink-two-component-z2-nonzero= with sectors \(1,1\).
+
+These are deterministic decorated-core input summaries only.  They check that
+component decorations route to candidate Omega_a sector ids consistently across
+several toy fixtures.
+
+* Trust Boundary
+
+Passing the suite means:
+
+- n35 decorated-core artifacts for the listed cases pass metadata validation;
+- JSON serialization is stable;
+- serialized JSON contains no float marker such as =.0=;
+- source/claim boundary fields are present;
+- zero and nonzero \(Z/2\) sectors are represented.
+
+Passing the suite does not mean:
+
+- the candidate \(\Omega_a\) formula is proved;
+- a link was evaluated;
+- a Kirby color sum was computed;
+- a decorated Kirby move was checked;
+- a closed 4-manifold invariant exists;
+- any exotic smooth pair has been distinguished.
+
+* Unblocks and Remaining Blockers
+
+Unblocks:
+
+- later toy closed-suite work can consume stable many-case decorated-core
+  metadata summaries instead of constructing ad hoc decoration inputs;
+- presentation/pair generator nodes can reuse the case summary shape for
+  metadata-only dry runs.
+
+Still blocked:
+
+- =n24-ordinary-surgery-gate=;
+- source-audited Yetter \(Z/2\) surgical formula;
+- theorem-level general finite \(A\) \(\Omega_a\) formula;
+- decorated Kirby-move / presentation invariance gate;
+- any closed invariant or exotic-pair computation claim.
