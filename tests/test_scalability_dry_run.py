@@ -69,14 +69,44 @@ def test_n75_toy_scale_inventory_counts_existing_metadata_only() -> None:
     assert inventory["n50_evaluator_input_pair_count"] == 0
     assert inventory["n55_toy_case_count"] == 8
     assert inventory["n70_candidate_count"] == 4
+    assert inventory["n70_certified_input_count"] == 0
     assert inventory["real_exotic_input_count"] == 0
     assert inventory["certified_n80_target_count"] == 0
+    assert inventory["metadata_only_estimated_term_counts"] == {
+        "basis": (
+            "counts already present in n36 metadata; no real diagram "
+            "benchmark, crossing estimate, or exotic sector enumeration"
+        ),
+        "toy_case_rows": 8,
+        "toy_component_slots": 12,
+        "toy_component_sector_slots": 12,
+        "toy_pair_rows": 5,
+        "real_exotic_sector_terms": None,
+        "real_exotic_link_evaluation_terms": None,
+        "real_exotic_estimate_status": "not-estimated-n70-blocked",
+    }
     assert "repo-local toy/candidate metadata" in inventory["counting_scope"]
 
 
 def test_n75_blocks_n80_real_benchmark_and_high_claims() -> None:
     artifact = scalability_dry_run_artifact()
 
+    assert artifact["readiness_summary"] == {
+        "status": "dry-run-blocked",
+        "n70_status": "blocked",
+        "n70_source_status": "source-needed",
+        "n70_certified_input_count": 0,
+        "n70_selected_computation_target": None,
+        "n70_candidate_count": 4,
+        "n70_any_candidate_certified": False,
+        "n80_route_allowed": False,
+        "real_input_sizing_available": False,
+        "real_benchmark_available": False,
+        "next_unblock_route": (
+            "manual/offline source acquisition, then rerun n72/n73/n74 before "
+            "n70; n75 remains dry-run-blocked until n70 has a pass artifact"
+        ),
+    }
     assert artifact["readiness_routes"]["n80-exotic-computation"] == "blocked"
     assert artifact["readiness_routes"]["real_exotic_scaling_benchmark"] == "blocked"
     assert artifact["n80_exotic_computation_route_allowed"] is False
@@ -109,7 +139,13 @@ def test_n75_blockers_reference_n70_n55_n50_and_n24() -> None:
     assert artifact["blocked_reason_ids"] == expected
     blockers = {blocker["reason_id"]: blocker for blocker in artifact["blockers"]}
     assert set(blockers) == set(expected)
-    assert blockers[N70_DATA_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
+    assert blockers[N70_DATA_BLOCKED_BLOCKER_ID]["observed"] == {
+        "status": "blocked",
+        "source_status": "source-needed",
+        "certified_input_count": 0,
+        "selected_computation_target": None,
+        "n80_route_allowed": False,
+    }
     assert blockers[N55_TOY_CLOSED_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
     assert blockers[N50_DECORATED_GATE_BLOCKED_BLOCKER_ID]["observed"] == "blocked"
     assert blockers[N24_ORDINARY_SURGERY_BLOCKED_BLOCKER_ID]["observed"] == "blocked"

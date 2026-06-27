@@ -188,6 +188,7 @@ def scalability_dry_run_artifact(
             n55=toy_suite,
             n70=exotic_gate,
         ),
+        "readiness_summary": _readiness_summary(exotic_gate=exotic_gate),
         "readiness_routes": _readiness_routes(
             ordinary_gate=ordinary_gate,
             decorated_gate=decorated_gate,
@@ -248,6 +249,7 @@ def validate_scalability_dry_run_artifact(
         "input_schemas",
         "input_statuses",
         "toy_scale_inventory",
+        "readiness_summary",
         "readiness_routes",
         "blocked_reason_ids",
         "blockers",
@@ -286,7 +288,20 @@ def validate_scalability_dry_run_artifact(
         and inventory.get("n50_evaluator_input_pair_count") == 0
         and inventory.get("n55_toy_case_count") == 8
         and inventory.get("n70_candidate_count") == 4
+        and inventory.get("n70_certified_input_count") == 0
         and inventory.get("real_exotic_input_count") == 0
+        and inventory.get("metadata_only_estimated_term_counts", {}).get(
+            "toy_component_sector_slots"
+        )
+        == 12
+    )
+    readiness = artifact.get("readiness_summary", {})
+    readiness_ok = (
+        isinstance(readiness, Mapping)
+        and readiness.get("n70_status") == "blocked"
+        and readiness.get("n70_source_status") == "source-needed"
+        and readiness.get("n70_certified_input_count") == 0
+        and readiness.get("n80_route_allowed") is False
     )
     routes = artifact.get("readiness_routes", {})
     routes_ok = (
@@ -314,6 +329,7 @@ def validate_scalability_dry_run_artifact(
             and input_schemas_ok
             and blockers_ok
             and inventory_ok
+            and readiness_ok
             and routes_ok
             and blocked_claims_ok
         ),
@@ -321,6 +337,7 @@ def validate_scalability_dry_run_artifact(
         "input_schemas_ok": input_schemas_ok,
         "blockers_ok": blockers_ok,
         "toy_scale_inventory_ok": inventory_ok,
+        "readiness_summary_ok": readiness_ok,
         "routes_ok": routes_ok,
         "blocked_claims_ok": blocked_claims_ok,
         "scope": "n75 dry-run/readiness ledger only; no n80 computation or benchmark",
@@ -432,6 +449,20 @@ def _toy_scale_inventory(
         ),
         "n55_toy_case_count": _int_field(n55, "case_count", len(toy_cases)),
         "n70_candidate_count": _int_field(n70, "candidate_count", len(candidates)),
+        "n70_certified_input_count": _int_field(n70, "certified_input_count", 0),
+        "metadata_only_estimated_term_counts": {
+            "basis": (
+                "counts already present in n36 metadata; no real diagram "
+                "benchmark, crossing estimate, or exotic sector enumeration"
+            ),
+            "toy_case_rows": _int_field(n36, "case_count", len(cases)),
+            "toy_component_slots": component_slots,
+            "toy_component_sector_slots": sector_slots,
+            "toy_pair_rows": _int_field(n45, "pair_count", len(pairs)),
+            "real_exotic_sector_terms": None,
+            "real_exotic_link_evaluation_terms": None,
+            "real_exotic_estimate_status": "not-estimated-n70-blocked",
+        },
         "real_exotic_input_count": 0,
         "certified_n80_target_count": 0,
         "counting_scope": (
@@ -441,6 +472,29 @@ def _toy_scale_inventory(
         "real_input_scope": (
             "no certified real exotic Kirby diagrams or H2 markings are "
             "available to size"
+        ),
+    }
+
+
+def _readiness_summary(*, exotic_gate: Mapping[str, object]) -> dict[str, object]:
+    return {
+        "status": "dry-run-blocked",
+        "n70_status": exotic_gate.get("status"),
+        "n70_source_status": exotic_gate.get("source_status"),
+        "n70_certified_input_count": _int_field(
+            exotic_gate, "certified_input_count", 0
+        ),
+        "n70_selected_computation_target": exotic_gate.get(
+            "selected_computation_target"
+        ),
+        "n70_candidate_count": _int_field(exotic_gate, "candidate_count", 0),
+        "n70_any_candidate_certified": exotic_gate.get("any_candidate_certified"),
+        "n80_route_allowed": False,
+        "real_input_sizing_available": False,
+        "real_benchmark_available": False,
+        "next_unblock_route": (
+            "manual/offline source acquisition, then rerun n72/n73/n74 before "
+            "n70; n75 remains dry-run-blocked until n70 has a pass artifact"
         ),
     }
 
@@ -483,7 +537,19 @@ def _blockers(
             "reason_id": N70_DATA_BLOCKED_BLOCKER_ID,
             "status": "blocked",
             "source_node": "n70-exotic-input-certification",
-            "observed": exotic_gate.get("status", "missing"),
+            "observed": {
+                "status": exotic_gate.get("status", "missing"),
+                "source_status": exotic_gate.get("source_status", "missing"),
+                "certified_input_count": _int_field(
+                    exotic_gate, "certified_input_count", 0
+                ),
+                "selected_computation_target": exotic_gate.get(
+                    "selected_computation_target"
+                ),
+                "n80_route_allowed": exotic_gate.get(
+                    "n80_exotic_computation_route_allowed"
+                ),
+            },
             "required": "pass with one certified n80 target",
             "upstream_artifact": EXOTIC_INPUT_CERTIFICATION_ARTIFACT,
             "upstream_blocker_reason_ids": exotic_gate.get("blocker_reason_ids", []),

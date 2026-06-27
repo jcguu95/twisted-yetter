@@ -26,7 +26,13 @@
     "blockers": [
       {
         "claim_boundary": "n75 cannot route into n80 while n70 is blocked/source-needed",
-        "observed": "blocked",
+        "observed": {
+          "certified_input_count": 0,
+          "n80_route_allowed": false,
+          "selected_computation_target": null,
+          "source_status": "source-needed",
+          "status": "blocked"
+        },
         "reason_id": "n70-exotic-input-certification-blocked",
         "required": "pass with one certified n80 target",
         "source_node": "n70-exotic-input-certification",
@@ -164,6 +170,7 @@
       "blockers_ok": true,
       "input_schemas_ok": true,
       "missing_required_fields": [],
+      "readiness_summary_ok": true,
       "routes_ok": true,
       "scope": "n75 dry-run/readiness ledger only; no n80 computation or benchmark",
       "toy_scale_inventory_ok": true,
@@ -186,6 +193,19 @@
       "reason_id": "n75-dry-run-blocked-by-n70",
       "toy_metadata_counting": "available"
     },
+    "readiness_summary": {
+      "n70_any_candidate_certified": false,
+      "n70_candidate_count": 4,
+      "n70_certified_input_count": 0,
+      "n70_selected_computation_target": null,
+      "n70_source_status": "source-needed",
+      "n70_status": "blocked",
+      "n80_route_allowed": false,
+      "next_unblock_route": "manual/offline source acquisition, then rerun n72/n73/n74 before n70; n75 remains dry-run-blocked until n70 has a pass artifact",
+      "real_benchmark_available": false,
+      "real_input_sizing_available": false,
+      "status": "dry-run-blocked"
+    },
     "real_exotic_input_scaling_claim_allowed": false,
     "required_unblock_artifacts": [
       "n70 pass artifact selecting one certified exotic pair target",
@@ -203,6 +223,16 @@
     "toy_scale_inventory": {
       "certified_n80_target_count": 0,
       "counting_scope": "deterministic counts over existing repo-local toy/candidate metadata only",
+      "metadata_only_estimated_term_counts": {
+        "basis": "counts already present in n36 metadata; no real diagram benchmark, crossing estimate, or exotic sector enumeration",
+        "real_exotic_estimate_status": "not-estimated-n70-blocked",
+        "real_exotic_link_evaluation_terms": null,
+        "real_exotic_sector_terms": null,
+        "toy_case_rows": 8,
+        "toy_component_sector_slots": 12,
+        "toy_component_slots": 12,
+        "toy_pair_rows": 5
+      },
       "n36_case_count": 8,
       "n36_total_component_slots": 12,
       "n36_total_sector_slots": 12,
@@ -214,6 +244,7 @@
       "n50_pair_classification_count": 8,
       "n55_toy_case_count": 8,
       "n70_candidate_count": 4,
+      "n70_certified_input_count": 0,
       "real_exotic_input_count": 0,
       "real_input_scope": "no certified real exotic Kirby diagrams or H2 markings are available to size"
     },
@@ -228,10 +259,10 @@
   },
   "generator_script": "src/twisted_yetter/scalability_dry_run.py",
   "git": {
-    "commit": "19bd25bc91a775d922c0dcaddabaa2fb6e4f708a",
+    "commit": "064d6919f309ab7ed088f49006594fa991d986bd",
     "dirty": true
   },
-  "input_hash": "10b39a8bb66e3b2a0ffeaf61e400316a39a386514018eddb79fcaead09fbc0e0",
+  "input_hash": "3353a02f71c404a65e5e4f48100b52c2e8e08a0c9c9996f6d3d1475807a0e5d4",
   "log_references": [],
   "notes": [
     "n75 is dry-run-blocked because n70 is blocked/source-needed.",
