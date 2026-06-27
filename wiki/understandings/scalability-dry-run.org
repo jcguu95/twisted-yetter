@@ -1,0 +1,132 @@
+#+TITLE: n75 Scalability Dry-Run Ledger
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n75-scalability-dry-run=
+- verdict: =dry-run-blocked=
+- claim level: =dry-run/readiness ledger=
+- implementation: =src/twisted_yetter/scalability_dry_run.py=
+- tests: =tests/test_scalability_dry_run.py=
+- artifact: =experiments/results/scalability/n75-scalability-dry-run.json=
+
+本節點是 repo-local pipeline 的 scalability / readiness ledger。它只對目前
+已存在的 toy metadata、candidate metadata、gate status 做 deterministic counting
+與 blocker 整理。它不是 real exotic input 的 performance benchmark，也不是
+twisted Yetter exotic computation。
+
+因為 =n70-exotic-input-certification= 目前是 =data-blocked=，=n75= 的正確
+狀態也是 =dry-run-blocked=。這個狀態明確表示：目前不能進入
+=n80-exotic-computation=，也不能宣稱已能計算 exotic pair。
+
+* Consumed Upstream Statuses
+
+Executable ledger 直接或透過 =n70= 消耗以下 upstream 狀態：
+
+| Node | Status consumed by n75 | Role |
+|------+------------------------+------|
+| =n24-ordinary-surgery-gate= | =blocked= | ordinary closed surgery support 尚未 pass |
+| =n36-many-case-candidate-validation-suite= | =pass= | toy decorated-core metadata inventory |
+| =n45-kirby-presentation-pair-generator= | =pass= | toy presentation-pair metadata inventory |
+| =n50-decorated-kirby-move-gate= | =blocked= | decorated Kirby move/presentation gate 尚未 pass |
+| =n55-toy-closed-suite= | =blocked= | toy closed suite 仍是 blocked ledger |
+| =n70-exotic-input-certification= | =data-blocked= | 沒有 certified exotic pair input |
+
+=n75= 參照 =experiments/inputs/exotic-pairs/n70-exotic-input-certification.json=
+作為目前 exotic input certification 的 repo-local artifact record。若將來
+=n70= 產生 pass artifact，=n75= 才能改寫為下一階段的 real-input sizing /
+benchmark design；目前不做這件事。
+
+* Toy-Scale Inventory
+
+目前 executable artifact 記錄的 toy/candidate metadata size 為：
+
+| Source node | Count |
+|-------------+-------|
+| =n36= case count | 8 |
+| =n45= pair count | 4 |
+| =n50= pair classification count | 4 |
+| =n55= toy case count | 8 |
+| =n70= candidate count | 4 |
+| certified real exotic input count | 0 |
+| certified =n80= target count | 0 |
+
+這些數字只描述目前 repo 中可以穩定讀取與測試的 toy/candidate metadata。
+它們不是 runtime scaling numbers，也不是 large exotic Kirby diagram 的 component /
+crossing / sector growth estimate。
+
+* Blocked Claims
+
+=n75= 明確拒絕下列 claims：
+
+- =n80= exotic computation route；
+- exotic smooth-structure detection claim；
+- marked / unmarked exotic distinction claim；
+- real exotic inputs 的 performance 或 scaling success claim；
+- closed 4-manifold invariant value claim。
+
+測試會檢查 claim-promoter flags 會丟出錯誤，避免未來程式 accidentally 把
+dry-run ledger 當作 calculator 或 benchmark 入口。
+
+* Blocker IDs
+
+目前 stable blocker reason ids：
+
+- =n70-exotic-input-certification-data-blocked=
+- =n55-toy-closed-suite-blocked=
+- =n50-decorated-kirby-move-gate-blocked=
+- =n24-ordinary-surgery-gate-blocked=
+- =no-real-exotic-input-size-observed=
+
+其中最重要的是 =n70-exotic-input-certification-data-blocked=：沒有 certified
+machine-readable exotic Kirby input、source capture、以及 =H_2= / homeomorphism
+marking certificate 時，=n75= 只能做 readiness ledger。
+
+* What Is Still Missing Before n80
+
+=n80-exotic-computation= 仍至少需要：
+
+1. =n70= pass artifact，選定一組 certified exotic pair target。
+2. 兩邊 machine-readable Kirby / handle data：component ids、framings、
+   dotted status、orientation、PD code / braid / equivalent handle data。
+3. 來源 reference records，含 exact page / figure / theorem ids 與 hash。
+4. =H_2= / homeomorphism marking certificate，含 integer basis matrices。
+5. =n24= ordinary surgery gate pass certificate。
+6. =n50= decorated Kirby move gate pass certificate。
+7. =n55= toy closed suite pass certificate；在此之前 toy closed metadata 不可被提升成
+   closed invariant evidence。
+8. 真實 input 存在之後另立 benchmark artifact；=n75= 的 toy counts 不可替代。
+
+* Reproducibility
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache \
+  uv run python -m twisted_yetter.scalability_dry_run \
+  --write experiments/results/scalability/n75-scalability-dry-run.json
+
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache \
+  uv run python -m pytest tests/test_scalability_dry_run.py
+#+end_src
+
+Current graph verification:
+
+#+begin_src sh
+cd ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache \
+  uv run python scripts/verify.py
+#+end_src
+
+* Trust Boundary
+
+這份 ledger 的 strongest legitimate statement 是：
+
+#+begin_quote
+Current repo-local pipeline 有 deterministic toy/candidate metadata counting；
+但 n70 data-blocked，因此 real exotic computation、real-input benchmark、以及
+exotic detection claim 全部 blocked。
+#+end_quote
+
+不要把它改寫成「scalability pass」、「可計算 exotic pair」、或「已證明 route
+可以 scale 到 Dolgachev / R8」。

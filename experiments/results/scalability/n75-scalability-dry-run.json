@@ -1,0 +1,235 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.scalability_dry_run",
+    "--write",
+    "experiments/results/scalability/n75-scalability-dry-run.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.scalability_dry_run --write experiments/results/scalability/n75-scalability-dry-run.json",
+  "exact_output": {
+    "artifact_path": "experiments/results/scalability/n75-scalability-dry-run.json",
+    "blocked_claims": [
+      "n80 exotic computation route",
+      "exotic smooth-structure detection claim",
+      "marked or unmarked exotic distinction claim",
+      "performance/scaling success claim for real exotic inputs",
+      "closed 4-manifold invariant value claim"
+    ],
+    "blocked_reason_ids": [
+      "n70-exotic-input-certification-data-blocked",
+      "n55-toy-closed-suite-blocked",
+      "n50-decorated-kirby-move-gate-blocked",
+      "n24-ordinary-surgery-gate-blocked",
+      "no-real-exotic-input-size-observed"
+    ],
+    "blockers": [
+      {
+        "claim_boundary": "n75 cannot route into n80 while n70 is data-blocked",
+        "observed": "data-blocked",
+        "reason_id": "n70-exotic-input-certification-data-blocked",
+        "required": "pass with one certified n80 target",
+        "source_node": "n70-exotic-input-certification",
+        "status": "blocked",
+        "upstream_artifact": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
+        "upstream_blocker_reason_ids": [
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-source-page-capture",
+          "missing-h2-homeomorphism-marking-certificate",
+          "n55-toy-closed-suite-blocked",
+          "n24-n50-upstream-blocked"
+        ]
+      },
+      {
+        "claim_boundary": "toy closed metadata cannot be treated as closed invariant performance evidence",
+        "observed": "blocked",
+        "reason_id": "n55-toy-closed-suite-blocked",
+        "required": "pass",
+        "source_node": "n55-toy-closed-suite",
+        "status": "blocked",
+        "upstream_blocker_reason_ids": [
+          "n24-ordinary-surgery-gate-blocked",
+          "n50-decorated-kirby-move-gate-blocked"
+        ]
+      },
+      {
+        "claim_boundary": "presentation/dry-run pairs do not certify decorated Kirby move scalability",
+        "observed": "blocked",
+        "reason_id": "n50-decorated-kirby-move-gate-blocked",
+        "required": "pass",
+        "source_node": "n50-decorated-kirby-move-gate",
+        "status": "blocked"
+      },
+      {
+        "claim_boundary": "ordinary closed surgery support is still blocked upstream",
+        "observed": "blocked",
+        "reason_id": "n24-ordinary-surgery-gate-blocked",
+        "required": "pass",
+        "source_node": "n24-ordinary-surgery-gate",
+        "status": "blocked",
+        "upstream_blocker_reason_ids": [
+          "n21-source-slots-unfilled",
+          "n22-local-convention-only",
+          "n23-s2xs2-crossing-blocked",
+          "closed-claim-refused"
+        ]
+      },
+      {
+        "claim_boundary": "toy metadata counts are not a performance/scaling success claim for real exotic inputs",
+        "observed": "zero certified real exotic input targets",
+        "reason_id": "no-real-exotic-input-size-observed",
+        "required": "at least one certified real exotic input target",
+        "source_node": "n75-scalability-dry-run",
+        "status": "blocked"
+      }
+    ],
+    "claim_boundary": "n75 is an executable dry-run/readiness ledger over existing repo-local metadata; it is not n80, not an exotic calculation, and not evidence of real exotic-input scalability",
+    "claim_level": "dry-run/readiness ledger",
+    "closed_4_manifold_invariant_claim_allowed": false,
+    "exotic_detection_claim_allowed": false,
+    "input_artifacts": {
+      "n70_exotic_input_certification": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json"
+    },
+    "input_schemas": {
+      "candidate_validation_suite": "twisted-yetter.many-case-candidate-validation-suite.v1",
+      "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v1",
+      "exotic_input_certification": "twisted-yetter.exotic-input-certification.v1",
+      "ordinary_surgery_gate": "twisted-yetter.ordinary-surgery-gate.v1",
+      "presentation_pair_registry": "twisted-yetter.kirby-presentation-pair-registry.v1",
+      "toy_closed_suite": "twisted-yetter.toy-closed-suite-ledger.v1"
+    },
+    "input_statuses": {
+      "candidate_validation_suite": "pass",
+      "decorated_kirby_gate": "blocked",
+      "exotic_input_certification": "data-blocked",
+      "ordinary_surgery_gate": "blocked",
+      "presentation_pair_registry": "pass",
+      "toy_closed_suite": "blocked"
+    },
+    "input_validations": {
+      "candidate_validation_suite": {
+        "blocked_claims_ok": true,
+        "case_list_ok": true,
+        "missing_required_fields": [],
+        "scope": "suite metadata validation only; no link evaluation",
+        "valid": true
+      },
+      "decorated_kirby_gate": {
+        "blocked_claims_ok": true,
+        "missing_required_fields": [],
+        "pair_list_ok": true,
+        "scope": "decorated Kirby move gate scaffold only; no theorem proof",
+        "valid": true
+      },
+      "exotic_input_certification": {
+        "blocked_claims_ok": true,
+        "blockers_ok": true,
+        "candidate_list_ok": true,
+        "input_schemas_ok": true,
+        "missing_required_fields": [],
+        "route_ok": true,
+        "scope": "data-blocked exotic input ledger only; no n80 computation route",
+        "valid": true
+      },
+      "presentation_pair_registry": {
+        "blocked_claims_ok": true,
+        "does_not_prove_ok": true,
+        "missing_required_fields": [],
+        "pair_list_ok": true,
+        "scope": "presentation-pair dry-run metadata only; no Kirby move proof",
+        "valid": true
+      },
+      "toy_closed_suite": {
+        "blocked_claims_ok": true,
+        "blockers_ok": true,
+        "case_list_ok": true,
+        "input_schemas_ok": true,
+        "missing_required_fields": [],
+        "scope": "blocked ledger only; no closed 4-manifold invariant values",
+        "valid": true
+      }
+    },
+    "ledger_note": "wiki/understandings/scalability-dry-run.org",
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "blockers_ok": true,
+      "input_schemas_ok": true,
+      "missing_required_fields": [],
+      "routes_ok": true,
+      "scope": "n75 dry-run/readiness ledger only; no n80 computation or benchmark",
+      "toy_scale_inventory_ok": true,
+      "valid": true
+    },
+    "n80_exotic_computation_route_allowed": false,
+    "node_id": "n75-scalability-dry-run",
+    "performance_benchmark_claim_allowed": false,
+    "readiness_routes": {
+      "claim_boundary": "only metadata-size/readiness counting is available; real exotic calculation and benchmark routes remain closed",
+      "consumed_statuses": {
+        "n24": "blocked",
+        "n50": "blocked",
+        "n55": "blocked",
+        "n70": "data-blocked"
+      },
+      "n80-exotic-computation": "blocked",
+      "real_exotic_scaling_benchmark": "blocked",
+      "reason_id": "n75-dry-run-blocked-by-n70",
+      "toy_metadata_counting": "available"
+    },
+    "real_exotic_input_scaling_claim_allowed": false,
+    "required_unblock_artifacts": [
+      "n70 pass artifact selecting one certified exotic pair target",
+      "machine-readable Kirby or handle data for both sides of the selected pair",
+      "source reference records with exact page/figure/theorem ids and hashes",
+      "H2/homeomorphism marking certificate with integer basis matrices",
+      "n24 ordinary surgery gate pass certificate",
+      "n50 decorated Kirby move gate pass certificate",
+      "n55 closed toy suite pass certificate before promoting beyond toy metadata",
+      "separate real-input benchmark artifact after real certified inputs exist"
+    ],
+    "schema": "twisted-yetter.scalability-dry-run.v1",
+    "source_status": "n75 consumes repo-local n36/n45/n50/n55/n70 metadata and records toy-scale inventory plus blockers; no downloads, no real exotic input computation, and no performance benchmark are performed",
+    "status": "dry-run-blocked",
+    "toy_scale_inventory": {
+      "certified_n80_target_count": 0,
+      "counting_scope": "deterministic counts over existing repo-local toy/candidate metadata only",
+      "n36_case_count": 8,
+      "n36_total_component_slots": 12,
+      "n36_total_sector_slots": 12,
+      "n36_unique_diagram_count": 4,
+      "n36_unique_fixture_count": 4,
+      "n45_pair_count": 4,
+      "n50_pair_classification_count": 4,
+      "n55_toy_case_count": 8,
+      "n70_candidate_count": 4,
+      "real_exotic_input_count": 0,
+      "real_input_scope": "no certified real exotic Kirby diagrams or H2 markings are available to size"
+    },
+    "upstream_nodes": [
+      "n24-ordinary-surgery-gate",
+      "n36-many-case-candidate-validation-suite",
+      "n45-kirby-presentation-pair-generator",
+      "n50-decorated-kirby-move-gate",
+      "n55-toy-closed-suite",
+      "n70-exotic-input-certification"
+    ]
+  },
+  "generator_script": "src/twisted_yetter/scalability_dry_run.py",
+  "git": {
+    "commit": "9d98703cd9c789fbf76b1fd734c341163a33d8c4",
+    "dirty": true
+  },
+  "input_hash": "67b33c6e5f20c9cde749590b4072fc953eb7acb4fa0e247697626243b3ab2c4a",
+  "log_references": [],
+  "notes": [
+    "n75 is dry-run-blocked because n70 is data-blocked.",
+    "No real exotic input computation, download, or benchmark is performed."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.scalability_dry_run --write experiments/results/scalability/n75-scalability-dry-run.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}
