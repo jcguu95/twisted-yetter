@@ -1,0 +1,263 @@
+{
+  "argv": [
+    "python",
+    "inline-generate-n23-known-ordinary-controls-artifact"
+  ],
+  "command": "PYTHONPATH=src UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python - <<PY n23 known ordinary controls artifact generator",
+  "elapsed_seconds": 0,
+  "exact_output": {
+    "cases": [
+      {
+        "case_id": "S4-empty",
+        "closed_4_manifold_claim_allowed": false,
+        "closed_claim_source_status": "SOURCE NEEDED for closed claim",
+        "component_ids": [],
+        "crossing_count": 0,
+        "diagram_id": "s4-empty-kirby-diagram",
+        "fixture_path": "experiments/inputs/toy-diagrams/s4-empty.json",
+        "framings": [],
+        "linking_matrix": [],
+        "n22_can_compute": true,
+        "n22_certificate_summary": {
+          "claim_level": "experimental/local-convention",
+          "closed_4_manifold_claim_allowed": false,
+          "handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+          "normalization_status": "SOURCE NEEDED",
+          "schema": "twisted-yetter.experimental-ordinary-kirby-color.v1",
+          "sector_count": 1,
+          "total_value": {
+            "kind": "Q(sqrt2)[zeta_16]_sparse_sum",
+            "terms": [
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 0
+              }
+            ]
+          }
+        },
+        "ordinary_control_role": "empty Kirby diagram ordinary closed-control sanity target",
+        "ordinary_scaffold_status": "computed scaffold",
+        "source_audited_ordinary_value_status": "SOURCE NEEDED for closed claim",
+        "source_needed_expectation": "source audit must identify the empty-diagram normalization before this can be used as an S4 ordinary invariant value",
+        "status": "computed scaffold",
+        "value_convention_status": "experimental/local-convention",
+        "value_status": "computed scaffold"
+      },
+      {
+        "case_id": "CP2-plus-one-unknot",
+        "closed_4_manifold_claim_allowed": false,
+        "closed_claim_source_status": "SOURCE NEEDED for closed claim",
+        "component_ids": [
+          "cp2_h"
+        ],
+        "crossing_count": 0,
+        "diagram_id": "cp2-plus-one-framed-unknot",
+        "fixture_path": "experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json",
+        "framings": [
+          1
+        ],
+        "linking_matrix": [
+          [
+            1
+          ]
+        ],
+        "n22_can_compute": true,
+        "n22_certificate_summary": {
+          "claim_level": "experimental/local-convention",
+          "closed_4_manifold_claim_allowed": false,
+          "handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+          "normalization_status": "SOURCE NEEDED",
+          "schema": "twisted-yetter.experimental-ordinary-kirby-color.v1",
+          "sector_count": 3,
+          "total_value": {
+            "kind": "Q(sqrt2)[zeta_16]_sparse_sum",
+            "terms": [
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 0
+              },
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "2"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 3
+              },
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "1"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 8
+              }
+            ]
+          }
+        },
+        "ordinary_control_role": "+1-framed unknot ordinary closed-control sanity target",
+        "ordinary_scaffold_status": "computed scaffold",
+        "source_audited_ordinary_value_status": "SOURCE NEEDED for closed claim",
+        "source_needed_expectation": "source audit must identify the +1 framing, signature anomaly, and global normalization before this can be used as a CP2 value",
+        "status": "computed scaffold",
+        "value_convention_status": "experimental/local-convention",
+        "value_status": "computed scaffold"
+      },
+      {
+        "case_id": "S2xS2-hopf",
+        "closed_4_manifold_claim_allowed": false,
+        "closed_claim_source_status": "SOURCE NEEDED for closed claim",
+        "component_ids": [
+          "s2_a",
+          "s2_b"
+        ],
+        "crossing_count": 2,
+        "diagram_id": "s2x-s2-hopf-zero-framed",
+        "fixture_path": "experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json",
+        "framings": [
+          0,
+          0
+        ],
+        "linking_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "n22_can_compute": true,
+        "n22_certificate_summary": {
+          "claim_level": "experimental/local-convention",
+          "closed_4_manifold_claim_allowed": false,
+          "handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+          "normalization_status": "SOURCE NEEDED",
+          "schema": "twisted-yetter.experimental-ordinary-kirby-color.v1",
+          "sector_count": 9,
+          "total_value": {
+            "kind": "Q(sqrt2)[zeta_16]_sparse_sum",
+            "terms": [
+              {
+                "coefficient": {
+                  "kind": "Q(sqrt2)",
+                  "rational": {
+                    "type": "integer",
+                    "value": "4"
+                  },
+                  "sqrt2": {
+                    "type": "integer",
+                    "value": "0"
+                  }
+                },
+                "exponent": 0
+              }
+            ]
+          }
+        },
+        "ordinary_control_role": "0-framed Hopf-pair ordinary closed-control sanity target",
+        "ordinary_scaffold_status": "computed scaffold",
+        "source_audited_ordinary_value_status": "SOURCE NEEDED for closed claim",
+        "source_needed_expectation": "source audit must identify ordinary surgery normalization, signature/anomaly behavior, and closed-scope treatment before the local Hopf sector sum can be used as an S2xS2 value",
+        "status": "computed scaffold",
+        "value_convention_status": "experimental/local-convention",
+        "value_status": "computed scaffold"
+      }
+    ],
+    "claim_level": "source-aware audit/gate ledger",
+    "closed_4_manifold_claim_allowed": false,
+    "does_not_unblock": [
+      "claim-supporting ordinary closed 4D invariant values",
+      "decorated or twisted formula claims",
+      "exotic-pair computation claims"
+    ],
+    "ledger_note": "wiki/understandings/known-ordinary-4d-controls.org",
+    "n24_blocked_slots": [
+      "kirby_color_coefficients",
+      "global_dimension_and_normalization",
+      "signature_anomaly_framing_convention",
+      "handle_slide_invariance_proof_scope",
+      "one_two_cancellation_treatment",
+      "two_three_cancellation_treatment",
+      "closed_4_manifold_vs_2_handlebody_distinction"
+    ],
+    "node_id": "n23-known-ordinary-4d-controls",
+    "ordinary_scaffold_claim_level": "experimental/local-convention",
+    "ordinary_scaffold_handle_scope": "restricted-core-supported-no-dotted-2-handle-framed-link-only",
+    "ordinary_scaffold_normalization_status": "SOURCE NEEDED",
+    "schema": "twisted-yetter.known-ordinary-4d-controls-ledger.v1",
+    "source_status_by_slot": {
+      "closed_4_manifold_vs_2_handlebody_distinction": "SOURCE NEEDED",
+      "global_dimension_and_normalization": "SOURCE NEEDED",
+      "handle_slide_invariance_proof_scope": "SOURCE NEEDED",
+      "kirby_color_coefficients": "SOURCE NEEDED",
+      "one_two_cancellation_treatment": "SOURCE NEEDED",
+      "signature_anomaly_framing_convention": "SOURCE NEEDED",
+      "two_three_cancellation_treatment": "SOURCE NEEDED"
+    },
+    "status": "pass",
+    "unblocks": [
+      "n24-ordinary-surgery-gate source-audit planning",
+      "deterministic regression checks for n22 no-crossing controls"
+    ],
+    "value_status_labels": {
+      "closed_claim_source_status": "SOURCE NEEDED for closed claim",
+      "computed_scaffold": "computed scaffold",
+      "local_convention": "experimental/local-convention"
+    }
+  },
+  "finished_at_utc": "2026-06-27T04:55:00Z",
+  "generator_script": "inline Python using twisted_yetter.ordinary_control_gate.known_ordinary_control_ledger",
+  "git": {
+    "commit": "44349d262e595cab64f9697027c9672d3181ca15",
+    "dirty": true
+  },
+  "input_hash": "977c9c3401acd34c390b2d4569e6df5bc4ba7ca1a133e4fcabb48314e45793aa",
+  "log_references": [],
+  "notes": [
+    "n23 is a regression/control ledger, not an ordinary surgery theorem gate.",
+    "All values are computed scaffold / experimental-local-convention / SOURCE NEEDED for closed claim.",
+    "n24 ordinary surgery gate remains blocked until source slots and normalization are filled."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "PYTHONPATH=src UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest tests/test_known_ordinary_controls.py",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-06-27T04:55:00Z",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

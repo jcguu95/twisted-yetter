@@ -28,8 +28,14 @@ KNOWN_ORDINARY_CONTROL_SCHEMA: Final = (
 KNOWN_CONTROL_LEDGER_PATH: Final = (
     "wiki/understandings/known-ordinary-4d-controls.org"
 )
+KNOWN_CONTROL_ARTIFACT_PATH: Final = (
+    "experiments/results/known-ordinary-controls/su2-level2-local-convention.json"
+)
 TOY_FIXTURE_DIR: Final = Path("experiments/inputs/toy-diagrams")
 SOURCE_NEEDED_SLOTS: Final = tuple(SOURCE_STATUS_BY_SLOT)
+VALUE_STATUS: Final = "computed scaffold"
+VALUE_CONVENTION_STATUS: Final = CLAIM_LEVEL
+CLOSED_VALUE_SOURCE_STATUS: Final = "SOURCE NEEDED for closed claim"
 
 
 @dataclass(frozen=True)
@@ -99,6 +105,11 @@ def known_ordinary_control_ledger(
         "ordinary_scaffold_normalization_status": NORMALIZATION_STATUS,
         "closed_4_manifold_claim_allowed": False,
         "source_status_by_slot": dict(SOURCE_STATUS_BY_SLOT),
+        "value_status_labels": {
+            "computed_scaffold": VALUE_STATUS,
+            "local_convention": VALUE_CONVENTION_STATUS,
+            "closed_claim_source_status": CLOSED_VALUE_SOURCE_STATUS,
+        },
         "cases": cases,
         "n24_blocked_slots": list(SOURCE_NEEDED_SLOTS),
         "unblocks": [
@@ -125,7 +136,10 @@ def _case_payload(control: KnownOrdinaryControl) -> dict[str, object]:
         "framings": list(diagram.framings),
         "crossing_count": len(diagram.crossings),
         "linking_matrix": [list(row) for row in diagram.linking_matrix()],
-        "source_audited_ordinary_value_status": "source-needed",
+        "value_status": VALUE_STATUS,
+        "value_convention_status": VALUE_CONVENTION_STATUS,
+        "closed_claim_source_status": CLOSED_VALUE_SOURCE_STATUS,
+        "source_audited_ordinary_value_status": CLOSED_VALUE_SOURCE_STATUS,
         "source_needed_expectation": control.source_needed_expectation,
         "closed_4_manifold_claim_allowed": False,
     }
@@ -144,8 +158,8 @@ def _case_payload(control: KnownOrdinaryControl) -> dict[str, object]:
 
     return {
         **base_payload,
-        "status": "computed scaffold",
-        "ordinary_scaffold_status": "computed scaffold",
+        "status": VALUE_STATUS,
+        "ordinary_scaffold_status": VALUE_STATUS,
         "n22_can_compute": True,
         "n22_certificate_summary": {
             "schema": certificate["schema"],
@@ -169,9 +183,13 @@ def _load_diagram(fixture_path: str) -> LinkDiagram:
 
 
 __all__ = [
+    "CLOSED_VALUE_SOURCE_STATUS",
+    "KNOWN_CONTROL_ARTIFACT_PATH",
     "KNOWN_CONTROL_LEDGER_PATH",
     "KNOWN_ORDINARY_CONTROL_SCHEMA",
     "KNOWN_ORDINARY_CONTROLS",
     "SOURCE_NEEDED_SLOTS",
+    "VALUE_CONVENTION_STATUS",
+    "VALUE_STATUS",
     "known_ordinary_control_ledger",
 ]

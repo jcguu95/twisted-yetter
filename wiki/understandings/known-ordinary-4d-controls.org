@@ -37,16 +37,20 @@ claim remains refused while the source slots from
 
 * Control Ledger
 
-| control | fixture | n22 status | source-audited ordinary value status | n24 gate consequence |
+| control | fixture | n23 value labels | n22 local-convention sector value | n24 gate consequence |
 |-
-| =S4 empty= | =experiments/inputs/toy-diagrams/s4-empty.json= | =computed scaffold=; total \(1\) in the n22 local convention | =source-needed=; empty-diagram normalization must be page-level sourced | closed value blocked by global normalization and closed 4-manifold-vs-2-handlebody slots |
-| =CP2 +1 unknot= | =experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json= | =computed scaffold=; total \(1 + 2 zeta_16^3 + zeta_16^8\) in the n22 local convention | =source-needed=; +1 framing, signature anomaly, and global normalization must be page-level sourced | closed value blocked by signature/framing, global normalization, blow-up/down, and closed-scope slots |
-| =S2xS2 Hopf fixture= | =experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json= | =computed scaffold=; total \(4\) in the n22 local convention through the accepted Hopf core | =source-needed=; ordinary surgery normalization and closed-scope treatment must be sourced or proved | ordinary surgery gate remains blocked by source / normalization slots, not by the Hopf sector implementation |
+| =S4 empty= | =experiments/inputs/toy-diagrams/s4-empty.json= | =computed scaffold= / =experimental/local-convention= / =SOURCE NEEDED for closed claim= | total \(1\) in the n22 local convention | closed value blocked by global normalization and closed 4-manifold-vs-2-handlebody slots |
+| =CP2 +1 unknot= | =experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json= | =computed scaffold= / =experimental/local-convention= / =SOURCE NEEDED for closed claim= | total \(1 + 2 zeta_16^3 + zeta_16^8\) in the n22 local convention | closed value blocked by signature/framing, global normalization, blow-up/down, and closed-scope slots |
+| =S2xS2 Hopf fixture= | =experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json= | =computed scaffold= / =experimental/local-convention= / =SOURCE NEEDED for closed claim= | total \(4\) in the n22 local convention through the accepted Hopf core | ordinary surgery gate remains blocked by source / normalization slots, not by the Hopf sector implementation |
 
 The =computed scaffold= values above are regression data for the current code
 path only.  They are useful for deterministic tests and for catching accidental
 changes in the local convention.  They are not normalized ordinary invariant
 values of \(S^4\), \(CP^2\), or \(S^2\times S^2\).
+
+Generated artifact:
+
+- =experiments/results/known-ordinary-controls/su2-level2-local-convention.json=
 
 * Programmatic Gate
 
