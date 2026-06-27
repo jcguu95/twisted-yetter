@@ -1,0 +1,106 @@
+#+TITLE: Toy Diagram Fixtures
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* 狀態
+
+狀態標籤：=n13-toy-diagram-fixtures= / =working understanding= / =fixture layer only=
+
+本頁整理 =n12-kirby-diagram-schema= 產生的 toy Kirby/link diagram JSON inputs，作為
+後續 link evaluator gate 的 fixture inventory。這些 fixture 是 machine-readable
+schema sanity controls，不是 RT link evaluator output、Kirby-color sum、ordinary
+Yetter invariant，也不是 twisted Yetter invariant result。
+
+Python schema implementation：=src/twisted_yetter/link_diagram.py=
+
+Fixture directory：=experiments/inputs/toy-diagrams/=
+
+Coverage：=tests/test_toy_diagram_fixtures.py= 會讀取該目錄所有 =*.json= fixture，
+檢查 inventory 是否完整、schema tag、component ids、framings、crossing ids，以及
+由 schema sanity layer 導出的 linking matrix。
+
+* Fixture inventory
+
+** =s4-empty.json=
+
+- diagram id：=s4-empty-kirby-diagram=
+- role：empty Kirby diagram control；確保 evaluator / surgery gate 能處理 no-component
+  input，而不是假設至少一個 link component。
+- expected handle/link sanity checks：component count =0=、crossing count =0=、
+  linking matrix =()=。
+- trust boundary：這只表示 empty input 可被 schema layer 載入；不是 =S^4= invariant
+  normalization 的計算結果。
+
+** =cp2-plus-one-framed-unknot.json=
+
+- diagram id：=cp2-plus-one-framed-unknot=
+- role：single-component framed unknot control；檢查 component metadata、integer
+  framing、diagonal linking matrix entry。
+- expected handle/link sanity checks：component ids =("cp2_h")=、framing =+1=、
+  crossing count =0=、linking matrix =((1))=。
+- trust boundary：這是 =CP^2= toy Kirby input 的 framing sanity fixture；不是
+  ordinary 或 twisted invariant value。
+
+** =unlink-two-component.json=
+
+- diagram id：=unlink-2=
+- role：multi-component unlink control；檢查多 component ids、zero off-diagonal
+  linking、以及沒有 crossing 時的 matrix behavior。
+- expected handle/link sanity checks：component ids =("u1" "u2")=、framings =(0 0)=、
+  crossing count =0=、linking matrix =((0 0) (0 0))=。
+- trust boundary：這只測 disconnected zero-linking input 的 schema loading；不宣稱
+  closed 4-manifold invariant。
+
+** =hopf-link.json=
+
+- diagram id：=hopf-linking-1=
+- role：positive Hopf-style link control；檢查 inter-component signed crossing sum
+  對應 off-diagonal linking number =+1=。
+- expected handle/link sanity checks：component ids =("h1" "h2")=、framings =(0 0)=、
+  two positive inter-component crossings、linking matrix =((0 1) (1 0))=。
+- trust boundary：crossing record 是目前 schema 的 minimal PD-code-like record，尚非
+  完整 planar adjacency encoding；此 fixture 不測 Reidemeister / RT evaluation。
+
+** =s2x-s2-hopf-zero-framed.json=
+
+- diagram id：=s2x-s2-hopf-zero-framed=
+- role：=S^2 x S^2= toy Kirby input control；和 generic Hopf link 使用同型 sanity
+  matrix，但保留語意化 component ids，供後續 ordinary Kirby-color / surgery controls
+  對照。
+- expected handle/link sanity checks：component ids =("s2_a" "s2_b")=、framings
+  =(0 0)=、two positive inter-component crossings、linking matrix =((0 1) (1 0))=。
+- trust boundary：這不是 =S^2 x S^2= 的 invariant result，也不處理 3/4-handle
+  normalization。
+
+* Reproducibility
+
+本 fixture layer 的基本檢查：
+
+#+begin_src sh
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python -m pytest
+#+end_src
+
+CTL graph verification：
+
+#+begin_src sh
+cd ctl-dogfood
+UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache uv run python scripts/verify.py
+#+end_src
+
+* Downstream use
+
+此 node unblock 的不是 invariant computation，而是後續 evaluator gate 可以用的一組小型、
+可讀、可測的 input controls。直接受益的 downstream nodes 包含：
+
+- =n16-elementary-link-controls=：empty / unknot / unlink controls。
+- =n17-hopf-and-crossing-controls=：Hopf crossing-sign 與 linking sanity controls。
+- =n18-colored-framed-link-evaluator-gate=：要求 evaluator 從 machine-readable
+  link diagram input 進入，而不是從手寫圖像或 matrix-only statistic 進入。
+
+* 明確非目標
+
+- 不新增 evaluator。
+- 不新增 Kirby formula 或 twisted formula。
+- 不把 linking matrix sanity check 當作 link invariant evaluator。
+- 不改動 =n12= 產生的 toy diagram topology；本層只 inventory 與測試既有 JSON fixtures。
