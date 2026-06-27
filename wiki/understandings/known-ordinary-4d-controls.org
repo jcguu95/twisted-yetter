@@ -1,0 +1,90 @@
+#+TITLE: Known Ordinary 4D Controls Source-Aware Ledger
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n23-known-ordinary-4d-controls=
+- status: =source-aware audit/gate ledger= / =computed scaffold where n22 supports it=
+- implementation helper: =src/twisted_yetter/ordinary_control_gate.py=
+- tests: =tests/test_known_ordinary_controls.py=
+- upstream scaffold: =n22-ordinary-kirby-color-implementation=
+- upstream source ledger: =wiki/understandings/ordinary-kirby-color-source-capture.org=
+- git commit when written: =316d4e047575e3cf990e7cd93d628174ec0201ee=
+
+This note records how the known ordinary controls should be used before the
+ordinary surgery gate.  It is not a proof of the ordinary Crane-Yetter/Yetter
+closed invariant, not a source-audited value table, and not an exotic-detection
+claim.
+
+* Boundary
+
+=n22= currently implements an =experimental/local-convention= no-crossing
+Kirby-color summation scaffold:
+
+#+begin_src text
+omega = sum_i d_i X_i
+handle scope = no-dotted-2-handle-framed-link-only
+normalization status = SOURCE NEEDED
+#+end_src
+
+Therefore =n23= may use n22 only as computed scaffold evidence.  It must not
+call the resulting numbers ordinary closed 4D invariant values.  Every closed
+claim remains refused while the source slots from
+=ordinary-kirby-color-source-capture.org= remain =SOURCE NEEDED=.
+
+* Control Ledger
+
+| control | fixture | n22 status | source-audited ordinary value status | n24 gate consequence |
+|-
+| =S4 empty= | =experiments/inputs/toy-diagrams/s4-empty.json= | =computed scaffold=; total \(1\) in the n22 local convention | =source-needed=; empty-diagram normalization must be page-level sourced | closed value blocked by global normalization and closed 4-manifold-vs-2-handlebody slots |
+| =CP2 +1 unknot= | =experiments/inputs/toy-diagrams/cp2-plus-one-framed-unknot.json= | =computed scaffold=; total \(1 + 2 zeta_16^3 + zeta_16^8\) in the n22 local convention | =source-needed=; +1 framing, signature anomaly, and global normalization must be page-level sourced | closed value blocked by signature/framing, global normalization, blow-up/down, and closed-scope slots |
+| =S2xS2 Hopf fixture= | =experiments/inputs/toy-diagrams/s2x-s2-hopf-zero-framed.json= | =blocked=; the fixture has two crossings and n22 refuses crossing/Hopf Kirby-color evaluation | =source-needed=; Hopf/crossing ordinary control and surgery normalization must both be sourced or proved | ordinary surgery gate remains blocked; this is the first known control requiring a crossing-capable ordinary layer |
+
+The =computed scaffold= values above are regression data for the current code
+path only.  They are useful for deterministic tests and for catching accidental
+changes in the local convention.  They are not normalized ordinary invariant
+values of \(S^4\), \(CP^2\), or \(S^2\times S^2\).
+
+* Programmatic Gate
+
+=known_ordinary_control_ledger()= returns schema:
+
+#+begin_src text
+twisted-yetter.known-ordinary-4d-controls-ledger.v1
+#+end_src
+
+It records:
+
+- =closed_4_manifold_claim_allowed=false=;
+- all inherited source slots as =SOURCE NEEDED=;
+- =S4-empty= and =CP2-plus-one-unknot= as =computed scaffold=;
+- =S2xS2-hopf= as =blocked= with the n22 no-crossing refusal reason;
+- =n24_blocked_slots= equal to all ordinary Kirby-color / surgery source slots.
+
+Calling it with =closed_4_manifold_claim=True= raises a refusal.  This is
+intentional: n23 is a ledger/gate, not a claim-promoter.
+
+* n24 Blocker Ledger
+
+The following gates remain blocked before ordinary controls can become
+claim-supporting closed 4D controls:
+
+- ordinary Kirby color coefficients are not page-level sourced;
+- global dimension / closed normalization is not page-level sourced;
+- signature anomaly and framing sign convention are not page-level sourced;
+- handle-slide proof scope is not page-level sourced;
+- 1/2 and 2/3 cancellation treatment is not page-level sourced;
+- closed 4-manifold versus 2-handlebody equivalence is not page-level sourced;
+- crossing/Hopf ordinary Kirby-color evaluation is not implemented in n22, so
+  =S2xS2= is not computable by the current scaffold.
+
+* Downstream Effect
+
+This node unblocks =n24-ordinary-surgery-gate= only as a clear source-audit
+planning input.  It also unblocks deterministic regression checks for the two
+n22 no-crossing known controls.
+
+This node does not unblock theorem-level ordinary closed 4D invariant values,
+decorated/twisted formula claims, or exotic-pair computation claims.
