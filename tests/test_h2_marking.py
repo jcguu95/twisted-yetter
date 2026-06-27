@@ -60,6 +60,14 @@ def test_cp2_unknot_z2_zero_decoration_records_component_id() -> None:
     ]
     assert certificate["decoration_by_component"] == {"cp2_h": "0"}
     assert certificate["ordinary_surgery_gate_status"] == "blocked"
+    assert certificate["h2_basis"]["basis_matrix"] == [[1]]
+    assert certificate["intersection_form"]["matrix"] == [[1]]
+    assert certificate["basis_change"]["matrix"] == [[1]]
+    assert certificate["coefficient_group"]["group_id"] == "Z/2"
+    assert certificate["h2_marking_certification_status"] == "blocked"
+    assert {
+        blocker["blocker_id"] for blocker in certificate["certification_blockers"]
+    } == {"uncertified-h2-marking", "uncertified-component-lineage"}
 
 
 def test_s2xs2_hopf_z2_decoration_aligns_vector_with_component_order() -> None:
@@ -82,6 +90,19 @@ def test_s2xs2_hopf_z2_decoration_aligns_vector_with_component_order() -> None:
     assert certificate["basis_id"] == BASIS_KWARGS["basis_id"]
     assert certificate["basis_status"] == BASIS_KWARGS["basis_status"]
     assert certificate["basis_source_status"] == BASIS_KWARGS["basis_source_status"]
+    assert certificate["intersection_form"]["matrix"] == [[0, 1], [1, 0]]
+    assert certificate["component_lineage"] == [
+        {
+            "component_id": "s2_a",
+            "source_status": "diagram component ids only; handle-slide lineage not certified",
+            "lineage_certified": False,
+        },
+        {
+            "component_id": "s2_b",
+            "source_status": "diagram component ids only; handle-slide lineage not certified",
+            "lineage_certified": False,
+        },
+    ]
 
 
 def test_mapping_input_is_canonicalized_to_diagram_component_order() -> None:
@@ -122,6 +143,30 @@ def test_certificate_json_is_stable_and_has_no_float_markers() -> None:
     assert ".0" not in stable_h2_decoration_json(first)
 
 
+def test_explicit_integer_matrices_and_marked_language_return_blocker() -> None:
+    diagram = _load_fixture("s2x-s2-hopf-zero-framed.json")
+
+    certificate = h2_component_decoration_certificate(
+        diagram,
+        Z2_GROUP,
+        decoration_vector=[(1,), (0,)],
+        h2_basis_matrix=[[1, 0], [0, 1]],
+        intersection_matrix=[[0, 1], [1, 0]],
+        basis_change_matrix=[[1, 1], [0, 1]],
+        comparison_level="marked",
+        claim_boundary="marked language named only; no marking certificate is present",
+        **BASIS_KWARGS,
+    )
+
+    assert certificate["comparison_level"] == "marked"
+    assert certificate["comparison_language"]["comparison_claim_certified"] is False
+    assert certificate["basis_change"]["matrix"] == [[1, 1], [0, 1]]
+    assert certificate["metadata_validation"]["matrix_validation"]["valid"] is True
+    assert "uncertified-marked-comparison" in {
+        blocker["blocker_id"] for blocker in certificate["certification_blockers"]
+    }
+
+
 def test_rejects_length_id_value_and_basis_errors() -> None:
     diagram = _load_fixture("s2x-s2-hopf-zero-framed.json")
 
@@ -156,6 +201,58 @@ def test_rejects_length_id_value_and_basis_errors() -> None:
             basis_id="",
             basis_status=BASIS_KWARGS["basis_status"],
             basis_source_status=BASIS_KWARGS["basis_source_status"],
+        )
+
+
+def test_rejects_non_integer_and_bad_dimension_matrices() -> None:
+    diagram = _load_fixture("s2x-s2-hopf-zero-framed.json")
+
+    with pytest.raises(TypeError, match="exact integers"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            intersection_matrix=[[0, 1.0], [1, 0]],
+            **BASIS_KWARGS,
+        )
+
+    with pytest.raises(TypeError, match="exact integers"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            basis_change_matrix=[[True, 0], [0, 1]],
+            **BASIS_KWARGS,
+        )
+
+    with pytest.raises(ValueError, match="size"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            h2_basis_matrix=[[1]],
+            **BASIS_KWARGS,
+        )
+
+    with pytest.raises(ValueError, match="symmetric"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            intersection_matrix=[[0, 1], [0, 0]],
+            **BASIS_KWARGS,
+        )
+
+    with pytest.raises(ValueError, match="GL"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            basis_change_matrix=[[2, 0], [0, 1]],
+            **BASIS_KWARGS,
+        )
+
+    with pytest.raises(ValueError, match="comparison_level"):
+        h2_component_decoration_certificate(
+            diagram,
+            Z2_GROUP,
+            comparison_level="cork-canonical",
+            **BASIS_KWARGS,
         )
 
 

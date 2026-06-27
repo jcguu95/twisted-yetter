@@ -12,6 +12,8 @@
 - upstream component schema: =src/twisted_yetter/link_diagram.py=
 - upstream finite groups: =src/twisted_yetter/finite_groups.py=
 - upstream candidate sectors: =src/twisted_yetter/omega_a.py=
+- certificate artifact:
+  =experiments/results/h2-marking/n34-schema-certificate.json=
 
 This node creates deterministic JSON-ready metadata for aligning finite \(A\)
 decoration choices with machine-readable Kirby/link components.  It does not
@@ -31,15 +33,34 @@ The required top-level fields include:
 - =claim_level=: currently =schema-test-safe=.
 - =source_status=: records that this is Kirby-basis/component metadata only.
 - =basis_id=, =basis_status=, =basis_source_status=: required basis metadata.
+- =h2_basis=: exact integer basis metadata.  Current no-1/no-3 toy schema uses
+  component order and records an integer =basis_matrix=; this is metadata, not
+  certified closed \(H_2\) marking.
+- =intersection_form=: exact integer symmetric matrix metadata, derived from
+  =LinkDiagram.linking_matrix()= unless supplied explicitly.
+- =basis_change=: exact integer =GL(n,Z)= matrix metadata.  The identity matrix
+  records that no basis change has been applied; non-unimodular matrices are
+  rejected.
 - =finite_group_id=: currently =trivial= or =Z/2=.
+- =coefficient_group=: finite coefficient group metadata.
 - =component_ids=: copied from the =LinkDiagram= component order.
+- =component_lineage=: component ids plus a source/lineage status.  Current
+  lineage is not certified by n34.
 - =decoration_vector=: explicit list in component order, with =component_id=,
   =element_id=, and coordinate =element=.
 - =decoration_by_component=: deterministic component-id map to finite-group
   element labels.
+- =comparison_level=: one of =marked=, =unmarked=, =orbit/multiset=, or
+  =not-in-scope=.
+- =claim_boundary=: explicit statement of what the artifact is allowed to
+  support.
 - =zero_decoration=: true exactly when every component has the group identity.
 - =all_trivial_decoration_explicit=: true, including for empty =S4= diagrams.
 - =ordinary_surgery_gate_status= and explanation: inherited from =n24=.
+- =h2_marking_certification_status=: currently =blocked=.
+- =certification_blockers=: structured blockers explaining which evidence is
+  missing before any \(H_2\), homeomorphism, marked, unmarked, or orbit/multiset
+  comparison claim could be made.
 
 The implementation also records:
 
@@ -72,6 +93,14 @@ The schema layer checks:
 - mapping keys match the diagram component ids exactly;
 - every decoration value is an element of the selected finite group;
 - =basis_id=, =basis_status=, and =basis_source_status= are present;
+- =h2_basis.basis_matrix=, =intersection_form.matrix=, and
+  =basis_change.matrix= are square exact integer matrices with no floats or
+  booleans;
+- matrix dimensions match the component/H2 rank used by this schema;
+- =intersection_form.matrix= is symmetric;
+- =basis_change.matrix= lies in =GL(n,Z)=;
+- =comparison_level= is restricted to =marked=, =unmarked=,
+  =orbit/multiset=, or =not-in-scope=;
 - zero / all-trivial decoration is represented explicitly;
 - stable JSON serialization is deterministic and contains no float markers.
 
@@ -101,6 +130,13 @@ API calls with =claim_certified_h2_marking=True= or
 component-level Kirby metadata is a necessary alignment record, not a
 certificate that a class in \(H_2(X;A)\), \(H^2(X;A)\), or a \(K(A,2)\)
 background has been identified invariantly across presentations.
+
+If a caller uses =comparison_level= =marked=, =unmarked=, or
+=orbit/multiset=, n34 records that vocabulary only as language discipline and
+returns a structured blocker.  It does not certify a marking, enumerate the
+homeomorphism/isometry action, construct an orbit/multiset, or compare exotic
+inputs.  If exact integer matrix data are malformed, the API raises a schema
+validation error rather than guessing missing data.
 
 * Unblocks and Remaining Blockers
 
