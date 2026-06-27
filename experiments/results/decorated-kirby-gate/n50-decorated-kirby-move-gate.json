@@ -1,0 +1,889 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "twisted_yetter.decorated_kirby_gate",
+    "--write",
+    "experiments/results/decorated-kirby-gate/n50-decorated-kirby-move-gate.json"
+  ],
+  "command": "PYTHONPATH=src uv run python -m twisted_yetter.decorated_kirby_gate --write experiments/results/decorated-kirby-gate/n50-decorated-kirby-move-gate.json",
+  "exact_output": {
+    "all_pairs_blocked_or_metadata_only": true,
+    "all_pairs_have_structured_blockers": true,
+    "blocked_final_claims": [
+      "presentation equivalence theorem",
+      "decorated Kirby move theorem",
+      "claim-supporting closed 4D invariant",
+      "exotic detection claim"
+    ],
+    "claim_level": "executable blocker/certificate",
+    "classification_status_counts": {
+      "blocked": 5,
+      "metadata-only": 3,
+      "not-applicable": 0,
+      "pass": 0
+    },
+    "classification_status_semantics": {
+      "blocked": "cannot be used as evaluator input because required decorated Kirby move evidence is absent or upstream gates are blocked",
+      "metadata-only": "machine-checkable auxiliary metadata may be retained, but it is not a link-diagram move proof or evaluator input",
+      "not-applicable": "outside the decorated Kirby move gate scope; currently no registry entry requires this status",
+      "pass": "accepted as later evaluator comparison input; currently no pair has this status"
+    },
+    "closed_4_manifold_claim_allowed": false,
+    "decorated_kirby_move_theorem_claim_allowed": false,
+    "diagram_pair_count": 5,
+    "downstream_decision": {
+      "n55-toy-closed-suite": "blocked",
+      "reason": "n55 may read the classification inventory, but may not treat n45 toy or matrix pairs as closed 4-manifold invariance evidence until n50 has generated link-diagram move certificates"
+    },
+    "evaluator_comparison_input_pair_ids": [],
+    "exotic_detection_claim_allowed": false,
+    "final_decorated_gate_passed": false,
+    "input_registry_node_id": "n45-kirby-presentation-pair-generator",
+    "input_registry_schema": "twisted-yetter.kirby-presentation-pair-registry.v2",
+    "input_registry_status": "pass",
+    "input_registry_validation": {
+      "blocked_claims_ok": true,
+      "does_not_prove_ok": true,
+      "matrix_pair_list_ok": true,
+      "missing_required_fields": [],
+      "pair_list_ok": true,
+      "scope": "presentation-pair registry metadata plus matrix-level basis-change fixtures only; no link-diagram Kirby move proof",
+      "valid": true
+    },
+    "ledger_note": "wiki/understandings/decorated-kirby-move-gate.org",
+    "matrix_level_consistency": {
+      "claim_boundary": "GL(n,Z) matrix consistency is an auxiliary sanity check only and is not upgraded to a link-diagram Kirby move proof",
+      "machine_checked_matrix_pair_ids": [
+        "hyperbolic-shear",
+        "odd-indefinite-swap",
+        "odd-positive-shear"
+      ],
+      "matrix_pair_count": 3,
+      "status": "metadata-only"
+    },
+    "matrix_pair_count": 3,
+    "metadata_validation": {
+      "blocked_claims_ok": true,
+      "missing_required_fields": [],
+      "pair_list_ok": true,
+      "scope": "decorated Kirby move gate scaffold only; no theorem proof",
+      "valid": true
+    },
+    "node_id": "n50-decorated-kirby-move-gate",
+    "ordinary_surgery_gate_status": "blocked",
+    "pair_classifications": [
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "presentation-pair-candidate-dry-run",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "missing-basis-matrix-certificate",
+          "n35-decorated-core-planned-calls-only",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "candidate/dry-run presentation pairs cannot support presentation equivalence or decorated Kirby move claims",
+            "field": "relation_status",
+            "observed": "candidate/dry-run",
+            "reason_id": "presentation-pair-candidate-dry-run",
+            "required": "certified/decorated-kirby-move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "recorded swap-shaped lineage for downstream field coverage only; the right fixture is not a transformed diagram",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "basis_map_status": "swap-shaped placeholder; no component-order operation has been applied or proved",
+            "claim_boundary": "basis-change placeholders cannot identify H2 markings",
+            "field": "basis_map",
+            "observed": {
+              "claim_certified": false,
+              "matrix": null
+            },
+            "reason_id": "missing-basis-matrix-certificate",
+            "required": {
+              "claim_certified": true,
+              "matrix": "integer GL(n,Z) matrix"
+            },
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "n35/n36 decorated-core summaries are metadata carried forward for planning, not an executed decorated Kirby move comparison",
+            "field": "decorated_core_cases",
+            "observed": "planned evaluator call metadata",
+            "reason_id": "n35-decorated-core-planned-calls-only",
+            "required": "executed evaluator-backed decorated-core comparison",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": "unlink-two-component-z2-mixed",
+        "pair_id": "component-order-unlink-z2-mixed-dry-run",
+        "pair_kind": "component-relabel-dry-run",
+        "registry_section": "pairs",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "component-order-placeholder",
+        "required_pair_fields_present": true,
+        "right_case_id": "unlink-two-component-z2-mixed",
+        "status": "blocked",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "presentation-pair-candidate-dry-run",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "missing-basis-matrix-certificate",
+          "n35-decorated-core-planned-calls-only",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "candidate/dry-run presentation pairs cannot support presentation equivalence or decorated Kirby move claims",
+            "field": "relation_status",
+            "observed": "candidate/dry-run",
+            "reason_id": "presentation-pair-candidate-dry-run",
+            "required": "certified/decorated-kirby-move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "recorded swap-shaped lineage between two existing n36 cases; no diagram relabel operation is generated or certified",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "basis_map_status": "swap-shaped placeholder; no H2 marking, GL(n,Z), or diagram operation is certified",
+            "claim_boundary": "basis-change placeholders cannot identify H2 markings",
+            "field": "basis_map",
+            "observed": {
+              "claim_certified": false,
+              "matrix": null
+            },
+            "reason_id": "missing-basis-matrix-certificate",
+            "required": {
+              "claim_certified": true,
+              "matrix": "integer GL(n,Z) matrix"
+            },
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "n35/n36 decorated-core summaries are metadata carried forward for planning, not an executed decorated Kirby move comparison",
+            "field": "decorated_core_cases",
+            "observed": "planned evaluator call metadata",
+            "reason_id": "n35-decorated-core-planned-calls-only",
+            "required": "executed evaluator-backed decorated-core comparison",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": "s2xs2-hopf-z2-mixed-10",
+        "pair_id": "component-relabel-s2xs2-hopf-z2-mixed-swap-dry-run",
+        "pair_kind": "component-relabel-dry-run",
+        "registry_section": "pairs",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "component-relabel-placeholder",
+        "required_pair_fields_present": true,
+        "right_case_id": "s2xs2-hopf-z2-mixed-01",
+        "status": "blocked",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "presentation-pair-candidate-dry-run",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "missing-basis-matrix-certificate",
+          "n35-decorated-core-planned-calls-only",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "candidate/dry-run presentation pairs cannot support presentation equivalence or decorated Kirby move claims",
+            "field": "relation_status",
+            "observed": "candidate/dry-run",
+            "reason_id": "presentation-pair-candidate-dry-run",
+            "required": "certified/decorated-kirby-move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "identity component lineage placeholder",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "basis_map_status": "1x1 identity placeholder; not a Kirby proof",
+            "claim_boundary": "basis-change placeholders cannot identify H2 markings",
+            "field": "basis_map",
+            "observed": {
+              "claim_certified": false,
+              "matrix": null
+            },
+            "reason_id": "missing-basis-matrix-certificate",
+            "required": {
+              "claim_certified": true,
+              "matrix": "integer GL(n,Z) matrix"
+            },
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "n35/n36 decorated-core summaries are metadata carried forward for planning, not an executed decorated Kirby move comparison",
+            "field": "decorated_core_cases",
+            "observed": "planned evaluator call metadata",
+            "reason_id": "n35-decorated-core-planned-calls-only",
+            "required": "executed evaluator-backed decorated-core comparison",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": "cp2-z2-nonzero",
+        "pair_id": "identity-cp2-z2-nonzero",
+        "pair_kind": "presentation-sanity-pair",
+        "registry_section": "pairs",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity/nonzero-Z2-decoration",
+        "required_pair_fields_present": true,
+        "right_case_id": "cp2-z2-nonzero",
+        "status": "blocked",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "presentation-pair-candidate-dry-run",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "missing-basis-matrix-certificate",
+          "n35-decorated-core-planned-calls-only",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "candidate/dry-run presentation pairs cannot support presentation equivalence or decorated Kirby move claims",
+            "field": "relation_status",
+            "observed": "candidate/dry-run",
+            "reason_id": "presentation-pair-candidate-dry-run",
+            "required": "certified/decorated-kirby-move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "identity component lineage placeholder",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "basis_map_status": "1x1 identity placeholder; not a Kirby proof",
+            "claim_boundary": "basis-change placeholders cannot identify H2 markings",
+            "field": "basis_map",
+            "observed": {
+              "claim_certified": false,
+              "matrix": null
+            },
+            "reason_id": "missing-basis-matrix-certificate",
+            "required": {
+              "claim_certified": true,
+              "matrix": "integer GL(n,Z) matrix"
+            },
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "n35/n36 decorated-core summaries are metadata carried forward for planning, not an executed decorated Kirby move comparison",
+            "field": "decorated_core_cases",
+            "observed": "planned evaluator call metadata",
+            "reason_id": "n35-decorated-core-planned-calls-only",
+            "required": "executed evaluator-backed decorated-core comparison",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": "cp2-z2-zero",
+        "pair_id": "identity-cp2-z2-zero",
+        "pair_kind": "presentation-sanity-pair",
+        "registry_section": "pairs",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity/zero-decoration",
+        "required_pair_fields_present": true,
+        "right_case_id": "cp2-z2-zero",
+        "status": "blocked",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "presentation-pair-candidate-dry-run",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "missing-basis-matrix-certificate",
+          "n35-decorated-core-planned-calls-only",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "candidate/dry-run presentation pairs cannot support presentation equivalence or decorated Kirby move claims",
+            "field": "relation_status",
+            "observed": "candidate/dry-run",
+            "reason_id": "presentation-pair-candidate-dry-run",
+            "required": "certified/decorated-kirby-move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "identity on the empty component set; still not a closed invariant claim",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "basis_map_status": "empty identity placeholder; no H2 marking is certified",
+            "claim_boundary": "basis-change placeholders cannot identify H2 markings",
+            "field": "basis_map",
+            "observed": {
+              "claim_certified": false,
+              "matrix": null
+            },
+            "reason_id": "missing-basis-matrix-certificate",
+            "required": {
+              "claim_certified": true,
+              "matrix": "integer GL(n,Z) matrix"
+            },
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "n35/n36 decorated-core summaries are metadata carried forward for planning, not an executed decorated Kirby move comparison",
+            "field": "decorated_core_cases",
+            "observed": "planned evaluator call metadata",
+            "reason_id": "n35-decorated-core-planned-calls-only",
+            "required": "executed evaluator-backed decorated-core comparison",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": "s4-trivial-zero",
+        "pair_id": "identity-s4-trivial-zero",
+        "pair_kind": "presentation-sanity-pair",
+        "registry_section": "pairs",
+        "relation_status": "candidate/dry-run",
+        "relation_type": "identity",
+        "required_pair_fields_present": true,
+        "right_case_id": "s4-trivial-zero",
+        "status": "blocked",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "matrix-level-only-not-link-diagram-proof",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "exact GL(n,Z) matrix consistency is metadata-only and cannot be promoted to a link-diagram handle-slide proof",
+            "field": "pair_kind",
+            "observed": "matrix-basis-change-pair",
+            "reason_id": "matrix-level-only-not-link-diagram-proof",
+            "required": "generated link-diagram decorated Kirby move pair",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "component ids recorded from source to target matrix bases",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": null,
+        "matrix_level_consistency_check": {
+          "basis_matrix_claim_certified": true,
+          "claim_boundary": "matrix-level GL(n,Z) consistency only; not a generated link-diagram Kirby move proof",
+          "determinant_abs": 1,
+          "machine_checked_matrix_equivalence": true,
+          "status": "pass"
+        },
+        "pair_id": "hyperbolic-shear",
+        "pair_kind": "matrix-basis-change-pair",
+        "registry_section": "matrix_presentation_pairs",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "elementary shear",
+        "required_pair_fields_present": false,
+        "right_case_id": null,
+        "status": "metadata-only",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "matrix-level-only-not-link-diagram-proof",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "exact GL(n,Z) matrix consistency is metadata-only and cannot be promoted to a link-diagram handle-slide proof",
+            "field": "pair_kind",
+            "observed": "matrix-basis-change-pair",
+            "reason_id": "matrix-level-only-not-link-diagram-proof",
+            "required": "generated link-diagram decorated Kirby move pair",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "component ids recorded from source to target matrix bases",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": null,
+        "matrix_level_consistency_check": {
+          "basis_matrix_claim_certified": true,
+          "claim_boundary": "matrix-level GL(n,Z) consistency only; not a generated link-diagram Kirby move proof",
+          "determinant_abs": 1,
+          "machine_checked_matrix_equivalence": true,
+          "status": "pass"
+        },
+        "pair_id": "odd-indefinite-swap",
+        "pair_kind": "matrix-basis-change-pair",
+        "registry_section": "matrix_presentation_pairs",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "basis swap",
+        "required_pair_fields_present": false,
+        "right_case_id": null,
+        "status": "metadata-only",
+        "usable_as_evaluator_comparison_input": false
+      },
+      {
+        "blocked_final_claims": [
+          "presentation equivalence theorem",
+          "decorated Kirby move theorem",
+          "claim-supporting closed 4D invariant",
+          "exotic detection claim"
+        ],
+        "blocked_reason_ids": [
+          "matrix-level-only-not-link-diagram-proof",
+          "not-generated-link-diagram-move",
+          "missing-decorated-move-certificate",
+          "missing-component-lineage-certificate",
+          "ordinary-surgery-gate-blocked",
+          "missing-source-proof"
+        ],
+        "blocked_reasons": [
+          {
+            "claim_boundary": "exact GL(n,Z) matrix consistency is metadata-only and cannot be promoted to a link-diagram handle-slide proof",
+            "field": "pair_kind",
+            "observed": "matrix-basis-change-pair",
+            "reason_id": "matrix-level-only-not-link-diagram-proof",
+            "required": "generated link-diagram decorated Kirby move pair",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "registry metadata is not a generated link-diagram Kirby move",
+            "field": "generated_link_diagram_move",
+            "observed": "missing",
+            "reason_id": "not-generated-link-diagram-move",
+            "required": "machine-readable before/after link diagram move",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "no handle-slide, stabilization, cancellation, or component-order certificate is recorded",
+            "field": "decorated_kirby_move_certificate",
+            "observed": "missing",
+            "reason_id": "missing-decorated-move-certificate",
+            "required": "machine-checkable certificate",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "component lineage prose or placeholders are not move certificates",
+            "component_lineage_status": "component ids recorded from source to target matrix bases",
+            "field": "component_lineage.claim_certified",
+            "observed": "missing",
+            "reason_id": "missing-component-lineage-certificate",
+            "required": true,
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "decorated closed-invariant claims inherit the ordinary surgery gate blocker",
+            "field": "ordinary_surgery_gate_status",
+            "observed": "blocked",
+            "reason_id": "ordinary-surgery-gate-blocked",
+            "required": "pass",
+            "status": "blocked"
+          },
+          {
+            "claim_boundary": "computed dry-run metadata is not a decorated Kirby theorem",
+            "field": "source_proof",
+            "observed": "missing",
+            "reason_id": "missing-source-proof",
+            "required": "source-audited proposition/theorem or repo-local proof artifact",
+            "status": "blocked"
+          }
+        ],
+        "final_decorated_gate_passed": false,
+        "gate_decision": "blocked",
+        "left_case_id": null,
+        "matrix_level_consistency_check": {
+          "basis_matrix_claim_certified": true,
+          "claim_boundary": "matrix-level GL(n,Z) consistency only; not a generated link-diagram Kirby move proof",
+          "determinant_abs": 1,
+          "machine_checked_matrix_equivalence": true,
+          "status": "pass"
+        },
+        "pair_id": "odd-positive-shear",
+        "pair_kind": "matrix-basis-change-pair",
+        "registry_section": "matrix_presentation_pairs",
+        "relation_status": "matrix-level-certified",
+        "relation_type": "elementary shear",
+        "required_pair_fields_present": false,
+        "right_case_id": null,
+        "status": "metadata-only",
+        "usable_as_evaluator_comparison_input": false
+      }
+    ],
+    "pair_count": 8,
+    "presentation_equivalence_theorem_claim_allowed": false,
+    "required_unblock_artifacts": [
+      "generated link-diagram decorated Kirby move certificate for each accepted pair",
+      "certified component lineage, not placeholder lineage prose",
+      "integer basis matrix with claim_certified true",
+      "ordinary surgery gate support for closed 4D claims",
+      "n35 decorated-core calls upgraded from planned metadata to executed evaluator-backed calls",
+      "source-audited proof/reference record for the decorated move rule"
+    ],
+    "schema": "twisted-yetter.decorated-kirby-gate.v2",
+    "source_status": "n50 gate classifier over n45 dry-run and matrix-level pair metadata; no generated link-diagram decorated Kirby move certificate is present",
+    "status": "blocked"
+  },
+  "generator_script": "src/twisted_yetter/decorated_kirby_gate.py",
+  "git": {
+    "commit": "24dc661b3992d68737c2cbd2db1572740bd34b23",
+    "dirty": true
+  },
+  "input_hash": "fd58408047c68cdba84506aacc75c33f329e94dfe51e0d02eb0ce391723ee2c7",
+  "log_references": [],
+  "notes": [
+    "n50 classifies n45 registry entries for later evaluator comparisons.",
+    "Diagram/decorated-core pairs remain blocked dry-run metadata.",
+    "Matrix pairs are metadata-only GL(n,Z) consistency checks, not link-diagram Kirby move proofs.",
+    "No decorated Kirby theorem, closed invariant, Reutter escape/no-go, or exotic claim is made."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.decorated_kirby_gate --write experiments/results/decorated-kirby-gate/n50-decorated-kirby-move-gate.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "status": "inconclusive",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

@@ -281,7 +281,9 @@ def validate_scalability_dry_run_artifact(
         isinstance(inventory, Mapping)
         and inventory.get("n36_case_count") == 8
         and inventory.get("n45_pair_count") == 5
-        and inventory.get("n50_pair_classification_count") == 5
+        and inventory.get("n45_matrix_pair_count") == 3
+        and inventory.get("n50_pair_classification_count") == 8
+        and inventory.get("n50_evaluator_input_pair_count") == 0
         and inventory.get("n55_toy_case_count") == 8
         and inventory.get("n70_candidate_count") == 4
         and inventory.get("real_exotic_input_count") == 0
@@ -421,8 +423,12 @@ def _toy_scale_inventory(
         "n36_total_component_slots": component_slots,
         "n36_total_sector_slots": sector_slots,
         "n45_pair_count": _int_field(n45, "pair_count", len(pairs)),
+        "n45_matrix_pair_count": _int_field(n45, "matrix_pair_count", 0),
         "n50_pair_classification_count": _int_field(
             n50, "pair_count", len(pair_classifications)
+        ),
+        "n50_evaluator_input_pair_count": len(
+            _list_or_empty(n50.get("evaluator_comparison_input_pair_ids"))
         ),
         "n55_toy_case_count": _int_field(n55, "case_count", len(toy_cases)),
         "n70_candidate_count": _int_field(n70, "candidate_count", len(candidates)),

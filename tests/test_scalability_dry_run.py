@@ -64,7 +64,9 @@ def test_n75_toy_scale_inventory_counts_existing_metadata_only() -> None:
     assert inventory["n36_total_component_slots"] == 12
     assert inventory["n36_total_sector_slots"] == 12
     assert inventory["n45_pair_count"] == 5
-    assert inventory["n50_pair_classification_count"] == 5
+    assert inventory["n45_matrix_pair_count"] == 3
+    assert inventory["n50_pair_classification_count"] == 8
+    assert inventory["n50_evaluator_input_pair_count"] == 0
     assert inventory["n55_toy_case_count"] == 8
     assert inventory["n70_candidate_count"] == 4
     assert inventory["real_exotic_input_count"] == 0
