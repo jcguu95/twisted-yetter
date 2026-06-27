@@ -1,0 +1,147 @@
+#+TITLE: Provisional Formula Policy Gate
+#+DATE: 2026-06-26
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- decision graph node: =n30-provisional-formula-policy=
+- status: =policy-active= / =gating certificate=
+- implementation: =src/twisted_yetter/provisional_formula_policy.py=
+- tests: =tests/test_provisional_formula_policy.py=
+- upstream blocker: =n24-ordinary-surgery-gate= is explicitly =blocked=
+- upstream blocker note: =wiki/understandings/ordinary-surgery-gate.org=
+- source confidence ledger: =wiki/understandings/source-confidence-ledger.org=
+- formula convention ledger: =wiki/understandings/formula-conventions.org=
+
+This node is a policy/gating node.  It is not a proof of a mathematical formula, not a
+source audit of Yetter or Crane-Kauffman-Yetter, and not an implementation of a twisted
+formula.
+
+The purpose is to allow downstream agents to compute many provisional examples without
+silently upgrading those computations into closed 4-manifold invariants or exotic
+smooth-structure claims.
+
+* Executable Contract
+
+=provisional_formula_policy_certificate()= returns schema:
+
+#+begin_src text
+twisted-yetter.provisional-formula-policy.v1
+#+end_src
+
+The certificate records:
+
+- =status= as =policy-active=;
+- inherited =n24-ordinary-surgery-gate= status =blocked=;
+- inherited n24 blocker reason ids and blocked source slots;
+- allowed artifact claim levels;
+- required artifact fields;
+- rejected high-claim types;
+- policy decisions for =n31=, =n32=, =n33=, and =n35=.
+
+Stable JSON is produced by:
+
+#+begin_src python
+stable_provisional_formula_policy_json(provisional_formula_policy_certificate())
+#+end_src
+
+* Inherited n24 Blocker
+
+n24 is not passed.  Its certificate says:
+
+- =closed_4_manifold_claim_allowed=false=;
+- =claim_supporting_closed_invariant_allowed=false=;
+- ordinary Kirby-color / surgery source slots remain =SOURCE NEEDED=;
+- the S2xS2 Hopf/crossing ordinary control is blocked by the current no-crossing scaffold.
+
+n30 therefore does not authorize any closed ordinary 4D invariant claim.  It only gives a
+controlled route for provisional/candidate downstream work.
+
+* Allowed Artifact Claim Levels
+
+Downstream artifacts may use only non-theorem levels such as:
+
+- =candidate-experimental=
+- =provisional-low-confidence=
+- =schema-test-safe=
+- =computed evidence scaffold=
+
+Every downstream artifact covered by this policy must include at least:
+
+- =claim_level=
+- =source_status=
+
+=n35= decorated core artifacts must also record =ordinary_surgery_gate_status=, because they
+are allowed only while explicitly carrying the inherited =n24 blocked= boundary.
+
+* Rejected Claims
+
+The policy rejects:
+
+- =claim-supporting closed 4D invariant=
+- =decorated/twisted formula theorem=
+- =exotic detection claim=
+- =Reutter escape/no-go conclusion=
+
+Passing many examples may become computed evidence for a candidate formula.  It is not proof of
+decorated Kirby invariance, not a closed invariant certificate, and not exotic detection.
+
+Likewise, negative examples or equal values do not imply a Reutter-style no-go theorem.  They
+route to source/formula/code triage and, if reproducible, to a later obstruction audit.
+
+* Downstream Decisions
+
+** n31 Yetter Z2 source capture
+
+- decision: =allowed=
+- activity: source capture for the Yetter =Z/2= surgical formula
+- allowed levels: =schema-test-safe= and =provisional-low-confidence=
+- required fields: =claim_level= and =source_status=
+
+n31 may record source locators, exact page/proposition labels, and missing slots.  It must not
+upgrade the =Z/2= surgical formula to a theorem-level decorated formula merely by finding a
+candidate passage.
+
+** n32 general A candidate contract
+
+- decision: =allowed=
+- activity: candidate contract for the general finite =A= color
+- allowed levels: =candidate-experimental= and =schema-test-safe=
+- required fields: =claim_level= and =source_status=
+
+n32 may state falsification criteria, specialization checks, and artifact schema requirements.
+It must not treat the general finite =A= candidate as a sourced theorem.
+
+** n33 finite A Omega-a implementation
+
+- decision: =allowed=
+- activity: finite =A= candidate-color implementation scaffold
+- allowed levels: =candidate-experimental= and =schema-test-safe=
+- required fields: =claim_level= and =source_status=
+
+n33 may implement exact candidate scaffolding for supported finite =A= data.  It must expose
+candidate status in artifacts and must not certify a homologically twisted Kirby color.
+
+** n35 decorated core experiments
+
+- decision: =allowed-with-blocked-ordinary-gate=
+- activity: decorated core experiments from diagram-backed data
+- allowed levels: =computed evidence scaffold=, =provisional-low-confidence=, and
+  =candidate-experimental=
+- required fields: =claim_level=, =source_status=, and =ordinary_surgery_gate_status=
+
+n35 may produce computed evidence scaffold artifacts if the computation remains diagram-backed
+and carries the =n24 blocked= boundary.  Its outputs are not closed 4D invariant values and
+cannot support exotic detection.
+
+* Acceptance Check
+
+- Policy certificate deterministic: =PASS=.
+- Schema is explicit: =PASS=.
+- n24 =blocked= status is inherited: =PASS=.
+- Candidate/provisional experiment statuses are allowed: =PASS=.
+- High theorem/exotic/Reutter claims are rejected: =PASS=.
+- n31/n32/n33/n35 decisions are recorded: =PASS=.
+- No mathematical formula was added here: =PASS=.
+- No external source audit was performed here: =PASS=.
