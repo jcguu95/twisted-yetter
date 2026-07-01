@@ -65,6 +65,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_auto_stress.sage.py
 experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json
 #+end_src
 
+產生第一批 Kirby handle-slide toy certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
+#+end_src
+
 * Payload Shape
 
 #+begin_src json
@@ -106,6 +118,13 @@ experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json
 - 552 個 Markov / conjugation move checks；
 - 2760 個 exact sector comparisons，包含 =Omega_0/Omega_1= 與 fixed labels =0,1,2=；
 - scope 明確排除 multi-component =Omega= label permutation。
+
+第一批 handle-slide toy suite 另保存：
+
+- unknotted two-component slides：=CP^2#CP^2=、=CP^2#CPbar=、=S^2 x S^2=；
+- right trefoil slid over a split =+1=-framed unknot；
+- 每個 comparison 同時檢查 before value、after value、以及既有 lab note 的 expected value；
+- 若任一值不一致，script 會以非零狀態停止。
 
 尚未涵蓋：
 

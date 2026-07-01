@@ -1,0 +1,130 @@
+#+TITLE: SU(2)_2 Handle-Slide Toy Suite
+#+DATE: 2026-07-01
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- status: =computed evidence / mechanized handle-slide toy checks=
+- purpose: 機械化先前自然語言 / scratch exact arithmetic 已經做過的前兩類
+  handle-slide examples，並逐項比對舊 lab note 的 expected values。
+- source note:
+  =wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org=
+- boundary:
+  - 這不是 general Kirby diagram evaluator。
+  - 這不是 arbitrary band-sum constructor。
+  - 這不是 special-link / dotted-component evaluator。
+  - 這不是 closed 4-manifold normalization。
+
+* Artifact
+
+#+begin_src text
+experiments/sage/su2_2_handle_slide_toys.sage.py
+experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
+#+end_src
+
+重現指令：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
+#+end_src
+
+輸出摘要：
+
+#+begin_src text
+wrote experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
+status: pass
+examples: 2
+comparisons: 16
+#+end_src
+
+如果任一 value 和舊 note 不同，script 會產生 =fail= certificate 並以 nonzero status
+停止。
+
+* Example 1: Unknotted Two-Component Slides
+
+機械化舊 note 的 Test 4、Test 5、Test 6：
+
+- =CP^2 # CP^2=：split =(+1,+1)= unknots slide 成 Hopf framings =(1,2)=。
+- =CP^2 # CPbar=：split =(+1,-1)= unknots slide 成 Hopf framings =(1,0)=。
+- =S^2 x S^2=：0-framed Hopf slide 成 Hopf framings =(0,2)=。
+
+label rule：
+
+#+begin_src text
+before labels = (a,b)
+after labels  = (a, a+b)
+#+end_src
+
+結果全部和舊 note 一致：
+
+#+begin_src text
+Test 4: +/- 4 zeta_16^6
+Test 5: +/- 4
+Test 6: 4
+#+end_src
+
+* Example 2: Trefoil Over +1 Unknot
+
+before picture：
+
+#+begin_src text
+K = 0-framed right trefoil = closure(sigma_1^3)
+U = split +1-framed unknot
+braid word = [1,1,1] in B_3
+framings = (0,1)
+labels = (a,b)
+#+end_src
+
+after picture：
+
+#+begin_src text
+K' = trefoil-shaped component with framing +1
+U  = +1-framed unknot linking K' once
+braid word = [1,1,1,2,2] in B_3
+framings = (1,1)
+labels = (a+b,b)
+#+end_src
+
+這裡 after picture 不再只用手寫 =S=-matrix formula，而是用 braid closure 直接送進
+Sage oracle。該 braid closure 的 diagnostics 是：
+
+#+begin_src text
+components = [[0,1], [2]]
+linking matrix = [[0,1],
+                  [1,0]]
+#+end_src
+
+機械化後得到：
+
+#+begin_src text
+(a,b)=(0,0): 0 = 0 = expected
+(a,b)=(0,1): 0 = 0 = expected
+(a,b)=(1,0):  8 zeta_16^3 =  8 zeta_16^3 = expected
+(a,b)=(1,1): -8 zeta_16^3 = -8 zeta_16^3 = expected
+#+end_src
+
+舊 note 裡 Test 8 的 expected expressions 原本寫成較長的形式，例如：
+
+#+begin_src text
+-2 sqrt(2) zeta_16 + 4 zeta_16^3 - 2 sqrt(2) zeta_16^5
+#+end_src
+
+Sage 在 =CyclotomicField(16)= 中會把它簡化為 =0=。這不是不一致，而是同一個
+exact value 的化簡。
+
+* Interpretation
+
+這一輪比 pure braid presentation stress test 更接近 Kirby calculus，因為它檢查的是：
+
+#+begin_src text
+before Kirby link
+after handle-slide Kirby link
+cohomology label basis-change
+exact Omega_a evaluation
+prior hand/scratch expected value
+#+end_src
+
+下一步仍然不是直接上 exotic pair，而是做更一般的 small framed-link handle-slide
+generator，避免只靠這兩個人工設計的 after braid words。
+
