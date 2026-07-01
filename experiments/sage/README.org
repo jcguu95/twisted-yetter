@@ -1,0 +1,80 @@
+#+TITLE: SU(2)_2 Sage Braid Oracle
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:nil num:nil
+
+* Purpose
+
+=su2_2_braid_oracle.sage.py= 是目前的 exact SU(2)_2 braid-closure stress-test
+oracle。它的用途是讓我們快速把 oriented link 寫成 braid closure，然後計算：
+
+- fixed simple-label =SU(2)_2= framed RT link value；
+- 每個 component 塗上 =Omega_a= 之後的 twisted Kirby-color expansion；
+- sector amplitudes，方便之後做 finite Fourier / basis-change checks。
+
+這不是 final local-piece evaluator。也就是說，它還不是把 arbitrary planar diagram
+展開成 =ev=、=coev=、=R=、=F= 的正式 evaluator。它目前依賴 Sage 的 Jones
+polynomial 來處理 =sigma= colored sublink。
+
+* Run
+
+從 repo root 執行：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --self-test
+#+end_src
+
+目前通過時會輸出：
+
+#+begin_src text
+self-test: pass
+#+end_src
+
+看 example payload：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --example trefoil
+#+end_src
+
+用 JSON payload 評估：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --input-json /path/to/input.json
+#+end_src
+
+* Payload Shape
+
+#+begin_src json
+{
+  "n_strands": 2,
+  "braid_word": [1, 1, 1],
+  "framings": [0],
+  "omega_labels": [1]
+}
+#+end_src
+
+注意：
+
+- braid generator 是 1-based；=+k= 表示 Sage 的 positive =sigma_k=。
+- =framings= 與 =omega_labels= 是依照 closure components 排序，不是依照 strands 排序。
+- components 依照 closure cycle 中最小的 original strand number 排序。
+- output 會附 =components_0_based_strands= 與 =linking_matrix= 方便檢查。
+
+* Current Trust Boundary
+
+狀態標籤：=computed evidence / experimental oracle / not final evaluator=
+
+已通過 self-test 的控制案例：
+
+- =CP^2= 與 =CPbar^2= 單 unknot =Omega_0/Omega_1=；
+- positive Hopf fixed labels =(1,2)= 與 =(1,1)=；
+- =CP^2 # CP^2=、=CP^2 # CPbar^2=、=S^2 x S^2= 的 toy handle-slide values；
+- right trefoil =Omega_0= 得到 =0=、=Omega_1= 得到 =4=。
+
+尚未涵蓋：
+
+- dotted / special link；
+- 1-handle / 3-handle normalization；
+- full Kirby diagram parser；
+- arbitrary planar diagram 到 local tensor network 的轉換；
+- 對 twisted formula 本身的 theorem-level proof。
+
