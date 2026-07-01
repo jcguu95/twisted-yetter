@@ -1,0 +1,4690 @@
+{
+  "argv": [
+    "su2_2_rf_omega_backend.sage.py"
+  ],
+  "command": "sage experiments/sage/su2_2_rf_omega_backend.sage.py",
+  "elapsed_seconds": 4,
+  "exact_output": {
+    "backend": {
+      "fixed_label_method": "sigma sublink by explicit B1' R/F contraction; psi by invertible psi-sigma linking factor; component framings by twists",
+      "omega_formula": "Omega_a = sum_i d_i (-1)^(a deg(i)) X_i",
+      "oracle_comparison_script": "experiments/sage/su2_2_braid_oracle.sage.py",
+      "rf_backend_script": "experiments/sage/su2_2_rf_local_backend.sage.py"
+    },
+    "case_count": 6,
+    "category_id": "SU(2)_2",
+    "claim_level": "B2 explicit R/F backend with Omega expansion / supported braid closures",
+    "evaluations": [
+      {
+        "case_id": "omega-cp2",
+        "component_count": 1,
+        "fixed_label_check_count": 3,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0"
+              ],
+              "display": "zeta16^5 + zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0"
+              ],
+              "display": "zeta16^5 + zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0
+                ]
+              ],
+              "strand_to_component": [
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 0,
+            "program_id": "omega-cp2",
+            "strand_count": 1,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [],
+            "program_id": "omega-cp2",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 1
+          }
+        },
+        "omega_check_count": 2,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      {
+        "case_id": "omega-two-component-unlink",
+        "component_count": 2,
+        "fixed_label_check_count": 9,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1"
+              ],
+              "display": "-zeta16^7 - zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1"
+              ],
+              "display": "-zeta16^7 - zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0"
+              ],
+              "display": "zeta16^5 + zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0"
+              ],
+              "display": "zeta16^5 + zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "2",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "2",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0"
+              ],
+              "display": "-zeta16^5 - zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0"
+              ],
+              "display": "-zeta16^5 - zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1"
+              ],
+              "display": "zeta16^7 + zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1"
+              ],
+              "display": "zeta16^7 + zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1,
+                -1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "piece_count": 0,
+            "program_id": "omega-two-component-unlink",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1,
+                -1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [],
+            "program_id": "omega-two-component-unlink",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "omega_check_count": 4,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      {
+        "case_id": "omega-positive-hopf",
+        "component_count": 2,
+        "fixed_label_check_count": 9,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0"
+              ],
+              "display": "-zeta16^6 + zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0"
+              ],
+              "display": "-zeta16^6 + zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0"
+              ],
+              "display": "-zeta16^6 + zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0"
+              ],
+              "display": "-zeta16^6 + zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2,
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "piece_count": 2,
+            "program_id": "omega-positive-hopf",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "omega-positive-hopf",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "omega_check_count": 4,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      {
+        "case_id": "omega-right-trefoil",
+        "component_count": 1,
+        "fixed_label_check_count": 3,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 3,
+            "program_id": "omega-right-trefoil",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "omega-right-trefoil",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "omega_check_count": 2,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      {
+        "case_id": "omega-figure-eight",
+        "component_count": 1,
+        "fixed_label_check_count": 3,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "0"
+              ],
+              "display": "zeta16^6 - zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              -1,
+              2,
+              -1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "omega-figure-eight",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "omega-figure-eight",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "omega_check_count": 2,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      {
+        "case_id": "omega-figure-eight-plus-one-framed",
+        "component_count": 1,
+        "fixed_label_check_count": 3,
+        "fixed_label_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0"
+              ],
+              "display": "-zeta16^5 - zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "-1",
+                "0",
+                "0",
+                "0",
+                "-1",
+                "0",
+                "0"
+              ],
+              "display": "-zeta16^5 - zeta16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "labels": [
+              2
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "-1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              -1,
+              2,
+              -1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "omega-figure-eight-plus-one-framed",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "omega-figure-eight-plus-one-framed",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "omega_check_count": 2,
+        "omega_checks": [
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "-2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "2",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "2*zeta16^3",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "move_regression_count": 4,
+    "move_regressions": [
+      {
+        "comparison_count": 4,
+        "comparisons": [
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              0
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "16",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0,
+              1
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              0
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1,
+              1
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "left": {
+          "diagnostics": {
+            "braid_word": [],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "piece_count": 0,
+            "program_id": "rf-omega-case",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "name": "omega-r-r-inverse-cancellation",
+        "reason": "local R followed by R^{-1} cancels for every Omega sector",
+        "right": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              -1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "piece_count": 2,
+            "program_id": "rf-omega-case",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "comparison_count": 2,
+        "comparisons": [
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "left": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 3,
+            "program_id": "rf-omega-case",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "name": "omega-trefoil-positive-markov",
+        "reason": "closure(beta) equals closure(beta sigma_n)",
+        "right": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "rf-omega-case",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "comparison_count": 2,
+        "comparisons": [
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "left": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 3,
+            "program_id": "rf-omega-case",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "name": "omega-trefoil-negative-markov",
+        "reason": "closure(beta) equals closure(beta sigma_n^-1)",
+        "right": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1,
+              -2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "rf-omega-case",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": -1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "comparison_count": 2,
+        "comparisons": [
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              0
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          },
+          {
+            "left_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "left_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "omega_labels": [
+              1
+            ],
+            "oracle_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "rf_difference": {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_oracle_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "right_rf_value": {
+              "coefficients": [
+                "4",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "4",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            "status": "pass"
+          }
+        ],
+        "left": {
+          "diagnostics": {
+            "braid_word": [
+              -1,
+              2,
+              -1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "rf-omega-case",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "name": "omega-figure-eight-conjugation",
+        "reason": "closure(beta) equals closure(alpha beta alpha^-1)",
+        "right": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              -1,
+              2,
+              -1,
+              2,
+              -1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 6,
+            "program_id": "rf-omega-case",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r5",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r6",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              }
+            ],
+            "program_id": "rf-omega-case",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "status": "pass"
+      }
+    ],
+    "not_scope": "arbitrary planar tensor graph, sigma sublinks needing more than three selected strands, generic mixed-label F/R path implementation, cup/cap programs, special/dotted links, closed 4-manifold normalization, or exotic-pair computation",
+    "schema": "twisted-yetter.su2_2-rf-omega-backend.v1",
+    "scope": "SU(2)_2 braid closures whose sigma sublink has at most three selected strands; fixed labels 0,sigma,psi; Omega_0/Omega_1 expansion; exact comparison against the braid oracle",
+    "status": "pass",
+    "upstream_backend_artifacts": [
+      "experiments/results/local-piece/su2-2-rf-local-backend-v1.json",
+      "experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json",
+      "experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json"
+    ]
+  },
+  "finished_at_utc": "2026-07-01T20:26:11Z",
+  "generator_script": "experiments/sage/su2_2_rf_omega_backend.sage.py",
+  "git": {
+    "commit": "b16834665edc0aa636413da4257fe297e7626acc",
+    "dirty": true
+  },
+  "input_hash": "5377fe4c0256d2da21a6322eb4096068cb46975a0263763a7d1a3af7fb517b1a",
+  "log_references": [],
+  "notes": [
+    "This is B2: explicit RF-backed fixed-label and Omega expansion for supported SU(2)_2 braid closures.",
+    "The braid oracle is used only as an independent exact comparison backend."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/su2_2_rf_omega_backend.sage.py --output experiments/results/local-piece/su2-2-rf-omega-backend-v1.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-07-01T20:26:07Z",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.13.7",
+    "sage": "10.8"
+  }
+}

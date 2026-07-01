@@ -1,0 +1,169 @@
+#+title: 2026-07-01 B2 Explicit R/F Backend With Omega Expansion
+#+date: 2026-07-01
+#+status: computed evidence / evaluator-track scaffold
+
+* 目的
+
+在 B1' fixed all-=sigma= explicit =R/F= backend 之後，把 evaluator track 推到
+第一個真正可用的 =Omega= expansion backend。
+
+本輪目標：
+
+#+begin_src text
+supported SU(2)_2 braid closures
+  fixed label assignments by explicit RF-backed computation
+  -> Omega_a expansion
+  -> exact comparison with braid oracle
+#+end_src
+
+這代表我們不再只是對 all-=sigma= fixed label 做 local matrix contraction，而是能
+對 supported examples 真的展開 twisted Kirby color。
+
+* 新增檔案
+
+#+begin_src text
+experiments/sage/su2_2_rf_omega_backend.sage.py
+experiments/results/local-piece/su2-2-rf-omega-backend-v1.json
+tests/test_su2_2_rf_omega_backend.py
+#+end_src
+
+* 重現指令
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_rf_omega_backend.sage.py
+uv run pytest tests/test_su2_2_rf_omega_backend.py
+#+end_src
+
+完整 regression：
+
+#+begin_src sh
+uv run pytest
+#+end_src
+
+* 方法
+
+固定 label assignment 的 evaluator：
+
+1. 找出 closure components 與 strand-to-component map。
+2. 若有 =sigma= components，取出 =sigma= strands 的 selected subbraid。
+3. =sigma= sublink 用 B1' explicit =R/F= backend 評估。
+4. =psi= 作為 invertible object，用 =psi=-=sigma= linking factor：
+
+   #+begin_src text
+   (-1)^(sum linking(psi_component, sigma_component))
+   #+end_src
+
+5. component framing 乘上 twist。
+6. =Omega_a= 用：
+
+   #+begin_src text
+   Omega_a = sum_i d_i (-1)^(a deg(i)) X_i
+   #+end_src
+
+7. 對所有 fixed labels 求和。
+
+braid oracle 只作 independent exact comparison，不作主要計算。
+
+* Cases
+
+本輪 artifact 覆蓋：
+
+#+begin_src text
+omega-cp2
+omega-two-component-unlink
+omega-positive-hopf
+omega-right-trefoil
+omega-figure-eight
+omega-figure-eight-plus-one-framed
+#+end_src
+
+每個 fixed-label check 都通過，且每個 =Omega= value 都和 oracle 一致。
+
+重要值：
+
+#+begin_src text
+CP2:
+  Omega_0 =  2 zeta16^3
+  Omega_1 = -2 zeta16^3
+
+two-component unlink with framings (1,-1):
+  (0,0) ->  4
+  (0,1) -> -4
+  (1,0) -> -4
+  (1,1) ->  4
+
+positive Hopf:
+  all Omega sectors -> 4
+
+right trefoil:
+  Omega_0 -> 0
+  Omega_1 -> 4
+
+figure-eight:
+  Omega_0 -> 0
+  Omega_1 -> 4
+#+end_src
+
+* Omega-Level Move Regressions
+
+本輪檢查：
+
+#+begin_src text
+omega-r-r-inverse-cancellation
+omega-trefoil-positive-markov
+omega-trefoil-negative-markov
+omega-figure-eight-conjugation
+#+end_src
+
+全部 pass，而且同時要求：
+
+#+begin_src text
+left RF value  = right RF value
+left oracle    = right oracle
+RF             = oracle
+#+end_src
+
+* 判斷
+
+這條 explicit RF line 目前已經完成到一個合理 checkpoint：
+
+#+begin_src text
+B0:
+  local-piece program -> braid closure -> oracle backend
+
+B1':
+  fixed all-sigma braid closure -> explicit R/F contraction
+
+B2:
+  supported mixed fixed labels + Omega expansion
+  -> RF-backed fixed-label values
+  -> exact Omega values
+#+end_src
+
+所以在碰 Yasui 之前，evaluator track 已經不只是包裝 Sage/Jones oracle，而是有
+一條 explicit local categorical calculation route，可以當未來任意 planar evaluator
+的 regression substrate。
+
+* 邊界
+
+仍未完成：
+
+- =sigma= sublink 超過三條 selected strands；
+- fully generic mixed-label fusion-path implementation；
+- cup/cap/eval/coeval local program；
+- arbitrary planar tensor graph；
+- special/dotted Kirby components；
+- closed 4-manifold normalization；
+- Yasui exotic pair presentation。
+
+下一步若繼續 evaluator line，最合理的是：
+
+#+begin_src text
+B3:
+  implement generic fusion-path basis for arbitrary short SU(2)_2 strand sequences
+  and local generators, replacing the current sigma-sublink special route.
+
+或：
+  start Yasui presentation track with untwisted negative control,
+  using current evaluator artifacts as sanity regressions.
+#+end_src

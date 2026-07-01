@@ -359,6 +359,36 @@ positive/negative Markov stabilization、braid conjugation regressions。
 它只證明 evaluator track 已經開始從「包裝 braid oracle」移向顯式 local categorical
 matrix contraction。
 
+產生 =SU(2)_2= B2 explicit =R/F= + =Omega= expansion backend certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_rf_omega_backend.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/local-piece/su2-2-rf-omega-backend-v1.json
+#+end_src
+
+=su2_2_rf_omega_backend.sage.py= 把 B1' 推到第一個可用的 =Omega= path：
+
+- 每個 fixed label assignment 都由 explicit backend 評估；
+- =sigma= sublink 用 B1' 的 =R/F= contraction；
+- =psi= 用 invertible sector 與 =psi=-=sigma= linking action；
+- component framing 用 twist；
+- 最後展開 =Omega_a = sum_i d_i (-1)^(a deg(i)) X_i=；
+- braid oracle 仍只作 exact comparison。
+
+目前測過 CP2 unknot、two-component unlink、positive Hopf、right trefoil、
+figure-eight、+1 framed figure-eight，以及 =Omega= level 的
+=R R^{-1}= cancellation、positive/negative Markov stabilization、figure-eight
+conjugation。
+
+這仍不是 unrestricted planar tensor graph evaluator；目前限制是 =sigma= sublink
+最多三條 selected strands，且還沒有 cup/cap program 或 arbitrary special/dotted
+Kirby component semantics。
+
 * Fusion-Channel Gate
 
 =experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面
