@@ -1,0 +1,3299 @@
+{
+  "argv": [
+    "su2_2_rf_local_backend.sage.py"
+  ],
+  "command": "sage experiments/sage/su2_2_rf_local_backend.sage.py",
+  "elapsed_seconds": 0,
+  "exact_output": {
+    "category_id": "SU(2)_2",
+    "claim_level": "B1-prime explicit R/F backend / fixed all-sigma braid closures",
+    "convention": {
+      "calibration_note": "R eigenvalues are oracle-calibrated to the repository's SU(2)_2 braid/Jones convention: sigma_1 closure gives sqrt(2), sigma_1^2 Hopf with sigma labels gives 0, and sigma_1^3 trefoil gives -sqrt(2).",
+      "f_sigma_sigma_sigma_sigma": [
+        [
+          {
+            "coefficients": [
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "0",
+              "0",
+              "-1/2",
+              "0"
+            ],
+            "display": "-1/2*zeta16^6 + 1/2*zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          {
+            "coefficients": [
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "0",
+              "0",
+              "-1/2",
+              "0"
+            ],
+            "display": "-1/2*zeta16^6 + 1/2*zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        ],
+        [
+          {
+            "coefficients": [
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "0",
+              "0",
+              "-1/2",
+              "0"
+            ],
+            "display": "-1/2*zeta16^6 + 1/2*zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          {
+            "coefficients": [
+              "0",
+              "0",
+              "-1/2",
+              "0",
+              "0",
+              "0",
+              "1/2",
+              "0"
+            ],
+            "display": "1/2*zeta16^6 - 1/2*zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        ]
+      ],
+      "field": "CyclotomicField(16)",
+      "psi_label": 2,
+      "r_sigma_sigma": {
+        "0": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "2": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        }
+      },
+      "sigma_label": 1,
+      "theta_sigma": {
+        "coefficients": [
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "display": "zeta16^3",
+        "field": "CyclotomicField(16)",
+        "zeta_symbol": "zeta16"
+      },
+      "zeta_symbol": "zeta16"
+    },
+    "example_count": 7,
+    "examples": [
+      {
+        "case_id": "sigma-unknot-one-strand",
+        "description": "0-framed sigma-colored unknot",
+        "diagnostics": {
+          "component_count": 1,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6 + zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 1,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6 + zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0
+                ]
+              ],
+              "strand_to_component": [
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 0,
+            "program_id": "sigma-unknot-one-strand",
+            "strand_count": 1,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [],
+            "program_id": "sigma-unknot-one-strand",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 1
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-unlink-two-strand-identity",
+        "description": "two split sigma-colored unknots",
+        "diagnostics": {
+          "component_count": 2,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 0,
+              "weighted_trace": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            },
+            {
+              "basis": [
+                [
+                  1,
+                  2
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 2,
+              "weighted_trace": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1,
+                1
+              ],
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "piece_count": 0,
+            "program_id": "sigma-unlink-two-strand-identity",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1,
+                1
+              ],
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [],
+            "program_id": "sigma-unlink-two-strand-identity",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-unknot-two-strand-sigma1",
+        "description": "sigma_1 closure, isotopic to sigma-colored unknot",
+        "diagnostics": {
+          "component_count": 1,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 0,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            },
+            {
+              "basis": [
+                [
+                  1,
+                  2
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 2,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 1,
+            "program_id": "sigma-unknot-two-strand-sigma1",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "sigma-unknot-two-strand-sigma1",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-hopf",
+        "description": "positive Hopf with both components sigma-colored",
+        "diagnostics": {
+          "component_count": 2,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "zeta16^4",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 0,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "zeta16^4",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            },
+            {
+              "basis": [
+                [
+                  1,
+                  2
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-zeta16^4",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 2,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-zeta16^4",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1,
+                1
+              ],
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 2,
+              "components_0_based_strands": [
+                [
+                  0
+                ],
+                [
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                1
+              ]
+            },
+            "linking_matrix": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "piece_count": 2,
+            "program_id": "sigma-hopf",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1,
+                1
+              ],
+              "framings": [
+                0,
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0,
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "sigma-hopf",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-right-trefoil",
+        "description": "right trefoil with sigma color",
+        "diagnostics": {
+          "component_count": 1,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                "display": "zeta16^6",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 0,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                "display": "zeta16^6",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            },
+            {
+              "basis": [
+                [
+                  1,
+                  2
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 2,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              1,
+              1,
+              1
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 3,
+            "program_id": "sigma-right-trefoil",
+            "strand_count": 2,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": 1
+              }
+            ],
+            "program_id": "sigma-right-trefoil",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 2
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-figure-eight",
+        "description": "figure-eight with sigma color",
+        "diagnostics": {
+          "component_count": 1,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6 + zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 1,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                "display": "zeta16^6 - zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              -1,
+              2,
+              -1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "sigma-figure-eight",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                0
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "sigma-figure-eight",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      },
+      {
+        "case_id": "sigma-figure-eight-plus-one-framed",
+        "description": "figure-eight with sigma color and +1 external framing",
+        "diagnostics": {
+          "component_count": 1,
+          "fusion_trace_terms": [
+            {
+              "basis": [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              "matrix_trace": {
+                "coefficients": [
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                "display": "-1",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "quantum_dimension": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "-1",
+                  "0"
+                ],
+                "display": "-zeta16^6 + zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              },
+              "total_label": 1,
+              "weighted_trace": {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                "display": "zeta16^6 - zeta16^2",
+                "field": "CyclotomicField(16)",
+                "zeta_symbol": "zeta16"
+              }
+            }
+          ]
+        },
+        "difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "local_piece_program": {
+          "diagnostics": {
+            "braid_word": [
+              -1,
+              2,
+              -1,
+              2
+            ],
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "closure_data": {
+              "component_count": 1,
+              "components_0_based_strands": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ],
+              "strand_to_component": [
+                0,
+                0,
+                0
+              ]
+            },
+            "linking_matrix": [
+              [
+                0
+              ]
+            ],
+            "piece_count": 4,
+            "program_id": "sigma-figure-eight-plus-one-framed",
+            "strand_count": 3,
+            "supported_piece_kinds": [
+              "braid_crossing"
+            ],
+            "unsupported_piece_kinds_v1": [
+              "cup",
+              "cap",
+              "trivalent_split",
+              "trivalent_merge"
+            ]
+          },
+          "program": {
+            "category_id": "SU(2)_2",
+            "closure": {
+              "fixed_labels": [
+                1
+              ],
+              "framings": [
+                1
+              ],
+              "kind": "braid_closure",
+              "omega_labels": [
+                0
+              ]
+            },
+            "pieces": [
+              {
+                "id": "r1",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r2",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              },
+              {
+                "id": "r3",
+                "kind": "braid_crossing",
+                "left_index": 1,
+                "sign": -1
+              },
+              {
+                "id": "r4",
+                "kind": "braid_crossing",
+                "left_index": 2,
+                "sign": 1
+              }
+            ],
+            "program_id": "sigma-figure-eight-plus-one-framed",
+            "schema": "twisted-yetter.local-piece-program.v1",
+            "strand_count": 3
+          }
+        },
+        "oracle_fixed_sigma_value": {
+          "coefficients": [
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "display": "-zeta16^5 - zeta16",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "rf_value": {
+          "coefficients": [
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "display": "-zeta16^5 - zeta16",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "status": "pass"
+      }
+    ],
+    "move_regression_count": 4,
+    "move_regressions": [
+      {
+        "left": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1,
+                  1
+                ],
+                "framings": [
+                  0,
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0,
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 2,
+                "components_0_based_strands": [
+                  [
+                    0
+                  ],
+                  [
+                    1
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  1
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "piece_count": 0,
+              "program_id": "rf-local-case",
+              "strand_count": 2,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1,
+                  1
+                ],
+                "framings": [
+                  0,
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0,
+                  0
+                ]
+              },
+              "pieces": [],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 2
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "display": "2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "display": "2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "name": "rf-r-r-inverse-cancellation",
+        "oracle_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "reason": "local R followed by R^{-1} cancels",
+        "rf_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "right": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                -1
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1,
+                  1
+                ],
+                "framings": [
+                  0,
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0,
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 2,
+                "components_0_based_strands": [
+                  [
+                    0
+                  ],
+                  [
+                    1
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  1
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "piece_count": 2,
+              "program_id": "rf-local-case",
+              "strand_count": 2,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1,
+                  1
+                ],
+                "framings": [
+                  0,
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0,
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 2
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "display": "2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "display": "2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "left": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                1,
+                1
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 3,
+              "program_id": "rf-local-case",
+              "strand_count": 2,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 2
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "name": "rf-trefoil-positive-markov",
+        "oracle_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "reason": "closure(beta) equals closure(beta sigma_n)",
+        "rf_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "right": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                1,
+                1,
+                2
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 4,
+              "program_id": "rf-local-case",
+              "strand_count": 3,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r4",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": 1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 3
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "left": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                1,
+                1
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 3,
+              "program_id": "rf-local-case",
+              "strand_count": 2,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 2
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "name": "rf-trefoil-negative-markov",
+        "oracle_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "reason": "closure(beta) equals closure(beta sigma_n^-1)",
+        "rf_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "right": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                1,
+                1,
+                -2
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 4,
+              "program_id": "rf-local-case",
+              "strand_count": 3,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r4",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": -1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 3
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "status": "pass"
+      },
+      {
+        "left": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                -1,
+                2,
+                -1,
+                2
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 4,
+              "program_id": "rf-local-case",
+              "strand_count": 3,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": 1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                },
+                {
+                  "id": "r4",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": 1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 3
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "name": "rf-figure-eight-conjugation",
+        "oracle_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "reason": "closure(beta) equals closure(alpha beta alpha^-1)",
+        "rf_difference": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "right": {
+          "local_piece_program": {
+            "diagnostics": {
+              "braid_word": [
+                1,
+                -1,
+                2,
+                -1,
+                2,
+                -1
+              ],
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "closure_data": {
+                "component_count": 1,
+                "components_0_based_strands": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ],
+                "strand_to_component": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "linking_matrix": [
+                [
+                  0
+                ]
+              ],
+              "piece_count": 6,
+              "program_id": "rf-local-case",
+              "strand_count": 3,
+              "supported_piece_kinds": [
+                "braid_crossing"
+              ],
+              "unsupported_piece_kinds_v1": [
+                "cup",
+                "cap",
+                "trivalent_split",
+                "trivalent_merge"
+              ]
+            },
+            "program": {
+              "category_id": "SU(2)_2",
+              "closure": {
+                "fixed_labels": [
+                  1
+                ],
+                "framings": [
+                  0
+                ],
+                "kind": "braid_closure",
+                "omega_labels": [
+                  0
+                ]
+              },
+              "pieces": [
+                {
+                  "id": "r1",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": 1
+                },
+                {
+                  "id": "r2",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                },
+                {
+                  "id": "r3",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": 1
+                },
+                {
+                  "id": "r4",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                },
+                {
+                  "id": "r5",
+                  "kind": "braid_crossing",
+                  "left_index": 2,
+                  "sign": 1
+                },
+                {
+                  "id": "r6",
+                  "kind": "braid_crossing",
+                  "left_index": 1,
+                  "sign": -1
+                }
+              ],
+              "program_id": "rf-local-case",
+              "schema": "twisted-yetter.local-piece-program.v1",
+              "strand_count": 3
+            }
+          },
+          "oracle_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          },
+          "rf_value": {
+            "coefficients": [
+              "0",
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            "display": "zeta16^6 - zeta16^2",
+            "field": "CyclotomicField(16)",
+            "zeta_symbol": "zeta16"
+          }
+        },
+        "status": "pass"
+      }
+    ],
+    "not_scope": "Omega expansion, mixed simple labels, arbitrary component colorings, n>3 fusion-path implementation, cup/cap boundary programs, special/dotted links, closed 4-manifold normalization, or exotic-pair computation",
+    "rf_controls": [
+      {
+        "actual": [
+          [
+            {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ],
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ]
+        ],
+        "expected": [
+          [
+            {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ],
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "0",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "1",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "1",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ]
+        ],
+        "name": "f_matrix_is_involutive",
+        "status": "pass"
+      },
+      {
+        "actual": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "expected": {
+          "coefficients": [
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "display": "-zeta16^6 + zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "name": "two_strand_sigma_unknot_calibration",
+        "status": "pass"
+      },
+      {
+        "actual": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "expected": {
+          "coefficients": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "0",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "name": "two_strand_sigma_hopf_calibration",
+        "status": "pass"
+      },
+      {
+        "actual": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "expected": {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "display": "zeta16^6 - zeta16^2",
+          "field": "CyclotomicField(16)",
+          "zeta_symbol": "zeta16"
+        },
+        "name": "two_strand_sigma_trefoil_calibration",
+        "status": "pass"
+      },
+      {
+        "left": [
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ],
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "-1/2",
+                "0",
+                "0",
+                "0",
+                "-1/2",
+                "0"
+              ],
+              "display": "-1/2*zeta16^6 - 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ]
+        ],
+        "name": "b3_braid_relation",
+        "right": [
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ],
+          [
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "1/2",
+                "0",
+                "0",
+                "0",
+                "1/2",
+                "0"
+              ],
+              "display": "1/2*zeta16^6 + 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            },
+            {
+              "coefficients": [
+                "0",
+                "0",
+                "-1/2",
+                "0",
+                "0",
+                "0",
+                "-1/2",
+                "0"
+              ],
+              "display": "-1/2*zeta16^6 - 1/2*zeta16^2",
+              "field": "CyclotomicField(16)",
+              "zeta_symbol": "zeta16"
+            }
+          ]
+        ],
+        "status": "pass"
+      }
+    ],
+    "schema": "twisted-yetter.su2_2-rf-local-backend.v1",
+    "scope": "fixed-label all-sigma braid closures with at most three strands, evaluated by explicit R/F fusion-path matrices and categorical trace",
+    "status": "pass",
+    "upstream_backend_artifacts": [
+      "experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json",
+      "experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json"
+    ]
+  },
+  "finished_at_utc": "2026-07-01T20:16:52Z",
+  "generator_script": "experiments/sage/su2_2_rf_local_backend.sage.py",
+  "git": {
+    "commit": "b212e104545a8ec967b40ce560fe6a64b4453fbf",
+    "dirty": true
+  },
+  "input_hash": "89e08afb2a65ab02efabca3f9f0321b65288a1ab6b1f50f36b64f74b69a00f3a",
+  "log_references": [],
+  "notes": [
+    "This is B1-prime: fixed all-sigma braid closures evaluated by explicit R/F matrices.",
+    "The SU(2)_2 braid oracle is used only as an external exact comparison backend."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/su2_2_rf_local_backend.sage.py --output experiments/results/local-piece/su2-2-rf-local-backend-v1.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-07-01T20:16:51Z",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.13.7",
+    "sage": "10.8"
+  }
+}

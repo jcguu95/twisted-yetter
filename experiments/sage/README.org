@@ -329,6 +329,36 @@ experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json
 任意 planar tensor graph、special/dotted links、closed 4-manifold normalization
 或 exotic-pair computation。
 
+產生 =SU(2)_2= B1' explicit =R/F= local backend certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_rf_local_backend.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/local-piece/su2-2-rf-local-backend-v1.json
+#+end_src
+
+=su2_2_rf_local_backend.sage.py= 是 B0 之後更接近真正 local evaluator 的
+切片：
+
+- 固定 all-=sigma= braid closures；
+- 使用 explicit =R_{sigma,sigma}^0=、=R_{sigma,sigma}^{psi}= 與
+  =F^{sigma,sigma,sigma}_{sigma}=；
+- 在 fusion-path basis 上做 braid matrix multiplication；
+- 對 total fusion sector 取 categorical trace；
+- 用既有 braid oracle 只作 exact comparison，不作主要計算。
+
+目前涵蓋一到三股 braid closure，包括 =sigma= unknot、two-component unlink、
+positive Hopf、right trefoil、figure-eight，以及 =R R^{-1}= cancellation、
+positive/negative Markov stabilization、braid conjugation regressions。
+
+這仍不是 Omega evaluator，也不是 mixed-label 或任意 planar tensor graph evaluator；
+它只證明 evaluator track 已經開始從「包裝 braid oracle」移向顯式 local categorical
+matrix contraction。
+
 * Fusion-Channel Gate
 
 =experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面
