@@ -268,6 +268,37 @@ cases，總共 180 個 exact comparisons。這比 meridian-unknot slide 更接�
 nontrivial-over-nontrivial Kirby move，但仍不是 arbitrary linked starting
 diagram 或 full =F/R= evaluator。
 
+產生 =SU(3)_3= multiplicity-nonfree stress certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su3_3_multiplicity_stress.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/mtc-candidates/su3-3-multiplicity-stress-v1.json
+#+end_src
+
+=su3_3_multiplicity_stress.sage.py= 測第一個 =SU(3)_k= multiplicity-nonfree
+case：
+
+- =SU(3)_3=，rank 10，=U(C)=Z/3=，degree 是 =deg(a,b)=a+2b mod 3=；
+- multiplicity witness 是 =(1,1) tensor (1,1)= 含有 =2*(1,1)=；
+- simple-current row targets 是 =0 -> (0,0)=、=1 -> (3,0)=、=2 -> (0,3)=；
+- =Omega_a= Hopf projector targets 要取 dual，所以是
+  =0 -> (0,0)=、=1 -> (0,3)=、=2 -> (3,0)=；
+- meridian-slide suite 覆蓋前面 =SU(2)_6= 用過的七個 framed-unknot slide
+  scenarios，總共 11250 個 coefficient identities；
+- framed meridian-slide 的 sector transform 是 =a - sum f_r b_r mod 3=；
+- nontrivial-over-nontrivial parallel-copy fusion suite 做 900 個 coefficient
+  identities，並真正使用 fusion multiplicities。
+
+這不是 arbitrary =SU(3)_3= link polynomial 或 full =F/R= evaluator；它是
+category-level symbolic coefficient stress test，用來把目前所有已用過的
+Kirby-move classes 推到非 =Z/2=、非自對偶 simple-current、multiplicity-nonfree
+的情況。
+
 * Fusion-Channel Gate
 
 =experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面
