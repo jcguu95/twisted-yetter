@@ -15,13 +15,18 @@
 experiments/sage/mtc_candidate_data.sage.py
 experiments/results/mtc-candidates/mtc-candidate-data-v1.json
 tests/test_mtc_candidate_data.py
+experiments/sage/vec_z3_pointed_stress.sage.py
+experiments/results/mtc-candidates/vec-z3-pointed-stress-v1.json
+tests/test_vec_z3_pointed_stress.py
 #+end_src
 
 重現指令：
 
 #+begin_src sh
 DOT_SAGE="$PWD/.sage" sage experiments/sage/mtc_candidate_data.sage.py
+DOT_SAGE="$PWD/.sage" sage experiments/sage/vec_z3_pointed_stress.sage.py
 UV_CACHE_DIR="$PWD/.uv-cache" uv run pytest tests/test_mtc_candidate_data.py
+UV_CACHE_DIR="$PWD/.uv-cache" uv run pytest tests/test_vec_z3_pointed_stress.py
 #+end_src
 
 結果摘要：
@@ -32,6 +37,8 @@ SU(2)_6: pass
 Vec_Z3_q: pass
 SU(3)_2: pass
 pytest tests/test_mtc_candidate_data.py: 4 passed
+vec_z3_pointed_stress: pass, moves 121, comparisons 17589, failures 0
+pytest tests/test_vec_z3_pointed_stress.py: 3 passed
 #+end_src
 
 * Boundary
@@ -138,6 +145,54 @@ Omega labels 則用：
 #+end_src
 
 全部通過。
+
+** Vec_{Z/3}^q Pointed Stress Suite
+
+接著把 =Vec_{Z/3}^q= 擴成真正的 linking-matrix / Kirby basis-change stress
+suite。這一類 category 是 pointed，所以 fixed-label framed link evaluation 不需要
+=F/R= evaluator；對 linking matrix =Q= 和 simple labels =x_i in Z/3=：
+
+#+begin_src text
+value_Q(x)
+  = product_i q(x_i)^{Q_ii}
+    product_{i<j} b(x_i,x_j)^{Q_ij}
+
+q(x)=zeta_3^(x^2)
+b(x,y)=zeta_3^(2xy)
+#+end_src
+
+再展開 twisted Kirby color：
+
+#+begin_src text
+Omega_a value
+  = sum_x zeta_3^{sum_i a_i x_i} value_Q(x)
+#+end_src
+
+若 =B in GL(n,Z)= 的 columns 是 new basis vectors written in old basis，則：
+
+#+begin_src text
+Q' = B^T Q B
+a' = B^T a mod 3
+#+end_src
+
+stress suite 覆蓋：
+
+#+begin_src text
+sizes = 1,2,3,4,5
+basis moves = elementary slides, swaps, orientation reversals, compound moves
+total moves = 121
+total Omega comparisons = 17589
+failures = 0
+#+end_src
+
+每個 comparison 都真的檢查：
+
+#+begin_src text
+Omega_a(Q) == Omega_{B^T a}(B^T Q B)
+#+end_src
+
+初版直接用 Sage field element 在內層展開，跑約 95 秒；後來改成先做純 =mod 3=
+Gauss-sum exponent counting，再轉回 =CyclotomicField(3)=，同樣檢查範圍降到約 5 秒。
 
 * Candidate 3: SU(3)_2
 

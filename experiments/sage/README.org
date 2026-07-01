@@ -89,6 +89,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/mtc_candidate_data.sage.py
 experiments/results/mtc-candidates/mtc-candidate-data-v1.json
 #+end_src
 
+產生 =Vec_{Z/3}^q= pointed linking-matrix stress certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/vec_z3_pointed_stress.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/mtc-candidates/vec-z3-pointed-stress-v1.json
+#+end_src
+
 * Payload Shape
 
 #+begin_src json
@@ -172,3 +184,7 @@ experiments/results/mtc-candidates/mtc-candidate-data-v1.json
 coefficients、以及小型 algebraic controls。它不是 arbitrary colored link evaluator；
 離開 pointed categories 後，fixed-label link evaluation 仍需要 explicit
 =F/R=-symbol gauge 或 colored-Jones / fusion-space trace backend。
+
+=vec_z3_pointed_stress.sage.py= 則利用 pointed category 的特性，直接把 framed
+link evaluation 化成 linking matrix Gauss sum，測 =Q'=B^TQB= 與
+=a'=B^Ta mod 3= 的 Kirby basis-change invariance。
