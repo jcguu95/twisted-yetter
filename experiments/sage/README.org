@@ -125,6 +125,12 @@ experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 - right trefoil slid over a split =+1=-framed unknot；
 - right trefoil slid over two split =+1=-framed unknots；
 - generated 2-strand knot family slid over 1, 2, or 3 split =+1=-framed unknots；
+- true connected-sum band slide：right trefoil slid over right trefoil；
+- 帶既有 linking 的 true band slide；
+- mixed slide-over framings =-1= 與 =+1= 的 true band slide，並檢查
+  slide 後 off-diagonal linking term =l+f_2=；
+- component-order permutation checks：component order 改變時，=Omega= labels 與
+  framings 必須一起 permute；
 - 每個 comparison 同時檢查 before value、after value、以及既有 lab note 的 expected value；
 - 若任一值不一致，script 會以非零狀態停止。
 
@@ -134,4 +140,7 @@ experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 - 1-handle / 3-handle normalization；
 - full Kirby diagram parser；
 - arbitrary planar diagram 到 local tensor network 的轉換；
+- arbitrary true band-sum constructor；目前只涵蓋幾個手寫但機械驗證的 true band
+  slide toys，尤其 =|f_2|>1= 的 mixed framing 仍需要 framed push-off / cabling
+  constructor；
 - 對 twisted formula 本身的 theorem-level proof。

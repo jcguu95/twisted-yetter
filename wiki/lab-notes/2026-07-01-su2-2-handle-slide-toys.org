@@ -7,7 +7,8 @@
 
 - status: =computed evidence / mechanized handle-slide toy checks=
 - purpose: 機械化先前自然語言 / scratch exact arithmetic 已經做過的 handle-slide
-  examples，並加入一個小型 generated family。
+  examples，加入一個小型 generated family，並補上 true band-sum slide、mixed framing、
+  pre-existing linking、component-order permutation 的檢查。
 - source note:
   =wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org=
 - boundary:
@@ -34,12 +35,34 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
 #+begin_src text
 wrote experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 status: pass
-examples: 4
-comparisons: 136
+examples: 8
+comparisons: 180
 #+end_src
 
 如果任一 value 和舊 note 不同，script 會產生 =fail= certificate 並以 nonzero status
 停止。
+
+* Validation Transcript
+
+本輪修改後執行：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --self-test
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_stress_suite.sage.py
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_auto_stress.sage.py
+UV_CACHE_DIR="$PWD/.uv-cache" uv run pytest
+#+end_src
+
+結果摘要：
+
+#+begin_src text
+self-test: pass
+handle-slide toys: pass, examples 8, comparisons 180
+braid stress suite: pass, checks 5
+braid auto stress: pass, cases 48, move checks 552, sector checks 2760
+pytest: 283 passed
+#+end_src
 
 * Example 1: Unknotted Two-Component Slides
 
@@ -210,6 +233,149 @@ m = 1,2,3
 
 總共 112 個 generated-family comparisons，全部 =pass=。
 
+* Example 5: True Band-Sum Slide Between Trefoils
+
+前面的 trefoil-over-unknot tests 已經不是純 =S=-matrix cheating，但 slide-over component
+仍然是 unknot。這一輪加入第一個真正的 band-sum toy：
+
+#+begin_src text
+before:
+  B_4 braid word = sigma_1^3 sigma_3^3
+  components = right trefoil union right trefoil
+  framings = (0,0)
+  labels = (a,b)
+
+after:
+  B_5 braid word = sigma_1^3 sigma_2^3 sigma_4^3
+  components = (right trefoil # right trefoil) union right trefoil
+  framings = (0,0)
+  labels = (a+b,b)
+#+end_src
+
+全部 4 個 label choices 通過：
+
+#+begin_src text
+source_test = true-band-sum-1
+comparisons = 4
+status = pass
+#+end_src
+
+這不是 arbitrary band-sum constructor，但至少確認了 calculator 可以處理「slide 後
+component 本身變成 connected sum」的非 Hopf-only case。
+
+* Example 6: True Band-Sum With Pre-Existing Linking
+
+接著加入第三個 component，在 slide 前 link 第一個 trefoil；slide 後它應該 link 新的
+connected-sum component。
+
+#+begin_src text
+before:
+  components = K_1, K_2, M
+  K_1, K_2 = two split right trefoils
+  M links K_1 once
+  framings = (0,0,0)
+  labels = (a,b,c)
+
+after:
+  components = K_1 # K_2, K_2, M
+  M links K_1 # K_2 once
+  framings = (0,0,0)
+  labels = (a+b,b,c)
+#+end_src
+
+全部 8 個 label choices 通過：
+
+#+begin_src text
+source_test = true-band-sum-2
+comparisons = 8
+status = pass
+#+end_src
+
+這個 test 的目的，是避免我們只在 split case 裡產生幸運相等。
+
+* Example 7: Mixed Framing True Band-Sum
+
+這是本輪最重要的修正點。若 =K_1= slides over =K_2=，old linking matrix
+
+#+begin_src text
+Q = [[f_1, l],
+     [l,   f_2]]
+#+end_src
+
+在 new basis =e_1' = e_1 + e_2=, =e_2' = e_2= 下變成
+
+#+begin_src text
+Q' = [[f_1 + 2l + f_2, l + f_2],
+      [l + f_2,         f_2]]
+#+end_src
+
+因此即使 slide 前兩個 components split，也就是 =l=0，只要 slide-over component 有
+framing =f_2 != 0=，slide 後就不只是把 =K_1'=K_1#K_2= 的 self-framing 改成
+=f_1+f_2=；它還必須和保留下來的 =K_2= 有 linking number =f_2=。
+
+本輪一開始的 naive mixed-framing model 正是漏掉這個 off-diagonal term，所以 fail。
+修正後的 after braid 在 band-sum base word 後面加上 =sigma_3^{2f_2}= 的 tail
+（目前只宣稱 =f_2= 為 =-1= 或 =+1= 的手寫 local model）。
+
+測試 cases：
+
+#+begin_src text
+(f_1,f_2) = ( 1,-1)
+(f_1,f_2) = ( 2,-1)
+(f_1,f_2) = ( 0, 1)
+(f_1,f_2) = (-1, 1)
+#+end_src
+
+label rule 仍然是：
+
+#+begin_src text
+before labels = (a,b)
+after labels  = (a+b,b)
+#+end_src
+
+全部 16 個 comparisons 通過：
+
+#+begin_src text
+source_test = true-band-sum-3
+comparisons = 16
+status = pass
+#+end_src
+
+重要 boundary：
+
+- =|f_2|>1= 尚未宣稱涵蓋。
+- 要處理任意 framing，應該先做一個真正的 framed push-off / cabling constructor。
+- 這個 test 的價值是先把 =Q'=B^TQB= 的 framing/linking bookkeeping 防呆。
+
+* Example 8: Component Order And Label Permutation
+
+Kirby diagram parser / braid closure evaluator 之後一定會遇到 component order 改變。這一輪
+加入小型檢查：若 component order 交換，=Omega= labels 與 framings 必須跟著交換。
+
+測試包含：
+
+#+begin_src text
+split right/left trefoil swap
+trefoil-meridian swap with framings (0,1) -> (1,0)
+trefoil-meridian swap with framings (1,0) -> (0,1)
+trefoil-meridian swap with framings (1,-1) -> (-1,1)
+#+end_src
+
+label rule：
+
+#+begin_src text
+before labels = (a,b)
+after labels  = (b,a)
+#+end_src
+
+全部 16 個 comparisons 通過：
+
+#+begin_src text
+source_test = component-order-permutation
+comparisons = 16
+status = pass
+#+end_src
+
 * Interpretation
 
 這一輪比 pure braid presentation stress test 更接近 Kirby calculus，因為它檢查的是：
@@ -223,4 +389,5 @@ prior hand/scratch expected value
 #+end_src
 
 下一步仍然不是直接上 exotic pair，而是把這個 generator 推到更一般的 framed-link
-handle-slide layer：目前它只處理 2-strand knot + meridian unknots，不是任意 band-sum。
+handle-slide layer：目前它處理 2-strand knot + meridian unknots，以及幾個手寫的
+true band-sum toys；仍然不是任意 band-sum evaluator。

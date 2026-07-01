@@ -13,6 +13,10 @@ hand/natural-language scratch work, then adds a small generated family:
 3. the same trefoil slid over two split +1-framed unknots;
 4. generated 2-strand knot examples slid over 1, 2, or 3 split +1-framed
    unknots.
+5. true connected-sum band slides between two trefoils, including pre-existing
+   linking and slide-over framings -1, 0, +1.
+6. component-order permutation checks where labels and framings must be
+   permuted with the components.
 
 Each comparison checks:
 
@@ -61,6 +65,10 @@ def run_suite(oracle):
         trefoil_over_plus_one_unknot(oracle),
         trefoil_over_two_plus_one_unlinks(oracle),
         generated_two_strand_knot_meridian_slides(oracle),
+        true_band_sum_split_trefoils(oracle),
+        true_band_sum_with_preexisting_linking(oracle),
+        true_band_sum_unit_mixed_framings(oracle),
+        component_order_label_permutations(oracle),
     ]
     status = "pass" if all(example["status"] == "pass" for example in examples) else "fail"
     return {
@@ -70,7 +78,8 @@ def run_suite(oracle):
         "source_note": "wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org",
         "scope": (
             "mechanized SU(2)_2 checks for unknotted slides, trefoil one/two-slide "
-            "examples from the prior note, and a generated 2-strand knot slide family"
+            "examples from the prior note, a generated 2-strand knot slide family, "
+            "true connected-sum band-slide toys, and component-order permutation checks"
         ),
         "not_scope": (
             "general Kirby diagram evaluator, arbitrary band-sum constructor, "
@@ -313,6 +322,227 @@ def generated_two_strand_knot_meridian_slides(oracle):
     }
 
 
+def true_band_sum_split_trefoils(oracle):
+    before = split_two_trefoils()
+    after = true_band_sum_two_trefoils(slide_over_framing=0, framings=(0, 0))
+
+    comparisons = []
+    for a, b in product((0, 1), repeat=2):
+        comparisons.append(
+            slide_comparison(
+                oracle,
+                case_name="right-trefoil-over-right-trefoil-zero-framing",
+                source_test="true-band-sum-1",
+                before=before,
+                after=after,
+                before_labels=(a, b),
+                after_labels=((a + b) % 2, b),
+            )
+        )
+
+    return {
+        "name": "true-band-sum-split-trefoils",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "after_braid_note": (
+            "before is sigma_1^3 union sigma_3^3 in B_4; after is "
+            "sigma_1^3 sigma_2^3 union sigma_4^3 in B_5, representing "
+            "(right trefoil # right trefoil) union right trefoil"
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def true_band_sum_with_preexisting_linking(oracle):
+    before = {
+        "n_strands": 5,
+        "braid_word": split_two_trefoils()["braid_word"] + meridian_word_for_new_strand(5),
+        "framings": (0, 0, 0),
+    }
+    after = {
+        "n_strands": 6,
+        "braid_word": true_band_sum_two_trefoils(
+            slide_over_framing=0,
+            framings=(0, 0),
+        )["braid_word"] + (5, 4, 3, 3, -4, -5),
+        "framings": (0, 0, 0),
+    }
+
+    comparisons = []
+    for a, b, c in product((0, 1), repeat=3):
+        comparisons.append(
+            slide_comparison(
+                oracle,
+                case_name="true-band-sum-with-preexisting-linking",
+                source_test="true-band-sum-2",
+                before=before,
+                after=after,
+                before_labels=(a, b, c),
+                after_labels=((a + b) % 2, b, c),
+            )
+        )
+
+    return {
+        "name": "true-band-sum-with-preexisting-linking",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "after_braid_note": (
+            "third component links the first trefoil before the slide and links "
+            "the connected-sum component after the slide"
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def true_band_sum_unit_mixed_framings(oracle):
+    cases = [
+        {"name": "slide-over-minus-one", "framings": (1, -1)},
+        {"name": "slide-over-plus-one", "framings": (0, 1)},
+        {"name": "slide-over-plus-one-shifted", "framings": (-1, 1)},
+        {"name": "slide-over-minus-one-shifted", "framings": (2, -1)},
+    ]
+
+    comparisons = []
+    for case in cases:
+        f1, f2 = case["framings"]
+        before = {
+            **split_two_trefoils(),
+            "framings": (f1, f2),
+        }
+        after = true_band_sum_two_trefoils(
+            slide_over_framing=f2,
+            framings=(f1 + f2, f2),
+        )
+        for a, b in product((0, 1), repeat=2):
+            comparisons.append(
+                slide_comparison(
+                    oracle,
+                    case_name=f"true-band-sum-mixed-framing-{case['name']}",
+                    source_test="true-band-sum-3",
+                    before=before,
+                    after=after,
+                    before_labels=(a, b),
+                    after_labels=((a + b) % 2, b),
+                )
+            )
+
+    return {
+        "name": "true-band-sum-unit-mixed-framings",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "scope_note": (
+            "covers slide-over framings -1 and +1.  The after braid includes "
+            "the off-diagonal linking term l+f2 from Q' = B^T Q B.  Higher "
+            "|f2| requires a framed push-off/cabling constructor and is not "
+            "claimed here."
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def component_order_label_permutations(oracle):
+    cases = [
+        {
+            "name": "split-right-left-trefoil-swap",
+            "before": {
+                "n_strands": 4,
+                "braid_word": (1, 1, 1, -3, -3, -3),
+                "framings": (0, 0),
+            },
+            "after": {
+                "n_strands": 4,
+                "braid_word": (-1, -1, -1, 3, 3, 3),
+                "framings": (0, 0),
+            },
+        },
+        {
+            "name": "trefoil-meridian-swap-framings-0-1",
+            "before": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 1, 2, 2),
+                "framings": (0, 1),
+            },
+            "after": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 2, 2, 2),
+                "framings": (1, 0),
+            },
+        },
+        {
+            "name": "trefoil-meridian-swap-framings-1-0",
+            "before": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 1, 2, 2),
+                "framings": (1, 0),
+            },
+            "after": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 2, 2, 2),
+                "framings": (0, 1),
+            },
+        },
+        {
+            "name": "trefoil-meridian-swap-framings-1-minus-1",
+            "before": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 1, 2, 2),
+                "framings": (1, -1),
+            },
+            "after": {
+                "n_strands": 3,
+                "braid_word": (1, 1, 2, 2, 2),
+                "framings": (-1, 1),
+            },
+        },
+    ]
+
+    comparisons = []
+    for case in cases:
+        for a, b in product((0, 1), repeat=2):
+            comparisons.append(
+                slide_comparison(
+                    oracle,
+                    case_name=case["name"],
+                    source_test="component-order-permutation",
+                    before=case["before"],
+                    after=case["after"],
+                    before_labels=(a, b),
+                    after_labels=(b, a),
+                )
+            )
+
+    return {
+        "name": "component-order-label-permutations",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "scope_note": (
+            "checks that component order changes are harmless only when both "
+            "Omega labels and framings are permuted with the components"
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def split_two_trefoils():
+    return {
+        "n_strands": 4,
+        "braid_word": (1, 1, 1, 3, 3, 3),
+        "framings": (0, 0),
+    }
+
+
+def true_band_sum_two_trefoils(*, slide_over_framing, framings):
+    base_word = (1, 1, 1, 2, 2, 2, 4, 4, 4)
+    return {
+        "n_strands": 5,
+        "braid_word": base_word + linking_tail_between_band_sum_components(slide_over_framing),
+        "framings": tuple(framings),
+    }
+
+
+def linking_tail_between_band_sum_components(linking_number):
+    if linking_number == 0:
+        return ()
+    generator = 3 if linking_number > 0 else -3
+    return tuple(generator for _ in range(2 * abs(linking_number)))
+
+
 def split_knot_with_unlinks(*, knot_n_strands, knot_word, meridian_count):
     return {
         "n_strands": knot_n_strands + meridian_count,
@@ -339,6 +569,41 @@ def meridian_word_for_new_strand(strand):
         tuple(range(strand - 1, 2, -1))
         + (2, 2)
         + tuple(range(-3, -strand, -1))
+    )
+
+
+def slide_comparison(
+    oracle,
+    *,
+    case_name,
+    source_test,
+    before,
+    after,
+    before_labels,
+    after_labels,
+):
+    before_value = oracle.omega_value(
+        before["n_strands"],
+        before["braid_word"],
+        before["framings"],
+        before_labels,
+    )
+    after_value = oracle.omega_value(
+        after["n_strands"],
+        after["braid_word"],
+        after["framings"],
+        after_labels,
+    )
+    return comparison_payload(
+        oracle,
+        case_name=case_name,
+        source_test=source_test,
+        labels={"before": list(before_labels), "after": list(after_labels)},
+        before=before,
+        after=after,
+        before_value=before_value,
+        after_value=after_value,
+        expected_value=before_value,
     )
 
 
