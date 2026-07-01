@@ -374,6 +374,93 @@ Results:
 
 Thus the trefoil-containing handle-slide test passes.
 
+* Test 9: Three-Component / Two-Slide Pressure Test
+
+This test was run after committing the initial temporary note.  It is recorded
+here to avoid leaving the strongest scratch calculation only in chat history.
+
+Before slides:
+
+#+begin_src text
+K = 0-framed right trefoil
+U = split +1-framed unknot
+V = split +1-framed unknot
+labels = (a,b,c)
+#+end_src
+
+Slides:
+
+#+begin_src text
+K <- K + U
+K <- K + V
+#+end_src
+
+After the two slides:
+
+#+begin_src text
+K' = trefoil-shaped component with framing +2
+U  = +1-framed unknot encircling/linking K' once
+V  = +1-framed unknot encircling/linking K' once
+labels = (a+b+c, b, c)
+#+end_src
+
+The after-slide formula uses the trefoil =R^3= evaluation and two encircling
+factors:
+
+#+begin_src text
+sum_{i,j,k}
+  d_i chi_{a+b+c}(i)
+  d_j chi_b(j)
+  d_k chi_c(k)
+  T_{trefoil,i}^{framing +2}
+  theta_j
+  theta_k
+  (S_{ij}/S_{0i})
+  (S_{ik}/S_{0i})
+#+end_src
+
+This is still not a full arbitrary planar diagram evaluator, but it is stronger
+than Test 8 because it checks two consecutive slides, three =Z/2= labels, and
+two encircling factors in the presence of a trefoil =R=-symbol computation.
+
+Results:
+
+#+begin_src text
+(a,b,c)=(0,0,0):
+  before =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+  after  =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+
+(a,b,c)=(0,0,1):
+  before = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+  after  = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+
+(a,b,c)=(0,1,0):
+  before = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+  after  = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+
+(a,b,c)=(0,1,1):
+  before =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+  after  =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+
+(a,b,c)=(1,0,0):
+  before = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+  after  = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+
+(a,b,c)=(1,0,1):
+  before =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+  after  =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+
+(a,b,c)=(1,1,0):
+  before =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+  after  =  4 sqrt(2) zeta_16^0 - 4 sqrt(2) zeta_16^4 - 8 zeta_16^6
+
+(a,b,c)=(1,1,1):
+  before = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+  after  = -4 sqrt(2) zeta_16^0 + 4 sqrt(2) zeta_16^4 + 8 zeta_16^6
+#+end_src
+
+Thus all eight =Z/2= label choices pass this two-slide pressure test.
+
 * Current Interpretation
 
 The tests support the following working understanding:
@@ -386,10 +473,12 @@ The tests support the following working understanding:
    handle-basis change.
 4. The trefoil test uses actual =R=-symbol data and is not just a Hopf
    =S=-matrix shortcut.
+5. The three-component pressure test suggests that the label-transform rule is
+   not only a one-slide accident in these =SU(2)_2= examples.
 
-The next useful pressure test is a three-handle-component / multi-slide exact
-calculation, still in =SU(2)_2= and =A=Z/2=, to reduce the chance that the
-previous checks pass only because the examples are too small.
+The next useful pressure test should either introduce negative crossings /
+mirror trefoils or move toward a small general braid-word evaluator, still
+before touching exotic-pair diagrams.
 
 * Reproduction
 
