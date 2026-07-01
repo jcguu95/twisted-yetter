@@ -53,6 +53,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_stress_suite.sage.py
 experiments/results/sage-stress/su2-2-braid-stress-v1.json
 #+end_src
 
+產生自動小 braid word stress-test certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_auto_stress.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json
+#+end_src
+
 * Payload Shape
 
 #+begin_src json
@@ -87,6 +99,13 @@ experiments/results/sage-stress/su2-2-braid-stress-v1.json
 - right trefoil positive / negative Markov stabilization；
 - figure-eight braid conjugation，含 =0= framing 與 =+1= framing；
 - trefoil split union unknot 的 multiplicativity。
+
+自動 stress suite 另保存：
+
+- 48 個 deterministic one-component small braid closures；
+- 552 個 Markov / conjugation move checks；
+- 2760 個 exact sector comparisons，包含 =Omega_0/Omega_1= 與 fixed labels =0,1,2=；
+- scope 明確排除 multi-component =Omega= label permutation。
 
 尚未涵蓋：
 

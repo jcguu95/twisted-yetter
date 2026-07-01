@@ -1,0 +1,105 @@
+#+TITLE: SU(2)_2 Braid Oracle 自動小 Braid 壓測
+#+DATE: 2026-07-01
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- status: =computed evidence / automated presentation stress test=
+- purpose: 把上一輪手選的 braid presentation checks 推廣成 deterministic 小 braid word
+  自動壓測。
+- boundary:
+  - 只測 one-component braid closures。
+  - 不處理 multi-component =Omega= label permutation。
+  - 不宣稱已證 Kirby handle-slide invariance。
+  - 不取代 future local-piece =ev/coev/R/F= evaluator。
+
+* Artifact
+
+#+begin_src text
+experiments/sage/su2_2_braid_auto_stress.sage.py
+experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json
+#+end_src
+
+重現指令：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_auto_stress.sage.py
+#+end_src
+
+輸出摘要：
+
+#+begin_src text
+wrote experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json
+status: pass
+cases: 48
+move checks: 552
+sector checks: 2760
+#+end_src
+
+* Generation Rule
+
+產生規則：
+
+- braid groups: =B_2= 與 =B_3=；
+- max lengths: =B_2= 長度最多 5，=B_3= 長度最多 4；
+- 過濾 immediate cancellation，例如 =sigma_i sigma_i^{-1}=；
+- 只保留 closure 正好是一個 component 的 braid；
+- deterministic 排序後取前 48 個 base cases；
+- 每個 base case 測 framing =0= 與 =1=；
+- 每個 move 測 =Omega_0/Omega_1= 以及 fixed simple labels =0,1,2=。
+
+Moves：
+
+- positive Markov stabilization；
+- negative Markov stabilization；
+- elementary braid conjugation。
+
+* Result
+
+全部 =pass=。
+
+總量：
+
+#+begin_src text
+base cases:        48
+move checks:       552
+sector comparisons: 2760
+#+end_src
+
+distinct =Omega= displayed values：
+
+#+begin_src text
+0
+4
+-2 zeta_16^3
+ 2 zeta_16^3
+#+end_src
+
+distinct fixed-label displayed values：
+
+#+begin_src text
+1
+-1
+zeta_16^6 - zeta_16^2
+-zeta_16^6 + zeta_16^2
+zeta_16^5 + zeta_16
+-zeta_16^5 - zeta_16
+#+end_src
+
+這比只檢查 =Omega_a= 更有用，因為 =SU(2)_2= 的 =Omega= sum 在許多小 knot 上會
+壓縮成少數值；fixed-label sectors 讓底層 =sigma= colored Jones-at-root path 也被檢查。
+
+* Interpretation
+
+這一輪增加的是 presentation robustness evidence：
+
+#+begin_src text
+同一個 one-component link，
+用不同 braid presentation 表示，
+在 fixed-label sectors 與 Omega sectors 都得到相同 exact value。
+#+end_src
+
+它仍然不是我們真正想要的 Kirby handle-slide stress test。下一步應該找可機械表示的
+handle-slide toy pairs，或先建立一個 framed link / linking matrix 層的 slide generator。
+
