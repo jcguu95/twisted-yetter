@@ -36,7 +36,7 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
 wrote experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 status: pass
 examples: 8
-comparisons: 180
+comparisons: 588
 #+end_src
 
 如果任一 value 和舊 note 不同，script 會產生 =fail= certificate 並以 nonzero status
@@ -58,7 +58,7 @@ UV_CACHE_DIR="$PWD/.uv-cache" uv run pytest
 
 #+begin_src text
 self-test: pass
-handle-slide toys: pass, examples 8, comparisons 180
+handle-slide toys: pass, examples 8, comparisons 588
 braid stress suite: pass, checks 5
 braid auto stress: pass, cases 48, move checks 552, sector checks 2760
 pytest: 283 passed
@@ -350,7 +350,8 @@ status = pass
 * Example 8: Component Order And Label Permutation
 
 Kirby diagram parser / braid closure evaluator 之後一定會遇到 component order 改變。這一輪
-加入小型檢查：若 component order 交換，=Omega= labels 與 framings 必須跟著交換。
+先加入 hand-written swap 檢查：若 component order 交換，=Omega= labels 與 framings
+必須跟著交換。
 
 測試包含：
 
@@ -368,11 +369,66 @@ before labels = (a,b)
 after labels  = (b,a)
 #+end_src
 
-全部 16 個 comparisons 通過：
+hand-written swaps 的 16 個 comparisons 通過：
 
 #+begin_src text
 source_test = component-order-permutation
 comparisons = 16
+status = pass
+#+end_src
+
+接著把這一類升級成 pressure test。做法是從 pure braid link =beta= 出發，對每個
+component permutation =p= 建立 after diagram：
+
+#+begin_src text
+after braid word = p^{-1} beta p
+#+end_src
+
+這裡 =p= 是把 old component identity 搬到 new component position 的 permutation
+braid。若 =old_to_new[i]=j=，則 after diagram 的 labels / framings 必須滿足：
+
+#+begin_src text
+after_labels[j]  = before_labels[i]
+after_framings[j]= before_framings[i]
+#+end_src
+
+一開始若用 =p beta p^{-1}= 並照同一個方向搬 labels，會得到錯誤結果；probe 顯示正確
+方向是 =p^{-1} beta p=。這件事很重要，因為 component-order bug 很容易被「value
+剛好對稱」掩蓋。
+
+pressure cases：
+
+#+begin_src text
+3-component pure link:
+  linking edges = (0,1,+1), (0,2,-1), (1,2,+1)
+  framings = (1,-1,2)
+  permutations = all 5 non-identity permutations
+  labels = all 2^3 Omega labels
+
+4-component pure link:
+  linking edges = (0,1,+1), (0,2,-1), (0,3,+1),
+                  (1,2,-1), (1,3,+1), (2,3,+2)
+  framings = (2,-1,0,1)
+  permutations = all 23 non-identity permutations
+  labels = all 2^4 Omega labels
+#+end_src
+
+為了避免 expensive repeated =Omega= expansion，script 先算 fixed-label sector amplitudes，
+再由 sectors 對所有 =Omega_a= 做 finite Fourier sum；這和直接呼叫 =omega_value=
+等價，但讓壓力測試可以快速跑完。
+
+pressure comparisons：
+
+#+begin_src text
+source_test = component-order-permutation-pressure
+comparisons = 408
+status = pass
+#+end_src
+
+所以 Example 8 總共：
+
+#+begin_src text
+comparisons = 424
 status = pass
 #+end_src
 

@@ -130,7 +130,9 @@ experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 - mixed slide-over framings =-1= 與 =+1= 的 true band slide，並檢查
   slide 後 off-diagonal linking term =l+f_2=；
 - component-order permutation checks：component order 改變時，=Omega= labels 與
-  framings 必須一起 permute；
+  framings 必須一起 permute；其中包含 hand-written swaps，以及 3-component /
+  4-component pure-link diagrams 對所有 non-identity permutations 的 conjugation
+  pressure tests；
 - 每個 comparison 同時檢查 before value、after value、以及既有 lab note 的 expected value；
 - 若任一值不一致，script 會以非零狀態停止。
 

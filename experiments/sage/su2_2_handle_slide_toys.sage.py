@@ -34,7 +34,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import sys
-from itertools import product
+from itertools import permutations, product
 from pathlib import Path
 import subprocess
 import time
@@ -438,7 +438,7 @@ def true_band_sum_unit_mixed_framings(oracle):
 
 
 def component_order_label_permutations(oracle):
-    cases = [
+    manual_cases = [
         {
             "name": "split-right-left-trefoil-swap",
             "before": {
@@ -494,7 +494,7 @@ def component_order_label_permutations(oracle):
     ]
 
     comparisons = []
-    for case in cases:
+    for case in manual_cases:
         for a, b in product((0, 1), repeat=2):
             comparisons.append(
                 slide_comparison(
@@ -508,15 +508,179 @@ def component_order_label_permutations(oracle):
                 )
             )
 
+    comparisons.extend(component_order_pressure_comparisons(oracle))
+
     return {
         "name": "component-order-label-permutations",
         "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
         "scope_note": (
-            "checks that component order changes are harmless only when both "
-            "Omega labels and framings are permuted with the components"
+            "checks hand-written swaps and generated permutation-braid conjugates. "
+            "Component order changes are harmless only when both Omega labels and "
+            "framings are permuted with the components."
         ),
         "comparisons": comparisons,
     }
+
+
+def component_order_pressure_comparisons(oracle):
+    cases = [
+        {
+            "name": "three-component-pure-link-all-nonidentity-permutations",
+            "diagram": pure_link_diagram(
+                3,
+                edges=[
+                    (0, 1, 1),
+                    (0, 2, -1),
+                    (1, 2, 1),
+                ],
+                framings=(1, -1, 2),
+            ),
+        },
+        {
+            "name": "four-component-pure-link-all-nonidentity-permutations",
+            "diagram": pure_link_diagram(
+                4,
+                edges=[
+                    (0, 1, 1),
+                    (0, 2, -1),
+                    (0, 3, 1),
+                    (1, 2, -1),
+                    (1, 3, 1),
+                    (2, 3, 2),
+                ],
+                framings=(2, -1, 0, 1),
+            ),
+        },
+    ]
+
+    comparisons = []
+    for case in cases:
+        before = case["diagram"]
+        component_count = len(before["framings"])
+        before_sectors = oracle.sector_amplitudes(
+            before["n_strands"],
+            before["braid_word"],
+            before["framings"],
+        )
+        before_values = {
+            labels: omega_value_from_sectors(oracle, before_sectors, labels)
+            for labels in product((0, 1), repeat=component_count)
+        }
+        identity = tuple(range(component_count))
+
+        for old_to_new in permutations(range(component_count)):
+            old_to_new = tuple(old_to_new)
+            if old_to_new == identity:
+                continue
+
+            permutation_word = permutation_braid_word(old_to_new)
+            after = conjugate_diagram_by_permutation(before, old_to_new, permutation_word)
+            after_sectors = oracle.sector_amplitudes(
+                after["n_strands"],
+                after["braid_word"],
+                after["framings"],
+            )
+
+            for labels in product((0, 1), repeat=component_count):
+                after_labels = permute_old_to_new(labels, old_to_new)
+                before_value = before_values[labels]
+                after_value = omega_value_from_sectors(oracle, after_sectors, after_labels)
+                item = comparison_payload(
+                    oracle,
+                    case_name=f"{case['name']}-perm-{permutation_name(old_to_new)}",
+                    source_test="component-order-permutation-pressure",
+                    labels={"before": list(labels), "after": list(after_labels)},
+                    before=before,
+                    after=after,
+                    before_value=before_value,
+                    after_value=after_value,
+                    expected_value=before_value,
+                )
+                item["permutation_old_to_new"] = [int(index) for index in old_to_new]
+                item["permutation_braid_word"] = [int(generator) for generator in permutation_word]
+                comparisons.append(item)
+
+    return comparisons
+
+
+def omega_value_from_sectors(oracle, sectors, omega_labels):
+    total = oracle.K(0)
+    for simple_labels, sector_value in sectors.items():
+        coefficient = oracle.K(1)
+        for omega_label, simple_label in zip(omega_labels, simple_labels, strict=True):
+            coefficient *= oracle.DIMENSIONS[simple_label] * oracle.character(omega_label, simple_label)
+        total += coefficient * sector_value
+    return total
+
+
+def pure_link_diagram(component_count, *, edges, framings):
+    braid_word = ()
+    for left, right, linking_number in edges:
+        braid_word += pure_pair_linking_word(left, right, linking_number)
+    return {
+        "n_strands": component_count,
+        "braid_word": braid_word,
+        "framings": tuple(framings),
+    }
+
+
+def pure_pair_linking_word(left, right, linking_number):
+    if linking_number == 0:
+        return ()
+    if left > right:
+        left, right = right, left
+    left += 1
+    right += 1
+    sign = 1 if linking_number > 0 else -1
+    block = (
+        tuple(range(right - 1, left, -1))
+        + (sign * left, sign * left)
+        + tuple(range(-(left + 1), -right, -1))
+    )
+    return block * abs(linking_number)
+
+
+def permutation_braid_word(old_to_new):
+    component_count = len(old_to_new)
+    final_positions = [None] * component_count
+    for old, new in enumerate(old_to_new):
+        final_positions[new] = old
+
+    current_positions = list(range(component_count))
+    word = []
+    for target_position, wanted_old_component in enumerate(final_positions):
+        current_position = current_positions.index(wanted_old_component)
+        while current_position > target_position:
+            word.append(current_position)
+            current_positions[current_position - 1], current_positions[current_position] = (
+                current_positions[current_position],
+                current_positions[current_position - 1],
+            )
+            current_position -= 1
+    return tuple(word)
+
+
+def conjugate_diagram_by_permutation(diagram, old_to_new, permutation_word):
+    return {
+        "n_strands": diagram["n_strands"],
+        "braid_word": inverse_braid_word(permutation_word) + tuple(diagram["braid_word"]) + permutation_word,
+        "framings": permute_old_to_new(diagram["framings"], old_to_new),
+    }
+
+
+def inverse_braid_word(braid_word):
+    return tuple(-generator for generator in reversed(braid_word))
+
+
+def permute_old_to_new(values, old_to_new):
+    output = [None] * len(values)
+    for old, new in enumerate(old_to_new):
+        output[new] = values[old]
+    return tuple(output)
+
+
+def permutation_name(old_to_new):
+    return "-".join(str(index) for index in old_to_new)
 
 
 def split_two_trefoils():
