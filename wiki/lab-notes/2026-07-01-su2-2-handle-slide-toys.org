@@ -6,8 +6,8 @@
 * Status
 
 - status: =computed evidence / mechanized handle-slide toy checks=
-- purpose: 機械化先前自然語言 / scratch exact arithmetic 已經做過的前兩類
-  handle-slide examples，並逐項比對舊 lab note 的 expected values。
+- purpose: 機械化先前自然語言 / scratch exact arithmetic 已經做過的 handle-slide
+  examples，並加入一個小型 generated family。
 - source note:
   =wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org=
 - boundary:
@@ -34,8 +34,8 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
 #+begin_src text
 wrote experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 status: pass
-examples: 2
-comparisons: 16
+examples: 4
+comparisons: 136
 #+end_src
 
 如果任一 value 和舊 note 不同，script 會產生 =fail= certificate 並以 nonzero status
@@ -113,6 +113,103 @@ linking matrix = [[0,1],
 Sage 在 =CyclotomicField(16)= 中會把它簡化為 =0=。這不是不一致，而是同一個
 exact value 的化簡。
 
+* Example 3: Trefoil Over Two +1 Unknots
+
+這是舊 note 的 Test 9。
+
+before picture：
+
+#+begin_src text
+K = 0-framed right trefoil = closure(sigma_1^3)
+U,V = split +1-framed unknots
+braid word = [1,1,1] in B_4
+framings = (0,1,1)
+labels = (a,b,c)
+#+end_src
+
+after picture：
+
+#+begin_src text
+K' = trefoil-shaped component with framing +2
+U,V = +1-framed unknots, each linking K' once, mutually unlinked
+braid word = [1,1,1,2,2,3,2,2,-3] in B_4
+framings = (2,1,1)
+labels = (a+b+c,b,c)
+#+end_src
+
+after diagnostics：
+
+#+begin_src text
+components = [[0,1], [2], [3]]
+linking matrix = [[0,1,1],
+                  [1,0,0],
+                  [1,0,0]]
+#+end_src
+
+全部 8 個 label choices 都通過。Sage 的化簡後摘要：
+
+#+begin_src text
+(a,b,c)=(0,0,0): 0
+(a,b,c)=(0,0,1): 0
+(a,b,c)=(0,1,0): 0
+(a,b,c)=(0,1,1): 0
+(a,b,c)=(1,0,0):  16 zeta_16^6
+(a,b,c)=(1,0,1): -16 zeta_16^6
+(a,b,c)=(1,1,0): -16 zeta_16^6
+(a,b,c)=(1,1,1):  16 zeta_16^6
+#+end_src
+
+舊 note 裡 Test 9 的 expressions 以 =sqrt(2)= 和 =zeta_16^4= 寫得較長；
+certificate 逐項確認那些 expressions 在 =CyclotomicField(16)= 中等於上面的簡化值。
+
+* Example 4: Generated Two-Strand Knot Meridian Slides
+
+為了不要只靠人工設計的 after braid word，本輪加入一個小 generator。
+
+輸入：
+
+#+begin_src text
+2-strand knot word beta
+m split +1-framed unknots
+#+end_src
+
+before：
+
+#+begin_src text
+braid word = beta in B_{2+m}
+framings = (0,1,...,1)
+labels = (a_0,a_1,...,a_m)
+#+end_src
+
+after：
+
+#+begin_src text
+braid word = beta followed by m pure-braid meridian words
+framings = (m,1,...,1)
+labels = (a_0+a_1+...+a_m, a_1, ..., a_m)
+#+end_src
+
+The meridian word for a new strand =r= is:
+
+#+begin_src text
+sigma_{r-1} ... sigma_3 sigma_2^2 sigma_3^{-1} ... sigma_{r-1}^{-1}
+#+end_src
+
+這會讓 knot component 和每個 new unknot linking number =+1=，並讓 unknots
+彼此不 linking。
+
+Generated cases：
+
+#+begin_src text
+right trefoil:       sigma_1^3
+left trefoil:        sigma_1^{-3}
+T(2,5):              sigma_1^5
+T(2,-5):             sigma_1^{-5}
+m = 1,2,3
+#+end_src
+
+總共 112 個 generated-family comparisons，全部 =pass=。
+
 * Interpretation
 
 這一輪比 pure braid presentation stress test 更接近 Kirby calculus，因為它檢查的是：
@@ -125,6 +222,5 @@ exact Omega_a evaluation
 prior hand/scratch expected value
 #+end_src
 
-下一步仍然不是直接上 exotic pair，而是做更一般的 small framed-link handle-slide
-generator，避免只靠這兩個人工設計的 after braid words。
-
+下一步仍然不是直接上 exotic pair，而是把這個 generator 推到更一般的 framed-link
+handle-slide layer：目前它只處理 2-strand knot + meridian unknots，不是任意 band-sum。

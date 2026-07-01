@@ -4,12 +4,15 @@ Run from the repository root:
 
     DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
 
-This suite intentionally covers only the two handle-slide examples that were
-already checked by hand/natural-language scratch work:
+This suite covers the handle-slide examples that were already checked by
+hand/natural-language scratch work, then adds a small generated family:
 
 1. two-component unknotted framed-link slides, including the CP2#CP2,
    CP2#CPbar, and S2xS2 toy cases;
-2. a 0-framed right trefoil slid over a split +1-framed unknot.
+2. a 0-framed right trefoil slid over a split +1-framed unknot;
+3. the same trefoil slid over two split +1-framed unknots;
+4. generated 2-strand knot examples slid over 1, 2, or 3 split +1-framed
+   unknots.
 
 Each comparison checks:
 
@@ -56,6 +59,8 @@ def run_suite(oracle):
     examples = [
         unknot_slide_family(oracle),
         trefoil_over_plus_one_unknot(oracle),
+        trefoil_over_two_plus_one_unlinks(oracle),
+        generated_two_strand_knot_meridian_slides(oracle),
     ]
     status = "pass" if all(example["status"] == "pass" for example in examples) else "fail"
     return {
@@ -64,8 +69,8 @@ def run_suite(oracle):
         "oracle_script": str(ORACLE_PATH.relative_to(REPO_ROOT)),
         "source_note": "wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org",
         "scope": (
-            "mechanized SU(2)_2 checks for the first two handle-slide toy examples: "
-            "unknotted two-component slides and a trefoil slid over a +1 unknot"
+            "mechanized SU(2)_2 checks for unknotted slides, trefoil one/two-slide "
+            "examples from the prior note, and a generated 2-strand knot slide family"
         ),
         "not_scope": (
             "general Kirby diagram evaluator, arbitrary band-sum constructor, "
@@ -195,6 +200,148 @@ def trefoil_over_plus_one_unknot(oracle):
     }
 
 
+def trefoil_over_two_plus_one_unlinks(oracle):
+    before = split_knot_with_unlinks(
+        knot_n_strands=2,
+        knot_word=(1, 1, 1),
+        meridian_count=2,
+    )
+    after = slid_knot_with_meridians(
+        knot_word=(1, 1, 1),
+        meridian_count=2,
+    )
+
+    comparisons = []
+    for a, b, c in product((0, 1), repeat=3):
+        after_labels = ((a + b + c) % 2, b, c)
+        before_value = oracle.omega_value(
+            before["n_strands"],
+            before["braid_word"],
+            before["framings"],
+            (a, b, c),
+        )
+        after_value = oracle.omega_value(
+            after["n_strands"],
+            after["braid_word"],
+            after["framings"],
+            after_labels,
+        )
+        expected_value = trefoil_two_slide_expected(oracle, a, b, c)
+        comparisons.append(
+            comparison_payload(
+                oracle,
+                case_name="right-trefoil-over-two-plus-one-unlinks",
+                source_test="Test 9",
+                labels={"before": [a, b, c], "after": list(after_labels)},
+                before=before,
+                after=after,
+                before_value=before_value,
+                after_value=after_value,
+                expected_value=expected_value,
+            )
+        )
+
+    return {
+        "name": "right-trefoil-over-two-plus-one-unlinks",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "after_braid_note": (
+            "after picture encoded as closure of sigma_1^3 sigma_2^2 "
+            "sigma_3 sigma_2^2 sigma_3^-1; linking matrix has K linked once "
+            "with each unknot and the unknots mutually unlinked"
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def generated_two_strand_knot_meridian_slides(oracle):
+    knots = [
+        {"name": "right-trefoil", "word": (1, 1, 1)},
+        {"name": "left-trefoil", "word": (-1, -1, -1)},
+        {"name": "t-2-5", "word": (1, 1, 1, 1, 1)},
+        {"name": "t-2-minus-5", "word": (-1, -1, -1, -1, -1)},
+    ]
+
+    comparisons = []
+    for knot in knots:
+        for meridian_count in (1, 2, 3):
+            before = split_knot_with_unlinks(
+                knot_n_strands=2,
+                knot_word=knot["word"],
+                meridian_count=meridian_count,
+            )
+            after = slid_knot_with_meridians(
+                knot_word=knot["word"],
+                meridian_count=meridian_count,
+            )
+            for labels in product((0, 1), repeat=meridian_count + 1):
+                after_labels = ((sum(labels) % 2), *labels[1:])
+                before_value = oracle.omega_value(
+                    before["n_strands"],
+                    before["braid_word"],
+                    before["framings"],
+                    labels,
+                )
+                after_value = oracle.omega_value(
+                    after["n_strands"],
+                    after["braid_word"],
+                    after["framings"],
+                    after_labels,
+                )
+                comparisons.append(
+                    comparison_payload(
+                        oracle,
+                        case_name=f"{knot['name']}-over-{meridian_count}-plus-one-unlinks",
+                        source_test="generated-family",
+                        labels={"before": list(labels), "after": list(after_labels)},
+                        before=before,
+                        after=after,
+                        before_value=before_value,
+                        after_value=after_value,
+                        expected_value=before_value,
+                    )
+                )
+
+    return {
+        "name": "generated-two-strand-knot-meridian-slides",
+        "status": "pass" if all(item["status"] == "pass" for item in comparisons) else "fail",
+        "generator_note": (
+            "For a 2-strand knot word beta and m split +1 unknots, the after word "
+            "is beta followed by pure-braid meridian words linking the knot component "
+            "once with each unknot and keeping the unknots mutually unlinked."
+        ),
+        "comparisons": comparisons,
+    }
+
+
+def split_knot_with_unlinks(*, knot_n_strands, knot_word, meridian_count):
+    return {
+        "n_strands": knot_n_strands + meridian_count,
+        "braid_word": tuple(knot_word),
+        "framings": (0,) + tuple(1 for _ in range(meridian_count)),
+    }
+
+
+def slid_knot_with_meridians(*, knot_word, meridian_count):
+    braid_word = tuple(knot_word)
+    for strand in range(3, 3 + meridian_count):
+        braid_word += meridian_word_for_new_strand(strand)
+    return {
+        "n_strands": 2 + meridian_count,
+        "braid_word": braid_word,
+        "framings": (meridian_count,) + tuple(1 for _ in range(meridian_count)),
+    }
+
+
+def meridian_word_for_new_strand(strand):
+    """Pure braid linking a new strand once with the 2-strand knot component."""
+
+    return (
+        tuple(range(strand - 1, 2, -1))
+        + (2, 2)
+        + tuple(range(-3, -strand, -1))
+    )
+
+
 def trefoil_slide_expected(oracle, a, b):
     z = oracle.ZETA
     sqrt2 = oracle.SQRT2
@@ -206,6 +353,28 @@ def trefoil_slide_expected(oracle, a, b):
         return 2 * sqrt2 * z + 4 * z**3 + 2 * sqrt2 * z**5
     if (a, b) == (1, 1):
         return -2 * sqrt2 * z - 4 * z**3 - 2 * sqrt2 * z**5
+    raise ValueError("Z/2 labels expected")
+
+
+def trefoil_two_slide_expected(oracle, a, b, c):
+    z = oracle.ZETA
+    sqrt2 = oracle.SQRT2
+    if (a, b, c) == (0, 0, 0):
+        return 4 * sqrt2 - 4 * sqrt2 * z**4 + 8 * z**6
+    if (a, b, c) == (0, 0, 1):
+        return -4 * sqrt2 + 4 * sqrt2 * z**4 - 8 * z**6
+    if (a, b, c) == (0, 1, 0):
+        return -4 * sqrt2 + 4 * sqrt2 * z**4 - 8 * z**6
+    if (a, b, c) == (0, 1, 1):
+        return 4 * sqrt2 - 4 * sqrt2 * z**4 + 8 * z**6
+    if (a, b, c) == (1, 0, 0):
+        return -4 * sqrt2 + 4 * sqrt2 * z**4 + 8 * z**6
+    if (a, b, c) == (1, 0, 1):
+        return 4 * sqrt2 - 4 * sqrt2 * z**4 - 8 * z**6
+    if (a, b, c) == (1, 1, 0):
+        return 4 * sqrt2 - 4 * sqrt2 * z**4 - 8 * z**6
+    if (a, b, c) == (1, 1, 1):
+        return -4 * sqrt2 + 4 * sqrt2 * z**4 + 8 * z**6
     raise ValueError("Z/2 labels expected")
 
 
