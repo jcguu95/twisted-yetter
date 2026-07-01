@@ -41,6 +41,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --example
 DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --input-json /path/to/input.json
 #+end_src
 
+產生第一批 presentation stress-test certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_stress_suite.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/sage-stress/su2-2-braid-stress-v1.json
+#+end_src
+
 * Payload Shape
 
 #+begin_src json
@@ -70,6 +82,12 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --input-j
 - =CP^2 # CP^2=、=CP^2 # CPbar^2=、=S^2 x S^2= 的 toy handle-slide values；
 - right trefoil =Omega_0= 得到 =0=、=Omega_1= 得到 =4=。
 
+第一批 stress suite 另保存：
+
+- right trefoil positive / negative Markov stabilization；
+- figure-eight braid conjugation，含 =0= framing 與 =+1= framing；
+- trefoil split union unknot 的 multiplicativity。
+
 尚未涵蓋：
 
 - dotted / special link；
@@ -77,4 +95,3 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_braid_oracle.sage.py --input-j
 - full Kirby diagram parser；
 - arbitrary planar diagram 到 local tensor network 的轉換；
 - 對 twisted formula 本身的 theorem-level proof。
-
