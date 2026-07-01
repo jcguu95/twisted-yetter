@@ -299,6 +299,36 @@ category-level symbolic coefficient stress test，用來把目前所有已用過
 Kirby-move classes 推到非 =Z/2=、非自對偶 simple-current、multiplicity-nonfree
 的情況。
 
+* Local-Piece Evaluator Track
+
+產生 =SU(2)_2= B0 local-piece evaluator certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_local_piece_evaluator.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json
+#+end_src
+
+=su2_2_local_piece_evaluator.sage.py= 是 evaluator track 的第一個可執行切片：
+
+- 使用 repo 內的 =twisted_yetter.local_piece= schema，把 link 寫成
+  =braid_crossing= local pieces；
+- compose 成 braid word 後取 braid closure；
+- dispatch 到既有 =SU(2)_2= exact braid oracle；
+- example programs 包含 +1 framed unknot、two-component unlink、positive Hopf、
+  right trefoil、figure-eight；
+- local-move regressions 包含 =R R^{-1}= cancellation、positive/negative
+  Markov stabilization、braid conjugation。
+
+這是 =B0 braid-closure local-piece evaluator=，不是 full planar
+=F/R/eval/coeval= evaluator。尚未支援 cup/cap、trivalent split/merge、
+任意 planar tensor graph、special/dotted links、closed 4-manifold normalization
+或 exotic-pair computation。
+
 * Fusion-Channel Gate
 
 =experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面

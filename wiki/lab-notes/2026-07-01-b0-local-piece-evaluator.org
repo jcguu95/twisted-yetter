@@ -1,0 +1,155 @@
+#+title: 2026-07-01 B0 Local-Piece Evaluator
+#+date: 2026-07-01
+#+status: computed evidence / evaluator-track scaffold
+
+* 目的
+
+開始執行 evaluator track，也就是把目前依賴 braid oracle / special-purpose stress
+scripts 的計算，往真正的 local-piece evaluator 推進。
+
+本輪刻意只做 B0：
+
+#+begin_src text
+braid_crossing local pieces
+  -> compose braid word
+  -> braid closure
+  -> SU(2)_2 exact backend
+#+end_src
+
+這不是 full planar =F/R/eval/coeval= evaluator，但它建立了第一個可測的
+local-piece API，之後 cup/cap、trivalent vertices、general tensor graph 可以沿著
+同一個 schema 擴張。
+
+* 新增檔案
+
+#+begin_src text
+src/twisted_yetter/local_piece.py
+experiments/sage/su2_2_local_piece_evaluator.sage.py
+experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json
+tests/test_local_piece.py
+tests/test_su2_2_local_piece_evaluator.py
+#+end_src
+
+* 重現指令
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_local_piece_evaluator.sage.py
+uv run pytest tests/test_local_piece.py tests/test_su2_2_local_piece_evaluator.py
+#+end_src
+
+完整 regression：
+
+#+begin_src sh
+uv run pytest
+#+end_src
+
+* B0 Schema
+
+新的 repo-local schema：
+
+#+begin_src text
+twisted-yetter.local-piece-program.v1
+#+end_src
+
+目前支援：
+
+#+begin_src text
+piece kind:
+  braid_crossing
+
+closure kind:
+  braid_closure
+#+end_src
+
+每個 =braid_crossing= 是一個 local =R= 或 =R^{-1}= piece：
+
+#+begin_src text
+left_index = braid generator index
+sign       = +1 or -1
+#+end_src
+
+程式會從 pieces compose 出 braid word，然後由 closure permutation 決定 component
+ordering、component count、linking matrix sanity check，最後產生既有
+=su2_2_braid_oracle= 可吃的 payload。
+
+* Example Programs
+
+本輪 artifact 包含 5 個 direct evaluations：
+
+#+begin_src text
+lp-cp2-omega0-fixed-psi
+lp-unlink-two-components
+lp-positive-hopf
+lp-right-trefoil
+lp-figure-eight
+#+end_src
+
+這些覆蓋：
+
+- empty one-strand closure / framed unknot；
+- empty two-strand closure / split unlink；
+- two local crossings / positive Hopf；
+- three local crossings / right trefoil；
+- mixed positive/negative crossings / figure-eight。
+
+* Local-Move Regressions
+
+本輪 artifact 也包含 4 個 local-move regressions：
+
+#+begin_src text
+r-r-inverse-cancellation-two-strand-unlink
+trefoil-positive-markov-stabilization
+trefoil-negative-markov-stabilization
+trefoil-braid-conjugation
+#+end_src
+
+其中 one-component Markov / conjugation checks 會對：
+
+#+begin_src text
+framing in {0,1}
+Omega label in {0,1}
+fixed label sigma
+#+end_src
+
+逐項比較 exact values。
+
+* 判斷
+
+這是一個真正前進的 evaluator-track scaffold，因為現在資料流已經是：
+
+#+begin_src text
+local pieces
+  -> compositional program
+  -> closure/component diagnostics
+  -> exact categorical backend
+  -> reproducible certificate
+  -> pytest regression
+#+end_src
+
+但它仍然不可宣稱：
+
+- 任意 oriented planar diagram evaluator；
+- full =F/R= tensor-network evaluator；
+- cup/cap/eval/coeval support；
+- special/dotted Kirby component support；
+- closed 4-manifold invariant evaluator；
+- exotic-pair computation。
+
+* 下一步
+
+最自然的下一步是 B1：
+
+#+begin_src text
+加入 cup/cap/eval/coeval 或等價的 plat/closure boundary layer，
+讓不是 braid-closure 原生輸入的 planar pieces 可以被 local tensor graph 表示。
+#+end_src
+
+另一條可並行的 B1' 是：
+
+#+begin_src text
+把 SU(2)_2 backend 從 braid oracle 逐步替換成顯式 local R/eval/coeval
+matrix contraction，先在 Ising/SU(2)_2 上做。
+#+end_src
+
+目前建議先走 B1'，因為它會更直接驗證我們真的在做 local-piece evaluator，而不是只把
+braid oracle 包一層。
