@@ -1,0 +1,403 @@
+#+TITLE: SU(2)_2 Twisted Kirby Color 小型測試暫存筆記
+#+DATE: 2026-07-01
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+- status: =working calculation / temporary lab note=
+- purpose: 記錄目前手算與 scratch recomputation 的 =SU(2)_2= nontrivial universal-group twist 測試。
+- claim boundary:
+  - 這是小型 exact arithmetic 測試，不是 exotic pair computation。
+  - 這不是已完成 source-audited theorem proof。
+  - 這不是 full arbitrary Kirby diagram evaluator。
+  - 目前只檢查 =SU(2)_2=、=A=Z/2=、少數 Kirby / link test beds。
+
+* Convention
+
+Simple objects:
+
+#+begin_src text
+0, 1, 2
+#+end_src
+
+Quantum dimensions:
+
+#+begin_src text
+d_0 = 1
+d_1 = sqrt(2)
+d_2 = 1
+#+end_src
+
+Twists:
+
+#+begin_src text
+theta_0 = zeta_16^0
+theta_1 = zeta_16^3
+theta_2 = zeta_16^8 = -1
+#+end_src
+
+Universal grading:
+
+#+begin_src text
+deg(0) = 0
+deg(1) = 1
+deg(2) = 0
+#+end_src
+
+Twist coefficient group:
+
+#+begin_src text
+A = Z/2
+chi_0(deg i) = 1
+chi_1(deg i) = (-1)^{deg i}
+#+end_src
+
+Twisted Kirby colors:
+
+#+begin_src text
+Omega_0 = 0 + sqrt(2) * 1 + 2
+Omega_1 = 0 - sqrt(2) * 1 + 2
+#+end_src
+
+Here =Omega_0= is the ordinary Kirby color and =Omega_1= is the nontrivial
+universal-group twist.
+
+* Test 0: Encircling Projector
+
+Normalized projector:
+
+#+begin_src text
+P_a(j) = sum_i S_{0i} chi_a(i) S_{ij}
+#+end_src
+
+Result:
+
+#+begin_src text
+a = 0:
+  P_0(0)=1
+  P_0(1)=0
+  P_0(2)=0
+
+a = 1:
+  P_1(0)=0
+  P_1(1)=0
+  P_1(2)=1
+#+end_src
+
+Interpretation:
+
+#+begin_src text
+Omega_0 / D projects to simple object 0.
+Omega_1 / D projects to simple object 2.
+#+end_src
+
+This is the first nontrivial mechanism: the twisted Kirby color is not the
+ordinary vacuum projector.
+
+* Test 1: CP^2
+
+Kirby presentation:
+
+#+begin_src text
+one +1-framed unknot
+#+end_src
+
+Raw link expression:
+
+#+begin_src text
+Z_raw(CP^2, a) = sum_i d_i^2 chi_a(i) theta_i
+#+end_src
+
+Results:
+
+#+begin_src text
+Z_raw(CP^2, 0) =  2 zeta_16^3
+Z_raw(CP^2, 1) = -2 zeta_16^3
+#+end_src
+
+* Test 2: CPbar^2
+
+Kirby presentation:
+
+#+begin_src text
+one -1-framed unknot
+#+end_src
+
+Raw link expression:
+
+#+begin_src text
+Z_raw(CPbar^2, a) = sum_i d_i^2 chi_a(i) theta_i^{-1}
+#+end_src
+
+Results:
+
+#+begin_src text
+Z_raw(CPbar^2, 0) =  2 zeta_16^13
+Z_raw(CPbar^2, 1) = -2 zeta_16^13
+#+end_src
+
+* Test 4: CP^2 # CP^2 Handle-Slide Check
+
+Before slide:
+
+#+begin_src text
+split +1,+1 framed unknots
+Q = [[1,0],
+     [0,1]]
+labels = (a,b)
+#+end_src
+
+Slide: second handle over first.
+
+After slide:
+
+#+begin_src text
+positive Hopf link
+framings = (1,2)
+Q' = [[1,1],
+      [1,2]]
+labels = (a, a+b)
+#+end_src
+
+The after-slide sector formula uses:
+
+#+begin_src text
+sum_{i,j}
+  d_i chi_a(i)
+  d_j chi_{a+b}(j)
+  (S_{ij}/S_{00})
+  theta_i theta_j^2
+#+end_src
+
+Results:
+
+#+begin_src text
+(a,b)=(0,0):  4 zeta_16^6
+(a,b)=(0,1): -4 zeta_16^6
+(a,b)=(1,0): -4 zeta_16^6
+(a,b)=(1,1):  4 zeta_16^6
+#+end_src
+
+The before and after values agree after the cohomology labels are transformed
+by the handle-slide basis change.
+
+* Test 5: CP^2 # CPbar^2 Handle-Slide Check
+
+Before slide:
+
+#+begin_src text
+split +1,-1 framed unknots
+Q = [[1,0],
+     [0,-1]]
+labels = (a,b)
+#+end_src
+
+Slide: second handle over first.
+
+After slide:
+
+#+begin_src text
+positive Hopf link
+framings = (1,0)
+Q' = [[1,1],
+      [1,0]]
+labels = (a, a+b)
+#+end_src
+
+Results:
+
+#+begin_src text
+(a,b)=(0,0):  4
+(a,b)=(0,1): -4
+(a,b)=(1,0): -4
+(a,b)=(1,1):  4
+#+end_src
+
+The before and after values agree.
+
+* Test 6: S^2 x S^2 Handle-Slide Check
+
+Before slide:
+
+#+begin_src text
+0-framed Hopf link
+Q = [[0,1],
+     [1,0]]
+labels = (a,b)
+#+end_src
+
+Slide: second handle over first.
+
+After slide:
+
+#+begin_src text
+Hopf link
+framings = (0,2)
+Q' = [[0,1],
+      [1,2]]
+labels = (a, a+b)
+#+end_src
+
+Results:
+
+#+begin_src text
+(a,b)=(0,0): 4
+(a,b)=(0,1): 4
+(a,b)=(1,0): 4
+(a,b)=(1,1): 4
+#+end_src
+
+The values are twist-independent for this test bed, but the before/after
+handle-slide check still passes.
+
+* Test 7: Right Trefoil R-Symbol / Framing Check
+
+Right-handed trefoil model:
+
+#+begin_src text
+closure of sigma_1^3
+#+end_src
+
+Blackboard framing is =+3=.  Requested framing =f= is obtained by multiplying
+by =theta_label^{f-3}=.
+
+Relevant =R= eigenvalues:
+
+#+begin_src text
+R^{00}_0 = zeta_16^0
+R^{11}_0 = zeta_16^5
+R^{11}_2 = zeta_16^1
+R^{22}_0 = zeta_16^8
+R^{12}_1 = zeta_16^4
+R^{21}_1 = zeta_16^4
+#+end_src
+
+Simple-colored results:
+
+#+begin_src text
+label 0:
+  T_bb(+3) = 1
+  T_f0     = 1
+  T_f1     = 1
+
+label 1:
+  T_bb(+3) = zeta_16^3 - zeta_16^7
+  T_f0     = -zeta_16^2 + zeta_16^6
+  T_f1     = -zeta_16^1 - zeta_16^5
+
+label 2:
+  T_bb(+3) = -1
+  T_f0     = 1
+  T_f1     = -1
+#+end_src
+
+Kirby-colored sums:
+
+#+begin_src text
+Omega_0:
+  f=0:  2 - sqrt(2) zeta_16^2 + sqrt(2) zeta_16^6
+  f=1: -sqrt(2) zeta_16^1 - sqrt(2) zeta_16^5
+  bb:   sqrt(2) zeta_16^3 - sqrt(2) zeta_16^7
+
+Omega_1:
+  f=0:  2 + sqrt(2) zeta_16^2 - sqrt(2) zeta_16^6
+  f=1:  sqrt(2) zeta_16^1 + sqrt(2) zeta_16^5
+  bb:  -sqrt(2) zeta_16^3 + sqrt(2) zeta_16^7
+#+end_src
+
+Important local observation:
+
+#+begin_src text
+0-framed right trefoil:
+  Omega_0 gives 0
+  Omega_1 gives 4
+#+end_src
+
+This simplification uses the cyclotomic relation
+=sqrt(2)=zeta_16^2+zeta_16^{-2}=zeta_16^2-zeta_16^6=.
+
+This is a knot-evaluation phenomenon, not a closed 4-manifold claim.
+
+* Test 8: Trefoil Handle-Slide Check
+
+Before slide:
+
+#+begin_src text
+K = 0-framed right trefoil
+U = split +1-framed unknot
+labels = (a,b)
+before = T_f0(Omega_a) * U_{+1}(Omega_b)
+#+end_src
+
+Slide: trefoil component over the +1-framed unknot.
+
+After slide:
+
+#+begin_src text
+K' = trefoil-shaped component with framing +1
+U  = +1-framed unknot encircling/linking K' once
+labels = (a+b, b)
+#+end_src
+
+The after-slide formula uses the trefoil =R^3= evaluation and an encircling
+factor:
+
+#+begin_src text
+sum_{i,j}
+  d_i chi_{a+b}(i)
+  d_j chi_b(j)
+  T_{trefoil,i}^{framing +1}
+  theta_j
+  (S_{ij}/S_{0i})
+#+end_src
+
+Results:
+
+#+begin_src text
+(a,b)=(0,0):
+  before = -2 sqrt(2) zeta_16^1 + 4 zeta_16^3 - 2 sqrt(2) zeta_16^5
+  after  = -2 sqrt(2) zeta_16^1 + 4 zeta_16^3 - 2 sqrt(2) zeta_16^5
+
+(a,b)=(0,1):
+  before =  2 sqrt(2) zeta_16^1 - 4 zeta_16^3 + 2 sqrt(2) zeta_16^5
+  after  =  2 sqrt(2) zeta_16^1 - 4 zeta_16^3 + 2 sqrt(2) zeta_16^5
+
+(a,b)=(1,0):
+  before =  2 sqrt(2) zeta_16^1 + 4 zeta_16^3 + 2 sqrt(2) zeta_16^5
+  after  =  2 sqrt(2) zeta_16^1 + 4 zeta_16^3 + 2 sqrt(2) zeta_16^5
+
+(a,b)=(1,1):
+  before = -2 sqrt(2) zeta_16^1 - 4 zeta_16^3 - 2 sqrt(2) zeta_16^5
+  after  = -2 sqrt(2) zeta_16^1 - 4 zeta_16^3 - 2 sqrt(2) zeta_16^5
+#+end_src
+
+Thus the trefoil-containing handle-slide test passes.
+
+* Current Interpretation
+
+The tests support the following working understanding:
+
+1. =Omega_1= is not a vacuum projector; in =SU(2)_2= it projects to the
+   invertible simple object =2=.
+2. The nontrivial twist changes small raw values, sometimes only by sign and
+   sometimes more substantially.
+3. Basic handle-slide tests pass when cohomology labels transform by the
+   handle-basis change.
+4. The trefoil test uses actual =R=-symbol data and is not just a Hopf
+   =S=-matrix shortcut.
+
+The next useful pressure test is a three-handle-component / multi-slide exact
+calculation, still in =SU(2)_2= and =A=Z/2=, to reduce the chance that the
+previous checks pass only because the examples are too small.
+
+* Reproduction
+
+The calculations above were checked by scratch exact arithmetic using the
+repo-local =SU(2)_2= data in:
+
+#+begin_src text
+src/twisted_yetter/su2_level2.py
+#+end_src
+
+No floating point arithmetic is used.
