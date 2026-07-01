@@ -101,6 +101,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/vec_z3_pointed_stress.sage.py
 experiments/results/mtc-candidates/vec-z3-pointed-stress-v1.json
 #+end_src
 
+產生 =SU(2)_6= colored-Jones Kirby-slide stress certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_6_kirby_slide_stress.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/sage-stress/su2-6-kirby-slide-stress-v1.json
+#+end_src
+
 產生 =SU(2)_6= modular-data controls 與 restricted supported-link-class
 certificate：
 
@@ -214,6 +226,21 @@ link evaluation 化成 linking matrix Gauss sum，測 =Q'=B^TQB= 與
 這個檔案不是 =SU(2)_6= arbitrary link evaluator，也還沒有做 Kirby slide
 invariance。下一步若要測真正 non-pointed Kirby moves，必須先加入
 =F/R=-symbol 或其他等價的 colored link backend。
+
+=su2_6_kirby_slide_stress.sage.py= 補上 =SU(2)_6= 的非平凡 Kirby-slide stress
+suite。它支援的 move class 是：
+
+- 一個 nontrivial knot component 以 one-component braid closure 表示；
+- fixed-label knot value 用 Sage reduced colored Jones polynomial 在
+  =q=A^4= 評估，並乘上 =d_j theta_j^f=；
+- knot slid over one or more split framed unknots；
+- slide 後的 meridian components 用 =S= matrix meridian action 評估；
+- =Omega= label 依 =U(C)=Z/2= 加法轉換。
+
+目前測過 right trefoil、left trefoil、figure-eight、=T(2,5)=，以及五種
+slide-over framing scenarios，總共 160 個 exact before/after comparisons。
+這仍不是 arbitrary multi-component colored-link evaluator；一般 band-sum、任意
+planar diagram、dotted/special links 與 closed 4-manifold normalization 仍未涵蓋。
 
 * Fusion-Channel Gate
 
