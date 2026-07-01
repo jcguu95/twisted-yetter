@@ -58,7 +58,7 @@ Omega_a = sum_j d_j (-1)^(a deg(j)) X_j,   a in Z/2
 
 script 產生的 certificate 狀態為 =pass=。
 
-modular controls 共 6 個：
+modular controls 共 9 個：
 
 - =s_matrix_symmetric=
 - =s_square_is_identity=
@@ -66,6 +66,19 @@ modular controls 共 6 個：
 - =fusion_dimension_algebra=
 - =universal_degree_respects_fusion=
 - =omega_coefficients_match_degree_characters=
+- =simple_current_character_matches_degree=
+- =omega_hopf_projector_identity=
+- =omega_hopf_pair_closed_form=
+
+最後三個是本輪補上的去水 controls：
+
+- =simple_current_character_matches_degree= 檢查 simple current =6= 的 =S=
+  matrix row 確實給出 =(-1)^j= character。
+- =omega_hopf_projector_identity= 檢查 =Omega_0= encircling projector 只留下
+  label =0=，而 =Omega_1= encircling projector 只留下 simple current label =6=。
+- =omega_hopf_pair_closed_form= 檢查 zero-framed Hopf pair 的
+  =Omega_a, Omega_b= exact value 等於 global dimension，這不是單純比較同一個
+  展開的兩種 JSON 包裝。
 
 supported evaluator controls 共 4 個：
 

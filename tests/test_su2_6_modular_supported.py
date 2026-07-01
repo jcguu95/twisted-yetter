@@ -38,6 +38,9 @@ def test_su2_6_modular_data_controls_all_pass() -> None:
         "fusion_dimension_algebra",
         "universal_degree_respects_fusion",
         "omega_coefficients_match_degree_characters",
+        "simple_current_character_matches_degree",
+        "omega_hopf_projector_identity",
+        "omega_hopf_pair_closed_form",
     ]
     assert {control["status"] for control in controls} == {"pass"}
 

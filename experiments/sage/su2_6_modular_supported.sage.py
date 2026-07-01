@@ -155,6 +155,18 @@ def modular_data_controls(data):
             "omega_coefficients_match_degree_characters",
             validate_omega_coefficients(data["omega_coefficients"], data["dimensions"], data["degrees"]),
         ),
+        validation(
+            "simple_current_character_matches_degree",
+            validate_simple_current_character(data["s_matrix"], data["degrees"]),
+        ),
+        validation(
+            "omega_hopf_projector_identity",
+            validate_omega_hopf_projector(data),
+        ),
+        validation(
+            "omega_hopf_pair_closed_form",
+            validate_omega_hopf_pair_closed_form(data),
+        ),
     ]
 
 
@@ -478,6 +490,50 @@ def validate_omega_coefficients(omega_coefficients, dimensions, degrees):
             expected = dimensions[label] * ((-1) ** (character * degrees[label]))
             if omega_coefficients[str(character)][label] != expected:
                 return False
+    return True
+
+
+def validate_simple_current_character(s_matrix, degrees):
+    simple_current = str(LEVEL)
+    for label in LABELS:
+        expected = ((-1) ** degrees[label]) * s_matrix["0"][label]
+        if s_matrix[simple_current][label] != expected:
+            return False
+    return True
+
+
+def validate_omega_hopf_projector(data):
+    global_dimension = sum(value * value for value in data["dimensions"].values())
+    for character in (0, 1):
+        target_label = str(LEVEL if character else 0)
+        for label in LABELS:
+            total = FIELD(0)
+            for summand_label in LABELS:
+                total += (
+                    data["omega_coefficients"][str(character)][summand_label]
+                    * data["hopf"][summand_label][label]
+                )
+            expected = global_dimension if label == target_label else FIELD(0)
+            if total != expected:
+                return False
+    return True
+
+
+def validate_omega_hopf_pair_closed_form(data):
+    hopf_diagram = {
+        "component_count": 2,
+        "blocks": [
+            {
+                "kind": "positive_hopf_pair",
+                "components": [0, 1],
+                "framings": [0, 0],
+            }
+        ],
+    }
+    global_dimension = sum(value * value for value in data["dimensions"].values())
+    for left_character, right_character in product((0, 1), repeat=2):
+        if omega_value(data, hopf_diagram, (left_character, right_character)) != global_dimension:
+            return False
     return True
 
 
