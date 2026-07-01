@@ -82,33 +82,42 @@ S_{i,j} / S_{0,j}
 
 * Tested Knots
 
-這次測了四個 one-component braid closures：
+這次測了八個 one-component braid closure cases：
 
 - right trefoil: =sigma_1^3=
+- right trefoil with knot framing =+1=
 - left trefoil: =sigma_1^{-3}=
 - figure-eight: =sigma_1^{-1} sigma_2 sigma_1^{-1} sigma_2=
+- figure-eight with knot framing =-1=
 - =T(2,5)=: =sigma_1^5=
+- =T(2,7)=: =sigma_1^7=
+- =T(3,4)=: =(sigma_1 sigma_2)^4=
 
 每個 knot 都有 nontrivial colored Jones root value；certificate 以
 =nontriviality_controls= 記錄。
 
 * Tested Slide Scenarios
 
-五種 slide-over framed unlink scenarios：
+七種 slide-over framed unlink scenarios：
 
 - slide over one =+1=-framed unknot
 - slide over one =-1=-framed unknot
 - slide over two =+1=-framed unknots
 - slide over one =+1= and one =-1= framed unknot
 - slide over three mixed framed unknots =(1,1,-1)=
+- slide over four mixed framed unknots =(1,-1,1,-1)=
+- slide over five mixed framed unknots =(1,1,-1,1,-1)=
 
 對每個 case，所有 =Omega= labels 都測：
 
 #+begin_src text
-4 knots * (2^2 + 2^2 + 2^3 + 2^3 + 2^4)
-= 4 * 40
-= 160 comparisons
+8 knot cases * (2^2 + 2^2 + 2^3 + 2^3 + 2^4 + 2^5 + 2^6)
+= 8 * 136
+= 1088 comparisons
 #+end_src
+
+其中 unique colored-Jones braid inputs 是 6 個；framed variants 會重用同一份
+colored Jones root values，只改 framing factor。
 
 * Result
 
@@ -116,9 +125,9 @@ S_{i,j} / S_{0,j}
 
 #+begin_src text
 status: pass
-knots: 4
-scenarios: 5
-comparisons: 160
+knots: 8
+scenarios: 7
+comparisons: 1088
 all differences: 0 exactly in CyclotomicField(32)
 #+end_src
 

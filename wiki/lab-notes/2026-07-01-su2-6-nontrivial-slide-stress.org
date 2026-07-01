@@ -1,0 +1,123 @@
+#+TITLE: 2026-07-01 SU(2)_6 Nontrivial-Over-Nontrivial Slide Stress
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:nil num:nil
+
+* Status
+
+狀態標籤：=computed nontrivial-over-nontrivial Kirby-slide evidence / parallel-copy fusion class=
+
+這份 note 補上比 meridian-unknot slide 更強的一類壓力測試：
+
+#+begin_src text
+before:
+  split nontrivial knots K and L
+
+move:
+  slide K over L
+
+after:
+  along L there is a parallel copy from the slid component
+#+end_src
+
+這仍不是 arbitrary multi-component colored link evaluator；它是針對 split
+nontrivial-over-nontrivial handle slide 的 parallel-copy / fusion-channel
+計算。
+
+* Repo / Environment
+
+- generator: =experiments/sage/su2_6_nontrivial_slide_stress.sage.py=
+- certificate: =experiments/results/sage-stress/su2-6-nontrivial-slide-stress-v1.json=
+- test: =tests/test_su2_6_nontrivial_slide_stress.py=
+
+重現指令：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_6_nontrivial_slide_stress.sage.py
+uv run pytest tests/test_su2_6_nontrivial_slide_stress.py
+#+end_src
+
+* Formula
+
+Before fixed labels =i,j=：
+
+#+begin_src text
+RT_i(K,fK) * RT_j(L,fL)
+#+end_src
+
+After sliding =K= over =L=，沿著 =L= 的 two parallel labels =i,j= 用
+=SU(2)_6= fusion decomposition：
+
+#+begin_src text
+(RT_i(K,fK) / d_i) * sum_k N_{ij}^k RT_k(L,fL)
+#+end_src
+
+=1/d_i= 是 connected-sum normalization。=Omega= label 轉換為：
+
+#+begin_src text
+(a,b) -> (a+b mod 2, b)
+#+end_src
+
+這個公式在原型測試時，錯誤的 monodromy/twist variants 會失敗；最後通過的是
+parallel-copy fusion decomposition，而不是 meridian Hopf action。
+
+* Tested Cases
+
+K 和 L 都從下列 nontrivial knots 選：
+
+- right trefoil
+- figure-eight
+- =T(2,5)=
+
+framing cases：
+
+#+begin_src text
+(fK,fL) = (0,0), (1,0), (0,1), (0,-1), (1,-1)
+#+end_src
+
+每個 case 測所有 =Omega= labels：
+
+#+begin_src text
+3 choices for K
+* 3 choices for L
+* 5 framing cases
+* 2^2 Omega labels
+= 180 exact comparisons
+#+end_src
+
+* Result
+
+#+begin_src text
+status: pass
+knots: 3
+framing cases: 5
+comparisons: 180
+all differences: 0 exactly in CyclotomicField(32)
+#+end_src
+
+這是目前比 meridian-link suite 更接近「nontrivial Kirby move」的 positive
+evidence：slide-over component 本身也是非平凡 knot，不只是 framed unknot。
+
+* Remaining Boundary
+
+仍未涵蓋：
+
+- linked starting diagrams；
+- arbitrary band placement；
+- slide between components with pre-existing complicated linking；
+- arbitrary multi-component colored link evaluator；
+- full local-piece =F/R= tensor network；
+- dotted / special links；
+- closed 4-manifold normalization。
+
+所以目前可說：
+
+#+begin_src text
+SU(2)_6 passed nontrivial-over-nontrivial split-slide stress tests
+for the parallel-copy fusion class.
+#+end_src
+
+仍不可說：
+
+#+begin_src text
+SU(2)_6 arbitrary Kirby diagram evaluator is complete.
+#+end_src

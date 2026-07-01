@@ -237,10 +237,36 @@ suite。它支援的 move class 是：
 - slide 後的 meridian components 用 =S= matrix meridian action 評估；
 - =Omega= label 依 =U(C)=Z/2= 加法轉換。
 
-目前測過 right trefoil、left trefoil、figure-eight、=T(2,5)=，以及五種
-slide-over framing scenarios，總共 160 個 exact before/after comparisons。
+目前測過 right trefoil、left trefoil、figure-eight、=T(2,5)=、=T(2,7)=、
+=T(3,4)=，也包含非零 knot framing variants；slide-over scenarios 包含一到五個
+mixed framed unknots，總共 1088 個 exact before/after comparisons。
 這仍不是 arbitrary multi-component colored-link evaluator；一般 band-sum、任意
 planar diagram、dotted/special links 與 closed 4-manifold normalization 仍未涵蓋。
+
+產生 =SU(2)_6= nontrivial-over-nontrivial Kirby-slide stress certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_6_nontrivial_slide_stress.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/sage-stress/su2-6-nontrivial-slide-stress-v1.json
+#+end_src
+
+=su2_6_nontrivial_slide_stress.sage.py= 測一個更強但仍受限的 move class：
+
+- before 是 split nontrivial knots =K,L=；
+- slide =K= over =L=；
+- after 沿著 =L= 的 parallel copy 用 fusion decomposition 評估：
+  =(RT_i(K)/d_i) * sum_k N_{ij}^k RT_k(L)=；
+- =Omega= label 依 =a,b -> a+b,b= 轉換。
+
+目前測過 right trefoil、figure-eight、=T(2,5)= 互相 slide，五種 framing
+cases，總共 180 個 exact comparisons。這比 meridian-unknot slide 更接近真正的
+nontrivial-over-nontrivial Kirby move，但仍不是 arbitrary linked starting
+diagram 或 full =F/R= evaluator。
 
 * Fusion-Channel Gate
 

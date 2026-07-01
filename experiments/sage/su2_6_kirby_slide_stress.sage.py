@@ -66,6 +66,12 @@ KNOT_CASES = [
         "knot_framing": 0,
     },
     {
+        "name": "right_trefoil_plus_one_framed",
+        "n_strands": 2,
+        "braid_word": (1, 1, 1),
+        "knot_framing": 1,
+    },
+    {
         "name": "left_trefoil",
         "n_strands": 2,
         "braid_word": (-1, -1, -1),
@@ -78,9 +84,27 @@ KNOT_CASES = [
         "knot_framing": 0,
     },
     {
+        "name": "figure_eight_minus_one_framed",
+        "n_strands": 3,
+        "braid_word": (-1, 2, -1, 2),
+        "knot_framing": -1,
+    },
+    {
         "name": "torus_2_5",
         "n_strands": 2,
         "braid_word": (1, 1, 1, 1, 1),
+        "knot_framing": 0,
+    },
+    {
+        "name": "torus_2_7",
+        "n_strands": 2,
+        "braid_word": (1, 1, 1, 1, 1, 1, 1),
+        "knot_framing": 0,
+    },
+    {
+        "name": "torus_3_4",
+        "n_strands": 3,
+        "braid_word": (1, 2, 1, 2, 1, 2, 1, 2),
         "knot_framing": 0,
     },
 ]
@@ -107,6 +131,14 @@ SLIDE_SCENARIOS = [
         "name": "slide_over_three_mixed_unlinks",
         "slide_framings": (1, 1, -1),
     },
+    {
+        "name": "slide_over_four_mixed_unlinks",
+        "slide_framings": (1, -1, 1, -1),
+    },
+    {
+        "name": "slide_over_five_mixed_unlinks",
+        "slide_framings": (1, 1, -1, 1, -1),
+    },
 ]
 
 
@@ -115,8 +147,9 @@ def run_suite():
     normalization_controls = colored_jones_normalization_controls()
     comparisons = []
     nontriviality_controls = []
+    knot_value_cache = {}
     for knot in KNOT_CASES:
-        knot_values = colored_jones_root_values(knot)
+        knot_values = cached_colored_jones_root_values(knot_value_cache, knot)
         nontriviality_controls.append(nontrivial_knot_control(knot, knot_values))
         for scenario in SLIDE_SCENARIOS:
             comparisons.extend(slide_comparisons(knot, scenario, knot_values))
@@ -149,6 +182,7 @@ def run_suite():
         "comparison_count": len(comparisons),
         "knot_count": len(KNOT_CASES),
         "scenario_count": len(SLIDE_SCENARIOS),
+        "unique_colored_jones_braid_count": len(knot_value_cache),
         "comparisons": comparisons,
     }
 
@@ -196,24 +230,14 @@ def after_slide_value(knot, scenario, omega_labels, knot_values):
     slide_omegas = omega_labels[1:]
     transformed_knot_framing = knot["knot_framing"] + sum(slide_framings)
     for knot_label in LABELS:
+        meridian_product = FIELD(1)
+        for slide_framing, slide_omega in zip(slide_framings, slide_omegas, strict=True):
+            meridian_product *= meridian_omega_value(slide_framing, slide_omega, knot_label)
         knot_factor = (
             omega_coefficient(transformed_knot_omega, knot_label)
             * framed_knot_value(knot, knot_label, transformed_knot_framing, knot_values)
         )
-        for slide_labels in product(LABELS, repeat=len(slide_framings)):
-            meridian_factor = FIELD(1)
-            for slide_label, slide_framing, slide_omega in zip(
-                slide_labels,
-                slide_framings,
-                slide_omegas,
-                strict=True,
-            ):
-                meridian_factor *= (
-                    omega_coefficient(slide_omega, slide_label)
-                    * twist(slide_label) ** slide_framing
-                    * meridian_action(slide_label, knot_label)
-                )
-            total += knot_factor * meridian_factor
+        total += knot_factor * meridian_product
     return FIELD(total)
 
 
@@ -225,6 +249,17 @@ def split_unlink_omega_value(slide_framings, slide_omegas):
             summand += omega_coefficient(omega_label, label) * dimension(label) * twist(label) ** framing
         value *= summand
     return FIELD(value)
+
+
+def meridian_omega_value(slide_framing, slide_omega, knot_label):
+    return FIELD(
+        sum(
+            omega_coefficient(slide_omega, slide_label)
+            * twist(slide_label) ** slide_framing
+            * meridian_action(slide_label, knot_label)
+            for slide_label in LABELS
+        )
+    )
 
 
 def after_knot_omega_label(omega_labels):
@@ -246,6 +281,13 @@ def colored_jones_root_values(knot):
         label: FIELD(braid.colored_jones_polynomial(label + 1)(JONES_Q))
         for label in LABELS
     }
+
+
+def cached_colored_jones_root_values(cache, knot):
+    key = (int(knot["n_strands"]), tuple(int(generator) for generator in knot["braid_word"]))
+    if key not in cache:
+        cache[key] = colored_jones_root_values(knot)
+    return cache[key]
 
 
 def nontrivial_knot_control(knot, knot_values):
