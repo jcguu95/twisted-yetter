@@ -1,0 +1,596 @@
+{
+  "argv": [
+    "mtc_fusion_channel_gate.py"
+  ],
+  "command": "uv run python experiments/scripts/mtc_fusion_channel_gate.py",
+  "elapsed_seconds": 0,
+  "exact_output": {
+    "claim_level": "computed fusion-channel evidence / not full F-R evaluator",
+    "not_scope": "arbitrary braid closure, arbitrary planar diagram, full local-piece F/R evaluator, Kirby diagram parser, special-link/dotted-component evaluation, or exotic-pair computation",
+    "schema": "twisted-yetter.mtc-fusion-channel-gate.v1",
+    "scope": "central Omega projector gates for Hopf-star style encircling diagrams, fusion associativity pressure, and next-candidate readiness",
+    "source_artifacts": {
+      "candidate_data": "experiments/results/mtc-candidates/mtc-candidate-data-v1.json",
+      "su2_projector_data": "experiments/results/mtc-candidates/su2-6-modular-supported-v1.json"
+    },
+    "status": "pass",
+    "step_3_su2_6_hopf_star_fusion_channel_gate": {
+      "category_id": "SU(2)_6",
+      "controls": [
+        {
+          "actual_global_dimension_multiplier": 1,
+          "central_omega": "0",
+          "expected_global_dimension_multiplier": 1,
+          "fusion_distribution": {
+            "0": 1,
+            "2": 1
+          },
+          "leaf_labels": [
+            "1",
+            "1"
+          ],
+          "name": "1x1_omega0_keeps_vacuum",
+          "status": "pass",
+          "target_simple_current": "0",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 1
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 0,
+          "central_omega": "1",
+          "expected_global_dimension_multiplier": 0,
+          "fusion_distribution": {
+            "0": 1,
+            "2": 1
+          },
+          "leaf_labels": [
+            "1",
+            "1"
+          ],
+          "name": "1x1_omega1_rejects_simple_current",
+          "status": "pass",
+          "target_simple_current": "6",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 0
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 1,
+          "central_omega": "0",
+          "expected_global_dimension_multiplier": 1,
+          "fusion_distribution": {
+            "0": 1,
+            "2": 1,
+            "4": 1,
+            "6": 1
+          },
+          "leaf_labels": [
+            "3",
+            "3"
+          ],
+          "name": "3x3_omega0_keeps_vacuum",
+          "status": "pass",
+          "target_simple_current": "0",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 1
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 1,
+          "central_omega": "1",
+          "expected_global_dimension_multiplier": 1,
+          "fusion_distribution": {
+            "0": 1,
+            "2": 1,
+            "4": 1,
+            "6": 1
+          },
+          "leaf_labels": [
+            "3",
+            "3"
+          ],
+          "name": "3x3_omega1_keeps_simple_current",
+          "status": "pass",
+          "target_simple_current": "6",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 1
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 0,
+          "central_omega": "0",
+          "expected_global_dimension_multiplier": 0,
+          "fusion_distribution": {
+            "2": 1,
+            "4": 1,
+            "6": 1
+          },
+          "leaf_labels": [
+            "2",
+            "4"
+          ],
+          "name": "2x4_omega0_rejects_vacuum",
+          "status": "pass",
+          "target_simple_current": "0",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 0
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 1,
+          "central_omega": "1",
+          "expected_global_dimension_multiplier": 1,
+          "fusion_distribution": {
+            "2": 1,
+            "4": 1,
+            "6": 1
+          },
+          "leaf_labels": [
+            "2",
+            "4"
+          ],
+          "name": "2x4_omega1_keeps_simple_current",
+          "status": "pass",
+          "target_simple_current": "6",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 1
+          }
+        },
+        {
+          "actual_global_dimension_multiplier": 1,
+          "central_omega": "1",
+          "expected_global_dimension_multiplier": 1,
+          "fusion_distribution": {
+            "4": 1,
+            "6": 1
+          },
+          "leaf_labels": [
+            "1",
+            "5"
+          ],
+          "name": "1x5_omega1_keeps_simple_current",
+          "status": "pass",
+          "target_simple_current": "6",
+          "value": {
+            "global_dimension": {
+              "coefficients": [
+                "16",
+                "0",
+                "0",
+                "0",
+                "8",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "-8",
+                "0",
+                "0",
+                "0"
+              ],
+              "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+              "field": "CyclotomicField(32)",
+              "zeta_symbol": "zeta32"
+            },
+            "kind": "global_dimension_multiple",
+            "multiplier": 1
+          }
+        }
+      ],
+      "projector_formula": "central Omega_a around fixed leaves equals global_dimension times multiplicity of target simple current g_a in the fusion product",
+      "status": "pass",
+      "target_simple_currents": {
+        "0": "0",
+        "1": "6"
+      },
+      "value_unit": {
+        "category_id": "SU(2)_6",
+        "kind": "global_dimension",
+        "value": {
+          "coefficients": [
+            "16",
+            "0",
+            "0",
+            "0",
+            "8",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "-8",
+            "0",
+            "0",
+            "0"
+          ],
+          "display": "-8*zeta32^12 + 8*zeta32^4 + 16",
+          "field": "CyclotomicField(32)",
+          "zeta_symbol": "zeta32"
+        }
+      }
+    },
+    "step_4_su2_6_pressure_controls": {
+      "associativity_failure_count": 0,
+      "associativity_failures": [],
+      "associativity_samples": [
+        {
+          "fusion_distribution": {
+            "0": 1,
+            "2": 2,
+            "4": 1
+          },
+          "leaf_labels": [
+            "1",
+            "1",
+            "2"
+          ],
+          "omega0_multiplier": 1,
+          "omega1_multiplier": 0
+        },
+        {
+          "fusion_distribution": {
+            "0": 1,
+            "2": 2,
+            "4": 2,
+            "6": 1
+          },
+          "leaf_labels": [
+            "1",
+            "3",
+            "4"
+          ],
+          "omega0_multiplier": 1,
+          "omega1_multiplier": 1
+        },
+        {
+          "fusion_distribution": {
+            "0": 1,
+            "2": 2,
+            "4": 2,
+            "6": 1
+          },
+          "leaf_labels": [
+            "2",
+            "3",
+            "5"
+          ],
+          "omega0_multiplier": 1,
+          "omega1_multiplier": 1
+        },
+        {
+          "fusion_distribution": {
+            "1": 2,
+            "3": 4,
+            "5": 2
+          },
+          "leaf_labels": [
+            "3",
+            "3",
+            "3"
+          ],
+          "omega0_multiplier": 0,
+          "omega1_multiplier": 0
+        }
+      ],
+      "associativity_triple_count": 343,
+      "category_id": "SU(2)_6",
+      "same_linking_matrix_not_enough_witnesses": [
+        {
+          "central_omega": "1",
+          "interpretation": "same pairwise linking data gives different central Omega projector output; a linking-matrix-only evaluator would be wrong for this non-pointed gate",
+          "left_leaf_labels": [
+            "1",
+            "1"
+          ],
+          "left_multiplier": 0,
+          "name": "omega1_distinguishes_1x1_from_2x4",
+          "pairwise_linking_signature": "central links each leaf once; leaves mutually unlinked",
+          "right_leaf_labels": [
+            "2",
+            "4"
+          ],
+          "right_multiplier": 1,
+          "status": "pass"
+        },
+        {
+          "central_omega": "0",
+          "interpretation": "same pairwise linking data gives different central Omega projector output; a linking-matrix-only evaluator would be wrong for this non-pointed gate",
+          "left_leaf_labels": [
+            "1",
+            "1"
+          ],
+          "left_multiplier": 1,
+          "name": "omega0_distinguishes_1x1_from_2x4",
+          "pairwise_linking_signature": "central links each leaf once; leaves mutually unlinked",
+          "right_leaf_labels": [
+            "2",
+            "4"
+          ],
+          "right_multiplier": 0,
+          "status": "pass"
+        }
+      ],
+      "status": "pass"
+    },
+    "step_5_su3_2_next_candidate_gate": {
+      "blocker": {
+        "message": "The fusion multiplicity side is ready, but we have not yet certified which invertible label realizes each universal-grading character in the S-matrix row, nor do we have a full F/R-symbol backend.",
+        "needed_next": [
+          "exact simple-current character row check for SU(3)_2",
+          "central Omega projector identity for all three characters",
+          "then reuse this fusion-channel gate with certified character targets"
+        ],
+        "reason_id": "su3-2-projector-target-map-not-yet-certified"
+      },
+      "category_id": "SU(3)_2",
+      "fusion_channel_samples": [
+        {
+          "fusion_distribution": {
+            "(0,1)": 1,
+            "(2,0)": 1
+          },
+          "invertible_multiplicities": {
+            "(0,0)": 0,
+            "(0,2)": 0,
+            "(2,0)": 1
+          },
+          "leaf_labels": [
+            "(1,0)",
+            "(1,0)"
+          ]
+        },
+        {
+          "fusion_distribution": {
+            "(0,0)": 1,
+            "(1,1)": 1
+          },
+          "invertible_multiplicities": {
+            "(0,0)": 1,
+            "(0,2)": 0,
+            "(2,0)": 0
+          },
+          "leaf_labels": [
+            "(1,0)",
+            "(0,1)"
+          ]
+        },
+        {
+          "fusion_distribution": {
+            "(0,2)": 1,
+            "(1,0)": 1
+          },
+          "invertible_multiplicities": {
+            "(0,0)": 0,
+            "(0,2)": 1,
+            "(2,0)": 0
+          },
+          "leaf_labels": [
+            "(0,1)",
+            "(0,1)"
+          ]
+        },
+        {
+          "fusion_distribution": {
+            "(0,2)": 1,
+            "(1,0)": 1
+          },
+          "invertible_multiplicities": {
+            "(0,0)": 0,
+            "(0,2)": 1,
+            "(2,0)": 0
+          },
+          "leaf_labels": [
+            "(1,1)",
+            "(1,0)"
+          ]
+        },
+        {
+          "fusion_distribution": {
+            "(0,1)": 1,
+            "(2,0)": 1
+          },
+          "invertible_multiplicities": {
+            "(0,0)": 0,
+            "(0,2)": 0,
+            "(2,0)": 1
+          },
+          "leaf_labels": [
+            "(1,1)",
+            "(0,1)"
+          ]
+        }
+      ],
+      "invertible_labels_detected_from_dimension_one": [
+        "(0,0)",
+        "(2,0)",
+        "(0,2)"
+      ],
+      "readiness": "structured-blocker",
+      "status": "pass"
+    },
+    "validations": [
+      {
+        "name": "su2_step3_hopf_star_controls",
+        "status": "pass"
+      },
+      {
+        "name": "su2_step4_fusion_pressure_controls",
+        "status": "pass"
+      },
+      {
+        "name": "su3_step5_readiness_gate_is_structured",
+        "status": "pass"
+      }
+    ]
+  },
+  "finished_at_utc": "2026-07-01T18:57:52Z",
+  "generator_script": "experiments/scripts/mtc_fusion_channel_gate.py",
+  "git": {
+    "commit": "39298eb0bd4b851ca3d7acf9fbd58332dc42f50b",
+    "dirty": true
+  },
+  "input_hash": "4039f7fe8bd417c0a32edeedc08f21899bb1f3f1f75dcd6fe1700946d26161e7",
+  "log_references": [],
+  "notes": [
+    "This gate is a fusion-channel projector test, not a full F/R-symbol evaluator.",
+    "SU(3)_2 is intentionally kept at structured-blocker status in this artifact."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "uv run python experiments/scripts/mtc_fusion_channel_gate.py --output experiments/results/mtc-candidates/mtc-fusion-channel-gate-v1.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-07-01T18:57:52Z",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

@@ -214,3 +214,29 @@ link evaluation 化成 linking matrix Gauss sum，測 =Q'=B^TQB= 與
 這個檔案不是 =SU(2)_6= arbitrary link evaluator，也還沒有做 Kirby slide
 invariance。下一步若要測真正 non-pointed Kirby moves，必須先加入
 =F/R=-symbol 或其他等價的 colored link backend。
+
+* Fusion-Channel Gate
+
+=experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面
+產生的 exact category-data artifact，檢查 non-pointed Hopf-star / central
+=Omega= projector 這個中間層：
+
+#+begin_src sh
+uv run python experiments/scripts/mtc_fusion_channel_gate.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/mtc-candidates/mtc-fusion-channel-gate-v1.json
+#+end_src
+
+目前涵蓋：
+
+- =SU(2)_6= fixed-label Hopf-star fusion-channel controls；
+- =SU(2)_6= 343 個三重 fusion associativity checks；
+- 一個明確 witness：同樣的 pairwise linking signature 可以因 fusion channel 不同而
+  給出不同 =Omega= projector multiplier，所以 non-pointed case 不能只看 linking
+  matrix；
+- =SU(3)_2= 的 next-candidate readiness gate，目前是 structured blocker，不是
+  evaluator：還缺 simple-current character target map 與 full =F/R= backend。
