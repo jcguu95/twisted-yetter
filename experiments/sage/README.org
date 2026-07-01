@@ -389,6 +389,24 @@ conjugation。
 最多三條 selected strands，且還沒有 cup/cap program 或 arbitrary special/dotted
 Kirby component semantics。
 
+產生 =SU(2)_2= B3 generic fusion-path backend certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_rf_generic_backend.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/local-piece/su2-2-rf-generic-backend-v1.json
+#+end_src
+
+=su2_2_rf_generic_backend.sage.py= 移除 B2 的 all-=sigma= selected sublink
+三股上限：=sigma= sublink 由 arbitrary-length left-associated fusion-path basis
+與 local =R/F= matrices 評估，然後沿用 B2 的 unit/psi linking scalar 與 =Omega=
+expansion 包裝。這是 B3 的實作 checkpoint；full mixed-label =F/R= generator
+matrices、cup/cap 與 arbitrary planar tensor graph 仍列為下一步。
+
 * Fusion-Channel Gate
 
 =experiments/scripts/mtc_fusion_channel_gate.py= 不是 Sage script，但它使用前面
