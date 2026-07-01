@@ -77,6 +77,18 @@ DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_2_handle_slide_toys.sage.py
 experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
 #+end_src
 
+產生下一批 MTC candidate category-data certificate：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/mtc_candidate_data.sage.py
+#+end_src
+
+預設輸出：
+
+#+begin_src text
+experiments/results/mtc-candidates/mtc-candidate-data-v1.json
+#+end_src
+
 * Payload Shape
 
 #+begin_src json
@@ -146,3 +158,17 @@ experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json
   slide toys，尤其 =|f_2|>1= 的 mixed framing 仍需要 framed push-off / cabling
   constructor；
 - 對 twisted formula 本身的 theorem-level proof。
+
+* MTC Candidate Data Boundary
+
+=mtc_candidate_data.sage.py= 目前只做 category-side exact certificate：
+
+- =SU(2)_6=：=U(C)=Z/2=，degree =j mod 2=。
+- =Vec_{Z/3}^q=：=U(C)=Z/3=，=q(x)=zeta_3^{x^2}=，並附 pointed
+  linking-matrix handle-slide controls。
+- =SU(3)_2=：第一個 non-pointed =Z/3= candidate，degree =a+2b mod 3=。
+
+它會記錄 fusion rules、quantum dimensions、twists、Hopf controls、=Omega_a=
+coefficients、以及小型 algebraic controls。它不是 arbitrary colored link evaluator；
+離開 pointed categories 後，fixed-label link evaluation 仍需要 explicit
+=F/R=-symbol gauge 或 colored-Jones / fusion-space trace backend。
