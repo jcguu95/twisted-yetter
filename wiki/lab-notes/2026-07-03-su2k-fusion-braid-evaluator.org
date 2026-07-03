@@ -1,0 +1,207 @@
+#+TITLE: SU(2)_k Fusion-Braid Evaluator 嘗試
+#+DATE: 2026-07-03
+#+STATUS: evaluator scaffold / calibration blocker
+
+* 目的
+
+建立一個能吃 mixed-color braid closure 的 =SU(2)_k= evaluator，目標是讓
+=SU(2)_6= 不再只能靠 split unlink / Hopf / special stress classes，而可以直接
+評估 Yasui Figure 3 \(a=1\) 的 braid payload。
+
+這次結果不是完成版 evaluator。比較誠實的狀態是：
+
+#+begin_src text
+low-level SU(2)_2 controls: pass
+mixed-color SU(2)_k scaffold: exists
+multi-component Yasui SU(2)_2 calibration: fail
+SU(2)_6 Yasui use: blocked
+#+end_src
+
+* Git 與環境
+
+起始 commit：
+
+#+begin_src text
+ac95aa0fb81d57e891355b0a102a6db3415472c5
+#+end_src
+
+dirty 狀態包含本次新增 evaluator scaffold、Yasui comparison blocker 更新、測試與本筆記。
+
+使用工具：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2k_fusion_braid_evaluator.sage.py --self-test
+DOT_SAGE="$PWD/.sage" sage experiments/sage/yasui_figure3_a1_other_mtc_comparison.sage.py
+UV_CACHE_DIR="$PWD/.uv-cache" uv run python -m pytest \
+  tests/test_su2k_fusion_braid_evaluator.py \
+  tests/test_yasui_figure3_other_mtc_comparison.py
+#+end_src
+
+pytest 結果：
+
+#+begin_src text
+2 passed
+#+end_src
+
+* 新增 artifact / code
+
+新增：
+
+#+begin_src text
+experiments/sage/su2k_fusion_braid_evaluator.sage.py
+tests/test_su2k_fusion_braid_evaluator.py
+#+end_src
+
+更新：
+
+#+begin_src text
+experiments/sage/yasui_figure3_a1_other_mtc_comparison.sage.py
+experiments/results/yasui/figure3-a1-other-mtc-comparison-v1.json
+tests/test_yasui_figure3_other_mtc_comparison.py
+#+end_src
+
+* 已通過的 controls
+
+新 evaluator 的 =--self-test= 目前通過以下 =SU(2)_2= checks：
+
+1. two-component sigma unlink：
+   \( \langle U_\sigma \sqcup U_\sigma\rangle = d_\sigma^2 = 2 \)。
+
+2. sigma-sigma positive Hopf：
+   值為 \(0\)，符合 Ising \(S_{\sigma,\sigma}=0\)。
+
+3. psi-sigma positive Hopf：
+   值為 \(-\sqrt 2\)，符合既有 =su2_2_braid_oracle= convention。
+
+4. right trefoil with sigma label and zero external framing：
+   值為 \(-\sqrt 2\)，符合既有 oracle。
+
+這些 controls 測到：
+
+#+begin_src text
+R convention
+blackboard framing correction
+basic Markov stabilization
+some unit deletion behavior
+#+end_src
+
+* 實作細節
+
+目前 evaluator 使用：
+
+#+begin_src text
+SU(2)_k labels: 0,...,k
+fusion-path basis
+q-6j candidate F-symbols
+R-symbols calibrated to SU(2)_2 trefoil/Hopf controls
+sparse path propagation
+blackboard self-writhe correction:
+  theta_label^(external_framing - braid_self_writhe)
+unit-colored component deletion before evaluation
+#+end_src
+
+為了避免 =QQbar= expression swell，class 支援：
+
+#+begin_src text
+exact=True   -> QQbar controls
+exact=False  -> high-precision ComplexField numerical mode
+#+end_src
+
+* 失敗的 calibration gate
+
+把 evaluator 套到 Yasui Figure 3 \(a=1\) 的 =SU(2)_2= fixed sectors，並與既有
+=su2_2_braid_oracle= 對照，仍然不一致。
+
+重要觀察：
+
+#+begin_src text
+全 unit sector: matches
+部分 one-component / Hopf / trefoil controls: match
+Yasui multi-component fixed sectors: mismatch
+max fixed-sector difference observed: 4.0
+#+end_src
+
+代表目前不能把這個 evaluator 用在 =SU(2)_6= Yasui computation。
+
+* 已修掉的中間錯誤
+
+1. Dense =QQbar= matrix multiplication 太慢。
+   改成 sparse path propagation 後，某些 =SU(2)_6= fixed sector 從約 24 秒降到
+   約 0.17 秒。
+
+2. Unit-colored components 不能直接留在 full braid trace 裡。
+   已改成先刪掉 unit-colored components，抽出 selected subbraid。
+
+3. 抽 selected subbraid 後 component order 不能沿用原本 nonzero component order。
+   已新增 selected subcomponent -> original component lineage。
+
+4. 第二個 F-move 必須用 \(F^{-1}\)，不能假設 F 自己就是 inverse。
+
+5. q-6j face placement 曾經把一些合法 unit/nonunit channel 算成 0。
+   已修成 associator faces：
+
+#+begin_src text
+(a,b,e), (e,c,d), (b,c,f), (a,f,d)
+#+end_src
+
+* 目前 blocker 的形狀
+
+局部 braid generators 在小型 =SU(2)_2= examples 上可對上，但完整 Yasui
+multi-component sectors 仍不對。可能原因：
+
+#+begin_src text
+1. 手寫 q-6j gauge 尚未與 Sage / Jones oracle convention 完全一致。
+2. Markov trace / colored closure formula 對多 component closure 的 normalization
+   還缺少 convention factor。
+3. mixed labels involving invertible object 2 與 sigma 的 braid/trace convention
+   仍有錯。
+#+end_src
+
+因此 =experiments/results/yasui/figure3-a1-other-mtc-comparison-v1.json= 現在把
+=SU(2)_6= 標成：
+
+#+begin_src text
+blocked-fusion-braid-calibration-failed
+#+end_src
+
+這是故意的防呆：不要讓未來 agent 誤用目前 scaffold。
+
+* 下一步建議
+
+下一步不應直接算 =SU(2)_6=，而應先做 calibration-focused work：
+
+1. 用 Sage =FusionRing.get_braid_generators= 在 all-sigma \(n=4,5,\dots\) cases 上
+   比較 trace，而不只比較 generator matrices。
+
+2. 對 =SU(2)_2= Yasui payload 建立完整 fixed-sector mismatch artifact：
+   每個 labels sector 記錄 oracle value、fusion evaluator value、difference。
+
+3. 優先解釋 sectors：
+
+#+begin_src text
+(1,1,2)
+(1,1,0)
+(0,1,1)
+(1,1,1)
+#+end_src
+
+4. 若 q-6j gauge 持續難修，改走 Kauffman bracket / Jones-Wenzl cabling route，
+   先求一個可靠的 =SU(2)_k= colored-link evaluator，再回頭一般化到 F/R backend。
+
+* 重要結論
+
+這次不是得到 =SU(2)_6= 的 Yasui 數值，而是得到一個可審計的 evaluator scaffold
+和一個明確 calibration blocker。
+
+目前不能宣稱：
+
+#+begin_src text
+we have a correct arbitrary SU(2)_6 link evaluator
+#+end_src
+
+目前可以宣稱：
+
+#+begin_src text
+we have a tested SU(2)_k fusion-braid evaluator scaffold,
+but it is blocked by multi-component SU(2)_2 calibration.
+#+end_src

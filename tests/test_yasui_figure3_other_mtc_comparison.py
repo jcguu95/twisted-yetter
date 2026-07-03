@@ -27,5 +27,6 @@ def test_yasui_figure3_vec_z3_matches_standard_and_nonpointed_are_blocked() -> N
     assert all(row["equal_raw_value"] for row in vec_z3["rows"])
 
     blocked = {item["category_id"]: item for item in payload["blocked_categories"]}
-    assert blocked["SU(2)_6"]["status"] == "blocked-no-arbitrary-link-evaluator"
+    assert blocked["SU(2)_6"]["status"] == "blocked-fusion-braid-calibration-failed"
+    assert "fusion-braid evaluator scaffold now exists" in blocked["SU(2)_6"]["reason"]
     assert blocked["SU(3)_3"]["status"] == "blocked-no-arbitrary-link-evaluator"

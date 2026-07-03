@@ -17,8 +17,10 @@ import json
 from itertools import product
 from pathlib import Path
 import sys
+import time
+import importlib.util
 
-from sage.all import CyclotomicField, Matrix, ZZ
+from sage.all import ComplexField, CyclotomicField, Matrix, ZZ
 from sage.env import SAGE_VERSION
 
 
@@ -37,6 +39,8 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 FIELD_Z3 = CyclotomicField(3)
 ZETA3 = FIELD_Z3.gen()
+CF = ComplexField(120)
+SU2K_EVALUATOR = REPO_ROOT / "experiments" / "sage" / "su2k_fusion_braid_evaluator.sage.py"
 
 
 def quadratic_exponent_mod3(entries, simple_labels):
@@ -71,6 +75,17 @@ def cyclotomic_z3_json(value):
         "zeta_symbol": "zeta3",
         "display": str(value),
         "coefficients": [str(coefficient) for coefficient in value.list()],
+    }
+
+
+def complex_json(value):
+    value = CF(value)
+    return {
+        "field": "ComplexField(120)",
+        "display": str(value),
+        "real": str(value.real()),
+        "imag": str(value.imag()),
+        "abs": str(abs(value)),
     }
 
 
@@ -126,20 +141,108 @@ def vec_z3_comparison(yasui):
     }
 
 
+def load_su2k_evaluator_module():
+    spec = importlib.util.spec_from_file_location("su2k_fusion_braid_evaluator", SU2K_EVALUATOR)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["su2k_fusion_braid_evaluator"] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def omega_from_sector_cache(evaluator, sector_cache, omega_labels):
+    total = evaluator.zero()
+    for fixed_labels, amplitude in sector_cache.items():
+        coefficient = evaluator.one()
+        for omega_label, simple_label in zip(omega_labels, fixed_labels, strict=True):
+            coefficient *= evaluator.dimension(simple_label) * evaluator.character(omega_label, simple_label)
+        total += coefficient * amplitude
+    return total
+
+
+def su2_6_numerical_comparison(yasui):
+    module = load_su2k_evaluator_module()
+    evaluator = module.SU2KBraidEvaluator(6, exact=False, precision=120)
+    started = time.time()
+
+    yasui_braid_word = tuple(int(generator) for generator in yasui["braid_word"])
+    yasui_framings = tuple(int(framing) for framing in yasui["framings_in_braid_order"])
+    yasui_sector_cache = evaluator.sector_amplitudes(
+        int(yasui["n_strands"]),
+        yasui_braid_word,
+        yasui_framings,
+    )
+
+    standard_sector_cache = evaluator.sector_amplitudes(
+        3,
+        (),
+        (1, -1, -1),
+    )
+
+    rows = []
+    max_abs_difference = CF(0)
+    tolerance = CF("1e-70")
+    all_close = True
+    for alpha_h, alpha_e1, alpha_e2 in product((0, 1), repeat=3):
+        standard_labels = (alpha_h, alpha_e1, alpha_e2)
+        yasui_by_source = {
+            "A": alpha_e2,
+            "B": alpha_h,
+            "C": alpha_e1,
+        }
+        yasui_labels = tuple(yasui_by_source[name] for name in yasui["omega_label_order"])
+        standard_value = omega_from_sector_cache(evaluator, standard_sector_cache, standard_labels)
+        yasui_value = omega_from_sector_cache(evaluator, yasui_sector_cache, yasui_labels)
+        difference = CF(yasui_value - standard_value)
+        abs_difference = abs(difference)
+        max_abs_difference = max(max_abs_difference, abs_difference)
+        close = bool(abs_difference < tolerance)
+        all_close = all_close and close
+        rows.append(
+            {
+                "alpha_basis_order": ["h", "e1", "e2"],
+                "alpha": [int(alpha_h), int(alpha_e1), int(alpha_e2)],
+                "standard_component_order": ["h", "e1", "e2"],
+                "standard_omega_labels": list(standard_labels),
+                "yasui_component_order": list(yasui["omega_label_order"]),
+                "yasui_omega_labels": list(yasui_labels),
+                "standard_raw_value": complex_json(standard_value),
+                "yasui_raw_value": complex_json(yasui_value),
+                "difference": complex_json(difference),
+                "abs_difference": str(abs_difference),
+                "close_under_tolerance": close,
+            }
+        )
+
+    return {
+        "category_id": "SU(2)_6",
+        "status": "numerical-pass" if all_close else "numerical-mismatch",
+        "claim_level": "high-precision numerical evidence from mixed-color fusion-braid evaluator",
+        "scope": "all 8 alpha in Hom(H2,Z/2) for Yasui Figure 3 a=1 versus standard CP2#2CPbar presentation",
+        "not_scope": "exact certificate, arbitrary MTC evaluator, SU(3)_3 evaluator, dotted/special-link evaluator",
+        "precision_bits": 120,
+        "tolerance": str(tolerance),
+        "elapsed_seconds": time.time() - started,
+        "yasui_fixed_sector_count": len(yasui_sector_cache),
+        "standard_fixed_sector_count": len(standard_sector_cache),
+        "max_abs_difference": str(max_abs_difference),
+        "rows": rows,
+    }
+
+
 def blocked_nonpointed_categories():
     return [
         {
             "category_id": "SU(2)_6",
-            "status": "blocked-no-arbitrary-link-evaluator",
+            "status": "blocked-fusion-braid-calibration-failed",
             "reason": (
-                "Current SU(2)_6 artifacts cover modular data, split unlinks, Hopf pairs, "
-                "and specific Kirby-slide stress classes.  They explicitly reject arbitrary "
-                "colored-link evaluation for a Yasui 8-strand braid closure."
+                "A mixed-color SU(2)_k fusion-braid evaluator scaffold now exists, "
+                "but it is not admitted for Yasui/SU(2)_6 use because its "
+                "multi-component SU(2)_2 calibration against the existing braid "
+                "oracle is not yet clean."
             ),
             "blocking_artifacts": [
-                "experiments/results/mtc-candidates/su2-6-modular-supported-v1.json",
-                "experiments/results/sage-stress/su2-6-kirby-slide-stress-v1.json",
-                "experiments/results/sage-stress/su2-6-nontrivial-slide-stress-v1.json",
+                "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+                "experiments/results/yasui/figure3-a1-braid-payload-v1.json",
             ],
         },
         {
@@ -164,9 +267,10 @@ def main():
 
     vec_z3 = vec_z3_comparison(yasui)
     blocked = blocked_nonpointed_categories()
+    status = "pass-with-blocked-nonpointed" if vec_z3["status"] == "pass" else "mismatch"
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-other-mtc-comparison.v1",
-        "status": "pass-with-blocked-nonpointed" if vec_z3["status"] == "pass" else "mismatch",
+        "status": status,
         "sage_version": SAGE_VERSION,
         "source": {
             "yasui_payload": str(YASUI_PAYLOAD.relative_to(REPO_ROOT)),
@@ -178,7 +282,7 @@ def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps(result, indent=2, sort_keys=True))
-    return 0 if vec_z3["status"] == "pass" else 1
+    return 0 if status != "mismatch" else 1
 
 
 if __name__ == "__main__":

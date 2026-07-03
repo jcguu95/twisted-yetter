@@ -2,13 +2,12 @@
   "blocked_categories": [
     {
       "blocking_artifacts": [
-        "experiments/results/mtc-candidates/su2-6-modular-supported-v1.json",
-        "experiments/results/sage-stress/su2-6-kirby-slide-stress-v1.json",
-        "experiments/results/sage-stress/su2-6-nontrivial-slide-stress-v1.json"
+        "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+        "experiments/results/yasui/figure3-a1-braid-payload-v1.json"
       ],
       "category_id": "SU(2)_6",
-      "reason": "Current SU(2)_6 artifacts cover modular data, split unlinks, Hopf pairs, and specific Kirby-slide stress classes.  They explicitly reject arbitrary colored-link evaluation for a Yasui 8-strand braid closure.",
-      "status": "blocked-no-arbitrary-link-evaluator"
+      "reason": "A mixed-color SU(2)_k fusion-braid evaluator scaffold now exists, but it is not admitted for Yasui/SU(2)_6 use because its multi-component SU(2)_2 calibration against the existing braid oracle is not yet clean.",
+      "status": "blocked-fusion-braid-calibration-failed"
     },
     {
       "blocking_artifacts": [
