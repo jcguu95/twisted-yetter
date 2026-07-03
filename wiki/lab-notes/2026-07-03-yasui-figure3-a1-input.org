@@ -329,3 +329,58 @@ all 8 alpha in Hom(H2,Z/2): Yasui raw value == standard raw value
 calibration 後，Yasui Figure 3 \(a=1\) 的奇怪 three-component presentation
 和 standard \(CP^2\#2\overline{CP^2}\) unlink presentation，在目前
 =SU(2)_2= twisted braid-oracle convention 下給出完全相同的 raw value。
+
+* Other MTC Comparison
+
+新增 comparison script:
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/yasui_figure3_a1_other_mtc_comparison.sage.py
+#+end_src
+
+輸出：
+
+#+begin_src text
+experiments/results/yasui/figure3-a1-other-mtc-comparison-v1.json
+#+end_src
+
+目前可實際計算的其他 category 是 =Vec_Z3_q=，因為 pointed category 的
+fixed-label framed-link value 只依賴 integer linking matrix。此處不能沿用 mod 2
+的 label 簡化；對 \(\alpha \in Hom(H_2,Z/3)\)：
+
+#+begin_src text
+A = 2h + e2 -> 2 alpha(h) + alpha(e2)
+B = h       -> alpha(h)
+C = 2h + e1 -> 2 alpha(h) + alpha(e1)
+#+end_src
+
+結果：
+
+#+begin_src text
+Vec_Z3_q: pass
+all 27 alpha in Hom(H2,Z/3): Yasui raw value == standard raw value
+#+end_src
+
+目前不能宣稱已對 =SU(2)_6= 或 =SU(3)_3= 做同樣 Yasui arbitrary-link
+comparison。原因不是數學上 mismatch，而是 repo 目前沒有相應 arbitrary
+colored-link evaluator：
+
+#+begin_src text
+SU(2)_6: blocked-no-arbitrary-link-evaluator
+  current artifacts cover modular data, split unlinks, Hopf pairs, and specific
+  Kirby-slide stress classes; they explicitly reject arbitrary Yasui braid
+  closure evaluation.
+
+SU(3)_3: blocked-no-arbitrary-link-evaluator
+  current artifact proves category-level coefficient identities, but explicitly
+  says there is no arbitrary SU(3)_3 link-polynomial or full F/R backend.
+#+end_src
+
+所以目前可靠結論是：
+
+#+begin_src text
+SU(2)_2: computed pass over 8 alpha
+Vec_Z3_q: computed pass over 27 alpha
+SU(2)_6: blocked by evaluator scope
+SU(3)_3: blocked by evaluator scope
+#+end_src
