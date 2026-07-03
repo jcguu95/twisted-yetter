@@ -55,7 +55,7 @@
     {"id": "x11", "tuple": ["A12", "C5", "A13", "C6"]},
     {"id": "x12", "tuple": ["C2", "A13", "C3", "A14"]},
     {"id": "x13", "tuple": ["B9", "A15", "B10", "A14"]},
-    {"id": "x14", "tuple": ["B6", "A15", "B7", "A16"]},
+    {"id": "x14", "tuple": ["A15", "B7", "A16", "B6"]},
     {"id": "x15", "tuple": ["A17", "C6", "A18", "C7"]},
     {"id": "x16", "tuple": ["C1", "A18", "C2", "A1"]},
     {"id": "x17", "tuple": ["B1", "C10", "B2", "C11"]},
@@ -75,13 +75,13 @@
     "arc_occurrence_check": "pass",
     "intercomponent_linking_check": "provisional-only",
     "derived_linking_matrix_from_current_sign_rule": [
-      [3, -1, 4],
-      [-1, 1, 2],
+      [3, -2, 4],
+      [-2, 1, 2],
       [4, 2, 3]
     ],
     "matches_target_entries": ["A-C", "B-C", "diagonal framings"],
     "mismatch_entries": ["A-B"],
-    "interpretation": "The A-B mismatch is not evidence that the six A/B crossings are wrong. It indicates that the provisional crossing-sign convention and the unexpanded A self-twist are not yet sufficient for an accepted PD/evaluator input.",
+    "interpretation": "The A-B mismatch is not evidence that the A/B crossings are wrong. The user rechecked x14 against the source and corrected it to A15 B7 A16 B6. This confirms that the raw combinatorics should be preserved separately from the provisional sign rule.",
     "next_review_focus": "First expand the A15 +1 full twist into explicit self-crossings. Then calibrate the X Y Z W sign convention against a known positive crossing before using derived linking as an acceptance gate."
   }
 }

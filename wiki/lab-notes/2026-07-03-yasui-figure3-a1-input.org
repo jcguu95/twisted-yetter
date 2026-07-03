@@ -99,7 +99,7 @@ C1..C12 each appears exactly twice.
 The current sign rule gives:
 
 #+begin_src text
-lk(A,B) = -1
+lk(A,B) = -2
 lk(A,C) =  4
 lk(B,C) =  2
 #+end_src
@@ -130,8 +130,13 @@ x05: B10 A5 B1  A6
 x08: B4 A10 B5  A9
 x09: A10 B6 A11 B5
 x13: B9 A15 B10 A14
-x14: B6 A15 B7  A16
+x14: A15 B7 A16 B6
 #+end_src
+
+Update on 2026-07-03: 使用者重新檢查 source 後修正 \(x14\) 為
+=A15 B7 A16 B6=。Arc bookkeeping 仍 pass；在尚未校準的 provisional sign rule 下，
+\(lk(A,B)\) 變成 \(-2\)，這更支持目前不能把 provisional sign mismatch 當作 source
+crossing 錯誤。
 
 * Boundary
 
