@@ -458,3 +458,106 @@ current Yasui braid payload: still not admitted
 這比上一輪更強，因為它承認並修掉了 =SU(2)_6= 自身的一個 convention bug。
 但仍不能把 Yasui mismatch 解讀成 exotic signal；下一步仍應是重新 admission
 Yasui Figure 3 的 machine-readable diagram。
+
+* Update: first multi-component mixed-color stress gate
+
+使用者要求先假設 =SU(2)_6= 可能仍然有錯，並從比較簡單的
+multi-component mixed-color links 一個一個測。這一輪新增一個不碰 Yasui 的
+小型 stress gate。
+
+新增：
+
+#+begin_src text
+experiments/sage/su2_6_multicomponent_mixed_stress.sage.py
+experiments/results/sage-stress/su2-6-multicomponent-mixed-stress-v1.json
+tests/test_su2_6_multicomponent_mixed_stress.py
+#+end_src
+
+** 測試對象
+
+1. =pure-commutator-borromean-like=
+
+#+begin_src text
+braid word: sigma1^2 sigma2^2 sigma1^-2 sigma2^-2
+components: 3
+pairwise linking matrix: zero
+ordinary Jones polynomial: nontrivial
+#+end_src
+
+這是 Borromean-like 的 pure braid commutator。它不是 Hopf-only，且 pairwise
+linking 全 0，所以比 Hopf / split unlink 更能測到 fusion interaction。
+
+2. =two-component-zero-linking-3braid=
+
+#+begin_src text
+braid word: sigma1 sigma1 sigma2^-1 sigma1 sigma2^-1
+components: 2
+pairwise linking matrix: zero
+ordinary Jones polynomial: nontrivial
+#+end_src
+
+這是自動搜尋出來的小 2-component zero-linking braid；排除了最簡單的
+split knot plus unknot 例子。
+
+** 測試 move
+
+每個 base link 都測：
+
+#+begin_src text
+pure conjugation by A12
+pure conjugation by A23
+component-transporting conjugation by sigma1
+component-transporting conjugation by sigma2
+positive Markov stabilization
+negative Markov stabilization
+#+end_src
+
+其中 component-transporting conjugation 會真的搬動 component order，script 會根據
+conjugator 對 strand 的 permutation 把 fixed labels transport 到新的 component order。
+這是刻意加入的，因為 Yasui input 最可疑的地方之一就是 component order / label
+transport。
+
+** labels
+
+這一輪測的是 fixed simple labels，不是只測 =Omega= sum。例子包含：
+
+#+begin_src text
+(1,2,3), (1,3,5), (2,3,4), (3,4,5), ...
+(1,2), (1,3), (2,3), (1,5), ...
+#+end_src
+
+** 結果
+
+#+begin_src text
+status: pass
+cases: 2
+comparisons: 72
+max_abs_difference: about 2.87e-15
+#+end_src
+
+這代表：
+
+#+begin_src text
+SU(2)_6 evaluator did not immediately fail on small non-Hopf
+multi-component mixed fixed-label braid-closure invariance tests.
+#+end_src
+
+但這仍不能宣稱：
+
+#+begin_src text
+we have an independent colored-link oracle;
+we have proved arbitrary multi-component SU(2)_6 correctness;
+Yasui input is therefore definitely wrong.
+#+end_src
+
+目前比較合理的更新狀態是：
+
+#+begin_src text
+SU(2)_6 evaluator:
+  simple calibration gate: pass
+  Kirby-slide meridian class: pass
+  first small multi-component mixed stress gate: pass
+
+current Yasui braid payload:
+  still not admitted
+#+end_src
