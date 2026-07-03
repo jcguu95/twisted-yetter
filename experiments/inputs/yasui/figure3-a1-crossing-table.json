@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
-  "status": "needs-self-twist-expansion",
+  "status": "needs-framing-check",
   "source": {
     "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
     "arxiv": "0807.0373v2",
@@ -13,19 +13,29 @@
       "id": "A",
       "class_in_h_e_basis": {"h": 2, "e1": 0, "e2": 1},
       "framing": 3,
-      "arc_count": 18
+      "arc_count": 20,
+      "arc_order": [
+        "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10",
+        "A11", "A12", "A13", "A14", "A15a", "A15b", "A15c", "A16",
+        "A17", "A18"
+      ]
     },
     {
       "id": "B",
       "class_in_h_e_basis": {"h": 1, "e1": 0, "e2": 0},
       "framing": 1,
-      "arc_count": 10
+      "arc_count": 10,
+      "arc_order": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"]
     },
     {
       "id": "C",
       "class_in_h_e_basis": {"h": 2, "e1": 1, "e2": 0},
       "framing": 3,
-      "arc_count": 12
+      "arc_count": 12,
+      "arc_order": [
+        "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10",
+        "C11", "C12"
+      ]
     }
   ],
   "target_intersection_matrix": [
@@ -59,21 +69,25 @@
     {"id": "x10", "tuple": ["A16", "A12", "A17", "A11"]},
     {"id": "x11", "tuple": ["A12", "C5", "A13", "C6"]},
     {"id": "x12", "tuple": ["C2", "A13", "C3", "A14"]},
-    {"id": "x13", "tuple": ["B9", "A15", "B10", "A14"]},
-    {"id": "x14", "tuple": ["A15", "B7", "A16", "B6"]},
-    {"id": "x15", "tuple": ["A17", "C6", "A18", "C7"]},
-    {"id": "x16", "tuple": ["C1", "A18", "C2", "A1"]},
-    {"id": "x17", "tuple": ["B1", "C10", "B2", "C11"]},
-    {"id": "x18", "tuple": ["C9", "B2", "C10", "B3"]},
-    {"id": "x19", "tuple": ["B7", "C4", "B8", "C5"]},
-    {"id": "x20", "tuple": ["C3", "B8", "C4", "B9"]}
+    {"id": "x13", "tuple": ["B9", "A15a", "B10", "A14"]},
+    {"id": "x14", "tuple": ["A15b", "A15b", "A15c", "A15a"]},
+    {"id": "x15", "tuple": ["A15c", "B7", "A16", "B6"]},
+    {"id": "x16", "tuple": ["A17", "C6", "A18", "C7"]},
+    {"id": "x17", "tuple": ["C1", "A18", "C2", "A1"]},
+    {"id": "x18", "tuple": ["B1", "C10", "B2", "C11"]},
+    {"id": "x19", "tuple": ["C9", "B2", "C10", "B3"]},
+    {"id": "x20", "tuple": ["B7", "C4", "B8", "C5"]},
+    {"id": "x21", "tuple": ["C3", "B8", "C4", "B9"]}
   ],
   "self_twists": [
     {
       "component_id": "A",
       "description": "A15 has +1 twist with itself",
-      "status": "must be expanded before evaluator use",
-      "expected_expansion": "split the local A15 segment into subarcs such as A15a, A15b, A15c and add the two self-crossings of a positive full twist"
+      "status": "expanded-as-source-transcribed-self-crossing",
+      "expanded_arc_order": ["A15a", "A15b", "A15c"],
+      "expanded_crossing_ids": ["x14"],
+      "expanded_crossing_tuple": ["A15b", "A15b", "A15c", "A15a"],
+      "remaining_check": "verify blackboard writhe/framing convention for the expanded +1 twist"
     }
   ],
   "sanity_observation": {
@@ -86,7 +100,7 @@
     ],
     "matches_oriented_diagram_target_entries": ["A-B", "A-C", "B-C", "diagonal framings"],
     "mismatch_entries": [],
-    "interpretation": "After the user corrected x14 to A15 B7 A16 B6, the provisional signed crossing rule gives the oriented drawing linking matrix recorded here. The homology-label matrix is retained separately; the sign difference in A-B is an orientation/convention reconciliation issue, not a raw crossing-table failure.",
-    "next_review_focus": "Expand the A15 +1 full twist into explicit self-crossings before producing an evaluator-ready PD/local-piece input."
+    "interpretation": "After expanding the A15 +1 twist as source-transcribed arcs A15a,A15b,A15c, the provisional signed crossing rule still gives the oriented drawing linking matrix recorded here. The homology-label matrix is retained separately; the sign difference in A-B is an orientation/convention reconciliation issue, not a raw crossing-table failure.",
+    "next_review_focus": "Verify blackboard writhe/framing for the expanded A self-crossing before producing an evaluator-ready PD/local-piece input."
   }
 }

@@ -19,13 +19,12 @@
   "input": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
   "interpretation": [
     "The raw arc bookkeeping is consistent.",
-    "The A15 +1 twist is still a coupon-level notation, not explicit PD/local-piece crossings.",
+    "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
     "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
     "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates."
   ],
   "next_actions": [
-    "Expand the A15 +1 full twist using an explicit local convention.",
-    "After expansion, compute blackboard writhe/framing and compare against the recorded framing of A=3.",
+    "Compute blackboard writhe/framing and compare against the recorded framing of A=3.",
     "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact."
   ],
   "oriented_diagram_target_linking": {
@@ -41,7 +40,7 @@
         "x08",
         "x09",
         "x13",
-        "x14"
+        "x15"
       ],
       "note": "Not fixed by a simple all-crossings sign flip for this pair.",
       "pair": "A-B",
@@ -65,8 +64,8 @@
         "x07",
         "x11",
         "x12",
-        "x15",
-        "x16"
+        "x16",
+        "x17"
       ],
       "note": "Not fixed by a simple all-crossings sign flip for this pair.",
       "pair": "A-C",
@@ -86,10 +85,10 @@
     },
     {
       "crossing_ids": [
-        "x17",
         "x18",
         "x19",
-        "x20"
+        "x20",
+        "x21"
       ],
       "note": "Not fixed by a simple all-crossings sign flip for this pair.",
       "pair": "B-C",
@@ -104,15 +103,29 @@
       "target_signed_sum": 4
     }
   ],
-  "raw_crossing_table_status": "needs-self-twist-expansion",
+  "raw_crossing_table_status": "needs-framing-check",
   "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
   "self_twist_blockers": [
     {
       "component_id": "A",
       "description": "A15 has +1 twist with itself",
-      "expected_expansion": "split the local A15 segment into subarcs such as A15a, A15b, A15c and add the two self-crossings of a positive full twist",
-      "status": "must be expanded before evaluator use"
+      "expanded_arc_order": [
+        "A15a",
+        "A15b",
+        "A15c"
+      ],
+      "expanded_crossing_ids": [
+        "x14"
+      ],
+      "expanded_crossing_tuple": [
+        "A15b",
+        "A15b",
+        "A15c",
+        "A15a"
+      ],
+      "remaining_check": "verify blackboard writhe/framing convention for the expanded +1 twist",
+      "status": "expanded-as-source-transcribed-self-crossing"
     }
   ],
-  "status": "needs-self-twist-expansion"
+  "status": "needs-framing-check"
 }

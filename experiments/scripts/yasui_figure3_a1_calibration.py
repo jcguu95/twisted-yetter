@@ -23,24 +23,38 @@ INPUT = REPO_ROOT / "experiments" / "inputs" / "yasui" / "figure3-a1-crossing-ta
 OUTPUT = REPO_ROOT / "experiments" / "results" / "yasui" / "figure3-a1-calibration-v1.json"
 
 
-def arc_next(label: str, arc_counts: dict[str, int]) -> str:
+def arc_orders(payload: dict[str, Any]) -> dict[str, list[str]]:
+    orders = {}
+    for component in payload["components"]:
+        component_id = component["id"]
+        if "arc_order" in component:
+            orders[component_id] = list(component["arc_order"])
+        else:
+            orders[component_id] = [
+                f"{component_id}{index}" for index in range(1, component["arc_count"] + 1)
+            ]
+    return orders
+
+
+def arc_next(label: str, orders: dict[str, list[str]]) -> str:
     component = label[0]
-    index = int(label[1:])
-    return f"{component}{index % arc_counts[component] + 1}"
+    order = orders[component]
+    index = order.index(label)
+    return order[(index + 1) % len(order)]
 
 
 def pair_key(left: str, right: str) -> str:
     return "-".join(sorted((left, right)))
 
 
-def provisional_crossing_record(crossing: dict[str, Any], arc_counts: dict[str, int]) -> dict[str, Any]:
+def provisional_crossing_record(crossing: dict[str, Any], orders: dict[str, list[str]]) -> dict[str, Any]:
     x, y, z, w = crossing["tuple"]
-    if arc_next(x, arc_counts) != z:
+    if arc_next(x, orders) != z:
         raise ValueError(f"{crossing['id']} understrand is not oriented as X -> Z")
-    if arc_next(y, arc_counts) == w:
+    if arc_next(y, orders) == w:
         over_direction = "Y->W"
         sign = 1
-    elif arc_next(w, arc_counts) == y:
+    elif arc_next(w, orders) == y:
         over_direction = "W->Y"
         sign = -1
     else:
@@ -57,7 +71,7 @@ def provisional_crossing_record(crossing: dict[str, Any], arc_counts: dict[str, 
 
 def main() -> int:
     payload = json.loads(INPUT.read_text())
-    arc_counts = {component["id"]: component["arc_count"] for component in payload["components"]}
+    orders = arc_orders(payload)
     homology_matrix = payload["target_intersection_matrix"]
     target_matrix = payload.get("oriented_diagram_linking_matrix", homology_matrix)
     component_order = [component["id"] for component in payload["components"]]
@@ -67,7 +81,7 @@ def main() -> int:
             if i < j:
                 target_linking[pair_key(left, right)] = target_matrix[i][j]
 
-    records = [provisional_crossing_record(crossing, arc_counts) for crossing in payload["crossings"]]
+    records = [provisional_crossing_record(crossing, orders) for crossing in payload["crossings"]]
     signed_sums: dict[str, int] = defaultdict(int)
     crossings_by_pair: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for record in records:
@@ -99,7 +113,7 @@ def main() -> int:
 
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
-        "status": "needs-self-twist-expansion",
+        "status": "needs-framing-check",
         "input": str(INPUT.relative_to(REPO_ROOT)),
         "raw_crossing_table_status": payload["status"],
         "oriented_diagram_target_linking": target_linking,
@@ -108,13 +122,12 @@ def main() -> int:
         "self_twist_blockers": payload.get("self_twists", []),
         "interpretation": [
             "The raw arc bookkeeping is consistent.",
-            "The A15 +1 twist is still a coupon-level notation, not explicit PD/local-piece crossings.",
+            "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
             "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
             "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates.",
         ],
         "next_actions": [
-            "Expand the A15 +1 full twist using an explicit local convention.",
-            "After expansion, compute blackboard writhe/framing and compare against the recorded framing of A=3.",
+            "Compute blackboard writhe/framing and compare against the recorded framing of A=3.",
             "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact.",
         ],
     }

@@ -13,18 +13,23 @@ def test_yasui_figure3_a1_arc_bookkeeping_passes() -> None:
     counter = Counter(label for crossing in payload["crossings"] for label in crossing["tuple"])
 
     for component in payload["components"]:
-        component_id = component["id"]
-        for index in range(1, component["arc_count"] + 1):
-            assert counter[f"{component_id}{index}"] == 2
+        for label in component["arc_order"]:
+            assert counter[label] == 2
 
 
 def test_yasui_figure3_a1_records_twist_blocker() -> None:
     payload = json.loads(INPUT.read_text())
 
-    assert payload["status"] == "needs-self-twist-expansion"
+    assert payload["status"] == "needs-framing-check"
     assert payload["self_twists"][0]["component_id"] == "A"
     assert "A15" in payload["self_twists"][0]["description"]
-    assert payload["self_twists"][0]["status"] == "must be expanded before evaluator use"
+    assert payload["self_twists"][0]["status"] == "expanded-as-source-transcribed-self-crossing"
+    assert payload["self_twists"][0]["expanded_crossing_tuple"] == [
+        "A15b",
+        "A15b",
+        "A15c",
+        "A15a",
+    ]
 
 
 def test_yasui_figure3_calibration_report_is_reproducible() -> None:
@@ -36,7 +41,7 @@ def test_yasui_figure3_calibration_report_is_reproducible() -> None:
     )
     report = json.loads(CALIBRATION.read_text())
 
-    assert report["status"] == "needs-self-twist-expansion"
+    assert report["status"] == "needs-framing-check"
     pair_reports = {item["pair"]: item for item in report["pair_reports"]}
     assert pair_reports["A-C"]["status"] == "pass"
     assert pair_reports["B-C"]["status"] == "pass"

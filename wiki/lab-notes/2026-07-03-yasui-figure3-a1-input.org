@@ -5,7 +5,7 @@
 
 * 狀態
 
-狀態標籤：=working input= / =Yasui Figure 3= / =needs self-twist expansion=
+狀態標籤：=working input= / =Yasui Figure 3= / =needs framing check=
 
 本 note 記錄使用者手工讀取 Yasui 0807.0373v2 Figure 3 在 =a=1= 時的
 三 component crossing table。目標是先驗證這張 nonstandard Kirby diagram 是否能作為
@@ -87,22 +87,32 @@ calibrated against a known positive crossing before evaluator use.
 * A15 +1 Twist
 
 使用者指出 Figure 3 中 \(A15\) local segment 有一個 \(+1\) twist。這不是普通
-文字註解；在真正的 PD / local-piece input 中必須展開成 explicit self-crossings。
+文字註解；在真正的 PD / local-piece input 中必須展開成 explicit self-crossing。
 
-目前 artifact 只記錄：
-
-#+begin_src text
-A15 has +1 twist with itself
-#+end_src
-
-尚未把它 boost 成例如：
+2026-07-03 update：使用者給出 source transcription：
 
 #+begin_src text
-A15a, A15b, A15c
-plus two self-crossings for a positive full twist
+B9 A15a B10 A14
+A15b A15b A15c A15a
+A15c B7 A16 B6
 #+end_src
 
-因此目前資料不可直接送 evaluator。
+因此原本兩行
+
+#+begin_src text
+B9 A15 B10 A14
+A15 B7 A16 B6
+#+end_src
+
+已 boost 成三行，並把 \(A\) 的 arc order 改為：
+
+#+begin_src text
+..., A14, A15a, A15b, A15c, A16, ...
+#+end_src
+
+目前剩下的 blocker 不是 self-twist expansion，而是要檢查 expanded self-crossing
+對 blackboard writhe / framing convention 的貢獻是否符合 component \(A\) 的 framing
+\(3\)。
 
 * Current Result
 
@@ -195,5 +205,5 @@ B-C: provisional signed sum 4, target 4, pass
 A-B: provisional signed sum -4, target -4, pass
 #+end_src
 
-剩下的 evaluator 前 blocker 是：\(A15\) 的 \(+1\) coupon 尚未展開成 explicit
-self-crossings。
+剩下的 evaluator 前 blocker 是：expanded \(A15\) self-crossing 的 blackboard
+writhe/framing contribution 尚未驗證。
