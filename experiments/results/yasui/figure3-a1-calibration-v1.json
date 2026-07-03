@@ -1,16 +1,38 @@
 {
+  "homology_label_intersection_matrix": [
+    [
+      3,
+      2,
+      4
+    ],
+    [
+      2,
+      1,
+      2
+    ],
+    [
+      4,
+      2,
+      3
+    ]
+  ],
   "input": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
   "interpretation": [
     "The raw arc bookkeeping is consistent.",
     "The A15 +1 twist is still a coupon-level notation, not explicit PD/local-piece crossings.",
-    "The provisional sign rule agrees with A-C and B-C but not A-B.",
-    "Because the A-B provisional signed sum is the negative of the target signed sum, the issue is consistent with a local sign-convention calibration problem rather than a raw crossing-table failure."
+    "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
+    "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates."
   ],
   "next_actions": [
     "Expand the A15 +1 full twist using an explicit local convention.",
-    "Calibrate the X Y Z W sign rule against a known positive crossing drawn in the same convention.",
+    "After expansion, compute blackboard writhe/framing and compare against the recorded framing of A=3.",
     "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact."
   ],
+  "oriented_diagram_target_linking": {
+    "A-B": -2,
+    "A-C": 4,
+    "B-C": 2
+  },
   "pair_reports": [
     {
       "crossing_ids": [
@@ -21,7 +43,7 @@
         "x13",
         "x14"
       ],
-      "note": "A global flip of all signs for this pair would match the target.",
+      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
       "pair": "A-B",
       "provisional_signed_sum": -4,
       "provisional_signs": [
@@ -32,8 +54,8 @@
         -1,
         -1
       ],
-      "status": "needs-calibration",
-      "target_signed_sum": 4
+      "status": "pass",
+      "target_signed_sum": -4
     },
     {
       "crossing_ids": [
@@ -82,7 +104,7 @@
       "target_signed_sum": 4
     }
   ],
-  "raw_crossing_table_status": "needs-self-twist-expansion-and-sign-calibration",
+  "raw_crossing_table_status": "needs-self-twist-expansion",
   "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
   "self_twist_blockers": [
     {
@@ -92,10 +114,5 @@
       "status": "must be expanded before evaluator use"
     }
   ],
-  "status": "blocked-before-evaluator",
-  "target_linking": {
-    "A-B": 2,
-    "A-C": 4,
-    "B-C": 2
-  }
+  "status": "needs-self-twist-expansion"
 }

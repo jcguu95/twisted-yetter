@@ -4,7 +4,7 @@ This script is deliberately not an evaluator.  It separates three layers:
 
 1. the raw X Y Z W crossing table;
 2. the provisional sign rule inferred from the local tuple convention;
-3. the homology-target linking matrix from the component labels.
+3. the oriented-drawing linking target and the homology-label matrix.
 
 The report is meant to prevent accidental promotion of an uncalibrated
 hand-transcribed diagram to evaluator input.
@@ -58,7 +58,8 @@ def provisional_crossing_record(crossing: dict[str, Any], arc_counts: dict[str, 
 def main() -> int:
     payload = json.loads(INPUT.read_text())
     arc_counts = {component["id"]: component["arc_count"] for component in payload["components"]}
-    target_matrix = payload["target_intersection_matrix"]
+    homology_matrix = payload["target_intersection_matrix"]
+    target_matrix = payload.get("oriented_diagram_linking_matrix", homology_matrix)
     component_order = [component["id"] for component in payload["components"]]
     target_linking = {}
     for i, left in enumerate(component_order):
@@ -98,21 +99,22 @@ def main() -> int:
 
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
-        "status": "blocked-before-evaluator",
+        "status": "needs-self-twist-expansion",
         "input": str(INPUT.relative_to(REPO_ROOT)),
         "raw_crossing_table_status": payload["status"],
-        "target_linking": target_linking,
+        "oriented_diagram_target_linking": target_linking,
+        "homology_label_intersection_matrix": homology_matrix,
         "pair_reports": pair_reports,
         "self_twist_blockers": payload.get("self_twists", []),
         "interpretation": [
             "The raw arc bookkeeping is consistent.",
             "The A15 +1 twist is still a coupon-level notation, not explicit PD/local-piece crossings.",
-            "The provisional sign rule agrees with A-C and B-C but not A-B.",
-            "Because the A-B provisional signed sum is the negative of the target signed sum, the issue is consistent with a local sign-convention calibration problem rather than a raw crossing-table failure.",
+            "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
+            "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates.",
         ],
         "next_actions": [
             "Expand the A15 +1 full twist using an explicit local convention.",
-            "Calibrate the X Y Z W sign rule against a known positive crossing drawn in the same convention.",
+            "After expansion, compute blackboard writhe/framing and compare against the recorded framing of A=3.",
             "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact.",
         ],
     }

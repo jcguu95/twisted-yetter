@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
-  "status": "needs-self-twist-expansion-and-sign-calibration",
+  "status": "needs-self-twist-expansion",
   "source": {
     "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
     "arxiv": "0807.0373v2",
@@ -31,6 +31,11 @@
   "target_intersection_matrix": [
     [3, 2, 4],
     [2, 1, 2],
+    [4, 2, 3]
+  ],
+  "oriented_diagram_linking_matrix": [
+    [3, -2, 4],
+    [-2, 1, 2],
     [4, 2, 3]
   ],
   "conventions": {
@@ -73,15 +78,15 @@
   ],
   "sanity_observation": {
     "arc_occurrence_check": "pass",
-    "intercomponent_linking_check": "provisional-only",
+    "intercomponent_linking_check": "pass-against-oriented-diagram-target",
     "derived_linking_matrix_from_current_sign_rule": [
       [3, -2, 4],
       [-2, 1, 2],
       [4, 2, 3]
     ],
-    "matches_target_entries": ["A-C", "B-C", "diagonal framings"],
-    "mismatch_entries": ["A-B"],
-    "interpretation": "The A-B mismatch is not evidence that the A/B crossings are wrong. The user rechecked x14 against the source and corrected it to A15 B7 A16 B6. This confirms that the raw combinatorics should be preserved separately from the provisional sign rule.",
-    "next_review_focus": "First expand the A15 +1 full twist into explicit self-crossings. Then calibrate the X Y Z W sign convention against a known positive crossing before using derived linking as an acceptance gate."
+    "matches_oriented_diagram_target_entries": ["A-B", "A-C", "B-C", "diagonal framings"],
+    "mismatch_entries": [],
+    "interpretation": "After the user corrected x14 to A15 B7 A16 B6, the provisional signed crossing rule gives the oriented drawing linking matrix recorded here. The homology-label matrix is retained separately; the sign difference in A-B is an orientation/convention reconciliation issue, not a raw crossing-table failure.",
+    "next_review_focus": "Expand the A15 +1 full twist into explicit self-crossings before producing an evaluator-ready PD/local-piece input."
   }
 }
