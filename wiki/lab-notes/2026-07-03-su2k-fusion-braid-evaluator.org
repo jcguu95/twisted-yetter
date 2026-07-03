@@ -343,3 +343,118 @@ we have admitted the current Yasui Figure 3 braid payload for SU(2)_6 comparison
 we have a certified arbitrary MTC evaluator;
 we have an exotic-pair computation.
 #+end_src
+
+* Update: SU(2)_6 calibration gate added
+
+使用者指出一個重要問題：Yasui mismatch 也可能來自 =SU(2)_6= evaluator 本身錯，
+不能只怪 Yasui input。重新檢查後，這個懷疑是對的：上一版 =SU(2)_6= evaluator
+還沒有完全乾淨。
+
+** 找到的問題
+
+1. 上一輪為了對齊 =SU(2)_2= braid oracle，加入了 degree-linking phase。
+   這個 phase 若錯誤推廣到所有 even level，會讓 =SU(2)_6= positive Hopf link
+   在 odd-odd labels 上不等於 modular-data value \(S_{ij}/S_{00}\)。
+
+2. 舊的 =SU(2)_6= Kirby-slide stress suite 使用 Sage colored Jones 時，採用
+   =q=A^4= for all labels。這對 formal slide identity 仍會 pass，因為 before/after
+   使用同一批 knot values；但它不等於 explicit =F/R= fusion-braid evaluator 的
+   odd-colored trefoil convention。
+
+** 修正
+
+1. =su2k_fusion_braid_evaluator.sage.py= 中的 degree-linking phase 現在只套用在
+   =level == 2=。這被明確標記為 repo-local =SU(2)_2= oracle convention，不是
+   一般 =SU(2)_k= RT normalization。
+
+2. =su2_6_kirby_slide_stress.sage.py= 的 Sage colored Jones root convention 改成：
+
+#+begin_src text
+even simple label j: q = A^4
+odd  simple label j: q = A^-4
+#+end_src
+
+這個 convention 是用 explicit =SU(2)_6= fusion-braid evaluator 的 odd trefoil
+controls 校準出來的。
+
+** 新增 calibration artifact
+
+新增：
+
+#+begin_src text
+experiments/sage/su2_6_fusion_braid_calibration.sage.py
+experiments/results/sage-stress/su2-6-fusion-braid-calibration-v1.json
+tests/test_su2_6_fusion_braid_calibration.py
+#+end_src
+
+這個 gate 不碰 Yasui。它只檢查新的 =SU(2)_6= fusion-braid evaluator 是否對上
+已知簡單 diagram / independent formula：
+
+#+begin_src text
+fixed framed unknots:             35 controls
+split unlinks:                    98 controls
+positive Hopf links:              98 controls
+one-component braid knots:        56 controls
+Omega expansion controls:          8 controls
+total:                           295 controls
+#+end_src
+
+結果：
+
+#+begin_src text
+status: pass
+max_abs_difference: about 2.22e-14
+#+end_src
+
+其中 one-component braid knots 使用既有 stress suite 的 8 個 knots：
+
+#+begin_src text
+right trefoil
+right trefoil, +1 framing
+left trefoil
+figure-eight
+figure-eight, -1 framing
+T(2,5)
+T(2,7)
+T(3,4)
+#+end_src
+
+** 重跑 stress suite
+
+修正 colored-Jones convention 後，重新跑：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_6_kirby_slide_stress.sage.py
+#+end_src
+
+結果仍然：
+
+#+begin_src text
+status: pass
+knots: 8
+scenarios: 7
+comparisons: 1088
+#+end_src
+
+** 對 Yasui 狀態的影響
+
+修正 =SU(2)_6= evaluator / colored-Jones convention 後，重新跑目前 Yasui braid
+payload 的 =SU(2)_6= comparison，仍然得到 mismatch：
+
+#+begin_src text
+status: numerical-mismatch
+max_abs_difference: about 2417.58
+elapsed: about 32 seconds
+#+end_src
+
+所以目前狀態變成更清楚：
+
+#+begin_src text
+SU(2)_6 evaluator on simple diagrams: admitted by calibration gate
+SU(2)_6 Kirby-slide stress class: pass
+current Yasui braid payload: still not admitted
+#+end_src
+
+這比上一輪更強，因為它承認並修掉了 =SU(2)_6= 自身的一個 convention bug。
+但仍不能把 Yasui mismatch 解讀成 exotic signal；下一步仍應是重新 admission
+Yasui Figure 3 的 machine-readable diagram。

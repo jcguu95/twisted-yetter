@@ -1,0 +1,78 @@
+{
+  "argv": [
+    "su2_6_fusion_braid_calibration.sage.py"
+  ],
+  "command": "sage experiments/sage/su2_6_fusion_braid_calibration.sage.py",
+  "elapsed_seconds": 4,
+  "exact_output": {
+    "category_id": "SU(2)_6",
+    "claim_level": "calibration evidence for repo-local SU(2)_6 fusion-braid evaluator",
+    "control_groups": [
+      {
+        "control_count": 35,
+        "max_abs_difference": "1.2537167179050217771285464501992935977844605672e-16",
+        "name": "fixed_unknot",
+        "sample_failures": [],
+        "status": "pass"
+      },
+      {
+        "control_count": 98,
+        "max_abs_difference": "9.1343198504954400268355855819016479527451197999e-16",
+        "name": "split_unlink",
+        "sample_failures": [],
+        "status": "pass"
+      },
+      {
+        "control_count": 98,
+        "max_abs_difference": "9.0830903114803145163345312733284860088677132704e-16",
+        "name": "positive_hopf",
+        "sample_failures": [],
+        "status": "pass"
+      },
+      {
+        "control_count": 56,
+        "max_abs_difference": "2.2923410391198908440123304939425344395184121690e-15",
+        "name": "one_component_braid_knot",
+        "sample_failures": [],
+        "status": "pass"
+      },
+      {
+        "control_count": 8,
+        "max_abs_difference": "2.2180097446065766223699728946853460900620912912e-14",
+        "name": "omega_expansion",
+        "sample_failures": [],
+        "status": "pass"
+      }
+    ],
+    "convention_notes": [
+      "SU(2)_6 Hopf values are compared to S_ij/S_00 with ordinary RT normalization.",
+      "Sage colored Jones uses q=A^4 for even simple labels and q=A^-4 for odd simple labels in this calibration.",
+      "The SU(2)_2 degree-linking phase in su2k_fusion_braid_evaluator is a repo-local oracle convention and is not applied at level 6."
+    ],
+    "max_abs_difference": "2.2180097446065766223699728946853460900620912912e-14",
+    "not_scope": "Yasui diagram admission, exotic-pair computation, arbitrary MTC evaluator, dotted/special links, or closed 4-manifold normalization",
+    "sample_failures": [],
+    "schema": "twisted-yetter.su2-6-fusion-braid-calibration.v1",
+    "scope": "framed unknots, split unlinks, positive Hopf links, and one-component braid knots compared against modular-data or Sage-colored-Jones controls",
+    "status": "pass",
+    "tolerance": "1.0000000000000000000000000000000000000000000000e-10"
+  },
+  "finished_at_utc": "2026-07-03T14:22:16Z",
+  "generator_script": "experiments/sage/su2_6_fusion_braid_calibration.sage.py",
+  "git": {
+    "commit": "e19cbdb187776b2897ff97265d72e2c0a69e7e80",
+    "dirty": true
+  },
+  "input_hash": "81e1be70432fba5f9e1e4c1de5afe4dabb3a6656852fba0cfde408c4e4cd506f",
+  "log_references": [],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/su2_6_fusion_braid_calibration.sage.py --output experiments/results/sage-stress/su2-6-fusion-braid-calibration-v1.json",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-07-03T14:22:11Z",
+  "status": "pass",
+  "tool_versions": {
+    "numpy_backend": "enabled for exact=False",
+    "python": "3.13.7",
+    "sage": "10.8"
+  }
+}

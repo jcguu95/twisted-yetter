@@ -229,7 +229,11 @@ class SU2KBraidEvaluator:
         return tuple(tuple(int(entry) for entry in row) for row in linkings)
 
     def degree_linking_phase(self, n_strands, braid_word, component_labels):
-        if self.level % 2 != 0:
+        # This compensates a repo-local SU(2)_2 braid-oracle convention.  It is
+        # not part of the general SU(2)_k RT normalization; in particular
+        # SU(2)_6 Hopf-link values must agree with the modular S-matrix without
+        # this phase.
+        if self.level != 2:
             return self.one()
         linkings = self.linking_matrix(n_strands, braid_word)
         exponent = 0

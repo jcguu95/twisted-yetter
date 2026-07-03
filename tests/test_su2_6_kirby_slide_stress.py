@@ -29,12 +29,16 @@ def test_su2_6_kirby_slide_stress_records_scope() -> None:
 def test_su2_6_colored_jones_normalization_is_calibrated() -> None:
     exact = _exact_output()
     controls = exact["normalization_controls"]
+    convention = exact["colored_jones_q_convention"]
 
     assert [control["name"] for control in controls] == [
         "sage_colored_jones_matches_su2_2_trefoil_calibration"
     ]
     assert controls[0]["status"] == "pass"
     assert controls[0]["actual_reduced_colored_jones"]["display"] == "-1"
+    assert convention["even_simple_label"] == "q=A^4"
+    assert convention["odd_simple_label"] == "q=A^-4"
+    assert "fusion-braid evaluator" in convention["reason"]
 
 
 def test_su2_6_knot_inputs_are_nontrivial_at_the_root() -> None:

@@ -31,6 +31,7 @@ def test_yasui_figure3_vec_z3_matches_standard_and_nonpointed_are_blocked() -> N
     assert "SU(2)_2 fixed-sector calibration" in blocked["SU(2)_6"]["reason"]
     assert "large mismatch" in blocked["SU(2)_6"]["reason"]
     assert any("SU(2)_2 fixed-sector Yasui calibration: pass" in item for item in blocked["SU(2)_6"]["latest_checks"])
+    assert any("SU(2)_6 fusion-braid calibration gate: pass" in item for item in blocked["SU(2)_6"]["latest_checks"])
     assert any("SU(2)_6 standard-vs-Yasui comparison: numerical mismatch" in item for item in blocked["SU(2)_6"]["latest_checks"])
     assert any("Kirby-slide stress suite: pass" in item for item in blocked["SU(2)_6"]["latest_checks"])
     assert blocked["SU(3)_3"]["status"] == "blocked-no-arbitrary-link-evaluator"
