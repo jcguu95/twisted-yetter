@@ -20,7 +20,7 @@ def test_yasui_figure3_a1_arc_bookkeeping_passes() -> None:
 def test_yasui_figure3_a1_records_twist_blocker() -> None:
     payload = json.loads(INPUT.read_text())
 
-    assert payload["status"] == "needs-framing-check"
+    assert payload["status"] == "needs-evaluator-artifact"
     assert payload["self_twists"][0]["component_id"] == "A"
     assert "A15" in payload["self_twists"][0]["description"]
     assert payload["self_twists"][0]["status"] == "expanded-as-source-transcribed-self-crossing"
@@ -41,10 +41,15 @@ def test_yasui_figure3_calibration_report_is_reproducible() -> None:
     )
     report = json.loads(CALIBRATION.read_text())
 
-    assert report["status"] == "needs-framing-check"
+    assert report["status"] == "needs-evaluator-artifact"
     pair_reports = {item["pair"]: item for item in report["pair_reports"]}
     assert pair_reports["A-C"]["status"] == "pass"
     assert pair_reports["B-C"]["status"] == "pass"
     assert pair_reports["A-B"]["status"] == "pass"
     assert pair_reports["A-B"]["provisional_signed_sum"] == -4
     assert pair_reports["A-B"]["target_signed_sum"] == -4
+    framing_reports = {item["component"]: item for item in report["framing_reports"]}
+    assert framing_reports["A"]["oriented_self_writhe"] == -3
+    assert framing_reports["A"]["kirby_positive_twist_writhe"] == 3
+    assert framing_reports["A"]["recorded_framing"] == 3
+    assert framing_reports["A"]["status"] == "pass-under-kirby-sign"

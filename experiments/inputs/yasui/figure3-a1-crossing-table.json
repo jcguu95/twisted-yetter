@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
-  "status": "needs-framing-check",
+  "status": "needs-evaluator-artifact",
   "source": {
     "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
     "arxiv": "0807.0373v2",
@@ -101,6 +101,13 @@
     "matches_oriented_diagram_target_entries": ["A-B", "A-C", "B-C", "diagonal framings"],
     "mismatch_entries": [],
     "interpretation": "After expanding the A15 +1 twist as source-transcribed arcs A15a,A15b,A15c, the provisional signed crossing rule still gives the oriented drawing linking matrix recorded here. The homology-label matrix is retained separately; the sign difference in A-B is an orientation/convention reconciliation issue, not a raw crossing-table failure.",
-    "next_review_focus": "Verify blackboard writhe/framing for the expanded A self-crossing before producing an evaluator-ready PD/local-piece input."
+    "framing_check": {
+      "component": "A",
+      "oriented_self_writhe": -3,
+      "kirby_positive_twist_writhe": 3,
+      "recorded_framing": 3,
+      "status": "pass-under-kirby-sign"
+    },
+    "next_review_focus": "Produce an evaluator-ready PD/local-piece input with explicit component framings and documented Kirby/oriented sign conversion."
   }
 }

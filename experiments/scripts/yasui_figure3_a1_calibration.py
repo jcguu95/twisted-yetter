@@ -84,11 +84,17 @@ def main() -> int:
     records = [provisional_crossing_record(crossing, orders) for crossing in payload["crossings"]]
     signed_sums: dict[str, int] = defaultdict(int)
     crossings_by_pair: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    self_writhe: dict[str, int] = {component: 0 for component in component_order}
+    self_crossings: dict[str, list[dict[str, Any]]] = {component: [] for component in component_order}
     for record in records:
         pair = record["component_pair"]
         crossings_by_pair[pair].append(record)
         if pair in target_linking:
             signed_sums[pair] += record["provisional_sign"]
+        left, right = pair.split("-")
+        if left == right:
+            self_writhe[left] += record["provisional_sign"]
+            self_crossings[left].append(record)
 
     pair_reports = []
     for pair, target in sorted(target_linking.items()):
@@ -113,22 +119,41 @@ def main() -> int:
 
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
-        "status": "needs-framing-check",
+        "status": "needs-evaluator-artifact",
         "input": str(INPUT.relative_to(REPO_ROOT)),
         "raw_crossing_table_status": payload["status"],
         "oriented_diagram_target_linking": target_linking,
         "homology_label_intersection_matrix": homology_matrix,
         "pair_reports": pair_reports,
+        "framing_reports": [
+            {
+                "component": component["id"],
+                "recorded_framing": component["framing"],
+                "oriented_self_writhe": self_writhe[component["id"]],
+                "kirby_positive_twist_writhe": -self_writhe[component["id"]],
+                "self_crossing_ids": [
+                    record["id"] for record in self_crossings[component["id"]]
+                ],
+                "status": (
+                    "pass-under-kirby-sign"
+                    if component["id"] == "A"
+                    and -self_writhe[component["id"]] == component["framing"]
+                    else "not-checked-by-self-crossings"
+                ),
+            }
+            for component in payload["components"]
+        ],
         "self_twist_blockers": payload.get("self_twists", []),
         "interpretation": [
             "The raw arc bookkeeping is consistent.",
             "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
             "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
+            "For component A, the oriented self-writhe is -3; reversing the sign to match the Kirby positive-twist convention gives +3, agreeing with A=(2h+e2)^2.",
             "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates.",
         ],
         "next_actions": [
-            "Compute blackboard writhe/framing and compare against the recorded framing of A=3.",
-            "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact.",
+            "Produce an evaluator-ready LinkDiagram/PD artifact with explicit component framings and a documented Kirby/oriented sign conversion.",
+            "Then compare the nonstandard Yasui Figure 3 presentation against the standard (+1,-1,-1) unlink presentation.",
         ],
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)

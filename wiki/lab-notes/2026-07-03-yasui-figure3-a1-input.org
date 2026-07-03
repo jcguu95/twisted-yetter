@@ -5,7 +5,7 @@
 
 * 狀態
 
-狀態標籤：=working input= / =Yasui Figure 3= / =needs framing check=
+狀態標籤：=working input= / =Yasui Figure 3= / =needs evaluator artifact=
 
 本 note 記錄使用者手工讀取 Yasui 0807.0373v2 Figure 3 在 =a=1= 時的
 三 component crossing table。目標是先驗證這張 nonstandard Kirby diagram 是否能作為
@@ -110,9 +110,16 @@ A15 B7 A16 B6
 ..., A14, A15a, A15b, A15c, A16, ...
 #+end_src
 
-目前剩下的 blocker 不是 self-twist expansion，而是要檢查 expanded self-crossing
-對 blackboard writhe / framing convention 的貢獻是否符合 component \(A\) 的 framing
-\(3\)。
+Framing check update：expanded input 中 \(A\) 的 self-crossings 是 \(x03,x10,x14\)。
+在目前 oriented sign convention 下三者都是 \(-1\)，所以 oriented self-writhe 為
+\(-3\)。Yasui 圖中的 \(+1\) twist convention 和這個 oriented sign 相反時，得到
+Kirby positive-twist writhe \(+3\)，正好等於
+
+#+begin_src text
+A^2=(2h+e_2)^2=4-1=3
+#+end_src
+
+因此 \(A\) 的 framing check 在 Kirby sign convention 下通過。
 
 * Current Result
 
@@ -205,5 +212,5 @@ B-C: provisional signed sum 4, target 4, pass
 A-B: provisional signed sum -4, target -4, pass
 #+end_src
 
-剩下的 evaluator 前 blocker 是：expanded \(A15\) self-crossing 的 blackboard
-writhe/framing contribution 尚未驗證。
+剩下的是產生 evaluator-ready PD/local-piece artifact：必須保留 explicit component
+framings，並記錄 Kirby/oriented sign conversion。

@@ -91,7 +91,7 @@ def main() -> int:
         "-".join(pair): signed_sum // 2 for pair, signed_sum in signed_sums.items()
     }
     result = {
-        "status": "needs-framing-check",
+        "status": "needs-evaluator-artifact",
         "arc_occurrences": "pass" if not bad_occurrences and not missing else "fail",
         "bad_occurrences": bad_occurrences,
         "missing": missing,

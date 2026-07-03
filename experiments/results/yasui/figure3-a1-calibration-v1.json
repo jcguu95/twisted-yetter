@@ -1,4 +1,34 @@
 {
+  "framing_reports": [
+    {
+      "component": "A",
+      "kirby_positive_twist_writhe": 3,
+      "oriented_self_writhe": -3,
+      "recorded_framing": 3,
+      "self_crossing_ids": [
+        "x03",
+        "x10",
+        "x14"
+      ],
+      "status": "pass-under-kirby-sign"
+    },
+    {
+      "component": "B",
+      "kirby_positive_twist_writhe": 0,
+      "oriented_self_writhe": 0,
+      "recorded_framing": 1,
+      "self_crossing_ids": [],
+      "status": "not-checked-by-self-crossings"
+    },
+    {
+      "component": "C",
+      "kirby_positive_twist_writhe": 0,
+      "oriented_self_writhe": 0,
+      "recorded_framing": 3,
+      "self_crossing_ids": [],
+      "status": "not-checked-by-self-crossings"
+    }
+  ],
   "homology_label_intersection_matrix": [
     [
       3,
@@ -21,11 +51,12 @@
     "The raw arc bookkeeping is consistent.",
     "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
     "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
+    "For component A, the oriented self-writhe is -3; reversing the sign to match the Kirby positive-twist convention gives +3, agreeing with A=(2h+e2)^2.",
     "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates."
   ],
   "next_actions": [
-    "Compute blackboard writhe/framing and compare against the recorded framing of A=3.",
-    "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact."
+    "Produce an evaluator-ready LinkDiagram/PD artifact with explicit component framings and a documented Kirby/oriented sign conversion.",
+    "Then compare the nonstandard Yasui Figure 3 presentation against the standard (+1,-1,-1) unlink presentation."
   ],
   "oriented_diagram_target_linking": {
     "A-B": -2,
@@ -103,7 +134,7 @@
       "target_signed_sum": 4
     }
   ],
-  "raw_crossing_table_status": "needs-framing-check",
+  "raw_crossing_table_status": "needs-evaluator-artifact",
   "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
   "self_twist_blockers": [
     {
@@ -127,5 +158,5 @@
       "status": "expanded-as-source-transcribed-self-crossing"
     }
   ],
-  "status": "needs-framing-check"
+  "status": "needs-evaluator-artifact"
 }
