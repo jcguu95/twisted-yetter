@@ -44,6 +44,12 @@ Sanity checker:
 python3 experiments/scripts/yasui_figure3_a1_sanity.py
 #+end_src
 
+Calibration report:
+
+#+begin_src sh
+python3 experiments/scripts/yasui_figure3_a1_calibration.py
+#+end_src
+
 * Convention
 
 Each crossing is recorded as:
@@ -153,3 +159,29 @@ Next action:
 1. expand the \(A15\) \(+1\) full twist into explicit subarcs and self-crossings;
 2. calibrate the \(X,Y,Z,W\) sign convention against a known positive crossing;
 3. only then use the target intersection matrix as an acceptance check.
+
+* Calibration Report
+
+新增 script:
+
+#+begin_src text
+experiments/scripts/yasui_figure3_a1_calibration.py
+#+end_src
+
+它輸出：
+
+#+begin_src text
+experiments/results/yasui/figure3-a1-calibration-v1.json
+#+end_src
+
+目前報告把三個 intercomponent pairs 分開：
+
+#+begin_src text
+A-C: provisional signed sum 8, target 8, pass
+B-C: provisional signed sum 4, target 4, pass
+A-B: provisional signed sum -4, target 4, needs calibration
+#+end_src
+
+這裡的重點不是要把 \(A,B\) crossings 改掉，而是保留 raw crossing table，並把
+「A15 \(+1\) coupon 尚未展開」與「local sign rule 尚未校準」列成 evaluator 前
+blockers。

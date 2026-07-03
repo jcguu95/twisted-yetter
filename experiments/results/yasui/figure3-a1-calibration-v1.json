@@ -1,0 +1,101 @@
+{
+  "input": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
+  "interpretation": [
+    "The raw arc bookkeeping is consistent.",
+    "The A15 +1 twist is still a coupon-level notation, not explicit PD/local-piece crossings.",
+    "The provisional sign rule agrees with A-C and B-C but not A-B.",
+    "Because the A-B provisional signed sum is the negative of the target signed sum, the issue is consistent with a local sign-convention calibration problem rather than a raw crossing-table failure."
+  ],
+  "next_actions": [
+    "Expand the A15 +1 full twist using an explicit local convention.",
+    "Calibrate the X Y Z W sign rule against a known positive crossing drawn in the same convention.",
+    "Only after calibration produce an evaluator-ready LinkDiagram/PD artifact."
+  ],
+  "pair_reports": [
+    {
+      "crossing_ids": [
+        "x04",
+        "x05",
+        "x08",
+        "x09",
+        "x13",
+        "x14"
+      ],
+      "note": "A global flip of all signs for this pair would match the target.",
+      "pair": "A-B",
+      "provisional_signed_sum": -4,
+      "provisional_signs": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "status": "needs-calibration",
+      "target_signed_sum": 4
+    },
+    {
+      "crossing_ids": [
+        "x01",
+        "x02",
+        "x06",
+        "x07",
+        "x11",
+        "x12",
+        "x15",
+        "x16"
+      ],
+      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
+      "pair": "A-C",
+      "provisional_signed_sum": 8,
+      "provisional_signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "status": "pass",
+      "target_signed_sum": 8
+    },
+    {
+      "crossing_ids": [
+        "x17",
+        "x18",
+        "x19",
+        "x20"
+      ],
+      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
+      "pair": "B-C",
+      "provisional_signed_sum": 4,
+      "provisional_signs": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "status": "pass",
+      "target_signed_sum": 4
+    }
+  ],
+  "raw_crossing_table_status": "needs-self-twist-expansion-and-sign-calibration",
+  "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
+  "self_twist_blockers": [
+    {
+      "component_id": "A",
+      "description": "A15 has +1 twist with itself",
+      "expected_expansion": "split the local A15 segment into subarcs such as A15a, A15b, A15c and add the two self-crossings of a positive full twist",
+      "status": "must be expanded before evaluator use"
+    }
+  ],
+  "status": "blocked-before-evaluator",
+  "target_linking": {
+    "A-B": 2,
+    "A-C": 4,
+    "B-C": 2
+  }
+}
