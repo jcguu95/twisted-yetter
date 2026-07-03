@@ -233,13 +233,24 @@ def blocked_nonpointed_categories():
     return [
         {
             "category_id": "SU(2)_6",
-            "status": "blocked-fusion-braid-calibration-failed",
+            "status": "blocked-yasui-braid-payload-not-admitted",
             "reason": (
-                "A mixed-color SU(2)_k fusion-braid evaluator scaffold now exists, "
-                "but it is not admitted for Yasui/SU(2)_6 use because its "
-                "multi-component SU(2)_2 calibration against the existing braid "
-                "oracle is not yet clean."
+                "The mixed-color SU(2)_k fusion-braid evaluator now passes the "
+                "Yasui Figure 3 a=1 SU(2)_2 fixed-sector calibration against the "
+                "existing braid oracle and can compute the full SU(2)_6 sector "
+                "cache numerically.  However, applying it to the current Yasui "
+                "braid payload gives a large mismatch against the split standard "
+                "CP2#2CPbar presentation.  Since SU(2)_6 sees link type beyond "
+                "the linking matrix, this is treated as an admission failure of "
+                "the current digitized Yasui braid payload, not as an exotic or "
+                "invariant claim."
             ),
+            "latest_checks": [
+                "SU(2)_2 fixed-sector Yasui calibration: pass, max difference < 1e-12",
+                "SU(2)_6 Yasui sector cache: completes numerically in about 37 seconds on this machine",
+                "SU(2)_6 standard-vs-Yasui comparison: numerical mismatch, max absolute difference about 2.4e3",
+                "Existing SU(2)_6 Kirby-slide stress suite: pass, 1088 exact comparisons",
+            ],
             "blocking_artifacts": [
                 "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
                 "experiments/results/yasui/figure3-a1-braid-payload-v1.json",

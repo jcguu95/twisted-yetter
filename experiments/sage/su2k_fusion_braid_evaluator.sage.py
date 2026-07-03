@@ -26,6 +26,7 @@ from pathlib import Path
 import sys
 import time
 
+import numpy as np
 from sage.all import AA, BraidGroup, ComplexField, CyclotomicField, Matrix, QQbar, ZZ
 from sage.env import SAGE_VERSION
 
@@ -44,6 +45,8 @@ class SU2KBraidEvaluator:
         self.field = CyclotomicField(self.root_order) if self.exact else ComplexField(self.precision)
         self.A = self.field.gen() if self.exact else self.field.zeta(self.root_order)
         self.labels = tuple(range(self.level + 1))
+        self._fixed_label_cache = {}
+        self._numpy_crossing_cache = {}
 
     def coerce(self, value):
         return QQbar(value) if self.exact else self.field(value)
@@ -94,9 +97,19 @@ class SU2KBraidEvaluator:
     def fixed_label_value(self, n_strands, braid_word, component_labels, framings):
         """Return the framed RT value for fixed component labels."""
 
+        n_strands = int(n_strands)
         braid_word = tuple(int(generator) for generator in braid_word)
         component_labels = tuple(int(label) for label in component_labels)
         framings = tuple(int(framing) for framing in framings)
+        cache_key = (n_strands, braid_word, component_labels, framings)
+        if cache_key in self._fixed_label_cache:
+            return self._fixed_label_cache[cache_key]
+
+        value = self._fixed_label_value_uncached(n_strands, braid_word, component_labels, framings)
+        self._fixed_label_cache[cache_key] = value
+        return value
+
+    def _fixed_label_value_uncached(self, n_strands, braid_word, component_labels, framings):
         components, strand_to_component = self.component_data(n_strands, braid_word)
         if len(component_labels) != len(components):
             raise ValueError("component label count does not match braid closure")
@@ -150,7 +163,7 @@ class SU2KBraidEvaluator:
         framing_factor = self.one()
         for label, framing, writhe in zip(component_labels, framings, self_writhe, strict=True):
             framing_factor *= self.twist(label) ** (framing - writhe)
-        return self.coerce(trace_value * framing_factor)
+        return self.coerce(trace_value * framing_factor * self.degree_linking_phase(n_strands, braid_word, component_labels))
 
     def omega_value(self, n_strands, braid_word, framings, omega_labels):
         components, _ = self.component_data(n_strands, braid_word)
@@ -215,6 +228,19 @@ class SU2KBraidEvaluator:
                 linkings[right][left] = total // 2
         return tuple(tuple(int(entry) for entry in row) for row in linkings)
 
+    def degree_linking_phase(self, n_strands, braid_word, component_labels):
+        if self.level % 2 != 0:
+            return self.one()
+        linkings = self.linking_matrix(n_strands, braid_word)
+        exponent = 0
+        for left, left_label in enumerate(component_labels):
+            if left_label % 2 == 0:
+                continue
+            for right in range(left + 1, len(component_labels)):
+                if component_labels[right] % 2 == 1:
+                    exponent += linkings[left][right]
+        return self.coerce(self.A ** (((self.level + 2) // 2) * exponent))
+
     @staticmethod
     def selected_subbraid_word(n_strands, braid_word, selected_strands):
         positions = list(range(n_strands))
@@ -234,6 +260,9 @@ class SU2KBraidEvaluator:
         return tuple(subword), len(selected_strands)
 
     def _braid_quantum_trace(self, strand_labels, braid_word):
+        if not self.exact:
+            return self._braid_quantum_trace_numpy(strand_labels, braid_word)
+
         current_sequence = tuple(int(label) for label in strand_labels)
         initial_sequence = current_sequence
         total = self.zero()
@@ -265,6 +294,49 @@ class SU2KBraidEvaluator:
             total += self.dimension(total_charge) * trace
         return self.coerce(total)
 
+    def _braid_quantum_trace_numpy(self, strand_labels, braid_word):
+        current_sequence = tuple(int(label) for label in strand_labels)
+        initial_sequence = current_sequence
+        total = 0.0 + 0.0j
+        for total_charge in self.labels:
+            initial_basis = self.paths(current_sequence, total_charge)
+            dimension = len(initial_basis)
+            if dimension == 0:
+                continue
+            state = np.eye(dimension, dtype=np.complex128)
+            current_basis = initial_basis
+            for generator in braid_word:
+                crossing, next_basis = self.numpy_crossing_matrix(
+                    current_sequence,
+                    total_charge,
+                    abs(int(generator)) - 1,
+                    int(generator) > 0,
+                )
+                state = crossing @ state
+                current_sequence = self.swapped_sequence(current_sequence, abs(int(generator)) - 1)
+                current_basis = next_basis
+            if current_sequence != initial_sequence:
+                raise ValueError("braid closure colors are not component-constant")
+            if current_basis != initial_basis:
+                raise ValueError("internal basis ordering changed unexpectedly")
+            total += complex(self.dimension(total_charge)) * np.trace(state)
+        return self.coerce(total)
+
+    def numpy_crossing_matrix(self, sequence, total_charge, generator_index, positive):
+        key = (tuple(sequence), int(total_charge), int(generator_index), bool(positive))
+        if key in self._numpy_crossing_cache:
+            return self._numpy_crossing_cache[key]
+        crossing, target_basis = self.crossing_entries(*key)
+        source_basis = self.paths(tuple(sequence), int(total_charge))
+        target_index = {path: index for index, path in enumerate(target_basis)}
+        source_index = {path: index for index, path in enumerate(source_basis)}
+        matrix = np.zeros((len(target_basis), len(source_basis)), dtype=np.complex128)
+        for (target_path, source_path), coefficient in crossing.items():
+            matrix[target_index[target_path], source_index[source_path]] += complex(coefficient)
+        value = (matrix, target_basis)
+        self._numpy_crossing_cache[key] = value
+        return value
+
     def crossing_matrix(self, sequence, total_charge, generator_index, positive):
         crossing, target_basis = self.crossing_entries(sequence, total_charge, generator_index, positive)
         source_basis = self.paths(sequence, total_charge)
@@ -280,12 +352,14 @@ class SU2KBraidEvaluator:
         for (target_path, source_path), coefficient in left.items():
             by_source.setdefault(source_path, []).append((target_path, coefficient))
         output = {}
+        zero = self.zero()
         for (middle_path, original_path), right_coefficient in right.items():
             for target_path, left_coefficient in by_source.get(middle_path, ()):
                 key = (target_path, original_path)
-                output[key] = output.get(key, self.zero()) + left_coefficient * right_coefficient
+                output[key] = output.get(key, zero) + left_coefficient * right_coefficient
         return {key: value for key, value in output.items() if value != 0}
 
+    @lru_cache(maxsize=None)
     def crossing_entries(self, sequence, total_charge, generator_index, positive):
         source_basis = self.paths(sequence, total_charge)
         target_sequence = self.swapped_sequence(sequence, generator_index)
@@ -296,7 +370,9 @@ class SU2KBraidEvaluator:
 
         def add_entry(target_path, source_path, coefficient):
             key = (target_path, source_path)
-            entries[key] = entries.get(key, self.zero()) + coefficient
+            entries[key] = entries.get(key, zero) + coefficient
+
+        zero = self.zero()
 
         for path in source_basis:
             if generator_index == 0:
@@ -306,7 +382,7 @@ class SU2KBraidEvaluator:
                 add_entry(target_path, path, scalar)
                 continue
 
-            prefix = path[generator_index - 2]
+            prefix = sequence[0] if generator_index == 1 else path[generator_index - 2]
             left_channel = path[generator_index - 1]
             total_segment = path[generator_index]
             for middle_channel in self.fusion_outputs(x, y):
@@ -332,6 +408,7 @@ class SU2KBraidEvaluator:
 
         return ({key: value for key, value in entries.items() if value != 0}, target_basis)
 
+    @lru_cache(maxsize=None)
     def paths(self, sequence, total_charge):
         sequence = tuple(int(label) for label in sequence)
         total_charge = int(total_charge)
@@ -366,6 +443,7 @@ class SU2KBraidEvaluator:
             raise ValueError("SU(2)_k universal character label must be 0 or 1")
         return self.coerce(-1) if omega_label == 1 and simple_label % 2 else self.one()
 
+    @lru_cache(maxsize=None)
     def fusion_outputs(self, left, right):
         left = int(left)
         right = int(right)
@@ -377,6 +455,7 @@ class SU2KBraidEvaluator:
             if (left + right + label) % 2 == 0
         )
 
+    @lru_cache(maxsize=None)
     def admissible(self, left, right, output):
         return int(output) in self.fusion_outputs(left, right)
 
@@ -533,10 +612,10 @@ class SU2KBraidEvaluator:
         output = int(output)
         if positive:
             exponent = -(left * (left + 2) + right * (right + 2) - output * (output + 2)) // 2
-            sign = (-1) ** ((left + right - output) // 2)
+            sign = (-1) ** ((left + right - output) // 2) if left == right else 1
             return self.coerce(sign * self.A**exponent)
         exponent = -(right * (right + 2) + left * (left + 2) - output * (output + 2)) // 2
-        sign = (-1) ** ((right + left - output) // 2)
+        sign = (-1) ** ((right + left - output) // 2) if left == right else 1
         return self.one() / self.coerce(sign * self.A**exponent)
 
     @staticmethod

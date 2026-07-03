@@ -205,3 +205,141 @@ we have a correct arbitrary SU(2)_6 link evaluator
 we have a tested SU(2)_k fusion-braid evaluator scaffold,
 but it is blocked by multi-component SU(2)_2 calibration.
 #+end_src
+
+* Update: calibration repaired, Yasui/SU(2)_6 still not admitted
+
+後續修復後，上一節的 calibration blocker 已不再準確；保留原文是為了
+append-only 追蹤，但目前狀態如下：
+
+#+begin_src text
+SU(2)_2 Yasui fixed-sector calibration: pass
+SU(2)_6 full Yasui sector cache: computable numerically
+SU(2)_6 standard-vs-Yasui comparison: mismatch
+Yasui/SU(2)_6 use: still blocked, but for input-admission reasons
+#+end_src
+
+** 修正項目
+
+1. =crossing_entries= 的 prefix indexing 有 off-by-one 類錯誤。
+   對 generator index =1=，prefix 應是第一條 strand 的 label，而不是
+   =path[-1]=。修正後，all-=sigma= generator traces 在 \(n=4,5\) controls
+   上與 Sage =FusionRing.get_braid_generators= 對齊。
+
+2. =R=-symbol 的 sign convention 對 mixed simple labels 過強。
+   與 Sage all-=sigma= controls 比對後，目前只在 =left == right= 時套用
+   \((-1)^{(left+right-output)/2}\) sign。
+
+3. 為了與既有 =SU(2)_2= braid oracle 的 multi-component convention 對齊，
+   加入了 even-level degree-linking phase：
+
+#+begin_src text
+phase = A^(((k+2)/2) * sum_{i<j, labels_i odd, labels_j odd} lk(i,j))
+#+end_src
+
+   這一步目前應視為 convention calibration，不應升格為一般 theorem。
+
+4. =exact=False= 時新增 NumPy dense matrix backend。數學語義仍是同一個
+   fusion-path braid action；差別只是把每個 total charge sector 的矩陣乘法交給
+   BLAS，而不是用 Python/Sage sparse dictionary compose。
+
+** 新 regression
+
+新增測試：
+
+#+begin_src text
+tests/test_su2k_fusion_braid_evaluator.py
+  test_su2k_fusion_braid_evaluator_yasui_su2_2_calibration
+#+end_src
+
+它逐一比較 Yasui Figure 3 \(a=1\) 的 27 個 =SU(2)_2= fixed-label sector：
+
+#+begin_src text
+max difference < 1e-12
+#+end_src
+
+目前測試結果：
+
+#+begin_src sh
+UV_CACHE_DIR="$PWD/.uv-cache" uv run python -m pytest \
+  tests/test_su2k_fusion_braid_evaluator.py \
+  tests/test_yasui_figure3_other_mtc_comparison.py
+#+end_src
+
+#+begin_src text
+3 passed
+#+end_src
+
+** SU(2)_6 性能與結果
+
+用 NumPy backend 後，Yasui braid payload 的 =SU(2)_6= 343 個 fixed sectors
+可以完成：
+
+#+begin_src text
+sector count: 343
+elapsed: about 36.6 seconds on this machine
+slowest observed sector: about 1.2 seconds
+#+end_src
+
+但把它真正套到 standard =CP2#2CPbar= split presentation 對照時，得到巨大
+數值差：
+
+#+begin_src text
+status: numerical-mismatch
+max_abs_difference: about 2417.58
+#+end_src
+
+這個結果目前不能解讀成 exotic 或 invariant signal。原因是 Yasui Figure 3 \(a=1\)
+的 braid payload 是從手抄 Gauss/crossing data 與 linking-matrix calibration 得來；
+=SU(2)_2= 與 pointed =Vec_Z3= 主要只能看到較低階的 linking/framing 資訊，而
+=SU(2)_6= 會看到真正 colored link type。大 mismatch 更合理的解讀是：
+
+#+begin_src text
+current Yasui braid payload is not admitted for nonpointed colored-link evaluation.
+#+end_src
+
+也就是說，我們還需要回到 Figure 3 的 diagram digitization / over-under embedding /
+Kirby calibration，而不是把這個 mismatch 當作四維不變量的數值。
+
+** 獨立 sanity check
+
+重新跑既有 =SU(2)_6= Kirby-slide stress suite：
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/su2_6_kirby_slide_stress.sage.py
+#+end_src
+
+結果：
+
+#+begin_src text
+status: pass
+knots: 8
+scenarios: 7
+comparisons: 1088
+#+end_src
+
+這個 suite 不是 arbitrary link evaluator，但它支持目前的判斷：
+
+#+begin_src text
+SU(2)_6 Kirby-slide logic for the meridian-link stress class still passes;
+the Yasui/SU(2)_6 blocker is specific to admitting the digitized Yasui braid payload.
+#+end_src
+
+** 更新後的可宣稱範圍
+
+可以宣稱：
+
+#+begin_src text
+we have a SU(2)_k fusion-braid evaluator that:
+  - passes exact low-level SU(2)_2 controls,
+  - passes Yasui Figure 3 a=1 SU(2)_2 fixed-sector calibration,
+  - computes SU(2)_6 numerical sector caches fast enough for this 3-component/8-strand braid,
+  - remains compatible with the existing exact SU(2)_6 Kirby-slide stress evidence.
+#+end_src
+
+仍不能宣稱：
+
+#+begin_src text
+we have admitted the current Yasui Figure 3 braid payload for SU(2)_6 comparison;
+we have a certified arbitrary MTC evaluator;
+we have an exotic-pair computation.
+#+end_src
