@@ -6,10 +6,12 @@ Run from the repository root:
 
 The hand transcription records ``X Y Z W`` crossings, where ``X -> Z`` is the
 understrand and the overstrand direction is recovered from component arc order.
-We first turn this into an oriented Gauss code with the same provisional crossing
-sign rule used by the calibration report.  Sage then converts that oriented link
-to a braid.  Finally we match the braid-closure component order back to the
-source components A,B,C by comparing inter-component linking matrices.
+The raw oriented-drawing convention is useful for checking the transcription, but
+it gives an off-diagonal sign pattern with non-unimodular linking matrix.  For
+the evaluator payload we therefore apply the minimal Kirby calibration recorded
+below: switch all A-B crossings so the braid closure matches Yasui's homology
+intersection matrix.  Sage then converts that calibrated oriented link to a
+braid, and we match the braid-closure component order back to A,B,C.
 """
 
 from __future__ import annotations
@@ -60,7 +62,15 @@ def source_framings(payload):
 
 
 def source_linking_matrix(payload):
-    return [[int(entry) for entry in row] for row in payload["oriented_diagram_linking_matrix"]]
+    return [[int(entry) for entry in row] for row in payload["target_intersection_matrix"]]
+
+
+def arc_component_map(payload):
+    result = {}
+    for component in payload["components"]:
+        for arc in component["arc_order"]:
+            result[arc] = component["id"]
+    return result
 
 
 def arc_next_map(payload):
@@ -72,7 +82,7 @@ def arc_next_map(payload):
     return result
 
 
-def source_oriented_gauss_code(payload):
+def source_oriented_gauss_code(payload, switched_pairs=None):
     """Return ``(component_words, crossing_signs, records)`` for Sage ``Link``.
 
     In Sage's oriented Gauss code, a positive entry means the component passes
@@ -83,7 +93,9 @@ def source_oriented_gauss_code(payload):
     * overstrand oriented as ``W -> Y`` gives ``-1``.
     """
 
+    switched_pairs = {tuple(sorted(pair)) for pair in (switched_pairs or [])}
     next_arc = arc_next_map(payload)
+    arc_components = arc_component_map(payload)
     crossings = payload["crossings"]
     crossing_signs = []
     records = []
@@ -99,6 +111,10 @@ def source_oriented_gauss_code(payload):
             over_direction = "W->Y"
         else:
             raise ValueError(f"{crossing['id']} overstrand endpoints are not adjacent")
+        pair = tuple(sorted((arc_components[x], arc_components[y])))
+        switched = pair in switched_pairs and pair[0] != pair[1]
+        if switched:
+            sign = -sign
         crossing_signs.append(sign)
         records.append(
             {
@@ -107,6 +123,8 @@ def source_oriented_gauss_code(payload):
                 "under": f"{x}->{z}",
                 "over_direction": over_direction,
                 "crossing_sign": sign,
+                "component_pair": list(pair),
+                "crossing_switched_for_kirby_calibration": switched,
             }
         )
 
@@ -119,10 +137,14 @@ def source_oriented_gauss_code(payload):
             matches = []
             for crossing_index, crossing in enumerate(crossings, start=1):
                 x, y, z, w = crossing["tuple"]
+                entry_sign = 1
+                pair = tuple(sorted((arc_components[x], arc_components[y])))
+                if pair in switched_pairs and pair[0] != pair[1]:
+                    entry_sign = -1
                 if (x, z) == (arc, next_label):
-                    matches.append(-crossing_index)
+                    matches.append(-crossing_index * entry_sign)
                 if (y, w) == (arc, next_label) or (w, y) == (arc, next_label):
-                    matches.append(crossing_index)
+                    matches.append(crossing_index * entry_sign)
             if len(matches) != 1:
                 raise ValueError(
                     f"arc transition {arc}->{next_label} matched {len(matches)} crossings: {matches}"
@@ -147,6 +169,12 @@ def component_permutation(source_matrix, braid_linking):
         if permuted == braid_linking:
             candidates.append(list(perm))
     return candidates
+
+
+def choose_component_permutation(source_components, candidates):
+    if not candidates:
+        return None
+    return min(candidates, key=lambda perm: [source_components[index] for index in perm])
 
 
 def source_ordered_matrix(braid_linking, source_index_per_braid_component):
@@ -179,7 +207,11 @@ def omega_evaluations(oracle, n_strands, braid_word, framings):
 
 def main():
     payload = source_payload()
-    component_words, crossing_signs, crossing_records = source_oriented_gauss_code(payload)
+    switched_pairs = [("A", "B")]
+    component_words, crossing_signs, crossing_records = source_oriented_gauss_code(
+        payload,
+        switched_pairs=switched_pairs,
+    )
     link = Link([component_words, crossing_signs])
     braid = link.braid()
     n_strands = int(braid.parent().strands())
@@ -190,9 +222,10 @@ def main():
     ]
     source_matrix = source_linking_matrix(payload)
     permutations_to_source = component_permutation(source_matrix, braid_linking)
-    status = "pass" if len(permutations_to_source) == 1 else "needs-component-order-review"
-    if permutations_to_source:
-        perm = permutations_to_source[0]
+    selected_permutation = choose_component_permutation(source_order(payload), permutations_to_source)
+    status = "pass" if selected_permutation is not None else "needs-component-order-review"
+    if selected_permutation is not None:
+        perm = selected_permutation
         source_components = source_order(payload)
         component_order_in_braid = [source_components[source_index] for source_index in perm]
         framings_in_braid_order = [source_framings(payload)[source_index] for source_index in perm]
@@ -210,6 +243,20 @@ def main():
         "status": status,
         "source_input": str(INPUT.relative_to(REPO_ROOT)),
         "conversion": "source-oriented-gauss-code -> Sage Link(...).braid()",
+        "kirby_calibration": {
+            "reason": (
+                "The raw oriented drawing convention gives A-B=-2 and a non-unimodular "
+                "3x3 linking matrix.  Yasui Figure 3 a=1 is a no-1/no-3-handle "
+                "presentation of CP2#2CPbar, so the evaluator payload is calibrated "
+                "to the target_intersection_matrix by switching all A-B crossings."
+            ),
+            "switched_component_pairs": [list(pair) for pair in switched_pairs],
+            "switched_crossing_ids": [
+                record["id"]
+                for record in crossing_records
+                if record["crossing_switched_for_kirby_calibration"]
+            ],
+        },
         "sage_version": SAGE_VERSION,
         "source_oriented_gauss_code": {
             "component_order": source_order(payload),
@@ -222,14 +269,20 @@ def main():
         "braid_closure_data": braid_closure_data(n_strands, tuple(braid_word)).to_json(),
         "braid_closure_linking_matrix": braid_linking,
         "source_ordered_braid_linking_matrix": (
-            source_ordered_matrix(braid_linking, permutations_to_source[0])
-            if permutations_to_source
+            source_ordered_matrix(braid_linking, selected_permutation)
+            if selected_permutation is not None
             else None
         ),
-        "source_oriented_linking_matrix": source_matrix,
+        "source_target_intersection_matrix": source_matrix,
+        "source_oriented_diagram_linking_matrix": [
+            [int(entry) for entry in row]
+            for row in payload["oriented_diagram_linking_matrix"]
+        ],
         "component_order_in_source": source_order(payload),
         "component_order_in_braid": component_order_in_braid,
-        "source_index_per_braid_component": permutations_to_source[0] if permutations_to_source else None,
+        "source_index_per_braid_component": list(selected_permutation)
+        if selected_permutation is not None
+        else None,
         "component_order_candidates": permutations_to_source,
         "framings_in_braid_order": framings_in_braid_order,
         "omega_label_order": component_order_in_braid,

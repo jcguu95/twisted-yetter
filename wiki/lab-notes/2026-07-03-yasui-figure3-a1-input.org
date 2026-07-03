@@ -232,15 +232,22 @@ component orientation 的 convention 會重新詮釋，產生的 braid closure l
 1. 從 source crossing table 和 component arc order 建立 oriented Gauss code。
    在 Sage oriented Gauss code 中，positive entry 表示該 component 在該 crossing
    走 over，negative entry 表示走 under。
-2. crossing sign 使用 calibration script 已驗過的規則：
+2. crossing sign 先使用 calibration script 已驗過的 raw oriented-drawing 規則：
    overstrand 若按 =Y -> W= 方向走，sign 為 \(+1\)；若按 =W -> Y= 方向走，
    sign 為 \(-1\)。
-3. 用 =Link([component_words, crossing_signs]).braid()= 產生 braid closure。
-4. 用 braid closure linking matrix 反推出 braid component order 對應 source components
+3. raw oriented-drawing 規則會得到 \(A-B=-2\)，使得三條 2-handle 的 full
+   linking/framing matrix determinant 變成 \(-63\)，不可能是
+   \(CP^2\#2\overline{CP^2}\)。因此 evaluator payload 必須校準到 Yasui 圖上
+   寫出的 homology / Kirby target matrix。
+4. 校準方式：switch 全部 \(A-B\) crossings：
+   =x04,x05,x08,x09,x13,x15=。這會把 source-ordered off-diagonal matrix
+   變成 \(A-B=2,A-C=4,B-C=2\)，full matrix determinant 為 \(1\)。
+5. 用 =Link([component_words, crossing_signs]).braid()= 產生 braid closure。
+6. 用 braid closure linking matrix 反推出 braid component order 對應 source components
    \(A,B,C\) 的 permutation。
-5. 依該 order 排列 framings，產生 =twisted-yetter.local-piece-program.v1=
+7. 依該 order 排列 framings，產生 =twisted-yetter.local-piece-program.v1=
    evaluator payload。
-6. 對所有 \(A=(\mathbb Z/2)^3\) sectors 跑 =SU(2)_2= =Omega_a= evaluator。
+8. 對所有 \(A=(\mathbb Z/2)^3\) sectors 跑 =SU(2)_2= =Omega_a= evaluator。
 
 輸出：
 
@@ -257,33 +264,68 @@ payload，不是和 standard \((+1,-1,-1)\) unlink presentation 的比較結論�
 status: pass
 n_strands: 8
 braid_word length: 37
-braid component order: C, A, B
+braid component order: A, C, B
 framings in braid order: 3, 3, 1
-source-index-per-braid-component: 2, 0, 1
+source-index-per-braid-component: 0, 2, 1
 
-braid closure linking matrix in braid order C,A,B:
+braid closure linking matrix in braid order A,C,B:
   0   4   2
-  4   0  -2
-  2  -2   0
+  4   0   2
+  2   2   0
 
 same matrix reordered to source order A,B,C:
-  0  -2   4
- -2   0   2
+  0   2   4
+  2   0   2
   4   2   0
 #+end_src
 
-這表示 conversion artifact 的 off-diagonal linking 已回到 source-oriented
-Yasui diagram target。Diagonal framing 由 source component framings 額外提供。
+這表示 conversion artifact 的 off-diagonal linking 已回到 Yasui homology /
+Kirby target。Diagonal framing 由 source component framings 額外提供。
 
-=SU(2)_2= twisted sector values（omega label order =C,A,B=）：
+=SU(2)_2= twisted sector values（omega label order =A,C,B=）：
 
 #+begin_src text
-000:  8*zeta16^5
-001: -8*zeta16^5
-010: -8*zeta16^5
-011:  8*zeta16^5
-100: -8*zeta16^5
-101:  8*zeta16^5
-110:  8*zeta16^5
-111: -8*zeta16^5
+000: -8*zeta16^5
+001:  8*zeta16^5
+010:  8*zeta16^5
+011: -8*zeta16^5
+100:  8*zeta16^5
+101: -8*zeta16^5
+110: -8*zeta16^5
+111:  8*zeta16^5
 #+end_src
+
+* Standard Presentation Comparison
+
+新增 comparison script:
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage experiments/sage/yasui_figure3_a1_compare_standard.sage.py
+#+end_src
+
+Standard presentation 取 split unlink with framings \((+1,-1,-1)\)，component
+order 為 \(h,e_1,e_2\)。Yasui labels mod 2 為：
+
+#+begin_src text
+A = 2h + e2 -> e2
+B = h       -> h
+C = 2h + e1 -> e1
+#+end_src
+
+輸出：
+
+#+begin_src text
+experiments/results/yasui/figure3-a1-standard-comparison-su2-2-v1.json
+#+end_src
+
+結果：
+
+#+begin_src text
+status: pass
+all 8 alpha in Hom(H2,Z/2): Yasui raw value == standard raw value
+#+end_src
+
+這是一個 sanity check，不是 exotic detection。它表示：在修正 Kirby sign
+calibration 後，Yasui Figure 3 \(a=1\) 的奇怪 three-component presentation
+和 standard \(CP^2\#2\overline{CP^2}\) unlink presentation，在目前
+=SU(2)_2= twisted braid-oracle convention 下給出完全相同的 raw value。
