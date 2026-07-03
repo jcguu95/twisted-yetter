@@ -1,0 +1,85 @@
+{
+  "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
+  "status": "needs-ab-crossing-review",
+  "source": {
+    "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
+    "arxiv": "0807.0373v2",
+    "figure": "Figure 3",
+    "case": "a=1",
+    "topological_target": "CP2 # 2 CPbar2"
+  },
+  "components": [
+    {
+      "id": "A",
+      "class_in_h_e_basis": {"h": 2, "e1": 0, "e2": 1},
+      "framing": 3,
+      "arc_count": 18
+    },
+    {
+      "id": "B",
+      "class_in_h_e_basis": {"h": 1, "e1": 0, "e2": 0},
+      "framing": 1,
+      "arc_count": 10
+    },
+    {
+      "id": "C",
+      "class_in_h_e_basis": {"h": 2, "e1": 1, "e2": 0},
+      "framing": 3,
+      "arc_count": 12
+    }
+  ],
+  "target_intersection_matrix": [
+    [3, 2, 4],
+    [2, 1, 2],
+    [4, 2, 3]
+  ],
+  "conventions": {
+    "component_orientation": "arc labels increase cyclically, e.g. A1 -> A2 -> ... -> A18 -> A1",
+    "crossing_tuple": "X Y Z W",
+    "understrand": "X -> Z",
+    "overstrand": "the strand through Y and W, oriented by the component arc order",
+    "cyclic_order": "X, Y, Z, W listed counterclockwise around the crossing",
+    "sign_status": "derived by the local cyclic-order convention in the sanity script; must be checked against the source diagram before evaluator use"
+  },
+  "crossings": [
+    {"id": "x01", "tuple": ["A1", "C12", "A2", "C1"]},
+    {"id": "x02", "tuple": ["C7", "A2", "C8", "A3"]},
+    {"id": "x03", "tuple": ["A8", "A4", "A9", "A3"]},
+    {"id": "x04", "tuple": ["B3", "A5", "B4", "A4"]},
+    {"id": "x05", "tuple": ["B10", "A5", "B1", "A6"]},
+    {"id": "x06", "tuple": ["A6", "C11", "A7", "C12"]},
+    {"id": "x07", "tuple": ["C8", "A7", "C9", "A8"]},
+    {"id": "x08", "tuple": ["B4", "A10", "B5", "A9"]},
+    {"id": "x09", "tuple": ["A10", "B6", "A11", "B5"]},
+    {"id": "x10", "tuple": ["A16", "A12", "A17", "A11"]},
+    {"id": "x11", "tuple": ["A12", "C5", "A13", "C6"]},
+    {"id": "x12", "tuple": ["C2", "A13", "C3", "A14"]},
+    {"id": "x13", "tuple": ["B9", "A15", "B10", "A14"]},
+    {"id": "x14", "tuple": ["B6", "A15", "B7", "A16"]},
+    {"id": "x15", "tuple": ["A17", "C6", "A18", "C7"]},
+    {"id": "x16", "tuple": ["C1", "A18", "C2", "A1"]},
+    {"id": "x17", "tuple": ["B1", "C10", "B2", "C11"]},
+    {"id": "x18", "tuple": ["C9", "B2", "C10", "B3"]},
+    {"id": "x19", "tuple": ["B7", "C4", "B8", "C5"]},
+    {"id": "x20", "tuple": ["C3", "B8", "C4", "B9"]}
+  ],
+  "self_twists": [
+    {
+      "component_id": "A",
+      "description": "A15 has +1 twist with itself",
+      "status": "recorded from user reading; not yet expanded into explicit two-crossing writhe data"
+    }
+  ],
+  "sanity_observation": {
+    "arc_occurrence_check": "pass",
+    "intercomponent_linking_check": "partial",
+    "derived_linking_matrix_from_current_sign_rule": [
+      [3, -1, 4],
+      [-1, 1, 2],
+      [4, 2, 3]
+    ],
+    "matches_target_entries": ["A-C", "B-C", "diagonal framings"],
+    "mismatch_entries": ["A-B"],
+    "next_review_focus": "Recheck the six A/B crossings x04, x05, x08, x09, x13, x14 and the over-strand orientation at each."
+  }
+}
