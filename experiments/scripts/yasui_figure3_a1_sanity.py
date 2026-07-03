@@ -71,14 +71,19 @@ def main() -> int:
         "-".join(pair): signed_sum // 2 for pair, signed_sum in signed_sums.items()
     }
     result = {
-        "status": "needs-ab-crossing-review",
+        "status": "needs-self-twist-expansion-and-sign-calibration",
         "arc_occurrences": "pass" if not bad_occurrences and not missing else "fail",
         "bad_occurrences": bad_occurrences,
         "missing": missing,
         "signed_sums": {"-".join(pair): value for pair, value in signed_sums.items()},
         "derived_linking": derived_linking,
         "target_linking": {"A-B": 2, "A-C": 4, "B-C": 2},
-        "mismatch": ["A-B"] if derived_linking["A-B"] != 2 else [],
+        "mismatch_under_provisional_sign_rule": ["A-B"] if derived_linking["A-B"] != 2 else [],
+        "warning": (
+            "A-B mismatch is not treated as a user crossing-table error. "
+            "The A15 +1 full twist is not expanded, and the local crossing-sign "
+            "rule still needs calibration against a known positive crossing."
+        ),
         "crossing_details": crossing_details,
     }
     print(json.dumps(result, indent=2, sort_keys=True))

@@ -5,7 +5,7 @@
 
 * 狀態
 
-狀態標籤：=working input= / =Yasui Figure 3= / =needs A-B crossing review=
+狀態標籤：=working input= / =Yasui Figure 3= / =needs self-twist expansion and sign calibration=
 
 本 note 記錄使用者手工讀取 Yasui 0807.0373v2 Figure 3 在 =a=1= 時的
 三 component crossing table。目標是先驗證這張 nonstandard Kirby diagram 是否能作為
@@ -63,7 +63,27 @@ The overstrand orientation is inferred from component arc order. For example,
 if \(Y\to W\) follows the component orientation, the local sign used by the sanity
 script is \(+1\); if \(W\to Y\) follows the component orientation, it is \(-1\).
 This sign convention is a working convention for input sanity only and must be
-checked against the source diagram before evaluator use.
+calibrated against a known positive crossing before evaluator use.
+
+* A15 +1 Twist
+
+使用者指出 Figure 3 中 \(A15\) local segment 有一個 \(+1\) twist。這不是普通
+文字註解；在真正的 PD / local-piece input 中必須展開成 explicit self-crossings。
+
+目前 artifact 只記錄：
+
+#+begin_src text
+A15 has +1 twist with itself
+#+end_src
+
+尚未把它 boost 成例如：
+
+#+begin_src text
+A15a, A15b, A15c
+plus two self-crossings for a positive full twist
+#+end_src
+
+因此目前資料不可直接送 evaluator。
 
 * Current Result
 
@@ -93,8 +113,16 @@ lk(B,C) = 2
 #+end_src
 
 Therefore the input is not yet accepted for evaluator use. The successful
-\(A,C\) and \(B,C\) entries are encouraging, but the six \(A,B\) crossings must be
-rechecked:
+\(A,C\) and \(B,C\) entries are encouraging, but the \(A,B\) mismatch should not
+be interpreted as evidence that the six \(A,B\) crossings are wrong. The more
+conservative interpretation is:
+
+1. \(A15\) 的 \(+1\) full twist 尚未展開成 explicit self-crossings；
+2. the provisional local crossing-sign convention has not been calibrated against
+   a known positive crossing;
+3. derived linking is therefore only a diagnostic, not an acceptance gate.
+
+The six \(A,B\) crossings involved in the mismatch are:
 
 #+begin_src text
 x04: B3 A5  B4  A4
@@ -115,5 +143,8 @@ This note does not claim:
 - equality with the standard \((+1,-1,-1)\) unlink presentation;
 - any exotic-pair computation.
 
-Next action: recheck the six \(A,B\) crossings directly against Figure 3, especially
-which endpoint pair is the overstrand orientation in each local picture.
+Next action:
+
+1. expand the \(A15\) \(+1\) full twist into explicit subarcs and self-crossings;
+2. calibrate the \(X,Y,Z,W\) sign convention against a known positive crossing;
+3. only then use the target intersection matrix as an acceptance check.
