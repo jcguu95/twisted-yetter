@@ -1,0 +1,150 @@
+#+TITLE: 2026-07-05 Clean SU2 PD Extraction Checkpoint
+#+DATE: 2026-07-05
+#+STATUS: computed evidence / cleanup checkpoint
+
+* Purpose
+
+This note records the clean extraction from the noisy July 4--5 working tree.
+The goal is to preserve the hard-entered Kirby/PD inputs and the SU(2) gates
+that survived the R-symbol convention fix, without carrying the unrelated
+D(A4) / distributed-run noise into the main research history.
+
+This is not a theorem claim about twisted Yetter detecting exotic smooth
+structures.  It is a calculation checkpoint for diagram/evaluator sanity.
+
+* Snapshot Boundary
+
+- pre-cleanup noisy snapshot branch:
+  =snapshot-noisy-pre-cleanup-20260705=
+- pre-cleanup noisy snapshot commit:
+  =826fc90= (=WIP noisy pre-cleanup snapshot=)
+- clean extraction branch:
+  =clean-yasui-su2-r1-extraction=
+- clean extraction base before new commits:
+  =e5fe58b= (=Add SU2_6 multicomponent mixed stress gate=)
+
+The noisy snapshot keeps all generated material, including D(A4) experiments and
+large distributed chunks.  This clean extraction intentionally keeps only the
+small input data, SU2 evaluator scripts, final SU2 comparison artifacts, and
+tests needed to audit the current checkpoint.
+
+* Hand-entered PD / crossing-table inputs
+
+These are core human-entered assets and must not be discarded:
+
+| case | path | status |
+|------+------|--------|
+| Yasui Figure 3, a=1 | =experiments/inputs/yasui/figure3-a1-crossing-table.json= | hand PD / calibrated |
+| Yasui Figure 3, a=3 | =experiments/inputs/yasui/figure3-a3-crossing-table.json= | hand PD / compressed overpass convention |
+| Akbulut Figure 1 E(1) | =experiments/inputs/akbulut/figure1-e1-crossing-table.json= | hand PD / cyclic-sign sanity pass |
+
+The corresponding regression entrance is:
+
+#+begin_src sh
+UV_CACHE_DIR="$PWD/.uv-cache" uv run python -m pytest \
+  tests/test_hand_pd_su2_gate_artifacts.py
+#+end_src
+
+* SU2 evaluator checkpoint
+
+The main recovered evaluator file is:
+
+- =experiments/sage/su2k_fusion_braid_evaluator.sage.py=
+
+Important convention checkpoint:
+
+- The old repo-local special =SU(2)_2= degree/linking phase was removed.
+- The R-symbol sign was corrected uniformly, not only in the equal-label case.
+- A braid-relation test now checks =SU(2)_3=, =SU(2)_4=, and =SU(2)_6=.
+
+Relevant test entrance:
+
+#+begin_src sh
+UV_CACHE_DIR="$PWD/.uv-cache" uv run python -m pytest \
+  tests/test_su2k_fusion_braid_evaluator.py \
+  tests/test_hand_pd_su2_gate_artifacts.py
+#+end_src
+
+* Current passing final artifacts
+
+** Yasui Figure 3, a=1
+
+R1-normalized all-alpha artifacts currently pass:
+
+| category | artifact | max difference |
+|----------+----------+----------------|
+| SU(2)_2 | =experiments/results/yasui/figure3-a1-r1-normalized-su2-2-all-alpha-raw-comparison-v3.json= | about =2.93e-15= |
+| SU(2)_3 | =experiments/results/yasui/figure3-a1-r1-normalized-su2-3-all-alpha-raw-comparison-v2.json= | about =2.68e-14= |
+| SU(2)_6 | =experiments/results/yasui/figure3-a1-r1-normalized-su2-6-all-alpha-raw-comparison-v2.json= | about =3.93e-13= |
+
+** Yasui Figure 3, a=3
+
+All-alpha artifacts currently pass:
+
+| category | artifact | max difference |
+|----------+----------+----------------|
+| SU(2)_2 | =experiments/results/yasui/figure3-a3-su2-2-all-alpha-chunked-comparison-v1.json= | about =1.41e-14= |
+| SU(2)_3 | =experiments/results/yasui/figure3-a3-su2-3-all-alpha-chunked-comparison-v1.json= | about =4.73e-14= |
+| SU(2)_6 | =experiments/results/yasui/figure3-a3-su2-6-all-alpha-chunked-comparison-v1.json= | about =9.55e-13= |
+
+The =SU(2)_3= a=3 all-alpha artifact was rerun during this cleanup pass.
+
+** Akbulut Figure 1 E(1)
+
+Current Akbulut artifacts are more limited:
+
+| category | artifact | status |
+|----------+----------+--------|
+| SU(2)_2 sampled twists | =experiments/results/akbulut/figure1-e1-su2-2-sampled-twists-comparison-v1.json= | sampled rows pass |
+| SU(2)_3 twist only on X | =experiments/results/akbulut/figure1-e1-su2-3-twisted-x-chunked-comparison-v1.json= | pass |
+
+Important caveat:
+
+- This clean checkpoint does *not* claim Akbulut E(1) has a full =SU(2)_6=
+  all-alpha/twisted gate.
+- It also does *not* claim Akbulut has full all-alpha =SU(2)_3= over all ten
+  source components.  The current saved =SU(2)_3= gate is twist-only-on-X.
+
+Future agents should treat these as explicit open gates, not as passed tests.
+
+* Verification Run During Cleanup
+
+Commands run during the cleanup:
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage \
+  experiments/sage/yasui_figure3_a1_r1_normalized_su2_raw_comparison.sage.py \
+  --level 3 --untwisted-only
+
+DOT_SAGE="$PWD/.sage" sage \
+  experiments/sage/yasui_figure3_a3_su2_chunked_comparison.sage.py \
+  --level 3 --chunk-size 16
+
+DOT_SAGE="$PWD/.sage" sage \
+  experiments/sage/yasui_figure3_a3_su2_chunked_comparison.sage.py \
+  --level 3 --all-alpha --chunk-size 16
+#+end_src
+
+Results:
+
+- Yasui a=1, R1-normalized, =SU(2)_3=, untwisted: pass, max difference about
+  =1.25e-14=.
+- Yasui a=3, =SU(2)_3=, untwisted: pass, max difference about =4.23e-14=.
+- Yasui a=3, =SU(2)_3=, all-alpha: pass, max difference about =4.73e-14=.
+
+The aggregate pytest command was interrupted because one legacy
+=skipped-legacy-jones-diagnostic= test invoked a slow old script.  The relevant
+new gates were run separately and passed.
+
+* Next Audit Questions
+
+The next independent session should check:
+
+1. The three hand-entered PD codes exist and match the intended source figures.
+2. Yasui a=1 and a=3 have passing =SU(2)_2=, =SU(2)_3=, =SU(2)_6= all-alpha
+   artifacts.
+3. Akbulut E(1) currently has only partial SU2 twisted coverage:
+   =SU(2)_2= sampled twists and =SU(2)_3= twist-only-on-X.
+4. Before any exotic detection claim, Akbulut needs a deliberately designed
+   full-twist or marked-subspace gate, and likely a more efficient sector
+   aggregation plan.
