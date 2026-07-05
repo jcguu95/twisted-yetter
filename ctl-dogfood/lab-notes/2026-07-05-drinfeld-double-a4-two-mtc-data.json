@@ -1,0 +1,160 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-05-drinfeld-double-a4-two-mtc-data",
+  "title": "Final numeric FR data for two Drinfeld double A4 MTCs",
+  "created_at": "2026-07-05T23:22:32Z",
+  "created_by": "actor:codex",
+  "status": "ESTABLISHED",
+  "mathematical_status": "ESTABLISHED_NUMERIC",
+  "scope": {
+    "question": "Record clean final mathematical data for two Drinfeld double A4 modular tensor categories and the repo-local verification certificate that makes them safe to use as numeric FR-symbol inputs.",
+    "claim_boundary": "This note establishes repo-local canonical numeric F/R-symbol artifacts and a verification-run certificate for the two listed MTCs at floating-point tolerance 1e-7 for all-label coherence scans. It does not claim an exact arithmetic proof or a link invariant adapter.",
+    "normative_source_policy": "The canonical JSON data artifacts, verification-run JSON, and this admitted CTL objective note are normative. The supplied dirty /tmp package is only an extraction source and is not a current-state source of truth.",
+    "path_policy": "All normative artifact locators below are repo-relative paths."
+  },
+  "included_mtcs": [
+    {
+      "mtc_id": "omega0_untwisted_D_A4",
+      "name": "untwisted Drinfeld double D(A4)",
+      "twisting": {
+        "kind": "untwisted",
+        "omega_class": 0
+      },
+      "simple_count": 14,
+      "global_dimension_squared": 144,
+      "nonzero_f_blocks": 10100,
+      "nonzero_r_blocks": 497,
+      "fr_reconstruction_max_errors": {
+        "f_reconstruction": "1.0658719261875218e-14",
+        "r_reconstruction": "1.9984014443252818e-15"
+      },
+      "coherence_max_errors": {
+        "pentagon": "3.375077994860476e-14",
+        "right_hexagon": "1.2434497875801753e-14",
+        "left_hexagon": "3.6955587428207345e-15"
+      },
+      "t_spectrum": {
+        "1:0": 8,
+        "2:1": 2,
+        "3:1": 2,
+        "3:2": 2
+      },
+      "artifact": {
+        "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+        "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+        "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-a4.v1",
+        "status": "ESTABLISHED_NUMERIC"
+      }
+    },
+    {
+      "mtc_id": "c3w1_twisted_D_A4",
+      "name": "C3-inflated omega_power=1 twisted Drinfeld double D^omega(A4)",
+      "twisting": {
+        "kind": "c3-inflated",
+        "quotient": "A4 -> C3",
+        "omega_power": 1
+      },
+      "simple_count": 14,
+      "global_dimension_squared": 144,
+      "nonzero_f_blocks": 10100,
+      "nonzero_r_blocks": 497,
+      "fr_reconstruction_max_errors": {
+        "f_reconstruction": "2.6461764271751916e-14",
+        "r_reconstruction": "5.96325167112423e-15"
+      },
+      "coherence_max_errors": {
+        "pentagon": "3.375077994860476e-14",
+        "right_hexagon": "1.5466805407331916e-14",
+        "left_hexagon": "1.0968194384045365e-14"
+      },
+      "t_spectrum": {
+        "1:0": 6,
+        "2:1": 2,
+        "9:2": 2,
+        "9:5": 2,
+        "9:8": 2
+      },
+      "artifact": {
+        "path": "experiments/results/mtc-candidates/drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+        "sha256": "31fbc6af46a2289a9f0feb941a0b4d6afcdc3977d0187f3ebf5e195f8951df3d",
+        "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-a4.v1",
+        "status": "ESTABLISHED_NUMERIC"
+      }
+    }
+  ],
+  "coherence_certificate": {
+    "tolerance": "1e-7",
+    "tuple_counts": {
+      "pentagon": 537824,
+      "right_hexagon": 38416,
+      "left_hexagon": 38416
+    },
+    "verifier_checks": [
+      "schema/status",
+      "no imported absolute scratch paths in canonical data",
+      "14 simple labels and global dimension squared 144",
+      "nonzero twists and expected T-spectra",
+      "fusion grid completeness, integrality, nonnegativity, and unit object",
+      "R blocks exactly match nonzero fusion channels",
+      "F blocks exactly match nonzero fusion-tree bases",
+      "FR reconstruction errors below 1e-10",
+      "all-label pentagon/right-hexagon/left-hexagon certificate counts and errors below 1e-7",
+      "source package artifact hashes match canonical source records"
+    ],
+    "verification_run": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+      "sha256": "717fd28cc21425f1db480e941dcb65ce016971c76b0c292e7b087f6dbdb764dc",
+      "schema": "twisted-yetter.drinfeld-double-a4.two-mtc-verification-run.v1",
+      "status": "pass",
+      "failure_count": 0,
+      "reproduce_command": "python experiments/scripts/verify_drinfeld_double_a4_mtc_data.py --source-package $DRINFELD_DOUBLE_A4_SOURCE_PACKAGE"
+    }
+  },
+  "inequivalence_observation": {
+    "status": "ESTABLISHED_NUMERIC",
+    "basis": "The two canonical artifacts have different T-spectra; c3w1 has primitive ninth-root twists and omega0 does not.",
+    "omega0_t_spectrum": {
+      "1:0": 8,
+      "2:1": 2,
+      "3:1": 2,
+      "3:2": 2
+    },
+    "c3w1_t_spectrum": {
+      "1:0": 6,
+      "2:1": 2,
+      "9:2": 2,
+      "9:5": 2,
+      "9:8": 2
+    }
+  },
+  "excluded": [
+    "c3w2 / omega_power=2 data",
+    "order-2 component",
+    "full Z/6 family",
+    "exact arithmetic coherence proof",
+    "link invariant adapter"
+  ],
+  "tools": [
+    {
+      "path": "experiments/scripts/extract_drinfeld_double_a4_mtc_data.py",
+      "sha256": "049e8e9bafae95ddfd35c8cd3b83002cd8ee4240c7c557ed57ed390d63c5b59b",
+      "role": "Extract clean canonical final-data artifacts from the supplied local package without importing dirty worktree metadata as normative state."
+    },
+    {
+      "path": "experiments/scripts/verify_drinfeld_double_a4_mtc_data.py",
+      "sha256": "84b414d2904eec6ffd62252bc6daa0c6e562c40ea9645e9d947c05dc9370acf6",
+      "role": "Verify canonical data artifacts and emit the verification-run certificate."
+    }
+  ],
+  "source_package_fingerprint": {
+    "package_id": "drinfeld-double-a4-mtc-fr-package-2026-07-05",
+    "manifest_sha256": "b63a8d4e5401d7a65904dd2b5013343f22bb82634744432d0cfd0c86e0cab37b",
+    "package_recorded_source_commit": "d31216e77226712fac12a9489c124029889f27f0",
+    "package_recorded_dirty": true,
+    "dirty_provenance_imported_as_normative_state": false
+  },
+  "repo_snapshot": {
+    "commit_before_admission": "d86e5a339419c059a99f1dd2e63e5152bd0d1c0e",
+    "dirty_status_context": "dirty because the canonical data artifacts, tools, verification run, and this lab-note preimage are newly generated before admission"
+  }
+}

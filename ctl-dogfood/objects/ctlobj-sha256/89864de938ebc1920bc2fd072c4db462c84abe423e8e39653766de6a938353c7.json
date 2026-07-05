@@ -1,0 +1,79 @@
+{
+  "created_at": "2026-07-05T23:30:10Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-drinfeld-double-a4-construction-account",
+  "parents": [],
+  "payload": {
+    "canonical_data_artifacts": [
+      {
+        "mtc_id": "omega0_untwisted_D_A4",
+        "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+        "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5"
+      },
+      {
+        "mtc_id": "c3w1_twisted_D_A4",
+        "path": "experiments/results/mtc-candidates/drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+        "sha256": "31fbc6af46a2289a9f0feb941a0b4d6afcdc3977d0187f3ebf5e195f8951df3d"
+      }
+    ],
+    "construction_certificate": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-construction-certificate-v1.json",
+      "schema": "twisted-yetter.mtc.drinfeld-double-a4-construction-certificate.v1",
+      "sha256": "affb8d17816753eab38155f78c04dbaeb3a44fe67b619e27448ae6816ea7453a",
+      "status": "ESTABLISHED_NUMERIC_CONSTRUCTION_ACCOUNT"
+    },
+    "construction_summary": {
+      "coherence": "The corresponding data artifacts are backed by all-label pentagon, right-hexagon, and left-hexagon scan certificates recorded in the verification artifact.",
+      "fr_symbols": "F/R blocks are extracted from Hom(a tensor b, c) bases for induced Yetter-Drinfeld modules; F columns express right-associated tree vectors in the left-associated tree basis, and R columns braid Hom(b tensor a, c) into Hom(a tensor b, c).",
+      "simple_objects": "Labels are conjugacy-class plus centralizer representation labels; in the c3w1 order-three classes, centralizer irreps are replaced by the DPR alpha-projective one-dimensional representations.",
+      "twisted": "c3w1_twisted_D_A4 is Z(Vec_A4^omega), where omega is the omega_power=1 normalized C3 cocycle inflated along A4 -> A4/V4 ~= C3.",
+      "untwisted": "omega0_untwisted_D_A4 is Z(Vec_A4), equivalently Rep(D(A4)) as A4 Yetter-Drinfeld modules."
+    },
+    "created_at": "2026-07-05T23:29:40Z",
+    "created_by": "actor:codex",
+    "future_reader_entrypoints": [
+      "Start with experiments/results/mtc-candidates/drinfeld-double-a4-construction-certificate-v1.json for the Drinfeld-center construction recipe.",
+      "Then read the two canonical FR-data JSON artifacts for the actual usable F/R tables.",
+      "Then read experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json for the repo-local coherence and consistency checks."
+    ],
+    "mathematical_status": "ESTABLISHED_NUMERIC_CONSTRUCTION_ACCOUNT",
+    "note_id": "objective-note-2026-07-05-drinfeld-double-a4-construction-account",
+    "related_admitted_claims": [
+      {
+        "claim_cid": "ctlobj-sha256:888c919eee9800a96c0437b46223467a245f569241c2536d7956fdfd0ec0f5b3",
+        "logical_id": "claim:lab-note:2026-07-05-drinfeld-double-a4-two-mtc-data",
+        "role": "Admitted final numeric FR data and coherence certificate for the same two DA4 MTC artifacts."
+      }
+    ],
+    "repo_snapshot": {
+      "commit_before_admission": "d86e5a339419c059a99f1dd2e63e5152bd0d1c0e",
+      "dirty_status_context": "dirty because DA4 canonical data, construction certificate, verification artifact, and CTL lab-note admissions are newly generated in this worktree"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This note admits a construction certificate that records the group data, simple-object classification, C3-inflated cocycle recipe, Yetter-Drinfeld / DPR object model, Hom-basis convention, F/R extraction convention, and coherence-test principle for the two canonical DA4 MTC artifacts.",
+      "not_claimed": "This is not an exact symbolic proof of every F/R entry and not a link invariant adapter.",
+      "question": "Make it clear to a future repo reader how the two DA4 MTC data artifacts arise from the Drinfeld-center / twisted-double construction, not just that their F/R tables pass coherence checks."
+    },
+    "source_fingerprint": {
+      "dirty_source_package_is_not_normative": true,
+      "source_constructor_sha256": "da2f15390c239aecacfe47c23948144b9d6b838836396a35d9f70a90bbc8d65f",
+      "source_package_id": "drinfeld-double-a4-mtc-fr-package-2026-07-05",
+      "source_package_manifest_sha256": "b63a8d4e5401d7a65904dd2b5013343f22bb82634744432d0cfd0c86e0cab37b"
+    },
+    "status": "ESTABLISHED",
+    "title": "Construction account for the Drinfeld-center A4 MTC data",
+    "verification_artifact": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+      "sha256": "717fd28cc21425f1db480e941dcb65ce016971c76b0c292e7b087f6dbdb764dc",
+      "status": "pass"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

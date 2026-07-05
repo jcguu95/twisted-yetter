@@ -1,0 +1,173 @@
+{
+  "schema": "twisted-yetter.mtc.drinfeld-double-a4-construction-certificate.v1",
+  "status": "ESTABLISHED_NUMERIC_CONSTRUCTION_ACCOUNT",
+  "title": "Construction account for two Drinfeld-center A4 MTC FR artifacts",
+  "purpose": "Record the mathematical construction recipe that explains where the two canonical D(A4) MTC F/R-symbol artifacts come from, without importing the dirty exploratory constructor as normative source.",
+  "claim_boundary": {
+    "established": "The two canonical FR artifacts are presented as numeric F/R data for the listed Drinfeld-center categories, with simple-object classification, twisting source, basis convention, and extraction principle recorded here.",
+    "coherence_is_verified_by": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+    "not_claimed": [
+      "Exact arithmetic proof of all F/R entries",
+      "A standalone symbolic derivation of every F/R entry",
+      "A link invariant adapter",
+      "c3w2, order-2 twist, or full Z/6 family"
+    ]
+  },
+  "categorical_model": {
+    "untwisted": {
+      "mtc_id": "omega0_untwisted_D_A4",
+      "category": "Z(Vec_A4)",
+      "equivalent_description": "Rep(D(A4)) as A4 Yetter-Drinfeld modules",
+      "associator": "trivial normalized 3-cocycle"
+    },
+    "c3w1": {
+      "mtc_id": "c3w1_twisted_D_A4",
+      "category": "Z(Vec_A4^omega)",
+      "equivalent_description": "DPR twisted double D^omega(A4)",
+      "twisting_source": "Inflation of the order-three normalized cocycle on A4/V4 ~= C3",
+      "omega_power": 1
+    }
+  },
+  "group_data": {
+    "group": "A4",
+    "permutation_model": "even permutations of {0,1,2,3}, composed as left after right",
+    "order": 12,
+    "identity": [0, 1, 2, 3],
+    "normal_v4": "elements of permutation order 1 or 2",
+    "quotient": {
+      "name": "A4/V4",
+      "identified_with": "C3",
+      "quotient_generator": [1, 2, 0, 3],
+      "quotient_exponent_rule": "q(g) is the exponent e in {0,1,2} such that g lies in V4 * quotient_generator^e"
+    },
+    "conjugacy_classes": [
+      {
+        "class_label": "1A",
+        "representative": [0, 1, 2, 3],
+        "class_size": 1,
+        "centralizer_order": 12,
+        "centralizer_irrep_labels_untwisted": ["triv", "chi1", "chi2", "std3"]
+      },
+      {
+        "class_label": "2A",
+        "representative_description": "the first sorted double transposition in the permutation model",
+        "class_size": 3,
+        "centralizer_order": 4,
+        "centralizer_irrep_labels_untwisted": ["eps00", "eps01", "eps10", "eps11"]
+      },
+      {
+        "class_label": "3A",
+        "representative": [1, 2, 0, 3],
+        "class_size": 4,
+        "centralizer_order": 3,
+        "centralizer_irrep_labels_untwisted": ["eta0", "eta1", "eta2"],
+        "centralizer_projective_rep_labels_c3w1": ["eta0", "eta1", "eta2"]
+      },
+      {
+        "class_label": "3B",
+        "representative_description": "square of the 3A representative",
+        "class_size": 4,
+        "centralizer_order": 3,
+        "centralizer_irrep_labels_untwisted": ["eta0", "eta1", "eta2"],
+        "centralizer_projective_rep_labels_c3w1": ["eta0", "eta1", "eta2"]
+      }
+    ]
+  },
+  "simple_object_recipe": {
+    "principle": "Simple objects are indexed by pairs (C, pi), where C is an A4 conjugacy class and pi is an irreducible representation of the centralizer of a chosen representative; in the c3w1 twisted case pi is replaced by the DPR alpha-projective representation for classes affected by the inflated cocycle.",
+    "dimension_formula": "qdim(C, pi) = |C| * dim(pi)",
+    "simple_labels": [
+      "1A:triv",
+      "1A:chi1",
+      "1A:chi2",
+      "1A:std3",
+      "2A:eps00",
+      "2A:eps01",
+      "2A:eps10",
+      "2A:eps11",
+      "3A:eta0",
+      "3A:eta1",
+      "3A:eta2",
+      "3B:eta0",
+      "3B:eta1",
+      "3B:eta2"
+    ],
+    "quantum_dimensions": {
+      "1A:triv": 1,
+      "1A:chi1": 1,
+      "1A:chi2": 1,
+      "1A:std3": 3,
+      "2A:eps00": 3,
+      "2A:eps01": 3,
+      "2A:eps10": 3,
+      "2A:eps11": 3,
+      "3A:eta0": 4,
+      "3A:eta1": 4,
+      "3A:eta2": 4,
+      "3B:eta0": 4,
+      "3B:eta1": 4,
+      "3B:eta2": 4
+    },
+    "global_dimension_squared": 144
+  },
+  "twisting_recipe": {
+    "untwisted": {
+      "omega_class": 0,
+      "omega_formula": "omega(g,h,k)=1"
+    },
+    "c3w1": {
+      "quotient_exponents": "a=q(g), b=q(h), c=q(k) in {0,1,2}",
+      "normalized_cocycle_exponent_formula": "omega_power * a * floor((b+c)/3) mod 3",
+      "omega_formula": "omega(g,h,k)=zeta_3^(omega_power * q(g) * floor((q(h)+q(k))/3))",
+      "omega_power": 1,
+      "projective_centralizer_effect": "For 3A and 3B centralizers, DPR alpha-projective one-dimensional reps have generator values among ninth roots; this is the construction-level source of the primitive ninth-root twists in c3w1."
+    }
+  },
+  "fr_extraction_recipe": {
+    "object_model": "Induced Yetter-Drinfeld modules over A4, with degree decomposition over conjugacy-class elements and A4 action induced from centralizer data plus DPR action scalars in the twisted case.",
+    "hom_basis": "For labels a,b,c, Hom(a tensor b, c) is computed as the nullspace of equivariance equations respecting degrees and A4 action.",
+    "f_symbol_convention": "F_block columns are right-associated tree basis vectors expressed in the left-associated tree basis.",
+    "r_symbol_convention": "R_block columns are Hom(b tensor a, c) basis vectors braided into Hom(a tensor b, c).",
+    "braiding_origin": "The braiding is the Drinfeld-center/Yetter-Drinfeld braiding: a homogeneous vector of degree g acts on the second tensor factor by g before swapping tensor factors; twisted associator and DPR scalars modify the c3w1 numeric path.",
+    "coherence_test_principle": "All-label pentagon, right-hexagon, and left-hexagon scans compare the F/R formula paths for every label tuple; recorded tuple counts are 14^5, 14^4, and 14^4 respectively."
+  },
+  "canonical_data_artifacts": [
+    {
+      "mtc_id": "omega0_untwisted_D_A4",
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+      "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+      "role": "canonical numeric FR data for Z(Vec_A4)"
+    },
+    {
+      "mtc_id": "c3w1_twisted_D_A4",
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+      "sha256": "31fbc6af46a2289a9f0feb941a0b4d6afcdc3977d0187f3ebf5e195f8951df3d",
+      "role": "canonical numeric FR data for Z(Vec_A4^omega) with c3-inflated omega_power=1"
+    }
+  ],
+  "verification_artifact": {
+    "path": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+    "sha256": "717fd28cc21425f1db480e941dcb65ce016971c76b0c292e7b087f6dbdb764dc",
+    "status": "pass",
+    "verified_checks": 37
+  },
+  "construction_source_fingerprint": {
+    "source_package_id": "drinfeld-double-a4-mtc-fr-package-2026-07-05",
+    "source_package_manifest_sha256": "b63a8d4e5401d7a65904dd2b5013343f22bb82634744432d0cfd0c86e0cab37b",
+    "source_constructor_package_relative_path": "source/src/twisted_yetter/drinfeld_double_a4.py",
+    "source_constructor_sha256": "da2f15390c239aecacfe47c23948144b9d6b838836396a35d9f70a90bbc8d65f",
+    "source_fr_generator_package_relative_path": "source/experiments/scripts/drinfeld_double_a4_numeric_fr_symbols.py",
+    "source_fr_generator_sha256": "18bed8eeb505a674b0580068b9b1aeb0d16e29dd3fde2172875a24e258b6bdba",
+    "source_full_scan_package_relative_path": "source/experiments/scripts/drinfeld_double_a4_full_coherence_scan.py",
+    "source_full_scan_sha256": "6e8c4096252c69deadd6d346aa02a7dd6d4fa99cba9fd344a25e3c416a2b48e7",
+    "source_chunk_merge_package_relative_path": "source/experiments/scripts/drinfeld_double_a4_merge_coherence_chunks.py",
+    "source_chunk_merge_sha256": "eb17b91655a3c1479305c54e6bfac37c6b53eceedae4bda6f5d2bf8179f46887",
+    "dirty_source_package_is_not_normative": true
+  },
+  "future_reader_entrypoints": [
+    "Read this construction certificate to understand why the labels and F/R conventions are Drinfeld-center data.",
+    "Read the two canonical data artifacts to consume the actual F/R tables.",
+    "Read the verification-run artifact to see exactly which coherence and consistency checks passed in this repo.",
+    "Read the admitted CTL lab notes for normative claim boundaries."
+  ]
+}
