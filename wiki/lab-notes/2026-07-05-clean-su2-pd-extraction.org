@@ -95,6 +95,7 @@ Current Akbulut artifacts are more limited:
 
 | category | artifact | status |
 |----------+----------+--------|
+| SU(2)_2 untwisted baseline | =experiments/results/akbulut/figure1-e1-su2-2-untwisted-comparison-v1.json= | pass / generator-rerunnable |
 | SU(2)_2 sampled twists | =experiments/results/akbulut/figure1-e1-su2-2-sampled-twists-comparison-v1.json= | sampled rows pass |
 | SU(2)_3 twist only on X | =experiments/results/akbulut/figure1-e1-su2-3-twisted-x-chunked-comparison-v1.json= | pass |
 
@@ -104,6 +105,11 @@ Important caveat:
   all-alpha/twisted gate.
 - It also does *not* claim Akbulut has full all-alpha =SU(2)_3= over all ten
   source components.  The current saved =SU(2)_3= gate is twist-only-on-X.
+- The Akbulut scripts depend on the tracked base file
+  =experiments/sage/akbulut_figure1_e1_su2_2_untwisted_comparison.sage.py=.
+  A previous clean extraction missed this file, which made the pass-marked JSON
+  stronger than the runnable generator graph.  The artifact gate now includes
+  generator probes to catch this class of mistake.
 
 Future agents should treat these as explicit open gates, not as passed tests.
 
@@ -135,6 +141,22 @@ Results:
 The aggregate pytest command was interrupted because one legacy
 =skipped-legacy-jones-diagnostic= test invoked a slow old script.  The relevant
 new gates were run separately and passed.
+
+Additional Akbulut reproducibility probes added after independent review:
+
+#+begin_src sh
+DOT_SAGE="$PWD/.sage" sage \
+  experiments/sage/akbulut_figure1_e1_su2_2_untwisted_comparison.sage.py
+
+DOT_SAGE="$PWD/.sage" sage \
+  experiments/sage/akbulut_figure1_e1_su2_3_twisted_x_chunked.sage.py \
+  --worker --start 0 --count 1 --no-write-partial
+#+end_src
+
+These probes passed locally.  They are intentionally small: the first reruns the
+=SU(2)_2= baseline generator, and the second checks that the =SU(2)_3=
+twist-only-on-X chunk worker dependency graph is intact without launching the
+full million-sector computation.
 
 * Next Audit Questions
 
