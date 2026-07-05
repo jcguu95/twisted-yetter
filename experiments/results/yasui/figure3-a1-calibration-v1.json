@@ -2,129 +2,92 @@
   "framing_reports": [
     {
       "component": "A",
-      "kirby_positive_twist_writhe": 3,
-      "oriented_self_writhe": -3,
+      "effective_framing_correction": 0,
       "recorded_framing": 3,
       "self_crossing_ids": [
-        "x03",
-        "x10",
-        "x14"
+        "x06",
+        "x14",
+        "x18"
       ],
-      "status": "pass-under-kirby-sign"
+      "status": "pass-clean-pd-carries-framing",
+      "visible_self_writhe": 3
     },
     {
       "component": "B",
-      "kirby_positive_twist_writhe": 0,
-      "oriented_self_writhe": 0,
+      "effective_framing_correction": 0,
       "recorded_framing": 1,
-      "self_crossing_ids": [],
-      "status": "not-checked-by-self-crossings"
+      "self_crossing_ids": [
+        "x09"
+      ],
+      "status": "pass-clean-pd-carries-framing",
+      "visible_self_writhe": 1
     },
     {
       "component": "C",
-      "kirby_positive_twist_writhe": 0,
-      "oriented_self_writhe": 0,
+      "effective_framing_correction": 0,
       "recorded_framing": 3,
-      "self_crossing_ids": [],
-      "status": "not-checked-by-self-crossings"
+      "self_crossing_ids": [
+        "x02",
+        "x03",
+        "x04"
+      ],
+      "status": "pass-clean-pd-carries-framing",
+      "visible_self_writhe": 3
     }
   ],
   "homology_label_intersection_matrix": [
     [
       3,
       2,
-      4
+      -4
     ],
     [
       2,
       1,
-      2
+      -2
     ],
     [
-      4,
-      2,
+      -4,
+      -2,
       3
     ]
   ],
   "input": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
   "interpretation": [
     "The raw arc bookkeeping is consistent.",
-    "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
-    "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
-    "For component A, the oriented self-writhe is -3; reversing the sign to match the Kirby positive-twist convention gives +3, agreeing with A=(2h+e2)^2.",
-    "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates."
+    "The A15, B1, and C1 positive self-twist blocks have been expanded into explicit subarcs and self-crossings.",
+    "The tuple convention supplies incidence and over/under data, but not enough absolute page-position data to infer every sign from one quadrant convention.",
+    "The hand-calibrated visible crossing signs are treated as first-class data, not inferred from a linear label order.",
+    "With the current signs, every pair report must explicitly match the target before evaluator promotion.",
+    "For components A, B, and C, the visible self-writhe agrees with the recorded component framing.",
+    "The oriented source component C is opposite to the paper label direction, so evaluator markings use C=-(2h+e1).",
+    "The clean PD now carries the component framings directly; the homology-label matrix remains the target intersection check."
   ],
   "next_actions": [
     "Produce an evaluator-ready LinkDiagram/PD artifact with explicit component framings and a documented Kirby/oriented sign conversion.",
     "Then compare the nonstandard Yasui Figure 3 presentation against the standard (+1,-1,-1) unlink presentation."
   ],
   "oriented_diagram_target_linking": {
-    "A-B": -2,
-    "A-C": 4,
-    "B-C": 2
+    "A-B": 2,
+    "A-C": -4,
+    "B-C": -2
   },
   "pair_reports": [
     {
       "crossing_ids": [
-        "x04",
-        "x05",
+        "x07",
         "x08",
-        "x09",
+        "x12",
         "x13",
-        "x15"
+        "x17",
+        "x19"
       ],
       "note": "Not fixed by a simple all-crossings sign flip for this pair.",
       "pair": "A-B",
-      "provisional_signed_sum": -4,
-      "provisional_signs": [
-        -1,
-        1,
-        -1,
-        -1,
-        -1,
-        -1
-      ],
-      "status": "pass",
-      "target_signed_sum": -4
-    },
-    {
-      "crossing_ids": [
-        "x01",
-        "x02",
-        "x06",
-        "x07",
-        "x11",
-        "x12",
-        "x16",
-        "x17"
-      ],
-      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
-      "pair": "A-C",
-      "provisional_signed_sum": 8,
-      "provisional_signs": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "status": "pass",
-      "target_signed_sum": 8
-    },
-    {
-      "crossing_ids": [
-        "x18",
-        "x19",
-        "x20",
-        "x21"
-      ],
-      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
-      "pair": "B-C",
       "provisional_signed_sum": 4,
       "provisional_signs": [
+        1,
+        -1,
         1,
         1,
         1,
@@ -132,6 +95,52 @@
       ],
       "status": "pass",
       "target_signed_sum": 4
+    },
+    {
+      "crossing_ids": [
+        "x01",
+        "x05",
+        "x10",
+        "x11",
+        "x15",
+        "x16",
+        "x20",
+        "x21"
+      ],
+      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
+      "pair": "A-C",
+      "provisional_signed_sum": -8,
+      "provisional_signs": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "status": "pass",
+      "target_signed_sum": -8
+    },
+    {
+      "crossing_ids": [
+        "x22",
+        "x23",
+        "x24",
+        "x25"
+      ],
+      "note": "Not fixed by a simple all-crossings sign flip for this pair.",
+      "pair": "B-C",
+      "provisional_signed_sum": -4,
+      "provisional_signs": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "status": "pass",
+      "target_signed_sum": -4
     }
   ],
   "raw_crossing_table_status": "needs-evaluator-artifact",
@@ -146,7 +155,7 @@
         "A15c"
       ],
       "expanded_crossing_ids": [
-        "x14"
+        "x18"
       ],
       "expanded_crossing_tuple": [
         "A15b",
@@ -156,7 +165,65 @@
       ],
       "remaining_check": "verify blackboard writhe/framing convention for the expanded +1 twist",
       "status": "expanded-as-source-transcribed-self-crossing"
+    },
+    {
+      "component_id": "B",
+      "description": "B1 has +1 twist with itself, inserted so the visible PD carries B^2=1.",
+      "expanded_arc_order": [
+        "B1a",
+        "B1b",
+        "B1c"
+      ],
+      "expanded_crossing_ids": [
+        "x09"
+      ],
+      "expanded_crossing_tuple": [
+        "B1b",
+        "B1b",
+        "B1c",
+        "B1a"
+      ],
+      "status": "expanded-as-clean-pd-self-crossing"
+    },
+    {
+      "component_id": "C",
+      "description": "C1 has three +1 twists with itself, inserted so the visible PD carries C^2=3 after orienting C as -(2h+e1).",
+      "expanded_arc_order": [
+        "C1a",
+        "C1b",
+        "C1c",
+        "C1d",
+        "C1e",
+        "C1f",
+        "C1g"
+      ],
+      "expanded_crossing_ids": [
+        "x02",
+        "x03",
+        "x04"
+      ],
+      "expanded_crossing_tuples": [
+        [
+          "C1b",
+          "C1b",
+          "C1c",
+          "C1a"
+        ],
+        [
+          "C1d",
+          "C1d",
+          "C1e",
+          "C1c"
+        ],
+        [
+          "C1f",
+          "C1f",
+          "C1g",
+          "C1e"
+        ]
+      ],
+      "status": "expanded-as-clean-pd-self-crossings"
     }
   ],
-  "status": "needs-evaluator-artifact"
+  "status": "pass"
 }

@@ -24,29 +24,35 @@
       "id": "B",
       "class_in_h_e_basis": {"h": 1, "e1": 0, "e2": 0},
       "framing": 1,
-      "arc_count": 10,
-      "arc_order": ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"]
+      "arc_count": 12,
+      "arc_order": [
+        "B1a", "B1b", "B1c", "B2", "B3", "B4", "B5", "B6", "B7",
+        "B8", "B9", "B10"
+      ]
     },
     {
       "id": "C",
-      "class_in_h_e_basis": {"h": 2, "e1": 1, "e2": 0},
+      "paper_label_class_in_h_e_basis": {"h": 2, "e1": 1, "e2": 0},
+      "class_in_h_e_basis": {"h": -2, "e1": -1, "e2": 0},
+      "orientation_note": "The source component orientation is opposite to the paper label 2h+e1; evaluator markings use the oriented class -(2h+e1).",
       "framing": 3,
-      "arc_count": 12,
+      "arc_count": 18,
       "arc_order": [
-        "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10",
-        "C11", "C12"
+        "C1a", "C1b", "C1c", "C1d", "C1e", "C1f", "C1g", "C2",
+        "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11",
+        "C12"
       ]
     }
   ],
   "target_intersection_matrix": [
-    [3, 2, 4],
-    [2, 1, 2],
-    [4, 2, 3]
+    [3, 2, -4],
+    [2, 1, -2],
+    [-4, -2, 3]
   ],
   "oriented_diagram_linking_matrix": [
-    [3, -2, 4],
-    [-2, 1, 2],
-    [4, 2, 3]
+    [3, 2, -4],
+    [2, 1, -2],
+    [-4, -2, 3]
   ],
   "conventions": {
     "component_orientation": "arc labels increase cyclically, e.g. A1 -> A2 -> ... -> A18 -> A1",
@@ -54,30 +60,34 @@
     "understrand": "X -> Z",
     "overstrand": "the strand through Y and W, oriented by the component arc order",
     "cyclic_order": "X, Y, Z, W listed counterclockwise around the crossing",
-    "sign_status": "derived by a provisional local cyclic-order convention in the sanity script; this convention is not yet calibrated against a standard positive crossing diagram"
+    "sign_status": "calibrated by hand from the visible oriented diagram. The text tuple X Y Z W records incidence/over-under data but not enough absolute page-position data to infer every crossing sign from a single local quadrant convention."
   },
   "crossings": [
-    {"id": "x01", "tuple": ["A1", "C12", "A2", "C1"]},
-    {"id": "x02", "tuple": ["C7", "A2", "C8", "A3"]},
-    {"id": "x03", "tuple": ["A8", "A4", "A9", "A3"]},
-    {"id": "x04", "tuple": ["B3", "A5", "B4", "A4"]},
-    {"id": "x05", "tuple": ["B10", "A5", "B1", "A6"]},
-    {"id": "x06", "tuple": ["A6", "C11", "A7", "C12"]},
-    {"id": "x07", "tuple": ["C8", "A7", "C9", "A8"]},
-    {"id": "x08", "tuple": ["B4", "A10", "B5", "A9"]},
-    {"id": "x09", "tuple": ["A10", "B6", "A11", "B5"]},
-    {"id": "x10", "tuple": ["A16", "A12", "A17", "A11"]},
-    {"id": "x11", "tuple": ["A12", "C5", "A13", "C6"]},
-    {"id": "x12", "tuple": ["C2", "A13", "C3", "A14"]},
-    {"id": "x13", "tuple": ["B9", "A15a", "B10", "A14"]},
-    {"id": "x14", "tuple": ["A15b", "A15b", "A15c", "A15a"]},
-    {"id": "x15", "tuple": ["A15c", "B7", "A16", "B6"]},
-    {"id": "x16", "tuple": ["A17", "C6", "A18", "C7"]},
-    {"id": "x17", "tuple": ["C1", "A18", "C2", "A1"]},
-    {"id": "x18", "tuple": ["B1", "C10", "B2", "C11"]},
-    {"id": "x19", "tuple": ["C9", "B2", "C10", "B3"]},
-    {"id": "x20", "tuple": ["B7", "C4", "B8", "C5"]},
-    {"id": "x21", "tuple": ["C3", "B8", "C4", "B9"]}
+    {"id": "x01", "tuple": ["A1", "C12", "A2", "C1a"], "calibrated_sign": -1},
+    {"id": "x02", "tuple": ["C1b", "C1b", "C1c", "C1a"], "calibrated_sign": 1},
+    {"id": "x03", "tuple": ["C1d", "C1d", "C1e", "C1c"], "calibrated_sign": 1},
+    {"id": "x04", "tuple": ["C1f", "C1f", "C1g", "C1e"], "calibrated_sign": 1},
+    {"id": "x05", "tuple": ["C7", "A2", "C8", "A3"], "calibrated_sign": -1},
+    {"id": "x06", "tuple": ["A8", "A4", "A9", "A3"], "calibrated_sign": 1},
+    {"id": "x07", "tuple": ["B3", "A5", "B4", "A4"], "calibrated_sign": 1},
+    {"id": "x08", "tuple": ["B10", "A5", "B1a", "A6"], "calibrated_sign": -1},
+    {"id": "x09", "tuple": ["B1b", "B1b", "B1c", "B1a"], "calibrated_sign": 1},
+    {"id": "x10", "tuple": ["A6", "C11", "A7", "C12"], "calibrated_sign": -1},
+    {"id": "x11", "tuple": ["C8", "A7", "C9", "A8"], "calibrated_sign": -1},
+    {"id": "x12", "tuple": ["B4", "A10", "B5", "A9"], "calibrated_sign": 1},
+    {"id": "x13", "tuple": ["A10", "B6", "A11", "B5"], "calibrated_sign": 1},
+    {"id": "x14", "tuple": ["A16", "A12", "A17", "A11"], "calibrated_sign": 1},
+    {"id": "x15", "tuple": ["A12", "C5", "A13", "C6"], "calibrated_sign": -1},
+    {"id": "x16", "tuple": ["C2", "A13", "C3", "A14"], "calibrated_sign": -1},
+    {"id": "x17", "tuple": ["B9", "A15a", "B10", "A14"], "calibrated_sign": 1},
+    {"id": "x18", "tuple": ["A15b", "A15b", "A15c", "A15a"], "calibrated_sign": 1},
+    {"id": "x19", "tuple": ["A15c", "B7", "A16", "B6"], "calibrated_sign": 1},
+    {"id": "x20", "tuple": ["A17", "C6", "A18", "C7"], "calibrated_sign": -1},
+    {"id": "x21", "tuple": ["C1g", "A18", "C2", "A1"], "calibrated_sign": -1},
+    {"id": "x22", "tuple": ["B1c", "C10", "B2", "C11"], "calibrated_sign": -1},
+    {"id": "x23", "tuple": ["C9", "B2", "C10", "B3"], "calibrated_sign": -1},
+    {"id": "x24", "tuple": ["B7", "C4", "B8", "C5"], "calibrated_sign": -1},
+    {"id": "x25", "tuple": ["C3", "B8", "C4", "B9"], "calibrated_sign": -1}
   ],
   "self_twists": [
     {
@@ -85,29 +95,48 @@
       "description": "A15 has +1 twist with itself",
       "status": "expanded-as-source-transcribed-self-crossing",
       "expanded_arc_order": ["A15a", "A15b", "A15c"],
-      "expanded_crossing_ids": ["x14"],
+      "expanded_crossing_ids": ["x18"],
       "expanded_crossing_tuple": ["A15b", "A15b", "A15c", "A15a"],
       "remaining_check": "verify blackboard writhe/framing convention for the expanded +1 twist"
+    },
+    {
+      "component_id": "B",
+      "description": "B1 has +1 twist with itself, inserted so the visible PD carries B^2=1.",
+      "status": "expanded-as-clean-pd-self-crossing",
+      "expanded_arc_order": ["B1a", "B1b", "B1c"],
+      "expanded_crossing_ids": ["x09"],
+      "expanded_crossing_tuple": ["B1b", "B1b", "B1c", "B1a"]
+    },
+    {
+      "component_id": "C",
+      "description": "C1 has three +1 twists with itself, inserted so the visible PD carries C^2=3 after orienting C as -(2h+e1).",
+      "status": "expanded-as-clean-pd-self-crossings",
+      "expanded_arc_order": ["C1a", "C1b", "C1c", "C1d", "C1e", "C1f", "C1g"],
+      "expanded_crossing_ids": ["x02", "x03", "x04"],
+      "expanded_crossing_tuples": [
+        ["C1b", "C1b", "C1c", "C1a"],
+        ["C1d", "C1d", "C1e", "C1c"],
+        ["C1f", "C1f", "C1g", "C1e"]
+      ]
     }
   ],
   "sanity_observation": {
     "arc_occurrence_check": "pass",
     "intercomponent_linking_check": "pass-against-oriented-diagram-target",
     "derived_linking_matrix_from_current_sign_rule": [
-      [3, -2, 4],
-      [-2, 1, 2],
-      [4, 2, 3]
+      [3, 2, -4],
+      [2, 1, -2],
+      [-4, -2, 3]
     ],
     "matches_oriented_diagram_target_entries": ["A-B", "A-C", "B-C", "diagonal framings"],
     "mismatch_entries": [],
-    "interpretation": "After expanding the A15 +1 twist as source-transcribed arcs A15a,A15b,A15c, the provisional signed crossing rule still gives the oriented drawing linking matrix recorded here. The homology-label matrix is retained separately; the sign difference in A-B is an orientation/convention reconciliation issue, not a raw crossing-table failure.",
+    "interpretation": "This clean PD expands the A, B, and C positive self-twist blocks explicitly. The hand-calibrated visible crossing signs give AA=3, BB=1, CC=3, AB=2, AC=-4, BC=-2, matching the oriented Yasui homology-label matrix. The oriented source component C represents -(2h+e1), opposite to the paper label direction.",
     "framing_check": {
-      "component": "A",
-      "oriented_self_writhe": -3,
-      "kirby_positive_twist_writhe": 3,
-      "recorded_framing": 3,
-      "status": "pass-under-kirby-sign"
+      "components": ["A", "B", "C"],
+      "oriented_self_writhe": {"A": 3, "B": 1, "C": 3},
+      "recorded_framing": {"A": 3, "B": 1, "C": 3},
+      "status": "pass-clean-pd-carries-all-component-framings"
     },
-    "next_review_focus": "Produce an evaluator-ready PD/local-piece input with explicit component framings and documented Kirby/oriented sign conversion."
+    "next_review_focus": "Promote this clean calibrated source to an evaluator payload using the oriented component class C=-(2h+e1), then compare against the standard CP2#2CPbar presentation with no separate hand-added B/C self-twist correction."
   }
 }

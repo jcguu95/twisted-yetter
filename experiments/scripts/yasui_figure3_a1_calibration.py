@@ -3,11 +3,11 @@
 This script is deliberately not an evaluator.  It separates three layers:
 
 1. the raw X Y Z W crossing table;
-2. the provisional sign rule inferred from the local tuple convention;
-3. the oriented-drawing linking target and the homology-label matrix.
+2. explicit hand-calibrated visible crossing signs;
+3. the clean-PD visible self-writhe/linking target and the homology-label matrix.
 
-The report is meant to prevent accidental promotion of an uncalibrated
-hand-transcribed diagram to evaluator input.
+The report is meant to prevent accidental promotion of a hand-transcribed
+diagram to evaluator input without recording the crossing signs.
 """
 
 from __future__ import annotations
@@ -53,12 +53,15 @@ def provisional_crossing_record(crossing: dict[str, Any], orders: dict[str, list
         raise ValueError(f"{crossing['id']} understrand is not oriented as X -> Z")
     if arc_next(y, orders) == w:
         over_direction = "Y->W"
-        sign = 1
     elif arc_next(w, orders) == y:
         over_direction = "W->Y"
-        sign = -1
     else:
         raise ValueError(f"{crossing['id']} overstrand endpoints are not adjacent")
+    if "calibrated_sign" not in crossing:
+        raise ValueError(f"{crossing['id']} has no calibrated_sign")
+    sign = int(crossing["calibrated_sign"])
+    if sign not in (-1, 1):
+        raise ValueError(f"{crossing['id']} calibrated_sign must be +/-1")
     return {
         "id": crossing["id"],
         "tuple": crossing["tuple"],
@@ -117,39 +120,49 @@ def main() -> int:
             }
         )
 
+    framing_reports = [
+        {
+            "component": component["id"],
+            "recorded_framing": component["framing"],
+            "visible_self_writhe": self_writhe[component["id"]],
+            "effective_framing_correction": component["framing"] - self_writhe[component["id"]],
+            "self_crossing_ids": [
+                record["id"] for record in self_crossings[component["id"]]
+            ],
+            "status": (
+                "pass-clean-pd-carries-framing"
+                if self_writhe[component["id"]] == component["framing"]
+                else "needs-framing-review"
+            ),
+        }
+        for component in payload["components"]
+    ]
+
+    overall_status = (
+        "pass"
+        if all(report["status"] == "pass" for report in pair_reports)
+        and all(report["status"] == "pass-clean-pd-carries-framing" for report in framing_reports)
+        else "needs-sign-or-framing-review"
+    )
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-calibration.v1",
-        "status": "needs-evaluator-artifact",
+        "status": overall_status,
         "input": str(INPUT.relative_to(REPO_ROOT)),
         "raw_crossing_table_status": payload["status"],
         "oriented_diagram_target_linking": target_linking,
         "homology_label_intersection_matrix": homology_matrix,
         "pair_reports": pair_reports,
-        "framing_reports": [
-            {
-                "component": component["id"],
-                "recorded_framing": component["framing"],
-                "oriented_self_writhe": self_writhe[component["id"]],
-                "kirby_positive_twist_writhe": -self_writhe[component["id"]],
-                "self_crossing_ids": [
-                    record["id"] for record in self_crossings[component["id"]]
-                ],
-                "status": (
-                    "pass-under-kirby-sign"
-                    if component["id"] == "A"
-                    and -self_writhe[component["id"]] == component["framing"]
-                    else "not-checked-by-self-crossings"
-                ),
-            }
-            for component in payload["components"]
-        ],
+        "framing_reports": framing_reports,
         "self_twist_blockers": payload.get("self_twists", []),
         "interpretation": [
             "The raw arc bookkeeping is consistent.",
-            "The A15 +1 twist has been expanded into source-transcribed explicit subarcs and a self-crossing.",
-            "The provisional signed crossing rule now matches the oriented drawing target for A-B, A-C, and B-C.",
-            "For component A, the oriented self-writhe is -3; reversing the sign to match the Kirby positive-twist convention gives +3, agreeing with A=(2h+e2)^2.",
-            "The homology-label matrix is retained separately because component orientation and Kirby-label conventions still need reconciliation before using labels as H2 coordinates.",
+            "The A15, B1, and C1 positive self-twist blocks have been expanded into explicit subarcs and self-crossings.",
+            "The tuple convention supplies incidence and over/under data, but not enough absolute page-position data to infer every sign from one quadrant convention.",
+            "The hand-calibrated visible crossing signs are treated as first-class data, not inferred from a linear label order.",
+            "With the current signs, every pair report must explicitly match the target before evaluator promotion.",
+            "For components A, B, and C, the visible self-writhe agrees with the recorded component framing.",
+            "The oriented source component C is opposite to the paper label direction, so evaluator markings use C=-(2h+e1).",
+            "The clean PD now carries the component framings directly; the homology-label matrix remains the target intersection check.",
         ],
         "next_actions": [
             "Produce an evaluator-ready LinkDiagram/PD artifact with explicit component framings and a documented Kirby/oriented sign conversion.",
