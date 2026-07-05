@@ -2,6 +2,7 @@ import json
 
 import pytest
 
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.su2_level2 import (
     GLOBAL_DIMENSION,
     LINK_DATA_CLAIM_LEVELS,
@@ -116,7 +117,7 @@ def test_omega_theta_convention_cites_ledger_and_stays_source_needed() -> None:
     assert OMEGA_THETA_CONVENTION["status"] == "source-needed/working"
     assert (
         OMEGA_THETA_CONVENTION["ledger"]
-        == "wiki/understandings/formula-conventions.org"
+        == legacy_prose_member_ref("wiki/understandings/formula-conventions.org")
     )
     assert "SOURCE NEEDED" in OMEGA_THETA_CONVENTION["reason_numeric_coefficients_absent"]
 

@@ -1,0 +1,66 @@
+{
+  "created_at": "2026-07-05T19:48:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-legacy-prose-archive",
+  "parents": [],
+  "payload": {
+    "allowed_loose_prose_paths": [
+      "AGENTS.md",
+      "ctl-dogfood/README.org",
+      "experiments/README.org",
+      "experiments/sage/README.org"
+    ],
+    "archive": {
+      "archive_member_paths_are_repo_relative": true,
+      "archive_path": "legacy-archives/prose-corpus-2026-07-05.tar",
+      "archive_sha256": "1933c6b9976fc608371b3aeb401e323bfc13afe709ca4f81454dce8df4e07ec4",
+      "file_count": 75,
+      "manifest_path": "legacy-archives/prose-corpus-2026-07-05.manifest.json",
+      "manifest_sha256": "8943281161f9058fd9496963f513aec79ea5ced812491aa787f59d8dc4a0cc26"
+    },
+    "archived_role_counts": {
+      "legacy-environment-note": 1,
+      "legacy-lab-note": 18,
+      "legacy-reference": 9,
+      "legacy-research-plan": 1,
+      "legacy-roadmap": 3,
+      "legacy-run-transcript": 3,
+      "legacy-understanding": 39,
+      "legacy-wiki-entry": 1
+    },
+    "created_at": "2026-07-05T19:47:30Z",
+    "created_by": "actor:codex",
+    "next_step": {
+      "action": "remove archived loose prose files after this objective note is admitted",
+      "removal_command": "python ctl-dogfood/scripts/archive_legacy_prose.py --remove-archived-files",
+      "safety_condition": "script refuses to remove a file if its current sha256 differs from the manifest entry"
+    },
+    "note_id": "objective-note-2026-07-05-legacy-prose-archive",
+    "repo_snapshot": {
+      "commit": "d31216e77226712fac12a9489c124029889f27f0",
+      "dirty_status": "dirty-migration-in-progress"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This is faithful byte preservation by archive and manifest hashes. It is not a semantic conversion, summary, theorem claim, or source audit.",
+      "normative_policy": "Archived prose is historical material only. Future experiment history, lab notes, references, roadmaps, and working understandings must be JSON/CTL objective artifacts.",
+      "purpose": "Preserve legacy human prose files before removing non-whitelisted prose from active repo paths."
+    },
+    "status": "preservation-checkpoint",
+    "title": "Faithful archive of legacy prose experiment notes",
+    "verification": {
+      "archive_generation_command": "python ctl-dogfood/scripts/archive_legacy_prose.py",
+      "archive_generation_status": "pass",
+      "archive_member_count_check": "75 members",
+      "archive_member_hash_check": "pass during archive_legacy_prose.py verify_archive",
+      "prose_policy_enforcement": "ctl-dogfood/scripts/verify.py now rejects loose non-whitelisted prose files"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

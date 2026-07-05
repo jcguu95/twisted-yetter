@@ -23,6 +23,7 @@ from twisted_yetter.decorated_kirby_gate import (
     DECORATED_KIRBY_GATE_SCHEMA,
     decorated_kirby_gate_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import (
     ORDINARY_SURGERY_GATE_SCHEMA,
     ordinary_surgery_gate_certificate,
@@ -34,10 +35,14 @@ from twisted_yetter.toy_closed_suite import (
 )
 
 EXOTIC_INPUT_SCOUT_SCHEMA: Final = "twisted-yetter.exotic-input-scout.v1"
-EXOTIC_INPUT_SCOUT_NOTE: Final = "wiki/understandings/exotic-input-scout.org"
-EXOTIC_INPUT_SCOUT_ROADMAP: Final = "wiki/roadmaps/exotic-input-scout.org"
+EXOTIC_INPUT_SCOUT_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/exotic-input-scout.org"
+)
+EXOTIC_INPUT_SCOUT_ROADMAP: Final = legacy_prose_member_ref(
+    "wiki/roadmaps/exotic-input-scout.org"
+)
 EXOTIC_INPUT_REFERENCE_STUB: Final = (
-    "wiki/references/exotic-input-candidates-2026-06-26.org"
+    legacy_prose_member_ref("wiki/references/exotic-input-candidates-2026-06-26.org")
 )
 EXOTIC_INPUT_SCOUT_ARTIFACT: Final = (
     "experiments/results/exotic-input-scout/n65-exotic-input-scout.json"

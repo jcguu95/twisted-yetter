@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 from typing import Any
 
@@ -14,8 +16,29 @@ REPO_ROOT = DOGFOOD_ROOT.parent
 CTL_META_ROOT = Path(os.environ.get("CTL_META_ROOT", REPO_ROOT.parent / "ctl-meta")).resolve()
 KERNEL_ROOT = CTL_META_ROOT / "meta" / "ctl-kernel"
 sys.path.insert(0, str(KERNEL_ROOT / "reference"))
+sys.path.insert(0, str(DOGFOOD_ROOT / "scripts"))
 
 import ctl_ref  # noqa: E402
+from prose_policy import (  # noqa: E402
+    ALLOWED_LEGACY_ARCHIVE_PATHS,
+    ARCHIVE_ID as LEGACY_ARCHIVE_ID,
+    PROSE_SUFFIXES,
+    archive_member_refs_in_string,
+    archive_path,
+    is_allowed_loose_prose,
+    is_under_generated_cache,
+    is_under_git_dir,
+    is_under_legacy_archives,
+    manifest_path,
+    raw_legacy_refs_in_string,
+    repo_path,
+    validate_archive_member_path,
+)
+
+
+LEGACY_ARCHIVE_DIR = REPO_ROOT / "legacy-archives"
+LEGACY_ARCHIVE_PATH = archive_path(REPO_ROOT)
+LEGACY_ARCHIVE_MANIFEST_PATH = manifest_path(REPO_ROOT)
 
 
 def run_git(root: Path, args: list[str]) -> str:
@@ -24,6 +47,14 @@ def run_git(root: Path, args: list[str]) -> str:
 
 def load_json(path: Path) -> Any:
     return ctl_ref.load_json_strict(path)
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def file_sha256(path: Path) -> str:
+    return sha256_bytes(path.read_bytes())
 
 
 def load_store() -> ctl_ref.Store:
@@ -79,7 +110,7 @@ def verify_admission_fast_forward(store: ctl_ref.Store, manifests: list[dict[str
             continue
         logical_id = manifest.get("logical_id")
         objects = manifest.get("objects", {})
-        new_cid = objects.get("graph_claim")
+        new_cid = objects.get("graph_claim") or objects.get("claim")
         parent_root_cid = manifest.get("parent_root_cid")
         if logical_id is None or new_cid is None or parent_root_cid is None:
             continue
@@ -148,6 +179,173 @@ def verify_active_decision_graphs(store: ctl_ref.Store, state: dict[str, Any]) -
         verify_decision_graph_payload(rev["payload"])
 
 
+def verify_manifest_archive_member_path(member_path: str) -> None:
+    try:
+        validate_archive_member_path(member_path)
+    except ValueError as error:
+        ctl_ref.die_unless(False, str(error))
+
+
+def verify_legacy_archive_files() -> None:
+    ctl_ref.die_unless(LEGACY_ARCHIVE_DIR.exists(), "legacy archive directory is missing")
+    seen = []
+    for path in sorted(LEGACY_ARCHIVE_DIR.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = repo_path(REPO_ROOT, path)
+        seen.append(rel)
+    unexpected = sorted(set(seen) - ALLOWED_LEGACY_ARCHIVE_PATHS)
+    ctl_ref.die_unless(
+        not unexpected,
+        "legacy-archives may contain only the approved tar and manifest files: " + ", ".join(unexpected),
+    )
+    missing = sorted(ALLOWED_LEGACY_ARCHIVE_PATHS - set(seen))
+    ctl_ref.die_unless(not missing, "legacy archive approved files missing: " + ", ".join(missing))
+
+    manifest = load_json(LEGACY_ARCHIVE_MANIFEST_PATH)
+    ctl_ref.die_unless(
+        manifest.get("schema") == "twisted-yetter/legacy-prose-archive-manifest/1",
+        "bad legacy prose archive manifest schema",
+    )
+    ctl_ref.die_unless(manifest.get("archive_id") == LEGACY_ARCHIVE_ID, "legacy prose archive id mismatch")
+    ctl_ref.die_unless(
+        manifest.get("archive_path") == LEGACY_ARCHIVE_PATH.relative_to(REPO_ROOT).as_posix(),
+        "legacy prose archive path mismatch",
+    )
+    ctl_ref.die_unless(
+        manifest.get("manifest_path") == LEGACY_ARCHIVE_MANIFEST_PATH.relative_to(REPO_ROOT).as_posix(),
+        "legacy prose manifest path mismatch",
+    )
+    ctl_ref.die_unless(
+        file_sha256(LEGACY_ARCHIVE_PATH) == manifest.get("archive_sha256"),
+        "legacy prose archive sha256 mismatch",
+    )
+    files = manifest.get("files")
+    ctl_ref.die_unless(isinstance(files, list), "legacy prose manifest files must be array")
+    ctl_ref.die_unless(manifest.get("file_count") == len(files), "legacy prose manifest file_count mismatch")
+
+    expected = {}
+    for item in files:
+        ctl_ref.die_unless(isinstance(item, dict), "legacy prose manifest file item must be object")
+        member_path = item.get("archive_member_path")
+        original_path = item.get("original_repo_path")
+        verify_manifest_archive_member_path(member_path)
+        verify_manifest_archive_member_path(original_path)
+        ctl_ref.die_unless(member_path == original_path, "legacy prose archive member/original path mismatch")
+        ctl_ref.die_unless(member_path not in expected, f"duplicate legacy archive member: {member_path}")
+        ctl_ref.die_unless(isinstance(item.get("sha256"), str), f"missing legacy archive sha256: {member_path}")
+        ctl_ref.die_unless(isinstance(item.get("size_bytes"), int), f"missing legacy archive size: {member_path}")
+        expected[member_path] = item
+
+    with tarfile.open(LEGACY_ARCHIVE_PATH, "r") as archive:
+        members = sorted(
+            (member for member in archive.getmembers() if member.isfile()),
+            key=lambda member: member.name,
+        )
+        names = [member.name for member in members]
+        ctl_ref.die_unless(names == sorted(expected), "legacy archive member list does not match manifest")
+        for member in members:
+            verify_manifest_archive_member_path(member.name)
+            ctl_ref.die_unless(member.mode & 0o222 == 0, f"legacy archive member is writable: {member.name}")
+            extracted = archive.extractfile(member)
+            ctl_ref.die_unless(extracted is not None, f"could not read legacy archive member: {member.name}")
+            data = extracted.read()
+            item = expected[member.name]
+            ctl_ref.die_unless(sha256_bytes(data) == item["sha256"], f"legacy archive member hash mismatch: {member.name}")
+            ctl_ref.die_unless(len(data) == item["size_bytes"], f"legacy archive member size mismatch: {member.name}")
+
+
+def iter_json_strings(value: Any) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list):
+        out: list[str] = []
+        for item in value:
+            out.extend(iter_json_strings(item))
+        return out
+    if isinstance(value, dict):
+        out = []
+        for item in value.values():
+            out.extend(iter_json_strings(item))
+        return out
+    return []
+
+
+def verify_active_json_has_no_raw_legacy_prose_locators() -> None:
+    manifest = load_json(LEGACY_ARCHIVE_MANIFEST_PATH)
+    manifest_files = manifest.get("files")
+    ctl_ref.die_unless(isinstance(manifest_files, list), "legacy prose manifest files must be array")
+    archive_members = {
+        validate_archive_member_path(item.get("archive_member_path"))
+        for item in manifest_files
+        if isinstance(item, dict)
+    }
+    violations = []
+    for root in (REPO_ROOT / "experiments" / "inputs", REPO_ROOT / "experiments" / "results"):
+        if not root.exists():
+            continue
+        for path in sorted(root.rglob("*.json")):
+            payload = json.loads(path.read_text())
+            raw_locators = sorted(
+                {
+                    raw_ref
+                    for item in iter_json_strings(payload)
+                    for raw_ref in raw_legacy_refs_in_string(item)
+                }
+            )
+            archive_refs = sorted(
+                {
+                    member_ref
+                    for item in iter_json_strings(payload)
+                    for member_ref in archive_member_refs_in_string(item)
+                }
+            )
+            missing_archive_refs = [
+                member_ref for member_ref in archive_refs if member_ref not in archive_members
+            ]
+            if raw_locators or missing_archive_refs:
+                violations.append(
+                    {
+                        "path": repo_path(REPO_ROOT, path),
+                        "missing_archive_refs": missing_archive_refs,
+                        "raw_locators": raw_locators,
+                    }
+                )
+    ctl_ref.die_unless(
+        not violations,
+        "active experiment JSON contains raw legacy prose locators or archive refs "
+        "that are missing from the legacy prose manifest; use "
+        "legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=... "
+        "with an existing manifest member: "
+        + json.dumps(violations, sort_keys=True),
+    )
+
+
+def verify_no_unapproved_prose_files() -> None:
+    violations = []
+    for path in sorted(REPO_ROOT.rglob("*")):
+        if not path.is_file():
+            continue
+        if is_under_git_dir(REPO_ROOT, path) or is_under_generated_cache(REPO_ROOT, path):
+            continue
+        if path.suffix.lower() not in PROSE_SUFFIXES:
+            continue
+        rel = repo_path(REPO_ROOT, path)
+        if is_under_legacy_archives(REPO_ROOT, path) and rel in ALLOWED_LEGACY_ARCHIVE_PATHS:
+            continue
+        if is_allowed_loose_prose(rel):
+            continue
+        violations.append(rel)
+    if violations:
+        message = (
+            "unapproved prose files found; experiment history, lab notes, wiki, "
+            "references, roadmaps, and run transcripts must be CTL/JSON artifacts "
+            "or legacy archive members, not loose prose files: "
+            + ", ".join(violations)
+        )
+        ctl_ref.die_unless(False, message)
+
+
 def main() -> int:
     store = load_store()
     ref = load_json(DOGFOOD_ROOT / "refs" / "main.json")
@@ -187,6 +385,9 @@ def main() -> int:
     verify_manifest_reachability(store, manifests, ref)
     verify_admission_fast_forward(store, manifests)
     verify_active_decision_graphs(store, state)
+    verify_legacy_archive_files()
+    verify_active_json_has_no_raw_legacy_prose_locators()
+    verify_no_unapproved_prose_files()
     ctl_ref.die_unless(bootstrap["genesis_root_cid"] == ref["genesis_root_cid"], "manifest/ref genesis mismatch")
     current_manifests = [manifest for manifest in manifests if manifest.get("current_root_cid") == ref["root_cid"]]
     ctl_ref.die_unless(current_manifests, "no manifest pins current ref root")

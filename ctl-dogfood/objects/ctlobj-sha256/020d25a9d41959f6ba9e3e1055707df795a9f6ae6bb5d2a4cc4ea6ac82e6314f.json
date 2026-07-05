@@ -1,0 +1,214 @@
+{
+  "created_at": "2026-07-05T19:50:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-pd-gauss-braid-evaluator-inventory",
+  "parents": [
+    "ctlobj-sha256:0cf8cd67819b7b4ddf7a489ada0df7e9e8b62ec2059414667e7c69b95cdafabd"
+  ],
+  "payload": {
+    "coverage_summary": {
+      "akbulut_e1": "partial only: SU(2)_2 untwisted baseline, SU(2)_2 sampled twists, and SU(2)_3 twist-only-on-X artifact are present; no full SU(2)_4/SU(2)_6 all-alpha gate is asserted.",
+      "general_bfc_fr_evaluator": "not found as a complete arbitrary braided fusion category evaluator that only takes F and R symbols.",
+      "yasui_a1": "R1-normalized SU(2)_2, SU(2)_3, SU(2)_4, SU(2)_6 all-alpha comparison artifacts are present and pass under current saved artifacts.",
+      "yasui_a3": "SU(2)_2, SU(2)_3, SU(2)_4, SU(2)_6 all-alpha comparison artifacts are present and pass under current saved artifacts."
+    },
+    "created_at": "2026-07-05T19:34:45Z",
+    "created_by": "actor:codex",
+    "evaluators": [
+      {
+        "evaluator_id": "su2k-fusion-braid-evaluator",
+        "levels_observed_in_artifacts": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "not_scope": "not a general planar tensor-graph parser and not a general arbitrary braided fusion category evaluator",
+        "repo_path": "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+        "scope": "SU(2)_k mixed-color braid-closure evaluator using fusion-path basis, q-6j F-symbols, and R-symbols",
+        "sha256": "f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed"
+      },
+      {
+        "evaluator_id": "su2-2-rf-generic-backend",
+        "not_scope": "the file explicitly states this is not a fully generic mixed-label F/R local tensor graph evaluator",
+        "repo_path": "experiments/sage/su2_2_rf_generic_backend.sage.py",
+        "scope": "SU(2)_2 generic left-associated fusion-path backend for arbitrary-length all-sigma strand sequences plus restricted mixed fixed-label/Omega support",
+        "sha256": "817d515461e7581ef7423af86b7c5091df9578ff68345d041e6c656def2d1105"
+      }
+    ],
+    "hand_entered_inputs": [
+      {
+        "case_id": "yasui-figure3-a1",
+        "format": "component arc orders plus XYZW crossing table with calibrated signs; treated by tests as hand-entered PD/crossing-table data",
+        "repo_path": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
+        "sha256": "15fcad557810acb4580db30665739ec86da9519639cb36b69b797a547d186937",
+        "source_confidence": "source-pointer-in-json; no local PDF/hash source record asserted by this note",
+        "source_pointer": {
+          "arxiv": "0807.0373v2",
+          "case": "a=1",
+          "figure": "Figure 3",
+          "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles"
+        }
+      },
+      {
+        "case_id": "yasui-figure3-a3",
+        "format": "component arc orders plus compressed XYZW crossing table with calibrated signs",
+        "repo_path": "experiments/inputs/yasui/figure3-a3-crossing-table.json",
+        "sha256": "cd472022810c49f79e26fc840290aebc002bf60343d63003ecb315a1dfe514aa",
+        "source_confidence": "source-pointer-in-json plus hand_transcription note; no local PDF/hash source record asserted by this note",
+        "source_pointer": {
+          "arxiv": "0807.0373v2",
+          "case": "a=3",
+          "figure": "Figure 3",
+          "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles"
+        }
+      },
+      {
+        "case_id": "akbulut-figure1-e1",
+        "format": "component arc orders plus XYZW crossing table",
+        "repo_path": "experiments/inputs/akbulut/figure1-e1-crossing-table.json",
+        "sha256": "a27dfcc68c4f196c11641eb2435368fba279ed5047e9b6186da203ec40acbe95",
+        "source_confidence": "source-pointer-in-json; wiki reference record is SOURCE NEEDED",
+        "source_pointer": {
+          "arxiv": "0805.1524",
+          "figure": "Figure 1",
+          "paper": "Selman Akbulut, The Dolgachev surface",
+          "target": "E(1) = CP2 # 9 CPbar2"
+        }
+      }
+    ],
+    "note_id": "objective-note-2026-07-05-pd-gauss-braid-evaluator-inventory",
+    "pd_to_gauss_to_braid_pipeline": [
+      {
+        "braid_word_length": 97,
+        "case_id": "yasui-figure3-a1-clean-pd",
+        "component_order_in_braid": [
+          "C",
+          "A",
+          "B"
+        ],
+        "conversion": "source-oriented-gauss-code -> Sage Link(...).braid()",
+        "framings_in_braid_order": [
+          3,
+          3,
+          1
+        ],
+        "n_strands": 12,
+        "repo_path": "experiments/results/yasui/figure3-a1-braid-payload-v1.json",
+        "sha256": "ac5eae89c092601491b919491c13651db6ef676fca139fcaed27bb38cb574ab8",
+        "status": "pass"
+      },
+      {
+        "braid_word_length": 30,
+        "case_id": "yasui-figure3-a1-r1-normalized",
+        "component_order_in_braid": [
+          "C",
+          "A",
+          "B"
+        ],
+        "conversion": "clean-PD -> explicit R1 curl removal -> source-oriented-gauss-code -> Sage Link(...).braid()",
+        "framings_in_braid_order": [
+          3,
+          3,
+          1
+        ],
+        "n_strands": 7,
+        "repo_path": "experiments/results/yasui/figure3-a1-r1-normalized-braid-payload-v1.json",
+        "sha256": "f96fb3836333429b89539269002eb9fc68672c5d09c55f63c4248997a3c10199",
+        "status": "pass"
+      },
+      {
+        "case_id": "yasui-figure3-a3",
+        "conversion": "crossing table -> source-oriented Gauss code -> Sage braid inside comparison generator",
+        "note": "No standalone a=3 braid-payload JSON was found; comparison artifacts carry source.braid_word and source.crossing_records.",
+        "repo_path": "experiments/results/yasui/figure3-a3-su2-2-all-alpha-chunked-comparison-v1.json",
+        "sha256": "a132d980468293218a69a2e3c4d3e61200fdfc7eb82128ecc2ae6ee47f5968bb",
+        "status": "pass"
+      },
+      {
+        "algorithm": "source XYZW -> Sage oriented Gauss code -> Sage braid -> SU2KBraidEvaluator",
+        "braid_word_length": 88,
+        "case_id": "akbulut-figure1-e1",
+        "component_count": 10,
+        "component_order_in_braid": [
+          "A",
+          "Y",
+          "H",
+          "G",
+          "F",
+          "E",
+          "D",
+          "C",
+          "B",
+          "X"
+        ],
+        "framings_in_braid_order": [
+          -2,
+          1,
+          -1,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          0
+        ],
+        "n_strands": 12,
+        "repo_path": "experiments/results/akbulut/figure1-e1-su2-2-untwisted-comparison-v1.json",
+        "sha256": "eab596b88b35e9d14a5d322ee26872567818e6f2c106b27f47ed1e3cebcd2798",
+        "status": "pass"
+      }
+    ],
+    "recommended_cleanup": {
+      "do_not_delete": "Do not delete the JSON input, result, or CTL object-store artifacts listed above.",
+      "safe_next_step": "Move or regenerate the listed org files as /tmp human projections after confirming no other active workflow depends on them."
+    },
+    "related_org_files_demoted_to_projection": [
+      {
+        "archive_manifest_path": "legacy-archives/prose-corpus-2026-07-05.manifest.json",
+        "archive_member_path": "wiki/lab-notes/2026-07-03-yasui-figure3-a1-input.org",
+        "archive_path": "legacy-archives/prose-corpus-2026-07-05.tar",
+        "role": "historical human-readable working note; contains older values and should not be normative"
+      },
+      {
+        "archive_manifest_path": "legacy-archives/prose-corpus-2026-07-05.manifest.json",
+        "archive_member_path": "wiki/lab-notes/2026-07-03-su2k-fusion-braid-evaluator.org",
+        "archive_path": "legacy-archives/prose-corpus-2026-07-05.tar",
+        "role": "historical evaluator development note; should not be normative"
+      },
+      {
+        "archive_manifest_path": "legacy-archives/prose-corpus-2026-07-05.manifest.json",
+        "archive_member_path": "wiki/lab-notes/2026-07-05-clean-su2-pd-extraction.org",
+        "archive_path": "legacy-archives/prose-corpus-2026-07-05.tar",
+        "role": "human-readable cleanup checkpoint; this CTL objective note supersedes it for the specific inventory question"
+      },
+      {
+        "archive_manifest_path": "legacy-archives/prose-corpus-2026-07-05.manifest.json",
+        "archive_member_path": "wiki/references/akbulut-dolgachev-surface.org",
+        "archive_path": "legacy-archives/prose-corpus-2026-07-05.tar",
+        "role": "SOURCE NEEDED reference stub; not certificate-level source"
+      }
+    ],
+    "repo_snapshot": {
+      "commit": "d31216e77226712fac12a9489c124029889f27f0",
+      "dirty_status": "clean-before-admission"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This note records artifact presence, paths, hashes, and claim boundaries. It does not prove source-paper correctness, diagram correctness, exotic detection, or closed 4-manifold invariance.",
+      "normative_source_policy": "Machine-readable JSON artifacts and CTL claims are normative. Human-readable org files listed here are projections or historical notes only and should not become a second source of truth.",
+      "path_policy": "All artifact locators in this objective note are repo-relative paths or archive-member paths; absolute host paths are intentionally omitted.",
+      "question": "Inventory the branch-local data for Yasui a=1, Yasui a=3, Akbulut E(1), the PD/crossing-table to Gauss to braid pipeline, SU(2)_k evaluators for k=2..6, and any general F/R-symbol evaluator."
+    },
+    "status": "objective-inventory",
+    "title": "PD, Gauss, braid, and evaluator inventory for Yasui/Akbulut inputs"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

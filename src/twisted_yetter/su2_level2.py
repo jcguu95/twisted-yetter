@@ -17,10 +17,17 @@ from fractions import Fraction
 from typing import Final
 
 from twisted_yetter.exact import ExactNumber, exact
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 
-FORMULA_LEDGER_REFERENCE: Final = "wiki/understandings/formula-conventions.org"
-RT_LINK_LEDGER_REFERENCE: Final = "wiki/understandings/rt-link-conventions.org"
-RT_LINK_SOURCE_REFERENCE: Final = "wiki/references/rt-or-kauffman-link-source.org"
+FORMULA_LEDGER_REFERENCE: Final = legacy_prose_member_ref(
+    "wiki/understandings/formula-conventions.org"
+)
+RT_LINK_LEDGER_REFERENCE: Final = legacy_prose_member_ref(
+    "wiki/understandings/rt-link-conventions.org"
+)
+RT_LINK_SOURCE_REFERENCE: Final = legacy_prose_member_ref(
+    "wiki/references/rt-or-kauffman-link-source.org"
+)
 SIMPLE_LABELS: Final[tuple[str, ...]] = ("0", "1", "2")
 
 

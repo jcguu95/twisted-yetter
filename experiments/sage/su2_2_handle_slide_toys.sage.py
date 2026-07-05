@@ -23,7 +23,7 @@ Each comparison checks:
 * the before-slide braid-closure evaluation;
 * the after-slide braid-closure evaluation;
 * the previously recorded expected value from
-  wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org.
+  legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org.
 
 If any value differs, the certificate status becomes fail and the script exits
 with a nonzero status.
@@ -75,7 +75,10 @@ def run_suite(oracle):
         "schema": "twisted-yetter.su2_2-handle-slide-toys.v1",
         "status": status,
         "oracle_script": str(ORACLE_PATH.relative_to(REPO_ROOT)),
-        "source_note": "wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org",
+        "source_note": (
+            "legacy-archives/prose-corpus-2026-07-05.manifest.json"
+            "#archive_member_path=wiki/lab-notes/2026-07-01-su2-2-twisted-kirby-tests.org"
+        ),
         "scope": (
             "mechanized SU(2)_2 checks for unknotted slides, trefoil one/two-slide "
             "examples from the prior note, a generated 2-strand knot slide family, "

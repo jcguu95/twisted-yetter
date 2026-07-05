@@ -24,6 +24,7 @@ from twisted_yetter.artifacts import (
 from twisted_yetter.exact import from_jsonable
 from twisted_yetter.finite_groups import TRIVIAL_GROUP, Z2_GROUP, FiniteAbelianGroup
 from twisted_yetter.h2_marking import h2_component_decoration_certificate
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.omega_a import omega_a_candidate_certificate
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
@@ -34,7 +35,9 @@ from twisted_yetter.provisional_formula_policy import (
 from twisted_yetter.su2_level2 import SIMPLE_LABELS, QuadraticSurd
 
 DECORATED_CORE_SCHEMA: Final = "twisted-yetter.decorated-core-input.v1"
-DECORATED_CORE_NOTE: Final = "wiki/understandings/twisted-decorated-core.org"
+DECORATED_CORE_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/twisted-decorated-core.org"
+)
 DECORATED_CORE_ARTIFACT: Final = (
     "experiments/results/twisted-decorated-core/n35-core-scaffold.json"
 )
@@ -148,7 +151,7 @@ def decorated_core_input_artifact(
             "entry_point": (
                 "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link"
             ),
-            "restricted_gate_ref": (
+            "restricted_gate_ref": legacy_prose_member_ref(
                 "wiki/understandings/colored-framed-link-evaluator-gate.org"
             ),
             "does_execute_link_evaluator": False,
@@ -365,7 +368,7 @@ def _link_evaluator_call_plan(
     return {
         "status": "planned-only",
         "entry_point": "twisted_yetter.su2_link_evaluator.evaluate_su2_level2_link",
-        "restricted_gate_ref": (
+        "restricted_gate_ref": legacy_prose_member_ref(
             "wiki/understandings/colored-framed-link-evaluator-gate.org"
         ),
         "does_execute_link_evaluator": False,

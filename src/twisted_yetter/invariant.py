@@ -1,7 +1,8 @@
 """Experimental matrix-level invariant core for the n30 formula contract.
 
 This module deliberately implements only the n35 scaffold allowed by
-``wiki/understandings/formula-contract-v0.org``.  It records formal
+the archived legacy prose record for ``wiki/understandings/formula-contract-v0.org``.
+It records formal
 omega/theta sectors and exact matrix sanity data, but it does not choose the
 source-needed numerical omega/theta coefficients, closed-manifold
 normalization, or signature phase.
@@ -21,12 +22,17 @@ from twisted_yetter.artifacts import (
     hash_json,
     make_certificate,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.linking_matrix import KirbyMatrixPresentation
 from twisted_yetter.su2_level2 import certificate_payload
 
 
-FORMULA_CONTRACT_REFERENCE: Final = "wiki/understandings/formula-contract-v0.org"
-FORMULA_CONVENTIONS_REFERENCE: Final = "wiki/understandings/formula-conventions.org"
+FORMULA_CONTRACT_REFERENCE: Final = legacy_prose_member_ref(
+    "wiki/understandings/formula-contract-v0.org"
+)
+FORMULA_CONVENTIONS_REFERENCE: Final = legacy_prose_member_ref(
+    "wiki/understandings/formula-conventions.org"
+)
 NORMALIZATION_NAME: Final = "experimental-yetter-surgery-normalization-v0"
 SIGNATURE_CORRECTION_NAME: Final = "experimental-signature-correction-v0"
 

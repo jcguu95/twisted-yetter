@@ -18,6 +18,7 @@ from twisted_yetter.dolgachev_source_capture import (
     stable_dolgachev_source_capture_ledger_json,
     validate_dolgachev_source_capture_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.exotic_input_scout import (
     MISSING_H2_MARKING_CERTIFICATE_BLOCKER_ID,
     MISSING_MACHINE_READABLE_DIAGRAMS_BLOCKER_ID,
@@ -69,7 +70,9 @@ def test_n72_reference_inventory_is_stub_only() -> None:
     assert len(inventory) == 1
     reference = inventory[0]
     assert reference["reference_id"] == REFERENCE_ID
-    assert reference["record_path"] == "wiki/references/akbulut-dolgachev-surface.org"
+    assert reference["record_path"] == legacy_prose_member_ref(
+        "wiki/references/akbulut-dolgachev-surface.org"
+    )
     assert reference["record_status"] == "stub/source-needed"
     assert reference["content_hash_status"] == "missing"
     assert reference["capture_time_status"] == "missing"

@@ -26,6 +26,7 @@ from twisted_yetter.exotic_input_certification import (
     exotic_input_certification_ledger_artifact,
     validate_exotic_input_certification_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.scalability_dry_run import (
     SCALABILITY_DRY_RUN_ARTIFACT,
     SCALABILITY_DRY_RUN_SCHEMA,
@@ -37,7 +38,9 @@ EXOTIC_COMPUTATION_SCHEMA: Final = "twisted-yetter.exotic-computation.v1"
 EXOTIC_COMPUTATION_ARTIFACT: Final = (
     "experiments/results/exotic-computation/n80-exotic-computation.json"
 )
-EXOTIC_COMPUTATION_NOTE: Final = "wiki/understandings/exotic-computation.org"
+EXOTIC_COMPUTATION_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/exotic-computation.org"
+)
 
 NODE_ID: Final = "n80-exotic-computation"
 CLAIM_LEVEL: Final = "terminal blocked computation gate verdict"

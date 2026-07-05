@@ -35,6 +35,7 @@ from twisted_yetter.exotic_input_certification import (
     exotic_input_certification_ledger_artifact,
     validate_exotic_input_certification_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import (
     ORDINARY_SURGERY_GATE_SCHEMA,
     ordinary_surgery_gate_certificate,
@@ -54,7 +55,9 @@ SCALABILITY_DRY_RUN_SCHEMA: Final = "twisted-yetter.scalability-dry-run.v1"
 SCALABILITY_DRY_RUN_ARTIFACT: Final = (
     "experiments/results/scalability/n75-scalability-dry-run.json"
 )
-SCALABILITY_DRY_RUN_NOTE: Final = "wiki/understandings/scalability-dry-run.org"
+SCALABILITY_DRY_RUN_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/scalability-dry-run.org"
+)
 
 NODE_ID: Final = "n75-scalability-dry-run"
 CLAIM_LEVEL: Final = "dry-run/readiness ledger"

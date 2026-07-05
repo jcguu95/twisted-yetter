@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "a52af635dc832bea8dbd13652355d5820dddd407",
+  "current_root_cid": "ctlobj-sha256:64bd54eff612bbde76eea556424ed118db3f8f637a89bb8d28fa3be303f44940",
+  "generated_at": "2026-07-05T19:36:00Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-pd-gauss-braid-evaluator-inventory",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:0cf8cd67819b7b4ddf7a489ada0df7e9e8b62ec2059414667e7c69b95cdafabd",
+    "current_root": "ctlobj-sha256:64bd54eff612bbde76eea556424ed118db3f8f637a89bb8d28fa3be303f44940",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:459b9684d184bec99ac06ea8b1613d0259faa598f64ff2b54c2bca108120010e"
+  },
+  "parent_root_cid": "ctlobj-sha256:1e8c5b529ef21590a8971de060494d4f2495028d70ec00fa0468e43f49153cf2",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-05-pd-gauss-braid-evaluator-inventory.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-05-pd-gauss-braid-evaluator-inventory --payload lab-notes/2026-07-05-pd-gauss-braid-evaluator-inventory.json --manifest manifests/lab-note-2026-07-05-pd-gauss-braid-evaluator-inventory.json --created-at 2026-07-05T19:36:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "d31216e77226712fac12a9489c124029889f27f0"
+}

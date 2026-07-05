@@ -57,6 +57,7 @@ from twisted_yetter.exotic_h2_marking_certification import (
     MISSING_SOURCE_CITATION_BLOCKER_ID,
     exotic_h2_marking_certification_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import (
     ORDINARY_SURGERY_GATE_SCHEMA,
     ordinary_surgery_gate_certificate,
@@ -71,7 +72,7 @@ EXOTIC_INPUT_CERTIFICATION_SCHEMA: Final = (
     "twisted-yetter.exotic-input-certification.v1"
 )
 EXOTIC_INPUT_CERTIFICATION_NOTE: Final = (
-    "wiki/understandings/exotic-input-certification.org"
+    legacy_prose_member_ref("wiki/understandings/exotic-input-certification.org")
 )
 EXOTIC_INPUT_CERTIFICATION_ARTIFACT: Final = (
     "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json"

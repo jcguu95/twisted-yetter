@@ -29,6 +29,7 @@ from twisted_yetter.exotic_input_scout import (
     SOURCE_NEEDED_BLOCKER_ID,
     exotic_input_scout_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 
 
 DOLGACHEV_SOURCE_CAPTURE_SCHEMA: Final = (
@@ -38,10 +39,14 @@ DOLGACHEV_SOURCE_CAPTURE_ARTIFACT: Final = (
     "experiments/results/source-capture/n72-dolgachev-source-capture.json"
 )
 DOLGACHEV_SOURCE_CAPTURE_NOTE: Final = (
-    "wiki/understandings/dolgachev-source-capture.org"
+    legacy_prose_member_ref("wiki/understandings/dolgachev-source-capture.org")
 )
-DOLGACHEV_REFERENCE_STUB: Final = "wiki/references/akbulut-dolgachev-surface.org"
-DOLGACHEV_SOURCE_CAPTURE_ROADMAP: Final = "wiki/roadmaps/dolgachev-source-capture.org"
+DOLGACHEV_REFERENCE_STUB: Final = legacy_prose_member_ref(
+    "wiki/references/akbulut-dolgachev-surface.org"
+)
+DOLGACHEV_SOURCE_CAPTURE_ROADMAP: Final = legacy_prose_member_ref(
+    "wiki/roadmaps/dolgachev-source-capture.org"
+)
 
 NODE_ID: Final = "n72-dolgachev-source-capture"
 CANDIDATE_ID: Final = "dolgachev-e1-23-vs-e1"
@@ -176,7 +181,7 @@ def dolgachev_source_capture_ledger_artifact(
                 "record_path": DOLGACHEV_REFERENCE_STUB,
                 "record_status": "stub/source-needed",
                 "locator_status": "bibliographic pointer only; no local snapshot",
-                "known_repo_locator": "wiki/references/exotic-input-candidates-2026-06-26.org",
+                "known_repo_locator": EXOTIC_INPUT_REFERENCE_STUB,
                 "parent_stub": EXOTIC_INPUT_REFERENCE_STUB,
                 "content_hash_status": "missing",
                 "capture_time_status": "missing",

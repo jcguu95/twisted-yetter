@@ -19,12 +19,22 @@ def test_yasui_figure3_vec_z3_matches_standard_and_nonpointed_are_blocked() -> N
     )
     payload = json.loads(OUTPUT.read_text())
 
-    assert payload["status"] == "pass-with-blocked-nonpointed"
+    assert payload["status"] == "blocked-yasui-braid-payload-not-admitted"
     vec_z3 = payload["computed_categories"][0]
     assert vec_z3["category_id"] == "Vec_Z3_q"
-    assert vec_z3["status"] == "pass"
-    assert len(vec_z3["rows"]) == 27
-    assert all(row["equal_raw_value"] for row in vec_z3["rows"])
+    assert vec_z3["status"] == "blocked-yasui-braid-payload-not-admitted"
+    assert vec_z3["rows"] == []
+    assert vec_z3["observed_yasui_matrix_source_order"] == [
+        [3, 2, -4],
+        [2, 1, -2],
+        [-4, -2, 3],
+    ]
+    assert vec_z3["expected_yasui_matrix_source_order"] == [
+        [3, 2, 4],
+        [2, 1, 2],
+        [4, 2, 3],
+    ]
+    assert "payload admission failure" in vec_z3["reason"]
 
     blocked = {item["category_id"]: item for item in payload["blocked_categories"]}
     assert blocked["SU(2)_6"]["status"] == "blocked-yasui-braid-payload-not-admitted"

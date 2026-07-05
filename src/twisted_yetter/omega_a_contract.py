@@ -11,13 +11,14 @@ from __future__ import annotations
 import json
 from typing import Final, Mapping
 
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
 from twisted_yetter.provisional_formula_policy import claim_policy_decision
 
 OMEGA_A_CONTRACT_SCHEMA: Final = "twisted-yetter.omega-a-candidate-contract.v1"
 OMEGA_A_CANDIDATE_FORMULA_ID: Final = "omega-a-character-weighted-kirby-color-v0"
 OMEGA_A_CONTRACT_NOTE: Final = (
-    "wiki/understandings/general-a-candidate-contract.org"
+    legacy_prose_member_ref("wiki/understandings/general-a-candidate-contract.org")
 )
 
 ALLOWED_CONTRACT_CLAIM_LEVELS: Final = (

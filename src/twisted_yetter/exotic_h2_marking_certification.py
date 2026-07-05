@@ -29,6 +29,7 @@ from twisted_yetter.exotic_diagram_digitization import (
     exotic_diagram_digitization_ledger_artifact,
 )
 from twisted_yetter.h2_marking import H2_DECORATION_SCHEMA
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 
 
 EXOTIC_H2_MARKING_CERTIFICATION_SCHEMA: Final = (
@@ -39,7 +40,9 @@ EXOTIC_H2_MARKING_CERTIFICATION_ARTIFACT: Final = (
     "n74-exotic-h2-marking-certification.json"
 )
 EXOTIC_H2_MARKING_CERTIFICATION_NOTE: Final = (
-    "wiki/understandings/exotic-h2-marking-certification.org"
+    legacy_prose_member_ref(
+        "wiki/understandings/exotic-h2-marking-certification.org"
+    )
 )
 
 NODE_ID: Final = "n74-exotic-h2-marking-certification"

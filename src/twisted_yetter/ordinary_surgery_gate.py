@@ -20,6 +20,7 @@ from twisted_yetter.artifacts import (
     hash_json,
     make_certificate,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_control_gate import known_ordinary_control_ledger
 from twisted_yetter.ordinary_kirby_color import (
     CLAIM_LEVEL,
@@ -30,7 +31,7 @@ from twisted_yetter.ordinary_kirby_color import (
 
 ORDINARY_SURGERY_GATE_SCHEMA: Final = "twisted-yetter.ordinary-surgery-gate.v1"
 ORDINARY_SURGERY_GATE_NOTE: Final = (
-    "wiki/understandings/ordinary-surgery-gate.org"
+    legacy_prose_member_ref("wiki/understandings/ordinary-surgery-gate.org")
 )
 ORDINARY_SURGERY_GATE_ARTIFACT: Final = (
     "experiments/results/ordinary-surgery-gate/n24-blocker-certificate.json"
@@ -143,7 +144,9 @@ def ordinary_surgery_gate_certificate(
         "blocked_source_slots": blocked_source_slots,
         "blocked_reasons": blocked_reasons,
         "upstream": {
-            "n21": "wiki/understandings/ordinary-kirby-color-source-capture.org",
+            "n21": legacy_prose_member_ref(
+                "wiki/understandings/ordinary-kirby-color-source-capture.org"
+            ),
             "n22": {
                 "claim_level": CLAIM_LEVEL,
                 "handle_scope": HANDLE_SCOPE,
