@@ -1,24 +1,18 @@
 # Codex / Agent 交接規則
 
-這份文件是給未來研究代理的 repo-local 工作規約。它不取代
-`twisted-yetter.org` 的研究計畫，而是說明在這個 repo 中應該如何溝通、記錄、
-保存證據、管理可重現環境，以及避免把猜想誤寫成定理。
+現行 normative research state以 CTL current graph、admitted objective notes 與
+machine-readable JSON artifacts為準；舊 `twisted-yetter.org` 只作為 legacy
+archive material。本文說明在這個 repo中應該如何溝通、記錄、保存證據、管理可重
+現環境，以及避免把猜想誤寫成定理。
 
 ## 語言與溝通
 
-- 預設主要使用繁體中文與使用者溝通，因為使用者閱讀繁中明顯較快。
-- 數學、拓撲、category theory、TQFT、Kirby calculus、程式與工具鏈術語可保留英文；
-  不要為了翻譯而犧牲精確性。
-- 若英文原詞是文獻中的固定術語，第一次可用「繁中說明 + English term」並列，之後可直接使用英文術語。
-- 對研究狀態要明確使用狀態語言，例如：
-  `working understanding`、`computed evidence`、`conjectural`、
-  `non-formal proof sketch`、`certificate-level observation`、`proved in source`。
+- 預設用繁體中文與使用者溝通, 術語可以用英文。
 
 ## 專案目標
 
 本 repo 研究 homologically twisted Crane-Yetter / Yetter invariant，尤其是帶
-`H_2` marking 或 `K(A,2)` background 的版本是否可能偵測 exotic smooth
-4-manifolds。
+`H_2` marking 的版本是否可能偵測 exotic smooth 4-manifolds。
 
 理想的 positive outcome 是：
 
@@ -39,33 +33,40 @@
 不要把「Reutter 原文沒有直接涵蓋 decorated theory」寫成「已繞過 Reutter」。
 真正要研究的是 decorated stabilization behavior。
 
-## Lab Notes 與 repo 結構
+## CTL Objective Notes 與 repo 結構
 
-本 repo 應採用類似 `/Users/jin/data/local/projects/VOA-computation/` 的長期研究記錄方式：
+本 repo 的實驗歷史、lab note、reference record、roadmap、working understanding
+不可再寫成散落的 `.org` / `.md` / `.txt` prose 檔。這些內容必須寫成
+machine-readable JSON artifact，並在重要時透過 `ctl-dogfood` admission 成為 CTL
+objective lab note / claim。
 
-- `wiki/`：主要 human-readable 研究 wiki。
-- `wiki/index.org`：入口與讀取順序。
-- `wiki/lab-notes/YYYY-MM-DD.org`：日期式 lab notes。記錄當天做了什麼、為何做、
-  使用哪些 artifact、得到什麼、哪些事情失敗或仍不確定。
-- `wiki/understandings/`：穩定下來的 working understanding，不要塞進每日流水帳。
-- `wiki/roadmaps/`：可變動的研究路線、go/no-go tree、sprint plan。
-- `wiki/env/reproducibility.org`：環境、工具版本、重現指令。
-- `wiki/references/`：文獻、PDF、網頁快照、外部路徑、generated artifacts 的 metadata records。
-- `research_graph/`：若研究分支變多，建立 current-view overlay，幫未來 agent 不必讀完整歷史。
-- `experiments/` 或 `results/`：generated artifacts、JSON certificates、run logs。
+允許存在的 prose 檔只限極小白名單，例如本檔 `AGENTS.md` 與少數工具入口
+`README`。白名單 prose 只用於人類入口、工具導覽或 agent 規約；它們不是
+experiment history、lab note、reference ledger、roadmap、working understanding
+或數學證據來源。
+
+- `ctl-dogfood/`：CTL object store、admission manifests、objective notes、policy claims。
+- `ctl-dogfood/lab-notes/*.json`：objective lab-note preimage；admitted 後的 CTL claim
+  才是 normative record。
+- `experiments/` / `experiments/results/`：generated machine artifacts、JSON certificates、
+  run logs 與 reproducible outputs。
+- `experiments/inputs/`：machine-readable inputs，例如 Kirby/crossing/link data。
+- `legacy-archives/`：舊 human prose 的 faithful archive（tar + manifest）。archive
+  只保存歷史 bytes，不提升內容為 normative source。
 - `src/`：穩定程式碼。
-- `notebooks/`：探索用；重要結果穩定後要搬成 script + artifact，不要只留 notebook。
+- `notebooks/`：探索用；重要結果穩定後要搬成 script + JSON artifact，不要只留 notebook。
 
 新的重要研究紀錄不要只放在 final answer 或聊天記憶裡。能影響未來判斷的內容應寫入
-repo-local org / artifact。
+repo-local JSON artifact，必要時用 `ctl-dogfood/scripts/admit_claim.py` admission 成
+CTL objective note。
 
-## Lab Note 最低內容
+## Objective Lab Note 最低內容
 
-每篇重要 lab note 至少應包含：
+每篇重要 objective lab note / artifact 至少應包含：
 
 - 日期、目的、狀態標籤。
 - 當前 git commit 與 dirty 狀態。
-- 使用的環境與工具版本，或指向 `wiki/env/reproducibility.org`。
+- 使用的環境與工具版本，或指向 machine-readable reproducibility artifact。
 - 重現指令，包含 `uv` / `nix` / `sage` / exact arithmetic backend。
 - 輸入資料來源，例如 Kirby diagram、category data、文獻頁碼、reference record。
 - 輸出 artifact 路徑與 hash / git blob hash。
@@ -76,7 +77,7 @@ repo-local org / artifact。
 ## References 與 Evidence
 
 - 外部文獻、PDF、web page、arXiv、local file snapshot、email、generated certificate 都應建立
-  repo-local reference record。
+  repo-local JSON reference record 或 CTL objective note。
 - 正文優先引用 `ref:<short-id>`，不要只寫 URL 或絕對路徑。
 - reference record 應保存 canonical metadata payload、capture time、locator、content hash
   或 git blob hash。
@@ -102,8 +103,11 @@ DOT_SAGE="$PWD/.sage" sage --python ...
 
 ## 數學信任邊界
 
-- `twisted-yetter.org` 中的 `ESTABLISHED`、`INFERENCE`、`CONJECTURAL UNTIL PROVED`
-  分層要延續到所有筆記。
+- 舊 `twisted-yetter.org` 已屬 legacy prose archive。它可作歷史材料，但不是當前
+  normative research plan；當前狀態以 CTL current graph、objective notes 與 JSON
+  artifacts 為準。
+- `ESTABLISHED`、`INFERENCE`、`CONJECTURAL UNTIL PROVED` 等分層要延續到所有
+  objective notes / artifacts。
 - 候選 formula
   `Omega_a = sum_i d_i lambda_i(a) X_i`
   在一般 category 中是待證命題，不是可直接使用的定理。
@@ -135,16 +139,18 @@ DOT_SAGE="$PWD/.sage" sage --python ...
 新 agent 進入 repo 時：
 
 1. 讀本檔 `AGENTS.md`。
-2. 讀 `twisted-yetter.org` 的核心研究計畫。
-3. 若 `wiki/index.org` 存在，照它的讀取順序走。
-4. 若 `research_graph/current_view.json` 存在，先讀 current view，再讀 active nodes。
-5. 若要回答 current-status 問題，不要只 grep 歷史 lab notes；先找 current-view / status artifact。
-6. 若要跑 code，先讀 `wiki/env/reproducibility.org` 或 `pyproject.toml` / `flake.nix` / `uv.lock`。
+2. 用 `CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/show_current_graph.py --json`
+   讀 CTL current graph。
+3. 若要找舊 prose 歷史，只讀 `legacy-archives/*.manifest.json`，再按需解包 archive；
+   不要把 archive prose 當 normative source。
+4. 若要回答 current-status 問題，先找 CTL current graph / admitted objective notes /
+   status artifacts，不要依賴 legacy prose。
+5. 若要跑 code，先讀 `pyproject.toml` / `flake.nix` / `uv.lock` 與相關 JSON artifacts。
 
 ## Git 與工作方式
 
 - 不要刪除或重寫使用者未要求改動的資料。
-- 對大型研究步驟，先留下 lab note 或更新 roadmap，再開始長時間 computation。
+- 對大型研究步驟，先留下 CTL objective note / JSON artifact 或更新 CTL graph，再開始長時間 computation。
 - Commit 應該對應一個可理解的研究狀態：環境 scaffolding、文獻矩陣、diagram data、
   calculation artifact、theory note 等。
-- 若新增重要 artifact，盡量同時新增 reference record 或在 lab note 中建立可追溯引用。
+- 若新增重要 artifact，盡量同時新增 JSON reference record 或 objective note 中建立可追溯引用。

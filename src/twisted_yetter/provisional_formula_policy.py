@@ -20,13 +20,14 @@ from twisted_yetter.artifacts import (
     hash_json,
     make_certificate,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
 
 PROVISIONAL_FORMULA_POLICY_SCHEMA: Final = (
     "twisted-yetter.provisional-formula-policy.v1"
 )
 PROVISIONAL_FORMULA_POLICY_NOTE: Final = (
-    "wiki/understandings/provisional-formula-policy.org"
+    legacy_prose_member_ref("wiki/understandings/provisional-formula-policy.org")
 )
 PROVISIONAL_FORMULA_POLICY_ARTIFACT: Final = (
     "experiments/results/provisional-formula-policy/n30-policy-certificate.json"

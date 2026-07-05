@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Final, Mapping
 
 from twisted_yetter.exact import from_jsonable
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.su2_link_evaluator import evaluate_su2_level2_link
 from twisted_yetter.su2_level2 import (
@@ -46,8 +47,12 @@ CLAIM_BOUNDARY: Final = {
     "handle_scope": HANDLE_SCOPE,
     "normalization_status": NORMALIZATION_STATUS,
     "source_status": "SOURCE NEEDED slots inherited from n21 source-capture ledger",
-    "ledger": "wiki/understandings/ordinary-kirby-color-source-capture.org",
-    "link_evaluator_gate": "wiki/understandings/colored-framed-link-evaluator-gate.org",
+    "ledger": legacy_prose_member_ref(
+        "wiki/understandings/ordinary-kirby-color-source-capture.org"
+    ),
+    "link_evaluator_gate": legacy_prose_member_ref(
+        "wiki/understandings/colored-framed-link-evaluator-gate.org"
+    ),
     "rt_link_ledger": RT_LINK_LEDGER_REFERENCE,
     "not_scope": (
         "ordinary Crane-Yetter/Yetter invariant, closed 4-manifold invariant, "

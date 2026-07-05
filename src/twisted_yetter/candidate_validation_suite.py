@@ -27,6 +27,7 @@ from twisted_yetter.decorated_core import (
     validate_decorated_core_artifact_metadata,
 )
 from twisted_yetter.finite_groups import TRIVIAL_GROUP, Z2_GROUP, FiniteAbelianGroup
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
 
@@ -34,7 +35,9 @@ CANDIDATE_VALIDATION_SUITE_SCHEMA: Final = (
     "twisted-yetter.many-case-candidate-validation-suite.v1"
 )
 CANDIDATE_VALIDATION_SUITE_NOTE: Final = (
-    "wiki/understandings/many-case-candidate-validation-suite.org"
+    legacy_prose_member_ref(
+        "wiki/understandings/many-case-candidate-validation-suite.org"
+    )
 )
 CANDIDATE_VALIDATION_SUITE_ARTIFACT: Final = (
     "experiments/results/candidate-validation-suite/n36-many-case-validation.json"

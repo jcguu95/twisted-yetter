@@ -17,6 +17,7 @@ from twisted_yetter.invariant import (
     numerical_invariant_value,
     sector_amplitudes,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.linking_matrix import KirbyMatrixPresentation, s2x_s2, s4
 from twisted_yetter.su2_level2 import certificate_payload
 
@@ -132,7 +133,9 @@ def test_unsupported_contract_features_raise_explicit_errors() -> None:
             s4(),
             (),
             formula_convention_record=FormulaConventionRecord(
-                formula_contract="wiki/understandings/other.org"
+                formula_contract=legacy_prose_member_ref(
+                    "wiki/understandings/other.org"
+                )
             ),
         )
 

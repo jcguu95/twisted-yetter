@@ -72,7 +72,7 @@
           "n72_source_status": "source-needed"
         },
         "reason_id": "missing-source-page-capture",
-        "reference_stub": "wiki/references/exotic-input-candidates-2026-06-26.org",
+        "reference_stub": "legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=wiki/references/exotic-input-candidates-2026-06-26.org",
         "required": "captured source records with exact page/figure/theorem ids and content hash or canonical locator",
         "source_node": "n65-exotic-input-scout and n72-dolgachev-source-capture",
         "status": "blocked"
@@ -316,8 +316,8 @@
     ],
     "exotic_detection_claim_allowed": false,
     "input_notes": {
-      "candidate_reference_stubs": "wiki/references/exotic-input-candidates-2026-06-26.org",
-      "n65_exotic_input_scout": "wiki/roadmaps/exotic-input-scout.org"
+      "candidate_reference_stubs": "legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=wiki/references/exotic-input-candidates-2026-06-26.org",
+      "n65_exotic_input_scout": "legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=wiki/roadmaps/exotic-input-scout.org"
     },
     "input_schemas": {
       "decorated_kirby_gate": "twisted-yetter.decorated-kirby-gate.v2",
@@ -357,7 +357,7 @@
         "valid": true
       }
     },
-    "ledger_note": "wiki/understandings/exotic-input-certification.org",
+    "ledger_note": "legacy-archives/prose-corpus-2026-07-05.manifest.json#archive_member_path=wiki/understandings/exotic-input-certification.org",
     "marked_distinction_claim_allowed": false,
     "metadata_validation": {
       "blocked_claims_ok": true,
@@ -465,7 +465,7 @@
   },
   "generator_script": "src/twisted_yetter/exotic_input_certification.py",
   "git": {
-    "commit": "19bd25bc91a775d922c0dcaddabaa2fb6e4f708a",
+    "commit": "d31216e77226712fac12a9489c124029889f27f0",
     "dirty": true
   },
   "input_hash": "7ce3f676999eee9190f41a3fcbaed11f0bc7803d04e5ea9485503f1220852bbe",
@@ -475,11 +475,11 @@
     "n65 is only a scout ledger; n72 is source-needed; n73 and n74 are blocked.",
     "n80 remains blocked and no invariant computation was run."
   ],
-  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "repo_root": "/Users/jin/.codex/worktrees/0362/twisted-yetter",
   "reproduce_command": "UV_CACHE_DIR=/Users/jin/data/local/projects/twisted-yetter/.uv-cache PYTHONPATH=src uv run python -m twisted_yetter.exotic_input_certification --write experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
   "schema": "twisted-yetter.certificate.v1",
   "status": "fail",
   "tool_versions": {
-    "python": "3.11.15"
+    "python": "3.14.6"
   }
 }

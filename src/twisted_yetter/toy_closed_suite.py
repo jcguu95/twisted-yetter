@@ -31,6 +31,7 @@ from twisted_yetter.decorated_kirby_gate import (
     decorated_kirby_gate_artifact,
     validate_decorated_kirby_gate_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import (
     ORDINARY_SURGERY_GATE_SCHEMA,
     ordinary_surgery_gate_certificate,
@@ -42,7 +43,9 @@ from twisted_yetter.presentation_pairs import (
 )
 
 TOY_CLOSED_SUITE_SCHEMA: Final = "twisted-yetter.toy-closed-suite-ledger.v1"
-TOY_CLOSED_SUITE_NOTE: Final = "wiki/understandings/toy-closed-suite.org"
+TOY_CLOSED_SUITE_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/toy-closed-suite.org"
+)
 TOY_CLOSED_SUITE_ARTIFACT: Final = (
     "experiments/results/toy-suite/n55-toy-closed-suite.json"
 )

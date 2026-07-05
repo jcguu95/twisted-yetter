@@ -33,6 +33,7 @@ from twisted_yetter.dolgachev_source_capture import (
     SOURCE_CAPTURE_BLOCKER_ID,
     dolgachev_source_capture_ledger_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 
 
 EXOTIC_DIAGRAM_DIGITIZATION_SCHEMA: Final = (
@@ -43,7 +44,7 @@ EXOTIC_DIAGRAM_DIGITIZATION_ARTIFACT: Final = (
     "n73-exotic-diagram-digitization.json"
 )
 EXOTIC_DIAGRAM_DIGITIZATION_NOTE: Final = (
-    "wiki/understandings/exotic-diagram-digitization.org"
+    legacy_prose_member_ref("wiki/understandings/exotic-diagram-digitization.org")
 )
 
 NODE_ID: Final = "n73-exotic-diagram-digitization"

@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.link_diagram import LINK_DIAGRAM_SCHEMA, LinkDiagram
 from twisted_yetter.ordinary_kirby_color import (
     CLAIM_LEVEL,
@@ -26,7 +27,7 @@ KNOWN_ORDINARY_CONTROL_SCHEMA: Final = (
     "twisted-yetter.known-ordinary-4d-controls-ledger.v1"
 )
 KNOWN_CONTROL_LEDGER_PATH: Final = (
-    "wiki/understandings/known-ordinary-4d-controls.org"
+    legacy_prose_member_ref("wiki/understandings/known-ordinary-4d-controls.org")
 )
 KNOWN_CONTROL_ARTIFACT_PATH: Final = (
     "experiments/results/known-ordinary-controls/su2-level2-local-convention.json"

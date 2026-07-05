@@ -28,6 +28,7 @@ from twisted_yetter.artifacts import (
 from twisted_yetter.candidate_validation_suite import (
     many_case_candidate_validation_suite_artifact,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
 from twisted_yetter.presentation_moves import (
     PresentationPair,
@@ -38,7 +39,9 @@ PRESENTATION_PAIR_REGISTRY_SCHEMA: Final = (
     "twisted-yetter.kirby-presentation-pair-registry.v2"
 )
 PRESENTATION_PAIR_NOTE: Final = (
-    "wiki/understandings/kirby-presentation-pair-generator.org"
+    legacy_prose_member_ref(
+        "wiki/understandings/kirby-presentation-pair-generator.org"
+    )
 )
 PRESENTATION_PAIR_ARTIFACT: Final = (
     "experiments/results/presentation-pairs/n45-presentation-pair-generator.json"

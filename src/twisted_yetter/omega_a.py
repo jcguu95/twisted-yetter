@@ -34,6 +34,7 @@ from twisted_yetter.finite_groups import (
     character_value,
     validate_character_table,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.omega_a_contract import (
     OMEGA_A_CANDIDATE_FORMULA_ID,
     validate_omega_a_candidate_artifact_metadata,
@@ -47,7 +48,7 @@ from twisted_yetter.su2_level2 import SIMPLE_LABELS
 
 OMEGA_A_SCHEMA: Final = "twisted-yetter.omega-a-candidate-coefficients.v1"
 OMEGA_A_IMPLEMENTATION_NOTE: Final = (
-    "wiki/understandings/omega-a-implementation.org"
+    legacy_prose_member_ref("wiki/understandings/omega-a-implementation.org")
 )
 OMEGA_A_ARTIFACT: Final = (
     "experiments/results/omega-a-candidate/n33-candidate-coefficients.json"

@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Final, Literal, Mapping
 
 from twisted_yetter.hopf_controls import positive_hopf_sanity
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.su2_level2 import (
     LINK_DATA_CLAIM_LEVELS,
@@ -46,8 +47,8 @@ EVALUATOR_CLAIM_LEVEL: Final = {
     ),
     "ledgers": [
         RT_LINK_LEDGER_REFERENCE,
-        "wiki/understandings/elementary-link-controls.org",
-        "wiki/understandings/hopf-and-crossing-controls.org",
+        legacy_prose_member_ref("wiki/understandings/elementary-link-controls.org"),
+        legacy_prose_member_ref("wiki/understandings/hopf-and-crossing-controls.org"),
     ],
     "source_record": RT_LINK_SOURCE_REFERENCE,
 }

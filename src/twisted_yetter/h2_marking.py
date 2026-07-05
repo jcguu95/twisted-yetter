@@ -21,10 +21,13 @@ from twisted_yetter.finite_groups import (
 )
 from twisted_yetter.link_diagram import LinkDiagram
 from twisted_yetter.linking_matrix import determinant
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 from twisted_yetter.ordinary_surgery_gate import ordinary_surgery_gate_certificate
 
 H2_DECORATION_SCHEMA: Final = "twisted-yetter.h2-component-decoration.v1"
-H2_DECORATION_NOTE: Final = "wiki/understandings/h2-label-and-basis-schema.org"
+H2_DECORATION_NOTE: Final = legacy_prose_member_ref(
+    "wiki/understandings/h2-label-and-basis-schema.org"
+)
 COMPARISON_LEVELS: Final = ("marked", "unmarked", "orbit/multiset", "not-in-scope")
 
 CLAIM_LEVEL: Final = "schema-test-safe"

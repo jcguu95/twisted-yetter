@@ -21,6 +21,7 @@ from twisted_yetter.artifacts import (
     hash_json,
     make_certificate,
 )
+from twisted_yetter.legacy_prose import legacy_prose_member_ref
 
 from twisted_yetter.presentation_pairs import (
     PRESENTATION_PAIR_REGISTRY_SCHEMA,
@@ -30,7 +31,7 @@ from twisted_yetter.presentation_pairs import (
 
 DECORATED_KIRBY_GATE_SCHEMA: Final = "twisted-yetter.decorated-kirby-gate.v2"
 DECORATED_KIRBY_GATE_NOTE: Final = (
-    "wiki/understandings/decorated-kirby-move-gate.org"
+    legacy_prose_member_ref("wiki/understandings/decorated-kirby-move-gate.org")
 )
 DECORATED_KIRBY_GATE_ARTIFACT: Final = (
     "experiments/results/decorated-kirby-gate/"
