@@ -56,6 +56,10 @@ def test_yasui_a1_r1_normalized_su2_all_alpha_artifacts_pass() -> None:
         "SU(2)_3",
     )
     assert_all_alpha_pass(
+        "experiments/results/yasui/figure3-a1-r1-normalized-su2-4-all-alpha-raw-comparison-v3.json",
+        "SU(2)_4",
+    )
+    assert_all_alpha_pass(
         "experiments/results/yasui/figure3-a1-r1-normalized-su2-6-all-alpha-raw-comparison-v2.json",
         "SU(2)_6",
     )
@@ -69,6 +73,10 @@ def test_yasui_a3_su2_all_alpha_artifacts_pass() -> None:
     assert_all_alpha_pass(
         "experiments/results/yasui/figure3-a3-su2-3-all-alpha-chunked-comparison-v1.json",
         "SU(2)_3",
+    )
+    assert_all_alpha_pass(
+        "experiments/results/yasui/figure3-a3-su2-4-all-alpha-chunked-comparison-v1.json",
+        "SU(2)_4",
     )
     assert_all_alpha_pass(
         "experiments/results/yasui/figure3-a3-su2-6-all-alpha-chunked-comparison-v1.json",
