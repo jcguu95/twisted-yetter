@@ -6,17 +6,17 @@ Run from the repository root:
 
 The hand transcription records ``X Y Z W`` crossings, where ``X -> Z`` is the
 understrand and the overstrand direction is recovered from component arc order.
-The raw oriented-drawing convention is useful for checking the transcription, but
-it gives an off-diagonal sign pattern with non-unimodular linking matrix.  For
-the evaluator payload we therefore apply the minimal Kirby calibration recorded
-below: switch all A-B crossings so the braid closure matches Yasui's homology
-intersection matrix.  Sage then converts that calibrated oriented link to a
-braid, and we match the braid-closure component order back to A,B,C.
+The tuple data records incidence and over/under information.  It does not
+record enough absolute page-position data to infer every crossing sign from a
+single local quadrant convention.  Therefore the admitted input carries
+explicit hand-calibrated crossing signs.  In the clean PD, the A, B, and C
+self-twist blocks are all expanded into actual self-crossings, giving
+``AA=3, BB=1, CC=3, AB=2, AC=-4, BC=-2``.  Equivalently, the source-oriented
+component ``C`` represents ``-(2h+e1)``.
 """
 
 from __future__ import annotations
 
-import importlib.util
 import json
 from itertools import permutations, product
 from pathlib import Path
@@ -30,8 +30,6 @@ from sage.knots.link import Link
 REPO_ROOT = Path(__file__).resolve().parents[2]
 INPUT = REPO_ROOT / "experiments" / "inputs" / "yasui" / "figure3-a1-crossing-table.json"
 OUTPUT = REPO_ROOT / "experiments" / "results" / "yasui" / "figure3-a1-braid-payload-v1.json"
-ORACLE_PATH = REPO_ROOT / "experiments" / "sage" / "su2_2_braid_oracle.sage.py"
-
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from twisted_yetter.local_piece import (  # noqa: E402
@@ -39,14 +37,6 @@ from twisted_yetter.local_piece import (  # noqa: E402
     braid_closure_linking_matrix,
     braid_program,
 )
-
-
-def load_module(path, name):
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
 
 
 def source_payload():
@@ -87,30 +77,38 @@ def source_oriented_gauss_code(payload, switched_pairs=None):
 
     In Sage's oriented Gauss code, a positive entry means the component passes
     over the crossing and a negative entry means it passes under.  The separate
-    crossing-sign list uses the calibration sign convention:
-
-    * overstrand oriented as ``Y -> W`` gives ``+1``;
-    * overstrand oriented as ``W -> Y`` gives ``-1``.
+    crossing-sign list uses the explicit ``calibrated_sign`` field in the
+    source crossing table.  The tuple still supplies the oriented Gauss-code
+    incidence and over/under data.
     """
 
+    # ``switched_pairs`` belongs to the derived evaluator-calibration layer.  It
+    # must not be confused with the source crossing table.
     switched_pairs = {tuple(sorted(pair)) for pair in (switched_pairs or [])}
     next_arc = arc_next_map(payload)
     arc_components = arc_component_map(payload)
     crossings = payload["crossings"]
     crossing_signs = []
     records = []
+    over_arc_by_crossing_id = {}
     for crossing in crossings:
         x, y, z, w = crossing["tuple"]
         if next_arc[x] != z:
             raise ValueError(f"{crossing['id']} understrand is not oriented as X -> Z")
         if next_arc[y] == w:
-            sign = 1
             over_direction = "Y->W"
+            over_arc = (y, w)
         elif next_arc[w] == y:
-            sign = -1
             over_direction = "W->Y"
+            over_arc = (w, y)
         else:
             raise ValueError(f"{crossing['id']} overstrand endpoints are not adjacent")
+        over_arc_by_crossing_id[crossing["id"]] = over_arc
+        if "calibrated_sign" not in crossing:
+            raise ValueError(f"{crossing['id']} has no calibrated_sign")
+        sign = int(crossing["calibrated_sign"])
+        if sign not in (-1, 1):
+            raise ValueError(f"{crossing['id']} calibrated_sign must be +/-1")
         pair = tuple(sorted((arc_components[x], arc_components[y])))
         switched = pair in switched_pairs and pair[0] != pair[1]
         if switched:
@@ -143,7 +141,7 @@ def source_oriented_gauss_code(payload, switched_pairs=None):
                     entry_sign = -1
                 if (x, z) == (arc, next_label):
                     matches.append(-crossing_index * entry_sign)
-                if (y, w) == (arc, next_label) or (w, y) == (arc, next_label):
+                if over_arc_by_crossing_id[crossing["id"]] == (arc, next_label):
                     matches.append(crossing_index * entry_sign)
             if len(matches) != 1:
                 raise ValueError(
@@ -191,23 +189,9 @@ def source_ordered_matrix(braid_linking, source_index_per_braid_component):
     ]
 
 
-def omega_evaluations(oracle, n_strands, braid_word, framings):
-    output = []
-    for omega_labels in product((0, 1), repeat=len(framings)):
-        output.append(
-            {
-                "omega_labels": list(omega_labels),
-                "omega_value": oracle.cyclotomic_json(
-                    oracle.omega_value(n_strands, braid_word, tuple(framings), omega_labels)
-                ),
-            }
-        )
-    return output
-
-
 def main():
     payload = source_payload()
-    switched_pairs = [("A", "B")]
+    switched_pairs = []
     component_words, crossing_signs, crossing_records = source_oriented_gauss_code(
         payload,
         switched_pairs=switched_pairs,
@@ -233,11 +217,6 @@ def main():
         component_order_in_braid = []
         framings_in_braid_order = []
 
-    oracle = load_module(ORACLE_PATH, "su2_2_braid_oracle_for_yasui_figure3")
-    evaluations = []
-    if status == "pass":
-        evaluations = omega_evaluations(oracle, n_strands, tuple(ZZ(g) for g in braid_word), framings_in_braid_order)
-
     result = {
         "schema": "twisted-yetter.yasui-figure3-a1-braid-payload.v1",
         "status": status,
@@ -245,10 +224,13 @@ def main():
         "conversion": "source-oriented-gauss-code -> Sage Link(...).braid()",
         "kirby_calibration": {
             "reason": (
-                "The raw oriented drawing convention gives A-B=-2 and a non-unimodular "
-                "3x3 linking matrix.  Yasui Figure 3 a=1 is a no-1/no-3-handle "
-                "presentation of CP2#2CPbar, so the evaluator payload is calibrated "
-                "to the target_intersection_matrix by switching all A-B crossings."
+                "The source crossing table is kept as transcribed.  The local "
+                "tuple convention records incidence and over/under data, while "
+                "the source table's calibrated_sign fields record the hand-checked "
+                "visible crossing signs.  These signs give AA=3, BB=1, CC=3, "
+                "AB=2, AC=-4, BC=-2 and match the oriented Yasui homology-label "
+                "matrix, so no component-pair crossing switch or separate B/C "
+                "self-twist correction is applied."
             ),
             "switched_component_pairs": [list(pair) for pair in switched_pairs],
             "switched_crossing_ids": [
@@ -286,7 +268,12 @@ def main():
         "component_order_candidates": permutations_to_source,
         "framings_in_braid_order": framings_in_braid_order,
         "omega_label_order": component_order_in_braid,
-        "su2_2_omega_evaluations": evaluations,
+        "su2_2_omega_evaluations": [],
+        "su2_2_omega_evaluations_status": (
+            "skipped-legacy-jones-diagnostic; clean PD braid conversion is a "
+            "payload step and should not be blocked by the older SU(2)_2 "
+            "Jones-polynomial oracle"
+        ),
         "local_piece_programs": [
             braid_program(
                 program_id=f"yasui-figure3-a1-su2-2-omega-{''.join(map(str, omega_labels))}",

@@ -4,43 +4,51 @@
     "components_0_based_strands": [
       [
         0,
-        2,
-        7
-      ],
-      [
         1,
+        2,
         3,
-        5,
-        6
+        8,
+        10
       ],
       [
-        4
+        4,
+        5,
+        7,
+        9
+      ],
+      [
+        6,
+        11
       ]
     ],
     "strand_to_component": [
       0,
-      1,
       0,
+      0,
+      0,
+      1,
       1,
       2,
       1,
+      0,
       1,
-      0
+      0,
+      2
     ]
   },
   "braid_closure_linking_matrix": [
     [
       0,
-      4,
-      2
+      -4,
+      -2
     ],
     [
-      4,
+      -4,
       0,
       2
     ],
     [
-      2,
+      -2,
       2,
       0
     ]
@@ -48,49 +56,104 @@
   "braid_word": [
     1,
     2,
-    3,
+    -3,
     4,
     5,
     6,
+    7,
+    8,
     -7,
-    6,
-    5,
+    -6,
+    -5,
+    -4,
+    3,
+    2,
+    -3,
+    2,
     4,
     -3,
     -2,
-    -1,
-    -6,
-    5,
-    -4,
-    -3,
-    6,
-    6,
     5,
     4,
-    -6,
-    5,
+    -3,
     6,
+    5,
+    -4,
+    3,
     7,
     6,
     5,
     4,
-    3,
+    -9,
+    -8,
+    -7,
+    -6,
+    -5,
+    4,
+    -3,
+    -10,
+    -9,
+    -8,
+    -7,
+    -6,
+    5,
+    -11,
+    -10,
+    -9,
+    -8,
+    -7,
+    6,
+    5,
+    4,
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
     -2,
     -3,
-    5,
+    2,
     -4,
     3,
     2,
-    4,
-    -5
+    2,
+    -6,
+    -5,
+    -4,
+    3,
+    2,
+    7,
+    6,
+    5,
+    8,
+    7,
+    6,
+    -5,
+    -4,
+    -3,
+    -2,
+    9,
+    8,
+    7,
+    -6,
+    -5,
+    -4,
+    3,
+    10,
+    9,
+    8,
+    11,
+    10,
+    9,
+    -8,
+    -7,
+    -6,
+    -5,
+    -4,
+    3
   ],
   "claim_boundary": "This is a converted braid payload for the Yasui Figure 3 a=1 presentation. It is not yet a comparison with the standard CP2#2CPbar presentation.",
   "component_order_candidates": [
-    [
-      0,
-      2,
-      1
-    ],
     [
       2,
       0,
@@ -98,8 +161,8 @@
     ]
   ],
   "component_order_in_braid": [
-    "A",
     "C",
+    "A",
     "B"
   ],
   "component_order_in_source": [
@@ -114,21 +177,9 @@
     1
   ],
   "kirby_calibration": {
-    "reason": "The raw oriented drawing convention gives A-B=-2 and a non-unimodular 3x3 linking matrix.  Yasui Figure 3 a=1 is a no-1/no-3-handle presentation of CP2#2CPbar, so the evaluator payload is calibrated to the target_intersection_matrix by switching all A-B crossings.",
-    "switched_component_pairs": [
-      [
-        "A",
-        "B"
-      ]
-    ],
-    "switched_crossing_ids": [
-      "x04",
-      "x05",
-      "x08",
-      "x09",
-      "x13",
-      "x15"
-    ]
+    "reason": "The source crossing table is kept as transcribed.  The local tuple convention records incidence and over/under data, while the source table's calibrated_sign fields record the hand-checked visible crossing signs.  These signs give AA=3, BB=1, CC=3, AB=2, AC=-4, BC=-2 and match the oriented Yasui homology-label matrix, so no component-pair crossing switch or separate B/C self-twist correction is applied.",
+    "switched_component_pairs": [],
+    "switched_crossing_ids": []
   },
   "local_piece_programs": [
     {
@@ -164,7 +215,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -188,79 +239,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -277,86 +328,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -367,13 +418,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-000",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -408,7 +819,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -432,79 +843,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -521,86 +932,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -611,13 +1022,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-001",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -652,7 +1423,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -676,79 +1447,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -765,86 +1536,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -855,13 +1626,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-010",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -896,7 +2027,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -920,79 +2051,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -1009,86 +2140,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -1099,13 +2230,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-011",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -1140,7 +2631,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -1164,79 +2655,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -1253,86 +2744,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -1343,13 +2834,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-100",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -1384,7 +3235,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -1408,79 +3259,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -1497,86 +3348,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -1587,13 +3438,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-101",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -1628,7 +3839,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -1652,79 +3863,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -1741,86 +3952,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -1831,13 +4042,373 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-110",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     },
     {
       "category_id": "SU(2)_2",
@@ -1872,7 +4443,7 @@
           "id": "r3",
           "kind": "braid_crossing",
           "left_index": 3,
-          "sign": 1
+          "sign": -1
         },
         {
           "id": "r4",
@@ -1896,79 +4467,79 @@
           "id": "r7",
           "kind": "braid_crossing",
           "left_index": 7,
-          "sign": -1
+          "sign": 1
         },
         {
           "id": "r8",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 8,
           "sign": 1
         },
         {
           "id": "r9",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 7,
+          "sign": -1
         },
         {
           "id": "r10",
           "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r11",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": -1
         },
         {
           "id": "r12",
           "kind": "braid_crossing",
-          "left_index": 2,
+          "left_index": 4,
           "sign": -1
         },
         {
           "id": "r13",
           "kind": "braid_crossing",
-          "left_index": 1,
-          "sign": -1
+          "left_index": 3,
+          "sign": 1
         },
         {
           "id": "r14",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": -1
-        },
-        {
-          "id": "r15",
-          "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 2,
           "sign": 1
         },
         {
-          "id": "r16",
-          "kind": "braid_crossing",
-          "left_index": 4,
-          "sign": -1
-        },
-        {
-          "id": "r17",
+          "id": "r15",
           "kind": "braid_crossing",
           "left_index": 3,
           "sign": -1
         },
         {
+          "id": "r16",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r17",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
           "id": "r18",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 3,
+          "sign": -1
         },
         {
           "id": "r19",
           "kind": "braid_crossing",
-          "left_index": 6,
-          "sign": 1
+          "left_index": 2,
+          "sign": -1
         },
         {
           "id": "r20",
@@ -1985,86 +4556,86 @@
         {
           "id": "r22",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": -1
         },
         {
           "id": "r23",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r24",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r25",
           "kind": "braid_crossing",
-          "left_index": 7,
-          "sign": 1
+          "left_index": 4,
+          "sign": -1
         },
         {
           "id": "r26",
           "kind": "braid_crossing",
-          "left_index": 6,
+          "left_index": 3,
           "sign": 1
         },
         {
           "id": "r27",
           "kind": "braid_crossing",
-          "left_index": 5,
+          "left_index": 7,
           "sign": 1
         },
         {
           "id": "r28",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 6,
           "sign": 1
         },
         {
           "id": "r29",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 5,
           "sign": 1
         },
         {
           "id": "r30",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": -1
+          "left_index": 4,
+          "sign": 1
         },
         {
           "id": "r31",
           "kind": "braid_crossing",
-          "left_index": 3,
+          "left_index": 9,
           "sign": -1
         },
         {
           "id": "r32",
           "kind": "braid_crossing",
-          "left_index": 5,
-          "sign": 1
+          "left_index": 8,
+          "sign": -1
         },
         {
           "id": "r33",
           "kind": "braid_crossing",
-          "left_index": 4,
+          "left_index": 7,
           "sign": -1
         },
         {
           "id": "r34",
           "kind": "braid_crossing",
-          "left_index": 3,
-          "sign": 1
+          "left_index": 6,
+          "sign": -1
         },
         {
           "id": "r35",
           "kind": "braid_crossing",
-          "left_index": 2,
-          "sign": 1
+          "left_index": 5,
+          "sign": -1
         },
         {
           "id": "r36",
@@ -2075,26 +4646,386 @@
         {
           "id": "r37",
           "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r38",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r39",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r40",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r41",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r42",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r43",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r44",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": -1
+        },
+        {
+          "id": "r45",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": -1
+        },
+        {
+          "id": "r46",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": -1
+        },
+        {
+          "id": "r47",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r48",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r49",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r50",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r51",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": 1
+        },
+        {
+          "id": "r52",
+          "kind": "braid_crossing",
           "left_index": 5,
           "sign": -1
+        },
+        {
+          "id": "r53",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r54",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r55",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r56",
+          "kind": "braid_crossing",
+          "left_index": 1,
+          "sign": -1
+        },
+        {
+          "id": "r57",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r58",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r59",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r60",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r61",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r62",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r63",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r64",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r65",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r66",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r67",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r68",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": 1
+        },
+        {
+          "id": "r69",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r70",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r71",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": 1
+        },
+        {
+          "id": "r72",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r73",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r74",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": 1
+        },
+        {
+          "id": "r75",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r76",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r77",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": -1
+        },
+        {
+          "id": "r78",
+          "kind": "braid_crossing",
+          "left_index": 2,
+          "sign": -1
+        },
+        {
+          "id": "r79",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r80",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r81",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": 1
+        },
+        {
+          "id": "r82",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r83",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r84",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r85",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
+        },
+        {
+          "id": "r86",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r87",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r88",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": 1
+        },
+        {
+          "id": "r89",
+          "kind": "braid_crossing",
+          "left_index": 11,
+          "sign": 1
+        },
+        {
+          "id": "r90",
+          "kind": "braid_crossing",
+          "left_index": 10,
+          "sign": 1
+        },
+        {
+          "id": "r91",
+          "kind": "braid_crossing",
+          "left_index": 9,
+          "sign": 1
+        },
+        {
+          "id": "r92",
+          "kind": "braid_crossing",
+          "left_index": 8,
+          "sign": -1
+        },
+        {
+          "id": "r93",
+          "kind": "braid_crossing",
+          "left_index": 7,
+          "sign": -1
+        },
+        {
+          "id": "r94",
+          "kind": "braid_crossing",
+          "left_index": 6,
+          "sign": -1
+        },
+        {
+          "id": "r95",
+          "kind": "braid_crossing",
+          "left_index": 5,
+          "sign": -1
+        },
+        {
+          "id": "r96",
+          "kind": "braid_crossing",
+          "left_index": 4,
+          "sign": -1
+        },
+        {
+          "id": "r97",
+          "kind": "braid_crossing",
+          "left_index": 3,
+          "sign": 1
         }
       ],
       "program_id": "yasui-figure3-a1-su2-2-omega-111",
       "schema": "twisted-yetter.local-piece-program.v1",
-      "strand_count": 8
+      "strand_count": 12
     }
   ],
-  "n_strands": 8,
+  "n_strands": 12,
   "omega_label_order": [
-    "A",
     "C",
+    "A",
     "B"
   ],
   "sage_version": "10.8",
   "schema": "twisted-yetter.yasui-figure3-a1-braid-payload.v1",
   "source_index_per_braid_component": [
-    0,
     2,
+    0,
     1
   ],
   "source_input": "experiments/inputs/yasui/figure3-a1-crossing-table.json",
@@ -2102,33 +5033,33 @@
     [
       0,
       2,
-      4
+      -4
     ],
     [
       2,
       0,
-      2
+      -2
     ],
     [
-      4,
-      2,
+      -4,
+      -2,
       0
     ]
   ],
   "source_oriented_diagram_linking_matrix": [
     [
       3,
-      -2,
-      4
-    ],
-    [
-      -2,
-      1,
-      2
-    ],
-    [
-      4,
       2,
+      -4
+    ],
+    [
+      2,
+      1,
+      -2
+    ],
+    [
+      -4,
+      -2,
       3
     ]
   ],
@@ -2141,50 +5072,58 @@
     "component_words": [
       [
         -1,
-        2,
-        3,
-        -4,
-        -5,
-        -6,
+        5,
+        6,
         7,
-        -3,
-        -8,
-        9,
-        10,
-        -11,
+        8,
+        -10,
+        11,
+        -6,
         12,
         -13,
         14,
-        -14,
-        15,
-        -10,
-        -16,
-        17
-      ],
-      [
-        -18,
-        19,
-        4,
-        8,
-        -9,
         -15,
+        16,
+        17,
+        18,
+        -18,
+        -19,
+        -14,
         -20,
-        21,
-        13,
-        5
+        21
       ],
       [
-        -17,
-        -12,
-        -21,
-        20,
-        11,
-        16,
-        -2,
+        9,
+        -9,
+        -22,
+        23,
         -7,
-        -19,
-        18,
-        6,
+        -12,
+        13,
+        19,
+        -24,
+        25,
+        -17,
+        -8
+      ],
+      [
+        2,
+        -2,
+        3,
+        -3,
+        4,
+        -4,
+        -21,
+        -16,
+        -25,
+        24,
+        15,
+        20,
+        -5,
+        -11,
+        -23,
+        22,
+        10,
         1
       ]
     ],
@@ -2194,7 +5133,7 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
         "id": "x01",
         "over_direction": "Y->W",
@@ -2202,18 +5141,69 @@
           "A1",
           "C12",
           "A2",
-          "C1"
+          "C1a"
         ],
         "under": "A1->A2"
+      },
+      {
+        "component_pair": [
+          "C",
+          "C"
+        ],
+        "crossing_sign": 1,
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x02",
+        "over_direction": "W->Y",
+        "tuple": [
+          "C1b",
+          "C1b",
+          "C1c",
+          "C1a"
+        ],
+        "under": "C1b->C1c"
+      },
+      {
+        "component_pair": [
+          "C",
+          "C"
+        ],
+        "crossing_sign": 1,
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x03",
+        "over_direction": "W->Y",
+        "tuple": [
+          "C1d",
+          "C1d",
+          "C1e",
+          "C1c"
+        ],
+        "under": "C1d->C1e"
+      },
+      {
+        "component_pair": [
+          "C",
+          "C"
+        ],
+        "crossing_sign": 1,
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x04",
+        "over_direction": "W->Y",
+        "tuple": [
+          "C1f",
+          "C1f",
+          "C1g",
+          "C1e"
+        ],
+        "under": "C1f->C1g"
       },
       {
         "component_pair": [
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x02",
+        "id": "x05",
         "over_direction": "Y->W",
         "tuple": [
           "C7",
@@ -2228,9 +5218,9 @@
           "A",
           "A"
         ],
-        "crossing_sign": -1,
+        "crossing_sign": 1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x03",
+        "id": "x06",
         "over_direction": "W->Y",
         "tuple": [
           "A8",
@@ -2246,8 +5236,8 @@
           "B"
         ],
         "crossing_sign": 1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x04",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x07",
         "over_direction": "W->Y",
         "tuple": [
           "B3",
@@ -2263,25 +5253,42 @@
           "B"
         ],
         "crossing_sign": -1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x05",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x08",
         "over_direction": "Y->W",
         "tuple": [
           "B10",
           "A5",
-          "B1",
+          "B1a",
           "A6"
         ],
-        "under": "B10->B1"
+        "under": "B10->B1a"
+      },
+      {
+        "component_pair": [
+          "B",
+          "B"
+        ],
+        "crossing_sign": 1,
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x09",
+        "over_direction": "W->Y",
+        "tuple": [
+          "B1b",
+          "B1b",
+          "B1c",
+          "B1a"
+        ],
+        "under": "B1b->B1c"
       },
       {
         "component_pair": [
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x06",
+        "id": "x10",
         "over_direction": "Y->W",
         "tuple": [
           "A6",
@@ -2296,9 +5303,9 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x07",
+        "id": "x11",
         "over_direction": "Y->W",
         "tuple": [
           "C8",
@@ -2314,8 +5321,8 @@
           "B"
         ],
         "crossing_sign": 1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x08",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x12",
         "over_direction": "W->Y",
         "tuple": [
           "B4",
@@ -2331,8 +5338,8 @@
           "B"
         ],
         "crossing_sign": 1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x09",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x13",
         "over_direction": "W->Y",
         "tuple": [
           "A10",
@@ -2347,9 +5354,9 @@
           "A",
           "A"
         ],
-        "crossing_sign": -1,
+        "crossing_sign": 1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x10",
+        "id": "x14",
         "over_direction": "W->Y",
         "tuple": [
           "A16",
@@ -2364,9 +5371,9 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x11",
+        "id": "x15",
         "over_direction": "Y->W",
         "tuple": [
           "A12",
@@ -2381,9 +5388,9 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x12",
+        "id": "x16",
         "over_direction": "Y->W",
         "tuple": [
           "C2",
@@ -2399,8 +5406,8 @@
           "B"
         ],
         "crossing_sign": 1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x13",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x17",
         "over_direction": "W->Y",
         "tuple": [
           "B9",
@@ -2415,9 +5422,9 @@
           "A",
           "A"
         ],
-        "crossing_sign": -1,
+        "crossing_sign": 1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x14",
+        "id": "x18",
         "over_direction": "W->Y",
         "tuple": [
           "A15b",
@@ -2433,8 +5440,8 @@
           "B"
         ],
         "crossing_sign": 1,
-        "crossing_switched_for_kirby_calibration": true,
-        "id": "x15",
+        "crossing_switched_for_kirby_calibration": false,
+        "id": "x19",
         "over_direction": "W->Y",
         "tuple": [
           "A15c",
@@ -2449,9 +5456,9 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x16",
+        "id": "x20",
         "over_direction": "Y->W",
         "tuple": [
           "A17",
@@ -2466,43 +5473,43 @@
           "A",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x17",
+        "id": "x21",
         "over_direction": "Y->W",
         "tuple": [
-          "C1",
+          "C1g",
           "A18",
           "C2",
           "A1"
         ],
-        "under": "C1->C2"
+        "under": "C1g->C2"
       },
       {
         "component_pair": [
           "B",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x18",
+        "id": "x22",
         "over_direction": "Y->W",
         "tuple": [
-          "B1",
+          "B1c",
           "C10",
           "B2",
           "C11"
         ],
-        "under": "B1->B2"
+        "under": "B1c->B2"
       },
       {
         "component_pair": [
           "B",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x19",
+        "id": "x23",
         "over_direction": "Y->W",
         "tuple": [
           "C9",
@@ -2517,9 +5524,9 @@
           "B",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x20",
+        "id": "x24",
         "over_direction": "Y->W",
         "tuple": [
           "B7",
@@ -2534,9 +5541,9 @@
           "B",
           "C"
         ],
-        "crossing_sign": 1,
+        "crossing_sign": -1,
         "crossing_switched_for_kirby_calibration": false,
-        "id": "x21",
+        "id": "x25",
         "over_direction": "Y->W",
         "tuple": [
           "C3",
@@ -2548,15 +5555,6 @@
       }
     ],
     "crossing_signs": [
-      1,
-      1,
-      -1,
-      1,
-      -1,
-      1,
-      1,
-      1,
-      1,
       -1,
       1,
       1,
@@ -2564,207 +5562,44 @@
       -1,
       1,
       1,
+      -1,
+      1,
+      -1,
+      -1,
       1,
       1,
       1,
+      -1,
+      -1,
       1,
-      1
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
     ]
   },
   "source_target_intersection_matrix": [
     [
       3,
       2,
-      4
+      -4
     ],
     [
       2,
       1,
-      2
+      -2
     ],
     [
-      4,
-      2,
+      -4,
+      -2,
       3
     ]
   ],
   "status": "pass",
-  "su2_2_omega_evaluations": [
-    {
-      "omega_labels": [
-        0,
-        0,
-        0
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "-8",
-          "0",
-          "0"
-        ],
-        "display": "-8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        0,
-        0,
-        1
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "8",
-          "0",
-          "0"
-        ],
-        "display": "8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        0,
-        1,
-        0
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "8",
-          "0",
-          "0"
-        ],
-        "display": "8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        0,
-        1,
-        1
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "-8",
-          "0",
-          "0"
-        ],
-        "display": "-8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        1,
-        0,
-        0
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "8",
-          "0",
-          "0"
-        ],
-        "display": "8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        1,
-        0,
-        1
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "-8",
-          "0",
-          "0"
-        ],
-        "display": "-8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        1,
-        1,
-        0
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "-8",
-          "0",
-          "0"
-        ],
-        "display": "-8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    },
-    {
-      "omega_labels": [
-        1,
-        1,
-        1
-      ],
-      "omega_value": {
-        "coefficients": [
-          "0",
-          "0",
-          "0",
-          "0",
-          "0",
-          "8",
-          "0",
-          "0"
-        ],
-        "display": "8*zeta16^5",
-        "field": "CyclotomicField(16)",
-        "zeta_symbol": "zeta16"
-      }
-    }
-  ]
+  "su2_2_omega_evaluations": [],
+  "su2_2_omega_evaluations_status": "skipped-legacy-jones-diagnostic; clean PD braid conversion is a payload step and should not be blocked by the older SU(2)_2 Jones-polynomial oracle"
 }

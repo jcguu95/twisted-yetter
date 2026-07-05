@@ -229,21 +229,11 @@ class SU2KBraidEvaluator:
         return tuple(tuple(int(entry) for entry in row) for row in linkings)
 
     def degree_linking_phase(self, n_strands, braid_word, component_labels):
-        # This compensates a repo-local SU(2)_2 braid-oracle convention.  It is
-        # not part of the general SU(2)_k RT normalization; in particular
-        # SU(2)_6 Hopf-link values must agree with the modular S-matrix without
-        # this phase.
-        if self.level != 2:
-            return self.one()
-        linkings = self.linking_matrix(n_strands, braid_word)
-        exponent = 0
-        for left, left_label in enumerate(component_labels):
-            if left_label % 2 == 0:
-                continue
-            for right in range(left + 1, len(component_labels)):
-                if component_labels[right] % 2 == 1:
-                    exponent += linkings[left][right]
-        return self.coerce(self.A ** (((self.level + 2) // 2) * exponent))
+        # General SU(2)_k RT profile: no repo-local level-2 oracle phase.
+        # Older SU(2)_2 Jones/oracle scripts used a separate convention; keep
+        # that convention out of this shared evaluator so k=2 behaves like the
+        # same RT profile as k>2.
+        return self.one()
 
     @staticmethod
     def selected_subbraid_word(n_strands, braid_word, selected_strands):
@@ -614,12 +604,11 @@ class SU2KBraidEvaluator:
         left = int(left)
         right = int(right)
         output = int(output)
+        sign = (-1) ** ((left + right - output) // 2)
         if positive:
             exponent = -(left * (left + 2) + right * (right + 2) - output * (output + 2)) // 2
-            sign = (-1) ** ((left + right - output) // 2) if left == right else 1
             return self.coerce(sign * self.A**exponent)
         exponent = -(right * (right + 2) + left * (left + 2) - output * (output + 2)) // 2
-        sign = (-1) ** ((right + left - output) // 2) if left == right else 1
         return self.one() / self.coerce(sign * self.A**exponent)
 
     @staticmethod
