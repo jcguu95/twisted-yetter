@@ -112,3 +112,5 @@ dirty flag、tool versions。
   reference matrix、diagram data、calculation artifact、theory note。
 - 新增重要 artifact 時，盡量同時新增 JSON reference record，或在 objective note
   中建立可追溯引用。
+- Always merge with no-ff. 除非你強烈覺得不應該這麼做，那你停下來問使用者。
+- 每次要修改本檔 AGENTS.md 時，必須要重複和使用者確認。
