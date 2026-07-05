@@ -35,6 +35,8 @@ GENERATED_CACHE_DIRS = {
     ".pytest_cache",
     ".ruff_cache",
     ".sage",
+    ".uv-cache",
+    ".venv",
     "__pycache__",
 }
 
