@@ -52,11 +52,51 @@ def labels_for_yasui_order(component_order, alpha):
     return tuple(alpha_by_basis[CLASS_MOD_2[component]] for component in component_order)
 
 
+def skipped_result(yasui, reason):
+    return {
+        "schema": "twisted-yetter.yasui-figure3-a1-standard-comparison-su2-2.v1",
+        "status": "skipped-legacy-jones-diagnostic",
+        "reason": reason,
+        "comparison_level": (
+            "raw unnormalized SU(2)_2 braid-oracle values as functions of "
+            "alpha in Hom(H2,Z/2); skipped because the clean Yasui braid "
+            "payload explicitly marks the legacy Jones diagnostic as outside "
+            "this payload admission step"
+        ),
+        "standard_presentation": {
+            "description": "split unlink for CP2#2CPbar",
+            "component_order": ["h", "e1", "e2"],
+            "framings": [1, -1, -1],
+            "n_strands": 3,
+            "braid_word": [],
+        },
+        "yasui_presentation": {
+            "source": str(YASUI_PAYLOAD.relative_to(REPO_ROOT)),
+            "component_order_in_braid": yasui.get("omega_label_order"),
+            "framings_in_braid_order": yasui.get("framings_in_braid_order"),
+            "class_map_mod_2": {
+                key: value for key, value in sorted(CLASS_MOD_2.items())
+            },
+            "kirby_calibration": yasui.get("kirby_calibration"),
+            "su2_2_omega_evaluations_status": yasui.get("su2_2_omega_evaluations_status"),
+        },
+        "rows": [],
+    }
+
+
 def main():
     oracle = load_module(ORACLE_PATH, "su2_2_braid_oracle_for_yasui_compare")
     yasui = json.loads(YASUI_PAYLOAD.read_text())
     if yasui["status"] != "pass":
         raise ValueError("Yasui braid payload is not pass")
+    legacy_status = yasui.get("su2_2_omega_evaluations_status", "")
+    if legacy_status.startswith("skipped-legacy-jones-diagnostic"):
+        result = skipped_result(yasui, legacy_status)
+        OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+        OUTPUT.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return 0
+
     yasui_order = list(yasui["omega_label_order"])
     for component in yasui_order:
         if component not in CLASS_MOD_2:
