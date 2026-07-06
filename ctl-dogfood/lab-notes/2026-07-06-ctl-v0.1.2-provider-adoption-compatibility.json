@@ -1,0 +1,103 @@
+{
+  "adoption_boundary": {
+    "adoption_type": "downstream compatibility checkpoint for upstream tooling/profile release",
+    "graph_revision_created": false,
+    "kernel_migration": false,
+    "old_objects_rewritten": false,
+    "project_specific_ontology_imported_upstream": false,
+    "state_store_migration": false
+  },
+  "adoption_recommendation": {
+    "admit_this_note_before_verifier_policy_change": true,
+    "do_not_replace_project_specific_verifier_checks": true,
+    "may_wrap_upstream_ctl_store_for_structural_audit": true,
+    "status": "ADOPT_AS_TOOLING_COMPATIBLE_PROVIDER_AFTER_CHECKPOINT"
+  },
+  "checks": [
+    {
+      "command": "python ctl-dogfood/scripts/verify.py",
+      "interpretation": "Old project verifier still treats bootstrap ctl_meta_commit as current HEAD; this is now too strict after upstream v0.1.2.",
+      "result": "fail",
+      "stderr_tail": "ctl_ref.InvalidHistory: ctl-meta HEAD mismatch"
+    },
+    {
+      "command": "python -c 'import json, sys; from pathlib import Path; sys.path.insert(0, \"/Users/jin/data/local/projects/ctl-meta/meta/ctl-dogfood/scripts\"); import ctl_store; report = ctl_store.build_verify_report(Path(\"/Users/jin/data/local/projects/twisted-yetter/ctl-dogfood\")); print(json.dumps(report, sort_keys=True))'",
+      "interpretation": "Upstream v0.1.2 generic structural verifier can replay the twisted-yetter CTL store without changing history.",
+      "result": "pass",
+      "summary": {
+        "history_kernel_result": "Valid",
+        "manifest_count": 37,
+        "manifest_status": "ok",
+        "object_count": 115,
+        "root_cid": "ctlobj-sha256:5796f664452bc39286b12882a18da90b0d9851fdc406c03fe60863f4b9607a8d",
+        "status": "ok",
+        "store_status": "ok"
+      }
+    },
+    {
+      "command": "python -c 'import json, sys; from pathlib import Path; sys.path.insert(0, \"/Users/jin/data/local/projects/ctl-meta/meta/ctl-dogfood/scripts\"); import ctl_store; report = ctl_store.inspect_binding(\"claim:graph:computation-first-v1\", Path(\"/Users/jin/data/local/projects/twisted-yetter/ctl-dogfood\")); print(json.dumps(report, sort_keys=True))'",
+      "interpretation": "The active graph binding remains the admitted v30 graph claim.",
+      "result": "pass",
+      "summary": {
+        "binding_cid": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
+        "binding_state": "bound",
+        "logical_id": "claim:graph:computation-first-v1",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      }
+    }
+  ],
+  "claim_boundary": "This note establishes downstream compatibility with the upstream CTL v0.1.2 tooling/profile release. It does not modify the CTL kernel, does not assert a new Twisted-Yetter research result, and does not create graph v31.",
+  "created_at": "2026-07-06T04:49:52Z",
+  "downstream_store_under_test": {
+    "active_graph_claim_cid": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
+    "active_graph_logical_id": "claim:graph:computation-first-v1",
+    "active_graph_version": 30,
+    "pre_admission_current_root_cid": "ctlobj-sha256:5796f664452bc39286b12882a18da90b0d9851fdc406c03fe60863f4b9607a8d",
+    "project_id": "project:twisted-yetter"
+  },
+  "generator_script": "manual-json-artifact",
+  "git": {
+    "commit_before_artifact": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "dirty_before_artifact": false
+  },
+  "kernel_compatibility": {
+    "kernel_profile": "ctl-kernel/1",
+    "kernel_profile_change": "none",
+    "kernel_semantics_changed": false,
+    "old_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+    "upstream_release_declares_no_ctl_kernel_2": true,
+    "upstream_release_declares_no_validate_transition_change": true
+  },
+  "legacy_provider_pin": {
+    "bootstrap_manifest": "ctl-dogfood/manifests/bootstrap-2026-06-26.json",
+    "ctl_meta_commit": "a52af635dc832bea8dbd13652355d5820dddd407",
+    "ctl_meta_status_short": "",
+    "meaning": "historical bootstrap provider used to create the original dogfood store"
+  },
+  "note_id": "objective-note-2026-07-06-ctl-v0.1.2-provider-adoption-compatibility",
+  "purpose": "Record that upstream CTL v0.1.2 is a kernel-compatible tooling/profile release and that its generic structural verifier can replay the existing twisted-yetter CTL store.",
+  "reproduce_commands": [
+    "python ctl-dogfood/scripts/verify.py",
+    "python -c 'import json, sys; from pathlib import Path; sys.path.insert(0, \"/Users/jin/data/local/projects/ctl-meta/meta/ctl-dogfood/scripts\"); import ctl_store; report = ctl_store.build_verify_report(Path(\"/Users/jin/data/local/projects/twisted-yetter/ctl-dogfood\")); print(json.dumps(report, sort_keys=True))'",
+    "python -c 'import json, sys; from pathlib import Path; sys.path.insert(0, \"/Users/jin/data/local/projects/ctl-meta/meta/ctl-dogfood/scripts\"); import ctl_store; report = ctl_store.inspect_binding(\"claim:graph:computation-first-v1\", Path(\"/Users/jin/data/local/projects/twisted-yetter/ctl-dogfood\")); print(json.dumps(report, sort_keys=True))'"
+  ],
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_of_truth_policy": "This compatibility note is a machine-readable CTL lab-note preimage. Bootstrap provider pins remain historical facts; current provider adoption is established by the admitted compatibility claim.",
+  "status": "ESTABLISHED_COMPATIBILITY_CHECKPOINT",
+  "upstream_release": {
+    "commit": "4961189407282548d58e4fe977f28556a76e5908",
+    "release_decision": "meta/ctl-dogfood/decisions/v0.1.2-release-decision-2026-07-06.json",
+    "release_note": "meta/ctl-kernel/releases/ctl-v0.1.2.org",
+    "tag": "ctl-v0.1.2"
+  },
+  "verifier_update_policy": {
+    "bootstrap_provider_pin_should_remain_historical": true,
+    "current_provider_can_be_accepted_from_this_admitted_note": true,
+    "required_current_provider_clean_status": "",
+    "required_current_provider_commit": "4961189407282548d58e4fe977f28556a76e5908",
+    "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+    "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental",
+    "required_release_tag": "ctl-v0.1.2"
+  }
+}

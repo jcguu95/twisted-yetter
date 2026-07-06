@@ -39,6 +39,7 @@ from prose_policy import (  # noqa: E402
 LEGACY_ARCHIVE_DIR = REPO_ROOT / "legacy-archives"
 LEGACY_ARCHIVE_PATH = archive_path(REPO_ROOT)
 LEGACY_ARCHIVE_MANIFEST_PATH = manifest_path(REPO_ROOT)
+PROVIDER_ADOPTION_POLICY_KEY = "verifier_update_policy"
 
 
 def run_git(root: Path, args: list[str]) -> str:
@@ -346,19 +347,102 @@ def verify_no_unapproved_prose_files() -> None:
         ctl_ref.die_unless(False, message)
 
 
+def active_provider_adoption_policy(store: ctl_ref.Store, state: dict[str, Any]) -> dict[str, Any] | None:
+    candidates = []
+    for logical_id, cid in state["bindings"].items():
+        if not logical_id.startswith("claim:lab-note:"):
+            continue
+        rev = store.resolve(cid)
+        payload = rev.get("payload")
+        if not isinstance(payload, dict):
+            continue
+        policy = payload.get(PROVIDER_ADOPTION_POLICY_KEY)
+        if not isinstance(policy, dict):
+            continue
+        if policy.get("current_provider_can_be_accepted_from_this_admitted_note") is not True:
+            continue
+        candidates.append(
+            {
+                "claim_cid": cid,
+                "created_at": rev["created_at"],
+                "logical_id": logical_id,
+                "policy": policy,
+            }
+        )
+    if not candidates:
+        return None
+    return sorted(candidates, key=lambda item: (item["created_at"], item["logical_id"], item["claim_cid"]))[-1]
+
+
+def verify_provider_compatibility(
+    bootstrap: dict[str, Any],
+    store: ctl_ref.Store,
+    state: dict[str, Any],
+) -> dict[str, Any]:
+    bootstrap_provider = bootstrap["provider"]
+    current_head = run_git(CTL_META_ROOT, ["rev-parse", "HEAD"])
+    current_status = run_git(CTL_META_ROOT, ["status", "--short"])
+    bootstrap_freeze_tag = bootstrap_provider["ctl_kernel_freeze_tag"]
+    bootstrap_freeze_commit = bootstrap_provider["ctl_kernel_freeze_commit"]
+    current_freeze_commit = run_git(CTL_META_ROOT, ["rev-parse", f"{bootstrap_freeze_tag}^{{}}"])
+    ctl_ref.die_unless(current_freeze_commit == bootstrap_freeze_commit, "ctl-kernel freeze tag mismatch")
+
+    adoption = active_provider_adoption_policy(store, state)
+    if adoption is None:
+        ctl_ref.die_unless(current_head == bootstrap_provider["ctl_meta_commit"], "ctl-meta HEAD mismatch")
+        ctl_ref.die_unless(current_status == bootstrap_provider["ctl_meta_status_short"], "ctl-meta dirty status mismatch")
+        return {
+            "mode": "bootstrap-provider-pin",
+            "bootstrap_ctl_meta_commit": bootstrap_provider["ctl_meta_commit"],
+            "current_ctl_meta_commit": current_head,
+            "current_ctl_meta_status_short": current_status,
+            "ctl_kernel_freeze_commit": current_freeze_commit,
+        }
+
+    policy = adoption["policy"]
+    required_kernel_tag = policy.get("required_kernel_freeze_tag", bootstrap_freeze_tag)
+    required_kernel_commit = policy.get("required_kernel_freeze_commit", bootstrap_freeze_commit)
+    required_release_tag = policy.get("required_release_tag")
+    required_provider_commit = policy.get("required_current_provider_commit")
+    required_status = policy.get("required_current_provider_clean_status", "")
+
+    ctl_ref.die_unless(isinstance(required_kernel_tag, str), "provider adoption policy missing kernel tag")
+    ctl_ref.die_unless(isinstance(required_kernel_commit, str), "provider adoption policy missing kernel commit")
+    ctl_ref.die_unless(isinstance(required_provider_commit, str), "provider adoption policy missing provider commit")
+    ctl_ref.die_unless(isinstance(required_status, str), "provider adoption policy dirty status must be string")
+
+    current_required_freeze_commit = run_git(CTL_META_ROOT, ["rev-parse", f"{required_kernel_tag}^{{}}"])
+    ctl_ref.die_unless(
+        current_required_freeze_commit == required_kernel_commit,
+        "ctl-kernel freeze tag mismatch with provider adoption policy",
+    )
+    if required_release_tag is not None:
+        ctl_ref.die_unless(isinstance(required_release_tag, str), "provider adoption policy release tag must be string")
+        current_release_commit = run_git(CTL_META_ROOT, ["rev-parse", f"{required_release_tag}^{{}}"])
+        ctl_ref.die_unless(
+            current_release_commit == required_provider_commit,
+            "ctl-meta release tag mismatch with provider adoption policy",
+        )
+
+    ctl_ref.die_unless(current_head == required_provider_commit, "ctl-meta HEAD mismatch with provider adoption policy")
+    ctl_ref.die_unless(current_status == required_status, "ctl-meta dirty status mismatch with provider adoption policy")
+    return {
+        "mode": "admitted-provider-adoption",
+        "adoption_claim_cid": adoption["claim_cid"],
+        "adoption_logical_id": adoption["logical_id"],
+        "bootstrap_ctl_meta_commit": bootstrap_provider["ctl_meta_commit"],
+        "current_ctl_meta_commit": current_head,
+        "current_ctl_meta_status_short": current_status,
+        "ctl_kernel_freeze_commit": current_required_freeze_commit,
+        "required_release_tag": required_release_tag,
+    }
+
+
 def main() -> int:
     store = load_store()
     ref = load_json(DOGFOOD_ROOT / "refs" / "main.json")
     bootstrap = load_json(DOGFOOD_ROOT / "manifests" / "bootstrap-2026-06-26.json")
     manifests = load_manifests()
-    provider = bootstrap["provider"]
-    ctl_ref.die_unless(run_git(CTL_META_ROOT, ["rev-parse", "HEAD"]) == provider["ctl_meta_commit"], "ctl-meta HEAD mismatch")
-    ctl_ref.die_unless(
-        run_git(CTL_META_ROOT, ["rev-parse", "ctl-kernel-v0.1.1-experimental^{}"])
-        == provider["ctl_kernel_freeze_commit"],
-        "ctl-kernel freeze tag mismatch",
-    )
-    ctl_ref.die_unless(run_git(CTL_META_ROOT, ["status", "--short"]) == provider["ctl_meta_status_short"], "ctl-meta dirty status mismatch")
     ctl_ref.check_keys(
         ref,
         {
@@ -382,6 +466,7 @@ def main() -> int:
     }
     state = ctl_ref.validate_chain(store, ref["root_cid"], trust_anchor)
     ctl_ref.die_unless(state["root_cid"] == ref["root_cid"], "ref root replay mismatch")
+    provider_report = verify_provider_compatibility(bootstrap, store, state)
     verify_manifest_reachability(store, manifests, ref)
     verify_admission_fast_forward(store, manifests)
     verify_active_decision_graphs(store, state)
@@ -403,6 +488,7 @@ def main() -> int:
                 "manifest_count": len(manifests),
                 "ctl_meta_commit": bootstrap["provider"]["ctl_meta_commit"],
                 "ctl_kernel_freeze_commit": bootstrap["provider"]["ctl_kernel_freeze_commit"],
+                "provider": provider_report,
             },
             sort_keys=True,
         )
