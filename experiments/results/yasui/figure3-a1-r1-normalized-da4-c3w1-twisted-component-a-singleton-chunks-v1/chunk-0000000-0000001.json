@@ -1,0 +1,231 @@
+{
+  "argv": [
+    "--sector-index",
+    "0",
+    "--worker-id",
+    "local-smoke-a0",
+    "--run-label",
+    "smoke-c3w1-a-twist",
+    "--force"
+  ],
+  "base_evaluator_script": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+  "category_id": "c3w1_twisted_D_A4",
+  "category_twist": {
+    "cohomology_class": "c3-inflated omega_power=1 on A4/V4 ~= C3",
+    "kind": "H3-cocycle",
+    "mtc_artifact_id": "c3w1_twisted_D_A4"
+  },
+  "claim_boundary": "Numeric fixed-label singleton for the c3w1 D(A4) evaluator with component-A Z/3 character-twisted Kirby color; not an exact theorem-level certificate.",
+  "component_order_in_braid": [
+    "C",
+    "A",
+    "B"
+  ],
+  "elapsed_seconds": 7.349997758865356e-05,
+  "environment": {
+    "cpu_count": 8,
+    "env_allowlist": {
+      "DOT_SAGE": "/Users/jin/.codex/worktrees/7363/twisted-yetter/.sage",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "hostname": "jin-m2",
+    "machine": "arm64",
+    "numpy_config": "Build Dependencies:\n  blas:\n    detection method: pkgconfig\n    found: true\n    include directory: /var/tmp/sage-10.8-current/local/include\n    lib directory: /var/tmp/sage-10.8-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEX MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.8-current/local/lib/pkgconfig\n    version: 0.3.29\n  lapack:\n    detection method: pkgconfig\n    found: true\n    include directory: /var/tmp/sage-10.8-current/local/include\n    lib directory: /var/tmp/sage-10.8-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEX MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.8-current/local/lib/pkgconfig\n    version: 0.3.29\nCompilers:\n  c:\n    args: -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    commands: gcc\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.8-current/local/lib, -L/private/var/tmp/sage-10.8-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.8-current/local/lib,\n      -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    name: clang\n    version: 17.0.0\n  c++:\n    args: -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    commands: g++\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.8-current/local/lib, -L/private/var/tmp/sage-10.8-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.8-current/local/lib,\n      -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    name: clang\n    version: 17.0.0\n  cython:\n    commands: cython\n    linker: cython\n    name: cython\n    version: 3.1.3\nMachine Information:\n  build:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\n  host:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\nPython Information:\n  path: /private/var/folders/xz/fl2zxh5d2mx_p1n25h7m8t800000gn/T/build-env-4_moge6i/bin/python\n  version: '3.13'\nSIMD Extensions:\n  baseline:\n  - NEON\n  - NEON_FP16\n  - NEON_VFPV4\n  - ASIMD\n  found:\n  - ASIMDHP\n  not found:\n  - ASIMDFHM\n  - SVE\n\n",
+    "numpy_version": "2.3.2",
+    "pid": 54800,
+    "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+    "ppid": 54676,
+    "processor": "arm",
+    "python_executable": "/var/tmp/sage-10.8-current/local/bin/python3",
+    "python_version": "3.13.7 (main, Dec 26 2025, 08:28:22) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "sage_executable": "/var/tmp/sage-10.8-current/local/bin/sage",
+    "sage_version": "10.8",
+    "timezone_name": "MDT",
+    "timezone_utc_offset_seconds": -21600,
+    "total_memory_bytes": 17179869184,
+    "uname": [
+      "Darwin",
+      "jin-m2",
+      "24.6.0",
+      "Darwin Kernel Version 24.6.0: Wed Oct 15 21:12:44 PDT 2025; root:xnu-11417.140.69.703.14~1/RELEASE_ARM64_T8112",
+      "arm64"
+    ]
+  },
+  "evaluator_stats": {
+    "selected_component_count": 0,
+    "selected_strand_count": 0,
+    "subbraid_word_length": 0,
+    "unit_pruned": true
+  },
+  "fixed_component_labels": [
+    "1A:triv",
+    "1A:triv",
+    "1A:triv"
+  ],
+  "fixed_sector_amplitude": {
+    "abs": "1.0",
+    "display": "1+0j",
+    "field": "complex128",
+    "imag": "0.0",
+    "real": "1.0"
+  },
+  "generator_script": "experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py",
+  "kind": "fixed-label-sector",
+  "link_id": "yasui-figure3-a1-r1-normalized",
+  "link_twist": {
+    "character_formula": "zeta_3^(omega_label * degree(simple_label))",
+    "degree_by_flux_class": {
+      "1A": 0,
+      "2A": 0,
+      "3A": 1,
+      "3B": 2
+    },
+    "id": "component-A-generator-in-Z3",
+    "omega_by_component": {
+      "A": 1,
+      "B": 0,
+      "C": 0
+    },
+    "omega_labels_in_braid_order": [
+      0,
+      1,
+      0
+    ],
+    "universal_group": "Z/3"
+  },
+  "manifest_entry": {
+    "basis_sizes_by_total": {
+      "1A:triv": 1
+    },
+    "difficulty_score": 0,
+    "effective_component_labels": [],
+    "effective_framings": [],
+    "fixed_component_labels": [
+      "1A:triv",
+      "1A:triv",
+      "1A:triv"
+    ],
+    "max_basis_size": 1,
+    "max_state_size_proxy": 1,
+    "priority_rank": 0,
+    "sector_index": 0,
+    "selected_component_count": 0,
+    "selected_strand_count": 0,
+    "subbraid_word_length": 0,
+    "sum_basis_size": 1,
+    "total_charge_count": 1,
+    "unit_pruned": true
+  },
+  "mtc_id": "c3w1_twisted_D_A4",
+  "repo": {
+    "dirty": true,
+    "dirty_ignoring_codex_app_metadata": true,
+    "git_commit": "ec08f37ee1bf5ab4bdbe839c3ca57a074fd6d159",
+    "ignored_dirty_prefixes": [
+      ".codex/"
+    ],
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? .codex/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-balanced-random-requeue-20260706T1527Z-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-chunks-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json\n?? experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py",
+    "status_short_relevant": "?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-balanced-random-requeue-20260706T1527Z-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-chunks-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json\n?? experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py"
+  },
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py --sector-index 0 --worker-id local-smoke-a0",
+  "run_context": {
+    "environment": {
+      "cpu_count": 8,
+      "env_allowlist": {
+        "DOT_SAGE": "/Users/jin/.codex/worktrees/7363/twisted-yetter/.sage",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "hostname": "jin-m2",
+      "machine": "arm64",
+      "numpy_config": "Build Dependencies:\n  blas:\n    detection method: pkgconfig\n    found: true\n    include directory: /var/tmp/sage-10.8-current/local/include\n    lib directory: /var/tmp/sage-10.8-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEX MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.8-current/local/lib/pkgconfig\n    version: 0.3.29\n  lapack:\n    detection method: pkgconfig\n    found: true\n    include directory: /var/tmp/sage-10.8-current/local/include\n    lib directory: /var/tmp/sage-10.8-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEX MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.8-current/local/lib/pkgconfig\n    version: 0.3.29\nCompilers:\n  c:\n    args: -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    commands: gcc\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.8-current/local/lib, -L/private/var/tmp/sage-10.8-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.8-current/local/lib,\n      -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    name: clang\n    version: 17.0.0\n  c++:\n    args: -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    commands: g++\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.8-current/local/lib, -L/private/var/tmp/sage-10.8-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.8-current/local/lib,\n      -O2, -mmacosx-version-min=11.0, -I/var/tmp/sage-10.8-current/local/include,\n      -I/var/tmp/sage-10.8-current/local/include\n    name: clang\n    version: 17.0.0\n  cython:\n    commands: cython\n    linker: cython\n    name: cython\n    version: 3.1.3\nMachine Information:\n  build:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\n  host:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\nPython Information:\n  path: /private/var/folders/xz/fl2zxh5d2mx_p1n25h7m8t800000gn/T/build-env-4_moge6i/bin/python\n  version: '3.13'\nSIMD Extensions:\n  baseline:\n  - NEON\n  - NEON_FP16\n  - NEON_VFPV4\n  - ASIMD\n  found:\n  - ASIMDHP\n  not found:\n  - ASIMDFHM\n  - SVE\n\n",
+      "numpy_version": "2.3.2",
+      "pid": 54800,
+      "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+      "ppid": 54676,
+      "processor": "arm",
+      "python_executable": "/var/tmp/sage-10.8-current/local/bin/python3",
+      "python_version": "3.13.7 (main, Dec 26 2025, 08:28:22) [Clang 17.0.0 (clang-1700.3.19.1)]",
+      "sage_executable": "/var/tmp/sage-10.8-current/local/bin/sage",
+      "sage_version": "10.8",
+      "timezone_name": "MDT",
+      "timezone_utc_offset_seconds": -21600,
+      "total_memory_bytes": 17179869184,
+      "uname": [
+        "Darwin",
+        "jin-m2",
+        "24.6.0",
+        "Darwin Kernel Version 24.6.0: Wed Oct 15 21:12:44 PDT 2025; root:xnu-11417.140.69.703.14~1/RELEASE_ARM64_T8112",
+        "arm64"
+      ]
+    },
+    "mode": "singleton",
+    "repo_before_write": {
+      "dirty": true,
+      "dirty_ignoring_codex_app_metadata": true,
+      "git_commit": "ec08f37ee1bf5ab4bdbe839c3ca57a074fd6d159",
+      "ignored_dirty_prefixes": [
+        ".codex/"
+      ],
+      "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+      "status_short": "?? .codex/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-balanced-random-requeue-20260706T1527Z-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-chunks-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json\n?? experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py",
+      "status_short_relevant": "?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-balanced-random-requeue-20260706T1527Z-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-chunks-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json\n?? experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py"
+    },
+    "run_label": "smoke-c3w1-a-twist",
+    "tool_versions": {
+      "numpy": "2.3.2",
+      "python": "3.13.7 (main, Dec 26 2025, 08:28:22) [Clang 17.0.0 (clang-1700.3.19.1)]",
+      "sage": "10.8"
+    },
+    "worker_id": "local-smoke-a0"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton.v1",
+  "sector_index": 0,
+  "sector_total": 2744,
+  "source": {
+    "braid_payload": "experiments/results/yasui/figure3-a1-r1-normalized-braid-payload-v1.json",
+    "braid_payload_sha256": "f96fb3836333429b89539269002eb9fc68672c5d09c55f63c4248997a3c10199",
+    "braid_word_length": 30,
+    "component_order_in_braid": [
+      "C",
+      "A",
+      "B"
+    ],
+    "framings_in_braid_order": [
+      3,
+      3,
+      1
+    ],
+    "link_twist_omega_labels_in_braid_order": [
+      0,
+      1,
+      0
+    ],
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+    "mtc_sha256": "31fbc6af46a2289a9f0feb941a0b4d6afcdc3977d0187f3ebf5e195f8951df3d",
+    "n_strands": 7
+  },
+  "status": "computed-numeric",
+  "tool_versions": {
+    "numpy": "2.3.2",
+    "python": "3.13.7 (main, Dec 26 2025, 08:28:22) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "sage": "10.8"
+  },
+  "twisted_coefficient": {
+    "abs": "1.0",
+    "display": "1+0j",
+    "field": "complex128",
+    "imag": "0.0",
+    "real": "1.0"
+  },
+  "utc_finish": "2026-07-06T17:13:40.579760+00:00",
+  "utc_start": "2026-07-06T17:13:40.568537+00:00",
+  "weighted_twisted_contribution": {
+    "abs": "1.0",
+    "display": "1+0j",
+    "field": "complex128",
+    "imag": "0.0",
+    "real": "1.0"
+  },
+  "yetter_twist": "none"
+}
