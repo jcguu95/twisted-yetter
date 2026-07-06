@@ -1,0 +1,66 @@
+{
+  "argv": [
+    "--start",
+    "0",
+    "--count",
+    "1",
+    "--profile-output",
+    "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-smoke-profile-v1.json"
+  ],
+  "chunk_artifacts": [
+    "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/chunk-0000000-0000001.json"
+  ],
+  "chunk_dir": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1",
+  "claim_boundary": "numeric timing/profile artifact only; not an exact certificate or exotic invariant conclusion",
+  "count": 1,
+  "elapsed_seconds": 6.357401124900207,
+  "generator_script": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+  "repo": {
+    "dirty": true,
+    "git_commit": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/\n?? experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py"
+  },
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py --start 0 --count 1",
+  "requested_count": 1,
+  "sage_version": "10.8",
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-first20-profile.v1",
+  "scope": "first timing probe for fixed-label sectors of Yasui Figure 3 a=3 with D(A4) untwisted FR data and no Yetter twist",
+  "sector_total": 2744,
+  "source": {
+    "braid_word_length": 64,
+    "component_order_in_braid": [
+      "A",
+      "C",
+      "B"
+    ],
+    "framings_in_braid_order": [
+      15,
+      3,
+      1
+    ],
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+    "mtc_sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+    "n_strands": 9,
+    "yasui_input": "experiments/inputs/yasui/figure3-a3-crossing-table.json"
+  },
+  "start": 0,
+  "stats": {
+    "max_basis_size_seen": 0,
+    "max_state_size_seen": 0,
+    "unit_pruned_count": 1
+  },
+  "status": "profile-complete",
+  "timing": {
+    "estimated_full_2744_sector_seconds_from_wall": 17444.708686726168,
+    "max_chunk_seconds": 3.0624913051724434e-05,
+    "mean_chunk_seconds": 3.0624913051724434e-05,
+    "min_chunk_seconds": 3.0624913051724434e-05,
+    "per_chunk_seconds": [
+      3.0624913051724434e-05
+    ],
+    "total_wall_seconds": 6.357401124900207
+  },
+  "utc_finish": "2026-07-06T02:20:39.340076+00:00",
+  "utc_start": "2026-07-06T02:20:32.982388+00:00"
+}

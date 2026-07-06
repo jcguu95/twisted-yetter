@@ -1,0 +1,104 @@
+{
+  "argv": [],
+  "category_id": "omega0_untwisted_D_A4",
+  "claim_boundary": "Timing/profile summary only; numeric evaluator artifact, not theorem-level invariant evidence.",
+  "generator_script": "inline-python-summary-from-existing-singleton-artifacts",
+  "link_id": "yasui-figure3-a1-r1-normalized",
+  "probes": [
+    {
+      "artifact": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-chunks-v1/chunk-0000014-0000015.json",
+      "artifact_sha256": "7e3b25164a76f9d7aa36638dcfa9dac875836a10e424ddaf648c5b37f0960f5c",
+      "difficulty_score": 4,
+      "elapsed_seconds": 0.00018783379346132278,
+      "fixed_component_labels": [
+        "1A:triv",
+        "1A:chi1",
+        "1A:triv"
+      ],
+      "max_basis_size": 1,
+      "max_state_size": 1,
+      "priority_rank": 14,
+      "role": "easy-with-crossing",
+      "sector_index": 14,
+      "selected_strand_count": 3,
+      "subbraid_word_length": 4,
+      "unit_pruned": true
+    },
+    {
+      "artifact": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-chunks-v1/chunk-0001083-0001084.json",
+      "artifact_sha256": "ad2b01994116e8aa7373eae3c176bef33ff1c58c80e6836379934440fe8b1092",
+      "difficulty_score": 648270,
+      "elapsed_seconds": 0.19294591597281396,
+      "fixed_component_labels": [
+        "2A:eps01",
+        "2A:eps11",
+        "2A:eps01"
+      ],
+      "max_basis_size": 147,
+      "max_state_size": 1947,
+      "priority_rank": 1372,
+      "role": "medium-priority",
+      "sector_index": 1083,
+      "selected_strand_count": 7,
+      "subbraid_word_length": 30,
+      "unit_pruned": false
+    },
+    {
+      "artifact": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-chunks-v1/chunk-0002743-0002744.json",
+      "artifact_sha256": "24f47f36bdbbc39725330df377a92ffea5239f73d3e763f10ab5e3fa8ec39c16",
+      "difficulty_score": 55978680,
+      "elapsed_seconds": 274.27257008384913,
+      "fixed_component_labels": [
+        "3B:eta2",
+        "3B:eta2",
+        "3B:eta2"
+      ],
+      "max_basis_size": 1366,
+      "max_state_size": 1680098,
+      "priority_rank": 2743,
+      "role": "hardest-priority",
+      "sector_index": 2743,
+      "selected_strand_count": 7,
+      "subbraid_word_length": 30,
+      "unit_pruned": false
+    }
+  ],
+  "repo": {
+    "dirty": false,
+    "git_commit": "79cef7cc1890c8509059b662381da5548d6a41a6",
+    "ignored_dirty_prefixes": [
+      ".codex/",
+      "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-probe-v1.json"
+    ],
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? .codex/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-probe-v1.json\n",
+    "status_short_relevant": ""
+  },
+  "reproduce_command": "Read the three listed singleton JSON artifacts and aggregate the selected fields and sha256 hashes.",
+  "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-untwisted-probe-summary.v1",
+  "selection_policy": {
+    "easy-with-crossing": "first manifest-priority sector with subbraid_word_length > 0; skips all-unit and framing-only overhead sectors",
+    "hardest-priority": "last entry in manifest priority order",
+    "medium-priority": "entry at floor(2744/2) in manifest priority order"
+  },
+  "source": {
+    "braid_payload": "experiments/results/yasui/figure3-a1-r1-normalized-braid-payload-v1.json",
+    "braid_payload_sha256": "f96fb3836333429b89539269002eb9fc68672c5d09c55f63c4248997a3c10199",
+    "manifest": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-manifest-v1.json",
+    "manifest_sha256": "8d3f83417786b0f46c1affcb3becebc88937fa6248283e554ec3179ccff53a36",
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+    "mtc_artifact_sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+    "runner": "experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py",
+    "runner_sha256": "600de379294b2ce99414e555980314c11dcaaa6649de6d59aff1821ad29ee8d0"
+  },
+  "status": "probe-complete",
+  "summary": {
+    "hardest_elapsed_seconds": 274.27257008384913,
+    "max_elapsed_seconds": 274.27257008384913,
+    "medium_elapsed_seconds": 0.19294591597281396,
+    "min_elapsed_seconds": 0.00018783379346132278,
+    "note": "elapsed_seconds is evaluator-internal contraction time; Sage process startup overhead is not included."
+  },
+  "utc_created": "2026-07-06T14:13:48.654828+00:00",
+  "yetter_twist": "none"
+}
