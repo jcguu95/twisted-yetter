@@ -1,0 +1,249 @@
+{
+  "argv": [
+    "--index-file",
+    "experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-xil-5sec-v1/xil-m2-a1-5sec-v1-w01.json",
+    "--worker-id",
+    "xil-m2-a1-5sec-v1-w01",
+    "--run-label",
+    "xil-5sec-v1"
+  ],
+  "artifact": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-chunks-v1/chunk-0001093-0001094.json",
+  "base_evaluator_script": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+  "category_id": "omega0_untwisted_D_A4",
+  "claim_boundary": "Numeric fixed-label singleton for the untwisted D(A4) evaluator only; not an exact theorem-level certificate.",
+  "component_order_in_braid": [
+    "C",
+    "A",
+    "B"
+  ],
+  "elapsed_seconds": 0.8413665830157697,
+  "environment": {
+    "cpu_count": 8,
+    "env_allowlist": {
+      "DOT_SAGE": "/Users/xilingdai/twisted-yetter-da4-run/.sage",
+      "OPENBLAS_NUM_THREADS": "1",
+      "SAGE_LOCAL": "/var/tmp/sage-10.9-current/local",
+      "SAGE_ROOT": "/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/10.9"
+    },
+    "hostname": "xil-m2",
+    "machine": "arm64",
+    "numpy_config": "Build Dependencies:\n  blas:\n    detection method: pkgconfig\n    found: true\n    include directory: /private/var/tmp/sage-10.9-current/local/include\n    lib directory: /private/var/tmp/sage-10.9-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEXM4 MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.9-current/local/lib/pkgconfig\n    version: 0.3.31\n  lapack:\n    detection method: pkgconfig\n    found: true\n    include directory: /private/var/tmp/sage-10.9-current/local/include\n    lib directory: /private/var/tmp/sage-10.9-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEXM4 MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.9-current/local/lib/pkgconfig\n    version: 0.3.31\nCompilers:\n  c:\n    args: -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    commands: gcc\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.9-current/local/lib, -L/private/var/tmp/sage-10.9-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.9-current/local/lib,\n      -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    name: clang\n    version: 17.0.0\n  c++:\n    args: -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    commands: g++\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.9-current/local/lib, -L/private/var/tmp/sage-10.9-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.9-current/local/lib,\n      -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    name: clang\n    version: 17.0.0\n  cython:\n    commands: cython\n    linker: cython\n    name: cython\n    version: 3.2.4\nMachine Information:\n  build:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\n  host:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\nPython Information:\n  path: /private/var/folders/xz/fl2zxh5d2mx_p1n25h7m8t800000gn/T/build-env-dhf1lj0f/bin/python\n  version: '3.14'\nSIMD Extensions:\n  baseline:\n  - NEON\n  - NEON_FP16\n  - NEON_VFPV4\n  - ASIMD\n  found:\n  - ASIMDHP\n  - ASIMDDP\n  not found:\n  - ASIMDFHM\n  - SVE\n\n",
+    "numpy_version": "2.4.4",
+    "pid": 78008,
+    "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+    "ppid": 77998,
+    "processor": "arm",
+    "python_executable": "/var/tmp/sage-10.9-current/local/bin/python3",
+    "python_version": "3.14.3 (main, Mar  8 2026, 09:55:32) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "sage_executable": "/var/tmp/sage-10.9-current/local/bin/sage",
+    "sage_version": "10.9",
+    "timezone_name": "MDT",
+    "timezone_utc_offset_seconds": -21600,
+    "total_memory_bytes": 17179869184,
+    "uname": [
+      "Darwin",
+      "xil-m2",
+      "24.6.0",
+      "Darwin Kernel Version 24.6.0: Wed Oct 15 21:12:44 PDT 2025; root:xnu-11417.140.69.703.14~1/RELEASE_ARM64_T8112",
+      "arm64"
+    ]
+  },
+  "evaluator_stats": {
+    "basis_sizes_by_total": {
+      "1A:chi1": 36,
+      "1A:chi2": 36,
+      "1A:std3": 108,
+      "1A:triv": 36,
+      "2A:eps00": 108,
+      "2A:eps01": 108,
+      "2A:eps10": 108,
+      "2A:eps11": 108
+    },
+    "max_basis_size": 108,
+    "max_state_size": 9153,
+    "selected_component_count": 3,
+    "selected_strand_count": 7,
+    "subbraid_word_length": 30,
+    "total_charge_count": 8,
+    "unit_pruned": false
+  },
+  "fixed_component_labels": [
+    "2A:eps01",
+    "3A:eta0",
+    "1A:chi1"
+  ],
+  "fixed_sector_amplitude": {
+    "abs": "2.5050723726870128e-15",
+    "display": "1.0200174038743626e-15-2.2880017675240431e-15j",
+    "field": "complex128",
+    "imag": "-2.288001767524043e-15",
+    "real": "1.0200174038743626e-15"
+  },
+  "generator_script": "experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py",
+  "kind": "fixed-label-sector",
+  "link_id": "yasui-figure3-a1-r1-normalized",
+  "manifest_entry": {
+    "basis_sizes_by_total": {
+      "1A:chi1": 36,
+      "1A:chi2": 36,
+      "1A:std3": 108,
+      "1A:triv": 36,
+      "2A:eps00": 108,
+      "2A:eps01": 108,
+      "2A:eps10": 108,
+      "2A:eps11": 108
+    },
+    "difficulty_score": 349920,
+    "effective_component_labels": [
+      "2A:eps01",
+      "3A:eta0",
+      "1A:chi1"
+    ],
+    "effective_framings": [
+      3,
+      3,
+      1
+    ],
+    "fixed_component_labels": [
+      "2A:eps01",
+      "3A:eta0",
+      "1A:chi1"
+    ],
+    "max_basis_size": 108,
+    "max_state_size_proxy": 11664,
+    "priority_rank": 1194,
+    "sector_index": 1093,
+    "selected_component_count": 3,
+    "selected_strand_count": 7,
+    "subbraid_word_length": 30,
+    "sum_basis_size": 648,
+    "total_charge_count": 8,
+    "unit_pruned": false
+  },
+  "mtc_id": "omega0_untwisted_D_A4",
+  "repo": {
+    "dirty": false,
+    "dirty_ignoring_codex_app_metadata": false,
+    "git_commit": null,
+    "ignored_dirty_prefixes": [
+      ".codex/"
+    ],
+    "root": "/Users/xilingdai/twisted-yetter-da4-run",
+    "status_short": null,
+    "status_short_relevant": ""
+  },
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py --sector-index 1093 --worker-id xil-m2-a1-5sec-v1-w01",
+  "run_context": {
+    "environment": {
+      "cpu_count": 8,
+      "env_allowlist": {
+        "DOT_SAGE": "/Users/xilingdai/twisted-yetter-da4-run/.sage",
+        "OPENBLAS_NUM_THREADS": "1",
+        "SAGE_LOCAL": "/var/tmp/sage-10.9-current/local",
+        "SAGE_ROOT": "/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/10.9"
+      },
+      "hostname": "xil-m2",
+      "machine": "arm64",
+      "numpy_config": "Build Dependencies:\n  blas:\n    detection method: pkgconfig\n    found: true\n    include directory: /private/var/tmp/sage-10.9-current/local/include\n    lib directory: /private/var/tmp/sage-10.9-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEXM4 MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.9-current/local/lib/pkgconfig\n    version: 0.3.31\n  lapack:\n    detection method: pkgconfig\n    found: true\n    include directory: /private/var/tmp/sage-10.9-current/local/include\n    lib directory: /private/var/tmp/sage-10.9-current/local/lib\n    name: openblas\n    openblas configuration: USE_64BITINT= DYNAMIC_ARCH= DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=\n      NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= VORTEXM4 MAX_THREADS=10\n    pc file directory: /private/var/tmp/sage-10.9-current/local/lib/pkgconfig\n    version: 0.3.31\nCompilers:\n  c:\n    args: -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    commands: gcc\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.9-current/local/lib, -L/private/var/tmp/sage-10.9-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.9-current/local/lib,\n      -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    name: clang\n    version: 17.0.0\n  c++:\n    args: -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    commands: g++\n    linker: ld64\n    linker args: -L/private/var/tmp/sage-10.9-current/local/lib, -L/private/var/tmp/sage-10.9-current/local/lib,\n      -Wl,-platform_version,macos,11.0,11.3, -L/var/tmp/sage-10.9-current/local/lib,\n      -O2, -mmacosx-version-min=12.0, -I/var/tmp/sage-10.9-current/local/include,\n      -I/var/tmp/sage-10.9-current/local/include\n    name: clang\n    version: 17.0.0\n  cython:\n    commands: cython\n    linker: cython\n    name: cython\n    version: 3.2.4\nMachine Information:\n  build:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\n  host:\n    cpu: aarch64\n    endian: little\n    family: aarch64\n    system: darwin\nPython Information:\n  path: /private/var/folders/xz/fl2zxh5d2mx_p1n25h7m8t800000gn/T/build-env-dhf1lj0f/bin/python\n  version: '3.14'\nSIMD Extensions:\n  baseline:\n  - NEON\n  - NEON_FP16\n  - NEON_VFPV4\n  - ASIMD\n  found:\n  - ASIMDHP\n  - ASIMDDP\n  not found:\n  - ASIMDFHM\n  - SVE\n\n",
+      "numpy_version": "2.4.4",
+      "pid": 78008,
+      "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+      "ppid": 77998,
+      "processor": "arm",
+      "python_executable": "/var/tmp/sage-10.9-current/local/bin/python3",
+      "python_version": "3.14.3 (main, Mar  8 2026, 09:55:32) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "sage_executable": "/var/tmp/sage-10.9-current/local/bin/sage",
+      "sage_version": "10.9",
+      "timezone_name": "MDT",
+      "timezone_utc_offset_seconds": -21600,
+      "total_memory_bytes": 17179869184,
+      "uname": [
+        "Darwin",
+        "xil-m2",
+        "24.6.0",
+        "Darwin Kernel Version 24.6.0: Wed Oct 15 21:12:44 PDT 2025; root:xnu-11417.140.69.703.14~1/RELEASE_ARM64_T8112",
+        "arm64"
+      ]
+    },
+    "index_file": "experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-xil-5sec-v1/xil-m2-a1-5sec-v1-w01.json",
+    "index_file_sha256": "033cf695c9031e8dba8824b166f3a03396b3d485cc12f238c20213ab37bea30c",
+    "index_payload_summary": {
+      "assignment_id": "figure3-a1-r1-normalized-da4-omega0-untwisted-xil-5sec-v1",
+      "difficulty_score_max": 5000000,
+      "priority_rank_max": 1981,
+      "priority_rank_min": 1,
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-untwisted-index-assignment.v1",
+      "selection_policy": "priority-ordered sectors with difficulty_score <= 5,000,000, excluding already completed local probe sectors {14,1083,2743}; split by even/odd position in selected priority order for load balance.",
+      "status": "ready",
+      "worker_slot": 1
+    },
+    "mode": "index-file",
+    "repo_before_worker": {
+      "dirty": false,
+      "dirty_ignoring_codex_app_metadata": false,
+      "git_commit": null,
+      "ignored_dirty_prefixes": [
+        ".codex/"
+      ],
+      "root": "/Users/xilingdai/twisted-yetter-da4-run",
+      "status_short": null,
+      "status_short_relevant": ""
+    },
+    "repo_before_write": {
+      "dirty": false,
+      "dirty_ignoring_codex_app_metadata": false,
+      "git_commit": null,
+      "ignored_dirty_prefixes": [
+        ".codex/"
+      ],
+      "root": "/Users/xilingdai/twisted-yetter-da4-run",
+      "status_short": null,
+      "status_short_relevant": ""
+    },
+    "run_label": "xil-5sec-v1",
+    "tool_versions": {
+      "numpy": "2.4.4",
+      "python": "3.14.3 (main, Mar  8 2026, 09:55:32) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "sage": "10.9"
+    },
+    "worker_id": "xil-m2-a1-5sec-v1-w01"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-untwisted-singleton.v1",
+  "sector_index": 1093,
+  "sector_total": 2744,
+  "source": {
+    "braid_payload": "experiments/results/yasui/figure3-a1-r1-normalized-braid-payload-v1.json",
+    "braid_payload_sha256": "f96fb3836333429b89539269002eb9fc68672c5d09c55f63c4248997a3c10199",
+    "braid_word_length": 30,
+    "component_order_in_braid": [
+      "C",
+      "A",
+      "B"
+    ],
+    "framings_in_braid_order": [
+      3,
+      3,
+      1
+    ],
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+    "mtc_sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+    "n_strands": 7
+  },
+  "status": "computed-numeric",
+  "tool_versions": {
+    "numpy": "2.4.4",
+    "python": "3.14.3 (main, Mar  8 2026, 09:55:32) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "sage": "10.9"
+  },
+  "untwisted_coefficient": "12.0",
+  "utc_finish": "2026-07-06T14:38:37.713013+00:00",
+  "utc_start": "2026-07-06T14:38:36.860666+00:00",
+  "weighted_untwisted_contribution": {
+    "abs": "3.0060868472244155e-14",
+    "display": "1.2240208846492351e-14-2.7456021210288517e-14j",
+    "field": "complex128",
+    "imag": "-2.7456021210288517e-14",
+    "real": "1.2240208846492351e-14"
+  },
+  "yetter_twist": "none"
+}
