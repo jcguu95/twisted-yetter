@@ -1,0 +1,93 @@
+{
+  "abandoned_incomplete_sector": {
+    "approx_partial_runtime_since_previous_completion": "about 8 hours",
+    "artifact_written": false,
+    "fixed_component_labels": [
+      "3A:eta0",
+      "1A:std3",
+      "3B:eta0"
+    ],
+    "sector_index": 1621
+  },
+  "claim_boundary": "Operational worker lifecycle record only; no invariant aggregation or mathematical claim.",
+  "completed_before_kill": [
+    {
+      "artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/chunk-0001550-0001551.json",
+      "elapsed_seconds": 732.6408947499003,
+      "fixed_component_labels": [
+        "2A:eps11",
+        "3B:eta1",
+        "3A:eta2"
+      ],
+      "max_state_size": 4782969,
+      "sector_index": 1550,
+      "utc_finish": "2026-07-06T06:22:10.638476+00:00",
+      "utc_start": "2026-07-06T06:09:57.966199+00:00"
+    },
+    {
+      "artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/chunk-0001562-0001563.json",
+      "elapsed_seconds": 593.9461149999406,
+      "fixed_component_labels": [
+        "2A:eps11",
+        "3B:eta2",
+        "3A:eta0"
+      ],
+      "max_state_size": 4782969,
+      "sector_index": 1562,
+      "utc_finish": "2026-07-06T06:32:04.596143+00:00",
+      "utc_start": "2026-07-06T06:22:10.641817+00:00"
+    },
+    {
+      "artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/chunk-0001563-0001564.json",
+      "elapsed_seconds": 604.5460573751479,
+      "fixed_component_labels": [
+        "2A:eps11",
+        "3B:eta2",
+        "3A:eta1"
+      ],
+      "max_state_size": 4782969,
+      "sector_index": 1563,
+      "utc_finish": "2026-07-06T06:42:09.174477+00:00",
+      "utc_start": "2026-07-06T06:32:04.599731+00:00"
+    },
+    {
+      "artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/chunk-0001564-0001565.json",
+      "elapsed_seconds": 585.863250416005,
+      "fixed_component_labels": [
+        "2A:eps11",
+        "3B:eta2",
+        "3A:eta2"
+      ],
+      "max_state_size": 4782969,
+      "sector_index": 1564,
+      "utc_finish": "2026-07-06T06:51:55.041228+00:00",
+      "utc_start": "2026-07-06T06:42:09.177240+00:00"
+    }
+  ],
+  "created_utc": "2026-07-06T14:57:28.018823+00:00",
+  "event": "Killed Jin local a=3 long worker after it exceeded the user threshold of 7h50m.",
+  "index_file": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-mac-long-overnight-v1/jin-m2-long-v1-w01.json",
+  "processes": [
+    {
+      "elapsed_at_kill": "08:43:41",
+      "pid": 64929,
+      "role": "python3 evaluator",
+      "signal": "TERM"
+    },
+    {
+      "elapsed_at_kill": "08:43:41",
+      "pid": 64927,
+      "role": "sage bash wrapper",
+      "signal": "TERM"
+    }
+  ],
+  "reason": "User noticed high SSD R/W and instructed kill if runtime exceeded 7h50m; runtime was about 8h43m.",
+  "repo": {
+    "dirty_before_event_artifact": true,
+    "git_commit": "d87d18edbea57be204a9149b10bb0a2a7312fe2f",
+    "status_short_before_event_artifact": "?? .codex/\n?? experiments/results/yasui/singleton-worker-logs/xil-m2-a1-5sec-v1-w00.log\n?? experiments/results/yasui/singleton-worker-logs/xil-m2-a1-5sec-v1-w01.log\n?? experiments/results/yasui/singleton-worker-logs/xil-m2-a1-5sec-v1-w01.pid\n"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-worker-stop-event.v1",
+  "status": "worker-killed-by-user-request",
+  "worker_id": "jin-m2-long-v1-w01"
+}
