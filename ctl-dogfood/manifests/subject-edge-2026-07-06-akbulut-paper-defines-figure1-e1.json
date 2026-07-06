@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:1fb50eb6b11acd15c93482ecff3f25b208b2533beb266c9b8db7c9a3351a5199",
+  "generated_at": "2026-07-06T23:35:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:akbulut-paper:defines:figure1-e1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:1fb50eb6b11acd15c93482ecff3f25b208b2533beb266c9b8db7c9a3351a5199",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:f9bf33167ebb1e751f9d3327ce7b0895d811560eb40ce8ba313ed6c2edfc0268",
+    "transition": "ctlobj-sha256:417f1d961e6684a93178e1159c4d734d90acc28d1194c11418e4306c8a1a52cb"
+  },
+  "parent_root_cid": "ctlobj-sha256:e4a48e540c052b16837c636e8def3f82404e4d33f1b5c36eae42627a0da8e8e6",
+  "payload_file": "ctl-dogfood/subject-layer/edges/akbulut-paper-defines-figure1-e1.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:akbulut-paper:defines:figure1-e1 --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/akbulut-paper-defines-figure1-e1.json --manifest manifests/subject-edge-2026-07-06-akbulut-paper-defines-figure1-e1.json --created-at 2026-07-06T23:35:00Z --admitted-at 2026-07-06T23:35:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}
