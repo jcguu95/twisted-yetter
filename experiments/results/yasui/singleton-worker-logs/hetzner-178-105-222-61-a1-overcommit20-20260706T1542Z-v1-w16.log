@@ -1,3 +1,20 @@
 {"elapsed_seconds": 254.08649002700008, "phase": "index-file-sector-complete", "processed_count": 1, "sector_index": 2533, "skipped_count": 0, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
 {"elapsed_seconds": 39.63915799399979, "phase": "index-file-sector-complete", "processed_count": 2, "sector_index": 1871, "skipped_count": 0, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
 {"elapsed_seconds": 133.25735927100004, "phase": "index-file-sector-complete", "processed_count": 3, "sector_index": 1684, "skipped_count": 1, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
+{"elapsed_seconds": 121.3288659110001, "phase": "index-file-sector-complete", "processed_count": 4, "sector_index": 1754, "skipped_count": 1, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
+{"elapsed_seconds": 241.82137519499997, "phase": "index-file-sector-complete", "processed_count": 5, "sector_index": 2473, "skipped_count": 1, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
+{"elapsed_seconds": 39.228413284, "phase": "index-file-sector-complete", "processed_count": 6, "sector_index": 1829, "skipped_count": 2, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
+{"elapsed_seconds": 39.5419396340003, "phase": "index-file-sector-complete", "processed_count": 7, "sector_index": 2267, "skipped_count": 2, "worker_id": "hetzner-178-105-222-61-a1-overcommit20-20260706T1542Z-v1-w16"}
+Traceback (most recent call last):
+  File "/root/twisted-yetter-a1-run/experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py", line 694, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/twisted-yetter-a1-run/experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py", line 687, in main
+    return run_index_file(args)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/root/twisted-yetter-a1-run/experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py", line 572, in run_index_file
+    payload = compute_singleton(args)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/twisted-yetter-a1-run/experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py", line 503, in compute_singleton
+    raise FileExistsError(f"{artifact} exists; pass --force to overwrite")
+FileExistsError: /root/twisted-yetter-a1-run/experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-chunks-v1/chunk-0002099-0002100.json exists; pass --force to overwrite
