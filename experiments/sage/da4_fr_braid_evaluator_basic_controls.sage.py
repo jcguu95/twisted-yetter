@@ -13,6 +13,7 @@ and Hopf links, not a second/simpler link evaluator.
 from __future__ import annotations
 
 import argparse
+import cmath
 from datetime import UTC, datetime
 import hashlib
 import importlib.util
@@ -43,6 +44,20 @@ OUTPUT = (
     / "drinfeld-double-a4-fr-braid-evaluator-basic-controls-v1.json"
 )
 TOLERANCE = 1e-7
+GROUP_ORDER = 3
+FLUX_DEGREE_BY_CLASS = {
+    "1A": 0,
+    "2A": 0,
+    "3A": 1,
+    "3B": 2,
+}
+HUB_TWO_LEAF_BRAID_WORD = (1, 1, 2, 1, 1, -2)
+HUB_TWO_LEAF_SAMPLES = (
+    ("1A:std3", "1A:std3"),
+    ("2A:eps00", "2A:eps11"),
+    ("3A:eta0", "3B:eta0"),
+    ("1A:chi1", "3A:eta0"),
+)
 
 
 def load_evaluator_module():
@@ -54,7 +69,10 @@ def load_evaluator_module():
 
 
 def command(argv: list[str]) -> str:
-    return subprocess.check_output(argv, cwd=REPO_ROOT, text=True).strip()
+    try:
+        return subprocess.check_output(argv, cwd=REPO_ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (FileNotFoundError, subprocess.CalledProcessError) as exc:
+        return f"unavailable: {type(exc).__name__}"
 
 
 def file_sha256(path: Path) -> str:
@@ -105,6 +123,46 @@ def hopf_expected(evaluator, x: str, y: str, *, positive: bool) -> complex:
     return total
 
 
+def global_dimension(evaluator) -> float:
+    return sum(evaluator.dimension(label) ** 2 for label in evaluator.labels)
+
+
+def character_value(character: int, label: str) -> complex:
+    flux_class = label.split(":", 1)[0]
+    degree = FLUX_DEGREE_BY_CLASS[flux_class]
+    return cmath.exp(2j * cmath.pi * int(character) * degree / GROUP_ORDER)
+
+
+def omega_coefficient(evaluator, character: int, label: str) -> complex:
+    return evaluator.dimension(label) * character_value(character, label)
+
+
+def simple_current_targets(evaluator) -> dict[int, str]:
+    targets = {}
+    for character in range(GROUP_ORDER):
+        matches = []
+        for candidate in evaluator.labels:
+            if abs(evaluator.dimension(candidate) - 1.0) > TOLERANCE:
+                continue
+            row_matches = True
+            for label in evaluator.labels:
+                expected = character_value(character, label) * evaluator.dimension(label)
+                observed = hopf_expected(evaluator, candidate, label, positive=True)
+                if abs(observed - expected) > TOLERANCE:
+                    row_matches = False
+                    break
+            if row_matches:
+                matches.append(candidate)
+        if len(matches) != 1:
+            raise ValueError(f"expected one simple-current target for character {character}, got {matches}")
+        targets[character] = matches[0]
+    return targets
+
+
+def fusion_multiplicity(evaluator, left: str, right: str, target: str) -> int:
+    return sum(multiplicity for output, multiplicity in evaluator.fusion_outputs(left, right) if output == target)
+
+
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--mtc", type=Path, default=MTC_PATH)
@@ -122,6 +180,8 @@ def main(argv=None) -> int:
     mtc = json.loads(mtc_path.read_text())
     evaluator = module.DA4FRBraidEvaluator(mtc)
     rows = []
+    simple_current_target_by_character = simple_current_targets(evaluator)
+    global_dim = global_dimension(evaluator)
 
     for label in evaluator.labels:
         for framing in (-2, -1, 0, 1, 2):
@@ -180,6 +240,68 @@ def main(argv=None) -> int:
                 )
             )
 
+    for character in range(GROUP_ORDER):
+        target = simple_current_target_by_character[(-character) % GROUP_ORDER]
+        for fixed_label in evaluator.labels:
+            observed = 0.0 + 0.0j
+            max_basis_size = 0
+            for summand in evaluator.labels:
+                fixed_value, stats = evaluator.fixed_label_value(
+                    2,
+                    (1, 1),
+                    (summand, fixed_label),
+                    (0, 0),
+                )
+                observed += omega_coefficient(evaluator, character, summand) * fixed_value
+                max_basis_size = max(max_basis_size, int(stats.get("max_basis_size", 0)))
+            expected = global_dim if fixed_label == target else 0.0 + 0.0j
+            rows.append(
+                row_json(
+                    "colored_positive_hopf_projector",
+                    (f"Omega_{character}", fixed_label),
+                    observed,
+                    expected,
+                    {
+                        "braid_word": [1, 1],
+                        "framings": [0, 0],
+                        "target_simple_current": target,
+                        "max_basis_size_seen": max_basis_size,
+                    },
+                )
+            )
+
+    for character in range(GROUP_ORDER):
+        target = simple_current_target_by_character[(-character) % GROUP_ORDER]
+        for left, right in HUB_TWO_LEAF_SAMPLES:
+            observed = 0.0 + 0.0j
+            max_basis_size = 0
+            for summand in evaluator.labels:
+                fixed_value, stats = evaluator.fixed_label_value(
+                    3,
+                    HUB_TWO_LEAF_BRAID_WORD,
+                    (summand, left, right),
+                    (0, 0, 0),
+                )
+                observed += omega_coefficient(evaluator, character, summand) * fixed_value
+                max_basis_size = max(max_basis_size, int(stats.get("max_basis_size", 0)))
+            multiplicity = fusion_multiplicity(evaluator, left, right, target)
+            expected = global_dim * multiplicity
+            rows.append(
+                row_json(
+                    "colored_two_leaf_hub_projector",
+                    (f"Omega_{character}", left, right),
+                    observed,
+                    expected,
+                    {
+                        "braid_word": list(HUB_TWO_LEAF_BRAID_WORD),
+                        "framings": [0, 0, 0],
+                        "target_simple_current": target,
+                        "target_multiplicity_in_leaf_fusion": multiplicity,
+                        "max_basis_size_seen": max_basis_size,
+                    },
+                )
+            )
+
     failures = [row for row in rows if not row["pass"]]
     max_abs_difference = max(float(row["abs_difference"]) for row in rows) if rows else 0.0
     payload = {
@@ -225,11 +347,21 @@ def main(argv=None) -> int:
             "row_count": len(rows),
             "failure_count": len(failures),
             "max_abs_difference": repr(float(max_abs_difference)),
+            "global_dimension": repr(float(global_dim)),
+            "simple_current_target_by_character": {
+                str(character): target for character, target in simple_current_target_by_character.items()
+            },
+            "omega_projector_target_by_character": {
+                str(character): simple_current_target_by_character[(-character) % GROUP_ORDER]
+                for character in range(GROUP_ORDER)
+            },
             "controls": {
                 "framed_unknot": 14 * 5,
                 "split_two_component_unlink": 14 * 14 * 2,
                 "positive_hopf_sigma1_squared": 14 * 14,
                 "negative_hopf_sigma1_inverse_squared": 14 * 14,
+                "colored_positive_hopf_projector": GROUP_ORDER * 14,
+                "colored_two_leaf_hub_projector": GROUP_ORDER * len(HUB_TWO_LEAF_SAMPLES),
             },
         },
         "failures": failures[:20],
