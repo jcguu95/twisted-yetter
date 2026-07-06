@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:a79dcedf1786c0c3787f6fb99bf6cb0daf1e55ed68d9e1cb7166fcbbdc5a45aa",
+  "generated_at": "2026-07-06T23:18:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:a79dcedf1786c0c3787f6fb99bf6cb0daf1e55ed68d9e1cb7166fcbbdc5a45aa",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:f9adf0b0f583ece1edbe75dbe27e01b91dd874469638fc3cdbf9f6618b8e3fdb",
+    "transition": "ctlobj-sha256:312b049f72a43d38311f4107afbaf291cd00ff6a9686f1bc721f805457ded04d"
+  },
+  "parent_root_cid": "ctlobj-sha256:130676c9e5f112f11503a27ee42d984d1ccfcf7c6568c9f3aac19e5129bed199",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-a1-character-twist.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:claim-cluster:yasui-a1-character-twist --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/claim-cluster-yasui-a1-character-twist.json --manifest manifests/subject-definition-2026-07-06-claim-cluster-yasui-a1-character-twist.json --created-at 2026-07-06T23:18:40Z --admitted-at 2026-07-06T23:18:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "e1f926c54ff55e82b4d3412adc3b33ab39b8e970"
+}
