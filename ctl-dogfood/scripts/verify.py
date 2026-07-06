@@ -111,7 +111,7 @@ def verify_admission_fast_forward(store: ctl_ref.Store, manifests: list[dict[str
             continue
         logical_id = manifest.get("logical_id")
         objects = manifest.get("objects", {})
-        new_cid = objects.get("graph_claim") or objects.get("claim")
+        new_cid = objects.get("graph_claim") or objects.get("claim") or objects.get("revision")
         parent_root_cid = manifest.get("parent_root_cid")
         if logical_id is None or new_cid is None or parent_root_cid is None:
             continue
@@ -178,6 +178,208 @@ def verify_active_decision_graphs(store: ctl_ref.Store, state: dict[str, Any]) -
         rev = store.resolve(cid)
         ctl_ref.validate_revision_envelope(store, cid, rev)
         verify_decision_graph_payload(rev["payload"])
+
+
+SUBJECT_DEFINITION_SCHEMA = "twisted-yetter/subject-definition/0"
+SUBJECT_EDGE_SCHEMA = "twisted-yetter/subject-edge/0"
+SUBJECT_INDEX_SCHEMA = "twisted-yetter/subject-index/0"
+SUBJECT_OPERATION_SCHEMA = "twisted-yetter/subject-operation/0"
+
+SUBJECT_KINDS = {
+    "ty:ambiguous-hub",
+    "ty:category",
+    "ty:category-family",
+    "ty:claim-cluster",
+    "ty:experiment-route",
+    "ty:lie-group",
+    "ty:link-presentation",
+    "ty:mathematical-object",
+    "ty:method",
+    "ty:paper",
+    "ty:person",
+    "ty:reference",
+}
+SUBJECT_STATUSES = {"active", "ambiguous_hub", "deprecated", "external_locator_only", "provisional", "redirect"}
+SUBJECT_EDGE_ROLES = {
+    "about",
+    "computes",
+    "contradicts",
+    "defines",
+    "depends_on",
+    "historical",
+    "mentions",
+    "motivated_by",
+    "negative_evidence_for",
+    "refines",
+    "redirected_from",
+    "supports",
+    "uses",
+}
+SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed"}
+SUBJECT_OPERATION_KINDS = {
+    "add_alias",
+    "correct_subject_type",
+    "deprecate_subject",
+    "merge_subjects",
+    "migrate_to_upstream_profile",
+    "redirect_subject",
+    "remove_alias_from_current_view",
+    "split_subject",
+}
+SUBJECT_OPERATION_STATUSES = {"accepted", "proposed", "superseded"}
+
+
+def require_string_list(value: Any, label: str) -> list[str]:
+    ctl_ref.die_unless(isinstance(value, list), f"{label} must be array")
+    ctl_ref.die_unless(all(isinstance(item, str) for item in value), f"{label} entries must be strings")
+    return value
+
+
+def verify_endpoint_exists(endpoint: str, state: dict[str, Any], label: str) -> None:
+    ctl_ref.die_unless(ctl_ref.is_id(endpoint), f"bad {label}")
+    tracked_prefixes = ("claim:", "subject:", "subject-edge:", "subject-index:", "subject-operation:")
+    if endpoint.startswith(tracked_prefixes):
+        ctl_ref.die_unless(endpoint in state["bindings"], f"{label} endpoint is not active in CTL state: {endpoint}")
+
+
+def verify_subject_definition(logical_id: str, payload: dict[str, Any], state: dict[str, Any]) -> None:
+    ctl_ref.die_unless(payload.get("schema") == SUBJECT_DEFINITION_SCHEMA, "bad subject definition schema")
+    ctl_ref.die_unless(logical_id.startswith("subject:"), "subject definition logical_id must start with subject:")
+    ctl_ref.check_keys(
+        payload,
+        {"schema", "subject_id", "subject_kind", "display_name", "status", "scope_note"},
+        {
+            "aliases",
+            "current_view_hints",
+            "deprecated_reason",
+            "disambiguation_note",
+            "equivalent_external_ids",
+            "local_reference_cids",
+            "parent_subject_ids",
+            "provisional_reason",
+            "superseded_by_subject_ids",
+            "taxonomy_notes",
+            "upstream_review_hints",
+        },
+    )
+    ctl_ref.die_unless(payload["subject_id"] == logical_id, "subject_id/logical_id mismatch")
+    ctl_ref.die_unless(payload["subject_kind"] in SUBJECT_KINDS, f"unknown subject_kind: {payload['subject_kind']}")
+    ctl_ref.die_unless(payload["status"] in SUBJECT_STATUSES, f"bad subject status: {payload['status']}")
+    ctl_ref.die_unless(isinstance(payload["display_name"], str) and payload["display_name"], "bad subject display_name")
+    ctl_ref.die_unless(isinstance(payload["scope_note"], str) and payload["scope_note"], "bad subject scope_note")
+    for key in [
+        "aliases",
+        "equivalent_external_ids",
+        "local_reference_cids",
+        "parent_subject_ids",
+        "superseded_by_subject_ids",
+        "upstream_review_hints",
+    ]:
+        if key in payload:
+            values = require_string_list(payload[key], f"subject {key}")
+            if key.endswith("_subject_ids") or key == "parent_subject_ids":
+                for subject_id in values:
+                    verify_endpoint_exists(subject_id, state, f"subject {key}")
+
+
+def verify_subject_edge(logical_id: str, payload: dict[str, Any], state: dict[str, Any]) -> None:
+    ctl_ref.die_unless(payload.get("schema") == SUBJECT_EDGE_SCHEMA, "bad subject edge schema")
+    ctl_ref.die_unless(logical_id.startswith("subject-edge:"), "subject edge logical_id must start with subject-edge:")
+    ctl_ref.check_keys(
+        payload,
+        {"schema", "edge_id", "source", "role", "target", "status", "explanation"},
+        {"evidence_status", "review_notes"},
+    )
+    ctl_ref.die_unless(payload["edge_id"] == logical_id, "edge_id/logical_id mismatch")
+    ctl_ref.die_unless(payload["role"] in SUBJECT_EDGE_ROLES, f"unknown subject edge role: {payload['role']}")
+    ctl_ref.die_unless(payload["status"] in SUBJECT_EDGE_STATUSES, f"bad subject edge status: {payload['status']}")
+    ctl_ref.die_unless(isinstance(payload["explanation"], str) and payload["explanation"], "bad edge explanation")
+    verify_endpoint_exists(payload["source"], state, "subject edge source")
+    verify_endpoint_exists(payload["target"], state, "subject edge target")
+
+
+def verify_subject_index(logical_id: str, payload: dict[str, Any], state: dict[str, Any]) -> None:
+    ctl_ref.die_unless(payload.get("schema") == SUBJECT_INDEX_SCHEMA, "bad subject index schema")
+    ctl_ref.die_unless(logical_id.startswith("subject-index:"), "subject index logical_id must start with subject-index:")
+    ctl_ref.check_keys(
+        payload,
+        {
+            "schema",
+            "index_id",
+            "status",
+            "title",
+            "purpose",
+            "physical_store",
+            "current_view_rule",
+            "logical_id_prefixes",
+            "profile_family",
+            "seed_subjects",
+            "seed_edges",
+            "upstream_review_contract",
+        },
+        {"known_proposal_notes", "migration_notes", "review_warnings_addressed"},
+    )
+    ctl_ref.die_unless(payload["index_id"] == logical_id, "index_id/logical_id mismatch")
+    ctl_ref.die_unless(payload["status"] in {"active", "provisional"}, "bad subject index status")
+    for key in ["title", "purpose", "physical_store", "current_view_rule"]:
+        ctl_ref.die_unless(isinstance(payload[key], str) and payload[key], f"bad subject index {key}")
+    for key in ["logical_id_prefixes", "profile_family", "seed_subjects", "seed_edges"]:
+        values = require_string_list(payload[key], f"subject index {key}")
+        if key in {"seed_subjects", "seed_edges"}:
+            for endpoint in values:
+                verify_endpoint_exists(endpoint, state, f"subject index {key}")
+    ctl_ref.die_unless(isinstance(payload["upstream_review_contract"], dict), "bad upstream_review_contract")
+
+
+def verify_subject_operation(logical_id: str, payload: dict[str, Any], state: dict[str, Any]) -> None:
+    ctl_ref.die_unless(payload.get("schema") == SUBJECT_OPERATION_SCHEMA, "bad subject operation schema")
+    ctl_ref.die_unless(
+        logical_id.startswith("subject-operation:"), "subject operation logical_id must start with subject-operation:"
+    )
+    ctl_ref.check_keys(
+        payload,
+        {"schema", "operation_id", "operation_kind", "affected_subject_ids", "reason", "status"},
+        {"replacement_subject_ids", "review_notes"},
+    )
+    ctl_ref.die_unless(payload["operation_id"] == logical_id, "operation_id/logical_id mismatch")
+    ctl_ref.die_unless(
+        payload["operation_kind"] in SUBJECT_OPERATION_KINDS,
+        f"unknown subject operation kind: {payload['operation_kind']}",
+    )
+    ctl_ref.die_unless(payload["status"] in SUBJECT_OPERATION_STATUSES, f"bad subject operation status: {payload['status']}")
+    ctl_ref.die_unless(isinstance(payload["reason"], str) and payload["reason"], "bad operation reason")
+    for key in ["affected_subject_ids", "replacement_subject_ids"]:
+        if key in payload:
+            for subject_id in require_string_list(payload[key], f"subject operation {key}"):
+                verify_endpoint_exists(subject_id, state, f"subject operation {key}")
+
+
+def verify_active_subject_layer(store: ctl_ref.Store, state: dict[str, Any]) -> None:
+    subject_definition_ids = []
+    aliases: dict[str, str] = {}
+    for logical_id, cid in state["bindings"].items():
+        if not logical_id.startswith(("subject:", "subject-edge:", "subject-index:", "subject-operation:")):
+            continue
+        rev = store.resolve(cid)
+        ctl_ref.validate_revision_envelope(store, cid, rev)
+        payload = rev["payload"]
+        if logical_id.startswith("subject:"):
+            verify_subject_definition(logical_id, payload, state)
+            subject_definition_ids.append(logical_id)
+            for alias in payload.get("aliases", []):
+                old = aliases.get(alias)
+                ctl_ref.die_unless(old is None, f"subject alias collision without disambiguation: {alias}")
+                aliases[alias] = logical_id
+        elif logical_id.startswith("subject-edge:"):
+            verify_subject_edge(logical_id, payload, state)
+        elif logical_id.startswith("subject-index:"):
+            verify_subject_index(logical_id, payload, state)
+        elif logical_id.startswith("subject-operation:"):
+            verify_subject_operation(logical_id, payload, state)
+    ctl_ref.die_unless(
+        len(subject_definition_ids) == len(set(subject_definition_ids)),
+        "duplicate active subject definition logical_id",
+    )
 
 
 def verify_manifest_archive_member_path(member_path: str) -> None:
@@ -470,6 +672,7 @@ def main() -> int:
     verify_manifest_reachability(store, manifests, ref)
     verify_admission_fast_forward(store, manifests)
     verify_active_decision_graphs(store, state)
+    verify_active_subject_layer(store, state)
     verify_legacy_archive_files()
     verify_active_json_has_no_raw_legacy_prose_locators()
     verify_no_unapproved_prose_files()
