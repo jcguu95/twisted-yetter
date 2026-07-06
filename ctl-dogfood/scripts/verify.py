@@ -202,6 +202,7 @@ SUBJECT_KINDS = {
 SUBJECT_STATUSES = {"active", "ambiguous_hub", "deprecated", "external_locator_only", "provisional", "redirect"}
 SUBJECT_EDGE_ROLES = {
     "about",
+    "authored_by",
     "computes",
     "contradicts",
     "defines",
