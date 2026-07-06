@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:25f94d03f3491bd6645e2b04d76cbee470518dc7fc507976fe9f7111d6c145c7",
+  "generated_at": "2026-07-06T22:58:00Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-06-twisted-yetter-subject-ontology-v0",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
+    "current_root": "ctlobj-sha256:25f94d03f3491bd6645e2b04d76cbee470518dc7fc507976fe9f7111d6c145c7",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:6e42fb46b0af5f27b2562116bc6a2d1620c7f18699c08ad9553b72d53687ce54"
+  },
+  "parent_root_cid": "ctlobj-sha256:4121a60c40eebb5b99c76134600836d2f6832729d03f5be2b64ab9c0baede6dd",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-06-twisted-yetter-subject-ontology-v0.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-06-twisted-yetter-subject-ontology-v0 --payload lab-notes/2026-07-06-twisted-yetter-subject-ontology-v0.json --manifest manifests/lab-note-2026-07-06-twisted-yetter-subject-ontology-v0.json --created-at 2026-07-06T22:58:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "1ceaabe01ae5f18f02aef1b60f70cc496c378b49"
+}
