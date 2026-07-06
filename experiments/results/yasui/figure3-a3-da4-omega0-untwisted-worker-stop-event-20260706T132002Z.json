@@ -1,0 +1,38 @@
+{
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-worker-stop-event.v1",
+  "status": "operational-record",
+  "created_at_utc": "2026-07-06T13:20:02Z",
+  "created_at_edmonton": "2026-07-06T07:20:02-06:00",
+  "objective": {
+    "link_id": "yasui-figure3-a3",
+    "category_id": "omega0_untwisted_D_A4",
+    "yetter_twist": "none"
+  },
+  "events": [
+    {
+      "host": "xil-m2",
+      "action": "stopped-workers",
+      "worker_ids": ["xil-m2-long-v1-w00", "xil-m2-long-v1-w01"],
+      "reason": "user requested no further XIL workers",
+      "canonical_results_pulled_before_stop": true,
+      "new_canonical_sectors_from_last_pull": [1788, 1800],
+      "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0016.json"
+    },
+    {
+      "host": "jin-m2-local",
+      "action": "stopped-worker",
+      "worker_ids": ["jin-m2-long-v1-w00"],
+      "reason": "user requested stopping current sector after confirming it had only run about 2.5 hours",
+      "likely_current_sector_at_stop": 1905
+    },
+    {
+      "host": "jin-m2-local",
+      "action": "left-running",
+      "worker_ids": ["jin-m2-long-v1-w01"],
+      "reason": "user requested letting this worker continue for now",
+      "likely_current_sector": 1621
+    }
+  ],
+  "canonical_completed_after_last_merge": 1352,
+  "notes": "Operational stop record only; not an invariant certificate."
+}

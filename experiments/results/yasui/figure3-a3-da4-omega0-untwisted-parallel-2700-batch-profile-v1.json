@@ -1,0 +1,158 @@
+{
+  "claim_boundary": "Timing/failure profile only; not a complete invariant artifact or exact certificate.",
+  "created_at": "2026-07-06T02:40:10.637447+00:00",
+  "generator": "manual-summary-after-parallel-sage-run",
+  "note": "The first 300-sector profile finished in 2.081s and triggered the requested parallel run. The 300-600 segment completed in 275.720s. The remaining parallel Sage processes exited with code 137 / Killed: 9, consistent with memory pressure/OOM. The 1500-1800 segment had one immediate typo launch failure and was restarted with the correct script path before the OOM batch failure.",
+  "repo": {
+    "dirty": true,
+    "git_commit": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-first20-profile-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000000-0000300-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000300-0000600-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-smoke-profile-v1.json\n?? experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py\n"
+  },
+  "reproduce_commands": [
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py --start 0 --count 300",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py --start START --count 300 --quiet for START in 300,600,...,2400 launched in parallel"
+  ],
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-parallel-2700-batch-profile.v1",
+  "scope": "Parallel attempt to run nine 300-sector ranges for Yasui Figure 3 a=3 with omega0 untwisted D(A4), no Yetter twist.",
+  "sector_plan": {
+    "excluded_tail": "2700-2744 not requested in this parallel 2700-sector run",
+    "full_da4_sector_total": 2744,
+    "planned_sector_count": 2700,
+    "segment_count": 9,
+    "segment_size": 300
+  },
+  "segments": [
+    {
+      "chunk_count_on_disk": 300,
+      "elapsed_seconds": 2.081116832792759,
+      "end": 300,
+      "exit_code": 0,
+      "first_chunk_start": 0,
+      "last_chunk_end": 300,
+      "profile_artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000000-0000300-v1.json",
+      "start": 0,
+      "stats": {
+        "max_basis_size_seen": 2,
+        "max_state_size_seen": 4,
+        "unit_pruned_count": 217
+      },
+      "status": "complete"
+    },
+    {
+      "chunk_count_on_disk": 300,
+      "elapsed_seconds": 275.719527709065,
+      "end": 600,
+      "exit_code": 0,
+      "first_chunk_start": 300,
+      "last_chunk_end": 600,
+      "profile_artifact": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000300-0000600-v1.json",
+      "start": 300,
+      "stats": {
+        "max_basis_size_seen": 1640,
+        "max_state_size_seen": 933293,
+        "unit_pruned_count": 45
+      },
+      "status": "complete"
+    },
+    {
+      "chunk_count_on_disk": 30,
+      "elapsed_seconds": null,
+      "end": 900,
+      "exit_code": 137,
+      "first_chunk_start": 600,
+      "last_chunk_end": 630,
+      "profile_artifact": null,
+      "start": 600,
+      "stats": null,
+      "status": "killed-partial"
+    },
+    {
+      "chunk_count_on_disk": 2,
+      "elapsed_seconds": null,
+      "end": 1200,
+      "exit_code": 137,
+      "first_chunk_start": 900,
+      "last_chunk_end": 902,
+      "profile_artifact": null,
+      "start": 900,
+      "stats": null,
+      "status": "killed-partial"
+    },
+    {
+      "chunk_count_on_disk": 13,
+      "elapsed_seconds": null,
+      "end": 1500,
+      "exit_code": 137,
+      "first_chunk_start": 1200,
+      "last_chunk_end": 1213,
+      "profile_artifact": null,
+      "start": 1200,
+      "stats": null,
+      "status": "killed-partial"
+    },
+    {
+      "chunk_count_on_disk": 1,
+      "elapsed_seconds": null,
+      "end": 1800,
+      "exit_code": 137,
+      "first_chunk_start": 1500,
+      "last_chunk_end": 1501,
+      "profile_artifact": null,
+      "start": 1500,
+      "stats": null,
+      "status": "killed-partial"
+    },
+    {
+      "chunk_count_on_disk": 0,
+      "elapsed_seconds": null,
+      "end": 2100,
+      "exit_code": 137,
+      "first_chunk_start": null,
+      "last_chunk_end": null,
+      "profile_artifact": null,
+      "start": 1800,
+      "stats": null,
+      "status": "killed-no-profile"
+    },
+    {
+      "chunk_count_on_disk": 0,
+      "elapsed_seconds": null,
+      "end": 2400,
+      "exit_code": 137,
+      "first_chunk_start": null,
+      "last_chunk_end": null,
+      "profile_artifact": null,
+      "start": 2100,
+      "stats": null,
+      "status": "killed-no-profile"
+    },
+    {
+      "chunk_count_on_disk": 0,
+      "elapsed_seconds": null,
+      "end": 2700,
+      "exit_code": 137,
+      "first_chunk_start": null,
+      "last_chunk_end": null,
+      "profile_artifact": null,
+      "start": 2400,
+      "stats": null,
+      "status": "killed-no-profile"
+    }
+  ],
+  "source": {
+    "chunk_dir": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1",
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+    "mtc_sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+    "script": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+    "yasui_input": "experiments/inputs/yasui/figure3-a3-crossing-table.json"
+  },
+  "status": "blocked-by-parallel-oom",
+  "summary": {
+    "complete_chunk_count_on_disk": 646,
+    "complete_contiguous_prefix_end": 600,
+    "complete_profile_count": 2,
+    "failed_segment_count": 7,
+    "known_completed_profile_elapsed_seconds": 277.80064454185776
+  }
+}
