@@ -526,6 +526,134 @@ def run_singleton(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_index_file(args: argparse.Namespace) -> int:
+    utc_start = datetime.now(UTC).isoformat()
+    wall_start = time.monotonic()
+    index_payload = read_json(args.index_file)
+    indices = [int(index) for index in index_payload["indices"]]
+    processed = []
+    skipped = []
+    run_context = {
+        "mode": "index-file",
+        "worker_id": args.worker_id,
+        "run_label": args.run_label,
+        "index_file": rel(args.index_file),
+        "index_file_sha256": base.file_sha256(args.index_file),
+        "repo_before_worker": repo_metadata(),
+        "tool_versions": tool_versions(),
+        "environment": environment_metadata(),
+        "index_payload_summary": {
+            key: index_payload.get(key)
+            for key in (
+                "schema",
+                "status",
+                "assignment_id",
+                "worker_slot",
+                "priority_rank_min",
+                "priority_rank_max",
+                "difficulty_score_max",
+                "selection_policy",
+            )
+        },
+    }
+
+    for index in indices:
+        artifact = chunk_path(index)
+        if artifact.exists() and not args.force:
+            skipped.append(
+                {
+                    "sector_index": index,
+                    "reason": "preexisting-artifact",
+                    "artifact": rel(artifact),
+                }
+            )
+            continue
+        args.sector_index = index
+        payload = compute_singleton(args)
+        payload["run_context"] = dict(payload["run_context"])
+        payload["run_context"].update(run_context)
+        # Re-write with the index-file run context attached to the singleton.
+        write_json(artifact, payload)
+        processed.append(
+            {
+                "sector_index": index,
+                "artifact": rel(artifact),
+                "elapsed_seconds": payload["elapsed_seconds"],
+                "max_basis_size": payload["evaluator_stats"].get("max_basis_size"),
+                "max_state_size": payload["evaluator_stats"].get("max_state_size"),
+                "priority_rank": (payload.get("manifest_entry") or {}).get("priority_rank"),
+                "difficulty_score": (payload.get("manifest_entry") or {}).get("difficulty_score"),
+            }
+        )
+        if not args.quiet:
+            print(
+                json.dumps(
+                    {
+                        "phase": "index-file-sector-complete",
+                        "worker_id": args.worker_id,
+                        "sector_index": index,
+                        "elapsed_seconds": payload["elapsed_seconds"],
+                        "processed_count": len(processed),
+                        "skipped_count": len(skipped),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+        if args.max_sectors is not None and len(processed) >= args.max_sectors:
+            break
+
+    profile = {
+        "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-untwisted-index-file-worker-profile.v1",
+        "status": "complete",
+        "generator_script": rel(Path(__file__)),
+        "base_evaluator_script": rel(BASE_EVALUATOR_SCRIPT),
+        "argv": sys.argv[1:],
+        "reproduce_command": (
+            'DOT_SAGE="$PWD/.sage" sage '
+            "experiments/sage/yasui_figure3_a1_r1_normalized_da4_untwisted_singletons.sage.py "
+            f"--index-file {rel(args.index_file)} --worker-id {args.worker_id}"
+        ),
+        "worker_id": args.worker_id,
+        "run_label": args.run_label,
+        "index_file": rel(args.index_file),
+        "index_file_sha256": base.file_sha256(args.index_file),
+        "utc_start": utc_start,
+        "utc_finish": datetime.now(UTC).isoformat(),
+        "elapsed_wall_seconds": time.monotonic() - wall_start,
+        "requested_count": len(indices),
+        "processed_count": len(processed),
+        "skipped_count": len(skipped),
+        "processed": processed,
+        "skipped": skipped,
+        "repo": repo_metadata(),
+        "tool_versions": tool_versions(),
+        "environment": environment_metadata(),
+        "claim_boundary": "Operational worker profile only; complete invariant aggregation is separate.",
+    }
+    profile_path = (
+        RESULT_DIR
+        / f"figure3-a1-r1-normalized-da4-omega0-untwisted-index-worker-{args.worker_id}-profile-v1.json"
+    )
+    write_json(profile_path, profile)
+    if not args.quiet:
+        print(
+            json.dumps(
+                {
+                    "phase": "index-file-worker-complete",
+                    "worker_id": args.worker_id,
+                    "profile": rel(profile_path),
+                    "processed_count": len(processed),
+                    "skipped_count": len(skipped),
+                    "elapsed_wall_seconds": profile["elapsed_wall_seconds"],
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
+    return 0
+
+
 def parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mtc", type=Path, default=MTC_PATH)
@@ -535,6 +663,9 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--probe-summary-output", type=Path, default=PROBE_SUMMARY_PATH)
     parser.add_argument("--write-manifest", action="store_true")
     parser.add_argument("--sector-index", type=int)
+    parser.add_argument("--index-file", type=Path)
+    parser.add_argument("--max-sectors", type=int)
+    parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--worker-id", default=f"local-{os.getpid()}")
     parser.add_argument("--run-label", default="manual")
     parser.add_argument("--force", action="store_true")
@@ -548,10 +679,14 @@ def main(argv=None) -> int:
     args.manifest = args.manifest.resolve()
     args.manifest_output = args.manifest_output.resolve()
     args.probe_summary_output = args.probe_summary_output.resolve()
+    if args.index_file is not None:
+        args.index_file = args.index_file.resolve()
     if args.write_manifest:
         return write_manifest(args)
+    if args.index_file is not None:
+        return run_index_file(args)
     if args.sector_index is None:
-        raise SystemExit("pass --write-manifest or --sector-index")
+        raise SystemExit("pass --write-manifest, --index-file, or --sector-index")
     return run_singleton(args)
 
 
