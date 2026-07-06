@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:fd7010de8b3872eb5753093e95ddd12177db4455b05544eb305e3ad83b792f72",
+  "generated_at": "2026-07-06T23:55:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:reference-hub:mentions:burke-2402-15087-provisional",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:fd7010de8b3872eb5753093e95ddd12177db4455b05544eb305e3ad83b792f72",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:652ea63e096a38fb0e4ef40e95cb5f0568e9fcc0414e3b731e11f666f393f750",
+    "transition": "ctlobj-sha256:2255a7ab7a8dc8fa27d9377d472c3de5ef8295c61e19094c765860c9300a0ef2"
+  },
+  "parent_root_cid": "ctlobj-sha256:2dc09a94e1e5a55bd6693c4df142af862ff6bb42bcb3d24a6bf823863b6de550",
+  "payload_file": "ctl-dogfood/subject-layer/edges/reference-hub-mentions-burke-2402-15087-provisional.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:reference-hub:mentions:burke-2402-15087-provisional --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/reference-hub-mentions-burke-2402-15087-provisional.json --manifest manifests/subject-edge-2026-07-06-reference-hub-mentions-burke-2402-15087-provisional.json --created-at 2026-07-06T23:55:20Z --admitted-at 2026-07-06T23:55:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "95d08a53b5a8760de209009b919324f977352315"
+}

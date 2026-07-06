@@ -215,7 +215,7 @@ SUBJECT_EDGE_ROLES = {
     "supports",
     "uses",
 }
-SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed"}
+SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed", "provisional"}
 SUBJECT_OPERATION_KINDS = {
     "add_alias",
     "correct_subject_type",
@@ -254,6 +254,7 @@ def verify_subject_definition(logical_id: str, payload: dict[str, Any], state: d
             "deprecated_reason",
             "disambiguation_note",
             "equivalent_external_ids",
+            "external_references",
             "local_reference_cids",
             "parent_subject_ids",
             "provisional_reason",
@@ -280,6 +281,13 @@ def verify_subject_definition(logical_id: str, payload: dict[str, Any], state: d
             if key.endswith("_subject_ids") or key == "parent_subject_ids":
                 for subject_id in values:
                     verify_endpoint_exists(subject_id, state, f"subject {key}")
+    if "external_references" in payload:
+        ctl_ref.die_unless(isinstance(payload["external_references"], list), "subject external_references must be array")
+        for reference in payload["external_references"]:
+            ctl_ref.die_unless(isinstance(reference, dict), "subject external reference must be object")
+            ctl_ref.die_unless(isinstance(reference.get("kind"), str), "subject external reference missing kind")
+            for value in reference.values():
+                ctl_ref.die_unless(isinstance(value, str), "subject external reference values must be strings")
 
 
 def verify_subject_edge(logical_id: str, payload: dict[str, Any], state: dict[str, Any]) -> None:

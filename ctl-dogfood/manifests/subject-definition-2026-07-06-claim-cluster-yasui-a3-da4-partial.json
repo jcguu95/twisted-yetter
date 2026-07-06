@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:89ebf8d007a37a2d69fa7062c7d7663c12b10d5c8b68b9bba536dc37c061dcfd",
+  "generated_at": "2026-07-06T23:33:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:89ebf8d007a37a2d69fa7062c7d7663c12b10d5c8b68b9bba536dc37c061dcfd",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:6822c3503b8c2bedaf113292a4095f4187b51d2c703f0ee8e438fc87fc459803",
+    "transition": "ctlobj-sha256:d0c66fc397abfe691b8c7fde184fff7b34b98d6fa82542762d2180445e63e1ba"
+  },
+  "parent_root_cid": "ctlobj-sha256:f2efffa4d38bc71d271a1a798f1756f954c39256cdeeee897984a453e4a12ce1",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-a3-da4-partial.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/claim-cluster-yasui-a3-da4-partial.json --manifest manifests/subject-definition-2026-07-06-claim-cluster-yasui-a3-da4-partial.json --created-at 2026-07-06T23:33:20Z --admitted-at 2026-07-06T23:33:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}
