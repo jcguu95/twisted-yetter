@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:9bfe7b0617726625ce996156057d6ac4596c9a50ea68f6a683b01798a727543a",
+  "generated_at": "2026-07-06T23:18:00Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:7ac2dc22abe2c9db0fe0e60c118b432179adf437b2d1519e90ef21514f269ce7",
+    "current_root": "ctlobj-sha256:9bfe7b0617726625ce996156057d6ac4596c9a50ea68f6a683b01798a727543a",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:0e93b3544cee77d51adf987070ea113940e8a532a9bcc2e6c7fc3b064fac2f09"
+  },
+  "parent_root_cid": "ctlobj-sha256:67d6da66ae5f22b33e2b0009a12648cd9264a1915d71cce07531af6217de5777",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-gauge-equivalence.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06 --payload lab-notes/2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-gauge-equivalence.json --manifest manifests/lab-note-2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-gauge-equivalence.json --created-at 2026-07-06T23:18:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "a06497b2413149d679b4880426561bc8a734166a"
+}
