@@ -84,7 +84,7 @@ base = load_module(BASE_EVALUATOR_SCRIPT, "da4_fr_braid_evaluator_for_yasui_a1")
 
 
 def command(argv: list[str]) -> str:
-    return subprocess.check_output(argv, cwd=REPO_ROOT, text=True).strip()
+    return subprocess.check_output(argv, cwd=REPO_ROOT, text=True, stderr=subprocess.DEVNULL).strip()
 
 
 def optional_command(argv: list[str]) -> str | None:
