@@ -215,7 +215,7 @@ SUBJECT_EDGE_ROLES = {
     "supports",
     "uses",
 }
-SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed"}
+SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed", "provisional"}
 SUBJECT_OPERATION_KINDS = {
     "add_alias",
     "correct_subject_type",
