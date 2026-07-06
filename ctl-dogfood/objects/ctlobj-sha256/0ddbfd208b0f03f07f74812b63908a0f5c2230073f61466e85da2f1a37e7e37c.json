@@ -1,0 +1,276 @@
+{
+  "created_at": "2026-07-05T23:51:56Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-akbulut-figure38-pd-certification",
+  "parents": [],
+  "payload": {
+    "artifact_records": [
+      {
+        "artifact_id": "input",
+        "repo_path": "experiments/inputs/akbulut/figure38-pd-code.json",
+        "sha256": "a32e43777b339b8f479d911299ee4a05440b94ddb48ba16c735187b39a0ad98f"
+      },
+      {
+        "artifact_id": "pd_sanity",
+        "repo_path": "experiments/results/akbulut/figure38-pd-sanity-v1.json",
+        "sha256": "b761db1547525f37c5d7f9a40db57af7ba36fe2ba9fa5a4114c4a4368e40eb0f"
+      },
+      {
+        "artifact_id": "z_unknot",
+        "repo_path": "experiments/results/akbulut/figure38-z-unknot-certificate-v1.json",
+        "sha256": "b723a7be53bc1fb3afe1918a58ddfe2abc8c0faf32d43672b865ce02038ac858"
+      },
+      {
+        "artifact_id": "algebraic",
+        "repo_path": "experiments/results/akbulut/figure38-y-slide-cancel-algebraic-v1.json",
+        "sha256": "df772c82ac3c84c90702023a15357d3da256c95abfed1212a44dc780d06e6616"
+      },
+      {
+        "artifact_id": "generator_script",
+        "repo_path": "experiments/scripts/akbulut_figure38_certify.py",
+        "sha256": "b085109700cfdf7a88c3993b72d52936b63ec7204fb808297ecd5c4a5d46c81d"
+      }
+    ],
+    "claims": [
+      {
+        "artifact": "experiments/results/akbulut/figure38-pd-sanity-v1.json",
+        "claim_id": "figure38-pd-structural-validation",
+        "status": "ESTABLISHED",
+        "summary": {
+          "arc_occurrence_status": "pass",
+          "component_order": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "Y",
+            "Z"
+          ],
+          "crossing_count": 75,
+          "intercomponent_odd_sum_count": 0,
+          "transition_error_count": 0
+        }
+      },
+      {
+        "akbulut_semantics": {
+          "A": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "B": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "C": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "D": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "E": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "P": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "Q": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "R": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "S": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "T": {
+            "akbulut_color": "red",
+            "akbulut_role": "red_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "Y": {
+            "akbulut_color": "black",
+            "akbulut_role": "black_Y_component",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": false
+          },
+          "Z": {
+            "akbulut_color": "blue",
+            "akbulut_role": "blue_Z_component_with_special_dot",
+            "ordinary_kirby_role_asserted": false,
+            "special_dot": true
+          }
+        },
+        "artifact": "experiments/inputs/akbulut/figure38-pd-code.json",
+        "boundary": "Akbulut colors and Z special dot are recorded semantics, not ordinary Kirby role assertions.",
+        "claim_id": "figure38-component-framing-and-akbulut-semantics-recorded",
+        "component_framings": {
+          "A": -4,
+          "B": -1,
+          "C": 0,
+          "D": -1,
+          "E": -2,
+          "P": -2,
+          "Q": -2,
+          "R": -2,
+          "S": -2,
+          "T": -2,
+          "Y": -1,
+          "Z": 0
+        },
+        "status": "ESTABLISHED"
+      },
+      {
+        "artifact": "experiments/results/akbulut/figure38-z-unknot-certificate-v1.json",
+        "claim_id": "figure38-z-component-unknot-projection",
+        "move_count": 5,
+        "scope": "Z-only self-crossing projection after deleting all non-Z components",
+        "status": "ESTABLISHED",
+        "terminal_diagram": "crossing-free unknot",
+        "z_self_crossing_count": 7
+      },
+      {
+        "artifact": "experiments/results/akbulut/figure38-y-slide-cancel-algebraic-v1.json",
+        "boundary": "matches-E1-coarse-intersection-form-sanity-not-full-topological-proof",
+        "claim_id": "figure38-y-slide-z-cancel-coarse-algebraic-shadow",
+        "e1_intersection_form_sanity": {
+          "determinant_abs_1": true,
+          "odd_form": true,
+          "rank_10": true,
+          "signature_1_9_0": true,
+          "signature_value_minus_8": true
+        },
+        "final_matrix_invariants": {
+          "determinant": -1,
+          "parity": "odd",
+          "rank": 10,
+          "signature": -8,
+          "signature_tuple_positive_negative_zero": [
+            1,
+            9,
+            0
+          ]
+        },
+        "scope": "coarse algebraic matrix check for the reported Akbulut slide/cancel story",
+        "slide_sequence": [
+          {
+            "coefficient": 1,
+            "component": "A",
+            "lk_with_Z_after": 0,
+            "lk_with_Z_before": -1,
+            "move_id": "alg-slide-01",
+            "reason": "kill algebraic linking with Z before Y/Z cancellation",
+            "slide_over": "Y"
+          },
+          {
+            "coefficient": -1,
+            "component": "B",
+            "lk_with_Z_after": 0,
+            "lk_with_Z_before": 1,
+            "move_id": "alg-slide-02",
+            "reason": "kill algebraic linking with Z before Y/Z cancellation",
+            "slide_over": "Y"
+          },
+          {
+            "coefficient": -1,
+            "component": "D",
+            "lk_with_Z_after": 0,
+            "lk_with_Z_before": 1,
+            "move_id": "alg-slide-03",
+            "reason": "kill algebraic linking with Z before Y/Z cancellation",
+            "slide_over": "Y"
+          }
+        ],
+        "status": "ESTABLISHED"
+      },
+      {
+        "blocked_reasons": [
+          "Akbulut special-dot/upside-down convention has not been decoded",
+          "Z special dot is not asserted to be an ordinary dotted 1-handle",
+          "This is one Figure 38 side, not a certified exotic-pair input with H2 marking"
+        ],
+        "claim_id": "figure38-evaluator-readiness",
+        "status": "BLOCKED_FOR_EVALUATION"
+      }
+    ],
+    "created_at": "2026-07-05T23:50:10Z",
+    "created_by": "actor:codex",
+    "downstream_policy": {
+      "may_use_as": [
+        "audited Figure 38 PD transcription candidate",
+        "component-framing label record",
+        "Z-only unknot projection certificate",
+        "coarse algebraic consistency certificate for the reported Akbulut slide/cancel story"
+      ],
+      "must_not_use_as": [
+        "ordinary Kirby diagram with decoded dotted-handle semantics",
+        "complete E(1) topological proof",
+        "exotic invariant computation input",
+        "n70 pass certificate"
+      ]
+    },
+    "generator_script": "experiments/scripts/akbulut_figure38_certify.py",
+    "note_id": "objective-note-2026-07-05-akbulut-figure38-pd-certification",
+    "repo_snapshot": {
+      "commit": "5dcff5456f1428b1fd2a95ae67aceb7cb9766fff",
+      "dirty": true
+    },
+    "reproduce_command": "PYTHONPATH=src python experiments/scripts/akbulut_figure38_certify.py --write",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "The Figure 38 Akbulut convention is recorded but not decoded as an ordinary Kirby evaluator input.",
+      "normative_source_policy": "This objective note summarizes machine-readable JSON artifacts; it does not promote chat text or legacy prose to theorem evidence.",
+      "question": "Record and certify the Akbulut arXiv 0805.1524 Figure 38 PD code, component framings, Z unknot check, and coarse Y-slide/Z-cancel algebraic check."
+    },
+    "source_reference": {
+      "arxiv": "0805.1524",
+      "arxiv_version": "v4",
+      "canonical_locator": "https://arxiv.org/abs/0805.1524",
+      "doi": "10.48550/arXiv.0805.1524",
+      "figure": "Figure 38",
+      "paper": "Selman Akbulut, The Dolgachev Surface",
+      "reference_id": "akbulut-dolgachev-surface",
+      "source_snapshot_status": "not-captured-in-this-artifact"
+    },
+    "status": "objective-certification-with-claim-boundaries",
+    "title": "Akbulut Figure 38 PD transcription and coarse algebraic certification"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

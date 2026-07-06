@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "a52af635dc832bea8dbd13652355d5820dddd407",
+  "current_root_cid": "ctlobj-sha256:5796f664452bc39286b12882a18da90b0d9851fdc406c03fe60863f4b9607a8d",
+  "generated_at": "2026-07-05T23:51:56Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-05-akbulut-figure38-pd-certification",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:0ddbfd208b0f03f07f74812b63908a0f5c2230073f61466e85da2f1a37e7e37c",
+    "current_root": "ctlobj-sha256:5796f664452bc39286b12882a18da90b0d9851fdc406c03fe60863f4b9607a8d",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:2b1a2968ad09287b9761f0615ed353d68f6a2262c119fd135b4b61806306ae9c"
+  },
+  "parent_root_cid": "ctlobj-sha256:abae46e8cc01ad85c860023ec866455e539338057f58864435930afd00653413",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-05-akbulut-figure38-pd-certification.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-05-akbulut-figure38-pd-certification --payload lab-notes/2026-07-05-akbulut-figure38-pd-certification.json --manifest manifests/lab-note-2026-07-05-akbulut-figure38-pd-certification.json --created-at 2026-07-05T23:51:56Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5dcff5456f1428b1fd2a95ae67aceb7cb9766fff"
+}
