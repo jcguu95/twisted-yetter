@@ -1,0 +1,143 @@
+{
+  "case": {
+    "category": "c3w1_twisted_D_A4",
+    "category_twist": "c3-inflated omega_power=1 on A4/V4 ~= C3",
+    "component_class_map": {
+      "A": "2h+e2",
+      "B": "h",
+      "C": "2h+e1"
+    },
+    "component_order_in_braid": [
+      "C",
+      "A",
+      "B"
+    ],
+    "link": "yasui-figure3-a1-r1-normalized",
+    "link_component_twist": "A has omega=1 in Hom(Z/3,C*) generator; C,B have omega=0",
+    "omega_labels_in_braid_order": [
+      0,
+      1,
+      0
+    ],
+    "yetter_twist": "none"
+  },
+  "claim_boundary": "Operational preflight for launching numeric singleton computation; not theorem-level certificate.",
+  "conventions": {
+    "character_direction": "+1 generator; inverse would be conjugate/order-3 equivalent as a separate variation",
+    "character_formula": "zeta_3^(omega_label * degree(simple_label))",
+    "component_choice": "A confirmed by user; also highest braid crossing exposure among A,B,C in this payload",
+    "degree_by_flux_class": {
+      "1A": 0,
+      "2A": 0,
+      "3A": 1,
+      "3B": 2
+    }
+  },
+  "generator": "inline preflight script run by Codex",
+  "inputs": {
+    "braid_payload": "experiments/results/yasui/figure3-a1-r1-normalized-braid-payload-v1.json",
+    "braid_payload_sha256": "f96fb3836333429b89539269002eb9fc68672c5d09c55f63c4248997a3c10199",
+    "manifest": "experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json",
+    "manifest_sha256": "71937f6cf0ee363fb63ce17d0d179e1894ae664ac09088493872c1aa19d18b93",
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+    "mtc_sha256": "31fbc6af46a2289a9f0feb941a0b4d6afcdc3977d0187f3ebf5e195f8951df3d",
+    "remote_assignment_manifest": "experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/manifest.json",
+    "remote_assignment_manifest_sha256": "ef9615f2f1c37b2aa0fc02acdfe00cff85ec6e68b93e82f5dab39fe57667ddd3",
+    "script": "experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py",
+    "script_sha256": "ad5b7bec8d1041368bb4be23eb47200549a5d25ceaa2352883fd87b72e4c329f"
+  },
+  "known_risks": [
+    "DA4 Z/3 character convention is implemented in this runner, not inherited from a preexisting DA4 evaluator.character method.",
+    "A later aggregate checker must sum weighted_twisted_contribution, not weighted_untwisted_contribution.",
+    "Remote worker directories must be separate from omega0 untwisted A1 outputs to avoid skip/collision."
+  ],
+  "local_smoke_chunks": [
+    {
+      "elapsed_seconds": 7.349997758865356e-05,
+      "labels": [
+        "1A:triv",
+        "1A:triv",
+        "1A:triv"
+      ],
+      "link_twist": {
+        "character_formula": "zeta_3^(omega_label * degree(simple_label))",
+        "degree_by_flux_class": {
+          "1A": 0,
+          "2A": 0,
+          "3A": 1,
+          "3B": 2
+        },
+        "id": "component-A-generator-in-Z3",
+        "omega_by_component": {
+          "A": 1,
+          "B": 0,
+          "C": 0
+        },
+        "omega_labels_in_braid_order": [
+          0,
+          1,
+          0
+        ],
+        "universal_group": "Z/3"
+      },
+      "sector_index": 0,
+      "sha256": "a8e22ff1a662ab00da7f356270bff2e33e83df7df9e4a2a614e4166c048c7f09",
+      "yetter_twist": "none"
+    },
+    {
+      "elapsed_seconds": 109.23721654084511,
+      "labels": [
+        "3A:eta2",
+        "3A:eta2",
+        "2A:eps11"
+      ],
+      "link_twist": {
+        "character_formula": "zeta_3^(omega_label * degree(simple_label))",
+        "degree_by_flux_class": {
+          "1A": 0,
+          "2A": 0,
+          "3A": 1,
+          "3B": 2
+        },
+        "id": "component-A-generator-in-Z3",
+        "omega_by_component": {
+          "A": 1,
+          "B": 0,
+          "C": 0
+        },
+        "omega_labels_in_braid_order": [
+          0,
+          1,
+          0
+        ],
+        "universal_group": "Z/3"
+      },
+      "sector_index": 2107,
+      "sha256": "76b14aedb57cc0358810cb4ece9a86cbf94acaba62f6fb7fcb874a9fbbe5fc90",
+      "yetter_twist": "none"
+    }
+  ],
+  "mechanical_checks": {
+    "expected_sector_total": 2744,
+    "local_plus_remote_sector_total": 2744,
+    "manifest_mtc_id": "c3w1_twisted_D_A4",
+    "manifest_status": "manifest-complete",
+    "max_basis_size": 1366,
+    "precomputed_local_sector_indices": [
+      0,
+      2107
+    ],
+    "remote_assignment_total": 2742,
+    "sector_total": 2744,
+    "sector_total_matches": true,
+    "simple_label_count": 14,
+    "unit_pruned_count": 547
+  },
+  "repo": {
+    "git_commit": "ec08f37ee1bf5ab4bdbe839c3ca57a074fd6d159",
+    "status_short": "?? .codex/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-hetzner-119-balanced16-20260706T1711Z-v1/\n?? experiments/inputs/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-balanced-random-requeue-20260706T1527Z-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-chunks-v1/\n?? experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-manifest-v1.json\n?? experiments/sage/yasui_figure3_a1_r1_normalized_da4_c3w1_twisted_a_singletons.sage.py"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight.v1",
+  "status": "pass-with-noted-conventions",
+  "utc_created": "2026-07-06T17:16:47.483833+00:00"
+}

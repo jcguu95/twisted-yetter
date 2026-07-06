@@ -1,0 +1,1428 @@
+{
+  "canonical_completed_count": 1350,
+  "canonical_missing_count": 1394,
+  "category_id": "omega0_untwisted_D_A4",
+  "claim_boundary": "Operational distributed computation status only; invariant aggregation and validation are separate artifacts.",
+  "events": [
+    {
+      "at": "2026-07-06T04:30:58.602020+00:00",
+      "blocked_action": "stopping old Hetzner workers requires explicit user approval because it discards in-flight singleton computations",
+      "canonical_completed_count": 813,
+      "canonical_missing_count": 1931,
+      "corrective_artifacts": {
+        "active_safe_audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-active-safe-v3/audit.json",
+        "active_safe_manifest_launched": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-active-safe-v3/manifest.json",
+        "checker_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-sector-742-linux-mac-revalidation-v1.json",
+        "fully_disjoint_audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-disjoint-v2/audit.json",
+        "fully_disjoint_manifest_ready": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-disjoint-v2/manifest.json",
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-delta-remote-merge-report-v2.json"
+      },
+      "event": "overlap-corrective-dispatch",
+      "issue": "previous hetzner shard manifest had excessive assignment overlap; user threshold approx 2 per 100",
+      "launched_workers": {
+        "167.233.199.127": 8,
+        "178.105.119.138": 8,
+        "178.105.222.61": 8
+      },
+      "status": "active-safe-v3-launched-on-idle-hetzner",
+      "still_active_old_overlap_risk_hosts": [
+        "178.105.245.31",
+        "178.105.223.106"
+      ]
+    },
+    {
+      "at": "2026-07-06T04:39:26.392164+00:00",
+      "canonical_completed_count": 833,
+      "canonical_missing_count": 1911,
+      "details": {
+        "167.233.199.127": "OOM killed one python around 9.2GiB RSS; remaining active python count observed 5",
+        "178.105.119.138": "OOM killed one python around 6.7GiB RSS; remaining active python count observed 3",
+        "178.105.222.61": "OOM killed one python around 7.0GiB RSS; remaining active python count observed 5, max observed RSS around 10.5GiB"
+      },
+      "event": "v3-high-sector-oom-observed",
+      "policy": "let surviving active-safe-v3 workers drain; do not refill killed high-sector workers without revised lower-concurrency shard plan",
+      "status": "do-not-refill-to-8"
+    },
+    {
+      "artifacts": {
+        "audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-easy-first-v4/audit.json",
+        "checker_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-sector-826-linux-mac-revalidation-v1.json",
+        "manifest": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-easy-first-v4/manifest.json",
+        "premerge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-premerge-report-v1.json"
+      },
+      "at": "2026-07-06T04:49:54.976090+00:00",
+      "audit_summary": {
+        "assigned_unique": 1856,
+        "duplicate_indices": 0,
+        "overlap_with_completed": 0
+      },
+      "canonical_completed_count": 889,
+      "canonical_missing_count": 1855,
+      "dispatch_policy": "learned easy-first priority: sort missing sectors by observed label/class max_state and elapsed medians, fallback to component nonunit/dim4/dimension-product features; 40 disjoint Hetzner worker shards prepared",
+      "event": "easy-first-dispatch-prepared",
+      "launch_blocked_reason": "stopping current Hetzner workers was blocked by policy until user explicitly authorizes discarding in-flight singleton computations",
+      "status": "ready-synced-not-launched"
+    },
+    {
+      "artifacts": {
+        "audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-easy-first-v5/audit.json",
+        "checker_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-sector-868-linux-mac-revalidation-v1.json",
+        "final_premerge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-final-premerge-report-v1.json",
+        "manifest": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-easy-first-v5/manifest.json"
+      },
+      "at": "2026-07-06T04:57:37.730063+00:00",
+      "audit_summary": {
+        "assigned_unique": 1838,
+        "duplicate_indices": 0,
+        "overlap_with_completed": 0,
+        "reserved_local_in_progress_excluded": 1
+      },
+      "canonical_completed_count": 906,
+      "canonical_missing_count": 1838,
+      "event": "easy-first-v5-launched",
+      "launched_workers": {
+        "167.233.199.127": 8,
+        "178.105.119.138": 8,
+        "178.105.222.61": 8,
+        "178.105.223.106": 8,
+        "178.105.245.31": 8
+      },
+      "policy": "easy-first phase: keep 8 workers per Hetzner while memory remains low; later reduce concurrency when queue reaches high 3A/3B-heavy sectors",
+      "status": "running"
+    },
+    {
+      "artifacts": {
+        "checker_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-sector-1036-linux-mac-revalidation-v1.json",
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0001.json"
+      },
+      "at": "2026-07-06T05:00:58.612465+00:00",
+      "canonical_completed_count": 1152,
+      "canonical_missing_count": 1592,
+      "event": "easy-first-v5-first-pull-merged",
+      "first_pull_summary": {
+        "checker_max_abs_difference": "1.492284081749216e-14",
+        "checker_sector": 1036,
+        "discrepancy_count": 0,
+        "new_easy_first_v5_files": 246
+      },
+      "status": "running-healthy",
+      "worker_health": {
+        "hetzner_python_workers_per_host": 8,
+        "policy": "continue 8 workers during easy-first phase; monitor for RAM growth/OOM as harder sectors arrive",
+        "ram_used_gib_range": "10-16 of 30"
+      }
+    },
+    {
+      "artifacts": {
+        "audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-mac-long-overnight-v1/audit.json",
+        "hard_sector_checker": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-sector-1086-linux-mac-revalidation-v1.json",
+        "manifest": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-mac-long-overnight-v1/manifest.json"
+      },
+      "at": "2026-07-06T05:11:08.219590+00:00",
+      "canonical_completed_count": 1183,
+      "canonical_missing_count": 1561,
+      "checker_summary": {
+        "max_abs_difference": "8.802045310836489e-14",
+        "sector": 1086,
+        "status": "pass"
+      },
+      "event": "mac-long-overnight-workers-launched",
+      "selection_policy": "Mac workers assigned long-but-not-extreme late learned easy-first slice; disjoint among Mac workers; intended for overnight after Hetzner shutdowns",
+      "status": "running",
+      "workers": {
+        "jin-m2-long-v1-w00": "local wrapper pid 78967 python pid 78974",
+        "xil-m2-long-v1-w00": "xil-m2 pid 62824 wrapper",
+        "xil-m2-long-v1-w01": "xil-m2 pid 62825 wrapper"
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0003.json"
+      },
+      "at": "2026-07-06T05:14:36.297206+00:00",
+      "canonical_completed_count": 1220,
+      "canonical_missing_count": 1524,
+      "event": "easy-first-v5-third-pull-merged",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "new_canonical_files": 37,
+        "new_easy_first_v5_files": 37,
+        "new_jin_long_files": 0,
+        "new_xil_files": 0,
+        "slowest_elapsed_seconds_observed": 853.2164071729999
+      },
+      "status": "running-monitoring-memory",
+      "worker_health": {
+        "hetzner_python_workers_per_host": 8,
+        "largest_observed_rss_gib_approx": 4.3,
+        "policy": "continue 8 for now; reduce if RAM approaches 24GiB used or OOM appears with current v5 timestamp",
+        "ram_used_gib_range": "17-21 of 30"
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0004.json"
+      },
+      "at": "2026-07-06T05:18:16.737932+00:00",
+      "canonical_completed_count": 1246,
+      "canonical_missing_count": 1498,
+      "event": "easy-first-v5-fourth-pull-merged",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 0.9624367189999248,
+        "new_canonical_files": 26,
+        "new_easy_first_v5_files": 26,
+        "new_jin_long_files": 0,
+        "new_xil_files": 0,
+        "slowest_elapsed_seconds_observed": 872.4900347339999
+      },
+      "status": "running"
+    },
+    {
+      "action": "killed two largest-RSS python workers, reducing host from 8 to 6 workers",
+      "at": "2026-07-06T05:19:50.231872+00:00",
+      "canonical_completed_count": 1246,
+      "canonical_missing_count": 1498,
+      "event": "hetzner-host-concurrency-reduced",
+      "host": "178.105.222.61",
+      "killed_workers": [
+        "hetzner-222-61-easy-v5-w06",
+        "hetzner-222-61-easy-v5-w07"
+      ],
+      "post_action_memory": "15GiB used / 15GiB available",
+      "reason": "memory reached 27/30GiB with only 3.3GiB available",
+      "requeue_note": "unfinished indices in killed worker shard files remain uncomputed and will be recovered by next completed-minus-missing requeue",
+      "status": "running-reduced-one-host"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0005.json"
+      },
+      "at": "2026-07-06T05:28:09.299293+00:00",
+      "canonical_completed_count": 1304,
+      "canonical_missing_count": 1440,
+      "event": "easy-first-v5-fifth-pull-merged",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 0.6305149429999801,
+        "new_by_host_pull": {
+          "167-233-199-127": 21,
+          "178-105-119-138": 5,
+          "178-105-222-61": 5,
+          "178-105-223-106": 19,
+          "178-105-245-31": 8
+        },
+        "new_canonical_files": 58,
+        "remote_file_count": 645,
+        "slowest_elapsed_seconds_observed": 1133.597518171
+      },
+      "status": "running"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0006-final-pull-first-two.json"
+      },
+      "at": "2026-07-06T05:33:33.589986+00:00",
+      "canonical_completed_count": 1307,
+      "canonical_missing_count": 1437,
+      "event": "easy-first-v5-final-pull-before-first-two-shutdown-merged",
+      "hosts": [
+        "178-105-119-138",
+        "178-105-245-31"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "178-105-119-138": 2,
+          "178-105-245-31": 1
+        },
+        "new_canonical_files": 3
+      },
+      "status": "shutdown-ready-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0007-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:35:53.542587+00:00",
+      "canonical_completed_count": 1333,
+      "canonical_missing_count": 1411,
+      "event": "easy-first-v5-monitor-pull-three-hetzner-macs-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 0.6739077720003479,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "167-233-199-127": 16,
+          "178-105-222-61": 4,
+          "178-105-223-106": 6
+        },
+        "new_canonical_files": 26,
+        "slowest_elapsed_seconds_observed": 1099.0946348199996
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0007-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:38:17.140862+00:00",
+      "canonical_completed_count": 1333,
+      "canonical_missing_count": 1411,
+      "event": "monitor-health-three-hetzner-macs-and-jin-worker-restart",
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "167.233.199.127": {
+          "largest_rss_gib_approx": 6.0,
+          "mem_available_gib_approx": 6.3,
+          "python_workers_observed": 5
+        },
+        "178.105.222.61": {
+          "largest_rss_gib_approx": 6.0,
+          "mem_available_gib_approx": 6.9,
+          "python_workers_observed": 6
+        },
+        "178.105.223.106": {
+          "largest_rss_gib_approx": 6.0,
+          "mem_available_gib_approx": 7.8,
+          "python_workers_observed": 4
+        },
+        "jin-m2": {
+          "action": "restarted local worker jin-m2-long-v1-w00",
+          "wrapper_pid": 16442
+        },
+        "xil-m2": {
+          "cpu_percent_each_approx": "90",
+          "python_workers_observed": 2,
+          "status": "running"
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0008-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:42:44.314281+00:00",
+      "canonical_completed_count": 1340,
+      "canonical_missing_count": 1404,
+      "event": "easy-first-v5-monitor-pull-0008-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 209.44137584100008,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "167-233-199-127": 1,
+          "178-105-222-61": 6
+        },
+        "new_canonical_files": 7,
+        "slowest_elapsed_seconds_observed": 1109.761309595
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0009-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:46:47.328820+00:00",
+      "canonical_completed_count": 1341,
+      "canonical_missing_count": 1403,
+      "event": "easy-first-v5-monitor-pull-0009-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 208.919270376,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "167-233-199-127": 1
+        },
+        "new_canonical_files": 1,
+        "slowest_elapsed_seconds_observed": 208.919270376
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0010-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:51:35.021331+00:00",
+      "canonical_completed_count": 1342,
+      "canonical_missing_count": 1402,
+      "event": "easy-first-v5-monitor-pull-0010-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 71.5381410760001,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "167-233-199-127": 1
+        },
+        "new_canonical_files": 1,
+        "slowest_elapsed_seconds_observed": 71.5381410760001
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0011-three-hetzner-macs.json"
+      },
+      "at": "2026-07-06T05:58:24.332600+00:00",
+      "canonical_completed_count": 1344,
+      "canonical_missing_count": 1400,
+      "event": "easy-first-v5-monitor-pull-0011-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": 219.90865637499974,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {
+          "178-105-222-61": 2
+        },
+        "new_canonical_files": 2,
+        "slowest_elapsed_seconds_observed": 1082.4493436679995
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-easy-first-v5-merge-report-0012-urgent-pull.json"
+      },
+      "at": "2026-07-06T06:03:45.823570+00:00",
+      "canonical_completed_count": 1344,
+      "canonical_missing_count": 1400,
+      "event": "easy-first-v5-urgent-pull-0012-merged",
+      "hosts": [
+        "178-105-222-61",
+        "178-105-223-106",
+        "167-233-199-127",
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": null,
+        "max_duplicate_abs_diff": 6.608088374803476e-13,
+        "new_by_host_pull": {},
+        "new_canonical_files": 0,
+        "slowest_elapsed_seconds_observed": null
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0001.json"
+      },
+      "at": "2026-07-06T06:07:51.363804+00:00",
+      "canonical_completed_count": 1344,
+      "canonical_missing_count": 1400,
+      "event": "mac-overnight-monitor-pull-0001-merged",
+      "hosts": [
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "fastest_elapsed_seconds_observed": null,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files": 0,
+        "slowest_elapsed_seconds_observed": null
+      },
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "jin_w01_audit": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-mac-long-overnight-v1/jin-m2-long-v1-w01-audit.json",
+        "jin_w01_shard": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-mac-long-overnight-v1/jin-m2-long-v1-w01.json",
+        "last_merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0001.json"
+      },
+      "at": "2026-07-06T06:10:46.006446+00:00",
+      "canonical_completed_count": 1344,
+      "canonical_missing_count": 1400,
+      "event": "mac-overnight-monitor-heartbeat-xil-jin-two-workers",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "new_canonical_files": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T05:38:17.140862+00:00",
+          "baseline_completed": 1333,
+          "chunks_per_hour": 20.319513220979534,
+          "minutes_window": 30,
+          "new_chunks": 11
+        },
+        {
+          "baseline_at": "2026-07-06T05:00:58.612465+00:00",
+          "baseline_completed": 1152,
+          "chunks_per_hour": 165.06686572514323,
+          "minutes_window": 60,
+          "new_chunks": 192
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "status": "running",
+          "w01_action": "created disjoint 150-sector shard and launched detached worker pid 64927",
+          "workers": [
+            "jin-m2-long-v1-w00",
+            "jin-m2-long-v1-w01"
+          ],
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "83.7",
+            "82.0"
+          ],
+          "pmem_percent_approx_each": [
+            "19.3",
+            "11.8"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0002.json"
+      },
+      "at": "2026-07-06T06:18:38.543342+00:00",
+      "canonical_completed_count": 1344,
+      "canonical_missing_count": 1400,
+      "event": "mac-overnight-monitor-pull-merged",
+      "hosts": [
+        "xil-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T05:46:47.328820+00:00",
+          "baseline_completed": 1341,
+          "chunks_per_hour": 5.650857020853047,
+          "minutes_window": 30,
+          "new_chunks": 3
+        },
+        {
+          "baseline_at": "2026-07-06T05:18:16.737932+00:00",
+          "baseline_completed": 1246,
+          "chunks_per_hour": 97.40998205643523,
+          "minutes_window": 60,
+          "new_chunks": 98
+        }
+      ],
+      "status": "running-no-discrepancy"
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0003.json"
+      },
+      "at": "2026-07-06T06:36:13.214810+00:00",
+      "canonical_completed_count": 1346,
+      "canonical_missing_count": 1398,
+      "event": "mac-overnight-heartbeat-xil-jin-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T06:03:45.823570+00:00",
+          "baseline_completed": 1344,
+          "chunks_per_hour": 3.697253973474791,
+          "minutes_window": 30,
+          "new_chunks": 2
+        },
+        {
+          "baseline_at": "2026-07-06T05:35:53.542587+00:00",
+          "baseline_completed": 1333,
+          "chunks_per_hour": 12.929347497993053,
+          "minutes_window": 60,
+          "new_chunks": 13
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "99.3",
+            "99.5"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "68.5",
+            "71.0"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0004.json"
+      },
+      "at": "2026-07-06T07:06:11.790798+00:00",
+      "canonical_completed_count": 1348,
+      "canonical_missing_count": 1396,
+      "event": "mac-overnight-heartbeat-xil-jin-0705-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T06:18:38.543342+00:00",
+          "baseline_completed": 1344,
+          "chunks_per_hour": 5.046880868926638,
+          "minutes_window": 30,
+          "new_chunks": 4
+        },
+        {
+          "baseline_at": "2026-07-06T06:03:45.823570+00:00",
+          "baseline_completed": 1344,
+          "chunks_per_hour": 3.8441340042604346,
+          "minutes_window": 60,
+          "new_chunks": 4
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "100.0",
+            "99.4"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "61.5",
+            "62.2"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0005.json"
+      },
+      "at": "2026-07-06T07:36:15.890652+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-0735-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 1.995454958891649,
+          "minutes_window": 30,
+          "new_chunks": 1
+        },
+        {
+          "baseline_at": "2026-07-06T06:36:13.214810+00:00",
+          "baseline_completed": 1346,
+          "chunks_per_hour": 2.99777178787322,
+          "minutes_window": 60,
+          "new_chunks": 3
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "92.3",
+            "90.4"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "65.0",
+            "66.9"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0006.json"
+      },
+      "at": "2026-07-06T08:06:17.936681+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-0805-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T07:36:15.890652+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.9982957198074063,
+          "minutes_window": 60,
+          "new_chunks": 1
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "86.5",
+            "90.1"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "58.1",
+            "57.7"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0007.json"
+      },
+      "at": "2026-07-06T08:36:15.547406+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-0835-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T07:36:15.890652+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.6662032103130578,
+          "minutes_window": 60,
+          "new_chunks": 1
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "82.6",
+            "13.5"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "82.6",
+            "81.1"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0008.json"
+      },
+      "at": "2026-07-06T09:07:03.626434+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-0905-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T08:36:15.547406+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T08:06:17.936681+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.4964260334485055,
+          "minutes_window": 120,
+          "new_chunks": 1
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "81.1",
+            "48.7"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "84.6",
+            "85.8"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0009.json"
+      },
+      "at": "2026-07-06T09:36:42.092187+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-0935-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T08:36:15.547406+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T08:36:15.547406+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:36:15.890652+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 120,
+          "new_chunks": 0
+        }
+      ],
+      "status": "running-no-discrepancy",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "69.6",
+            "26.5"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "71.1",
+            "75.2"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0010.json"
+      },
+      "at": "2026-07-06T10:06:42.591960+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-1005-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "All four Mac workers remain CPU-active for multi-hour sectors; no worker is idle, so no reassignment yet.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T09:36:42.092187+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T08:36:15.547406+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.3323853836990974,
+          "minutes_window": 180,
+          "new_chunks": 1
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "98.6",
+            "97.6"
+          ],
+          "elapsed_each": [
+            "04:25:44",
+            "03:56:02"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "67.3",
+            "66.1"
+          ],
+          "elapsed_each": "04:56:46",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0011.json"
+      },
+      "at": "2026-07-06T10:36:42.333328+00:00",
+      "canonical_completed_count": 1349,
+      "canonical_missing_count": 1395,
+      "event": "mac-overnight-heartbeat-xil-jin-1035-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "No completed chunks in recent windows; all workers remain alive. XIL high CPU, Jin lower CPU but running; no idle worker to reassign.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T09:36:42.092187+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T09:36:42.092187+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T06:36:13.214810+00:00",
+          "baseline_completed": 1346,
+          "chunks_per_hour": 0.7484864710569287,
+          "minutes_window": 240,
+          "new_chunks": 3
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "45.7",
+            "40.0"
+          ],
+          "elapsed_each": [
+            "04:55:39",
+            "04:25:57"
+          ],
+          "status": "running-lower-cpu-than-prior",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "82.2",
+            "91.0"
+          ],
+          "elapsed_each": "05:26:45",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0012.json"
+      },
+      "at": "2026-07-06T11:06:42.597663+00:00",
+      "canonical_completed_count": 1350,
+      "canonical_missing_count": 1394,
+      "event": "mac-overnight-heartbeat-xil-jin-1105-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "One local chunk completed since previous heartbeat; all workers remain alive and CPU-active; no idle worker to reassign.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T10:36:42.333328+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 1.999706337569588,
+          "minutes_window": 30,
+          "new_chunks": 1
+        },
+        {
+          "baseline_at": "2026-07-06T10:06:42.591960+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.9999984158358429,
+          "minutes_window": 60,
+          "new_chunks": 1
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.49893260074477475,
+          "minutes_window": 240,
+          "new_chunks": 2
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "87.7",
+            "58.1"
+          ],
+          "elapsed_each": [
+            "05:25:42",
+            "04:56:00"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "91.0",
+            "94.4"
+          ],
+          "elapsed_each": "05:56:45",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0013.json"
+      },
+      "at": "2026-07-06T11:36:45.633363+00:00",
+      "canonical_completed_count": 1350,
+      "canonical_missing_count": 1394,
+      "event": "mac-overnight-heartbeat-xil-jin-1135-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "No new chunks this heartbeat; all workers remain alive and CPU-active; no idle worker to reassign.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T11:06:42.597663+00:00",
+          "baseline_completed": 1350,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T10:36:42.333328+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.9990841631371393,
+          "minutes_window": 60,
+          "new_chunks": 1
+        },
+        {
+          "baseline_at": "2026-07-06T07:36:15.890652+00:00",
+          "baseline_completed": 1349,
+          "chunks_per_hour": 0.2494846978287193,
+          "minutes_window": 240,
+          "new_chunks": 1
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "66.8",
+            "77.8"
+          ],
+          "elapsed_each": [
+            "05:55:41",
+            "05:25:59"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "73.5",
+            "72.9"
+          ],
+          "elapsed_each": "06:26:45",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0014.json"
+      },
+      "at": "2026-07-06T12:07:16.210286+00:00",
+      "canonical_completed_count": 1350,
+      "canonical_missing_count": 1394,
+      "event": "mac-overnight-heartbeat-xil-jin-1206-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "No new chunks this heartbeat; all workers remain alive and CPU-active; no idle worker to reassign.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T11:36:45.633363+00:00",
+          "baseline_completed": 1350,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T11:06:42.597663+00:00",
+          "baseline_completed": 1350,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T07:06:11.790798+00:00",
+          "baseline_completed": 1348,
+          "chunks_per_hour": 0.3985735608488766,
+          "minutes_window": 300,
+          "new_chunks": 2
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "81.9",
+            "43.1"
+          ],
+          "elapsed_each": [
+            "06:26:13",
+            "05:56:31"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "56.2",
+            "61.2"
+          ],
+          "elapsed_each": "06:57:14",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0015.json"
+      },
+      "at": "2026-07-06T12:37:19.340892+00:00",
+      "canonical_completed_count": 1350,
+      "canonical_missing_count": 1394,
+      "event": "mac-overnight-heartbeat-xil-jin-1236-merged",
+      "hosts": [
+        "xil-m2",
+        "jin-m2"
+      ],
+      "interpretation": "No new chunks this heartbeat; all workers remain alive and CPU-active; no idle worker to reassign.",
+      "pull_summary": {
+        "discrepancy_count": 0,
+        "max_duplicate_abs_diff": 0.0,
+        "new_by_host_pull": {},
+        "new_canonical_files_from_xil_pull": 0
+      },
+      "speed_estimates": [
+        {
+          "baseline_at": "2026-07-06T12:07:16.210286+00:00",
+          "baseline_completed": 1350,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 30,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T11:36:45.633363+00:00",
+          "baseline_completed": 1350,
+          "chunks_per_hour": 0.0,
+          "minutes_window": 60,
+          "new_chunks": 0
+        },
+        {
+          "baseline_at": "2026-07-06T06:36:13.214810+00:00",
+          "baseline_completed": 1346,
+          "chunks_per_hour": 0.6646319672238673,
+          "minutes_window": 360,
+          "new_chunks": 4
+        }
+      ],
+      "status": "running-no-discrepancy-long-sector-stall",
+      "worker_health": {
+        "jin-m2": {
+          "cpu_percent_approx_each": [
+            "81.1",
+            "52.8"
+          ],
+          "elapsed_each": [
+            "06:56:11",
+            "06:26:29"
+          ],
+          "status": "running",
+          "workers_observed": 2
+        },
+        "xil-m2": {
+          "cpu_percent_approx_each": [
+            "77.9",
+            "82.8"
+          ],
+          "elapsed_each": "07:27:23",
+          "status": "running",
+          "workers_observed": 2
+        }
+      }
+    }
+  ],
+  "generator": "codex-distributed-worker-control",
+  "latest_observation": {
+    "178.105.119.138_oom": "Kernel OOM killed workers w00,w02,w03,w04,w05 around 2026-07-06T04:01:19Z; surviving workers w01,w06,w07 continue.",
+    "178.105.119.138_policy": "Do not refill to 8 workers; treat as 3-worker host until memory pressure drops.",
+    "active_compute_worker_count": 19,
+    "canonical_complete": "784/2744",
+    "hetzner_temperature": "no readable thermal sensors exposed via /sys in VM polls",
+    "latest_local_validation": "sector 729 from 178.105.245.31 revalidated locally; max_abs_difference=1.5682780397173302e-13",
+    "latest_merge": "merged 4 new chunks; 121 overlaps pass; discrepancies=0",
+    "merge_status": "latest merge report pass; no discrepancies observed.",
+    "new_host_shard_manifest": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/new-hetzner-3hosts-manifest.json",
+    "new_hosts": "178.105.222.61, 178.105.223.106, and 167.233.199.127 each launched 8 mixed-band workers.",
+    "oom_prone_host": "178.105.119.138 not being refilled; no newer OOM after 04:15:44Z in latest poll.",
+    "priority": "Hetzner throughput and tracker/checker first; xil-m2 and jin-m2 compute opportunistic.",
+    "validation_policy": "After each successful pull/merge, choose fastest newly merged sector and revalidate locally.",
+    "xil_m2_temperature": "powermetrics did not return temperature under noninteractive SSH privileges"
+  },
+  "link_id": "yasui-figure3-a3",
+  "repo": {
+    "dirty": true,
+    "git_commit": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? .codex/\n?? experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/\n?? experiments/results/mtc-candidates/drinfeld-double-a4-fr-braid-evaluator-basic-controls-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-50-scheduler-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-50-two-worker-status-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-fast-sector-revalidation-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-first20-profile-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-parallel-2700-batch-profile-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000000-0000300-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000300-0000600-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000600-0000601-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-singleton-pool-state-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-singleton-pool-state-v1.json.lock\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-smoke-profile-v1.json\n?? experiments/results/yasui/singleton-worker-logs/\n?? experiments/sage/da4_fr_braid_evaluator_basic_controls.sage.py\n?? experiments/sage/da4_yasui_a3_fast_sector_revalidation.sage.py\n?? experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py\n?? experiments/scripts/run_yasui_a3_da4_50_scheduler.py"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-distributed-run-status.v1",
+  "status": "easy-first-v5-running-with-one-host-reduced",
+  "updated_at": "2026-07-06T12:37:19.340892+00:00",
+  "workers": [
+    {
+      "host": "jin-m2-local",
+      "mode": "singleton-pool",
+      "pool_state": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-singleton-pool-state-v1.json",
+      "role": "compute",
+      "worker_count": 1
+    },
+    {
+      "host": "jin-m2-local",
+      "mode": "reserved",
+      "role": "fast-check",
+      "worker_count": 1
+    },
+    {
+      "host": "xil-m2.local",
+      "role": "compute",
+      "shards": [
+        "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/xil-m2-local-worker-00.json",
+        "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/xil-m2-local-worker-01.json"
+      ],
+      "worker_count": 2
+    },
+    {
+      "host": "178.105.245.31",
+      "role": "compute",
+      "shard_range": "650-1700",
+      "worker_count": 8
+    },
+    {
+      "host": "178.105.119.138",
+      "role": "compute",
+      "shard_range": "1700-2700",
+      "worker_count": 8
+    },
+    {
+      "host": "167.233.199.127",
+      "role": "compute",
+      "sharding": "mixed-band",
+      "shards_glob": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/hetzner-167-233-199-127-worker-*.json",
+      "worker_count": 8
+    },
+    {
+      "host": "178.105.222.61",
+      "role": "compute",
+      "sharding": "mixed-band",
+      "shards_glob": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/hetzner-178-105-222-61-worker-*.json",
+      "worker_count": 8
+    },
+    {
+      "host": "178.105.223.106",
+      "role": "compute",
+      "sharding": "mixed-band",
+      "shards_glob": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/hetzner-178-105-223-106-worker-*.json",
+      "worker_count": 8
+    }
+  ],
+  "yetter_twist": "none"
+}

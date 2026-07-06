@@ -1,0 +1,144 @@
+{
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-microchunk-breakdown-assessment.v1",
+  "status": "INFERENCE-operational-assessment",
+  "created_at_utc": "2026-07-06T12:59:57Z",
+  "generator": "codex-manual-analysis",
+  "claim_boundary": "This artifact records an operational and mathematical decomposition assessment for numeric computation scheduling. It is not a theorem-level invariant certificate.",
+  "repo": {
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "git_commit": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "dirty": true
+  },
+  "objective": {
+    "link_id": "yasui-figure3-a3",
+    "category_id": "omega0_untwisted_D_A4",
+    "mtc": "D(A4) untwisted",
+    "yetter_twist": "none",
+    "sector_total": 2744
+  },
+  "source_artifacts": {
+    "worker_script": {
+      "path": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+      "sha256": "2c7461cd5a7f2613e0eb272b3b6a6e72ba1df85cfb3fdd495253360a292fd07f"
+    },
+    "mtc_fr_data": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+      "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5"
+    },
+    "distributed_status": {
+      "path": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-distributed-run-status-v1.json",
+      "sha256": "1ce31f40928b3387406c16be70cf227ae92f47ffc652ed7339afd32103b832ad"
+    },
+    "chunk_dir": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1"
+  },
+  "observed_progress_at_assessment": {
+    "canonical_completed": 1350,
+    "canonical_missing": 1394,
+    "latest_mac_overnight_merge_report": "experiments/results/yasui/figure3-a3-da4-omega0-untwisted-mac-overnight-merge-report-0015.json",
+    "latest_merge_new_files": 0,
+    "latest_merge_discrepancies": 0
+  },
+  "completed_sector_timing_distribution": {
+    "sample_count": 1350,
+    "elapsed_seconds": {
+      "min": 0.00002533290535211563,
+      "p50": 1.4115204679999351,
+      "p90": 305.92278280599976,
+      "p99": 1083.4176771560005,
+      "max": 11643.482530750101
+    },
+    "max_basis_size": {
+      "min": 0,
+      "p50": 547,
+      "p90": 2187,
+      "p99": 2916,
+      "max": 5462
+    },
+    "max_state_size": {
+      "min": 0,
+      "p50": 5355,
+      "p90": 4782969,
+      "p99": 4783698,
+      "max": 27302164
+    }
+  },
+  "representative_hard_completed_sectors": [
+    {
+      "sector_index": 1878,
+      "fixed_component_labels": ["3A:eta1", "3A:eta0", "1A:chi2"],
+      "elapsed_seconds": 11643.482530750101,
+      "max_basis_size": 5462,
+      "max_state_size": 27302164
+    },
+    {
+      "sector_index": 1801,
+      "fixed_component_labels": ["3A:eta1", "1A:chi2", "3A:eta1"],
+      "elapsed_seconds": 6555.496519833105,
+      "max_basis_size": 5462,
+      "max_state_size": 26981296
+    },
+    {
+      "sector_index": 633,
+      "fixed_component_labels": ["1A:std3", "1A:std3", "1A:std3"],
+      "elapsed_seconds": 874.2723923327867,
+      "max_basis_size": 4921,
+      "max_state_size": 7045463
+    }
+  ],
+  "cheap_path_scan_examples": [
+    {
+      "sector_index": 783,
+      "fixed_component_labels": ["1A:std3", "3B:eta2", "3B:eta2"],
+      "nonempty_total_charge_count": 3,
+      "sum_basis": 8748,
+      "max_total_charge_basis": 2916
+    },
+    {
+      "sector_index": 1801,
+      "fixed_component_labels": ["3A:eta1", "1A:chi2", "3A:eta1"],
+      "nonempty_total_charge_count": 3,
+      "sum_basis": 16384,
+      "max_total_charge_basis": 5462
+    },
+    {
+      "sector_index": 1878,
+      "fixed_component_labels": ["3A:eta1", "3A:eta0", "1A:chi2"],
+      "nonempty_total_charge_count": 3,
+      "sum_basis": 16384,
+      "max_total_charge_basis": 5462
+    }
+  ],
+  "mathematical_decomposition": {
+    "current_outer_chunk": "A chunk is one fixed component-label sector.",
+    "current_inner_formula": "For each fixed sector, braid_quantum_trace sums dimension(total_charge) times the trace of the braid action over the fusion path basis for that total charge.",
+    "exact_first_split": "Split a fixed sector by total_charge. The sector trace is the sum over total_charge partial traces, so these microchunks can be computed independently and aggregated by addition.",
+    "exact_second_split": "For a fixed sector and total_charge, split the trace by initial basis path blocks. The trace is the sum of diagonal matrix coefficients, so disjoint initial-basis blocks can be computed independently and aggregated by addition.",
+    "framing_and_coefficient": "Apply the fixed-sector framing factor and untwisted coefficient either once in the final sector aggregator or consistently to each microchunk with documented normalization."
+  },
+  "assessment": {
+    "will_more_whole_sector_workers_fix_long_tail": false,
+    "reason": "Whole-sector singleton scheduling has no checkpoint inside expensive sectors. Easy sectors are already mostly exhausted, and remaining/missing sectors include large basis/state-size sectors where one sector can occupy a worker for hours.",
+    "can_break_down_smaller": true,
+    "recommended_microchunk_levels": [
+      "sector_index + total_charge",
+      "sector_index + total_charge + initial_basis_path_block"
+    ],
+    "expected_benefits": [
+      "turn multi-hour invisible sector jobs into smaller interruptible jobs",
+      "reduce lost work from killed workers or remote shutdown",
+      "make Linux/Mac cross-validation cheaper at the microchunk level",
+      "allow worker pools to rebalance hard sectors instead of waiting behind a single long sector"
+    ],
+    "main_risks": [
+      "floating summation order changes; aggregator must use a fixed order and tolerance",
+      "current compose_sparse starts from the full identity on the total-charge basis; path-block mode needs a restricted-column implementation to avoid doing the same full work repeatedly",
+      "microchunk artifacts need a new schema and validation against already completed whole-sector chunks"
+    ]
+  },
+  "recommended_next_steps": [
+    "Implement a microchunk evaluator mode for sector_index plus total_charge.",
+    "Validate total-charge aggregation against several already completed whole-sector chunks, including fast, medium, and hard examples.",
+    "If total-charge chunks remain too large, implement restricted initial-basis block mode so each microchunk propagates only selected source columns.",
+    "Only after validation, stop or drain current long workers and requeue remaining work as microchunks."
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-06-yasui-a1-character-twist-distillation",
+  "title": "Distilled Yasui Figure 3 a=1 D(A4) baseline and character-twist findings",
+  "created_at": "2026-07-06T21:24:00Z",
+  "created_by": "actor:codex",
+  "status": "MIXED_ESTABLISHED_NUMERIC_AND_PROOF_DRAFT",
+  "mathematical_status": "ESTABLISHED_NUMERIC_RESULTS_WITH_PROOF_DRAFT_REDUCTION",
+  "scope": {
+    "question": "Record the completed Yasui Figure 3 a=1 D(A4) singleton computations, the D(A4) c3w1 component-A character-twist computation, and the distilled separated-link character-twist reduction used to filter future candidates.",
+    "claim_boundary": "This note admits completed numeric artifacts and explicitly marked proof-draft/inference artifacts. It does not claim an exotic-pair separation, an exact arithmetic certificate, a theorem for arbitrary non-separated surgery links, or a complete F/R implementation for SU(3)_2 or D(Dic_3).",
+    "normative_source_policy": "Repo-local JSON artifacts listed here are the normative sources. Raw singleton chunks, worker logs, SSH/server scheduling notes, and transient chat or /tmp prose are intentionally excluded from the admitted research state.",
+    "path_policy": "All artifact paths below are repo-relative."
+  },
+  "repo_snapshot": {
+    "artifact_commit_before_this_note": "a71b282810a6a7d2ba64719317147ac10cbefc6c",
+    "tracked_worktree_after_artifact_commit": "clean before creating this lab-note preimage",
+    "untracked_noise_policy": "Large raw singleton chunks, worker logs, remote pull debris, and an intermediate D12 exploratory artifact were left untracked and are not part of this note."
+  },
+  "core_numeric_results": [
+    {
+      "id": "yasui-a1-da4-omega0-baseline",
+      "status": "ESTABLISHED_NUMERIC",
+      "case": {
+        "link": "yasui-figure3-a1-r1-normalized",
+        "category": "omega0 untwisted D(A4)",
+        "yetter_twist": "none",
+        "simple_label_count": 14,
+        "sector_count": 2744
+      },
+      "result": {
+        "raw_aggregate": {
+          "real": "1727.9999999999975",
+          "imag": "-2.2140511646284722e-11"
+        },
+        "normalized_by_global_dimension_squared_144": {
+          "real": "11.999999999999982",
+          "imag": "-1.5375355309919946e-13"
+        },
+        "standard_split_unlink_check": {
+          "presentation": "ordinary split unlink with framings (+1,-1,-1)",
+          "expected_raw": {
+            "real": "1728.0000000000011",
+            "imag": "-3.0695446184836336e-12"
+          },
+          "status": "pass",
+          "tolerance": "1e-08"
+        }
+      },
+      "interpretation": "The untwisted D(A4) full 2744-sector Yasui a=1 computation agrees numerically with the standard CP2#2CPbar split presentation. This is a baseline consistency win, not an exotic separation.",
+      "artifact": {
+        "path": "experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-aggregate-check-v1.json",
+        "sha256": "0f9c439c786203dbde8b6a219887c4a353f43392a1ba27b0d1d13ed7350782fb",
+        "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-aggregate-check.v1",
+        "status": "pass"
+      }
+    },
+    {
+      "id": "yasui-a1-da4-c3w1-component-a-character-twist",
+      "status": "ESTABLISHED_NUMERIC",
+      "case": {
+        "link": "yasui-figure3-a1-r1-normalized",
+        "category": "c3w1 twisted D(A4)",
+        "category_twist": "H3 cocycle c3-inflated omega_power=1 on A4/V4 ~= C3",
+        "component_order_in_braid": [
+          "C",
+          "A",
+          "B"
+        ],
+        "twisted_component": "A",
+        "omega_by_component": {
+          "A": 1,
+          "B": 0,
+          "C": 0
+        },
+        "omega_labels_in_braid_order": [
+          0,
+          1,
+          0
+        ],
+        "universal_group": "Z/3",
+        "simple_label_count": 14,
+        "sector_count": 2744
+      },
+      "result": {
+        "raw_aggregate": {
+          "real": "1728.0000000000696",
+          "imag": "-2.2993162929196842e-11"
+        },
+        "normalized_by_global_dimension_144": {
+          "real": "12.000000000000483",
+          "imag": "-1.5967474256386695e-13"
+        },
+        "sector_total_present": 2744,
+        "error_count": 0
+      },
+      "interpretation": "The D(A4) c3w1 category with a generator character twist on Yasui component A also evaluates to the same normalized value 12, within numeric tolerance. This validates the component-twist singleton pipeline for this case but does not produce a separating invariant.",
+      "artifact": {
+        "path": "experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-aggregate-v1.json",
+        "sha256": "b9ed3d69e59711b11d83de10a9f266c28fe56d3b40cce92fd6ad31fec5a1dd2f",
+        "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-aggregate.v1",
+        "status": "pass"
+      }
+    },
+    {
+      "id": "standard-split-da4-c3w1-character-scan",
+      "status": "ESTABLISHED_NUMERIC",
+      "case": {
+        "presentation": "ordinary CP2#2CPbar split unlink",
+        "category": "c3w1 twisted D(A4)",
+        "character_group_scanned": "Z/3^3",
+        "row_count": 27
+      },
+      "result": {
+        "baseline_raw_value": "1728.0",
+        "nonbaseline_count": 0,
+        "tolerance": "1e-07"
+      },
+      "interpretation": "Every ordinary separated Z/3^3 character assignment in D(A4)c3w1 stayed at the baseline value 1728. This matches the later pointed-only reduction: the relevant D(A4) directions are pure-charge bosons.",
+      "artifact": {
+        "path": "experiments/results/yasui/figure3-a1-standard-split-unlink-da4-c3w1-character-scan-v1.json",
+        "sha256": "a8521ff4a19834fcd3b73ea17b7e9236603fa04079bdaebad27cee1105e145db",
+        "schema": "twisted-yetter.da4-c3w1-split-unlink-character-scan.v1",
+        "status": "no-nonbaseline-character-found"
+      }
+    }
+  ],
+  "separated_character_twist_reduction": {
+    "status": "PROOF_DRAFT_AND_INFERENCE",
+    "main_formula": "For ordinary separated CP2#2CPbar with framings (+1,-1,-1), a universal-character assignment represented by invertibles g_h, g_e1, g_e2 has ratio theta(g_h)^-1 theta(g_e1) theta(g_e2) relative to the untwisted split value.",
+    "proof_draft_content": [
+      "For a modular category, a universal grading character is represented by an invertible simple object g via monodromy.",
+      "The +1 Gauss sum obeys tau_+(g)=theta_g^-1 tau_+(1) by reindexing X -> g tensor X.",
+      "The -1 Gauss sum obeys tau_-(g)=theta_g tau_-(1) in the unitary/ribbon setting.",
+      "The split unlink factorizes over components, so only the pointed/invertible quadratic form remains."
+    ],
+    "consequence": "On the ordinary separated presentation, F-symbols, R-symbols, fusion multiplicities, and non-pointed simple objects disappear except through the baseline Gauss sums. Therefore this cheap test filters pointed/simple-current phases, not genuinely non-pointed exotic information.",
+    "artifacts": [
+      {
+        "path": "experiments/results/yasui/cp2-2cpbar-character-twist-symbolic-reduction-v1.json",
+        "sha256": "819be6279f794a063add674ea3b16da755f9ef1071dd07f7cad0000ccb084644",
+        "schema": "twisted-yetter.cp2-2cpbar-character-twist-symbolic-reduction.v1",
+        "status": "INFERENCE"
+      },
+      {
+        "path": "experiments/results/yasui/separated-character-twist-pointed-only-proof-draft-v1.json",
+        "sha256": "e381bed0d8caaf9429decf653c547f406725b4862a6d0dbc8811b7fd4eebe39a",
+        "schema": "twisted-yetter.separated-character-twist-pointed-only-proof-draft.v1",
+        "status": "PROOF_DRAFT"
+      }
+    ],
+    "not_yet_proved": [
+      "A fully cited theorem-level writeup for arbitrary non-separated surgery links.",
+      "A formal convention comparison for every premodular/nonmodular Yetter twist setting.",
+      "A classification statement for all U_q(g) simple-current groups and all twisted doubles D^omega(G)."
+    ]
+  },
+  "candidate_filtering_results": [
+    {
+      "id": "general-cp2-2cpbar-character-gauss-scan",
+      "status": "ESTABLISHED_NUMERIC_SUMMARY",
+      "summary": {
+        "candidate_count": 4,
+        "candidates_with_nonbaseline": [
+          "vec_z3_pointed_q_x_squared"
+        ],
+        "candidates_without_nonbaseline": [
+          "drinfeld_double_a4_omega0",
+          "drinfeld_double_a4_c3w1",
+          "su3_3"
+        ]
+      },
+      "artifact": {
+        "path": "experiments/results/yasui/cp2-2cpbar-character-gauss-scan-v1.json",
+        "sha256": "1c1065bad928aa453dfab9801bdedd29b1574c49332c0d711845c974ad4cbe97",
+        "schema": "twisted-yetter.cp2-2cpbar-character-gauss-scan.v1",
+        "status": "nonbaseline-found"
+      }
+    },
+    {
+      "id": "untwisted-DG-usefulness-criterion",
+      "status": "PROOF_DRAFT_UNTWISTED_DG",
+      "criterion": "For untwisted D(G), invertible simples are (z,chi) with z in Z(G) and chi in Hom(G,C*), and theta_(z,chi)=chi(z). The ordinary split character test can be nonbaseline exactly when some central element survives in G_ab, equivalently the natural map Z(G)->G_ab is nonzero.",
+      "important_correction": "Z(A4) is trivial, while A4_ab is Z/3. The Z/3 directions used by D(A4) are pure charges, hence bosonic with twist 1.",
+      "artifact": {
+        "path": "experiments/results/yasui/dg-split-character-usefulness-criterion-v1.json",
+        "sha256": "38034478c3addb16d29dcfb712e0bb206c4744ea289ae12052a5a8da24b263e7",
+        "schema": "twisted-yetter.dg-split-character-usefulness-criterion.v1",
+        "status": "PROOF_DRAFT_UNTWISTED_DG"
+      }
+    },
+    {
+      "id": "D-Dic3-counterexample-to-all-DG-useless",
+      "status": "ESTABLISHED_NUMERIC_ON_SPLIT_PRESENTATION",
+      "summary": {
+        "group": "Dic_3, the order-12 dicyclic / binary-dihedral group Q12",
+        "center": "<a^3> = C2",
+        "abelianization": "C4",
+        "category": "untwisted D(Dic_3)",
+        "simple_count": 32,
+        "global_dimension": 144,
+        "scan_rows": 64,
+        "nonbaseline_count": 32,
+        "observed_nonbaseline_ratio": "-1"
+      },
+      "interpretation": "This refutes the naive guess that every D(G) is split-test useless. However the signal is still only a pointed metric-group phase, not a non-pointed F/R effect.",
+      "artifact": {
+        "path": "experiments/results/yasui/cp2-2cpbar-dg-dic3-split-character-scan-v1.json",
+        "sha256": "8bc5a446f888821398636ddf36a232daa3e33774097ce914bb504902d33bd47f",
+        "schema": "twisted-yetter.cp2-2cpbar-dg-dic3-split-character-scan.v1",
+        "status": "pass"
+      }
+    },
+    {
+      "id": "SU3-2-counterexample-to-all-Uqg-useless",
+      "status": "ESTABLISHED_NUMERIC_ON_SPLIT_PRESENTATION",
+      "summary": {
+        "category": "SU(3)_2",
+        "rank": 6,
+        "simple_current_group": "Z/3 generated by (2,0)",
+        "generator_twist_closed_form": "exp(4*pi*i/3)",
+        "scan_rows": 27,
+        "nonbaseline_count": 18
+      },
+      "interpretation": "SU(3)_2 gives a clean simple-current phase on the ordinary separated presentation. It is a useful future candidate only after building/importing actual SU(3)_2 F/R data for the non-separated Yasui link.",
+      "artifact": {
+        "path": "experiments/results/yasui/cp2-2cpbar-su3-2-character-gauss-scan-v1.json",
+        "sha256": "bc873aa19455c46146607017a2d08eed06fc1e0b137033c7035bf9b45ef09d42",
+        "schema": "twisted-yetter.cp2-2cpbar-su3-2-character-gauss-scan.v1",
+        "status": "pass"
+      }
+    },
+    {
+      "id": "SU2-k-split-filter-and-yasui-a1-checks",
+      "status": "ESTABLISHED_NUMERIC_EVIDENCE_WITH_STRUCTURAL_EXPLANATION",
+      "summary": {
+        "split_scan_max_level": 64,
+        "split_levels_eliminated_rule": "k congruent 0 mod 4",
+        "split_levels_eliminated": [
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32,
+          36,
+          40,
+          44,
+          48,
+          52,
+          56,
+          60,
+          64
+        ],
+        "yasui_a1_level_8_all_alpha_max_abs_difference": "1.3235946575869639180227818740500259e-12"
+      },
+      "interpretation": "The split presentation sees only the SU(2)_k simple current phase. Prior saved Yasui a=1 SU(2) checks, including the committed k=8 all-alpha comparison, do not show a Yasui-vs-standard difference. Treat SU(2)_k as poor evidence for this route unless a sharper non-separated mechanism is identified.",
+      "artifacts": [
+        {
+          "path": "experiments/results/yasui/cp2-2cpbar-su2k-character-gauss-scan-v1.json",
+          "sha256": "dc733a86beb593419251b0167297a39d1197dd384d2c955aa07b756b285c9774",
+          "schema": "twisted-yetter.cp2-2cpbar-su2k-character-gauss-scan.v1",
+          "status": "pass"
+        },
+        {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-8-all-alpha-raw-comparison-v3.json",
+          "sha256": "00f3d89729387342c131565f091886f140e0955df428c2d603d83733fcd8fb27",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "reproduction_scripts": [
+    {
+      "path": "experiments/sage/da4_c3w1_split_unlink_character_scan.py",
+      "sha256": "6e6e230aa15cb551a637537bf87bbd64d9225e1cf9117303505b5292106fc9a0",
+      "role": "Regenerate the D(A4)c3w1 ordinary split character scan."
+    },
+    {
+      "path": "experiments/sage/cp2_2cpbar_character_gauss_scan.py",
+      "sha256": "1c9136951f3f7df9030b1e8df54a137d3998804eb61d10a7f70af82697b4826a",
+      "role": "Regenerate the small candidate CP2#2CPbar separated Gauss-sum scan."
+    },
+    {
+      "path": "experiments/sage/cp2_2cpbar_su2k_character_scan.py",
+      "sha256": "3bd5ab2a4e36190ac53f5ada08dcdd4250387e8130d1e39bedf9de4dcb6530bd",
+      "role": "Regenerate the SU(2)_k separated character scan."
+    },
+    {
+      "path": "experiments/sage/cp2_2cpbar_su3_2_character_scan.py",
+      "sha256": "90bdda58d51e0ef47fa25a92cfde856cd97e9ba6fb7f76f54aa94c9ff516c561",
+      "role": "Regenerate the SU(3)_2 separated character scan."
+    },
+    {
+      "path": "experiments/sage/dg_dic3_split_character_scan.py",
+      "sha256": "55e215e3d6778ab275a7d6ab88b6c91c46d296ce20d725668669ad62e42b4185",
+      "role": "Regenerate the untwisted D(Dic_3) separated character scan."
+    }
+  ],
+  "deliberately_excluded_from_ctl_note": [
+    {
+      "kind": "raw-singleton-chunks",
+      "reason": "They are numerous per-sector certificates and worker output details. Aggregates listed above are the normative distilled results for this note."
+    },
+    {
+      "kind": "worker-logs-and-server-operations",
+      "reason": "Scheduling, SSH, CPU/RAM, and Hetzner cleanup details are operational noise, not mathematical evidence."
+    },
+    {
+      "kind": "intermediate-D12-exploration",
+      "reason": "The corrected distilled result is the D(G) criterion and the nonproduct Dic_3 example. D12 was an intermediate product/decomposable caution, not a core artifact."
+    }
+  ],
+  "next_research_steps": [
+    {
+      "priority": 1,
+      "task": "For the main Yasui strategy, avoid more ordinary separated split-link sweeps unless they test a new pointed metric group. They cannot see non-pointed F/R data."
+    },
+    {
+      "priority": 2,
+      "task": "If pursuing SU(3)_2 or D(Dic_3), first build or import reliable F/R data and basic link checkers before running the non-separated Yasui braid."
+    },
+    {
+      "priority": 3,
+      "task": "Promote the separated character-twist reduction from proof draft to a cited theorem-level note only after checking conventions and references for universal grading, invertibles, Gauss sums, and unitary/ribbon normalization."
+    }
+  ]
+}

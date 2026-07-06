@@ -1,0 +1,178 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-06-yasui-a1-ctl-quality-audit-and-next-steps",
+  "title": "Yasui a=1 CTL quality audit and F/R next-step plan",
+  "created_at": "2026-07-06T21:48:00Z",
+  "created_by": "actor:codex",
+  "status": "QUALITY_AUDIT_WITH_NEXT_STEP_RECOMMENDATION",
+  "mathematical_status": "AUDIT_AND_PLANNING_NOT_NEW_MATHEMATICAL_RESULT",
+  "scope": {
+    "question": "Audit the recent Yasui a=1 character-twist CTL commits for future searchability, provenance quality, and evidence strength, and record the recommended next step.",
+    "claim_boundary": "This note does not repair prior artifacts, does not upgrade proof drafts to theorems, and does not produce F/R symbols. It records an audit of current record quality and recommends the next research step.",
+    "path_policy": "All paths are repo-relative unless explicitly stated otherwise."
+  },
+  "audited_range": {
+    "base_commit": "fcd55b3e2c801a2f9d85dec072ef1221afdacb18",
+    "head_commit_when_audited": "1260e566cfa9ff8ebf1088402ffee3013fe88aaa",
+    "branch": "codex/20260706-yasui-ctl-lab-distill",
+    "commit_count_after_base": 12
+  },
+  "overall_quality_assessment": {
+    "verdict": "usable but not perfect",
+    "strengths": [
+      "The large research state is now split into topic-specific commits rather than one oversized artifact commit.",
+      "The admitted CTL lab note clearly separates ESTABLISHED_NUMERIC, INFERENCE, and PROOF_DRAFT material.",
+      "The key numeric artifacts have schemas, statuses, timestamps, paths, hashes in the distilled note, and reproduction scripts where appropriate.",
+      "The final CTL admission manifest records parent root, source commit, claim object, transition object, current root, and reproduce commands."
+    ],
+    "weaknesses": [
+      "The D(A4)c3w1 A-twist aggregate preserves per-sector elapsed_seconds, hostname, worker_id, labels, and contributions, but not complete per-sector runtime environment for every remote worker.",
+      "The aggregate artifact's utc_start and utc_finish describe the aggregation script run, not the full distributed Hetzner compute window.",
+      "Only the manifest and two smoke singleton chunks for the c3w1 A-twist run are tracked; the full raw singleton chunk set and worker logs remain outside the normative tracked record.",
+      "The separated pointed-only proof draft is clearly labeled PROOF_DRAFT, but it does not yet explicitly say that it has not been independently checked, cited, or mechanically verified."
+    ],
+    "recommended_policy": "Do not silently upgrade proof drafts or distributed-compute provenance. Future agents should keep the current artifacts as evidence, while adding focused audit or verification notes when strengthening claims."
+  },
+  "commit_search_summaries": [
+    {
+      "commit": "24b3146",
+      "subject": "收錄 Yasui a1 的 D(A4)c3w1 A 分量 twist 結果",
+      "paragraph_1": "This commit is the main D(A4)c3w1 Yasui a=1 component-A character-twist computation. It records the full 2744-sector aggregate for C=D(A4)c3w1, Link=Yasui Figure 3 a=1 R1-normalized, Yetter twist=none, and a Z/3 generator character twist on component A. The aggregate result is status pass, sector_total_present 2744, error_count 0, raw aggregate approximately 1728, and normalized value approximately 12.",
+      "paragraph_2": "For future provenance search, the commit does preserve useful performance shape: per-sector elapsed_seconds, fixed labels, hostname, worker_id, and contribution are present in the aggregate rows. The lightest recorded row is sector 0 at about 0.0000735 seconds, and the heaviest aggregate row is sector 2098 at about 279.609 seconds; summed per-row elapsed time is about 101291.36 seconds. However, the aggregate utc_start/utc_finish are only the aggregation script's 0.31 second run, not the full distributed compute window, and complete remote runtime environments are not tracked for every sector."
+    },
+    {
+      "commit": "a0796cb",
+      "subject": "收錄 D(A4)c3w1 的 separated character scan",
+      "paragraph_1": "This commit records the ordinary separated CP2#2CPbar split-unlink character scan for D(A4)c3w1. It scans the Z/3^3 character assignments on the split presentation and finds no nonbaseline value: all 27 rows remain at raw value 1728 within tolerance. This is the direct split-side comparison for the component-twist experiment.",
+      "paragraph_2": "The useful future-search message is that D(A4)c3w1 does not produce a cheap ordinary-side phase in the separated presentation. The commit also includes the reproduction script da4_c3w1_split_unlink_character_scan.py, so future agents can regenerate this small scan quickly and compare it to the larger non-separated Yasui run."
+    },
+    {
+      "commit": "c1328fd",
+      "subject": "收錄 CP2#2CPbar 的 separated 候選掃描",
+      "paragraph_1": "This commit is a small candidate-screening scan on the ordinary separated CP2#2CPbar presentation. It compares four candidate categories and finds that only the pointed Vec_Z3 toy candidate has a nonbaseline separated character value; D(A4) omega0, D(A4)c3w1, and SU(3)_3 are baseline in this cheap test.",
+      "paragraph_2": "The clean takeaway is that the separated presentation is useful as a quick filter but mostly sees pointed/simple-current information. A future search for candidate filtering should find this commit before launching expensive Yasui braid computations, because it records which candidates are immediately boring on the ordinary separated side."
+    },
+    {
+      "commit": "8c74e68",
+      "subject": "記錄 separated character twist 的符號化化簡",
+      "paragraph_1": "This commit records the symbolic reduction for universal-character twists on ordinary separated CP2#2CPbar. The key formula is that for framings (+1,-1,-1), the character-twisted split value differs from the untwisted value by theta(g_h)^-1 theta(g_e1) theta(g_e2), where the character assignment is represented by invertible objects.",
+      "paragraph_2": "Its search value is conceptual: it explains why F-symbols, R-symbols, fusion multiplicities, and non-pointed simple objects disappear from the ordinary split-link test. It is explicitly marked INFERENCE and does not evaluate the non-separated Yasui braid presentation."
+    },
+    {
+      "commit": "a5cde1c",
+      "subject": "保存 separated twist 只看 pointed 部分的 proof draft",
+      "paragraph_1": "This commit turns the symbolic reduction into a proof-draft artifact. It states that, for an ordinary separated +/-1-framed unlink and universal-character twists, the value depends only on the pointed modular subcategory generated by invertible objects. It also lists several things not yet proved, including non-separated surgery links and convention matching for all Yetter settings.",
+      "paragraph_2": "Important caveat: this proof draft should be treated as agent-generated mathematical intuition, not as checked mathematics. It has not yet been independently verified, cited against literature, or mechanically checked. Future agents should not quote it as a theorem until it receives a separate source-audited proof note."
+    },
+    {
+      "commit": "1766bc8",
+      "subject": "記錄 untwisted D(G) 的 split character criterion",
+      "paragraph_1": "This commit records a proof-draft criterion for untwisted Drinfeld doubles D(G) on the ordinary separated split test. Invertible simples are pairs (z, chi) with z in Z(G) and chi a linear character, and their twist is chi(z). The split test can be nonbaseline precisely when a central element survives in the abelianization and is seen by a linear character.",
+      "paragraph_2": "The commit also fixes an important earlier confusion: Z(A4) is trivial, while A4_ab is Z/3. Thus the Z/3 direction in D(A4) is pure charge and bosonic for this split test. This commit is good search material for deciding whether a D(G) candidate is worth even a cheap separated scan."
+    },
+    {
+      "commit": "1bf8ce5",
+      "subject": "收錄 D(Dic3) 的 separated split 反例",
+      "paragraph_1": "This commit records the D(Dic_3) ordinary separated CP2#2CPbar character scan. Dic_3 is the order-12 dicyclic or binary-dihedral group Q12; its untwisted double has simple_count 32 and global_dimension 144. The scan has status pass and finds 32 nonbaseline rows.",
+      "paragraph_2": "The clean takeaway is that not every D(G) is useless for the separated split test. D(Dic_3) gives a real pointed metric phase, though it still does not demonstrate non-pointed F/R effects or Yasui exotic separation. It is one of the two best next candidates once F/R data can be produced carefully."
+    },
+    {
+      "commit": "4b684b1",
+      "subject": "收錄 SU(3)_2 的 separated simple-current phase",
+      "paragraph_1": "This commit records the SU(3)_2 ordinary separated CP2#2CPbar character Gauss scan. SU(3)_2 has rank 6 and a Z/3 simple-current group generated by (2,0), with generator twist exp(4*pi*i/3). The scan has status pass and finds 18 nonbaseline rows among 27 assignments.",
+      "paragraph_2": "The search value is that SU(3)_2 is a clean quantum-group counterexample to the overstrong guess that all U_q(g)-type examples are split-test trivial. But this is only a simple-current separated-side phase; real Yasui work requires producing reliable SU(3)_2 F/R symbols and checking basic links first."
+    },
+    {
+      "commit": "4bc79c8",
+      "subject": "收錄 SU(2)_k 的 separated mod 4 掃描",
+      "paragraph_1": "This commit records the SU(2)_k ordinary separated character scan through k=64. The clean rule found is that levels k congruent 0 mod 4 are baseline for every assignment in this split test, while all other tested levels have a simple-current phase.",
+      "paragraph_2": "This is a structural filter for SU(2)_k, not a positive Yasui result. It tells future searches that the separated presentation only sees the SU(2)_k simple current and should not be mistaken for non-pointed evidence."
+    },
+    {
+      "commit": "a71b282",
+      "subject": "保存 Yasui a1 的 SU(2)_8 all-alpha 對照",
+      "paragraph_1": "This commit records a non-separated Yasui a=1 SU(2)_8 all-alpha raw comparison. The artifact has status pass, elapsed_seconds about 88.66, and max_abs_difference about 1.32e-12 against the comparison target.",
+      "paragraph_2": "Its search value is negative evidence for the SU(2) route in this Yasui a=1 case. Even though separated SU(2)_k can show simple-current phases away from k divisible by 4, this saved Yasui comparison did not produce a Yasui-versus-standard discrepancy."
+    },
+    {
+      "commit": "351ccd0",
+      "subject": "整理 Yasui a1 character twist 的 CTL lab note",
+      "paragraph_1": "This commit creates the distilled CTL objective lab-note preimage for the Yasui a=1 character-twist work. It gathers the D(A4) omega0 baseline, D(A4)c3w1 component-A twist, split-side character reductions, D(G) criterion, D(Dic_3), SU(3)_2, and SU(2)_k evidence into one searchable JSON note.",
+      "paragraph_2": "The note is a good future entry point because it explicitly separates established numeric results from inference and proof draft material. It also intentionally excludes raw chunks, worker logs, D12 intermediate exploration, and operational Hetzner details from normative research state."
+    },
+    {
+      "commit": "1260e56",
+      "subject": "將 Yasui a1 character twist lab note admit 進 CTL",
+      "paragraph_1": "This commit admits the Yasui a=1 character-twist lab note into the CTL dogfood object store. It adds the claim object, transition object, current root object, admission manifest, and refs/main.json update. The resulting CTL root is ctlobj-sha256:5d6afe964581e2f7870af267869e32b4af4c4bb051a3ddbdc35a8522d86f5c9f.",
+      "paragraph_2": "The admission manifest records the parent root, the source repo commit before admission, and reproduce commands. This is the commit future agents should use when they need the normative CTL claim rather than only the preimage JSON."
+    }
+  ],
+  "specific_audit_findings": {
+    "commit_24b3146": {
+      "what_can_be_seen": [
+        "The aggregate artifact identifies the mathematical case, category twist, link twist, component order, sector count, raw aggregate, normalized aggregate, per-sector labels, per-sector elapsed_seconds, hostnames, worker_ids, and weighted contributions.",
+        "The aggregate rows show elapsed_seconds min approximately 0.0000735 seconds at sector 0 and max approximately 279.609275 seconds at sector 2098.",
+        "The aggregate rows sum to approximately 101291.36 seconds of per-sector elapsed time across workers.",
+        "The tracked manifest from earlier commit 4b9baf7 records local manifest generation environment on jin-m2, Sage/Python/NumPy-related environment, and reproduction command for manifest generation."
+      ],
+      "what_cannot_be_seen_cleanly": [
+        "The aggregate utc_start and utc_finish are only for the aggregation script run from 2026-07-06T19:08:02.841759+00:00 to 2026-07-06T19:08:03.154193+00:00, not the whole distributed computation.",
+        "The aggregate repo metadata says dirty=false but git_commit=null under /root/twisted-yetter-a1-run; this is weaker than a pinned remote source commit.",
+        "Complete per-sector remote runtime environment is not tracked for all 2744 sectors in this commit.",
+        "Full worker logs and raw singleton chunk set were intentionally excluded, so exact remote wall-clock reconstruction is incomplete."
+      ],
+      "quality_verdict": "The numeric aggregate is searchable and useful, but provenance is only partial for distributed compute. It is enough to understand what was computed and the rough performance distribution, not enough to fully reconstruct every worker environment two years later."
+    },
+    "commit_a5cde1c": {
+      "quality_verdict": "The artifact correctly labels itself PROOF_DRAFT and says it does not evaluate a non-separated Yasui braid diagram, but it should be read as unchecked agent-generated proof intuition.",
+      "important_warning": "No independent checker, literature citation audit, or mechanical proof verification has been performed for this proof draft. Future agents should not promote it to theorem status without a separate cited proof artifact."
+    }
+  },
+  "recommended_next_step": {
+    "status": "RECOMMENDED",
+    "statement": "The next serious research step should be to produce D(Dic_3) and SU(3)_2 F/R symbols very carefully before launching further Yasui braid computations.",
+    "rationale": [
+      "The separated split scans identify D(Dic_3) and SU(3)_2 as clean sources of nonbaseline pointed/simple-current phases.",
+      "Those split-side phases are not enough for the exotic strategy; the real test requires non-separated Yasui link evaluation using reliable F/R data.",
+      "Both candidates sit outside the current D(A4) evaluator comfort zone, so basic link controls must come before any expensive Yasui run."
+    ],
+    "minimum_acceptance_criteria": [
+      "Produce machine-readable F/R data artifacts with schemas, hashes, exact category identifiers, gauge/convention notes, and reproduction commands.",
+      "Record tool versions, environment, source formulas or literature references, and any numerical precision assumptions.",
+      "Run unit axioms, pentagon/hexagon checks, duality/twist consistency, S/T sanity checks where applicable, and elementary link controls such as unknot, Hopf link, and framed split unlink.",
+      "Only after these checks pass should a new Yasui non-separated computation be scheduled."
+    ],
+    "candidate_priority": [
+      {
+        "candidate": "SU(3)_2",
+        "why": "Small rank 6 modular quantum-group category with a clean Z/3 simple-current phase, likely a natural next test if reliable F/R data can be obtained."
+      },
+      {
+        "candidate": "D(Dic_3)",
+        "why": "Small nonproduct untwisted Drinfeld double with nontrivial pointed metric phase; useful as a finite-group double counterexample, but rank 32 may make full F/R handling heavier."
+      }
+    ]
+  },
+  "referenced_artifacts": [
+    {
+      "path": "ctl-dogfood/lab-notes/2026-07-06-yasui-a1-character-twist-distillation.json",
+      "sha256": "8195ea11eb1fd133dc904cd8727f354f1064e56dbd96f017f2762e859eb2cdf5"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-aggregate-v1.json",
+      "sha256": "b9ed3d69e59711b11d83de10a9f266c28fe56d3b40cce92fd6ad31fec5a1dd2f"
+    },
+    {
+      "path": "experiments/results/yasui/separated-character-twist-pointed-only-proof-draft-v1.json",
+      "sha256": "e381bed0d8caaf9429decf653c547f406725b4862a6d0dbc8811b7fd4eebe39a"
+    },
+    {
+      "path": "experiments/results/yasui/cp2-2cpbar-dg-dic3-split-character-scan-v1.json",
+      "sha256": "8bc5a446f888821398636ddf36a232daa3e33774097ce914bb504902d33bd47f"
+    },
+    {
+      "path": "experiments/results/yasui/cp2-2cpbar-su3-2-character-gauss-scan-v1.json",
+      "sha256": "bc873aa19455c46146607017a2d08eed06fc1e0b137033c7035bf9b45ef09d42"
+    }
+  ]
+}

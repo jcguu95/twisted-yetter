@@ -1,0 +1,217 @@
+{
+  "created_at": "2026-07-06T22:57:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-06-subject-layer-design-proposal-v0",
+  "parents": [],
+  "payload": {
+    "append_only_correction_model": {
+      "migration_example": {
+        "from_profile": "twisted-yetter/downstream-subject-definition/0",
+        "operation_kind": "migrate_to_upstream_profile",
+        "reason": "A later ctl-meta session defined an upstream subject profile.",
+        "to_profile": "researchctl/subject-definition/1"
+      },
+      "principle": "Do not mutate a subject in place. Admit a new subject revision or subject operation object.",
+      "redirect_example": {
+        "from": "twisted-yetter:subject:su2-mtc",
+        "operation_kind": "redirect_subject",
+        "reason": "SU(2) itself is a Lie group; SU(2)_k is the modular tensor category family.",
+        "to": "twisted-yetter:subject:category-family:su2-k"
+      },
+      "split_example": {
+        "from": "twisted-yetter:subject:yasui",
+        "operation_kind": "split_subject",
+        "reason": "The original subject conflated a person, a paper, and a link family.",
+        "to": [
+          "twisted-yetter:subject:person:yasui-kouichi",
+          "twisted-yetter:subject:paper:yasui-figure3-source",
+          "twisted-yetter:subject:link-family:yasui-figure3"
+        ]
+      }
+    },
+    "created_at": "2026-07-06T22:55:00Z",
+    "created_by": "actor:codex",
+    "current_view_rules": {
+      "alias_rule": "Alias collisions should produce disambiguation rather than silent winner-takes-all resolution.",
+      "claim_precision_rule": "A claim may cite a broad subject for discoverability, but it should also cite the most precise known subject for the asserted computation or theorem.",
+      "deprecated_subject_rule": "Deprecated subjects should not be used as primary about/uses targets in new claims unless the edge role is historical or redirected_from.",
+      "projection": "A current subject view is derived by replaying admitted subject definitions and operations from the CTL current root.",
+      "redirect_rule": "Redirect chains should be resolved in generated views. Redirect cycles are invalid."
+    },
+    "future_verifier_rules": [
+      "Verify subject object CIDs through the ordinary CTL object store.",
+      "Verify subject revision updates parent the previous active revision for the same logical id.",
+      "Reject redirect cycles in the projected current view.",
+      "Warn or fail on alias collisions without an admitted disambiguation subject.",
+      "Warn or fail when new primary edges target deprecated subjects.",
+      "Require explicit reasons for split, merge, redirect, deprecate, and subject_kind correction operations.",
+      "Require migration operations to preserve old subject ids as redirected_from or historical edges."
+    ],
+    "layering": {
+      "ctl_kernel_role": [
+        "Content-addressed immutable objects.",
+        "Revision envelopes, parents, roots, policy, and admission transitions.",
+        "No knowledge of research topics, wiki pages, Yasui links, MTCs, or mathematical proof criteria."
+      ],
+      "downstream_subject_layer_role": [
+        "Define project-local subject identities, aliases, display names, scope notes, status, edges, and correction operations.",
+        "Provide machine-readable material from which human wiki views can be generated.",
+        "Make split, merge, redirect, deprecation, and correction append-only CTL records."
+      ],
+      "generated_wiki_role": [
+        "Render human-readable pages or search results from admitted subject definitions, subject edges, and subject operations.",
+        "Never become the normative record itself.",
+        "May be regenerated after subject splits, redirects, or ontology migrations."
+      ]
+    },
+    "mathematical_status": "DESIGN_PROPOSAL_NOT_MATHEMATICAL_EVIDENCE",
+    "note_id": "objective-note-2026-07-06-subject-layer-design-proposal-v0",
+    "problem_statement": {
+      "core_principle": "Subjects may be provisional; admitted claims and artifacts must not be ambiguous about what they actually assert or compute.",
+      "motivation": [
+        "Research projects need durable search handles for people, papers, figures, links, categories, experiments, claims, methods, and artifacts.",
+        "Agents may choose the wrong granularity, for example conflating a person named Yasui with one Yasui paper or conflating the Lie group SU(2) with the modular tensor categories SU(2)_k.",
+        "The system must make wrong granularity cheap to repair without silently mutating old objects.",
+        "The same subject may need to be referenced across future CTL wiki views or across projects, while external URLs may rot."
+      ],
+      "non_goals": [
+        "Do not add subject semantics to CTL Kernel.",
+        "Do not define twisted-yetter mathematical ontology as an upstream ResearchCTL requirement.",
+        "Do not make prose wiki pages normative.",
+        "Do not require a perfect ontology before recording useful subject objects."
+      ]
+    },
+    "proposed_profiles": [
+      {
+        "optional_fields": [
+          "aliases",
+          "disambiguation_note",
+          "parent_subject_ids",
+          "equivalent_external_ids",
+          "local_reference_cids",
+          "provisional_reason",
+          "deprecated_reason",
+          "superseded_by_subject_ids"
+        ],
+        "profile": "twisted-yetter/downstream-subject-definition/0",
+        "purpose": "Define or revise one subject identity under a logical id.",
+        "required_fields": [
+          "subject_id",
+          "subject_kind",
+          "display_name",
+          "status",
+          "scope_note"
+        ]
+      },
+      {
+        "profile": "twisted-yetter/downstream-subject-edge/0",
+        "purpose": "Attach a subject to another subject, claim, artifact, reference, experiment, method, or generated view with an explicit role.",
+        "recommended_roles": [
+          "about",
+          "uses",
+          "mentions",
+          "defines",
+          "computes",
+          "supports",
+          "contradicts",
+          "negative_evidence_for",
+          "motivated_by",
+          "refines",
+          "depends_on",
+          "redirected_from",
+          "historical"
+        ],
+        "required_fields": [
+          "edge_id",
+          "source",
+          "role",
+          "target",
+          "status"
+        ]
+      },
+      {
+        "operation_kinds": [
+          "split_subject",
+          "merge_subjects",
+          "redirect_subject",
+          "deprecate_subject",
+          "correct_subject_type",
+          "add_alias",
+          "remove_alias_from_current_view",
+          "migrate_to_upstream_profile"
+        ],
+        "profile": "twisted-yetter/downstream-subject-operation/0",
+        "purpose": "Record append-only corrections to the subject graph.",
+        "required_fields": [
+          "operation_id",
+          "operation_kind",
+          "affected_subject_ids",
+          "reason",
+          "status"
+        ]
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This is a twisted-yetter downstream design proposal. It is not a CTL Meta specification, not a ResearchCTL upstream profile, and not yet enforced by dedicated subject-layer verifier rules.",
+      "migration_expectation": "A future ctl-meta session may copy, revise, reject, or replace this proposal. If ctl-meta later defines a different subject profile, twisted-yetter should migrate by admitting explicit mapping and migration objects rather than rewriting these records.",
+      "question": "Specify a downstream subject layer for future CTL-style search, disambiguation, correction, and generated wiki views.",
+      "source_of_truth_policy": "The normative record is this admitted JSON payload and its CTL revision object. Any future human-facing wiki page must be generated from admitted subject objects and edges, not treated as the source of truth."
+    },
+    "status": "PROPOSAL",
+    "subject_definition_model": {
+      "identity_vs_locator": [
+        "External URLs, arXiv links, DOIs, and file paths are locators or references, not subject identity.",
+        "Important external sources should have local reference records, capture times, and hashes when possible.",
+        "Locator-only subjects or references should be marked with rot risk."
+      ],
+      "status_values": [
+        "active",
+        "provisional",
+        "ambiguous_hub",
+        "deprecated",
+        "redirect",
+        "external_locator_only"
+      ],
+      "subject_id_policy": [
+        "Subject ids should be stable logical identifiers, not display names.",
+        "Subject ids should include project or namespace prefix when intended for cross-project citation.",
+        "Display names and aliases may change through append-only revisions or operations.",
+        "A broad or ambiguous subject may remain as a hub after finer subjects are split out."
+      ],
+      "subject_kind_policy": [
+        "subject_kind should be typed but project-local kinds are allowed.",
+        "Changing subject_kind in the current view should require an explicit correction operation.",
+        "A subject_kind correction does not erase prior mistaken revisions."
+      ]
+    },
+    "terminology": {
+      "avoid_as_source_of_truth_name": "wiki layer",
+      "preferred_human_name": "subject layer",
+      "preferred_payload_family_name": "downstream subject layer proposal",
+      "rationale": "The word wiki suggests editable prose pages. The desired source of truth is a machine-readable subject graph; wiki pages are only generated views."
+    },
+    "title": "Downstream subject layer design proposal v0",
+    "upstream_feedback_notes": {
+      "expected_future_ctl_meta_work": "A separate ctl-meta session should review this downstream proposal and decide whether to define a generic ResearchCTL subject profile. That session may reuse this design or replace it with a different upstream model.",
+      "why_this_may_be_generically_useful": [
+        "Any ResearchCTL project with long-lived notes will need subject disambiguation and repair.",
+        "Append-only subject correction fits CTL's existing revision model.",
+        "Generated wiki views are a natural consumer of admitted subject graphs."
+      ],
+      "why_this_should_not_be_kernel": [
+        "Subject meanings are research ontology, not CTL object semantics.",
+        "Kernel validators should not need to know what a paper, theorem, MTC, or link is.",
+        "Projects should be free to define domain-specific subject kinds downstream."
+      ]
+    },
+    "upstream_status": "NOT_UPSTREAMED"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

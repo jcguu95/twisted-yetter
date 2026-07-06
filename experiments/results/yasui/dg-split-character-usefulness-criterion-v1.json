@@ -1,0 +1,84 @@
+{
+  "case": {
+    "manifold": "CP2#2CPbar",
+    "presentation": "ordinary separated split unlink",
+    "standard_component_order": [
+      "h",
+      "e1",
+      "e2"
+    ],
+    "standard_framings": [
+      1,
+      -1,
+      -1
+    ]
+  },
+  "correction": {
+    "A4_center": "trivial",
+    "A4_abelianization": "Z/3",
+    "note": "The Z/3 direction used by D(A4) is from linear characters of A4, not from the group center."
+  },
+  "created_at_utc": "2026-07-06T20:51:11Z",
+  "criterion_for_untwisted_DG": {
+    "invertible_simples": "Pairs (z, chi) with z in Z(G) and chi in Hom(G,C*) = Hom(G_ab,C*).",
+    "twist": "theta_(z,chi)=chi(z).",
+    "pointed_quadratic_form": "q(z,chi)=chi(z) on Z(G) x Hom(G_ab,C*).",
+    "nonbaseline_split_signal": "There is a nonbaseline ordinary split character-twist value exactly when some chosen invertible labels g_h,g_e1,g_e2 have theta(g_h)^-1 theta(g_e1) theta(g_e2) != 1.",
+    "group_theoretic_nontriviality_test": "The pointed quadratic form of D(G) is nontrivial exactly when the natural map Z(G) -> G_ab is nonzero, equivalently when some central element survives abelianization and some linear character evaluates nontrivially on it."
+  },
+  "smallest_natural_nonproduct_candidate": {
+    "group": "Dic_3, the order-12 dicyclic / binary-dihedral group, sometimes denoted Q12",
+    "presentation": "<a,x | a^6=1, x^2=a^3, x^-1 a x=a^-1>",
+    "center": "<a^3> = C2",
+    "commutator_subgroup": "<a^2> = C3",
+    "abelianization": "C4",
+    "why_it_is_first_useful_natural_example": "Among nonabelian groups below order 12, S3 and D10 have trivial center, while the order-8 groups D8 and Q8 have center contained in the commutator subgroup. The order-12 dihedral group has the needed phase but is S3 x C2. Dic_3 is the natural order-12 nonproduct example: a^3 is central and a^3 is not in <a^2>, so it survives in G_ab.",
+    "D_G_twist_witness": "In the abelianization, a maps to the square of a C4 generator. A linear character sending that generator to i has chi(a^3)=-1, so the invertible simple (a^3,chi) in D(G) has twist -1."
+  },
+  "examples": {
+    "A4": {
+      "center": "1",
+      "abelianization": "Z/3",
+      "verdict": "trivial for this D(G) split character test",
+      "reason": "There are pure charge invertibles but no central flux; all invertible twists are 1."
+    },
+    "S3": {
+      "center": "1",
+      "abelianization": "Z/2",
+      "verdict": "trivial for this D(G) split character test",
+      "reason": "Same pure-charge-only issue as A4."
+    },
+    "abelian_G": {
+      "verdict": "often nontrivial",
+      "reason": "Z(G)=G and G_ab=G, so the evaluation pairing can be nontrivial. However this is just a pointed finite metric group calculation."
+    },
+    "D8_order_8_dihedral": {
+      "verdict": "trivial despite nontrivial center",
+      "reason": "For the square dihedral group, the central 180-degree rotation lies in the commutator subgroup and dies in abelianization, so every linear character is trivial on it."
+    },
+    "D12_order_12_dihedral": {
+      "verdict": "nontrivial but decomposable",
+      "reason": "For the dihedral group with rotation order 6, the central 180-degree rotation does survive in abelianization, so some linear character sees it. However this group is isomorphic to S3 x C2, so it is not the desired nonproduct example."
+    },
+    "Dic3_order_12_dicyclic": {
+      "verdict": "nontrivial and nonproduct",
+      "reason": "The central element a^3 survives in the C4 abelianization."
+    },
+    "Q8": {
+      "verdict": "trivial despite nontrivial center",
+      "reason": "The central element -1 lies in the commutator subgroup and dies in abelianization, so every linear character is trivial on it."
+    }
+  },
+  "interpretation_for_search": {
+    "weak_useful": "A D(G) with Z(G)->G_ab nonzero can produce nonbaseline phases on the ordinary split presentation.",
+    "strong_useful_for_exotic_detection": "This is probably still not useful for the main Yasui strategy, because the separated test only sees the pointed metric group, not the nonabelian double data.",
+    "recommended_filter": "Do not brute-force D(G) merely because G has nontrivial abelianization. First check whether a central element survives in G_ab; otherwise the split character scan is guaranteed baseline."
+  },
+  "related_artifacts": [
+    "experiments/results/yasui/separated-character-twist-pointed-only-proof-draft-v1.json",
+    "experiments/results/yasui/cp2-2cpbar-character-twist-symbolic-reduction-v1.json",
+    "experiments/results/yasui/figure3-a1-standard-split-unlink-da4-c3w1-character-scan-v1.json"
+  ],
+  "schema": "twisted-yetter.dg-split-character-usefulness-criterion.v1",
+  "status": "PROOF_DRAFT_UNTWISTED_DG"
+}
