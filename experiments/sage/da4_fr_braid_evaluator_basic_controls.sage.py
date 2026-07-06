@@ -12,6 +12,7 @@ and Hopf links, not a second/simpler link evaluator.
 
 from __future__ import annotations
 
+import argparse
 from datetime import UTC, datetime
 import hashlib
 import importlib.util
@@ -104,11 +105,21 @@ def hopf_expected(evaluator, x: str, y: str, *, positive: bool) -> complex:
     return total
 
 
-def main() -> int:
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mtc", type=Path, default=MTC_PATH)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    return parser.parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = parse_args(argv)
+    mtc_path = args.mtc.resolve()
+    output_path = args.output.resolve()
     started = time.monotonic()
     utc_start = datetime.now(UTC).isoformat()
     module = load_evaluator_module()
-    mtc = json.loads(MTC_PATH.read_text())
+    mtc = json.loads(mtc_path.read_text())
     evaluator = module.DA4FRBraidEvaluator(mtc)
     rows = []
 
@@ -176,7 +187,10 @@ def main() -> int:
         "status": "pass" if not failures else "fail",
         "generator_script": "experiments/sage/da4_fr_braid_evaluator_basic_controls.sage.py",
         "argv": sys.argv[1:],
-        "reproduce_command": 'DOT_SAGE="$PWD/.sage" sage experiments/sage/da4_fr_braid_evaluator_basic_controls.sage.py',
+        "reproduce_command": (
+            'DOT_SAGE="$PWD/.sage" sage experiments/sage/da4_fr_braid_evaluator_basic_controls.sage.py '
+            f"--mtc {rel(mtc_path)} --output {rel(output_path)}"
+        ),
         "utc_start": utc_start,
         "utc_finish": datetime.now(UTC).isoformat(),
         "elapsed_seconds": time.monotonic() - started,
@@ -192,8 +206,8 @@ def main() -> int:
             "no_alternate_link_evaluator_used": True,
         },
         "source": {
-            "mtc_artifact": rel(MTC_PATH),
-            "mtc_sha256": file_sha256(MTC_PATH),
+            "mtc_artifact": rel(mtc_path),
+            "mtc_sha256": file_sha256(mtc_path),
             "mtc_id": mtc["mtc_id"],
         },
         "tool_versions": {
@@ -221,9 +235,9 @@ def main() -> int:
         "failures": failures[:20],
         "rows": rows,
     }
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
-    print(json.dumps({"status": payload["status"], "artifact": rel(OUTPUT), "failure_count": len(failures), "max_abs_difference": payload["summary"]["max_abs_difference"]}, sort_keys=True))
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"status": payload["status"], "artifact": rel(output_path), "failure_count": len(failures), "max_abs_difference": payload["summary"]["max_abs_difference"]}, sort_keys=True))
     return 0 if payload["status"] == "pass" else 1
 
 
