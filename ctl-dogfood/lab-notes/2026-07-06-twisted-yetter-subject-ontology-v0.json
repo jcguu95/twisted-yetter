@@ -1,0 +1,317 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-06-twisted-yetter-subject-ontology-v0",
+  "title": "Twisted-Yetter downstream subject ontology v0",
+  "created_at": "2026-07-06T22:56:00Z",
+  "created_by": "actor:codex",
+  "status": "PROPOSAL",
+  "mathematical_status": "PROJECT_ONTOLOGY_PROPOSAL_NOT_MATHEMATICAL_EVIDENCE",
+  "upstream_status": "NOT_UPSTREAMED",
+  "scope": {
+    "question": "Specify a first downstream twisted-yetter subject ontology to support search, disambiguation, and generated wiki views.",
+    "claim_boundary": "This note defines proposed twisted-yetter subject kinds and seed subjects. It does not assert new mathematical results, does not create a complete subject registry, and does not claim compatibility with any future ctl-meta subject profile.",
+    "depends_on": "objective-note-2026-07-06-subject-layer-design-proposal-v0",
+    "migration_expectation": "If a future ctl-meta subject profile differs from this proposal, twisted-yetter should admit explicit migration operations preserving old ids and mapping them to the upstream-compatible form."
+  },
+  "ontology_policy": {
+    "project_namespace": "twisted-yetter",
+    "subject_id_prefix": "twisted-yetter:subject:",
+    "kind_prefix": "ty:",
+    "display_name_policy": "Display names are human-facing and may be corrected append-only. Subject ids should be stable.",
+    "granularity_policy": "Use the most precise subject available for claims and artifacts, while allowing broad hub subjects for discoverability.",
+    "broad_subject_policy": "Broad subjects such as Yasui or SU(2) should be hubs or family subjects. They should not be treated as if they were one paper, one diagram, or one MTC.",
+    "prose_policy": "Human wiki pages may be generated from these subjects, but project state must remain in admitted JSON artifacts and CTL objects."
+  },
+  "proposed_subject_kinds": [
+    {
+      "kind": "ty:person",
+      "description": "A human researcher or author relevant to sources, diagrams, or constructions.",
+      "examples": [
+        "twisted-yetter:subject:person:yasui-kouichi"
+      ]
+    },
+    {
+      "kind": "ty:paper",
+      "description": "A specific paper, preprint, book section, or source document.",
+      "examples": [
+        "twisted-yetter:subject:paper:yasui-source-for-figure3"
+      ]
+    },
+    {
+      "kind": "ty:figure",
+      "description": "A specific figure or diagram as it appears in a source.",
+      "examples": [
+        "twisted-yetter:subject:figure:yasui-figure3"
+      ]
+    },
+    {
+      "kind": "ty:link-family",
+      "description": "A family of links or Kirby diagrams related by parameters or source presentation.",
+      "examples": [
+        "twisted-yetter:subject:link-family:yasui-figure3"
+      ]
+    },
+    {
+      "kind": "ty:link",
+      "description": "A specific link or surgery presentation, including normalization choices when relevant.",
+      "examples": [
+        "twisted-yetter:subject:link:yasui-figure3-a1-r1-normalized"
+      ]
+    },
+    {
+      "kind": "ty:four-manifold",
+      "description": "A smooth or topological four-manifold subject.",
+      "examples": [
+        "twisted-yetter:subject:four-manifold:cp2-2cpbar"
+      ]
+    },
+    {
+      "kind": "ty:category-family",
+      "description": "A family of tensor categories or MTCs, not necessarily one concrete category.",
+      "examples": [
+        "twisted-yetter:subject:category-family:su2-k",
+        "twisted-yetter:subject:category-family:drinfeld-double"
+      ]
+    },
+    {
+      "kind": "ty:lie-group",
+      "description": "A classical Lie group as a mathematical input or background subject.",
+      "examples": [
+        "twisted-yetter:subject:lie-group:su2"
+      ]
+    },
+    {
+      "kind": "ty:mtc",
+      "description": "A concrete modular tensor category or category model used in computations.",
+      "examples": [
+        "twisted-yetter:subject:mtc:su2-k8",
+        "twisted-yetter:subject:mtc:d-a4-omega0",
+        "twisted-yetter:subject:mtc:d-a4-c3w1",
+        "twisted-yetter:subject:mtc:su3-k2",
+        "twisted-yetter:subject:mtc:d-dic3-omega0"
+      ]
+    },
+    {
+      "kind": "ty:category-data",
+      "description": "Concrete F/R, fusion, S/T, or related category data artifact.",
+      "examples": [
+        "twisted-yetter:subject:category-data:d-a4-c3w1-fr-symbols"
+      ]
+    },
+    {
+      "kind": "ty:experiment-route",
+      "description": "A reusable computational or theoretical route, such as separated character scan or non-separated Yasui evaluation.",
+      "examples": [
+        "twisted-yetter:subject:route:separated-character-twist",
+        "twisted-yetter:subject:route:yasui-nonseparated-singleton-evaluation"
+      ]
+    },
+    {
+      "kind": "ty:claim-cluster",
+      "description": "A cluster of related claims or lab notes used as a human navigation hub.",
+      "examples": [
+        "twisted-yetter:subject:claim-cluster:yasui-a1-character-twist"
+      ]
+    }
+  ],
+  "seed_subjects": [
+    {
+      "subject_id": "twisted-yetter:subject:hub:yasui",
+      "subject_kind": "ty:ambiguous-hub",
+      "display_name": "Yasui",
+      "status": "ambiguous_hub",
+      "scope_note": "Navigation hub for Yasui-related people, papers, figures, link families, and experiments. This subject must not be treated as one paper or one link.",
+      "aliases": [
+        "Yasui",
+        "Yasui examples"
+      ],
+      "expected_children": [
+        "twisted-yetter:subject:person:yasui-kouichi",
+        "twisted-yetter:subject:paper:yasui-source-for-figure3",
+        "twisted-yetter:subject:figure:yasui-figure3",
+        "twisted-yetter:subject:link-family:yasui-figure3"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:lie-group:su2",
+      "subject_kind": "ty:lie-group",
+      "display_name": "SU(2)",
+      "status": "active",
+      "scope_note": "The classical Lie group SU(2). It is not itself the same subject as the modular tensor category family SU(2)_k.",
+      "aliases": [
+        "SU2",
+        "SU(2)"
+      ],
+      "related_subjects": [
+        {
+          "role": "classical_input_to",
+          "target": "twisted-yetter:subject:category-family:su2-k"
+        }
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:category-family:su2-k",
+      "subject_kind": "ty:category-family",
+      "display_name": "SU(2)_k MTC family",
+      "status": "active",
+      "scope_note": "The level-k SU(2) modular tensor category family. Specific levels such as SU(2)_8 should be separate concrete MTC subjects.",
+      "aliases": [
+        "SU(2)_k",
+        "SU2_k",
+        "A1 level k"
+      ],
+      "example_instances": [
+        "twisted-yetter:subject:mtc:su2-k8"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:mtc:su2-k8",
+      "subject_kind": "ty:mtc",
+      "display_name": "SU(2)_8",
+      "status": "active",
+      "scope_note": "Concrete SU(2) level 8 MTC subject. It should be linked to experiments only when that level was actually used.",
+      "parent_subject_ids": [
+        "twisted-yetter:subject:category-family:su2-k"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:category-family:drinfeld-double",
+      "subject_kind": "ty:category-family",
+      "display_name": "Drinfeld doubles D(G)",
+      "status": "active",
+      "scope_note": "Family of Drinfeld double categories, including twisted and untwisted finite-group examples. Concrete categories such as D(A4) omega0 and D(A4)c3w1 should be separate MTC subjects.",
+      "aliases": [
+        "D(G)",
+        "Drinfeld double",
+        "quantum double"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:mtc:d-a4-omega0",
+      "subject_kind": "ty:mtc",
+      "display_name": "D(A4) untwisted",
+      "status": "active",
+      "scope_note": "Untwisted Drinfeld double of A4 used in Yasui a=1 and a=3 computations.",
+      "parent_subject_ids": [
+        "twisted-yetter:subject:category-family:drinfeld-double"
+      ],
+      "aliases": [
+        "D(A4) omega0",
+        "D(A4) untwisted"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:mtc:d-a4-c3w1",
+      "subject_kind": "ty:mtc",
+      "display_name": "D(A4)c3w1",
+      "status": "active",
+      "scope_note": "H3 cocycle twisted D(A4) category with c3-inflated omega_power=1 on A4/V4 ~= C3.",
+      "parent_subject_ids": [
+        "twisted-yetter:subject:category-family:drinfeld-double"
+      ],
+      "aliases": [
+        "D(A4) c3w1",
+        "twisted D(A4) c3w1"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:link-family:yasui-figure3",
+      "subject_kind": "ty:link-family",
+      "display_name": "Yasui Figure 3 link family",
+      "status": "provisional",
+      "scope_note": "Parameterized Yasui Figure 3 link family. The exact source paper and bibliographic reference should be attached by future reference records.",
+      "aliases": [
+        "Yasui Figure 3",
+        "Yasui fig3"
+      ],
+      "parent_subject_ids": [
+        "twisted-yetter:subject:hub:yasui"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:link:yasui-figure3-a1-r1-normalized",
+      "subject_kind": "ty:link",
+      "display_name": "Yasui Figure 3 a=1 R1-normalized link",
+      "status": "active",
+      "scope_note": "The normalized non-separated Yasui a=1 link presentation used in the July 2026 singleton computations.",
+      "aliases": [
+        "Yasui a=1",
+        "Yasui fig3 a1",
+        "figure3-a1-r1-normalized"
+      ],
+      "parent_subject_ids": [
+        "twisted-yetter:subject:link-family:yasui-figure3"
+      ]
+    },
+    {
+      "subject_id": "twisted-yetter:subject:route:separated-character-twist",
+      "subject_kind": "ty:experiment-route",
+      "display_name": "Separated character twist route",
+      "status": "active",
+      "scope_note": "Cheap ordinary separated CP2#2CPbar character-twist scan route. It mainly sees pointed/simple-current phase data and should not be mistaken for a non-separated Yasui computation."
+    },
+    {
+      "subject_id": "twisted-yetter:subject:route:yasui-nonseparated-singleton-evaluation",
+      "subject_kind": "ty:experiment-route",
+      "display_name": "Yasui non-separated singleton evaluation route",
+      "status": "active",
+      "scope_note": "Full sector-by-sector non-separated Yasui link evaluation route using category data and braid/link presentation."
+    },
+    {
+      "subject_id": "twisted-yetter:subject:claim-cluster:yasui-a1-character-twist",
+      "subject_kind": "ty:claim-cluster",
+      "display_name": "Yasui a=1 character twist results",
+      "status": "active",
+      "scope_note": "Navigation cluster for the July 2026 Yasui a=1 baseline, D(A4)c3w1 component-A twist, separated character scans, and negative/positive candidate filters.",
+      "primary_claim_logical_ids": [
+        "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+        "claim:lab-note:2026-07-06-yasui-a1-ctl-quality-audit-and-next-steps"
+      ]
+    }
+  ],
+  "recommended_edges_for_existing_yasui_a1_work": [
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "about",
+      "target": "twisted-yetter:subject:claim-cluster:yasui-a1-character-twist"
+    },
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "computes",
+      "target": "twisted-yetter:subject:link:yasui-figure3-a1-r1-normalized"
+    },
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "uses",
+      "target": "twisted-yetter:subject:mtc:d-a4-omega0"
+    },
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "uses",
+      "target": "twisted-yetter:subject:mtc:d-a4-c3w1"
+    },
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "uses",
+      "target": "twisted-yetter:subject:route:separated-character-twist"
+    },
+    {
+      "source": "claim:lab-note:2026-07-06-yasui-a1-character-twist-distillation",
+      "role": "uses",
+      "target": "twisted-yetter:subject:route:yasui-nonseparated-singleton-evaluation"
+    }
+  ],
+  "known_open_issues": [
+    "The exact Yasui paper metadata and figure reference should be captured as repo-local reference records before creating precise ty:paper and ty:figure subjects.",
+    "The current seed subject for Yasui Figure 3 is provisional until source-paper metadata and diagram provenance are attached.",
+    "This note does not yet create actual subject-definition CTL revisions for each seed subject; it records a proposed ontology and seed plan.",
+    "No dedicated subject-layer verifier exists yet.",
+    "Future generated wiki pages must not become a second source of truth."
+  ],
+  "first_implementation_plan": [
+    "Admit this ontology note and the design proposal note into CTL dogfood.",
+    "If accepted, add a small script that projects admitted subject-like JSON into a current subject index.",
+    "Create actual subject-definition JSON artifacts for the seed subjects only after the proposal is reviewed.",
+    "Attach subject edges to existing Yasui a=1 lab notes through explicit CTL objects or a later admitted subject-edge bundle."
+  ]
+}
