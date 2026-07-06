@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:872c2480f19a8defa12a184e8e00a8864040ee6d7fec684554efde6942a607f0",
+  "generated_at": "2026-07-06T23:58:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:paper:baykur-2403-14586",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:872c2480f19a8defa12a184e8e00a8864040ee6d7fec684554efde6942a607f0",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:a66585e7c4a706db45970e66e7a7d82f56fc28cfd1a50645f4dde74e4f03e479",
+    "transition": "ctlobj-sha256:a92e2da98efa6cc08f1ea67ddb27e618e1e3eccddde6f418d565cbc8438e3b9a"
+  },
+  "parent_root_cid": "ctlobj-sha256:6e1b13b6785ff09fc7a8e3854080027a396b52e3a266fd699a5ac9a9877891a0",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/paper-baykur-2403-14586.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:paper:baykur-2403-14586 --revision-kind subject:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/paper-baykur-2403-14586.json --manifest manifests/subject-definition-2026-07-06-paper-baykur-2403-14586.json --created-at 2026-07-06T23:58:20Z --admitted-at 2026-07-06T23:58:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5d0f79b3b27c2afce599d9d47da09e3d467f0ee5"
+}

@@ -1,0 +1,136 @@
+{
+  "created_at": "2026-07-06T23:59:20Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v0",
+  "parents": [
+    "ctlobj-sha256:a0797de6f3c07faf30dbedaa3a3dcdcd353cac86991d8861994e858cba6514c5"
+  ],
+  "payload": {
+    "current_view_rule": "Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.",
+    "index_id": "subject-index:twisted-yetter:subject-layer-lane-v0",
+    "known_proposal_notes": {
+      "design_proposal": {
+        "current_claim_cid_at_index_creation": "ctlobj-sha256:f0106d0a7b0028d382863da76675943187a4a1355da1cb81b4366cc5880e74dd",
+        "logical_id": "claim:lab-note:2026-07-06-subject-layer-design-proposal-v0"
+      },
+      "ontology_proposal": {
+        "current_claim_cid_at_index_creation": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
+        "logical_id": "claim:lab-note:2026-07-06-twisted-yetter-subject-ontology-v0"
+      }
+    },
+    "logical_id_prefixes": [
+      "subject-edge:",
+      "subject-index:",
+      "subject-operation:",
+      "subject:"
+    ],
+    "migration_notes": "If ctl-meta later defines a generic upstream subject profile, migrate by admitting subject-operation:migrate_to_upstream_profile records or replacement subject revisions. Do not rewrite these seed objects in place.",
+    "physical_store": "Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.",
+    "profile_family": [
+      "twisted-yetter/subject-definition/0",
+      "twisted-yetter/subject-edge/0",
+      "twisted-yetter/subject-index/0",
+      "twisted-yetter/subject-operation/0"
+    ],
+    "purpose": "Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to an upstream ctl-meta reviewer.",
+    "review_warnings_addressed": [
+      "The lane is physically integrated into ctl-dogfood rather than a separate CTL store.",
+      "The ty:ambiguous-hub kind is now represented by an active subject definition.",
+      "Yasui and Akbulut source papers are represented as paper subjects with arXiv id and versioned id in external_references.",
+      "Crane-Yetter, homologically twisted state-sum, Kirby-formula, and Tham thesis/preprint references are represented as paper/reference subjects, but no page-level theorem extraction is admitted here.",
+      "Baykur arXiv:2403.14586v1 and its arXiv-listed author are represented as paper/person subjects; authored_by is a local subject-edge role added for paper-author navigation.",
+      "Burke arXiv:2402.15087v1 is represented only as a provisional candidate for the user-described UMass/small-Kirby reference because the affiliation/context match was not verified.",
+      "The SU(2) Lie group and SU(2)_k MTC family have separate seed subjects.",
+      "SU(3)_2 and SU(3)_3 are represented as category subjects with explicit warnings about incomplete/nonexistent F/R Yasui evaluations.",
+      "The Yasui a=3 D(A4) run is represented as an inconclusive partial-computation cluster, not a completed invariant.",
+      "Edges in this seed set are admitted subject-edge records, not informal candidate prose.",
+      "The index cites prior proposal logical ids and their current claim CIDs at index creation."
+    ],
+    "schema": "twisted-yetter/subject-index/0",
+    "seed_edges": [
+      "subject-edge:ty:akbulut-figure1-e1:about:e1",
+      "subject-edge:ty:akbulut-figure38-note:about:figure38",
+      "subject-edge:ty:akbulut-figure38:about:e1",
+      "subject-edge:ty:akbulut-paper:defines:figure1-e1",
+      "subject-edge:ty:akbulut-paper:defines:figure38",
+      "subject-edge:ty:baykur-2403-14586:authored-by:r-inanc-baykur",
+      "subject-edge:ty:reference-hub:mentions:baerenz-barrett-1601-03580",
+      "subject-edge:ty:reference-hub:mentions:baykur-2403-14586",
+      "subject-edge:ty:reference-hub:mentions:burke-2402-15087-provisional",
+      "subject-edge:ty:reference-hub:mentions:crane-kauffman-yetter-hepth-9409167",
+      "subject-edge:ty:reference-hub:mentions:tham-2108-13467",
+      "subject-edge:ty:reference-hub:mentions:yetter-hepth-9311082",
+      "subject-edge:ty:su2-k:depends-on:su2",
+      "subject-edge:ty:su3-2:depends-on:su3-k",
+      "subject-edge:ty:su3-3:depends-on:su3-k",
+      "subject-edge:ty:yasui-a1-cluster:computes:yasui-a1-link",
+      "subject-edge:ty:yasui-a1-cluster:mentions:su3-2",
+      "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su2-k",
+      "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su3-3",
+      "subject-edge:ty:yasui-a1-cluster:uses:cp2-split-baseline",
+      "subject-edge:ty:yasui-a1-cluster:uses:da4-c3w1",
+      "subject-edge:ty:yasui-a1-cluster:uses:singleton-route",
+      "subject-edge:ty:yasui-a3-cluster:computes:yasui-a3-link",
+      "subject-edge:ty:yasui-a3-cluster:uses:da4-omega0",
+      "subject-edge:ty:yasui-a3-cluster:uses:singleton-route",
+      "subject-edge:ty:yasui-a1-link:mentions:yasui-hub",
+      "subject-edge:ty:yasui-a1-note:about:cluster",
+      "subject-edge:ty:yasui-a3-note:about:partial-cluster",
+      "subject-edge:ty:yasui-paper:defines:a1-link",
+      "subject-edge:ty:yasui-paper:defines:a3-link"
+    ],
+    "seed_subjects": [
+      "subject:twisted-yetter:category-family:su2-k",
+      "subject:twisted-yetter:category-family:su3-k",
+      "subject:twisted-yetter:category:d-a4-omega0",
+      "subject:twisted-yetter:category:d-a4-c3w1",
+      "subject:twisted-yetter:category:su3-2",
+      "subject:twisted-yetter:category:su3-3",
+      "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
+      "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial",
+      "subject:twisted-yetter:4-manifold:e1",
+      "subject:twisted-yetter:hub:yasui",
+      "subject:twisted-yetter:lie-group:su2",
+      "subject:twisted-yetter:link:yasui-figure3-a1-r1-normalized",
+      "subject:twisted-yetter:link:yasui-figure3-a3",
+      "subject:twisted-yetter:paper:akbulut-0805-1524",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+      "subject:twisted-yetter:paper:baykur-2403-14586",
+      "subject:twisted-yetter:paper:burke-2402-15087-provisional",
+      "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167",
+      "subject:twisted-yetter:paper:tham-2108-13467",
+      "subject:twisted-yetter:paper:yetter-hepth-9311082",
+      "subject:twisted-yetter:paper:yasui-0807-0373",
+      "subject:twisted-yetter:person:r-inanc-baykur",
+      "subject:twisted-yetter:presentation:akbulut-figure1-e1",
+      "subject:twisted-yetter:presentation:akbulut-figure38",
+      "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation"
+    ],
+    "status": "active",
+    "title": "Twisted Yetter downstream subject lane v0",
+    "upstream_review_contract": {
+      "downstream_scope": "This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.",
+      "first_reading_path": [
+        "Read this subject-index payload.",
+        "Read the verifier rules in ctl-dogfood/scripts/verify.py for the accepted local schemas.",
+        "Read the admitted proposal notes listed in known_proposal_notes only as design history, not as the active schema."
+      ],
+      "migration_commitment": "Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.",
+      "questions_for_upstream": [
+        "Should subject definitions and edges remain opaque-json plus project verifier, or become a generic ctl-data profile?",
+        "Should alias collision handling be a hard verifier failure or a current-view warning with explicit disambiguation objects?",
+        "Should subject operations be first-class upstream profiles or downstream conventions?"
+      ],
+      "upstream_may_replace_profiles": true
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-index:definition"
+}
