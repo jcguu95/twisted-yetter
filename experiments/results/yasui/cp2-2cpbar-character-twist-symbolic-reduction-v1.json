@@ -1,0 +1,57 @@
+{
+  "case": {
+    "manifold": "CP2#2CPbar",
+    "presentation": "ordinary split unlink",
+    "standard_component_order": [
+      "h",
+      "e1",
+      "e2"
+    ],
+    "standard_framings": [
+      1,
+      -1,
+      -1
+    ]
+  },
+  "claim_boundary": "This is a symbolic reduction for the ordinary separated presentation only. It does not evaluate the Yasui braid presentation and does not prove any exotic-pair separation.",
+  "consequence": {
+    "boring_nontriviality": "If the relevant invertible twists are nontrivial, the ordinary split value changes only by the pointed-sector phase theta(g_h)^-1 theta(g_e1) theta(g_e2).",
+    "elimination_rule": "A modular category is trivial for this cheap split-link character test whenever every relevant invertible object has twist 1, or more generally whenever theta(g_h)^-1 theta(g_e1) theta(g_e2)=1 for every character assignment under consideration.",
+    "what_disappears": [
+      "non-pointed simple objects except through the baseline Gauss sums",
+      "fusion multiplicities",
+      "F symbols",
+      "R symbols",
+      "braid-word complexity"
+    ]
+  },
+  "examples": {
+    "D(A4)_c3w1": {
+      "observed_in_artifact": "experiments/results/yasui/figure3-a1-standard-split-unlink-da4-c3w1-character-scan-v1.json",
+      "interpretation": "The Z/3 character directions seen in the ordinary split presentation are represented by bosonic pure-charge invertibles, so every CP2#2CPbar split character twist remains at the baseline value 1728."
+    },
+    "Drinfeld_centers": {
+      "status": "INFERENCE",
+      "interpretation": "Being a center forces total central charge 1, but the split character test is governed by twists of invertible objects. Untwisted doubles with only bosonic relevant invertibles are eliminated; doubles with nontrivial pointed metric can show only pointed-sector phases."
+    },
+    "SU2_k": {
+      "observed_in_artifact": "experiments/results/yasui/cp2-2cpbar-su2k-character-gauss-scan-v1.json",
+      "rule": "The nontrivial character is parity and is represented by the invertible simple object k, whose twist is exp(pi*i*k/2). Levels k=0 mod 4 are eliminated; all other levels have some nonbaseline split character twist."
+    },
+    "Uq_g_general": {
+      "status": "INFERENCE",
+      "interpretation": "For semisimple quantum-group modular categories, this cheap split test depends only on the simple-current pointed subcategory and its quadratic form. If the simple-current quadratic form is trivial on the relevant subgroup, the test is eliminated; if not, the signal is only a simple-current phase."
+    }
+  },
+  "git_commit_when_recorded": "fa8bc94e51eb2073d308d9d0a6049647e1cf6efa",
+  "proof_sketch": {
+    "factorization": "For a split unlink, the colored Kirby sum factorizes over components.",
+    "single_component_sum": "For framing f=+1 or -1 and character chi_g represented by an invertible object g, define tau_f(chi_g)=sum_X d_X^2 chi_g(|X|) theta_X^f.",
+    "balancing_input": "In a modular category, chi_g(|X|)=S_{g,X}/d_X is the monodromy character associated to g.",
+    "ratio_formula": "For unitary modular data, tau_+1(chi_g)=theta_g^-1 tau_+1(1) and tau_-1(chi_g)=theta_g tau_-1(1).",
+    "split_ratio": "Therefore CP2#2CPbar with framings (+1,-1,-1) has ratio theta(g_h)^-1 theta(g_e1) theta(g_e2)."
+  },
+  "recorded_at_utc": "2026-07-06T19:31:08Z",
+  "schema": "twisted-yetter.cp2-2cpbar-character-twist-symbolic-reduction.v1",
+  "status": "INFERENCE"
+}
