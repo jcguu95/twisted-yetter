@@ -1,0 +1,110 @@
+{
+  "argv": [
+    "--index-file",
+    "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/hetzner-178-105-245-31-worker-04.json",
+    "--worker-id",
+    "hetzner-245-31-w04",
+    "--quiet"
+  ],
+  "category_id": "omega0_untwisted_D_A4",
+  "component_order_in_braid": [
+    "A",
+    "C",
+    "B"
+  ],
+  "elapsed_seconds": 2.0651311339997847,
+  "evaluator_stats": {
+    "basis_sizes_by_total": {
+      "1A:chi1": 182,
+      "1A:chi2": 182,
+      "1A:triv": 182,
+      "2A:eps00": 547
+    },
+    "max_basis_size": 547,
+    "max_state_size": 21283,
+    "selected_component_count": 3,
+    "selected_strand_count": 9,
+    "subbraid_word_length": 64,
+    "total_charge_count": 4,
+    "unit_pruned": false
+  },
+  "fixed_component_labels": [
+    "2A:eps00",
+    "1A:chi2",
+    "1A:chi1"
+  ],
+  "fixed_sector_amplitude": {
+    "abs": "2.999999999999997",
+    "display": "2.9999999999999969-2.3582789566125295e-16j",
+    "field": "complex128",
+    "imag": "-2.3582789566125295e-16",
+    "real": "2.999999999999997"
+  },
+  "generator_script": "experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py",
+  "kind": "fixed-label-sector",
+  "link_id": "yasui-figure3-a3",
+  "mtc_id": "omega0_untwisted_D_A4",
+  "repo": {
+    "dirty": null,
+    "git_commit": null,
+    "metadata_status": "git-unavailable",
+    "root": "/root/twisted-yetter-da4-run",
+    "status_short": null
+  },
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py --start 813 --count 1",
+  "run_context": {
+    "index_file": "experiments/inputs/yasui/figure3-a3-da4-omega0-untwisted-remote-shards-v1/hetzner-178-105-245-31-worker-04.json",
+    "index_file_sha256": "a7c4a4b2f8808202907869abf006b7e1d005ce97e39e774b6a96ef58f6cfb375",
+    "mode": "index-file",
+    "repo": {
+      "dirty": null,
+      "git_commit": null,
+      "metadata_status": "git-unavailable",
+      "root": "/root/twisted-yetter-da4-run",
+      "status_short": null
+    },
+    "tool_versions": {
+      "numpy": "1.24.2",
+      "python": "3.11.2 (main, Apr  8 2026, 01:58:00) [GCC 12.2.0]",
+      "sage": "9.5"
+    },
+    "worker_id": "hetzner-245-31-w04"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-sector-chunk.v1",
+  "sector_index": 813,
+  "sector_total": 2744,
+  "source": {
+    "braid_word_length": 64,
+    "component_order_in_braid": [
+      "A",
+      "C",
+      "B"
+    ],
+    "framings_in_braid_order": [
+      15,
+      3,
+      1
+    ],
+    "mtc_artifact": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+    "mtc_id": "omega0_untwisted_D_A4",
+    "n_strands": 9,
+    "yasui_input": "experiments/inputs/yasui/figure3-a3-crossing-table.json"
+  },
+  "status": "computed-numeric",
+  "tool_versions": {
+    "numpy": "1.24.2",
+    "python": "3.11.2 (main, Apr  8 2026, 01:58:00) [GCC 12.2.0]",
+    "sage": "9.5"
+  },
+  "untwisted_coefficient": "3.0",
+  "utc_finish": "2026-07-06T04:39:41.852614+00:00",
+  "utc_start": "2026-07-06T04:39:39.787544+00:00",
+  "weighted_untwisted_contribution": {
+    "abs": "8.999999999999991",
+    "display": "8.9999999999999911-7.0748368698375891e-16j",
+    "field": "complex128",
+    "imag": "-7.074836869837589e-16",
+    "real": "8.999999999999991"
+  },
+  "yetter_twist": "none"
+}

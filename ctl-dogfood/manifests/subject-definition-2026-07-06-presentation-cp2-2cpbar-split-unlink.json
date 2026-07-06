@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:1a741f51861f22cdb00c52d61ce495f5bb45d1e4f5b52709badd9eae955da7e1",
+  "generated_at": "2026-07-06T23:20:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:1a741f51861f22cdb00c52d61ce495f5bb45d1e4f5b52709badd9eae955da7e1",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:2ddd5c9de028cc647e0a6b7b9d2be63574e3c66f6ebddac7218a07cf272e352f",
+    "transition": "ctlobj-sha256:0ba40922d5b6d1fb9e01198c982833e9378b88ffce6ed7232576dfdabb163d43"
+  },
+  "parent_root_cid": "ctlobj-sha256:f4537f857120139959bff098424fd8b2edb76db7aed1cd6717394c096e261428",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-cp2-2cpbar-split-unlink.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/presentation-cp2-2cpbar-split-unlink.json --manifest manifests/subject-definition-2026-07-06-presentation-cp2-2cpbar-split-unlink.json --created-at 2026-07-06T23:20:00Z --admitted-at 2026-07-06T23:20:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "e1f926c54ff55e82b4d3412adc3b33ab39b8e970"
+}

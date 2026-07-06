@@ -1,0 +1,45 @@
+{
+  "default": "deny",
+  "rules": [
+    {
+      "actions": [
+        "binding.remove",
+        "binding.set",
+        "policy.replace",
+        "revision.record"
+      ],
+      "effect": "allow",
+      "required_evidence_basis": [],
+      "resources": [
+        {
+          "logical_id": "sys:policy"
+        },
+        {
+          "logical_id_prefix": "claim:"
+        },
+        {
+          "logical_id_prefix": "role-binding:"
+        },
+        {
+          "logical_id_prefix": "subject-edge:"
+        },
+        {
+          "logical_id_prefix": "subject-index:"
+        },
+        {
+          "logical_id_prefix": "subject-operation:"
+        },
+        {
+          "logical_id_prefix": "subject:"
+        },
+        {
+          "payload_profile": "ctl-data/opaque-json/1"
+        }
+      ],
+      "subject": {
+        "role_id": "role:owner"
+      }
+    }
+  ],
+  "version": 1
+}

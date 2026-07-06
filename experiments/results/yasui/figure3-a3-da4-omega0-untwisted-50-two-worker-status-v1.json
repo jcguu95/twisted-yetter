@@ -1,0 +1,139 @@
+{
+  "claim_boundary": "Operational timing/status artifact only; not a complete invariant artifact.",
+  "completed_sector_counts": {
+    "complete_prefix_end": 600,
+    "range_1200_1250_done": 13,
+    "range_1500_1550_done": 1,
+    "range_600_650_done": 33,
+    "range_650_700_done": 7,
+    "range_900_950_done": 2,
+    "total_chunk_files_on_disk": 656
+  },
+  "correction_to_previous_parallel_summary": "The earlier parallel 2700 batch processes were user-killed, not conclusively OOM-killed by the system. Treat experiments/results/yasui/figure3-a3-da4-omega0-untwisted-parallel-2700-batch-profile-v1.json as superseded for failure diagnosis by this status artifact.",
+  "created_at": "2026-07-06T03:04:02.911314+00:00",
+  "local_scheduler": {
+    "command": "python experiments/scripts/run_yasui_a3_da4_50_scheduler.py --start 0 --end 2700 --range-size 50 --local-workers 2 --remote-workers 0",
+    "interrupted_exit": "KeyboardInterrupt / exit 130",
+    "local_workers": 2,
+    "outcome": "manually interrupted by assistant after slow-sector evidence, to avoid occupying the machine for many hours without a better strategy",
+    "range_size": 50,
+    "script": "experiments/scripts/run_yasui_a3_da4_50_scheduler.py"
+  },
+  "observations": [
+    "0-300 completed in 2.081s because many sectors were unit-pruned.",
+    "300-600 completed in 275.720s with max_basis_size_seen=1640 and max_state_size_seen=933293.",
+    "Sectors 652-656 each took roughly 181-192s with max_basis_size=2187 and max_state_size=4782969.",
+    "A 50-sector range can therefore be dominated by a few multi-minute sectors; full 2700-sector evaluation with the current pure-Python sparse-state evaluator is not a short local run."
+  ],
+  "recommended_next": [
+    "Do not run all remaining sectors blindly in 50-sector ranges with this evaluator.",
+    "Add single-sector resume/profiling and a slow-sector manifest, or optimize crossing/state composition before full execution.",
+    "If remote execution is still desired, get explicit user approval acknowledging workspace export risk and provide a verified remote checkout/sync policy."
+  ],
+  "remote_status": {
+    "reason": "Exporting workspace files/artifacts to an unverified external host via rsync/ssh was denied by sandbox escalation review.",
+    "remote_sage": "SageMath 10.9 observed during probe",
+    "requested_remote": "xilingdai@xil-m2.local",
+    "scheduler_remote_execution": "blocked-by-policy-review",
+    "ssh_connectivity": "available during probe"
+  },
+  "repo": {
+    "dirty": true,
+    "git_commit": "a9a040e52c3ffbd3eec6fe816c7d1232e78fed0e",
+    "root": "/Users/jin/.codex/worktrees/7363/twisted-yetter",
+    "status_short": "?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-50-scheduler-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-chunks-v1/\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-first20-profile-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-parallel-2700-batch-profile-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000000-0000300-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000300-0000600-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-profile-0000600-0000601-v1.json\n?? experiments/results/yasui/figure3-a3-da4-omega0-untwisted-smoke-profile-v1.json\n?? experiments/sage/yasui_figure3_a3_da4_untwisted_chunked.sage.py\n?? experiments/scripts/run_yasui_a3_da4_50_scheduler.py\n"
+  },
+  "schema": "twisted-yetter.yasui-figure3-a3-da4-untwisted-50-two-worker-status.v1",
+  "scope": "Status after switching to 50-sector ranges with at most two local workers for Yasui a=3, omega0 untwisted D(A4), no Yetter twist.",
+  "slow_sector_evidence": [
+    {
+      "elapsed_seconds": 6.986865417100489,
+      "fixed_component_labels": [
+        "1A:std3",
+        "1A:triv",
+        "3B:eta1"
+      ],
+      "max_basis_size": 729,
+      "max_state_size": 145503,
+      "sector_index": 600
+    },
+    {
+      "elapsed_seconds": 17.91432487498969,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "2A:eps10"
+      ],
+      "max_basis_size": 1640,
+      "max_state_size": 179613,
+      "sector_index": 650
+    },
+    {
+      "elapsed_seconds": 18.21787124988623,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "2A:eps11"
+      ],
+      "max_basis_size": 1640,
+      "max_state_size": 179613,
+      "sector_index": 651
+    },
+    {
+      "elapsed_seconds": 180.74193795886822,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "3A:eta0"
+      ],
+      "max_basis_size": 2187,
+      "max_state_size": 4782969,
+      "sector_index": 652
+    },
+    {
+      "elapsed_seconds": 181.06848054099828,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "3A:eta1"
+      ],
+      "max_basis_size": 2187,
+      "max_state_size": 4782969,
+      "sector_index": 653
+    },
+    {
+      "elapsed_seconds": 191.69564029108733,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "3A:eta2"
+      ],
+      "max_basis_size": 2187,
+      "max_state_size": 4782969,
+      "sector_index": 654
+    },
+    {
+      "elapsed_seconds": 189.53171154204756,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "3B:eta0"
+      ],
+      "max_basis_size": 2187,
+      "max_state_size": 4782969,
+      "sector_index": 655
+    },
+    {
+      "elapsed_seconds": 191.8727453330066,
+      "fixed_component_labels": [
+        "1A:std3",
+        "2A:eps00",
+        "3B:eta1"
+      ],
+      "max_basis_size": 2187,
+      "max_state_size": 4782969,
+      "sector_index": 656
+    }
+  ],
+  "status": "interrupted-after-slow-sector-evidence"
+}
