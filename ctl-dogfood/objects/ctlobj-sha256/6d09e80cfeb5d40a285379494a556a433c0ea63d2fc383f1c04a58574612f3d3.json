@@ -1,0 +1,99 @@
+{
+  "created_at": "2026-07-06T23:06:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:source-capture:anyonwiki-fr-6-1-4-5-cat-1-3-1-2026-07-06",
+  "parents": [
+    "ctlobj-sha256:e747221bb7e7d8a540eb6d6007362b4e1ae453ca008ab172c6ea6887b86b94f8"
+  ],
+  "payload": {
+    "anyonwiki_identifiers": {
+      "category_directory": "FusionCategories/FR_6_1_4_5/cat_1_3_1",
+      "files_in_bundle": [
+        "FR_6_1_4_5_structconst.txt",
+        "cat_1_3_1/1_3_1_pentsol.txt",
+        "cat_1_3_1/1_3_1_hexsol.txt",
+        "cat_1_3_1/1_3_1_pivsol.txt"
+      ],
+      "fusion_ring_directory": "FusionCategories/FR_6_1_4_5",
+      "parameter_triple": "1_3_1"
+    },
+    "capture_id": "anyonwiki-FR_6_1_4_5-cat_1_3_1-source-capture-2026-07-06",
+    "claim_boundary": "This record captures an AnyonWiki numeric category data bundle member and its local files. It does not assert that the captured data is SU(3)_2 or any other specific MTC.",
+    "created_at": "2026-07-06T22:58:00Z",
+    "created_by": "actor:codex",
+    "format_observation": {
+      "hexsol_txt": "Rows with three object labels followed by real and imaginary parts, interpreted as hexagon/braiding numeric solution data in the AnyonWiki bundle.",
+      "pentsol_txt": "Rows with six object labels followed by real and imaginary parts, interpreted by AnyonWiki documentation as F-symbol numeric solution data.",
+      "pivsol_txt": "Rows with object label followed by real and imaginary parts for pivotal solution data.",
+      "structconst_txt": "Triples a b c for multiplicity-free fusion channels as provided by AnyonWiki."
+    },
+    "mathematical_status": "NOT_IDENTIFICATION_CLAIM",
+    "policy_notes": [
+      "Do not cite this source-capture record alone as evidence that the data is SU(3)_2.",
+      "Use later verification artifacts for any identification or convention claim.",
+      "The full 13MB zip is not stored in the repo; selected extracted files and the zip hash are recorded."
+    ],
+    "related_non_identifying_checks": [
+      {
+        "path": "experiments/results/anyon-wiki-su3-2/su3-2-anyonwiki-candidate-check-v1.json",
+        "sha256": "38b20f19ef79da25ec4ba6ec4a703ad12ecbacdf3e35e72b5e65ef3f8945299f",
+        "status": "pass"
+      },
+      {
+        "path": "experiments/results/anyon-wiki-su3-2/su3-2-anyonwiki-hopf-check-v2.json",
+        "sha256": "3a7bbf7f22973c67d9d3aa53874de87fc18dcf35f98fed9575d5c6dc41401051",
+        "status": "pass"
+      }
+    ],
+    "repo_state": {
+      "dirty_at_payload_creation": true,
+      "git_commit_after_main_merge_before_admission": "25371a589e7cbd247c624b6d41346ebf8af59e9e",
+      "repo_root": "/Users/jin/.codex/worktrees/4ec6/twisted-yetter"
+    },
+    "schema": "twisted-yetter/anyonwiki-source-capture/1",
+    "selected_extracted_files": [
+      {
+        "bytes": 269,
+        "line_count": 45,
+        "path": "experiments/inputs/anyon-wiki-data/FR_6_1_4_5/FR_6_1_4_5_structconst.txt",
+        "sha256": "892e0ac54f78641158227d3136c5656c3fa1a281ad5139a878d73fa61bd9c7e6"
+      },
+      {
+        "bytes": 32426,
+        "line_count": 405,
+        "path": "experiments/inputs/anyon-wiki-data/FR_6_1_4_5/cat_1_3_1/1_3_1_pentsol.txt",
+        "sha256": "ec5a25fde81b7cf00a23f56c99524dfa1835b3afaae62c34fe0ea7b59a7c111b"
+      },
+      {
+        "bytes": 5348,
+        "line_count": 45,
+        "path": "experiments/inputs/anyon-wiki-data/FR_6_1_4_5/cat_1_3_1/1_3_1_hexsol.txt",
+        "sha256": "2d28a4b0a9ee4f29f55e9ffbc3e7ba1e2374f713ac2abf930c2ad74b384ae486"
+      },
+      {
+        "bytes": 419,
+        "line_count": 6,
+        "path": "experiments/inputs/anyon-wiki-data/FR_6_1_4_5/cat_1_3_1/1_3_1_pivsol.txt",
+        "sha256": "f40423ebb8d538066522e2f734349ed92192cad7a060d83d1b095d8155fbe92e"
+      }
+    ],
+    "source": {
+      "anyonwiki_list_page": "https://anyonwiki.github.io/pages/Lists/losmffc.html",
+      "download_command": "curl -L --max-time 60 https://anyonwiki.github.io/data/NumericCategories.zip -o /private/tmp/anyonwiki-numeric-categories.zip",
+      "download_url": "https://anyonwiki.github.io/data/NumericCategories.zip",
+      "downloaded_at_utc": "2026-07-06T22:36:36Z",
+      "downloaded_zip_path_at_capture_time": "/private/tmp/anyonwiki-numeric-categories.zip",
+      "downloaded_zip_sha256": "1eea008ba92ab5d3f9e39a3bf3b03c3b0176e1f08d41a54872c6788d35954582",
+      "provider": "AnyonWiki"
+    },
+    "status": "SOURCE_CAPTURE_ONLY",
+    "title": "AnyonWiki numeric category source capture for FR_6_1_4_5 cat_1_3_1"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
