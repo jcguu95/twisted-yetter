@@ -1,0 +1,272 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-06-yasui-figure3-a3-da4-distilled-partial-computation",
+  "title": "Distilled partial D(A4) sector computation for Yasui Figure 3 a=3",
+  "created_at": "2026-07-06T14:00:00Z",
+  "created_by": "actor:codex",
+  "status": "INCONCLUSIVE",
+  "mathematical_status": "INCONCLUSIVE_PARTIAL_NUMERIC",
+  "scope": {
+    "question": "Record what the prior-agent handoff says was computed for Yasui Figure 3 a=3 with the omega0 untwisted D(A4) MTC, what code/artifacts are identifiable now, what provenance is missing, why brute-force whole-sector scheduling was abandoned as the primary strategy, and what the next research steps should be.",
+    "claim_boundary": "This note admits a distilled operational summary and negative feasibility lesson for a partial numerical fixed-label sector computation. It does not admit a complete invariant, an exact certificate, theorem-level evidence, full cross-validation, or a Yasui exotic-pair conclusion.",
+    "normative_source_policy": "The repo-local capture artifact and this admitted CTL note are the normative records of this distilled handoff. The /tmp package is a transient source package and is not a complete provenance record.",
+    "path_policy": "Repo-local artifact locators are repo-relative paths unless explicitly marked as a transient external locator."
+  },
+  "distillation_source": {
+    "capture_artifact": {
+      "path": "experiments/results/yasui/figure3-a3-da4-distilled-handoff-capture-v1.json",
+      "sha256": "c91c4f76e3497ce05ca952ecc3a25db7485a8fbdc89517eccb6024984d49d94e",
+      "schema": "twisted-yetter.yasui-da4-distilled-handoff-capture.v1",
+      "status": "INCONCLUSIVE_PARTIAL_COMPUTATION_CAPTURE"
+    },
+    "transient_handoff_package": {
+      "locator": "/tmp/yasui-da4-distilled-handoff-20260706",
+      "created_at_utc_recorded_by_handoff": "2026-07-06T13:44:34Z",
+      "source_character": "prior-agent distillation; not raw log; not complete provenance; prior-session local file locations intentionally omitted",
+      "file_hashes": [
+        {
+          "name": "README.txt",
+          "sha256": "03562bda296e18098d61aa4b1f9958893a2dd8d99e061e14eb1e3893dc37514c"
+        },
+        {
+          "name": "handoff_brief.json",
+          "sha256": "3402ef93e0b67331f7c0292def0f32b4493fbc922200c8a11b6368a8567436d3"
+        },
+        {
+          "name": "ctl_lab_note_seed.json",
+          "sha256": "5847156a78412034358d102d18535300cd57f5dfdbdaddd56e7a847b64dfa237"
+        }
+      ]
+    },
+    "must_read_caveat": "This note is distilled from a prior Codex session. It is not a faithful raw transcript or complete provenance record. Raw artifacts may contain more detail, but this handoff only preserved selected facts and caveats."
+  },
+  "computed_object": {
+    "link": {
+      "id": "yasui-figure3-a3",
+      "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
+      "arxiv": "0807.0373v2",
+      "figure": "Figure 3",
+      "case": "a=3",
+      "topological_target": "CP2 # 2 CPbar2",
+      "components": [
+        {
+          "id": "A",
+          "framing": 15,
+          "class_in_h_e_basis": {
+            "h": 4,
+            "e1": 0,
+            "e2": 1
+          }
+        },
+        {
+          "id": "B",
+          "framing": 1,
+          "class_in_h_e_basis": {
+            "h": 1,
+            "e1": 0,
+            "e2": 0
+          }
+        },
+        {
+          "id": "C",
+          "framing": 3,
+          "class_in_h_e_basis": {
+            "h": 2,
+            "e1": 1,
+            "e2": 0
+          }
+        }
+      ],
+      "crossing_count": 46,
+      "target_intersection_matrix": [
+        [
+          15,
+          4,
+          8
+        ],
+        [
+          4,
+          1,
+          2
+        ],
+        [
+          8,
+          2,
+          3
+        ]
+      ]
+    },
+    "mtc": {
+      "mtc_id": "omega0_untwisted_D_A4",
+      "name": "untwisted Drinfeld double D(A4)",
+      "omega": 0,
+      "yetter_twist": "none",
+      "simple_count": 14,
+      "global_dimension_squared": 144,
+      "field": "complex floating point",
+      "data_status": "ESTABLISHED_NUMERIC"
+    },
+    "computation_type": "fixed-label sector numerical braid-closure evaluation"
+  },
+  "known_code_and_artifacts": {
+    "link_input_generator_code": {
+      "path": "experiments/scripts/yasui_figure3_a3_make_input.py",
+      "sha256": "788ced98f555f95d9cda7d0d944313bb87f9a11a1006ed1c16a9f7f7cce0a45c",
+      "role": "Creates the Yasui Figure 3 a=3 clean crossing-table input from hand PD data."
+    },
+    "link_input_artifact": {
+      "path": "experiments/inputs/yasui/figure3-a3-crossing-table.json",
+      "sha256": "cd472022810c49f79e26fc840290aebc002bf60343d63003ecb315a1dfe514aa",
+      "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
+      "status": "needs-evaluator-artifact",
+      "role": "Machine-readable link input for the named Yasui link."
+    },
+    "mtc_data_artifact": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+      "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+      "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-a4.v1",
+      "status": "ESTABLISHED_NUMERIC",
+      "role": "Numeric F/R data for the omega0 untwisted D(A4) MTC named by this computation."
+    },
+    "mtc_verification": {
+      "verification_code": {
+        "path": "experiments/scripts/verify_drinfeld_double_a4_mtc_data.py",
+        "sha256": "84b414d2904eec6ffd62252bc6daa0c6e562c40ea9645e9d947c05dc9370acf6"
+      },
+      "verification_run": {
+        "path": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+        "sha256": "717fd28cc21425f1db480e941dcb65ce016971c76b0c292e7b087f6dbdb764dc",
+        "schema": "twisted-yetter.drinfeld-double-a4.two-mtc-verification-run.v1",
+        "status": "pass"
+      },
+      "extraction_code": {
+        "path": "experiments/scripts/extract_drinfeld_double_a4_mtc_data.py",
+        "sha256": "049e8e9bafae95ddfd35c8cd3b83002cd8ee4240c7c557ed57ed390d63c5b59b"
+      }
+    },
+    "prior_session_sector_evaluator_code": {
+      "status": "unknown_from_handoff",
+      "repo_local_path": null,
+      "sha256": null,
+      "reproduce_command": null,
+      "consequence": "The code that produced the 1352 fixed-label D(A4) sector outputs is not identified by the distilled handoff. Future work should recover or rebuild this evaluator before doing more large runs."
+    }
+  },
+  "sector_meaning_for_future_readers": {
+    "status": "conceptual-description",
+    "meaning": "A sector is one fixed assignment of simple objects of omega0_untwisted_D_A4 to the components/strands in the braid-closure evaluation being summed. In a fixed-label sector, the evaluator does not yet sum over all labels; it computes the numerical braid quantum trace contribution for that one label assignment.",
+    "why_sector_count_is_2744": "The handoff records 2744 canonical sectors. This matches 14^3 for the three-component Yasui Figure 3 a=3 link with 14 simple labels in omega0_untwisted_D_A4, after using the canonical sector indexing convention from the prior session.",
+    "what_is_not_preserved": "The handoff does not preserve the canonical sector ID list, the component-label tuple for each completed sector, or per-sector numeric values. Therefore this note explains the meaning of a sector but is not a per-sector ledger."
+  },
+  "partial_computation_status": {
+    "sector_total": 2744,
+    "canonical_completed_sectors": 1352,
+    "canonical_missing_sectors": 1392,
+    "status_label": "incomplete-long-tail-stalled",
+    "completed_sector_ids": {
+      "status": "not_preserved_in_distilled_handoff",
+      "consequence": "This note can report aggregate coverage but cannot certify exactly which canonical sectors were completed."
+    },
+    "missing_sector_ids": {
+      "status": "not_preserved_in_distilled_handoff",
+      "consequence": "This note cannot serve as a restart manifest for the remaining 1392 sectors."
+    }
+  },
+  "compute_node_and_environment_summary": {
+    "chunks_total_observed": 1352,
+    "chunks_with_fullish_metadata": 696,
+    "chunks_with_partial_metadata": 656,
+    "fullish_metadata_fields": [
+      "utc_start",
+      "utc_finish",
+      "elapsed_seconds",
+      "tool_versions",
+      "run_context",
+      "repo metadata when available"
+    ],
+    "platforms_observed": [
+      {
+        "platform": "Linux remote workers",
+        "tool_versions": {
+          "Sage": "9.5",
+          "Python": "3.11.2",
+          "NumPy": "1.24.2"
+        }
+      },
+      {
+        "platform": "local Mac worker",
+        "tool_versions": {
+          "Sage": "10.8",
+          "Python": "3.13.7",
+          "NumPy": "2.3.2"
+        }
+      },
+      {
+        "platform": "remote Mac worker",
+        "tool_versions": {
+          "Sage": "10.9",
+          "Python": "3.14.3",
+          "NumPy": "2.4.4"
+        }
+      }
+    ],
+    "partial_metadata_caveat": "Early chunks have numeric sector outputs but lack complete start/end/tool-version/run-context metadata. The handoff does not preserve per-node raw timing rows."
+  },
+  "timing_and_performance_summary": {
+    "main_bottleneck": "fusion-path sparse state blow-up during braid quantum trace evaluation",
+    "why_some_sectors_are_easy": {
+      "status": "inference-from-MTC-data-and-handoff-performance-summary",
+      "explanation": "Some fixed-label sectors are easy because their labels force small or sparse fusion spaces along the braid word, sometimes with unit-like or low-dimensional simple objects and many zero/nonadmissible intermediate channels. Those sectors keep the fusion-path state small, so the quantum trace is seconds-scale.",
+      "why_some_sectors_are_hard": "Hard sectors are those whose label assignments allow many admissible intermediate fusion paths through the long braid. The sparse state then grows during repeated F/R moves and trace contraction, producing multi-hour sectors.",
+      "caveat": "This is a structural explanation of the observed timing shape, not a recovered per-sector classification. The handoff did not preserve a table mapping sector IDs to easy/hard labels."
+    },
+    "completed_sector_timing_shape": {
+      "median": "seconds-scale for easy sectors",
+      "p90": "about 5 minutes in observed completed sample",
+      "hard_sectors": "multi-hour; observed sectors around 7.7 hours"
+    },
+    "interpretation": "The computation appears to have exhausted easy sectors and entered a long tail. Adding whole-sector workers alone does not address the underlying contraction/state blow-up."
+  },
+  "validation_summary": {
+    "observed_linux_mac_discrepancies": 0,
+    "scope": "Partial overlaps and selected revalidations only.",
+    "caveat": "No claim that all sectors were independently cross-validated."
+  },
+  "abandonment_reason": {
+    "decision": "Do not continue brute-force whole-sector scheduling as the primary strategy.",
+    "reasons": [
+      "The computation is incomplete: 1352 of 2744 canonical sectors completed, 1392 missing.",
+      "The long tail already contains multi-hour sectors, including observed sectors around 7.7 hours.",
+      "The handoff identifies fusion-path sparse state blow-up during braid quantum trace evaluation as the dominant bottleneck.",
+      "Whole-sector parallelism increases throughput on easy sectors but does not reduce total work for the hard tail.",
+      "The handoff does not preserve enough provenance or evaluator-code identity to justify more large brute-force runs without first repairing reproducibility."
+    ]
+  },
+  "future_plan": [
+    "Recover raw sector chunks, selected validation reports, merge summaries, and performance assessments if possible, then record a repo-local raw-artifact manifest with stable hashes.",
+    "Identify or rebuild the fixed-label D(A4) braid-closure evaluator as repo-local source code with a stable output schema and reproduce command.",
+    "Study tensor-network contraction ordering and contraction-width estimates for the Yasui Figure 3 a=3 link with omega0_untwisted_D_A4.",
+    "Study braid/link simplification before committing to further large numerical runs.",
+    "Use microchunking for checkpointing and profiling only; do not treat it as a total-work reduction by itself."
+  ],
+  "explicit_non_claims": [
+    "Not a complete invariant computation.",
+    "Not an exact certificate.",
+    "Not theorem-level evidence.",
+    "Not full Linux/Mac cross-validation.",
+    "Not sufficient evidence for a Yasui exotic-pair conclusion.",
+    "Not a restart manifest for the missing sectors.",
+    "Not an identification of the prior-session fixed-label sector evaluator source code."
+  ],
+  "current_graph_context": {
+    "graph_logical_id": "claim:graph:computation-first-v1",
+    "graph_version_read": 30,
+    "graph_cid_read": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
+    "priority_node_id_read": "n80-exotic-computation",
+    "relation": "This note records an auxiliary distilled partial computation. It does not advance n80 and does not override current graph invariants requiring certified input marking and exact artifact comparison before terminal positive claims."
+  },
+  "repo_snapshot": {
+    "commit_before_note": "2a2901b2626a86ed35a3f2fa2dfd316e656fd7c5",
+    "dirty_status_context": "dirty because this capture artifact, this lab-note preimage, and the CTL admission files are newly generated before any commit"
+  }
+}

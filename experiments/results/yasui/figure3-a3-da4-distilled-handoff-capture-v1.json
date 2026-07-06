@@ -1,0 +1,256 @@
+{
+  "schema": "twisted-yetter.yasui-da4-distilled-handoff-capture.v1",
+  "status": "INCONCLUSIVE_PARTIAL_COMPUTATION_CAPTURE",
+  "created_at_utc": "2026-07-06T14:00:00Z",
+  "generator": "Codex manual CTL-lab-note preparation from /tmp/yasui-da4-distilled-handoff-20260706",
+  "generator_claim_boundary": "This capture records the distilled handoff package and repo-local context. It does not reconstruct omitted raw artifacts, command transcripts, per-sector outputs, or the prior-session evaluator source code.",
+  "repo_snapshot": {
+    "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+    "git_commit_before_capture": "2a2901b2626a86ed35a3f2fa2dfd316e656fd7c5",
+    "dirty_before_capture": false
+  },
+  "source_handoff_package": {
+    "locator": "/tmp/yasui-da4-distilled-handoff-20260706",
+    "created_at_utc_recorded_by_handoff": "2026-07-06T13:44:34Z",
+    "source_character": {
+      "kind": "prior-agent-distillation",
+      "not_raw_log": true,
+      "not_complete_provenance": true,
+      "local_file_locations_omitted": true,
+      "traceability_boundary": "The package preserves selected distilled facts and caveats only. It omits raw operational detail, command transcript, machine events, and prior-session local artifact locations."
+    },
+    "files": [
+      {
+        "name": "README.txt",
+        "bytes": 539,
+        "sha256": "03562bda296e18098d61aa4b1f9958893a2dd8d99e061e14eb1e3893dc37514c",
+        "role": "handoff package explanation"
+      },
+      {
+        "name": "handoff_brief.json",
+        "bytes": 2961,
+        "sha256": "3402ef93e0b67331f7c0292def0f32b4493fbc922200c8a11b6368a8567436d3",
+        "role": "distilled computation status, provenance caveats, validation summary, and strategic conclusion"
+      },
+      {
+        "name": "ctl_lab_note_seed.json",
+        "bytes": 2444,
+        "sha256": "5847156a78412034358d102d18535300cd57f5dfdbdaddd56e7a847b64dfa237",
+        "role": "suggested CTL note content and claim boundary"
+      }
+    ]
+  },
+  "objective": {
+    "link": {
+      "id": "yasui-figure3-a3",
+      "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
+      "arxiv": "0807.0373v2",
+      "figure": "Figure 3",
+      "case": "a=3",
+      "topological_target": "CP2 # 2 CPbar2",
+      "components": [
+        {
+          "id": "A",
+          "framing": 15,
+          "class_in_h_e_basis": {
+            "h": 4,
+            "e1": 0,
+            "e2": 1
+          }
+        },
+        {
+          "id": "B",
+          "framing": 1,
+          "class_in_h_e_basis": {
+            "h": 1,
+            "e1": 0,
+            "e2": 0
+          }
+        },
+        {
+          "id": "C",
+          "framing": 3,
+          "class_in_h_e_basis": {
+            "h": 2,
+            "e1": 1,
+            "e2": 0
+          }
+        }
+      ],
+      "crossing_count": 46,
+      "target_intersection_matrix": [
+        [
+          15,
+          4,
+          8
+        ],
+        [
+          4,
+          1,
+          2
+        ],
+        [
+          8,
+          2,
+          3
+        ]
+      ]
+    },
+    "category": {
+      "mtc_id": "omega0_untwisted_D_A4",
+      "name": "untwisted Drinfeld double D(A4)",
+      "omega": 0,
+      "yetter_twist": "none",
+      "simple_count": 14,
+      "global_dimension_squared": 144,
+      "field": "complex floating point"
+    },
+    "computation_type": "fixed-label sector numerical braid-closure evaluation"
+  },
+  "repo_local_artifacts_known_to_this_capture": {
+    "link_input_generator_code": {
+      "path": "experiments/scripts/yasui_figure3_a3_make_input.py",
+      "sha256": "788ced98f555f95d9cda7d0d944313bb87f9a11a1006ed1c16a9f7f7cce0a45c",
+      "role": "Creates the Yasui Figure 3 a=3 clean crossing-table input from hand PD data."
+    },
+    "link_input_artifact": {
+      "path": "experiments/inputs/yasui/figure3-a3-crossing-table.json",
+      "sha256": "cd472022810c49f79e26fc840290aebc002bf60343d63003ecb315a1dfe514aa",
+      "schema": "twisted-yetter.yasui-figure-crossing-table.v1",
+      "status": "needs-evaluator-artifact",
+      "role": "Machine-readable link input for Yasui Figure 3 a=3."
+    },
+    "mtc_data_artifact": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
+      "sha256": "7907208ba2c47b301e9127dbd93885b2bbb187db90c5eb23d4a516341b4e9bb5",
+      "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-a4.v1",
+      "status": "ESTABLISHED_NUMERIC",
+      "role": "Numeric F/R data for omega0_untwisted_D_A4 used as the MTC input named by the handoff."
+    },
+    "mtc_extraction_code": {
+      "path": "experiments/scripts/extract_drinfeld_double_a4_mtc_data.py",
+      "sha256": "049e8e9bafae95ddfd35c8cd3b83002cd8ee4240c7c557ed57ed390d63c5b59b",
+      "role": "Extracts canonical D(A4) MTC artifacts from the July 5 source package."
+    },
+    "mtc_verification_code": {
+      "path": "experiments/scripts/verify_drinfeld_double_a4_mtc_data.py",
+      "sha256": "84b414d2904eec6ffd62252bc6daa0c6e562c40ea9645e9d947c05dc9370acf6",
+      "role": "Verifies the D(A4) MTC artifacts and emits a verification-run certificate."
+    },
+    "mtc_verification_run": {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-a4-two-mtc-verification-run-v1.json",
+      "sha256": "717fd28cc21425f1db480e941dcb65ce016971c76b0c292e7b087f6dbdb764dc",
+      "schema": "twisted-yetter.drinfeld-double-a4.two-mtc-verification-run.v1",
+      "status": "pass",
+      "role": "Repo-local numeric coherence and consistency certificate for the D(A4) MTC artifacts."
+    },
+    "prior_session_sector_evaluator_code": {
+      "status": "unknown_from_handoff",
+      "repo_local_path": null,
+      "sha256": null,
+      "reproduce_command": null,
+      "role": "The code that evaluated the 1352 fixed-label D(A4) sectors was not identified by the distilled handoff package. This prevents the handoff from being complete provenance."
+    }
+  },
+  "partial_computation_summary": {
+    "sector_meaning_for_future_readers": {
+      "status": "conceptual-description",
+      "meaning": "A sector is one fixed assignment of simple objects of omega0_untwisted_D_A4 to the components/strands in the braid-closure evaluation being summed. In a fixed-label sector, the evaluator does not yet sum over all labels; it computes the numerical braid quantum trace contribution for that one label assignment.",
+      "why_sector_count_is_2744": "The handoff records 2744 canonical sectors. This matches 14^3 for the three-component Yasui Figure 3 a=3 link with 14 simple labels in omega0_untwisted_D_A4, after using the canonical sector indexing convention from the prior session.",
+      "what_is_not_preserved": "The handoff does not preserve the canonical sector ID list, the component-label tuple for each completed sector, or per-sector numeric values. Therefore this capture explains the meaning of a sector but is not a per-sector ledger."
+    },
+    "sector_total": 2744,
+    "canonical_completed_sectors": 1352,
+    "canonical_missing_sectors": 1392,
+    "completed_sector_ids": {
+      "status": "not_preserved_in_distilled_handoff",
+      "note": "The handoff gives aggregate counts but does not include the canonical completed-sector ID list or the missing-sector ID list."
+    },
+    "status_label_from_handoff": "incomplete-long-tail-stalled",
+    "claim_boundary": "Partial numeric computation only. Not a complete invariant, theorem, exact certificate, or finished Yasui distinction."
+  },
+  "provenance_summary_from_handoff": {
+    "chunks_total_observed": 1352,
+    "chunks_with_fullish_metadata": 696,
+    "chunks_with_partial_metadata": 656,
+    "fullish_metadata_fields": [
+      "utc_start",
+      "utc_finish",
+      "elapsed_seconds",
+      "tool_versions",
+      "run_context",
+      "repo metadata when available"
+    ],
+    "partial_metadata_caveat": "Early chunks have numeric sector outputs but lack complete start/end/tool-version/run-context metadata.",
+    "platforms_observed": [
+      {
+        "platform": "Linux remote workers",
+        "tool_versions": {
+          "Sage": "9.5",
+          "Python": "3.11.2",
+          "NumPy": "1.24.2"
+        }
+      },
+      {
+        "platform": "local Mac worker",
+        "tool_versions": {
+          "Sage": "10.8",
+          "Python": "3.13.7",
+          "NumPy": "2.3.2"
+        }
+      },
+      {
+        "platform": "remote Mac worker",
+        "tool_versions": {
+          "Sage": "10.9",
+          "Python": "3.14.3",
+          "NumPy": "2.4.4"
+        }
+      }
+    ]
+  },
+  "timing_summary_from_handoff": {
+    "main_bottleneck": "fusion-path sparse state blow-up during braid quantum trace evaluation",
+    "why_some_sectors_are_easy": {
+      "status": "inference-from-MTC-data-and-handoff-performance-summary",
+      "explanation": "Some fixed-label sectors are easy because their labels force small or sparse fusion spaces along the braid word, sometimes with unit-like or low-dimensional simple objects and many zero/nonadmissible intermediate channels. Those sectors keep the fusion-path state small, so the quantum trace is seconds-scale.",
+      "why_some_sectors_are_hard": "Hard sectors are those whose label assignments allow many admissible intermediate fusion paths through the long braid. The sparse state then grows during repeated F/R moves and trace contraction, producing multi-hour sectors.",
+      "caveat": "This is a structural explanation of the observed timing shape, not a recovered per-sector classification. The handoff did not preserve a table mapping sector IDs to easy/hard labels."
+    },
+    "completed_sector_timing_shape": {
+      "median": "seconds-scale for easy sectors",
+      "p90": "about 5 minutes in observed completed sample",
+      "hard_sectors": "multi-hour; observed sectors around 7.7 hours"
+    },
+    "interpretation": "Adding whole-sector workers alone is a poor strategy after easy sectors are exhausted because the remaining sectors are dominated by a long tail."
+  },
+  "validation_summary_from_handoff": {
+    "observed_linux_mac_discrepancies": 0,
+    "scope": "Partial overlaps and selected revalidations only.",
+    "caveat": "No claim that all sectors were independently cross-validated."
+  },
+  "decision_record": {
+    "why_bruteforce_was_abandoned_as_primary_strategy": [
+      "Only 1352 of 2744 canonical sectors completed before the computation stalled in the long tail.",
+      "Completed-sector timing already includes multi-hour sectors, with observed hard sectors around 7.7 hours.",
+      "The dominant cost appears to be fusion-path sparse state blow-up during braid quantum trace evaluation.",
+      "Whole-sector worker parallelism does not reduce the total work or address contraction width after easy sectors are exhausted.",
+      "The handoff lacks complete provenance and evaluator-code identity, so further large runs should first repair reproducibility and profiling."
+    ],
+    "recommended_next_research": [
+      "Curate raw-artifact manifests if raw sector chunks and validation reports can be recovered.",
+      "Identify or rebuild a repo-local fixed-label D(A4) braid-closure evaluator with stable source path, versioned inputs, and chunk-level output schema.",
+      "Study tensor-network contraction ordering and contraction-width models for this link/category pair.",
+      "Study braid/link simplification before further large runs.",
+      "Use microchunking for checkpointing and profiling, not as a total-work reduction by itself."
+    ]
+  },
+  "explicit_non_claims": [
+    "This capture does not establish a complete invariant computation.",
+    "This capture does not provide an exact certificate.",
+    "This capture is not theorem-level evidence.",
+    "This capture is not full Linux/Mac cross-validation.",
+    "This capture is not sufficient evidence for a Yasui exotic-pair conclusion.",
+    "This capture does not identify the prior-session fixed-label sector evaluator source code."
+  ]
+}
