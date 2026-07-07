@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "b6b32a8cffaec7e089be1cec305f9ffc66f3f6c9",
+  "current_root_cid": "ctlobj-sha256:a400062d861237d8a770659f5ac6daa6677e1e438aaf610a2e1be5d097b16694",
+  "generated_at": "2026-07-07T01:28:30Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-a1-su3-2-signal:motivated-by:cp2-2cpbar-character-twist-signal",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:a400062d861237d8a770659f5ac6daa6677e1e438aaf610a2e1be5d097b16694",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:5c4a6d487837fe3656ba5d8e1905fbd70f113acf172ea56ef5fb298508a5d1fa",
+    "transition": "ctlobj-sha256:dffe83e53c587509139cc5da32f7785e23b6e6b0b7c7963e9b6806e92c10759f"
+  },
+  "parent_root_cid": "ctlobj-sha256:56e7afac3919cecec274acc25031d9a3cb5e9249b4b975ead85eea622af78ea5",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-a1-su3-2-signal-motivated-by-cp2-split-signal.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-a1-su3-2-signal:motivated-by:cp2-2cpbar-character-twist-signal --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-a1-su3-2-signal-motivated-by-cp2-split-signal.json --manifest manifests/subject-edge-2026-07-07-yasui-a1-su3-2-signal-motivated-by-cp2-split-signal.json --created-at 2026-07-07T01:28:30Z --admitted-at 2026-07-07T01:28:30Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "dbb752c63247e937cfeaf25dd6f7442c4eda7c9a"
+}
