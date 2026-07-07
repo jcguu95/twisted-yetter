@@ -1,0 +1,84 @@
+{
+  "argv": [],
+  "elapsed_seconds": 0.47234179195947945,
+  "environment": {
+    "cpu_count": 8,
+    "hostname": "jin-m2",
+    "machine": "arm64",
+    "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+    "python_executable": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "python_version": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "exclusion_policy": "This compact trace omits SSH, Hetzner setup, worker timing, duplicated environment records, and other operational provenance. Those remain in raw experiment artifacts when needed for audit.",
+  "generator_script": "experiments/scripts/yasui_dic12_make_compact_twist_trace.py",
+  "input": {
+    "path": "experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-aggregate-v1.json",
+    "sha256": "8c0da46c7fba8bb2f331c24335e8a11d6a232c03200ec764e0e2e40796c23ced",
+    "size_bytes": 49934995
+  },
+  "mathematical_summary": {
+    "aggregate_twisted": {
+      "abs": "1728.0000000000034",
+      "display": "-1728.0000000000034+1.3841372492606752e-11j",
+      "field": "complex128-summed-in-python-float",
+      "imag": "1.3841372492606752e-11",
+      "real": "-1728.0000000000034"
+    },
+    "component_order_in_braid": [
+      "C",
+      "A",
+      "B"
+    ],
+    "normalized_twisted_by_global_dimension_sum_d_squared": {
+      "abs": "12.000000000000023",
+      "display": "-12.000000000000023+9.612064230976911e-14j",
+      "field": "complex128-summed-in-python-float",
+      "imag": "9.612064230976911e-14",
+      "real": "-12.000000000000023"
+    },
+    "ratio_twisted_to_untwisted": {
+      "abs": "1.0000000000000007",
+      "display": "-1.0000000000000007+6.072679337229828e-15j",
+      "field": "complex128-summed-in-python-float",
+      "imag": "6.072679337229828e-15",
+      "real": "-1.0000000000000007"
+    },
+    "row_count": 32768,
+    "simple_label_count": 32,
+    "standard_order_interpretation": [
+      "h",
+      "e1",
+      "e2"
+    ],
+    "twist_powers_in_braid_order": [
+      0,
+      1,
+      0
+    ],
+    "verdict": "twisted_matches_expected_nonbaseline_split_signal"
+  },
+  "output": {
+    "compression_estimates": {
+      "git_loose_object_zlib_bytes_estimate": 687930,
+      "gzip_bytes": 671057,
+      "plain_zlib_bytes": 687917
+    },
+    "format": "jsonl text; first line metadata, following lines compact sector rows",
+    "line_count": 32769,
+    "path": "experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-compact-trace-v1.jsonl",
+    "sha256": "4ec06401f9d77060dc7d25c7b7b7bedcb10b901281b3ab2d3ede230c1ddf3029",
+    "size_bytes": 4930481
+  },
+  "repo": {
+    "dirty": true,
+    "git_commit": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf",
+    "root": "/Users/jin/.codex/worktrees/410b/twisted-yetter",
+    "status_short_line_count": 36,
+    "status_short_sha256": "4b33b8bd7e11fcd8a1447b7d9506d852f6c3ba2cc57cdfe54ecbe69b151cc5a3"
+  },
+  "reproduce_command": "python3 experiments/scripts/yasui_dic12_make_compact_twist_trace.py",
+  "schema": "twisted-yetter.yasui-dic12-witness-character-compact-trace-manifest.v1",
+  "status": "pass",
+  "utc_finish": "2026-07-07T04:29:57.508067+00:00",
+  "utc_start": "2026-07-07T04:29:57.035716+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+  "current_root_cid": "ctlobj-sha256:cd6d1c4a002731a856c1b6ee9c36b057f0e34758019eeb748d261326da84a4a7",
+  "generated_at": "2026-07-07T04:45:00Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-yasui-a1-dic12-character-twist-signal",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:50dce79a5eb1726adb9acbedce80987ad3cb3f1ed08aea432b40cbcb384f55ca",
+    "current_root": "ctlobj-sha256:cd6d1c4a002731a856c1b6ee9c36b057f0e34758019eeb748d261326da84a4a7",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:3ef0272204ad79095b6b958debc4fa2e59d86f3af92aa05e71f50b1012a0a014"
+  },
+  "parent_root_cid": "ctlobj-sha256:58b00352530a2dc3928fb14dc36570721acdb2e476bee5256677dc0d8de80505",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-07-yasui-a1-dic12-character-twist-signal.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-07-yasui-a1-dic12-character-twist-signal --payload lab-notes/2026-07-07-yasui-a1-dic12-character-twist-signal.json --manifest manifests/lab-note-2026-07-07-yasui-a1-dic12-character-twist-signal.json --created-at 2026-07-07T04:45:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf"
+}

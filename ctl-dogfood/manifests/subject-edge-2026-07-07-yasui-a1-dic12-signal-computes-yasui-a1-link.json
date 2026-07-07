@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+  "current_root_cid": "ctlobj-sha256:091ed5f80e5411727a70329936135f9d0e289d8dc387cb015f968fc3340c5434",
+  "generated_at": "2026-07-07T04:46:10Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-a1-dic12-signal:computes:yasui-a1-link",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:091ed5f80e5411727a70329936135f9d0e289d8dc387cb015f968fc3340c5434",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:c4fd57320b91a748038c5eec0fe0fdf3fbf61ef2fa2f1f66a2bc80e0cc1ccfcb",
+    "transition": "ctlobj-sha256:8aca137b8d19d2f9ff7f3e72a2053513920ed46ca0f90350d7118dd573143b8c"
+  },
+  "parent_root_cid": "ctlobj-sha256:f90133259163d0880129a7fdcf007e21cc456c7090dd6012e0d70875c8dc6d2f",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-a1-dic12-signal-computes-yasui-a1-link.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-a1-dic12-signal:computes:yasui-a1-link --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-a1-dic12-signal-computes-yasui-a1-link.json --manifest manifests/subject-edge-2026-07-07-yasui-a1-dic12-signal-computes-yasui-a1-link.json --created-at 2026-07-07T04:46:10Z --admitted-at 2026-07-07T04:46:10Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf"
+}

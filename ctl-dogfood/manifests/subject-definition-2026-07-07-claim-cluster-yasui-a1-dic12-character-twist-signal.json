@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+  "current_root_cid": "ctlobj-sha256:f90133259163d0880129a7fdcf007e21cc456c7090dd6012e0d70875c8dc6d2f",
+  "generated_at": "2026-07-07T04:46:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:f90133259163d0880129a7fdcf007e21cc456c7090dd6012e0d70875c8dc6d2f",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
+    "transition": "ctlobj-sha256:4a86a9b1d883f22c615121a7d93e7977eda5d7d342d80d0c5119163b86a11f17"
+  },
+  "parent_root_cid": "ctlobj-sha256:cd6d1c4a002731a856c1b6ee9c36b057f0e34758019eeb748d261326da84a4a7",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-a1-dic12-character-twist-signal.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/claim-cluster-yasui-a1-dic12-character-twist-signal.json --manifest manifests/subject-definition-2026-07-07-claim-cluster-yasui-a1-dic12-character-twist-signal.json --created-at 2026-07-07T04:46:00Z --admitted-at 2026-07-07T04:46:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf"
+}
