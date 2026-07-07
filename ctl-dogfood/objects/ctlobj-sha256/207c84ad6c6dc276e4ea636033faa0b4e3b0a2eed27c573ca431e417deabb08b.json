@@ -1,0 +1,58 @@
+{
+  "created_at": "2026-07-06T23:56:20Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:category:d-dic12-omega0",
+  "parents": [],
+  "payload": {
+    "aliases": [
+      "d(dic12)-omega0",
+      "d(dic_12)-untwisted",
+      "ddic12",
+      "d-dic12-omega0"
+    ],
+    "current_view_hints": {
+      "connected_lab_notes": [
+        {
+          "logical_id": "claim:lab-note:2026-07-05-drinfeld-double-a4-two-mtc-data",
+          "role": "prior finite-group Drinfeld-double F/R-symbol data model"
+        },
+        {
+          "logical_id": "claim:lab-note:2026-07-05-drinfeld-double-a4-construction-account",
+          "role": "prior construction-account template for Drinfeld-center/Yetter-Drinfeld extraction"
+        },
+        {
+          "logical_id": "claim:lab-note:2026-07-06-yasui-figure3-a3-da4-distilled-partial-computation",
+          "role": "downstream motivation for more finite-group double category data"
+        }
+      ],
+      "why_we_first_encountered_it": "After the D(A4) F/R-symbol artifacts and Yasui DA4 computation work, Dic_12 was considered as another order-12 finite group whose Drinfeld double might provide a useful MTC input. Its sector count is larger than D(A4), but the computed fusion skeleton is multiplicity-free with maximum three-object F-space dimension 5, making the local gate size manageable.",
+      "working_artifacts": [
+        "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-fusion-skeleton-v1.json",
+        "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json",
+        "experiments/results/mtc-candidates/drinfeld-double-dic12-construction-certificate-v1.json",
+        "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-verification-run-v1.json"
+      ]
+    },
+    "display_name": "D(Dic_12) untwisted MTC",
+    "parent_subject_ids": [
+      "subject:twisted-yetter:category-family:drinfeld-double",
+      "subject:twisted-yetter:mathematical-object:dic12"
+    ],
+    "schema": "twisted-yetter/subject-definition/0",
+    "scope_note": "Concrete untwisted Drinfeld double MTC Rep(D(Dic_12)) = Z(Vec_Dic12), using the dicyclic group of order 12. This subject is for the category, not for one link evaluation run. The current working F/R-symbol artifacts identify the category by its Dic_12 group signature, 32 simple objects, qdim distribution 1^8 2^16 3^8, T-spectrum, S-matrix checks, and all-label F/R coherence verification.",
+    "status": "active",
+    "subject_id": "subject:twisted-yetter:category:d-dic12-omega0",
+    "subject_kind": "ty:category",
+    "upstream_review_hints": [
+      "This is a concrete MTC subject under the finite-group Drinfeld-double family.",
+      "The current F/R-symbol data remain working artifacts until separately admitted as a lab note or category-data claim."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-definition"
+}

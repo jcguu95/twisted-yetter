@@ -30,11 +30,19 @@
     "The lane is physically integrated into ctl-dogfood rather than a separate CTL store.",
     "The ty:ambiguous-hub kind is now represented by an active subject definition.",
     "The SU(2) Lie group and SU(2)_k MTC family have separate seed subjects.",
+    "Dic_12, D(Dic_12), and the working D(Dic_12) F/R-symbol data are separate seed subjects, linked by admitted subject edges.",
+    "The D(Dic_12) subject records why it entered the project and which prior DA4/Yasui lab notes motivated it.",
     "Edges in this seed set are admitted subject-edge records, not informal candidate prose.",
     "The index cites prior proposal logical ids and their current claim CIDs at index creation."
   ],
   "schema": "twisted-yetter/subject-index/0",
   "seed_edges": [
+    "subject-edge:ty:d-dic12-fr-data:defines:d-dic12-omega0",
+    "subject-edge:ty:d-dic12-omega0:depends-on:dic12",
+    "subject-edge:ty:d-dic12-omega0:depends-on:drinfeld-double-family",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:da4-construction-account",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:da4-two-mtc-data",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:yasui-a3-da4",
     "subject-edge:ty:su2-k:depends-on:su2",
     "subject-edge:ty:yasui-a1-cluster:computes:yasui-a1-link",
     "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su2-k",
@@ -45,12 +53,16 @@
     "subject-edge:ty:yasui-a1-note:about:cluster"
   ],
   "seed_subjects": [
+    "subject:twisted-yetter:category-family:drinfeld-double",
+    "subject:twisted-yetter:category:d-dic12-omega0",
     "subject:twisted-yetter:category-family:su2-k",
     "subject:twisted-yetter:category:d-a4-c3w1",
     "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
     "subject:twisted-yetter:hub:yasui",
     "subject:twisted-yetter:lie-group:su2",
     "subject:twisted-yetter:link:yasui-figure3-a1-r1-normalized",
+    "subject:twisted-yetter:mathematical-object:d-dic12-omega0-fr-symbols",
+    "subject:twisted-yetter:mathematical-object:dic12",
     "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
     "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation"
   ],

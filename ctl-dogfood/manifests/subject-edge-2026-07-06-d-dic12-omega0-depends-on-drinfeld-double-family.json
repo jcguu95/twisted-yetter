@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:68ce8240bc13b76b400aacc0da217fe3ac8804ecb3a1664a6f27227c6d3b0fdd",
+  "generated_at": "2026-07-06T23:56:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:d-dic12-omega0:depends-on:drinfeld-double-family",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:68ce8240bc13b76b400aacc0da217fe3ac8804ecb3a1664a6f27227c6d3b0fdd",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:579caa852a85d29e7e501c793ece980b5dff4d57ba2965d73259277dbd00be24",
+    "transition": "ctlobj-sha256:adb9d1e600c435fa31536d39479db2d702a54e62046a6b9a2f127a0dc89a5a48"
+  },
+  "parent_root_cid": "ctlobj-sha256:e1e6c6390576b25716fd5eb1a5cbe9088c2ca3569b299ef238d336516d96df45",
+  "payload_file": "ctl-dogfood/subject-layer/edges/d-dic12-omega0-depends-on-drinfeld-double-family.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:d-dic12-omega0:depends-on:drinfeld-double-family --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/d-dic12-omega0-depends-on-drinfeld-double-family.json --manifest manifests/subject-edge-2026-07-06-d-dic12-omega0-depends-on-drinfeld-double-family.json --created-at 2026-07-06T23:56:40Z --admitted-at 2026-07-06T23:56:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "667f0234d532e446a937ee8c84c9058d20a7306e"
+}

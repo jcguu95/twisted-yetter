@@ -1,0 +1,467 @@
+{
+  "categorical_model": {
+    "associator": "Strict vector-space associator; nontrivial F-symbols arise from the chosen simple-channel Hom bases.",
+    "braiding": "For homogeneous v_g, c(v_g tensor w)=g.w tensor v_g.",
+    "category": "Z(Vec_Dic12), equivalently Rep(D(Dic_12))",
+    "object_model": "Untwisted Yetter-Drinfeld modules over Dic_12."
+  },
+  "claim_boundary": {
+    "not_admitted_to_ctl": true,
+    "not_claimed": [
+      "Exact arithmetic proof",
+      "Twisted cocycle-family data",
+      "Downstream link or Kirby evaluator integration"
+    ]
+  },
+  "fr_extraction_recipe": {
+    "F": "Compare composites T_{x,c}^d (T_{a,b}^x tensor id_c) and T_{a,y}^d (id_a tensor T_{b,c}^y).",
+    "R": "Compare T_{b,a}^c after the Yetter-Drinfeld braiding against the Hom(a tensor b, c) basis.",
+    "coherence": "Pentagon and two hexagon scans are performed from the serialized F/R blocks.",
+    "hom_basis": "Grading-preserving G-intertwiner nullspaces in Hom(a tensor b, c), SVD-normalized and phase-fixed."
+  },
+  "group_data": {
+    "conjugacy_classes": [
+      {
+        "centralizer": [
+          "1",
+          "a",
+          "a^2",
+          "a^3",
+          "a^4",
+          "a^5",
+          "x",
+          "ax",
+          "a^2x",
+          "a^3x",
+          "a^4x",
+          "a^5x"
+        ],
+        "centralizer_size": 12,
+        "elements": [
+          "1"
+        ],
+        "label": "1A",
+        "representative": "1"
+      },
+      {
+        "centralizer": [
+          "1",
+          "a",
+          "a^2",
+          "a^3",
+          "a^4",
+          "a^5"
+        ],
+        "centralizer_size": 6,
+        "elements": [
+          "a",
+          "a^5"
+        ],
+        "label": "aA",
+        "representative": "a"
+      },
+      {
+        "centralizer": [
+          "1",
+          "a",
+          "a^2",
+          "a^3",
+          "a^4",
+          "a^5"
+        ],
+        "centralizer_size": 6,
+        "elements": [
+          "a^2",
+          "a^4"
+        ],
+        "label": "a2A",
+        "representative": "a^2"
+      },
+      {
+        "centralizer": [
+          "1",
+          "a",
+          "a^2",
+          "a^3",
+          "a^4",
+          "a^5",
+          "x",
+          "ax",
+          "a^2x",
+          "a^3x",
+          "a^4x",
+          "a^5x"
+        ],
+        "centralizer_size": 12,
+        "elements": [
+          "a^3"
+        ],
+        "label": "a3A",
+        "representative": "a^3"
+      },
+      {
+        "centralizer": [
+          "1",
+          "a^3",
+          "x",
+          "a^3x"
+        ],
+        "centralizer_size": 4,
+        "elements": [
+          "x",
+          "a^2x",
+          "a^4x"
+        ],
+        "label": "xA",
+        "representative": "x"
+      },
+      {
+        "centralizer": [
+          "1",
+          "a^3",
+          "ax",
+          "a^4x"
+        ],
+        "centralizer_size": 4,
+        "elements": [
+          "ax",
+          "a^3x",
+          "a^5x"
+        ],
+        "label": "axA",
+        "representative": "ax"
+      }
+    ],
+    "element_encoding": "a^i x^j encoded as [i,j] with i mod 6 and j in {0,1}",
+    "elements": [
+      {
+        "encoded": [
+          0,
+          0
+        ],
+        "label": "1"
+      },
+      {
+        "encoded": [
+          1,
+          0
+        ],
+        "label": "a"
+      },
+      {
+        "encoded": [
+          2,
+          0
+        ],
+        "label": "a^2"
+      },
+      {
+        "encoded": [
+          3,
+          0
+        ],
+        "label": "a^3"
+      },
+      {
+        "encoded": [
+          4,
+          0
+        ],
+        "label": "a^4"
+      },
+      {
+        "encoded": [
+          5,
+          0
+        ],
+        "label": "a^5"
+      },
+      {
+        "encoded": [
+          0,
+          1
+        ],
+        "label": "x"
+      },
+      {
+        "encoded": [
+          1,
+          1
+        ],
+        "label": "ax"
+      },
+      {
+        "encoded": [
+          2,
+          1
+        ],
+        "label": "a^2x"
+      },
+      {
+        "encoded": [
+          3,
+          1
+        ],
+        "label": "a^3x"
+      },
+      {
+        "encoded": [
+          4,
+          1
+        ],
+        "label": "a^4x"
+      },
+      {
+        "encoded": [
+          5,
+          1
+        ],
+        "label": "a^5x"
+      }
+    ],
+    "name": "Dic_12",
+    "order": 12,
+    "presentation": "<a,x | a^6=1, x^2=a^3, x a x^-1=a^-1>"
+  },
+  "identity_certificate": {
+    "claimed_category": "Rep(D(Dic_12)) = Z(Vec_Dic12)",
+    "double_simple_object_signature": {
+      "centralizer_rep_dimensions_by_class": {
+        "1A": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "a2A": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "a3A": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "aA": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "axA": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "xA": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "classification": "simple objects are pairs (conjugacy class C, irreducible representation rho of Z_G(r_C))",
+      "dimension_formula": "qdim(C,rho)=|C|*dim(rho)",
+      "expected_global_dimension_squared": 144,
+      "global_dimension_squared": 144,
+      "labels_by_class": {
+        "1A": [
+          "1A:lin0",
+          "1A:lin1",
+          "1A:lin2",
+          "1A:lin3",
+          "1A:rho1",
+          "1A:rho2"
+        ],
+        "a2A": [
+          "a2A:chi0",
+          "a2A:chi1",
+          "a2A:chi2",
+          "a2A:chi3",
+          "a2A:chi4",
+          "a2A:chi5"
+        ],
+        "a3A": [
+          "a3A:lin0",
+          "a3A:lin1",
+          "a3A:lin2",
+          "a3A:lin3",
+          "a3A:rho1",
+          "a3A:rho2"
+        ],
+        "aA": [
+          "aA:chi0",
+          "aA:chi1",
+          "aA:chi2",
+          "aA:chi3",
+          "aA:chi4",
+          "aA:chi5"
+        ],
+        "axA": [
+          "axA:eta0",
+          "axA:eta1",
+          "axA:eta2",
+          "axA:eta3"
+        ],
+        "xA": [
+          "xA:eta0",
+          "xA:eta1",
+          "xA:eta2",
+          "xA:eta3"
+        ]
+      },
+      "quantum_dimension_distribution": {
+        "1": 8,
+        "2": 16,
+        "3": 8
+      },
+      "quantum_dimensions_by_class": {
+        "1A": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "a2A": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "a3A": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "aA": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "axA": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "xA": [
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "simple_count": 32
+    },
+    "group_signature": {
+      "centralizer_orders": [
+        12,
+        6,
+        6,
+        12,
+        4,
+        4
+      ],
+      "centralizer_types": {
+        "1A": "Dic_12",
+        "a2A": "C6",
+        "a3A": "Dic_12",
+        "aA": "C6",
+        "axA": "C4",
+        "xA": "C4"
+      },
+      "conjugacy_class_labels": [
+        "1A",
+        "aA",
+        "a2A",
+        "a3A",
+        "xA",
+        "axA"
+      ],
+      "conjugacy_class_representatives": [
+        "1",
+        "a",
+        "a^2",
+        "a^3",
+        "x",
+        "ax"
+      ],
+      "conjugacy_class_sizes": [
+        1,
+        2,
+        2,
+        1,
+        3,
+        3
+      ],
+      "convention": "dicyclic group of order 12",
+      "distinguishes_from_A4": "Dic_12 has six conjugacy classes with sizes [1,2,2,1,3,3]; A4 has four conjugacy classes with sizes [1,3,4,4].",
+      "element_encoding": "a^i x^j encoded as [i,j] with i mod 6 and j in {0,1}",
+      "name": "Dic_12",
+      "order": 12,
+      "presentation": "<a,x | a^6=1, x^2=a^3, x a x^-1=a^-1>"
+    },
+    "identity_status": "WORKING_NUMERIC_IDENTITY_CERTIFICATE",
+    "modular_identity_cross_checks": {
+      "balancing_ribbon_scalars_checked": true,
+      "object_s_formula": "S_ab = |G|^-1 sum_{g in C_a, h in C_b, gh=hg} chi_a(t_g^-1 h t_g) chi_b(t_h^-1 g t_h)",
+      "s_from_r_and_s_from_twist_fusion_are_checked_against_object_s": true
+    },
+    "twist_signature": {
+      "t_spectrum": {
+        "1:0": 14,
+        "2:1": 6,
+        "3:1": 3,
+        "3:2": 3,
+        "4:1": 2,
+        "4:3": 2,
+        "6:1": 1,
+        "6:5": 1
+      },
+      "twist_formula": "theta_(C,rho)=rho(r_C)/dim(rho) for untwisted D(G)"
+    }
+  },
+  "purpose": "Record the construction route for working numeric F/R-symbol artifacts before any CTL admission.",
+  "schema": "twisted-yetter.mtc.drinfeld-double-dic12-construction-certificate.v1",
+  "simple_object_recipe": {
+    "classification": "Pairs (conjugacy class C, irreducible representation rho of Z_G(r_C)).",
+    "global_dimension_squared": 144,
+    "simple_count": 32
+  },
+  "status": "WORKING_NUMERIC_CONSTRUCTION_ACCOUNT",
+  "title": "Construction account for untwisted Drinfeld double D(Dic_12) numeric F/R data",
+  "working_artifacts": [
+    {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-fusion-skeleton-v1.json",
+      "role": "fusion_skeleton",
+      "schema": "twisted-yetter.mtc.fusion-skeleton.drinfeld-double-dic12.v1"
+    },
+    {
+      "path": "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json",
+      "role": "fr_data",
+      "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-dic12.v1"
+    }
+  ]
+}

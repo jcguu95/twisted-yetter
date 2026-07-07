@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:45e2ef82bf1d60816ff827f85e5d03e5c55ad430aed2ad7e896efd99a5907812",
+  "generated_at": "2026-07-06T23:57:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:d-dic12-omega0:motivated-by:da4-construction-account",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:45e2ef82bf1d60816ff827f85e5d03e5c55ad430aed2ad7e896efd99a5907812",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
+    "transition": "ctlobj-sha256:30d8bfdc311e4468f40d96bc92e2efd51feaf1c01efc8d2b9a5fe9db6d2c37fa"
+  },
+  "parent_root_cid": "ctlobj-sha256:73cbe9163d81eaa0ea52fab4a0488cb879764fe4933e94be60e7598e43eb245f",
+  "payload_file": "ctl-dogfood/subject-layer/edges/d-dic12-omega0-motivated-by-da4-construction-account.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:d-dic12-omega0:motivated-by:da4-construction-account --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/d-dic12-omega0-motivated-by-da4-construction-account.json --manifest manifests/subject-edge-2026-07-06-d-dic12-omega0-motivated-by-da4-construction-account.json --created-at 2026-07-06T23:57:20Z --admitted-at 2026-07-06T23:57:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "667f0234d532e446a937ee8c84c9058d20a7306e"
+}

@@ -1,0 +1,451 @@
+{
+  "argv": [
+    "python",
+    "experiments/scripts/verify_drinfeld_double_dic12_mtc_data.py"
+  ],
+  "checks": {
+    "balancing_ribbon_scalars.max_error": true,
+    "balancing_ribbon_scalars.recorded_matches_recomputed": true,
+    "f_blocks_match_fusion_tree_bases": true,
+    "f_space_dimension_distribution": true,
+    "fr_reconstruction_errors": true,
+    "fusion_complete_grid": true,
+    "fusion_integral": true,
+    "fusion_nonnegative": true,
+    "fusion_unit": true,
+    "global_dimension_squared_144": true,
+    "group_order_12": true,
+    "identity.claimed_category": true,
+    "identity.group_signature": true,
+    "identity.modular_cross_checks_present": true,
+    "identity.simple_signature": true,
+    "identity.twist_signature": true,
+    "imported_fr_checks_all_true": true,
+    "input_under_repo": true,
+    "left_hexagon.max_error": true,
+    "left_hexagon.recorded_matches_recomputed_count": true,
+    "left_hexagon.recorded_matches_recomputed_error": true,
+    "max_f_block_size_5": true,
+    "max_fusion_multiplicity_1": true,
+    "max_r_block_size_1": true,
+    "max_three_object_fusion_space_5": true,
+    "metadata.argv": true,
+    "metadata.elapsed_seconds": true,
+    "metadata.generator_script": true,
+    "metadata.repo": true,
+    "metadata.reproduce_command": true,
+    "metadata.tool_versions": true,
+    "metadata.utc_finish": true,
+    "metadata.utc_start": true,
+    "mtc_id": true,
+    "nonzero_fusion_triples_1856": true,
+    "pair_hom_dimensions_match_fusion": true,
+    "path_hygiene": true,
+    "pentagon.max_error": true,
+    "pentagon.recorded_matches_recomputed_count": true,
+    "pentagon.recorded_matches_recomputed_error": true,
+    "presentation_convention": true,
+    "r_blocks_match_fusion": true,
+    "recomputed_coherence_status": true,
+    "recorded_coherence_status": true,
+    "right_hexagon.max_error": true,
+    "right_hexagon.recorded_matches_recomputed_count": true,
+    "right_hexagon.recorded_matches_recomputed_error": true,
+    "s_from_r_matches_object_s.max_error": true,
+    "s_from_r_matches_object_s.recorded_matches_recomputed": true,
+    "s_from_twist_fusion_matches_object_s.max_error": true,
+    "s_from_twist_fusion_matches_object_s.recorded_matches_recomputed": true,
+    "s_matrix_unit_row": true,
+    "schema": true,
+    "simple_count_32": true,
+    "simple_objects_match_labels": true,
+    "status_working_numeric": true,
+    "t_spectrum": true,
+    "twists_nonzero": true
+  },
+  "elapsed_seconds": 99.388676,
+  "failures": [],
+  "generator_script": "experiments/scripts/verify_drinfeld_double_dic12_mtc_data.py",
+  "input_artifact": {
+    "mtc_id": "omega0_untwisted_D_Dic12",
+    "path": "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json",
+    "schema": "twisted-yetter.mtc.fr-data.drinfeld-double-dic12.v1",
+    "sha256": "fab12bc3935d79861ec02bddfa3480e46e922a104ee6ab3050cba440b17fa0da",
+    "status": "WORKING_NUMERIC"
+  },
+  "recomputed_coherence_certificate": {
+    "kind": "independently re-read serialized F/R all-active-label coherence scan",
+    "label_tuple_counts": {
+      "left_hexagon_all_label_tuples": 1048576,
+      "pentagon_all_label_tuples": 33554432,
+      "right_hexagon_all_label_tuples": 1048576
+    },
+    "scans": {
+      "left_hexagon": {
+        "active_tuple_count": 86016,
+        "max_error": 8.775880794401763e-15,
+        "nonzero_fusion_spaces": 86016,
+        "status": "pass",
+        "worst_example": {
+          "a": "xA:eta1",
+          "b": "axA:eta3",
+          "c": "xA:eta2",
+          "d": "xA:eta0",
+          "error": 8.775880794401763e-15
+        },
+        "worst_sample": [
+          "xA:eta1",
+          "axA:eta3",
+          "xA:eta2",
+          "xA:eta0"
+        ]
+      },
+      "pentagon": {
+        "active_tuple_count": 3384320,
+        "max_error": 1.5106589756448845e-14,
+        "nonzero_fusion_spaces": 3384320,
+        "status": "pass",
+        "worst_example": {
+          "a": "xA:eta3",
+          "b": "xA:eta0",
+          "c": "a2A:chi0",
+          "d": "axA:eta1",
+          "e": "xA:eta2",
+          "error": 1.5106589756448845e-14
+        },
+        "worst_sample": [
+          "xA:eta3",
+          "xA:eta0",
+          "a2A:chi0",
+          "axA:eta1",
+          "xA:eta2"
+        ]
+      },
+      "right_hexagon": {
+        "active_tuple_count": 86016,
+        "max_error": 9.051435550370019e-15,
+        "nonzero_fusion_spaces": 86016,
+        "status": "pass",
+        "worst_example": {
+          "a": "xA:eta1",
+          "b": "xA:eta2",
+          "c": "axA:eta3",
+          "d": "xA:eta0",
+          "error": 9.051435550370019e-15
+        },
+        "worst_sample": [
+          "xA:eta1",
+          "xA:eta2",
+          "axA:eta3",
+          "xA:eta0"
+        ]
+      }
+    },
+    "status": "pass",
+    "tolerance": 1e-07
+  },
+  "repo": {
+    "dirty": true,
+    "git_commit": "667f0234d532e446a937ee8c84c9058d20a7306e",
+    "root": "/Users/jin/.codex/worktrees/3ccc/twisted-yetter",
+    "status_short": "M ctl-dogfood/refs/main.json\n M ctl-dogfood/subject-layer/index/2026-07-06-subject-layer-lane-v0.json\n?? ctl-dogfood/manifests/subject-definition-2026-07-06-category-d-dic12-omega0.json\n?? ctl-dogfood/manifests/subject-definition-2026-07-06-category-family-drinfeld-double.json\n?? ctl-dogfood/manifests/subject-definition-2026-07-06-mathematical-object-d-dic12-omega0-fr-symbols.json\n?? ctl-dogfood/manifests/subject-definition-2026-07-06-mathematical-object-dic12.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-fr-data-defines-d-dic12-omega0.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-omega0-depends-on-dic12.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-omega0-depends-on-drinfeld-double-family.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-omega0-motivated-by-da4-construction-account.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-omega0-motivated-by-da4-two-mtc-data.json\n?? ctl-dogfood/manifests/subject-edge-2026-07-06-d-dic12-omega0-motivated-by-yasui-a3-da4.json\n?? ctl-dogfood/manifests/subject-index-2026-07-06-subject-layer-lane-v0-dic12-update.json\n?? ctl-dogfood/objects/ctlobj-sha256/009e4f9701ae74797b2342a2cd172eff19945504fd01b3d6f16186de7274bffd.json\n?? ctl-dogfood/objects/ctlobj-sha256/015872de37b52a26d68302d4c54fe469ce68724cc89ed2d5797b3c2cbd396f15.json\n?? ctl-dogfood/objects/ctlobj-sha256/0bf2442db3b1dd89af2e8335f9b79ccdc948dd6d0fff87d13cfe4491278ac547.json\n?? ctl-dogfood/objects/ctlobj-sha256/11ec5825e6c85f0798adad010dd4ee5744b719250d9cdf418cb7403221236da9.json\n?? ctl-dogfood/objects/ctlobj-sha256/1d89b700a622472a7d6e955d0f3171b4fa0a61f9bb6515c68d507a681e4a11b0.json\n?? ctl-dogfood/objects/ctlobj-sha256/207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b.json\n?? ctl-dogfood/objects/ctlobj-sha256/2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc.json\n?? ctl-dogfood/objects/ctlobj-sha256/30d8bfdc311e4468f40d96bc92e2efd51feaf1c01efc8d2b9a5fe9db6d2c37fa.json\n?? ctl-dogfood/objects/ctlobj-sha256/44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005.json\n?? ctl-dogfood/objects/ctlobj-sha256/45e2ef82bf1d60816ff827f85e5d03e5c55ad430aed2ad7e896efd99a5907812.json\n?? ctl-dogfood/objects/ctlobj-sha256/4967730795eceec4cba83efb262fb617efbd820181b3fc8eddd0796c5713bc7d.json\n?? ctl-dogfood/objects/ctlobj-sha256/4a26c516c39c7e65ed86c06cac623b344c06903ee0241b0aef6877676b02aa14.json\n?? ctl-dogfood/objects/ctlobj-sha256/579caa852a85d29e7e501c793ece980b5dff4d57ba2965d73259277dbd00be24.json\n?? ctl-dogfood/objects/ctlobj-sha256/601fd109c9a6a81aaf8790b2c7df70f77632b6d075aca91ba7d61dc1e6b54138.json\n?? ctl-dogfood/objects/ctlobj-sha256/662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea.json\n?? ctl-dogfood/objects/ctlobj-sha256/68ce8240bc13b76b400aacc0da217fe3ac8804ecb3a1664a6f27227c6d3b0fdd.json\n?? ctl-dogfood/objects/ctlobj-sha256/73cbe9163d81eaa0ea52fab4a0488cb879764fe4933e94be60e7598e43eb245f.json\n?? ctl-dogfood/objects/ctlobj-sha256/76db13da3fb90cf5c5e615a5ec2b05be2d9f5323dad8855a0ae1ce5ed083345c.json\n?? ctl-dogfood/objects/ctlobj-sha256/7cc94797a9db65ebcfb588a0e3292891b4f2fac074f553a2d40a33fa18a57835.json\n?? ctl-dogfood/objects/ctlobj-sha256/986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78.json\n?? ctl-dogfood/objects/ctlobj-sha256/a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3.json\n?? ctl-dogfood/objects/ctlobj-sha256/adb9d1e600c435fa31536d39479db2d702a54e62046a6b9a2f127a0dc89a5a48.json\n?? ctl-dogfood/objects/ctlobj-sha256/b3d997640b28b51793059271d25ed3101c302acd0816569f31ae77a0f4c5f9f5.json\n?? ctl-dogfood/objects/ctlobj-sha256/d553c0743d5a16eec5d7a58e1637fc55f34a7b9d5b8cebbb49d7855786db4c3f.json\n?? ctl-dogfood/objects/ctlobj-sha256/d5f5c8ad81b2b2b1318ff8c6984ba49bf3b704538dd73f222c74482116027087.json\n?? ctl-dogfood/objects/ctlobj-sha256/d70c43a2f4eea2bd6382583e8bf6d91094f325bea302759af03f00144bc4eb2b.json\n?? ctl-dogfood/objects/ctlobj-sha256/d8ba1daa68c255dadeb0047a2340c7b46f0f293513426ba66f9896c13f7b0cb2.json\n?? ctl-dogfood/objects/ctlobj-sha256/e10a49467cd51b21ed49315651b67ba8d47b959878303a5964f32315d8759cad.json\n?? ctl-dogfood/objects/ctlobj-sha256/e1e6c6390576b25716fd5eb1a5cbe9088c2ca3569b299ef238d336516d96df45.json\n?? ctl-dogfood/objects/ctlobj-sha256/ebe92f7ca7ef7cb028b81be71734ca55ac9dc2b500dfb7b8badcec069133b6ad.json\n?? ctl-dogfood/objects/ctlobj-sha256/efc407392226b1b89eaacc7e7e642c803cf1ffdf8d64363189f07794e636b964.json\n?? ctl-dogfood/objects/ctlobj-sha256/f10edf42afb55189a3e23d3ed8a92784f6b53d776508657d9ca7d35b7ecb2022.json\n?? ctl-dogfood/objects/ctlobj-sha256/f247bd7bc4847902cfa4132945ca7e697d27a9c5541ef45d83e33a10c6520fe0.json\n?? ctl-dogfood/subject-layer/definitions/category-d-dic12-omega0.json\n?? ctl-dogfood/subject-layer/definitions/category-family-drinfeld-double.json\n?? ctl-dogfood/subject-layer/definitions/mathematical-object-d-dic12-omega0-fr-symbols.json\n?? ctl-dogfood/subject-layer/definitions/mathematical-object-dic12.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-fr-data-defines-d-dic12-omega0.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-omega0-depends-on-dic12.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-omega0-depends-on-drinfeld-double-family.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-omega0-motivated-by-da4-construction-account.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-omega0-motivated-by-da4-two-mtc-data.json\n?? ctl-dogfood/subject-layer/edges/d-dic12-omega0-motivated-by-yasui-a3-da4.json\n?? experiments/results/mtc-candidates/drinfeld-double-dic12-construction-certificate-v1.json\n?? experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-fusion-skeleton-v1.json\n?? experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json\n?? experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-verification-run-v1.json\n?? experiments/scripts/build_drinfeld_double_dic12_mtc_data.py\n?? experiments/scripts/verify_drinfeld_double_dic12_mtc_data.py"
+  },
+  "reproduce_command": "python experiments/scripts/verify_drinfeld_double_dic12_mtc_data.py",
+  "schema": "twisted-yetter.drinfeld-double-dic12.verification-run.v1",
+  "status": "pass",
+  "summary": {
+    "checks_imported_from_final_fr_artifact": {
+      "all_f_blocks_reconstruct": true,
+      "all_r_blocks_reconstruct": true,
+      "balancing_ribbon_scalars": true,
+      "pair_hom_dimensions_match_fusion": true,
+      "s_from_r_matches_object_s": true,
+      "s_from_twist_fusion_matches_object_s": true,
+      "selected_left_hexagons": true,
+      "selected_pentagons": true,
+      "selected_right_hexagons": true,
+      "t_twists_nonzero": true
+    },
+    "coherence_active_tuple_counts": {
+      "left_hexagon": 86016,
+      "pentagon": 3384320,
+      "right_hexagon": 86016
+    },
+    "coherence_max_errors": {
+      "left_hexagon": 8.775880794401763e-15,
+      "pentagon": 1.5106589756448845e-14,
+      "right_hexagon": 9.051435550370019e-15
+    },
+    "global_dimension_squared": 144,
+    "identity_certificate": {
+      "claimed_category": "Rep(D(Dic_12)) = Z(Vec_Dic12)",
+      "double_simple_object_signature": {
+        "centralizer_rep_dimensions_by_class": {
+          "1A": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "a2A": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "a3A": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "aA": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "axA": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "xA": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "classification": "simple objects are pairs (conjugacy class C, irreducible representation rho of Z_G(r_C))",
+        "dimension_formula": "qdim(C,rho)=|C|*dim(rho)",
+        "expected_global_dimension_squared": 144,
+        "global_dimension_squared": 144,
+        "labels_by_class": {
+          "1A": [
+            "1A:lin0",
+            "1A:lin1",
+            "1A:lin2",
+            "1A:lin3",
+            "1A:rho1",
+            "1A:rho2"
+          ],
+          "a2A": [
+            "a2A:chi0",
+            "a2A:chi1",
+            "a2A:chi2",
+            "a2A:chi3",
+            "a2A:chi4",
+            "a2A:chi5"
+          ],
+          "a3A": [
+            "a3A:lin0",
+            "a3A:lin1",
+            "a3A:lin2",
+            "a3A:lin3",
+            "a3A:rho1",
+            "a3A:rho2"
+          ],
+          "aA": [
+            "aA:chi0",
+            "aA:chi1",
+            "aA:chi2",
+            "aA:chi3",
+            "aA:chi4",
+            "aA:chi5"
+          ],
+          "axA": [
+            "axA:eta0",
+            "axA:eta1",
+            "axA:eta2",
+            "axA:eta3"
+          ],
+          "xA": [
+            "xA:eta0",
+            "xA:eta1",
+            "xA:eta2",
+            "xA:eta3"
+          ]
+        },
+        "quantum_dimension_distribution": {
+          "1": 8,
+          "2": 16,
+          "3": 8
+        },
+        "quantum_dimensions_by_class": {
+          "1A": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "a2A": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "a3A": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "aA": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "axA": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "xA": [
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        "simple_count": 32
+      },
+      "group_signature": {
+        "centralizer_orders": [
+          12,
+          6,
+          6,
+          12,
+          4,
+          4
+        ],
+        "centralizer_types": {
+          "1A": "Dic_12",
+          "a2A": "C6",
+          "a3A": "Dic_12",
+          "aA": "C6",
+          "axA": "C4",
+          "xA": "C4"
+        },
+        "conjugacy_class_labels": [
+          "1A",
+          "aA",
+          "a2A",
+          "a3A",
+          "xA",
+          "axA"
+        ],
+        "conjugacy_class_representatives": [
+          "1",
+          "a",
+          "a^2",
+          "a^3",
+          "x",
+          "ax"
+        ],
+        "conjugacy_class_sizes": [
+          1,
+          2,
+          2,
+          1,
+          3,
+          3
+        ],
+        "convention": "dicyclic group of order 12",
+        "distinguishes_from_A4": "Dic_12 has six conjugacy classes with sizes [1,2,2,1,3,3]; A4 has four conjugacy classes with sizes [1,3,4,4].",
+        "element_encoding": "a^i x^j encoded as [i,j] with i mod 6 and j in {0,1}",
+        "name": "Dic_12",
+        "order": 12,
+        "presentation": "<a,x | a^6=1, x^2=a^3, x a x^-1=a^-1>"
+      },
+      "identity_status": "WORKING_NUMERIC_IDENTITY_CERTIFICATE",
+      "modular_identity_cross_checks": {
+        "balancing_ribbon_scalars_checked": true,
+        "object_s_formula": "S_ab = |G|^-1 sum_{g in C_a, h in C_b, gh=hg} chi_a(t_g^-1 h t_g) chi_b(t_h^-1 g t_h)",
+        "s_from_r_and_s_from_twist_fusion_are_checked_against_object_s": true
+      },
+      "twist_signature": {
+        "t_spectrum": {
+          "1:0": 14,
+          "2:1": 6,
+          "3:1": 3,
+          "3:2": 3,
+          "4:1": 2,
+          "4:3": 2,
+          "6:1": 1,
+          "6:5": 1
+        },
+        "twist_formula": "theta_(C,rho)=rho(r_C)/dim(rho) for untwisted D(G)"
+      }
+    },
+    "max_errors": {
+      "f_reconstruction": 6.7595685323343765e-15,
+      "r_reconstruction": 1.7163566473124597e-15
+    },
+    "nonzero_f_blocks": 86016,
+    "nonzero_r_blocks": 1856,
+    "simple_count": 32,
+    "supplementary_equation_checks": {
+      "balancing_ribbon_scalars": {
+        "formula": "R_ab^c R_ba^c = theta_c / (theta_a theta_b) in the serialized ba_to_ab convention",
+        "max_error": 3.925231146709438e-15,
+        "worst_example": {
+          "a": "a2A:chi4",
+          "b": "a2A:chi4",
+          "c": "1A:lin0",
+          "error": 3.925231146709438e-15
+        }
+      },
+      "s_from_r_matches_object_s": {
+        "formula": "S_ab = |G|^-1 sum_c N_ab^c R_ab^c R_ba^c dim(c), compared with the Drinfeld-double character formula",
+        "max_error": 8.370483062962207e-16
+      },
+      "s_from_twist_fusion_matches_object_s": {
+        "formula": "S_ab = |G|^-1 sum_c N_ab^c theta_c/(theta_a theta_b) dim(c), compared with the Drinfeld-double character formula",
+        "max_error": 9.352443501189082e-16
+      },
+      "s_matrix_unit_row": {
+        "formula": "S_0a = dim(a)/|G|",
+        "max_error": 0.0
+      }
+    },
+    "t_spectrum": {
+      "1:0": 14,
+      "2:1": 6,
+      "3:1": 3,
+      "3:2": 3,
+      "4:1": 2,
+      "4:3": 2,
+      "6:1": 1,
+      "6:5": 1
+    }
+  },
+  "tolerances": {
+    "coherence": 1e-07,
+    "fr_reconstruction": 1e-10
+  },
+  "tool_versions": {
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.1.8 ]"
+  },
+  "utc_finish": "2026-07-07T00:01:53.394970+00:00",
+  "utc_start": "2026-07-07T00:00:14.005198+00:00"
+}
