@@ -1,0 +1,184 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-07-yasui-a1-dic12-character-twist-signal",
+  "title": "Yasui a=1 D(Dic_12) witness character-twist signal and compact sector trace",
+  "created_at": "2026-07-07T04:45:00Z",
+  "created_by": "actor:codex",
+  "status": "ESTABLISHED_NUMERIC",
+  "mathematical_status": "ESTABLISHED_NUMERIC_WITH_POINTED_CHARACTER_INTERPRETATION",
+  "scope": {
+    "question": "Record the completed D(Dic_12) untwisted Yasui Figure 3 a=1 singleton sweep, the witness character-twist transform predicted by the CP2#2CPbar split scan, and the compact per-sector trace retained for future inspection.",
+    "claim_boundary": "This note admits numeric floating-point artifacts and a compact sector trace. It does not claim an exotic separation: Yasui a=1 is diffeomorphic to CP2#2CPbar. It also does not claim exact arithmetic, theorem-level proof of arbitrary character twists, or non-pointed F/R sensitivity beyond this computation.",
+    "normative_source_policy": "Repo-local JSON/JSONL artifacts listed here are the normative machine-readable record. Raw singleton chunks, remote pulls, Hetzner setup metadata, SSH details, worker timing logs, and transient chat are intentionally excluded from the admitted research state.",
+    "path_policy": "All artifact paths below are repo-relative."
+  },
+  "motivation": {
+    "why_dic12": "The ordinary CP2#2CPbar split character scan had identified untwisted D(Dic_12), equivalently the order-12 dicyclic group Dic_3/Q12 convention used in earlier artifacts, as a natural finite-group double with a nontrivial pointed witness. The witness invertible is g=(a^3,chi), where chi(a)=-1 and chi(x)=i, with theta(g)=-1.",
+    "why_yasui_a1": "Yasui Figure 3 a=1 is known here as diffeomorphic to CP2#2CPbar, so it is a bookkeeping and convention test rather than an exotic test. If the standard split character twist says the witness should change the value by -1, the nonseparated Yasui presentation should reproduce the same ratio when the twist is translated to the correct component.",
+    "why_this_is_good": "The result checks several moving parts at once: the completed 32768-sector D(Dic_12) singleton evaluation, the component order convention [C,A,B]=[h,e1,e2], the monodromy character formula for the witness invertible, and the ability to reweight existing fixed-sector amplitudes without rerunning the expensive F/R evaluator."
+  },
+  "core_numeric_results": [
+    {
+      "id": "yasui-a1-dic12-omega0-untwisted-baseline",
+      "status": "ESTABLISHED_NUMERIC",
+      "case": {
+        "link": "yasui-figure3-a1-r1-normalized",
+        "category": "omega0 untwisted D(Dic_12)",
+        "simple_label_count": 32,
+        "sector_count": 32768,
+        "component_order_in_braid": [
+          "C",
+          "A",
+          "B"
+        ],
+        "standard_order_interpretation": [
+          "h",
+          "e1",
+          "e2"
+        ]
+      },
+      "result": {
+        "raw_aggregate": {
+          "real": "1728.0000000000011",
+          "imag": "-1.9895196601282805e-12"
+        },
+        "normalized_by_global_dimension_sum_d_squared_144": {
+          "real": "12.000000000000007",
+          "imag": "-1.3816108750890837e-14"
+        },
+        "standard_split_unlink_check": {
+          "presentation": "ordinary split unlink with framings (+1,-1,-1)",
+          "status": "pass",
+          "interpretation": "Yasui a=1 is diffeomorphic to CP2#2CPbar, so matching the split presentation is a sanity win."
+        }
+      }
+    },
+    {
+      "id": "yasui-a1-dic12-witness-g-component-a-character-twist",
+      "status": "ESTABLISHED_NUMERIC",
+      "case": {
+        "witness_invertible": {
+          "label": "g=(a^3, chi)",
+          "chi": "chi(a)=-1, chi(x)=i",
+          "twist": "-1",
+          "monodromy_formula": "M_g(C,rho)=chi(class representative)*rho(a^3)"
+        },
+        "twist_power_by_component_name": {
+          "A": 1,
+          "B": 0,
+          "C": 0
+        },
+        "twist_powers_in_braid_order": [
+          0,
+          1,
+          0
+        ],
+        "translation": "Component A in the Yasui braid is standard e1 under [C,A,B]=[h,e1,e2]."
+      },
+      "result": {
+        "raw_aggregate": {
+          "real": "-1728.0000000000034",
+          "imag": "1.3841372492606752e-11"
+        },
+        "normalized_by_global_dimension_sum_d_squared_144": {
+          "real": "-12.000000000000023",
+          "imag": "9.612064230976911e-14"
+        },
+        "ratio_to_untwisted": {
+          "real": "-1.0000000000000007",
+          "imag": "6.072679337229828e-15"
+        },
+        "split_reference": {
+          "ratio_formula": "theta(g_h)^-1 theta(g_e1) theta(g_e2)",
+          "ratio_for_this_assignment": "-1",
+          "abs_difference_from_expected_twisted_raw": "1.3888984783339546e-11"
+        }
+      },
+      "interpretation": "The nonseparated Yasui a=1 presentation reproduces the same nonbaseline character phase as the CP2#2CPbar split presentation. This is a strong bookkeeping win for the D(Dic_12) witness and the component-twist translation, while still being a pointed-character signal rather than an exotic detector."
+    }
+  ],
+  "compact_trace_policy": {
+    "decision": "Keep a compact mathematical trace artifact, not the raw worker corpus.",
+    "why_keep_it": [
+      "It records exactly how each of the 32768 fixed-sector amplitudes is reweighted by the witness monodromy.",
+      "It makes the aggregate -1728 auditable without reopening Hetzner logs or rerunning the Sage F/R evaluator.",
+      "It is small enough for Git as text: 4,930,481 worktree bytes, with an estimated Git loose-object zlib size of 687,930 bytes."
+    ],
+    "why_not_raw_chunks": [
+      "Raw chunks plus remote pulls are hundreds of MB and duplicate environment/provenance fields per sector.",
+      "Server setup, SSH host-key issues, worker scheduling, and RAM/CPU timing are operationally useful but not subject-layer mathematical evidence.",
+      "Future readers usually need the sector label, untwisted contribution, witness monodromy, phase, and twisted contribution; the compact trace preserves those fields directly."
+    ],
+    "row_encoding": {
+      "metadata_line": "First JSONL line records case metadata, label dictionary, aggregate values, source artifact hash, and row encoding.",
+      "i": "sector_index",
+      "l": "fixed component label indices into the metadata label_dictionary, in braid component order",
+      "u": "untwisted weighted contribution [real, imag] as decimal strings",
+      "m": "witness monodromy symbols per component, each in {1,-1,i,-i}",
+      "p": "net phase product_j m_j^twist_power_j",
+      "t": "twisted weighted contribution [real, imag] as decimal strings"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-compact-trace-v1.jsonl",
+      "sha256": "4ec06401f9d77060dc7d25c7b7b7bedcb10b901281b3ab2d3ede230c1ddf3029",
+      "schema": "twisted-yetter.yasui-dic12-witness-character-compact-trace.v1",
+      "status": "pass",
+      "role": "primary committed compact per-sector mathematical trace"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-compact-trace-manifest-v1.json",
+      "sha256": "59697bb5fbccf31fcd8974eccbae67c1749e352be47e87632cebc6c94d05f27e",
+      "schema": "twisted-yetter.yasui-dic12-witness-character-compact-trace-manifest.v1",
+      "status": "pass",
+      "role": "manifest with size, compression, environment, and exclusion-policy metadata"
+    },
+    {
+      "path": "experiments/scripts/yasui_dic12_make_compact_twist_trace.py",
+      "sha256": "428dcb489cb884e2dc6bafa9375acd49d7723df1999622f005d54092611f1d47",
+      "role": "script used to build the compact JSONL trace from the full transform artifact"
+    },
+    {
+      "path": "experiments/scripts/yasui_dic12_verify_compact_twist_trace.py",
+      "sha256": "6333dfa5773c8cd66baf44538405334f42cff741b940a55e762b0d4a737d4167",
+      "role": "self-contained streaming verifier for the committed compact trace"
+    },
+    {
+      "path": "experiments/scripts/yasui_dic12_character_twist_transform.py",
+      "sha256": "1873ea0aac03d1891e29017de6462bfba8a142aebb0dbc9f16c0dee4dece812a",
+      "role": "coefficient-transform script from completed singleton chunks to the full aggregate trace"
+    }
+  ],
+  "verification": {
+    "commands": [
+      "python3 experiments/scripts/yasui_dic12_verify_compact_twist_trace.py",
+      "python3 -m json.tool experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-compact-trace-manifest-v1.json",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/verify.py"
+    ],
+    "compact_trace_verifier_result": {
+      "status": "pass",
+      "row_count": 32768,
+      "bad_row_count": 0,
+      "aggregate_twisted_from_rows": "-1728.0000000000064+2.7425689472221937e-12j",
+      "normalized_twisted_by_144_from_rows": "-12.000000000000044+1.904561768904301e-14j",
+      "note": "Tiny differences from metadata aggregate are due to floating-point summation order and are below the 1e-8 numeric tolerance."
+    }
+  },
+  "subject_layer_updates": {
+    "new_subject": "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal",
+    "new_edges": [
+      "subject-edge:ty:yasui-a1-dic12-signal:computes:yasui-a1-link",
+      "subject-edge:ty:yasui-a1-dic12-signal:uses:d-dic12-omega0",
+      "subject-edge:ty:yasui-a1-dic12-signal:extends:yasui-a1-character-twist",
+      "subject-edge:ty:yasui-a1-dic12-signal:uses:cp2-split-baseline",
+      "subject-edge:ty:yasui-a1-dic12-signal:uses:singleton-route"
+    ],
+    "generated_wiki_view_guidance": "A generated topic page should lead with the +12 to -12 result, then explain the witness g=(a^3,chi), the component map A=e1, and why the compact trace blob is intentionally committed while raw worker debris is not."
+  },
+  "residual_risks": [
+    "The computation is floating-point numeric, not exact arithmetic.",
+    "The signal is explained by the pointed invertible character phase on a manifold diffeomorphic to CP2#2CPbar; it is not evidence of exotic separation.",
+    "The compact trace is derived from the full transform artifact and completed singleton chunks, which are kept out of admitted subject-layer state by policy."
+  ]
+}
