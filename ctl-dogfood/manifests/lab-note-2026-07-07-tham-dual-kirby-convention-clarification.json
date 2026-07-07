@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:29f240c8c7e41075c54839a175af219beb4ee0a1dbd4c1d8b20ee95d54d548f2",
+  "generated_at": "2026-07-07T13:15:16Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-tham-dual-kirby-convention-clarification",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:59d1e42c37b04367c7f574e90588b170c1fe43ddf75022be5f3ad4c50464fcfa",
+    "current_root": "ctlobj-sha256:29f240c8c7e41075c54839a175af219beb4ee0a1dbd4c1d8b20ee95d54d548f2",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:01d4ea4d7b0d506e50b90422b9201adb493bc039917b3aa1cb8d22f5edaf0148"
+  },
+  "parent_root_cid": "ctlobj-sha256:b5531b9f3380a4c46e8b450549cd2b20fc1ce2a21f79eac18b261a8fdebcb1f1",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-07-tham-dual-kirby-convention-clarification.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-07-tham-dual-kirby-convention-clarification --payload lab-notes/2026-07-07-tham-dual-kirby-convention-clarification.json --manifest manifests/lab-note-2026-07-07-tham-dual-kirby-convention-clarification.json --created-at 2026-07-07T13:15:16Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "0c5ceac04b7f02432623f094e3d68fc310ed368f"
+}

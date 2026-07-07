@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:6f4aafc4589b92f7927c3b68cfdeb9765f7f30cf2456ad6cc38687fb8cb1a48b",
+  "generated_at": "2026-07-07T13:17:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:tham-2108-13467:supports:dual-kirby-convention",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:6f4aafc4589b92f7927c3b68cfdeb9765f7f30cf2456ad6cc38687fb8cb1a48b",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:03572920fa6cb10bb575e0a5792d5d103c18f1ed406ff08eedc28d4ee4822fdc",
+    "transition": "ctlobj-sha256:8200866a31541a8c57dd9dbf522f519becb2f8ea17eaac74a6482c9033c7b8ba"
+  },
+  "parent_root_cid": "ctlobj-sha256:45f6f596e9b1f51a3984e50af796d41e71def4e965b2ad0938b0bd70d9a62402",
+  "payload_file": "ctl-dogfood/subject-layer/edges/tham-2108-13467-supports-dual-kirby-convention.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:tham-2108-13467:supports:dual-kirby-convention --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/tham-2108-13467-supports-dual-kirby-convention.json --manifest manifests/subject-edge-2026-07-07-tham-2108-13467-supports-dual-kirby-convention.json --created-at 2026-07-07T13:17:00Z --admitted-at 2026-07-07T13:17:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "0c5ceac04b7f02432623f094e3d68fc310ed368f"
+}

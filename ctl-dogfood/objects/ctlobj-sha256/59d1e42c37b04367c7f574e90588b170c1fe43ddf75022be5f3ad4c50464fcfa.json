@@ -1,0 +1,43 @@
+{
+  "created_at": "2026-07-07T13:15:16Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-tham-dual-kirby-convention-clarification",
+  "parents": [],
+  "payload": {
+    "created_at": "2026-07-07T13:15:16Z",
+    "created_by": "actor:codex",
+    "mathematical_status": "WORKING_UNDERSTANDING_NOT_THEOREM",
+    "note_id": "objective-note-2026-07-07-tham-dual-kirby-convention-clarification",
+    "repo_snapshot": {
+      "dirty_status": "dirty: unrelated pre-existing ctl_merge/protocol/test changes were present and intentionally not interpreted as part of this note",
+      "git_commit": "0c5ceac04b7f02432623f094e3d68fc310ed368f"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This note records a working interpretation of how existing Kirby-link evaluations may relate to Tham Definition 5.11. It does not prove a theorem, implement a new evaluator, or retroactively certify every prior computation.",
+      "question": "Clarify why existing direct Kirby-link evaluations may still be compatible with Tham's premodular handle-by-handle skein maps, despite Tham's literal 2-handle map producing belt-core graphs in the post-surgery boundary."
+    },
+    "source_anchors": [
+      {
+        "locator": "arXiv:2108.13467v1, Definition 5.11, section 5.2, approximately PDF page 58",
+        "subject_id": "subject:twisted-yetter:paper:tham-2108-13467",
+        "summary": "Tham defines premodular Crane-Yetter skein maps handle by handle; in particular the 2-handle map inserts a regular-colored belt-core circle in the post-attachment boundary, and the 3-handle map is a unit/vacuum-channel projection across the 3-handle co-core."
+      }
+    ],
+    "status": "WORKING_UNDERSTANDING_NOT_THEOREM",
+    "title": "Tham Definition 5.11 and the dual Kirby-link evaluation convention",
+    "working_understanding": {
+      "discussion_summary_zh_hant": "我們剛剛差點把兩個圖混在一起。若一個 closed 4-manifold 沒有 1-handles、也沒有 3-handles，平常給出的 Kirby diagram 是 2-handles 的 attaching link，畫在最初 0-handle 的邊界 S^3 上；但照 Tham Definition 5.11 從下往上做，2-handle map 之後真正留給最後 4-handle 去 evaluate 的，並不是這條 attaching link 本身，而是 surgery 之後 boundary 裡的 belt-core / dual graph。這一度讓人以為：我們以前直接拿 Kirby link 做 RT/link evaluation，是不是少掛了一堆 meridian，所以算錯了。後來解開的方式是：我們其實應該把既有算法理解成從 upside-down / dual Kirby picture 在算。也就是說，Tham 從下往上得到的 belt-core graph，如果改從 4-handle 那一側往回看，就正是畫在原本 4-handle boundary 上的 dual Kirby link。這樣就不用在原始 attaching link 旁邊硬掛 meridian；掛 meridian 是另一種把 dual graph 留在 primal S^3 裡描述的中介做法，還會牽涉 3-dimensional surgery normalization。這個理解還只是工作性整理，尚未當作定理使用。",
+      "existing_evaluator_convention": "Existing direct link evaluations should provisionally be read as using an upside-down / dual Kirby-link convention, not as a literal bottom-up implementation of Tham Definition 5.11.",
+      "special_dotted_knot_warning": "If the original Kirby diagram contains special dotted knots, then under this Tham-5.11-compatible dual interpretation it is more natural to treat them as 3-handle / vacuum-projection data than as ordinary 1-handles directly consumable by the current framed-link evaluator.",
+      "why_prior_agreement_is_not_surprising": "The observed agreement of complicated prior examples is evidence that the adopted convention is internally consistent; it should not be interpreted as a proof that primal attaching-link evaluation and literal Tham belt-core evaluation are raw-equal without dualization or surgery normalization."
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

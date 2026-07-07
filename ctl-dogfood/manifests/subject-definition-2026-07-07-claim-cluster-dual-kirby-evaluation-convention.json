@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:e5d07d202a5d33f900d5d77b95edf13a18e23f25c8a91261e718dcb4f7a8ab66",
+  "generated_at": "2026-07-07T13:16:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:dual-kirby-evaluation-convention",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e5d07d202a5d33f900d5d77b95edf13a18e23f25c8a91261e718dcb4f7a8ab66",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
+    "transition": "ctlobj-sha256:dd600cbfb29337310d3542f623a45a834137aeca8792f72bcefffaf7769e4e65"
+  },
+  "parent_root_cid": "ctlobj-sha256:29f240c8c7e41075c54839a175af219beb4ee0a1dbd4c1d8b20ee95d54d548f2",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-dual-kirby-evaluation-convention.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:claim-cluster:dual-kirby-evaluation-convention --revision-kind subject:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/claim-cluster-dual-kirby-evaluation-convention.json --manifest manifests/subject-definition-2026-07-07-claim-cluster-dual-kirby-evaluation-convention.json --created-at 2026-07-07T13:16:00Z --admitted-at 2026-07-07T13:16:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "0c5ceac04b7f02432623f094e3d68fc310ed368f"
+}
