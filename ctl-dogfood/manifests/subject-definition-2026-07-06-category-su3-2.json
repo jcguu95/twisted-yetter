@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:8f66d9819eb4c16cf9a33777a12d6adb8757138a1ef2fcb7d6506803ad1fde36",
+  "generated_at": "2026-07-06T23:56:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:category:su3-2",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:8f66d9819eb4c16cf9a33777a12d6adb8757138a1ef2fcb7d6506803ad1fde36",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:218dee28584857fb96aa02f9ebb8e54ed143933084b8d89435edc4262b394a37",
+    "transition": "ctlobj-sha256:c42ff8fbfa08e89461900c42bf7a6306c50ea8d4e99e46c3d90f8375c49eb39f"
+  },
+  "parent_root_cid": "ctlobj-sha256:aece09509b6ccd321ccae4f3de8053255550300e733f4b94799b18c37f1268ce",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/category-su3-2.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:category:su3-2 --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/category-su3-2.json --manifest manifests/subject-definition-2026-07-06-category-su3-2.json --created-at 2026-07-06T23:56:20Z --admitted-at 2026-07-06T23:56:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "2724d62d411c41f8b848d5c65491e2c1ad20d6e4"
+}
