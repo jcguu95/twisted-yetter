@@ -207,6 +207,8 @@ SUBJECT_EDGE_ROLES = {
     "contradicts",
     "defines",
     "depends_on",
+    "extends",
+    "has_convention_warning",
     "historical",
     "mentions",
     "motivated_by",
@@ -215,6 +217,8 @@ SUBJECT_EDGE_ROLES = {
     "redirected_from",
     "supports",
     "uses",
+    "uses_category",
+    "uses_fr_data",
 }
 SUBJECT_EDGE_STATUSES = {"active", "candidate", "deprecated", "proposed", "provisional"}
 SUBJECT_OPERATION_KINDS = {
