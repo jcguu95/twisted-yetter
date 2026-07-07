@@ -1,0 +1,640 @@
+#+TITLE: CTL Dogfood Branch Store Merge Protocol
+#+DATE: 2026-07-06
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+#+begin_example
+status: dogfood
+kernel_semantics: none
+root_model: single-parent-transplant
+multi_parent_roots: unsupported
+payload_dependency_ordering: backlog
+#+end_example
+
+This protocol is local-store tooling for the CTL Meta dogfood shadow store. It
+does not change =ctl-kernel/1=, =ProjectStateRoot=, =AdmissionBatch=, canonical
+encoding, authority, or CID semantics.
+
+* Problem
+
+When two Git worktrees both admit CTL transitions, Git sees JSON conflicts, but
+CTL cares about semantic state:
+
+- current root;
+- logical id bindings;
+- active revision CID;
+- recorded revision reachability;
+- transition parent roots;
+- admission manifest reachability.
+
+Therefore =refs/main.json= must not be resolved by choosing ours/theirs. It is a
+current-root pointer. The normal semantic resolution is to create a new child
+root on top of the target current root.
+
+* Commands
+
+Dry-run a semantic root merge:
+
+#+begin_src sh
+cd ctl-dogfood
+python3 scripts/ctl_merge.py merge-root \
+  --incoming-store-root /path/to/other/ctl-dogfood \
+  --format text
+#+end_src
+
+Admit a no-conflict transplant:
+
+#+begin_src sh
+cd ctl-dogfood
+python3 scripts/ctl_merge.py transplant-revisions \
+  --incoming-store-root /path/to/other/ctl-dogfood \
+  --expected-root "$(python3 -c 'import json, subprocess; print(json.loads(subprocess.check_output(["python3", "scripts/ctl_store.py", "current-root"]))["root_cid"])')" \
+  --admitted-at 2026-07-06T00:00:00Z \
+  --format text
+#+end_src
+
+The legacy aliases =preview= and =admit= remain available, but
+=merge-root= and =transplant-revisions= are the preferred names.
+
+* Operator Runbook
+
+Use this when Git reports conflicts in =ctl-dogfood/refs/main.json= or
+under =ctl-dogfood/objects/= after two worktrees both admitted CTL state.
+
+1. Keep the target worktree on the branch that should receive the merged CTL
+   state.
+
+2. Do not choose Git ours/theirs for =refs/main.json=. Leave Git conflict
+   resolution aside and ask CTL what the roots mean.
+
+3. Run a dry-run from the target =ctl-dogfood= directory:
+
+   #+begin_src sh
+   python3 scripts/ctl_merge.py merge-root \
+     --incoming-store-root /path/to/incoming/ctl-dogfood \
+     --format text
+   #+end_src
+
+4. Read the text report:
+
+   - =status: ok= means the incoming CTL transitions can be represented on top
+     of the target current root.
+   - =status: conflict= means at least one =logical_id= needs a profile-owned
+     semantic decision before a full transplant.
+   - =summary= counts =auto-admit=, =already-present=, and =conflict= binding
+     operations.
+   - =logical ids= is the human-facing list to inspect first.
+   - =warnings= may report incoming branch-local manifests that should not be
+     copied as target-current sidecars.
+   - for automation, rerun with =--format json= to get =logical_ids[]= and
+     =items[]=.
+
+5. If =status= is =conflict=:
+
+   - inspect =conflicts[]= or =logical_ids[]=;
+   - use the listed =logical_id=, active CID, incoming CID, and =payload_diff=;
+   - if the report also has =auto-admit= items, the text output may show an
+     optional =--auto-only= partial transplant command;
+   - =--auto-only= only applies safe binding operations and leaves conflicting
+     active bindings untouched;
+   - admit an explicit resolution or correction revision for the remaining
+     conflicts by the profile's own rules;
+   - rerun =merge-root=.
+
+6. If =status= is =ok=, transplant:
+
+   #+begin_src sh
+   python3 scripts/ctl_merge.py transplant-revisions \
+     --incoming-store-root /path/to/incoming/ctl-dogfood \
+     --expected-root "$(python3 -c 'import json, subprocess; print(json.loads(subprocess.check_output(["python3", "scripts/ctl_store.py", "current-root"]))["root_cid"])')" \
+     --admitted-at 2026-07-07T01:00:00Z \
+     --format text
+   #+end_src
+
+7. Verify:
+
+   #+begin_src sh
+   python3 scripts/verify.py
+   #+end_src
+
+8. Commit the resulting object files, =refs/main.json=, and generated manifest
+   together.
+
+* What Downstream Must Provide
+
+The generic upstream tool needs only CTL store roots and objects:
+
+- target =ctl-dogfood= directory;
+- incoming =ctl-dogfood= directory;
+- optionally explicit =--main-root=, =--incoming-root=, or =--base-root= CIDs.
+
+Downstream does not need to explain its ontology to this tool. If the report
+says =conflict=, downstream must decide the semantic resolution because only the
+profile owner knows what a combined or corrective revision should mean.
+
+* Upstream Follow-up Plan
+
+#+begin_example
+status: dogfood / backlog split
+owner: upstream / ctl-meta dogfood tooling
+kernel_semantics: none
+downstream_audit: no
+profile_payload_semantics: unsupported
+#+end_example
+
+This section tracks generic CTL local-store merge safety work without learning
+downstream ontology. Each item must pass the scope check before implementation.
+
+** Scope Check
+
+Before accepting any branch-store merge feature, verify:
+
+- it only depends on CTL roots, revisions, bindings, transition batches,
+  manifests, refs, or filesystem-local store shape;
+- it does not inspect domain-specific payload fields to decide semantic
+  correctness;
+- it does not generate a combined payload or choose a semantic winner;
+- it does not require auditing a downstream repository;
+- it preserves =ctl-kernel/1= semantics.
+
+If any answer fails, the feature belongs to a profile-owned or downstream-owned
+tool, not this upstream dogfood layer.
+
+** Next Implementation Plan: Agent-Usable Merge Tooling
+
+#+begin_example
+status: dogfood
+owner: upstream / ctl-meta dogfood tooling
+implementation_order: tests-first
+kernel_semantics: none
+downstream_audit: no
+profile_payload_semantics: unsupported
+primary_reader: agents
+#+end_example
+
+This milestone makes the existing capability obvious and hard to misuse for
+agents operating in a merge conflict worktree. An agent can discover the
+feature, pick the safe command, understand when to stop, and avoid confusing
+Git ours/theirs with CTL target/incoming.
+
+*** P0: Agent-Facing Quickstart
+
+#+begin_example
+status: dogfood
+implemented_in: protocols/branch-store-merge-agents.org
+#+end_example
+
+The first-stop guide for agents is:
+
+#+begin_example
+ctl-dogfood/protocols/branch-store-merge-agents.org
+#+end_example
+
+Contents:
+
+- feature map: =merge-root=, =transplant-revisions=, =--auto-only=,
+  manifest warnings, verify, and report formats;
+- when to use it: Git conflict on =refs/main.json= or CTL object files after
+  two worktrees admitted state;
+- input vocabulary: =target= is the worktree being advanced, =incoming= is the
+  other CTL store, =base= is the common CTL root;
+- safe decision table:
+  - =status: ok= with transplant work means full transplant is allowed;
+  - =status: ok= and no work means no CTL root update is needed;
+  - mixed =auto-admit= plus =conflict= means optional =--auto-only= is allowed;
+  - any remaining =conflict= means stop and ask for profile-owned resolution;
+- copy-paste command blocks that use placeholders and do not depend on a
+  downstream ontology;
+- explicit anti-patterns: do not choose Git ours/theirs for =refs/main.json=,
+  do not invent a combined payload, do not edit CTL objects by hand.
+
+Covered by tests / checks:
+
+- README links to this guide from the merge section;
+- =ctl_merge.py --help= or text output points agents toward the guide or the
+  same command sequence;
+- the guide contains no downstream-specific logical ids, payload fields, or
+  domain terms;
+- the guide states which outputs are advisory text and which JSON fields are
+  stable for automation.
+
+Non-goal:
+
+- no downstream runbook;
+- no ontology-specific examples;
+- no profile-level resolver.
+
+*** P1: One-Pass Safe Runbook Command
+
+Add a command that prints a ready-to-run operational plan without writing CTL
+state:
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_merge.py runbook
+#+end_example
+
+#+begin_example
+python3 scripts/ctl_merge.py runbook \
+  --incoming-store-root <incoming-store-root> \
+  --format text
+#+end_example
+
+Behavior:
+
+- wraps =merge-root= preview plus current-root discovery;
+- emits steps in the order an agent should execute them;
+- distinguishes =noop=, =full-transplant=, =partial-auto-only=, and
+  =blocked-conflict=;
+- includes exact command skeletons with =--expected-root= filled from the
+  current target ref;
+- includes verify and commit checklist;
+- includes manifest warning handling guidance;
+- returns JSON with a stable =plan.kind= for automation.
+
+Acceptance tests:
+
+- clean no-conflict branch produces =plan.kind: full-transplant=;
+- same-root preview produces =plan.kind: noop=;
+- mixed auto/conflict branch produces =plan.kind: partial-auto-only= and lists
+  skipped conflicts;
+- pure conflict branch produces =plan.kind: blocked-conflict= and no
+  transplant command;
+- text output never uses Git ours/theirs as CTL terminology.
+
+Non-goal:
+
+- no writes to =refs/main.json=;
+- no automatic conflict resolution;
+- no domain payload template.
+
+*** P1: Manifest Cleanup / Rewrite / Drop Plan
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_merge.py manifest-plan
+#+end_example
+
+The manifest sidecar plan tells agents what to do with incoming branch-local
+manifests:
+
+#+begin_example
+python3 scripts/ctl_merge.py manifest-plan \
+  --incoming-store-root <incoming-store-root> \
+  --format text
+#+end_example
+
+Behavior:
+
+- structurally inspects incoming =manifests/*.json=;
+- classifies manifests as =reachable-from-target=, =branch-local=,
+  =unreadable=, or =bad-current-root=;
+- explains that branch-local manifests are not target-current manifests after a
+  single-parent transplant;
+- prints a standard action table: keep as historical incoming metadata,
+  archive outside the merge commit, or omit from target merge commit;
+- JSON output exposes stable classification fields.
+
+Acceptance tests:
+
+- branch-local manifest is classified without reading payload semantics;
+- target-reachable manifest is not flagged as branch-local;
+- malformed manifest is reported as a manifest-sidecar issue, not a kernel
+  history issue;
+- =verify.py= remains the final authority for the target store after transplant.
+
+Non-goal:
+
+- no rewriting kernel history to make branch-local manifests reachable;
+- no guessing downstream manifest semantics;
+- no deleting files automatically.
+
+*** P2: Portable Path Hygiene Validator
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_store.py path-hygiene
+#+end_example
+
+The upstream-owned hygiene check for CTL-adjacent artifacts is:
+
+#+begin_example
+python3 scripts/ctl_store.py path-hygiene
+#+end_example
+
+Behavior:
+
+- scans dogfood manifests, decisions, reviews, protocols, and generated CTL
+  sidecars for absolute worktree paths;
+- treats repo-relative paths and explicit placeholders such as =${REPO_ROOT}= as
+  portable;
+- reports absolute paths as hygiene warnings by default;
+- supports a strict mode for CI or release checks;
+- fails fast when a CLI output path is invalid before doing long scans.
+
+Acceptance tests:
+
+- detects absolute home-directory, temporary-directory, and worktree-like paths
+  in canonical artifacts;
+- allows repo-relative paths;
+- allows documented placeholders;
+- does not flag local diagnostic output that is not written as a canonical
+  artifact.
+
+Non-goal:
+
+- no kernel validation semantics;
+- no policy that every human note must be portable unless that note is adopted
+  as an upstream-owned artifact class.
+
+*** P2: Stable Report Contract
+
+#+begin_example
+status: dogfood
+implemented_in: protocols/branch-store-merge-report-contract.org
+#+end_example
+
+The report contract documents which JSON fields agents may rely on:
+
+#+begin_example
+ctl-dogfood/protocols/branch-store-merge-report-contract.org
+#+end_example
+
+Required contents:
+
+- stable fields for =merge-root= JSON;
+- stable fields for =transplant-revisions= JSON;
+- stable fields for =runbook= and =manifest-plan= JSON;
+- text output is for humans and agents reading logs, but JSON is the automation
+  contract;
+- additive changes are allowed; removing or renaming stable fields requires a
+  protocol update.
+
+Acceptance tests:
+
+- tests assert the presence and type of stable top-level fields;
+- tests cover =ok=, =conflict=, =auto-only=, =noop=, and manifest-warning
+  shapes;
+- docs and tests agree on field names.
+
+Non-goal:
+
+- no promise that payload diffs are semantically complete;
+- no stable contract for downstream-owned profile fields.
+
+*** Milestone Completion Checklist
+
+The milestone is complete only when:
+
+- agents can start from the quickstart guide and choose a command without
+  reading the implementation;
+- every new command has JSON and text tests;
+- every write-capable path still requires =--expected-root=;
+- no feature inspects downstream payload fields to decide merge correctness;
+- =python3 -m unittest ctl-dogfood/tests/test_ctl_merge.py= passes;
+- =cd ctl-dogfood && python3 scripts/verify.py= passes;
+- dogfood admission records the tooling update or a clear manifest explains why
+  no admission was needed.
+
+** P1: Auto-only Partial Transplant
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_merge.py transplant-revisions --auto-only
+kernel_semantics: none
+#+end_example
+
+The tool provides an explicit safe partial transplant mode:
+
+#+begin_example
+python3 scripts/ctl_merge.py transplant-revisions --auto-only ...
+#+end_example
+
+Behavior:
+
+- useful when =merge-root= reports both =auto-admit= and =conflict= items;
+- admits only binding operations classified as =auto-admit=;
+- leaves conflicting =logical_id= bindings untouched;
+- records skipped conflicts in the text/JSON output and merge manifest;
+- still requires =--expected-root=;
+- still validates every generated child root with the reference validator.
+
+Covered by tests:
+
+- one incoming branch has two independent =auto-admit= logical ids and one
+  conflicting logical id;
+- =--auto-only= advances the target root for the two safe logical ids;
+- the conflicting logical id remains bound to the target-side CID;
+- the generated manifest lists skipped conflicts;
+- a normal transplant without =--auto-only= still refuses the same merge.
+
+Non-goal:
+
+- no automatic resolution payload;
+- no profile-owned index union;
+- no profile-specific merge strategy.
+
+** P1: Manifest Reachability Preflight
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_merge.py merge-root
+kernel_semantics: none
+#+end_example
+
+Preview emits warnings for incoming branch-local manifests that would not be
+current or reachable from the final target root after transplant.
+
+Behavior:
+
+- inspect manifest sidecars structurally, not profile payload semantics;
+- report incoming manifests whose =current_root_cid= points at branch-only
+  roots;
+- explain that the target merge manifest is the canonical final admission
+  sidecar for the transplant;
+- provide a standard operator choice: keep branch manifests as historical
+  files outside the target current-manifest set, archive them, or omit them
+  from the target merge commit.
+
+Covered by tests:
+
+- incoming store contains a manifest pointing at an incoming-only root;
+- =merge-root= emits a warning before transplant;
+- no warning is emitted for manifests whose current root is already reachable
+  from target;
+- =verify.py= remains the authority for the target store after transplant.
+
+Non-goal:
+
+- no attempt to make every branch-local manifest reachable by changing kernel
+  history;
+- no copying downstream manifest semantics into upstream.
+
+** P2: Ready-to-run Generic Operator Plan
+
+#+begin_example
+status: dogfood
+implemented_in: scripts/ctl_merge.py --format text
+kernel_semantics: none
+#+end_example
+
+Text output includes generic next commands when enough information is known:
+
+- for =status: ok=, show the matching =transplant-revisions= command skeleton;
+- for mixed auto/conflict reports, show the =--auto-only= command skeleton after
+  P1 exists;
+- for =status: conflict=, list the logical ids that require profile-owned
+  resolution before rerunning =merge-root=;
+- for all commands, use =target= and =incoming= terminology, never Git
+  ours/theirs as the CTL mental model.
+
+Covered by tests:
+
+- text report for a clean merge includes a transplant command skeleton;
+- text report for conflict includes no semantic-resolution command;
+- JSON output remains stable for automation.
+
+Non-goal:
+
+- no generated payload templates;
+- no suggested domain-specific resolution.
+
+** P2: Portable Artifact Path Hygiene
+
+#+begin_example
+status: dogfood / backlog split
+implemented_in: ctl-dogfood/merge-manifest/1 path discipline
+kernel_semantics: none
+#+end_example
+
+Record a profile/tooling hygiene rule for CTL-adjacent artifact references:
+
+- canonical artifact refs should prefer repo-relative paths or explicit
+  placeholders such as =${REPO_ROOT}=;
+- absolute worktree paths are acceptable only in local diagnostics, not
+  canonical reusable artifacts;
+- validators and CLIs should fail fast on invalid output paths before long
+  scans.
+
+For the branch-store merge tool, generated merge manifests do not record
+absolute worktree paths; CLI reports may still print local diagnostic paths such
+as the generated manifest path.
+
+This belongs to artifact / manifest profile hygiene, not =ctl-kernel/1=.
+
+Broader artifact validators should add acceptance tests only when a concrete
+upstream-owned profile or tool adopts this rule.
+
+** Explicitly Out of Scope
+
+The following feedback is useful pressure but must not be implemented in this
+generic upstream layer:
+
+- profile-owned index union strategies;
+- unioning profile-owned arrays, warnings, or other payload fields;
+- automatic combined conflict revision generation;
+- merged payload templates that imply upstream understands payload semantics;
+- profile-specific endpoint dependency sorting;
+- a generic dependency hook contract in this milestone;
+- downstream-specific verifier behavior or CLI bugs;
+- kernel-level multi-parent roots;
+- auditing downstream stores or ontology.
+
+* Example Report Reading
+
+For a simple no-conflict import, expect:
+
+#+begin_example
+status: ok
+summary: auto-admit=1 already-present=0 conflict=0
+logical ids:
+  - claim:example: auto-admit
+next: run this on the target branch if you want to advance refs/main.json:
+  python3 scripts/ctl_merge.py transplant-revisions \
+    --incoming-store-root <incoming-store-root> \
+    --expected-root ctlobj-sha256:... \
+    --admitted-at <UTC> \
+    --format text
+#+end_example
+
+For a mixed report with safe and conflicting logical ids, expect an optional
+partial transplant command:
+
+#+begin_example
+status: conflict
+summary: auto-admit=1 already-present=0 conflict=1
+logical ids:
+  - claim:safe: auto-admit
+  - claim:example: conflict
+    main: ctlobj-sha256:...
+    incoming: ctlobj-sha256:...
+    payload: changed
+next: optional partial transplant for auto-admit logical ids only:
+  python3 scripts/ctl_merge.py transplant-revisions \
+    --incoming-store-root <incoming-store-root> \
+    --expected-root ctlobj-sha256:... \
+    --admitted-at <UTC> \
+    --auto-only \
+    --format text
+#+end_example
+
+The operator should resolve the =logical_id= conflict, not the file conflict.
+
+* Merge Model
+
+The tool:
+
+1. loads objects from the target and incoming stores;
+2. validates both roots against the target trust anchor;
+3. finds or accepts a base root;
+4. walks incoming transitions after the base root;
+5. reports each binding operation by =logical_id=;
+6. classifies each operation as =auto-admit=, =already-present=, or =conflict=;
+7. for no-conflict transplants, re-admits the incoming revisions as new
+   single-parent child roots on top of the target root;
+8. for =--auto-only=, re-admits only =auto-admit= binding operations and
+   records skipped conflicts;
+9. warns about incoming branch-local manifest sidecars that should not become
+   target-current manifests;
+10. rewrites =refs/main.json= to the new child root;
+11. writes a =ctl-dogfood/merge-manifest/1= manifest.
+
+* Conflict Report
+
+The dry-run report is logical-id first. A conflict means the target active
+binding is not the incoming expected CID, not the incoming result CID, and not a
+later state on the incoming logical-id path.
+
+For bound-vs-bound conflicts, the report includes:
+
+- target active revision CID;
+- incoming revision CID;
+- revision kind and payload profile;
+- parent CIDs;
+- a top-level payload diff.
+
+This is intentionally more useful than a Git conflict on individual JSON files:
+the operator should see the affected =logical_id=, not merely a filename.
+
+* Dependency Ordering
+
+The dogfood merge tool preserves incoming transition order and validates every
+generated admission batch with the reference kernel validator.
+
+Profile-specific payload dependency ordering, such as profile-owned endpoint
+dependencies, remains =backlog=. In =ctl-kernel/1=, =parents= only describe
+same-logical-object revision lineage; arbitrary cross-object dependencies
+belong to profile-defined payload references. A future ResearchCTL or
+downstream profile tool can add dependency extraction without changing this
+kernel-level transplant model.
+
+* Unsupported
+
+- multi-parent =ProjectStateRoot=;
+- automatic combined conflict revision generation;
+- profile-specific endpoint dependency sorting;
+- payload-aware merge policy beyond top-level conflict diff.
+
+These are intentionally not hidden behind the generic merge command.

@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+  "current_root_cid": "ctlobj-sha256:04ee89a9005c9b01632b8d357c16211b12d0e1573d36bbe515258e11b817e16e",
+  "generated_at": "2026-07-07T04:07:07Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-ctl-meta-agent-merge-tooling-adoption",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:792bad58e31ffa8fc5d5ab9ea77bf76bb75e7e55ecba0e0a63a3b10ee68d108b",
+    "current_root": "ctlobj-sha256:04ee89a9005c9b01632b8d357c16211b12d0e1573d36bbe515258e11b817e16e",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:979a67ddb4ce0828257218c27aa30205e534253a576a11549e0f7de5602ee00e"
+  },
+  "parent_root_cid": "ctlobj-sha256:9e133a3cd547d68629e27bc63f84a5328c5f8ba488df1a39565913ab1c4b1e09",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-07-ctl-meta-agent-merge-tooling-adoption.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-07-ctl-meta-agent-merge-tooling-adoption --payload lab-notes/2026-07-07-ctl-meta-agent-merge-tooling-adoption.json --manifest manifests/lab-note-2026-07-07-ctl-meta-agent-merge-tooling-adoption.json --created-at 2026-07-07T04:07:07Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf"
+}

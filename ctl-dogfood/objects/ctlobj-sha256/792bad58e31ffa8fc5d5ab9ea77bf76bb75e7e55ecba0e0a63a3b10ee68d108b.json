@@ -1,0 +1,140 @@
+{
+  "created_at": "2026-07-07T04:07:07Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-ctl-meta-agent-merge-tooling-adoption",
+  "parents": [
+    "ctlobj-sha256:9587a6f16e2ea20e0e2e0f1fa4648de4b929becded869b0b66d375697f58f196"
+  ],
+  "payload": {
+    "adoption_boundary": {
+      "adoption_type": "downstream follow-up adoption of agent-usable CTL branch-store merge tooling",
+      "adopts_ctl_meta_normative_state": false,
+      "branch_store_agent_runbook_available": true,
+      "graph_revision_created": false,
+      "kernel_migration": false,
+      "old_objects_rewritten": false,
+      "state_store_migration": false
+    },
+    "adoption_scope": {
+      "included": [
+        "ctl-dogfood/scripts/ctl_merge.py",
+        "ctl-dogfood/scripts/ctl_store.py",
+        "tests/test_ctl_merge.py",
+        "ctl-dogfood/scripts/prose_policy.py",
+        "ctl-dogfood/protocols/branch-store-merge.org",
+        "ctl-dogfood/protocols/branch-store-merge-agents.org",
+        "ctl-dogfood/protocols/branch-store-merge-report-contract.org",
+        "ctl-dogfood/README.org"
+      ],
+      "not_included": [
+        "ctl-meta meta/ctl-dogfood/objects",
+        "ctl-meta meta/ctl-dogfood/manifests",
+        "ctl-meta meta/ctl-dogfood/refs/main.json",
+        "ctl-meta decision/admission records as twisted-yetter claims"
+      ]
+    },
+    "claim_boundary": "This note records a tooling-profile follow-up adoption only. It does not assert a new twisted-yetter mathematical result, does not change ctl-kernel/1 semantics, and does not import ctl-meta's project-local normative CTL state.",
+    "created_at": "2026-07-07T04:07:07Z",
+    "generator_script": "manual-json-artifact",
+    "git": {
+      "commit_before_artifact": "b3b2b4636d3d07a080cdfc1a989123edfd726fcf",
+      "dirty_before_artifact": true,
+      "dirty_reason": "upstream tooling/protocol files were copied and adapted before recording this follow-up adoption checkpoint"
+    },
+    "kernel_compatibility": {
+      "kernel_profile": "ctl-kernel/1",
+      "kernel_profile_change": "none",
+      "kernel_semantics_changed": false
+    },
+    "note_id": "objective-note-2026-07-07-ctl-meta-agent-merge-tooling-adoption",
+    "previous_provider_adoption_note": "claim:lab-note:2026-07-07-ctl-meta-branch-store-tooling-adoption",
+    "purpose": "Record downstream adoption of ctl-meta agent-usable branch-store merge tooling, including runbook, manifest-plan, auto-only transplant support, report contracts, path hygiene checks, and prose-policy allowance for the adopted local protocol files.",
+    "reproduce_commands": [
+      "python ctl-dogfood/scripts/ctl_merge.py --help",
+      "python ctl-dogfood/scripts/ctl_merge.py runbook --help",
+      "python ctl-dogfood/scripts/ctl_merge.py manifest-plan --help",
+      "python ctl-dogfood/scripts/ctl_store.py --help",
+      "python -m pytest tests/test_ctl_merge.py",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/verify.py",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/show_current_graph.py --json"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_of_truth_policy": "This is a machine-readable CTL lab-note preimage. The admitted claim for this payload records tooling adoption for future agent behavior; the current mathematical graph remains the existing CTL graph claim.",
+    "status": "ESTABLISHED_TOOLING_ADOPTION_CHECKPOINT",
+    "tooling_files": [
+      {
+        "path": "ctl-dogfood/scripts/ctl_merge.py",
+        "sha256": "ed72b98cd5ed5b898e6e1f6971a3741e59ce264b578c30b9db60d780a3cab31b",
+        "upstream_source": "meta/ctl-dogfood/scripts/ctl_merge.py"
+      },
+      {
+        "path": "ctl-dogfood/scripts/ctl_store.py",
+        "sha256": "a336ae64d932fbcc9b5363c161319a7da12b5e96db761dba3ec0a0266c08907b",
+        "upstream_source": "meta/ctl-dogfood/scripts/ctl_store.py"
+      },
+      {
+        "path": "tests/test_ctl_merge.py",
+        "sha256": "6a4a237bb1b29bec05e1d01d2c2825d4e0522d50f2f06699811fee99c7de74c9",
+        "upstream_source": "meta/ctl-dogfood/tests/test_ctl_merge.py"
+      },
+      {
+        "path": "ctl-dogfood/scripts/prose_policy.py",
+        "sha256": "3bbc1d9c4376e209b03b4e786282f86fe54106c48448693cbf7dca7547ab4f74",
+        "upstream_source": "downstream prose policy update allowing adopted local protocol files"
+      },
+      {
+        "path": "ctl-dogfood/protocols/branch-store-merge.org",
+        "sha256": "1ebcbd8617f875ee5e0171fefb0dc4368b87005f38267d6c4d750d27e5975e36",
+        "upstream_source": "meta/ctl-dogfood/protocols/branch-store-merge.org"
+      },
+      {
+        "path": "ctl-dogfood/protocols/branch-store-merge-agents.org",
+        "sha256": "8de11b9af773cf5179f6bc894938b9e709373ff00863aeca221df2839109227c",
+        "upstream_source": "meta/ctl-dogfood/protocols/branch-store-merge-agents.org"
+      },
+      {
+        "path": "ctl-dogfood/protocols/branch-store-merge-report-contract.org",
+        "sha256": "c868cf1c2768e94fe3babdb4d07d8d9e20fe0959533c47de267152a88edd9c8b",
+        "upstream_source": "meta/ctl-dogfood/protocols/branch-store-merge-report-contract.org"
+      },
+      {
+        "path": "ctl-dogfood/README.org",
+        "sha256": "0f52812f1304498dd7cb0cb6f2b9089511bee5ed6d055059d1b0ac15a6c55f8b",
+        "upstream_source": "downstream README update documenting local protocol scope"
+      }
+    ],
+    "upstream_provider": {
+      "commit": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+      "commit_status_short": "",
+      "recent_commits": [
+        {
+          "commit": "d339bb185d37c6766d420f0f27cc8fca5e53da1b",
+          "summary": "Plan upstream merge follow-ups"
+        },
+        {
+          "commit": "54b3bbdb3386948b46ae78f5f4ade5fede3730e6",
+          "summary": "Implement branch-store merge followups"
+        },
+        {
+          "commit": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+          "summary": "Add agent-usable branch merge tooling"
+        }
+      ]
+    },
+    "verifier_update_policy": {
+      "bootstrap_provider_pin_should_remain_historical": true,
+      "current_provider_can_be_accepted_from_this_admitted_note": true,
+      "required_current_provider_clean_status": "",
+      "required_current_provider_commit": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+      "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+      "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

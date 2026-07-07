@@ -1,0 +1,108 @@
+#+TITLE: CTL Branch Store Merge Report Contract
+#+DATE: 2026-07-07
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+#+begin_example
+status: dogfood
+audience: agents / automation
+kernel_semantics: none
+profile_payload_semantics: unsupported
+#+end_example
+
+JSON output is the automation contract. Text output is for humans and agents
+reading operational logs. Stable fields may gain additive siblings, but removing
+or renaming them requires updating this contract and the tests.
+
+* merge-root
+
+Stable top-level fields:
+
+- =status=
+- =summary=
+- =logical_ids=
+- =items=
+- =recorded_items=
+- =warnings=
+- =base_root_cid=
+- =main_root_cid=
+- =incoming_root_cid=
+- =incoming_transition_cids=
+
+Payload diffs are useful diagnostics but are not a complete semantic merge
+policy.
+
+* transplant-revisions
+
+Stable top-level fields:
+
+- =status=
+- =mode=
+- =previous_root_cid=
+- =incoming_root_cid=
+- =current_root_cid=
+- =merge_batches=
+- =skipped_conflicts=
+- =manifest_path=
+
+=manifest_path= is local diagnostic output. Canonical merge manifests should
+use portable, repo-relative references.
+
+* runbook
+
+Stable fields:
+
+- =status=
+- =plan.kind=
+- =plan.commands=
+- =plan.warnings=
+- =plan.writes_state=
+- =plan.verify_command=
+- =plan.blocked_logical_ids=
+- =merge_preview=
+
+Allowed =plan.kind= values:
+
+- =noop=
+- =full-transplant=
+- =partial-auto-only=
+- =blocked-conflict=
+
+The =runbook= command itself is read-only. Any command listed under
+=plan.commands= must still be executed explicitly by the agent.
+
+* manifest-plan
+
+Stable fields:
+
+- =status=
+- =manifest_plan.items=
+- =manifest_plan.items[].path=
+- =manifest_plan.items[].classification=
+- =manifest_plan.items[].recommended_action=
+- =manifest_plan.items[].message=
+
+Allowed classifications:
+
+- =reachable-from-target=
+- =branch-local=
+- =unreadable=
+- =bad-current-root=
+
+Allowed recommended actions:
+
+- =keep-historical=
+- =archive-outside-merge=
+- =omit-from-target-merge=
+- =inspect=
+
+* Boundaries
+
+This contract does not promise:
+
+- semantic completeness of payload diffs;
+- stability for downstream-owned profile fields;
+- automatic combined conflict revision generation;
+- profile-specific dependency ordering.

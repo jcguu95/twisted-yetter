@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -284,6 +285,46 @@ def inspect_binding(logical_id: str, dogfood_root: Path = DOGFOOD_ROOT) -> dict[
     }
 
 
+ABSOLUTE_WORKTREE_PATH_RE = re.compile(r"(/Users/[^\s\"'<>]+|/private/tmp/[^\s\"'<>]+|/var/folders/[^\s\"'<>]+)")
+HYGIENE_DIRS = ["manifests", "decisions", "protocols", "profiles", "reviews"]
+
+
+def path_hygiene_paths(dogfood_root: Path) -> list[Path]:
+    paths: list[Path] = []
+    for dirname in HYGIENE_DIRS:
+        directory = dogfood_root / dirname
+        if directory.exists():
+            paths.extend(path for path in sorted(directory.rglob("*")) if path.is_file())
+    paths.extend(path for path in sorted(dogfood_root.glob("run-*.txt")) if path.is_file())
+    return paths
+
+
+def path_hygiene_report(dogfood_root: Path = DOGFOOD_ROOT) -> dict[str, Any]:
+    warnings: list[dict[str, Any]] = []
+    checked = 0
+    for path in path_hygiene_paths(dogfood_root):
+        checked += 1
+        try:
+            text = path.read_text()
+        except UnicodeDecodeError:
+            continue
+        matches = sorted(set(ABSOLUTE_WORKTREE_PATH_RE.findall(text)))
+        if matches:
+            warnings.append(
+                {
+                    "code": "absolute_worktree_path",
+                    "path": path.relative_to(dogfood_root).as_posix(),
+                    "matches": matches,
+                    "message": "canonical CTL-adjacent artifacts should use repo-relative paths or ${REPO_ROOT}",
+                }
+            )
+    return {
+        "status": "warning" if warnings else "ok",
+        "checked_files": checked,
+        "warnings": warnings,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Inspect or verify a CTL dogfood local store.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -292,6 +333,8 @@ def main() -> int:
     inspect = sub.add_parser("inspect-binding")
     inspect.add_argument("logical_id")
     sub.add_parser("manifest-check")
+    hygiene = sub.add_parser("path-hygiene")
+    hygiene.add_argument("--strict", action="store_true", help="exit nonzero when path hygiene warnings are found")
     args = parser.parse_args()
 
     if args.command == "verify":
@@ -303,6 +346,10 @@ def main() -> int:
     if args.command == "manifest-check":
         report = build_verify_report()
         return print_report({"status": report["manifest_integrity"]["status"], "manifest_integrity": report["manifest_integrity"]})
+    if args.command == "path-hygiene":
+        report = path_hygiene_report()
+        print(json.dumps(report, sort_keys=True))
+        return 1 if args.strict and report["status"] != "ok" else 0
     raise AssertionError(args.command)
 
 

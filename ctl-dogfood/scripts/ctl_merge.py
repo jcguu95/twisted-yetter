@@ -527,6 +527,232 @@ def build_merge_preview(
     }
 
 
+def manifest_reachability_warnings(
+    store: ctl_ref.Store,
+    target_root: str,
+    incoming_store_root: Path,
+) -> list[dict[str, Any]]:
+    target_reachable = set(root_lineage(store, target_root))
+    manifest_dir = incoming_store_root / "manifests"
+    warnings: list[dict[str, Any]] = []
+    if not manifest_dir.exists():
+        return warnings
+    for path in sorted(manifest_dir.glob("*.json")):
+        rel = path.relative_to(incoming_store_root).as_posix()
+        try:
+            manifest = load_json(path)
+        except Exception as exc:  # noqa: BLE001 - preview should report local sidecar problems.
+            warnings.append(
+                {
+                    "code": "incoming_manifest_unreadable",
+                    "path": rel,
+                    "message": f"incoming manifest could not be read structurally: {exc}",
+                }
+            )
+            continue
+        current_root = manifest.get("current_root_cid") if isinstance(manifest, dict) else None
+        if current_root is None:
+            continue
+        if not ctl_ref.is_cid(current_root):
+            warnings.append(
+                {
+                    "code": "incoming_manifest_bad_current_root",
+                    "path": rel,
+                    "current_root_cid": current_root,
+                    "message": "incoming manifest current_root_cid is not a CTL CID",
+                }
+            )
+            continue
+        if current_root not in target_reachable:
+            warnings.append(
+                {
+                    "code": "incoming_manifest_branch_local",
+                    "path": rel,
+                    "current_root_cid": current_root,
+                    "message": (
+                        "incoming manifest points at a branch-local root; after transplant the target "
+                        "merge manifest is the canonical final sidecar"
+                    ),
+                    "operator_choices": [
+                        "keep as historical incoming-branch metadata outside the target current-manifest set",
+                        "archive it outside the target merge commit",
+                        "omit it from the target merge commit",
+                    ],
+                }
+            )
+    return warnings
+
+
+def build_store_merge_preview(
+    main_store_root: Path,
+    incoming_store_root: Path,
+    *,
+    main_root: str | None = None,
+    incoming_root: str | None = None,
+    base_root: str | None = None,
+) -> dict[str, Any]:
+    main_ref = load_ref(main_store_root)
+    incoming_ref = load_ref(incoming_store_root)
+    resolved_main_root = main_root or main_ref["root_cid"]
+    resolved_incoming_root = incoming_root or incoming_ref["root_cid"]
+    store = load_store_from_roots([main_store_root, incoming_store_root])
+    report = build_merge_preview(
+        store,
+        resolved_main_root,
+        resolved_incoming_root,
+        trust_anchor_from_ref(main_ref),
+        base_root,
+    )
+    report["warnings"] = manifest_reachability_warnings(store, resolved_main_root, incoming_store_root)
+    return report
+
+
+def has_transplant_work(report: dict[str, Any]) -> bool:
+    summary = report.get("summary", {})
+    if summary.get("auto-admit", 0) > 0:
+        return True
+    return any(item["status"] == "record" for item in report.get("recorded_items", []))
+
+
+def transplant_command(
+    incoming_store_root: Path,
+    expected_root: str,
+    *,
+    auto_only: bool = False,
+) -> str:
+    parts = [
+        "python3 scripts/ctl_merge.py transplant-revisions",
+        f"--incoming-store-root {incoming_store_root}",
+        f"--expected-root {expected_root}",
+        "--admitted-at <UTC>",
+    ]
+    if auto_only:
+        parts.append("--auto-only")
+    parts.append("--format text")
+    return " ".join(parts)
+
+
+def build_runbook(
+    main_store_root: Path,
+    incoming_store_root: Path,
+    *,
+    main_root: str | None = None,
+    incoming_root: str | None = None,
+    base_root: str | None = None,
+) -> dict[str, Any]:
+    preview = build_store_merge_preview(
+        main_store_root,
+        incoming_store_root,
+        main_root=main_root,
+        incoming_root=incoming_root,
+        base_root=base_root,
+    )
+    expected_root = preview["main_root_cid"]
+    summary = preview.get("summary", {})
+    blocked = ctl_ref.sort_scalars(
+        [item["logical_id"] for item in preview.get("logical_ids", []) if item["status"] == "conflict"]
+    )
+    commands: list[str] = []
+    if preview["status"] == "ok":
+        kind = "full-transplant" if has_transplant_work(preview) else "noop"
+        if kind == "full-transplant":
+            commands.append(transplant_command(incoming_store_root, expected_root))
+    elif summary.get("auto-admit", 0) > 0 and summary.get("conflict", 0) > 0:
+        kind = "partial-auto-only"
+        commands.append(transplant_command(incoming_store_root, expected_root, auto_only=True))
+    else:
+        kind = "blocked-conflict"
+
+    return {
+        "status": "ok",
+        "plan": {
+            "kind": kind,
+            "writes_state": False,
+            "commands": commands,
+            "verify_command": "python3 scripts/verify.py",
+            "warnings": preview.get("warnings", []),
+            "blocked_logical_ids": blocked,
+            "commit_checklist": ["refs/main.json", "objects/ctlobj-sha256/*.json", "manifests/*.json"],
+        },
+        "merge_preview": preview,
+    }
+
+
+def build_manifest_plan(
+    main_store_root: Path,
+    incoming_store_root: Path,
+    *,
+    main_root: str | None = None,
+) -> dict[str, Any]:
+    main_ref = load_ref(main_store_root)
+    resolved_main_root = main_root or main_ref["root_cid"]
+    store = load_store_from_roots([main_store_root, incoming_store_root])
+    target_reachable = set(root_lineage(store, resolved_main_root))
+    manifest_dir = incoming_store_root / "manifests"
+    items: list[dict[str, Any]] = []
+    if manifest_dir.exists():
+        for path in sorted(manifest_dir.glob("*.json")):
+            rel = path.relative_to(incoming_store_root).as_posix()
+            try:
+                manifest = load_json(path)
+            except Exception as exc:  # noqa: BLE001 - manifest-plan is a sidecar inspection tool.
+                items.append(
+                    {
+                        "path": rel,
+                        "classification": "unreadable",
+                        "recommended_action": "inspect",
+                        "message": f"manifest could not be read structurally: {exc}",
+                    }
+                )
+                continue
+            current_root = manifest.get("current_root_cid") if isinstance(manifest, dict) else None
+            if current_root is None:
+                items.append(
+                    {
+                        "path": rel,
+                        "classification": "reachable-from-target",
+                        "recommended_action": "keep-historical",
+                        "message": "manifest has no current_root_cid to classify",
+                    }
+                )
+            elif not ctl_ref.is_cid(current_root):
+                items.append(
+                    {
+                        "path": rel,
+                        "classification": "bad-current-root",
+                        "recommended_action": "inspect",
+                        "current_root_cid": current_root,
+                        "message": "manifest current_root_cid is not a CTL CID",
+                    }
+                )
+            elif current_root in target_reachable:
+                items.append(
+                    {
+                        "path": rel,
+                        "classification": "reachable-from-target",
+                        "recommended_action": "keep-historical",
+                        "current_root_cid": current_root,
+                        "message": "manifest current_root_cid is reachable from target",
+                    }
+                )
+            else:
+                items.append(
+                    {
+                        "path": rel,
+                        "classification": "branch-local",
+                        "recommended_action": "omit-from-target-merge",
+                        "current_root_cid": current_root,
+                        "message": (
+                            "single-parent transplant does not make this incoming branch-local "
+                            "manifest a target-current manifest"
+                        ),
+                    }
+                )
+    warning_classes = {"branch-local", "unreadable", "bad-current-root"}
+    status = "warning" if any(item["classification"] in warning_classes for item in items) else "ok"
+    return {"status": status, "manifest_plan": {"items": items}}
+
+
 def admit_merge_in_memory(
     store: ctl_ref.Store,
     main_root: str,
@@ -537,11 +763,12 @@ def admit_merge_in_memory(
     submitted_by: str,
     admitted_at: str,
     base_root: str | None = None,
+    auto_only: bool = False,
 ) -> dict[str, Any]:
     ctl_ref.check_timestamp(admitted_at)
     ctx = build_merge_context(store, main_root, incoming_root, trust_anchor, base_root)
     conflicts = preflight_conflicts(store, ctx)
-    if conflicts:
+    if conflicts and not auto_only:
         return {
             "status": "conflict",
             "merge_model": merge_model_report(),
@@ -556,15 +783,34 @@ def admit_merge_in_memory(
         op_records_by_transition.setdefault(op_record["transition_cid"], []).append(op_record)
 
     merge_batches: list[dict[str, Any]] = []
+    skipped_conflicts: list[dict[str, Any]] = []
+    auto_binding_count = 0
     for transition_cid in ctx["incoming_transition_cids"]:
         incoming_batch = store.resolve(transition_cid)
-        recorded = [cid for cid in incoming_batch["recorded_revisions"] if cid not in current_state["recorded"]]
         binding_ops: list[dict[str, Any]] = []
         for op_record in op_records_by_transition.get(transition_cid, []):
             status, reason, current = classify_op(current_state["bindings"], op_record, ctx["paths"])
-            ctl_ref.die_unless(status != "conflict", f"unexpected conflict after preflight: {op_record['logical_id']}")
+            if status == "conflict":
+                skipped_conflicts.append(
+                    conflict_entry(
+                        store,
+                        op_record["logical_id"],
+                        op_record["transition_cid"],
+                        reason,
+                        op_record["expected"],
+                        op_record["result"],
+                        current,
+                    )
+                )
+                continue
             if status == "auto-admit":
                 binding_ops.append(op_record["op"])
+        if auto_only and not binding_ops:
+            continue
+        if not auto_only and skipped_conflicts:
+            raise ctl_ref.InvalidHistory(f"unexpected conflict after preflight: {skipped_conflicts[-1]['logical_id']}")
+        auto_binding_count += len(binding_ops)
+        recorded = [cid for cid in incoming_batch["recorded_revisions"] if cid not in current_state["recorded"]]
         if not recorded and not binding_ops:
             continue
         roles = active_role_bindings_for_actor(store, current_state, actor_id)
@@ -593,17 +839,33 @@ def admit_merge_in_memory(
         )
         current_state = child
 
+    if auto_only and conflicts and auto_binding_count == 0:
+        return {
+            "status": "conflict",
+            "merge_model": merge_model_report(),
+            "base_root_cid": ctx["base_root"],
+            "main_root_cid": ctx["main_state"]["root_cid"],
+            "incoming_root_cid": ctx["incoming_state"]["root_cid"],
+            "conflicts": skipped_conflicts,
+            "skipped_conflicts": skipped_conflicts,
+        }
+
     checked = ctl_ref.validate_chain(store, current_state["root_cid"], trust_anchor)
     ctl_ref.die_unless(checked["root_cid"] == current_state["root_cid"], "merge replay mismatch")
-    return {
+    report: dict[str, Any] = {
         "status": "ok",
+        "mode": "noop" if not merge_batches else "full",
         "merge_model": merge_model_report(),
         "base_root_cid": ctx["base_root"],
         "previous_root_cid": ctx["main_state"]["root_cid"],
         "incoming_root_cid": ctx["incoming_state"]["root_cid"],
         "current_root_cid": current_state["root_cid"],
         "merge_batches": merge_batches,
+        "skipped_conflicts": skipped_conflicts,
     }
+    if auto_only:
+        report["mode"] = "noop" if not merge_batches else "auto-only"
+    return report
 
 
 def merge_manifest_name(incoming_root: str, admitted_at: str) -> str:
@@ -622,6 +884,7 @@ def admit_merge_to_store(
     actor_id: str = DEFAULT_ACTOR_ID,
     submitted_by: str = DEFAULT_SUBMITTED_BY,
     base_root: str | None = None,
+    auto_only: bool = False,
 ) -> dict[str, Any]:
     main_ref = load_ref(main_store_root)
     ctl_ref.die_unless(main_ref["root_cid"] == expected_root, "expected root mismatch")
@@ -636,6 +899,7 @@ def admit_merge_to_store(
         submitted_by=submitted_by,
         admitted_at=admitted_at,
         base_root=base_root,
+        auto_only=auto_only,
     )
     if report["status"] != "ok":
         return report
@@ -661,27 +925,27 @@ def admit_merge_to_store(
         replace=True,
     )
     manifest_path = main_store_root / "manifests" / merge_manifest_name(incoming_root, admitted_at)
-    write_json(
-        manifest_path,
-        {
-            "schema": "ctl-dogfood/merge-manifest/1",
-            "mode": "shadow",
-            "project_id": main_ref["project_id"],
-            "kernel_profile": main_ref["kernel_profile"],
-            "admitted_at": admitted_at,
-            "actor_id": actor_id,
-            "submitted_by": submitted_by,
-            "base_root_cid": report["base_root_cid"],
-            "previous_root_cid": report["previous_root_cid"],
-            "incoming_root_cid": report["incoming_root_cid"],
-            "current_root_cid": report["current_root_cid"],
-            "merge_batches": report["merge_batches"],
-            "reproduce": [
-                "cd meta/ctl-dogfood",
-                "uv run python scripts/verify.py",
-            ],
-        },
-    )
+    manifest = {
+        "schema": "ctl-dogfood/merge-manifest/1",
+        "mode": report.get("mode", "shadow"),
+        "project_id": main_ref["project_id"],
+        "kernel_profile": main_ref["kernel_profile"],
+        "admitted_at": admitted_at,
+        "actor_id": actor_id,
+        "submitted_by": submitted_by,
+        "base_root_cid": report["base_root_cid"],
+        "previous_root_cid": report["previous_root_cid"],
+        "incoming_root_cid": report["incoming_root_cid"],
+        "current_root_cid": report["current_root_cid"],
+        "merge_batches": report["merge_batches"],
+        "reproduce": [
+            "cd ctl-dogfood",
+            "uv run python scripts/verify.py",
+        ],
+    }
+    if report.get("skipped_conflicts"):
+        manifest["skipped_conflicts"] = report["skipped_conflicts"]
+    write_json(manifest_path, manifest)
     report["manifest_path"] = str(manifest_path)
     return report
 
@@ -741,6 +1005,19 @@ def payload_diff_text(diff: dict[str, Any] | None) -> list[str]:
     return lines
 
 
+def transplant_command_lines(report: dict[str, Any], *, auto_only: bool = False) -> list[str]:
+    lines = [
+        "  python3 scripts/ctl_merge.py transplant-revisions \\",
+        "    --incoming-store-root <incoming-store-root> \\",
+        f"    --expected-root {report['main_root_cid']} \\",
+        "    --admitted-at <UTC> \\",
+    ]
+    if auto_only:
+        lines.append("    --auto-only \\")
+    lines.append("    --format text")
+    return lines
+
+
 def format_merge_root_text(report: dict[str, Any]) -> str:
     lines = [
         f"status: {report['status']}",
@@ -780,8 +1057,27 @@ def format_merge_root_text(report: dict[str, Any]) -> str:
             lines.append(f"    main: {revision_text(item['main_revision'])}")
             lines.append(f"    incoming: {revision_text(item['incoming_revision'])}")
             lines.extend(payload_diff_text(item.get("payload_diff")))
-    if report["status"] == "ok":
-        lines.append("next: run transplant-revisions only if this is the target branch you want to advance")
+    warnings = report.get("warnings", [])
+    if warnings:
+        lines.append("warnings:")
+        for item in warnings:
+            lines.append(f"  - {item['code']}: {item['path']}")
+            if "current_root_cid" in item:
+                lines.append(f"    current_root: {short_cid(item['current_root_cid'])}")
+            lines.append(f"    {item['message']}")
+    needs_transplant = False
+    if summary is not None:
+        needs_transplant = summary["auto-admit"] > 0
+    needs_transplant = needs_transplant or any(item["status"] == "record" for item in report.get("recorded_items", []))
+    if report["status"] == "ok" and not needs_transplant:
+        lines.append("next: no CTL root update is needed")
+    elif report["status"] == "ok":
+        lines.append("next: run this on the target branch if you want to advance refs/main.json:")
+        lines.extend(transplant_command_lines(report))
+    elif summary is not None and summary["auto-admit"] > 0 and summary["conflict"] > 0:
+        lines.append("next: optional partial transplant for auto-admit logical ids only:")
+        lines.extend(transplant_command_lines(report, auto_only=True))
+        lines.append("then: resolve listed logical-id conflicts by profile-owned rules and rerun merge-root")
     else:
         lines.append("next: resolve listed logical-id conflicts, then rerun merge-root")
     return "\n".join(lines)
@@ -800,6 +1096,8 @@ def format_transplant_text(report: dict[str, Any]) -> str:
         lines.append("mode: noop")
         lines.append("next: no CTL root update was needed")
         return "\n".join(lines)
+    if "mode" in report:
+        lines.append(f"mode: {report['mode']}")
     batches = report.get("merge_batches", [])
     lines.append(f"merge batches: {len(batches)}")
     for batch in batches:
@@ -807,7 +1105,67 @@ def format_transplant_text(report: dict[str, Any]) -> str:
         lines.append(f"  - {short_cid(batch['merge_batch_cid'])} -> {short_cid(batch['root_cid'])}: {ids}")
     if "manifest_path" in report:
         lines.append(f"manifest: {report['manifest_path']}")
+    skipped = report.get("skipped_conflicts", [])
+    if skipped:
+        lines.append("skipped conflicts:")
+        for item in skipped:
+            lines.append(f"  - {item['logical_id']}: {item['reason']}")
     lines.append("next: run python3 scripts/verify.py and commit refs/main.json, objects, and manifest together")
+    return "\n".join(lines)
+
+
+def format_runbook_text(report: dict[str, Any]) -> str:
+    plan = report["plan"]
+    preview = report["merge_preview"]
+    summary = preview.get("summary", {})
+    lines = [
+        "runbook: CTL branch-store merge",
+        f"kind: {plan['kind']}",
+        "writes_state: false",
+        f"target: {short_cid(preview.get('main_root_cid'))}",
+        f"incoming: {short_cid(preview.get('incoming_root_cid'))}",
+        (
+            "summary: "
+            f"auto-admit={summary.get('auto-admit', 0)} "
+            f"already-present={summary.get('already-present', 0)} "
+            f"conflict={summary.get('conflict', 0)}"
+        ),
+    ]
+    blocked = plan.get("blocked_logical_ids", [])
+    if blocked:
+        lines.append("blocked logical ids:")
+        for logical_id in blocked:
+            lines.append(f"  - {logical_id}")
+    warnings = plan.get("warnings", [])
+    if warnings:
+        lines.append("warnings:")
+        for item in warnings:
+            lines.append(f"  - {item['code']}: {item['path']}")
+        lines.append("next: inspect manifest sidecars with manifest-plan before committing")
+    commands = plan.get("commands", [])
+    if commands:
+        lines.append("commands:")
+        for command in commands:
+            lines.append(f"  {command}")
+    elif plan["kind"] == "blocked-conflict":
+        lines.append("commands: none until profile-owned conflict resolution is admitted")
+    else:
+        lines.append("commands: none")
+    lines.append(f"verify: {plan['verify_command']}")
+    lines.append("commit: include generated refs/main.json, objects, and manifests only after verify passes")
+    return "\n".join(lines)
+
+
+def format_manifest_plan_text(report: dict[str, Any]) -> str:
+    lines = [f"status: {report['status']}", "manifest plan:"]
+    items = report["manifest_plan"]["items"]
+    if not items:
+        lines.append("  - no incoming manifests found")
+        return "\n".join(lines)
+    for item in items:
+        lines.append(f"  - {item['path']}: {item['classification']}")
+        lines.append(f"    action: {item['recommended_action']}")
+        lines.append(f"    {item['message']}")
     return "\n".join(lines)
 
 
@@ -817,6 +1175,10 @@ def print_report(value: dict[str, Any], output_format: str, *, command: str) -> 
         return
     if command in {"merge-root", "preview"}:
         print(format_merge_root_text(value))
+    elif command == "runbook":
+        print(format_runbook_text(value))
+    elif command == "manifest-plan":
+        print(format_manifest_plan_text(value))
     else:
         print(format_transplant_text(value))
 
@@ -854,14 +1216,25 @@ def add_common_args(parser: argparse.ArgumentParser) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Merge CTL dogfood branch-store roots by logical binding semantics.")
+    parser = argparse.ArgumentParser(
+        description="Merge CTL dogfood branch-store roots by logical binding semantics.",
+        epilog=(
+            "Agents: start with 'runbook --format text' or 'merge-root --format text'. "
+            "See ctl-dogfood/protocols/branch-store-merge-agents.org."
+        ),
+    )
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ["merge-root", "preview"]:
+    for name in ["merge-root", "preview", "runbook"]:
         preview = sub.add_parser(
             name,
-            help="dry-run semantic merge report; never writes refs/main.json",
+            help="dry-run semantic merge report or agent runbook; never writes refs/main.json",
         )
         add_common_args(preview)
+    manifest_plan = sub.add_parser(
+        "manifest-plan",
+        help="classify incoming manifest sidecars without writing or deleting files",
+    )
+    add_common_args(manifest_plan)
     for name in ["transplant-revisions", "admit"]:
         admit = sub.add_parser(
             name,
@@ -878,18 +1251,50 @@ def main() -> int:
             required=True,
             help="UTC timestamp for generated merge admission batches, e.g. 2026-07-07T01:00:00Z",
         )
+        admit.add_argument(
+            "--auto-only",
+            action="store_true",
+            help="transplant only auto-admit binding ops and leave conflicting logical ids untouched",
+        )
         admit.add_argument("--actor-id", default=DEFAULT_ACTOR_ID, help="principal actor id")
         admit.add_argument("--submitted-by", default=DEFAULT_SUBMITTED_BY, help="submitting actor id")
     args = parser.parse_args()
 
     if args.command in {"merge-root", "preview"}:
-        store, trust_anchor, main_root, incoming_root, base_root = resolve_roots_for_cli(args)
+        incoming_store_root = args.incoming_store_root or args.store_root
         print_report(
-            build_merge_preview(store, main_root, incoming_root, trust_anchor, base_root),
+            build_store_merge_preview(
+                args.store_root,
+                incoming_store_root,
+                main_root=args.main_root,
+                incoming_root=args.incoming_root,
+                base_root=args.base_root,
+            ),
             args.format,
             command=args.command,
         )
         return 0
+
+    if args.command == "runbook":
+        incoming_store_root = args.incoming_store_root or args.store_root
+        print_report(
+            build_runbook(
+                args.store_root,
+                incoming_store_root,
+                main_root=args.main_root,
+                incoming_root=args.incoming_root,
+                base_root=args.base_root,
+            ),
+            args.format,
+            command=args.command,
+        )
+        return 0
+
+    if args.command == "manifest-plan":
+        incoming_store_root = args.incoming_store_root or args.store_root
+        report = build_manifest_plan(args.store_root, incoming_store_root, main_root=args.main_root)
+        print_report(report, args.format, command=args.command)
+        return 0 if report["status"] in {"ok", "warning"} else 1
 
     if args.command in {"transplant-revisions", "admit"}:
         incoming_store_root = args.incoming_store_root or args.store_root
@@ -904,6 +1309,7 @@ def main() -> int:
             actor_id=args.actor_id,
             submitted_by=args.submitted_by,
             base_root=args.base_root,
+            auto_only=args.auto_only,
         )
         print_report(report, args.format, command=args.command)
         return 0 if report["status"] == "ok" else 1
