@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:846cb3544e220638e298c5dd241b0ad17e9eebd34fb4234186e400904ca22895",
+  "generated_at": "2026-07-06T23:30:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:4-manifold:e1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:846cb3544e220638e298c5dd241b0ad17e9eebd34fb4234186e400904ca22895",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
+    "transition": "ctlobj-sha256:925fc53bc4e212372191f0833554ded4d45358aa1bc165c0845700f3ba29a14f"
+  },
+  "parent_root_cid": "ctlobj-sha256:a2c4bdcb00d7abd60598d3f2617e0491a5c06b3c5de5113828f8fd6a59a2606a",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/manifold-e1.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:4-manifold:e1 --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/manifold-e1.json --manifest manifests/subject-definition-2026-07-06-manifold-e1.json --created-at 2026-07-06T23:30:40Z --admitted-at 2026-07-06T23:30:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}

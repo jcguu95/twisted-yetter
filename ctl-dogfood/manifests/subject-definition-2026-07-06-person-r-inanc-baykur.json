@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:6e1b13b6785ff09fc7a8e3854080027a396b52e3a266fd699a5ac9a9877891a0",
+  "generated_at": "2026-07-06T23:58:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:person:r-inanc-baykur",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:6e1b13b6785ff09fc7a8e3854080027a396b52e3a266fd699a5ac9a9877891a0",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1",
+    "transition": "ctlobj-sha256:c97bb2aff611afe2335cc4daa4533dcc3b8ba3a12024d9d32d6a0817ae2bba4b"
+  },
+  "parent_root_cid": "ctlobj-sha256:eb574e92bec61697583c36a51b17d4bf1ecf79c6662a5855ed95db83c17e025c",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/person-r-inanc-baykur.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:person:r-inanc-baykur --revision-kind subject:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/person-r-inanc-baykur.json --manifest manifests/subject-definition-2026-07-06-person-r-inanc-baykur.json --created-at 2026-07-06T23:58:00Z --admitted-at 2026-07-06T23:58:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5d0f79b3b27c2afce599d9d47da09e3d467f0ee5"
+}

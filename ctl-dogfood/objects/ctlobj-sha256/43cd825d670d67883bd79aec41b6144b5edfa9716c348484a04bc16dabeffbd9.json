@@ -1,0 +1,165 @@
+{
+  "created_at": "2026-07-07T01:42:58Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-ctl-meta-branch-store-tooling-adoption",
+  "parents": [],
+  "payload": {
+    "adoption_boundary": {
+      "adoption_type": "downstream adoption of upstream CTL branch-store merge tooling",
+      "branch_store_semantic_merge_available": true,
+      "graph_revision_created": false,
+      "kernel_migration": false,
+      "old_objects_rewritten": false,
+      "state_store_migration": false
+    },
+    "adoption_recommendation": {
+      "admit_this_note_before_using_new_provider_as_current": true,
+      "do_not_resolve_ctl_refs_main_by_git_ours_or_theirs": true,
+      "status": "ADOPT_AS_CURRENT_PROVIDER_TOOLING"
+    },
+    "checks": [
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py current-root",
+        "result": "pass",
+        "summary": {
+          "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+          "root_cid": "ctlobj-sha256:20a8bc5427f70a0ccfc25ebc70bfbc5a898f9d43a1f940b57d479cafdd76fbfa",
+          "status": "ok",
+          "transition_cid": "ctlobj-sha256:5326fcce4ea37fa39363e74395e736438572ebd177e6a102d9914fa7de85f394"
+        }
+      },
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+        "result": "pass",
+        "summary": {
+          "history_kernel_result": "Valid",
+          "manifest_count": 132,
+          "manifest_status": "ok",
+          "object_count": 502,
+          "root_cid": "ctlobj-sha256:20a8bc5427f70a0ccfc25ebc70bfbc5a898f9d43a1f940b57d479cafdd76fbfa",
+          "status": "ok",
+          "store_status": "ok"
+        }
+      },
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py inspect-binding claim:graph:computation-first-v1",
+        "result": "pass",
+        "summary": {
+          "binding_cid": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
+          "binding_state": "bound",
+          "logical_id": "claim:graph:computation-first-v1",
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_merge.py --help",
+        "result": "pass",
+        "summary": {
+          "commands": [
+            "merge-root",
+            "preview",
+            "transplant-revisions",
+            "admit"
+          ],
+          "text_report_support": true
+        }
+      }
+    ],
+    "claim_boundary": "This note adopts upstream CTL branch-store merge tooling in twisted-yetter as downstream-local tooling. It does not rewrite historical State Store objects, does not change ctl-kernel/1 semantics, and does not assert a new Twisted-Yetter mathematical result.",
+    "created_at": "2026-07-07T01:42:58Z",
+    "downstream_store_under_test": {
+      "active_graph_claim_cid": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
+      "active_graph_logical_id": "claim:graph:computation-first-v1",
+      "active_graph_version": 30,
+      "manifest_count_before_admission": 132,
+      "object_count_before_admission": 502,
+      "pre_admission_current_root_cid": "ctlobj-sha256:20a8bc5427f70a0ccfc25ebc70bfbc5a898f9d43a1f940b57d479cafdd76fbfa",
+      "project_id": "project:twisted-yetter"
+    },
+    "generator_script": "manual-json-artifact",
+    "git": {
+      "commit_before_artifact": "4d2c1ffac74acfdd440c5e256170562e33d63014",
+      "dirty_before_artifact": true,
+      "dirty_reason": "upstream tooling files were copied into the worktree before recording this adoption checkpoint"
+    },
+    "kernel_compatibility": {
+      "kernel_profile": "ctl-kernel/1",
+      "kernel_profile_change": "none",
+      "kernel_semantics_changed": false,
+      "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+      "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
+    },
+    "legacy_provider_policy": {
+      "active_policy_logical_id_before_admission": "claim:lab-note:2026-07-06-ctl-v0.1.2-provider-adoption-compatibility",
+      "meaning": "The old provider adoption checkpoint remains a historical fact; this note supersedes it as the current provider policy by having a later admitted created_at.",
+      "required_current_provider_commit_before_admission": "4961189407282548d58e4fe977f28556a76e5908"
+    },
+    "note_id": "objective-note-2026-07-07-ctl-meta-branch-store-tooling-adoption",
+    "purpose": "Record downstream adoption of ctl-meta branch-store semantic merge tooling after the upstream b6b32a8 provider update, while preserving the existing twisted-yetter State Store as append-only history.",
+    "reproduce_commands": [
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py current-root",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py inspect-binding claim:graph:computation-first-v1",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_merge.py --help"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_of_truth_policy": "This compatibility note is a machine-readable CTL lab-note preimage. Bootstrap provider pins and earlier provider adoption claims remain historical facts; current provider adoption is established by the admitted compatibility claim.",
+    "status": "ESTABLISHED_COMPATIBILITY_CHECKPOINT",
+    "tooling_files": [
+      {
+        "path": "ctl-dogfood/scripts/ctl_store.py",
+        "sha256": "daa4ac22f31f50aed1478b7f22fae2ab896e3d5ed61b323980e482146ad16797",
+        "upstream_source": "meta/ctl-dogfood/scripts/ctl_store.py"
+      },
+      {
+        "path": "ctl-dogfood/scripts/ctl_merge.py",
+        "sha256": "a915012020ca07051c3cb3fc9418c24be2123487f59d31a0b0dc831533d8600d",
+        "upstream_source": "meta/ctl-dogfood/scripts/ctl_merge.py"
+      },
+      {
+        "path": "ctl-dogfood/scripts/merge_preview.py",
+        "sha256": "ca02e04bf8f0d558a571391870fe96c12655a9146062daf17ae9c9d74f38efd1",
+        "upstream_source": "meta/ctl-dogfood/scripts/merge_preview.py"
+      },
+      {
+        "path": "tests/test_ctl_merge.py",
+        "sha256": "96c86d426e19933801bc90c9e99f0fe0a3ca573b63a7ae3f2079cefdac3d16f3",
+        "upstream_source": "meta/ctl-dogfood/tests/test_ctl_merge.py"
+      }
+    ],
+    "upstream_provider": {
+      "commit": "b6b32a8cffaec7e089be1cec305f9ffc66f3f6c9",
+      "commit_status_short": "",
+      "recent_commits": [
+        {
+          "commit": "6d1bfada08f9ed70d337f82a99f0297e72e2f615",
+          "summary": "Add dogfood branch-store merge tooling"
+        },
+        {
+          "commit": "4a9d22872fbea23e3a979338260e89887aab3b2e",
+          "summary": "Document branch-store merge runbook"
+        },
+        {
+          "commit": "b6b32a8cffaec7e089be1cec305f9ffc66f3f6c9",
+          "summary": "Add human-readable merge reports"
+        }
+      ]
+    },
+    "verifier_update_policy": {
+      "bootstrap_provider_pin_should_remain_historical": true,
+      "current_provider_can_be_accepted_from_this_admitted_note": true,
+      "required_current_provider_clean_status": "",
+      "required_current_provider_commit": "b6b32a8cffaec7e089be1cec305f9ffc66f3f6c9",
+      "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+      "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:85ec3440676cdb8ebff4fd3238fbe7067a6d75f772c595c7eec1dc9633b7955c",
+  "generated_at": "2026-07-07T00:59:10Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:source-capture:anyonwiki-fr-6-1-4-5-cat-1-3-2-2026-07-06",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
+    "current_root": "ctlobj-sha256:85ec3440676cdb8ebff4fd3238fbe7067a6d75f772c595c7eec1dc9633b7955c",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:cd25fc8f5ad6c29fa1f3dc9af5529811f42ea336f397866df8aad4cf1334c7b2"
+  },
+  "parent_root_cid": "ctlobj-sha256:ca256a8df390409da1fd1bcb384b8dd9b24bd608d3b68f541c2de112eee32d1a",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-2-source-capture.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:source-capture:anyonwiki-fr-6-1-4-5-cat-1-3-2-2026-07-06 --payload lab-notes/2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-2-source-capture.json --manifest manifests/source-capture-2026-07-06-anyonwiki-fr-6-1-4-5-cat-1-3-2.json --created-at 2026-07-07T00:59:10Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}

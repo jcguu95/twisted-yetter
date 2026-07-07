@@ -1,0 +1,251 @@
+from __future__ import annotations
+
+import sys
+import tempfile
+import unittest
+import os
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DOGFOOD_ROOT = REPO_ROOT / "ctl-dogfood"
+CTL_META_ROOT = Path(os.environ.get("CTL_META_ROOT", REPO_ROOT.parent / "ctl-meta")).resolve()
+KERNEL_ROOT = CTL_META_ROOT / "meta" / "ctl-kernel"
+sys.path.insert(0, str(KERNEL_ROOT / "reference"))
+sys.path.insert(0, str(DOGFOOD_ROOT / "scripts"))
+
+import ctl_ref  # noqa: E402
+import ctl_merge  # noqa: E402
+
+
+def trust_anchor(genesis_root_cid: str) -> dict[str, str]:
+    return {
+        "project_id": "project:demo",
+        "kernel_profile": "ctl-kernel/1",
+        "genesis_root_cid": genesis_root_cid,
+    }
+
+
+def admit_claim(
+    store: ctl_ref.Store,
+    state: dict[str, object],
+    role_cid: str,
+    logical_id: str,
+    payload: dict[str, object],
+) -> dict[str, object]:
+    old_cid = state["bindings"].get(logical_id)  # type: ignore[index,union-attr]
+    parents = [] if old_cid is None else [old_cid]
+    claim = ctl_ref.revision(logical_id, "claim", "ctl-data/opaque-json/1", payload, parents)
+    claim_cid = store.add(claim)
+    expected = ctl_ref.absent() if old_cid is None else ctl_ref.bound(old_cid)
+    batch = ctl_ref.batch(
+        state["root_cid"],  # type: ignore[index]
+        [claim_cid],
+        [ctl_ref.set_op(logical_id, expected, claim_cid)],
+        [role_cid],
+    )
+    batch_cid = store.add(batch)
+    return ctl_ref.validate_transition(store, state, batch_cid)  # type: ignore[arg-type]
+
+
+class CtlMergeTests(unittest.TestCase):
+    def genesis(self):
+        store, manifest = ctl_ref.build_case("genesis")
+        state = ctl_ref.derive_genesis(store, manifest["genesis_batch"])
+        return store, manifest, state
+
+    def preview(self, store, base, main, incoming):
+        return ctl_merge.build_merge_preview(
+            store,
+            main["root_cid"],
+            incoming["root_cid"],
+            trust_anchor(base["root_cid"]),
+            base["root_cid"],
+        )
+
+    def admit(self, store, base, main, incoming):
+        return ctl_merge.admit_merge_in_memory(
+            store,
+            main["root_cid"],
+            incoming["root_cid"],
+            trust_anchor(base["root_cid"]),
+            actor_id="actor:jin",
+            submitted_by="operator:local",
+            admitted_at="2026-06-25T23:02:00Z",
+            base_root=base["root_cid"],
+        )
+
+    def test_distinct_branch_binding_can_auto_admit(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:main", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:branch", {"text": "branch"})
+
+        report = self.preview(store, base, main, incoming)
+
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual([item["status"] for item in report["items"]], ["auto-admit"])
+        self.assertEqual(report["items"][0]["logical_id"], "claim:branch")
+
+    def test_auto_admit_builds_valid_merge_root(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:main", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:branch", {"text": "branch"})
+
+        report = self.admit(store, base, main, incoming)
+        merged = ctl_ref.validate_chain(store, report["current_root_cid"], trust_anchor(base["root_cid"]))
+
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual(len(report["merge_batches"]), 1)
+        self.assertIn("claim:main", merged["bindings"])
+        self.assertIn("claim:branch", merged["bindings"])
+
+    def test_same_binding_cid_is_already_present(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:same", {"text": "same"})
+        incoming = admit_claim(store, base, role_cid, "claim:same", {"text": "same"})
+
+        report = self.preview(store, base, main, incoming)
+
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual([item["status"] for item in report["items"]], ["already-present"])
+
+    def test_main_at_intermediate_branch_state_fast_forwards(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        first = admit_claim(store, base, role_cid, "claim:topic", {"text": "one"})
+        incoming = admit_claim(store, first, role_cid, "claim:topic", {"text": "two"})
+        main = first
+
+        preview = self.preview(store, base, main, incoming)
+        report = self.admit(store, base, main, incoming)
+        merged = ctl_ref.validate_chain(store, report["current_root_cid"], trust_anchor(base["root_cid"]))
+
+        self.assertEqual([item["status"] for item in preview["items"]], ["already-present", "auto-admit"])
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual(len(report["merge_batches"]), 1)
+        self.assertEqual(merged["bindings"]["claim:topic"], incoming["bindings"]["claim:topic"])
+
+    def test_fully_merged_multistep_branch_is_noop(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        first = admit_claim(store, base, role_cid, "claim:topic", {"text": "one"})
+        incoming = admit_claim(store, first, role_cid, "claim:topic", {"text": "two"})
+        main = incoming
+
+        preview = self.preview(store, base, main, incoming)
+        report = self.admit(store, base, main, incoming)
+
+        self.assertEqual([item["status"] for item in preview["items"]], ["already-present", "already-present"])
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual(report["merge_batches"], [])
+        self.assertEqual(report["current_root_cid"], main["root_cid"])
+
+    def test_same_logical_id_different_cid_conflicts(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:shared", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:shared", {"text": "branch"})
+
+        report = self.preview(store, base, main, incoming)
+
+        self.assertEqual(report["status"], "conflict")
+        self.assertEqual([item["status"] for item in report["items"]], ["conflict"])
+        self.assertEqual(report["items"][0]["main_current"]["state"], "bound")
+        self.assertEqual(report["logical_ids"][0]["payload_diff"]["changed"]["text"]["main"], "main")
+        self.assertEqual(report["logical_ids"][0]["payload_diff"]["changed"]["text"]["incoming"], "branch")
+
+    def test_text_report_names_conflict_logical_id_and_payload_diff(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:shared", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:shared", {"text": "branch"})
+
+        text = ctl_merge.format_merge_root_text(self.preview(store, base, main, incoming))
+
+        self.assertIn("status: conflict", text)
+        self.assertIn("claim:shared", text)
+        self.assertIn("payload: changed", text)
+        self.assertIn("main='main'", text)
+        self.assertIn("incoming='branch'", text)
+
+    def test_text_report_shows_operator_next_step_for_ok_merge(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:main", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:branch", {"text": "branch"})
+
+        text = ctl_merge.format_merge_root_text(self.preview(store, base, main, incoming))
+
+        self.assertIn("status: ok", text)
+        self.assertIn("auto-admit=1", text)
+        self.assertIn("transplant-revisions", text)
+
+    def test_conflict_is_not_admitted(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:shared", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:shared", {"text": "branch"})
+        object_count = len(store.objects)
+
+        report = self.admit(store, base, main, incoming)
+
+        self.assertEqual(report["status"], "conflict")
+        self.assertNotIn("current_root_cid", report)
+        self.assertEqual(len(store.objects), object_count)
+
+    def test_admit_merge_to_store_writes_ref_and_manifest(self):
+        store, manifest, base = self.genesis()
+        role_cid = manifest["objects"]["role"]
+        main = admit_claim(store, base, role_cid, "claim:main", {"text": "main"})
+        incoming = admit_claim(store, base, role_cid, "claim:branch", {"text": "branch"})
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            main_root = tmp_root / "main"
+            incoming_root = tmp_root / "incoming"
+            ctl_merge.write_all_objects(main_root, store)
+            ctl_merge.write_all_objects(incoming_root, store)
+            ref_common = {
+                "schema": "ctl-dogfood/ref/1",
+                "name": "refs/main",
+                "project_id": "project:demo",
+                "kernel_profile": "ctl-kernel/1",
+                "genesis_root_cid": base["root_cid"],
+                "updated_at": "2026-06-25T23:01:00Z",
+                "updated_by": "operator:local",
+            }
+            ctl_merge.write_json(
+                main_root / "refs" / "main.json",
+                {**ref_common, "root_cid": main["root_cid"], "transition_cid": main["root"]["transition"]},
+            )
+            ctl_merge.write_json(
+                incoming_root / "refs" / "main.json",
+                {
+                    **ref_common,
+                    "root_cid": incoming["root_cid"],
+                    "transition_cid": incoming["root"]["transition"],
+                },
+            )
+
+            report = ctl_merge.admit_merge_to_store(
+                main_root,
+                incoming_root,
+                incoming_root=incoming["root_cid"],
+                expected_root=main["root_cid"],
+                admitted_at="2026-06-25T23:02:00Z",
+                actor_id="actor:jin",
+                submitted_by="operator:local",
+                base_root=base["root_cid"],
+            )
+            ref = ctl_merge.load_ref(main_root)
+
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual(ref["root_cid"], report["current_root_cid"])
+        self.assertIn("manifest_path", report)
+
+
+if __name__ == "__main__":
+    unittest.main()

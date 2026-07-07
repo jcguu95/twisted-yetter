@@ -1,0 +1,144 @@
+{
+  "created_at": "2026-07-07T01:02:20Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v1",
+  "parents": [],
+  "payload": {
+    "current_view_rule": "Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.",
+    "index_id": "subject-index:twisted-yetter:subject-layer-lane-v1",
+    "known_proposal_notes": {
+      "design_proposal": {
+        "current_claim_cid_at_index_creation": "ctlobj-sha256:f0106d0a7b0028d382863da76675943187a4a1355da1cb81b4366cc5880e74dd",
+        "logical_id": "claim:lab-note:2026-07-06-subject-layer-design-proposal-v0"
+      },
+      "ontology_proposal": {
+        "current_claim_cid_at_index_creation": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
+        "logical_id": "claim:lab-note:2026-07-06-twisted-yetter-subject-ontology-v0"
+      }
+    },
+    "logical_id_prefixes": [
+      "subject-edge:",
+      "subject-index:",
+      "subject-operation:",
+      "subject:"
+    ],
+    "migration_notes": "This v1 index extends v0 with SU(3)_2 / AnyonWiki FR_6_1_4_5 navigation subjects while retaining the Baykur, Akbulut, Yasui, Crane-Yetter, and D(A4) subject lane seeds from current main. If ctl-meta later defines a generic upstream subject profile, migrate by admitting subject-operation:migrate_to_upstream_profile records or replacement subject revisions.",
+    "physical_store": "Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.",
+    "profile_family": [
+      "twisted-yetter/subject-definition/0",
+      "twisted-yetter/subject-edge/0",
+      "twisted-yetter/subject-index/0",
+      "twisted-yetter/subject-operation/0"
+    ],
+    "purpose": "Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to generated topic-oriented wiki views.",
+    "review_warnings_addressed": [
+      "This v1 index is a union over the latest main subject lane and the SU(3)_2 AnyonWiki FR_6_1_4_5 lane.",
+      "SU(3), SU(3)_k, and SU(3)_2 are represented as distinct subjects.",
+      "AnyonWiki source records remain provenance subjects and source-capture claims, not automatic SU(3)_2 identification theorems.",
+      "The scalar-gauge equivalence claim is attached as an evidence claim about the F/R source cluster.",
+      "The CP2#2CPbar character-twist signal is represented as motivation without upgrading exploratory scans into theorem-level claims.",
+      "The Yasui a=3 D(A4) run remains an inconclusive partial-computation cluster, not a completed invariant.",
+      "Baykur arXiv:2403.14586v1 and its arXiv-listed author remain represented as paper/person subjects."
+    ],
+    "schema": "twisted-yetter/subject-index/0",
+    "seed_edges": [
+      "subject-edge:ty:akbulut-figure1-e1:about:e1",
+      "subject-edge:ty:akbulut-figure38-note:about:figure38",
+      "subject-edge:ty:akbulut-figure38:about:e1",
+      "subject-edge:ty:akbulut-paper:defines:figure1-e1",
+      "subject-edge:ty:akbulut-paper:defines:figure38",
+      "subject-edge:ty:anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence:about:su3-2-fr-cluster",
+      "subject-edge:ty:anyonwiki-cat-1-3-1-source-capture:about:fr-6-1-4-5",
+      "subject-edge:ty:anyonwiki-cat-1-3-2-source-capture:about:fr-6-1-4-5",
+      "subject-edge:ty:baykur-2403-14586:authored-by:r-inanc-baykur",
+      "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline",
+      "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:su3-2",
+      "subject-edge:ty:reference-hub:mentions:baerenz-barrett-1601-03580",
+      "subject-edge:ty:reference-hub:mentions:baykur-2403-14586",
+      "subject-edge:ty:reference-hub:mentions:burke-2402-15087-provisional",
+      "subject-edge:ty:reference-hub:mentions:crane-kauffman-yetter-hepth-9409167",
+      "subject-edge:ty:reference-hub:mentions:tham-2108-13467",
+      "subject-edge:ty:reference-hub:mentions:yetter-hepth-9311082",
+      "subject-edge:ty:su2-k:depends-on:su2",
+      "subject-edge:ty:su3-2:depends-on:su3-k",
+      "subject-edge:ty:su3-2:motivated-by:cp2-2cpbar-character-twist-signal",
+      "subject-edge:ty:su3-2-anyonwiki-fr-cluster:about:su3-2",
+      "subject-edge:ty:su3-2-anyonwiki-fr-cluster:supports:su3-2",
+      "subject-edge:ty:su3-2-anyonwiki-fr-cluster:uses:anyonwiki-fr-6-1-4-5",
+      "subject-edge:ty:su3-3:depends-on:su3-k",
+      "subject-edge:ty:su3-k:depends-on:su3",
+      "subject-edge:ty:yasui-a1-cluster:computes:yasui-a1-link",
+      "subject-edge:ty:yasui-a1-cluster:mentions:su3-2",
+      "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su2-k",
+      "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su3-3",
+      "subject-edge:ty:yasui-a1-cluster:uses:cp2-split-baseline",
+      "subject-edge:ty:yasui-a1-cluster:uses:da4-c3w1",
+      "subject-edge:ty:yasui-a1-cluster:uses:singleton-route",
+      "subject-edge:ty:yasui-a1-link:mentions:yasui-hub",
+      "subject-edge:ty:yasui-a1-note:about:cluster",
+      "subject-edge:ty:yasui-a3-cluster:computes:yasui-a3-link",
+      "subject-edge:ty:yasui-a3-cluster:uses:da4-omega0",
+      "subject-edge:ty:yasui-a3-cluster:uses:singleton-route",
+      "subject-edge:ty:yasui-a3-note:about:partial-cluster",
+      "subject-edge:ty:yasui-paper:defines:a1-link",
+      "subject-edge:ty:yasui-paper:defines:a3-link"
+    ],
+    "seed_subjects": [
+      "subject:twisted-yetter:4-manifold:e1",
+      "subject:twisted-yetter:category-family:su2-k",
+      "subject:twisted-yetter:category-family:su3-k",
+      "subject:twisted-yetter:category:d-a4-c3w1",
+      "subject:twisted-yetter:category:d-a4-omega0",
+      "subject:twisted-yetter:category:su3-2",
+      "subject:twisted-yetter:category:su3-3",
+      "subject:twisted-yetter:claim-cluster:cp2-2cpbar-character-twist-signal",
+      "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols",
+      "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
+      "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial",
+      "subject:twisted-yetter:hub:yasui",
+      "subject:twisted-yetter:lie-group:su2",
+      "subject:twisted-yetter:lie-group:su3",
+      "subject:twisted-yetter:link:yasui-figure3-a1-r1-normalized",
+      "subject:twisted-yetter:link:yasui-figure3-a3",
+      "subject:twisted-yetter:paper:akbulut-0805-1524",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+      "subject:twisted-yetter:paper:baykur-2403-14586",
+      "subject:twisted-yetter:paper:burke-2402-15087-provisional",
+      "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167",
+      "subject:twisted-yetter:paper:tham-2108-13467",
+      "subject:twisted-yetter:paper:yasui-0807-0373",
+      "subject:twisted-yetter:paper:yetter-hepth-9311082",
+      "subject:twisted-yetter:person:r-inanc-baykur",
+      "subject:twisted-yetter:presentation:akbulut-figure1-e1",
+      "subject:twisted-yetter:presentation:akbulut-figure38",
+      "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
+      "subject:twisted-yetter:reference:anyonwiki-fr-6-1-4-5",
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation"
+    ],
+    "status": "active",
+    "title": "Twisted Yetter downstream subject lane v1",
+    "upstream_review_contract": {
+      "downstream_scope": "This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.",
+      "first_reading_path": [
+        "Read this subject-index payload.",
+        "Read the verifier rules in ctl-dogfood/scripts/verify.py for the accepted local schemas.",
+        "Read v0 as historical seed context; use active CTL bindings for the current subject projection."
+      ],
+      "migration_commitment": "Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.",
+      "questions_for_upstream": [
+        "Should source/provenance records such as AnyonWiki FR_6_1_4_5 be subject:reference records or a distinct upstream source-record kind?",
+        "Should evidence strength such as candidate-identification-not-independent-proof become typed rather than an optional edge string?",
+        "Should generated wiki views distinguish active and candidate subject edges visually?"
+      ],
+      "upstream_may_replace_profiles": true
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-index"
+}
