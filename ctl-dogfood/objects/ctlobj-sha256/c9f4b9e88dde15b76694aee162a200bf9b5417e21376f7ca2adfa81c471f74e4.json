@@ -1,0 +1,137 @@
+{
+  "created_at": "2026-07-07T14:10:56Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-special-handle-evaluation-roadmap",
+  "parents": [],
+  "payload": {
+    "conceptual_context": {
+      "dual_upside_down_understanding": "目前工作理解是：既有 direct Kirby-link evaluation 應被視為採用 upside-down / dual Kirby picture，而不是逐字 bottom-up 實作 Tham 5.11。Tham 5.11 中 2-handle map 產生的 post-surgery belt-core graph，從 4-handle 側看可視為 dual Kirby link。",
+      "general_case_preview": "若 1-handles 與 3-handles 同時在場，預期 H2 = ker(d2) / im(d3)。這會同時有 kernel constraint 與 image quotient，比前五步更困難。",
+      "only_one_and_two_handles_case": "若 chosen direction 中只有 1-handles 與 2-handles，則 H2 應由 ker(d2) 控制。twisted character assignments 必須落在 ker(d2) 上，不能任意貼到所有 2-handle components。",
+      "only_two_and_three_handles_case": "若 chosen direction 中只有 2-handles 與 3-handles，則 H2 應由 C2 / im(d3) 控制。special dotted unknots 或 3-handle projectors 會給出 im(d3) relations；character assignments 必須對這些 relations descend。",
+      "special_dotted_unknot_interpretation": "若原 Kirby diagram 中出現 special dotted unknots，在 dual/upside-down convention 下較自然解釋為 Tham 5.11 的 3-handle / vacuum-channel projection data，而不是 ordinary 1-handles。"
+    },
+    "created_at": "2026-07-07T14:10:56Z",
+    "created_by": "actor:codex",
+    "execution_dependency_policy": {
+      "carry_on_rule": "此 roadmap 是有條件的順序計畫；若較早步驟失敗、normalization 不符、source interpretation 壞掉、或 convention 無法固定，後續步驟不應自動繼續 carry on。",
+      "status": "CONTINGENT_PLAN",
+      "why": "前五步是逐層拆風險的 sanity ladder，不是承諾一定會依序完成。後面 mixed-handle 步驟尤其依賴前面 untwisted/twisted checks 成功。"
+    },
+    "global_caveats": [
+      "此 roadmap 是下一步工作方向，不是 admitted mathematical result。",
+      "Yasui CP^2(a) 的 ordinary/twisted comparison 仍需 page-level source citation、machine-readable diagram data、normalization convention，以及 reproducible artifact。",
+      "D(Dic_12) 與 SU(3)_2 被選為候選，是因為現有結果顯示它們有 nontrivial pointed/simple-current character phase；這不代表它們必然給出 exotic-sensitive invariant。",
+      "special dotted knots 在 dual/upside-down convention 下較自然解釋為 Tham 5.11 的 3-handle / vacuum-channel projection data；這仍是 working interpretation。",
+      "一般同時有 1-handles 與 3-handles 的情況預期最困難，因為 twisted data 必須同時處理 ker(d2) 和 im(d3)。"
+    ],
+    "mathematical_status": "PLAN_ONLY_NOT_EVIDENCE",
+    "next_artifact_targets": [
+      "Yasui CP^2(a) source record with exact figure/page locator and handle counts。",
+      "Ordinary CP^2 D(Dic_12) and SU(3)_2 character-twist preflight artifacts。",
+      "A machine-readable schema for special dotted knots as Tham 5.11 projector/relation data。",
+      "A small X candidate record with d2 matrix and H2 computation。",
+      "A later mixed-handle candidate record with both d2 and d3 matrices。"
+    ],
+    "note_id": "objective-note-2026-07-07-special-handle-evaluation-roadmap",
+    "repo_snapshot": {
+      "dirty_status": "dirty: unrelated pre-existing ctl_merge/protocol/test changes and ctl-dogfood/.DS_Store were present and intentionally excluded from this plan",
+      "git_commit": "b4db936140a0ab2eef4125341d016ea5cbc37c48"
+    },
+    "roadmap": [
+      {
+        "description": "先做 Yasui CP^2(a) 的 untwisted Crane-Yetter evaluation。預期不依賴 a，應與 standard CP^2 的 ordinary value 一致。",
+        "not_claimed": "尚未聲稱已經能從圖中完整 machine-read dual Kirby link，也不聲稱此步已完成。",
+        "purpose": "檢查 dual/upside-down convention、Tham 5.11 方向下的 1-handle normalization，以及 Yasui 圖中 genuine 3-handles 在 upside-down 後的處理是否合理。",
+        "status": "PLANNED",
+        "step": 1,
+        "title": "Yasui CP^2(a) untwisted evaluation"
+      },
+      {
+        "candidate_categories": [
+          "D(Dic_12) / D(Dic_3) witness invertible with twist -1",
+          "SU(3)_2 with Z/3 simple-current phase"
+        ],
+        "description": "在 standard CP^2 的 +1 unknot presentation 上，先檢查 D(Dic_12) 與 SU(3)_2 是否給出 nontrivial character-twisted value。",
+        "not_claimed": "尚未固定所有 sign、framing、theta/inverse theta convention。",
+        "purpose": "確認候選 category 的 character twist 在最小 ordinary CP^2 case 上真的會動，再拿去 Yasui CP^2(a) 測。",
+        "status": "PLANNED",
+        "step": 2,
+        "title": "Ordinary CP^2 character-twist preflight"
+      },
+      {
+        "description": "嘗試 Yasui CP^2(a) 的 character-twisted evaluation。component-level twist 不可任意指定，應由 H2=<h> 上的 character pull back 到圖中 components。",
+        "expected_pullback_shape": "若 component classes 為 (a+1)h, 2h, h，則 component phases 應形如 chi^(a+1), chi^2, chi。",
+        "not_claimed": "這仍是候選規則；尚未證明 full twisted formula，也尚未處理所有 convention risk。",
+        "purpose": "檢查 Yasui CP^2(a) 的 twisted value 是否與 ordinary CP^2 的 chi-twisted value一致。",
+        "status": "PLANNED",
+        "step": 3,
+        "title": "Yasui CP^2(a) slightly twisted evaluation"
+      },
+      {
+        "description": "尋找一個小而非平凡的 closed 4-manifold presentation X，在 chosen direction 下只有 1-handles 與 2-handles。這可以是真正的新例子，也可能是 Yasui CP^2(a) 的 upside-down diagram。",
+        "desired_features": [
+          "closed 4-manifold",
+          "H2 非零",
+          "2-handle components 與 H2 basis 不完全一一對應",
+          "例子要小到可以手動或 machine-readably 驗算"
+        ],
+        "not_claimed": "尚未選定 X。",
+        "purpose": "測試 Tham 5.11 中 one-handle / two-handle side 的 evaluator，也就是 ker(d2) 版本。",
+        "status": "PLANNED",
+        "step": 4,
+        "title": "Find a small closed X with only 1- and 2-handles"
+      },
+      {
+        "description": "先對 X 做 untwisted evaluation，檢查是否等於已知 manifold value；再做 character-twisted evaluation，測試 ker(d2) constraint 下的 legal character assignments。",
+        "not_claimed": "尚未建立 X 的 d2 matrix、合法 character assignment list、或任何 evaluation artifact。",
+        "purpose": "補上 only 1-/2-handle picture 的測試：untwisted 檢查 Tham one-handle/two-handle normalization；twisted 檢查 H2=ker(d2) 上的 character data。",
+        "status": "PLANNED",
+        "step": 5,
+        "title": "Evaluate X untwisted and slightly twisted"
+      },
+      {
+        "description": "若前五步順利，尋找一個同時有 1-handles、2-handles、3-handles 的小 closed example，使 H2 同時需要 kernel 與 image：H2 = ker(d2) / im(d3)。",
+        "not_claimed": "目前沒有候選例子，也不急著執行。",
+        "purpose": "測試完整 H2 bookkeeping，而不是只測 ker(d2) 或 C2/im(d3) 的單側版本。",
+        "status": "PLANNED_LATER",
+        "step": 6,
+        "title": "Find a small mixed-handle example with both d2 and d3"
+      },
+      {
+        "description": "對 step 6 的 mixed-handle example 做 untwisted Crane-Yetter evaluation，檢查 Tham 5.11 中 1-handle factors、2-handle regular colors、3-handle vacuum projectors 是否與已知 closed-manifold value 一致。",
+        "not_claimed": "尚未建立任何 mixed-handle evaluator。",
+        "purpose": "在同時存在 kernel/image 前，先確認 untwisted normalization 和 projector bookkeeping 沒有錯。",
+        "status": "PLANNED_LATER",
+        "step": 7,
+        "title": "Mixed-handle untwisted normalization check"
+      },
+      {
+        "description": "對 mixed-handle example 嘗試 character-twisted evaluation。合法 character assignment 應先滿足 d2-kernel constraint，再 quotient 掉 im(d3) relation，也就是真正活在 H2 = ker(d2)/im(d3)。",
+        "not_claimed": "這是後續高風險設計步驟，尚未聲稱公式正確。",
+        "purpose": "測試完整 twisted-data placement：同時處理 one-handle constraints 與 three-handle relations。",
+        "status": "PLANNED_LATER",
+        "step": 8,
+        "title": "Mixed-handle twisted H2 assignment check"
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "這是一個研究計畫草案，不是計算結果、不是 theorem、不是已驗證公式，也不保證後續一定照此順序執行。若前面任一步驟壞掉，後續步驟不應自動 carry on。",
+      "question": "記錄下一輪 special-handle / Tham 5.11 / dual Kirby convention 下的 Crane-Yetter 與 character-twisted evaluation 路線。",
+      "source_context": [
+        "Tham arXiv:2108.13467v1 Definition 5.11 的 premodular handle-by-handle skein map。",
+        "ctl-dogfood/lab-notes/2026-07-07-tham-dual-kirby-convention-clarification.json 的 dual/upside-down Kirby-link working understanding。"
+      ]
+    },
+    "status": "ROADMAP_PROPOSAL_NOT_EXECUTED",
+    "title": "Special-handle Crane-Yetter evaluation roadmap"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
