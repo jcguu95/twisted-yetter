@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-07-07T12:47:32Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:paper:tham-2108-13467",
+  "parents": [
+    "ctlobj-sha256:a3c65e595aa4526e756651b98b85cb59ccbb2f88d84c352a2505368a0dddb214"
+  ],
+  "payload": {
+    "aliases": [
+      "tham-extended-crane-yetter-thesis",
+      "tham-boundary-values-extended-crane-yetter"
+    ],
+    "current_view_hints": {
+      "tham_definition_5_11_premodular_handle_maps": {
+        "id": "definition-5-11-premodular-handle-maps",
+        "locator": {
+          "arxiv_id": "2108.13467v1",
+          "definition": "Definition 5.11",
+          "pdf_page": 58,
+          "printed_page": 52,
+          "section": "5.2"
+        },
+        "relevance_to_twisted_yetter": "High-priority source for the handle-by-handle extended Crane-Yetter skein map before imposing modular-category signature simplifications. This is directly relevant to future dotted/special-link and 3-handle evaluator design.",
+        "status": "SOURCE_EXTRACTED_SUMMARY",
+        "summary": {
+          "handle_maps": [
+            {
+              "handle_index": 0,
+              "map_summary": "Adds a new S^3 component and multiplies by D."
+            },
+            {
+              "handle_index": 1,
+              "map_summary": "After isotoping the graph away from the attaching balls, includes the graph in the new boundary and multiplies by D^{-1}."
+            },
+            {
+              "handle_index": 2,
+              "map_summary": "Adds a trivially framed core circle in the 2-handle belt solid torus, colored by the regular color."
+            },
+            {
+              "handle_index": 3,
+              "map_summary": "Projects the graph crossing the 3-handle co-core onto the tensor-unit/simple-object-1 channel, after decomposing crossings into simple-label summands."
+            },
+            {
+              "handle_index": 4,
+              "map_summary": "Evaluates the graph in the killed S^3 component by Reshetikhin-Turaev evaluation and leaves the remaining graph."
+            }
+          ],
+          "interpretation_for_current_project": "For ordinary modular closed-manifold specializations the handle maps can collapse to scalar signature/Euler-characteristic formulae, but the premodular handle-level definition indicates that 3-handles are categorically vacuum-channel projections rather than merely global-dimension scalars. A twisted/H2-marked extension should therefore record the 3-handle relation data and the corresponding unit-channel constraint.",
+          "setup": "For an elementary index-k cornered handle cobordism W = H_k o id_M, Tham defines a linear map Z_CY^sk(W;N) between skein modules for an arbitrary premodular-category Crane-Yetter setup."
+        }
+      }
+    },
+    "display_name": "Tham, On the Category of Boundary Values in the Extended Crane-Yetter TQFT",
+    "equivalent_external_ids": [
+      "arxiv:2108.13467v1",
+      "doi:10.48550/arXiv.2108.13467"
+    ],
+    "external_references": [
+      {
+        "abs_url": "https://arxiv.org/abs/2108.13467",
+        "arxiv_id": "2108.13467",
+        "capture_date": "2026-07-06",
+        "kind": "arxiv",
+        "version": "v1",
+        "versioned_id": "2108.13467v1"
+      }
+    ],
+    "parent_subject_ids": [
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature"
+    ],
+    "schema": "twisted-yetter/subject-definition/0",
+    "scope_note": "Ying Hong Tham's thesis/preprint on extended Crane-Yetter TQFT, PLCW decompositions, skein descriptions, and boundary values. User flagged this as a likely starting point for a future complete formula route; this record does not yet extract the Kirby/skein formula details.",
+    "status": "active",
+    "subject_id": "subject:twisted-yetter:paper:tham-2108-13467",
+    "subject_kind": "ty:paper",
+    "upstream_review_hints": [
+      "Treat this as a high-priority source for future evaluator design.",
+      "Before implementing from it, create page-level reference/evidence notes for the PLCW, skein, and boundary-category formulae."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject:definition"
+}
