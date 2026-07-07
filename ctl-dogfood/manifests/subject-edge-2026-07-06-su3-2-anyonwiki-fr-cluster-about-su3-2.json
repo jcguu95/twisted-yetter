@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:5e9f3baffa806fff076b0d5e90f0dd0069c5e0d3ca13f768221caf9a16d1e131",
+  "generated_at": "2026-07-07T01:00:50Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:su3-2-anyonwiki-fr-cluster:about:su3-2",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:5e9f3baffa806fff076b0d5e90f0dd0069c5e0d3ca13f768221caf9a16d1e131",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:b5f892a503534eec578e317214d5a09931359dc60b278f64692323551e776d88",
+    "transition": "ctlobj-sha256:aba014031a409564d0828eca6096760dea19195621405062b8f12adb5f00eae6"
+  },
+  "parent_root_cid": "ctlobj-sha256:f489790dc14900bea5ff81a269f903b09bad300714b223834008e6ff2af61ccd",
+  "payload_file": "ctl-dogfood/subject-layer/edges/su3-2-anyonwiki-fr-cluster-about-su3-2.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:su3-2-anyonwiki-fr-cluster:about:su3-2 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/su3-2-anyonwiki-fr-cluster-about-su3-2.json --manifest manifests/subject-edge-2026-07-06-su3-2-anyonwiki-fr-cluster-about-su3-2.json --created-at 2026-07-07T01:00:50Z --admitted-at 2026-07-07T01:00:50Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}

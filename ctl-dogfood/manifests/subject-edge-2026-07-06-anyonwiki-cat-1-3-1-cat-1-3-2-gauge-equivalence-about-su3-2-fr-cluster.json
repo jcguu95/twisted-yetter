@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:e8c55ffe9ad8f9cbdf204ed7908db0107db8dffde421f02fbdd74b46a4a9377e",
+  "generated_at": "2026-07-07T01:01:30Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence:about:su3-2-fr-cluster",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e8c55ffe9ad8f9cbdf204ed7908db0107db8dffde421f02fbdd74b46a4a9377e",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:f465e66f221c8819fdba20704f5ef85de1ffbf5975d2d7e444d09b9b18e4a8aa",
+    "transition": "ctlobj-sha256:f1041c3eb44df36bd33d778a3f9ee5ee5433c90553645d91472e7d79338a97f3"
+  },
+  "parent_root_cid": "ctlobj-sha256:2bf987d447797ffd3c87cbd0ae2a8146319550214a91b7a2bbea9077a46879b2",
+  "payload_file": "ctl-dogfood/subject-layer/edges/anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence-about-cluster.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence:about:su3-2-fr-cluster --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence-about-cluster.json --manifest manifests/subject-edge-2026-07-06-anyonwiki-cat-1-3-1-cat-1-3-2-gauge-equivalence-about-su3-2-fr-cluster.json --created-at 2026-07-07T01:01:30Z --admitted-at 2026-07-07T01:01:30Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}

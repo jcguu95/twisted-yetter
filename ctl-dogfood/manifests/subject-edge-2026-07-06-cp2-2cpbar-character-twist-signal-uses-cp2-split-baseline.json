@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:6791ca9e4e249a28b3e2c7d598278a1ba2acdad05435836957e3830a9266ca41",
+  "generated_at": "2026-07-07T01:02:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:6791ca9e4e249a28b3e2c7d598278a1ba2acdad05435836957e3830a9266ca41",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:f4364851020c3d2fee98f67eea11d0f3c2d4821f2b56dd4c7ded1727a003b52e",
+    "transition": "ctlobj-sha256:c42811fd5bef587dfc01472f87b7f7dc5a025b73af6fdf7454158096b1abf4c4"
+  },
+  "parent_root_cid": "ctlobj-sha256:7153c84320366e1bcbe58a746b76703d933ef3d910459c9660fdd311577f1780",
+  "payload_file": "ctl-dogfood/subject-layer/edges/cp2-2cpbar-character-twist-signal-uses-cp2-split-baseline.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/cp2-2cpbar-character-twist-signal-uses-cp2-split-baseline.json --manifest manifests/subject-edge-2026-07-06-cp2-2cpbar-character-twist-signal-uses-cp2-split-baseline.json --created-at 2026-07-07T01:02:00Z --admitted-at 2026-07-07T01:02:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}
