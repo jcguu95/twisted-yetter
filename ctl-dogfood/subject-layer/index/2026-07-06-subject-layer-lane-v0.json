@@ -37,7 +37,9 @@
     "SU(3)_2 and SU(3)_3 are represented as category subjects with explicit warnings about incomplete/nonexistent F/R Yasui evaluations.",
     "The Yasui a=3 D(A4) run is represented as an inconclusive partial-computation cluster, not a completed invariant.",
     "Edges in this seed set are admitted subject-edge records, not informal candidate prose.",
-    "The index cites prior proposal logical ids and their current claim CIDs at index creation."
+    "The index cites prior proposal logical ids and their current claim CIDs at index creation.",
+    "Dic_12, D(Dic_12), and the working D(Dic_12) F/R-symbol data are separate seed subjects, linked by admitted subject edges.",
+    "The D(Dic_12) subject records why it entered the project and which prior DA4/Yasui lab notes motivated it."
   ],
   "schema": "twisted-yetter/subject-index/0",
   "seed_edges": [
@@ -70,7 +72,13 @@
     "subject-edge:ty:yasui-a1-note:about:cluster",
     "subject-edge:ty:yasui-a3-note:about:partial-cluster",
     "subject-edge:ty:yasui-paper:defines:a1-link",
-    "subject-edge:ty:yasui-paper:defines:a3-link"
+    "subject-edge:ty:yasui-paper:defines:a3-link",
+    "subject-edge:ty:d-dic12-fr-data:defines:d-dic12-omega0",
+    "subject-edge:ty:d-dic12-omega0:depends-on:dic12",
+    "subject-edge:ty:d-dic12-omega0:depends-on:drinfeld-double-family",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:da4-construction-account",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:da4-two-mtc-data",
+    "subject-edge:ty:d-dic12-omega0:motivated-by:yasui-a3-da4"
   ],
   "seed_subjects": [
     "subject:twisted-yetter:category-family:su2-k",
@@ -99,7 +107,11 @@
     "subject:twisted-yetter:presentation:akbulut-figure38",
     "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
     "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
-    "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation"
+    "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation",
+    "subject:twisted-yetter:category-family:drinfeld-double",
+    "subject:twisted-yetter:category:d-dic12-omega0",
+    "subject:twisted-yetter:mathematical-object:d-dic12-omega0-fr-symbols",
+    "subject:twisted-yetter:mathematical-object:dic12"
   ],
   "status": "active",
   "title": "Twisted Yetter downstream subject lane v0",
