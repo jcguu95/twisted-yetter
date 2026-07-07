@@ -436,7 +436,8 @@ def reproduce_command(args: argparse.Namespace) -> str:
 def repo_payload() -> dict[str, Any]:
     status = command(["git", "status", "--short"])
     return {
-        "root": str(REPO_ROOT),
+        "root": "<repo-root>",
+        "root_policy": "portable placeholder; commands are interpreted relative to the checkout root",
         "git_commit": command(["git", "rev-parse", "HEAD"]),
         "dirty": bool(status),
         "status_short": status,
