@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:73b237019b3abbcf96535e3a8eaed927fbf9253c80f330fed5196fe50906e0ec",
+  "generated_at": "2026-07-06T23:36:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su3-3",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:73b237019b3abbcf96535e3a8eaed927fbf9253c80f330fed5196fe50906e0ec",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:be9252fc452adca3ad79b6807a4ed48a16861c5079bf3323f2f57ee42658b2b1",
+    "transition": "ctlobj-sha256:1c35041b2fc86abd2cef2fed702d9cf6ec091ce39b17c7decea42288a9608957"
+  },
+  "parent_root_cid": "ctlobj-sha256:9268d7e3f056ce7cf8943277f6b37d02b5a3a5016bbf037b829369073ac2d839",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-a1-cluster-negative-evidence-for-su3-3.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-a1-cluster:negative-evidence-for:su3-3 --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-a1-cluster-negative-evidence-for-su3-3.json --manifest manifests/subject-edge-2026-07-06-yasui-a1-cluster-negative-evidence-for-su3-3.json --created-at 2026-07-06T23:36:40Z --admitted-at 2026-07-06T23:36:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}

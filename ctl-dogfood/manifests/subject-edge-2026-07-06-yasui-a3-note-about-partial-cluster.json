@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:b16a6455db208addb090d6a6cf43435aef37dd23b59008b93c590a33014928f8",
+  "generated_at": "2026-07-06T23:38:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-a3-note:about:partial-cluster",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:b16a6455db208addb090d6a6cf43435aef37dd23b59008b93c590a33014928f8",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:e80e58425bb4524cf14227167fac72b997803566484b5832b9a48fb529db4f23",
+    "transition": "ctlobj-sha256:09a9f7005d3c445c812d636fd9a7fb12055dae611419e1f704e04d1d2bcd0bad"
+  },
+  "parent_root_cid": "ctlobj-sha256:3a431fdd75a9680e53421423534409dcc96a046a140d5aa9e364100c52523aec",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-a3-note-about-partial-cluster.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-a3-note:about:partial-cluster --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-a3-note-about-partial-cluster.json --manifest manifests/subject-edge-2026-07-06-yasui-a3-note-about-partial-cluster.json --created-at 2026-07-06T23:38:00Z --admitted-at 2026-07-06T23:38:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}

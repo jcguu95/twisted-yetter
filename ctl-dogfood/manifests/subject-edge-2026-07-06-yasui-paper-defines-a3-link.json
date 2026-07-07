@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:99faf1506096588205f10fa712bf1fa33ac70b1d4e71c359324713551fa21962",
+  "generated_at": "2026-07-06T23:38:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-paper:defines:a3-link",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:99faf1506096588205f10fa712bf1fa33ac70b1d4e71c359324713551fa21962",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:e3de6e59f088215ef936957d3e6a559d0d4d121e125b42108ac8ea0f2740370b",
+    "transition": "ctlobj-sha256:c5b845185285a83e1f158e70fcdd3defebfc04c0cb14101ff53e2f0c3633e1dd"
+  },
+  "parent_root_cid": "ctlobj-sha256:159f9770817a6f11810867a7b25789f6271685861644988a3728806748509538",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-paper-defines-a3-link.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-paper:defines:a3-link --revision-kind subject-edge:definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-paper-defines-a3-link.json --manifest manifests/subject-edge-2026-07-06-yasui-paper-defines-a3-link.json --created-at 2026-07-06T23:38:40Z --admitted-at 2026-07-06T23:38:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge:definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9b5d760651c6e9df8be7210b5ae1196dbbd594e9"
+}
