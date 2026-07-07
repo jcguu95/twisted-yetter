@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:2bf987d447797ffd3c87cbd0ae2a8146319550214a91b7a2bbea9077a46879b2",
+  "generated_at": "2026-07-07T01:01:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:anyonwiki-cat-1-3-2-source-capture:about:fr-6-1-4-5",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:2bf987d447797ffd3c87cbd0ae2a8146319550214a91b7a2bbea9077a46879b2",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:32fa6d3db52b3d26d6f8a59883b8497e3879b846f4f07924ba4cafaa8bc1bcc1",
+    "transition": "ctlobj-sha256:49d1347387ad887575bf4fe1985e88d6cd98b558e6fee6f3fa347d2327d0bbca"
+  },
+  "parent_root_cid": "ctlobj-sha256:77f4946d8fef5028b1740ba1e1792be0ccc5e00816d11682175d82ec7ac98e89",
+  "payload_file": "ctl-dogfood/subject-layer/edges/anyonwiki-cat-1-3-2-source-capture-about-fr-6-1-4-5.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:anyonwiki-cat-1-3-2-source-capture:about:fr-6-1-4-5 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/anyonwiki-cat-1-3-2-source-capture-about-fr-6-1-4-5.json --manifest manifests/subject-edge-2026-07-06-anyonwiki-cat-1-3-2-source-capture-about-fr-6-1-4-5.json --created-at 2026-07-07T01:01:20Z --admitted-at 2026-07-07T01:01:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}

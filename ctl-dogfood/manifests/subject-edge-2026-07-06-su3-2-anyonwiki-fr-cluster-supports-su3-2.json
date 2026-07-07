@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "4961189407282548d58e4fe977f28556a76e5908",
+  "current_root_cid": "ctlobj-sha256:d80b35e58e9ca5e826fc3227caec217495fe4ad7dfcc19255839b372392c6a24",
+  "generated_at": "2026-07-07T01:01:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:su3-2-anyonwiki-fr-cluster:supports:su3-2",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:d80b35e58e9ca5e826fc3227caec217495fe4ad7dfcc19255839b372392c6a24",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
+    "transition": "ctlobj-sha256:a926ffcac8f459e35ca6c579bfb605f87f532d18fe6d9bc51e1eabc544d7b533"
+  },
+  "parent_root_cid": "ctlobj-sha256:e8c55ffe9ad8f9cbdf204ed7908db0107db8dffde421f02fbdd74b46a4a9377e",
+  "payload_file": "ctl-dogfood/subject-layer/edges/su3-2-anyonwiki-fr-cluster-supports-su3-2.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:su3-2-anyonwiki-fr-cluster:supports:su3-2 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/su3-2-anyonwiki-fr-cluster-supports-su3-2.json --manifest manifests/subject-edge-2026-07-06-su3-2-anyonwiki-fr-cluster-supports-su3-2.json --created-at 2026-07-07T01:01:40Z --admitted-at 2026-07-07T01:01:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "3fa98966e0dacf20ea80f592575fb8c39b67394d"
+}
