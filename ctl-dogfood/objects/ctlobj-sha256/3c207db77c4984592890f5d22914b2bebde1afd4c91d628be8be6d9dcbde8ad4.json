@@ -1,0 +1,76 @@
+{
+  "created_at": "2026-07-07T05:02:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-ctl-branch-store-merge-agent-feedback",
+  "parents": [],
+  "payload": {
+    "constructive_complaints": [
+      {
+        "impact": "The agent had to manually restore the target-side ref before the CTL tool could even read the store. This feels backwards precisely when the tool is most needed.",
+        "issue": "runbook cannot start from a normal Git conflict state where ctl-dogfood/refs/main.json contains conflict markers.",
+        "suggestion": "Add a conflict-state mode that accepts explicit --main-root and --incoming-root without loading refs/main.json first, or print a safe command that writes a temporary target ref from the chosen target root."
+      },
+      {
+        "impact": "In a same-worktree conflict resolution, refs/main.json had already been restored to the target root, so running the printed command literally would risk defaulting incoming-root to the target ref instead of the intended incoming branch root.",
+        "issue": "The runbook's printed transplant command omitted --incoming-root even though the runbook itself was invoked with an explicit incoming root.",
+        "suggestion": "When runbook was called with explicit roots, echo those explicit roots in every generated follow-up command."
+      },
+      {
+        "impact": "The useful information was seven branch-local warnings, but it was buried among more than a hundred reachable historical manifests.",
+        "issue": "manifest-plan output is too verbose for the common case.",
+        "suggestion": "Provide a --problems-only or --actionable-only mode, and include a copy-pastable cleanup list for branch-local sidecar manifests that should be omitted."
+      },
+      {
+        "impact": "Each admission/transplant/verify step can take tens of seconds with no progress indicator, making it hard for an agent to tell whether it is replaying correctly or stuck.",
+        "issue": "write operations and verify have long silent periods.",
+        "suggestion": "Emit progress by phase: load store, find base, classify transitions, write batch N/M, replay verify N/M. A JSON event stream mode would be ideal for agents."
+      },
+      {
+        "impact": "A human can see provider.mode=admitted-provider-adoption, but the top-level ctl_meta_commit still shows the old bootstrap commit, creating a momentary false alarm.",
+        "issue": "The final verify JSON reports bootstrap ctl_meta_commit separately from provider.current_ctl_meta_commit, which is easy to misread.",
+        "suggestion": "Rename the top-level field to bootstrap_ctl_meta_commit or add current_provider_commit at top level."
+      },
+      {
+        "impact": "The agent had to infer that those files should be deleted from the final merge tree and replaced by the generated merge manifest.",
+        "issue": "The tool explains that incoming manifests are branch-local, but not what should happen to already-tracked incoming manifest files during the Git merge.",
+        "suggestion": "Have manifest-plan print explicit Git-resolution guidance: keep historical target manifests, remove listed branch-local incoming manifests from final tree, add generated merge manifest."
+      }
+    ],
+    "created_at": "2026-07-07T05:02:00Z",
+    "created_by": "actor:codex",
+    "mathematical_status": "NOT_A_MATHEMATICAL_CLAIM",
+    "note_id": "objective-note-2026-07-07-ctl-branch-store-merge-agent-feedback",
+    "overall_assessment": {
+      "priority_request": "Make runbook usable directly from a Git conflict state with explicit roots, and ensure generated commands preserve the exact roots used for planning.",
+      "verdict": "The new tooling is a substantial safety improvement and did prevent a bad refs/main.json side-choice merge. The remaining pain is mostly agent UX around conflict-state bootstrap, command echoing, and actionable cleanup."
+    },
+    "related_artifacts": [
+      "ctl-dogfood/protocols/branch-store-merge-agents.org",
+      "ctl-dogfood/protocols/branch-store-merge-report-contract.org",
+      "ctl-dogfood/manifests/merge-2026-07-07-c99490bce09c44c5.json"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This is process feedback for upstream tooling. It does not assert mathematical content, CTL kernel semantics, or a new research result.",
+      "outcome": "The tooling correctly produced a full-transplant plan with 7 auto-admit bindings and no logical conflicts, transplanted those bindings onto the main provider-adoption root, and verify.py passed at root ctlobj-sha256:578523fe5aef...",
+      "question": "Record constructive user/agent feedback after using the newly adopted CTL branch-store merge tooling to merge the D(Dic_12) Yasui a=1 compact-trace CTL objects over main's provider/tooling adoption root.",
+      "source_event": "No-ff merge of main commit b0d82ac into codex/dic12-yasui-a1-ctl-trace, with target root ctlobj-sha256:04ee89a9005c... and incoming root ctlobj-sha256:c99490bce09c..."
+    },
+    "status": "PROCESS_FEEDBACK",
+    "title": "Agent feedback from using CTL branch-store merge tooling during the D(Dic_12) Yasui trace merge",
+    "what_worked_well": [
+      "The runbook vocabulary of target/incoming/base made the CTL merge safer than thinking in Git ours/theirs terms.",
+      "The tool correctly classified the merge as full-transplant with auto-admit=7 and conflict=0.",
+      "The transplant command produced a clean target-side root and a merge manifest that explains each transplanted binding.",
+      "manifest-plan was very helpful for catching that the incoming sidecar manifests were branch-local and should not be kept as target-current manifests.",
+      "After cleanup, verify.py accepted the final root and provider adoption policy."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

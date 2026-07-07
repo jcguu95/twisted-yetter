@@ -1,0 +1,110 @@
+#+TITLE: CTL Branch Store Merge Guide for Agents
+#+DATE: 2026-07-07
+#+LANGUAGE: zh-TW
+#+OPTIONS: toc:2 num:t ^:nil
+
+* Status
+
+#+begin_example
+status: dogfood
+primary_reader: agents
+kernel_semantics: none
+profile_payload_semantics: unsupported
+#+end_example
+
+This guide is the first stop for agents resolving CTL dogfood branch-store
+merge situations. It is local-store tooling guidance; it does not change
+=ctl-kernel/1=.
+
+* Feature Map
+
+- =merge-root=: dry-run semantic merge preview. It never writes =refs/main.json=.
+- =runbook=: dry-run agent runbook. It explains the safe next command, or why
+  the agent must stop.
+- =transplant-revisions=: write-capable command that creates child roots on the
+  target store. It requires =--expected-root=.
+- =--auto-only=: partial transplant mode for =auto-admit= binding operations
+  only. Conflicting logical ids stay bound to the target-side CID.
+- =manifest-plan=: read-only classification of incoming manifest sidecars.
+- =verify.py=: final dogfood store validity check after any write-capable
+  command.
+- =--format json=: automation contract.
+- =--format text=: human / agent-readable operational log.
+
+* When To Use
+
+Use this tooling when two worktrees both admitted CTL state and Git reports
+conflicts in:
+
+- =ctl-dogfood/refs/main.json=;
+- =ctl-dogfood/objects/=;
+- =ctl-dogfood/manifests/=.
+
+Do not resolve =refs/main.json= by choosing a Git side. It is a CTL current-root
+pointer. The safe resolution is normally a new child root on the target store.
+
+* Vocabulary
+
+- =target=: the CTL dogfood store whose =refs/main.json= should advance.
+- =incoming=: the other worktree's CTL dogfood store.
+- =base=: the common CTL root used to compare target and incoming history.
+
+Use these words instead of Git side labels while reasoning about CTL state.
+
+* Safe Procedure
+
+From the target =ctl-dogfood= directory, start with:
+
+#+begin_src sh
+python3 scripts/ctl_merge.py runbook \
+  --incoming-store-root <incoming-store-root> \
+  --format text
+#+end_src
+
+Then follow the runbook kind:
+
+| kind | safe action |
+|------+-------------|
+| =noop= | No CTL root update is needed. |
+| =full-transplant= | Run the printed =transplant-revisions= command. |
+| =partial-auto-only= | Optionally run the printed =--auto-only= command, then resolve remaining conflicts by profile-owned rules. |
+| =blocked-conflict= | Stop. Do not transplant until profile-owned resolution is admitted. |
+
+After any write-capable command, run:
+
+#+begin_src sh
+python3 scripts/verify.py
+#+end_src
+
+Only commit CTL refs, objects, and manifests after verify passes.
+
+* Manifest Sidecars
+
+If the runbook or merge preview shows manifest warnings, inspect them with:
+
+#+begin_src sh
+python3 scripts/ctl_merge.py manifest-plan \
+  --incoming-store-root <incoming-store-root> \
+  --format text
+#+end_src
+
+=branch-local= manifests are historical incoming metadata after a
+single-parent transplant. They are not target-current manifests unless a later
+target admission says so.
+
+* Do Not
+
+- Do not choose a Git side for =refs/main.json=.
+- Do not edit CTL object JSON by hand.
+- Do not invent a combined payload in generic upstream tooling.
+- Do not treat =--auto-only= as conflict resolution.
+- Do not commit branch-local incoming manifests as target-current manifests.
+
+* Automation
+
+Agents may read text output for logs and explanations, but automation should
+use JSON. Stable JSON fields are defined in:
+
+#+begin_example
+ctl-dogfood/protocols/branch-store-merge-report-contract.org
+#+end_example

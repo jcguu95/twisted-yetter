@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "4de60e6f17ccce93f5068a098b2a6def01cd183e",
+  "current_root_cid": "ctlobj-sha256:925efb2e66ed5036df8135b1e54562b516f335c26ac3ed44c215cfab99429e47",
+  "generated_at": "2026-07-07T05:02:00Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-07-ctl-branch-store-merge-agent-feedback",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:3c207db77c4984592890f5d22914b2bebde1afd4c91d628be8be6d9dcbde8ad4",
+    "current_root": "ctlobj-sha256:925efb2e66ed5036df8135b1e54562b516f335c26ac3ed44c215cfab99429e47",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:27c5af9d3b223396d5b445dc0b4608806f5dede3cd665ded9ef30dc20c55308d"
+  },
+  "parent_root_cid": "ctlobj-sha256:578523fe5aef4d55bf5e17d2123d347bb47408a773eae2507f87ccb66573fcba",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-07-ctl-branch-store-merge-agent-feedback.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-07-ctl-branch-store-merge-agent-feedback --payload lab-notes/2026-07-07-ctl-branch-store-merge-agent-feedback.json --manifest manifests/lab-note-2026-07-07-ctl-branch-store-merge-agent-feedback.json --created-at 2026-07-07T05:02:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "69f3cab5f990283b74bb12fcb3d08d704a1031d6"
+}

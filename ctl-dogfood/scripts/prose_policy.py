@@ -21,6 +21,9 @@ PROSE_SUFFIXES = {
 ALLOWED_PROSE_PATHS = {
     "AGENTS.md",
     "ctl-dogfood/README.org",
+    "ctl-dogfood/protocols/branch-store-merge.org",
+    "ctl-dogfood/protocols/branch-store-merge-agents.org",
+    "ctl-dogfood/protocols/branch-store-merge-report-contract.org",
     "experiments/README.org",
     "experiments/sage/README.org",
 }

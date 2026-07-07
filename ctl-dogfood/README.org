@@ -20,7 +20,25 @@
 #+end_example
 
 這裡只記錄 research planning / governance metadata；不修改 CTL Kernel protocol，也不把
-=ctl-meta= 的 source code 複製進本 repo。
+=ctl-meta= 的 normative dogfood state 複製進本 repo。少量 provider tooling scripts
+與 agent protocols 可以 vendor 到本 repo，用於重現與處理本 repo 的 CTL store。
+
+* Local Tooling Protocols
+
+branch-store merge 的 agent-facing runbook 是：
+
+#+begin_example
+protocols/branch-store-merge-agents.org
+#+end_example
+
+JSON / text report contract 是：
+
+#+begin_example
+protocols/branch-store-merge-report-contract.org
+#+end_example
+
+這些 protocol 文件描述本 repo 的 local store tooling；它們不是 twisted-yetter 的
+mathematical result，也不是 CTL meta repo 的 normative object state。
 
 * Pinned Provider
 
