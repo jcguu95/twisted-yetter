@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "b6b32a8cffaec7e089be1cec305f9ffc66f3f6c9",
+  "current_root_cid": "ctlobj-sha256:56e7afac3919cecec274acc25031d9a3cb5e9249b4b975ead85eea622af78ea5",
+  "generated_at": "2026-07-07T01:28:20Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-a1-su3-2-signal:extends:yasui-a1-character-twist",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:56e7afac3919cecec274acc25031d9a3cb5e9249b4b975ead85eea622af78ea5",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
+    "transition": "ctlobj-sha256:f62b5fbd588185fd3bc2444a84b1f459d37b2228c2792a3a98922e8748478dc5"
+  },
+  "parent_root_cid": "ctlobj-sha256:232b7a93deb2bf3a2efa98cadbd85dfab5d555b92062ab21136c78ce3443f807",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-a1-su3-2-signal-extends-yasui-a1-character-twist.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-a1-su3-2-signal:extends:yasui-a1-character-twist --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-a1-su3-2-signal-extends-yasui-a1-character-twist.json --manifest manifests/subject-edge-2026-07-07-yasui-a1-su3-2-signal-extends-yasui-a1-character-twist.json --created-at 2026-07-07T01:28:20Z --admitted-at 2026-07-07T01:28:20Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "dbb752c63247e937cfeaf25dd6f7442c4eda7c9a"
+}
