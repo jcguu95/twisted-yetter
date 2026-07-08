@@ -112,8 +112,10 @@ def test_search_current_compact_keeps_resource_warning_without_full_matches() ->
     assert report["current_objects"]
     notices = report["resource_notices"]
     assert isinstance(notices, list)
+    assert report["resource_notice_count"] == 3
     assert any(
         notice["safety_state"] == "known_wrong" and "DO NOT USE" in str(notice["top_notice"])
+        and notice["selected_overlay_logical_id"] == "claim:resource-safety:su2-2-braid-oracle-known-wrong"
         for notice in notices
         if isinstance(notice, dict)
     )

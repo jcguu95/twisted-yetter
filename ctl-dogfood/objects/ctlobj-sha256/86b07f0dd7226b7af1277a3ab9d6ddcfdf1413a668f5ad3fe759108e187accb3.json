@@ -1,0 +1,144 @@
+{
+  "created_at": "2026-07-08T19:25:17Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-08-ctl-current-read-provider-adoption",
+  "parents": [
+    "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98"
+  ],
+  "payload": {
+    "adoption_boundary": {
+      "adoption_type": "downstream provider adoption of CTL current-read tooling",
+      "adopts_ctl_meta_normative_state": false,
+      "ctl_kernel_profile_change": false,
+      "current_reader_core_forked_downstream": false,
+      "old_objects_rewritten": false,
+      "state_store_migration": false
+    },
+    "claim_boundary": "This note records tooling and provider-policy adoption only. It does not assert a new twisted-yetter mathematical result, does not change ctl-kernel/1 semantics, and does not import ctl-meta's project-local normative CTL state.",
+    "created_at": "2026-07-08T14:53:23Z",
+    "created_by": "actor:codex",
+    "current_read_discipline": {
+      "canonical_commands": [
+        "python ctl-dogfood/scripts/ctl_store.py build-current-index",
+        "python ctl-dogfood/scripts/ctl_store.py check-current-index",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-current <logical-id>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path <repo-relative-path>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --sha256 <sha256>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --git-blob <git-blob>",
+        "python ctl-dogfood/scripts/ctl_store.py search-current <query>",
+        "python ctl-dogfood/scripts/ctl_store.py list-current-bindings",
+        "python ctl-dogfood/scripts/ctl_store.py manifest-lookup --logical-id <logical-id>"
+      ],
+      "compact_search_summary": "search-current --compact returns current_objects and deduplicated resource_notices instead of the full matches payload. It preserves ResourceSafetyStatus top_notice values for daily use, deduplicates notices by selected overlay/resource/snapshot identity without fuzzy merging, and keeps full search-current available for detailed inspection.",
+      "discipline_summary": "Current-state and resource-safety answers must be grounded in replayed CTL current root, active bindings, ResourceSafetyStatus overlays, or a fresh generated current index built from that root. Filesystem search is acceptable for discovery or archaeology, not as the final current-state source.",
+      "generated_index_summary": "A fresh generated/current-index.json is a non-canonical acceleration of the replayed current root. It may serve lookup-current, search-current, and lookup-resource results with source_state generated-non-canonical-current-view; stale or missing index output must be refreshed with build-current-index or treated as a slow canonical fallback, not as an alternate source of truth.",
+      "resource_safety_registration_policy": "Reusable evaluators, scripts, generated artifacts, and lab notes that become known-wrong, deprecated, superseded, or replacement-critical should be registered as ctl-resource handle/snapshot/safety-status claims rather than relying only on file headers or prose notes.",
+      "source_state_labels": [
+        "current-ctl-object",
+        "current-discovery-only",
+        "absent-current-binding",
+        "unsupported-profile",
+        "invalid-history",
+        "manifest-provenance-missing",
+        "historical-note-only",
+        "unknown",
+        "registered_unmarked",
+        "known_active",
+        "known_wrong",
+        "deprecated",
+        "superseded",
+        "historical_only",
+        "caution"
+      ]
+    },
+    "downstream_adapter": {
+      "non_fork_checks": [
+        "adapter does not import ctl_ref",
+        "adapter does not implement search_current",
+        "adapter preserves path_hygiene_report as a subprocess-backed compatibility API for existing downstream tests",
+        "adapter path normalization is CLI ergonomics only and does not reimplement CTL current-read or resource-safety logic"
+      ],
+      "path": "ctl-dogfood/scripts/ctl_store.py",
+      "policy": "Delegate to ctl-meta/meta/ctl-dogfood/scripts/ctl_store.py, normalize repo-local absolute --path arguments to repo-relative paths, and inject --store-root for the twisted-yetter ctl-dogfood store when the caller did not provide one.",
+      "sha256": "0744c9984939a44b8c45c0b32207c62d0c78615e8db11e9a41c31975cef9538a"
+    },
+    "mathematical_status": "NOT_A_MATHEMATICAL_RESULT",
+    "note_id": "objective-note-2026-07-08-ctl-current-read-provider-adoption",
+    "purpose": "Record downstream adoption of ctl-meta current-read and resource-safety dogfood tooling as the canonical reader for CTL current-state and resource-safety queries, while keeping twisted-yetter's local ctl_store.py as a thin adapter rather than a fork.",
+    "repo_snapshot": {
+      "dirty_status_summary": "No unrelated dirty files were present before this compact-resource-notice-dedupe provider update. This update edits the provider-adoption preimage, refreshes the current-read compact-search regression test for deduplicated ResourceSafetyStatus notices, and rebuilds generated/current-index.json after admission.",
+      "local_test_file": {
+        "path": "tests/test_ctl_store_current_read.py",
+        "sha256": "d651c5717510e8c4cf405ca7f0cde0011078033a7699ed7b224b51eb516324c6"
+      },
+      "resource_payload_directory": "ctl-dogfood/resources",
+      "twisted_yetter_head_commit_before_admission": "b6300b6524d6c419147335ec3f1bd5a3efa74fb7"
+    },
+    "reproduce_commands": [
+      "python ctl-dogfood/scripts/ctl_store.py verify",
+      "python ctl-dogfood/scripts/ctl_store.py build-current-index",
+      "python ctl-dogfood/scripts/ctl_store.py check-current-index",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-current subject:twisted-yetter:category-family:su2-k",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path experiments/sage/su2_2_braid_oracle.sage.py",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-current claim:does-not-exist",
+      "python ctl-dogfood/scripts/ctl_store.py search-current \"SU(2)_k\"",
+      "python ctl-dogfood/scripts/ctl_store.py search-current --compact su2_2_braid_oracle",
+      "python3 -m pytest tests/test_ctl_store_current_read.py",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/verify.py"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_of_truth_policy": "This is a machine-readable CTL lab-note preimage. The admitted claim for this payload is the current provider-adoption record.",
+    "status": "ESTABLISHED_TOOLING_ADOPTION_CHECKPOINT",
+    "title": "Adopt ctl-meta current-read and resource-safety provider without downstream fork",
+    "updated_at": "2026-07-08T19:25:17Z",
+    "upstream_provider": {
+      "author": "jcguu95 <jcguu95@gmail.com>",
+      "author_date": "2026-07-08T13:22:42-06:00",
+      "commit": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+      "new_compact_notice_features": [
+        "search-current --compact deduplicates resource_notices by selected safety overlay, then resource identity, then snapshot identity, then lookup surface",
+        "compact resource_notices retain aggregate lookup_keys, lookup_selectors, detection_modes, matched_logical_ids, resource_ids, snapshot_ids, selected_overlay_logical_id, and selected_overlay_cid",
+        "fuzzy dedupe, downstream-specific logic, hard blocking, lookup-resource semantic changes, and NLP/ranking remain rejected upstream"
+      ],
+      "new_generated_current_index_commands": [
+        "build-current-index",
+        "check-current-index",
+        "lookup-current <logical-id>",
+        "search-current <query>",
+        "search-current --compact <query>",
+        "lookup-resource --path <repo-relative-path>"
+      ],
+      "new_resource_safety_commands": [
+        "lookup-resource --path <repo-relative-path>",
+        "lookup-resource --sha256 <sha256>",
+        "lookup-resource --git-blob <git-blob>",
+        "lookup-resource --logical-id <resource-logical-id>",
+        "lookup-resource --cid <resource-revision-cid>"
+      ],
+      "previous_current_read_provider_commit": "126cb9800667d6c907982cd47f96fc0265cb5e6e",
+      "previous_generated_index_provider_commit": "dc7990d62aa064fcf841fb501c1366d8c5e2a996",
+      "previous_provider_commit": "c8bd622bfe2c2f2fc5d0c11093e4d64b9d8099cf",
+      "previous_resource_safety_provider_commit": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+      "repo_path": "/Users/jin/data/local/projects/ctl-meta",
+      "status_short_at_adoption": "",
+      "subject": "Deduplicate compact resource notices",
+      "upstream_tool": "meta/ctl-dogfood/scripts/ctl_store.py",
+      "upstream_tool_sha256": "54c21d73fb0446c619bd116fa893808c70338f7adad676116a01b1b6925a88ed"
+    },
+    "verifier_update_policy": {
+      "bootstrap_provider_pin_should_remain_historical": true,
+      "current_provider_can_be_accepted_from_this_admitted_note": true,
+      "required_current_provider_clean_status": "",
+      "required_current_provider_commit": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+      "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+      "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
