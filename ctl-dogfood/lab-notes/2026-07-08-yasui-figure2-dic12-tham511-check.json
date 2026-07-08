@@ -16,11 +16,11 @@
   "artifacts": [
     {
       "path": "experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py",
-      "role": "floating-point manifest, profiling, range aggregate, and combine script"
+      "role": "floating-point profiling, compact range aggregate, and combine script"
     },
     {
-      "path": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-singleton-manifest-v1.json",
-      "role": "32768-sector priority manifest",
+      "path": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-profiles-v1/",
+      "role": "retained rank-scan and tail-decile profiling summaries",
       "summary": {
         "sector_total": 32768,
         "max_basis_size": 41,
@@ -76,12 +76,13 @@
   },
   "runtime_notes": {
     "previous_figure3_dic12_history": "The earlier Yasui Figure 3 D(Dic_12) run required priority scheduling and distributed workers; historical profiling estimated hours on a single worker for the remaining tail.",
-    "figure2_manifest_elapsed_seconds": 12.64775662496686,
+    "figure2_rank_profile_elapsed_seconds": 12.64775662496686,
     "range_worker_wall_seconds": [6.635292666964233, 16.280967083061114, 33.485924292122945, 156.72183579206467],
-    "singleton_json_route_note": "An initial fat singleton JSON route was interrupted after 1302 chunks because per-sector metadata and repeated MTC sha256 hashing dominated runtime. The pass result uses compact range aggregates, not the partial singleton chunks."
+    "singleton_json_route_note": "An initial fat singleton JSON route was interrupted after 1302 chunks because per-sector metadata and repeated MTC sha256 hashing dominated runtime. Those partial singleton chunks and the giant singleton manifest were intentionally not retained. The pass result is reproducible from the committed script plus compact range aggregates and the combined aggregate artifact."
   },
   "reproduce_commands": [
-    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --write-manifest",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --profile-ranks --profile-label rank-scan-v1 --profile-rank-count 32768",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --profile-ranks --profile-label tail-decile-v1 --profile-rank-start 29491 --profile-rank-count 3277",
     "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r00000-r08191-v1 --rank-start 0 --rank-count 8192",
     "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r08192-r16383-v1 --rank-start 8192 --rank-count 8192",
     "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r16384-r24575-v1 --rank-start 16384 --rank-count 8192",
