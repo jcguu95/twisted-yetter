@@ -47,7 +47,9 @@ def test_lookup_current_bound_subject() -> None:
     report = run_ctl_store("lookup-current", "subject:twisted-yetter:category-family:su2-k")
 
     assert report["status"] == "ok"
-    assert report["source_state"] == "current-ctl-object"
+    assert report["source_state"] in {"current-ctl-object", "generated-non-canonical-current-view"}
+    if report["source_state"] == "generated-non-canonical-current-view":
+        assert report["index_state"] == "fresh"
     binding = report["binding"]
     assert isinstance(binding, dict)
     assert binding["state"] == "bound"
@@ -67,6 +69,8 @@ def test_search_current_is_discovery_only() -> None:
     report = run_ctl_store("search-current", "SU(2)_k", timeout=180)
 
     assert report["status"] == "ok"
+    if report.get("index_state") == "fresh":
+        assert report["source_state"] == "current-discovery-only"
     assert report["source_state"] == "current-discovery-only"
     matches = report["matches"]
     assert isinstance(matches, list)
@@ -86,6 +90,8 @@ def test_bad_su2_2_oracle_resource_warning_by_path() -> None:
     assert report["resource_state"] == "found"
     assert report["safety_state"] == "known_wrong"
     assert "DO NOT USE" in str(report["top_notice"])
+    if report.get("index_state") == "fresh":
+        assert report["source_state"] == "generated-non-canonical-current-view"
 
 
 def test_bad_su2_2_oracle_resource_warning_by_absolute_path() -> None:
