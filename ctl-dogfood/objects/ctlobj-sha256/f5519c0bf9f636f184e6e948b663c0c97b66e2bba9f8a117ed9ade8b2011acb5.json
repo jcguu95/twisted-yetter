@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-07-08T16:35:27Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-safety:su2-2-braid-oracle-known-wrong",
+  "parents": [],
+  "payload": {
+    "evidence_claims": [
+      "claim:lab-note:2026-07-08-su2-2-braid-oracle-bug-audit"
+    ],
+    "profile": "ctl-resource/safety-status/1",
+    "replacement": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
+    "safe_scopes": [
+      "historical reproducibility of old artifacts",
+      "reading the file header to understand the deprecation"
+    ],
+    "status": "known_wrong",
+    "target_selector": {
+      "resource_id": "resource:twisted-yetter:script:su2-2-braid-oracle"
+    },
+    "top_notice": "DO NOT USE experiments/sage/su2_2_braid_oracle.sage.py as normative evidence. It has a known multi-component sigma-sector bug; keep it only for historical reproduction.",
+    "unsafe_scopes": [
+      "Yasui Figure 2 or Figure 3 Tham 5.11 comparison checks",
+      "multi-component sigma-colored sublink sectors",
+      "Omega expansion where a contributing fixed sector contains two or more sigma-labeled components",
+      "normative CTL evidence for arbitrary braid-closure RT values",
+      "twisted-Yetter or Crane-Yetter mathematical conclusions"
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

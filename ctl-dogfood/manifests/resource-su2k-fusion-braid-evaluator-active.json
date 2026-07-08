@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+  "current_root_cid": "ctlobj-sha256:34ad9d53c44879c1e16e6b01f036884ab95ec51438e0f2864316b057d9416625",
+  "generated_at": "2026-07-08T16:35:27Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:34ad9d53c44879c1e16e6b01f036884ab95ec51438e0f2864316b057d9416625",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:0e5d2d5db3e2a5e474995a1f54a66ecc5928d0d5271f15462ddea9c4d4b0795e",
+    "transition": "ctlobj-sha256:e7b94e30912cff5c67d0d8e0ee65e30682c71270362cd5ade7e1cb4ccfa9adb7"
+  },
+  "parent_root_cid": "ctlobj-sha256:46e190ce8d4496d061b08a61e680e71aed3613e970e1c23129471b9fb229e1ea",
+  "payload_file": "ctl-dogfood/resources/su2k-fusion-braid-evaluator-active.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:resource-safety:su2k-fusion-braid-evaluator-active --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload resources/su2k-fusion-braid-evaluator-active.json --manifest manifests/resource-su2k-fusion-braid-evaluator-active.json --created-at 2026-07-08T16:35:27Z --admitted-at 2026-07-08T16:35:27Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "f540d6a7f23fdf3f4e7dee6ec8c641388f4f8e69"
+}

@@ -26,6 +26,35 @@ def has_store_root_arg(argv: list[str]) -> bool:
     return any(arg == "--store-root" or arg.startswith("--store-root=") for arg in argv)
 
 
+def repo_relative_if_inside(path_text: str) -> str:
+    path = Path(path_text)
+    if not path.is_absolute():
+        return path_text
+    try:
+        return path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return path_text
+
+
+def normalize_repo_paths(argv: list[str]) -> list[str]:
+    out: list[str] = []
+    index = 0
+    while index < len(argv):
+        arg = argv[index]
+        if arg == "--path" and index + 1 < len(argv):
+            out.extend([arg, repo_relative_if_inside(argv[index + 1])])
+            index += 2
+            continue
+        if arg.startswith("--path="):
+            key, value = arg.split("=", 1)
+            out.append(f"{key}={repo_relative_if_inside(value)}")
+            index += 1
+            continue
+        out.append(arg)
+        index += 1
+    return out
+
+
 def run_upstream(argv: list[str], *, capture: bool = False) -> subprocess.CompletedProcess[str]:
     upstream = upstream_script()
     if not upstream.exists():
@@ -46,7 +75,7 @@ def path_hygiene_report(dogfood_root: Path = DOGFOOD_ROOT) -> dict[str, object]:
 
 
 def main() -> int:
-    argv = sys.argv[1:]
+    argv = normalize_repo_paths(sys.argv[1:])
     if not has_store_root_arg(argv):
         argv = ["--store-root", str(DOGFOOD_ROOT), *argv]
 

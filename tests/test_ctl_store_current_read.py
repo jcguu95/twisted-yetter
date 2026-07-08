@@ -33,6 +33,7 @@ def test_ctl_store_wrapper_is_thin_adapter() -> None:
     assert "def search_current" not in text
     assert "UPSTREAM_CTL_STORE" in text
     assert "--store-root" in text
+    assert "normalize_repo_paths" in text
 
 
 def test_verify_uses_twisted_yetter_store_by_default() -> None:
@@ -71,3 +72,27 @@ def test_search_current_is_discovery_only() -> None:
     assert isinstance(matches, list)
     assert matches
     assert {match["source_state"] for match in matches if isinstance(match, dict)} == {"current-discovery-only"}
+
+
+def test_bad_su2_2_oracle_resource_warning_by_path() -> None:
+    report = run_ctl_store(
+        "lookup-resource",
+        "--path",
+        "experiments/sage/su2_2_braid_oracle.sage.py",
+        timeout=180,
+    )
+
+    assert report["status"] == "ok"
+    assert report["resource_state"] == "found"
+    assert report["safety_state"] == "known_wrong"
+    assert "DO NOT USE" in str(report["top_notice"])
+
+
+def test_bad_su2_2_oracle_resource_warning_by_absolute_path() -> None:
+    absolute_path = REPO_ROOT / "experiments" / "sage" / "su2_2_braid_oracle.sage.py"
+
+    report = run_ctl_store("lookup-resource", "--path", str(absolute_path), timeout=180)
+
+    assert report["status"] == "ok"
+    assert report["resource_state"] == "found"
+    assert report["safety_state"] == "known_wrong"

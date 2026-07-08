@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+  "current_root_cid": "ctlobj-sha256:4dc806b461e93299f89b1c87bc0b9d796bd02a023608e2993f9d4b17e4f6774c",
+  "generated_at": "2026-07-08T16:35:27Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:4dc806b461e93299f89b1c87bc0b9d796bd02a023608e2993f9d4b17e4f6774c",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a",
+    "transition": "ctlobj-sha256:11d8a2e684f5c027f4e2b98ddc7b647eadf5b12bd59028ab1e47c23a542d1d86"
+  },
+  "parent_root_cid": "ctlobj-sha256:468aae2249388d9871edac436b313af49d897f16a1ac5e7cbbe67d0fa9987935",
+  "payload_file": "ctl-dogfood/resources/su2-2-braid-oracle-bug-audit-note-snapshot.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload resources/su2-2-braid-oracle-bug-audit-note-snapshot.json --manifest manifests/resource-su2-2-braid-oracle-bug-audit-note-snapshot.json --created-at 2026-07-08T16:35:27Z --admitted-at 2026-07-08T16:35:27Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "f540d6a7f23fdf3f4e7dee6ec8c641388f4f8e69"
+}

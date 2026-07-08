@@ -1,0 +1,120 @@
+{
+  "created_at": "2026-07-08T16:35:27Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-08-ctl-current-read-provider-adoption",
+  "parents": [
+    "ctlobj-sha256:6a007fb5b6c98709c909015d550dcb878eb8115cb90acc953428b32075329762"
+  ],
+  "payload": {
+    "adoption_boundary": {
+      "adoption_type": "downstream provider adoption of CTL current-read tooling",
+      "adopts_ctl_meta_normative_state": false,
+      "ctl_kernel_profile_change": false,
+      "current_reader_core_forked_downstream": false,
+      "old_objects_rewritten": false,
+      "state_store_migration": false
+    },
+    "claim_boundary": "This note records tooling and provider-policy adoption only. It does not assert a new twisted-yetter mathematical result, does not change ctl-kernel/1 semantics, and does not import ctl-meta's project-local normative CTL state.",
+    "created_at": "2026-07-08T14:53:23Z",
+    "created_by": "actor:codex",
+    "current_read_discipline": {
+      "canonical_commands": [
+        "python ctl-dogfood/scripts/ctl_store.py lookup-current <logical-id>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path <repo-relative-path>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --sha256 <sha256>",
+        "python ctl-dogfood/scripts/ctl_store.py lookup-resource --git-blob <git-blob>",
+        "python ctl-dogfood/scripts/ctl_store.py search-current <query>",
+        "python ctl-dogfood/scripts/ctl_store.py list-current-bindings",
+        "python ctl-dogfood/scripts/ctl_store.py manifest-lookup --logical-id <logical-id>"
+      ],
+      "discipline_summary": "Current-state and resource-safety answers must be grounded in replayed CTL current root, active bindings, and ResourceSafetyStatus overlays. Filesystem search is acceptable for discovery or archaeology, not as the final current-state source.",
+      "resource_safety_registration_policy": "Reusable evaluators, scripts, generated artifacts, and lab notes that become known-wrong, deprecated, superseded, or replacement-critical should be registered as ctl-resource handle/snapshot/safety-status claims rather than relying only on file headers or prose notes.",
+      "source_state_labels": [
+        "current-ctl-object",
+        "current-discovery-only",
+        "absent-current-binding",
+        "unsupported-profile",
+        "invalid-history",
+        "manifest-provenance-missing",
+        "historical-note-only",
+        "unknown",
+        "registered_unmarked",
+        "known_active",
+        "known_wrong",
+        "deprecated",
+        "superseded",
+        "historical_only",
+        "caution"
+      ]
+    },
+    "downstream_adapter": {
+      "non_fork_checks": [
+        "adapter does not import ctl_ref",
+        "adapter does not implement search_current",
+        "adapter preserves path_hygiene_report as a subprocess-backed compatibility API for existing downstream tests",
+        "adapter path normalization is CLI ergonomics only and does not reimplement CTL current-read or resource-safety logic"
+      ],
+      "path": "ctl-dogfood/scripts/ctl_store.py",
+      "policy": "Delegate to ctl-meta/meta/ctl-dogfood/scripts/ctl_store.py, normalize repo-local absolute --path arguments to repo-relative paths, and inject --store-root for the twisted-yetter ctl-dogfood store when the caller did not provide one.",
+      "sha256": "0744c9984939a44b8c45c0b32207c62d0c78615e8db11e9a41c31975cef9538a"
+    },
+    "mathematical_status": "NOT_A_MATHEMATICAL_RESULT",
+    "note_id": "objective-note-2026-07-08-ctl-current-read-provider-adoption",
+    "purpose": "Record downstream adoption of ctl-meta current-read and resource-safety dogfood tooling as the canonical reader for CTL current-state and resource-safety queries, while keeping twisted-yetter's local ctl_store.py as a thin adapter rather than a fork.",
+    "repo_snapshot": {
+      "dirty_status_summary": "Pre-existing unrelated branch-store merge files were dirty. This adoption work also edits ctl-dogfood/scripts/ctl_store.py and adds tests/test_ctl_store_current_read.py before admission.",
+      "local_test_file": {
+        "path": "tests/test_ctl_store_current_read.py",
+        "sha256": "53faa5ec95f38ef4f795d3f0a113479de8c72ad0f89f4a7e0e1778e93655e3f4"
+      },
+      "twisted_yetter_head_commit_before_admission": "0daa66ac78a52c6f8a2a097f911a4d472c4e0eb2"
+    },
+    "reproduce_commands": [
+      "python ctl-dogfood/scripts/ctl_store.py verify",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-current subject:twisted-yetter:category-family:su2-k",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path experiments/sage/su2_2_braid_oracle.sage.py",
+      "python ctl-dogfood/scripts/ctl_store.py lookup-current claim:does-not-exist",
+      "python ctl-dogfood/scripts/ctl_store.py search-current \"SU(2)_k\"",
+      "python3 -m pytest tests/test_ctl_store_current_read.py",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/verify.py"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_of_truth_policy": "This is a machine-readable CTL lab-note preimage. The admitted claim for this payload is the current provider-adoption record.",
+    "status": "ESTABLISHED_TOOLING_ADOPTION_CHECKPOINT",
+    "title": "Adopt ctl-meta current-read and resource-safety provider without downstream fork",
+    "updated_at": "2026-07-08T16:35:27Z",
+    "upstream_provider": {
+      "author": "jcguu95 <jcguu95@gmail.com>",
+      "author_date": "2026-07-08T10:20:20-06:00",
+      "commit": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+      "new_resource_safety_commands": [
+        "lookup-resource --path <repo-relative-path>",
+        "lookup-resource --sha256 <sha256>",
+        "lookup-resource --git-blob <git-blob>",
+        "lookup-resource --logical-id <resource-logical-id>",
+        "lookup-resource --cid <resource-revision-cid>"
+      ],
+      "previous_provider_commit": "126cb9800667d6c907982cd47f96fc0265cb5e6e",
+      "repo_path": "/Users/jin/data/local/projects/ctl-meta",
+      "status_short_at_adoption": "",
+      "subject": "Add resource safety overlay backlog",
+      "upstream_tool": "meta/ctl-dogfood/scripts/ctl_store.py",
+      "upstream_tool_sha256": "478cd9344fa982697d5943a787e3281b978ee25fab9177cfc513cf978a76cbcf"
+    },
+    "verifier_update_policy": {
+      "bootstrap_provider_pin_should_remain_historical": true,
+      "current_provider_can_be_accepted_from_this_admitted_note": true,
+      "required_current_provider_clean_status": "",
+      "required_current_provider_commit": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+      "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
+      "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

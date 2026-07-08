@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+  "current_root_cid": "ctlobj-sha256:a6d308b4bb53e17a658229c9cc7c579e0ab981b671bc151873c3d590e414cf5a",
+  "generated_at": "2026-07-08T16:35:27Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-handle:su2-2-braid-oracle",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:a6d308b4bb53e17a658229c9cc7c579e0ab981b671bc151873c3d590e414cf5a",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
+    "transition": "ctlobj-sha256:e72655adcbba5cf44bc1830a1ab81f296d06a7fc45507adb208914f45ab36746"
+  },
+  "parent_root_cid": "ctlobj-sha256:cac63b6c1fe41aae34a6b2ad2e677f3b49dec4c3e752ebc467583fe8262855d2",
+  "payload_file": "ctl-dogfood/resources/su2-2-braid-oracle-handle.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:resource-handle:su2-2-braid-oracle --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload resources/su2-2-braid-oracle-handle.json --manifest manifests/resource-su2-2-braid-oracle-handle.json --created-at 2026-07-08T16:35:27Z --admitted-at 2026-07-08T16:35:27Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "f540d6a7f23fdf3f4e7dee6ec8c641388f4f8e69"
+}
