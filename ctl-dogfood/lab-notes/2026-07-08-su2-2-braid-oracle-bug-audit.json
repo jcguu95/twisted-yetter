@@ -1,0 +1,263 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-08-su2-2-braid-oracle-bug-audit",
+  "title": "Known incorrect SU(2)_2 braid oracle sigma-sublink shortcut",
+  "created_at": "2026-07-08T05:26:33Z",
+  "created_by": "actor:codex",
+  "status": "ESTABLISHED_BUG_REPORT",
+  "mathematical_status": "BUG_IN_LEGACY_COMPUTATION_ORACLE_NOT_A_THEOREM_CLAIM",
+  "scope": {
+    "question": "Locate why the old specialized SU(2)_2 braid-closure oracle disagreed with the generic SU(2)_k fusion-path evaluator on the Yasui Figure 2 CP2(a=1) Tham 5.11 check, and make the bad oracle visibly unsafe for future use.",
+    "claim_boundary": "This note establishes a repo-local tool bug in the old specialized oracle. It does not claim a new mathematical formula, does not invalidate the n18b restricted no-crossing SU(2)_2 evaluator core, and does not by itself prove the Tham 5.11 upside-down interpretation.",
+    "path_policy": "All paths below are repo-relative."
+  },
+  "repo_snapshot": {
+    "head_commit_at_note_creation": "27ea5460b46b2fb1c16a02ddc188450d537777c3",
+    "dirty_status_summary": "Pre-existing unrelated dirty CTL merge files were present. Yasui Figure 2 / Tham 5.11 artifacts and diagnostic scripts were also uncommitted at the time this note was written.",
+    "related_current_graph_node": {
+      "node_id": "n18b-su2-2-link-evaluator-core",
+      "important_distinction": "The current graph node n18b refers to src/twisted_yetter/su2_link_evaluator.py at commit 137d449, a restricted bare no-crossing SU(2)_2 evaluator core. The bug recorded here is in the later experimental Sage braid oracle experiments/sage/su2_2_braid_oracle.sage.py, added at commit 00afe39."
+    }
+  },
+  "bad_oracle": {
+    "path": "experiments/sage/su2_2_braid_oracle.sage.py",
+    "origin_commit": {
+      "commit": "00afe39ada71e5da1b7bbe8391827bb6a5a6af75",
+      "author": "jcguu95 <jcguu95@gmail.com>",
+      "author_date": "2026-07-01T06:32:47-06:00",
+      "committer": "jcguu95 <jcguu95@gmail.com>",
+      "commit_date": "2026-07-01T06:32:47-06:00",
+      "subject": "Add SU2_2 Sage braid oracle"
+    },
+    "bad_status": "DEPRECATED_KNOWN_INCORRECT_FOR_MULTI_COMPONENT_SIGMA_SECTORS",
+    "safe_replacement_for_braid_closure_checks": "experiments/sage/su2k_fusion_braid_evaluator.sage.py at level k=2",
+    "do_not_use_for": [
+      "Yasui Figure 2 or Figure 3 Tham 5.11 comparison checks",
+      "multi-component sigma-colored sublink sectors",
+      "Omega expansion where any contributing fixed sector contains two or more sigma-labeled components",
+      "normative CTL evidence for arbitrary braid-closure RT values"
+    ],
+    "still_historical_for": [
+      "Understanding earlier stress tests that used this oracle only as an experimental comparator",
+      "Small controls that do not exercise the bad multi-component sigma shortcut"
+    ]
+  },
+  "exact_fault_location": {
+    "primary_function": "fixed_label_rt_value",
+    "primary_code_region": "experiments/sage/su2_2_braid_oracle.sage.py::fixed_label_rt_value",
+    "bad_computation_summary": "The function selects all components labeled sigma, extracts a selected subbraid, evaluates Sage's Jones polynomial of that selected sigma sublink at zeta_16, and then multiplies by a scalar ((-1)^(number_of_sigma_components-1))*sqrt(2). This shortcut was treated as the fixed-label SU(2)_2 RT value of the sigma-colored sublink.",
+    "bad_lines_by_function_name": [
+      {
+        "function": "fixed_label_rt_value",
+        "statement": "sigma_jones_value = _sigma_sublink_jones_at_zeta(...); sigma_factor = ((-1) ** (len(sigma_components) - 1)) * SQRT2 * sigma_jones_value"
+      },
+      {
+        "function": "_sigma_sublink_jones_at_zeta",
+        "statement": "polynomial = link.jones_polynomial(skein_normalization=True); return K(polynomial(ZETA)) * ((-SQRT2) ** isolated_component_count)"
+      }
+    ],
+    "why_this_is_wrong": "The selected-subbraid Jones-polynomial shortcut is not equivalent to the full SU(2)_2 RT quantum trace in the conventions used by the generic fusion-path evaluator once more than one component is sigma-colored. It loses convention-sensitive information for multi-component sigma sectors. The diagnostic mismatch is already visible at fixed simple-label sectors, before summing Omega coefficients.",
+    "not_the_primary_fault": [
+      "The Yasui Figure 2 Tham 5.11 normalization D^-2 is not the cause of this oracle mismatch.",
+      "The R1-normalized Yasui braid payload is not the cause of the sector-level oracle mismatch.",
+      "The n18b restricted no-crossing evaluator core is not the code path being diagnosed here."
+    ]
+  },
+  "reproduction": {
+    "diagnostic_script": "experiments/sage/su2_2_braid_oracle_vs_su2k_sector_diff.sage.py",
+    "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/su2_2_braid_oracle_vs_su2k_sector_diff.sage.py",
+    "test_case": {
+      "source": "R1-normalized Yasui Figure 2 CP2(a=1) braid payload",
+      "n_strands": 5,
+      "braid_word": [
+        1,
+        1,
+        2,
+        3,
+        3,
+        2,
+        1,
+        2,
+        3,
+        2,
+        2,
+        -4,
+        3,
+        2,
+        1,
+        2,
+        3,
+        3,
+        2,
+        3,
+        4,
+        -3
+      ],
+      "component_order": [
+        "A",
+        "C",
+        "B"
+      ],
+      "total_framings": [
+        4,
+        4,
+        1
+      ],
+      "blackboard_self_writhe": [
+        2,
+        0,
+        0
+      ],
+      "extra_framings_for_blackboard_style_input": [
+        2,
+        4,
+        1
+      ]
+    },
+    "observed_fixed_sector_mismatches": [
+      {
+        "labels": [
+          0,
+          1,
+          1
+        ],
+        "old_oracle_value": "2*zeta16^7",
+        "generic_su2k_value_float": "0.7653668647301795 + 1.8477590650225735*I",
+        "difference_float": "2.8284271247461898"
+      },
+      {
+        "labels": [
+          1,
+          0,
+          1
+        ],
+        "old_oracle_value": "2*zeta16^7",
+        "generic_su2k_value_float": "0.7653668647301795 + 1.8477590650225735*I",
+        "difference_float": "2.8284271247461900"
+      },
+      {
+        "labels": [
+          1,
+          1,
+          0
+        ],
+        "old_oracle_value": "-2",
+        "generic_su2k_value_float": "2.0",
+        "difference_float": "4.0"
+      },
+      {
+        "labels": [
+          1,
+          1,
+          2
+        ],
+        "old_oracle_value": "2",
+        "generic_su2k_value_float": "-2.0",
+        "difference_float": "4.0"
+      },
+      {
+        "labels": [
+          1,
+          2,
+          1
+        ],
+        "old_oracle_value": "2*zeta16^7",
+        "generic_su2k_value_float": "0.7653668647301795 + 1.8477590650225735*I",
+        "difference_float": "2.8284271247461900"
+      },
+      {
+        "labels": [
+          2,
+          1,
+          1
+        ],
+        "old_oracle_value": "2*zeta16^7",
+        "generic_su2k_value_float": "0.7653668647301795 + 1.8477590650225735*I",
+        "difference_float": "2.8284271247461898"
+      }
+    ],
+    "diagnostic_interpretation": "Every displayed mismatch has exactly two sigma labels. This localizes the bad behavior to the sigma sublink Jones-polynomial shortcut, not to the Omega summation layer."
+  },
+  "yasui_cp2_resolution": {
+    "false_alarm": "The old oracle made the Yasui Figure 2 CP2(a=1) D^-2 comparison appear to fail.",
+    "corrected_backend": "Using experiments/sage/su2k_fusion_braid_evaluator.sage.py at level 2, with total framings rather than old extra-framing input, the R1-normalized Yasui raw value divided by D^2 matches the standard +1 framed Omega_0 unknot value.",
+    "su2_2_numbers": {
+      "D_global_dimension": "4",
+      "D_squared": "16",
+      "standard_plus_one_omega0_unknot_float": "0.7653668647301795 + 1.8477590650225735*I",
+      "yasui_raw_float": "12.245869835682871 + 29.56414504036118*I",
+      "yasui_normalized_by_D_squared_float": "0.7653668647301794 + 1.8477590650225738*I",
+      "abs_difference": "3.0e-16"
+    },
+    "additional_backend_checks": [
+      {
+        "category": "SU(2)_3",
+        "status": "match",
+        "note": "Generic SU(2)_k evaluator gave Yasui raw / D^2 equal to standard +1 Omega_0 unknot."
+      },
+      {
+        "category": "SU(2)_4",
+        "status": "match",
+        "note": "Floating generic SU(2)_k evaluator gave Yasui raw / D^2 equal to standard +1 Omega_0 unknot."
+      },
+      {
+        "category": "SU(3)_2 AnyonWiki FR_6_1_4_5 cat_1_3_1 anyonwiki_direct",
+        "status": "match_with_convention_warning",
+        "artifact": "experiments/results/yasui/figure2-cp2-a1-r1-su3-2-anyonwiki-untwisted-v1.json",
+        "note": "The selected SU(3)_2 convention matches untwisted and character rows; cat_1_3_2 does not match naively and remains a convention warning."
+      }
+    ]
+  },
+  "affected_artifacts_and_scripts": {
+    "direct_importers_or_dependents_found_by_rg": [
+      "experiments/sage/su2_2_local_piece_evaluator.sage.py",
+      "experiments/results/local-piece/su2-2-local-piece-evaluator-v1.json",
+      "experiments/sage/su2_2_rf_local_backend.sage.py",
+      "experiments/results/local-piece/su2-2-rf-local-backend-v1.json",
+      "experiments/sage/su2_2_rf_omega_backend.sage.py",
+      "experiments/results/local-piece/su2-2-rf-omega-backend-v1.json",
+      "experiments/sage/su2_2_rf_generic_backend.sage.py",
+      "experiments/results/local-piece/su2-2-rf-generic-backend-v1.json",
+      "experiments/sage/su2_2_braid_stress_suite.sage.py",
+      "experiments/results/sage-stress/su2-2-braid-stress-v1.json",
+      "experiments/sage/su2_2_braid_auto_stress.sage.py",
+      "experiments/results/sage-stress/su2-2-braid-auto-stress-v1.json",
+      "experiments/sage/su2_2_handle_slide_toys.sage.py",
+      "experiments/results/sage-stress/su2-2-handle-slide-toys-v1.json",
+      "experiments/sage/yasui_figure2_cp2_a1_su2_2_tham511_compare.sage.py",
+      "experiments/results/yasui/figure2-cp2-a1-su2-2-tham511-r1-a15-curl-comparison-v1.json"
+    ],
+    "important_previous_warning": [
+      {
+        "path": "experiments/results/yasui/figure3-a1-standard-comparison-su2-2-v1.json",
+        "status": "skipped-legacy-jones-diagnostic",
+        "meaning": "A previous artifact already avoided blocking Yasui payload admission on the legacy Jones diagnostic, but did not fully identify the oracle bug."
+      },
+      {
+        "path": "experiments/results/yasui/figure2-cp2-a1-su2-2-tham511-r1-a15-curl-comparison-v1.json",
+        "status": "needs-review",
+        "meaning": "This artifact is now understood as contaminated by the bad old oracle convention and should not be used as evidence against the Tham 5.11 working interpretation."
+      }
+    ],
+    "triage_policy": [
+      "Artifacts whose only role was stress-testing the old oracle should be treated as historical experimental evidence.",
+      "Artifacts that used the old oracle as an external comparator for an explicit R/F backend need fresh comparison against the generic SU(2)_k evaluator or another independent categorical implementation before admission.",
+      "Any future Yasui, Tham 5.11, or twisted-Yetter computation must not cite experiments/sage/su2_2_braid_oracle.sage.py as a normative backend."
+    ]
+  },
+  "source_changes_made_for_future_users": [
+    {
+      "path": "experiments/sage/su2_2_braid_oracle.sage.py",
+      "change": "Add top-of-file known-incorrect/deprecated warning pointing to this lab note and the replacement generic SU(2)_k evaluator."
+    },
+    {
+      "path": "experiments/sage/README.org",
+      "change": "Add front-page warning that the README describes a historical oracle with a known multi-component sigma-sector bug."
+    }
+  ],
+  "next_actions": [
+    "Do not delete the old oracle immediately, because older artifacts and scripts still need historical reproducibility.",
+    "For any local-piece or R/F backend artifact that used the old oracle only as a comparator, rerun the relevant comparisons against experiments/sage/su2k_fusion_braid_evaluator.sage.py at k=2.",
+    "When admitting future CTL claims, explicitly exclude the old oracle as normative evidence unless the claim is only about historical provenance."
+  ]
+}

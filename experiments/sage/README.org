@@ -2,6 +2,20 @@
 #+LANGUAGE: zh-TW
 #+OPTIONS: toc:nil num:nil
 
+* WARNING: historical oracle only
+
+=su2_2_braid_oracle.sage.py= 已知不可以再當作 normative RT backend。
+它在 multi-component =sigma= sector 使用 selected-subbraid Jones-polynomial
+shortcut，會給出錯誤的 fixed-label value。詳細 bug report 見：
+
+=ctl-dogfood/lab-notes/2026-07-08-su2-2-braid-oracle-bug-audit.json=
+
+新的 =SU(2)_2= braid-closure comparison 應改用：
+
+=experiments/sage/su2k_fusion_braid_evaluator.sage.py= with =k=2=。
+
+以下內容只保留作 historical reproducibility。
+
 * Purpose
 
 =su2_2_braid_oracle.sage.py= 是目前的 exact SU(2)_2 braid-closure stress-test

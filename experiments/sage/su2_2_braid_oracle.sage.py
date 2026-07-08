@@ -1,4 +1,21 @@
-"""Exact SU(2)_2 braid-closure oracle for twisted Kirby stress tests.
+"""DEPRECATED / KNOWN INCORRECT SU(2)_2 braid-closure oracle.
+
+Do not use this file as a normative RT backend for Yasui, Tham 5.11,
+twisted-Yetter, or multi-component sigma-sector computations.
+
+Known bug: ``fixed_label_rt_value`` computes sigma-labeled sublinks by a
+selected-subbraid Jones-polynomial shortcut.  This shortcut gives wrong fixed
+sectors when two or more components are sigma-colored.  The failure is recorded
+in CTL lab note:
+
+    ctl-dogfood/lab-notes/2026-07-08-su2-2-braid-oracle-bug-audit.json
+
+Use ``experiments/sage/su2k_fusion_braid_evaluator.sage.py`` with ``k=2`` for
+current SU(2)_2 braid-closure comparison checks.  This file is kept only for
+historical reproducibility of old artifacts.
+
+Original description: exact SU(2)_2 braid-closure oracle for twisted Kirby
+stress tests.
 
 Run from the repository root with:
 

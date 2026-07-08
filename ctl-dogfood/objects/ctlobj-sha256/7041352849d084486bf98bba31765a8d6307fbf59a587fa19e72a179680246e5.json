@@ -1,0 +1,91 @@
+{
+  "created_at": "2026-07-08T06:55:10Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-figure2-dic12-tham511-check",
+  "parents": [],
+  "payload": {
+    "aliases": [
+      "yasui-figure2-dic12-tham511-check",
+      "yasui-fig2-ddic12-cp2-check",
+      "figure2-cp2-dic12-plus-minus-twelve"
+    ],
+    "current_view_hints": {
+      "core_result": {
+        "covered_sector_count": 32768,
+        "global_dimension_D": 144,
+        "global_dimension_D_squared": 20736,
+        "h_power_rows": [
+          {
+            "component_powers_in_braid_order": [
+              0,
+              0,
+              0
+            ],
+            "h_power": 0,
+            "normalized_yasui": "12-1.0404914241587309e-14j",
+            "standard_cp2": "11.999999999999991+8.8817841970012523e-15j"
+          },
+          {
+            "component_powers_in_braid_order": [
+              2,
+              2,
+              1
+            ],
+            "h_power": 1,
+            "normalized_yasui": "-12+9.8832054106788921e-15j",
+            "standard_cp2": "-12+1.230836605513238e-16j"
+          },
+          {
+            "component_powers_in_braid_order": [
+              0,
+              0,
+              2
+            ],
+            "h_power": 2,
+            "normalized_yasui": "12-1.0434383124339704e-14j",
+            "standard_cp2": "11.999999999999998+1.7763568394002505e-15j"
+          },
+          {
+            "component_powers_in_braid_order": [
+              2,
+              2,
+              3
+            ],
+            "h_power": 3,
+            "normalized_yasui": "-12+9.578935678714631e-15j",
+            "standard_cp2": "-12-1.230836605513238e-16j"
+          }
+        ],
+        "missing_sector_count": 0
+      },
+      "h2_character_rule": "For h_power=a, use witness powers (2a,2a,a) modulo 4 in braid order A,C,B.",
+      "primary_artifact": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-range-combined-aggregate-v1.json",
+      "supporting_lab_note": "ctl-dogfood/lab-notes/2026-07-08-yasui-figure2-dic12-tham511-check.json",
+      "why_interesting": "The D(Dic_12) witness character bookkeeping agrees with the standard CP2 +1-framed Omega unknot after the Tham 5.11 upside-down D^-2 normalization, providing a strong consistency check for the route."
+    },
+    "display_name": "Yasui Figure 2 CP2(a=1) D(Dic_12) Tham 5.11 check cluster",
+    "parent_subject_ids": [
+      "subject:twisted-yetter:presentation:yasui-figure2-cp2-a1-r1",
+      "subject:twisted-yetter:category:d-dic12-omega0",
+      "subject:twisted-yetter:claim-cluster:dual-kirby-evaluation-convention",
+      "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation"
+    ],
+    "schema": "twisted-yetter/subject-definition/0",
+    "scope_note": "Navigation cluster for the completed floating-point D(Dic_12) evaluation of the Yasui Figure 2 CP2(a=1) R1-normalized presentation. The calculation checks the working Tham 5.11 upside-down interpretation: the two original 3-handles contribute D^-2, no special dotted-knot projection is applied, and H2 character powers are assigned by A=2h, C=2h, B=h. The normalized Yasui values match the standard CP2 +1-framed Omega unknot for all four powers of the pointed witness. This is a computational consistency result, not a theorem or exotic-detection claim.",
+    "status": "active",
+    "subject_id": "subject:twisted-yetter:claim-cluster:yasui-figure2-dic12-tham511-check",
+    "subject_kind": "ty:claim-cluster",
+    "upstream_review_hints": [
+      "This cluster should be a generated-wiki landing page for the Figure 2 CP2(a=1) Tham 5.11 sanity check.",
+      "Keep operational details such as per-worker timing, slowest sectors, partial singleton chunks, and abandoned fat JSON outputs in lab notes/artifacts, not in the subject definition.",
+      "The result supports the current route but should not be promoted to a proof of the general special-handle formula."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-definition"
+}

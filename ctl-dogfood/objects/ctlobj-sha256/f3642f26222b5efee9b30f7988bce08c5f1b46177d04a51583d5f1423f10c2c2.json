@@ -1,0 +1,53 @@
+{
+  "created_at": "2026-07-08T06:56:30Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v2",
+  "parents": [],
+  "payload": {
+    "current_view_rule": "Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.",
+    "index_id": "subject-index:twisted-yetter:subject-layer-lane-v2",
+    "logical_id_prefixes": [
+      "subject-edge:",
+      "subject-index:",
+      "subject-operation:",
+      "subject:"
+    ],
+    "migration_notes": "This v2 index extends v1 with the Yasui Figure 2 CP2(a=1) R1-normalized presentation and the D(Dic_12) Tham 5.11 consistency-check cluster.",
+    "physical_store": "Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.",
+    "profile_family": [
+      "twisted-yetter/subject-definition/0",
+      "twisted-yetter/subject-edge/0",
+      "twisted-yetter/subject-index/0",
+      "twisted-yetter/subject-operation/0"
+    ],
+    "purpose": "Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to generated topic-oriented wiki views.",
+    "schema": "twisted-yetter/subject-index/0",
+    "seed_edges_added_in_v2": [
+      "subject-edge:ty:yasui-paper:defines:figure2-cp2-a1-r1",
+      "subject-edge:ty:yasui-figure2-dic12-check:computes:figure2-cp2-a1-r1",
+      "subject-edge:ty:yasui-figure2-dic12-check:uses:d-dic12-omega0",
+      "subject-edge:ty:yasui-figure2-dic12-check:uses:d-dic12-fr-data",
+      "subject-edge:ty:yasui-figure2-dic12-check:uses:dual-kirby-convention",
+      "subject-edge:ty:yasui-figure2-dic12-check:uses:singleton-route",
+      "subject-edge:ty:yasui-figure2-dic12-check:motivated-by:dic12-split-signal"
+    ],
+    "seed_subjects_added_in_v2": [
+      "subject:twisted-yetter:presentation:yasui-figure2-cp2-a1-r1",
+      "subject:twisted-yetter:claim-cluster:yasui-figure2-dic12-tham511-check"
+    ],
+    "status": "active",
+    "title": "Twisted Yetter downstream subject lane v2",
+    "upstream_review_contract": {
+      "downstream_scope": "This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.",
+      "migration_commitment": "Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.",
+      "upstream_may_replace_profiles": true
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-index"
+}

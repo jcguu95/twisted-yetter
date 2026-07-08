@@ -1,0 +1,41 @@
+{
+  "schema": "twisted-yetter.yasui-figure2-cp2-a1-su2-2-tham511.v1",
+  "status": "blocked",
+  "variant": "source-pd",
+  "mathematical_status": "WORKING_HYPOTHESIS_NOT_THEOREM",
+  "generator_script": "experiments/sage/yasui_figure2_cp2_a1_su2_2_tham511_compare.sage.py",
+  "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_su2_2_tham511_compare.sage.py --write",
+  "argv": [
+    "experiments/sage/yasui_figure2_cp2_a1_su2_2_tham511_compare.sage.py",
+    "--write"
+  ],
+  "category_id": "SU(2)_2",
+  "source": {
+    "input": "experiments/inputs/yasui/figure2-cp2-a1-crossing-table.json",
+    "context": "experiments/results/yasui/figure2-cp2-a1-tham511-context-v1.json",
+    "oracle": "experiments/sage/su2_2_braid_oracle.sage.py",
+    "standard_presentation": "one +1 framed unknot for CP2"
+  },
+  "normalization_working_hypothesis": {
+    "source_three_handle_count": 2,
+    "dual_tham511_one_handle_count": 2,
+    "global_dimension": {
+      "field": "CyclotomicField(16)",
+      "display": "4*1"
+    },
+    "factor": "GLOBAL_DIMENSION^-2",
+    "special_dotted_projector_status": "not present in this Figure 2 input; no cut-and-vacuum projection rule applied"
+  },
+  "blocker": {
+    "kind": "sage-link-braid-conversion-timeout",
+    "observed_at_utc": "2026-07-08T04:42:49Z",
+    "elapsed_before_interrupt_seconds": 300,
+    "interrupted_by": "KeyboardInterrupt after user-requested longer run",
+    "traceback_focus": "sage.knots.link.Link.braid() recursing through Link(newPD).braid(remove_loops=remove_loops), then seifert_circles()/_directions_of_edges()",
+    "interpretation": "No corrected source-PD RT value was produced. This is a conversion/backend blocker, not a mathematical mismatch artifact."
+  },
+  "related_artifacts": {
+    "r1_normalized_comparison": "experiments/results/yasui/figure2-cp2-a1-su2-2-tham511-r1-a15-curl-comparison-v1.json"
+  },
+  "halt_downstream_twisted_work": true
+}

@@ -1,0 +1,192 @@
+{
+  "argv": [
+    "experiments/scripts/yasui_figure2_cp2_a1_certify.py",
+    "--write"
+  ],
+  "claim_boundary": "Records a Tham 5.11-compatible working context for a CP2 sanity check.  It is not a theorem, not a general Crane-Yetter formula, and not evidence for exotic smooth detection.",
+  "command": "experiments/scripts/yasui_figure2_cp2_a1_certify.py --write",
+  "component_order": [
+    "A",
+    "B",
+    "C"
+  ],
+  "dual_d2_constraints": [
+    {
+      "coefficients_by_component": {
+        "A": 1,
+        "B": -2,
+        "C": 0
+      },
+      "id": "r1",
+      "interpretation": "dual one-handle d2 constraint on 2-handle coefficients; equivalently the corresponding vector is a radical vector of the source degenerate linking matrix"
+    },
+    {
+      "coefficients_by_component": {
+        "A": 0,
+        "B": -2,
+        "C": 1
+      },
+      "id": "r2",
+      "interpretation": "dual one-handle d2 constraint on 2-handle coefficients; equivalently the corresponding vector is a radical vector of the source degenerate linking matrix"
+    }
+  ],
+  "dual_d2_rank": 2,
+  "dual_upside_down_interpretation": {
+    "one_handle_scalar_factor": "GLOBAL_DIMENSION^-1 per original 3-handle",
+    "original_three_handles": "interpreted as Tham 5.11 one-handle maps",
+    "special_dotted_projector_status": "not present in this Yasui Figure 2 input; no cut-and-vacuum projection rule is applied",
+    "status": "WORKING_UNDERSTANDING_NOT_THEOREM"
+  },
+  "elapsed_seconds": 0,
+  "finished_at_utc": "2026-07-08T04:29:04Z",
+  "framing_plus_intercomponent_linking_matrix": [
+    [
+      4,
+      2,
+      4
+    ],
+    [
+      2,
+      1,
+      2
+    ],
+    [
+      4,
+      2,
+      4
+    ]
+  ],
+  "generator_script": "experiments/scripts/yasui_figure2_cp2_a1_certify.py",
+  "git": {
+    "commit": "27ea5460b46b2fb1c16a02ddc188450d537777c3",
+    "dirty": true
+  },
+  "h2_kernel": {
+    "component_pullback_to_h": {
+      "A": 2,
+      "B": 1,
+      "C": 2
+    },
+    "description": "In the dual/upside-down Tham 5.11 direction, H2 is ker(d2) for the two 1-handles and three 2-handles.",
+    "generator": "h",
+    "rank": 1
+  },
+  "input": "experiments/inputs/yasui/figure2-cp2-a1-crossing-table.json",
+  "input_hash": "adfec0d78cddfbf76d1250cc8bcff69348742f056bb1687eee56ce03a96d1fe4",
+  "input_schema": "twisted-yetter.yasui-figure2-cp2-crossing-table.v1",
+  "legal_character_assignments": {
+    "assignments": [
+      {
+        "component_omega_labels": [
+          0,
+          0,
+          0
+        ],
+        "component_omega_labels_by_id": {
+          "A": 0,
+          "B": 0,
+          "C": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "C"
+        ],
+        "h_label": 0
+      },
+      {
+        "component_omega_labels": [
+          0,
+          1,
+          0
+        ],
+        "component_omega_labels_by_id": {
+          "A": 0,
+          "B": 1,
+          "C": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "C"
+        ],
+        "h_label": 1
+      }
+    ],
+    "category": "SU(2)_2 / Z2 universal grading",
+    "rule": "component label is h_label times component_pullback_to_h modulo 2"
+  },
+  "mathematical_status": "WORKING_HYPOTHESIS_NOT_THEOREM",
+  "normalization_working_hypothesis": {
+    "dual_one_handle_count": 2,
+    "one_handle_factor": "GLOBAL_DIMENSION^-1 per dual Tham 5.11 one-handle",
+    "rt_framing_convention": "The target total framings come from the classes 2h,h,2h. When evaluating the explicit planar PD/braid, use extra framing = target total framing - visible blackboard self-writhe.",
+    "sign_status": "Figure 2 crossing signs are provisional XYZW-derived signs; source-image hand calibration remains required before treating the RT comparison as mathematical evidence.",
+    "source_three_handle_count": 2,
+    "status": "WORKING_HYPOTHESIS_NOT_THEOREM",
+    "total_factor": "GLOBAL_DIMENSION^-2"
+  },
+  "radical_relation_checks": [
+    {
+      "component_order": [
+        "A",
+        "B",
+        "C"
+      ],
+      "is_in_radical": true,
+      "matrix_times_vector": [
+        0,
+        0,
+        0
+      ],
+      "relation_id": "r1",
+      "vector": [
+        1,
+        -2,
+        0
+      ]
+    },
+    {
+      "component_order": [
+        "A",
+        "B",
+        "C"
+      ],
+      "is_in_radical": true,
+      "matrix_times_vector": [
+        0,
+        0,
+        0
+      ],
+      "relation_id": "r2",
+      "vector": [
+        0,
+        -2,
+        1
+      ]
+    }
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "PYTHONPATH=src uv run python experiments/scripts/yasui_figure2_cp2_a1_certify.py --write",
+  "schema": "twisted-yetter.tham511-handle-context.v1",
+  "source_handle_counts": {
+    "0": 1,
+    "1": 0,
+    "2": 3,
+    "3": 2,
+    "4": 1
+  },
+  "source_input_id": "yasui-figure2-cp2-a1",
+  "started_at_utc": "2026-07-08T04:29:04Z",
+  "status": "WORKING_HYPOTHESIS_NOT_THEOREM",
+  "tham511_dual_upside_down_handle_counts": {
+    "0": 1,
+    "1": 2,
+    "2": 3,
+    "3": 0,
+    "4": 1
+  },
+  "tool_versions": {
+    "python": "3.11.15"
+  }
+}

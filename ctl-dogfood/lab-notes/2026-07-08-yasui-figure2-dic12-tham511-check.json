@@ -1,0 +1,92 @@
+{
+  "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+  "note_id": "objective-note-2026-07-08-yasui-figure2-dic12-tham511-check",
+  "title": "Yasui Figure 2 CP2(a=1) D(Dic_12) Tham 5.11 floating-point check",
+  "created_at_utc": "2026-07-08T06:20:00Z",
+  "status": "COMPUTATIONAL_CHECK_PASS_NOT_THEOREM",
+  "mathematical_status": "FLOATING_POINT_COMPUTATIONAL_EVIDENCE_NOT_THEOREM",
+  "question": "Check whether the R1-normalized Yasui Figure 2 CP2(a=1) presentation, interpreted upside-down in the Tham 5.11 context with two original 3-handles contributing D^-2, reproduces the standard CP2 +1-framed Omega unknot value for untwisted D(Dic_12) and for the pointed witness character powers.",
+  "context": {
+    "category": "untwisted Drinfeld double D(Dic_12), also recorded earlier as D(Dic_3)/Q12 convention",
+    "why_this_category": "Previous split CP2#2CPbar scans found a nontrivial pointed witness g=(a^3, chi), chi(a)=-1, chi(x)=i, with theta(g)=-1.",
+    "yasui_input": "R1-normalized Yasui Figure 2 CP2(a=1) braid, component order in braid A,C,B, total framings 4,4,1.",
+    "tham511_interpretation": "The two original 3-handles are read upside-down as two Tham 5.11 one-handle operations, giving normalization by D^2. There are no special dotted knots in this input, so no cut-and-vacuum projection is applied.",
+    "h2_character_rule": "H2 generator h pulls back to A=2h, C=2h, B=h in braid order A,C,B; for witness h_power=a use component powers (2a,2a,a) modulo 4."
+  },
+  "artifacts": [
+    {
+      "path": "experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py",
+      "role": "floating-point manifest, profiling, range aggregate, and combine script"
+    },
+    {
+      "path": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-singleton-manifest-v1.json",
+      "role": "32768-sector priority manifest",
+      "summary": {
+        "sector_total": 32768,
+        "max_basis_size": 41,
+        "max_difficulty_score": 36982,
+        "unit_pruned_count": 2977
+      }
+    },
+    {
+      "path": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-range-aggregates-v1/",
+      "role": "four compact rank-range aggregate worker outputs"
+    },
+    {
+      "path": "experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-range-combined-aggregate-v1.json",
+      "role": "combined comparison against standard CP2 +1 framed Omega unknot",
+      "status": "pass"
+    }
+  ],
+  "result": {
+    "global_dimension_D": 144,
+    "global_dimension_D_squared": 20736,
+    "covered_rank_count": 32768,
+    "missing_rank_count": 0,
+    "rows": [
+      {
+        "h_power": 0,
+        "component_powers_in_braid_order": [0, 0, 0],
+        "normalized_yasui": "12-1.0404914241587309e-14j",
+        "standard_cp2": "11.999999999999991+8.8817841970012523e-15j",
+        "abs_difference": "2.123353072814683e-14"
+      },
+      {
+        "h_power": 1,
+        "component_powers_in_braid_order": [2, 2, 1],
+        "normalized_yasui": "-12+9.8832054106788921e-15j",
+        "standard_cp2": "-12+1.230836605513238e-16j",
+        "abs_difference": "9.760121750127568e-15"
+      },
+      {
+        "h_power": 2,
+        "component_powers_in_braid_order": [0, 0, 2],
+        "normalized_yasui": "12-1.0434383124339704e-14j",
+        "standard_cp2": "11.999999999999998+1.7763568394002505e-15j",
+        "abs_difference": "1.2339271213607393e-14"
+      },
+      {
+        "h_power": 3,
+        "component_powers_in_braid_order": [2, 2, 3],
+        "normalized_yasui": "-12+9.578935678714631e-15j",
+        "standard_cp2": "-12-1.230836605513238e-16j",
+        "abs_difference": "9.702019339265955e-15"
+      }
+    ]
+  },
+  "runtime_notes": {
+    "previous_figure3_dic12_history": "The earlier Yasui Figure 3 D(Dic_12) run required priority scheduling and distributed workers; historical profiling estimated hours on a single worker for the remaining tail.",
+    "figure2_manifest_elapsed_seconds": 12.64775662496686,
+    "range_worker_wall_seconds": [6.635292666964233, 16.280967083061114, 33.485924292122945, 156.72183579206467],
+    "singleton_json_route_note": "An initial fat singleton JSON route was interrupted after 1302 chunks because per-sector metadata and repeated MTC sha256 hashing dominated runtime. The pass result uses compact range aggregates, not the partial singleton chunks."
+  },
+  "reproduce_commands": [
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --write-manifest",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r00000-r08191-v1 --rank-start 0 --rank-count 8192",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r08192-r16383-v1 --rank-start 8192 --rank-count 8192",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r16384-r24575-v1 --rank-start 16384 --rank-count 8192",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --range-aggregate --profile-label full-r24576-r32767-v1 --rank-start 24576 --rank-count 8192",
+    "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/yasui_figure2_cp2_a1_r1_dic12_singletons.sage.py --combine-range-aggregates"
+  ],
+  "claim_boundary": "This is a floating-point computational consistency check for the current Yasui Figure 2 PD/braid convention and Tham 5.11 upside-down working interpretation. It is not a theorem, not an exact arithmetic certificate, and not an exotic-pair separation claim."
+}

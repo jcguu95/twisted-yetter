@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:e3d14710fde0244568a4c6431b3d0f7710f09cb5c4541cd6a10115b46fd0742e",
+  "generated_at": "2026-07-08T07:08:10Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-figure2-dic12-check:uses:dual-kirby-convention",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e3d14710fde0244568a4c6431b3d0f7710f09cb5c4541cd6a10115b46fd0742e",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
+    "transition": "ctlobj-sha256:9c283627cddef6e8c5be3418992ed763cc81e17f98c601fb1b886851a22a0a70"
+  },
+  "parent_root_cid": "ctlobj-sha256:30a929b7b7f21b1b8220ebdc9e1fa04dd6ede14ec4889ed9574573a77085e75a",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-figure2-dic12-check-uses-dual-kirby-convention.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-figure2-dic12-check:uses:dual-kirby-convention --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-figure2-dic12-check-uses-dual-kirby-convention.json --manifest manifests/subject-edge-2026-07-08-yasui-figure2-dic12-check-uses-dual-kirby-convention-v2.json --created-at 2026-07-08T07:08:10Z --admitted-at 2026-07-08T07:08:10Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "27ea5460b46b2fb1c16a02ddc188450d537777c3"
+}

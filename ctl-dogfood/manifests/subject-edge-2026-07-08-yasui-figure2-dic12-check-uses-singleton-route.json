@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:90de3eb8978acda574eaa36f6c38a32af03160e360558b5015bb570f9e6e2bfc",
+  "generated_at": "2026-07-08T06:56:10Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-figure2-dic12-check:uses:singleton-route",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:90de3eb8978acda574eaa36f6c38a32af03160e360558b5015bb570f9e6e2bfc",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
+    "transition": "ctlobj-sha256:a531e28fcfd12adbc50d2076f25aa2545531357fd160dd48e770b00b31bd4970"
+  },
+  "parent_root_cid": "ctlobj-sha256:2196da118c227c49349a07b30fdfdc27f9be1f66bc41dcb9e1af5de1e8ad350c",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-figure2-dic12-check-uses-singleton-route.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-figure2-dic12-check:uses:singleton-route --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-figure2-dic12-check-uses-singleton-route.json --manifest manifests/subject-edge-2026-07-08-yasui-figure2-dic12-check-uses-singleton-route.json --created-at 2026-07-08T06:56:10Z --admitted-at 2026-07-08T06:56:10Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "27ea5460b46b2fb1c16a02ddc188450d537777c3"
+}

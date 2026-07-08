@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "26b09aedb9fa52d4cbc85dd46a24e13772ae0dc6",
+  "current_root_cid": "ctlobj-sha256:2ff768b63bc53ce8fad2066929315120c0eb66b4aeb1a35977b16edd4d94f82c",
+  "generated_at": "2026-07-08T06:59:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:presentation:yasui-figure2-cp2-a1-r1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:2ff768b63bc53ce8fad2066929315120c0eb66b4aeb1a35977b16edd4d94f82c",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:b6f867a52a5a8d29fb6dc94ae49154b52f9228c63970ae5cc7e9666ce71a488f",
+    "transition": "ctlobj-sha256:cfb49bf5fb825bb2ac388458c4c5d5417a78c2b63c38dd0fa2f31502accf170b"
+  },
+  "parent_root_cid": "ctlobj-sha256:e02357b504a9d645ec6447984219d514ef23f90e59658c8563f3ef2c0edf39bc",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-yasui-figure2-cp2-a1-r1.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:presentation:yasui-figure2-cp2-a1-r1 --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/presentation-yasui-figure2-cp2-a1-r1.json --manifest manifests/subject-definition-2026-07-08-presentation-yasui-figure2-cp2-a1-r1-v2.json --created-at 2026-07-08T06:59:00Z --admitted-at 2026-07-08T06:59:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "27ea5460b46b2fb1c16a02ddc188450d537777c3"
+}

@@ -1,0 +1,372 @@
+{
+  "schema": "twisted-yetter.yasui-figure2-cp2-crossing-table.v1",
+  "diagram_id": "yasui-figure2-cp2-a1",
+  "status": "corrected-hand-transcription",
+  "source": {
+    "paper": "Kouichi Yasui, Small exotic rational surfaces without 1- and 3-handles",
+    "arxiv": "0807.0373v2",
+    "figure": "Figure 2",
+    "case": "CP2, a=1",
+    "hand_transcription": "provided by user in Codex thread on 2026-07-07",
+    "corrections": [
+      "A17 C7 A18 C6 was corrected to A17 B7 A18 B6",
+      "B1 = B10 closure seam; the last row is B10 A5 B1 A6, not a new B11 arc"
+    ]
+  },
+  "components": [
+    {
+      "id": "A",
+      "class_in_h_basis": {
+        "h": 2
+      },
+      "framing": 4,
+      "visible_self_writhe": 3,
+      "framing_correction_after_visible_writhe": 1,
+      "arc_count": 20,
+      "arc_order": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15",
+        "A16",
+        "A17",
+        "A18",
+        "A19",
+        "A20"
+      ]
+    },
+    {
+      "id": "B",
+      "class_in_h_basis": {
+        "h": 1
+      },
+      "framing": 1,
+      "visible_self_writhe": 0,
+      "framing_correction_after_visible_writhe": 1,
+      "arc_count": 10,
+      "arc_order": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7",
+        "B8",
+        "B9",
+        "B10"
+      ]
+    },
+    {
+      "id": "C",
+      "class_in_h_basis": {
+        "h": 2
+      },
+      "framing": 4,
+      "visible_self_writhe": 0,
+      "framing_correction_after_visible_writhe": 4,
+      "arc_count": 12,
+      "arc_order": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C11",
+        "C12"
+      ]
+    }
+  ],
+  "target_intersection_matrix": [
+    [
+      4,
+      2,
+      4
+    ],
+    [
+      2,
+      1,
+      2
+    ],
+    [
+      4,
+      2,
+      4
+    ]
+  ],
+  "oriented_diagram_linking_matrix": [
+    [
+      4,
+      2,
+      4
+    ],
+    [
+      2,
+      1,
+      2
+    ],
+    [
+      4,
+      2,
+      4
+    ]
+  ],
+  "conventions": {
+    "component_orientation": "arc labels increase cyclically, e.g. A1 -> A2 -> ... -> A20 -> A1",
+    "crossing_tuple": "X Y Z W",
+    "understrand": "X -> Z",
+    "overstrand": "the strand through Y and W, oriented by the component arc order",
+    "cyclic_order": "X, Y, Z, W listed counterclockwise around the crossing",
+    "sign_rule": "W->Y gives +1 and Y->W gives -1 for this corrected hand PD",
+    "framing_rule": "component framing is the total topological framing; visible blackboard writhe is recorded separately to avoid double counting"
+  },
+  "crossings": [
+    {
+      "id": "x01",
+      "tuple": [
+        "C10",
+        "B9",
+        "C11",
+        "B8"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x02",
+      "tuple": [
+        "B7",
+        "C10",
+        "B8",
+        "C9"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x03",
+      "tuple": [
+        "C11",
+        "A14",
+        "C12",
+        "A13"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x04",
+      "tuple": [
+        "A12",
+        "C9",
+        "A13",
+        "C8"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x05",
+      "tuple": [
+        "C12",
+        "A1",
+        "C1",
+        "A20"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x06",
+      "tuple": [
+        "A19",
+        "C8",
+        "A20",
+        "C7"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x07",
+      "tuple": [
+        "A17",
+        "B7",
+        "A18",
+        "B6"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x08",
+      "tuple": [
+        "A18",
+        "A12",
+        "A19",
+        "A11"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x09",
+      "tuple": [
+        "B4",
+        "A10",
+        "B5",
+        "A9"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x10",
+      "tuple": [
+        "A10",
+        "B6",
+        "A11",
+        "B5"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x11",
+      "tuple": [
+        "B3",
+        "A5",
+        "B4",
+        "A4"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x12",
+      "tuple": [
+        "A8",
+        "A4",
+        "A9",
+        "A3"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x13",
+      "tuple": [
+        "C4",
+        "B3",
+        "C5",
+        "B2"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x14",
+      "tuple": [
+        "C5",
+        "A8",
+        "C6",
+        "A7"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x15",
+      "tuple": [
+        "C6",
+        "A3",
+        "C7",
+        "A2"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x16",
+      "tuple": [
+        "B1",
+        "C4",
+        "B2",
+        "C3"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x17",
+      "tuple": [
+        "A6",
+        "C3",
+        "A7",
+        "C2"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x18",
+      "tuple": [
+        "A1",
+        "C2",
+        "A2",
+        "C1"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x19",
+      "tuple": [
+        "B9",
+        "A15",
+        "B10",
+        "A14"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x20",
+      "tuple": [
+        "A15",
+        "A17",
+        "A16",
+        "A16"
+      ],
+      "calibrated_sign": 1,
+      "sign_source": "W->Y-adjacent"
+    },
+    {
+      "id": "x21",
+      "tuple": [
+        "B10",
+        "A5",
+        "B1",
+        "A6"
+      ],
+      "calibrated_sign": -1,
+      "sign_source": "Y->W-adjacent"
+    }
+  ]
+}
