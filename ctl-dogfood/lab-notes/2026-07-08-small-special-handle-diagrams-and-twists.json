@@ -1,0 +1,115 @@
+{
+  "artifacts": [
+    {
+      "path": "experiments/results/small-handle-examples/kirby-diagram-svg-manifest-v1.json",
+      "role": "generated certificate and manifest for 16 SVG Kirby diagram fixtures"
+    },
+    {
+      "path": "experiments/results/small-handle-examples/diagrams-v1/*.svg",
+      "role": "concrete special-dotted Kirby diagram SVG fixtures, one per catalog example"
+    },
+    {
+      "path": "experiments/results/small-handle-examples/special-handle-catalog-sanity-v1.json",
+      "role": "updated generated certificate including SU(2)_2/Z2 twisted standard controls for all H2 characters"
+    },
+    {
+      "path": "experiments/scripts/small_handle_diagrams_draw.py",
+      "role": "reproducible SVG fixture generator"
+    },
+    {
+      "path": "src/twisted_yetter/small_handle_examples.py",
+      "role": "deterministic analyzer now recording all recognized SU(2)_2/Z2 character standard-control values"
+    },
+    {
+      "path": "tests/test_small_handle_examples.py",
+      "role": "regression tests for algebra sanity and all-character SU(2)_2/Z2 controls"
+    },
+    {
+      "path": "tests/test_small_handle_diagrams.py",
+      "role": "regression tests for SVG manifest, diagram hashes, and representative dotted/3-handle data"
+    }
+  ],
+  "branch_store_merge_dirty_context": {
+    "needed_for_this_note": false,
+    "summary": "Existing dirty files under ctl-dogfood/protocols, ctl-dogfood/scripts/ctl_merge.py, and tests/test_ctl_merge.py are unrelated CTL branch-store merge tooling/runbook work. They were not used for the Kirby diagram or twisted-control calculations and should be handled in a separate review or commit."
+  },
+  "claim_boundary": {
+    "not_closed_4d_invariant": true,
+    "not_kirby_slide_recognition_proof": true,
+    "not_special_dotted_rt_evaluator_output": true,
+    "use": "Fixed visible inputs and standard-form baseline values for the next special-dotted Tham 5.11 evaluator tests."
+  },
+  "created_at_utc": "2026-07-08T13:50:00Z",
+  "headline_results": {
+    "diagram_fixture_count": 16,
+    "diagram_manifest_status": "pass",
+    "su2_2_z2_twisted_standard_controls": {
+      "negative_rank_1_forms": {
+        "character_values": [
+          "2*zeta16^13",
+          "-2*zeta16^13"
+        ],
+        "examples": [
+          "cpbar-visible-cancel-1-2",
+          "cpbar-paired-one-handle",
+          "cpbar-uneven-incidence",
+          "cpbar-s1xs3-all-handles",
+          "cpbar-kernel-image-all-handles",
+          "cpbar-uneven-kernel-image-all-handles"
+        ]
+      },
+      "odd_rank_2_unimodular_forms": {
+        "basis_change_status": "recognized-by-integral-basis-change-standard-control",
+        "character_values": [
+          "4",
+          "4",
+          "-4",
+          "-4"
+        ],
+        "examples": [
+          "odd-s2-bundle-over-t2-chain"
+        ]
+      },
+      "positive_rank_1_forms": {
+        "character_values": [
+          "2*zeta16^3",
+          "-2*zeta16^3"
+        ],
+        "examples": [
+          "cp2-visible-cancel-1-2",
+          "cp2-paired-one-handle",
+          "cp2-uneven-incidence",
+          "cp2-two-dotted-three-two-handles",
+          "cp2-s1xs3-all-handles",
+          "cp2-kernel-image-all-handles"
+        ]
+      },
+      "rank_2_hyperbolic_forms": {
+        "character_values": [
+          "4",
+          "4",
+          "4",
+          "4"
+        ],
+        "examples": [
+          "s2xs2-one-dotted-three-two-handles",
+          "s2xs2-s1xs3-all-handles",
+          "s2xt2-product-chain"
+        ]
+      }
+    },
+    "test_status": "pass"
+  },
+  "mathematical_status": "DIAGRAM_AND_STANDARD_CONTROL_BASELINE_NOT_THEOREM",
+  "next_action": "Use the SVG fixtures and all-character standard controls as the input/expected-output layer for a real special-dotted vacuum-projection RT evaluator. The first hard comparison should be a no-3-handle example with a non-visible dotted 1-handle, such as cp2-paired-one-handle or s2xs2-one-dotted-three-two-handles.",
+  "note_id": "objective-note-2026-07-08-small-special-handle-diagrams-and-twists",
+  "question": "After enumerating small special-handle examples, draw them as Kirby diagrams and calculate every SU(2)_2/Z2 character twist available from their recognized standard H2 forms.",
+  "reproduce_commands": [
+    "PYTHONPATH=src python experiments/scripts/small_handle_examples_certify.py --write",
+    "PYTHONPATH=src python experiments/scripts/small_handle_diagrams_draw.py --write",
+    "PYTHONPATH=src uv run pytest tests/test_small_handle_examples.py tests/test_small_handle_diagrams.py"
+  ],
+  "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+  "status": "COMPUTATIONAL_BASELINE_PASS_NOT_THEOREM",
+  "title": "Small special-handle Kirby SVG fixtures and SU(2)_2/Z2 all-character controls"
+}

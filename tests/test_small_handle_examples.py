@@ -126,6 +126,61 @@ def test_rank_two_one_dotted_candidate_has_four_z2_characters_and_hyperbolic_for
         "root_symbol": "zeta_16 = exp(2*pi*i/16)",
         "terms": [{"exponent": 0, "integer_coefficient": 4}],
     }
+    assert [
+        item["value"]["display"]
+        for item in example["forms"]["su2_2_z2_twisted_standard_controls"]["controls"]
+    ] == ["4", "4", "4", "4"]
+
+
+def test_su2_2_z2_twist_controls_cover_all_rank_one_characters() -> None:
+    examples = _examples_by_id()
+
+    cp2_controls = examples["cp2-paired-one-handle"]["forms"][
+        "su2_2_z2_twisted_standard_controls"
+    ]
+    cpbar_controls = examples["cpbar-paired-one-handle"]["forms"][
+        "su2_2_z2_twisted_standard_controls"
+    ]
+
+    assert cp2_controls["mathematical_status"] == (
+        "STANDARD_FORM_SU2_2_Z2_TWIST_CONTROLS_NOT_SPECIAL_DOTTED_RT_EVALUATION"
+    )
+    assert [item["value"]["display"] for item in cp2_controls["controls"]] == [
+        "2*zeta16^3",
+        "-2*zeta16^3",
+    ]
+    assert [item["value"]["display"] for item in cpbar_controls["controls"]] == [
+        "2*zeta16^13",
+        "-2*zeta16^13",
+    ]
+
+
+def test_odd_rank_two_control_is_recorded_by_basis_change() -> None:
+    example = _examples_by_id()["odd-s2-bundle-over-t2-chain"]
+    controls = example["forms"]["su2_2_z2_twisted_standard_controls"]
+
+    assert example["forms"]["q_on_h2_quotient_basis"] == [[0, 1], [1, 1]]
+    assert controls["status"] == "recognized-by-integral-basis-change-standard-control"
+    assert controls["basis_change"] == {
+        "old_basis_columns_for_diagonal_basis": [[0, 1], [1, -1]],
+        "diagonal_form": [[1, 0], [0, -1]],
+        "character_rule": (
+            "If alpha=(a,b) on the catalog quotient basis, then "
+            "the diagonal-basis signs multiply to (-1)^a."
+        ),
+    }
+    assert [
+        (
+            item["h2_character_values_on_quotient_basis"],
+            item["value"]["display"],
+        )
+        for item in controls["controls"]
+    ] == [
+        ([0, 0], "4"),
+        ([0, 1], "4"),
+        ([1, 0], "-4"),
+        ([1, 1], "-4"),
+    ]
 
 
 def test_checked_in_small_handle_artifact_matches_current_analysis() -> None:

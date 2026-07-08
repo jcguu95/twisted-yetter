@@ -153,6 +153,7 @@ def analyze_example(example: Mapping[str, Any]) -> dict[str, Any]:
         )
 
     z2 = _z2_cohomology(d2, d3, h2_quotient_basis)
+    su2_2_twisted_controls = _su2_2_z2_twisted_standard_controls(quotient_form, z2)
 
     return {
         "id": example["id"],
@@ -199,6 +200,7 @@ def analyze_example(example: Mapping[str, Any]) -> dict[str, Any]:
             "h2_signature_triple_positive_negative_zero": list(quotient_signature),
             "h2_signature": quotient_signature[0] - quotient_signature[1],
             "standard_su2_2_omega_control": _standard_su2_2_control(quotient_form),
+            "su2_2_z2_twisted_standard_controls": su2_2_twisted_controls,
         },
         "augmented_dotted_surgery_matrix": {
             "matrix": augmented,
@@ -429,6 +431,122 @@ def _standard_su2_2_control(form: Sequence[Sequence[int]]) -> dict[str, Any]:
     return {
         "status": "not-recognized",
         "reason": "no hard-coded SU(2)_2 standard Omega control for this H2 form",
+    }
+
+
+def _su2_2_z2_twisted_standard_controls(
+    form: Sequence[Sequence[int]],
+    z2: Mapping[str, Any],
+) -> dict[str, Any]:
+    normalized = [list(row) for row in form]
+    character_rows = list(z2["cohomology_representatives"])
+    base: dict[str, Any] = {
+        "category": "SU(2)_2",
+        "coefficient_group": "Z/2",
+        "mathematical_status": (
+            "STANDARD_FORM_SU2_2_Z2_TWIST_CONTROLS_NOT_SPECIAL_DOTTED_RT_EVALUATION"
+        ),
+        "claim_boundary": {
+            "not_closed_4d_invariant": True,
+            "not_special_dotted_projector_implementation": True,
+            "not_new_formula_claim": True,
+            "purpose": (
+                "baseline values for all H2 -> Z/2 characters after reducing "
+                "the handle chain to its recognized ordinary H2 intersection form"
+            ),
+        },
+        "character_count": len(character_rows),
+    }
+
+    def build(
+        *,
+        status: str,
+        standard_form: str,
+        value_for_bits: Any,
+        extra: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        controls = []
+        for item in character_rows:
+            bits = list(item["values_on_h2_quotient_basis"])
+            value = value_for_bits(bits)
+            controls.append(
+                {
+                    "component_cochain_representative": list(item["representative"]),
+                    "coset_size": item["coset_size"],
+                    "h2_character_values_on_quotient_basis": bits,
+                    "value": value,
+                }
+            )
+        payload = dict(base)
+        payload.update(
+            {
+                "status": status,
+                "standard_form": standard_form,
+                "controls": controls,
+            }
+        )
+        if extra is not None:
+            payload.update(dict(extra))
+        return payload
+
+    if normalized == [[1]]:
+        return build(
+            status="recognized-standard-form-control",
+            standard_form="+1 framed Omega unknot",
+            value_for_bits=lambda bits: _zeta_display(
+                "-2*zeta16^3" if bits == [1] else "2*zeta16^3",
+                [(3, -2)] if bits == [1] else [(3, 2)],
+            ),
+        )
+    if normalized == [[-1]]:
+        return build(
+            status="recognized-standard-form-control",
+            standard_form="-1 framed Omega unknot",
+            value_for_bits=lambda bits: _zeta_display(
+                "-2*zeta16^13" if bits == [1] else "2*zeta16^13",
+                [(13, -2)] if bits == [1] else [(13, 2)],
+            ),
+        )
+    if normalized == [[0, 1], [1, 0]]:
+        return build(
+            status="recognized-standard-form-control",
+            standard_form="0-framed positive Hopf link with both components Omega_alpha colored",
+            value_for_bits=lambda bits: _zeta_display("4", [(0, 4)]),
+        )
+    if normalized == [[0, 1], [1, 1]]:
+        return build(
+            status="recognized-by-integral-basis-change-standard-control",
+            standard_form="odd rank-2 unimodular form, diagonalized as <+1> + <-1>",
+            value_for_bits=lambda bits: _zeta_display(
+                "-4" if bits and bits[0] == 1 else "4",
+                [(0, -4)] if bits and bits[0] == 1 else [(0, 4)],
+            ),
+            extra={
+                "basis_change": {
+                    "old_basis_columns_for_diagonal_basis": [[0, 1], [1, -1]],
+                    "diagonal_form": [[1, 0], [0, -1]],
+                    "character_rule": (
+                        "If alpha=(a,b) on the catalog quotient basis, then "
+                        "the diagonal-basis signs multiply to (-1)^a."
+                    ),
+                }
+            },
+        )
+    payload = dict(base)
+    payload.update(
+        {
+            "status": "not-recognized",
+            "reason": "no SU(2)_2/Z2 standard twist control is registered for this H2 form",
+            "controls": [],
+        }
+    )
+    return payload
+
+
+def _zeta_display(display: str, entries: Sequence[tuple[int, int]]) -> dict[str, Any]:
+    return {
+        "display": display,
+        "sparse_sum": _zeta_sparse(entries),
     }
 
 
