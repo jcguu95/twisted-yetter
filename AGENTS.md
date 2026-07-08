@@ -8,6 +8,9 @@
 
 - Normative research state 以 CTL current graph、admitted objective notes 與
   machine-readable JSON artifacts 為準。
+- 查詢 CTL current state 時，必須先用 current-read tooling replay current root，
+  不可用 `rg` / `grep` / filesystem search 直接搜尋 `ctl-dogfood/` 來當答案來源。
+  `rg` 只能作為 archaeology 或找檔案的輔助，不能取代 CTL current binding lookup。
 - 舊 `twisted-yetter.org`、`legacy-archives/` 與其他 legacy prose 只作歷史 archive；
   不可當作 current state、roadmap、evidence 或 theorem source。
 - 不要把重要研究內容只留在聊天、final answer、notebook 或散落 prose 裡。
@@ -36,18 +39,38 @@
 ## New Agent Entry
 
 1. 先讀本檔。
-2. 讀 CTL current graph：
+2. 驗證 CTL current root，並把後續 current-state 查詢建立在這個 replayed root 上：
+
+   ```sh
+   CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta \
+   python ctl-dogfood/scripts/ctl_store.py verify
+   ```
+
+3. 查 current status / subject / lab note / claim 時，優先用：
+
+   ```sh
+   python ctl-dogfood/scripts/ctl_store.py lookup-current <logical-id>
+   python ctl-dogfood/scripts/ctl_store.py list-current-bindings
+   python ctl-dogfood/scripts/ctl_store.py search-current "<query>"
+   python ctl-dogfood/scripts/ctl_store.py manifest-lookup --logical-id <logical-id>
+   ```
+
+   `lookup-current` 回傳 `current-ctl-object` 才可作為 current object 來源。
+   `search-current` 的結果是 `current-discovery-only`，只能說明 active payload
+   裡有命中；回答前仍要 inspect 對應 current object。
+4. 查 decision graph 時，可讀 CTL current graph projection：
 
    ```sh
    CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta \
    python ctl-dogfood/scripts/show_current_graph.py --json
    ```
 
-3. 查 current status 時，優先讀 CTL current graph、admitted objective notes、
-   status artifacts。
-4. 查舊 prose 歷史時，先讀 `legacy-archives/*.manifest.json`，再按需解包；
+5. 不可用 `rg` / `grep` over `ctl-dogfood/lab-notes/`、`ctl-dogfood/objects/`、
+   `ctl-dogfood/manifests/`、`ctl-dogfood/graphs/` 來回答 current-state 問題；
+   舊 payload、loose preimage、inactive manifest 命中都不能提升成 current truth。
+6. 查舊 prose 歷史時，先讀 `legacy-archives/*.manifest.json`，再按需解包；
    archive prose 不可提升為 normative source。
-5. 跑 code 前讀 `pyproject.toml`、`flake.nix`、`uv.lock` 與相關 JSON artifacts。
+7. 跑 code 前讀 `pyproject.toml`、`flake.nix`、`uv.lock` 與相關 JSON artifacts。
 
 ## Objective Notes / Artifacts
 
