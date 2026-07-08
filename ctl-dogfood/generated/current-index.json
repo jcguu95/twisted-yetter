@@ -6204,7 +6204,7 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
+      "cid": "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
       "logical_id": "claim:lab-note:2026-07-08-ctl-current-read-provider-adoption",
       "payload": {
         "adoption_boundary": {
@@ -6221,6 +6221,7 @@
         "current_read_discipline": {
           "canonical_commands": [
             "python ctl-dogfood/scripts/ctl_store.py build-current-index",
+            "python ctl-dogfood/scripts/ctl_store.py check-current-index",
             "python ctl-dogfood/scripts/ctl_store.py lookup-current <logical-id>",
             "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path <repo-relative-path>",
             "python ctl-dogfood/scripts/ctl_store.py lookup-resource --sha256 <sha256>",
@@ -6229,6 +6230,7 @@
             "python ctl-dogfood/scripts/ctl_store.py list-current-bindings",
             "python ctl-dogfood/scripts/ctl_store.py manifest-lookup --logical-id <logical-id>"
           ],
+          "compact_search_summary": "search-current --compact returns current_objects and resource_notices instead of the full matches payload. It preserves ResourceSafetyStatus top_notice values for daily use and keeps full search-current available for detailed inspection.",
           "discipline_summary": "Current-state and resource-safety answers must be grounded in replayed CTL current root, active bindings, ResourceSafetyStatus overlays, or a fresh generated current index built from that root. Filesystem search is acceptable for discovery or archaeology, not as the final current-state source.",
           "generated_index_summary": "A fresh generated/current-index.json is a non-canonical acceleration of the replayed current root. It may serve lookup-current, search-current, and lookup-resource results with source_state generated-non-canonical-current-view; stale or missing index output must be refreshed with build-current-index or treated as a slow canonical fallback, not as an alternate source of truth.",
           "resource_safety_registration_policy": "Reusable evaluators, scripts, generated artifacts, and lab notes that become known-wrong, deprecated, superseded, or replacement-critical should be registered as ctl-resource handle/snapshot/safety-status claims rather than relying only on file headers or prose notes.",
@@ -6265,21 +6267,23 @@
         "note_id": "objective-note-2026-07-08-ctl-current-read-provider-adoption",
         "purpose": "Record downstream adoption of ctl-meta current-read and resource-safety dogfood tooling as the canonical reader for CTL current-state and resource-safety queries, while keeping twisted-yetter's local ctl_store.py as a thin adapter rather than a fork.",
         "repo_snapshot": {
-          "dirty_status_summary": "No unrelated dirty files were present before this generated-current-index provider update. This update edits the provider-adoption preimage, refreshes current-read tests for generated-non-canonical-current-view output, and commits a fresh generated/current-index.json built from the admitted root.",
+          "dirty_status_summary": "No unrelated dirty files were present before this compact-search provider update. This update edits the provider-adoption preimage, refreshes current-read tests for check-current-index and search-current --compact output, and rebuilds generated/current-index.json after admission.",
           "local_test_file": {
             "path": "tests/test_ctl_store_current_read.py",
-            "sha256": "34c5135aa069907d981ca237a09efa8e01aa7ad92ba9b730bc8c04bbbcbb7343"
+            "sha256": "7ed0c5653ada061391be3c12069a8ac3800015e3f6a491ebd3f8387ab2f37b4f"
           },
           "resource_payload_directory": "ctl-dogfood/resources",
-          "twisted_yetter_head_commit_before_admission": "f540d6a7f23fdf3f4e7dee6ec8c641388f4f8e69"
+          "twisted_yetter_head_commit_before_admission": "bbc2aac70ef9a4468c9bab78c226c138226c5d0d"
         },
         "reproduce_commands": [
           "python ctl-dogfood/scripts/ctl_store.py verify",
           "python ctl-dogfood/scripts/ctl_store.py build-current-index",
+          "python ctl-dogfood/scripts/ctl_store.py check-current-index",
           "python ctl-dogfood/scripts/ctl_store.py lookup-current subject:twisted-yetter:category-family:su2-k",
           "python ctl-dogfood/scripts/ctl_store.py lookup-resource --path experiments/sage/su2_2_braid_oracle.sage.py",
           "python ctl-dogfood/scripts/ctl_store.py lookup-current claim:does-not-exist",
           "python ctl-dogfood/scripts/ctl_store.py search-current \"SU(2)_k\"",
+          "python ctl-dogfood/scripts/ctl_store.py search-current --compact su2_2_braid_oracle",
           "python3 -m pytest tests/test_ctl_store_current_read.py",
           "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/verify.py"
         ],
@@ -6287,15 +6291,17 @@
         "source_of_truth_policy": "This is a machine-readable CTL lab-note preimage. The admitted claim for this payload is the current provider-adoption record.",
         "status": "ESTABLISHED_TOOLING_ADOPTION_CHECKPOINT",
         "title": "Adopt ctl-meta current-read and resource-safety provider without downstream fork",
-        "updated_at": "2026-07-08T17:40:29Z",
+        "updated_at": "2026-07-08T18:59:26Z",
         "upstream_provider": {
           "author": "jcguu95 <jcguu95@gmail.com>",
-          "author_date": "2026-07-08T11:34:39-06:00",
-          "commit": "dc7990d62aa064fcf841fb501c1366d8c5e2a996",
+          "author_date": "2026-07-08T12:56:54-06:00",
+          "commit": "c8bd622bfe2c2f2fc5d0c11093e4d64b9d8099cf",
           "new_generated_current_index_commands": [
             "build-current-index",
+            "check-current-index",
             "lookup-current <logical-id>",
             "search-current <query>",
+            "search-current --compact <query>",
             "lookup-resource --path <repo-relative-path>"
           ],
           "new_resource_safety_commands": [
@@ -6306,32 +6312,33 @@
             "lookup-resource --cid <resource-revision-cid>"
           ],
           "previous_current_read_provider_commit": "126cb9800667d6c907982cd47f96fc0265cb5e6e",
-          "previous_provider_commit": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
+          "previous_provider_commit": "dc7990d62aa064fcf841fb501c1366d8c5e2a996",
+          "previous_resource_safety_provider_commit": "db3691e47f7745a15f5cbf617d64a3c3a38bee8f",
           "repo_path": "/Users/jin/data/local/projects/ctl-meta",
           "status_short_at_adoption": "",
-          "subject": "Extend generated current index UX",
+          "subject": "Add compact current search guard",
           "upstream_tool": "meta/ctl-dogfood/scripts/ctl_store.py",
-          "upstream_tool_sha256": "fbb05ac9bde1e1f5be83160a11bbbddbe3b0c620322dffd71f911437eb082986"
+          "upstream_tool_sha256": "de7b6d59538de010c3cf818089d4246f643edf01268bc1658492a987de468ffe"
         },
         "verifier_update_policy": {
           "bootstrap_provider_pin_should_remain_historical": true,
           "current_provider_can_be_accepted_from_this_admitted_note": true,
           "required_current_provider_clean_status": "",
-          "required_current_provider_commit": "dc7990d62aa064fcf841fb501c1366d8c5e2a996",
+          "required_current_provider_commit": "c8bd622bfe2c2f2fc5d0c11093e4d64b9d8099cf",
           "required_kernel_freeze_commit": "be3785695d60f9f125df31cc0013a580bc658651",
           "required_kernel_freeze_tag": "ctl-kernel-v0.1.1-experimental"
         }
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
-        "created_at": "2026-07-08T17:40:29Z",
+        "cid": "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
+        "created_at": "2026-07-08T18:59:26Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-08-ctl-current-read-provider-adoption",
         "parents": [
-          "ctlobj-sha256:a70e27b1192ee7b6ee65ca90a4a78a164b3ce8e65cbb2ccf0917b15a17bd56ce"
+          "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c"
         ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -11195,7 +11202,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-08T17:42:14Z",
+  "generated_at": "2026-07-08T19:01:46Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -11618,8 +11625,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:1646f1babd2aa5f9da986e64c3e439f4b1abe18b83d673730e8d8b48cbd47394",
+  "root_cid": "ctlobj-sha256:103d4ca7a350481d95002d09b471b46b1a2c31139b14069732e52d354a931e05",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:07671b301dfe7c8f5bd5dc58cdf9da749eba09221e83e4f3635a70f8da6aef27"
+  "transition_cid": "ctlobj-sha256:b4e2c670892648eef705dabdd3b221670127a3fbc647bcbe8329b8f9f02ca0b0"
 }

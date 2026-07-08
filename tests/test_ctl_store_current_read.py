@@ -94,6 +94,31 @@ def test_bad_su2_2_oracle_resource_warning_by_path() -> None:
         assert report["source_state"] == "generated-non-canonical-current-view"
 
 
+def test_check_current_index_reports_fresh_generated_view() -> None:
+    report = run_ctl_store("check-current-index")
+
+    assert report["status"] == "ok"
+    assert report["index_state"] == "fresh"
+    assert report["check_command"] == "python3 scripts/ctl_store.py check-current-index"
+
+
+def test_search_current_compact_keeps_resource_warning_without_full_matches() -> None:
+    report = run_ctl_store("search-current", "--compact", "su2_2_braid_oracle", timeout=180)
+
+    assert report["status"] == "ok"
+    assert report["source_state"] == "current-discovery-only"
+    assert report["index_state"] == "fresh"
+    assert "matches" not in report
+    assert report["current_objects"]
+    notices = report["resource_notices"]
+    assert isinstance(notices, list)
+    assert any(
+        notice["safety_state"] == "known_wrong" and "DO NOT USE" in str(notice["top_notice"])
+        for notice in notices
+        if isinstance(notice, dict)
+    )
+
+
 def test_bad_su2_2_oracle_resource_warning_by_absolute_path() -> None:
     absolute_path = REPO_ROOT / "experiments" / "sage" / "su2_2_braid_oracle.sage.py"
 
