@@ -84,6 +84,7 @@
 - sanity checks，例如 linking matrix、signature、Euler characteristic、handle count、
   `alpha=0` ordinary invariant、handle-slide consistency。
 - failure / inconclusive 結果，避免未來 agent 重複踩坑。
+- 已知錯誤或過時的 reusable resource 必須登記為 CTL `ResourceSafetyStatus`，不可只留在檔頭或散文。
 
 Generated JSON artifact 頂層應盡量包含 `schema`、`status`、`generator_script`、`argv`、
 `reproduce_command`、UTC start/finish、elapsed seconds、repo root、git commit、
