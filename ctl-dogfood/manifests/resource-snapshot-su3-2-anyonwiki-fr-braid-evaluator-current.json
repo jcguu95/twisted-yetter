@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:0fc5bd9c17217ff14a4c6a12d00eaf66f07ae5a0dd1ddf02abb111fdeefd0f87",
+  "generated_at": "2026-07-08T19:32:48Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:0fc5bd9c17217ff14a4c6a12d00eaf66f07ae5a0dd1ddf02abb111fdeefd0f87",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
+    "transition": "ctlobj-sha256:7210e21ae2a684a917d7f63c6b1c9f99a83cb89212e3614dda83930ae59929e0"
+  },
+  "parent_root_cid": "ctlobj-sha256:1519dc1c19e74a49d4847bc1c5b69af8710ea1247c6ee1112b280b48cb7927ad",
+  "payload_file": "ctl-dogfood/resources/su3-2-anyonwiki-fr-braid-evaluator-snapshot-current.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload resources/su3-2-anyonwiki-fr-braid-evaluator-snapshot-current.json --manifest manifests/resource-snapshot-su3-2-anyonwiki-fr-braid-evaluator-current.json --created-at 2026-07-08T19:32:48Z --admitted-at 2026-07-08T19:32:48Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b90341266ecf11211a1bccdb353971593ae2bbdd"
+}

@@ -6352,6 +6352,82 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:4815d79a7870ae5a98a6a0f114240c9ec453152f510f77aee278edbc98c63294",
+      "logical_id": "claim:lab-note:2026-07-08-small-special-handle-su3-2-character-controls",
+      "payload": {
+        "artifacts": [
+          {
+            "path": "experiments/results/small-handle-examples/su3-2-standard-form-character-controls-v1.json",
+            "role": "floating SU(3)_2 standard-form H2-character control artifact for all 16 small special-handle catalog examples",
+            "schema": "twisted-yetter.small-handle-su3-2-standard-form-character-controls.v1",
+            "sha256": "1f23f3f3a86d963baf2695b6f518ea6d7202ce2dc226990d4162d7755b366d94",
+            "status": "pass"
+          },
+          {
+            "path": "experiments/scripts/small_handle_su3_2_character_controls.py",
+            "role": "reproducible floating SU(3)_2 standard-form control generator",
+            "sha256": "00200a5e0d630c9ca729f9d84d2a8c9e9647f0c5097dd3cceba3e790391e766e"
+          },
+          {
+            "path": "tests/test_small_handle_examples.py",
+            "role": "regression tests asserting the SU(3)_2 control artifact remains passing and character-dependent for all catalog examples"
+          }
+        ],
+        "category": {
+          "category_id": "SU(3)_2",
+          "coefficient_group": "Z/3 from the simple-current triality character group",
+          "evaluator_resource": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+          "evaluator_safety_claim": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active"
+        },
+        "claim_boundary": {
+          "not_full_special_dotted_rt_evaluator": true,
+          "not_new_4_manifold_invariant_claim": true,
+          "not_theorem": true,
+          "use": "This is evidence that SU(3)_2 is a promising next test category for the small special-handle examples, after SU(2)_k controls did not provide the desired character-twist discrimination."
+        },
+        "created_at_utc": "2026-07-08T19:38:14Z",
+        "headline_results": {
+          "example_count": 16,
+          "interesting_example_count": 16,
+          "rank_1_character_count": 3,
+          "rank_1_nonbaseline_character_count": 2,
+          "rank_2_character_count": 9,
+          "rank_2_nonbaseline_character_count": 4,
+          "status": "pass",
+          "untwisted_controls": {
+            "cp2_type_rank_1": "-2.6653521280029184+1.9364916731037058j",
+            "cpbar_type_rank_1": "-2.6653521280029184-1.9364916731037058j",
+            "hyperbolic_or_odd_rank_2": "approximately 10.854101966249697"
+          }
+        },
+        "mathematical_status": "STANDARD_FORM_FLOATING_CONTROL_NOT_SPECIAL_DOTTED_RT_EVALUATION",
+        "next_action": "Implement the actual Tham 5.11 upside-down special-dotted vacuum-projection RT evaluator and compare its diagram-level outputs against these SU(3)_2 standard-form controls.",
+        "note_id": "objective-note-2026-07-08-small-special-handle-su3-2-character-controls",
+        "question": "After the SU(2)_k controls failed to give the desired character-twist signal on the small examples, do SU(3)_2 standard-form controls show character dependence across the catalog?",
+        "reproduce_commands": [
+          "python experiments/scripts/small_handle_su3_2_character_controls.py",
+          "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_small_handle_examples.py",
+          "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/ctl_store.py lookup-resource --path experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py"
+        ],
+        "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+        "status": "COMPUTATIONAL_CONTROL_PASS_NOT_THEOREM",
+        "title": "Small special-handle SU(3)_2 standard-form character controls"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4815d79a7870ae5a98a6a0f114240c9ec453152f510f77aee278edbc98c63294",
+        "created_at": "2026-07-08T19:38:14Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-08-small-special-handle-su3-2-character-controls",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:bed01e701b3b1e5d47b7477cfd34ef5f331b223e060e6a01c4753708a7f4ddf5",
       "logical_id": "claim:lab-note:2026-07-08-su2-2-braid-oracle-bug-audit",
       "payload": {
@@ -6717,6 +6793,35 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
+      "logical_id": "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py",
+          "su3_2_anyonwiki_fr_braid_evaluator.py",
+          "su3-2-anyonwiki-fr-braid-evaluator",
+          "su3-2-anyonwiki-f-r-braid-evaluator"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
+        "created_at": "2026-07-08T19:32:48Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
       "logical_id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
       "payload": {
@@ -6831,6 +6936,45 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
+      "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-07-yasui-a1-su3-2-character-twist-signal"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "floating SU(3)_2 AnyonWiki FR_6_1_4_5 braid-closure checks",
+          "Yasui Figure 2 and Figure 3 SU(3)_2 comparison reruns with explicit artifact metadata",
+          "standard-form SU(3)_2 character-control scans using documented modular data"
+        ],
+        "status": "active",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+        },
+        "top_notice": "Current floating SU(3)_2 AnyonWiki F/R braid evaluator used for Yasui and standard-form character-control checks. Use within recorded safe scopes and keep independent sanity checks.",
+        "unsafe_scopes": [
+          "standalone theorem proof without independent mathematical argument",
+          "non-SU(3)_2 categories",
+          "unrecorded convention changes across AnyonWiki category parameters"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
+        "created_at": "2026-07-08T19:32:48Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a",
       "logical_id": "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note",
       "payload": {
@@ -6905,6 +7049,33 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:su2k-fusion-braid-evaluator-current",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
+      "logical_id": "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current",
+      "payload": {
+        "captured_at": "2026-07-08T19:32:48Z",
+        "commit": "b90341266ecf11211a1bccdb353971593ae2bbdd",
+        "git_blob": "c96f6ecbfa34c8f1cc3340e12f38891818807fbf",
+        "path": "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+        "sha256": "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71",
+        "snapshot_id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
+        "created_at": "2026-07-08T19:32:48Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -11208,7 +11379,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-08T19:27:28Z",
+  "generated_at": "2026-07-08T19:40:17Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -11218,6 +11389,9 @@
       ],
       "78a656caa9b5c0e8a18617b1edcefe5a3c0f7142": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
+      ],
+      "c96f6ecbfa34c8f1cc3340e12f38891818807fbf": [
+        "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ],
       "dbccb900cbea8b872323debb7d8bd12e89ec42eb": [
         "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca"
@@ -11236,6 +11410,9 @@
       "experiments/sage/su2k_fusion_braid_evaluator.sage.py": [
         "resource:twisted-yetter:script:su2k-fusion-braid-evaluator"
       ],
+      "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
+        "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      ],
       "general-su2-k-fusion-braid-evaluator": [
         "resource:twisted-yetter:script:su2k-fusion-braid-evaluator"
       ],
@@ -11251,6 +11428,9 @@
       "resource:twisted-yetter:script:su2k-fusion-braid-evaluator": [
         "resource:twisted-yetter:script:su2k-fusion-braid-evaluator"
       ],
+      "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator": [
+        "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      ],
       "su2-2-braid-oracle-bug-audit": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
       ],
@@ -11262,6 +11442,15 @@
       ],
       "su2k_fusion_braid_evaluator.sage.py": [
         "resource:twisted-yetter:script:su2k-fusion-braid-evaluator"
+      ],
+      "su3-2-anyonwiki-f-r-braid-evaluator": [
+        "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      ],
+      "su3-2-anyonwiki-fr-braid-evaluator": [
+        "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      ],
+      "su3_2_anyonwiki_fr_braid_evaluator.py": [
+        "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
       ]
     },
     "by_path": {
@@ -11273,9 +11462,15 @@
       ],
       "experiments/sage/su2k_fusion_braid_evaluator.sage.py": [
         "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca"
+      ],
+      "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
+        "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ]
     },
     "by_sha256": {
+      "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71": [
+        "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
+      ],
       "d2b9b67d6e2217b6a1b35ffcf3a81338354063d2a1fed1b822b1f5a39636c3cb": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
       ],
@@ -11365,6 +11560,33 @@
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
         }
+      },
+      "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator": {
+        "cid": "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
+        "logical_id": "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py",
+            "su3_2_anyonwiki_fr_braid_evaluator.py",
+            "su3-2-anyonwiki-fr-braid-evaluator",
+            "su3-2-anyonwiki-f-r-braid-evaluator"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
+          "created_at": "2026-07-08T19:32:48Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
       }
     },
     "resource_cids": {
@@ -11380,12 +11602,24 @@
         "id": "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": {
+        "id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8": {
+        "id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+        "kind": "handle"
+      },
       "ctlobj-sha256:71eed37d06525440b2f783bd1ef23891f4f98d19939ddc3ebb45588714c690b2": {
         "id": "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit",
         "kind": "handle"
       },
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae": {
+        "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
         "kind": "safety-status"
       },
       "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c": {
@@ -11418,6 +11652,10 @@
         "id": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
         "kind": "handle"
       },
+      "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator": {
+        "id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+        "kind": "handle"
+      },
       "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
@@ -11430,6 +11668,10 @@
         "id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
         "kind": "safety-status"
       },
+      "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active": {
+        "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "kind": "safety-status"
+      },
       "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note": {
         "id": "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa",
         "kind": "snapshot"
@@ -11440,6 +11682,10 @@
       },
       "claim:resource-snapshot:su2k-fusion-braid-evaluator-current": {
         "id": "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current": {
+        "id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343",
         "kind": "snapshot"
       }
     },
@@ -11551,6 +11797,43 @@
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
         }
+      },
+      {
+        "cid": "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
+        "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-07-yasui-a1-su3-2-character-twist-signal"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "floating SU(3)_2 AnyonWiki FR_6_1_4_5 braid-closure checks",
+            "Yasui Figure 2 and Figure 3 SU(3)_2 comparison reruns with explicit artifact metadata",
+            "standard-form SU(3)_2 character-control scans using documented modular data"
+          ],
+          "status": "active",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+          },
+          "top_notice": "Current floating SU(3)_2 AnyonWiki F/R braid evaluator used for Yasui and standard-form character-control checks. Use within recorded safe scopes and keep independent sanity checks.",
+          "unsafe_scopes": [
+            "standalone theorem proof without independent mathematical argument",
+            "non-SU(3)_2 categories",
+            "unrecorded convention changes across AnyonWiki category parameters"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
+          "created_at": "2026-07-08T19:32:48Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
       }
     ],
     "snapshots": {
@@ -11628,11 +11911,36 @@
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
         }
+      },
+      "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343": {
+        "cid": "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
+        "logical_id": "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current",
+        "payload": {
+          "captured_at": "2026-07-08T19:32:48Z",
+          "commit": "b90341266ecf11211a1bccdb353971593ae2bbdd",
+          "git_blob": "c96f6ecbfa34c8f1cc3340e12f38891818807fbf",
+          "path": "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+          "sha256": "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71",
+          "snapshot_id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
+          "created_at": "2026-07-08T19:32:48Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:su3-2-anyonwiki-fr-braid-evaluator-current",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
       }
     }
   },
-  "root_cid": "ctlobj-sha256:25b0a5f30c5e477461baeedbdfcd9ab2fad4965ddb8e1e91887db8f2ba1601c5",
+  "root_cid": "ctlobj-sha256:e33481c72b1c0a783526b2d869686ca7f5231b9f0526d884ab152ce6696b9821",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:df6118a9714cc34645060299bc7b6e6932b39132cb663c7fbad270814f7fb0d0"
+  "transition_cid": "ctlobj-sha256:6a732be5c8e68644bc6a89546c707ad3829a2ad9ea65cecf07a60d9e30f01e1b"
 }

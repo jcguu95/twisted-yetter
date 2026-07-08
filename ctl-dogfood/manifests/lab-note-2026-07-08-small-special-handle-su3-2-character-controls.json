@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:e33481c72b1c0a783526b2d869686ca7f5231b9f0526d884ab152ce6696b9821",
+  "generated_at": "2026-07-08T19:38:14Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-08-small-special-handle-su3-2-character-controls",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e33481c72b1c0a783526b2d869686ca7f5231b9f0526d884ab152ce6696b9821",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:4815d79a7870ae5a98a6a0f114240c9ec453152f510f77aee278edbc98c63294",
+    "transition": "ctlobj-sha256:6a732be5c8e68644bc6a89546c707ad3829a2ad9ea65cecf07a60d9e30f01e1b"
+  },
+  "parent_root_cid": "ctlobj-sha256:5edabf0336ecd86c5c2b689eba01635e337eeee022a9dff642786c7ce8b58e24",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-08-small-special-handle-su3-2-character-controls.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:lab-note:2026-07-08-small-special-handle-su3-2-character-controls --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload lab-notes/2026-07-08-small-special-handle-su3-2-character-controls.json --manifest manifests/lab-note-2026-07-08-small-special-handle-su3-2-character-controls.json --created-at 2026-07-08T19:38:14Z --admitted-at 2026-07-08T19:38:14Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b90341266ecf11211a1bccdb353971593ae2bbdd"
+}

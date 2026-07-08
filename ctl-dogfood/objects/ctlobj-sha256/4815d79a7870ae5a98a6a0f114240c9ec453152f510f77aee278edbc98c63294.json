@@ -1,0 +1,72 @@
+{
+  "created_at": "2026-07-08T19:38:14Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-08-small-special-handle-su3-2-character-controls",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "path": "experiments/results/small-handle-examples/su3-2-standard-form-character-controls-v1.json",
+        "role": "floating SU(3)_2 standard-form H2-character control artifact for all 16 small special-handle catalog examples",
+        "schema": "twisted-yetter.small-handle-su3-2-standard-form-character-controls.v1",
+        "sha256": "1f23f3f3a86d963baf2695b6f518ea6d7202ce2dc226990d4162d7755b366d94",
+        "status": "pass"
+      },
+      {
+        "path": "experiments/scripts/small_handle_su3_2_character_controls.py",
+        "role": "reproducible floating SU(3)_2 standard-form control generator",
+        "sha256": "00200a5e0d630c9ca729f9d84d2a8c9e9647f0c5097dd3cceba3e790391e766e"
+      },
+      {
+        "path": "tests/test_small_handle_examples.py",
+        "role": "regression tests asserting the SU(3)_2 control artifact remains passing and character-dependent for all catalog examples"
+      }
+    ],
+    "category": {
+      "category_id": "SU(3)_2",
+      "coefficient_group": "Z/3 from the simple-current triality character group",
+      "evaluator_resource": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
+      "evaluator_safety_claim": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active"
+    },
+    "claim_boundary": {
+      "not_full_special_dotted_rt_evaluator": true,
+      "not_new_4_manifold_invariant_claim": true,
+      "not_theorem": true,
+      "use": "This is evidence that SU(3)_2 is a promising next test category for the small special-handle examples, after SU(2)_k controls did not provide the desired character-twist discrimination."
+    },
+    "created_at_utc": "2026-07-08T19:38:14Z",
+    "headline_results": {
+      "example_count": 16,
+      "interesting_example_count": 16,
+      "rank_1_character_count": 3,
+      "rank_1_nonbaseline_character_count": 2,
+      "rank_2_character_count": 9,
+      "rank_2_nonbaseline_character_count": 4,
+      "status": "pass",
+      "untwisted_controls": {
+        "cp2_type_rank_1": "-2.6653521280029184+1.9364916731037058j",
+        "cpbar_type_rank_1": "-2.6653521280029184-1.9364916731037058j",
+        "hyperbolic_or_odd_rank_2": "approximately 10.854101966249697"
+      }
+    },
+    "mathematical_status": "STANDARD_FORM_FLOATING_CONTROL_NOT_SPECIAL_DOTTED_RT_EVALUATION",
+    "next_action": "Implement the actual Tham 5.11 upside-down special-dotted vacuum-projection RT evaluator and compare its diagram-level outputs against these SU(3)_2 standard-form controls.",
+    "note_id": "objective-note-2026-07-08-small-special-handle-su3-2-character-controls",
+    "question": "After the SU(2)_k controls failed to give the desired character-twist signal on the small examples, do SU(3)_2 standard-form controls show character dependence across the catalog?",
+    "reproduce_commands": [
+      "python experiments/scripts/small_handle_su3_2_character_controls.py",
+      "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_small_handle_examples.py",
+      "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/ctl_store.py lookup-resource --path experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py"
+    ],
+    "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+    "status": "COMPUTATIONAL_CONTROL_PASS_NOT_THEOREM",
+    "title": "Small special-handle SU(3)_2 standard-form character controls"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

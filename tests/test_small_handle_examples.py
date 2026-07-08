@@ -9,6 +9,9 @@ INPUT = Path("experiments/inputs/small-handle-examples/special-handle-catalog-v1
 ARTIFACT = Path(
     "experiments/results/small-handle-examples/special-handle-catalog-sanity-v1.json"
 )
+SU3_2_CONTROLS = Path(
+    "experiments/results/small-handle-examples/su3-2-standard-form-character-controls-v1.json"
+)
 
 
 def _examples_by_id() -> dict[str, dict[str, object]]:
@@ -189,3 +192,36 @@ def test_checked_in_small_handle_artifact_matches_current_analysis() -> None:
 
     assert certificate["status"] == "pass"
     assert certificate["exact_output"] == analyze_catalog(load_catalog(INPUT))
+
+
+def test_su3_2_standard_form_controls_find_character_dependence_for_all_examples() -> None:
+    artifact = json.loads(SU3_2_CONTROLS.read_text())
+
+    assert artifact["schema"] == (
+        "twisted-yetter.small-handle-su3-2-standard-form-character-controls.v1"
+    )
+    assert artifact["status"] == "pass"
+    assert artifact["mathematical_status"] == (
+        "STANDARD_FORM_FLOATING_CONTROL_NOT_SPECIAL_DOTTED_RT_EVALUATION"
+    )
+    assert artifact["example_count"] == 16
+    assert artifact["interesting_example_count"] == 16
+    assert artifact["interesting_example_ids"] == [
+        example["id"] for example in artifact["examples"]
+    ]
+
+    for example in artifact["examples"]:
+        assert example["has_interesting_su3_2_character_twist"] is True
+        assert example["nonbaseline_character_count"] > 0
+        assert example["z3_character_count"] == 3 ** example["h2_rank"]
+
+    rank_one = [
+        example for example in artifact["examples"]
+        if example["h2_rank"] == 1
+    ]
+    rank_two = [
+        example for example in artifact["examples"]
+        if example["h2_rank"] == 2
+    ]
+    assert {example["z3_character_count"] for example in rank_one} == {3}
+    assert {example["z3_character_count"] for example in rank_two} == {9}

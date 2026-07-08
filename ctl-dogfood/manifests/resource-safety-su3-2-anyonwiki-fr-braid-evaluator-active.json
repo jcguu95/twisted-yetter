@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:5edabf0336ecd86c5c2b689eba01635e337eeee022a9dff642786c7ce8b58e24",
+  "generated_at": "2026-07-08T19:32:48Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:5edabf0336ecd86c5c2b689eba01635e337eeee022a9dff642786c7ce8b58e24",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
+    "transition": "ctlobj-sha256:714d04f155d211a9a6828e7c45c26170b8005162d989b7b851e7d6fefcb2186d"
+  },
+  "parent_root_cid": "ctlobj-sha256:0fc5bd9c17217ff14a4c6a12d00eaf66f07ae5a0dd1ddf02abb111fdeefd0f87",
+  "payload_file": "ctl-dogfood/resources/su3-2-anyonwiki-fr-braid-evaluator-active.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload resources/su3-2-anyonwiki-fr-braid-evaluator-active.json --manifest manifests/resource-safety-su3-2-anyonwiki-fr-braid-evaluator-active.json --created-at 2026-07-08T19:32:48Z --admitted-at 2026-07-08T19:32:48Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "b90341266ecf11211a1bccdb353971593ae2bbdd"
+}
