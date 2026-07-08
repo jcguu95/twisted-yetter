@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "path": "experiments/inputs/small-handle-examples/special-handle-catalog-v1.json",
+      "role": "machine-readable catalog of 16 small algebraic handle-chain candidates"
+    },
+    {
+      "path": "experiments/results/small-handle-examples/special-handle-catalog-sanity-v1.json",
+      "role": "generated certificate containing d2/d3, H2, quotient form, augmented dotted surgery matrix, and Z2 character cohomology"
+    },
+    {
+      "path": "src/twisted_yetter/small_handle_examples.py",
+      "role": "deterministic analyzer for small algebraic handle-chain candidates"
+    },
+    {
+      "path": "experiments/scripts/small_handle_examples_certify.py",
+      "role": "reproducible certificate generator"
+    },
+    {
+      "path": "tests/test_small_handle_examples.py",
+      "role": "regression tests for the catalog and generated certificate"
+    }
+  ],
+  "claim_boundary": {
+    "not_closed_4d_invariant": true,
+    "not_rt_link_evaluator_output": true,
+    "not_special_dotted_projector_implementation": true,
+    "use": "Fixture algebra for deciding which small diagrams should be drawn and evaluated next."
+  },
+  "created_at_utc": "2026-07-08T13:40:00Z",
+  "headline_results": {
+    "all_handle_kernel_image_examples": [
+      "cp2-kernel-image-all-handles",
+      "cpbar-kernel-image-all-handles",
+      "cpbar-uneven-kernel-image-all-handles"
+    ],
+    "candidate_count": 16,
+    "first_no_three_handle_targets": [
+      "cp2-paired-one-handle",
+      "cpbar-paired-one-handle",
+      "cp2-uneven-incidence",
+      "cpbar-uneven-incidence",
+      "cp2-two-dotted-three-two-handles",
+      "s2xs2-one-dotted-three-two-handles"
+    ],
+    "sanity_status": "pass",
+    "z2_character_counts_observed": {
+      "rank_1_h2_examples": 2,
+      "rank_2_h2_examples": 4
+    }
+  },
+  "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_THEOREM",
+  "next_action": "Draw concrete Kirby diagrams for the first no-3-handle targets, then implement the special dotted vacuum-projection evaluator against those diagrams.",
+  "note_id": "objective-note-2026-07-08-small-special-handle-examples",
+  "question": "Before implementing the special dotted unknot evaluator, enumerate and calculate small algebraic examples with 1/2-handles and with simultaneous 1/2/3-handles.",
+  "reproduce_commands": [
+    "PYTHONPATH=src python experiments/scripts/small_handle_examples_certify.py --write",
+    "PYTHONPATH=src uv run pytest tests/test_small_handle_examples.py",
+    "PYTHONPATH=src uv run pytest tests/test_yasui_figure2_cp2.py tests/test_tham511_context.py"
+  ],
+  "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+  "status": "COMPUTATIONAL_SANITY_PASS_NOT_THEOREM",
+  "title": "Small special-handle algebraic examples for Tham 5.11 work"
+}

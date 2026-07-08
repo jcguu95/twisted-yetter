@@ -1,0 +1,4275 @@
+{
+  "argv": [
+    "--write"
+  ],
+  "command": "PYTHONPATH=src python experiments/scripts/small_handle_examples_certify.py --write",
+  "elapsed_seconds": 0.04136958299204707,
+  "exact_output": {
+    "catalog_id": "small-special-handle-catalog-v1",
+    "claim_boundary": {
+      "not_closed_4d_invariant": true,
+      "not_rt_evaluation": true,
+      "not_special_dotted_projector_implementation": true,
+      "purpose": "fixture-level algebra for future Tham 5.11/special-dotted tests: d2, d3, H2, quotient form, and Z2 character cohomology"
+    },
+    "example_count": 16,
+    "example_status_counts": {
+      "pass": 16
+    },
+    "examples": [
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": -1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": 1,
+          "signature_triple_positive_negative_zero": [
+            2,
+            1,
+            0
+          ]
+        },
+        "candidate_status": "visible-cancel-control",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "cancel",
+            "h"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2 after a visible 1/2 cancellation"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              0,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cp2-visible-cancel-1-2",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Trivial but essential positive-framing control for a special dotted unknot and an isolated CP2 2-handle.",
+        "recognition_status": "VISIBLE_CANCEL_TO_STANDARD",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              -1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": -1,
+          "signature_triple_positive_negative_zero": [
+            1,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "visible-cancel-control",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "cancel",
+            "h"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar after a visible 1/2 cancellation"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              0,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cpbar-visible-cancel-1-2",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Trivial but essential negative-framing control for a special dotted unknot and an isolated CPbar 2-handle.",
+        "recognition_status": "VISIBLE_CANCEL_TO_STANDARD",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": -1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": 1,
+          "signature_triple_positive_negative_zero": [
+            2,
+            1,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              1
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2 candidate; requires explicit Kirby slides for theorem-level recognition"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              -1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              1,
+              -1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cp2-paired-one-handle",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Smallest nontrivial no-3-handle special-dotted candidate with H2 rank 1 and d2=[1,1].",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              1
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": -1,
+          "signature_triple_positive_negative_zero": [
+            1,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              1
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar candidate; requires explicit Kirby slides for theorem-level recognition"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              -1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              1,
+              -1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cpbar-paired-one-handle",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Smallest nontrivial no-3-handle special-dotted candidate with H2 rank 1 and negative square.",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              1
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": -1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": 1,
+          "signature_triple_positive_negative_zero": [
+            2,
+            1,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              2
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2-like primitive uneven-incidence candidate"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              2,
+              -1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              2,
+              -1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cp2-uneven-incidence",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Tests that the algebraic machinery does not assume every special dotted incidence is 0 or 1.",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              -1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 3,
+          "signature": -1,
+          "signature_triple_positive_negative_zero": [
+            1,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              2
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar-like primitive uneven-incidence candidate"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              2,
+              -1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              2,
+              -1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cpbar-uneven-incidence",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Negative-square uneven-incidence partner for the CP2-like primitive candidate.",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "nullity": 0,
+          "rank": 5,
+          "signature": 1,
+          "signature_triple_positive_negative_zero": [
+            3,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "d2_rank": 2,
+          "d2_times_d3": [
+            [],
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D1",
+            "D2"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2-like two-dotted candidate"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              -1,
+              -1,
+              1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              -1,
+              -1,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 2,
+          "2": 3,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cp2-two-dotted-three-two-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Small no-3-handle candidate with two special dotted unknots and one H2 generator.",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 4,
+          "coboundary_generators": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "cochain_count": 8,
+          "cocycle_count": 8,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 4,
+              "representative": [
+                0,
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 4,
+              "representative": [
+                0,
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 1,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              0
+            ]
+          ],
+          "nullity": 0,
+          "rank": 4,
+          "signature": 0,
+          "signature_triple_positive_negative_zero": [
+            2,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "first-round-nontrivial-no-three-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            []
+          ],
+          "d3_matrix_c3_to_c2": [
+            [],
+            [],
+            []
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [],
+          "two_handles": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 4,
+          "from_handles": 4
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+          "h2_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_form": "S2xS2-like one-dotted rank-2 candidate"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": 0,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega Hopf control only",
+            "standard_form": "0-framed positive Hopf link with both components Omega colored",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 4
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              -1,
+              0
+            ],
+            [
+              1,
+              0,
+              -1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              1,
+              -1,
+              0
+            ],
+            [
+              1,
+              0,
+              -1
+            ]
+          ],
+          "rank": 2,
+          "relation_radical_checks": []
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 3,
+          "3": 0,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 2,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "s2xs2-one-dotted-three-two-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Small no-3-handle rank-2 H2 candidate whose quotient form is hyperbolic.",
+        "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "cochain_count": 8,
+          "cocycle_count": 8,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                1
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                1,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 4,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "nullity": 1,
+          "rank": 1,
+          "signature": 1,
+          "signature_triple_positive_negative_zero": [
+            1,
+            0,
+            1
+          ]
+        },
+        "candidate_status": "all-handles-control",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              0
+            ]
+          ],
+          "d2_rank": 0,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              0
+            ]
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "h"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 1,
+          "from_handles": 1
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2 # S1xS3 handle-chain model"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 1,
+          "b2": 1,
+          "b3": 1,
+          "b4": 1
+        },
+        "id": "cp2-s1xs3-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "All handle indices are present; H1 and H3 survive as an S1xS3 factor.",
+        "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 1,
+          "coboundary_generators": [
+            [
+              0
+            ]
+          ],
+          "cochain_count": 2,
+          "cocycle_count": 2,
+          "cocycle_representatives_before_quotient": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 1,
+              "representative": [
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "nullity": 1,
+          "rank": 1,
+          "signature": -1,
+          "signature_triple_positive_negative_zero": [
+            0,
+            1,
+            1
+          ]
+        },
+        "candidate_status": "all-handles-control",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              0
+            ]
+          ],
+          "d2_rank": 0,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              0
+            ]
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "h"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 1,
+          "from_handles": 1
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar # S1xS3 handle-chain model"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              -1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1
+            ]
+          ],
+          "kernel_rank": 1,
+          "quotient_basis_representatives": [
+            [
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 1,
+          "b2": 1,
+          "b3": 1,
+          "b4": 1
+        },
+        "id": "cpbar-s1xs3-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Negative all-handle connected-sum control.",
+        "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 1,
+          "coboundary_generators": [
+            [
+              0
+            ]
+          ],
+          "cochain_count": 2,
+          "cocycle_count": 2,
+          "cocycle_representatives_before_quotient": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 1,
+              "representative": [
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "nullity": 1,
+          "rank": 2,
+          "signature": 0,
+          "signature_triple_positive_negative_zero": [
+            1,
+            1,
+            1
+          ]
+        },
+        "candidate_status": "all-handles-control",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              0,
+              0
+            ]
+          ],
+          "d2_rank": 0,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              0
+            ],
+            [
+              0
+            ]
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "x",
+            "y"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 2,
+          "from_handles": 2
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1",
+          "h2_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_form": "S2xS2 # S1xS3 handle-chain model"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": 0,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega Hopf control only",
+            "standard_form": "0-framed positive Hopf link with both components Omega colored",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 4
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              0,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rank": 2,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 1,
+          "b2": 2,
+          "b3": 1,
+          "b4": 1
+        },
+        "id": "s2xs2-s1xs3-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Hyperbolic all-handle connected-sum control with H2 rank 2.",
+        "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 1,
+          "coboundary_generators": [
+            [
+              0,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                1
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 4,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1
+            ]
+          ],
+          "nullity": 1,
+          "rank": 3,
+          "signature": 0,
+          "signature_triple_positive_negative_zero": [
+            2,
+            2,
+            0
+          ]
+        },
+        "candidate_status": "minimal-kernel-image-all-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              1
+            ],
+            [
+              -1
+            ],
+            [
+              0
+            ]
+          ],
+          "d3_rank": 1,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the single 3-handle relation",
+          "h2_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "standard_form": "CP2-like all-handle kernel/image test"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": 1,
+          "h2_signature": 1,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            0,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "+1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 3,
+                  "integer_coefficient": 2
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              1,
+              -1,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                1,
+                -1,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 3,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cp2-kernel-image-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Minimal example where one-handles and three-handles are both active: H2 = ker(d2)/im(d3).",
+        "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 8,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              -1
+            ]
+          ],
+          "nullity": 1,
+          "rank": 3,
+          "signature": -2,
+          "signature_triple_positive_negative_zero": [
+            1,
+            3,
+            0
+          ]
+        },
+        "candidate_status": "minimal-kernel-image-all-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              1
+            ],
+            [
+              -1
+            ],
+            [
+              0
+            ]
+          ],
+          "d3_rank": 1,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the single 3-handle relation",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar-like all-handle kernel/image test"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              -1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              1,
+              -1,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                1,
+                -1,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 3,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cpbar-kernel-image-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Negative-square partner for the minimal kernel/image all-handle test.",
+        "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "cochain_count": 8,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              -1
+            ]
+          ],
+          "nullity": 1,
+          "rank": 3,
+          "signature": -2,
+          "signature_triple_positive_negative_zero": [
+            1,
+            3,
+            0
+          ]
+        },
+        "candidate_status": "minimal-kernel-image-all-handles",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              1,
+              2,
+              0
+            ]
+          ],
+          "d2_rank": 1,
+          "d2_times_d3": [
+            [
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              2
+            ],
+            [
+              -1
+            ],
+            [
+              0
+            ]
+          ],
+          "d3_rank": 1,
+          "one_handles": [
+            "D"
+          ],
+          "three_handles": [
+            "T"
+          ],
+          "two_handles": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 3,
+          "from_handles": 3
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the primitive 3-handle relation",
+          "h2_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "standard_form": "CPbar-like uneven-incidence kernel/image test"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": -1,
+          "h2_signature_triple_positive_negative_zero": [
+            0,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              -1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              -1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega control only",
+            "standard_form": "-1 framed Omega unknot",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 8,
+                  "integer_coefficient": 1
+                },
+                {
+                  "exponent": 13,
+                  "integer_coefficient": 2
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              2,
+              -1,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              2,
+              -1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "rank": 1,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                2,
+                -1,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 1,
+          "2": 3,
+          "3": 1,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 0,
+          "b2": 1,
+          "b3": 0,
+          "b4": 1
+        },
+        "id": "cpbar-uneven-kernel-image-all-handles",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Tests simultaneous non-unit one-handle incidence and nonzero im(d3).",
+        "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 2,
+          "coboundary_generators": [
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "cochain_count": 8,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0
+              ]
+            },
+            {
+              "coset_size": 2,
+              "representative": [
+                0,
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 2,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "nullity": 2,
+          "rank": 2,
+          "signature": 0,
+          "signature_triple_positive_negative_zero": [
+            1,
+            1,
+            2
+          ]
+        },
+        "candidate_status": "external-geometric-control-candidate",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d2_rank": 0,
+          "d2_times_d3": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "a",
+            "b"
+          ],
+          "three_handles": [
+            "A",
+            "B"
+          ],
+          "two_handles": [
+            "S",
+            "T"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 0,
+          "from_handles": 0
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 2",
+          "h2_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_form": "S2 x T2 product handle-chain model"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": 0,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "claim_boundary": "ordinary local SU(2)_2 Omega Hopf control only",
+            "standard_form": "0-framed positive Hopf link with both components Omega colored",
+            "status": "recognized-local-control",
+            "value": {
+              "kind": "Z[zeta_16]_sparse_sum",
+              "root_symbol": "zeta_16 = exp(2*pi*i/16)",
+              "terms": [
+                {
+                  "exponent": 0,
+                  "integer_coefficient": 4
+                }
+              ]
+            }
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rank": 2,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                0,
+                0
+              ]
+            },
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 1,
+              "relation_vector": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 2,
+          "b2": 2,
+          "b3": 2,
+          "b4": 1
+        },
+        "id": "s2xt2-product-chain",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Small product-manifold all-handle candidate with b1=b3=2 and hyperbolic H2.",
+        "recognition_status": "PRODUCT_HANDLE_CHAIN_MODEL_NOT_KIRBY_DIAGRAM",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 1,
+          "coboundary_generators": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                1
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 4,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      },
+      {
+        "augmented_dotted_surgery_matrix": {
+          "determinant": 0,
+          "interpretation": "homology-boundary sanity only; not a proof that the Kirby boundary is S3 or a standard connected sum",
+          "matrix": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "nullity": 2,
+          "rank": 2,
+          "signature": 0,
+          "signature_triple_positive_negative_zero": [
+            1,
+            1,
+            2
+          ]
+        },
+        "candidate_status": "external-geometric-control-candidate",
+        "chain_complex": {
+          "d2_matrix_c2_to_c1": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d2_rank": 0,
+          "d2_times_d3": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d3_matrix_c3_to_c2": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "d3_rank": 0,
+          "one_handles": [
+            "a",
+            "b"
+          ],
+          "three_handles": [
+            "A",
+            "B"
+          ],
+          "two_handles": [
+            "S",
+            "T"
+          ]
+        },
+        "euler_characteristic": {
+          "from_betti_ranks": 0,
+          "from_handles": 0
+        },
+        "expected": {
+          "boundary_sanity": "augmented dotted surgery nullity is 2",
+          "h2_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "standard_form": "odd S2-bundle-over-T2 style handle-chain candidate"
+        },
+        "failure_count": 0,
+        "failures": [],
+        "forms": {
+          "h2_form_determinant": -1,
+          "h2_signature": 0,
+          "h2_signature_triple_positive_negative_zero": [
+            1,
+            1,
+            0
+          ],
+          "q2_on_two_handles": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "q_on_h2_quotient_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "q_on_kernel_basis": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "standard_su2_2_omega_control": {
+            "reason": "no hard-coded SU(2)_2 standard Omega control for this H2 form",
+            "status": "not-recognized"
+          }
+        },
+        "h2": {
+          "d3_relation_columns": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "kernel_basis_in_two_handle_coordinates": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kernel_rank": 2,
+          "quotient_basis_representatives": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rank": 2,
+          "relation_radical_checks": [
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 0,
+              "relation_vector": [
+                0,
+                0
+              ]
+            },
+            {
+              "is_radical_on_kernel": true,
+              "pairings_against_kernel_basis": [
+                0,
+                0
+              ],
+              "relation_index": 1,
+              "relation_vector": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "handle_counts": {
+          "0": 1,
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 1
+        },
+        "homology_ranks_over_Q": {
+          "b0": 1,
+          "b1": 2,
+          "b2": 2,
+          "b3": 2,
+          "b4": 1
+        },
+        "id": "odd-s2-bundle-over-t2-chain",
+        "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+        "purpose": "Odd rank-2 all-handle product-family candidate; useful later only after a concrete Kirby diagram is pinned down.",
+        "recognition_status": "SPECULATIVE_HANDLE_CHAIN_MODEL_NEEDS_SOURCE_DIAGRAM",
+        "status": "pass",
+        "z2_character_cohomology": {
+          "coboundaries": [
+            [
+              0,
+              0
+            ]
+          ],
+          "coboundaries_subset_cocycles": true,
+          "coboundary_count": 1,
+          "coboundary_generators": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "cochain_count": 4,
+          "cocycle_count": 4,
+          "cocycle_representatives_before_quotient": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "coefficient_group": "Z/2",
+          "cohomology_representatives": [
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                0,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                0,
+                1
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                0
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                0
+              ]
+            },
+            {
+              "coset_size": 1,
+              "representative": [
+                1,
+                1
+              ],
+              "values_on_h2_quotient_basis": [
+                1,
+                1
+              ]
+            }
+          ],
+          "h2_character_count": 4,
+          "interpretation": "2-handle cochains alpha with d3^T alpha = 0, modulo d2^T one-handle coboundaries; representatives are lexicographic choices for bookkeeping, not canonical geometry"
+        }
+      }
+    ],
+    "mathematical_status": "ALGEBRAIC_HANDLE_SANITY_NOT_LINK_EVALUATOR_OUTPUT",
+    "schema": "twisted-yetter.small-special-handle-example-sanity.v1",
+    "status": "pass"
+  },
+  "finished_at_utc": "2026-07-08T13:37:28Z",
+  "generator_script": "experiments/scripts/small_handle_examples_certify.py",
+  "git": {
+    "commit": "0e9c1c3bc5ee557055b9a7d56a114877d343ebfe",
+    "dirty": true
+  },
+  "input_hash": "f275b7f94cb9d32626b0aa98ef045c30e3e8164aec61039ca7f0a98eee8444f3",
+  "log_references": [],
+  "notes": [
+    "Algebraic handle-chain sanity only.",
+    "This is not an RT link evaluation and not a closed 4D invariant."
+  ],
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "PYTHONPATH=src python experiments/scripts/small_handle_examples_certify.py --write",
+  "schema": "twisted-yetter.certificate.v1",
+  "started_at_utc": "2026-07-08T13:37:28Z",
+  "status": "pass",
+  "tool_versions": {
+    "python": "3.12.13"
+  }
+}

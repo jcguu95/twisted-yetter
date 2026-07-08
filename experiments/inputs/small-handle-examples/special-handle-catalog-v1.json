@@ -1,0 +1,312 @@
+{
+  "catalog_id": "small-special-handle-catalog-v1",
+  "created_at_utc": "2026-07-08T13:35:00Z",
+  "description": "Small algebraic handle-chain candidates for Tham 5.11/special-dotted-handle work. These are not RT link diagrams.",
+  "examples": [
+    {
+      "candidate_status": "visible-cancel-control",
+      "d2_matrix": [[1, 0]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2 after a visible 1/2 cancellation"
+      },
+      "h2_kernel_basis": [[0, 1]],
+      "h2_quotient_basis": [[0, 1]],
+      "id": "cp2-visible-cancel-1-2",
+      "one_handles": ["D"],
+      "purpose": "Trivial but essential positive-framing control for a special dotted unknot and an isolated CP2 2-handle.",
+      "q2_matrix": [[0, 0], [0, 1]],
+      "recognition_status": "VISIBLE_CANCEL_TO_STANDARD",
+      "three_handles": [],
+      "two_handles": ["cancel", "h"]
+    },
+    {
+      "candidate_status": "visible-cancel-control",
+      "d2_matrix": [[1, 0]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar after a visible 1/2 cancellation"
+      },
+      "h2_kernel_basis": [[0, 1]],
+      "h2_quotient_basis": [[0, 1]],
+      "id": "cpbar-visible-cancel-1-2",
+      "one_handles": ["D"],
+      "purpose": "Trivial but essential negative-framing control for a special dotted unknot and an isolated CPbar 2-handle.",
+      "q2_matrix": [[0, 0], [0, -1]],
+      "recognition_status": "VISIBLE_CANCEL_TO_STANDARD",
+      "three_handles": [],
+      "two_handles": ["cancel", "h"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 1]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2 candidate; requires explicit Kirby slides for theorem-level recognition"
+      },
+      "h2_kernel_basis": [[1, -1]],
+      "h2_quotient_basis": [[1, -1]],
+      "id": "cp2-paired-one-handle",
+      "one_handles": ["D"],
+      "purpose": "Smallest nontrivial no-3-handle special-dotted candidate with H2 rank 1 and d2=[1,1].",
+      "q2_matrix": [[0, 0], [0, 1]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 1]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar candidate; requires explicit Kirby slides for theorem-level recognition"
+      },
+      "h2_kernel_basis": [[1, -1]],
+      "h2_quotient_basis": [[1, -1]],
+      "id": "cpbar-paired-one-handle",
+      "one_handles": ["D"],
+      "purpose": "Smallest nontrivial no-3-handle special-dotted candidate with H2 rank 1 and negative square.",
+      "q2_matrix": [[1, 1], [1, 0]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 2]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2-like primitive uneven-incidence candidate"
+      },
+      "h2_kernel_basis": [[2, -1]],
+      "h2_quotient_basis": [[2, -1]],
+      "id": "cp2-uneven-incidence",
+      "one_handles": ["D"],
+      "purpose": "Tests that the algebraic machinery does not assume every special dotted incidence is 0 or 1.",
+      "q2_matrix": [[0, 0], [0, 1]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 2]],
+      "d3_matrix": [[], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar-like primitive uneven-incidence candidate"
+      },
+      "h2_kernel_basis": [[2, -1]],
+      "h2_quotient_basis": [[2, -1]],
+      "id": "cpbar-uneven-incidence",
+      "one_handles": ["D"],
+      "purpose": "Negative-square uneven-incidence partner for the CP2-like primitive candidate.",
+      "q2_matrix": [[0, 0], [0, -1]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 0, 1], [0, 1, 1]],
+      "d3_matrix": [[], [], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2-like two-dotted candidate"
+      },
+      "h2_kernel_basis": [[-1, -1, 1]],
+      "h2_quotient_basis": [[-1, -1, 1]],
+      "id": "cp2-two-dotted-three-two-handles",
+      "one_handles": ["D1", "D2"],
+      "purpose": "Small no-3-handle candidate with two special dotted unknots and one H2 generator.",
+      "q2_matrix": [[0, 0, 0], [0, 0, 0], [0, 0, 1]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B", "C"]
+    },
+    {
+      "candidate_status": "first-round-nontrivial-no-three-handles",
+      "d2_matrix": [[1, 1, 1]],
+      "d3_matrix": [[], [], []],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery determinant is +/-1",
+        "h2_intersection_form": [[0, 1], [1, 0]],
+        "standard_form": "S2xS2-like one-dotted rank-2 candidate"
+      },
+      "h2_kernel_basis": [[1, -1, 0], [1, 0, -1]],
+      "h2_quotient_basis": [[1, -1, 0], [1, 0, -1]],
+      "id": "s2xs2-one-dotted-three-two-handles",
+      "one_handles": ["D"],
+      "purpose": "Small no-3-handle rank-2 H2 candidate whose quotient form is hyperbolic.",
+      "q2_matrix": [[0, 0, 0], [0, 0, 1], [0, 1, 0]],
+      "recognition_status": "ALGEBRAIC_HOMOLOGY_SPHERE_BOUNDARY_NOT_KIRBY_PROOF",
+      "three_handles": [],
+      "two_handles": ["A", "B", "C"]
+    },
+    {
+      "candidate_status": "all-handles-control",
+      "d2_matrix": [[0]],
+      "d3_matrix": [[0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2 # S1xS3 handle-chain model"
+      },
+      "h2_kernel_basis": [[1]],
+      "h2_quotient_basis": [[1]],
+      "id": "cp2-s1xs3-all-handles",
+      "one_handles": ["D"],
+      "purpose": "All handle indices are present; H1 and H3 survive as an S1xS3 factor.",
+      "q2_matrix": [[1]],
+      "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+      "three_handles": ["T"],
+      "two_handles": ["h"]
+    },
+    {
+      "candidate_status": "all-handles-control",
+      "d2_matrix": [[0]],
+      "d3_matrix": [[0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar # S1xS3 handle-chain model"
+      },
+      "h2_kernel_basis": [[1]],
+      "h2_quotient_basis": [[1]],
+      "id": "cpbar-s1xs3-all-handles",
+      "one_handles": ["D"],
+      "purpose": "Negative all-handle connected-sum control.",
+      "q2_matrix": [[-1]],
+      "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+      "three_handles": ["T"],
+      "two_handles": ["h"]
+    },
+    {
+      "candidate_status": "all-handles-control",
+      "d2_matrix": [[0, 0]],
+      "d3_matrix": [[0], [0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1",
+        "h2_intersection_form": [[0, 1], [1, 0]],
+        "standard_form": "S2xS2 # S1xS3 handle-chain model"
+      },
+      "h2_kernel_basis": [[1, 0], [0, 1]],
+      "h2_quotient_basis": [[1, 0], [0, 1]],
+      "id": "s2xs2-s1xs3-all-handles",
+      "one_handles": ["D"],
+      "purpose": "Hyperbolic all-handle connected-sum control with H2 rank 2.",
+      "q2_matrix": [[0, 1], [1, 0]],
+      "recognition_status": "PRODUCT_OR_CONNECTED_SUM_HANDLE_CHAIN_MODEL",
+      "three_handles": ["T"],
+      "two_handles": ["x", "y"]
+    },
+    {
+      "candidate_status": "minimal-kernel-image-all-handles",
+      "d2_matrix": [[1, 1, 0]],
+      "d3_matrix": [[1], [-1], [0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the single 3-handle relation",
+        "h2_intersection_form": [[1]],
+        "standard_form": "CP2-like all-handle kernel/image test"
+      },
+      "h2_kernel_basis": [[1, -1, 0], [0, 0, 1]],
+      "h2_quotient_basis": [[0, 0, 1]],
+      "id": "cp2-kernel-image-all-handles",
+      "one_handles": ["D"],
+      "purpose": "Minimal example where one-handles and three-handles are both active: H2 = ker(d2)/im(d3).",
+      "q2_matrix": [[0, 0, 0], [0, 0, 0], [0, 0, 1]],
+      "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+      "three_handles": ["T"],
+      "two_handles": ["A", "B", "C"]
+    },
+    {
+      "candidate_status": "minimal-kernel-image-all-handles",
+      "d2_matrix": [[1, 1, 0]],
+      "d3_matrix": [[1], [-1], [0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the single 3-handle relation",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar-like all-handle kernel/image test"
+      },
+      "h2_kernel_basis": [[1, -1, 0], [0, 0, 1]],
+      "h2_quotient_basis": [[0, 0, 1]],
+      "id": "cpbar-kernel-image-all-handles",
+      "one_handles": ["D"],
+      "purpose": "Negative-square partner for the minimal kernel/image all-handle test.",
+      "q2_matrix": [[0, 0, 0], [0, 0, 0], [0, 0, -1]],
+      "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+      "three_handles": ["T"],
+      "two_handles": ["A", "B", "C"]
+    },
+    {
+      "candidate_status": "minimal-kernel-image-all-handles",
+      "d2_matrix": [[1, 2, 0]],
+      "d3_matrix": [[2], [-1], [0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 1, killed by the primitive 3-handle relation",
+        "h2_intersection_form": [[-1]],
+        "standard_form": "CPbar-like uneven-incidence kernel/image test"
+      },
+      "h2_kernel_basis": [[2, -1, 0], [0, 0, 1]],
+      "h2_quotient_basis": [[0, 0, 1]],
+      "id": "cpbar-uneven-kernel-image-all-handles",
+      "one_handles": ["D"],
+      "purpose": "Tests simultaneous non-unit one-handle incidence and nonzero im(d3).",
+      "q2_matrix": [[0, 0, 0], [0, 0, 0], [0, 0, -1]],
+      "recognition_status": "ALGEBRAIC_KERNEL_IMAGE_TEST_NOT_KIRBY_PROOF",
+      "three_handles": ["T"],
+      "two_handles": ["A", "B", "C"]
+    },
+    {
+      "candidate_status": "external-geometric-control-candidate",
+      "d2_matrix": [[0, 0], [0, 0]],
+      "d3_matrix": [[0, 0], [0, 0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 2",
+        "h2_intersection_form": [[0, 1], [1, 0]],
+        "standard_form": "S2 x T2 product handle-chain model"
+      },
+      "h2_kernel_basis": [[1, 0], [0, 1]],
+      "h2_quotient_basis": [[1, 0], [0, 1]],
+      "id": "s2xt2-product-chain",
+      "one_handles": ["a", "b"],
+      "purpose": "Small product-manifold all-handle candidate with b1=b3=2 and hyperbolic H2.",
+      "q2_matrix": [[0, 1], [1, 0]],
+      "recognition_status": "PRODUCT_HANDLE_CHAIN_MODEL_NOT_KIRBY_DIAGRAM",
+      "three_handles": ["A", "B"],
+      "two_handles": ["S", "T"]
+    },
+    {
+      "candidate_status": "external-geometric-control-candidate",
+      "d2_matrix": [[0, 0], [0, 0]],
+      "d3_matrix": [[0, 0], [0, 0]],
+      "expected": {
+        "boundary_sanity": "augmented dotted surgery nullity is 2",
+        "h2_intersection_form": [[0, 1], [1, 1]],
+        "standard_form": "odd S2-bundle-over-T2 style handle-chain candidate"
+      },
+      "h2_kernel_basis": [[1, 0], [0, 1]],
+      "h2_quotient_basis": [[1, 0], [0, 1]],
+      "id": "odd-s2-bundle-over-t2-chain",
+      "one_handles": ["a", "b"],
+      "purpose": "Odd rank-2 all-handle product-family candidate; useful later only after a concrete Kirby diagram is pinned down.",
+      "q2_matrix": [[0, 1], [1, 1]],
+      "recognition_status": "SPECULATIVE_HANDLE_CHAIN_MODEL_NEEDS_SOURCE_DIAGRAM",
+      "three_handles": ["A", "B"],
+      "two_handles": ["S", "T"]
+    }
+  ],
+  "schema": "twisted-yetter.small-special-handle-example-catalog.v1"
+}
