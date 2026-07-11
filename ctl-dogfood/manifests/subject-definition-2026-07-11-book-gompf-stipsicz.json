@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:366016f14707111380e898cacedf2ca9c795d1d5831b88c58cda73e48c9993e2",
+  "generated_at": "2026-07-11T15:44:43Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:366016f14707111380e898cacedf2ca9c795d1d5831b88c58cda73e48c9993e2",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
+    "transition": "ctlobj-sha256:5472c0bd34af099799097ab707165291108924973b05024ace3036ff12b9d982"
+  },
+  "parent_root_cid": "ctlobj-sha256:727dfe86be6a6a1659b799a7a5df0ec62446a8e7a0f07079e2933cb1442a6e63",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/book-gompf-stipsicz-4-manifolds-and-kirby-calculus.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/book-gompf-stipsicz-4-manifolds-and-kirby-calculus.json --manifest manifests/subject-definition-2026-07-11-book-gompf-stipsicz.json --created-at 2026-07-11T15:44:43Z --admitted-at 2026-07-11T15:44:43Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "48a73d2591c87cacb2b06f701e0505344b0c42c2"
+}

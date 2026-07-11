@@ -1,0 +1,119 @@
+{
+  "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+  "note_id": "objective-note-2026-07-11-yasui-correspondence-candidate-triage",
+  "title": "Yasui correspondence and first closed exotic handlebody candidates",
+  "created_at_utc": "2026-07-11T15:44:43Z",
+  "status": "SOURCE_GUIDANCE_TRIAGE",
+  "mathematical_status": "CANDIDATE_PRIORITIZATION_NOT_THEOREM",
+  "source_capture": {
+    "logical_id": "claim:source-capture:yasui-email-2026-07-11",
+    "path": "ctl-dogfood/resources/yasui-email-2026-07-11-source-capture.json",
+    "summary": "Kouichi Yasui replied with references for whole handlebody diagrams of exotic rational surfaces, suggested knot traces if boundary invariants are allowed, and suggested K3#-CP2 as a small closed exotic example."
+  },
+  "project_context": {
+    "current_goal": "Find convincing closed exotic 4-manifold Kirby presentations for testing the twisted-Yetter evaluator beyond CP2 sanity checks.",
+    "constraint_from_user": "The project currently prioritizes closed oriented 4-manifolds with nontrivial H2. Boundary-only knot traces are useful context but not the main target.",
+    "current_evaluator_scope": "The implemented and tested Tham 5.11 upside-down route has passed small examples involving only 2-handles and 2/3-handles. A robust special-dotted one-handle evaluator is still design work."
+  },
+  "paper_triage": [
+    {
+      "subject_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+      "citation": "Selman Akbulut and Kouichi Yasui, Corks, Plugs and exotic structures, J. Gökova Geom. Topol. GGT 2 (2008), 40-82; arXiv:0806.3010v3.",
+      "relevance": "Whole handlebody diagrams for exotic rational surfaces; Section 6 draws a whole diagram of the exotic CP2#9(-CP2) E3prime.",
+      "online_metadata": {
+        "arxiv_abs_url": "https://arxiv.org/abs/0806.3010",
+        "arxiv_version": "v3",
+        "journal_reference": "Journal of Gokova Geometry Topology, Volume 2 (2008) 40-82",
+        "comments": "43 pages, 61 figures, published version",
+        "tmp_pdf_sha256": "48626a2c0b8522660af8de4c692257110d1f020f084ce62d5efa80aa2a5fe741"
+      },
+      "candidate_presentations": [
+        "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      ],
+      "priority": "PRIMARY_CLOSED_NO_ONE_HANDLE_CANDIDATE"
+    },
+    {
+      "subject_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+      "citation": "Yohei Wakamaki, A cork of the rational surface with the second Betti number 9, Topology Appl. 354 (2024), Paper No. 109002; arXiv:2307.16454v3.",
+      "relevance": "Provides explicit diagrams for a cork in CP2#8(-CP2) and an exotic rational surface R8, but the first visible route includes a unique 1-handle that can be cancelled after slides.",
+      "online_metadata": {
+        "arxiv_abs_url": "https://arxiv.org/abs/2307.16454",
+        "arxiv_version": "v3",
+        "journal_reference": "Topology and its Applications 354 (2024), 109002",
+        "related_doi": "10.1016/j.topol.2024.109002",
+        "comments": "24 pages, 31 figures; v3 agrees with the published version",
+        "tmp_pdf_sha256": "e5fb2e636a17d772dbd1c19376083d7e8b0873f583d1de1ef8e109e9f2620001"
+      },
+      "candidate_presentations": [
+        "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
+      ],
+      "priority": "SECONDARY_AUDIT_CANDIDATE"
+    },
+    {
+      "subject_id": "subject:twisted-yetter:paper:yasui-1505-02551",
+      "citation": "Kouichi Yasui, Corks, exotic 4-manifolds and knot concordance, arXiv:1505.02551v4; email cites J. Differential Geom. 132 (2026), no. 3, 547-576.",
+      "relevance": "Good source for boundary/knot-trace examples if the invariant is extended to manifolds with boundary, but not the current closed-only target.",
+      "online_metadata": {
+        "arxiv_abs_url": "https://arxiv.org/abs/1505.02551",
+        "arxiv_version": "v4",
+        "comments": "25 pages, 26 figures"
+      },
+      "priority": "DEFER_UNTIL_BOUNDARY_VERSION"
+    },
+    {
+      "subject_id": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold",
+      "citation": "Selman Akbulut, An exotic 4-manifold, Journal of Differential Geometry 33 (1991), 357-361.",
+      "relevance": "Yasui identifies it as the simplest exotic knot-trace-style example, also written in Gompf-Stipsicz. It is not the current closed-only target.",
+      "priority": "DEFER_UNTIL_BOUNDARY_VERSION"
+    },
+    {
+      "subject_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+      "citation": "Robert E. Gompf and András I. Stipsicz, 4-Manifolds and Kirby Calculus, AMS Graduate Studies in Mathematics 20.",
+      "relevance": "Yasui points to this book for the K3 diagram and the Akbulut 1991 example.",
+      "candidate_presentations": [
+        "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+      ],
+      "priority": "REFERENCE_FOR_K3_ROUTE"
+    }
+  ],
+  "primary_candidate": {
+    "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+    "why_primary": [
+      "It is closed and simply connected.",
+      "The source states it is homeomorphic but not diffeomorphic to CP2#9(-CP2).",
+      "The source states Figure 21 has neither 1- nor 3-handles in that handle decomposition.",
+      "Therefore it fits the evaluator path we already trust best: a pure 2-handle Kirby presentation, no special-dotted one-handle evaluator needed."
+    ],
+    "source_anchors": [
+      "Akbulut-Yasui 2008, Section 6.",
+      "Akbulut-Yasui 2008, Theorem 6.1.",
+      "Akbulut-Yasui 2008, Figure 21."
+    ],
+    "next_steps": [
+      "Extract or manually transcribe Figure 21 as a machine-readable Kirby/link input.",
+      "Check linking matrix, rank, signature, Euler characteristic, and expected homeomorphism type CP2#9(-CP2).",
+      "Run untwisted Crane-Yetter sanity checks against the standard CP2#9(-CP2) diagonal presentation.",
+      "Only after untwisted checks pass, run twisted character scans in SU(3)_2 and D(Dic_12)."
+    ]
+  },
+  "secondary_candidates": [
+    {
+      "subject_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+      "why_secondary": "Yasui says K3#-CP2 has a simple diagram and is an exotic copy of 3CP2#20(-CP2). It is attractive but probably larger than E3prime and requires locating the exact Gompf-Stipsicz K3 diagram/page.",
+      "next_steps": [
+        "Locate exact page/figure in Gompf-Stipsicz.",
+        "Check whether the chosen K3 diagram is practical for transcription."
+      ]
+    },
+    {
+      "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+      "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. This is useful for Kirby-calculus practice, less clean than E3prime for immediate evaluator validation.",
+      "next_steps": [
+        "Inspect Figure 19 and the cancellation move described after Figure 18.",
+        "Decide whether to transcribe the pre-cancellation or post-cancellation diagram."
+      ]
+    }
+  ],
+  "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next closed exotic, no-one-handle candidate. Keep Wakamaki 2024 and K3#-CP2 as follow-up routes. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
+  "claim_boundary": "This note records source guidance and candidate triage. It does not assert that the transcription is done, that the twisted invariant separates the exotic pair, or that any diagram has already been verified by our evaluator."
+}

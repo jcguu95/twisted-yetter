@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:e907f9f4c2001b0c6d3e12bfbebd016a63eda5918342162d5d5f594b311b29dc",
+  "generated_at": "2026-07-11T15:44:43Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e907f9f4c2001b0c6d3e12bfbebd016a63eda5918342162d5d5f594b311b29dc",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960",
+    "transition": "ctlobj-sha256:7c5b0c1a9502a22edc685e309d2b6ee3a2f6cef6d85ddf845138d9b7f2bdb8bf"
+  },
+  "parent_root_cid": "ctlobj-sha256:81e80f3dff6fe314a23ae0f6e29af380de4eda592b87a34b10220dcbce3414bb",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-11-yasui-correspondence-candidate-triage.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload lab-notes/2026-07-11-yasui-correspondence-candidate-triage.json --manifest manifests/lab-note-2026-07-11-yasui-correspondence-candidate-triage.json --created-at 2026-07-11T15:44:43Z --admitted-at 2026-07-11T15:44:43Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "48a73d2591c87cacb2b06f701e0505344b0c42c2"
+}

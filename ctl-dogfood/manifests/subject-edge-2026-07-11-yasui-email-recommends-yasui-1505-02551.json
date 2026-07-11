@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:6c982666f280198ad6978448f723d03f0cc230c962570c36bafc65d4b2e81c58",
+  "generated_at": "2026-07-11T15:44:43Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:yasui-1505-02551",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:6c982666f280198ad6978448f723d03f0cc230c962570c36bafc65d4b2e81c58",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
+    "transition": "ctlobj-sha256:8419b9d6b495afe2894b35c931f0606a359fb5a740eaad0f5023a3f97963da4e"
+  },
+  "parent_root_cid": "ctlobj-sha256:b67065cc067a4df39bea29d98646ac50aa2c01c17c18e851722ce1fac0a41af0",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-email-recommends-yasui-1505-02551.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-email-2026-07-11:recommends:yasui-1505-02551 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-email-recommends-yasui-1505-02551.json --manifest manifests/subject-edge-2026-07-11-yasui-email-recommends-yasui-1505-02551.json --created-at 2026-07-11T15:44:43Z --admitted-at 2026-07-11T15:44:43Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "48a73d2591c87cacb2b06f701e0505344b0c42c2"
+}

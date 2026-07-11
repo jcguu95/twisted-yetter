@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:aa1f8f38a19772167c1bb49afc08229441ba3d9d11ef090bfb5f6b2004a8d7ca",
+  "generated_at": "2026-07-11T15:44:43Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:person-kouichi-yasui:under:yasui-hub",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:aa1f8f38a19772167c1bb49afc08229441ba3d9d11ef090bfb5f6b2004a8d7ca",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
+    "transition": "ctlobj-sha256:3f1e0b45359bfeef2723eb39404cbba80625b587377afad884b25d5f19aa7901"
+  },
+  "parent_root_cid": "ctlobj-sha256:6c15fc337753ae988fd29c95053240eaa180f1548784f67b09e69a8e63fb40e2",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-person-under-yasui-hub.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:person-kouichi-yasui:under:yasui-hub --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-person-under-yasui-hub.json --manifest manifests/subject-edge-2026-07-11-yasui-person-under-yasui-hub.json --created-at 2026-07-11T15:44:43Z --admitted-at 2026-07-11T15:44:43Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "48a73d2591c87cacb2b06f701e0505344b0c42c2"
+}

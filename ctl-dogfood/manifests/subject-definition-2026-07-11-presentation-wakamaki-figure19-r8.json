@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:29c6602ee0f57633e8b494415bbb39ffb6181f58cb7b88da5ae6add16103c205",
+  "generated_at": "2026-07-11T15:44:43Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:29c6602ee0f57633e8b494415bbb39ffb6181f58cb7b88da5ae6add16103c205",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
+    "transition": "ctlobj-sha256:0fd2ead9dadd75f90a4172bda67e08afc4510b9828d8af17f5009c3eab3f12b1"
+  },
+  "parent_root_cid": "ctlobj-sha256:e213d1cfe751eac64ab248da5c6c6ae15abf8cc0a501eb76ebfbdac5697563db",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-wakamaki-2024-figure19-r8.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8 --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/presentation-wakamaki-2024-figure19-r8.json --manifest manifests/subject-definition-2026-07-11-presentation-wakamaki-figure19-r8.json --created-at 2026-07-11T15:44:43Z --admitted-at 2026-07-11T15:44:43Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "48a73d2591c87cacb2b06f701e0505344b0c42c2"
+}

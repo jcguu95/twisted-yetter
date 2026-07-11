@@ -6708,6 +6708,142 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960",
+      "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+      "payload": {
+        "claim_boundary": "This note records source guidance and candidate triage. It does not assert that the transcription is done, that the twisted invariant separates the exotic pair, or that any diagram has already been verified by our evaluator.",
+        "created_at_utc": "2026-07-11T15:44:43Z",
+        "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next closed exotic, no-one-handle candidate. Keep Wakamaki 2024 and K3#-CP2 as follow-up routes. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
+        "mathematical_status": "CANDIDATE_PRIORITIZATION_NOT_THEOREM",
+        "note_id": "objective-note-2026-07-11-yasui-correspondence-candidate-triage",
+        "paper_triage": [
+          {
+            "candidate_presentations": [
+              "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+            ],
+            "citation": "Selman Akbulut and Kouichi Yasui, Corks, Plugs and exotic structures, J. G\u00f6kova Geom. Topol. GGT 2 (2008), 40-82; arXiv:0806.3010v3.",
+            "online_metadata": {
+              "arxiv_abs_url": "https://arxiv.org/abs/0806.3010",
+              "arxiv_version": "v3",
+              "comments": "43 pages, 61 figures, published version",
+              "journal_reference": "Journal of Gokova Geometry Topology, Volume 2 (2008) 40-82",
+              "tmp_pdf_sha256": "48626a2c0b8522660af8de4c692257110d1f020f084ce62d5efa80aa2a5fe741"
+            },
+            "priority": "PRIMARY_CLOSED_NO_ONE_HANDLE_CANDIDATE",
+            "relevance": "Whole handlebody diagrams for exotic rational surfaces; Section 6 draws a whole diagram of the exotic CP2#9(-CP2) E3prime.",
+            "subject_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010"
+          },
+          {
+            "candidate_presentations": [
+              "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
+            ],
+            "citation": "Yohei Wakamaki, A cork of the rational surface with the second Betti number 9, Topology Appl. 354 (2024), Paper No. 109002; arXiv:2307.16454v3.",
+            "online_metadata": {
+              "arxiv_abs_url": "https://arxiv.org/abs/2307.16454",
+              "arxiv_version": "v3",
+              "comments": "24 pages, 31 figures; v3 agrees with the published version",
+              "journal_reference": "Topology and its Applications 354 (2024), 109002",
+              "related_doi": "10.1016/j.topol.2024.109002",
+              "tmp_pdf_sha256": "e5fb2e636a17d772dbd1c19376083d7e8b0873f583d1de1ef8e109e9f2620001"
+            },
+            "priority": "SECONDARY_AUDIT_CANDIDATE",
+            "relevance": "Provides explicit diagrams for a cork in CP2#8(-CP2) and an exotic rational surface R8, but the first visible route includes a unique 1-handle that can be cancelled after slides.",
+            "subject_id": "subject:twisted-yetter:paper:wakamaki-2307-16454"
+          },
+          {
+            "citation": "Kouichi Yasui, Corks, exotic 4-manifolds and knot concordance, arXiv:1505.02551v4; email cites J. Differential Geom. 132 (2026), no. 3, 547-576.",
+            "online_metadata": {
+              "arxiv_abs_url": "https://arxiv.org/abs/1505.02551",
+              "arxiv_version": "v4",
+              "comments": "25 pages, 26 figures"
+            },
+            "priority": "DEFER_UNTIL_BOUNDARY_VERSION",
+            "relevance": "Good source for boundary/knot-trace examples if the invariant is extended to manifolds with boundary, but not the current closed-only target.",
+            "subject_id": "subject:twisted-yetter:paper:yasui-1505-02551"
+          },
+          {
+            "citation": "Selman Akbulut, An exotic 4-manifold, Journal of Differential Geometry 33 (1991), 357-361.",
+            "priority": "DEFER_UNTIL_BOUNDARY_VERSION",
+            "relevance": "Yasui identifies it as the simplest exotic knot-trace-style example, also written in Gompf-Stipsicz. It is not the current closed-only target.",
+            "subject_id": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold"
+          },
+          {
+            "candidate_presentations": [
+              "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+            ],
+            "citation": "Robert E. Gompf and Andr\u00e1s I. Stipsicz, 4-Manifolds and Kirby Calculus, AMS Graduate Studies in Mathematics 20.",
+            "priority": "REFERENCE_FOR_K3_ROUTE",
+            "relevance": "Yasui points to this book for the K3 diagram and the Akbulut 1991 example.",
+            "subject_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus"
+          }
+        ],
+        "primary_candidate": {
+          "next_steps": [
+            "Extract or manually transcribe Figure 21 as a machine-readable Kirby/link input.",
+            "Check linking matrix, rank, signature, Euler characteristic, and expected homeomorphism type CP2#9(-CP2).",
+            "Run untwisted Crane-Yetter sanity checks against the standard CP2#9(-CP2) diagonal presentation.",
+            "Only after untwisted checks pass, run twisted character scans in SU(3)_2 and D(Dic_12)."
+          ],
+          "source_anchors": [
+            "Akbulut-Yasui 2008, Section 6.",
+            "Akbulut-Yasui 2008, Theorem 6.1.",
+            "Akbulut-Yasui 2008, Figure 21."
+          ],
+          "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+          "why_primary": [
+            "It is closed and simply connected.",
+            "The source states it is homeomorphic but not diffeomorphic to CP2#9(-CP2).",
+            "The source states Figure 21 has neither 1- nor 3-handles in that handle decomposition.",
+            "Therefore it fits the evaluator path we already trust best: a pure 2-handle Kirby presentation, no special-dotted one-handle evaluator needed."
+          ]
+        },
+        "project_context": {
+          "constraint_from_user": "The project currently prioritizes closed oriented 4-manifolds with nontrivial H2. Boundary-only knot traces are useful context but not the main target.",
+          "current_evaluator_scope": "The implemented and tested Tham 5.11 upside-down route has passed small examples involving only 2-handles and 2/3-handles. A robust special-dotted one-handle evaluator is still design work.",
+          "current_goal": "Find convincing closed exotic 4-manifold Kirby presentations for testing the twisted-Yetter evaluator beyond CP2 sanity checks."
+        },
+        "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+        "secondary_candidates": [
+          {
+            "next_steps": [
+              "Locate exact page/figure in Gompf-Stipsicz.",
+              "Check whether the chosen K3 diagram is practical for transcription."
+            ],
+            "subject_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+            "why_secondary": "Yasui says K3#-CP2 has a simple diagram and is an exotic copy of 3CP2#20(-CP2). It is attractive but probably larger than E3prime and requires locating the exact Gompf-Stipsicz K3 diagram/page."
+          },
+          {
+            "next_steps": [
+              "Inspect Figure 19 and the cancellation move described after Figure 18.",
+              "Decide whether to transcribe the pre-cancellation or post-cancellation diagram."
+            ],
+            "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+            "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. This is useful for Kirby-calculus practice, less clean than E3prime for immediate evaluator validation."
+          }
+        ],
+        "source_capture": {
+          "logical_id": "claim:source-capture:yasui-email-2026-07-11",
+          "path": "ctl-dogfood/resources/yasui-email-2026-07-11-source-capture.json",
+          "summary": "Kouichi Yasui replied with references for whole handlebody diagrams of exotic rational surfaces, suggested knot traces if boundary invariants are allowed, and suggested K3#-CP2 as a small closed exotic example."
+        },
+        "status": "SOURCE_GUIDANCE_TRIAGE",
+        "title": "Yasui correspondence and first closed exotic handlebody candidates"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
       "logical_id": "claim:resource-handle:su2-2-braid-oracle",
       "payload": {
@@ -7287,6 +7423,104 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:a95f62caa595bc8cc2544cbea696d2c18e9ce114f4a9c8aec3352a1cc07dd3f3",
+      "logical_id": "claim:source-capture:yasui-email-2026-07-11",
+      "payload": {
+        "capture_id": "source-capture:yasui-email-2026-07-11",
+        "captured_at_utc": "2026-07-11T15:44:43Z",
+        "captured_by": "actor:codex",
+        "linked_objects": [
+          "subject:twisted-yetter:person:kouichi-yasui",
+          "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+          "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+          "subject:twisted-yetter:paper:wakamaki-2307-16454",
+          "subject:twisted-yetter:paper:yasui-1505-02551",
+          "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold",
+          "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+          "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+          "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+          "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+          "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+        ],
+        "mathematical_status": "SOURCE_GUIDANCE_NOT_THEOREM",
+        "notes": [
+          "This is a source capture, not an endorsement that every suggested example is immediately usable by the current evaluator.",
+          "If the original .eml is later downloaded, admit it as a successor source capture with headers and attachment hashes."
+        ],
+        "original_headers_available": false,
+        "privacy_note": "The user explicitly requested that this email be stored in the project object store. No email headers were provided in chat; this capture preserves the body text supplied by the user.",
+        "profile": "twisted-yetter/source-capture/1",
+        "raw_email_lines": [
+          "Dear Jin-Cheng Guu",
+          "",
+          "Thank you for your mail.",
+          "Due to an urgent work, I provide a brief response for now. I hope this",
+          "is helpful.",
+          "",
+          "Whole handlebody diagrams for some of my exotic rational surfaces",
+          "are given in the following papers. (Wakamaki is a former student of",
+          "mine.)",
+          "",
+          "Akbulut, Selman; Yasui, Kouichi",
+          "Corks, plugs and exotic structures.",
+          "J. G\u00f6kova Geom. Topol. GGT 2 (2008), 40\u201382.",
+          "",
+          "Wakamaki, Yohei",
+          "A cork of the rational surface with the second Betti number 9.",
+          "Topology Appl. 354 (2024), Paper No. 109002, 17 pp.",
+          "",
+          "Suggestions.",
+          "",
+          "(1) If your invariant is defined for 4-manifolds with boundary as well,",
+          "it might be easier to use exotic knot traces.",
+          "I think Akbulut's example in his 1991 JDG paper is the simplest one,",
+          "which is written in the Gompf-Stipsicz book as well.",
+          "Many more examples are given in my paper below, which was first posted",
+          "on arXiv in 2015.",
+          "",
+          "Yasui, Kouichi",
+          "Corks, exotic 4-manifolds and knot concordance.",
+          "J. Differential Geom. 132 (2026), no. 3, 547\u2013576.",
+          "",
+          "(2) If you need exotic closed 4-manifolds that admit handlebody diagrams",
+          "with small crossing numbers, it might be easier for you to use",
+          "simple examples of exotic closed 4-manifolds.",
+          "For example, K3#-CP2 has a simple diagram and is an exotic copy of",
+          "3CP2#-20CP2.",
+          "A diagram of K3 is in the Gompf-Stipsicz book.",
+          "",
+          "Best Regards,",
+          "",
+          "Kouichi Yasui",
+          "The University of Osaka"
+        ],
+        "received_date_local": "2026-07-11",
+        "recipient": {
+          "name": "Jin-Cheng Guu"
+        },
+        "sender": {
+          "affiliation_in_signature": "The University of Osaka",
+          "name": "Kouichi Yasui",
+          "subject_id": "subject:twisted-yetter:person:kouichi-yasui"
+        },
+        "source_type": "private_email_shared_by_user",
+        "status": "captured_for_project_record"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a95f62caa595bc8cc2544cbea696d2c18e9ce114f4a9c8aec3352a1cc07dd3f3",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:source-capture:yasui-email-2026-07-11",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:f419b9d194bb2d76367acad8ee9670d9d81c7b83e3142d99b3075b0b7c68a87a",
       "logical_id": "claim:twisted-yetter-computation-first-plan",
       "payload": {
@@ -7405,6 +7639,84 @@
         "revision_kind": "role-binding"
       },
       "revision_kind": "role-binding"
+    },
+    {
+      "cid": "ctlobj-sha256:7665f3b110165b7fba771ff337c4cf5650df2ea22c6a8ada9f000e59033356aa",
+      "logical_id": "subject-edge:ty:2026-07-11-triage:audits:wakamaki-r8",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-triage:audits:wakamaki-r8",
+        "explanation": "The triage note keeps Wakamaki Figure 19 / R8 as a secondary audit target because it is explicit but less clean for no-one-handle evaluator validation.",
+        "role": "audits",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7665f3b110165b7fba771ff337c4cf5650df2ea22c6a8ada9f000e59033356aa",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-triage:audits:wakamaki-r8",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:72959d87c0bc4c1b7be61be2404a09d9ad00b92d2349b200ab1c401cf0a766f6",
+      "logical_id": "subject-edge:ty:2026-07-11-triage:prioritizes:e3prime-figure21",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-triage:prioritizes:e3prime-figure21",
+        "explanation": "The triage note selects Akbulut-Yasui Figure 21 / E3prime as the primary next closed exotic, no-one-handle transcription target.",
+        "role": "prioritizes",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:72959d87c0bc4c1b7be61be2404a09d9ad00b92d2349b200ab1c401cf0a766f6",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-triage:prioritizes:e3prime-figure21",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:31dfe48e7cbeb0644ac2c61404ff1838f8216ca21f89bb942c9615648e876a36",
+      "logical_id": "subject-edge:ty:2026-07-11-triage:uses:yasui-email",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-triage:uses:yasui-email",
+        "explanation": "The triage note is based on Yasui's 2026-07-11 email reply.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+        "status": "active",
+        "target": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:31dfe48e7cbeb0644ac2c61404ff1838f8216ca21f89bb942c9615648e876a36",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-triage:uses:yasui-email",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948",
@@ -7535,6 +7847,32 @@
         "revision_kind": "subject-edge:definition"
       },
       "revision_kind": "subject-edge:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
+      "logical_id": "subject-edge:ty:akbulut-yasui-0806-3010:defines:e3prime-figure21",
+      "payload": {
+        "edge_id": "subject-edge:ty:akbulut-yasui-0806-3010:defines:e3prime-figure21",
+        "explanation": "Akbulut-Yasui 2008 Section 6 / Figure 21 gives the whole handlebody diagram for the E3prime exotic CP2#9(-CP2) candidate.",
+        "role": "defines",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:akbulut-yasui-0806-3010:defines:e3prime-figure21",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:f465e66f221c8819fdba20704f5ef85de1ffbf5975d2d7e444d09b9b18e4a8aa",
@@ -7875,6 +8213,58 @@
         "revision_kind": "subject-edge:definition"
       },
       "revision_kind": "subject-edge:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
+      "logical_id": "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route",
+      "payload": {
+        "edge_id": "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route",
+        "explanation": "Yasui says the K3 diagram is in Gompf-Stipsicz; exact page/figure anchor remains to be captured before transcription.",
+        "role": "source-for",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+        "status": "active_incomplete_anchor",
+        "target": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
+      "logical_id": "subject-edge:ty:person-kouichi-yasui:under:yasui-hub",
+      "payload": {
+        "edge_id": "subject-edge:ty:person-kouichi-yasui:under:yasui-hub",
+        "explanation": "Kouichi Yasui is a person subject under the older broad Yasui-related hub.",
+        "role": "under",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:person:kouichi-yasui",
+        "status": "active",
+        "target": "subject:twisted-yetter:hub:yasui"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:person-kouichi-yasui:under:yasui-hub",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:59b1c90e2e7a567d84c7f8d5672dc3d301a6c87708a0dff545a03d7fe64b0531",
@@ -8269,6 +8659,32 @@
         "revision_kind": "subject-edge:definition"
       },
       "revision_kind": "subject-edge:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:eb3824eff7774d34231f5995a8c9268a9c98c82ff0bbcb52117ff2a20cd65811",
+      "logical_id": "subject-edge:ty:wakamaki-2307-16454:defines:r8-figure19",
+      "payload": {
+        "edge_id": "subject-edge:ty:wakamaki-2307-16454:defines:r8-figure19",
+        "explanation": "Wakamaki 2024 gives Figure 19 as a diagram of R8 and proves it is homeomorphic but not diffeomorphic to CP2#8(-CP2).",
+        "role": "defines",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:eb3824eff7774d34231f5995a8c9268a9c98c82ff0bbcb52117ff2a20cd65811",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:wakamaki-2307-16454:defines:r8-figure19",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:11245f615affc90c4099abc228d170dfa45ccb95d2c6a938d61db7bb7aea081b",
@@ -8894,6 +9310,214 @@
         "revision_kind": "subject-edge:definition"
       },
       "revision_kind": "subject-edge:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui",
+        "explanation": "The captured email body is signed by Kouichi Yasui.",
+        "role": "authored-by",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:person:kouichi-yasui"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-jdg-1991",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-jdg-1991",
+        "explanation": "Yasui identifies Akbulut's 1991 JDG example as the simplest boundary/knot-trace-style example.",
+        "role": "recommends",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-jdg-1991",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:e6f959f0457352da57810cee1ef75dc6743bba93ae53db7b5a914405e389cb71",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-yasui-0806-3010",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-yasui-0806-3010",
+        "explanation": "Yasui names Akbulut-Yasui 2008 as a source of whole handlebody diagrams for exotic rational surfaces.",
+        "role": "recommends",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e6f959f0457352da57810cee1ef75dc6743bba93ae53db7b5a914405e389cb71",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-yasui-0806-3010",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:a223245f73de6b11f28fb9663696e0a9a8e7377147a48e585d8a66ce0e672e9d",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:k3-cpbar",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:k3-cpbar",
+        "explanation": "Yasui suggests K3#-CP2 as a simple closed exotic copy of 3CP2#-20CP2.",
+        "role": "recommends",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a223245f73de6b11f28fb9663696e0a9a8e7377147a48e585d8a66ce0e672e9d",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:k3-cpbar",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:wakamaki-2307-16454",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:wakamaki-2307-16454",
+        "explanation": "Yasui names Wakamaki 2024 as a source of whole handlebody diagrams for exotic rational surfaces.",
+        "role": "recommends",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:wakamaki-2307-16454"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:wakamaki-2307-16454",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:yasui-1505-02551",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:yasui-1505-02551",
+        "explanation": "Yasui points to his knot-concordance paper for many boundary/knot-trace examples if boundary invariants become in scope.",
+        "role": "recommends",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:yasui-1505-02551"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recommends:yasui-1505-02551",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recorded-by:source-capture",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:recorded-by:source-capture",
+        "explanation": "The correspondence subject is backed by the admitted source-capture claim that preserves the email body.",
+        "role": "recorded-by",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "claim:source-capture:yasui-email-2026-07-11"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:recorded-by:source-capture",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:1db2736ed1339d48d05a6c0e3deeb629eda0be30d1a6299b423f524563e1b0da",
+      "logical_id": "subject-edge:ty:yasui-email-2026-07-11:triaged-by:2026-07-11-note",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-email-2026-07-11:triaged-by:2026-07-11-note",
+        "explanation": "The triage note records how the email changes our candidate roadmap.",
+        "role": "triaged-by",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1db2736ed1339d48d05a6c0e3deeb629eda0be30d1a6299b423f524563e1b0da",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-email-2026-07-11:triaged-by:2026-07-11-note",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
@@ -9528,6 +10152,43 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:4-manifold:e1",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
+      "logical_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+      "payload": {
+        "aliases": [
+          "gompf-stipsicz",
+          "gs-book",
+          "4-manifolds-and-kirby-calculus"
+        ],
+        "display_name": "Gompf-Stipsicz, 4-Manifolds and Kirby Calculus",
+        "external_references": [
+          {
+            "citation": "Robert E. Gompf and Andr\u00e1s I. Stipsicz, 4-Manifolds and Kirby Calculus, Graduate Studies in Mathematics 20, American Mathematical Society",
+            "kind": "bibliographic-citation",
+            "source": "Yasui email and existing project discussion"
+          }
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference book pointed to by Yasui for the K3 diagram and the Akbulut 1991 example. Exact page/figure anchors remain to be captured.",
+        "status": "active_reference_stub",
+        "subject_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+        "subject_kind": "ty:book"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -10256,6 +10917,44 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:7292c08fc35f09cee901c0eae2c5c580c4e6a9b75116908b40c39cc18b897ed4",
+      "logical_id": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+      "payload": {
+        "aliases": [
+          "yasui-email-2026-07-11",
+          "yasui-reply-closed-exotic-candidates"
+        ],
+        "current_view_hints": {
+          "source_capture_logical_id": "claim:source-capture:yasui-email-2026-07-11",
+          "source_capture_path": "ctl-dogfood/resources/yasui-email-2026-07-11-source-capture.json",
+          "triage_note_logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+        },
+        "display_name": "Yasui email reply about closed exotic handlebody candidates, 2026-07-11",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:person:kouichi-yasui",
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Private correspondence supplied by the user in chat. The current source capture preserves the body text and records Yasui's suggested papers and examples.",
+        "status": "active_private_correspondence",
+        "subject_id": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "subject_kind": "ty:correspondence"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7292c08fc35f09cee901c0eae2c5c580c4e6a9b75116908b40c39cc18b897ed4",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:correspondence:yasui-email-2026-07-11",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:b22af862bd584522efc8efe8869436bfd156e3b1c20225ed11e19c8901a80874",
       "logical_id": "subject:twisted-yetter:hub:yasui",
       "payload": {
@@ -10584,6 +11283,90 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:7357fc05e0a6b3259cc9fc10823fb05ef6e88e03f0b3cf6fc1e3a56ae03754b6",
+      "logical_id": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold",
+      "payload": {
+        "aliases": [
+          "akbulut-1991-an-exotic-4-manifold",
+          "akbulut-jdg-33-357-361"
+        ],
+        "display_name": "Akbulut, An exotic 4-manifold",
+        "external_references": [
+          {
+            "citation": "Selman Akbulut, An exotic 4-manifold, Journal of Differential Geometry 33 (1991), 357-361",
+            "kind": "bibliographic-citation",
+            "source": "Yasui email and online bibliography search"
+          }
+        ],
+        "parent_subject_ids": [],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Yasui identifies this as the simplest boundary/knot-trace-style exotic example and says it is written in Gompf-Stipsicz. It is a bibliographic stub until we capture the paper/page anchors directly.",
+        "status": "bibliographic_stub",
+        "subject_id": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7357fc05e0a6b3259cc9fc10823fb05ef6e88e03f0b3cf6fc1e3a56ae03754b6",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:akbulut-jdg-1991-an-exotic-4-manifold",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
+      "logical_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+      "payload": {
+        "aliases": [
+          "akbulut-yasui-0806.3010",
+          "corks-plugs-and-exotic-structures"
+        ],
+        "display_name": "Akbulut-Yasui, Corks, Plugs and exotic structures",
+        "equivalent_external_ids": [
+          "arxiv:0806.3010v3",
+          "doi:10.48550/arxiv.0806.3010"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/0806.3010",
+            "arxiv_id": "0806.3010",
+            "capture_date": "2026-07-11",
+            "kind": "arxiv",
+            "version": "v3",
+            "versioned_id": "0806.3010v3"
+          }
+        ],
+        "journal_reference": "Journal of Gokova Geometry Topology, Volume 2 (2008), 40-82",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Source paper recommended by Yasui for whole handlebody diagrams of exotic rational surfaces. Section 6 / Figure 21 is our primary closed exotic no-one-handle candidate.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:8f5778a29bddb828a7ab1f332a498fce1db0ea3d4a84766d1cd40260da020202",
       "logical_id": "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
       "payload": {
@@ -10882,6 +11665,54 @@
       "revision_kind": "subject:definition"
     },
     {
+      "cid": "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
+      "logical_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+      "payload": {
+        "aliases": [
+          "wakamaki-2307.16454",
+          "wakamaki-cork-b2-9"
+        ],
+        "display_name": "Wakamaki, A cork of the rational surface with the second Betti number 9",
+        "equivalent_external_ids": [
+          "arxiv:2307.16454v3",
+          "doi:10.48550/arxiv.2307.16454",
+          "doi:10.1016/j.topol.2024.109002"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/2307.16454",
+            "arxiv_id": "2307.16454",
+            "capture_date": "2026-07-11",
+            "kind": "arxiv",
+            "version": "v3",
+            "versioned_id": "2307.16454v3"
+          }
+        ],
+        "journal_reference": "Topology and its Applications 354 (2024), 109002",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Paper recommended by Yasui. It gives explicit cork/rational-surface diagrams, including R8, but is secondary for the immediate no-one-handle closed exotic target.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
       "logical_id": "subject:twisted-yetter:paper:yasui-0807-0373",
       "payload": {
@@ -10925,6 +11756,54 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:paper:yasui-0807-0373",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:27d82f4aff90d2448ad76c260e09543da9639c49852066957e007ac1c17b4ae6",
+      "logical_id": "subject:twisted-yetter:paper:yasui-1505-02551",
+      "payload": {
+        "aliases": [
+          "yasui-1505.02551",
+          "yasui-corks-exotic-4-manifolds-knot-concordance"
+        ],
+        "display_name": "Yasui, Corks, exotic 4-manifolds and knot concordance",
+        "equivalent_external_ids": [
+          "arxiv:1505.02551v4",
+          "doi:10.48550/arxiv.1505.02551"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/1505.02551",
+            "arxiv_id": "1505.02551",
+            "capture_date": "2026-07-11",
+            "kind": "arxiv",
+            "version": "v4",
+            "versioned_id": "1505.02551v4"
+          }
+        ],
+        "journal_reference_from_email": "J. Differential Geom. 132 (2026), no. 3, 547-576",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:person:kouichi-yasui",
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Yasui-recommended source for knot-trace and boundary examples. It is relevant if the invariant is extended to 4-manifolds with boundary, not the current closed-only target.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:yasui-1505-02551",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:27d82f4aff90d2448ad76c260e09543da9639c49852066957e007ac1c17b4ae6",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:yasui-1505-02551",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -10980,6 +11859,44 @@
         "revision_kind": "subject:definition"
       },
       "revision_kind": "subject:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:f4dfeb7b5adb557ebf8473f7ec8d90926d02b44695368158b6ced142de8f6f13",
+      "logical_id": "subject:twisted-yetter:person:kouichi-yasui",
+      "payload": {
+        "aliases": [
+          "kouichi-yasui",
+          "yasui"
+        ],
+        "display_name": "Kouichi Yasui",
+        "external_references": [
+          {
+            "kind": "arxiv-author",
+            "locator": "https://arxiv.org/search/math?searchtype=author&query=Yasui,+K"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Person subject for Kouichi Yasui, separated from the broad Yasui-related hub and from individual paper/presentation subjects.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:person:kouichi-yasui",
+        "subject_kind": "ty:person"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:f4dfeb7b5adb557ebf8473f7ec8d90926d02b44695368158b6ced142de8f6f13",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:person:kouichi-yasui",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
     },
     {
       "cid": "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1",
@@ -11098,6 +12015,48 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
+      "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+      "payload": {
+        "aliases": [
+          "akbulut-yasui-figure21-e3prime",
+          "e3prime",
+          "minimal-exotic-cp2-9cpbar-figure21"
+        ],
+        "current_view_hints": {
+          "candidate_status": "PRIMARY_NEXT_TRANSCRIPTION_TARGET",
+          "expected_homeomorphism_type": "CP2#9(-CP2)",
+          "source_anchor": "Akbulut-Yasui 2008, Section 6, Theorem 6.1, Figure 21",
+          "source_claimed_handle_feature": "neither 1- nor 3-handles in that handle decomposition",
+          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#9(-CP2)"
+        },
+        "display_name": "Akbulut-Yasui 2008 Figure 21 E3prime exotic CP2#9(-CP2) presentation",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+          "subject:twisted-yetter:paper:yasui-0807-0373",
+          "subject:twisted-yetter:hub:yasui"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Candidate pure 2-handle Kirby presentation of a closed exotic rational surface. This is currently the cleanest next target because it should not require the special-dotted one-handle evaluator.",
+        "status": "candidate_not_transcribed",
+        "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+        "subject_kind": "ty:kirby-presentation"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:2ddd5c9de028cc647e0a6b7b9d2be63574e3c66f6ebddac7218a07cf272e352f",
       "logical_id": "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
       "payload": {
@@ -11124,6 +12083,84 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:presentation:cp2-2cpbar-split-unlink",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:2f4cdb0831b839cb32b82df418cc1657a3b4427a9ca33568443390cb4834a8d8",
+      "logical_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+      "payload": {
+        "aliases": [
+          "k3-cpbar",
+          "k3-sharp-minus-cp2",
+          "k3-gompf-stipsicz"
+        ],
+        "current_view_hints": {
+          "candidate_status": "FOLLOW_UP_CLOSED_EXOTIC_TARGET",
+          "claimed_relation_from_email": "K3#-CP2 is an exotic copy of 3CP2#-20CP2",
+          "missing_anchor": "Exact Gompf-Stipsicz page/figure has not yet been captured.",
+          "source_anchor": "Yasui email points to the K3 diagram in Gompf-Stipsicz"
+        },
+        "display_name": "K3#-CP2 via Gompf-Stipsicz K3 diagram",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Follow-up closed exotic candidate suggested by Yasui. This may be a good showcase after the smaller Akbulut-Yasui E3prime candidate, but the exact diagram anchor still needs capture.",
+        "status": "candidate_reference_incomplete",
+        "subject_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+        "subject_kind": "ty:kirby-presentation"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:2f4cdb0831b839cb32b82df418cc1657a3b4427a9ca33568443390cb4834a8d8",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
+      "logical_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+      "payload": {
+        "aliases": [
+          "wakamaki-figure19-r8",
+          "r8-exotic-cp2-8cpbar"
+        ],
+        "current_view_hints": {
+          "candidate_status": "SECONDARY_AUDIT_TARGET",
+          "expected_homeomorphism_type": "CP2#8(-CP2)",
+          "handle_caveat": "The text says a slide yields a diagram of R8 where the unique 1-handle can be cancelled; decide whether to use the pre- or post-cancellation diagram.",
+          "source_anchor": "Wakamaki 2024, Theorem 2.10 / Figure 19 / Theorem 2.12",
+          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#8(-CP2)"
+        },
+        "display_name": "Wakamaki 2024 Figure 19 R8 exotic CP2#8(-CP2) presentation",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:paper:wakamaki-2307-16454"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Secondary closed exotic candidate from Wakamaki. It is explicit and useful but less clean than Akbulut-Yasui Figure 21 for immediate no-one-handle evaluator validation.",
+        "status": "candidate_not_transcribed",
+        "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+        "subject_kind": "ty:kirby-presentation"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
+        "created_at": "2026-07-11T15:44:43Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -11379,7 +12416,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-08T19:40:17Z",
+  "generated_at": "2026-07-11T16:08:04Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -11939,8 +12976,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:e33481c72b1c0a783526b2d869686ca7f5231b9f0526d884ab152ce6696b9821",
+  "root_cid": "ctlobj-sha256:8bf0f740fb37720da07c8dbdf762645da74406aade2ec053e82cde2c96d1d288",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:6a732be5c8e68644bc6a89546c707ad3829a2ad9ea65cecf07a60d9e30f01e1b"
+  "transition_cid": "ctlobj-sha256:7305c7436673477d5684f24ecc50252b2e07f07e8dc6dc0a0b33b05d7ec23c43"
 }
