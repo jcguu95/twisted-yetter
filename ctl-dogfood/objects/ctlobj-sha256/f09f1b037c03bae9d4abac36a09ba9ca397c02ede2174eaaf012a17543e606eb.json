@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-07-11T16:24:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
+  "parents": [],
+  "payload": {
+    "claim_boundary": "This note is only a visual inspection and workflow correction. It does not dispute the papers' mathematical claims and does not prove a cleaned Kirby presentation.",
+    "created_at_utc": "2026-07-11T16:24:00Z",
+    "decision_update": "The next usable route is not simply to transcribe Akbulut-Yasui Figure 21 as a pure 2-handle link. First resolve the dotted-component convention/cancellation. Wakamaki R8 is in the same practical class: promising but requires explicit one-handle cancellation work. The standard Wakamaki Figure 31 CP2#8(-CP2) comparison diagram appears visually dot-free, but it is the standard-side check, not the exotic-side target.",
+    "mathematical_status": "VISUAL_INSPECTION_NOT_THEOREM",
+    "note_id": "objective-note-2026-07-11-yasui-visual-dotted-caveat",
+    "question": "Do Yasui's recommended closed exotic handlebody candidates already give machine-ready Kirby diagrams without special dotted one-handle components?",
+    "recommended_next_actions": [
+      "Ask a Kirby-calculus expert or Yasui whether the dotted component in Akbulut-Yasui Figure 21 is meant as an immediately cancellable 1-handle or some convention in a no-1-handle statement.",
+      "If using Wakamaki R8, follow the paper's local Figure 20-21 moves and explicitly derive the post-cancellation diagram before evaluator transcription.",
+      "Do not run the current pure 2-handle evaluator on these drawn diagrams until the dotted component has been eliminated or the special-dotted evaluator is implemented."
+    ],
+    "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+    "source_context": {
+      "email_capture": "claim:source-capture:yasui-email-2026-07-11",
+      "previous_triage_note": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+    },
+    "status": "VISUAL_AUDIT_CAVEAT",
+    "title": "Visual dotted-component caveat for Yasui correspondence candidates",
+    "visual_checks": [
+      {
+        "current_interpretation": "Do not treat this as a machine-ready pure 2-handle diagram. The dotted component must be explained by a convention, an immediate cancellation, or a diagrammatic shorthand before evaluator transcription.",
+        "observation": "Figure 21 visibly contains one black dotted component on the outer top curve.",
+        "rendered_page": "/private/tmp/yasui-visual-check/ay-fig21-pages-21.png",
+        "source_anchor": "Akbulut-Yasui 2008, Section 6, Theorem 6.1, Figure 21",
+        "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+        "textual_tension": "The preceding theorem states that it is clear from Figure 21 that the minimal 4-manifold has neither 1- nor 3-handles in that handle decomposition."
+      },
+      {
+        "current_interpretation": "This is explicitly not a ready no-one-handle diagram; it is a usable route only after performing the described Kirby moves/cancellation.",
+        "observation": "Figure 19 and Figure 22 visibly contain a dotted component.",
+        "rendered_pages": [
+          "/private/tmp/yasui-visual-check/wakamaki-pages-13-17-14.png",
+          "/private/tmp/yasui-visual-check/wakamaki-pages-18-19-18.png"
+        ],
+        "source_anchor": "Wakamaki 2024, Figure 19 and Figure 22",
+        "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+        "textual_support": "The text after Figure 18 says that sliding a -1-framed unknot over a 0-framed unknot in Figure 19 gives a diagram of R8 where the unique 1-handle can be cancelled."
+      },
+      {
+        "current_interpretation": "Keep as an incomplete-anchor follow-up, not as evidence of a no-dotted-component ready input.",
+        "observation": "Not visually checked in this audit because the exact book page/figure is not yet captured in the repo.",
+        "source_anchor": "Yasui email points to the K3 diagram in Gompf-Stipsicz",
+        "subject_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+      }
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

@@ -3,7 +3,7 @@
   "note_id": "objective-note-2026-07-11-yasui-correspondence-candidate-triage",
   "title": "Yasui correspondence and first closed exotic handlebody candidates",
   "created_at_utc": "2026-07-11T15:44:43Z",
-  "status": "SOURCE_GUIDANCE_TRIAGE",
+  "status": "SOURCE_GUIDANCE_TRIAGE_WITH_VISUAL_CAVEAT",
   "mathematical_status": "CANDIDATE_PRIORITIZATION_NOT_THEOREM",
   "source_capture": {
     "logical_id": "claim:source-capture:yasui-email-2026-07-11",
@@ -30,7 +30,7 @@
       "candidate_presentations": [
         "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
       ],
-      "priority": "PRIMARY_CLOSED_NO_ONE_HANDLE_CANDIDATE"
+      "priority": "PRIMARY_CLOSED_EXOTIC_CANDIDATE_NEEDS_DOTTED_COMPONENT_AUDIT"
     },
     {
       "subject_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
@@ -47,7 +47,7 @@
       "candidate_presentations": [
         "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
       ],
-      "priority": "SECONDARY_AUDIT_CANDIDATE"
+      "priority": "SECONDARY_AUDIT_CANDIDATE_NEEDS_ONE_HANDLE_CANCELLATION"
     },
     {
       "subject_id": "subject:twisted-yetter:paper:yasui-1505-02551",
@@ -82,7 +82,7 @@
       "It is closed and simply connected.",
       "The source states it is homeomorphic but not diffeomorphic to CP2#9(-CP2).",
       "The source states Figure 21 has neither 1- nor 3-handles in that handle decomposition.",
-      "Therefore it fits the evaluator path we already trust best: a pure 2-handle Kirby presentation, no special-dotted one-handle evaluator needed."
+      "However, a 2026-07-11 visual render of Figure 21 shows one black dotted component. Therefore it is not yet a machine-ready pure 2-handle input; the dotted component must be explained or cancelled first."
     ],
     "source_anchors": [
       "Akbulut-Yasui 2008, Section 6.",
@@ -90,7 +90,8 @@
       "Akbulut-Yasui 2008, Figure 21."
     ],
     "next_steps": [
-      "Extract or manually transcribe Figure 21 as a machine-readable Kirby/link input.",
+      "Resolve the dotted-component convention/cancellation in Figure 21 before transcription.",
+      "Only then extract or manually transcribe the cleaned Figure 21 as a machine-readable Kirby/link input.",
       "Check linking matrix, rank, signature, Euler characteristic, and expected homeomorphism type CP2#9(-CP2).",
       "Run untwisted Crane-Yetter sanity checks against the standard CP2#9(-CP2) diagonal presentation.",
       "Only after untwisted checks pass, run twisted character scans in SU(3)_2 and D(Dic_12)."
@@ -107,13 +108,14 @@
     },
     {
       "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
-      "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. This is useful for Kirby-calculus practice, less clean than E3prime for immediate evaluator validation.",
+      "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. A 2026-07-11 visual audit confirms that Figure 19 and Figure 22 contain a dotted component. This is useful for Kirby-calculus practice, but not a direct no-dotted-component evaluator input.",
       "next_steps": [
         "Inspect Figure 19 and the cancellation move described after Figure 18.",
         "Decide whether to transcribe the pre-cancellation or post-cancellation diagram."
       ]
     }
   ],
-  "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next closed exotic, no-one-handle candidate. Keep Wakamaki 2024 and K3#-CP2 as follow-up routes. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
+  "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next literature candidate, but no longer treat the drawn figure as a ready no-dotted-component pure 2-handle input. A visual audit found one dotted component, despite the paper's no-1/3-handle statement, so the next step is a Kirby-convention/cancellation audit. Keep Wakamaki 2024 as a follow-up route that explicitly requires one-handle cancellation. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
+  "visual_caveat_note": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
   "claim_boundary": "This note records source guidance and candidate triage. It does not assert that the transcription is done, that the twisted invariant separates the exotic pair, or that any diagram has already been verified by our evaluator."
 }

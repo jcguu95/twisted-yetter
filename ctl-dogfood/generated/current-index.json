@@ -6708,12 +6708,12 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960",
+      "cid": "ctlobj-sha256:10bde437b4e87170de6262f12341053f9d76871795b616542dd5a7520398bc4f",
       "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
       "payload": {
         "claim_boundary": "This note records source guidance and candidate triage. It does not assert that the transcription is done, that the twisted invariant separates the exotic pair, or that any diagram has already been verified by our evaluator.",
         "created_at_utc": "2026-07-11T15:44:43Z",
-        "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next closed exotic, no-one-handle candidate. Keep Wakamaki 2024 and K3#-CP2 as follow-up routes. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
+        "decision": "Use Akbulut-Yasui 2008 Figure 21 / E3prime as the next literature candidate, but no longer treat the drawn figure as a ready no-dotted-component pure 2-handle input. A visual audit found one dotted component, despite the paper's no-1/3-handle statement, so the next step is a Kirby-convention/cancellation audit. Keep Wakamaki 2024 as a follow-up route that explicitly requires one-handle cancellation. Defer knot-trace examples until a boundary invariant or boundary-compatible evaluator is part of scope.",
         "mathematical_status": "CANDIDATE_PRIORITIZATION_NOT_THEOREM",
         "note_id": "objective-note-2026-07-11-yasui-correspondence-candidate-triage",
         "paper_triage": [
@@ -6729,7 +6729,7 @@
               "journal_reference": "Journal of Gokova Geometry Topology, Volume 2 (2008) 40-82",
               "tmp_pdf_sha256": "48626a2c0b8522660af8de4c692257110d1f020f084ce62d5efa80aa2a5fe741"
             },
-            "priority": "PRIMARY_CLOSED_NO_ONE_HANDLE_CANDIDATE",
+            "priority": "PRIMARY_CLOSED_EXOTIC_CANDIDATE_NEEDS_DOTTED_COMPONENT_AUDIT",
             "relevance": "Whole handlebody diagrams for exotic rational surfaces; Section 6 draws a whole diagram of the exotic CP2#9(-CP2) E3prime.",
             "subject_id": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010"
           },
@@ -6746,7 +6746,7 @@
               "related_doi": "10.1016/j.topol.2024.109002",
               "tmp_pdf_sha256": "e5fb2e636a17d772dbd1c19376083d7e8b0873f583d1de1ef8e109e9f2620001"
             },
-            "priority": "SECONDARY_AUDIT_CANDIDATE",
+            "priority": "SECONDARY_AUDIT_CANDIDATE_NEEDS_ONE_HANDLE_CANCELLATION",
             "relevance": "Provides explicit diagrams for a cork in CP2#8(-CP2) and an exotic rational surface R8, but the first visible route includes a unique 1-handle that can be cancelled after slides.",
             "subject_id": "subject:twisted-yetter:paper:wakamaki-2307-16454"
           },
@@ -6779,7 +6779,8 @@
         ],
         "primary_candidate": {
           "next_steps": [
-            "Extract or manually transcribe Figure 21 as a machine-readable Kirby/link input.",
+            "Resolve the dotted-component convention/cancellation in Figure 21 before transcription.",
+            "Only then extract or manually transcribe the cleaned Figure 21 as a machine-readable Kirby/link input.",
             "Check linking matrix, rank, signature, Euler characteristic, and expected homeomorphism type CP2#9(-CP2).",
             "Run untwisted Crane-Yetter sanity checks against the standard CP2#9(-CP2) diagonal presentation.",
             "Only after untwisted checks pass, run twisted character scans in SU(3)_2 and D(Dic_12)."
@@ -6794,7 +6795,7 @@
             "It is closed and simply connected.",
             "The source states it is homeomorphic but not diffeomorphic to CP2#9(-CP2).",
             "The source states Figure 21 has neither 1- nor 3-handles in that handle decomposition.",
-            "Therefore it fits the evaluator path we already trust best: a pure 2-handle Kirby presentation, no special-dotted one-handle evaluator needed."
+            "However, a 2026-07-11 visual render of Figure 21 shows one black dotted component. Therefore it is not yet a machine-ready pure 2-handle input; the dotted component must be explained or cancelled first."
           ]
         },
         "project_context": {
@@ -6818,7 +6819,7 @@
               "Decide whether to transcribe the pre-cancellation or post-cancellation diagram."
             ],
             "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
-            "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. This is useful for Kirby-calculus practice, less clean than E3prime for immediate evaluator validation."
+            "why_secondary": "Wakamaki gives a closed exotic rational surface R8 and later a cork diagram, but the visible route mentions a unique 1-handle that can be cancelled after slides. A 2026-07-11 visual audit confirms that Figure 19 and Figure 22 contain a dotted component. This is useful for Kirby-calculus practice, but not a direct no-dotted-component evaluator input."
           }
         ],
         "source_capture": {
@@ -6826,17 +6827,84 @@
           "path": "ctl-dogfood/resources/yasui-email-2026-07-11-source-capture.json",
           "summary": "Kouichi Yasui replied with references for whole handlebody diagrams of exotic rational surfaces, suggested knot traces if boundary invariants are allowed, and suggested K3#-CP2 as a small closed exotic example."
         },
-        "status": "SOURCE_GUIDANCE_TRIAGE",
-        "title": "Yasui correspondence and first closed exotic handlebody candidates"
+        "status": "SOURCE_GUIDANCE_TRIAGE_WITH_VISUAL_CAVEAT",
+        "title": "Yasui correspondence and first closed exotic handlebody candidates",
+        "visual_caveat_note": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat"
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960",
-        "created_at": "2026-07-11T15:44:43Z",
+        "cid": "ctlobj-sha256:10bde437b4e87170de6262f12341053f9d76871795b616542dd5a7520398bc4f",
+        "created_at": "2026-07-11T16:24:00Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+        "parents": [
+          "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960"
+        ],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:f09f1b037c03bae9d4abac36a09ba9ca397c02ede2174eaaf012a17543e606eb",
+      "logical_id": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
+      "payload": {
+        "claim_boundary": "This note is only a visual inspection and workflow correction. It does not dispute the papers' mathematical claims and does not prove a cleaned Kirby presentation.",
+        "created_at_utc": "2026-07-11T16:24:00Z",
+        "decision_update": "The next usable route is not simply to transcribe Akbulut-Yasui Figure 21 as a pure 2-handle link. First resolve the dotted-component convention/cancellation. Wakamaki R8 is in the same practical class: promising but requires explicit one-handle cancellation work. The standard Wakamaki Figure 31 CP2#8(-CP2) comparison diagram appears visually dot-free, but it is the standard-side check, not the exotic-side target.",
+        "mathematical_status": "VISUAL_INSPECTION_NOT_THEOREM",
+        "note_id": "objective-note-2026-07-11-yasui-visual-dotted-caveat",
+        "question": "Do Yasui's recommended closed exotic handlebody candidates already give machine-ready Kirby diagrams without special dotted one-handle components?",
+        "recommended_next_actions": [
+          "Ask a Kirby-calculus expert or Yasui whether the dotted component in Akbulut-Yasui Figure 21 is meant as an immediately cancellable 1-handle or some convention in a no-1-handle statement.",
+          "If using Wakamaki R8, follow the paper's local Figure 20-21 moves and explicitly derive the post-cancellation diagram before evaluator transcription.",
+          "Do not run the current pure 2-handle evaluator on these drawn diagrams until the dotted component has been eliminated or the special-dotted evaluator is implemented."
+        ],
+        "schema": "twisted-yetter.ctl-lab-note-preimage.v1",
+        "source_context": {
+          "email_capture": "claim:source-capture:yasui-email-2026-07-11",
+          "previous_triage_note": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+        },
+        "status": "VISUAL_AUDIT_CAVEAT",
+        "title": "Visual dotted-component caveat for Yasui correspondence candidates",
+        "visual_checks": [
+          {
+            "current_interpretation": "Do not treat this as a machine-ready pure 2-handle diagram. The dotted component must be explained by a convention, an immediate cancellation, or a diagrammatic shorthand before evaluator transcription.",
+            "observation": "Figure 21 visibly contains one black dotted component on the outer top curve.",
+            "rendered_page": "/private/tmp/yasui-visual-check/ay-fig21-pages-21.png",
+            "source_anchor": "Akbulut-Yasui 2008, Section 6, Theorem 6.1, Figure 21",
+            "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+            "textual_tension": "The preceding theorem states that it is clear from Figure 21 that the minimal 4-manifold has neither 1- nor 3-handles in that handle decomposition."
+          },
+          {
+            "current_interpretation": "This is explicitly not a ready no-one-handle diagram; it is a usable route only after performing the described Kirby moves/cancellation.",
+            "observation": "Figure 19 and Figure 22 visibly contain a dotted component.",
+            "rendered_pages": [
+              "/private/tmp/yasui-visual-check/wakamaki-pages-13-17-14.png",
+              "/private/tmp/yasui-visual-check/wakamaki-pages-18-19-18.png"
+            ],
+            "source_anchor": "Wakamaki 2024, Figure 19 and Figure 22",
+            "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
+            "textual_support": "The text after Figure 18 says that sliding a -1-framed unknot over a 0-framed unknot in Figure 19 gives a diagram of R8 where the unique 1-handle can be cancelled."
+          },
+          {
+            "current_interpretation": "Keep as an incomplete-anchor follow-up, not as evidence of a no-dotted-component ready input.",
+            "observation": "Not visually checked in this audit because the exact book page/figure is not yet captured in the repo.",
+            "source_anchor": "Yasui email points to the K3 diagram in Gompf-Stipsicz",
+            "subject_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+          }
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:f09f1b037c03bae9d4abac36a09ba9ca397c02ede2174eaaf012a17543e606eb",
+        "created_at": "2026-07-11T16:24:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7712,6 +7780,84 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-11-triage:uses:yasui-email",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:baebde2a674098a6f5d3014c2661f24d125b74c955ca13c5fdec49d7c35db8f6",
+      "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:e3prime-figure21",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:e3prime-figure21",
+        "explanation": "The visual caveat records that Akbulut-Yasui Figure 21 visibly has one dotted component despite the paper's no-1/3-handle statement.",
+        "role": "about",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:baebde2a674098a6f5d3014c2661f24d125b74c955ca13c5fdec49d7c35db8f6",
+        "created_at": "2026-07-11T16:24:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:e3prime-figure21",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
+      "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:wakamaki-r8",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:wakamaki-r8",
+        "explanation": "The visual caveat records that Wakamaki Figure 19 and Figure 22 visibly have a dotted component and require the paper's cancellation route before no-dotted-component evaluation.",
+        "role": "about",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
+        "created_at": "2026-07-11T16:24:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:about:wakamaki-r8",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
+      "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
+        "explanation": "The visual caveat updates the earlier triage note: Akbulut-Yasui Figure 21 is a priority literature target but not yet a machine-ready no-dotted-component input.",
+        "role": "corrects",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-11-yasui-visual-dotted-caveat",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
+        "created_at": "2026-07-11T16:24:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -12015,7 +12161,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
+      "cid": "ctlobj-sha256:f2d9436e7b76429024c8ed8d7dcdec9a3c6646a76075e84d1e24cb5a06658070",
       "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
       "payload": {
         "aliases": [
@@ -12024,11 +12170,16 @@
           "minimal-exotic-cp2-9cpbar-figure21"
         ],
         "current_view_hints": {
-          "candidate_status": "PRIMARY_NEXT_TRANSCRIPTION_TARGET",
+          "candidate_status": "PRIMARY_LITERATURE_TARGET_NEEDS_DOTTED_COMPONENT_AUDIT",
           "expected_homeomorphism_type": "CP2#9(-CP2)",
           "source_anchor": "Akbulut-Yasui 2008, Section 6, Theorem 6.1, Figure 21",
           "source_claimed_handle_feature": "neither 1- nor 3-handles in that handle decomposition",
-          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#9(-CP2)"
+          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#9(-CP2)",
+          "visual_check_2026_07_11": {
+            "observation": "One black dotted component is visible on the outer top curve of Figure 21.",
+            "rendered_page": "/private/tmp/yasui-visual-check/ay-fig21-pages-21.png",
+            "workflow_consequence": "Do not treat the drawn Figure 21 as a machine-ready pure 2-handle input until the dotted component convention or cancellation is resolved."
+          }
         },
         "display_name": "Akbulut-Yasui 2008 Figure 21 E3prime exotic CP2#9(-CP2) presentation",
         "parent_subject_ids": [
@@ -12037,20 +12188,22 @@
           "subject:twisted-yetter:hub:yasui"
         ],
         "schema": "twisted-yetter/subject-definition/0",
-        "scope_note": "Candidate pure 2-handle Kirby presentation of a closed exotic rational surface. This is currently the cleanest next target because it should not require the special-dotted one-handle evaluator.",
-        "status": "candidate_not_transcribed",
+        "scope_note": "Candidate closed exotic rational-surface presentation. The source states that Figure 21 has neither 1- nor 3-handles, but a 2026-07-11 visual audit sees one dotted component in the drawn figure. Treat it as a priority Kirby-calculus audit target, not yet as a cleaned pure 2-handle evaluator input.",
+        "status": "candidate_needs_dotted_component_convention_audit",
         "subject_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
         "subject_kind": "ty:kirby-presentation"
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
-        "created_at": "2026-07-11T15:44:43Z",
+        "cid": "ctlobj-sha256:f2d9436e7b76429024c8ed8d7dcdec9a3c6646a76075e84d1e24cb5a06658070",
+        "created_at": "2026-07-11T16:24:00Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
       },
@@ -12129,7 +12282,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
+      "cid": "ctlobj-sha256:cbed4b6bdca02afbb22f46ec914b22af4696b6926455a694e985902959a11056",
       "logical_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
       "payload": {
         "aliases": [
@@ -12141,7 +12294,15 @@
           "expected_homeomorphism_type": "CP2#8(-CP2)",
           "handle_caveat": "The text says a slide yields a diagram of R8 where the unique 1-handle can be cancelled; decide whether to use the pre- or post-cancellation diagram.",
           "source_anchor": "Wakamaki 2024, Theorem 2.10 / Figure 19 / Theorem 2.12",
-          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#8(-CP2)"
+          "source_claimed_smooth_status": "homeomorphic but not diffeomorphic to CP2#8(-CP2)",
+          "visual_check_2026_07_11": {
+            "observation": "Figure 19 and Figure 22 visibly contain a dotted component.",
+            "rendered_pages": [
+              "/private/tmp/yasui-visual-check/wakamaki-pages-13-17-14.png",
+              "/private/tmp/yasui-visual-check/wakamaki-pages-18-19-18.png"
+            ],
+            "workflow_consequence": "This is not a ready no-dotted-component evaluator input; derive the post-cancellation diagram first."
+          }
         },
         "display_name": "Wakamaki 2024 Figure 19 R8 exotic CP2#8(-CP2) presentation",
         "parent_subject_ids": [
@@ -12149,19 +12310,21 @@
         ],
         "schema": "twisted-yetter/subject-definition/0",
         "scope_note": "Secondary closed exotic candidate from Wakamaki. It is explicit and useful but less clean than Akbulut-Yasui Figure 21 for immediate no-one-handle evaluator validation.",
-        "status": "candidate_not_transcribed",
+        "status": "candidate_requires_one_handle_cancellation_audit",
         "subject_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
         "subject_kind": "ty:kirby-presentation"
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
-        "created_at": "2026-07-11T15:44:43Z",
+        "cid": "ctlobj-sha256:cbed4b6bdca02afbb22f46ec914b22af4696b6926455a694e985902959a11056",
+        "created_at": "2026-07-11T16:24:00Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:presentation:wakamaki-2024-figure19-r8",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
       },
@@ -12416,7 +12579,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-11T16:08:04Z",
+  "generated_at": "2026-07-11T16:30:07Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -12976,8 +13139,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:8bf0f740fb37720da07c8dbdf762645da74406aade2ec053e82cde2c96d1d288",
+  "root_cid": "ctlobj-sha256:0cbfd1a4058622ecd838008ba4ac06a0d606a5db78686c5af405f4a841a30355",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:7305c7436673477d5684f24ecc50252b2e07f07e8dc6dc0a0b33b05d7ec23c43"
+  "transition_cid": "ctlobj-sha256:77e17e0b91188f74f93b931dd13772b0b62baa2ddd34b256bbe9d0f36e756809"
 }

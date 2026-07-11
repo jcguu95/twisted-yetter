@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:3038affaf1e5dc1ac5ac00c0f259ca8756e08a172ba071d2011612a03142c128",
+  "generated_at": "2026-07-11T16:24:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:3038affaf1e5dc1ac5ac00c0f259ca8756e08a172ba071d2011612a03142c128",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:10bde437b4e87170de6262f12341053f9d76871795b616542dd5a7520398bc4f",
+    "transition": "ctlobj-sha256:1c5dfaba759232815fbf4f20536c9d4250491edb41785e05fbf8b3e1465a6464"
+  },
+  "parent_root_cid": "ctlobj-sha256:3f7719f0853b0036e3672a35db62edd7d9d1e41b1f213383a4b9a7d0dc39bb19",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-11-yasui-correspondence-candidate-triage.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:lab-note:2026-07-11-yasui-correspondence-candidate-triage --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload lab-notes/2026-07-11-yasui-correspondence-candidate-triage.json --manifest manifests/lab-note-2026-07-11-yasui-correspondence-candidate-triage-v2.json --created-at 2026-07-11T16:24:00Z --admitted-at 2026-07-11T16:24:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9dad2d677debfe2b460cee6e2b614cd17b81efc8"
+}

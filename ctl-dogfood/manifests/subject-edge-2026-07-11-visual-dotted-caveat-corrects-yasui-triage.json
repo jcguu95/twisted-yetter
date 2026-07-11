@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "337ae56ed5b9afbf08b2d2109afb66c25041a665",
+  "current_root_cid": "ctlobj-sha256:5629226e44bc8fe8745b17c6b31bbbb60d3f13dcab1f71c2750f1805590562fe",
+  "generated_at": "2026-07-11T16:24:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:5629226e44bc8fe8745b17c6b31bbbb60d3f13dcab1f71c2750f1805590562fe",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
+    "transition": "ctlobj-sha256:635bb861cbbab94f15e8b97984c2b561cea070b45a1498601b576ec2641ad81b"
+  },
+  "parent_root_cid": "ctlobj-sha256:7e12a546006807592a29876ebb7d438ed641221e7fb856a1317ecf679be1d604",
+  "payload_file": "ctl-dogfood/subject-layer/edges/visual-dotted-caveat-corrects-yasui-triage.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/visual-dotted-caveat-corrects-yasui-triage.json --manifest manifests/subject-edge-2026-07-11-visual-dotted-caveat-corrects-yasui-triage.json --created-at 2026-07-11T16:24:00Z --admitted-at 2026-07-11T16:24:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "9dad2d677debfe2b460cee6e2b614cd17b81efc8"
+}
