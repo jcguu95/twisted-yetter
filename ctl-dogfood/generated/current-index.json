@@ -6912,6 +6912,176 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
+      "logical_id": "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+      "payload": {
+        "claim_boundary": {
+          "established": "The recorded E(1) draft passes component, determinant, signature, complete-sector coverage, and SU(2)_2 agreement against two independent E(1) presentations; the E(2) draft passes only the recorded link-level checks.",
+          "not_claimed": [
+            "A proof-level identification of either hand transcription with every detail of the printed Figure 8.15 diagram.",
+            "An E(2) Crane-Yetter evaluation.",
+            "Validation beyond the explicitly recorded SU(2)_2 E(1) comparison."
+          ]
+        },
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": "actor:codex",
+        "evidence": {
+          "e1_link_sanity": {
+            "component_count": 10,
+            "determinant": -1,
+            "path": "experiments/results/gompf-stipsicz/figure815-e1-morse-link-sanity-v1.json",
+            "signature": -8,
+            "status": "pass"
+          },
+          "e1_su2_2": {
+            "comparison_presentations": [
+              "standard CP2#9(-CP2) split presentation",
+              "Akbulut Figure 1 E(1) presentation"
+            ],
+            "coverage": "complete",
+            "expected": "-1024+0j",
+            "path": "experiments/results/gompf-stipsicz/figure815-e1-su2-2-b-minus1-direct-aggregate-v1.json",
+            "sector_count": 59049,
+            "status": "pass",
+            "value": "-1023.9999999999999+2.4069635173873394e-13j"
+          },
+          "e2_link_sanity": {
+            "component_count": 22,
+            "determinant": -1,
+            "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-morse-link-sanity-v1.json",
+            "signature": -16,
+            "status": "pass"
+          }
+        },
+        "inputs": {
+          "e1": {
+            "framings": "B=-1; every L_i/R_i=-2; A total framing is 0 after the recorded visible-writhe correction",
+            "git_blob": "537f4ebfb65e75d9975235e71396eabedd80e46e",
+            "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+            "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128"
+          },
+          "e2": {
+            "framings": "B=-2; every L_i/R_i=-2; A total framing is 0 after the recorded visible-writhe correction",
+            "path": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+            "sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21"
+          }
+        },
+        "mathematical_status": "E1_NUMERIC_SU2_2_AND_LINK_SANITY_E2_LINK_SANITY_ONLY",
+        "note_id": "objective-note-2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "source": {
+          "identity_scope": "E(n) special cases n=1 and n=2",
+          "locator": "printed page 305, PDF page 322, Figure 8.15",
+          "subject_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus"
+        },
+        "source_checkpoint": {
+          "dirty_scope": "Untracked later-step calibration files were present but excluded from this checkpoint.",
+          "git_commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+          "git_dirty": true
+        },
+        "status": "E1_ESTABLISHED_NUMERIC_SU2_2_E2_LINK_SANITY_TRANSCRIPTIONS_REMAIN_DRAFT",
+        "title": "Figure 8.15 E(1)/E(2) draft Morse checkpoint",
+        "top_notice": "These are draft transcriptions of the n=1 and n=2 special cases of Gompf-Stipsicz Figure 8.15. E(1) has link-level checks and a complete SU(2)_2 comparison; E(2) has link-level checks only. Neither identity is claimed at proof level."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
+      "logical_id": "claim:resource-handle:figure815-e1-morse-input",
+      "payload": {
+        "kind": "input",
+        "lookup_keys": [
+          "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+          "figure815-e1-morse-draft-v1.json",
+          "gompf-stipsicz-figure815-e1-morse-input"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure815-e1-morse-input",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96",
+      "logical_id": "claim:resource-handle:figure815-e2-morse-input",
+      "payload": {
+        "kind": "input",
+        "lookup_keys": [
+          "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+          "figure815-k3-e2-morse-draft-v1.json",
+          "gompf-stipsicz-figure815-e2-morse-input"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure815-e2-morse-input",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
+      "logical_id": "claim:resource-handle:native-morse-fusion-evaluator",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/morse_fusion_evaluator.py",
+          "morse_fusion_evaluator.py",
+          "native-morse-fusion-evaluator"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:native-morse-fusion-evaluator",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
       "logical_id": "claim:resource-handle:su2-2-braid-oracle",
       "payload": {
@@ -7019,6 +7189,122 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-handle:su3-2-anyonwiki-fr-braid-evaluator",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
+      "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing the recorded SU(2)_2 E(1) checkpoint",
+          "link-level sanity checks with the exact snapshot hash",
+          "further experiments that preserve the draft status"
+        ],
+        "status": "caution",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft"
+        },
+        "top_notice": "DRAFT INPUT: use only sha256 a592144b at commit d0bfff5, with B=-1 and every L_i/R_i=-2. It passes the recorded link checks and complete SU(2)_2 E(1) comparison, but printed-diagram identity remains below proof level.",
+        "unsafe_scopes": [
+          "proof-level identification with the printed Figure 8.15 diagram",
+          "using an unrecorded framing variant",
+          "promoting this input to established presentation data without further checks"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
+      "logical_id": "claim:resource-safety:figure815-e2-morse-input-caution",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing the recorded E(2) link-level sanity checks",
+          "further experiments that preserve the draft status"
+        ],
+        "status": "caution",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft"
+        },
+        "top_notice": "DRAFT INPUT: use only sha256 67bfb4f3 at commit d0bfff5, with B=-2 and every L_i/R_i=-2. It passes component, determinant, and signature checks only; no E(2) Crane-Yetter evaluation is recorded.",
+        "unsafe_scopes": [
+          "claiming an E(2) Crane-Yetter evaluation",
+          "proof-level identification with the printed Figure 8.15 diagram",
+          "promoting this input to established presentation data without further checks"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure815-e2-morse-input-caution",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
+      "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing the recorded SU(2)_2 E(1) controls",
+          "small tests checked against an independent evaluator",
+          "new experiments explicitly marked as needing validation"
+        ],
+        "status": "caution",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+        },
+        "top_notice": "LIMITED VALIDATION: this snapshot is supported here only by the recorded SU(2)_2 standard, Akbulut, and Figure 8.15 E(1) controls. Treat every broader use as a new validation task.",
+        "unsafe_scopes": [
+          "claiming category-independent validation",
+          "large uncalibrated runs used as standalone mathematical evidence",
+          "theorem-level conclusions without independent controls"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7172,6 +7458,87 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+      "logical_id": "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
+      "payload": {
+        "captured_at": "2026-07-12T20:59:19Z",
+        "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+        "git_blob": "537f4ebfb65e75d9975235e71396eabedd80e46e",
+        "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+        "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "snapshot_id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
+      "logical_id": "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+      "payload": {
+        "captured_at": "2026-07-12T20:59:19Z",
+        "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+        "git_blob": "8aa7f2e11c2d90f61a1f94322d644d9657480e85",
+        "path": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+        "sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21",
+        "snapshot_id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
+      "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
+      "payload": {
+        "captured_at": "2026-07-12T20:59:19Z",
+        "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+        "git_blob": "6b86687dae72906c029bde17a9f69cccd0e1ead9",
+        "path": "experiments/sage/morse_fusion_evaluator.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+        "sha256": "3b7920d48d8a435b223e48fcba8cc7277e2ebcde0ae2ab0e06e27fe1bcb130c5",
+        "snapshot_id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -8361,6 +8728,32 @@
       "revision_kind": "subject-edge:definition"
     },
     {
+      "cid": "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
+      "logical_id": "subject-edge:ty:gompf-stipsicz:contains:figure815-morse-draft",
+      "payload": {
+        "edge_id": "subject-edge:ty:gompf-stipsicz:contains:figure815-morse-draft",
+        "explanation": "The draft workflow is anchored to the n=1 and n=2 special cases of Gompf-Stipsicz Figure 8.15, without claiming proof-level transcription identity.",
+        "role": "source-anchor",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:gompf-stipsicz:contains:figure815-morse-draft",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
       "cid": "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
       "logical_id": "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route",
       "payload": {
@@ -8380,6 +8773,32 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
+      "logical_id": "subject-edge:ty:k3-cpbar-route:related-to:figure815-morse-draft",
+      "payload": {
+        "edge_id": "subject-edge:ty:k3-cpbar-route:related-to:figure815-morse-draft",
+        "explanation": "The K3/Gompf-Stipsicz route is related to the Figure 8.15 E(2) draft workflow; this edge is not a verification claim.",
+        "role": "related-draft-workflow",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:k3-cpbar-route:related-to:figure815-morse-draft",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -12243,6 +12662,52 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
+      "logical_id": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
+      "payload": {
+        "aliases": [
+          "figure815-morse-draft",
+          "gompf-stipsicz-figure815-en-special-cases",
+          "gs-figure815-morse-draft"
+        ],
+        "current_view_hints": {
+          "e1_framings": "B=-1; every L_i/R_i=-2",
+          "e1_input": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+          "e1_input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+          "e1_su2_2_value": "-1024 within 2.7e-13",
+          "e2_framings": "B=-2; every L_i/R_i=-2",
+          "e2_input": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+          "e2_input_sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21",
+          "primary_lab_note": "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+          "source_commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3"
+        },
+        "display_name": "Draft Morse transcriptions for Gompf-Stipsicz Figure 8.15 E(n), n=1,2",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
+          "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "E(1) has strong link-level and SU(2)_2 numerical evidence. E(2) has link-level sanity checks only. Neither is a proof-level printed-diagram identification.",
+        "status": "E1_SU2_2_NUMERIC_CHECKPOINT_E2_LINK_SANITY_TRANSCRIPTIONS_REMAIN_DRAFT",
+        "subject_id": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
+        "subject_kind": "ty:morse-transcription-workflow",
+        "top_notice": "Use the E(1) input with B=-1 and the E(2) input with B=-2. Both remain draft transcriptions; only E(1) has the recorded complete SU(2)_2 comparison."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
+        "created_at": "2026-07-12T20:59:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:2f4cdb0831b839cb32b82df418cc1657a3b4427a9ca33568443390cb4834a8d8",
       "logical_id": "subject:twisted-yetter:presentation:k3-sharp-cpbar-gompf-stipsicz",
       "payload": {
@@ -12579,16 +13044,25 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-11T16:30:07Z",
+  "generated_at": "2026-07-12T20:59:19Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
     "by_git_blob": {
+      "537f4ebfb65e75d9975235e71396eabedd80e46e": [
+        "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
+      ],
       "5d46af2f889acd153a27042d0db988aaf631aa4d": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
       ],
+      "6b86687dae72906c029bde17a9f69cccd0e1ead9": [
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+      ],
       "78a656caa9b5c0e8a18617b1edcefe5a3c0f7142": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
+      ],
+      "8aa7f2e11c2d90f61a1f94322d644d9657480e85": [
+        "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
       "c96f6ecbfa34c8f1cc3340e12f38891818807fbf": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
@@ -12604,6 +13078,15 @@
       "ctl-dogfood/lab-notes/2026-07-08-su2-2-braid-oracle-bug-audit.json": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
       ],
+      "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json": [
+        "resource:twisted-yetter:input:figure815-e1-morse-draft"
+      ],
+      "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
+        "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      ],
+      "experiments/sage/morse_fusion_evaluator.py": [
+        "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+      ],
       "experiments/sage/su2_2_braid_oracle.sage.py": [
         "resource:twisted-yetter:script:su2-2-braid-oracle"
       ],
@@ -12613,14 +13096,41 @@
       "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
         "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
       ],
+      "figure815-e1-morse-draft-v1.json": [
+        "resource:twisted-yetter:input:figure815-e1-morse-draft"
+      ],
+      "figure815-k3-e2-morse-draft-v1.json": [
+        "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      ],
       "general-su2-k-fusion-braid-evaluator": [
         "resource:twisted-yetter:script:su2k-fusion-braid-evaluator"
+      ],
+      "gompf-stipsicz-figure815-e1-morse-input": [
+        "resource:twisted-yetter:input:figure815-e1-morse-draft"
+      ],
+      "gompf-stipsicz-figure815-e2-morse-input": [
+        "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      ],
+      "morse_fusion_evaluator.py": [
+        "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+      ],
+      "native-morse-fusion-evaluator": [
+        "resource:twisted-yetter:script:native-morse-fusion-evaluator"
       ],
       "old-specialized-su2-2-braid-oracle": [
         "resource:twisted-yetter:script:su2-2-braid-oracle"
       ],
+      "resource:twisted-yetter:input:figure815-e1-morse-draft": [
+        "resource:twisted-yetter:input:figure815-e1-morse-draft"
+      ],
+      "resource:twisted-yetter:input:figure815-e2-morse-draft": [
+        "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      ],
       "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
+      ],
+      "resource:twisted-yetter:script:native-morse-fusion-evaluator": [
+        "resource:twisted-yetter:script:native-morse-fusion-evaluator"
       ],
       "resource:twisted-yetter:script:su2-2-braid-oracle": [
         "resource:twisted-yetter:script:su2-2-braid-oracle"
@@ -12657,6 +13167,15 @@
       "ctl-dogfood/lab-notes/2026-07-08-su2-2-braid-oracle-bug-audit.json": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
       ],
+      "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json": [
+        "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
+      ],
+      "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
+        "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
+      ],
+      "experiments/sage/morse_fusion_evaluator.py": [
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+      ],
       "experiments/sage/su2_2_braid_oracle.sage.py": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
       ],
@@ -12668,8 +13187,17 @@
       ]
     },
     "by_sha256": {
+      "3b7920d48d8a435b223e48fcba8cc7277e2ebcde0ae2ab0e06e27fe1bcb130c5": [
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+      ],
+      "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21": [
+        "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
+      ],
       "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
+      ],
+      "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128": [
+        "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
       ],
       "d2b9b67d6e2217b6a1b35ffcf3a81338354063d2a1fed1b822b1f5a39636c3cb": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
@@ -12682,6 +13210,58 @@
       ]
     },
     "handles": {
+      "resource:twisted-yetter:input:figure815-e1-morse-draft": {
+        "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
+        "logical_id": "claim:resource-handle:figure815-e1-morse-input",
+        "payload": {
+          "kind": "input",
+          "lookup_keys": [
+            "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+            "figure815-e1-morse-draft-v1.json",
+            "gompf-stipsicz-figure815-e1-morse-input"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure815-e1-morse-input",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:input:figure815-e2-morse-draft": {
+        "cid": "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96",
+        "logical_id": "claim:resource-handle:figure815-e2-morse-input",
+        "payload": {
+          "kind": "input",
+          "lookup_keys": [
+            "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+            "figure815-k3-e2-morse-draft-v1.json",
+            "gompf-stipsicz-figure815-e2-morse-input"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure815-e2-morse-input",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit": {
         "cid": "ctlobj-sha256:71eed37d06525440b2f783bd1ef23891f4f98d19939ddc3ebb45588714c690b2",
         "logical_id": "claim:resource-handle:su2-2-braid-oracle-bug-audit-note",
@@ -12703,6 +13283,32 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:su2-2-braid-oracle-bug-audit-note",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:native-morse-fusion-evaluator": {
+        "cid": "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
+        "logical_id": "claim:resource-handle:native-morse-fusion-evaluator",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/morse_fusion_evaluator.py",
+            "morse_fusion_evaluator.py",
+            "native-morse-fusion-evaluator"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:native-morse-fusion-evaluator",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -12790,6 +13396,10 @@
       }
     },
     "resource_cids": {
+      "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881": {
+        "id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+        "kind": "handle"
+      },
       "ctlobj-sha256:0e5d2d5db3e2a5e474995a1f54a66ecc5928d0d5271f15462ddea9c4d4b0795e": {
         "id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
         "kind": "safety-status"
@@ -12798,13 +13408,29 @@
         "id": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
         "kind": "handle"
       },
+      "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0": {
+        "id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "kind": "safety-status"
+      },
       "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a": {
         "id": "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380": {
+        "id": "claim:resource-safety:figure815-e2-morse-input-caution",
+        "kind": "safety-status"
+      },
       "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": {
         "id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343",
         "kind": "snapshot"
+      },
+      "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296": {
+        "id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487": {
+        "id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+        "kind": "handle"
       },
       "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8": {
         "id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
@@ -12818,12 +13444,28 @@
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
       },
+      "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef": {
+        "id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae": {
         "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
         "kind": "safety-status"
       },
       "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c": {
         "id": "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac": {
+        "id": "claim:resource-safety:figure815-e1-morse-input-caution",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96": {
+        "id": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+        "kind": "handle"
+      },
+      "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550": {
+        "id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3",
         "kind": "snapshot"
       },
       "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825": {
@@ -12840,6 +13482,18 @@
       }
     },
     "resource_logical_ids": {
+      "claim:resource-handle:figure815-e1-morse-input": {
+        "id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure815-e2-morse-input": {
+        "id": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+        "kind": "handle"
+      },
+      "claim:resource-handle:native-morse-fusion-evaluator": {
+        "id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+        "kind": "handle"
+      },
       "claim:resource-handle:su2-2-braid-oracle": {
         "id": "resource:twisted-yetter:script:su2-2-braid-oracle",
         "kind": "handle"
@@ -12856,6 +13510,18 @@
         "id": "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator",
         "kind": "handle"
       },
+      "claim:resource-safety:figure815-e1-morse-input-caution": {
+        "id": "claim:resource-safety:figure815-e1-morse-input-caution",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:figure815-e2-morse-input-caution": {
+        "id": "claim:resource-safety:figure815-e2-morse-input-caution",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:native-morse-fusion-evaluator-caution": {
+        "id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "kind": "safety-status"
+      },
       "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
@@ -12871,6 +13537,18 @@
       "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active": {
         "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
         "kind": "safety-status"
+      },
+      "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5": {
+        "id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5": {
+        "id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5": {
+        "id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4",
+        "kind": "snapshot"
       },
       "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note": {
         "id": "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa",
@@ -12890,6 +13568,116 @@
       }
     },
     "safety_statuses": [
+      {
+        "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
+        "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing the recorded SU(2)_2 E(1) checkpoint",
+            "link-level sanity checks with the exact snapshot hash",
+            "further experiments that preserve the draft status"
+          ],
+          "status": "caution",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft"
+          },
+          "top_notice": "DRAFT INPUT: use only sha256 a592144b at commit d0bfff5, with B=-1 and every L_i/R_i=-2. It passes the recorded link checks and complete SU(2)_2 E(1) comparison, but printed-diagram identity remains below proof level.",
+          "unsafe_scopes": [
+            "proof-level identification with the printed Figure 8.15 diagram",
+            "using an unrecorded framing variant",
+            "promoting this input to established presentation data without further checks"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
+        "logical_id": "claim:resource-safety:figure815-e2-morse-input-caution",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing the recorded E(2) link-level sanity checks",
+            "further experiments that preserve the draft status"
+          ],
+          "status": "caution",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft"
+          },
+          "top_notice": "DRAFT INPUT: use only sha256 67bfb4f3 at commit d0bfff5, with B=-2 and every L_i/R_i=-2. It passes component, determinant, and signature checks only; no E(2) Crane-Yetter evaluation is recorded.",
+          "unsafe_scopes": [
+            "claiming an E(2) Crane-Yetter evaluation",
+            "proof-level identification with the printed Figure 8.15 diagram",
+            "promoting this input to established presentation data without further checks"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure815-e2-morse-input-caution",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
+        "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing the recorded SU(2)_2 E(1) controls",
+            "small tests checked against an independent evaluator",
+            "new experiments explicitly marked as needing validation"
+          ],
+          "status": "caution",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+          },
+          "top_notice": "LIMITED VALIDATION: this snapshot is supported here only by the recorded SU(2)_2 standard, Akbulut, and Figure 8.15 E(1) controls. Treat every broader use as a new validation task.",
+          "unsafe_scopes": [
+            "claiming category-independent validation",
+            "large uncalibrated runs used as standalone mathematical evidence",
+            "theorem-level conclusions without independent controls"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       {
         "cid": "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
         "logical_id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
@@ -13037,6 +13825,56 @@
       }
     ],
     "snapshots": {
+      "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b": {
+        "cid": "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+        "logical_id": "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
+        "payload": {
+          "captured_at": "2026-07-12T20:59:19Z",
+          "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+          "git_blob": "537f4ebfb65e75d9975235e71396eabedd80e46e",
+          "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+          "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+          "snapshot_id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3": {
+        "cid": "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
+        "logical_id": "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+        "payload": {
+          "captured_at": "2026-07-12T20:59:19Z",
+          "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+          "git_blob": "8aa7f2e11c2d90f61a1f94322d644d9657480e85",
+          "path": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+          "sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21",
+          "snapshot_id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa": {
         "cid": "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a",
         "logical_id": "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note",
@@ -13057,6 +13895,31 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-snapshot:su2-2-braid-oracle-bug-audit-note",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4": {
+        "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
+        "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
+        "payload": {
+          "captured_at": "2026-07-12T20:59:19Z",
+          "commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+          "git_blob": "6b86687dae72906c029bde17a9f69cccd0e1ead9",
+          "path": "experiments/sage/morse_fusion_evaluator.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+          "sha256": "3b7920d48d8a435b223e48fcba8cc7277e2ebcde0ae2ab0e06e27fe1bcb130c5",
+          "snapshot_id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
+          "created_at": "2026-07-12T20:59:19Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -13139,8 +14002,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:0cbfd1a4058622ecd838008ba4ac06a0d606a5db78686c5af405f4a841a30355",
+  "root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:77e17e0b91188f74f93b931dd13772b0b62baa2ddd34b256bbe9d0f36e756809"
+  "transition_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04"
 }

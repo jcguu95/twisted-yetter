@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-07-12T20:59:19Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+  "parents": [],
+  "payload": {
+    "claim_boundary": {
+      "established": "The recorded E(1) draft passes component, determinant, signature, complete-sector coverage, and SU(2)_2 agreement against two independent E(1) presentations; the E(2) draft passes only the recorded link-level checks.",
+      "not_claimed": [
+        "A proof-level identification of either hand transcription with every detail of the printed Figure 8.15 diagram.",
+        "An E(2) Crane-Yetter evaluation.",
+        "Validation beyond the explicitly recorded SU(2)_2 E(1) comparison."
+      ]
+    },
+    "created_at": "2026-07-12T20:59:19Z",
+    "created_by": "actor:codex",
+    "evidence": {
+      "e1_link_sanity": {
+        "component_count": 10,
+        "determinant": -1,
+        "path": "experiments/results/gompf-stipsicz/figure815-e1-morse-link-sanity-v1.json",
+        "signature": -8,
+        "status": "pass"
+      },
+      "e1_su2_2": {
+        "comparison_presentations": [
+          "standard CP2#9(-CP2) split presentation",
+          "Akbulut Figure 1 E(1) presentation"
+        ],
+        "coverage": "complete",
+        "expected": "-1024+0j",
+        "path": "experiments/results/gompf-stipsicz/figure815-e1-su2-2-b-minus1-direct-aggregate-v1.json",
+        "sector_count": 59049,
+        "status": "pass",
+        "value": "-1023.9999999999999+2.4069635173873394e-13j"
+      },
+      "e2_link_sanity": {
+        "component_count": 22,
+        "determinant": -1,
+        "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-morse-link-sanity-v1.json",
+        "signature": -16,
+        "status": "pass"
+      }
+    },
+    "inputs": {
+      "e1": {
+        "framings": "B=-1; every L_i/R_i=-2; A total framing is 0 after the recorded visible-writhe correction",
+        "git_blob": "537f4ebfb65e75d9975235e71396eabedd80e46e",
+        "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+        "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128"
+      },
+      "e2": {
+        "framings": "B=-2; every L_i/R_i=-2; A total framing is 0 after the recorded visible-writhe correction",
+        "path": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+        "sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21"
+      }
+    },
+    "mathematical_status": "E1_NUMERIC_SU2_2_AND_LINK_SANITY_E2_LINK_SANITY_ONLY",
+    "note_id": "objective-note-2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source": {
+      "identity_scope": "E(n) special cases n=1 and n=2",
+      "locator": "printed page 305, PDF page 322, Figure 8.15",
+      "subject_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus"
+    },
+    "source_checkpoint": {
+      "dirty_scope": "Untracked later-step calibration files were present but excluded from this checkpoint.",
+      "git_commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3",
+      "git_dirty": true
+    },
+    "status": "E1_ESTABLISHED_NUMERIC_SU2_2_E2_LINK_SANITY_TRANSCRIPTIONS_REMAIN_DRAFT",
+    "title": "Figure 8.15 E(1)/E(2) draft Morse checkpoint",
+    "top_notice": "These are draft transcriptions of the n=1 and n=2 special cases of Gompf-Stipsicz Figure 8.15. E(1) has link-level checks and a complete SU(2)_2 comparison; E(2) has link-level checks only. Neither identity is claimed at proof level."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

@@ -1,0 +1,73 @@
+{
+  "actor_id": "actor:jin",
+  "admission_batch_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04",
+  "admitted_at": "2026-07-12T20:59:19Z",
+  "binding_logical_ids": [
+    "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
+    "claim:resource-handle:figure815-e1-morse-input",
+    "claim:resource-handle:figure815-e2-morse-input",
+    "claim:resource-handle:native-morse-fusion-evaluator",
+    "claim:resource-safety:figure815-e1-morse-input-caution",
+    "claim:resource-safety:figure815-e2-morse-input-caution",
+    "claim:resource-safety:native-morse-fusion-evaluator-caution",
+    "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
+    "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+    "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
+    "subject-edge:ty:gompf-stipsicz:contains:figure815-morse-draft",
+    "subject-edge:ty:k3-cpbar-route:related-to:figure815-morse-draft",
+    "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft"
+  ],
+  "child_root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
+  "created_at": "2026-07-12T20:59:19Z",
+  "current_root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
+  "kernel_profile": "ctl-kernel/1",
+  "manifest_kind": "batch-admission",
+  "mode": "dogfood",
+  "parent_root_cid": "ctlobj-sha256:0cbfd1a4058622ecd838008ba4ac06a0d606a5db78686c5af405f4a841a30355",
+  "payload_files": [
+    "lab-notes/2026-07-12-gompf-stipsicz-figure815-morse-workflow.json",
+    "subject-layer/definitions/presentation-gompf-stipsicz-figure815-morse-draft.json",
+    "subject-layer/edges/gompf-stipsicz-book-contains-figure815-morse-draft.json",
+    "subject-layer/edges/k3-cpbar-route-related-to-figure815-morse-draft.json",
+    "resources/figure815-e1-morse-input-handle.json",
+    "resources/figure815-e1-morse-input-snapshot.json",
+    "resources/figure815-e1-morse-input-safety.json",
+    "resources/figure815-e2-morse-input-handle.json",
+    "resources/figure815-e2-morse-input-snapshot.json",
+    "resources/figure815-e2-morse-input-safety.json",
+    "resources/native-morse-fusion-evaluator-handle.json",
+    "resources/native-morse-fusion-evaluator-snapshot.json",
+    "resources/native-morse-fusion-evaluator-safety.json"
+  ],
+  "plan_schema": "ctl-dogfood/batch-admission-plan/1",
+  "principal_roles": [
+    "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1"
+  ],
+  "project_id": "project:twisted-yetter",
+  "revision_cids": [
+    "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
+    "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
+    "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
+    "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
+    "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
+    "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
+    "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+    "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
+    "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
+    "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96",
+    "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
+    "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
+    "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644"
+  ],
+  "schema": "ctl-dogfood/batch-admission-manifest/1",
+  "semantics": {
+    "adds_authority_semantics": false,
+    "adds_downstream_ontology": false,
+    "adds_evidence_semantics": false,
+    "manifest_role": "audit-and-reproduction-sidecar-only",
+    "validate_transition_input": false
+  },
+  "submitted_by": "actor:codex",
+  "tool": "scripts/admit_revisions_batch.py",
+  "transition_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04"
+}
