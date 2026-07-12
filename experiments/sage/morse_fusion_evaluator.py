@@ -10,10 +10,10 @@ fusion multiplicities: basis states retain every trivalent-vertex
 multiplicity index, F rotations use complete F blocks, and sibling braids use
 complete R blocks.
 
-Current safety boundary: the SU(2)_2 E(1) lane is numerically validated, but
-this is not yet a universal F/R evaluator.  In particular, the recorded
-D(Dic_3) largest-F-block braid bridge fails and blocks the generic loaded-F/R
-lane until its convention mismatch is resolved.
+Current safety boundary: only explicitly recorded category and diagram
+controls are validated.  Loaded F/R adapters may also need a documented path-
+basis conversion before their cup/cap normalization is compatible with this
+engine.
 """
 
 from __future__ import annotations
@@ -886,8 +886,12 @@ class MorseEvaluator:
                 if abs(left_index - right_index) != 1:
                     raise ValueError("cap strands are not adjacent")
                 lo = min(left_index, right_index)
-                target, path = grouped_target(tree, lo, lo + 2, split=lo + 1)
-                tree, vector, plan = self._rotate(tree, vector, target, stats)
+                try:
+                    path = find_subtree_path(tree, frozenset((left, right)))
+                    plan = ()
+                except ValueError:
+                    target, path = grouped_target(tree, lo, lo + 2, split=lo + 1)
+                    tree, vector, plan = self._rotate(tree, vector, target, stats)
                 label = component_labels[topology.component_by_strand[left]]
                 coefficient = math.sqrt(float(self.category.dimension(label)))
                 geometric_left = order[lo]

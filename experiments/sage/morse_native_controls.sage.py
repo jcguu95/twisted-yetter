@@ -7,7 +7,10 @@ from datetime import UTC, datetime
 import importlib.util
 import json
 from pathlib import Path
+import platform
+import subprocess
 import sys
+import time
 
 from experiments.sage.morse_category_adapters import LoadedFRMorseAdapter, SU2KMorseAdapter
 from experiments.sage.morse_fusion_evaluator import MorseEvaluator, analyze_topology, canonical_component_name
@@ -354,6 +357,27 @@ def run_loaded_fr_controls():
                 mult for _, mult in category.fusion_outputs(left, right)
             ),
         })
+        identity_label = max(category.labels, key=category.dimension)
+        identity_forms, identity_component_index = braid_closure_morse_forms(
+            3, (), (0, 0, 0)
+        )
+        identity_labels = {
+            component_name: identity_label
+            for component_name in identity_component_index
+        }
+        identity_observed, identity_stats = evaluator.fixed_label_value(
+            identity_forms, identity_labels
+        )
+        identity_expected = complex(category.dimension(identity_label) ** 3)
+        rows.append({
+            "category": name,
+            "control": "three_component_identity_braid_closure",
+            "labels": [identity_label, identity_label, identity_label],
+            "observed": [identity_observed.real, identity_observed.imag],
+            "expected": [identity_expected.real, identity_expected.imag],
+            "pass": close(identity_observed, identity_expected, 1e-7),
+            "stats": identity_stats,
+        })
         largest_key, largest_block = max(
             category.backend.f_blocks.items(),
             key=lambda item: item[1]["matrix"].shape[0] * item[1]["matrix"].shape[1],
@@ -384,18 +408,58 @@ def run_loaded_fr_controls():
 
 
 def main():
+    started = datetime.now(UTC)
+    started_clock = time.monotonic()
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     su2 = load_module(SU2_PATH, "su2k_for_native_morse_bridge_controls")
     rows = run_su2_controls() + run_loaded_fr_controls() + run_su2_braid_bridge_controls(su2)
     payload = {
-        "schema": "twisted-yetter.native-morse-evaluator-controls.v1",
+        "schema": "twisted-yetter.native-morse-evaluator-controls.v2",
         "status": "pass" if all(row["pass"] for row in rows) else "needs-review",
         "mathematical_status": "NUMERICAL_LOCAL_AND_BRAID_BRIDGE_CALIBRATION",
         "generator_script": "experiments/sage/morse_native_controls.sage.py",
-        "reproduce_command": "PYTHONPATH=. DOT_SAGE=\"$PWD/.sage\" sage --python experiments/sage/morse_native_controls.sage.py --output experiments/results/gompf-stipsicz/native-morse-evaluator-category-controls-v1.json",
+        "argv": sys.argv,
+        "reproduce_command": "PYTHONPATH=. DOT_SAGE=\"$PWD/.sage\" sage --python experiments/sage/morse_native_controls.sage.py --output experiments/results/morse/native-morse-evaluator-category-controls-v2.json",
+        "basis_normalization": {
+            "scope": "Loaded payloads that explicitly declare Frobenius-normalized SVD intertwiner fusion bases.",
+            "path_basis_gram": "The left channel x and right channel y composite basis norms squared are 1/d_x and 1/d_y.",
+            "conversion": "F_orth[x,y] = sqrt(d_y/d_x) F_serialized[x,y].",
+            "activation": "LoadedFRMorseAdapter auto-detects the documented SVD nullspace basis convention; other loaded gauges are unchanged."
+        },
+        "repo": {
+            "root": str(REPO_ROOT),
+            "git_commit": subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=REPO_ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip(),
+            "git_dirty": bool(
+                subprocess.run(
+                    ["git", "status", "--porcelain"],
+                    cwd=REPO_ROOT,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ).stdout
+            ),
+            "git_status_short": subprocess.run(
+                ["git", "status", "--short"],
+                cwd=REPO_ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.splitlines(),
+        },
+        "tool_versions": {
+            "python": platform.python_version(),
+        },
+        "utc_start": started.isoformat(),
         "utc_finish": datetime.now(UTC).isoformat(),
+        "elapsed_seconds": time.monotonic() - started_clock,
         "rows": rows,
     }
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"

@@ -4,14 +4,15 @@ Adapters wrap the repository's already calibrated F/R backends.  This keeps
 the Morse engine independent of category names and, importantly, preserves
 fusion multiplicity data for Drinfeld-double categories.
 
-These adapters are experimental outside the validated SU(2)_2 lane.  The
-current D(Dic_3) largest-F-block bridge control fails, so adapter availability
-must not be read as universal-evaluator certification.
+These adapters remain experimental outside explicitly recorded controls.
+Loaded payloads whose fusion spaces use Frobenius-normalized SVD intertwiners
+are converted to the corresponding orthonormal path basis before use.
 """
 
 from __future__ import annotations
 
 from functools import lru_cache
+import math
 import numpy as np
 
 
@@ -131,12 +132,30 @@ class LoadedFRMorseAdapter(BaseMorseCategoryAdapter):
     and is also the backend used with the D(Dic_12)=D(Dic_3) payload.
     """
 
-    def __init__(self, evaluator, *, character=None, adapter_name=None):
+    def __init__(
+        self,
+        evaluator,
+        *,
+        character=None,
+        adapter_name=None,
+        orthonormalize_svd_intertwiners=None,
+    ):
         self.backend = evaluator
         self.labels = tuple(evaluator.labels)
         self.unit = evaluator.unit
         self._character = character
         self.name = adapter_name or type(evaluator).__name__
+        if orthonormalize_svd_intertwiners is None:
+            payload = getattr(evaluator, "payload", {})
+            fusion_space = payload.get("basis_convention", {}).get(
+                "fusion_space", ""
+            )
+            orthonormalize_svd_intertwiners = (
+                "SVD nullspace basis" in fusion_space
+            )
+        self.orthonormalize_svd_intertwiners = bool(
+            orthonormalize_svd_intertwiners
+        )
 
     def dimension(self, label):
         return float(self.backend.dimension(label))
@@ -147,15 +166,39 @@ class LoadedFRMorseAdapter(BaseMorseCategoryAdapter):
     def fusion_outputs(self, left, right):
         return tuple((target, int(mult)) for target, mult in self.backend.fusion_outputs(left, right))
 
+    @lru_cache(maxsize=None)
     def f_block(self, a, b, c, d):
         block = self.backend.f_blocks[(a, b, c, d)]
+        matrix = np.asarray(block["matrix"], dtype=np.complex128)
+        inverse = self.backend.f_inv_blocks[(a, b, c, d)]
+        if self.orthonormalize_svd_intertwiners:
+            left_scale = np.asarray(
+                [
+                    1.0 / math.sqrt(self.dimension(channel))
+                    for channel, _, _ in block["left_basis"]
+                ],
+                dtype=np.float64,
+            )
+            right_scale = np.asarray(
+                [
+                    math.sqrt(self.dimension(channel))
+                    for channel, _, _ in block["right_basis"]
+                ],
+                dtype=np.float64,
+            )
+            matrix = (
+                left_scale[:, np.newaxis]
+                * matrix
+                * right_scale[np.newaxis, :]
+            )
+            inverse = _inverse(matrix)
         return {
             "left_basis": block["left_basis"],
             "right_basis": block["right_basis"],
             "left_index": block["left_index"],
             "right_index": block["right_index"],
-            "right_to_left": block["matrix"],
-            "left_to_right": self.backend.f_inv_blocks[(a, b, c, d)],
+            "right_to_left": matrix,
+            "left_to_right": inverse,
         }
 
     def r_matrix(self, a, b, c, positive):

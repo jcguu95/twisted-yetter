@@ -89,6 +89,15 @@ def block_r2_forms():
     ]
 
 
+def parallel_unlink_forms():
+    return [
+        {"kind": "cup", "piece": "A", "at": "far-right"},
+        {"kind": "cup", "piece": "B", "at": "far-right"},
+        {"kind": "cap", "piece": "B", "strands": ["B.left", "B.right"]},
+        {"kind": "cap", "piece": "A", "strands": ["A.left", "A.right"]},
+    ]
+
+
 def test_rotation_plan_preserves_order_and_reaches_target():
     a, b, c, d = (Leaf(name, 0) for name in "abcd")
     source = Node(Node(Node(a, b), c), d)
@@ -104,6 +113,16 @@ def test_unknot_and_kink_normalizations():
     assert evaluator.fixed_label_value(unknot_forms(), {"A": 1})[0] == 1.0
     assert evaluator.fixed_label_value(unknot_forms(kink=True), {"A": 1})[0] == 1.0j
     assert evaluator.omega_value(tuple(unknot_forms()))[0] == 2.0
+
+
+def test_cap_reuses_existing_pair_subtree_without_f_rotation():
+    evaluator = MorseEvaluator(SemionCategory())
+    value, stats = evaluator.fixed_label_value(
+        parallel_unlink_forms(), {"A": 1, "B": 1}
+    )
+    assert value == 1.0
+    assert stats["f_rotations"] == 0
+    assert [plan["f_rotations"] for plan in stats["plans"]] == [0, 0]
 
 
 def test_reversing_pseudoreal_unknot_orientation_preserves_value():
