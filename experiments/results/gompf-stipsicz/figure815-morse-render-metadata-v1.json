@@ -1,0 +1,94 @@
+{
+  "schema": "twisted-yetter.figure815-morse-workflow-checkpoint.v1",
+  "status": "DRAFT_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM",
+  "mathematical_status": "E1_NUMERIC_SU2_2_AND_LINK_SANITY_E2_LINK_SANITY_ONLY",
+  "captured_at_utc": "2026-07-12T20:56:30Z",
+  "identity_scope": "Draft transcriptions of the n=1 and n=2 special cases of Gompf-Stipsicz Figure 8.15 E(n)",
+  "claim_boundary": {
+    "established": [
+      "The E(1) draft has 10 components, determinant -1, and signature -8.",
+      "The E(2) draft has 22 components, determinant -1, and signature -16.",
+      "The complete 59049-sector SU(2)_2 evaluation of the E(1) draft agrees with the standard and Akbulut E(1) presentations at -1024 within floating-point error."
+    ],
+    "not_claimed": [
+      "A proof-level identification of either hand transcription with every detail of the printed Figure 8.15 diagram.",
+      "An E(2) Crane-Yetter evaluation.",
+      "Validation beyond the explicitly recorded SU(2)_2 E(1) comparison."
+    ]
+  },
+  "inputs": [
+    {
+      "name": "E(1)",
+      "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+      "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+      "parameters": {
+        "wheel_count": 4,
+        "b_framing": -1,
+        "component_self_twist": -2,
+        "a_self_twist": -3
+      }
+    },
+    {
+      "name": "E(2)",
+      "path": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+      "sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21",
+      "parameters": {
+        "wheel_count": 10,
+        "b_framing": -2,
+        "component_self_twist": -2,
+        "a_self_twist": -3
+      }
+    }
+  ],
+  "link_sanity": [
+    {
+      "name": "E(1)",
+      "path": "experiments/results/gompf-stipsicz/figure815-e1-morse-link-sanity-v1.json",
+      "sha256": "f16c403e34a78a75ec05c6d4ec8973d892d00cd1d380d722392e109d9d2ea926",
+      "component_count": 10,
+      "determinant": -1,
+      "signature": -8,
+      "status": "pass"
+    },
+    {
+      "name": "E(2)",
+      "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-morse-link-sanity-v1.json",
+      "sha256": "e12c6666f6f5e4ecd5101d3182a12c93d4172f99dc74e5f7aac8d2d60378c76e",
+      "component_count": 22,
+      "determinant": -1,
+      "signature": -16,
+      "status": "pass"
+    }
+  ],
+  "su2_2_e1_comparison": [
+    {
+      "presentation": "standard CP2#9(-CP2) split presentation",
+      "path": "experiments/results/standard/e1-cp2-sum-9barcp2-su2-2-native-morse-v1.json",
+      "sha256": "19db768b3dcfc6bae44c94d82a2bf93bf16126f7948c6da2f22d8d807e5aafc3",
+      "value": "-1023.9999999999999+3.6673929283544259e-13j"
+    },
+    {
+      "presentation": "Akbulut Figure 1 E(1) presentation",
+      "path": "experiments/results/akbulut/figure1-e1-su2-2-native-morse-aggregate-v1.json",
+      "sha256": "48efe3ee4d9dfb4fb227580ebb470938031dbd5f99fc9df147d7978d80f9d21c",
+      "value": "-1024-5.808686864838819e-13j"
+    },
+    {
+      "presentation": "Gompf-Stipsicz Figure 8.15 E(1) draft",
+      "path": "experiments/results/gompf-stipsicz/figure815-e1-su2-2-b-minus1-direct-aggregate-v1.json",
+      "sha256": "d9efd7a28a3f4c7a7d6b2c161030615e280552bc582f59fd79d1552a66e2345d",
+      "sector_count": 59049,
+      "coverage": "complete",
+      "value": "-1023.9999999999999+2.4069635173873394e-13j"
+    }
+  ],
+  "commands": {
+    "generate_e1_input": "python experiments/scripts/k3_figure815_morse_draft.py --wheel-count 4 --component-self-twist 2 --b-framing 1 --name \"E(1)\" --write experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+    "generate_e2_input": "python experiments/scripts/k3_figure815_morse_draft.py --wheel-count 10 --component-self-twist 2 --b-framing 2 --name \"E(2)\" --write experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+    "sanity_e1": "PYTHONPATH=src:. python experiments/scripts/gompf_figure815_morse_sanity.py experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json --expected-component-count 10 --expected-signature -8 --write experiments/results/gompf-stipsicz/figure815-e1-morse-link-sanity-v1.json",
+    "sanity_e2": "PYTHONPATH=src:. python experiments/scripts/gompf_figure815_morse_sanity.py experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json --expected-component-count 22 --expected-signature -16 --write experiments/results/gompf-stipsicz/figure815-k3-e2-morse-link-sanity-v1.json",
+    "render_e1": "python experiments/scripts/render_morse_svg.py experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json --out /tmp/e1-figure815-final-draft.svg --layout-mode unoptimized --vertical-mode scheduled --draw-style rectilinear45 --stroke-scale 2 --vertical-scale 2.4 --sign-labels-from-sanity experiments/results/gompf-stipsicz/figure815-e1-morse-link-sanity-v1.json",
+    "render_e2": "python experiments/scripts/render_morse_svg.py experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json --out /tmp/e2-figure815-final-draft.svg --layout-mode unoptimized --vertical-mode scheduled --draw-style rectilinear45 --stroke-scale 2 --vertical-scale 2.4 --sign-labels-from-sanity experiments/results/gompf-stipsicz/figure815-k3-e2-morse-link-sanity-v1.json",
+    "tests": "env UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=src:. uv run pytest tests/test_morse_dsl.py tests/test_morse_renderer_layers.py tests/test_gompf_figure815_morse_sanity.py tests/test_morse_fusion_evaluator.py"
+  }
+}
