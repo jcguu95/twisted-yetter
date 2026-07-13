@@ -10,6 +10,7 @@ from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
 )
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
+    build_vacuum_coupon_graph,
     compile_projected_morphism,
     preflight_horizontal_disk_corridor,
     replay_forms,
@@ -94,6 +95,25 @@ def test_one_puncture_has_a_horizontal_projector_slice():
     assert preflight["projector_strands"] == ["A1.left"]
 
 
+def test_one_puncture_builds_first_class_coupon_with_identity_recovery():
+    forms, component_by_piece = one_puncture_input()
+    ir = compile_projected_morphism(
+        forms,
+        component_by_piece=component_by_piece,
+        special_components=("red",),
+    )
+    graph = build_vacuum_coupon_graph(forms, ir)
+    assert graph["status"] == (
+        "PASS_GRAPH_LEVEL_VACUUM_PROJECTOR_COUPON_NOT_EVALUATED"
+    )
+    assert graph["coupon_input_count"] == 1
+    assert graph["coupon_output_count"] == 1
+    assert graph["identity_recovery"]["status"] == (
+        "PASS_COUPON_IDENTITY_RECOVERS_ONE_CYCLE_PER_ORDINARY_COMPONENT"
+    )
+    assert graph["identity_recovery"]["component_cycles"]["A"]["cycle_count"] == 1
+
+
 def test_two_punctures_on_one_strand_fail_closed_as_nonhorizontal():
     forms, component_by_piece = two_puncture_input()
     ir = compile_projected_morphism(
@@ -104,6 +124,15 @@ def test_two_punctures_on_one_strand_fail_closed_as_nonhorizontal():
     preflight = preflight_horizontal_disk_corridor(forms, ir)
     assert preflight["status"] == "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
     assert preflight["duplicate_active_strands"] == ["A1.left"]
+    graph = build_vacuum_coupon_graph(forms, ir)
+    assert graph["coupon_input_count"] == 2
+    assert graph["coupon_output_count"] == 2
+    cut_tokens = [
+        token
+        for token in graph["ordinary_component_sequences"]["A"]
+        if token["kind"] == "coupon-cut"
+    ]
+    assert len(cut_tokens) == 2
 
 
 def test_multiple_special_components_parse_but_numeric_support_fails_closed():
@@ -157,6 +186,17 @@ def test_figure21_disk_certificate_regression():
     preflight = preflight_horizontal_disk_corridor(builder.forms, ir)
     assert preflight["status"] == "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
     assert len(preflight["nonmonotone_cut_ids"]) == 8
+    graph = build_vacuum_coupon_graph(builder.forms, ir)
+    assert graph["coupon_input_count"] == 29
+    assert graph["coupon_output_count"] == 29
+    assert graph["identity_recovery"]["status"] == (
+        "PASS_COUPON_IDENTITY_RECOVERS_ONE_CYCLE_PER_ORDINARY_COMPONENT"
+    )
+    assert set(graph["identity_recovery"]["component_cycles"]) == set(
+        COMPONENT_ORDER
+    ) - {"red"}
+    repeated = build_vacuum_coupon_graph(builder.forms, ir)
+    assert repeated["graph_hash"] == graph["graph_hash"]
 
 
 def test_figure21_topology_artifact_is_conservative_and_reproducible():
