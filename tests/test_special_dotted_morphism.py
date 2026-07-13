@@ -3,7 +3,10 @@ from pathlib import Path
 
 import pytest
 
-from experiments.sage.morse_fusion_evaluator import vacuum_coupon_path_basis
+from experiments.sage.morse_fusion_evaluator import (
+    expand_vacuum_coupon_graph_term,
+    vacuum_coupon_path_basis,
+)
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
     COMPONENT_BY_PIECE,
     COMPONENT_ORDER,
@@ -146,6 +149,19 @@ def test_two_punctures_on_one_strand_fail_closed_as_nonhorizontal():
         if token["kind"] == "coupon-cut"
     ]
     assert len(cut_tokens) == 2
+    expanded = expand_vacuum_coupon_graph_term(
+        Z2FusionRules(), graph, {"A": 1}, basis_index=0
+    )
+    assert expanded["status"] == (
+        "PASS_TRIVALENT_VACUUM_PROJECTOR_TERM_NOT_CONTRACTED"
+    )
+    assert expanded["expanded_coupon"]["projection_vertex_count"] == 1
+    assert expanded["expanded_coupon"]["inclusion_vertex_count"] == 1
+    assert all(
+        endpoint["node_id"] != graph["coupon_node_id"]
+        for edge in expanded["edges"]
+        for endpoint in (edge["from"], edge["to"])
+    )
 
 
 def test_multiple_special_components_parse_but_numeric_support_fails_closed():
@@ -230,6 +246,18 @@ def test_figure21_disk_certificate_regression():
     )
     assert odd_basis == ()
     assert odd_metadata["root_multiplicity_rank"] == 0
+
+    expanded = expand_vacuum_coupon_graph_term(
+        Z2FusionRules(), graph, all_unit, basis_index=0,
+        namespace="figure21-control",
+    )
+    assert expanded["expanded_coupon"]["factor_count"] == 29
+    assert expanded["expanded_coupon"]["basis_rank"] == 1
+    assert expanded["expanded_coupon"]["projection_vertex_count"] == 28
+    assert expanded["expanded_coupon"]["inclusion_vertex_count"] == 28
+    assert sum(node["kind"] == "fusion-coupon" for node in expanded["nodes"]) == 28
+    assert sum(node["kind"] == "split-coupon" for node in expanded["nodes"]) == 28
+    assert all(node["node_id"] != graph["coupon_node_id"] for node in expanded["nodes"])
 
 
 def test_figure21_topology_artifact_is_conservative_and_reproducible():

@@ -5,6 +5,7 @@ from experiments.sage.morse_fusion_evaluator import (
     NodeState,
     MorseEvaluator,
     analyze_topology,
+    compile_right_comb_projector_term,
     fuse_active_pair,
     leaves,
     project_vacuum_interval,
@@ -403,6 +404,80 @@ def test_explicit_trivalent_events_preserve_the_selected_multiplicity_copy():
     )
     assert split_tree == tree
     assert split == {state1: 3.0}
+
+
+def test_compiled_path_sum_matches_horizontal_vacuum_projector():
+    category = SemionCategory()
+    evaluator = MorseEvaluator(category)
+    prefix = [
+        {"kind": "cup", "piece": "A", "at": "far-left"},
+        {"kind": "cup", "piece": "B", "at": "far-right"},
+    ]
+    suffix = [
+        {"kind": "cap", "strands": ["B.left", "B.right"]},
+        {"kind": "cap", "strands": ["A.left", "A.right"]},
+    ]
+    horizontal = [
+        *prefix,
+        {
+            "kind": "vacuum-projector",
+            "projector_id": "direct",
+            "strands": ["A.right", "B.left"],
+        },
+        *suffix,
+    ]
+    expected = evaluator.fixed_label_value(
+        horizontal, {"A": 1, "B": 1}
+    )[0]
+
+    tree, basis = right_comb_fusion_path_basis(
+        category,
+        (("A.right", 1), ("B.left", 1)),
+        target=category.unit,
+    )
+    observed = 0.0 + 0.0j
+    for basis_index, state in enumerate(basis):
+        term = compile_right_comb_projector_term(
+            tree,
+            state,
+            unit=category.unit,
+            namespace=f"control.mu{basis_index}",
+        )
+        value, stats = evaluator.fixed_label_value(
+            [*prefix, *term, *suffix], {"A": 1, "B": 1}
+        )
+        assert stats["fusions"] == 1
+        assert stats["splits"] == 1
+        observed += value
+    assert abs(observed - expected) < 1e-12
+
+
+def test_compiled_projector_terms_cover_every_rep_a4_unit_path():
+    category = RepA4FusionRules()
+    tree, basis = right_comb_fusion_path_basis(
+        category,
+        ((f"x{index}", 3) for index in range(4)),
+        target=category.unit,
+    )
+    programs = [
+        compile_right_comb_projector_term(
+            tree,
+            state,
+            unit=category.unit,
+            namespace=f"rep-a4.mu{index}",
+        )
+        for index, state in enumerate(basis)
+    ]
+    assert len(programs) == 7
+    assert all(len(program) == 6 for program in programs)
+    signatures = {
+        tuple(
+            (form["kind"], form["output_label"] if form["kind"] == "fuse" else tuple(form["output_labels"]), form["multiplicity"])
+            for form in program
+        )
+        for program in programs
+    }
+    assert len(signatures) == 7
 
 
 def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():

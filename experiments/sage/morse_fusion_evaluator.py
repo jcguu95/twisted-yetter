@@ -19,6 +19,7 @@ engine.
 from __future__ import annotations
 
 from collections import defaultdict, deque
+import copy
 from dataclasses import dataclass
 from functools import lru_cache
 from itertools import product
@@ -219,6 +220,348 @@ def vacuum_coupon_path_basis(
         "projector_term_count": expected_rank,
         "projector_formula": "sum_mu |mu><mu|",
     }
+
+
+def compile_right_comb_projector_term(
+    tree: Tree | None,
+    basis_state: State | None,
+    *,
+    unit: Any,
+    namespace: str,
+) -> tuple[dict[str, Any], ...]:
+    """Compile one ``|mu><mu|`` term into explicit fuse/split forms.
+
+    ``tree`` must be a right comb whose root is the tensor unit.  The emitted
+    program consumes the factor wires from right to left and recreates them
+    from left to right.  It contains no F, R, dimension, or handle
+    normalization coefficients; those remain the evaluator's responsibility.
+    """
+
+    if tree is None:
+        if basis_state is not None:
+            raise ValueError("empty projector tree needs the empty basis state")
+        return ()
+    if basis_state is None:
+        raise ValueError("nonempty projector tree needs a basis state")
+    if root_label(tree, basis_state) != unit:
+        raise ValueError("projector basis state does not end at the tensor unit")
+
+    ordered_leaves = leaves(tree)
+    if len(ordered_leaves) == 1:
+        if ordered_leaves[0].label != unit:
+            raise ValueError("one-factor vacuum path must itself be the unit")
+        return ()
+
+    spine: list[tuple[Leaf, Tree, NodeState]] = []
+    current_tree = tree
+    current_state = basis_state
+    while isinstance(current_tree, Node):
+        if not isinstance(current_tree.left, Leaf):
+            raise ValueError("projector compiler requires a right-comb tree")
+        if not isinstance(current_state, NodeState):
+            raise ValueError("projector state does not match its right-comb tree")
+        spine.append((current_tree.left, current_tree.right, current_state))
+        current_tree = current_tree.right
+        current_state = current_state.right
+    if not isinstance(current_state, LeafState):
+        raise ValueError("projector right-comb tail does not end in a leaf state")
+
+    forms: list[dict[str, Any]] = []
+    tail_wire = ordered_leaves[-1].strand
+    projection_wire_by_index: dict[int, str] = {}
+    for index in range(len(spine) - 1, -1, -1):
+        left_leaf, _right_tree, node_state = spine[index]
+        output_wire = f"{namespace}.projection.acc{index:03d}"
+        forms.append(
+            {
+                "kind": "fuse",
+                "inputs": [left_leaf.strand, tail_wire],
+                "output": output_wire,
+                "output_label": node_state.output,
+                "multiplicity": node_state.multiplicity,
+                "projector_role": "projection",
+                "projector_basis_index": namespace,
+                "right_comb_vertex_index": index,
+            }
+        )
+        projection_wire_by_index[index] = output_wire
+        tail_wire = output_wire
+
+    current_wire = projection_wire_by_index[0]
+    for index, (left_leaf, right_tree, node_state) in enumerate(spine):
+        if index + 1 < len(spine):
+            right_wire = f"{namespace}.inclusion.acc{index + 1:03d}"
+        else:
+            right_wire = ordered_leaves[-1].strand
+        right_state = node_state.right
+        forms.append(
+            {
+                "kind": "split",
+                "input": current_wire,
+                "outputs": [left_leaf.strand, right_wire],
+                "output_labels": [
+                    left_leaf.label,
+                    root_label(right_tree, right_state),
+                ],
+                "multiplicity": node_state.multiplicity,
+                "projector_role": "inclusion",
+                "projector_basis_index": namespace,
+                "right_comb_vertex_index": index,
+            }
+        )
+        current_wire = right_wire
+    return tuple(forms)
+
+
+def expand_vacuum_coupon_graph_term(
+    category: Any,
+    coupon_graph: dict[str, Any],
+    component_labels: dict[str, Any],
+    *,
+    basis_index: int,
+    namespace: str = "vacuum-coupon",
+    max_intermediate_paths: int = 100_000,
+) -> dict[str, Any]:
+    """Replace one high-valence vacuum coupon by a trivalent basis term.
+
+    The external graph is unchanged.  Incoming coupon ports feed the
+    projection tree, its unit root is joined to the inclusion tree, and the
+    inclusion leaves feed the original outgoing ports.  The result is a
+    category-instantiated ribbon morphism graph, not yet a contracted scalar.
+    """
+
+    coupon_id = coupon_graph["coupon_node_id"]
+    coupon_nodes = [
+        node
+        for node in coupon_graph["nodes"]
+        if node["node_id"] == coupon_id
+    ]
+    if len(coupon_nodes) != 1:
+        raise ValueError("coupon graph must contain exactly one named coupon")
+    coupon_node = coupon_nodes[0]
+    tree, basis, basis_metadata = vacuum_coupon_path_basis(
+        category,
+        coupon_node,
+        component_labels,
+        max_intermediate_paths=max_intermediate_paths,
+    )
+    if not (0 <= basis_index < len(basis)):
+        raise ValueError(
+            f"coupon basis_index {basis_index} is outside rank {len(basis)}"
+        )
+    basis_state = basis[basis_index]
+    term_forms = compile_right_comb_projector_term(
+        tree,
+        basis_state,
+        unit=category.unit,
+        namespace=f"{namespace}.mu{basis_index:06d}",
+    )
+    factors = list(coupon_node["factor_order"])
+    factor_count = len(factors)
+    nodes = [
+        copy.deepcopy(node)
+        for node in coupon_graph["nodes"]
+        if node["node_id"] != coupon_id
+    ]
+    projection_nodes: dict[int, dict[str, Any]] = {}
+    inclusion_nodes: dict[int, dict[str, Any]] = {}
+    input_targets: dict[str, dict[str, str]] = {}
+    output_sources: dict[str, dict[str, str]] = {}
+    internal_edges: list[dict[str, Any]] = []
+
+    if factor_count == 1:
+        cut_id = factors[0]["cut_id"]
+        node_id = f"trivalent:{namespace}:mu{basis_index:06d}:unit-identity"
+        nodes.append(
+            {
+                "node_id": node_id,
+                "kind": "unit-channel-identity",
+                "label": category.unit,
+                "ports": ["in", "out"],
+            }
+        )
+        input_targets[cut_id] = {"node_id": node_id, "port": "in"}
+        output_sources[cut_id] = {"node_id": node_id, "port": "out"}
+    elif factor_count > 1:
+        projection_forms = {
+            form["right_comb_vertex_index"]: form
+            for form in term_forms
+            if form["kind"] == "fuse"
+        }
+        inclusion_forms = {
+            form["right_comb_vertex_index"]: form
+            for form in term_forms
+            if form["kind"] == "split"
+        }
+        expected_vertices = set(range(factor_count - 1))
+        if set(projection_forms) != expected_vertices or set(inclusion_forms) != expected_vertices:
+            raise AssertionError("compiled projector term has an incomplete right comb")
+
+        for index in range(factor_count - 1):
+            projection = projection_forms[index]
+            inclusion = inclusion_forms[index]
+            p_id = f"trivalent:{namespace}:mu{basis_index:06d}:p{index:03d}"
+            i_id = f"trivalent:{namespace}:mu{basis_index:06d}:i{index:03d}"
+            projection_nodes[index] = {
+                "node_id": p_id,
+                "kind": "fusion-coupon",
+                "left_label": inclusion["output_labels"][0],
+                "right_label": inclusion["output_labels"][1],
+                "output_label": projection["output_label"],
+                "multiplicity": projection["multiplicity"],
+                "ports": ["left-in", "right-in", "out"],
+                "right_comb_vertex_index": index,
+            }
+            inclusion_nodes[index] = {
+                "node_id": i_id,
+                "kind": "split-coupon",
+                "input_label": projection["output_label"],
+                "left_label": inclusion["output_labels"][0],
+                "right_label": inclusion["output_labels"][1],
+                "multiplicity": inclusion["multiplicity"],
+                "ports": ["in", "left-out", "right-out"],
+                "right_comb_vertex_index": index,
+            }
+        nodes.extend(projection_nodes.values())
+        nodes.extend(inclusion_nodes.values())
+
+        for index, factor in enumerate(factors):
+            cut_id = factor["cut_id"]
+            if index < factor_count - 1:
+                input_targets[cut_id] = {
+                    "node_id": projection_nodes[index]["node_id"],
+                    "port": "left-in",
+                }
+                output_sources[cut_id] = {
+                    "node_id": inclusion_nodes[index]["node_id"],
+                    "port": "left-out",
+                }
+            else:
+                input_targets[cut_id] = {
+                    "node_id": projection_nodes[index - 1]["node_id"],
+                    "port": "right-in",
+                }
+                output_sources[cut_id] = {
+                    "node_id": inclusion_nodes[index - 1]["node_id"],
+                    "port": "right-out",
+                }
+
+        edge_index = 0
+        for index in range(factor_count - 2):
+            internal_edges.append(
+                {
+                    "edge_id": f"edge:{namespace}:mu{basis_index:06d}:internal:{edge_index:04d}",
+                    "component": "__vacuum_projector__",
+                    "from": {
+                        "node_id": projection_nodes[index + 1]["node_id"],
+                        "port": "out",
+                    },
+                    "to": {
+                        "node_id": projection_nodes[index]["node_id"],
+                        "port": "right-in",
+                    },
+                }
+            )
+            edge_index += 1
+        internal_edges.append(
+            {
+                "edge_id": f"edge:{namespace}:mu{basis_index:06d}:internal:{edge_index:04d}",
+                "component": "__vacuum_projector__",
+                "from": {"node_id": projection_nodes[0]["node_id"], "port": "out"},
+                "to": {"node_id": inclusion_nodes[0]["node_id"], "port": "in"},
+                "label": category.unit,
+                "role": "projector-unit-root",
+            }
+        )
+        edge_index += 1
+        for index in range(factor_count - 2):
+            internal_edges.append(
+                {
+                    "edge_id": f"edge:{namespace}:mu{basis_index:06d}:internal:{edge_index:04d}",
+                    "component": "__vacuum_projector__",
+                    "from": {
+                        "node_id": inclusion_nodes[index]["node_id"],
+                        "port": "right-out",
+                    },
+                    "to": {
+                        "node_id": inclusion_nodes[index + 1]["node_id"],
+                        "port": "in",
+                    },
+                }
+            )
+            edge_index += 1
+    else:
+        raise ValueError("graph-level coupon term needs at least one factor")
+
+    edges = []
+    for edge in coupon_graph["edges"]:
+        rewritten = copy.deepcopy(edge)
+        if rewritten["to"]["node_id"] == coupon_id:
+            port = rewritten["to"]["port"]
+            if not port.startswith("input:"):
+                raise ValueError(f"unexpected incoming coupon port: {port!r}")
+            rewritten["to"] = input_targets[port.removeprefix("input:")]
+        if rewritten["from"]["node_id"] == coupon_id:
+            port = rewritten["from"]["port"]
+            if not port.startswith("output:"):
+                raise ValueError(f"unexpected outgoing coupon port: {port!r}")
+            rewritten["from"] = output_sources[port.removeprefix("output:")]
+        edges.append(rewritten)
+    edges.extend(internal_edges)
+    if any(
+        endpoint["node_id"] == coupon_id
+        for edge in edges
+        for endpoint in (edge["from"], edge["to"])
+    ):
+        raise AssertionError("trivalent expansion left a high-valence coupon edge")
+    incoming_degree: dict[tuple[str, str], int] = defaultdict(int)
+    outgoing_degree: dict[tuple[str, str], int] = defaultdict(int)
+    for edge in edges:
+        outgoing_degree[(edge["from"]["node_id"], edge["from"]["port"])] += 1
+        incoming_degree[(edge["to"]["node_id"], edge["to"]["port"])] += 1
+    for node in nodes:
+        if node["kind"] == "fusion-coupon":
+            expected_in, expected_out = ("left-in", "right-in"), ("out",)
+        elif node["kind"] == "split-coupon":
+            expected_in, expected_out = ("in",), ("left-out", "right-out")
+        elif node["kind"] == "unit-channel-identity":
+            expected_in, expected_out = ("in",), ("out",)
+        else:
+            continue
+        if any(incoming_degree[(node["node_id"], port)] != 1 for port in expected_in):
+            raise AssertionError(
+                f"trivalent node has a malformed incoming port: {node['node_id']}"
+            )
+        if any(outgoing_degree[(node["node_id"], port)] != 1 for port in expected_out):
+            raise AssertionError(
+                f"trivalent node has a malformed outgoing port: {node['node_id']}"
+            )
+
+    result = {
+        **{
+            key: copy.deepcopy(value)
+            for key, value in coupon_graph.items()
+            if key not in {"nodes", "edges", "node_count", "edge_count", "graph_hash"}
+        },
+        "schema": "twisted-yetter.trivalent-vacuum-projector-graph.v1",
+        "status": "PASS_TRIVALENT_VACUUM_PROJECTOR_TERM_NOT_CONTRACTED",
+        "nodes": nodes,
+        "edges": edges,
+        "node_count": len(nodes),
+        "edge_count": len(edges),
+        "expanded_coupon": {
+            "source_coupon_node_id": coupon_id,
+            "basis_index": basis_index,
+            "basis_rank": len(basis),
+            "factor_count": factor_count,
+            "projection_vertex_count": max(factor_count - 1, 0),
+            "inclusion_vertex_count": max(factor_count - 1, 0),
+            "normalization": basis_metadata["normalization"],
+            "projector_formula": basis_metadata["projector_formula"],
+        },
+        "evaluation_status": "NOT_CONTRACTED_REQUIRES_TRIVALENT_GRAPH_LOWERING",
+    }
+    return result
 
 
 def leaf_count(tree: Tree) -> int:
