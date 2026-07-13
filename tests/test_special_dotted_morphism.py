@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
@@ -154,3 +157,28 @@ def test_figure21_disk_certificate_regression():
     preflight = preflight_horizontal_disk_corridor(builder.forms, ir)
     assert preflight["status"] == "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
     assert len(preflight["nonmonotone_cut_ids"]) == 8
+
+
+def test_figure21_topology_artifact_is_conservative_and_reproducible():
+    artifact = json.loads(
+        Path(
+            "experiments/results/akbulut-yasui/"
+            "figure21-right-special-disk-topology-v1.json"
+        ).read_text()
+    )
+    assert artifact["status"] == "MORPHISM_TOPOLOGY_CONTROLS_PASS_NOT_LINEARIZED"
+    assert artifact["mathematical_status"] == (
+        "DRAFT_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
+    )
+    assert artifact["git_dirty"] is False
+    assert artifact["link_certificate"]["determinant"] == 1
+    assert artifact["link_certificate"]["rank"] == 12
+    assert artifact["link_certificate"]["signature"]["signature"] == -8
+    certificate = artifact["projected_morphism_ir"]["special_disk_certificates"][0]
+    assert certificate["forced_cut_count"] == 29
+    assert certificate["signed_disk_intersections"] == [
+        -value for value in certificate["d2_linking_row"]
+    ]
+    assert artifact["corridor_preflight"]["status"] == (
+        "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
+    )
