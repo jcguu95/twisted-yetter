@@ -1,0 +1,116 @@
+{
+  "created_at": "2026-07-13T02:59:54Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+  "parents": [
+    "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870"
+  ],
+  "payload": {
+    "claim_boundary": {
+      "established": "The recorded local controls and 23 cross-presentation comparisons pass numerically for the explicitly listed categories and inputs.",
+      "not_claimed": [
+        "A proof that every Morse diagram or category adapter is correct.",
+        "Automatic compatibility with loaded F/R payloads that use a different or undocumented basis convention.",
+        "Correctness of large Figure 8.15 E(1) evaluations outside the already recorded SU(2)_2 checkpoint.",
+        "A theorem-level universal evaluator result."
+      ]
+    },
+    "created_at": "2026-07-12T21:30:31Z",
+    "created_by": "actor:codex",
+    "diagnosis": {
+      "first_issue": "Cap handling forced F-rotations even when the capped pair was already a fusion-tree subtree. Reusing the existing subtree removes these unnecessary moves.",
+      "second_issue": "The D(Dic_3) payload uses Frobenius-normalized SVD intertwiners. Their composite fusion-path bases are not orthonormal, while the Morse cup/cap contraction assumes an orthonormal path basis.",
+      "separation_check": "For a three-strand RII word with a spectator, the open morphism returned to the initial fusion tree with maximum coefficient error 1.7e-16, while the old closed value failed. This localized the remaining problem to the closure/path-basis pairing rather than R or F coherence.",
+      "serialized_basis_source": "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json basis_convention.fusion_space"
+    },
+    "evidence": {
+      "control_artifact": {
+        "categories": [
+          "SU(2)_2",
+          "SU(2)_3",
+          "SU(2)_4",
+          "SU(2)_5",
+          "SU(3)_2",
+          "D(Dic_3)=D(Dic_12-order-12)"
+        ],
+        "failure_count": 0,
+        "path": "experiments/results/morse/native-morse-evaluator-category-controls-v2.json",
+        "row_count": 168,
+        "sha256": "531b10d8d53286fa0591c890f8734f3d650f23c1fb003a2548a824cd8c714b27",
+        "status": "pass"
+      },
+      "cross_presentation_matrix": {
+        "categories": [
+          "SU(2)_2",
+          "SU(2)_3",
+          "SU(2)_4",
+          "SU(2)_5",
+          "SU(2)_6",
+          "SU(2)_8",
+          "SU(3)_2",
+          "D(A4) untwisted",
+          "D(A4) c3w1 twisted category",
+          "D(Dic_3)=D(Dic_12-order-12)"
+        ],
+        "comparison": "Tham 5.11 D^-2 normalization of the corrected Yasui Figure 2 CP2(a=1) Morse presentation against the standard +1-framed CP2 presentation",
+        "comparison_count": 23,
+        "dic3_normalized_twist_values": [
+          "12-1.0860996601394742e-14j",
+          "-12+9.6147718434487945e-15j",
+          "12-1.0908969201224223e-14j",
+          "-12+9.6565068309088602e-15j"
+        ],
+        "failure_count": 0,
+        "git_blob": "0f7838172b78cfadd7b83b08ecd04aa56d08ad33",
+        "path": "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+        "sha256": "479fafe8668fc9f3785fbd0d3529f0c3eaf0dd145caec35ae81004ed4ee5c075",
+        "status": "pass"
+      },
+      "ddic_all_f_block_unitarity_after_conversion": {
+        "block_count": 86016,
+        "maximum_operator_norm_error": "7.641918101711904e-15"
+      },
+      "ddic_largest_f_block_bridge": {
+        "expected": "2.999999999999998+8.78272281101353e-15j",
+        "observed": "2.9999999999999987+2.5862949945781526e-15j",
+        "status": "pass"
+      },
+      "singleton_braid_bridge": {
+        "commit": "9fddbfd79f113bd8d78baba36fb38fb28c619c6d",
+        "comparison": "Native Morse fixed-label values versus the independent SU(2)_2 braid backend on every sector of the Yasui Figure 2 CP2(a=1) bridge input",
+        "failure_count": 0,
+        "git_blob": "692be4eb1df7959c51df07ae5d330f5eea6b2d88",
+        "maximum_absolute_difference": "4.002966042486721e-15",
+        "path": "experiments/results/yasui/figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json",
+        "resource_id": "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge",
+        "row_count": 27,
+        "sha256": "e3e6e0451a75b2e4f9b58f2b471c0af496be9729e157d1968882a923f5df3a12",
+        "status": "pass"
+      }
+    },
+    "mathematical_status": "NUMERICAL_IMPLEMENTATION_RESULT_NOT_A_UNIVERSAL_THEOREM",
+    "normalization": {
+      "activation": "LoadedFRMorseAdapter applies the conversion only when payload metadata explicitly contains the documented SVD nullspace basis convention.",
+      "formula": "F_orth[x,y] = sqrt(d_y/d_x) F_serialized[x,y].",
+      "path_basis_gram": "For left channel x and right channel y, the composite SVD-intertwiner path basis norms squared are 1/d_x and 1/d_y.",
+      "r_symbols": "R blocks are unchanged because source and target trivalent spaces have the same output-channel normalization."
+    },
+    "note_id": "objective-note-2026-07-12-native-morse-svd-path-basis-normalization",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_checkpoint": {
+      "basis_normalization_commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+      "git_commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+      "git_dirty": false
+    },
+    "status": "ESTABLISHED_NUMERIC_CONTROL_CHECKPOINT",
+    "title": "Native Morse evaluator cross-category validation",
+    "top_notice": "The native Morse evaluator passes 23 recorded cross-presentation comparisons for SU(2)_2,3,4,5,6,8, SU(3)_2, D(A4), and D(Dic_3), in addition to its local controls. This is bounded numerical evidence, not universal certification or a theorem."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
