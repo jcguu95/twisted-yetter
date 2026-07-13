@@ -13,6 +13,10 @@ import sys
 import time
 
 from experiments.sage.morse_category_adapters import LoadedFRMorseAdapter, SU2KMorseAdapter
+from experiments.sage.morse_category_registry import (
+    da4_c3_character,
+    dic3_witness_character,
+)
 from experiments.sage.morse_fusion_evaluator import MorseEvaluator, analyze_topology, canonical_component_name
 
 
@@ -21,6 +25,8 @@ SU2_PATH = REPO_ROOT / "experiments" / "sage" / "su2k_fusion_braid_evaluator.sag
 SU3_PATH = REPO_ROOT / "experiments" / "sage" / "su3_2_anyonwiki_fr_braid_evaluator.py"
 GENERIC_FR_PATH = REPO_ROOT / "experiments" / "sage" / "yasui_figure3_a3_da4_untwisted_chunked.sage.py"
 DIC3_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-dic12-omega0-mtc-fr-data-v1.json"
+DA4_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-a4-omega0-mtc-fr-data-v1.json"
+DA4_C3W1_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-a4-c3w1-mtc-fr-data-v1.json"
 
 
 def load_module(path: Path, name: str):
@@ -165,7 +171,7 @@ def run_su2_braid_bridge_controls(su2):
         ("positive_trefoil_blackboard", 2, (1, 1, 1), (3,)),
         ("three_strand_mixed", 3, (1, -2, 1, 2, -1, 2), (0, 0, 0)),
     )
-    for level in (2, 3, 4, 5):
+    for level in (2, 3, 4, 5, 6, 8):
         backend = su2.SU2KBraidEvaluator(level, exact=False)
         category = SU2KMorseAdapter(backend)
         native = MorseEvaluator(category)
@@ -201,7 +207,7 @@ def close(left, right, tolerance=1e-9):
 def run_su2_controls():
     su2 = load_module(SU2_PATH, "su2k_for_native_morse_controls")
     rows = []
-    for level in (2, 3, 4, 5):
+    for level in (2, 3, 4, 5, 6, 8):
         backend = su2.SU2KBraidEvaluator(level, exact=False)
         category = SU2KMorseAdapter(backend)
         evaluator = MorseEvaluator(category)
@@ -300,6 +306,14 @@ def run_loaded_fr_controls():
             LoadedFRMorseAdapter(dic3_backend, adapter_name="D(Dic_3) numeric FR"),
         )
     )
+    for name, path in (
+        ("D(A4) untwisted", DA4_PAYLOAD),
+        ("D(A4) c3w1 twisted category", DA4_C3W1_PAYLOAD),
+    ):
+        backend = generic.DA4FRBraidEvaluator(json.loads(path.read_text()))
+        categories.append(
+            (name, LoadedFRMorseAdapter(backend, adapter_name=f"{name} numeric FR"))
+        )
     for name, category in categories:
         evaluator = MorseEvaluator(category)
         for label in category.labels:
@@ -407,6 +421,28 @@ def run_loaded_fr_controls():
     return rows
 
 
+def run_character_callback_controls():
+    cases = (
+        ("D(Dic_3)", "1A:lin1", dic3_witness_character(1, "1A:lin1"), -1),
+        ("D(Dic_3)", "xA:chi0", dic3_witness_character(1, "xA:chi0"), 1j),
+        ("D(Dic_3)", "axA:chi1", dic3_witness_character(1, "axA:chi1"), 1j),
+        ("D(Dic_3)", "xA:chi3 power 4", dic3_witness_character(4, "xA:chi3"), 1),
+        ("D(A4)c3w1", "3A degree", da4_c3_character(1, "3A:any"), complex(-0.5, 3**0.5 / 2)),
+        ("D(A4)c3w1", "3B degree", da4_c3_character(1, "3B:any"), complex(-0.5, -(3**0.5) / 2)),
+    )
+    return [
+        {
+            "category": category,
+            "control": "recorded_character_callback",
+            "labels": [label],
+            "observed": [complex(observed).real, complex(observed).imag],
+            "expected": [complex(expected).real, complex(expected).imag],
+            "pass": close(observed, expected, 1e-12),
+        }
+        for category, label, observed, expected in cases
+    ]
+
+
 def main():
     started = datetime.now(UTC)
     started_clock = time.monotonic()
@@ -414,14 +450,19 @@ def main():
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     su2 = load_module(SU2_PATH, "su2k_for_native_morse_bridge_controls")
-    rows = run_su2_controls() + run_loaded_fr_controls() + run_su2_braid_bridge_controls(su2)
+    rows = (
+        run_su2_controls()
+        + run_loaded_fr_controls()
+        + run_character_callback_controls()
+        + run_su2_braid_bridge_controls(su2)
+    )
     payload = {
-        "schema": "twisted-yetter.native-morse-evaluator-controls.v2",
+        "schema": "twisted-yetter.native-morse-evaluator-controls.v3",
         "status": "pass" if all(row["pass"] for row in rows) else "needs-review",
         "mathematical_status": "NUMERICAL_LOCAL_AND_BRAID_BRIDGE_CALIBRATION",
         "generator_script": "experiments/sage/morse_native_controls.sage.py",
         "argv": sys.argv,
-        "reproduce_command": "PYTHONPATH=. DOT_SAGE=\"$PWD/.sage\" sage --python experiments/sage/morse_native_controls.sage.py --output experiments/results/morse/native-morse-evaluator-category-controls-v2.json",
+        "reproduce_command": "PYTHONPATH=. DOT_SAGE=\"$PWD/.sage\" sage --python experiments/sage/morse_native_controls.sage.py --output experiments/results/morse/native-morse-evaluator-category-controls-v3.json",
         "basis_normalization": {
             "scope": "Loaded payloads that explicitly declare Frobenius-normalized SVD intertwiner fusion bases.",
             "path_basis_gram": "The left channel x and right channel y composite basis norms squared are 1/d_x and 1/d_y.",
