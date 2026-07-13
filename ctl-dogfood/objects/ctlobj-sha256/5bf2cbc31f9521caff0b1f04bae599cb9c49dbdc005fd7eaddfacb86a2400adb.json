@@ -1,0 +1,44 @@
+{
+  "created_at": "2026-07-13T02:49:30Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+  "parents": [],
+  "payload": {
+    "claim_boundary": {
+      "established": "The partial run is sufficient only as an operational warning that this implementation and allocation are too expensive for the intended E(2) SU(3)_2 target.",
+      "not_claimed": [
+        "A completed SU(2)_3 invariant value for E(1).",
+        "A hardware-independent lower bound.",
+        "A prediction for an ideally rebalanced or compiled implementation.",
+        "Any mathematical conclusion about E(2) or SU(3)_2."
+      ]
+    },
+    "computation_script_object": "resource:twisted-yetter:script:morse-singleton-pool",
+    "created_at": "2026-07-13T02:49:30Z",
+    "created_by": "actor:codex",
+    "evidence": {
+      "artifact": "experiments/results/gompf-stipsicz/figure815-e1-su2-3-aborted-runtime-estimate-v1.json",
+      "hetzner_nodes": 5,
+      "observed_estimate": "approximately 15 to 20 hours under the observed allocation and tail behavior",
+      "total_sectors": 1048576,
+      "valid_retrieved_singletons": 382276,
+      "vcpus_per_node": 16
+    },
+    "fusion_category": "SU(2)_3",
+    "fusion_category_object": "subject:twisted-yetter:category-family:su2-k",
+    "link_object": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+    "mathematical_status": "INCONCLUSIVE_PARTIAL_RUN_NOT_AN_EVALUATION_RESULT",
+    "note_id": "objective-note-2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "status": "ABORTED_RUNTIME_ESTIMATE",
+    "title": "Figure 8.15 E(1) SU(2)_3 distributed runtime estimate",
+    "top_notice": "Five 16-vCPU Hetzner nodes were used, but the observed allocation and tail behavior still projected at least tens of hours. The partial E(1) SU(2)_3 run was terminated because it served only as a feasibility estimate for the genuinely relevant E(2) SU(3)_2 case."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

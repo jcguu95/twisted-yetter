@@ -1,0 +1,58 @@
+{
+  "schema": "twisted-yetter.distributed-runtime-estimate.v1",
+  "status": "ABORTED_RUNTIME_ESTIMATE_NOT_AN_EVALUATION_RESULT",
+  "mathematical_status": "INCONCLUSIVE_PARTIAL_RUN",
+  "created_at": "2026-07-13T02:49:30Z",
+  "purpose": "Estimate whether a genuinely relevant E(2) and SU(3)_2 run is computationally realistic.",
+  "link_object": {
+    "resource_id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+    "path": "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json",
+    "sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+    "status": "DRAFT_FIGURE815_E1_INPUT"
+  },
+  "fusion_category": {
+    "subject_id": "subject:twisted-yetter:category-family:su2-k",
+    "category": "SU(2)_3",
+    "simple_object_count": 4
+  },
+  "computation_script": {
+    "resource_id": "resource:twisted-yetter:script:morse-singleton-pool",
+    "path": "experiments/scripts/morse_singleton_pool.py",
+    "sha256": "ebf1c5732c29e50d82ce3c60a1e4279025609b1f5fb8b687401d8b2bec74c28b",
+    "git_blob": "c2ba018b41cca065bafecc7adb40d975efbc31d8",
+    "git_commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+    "delegate": "experiments/sage/morse_native_evaluate.sage.py"
+  },
+  "ranking_inputs": [
+    {
+      "path": "experiments/results/gompf-stipsicz/figure815-e1-su2-3-full-ranking-720-shards-v1.json",
+      "sha256": "0e22c857f017d1088e1af9229b1cd34e335d310c2db63ba8cbff71eb71071a58"
+    },
+    {
+      "path": "experiments/results/gompf-stipsicz/figure815-e1-su2-3-runtime-calibration-v1.json",
+      "sha256": "240ad8334612cc21feb4d85a87f6ad65b99418259335ce460b3837c2f11f7157"
+    }
+  ],
+  "deployment": {
+    "hetzner_node_count": 5,
+    "vcpus_per_node": 16,
+    "memory_gb_per_node": 32,
+    "peak_hetzner_worker_configuration": [20, 24, 24, 24, 24],
+    "peak_hetzner_worker_count": 116,
+    "additional_lan_workers_at_peak": 4
+  },
+  "partial_result_inventory": {
+    "total_sector_count": 1048576,
+    "retrieved_valid_singleton_count": 382276,
+    "retrieved_fraction": "0.364566802978515625",
+    "per_hetzner_counts": [34987, 46640, 105862, 94628, 100159],
+    "raw_pull_location_at_capture": "/tmp/e1-su2-3-aborted-remote",
+    "raw_pull_size": "409 MiB",
+    "warning": "The raw /tmp pull is an operational recovery copy, not a committed mathematical artifact. No partial sum is promoted as an invariant value."
+  },
+  "runtime_conclusion": {
+    "estimate": "At least tens of hours under the observed shard allocation and tail behavior; the contemporaneous range was approximately 15 to 20 hours.",
+    "scope_warning": "This is an operational estimate for the observed deployment, not a hardware-independent lower bound and not an ideally rebalanced forecast.",
+    "decision": "Abort E(1) SU(2)_3 before completion. Its role was only to estimate the feasibility of the genuinely relevant E(2) SU(3)_2 case, whose state space is much larger."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "actor_id": "actor:jin",
+  "admission_batch_cid": "ctlobj-sha256:40e4090d2389ed5c748ed7de517f266940d5b93413419250943eea120807ff64",
+  "admitted_at": "2026-07-13T02:49:30Z",
+  "binding_logical_ids": [
+    "claim:lab-note:2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+    "claim:resource-handle:morse-singleton-pool",
+    "claim:resource-snapshot:morse-singleton-pool-d57316a"
+  ],
+  "child_root_cid": "ctlobj-sha256:bb77506446ccf0bf29179d1a778a20544b2d03d0f89462500f2709e75b1050de",
+  "created_at": "2026-07-13T02:49:30Z",
+  "current_root_cid": "ctlobj-sha256:bb77506446ccf0bf29179d1a778a20544b2d03d0f89462500f2709e75b1050de",
+  "kernel_profile": "ctl-kernel/1",
+  "manifest_kind": "batch-admission",
+  "mode": "dogfood",
+  "parent_root_cid": "ctlobj-sha256:11564aea231ff0e282637b6f7ea54fef2cd95a768088f75a3b5099b7e56cc1c9",
+  "payload_files": [
+    "lab-notes/2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate.json",
+    "resources/morse-singleton-pool-handle.json",
+    "resources/morse-singleton-pool-snapshot-d57316a.json"
+  ],
+  "plan_schema": "ctl-dogfood/batch-admission-plan/1",
+  "principal_roles": [
+    "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1"
+  ],
+  "project_id": "project:twisted-yetter",
+  "revision_cids": [
+    "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
+    "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
+    "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b"
+  ],
+  "schema": "ctl-dogfood/batch-admission-manifest/1",
+  "semantics": {
+    "adds_authority_semantics": false,
+    "adds_downstream_ontology": false,
+    "adds_evidence_semantics": false,
+    "manifest_role": "audit-and-reproduction-sidecar-only",
+    "validate_transition_input": false
+  },
+  "submitted_by": "actor:codex",
+  "tool": "scripts/admit_revisions_batch.py",
+  "transition_cid": "ctlobj-sha256:40e4090d2389ed5c748ed7de517f266940d5b93413419250943eea120807ff64"
+}

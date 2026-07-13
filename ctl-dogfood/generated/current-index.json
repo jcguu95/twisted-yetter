@@ -7171,6 +7171,54 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
+      "logical_id": "claim:lab-note:2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+      "payload": {
+        "claim_boundary": {
+          "established": "The partial run is sufficient only as an operational warning that this implementation and allocation are too expensive for the intended E(2) SU(3)_2 target.",
+          "not_claimed": [
+            "A completed SU(2)_3 invariant value for E(1).",
+            "A hardware-independent lower bound.",
+            "A prediction for an ideally rebalanced or compiled implementation.",
+            "Any mathematical conclusion about E(2) or SU(3)_2."
+          ]
+        },
+        "computation_script_object": "resource:twisted-yetter:script:morse-singleton-pool",
+        "created_at": "2026-07-13T02:49:30Z",
+        "created_by": "actor:codex",
+        "evidence": {
+          "artifact": "experiments/results/gompf-stipsicz/figure815-e1-su2-3-aborted-runtime-estimate-v1.json",
+          "hetzner_nodes": 5,
+          "observed_estimate": "approximately 15 to 20 hours under the observed allocation and tail behavior",
+          "total_sectors": 1048576,
+          "valid_retrieved_singletons": 382276,
+          "vcpus_per_node": 16
+        },
+        "fusion_category": "SU(2)_3",
+        "fusion_category_object": "subject:twisted-yetter:category-family:su2-k",
+        "link_object": "resource:twisted-yetter:input:figure815-e1-morse-draft",
+        "mathematical_status": "INCONCLUSIVE_PARTIAL_RUN_NOT_AN_EVALUATION_RESULT",
+        "note_id": "objective-note-2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "status": "ABORTED_RUNTIME_ESTIMATE",
+        "title": "Figure 8.15 E(1) SU(2)_3 distributed runtime estimate",
+        "top_notice": "Five 16-vCPU Hetzner nodes were used, but the observed allocation and tail behavior still projected at least tens of hours. The partial E(1) SU(2)_3 run was terminated because it served only as a feasibility estimate for the genuinely relevant E(2) SU(3)_2 case."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
+        "created_at": "2026-07-13T02:49:30Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -7276,6 +7324,34 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-handle:morse-category-adapters",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+      "logical_id": "claim:resource-handle:morse-singleton-pool",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/scripts/morse_singleton_pool.py",
+          "morse_singleton_pool.py",
+          "morse-singleton-pool"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:morse-singleton-pool"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+        "created_at": "2026-07-13T02:49:30Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:morse-singleton-pool",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7865,6 +7941,33 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:morse-category-adapters-2788022",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
+      "logical_id": "claim:resource-snapshot:morse-singleton-pool-d57316a",
+      "payload": {
+        "captured_at": "2026-07-13T02:49:30Z",
+        "commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+        "git_blob": "c2ba018b41cca065bafecc7adb40d975efbc31d8",
+        "path": "experiments/scripts/morse_singleton_pool.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:morse-singleton-pool",
+        "sha256": "ebf1c5732c29e50d82ce3c60a1e4279025609b1f5fb8b687401d8b2bec74c28b",
+        "snapshot_id": "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
+        "created_at": "2026-07-13T02:49:30Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:morse-singleton-pool-d57316a",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -13459,7 +13562,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-13T02:44:22Z",
+  "generated_at": "2026-07-13T02:49:30Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -13490,6 +13593,9 @@
       ],
       "a12224abd1cf44738a162cccd624e81f4db10bbc": [
         "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
+      ],
+      "c2ba018b41cca065bafecc7adb40d975efbc31d8": [
+        "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ],
       "c96f6ecbfa34c8f1cc3340e12f38891818807fbf": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
@@ -13538,6 +13644,9 @@
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
+      "experiments/scripts/morse_singleton_pool.py": [
+        "resource:twisted-yetter:script:morse-singleton-pool"
+      ],
       "figure815-e1-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e1-morse-draft"
       ],
@@ -13556,11 +13665,17 @@
       "morse-category-adapters": [
         "resource:twisted-yetter:script:morse-category-adapters"
       ],
+      "morse-singleton-pool": [
+        "resource:twisted-yetter:script:morse-singleton-pool"
+      ],
       "morse_category_adapters.py": [
         "resource:twisted-yetter:script:morse-category-adapters"
       ],
       "morse_fusion_evaluator.py": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+      ],
+      "morse_singleton_pool.py": [
+        "resource:twisted-yetter:script:morse-singleton-pool"
       ],
       "native-morse-figure2-cross-category-matrix": [
         "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
@@ -13591,6 +13706,9 @@
       ],
       "resource:twisted-yetter:script:morse-category-adapters": [
         "resource:twisted-yetter:script:morse-category-adapters"
+      ],
+      "resource:twisted-yetter:script:morse-singleton-pool": [
+        "resource:twisted-yetter:script:morse-singleton-pool"
       ],
       "resource:twisted-yetter:script:native-morse-fusion-evaluator": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13657,6 +13775,9 @@
       ],
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
+      ],
+      "experiments/scripts/morse_singleton_pool.py": [
+        "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ]
     },
     "by_sha256": {
@@ -13686,6 +13807,9 @@
       ],
       "de1210fa39b8e3cf8e2c8aa8191b7e96acb4bf18dd1f25c5b7fdd8700869e03f": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
+      ],
+      "ebf1c5732c29e50d82ce3c60a1e4279025609b1f5fb8b687401d8b2bec74c28b": [
+        "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ],
       "f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed": [
         "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca"
@@ -13846,6 +13970,32 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:morse-category-adapters",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:morse-singleton-pool": {
+        "cid": "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+        "logical_id": "claim:resource-handle:morse-singleton-pool",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/scripts/morse_singleton_pool.py",
+            "morse_singleton_pool.py",
+            "morse-singleton-pool"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:morse-singleton-pool"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+          "created_at": "2026-07-13T02:49:30Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:morse-singleton-pool",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -14015,6 +14165,10 @@
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
       },
+      "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211": {
+        "id": "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef": {
         "id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b",
         "kind": "snapshot"
@@ -14059,6 +14213,10 @@
         "id": "resource:twisted-yetter:script:su2-2-braid-oracle",
         "kind": "handle"
       },
+      "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b": {
+        "id": "resource:twisted-yetter:script:morse-singleton-pool",
+        "kind": "handle"
+      },
       "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381": {
         "id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe",
         "kind": "snapshot"
@@ -14091,6 +14249,10 @@
       },
       "claim:resource-handle:morse-category-adapters": {
         "id": "resource:twisted-yetter:script:morse-category-adapters",
+        "kind": "handle"
+      },
+      "claim:resource-handle:morse-singleton-pool": {
+        "id": "resource:twisted-yetter:script:morse-singleton-pool",
         "kind": "handle"
       },
       "claim:resource-handle:native-morse-figure2-cross-category-matrix": {
@@ -14163,6 +14325,10 @@
       },
       "claim:resource-snapshot:morse-category-adapters-2788022": {
         "id": "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:morse-singleton-pool-d57316a": {
+        "id": "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573",
         "kind": "snapshot"
       },
       "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a": {
@@ -14642,6 +14808,31 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573": {
+        "cid": "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
+        "logical_id": "claim:resource-snapshot:morse-singleton-pool-d57316a",
+        "payload": {
+          "captured_at": "2026-07-13T02:49:30Z",
+          "commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+          "git_blob": "c2ba018b41cca065bafecc7adb40d975efbc31d8",
+          "path": "experiments/scripts/morse_singleton_pool.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:morse-singleton-pool",
+          "sha256": "ebf1c5732c29e50d82ce3c60a1e4279025609b1f5fb8b687401d8b2bec74c28b",
+          "snapshot_id": "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
+          "created_at": "2026-07-13T02:49:30Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:morse-singleton-pool-d57316a",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4": {
         "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
         "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
@@ -14769,8 +14960,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:11564aea231ff0e282637b6f7ea54fef2cd95a768088f75a3b5099b7e56cc1c9",
+  "root_cid": "ctlobj-sha256:bb77506446ccf0bf29179d1a778a20544b2d03d0f89462500f2709e75b1050de",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:9c7ca5a8722a8c70e710dff46102015ea5067f875c5547b5f3db1766b5b67083"
+  "transition_cid": "ctlobj-sha256:40e4090d2389ed5c748ed7de517f266940d5b93413419250943eea120807ff64"
 }

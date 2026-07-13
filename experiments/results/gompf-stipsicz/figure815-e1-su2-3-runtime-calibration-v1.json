@@ -1,0 +1,2980 @@
+{
+  "all_sample_timing": {
+    "count": 4096,
+    "max_seconds": 67.27408800800004,
+    "mean_seconds": 1.309117180693133,
+    "median_seconds": 0.1243992250001611,
+    "min_seconds": 0.0010488139996596146,
+    "p90_seconds": 2.5590177310004947,
+    "p99_seconds": 22.079448598000454,
+    "sum_seconds": 5362.143972119073
+  },
+  "duplicate_count": 0,
+  "duplicates": [],
+  "expected_sample_sector_count": 4096,
+  "extrapolation": {
+    "caveat": "random-sample extrapolation; full ranking and dynamic shards reduce imbalance but do not change total CPU",
+    "estimated_cpu_hours": 374.8918010163971,
+    "estimated_cpu_seconds": 1349610.4836590295,
+    "ideal_wall_hours": 10.413661139344363,
+    "ideal_wall_seconds": 37489.18010163971,
+    "operational_wall_hours_range": [
+      10.934344196311581,
+      13.017076424180454
+    ],
+    "operational_wall_multiplier_range": [
+      1.05,
+      1.25
+    ],
+    "worker_count": 36
+  },
+  "generated_at_utc": "2026-07-12T23:21:18.456789+00:00",
+  "generator_script": "experiments/scripts/morse_runtime_calibration.py",
+  "mathematical_status": "RUNTIME_ESTIMATE_NOT_AN_RT_EVALUATION",
+  "observed_index_count": 4096,
+  "observed_unique_sector_count": 4096,
+  "pool_summaries": [
+    {
+      "elapsed_seconds": 250.31489678099933,
+      "environment": {
+        "cpu_count": 16,
+        "environment": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]"
+      },
+      "path": "/tmp/e1-su2-3-calibration-results/host1/pool-summary.json",
+      "repo": {
+        "git_commit": null,
+        "git_dirty": false,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "selected_shard_count": 18,
+      "sha256": "6dcbc45f93ee45e426b878fd4750cf0b7dd4bc02ba063e5d3b883ff97e1e6b5f",
+      "status": "pass",
+      "utc_finish": "2026-07-12T23:02:59.693335+00:00",
+      "utc_start": "2026-07-12T22:58:49.378439+00:00",
+      "workers": 16
+    },
+    {
+      "elapsed_seconds": 368.42735573400023,
+      "environment": {
+        "cpu_count": 16,
+        "environment": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]"
+      },
+      "path": "/tmp/e1-su2-3-calibration-results/host2/pool-summary.json",
+      "repo": {
+        "git_commit": null,
+        "git_dirty": false,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "selected_shard_count": 18,
+      "sha256": "a003da190e7d63e32b960dba4693e9794ecc4d359d598f8b5aa6456074d6d63a",
+      "status": "pass",
+      "utc_finish": "2026-07-12T23:05:13.377051+00:00",
+      "utc_start": "2026-07-12T22:59:04.949698+00:00",
+      "workers": 16
+    }
+  ],
+  "population_sector_count": 1048576,
+  "random_sample_timing": {
+    "count": 4062,
+    "max_seconds": 67.21569683300004,
+    "mean_seconds": 1.2870024698289202,
+    "median_seconds": 0.12626833000012994,
+    "min_seconds": 0.002431390999845462,
+    "p90_seconds": 2.5610434510008417,
+    "p99_seconds": 21.885005832000388,
+    "sum_seconds": 5227.804032445074
+  },
+  "ranking_summary": "/tmp/e1-su2-3-ranking-sample/ranking-summary.json",
+  "ranking_summary_sha256": "062820cea764bb9797522df3581fd6859725ac849be5d082c11b8838c34c534c",
+  "roots": [
+    "/tmp/e1-su2-3-calibration-results/host1",
+    "/tmp/e1-su2-3-calibration-results/host2"
+  ],
+  "sampled_anchor_timing": {
+    "count": 34,
+    "max_seconds": 67.27408800800004,
+    "mean_seconds": 3.9511746962940806,
+    "median_seconds": 0.0018855289999919478,
+    "min_seconds": 0.0010488139996596146,
+    "p90_seconds": 0.005907507999836525,
+    "p99_seconds": 67.27408800800004,
+    "sum_seconds": 134.33993967399874
+  },
+  "sampling": {
+    "anchor_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8,
+      12,
+      16,
+      32,
+      48,
+      64,
+      128,
+      192,
+      256,
+      512,
+      768,
+      1024,
+      2048,
+      3072,
+      4096,
+      8192,
+      12288,
+      16384,
+      32768,
+      49152,
+      65536,
+      131072,
+      196608,
+      262144,
+      349525,
+      524288,
+      699050,
+      786432,
+      1048575
+    ],
+    "anchor_population_count": 34,
+    "base": 4,
+    "component_count": 10,
+    "note": "anchors are removed from the random mean and added back at measured cost",
+    "random_sample_count": 4062,
+    "sampled_anchor_count": 34
+  },
+  "schema": "twisted-yetter.native-morse-runtime-calibration.v1",
+  "source_record_digest_sha256": "a5140a67016ee4e7a4e08fe2b4ebccad403a60ffbfb56f0da8f7d8dd8e2fabd3",
+  "status": "pass",
+  "stratified_extrapolation": {
+    "estimated_cpu_hours": 343.93665161248447,
+    "estimated_cpu_seconds": 1238171.945804944,
+    "ideal_wall_hours": 9.553795878124568,
+    "operational_wall_hours_range": [
+      10.031485672030797,
+      11.94224484765571
+    ],
+    "population_ranking_summary": "/tmp/e1-su2-3-full-ranking/summary.json",
+    "population_ranking_summary_sha256": "f32a43b213f475725ddfb9d43ad644ece488053ecb2dd2b7ed9995ea0c166636",
+    "strata": [
+      {
+        "estimated_cpu_seconds": 363.07448167397587,
+        "max_boundary_fusion_dimension": 1,
+        "population_count": 18432,
+        "sample_timing": {
+          "count": 98,
+          "max_seconds": 0.17433277099917177,
+          "mean_seconds": 0.01969805130609678,
+          "median_seconds": 0.0071867709993966855,
+          "min_seconds": 0.0010488139996596146,
+          "p90_seconds": 0.03241839800011803,
+          "p99_seconds": 0.16746159700051066,
+          "sum_seconds": 1.9304090279974844
+        }
+      },
+      {
+        "estimated_cpu_seconds": 1459.5508307815294,
+        "max_boundary_fusion_dimension": 2,
+        "population_count": 57344,
+        "sample_timing": {
+          "count": 214,
+          "max_seconds": 0.1082208059997356,
+          "mean_seconds": 0.0254525465747337,
+          "median_seconds": 0.014150197000162734,
+          "min_seconds": 0.0024431410001852782,
+          "p90_seconds": 0.07218204099990544,
+          "p99_seconds": 0.10108936400047241,
+          "sum_seconds": 5.446844966993012
+        }
+      },
+      {
+        "estimated_cpu_seconds": 4517.161167435618,
+        "max_boundary_fusion_dimension": 5,
+        "population_count": 115712,
+        "sample_timing": {
+          "count": 431,
+          "max_seconds": 0.23594340199997532,
+          "mean_seconds": 0.03903796639445881,
+          "median_seconds": 0.02423553999960859,
+          "min_seconds": 0.003147181000713317,
+          "p90_seconds": 0.09212229300010222,
+          "p99_seconds": 0.19662993800011463,
+          "sum_seconds": 16.82536351601175
+        }
+      },
+      {
+        "estimated_cpu_seconds": 8295.455376490563,
+        "max_boundary_fusion_dimension": 13,
+        "population_count": 160768,
+        "sample_timing": {
+          "count": 623,
+          "max_seconds": 0.28043496499958565,
+          "mean_seconds": 0.051598921280917615,
+          "median_seconds": 0.035394719000578334,
+          "min_seconds": 0.005895156999940809,
+          "p90_seconds": 0.09775671599982161,
+          "p99_seconds": 0.2572505110001657,
+          "sum_seconds": 32.146127958011675
+        }
+      },
+      {
+        "estimated_cpu_seconds": 13612.75479514977,
+        "max_boundary_fusion_dimension": 34,
+        "population_count": 172032,
+        "sample_timing": {
+          "count": 669,
+          "max_seconds": 0.44250783000006777,
+          "mean_seconds": 0.07912920151570504,
+          "median_seconds": 0.06565008500001568,
+          "min_seconds": 0.010943330000372953,
+          "p90_seconds": 0.12670542699925136,
+          "p99_seconds": 0.318925522000427,
+          "sum_seconds": 52.937435814006676
+        }
+      },
+      {
+        "estimated_cpu_seconds": 32222.96764541503,
+        "max_boundary_fusion_dimension": 89,
+        "population_count": 172032,
+        "sample_timing": {
+          "count": 646,
+          "max_seconds": 0.6453482630004146,
+          "mean_seconds": 0.18730798715015246,
+          "median_seconds": 0.16646621800009598,
+          "min_seconds": 0.046655176999593095,
+          "p90_seconds": 0.3043888000001971,
+          "p99_seconds": 0.5069224130002112,
+          "sum_seconds": 121.00095969899849
+        }
+      },
+      {
+        "estimated_cpu_seconds": 92317.37293813612,
+        "max_boundary_fusion_dimension": 233,
+        "population_count": 159744,
+        "sample_timing": {
+          "count": 609,
+          "max_seconds": 1.4026731450003354,
+          "mean_seconds": 0.5779082340378112,
+          "median_seconds": 0.5394387280002775,
+          "min_seconds": 0.16071365800053172,
+          "p90_seconds": 0.9407717189997129,
+          "p99_seconds": 1.1934917759999735,
+          "sum_seconds": 351.946114529027
+        }
+      },
+      {
+        "estimated_cpu_seconds": 234967.8240278403,
+        "max_boundary_fusion_dimension": 610,
+        "population_count": 116736,
+        "sample_timing": {
+          "count": 493,
+          "max_seconds": 3.820586842999546,
+          "mean_seconds": 2.012813733791121,
+          "median_seconds": 2.0196172050000314,
+          "min_seconds": 0.5385675230008928,
+          "p90_seconds": 2.9427692930003104,
+          "p99_seconds": 3.5173588969992124,
+          "sum_seconds": 992.3171707590227
+        }
+      },
+      {
+        "estimated_cpu_seconds": 369535.7889548353,
+        "max_boundary_fusion_dimension": 1597,
+        "population_count": 57344,
+        "sample_timing": {
+          "count": 229,
+          "max_seconds": 10.875222825000492,
+          "mean_seconds": 6.444192748235828,
+          "median_seconds": 6.339233276999948,
+          "min_seconds": 3.7397591090002607,
+          "p90_seconds": 8.940084126999864,
+          "p99_seconds": 9.784737745999337,
+          "sum_seconds": 1475.7201393460045
+        }
+      },
+      {
+        "estimated_cpu_seconds": 345281.0701760281,
+        "max_boundary_fusion_dimension": 4181,
+        "population_count": 16384,
+        "sample_timing": {
+          "count": 72,
+          "max_seconds": 27.269907656000214,
+          "mean_seconds": 21.07428406836109,
+          "median_seconds": 21.754768951000187,
+          "min_seconds": 15.550195073000395,
+          "p90_seconds": 25.516309100999933,
+          "p99_seconds": 26.50417284500054,
+          "sum_seconds": 1517.3484529219986
+        }
+      },
+      {
+        "estimated_cpu_seconds": 135598.92541115746,
+        "max_boundary_fusion_dimension": 10946,
+        "population_count": 2048,
+        "sample_timing": {
+          "count": 12,
+          "max_seconds": 67.27408800800004,
+          "mean_seconds": 66.21041279841673,
+          "median_seconds": 66.51494533799996,
+          "min_seconds": 64.89164021200031,
+          "p90_seconds": 67.21569683300004,
+          "p99_seconds": 67.27408800800004,
+          "sum_seconds": 794.5249535810008
+        }
+      }
+    ]
+  },
+  "worker_contexts": [
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0000/worker-context-debian-32gb-fsn1-2-shard-0000.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "b555de1fbcf0f4b7c4f8de94b046cf6df5016f289c80257de4def29148f3f795",
+      "sha256": "a6f7da0007cdb8dfbe840057f36297ca08e39e450e4843aeae385ffbd136c4a7",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.564433+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0000"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0001/worker-context-debian-32gb-fsn1-2-shard-0001.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "ff4b8833f50df7b7e641a771db722955fbadf8a45a1ae7a0c3be73f2ff4c3707",
+      "sha256": "09ba32f6c84cca80ff37f954b5be892af8e8627fb95aa7854e37ff049f9248c1",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.581461+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0001"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0002/worker-context-debian-32gb-fsn1-2-shard-0002.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "b91a97ef13d0b26e5871636044ab87d25648c3fa621eb85b4c61911c1d77e275",
+      "sha256": "cab4793ef030788161082e4087f509b1e66a3804ad9d0753baed21e280a78d92",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.570258+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0002"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0003/worker-context-debian-32gb-fsn1-2-shard-0003.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "73b1a9a4a77433cecbb66007e739966284d96285689aa13b37ec75bd863a6aa7",
+      "sha256": "6147c857b89974e02c5da12bafa63b93db87f403aaa2717f38458c7e92ac3b89",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.573060+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0003"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0004/worker-context-debian-32gb-fsn1-2-shard-0004.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "fb2cb33620283a97c11b06b9b73d1fa617c56c1853d221954297b9f85d6e446c",
+      "sha256": "4408fa33c51520eae4b75025fd7a279be0ec90f77cdd25d1842cd4886f9a432c",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.597895+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0004"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0005/worker-context-debian-32gb-fsn1-2-shard-0005.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "d5b4d36c4968b09e2e83c4d9e388c7a566fa4f61a5cc27c6adef8a4d049be82e",
+      "sha256": "b901ace5dc0a073b9bdae3ebd2ab30e0c318c767b343ddc2852e8979f567ae85",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.576299+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0005"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0006/worker-context-debian-32gb-fsn1-2-shard-0006.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "413f07aece9cb7042e0e5b0ba3cee7b618b2ef352c14276041affd38c79e9668",
+      "sha256": "6734fb2d3bd26f51bf992c89a09a7ca9d26b0851f5269101b55342ed1b983ad5",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.572039+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0006"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0007/worker-context-debian-32gb-fsn1-2-shard-0007.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "727848e0cd0285ddcc207d7348d24fdda63a1b696a393f7329e2ecaa2f102309",
+      "sha256": "7c96578a04036c0e962a32f1367db65a88ceb9015f86bb91aa50569540e879e7",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.579454+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0007"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0008/worker-context-debian-32gb-fsn1-2-shard-0008.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "639e423c82472b64807e1903acd63d49d51e424ebebedf364677b522584fa0fc",
+      "sha256": "127bffcf0e70d2b76e52b736e5085d5c8769817976919490ad8e910b5ba717ce",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.577907+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0008"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0009/worker-context-debian-32gb-fsn1-2-shard-0009.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "6e8ec1365e8670dfb50994c1a27b4d31b942ff513d4190135910cd88be739d23",
+      "sha256": "40b155eb6fb22bd598967004767ea5cf1ed3431b14fd5e27755a05a37bc2f46a",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.588384+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0009"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0010/worker-context-debian-32gb-fsn1-2-shard-0010.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "e5a26550e0d6b136fcc7d141be3ecc3c604877f947545b4178b0a9d1914225f2",
+      "sha256": "13efca55359a988eae8785eb266d3a3d11a9d636bd5e565ff7fff6927c259e9c",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.613563+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0010"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0011/worker-context-debian-32gb-fsn1-2-shard-0011.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "13ac7d8462a7b36d5ecf399573898456cf231bb3dc48ee4b1d1499ce6a0afc05",
+      "sha256": "ab04d674d491681365621f712bc210d412224c69cebe98dea8735e86dab311e8",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.572322+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0011"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0012/worker-context-debian-32gb-fsn1-2-shard-0012.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "dff882bb868474bf1a1a0aeeb1298a8c2ccb16dd3c80fc33c4e5b8f83a6122ea",
+      "sha256": "c1f67ea4e90325701c3f84797bb517b042e54cdf40b3a7043e8804fa2da008f8",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.644700+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0012"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0013/worker-context-debian-32gb-fsn1-2-shard-0013.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "778e45519a416b1ecb4344c38f9e7233c1eec949002e2bb97f911a2796720434",
+      "sha256": "f6e36e5cfb38996b327e07ad3a00345b8b60107560387d31a226208582edb07e",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.587786+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0013"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0014/worker-context-debian-32gb-fsn1-2-shard-0014.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "64dc7f65886add79c8478f9c893690bf86f501bfb6782c48777e0a7f84683001",
+      "sha256": "759e4de8ecc54c2782767bedfe492598d2d5bc33821be2a1efba8752be48b30a",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.609933+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0014"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0015/worker-context-debian-32gb-fsn1-2-shard-0015.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "6da089943b7ef559717f696ad4e08865b2251842cb7450095beedcc3151f581c",
+      "sha256": "71e523874b0783b01eae5c9dfcd353bde76ac6f4531ffd1315df64ad44a83574",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:58:49.595779+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0015"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0016/worker-context-debian-32gb-fsn1-2-shard-0016.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "c3b654b3cfa2dc044382c21a888c77e1559bf5cf510e8ee889c604200433e3c8",
+      "sha256": "69066483fa0bc10682c74fff05c4e9971eea099b9611e23b8e66bd6521610496",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:55.484280+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0016"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-2",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853520384
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host1/shard-0017/worker-context-debian-32gb-fsn1-2-shard-0017.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "de0a82b3a7f586911f605429823c79490e4fe05fda06b2c3344e81c28ef615e7",
+      "sha256": "2784cac1291d5d15af54b0735400ea62ada2244a5608244d4ddafd7e24da8c06",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:55.875940+00:00",
+      "worker_id": "debian-32gb-fsn1-2-shard-0017"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0018/worker-context-debian-32gb-fsn1-1-shard-0018.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "e3d739070eaad591da74fafe8403f7d5ec2b38a781e5c278ba5894715af4e34a",
+      "sha256": "bbb1383a987b1be559e4f1dbc497594b2246c42ccee16dd23c668289ee5448cd",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.148041+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0018"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0019/worker-context-debian-32gb-fsn1-1-shard-0019.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "59027b2369c68bd2162d9d1b2c3f4dbeb917bcc383aaaf17f4bf7e69f801e971",
+      "sha256": "02658a040ebfffaff441e6184367726e616dfa2998c15c0c01fbf7446fc9c131",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.165262+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0019"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0020/worker-context-debian-32gb-fsn1-1-shard-0020.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "f5fd925ff3ee6cd48027d1b5262863ccf0a737f38b4918b09e794b284258f3db",
+      "sha256": "297f232558a3d8877270b59bfedd04586787302552fbdae47e35c11a62ddd45a",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.199958+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0020"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0021/worker-context-debian-32gb-fsn1-1-shard-0021.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "df16c8e9c6f6f8208960309cb9c549ccf439b735b604355a02ee9f0c609f0ece",
+      "sha256": "1492e4712caac44d7aea4ca9a684f142e30592e9eefcee5d6b83cccd7db0dfb1",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.153851+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0021"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0022/worker-context-debian-32gb-fsn1-1-shard-0022.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "4dc16df5e99fdb772a1f64e95345e9072b4790fd63260150634271233aeb176b",
+      "sha256": "b810fa603e8fa96f5999ba9e73ebd8344fe9c4dd1af2be11700dfdd0e56d72fd",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.163517+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0022"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0023/worker-context-debian-32gb-fsn1-1-shard-0023.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "60e6d779b64deb6ef4815d4437edc05c6d42e71415abe866e167361573d3c340",
+      "sha256": "23cb75cc1382b0d9a0b59cb11c71026d2ce39fa0dfbf4899cf8cebf0d852ff73",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.166637+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0023"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0024/worker-context-debian-32gb-fsn1-1-shard-0024.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "e7f027e9cd5893c2dba4699647345767175aa96c3a73a5968a00801eab885b59",
+      "sha256": "41b09dc7a05e91999f26b630d7dccbf72a86740ad7bf542fec0c0a60a2cd7f16",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.169740+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0024"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0025/worker-context-debian-32gb-fsn1-1-shard-0025.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "f84376324c1ffcc97aabc60d6406b31f056b205b8d233fa9466286c964b917c4",
+      "sha256": "b2978b177859e3413de7a38ea6281d9f1d37ce6de325c3c9502254321f09ac34",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.168060+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0025"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0026/worker-context-debian-32gb-fsn1-1-shard-0026.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "beed34245ba35db63e851bc28f798878f85fc33db3ee75e58232b2a91d0dfb4e",
+      "sha256": "9404049908aa97f0ff1902f25ae66be77fe499f470ffd9d0ec3303112888b1cc",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.154346+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0026"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0027/worker-context-debian-32gb-fsn1-1-shard-0027.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "8b914e9a767914e3ee48abbd359603155d5dff7b695eab31625368e6749f61a6",
+      "sha256": "0b5bced74cffb88266483934fb05eeb21f369ee54bf18b01a75e440756f841ac",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.159445+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0027"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0028/worker-context-debian-32gb-fsn1-1-shard-0028.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "c6cf6214ecb1b3def3ce6d10b541abe2a9012f64e3e8c1b8a8e9b586dc022f1b",
+      "sha256": "73bfd8abac2ee98d5a5d9c7347f099bd830a3b69c8524ca81c40aad5310b1be5",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.201382+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0028"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0029/worker-context-debian-32gb-fsn1-1-shard-0029.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "f5623cbe58d99135c05aaf7a0e98ba54580026f91242ea93a10f1f20fdb91a0a",
+      "sha256": "b6238d05e366cc4e56dbf2267807c305640b1eaab387e2b7dd3292295679d71e",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.195912+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0029"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0030/worker-context-debian-32gb-fsn1-1-shard-0030.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "ed973ccc468825fae0847184df25aed47496a1d1791a0ab1fed622df484b1a16",
+      "sha256": "bdd1d803239c345f313f11eede5070433c60e0830b59770c5004bbaa0defbaed",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.177283+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0030"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0031/worker-context-debian-32gb-fsn1-1-shard-0031.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "117271c3ee22e8ca7ffdb235bbb2b4832a0c4a76667f114989ac787a7c3cd0c7",
+      "sha256": "1f648ae800804758f30f28f997b4b89072a04af1cf6afd672d4e8d147b8c2833",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.168535+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0031"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0032/worker-context-debian-32gb-fsn1-1-shard-0032.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "973d596fb071708f8397130ad4e1bee9be4d1806713c2215a895b0caba33bc3a",
+      "sha256": "d0be6f00b3b6e8a27bdf16f838fbcd62d239d7c1821dfbcaf685e9b273597935",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.195681+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0032"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0033/worker-context-debian-32gb-fsn1-1-shard-0033.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "932a409ea1ce74c3810fdd2491835ba52891412a43651ef717226498d8c8bad8",
+      "sha256": "7612e5a9cd53e4ea5210b43c5a4e5aa84731901c830b769a6e0b060837624fb3",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T22:59:05.159711+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0033"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0034/worker-context-debian-32gb-fsn1-1-shard-0034.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "d4186de649baff255989c9f9b7cf3af00c1f691d3cb772ab44f3924938d77017",
+      "sha256": "f3b7c89c34317743cd69bcae9de49b0b9286811597db3eb57565dc012f6fb7d1",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T23:02:11.650427+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0034"
+    },
+    {
+      "checkpoint_format": null,
+      "environment": {
+        "cpu_count": 16,
+        "environment_allowlist": {
+          "DOT_SAGE": "/root/twisted-yetter/.sage",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONPATH": ".",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "hostname": "debian-32gb-fsn1-1",
+        "machine": "x86_64",
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python_executable": "/usr/bin/python3",
+        "python_version": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage_version": "9.5",
+        "timezone_name": "UTC",
+        "timezone_utc_offset_seconds": 0,
+        "total_memory_bytes": 32853512192
+      },
+      "evaluation_identity": {
+        "category_id": "su2-k3",
+        "character_assignments": {
+          "A": 0,
+          "B": 0,
+          "L1": 0,
+          "L2": 0,
+          "L3": 0,
+          "L4": 0,
+          "R1": 0,
+          "R2": 0,
+          "R3": 0,
+          "R4": 0
+        },
+        "component_order": [
+          "A",
+          "B",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "input_sha256": "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128",
+        "level": 3,
+        "planner_mode": "hybrid",
+        "reversed_orientation_components": [],
+        "schema": "twisted-yetter.native-morse-singleton-identity.v1"
+      },
+      "evaluation_identity_sha256": "ab393f06d97cb6948f8f95f893217388ee17f34d8bbd6e8b899be4adfa588d45",
+      "path": "/tmp/e1-su2-3-calibration-results/host2/shard-0035/worker-context-debian-32gb-fsn1-1-shard-0035.json",
+      "progress_every": null,
+      "repo": {
+        "dirty": false,
+        "git_commit": null,
+        "root": "/root/twisted-yetter"
+      },
+      "run_id": "e1-su2-3-calibration-20260712",
+      "sector_index_file_sha256": "79a752afb5251a1a96bbd4e0da9ef928df23560743a2655997fa1418f9c062d3",
+      "sha256": "7a31648a632e11a4f44f317dcbd14bec1e4ec5d8c3f7a688d847c9f077c4ba07",
+      "tool_versions": {
+        "platform": "Linux-6.1.0-48-amd64-x86_64-with-glibc2.36",
+        "python": "3.11.2 (main, May 12 2026, 05:17:27) [GCC 12.2.0]",
+        "sage": "9.5"
+      },
+      "utc_start": "2026-07-12T23:02:15.251210+00:00",
+      "worker_id": "debian-32gb-fsn1-1-shard-0035"
+    }
+  ]
+}
