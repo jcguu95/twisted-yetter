@@ -1,9 +1,12 @@
 from experiments.sage.morse_fusion_evaluator import (
     Leaf,
+    LeafState,
     Node,
+    NodeState,
     MorseEvaluator,
     analyze_topology,
     leaves,
+    project_vacuum_interval,
     rotation_plan,
     rotate_shape,
 )
@@ -12,6 +15,7 @@ from experiments.sage.morse_fusion_evaluator import (
 class SemionCategory:
     labels = (0, 1)
     unit = 0
+    path_basis_is_orthonormal = True
 
     def dual(self, label):
         return label
@@ -98,6 +102,28 @@ def parallel_unlink_forms():
     ]
 
 
+def middle_vacuum_projector_forms(repetitions=1):
+    forms = [
+        {"kind": "cup", "piece": "A", "at": "far-left"},
+        {"kind": "cup", "piece": "B", "at": "far-right"},
+    ]
+    forms.extend(
+        {
+            "kind": "vacuum-projector",
+            "projector_id": f"middle-{index}",
+            "strands": ["A.right", "B.left"],
+        }
+        for index in range(repetitions)
+    )
+    forms.extend(
+        [
+            {"kind": "cap", "piece": "B", "strands": ["B.left", "B.right"]},
+            {"kind": "cap", "piece": "A", "strands": ["A.left", "A.right"]},
+        ]
+    )
+    return forms
+
+
 def test_rotation_plan_preserves_order_and_reaches_target():
     a, b, c, d = (Leaf(name, 0) for name in "abcd")
     source = Node(Node(Node(a, b), c), d)
@@ -152,6 +178,75 @@ def test_unit_components_are_pruned_without_changing_value():
     )
     assert abs(value - 1.0) < 1e-12
     assert stats["unit_pruned_components"] == ["B", "C"]
+
+
+def test_vacuum_projector_keeps_collective_unit_channel_not_individual_units():
+    evaluator = MorseEvaluator(SemionCategory())
+    value, stats = evaluator.fixed_label_value(
+        middle_vacuum_projector_forms(), {"A": 1, "B": 1}
+    )
+    assert abs(value - 1.0) < 1e-12
+    assert stats["vacuum_projectors"] == 1
+
+    vanished, vanished_stats = evaluator.fixed_label_value(
+        middle_vacuum_projector_forms(), {"A": 1, "B": 0}
+    )
+    assert abs(vanished) < 1e-12
+    assert vanished_stats["vanishing_reason"] == (
+        "empty support after fusion-channel projection"
+    )
+
+
+def test_vacuum_projector_is_idempotent():
+    evaluator = MorseEvaluator(SemionCategory())
+    once = evaluator.fixed_label_value(
+        middle_vacuum_projector_forms(1), {"A": 1, "B": 1}
+    )[0]
+    twice = evaluator.fixed_label_value(
+        middle_vacuum_projector_forms(2), {"A": 1, "B": 1}
+    )[0]
+    assert abs(once - twice) < 1e-12
+
+
+def test_vacuum_projector_retains_all_unit_root_path_copies():
+    class PathBasisOnly:
+        unit = 0
+        path_basis_is_orthonormal = True
+
+    category = PathBasisOnly()
+    leaf_trees = [Leaf(name, 2) for name in "abcd"]
+    leaf_states = [LeafState(name) for name in "abcd"]
+    tree = Node(
+        leaf_trees[0], Node(leaf_trees[1], Node(leaf_trees[2], leaf_trees[3]))
+    )
+    vector = {}
+    for inner_channel in (0, 1, 2):
+        inner = NodeState(
+            leaf_states[2], leaf_states[3], inner_channel, 0
+        )
+        middle = NodeState(leaf_states[1], inner, 2, 0)
+        state = NodeState(leaf_states[0], middle, 0, 0)
+        vector[state] = complex(inner_channel + 1)
+    projected_tree, projected, stats = project_vacuum_interval(
+        category, tree, vector, 0, 4
+    )
+    assert projected_tree == tree
+    assert projected == vector
+    assert stats["support_after"] == 3
+
+
+def test_vacuum_projector_fails_closed_without_orthonormal_basis_claim():
+    class UnsafeCategory:
+        unit = 0
+
+    tree = Leaf("a", 0)
+    vector = {LeafState("a"): 1.0 + 0.0j}
+    try:
+        project_vacuum_interval(UnsafeCategory(), tree, vector, 0, 1)
+    except ValueError as exc:
+        assert "orthonormal path basis" in str(exc)
+    else:
+        raise AssertionError("unsafe category adapter was accepted")
 
 
 def test_topology_joins_multiple_pieces_into_component_a():

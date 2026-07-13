@@ -314,6 +314,51 @@ def apply_rotation_plan(category: Any, tree: Tree, vector: dict[State, complex],
     return tree, vector
 
 
+def project_vacuum_interval(
+    category: Any,
+    tree: Tree,
+    vector: dict[State, complex],
+    start: int,
+    stop: int,
+):
+    """Apply the idempotent unit-channel projector to a leaf interval.
+
+    The projector is diagonal only after the requested leaves have been
+    grouped as a subtree.  Every fusion path whose subtree root is the tensor
+    unit is retained, including distinct multiplicity copies.  No global
+    dimension or handle normalization is inserted here.
+    """
+
+    if getattr(category, "path_basis_is_orthonormal", False) is not True:
+        raise ValueError(
+            "vacuum projection requires a category adapter with an explicitly "
+            "orthonormal path basis"
+        )
+    if not (0 <= start < stop <= leaf_count(tree)):
+        raise ValueError("vacuum projector needs a nonempty in-range leaf interval")
+    source = tree
+    target, path = grouped_target(tree, start, stop)
+    forward = rotation_plan(tree, target)
+    tree, vector = apply_rotation_plan(category, tree, vector, forward)
+    local_tree = subtree_at(tree, path)
+    retained = {
+        state: amplitude
+        for state, amplitude in vector.items()
+        if root_label(local_tree, _state_at(state, path)) == category.unit
+    }
+    backward = rotation_plan(tree, source)
+    tree, retained = apply_rotation_plan(category, tree, retained, backward)
+    if tree != source:
+        raise AssertionError("vacuum projection failed to restore the source tree")
+    return tree, _prune(retained), {
+        "forward_f_rotations": len(forward),
+        "backward_f_rotations": len(backward),
+        "support_before": len(vector),
+        "support_after": len(retained),
+        "subtree_path": list(path),
+    }
+
+
 def braid_siblings(category: Any, tree: Tree, vector: dict[State, complex], path: tuple[int, ...], positive: bool):
     local_tree = subtree_at(tree, path)
     if not isinstance(local_tree, Node):
@@ -495,6 +540,22 @@ def prune_unit_components(
         elif kind == "kink":
             if topology.component_by_strand[form["strand"]] in retained_components:
                 output.append(dict(form))
+        elif kind == "vacuum-projector":
+            strands = [
+                strand
+                for strand in form.get("strands", ())
+                if topology.component_by_strand[strand] in retained_components
+            ]
+            if strands:
+                positions = [kept_order.index(strand) for strand in strands]
+                start = min(positions)
+                if kept_order[start : start + len(strands)] != strands:
+                    raise ValueError(
+                        "unit pruning made vacuum-projector strands noncontiguous"
+                    )
+                projected = dict(form)
+                projected["strands"] = strands
+                output.append(projected)
         else:
             raise ValueError(f"unsupported form during unit pruning: {form!r}")
     if full_order or kept_order:
@@ -588,6 +649,7 @@ class EvaluationStats:
     cups: int = 0
     caps: int = 0
     kinks: int = 0
+    vacuum_projectors: int = 0
     max_active_strands: int = 0
     max_state_support: int = 1
     plans: list[dict[str, Any]] | None = None
@@ -662,6 +724,7 @@ class MorseEvaluator:
             "cups": stats.cups,
             "caps": stats.caps,
             "kinks": stats.kinks,
+            "vacuum_projectors": stats.vacuum_projectors,
             "max_active_strands": stats.max_active_strands,
             "max_state_support": stats.max_state_support,
             "planner_weights": {"f": self.f_weight, "r": self.r_weight},
@@ -992,6 +1055,50 @@ class MorseEvaluator:
                 factor = complex(self.category.twist(label)) ** exponent
                 vector = {state: factor * amplitude for state, amplitude in vector.items()}
                 stats.kinks += abs(exponent)
+                index += 1
+            elif kind == "vacuum-projector":
+                strands = list(form.get("strands", ()))
+                if not strands:
+                    stats.plans.append(
+                        {
+                            "kind": "vacuum-projector",
+                            "form_index": index,
+                            "projector_id": form.get("projector_id"),
+                            "empty_tensor_identity": True,
+                        }
+                    )
+                    stats.vacuum_projectors += 1
+                    index += 1
+                    continue
+                if tree is None:
+                    raise ValueError("nonempty vacuum projector on an empty diagram")
+                if len(set(strands)) != len(strands):
+                    raise ValueError("vacuum projector repeats an active strand")
+                if any(strand not in order for strand in strands):
+                    raise ValueError("vacuum projector references an inactive strand")
+                start = order.index(strands[0])
+                stop = start + len(strands)
+                if order[start:stop] != strands:
+                    raise ValueError(
+                        "vacuum projector strands must be one contiguous ordered interval"
+                    )
+                tree, vector, projector_stats = project_vacuum_interval(
+                    self.category, tree, vector, start, stop
+                )
+                stats.f_rotations += (
+                    projector_stats["forward_f_rotations"]
+                    + projector_stats["backward_f_rotations"]
+                )
+                stats.vacuum_projectors += 1
+                stats.plans.append(
+                    {
+                        "kind": "vacuum-projector",
+                        "form_index": index,
+                        "projector_id": form.get("projector_id"),
+                        "strands": strands,
+                        **projector_stats,
+                    }
+                )
                 index += 1
             else:
                 raise ValueError(f"unsupported Morse form: {form!r}")

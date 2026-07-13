@@ -31,6 +31,11 @@ def _cost_profile(f_blocks, r_blocks):
 
 
 class BaseMorseCategoryAdapter:
+    # The adapters below expose F/R data in the evaluator's orthonormal path
+    # basis.  Vacuum projection must fail closed for adapters that do not make
+    # this convention explicit.
+    path_basis_is_orthonormal = True
+
     def fusion_multiplicity(self, left, right, output) -> int:
         return next(
             (int(mult) for target, mult in self.fusion_outputs(left, right) if target == output),
