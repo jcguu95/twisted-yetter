@@ -2,6 +2,7 @@ import pytest
 
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
     COMPONENT_BY_PIECE,
+    COMPONENT_ORDER,
     build_figure21_right,
 )
 from experiments.scripts.morse_dsl import MorseBuilder
@@ -125,6 +126,7 @@ def test_figure21_disk_certificate_regression():
         builder.forms,
         component_by_piece=COMPONENT_BY_PIECE,
         special_components=("red",),
+        component_order=COMPONENT_ORDER,
     )
     certificate = ir["special_disk_certificates"][0]
     assert len(ir["component_order"]) == 12

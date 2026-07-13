@@ -776,6 +776,7 @@ def compile_projected_morphism(
     *,
     component_by_piece: dict[str, str],
     special_components: Iterable[str],
+    component_order: Iterable[str] | None = None,
 ) -> dict[str, Any]:
     """Return topology-only projector IR for crossing-free special components."""
 
@@ -792,7 +793,17 @@ def compile_projected_morphism(
     missing = set(specials) - set(components)
     if missing:
         raise ValueError(f"unknown special components: {sorted(missing)!r}")
-    component_order = list(dict.fromkeys(component_by_piece.values()))
+    discovered_components = set(component_by_piece.values())
+    if component_order is None:
+        component_order = list(dict.fromkeys(component_by_piece.values()))
+    else:
+        component_order = list(component_order)
+        if len(set(component_order)) != len(component_order):
+            raise ValueError("component_order contains duplicate names")
+        if set(component_order) != discovered_components:
+            raise ValueError(
+                "component_order does not exactly match component_by_piece values"
+            )
     records = _crossing_records(trace, orientation, strand_component)
     cycles = _component_cycles(
         components, _successors(forms, orientation)
@@ -815,6 +826,7 @@ def compile_projected_morphism(
         "forms": forms,
         "component_by_piece": component_by_piece,
         "special_components": specials,
+        "component_order": component_order,
     }
     input_hash = stable_json_hash(input_payload)
     for certificate in certificates:

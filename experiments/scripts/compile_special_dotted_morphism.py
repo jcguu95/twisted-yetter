@@ -148,6 +148,7 @@ def main() -> int:
             payload["forms"],
             component_by_piece=payload["component_by_piece"],
             special_components=payload["special_components"],
+            component_order=payload.get("component_order"),
         )
         if time.monotonic() - started_monotonic > args.max_seconds:
             raise TimeoutError("topology compilation exceeded --max-seconds")
