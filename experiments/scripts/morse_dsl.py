@@ -12,6 +12,7 @@ from typing import Any, Iterable, Literal
 
 
 Direction = Literal["left", "right"]
+TwistSign = Literal["+", "-"]
 
 
 def left(piece: str) -> str:
@@ -182,6 +183,54 @@ class MorseBuilder:
     ) -> list[dict[str, Any]]:
         return self.over(strand, "right", under=under, times=times, sign=sign)
 
+    def under(
+        self,
+        strand: str,
+        direction: Direction,
+        *,
+        over: Iterable[str] | None = None,
+        times: int | None = None,
+        sign: str | None = None,
+    ) -> list[dict[str, Any]]:
+        """Move STRAND under a list of strands or infer targets by TIMES."""
+        if over is not None and times is not None:
+            raise ValueError("use over=... or times=..., not both")
+        if over is None:
+            if times is None:
+                raise ValueError("under needs over=... or times=...")
+            if times < 0:
+                raise ValueError("times must be nonnegative")
+            made = []
+            for _ in range(times):
+                target = self._infer_target(strand, direction)
+                made.append(self.cross(over=target, under=strand, sign=sign))
+            return made
+
+        made = []
+        for target in over:
+            made.append(self.cross(over=target, under=strand, sign=sign))
+        return made
+
+    def under_left(
+        self,
+        strand: str,
+        *,
+        over: Iterable[str] | None = None,
+        times: int | None = None,
+        sign: str | None = None,
+    ) -> list[dict[str, Any]]:
+        return self.under(strand, "left", over=over, times=times, sign=sign)
+
+    def under_right(
+        self,
+        strand: str,
+        *,
+        over: Iterable[str] | None = None,
+        times: int | None = None,
+        sign: str | None = None,
+    ) -> list[dict[str, Any]]:
+        return self.under(strand, "right", over=over, times=times, sign=sign)
+
     def nested_cups(
         self,
         components: Iterable[str],
@@ -222,19 +271,28 @@ class MorseBuilder:
         start: str,
         end: str,
         direction: Direction = "left",
-        sign: str | None = None,
+        sign: TwistSign,
     ) -> list[dict[str, Any]]:
-        """Expand a convenient full-twist macro over the current interval.
+        """Expand a handed full twist over the current strand interval.
 
-        This is intentionally provisional: it is a checked shorthand for the
-        braid pattern we are using, not yet a claim about the book diagram.
+        ``sign`` is geometric handedness, not an oriented crossing-sign
+        annotation.  With a leftward sweep, a negative twist moves each
+        strand over its neighbors and a positive twist moves it under them.
+        The over/under choice reverses for a rightward sweep so handedness is
+        independent of the expansion direction.
         """
+        if sign not in {"+", "-"}:
+            raise ValueError("full-twist sign must be '+' or '-'")
         strands = self.interval(start, end)
         count = len(strands) - 1
         movers = list(reversed(strands)) if direction == "left" else list(strands)
         made = []
+        mover_is_over = (direction == "left") == (sign == "-")
         for strand in movers:
-            made.extend(self.over(strand, direction, times=count, sign=sign))
+            if mover_is_over:
+                made.extend(self.over(strand, direction, times=count))
+            else:
+                made.extend(self.under(strand, direction, times=count))
         return made
 
     def snapshot(self) -> dict[str, Any]:

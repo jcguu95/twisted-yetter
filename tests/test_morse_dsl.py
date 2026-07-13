@@ -34,6 +34,16 @@ def test_times_infers_current_targets():
     assert m.order == ["A.left", "B.left", "B.right", "A.right", "C.left", "C.right"]
 
 
+def test_under_left_infers_current_targets():
+    m = MorseBuilder()
+    m.cup("A", at="far-left")
+    m.cup("B", at="far-right")
+    m.under_left("B.left", times=2)
+    assert {"kind": "cross", "over": "A.right", "under": "B.left"} in m.forms
+    assert {"kind": "cross", "over": "A.left", "under": "B.left"} in m.forms
+    assert m.order == ["B.left", "A.left", "A.right", "B.right"]
+
+
 def test_rejects_nonadjacent_crossing():
     m = MorseBuilder()
     m.cup("A", at="far-left")
@@ -54,9 +64,46 @@ def test_full_twist_uses_current_interval():
     m.cup("A", at="far-left")
     m.nested_cups(["L1", "L2", "L3"], between=("A.left", "A.right"))
     m.full_twist(start="L1.left", end="L3.left", direction="left", sign="-")
-    assert {"kind": "cross", "over": "L3.left", "under": "L2.left", "sign": "-"} in m.forms
-    assert {"kind": "cross", "over": "L3.left", "under": "L1.left", "sign": "-"} in m.forms
-    assert {"kind": "cross", "over": "L2.left", "under": "L1.left", "sign": "-"} in m.forms
+    assert {"kind": "cross", "over": "L3.left", "under": "L2.left"} in m.forms
+    assert {"kind": "cross", "over": "L3.left", "under": "L1.left"} in m.forms
+    assert {"kind": "cross", "over": "L2.left", "under": "L1.left"} in m.forms
+
+
+def test_positive_and_negative_full_twists_have_inverse_crossings():
+    def crossing_pairs(sign):
+        m = MorseBuilder()
+        m.cup("A", at="far-left")
+        m.cup("B", at="far-right")
+        initial = list(m.order)
+        m.full_twist(start="A.right", end="B.left", direction="left", sign=sign)
+        assert m.order == initial
+        return [
+            (form["over"], form["under"])
+            for form in m.forms
+            if form["kind"] == "cross"
+        ]
+
+    negative = crossing_pairs("-")
+    positive = crossing_pairs("+")
+    assert negative == [("B.left", "A.right"), ("A.right", "B.left")]
+    assert positive == [("A.right", "B.left"), ("B.left", "A.right")]
+    assert positive == [(under, over) for over, under in negative]
+
+
+def test_full_twist_handedness_is_independent_of_sweep_direction():
+    left = MorseBuilder()
+    left.cup("A", at="far-left")
+    left.cup("B", at="far-right")
+    left.full_twist(start="A.right", end="B.left", direction="left", sign="-")
+
+    right = MorseBuilder()
+    right.cup("A", at="far-left")
+    right.cup("B", at="far-right")
+    right.full_twist(start="A.right", end="B.left", direction="right", sign="-")
+
+    left_pairs = [(f["over"], f["under"]) for f in left.forms if f["kind"] == "cross"]
+    right_pairs = [(f["over"], f["under"]) for f in right.forms if f["kind"] == "cross"]
+    assert left_pairs == right_pairs
 
 
 def test_figure815_e1_separates_b_framing_from_wheel_framings():

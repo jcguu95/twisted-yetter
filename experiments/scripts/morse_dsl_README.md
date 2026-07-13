@@ -11,12 +11,16 @@ that the draft transcription agrees with Gompf-Stipsicz Figure 8.15.
 Current scope:
 
 - `cup`, `cap`, `cross`, and one-sided `kink` are fundamental forms.
-- `nested_cups`, `over_left` / `over_right`, `kink_each`, and `full_twist`
+- `nested_cups`, `over_left` / `over_right`, `under_left` / `under_right`,
+  `kink_each`, and handed `full_twist`
   are convenience functions that expand into fundamental forms.
 - `over_left(..., times=n)` and `over_right(..., times=n)` are state-dependent:
   they infer the next adjacent strand from the current active order at each
   crossing.
 - This is not an evaluator yet.
+- `full_twist(sign="-")` and `full_twist(sign="+")` generate inverse
+  over/under geometry.  The sign is twist handedness, not an oriented
+  crossing-sign annotation.
 
 Run the K3 Figure 8.15 draft prefix:
 
@@ -29,11 +33,11 @@ Generate the repo-local E(1) and K3/E(2) draft inputs:
 
 ```sh
 python experiments/scripts/k3_figure815_morse_draft.py \
-  --wheel-count 4 --self-twist 1 --name "E(1)" \
+  --wheel-count 4 --component-self-twist 2 --b-framing 1 --name "E(1)" \
   --write experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json
 
 python experiments/scripts/k3_figure815_morse_draft.py \
-  --wheel-count 10 --self-twist 2 --name "K3/E(2)" \
+  --wheel-count 10 --component-self-twist 2 --b-framing 2 --name "K3/E(2)" \
   --write experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json
 ```
 
