@@ -7373,6 +7373,34 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+      "logical_id": "claim:resource-handle:morse-dsl",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/scripts/morse_dsl.py",
+          "morse_dsl.py",
+          "morse-dsl"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:morse-dsl"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+        "created_at": "2026-07-13T18:57:04Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:morse-dsl",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:62874d12efe75fcfc37ca67e099a10b8237aa61eaddbc076d8c775386015fad1",
       "logical_id": "claim:resource-handle:morse-singleton-braid-compare",
       "payload": {
@@ -7742,6 +7770,41 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
+      "logical_id": "claim:resource-safety:morse-dsl-c4fc6f7",
+      "payload": {
+        "evidence_claims": [],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "Morse DSL construction using explicit handed full twists",
+          "nested births, deaths, local crossings, kinks, and active-order validation"
+        ],
+        "status": "active",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+        },
+        "top_notice": "ACTIVE MORSE DSL: commit c4fc6f7 implements handed full twists with inverse over/under geometry for positive and negative signs; 10 focused DSL tests pass.",
+        "unsafe_scopes": [
+          "treating full-twist handedness as oriented crossing-sign metadata",
+          "claiming a transcription matches a printed Kirby diagram without independent link-level checks"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
+        "created_at": "2026-07-13T18:57:04Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:morse-dsl-c4fc6f7",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61",
       "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
       "payload": {
@@ -8066,6 +8129,33 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:morse-diagonal-standard-compare-9fddbfd",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
+      "logical_id": "claim:resource-snapshot:morse-dsl-c4fc6f7",
+      "payload": {
+        "captured_at": "2026-07-13T18:57:04Z",
+        "commit": "c4fc6f7975f56c90283a91533e291ce1de35af7c",
+        "git_blob": "2ababb0b371210ff6226a236aaf8c028cdca525f",
+        "path": "experiments/scripts/morse_dsl.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:morse-dsl",
+        "sha256": "cdbd4c4c9a4b2a0606d0a142e82447039871277c1d63d8f2433f92552c781a5a",
+        "snapshot_id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
+        "created_at": "2026-07-13T18:57:04Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:morse-dsl-c4fc6f7",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -13741,13 +13831,16 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-13T02:59:54Z",
+  "generated_at": "2026-07-13T18:57:04Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
     "by_git_blob": {
       "0f7838172b78cfadd7b83b08ecd04aa56d08ad33": [
         "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+      ],
+      "2ababb0b371210ff6226a236aaf8c028cdca525f": [
+        "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
       ],
       "537f4ebfb65e75d9975235e71396eabedd80e46e": [
         "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
@@ -13841,6 +13934,9 @@
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
+      "experiments/scripts/morse_dsl.py": [
+        "resource:twisted-yetter:script:morse-dsl"
+      ],
       "experiments/scripts/morse_singleton_pool.py": [
         "resource:twisted-yetter:script:morse-singleton-pool"
       ],
@@ -13868,6 +13964,9 @@
       "morse-diagonal-standard-compare": [
         "resource:twisted-yetter:script:morse-diagonal-standard-compare"
       ],
+      "morse-dsl": [
+        "resource:twisted-yetter:script:morse-dsl"
+      ],
       "morse-singleton-braid-compare": [
         "resource:twisted-yetter:script:morse-singleton-braid-compare"
       ],
@@ -13879,6 +13978,9 @@
       ],
       "morse_diagonal_standard_compare.sage.py": [
         "resource:twisted-yetter:script:morse-diagonal-standard-compare"
+      ],
+      "morse_dsl.py": [
+        "resource:twisted-yetter:script:morse-dsl"
       ],
       "morse_fusion_evaluator.py": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13924,6 +14026,9 @@
       ],
       "resource:twisted-yetter:script:morse-diagonal-standard-compare": [
         "resource:twisted-yetter:script:morse-diagonal-standard-compare"
+      ],
+      "resource:twisted-yetter:script:morse-dsl": [
+        "resource:twisted-yetter:script:morse-dsl"
       ],
       "resource:twisted-yetter:script:morse-singleton-braid-compare": [
         "resource:twisted-yetter:script:morse-singleton-braid-compare"
@@ -14009,6 +14114,9 @@
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
       ],
+      "experiments/scripts/morse_dsl.py": [
+        "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+      ],
       "experiments/scripts/morse_singleton_pool.py": [
         "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ]
@@ -14040,6 +14148,9 @@
       ],
       "a7654363eac00725c83f39b07e8ec56db6bfd78010847a4547e1c8f57004855c": [
         "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
+      ],
+      "cdbd4c4c9a4b2a0606d0a142e82447039871277c1d63d8f2433f92552c781a5a": [
+        "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
       ],
       "d2b9b67d6e2217b6a1b35ffcf3a81338354063d2a1fed1b822b1f5a39636c3cb": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
@@ -14269,6 +14380,32 @@
           "revision_kind": "claim"
         }
       },
+      "resource:twisted-yetter:script:morse-dsl": {
+        "cid": "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+        "logical_id": "claim:resource-handle:morse-dsl",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/scripts/morse_dsl.py",
+            "morse_dsl.py",
+            "morse-dsl"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:morse-dsl"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+          "created_at": "2026-07-13T18:57:04Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:morse-dsl",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "resource:twisted-yetter:script:morse-singleton-braid-compare": {
         "cid": "ctlobj-sha256:62874d12efe75fcfc37ca67e099a10b8237aa61eaddbc076d8c775386015fad1",
         "logical_id": "claim:resource-handle:morse-singleton-braid-compare",
@@ -14461,6 +14598,10 @@
         "id": "claim:resource-safety:figure815-e2-morse-input-caution",
         "kind": "safety-status"
       },
+      "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794": {
+        "id": "resource:twisted-yetter:script:morse-dsl",
+        "kind": "handle"
+      },
       "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": {
         "id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343",
         "kind": "snapshot"
@@ -14497,6 +14638,10 @@
         "id": "resource:twisted-yetter:script:morse-category-adapters",
         "kind": "handle"
       },
+      "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5": {
+        "id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
@@ -14511,6 +14656,10 @@
       },
       "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae": {
         "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939": {
+        "id": "claim:resource-safety:morse-dsl-c4fc6f7",
         "kind": "safety-status"
       },
       "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c": {
@@ -14599,6 +14748,10 @@
         "id": "resource:twisted-yetter:script:morse-diagonal-standard-compare",
         "kind": "handle"
       },
+      "claim:resource-handle:morse-dsl": {
+        "id": "resource:twisted-yetter:script:morse-dsl",
+        "kind": "handle"
+      },
       "claim:resource-handle:morse-singleton-braid-compare": {
         "id": "resource:twisted-yetter:script:morse-singleton-braid-compare",
         "kind": "handle"
@@ -14647,6 +14800,10 @@
         "id": "claim:resource-safety:morse-category-adapters-2788022",
         "kind": "safety-status"
       },
+      "claim:resource-safety:morse-dsl-c4fc6f7": {
+        "id": "claim:resource-safety:morse-dsl-c4fc6f7",
+        "kind": "safety-status"
+      },
       "claim:resource-safety:native-morse-fusion-evaluator-caution": {
         "id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
         "kind": "safety-status"
@@ -14685,6 +14842,10 @@
       },
       "claim:resource-snapshot:morse-diagonal-standard-compare-9fddbfd": {
         "id": "snapshot:twisted-yetter:script:morse-diagonal-standard-compare@sha256-45a8eb70",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:morse-dsl-c4fc6f7": {
+        "id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c",
         "kind": "snapshot"
       },
       "claim:resource-snapshot:morse-singleton-braid-compare-9fddbfd": {
@@ -14833,6 +14994,39 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
+        "logical_id": "claim:resource-safety:morse-dsl-c4fc6f7",
+        "payload": {
+          "evidence_claims": [],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "Morse DSL construction using explicit handed full twists",
+            "nested births, deaths, local crossings, kinks, and active-order validation"
+          ],
+          "status": "active",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+          },
+          "top_notice": "ACTIVE MORSE DSL: commit c4fc6f7 implements handed full twists with inverse over/under geometry for positive and negative signs; 10 focused DSL tests pass.",
+          "unsafe_scopes": [
+            "treating full-twist handedness as oriented crossing-sign metadata",
+            "claiming a transcription matches a printed Kirby diagram without independent link-level checks"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
+          "created_at": "2026-07-13T18:57:04Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:morse-dsl-c4fc6f7",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -15226,6 +15420,31 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c": {
+        "cid": "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
+        "logical_id": "claim:resource-snapshot:morse-dsl-c4fc6f7",
+        "payload": {
+          "captured_at": "2026-07-13T18:57:04Z",
+          "commit": "c4fc6f7975f56c90283a91533e291ce1de35af7c",
+          "git_blob": "2ababb0b371210ff6226a236aaf8c028cdca525f",
+          "path": "experiments/scripts/morse_dsl.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:morse-dsl",
+          "sha256": "cdbd4c4c9a4b2a0606d0a142e82447039871277c1d63d8f2433f92552c781a5a",
+          "snapshot_id": "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
+          "created_at": "2026-07-13T18:57:04Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:morse-dsl-c4fc6f7",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:morse-singleton-braid-compare@sha256-87437fb3": {
         "cid": "ctlobj-sha256:1d869ca15c5a7b414cc53d52028e0a58a88aadfe1c28d08b9640f42552044426",
         "logical_id": "claim:resource-snapshot:morse-singleton-braid-compare-9fddbfd",
@@ -15403,8 +15622,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:377bacdf3ae9daadb22205317fbb4b5cea55572911f01a00ae0a6325b12ea0d2",
+  "root_cid": "ctlobj-sha256:8b9f63dd63115f60741d0481c34ca27234724e871bacb47fc5711b38ee514153",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:76d6703f483dac78e460bade79f9f9966e8aa21754479bcc9c29c20f32728134"
+  "transition_cid": "ctlobj-sha256:c135775b737af73a4c7c69b983af8f5befb1c21ea917455e08dd17a3142ac47c"
 }
