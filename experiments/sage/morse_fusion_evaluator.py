@@ -1249,6 +1249,8 @@ class EvaluationStats:
     vacuum_projectors: int = 0
     fusions: int = 0
     splits: int = 0
+    coevaluations: int = 0
+    evaluations: int = 0
     max_active_strands: int = 0
     max_state_support: int = 1
     plans: list[dict[str, Any]] | None = None
@@ -1326,6 +1328,8 @@ class MorseEvaluator:
             "vacuum_projectors": stats.vacuum_projectors,
             "fusions": stats.fusions,
             "splits": stats.splits,
+            "coevaluations": stats.coevaluations,
+            "evaluations": stats.evaluations,
             "max_active_strands": stats.max_active_strands,
             "max_state_support": stats.max_state_support,
             "planner_weights": {"f": self.f_weight, "r": self.r_weight},
@@ -1484,10 +1488,11 @@ class MorseEvaluator:
         missing = set(topology.component_order) - set(component_labels)
         if missing:
             raise ValueError(f"missing component labels: {sorted(missing)!r}")
-        has_explicit_trivalent_morphisms = any(
-            form["kind"] in {"fuse", "split"} for form in forms
+        has_explicit_morphisms = any(
+            form["kind"] in {"fuse", "split", "coevaluation", "evaluation"}
+            for form in forms
         )
-        if not _unit_pruned and not has_explicit_trivalent_morphisms:
+        if not _unit_pruned and not has_explicit_morphisms:
             retained = frozenset(
                 component
                 for component in topology.component_order
@@ -1545,6 +1550,55 @@ class MorseEvaluator:
                 order[gap:gap] = [left_strand, right_strand]
                 stats.cups += 1
                 index += 1
+            elif kind == "coevaluation":
+                gap = self._cup_gap(order, form)
+                strands = list(form["strands"])
+                labels = list(form["labels"])
+                if len(strands) != 2 or len(set(strands)) != 2:
+                    raise ValueError(
+                        "coevaluation needs two distinct output wires"
+                    )
+                if len(labels) != 2:
+                    raise ValueError("coevaluation needs two output labels")
+                if any(strand in order for strand in strands):
+                    raise ValueError("coevaluation output wire is already active")
+                pair_tree = Node(
+                    Leaf(strands[0], labels[0]), Leaf(strands[1], labels[1])
+                )
+                pair_state = NodeState(
+                    LeafState(strands[0]),
+                    LeafState(strands[1]),
+                    self.category.unit,
+                    fusion_index(
+                        self.category, labels[0], labels[1], self.category.unit
+                    ),
+                )
+                dimension_label = form.get("dimension_label", labels[0])
+                coefficient = math.sqrt(
+                    float(self.category.dimension(dimension_label))
+                )
+                if form.get("reverse_bend", False):
+                    coefficient *= complex(
+                        self.category.reverse_bend(dimension_label)
+                    )
+                new_vector: dict[State, complex] = defaultdict(complex)
+                new_tree = None
+                for state, amplitude in vector.items():
+                    inserted_tree, inserted_state = insert_pair(
+                        self.category,
+                        tree,
+                        state,
+                        gap,
+                        pair_tree,
+                        pair_state,
+                    )
+                    new_tree = inserted_tree
+                    new_vector[inserted_state] += coefficient * amplitude
+                tree = new_tree
+                vector = _prune(dict(new_vector))
+                order[gap:gap] = strands
+                stats.coevaluations += 1
+                index += 1
             elif kind == "cap":
                 if tree is None:
                     raise ValueError("cap on empty diagram")
@@ -1583,6 +1637,66 @@ class MorseEvaluator:
                 order = [strand for strand in order if strand not in {left, right}]
                 stats.caps += 1
                 stats.plans.append({"kind": "cap", "form_index": index, "f_rotations": len(plan)})
+                index += 1
+            elif kind == "evaluation":
+                if tree is None:
+                    raise ValueError("evaluation on an empty diagram")
+                strands = list(form["strands"])
+                if len(strands) != 2 or len(set(strands)) != 2:
+                    raise ValueError("evaluation needs two distinct input wires")
+                positions = [order.index(strand) for strand in strands]
+                if abs(positions[0] - positions[1]) != 1:
+                    raise ValueError("evaluation input wires are not adjacent")
+                lo = min(positions)
+                try:
+                    path = find_subtree_path(tree, frozenset(strands))
+                    plan = ()
+                except ValueError:
+                    target, path = grouped_target(
+                        tree, lo, lo + 2, split=lo + 1
+                    )
+                    tree, vector, plan = self._rotate(
+                        tree, vector, target, stats
+                    )
+                dimension_label = form.get(
+                    "dimension_label", subtree_at(tree, path).left.label
+                )
+                coefficient = math.sqrt(
+                    float(self.category.dimension(dimension_label))
+                )
+                if form.get("reverse_bend", False):
+                    coefficient /= complex(
+                        self.category.reverse_bend(dimension_label)
+                    )
+                new_vector: dict[State | None, complex] = defaultdict(complex)
+                new_tree = None
+                for state, amplitude in vector.items():
+                    removed_tree, removed_state = remove_pair(
+                        self.category, tree, state, path
+                    )
+                    if removed_tree is _REJECTED:
+                        continue
+                    if removed_tree is _REMOVED:
+                        if path:
+                            continue
+                        new_tree = None
+                        new_vector[None] += coefficient * amplitude
+                    else:
+                        new_tree = removed_tree
+                        new_vector[removed_state] += coefficient * amplitude
+                tree = new_tree
+                vector = _prune(dict(new_vector))
+                order = [
+                    strand for strand in order if strand not in set(strands)
+                ]
+                stats.evaluations += 1
+                stats.plans.append(
+                    {
+                        "kind": "evaluation",
+                        "form_index": index,
+                        "f_rotations": len(plan),
+                    }
+                )
                 index += 1
             elif kind == "cross":
                 if tree is None:

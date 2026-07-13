@@ -92,6 +92,12 @@ class RepA4FusionRules:
     def dual(self, label):
         return {0: 0, 1: 2, 2: 1, 3: 3}[label]
 
+    def dimension(self, label):
+        return 3.0 if label == 3 else 1.0
+
+    def reverse_bend(self, label):
+        return 1.0
+
     def fusion_multiplicity(self, left, right, output):
         if left == 0:
             return int(right == output)
@@ -478,6 +484,28 @@ def test_compiled_projector_terms_cover_every_rep_a4_unit_path():
         for program in programs
     }
     assert len(signatures) == 7
+
+
+def test_explicit_rigidity_events_close_an_internal_channel_to_its_dimension():
+    evaluator = MorseEvaluator(RepA4FusionRules())
+    forms = [
+        {
+            "kind": "coevaluation",
+            "strands": ["q", "qdual"],
+            "labels": [3, 3],
+            "dimension_label": 3,
+            "at": "far-left",
+        },
+        {
+            "kind": "evaluation",
+            "strands": ["q", "qdual"],
+            "dimension_label": 3,
+        },
+    ]
+    value, stats = evaluator.fixed_label_value(forms, {})
+    assert abs(value - 3.0) < 1e-12
+    assert stats["coevaluations"] == 1
+    assert stats["evaluations"] == 1
 
 
 def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():
