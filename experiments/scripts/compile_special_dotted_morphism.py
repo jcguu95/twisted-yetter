@@ -16,6 +16,7 @@ import tempfile
 import time
 
 from experiments.scripts.special_dotted_morphism import (
+    build_vacuum_coupon_graph,
     compile_projected_morphism,
     linearize_horizontal_disk_projector,
     preflight_horizontal_disk_corridor,
@@ -153,11 +154,15 @@ def main() -> int:
         if time.monotonic() - started_monotonic > args.max_seconds:
             raise TimeoutError("topology compilation exceeded --max-seconds")
         link_certificate = _link_matrix_certificate(ir, payload["framing_labels"])
+        stage = "build-graph-coupon"
+        coupon_graph = build_vacuum_coupon_graph(payload["forms"], ir)
+        if time.monotonic() - started_monotonic > args.max_seconds:
+            raise TimeoutError("coupon-graph compilation exceeded --max-seconds")
         stage = "corridor-preflight"
         preflight = preflight_horizontal_disk_corridor(payload["forms"], ir)
         result = {
             "schema": "twisted-yetter.special-dotted-morphism-compilation.v1",
-            "status": "MORPHISM_TOPOLOGY_CONTROLS_PASS_NOT_LINEARIZED",
+            "status": "MORPHISM_GRAPH_COUPON_CONTROLS_PASS_NOT_EVALUATED",
             "mathematical_status": "DRAFT_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM",
             "source_ref": payload.get("source_ref"),
             "source_locator": payload.get("source_locator"),
@@ -165,6 +170,7 @@ def main() -> int:
             "input_file_hash": stable_json_hash(payload),
             "link_certificate": link_certificate,
             "projected_morphism_ir": ir,
+            "coupon_graph": coupon_graph,
             "corridor_preflight": preflight,
         }
         if not args.validate_only:
