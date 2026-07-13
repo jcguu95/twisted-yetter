@@ -196,6 +196,14 @@ def test_figure21_disk_certificate_regression():
     assert certificate["boundary_crossing_count"] == 78
     assert certificate["inside_arc_interval_count"] == 39
     assert certificate["forced_cut_count"] == 29
+    assert certificate["puncture_order_convention"] == (
+        "oriented-special-boundary-entry-crossing-order-v2"
+    )
+    boundary_positions = [
+        cut["special_boundary_entry_order_index"]
+        for cut in certificate["forced_cuts"]
+    ]
+    assert boundary_positions == sorted(boundary_positions)
     assert certificate["d2_linking_row"] == [5, 2, 0, 0, 0, 0, 6, -2, 5, -2, 1]
     assert certificate["signed_disk_intersections"] == [
         -5,

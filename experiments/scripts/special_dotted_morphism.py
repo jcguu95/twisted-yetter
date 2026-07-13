@@ -399,13 +399,42 @@ def _compile_one_disk(
             if forced:
                 cuts.append(
                     {
-                        "cut_id": f"{special}:cut{len(cuts) + 1:03d}",
                         **interval,
                         "factor_variance": (
                             "label" if signed_intersection > 0 else "dual"
                         ),
+                        "component_traversal_discovery_index": len(cuts),
                     }
                 )
+
+    special_boundary_crossing_order = []
+    for strand in cycles[special]:
+        ordered = sorted(
+            (
+                item
+                for item in boundary_crossings
+                if item["special_boundary_strand"] == strand
+            ),
+            key=lambda item: item["form_index"],
+            reverse=orientation[strand] < 0,
+        )
+        special_boundary_crossing_order.extend(
+            item["crossing_id"] for item in ordered
+        )
+    if len(special_boundary_crossing_order) != len(boundary_crossings):
+        raise AssertionError("special boundary traversal omitted crossings")
+    boundary_position = {
+        crossing_id: index
+        for index, crossing_id in enumerate(special_boundary_crossing_order)
+    }
+    if len(boundary_position) != len(special_boundary_crossing_order):
+        raise ValueError("special boundary traversal repeats a crossing")
+    cuts.sort(key=lambda cut: boundary_position[cut["entry_crossing"]])
+    for index, cut in enumerate(cuts):
+        cut["cut_id"] = f"{special}:cut{index + 1:03d}"
+        cut["special_boundary_entry_order_index"] = boundary_position[
+            cut["entry_crossing"]
+        ]
 
     ordinary_order = [name for name in component_order if name != special]
     d2 = _linking_row(special, records, ordinary_order)
@@ -447,7 +476,10 @@ def _compile_one_disk(
         "inside_arc_intervals": intervals,
         "forced_cut_count": len(cuts),
         "forced_cuts": cuts,
-        "puncture_order_convention": "component-order-then-oriented-traversal-v1",
+        "puncture_order_convention": (
+            "oriented-special-boundary-entry-crossing-order-v2"
+        ),
+        "special_boundary_crossing_order": special_boundary_crossing_order,
         "ordinary_component_order": ordinary_order,
         "d2_linking_row": d2,
         "signed_disk_intersections": disk_vector,
