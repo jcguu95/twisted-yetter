@@ -7,6 +7,9 @@ from experiments.sage.morse_fusion_evaluator import (
     expand_vacuum_coupon_graph_term,
     vacuum_coupon_path_basis,
 )
+from experiments.sage.morse_pivotal_contract import (
+    test_pivotal_profile as make_test_pivotal_profile,
+)
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
     COMPONENT_BY_PIECE,
     COMPONENT_ORDER,
@@ -17,7 +20,7 @@ from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
 class Z2FusionRules:
     labels = (0, 1)
     unit = 0
-    path_basis_is_orthonormal = True
+    pivotal_profile = make_test_pivotal_profile(category_id="test-z2-fusion-rules")
 
     def dual(self, label):
         return label

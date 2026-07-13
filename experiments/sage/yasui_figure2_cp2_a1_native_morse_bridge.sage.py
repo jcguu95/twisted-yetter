@@ -3,23 +3,20 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
-import importlib.util
 from itertools import product
 import json
 from pathlib import Path
-import sys
 import time
 
 from experiments.sage.braid_closure_morse import (
     braid_closure_morse_forms,
     trace_fundamental_forms,
 )
-from experiments.sage.morse_category_adapters import SU2KMorseAdapter
+from experiments.sage.morse_category_registry import build_category
 from experiments.sage.morse_fusion_evaluator import MorseEvaluator
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-SU2_PATH = REPO_ROOT / "experiments" / "sage" / "su2k_fusion_braid_evaluator.sage.py"
 INPUT_OUTPUT = REPO_ROOT / "experiments" / "inputs" / "yasui" / "figure2-cp2-a1-r1-braid-closure-morse-v1.json"
 RESULT_OUTPUT = REPO_ROOT / "experiments" / "results" / "yasui" / "figure2-cp2-a1-r1-su2-2-native-morse-bridge-v1.json"
 
@@ -29,14 +26,6 @@ BRAID_WORD = (
 )
 COMPONENT_ORDER_IN_BRAID = ("A", "C", "B")
 FRAMINGS = (4, 4, 1)
-
-
-def load_module(path, name):
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module
-    spec.loader.exec_module(module)
-    return module
 
 
 def complex_json(value):
@@ -51,9 +40,8 @@ def complex_json(value):
 
 def main():
     started = time.perf_counter()
-    su2 = load_module(SU2_PATH, "su2k_for_yasui_native_morse_bridge")
-    backend = su2.SU2KBraidEvaluator(2, exact=False)
-    category = SU2KMorseAdapter(backend)
+    category, _, _ = build_category("su2", 2)
+    backend = category.backend
     native = MorseEvaluator(category)
     forms, component_index = braid_closure_morse_forms(
         N_STRANDS, BRAID_WORD, FRAMINGS

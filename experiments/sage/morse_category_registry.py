@@ -25,6 +25,7 @@ GENERIC_FR_PATH = (
     / "yasui_figure3_a3_da4_untwisted_chunked.sage.py"
 )
 MTC_ROOT = REPO_ROOT / "experiments" / "results" / "mtc-candidates"
+PIVOTAL_ROOT = REPO_ROOT / "experiments" / "inputs" / "category-pivotal"
 
 CATEGORY_CHOICES = ("su2", "su3-2", "dic3", "da4", "da4-c3w1")
 
@@ -32,6 +33,12 @@ _PAYLOADS = {
     "dic3": MTC_ROOT / "drinfeld-double-dic12-omega0-mtc-fr-data-v1.json",
     "da4": MTC_ROOT / "drinfeld-double-a4-omega0-mtc-fr-data-v1.json",
     "da4-c3w1": MTC_ROOT / "drinfeld-double-a4-c3w1-mtc-fr-data-v1.json",
+}
+
+_PIVOTAL_PROFILES = {
+    "su2": PIVOTAL_ROOT / "su2-k-standard-pivotal-v1.json",
+    "su3-2": PIVOTAL_ROOT / "su3-2-anyonwiki-pivotal-v1.json",
+    "dic3": PIVOTAL_ROOT / "drinfeld-double-dic12-pivotal-v1.json",
 }
 
 _DISPLAY_NAMES = {
@@ -89,19 +96,32 @@ def build_category(category_name: str, level: int | None = None):
             raise ValueError("--category su2 requires --level 2, 3, 4, 5, 6, or 8")
         module = load_module(SU2_PATH, f"su2k_native_morse_level_{level}")
         backend = module.SU2KBraidEvaluator(level, exact=False)
-        return SU2KMorseAdapter(backend), f"SU(2)_{level}", f"su2-k{level}"
+        category_id = f"su2-k{level}"
+        profile = json.loads(_PIVOTAL_PROFILES["su2"].read_text())
+        return (
+            SU2KMorseAdapter(
+                backend, pivotal_profile=profile, category_id=category_id
+            ),
+            f"SU(2)_{level}",
+            category_id,
+        )
 
     if category_name == "su3-2":
         module = load_module(SU3_PATH, "su3_2_native_morse")
         backend = module.SU32AnyonWikiFRBraidEvaluator()
+        category_id = "su3-k2-anyonwiki-fr"
         return (
             LoadedFRMorseAdapter(
                 backend,
                 character=module.character_value,
                 adapter_name="SU(3)_2 AnyonWiki FR",
+                pivotal_profile=json.loads(
+                    _PIVOTAL_PROFILES["su3-2"].read_text()
+                ),
+                category_id=category_id,
             ),
             "SU(3)_2",
-            "su3-k2-anyonwiki-fr",
+            category_id,
         )
 
     if category_name in _PAYLOADS:
@@ -111,6 +131,7 @@ def build_category(category_name: str, level: int | None = None):
         payload_path = _PAYLOADS[category_name]
         payload = json.loads(payload_path.read_text())
         backend = module.DA4FRBraidEvaluator(payload)
+        category_id = payload.get("mtc_id", category_name)
         character = {
             "dic3": dic3_witness_character,
             "da4-c3w1": da4_c3_character,
@@ -120,9 +141,15 @@ def build_category(category_name: str, level: int | None = None):
                 backend,
                 character=character,
                 adapter_name=f"{_DISPLAY_NAMES[category_name]} numeric FR",
+                pivotal_profile=(
+                    json.loads(_PIVOTAL_PROFILES[category_name].read_text())
+                    if category_name in _PIVOTAL_PROFILES
+                    else None
+                ),
+                category_id=category_id,
             ),
             _DISPLAY_NAMES[category_name],
-            payload.get("mtc_id", category_name),
+            category_id,
         )
 
     raise ValueError(f"unknown category: {category_name!r}")

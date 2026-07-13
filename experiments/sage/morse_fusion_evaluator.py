@@ -26,8 +26,119 @@ from itertools import product
 import math
 from typing import Any, Iterable
 
+from experiments.sage.morse_pivotal_contract import (
+    require_pivotal_capabilities,
+    required_capabilities_for_forms,
+)
+
 
 TOLERANCE = 1e-13
+
+
+def right_bend_fusion_matrix(category: Any, a: Any, b: Any, c: Any) -> dict[str, Any]:
+    """Curry ``V_c^{a b}`` to ``V_a^{c dual(b)}`` in the path basis.
+
+    The map is the composition of a right coevaluation with one ordinary
+    F-move.  Rows are target multiplicity indices and columns are source
+    multiplicity indices.  This is the counterclockwise/right-leg bend in
+    the convention used here; no Frobenius--Schur flag reversal is included.
+    """
+
+    source_size = int(category.fusion_multiplicity(a, b, c))
+    dual_b = category.dual(b)
+    target_size = int(category.fusion_multiplicity(c, dual_b, a))
+    if source_size != target_size:
+        raise ValueError(
+            "right bend violates Frobenius reciprocity: "
+            f"N_{{{a},{b}}}^{c}={source_size}, "
+            f"N_{{{c},dual({b})}}^{a}={target_size}"
+        )
+    if source_size == 0:
+        raise ValueError("right bend needs an admissible fusion channel")
+    block = category.f_block(a, b, dual_b, a)
+    vacuum = (category.unit, 0, 0)
+    vacuum_column = block["right_index"].get(vacuum)
+    if vacuum_column is None:
+        raise ValueError("right bend F block has no right-associated vacuum basis state")
+    scale = math.sqrt(
+        float(category.dimension(a))
+        * float(category.dimension(b))
+        / float(category.dimension(c))
+    )
+    entries = tuple(
+        tuple(
+            scale
+            * complex(
+                block["right_to_left"][
+                    block["left_index"][(c, source, target)]
+                ][vacuum_column]
+            )
+            for source in range(source_size)
+        )
+        for target in range(target_size)
+    )
+    return {
+        "source_basis": tuple(range(source_size)),
+        "target_basis": tuple(range(target_size)),
+        "entries": entries,
+        "source_space": (a, b, c),
+        "target_space": (c, dual_b, a),
+        "normalization": "sqrt(d_a*d_b/d_c)",
+        "fs_flag_reversal_included": False,
+    }
+
+
+def left_bend_fusion_matrix(category: Any, a: Any, b: Any, c: Any) -> dict[str, Any]:
+    """Curry ``V_c^{a b}`` to ``V_b^{dual(a) c}`` in the path basis.
+
+    This is the clockwise/left-leg companion of
+    :func:`right_bend_fusion_matrix`.  It is obtained from a left
+    coevaluation and the inverse ordinary F-move.  Frobenius--Schur flag
+    reversals remain explicit and are not folded into this matrix.
+    """
+
+    source_size = int(category.fusion_multiplicity(a, b, c))
+    dual_a = category.dual(a)
+    target_size = int(category.fusion_multiplicity(dual_a, c, b))
+    if source_size != target_size:
+        raise ValueError(
+            "left bend violates Frobenius reciprocity: "
+            f"N_{{{a},{b}}}^{c}={source_size}, "
+            f"N_{{dual({a}),{c}}}^{b}={target_size}"
+        )
+    if source_size == 0:
+        raise ValueError("left bend needs an admissible fusion channel")
+    block = category.f_block(dual_a, a, b, b)
+    vacuum = (category.unit, 0, 0)
+    vacuum_column = block["left_index"].get(vacuum)
+    if vacuum_column is None:
+        raise ValueError("left bend F block has no left-associated vacuum basis state")
+    scale = math.sqrt(
+        float(category.dimension(a))
+        * float(category.dimension(b))
+        / float(category.dimension(c))
+    )
+    entries = tuple(
+        tuple(
+            scale
+            * complex(
+                block["left_to_right"][
+                    block["right_index"][(c, source, target)]
+                ][vacuum_column]
+            )
+            for source in range(source_size)
+        )
+        for target in range(target_size)
+    )
+    return {
+        "source_basis": tuple(range(source_size)),
+        "target_basis": tuple(range(target_size)),
+        "entries": entries,
+        "source_space": (a, b, c),
+        "target_space": (dual_a, c, b),
+        "normalization": "sqrt(d_a*d_b/d_c)",
+        "fs_flag_reversal_included": False,
+    }
 
 
 @dataclass(frozen=True)
@@ -165,11 +276,7 @@ def vacuum_coupon_path_basis(
 
     if coupon_node.get("kind") != "vacuum-projector-coupon":
         raise ValueError("expected a vacuum-projector-coupon node")
-    if getattr(category, "path_basis_is_orthonormal", False) is not True:
-        raise ValueError(
-            "vacuum coupon requires a category adapter with an explicitly "
-            "orthonormal path basis"
-        )
+    require_pivotal_capabilities(category, {"vacuum_projector"})
 
     factors: list[tuple[str, Any]] = []
     factor_metadata = []
@@ -843,11 +950,7 @@ def project_vacuum_interval(
     dimension or handle normalization is inserted here.
     """
 
-    if getattr(category, "path_basis_is_orthonormal", False) is not True:
-        raise ValueError(
-            "vacuum projection requires a category adapter with an explicitly "
-            "orthonormal path basis"
-        )
+    require_pivotal_capabilities(category, {"vacuum_projector"})
     if not (0 <= start < stop <= leaf_count(tree)):
         raise ValueError("vacuum projector needs a nonempty in-range leaf interval")
     source = tree
@@ -1482,6 +1585,9 @@ class MorseEvaluator:
 
     def fixed_label_value(self, forms: Iterable[dict[str, Any]], component_labels: dict[str, Any], *, _unit_pruned=False):
         forms = forms if isinstance(forms, tuple) else tuple(forms)
+        required_pivotal = required_capabilities_for_forms(forms)
+        if required_pivotal:
+            require_pivotal_capabilities(self.category, required_pivotal)
         topology = self._topology(
             forms, allow_missing_reversed=_unit_pruned
         )

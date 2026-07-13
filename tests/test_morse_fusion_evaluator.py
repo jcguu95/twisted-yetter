@@ -7,14 +7,19 @@ from experiments.sage.morse_fusion_evaluator import (
     analyze_topology,
     compile_right_comb_projector_term,
     fuse_active_pair,
+    left_bend_fusion_matrix,
     leaves,
     project_vacuum_interval,
+    right_bend_fusion_matrix,
     right_comb_fusion_path_basis,
     right_comb_fusion_path_counts,
     rotation_plan,
     rotate_shape,
     split_active_wire,
     vacuum_coupon_path_basis,
+)
+from experiments.sage.morse_pivotal_contract import (
+    test_pivotal_profile as make_test_pivotal_profile,
 )
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
@@ -27,7 +32,10 @@ from experiments.scripts.special_dotted_morphism import (
 class SemionCategory:
     labels = (0, 1)
     unit = 0
-    path_basis_is_orthonormal = True
+    pivotal_profile = make_test_pivotal_profile(
+        category_id="test-semion",
+        reverse_bend_values={"0": [1.0, 0.0], "1": [1.0, 0.0]},
+    )
 
     def dual(self, label):
         return label
@@ -78,6 +86,11 @@ class SemionCategory:
 
 
 class PseudorealSemionCategory(SemionCategory):
+    pivotal_profile = make_test_pivotal_profile(
+        category_id="test-pseudoreal-semion",
+        reverse_bend_values={"0": [1.0, 0.0], "1": [-1.0, 0.0]},
+    )
+
     def reverse_bend(self, label):
         return -1.0 if label else 1.0
 
@@ -87,7 +100,10 @@ class RepA4FusionRules:
 
     labels = (0, 1, 2, 3)
     unit = 0
-    path_basis_is_orthonormal = True
+    pivotal_profile = make_test_pivotal_profile(
+        category_id="test-rep-a4-fusion-rules",
+        reverse_bend_values={str(label): [1.0, 0.0] for label in range(4)},
+    )
 
     def dual(self, label):
         return {0: 0, 1: 2, 2: 1, 3: 3}[label]
@@ -114,6 +130,68 @@ class RepA4FusionRules:
             (2, 2): 1,
         }[(left, right)]
         return int(output == product)
+
+
+class TwoCopyBendCategory:
+    """Minimal orthonormal F block with a two-dimensional fusion space."""
+
+    labels = (0, 1)
+    unit = 0
+    pivotal_profile = make_test_pivotal_profile(
+        category_id="test-two-copy-bend",
+        reverse_bend_values={"0": [1.0, 0.0], "1": [1.0, 0.0]},
+    )
+
+    def __init__(self):
+        self.q_dimension = 1.0 + 2.0**0.5
+
+    def dual(self, label):
+        return label
+
+    def dimension(self, label):
+        return self.q_dimension if label else 1.0
+
+    def fusion_multiplicity(self, left, right, output):
+        if left == 0:
+            return int(right == output)
+        if right == 0:
+            return int(left == output)
+        return 1 if output == 0 else 2
+
+    def f_block(self, a, b, c, d):
+        assert (a, b, c, d) == (1, 1, 1, 1)
+        basis = (
+            (0, 0, 0),
+            (1, 0, 0),
+            (1, 0, 1),
+            (1, 1, 0),
+            (1, 1, 1),
+        )
+        first_column = [
+            1.0 / self.q_dimension,
+            1.0 / self.q_dimension**0.5,
+            0.0,
+            0.0,
+            1.0 / self.q_dimension**0.5,
+        ]
+        displacement = [1.0 - first_column[0], *(-x for x in first_column[1:])]
+        norm_squared = sum(x * x for x in displacement)
+        matrix = [
+            [
+                float(row == column)
+                - 2.0 * displacement[row] * displacement[column] / norm_squared
+                for column in range(len(basis))
+            ]
+            for row in range(len(basis))
+        ]
+        return {
+            "left_basis": basis,
+            "right_basis": basis,
+            "left_index": {entry: index for index, entry in enumerate(basis)},
+            "right_index": {entry: index for index, entry in enumerate(basis)},
+            "right_to_left": matrix,
+            "left_to_right": matrix,
+        }
 
 
 def unknot_forms(kink=False):
@@ -280,7 +358,7 @@ def test_vacuum_projector_is_idempotent():
 def test_vacuum_projector_retains_all_unit_root_path_copies():
     class PathBasisOnly:
         unit = 0
-        path_basis_is_orthonormal = True
+        pivotal_profile = make_test_pivotal_profile(category_id="test-path-basis-only")
 
     category = PathBasisOnly()
     leaf_trees = [Leaf(name, 2) for name in "abcd"]
@@ -313,7 +391,7 @@ def test_vacuum_projector_fails_closed_without_orthonormal_basis_claim():
     try:
         project_vacuum_interval(UnsafeCategory(), tree, vector, 0, 1)
     except ValueError as exc:
-        assert "orthonormal path basis" in str(exc)
+        assert "no explicit pivotal profile" in str(exc)
     else:
         raise AssertionError("unsafe category adapter was accepted")
 
@@ -506,6 +584,34 @@ def test_explicit_rigidity_events_close_an_internal_channel_to_its_dimension():
     assert abs(value - 3.0) < 1e-12
     assert stats["coevaluations"] == 1
     assert stats["evaluations"] == 1
+
+
+def test_semion_left_and_right_bends_are_unitary_one_by_one():
+    category = SemionCategory()
+    for bend in (left_bend_fusion_matrix, right_bend_fusion_matrix):
+        matrix = bend(category, 1, 1, 0)
+        assert matrix["source_basis"] == (0,)
+        assert matrix["target_basis"] == (0,)
+        assert abs(abs(matrix["entries"][0][0]) - 1.0) < 1e-12
+        assert matrix["fs_flag_reversal_included"] is False
+
+
+def test_bends_keep_both_multiplicity_copies_distinct_and_unitary():
+    category = TwoCopyBendCategory()
+    for bend in (left_bend_fusion_matrix, right_bend_fusion_matrix):
+        matrix = bend(category, 1, 1, 1)
+        assert matrix["source_basis"] == (0, 1)
+        assert matrix["target_basis"] == (0, 1)
+        entries = matrix["entries"]
+        for row in range(2):
+            for column in range(2):
+                gram = sum(
+                    entries[index][row].conjugate() * entries[index][column]
+                    for index in range(2)
+                )
+                assert abs(gram - float(row == column)) < 1e-12
+        assert abs(entries[0][1]) < 1e-12
+        assert abs(entries[1][0]) < 1e-12
 
 
 def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():

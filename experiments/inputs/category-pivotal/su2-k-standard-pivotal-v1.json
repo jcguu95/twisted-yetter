@@ -1,0 +1,51 @@
+{
+  "capabilities": {
+    "rigid_bends": true,
+    "ribbon_twist": true,
+    "trivalent_pairing": true,
+    "vacuum_projector": true
+  },
+  "category_ids": [
+    "su2-k2",
+    "su2-k3",
+    "su2-k4",
+    "su2-k5",
+    "su2-k6",
+    "su2-k8"
+  ],
+  "duality": {
+    "convention": "Every integer-labelled simple is self-dual in the standard SU(2)_k model."
+  },
+  "evaluation_coevaluation": {
+    "normalization": "sqrt(quantum_dimension)",
+    "orientation_convention": "left birth branch upward; reversed bend uses the recorded scalar"
+  },
+  "evidence": [
+    {
+      "kind": "implementation-source",
+      "path": "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+      "sha256": "f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed"
+    },
+    {
+      "cases": [2, 3, 4, 5, 6, 8],
+      "kind": "numeric-bend-control",
+      "path": "experiments/results/category-pivotal/bend-matrix-basic-controls-v1.json",
+      "maximum_residual": 8.881784197001252e-16
+    }
+  ],
+  "fusion_space_pairing": {
+    "basis": "standard multiplicity-free orthonormal q-6j path basis",
+    "orthonormal": true
+  },
+  "pivotal_structure": {
+    "convention": "standard ribbon pivotal structure of the numeric SU(2)_k backend",
+    "mathematical_status": "NUMERIC_CONTROL_PROFILE_NOT_FORMAL_CERTIFICATE"
+  },
+  "reverse_bend_scalars": {
+    "even": [1.0, 0.0],
+    "kind": "integer-label-parity",
+    "odd": [-1.0, 0.0]
+  },
+  "schema": "twisted-yetter.morse-pivotal-profile.v1",
+  "status": "SUPPORTED_FOR_NUMERIC_MORSE_CONTROLS"
+}

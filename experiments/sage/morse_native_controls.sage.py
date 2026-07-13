@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 from datetime import UTC, datetime
-import importlib.util
 import json
 from pathlib import Path
 import platform
@@ -12,31 +11,16 @@ import subprocess
 import sys
 import time
 
-from experiments.sage.morse_category_adapters import LoadedFRMorseAdapter, SU2KMorseAdapter
 from experiments.sage.morse_category_registry import (
+    build_category,
     da4_c3_character,
     dic3_witness_character,
 )
 from experiments.sage.morse_fusion_evaluator import MorseEvaluator, analyze_topology, canonical_component_name
+from experiments.sage.morse_pivotal_contract import PivotalCapabilityError
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-SU2_PATH = REPO_ROOT / "experiments" / "sage" / "su2k_fusion_braid_evaluator.sage.py"
-SU3_PATH = REPO_ROOT / "experiments" / "sage" / "su3_2_anyonwiki_fr_braid_evaluator.py"
-GENERIC_FR_PATH = REPO_ROOT / "experiments" / "sage" / "yasui_figure3_a3_da4_untwisted_chunked.sage.py"
-DIC3_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-dic12-omega0-mtc-fr-data-v1.json"
-DA4_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-a4-omega0-mtc-fr-data-v1.json"
-DA4_C3W1_PAYLOAD = REPO_ROOT / "experiments" / "results" / "mtc-candidates" / "drinfeld-double-a4-c3w1-mtc-fr-data-v1.json"
-
-
-def load_module(path: Path, name: str):
-    spec = importlib.util.spec_from_file_location(name, path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module
-    spec.loader.exec_module(module)
-    return module
-
-
 def unknot_forms(kinks: int = 0):
     forms = [{"kind": "cup", "piece": "A", "at": "far-left"}]
     if kinks:
@@ -164,7 +148,7 @@ def braid_closure_morse_forms(n_strands, braid_word, framings):
     return forms, component_index_by_name
 
 
-def run_su2_braid_bridge_controls(su2):
+def run_su2_braid_bridge_controls():
     rows = []
     cases = (
         ("positive_hopf", 2, (1, 1), (0, 0)),
@@ -172,8 +156,8 @@ def run_su2_braid_bridge_controls(su2):
         ("three_strand_mixed", 3, (1, -2, 1, 2, -1, 2), (0, 0, 0)),
     )
     for level in (2, 3, 4, 5, 6, 8):
-        backend = su2.SU2KBraidEvaluator(level, exact=False)
-        category = SU2KMorseAdapter(backend)
+        category, _, _ = build_category("su2", level)
+        backend = category.backend
         native = MorseEvaluator(category)
         for case_name, n_strands, word, framings in cases:
             components, _, _ = braid_component_data(n_strands, word)
@@ -205,11 +189,10 @@ def close(left, right, tolerance=1e-9):
 
 
 def run_su2_controls():
-    su2 = load_module(SU2_PATH, "su2k_for_native_morse_controls")
     rows = []
     for level in (2, 3, 4, 5, 6, 8):
-        backend = su2.SU2KBraidEvaluator(level, exact=False)
-        category = SU2KMorseAdapter(backend)
+        category, _, _ = build_category("su2", level)
+        backend = category.backend
         evaluator = MorseEvaluator(category)
         for label in category.labels:
             value, stats = evaluator.fixed_label_value(unknot_forms(), {"A": label})
@@ -286,34 +269,10 @@ def run_su2_controls():
 
 def run_loaded_fr_controls():
     rows = []
-    su3 = load_module(SU3_PATH, "su3_for_native_morse_controls")
-    su3_backend = su3.SU32AnyonWikiFRBraidEvaluator()
     categories = [
-        (
-            "SU(3)_2",
-            LoadedFRMorseAdapter(
-                su3_backend,
-                character=su3.character_value,
-                adapter_name="SU(3)_2 AnyonWiki FR",
-            ),
-        )
+        ("SU(3)_2", build_category("su3-2")[0]),
+        ("D(Dic_3)=D(Dic_12-order-12)", build_category("dic3")[0]),
     ]
-    generic = load_module(GENERIC_FR_PATH, "generic_fr_for_native_morse_controls")
-    dic3_backend = generic.DA4FRBraidEvaluator(json.loads(DIC3_PAYLOAD.read_text()))
-    categories.append(
-        (
-            "D(Dic_3)=D(Dic_12-order-12)",
-            LoadedFRMorseAdapter(dic3_backend, adapter_name="D(Dic_3) numeric FR"),
-        )
-    )
-    for name, path in (
-        ("D(A4) untwisted", DA4_PAYLOAD),
-        ("D(A4) c3w1 twisted category", DA4_C3W1_PAYLOAD),
-    ):
-        backend = generic.DA4FRBraidEvaluator(json.loads(path.read_text()))
-        categories.append(
-            (name, LoadedFRMorseAdapter(backend, adapter_name=f"{name} numeric FR"))
-        )
     for name, category in categories:
         evaluator = MorseEvaluator(category)
         for label in category.labels:
@@ -418,6 +377,35 @@ def run_loaded_fr_controls():
             "pass": close(observed, expected, 1e-7),
             "stats": stats,
         })
+    for category_name in ("da4", "da4-c3w1"):
+        category, name, _ = build_category(category_name)
+        try:
+            MorseEvaluator(category).fixed_label_value(
+                unknot_forms(), {"A": category.unit}
+            )
+        except PivotalCapabilityError as exc:
+            rows.append(
+                {
+                    "category": name,
+                    "control": "missing_pivotal_profile_rejected",
+                    "labels": [category.unit],
+                    "observed": "REJECTED",
+                    "expected": "REJECTED",
+                    "pass": "no explicit pivotal profile" in str(exc),
+                    "error": str(exc),
+                }
+            )
+        else:
+            rows.append(
+                {
+                    "category": name,
+                    "control": "missing_pivotal_profile_rejected",
+                    "labels": [category.unit],
+                    "observed": "ACCEPTED",
+                    "expected": "REJECTED",
+                    "pass": False,
+                }
+            )
     return rows
 
 
@@ -449,12 +437,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    su2 = load_module(SU2_PATH, "su2k_for_native_morse_bridge_controls")
     rows = (
         run_su2_controls()
         + run_loaded_fr_controls()
         + run_character_callback_controls()
-        + run_su2_braid_bridge_controls(su2)
+        + run_su2_braid_bridge_controls()
     )
     payload = {
         "schema": "twisted-yetter.native-morse-evaluator-controls.v3",
