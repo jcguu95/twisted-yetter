@@ -7,8 +7,10 @@ not by themselves prove that it agrees with the printed Kirby diagram.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
 from pathlib import Path
+import subprocess
 
 from experiments.scripts.morse_dsl import MorseBuilder
 
@@ -227,7 +229,35 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    encoded = json.dumps(payload(), indent=2, sort_keys=True) + "\n"
+    generated = payload()
+    repo = Path(__file__).resolve().parents[2]
+    generated.update(
+        {
+            "generator_script": str(Path(__file__).resolve().relative_to(repo)),
+            "reproduce_command": (
+                "PYTHONPATH=. uv run python "
+                "experiments/scripts/akbulut_yasui_figure21_morse_draft.py "
+                f"--output {args.output}"
+                if args.output
+                else "PYTHONPATH=. uv run python experiments/scripts/"
+                "akbulut_yasui_figure21_morse_draft.py"
+            ),
+            "generated_at": datetime.now(timezone.utc)
+            .replace(microsecond=0)
+            .isoformat()
+            .replace("+00:00", "Z"),
+            "repo_root": str(repo),
+            "git_commit": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=repo, text=True
+            ).strip(),
+            "git_dirty": bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain"], cwd=repo, text=True
+                ).strip()
+            ),
+        }
+    )
+    encoded = json.dumps(generated, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(encoded)
