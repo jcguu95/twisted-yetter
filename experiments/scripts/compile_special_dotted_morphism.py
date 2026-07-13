@@ -15,15 +15,13 @@ import sys
 import tempfile
 import time
 
-import numpy as np
-import sympy as sp
-
 from experiments.scripts.special_dotted_morphism import (
     compile_projected_morphism,
     linearize_horizontal_disk_projector,
     preflight_horizontal_disk_corridor,
     stable_json_hash,
 )
+from twisted_yetter.linking_matrix import determinant, rank, signature
 
 
 REPO = Path(__file__).resolve().parents[2]
@@ -60,16 +58,13 @@ def _atomic_json(path: Path, payload: dict) -> None:
 
 
 def _signature(matrix: list[list[int]]) -> dict:
-    eigenvalues = np.linalg.eigvalsh(np.asarray(matrix, dtype=float))
-    positive = int(np.sum(eigenvalues > 1e-8))
-    negative = int(np.sum(eigenvalues < -1e-8))
-    zero = len(eigenvalues) - positive - negative
+    positive, negative, zero = signature(matrix)
     return {
         "positive": positive,
         "negative": negative,
         "zero": zero,
         "signature": positive - negative,
-        "eigenvalues": [float(value) for value in eigenvalues],
+        "arithmetic": "exact-rational-congruence",
     }
 
 
@@ -100,14 +95,13 @@ def _link_matrix_certificate(ir: dict, framing_labels: dict[str, int]) -> dict:
     for (left, right), value in signed.items():
         matrix[index[left]][index[right]] = value // 2
         matrix[index[right]][index[left]] = value // 2
-    exact = sp.Matrix(matrix)
     return {
         "component_order": component_order,
         "framing_labels_are_total_framings": True,
         "visible_self_writhe": dict(visible_self),
         "linking_matrix": matrix,
-        "determinant": int(exact.det()),
-        "rank": int(exact.rank()),
+        "determinant": determinant(matrix),
+        "rank": rank(matrix),
         "signature": _signature(matrix),
     }
 
@@ -117,7 +111,7 @@ def _metadata(args, started: str, started_monotonic: float) -> dict:
     return {
         "generator_script": str(Path(__file__).resolve().relative_to(REPO)),
         "argv": sys.argv,
-        "reproduce_command": "PYTHONPATH=. uv run python " + " ".join(sys.argv),
+        "reproduce_command": "PYTHONPATH=src:. uv run python " + " ".join(sys.argv),
         "utc_start": started,
         "utc_finish": _utc_now(),
         "elapsed_seconds": time.monotonic() - started_monotonic,
@@ -126,8 +120,6 @@ def _metadata(args, started: str, started_monotonic: float) -> dict:
         "git_dirty": dirty,
         "tool_versions": {
             "python": platform.python_version(),
-            "numpy": np.__version__,
-            "sympy": sp.__version__,
         },
         "limits": {
             "max_seconds": args.max_seconds,
