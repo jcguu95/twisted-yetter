@@ -382,6 +382,16 @@ def find_subtree_path(tree: Tree, wanted: frozenset[str], path: tuple[int, ...] 
     raise ValueError(f"wanted leaves are not a subtree: {sorted(wanted)!r}")
 
 
+def find_leaf_path(tree: Tree, strand: str, path: tuple[int, ...] = ()) -> tuple[int, ...]:
+    if isinstance(tree, Leaf):
+        if tree.strand == strand:
+            return path
+        raise ValueError(f"leaf {strand!r} is absent")
+    if strand in {leaf.strand for leaf in leaves(tree.left)}:
+        return find_leaf_path(tree.left, strand, path + (0,))
+    return find_leaf_path(tree.right, strand, path + (1,))
+
+
 def matrix_entry(matrix: Any, row: int, column: int) -> complex:
     try:
         return complex(matrix[row, column])
@@ -518,6 +528,89 @@ def project_vacuum_interval(
         "support_after": len(retained),
         "subtree_path": list(path),
     }
+
+
+def fuse_active_pair(
+    category: Any,
+    tree: Tree,
+    vector: dict[State, complex],
+    path: tuple[int, ...],
+    *,
+    output_strand: str,
+    output_label: Any,
+    multiplicity: int,
+):
+    """Apply one orthonormal trivalent projection to a sibling pair."""
+
+    local_tree = subtree_at(tree, path)
+    if not isinstance(local_tree, Node):
+        raise ValueError("fusion input is not a sibling pair")
+    if not isinstance(local_tree.left, Leaf) or not isinstance(local_tree.right, Leaf):
+        raise ValueError("fusion inputs must be active physical wires")
+    available = category.fusion_multiplicity(
+        local_tree.left.label, local_tree.right.label, output_label
+    )
+    if not (0 <= multiplicity < available):
+        raise ValueError(
+            "fusion multiplicity index is out of range: "
+            f"{multiplicity} not in [0, {available})"
+        )
+    output: dict[State, complex] = defaultdict(complex)
+    for state, amplitude in vector.items():
+        local_state = _state_at(state, path)
+        if not isinstance(local_state, NodeState):
+            raise ValueError("fusion input state is not a sibling pair")
+        if (
+            local_state.output == output_label
+            and local_state.multiplicity == multiplicity
+        ):
+            replacement = LeafState(output_strand)
+            output[_replace_state(state, path, replacement)] += amplitude
+    replacement_tree = Leaf(output_strand, output_label)
+    return replace_subtree(tree, path, replacement_tree), _prune(dict(output))
+
+
+def split_active_wire(
+    category: Any,
+    tree: Tree,
+    vector: dict[State, complex],
+    path: tuple[int, ...],
+    *,
+    left_strand: str,
+    left_label: Any,
+    right_strand: str,
+    right_label: Any,
+    multiplicity: int,
+):
+    """Apply the adjoint inclusion of one orthonormal trivalent basis map."""
+
+    local_tree = subtree_at(tree, path)
+    if not isinstance(local_tree, Leaf):
+        raise ValueError("split input must be one active physical wire")
+    available = category.fusion_multiplicity(
+        left_label, right_label, local_tree.label
+    )
+    if not (0 <= multiplicity < available):
+        raise ValueError(
+            "split multiplicity index is out of range: "
+            f"{multiplicity} not in [0, {available})"
+        )
+    output: dict[State, complex] = defaultdict(complex)
+    for state, amplitude in vector.items():
+        local_state = _state_at(state, path)
+        if not isinstance(local_state, LeafState):
+            raise ValueError("split input state must be one active physical wire")
+        replacement = NodeState(
+            LeafState(left_strand),
+            LeafState(right_strand),
+            local_tree.label,
+            multiplicity,
+        )
+        output[_replace_state(state, path, replacement)] += amplitude
+    replacement_tree = Node(
+        Leaf(left_strand, left_label), Leaf(right_strand, right_label)
+    )
+    return replace_subtree(tree, path, replacement_tree), _prune(dict(output))
 
 
 def braid_siblings(category: Any, tree: Tree, vector: dict[State, complex], path: tuple[int, ...], positive: bool):
@@ -811,6 +904,8 @@ class EvaluationStats:
     caps: int = 0
     kinks: int = 0
     vacuum_projectors: int = 0
+    fusions: int = 0
+    splits: int = 0
     max_active_strands: int = 0
     max_state_support: int = 1
     plans: list[dict[str, Any]] | None = None
@@ -886,6 +981,8 @@ class MorseEvaluator:
             "caps": stats.caps,
             "kinks": stats.kinks,
             "vacuum_projectors": stats.vacuum_projectors,
+            "fusions": stats.fusions,
+            "splits": stats.splits,
             "max_active_strands": stats.max_active_strands,
             "max_state_support": stats.max_state_support,
             "planner_weights": {"f": self.f_weight, "r": self.r_weight},
@@ -1044,7 +1141,10 @@ class MorseEvaluator:
         missing = set(topology.component_order) - set(component_labels)
         if missing:
             raise ValueError(f"missing component labels: {sorted(missing)!r}")
-        if not _unit_pruned:
+        has_explicit_trivalent_morphisms = any(
+            form["kind"] in {"fuse", "split"} for form in forms
+        )
+        if not _unit_pruned and not has_explicit_trivalent_morphisms:
             retained = frozenset(
                 component
                 for component in topology.component_order
@@ -1258,6 +1358,87 @@ class MorseEvaluator:
                         "projector_id": form.get("projector_id"),
                         "strands": strands,
                         **projector_stats,
+                    }
+                )
+                index += 1
+            elif kind == "fuse":
+                if tree is None:
+                    raise ValueError("fusion on an empty diagram")
+                inputs = list(form["inputs"])
+                if len(inputs) != 2 or len(set(inputs)) != 2:
+                    raise ValueError("fusion needs two distinct input wires")
+                positions = [order.index(strand) for strand in inputs]
+                if positions[1] != positions[0] + 1:
+                    raise ValueError(
+                        "fusion inputs must be adjacent and left-to-right ordered"
+                    )
+                target, path = grouped_target(
+                    tree, positions[0], positions[1] + 1, split=positions[1]
+                )
+                tree, vector, plan = self._rotate(
+                    tree, vector, target, stats
+                )
+                output_strand = form["output"]
+                if output_strand in order:
+                    raise ValueError("fusion output wire is already active")
+                tree, vector = fuse_active_pair(
+                    self.category,
+                    tree,
+                    vector,
+                    path,
+                    output_strand=output_strand,
+                    output_label=form["output_label"],
+                    multiplicity=int(form.get("multiplicity", 0)),
+                )
+                order[positions[0] : positions[1] + 1] = [output_strand]
+                stats.fusions += 1
+                stats.plans.append(
+                    {
+                        "kind": "fuse",
+                        "form_index": index,
+                        "inputs": inputs,
+                        "output": output_strand,
+                        "output_label": form["output_label"],
+                        "multiplicity": int(form.get("multiplicity", 0)),
+                        "f_rotations": len(plan),
+                    }
+                )
+                index += 1
+            elif kind == "split":
+                if tree is None:
+                    raise ValueError("split on an empty diagram")
+                input_strand = form["input"]
+                input_position = order.index(input_strand)
+                output_strands = list(form["outputs"])
+                output_labels = list(form["output_labels"])
+                if len(output_strands) != 2 or len(set(output_strands)) != 2:
+                    raise ValueError("split needs two distinct output wires")
+                if len(output_labels) != 2:
+                    raise ValueError("split needs two output labels")
+                if any(strand in order for strand in output_strands):
+                    raise ValueError("split output wire is already active")
+                path = find_leaf_path(tree, input_strand)
+                tree, vector = split_active_wire(
+                    self.category,
+                    tree,
+                    vector,
+                    path,
+                    left_strand=output_strands[0],
+                    left_label=output_labels[0],
+                    right_strand=output_strands[1],
+                    right_label=output_labels[1],
+                    multiplicity=int(form.get("multiplicity", 0)),
+                )
+                order[input_position : input_position + 1] = output_strands
+                stats.splits += 1
+                stats.plans.append(
+                    {
+                        "kind": "split",
+                        "form_index": index,
+                        "input": input_strand,
+                        "outputs": output_strands,
+                        "output_labels": output_labels,
+                        "multiplicity": int(form.get("multiplicity", 0)),
                     }
                 )
                 index += 1

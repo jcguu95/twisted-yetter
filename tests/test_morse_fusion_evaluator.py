@@ -5,12 +5,14 @@ from experiments.sage.morse_fusion_evaluator import (
     NodeState,
     MorseEvaluator,
     analyze_topology,
+    fuse_active_pair,
     leaves,
     project_vacuum_interval,
     right_comb_fusion_path_basis,
     right_comb_fusion_path_counts,
     rotation_plan,
     rotate_shape,
+    split_active_wire,
     vacuum_coupon_path_basis,
 )
 from experiments.scripts.morse_dsl import MorseBuilder
@@ -159,6 +161,29 @@ def middle_vacuum_projector_forms(repetitions=1):
         ]
     )
     return forms
+
+
+def trivalent_channel_projector_forms(output_label=0, multiplicity=0):
+    return [
+        {"kind": "cup", "piece": "A", "at": "far-left"},
+        {"kind": "cup", "piece": "B", "at": "far-right"},
+        {
+            "kind": "fuse",
+            "inputs": ["A.right", "B.left"],
+            "output": "coupon.tail",
+            "output_label": output_label,
+            "multiplicity": multiplicity,
+        },
+        {
+            "kind": "split",
+            "input": "coupon.tail",
+            "outputs": ["A.right", "B.left"],
+            "output_labels": [1, 1],
+            "multiplicity": multiplicity,
+        },
+        {"kind": "cap", "strands": ["B.left", "B.right"]},
+        {"kind": "cap", "strands": ["A.left", "A.right"]},
+    ]
 
 
 def test_rotation_plan_preserves_order_and_reaches_target():
@@ -333,6 +358,51 @@ def test_graph_coupon_basis_applies_variance_and_keeps_all_unit_paths():
     )
     assert forbidden == ()
     assert forbidden_metadata["root_multiplicity_rank"] == 0
+
+
+def test_explicit_fuse_split_events_realize_a_channel_projector():
+    evaluator = MorseEvaluator(SemionCategory())
+    expected = evaluator.fixed_label_value(
+        parallel_unlink_forms(), {"A": 1, "B": 1}
+    )[0]
+    observed, stats = evaluator.fixed_label_value(
+        trivalent_channel_projector_forms(), {"A": 1, "B": 1}
+    )
+    assert abs(observed - expected) < 1e-12
+    assert stats["fusions"] == 1
+    assert stats["splits"] == 1
+
+
+def test_explicit_trivalent_events_preserve_the_selected_multiplicity_copy():
+    category = RepA4FusionRules()
+    tree = Node(Leaf("a", 3), Leaf("b", 3))
+    state0 = NodeState(LeafState("a"), LeafState("b"), 3, 0)
+    state1 = NodeState(LeafState("a"), LeafState("b"), 3, 1)
+    fused_tree, fused = fuse_active_pair(
+        category,
+        tree,
+        {state0: 2.0, state1: 3.0},
+        (),
+        output_strand="tail",
+        output_label=3,
+        multiplicity=1,
+    )
+    assert fused_tree == Leaf("tail", 3)
+    assert fused == {LeafState("tail"): 3.0}
+
+    split_tree, split = split_active_wire(
+        category,
+        fused_tree,
+        fused,
+        (),
+        left_strand="a",
+        left_label=3,
+        right_strand="b",
+        right_label=3,
+        multiplicity=1,
+    )
+    assert split_tree == tree
+    assert split == {state1: 3.0}
 
 
 def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():
