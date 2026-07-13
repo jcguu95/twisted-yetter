@@ -206,7 +206,9 @@ def test_figure21_topology_artifact_is_conservative_and_reproducible():
             "figure21-right-special-disk-topology-v1.json"
         ).read_text()
     )
-    assert artifact["status"] == "MORPHISM_TOPOLOGY_CONTROLS_PASS_NOT_LINEARIZED"
+    assert artifact["status"] == (
+        "MORPHISM_GRAPH_COUPON_CONTROLS_PASS_NOT_EVALUATED"
+    )
     assert artifact["mathematical_status"] == (
         "DRAFT_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
     )
@@ -221,4 +223,16 @@ def test_figure21_topology_artifact_is_conservative_and_reproducible():
     ]
     assert artifact["corridor_preflight"]["status"] == (
         "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
+    )
+    coupon = artifact["coupon_graph"]
+    assert coupon["status"] == (
+        "PASS_GRAPH_LEVEL_VACUUM_PROJECTOR_COUPON_NOT_EVALUATED"
+    )
+    assert coupon["coupon_input_count"] == 29
+    assert coupon["coupon_output_count"] == 29
+    assert coupon["identity_recovery"]["status"] == (
+        "PASS_COUPON_IDENTITY_RECOVERS_ONE_CYCLE_PER_ORDINARY_COMPONENT"
+    )
+    assert coupon["evaluation_status"] == (
+        "NOT_EVALUATED_REQUIRES_COUPON_AWARE_BACKEND"
     )
