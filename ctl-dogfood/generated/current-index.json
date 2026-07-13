@@ -6998,6 +6998,101 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
+      "logical_id": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
+      "payload": {
+        "category": "SU(2)_2",
+        "created_at": "2026-07-13T02:00:41Z",
+        "created_by": "actor:codex",
+        "derivation": "Extrapolate measured no-sigma fast fractions through two-count 7; charge estimated fast sectors zero time and every remaining sector exactly 0.01 seconds.",
+        "evidence": {
+          "generated_floor": {
+            "git_blob": "d034f6dbd202df532bf98ec672942239b0a766de",
+            "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-optimistic-runtime-floor-v1.json",
+            "sha256": "438f45434889690e5f3c1598e2fb2e86eb654ccdf8c56ec6de844088df0dac73"
+          },
+          "probe": {
+            "git_blob": "c5304d389d6a44a2ccc3eccd69c7932745574a5c",
+            "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-fast-sector-probes-v1.json",
+            "sha256": "4a2474c0ee1a219445c387214d0e94f20628b2cab6d66324c87a2e4aa04cd311"
+          }
+        },
+        "generator": {
+          "git_blob": "90f156cd7f2e63d2d69902e00a867337c1545927",
+          "path": "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+          "reproduce_command": "python3 experiments/scripts/e2_su2_2_optimistic_runtime_floor.py --probe experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-fast-sector-probes-v1.json --output experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-optimistic-runtime-floor-v1.json",
+          "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+          "sha256": "fd85dffed74e9c12f595350155d273dbfc9fb50b7274099c6ab48879545870fb"
+        },
+        "link_input_resource": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+        "mathematical_status": "NUMERICAL_SAMPLING_INFERENCE",
+        "note_id": "objective-note-2026-07-13-e2-su2-2-optimistic-runtime-floor",
+        "result": {
+          "estimated_fast_sector_count": "72736.09375",
+          "fast_threshold_seconds": "0.01",
+          "optimistic_120_worker_days": "30.26715554871359",
+          "optimistic_two_worker_years": "4.972017338597715",
+          "optimistic_worker_seconds": "313809868.7290625",
+          "optimistic_worker_years": "9.94403467719543",
+          "sector_total": 31381059609
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "source_checkpoint": {
+          "git_commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+          "git_dirty": true,
+          "scope": "Exact new files are pinned by SHA-256 and Git blob; unrelated dirty work is excluded from the commit."
+        },
+        "status": "HEURISTIC_OPTIMISTIC_RUNTIME_FLOOR_NOT_RIGOROUS_BOUND",
+        "subjects": [
+          "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
+          "subject:twisted-yetter:category-family:su2-k"
+        ],
+        "title": "E(2), SU(2)_2 optimistic runtime floor",
+        "top_notice": "This is a deliberately optimistic heuristic floor, not a rigorous runtime bound and not an E(2) Crane-Yetter evaluation."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
+        "created_at": "2026-07-13T02:00:41Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+      "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+          "e2_su2_2_optimistic_runtime_floor.py",
+          "e2-su2-2-optimistic-runtime-floor-generator"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+        "created_at": "2026-07-13T02:00:41Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
       "logical_id": "claim:resource-handle:figure815-e1-morse-input",
       "payload": {
@@ -7458,6 +7553,34 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
+      "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+      "payload": {
+        "capture_note": "The script was uncommitted at capture time; the Git blob and SHA-256 identify its exact bytes in the same small commit as this snapshot.",
+        "captured_at": "2026-07-13T02:00:41Z",
+        "commit": null,
+        "git_blob": "90f156cd7f2e63d2d69902e00a867337c1545927",
+        "path": "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+        "sha256": "fd85dffed74e9c12f595350155d273dbfc9fb50b7274099c6ab48879545870fb",
+        "snapshot_id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
+        "created_at": "2026-07-13T02:00:41Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -10795,7 +10918,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
+      "cid": "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
       "logical_id": "subject:twisted-yetter:category-family:su2-k",
       "payload": {
         "aliases": [
@@ -10805,6 +10928,9 @@
         "display_name": "SU(2)_k modular tensor category family",
         "parent_subject_ids": [
           "subject:twisted-yetter:lie-group:su2"
+        ],
+        "related_experiments": [
+          "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor"
         ],
         "schema": "twisted-yetter/subject-definition/0",
         "scope_note": "The quantum group / WZW modular tensor category family indexed by the level k. This is deliberately separate from the Lie group SU(2).",
@@ -10818,13 +10944,15 @@
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
-        "created_at": "2026-07-06T23:18:20Z",
+        "cid": "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
+        "created_at": "2026-07-13T02:00:41Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:category-family:su2-k",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
       },
@@ -12662,7 +12790,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
+      "cid": "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
       "logical_id": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
       "payload": {
         "aliases": [
@@ -12678,6 +12806,7 @@
           "e2_framings": "B=-2; every L_i/R_i=-2",
           "e2_input": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
           "e2_input_sha256": "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21",
+          "e2_su2_2_runtime_floor": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
           "primary_lab_note": "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow",
           "source_commit": "d0bfff53e71a7e25dab96a70af744f7de0315db3"
         },
@@ -12695,13 +12824,15 @@
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
-        "created_at": "2026-07-12T20:59:19Z",
+        "cid": "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
+        "created_at": "2026-07-13T02:00:41Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
       },
@@ -13044,7 +13175,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-12T20:59:19Z",
+  "generated_at": "2026-07-13T02:00:41Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -13064,6 +13195,9 @@
       "8aa7f2e11c2d90f61a1f94322d644d9657480e85": [
         "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
+      "90f156cd7f2e63d2d69902e00a867337c1545927": [
+        "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
+      ],
       "c96f6ecbfa34c8f1cc3340e12f38891818807fbf": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ],
@@ -13077,6 +13211,12 @@
       ],
       "ctl-dogfood/lab-notes/2026-07-08-su2-2-braid-oracle-bug-audit.json": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
+      ],
+      "e2-su2-2-optimistic-runtime-floor-generator": [
+        "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
+      ],
+      "e2_su2_2_optimistic_runtime_floor.py": [
+        "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
       "experiments/inputs/gompf-stipsicz/figure815-e1-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e1-morse-draft"
@@ -13095,6 +13235,9 @@
       ],
       "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
         "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
+      ],
+      "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
+        "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
       "figure815-e1-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e1-morse-draft"
@@ -13128,6 +13271,9 @@
       ],
       "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
+      ],
+      "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor": [
+        "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
       "resource:twisted-yetter:script:native-morse-fusion-evaluator": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13184,6 +13330,9 @@
       ],
       "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
+      ],
+      "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
+        "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
       ]
     },
     "by_sha256": {
@@ -13207,6 +13356,9 @@
       ],
       "f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed": [
         "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca"
+      ],
+      "fd85dffed74e9c12f595350155d273dbfc9fb50b7274099c6ab48879545870fb": [
+        "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
       ]
     },
     "handles": {
@@ -13283,6 +13435,32 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:su2-2-braid-oracle-bug-audit-note",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor": {
+        "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+        "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+            "e2_su2_2_optimistic_runtime_floor.py",
+            "e2-su2-2-optimistic-runtime-floor-generator"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+          "created_at": "2026-07-13T02:00:41Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -13456,6 +13634,10 @@
         "id": "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5": {
+        "id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+        "kind": "handle"
+      },
       "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac": {
         "id": "claim:resource-safety:figure815-e1-morse-input-caution",
         "kind": "safety-status"
@@ -13472,6 +13654,10 @@
         "id": "resource:twisted-yetter:script:su2-2-braid-oracle",
         "kind": "handle"
       },
+      "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381": {
+        "id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:f5519c0bf9f636f184e6e948b663c0c97b66e2bba9f8a117ed9ade8b2011acb5": {
         "id": "claim:resource-safety:su2-2-braid-oracle-known-wrong",
         "kind": "safety-status"
@@ -13482,6 +13668,10 @@
       }
     },
     "resource_logical_ids": {
+      "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": {
+        "id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+        "kind": "handle"
+      },
       "claim:resource-handle:figure815-e1-morse-input": {
         "id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
         "kind": "handle"
@@ -13537,6 +13727,10 @@
       "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active": {
         "id": "claim:resource-safety:su3-2-anyonwiki-fr-braid-evaluator-active",
         "kind": "safety-status"
+      },
+      "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe": {
+        "id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe",
+        "kind": "snapshot"
       },
       "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5": {
         "id": "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b",
@@ -13900,6 +14094,32 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe": {
+        "cid": "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
+        "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+        "payload": {
+          "capture_note": "The script was uncommitted at capture time; the Git blob and SHA-256 identify its exact bytes in the same small commit as this snapshot.",
+          "captured_at": "2026-07-13T02:00:41Z",
+          "commit": null,
+          "git_blob": "90f156cd7f2e63d2d69902e00a867337c1545927",
+          "path": "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+          "sha256": "fd85dffed74e9c12f595350155d273dbfc9fb50b7274099c6ab48879545870fb",
+          "snapshot_id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
+          "created_at": "2026-07-13T02:00:41Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4": {
         "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
         "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
@@ -14002,8 +14222,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
+  "root_cid": "ctlobj-sha256:f03cd9a4d38435c19f2c03bb8103f02e682c3c917892b97e9391f524597ba0fc",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04"
+  "transition_cid": "ctlobj-sha256:41eea13ed9c520ed2b8eec4c6112fc8ae4419cb1138a6b4524ef181a5af0816b"
 }

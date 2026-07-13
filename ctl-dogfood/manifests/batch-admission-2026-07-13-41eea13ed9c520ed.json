@@ -1,0 +1,49 @@
+{
+  "actor_id": "actor:jin",
+  "admission_batch_cid": "ctlobj-sha256:41eea13ed9c520ed2b8eec4c6112fc8ae4419cb1138a6b4524ef181a5af0816b",
+  "admitted_at": "2026-07-13T02:00:41Z",
+  "binding_logical_ids": [
+    "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
+    "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+    "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+    "subject:twisted-yetter:category-family:su2-k",
+    "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft"
+  ],
+  "child_root_cid": "ctlobj-sha256:f03cd9a4d38435c19f2c03bb8103f02e682c3c917892b97e9391f524597ba0fc",
+  "created_at": "2026-07-13T02:00:41Z",
+  "current_root_cid": "ctlobj-sha256:f03cd9a4d38435c19f2c03bb8103f02e682c3c917892b97e9391f524597ba0fc",
+  "kernel_profile": "ctl-kernel/1",
+  "manifest_kind": "batch-admission",
+  "mode": "dogfood",
+  "parent_root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
+  "payload_files": [
+    "resources/e2-su2-2-runtime-floor-generator-handle.json",
+    "resources/e2-su2-2-runtime-floor-generator-snapshot.json",
+    "lab-notes/2026-07-13-e2-su2-2-optimistic-runtime-floor.json",
+    "subject-layer/definitions/presentation-gompf-stipsicz-figure815-morse-draft.json",
+    "subject-layer/definitions/category-family-su2-k.json"
+  ],
+  "plan_schema": "ctl-dogfood/batch-admission-plan/1",
+  "principal_roles": [
+    "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1"
+  ],
+  "project_id": "project:twisted-yetter",
+  "revision_cids": [
+    "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
+    "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
+    "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
+    "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+    "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381"
+  ],
+  "schema": "ctl-dogfood/batch-admission-manifest/1",
+  "semantics": {
+    "adds_authority_semantics": false,
+    "adds_downstream_ontology": false,
+    "adds_evidence_semantics": false,
+    "manifest_role": "audit-and-reproduction-sidecar-only",
+    "validate_transition_input": false
+  },
+  "submitted_by": "actor:codex",
+  "tool": "scripts/admit_revisions_batch.py",
+  "transition_cid": "ctlobj-sha256:41eea13ed9c520ed2b8eec4c6112fc8ae4419cb1138a6b4524ef181a5af0816b"
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "twisted-yetter.e2-su2-2-fast-sector-probes.v1",
+  "status": "NUMERICAL_PROBES_WITH_DRAFT_INPUT_CAVEAT",
+  "input": "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json",
+  "input_status": "DRAFT_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM",
+  "category": "SU(2)_2",
+  "component_count": 22,
+  "simple_object_count": 3,
+  "fast_threshold_seconds": 0.01,
+  "probe_method": "Persistent native Morse evaluator; complete low-weight strata and deterministic rank-spread samples within no-sigma strata.",
+  "no_sigma_strata": [
+    {"two_count": 0, "sample_count": 1, "fast_count": 1, "sampling": "complete"},
+    {"two_count": 1, "sample_count": 22, "fast_count": 22, "sampling": "complete"},
+    {"two_count": 2, "sample_count": 231, "fast_count": 231, "sampling": "complete"},
+    {"two_count": 3, "sample_count": 1540, "fast_count": 1536, "sampling": "complete"},
+    {"two_count": 4, "sample_count": 7315, "fast_count": 7286, "sampling": "complete"},
+    {"two_count": 5, "sample_count": 256, "fast_count": 206, "sampling": "deterministic-rank-spread"},
+    {"two_count": 6, "sample_count": 256, "fast_count": 100, "sampling": "deterministic-rank-spread"},
+    {"two_count": 7, "sample_count": 128, "fast_count": 10, "sampling": "deterministic-rank-spread"},
+    {"two_count": 8, "sample_count": 256, "fast_count": 0, "sampling": "deterministic-rank-spread"}
+  ],
+  "runtime_context": {
+    "hostname": "jin-m2",
+    "workers": 2,
+    "floating_point": true,
+    "evaluator": "experiments/sage/morse_native_evaluate.sage.py",
+    "evaluator_sha256": "216bdd3885f8cb153f0b2ce1b7274230556f7681489f3e78968b69793b9adb85",
+    "evaluator_git_blob": "cfd4e121e98848107eb7805655a064d995b7db06",
+    "planner_mode": "hybrid",
+    "checkpoint_format": "jsonl"
+  }
+}

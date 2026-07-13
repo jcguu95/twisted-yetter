@@ -1,0 +1,63 @@
+{
+  "created_at": "2026-07-13T02:00:41Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
+  "parents": [],
+  "payload": {
+    "category": "SU(2)_2",
+    "created_at": "2026-07-13T02:00:41Z",
+    "created_by": "actor:codex",
+    "derivation": "Extrapolate measured no-sigma fast fractions through two-count 7; charge estimated fast sectors zero time and every remaining sector exactly 0.01 seconds.",
+    "evidence": {
+      "generated_floor": {
+        "git_blob": "d034f6dbd202df532bf98ec672942239b0a766de",
+        "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-optimistic-runtime-floor-v1.json",
+        "sha256": "438f45434889690e5f3c1598e2fb2e86eb654ccdf8c56ec6de844088df0dac73"
+      },
+      "probe": {
+        "git_blob": "c5304d389d6a44a2ccc3eccd69c7932745574a5c",
+        "path": "experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-fast-sector-probes-v1.json",
+        "sha256": "4a2474c0ee1a219445c387214d0e94f20628b2cab6d66324c87a2e4aa04cd311"
+      }
+    },
+    "generator": {
+      "git_blob": "90f156cd7f2e63d2d69902e00a867337c1545927",
+      "path": "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py",
+      "reproduce_command": "python3 experiments/scripts/e2_su2_2_optimistic_runtime_floor.py --probe experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-fast-sector-probes-v1.json --output experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-optimistic-runtime-floor-v1.json",
+      "resource_id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+      "sha256": "fd85dffed74e9c12f595350155d273dbfc9fb50b7274099c6ab48879545870fb"
+    },
+    "link_input_resource": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+    "mathematical_status": "NUMERICAL_SAMPLING_INFERENCE",
+    "note_id": "objective-note-2026-07-13-e2-su2-2-optimistic-runtime-floor",
+    "result": {
+      "estimated_fast_sector_count": "72736.09375",
+      "fast_threshold_seconds": "0.01",
+      "optimistic_120_worker_days": "30.26715554871359",
+      "optimistic_two_worker_years": "4.972017338597715",
+      "optimistic_worker_seconds": "313809868.7290625",
+      "optimistic_worker_years": "9.94403467719543",
+      "sector_total": 31381059609
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_checkpoint": {
+      "git_commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+      "git_dirty": true,
+      "scope": "Exact new files are pinned by SHA-256 and Git blob; unrelated dirty work is excluded from the commit."
+    },
+    "status": "HEURISTIC_OPTIMISTIC_RUNTIME_FLOOR_NOT_RIGOROUS_BOUND",
+    "subjects": [
+      "subject:twisted-yetter:presentation:gompf-stipsicz-figure815-morse-draft",
+      "subject:twisted-yetter:category-family:su2-k"
+    ],
+    "title": "E(2), SU(2)_2 optimistic runtime floor",
+    "top_notice": "This is a deliberately optimistic heuristic floor, not a rigorous runtime bound and not an E(2) Crane-Yetter evaluation."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
