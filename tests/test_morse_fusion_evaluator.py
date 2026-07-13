@@ -10,6 +10,12 @@ from experiments.sage.morse_fusion_evaluator import (
     rotation_plan,
     rotate_shape,
 )
+from experiments.scripts.morse_dsl import MorseBuilder
+from experiments.scripts.special_dotted_morphism import (
+    compile_projected_morphism,
+    insert_horizontal_projector,
+    linearize_horizontal_disk_projector,
+)
 
 
 class SemionCategory:
@@ -247,6 +253,63 @@ def test_vacuum_projector_fails_closed_without_orthonormal_basis_claim():
         assert "orthonormal path basis" in str(exc)
     else:
         raise AssertionError("unsafe category adapter was accepted")
+
+
+def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():
+    evaluator = MorseEvaluator(SemionCategory())
+    base = parallel_unlink_forms()
+    expected = evaluator.fixed_label_value(base, {"A": 1, "B": 1})[0]
+
+    identity = insert_horizontal_projector(
+        base,
+        before_form_index=2,
+        strands=("A.left", "B.right"),
+        projector_id="corridor-control",
+        identity_projector=True,
+    )
+    assert len(identity["gather"]) == 2
+    assert len(identity["inverse_gather"]) == 2
+    observed_identity = evaluator.fixed_label_value(
+        identity["compiled_forms"], {"A": 1, "B": 1}
+    )[0]
+    assert abs(observed_identity - expected) < 1e-12
+
+    projected = insert_horizontal_projector(
+        base,
+        before_form_index=2,
+        strands=("A.left", "B.right"),
+        projector_id="corridor-control",
+    )
+    observed_projected = evaluator.fixed_label_value(
+        projected["compiled_forms"], {"A": 1, "B": 1}
+    )[0]
+    assert abs(observed_projected - expected) < 1e-12
+
+
+def test_one_puncture_special_disk_only_allows_the_unit_label():
+    builder = MorseBuilder()
+    builder.cup("red1", at="far-left")
+    builder.cup("A1", at="far-right")
+    builder.cross(over="A1.left", under="red1.right")
+    builder.cross(over="red1.left", under="A1.left")
+    builder.cap("red1")
+    builder.cap("A1")
+    ir = compile_projected_morphism(
+        builder.forms,
+        component_by_piece={"red1": "red", "A1": "A"},
+        special_components=("red",),
+    )
+    linearized = linearize_horizontal_disk_projector(builder.forms, ir)
+    assert linearized["status"] == "PASS_HORIZONTAL_DISK_PROJECTOR_LINEARIZATION"
+    evaluator = MorseEvaluator(SemionCategory())
+    nontrivial = evaluator.fixed_label_value(
+        linearized["compiled_forms"], {"A": 1}
+    )[0]
+    trivial = evaluator.fixed_label_value(
+        linearized["compiled_forms"], {"A": 0}
+    )[0]
+    assert abs(nontrivial) < 1e-12
+    assert abs(trivial - 1.0) < 1e-12
 
 
 def test_topology_joins_multiple_pieces_into_component_a():

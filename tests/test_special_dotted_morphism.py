@@ -7,6 +7,7 @@ from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
     compile_projected_morphism,
+    preflight_horizontal_disk_corridor,
     replay_forms,
 )
 
@@ -77,6 +78,30 @@ def test_special_disk_compiler_rejects_self_crossing_special_component():
         )
 
 
+def test_one_puncture_has_a_horizontal_projector_slice():
+    forms, component_by_piece = one_puncture_input()
+    ir = compile_projected_morphism(
+        forms,
+        component_by_piece=component_by_piece,
+        special_components=("red",),
+    )
+    preflight = preflight_horizontal_disk_corridor(forms, ir)
+    assert preflight["status"] == "PASS_COMMON_HORIZONTAL_PROJECTOR_SLICE"
+    assert preflight["projector_strands"] == ["A1.left"]
+
+
+def test_two_punctures_on_one_strand_fail_closed_as_nonhorizontal():
+    forms, component_by_piece = two_puncture_input()
+    ir = compile_projected_morphism(
+        forms,
+        component_by_piece=component_by_piece,
+        special_components=("red",),
+    )
+    preflight = preflight_horizontal_disk_corridor(forms, ir)
+    assert preflight["status"] == "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
+    assert preflight["duplicate_active_strands"] == ["A1.left"]
+
+
 def test_multiple_special_components_parse_but_numeric_support_fails_closed():
     m = MorseBuilder()
     m.cup("red1", at="far-left")
@@ -124,3 +149,6 @@ def test_figure21_disk_certificate_regression():
     ]
     assert certificate["disk_to_linking_orientation_sign"] == -1
     assert ir["vacuum_projectors"][0]["corridor_status"] == "NOT_LINEARIZED"
+    preflight = preflight_horizontal_disk_corridor(builder.forms, ir)
+    assert preflight["status"] == "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR"
+    assert len(preflight["nonmonotone_cut_ids"]) == 8

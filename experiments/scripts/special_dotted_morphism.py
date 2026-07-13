@@ -466,7 +466,7 @@ def erase_components(
     kept_order: list[str] = []
     output: list[dict[str, Any]] = []
 
-    for raw_form in forms:
+    for source_form_index, raw_form in enumerate(forms):
         form = dict(raw_form)
         kind = form["kind"]
         if kind == "cup":
@@ -495,6 +495,7 @@ def erase_components(
                         kept_order[kept_gap - 1],
                         kept_order[kept_gap],
                     ]
+                new_form["source_form_index"] = source_form_index
                 output.append(new_form)
                 kept_order[kept_gap:kept_gap] = pair
             full_order[full_gap:full_gap] = pair
@@ -505,6 +506,7 @@ def erase_components(
                 ko, ku = kept_order.index(over), kept_order.index(under)
                 if abs(ko - ku) != 1:
                     raise ValueError("component erasure made a crossing nonlocal")
+                form["source_form_index"] = source_form_index
                 output.append(form)
                 kept_order[ko], kept_order[ku] = kept_order[ku], kept_order[ko]
             full_order[io], full_order[iu] = full_order[iu], full_order[io]
@@ -515,6 +517,7 @@ def erase_components(
                     raise ValueError("component erasure split a cap across components")
                 if abs(kept_order.index(left) - kept_order.index(right)) != 1:
                     raise ValueError("component erasure made a cap nonlocal")
+                form["source_form_index"] = source_form_index
                 output.append(form)
                 kept_order = [
                     strand for strand in kept_order if strand not in {left, right}
@@ -524,6 +527,7 @@ def erase_components(
             ]
         elif kind == "kink":
             if strand_component[form["strand"]] not in erased:
+                form["source_form_index"] = source_form_index
                 output.append(form)
         elif kind == "vacuum-projector":
             retained = [
@@ -534,6 +538,7 @@ def erase_components(
             if retained:
                 new_form = dict(form)
                 new_form["strands"] = retained
+                new_form["source_form_index"] = source_form_index
                 output.append(new_form)
         else:
             raise ValueError(f"unsupported form during component erasure: {form!r}")
@@ -541,6 +546,229 @@ def erase_components(
         raise ValueError("component erasure replay did not close")
     replay_forms(output)
     return output
+
+
+def insert_horizontal_projector(
+    forms: Iterable[dict[str, Any]],
+    *,
+    before_form_index: int,
+    strands: Iterable[str],
+    projector_id: str,
+    identity_projector: bool = False,
+) -> dict[str, Any]:
+    """Insert an explicit gather/project/inverse-gather corridor.
+
+    This function is intentionally limited to strands which are already
+    simultaneous at one Morse slice.  Selected strands are stably gathered
+    into one contiguous interval by adjacent over-crossings.  Replaying the
+    swaps in reverse while keeping the same physical overstrand gives the
+    inverse braid and a Reidemeister-II identity when the projector is absent.
+    """
+
+    forms = [dict(form) for form in forms]
+    if not (0 <= before_form_index <= len(forms)):
+        raise ValueError("horizontal projector insertion index is out of range")
+    trace = replay_forms(forms)
+    active = (
+        trace[before_form_index]["before_order"]
+        if before_form_index < len(trace)
+        else []
+    )
+    requested = list(strands)
+    if not requested:
+        raise ValueError("horizontal corridor needs at least one projector strand")
+    if len(set(requested)) != len(requested):
+        raise ValueError("horizontal corridor cannot represent two cuts on one strand")
+    if any(strand not in active for strand in requested):
+        raise ValueError("horizontal corridor strand is not active at the gate slice")
+
+    selected = [strand for strand in active if strand in set(requested)]
+    current = list(active)
+    anchor = min(current.index(strand) for strand in selected)
+    gather = []
+    for offset, strand in enumerate(selected):
+        target = anchor + offset
+        while current.index(strand) > target:
+            index = current.index(strand)
+            spectator = current[index - 1]
+            crossing = {
+                "kind": "cross",
+                "over": strand,
+                "under": spectator,
+                "corridor_role": "gather",
+                "corridor_step": len(gather),
+                "projector_id": projector_id,
+            }
+            gather.append(crossing)
+            current[index - 1], current[index] = current[index], current[index - 1]
+    if current[anchor : anchor + len(selected)] != selected:
+        raise AssertionError("stable projector gather failed")
+
+    inverse = []
+    for crossing in reversed(gather):
+        over, under = crossing["over"], crossing["under"]
+        io, iu = current.index(over), current.index(under)
+        if abs(io - iu) != 1:
+            raise AssertionError("inverse gather strands are not adjacent")
+        inverse_crossing = {
+            "kind": "cross",
+            "over": over,
+            "under": under,
+            "corridor_role": "inverse-gather",
+            "inverse_of_step": crossing["corridor_step"],
+            "projector_id": projector_id,
+        }
+        inverse.append(inverse_crossing)
+        current[io], current[iu] = current[iu], current[io]
+    if current != active:
+        raise AssertionError("inverse gather did not restore active order")
+
+    projector = {
+        "kind": "vacuum-projector",
+        "projector_id": projector_id,
+        "strands": selected,
+        "normalization": "IDEMPOTENT_UNIT_CHANNEL_NO_GLOBAL_DIMENSION_FACTOR",
+        "corridor_role": "projector",
+    }
+    inserted = [*gather]
+    if not identity_projector:
+        inserted.append(projector)
+    inserted.extend(inverse)
+    compiled = [*forms[:before_form_index], *inserted, *forms[before_form_index:]]
+    replay_forms(compiled)
+    return {
+        "status": "PASS_HORIZONTAL_GATHER_PROJECTOR_INVERSE_GATHER",
+        "projector_id": projector_id,
+        "identity_projector": identity_projector,
+        "before_form_index": before_form_index,
+        "active_order_before": active,
+        "requested_strands": requested,
+        "projector_strands": selected,
+        "gather": gather,
+        "inverse_gather": inverse,
+        "inserted_forms": inserted,
+        "compiled_forms": compiled,
+    }
+
+
+def preflight_horizontal_disk_corridor(
+    source_forms: Iterable[dict[str, Any]],
+    projected_ir: dict[str, Any],
+) -> dict[str, Any]:
+    """Find a common horizontal representative for every disk puncture.
+
+    The v1 preflight only accepts a cut whose entry and exit lie on the same
+    monotone Morse strand.  This is a deliberate fail-closed boundary: cuts
+    that pass a cup or cap require a graph-level, non-horizontal coupon and
+    must not be silently flattened.
+    """
+
+    source_forms = tuple(dict(form) for form in source_forms)
+    if projected_ir["special_component_count"] != 1:
+        return {
+            "status": "UNSUPPORTED_MULTIPLE_SPECIAL_COMPONENTS_FAIL_CLOSED",
+            "reason": "numeric v1 accepts exactly one special component",
+        }
+    certificate = projected_ir["special_disk_certificates"][0]
+    cuts = certificate["forced_cuts"]
+    nonmonotone = [
+        cut for cut in cuts if cut["entry_strand"] != cut["exit_strand"]
+    ]
+    duplicate_strands = sorted(
+        strand
+        for strand, count in _counts(cut["entry_strand"] for cut in cuts).items()
+        if count > 1
+    )
+    if nonmonotone or duplicate_strands:
+        return {
+            "status": "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR",
+            "reason": (
+                "some disk arcs cross a cup/cap or require multiple punctures "
+                "on one active Morse strand"
+            ),
+            "nonmonotone_cut_ids": [cut["cut_id"] for cut in nonmonotone],
+            "duplicate_active_strands": duplicate_strands,
+            "forced_cut_count": len(cuts),
+        }
+
+    candidate_sets = []
+    for cut in cuts:
+        lower = min(cut["entry_form_index"], cut["exit_form_index"])
+        upper = max(cut["entry_form_index"], cut["exit_form_index"])
+        candidate_sets.append(set(range(lower + 1, upper + 1)))
+    common = set.intersection(*candidate_sets) if candidate_sets else set()
+    trace = replay_forms(source_forms)
+    valid = []
+    for before_index in sorted(common):
+        active = (
+            trace[before_index]["before_order"]
+            if before_index < len(trace)
+            else []
+        )
+        if all(cut["entry_strand"] in active for cut in cuts):
+            valid.append(before_index)
+    if not valid:
+        return {
+            "status": "UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR",
+            "reason": "disk punctures have no common active Morse slice",
+            "forced_cut_count": len(cuts),
+            "candidate_slice_count": len(common),
+        }
+
+    source_index = valid[0]
+    ordinary_forms = projected_ir["ordinary_forms"]
+    ordinary_index = sum(
+        int(form.get("source_form_index", -1) < source_index)
+        for form in ordinary_forms
+    )
+    source_active = trace[source_index]["before_order"]
+    cut_by_strand = {cut["entry_strand"]: cut for cut in cuts}
+    strands = [strand for strand in source_active if strand in cut_by_strand]
+    return {
+        "status": "PASS_COMMON_HORIZONTAL_PROJECTOR_SLICE",
+        "source_before_form_index": source_index,
+        "ordinary_before_form_index": ordinary_index,
+        "projector_strands": strands,
+        "cut_order_at_slice": [cut_by_strand[strand]["cut_id"] for strand in strands],
+    }
+
+
+def linearize_horizontal_disk_projector(
+    source_forms: Iterable[dict[str, Any]],
+    projected_ir: dict[str, Any],
+    *,
+    identity_projector: bool = False,
+) -> dict[str, Any]:
+    """Linearize one disk projector when preflight proves a common slice."""
+
+    preflight = preflight_horizontal_disk_corridor(source_forms, projected_ir)
+    if preflight["status"] != "PASS_COMMON_HORIZONTAL_PROJECTOR_SLICE":
+        return {
+            "status": preflight["status"],
+            "preflight": preflight,
+            "compiled_forms": None,
+        }
+    projector = projected_ir["vacuum_projectors"][0]
+    corridor = insert_horizontal_projector(
+        projected_ir["ordinary_forms"],
+        before_form_index=preflight["ordinary_before_form_index"],
+        strands=preflight["projector_strands"],
+        projector_id=projector["projector_id"],
+        identity_projector=identity_projector,
+    )
+    return {
+        "status": "PASS_HORIZONTAL_DISK_PROJECTOR_LINEARIZATION",
+        "preflight": preflight,
+        "corridor": corridor,
+        "compiled_forms": corridor["compiled_forms"],
+    }
+
+
+def _counts(values: Iterable[str]) -> dict[str, int]:
+    counts: dict[str, int] = defaultdict(int)
+    for value in values:
+        counts[value] += 1
+    return dict(counts)
 
 
 def compile_projected_morphism(
