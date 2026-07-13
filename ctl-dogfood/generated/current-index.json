@@ -6998,6 +6998,112 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
+      "logical_id": "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+      "payload": {
+        "claim_boundary": {
+          "established": "The recorded local controls and 23 cross-presentation comparisons pass numerically for the explicitly listed categories and inputs.",
+          "not_claimed": [
+            "A proof that every Morse diagram or category adapter is correct.",
+            "Automatic compatibility with loaded F/R payloads that use a different or undocumented basis convention.",
+            "Correctness of large Figure 8.15 E(1) evaluations outside the already recorded SU(2)_2 checkpoint.",
+            "A theorem-level universal evaluator result."
+          ]
+        },
+        "created_at": "2026-07-12T21:30:31Z",
+        "created_by": "actor:codex",
+        "diagnosis": {
+          "first_issue": "Cap handling forced F-rotations even when the capped pair was already a fusion-tree subtree. Reusing the existing subtree removes these unnecessary moves.",
+          "second_issue": "The D(Dic_3) payload uses Frobenius-normalized SVD intertwiners. Their composite fusion-path bases are not orthonormal, while the Morse cup/cap contraction assumes an orthonormal path basis.",
+          "separation_check": "For a three-strand RII word with a spectator, the open morphism returned to the initial fusion tree with maximum coefficient error 1.7e-16, while the old closed value failed. This localized the remaining problem to the closure/path-basis pairing rather than R or F coherence.",
+          "serialized_basis_source": "experiments/results/mtc-candidates/drinfeld-double-dic12-omega0-mtc-fr-data-v1.json basis_convention.fusion_space"
+        },
+        "evidence": {
+          "control_artifact": {
+            "categories": [
+              "SU(2)_2",
+              "SU(2)_3",
+              "SU(2)_4",
+              "SU(2)_5",
+              "SU(3)_2",
+              "D(Dic_3)=D(Dic_12-order-12)"
+            ],
+            "failure_count": 0,
+            "path": "experiments/results/morse/native-morse-evaluator-category-controls-v2.json",
+            "row_count": 168,
+            "sha256": "531b10d8d53286fa0591c890f8734f3d650f23c1fb003a2548a824cd8c714b27",
+            "status": "pass"
+          },
+          "cross_presentation_matrix": {
+            "categories": [
+              "SU(2)_2",
+              "SU(2)_3",
+              "SU(2)_4",
+              "SU(2)_5",
+              "SU(2)_6",
+              "SU(2)_8",
+              "SU(3)_2",
+              "D(A4) untwisted",
+              "D(A4) c3w1 twisted category",
+              "D(Dic_3)=D(Dic_12-order-12)"
+            ],
+            "comparison": "Tham 5.11 D^-2 normalization of the corrected Yasui Figure 2 CP2(a=1) Morse presentation against the standard +1-framed CP2 presentation",
+            "comparison_count": 23,
+            "dic3_normalized_twist_values": [
+              "12-1.0860996601394742e-14j",
+              "-12+9.6147718434487945e-15j",
+              "12-1.0908969201224223e-14j",
+              "-12+9.6565068309088602e-15j"
+            ],
+            "failure_count": 0,
+            "git_blob": "0f7838172b78cfadd7b83b08ecd04aa56d08ad33",
+            "path": "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+            "sha256": "479fafe8668fc9f3785fbd0d3529f0c3eaf0dd145caec35ae81004ed4ee5c075",
+            "status": "pass"
+          },
+          "ddic_all_f_block_unitarity_after_conversion": {
+            "block_count": 86016,
+            "maximum_operator_norm_error": "7.641918101711904e-15"
+          },
+          "ddic_largest_f_block_bridge": {
+            "expected": "2.999999999999998+8.78272281101353e-15j",
+            "observed": "2.9999999999999987+2.5862949945781526e-15j",
+            "status": "pass"
+          }
+        },
+        "mathematical_status": "NUMERICAL_IMPLEMENTATION_RESULT_NOT_A_UNIVERSAL_THEOREM",
+        "normalization": {
+          "activation": "LoadedFRMorseAdapter applies the conversion only when payload metadata explicitly contains the documented SVD nullspace basis convention.",
+          "formula": "F_orth[x,y] = sqrt(d_y/d_x) F_serialized[x,y].",
+          "path_basis_gram": "For left channel x and right channel y, the composite SVD-intertwiner path basis norms squared are 1/d_x and 1/d_y.",
+          "r_symbols": "R blocks are unchanged because source and target trivalent spaces have the same output-channel normalization."
+        },
+        "note_id": "objective-note-2026-07-12-native-morse-svd-path-basis-normalization",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "source_checkpoint": {
+          "basis_normalization_commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+          "git_commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+          "git_dirty": false
+        },
+        "status": "ESTABLISHED_NUMERIC_CONTROL_CHECKPOINT",
+        "title": "Native Morse evaluator cross-category validation",
+        "top_notice": "The native Morse evaluator passes 23 recorded cross-presentation comparisons for SU(2)_2,3,4,5,6,8, SU(3)_2, D(A4), and D(Dic_3), in addition to its local controls. This is bounded numerical evidence, not universal certification or a theorem."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
       "logical_id": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
       "payload": {
@@ -7142,6 +7248,62 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-handle:figure815-e2-morse-input",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2",
+      "logical_id": "claim:resource-handle:morse-category-adapters",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/morse_category_adapters.py",
+          "morse_category_adapters.py",
+          "morse-category-adapters"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:morse-category-adapters"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:morse-category-adapters",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808",
+      "logical_id": "claim:resource-handle:native-morse-figure2-cross-category-matrix",
+      "payload": {
+        "kind": "result",
+        "lookup_keys": [
+          "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+          "native-morse-figure2-cross-category-matrix-v1.json",
+          "native-morse-figure2-cross-category-matrix"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:native-morse-figure2-cross-category-matrix",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7368,39 +7530,80 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
-      "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+      "cid": "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
+      "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
       "payload": {
         "evidence_claims": [
-          "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+          "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization"
         ],
         "profile": "ctl-resource/safety-status/1",
         "replacement": null,
         "safe_scopes": [
-          "reproducing the recorded SU(2)_2 E(1) controls",
-          "small tests checked against an independent evaluator",
-          "new experiments explicitly marked as needing validation"
+          "payloads carrying the exact documented SVD nullspace fusion-space convention",
+          "the recorded SU(2), SU(3)_2, and D(Dic_3) control matrix"
+        ],
+        "status": "caution",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:script:morse-category-adapters"
+        },
+        "top_notice": "BASIS-CONVENTION SENSITIVE: commit 2788022 converts explicitly documented Frobenius-normalized SVD-intertwiner F-blocks by F_orth[x,y]=sqrt(d_y/d_x)F[x,y]. Other loaded gauges are left unchanged and require their own validation.",
+        "unsafe_scopes": [
+          "assuming every nonunitary-looking F-block uses the same path metric",
+          "silently forcing this conversion on undocumented payloads",
+          "theorem-level conclusions without independent diagram controls"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61",
+      "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+          "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363",
+        "safe_scopes": [
+          "reproducing the recorded 168-row control artifact",
+          "the recorded SU(2)_2 Figure 8.15 E(1) checkpoint",
+          "small new cases checked against an independent evaluator"
         ],
         "status": "caution",
         "target_selector": {
           "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
         },
-        "top_notice": "LIMITED VALIDATION: this snapshot is supported here only by the recorded SU(2)_2 standard, Akbulut, and Figure 8.15 E(1) controls. Treat every broader use as a new validation task.",
+        "top_notice": "NUMERIC CONTROL CHECKPOINT: use evaluator snapshot a7654363 at commit 2788022 together with morse_category_adapters.py from the same commit. The recorded 168 SU(2), SU(3)_2, and D(Dic_3) controls pass; broader uses still require case-specific validation.",
         "unsafe_scopes": [
-          "claiming category-independent validation",
-          "large uncalibrated runs used as standalone mathematical evidence",
-          "theorem-level conclusions without independent controls"
+          "claiming category-independent or diagram-independent validation",
+          "using a loaded F/R payload with an undocumented basis convention",
+          "large new runs used as standalone mathematical evidence before case-specific controls pass"
         ]
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
-        "created_at": "2026-07-12T20:59:19Z",
+        "cid": "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61",
+        "created_at": "2026-07-13T02:44:22Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
       },
@@ -7635,6 +7838,87 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1",
+      "logical_id": "claim:resource-snapshot:morse-category-adapters-2788022",
+      "payload": {
+        "captured_at": "2026-07-12T21:30:31Z",
+        "commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+        "git_blob": "a12224abd1cf44738a162cccd624e81f4db10bbc",
+        "path": "experiments/sage/morse_category_adapters.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:morse-category-adapters",
+        "sha256": "8193f5807994c32afc1261d035f46ce3246cfa8348d6682d022da366ff4f978c",
+        "snapshot_id": "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:morse-category-adapters-2788022",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
+      "logical_id": "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a",
+      "payload": {
+        "captured_at": "2026-07-13T02:44:22Z",
+        "commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+        "git_blob": "0f7838172b78cfadd7b83b08ecd04aa56d08ad33",
+        "path": "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix",
+        "sha256": "479fafe8668fc9f3785fbd0d3529f0c3eaf0dd145caec35ae81004ed4ee5c075",
+        "snapshot_id": "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
+      "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-2788022",
+      "payload": {
+        "captured_at": "2026-07-12T21:30:31Z",
+        "commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+        "git_blob": "84d81e57d81125ab4ae2331f162d1170ae6e4db1",
+        "path": "experiments/sage/morse_fusion_evaluator.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+        "sha256": "a7654363eac00725c83f39b07e8ec56db6bfd78010847a4547e1c8f57004855c",
+        "snapshot_id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
+        "created_at": "2026-07-13T02:44:22Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-2788022",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -13175,11 +13459,14 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-13T02:00:41Z",
+  "generated_at": "2026-07-13T02:44:22Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
     "by_git_blob": {
+      "0f7838172b78cfadd7b83b08ecd04aa56d08ad33": [
+        "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+      ],
       "537f4ebfb65e75d9975235e71396eabedd80e46e": [
         "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
       ],
@@ -13192,11 +13479,17 @@
       "78a656caa9b5c0e8a18617b1edcefe5a3c0f7142": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
       ],
+      "84d81e57d81125ab4ae2331f162d1170ae6e4db1": [
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
+      ],
       "8aa7f2e11c2d90f61a1f94322d644d9657480e85": [
         "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
       "90f156cd7f2e63d2d69902e00a867337c1545927": [
         "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
+      ],
+      "a12224abd1cf44738a162cccd624e81f4db10bbc": [
+        "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
       ],
       "c96f6ecbfa34c8f1cc3340e12f38891818807fbf": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
@@ -13223,6 +13516,12 @@
       ],
       "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e2-morse-draft"
+      ],
+      "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json": [
+        "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
+      ],
+      "experiments/sage/morse_category_adapters.py": [
+        "resource:twisted-yetter:script:morse-category-adapters"
       ],
       "experiments/sage/morse_fusion_evaluator.py": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13254,8 +13553,20 @@
       "gompf-stipsicz-figure815-e2-morse-input": [
         "resource:twisted-yetter:input:figure815-e2-morse-draft"
       ],
+      "morse-category-adapters": [
+        "resource:twisted-yetter:script:morse-category-adapters"
+      ],
+      "morse_category_adapters.py": [
+        "resource:twisted-yetter:script:morse-category-adapters"
+      ],
       "morse_fusion_evaluator.py": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+      ],
+      "native-morse-figure2-cross-category-matrix": [
+        "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
+      ],
+      "native-morse-figure2-cross-category-matrix-v1.json": [
+        "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
       ],
       "native-morse-fusion-evaluator": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13272,8 +13583,14 @@
       "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
       ],
+      "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix": [
+        "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
+      ],
       "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor": [
         "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
+      ],
+      "resource:twisted-yetter:script:morse-category-adapters": [
+        "resource:twisted-yetter:script:morse-category-adapters"
       ],
       "resource:twisted-yetter:script:native-morse-fusion-evaluator": [
         "resource:twisted-yetter:script:native-morse-fusion-evaluator"
@@ -13319,8 +13636,15 @@
       "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
         "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
+      "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json": [
+        "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+      ],
+      "experiments/sage/morse_category_adapters.py": [
+        "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
+      ],
       "experiments/sage/morse_fusion_evaluator.py": [
-        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4",
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
       ],
       "experiments/sage/su2_2_braid_oracle.sage.py": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
@@ -13339,14 +13663,23 @@
       "3b7920d48d8a435b223e48fcba8cc7277e2ebcde0ae2ab0e06e27fe1bcb130c5": [
         "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
       ],
+      "479fafe8668fc9f3785fbd0d3529f0c3eaf0dd145caec35ae81004ed4ee5c075": [
+        "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+      ],
       "67bfb4f3fcf496ea8db716f35a299a96c385bf638e4914bc8374143c87a4ab21": [
         "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
       "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ],
+      "8193f5807994c32afc1261d035f46ce3246cfa8348d6682d022da366ff4f978c": [
+        "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
+      ],
       "a592144b1c765d624edc97f4144aed2d47b9350dbc016900b09f4b0936a31128": [
         "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
+      ],
+      "a7654363eac00725c83f39b07e8ec56db6bfd78010847a4547e1c8f57004855c": [
+        "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
       ],
       "d2b9b67d6e2217b6a1b35ffcf3a81338354063d2a1fed1b822b1f5a39636c3cb": [
         "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d"
@@ -13440,6 +13773,32 @@
           "revision_kind": "claim"
         }
       },
+      "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix": {
+        "cid": "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808",
+        "logical_id": "claim:resource-handle:native-morse-figure2-cross-category-matrix",
+        "payload": {
+          "kind": "result",
+          "lookup_keys": [
+            "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+            "native-morse-figure2-cross-category-matrix-v1.json",
+            "native-morse-figure2-cross-category-matrix"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:native-morse-figure2-cross-category-matrix",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor": {
         "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
         "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
@@ -13461,6 +13820,32 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:morse-category-adapters": {
+        "cid": "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2",
+        "logical_id": "claim:resource-handle:morse-category-adapters",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/morse_category_adapters.py",
+            "morse_category_adapters.py",
+            "morse-category-adapters"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:morse-category-adapters"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:morse-category-adapters",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -13578,6 +13963,10 @@
         "id": "resource:twisted-yetter:input:figure815-e1-morse-draft",
         "kind": "handle"
       },
+      "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52": {
+        "id": "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:0e5d2d5db3e2a5e474995a1f54a66ecc5928d0d5271f15462ddea9c4d4b0795e": {
         "id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
         "kind": "safety-status"
@@ -13585,10 +13974,6 @@
       "ctlobj-sha256:0f2ed3e38d8f2486d166d3e055900c3aac919af14eaf44f7baeb7d45438e0b67": {
         "id": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
         "kind": "handle"
-      },
-      "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0": {
-        "id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
-        "kind": "safety-status"
       },
       "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a": {
         "id": "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa",
@@ -13600,6 +13985,10 @@
       },
       "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": {
         "id": "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4": {
+        "id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363",
         "kind": "snapshot"
       },
       "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296": {
@@ -13618,6 +14007,10 @@
         "id": "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit",
         "kind": "handle"
       },
+      "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2": {
+        "id": "resource:twisted-yetter:script:morse-category-adapters",
+        "kind": "handle"
+      },
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
         "kind": "safety-status"
@@ -13633,6 +14026,10 @@
       "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c": {
         "id": "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca",
         "kind": "snapshot"
+      },
+      "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a": {
+        "id": "claim:resource-safety:morse-category-adapters-2788022",
+        "kind": "safety-status"
       },
       "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5": {
         "id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
@@ -13650,6 +14047,14 @@
         "id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1": {
+        "id": "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808": {
+        "id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix",
+        "kind": "handle"
+      },
       "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825": {
         "id": "resource:twisted-yetter:script:su2-2-braid-oracle",
         "kind": "handle"
@@ -13665,6 +14070,10 @@
       "ctlobj-sha256:f8d642a74d38232616291f9effcdf6db102481c4a75dd0c06ce028992ef5f118": {
         "id": "snapshot:twisted-yetter:script:su2-2-braid-oracle@sha256-d2b9b67d",
         "kind": "snapshot"
+      },
+      "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61": {
+        "id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "kind": "safety-status"
       }
     },
     "resource_logical_ids": {
@@ -13678,6 +14087,14 @@
       },
       "claim:resource-handle:figure815-e2-morse-input": {
         "id": "resource:twisted-yetter:input:figure815-e2-morse-draft",
+        "kind": "handle"
+      },
+      "claim:resource-handle:morse-category-adapters": {
+        "id": "resource:twisted-yetter:script:morse-category-adapters",
+        "kind": "handle"
+      },
+      "claim:resource-handle:native-morse-figure2-cross-category-matrix": {
+        "id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix",
         "kind": "handle"
       },
       "claim:resource-handle:native-morse-fusion-evaluator": {
@@ -13706,6 +14123,10 @@
       },
       "claim:resource-safety:figure815-e2-morse-input-caution": {
         "id": "claim:resource-safety:figure815-e2-morse-input-caution",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:morse-category-adapters-2788022": {
+        "id": "claim:resource-safety:morse-category-adapters-2788022",
         "kind": "safety-status"
       },
       "claim:resource-safety:native-morse-fusion-evaluator-caution": {
@@ -13738,6 +14159,18 @@
       },
       "claim:resource-snapshot:figure815-e2-morse-input-d0bfff5": {
         "id": "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:morse-category-adapters-2788022": {
+        "id": "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a": {
+        "id": "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:native-morse-fusion-evaluator-2788022": {
+        "id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363",
         "kind": "snapshot"
       },
       "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5": {
@@ -13836,38 +14269,77 @@
         }
       },
       {
-        "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
-        "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "cid": "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
+        "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
         "payload": {
           "evidence_claims": [
-            "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+            "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization"
           ],
           "profile": "ctl-resource/safety-status/1",
           "replacement": null,
           "safe_scopes": [
-            "reproducing the recorded SU(2)_2 E(1) controls",
-            "small tests checked against an independent evaluator",
-            "new experiments explicitly marked as needing validation"
+            "payloads carrying the exact documented SVD nullspace fusion-space convention",
+            "the recorded SU(2), SU(3)_2, and D(Dic_3) control matrix"
+          ],
+          "status": "caution",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:script:morse-category-adapters"
+          },
+          "top_notice": "BASIS-CONVENTION SENSITIVE: commit 2788022 converts explicitly documented Frobenius-normalized SVD-intertwiner F-blocks by F_orth[x,y]=sqrt(d_y/d_x)F[x,y]. Other loaded gauges are left unchanged and require their own validation.",
+          "unsafe_scopes": [
+            "assuming every nonunitary-looking F-block uses the same path metric",
+            "silently forcing this conversion on undocumented payloads",
+            "theorem-level conclusions without independent diagram controls"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61",
+        "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+            "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363",
+          "safe_scopes": [
+            "reproducing the recorded 168-row control artifact",
+            "the recorded SU(2)_2 Figure 8.15 E(1) checkpoint",
+            "small new cases checked against an independent evaluator"
           ],
           "status": "caution",
           "target_selector": {
             "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
           },
-          "top_notice": "LIMITED VALIDATION: this snapshot is supported here only by the recorded SU(2)_2 standard, Akbulut, and Figure 8.15 E(1) controls. Treat every broader use as a new validation task.",
+          "top_notice": "NUMERIC CONTROL CHECKPOINT: use evaluator snapshot a7654363 at commit 2788022 together with morse_category_adapters.py from the same commit. The recorded 168 SU(2), SU(3)_2, and D(Dic_3) controls pass; broader uses still require case-specific validation.",
           "unsafe_scopes": [
-            "claiming category-independent validation",
-            "large uncalibrated runs used as standalone mathematical evidence",
-            "theorem-level conclusions without independent controls"
+            "claiming category-independent or diagram-independent validation",
+            "using a loaded F/R payload with an undocumented basis convention",
+            "large new runs used as standalone mathematical evidence before case-specific controls pass"
           ]
         },
         "revision": {
-          "cid": "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
-          "created_at": "2026-07-12T20:59:19Z",
+          "cid": "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61",
+          "created_at": "2026-07-13T02:44:22Z",
           "created_by": {
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
-          "parents": [],
+          "parents": [
+            "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0"
+          ],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
         }
@@ -14094,6 +14566,31 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8": {
+        "cid": "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
+        "logical_id": "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a",
+        "payload": {
+          "captured_at": "2026-07-13T02:44:22Z",
+          "commit": "d57316a3653ab10bcfbc8afb854f217b015f0fee",
+          "git_blob": "0f7838172b78cfadd7b83b08ecd04aa56d08ad33",
+          "path": "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix",
+          "sha256": "479fafe8668fc9f3785fbd0d3529f0c3eaf0dd145caec35ae81004ed4ee5c075",
+          "snapshot_id": "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:native-morse-figure2-cross-category-matrix-d57316a",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe": {
         "cid": "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
         "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
@@ -14120,6 +14617,31 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580": {
+        "cid": "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1",
+        "logical_id": "claim:resource-snapshot:morse-category-adapters-2788022",
+        "payload": {
+          "captured_at": "2026-07-12T21:30:31Z",
+          "commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+          "git_blob": "a12224abd1cf44738a162cccd624e81f4db10bbc",
+          "path": "experiments/sage/morse_category_adapters.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:morse-category-adapters",
+          "sha256": "8193f5807994c32afc1261d035f46ce3246cfa8348d6682d022da366ff4f978c",
+          "snapshot_id": "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:morse-category-adapters-2788022",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4": {
         "cid": "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
         "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
@@ -14140,6 +14662,31 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-d0bfff5",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363": {
+        "cid": "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
+        "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-2788022",
+        "payload": {
+          "captured_at": "2026-07-12T21:30:31Z",
+          "commit": "278802260e8ecd634e75f53e64bf6c2aa00e0492",
+          "git_blob": "84d81e57d81125ab4ae2331f162d1170ae6e4db1",
+          "path": "experiments/sage/morse_fusion_evaluator.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator",
+          "sha256": "a7654363eac00725c83f39b07e8ec56db6bfd78010847a4547e1c8f57004855c",
+          "snapshot_id": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
+          "created_at": "2026-07-13T02:44:22Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:native-morse-fusion-evaluator-2788022",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -14222,8 +14769,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:f03cd9a4d38435c19f2c03bb8103f02e682c3c917892b97e9391f524597ba0fc",
+  "root_cid": "ctlobj-sha256:11564aea231ff0e282637b6f7ea54fef2cd95a768088f75a3b5099b7e56cc1c9",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:41eea13ed9c520ed2b8eec4c6112fc8ae4419cb1138a6b4524ef181a5af0816b"
+  "transition_cid": "ctlobj-sha256:9c7ca5a8722a8c70e710dff46102015ea5067f875c5547b5f3db1766b5b67083"
 }

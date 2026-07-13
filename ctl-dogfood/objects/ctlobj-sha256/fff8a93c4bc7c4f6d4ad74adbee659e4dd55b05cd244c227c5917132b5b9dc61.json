@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-07-13T02:44:22Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-safety:native-morse-fusion-evaluator-caution",
+  "parents": [
+    "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0"
+  ],
+  "payload": {
+    "evidence_claims": [
+      "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization",
+      "claim:lab-note:2026-07-12-gompf-stipsicz-figure815-morse-workflow"
+    ],
+    "profile": "ctl-resource/safety-status/1",
+    "replacement": "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363",
+    "safe_scopes": [
+      "reproducing the recorded 168-row control artifact",
+      "the recorded SU(2)_2 Figure 8.15 E(1) checkpoint",
+      "small new cases checked against an independent evaluator"
+    ],
+    "status": "caution",
+    "target_selector": {
+      "resource_id": "resource:twisted-yetter:script:native-morse-fusion-evaluator"
+    },
+    "top_notice": "NUMERIC CONTROL CHECKPOINT: use evaluator snapshot a7654363 at commit 2788022 together with morse_category_adapters.py from the same commit. The recorded 168 SU(2), SU(3)_2, and D(Dic_3) controls pass; broader uses still require case-specific validation.",
+    "unsafe_scopes": [
+      "claiming category-independent or diagram-independent validation",
+      "using a loaded F/R payload with an undocumented basis convention",
+      "large new runs used as standalone mathematical evidence before case-specific controls pass"
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

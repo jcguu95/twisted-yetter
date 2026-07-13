@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-07-13T02:44:22Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-safety:morse-category-adapters-2788022",
+  "parents": [],
+  "payload": {
+    "evidence_claims": [
+      "claim:lab-note:2026-07-12-native-morse-svd-path-basis-normalization"
+    ],
+    "profile": "ctl-resource/safety-status/1",
+    "replacement": null,
+    "safe_scopes": [
+      "payloads carrying the exact documented SVD nullspace fusion-space convention",
+      "the recorded SU(2), SU(3)_2, and D(Dic_3) control matrix"
+    ],
+    "status": "caution",
+    "target_selector": {
+      "resource_id": "resource:twisted-yetter:script:morse-category-adapters"
+    },
+    "top_notice": "BASIS-CONVENTION SENSITIVE: commit 2788022 converts explicitly documented Frobenius-normalized SVD-intertwiner F-blocks by F_orth[x,y]=sqrt(d_y/d_x)F[x,y]. Other loaded gauges are left unchanged and require their own validation.",
+    "unsafe_scopes": [
+      "assuming every nonunitary-looking F-block uses the same path metric",
+      "silently forcing this conversion on undocumented payloads",
+      "theorem-level conclusions without independent diagram controls"
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
