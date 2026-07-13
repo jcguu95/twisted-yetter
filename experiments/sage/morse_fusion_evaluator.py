@@ -60,6 +60,167 @@ class NodeState:
 State = LeafState | NodeState
 
 
+def right_comb_fusion_path_counts(category: Any, factor_labels: Iterable[Any]) -> dict[Any, int]:
+    """Count right-comb fusion paths by root label, including multiplicity.
+
+    The empty tensor product has one path to the tensor unit.  For a nonempty
+    word ``X_1 ... X_n`` the basis tree is ``X_1 (X_2 (... X_n))``.  This
+    dynamic count is deliberately separate from explicit path enumeration so
+    a large coupon can be rejected or ranked without materializing its basis.
+    """
+
+    labels = tuple(factor_labels)
+    if not labels:
+        return {category.unit: 1}
+    counts: dict[Any, int] = {labels[-1]: 1}
+    for left in reversed(labels[:-1]):
+        next_counts: dict[Any, int] = defaultdict(int)
+        for right, path_count in counts.items():
+            for output in category.labels:
+                multiplicity = int(
+                    category.fusion_multiplicity(left, right, output)
+                )
+                if multiplicity < 0:
+                    raise ValueError("fusion multiplicities must be nonnegative")
+                next_counts[output] += path_count * multiplicity
+        counts = {
+            output: count for output, count in next_counts.items() if count
+        }
+    return counts
+
+
+def right_comb_fusion_path_basis(
+    category: Any,
+    factors: Iterable[tuple[str, Any]],
+    *,
+    target: Any,
+    max_intermediate_paths: int = 100_000,
+) -> tuple[Tree | None, tuple[State | None, ...]]:
+    """Enumerate a right-comb path basis with a fail-closed size bound.
+
+    Each factor is ``(stable_id, label)``.  Distinct trivalent-vertex
+    multiplicity indices produce distinct states.  The empty tensor has one
+    unit-root path represented by ``(None, (None,))``.
+    """
+
+    factors = tuple(factors)
+    if max_intermediate_paths < 1:
+        raise ValueError("max_intermediate_paths must be positive")
+    if not factors:
+        return None, (None,) if target == category.unit else ()
+
+    last_id, last_label = factors[-1]
+    tree: Tree = Leaf(last_id, last_label)
+    basis_by_root: dict[Any, list[State]] = {
+        last_label: [LeafState(last_id)]
+    }
+    for factor_id, left_label in reversed(factors[:-1]):
+        left_tree = Leaf(factor_id, left_label)
+        next_basis: dict[Any, list[State]] = defaultdict(list)
+        for right_label, right_states in basis_by_root.items():
+            for output in category.labels:
+                multiplicity = int(
+                    category.fusion_multiplicity(
+                        left_label, right_label, output
+                    )
+                )
+                if multiplicity < 0:
+                    raise ValueError("fusion multiplicities must be nonnegative")
+                for right_state in right_states:
+                    for copy in range(multiplicity):
+                        next_basis[output].append(
+                            NodeState(
+                                LeafState(factor_id),
+                                right_state,
+                                output,
+                                copy,
+                            )
+                        )
+        path_count = sum(len(states) for states in next_basis.values())
+        if path_count > max_intermediate_paths:
+            raise ValueError(
+                "right-comb basis exceeds max_intermediate_paths: "
+                f"{path_count} > {max_intermediate_paths}"
+            )
+        tree = Node(left_tree, tree)
+        basis_by_root = dict(next_basis)
+    return tree, tuple(basis_by_root.get(target, ()))
+
+
+def vacuum_coupon_path_basis(
+    category: Any,
+    coupon_node: dict[str, Any],
+    component_labels: dict[str, Any],
+    *,
+    max_intermediate_paths: int = 100_000,
+) -> tuple[Tree | None, tuple[State | None, ...], dict[str, Any]]:
+    """Instantiate a graph-level vacuum coupon in its orthonormal path basis.
+
+    The returned basis realizes
+    ``P_1 = sum_mu |mu><mu|`` on the ordered tensor word recorded by the
+    coupon.  Variance is applied before fusion: a ``dual`` factor receives the
+    dual of its component label.  No global-dimension normalization occurs.
+    """
+
+    if coupon_node.get("kind") != "vacuum-projector-coupon":
+        raise ValueError("expected a vacuum-projector-coupon node")
+    if getattr(category, "path_basis_is_orthonormal", False) is not True:
+        raise ValueError(
+            "vacuum coupon requires a category adapter with an explicitly "
+            "orthonormal path basis"
+        )
+
+    factors: list[tuple[str, Any]] = []
+    factor_metadata = []
+    for factor in coupon_node.get("factor_order", ()):
+        component = factor["component"]
+        if component not in component_labels:
+            raise ValueError(f"missing coupon component label: {component!r}")
+        label = component_labels[component]
+        variance = factor["variance"]
+        if variance == "dual":
+            oriented_label = category.dual(label)
+        elif variance == "label":
+            oriented_label = label
+        else:
+            raise ValueError(f"unknown coupon factor variance: {variance!r}")
+        cut_id = factor["cut_id"]
+        factors.append((cut_id, oriented_label))
+        factor_metadata.append(
+            {
+                "cut_id": cut_id,
+                "component": component,
+                "variance": variance,
+                "label": label,
+                "oriented_label": oriented_label,
+            }
+        )
+
+    counts = right_comb_fusion_path_counts(
+        category, (label for _, label in factors)
+    )
+    tree, basis = right_comb_fusion_path_basis(
+        category,
+        factors,
+        target=category.unit,
+        max_intermediate_paths=max_intermediate_paths,
+    )
+    expected_rank = counts.get(category.unit, 0)
+    if len(basis) != expected_rank:
+        raise AssertionError(
+            "enumerated vacuum basis rank disagrees with dynamic fusion count"
+        )
+    return tree, basis, {
+        "normalization": "ORTHONORMAL_PATH_BASIS_IDEMPOTENT_NO_D_FACTOR",
+        "factor_count": len(factors),
+        "factor_order": factor_metadata,
+        "root_label": category.unit,
+        "root_multiplicity_rank": expected_rank,
+        "projector_term_count": expected_rank,
+        "projector_formula": "sum_mu |mu><mu|",
+    }
+
+
 def leaf_count(tree: Tree) -> int:
     if isinstance(tree, Leaf):
         return 1

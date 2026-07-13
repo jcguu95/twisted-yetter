@@ -7,8 +7,11 @@ from experiments.sage.morse_fusion_evaluator import (
     analyze_topology,
     leaves,
     project_vacuum_interval,
+    right_comb_fusion_path_basis,
+    right_comb_fusion_path_counts,
     rotation_plan,
     rotate_shape,
+    vacuum_coupon_path_basis,
 )
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
@@ -74,6 +77,34 @@ class SemionCategory:
 class PseudorealSemionCategory(SemionCategory):
     def reverse_bend(self, label):
         return -1.0 if label else 1.0
+
+
+class RepA4FusionRules:
+    """Fusion ring of Rep(A4), including 3 tensor 3's multiplicity two."""
+
+    labels = (0, 1, 2, 3)
+    unit = 0
+    path_basis_is_orthonormal = True
+
+    def dual(self, label):
+        return {0: 0, 1: 2, 2: 1, 3: 3}[label]
+
+    def fusion_multiplicity(self, left, right, output):
+        if left == 0:
+            return int(right == output)
+        if right == 0:
+            return int(left == output)
+        if left == 3 and right == 3:
+            return 2 if output == 3 else int(output in {0, 1, 2})
+        if left == 3 or right == 3:
+            return int(output == 3)
+        product = {
+            (1, 1): 2,
+            (1, 2): 0,
+            (2, 1): 0,
+            (2, 2): 1,
+        }[(left, right)]
+        return int(output == product)
 
 
 def unknot_forms(kink=False):
@@ -253,6 +284,55 @@ def test_vacuum_projector_fails_closed_without_orthonormal_basis_claim():
         assert "orthonormal path basis" in str(exc)
     else:
         raise AssertionError("unsafe category adapter was accepted")
+
+
+def test_right_comb_vacuum_basis_is_collective_and_multiplicity_aware():
+    semion = SemionCategory()
+    assert right_comb_fusion_path_counts(semion, (1, 1)) == {0: 1}
+    assert right_comb_fusion_path_counts(semion, (1, 0)) == {1: 1}
+
+    rep_a4 = RepA4FusionRules()
+    counts = right_comb_fusion_path_counts(rep_a4, (3, 3, 3, 3))
+    assert counts[0] == 7
+    tree, basis = right_comb_fusion_path_basis(
+        rep_a4,
+        ((f"x{index}", 3) for index in range(4)),
+        target=0,
+    )
+    assert tree is not None
+    assert len(basis) == 7
+    assert len(set(basis)) == 7
+
+
+def test_graph_coupon_basis_applies_variance_and_keeps_all_unit_paths():
+    coupon = {
+        "kind": "vacuum-projector-coupon",
+        "factor_order": [
+            {
+                "cut_id": "cut1",
+                "component": "A",
+                "variance": "label",
+            },
+            {
+                "cut_id": "cut2",
+                "component": "B",
+                "variance": "dual",
+            },
+        ],
+    }
+    tree, basis, metadata = vacuum_coupon_path_basis(
+        SemionCategory(), coupon, {"A": 1, "B": 1}
+    )
+    assert tree is not None
+    assert len(basis) == 1
+    assert metadata["root_multiplicity_rank"] == 1
+    assert metadata["projector_formula"] == "sum_mu |mu><mu|"
+
+    _, forbidden, forbidden_metadata = vacuum_coupon_path_basis(
+        SemionCategory(), coupon, {"A": 1, "B": 0}
+    )
+    assert forbidden == ()
+    assert forbidden_metadata["root_multiplicity_rank"] == 0
 
 
 def test_horizontal_corridor_identity_and_projector_preserve_collective_vacuum():

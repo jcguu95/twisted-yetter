@@ -3,11 +3,24 @@ from pathlib import Path
 
 import pytest
 
+from experiments.sage.morse_fusion_evaluator import vacuum_coupon_path_basis
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
     COMPONENT_BY_PIECE,
     COMPONENT_ORDER,
     build_figure21_right,
 )
+
+
+class Z2FusionRules:
+    labels = (0, 1)
+    unit = 0
+    path_basis_is_orthonormal = True
+
+    def dual(self, label):
+        return label
+
+    def fusion_multiplicity(self, left, right, output):
+        return int((left ^ right) == output)
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
     build_vacuum_coupon_graph,
@@ -197,6 +210,26 @@ def test_figure21_disk_certificate_regression():
     ) - {"red"}
     repeated = build_vacuum_coupon_graph(builder.forms, ir)
     assert repeated["graph_hash"] == graph["graph_hash"]
+
+    coupon = next(
+        node
+        for node in graph["nodes"]
+        if node["kind"] == "vacuum-projector-coupon"
+    )
+    ordinary_components = set(COMPONENT_ORDER) - {"red"}
+    all_unit = {component: 0 for component in ordinary_components}
+    _, all_unit_basis, all_unit_metadata = vacuum_coupon_path_basis(
+        Z2FusionRules(), coupon, all_unit
+    )
+    assert len(all_unit_basis) == 1
+    assert all_unit_metadata["factor_count"] == 29
+
+    odd_purple = dict(all_unit, purple=1)
+    _, odd_basis, odd_metadata = vacuum_coupon_path_basis(
+        Z2FusionRules(), coupon, odd_purple
+    )
+    assert odd_basis == ()
+    assert odd_metadata["root_multiplicity_rank"] == 0
 
 
 def test_figure21_topology_artifact_is_conservative_and_reproducible():
