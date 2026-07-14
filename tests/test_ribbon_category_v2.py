@@ -6,6 +6,7 @@ import pytest
 from experiments.sage.morse_pivotal_contract import (
     test_pivotal_profile as make_test_pivotal_profile,
 )
+from experiments.sage.morse_fusion_evaluator import MorseEvaluator
 from experiments.sage.ribbon_category_v2 import (
     LegacyRibbonCategoryV2Adapter,
     RIBBON_CATEGORY_CONTRACT_VERSION,
@@ -116,3 +117,21 @@ def test_historical_fr_only_category_cannot_enter_v2_contract():
 
     with pytest.raises(ValueError, match="no explicit pivotal profile"):
         LegacyRibbonCategoryV2Adapter(HistoricalFR())
+
+
+def test_v2_morse_fusion_uses_recorded_nonorthogonal_pairing():
+    category = full_vec()
+    category.fusion_pairing = (
+        lambda a, b, c: np.array([[2.0 + 0.0j]], dtype=np.complex128)
+    )
+    category.fusion_pairing_inverse = (
+        lambda a, b, c: np.array([[0.5 + 0.0j]], dtype=np.complex128)
+    )
+    forms = (
+        {"kind": "coevaluation", "strands": ["a", "b"], "labels": [0, 0], "at": "far-left"},
+        {"kind": "fuse", "inputs": ["a", "b"], "output": "c", "output_label": 0, "multiplicity": 0},
+        {"kind": "split", "input": "c", "outputs": ["a", "b"], "output_labels": [0, 0], "multiplicity": 0},
+        {"kind": "evaluation", "strands": ["a", "b"], "dimension_label": 0},
+    )
+    value, _ = MorseEvaluator(category).fixed_label_value(forms, {})
+    assert value == 2.0 + 0.0j

@@ -397,10 +397,10 @@ class LegacyRibbonCategoryV2Adapter:
         return self._bend_normalization(label)
 
     def right_evaluation(self, label: Any) -> complex:
-        return self.pivotal_scalar(label) * self._bend_normalization(label)
+        return self.pivotal_scalar(label) ** -1 * self._bend_normalization(label)
 
     def right_coevaluation(self, label: Any) -> complex:
-        return self.pivotal_scalar(label) ** -1 * self._bend_normalization(label)
+        return self.pivotal_scalar(label) * self._bend_normalization(label)
 
     def coherence_certificate(self) -> dict[str, Any]:
         return dict(self._coherence_certificate)

@@ -1267,7 +1267,31 @@ def build_ribbon_graph_ir_v2(
                     }
                     if not (pair & special_set):
                         node_id = f"cross:{crossing['crossing_id']}"
-                        ports = ["over-in", "under-in", "over-out", "under-out"]
+                        branches = ("over", "under")
+                        bottom = sorted(
+                            branches,
+                            key=lambda branch: crossing["before_order"].index(
+                                crossing[branch]
+                            ),
+                        )
+                        top = sorted(
+                            branches,
+                            key=lambda branch: crossing["after_order"].index(
+                                crossing[branch]
+                            ),
+                        )
+                        def geometric_port(branch: str, side: str) -> str:
+                            points_up = orientation[crossing[branch]] > 0
+                            is_input = (side == "bottom") == points_up
+                            return f"{branch}-{'in' if is_input else 'out'}"
+
+                        ports = [
+                            *(geometric_port(branch, "bottom") for branch in bottom),
+                            *(
+                                geometric_port(branch, "top")
+                                for branch in reversed(top)
+                            ),
+                        ]
                         nodes.setdefault(
                             node_id,
                             {

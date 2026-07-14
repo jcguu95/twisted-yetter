@@ -35,6 +35,12 @@ from experiments.sage.morse_pivotal_contract import (
 TOLERANCE = 1e-13
 
 
+def _is_ribbon_category_v2(category: Any) -> bool:
+    return getattr(category, "contract_version", None) == (
+        "twisted-yetter.ribbon-fusion-category.v2"
+    )
+
+
 def right_bend_fusion_matrix(category: Any, a: Any, b: Any, c: Any) -> dict[str, Any]:
     """Curry ``V_c^{a b}`` to ``V_a^{c dual(b)}`` in the path basis.
 
@@ -276,7 +282,8 @@ def vacuum_coupon_path_basis(
 
     if coupon_node.get("kind") != "vacuum-projector-coupon":
         raise ValueError("expected a vacuum-projector-coupon node")
-    require_pivotal_capabilities(category, {"vacuum_projector"})
+    if not _is_ribbon_category_v2(category):
+        require_pivotal_capabilities(category, {"vacuum_projector"})
 
     factors: list[tuple[str, Any]] = []
     factor_metadata = []
@@ -318,14 +325,24 @@ def vacuum_coupon_path_basis(
         raise AssertionError(
             "enumerated vacuum basis rank disagrees with dynamic fusion count"
         )
+    normalization = (
+        "PAIRING_INVERSE_PATH_BASIS_IDEMPOTENT_NO_D_FACTOR"
+        if _is_ribbon_category_v2(category)
+        else "ORTHONORMAL_PATH_BASIS_IDEMPOTENT_NO_D_FACTOR"
+    )
+    formula = (
+        "sum_mu_nu |mu> G^-1[mu,nu] <nu|"
+        if _is_ribbon_category_v2(category)
+        else "sum_mu |mu><mu|"
+    )
     return tree, basis, {
-        "normalization": "ORTHONORMAL_PATH_BASIS_IDEMPOTENT_NO_D_FACTOR",
+        "normalization": normalization,
         "factor_count": len(factors),
         "factor_order": factor_metadata,
         "root_label": category.unit,
         "root_multiplicity_rank": expected_rank,
         "projector_term_count": expected_rank,
-        "projector_formula": "sum_mu |mu><mu|",
+        "projector_formula": formula,
     }
 
 
@@ -1006,12 +1023,18 @@ def fuse_active_pair(
         local_state = _state_at(state, path)
         if not isinstance(local_state, NodeState):
             raise ValueError("fusion input state is not a sibling pair")
-        if (
-            local_state.output == output_label
-            and local_state.multiplicity == multiplicity
-        ):
+        if local_state.output != output_label:
+            continue
+        if _is_ribbon_category_v2(category):
+            pairing = category.fusion_pairing(
+                local_tree.left.label, local_tree.right.label, output_label
+            )
+            coefficient = complex(pairing[multiplicity][local_state.multiplicity])
+        else:
+            coefficient = complex(local_state.multiplicity == multiplicity)
+        if abs(coefficient) > TOLERANCE:
             replacement = LeafState(output_strand)
-            output[_replace_state(state, path, replacement)] += amplitude
+            output[_replace_state(state, path, replacement)] += coefficient * amplitude
     replacement_tree = Leaf(output_strand, output_label)
     return replace_subtree(tree, path, replacement_tree), _prune(dict(output))
 
@@ -1444,6 +1467,32 @@ class MorseEvaluator:
             **extra,
         }
 
+    def _coevaluation_coefficient(self, label: Any, reverse: bool) -> complex:
+        if _is_ribbon_category_v2(self.category):
+            method = (
+                self.category.right_coevaluation
+                if reverse
+                else self.category.left_coevaluation
+            )
+            return complex(method(label))
+        coefficient = math.sqrt(float(self.category.dimension(label)))
+        if reverse:
+            coefficient *= complex(self.category.reverse_bend(label))
+        return coefficient
+
+    def _evaluation_coefficient(self, label: Any, reverse: bool) -> complex:
+        if _is_ribbon_category_v2(self.category):
+            method = (
+                self.category.right_evaluation
+                if reverse
+                else self.category.left_evaluation
+            )
+            return complex(method(label))
+        coefficient = math.sqrt(float(self.category.dimension(label)))
+        if reverse:
+            coefficient /= complex(self.category.reverse_bend(label))
+        return coefficient
+
     @staticmethod
     def _cup_gap(order: list[str], form: dict[str, Any]) -> int:
         if form.get("at") == "far-left":
@@ -1586,7 +1635,7 @@ class MorseEvaluator:
     def fixed_label_value(self, forms: Iterable[dict[str, Any]], component_labels: dict[str, Any], *, _unit_pruned=False):
         forms = forms if isinstance(forms, tuple) else tuple(forms)
         required_pivotal = required_capabilities_for_forms(forms)
-        if required_pivotal:
+        if required_pivotal and not _is_ribbon_category_v2(self.category):
             require_pivotal_capabilities(self.category, required_pivotal)
         topology = self._topology(
             forms, allow_missing_reversed=_unit_pruned
@@ -1640,9 +1689,9 @@ class MorseEvaluator:
                     LeafState(left_strand), LeafState(right_strand), self.category.unit,
                     fusion_index(self.category, left_label, right_label, self.category.unit),
                 )
-                coefficient = math.sqrt(float(self.category.dimension(label)))
-                if topology.strand_orientation(left_strand) < 0:
-                    coefficient *= complex(self.category.reverse_bend(label))
+                coefficient = self._coevaluation_coefficient(
+                    label, topology.strand_orientation(left_strand) < 0
+                )
                 new_vector: dict[State, complex] = {}
                 new_tree = None
                 for state, amplitude in vector.items():
@@ -1680,13 +1729,9 @@ class MorseEvaluator:
                     ),
                 )
                 dimension_label = form.get("dimension_label", labels[0])
-                coefficient = math.sqrt(
-                    float(self.category.dimension(dimension_label))
+                coefficient = self._coevaluation_coefficient(
+                    dimension_label, bool(form.get("reverse_bend", False))
                 )
-                if form.get("reverse_bend", False):
-                    coefficient *= complex(
-                        self.category.reverse_bend(dimension_label)
-                    )
                 new_vector: dict[State, complex] = defaultdict(complex)
                 new_tree = None
                 for state, amplitude in vector.items():
@@ -1720,10 +1765,9 @@ class MorseEvaluator:
                     target, path = grouped_target(tree, lo, lo + 2, split=lo + 1)
                     tree, vector, plan = self._rotate(tree, vector, target, stats)
                 label = component_labels[topology.component_by_strand[left]]
-                coefficient = math.sqrt(float(self.category.dimension(label)))
                 geometric_left = order[lo]
-                if topology.strand_orientation(geometric_left) < 0:
-                    coefficient /= complex(self.category.reverse_bend(label))
+                reverse = topology.strand_orientation(geometric_left) < 0
+                coefficient = self._evaluation_coefficient(label, reverse)
                 new_vector: dict[State | None, complex] = defaultdict(complex)
                 new_tree = None
                 for state, amplitude in vector.items():
@@ -1767,13 +1811,9 @@ class MorseEvaluator:
                 dimension_label = form.get(
                     "dimension_label", subtree_at(tree, path).left.label
                 )
-                coefficient = math.sqrt(
-                    float(self.category.dimension(dimension_label))
+                coefficient = self._evaluation_coefficient(
+                    dimension_label, bool(form.get("reverse_bend", False))
                 )
-                if form.get("reverse_bend", False):
-                    coefficient /= complex(
-                        self.category.reverse_bend(dimension_label)
-                    )
                 new_vector: dict[State | None, complex] = defaultdict(complex)
                 new_tree = None
                 for state, amplitude in vector.items():
