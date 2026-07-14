@@ -298,18 +298,25 @@ def build_plan(work_root: Path, chunk_count: int, allow_dirty: bool) -> dict[str
         raise AssertionError("projector sweep counts changed")
 
     chunk_count = min(max(1, int(chunk_count)), len(surviving))
-    bins = [{"cost": 0, "sector_ids": []} for _ in range(chunk_count)]
-    for sector in sorted(
-        surviving, key=lambda item: (-item["estimated_cost"], item["sector_id"])
-    ):
-        target = min(
-            range(chunk_count),
-            key=lambda index: (bins[index]["cost"], len(bins[index]["sector_ids"]), index),
-        )
-        bins[target]["sector_ids"].append(sector["sector_id"])
-        bins[target]["cost"] += sector["estimated_cost"]
-    for chunk in bins:
-        chunk["sector_ids"].sort()
+    ordered_surviving = sorted(
+        surviving, key=lambda item: (item["estimated_cost"], item["sector_id"])
+    )
+    quotient, remainder = divmod(len(ordered_surviving), chunk_count)
+    bins = []
+    offset = 0
+    for chunk_id in range(chunk_count):
+        size = quotient + (1 if chunk_id < remainder else 0)
+        sectors = ordered_surviving[offset : offset + size]
+        offset += size
+        costs = [sector["estimated_cost"] for sector in sectors]
+        bins.append({
+            "cost": sum(costs),
+            "min_cost": min(costs),
+            "max_cost": max(costs),
+            "sector_ids": [sector["sector_id"] for sector in sectors],
+        })
+    if offset != len(ordered_surviving):
+        raise AssertionError("microchunk partition did not cover every surviving sector")
 
     evaluator_sha = sha256_bytes(
         (REPO_ROOT / "experiments/sage/ribbon_graph_evaluator.py").read_bytes()
@@ -348,10 +355,17 @@ def build_plan(work_root: Path, chunk_count: int, allow_dirty: bool) -> dict[str
             str(rank): count for rank, count in sorted(rank_distribution.items())
         },
         "chunk_count": len(bins),
+        "scheduling": {
+            "strategy": "GLOBAL_COST_ASCENDING_CONTIGUOUS_MICROCHUNKS",
+            "estimated_cost_definition": "active non-unit crossing and kink count",
+            "worker_assignment": "chunk_id modulo worker_count",
+        },
         "chunks": [
             {
                 "chunk_id": index,
                 "estimated_cost": chunk["cost"],
+                "minimum_sector_cost": chunk["min_cost"],
+                "maximum_sector_cost": chunk["max_cost"],
                 "sector_ids": chunk["sector_ids"],
             }
             for index, chunk in enumerate(bins)
@@ -558,6 +572,73 @@ def run_worker(work_root: Path, worker_index: int, worker_count: int, max_second
         )
 
 
+def workload_status(work_root: Path) -> dict[str, Any]:
+    plan = load_plan(work_root)
+    completed_chunks = []
+    completed_sector_count = 0
+    elapsed_worker_seconds = 0.0
+    recent_rates = []
+    hosts = Counter()
+    for chunk in plan["chunks"]:
+        chunk_id = chunk["chunk_id"]
+        path = work_root / "chunks" / f"chunk-{chunk_id:04d}.json"
+        if not path.exists():
+            continue
+        payload = json.loads(path.read_text())
+        if payload.get("evaluation_id") != plan["evaluation_id"]:
+            raise ValueError(f"chunk {chunk_id} evaluation identity mismatch")
+        sector_count = int(payload["sector_count"])
+        elapsed = float(payload["elapsed_seconds"])
+        completed_chunks.append(chunk_id)
+        completed_sector_count += sector_count
+        elapsed_worker_seconds += elapsed
+        hosts[payload["host"]] += sector_count
+        if elapsed > 0:
+            recent_rates.append((chunk_id, sector_count / elapsed))
+
+    recent_rates.sort()
+    recent_rates = recent_rates[-min(100, len(recent_rates)):]
+    recent_sector_rate = (
+        sum(rate for _, rate in recent_rates) / len(recent_rates)
+        if recent_rates else None
+    )
+    remaining_sector_count = plan["surviving_sector_count"] - completed_sector_count
+    failure_count = len(list((work_root / "failures").glob("sector-*.json")))
+    first_missing = next(
+        (
+            chunk["chunk_id"]
+            for chunk in plan["chunks"]
+            if chunk["chunk_id"] not in set(completed_chunks)
+        ),
+        None,
+    )
+    return {
+        "schema": "twisted-yetter.figure21-su2-2-workload-status.v1",
+        "evaluation_id": plan["evaluation_id"],
+        "utc": utc_now(),
+        "scheduling": plan.get("scheduling"),
+        "chunk_count": plan["chunk_count"],
+        "completed_chunk_count": len(completed_chunks),
+        "completed_surviving_sector_count": completed_sector_count,
+        "remaining_surviving_sector_count": remaining_sector_count,
+        "projector_pruned_sector_count": plan["pruned_sector_count"],
+        "completed_total_sector_count": plan["pruned_sector_count"] + completed_sector_count,
+        "total_sector_count": plan["total_sector_count"],
+        "completed_fraction": (
+            plan["pruned_sector_count"] + completed_sector_count
+        ) / plan["total_sector_count"],
+        "elapsed_worker_seconds": elapsed_worker_seconds,
+        "recent_sector_rate_per_worker_second": recent_sector_rate,
+        "optimistic_remaining_worker_seconds_at_recent_rate": (
+            remaining_sector_count / recent_sector_rate
+            if recent_sector_rate else None
+        ),
+        "first_missing_chunk_id": first_missing,
+        "failure_count": failure_count,
+        "completed_sectors_by_host": dict(sorted(hosts.items())),
+    }
+
+
 def trace_sector(work_root: Path, sector_id: int, output: Path) -> None:
     plan = load_plan(work_root)
     context = load_context()
@@ -712,7 +793,7 @@ def parser() -> argparse.ArgumentParser:
     sub = root.add_subparsers(dest="command", required=True)
     plan = sub.add_parser("plan")
     plan.add_argument("--work-root", type=Path, default=DEFAULT_WORK_ROOT)
-    plan.add_argument("--chunk-count", type=int, default=256)
+    plan.add_argument("--chunk-count", type=int, default=12000)
     plan.add_argument("--allow-dirty", action="store_true")
     chunk = sub.add_parser("run-chunk")
     chunk.add_argument("--work-root", type=Path, default=DEFAULT_WORK_ROOT)
@@ -723,6 +804,8 @@ def parser() -> argparse.ArgumentParser:
     worker.add_argument("--worker-index", type=int, required=True)
     worker.add_argument("--worker-count", type=int, required=True)
     worker.add_argument("--max-seconds", type=float, default=300.0)
+    status = sub.add_parser("status")
+    status.add_argument("--work-root", type=Path, default=DEFAULT_WORK_ROOT)
     trace = sub.add_parser("trace-sector")
     trace.add_argument("--work-root", type=Path, default=DEFAULT_WORK_ROOT)
     trace.add_argument("--sector-id", type=int, required=True)
@@ -749,6 +832,8 @@ def main() -> None:
         print(json.dumps(run_chunk(args.work_root, args.chunk_id, args.max_seconds), indent=2, default=str))
     elif args.command == "run-worker":
         run_worker(args.work_root, args.worker_index, args.worker_count, args.max_seconds)
+    elif args.command == "status":
+        print(json.dumps(workload_status(args.work_root), indent=2))
     elif args.command == "trace-sector":
         trace_sector(args.work_root, args.sector_id, args.output)
     elif args.command == "aggregate":
@@ -759,4 +844,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
