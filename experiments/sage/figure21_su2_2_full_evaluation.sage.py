@@ -452,8 +452,31 @@ def _timeout_handler(_signum, _frame):
     raise SectorTimeout("fixed-sector evaluation exceeded max seconds")
 
 
-def run_chunk(work_root: Path, chunk_id: int, max_seconds: float) -> dict[str, Any]:
+def load_worker_runtime(work_root: Path) -> dict[str, Any]:
     plan = load_plan(work_root)
+    word_payload = json.loads((work_root / "puncture-words.json").read_text())
+    return {
+        "plan": plan,
+        "context": load_context(),
+        "rank_by_word": {
+            item["puncture_word_id"]: item["vacuum_rank"]
+            for item in word_payload["words"]
+        },
+        "puncture_index": tuple(
+            plan["ordinary_component_order"].index(component)
+            for component in plan["puncture_component_order"]
+        ),
+    }
+
+
+def run_chunk(
+    work_root: Path,
+    chunk_id: int,
+    max_seconds: float,
+    runtime: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    runtime = runtime or load_worker_runtime(work_root)
+    plan = runtime["plan"]
     if not 0 <= chunk_id < plan["chunk_count"]:
         raise ValueError("chunk id out of range")
     output = work_root / "chunks" / f"chunk-{chunk_id:04d}.json"
@@ -462,22 +485,15 @@ def run_chunk(work_root: Path, chunk_id: int, max_seconds: float) -> dict[str, A
         if existing.get("evaluation_id") != plan["evaluation_id"]:
             raise ValueError(f"chunk {chunk_id} belongs to another evaluation")
         return existing
-    context = load_context()
+    context = runtime["context"]
     chunk = plan["chunks"][chunk_id]
     pruned_by_id = {
         item["sector_id"]: item for item in plan["pruned_sectors"]
     }
     if any(sector_id in pruned_by_id for sector_id in chunk["sector_ids"]):
         raise AssertionError("surviving chunk contains a pruned sector")
-    word_payload = json.loads((work_root / "puncture-words.json").read_text())
-    rank_by_word = {
-        item["puncture_word_id"]: item["vacuum_rank"]
-        for item in word_payload["words"]
-    }
-    puncture_index = tuple(
-        plan["ordinary_component_order"].index(component)
-        for component in plan["puncture_component_order"]
-    )
+    rank_by_word = runtime["rank_by_word"]
+    puncture_index = runtime["puncture_index"]
     records = []
     started_at = utc_now()
     started_clock = time.perf_counter()
@@ -553,12 +569,22 @@ def run_chunk(work_root: Path, chunk_id: int, max_seconds: float) -> dict[str, A
     return payload
 
 
-def run_worker(work_root: Path, worker_index: int, worker_count: int, max_seconds: float) -> None:
-    plan = load_plan(work_root)
+def run_worker(
+    work_root: Path,
+    worker_index: int,
+    worker_count: int,
+    max_seconds: float,
+    max_chunks: int | None = None,
+) -> None:
+    runtime = load_worker_runtime(work_root)
+    plan = runtime["plan"]
     if not 0 <= worker_index < worker_count:
         raise ValueError("worker index must be in 0..worker_count-1")
-    for chunk_id in range(worker_index, plan["chunk_count"], worker_count):
-        payload = run_chunk(work_root, chunk_id, max_seconds)
+    chunk_ids = range(worker_index, plan["chunk_count"], worker_count)
+    for ordinal, chunk_id in enumerate(chunk_ids):
+        if max_chunks is not None and ordinal >= max_chunks:
+            break
+        payload = run_chunk(work_root, chunk_id, max_seconds, runtime=runtime)
         print(
             json.dumps(
                 {
@@ -804,6 +830,7 @@ def parser() -> argparse.ArgumentParser:
     worker.add_argument("--worker-index", type=int, required=True)
     worker.add_argument("--worker-count", type=int, required=True)
     worker.add_argument("--max-seconds", type=float, default=300.0)
+    worker.add_argument("--max-chunks", type=int)
     status = sub.add_parser("status")
     status.add_argument("--work-root", type=Path, default=DEFAULT_WORK_ROOT)
     trace = sub.add_parser("trace-sector")
@@ -831,7 +858,13 @@ def main() -> None:
     elif args.command == "run-chunk":
         print(json.dumps(run_chunk(args.work_root, args.chunk_id, args.max_seconds), indent=2, default=str))
     elif args.command == "run-worker":
-        run_worker(args.work_root, args.worker_index, args.worker_count, args.max_seconds)
+        run_worker(
+            args.work_root,
+            args.worker_index,
+            args.worker_count,
+            args.max_seconds,
+            args.max_chunks,
+        )
     elif args.command == "status":
         print(json.dumps(workload_status(args.work_root), indent=2))
     elif args.command == "trace-sector":
