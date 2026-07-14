@@ -7233,6 +7233,105 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+      "logical_id": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+      "payload": {
+        "artifacts": [
+          {
+            "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f",
+            "git_blob": "dd1cf41ad9a244763e1c0ebaf04f2b29f3e6c2f0",
+            "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+            "sha256": "afad4fc8a10ab6d5dad46000782ca470e7943e2b1ffcc0c5f6592edde3d82ad6"
+          },
+          {
+            "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f",
+            "git_blob": "b9134d88117eeaf592fc8acfc2ec359ea9778758",
+            "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-sector-ledger-v1.jsonl.gz",
+            "sha256": "cd35e5fbd8546f05e86c3f459f41a812bd4644c701daa85094dbc6148c74c13b"
+          },
+          {
+            "commit": "ecb0e299938f38e79b783b5e111da19bfad43567",
+            "git_blob": "20e8aa3452d961d7de030fe195965c5f4cc51fa1",
+            "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-framing-recovery-fresh-sector-verification-v1.json",
+            "sha256": "49e5d53ce64c9651d90f9e15236126f6e8d6a163f51fe9df59ea48e3d5328dd3"
+          }
+        ],
+        "category": "subject:twisted-yetter:category-family:su2-k",
+        "category_specialization": "SU(2)_2",
+        "claim_id": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+        "created_at_utc": "2026-07-14T02:25:28Z",
+        "fresh_verification": {
+          "max_raw_residual": "3.8778423131653425e-15",
+          "max_weighted_residual": "1.9860273225978185e-14",
+          "sample_count": 100,
+          "sample_seed": 20260714,
+          "status": "PASS"
+        },
+        "git": {
+          "checkpoint_commit": "ecb0e299938f38e79b783b5e111da19bfad43567",
+          "dirty": false
+        },
+        "interpretation": {
+          "established": "Under the frozen draft transcription, explicit total framings, modular killing-loop projector contract, and untwisted SU(2)_2 category data, the complete numerical sum matches the standard presentation.",
+          "not_established": [
+            "The draft Morse transcription is proved identical to the printed Akbulut-Yasui Figure 21 right diagram.",
+            "The special-dotted projector hypothesis is a theorem.",
+            "Twisted Crane-Yetter distinguishes the exotic smooth structures."
+          ]
+        },
+        "presentation": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+        "result": {
+          "absolute_difference": "2.6083425889735415e-12",
+          "evaluated": 86670,
+          "evaluation_id": "sha256:39eaad33504efa7f043c4f5a79c1a7946da9584e2252bc9e40b275430f7edad6",
+          "match": "YES",
+          "match_tolerance": "1e-8",
+          "projector_pruned": 90477,
+          "sector_count": 177147,
+          "standard_value": [
+            "-1024.0",
+            "0.0"
+          ],
+          "value": [
+            "-1023.9999999999983",
+            "-1.9736753077561816e-12"
+          ]
+        },
+        "reusable_resources": [
+          "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+          "resource:twisted-yetter:script:figure21-framing-recovery",
+          "resource:twisted-yetter:script:figure21-framing-verifier",
+          "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+        ],
+        "root_cause": {
+          "affected_commit": "30d00ffa992e8067ea1830c62c7276e5e6852b4b",
+          "affected_evaluation_id": "sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+          "blackboard_value": [
+            "3496.1546878700474",
+            "-1448.1546878700476"
+          ],
+          "corrected_contract_commit": "189a1f8f6cef1b22c052f12c1f44a21fc8db3539",
+          "failure": "Figure 21 framing_labels were not passed to RibbonGraphEvaluator, and the evaluator did not require explicit total framings."
+        },
+        "schema": "twisted-yetter/lab-note/1",
+        "status": "ESTABLISHED_NUMERICAL_CONTROL",
+        "synopsis": "The first complete Figure 21 untwisted SU(2)_2 run returned a clean but wrong blackboard-link value because total Kirby framings were never passed to the evaluator. After making framings mandatory and applying the uniquely determined sectorwise ribbon-twist correction, all 177147 sectors sum to -1023.9999999999983-1.97e-12i, matching the standard CP2#9(-CP2) value -1024. A deterministic fresh sample of 100 surviving sectors agrees with direct re-contraction to below 2e-14 weighted residual."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -7254,6 +7353,118 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
+      "logical_id": "claim:resource-handle:figure21-framing-recovery",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/scripts/reweight_figure21_su2_2_framings.py",
+          "reweight_figure21_su2_2_framings.py",
+          "figure21-framing-recovery"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-framing-recovery"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure21-framing-recovery",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
+      "logical_id": "claim:resource-handle:figure21-framing-verifier",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/verify_figure21_framing_recovery.sage.py",
+          "verify_figure21_framing_recovery.sage.py",
+          "figure21-framing-verifier"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-framing-verifier"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure21-framing-verifier",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:74c7ead17d20aace6f1779d36e2d19c7ed2f0439584c22e527dd7f3ad008d2eb",
+      "logical_id": "claim:resource-handle:figure21-su2-2-framed-result",
+      "payload": {
+        "kind": "generated-artifact",
+        "lookup_keys": [
+          "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+          "figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+          "figure21-su2-2-framed-result"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:74c7ead17d20aace6f1779d36e2d19c7ed2f0439584c22e527dd7f3ad008d2eb",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure21-su2-2-framed-result",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
+      "logical_id": "claim:resource-handle:figure21-su2-2-full-evaluator",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+          "figure21_su2_2_full_evaluation.sage.py",
+          "figure21-su2-2-full-evaluator"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure21-su2-2-full-evaluator",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7655,6 +7866,191 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:c539a39714aa342547721d482b433944059b8f6ce70cab7b0e71355835ac36f4",
+      "logical_id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing evaluation sha256:39eaad33504efa7f043c4f5a79c1a7946da9584e2252bc9e40b275430f7edad6"
+        ],
+        "status": "active",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+        },
+        "top_notice": "ACTIVE HASH-FROZEN RECOVERY: this script accepts only the recorded blackboard ledger and Figure 21 input hashes, applies the explicit SU(2)_2 ribbon-twist framing phase sector by sector, and preserves both values.",
+        "unsafe_scopes": [
+          "use as a generic category-independent ledger rewriter",
+          "changing normalization or framing labels after seeing the aggregate"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:c539a39714aa342547721d482b433944059b8f6ce70cab7b0e71355835ac36f4",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250",
+      "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing the recorded 100-sector Figure 21 SU(2)_2 framing check"
+        ],
+        "status": "active",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
+        },
+        "top_notice": "ACTIVE IMPLEMENTATION CONTROL: deterministic seed 20260714 re-contracts 100 surviving sectors with the framing-aware evaluator and checks raw and weighted values against the recovered ledger.",
+        "unsafe_scopes": [
+          "promoting a finite random sample to proof of the projector hypothesis",
+          "using PASS as proof that the draft transcription equals the printed diagram"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
+      "logical_id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "the recorded untwisted SU(2)_2 numerical comparison under the frozen Figure 21 transcription and projector contract"
+        ],
+        "status": "active",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+        },
+        "top_notice": "ACTIVE NUMERICAL CHECKPOINT: the complete framed SU(2)_2 sum is -1023.9999999999983-1.97e-12i and matches -1024 within the frozen 1e-8 tolerance; this remains a draft-transcription control, not an exotic-detection theorem.",
+        "unsafe_scopes": [
+          "claiming the Morse transcription is proved identical to the printed Figure 21",
+          "claiming the special-dotted projector hypothesis is proved",
+          "claiming Twisted Crane-Yetter detects this exotic pair"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
+      "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "reproducing the recorded Figure 21 untwisted SU(2)_2 run",
+          "new one-special-component SU(2)_k experiments with explicit total framings and independent controls"
+        ],
+        "status": "caution",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+        },
+        "top_notice": "FRAMING-AWARE CHECKPOINT: this snapshot requires explicit total framings, records visible writhe and corrections, and is supported here by the complete Figure 21 SU(2)_2 recovery plus 100 fresh sector contractions.",
+        "unsafe_scopes": [
+          "claiming category-independent special-dotted validation",
+          "using a category outside the certified modular killing-loop allowlist",
+          "treating the draft Figure 21 transcription or projector hypothesis as a theorem"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
+      "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c",
+        "safe_scopes": [
+          "historical reproduction of evaluation sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+          "reuse of its fixed-label blackboard contractions only through the hash-frozen framing recovery script"
+        ],
+        "status": "known_wrong",
+        "target_selector": {
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+        },
+        "top_notice": "DO NOT USE AS A FRAMED-LINK EVALUATOR: commit 30d00ff silently omitted the Figure 21 total framing labels and evaluated only the blackboard link.",
+        "unsafe_scopes": [
+          "any framed Kirby-link value",
+          "the Figure 21 untwisted SU(2)_2 invariant value",
+          "normalization or exotic-smooth-structure conclusions"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
       "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
       "payload": {
@@ -8021,6 +8417,141 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
+      "logical_id": "claim:resource-snapshot:figure21-framing-recovery-46a17f9",
+      "payload": {
+        "captured_at": "2026-07-14T02:25:28Z",
+        "commit": "46a17f98c3dd884bd5af5d2d0f8955b3ad28043c",
+        "git_blob": "839682e711b27c7e02c90f3b768e7c99c90767f1",
+        "path": "experiments/scripts/reweight_figure21_su2_2_framings.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-framing-recovery",
+        "sha256": "eb242984cc68fdfac6df7cafe1fa7ec4f453f596a9da2160678ea7185760660d",
+        "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-framing-recovery-46a17f9",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+      "logical_id": "claim:resource-snapshot:figure21-framing-verifier-5ab5c75",
+      "payload": {
+        "captured_at": "2026-07-14T02:25:28Z",
+        "commit": "5ab5c7570401dcedfec9656db6ea912f928db147",
+        "git_blob": "efb211fa8d79ddf63ea4470d63558366c350118a",
+        "path": "experiments/sage/verify_figure21_framing_recovery.sage.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-framing-verifier",
+        "sha256": "c080074de4a75e0bc426df10cba81c81177528f740c2922d60f3573a72798270",
+        "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-framing-verifier-5ab5c75",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
+      "logical_id": "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce",
+      "payload": {
+        "captured_at": "2026-07-14T02:25:28Z",
+        "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f",
+        "git_blob": "dd1cf41ad9a244763e1c0ebaf04f2b29f3e6c2f0",
+        "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result",
+        "sha256": "afad4fc8a10ab6d5dad46000782ca470e7943e2b1ffcc0c5f6592edde3d82ad6",
+        "snapshot_id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0",
+      "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-189a1f8",
+      "payload": {
+        "captured_at": "2026-07-14T02:25:28Z",
+        "commit": "189a1f8f6cef1b22c052f12c1f44a21fc8db3539",
+        "git_blob": "425fe5761a85711ab5d48d40091adfbc3566aaec",
+        "path": "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+        "sha256": "69670d4ce2ca1990aa94dfeb0318982290e0f5df1ffd53dadf5ec2def6dc65f2",
+        "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-189a1f8",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c",
+      "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff",
+      "payload": {
+        "captured_at": "2026-07-14T02:25:28Z",
+        "commit": "30d00ffa992e8067ea1830c62c7276e5e6852b4b",
+        "git_blob": "bd7cbc1ea088b054bbab5ea122b1a4443e1d6d10",
+        "path": "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+        "sha256": "214b7a222245f4ffbe9bbe9c152ff39ac2359610c7ea717d83c5ab6e6d264493",
+        "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -9004,6 +9535,85 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
+      "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:about:e3prime-figure21",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:about:e3prime-figure21",
+        "explanation": "The recovery note records the complete untwisted SU(2)_2 special-dotted numerical comparison for the draft Akbulut-Yasui Figure 21 right transcription.",
+        "role": "about",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:about:e3prime-figure21",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
+      "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:flags:runner-30d00ff",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:flags:runner-30d00ff",
+        "explanation": "The note establishes that the 30d00ff Figure 21 runner snapshot omitted total framings and must not be used for framed-link conclusions.",
+        "role": "flags-resource-safety",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+        "status": "active",
+        "target": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:flags:runner-30d00ff",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
+      "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:uses:su2-k",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:uses:su2-k",
+        "evidence_status": "complete_floating_point_numerical_control",
+        "explanation": "The complete untwisted computation specializes the current SU(2)_k category family to k=2.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+        "status": "active",
+        "target": "subject:twisted-yetter:category-family:su2-k"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
+        "created_at": "2026-07-14T02:28:29Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:uses:su2-k",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -13831,7 +14441,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-13T18:57:04Z",
+  "generated_at": "2026-07-14T02:28:29Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -13841,6 +14451,9 @@
       ],
       "2ababb0b371210ff6226a236aaf8c028cdca525f": [
         "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+      ],
+      "425fe5761a85711ab5d48d40091adfbc3566aaec": [
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
       ],
       "537f4ebfb65e75d9975235e71396eabedd80e46e": [
         "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b"
@@ -13860,6 +14473,9 @@
       "78a656caa9b5c0e8a18617b1edcefe5a3c0f7142": [
         "snapshot:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit@sha256-de1210fa"
       ],
+      "839682e711b27c7e02c90f3b768e7c99c90767f1": [
+        "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+      ],
       "84d81e57d81125ab4ae2331f162d1170ae6e4db1": [
         "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
       ],
@@ -13872,6 +14488,9 @@
       "a12224abd1cf44738a162cccd624e81f4db10bbc": [
         "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
       ],
+      "bd7cbc1ea088b054bbab5ea122b1a4443e1d6d10": [
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+      ],
       "c2ba018b41cca065bafecc7adb40d975efbc31d8": [
         "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ],
@@ -13881,8 +14500,14 @@
       "dbccb900cbea8b872323debb7d8bd12e89ec42eb": [
         "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca"
       ],
+      "dd1cf41ad9a244763e1c0ebaf04f2b29f3e6c2f0": [
+        "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+      ],
       "eb932a1a8e60b427d1e0c5dd52dd7878e7903273": [
         "snapshot:twisted-yetter:script:morse-singleton-braid-compare@sha256-87437fb3"
+      ],
+      "efb211fa8d79ddf63ea4470d63558366c350118a": [
+        "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
       ]
     },
     "by_lookup_key": {
@@ -13904,11 +14529,17 @@
       "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e2-morse-draft"
       ],
+      "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json": [
+        "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+      ],
       "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json": [
         "resource:twisted-yetter:result:native-morse-figure2-cross-category-matrix"
       ],
       "experiments/results/yasui/figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json": [
         "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge"
+      ],
+      "experiments/sage/figure21_su2_2_full_evaluation.sage.py": [
+        "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
       ],
       "experiments/sage/morse_category_adapters.py": [
         "resource:twisted-yetter:script:morse-category-adapters"
@@ -13931,6 +14562,9 @@
       "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
         "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
       ],
+      "experiments/sage/verify_figure21_framing_recovery.sage.py": [
+        "resource:twisted-yetter:script:figure21-framing-verifier"
+      ],
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
       ],
@@ -13940,8 +14574,29 @@
       "experiments/scripts/morse_singleton_pool.py": [
         "resource:twisted-yetter:script:morse-singleton-pool"
       ],
+      "experiments/scripts/reweight_figure21_su2_2_framings.py": [
+        "resource:twisted-yetter:script:figure21-framing-recovery"
+      ],
       "figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json": [
         "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge"
+      ],
+      "figure21-framing-recovery": [
+        "resource:twisted-yetter:script:figure21-framing-recovery"
+      ],
+      "figure21-framing-verifier": [
+        "resource:twisted-yetter:script:figure21-framing-verifier"
+      ],
+      "figure21-right-su2-2-untwisted-framed-evaluation-v1.json": [
+        "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+      ],
+      "figure21-su2-2-framed-result": [
+        "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+      ],
+      "figure21-su2-2-full-evaluator": [
+        "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
+      ],
+      "figure21_su2_2_full_evaluation.sage.py": [
+        "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
       ],
       "figure815-e1-morse-draft-v1.json": [
         "resource:twisted-yetter:input:figure815-e1-morse-draft"
@@ -14003,6 +14658,9 @@
       "old-specialized-su2-2-braid-oracle": [
         "resource:twisted-yetter:script:su2-2-braid-oracle"
       ],
+      "resource:twisted-yetter:artifact:figure21-su2-2-framed-result": [
+        "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+      ],
       "resource:twisted-yetter:input:figure815-e1-morse-draft": [
         "resource:twisted-yetter:input:figure815-e1-morse-draft"
       ],
@@ -14020,6 +14678,15 @@
       ],
       "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor": [
         "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor"
+      ],
+      "resource:twisted-yetter:script:figure21-framing-recovery": [
+        "resource:twisted-yetter:script:figure21-framing-recovery"
+      ],
+      "resource:twisted-yetter:script:figure21-framing-verifier": [
+        "resource:twisted-yetter:script:figure21-framing-verifier"
+      ],
+      "resource:twisted-yetter:script:figure21-su2-2-full-evaluator": [
+        "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
       ],
       "resource:twisted-yetter:script:morse-category-adapters": [
         "resource:twisted-yetter:script:morse-category-adapters"
@@ -14048,6 +14715,9 @@
       "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator": [
         "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
       ],
+      "reweight_figure21_su2_2_framings.py": [
+        "resource:twisted-yetter:script:figure21-framing-recovery"
+      ],
       "su2-2-braid-oracle-bug-audit": [
         "resource:twisted-yetter:lab-note:su2-2-braid-oracle-bug-audit"
       ],
@@ -14069,6 +14739,9 @@
       "su3_2_anyonwiki_fr_braid_evaluator.py": [
         "resource:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator"
       ],
+      "verify_figure21_framing_recovery.sage.py": [
+        "resource:twisted-yetter:script:figure21-framing-verifier"
+      ],
       "yasui-figure2-su2-2-singleton-braid-bridge": [
         "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge"
       ]
@@ -14083,11 +14756,18 @@
       "experiments/inputs/gompf-stipsicz/figure815-k3-e2-morse-draft-v1.json": [
         "snapshot:twisted-yetter:input:figure815-e2-morse-draft@sha256-67bfb4f3"
       ],
+      "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json": [
+        "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+      ],
       "experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json": [
         "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8"
       ],
       "experiments/results/yasui/figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json": [
         "snapshot:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge@sha256-e3e6e045"
+      ],
+      "experiments/sage/figure21_su2_2_full_evaluation.sage.py": [
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22",
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
       ],
       "experiments/sage/morse_category_adapters.py": [
         "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
@@ -14111,6 +14791,9 @@
       "experiments/sage/su3_2_anyonwiki_fr_braid_evaluator.py": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ],
+      "experiments/sage/verify_figure21_framing_recovery.sage.py": [
+        "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
+      ],
       "experiments/scripts/e2_su2_2_optimistic_runtime_floor.py": [
         "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe"
       ],
@@ -14119,9 +14802,15 @@
       ],
       "experiments/scripts/morse_singleton_pool.py": [
         "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
+      ],
+      "experiments/scripts/reweight_figure21_su2_2_framings.py": [
+        "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
       ]
     },
     "by_sha256": {
+      "214b7a222245f4ffbe9bbe9c152ff39ac2359610c7ea717d83c5ab6e6d264493": [
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+      ],
       "3b7920d48d8a435b223e48fcba8cc7277e2ebcde0ae2ab0e06e27fe1bcb130c5": [
         "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-3b7920d4"
       ],
@@ -14137,6 +14826,9 @@
       "69081343671199612f511a42cf7c79c512c2cd6f85bdb3a4bff2105ad95b7b71": [
         "snapshot:twisted-yetter:script:su3-2-anyonwiki-fr-braid-evaluator@sha256-69081343"
       ],
+      "69670d4ce2ca1990aa94dfeb0318982290e0f5df1ffd53dadf5ec2def6dc65f2": [
+        "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+      ],
       "8193f5807994c32afc1261d035f46ce3246cfa8348d6682d022da366ff4f978c": [
         "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
       ],
@@ -14148,6 +14840,12 @@
       ],
       "a7654363eac00725c83f39b07e8ec56db6bfd78010847a4547e1c8f57004855c": [
         "snapshot:twisted-yetter:script:native-morse-fusion-evaluator@sha256-a7654363"
+      ],
+      "afad4fc8a10ab6d5dad46000782ca470e7943e2b1ffcc0c5f6592edde3d82ad6": [
+        "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+      ],
+      "c080074de4a75e0bc426df10cba81c81177528f740c2922d60f3573a72798270": [
+        "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
       ],
       "cdbd4c4c9a4b2a0606d0a142e82447039871277c1d63d8f2433f92552c781a5a": [
         "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
@@ -14161,6 +14859,9 @@
       "e3e6e0451a75b2e4f9b58f2b471c0af496be9729e157d1968882a923f5df3a12": [
         "snapshot:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge@sha256-e3e6e045"
       ],
+      "eb242984cc68fdfac6df7cafe1fa7ec4f453f596a9da2160678ea7185760660d": [
+        "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+      ],
       "ebf1c5732c29e50d82ce3c60a1e4279025609b1f5fb8b687401d8b2bec74c28b": [
         "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573"
       ],
@@ -14172,6 +14873,32 @@
       ]
     },
     "handles": {
+      "resource:twisted-yetter:artifact:figure21-su2-2-framed-result": {
+        "cid": "ctlobj-sha256:74c7ead17d20aace6f1779d36e2d19c7ed2f0439584c22e527dd7f3ad008d2eb",
+        "logical_id": "claim:resource-handle:figure21-su2-2-framed-result",
+        "payload": {
+          "kind": "generated-artifact",
+          "lookup_keys": [
+            "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+            "figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+            "figure21-su2-2-framed-result"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:74c7ead17d20aace6f1779d36e2d19c7ed2f0439584c22e527dd7f3ad008d2eb",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure21-su2-2-framed-result",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "resource:twisted-yetter:input:figure815-e1-morse-draft": {
         "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
         "logical_id": "claim:resource-handle:figure815-e1-morse-input",
@@ -14323,6 +15050,84 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:figure21-framing-recovery": {
+        "cid": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
+        "logical_id": "claim:resource-handle:figure21-framing-recovery",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/scripts/reweight_figure21_su2_2_framings.py",
+            "reweight_figure21_su2_2_framings.py",
+            "figure21-framing-recovery"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-framing-recovery"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure21-framing-recovery",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:figure21-framing-verifier": {
+        "cid": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
+        "logical_id": "claim:resource-handle:figure21-framing-verifier",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/verify_figure21_framing_recovery.sage.py",
+            "verify_figure21_framing_recovery.sage.py",
+            "figure21-framing-verifier"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-framing-verifier"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure21-framing-verifier",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:figure21-su2-2-full-evaluator": {
+        "cid": "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
+        "logical_id": "claim:resource-handle:figure21-su2-2-full-evaluator",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+            "figure21_su2_2_full_evaluation.sage.py",
+            "figure21-su2-2-full-evaluator"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure21-su2-2-full-evaluator",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -14574,6 +15379,10 @@
         "id": "snapshot:twisted-yetter:result:native-morse-figure2-cross-category-matrix@sha256-479fafe8",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341": {
+        "id": "resource:twisted-yetter:script:figure21-framing-recovery",
+        "kind": "handle"
+      },
       "ctlobj-sha256:0e5d2d5db3e2a5e474995a1f54a66ecc5928d0d5271f15462ddea9c4d4b0795e": {
         "id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
         "kind": "safety-status"
@@ -14581,6 +15390,10 @@
       "ctlobj-sha256:0f2ed3e38d8f2486d166d3e055900c3aac919af14eaf44f7baeb7d45438e0b67": {
         "id": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
         "kind": "handle"
+      },
+      "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250": {
+        "id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+        "kind": "safety-status"
       },
       "ctlobj-sha256:1d869ca15c5a7b414cc53d52028e0a58a88aadfe1c28d08b9640f42552044426": {
         "id": "snapshot:twisted-yetter:script:morse-singleton-braid-compare@sha256-87437fb3",
@@ -14597,6 +15410,10 @@
       "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380": {
         "id": "claim:resource-safety:figure815-e2-morse-input-caution",
         "kind": "safety-status"
+      },
+      "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72": {
+        "id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8",
+        "kind": "snapshot"
       },
       "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794": {
         "id": "resource:twisted-yetter:script:morse-dsl",
@@ -14634,6 +15451,10 @@
         "id": "snapshot:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge@sha256-e3e6e045",
         "kind": "snapshot"
       },
+      "ctlobj-sha256:74c7ead17d20aace6f1779d36e2d19c7ed2f0439584c22e527dd7f3ad008d2eb": {
+        "id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result",
+        "kind": "handle"
+      },
       "ctlobj-sha256:751f7636338aadd6b7f7368cd6b662268abfc0eba6ec16977888f5270d5583f2": {
         "id": "resource:twisted-yetter:script:morse-category-adapters",
         "kind": "handle"
@@ -14644,6 +15465,10 @@
       },
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": {
         "id": "claim:resource-safety:su2-2-braid-oracle-bug-audit-note-active",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad": {
+        "id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
         "kind": "safety-status"
       },
       "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211": {
@@ -14662,6 +15487,14 @@
         "id": "claim:resource-safety:morse-dsl-c4fc6f7",
         "kind": "safety-status"
       },
+      "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb": {
+        "id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3": {
+        "id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+        "kind": "safety-status"
+      },
       "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c": {
         "id": "snapshot:twisted-yetter:script:su2k-fusion-braid-evaluator@sha256-f66dbaca",
         "kind": "snapshot"
@@ -14676,6 +15509,22 @@
       },
       "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac": {
         "id": "claim:resource-safety:figure815-e1-morse-input-caution",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a": {
+        "id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+        "kind": "safety-status"
+      },
+      "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0": {
+        "id": "resource:twisted-yetter:script:figure21-framing-verifier",
+        "kind": "handle"
+      },
+      "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c": {
+        "id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22",
+        "kind": "snapshot"
+      },
+      "ctlobj-sha256:c539a39714aa342547721d482b433944059b8f6ce70cab7b0e71355835ac36f4": {
+        "id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
         "kind": "safety-status"
       },
       "ctlobj-sha256:c84dc93c708e5c698b40ed235a4258649d8bfd32b092d25e93ab31bde4ed6a96": {
@@ -14702,8 +15551,16 @@
         "id": "resource:twisted-yetter:script:morse-diagonal-standard-compare",
         "kind": "handle"
       },
+      "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b": {
+        "id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b": {
         "id": "resource:twisted-yetter:script:morse-singleton-pool",
+        "kind": "handle"
+      },
+      "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47": {
+        "id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
         "kind": "handle"
       },
       "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381": {
@@ -14713,6 +15570,10 @@
       "ctlobj-sha256:e892ec75447bd73e636f0e574cec8b8d9479893cfa2509f3feafcffc77a90a13": {
         "id": "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge",
         "kind": "handle"
+      },
+      "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0": {
+        "id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c",
+        "kind": "snapshot"
       },
       "ctlobj-sha256:f5519c0bf9f636f184e6e948b663c0c97b66e2bba9f8a117ed9ade8b2011acb5": {
         "id": "claim:resource-safety:su2-2-braid-oracle-known-wrong",
@@ -14730,6 +15591,22 @@
     "resource_logical_ids": {
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": {
         "id": "resource:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure21-framing-recovery": {
+        "id": "resource:twisted-yetter:script:figure21-framing-recovery",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure21-framing-verifier": {
+        "id": "resource:twisted-yetter:script:figure21-framing-verifier",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure21-su2-2-framed-result": {
+        "id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure21-su2-2-full-evaluator": {
+        "id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
         "kind": "handle"
       },
       "claim:resource-handle:figure815-e1-morse-input": {
@@ -14788,6 +15665,26 @@
         "id": "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge",
         "kind": "handle"
       },
+      "claim:resource-safety:figure21-framing-recovery-46a17f9": {
+        "id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:figure21-framing-verifier-5ab5c75": {
+        "id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:figure21-su2-2-framed-result-e017bce": {
+        "id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8": {
+        "id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
+        "kind": "safety-status"
+      },
+      "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff": {
+        "id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+        "kind": "safety-status"
+      },
       "claim:resource-safety:figure815-e1-morse-input-caution": {
         "id": "claim:resource-safety:figure815-e1-morse-input-caution",
         "kind": "safety-status"
@@ -14826,6 +15723,26 @@
       },
       "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe": {
         "id": "snapshot:twisted-yetter:script:e2-su2-2-optimistic-runtime-floor@sha256-fd85dffe",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-framing-recovery-46a17f9": {
+        "id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-framing-verifier-5ab5c75": {
+        "id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce": {
+        "id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-su2-2-full-evaluator-189a1f8": {
+        "id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff": {
+        "id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22",
         "kind": "snapshot"
       },
       "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5": {
@@ -14890,6 +15807,181 @@
       }
     },
     "safety_statuses": [
+      {
+        "cid": "ctlobj-sha256:c539a39714aa342547721d482b433944059b8f6ce70cab7b0e71355835ac36f4",
+        "logical_id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing evaluation sha256:39eaad33504efa7f043c4f5a79c1a7946da9584e2252bc9e40b275430f7edad6"
+          ],
+          "status": "active",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+          },
+          "top_notice": "ACTIVE HASH-FROZEN RECOVERY: this script accepts only the recorded blackboard ledger and Figure 21 input hashes, applies the explicit SU(2)_2 ribbon-twist framing phase sector by sector, and preserves both values.",
+          "unsafe_scopes": [
+            "use as a generic category-independent ledger rewriter",
+            "changing normalization or framing labels after seeing the aggregate"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:c539a39714aa342547721d482b433944059b8f6ce70cab7b0e71355835ac36f4",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-framing-recovery-46a17f9",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250",
+        "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing the recorded 100-sector Figure 21 SU(2)_2 framing check"
+          ],
+          "status": "active",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
+          },
+          "top_notice": "ACTIVE IMPLEMENTATION CONTROL: deterministic seed 20260714 re-contracts 100 surviving sectors with the framing-aware evaluator and checks raw and weighted values against the recovered ledger.",
+          "unsafe_scopes": [
+            "promoting a finite random sample to proof of the projector hypothesis",
+            "using PASS as proof that the draft transcription equals the printed diagram"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
+        "logical_id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "the recorded untwisted SU(2)_2 numerical comparison under the frozen Figure 21 transcription and projector contract"
+          ],
+          "status": "active",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+          },
+          "top_notice": "ACTIVE NUMERICAL CHECKPOINT: the complete framed SU(2)_2 sum is -1023.9999999999983-1.97e-12i and matches -1024 within the frozen 1e-8 tolerance; this remains a draft-transcription control, not an exotic-detection theorem.",
+          "unsafe_scopes": [
+            "claiming the Morse transcription is proved identical to the printed Figure 21",
+            "claiming the special-dotted projector hypothesis is proved",
+            "claiming Twisted Crane-Yetter detects this exotic pair"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
+        "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "reproducing the recorded Figure 21 untwisted SU(2)_2 run",
+            "new one-special-component SU(2)_k experiments with explicit total framings and independent controls"
+          ],
+          "status": "caution",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+          },
+          "top_notice": "FRAMING-AWARE CHECKPOINT: this snapshot requires explicit total framings, records visible writhe and corrections, and is supported here by the complete Figure 21 SU(2)_2 recovery plus 100 fresh sector contractions.",
+          "unsafe_scopes": [
+            "claiming category-independent special-dotted validation",
+            "using a category outside the certified modular killing-loop allowlist",
+            "treating the draft Figure 21 transcription or projector hypothesis as a theorem"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
+        "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c",
+          "safe_scopes": [
+            "historical reproduction of evaluation sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+            "reuse of its fixed-label blackboard contractions only through the hash-frozen framing recovery script"
+          ],
+          "status": "known_wrong",
+          "target_selector": {
+            "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+          },
+          "top_notice": "DO NOT USE AS A FRAMED-LINK EVALUATOR: commit 30d00ff silently omitted the Figure 21 total framing labels and evaluated only the blackboard link.",
+          "unsafe_scopes": [
+            "any framed Kirby-link value",
+            "the Figure 21 untwisted SU(2)_2 invariant value",
+            "normalization or exotic-smooth-structure conclusions"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-su2-2-full-evaluator-30d00ff",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       {
         "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
         "logical_id": "claim:resource-safety:figure815-e1-morse-input-caution",
@@ -15219,6 +16311,31 @@
       }
     ],
     "snapshots": {
+      "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8": {
+        "cid": "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce",
+        "payload": {
+          "captured_at": "2026-07-14T02:25:28Z",
+          "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f",
+          "git_blob": "dd1cf41ad9a244763e1c0ebaf04f2b29f3e6c2f0",
+          "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:artifact:figure21-su2-2-framed-result",
+          "sha256": "afad4fc8a10ab6d5dad46000782ca470e7943e2b1ffcc0c5f6592edde3d82ad6",
+          "snapshot_id": "snapshot:twisted-yetter:artifact:figure21-su2-2-framed-result@sha256-afad4fc8"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:input:figure815-e1-morse-draft@sha256-a592144b": {
         "cid": "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
         "logical_id": "claim:resource-snapshot:figure815-e1-morse-input-d0bfff5",
@@ -15365,6 +16482,106 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-snapshot:e2-su2-2-optimistic-runtime-floor-generator-fd85dffe",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984": {
+        "cid": "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
+        "logical_id": "claim:resource-snapshot:figure21-framing-recovery-46a17f9",
+        "payload": {
+          "captured_at": "2026-07-14T02:25:28Z",
+          "commit": "46a17f98c3dd884bd5af5d2d0f8955b3ad28043c",
+          "git_blob": "839682e711b27c7e02c90f3b768e7c99c90767f1",
+          "path": "experiments/scripts/reweight_figure21_su2_2_framings.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-framing-recovery",
+          "sha256": "eb242984cc68fdfac6df7cafe1fa7ec4f453f596a9da2160678ea7185760660d",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-recovery@sha256-eb242984"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-framing-recovery-46a17f9",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d": {
+        "cid": "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+        "logical_id": "claim:resource-snapshot:figure21-framing-verifier-5ab5c75",
+        "payload": {
+          "captured_at": "2026-07-14T02:25:28Z",
+          "commit": "5ab5c7570401dcedfec9656db6ea912f928db147",
+          "git_blob": "efb211fa8d79ddf63ea4470d63558366c350118a",
+          "path": "experiments/sage/verify_figure21_framing_recovery.sage.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-framing-verifier",
+          "sha256": "c080074de4a75e0bc426df10cba81c81177528f740c2922d60f3573a72798270",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-framing-verifier-5ab5c75",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22": {
+        "cid": "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c",
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff",
+        "payload": {
+          "captured_at": "2026-07-14T02:25:28Z",
+          "commit": "30d00ffa992e8067ea1830c62c7276e5e6852b4b",
+          "git_blob": "bd7cbc1ea088b054bbab5ea122b1a4443e1d6d10",
+          "path": "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+          "sha256": "214b7a222245f4ffbe9bbe9c152ff39ac2359610c7ea717d83c5ab6e6d264493",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c": {
+        "cid": "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0",
+        "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-189a1f8",
+        "payload": {
+          "captured_at": "2026-07-14T02:25:28Z",
+          "commit": "189a1f8f6cef1b22c052f12c1f44a21fc8db3539",
+          "git_blob": "425fe5761a85711ab5d48d40091adfbc3566aaec",
+          "path": "experiments/sage/figure21_su2_2_full_evaluation.sage.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+          "sha256": "69670d4ce2ca1990aa94dfeb0318982290e0f5df1ffd53dadf5ec2def6dc65f2",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0",
+          "created_at": "2026-07-14T02:28:29Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-189a1f8",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -15622,8 +16839,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:8b9f63dd63115f60741d0481c34ca27234724e871bacb47fc5711b38ee514153",
+  "root_cid": "ctlobj-sha256:94d03755c608e2fe86d5834dbce5cb1dc1b508dafe2e9c63d72589527e49da26",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:c135775b737af73a4c7c69b983af8f5befb1c21ea917455e08dd17a3142ac47c"
+  "transition_cid": "ctlobj-sha256:482280a0e5328110e4063818f77846177104797ad7187180b57a5a8e8a2817ad"
 }

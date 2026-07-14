@@ -1,0 +1,82 @@
+{
+  "schema": "twisted-yetter/lab-note/1",
+  "claim_id": "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery",
+  "created_at_utc": "2026-07-14T02:25:28Z",
+  "status": "ESTABLISHED_NUMERICAL_CONTROL",
+  "synopsis": "The first complete Figure 21 untwisted SU(2)_2 run returned a clean but wrong blackboard-link value because total Kirby framings were never passed to the evaluator. After making framings mandatory and applying the uniquely determined sectorwise ribbon-twist correction, all 177147 sectors sum to -1023.9999999999983-1.97e-12i, matching the standard CP2#9(-CP2) value -1024. A deterministic fresh sample of 100 surviving sectors agrees with direct re-contraction to below 2e-14 weighted residual.",
+  "presentation": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+  "category": "subject:twisted-yetter:category-family:su2-k",
+  "category_specialization": "SU(2)_2",
+  "root_cause": {
+    "affected_commit": "30d00ffa992e8067ea1830c62c7276e5e6852b4b",
+    "affected_evaluation_id": "sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+    "blackboard_value": [
+      "3496.1546878700474",
+      "-1448.1546878700476"
+    ],
+    "failure": "Figure 21 framing_labels were not passed to RibbonGraphEvaluator, and the evaluator did not require explicit total framings.",
+    "corrected_contract_commit": "189a1f8f6cef1b22c052f12c1f44a21fc8db3539"
+  },
+  "result": {
+    "evaluation_id": "sha256:39eaad33504efa7f043c4f5a79c1a7946da9584e2252bc9e40b275430f7edad6",
+    "value": [
+      "-1023.9999999999983",
+      "-1.9736753077561816e-12"
+    ],
+    "standard_value": [
+      "-1024.0",
+      "0.0"
+    ],
+    "absolute_difference": "2.6083425889735415e-12",
+    "match_tolerance": "1e-8",
+    "match": "YES",
+    "sector_count": 177147,
+    "projector_pruned": 90477,
+    "evaluated": 86670
+  },
+  "fresh_verification": {
+    "sample_seed": 20260714,
+    "sample_count": 100,
+    "status": "PASS",
+    "max_raw_residual": "3.8778423131653425e-15",
+    "max_weighted_residual": "1.9860273225978185e-14"
+  },
+  "artifacts": [
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+      "sha256": "afad4fc8a10ab6d5dad46000782ca470e7943e2b1ffcc0c5f6592edde3d82ad6",
+      "git_blob": "dd1cf41ad9a244763e1c0ebaf04f2b29f3e6c2f0",
+      "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f"
+    },
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-sector-ledger-v1.jsonl.gz",
+      "sha256": "cd35e5fbd8546f05e86c3f459f41a812bd4644c701daa85094dbc6148c74c13b",
+      "git_blob": "b9134d88117eeaf592fc8acfc2ec359ea9778758",
+      "commit": "e017bce8f844ae97ceb9b60623b2a22f2b089a1f"
+    },
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-framing-recovery-fresh-sector-verification-v1.json",
+      "sha256": "49e5d53ce64c9651d90f9e15236126f6e8d6a163f51fe9df59ea48e3d5328dd3",
+      "git_blob": "20e8aa3452d961d7de030fe195965c5f4cc51fa1",
+      "commit": "ecb0e299938f38e79b783b5e111da19bfad43567"
+    }
+  ],
+  "reusable_resources": [
+    "resource:twisted-yetter:script:figure21-su2-2-full-evaluator",
+    "resource:twisted-yetter:script:figure21-framing-recovery",
+    "resource:twisted-yetter:script:figure21-framing-verifier",
+    "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
+  ],
+  "interpretation": {
+    "established": "Under the frozen draft transcription, explicit total framings, modular killing-loop projector contract, and untwisted SU(2)_2 category data, the complete numerical sum matches the standard presentation.",
+    "not_established": [
+      "The draft Morse transcription is proved identical to the printed Akbulut-Yasui Figure 21 right diagram.",
+      "The special-dotted projector hypothesis is a theorem.",
+      "Twisted Crane-Yetter distinguishes the exotic smooth structures."
+    ]
+  },
+  "git": {
+    "checkpoint_commit": "ecb0e299938f38e79b783b5e111da19bfad43567",
+    "dirty": false
+  }
+}
