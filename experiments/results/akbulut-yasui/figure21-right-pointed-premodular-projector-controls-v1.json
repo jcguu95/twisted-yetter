@@ -1,0 +1,200 @@
+{
+  "argv": [],
+  "category_data": {
+    "categories": [
+      "rep-z2",
+      "svec"
+    ],
+    "pivotal_profile": "experiments/inputs/category-pivotal/pointed-z2-symmetric-pivotal-v1.json",
+    "pivotal_profile_sha256": "8d27eb9fca761968117722a9156b3d54fae589c85fc8c8d72bbb1e168d66f2c9",
+    "premodular_degeneracy": "symmetric braiding; not modular"
+  },
+  "checks": {
+    "all_unit_is_one": true,
+    "purple_and_black_has_vacuum": true,
+    "purple_only_has_no_vacuum": true
+  },
+  "coverage": {
+    "arbitrary_nonhorizontal_coupon": "SUPPORTED_FOR_POINTED_CATEGORIES",
+    "general_nonpointed_nonhorizontal_coupon": "NOT_IMPLEMENTED",
+    "general_pivotal_horizontal_coupon": "SUPPORTED"
+  },
+  "elapsed_seconds": 0.013500833883881569,
+  "finished_at_utc": "2026-07-14T14:19:35.710983+00:00",
+  "generator_script": "experiments/scripts/check_figure21_pointed_premodular.py",
+  "git_commit": "0e53f398af36d724f15e40cce530a2fc11c07a84",
+  "git_dirty": false,
+  "input": {
+    "coupon_factor_count": 29,
+    "coupon_graph_hash": "sha256:f66f1ef64661c432c389b6c1db726de605055ea0cabe74005fa649ebbd32a26c",
+    "path": "experiments/inputs/akbulut-yasui/figure21-right-morse-draft-v1.json",
+    "projected_ir_hash": "sha256:7b96de795e98bf8b521e33c9977c5eccbbde63e1d4296554ad388c609ff71695",
+    "sha256": "b6f8459547a7cec415eb6c70acb89a40c37ab4cabd364330206685d8e579cbc5",
+    "source_locator": "Figure 21, right",
+    "source_ref": "subject:twisted-yetter:paper:akbulut-yasui-0806-3010",
+    "source_status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
+  },
+  "mathematical_status": "NUMERIC_CONTROL_NOT_FULL_INVARIANT",
+  "non_claims": [
+    "This is not a complete Crane-Yetter evaluation.",
+    "This does not verify the draft transcription against the printed figure.",
+    "This does not support arbitrary nonpointed premodular categories."
+  ],
+  "purpose": "Exercise the direct graph-level vacuum projector on a nonhorizontal 29-puncture special disk in degenerate premodular categories.",
+  "python_version": "3.11.15",
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=. uv run python experiments/scripts/check_figure21_pointed_premodular.py",
+  "results": {
+    "rep-z2": {
+      "all_unit": {
+        "framing_phase": {
+          "imag": 0.0,
+          "real": 1.0
+        },
+        "labels": {
+          "beige": 0,
+          "black": 0,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 0
+        },
+        "projector_rank": 1,
+        "status": "EVALUATED_POINTED_VACUUM_SECTOR",
+        "value": {
+          "imag": 0.0,
+          "real": 1.0
+        }
+      },
+      "purple_and_black": {
+        "framing_phase": {
+          "imag": 0.0,
+          "real": 1.0
+        },
+        "labels": {
+          "beige": 0,
+          "black": 1,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 1
+        },
+        "projector_rank": 1,
+        "status": "EVALUATED_POINTED_VACUUM_SECTOR",
+        "value": {
+          "imag": 0.0,
+          "real": 1.0
+        }
+      },
+      "purple_only": {
+        "framing_phase": null,
+        "labels": {
+          "beige": 0,
+          "black": 0,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 1
+        },
+        "projector_rank": 0,
+        "status": "PRUNED_NO_VACUUM",
+        "value": {
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    "svec": {
+      "all_unit": {
+        "framing_phase": {
+          "imag": 0.0,
+          "real": 1.0
+        },
+        "labels": {
+          "beige": 0,
+          "black": 0,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 0
+        },
+        "projector_rank": 1,
+        "status": "EVALUATED_POINTED_VACUUM_SECTOR",
+        "value": {
+          "imag": 0.0,
+          "real": 1.0
+        }
+      },
+      "purple_and_black": {
+        "framing_phase": {
+          "imag": 0.0,
+          "real": 1.0
+        },
+        "labels": {
+          "beige": 0,
+          "black": 1,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 1
+        },
+        "projector_rank": 1,
+        "status": "EVALUATED_POINTED_VACUUM_SECTOR",
+        "value": {
+          "imag": 0.0,
+          "real": 1.0
+        }
+      },
+      "purple_only": {
+        "framing_phase": null,
+        "labels": {
+          "beige": 0,
+          "black": 0,
+          "blue": 0,
+          "green": 0,
+          "mint": 0,
+          "orange": 0,
+          "pink1": 0,
+          "pink2": 0,
+          "pink3": 0,
+          "pink4": 0,
+          "purple": 1
+        },
+        "projector_rank": 0,
+        "status": "PRUNED_NO_VACUUM",
+        "value": {
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    }
+  },
+  "schema": "twisted-yetter.figure21-pointed-premodular-projector-controls.v1",
+  "started_at_utc": "2026-07-14T14:19:35.697445+00:00",
+  "status": "PASS_POINTED_PREMODULAR_FIXED_SECTOR_CONTROLS"
+}
