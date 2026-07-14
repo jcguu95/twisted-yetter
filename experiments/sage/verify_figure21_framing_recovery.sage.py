@@ -15,11 +15,14 @@ import random
 import runpy
 import socket
 import subprocess
+import sys
 import time
 from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 RUNNER = REPO_ROOT / "experiments/sage/figure21_su2_2_full_evaluation.sage.py"
 DEFAULT_LEDGER = (
     REPO_ROOT
