@@ -148,6 +148,8 @@ def reweight_record(
     evaluation_id: str,
 ) -> dict[str, Any]:
     record = dict(source)
+    if "evaluation_id" not in source:
+        raise ValueError("source record lacks its inherited evaluation identity")
     record["source_evaluation_id"] = source["evaluation_id"]
     record["evaluation_id"] = evaluation_id
     if source["status"] == "PRUNED_NO_VACUUM":
@@ -296,7 +298,14 @@ def recover(args: argparse.Namespace) -> dict[str, Any]:
             )
             for line in source_handle:
                 source = json.loads(line)
-                if source.get("evaluation_id") != EXPECTED_SOURCE_EVALUATION_ID:
+                source_record_id = source.get("evaluation_id")
+                if (
+                    source_record_id is None
+                    and source.get("status") == "PRUNED_NO_VACUUM"
+                ):
+                    source["evaluation_id"] = header["evaluation_id"]
+                    source_record_id = source["evaluation_id"]
+                if source_record_id != EXPECTED_SOURCE_EVALUATION_ID:
                     raise ValueError("mixed evaluation identities in source ledger")
                 if source.get("sector_id") != record_count:
                     raise ValueError(

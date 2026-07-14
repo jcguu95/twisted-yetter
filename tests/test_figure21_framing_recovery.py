@@ -49,3 +49,23 @@ def test_reweight_record_preserves_blackboard_contribution():
     assert result["weighted_contribution"] == [0.0, 3.0]
     assert result["source_evaluation_id"] == "source-id"
     assert result["evaluation_id"] == "framed-id"
+
+
+def test_reweight_record_requires_inherited_source_identity():
+    source = {
+        "sector_id": 1,
+        "labels": [1],
+        "status": "PRUNED_NO_VACUUM",
+    }
+    try:
+        reweight_record(
+            source,
+            component_order=("A",),
+            framing_corrections={"A": 0},
+            twists=su2_k2_twists(),
+            evaluation_id="framed-id",
+        )
+    except ValueError as exc:
+        assert "inherited evaluation identity" in str(exc)
+    else:
+        raise AssertionError("missing source identity was accepted")
