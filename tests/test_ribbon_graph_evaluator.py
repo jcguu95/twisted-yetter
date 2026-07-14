@@ -10,6 +10,7 @@ from experiments.sage.morse_pivotal_contract import (
 )
 from experiments.sage.ribbon_graph_evaluator import (
     DirectVacuumProjectorEvaluator,
+    PointedVacuumProjectorEvaluator,
     RibbonGraphContractError,
     RibbonGraphEvaluator,
 )
@@ -97,6 +98,11 @@ class SymmetricZ2Control(SemionKillingLoopControl):
     def r_matrix(self, left, right, _output, _positive):
         value = -1.0 if self.fermionic and left == right == 1 else 1.0
         return ((value,),)
+
+
+class NonPointedDimensionControl(SymmetricZ2Control):
+    def dimension(self, label):
+        return 1.0 if label == 0 else 2.0**0.5
 
 
 def hopf_special_disk_control():
@@ -196,6 +202,77 @@ def test_direct_projector_accepts_degenerate_premodular_z2(fermionic):
             projected_ir=ir,
             total_framings={"red": 0, "A": 0},
         )
+
+
+@pytest.mark.parametrize("fermionic", [False, True])
+def test_pointed_graph_projector_matches_horizontal_direct_backend(fermionic):
+    forms, component_by_piece, ir, graph = hopf_special_disk_control()
+    category = SymmetricZ2Control(fermionic=fermionic)
+    horizontal = DirectVacuumProjectorEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    graph_level = PointedVacuumProjectorEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    for label in category.labels:
+        expected = horizontal.fixed_label_value(graph, {"A": label})[0]
+        observed, stats = graph_level.fixed_label_value(graph, {"A": label})
+        assert abs(observed - expected) < 1e-12
+        assert stats["projector_rank"] == int(label == category.unit)
+
+
+def test_pointed_graph_backend_fails_closed_on_nonpointed_category():
+    forms, component_by_piece, ir, _graph = hopf_special_disk_control()
+    with pytest.raises(RibbonGraphContractError, match="dimension to be one"):
+        PointedVacuumProjectorEvaluator(
+            NonPointedDimensionControl(fermionic=False),
+            source_forms=forms,
+            component_by_piece=component_by_piece,
+            projected_ir=ir,
+            total_framings={"red": 0, "A": 0},
+        )
+
+
+@pytest.mark.parametrize("fermionic", [False, True])
+def test_pointed_premodular_backend_evaluates_figure21_coupon(fermionic):
+    builder = build_figure21_right()
+    ir = compile_projected_morphism(
+        builder.forms,
+        component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+        special_components=("red",),
+        component_order=FIGURE21_COMPONENT_ORDER,
+    )
+    graph = build_vacuum_coupon_graph(builder.forms, ir)
+    category = SymmetricZ2Control(fermionic=fermionic)
+    evaluator = PointedVacuumProjectorEvaluator(
+        category,
+        source_forms=builder.forms,
+        component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+        projected_ir=ir,
+        total_framings=FIGURE21_FRAMING_LABELS,
+    )
+    labels = {component: 0 for component in FIGURE21_COMPONENT_ORDER if component != "red"}
+    all_unit, all_unit_stats = evaluator.fixed_label_value(graph, labels)
+    assert abs(all_unit - 1.0) < 1e-12
+    assert all_unit_stats["projector_rank"] == 1
+
+    labels["purple"] = 1
+    odd_puncture_word, odd_stats = evaluator.fixed_label_value(graph, labels)
+    assert abs(odd_puncture_word) < 1e-12
+    assert odd_stats["status"] == "PRUNED_NO_VACUUM"
+
+    labels["black"] = 1
+    surviving, surviving_stats = evaluator.fixed_label_value(graph, labels)
+    assert abs(abs(surviving) - 1.0) < 1e-12
+    assert surviving_stats["projector_rank"] == 1
 
 
 def test_direct_projector_fails_closed_on_figure21_nonhorizontal_coupon():
