@@ -18,6 +18,7 @@ from typing import Any, Iterable
 DISK_CERTIFICATE_SCHEMA = "twisted-yetter.special-disk-certificate.v1"
 PROJECTED_MORPHISM_SCHEMA = "twisted-yetter.projected-morphism-ir.v1"
 COUPON_GRAPH_SCHEMA = "twisted-yetter.ribbon-morphism-coupon-graph.v1"
+RIBBON_GRAPH_IR_V2_SCHEMA = "twisted-yetter.ribbon-graph-ir.v2"
 
 
 def stable_json_hash(value: Any) -> str:
@@ -1056,6 +1057,375 @@ def build_vacuum_coupon_graph(
         "evaluation_status": "NOT_EVALUATED_REQUIRES_COUPON_AWARE_BACKEND",
     }
     graph["graph_hash"] = stable_json_hash(graph)
+    return graph
+
+
+def _v2_coupon_endpoint(token: dict[str, Any], direction: str) -> dict[str, str]:
+    if token["kind"] == "coupon-cut":
+        prefix = "output" if direction == "from" else "input"
+        return {
+            "node_id": token["coupon_node_id"],
+            "port": f"{prefix}:{token['cut_id']}",
+        }
+    port = token["outgoing_port"] if direction == "from" else token["incoming_port"]
+    return {"node_id": token["node_id"], "port": port}
+
+
+def validate_ribbon_graph_ir_v2(graph: dict[str, Any]) -> dict[str, Any]:
+    """Validate the complete rotation system and directed port incidence."""
+
+    if graph.get("schema") != RIBBON_GRAPH_IR_V2_SCHEMA:
+        raise ValueError("expected RibbonGraphIRV2")
+    nodes = graph.get("nodes")
+    edges = graph.get("edges")
+    if not isinstance(nodes, list) or not isinstance(edges, list):
+        raise ValueError("RibbonGraphIRV2 nodes and edges must be lists")
+    node_by_id = {node["node_id"]: node for node in nodes}
+    if len(node_by_id) != len(nodes):
+        raise ValueError("RibbonGraphIRV2 node ids are not unique")
+    incoming: dict[tuple[str, str], int] = defaultdict(int)
+    outgoing: dict[tuple[str, str], int] = defaultdict(int)
+    edge_ids = set()
+    for edge in edges:
+        edge_id = edge["edge_id"]
+        if edge_id in edge_ids:
+            raise ValueError(f"duplicate RibbonGraphIRV2 edge id: {edge_id}")
+        edge_ids.add(edge_id)
+        source = (edge["from"]["node_id"], edge["from"]["port"])
+        target = (edge["to"]["node_id"], edge["to"]["port"])
+        if source[0] not in node_by_id or target[0] not in node_by_id:
+            raise ValueError(f"edge {edge_id} references an unknown node")
+        if source[1] not in node_by_id[source[0]]["ports"]:
+            raise ValueError(f"edge {edge_id} references an unknown source port")
+        if target[1] not in node_by_id[target[0]]["ports"]:
+            raise ValueError(f"edge {edge_id} references an unknown target port")
+        outgoing[source] += 1
+        incoming[target] += 1
+        if edge.get("orientation") != "from-to":
+            raise ValueError(f"edge {edge_id} has no explicit orientation")
+        if not isinstance(edge.get("framing"), int):
+            raise ValueError(f"edge {edge_id} has no integer framing")
+
+    for node in nodes:
+        ports = list(node.get("ports", ()))
+        cyclic_order = list(node.get("cyclic_order", ()))
+        if len(set(ports)) != len(ports) or set(cyclic_order) != set(ports):
+            raise ValueError(f"node {node['node_id']} has an invalid rotation system")
+        variance = node.get("port_variance", {})
+        if set(variance) != set(ports) or any(
+            value not in {"input", "output"} for value in variance.values()
+        ):
+            raise ValueError(f"node {node['node_id']} has invalid port variance")
+        for port in ports:
+            endpoint = (node["node_id"], port)
+            expected_in = int(variance[port] == "input")
+            expected_out = int(variance[port] == "output")
+            if incoming[endpoint] != expected_in or outgoing[endpoint] != expected_out:
+                raise ValueError(
+                    f"node port degree mismatch at {node['node_id']}:{port}"
+                )
+
+    expected_hash = graph.get("graph_hash")
+    if expected_hash is not None:
+        unhashed = {key: value for key, value in graph.items() if key != "graph_hash"}
+        if expected_hash != stable_json_hash(unhashed):
+            raise ValueError("RibbonGraphIRV2 graph hash mismatch")
+    return {
+        "status": "PASS_RIBBON_GRAPH_IR_V2",
+        "node_count": len(nodes),
+        "edge_count": len(edges),
+        "coupon_count": sum(
+            node["kind"] == "vacuum-projector-coupon" for node in nodes
+        ),
+        "graph_hash": expected_hash,
+    }
+
+
+def build_ribbon_graph_ir_v2(
+    source_forms: Iterable[dict[str, Any]], projected_ir: dict[str, Any]
+) -> dict[str, Any]:
+    """Build a category-independent ribbon graph with all special disks.
+
+    All special components are removed simultaneously.  Each certified disk
+    becomes one first-class vacuum-projector coupon.  The same ordinary
+    component may meet any number of coupons.  Intersections between special
+    disks themselves require an explicit disjoint-disk certificate and are
+    therefore rejected by this automatic crossing-free compiler.
+    """
+
+    source_forms = tuple(dict(form) for form in source_forms)
+    certificates = list(projected_ir.get("special_disk_certificates", ()))
+    specials = tuple(
+        certificate["special_component"] for certificate in certificates
+    )
+    if not specials or len(set(specials)) != len(specials):
+        raise ValueError("RibbonGraphIRV2 needs distinct special components")
+    if len(certificates) != projected_ir.get("special_component_count"):
+        raise ValueError("special disk certificate count mismatch")
+
+    component_by_piece = projected_ir["component_by_piece"]
+    strand_component, components, orientation = _component_data(
+        source_forms, component_by_piece
+    )
+    cycles = _component_cycles(components, _successors(source_forms, orientation))
+    special_set = set(specials)
+
+    cuts = []
+    cuts_by_entry: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    coupon_node_ids = {}
+    nodes: dict[str, dict[str, Any]] = {}
+    for certificate in certificates:
+        special = certificate["special_component"]
+        coupon_node_id = f"coupon:vacuum:{special}"
+        coupon_node_ids[special] = coupon_node_id
+        disk_cuts = []
+        for raw_cut in certificate["forced_cuts"]:
+            cut = {**raw_cut, "special_component": special}
+            if cut["component"] in special_set:
+                raise ValueError(
+                    "automatic RibbonGraphIRV2 requires pairwise disjoint special "
+                    f"disk markings; {special!r} is punctured by {cut['component']!r}"
+                )
+            disk_cuts.append(cut)
+            cuts.append(cut)
+            cuts_by_entry[cut["entry_crossing"]].append(cut)
+        input_ports = [f"input:{cut['cut_id']}" for cut in disk_cuts]
+        output_ports = [f"output:{cut['cut_id']}" for cut in disk_cuts]
+        ports = input_ports + output_ports
+        nodes[coupon_node_id] = {
+            "node_id": coupon_node_id,
+            "kind": "vacuum-projector-coupon",
+            "special_component": special,
+            "normalization": "PAIRING_INVERSE_UNIT_CHANNEL_IDEMPOTENT_NO_D_FACTOR",
+            "input_ports": input_ports,
+            "output_ports": output_ports,
+            "ports": ports,
+            "cyclic_order": input_ports + list(reversed(output_ports)),
+            "port_variance": {
+                **{port: "input" for port in input_ports},
+                **{port: "output" for port in output_ports},
+            },
+            "factor_order": [
+                {
+                    "cut_id": cut["cut_id"],
+                    "component": cut["component"],
+                    "variance": cut["factor_variance"],
+                }
+                for cut in disk_cuts
+            ],
+            "fusion_tree": _right_comb_marking(
+                [cut["cut_id"] for cut in disk_cuts]
+            ),
+            "provenance": {
+                "certificate_hash": certificate["certificate_hash"],
+                "input_hash": certificate["input_hash"],
+            },
+        }
+
+    crossing_by_form = {
+        crossing["form_index"]: crossing for crossing in projected_ir["crossings"]
+    }
+    cap_by_strand: dict[str, tuple[int, dict[str, Any]]] = {}
+    cup_by_piece: dict[str, tuple[int, dict[str, Any]]] = {}
+    kink_by_strand: dict[str, list[tuple[int, dict[str, Any]]]] = defaultdict(list)
+    for form_index, form in enumerate(source_forms):
+        if form["kind"] == "cup":
+            cup_by_piece[form["piece"]] = (form_index, form)
+        elif form["kind"] == "cap":
+            for strand in form["strands"]:
+                cap_by_strand[strand] = (form_index, form)
+        elif form["kind"] == "kink":
+            kink_by_strand[form["strand"]].append((form_index, form))
+
+    ordinary_components = [
+        component
+        for component in projected_ir["component_order"]
+        if component not in special_set
+    ]
+    component_sequences: dict[str, list[dict[str, Any]]] = {}
+    anchored_cuts: set[tuple[str, str]] = set()
+    for component in ordinary_components:
+        sequence = []
+        for strand in cycles[component]:
+            occurrences: list[tuple[int, str, Any]] = []
+            for form_index, crossing in crossing_by_form.items():
+                if crossing["over"] == strand:
+                    occurrences.append((form_index, "cross", (crossing, "over")))
+                elif crossing["under"] == strand:
+                    occurrences.append((form_index, "cross", (crossing, "under")))
+            occurrences.extend(
+                (form_index, "kink", form)
+                for form_index, form in kink_by_strand.get(strand, ())
+            )
+            occurrences.sort(key=lambda item: item[0], reverse=orientation[strand] < 0)
+
+            for form_index, kind, payload in occurrences:
+                if kind == "cross":
+                    crossing, branch = payload
+                    pair = {
+                        crossing["over_component"], crossing["under_component"]
+                    }
+                    if not (pair & special_set):
+                        node_id = f"cross:{crossing['crossing_id']}"
+                        ports = ["over-in", "under-in", "over-out", "under-out"]
+                        nodes.setdefault(
+                            node_id,
+                            {
+                                "node_id": node_id,
+                                "kind": "crossing",
+                                "crossing_id": crossing["crossing_id"],
+                                "source_form_index": form_index,
+                                "over_component": crossing["over_component"],
+                                "under_component": crossing["under_component"],
+                                "sign": crossing["sign"],
+                                "ports": ports,
+                                "cyclic_order": ports,
+                                "port_variance": {
+                                    "over-in": "input", "under-in": "input",
+                                    "over-out": "output", "under-out": "output",
+                                },
+                                "provenance": {"source_form_index": form_index},
+                            },
+                        )
+                        sequence.append(
+                            {
+                                "token_id": f"{node_id}:{branch}",
+                                "kind": "event",
+                                "node_id": node_id,
+                                "incoming_port": f"{branch}-in",
+                                "outgoing_port": f"{branch}-out",
+                                "strand": strand,
+                            }
+                        )
+                    for cut in sorted(
+                        cuts_by_entry.get(crossing["crossing_id"], ()),
+                        key=lambda item: (item["special_component"], item["cut_id"]),
+                    ):
+                        if cut["component"] != component or cut["entry_strand"] != strand:
+                            continue
+                        coupon_node_id = coupon_node_ids[cut["special_component"]]
+                        sequence.append(
+                            {
+                                "token_id": f"{cut['special_component']}:{cut['cut_id']}",
+                                "kind": "coupon-cut",
+                                "coupon_node_id": coupon_node_id,
+                                "cut_id": cut["cut_id"],
+                                "strand": strand,
+                                "anchor_crossing": crossing["crossing_id"],
+                            }
+                        )
+                        anchored_cuts.add((cut["special_component"], cut["cut_id"]))
+                else:
+                    form = payload
+                    node_id = f"kink:f{form_index:04d}:{strand}"
+                    nodes[node_id] = {
+                        "node_id": node_id,
+                        "kind": "kink",
+                        "source_form_index": form_index,
+                        "strand": strand,
+                        "sign": form["sign"],
+                        "times": int(form.get("times", 1)),
+                        "ports": ["in", "out"],
+                        "cyclic_order": ["in", "out"],
+                        "port_variance": {"in": "input", "out": "output"},
+                        "provenance": {"source_form_index": form_index},
+                    }
+                    sequence.append(
+                        {
+                            "token_id": node_id,
+                            "kind": "event",
+                            "node_id": node_id,
+                            "incoming_port": "in",
+                            "outgoing_port": "out",
+                            "strand": strand,
+                        }
+                    )
+
+            if orientation[strand] > 0:
+                form_index, turn_form = cap_by_strand[strand]
+                turn_kind = "cap"
+            else:
+                form_index, turn_form = cup_by_piece[piece_of(strand)]
+                turn_kind = "cup"
+            node_id = f"turn:{turn_kind}:f{form_index:04d}:{component}"
+            if node_id in nodes:
+                raise ValueError(f"turn event was visited twice: {node_id}")
+            nodes[node_id] = {
+                "node_id": node_id,
+                "kind": turn_kind,
+                "source_form_index": form_index,
+                "component": component,
+                "source_form": turn_form,
+                "ports": ["in", "out"],
+                "cyclic_order": ["in", "out"],
+                "port_variance": {"in": "input", "out": "output"},
+                "provenance": {"source_form_index": form_index},
+            }
+            sequence.append(
+                {
+                    "token_id": node_id,
+                    "kind": "event",
+                    "node_id": node_id,
+                    "incoming_port": "in",
+                    "outgoing_port": "out",
+                    "strand": strand,
+                }
+            )
+        if not sequence:
+            raise ValueError(f"ordinary component {component!r} has no graph events")
+        component_sequences[component] = sequence
+
+    expected_cuts = {
+        (cut["special_component"], cut["cut_id"]) for cut in cuts
+    }
+    if anchored_cuts != expected_cuts:
+        raise ValueError(
+            "not every multi-disk cut was anchored exactly once: "
+            f"missing={sorted(expected_cuts - anchored_cuts)!r}, "
+            f"extra={sorted(anchored_cuts - expected_cuts)!r}"
+        )
+
+    edges = []
+    for component, sequence in component_sequences.items():
+        for index, target_token in enumerate(sequence):
+            source_token = sequence[index - 1]
+            edges.append(
+                {
+                    "edge_id": f"edge:{component}:{index:04d}",
+                    "component": component,
+                    "from": _v2_coupon_endpoint(source_token, "from"),
+                    "to": _v2_coupon_endpoint(target_token, "to"),
+                    "orientation": "from-to",
+                    "framing": 0,
+                    "provenance": {
+                        "source_token": source_token["token_id"],
+                        "target_token": target_token["token_id"],
+                    },
+                }
+            )
+
+    graph = {
+        "schema": RIBBON_GRAPH_IR_V2_SCHEMA,
+        "status": "PASS_RIBBON_GRAPH_IR_V2_NOT_EVALUATED",
+        "source_projected_ir_hash": stable_json_hash(projected_ir),
+        "special_components": list(specials),
+        "coupon_node_ids": coupon_node_ids,
+        "ordinary_components": ordinary_components,
+        "node_count": len(nodes),
+        "edge_count": len(edges),
+        "nodes": list(nodes.values()),
+        "edges": edges,
+        "ordinary_component_sequences": component_sequences,
+        "identity_recovery": {
+            "status": "PASS_IDENTITY_COUPONS_RECOVER_ORDINARY_COMPONENT_CYCLES",
+            "component_cycle_count": {
+                component: 1 for component in ordinary_components
+            },
+        },
+        "evaluation_status": "NOT_EVALUATED_REQUIRES_GENERIC_RIBBON_CONTRACTOR",
+    }
+    graph["graph_hash"] = stable_json_hash(graph)
+    validate_ribbon_graph_ir_v2(graph)
     return graph
 
 

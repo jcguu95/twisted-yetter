@@ -29,10 +29,12 @@ class Z2FusionRules:
         return int((left ^ right) == output)
 from experiments.scripts.morse_dsl import MorseBuilder
 from experiments.scripts.special_dotted_morphism import (
+    build_ribbon_graph_ir_v2,
     build_vacuum_coupon_graph,
     compile_projected_morphism,
     preflight_horizontal_disk_corridor,
     replay_forms,
+    validate_ribbon_graph_ir_v2,
 )
 
 
@@ -184,6 +186,47 @@ def test_multiple_special_components_parse_but_numeric_support_fails_closed():
     )
 
 
+def test_ribbon_graph_v2_builds_multiple_independent_special_coupons():
+    m = MorseBuilder()
+    m.cup("red1", at="far-left")
+    m.cup("A1", between=("red1.left", "red1.right"))
+    m.cup("blue1", at="far-right")
+    m.cap("blue1")
+    m.cap("A1")
+    m.cap("red1")
+    component_by_piece = {"red1": "red", "blue1": "blue", "A1": "A"}
+    ir = compile_projected_morphism(
+        m.forms,
+        component_by_piece=component_by_piece,
+        special_components=("red", "blue"),
+    )
+    graph = build_ribbon_graph_ir_v2(m.forms, ir)
+    report = validate_ribbon_graph_ir_v2(graph)
+    assert report["coupon_count"] == 2
+    assert graph["special_components"] == ["red", "blue"]
+    assert graph["ordinary_components"] == ["A"]
+    assert set(graph["coupon_node_ids"]) == {"red", "blue"}
+    assert all(
+        edge["orientation"] == "from-to" and edge["framing"] == 0
+        for edge in graph["edges"]
+    )
+
+
+def test_ribbon_graph_v2_hash_covers_rotation_system():
+    forms, component_by_piece = one_puncture_input()
+    ir = compile_projected_morphism(
+        forms,
+        component_by_piece=component_by_piece,
+        special_components=("red",),
+    )
+    graph = build_ribbon_graph_ir_v2(forms, ir)
+    graph["nodes"][0]["cyclic_order"] = list(
+        reversed(graph["nodes"][0]["cyclic_order"])
+    )
+    with pytest.raises(ValueError, match="graph hash mismatch"):
+        validate_ribbon_graph_ir_v2(graph)
+
+
 def test_figure21_disk_certificate_regression():
     builder = build_figure21_right()
     ir = compile_projected_morphism(
@@ -237,6 +280,13 @@ def test_figure21_disk_certificate_regression():
     ) - {"red"}
     repeated = build_vacuum_coupon_graph(builder.forms, ir)
     assert repeated["graph_hash"] == graph["graph_hash"]
+
+    graph_v2 = build_ribbon_graph_ir_v2(builder.forms, ir)
+    assert graph_v2["special_components"] == ["red"]
+    assert validate_ribbon_graph_ir_v2(graph_v2)["coupon_count"] == 1
+    assert graph_v2["graph_hash"] == build_ribbon_graph_ir_v2(
+        builder.forms, ir
+    )["graph_hash"]
 
     coupon = next(
         node
