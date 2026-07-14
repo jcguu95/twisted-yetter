@@ -16,6 +16,7 @@ from experiments.sage.ribbon_graph_evaluator import (
     PointedVacuumProjectorEvaluator,
     RibbonGraphContractError,
     RibbonGraphEvaluator,
+    build_vacuum_projector_evaluator,
 )
 from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
     COMPONENT_BY_PIECE as FIGURE21_COMPONENT_BY_PIECE,
@@ -283,6 +284,46 @@ def test_direct_projector_fails_closed_on_figure21_nonhorizontal_coupon():
             source_forms=builder.forms,
             component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
             projected_ir=ir,
+            total_framings=FIGURE21_FRAMING_LABELS,
+        )
+
+
+def test_backend_selector_prefers_direct_semantics_and_fails_closed():
+    forms, component_by_piece, ir, _graph = hopf_special_disk_control()
+    direct = build_vacuum_projector_evaluator(
+        SymmetricZ2Control(fermionic=False),
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    assert isinstance(direct, DirectVacuumProjectorEvaluator)
+
+    builder = build_figure21_right()
+    figure21_ir = compile_projected_morphism(
+        builder.forms,
+        component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+        special_components=("red",),
+        component_order=FIGURE21_COMPONENT_ORDER,
+    )
+    pointed = build_vacuum_projector_evaluator(
+        SymmetricZ2Control(fermionic=True),
+        source_forms=builder.forms,
+        component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+        projected_ir=figure21_ir,
+        total_framings=FIGURE21_FRAMING_LABELS,
+    )
+    assert isinstance(pointed, PointedVacuumProjectorEvaluator)
+
+    with pytest.raises(
+        RibbonGraphContractError,
+        match="general nonpointed nonhorizontal premodular contraction",
+    ):
+        build_vacuum_projector_evaluator(
+            NonPointedDimensionControl(fermionic=False),
+            source_forms=builder.forms,
+            component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+            projected_ir=figure21_ir,
             total_framings=FIGURE21_FRAMING_LABELS,
         )
 

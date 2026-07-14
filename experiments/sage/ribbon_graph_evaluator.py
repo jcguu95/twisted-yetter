@@ -21,6 +21,7 @@ from experiments.sage.morse_pivotal_contract import require_pivotal_capabilities
 from experiments.scripts.special_dotted_morphism import (
     linearize_horizontal_disk_projector,
     piece_of,
+    preflight_horizontal_disk_corridor,
     stable_json_hash,
 )
 
@@ -657,3 +658,60 @@ class PointedVacuumProjectorEvaluator:
             "framing_phase": framing_phase,
             "morse_stats": morse_stats,
         }
+
+
+def _has_unitary_pointed_fusion_rules(category: Any) -> bool:
+    try:
+        labels = tuple(category.labels)
+        if not labels or category.unit not in labels:
+            return False
+        for label in labels:
+            dimension = complex(category.dimension(label))
+            if abs(dimension.imag) > 1e-10 or abs(dimension.real - 1.0) > 1e-10:
+                return False
+        return all(
+            len(outputs := tuple(category.fusion_outputs(left, right))) == 1
+            and int(outputs[0][1]) == 1
+            for left in labels
+            for right in labels
+        )
+    except (AttributeError, TypeError, ValueError):
+        return False
+
+
+def build_vacuum_projector_evaluator(
+    category: Any,
+    *,
+    source_forms: Iterable[dict[str, Any]],
+    component_by_piece: dict[str, str],
+    projected_ir: dict[str, Any],
+    total_framings: dict[str, int] | None = None,
+) -> DirectVacuumProjectorEvaluator | PointedVacuumProjectorEvaluator | RibbonGraphEvaluator:
+    """Choose the strongest certified special-disk backend.
+
+    Direct projector semantics always take precedence.  The modular
+    killing-loop identity is only used when direct lowering is unavailable,
+    the category is nonpointed, and its category id is explicitly certified.
+    """
+
+    forms = tuple(dict(form) for form in source_forms)
+    preflight = preflight_horizontal_disk_corridor(forms, projected_ir)
+    common = {
+        "source_forms": forms,
+        "component_by_piece": component_by_piece,
+        "projected_ir": projected_ir,
+        "total_framings": total_framings,
+    }
+    if preflight["status"] == "PASS_COMMON_HORIZONTAL_PROJECTOR_SLICE":
+        return DirectVacuumProjectorEvaluator(category, **common)
+    if _has_unitary_pointed_fusion_rules(category):
+        return PointedVacuumProjectorEvaluator(category, **common)
+    category_id = getattr(category, "category_id", None)
+    if category_id in SUPPORTED_KILLING_LOOP_CATEGORY_IDS:
+        return RibbonGraphEvaluator(category, **common)
+    raise RibbonGraphContractError(
+        "no certified vacuum-projector backend: horizontal direct lowering "
+        f"failed with {preflight['status']!r}; category {category_id!r} is "
+        "neither unitary pointed nor certified for the modular killing loop; "
+        "general nonpointed nonhorizontal premodular contraction is not implemented"
+    )
