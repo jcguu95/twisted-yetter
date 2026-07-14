@@ -8,6 +8,9 @@ import pytest
 from experiments.sage.morse_pivotal_contract import (
     test_pivotal_profile as make_test_pivotal_profile,
 )
+from experiments.sage.pointed_premodular_categories import (
+    SymmetricZ2PremodularCategory,
+)
 from experiments.sage.ribbon_graph_evaluator import (
     DirectVacuumProjectorEvaluator,
     PointedVacuumProjectorEvaluator,
@@ -82,22 +85,8 @@ class SemionKillingLoopControl:
         return {"f": 1.0, "r": 1.0}
 
 
-class SymmetricZ2Control(SemionKillingLoopControl):
-    """Pointed symmetric categories Rep(Z2) and sVec."""
-
-    def __init__(self, *, fermionic):
-        self.fermionic = bool(fermionic)
-        self.category_id = "svec" if fermionic else "rep-z2"
-        self.pivotal_profile = make_test_pivotal_profile(
-            category_id=self.category_id
-        )
-
-    def twist(self, label):
-        return -1.0 if self.fermionic and label == 1 else 1.0
-
-    def r_matrix(self, left, right, _output, _positive):
-        value = -1.0 if self.fermionic and left == right == 1 else 1.0
-        return ((value,),)
+class SymmetricZ2Control(SymmetricZ2PremodularCategory):
+    pass
 
 
 class NonPointedDimensionControl(SymmetricZ2Control):
