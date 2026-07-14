@@ -9,8 +9,15 @@ from experiments.sage.morse_pivotal_contract import (
     test_pivotal_profile as make_test_pivotal_profile,
 )
 from experiments.sage.ribbon_graph_evaluator import (
+    DirectVacuumProjectorEvaluator,
     RibbonGraphContractError,
     RibbonGraphEvaluator,
+)
+from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
+    COMPONENT_BY_PIECE as FIGURE21_COMPONENT_BY_PIECE,
+    COMPONENT_ORDER as FIGURE21_COMPONENT_ORDER,
+    FRAMING_LABELS as FIGURE21_FRAMING_LABELS,
+    build_figure21_right,
 )
 from experiments.scripts.special_dotted_morphism import (
     build_vacuum_coupon_graph,
@@ -74,6 +81,24 @@ class SemionKillingLoopControl:
         return {"f": 1.0, "r": 1.0}
 
 
+class SymmetricZ2Control(SemionKillingLoopControl):
+    """Pointed symmetric categories Rep(Z2) and sVec."""
+
+    def __init__(self, *, fermionic):
+        self.fermionic = bool(fermionic)
+        self.category_id = "svec" if fermionic else "rep-z2"
+        self.pivotal_profile = make_test_pivotal_profile(
+            category_id=self.category_id
+        )
+
+    def twist(self, label):
+        return -1.0 if self.fermionic and label == 1 else 1.0
+
+    def r_matrix(self, left, right, _output, _positive):
+        value = -1.0 if self.fermionic and left == right == 1 else 1.0
+        return ((value,),)
+
+
 def hopf_special_disk_control():
     forms = [
         {"kind": "cup", "piece": "A", "at": "far-left"},
@@ -118,6 +143,82 @@ def test_modular_killing_loop_is_the_vacuum_projector():
     assert stats["normalization"] == (
         "OMEGA_SPECIAL_LOOP_DIVIDED_BY_SUM_D_SQUARED"
     )
+
+
+def test_direct_projector_matches_modular_killing_loop_control():
+    forms, component_by_piece, ir, graph = hopf_special_disk_control()
+    category = SemionKillingLoopControl()
+    killing_loop = RibbonGraphEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    direct = DirectVacuumProjectorEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    for label in category.labels:
+        expected = killing_loop.fixed_label_value(graph, {"A": label})[0]
+        observed, stats = direct.fixed_label_value(graph, {"A": label})
+        assert abs(observed - expected) < 1e-12
+        assert stats["backend"] == "DIRECT_HORIZONTAL_VACUUM_PROJECTOR"
+        assert stats["normalization"] == (
+            "IDEMPOTENT_UNIT_CHANNEL_NO_GLOBAL_DIMENSION_FACTOR"
+        )
+
+
+@pytest.mark.parametrize("fermionic", [False, True])
+def test_direct_projector_accepts_degenerate_premodular_z2(fermionic):
+    forms, component_by_piece, ir, graph = hopf_special_disk_control()
+    category = SymmetricZ2Control(fermionic=fermionic)
+    direct = DirectVacuumProjectorEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    vacuum, stats = direct.fixed_label_value(graph, {"A": 0})
+    nonvacuum, _ = direct.fixed_label_value(graph, {"A": 1})
+    assert abs(vacuum - 1.0) < 1e-12
+    assert abs(nonvacuum) < 1e-12
+    assert stats["category_id"] in {"rep-z2", "svec"}
+    with pytest.raises(RibbonGraphContractError, match="not certified"):
+        RibbonGraphEvaluator(
+            category,
+            source_forms=forms,
+            component_by_piece=component_by_piece,
+            projected_ir=ir,
+            total_framings={"red": 0, "A": 0},
+        )
+
+
+def test_direct_projector_fails_closed_on_figure21_nonhorizontal_coupon():
+    builder = build_figure21_right()
+    ir = compile_projected_morphism(
+        builder.forms,
+        component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+        special_components=("red",),
+        component_order=FIGURE21_COMPONENT_ORDER,
+    )
+    graph = build_vacuum_coupon_graph(builder.forms, ir)
+    assert graph["coupon_input_count"] == 29
+    with pytest.raises(
+        RibbonGraphContractError,
+        match="UNSUPPORTED_NONHORIZONTAL_PROJECTOR_CORRIDOR",
+    ):
+        DirectVacuumProjectorEvaluator(
+            SymmetricZ2Control(fermionic=False),
+            source_forms=builder.forms,
+            component_by_piece=FIGURE21_COMPONENT_BY_PIECE,
+            projected_ir=ir,
+            total_framings=FIGURE21_FRAMING_LABELS,
+        )
 
 
 def test_canceling_dotted_one_two_handle_pair_has_value_one():

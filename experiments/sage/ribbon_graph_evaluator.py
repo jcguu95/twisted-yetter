@@ -14,7 +14,11 @@ from typing import Any, Iterable
 
 from experiments.sage.morse_fusion_evaluator import MorseEvaluator, analyze_topology
 from experiments.sage.morse_pivotal_contract import require_pivotal_capabilities
-from experiments.scripts.special_dotted_morphism import piece_of, stable_json_hash
+from experiments.scripts.special_dotted_morphism import (
+    linearize_horizontal_disk_projector,
+    piece_of,
+    stable_json_hash,
+)
 
 
 SUPPORTED_KILLING_LOOP_CATEGORY_IDS = frozenset(
@@ -259,4 +263,184 @@ class RibbonGraphEvaluator:
             "visible_self_writhe": self.visible_self_writhe,
             "framing_corrections": self.framing_corrections,
             "special_label_contributions": contributions,
+        }
+
+
+class DirectVacuumProjectorEvaluator:
+    """Evaluate a certified horizontal special disk without modularity.
+
+    This backend removes the special component and inserts the idempotent
+    unit-channel projector directly in the ordinary Morse diagram.  It only
+    accepts disks whose punctures admit the common horizontal slice certified
+    by ``linearize_horizontal_disk_projector``.  General graph-level coupons
+    remain unsupported and fail closed.
+    """
+
+    def __init__(
+        self,
+        category: Any,
+        *,
+        source_forms: Iterable[dict[str, Any]],
+        component_by_piece: dict[str, str],
+        projected_ir: dict[str, Any],
+        total_framings: dict[str, int] | None = None,
+    ):
+        self.category = category
+        self.source_forms = tuple(dict(form) for form in source_forms)
+        self.component_by_piece = dict(component_by_piece)
+        self.projected_ir = projected_ir
+        require_pivotal_capabilities(
+            category,
+            {"rigid_bends", "ribbon_twist", "vacuum_projector"},
+        )
+        if projected_ir.get("special_component_count") != 1:
+            raise RibbonGraphContractError(
+                "direct projector backend requires exactly one special component"
+            )
+        self.special = projected_ir["special_disk_certificates"][0][
+            "special_component"
+        ]
+        if projected_ir.get("component_by_piece") != self.component_by_piece:
+            raise RibbonGraphContractError(
+                "projected IR component map does not match source witness"
+            )
+        semantic_components = set(self.component_by_piece.values())
+        if set(projected_ir.get("component_order", ())) != semantic_components:
+            raise RibbonGraphContractError(
+                "projected IR component order does not match source witness"
+            )
+        if total_framings is None:
+            raise RibbonGraphContractError(
+                "total framings must be supplied explicitly; blackboard writhe "
+                "is not silently promoted to the framed-link contract"
+            )
+        missing_framings = semantic_components - set(total_framings)
+        extra_framings = set(total_framings) - semantic_components
+        if missing_framings or extra_framings:
+            raise RibbonGraphContractError(
+                "total framing components mismatch: "
+                f"missing={sorted(missing_framings)!r}, "
+                f"extra={sorted(extra_framings)!r}"
+            )
+        self.total_framings = {
+            component: int(total_framings[component])
+            for component in semantic_components
+        }
+        self.visible_self_writhe = _visible_self_writhe(
+            self.source_forms, self.component_by_piece, projected_ir
+        )
+        self.framing_corrections = {
+            component: self.total_framings[component]
+            - self.visible_self_writhe.get(component, 0)
+            for component in semantic_components
+        }
+        if self.framing_corrections[self.special] != 0:
+            raise RibbonGraphContractError(
+                "special dotted component must have zero total framing and "
+                "zero visible self-writhe"
+            )
+
+        self.linearization = linearize_horizontal_disk_projector(
+            self.source_forms, projected_ir
+        )
+        if self.linearization["status"] != (
+            "PASS_HORIZONTAL_DISK_PROJECTOR_LINEARIZATION"
+        ):
+            preflight = self.linearization.get("preflight", {})
+            raise RibbonGraphContractError(
+                "direct projector cannot lower this coupon: "
+                f"{self.linearization['status']}: {preflight.get('reason', '')}"
+            )
+        self.compiled_forms = tuple(self.linearization["compiled_forms"])
+        ordinary_piece_map = {
+            piece: component
+            for piece, component in self.component_by_piece.items()
+            if component != self.special
+        }
+        self.semantic_to_topology = _semantic_topology_components(
+            self.compiled_forms, ordinary_piece_map
+        )
+        self.ordinary_components = tuple(
+            component
+            for component in projected_ir["component_order"]
+            if component != self.special
+        )
+        if set(self.semantic_to_topology) != set(self.ordinary_components):
+            raise RibbonGraphContractError(
+                "compiled direct-projector diagram does not realize every "
+                "ordinary component"
+            )
+        self.morse = MorseEvaluator(category)
+
+    def _validate_graph(self, graph: dict[str, Any]) -> dict[str, Any]:
+        if graph.get("source_projected_ir_hash") != stable_json_hash(
+            self.projected_ir
+        ):
+            raise RibbonGraphContractError(
+                "coupon graph was not built from the supplied projected IR"
+            )
+        if graph.get("special_component") != self.special:
+            raise RibbonGraphContractError("coupon graph special component mismatch")
+        coupons = [
+            node
+            for node in graph.get("nodes", ())
+            if node.get("kind") == "vacuum-projector-coupon"
+        ]
+        if len(coupons) != 1:
+            raise RibbonGraphContractError(
+                "coupon graph must contain exactly one vacuum projector"
+            )
+        coupon = coupons[0]
+        if coupon.get("normalization") != (
+            "IDEMPOTENT_UNIT_CHANNEL_NO_GLOBAL_DIMENSION_FACTOR"
+        ):
+            raise RibbonGraphContractError("unsupported coupon normalization")
+        return coupon
+
+    def fixed_label_value(
+        self,
+        graph: dict[str, Any],
+        component_labels: dict[str, Any],
+    ) -> tuple[complex, dict[str, Any]]:
+        """Return the scalar from a direct unit-channel projector."""
+
+        coupon = self._validate_graph(graph)
+        missing = set(self.ordinary_components) - set(component_labels)
+        extra = set(component_labels) - set(self.ordinary_components)
+        if missing or extra:
+            raise RibbonGraphContractError(
+                "ordinary component labels mismatch: "
+                f"missing={sorted(missing)!r}, extra={sorted(extra)!r}"
+            )
+        topology_labels = {
+            self.semantic_to_topology[component]: label
+            for component, label in component_labels.items()
+        }
+        value, morse_stats = self.morse.fixed_label_value(
+            self.compiled_forms, topology_labels
+        )
+        framing_phase = 1.0 + 0.0j
+        for component, label in component_labels.items():
+            framing_phase *= complex(self.category.twist(label)) ** (
+                self.framing_corrections[component]
+            )
+        value *= framing_phase
+        projector_plans = [
+            plan
+            for plan in morse_stats.get("plans", ())
+            if plan.get("kind") == "vacuum-projector"
+        ]
+        return value, {
+            "backend": "DIRECT_HORIZONTAL_VACUUM_PROJECTOR",
+            "category_id": getattr(self.category, "category_id", None),
+            "special_component": self.special,
+            "coupon_factor_count": len(coupon.get("factor_order", ())),
+            "normalization": "IDEMPOTENT_UNIT_CHANNEL_NO_GLOBAL_DIMENSION_FACTOR",
+            "total_framings": self.total_framings,
+            "visible_self_writhe": self.visible_self_writhe,
+            "framing_corrections": self.framing_corrections,
+            "framing_phase": framing_phase,
+            "linearization_status": self.linearization["status"],
+            "projector_plans": projector_plans,
+            "morse_stats": morse_stats,
         }
