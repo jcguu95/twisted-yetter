@@ -1,0 +1,200 @@
+"""Coupon-aware ribbon-graph evaluation through a modular killing loop.
+
+For a single crossing-free special disk in a modular category, the vacuum
+projector is represented by the original special loop colored by Omega and
+divided by ``sum_i d_i^2``.  This backend keeps the graph/IR certificates as
+the public input and uses the source Morse diagram only as a checked witness
+for contracting that equivalent ribbon graph.
+"""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from typing import Any, Iterable
+
+from experiments.sage.morse_fusion_evaluator import MorseEvaluator, analyze_topology
+from experiments.sage.morse_pivotal_contract import require_pivotal_capabilities
+from experiments.scripts.special_dotted_morphism import piece_of, stable_json_hash
+
+
+SUPPORTED_KILLING_LOOP_CATEGORY_IDS = frozenset(
+    {"su2-k2", "su2-k3", "su2-k4", "su2-k5", "su2-k6", "su2-k8"}
+)
+
+
+class RibbonGraphContractError(ValueError):
+    """Raised when a graph cannot be contracted by the certified backend."""
+
+
+def _semantic_topology_components(
+    forms: tuple[dict[str, Any], ...], component_by_piece: dict[str, str]
+) -> dict[str, str]:
+    topology = analyze_topology(forms)
+    semantic_by_topology: dict[str, set[str]] = defaultdict(set)
+    for strand, topology_component in topology.component_by_strand.items():
+        semantic_by_topology[topology_component].add(
+            component_by_piece[piece_of(strand)]
+        )
+    ambiguous = {
+        component: sorted(names)
+        for component, names in semantic_by_topology.items()
+        if len(names) != 1
+    }
+    if ambiguous:
+        raise RibbonGraphContractError(
+            f"topological components mix semantic labels: {ambiguous!r}"
+        )
+    return {
+        next(iter(names)): topology_component
+        for topology_component, names in semantic_by_topology.items()
+    }
+
+
+class RibbonGraphEvaluator:
+    """Evaluate one-special-component coupon graphs in certified SU(2)_k data.
+
+    The category-independent coupon graph remains the semantic input.  The
+    checked source Morse witness realizes the same projector by the modular
+    killing-loop identity, so no new crossings or 3D routing are invented.
+    """
+
+    def __init__(
+        self,
+        category: Any,
+        *,
+        source_forms: Iterable[dict[str, Any]],
+        component_by_piece: dict[str, str],
+        projected_ir: dict[str, Any],
+    ):
+        self.category = category
+        self.source_forms = tuple(dict(form) for form in source_forms)
+        self.component_by_piece = dict(component_by_piece)
+        self.projected_ir = projected_ir
+        category_id = getattr(category, "category_id", None)
+        if category_id not in SUPPORTED_KILLING_LOOP_CATEGORY_IDS:
+            raise RibbonGraphContractError(
+                "modular killing-loop contraction is not certified for "
+                f"category {category_id!r}"
+            )
+        require_pivotal_capabilities(
+            category,
+            {"rigid_bends", "ribbon_twist", "vacuum_projector"},
+        )
+        if projected_ir.get("special_component_count") != 1:
+            raise RibbonGraphContractError(
+                "killing-loop backend requires exactly one special component"
+            )
+        self.special = projected_ir["special_disk_certificates"][0][
+            "special_component"
+        ]
+        if projected_ir.get("component_by_piece") != self.component_by_piece:
+            raise RibbonGraphContractError(
+                "projected IR component map does not match source witness"
+            )
+        semantic_components = set(self.component_by_piece.values())
+        if set(projected_ir.get("component_order", ())) != semantic_components:
+            raise RibbonGraphContractError(
+                "projected IR component order does not match source witness"
+            )
+        self.semantic_to_topology = _semantic_topology_components(
+            self.source_forms, self.component_by_piece
+        )
+        if set(self.semantic_to_topology) != semantic_components:
+            raise RibbonGraphContractError(
+                "source Morse topology does not realize every semantic component"
+            )
+        for form in self.source_forms:
+            if form.get("kind") != "kink":
+                continue
+            if self.component_by_piece[piece_of(form["strand"])] == self.special:
+                raise RibbonGraphContractError(
+                    "special killing loop must have zero self-framing"
+                )
+        self.global_dimension_squared = sum(
+            float(category.dimension(label)) ** 2 for label in category.labels
+        )
+        if self.global_dimension_squared <= 0:
+            raise RibbonGraphContractError("category global dimension is not positive")
+        self.morse = MorseEvaluator(category)
+
+    def _validate_graph(self, graph: dict[str, Any]) -> dict[str, Any]:
+        if graph.get("source_projected_ir_hash") != stable_json_hash(
+            self.projected_ir
+        ):
+            raise RibbonGraphContractError(
+                "coupon graph was not built from the supplied projected IR"
+            )
+        if graph.get("special_component") != self.special:
+            raise RibbonGraphContractError("coupon graph special component mismatch")
+        coupon_nodes = [
+            node
+            for node in graph.get("nodes", ())
+            if node.get("kind") == "vacuum-projector-coupon"
+        ]
+        if len(coupon_nodes) != 1:
+            raise RibbonGraphContractError(
+                "coupon graph must contain exactly one vacuum projector"
+            )
+        coupon = coupon_nodes[0]
+        if coupon.get("normalization") != (
+            "IDEMPOTENT_UNIT_CHANNEL_NO_GLOBAL_DIMENSION_FACTOR"
+        ):
+            raise RibbonGraphContractError("unsupported coupon normalization")
+        return coupon
+
+    def fixed_label_value(
+        self,
+        graph: dict[str, Any],
+        component_labels: dict[str, Any],
+    ) -> tuple[complex, dict[str, Any]]:
+        """Return the scalar after inserting the disk vacuum projector."""
+
+        coupon = self._validate_graph(graph)
+        ordinary_components = tuple(
+            component
+            for component in self.projected_ir["component_order"]
+            if component != self.special
+        )
+        missing = set(ordinary_components) - set(component_labels)
+        extra = set(component_labels) - set(ordinary_components)
+        if missing or extra:
+            raise RibbonGraphContractError(
+                "ordinary component labels mismatch: "
+                f"missing={sorted(missing)!r}, extra={sorted(extra)!r}"
+            )
+
+        contributions = []
+        total = 0.0 + 0.0j
+        for special_label in self.category.labels:
+            semantic_labels = dict(component_labels)
+            semantic_labels[self.special] = special_label
+            topology_labels = {
+                self.semantic_to_topology[component]: label
+                for component, label in semantic_labels.items()
+            }
+            source_value, source_stats = self.morse.fixed_label_value(
+                self.source_forms, topology_labels
+            )
+            omega_coefficient = float(self.category.dimension(special_label))
+            weighted = omega_coefficient * source_value
+            total += weighted
+            contributions.append(
+                {
+                    "special_label": special_label,
+                    "omega_coefficient": omega_coefficient,
+                    "source_value": source_value,
+                    "weighted_source_value": weighted,
+                    "source_stats": source_stats,
+                }
+            )
+        value = total / self.global_dimension_squared
+        return value, {
+            "backend": "MODULAR_KILLING_LOOP_SOURCE_MORSE_WITNESS",
+            "category_id": self.category.category_id,
+            "special_component": self.special,
+            "coupon_factor_count": len(coupon.get("factor_order", ())),
+            "global_dimension_squared": self.global_dimension_squared,
+            "normalization": "OMEGA_SPECIAL_LOOP_DIVIDED_BY_SUM_D_SQUARED",
+            "special_label_contributions": contributions,
+        }
+
