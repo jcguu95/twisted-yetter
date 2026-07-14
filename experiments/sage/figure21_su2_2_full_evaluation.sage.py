@@ -139,6 +139,7 @@ def load_context() -> dict[str, Any]:
         source_forms=forms,
         component_by_piece=source["component_by_piece"],
         projected_ir=ir,
+        total_framings=source["framing_labels"],
     )
     coupon = next(
         node
@@ -329,6 +330,8 @@ def build_plan(work_root: Path, chunk_count: int, allow_dirty: bool) -> dict[str
         "coupon_graph_hash": context["graph"]["graph_hash"],
         "category_id": context["category_id"],
         "projector_normalization": "OMEGA_SPECIAL_LOOP_DIVIDED_BY_SUM_D_SQUARED",
+        "total_framings": context["source"]["framing_labels"],
+        "framing_corrections": context["evaluator"].framing_corrections,
         "character_twist": "untwisted",
         "ordinary_component_order": list(context["ordinary"]),
         "evaluator_source_sha256": evaluator_sha,
@@ -412,6 +415,10 @@ def evaluate_sector(
         {
             "special_label": item["special_label"],
             "omega_coefficient": item["omega_coefficient"],
+            "blackboard_source_value": complex_json(
+                item["blackboard_source_value"]
+            ),
+            "framing_phase": complex_json(item["framing_phase"]),
             "source_value": complex_json(item["source_value"]),
             "weighted_source_value": complex_json(item["weighted_source_value"]),
             "source_stats": {
@@ -441,6 +448,7 @@ def evaluate_sector(
         "raw_graph_scalar": complex_json(value),
         "kirby_weight": kirby_weight,
         "weighted_contribution": complex_json(weighted),
+        "framing_corrections": stats["framing_corrections"],
         "imaginary_residual": abs(value.imag),
         "elapsed_seconds": time.perf_counter() - started,
         "special_label_contributions": contributions,

@@ -50,6 +50,26 @@ def _semantic_topology_components(
     }
 
 
+def _visible_self_writhe(
+    forms: tuple[dict[str, Any], ...],
+    component_by_piece: dict[str, str],
+    projected_ir: dict[str, Any],
+) -> dict[str, int]:
+    visible = defaultdict(int)
+    for crossing in projected_ir.get("crossings", ()):
+        over = crossing["over_component"]
+        under = crossing["under_component"]
+        if over == under:
+            visible[over] += int(crossing["sign"])
+    for form in forms:
+        if form.get("kind") != "kink":
+            continue
+        component = component_by_piece[piece_of(form["strand"])]
+        sign = 1 if form["sign"] == "+" else -1
+        visible[component] += sign * int(form.get("times", 1))
+    return dict(visible)
+
+
 class RibbonGraphEvaluator:
     """Evaluate one-special-component coupon graphs in certified SU(2)_k data.
 
@@ -65,6 +85,7 @@ class RibbonGraphEvaluator:
         source_forms: Iterable[dict[str, Any]],
         component_by_piece: dict[str, str],
         projected_ir: dict[str, Any],
+        total_framings: dict[str, int] | None = None,
     ):
         self.category = category
         self.source_forms = tuple(dict(form) for form in source_forms)
@@ -96,6 +117,31 @@ class RibbonGraphEvaluator:
             raise RibbonGraphContractError(
                 "projected IR component order does not match source witness"
             )
+        if total_framings is None:
+            raise RibbonGraphContractError(
+                "total framings must be supplied explicitly; blackboard writhe "
+                "is not silently promoted to the framed-link contract"
+            )
+        missing_framings = semantic_components - set(total_framings)
+        extra_framings = set(total_framings) - semantic_components
+        if missing_framings or extra_framings:
+            raise RibbonGraphContractError(
+                "total framing components mismatch: "
+                f"missing={sorted(missing_framings)!r}, "
+                f"extra={sorted(extra_framings)!r}"
+            )
+        self.total_framings = {
+            component: int(total_framings[component])
+            for component in semantic_components
+        }
+        self.visible_self_writhe = _visible_self_writhe(
+            self.source_forms, self.component_by_piece, projected_ir
+        )
+        self.framing_corrections = {
+            component: self.total_framings[component]
+            - self.visible_self_writhe.get(component, 0)
+            for component in semantic_components
+        }
         self.semantic_to_topology = _semantic_topology_components(
             self.source_forms, self.component_by_piece
         )
@@ -110,6 +156,11 @@ class RibbonGraphEvaluator:
                 raise RibbonGraphContractError(
                     "special killing loop must have zero self-framing"
                 )
+        if self.framing_corrections[self.special] != 0:
+            raise RibbonGraphContractError(
+                "special dotted component must have zero total framing and "
+                "zero visible self-writhe"
+            )
         self.global_dimension_squared = sum(
             float(category.dimension(label)) ** 2 for label in category.labels
         )
@@ -175,6 +226,13 @@ class RibbonGraphEvaluator:
             source_value, source_stats = self.morse.fixed_label_value(
                 self.source_forms, topology_labels
             )
+            blackboard_source_value = source_value
+            framing_phase = 1.0 + 0.0j
+            for component, label in semantic_labels.items():
+                framing_phase *= complex(self.category.twist(label)) ** (
+                    self.framing_corrections[component]
+                )
+            source_value *= framing_phase
             omega_coefficient = float(self.category.dimension(special_label))
             weighted = omega_coefficient * source_value
             total += weighted
@@ -182,6 +240,8 @@ class RibbonGraphEvaluator:
                 {
                     "special_label": special_label,
                     "omega_coefficient": omega_coefficient,
+                    "blackboard_source_value": blackboard_source_value,
+                    "framing_phase": framing_phase,
                     "source_value": source_value,
                     "weighted_source_value": weighted,
                     "source_stats": source_stats,
@@ -195,6 +255,8 @@ class RibbonGraphEvaluator:
             "coupon_factor_count": len(coupon.get("factor_order", ())),
             "global_dimension_squared": self.global_dimension_squared,
             "normalization": "OMEGA_SPECIAL_LOOP_DIVIDED_BY_SUM_D_SQUARED",
+            "total_framings": self.total_framings,
+            "visible_self_writhe": self.visible_self_writhe,
+            "framing_corrections": self.framing_corrections,
             "special_label_contributions": contributions,
         }
-

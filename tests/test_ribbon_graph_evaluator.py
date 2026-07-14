@@ -1,3 +1,8 @@
+from pathlib import Path
+import runpy
+import sys
+import types
+
 import pytest
 
 from experiments.sage.morse_pivotal_contract import (
@@ -103,6 +108,7 @@ def test_modular_killing_loop_is_the_vacuum_projector():
         source_forms=forms,
         component_by_piece=component_by_piece,
         projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
     )
     vacuum, stats = evaluator.fixed_label_value(graph, {"A": 0})
     nonvacuum, _ = evaluator.fixed_label_value(graph, {"A": 1})
@@ -122,6 +128,7 @@ def test_canceling_dotted_one_two_handle_pair_has_value_one():
         source_forms=forms,
         component_by_piece=component_by_piece,
         projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
     )
     kirby_sum = sum(
         category.dimension(label)
@@ -129,6 +136,93 @@ def test_canceling_dotted_one_two_handle_pair_has_value_one():
         for label in category.labels
     )
     assert abs(kirby_sum - 1.0) < 1e-12
+
+
+def test_total_framings_are_required_explicitly():
+    forms, component_by_piece, ir, _graph = hopf_special_disk_control()
+    with pytest.raises(RibbonGraphContractError, match="total framings"):
+        RibbonGraphEvaluator(
+            SemionKillingLoopControl(),
+            source_forms=forms,
+            component_by_piece=component_by_piece,
+            projected_ir=ir,
+        )
+
+
+def test_total_framing_correction_applies_the_ribbon_twist():
+    forms, component_by_piece, _ir, _graph = hopf_special_disk_control()
+    forms = [
+        *forms[:4],
+        {"kind": "cup", "piece": "B", "at": "far-right"},
+        *forms[4:],
+        {
+            "kind": "cap",
+            "piece": "B",
+            "strands": ["B.left", "B.right"],
+        },
+    ]
+    component_by_piece = {**component_by_piece, "B": "B"}
+    ir = compile_projected_morphism(
+        forms,
+        component_by_piece=component_by_piece,
+        special_components=["red"],
+        component_order=["red", "A", "B"],
+    )
+    graph = build_vacuum_coupon_graph(forms, ir)
+    blackboard = RibbonGraphEvaluator(
+        SemionKillingLoopControl(),
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0, "B": 0},
+    )
+    plus_one = RibbonGraphEvaluator(
+        SemionKillingLoopControl(),
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0, "B": 1},
+    )
+    value_zero, _ = blackboard.fixed_label_value(graph, {"A": 0, "B": 1})
+    value_plus_one, stats = plus_one.fixed_label_value(
+        graph, {"A": 0, "B": 1}
+    )
+    assert abs(value_plus_one - 1.0j * value_zero) < 1e-12
+    assert stats["framing_corrections"] == {"red": 0, "A": 0, "B": 1}
+
+
+def test_figure21_runner_preserves_the_frozen_total_framings(monkeypatch):
+    category = SemionKillingLoopControl()
+    registry = types.ModuleType("experiments.sage.morse_category_registry")
+    registry.build_category = lambda _family, _level: (
+        category,
+        "test semion",
+        category.category_id,
+    )
+    monkeypatch.setitem(
+        sys.modules, "experiments.sage.morse_category_registry", registry
+    )
+    runner = runpy.run_path(
+        Path("experiments/sage/figure21_su2_2_full_evaluation.sage.py")
+    )
+    context = runner["load_context"]()
+    expected = {
+        "red": 0,
+        "purple": -5,
+        "mint": -1,
+        "pink1": -2,
+        "pink2": -2,
+        "pink3": -2,
+        "pink4": -2,
+        "orange": 1,
+        "blue": -1,
+        "beige": 4,
+        "green": 2,
+        "black": -1,
+    }
+    assert context["evaluator"].total_framings == expected
+    assert context["evaluator"].visible_self_writhe == {}
+    assert context["evaluator"].framing_corrections == expected
 
 
 def test_killing_loop_backend_fails_closed_on_uncertified_category():
@@ -141,6 +235,7 @@ def test_killing_loop_backend_fails_closed_on_uncertified_category():
             source_forms=forms,
             component_by_piece=component_by_piece,
             projected_ir=ir,
+            total_framings={"red": 0, "A": 0},
         )
 
 
@@ -151,6 +246,7 @@ def test_coupon_graph_must_match_the_projected_ir():
         source_forms=forms,
         component_by_piece=component_by_piece,
         projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
     )
     graph = dict(graph)
     graph["source_projected_ir_hash"] = "sha256:not-the-ir"
