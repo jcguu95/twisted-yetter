@@ -100,6 +100,8 @@ def _write_deterministic_bundle(output: Path, files: list[tuple[Path, str]], inv
 
 
 def package(args: argparse.Namespace) -> dict[str, Any]:
+    source_commit = _git("rev-parse", "HEAD")
+    source_dirty = bool(_git("status", "--porcelain"))
     local_dirs = sorted(args.local_parent.glob("figure21-black-cancel-search-local-*"))
     xil_dirs = sorted(path for path in args.xil_root.glob("search-xil-*") if path.is_dir())
     xil_mtimes = _read_xil_mtimes(args.xil_stats)
@@ -184,8 +186,8 @@ def package(args: argparse.Namespace) -> dict[str, Any]:
         "argv": [str(value) for value in os.sys.argv],
         "reproduce_command": "python3 experiments/scripts/package_figure21_projection_search_evidence.py --write",
         "source_checkpoint": {
-            "git_commit": _git("rev-parse", "HEAD"),
-            "git_dirty": bool(_git("status", "--porcelain")),
+            "git_commit": source_commit,
+            "git_dirty_before_generation": source_dirty,
         },
     }
     return summary
