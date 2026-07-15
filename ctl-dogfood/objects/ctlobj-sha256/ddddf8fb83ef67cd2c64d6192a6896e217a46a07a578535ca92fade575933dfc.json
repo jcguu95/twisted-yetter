@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-07-15T14:47:18Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search",
+  "parents": [
+    "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+        "git_blob": "73f9f6c9cc8c4fa75846690b3d1e856710d8c320",
+        "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v2.json",
+        "sha256": "4ea878c7c96cc26e3677e549480241f2cff6ca6c3cfa2108cb61a980b5625496"
+      },
+      {
+        "bytes": 3268866,
+        "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+        "git_blob": "d93a66bda2e7dfb7166f4709c9930920f4baf331",
+        "path": "experiments/results/akbulut-yasui/evidence/figure21-black-cancel-projection-search-evidence-v2.tar.gz",
+        "sha256": "8f5c6a84bc835f4066c1ee798ce83ef3c31716b1e4824ed5073742699b300dea"
+      }
+    ],
+    "category": {
+      "category_id": "su2-k2",
+      "subject": "subject:twisted-yetter:category-family:su2-k"
+    },
+    "created_at": "2026-07-15T14:47:18Z",
+    "created_by": "actor:codex",
+    "execution": {
+      "checkpoint_count": 17,
+      "completed_checkpoint_count": 15,
+      "hosts": [
+        {
+          "alias": "jin-m2",
+          "hardware": "Apple M2 MacBook Air, 8 logical CPUs, 16 GiB",
+          "workers": 2
+        },
+        {
+          "alias": "xil-m2",
+          "hardware": "Apple M2, 8 logical CPUs, 16 GiB",
+          "workers": 2
+        }
+      ],
+      "interrupted_checkpoint_count": 2,
+      "time_notice": "Initial two-worker launches have exact UTC records. Per-strategy starts are otherwise inferred as checkpoint mtime minus elapsed_seconds; interrupted rows record the final observed checkpoint, not a completion time."
+    },
+    "generator": {
+      "path": "experiments/scripts/package_figure21_projection_search_evidence.py",
+      "reproduce_command": "python3 experiments/scripts/package_figure21_projection_search_evidence.py --write",
+      "source_commit": "d19973aabb8681099000e917fa629998c02be728"
+    },
+    "mathematical_status": {
+      "complexity_conclusion": "EMPIRICAL_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND",
+      "crossing_counts": "RECOVERED_MACHINE_READABLE_SEARCH_OUTPUT",
+      "diagram_rewrite": "EXPERIMENTAL_NOT_INDEPENDENTLY_CERTIFIED_AS_KIRBY_EQUIVALENT",
+      "frontier_dimensions": "EXACT_RANKER_OUTPUT_FOR_THIS_EXPERIMENTAL_REPRESENTATION"
+    },
+    "note_id": "objective-note-2026-07-15-figure21-black-cancel-projection-search",
+    "presentation": {
+      "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE",
+      "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+    },
+    "result": {
+      "baseline_crossings": 7443,
+      "best_evaluator_ready_crossings": 3988,
+      "decision": "STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE",
+      "maximum_active_strands_at_3988": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "status": "RECOVERED_REPRODUCIBILITY_CHECKPOINT",
+    "subjects": [
+      "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+      "subject:twisted-yetter:category-family:su2-k"
+    ],
+    "supersedes_current_object": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
+    "title": "Figure 21 black-cancel projection search evidence recovered",
+    "top_notice": "This revision supersedes the earlier claim that the transient search evidence had been lost. The files remained under /private/tmp and on XIL; 17 checkpoints, both search-script variants, source data, launch records, environments, and selected lowered candidates are now preserved in a Git-managed evidence bundle."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

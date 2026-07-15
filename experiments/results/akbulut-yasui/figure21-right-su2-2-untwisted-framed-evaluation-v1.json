@@ -1,0 +1,195 @@
+{
+  "artifacts": {
+    "framed_sector_ledger": {
+      "bytes": 11372488,
+      "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-sector-ledger-v1.jsonl.gz",
+      "sha256": "cd35e5fbd8546f05e86c3f459f41a812bd4644c701daa85094dbc6148c74c13b"
+    }
+  },
+  "coverage": {
+    "complete_exactly_once": true,
+    "evaluated_sector_count": 86670,
+    "framed_status_counts": {
+      "EVALUATED_EXACT_ZERO": 40470,
+      "EVALUATED_NONZERO": 41032,
+      "NUMERICALLY_SMALL": 5168,
+      "PRUNED_NO_VACUUM": 90477
+    },
+    "sector_count": 177147,
+    "source_status_counts": {
+      "EVALUATED_EXACT_ZERO": 40470,
+      "EVALUATED_NONZERO": 41032,
+      "NUMERICALLY_SMALL": 5168,
+      "PRUNED_NO_VACUUM": 90477
+    }
+  },
+  "environment": {
+    "host": "jin-m2",
+    "python": "3.12.13"
+  },
+  "evaluation_id": "sha256:39eaad33504efa7f043c4f5a79c1a7946da9584e2252bc9e40b275430f7edad6",
+  "evaluation_identity": {
+    "category_id": "su2-k2",
+    "component_order": [
+      "purple",
+      "mint",
+      "pink1",
+      "pink2",
+      "pink3",
+      "pink4",
+      "orange",
+      "blue",
+      "beige",
+      "green",
+      "black"
+    ],
+    "framing_corrections": {
+      "beige": 4,
+      "black": -1,
+      "blue": -1,
+      "green": 2,
+      "mint": -1,
+      "orange": 1,
+      "pink1": -2,
+      "pink2": -2,
+      "pink3": -2,
+      "pink4": -2,
+      "purple": -5,
+      "red": 0
+    },
+    "generator_commit": "46a17f98c3dd884bd5af5d2d0f8955b3ad28043c",
+    "generator_sha256": "eb242984cc68fdfac6df7cafe1fa7ec4f453f596a9da2160678ea7185760660d",
+    "input_sha256": "b6f8459547a7cec415eb6c70acb89a40c37ab4cabd364330206685d8e579cbc5",
+    "schema": "twisted-yetter.figure21-su2-2-framing-recovery-identity.v1",
+    "source_evaluation_id": "sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+    "source_ledger_sha256": "9cb126f76f23932b159d2dac0e88c2522087c60af9e32c38d2957e02a6b3714f",
+    "total_framings": {
+      "beige": 4,
+      "black": -1,
+      "blue": -1,
+      "green": 2,
+      "mint": -1,
+      "orange": 1,
+      "pink1": -2,
+      "pink2": -2,
+      "pink3": -2,
+      "pink4": -2,
+      "purple": -5,
+      "red": 0
+    },
+    "twists": {
+      "0": [
+        1.0,
+        0.0
+      ],
+      "1": [
+        0.38268343236508984,
+        0.9238795325112867
+      ],
+      "2": [
+        -1.0,
+        1.2246467991473532e-16
+      ]
+    },
+    "visible_self_writhe": {}
+  },
+  "framing_contract": {
+    "derivation": "Each fixed-label sector is multiplied by product_c theta(label_c)^(total_framing_c-visible_self_writhe_c).",
+    "framing_corrections": {
+      "beige": 4,
+      "black": -1,
+      "blue": -1,
+      "green": 2,
+      "mint": -1,
+      "orange": 1,
+      "pink1": -2,
+      "pink2": -2,
+      "pink3": -2,
+      "pink4": -2,
+      "purple": -5,
+      "red": 0
+    },
+    "total_framings": {
+      "beige": 4,
+      "black": -1,
+      "blue": -1,
+      "green": 2,
+      "mint": -1,
+      "orange": 1,
+      "pink1": -2,
+      "pink2": -2,
+      "pink3": -2,
+      "pink4": -2,
+      "purple": -5,
+      "red": 0
+    },
+    "twists": {
+      "0": [
+        1.0,
+        0.0
+      ],
+      "1": [
+        0.38268343236508984,
+        0.9238795325112867
+      ],
+      "2": [
+        -1.0,
+        1.2246467991473532e-16
+      ]
+    },
+    "visible_self_writhe": {}
+  },
+  "generator_script": "experiments/scripts/reweight_figure21_su2_2_framings.py",
+  "generator_script_sha256": "eb242984cc68fdfac6df7cafe1fa7ec4f453f596a9da2160678ea7185760660d",
+  "git": {
+    "commit": "46a17f98c3dd884bd5af5d2d0f8955b3ad28043c",
+    "dirty": false,
+    "status_short": []
+  },
+  "interpretation": {
+    "established": "The corrected untwisted SU(2)_2 numerical value matches the standard CP2#9CP2bar value under the frozen projector contract.",
+    "not_established": [
+      "The draft Morse transcription is proved identical to Figure 21.",
+      "The special-dotted projector hypothesis is a theorem.",
+      "Twisted Crane-Yetter detects this exotic pair."
+    ]
+  },
+  "mathematical_status": "DRAFT_TRANSCRIPTION_NUMERIC_COMPARISON",
+  "purpose": "Recover the frozen Figure 21 SU(2)_2 sector contractions by applying the total-framing ribbon twist omitted by the source run.",
+  "reproduce_command": "python experiments/scripts/reweight_figure21_su2_2_framings.py --source-ledger experiments/results/akbulut-yasui/figure21-right-su2-2-blackboard-framing-omission-sector-ledger-v1.jsonl.gz --output-ledger experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-sector-ledger-v1.jsonl.gz --output-result experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
+  "result": {
+    "absolute_difference": 2.6083425889735415e-12,
+    "imaginary_residual": 1.9736753077561816e-12,
+    "match": "YES",
+    "match_tolerance": 1e-08,
+    "reverse_order_value": [
+      -1023.9999999999983,
+      -1.9736753077561816e-12
+    ],
+    "standard_value": [
+      -1024.0,
+      0.0
+    ],
+    "summation_order_difference": 0.0,
+    "value": [
+      -1023.9999999999983,
+      -1.9736753077561816e-12
+    ]
+  },
+  "schema": "twisted-yetter.figure21-su2-2-framing-recovery.v1",
+  "source_blackboard_run": {
+    "evaluation_id": "sha256:1a23fccc262f3f523a686254c8e0553925c903169688b76afc9d12ca9116b1f2",
+    "git_commit": "30d00ffa992e8067ea1830c62c7276e5e6852b4b",
+    "ledger": "experiments/results/akbulut-yasui/figure21-right-su2-2-blackboard-framing-omission-sector-ledger-v1.jsonl.gz",
+    "ledger_sha256": "9cb126f76f23932b159d2dac0e88c2522087c60af9e32c38d2957e02a6b3714f",
+    "root_cause": "The runner did not pass input framing_labels to RibbonGraphEvaluator, so it evaluated the blackboard link.",
+    "status": "SUPERSEDED_FRAMING_OMISSION_FAILURE",
+    "value": [
+      3496.1546878700474,
+      -1448.1546878700476
+    ]
+  },
+  "status": "YES",
+  "utc_finish": "2026-07-14T02:18:58.953612+00:00",
+  "utc_start": "2026-07-14T02:18:51.786883+00:00"
+}

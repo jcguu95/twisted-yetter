@@ -1,0 +1,135 @@
+{
+  "argv": [
+    "experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py",
+    "--write"
+  ],
+  "category_id": "su2-k2",
+  "category_subject": "subject:twisted-yetter:category-family:su2-k",
+  "complexity_certificate": {
+    "active_vacuum_fusion_dimension": 134217728,
+    "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-sector95378-complexity-certificate-v1.json",
+    "sha256": "39869ca4f3d46ed13d8d2cf750730d14ecaf14acd0223010890b6558f9161a61"
+  },
+  "elapsed_seconds": 0.005082458257675171,
+  "environment": {
+    "hostname": "jin-m2",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15 (main, Mar 25 2026, 02:58:47) [Clang 22.1.1 ]"
+  },
+  "evidence_files": [
+    {
+      "bytes": 31484,
+      "git_blob": "d979b7dd852bd54ca0095bfbc6f093742ba52d7e",
+      "head_git_blob": "d979b7dd852bd54ca0095bfbc6f093742ba52d7e",
+      "matches_head": true,
+      "path": "experiments/results/akbulut-yasui/evidence/figure21-su22-frontier16-hetzner-evidence-v1.tar.gz",
+      "sha256": "42382369f4a6fca5883a90d114aef09a9c335f37455f441d551311ce5fc2e4d1"
+    },
+    {
+      "bytes": 24264,
+      "git_blob": "7c40f577a24054f358068a0f7ae41f6b89e83122",
+      "head_git_blob": "7c40f577a24054f358068a0f7ae41f6b89e83122",
+      "matches_head": true,
+      "path": "experiments/results/akbulut-yasui/evidence/figure21-su22-sector95378-path128-calibration-evidence-v1.tar.gz",
+      "sha256": "5b321e2ecabd420456ea491f30eb3c67602d3d678003a06b213bc4697b90efd3"
+    },
+    {
+      "bytes": 431025,
+      "git_blob": "9f4f642e28870a443da35bf692cbf495f9c1bd2e",
+      "head_git_blob": "9f4f642e28870a443da35bf692cbf495f9c1bd2e",
+      "matches_head": true,
+      "path": "experiments/results/akbulut-yasui/evidence/twisted-yetter-su2-2-direct-snapshot-v1.tar.gz",
+      "sha256": "efc18beddbd67ad09751e5fe75ccd914376295296d943351c07fba63de370a00"
+    }
+  ],
+  "frontier_probe": {
+    "cpu_count": 16,
+    "hard_sector_record": {
+      "category_id": "su2-k2",
+      "elapsed_seconds": 1806.9589301020005,
+      "error": "sector exceeded its wall-time limit",
+      "finished_at": "2026-07-15T02:16:18.671507+00:00",
+      "hamming_weight": 11,
+      "host": "debian-32gb-fsn1-1",
+      "input_hash": "sha256:b631105e55c622f13a9394b4fd669877deed4103a80135132e7613cd91445c2c",
+      "labels": {
+        "beige": 1,
+        "black": 2,
+        "blue": 1,
+        "green": 1,
+        "mint": 1,
+        "orange": 1,
+        "pink1": 2,
+        "pink2": 1,
+        "pink3": 1,
+        "pink4": 2,
+        "purple": 1
+      },
+      "lowering_hash": "sha256:057bb8044e9f67fb67ee1d0218d804121e2848630d0e8c2dbe2e2dd68141c3c7",
+      "max_seconds": 1800.0,
+      "pid": 14316,
+      "projector_rank": 8192,
+      "schema": "twisted-yetter.figure21-su2-2-direct-ranked-control-sector.v1",
+      "sector_id": 95378,
+      "shard_index": 15,
+      "side_lift_hash": "sha256:77edcd616051ab660464d216a73fe15987c5ec6b6520865a6fc207f3b9de1277",
+      "status": "TIMEOUT",
+      "timeout_phase": "direct"
+    },
+    "host": "debian-32gb-fsn1-1",
+    "maximum_elapsed_seconds": 1806.9589301020005,
+    "memory_summary": "total        used        free      shared  buff/cache   available\nMem:            30Gi       666Mi        25Gi       4.6Mi       4.6Gi        29Gi\nSwap:             0B          0B          0B",
+    "minimum_elapsed_seconds": 538.5629839029989,
+    "sector_count": 16,
+    "status_counts": {
+      "PASS": 3,
+      "TIMEOUT": 13
+    },
+    "timeout_seconds": 1800.0
+  },
+  "generator_script": "experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py",
+  "git_commit": "acefe765894c73e78a386ae536e976aacc4566ea",
+  "git_dirty": false,
+  "historical_code_snapshot": {
+    "matches_remote_environment": true,
+    "path": "experiments/results/akbulut-yasui/evidence/twisted-yetter-su2-2-direct-snapshot-v1.tar.gz",
+    "sha256": "efc18beddbd67ad09751e5fe75ccd914376295296d943351c07fba63de370a00"
+  },
+  "mathematical_status": "PERFORMANCE_EVIDENCE_NOT_A_COMPLEXITY_THEOREM",
+  "path_shard_calibration": {
+    "historical_decision": "do not dispatch remaining 112 shards; optimize the general evaluator first",
+    "historical_evaluation_run_identity": {
+      "evaluation_run_hash": "sha256:ae863df5919fc2e0ad4a3722fbe2d19c731ba7fe9d18986d582f488e1f3ac1ef",
+      "evaluator_hash": "f3a7d590c614666c4c8866c7a531630b47d216a982a6fc400db7945be37153c6",
+      "input_hash": "sha256:b631105e55c622f13a9394b4fd669877deed4103a80135132e7613cd91445c2c",
+      "lowering_hash": "sha256:057bb8044e9f67fb67ee1d0218d804121e2848630d0e8c2dbe2e2dd68141c3c7",
+      "semantic_workload_hash": "sha256:74f349d66d7722c037413dfa910ddbf36c80b8ad5a9e64e1d1c612098df318df"
+    },
+    "minimum_ideal_wall_hours_at_16_workers": 4.0026146417,
+    "minimum_total_worker_hours": 64.0418342672,
+    "paths_per_shard": 64,
+    "projector_path_count": 8192,
+    "recorded_worker_seconds": 28843.744148256006,
+    "sampled_shard_count": 16,
+    "shard_count": 128,
+    "status_counts": {
+      "TIMEOUT": 16
+    }
+  },
+  "presentation_subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+  "projector_rank": 8192,
+  "repo_root": "/Users/jin/data/local/projects/twisted-yetter",
+  "reproduce_command": "PYTHONPATH=. uv run python experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py --write",
+  "sanity_checks": {
+    "all_16_sampled_path_shards_timed_out": true,
+    "code_snapshot_hash_matches_remote_environment": true,
+    "frontier_status_is_3_pass_13_timeout": true,
+    "hard_sector_projector_rank_matches_exact_certificate": true
+  },
+  "schema": "twisted-yetter.figure21-su2-2-hard-sector-runtime-barrier.v1",
+  "scope_warning": "The evidence rules out the preserved full-state/path-sharded backend as a practical route for this sector. It does not rule out future tensor-network, recoupling, compiled, or Kirby-calculus algorithms.",
+  "sector_id": 95378,
+  "status": "ESTABLISHED_CURRENT_BACKEND_RUNTIME_BARRIER",
+  "utc_finish": "2026-07-15T05:07:51.347181+00:00",
+  "utc_start": "2026-07-15T05:07:51.342062+00:00"
+}

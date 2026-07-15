@@ -1,0 +1,49 @@
+{
+  "capabilities": {
+    "rigid_bends": true,
+    "ribbon_twist": true,
+    "trivalent_pairing": true,
+    "vacuum_projector": true
+  },
+  "category_ids": ["su3-k2-anyonwiki-fr"],
+  "duality": {
+    "convention": "unique simple dual inferred from the imported fusion table"
+  },
+  "evaluation_coevaluation": {
+    "normalization": "sqrt(quantum_dimension)",
+    "orientation_convention": "left birth branch upward; reversed bend uses the recorded scalar"
+  },
+  "evidence": [
+    {
+      "kind": "explicit-pivotal-source",
+      "path": "experiments/inputs/anyon-wiki-data/FR_6_1_4_5/cat_1_3_1/pivsol.json",
+      "sha256": "c960c0da45b0d45d7d04d6cd632b2753011410cbcd334dfe2f38993f1ee3a820"
+    },
+    {
+      "kind": "numeric-bend-control",
+      "path": "experiments/results/category-pivotal/bend-matrix-basic-controls-v1.json",
+      "maximum_residual": 8.881784197001252e-16
+    }
+  ],
+  "fusion_space_pairing": {
+    "basis": "multiplicity-free AnyonWiki basis checked by unitary F and bend controls",
+    "orthonormal": true
+  },
+  "pivotal_structure": {
+    "convention": "AnyonWiki pivsol values imported in the selected cat_1_3_1 gauge",
+    "mathematical_status": "EXPLICIT_SOURCE_PLUS_NUMERIC_CONTROLS"
+  },
+  "reverse_bend_scalars": {
+    "kind": "explicit-map",
+    "values": {
+      "(0,0)": [1.0, 0.0],
+      "(0,1)": [1.0, 0.0],
+      "(0,2)": [1.0, 0.0],
+      "(1,0)": [1.0, 0.0],
+      "(1,1)": [1.0, 0.0],
+      "(2,0)": [1.0, 0.0]
+    }
+  },
+  "schema": "twisted-yetter.morse-pivotal-profile.v1",
+  "status": "SUPPORTED_FOR_NUMERIC_MORSE_CONTROLS"
+}

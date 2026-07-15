@@ -15,6 +15,12 @@ from functools import lru_cache
 import math
 import numpy as np
 
+from experiments.sage.morse_pivotal_contract import (
+    require_pivotal_capabilities,
+    reverse_bend_scalar,
+    validate_pivotal_profile,
+)
+
 
 def _inverse(matrix):
     return np.linalg.inv(np.asarray(matrix, dtype=np.complex128))
@@ -31,6 +37,34 @@ def _cost_profile(f_blocks, r_blocks):
 
 
 class BaseMorseCategoryAdapter:
+    pivotal_profile = None
+    category_id = None
+    path_basis_is_orthonormal = False
+
+    def _configure_pivotal_profile(self, profile, category_id):
+        self.category_id = category_id
+        self.pivotal_profile = (
+            validate_pivotal_profile(profile, expected_category_id=category_id)
+            if profile is not None
+            else None
+        )
+        capabilities = (
+            self.pivotal_profile.get("capabilities", {})
+            if self.pivotal_profile is not None
+            else {}
+        )
+        self.path_basis_is_orthonormal = bool(
+            capabilities.get("trivalent_pairing")
+            and capabilities.get("vacuum_projector")
+        )
+        if capabilities.get("rigid_bends"):
+            for label in self.labels:
+                scalar = reverse_bend_scalar(self, label)
+                if abs(scalar) < 1e-12:
+                    raise ValueError(
+                        f"vanishing recorded pivotal bend scalar for {label!r}"
+                    )
+
     def fusion_multiplicity(self, left, right, output) -> int:
         return next(
             (int(mult) for target, mult in self.fusion_outputs(left, right) if target == output),
@@ -50,28 +84,24 @@ class BaseMorseCategoryAdapter:
 
     @lru_cache(maxsize=None)
     def reverse_bend(self, label):
-        """Gauge correction for a reversed coevaluation of a simple object."""
+        """Return an explicitly recorded pivotal bend scalar."""
 
-        dual = self.dual(label)
-        block = self.f_block(label, dual, label, label)
-        left = (self.unit, 0, 0)
-        right = (self.unit, 0, 0)
-        coefficient = complex(
-            block["right_to_left"][block["left_index"][left], block["right_index"][right]]
-        )
-        mu = complex(self.dimension(label)) * coefficient
-        if abs(mu) < 1e-12:
-            raise ValueError(f"vanishing pivotal bend coefficient for {label!r}")
-        return 1.0 / mu
+        return reverse_bend_scalar(self, label)
+
+    def require_pivotal(self, *capabilities):
+        return require_pivotal_capabilities(self, capabilities)
 
 
 class SU2KMorseAdapter(BaseMorseCategoryAdapter):
     """Adapter for ``SU2KBraidEvaluator`` at any supported level."""
 
-    def __init__(self, evaluator):
+    def __init__(self, evaluator, *, pivotal_profile=None, category_id=None):
         self.backend = evaluator
         self.labels = tuple(evaluator.labels)
         self.unit = 0
+        self._configure_pivotal_profile(
+            pivotal_profile, category_id or f"su2-k{evaluator.level}"
+        )
 
     def dimension(self, label):
         return complex(self.backend.dimension(label)).real
@@ -139,6 +169,8 @@ class LoadedFRMorseAdapter(BaseMorseCategoryAdapter):
         character=None,
         adapter_name=None,
         orthonormalize_svd_intertwiners=None,
+        pivotal_profile=None,
+        category_id=None,
     ):
         self.backend = evaluator
         self.labels = tuple(evaluator.labels)
@@ -155,6 +187,10 @@ class LoadedFRMorseAdapter(BaseMorseCategoryAdapter):
             )
         self.orthonormalize_svd_intertwiners = bool(
             orthonormalize_svd_intertwiners
+        )
+        self._configure_pivotal_profile(
+            pivotal_profile,
+            category_id or getattr(evaluator, "mtc_id", self.name),
         )
 
     def dimension(self, label):

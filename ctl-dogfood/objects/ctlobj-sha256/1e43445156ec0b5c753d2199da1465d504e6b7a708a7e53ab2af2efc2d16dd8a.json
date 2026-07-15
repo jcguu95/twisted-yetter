@@ -1,0 +1,102 @@
+{
+  "created_at": "2026-07-15T05:18:06Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+  "parents": [],
+  "payload": {
+    "artifacts": {
+      "complexity_certificate": {
+        "git_blob": "42c210cfe97e9b201080d02b39743c62b20bc340",
+        "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-sector95378-complexity-certificate-v1.json",
+        "sha256": "39869ca4f3d46ed13d8d2cf750730d14ecaf14acd0223010890b6558f9161a61"
+      },
+      "runtime_barrier": {
+        "git_blob": "a519cbaabdff3244ea045158253c07fcc48c136b",
+        "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-sector95378-runtime-barrier-v1.json",
+        "sha256": "6c4bb2cc92216b2f2ffc57b6231a7c17cfb88711c0bdc945c934139ed734a292"
+      }
+    },
+    "category": {
+      "category_id": "su2-k2",
+      "subject": "subject:twisted-yetter:category-family:su2-k"
+    },
+    "created_at": "2026-07-15T05:18:06Z",
+    "created_by": "actor:codex",
+    "exact_result": {
+      "active_label_multiplicities": {
+        "1": 56,
+        "2": 2
+      },
+      "active_root_counts": {
+        "0": 134217728,
+        "2": 134217728
+      },
+      "active_vacuum_fusion_dimension": 134217728,
+      "active_vacuum_fusion_dimension_power_of_two": 27,
+      "method": "Exact integer fusion-rule dynamic programming; no enumeration of 2^27 states.",
+      "projector_factor_count": 29,
+      "projector_label_multiplicities": {
+        "1": 28,
+        "2": 1
+      },
+      "projector_vacuum_rank": 8192,
+      "projector_vacuum_rank_power_of_two": 13,
+      "sector_id": 95378
+    },
+    "generator_code": {
+      "complexity_certificate": {
+        "commit": "ae238c03e947edf239a52a43437baa51bd10cc86",
+        "git_blob": "422fbbdfa4cfb7a1f98cb00b82c20d57e7141eb9",
+        "path": "experiments/sage/certify_figure21_su2_2_sector95378_complexity.sage.py",
+        "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" PYTHONPATH=. sage --python experiments/sage/certify_figure21_su2_2_sector95378_complexity.sage.py --write",
+        "sha256": "2a1c781693ebed3d3a677f60943532368b43b525599f157f215e61afe1835548"
+      },
+      "runtime_summary": {
+        "commit": "83ff13c22247b60e4e1147b375c50f95abb17081",
+        "git_blob": "89fd97f3334e013d4f66254807e632a8659a9474",
+        "path": "experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py",
+        "reproduce_command": "PYTHONPATH=. uv run python experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py --write",
+        "sha256": "3a44b6ba712f72db8396ae49f10d6d51ac96bc761be06fe325e0d473f7ebf9b2"
+      }
+    },
+    "mathematical_status": {
+      "fusion_dimension": "ESTABLISHED_EXACT_INTEGER_COMPUTATION",
+      "runtime_barrier": "EMPIRICAL_CURRENT_BACKEND_LIMIT_NOT_COMPLEXITY_THEOREM"
+    },
+    "note_id": "objective-note-2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+    "presentation": {
+      "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE",
+      "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+    },
+    "resource": {
+      "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
+      "snapshot_id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
+    },
+    "runtime_result": {
+      "frontier_probe": "16 Hetzner workers: 3 sectors passed and 13 timed out at about 1800 seconds; sector 95378 timed out at 1806.96 seconds.",
+      "historical_code_snapshot_sha256": "efc18beddbd67ad09751e5fe75ccd914376295296d943351c07fba63de370a00",
+      "ideal_wall_hour_floor_at_16_workers": "4.0026146417",
+      "path_shard_calibration": "Sector 95378 was divided into 128 shards of 64 projector paths; all 16 sampled shards timed out.",
+      "worker_hour_floor": "64.0418342672"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_checkpoint": {
+      "git_commit": "fe27f243414a0ae1f4b18a80cb48c16d4ae4a1da",
+      "git_dirty": false
+    },
+    "status": "ESTABLISHED_EXACT_DIMENSION_AND_CURRENT_BACKEND_BARRIER",
+    "subjects": [
+      "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+      "subject:twisted-yetter:category-family:su2-k"
+    ],
+    "title": "Figure 21 SU(2)_2 sector 95378 complexity and runtime barrier",
+    "top_notice": "The exact 2^27 fusion dimension and the current evaluator's severe runtime barrier are established. This is not a completed Figure 21 invariant, not a proof of the draft transcription, and not a lower bound for every possible algorithm."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
