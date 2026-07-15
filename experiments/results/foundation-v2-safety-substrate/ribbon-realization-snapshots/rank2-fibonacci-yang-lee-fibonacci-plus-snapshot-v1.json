@@ -1,0 +1,237 @@
+{
+  "category_contract": "RibbonFusionCategoryV2",
+  "category_data": {
+    "basis_gauge": "unit-normalized rank-2 gauge; nontrivial F block basis order is [1,x]",
+    "category_id": "rank2-fibonacci-yang-lee-fibonacci-plus",
+    "dimension_root": "positive_fibonacci_phi",
+    "dimensions": {
+      "1": "1",
+      "x": "-zeta10^3 + zeta10^2 + 1"
+    },
+    "duals": {
+      "1": "1",
+      "x": "x"
+    },
+    "f_symbols": {
+      "F_xxx_to_x_basis_1_x": [
+        [
+          "1/d",
+          "u"
+        ],
+        [
+          "u",
+          "-1/d"
+        ]
+      ],
+      "relations": [
+        "d^2=d+1",
+        "u^2=1/d"
+      ],
+      "unit_normalized_blocks": "all 1D unit associativity blocks are scalar 1"
+    },
+    "family_id": "rank2-fibonacci-yang-lee",
+    "field": "CyclotomicField(10) extended by u^2=1/d",
+    "field_embedding": {
+      "dimension": "-zeta10^3 + zeta10^2 + 1",
+      "u_relation": "u^2=1/d",
+      "zeta10": "exp(2*pi*i/10)"
+    },
+    "fusion": {
+      "1*1": {
+        "1": 1
+      },
+      "1*x": {
+        "x": 1
+      },
+      "x*1": {
+        "x": 1
+      },
+      "x*x": {
+        "1": 1,
+        "x": 1
+      }
+    },
+    "fusion_pairing": {
+      "basis": "multiplicity-free basis with channels 1,x for x*x",
+      "pairing_status": "invertible by one-dimensional channel pairings"
+    },
+    "fusion_ring": "Fib: x*x = 1 + x",
+    "labels": [
+      "1",
+      "x"
+    ],
+    "left_coevaluation": {
+      "1": "1",
+      "x": "coev_x with ev_x coev_x = d"
+    },
+    "left_evaluation": {
+      "1": "1",
+      "x": "ev_x with ev_x coev_x = d"
+    },
+    "pivotal_scalars": {
+      "1": "1",
+      "x": "canonical_spherical"
+    },
+    "pivotal_structure": "canonical spherical rank-2 pivotal structure used by the Sage coherence certificate; x is self-dual and the closed x-loop is d",
+    "r_symbols": {
+      "R_xx_to_1": "zeta10^6",
+      "R_xx_to_x": "zeta10^3",
+      "all_unit_channels": "1"
+    },
+    "right_coevaluation": {
+      "1": "1",
+      "x": "right trace equals left trace"
+    },
+    "right_evaluation": {
+      "1": "1",
+      "x": "right trace equals left trace"
+    },
+    "schema": "twisted-yetter.rank2-fibonacci-yang-lee-ribbon-data.v1",
+    "source_locators": [
+      {
+        "claim_used": "rank-2 Fibonacci/Yang-Lee modular braided row count",
+        "locator": "rank tables, pages 26-33",
+        "reference_id": "ref:dong-schopieray-near-integral-2024"
+      },
+      {
+        "claim_used": "exact rank-2 pentagon/hexagon/balancing/ribbon certificate",
+        "content_hash": "sha256:93767a75ed7482a3f9e8e5c8a7c9d6d10945fc08729c373f93bd70a8de5c6ea7",
+        "file_sha256": "sha256:225f21dc4578482cc6a9b56932ab0ac6cb6d9515f6bad5f9da52f1702af7a60c",
+        "locator": "experiments/results/foundation-v2-safety-substrate/rank2-fibonacci-yang-lee-sage-coherence-v1.json",
+        "reference_id": "self-contained-rank2-sage-coherence"
+      }
+    ],
+    "twists": {
+      "1": "1",
+      "x": "zeta10^4"
+    },
+    "unit": "1"
+  },
+  "category_data_hash": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+  "certificates": {
+    "consumer_runtime_coherence": {
+      "basis_order": [
+        "1",
+        "x"
+      ],
+      "basis_safety_checks": {
+        "branch_bound_to_exact_certificate_hash": "PASS",
+        "unit_label_mismatch_not_used_as_identity_test": "PASS",
+        "wrong_rx_square_root_fails_hexagon": "PASS"
+      },
+      "category_data_hash": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+      "certificate_kind": "consumer_runtime_coherence",
+      "checked_payload_hash": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+      "content_hash": "sha256:34c1a10d6d859a98dc85a2023e2ece0d621912b36e48eafd71c3b2eae67de2b8",
+      "proof_boundary": "Consumer certificate binds this serialized rank-2 branch only.",
+      "runtime_contract": "RibbonFusionCategoryV2-compatible multiplicity-free rank-2 fusion spaces with explicit channel basis [1,x]",
+      "status": "PASS"
+    },
+    "producer_exact_coherence": {
+      "branch_realization_id": "rank2-fibonacci-yang-lee-fibonacci-plus",
+      "category_data_hash": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+      "certificate_kind": "producer_exact_coherence",
+      "checks": {
+        "dimension_polynomial_d2_eq_d_plus_1": true,
+        "left_hexagon": true,
+        "nontrivial_f_matrix_involutive": true,
+        "pentagon": true,
+        "r1_square_balances_unit_channel": true,
+        "right_hexagon": true,
+        "rx_square_balances_x_channel": true,
+        "s_matrix_determinant_nonzero": true,
+        "twist_polynomial_theta2_plus_dtheta_plus_1": true,
+        "u_square_eq_inverse_dimension": true,
+        "wrong_rx_square_root_rejected": true
+      },
+      "content_hash": "sha256:d948b6dd01b5e3e96b78f169dbcdb306c88696d498e2fc12ca3f111b68e8263c",
+      "exact_certificate_content_hash": "sha256:93767a75ed7482a3f9e8e5c8a7c9d6d10945fc08729c373f93bd70a8de5c6ea7",
+      "exact_certificate_file_sha256": "sha256:225f21dc4578482cc6a9b56932ab0ac6cb6d9515f6bad5f9da52f1702af7a60c",
+      "exact_certificate_path": "experiments/results/foundation-v2-safety-substrate/rank2-fibonacci-yang-lee-sage-coherence-v1.json",
+      "negative_controls": {
+        "wrong_rx_square_root": {
+          "left_hexagon_status": "FAIL",
+          "right_hexagon_status": "FAIL"
+        }
+      },
+      "proof_boundary": "Exact Sage number-field scan for this rank-2 branch only; does not resolve semion, Ising, SU(2), or product rows.",
+      "scan_summaries": {
+        "left_hexagon": {
+          "active_tuple_count": 12,
+          "status": "PASS",
+          "worst_example": null
+        },
+        "pentagon": {
+          "active_tuple_count": 27,
+          "status": "PASS",
+          "worst_example": null
+        },
+        "right_hexagon": {
+          "active_tuple_count": 12,
+          "status": "PASS",
+          "worst_example": null
+        }
+      },
+      "status": "PASS"
+    },
+    "ribbon_pivotal_compatibility": {
+      "category_data_hash": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+      "certificate_kind": "ribbon_pivotal_compatibility",
+      "checks": {
+        "balancing": "PASS",
+        "left_right_trace_agree": "PASS",
+        "ribbon_square_unit_channel": "PASS",
+        "ribbon_square_x_channel": "PASS",
+        "s_matrix_nondegenerate": "PASS",
+        "theta_polynomial": "PASS"
+      },
+      "content_hash": "sha256:23792ca6bb77a787360615e07295eef7b9d4301c028e345f0d3f9c03de1ce8b0",
+      "proof_boundary": "Braided plus pivotal is not used as a shortcut; the Sage certificate checks ribbon/balancing compatibility.",
+      "status": "PASS"
+    }
+  },
+  "claim_level": "formal-low-rank-category-evidence",
+  "content_hash": "sha256:4d23d590d5850a77cf0abbc9b494ce9c11d4a3769ea681c7895ee6c793c031d2",
+  "evidence_kind": "ribbon_realization_snapshot",
+  "explicit_non_claims": [
+    "This snapshot resolves only one rank2 Fibonacci/Yang-Lee braided branch.",
+    "This snapshot does not authorize a formal scan plan by itself.",
+    "This snapshot does not resolve rank2 semion or anti-semion data."
+  ],
+  "family_id": "rank2-fibonacci-yang-lee",
+  "generated_at_utc": "2026-07-15T23:39:06Z",
+  "generator_script": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v4.py",
+  "git": {
+    "commit": "de15cd98a3c86fae920deeb4c755666c3395d5a8",
+    "dirty": true
+  },
+  "modular_braided_class_index": 0,
+  "mutable_alias_inputs": [],
+  "pinned_payload_hashes": {
+    "category_data": "sha256:64b1c061741c96a3fa57c065116f6938ae2f3b6c1262039b3d722d219ad3f11a",
+    "consumer_runtime_coherence": "sha256:34c1a10d6d859a98dc85a2023e2ece0d621912b36e48eafd71c3b2eae67de2b8",
+    "producer_exact_coherence": "sha256:d948b6dd01b5e3e96b78f169dbcdb306c88696d498e2fc12ca3f111b68e8263c",
+    "rank2_sage_coherence_certificate": "sha256:93767a75ed7482a3f9e8e5c8a7c9d6d10945fc08729c373f93bd70a8de5c6ea7",
+    "ribbon_pivotal_compatibility": "sha256:23792ca6bb77a787360615e07295eef7b9d4301c028e345f0d3f9c03de1ce8b0"
+  },
+  "realization_id": "rank2-fibonacci-yang-lee-fibonacci-plus",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_ribbon_realization_catalog_v4.py --write",
+  "schema": "twisted-yetter.ribbon-realization-snapshot.v1",
+  "source_status": "formal",
+  "status": "RESOLVED_RIBBON_REALIZATION",
+  "structural_checks": {
+    "balancing": "PASS",
+    "duality_involution": "PASS",
+    "fusion_pairing_invertible": "PASS",
+    "hexagon": "PASS",
+    "modularity": "PASS",
+    "pentagon": "PASS",
+    "r_inverse": "PASS",
+    "ribbon_pivotal_compatibility": "PASS",
+    "rigidity": "PASS"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
