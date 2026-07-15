@@ -1,0 +1,175 @@
+{
+  "schema": "twisted-yetter.figure21-black-cancel-projection-search-checkpoint.v1",
+  "status": "HISTORICAL_NUMERIC_CHECKPOINT_REPRODUCIBILITY_GAP",
+  "title": "Figure 21 black-handle cancellation projection search checkpoint",
+  "created_at_utc": "2026-07-15T13:45:38Z",
+  "mathematical_status": "EXPERIMENTAL_DIAGRAM_REWRITE_AND_COMPLEXITY_MEASUREMENT_NOT_A_KIRBY_CALCULUS_CERTIFICATE",
+  "top_notice": "The crossing counts and frontier dimensions below were observed during the interactive run. The stable projection and ranking libraries remain in Git, but the black-cancellation generator, search wrapper, lowered inputs, and transient checkpoints were not preserved. This artifact is therefore not an end-to-end reproducible certificate.",
+  "presentation": {
+    "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+    "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE"
+  },
+  "category_probe": {
+    "category_id": "su2-k2",
+    "subject": "subject:twisted-yetter:category-family:su2-k",
+    "sector": "all ten surviving ordinary components labeled by the noninvertible sigma object"
+  },
+  "diagram_operation": {
+    "description": "Experimental handle slides were used to slide ordinary 2-handle components off the red dotted 1-handle via the black 2-handle, followed by experimental red-black cancellation. Projection directions and small geometric perturbations were then searched to reduce the crossing count.",
+    "certification": "NOT_INDEPENDENTLY_CERTIFIED_AS_A_KIRBY_EQUIVALENT_DIAGRAM",
+    "baseline_crossings": 7443
+  },
+  "execution": {
+    "observed_utc_window": {
+      "first_monitor_checkpoint": "2026-07-15T07:16:20Z",
+      "last_monitor_checkpoint": "2026-07-15T12:46:21Z",
+      "exact_search_start_and_finish": "NOT_PRESERVED"
+    },
+    "hosts": [
+      {
+        "alias": "jin-m2",
+        "worker_count": 2,
+        "hardware_identity": "NOT_RECORDED_IN_THE_TRANSIENT_SEARCH_CHECKPOINTS"
+      },
+      {
+        "alias": "xil-m2",
+        "worker_count": 2,
+        "hardware_identity": "NOT_RECORDED_IN_THE_TRANSIENT_SEARCH_CHECKPOINTS"
+      }
+    ],
+    "oom_observed": false,
+    "su2_2_evaluator_restarted_during_projection_search": false
+  },
+  "search_progression": [
+    {
+      "strategy": "local-micro",
+      "geometric_best_crossings": 4774,
+      "geometric_best_lowering_status": "FAILED",
+      "first_lowerable_crossings": 4780
+    },
+    {
+      "strategy": "xil-halton",
+      "best_lowerable_crossings": 4672
+    },
+    {
+      "strategy": "xil-random",
+      "best_lowerable_crossings": 4545
+    },
+    {
+      "strategy": "local-edge-halton",
+      "geometric_best_crossings": 4234,
+      "geometric_best_lowering_status": "FAILED",
+      "first_lowerable_crossings": 4242
+    },
+    {
+      "strategy": "local-edge-jitter-or-ultrafine",
+      "best_lowerable_crossings": 4231
+    },
+    {
+      "strategy": "local-lowtilt-jitter-or-xil-edge-wide",
+      "best_lowerable_crossings": 4054
+    },
+    {
+      "strategy": "xil-edge-ridge",
+      "best_lowerable_crossings": 4064
+    },
+    {
+      "strategy": "local-very-low-halton-and-followups",
+      "best_repeated_lowerable_crossings": 3990
+    },
+    {
+      "strategy": "final-local-boundary-search",
+      "best_reported_and_frontier_measured_crossings": 3988,
+      "source_checkpoint": "MISSING_AFTER_TRANSIENT_STORAGE_CLEANUP"
+    }
+  ],
+  "frontier_measurements": [
+    {
+      "crossings": 7443,
+      "maximum_active_strands": 188,
+      "maximum_su2_2_boundary_fusion_dimension": "2^93"
+    },
+    {
+      "crossings": 4821,
+      "maximum_active_strands": 224,
+      "maximum_su2_2_boundary_fusion_dimension": "2^111"
+    },
+    {
+      "crossings": 4780,
+      "maximum_active_strands": 232,
+      "maximum_su2_2_boundary_fusion_dimension": "2^115"
+    },
+    {
+      "crossings": 4242,
+      "maximum_active_strands": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    },
+    {
+      "crossings": 4231,
+      "maximum_active_strands": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    },
+    {
+      "crossings": 4054,
+      "maximum_active_strands": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    },
+    {
+      "crossings": 3990,
+      "maximum_active_strands": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    },
+    {
+      "crossings": 3988,
+      "maximum_active_strands": 170,
+      "maximum_su2_2_boundary_fusion_dimension": "2^84"
+    }
+  ],
+  "ranker_cross_check": {
+    "crossings": 3990,
+    "maximum_boundary_fusion_dimension": "19342813113834066795298816",
+    "maximum_boundary_fusion_dimension_power_of_two": 84,
+    "effective_event_count": 4594,
+    "method": "Existing SU(2)_2 Morse complexity ranker on the all-sigma sector",
+    "source_output": "TRANSIENT_/tmp_OUTPUT_NOT_PRESERVED"
+  },
+  "conclusion": {
+    "crossing_reduction": "The search reduced the experimental projection from 7443 to the high 3000s.",
+    "complexity_result": "Crossing count alone was not the controlling bottleneck: all lowerable candidates from 4242 through 3988 retained maximum active width 170 and SU(2)_2 boundary fusion dimension 2^84.",
+    "decision": "STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE"
+  },
+  "stable_code_available": [
+    {
+      "path": "experiments/scripts/optimize_morse_side_projection.py",
+      "git_commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "426f72f2bebceeacdd943b5cea7ad61c22679b23",
+      "sha256": "cc51eb245a721a674e6a5ec17e95b8a5bd8fbd68ddb80e84a927fbac2a4c26d5"
+    },
+    {
+      "path": "experiments/scripts/morse_pl_lift.py",
+      "git_commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "082d58e8410084d2c25116569c4ba37d0ff734a4",
+      "sha256": "9fa003b2d8b8cf5f9882d801dc7201fc87e4c14d5f9b5db8ab01946299441ec5"
+    },
+    {
+      "path": "experiments/sage/morse_complexity_rank.sage.py",
+      "git_commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "b41eb6936e89a808befb5ff221582e0e938a8f0f",
+      "sha256": "82392aad55396d308c00efda803fbc431d36cfd5bc1a5fb578fb1a6a6179dd73"
+    }
+  ],
+  "missing_reproducibility_material": [
+    "black-handle slide and red-black cancellation generator",
+    "multi-strategy projection-search wrapper",
+    "lowered Morse inputs for the 7443 through 3988 candidates",
+    "per-strategy checkpoint JSON files",
+    "/tmp/measure_figure21_frontiers.py",
+    "/tmp/figure21-black-cancel-frontier-comparison-v1.json"
+  ],
+  "reproduce_command": null,
+  "generator_script": null,
+  "source_checkpoint": {
+    "git_commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+    "git_dirty_before_artifact_creation": false
+  }
+}
