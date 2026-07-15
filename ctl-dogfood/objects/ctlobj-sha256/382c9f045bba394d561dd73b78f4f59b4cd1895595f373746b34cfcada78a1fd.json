@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-07-15T15:00:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+  "parents": [],
+  "payload": {
+    "claim_id": "current-status-2026-07-15-yasui-character-twists-no-known-separation",
+    "created_at": "2026-07-15T15:00:00Z",
+    "created_by": "actor:codex",
+    "do_not_infer": [
+      "Do not infer theorem-level no-go.",
+      "Do not infer future exotic targets cannot be separated.",
+      "Do not infer standard-side baseline behavior is an obstruction.",
+      "Do not treat standard/split nonbaseline behavior as a success criterion."
+    ],
+    "evidence": {
+      "correction_ledger": {
+        "path": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+        "sha256": "02d6b25d877327f8f7cbaf5e30cc99e794c91b556fb2214cf59aa1dc92b37aa2"
+      },
+      "correction_note": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+      "su3_coordinate_comparison": {
+        "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+        "sha256": "7cfa69024db54d46d39ae04bf2a1b4ef41cdf21267da3ba8afafcd928076b3f3"
+      }
+    },
+    "schema": "twisted-yetter/current-status-claim/1",
+    "statement": "Current artifacts contain nonbaseline character-twist phases, but no current evidence that Yasui Figure 3 a=1/a=3 character-twist functions differ from their standard functions after the correct character-coordinate identification. Standard-side constancy is not currently known to obstruct the exotic-vs-standard goal.",
+    "status": "CURRENT_GUARDRAIL",
+    "title": "Current Yasui character-twist artifacts show no known Yasui-vs-standard separation"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-07-15T18:18:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+  "parents": [
+    "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6"
+  ],
+  "payload": {
+    "aliases": [
+      "yasui-character-twist-history-correction",
+      "yasui-character-twist-erratum",
+      "yasui-no-known-character-separation-guardrail"
+    ],
+    "current_view_hints": {
+      "guardrail": "Future agents should compare full character-twist functions after the correct coordinate identification, not just ask whether a presentation is nonbaseline.",
+      "headline": "Nonbaseline character-twist phases are not Yasui-vs-standard separation evidence.",
+      "primary_correction_note": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+      "primary_ledger": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+      "su3_coordinate_comparison": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json"
+    },
+    "display_name": "Yasui character-twist history correction cluster",
+    "parent_subject_ids": [
+      "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
+      "subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal",
+      "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal"
+    ],
+    "schema": "twisted-yetter/subject-definition/0",
+    "scope_note": "Append-only correction cluster for the July 2026 Yasui character-twist history. It demotes standard/split nonbaseline behavior to sanity or candidate bookkeeping, records that SU(3)_2 matches the split function after coordinate identification, and marks D(Dic_12) as a pointed witness bookkeeping signal rather than separation evidence.",
+    "status": "active",
+    "subject_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+    "subject_kind": "ty:claim-cluster",
+    "upstream_review_hints": [
+      "Lead generated views with: nonbaseline yes, separation no.",
+      "If a search finds the older phrase \"first positive closed-four-manifold character-twist signal\", route readers here: that wording is misleading outside a narrow SU(3)_2 pipeline-local sense because SU(2)_2 all-alpha nonbaseline Yasui runs already existed and nonbaseline is not separation.",
+      "The correction is append-only and does not rewrite the earlier SU(3)_2 or D(Dic_12) claims.",
+      "Standard-side constancy is not currently known to obstruct future exotic-vs-standard character-twist separation."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "subject-definition"
+}
