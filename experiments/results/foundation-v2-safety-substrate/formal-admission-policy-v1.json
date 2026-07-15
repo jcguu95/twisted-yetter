@@ -1,0 +1,110 @@
+{
+  "allowed_formal_claim_levels": [
+    "formal-low-rank-category-evidence",
+    "formal-low-rank-scan-evidence"
+  ],
+  "explicit_non_claims": [
+    "This policy does not establish any rank 2-5 ribbon refinement.",
+    "This policy does not authorize any formal scan plan while the catalog is blocked.",
+    "This policy does not turn formula preflight, candidate, or legacy FR-only outputs into evidence."
+  ],
+  "formal_evidence_kind_allowlist": [
+    "ribbon_realization_snapshot",
+    "scan_plan",
+    "scan_case_result",
+    "scan_aggregate"
+  ],
+  "formal_scan_status": "BLOCKED_UNTIL_LOW_RANK_RIBBON_CATALOG_ESTABLISHED",
+  "foundation_status": "FOUNDATION_ESTABLISHED",
+  "generated_at_utc": "2026-07-15T22:15:57Z",
+  "generator_script": "experiments/scripts/build_foundation_v2_safety_substrate_v1.py",
+  "git": {
+    "commit": "7a3a8e79a3487376f4438567feb45fb713f06c7b",
+    "dirty": true
+  },
+  "policy_flags": {
+    "braided_denominator_is_not_ribbon_denominator": true,
+    "classification_must_be_ribbon_level": true,
+    "ctl_claims_require_admission_validator": true,
+    "derived_readiness_only": true,
+    "formal_evidence_requires_content_hash": true,
+    "formula_preflight_is_not_formal_evidence": true,
+    "mutable_aliases_are_not_formal_evidence": true
+  },
+  "policy_id": "low-rank-ribbon-foundation-v2-formal-admission-policy-v1",
+  "policy_status": "ACTIVE_FAIL_CLOSED",
+  "rejected_source_statuses": [
+    "formula-preflight",
+    "provisional-low-confidence",
+    "candidate-experimental",
+    "legacy-fr-only",
+    "historical-negative-control"
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write",
+  "required_pinned_hash_fields": {
+    "ribbon_realization_snapshot": [
+      "content_hash",
+      "category_data_hash",
+      "producer_exact_coherence",
+      "consumer_runtime_coherence",
+      "ribbon_pivotal_compatibility"
+    ],
+    "scan_aggregate": [
+      "content_hash",
+      "scan_plan_hash",
+      "enumerator_certificate",
+      "expected_case_count",
+      "actual_case_count"
+    ],
+    "scan_case_result": [
+      "content_hash",
+      "scan_plan_hash",
+      "scan_case_id",
+      "input_hashes",
+      "worker_revalidated_hashes"
+    ],
+    "scan_plan": [
+      "content_hash",
+      "audit_snapshot_hash",
+      "classification_catalog_hash",
+      "category_catalog",
+      "manifold_catalog",
+      "character_assignment_catalog",
+      "evaluator_profile",
+      "numeric_policy",
+      "execution_semantics"
+    ]
+  },
+  "schema": "twisted-yetter.foundation-safety.formal-admission-policy.v1",
+  "status": "FOUNDATION_ESTABLISHED_POLICY_ARTIFACT",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "v0_seed_inputs": [
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/blocker-coverage-matrix-v0.json",
+      "sha256": "sha256:773095a66503b3f73dd3e21665ccf3021b39c4dc3b323597d7ee832ff0ca742a"
+    },
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/blocker-registry-v0.json",
+      "sha256": "sha256:f2bf9892d61e34da811ce720e4fa27d0e91bffb4ffa618e2f6049d59eabad7a2"
+    },
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v0.json",
+      "sha256": "sha256:f63fa50df680e588879029c643a2aff192858bff905a74533ff441d626aa371b"
+    },
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/historical-claim-audit-seed-v0.json",
+      "sha256": "sha256:6085f72732555ee95d8bd4ae7814fd6279516d13b189972bc3950b40d8e01f07"
+    },
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/known-execution-surface-inventory-v0.json",
+      "sha256": "sha256:63369f0429ca4b5c6244616382993c4571d6712b92d5fa3fe9f4dc384120749e"
+    },
+    {
+      "path": "experiments/results/foundation-v2-safety-substrate/review-input-bundle-v0.json",
+      "sha256": "sha256:38dcd843bdd463ec259a78a3d0d5780343226ccdd33850ed79dc4c93ce82c287"
+    }
+  ]
+}

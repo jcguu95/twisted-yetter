@@ -1,0 +1,88 @@
+{
+  "entries": [
+    {
+      "exists_at_generation": true,
+      "formal_low_rank_scan_allowed": false,
+      "path": "experiments/inputs/category-pivotal/historical-da4-fr-only-no-pivotal-v1.json",
+      "rationale": "Historical FR-only fixture intentionally lacks explicit pivotal data.",
+      "resource_id": "resource:twisted-yetter:category-input:historical-da4-fr-only-no-pivotal",
+      "safe_scopes": [
+        "negative control for missing-pivotal rejection"
+      ],
+      "safety_status": "unsafe_for_formal_low_rank_scan",
+      "sha256": "sha256:2ee39fbe58a0a8ccc6db6c50c68936e00b6fa691084f787e0efb7522f3c864aa",
+      "unsafe_scopes": [
+        "formal ribbon realization",
+        "formal low-rank scan category input",
+        "source of pivotal, spherical, or ribbon structure"
+      ]
+    },
+    {
+      "exists_at_generation": true,
+      "formal_low_rank_scan_allowed": false,
+      "path": "experiments/results/provisional-formula-policy/n30-policy-certificate.json",
+      "rationale": "n30 allows provisional formula experiments but rejects theorem-level claims.",
+      "resource_id": "resource:twisted-yetter:policy:provisional-formula-policy",
+      "safe_scopes": [
+        "policy citation for provisional formula boundaries"
+      ],
+      "safety_status": "policy_reference_not_formal_scan_evidence",
+      "sha256": "sha256:489c0e26f788679ba1c606bb110424e4f068f6813b2018589c619002206d26ff",
+      "unsafe_scopes": [
+        "formal scan evidence",
+        "closed 4D invariant claim",
+        "low-rank no-signal conclusion"
+      ]
+    },
+    {
+      "exists_at_generation": true,
+      "formal_low_rank_scan_allowed": false,
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-preflight-v1.json",
+      "rationale": "Preflight output may guide debugging but cannot satisfy formal scan admission.",
+      "resource_id": "resource:twisted-yetter:result:yasui-da4-c3w1-preflight",
+      "safe_scopes": [
+        "debugging and archaeology"
+      ],
+      "safety_status": "formula_preflight_not_formal_evidence",
+      "sha256": "sha256:8ad07a478ef811c391a6e9b41d61b3b4f203bdc402bd7a6fb3f155f2d70b95d0",
+      "unsafe_scopes": [
+        "formal scan case result",
+        "complete-no-signal aggregate",
+        "CTL claim evidence for low-rank classification"
+      ]
+    },
+    {
+      "exists_at_generation": true,
+      "formal_low_rank_scan_allowed": false,
+      "path": "experiments/sage/su2_2_braid_oracle.sage.py",
+      "rationale": "Legacy oracle scripts are execution surfaces, not admission gates.",
+      "resource_id": "resource:twisted-yetter:script:su2-2-braid-oracle",
+      "safe_scopes": [
+        "historical comparison after explicit resource safety review"
+      ],
+      "safety_status": "legacy_oracle_not_authorized_for_formal_scan",
+      "sha256": "sha256:d2b9b67d6e2217b6a1b35ffcf3a81338354063d2a1fed1b822b1f5a39636c3cb",
+      "unsafe_scopes": [
+        "backend-neutral formal scan runner",
+        "independent ribbon coherence certificate",
+        "CTL-admissible formal evidence by itself"
+      ]
+    }
+  ],
+  "formal_low_rank_scan_allowed_by_default": false,
+  "generated_at_utc": "2026-07-15T22:15:57Z",
+  "generator_script": "experiments/scripts/build_foundation_v2_safety_substrate_v1.py",
+  "git": {
+    "commit": "7a3a8e79a3487376f4438567feb45fb713f06c7b",
+    "dirty": true
+  },
+  "ledger_id": "low-rank-ribbon-foundation-v2-resource-safety-ledger-v1",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write",
+  "resource_count": 4,
+  "schema": "twisted-yetter.foundation-safety.resource-safety-ledger.v1",
+  "status": "FOUNDATION_RESOURCE_SAFETY_LEDGER_ACTIVE",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
