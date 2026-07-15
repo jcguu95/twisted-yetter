@@ -1,16 +1,16 @@
 {
   "schema": "twisted-yetter/objective-lab-note/1",
   "note_id": "objective-note-2026-07-15-figure21-black-cancel-projection-search",
-  "title": "Figure 21 black-cancel projection search reached the high 3000s but retained a 2^84 frontier",
-  "created_at": "2026-07-15T13:47:23Z",
+  "title": "Figure 21 black-cancel projection search evidence recovered",
+  "created_at": "2026-07-15T14:47:18Z",
   "created_by": "actor:codex",
-  "status": "HISTORICAL_CHECKPOINT_WITH_REPRODUCIBILITY_GAP",
-  "top_notice": "The high-3000 crossing reduction and 2^84 frontier observation are important negative evidence, but this is not an end-to-end reproducible certificate: transient cancellation/search code, lowered inputs, and checkpoints were not preserved.",
+  "status": "RECOVERED_REPRODUCIBILITY_CHECKPOINT",
+  "top_notice": "This revision supersedes the earlier claim that the transient search evidence had been lost. The files remained under /private/tmp and on XIL; 17 checkpoints, both search-script variants, source data, launch records, environments, and selected lowered candidates are now preserved in a Git-managed evidence bundle.",
   "mathematical_status": {
     "diagram_rewrite": "EXPERIMENTAL_NOT_INDEPENDENTLY_CERTIFIED_AS_KIRBY_EQUIVALENT",
-    "crossing_counts": "HISTORICAL_NUMERIC_OBSERVATION",
-    "frontier_dimensions": "HISTORICAL_EXACT_RANKER_OUTPUT_WITH_MISSING_TRANSIENT_INPUT",
-    "complexity_conclusion": "EMPIRICAL_CURRENT_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND"
+    "crossing_counts": "RECOVERED_MACHINE_READABLE_SEARCH_OUTPUT",
+    "frontier_dimensions": "EXACT_RANKER_OUTPUT_FOR_THIS_EXPERIMENTAL_REPRESENTATION",
+    "complexity_conclusion": "EMPIRICAL_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND"
   },
   "presentation": {
     "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
@@ -22,71 +22,42 @@
   },
   "result": {
     "baseline_crossings": 7443,
-    "best_repeated_lowerable_crossings": 3990,
-    "best_reported_and_frontier_measured_crossings": 3988,
-    "maximum_active_strands_from_4242_through_3988": 170,
+    "best_evaluator_ready_crossings": 3988,
+    "maximum_active_strands_at_3988": 170,
     "maximum_su2_2_boundary_fusion_dimension": "2^84",
-    "all_sigma_dimension_decimal": "19342813113834066795298816",
     "decision": "STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE"
   },
   "execution": {
-    "first_monitor_checkpoint_utc": "2026-07-15T07:16:20Z",
-    "last_monitor_checkpoint_utc": "2026-07-15T12:46:21Z",
-    "exact_start_and_finish": "NOT_PRESERVED",
+    "checkpoint_count": 17,
+    "completed_checkpoint_count": 15,
+    "interrupted_checkpoint_count": 2,
     "hosts": [
-      {
-        "alias": "jin-m2",
-        "workers": 2,
-        "hardware_identity": "NOT_RECORDED"
-      },
-      {
-        "alias": "xil-m2",
-        "workers": 2,
-        "hardware_identity": "NOT_RECORDED"
-      }
-    ]
+      {"alias": "jin-m2", "workers": 2, "hardware": "Apple M2 MacBook Air, 8 logical CPUs, 16 GiB"},
+      {"alias": "xil-m2", "workers": 2, "hardware": "Apple M2, 8 logical CPUs, 16 GiB"}
+    ],
+    "time_notice": "Initial two-worker launches have exact UTC records. Per-strategy starts are otherwise inferred as checkpoint mtime minus elapsed_seconds; interrupted rows record the final observed checkpoint, not a completion time."
   },
-  "artifact": {
-    "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v1.json",
-    "commit": "0b09122623505d5fcc1676e943f790f0fb014796",
-    "git_blob": "8de26f1fdef74324f6a3fc34226927b82456dd8d",
-    "sha256": "e84415ce203109782d865754f3063089a5a9185b13f1bdcb82e9990120e0ac8e"
-  },
-  "stable_code_available": [
+  "artifacts": [
     {
-      "path": "experiments/scripts/optimize_morse_side_projection.py",
-      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-      "git_blob": "426f72f2bebceeacdd943b5cea7ad61c22679b23",
-      "sha256": "cc51eb245a721a674e6a5ec17e95b8a5bd8fbd68ddb80e84a927fbac2a4c26d5"
+      "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v2.json",
+      "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+      "git_blob": "73f9f6c9cc8c4fa75846690b3d1e856710d8c320",
+      "sha256": "4ea878c7c96cc26e3677e549480241f2cff6ca6c3cfa2108cb61a980b5625496"
     },
     {
-      "path": "experiments/scripts/morse_pl_lift.py",
-      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-      "git_blob": "082d58e8410084d2c25116569c4ba37d0ff734a4",
-      "sha256": "9fa003b2d8b8cf5f9882d801dc7201fc87e4c14d5f9b5db8ab01946299441ec5"
-    },
-    {
-      "path": "experiments/sage/morse_complexity_rank.sage.py",
-      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-      "git_blob": "b41eb6936e89a808befb5ff221582e0e938a8f0f",
-      "sha256": "82392aad55396d308c00efda803fbc431d36cfd5bc1a5fb578fb1a6a6179dd73"
+      "path": "experiments/results/akbulut-yasui/evidence/figure21-black-cancel-projection-search-evidence-v2.tar.gz",
+      "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+      "git_blob": "d93a66bda2e7dfb7166f4709c9930920f4baf331",
+      "sha256": "8f5c6a84bc835f4066c1ee798ce83ef3c31716b1e4824ed5073742699b300dea",
+      "bytes": 3268866
     }
   ],
-  "reproducibility_gap": {
-    "missing": [
-      "black-handle slide and red-black cancellation generator",
-      "multi-strategy projection-search wrapper",
-      "lowered candidate inputs",
-      "per-strategy checkpoints",
-      "temporary frontier comparison script and output"
-    ],
-    "reproduce_command": null,
-    "recovery_rule": "Do not claim end-to-end reproduction unless the cancellation and search are rerun from a stable committed generator."
+  "generator": {
+    "path": "experiments/scripts/package_figure21_projection_search_evidence.py",
+    "source_commit": "d19973aabb8681099000e917fa629998c02be728",
+    "reproduce_command": "python3 experiments/scripts/package_figure21_projection_search_evidence.py --write"
   },
-  "source_checkpoint": {
-    "git_commit": "0b09122623505d5fcc1676e943f790f0fb014796",
-    "git_dirty": false
-  },
+  "supersedes_current_object": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
   "subjects": [
     "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
     "subject:twisted-yetter:category-family:su2-k"

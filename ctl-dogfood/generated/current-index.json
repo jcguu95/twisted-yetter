@@ -7438,110 +7438,166 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
+      "cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
       "logical_id": "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search",
       "payload": {
-        "artifact": {
-          "commit": "0b09122623505d5fcc1676e943f790f0fb014796",
-          "git_blob": "8de26f1fdef74324f6a3fc34226927b82456dd8d",
-          "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v1.json",
-          "sha256": "e84415ce203109782d865754f3063089a5a9185b13f1bdcb82e9990120e0ac8e"
-        },
+        "artifacts": [
+          {
+            "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+            "git_blob": "73f9f6c9cc8c4fa75846690b3d1e856710d8c320",
+            "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v2.json",
+            "sha256": "4ea878c7c96cc26e3677e549480241f2cff6ca6c3cfa2108cb61a980b5625496"
+          },
+          {
+            "bytes": 3268866,
+            "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+            "git_blob": "d93a66bda2e7dfb7166f4709c9930920f4baf331",
+            "path": "experiments/results/akbulut-yasui/evidence/figure21-black-cancel-projection-search-evidence-v2.tar.gz",
+            "sha256": "8f5c6a84bc835f4066c1ee798ce83ef3c31716b1e4824ed5073742699b300dea"
+          }
+        ],
         "category": {
           "category_id": "su2-k2",
           "subject": "subject:twisted-yetter:category-family:su2-k"
         },
-        "created_at": "2026-07-15T13:47:23Z",
+        "created_at": "2026-07-15T14:47:18Z",
         "created_by": "actor:codex",
         "execution": {
-          "exact_start_and_finish": "NOT_PRESERVED",
-          "first_monitor_checkpoint_utc": "2026-07-15T07:16:20Z",
+          "checkpoint_count": 17,
+          "completed_checkpoint_count": 15,
           "hosts": [
             {
               "alias": "jin-m2",
-              "hardware_identity": "NOT_RECORDED",
+              "hardware": "Apple M2 MacBook Air, 8 logical CPUs, 16 GiB",
               "workers": 2
             },
             {
               "alias": "xil-m2",
-              "hardware_identity": "NOT_RECORDED",
+              "hardware": "Apple M2, 8 logical CPUs, 16 GiB",
               "workers": 2
             }
           ],
-          "last_monitor_checkpoint_utc": "2026-07-15T12:46:21Z"
+          "interrupted_checkpoint_count": 2,
+          "time_notice": "Initial two-worker launches have exact UTC records. Per-strategy starts are otherwise inferred as checkpoint mtime minus elapsed_seconds; interrupted rows record the final observed checkpoint, not a completion time."
+        },
+        "generator": {
+          "path": "experiments/scripts/package_figure21_projection_search_evidence.py",
+          "reproduce_command": "python3 experiments/scripts/package_figure21_projection_search_evidence.py --write",
+          "source_commit": "d19973aabb8681099000e917fa629998c02be728"
         },
         "mathematical_status": {
-          "complexity_conclusion": "EMPIRICAL_CURRENT_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND",
-          "crossing_counts": "HISTORICAL_NUMERIC_OBSERVATION",
+          "complexity_conclusion": "EMPIRICAL_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND",
+          "crossing_counts": "RECOVERED_MACHINE_READABLE_SEARCH_OUTPUT",
           "diagram_rewrite": "EXPERIMENTAL_NOT_INDEPENDENTLY_CERTIFIED_AS_KIRBY_EQUIVALENT",
-          "frontier_dimensions": "HISTORICAL_EXACT_RANKER_OUTPUT_WITH_MISSING_TRANSIENT_INPUT"
+          "frontier_dimensions": "EXACT_RANKER_OUTPUT_FOR_THIS_EXPERIMENTAL_REPRESENTATION"
         },
         "note_id": "objective-note-2026-07-15-figure21-black-cancel-projection-search",
         "presentation": {
           "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE",
           "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
         },
-        "reproducibility_gap": {
-          "missing": [
-            "black-handle slide and red-black cancellation generator",
-            "multi-strategy projection-search wrapper",
-            "lowered candidate inputs",
-            "per-strategy checkpoints",
-            "temporary frontier comparison script and output"
-          ],
-          "recovery_rule": "Do not claim end-to-end reproduction unless the cancellation and search are rerun from a stable committed generator.",
-          "reproduce_command": null
-        },
         "result": {
-          "all_sigma_dimension_decimal": "19342813113834066795298816",
           "baseline_crossings": 7443,
-          "best_repeated_lowerable_crossings": 3990,
-          "best_reported_and_frontier_measured_crossings": 3988,
+          "best_evaluator_ready_crossings": 3988,
           "decision": "STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE",
-          "maximum_active_strands_from_4242_through_3988": 170,
+          "maximum_active_strands_at_3988": 170,
           "maximum_su2_2_boundary_fusion_dimension": "2^84"
         },
         "schema": "twisted-yetter/objective-lab-note/1",
-        "source_checkpoint": {
-          "git_commit": "0b09122623505d5fcc1676e943f790f0fb014796",
-          "git_dirty": false
-        },
-        "stable_code_available": [
-          {
-            "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-            "git_blob": "426f72f2bebceeacdd943b5cea7ad61c22679b23",
-            "path": "experiments/scripts/optimize_morse_side_projection.py",
-            "sha256": "cc51eb245a721a674e6a5ec17e95b8a5bd8fbd68ddb80e84a927fbac2a4c26d5"
-          },
-          {
-            "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-            "git_blob": "082d58e8410084d2c25116569c4ba37d0ff734a4",
-            "path": "experiments/scripts/morse_pl_lift.py",
-            "sha256": "9fa003b2d8b8cf5f9882d801dc7201fc87e4c14d5f9b5db8ab01946299441ec5"
-          },
-          {
-            "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
-            "git_blob": "b41eb6936e89a808befb5ff221582e0e938a8f0f",
-            "path": "experiments/sage/morse_complexity_rank.sage.py",
-            "sha256": "82392aad55396d308c00efda803fbc431d36cfd5bc1a5fb578fb1a6a6179dd73"
-          }
-        ],
-        "status": "HISTORICAL_CHECKPOINT_WITH_REPRODUCIBILITY_GAP",
+        "status": "RECOVERED_REPRODUCIBILITY_CHECKPOINT",
         "subjects": [
           "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
           "subject:twisted-yetter:category-family:su2-k"
         ],
-        "title": "Figure 21 black-cancel projection search reached the high 3000s but retained a 2^84 frontier",
-        "top_notice": "The high-3000 crossing reduction and 2^84 frontier observation are important negative evidence, but this is not an end-to-end reproducible certificate: transient cancellation/search code, lowered inputs, and checkpoints were not preserved."
+        "supersedes_current_object": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
+        "title": "Figure 21 black-cancel projection search evidence recovered",
+        "top_notice": "This revision supersedes the earlier claim that the transient search evidence had been lost. The files remained under /private/tmp and on XIL; 17 checkpoints, both search-script variants, source data, launch records, environments, and selected lowered candidates are now preserved in a Git-managed evidence bundle."
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
-        "created_at": "2026-07-15T13:47:23Z",
+        "cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+        "created_at": "2026-07-15T14:47:18Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search",
+        "parents": [
+          "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        ],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
+      "logical_id": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+      "payload": {
+        "artifact": {
+          "commit": "38e6a1f8bd3674a7d080f91cd2df4063681536b5",
+          "git_blob": "b6156d3c55e2018d095bc2e370b50cd4b00c526b",
+          "path": "experiments/results/mtc-classification/low-rank-mtc-classification-matrix-v1.json",
+          "sha256": "8dfee1eb16fc1b5dadcdd8736a52de4e1c530f40d706179b37cb4a516fef5f3b"
+        },
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": "actor:codex",
+        "mathematical_status": "SOURCE_SYNTHESIS_NOT_A_NEW_CLASSIFICATION_THEOREM",
+        "note_id": "objective-note-2026-07-15-low-rank-mtc-classification-scope",
+        "reference_ids": [
+          "ref:rsw-low-rank-umtc-2009",
+          "ref:bnrw-rank5-2016",
+          "ref:bruillard-ortiz-rank5-premodular-2018",
+          "ref:dong-schopieray-near-integral-2024"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "modular_braided_class_counts": {
+            "2": 6,
+            "3": 16,
+            "4": 33,
+            "5": 22
+          },
+          "premodular_braided_class_counts": {
+            "2": 8,
+            "3": 20,
+            "4": 57,
+            "5": 55
+          },
+          "rank5_modular_family_counts": {
+            "PSU(2)_9": 10,
+            "PSU(3)_4": 6,
+            "SU(2)_4": 4,
+            "SU(5)_1": 2
+          },
+          "ranks": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "ribbon_gap": "Spherical and pivotal refinements still require an explicit audit before claiming exhaustive MTC ribbon realizations."
+        },
+        "source_ledger": {
+          "commit": "0068c5dd538d273a3ab36feee2aadc7074743dda",
+          "git_blob": "c441d07eced46ed31e36d2d50edb62afc89b8f66",
+          "path": "experiments/inputs/references/low-rank-mtc-classification-primary-sources-v1.json",
+          "sha256": "e7de1f23c63979980a24d694d2826ee96b5313da1104f132ce7f1ebf7f060f79"
+        },
+        "status": "LITERATURE_BACKED_BRAIDED_CLASSIFICATION_SCOPE",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "title": "Rank 2 through 5 MTC classification scope corrected to braided equivalence",
+        "top_notice": "Rank 2 through 5 premodular categories are now catalogued using the 2024 braided-equivalence classification. This is not yet an exhaustion up to ribbon tensor equivalence because some braided classes admit multiple spherical structures and the source does not classify all such refinements."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -10065,6 +10121,136 @@
       "revision_kind": "subject-edge"
     },
     {
+      "cid": "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
+      "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub",
+        "explanation": "The note records the current rank-2-through-5 braided-classification scope and the remaining ribbon-refinement gap.",
+        "role": "about",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "status": "active",
+        "target": "subject:twisted-yetter:reference:low-rank-mtc-classification"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
+      "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang",
+        "explanation": "Uses the rank-5 Grothendieck-family theorem while retaining its explicit modular-structure gap.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
+      "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz",
+        "explanation": "Uses the earlier rank-5 premodular source only together with its later 2024 refinement.",
+        "role": "uses-with-later-correction",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
+      "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray",
+        "explanation": "Uses the current complete premodular braided-equivalence classification through rank 6, restricted here to ranks 2 through 5.",
+        "role": "uses-as-current-braided-classification",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:dong-schopieray-2407-15955"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
+      "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang",
+        "explanation": "Uses the unitary rank-at-most-4 ribbon classification as historical and scope evidence.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
       "cid": "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948",
       "logical_id": "subject-edge:ty:akbulut-figure1-e1:about:e1",
       "payload": {
@@ -10325,6 +10511,58 @@
       "revision_kind": "subject-edge:definition"
     },
     {
+      "cid": "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+      "logical_id": "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification",
+      "payload": {
+        "edge_id": "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification",
+        "explanation": "Primary rank-5 Grothendieck-family source, with its explicit modular-structure gap retained.",
+        "role": "classified-under",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139",
+        "status": "active",
+        "target": "subject:twisted-yetter:reference:low-rank-mtc-classification"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
+      "logical_id": "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification",
+      "payload": {
+        "edge_id": "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification",
+        "explanation": "Earlier rank-5 premodular source; current interpretation is constrained by Dong-Schopieray 2024.",
+        "role": "classified-under-with-later-refinement",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769",
+        "status": "active",
+        "target": "subject:twisted-yetter:reference:low-rank-mtc-classification"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
       "cid": "ctlobj-sha256:f4364851020c3d2fee98f67eea11d0f3c2d4821f2b56dd4c7ded1727a003b52e",
       "logical_id": "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline",
       "payload": {
@@ -10528,6 +10766,32 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:d-dic12-omega0:motivated-by:yasui-a3-da4",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
+      "logical_id": "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification",
+      "payload": {
+        "edge_id": "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification",
+        "explanation": "Current source for complete premodular braided-equivalence classification through rank 6, used here only through rank 5.",
+        "role": "current-braided-classification-source",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+        "status": "active",
+        "target": "subject:twisted-yetter:reference:low-rank-mtc-classification"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -10819,6 +11083,32 @@
         "revision_kind": "subject-edge:definition"
       },
       "revision_kind": "subject-edge:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
+      "logical_id": "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification",
+      "payload": {
+        "edge_id": "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification",
+        "explanation": "Primary unitary rank-at-most-4 ribbon-classification source.",
+        "role": "classified-under",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377",
+        "status": "active",
+        "target": "subject:twisted-yetter:reference:low-rank-mtc-classification"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
     },
     {
       "cid": "ctlobj-sha256:eee94193c60cd3c911b8c9547e968ffa079e2f33cb823195d7725ab29bae0360",
@@ -13867,6 +14157,98 @@
       "revision_kind": "subject:definition"
     },
     {
+      "cid": "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
+      "logical_id": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139",
+      "payload": {
+        "aliases": [
+          "bnrw-rank5-2016"
+        ],
+        "display_name": "Bruillard-Ng-Rowell-Wang, On Classification of Modular Categories by Rank",
+        "equivalent_external_ids": [
+          "arxiv:1507.05139v2",
+          "doi:10.48550/arXiv.1507.05139"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/1507.05139",
+            "arxiv_id": "1507.05139",
+            "capture_date": "2026-07-15",
+            "kind": "arxiv",
+            "pdf_sha256": "c23fbcf3076b0c0602009409b20d77ab84ec854018d95af7fc58733b6c4b9fe3",
+            "version": "v2",
+            "versioned_id": "1507.05139v2"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Primary source for rank-5 Grothendieck families. Theorem 4.1 is fusion-rule level; Remark 4.2 warns that distinct modular structures were not counted.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
+      "logical_id": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769",
+      "payload": {
+        "aliases": [
+          "bruillard-ortiz-rank5-premodular-2018"
+        ],
+        "display_name": "Bruillard-Ortiz, Classification of Rank 5 Premodular Categories",
+        "equivalent_external_ids": [
+          "arxiv:1612.08769v2",
+          "doi:10.48550/arXiv.1612.08769"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/1612.08769",
+            "arxiv_id": "1612.08769",
+            "capture_date": "2026-07-15",
+            "kind": "arxiv",
+            "pdf_sha256": "f74695813a9d143dcd9bb06947bc70acb624b657cc654313902eff7c8a8eb478",
+            "version": "v2",
+            "versioned_id": "1612.08769v2"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Earlier pseudo-unitary rank-5 premodular classification. Current use must include the correction/refinement supplied by Dong-Schopieray 2024; do not treat this paper alone as the final braided classification.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0",
       "logical_id": "subject:twisted-yetter:paper:burke-2402-15087-provisional",
       "payload": {
@@ -13965,6 +14347,98 @@
         "revision_kind": "subject:definition"
       },
       "revision_kind": "subject:definition"
+    },
+    {
+      "cid": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
+      "logical_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+      "payload": {
+        "aliases": [
+          "dong-schopieray-near-integral-2024"
+        ],
+        "display_name": "Dong-Schopieray, Near-integral fusion",
+        "equivalent_external_ids": [
+          "arxiv:2407.15955v1",
+          "doi:10.48550/arXiv.2407.15955"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/2407.15955",
+            "arxiv_id": "2407.15955",
+            "capture_date": "2026-07-15",
+            "kind": "arxiv",
+            "pdf_sha256": "48749f20f131ef4aafd379cb440313c6356bceffead16408acbaf85f4bdfcadb",
+            "version": "v1",
+            "versioned_id": "2407.15955v1"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Current primary source completing premodular classification through rank 6 up to braided equivalence. Page 26 explicitly separates this from a complete pivotal/spherical/ribbon classification.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
+      "logical_id": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377",
+      "payload": {
+        "aliases": [
+          "rsw-low-rank-umtc-2009"
+        ],
+        "display_name": "Rowell-Stong-Wang, On Classification of Modular Tensor Categories",
+        "equivalent_external_ids": [
+          "arxiv:0712.1377v4",
+          "doi:10.48550/arXiv.0712.1377"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/0712.1377",
+            "arxiv_id": "0712.1377",
+            "capture_date": "2026-07-15",
+            "kind": "arxiv",
+            "pdf_sha256": "f1d3dc4156025b8fd1e77c35cae54a982a42ecee7aa29fbf9eb31e496244f3ed",
+            "version": "v4",
+            "versioned_id": "0712.1377v4"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Primary source for the unitary rank-at-most-4 classification up to ribbon tensor equivalence. See abstract and page 4/Table 1.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
     },
     {
       "cid": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
@@ -14786,6 +15260,41 @@
       "revision_kind": "subject:definition"
     },
     {
+      "cid": "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
+      "logical_id": "subject:twisted-yetter:reference:low-rank-mtc-classification",
+      "payload": {
+        "aliases": [
+          "low-rank-mtc-classification",
+          "rank-at-most-five-mtc-references"
+        ],
+        "display_name": "Low-rank braided, premodular, and modular category classification references",
+        "equivalent_external_ids": [],
+        "parent_subject_ids": [],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference hub for classification results used to enumerate low-rank category candidates. It separates Grothendieck, braided, spherical, and ribbon equivalence and is not itself a classification theorem.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:reference:low-rank-mtc-classification",
+        "subject_kind": "ty:reference",
+        "upstream_review_hints": [
+          "Do not promote braided-equivalence counts to ribbon-equivalence counts without a spherical/pivotal refinement audit.",
+          "Use page-level locators from the repo-local primary-source ledger."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:reference:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
       "logical_id": "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation",
       "payload": {
@@ -14916,7 +15425,8 @@
       "claim:lab-note:2026-07-13-figure815-e1-su2-3-aborted-runtime-estimate": "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
       "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery": "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
       "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier": "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
-      "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
+      "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+      "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -14993,6 +15503,11 @@
       "subject-edge:ty:2026-07-14-figure21-su2-2-recovery:uses:su2-k": "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
       "subject-edge:ty:2026-07-15-figure21-black-cancel-search:about:figure21-e3prime": "ctlobj-sha256:60697aa9744a89c9d4c40432bfcf191008cf6afb5cb1825c826b3eac033cfccb",
       "subject-edge:ty:2026-07-15-figure21-black-cancel-search:uses:su2-k": "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub": "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang": "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz": "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray": "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang": "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
       "subject-edge:ty:akbulut-figure1-e1:about:e1": "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948",
       "subject-edge:ty:akbulut-figure38-note:about:figure38": "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655",
       "subject-edge:ty:akbulut-figure38:about:e1": "ctlobj-sha256:2d7e2926e6556bdfda45b2c4025563c23924a6ac3fda37a2f9bcc67498a31e75",
@@ -15003,6 +15518,8 @@
       "subject-edge:ty:anyonwiki-cat-1-3-1-source-capture:about:fr-6-1-4-5": "ctlobj-sha256:33ce2eb85945afc99fe9a45b65697ce8944cc68803ebfaa360cd508a6556cba3",
       "subject-edge:ty:anyonwiki-cat-1-3-2-source-capture:about:fr-6-1-4-5": "ctlobj-sha256:32fa6d3db52b3d26d6f8a59883b8497e3879b846f4f07924ba4cafaa8bc1bcc1",
       "subject-edge:ty:baykur-2403-14586:authored-by:r-inanc-baykur": "ctlobj-sha256:ff799a8064e7b0dcbf14d9967b3c68810d73a5beac95165adae72a796cd9a989",
+      "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification": "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+      "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification": "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
       "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline": "ctlobj-sha256:f4364851020c3d2fee98f67eea11d0f3c2d4821f2b56dd4c7ded1727a003b52e",
       "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:su3-2": "ctlobj-sha256:b2228764e72bac7b0b0db87bd7bb5b251f572ba87d481995009058f13089028f",
       "subject-edge:ty:d-dic12-fr-data:defines:d-dic12-omega0": "ctlobj-sha256:a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3",
@@ -15011,6 +15528,7 @@
       "subject-edge:ty:d-dic12-omega0:motivated-by:da4-construction-account": "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
       "subject-edge:ty:d-dic12-omega0:motivated-by:da4-two-mtc-data": "ctlobj-sha256:44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005",
       "subject-edge:ty:d-dic12-omega0:motivated-by:yasui-a3-da4": "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
+      "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification": "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
       "subject-edge:ty:dual-kirby-convention:uses:tham-2108-13467": "ctlobj-sha256:eb183e31ec24b3556f89bc71c257de1f1ee9a6c139e348ade73ef0eecfd20398",
       "subject-edge:ty:gompf-stipsicz:contains:figure815-morse-draft": "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
       "subject-edge:ty:gompf-stipsicz:defines:k3-cpbar-route": "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
@@ -15022,6 +15540,7 @@
       "subject-edge:ty:reference-hub:mentions:crane-kauffman-yetter-hepth-9409167": "ctlobj-sha256:467feb190a17908d79065799d4b7e23611ab1aebb2c80199e1810b98ccf6d180",
       "subject-edge:ty:reference-hub:mentions:tham-2108-13467": "ctlobj-sha256:238b43ce9cb239262eae619afe3f6f19ee76a40f1a778692089e7351a181544b",
       "subject-edge:ty:reference-hub:mentions:yetter-hepth-9311082": "ctlobj-sha256:fa7738e1cf5422fc9a39441078edd192b0e329a2e886b59312201ec377febd2b",
+      "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification": "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
       "subject-edge:ty:su2-k:depends-on:su2": "ctlobj-sha256:eee94193c60cd3c911b8c9547e968ffa079e2f33cb823195d7725ab29bae0360",
       "subject-edge:ty:su3-2-anyonwiki-fr-cluster:about:su3-2": "ctlobj-sha256:b5f892a503534eec578e317214d5a09931359dc60b278f64692323551e776d88",
       "subject-edge:ty:su3-2-anyonwiki-fr-cluster:supports:su3-2": "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
@@ -15107,8 +15626,12 @@
       "subject:twisted-yetter:paper:akbulut-yasui-0806-3010": "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
       "subject:twisted-yetter:paper:baerenz-barrett-1601-03580": "ctlobj-sha256:8f5778a29bddb828a7ab1f332a498fce1db0ea3d4a84766d1cd40260da020202",
       "subject:twisted-yetter:paper:baykur-2403-14586": "ctlobj-sha256:a66585e7c4a706db45970e66e7a7d82f56fc28cfd1a50645f4dde74e4f03e479",
+      "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139": "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
+      "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769": "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
       "subject:twisted-yetter:paper:burke-2402-15087-provisional": "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0",
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e",
+      "subject:twisted-yetter:paper:dong-schopieray-2407-15955": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
+      "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
       "subject:twisted-yetter:paper:tham-2108-13467": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
       "subject:twisted-yetter:paper:wakamaki-2307-16454": "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
       "subject:twisted-yetter:paper:yasui-0807-0373": "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
@@ -15126,6 +15649,7 @@
       "subject:twisted-yetter:presentation:yasui-figure2-cp2-a1-r1": "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b",
       "subject:twisted-yetter:reference:anyonwiki-fr-6-1-4-5": "ctlobj-sha256:f6e9930c15b01896b981c497ef42c75007b72dc328ac89ef367b99b5db71a355",
       "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature": "ctlobj-sha256:a4c2d777e3e2d69b3ab178d113b775c230b6f18c532193b625a1bf587a6cac11",
+      "subject:twisted-yetter:reference:low-rank-mtc-classification": "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
       "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation": "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
       "sys:policy": "ctlobj-sha256:c1ec81b7dbe81f9bdd4ed7a558611dc8a6a7574a7b0a3224058f8d1c96c433c1"
     },
@@ -15269,7 +15793,11 @@
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a"
       ],
       "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": [
-        "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
+        "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc"
+      ],
+      "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": [
+        "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446"
       ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
@@ -15500,6 +16028,21 @@
       "subject-edge:ty:2026-07-15-figure21-black-cancel-search:uses:su2-k": [
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5"
       ],
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub": [
+        "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222"
+      ],
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang": [
+        "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10"
+      ],
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz": [
+        "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3"
+      ],
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray": [
+        "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f"
+      ],
+      "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang": [
+        "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81"
+      ],
       "subject-edge:ty:akbulut-figure1-e1:about:e1": [
         "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948"
       ],
@@ -15530,6 +16073,12 @@
       "subject-edge:ty:baykur-2403-14586:authored-by:r-inanc-baykur": [
         "ctlobj-sha256:ff799a8064e7b0dcbf14d9967b3c68810d73a5beac95165adae72a796cd9a989"
       ],
+      "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification": [
+        "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895"
+      ],
+      "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification": [
+        "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512"
+      ],
       "subject-edge:ty:cp2-2cpbar-character-twist-signal:uses:cp2-split-baseline": [
         "ctlobj-sha256:f4364851020c3d2fee98f67eea11d0f3c2d4821f2b56dd4c7ded1727a003b52e"
       ],
@@ -15553,6 +16102,9 @@
       ],
       "subject-edge:ty:d-dic12-omega0:motivated-by:yasui-a3-da4": [
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc"
+      ],
+      "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification": [
+        "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9"
       ],
       "subject-edge:ty:dual-kirby-convention:uses:tham-2108-13467": [
         "ctlobj-sha256:eb183e31ec24b3556f89bc71c257de1f1ee9a6c139e348ade73ef0eecfd20398"
@@ -15586,6 +16138,9 @@
       ],
       "subject-edge:ty:reference-hub:mentions:yetter-hepth-9311082": [
         "ctlobj-sha256:fa7738e1cf5422fc9a39441078edd192b0e329a2e886b59312201ec377febd2b"
+      ],
+      "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification": [
+        "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75"
       ],
       "subject-edge:ty:su2-k:depends-on:su2": [
         "ctlobj-sha256:eee94193c60cd3c911b8c9547e968ffa079e2f33cb823195d7725ab29bae0360"
@@ -15860,11 +16415,23 @@
       "subject:twisted-yetter:paper:baykur-2403-14586": [
         "ctlobj-sha256:a66585e7c4a706db45970e66e7a7d82f56fc28cfd1a50645f4dde74e4f03e479"
       ],
+      "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139": [
+        "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f"
+      ],
+      "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769": [
+        "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48"
+      ],
       "subject:twisted-yetter:paper:burke-2402-15087-provisional": [
         "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0"
       ],
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": [
         "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e"
+      ],
+      "subject:twisted-yetter:paper:dong-schopieray-2407-15955": [
+        "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26"
+      ],
+      "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": [
+        "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e"
       ],
       "subject:twisted-yetter:paper:tham-2108-13467": [
         "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef",
@@ -15928,6 +16495,9 @@
       "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature": [
         "ctlobj-sha256:a4c2d777e3e2d69b3ab178d113b775c230b6f18c532193b625a1bf587a6cac11"
       ],
+      "subject:twisted-yetter:reference:low-rank-mtc-classification": [
+        "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6"
+      ],
       "subject:twisted-yetter:route:yasui-nonseparated-singleton-evaluation": [
         "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5"
       ],
@@ -15965,11 +16535,13 @@
         "ctlobj-sha256:0f2ed3e38d8f2486d166d3e055900c3aac919af14eaf44f7baeb7d45438e0b67",
         "ctlobj-sha256:0f355ce6511880afb9a1ec227b54a9e15090958821a92ba2f8a5e509a8ab224b",
         "ctlobj-sha256:0fcca45ebf3392fb5296b54bb72423a0ef6ad156da89520c4b2e84fed5265250",
+        "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
         "ctlobj-sha256:0fde6403007cb9edb343317bbe4660f57eabd80999085d941e36276b116ca5f8",
         "ctlobj-sha256:1061dbdafe2bd26b05fff737598774ba8d4eee1f5629f05c275045d812d203cd",
         "ctlobj-sha256:10bde437b4e87170de6262f12341053f9d76871795b616542dd5a7520398bc4f",
         "ctlobj-sha256:11245f615affc90c4099abc228d170dfa45ccb95d2c6a938d61db7bb7aea081b",
         "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
+        "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
         "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
         "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
         "ctlobj-sha256:12b4635adc1425dd0847992bbd8b122bcfc91fbaccb080ff05c81ee5f7eb2bef",
@@ -15977,6 +16549,8 @@
         "ctlobj-sha256:15a0dc817aedf55436071c7e19fc92d9e2efabe7c56a7fd0e11393953ee2c447",
         "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
         "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b",
+        "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
+        "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
         "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
         "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6",
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
@@ -16020,6 +16594,7 @@
         "ctlobj-sha256:3f78d59d8fcc404c2629acab95bc3ca1f74e57110aae823a3292f0b7bf1cb80e",
         "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
         "ctlobj-sha256:41e27b6828f0ebc4863bccdb2d052ec0d5e4d1e6066fc80314d472c3093457e8",
+        "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
         "ctlobj-sha256:429ec14e77a25248f523d99bb62f657f726f563535a4db4d79f5d6c4f7a54936",
         "ctlobj-sha256:43cd825d670d67883bd79aec41b6144b5edfa9716c348484a04bc16dabeffbd9",
         "ctlobj-sha256:44038ddcc0e21ad2f12ad1c45ee558b7397218500667780264e8c7dc7a4af530",
@@ -16028,6 +16603,7 @@
         "ctlobj-sha256:467feb190a17908d79065799d4b7e23611ab1aebb2c80199e1810b98ccf6d180",
         "ctlobj-sha256:4815d79a7870ae5a98a6a0f114240c9ec453152f510f77aee278edbc98c63294",
         "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
+        "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
         "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
         "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb",
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
@@ -16088,8 +16664,10 @@
         "ctlobj-sha256:792bad58e31ffa8fc5d5ab9ea77bf76bb75e7e55ecba0e0a63a3b10ee68d108b",
         "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
+        "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
+        "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
         "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
@@ -16098,6 +16676,7 @@
         "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
         "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
         "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
+        "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
         "ctlobj-sha256:86b07f0dd7226b7af1277a3ab9d6ddcfdf1413a668f5ad3fe759108e187accb3",
         "ctlobj-sha256:86f9fb701d2663de7a5ebc1384c7b8cb6cb009203a574f7ea7564681aaa4e501",
         "ctlobj-sha256:878c8bc52da61d196d0e1fbda5417552321aff5ee798e003c88b2a1e817793b0",
@@ -16120,12 +16699,14 @@
         "ctlobj-sha256:9558ad3a4f8cb4eca48234bdcacd1b07380e5068d0a759cc2a550175f2ccbbe2",
         "ctlobj-sha256:9587a6f16e2ea20e0e2e0f1fa4648de4b929becded869b0b66d375697f58f196",
         "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+        "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c",
         "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
+        "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
         "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e",
         "ctlobj-sha256:a0797de6f3c07faf30dbedaa3a3dcdcd353cac86991d8861994e858cba6514c5",
         "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
@@ -16151,6 +16732,7 @@
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
         "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655",
+        "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
         "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
         "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5",
         "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
@@ -16186,12 +16768,15 @@
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
+        "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
         "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
+        "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
         "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9",
         "ctlobj-sha256:d5f5c8ad81b2b2b1318ff8c6984ba49bf3b704538dd73f222c74482116027087",
         "ctlobj-sha256:d63602714a710e29b3efbc00c54758b028fb9e37fa1db7cceb4033a13f475b69",
         "ctlobj-sha256:d8e812ad652f26b9ee65ba7c3b31d540b40293141dbec483d4cc51fec4214eb6",
         "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
+        "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
         "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
         "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
         "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015",
@@ -16199,6 +16784,7 @@
         "ctlobj-sha256:dc916b1496fc4f18826bf7f110d43b15d6705e34af1cbe936e190d2831d60796",
         "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
         "ctlobj-sha256:ddb9ff855c744ea1ea08f0c709372d43a6ccf6bed447f4e81ffb88e42adcd6cd",
+        "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
         "ctlobj-sha256:e1610c59728c2ba73ad14dd79b73881ee540eea6d4dcf8c5dfaa3adbd1596e07",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
@@ -16373,11 +16959,13 @@
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
+        "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
         "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9",
         "ctlobj-sha256:d8e812ad652f26b9ee65ba7c3b31d540b40293141dbec483d4cc51fec4214eb6",
         "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
         "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
         "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
+        "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
@@ -16441,6 +17029,9 @@
         "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
         "ctlobj-sha256:7629a2ecb31e8cd17ce17fa075c46b5b1834d144ecd021ddfc435f5d7f43ecbe",
         "ctlobj-sha256:76db13da3fb90cf5c5e615a5ec2b05be2d9f5323dad8855a0ae1ce5ed083345c",
+        "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
+        "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
+        "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
         "ctlobj-sha256:899df7824c119fae9a8f174875b429a17948c49f5d0ee1c17648ee35bcc31445",
         "ctlobj-sha256:8eb27ceda7ac23eb9bedfd24bb3aa8a3372c2f0d03885130fc126e6b5ed33cca",
         "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
@@ -16456,6 +17047,8 @@
         "ctlobj-sha256:b6f867a52a5a8d29fb6dc94ae49154b52f9228c63970ae5cc7e9666ce71a488f",
         "ctlobj-sha256:b9064132924c394251a56bd33867b0bab66551026023a065c830390f6b3d6df5",
         "ctlobj-sha256:cbed4b6bdca02afbb22f46ec914b22af4696b6926455a694e985902959a11056",
+        "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
+        "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
         "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
         "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf",
@@ -16474,9 +17067,13 @@
         "ctlobj-sha256:0863e62b13d210d58c5ee353811deb9e688b0c4f5f6ef60416b0b93038c50da0",
         "ctlobj-sha256:0cb6f71da1eab125bdb4e23522e8088c4b6e5dd47d6721b5f9dade1dd34404cf",
         "ctlobj-sha256:0f355ce6511880afb9a1ec227b54a9e15090958821a92ba2f8a5e509a8ab224b",
+        "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
         "ctlobj-sha256:11245f615affc90c4099abc228d170dfa45ccb95d2c6a938d61db7bb7aea081b",
         "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
+        "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
         "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
+        "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
+        "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
         "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
         "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
@@ -16492,7 +17089,9 @@
         "ctlobj-sha256:33ce2eb85945afc99fe9a45b65697ce8944cc68803ebfaa360cd508a6556cba3",
         "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
         "ctlobj-sha256:41e27b6828f0ebc4863bccdb2d052ec0d5e4d1e6066fc80314d472c3093457e8",
+        "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
         "ctlobj-sha256:44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005",
+        "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
         "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
         "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
         "ctlobj-sha256:579caa852a85d29e7e501c793ece980b5dff4d57ba2965d73259277dbd00be24",
@@ -16514,13 +17113,16 @@
         "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
         "ctlobj-sha256:8fa9a1bf59f6baa2f22fae7a2c50bcefb792fd88e17c7998dc9fe35132bc6ad5",
         "ctlobj-sha256:9558ad3a4f8cb4eca48234bdcacd1b07380e5068d0a759cc2a550175f2ccbbe2",
+        "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
+        "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
         "ctlobj-sha256:a223245f73de6b11f28fb9663696e0a9a8e7377147a48e585d8a66ce0e672e9d",
         "ctlobj-sha256:a54d2743f76010c33354fd51d9a0031042a4c52084da045570e4e8d422231cee",
         "ctlobj-sha256:a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3",
         "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
+        "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
         "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5",
         "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
         "ctlobj-sha256:b2228764e72bac7b0b0db87bd7bb5b251f572ba87d481995009058f13089028f",
@@ -17497,6 +18099,21 @@
           "target_cid": "ctlobj-sha256:a70e27b1192ee7b6ee65ca90a4a78a164b3ce8e65cbb2ccf0917b15a17bd56ce"
         }
       ],
+      "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+          "target_cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.supersedes_current_object",
+          "source_cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+          "target_cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        }
+      ],
       "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063": [
         {
           "basis": "ctl/revision.parents",
@@ -17873,6 +18490,9 @@
       ],
       "ctlobj-sha256:a3c65e595aa4526e756651b98b85cb59ccbb2f88d84c352a2505368a0dddb214": [
         "ctlobj-sha256:529bc5ee19037e6596460f0355d3f24c20cd8cd244e041b30f2d86e689b6b979"
+      ],
+      "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436": [
+        "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc"
       ],
       "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583": [
         "ctlobj-sha256:44038ddcc0e21ad2f12ad1c45ee558b7397218500667780264e8c7dc7a4af530"
@@ -21135,6 +21755,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:0fde6403007cb9edb343317bbe4660f57eabd80999085d941e36276b116ca5f8": [
         {
           "admission_batch_cid": null,
@@ -21743,6 +22383,26 @@
           "payload_file": "ctl-dogfood/subject-layer/edges/yasui-figure2-dic12-check-uses-singleton-route.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": [
@@ -22478,6 +23138,46 @@
           "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-yasui-figure2-cp2-a1-r1.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665": [
@@ -24646,6 +25346,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:429ec14e77a25248f523d99bb62f657f726f563535a4db4d79f5d6c4f7a54936": [
         {
           "admission_batch_cid": null,
@@ -25841,6 +26561,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc": [
         {
           "admission_batch_cid": "ctlobj-sha256:5aca529dc2f8e739b4670c2dd102c6314af0cca97350c041682200b95009d026",
@@ -26648,6 +27388,23 @@
           ],
           "parent_root_cid": "ctlobj-sha256:94d03755c608e2fe86d5834dbce5cb1dc1b508dafe2e9c63d72589527e49da26",
           "path": "manifests/batch-admission-2026-07-15-bf46194b049f0443.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -33597,6 +34354,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e": [
         {
           "admission_batch_cid": "ctlobj-sha256:482280a0e5328110e4063818f77846177104797ad7187180b57a5a8e8a2817ad",
@@ -33632,6 +34409,26 @@
           ],
           "parent_root_cid": "ctlobj-sha256:0d7eb2a2d2df4fe0b2890b56216863b6140eb4de8e9ba82f08bdc846563459cc",
           "path": "manifests/batch-admission-2026-07-13-41eea13ed9c520ed.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -33795,6 +34592,26 @@
           "payload_file": "ctl-dogfood/subject-layer/edges/su3-2-anyonwiki-fr-cluster-supports-su3-2.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:86b07f0dd7226b7af1277a3ab9d6ddcfdf1413a668f5ad3fe759108e187accb3": [
@@ -36326,6 +37143,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78": [
         {
           "admission_batch_cid": null,
@@ -36457,6 +37294,26 @@
           ],
           "parent_root_cid": "ctlobj-sha256:0cbfd1a4058622ecd838008ba4ac06a0d606a5db78686c5af405f4a841a30355",
           "path": "manifests/batch-admission-2026-07-12-5a61a300075edaa0.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -36894,6 +37751,23 @@
           ],
           "parent_root_cid": "ctlobj-sha256:605df28612835bea196ec16e0a54851c4b30b412bdfd779df207c42c75059deb",
           "path": "manifests/batch-admission-2026-07-15-36ec14cc96f9f3fa.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -37569,6 +38443,26 @@
           "payload_file": "ctl-dogfood/subject-layer/edges/akbulut-figure38-note-about-figure38.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c": [
@@ -40413,6 +41307,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0": [
         {
           "admission_batch_cid": null,
@@ -40431,6 +41345,26 @@
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-dual-kirby-evaluation-convention.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9": [
@@ -40528,6 +41462,26 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-08-ctl-current-read-provider-adoption.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301": [
@@ -40681,6 +41635,43 @@
           ],
           "parent_root_cid": "ctlobj-sha256:373711da7379508fe3ce6c096b7e3619ed648180a85622f60db972a9c1a8bb28",
           "path": "manifests/batch-admission-2026-07-15-5aca529dc2f8e739.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:36ec14cc96f9f3fa7d0427fdf346a7bf60ddec35c6feee89d520798c5b0fe4a3",
+          "child_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "created_at": "2026-07-15T13:47:23Z",
+          "current_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids"
+          ],
+          "parent_root_cid": "ctlobj-sha256:605df28612835bea196ec16e0a54851c4b30b412bdfd779df207c42c75059deb",
+          "path": "manifests/batch-admission-2026-07-15-36ec14cc96f9f3fa.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4",
+          "child_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "created_at": "2026-07-15T14:47:18Z",
+          "current_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+          "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -45276,6 +46267,36 @@
         },
         "word_count": 53
       },
+      "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:0fd3ef0b535e75b6baa75db47934cc7a0799a9f19c0a3f888410791ec5bde7c3",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 140,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ortiz\",\"explanation\":\"Uses the earlier rank-5 premodular source only together with its later 2024 refinement.\",\"role\":\"uses-with-later-correction\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"claim:lab-note:2026-07-15-low-rank-mtc-classification-scope\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:bruillard-ortiz-1612-08769\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 426,
+          "base_estimate": 121,
+          "estimated_tokens": 140,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 19,
+          "serialized_character_count": 426,
+          "unicode_scalar_count": 426,
+          "utf8_bytes": 426
+        },
+        "word_count": 13
+      },
       "ctlobj-sha256:0fde6403007cb9edb343317bbe4660f57eabd80999085d941e36276b116ca5f8": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:0fde6403007cb9edb343317bbe4660f57eabd80999085d941e36276b116ca5f8",
@@ -45425,6 +46446,36 @@
           "utf8_bytes": 517
         },
         "word_count": 18
+      },
+      "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 144,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:bruillard-ng-rowell-wang-1507-05139:under:low-rank-mtc-classification\",\"explanation\":\"Primary rank-5 Grothendieck-family source, with its explicit modular-structure gap retained.\",\"role\":\"classified-under\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 441,
+          "base_estimate": 125,
+          "estimated_tokens": 144,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 19,
+          "serialized_character_count": 441,
+          "unicode_scalar_count": 441,
+          "utf8_bytes": 441
+        },
+        "word_count": 10
       },
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": {
         "active_state": "superseded",
@@ -45635,6 +46686,66 @@
           "utf8_bytes": 2642
         },
         "word_count": 186
+      },
+      "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 153,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:dong-schopieray-2407-15955:under:low-rank-mtc-classification\",\"explanation\":\"Current source for complete premodular braided-equivalence classification through rank 6, used here only through rank 5.\",\"role\":\"current-braided-classification-source\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:paper:dong-schopieray-2407-15955\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 472,
+          "base_estimate": 133,
+          "estimated_tokens": 153,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 20,
+          "serialized_character_count": 472,
+          "unicode_scalar_count": 472,
+          "utf8_bytes": 472
+        },
+        "word_count": 16
+      },
+      "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 133,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:rowell-stong-wang\",\"explanation\":\"Uses the unitary rank-at-most-4 ribbon classification as historical and scope evidence.\",\"role\":\"uses\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"claim:lab-note:2026-07-15-low-rank-mtc-classification-scope\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:rowell-stong-wang-0712-1377\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 407,
+          "base_estimate": 115,
+          "estimated_tokens": 133,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 18,
+          "serialized_character_count": 407,
+          "unicode_scalar_count": 407,
+          "utf8_bytes": 407
+        },
+        "word_count": 11
       },
       "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665": {
         "active_state": "active",
@@ -46926,6 +48037,36 @@
         },
         "word_count": 22
       },
+      "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 143,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-15-low-rank-mtc-classification:about:reference-hub\",\"explanation\":\"The note records the current rank-2-through-5 braided-classification scope and the remaining ribbon-refinement gap.\",\"role\":\"about\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"claim:lab-note:2026-07-15-low-rank-mtc-classification-scope\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 437,
+          "base_estimate": 124,
+          "estimated_tokens": 143,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 19,
+          "serialized_character_count": 437,
+          "unicode_scalar_count": 437,
+          "utf8_bytes": 437
+        },
+        "word_count": 13
+      },
       "ctlobj-sha256:429ec14e77a25248f523d99bb62f657f726f563535a4db4d79f5d6c4f7a54936": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:429ec14e77a25248f523d99bb62f657f726f563535a4db4d79f5d6c4f7a54936",
@@ -47165,6 +48306,36 @@
           "utf8_bytes": 528
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 129,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:rowell-stong-wang-0712-1377:under:low-rank-mtc-classification\",\"explanation\":\"Primary unitary rank-at-most-4 ribbon-classification source.\",\"role\":\"classified-under\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:paper:rowell-stong-wang-0712-1377\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 393,
+          "base_estimate": 112,
+          "estimated_tokens": 129,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 17,
+          "serialized_character_count": 393,
+          "unicode_scalar_count": 393,
+          "utf8_bytes": 393
+        },
+        "word_count": 5
       },
       "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc": {
         "active_state": "active",
@@ -48996,6 +50167,36 @@
         },
         "word_count": 270
       },
+      "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 309,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"bruillard-ortiz-rank5-premodular-2018\"],\"display_name\":\"Bruillard-Ortiz, Classification of Rank 5 Premodular Categories\",\"equivalent_external_ids\":[\"arxiv:1612.08769v2\",\"doi:10.48550/arXiv.1612.08769\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/1612.08769\",\"arxiv_id\":\"1612.08769\",\"capture_date\":\"2026-07-15\",\"kind\":\"arxiv\",\"pdf_sha256\":\"f74695813a9d143dcd9bb06947bc70acb624b657cc654313902eff7c8a8eb478\",\"version\":\"v2\",\"versioned_id\":\"1612.08769v2\"}],\"parent_subject_ids\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Earlier pseudo-unitary rank-5 premodular classification. Current use must include the correction/refinement supplied by Dong-Schopieray 2024; do not treat this paper alone as the final braided classification.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:paper:bruillard-ortiz-1612-08769\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 950,
+          "base_estimate": 268,
+          "estimated_tokens": 309,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 41,
+          "serialized_character_count": 950,
+          "unicode_scalar_count": 950,
+          "utf8_bytes": 950
+        },
+        "word_count": 32
+      },
       "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e": {
         "active_state": "active",
         "cid": "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
@@ -49055,6 +50256,36 @@
           "utf8_bytes": 2468
         },
         "word_count": 64
+      },
+      "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 289,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"bnrw-rank5-2016\"],\"display_name\":\"Bruillard-Ng-Rowell-Wang, On Classification of Modular Categories by Rank\",\"equivalent_external_ids\":[\"arxiv:1507.05139v2\",\"doi:10.48550/arXiv.1507.05139\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/1507.05139\",\"arxiv_id\":\"1507.05139\",\"capture_date\":\"2026-07-15\",\"kind\":\"arxiv\",\"pdf_sha256\":\"c23fbcf3076b0c0602009409b20d77ab84ec854018d95af7fc58733b6c4b9fe3\",\"version\":\"v2\",\"versioned_id\":\"1507.05139v2\"}],\"parent_subject_ids\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Primary source for rank-5 Grothendieck families. Theorem 4.1 is fusion-rule level; Remark 4.2 warns that distinct modular structures were not counted.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 889,
+          "base_estimate": 251,
+          "estimated_tokens": 289,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 38,
+          "serialized_character_count": 889,
+          "unicode_scalar_count": 889,
+          "utf8_bytes": 889
+        },
+        "word_count": 28
       },
       "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd": {
         "active_state": "active",
@@ -49295,6 +50526,36 @@
           "utf8_bytes": 572
         },
         "word_count": 27
+      },
+      "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 276,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"rsw-low-rank-umtc-2009\"],\"display_name\":\"Rowell-Stong-Wang, On Classification of Modular Tensor Categories\",\"equivalent_external_ids\":[\"arxiv:0712.1377v4\",\"doi:10.48550/arXiv.0712.1377\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/0712.1377\",\"arxiv_id\":\"0712.1377\",\"capture_date\":\"2026-07-15\",\"kind\":\"arxiv\",\"pdf_sha256\":\"f1d3dc4156025b8fd1e77c35cae54a982a42ecee7aa29fbf9eb31e496244f3ed\",\"version\":\"v4\",\"versioned_id\":\"0712.1377v4\"}],\"parent_subject_ids\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Primary source for the unitary rank-at-most-4 classification up to ribbon tensor equivalence. See abstract and page 4/Table 1.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:paper:rowell-stong-wang-0712-1377\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 851,
+          "base_estimate": 240,
+          "estimated_tokens": 276,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 36,
+          "serialized_character_count": 851,
+          "unicode_scalar_count": 851,
+          "utf8_bytes": 851
+        },
+        "word_count": 24
       },
       "ctlobj-sha256:86b07f0dd7226b7af1277a3ab9d6ddcfdf1413a668f5ad3fe759108e187accb3": {
         "active_state": "active",
@@ -49956,6 +51217,36 @@
         },
         "word_count": 1
       },
+      "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 148,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:bruillard-ortiz-1612-08769:under:low-rank-mtc-classification\",\"explanation\":\"Earlier rank-5 premodular source; current interpretation is constrained by Dong-Schopieray 2024.\",\"role\":\"classified-under-with-later-refinement\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:paper:bruillard-ortiz-1612-08769\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 449,
+          "base_estimate": 128,
+          "estimated_tokens": 148,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 20,
+          "serialized_character_count": 449,
+          "unicode_scalar_count": 449,
+          "utf8_bytes": 449
+        },
+        "word_count": 11
+      },
       "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78": {
         "active_state": "active",
         "cid": "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
@@ -50135,6 +51426,36 @@
           "utf8_bytes": 490
         },
         "word_count": 21
+      },
+      "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 155,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:dong-schopieray\",\"explanation\":\"Uses the current complete premodular braided-equivalence classification through rank 6, restricted here to ranks 2 through 5.\",\"role\":\"uses-as-current-braided-classification\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"claim:lab-note:2026-07-15-low-rank-mtc-classification-scope\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:dong-schopieray-2407-15955\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 476,
+          "base_estimate": 134,
+          "estimated_tokens": 155,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 21,
+          "serialized_character_count": 476,
+          "unicode_scalar_count": 476,
+          "utf8_bytes": 476
+        },
+        "word_count": 17
       },
       "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e": {
         "active_state": "active",
@@ -50587,7 +51908,7 @@
         "word_count": 15
       },
       "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436": {
-        "active_state": "active",
+        "active_state": "superseded",
         "cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
         "created_at": "2026-07-15T13:47:23Z",
         "created_by": {
@@ -50885,6 +52206,36 @@
           "utf8_bytes": 390
         },
         "word_count": 15
+      },
+      "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 141,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-15-low-rank-mtc-classification:uses:bruillard-ng-rowell-wang\",\"explanation\":\"Uses the rank-5 Grothendieck-family theorem while retaining its explicit modular-structure gap.\",\"role\":\"uses\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"claim:lab-note:2026-07-15-low-rank-mtc-classification-scope\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:bruillard-ng-rowell-wang-1507-05139\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 430,
+          "base_estimate": 122,
+          "estimated_tokens": 141,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 19,
+          "serialized_character_count": 430,
+          "unicode_scalar_count": 430,
+          "utf8_bytes": 430
+        },
+        "word_count": 11
       },
       "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c": {
         "active_state": "active",
@@ -51966,6 +53317,36 @@
         },
         "word_count": 1
       },
+      "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 268,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:reference:low-rank-mtc-classification",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"low-rank-mtc-classification\",\"rank-at-most-five-mtc-references\"],\"display_name\":\"Low-rank braided, premodular, and modular category classification references\",\"equivalent_external_ids\":[],\"parent_subject_ids\":[],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference hub for classification results used to enumerate low-rank category candidates. It separates Grothendieck, braided, spherical, and ribbon equivalence and is not itself a classification theorem.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:reference:low-rank-mtc-classification\",\"subject_kind\":\"ty:reference\",\"upstream_review_hints\":[\"Do not promote braided-equivalence counts to ribbon-equivalence counts without a spherical/pivotal refinement audit.\",\"Use page-level locators from the repo-local primary-source ledger.\"]}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 828,
+          "base_estimate": 233,
+          "estimated_tokens": 268,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 35,
+          "serialized_character_count": 828,
+          "unicode_scalar_count": 828,
+          "utf8_bytes": 828
+        },
+        "word_count": 52
+      },
       "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0": {
         "active_state": "active",
         "cid": "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
@@ -51995,6 +53376,36 @@
           "utf8_bytes": 2081
         },
         "word_count": 194
+      },
+      "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 609,
+        "gist": "Rank 2 through 5 premodular categories are now catalogued using the 2024 braided-equivalence classification. This is not yet an exhaustion up to ribbon tensor equivalence because some braided classes admit multiple spherical structures and the source does not classify all such...",
+        "logical_id": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifact\":{\"commit\":\"38e6a1f8bd3674a7d080f91cd2df4063681536b5\",\"git_blob\":\"b6156d3c55e2018d095bc2e370b50cd4b00c526b\",\"path\":\"experiments/results/mtc-classification/low-rank-mtc-classification-matrix-v1.json\",\"sha256\":\"8dfee1eb16fc1b5dadcdd8736a52de4e1c530f40d706179b37cb4a516fef5f3b\"},\"created_at\":\"2026-07-15T14:47:18Z\",\"created_by\":\"actor:codex\",\"mathematical_status\":\"SOURCE_SYNTHESIS_NOT_A_NEW_CLASSIFICATION_THEOREM\",\"note_id\":\"objective-note-2026-07-15-low-rank-mtc-classification-scope\",\"reference_ids\":[\"ref:rsw-low-rank-umtc-2009\",\"ref:bnrw-rank5-2016\",\"ref:bruillard-ortiz-rank5-premodular-2018\",\"ref:dong-schopieray-near-integral-2024\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"modular_braided_class_counts\":{\"2\":6,\"3\":16,\"4\":33,\"5\":22},\"premodular_braided_class_counts\":{\"2\":8,\"3\":20,\"4\":57,\"5\":55},\"rank5_modular_family_counts\":{\"PSU(2)_9\":10,\"PSU(3)_4\":6,\"SU(2)_4\":4,\"SU(5)_1\":2},\"ranks\":[2,3,4,5],\"ribbon_gap\":\"Spherical and pivotal refinements still require an explicit audit before claiming exhaustive MTC ribbon realizations.\"},\"source_ledger\":{\"commit\":\"0068c5dd538d273a3ab36feee2aadc7074743dda\",\"git_blob\":\"c441d07eced46ed31e36d2d50edb62afc89b8f66\",\"path\":\"experiments/inputs/references/low-rank-mtc-classification-primary-sources-v1.json\",\"sha256\":\"e7de1f23c63979980a24d694d2826ee96b5313da1104f132ce7f1ebf7f060f79\"},\"status\":\"LITERATURE_BACKED_BRAIDED_CLASSIFICATION_SCOPE\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"title\":\"Rank 2 through 5 MTC classification scope corrected to braided equivalence\",\"top_notice\":\"Rank 2 through 5 premodular categories are now catalogued using the 2024 braided-equivalence classification. This is not yet an exhaustion up to ribbon tensor equivalence because some braided classes admit multiple spherical structures and the source does not classify all such refinements.\"}",
+        "title": "Rank 2 through 5 MTC classification scope corrected to braided equivalence",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1880,
+          "base_estimate": 529,
+          "estimated_tokens": 609,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 80,
+          "serialized_character_count": 1880,
+          "unicode_scalar_count": 1880,
+          "utf8_bytes": 1880
+        },
+        "word_count": 66
       },
       "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9": {
         "active_state": "active",
@@ -52145,6 +53556,36 @@
           "utf8_bytes": 6718
         },
         "word_count": 368
+      },
+      "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 295,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"dong-schopieray-near-integral-2024\"],\"display_name\":\"Dong-Schopieray, Near-integral fusion\",\"equivalent_external_ids\":[\"arxiv:2407.15955v1\",\"doi:10.48550/arXiv.2407.15955\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/2407.15955\",\"arxiv_id\":\"2407.15955\",\"capture_date\":\"2026-07-15\",\"kind\":\"arxiv\",\"pdf_sha256\":\"48749f20f131ef4aafd379cb440313c6356bceffead16408acbaf85f4bdfcadb\",\"version\":\"v1\",\"versioned_id\":\"2407.15955v1\"}],\"parent_subject_ids\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Current primary source completing premodular classification through rank 6 up to braided equivalence. Page 26 explicitly separates this from a complete pivotal/spherical/ribbon classification.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:paper:dong-schopieray-2407-15955\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 905,
+          "base_estimate": 256,
+          "estimated_tokens": 295,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 39,
+          "serialized_character_count": 905,
+          "unicode_scalar_count": 905,
+          "utf8_bytes": 905
+        },
+        "word_count": 25
       },
       "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301": {
         "active_state": "active",
@@ -52355,6 +53796,36 @@
           "utf8_bytes": 410
         },
         "word_count": 14
+      },
+      "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+        "created_at": "2026-07-15T14:47:18Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1012,
+        "gist": "This revision supersedes the earlier claim that the transient search evidence had been lost. The files remained under /private/tmp and on XIL; 17 checkpoints, both search-script variants, source data, launch records, environments, and selected lowered candidates are now preser...",
+        "logical_id": "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"commit\":\"38e6a1f8bd3674a7d080f91cd2df4063681536b5\",\"git_blob\":\"73f9f6c9cc8c4fa75846690b3d1e856710d8c320\",\"path\":\"experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v2.json\",\"sha256\":\"4ea878c7c96cc26e3677e549480241f2cff6ca6c3cfa2108cb61a980b5625496\"},{\"bytes\":3268866,\"commit\":\"38e6a1f8bd3674a7d080f91cd2df4063681536b5\",\"git_blob\":\"d93a66bda2e7dfb7166f4709c9930920f4baf331\",\"path\":\"experiments/results/akbulut-yasui/evidence/figure21-black-cancel-projection-search-evidence-v2.tar.gz\",\"sha256\":\"8f5c6a84bc835f4066c1ee798ce83ef3c31716b1e4824ed5073742699b300dea\"}],\"category\":{\"category_id\":\"su2-k2\",\"subject\":\"subject:twisted-yetter:category-family:su2-k\"},\"created_at\":\"2026-07-15T14:47:18Z\",\"created_by\":\"actor:codex\",\"execution\":{\"checkpoint_count\":17,\"completed_checkpoint_count\":15,\"hosts\":[{\"alias\":\"jin-m2\",\"hardware\":\"Apple M2 MacBook Air, 8 logical CPUs, 16 GiB\",\"workers\":2},{\"alias\":\"xil-m2\",\"hardware\":\"Apple M2, 8 logical CPUs, 16 GiB\",\"workers\":2}],\"interrupted_checkpoint_count\":2,\"time_notice\":\"Initial two-worker launches have exact UTC records. Per-strategy starts are otherwise inferred as checkpoint mtime minus elapsed_seconds; interrupted rows record the final observed checkpoint, not a completion time.\"},\"generator\":{\"path\":\"experiments/scripts/package_figure21_projection_search_evidence.py\",\"reproduce_command\":\"python3 experiments/scripts/package_figure21_projection_search_evidence.py --write\",\"source_commit\":\"d19973aabb8681099000e917fa629998c02be728\"},\"mathematical_status\":{\"complexity_conclusion\":\"EMPIRICAL_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND\",\"crossing_counts\":\"RECOVERED_MACHINE_READABLE_SEARCH_OUTPUT\",\"diagram_rewrite\":\"EXPERIMENTAL_NOT_INDEPENDENTLY_CERTIFIED_AS_KIRBY_EQUIVALENT\",\"frontier_dimensions\":\"EXACT_RANKER_OUTPUT_FOR_THIS_EXPERIMENTAL_REPRESENTATION\"},\"note_id\":\"objective-note-2026-07-15-figure21-black-cancel-projection-search\",\"presentation\":{\"status\":\"DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE\",\"subject\":\"subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime\"},\"result\":{\"baseline_crossings\":7443,\"best_evaluator_ready_crossings\":3988,\"decision\":\"STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE\",\"maximum_active_strands_at_3988\":170,\"maximum_su2_2_boundary_fusion_dimension\":\"2^84\"},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"status\":\"RECOVERED_REPRODUCIBILITY_CHECKPOINT\",\"subjects\":[\"subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime\",\"subject:twisted-yetter:category-family:su2-k\"],\"supersedes_current_object\":\"ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436\",\"title\":\"Figure 21 black-cancel projection search evidence recovered\",\"top_notice\":\"This revision supersedes the earlier claim that the transient search evidence had been lost. The files remained under /private/tmp and on XIL; 17 checkpoints, both search-script variants, source data, launch records, environments, and selected lowered candidates are now preserved in a Git-managed evidence bundle.\"}",
+        "title": "Figure 21 black-cancel projection search evidence recovered",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 3126,
+          "base_estimate": 880,
+          "estimated_tokens": 1012,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 132,
+          "serialized_character_count": 3126,
+          "unicode_scalar_count": 3126,
+          "utf8_bytes": 3126
+        },
+        "word_count": 93
       },
       "ctlobj-sha256:de803b85e5de3335818aae14a605ad22c703cddcffeb523369b76a8b5c54bc1e": {
         "active_state": "superseded",
@@ -54688,6 +56159,21 @@
           "target_cid": "ctlobj-sha256:a3c65e595aa4526e756651b98b85cb59ccbb2f88d84c352a2505368a0dddb214"
         }
       ],
+      "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+          "target_cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.supersedes_current_object",
+          "source_cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+          "target_cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
+        }
+      ],
       "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583": [
         {
           "basis": "ctl/revision.parents",
@@ -55103,7 +56589,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-15T13:47:23Z",
+  "generated_at": "2026-07-15T14:47:18Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -57637,11 +59123,16 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
+  "root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 49588
+    "build_ms": 3632,
+    "context_source": "admission-validated-child-state",
+    "discovery_index_ms": 3520,
+    "payload_summaries_ms": 44,
+    "resource_index_ms": 44,
+    "write_ms": 21
   },
-  "transition_cid": "ctlobj-sha256:36ec14cc96f9f3fa7d0427fdf346a7bf60ddec35c6feee89d520798c5b0fe4a3"
+  "transition_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4"
 }
