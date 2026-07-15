@@ -1,0 +1,94 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-15-figure21-black-cancel-projection-search",
+  "title": "Figure 21 black-cancel projection search reached the high 3000s but retained a 2^84 frontier",
+  "created_at": "2026-07-15T13:47:23Z",
+  "created_by": "actor:codex",
+  "status": "HISTORICAL_CHECKPOINT_WITH_REPRODUCIBILITY_GAP",
+  "top_notice": "The high-3000 crossing reduction and 2^84 frontier observation are important negative evidence, but this is not an end-to-end reproducible certificate: transient cancellation/search code, lowered inputs, and checkpoints were not preserved.",
+  "mathematical_status": {
+    "diagram_rewrite": "EXPERIMENTAL_NOT_INDEPENDENTLY_CERTIFIED_AS_KIRBY_EQUIVALENT",
+    "crossing_counts": "HISTORICAL_NUMERIC_OBSERVATION",
+    "frontier_dimensions": "HISTORICAL_EXACT_RANKER_OUTPUT_WITH_MISSING_TRANSIENT_INPUT",
+    "complexity_conclusion": "EMPIRICAL_CURRENT_REPRESENTATION_BARRIER_NOT_AN_ALGORITHM_INDEPENDENT_LOWER_BOUND"
+  },
+  "presentation": {
+    "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+    "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE"
+  },
+  "category": {
+    "category_id": "su2-k2",
+    "subject": "subject:twisted-yetter:category-family:su2-k"
+  },
+  "result": {
+    "baseline_crossings": 7443,
+    "best_repeated_lowerable_crossings": 3990,
+    "best_reported_and_frontier_measured_crossings": 3988,
+    "maximum_active_strands_from_4242_through_3988": 170,
+    "maximum_su2_2_boundary_fusion_dimension": "2^84",
+    "all_sigma_dimension_decimal": "19342813113834066795298816",
+    "decision": "STOP_PROJECTION_DIRECTION_SEARCH_AND_REQUIRE_A_STRUCTURALLY_BETTER_KIRBY_SLIDE_SEQUENCE"
+  },
+  "execution": {
+    "first_monitor_checkpoint_utc": "2026-07-15T07:16:20Z",
+    "last_monitor_checkpoint_utc": "2026-07-15T12:46:21Z",
+    "exact_start_and_finish": "NOT_PRESERVED",
+    "hosts": [
+      {
+        "alias": "jin-m2",
+        "workers": 2,
+        "hardware_identity": "NOT_RECORDED"
+      },
+      {
+        "alias": "xil-m2",
+        "workers": 2,
+        "hardware_identity": "NOT_RECORDED"
+      }
+    ]
+  },
+  "artifact": {
+    "path": "experiments/results/akbulut-yasui/figure21-black-cancel-projection-search-checkpoint-v1.json",
+    "commit": "0b09122623505d5fcc1676e943f790f0fb014796",
+    "git_blob": "8de26f1fdef74324f6a3fc34226927b82456dd8d",
+    "sha256": "e84415ce203109782d865754f3063089a5a9185b13f1bdcb82e9990120e0ac8e"
+  },
+  "stable_code_available": [
+    {
+      "path": "experiments/scripts/optimize_morse_side_projection.py",
+      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "426f72f2bebceeacdd943b5cea7ad61c22679b23",
+      "sha256": "cc51eb245a721a674e6a5ec17e95b8a5bd8fbd68ddb80e84a927fbac2a4c26d5"
+    },
+    {
+      "path": "experiments/scripts/morse_pl_lift.py",
+      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "082d58e8410084d2c25116569c4ba37d0ff734a4",
+      "sha256": "9fa003b2d8b8cf5f9882d801dc7201fc87e4c14d5f9b5db8ab01946299441ec5"
+    },
+    {
+      "path": "experiments/sage/morse_complexity_rank.sage.py",
+      "commit": "faf77e7c1c35971e095cf80168d7d0c223c6e98b",
+      "git_blob": "b41eb6936e89a808befb5ff221582e0e938a8f0f",
+      "sha256": "82392aad55396d308c00efda803fbc431d36cfd5bc1a5fb578fb1a6a6179dd73"
+    }
+  ],
+  "reproducibility_gap": {
+    "missing": [
+      "black-handle slide and red-black cancellation generator",
+      "multi-strategy projection-search wrapper",
+      "lowered candidate inputs",
+      "per-strategy checkpoints",
+      "temporary frontier comparison script and output"
+    ],
+    "reproduce_command": null,
+    "recovery_rule": "Do not claim end-to-end reproduction unless the cancellation and search are rerun from a stable committed generator."
+  },
+  "source_checkpoint": {
+    "git_commit": "0b09122623505d5fcc1676e943f790f0fb014796",
+    "git_dirty": false
+  },
+  "subjects": [
+    "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+    "subject:twisted-yetter:category-family:su2-k"
+  ]
+}
