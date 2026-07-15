@@ -18,12 +18,16 @@ FORMAL_ADMISSION_POLICY_SCHEMA: Final = (
 LOW_RANK_RIBBON_CATALOG_SCHEMA: Final = (
     "twisted-yetter.low-rank-ribbon-realization-catalog.v1"
 )
+LOW_RANK_RIBBON_CATALOG_SCHEMA_V2: Final = (
+    "twisted-yetter.low-rank-ribbon-realization-catalog.v2"
+)
 FORMAL_SCAN_READINESS_SCHEMA: Final = (
     "twisted-yetter.low-rank-formal-scan-readiness.v1"
 )
 
 FOUNDATION_STATUS: Final = "FOUNDATION_ESTABLISHED"
 RIBBON_CATALOG_ESTABLISHED: Final = "LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED"
+RIBBON_CATALOG_PARTIAL: Final = "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
 RIBBON_CATALOG_BLOCKED: Final = "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
 
 EVIDENCE_KIND_ALLOWLIST: Final = (
@@ -148,9 +152,19 @@ def validate_formal_evidence(
 def validate_low_rank_ribbon_catalog(catalog: dict[str, Any]) -> None:
     """Validate the rank 2-5 ribbon refinement catalog or blocker ledger."""
 
-    _require_schema(catalog, LOW_RANK_RIBBON_CATALOG_SCHEMA)
+    if catalog.get("schema") not in (
+        LOW_RANK_RIBBON_CATALOG_SCHEMA,
+        LOW_RANK_RIBBON_CATALOG_SCHEMA_V2,
+    ):
+        raise FoundationSafetyError(
+            f"unsupported catalog schema: {catalog.get('schema')!r}"
+        )
     status = catalog.get("status")
-    if status not in (RIBBON_CATALOG_ESTABLISHED, RIBBON_CATALOG_BLOCKED):
+    if status not in (
+        RIBBON_CATALOG_ESTABLISHED,
+        RIBBON_CATALOG_PARTIAL,
+        RIBBON_CATALOG_BLOCKED,
+    ):
         raise FoundationSafetyError(f"unsupported catalog status: {status!r}")
     coverage = catalog.get("coverage_by_rank")
     if not isinstance(coverage, list):
@@ -187,6 +201,15 @@ def validate_low_rank_ribbon_catalog(catalog: dict[str, Any]) -> None:
         if catalog.get("formal_scan_plan_allowed") is not True:
             raise FoundationSafetyError("established catalog must allow scan plans")
         _require_object(catalog, "ribbon_denominator_by_rank")
+    elif status == RIBBON_CATALOG_PARTIAL:
+        if blocked == 0 or resolved == 0:
+            raise FoundationSafetyError(
+                "partial catalog must contain both blocked and resolved rows"
+            )
+        if catalog.get("formal_scan_plan_allowed") is not False:
+            raise FoundationSafetyError("partial catalog cannot allow scan plans")
+        if catalog.get("ribbon_denominator_by_rank") not in ({}, None):
+            raise FoundationSafetyError("partial catalog cannot publish final ribbon denominators")
     else:
         if blocked == 0:
             raise FoundationSafetyError("blocked catalog needs at least one blocker")
@@ -255,7 +278,19 @@ def _validate_catalog_row(row: Any) -> None:
     else:
         if row["formal_admission_allowed"] is not True:
             raise FoundationSafetyError("resolved row must be admissible")
-        if not _is_sha256_id(row.get("ribbon_realization_snapshot_hash")):
+        snapshot_hash = row.get("ribbon_realization_snapshot_hash")
+        snapshot_hashes = row.get("ribbon_realization_snapshot_hashes")
+        if snapshot_hashes is not None:
+            if not isinstance(snapshot_hashes, list) or not snapshot_hashes:
+                raise FoundationSafetyError("resolved row snapshot hash list is invalid")
+            if any(not _is_sha256_id(value) for value in snapshot_hashes):
+                raise FoundationSafetyError("resolved row has an invalid snapshot hash")
+            expected = int(row["modular_braided_class_count"])
+            if len(snapshot_hashes) != expected:
+                raise FoundationSafetyError(
+                    "resolved row snapshot count must match braided class count"
+                )
+        elif not _is_sha256_id(snapshot_hash):
             raise FoundationSafetyError("resolved row needs a snapshot hash")
 
 
@@ -390,9 +425,11 @@ __all__ = [
     "FOUNDATION_STATUS",
     "FoundationSafetyError",
     "LOW_RANK_RIBBON_CATALOG_SCHEMA",
+    "LOW_RANK_RIBBON_CATALOG_SCHEMA_V2",
     "REJECTED_SOURCE_STATUSES",
     "RIBBON_CATALOG_BLOCKED",
     "RIBBON_CATALOG_ESTABLISHED",
+    "RIBBON_CATALOG_PARTIAL",
     "TERMINAL_RIBBON_ROW_STATUSES",
     "add_content_hash",
     "stable_content_hash",

@@ -1,0 +1,193 @@
+{
+  "category_contract": "RibbonFusionCategoryV2",
+  "category_data": {
+    "basis_gauge": "strict pointed basis e_a tensor e_b -> e_{a+b}",
+    "category_id": "rank3-cyclic-z3-plus",
+    "dimensions": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "duals": {
+      "0": "0",
+      "1": "2",
+      "2": "1"
+    },
+    "f_symbols": "strict pointed gauge, all F(a,b,c)=1",
+    "family_id": "rank3-cyclic-z3",
+    "field": "Q(zeta3)",
+    "fusion": {
+      "0*0": "0",
+      "0*1": "1",
+      "0*2": "2",
+      "1*0": "1",
+      "1*1": "2",
+      "1*2": "0",
+      "2*0": "2",
+      "2*1": "0",
+      "2*2": "1"
+    },
+    "fusion_pairing": "unique one-dimensional orthonormal pointed basis",
+    "labels": [
+      "0",
+      "1",
+      "2"
+    ],
+    "left_coevaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "left_evaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "metric_group": "Z/3",
+    "monodromy_bicharacter": {
+      "0,0": "1",
+      "0,1": "1",
+      "0,2": "1",
+      "1,0": "1",
+      "1,1": "zeta3^2",
+      "1,2": "zeta3",
+      "2,0": "1",
+      "2,1": "zeta3",
+      "2,2": "zeta3^2"
+    },
+    "pivotal_scalars": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "quadratic_form": "q_s(x)=zeta3^(1*x^2)",
+    "r_symbols": {
+      "0,0": "1",
+      "0,1": "1",
+      "0,2": "1",
+      "1,0": "1",
+      "1,1": "zeta3",
+      "1,2": "zeta3^2",
+      "2,0": "1",
+      "2,1": "zeta3^2",
+      "2,2": "zeta3"
+    },
+    "right_coevaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "right_evaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1"
+    },
+    "schema": "twisted-yetter.pointed-metric-group-ribbon-data.v1",
+    "source_locators": [
+      {
+        "claim_used": "rank-3 cyclic Z3 pointed modular braided row count",
+        "locator": "rank tables, pages 26-33",
+        "reference_id": "ref:dong-schopieray-near-integral-2024"
+      },
+      {
+        "claim_used": "strict odd-order pointed metric group coherence equations checked below",
+        "locator": "this artifact",
+        "reference_id": "self-contained-pointed-check"
+      }
+    ],
+    "twists": {
+      "0": "1",
+      "1": "zeta3",
+      "2": "zeta3"
+    },
+    "unit": "0"
+  },
+  "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+  "certificates": {
+    "consumer_runtime_coherence": {
+      "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "certificate_kind": "consumer_runtime_coherence",
+      "checked_payload_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "content_hash": "sha256:05a86dce6b855529fb4d1b812384c6480db7110f57e76e48a57d99deca47245e",
+      "control_artifact": {
+        "category_id": "Vec_Z3_q",
+        "path": "experiments/results/mtc-candidates/mtc-candidate-data-v1.json",
+        "sha256": "sha256:ef6b8474264782ccca784abea2d4cda73c0adbbbbe302a257ea9f814a9f2dd7a"
+      },
+      "proof_boundary": "Runtime consumer certificate binds exact pointed Z3 data, not all pointed families.",
+      "runtime_contract": "RibbonFusionCategoryV2-compatible pointed one-dimensional fusion spaces",
+      "status": "PASS"
+    },
+    "producer_exact_coherence": {
+      "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "certificate_kind": "producer_exact_coherence",
+      "checks": {
+        "bilinear_braiding_hexagon": "PASS",
+        "duality_involution": "PASS",
+        "monodromy_bicharacter_nondegenerate": "PASS",
+        "strict_pentagon_all_f_symbols_one": "PASS",
+        "twist_balancing": "PASS"
+      },
+      "content_hash": "sha256:c4c7635a2c17dd9f14ab6db6e3b14e1656deb90684a1fd199e0698e2c26b46b4",
+      "field": "Q(zeta3)",
+      "proof_boundary": "Exact finite pointed Z3 equations only; does not cover semion Z2 cocycle data.",
+      "status": "PASS"
+    },
+    "ribbon_pivotal_compatibility": {
+      "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "certificate_kind": "ribbon_pivotal_compatibility",
+      "checks": {
+        "left_right_trace_agree": "PASS",
+        "pivotal_scalar_unit": "PASS",
+        "quantum_dimensions_all_one": "PASS",
+        "twist_balancing": "PASS"
+      },
+      "content_hash": "sha256:c35475b04a4efc1126aead639bde10fd2256c8863fdd84f67d0003e5bac5e176",
+      "proof_boundary": "Braided plus pivotal is accepted here only after explicit balancing checks.",
+      "status": "PASS"
+    }
+  },
+  "claim_level": "formal-low-rank-category-evidence",
+  "content_hash": "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+  "evidence_kind": "ribbon_realization_snapshot",
+  "explicit_non_claims": [
+    "This snapshot resolves only one rank3-cyclic-z3 pointed class.",
+    "This snapshot does not resolve rank2 semion/anti-semion cocycle data.",
+    "This snapshot does not authorize a formal scan plan by itself."
+  ],
+  "family_id": "rank3-cyclic-z3",
+  "generated_at_utc": "2026-07-15T23:04:17Z",
+  "generator_script": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v2.py",
+  "git": {
+    "commit": "b8a443cdb1ee013a10433424ace4b2b4b47fa23a",
+    "dirty": true
+  },
+  "modular_braided_class_index": 0,
+  "mutable_alias_inputs": [],
+  "pinned_payload_hashes": {
+    "category_data": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+    "consumer_runtime_coherence": "sha256:05a86dce6b855529fb4d1b812384c6480db7110f57e76e48a57d99deca47245e",
+    "producer_exact_coherence": "sha256:c4c7635a2c17dd9f14ab6db6e3b14e1656deb90684a1fd199e0698e2c26b46b4",
+    "ribbon_pivotal_compatibility": "sha256:c35475b04a4efc1126aead639bde10fd2256c8863fdd84f67d0003e5bac5e176"
+  },
+  "realization_id": "rank3-cyclic-z3-plus",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_ribbon_realization_catalog_v2.py --write",
+  "schema": "twisted-yetter.ribbon-realization-snapshot.v1",
+  "source_status": "formal",
+  "status": "RESOLVED_RIBBON_REALIZATION",
+  "structural_checks": {
+    "balancing": "PASS",
+    "duality_involution": "PASS",
+    "fusion_pairing_invertible": "PASS",
+    "hexagon": "PASS",
+    "modularity": "PASS",
+    "pentagon": "PASS",
+    "r_inverse": "PASS",
+    "ribbon_pivotal_compatibility": "PASS",
+    "rigidity": "PASS"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
