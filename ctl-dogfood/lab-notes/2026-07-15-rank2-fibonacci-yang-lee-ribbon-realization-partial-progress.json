@@ -1,0 +1,109 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-15-rank2-fibonacci-yang-lee-ribbon-realization-partial-progress",
+  "title": "Rank 2 Fibonacci/Yang-Lee row resolved as partial low-rank ribbon progress",
+  "created_at": "2026-07-15T23:41:36Z",
+  "created_by": "actor:codex",
+  "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+  "top_notice": "The rank2-fibonacci-yang-lee family row now has four exact Sage-certified ribbon realization snapshots that pass the formal evidence validator. The low-rank ribbon catalog remains partial: 3 rows resolved, 11 rows blocked, and formal scan-plan generation is still disabled.",
+  "scope": {
+    "ranks": [2, 3, 4, 5],
+    "resolved_family_ids": [
+      "rank2-fibonacci-yang-lee",
+      "rank3-cyclic-z3",
+      "rank5-su5-1"
+    ],
+    "resolved_family_row_count": 3,
+    "blocked_family_row_count": 11,
+    "formal_scan_plan_allowed": false,
+    "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-ribbon-realization-catalog-v4",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v4.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "e7ad754ff7c729b6604273f0caec864d00b35f5f",
+      "sha256": "078b2e2d1878a5c1133813d7e96e8e8c04d6a2141f12e7ee45dd3e2e471b79ce",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    {
+      "artifact_id": "rank2-fibonacci-yang-lee-sage-coherence-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/rank2-fibonacci-yang-lee-sage-coherence-v1.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "c04e2a73fbe5eeac0ae179aa48aa40b098d717a0",
+      "sha256": "225f21dc4578482cc6a9b56932ab0ac6cb6d9515f6bad5f9da52f1702af7a60c",
+      "content_hash": "sha256:93767a75ed7482a3f9e8e5c8a7c9d6d10945fc08729c373f93bd70a8de5c6ea7",
+      "status": "PASS"
+    },
+    {
+      "artifact_id": "rank2-fibonacci-yang-lee-fibonacci-plus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-fibonacci-plus-snapshot-v1.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "aa9c9d4456b052d19cd0d08a8fe17eab4553e91a",
+      "sha256": "9fa0f4c951052fe41f2eca51e3a8fc260d83e978a1c337a046a8f42922932a83",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "rank2-fibonacci-yang-lee-fibonacci-minus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-fibonacci-minus-snapshot-v1.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "d3e5c0100cc8aa6e69a31fc1cb29de2167c1b939",
+      "sha256": "1df111c69e03ae1b9955946f9fd17cb88a89bb448828c93e30c97db0dd3f623c",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "rank2-fibonacci-yang-lee-yang-lee-plus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-yang-lee-plus-snapshot-v1.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "dffc0695f21c522b7a4c3773eead236ea1d3a59c",
+      "sha256": "d6efd6fca7f68f6d6334dc9db9c373beb2fb23967d4ad6b4374903c1c5f43499",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "rank2-fibonacci-yang-lee-yang-lee-minus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-yang-lee-minus-snapshot-v1.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "ff29f72c4b9a598a4b35ab3b0c77e24cbe8bfd8a",
+      "sha256": "c2621172a42e7652eb20b89f20e125b715c11c6b5c752013eb60aab5943fbb5a",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "formal-low-rank-scan-readiness-v4",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v4.json",
+      "commit": "0fb7cb428846eb01b824db1170f8c0543ff1b6fe",
+      "git_blob": "d606d56fbe33c0e075df94aaf3d49f4a1c60cb4e",
+      "sha256": "a3c0e1057d415a2f0480d3bbea0b7f2e69cd5a295d6bf71cc23d185b77057d5a",
+      "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+    }
+  ],
+  "validated_behaviors": [
+    "The Sage certificate checks all four rank2 Fibonacci/Yang-Lee branches by exact number-field arithmetic.",
+    "The Sage certificate checks pentagon, left and right hexagon, twist polynomial, ribbon square relations, S-matrix nondegeneracy, and a wrong-R-square-root negative control.",
+    "The four rank2 Fibonacci/Yang-Lee snapshots pass validate_formal_evidence.",
+    "The v4 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+    "Resolved v4 rows no longer retain stale NOT_MATERIALIZED or NOT_VERIFIED level metadata.",
+    "The v4 readiness artifact keeps scan_plan_generation_allowed=false."
+  ],
+  "tests": [
+    {
+      "command": "env DOT_SAGE=$PWD/.sage sage --python experiments/sage/rank2_fibonacci_yang_lee_certificate.sage.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+      "status": "pass",
+      "collected": 42
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not authorize any formal scan plan.",
+    "This note does not resolve rank2 cyclic Z2 semion/anti-semion cocycle data.",
+    "This note does not resolve Ising, SU(2), PSU, PSU(3), or product rows.",
+    "This note does not publish a final ribbon denominator."
+  ],
+  "mathematical_status": "THREE_ROWS_FORMAL_RIBBON_PROGRESS_ELEVEN_ROWS_REMAIN_BLOCKED",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}
