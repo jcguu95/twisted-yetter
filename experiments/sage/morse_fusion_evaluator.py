@@ -20,11 +20,11 @@ from __future__ import annotations
 
 from collections import defaultdict, deque
 import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from itertools import product
 import math
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 from experiments.sage.morse_pivotal_contract import (
     require_pivotal_capabilities,
@@ -147,35 +147,81 @@ def left_bend_fusion_matrix(category: Any, a: Any, b: Any, c: Any) -> dict[str, 
     }
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Leaf:
     strand: str
     label: Any
+    _cached_hash: int = field(init=False, repr=False, compare=False, hash=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "_cached_hash", hash((self.strand, self.label)))
+
+    def __hash__(self) -> int:
+        return self._cached_hash
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Node:
     left: "Tree"
     right: "Tree"
+    _cached_hash: int = field(init=False, repr=False, compare=False, hash=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "_cached_hash", hash((self.left, self.right)))
+
+    def __hash__(self) -> int:
+        return self._cached_hash
 
 
 Tree = Leaf | Node
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class LeafState:
     strand: str
+    _cached_hash: int = field(init=False, repr=False, compare=False, hash=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "_cached_hash", hash(self.strand))
+
+    def __hash__(self) -> int:
+        return self._cached_hash
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class NodeState:
     left: "State"
     right: "State"
     output: Any
     multiplicity: int
+    _cached_hash: int = field(init=False, repr=False, compare=False, hash=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "_cached_hash",
+            hash((self.left, self.right, self.output, self.multiplicity)),
+        )
+
+    def __hash__(self) -> int:
+        return self._cached_hash
 
 
 State = LeafState | NodeState
+
+
+@lru_cache(maxsize=65_536)
+def _rebuilt_node_state(
+    left: State, right: State, output: Any, multiplicity: int
+) -> NodeState:
+    return NodeState(left, right, output, multiplicity)
+
+
+@lru_cache(maxsize=65_536)
+def _local_node_state(
+    left: State, right: State, output: Any, multiplicity: int
+) -> NodeState:
+    return NodeState(left, right, output, multiplicity)
 
 
 def right_comb_fusion_path_counts(category: Any, factor_labels: Iterable[Any]) -> dict[Any, int]:
@@ -700,7 +746,9 @@ def leaves(tree: Tree) -> tuple[Leaf, ...]:
     return leaves(tree.left) + leaves(tree.right)
 
 
-def root_label(tree: Tree, state: State) -> Any:
+def root_label(tree: Tree, state: Any, state_backend: Any | None = None) -> Any:
+    if state_backend is not None:
+        return state_backend.root_label(tree, state)
     if isinstance(tree, Leaf):
         if not isinstance(state, LeafState) or state.strand != tree.strand:
             raise ValueError("leaf/tree state mismatch")
@@ -708,6 +756,272 @@ def root_label(tree: Tree, state: State) -> Any:
     if not isinstance(state, NodeState):
         raise ValueError("node/tree state mismatch")
     return state.output
+
+
+class ObjectStateBackend:
+    name = "object-tree"
+
+    @staticmethod
+    def clear() -> None:
+        _rebuilt_node_state.cache_clear()
+        _local_node_state.cache_clear()
+
+    @staticmethod
+    def leaf(strand: str) -> LeafState:
+        return LeafState(strand)
+
+    @staticmethod
+    def node(left: State, right: State, output: Any, multiplicity: int) -> NodeState:
+        return _local_node_state(left, right, output, multiplicity)
+
+    @staticmethod
+    def is_leaf(state: Any) -> bool:
+        return isinstance(state, LeafState)
+
+    @staticmethod
+    def is_node(state: Any) -> bool:
+        return isinstance(state, NodeState)
+
+    @staticmethod
+    def strand(state: LeafState) -> str:
+        return state.strand
+
+    @staticmethod
+    def left(state: NodeState) -> State:
+        return state.left
+
+    @staticmethod
+    def right(state: NodeState) -> State:
+        return state.right
+
+    @staticmethod
+    def output(state: NodeState) -> Any:
+        return state.output
+
+    @staticmethod
+    def multiplicity(state: NodeState) -> int:
+        return state.multiplicity
+
+    @staticmethod
+    def root_label(tree: Tree, state: State) -> Any:
+        return root_label(tree, state)
+
+    @staticmethod
+    def zipper(state: State, path: tuple[int, ...]):
+        return _state_zipper(state, path)
+
+    @staticmethod
+    def rebuild(ancestors: list[tuple[NodeState, int]], replacement: State) -> State:
+        return _rebuild_state(ancestors, replacement)
+
+    @staticmethod
+    def cache_stats() -> dict[str, Any]:
+        rebuild = _rebuilt_node_state.cache_info()
+        local = _local_node_state.cache_info()
+        return {
+            "node_count": None,
+            "rebuild_hits": rebuild.hits,
+            "rebuild_misses": rebuild.misses,
+            "local_hits": local.hits,
+            "local_misses": local.misses,
+        }
+
+    @staticmethod
+    def maybe_compact(vector: dict[Any, complex]) -> dict[Any, complex]:
+        return vector
+
+
+class CompactStateArena:
+    """Hash-consed integer representation of fusion-basis states."""
+
+    name = "compact-integer-arena"
+
+    def __init__(self, *, compact_threshold: int = 750_000) -> None:
+        self.compact_threshold = int(compact_threshold)
+        if self.compact_threshold < 1:
+            raise ValueError("compact_threshold must be positive")
+        self._kind: list[int] = []
+        self._strand: list[str | None] = []
+        self._left: list[int] = []
+        self._right: list[int] = []
+        self._output: list[Any] = []
+        self._multiplicity: list[int] = []
+        self._leaf_ids: dict[str, int] = {}
+        self._node_ids: dict[tuple[int, int, Any, int], int] = {}
+        self._node_hits = 0
+        self._node_misses = 0
+        self._compactions = 0
+        self._peak_node_count = 0
+
+    def clear(self) -> None:
+        threshold = self.compact_threshold
+        self.__init__(compact_threshold=threshold)
+
+    def leaf(self, strand: str) -> int:
+        state_id = self._leaf_ids.get(strand)
+        if state_id is not None:
+            return state_id
+        state_id = len(self._kind)
+        self._leaf_ids[strand] = state_id
+        self._kind.append(0)
+        self._strand.append(strand)
+        self._left.append(-1)
+        self._right.append(-1)
+        self._output.append(None)
+        self._multiplicity.append(-1)
+        self._peak_node_count = max(self._peak_node_count, len(self._kind))
+        return state_id
+
+    def node(self, left: int, right: int, output: Any, multiplicity: int) -> int:
+        key = (left, right, output, multiplicity)
+        state_id = self._node_ids.get(key)
+        if state_id is not None:
+            self._node_hits += 1
+            return state_id
+        self._node_misses += 1
+        state_id = len(self._kind)
+        self._node_ids[key] = state_id
+        self._kind.append(1)
+        self._strand.append(None)
+        self._left.append(left)
+        self._right.append(right)
+        self._output.append(output)
+        self._multiplicity.append(multiplicity)
+        self._peak_node_count = max(self._peak_node_count, len(self._kind))
+        return state_id
+
+    def is_leaf(self, state: int) -> bool:
+        return self._kind[state] == 0
+
+    def is_node(self, state: int) -> bool:
+        return self._kind[state] == 1
+
+    def strand(self, state: int) -> str:
+        strand = self._strand[state]
+        if strand is None:
+            raise ValueError("node state has no strand")
+        return strand
+
+    def left(self, state: int) -> int:
+        return self._left[state]
+
+    def right(self, state: int) -> int:
+        return self._right[state]
+
+    def output(self, state: int) -> Any:
+        return self._output[state]
+
+    def multiplicity(self, state: int) -> int:
+        return self._multiplicity[state]
+
+    def root_label(self, tree: Tree, state: int) -> Any:
+        if isinstance(tree, Leaf):
+            if not self.is_leaf(state) or self.strand(state) != tree.strand:
+                raise ValueError("leaf/tree state mismatch")
+            return tree.label
+        if not self.is_node(state):
+            raise ValueError("node/tree state mismatch")
+        return self.output(state)
+
+    def zipper(
+        self, state: int, path: tuple[int, ...]
+    ) -> tuple[int, list[tuple[int, int]]]:
+        ancestors: list[tuple[int, int]] = []
+        current = state
+        for direction in path:
+            if not self.is_node(current):
+                raise ValueError("state path descends through a leaf")
+            ancestors.append((current, direction))
+            current = self.left(current) if direction == 0 else self.right(current)
+        return current, ancestors
+
+    def rebuild(self, ancestors: list[tuple[int, int]], replacement: int) -> int:
+        result = replacement
+        for parent, direction in reversed(ancestors):
+            if direction == 0:
+                result = self.node(
+                    result,
+                    self.right(parent),
+                    self.output(parent),
+                    self.multiplicity(parent),
+                )
+            else:
+                result = self.node(
+                    self.left(parent),
+                    result,
+                    self.output(parent),
+                    self.multiplicity(parent),
+                )
+        return result
+
+    def cache_stats(self) -> dict[str, Any]:
+        return {
+            "node_count": len(self._kind),
+            "peak_node_count": self._peak_node_count,
+            "leaf_count": len(self._leaf_ids),
+            "node_hits": self._node_hits,
+            "node_misses": self._node_misses,
+            "compactions": self._compactions,
+            "compact_threshold": self.compact_threshold,
+        }
+
+    def maybe_compact(self, vector: dict[Any, complex]) -> dict[Any, complex]:
+        if len(self._kind) < self.compact_threshold:
+            return vector
+        old_kind = self._kind
+        old_strand = self._strand
+        old_left = self._left
+        old_right = self._right
+        old_output = self._output
+        old_multiplicity = self._multiplicity
+        old_hits = self._node_hits
+        old_misses = self._node_misses
+        old_compactions = self._compactions
+        old_peak = self._peak_node_count
+        replacement = CompactStateArena(
+            compact_threshold=self.compact_threshold
+        )
+        remap: dict[int, int] = {}
+
+        def copy_state(state_id: int) -> int:
+            copied = remap.get(state_id)
+            if copied is not None:
+                return copied
+            if old_kind[state_id] == 0:
+                strand = old_strand[state_id]
+                if strand is None:
+                    raise ValueError("compact leaf lost its strand")
+                copied = replacement.leaf(strand)
+            else:
+                copied = replacement.node(
+                    copy_state(old_left[state_id]),
+                    copy_state(old_right[state_id]),
+                    old_output[state_id],
+                    old_multiplicity[state_id],
+                )
+            remap[state_id] = copied
+            return copied
+
+        compacted = {
+            (None if state is None else copy_state(state)): amplitude
+            for state, amplitude in vector.items()
+        }
+        self._kind = replacement._kind
+        self._strand = replacement._strand
+        self._left = replacement._left
+        self._right = replacement._right
+        self._output = replacement._output
+        self._multiplicity = replacement._multiplicity
+        self._leaf_ids = replacement._leaf_ids
+        self._node_ids = replacement._node_ids
+        self._node_hits = old_hits + replacement._node_hits
+        self._node_misses = old_misses + replacement._node_misses
+        self._compactions = old_compactions + 1
+        self._peak_node_count = max(old_peak, replacement._peak_node_count)
+        return compacted
+
+
+OBJECT_STATE_BACKEND = ObjectStateBackend()
 
 
 def right_comb(items: Iterable[Tree]) -> Tree:
@@ -866,49 +1180,105 @@ def matrix_entry(matrix: Any, row: int, column: int) -> complex:
         return complex(matrix[row][column])
 
 
-def _state_at(state: State, path: tuple[int, ...]) -> State:
+def _state_zipper(
+    state: State, path: tuple[int, ...]
+) -> tuple[State, list[tuple[NodeState, int]]]:
+    ancestors = []
     current = state
     for direction in path:
         if not isinstance(current, NodeState):
             raise ValueError("state path descends through a leaf")
+        ancestors.append((current, direction))
         current = current.left if direction == 0 else current.right
-    return current
+    return current, ancestors
+
+
+def _state_at(state: State, path: tuple[int, ...]) -> State:
+    return _state_zipper(state, path)[0]
+
+
+def _rebuild_state(
+    ancestors: list[tuple[NodeState, int]], replacement: State
+) -> State:
+    result = replacement
+    for parent, direction in reversed(ancestors):
+        if direction == 0:
+            result = _rebuilt_node_state(
+                result,
+                parent.right,
+                parent.output,
+                parent.multiplicity,
+            )
+        else:
+            result = _rebuilt_node_state(
+                parent.left,
+                result,
+                parent.output,
+                parent.multiplicity,
+            )
+    return result
 
 
 def _replace_state(state: State, path: tuple[int, ...], replacement: State) -> State:
-    if not path:
-        return replacement
-    if not isinstance(state, NodeState):
-        raise ValueError("cannot replace below a leaf state")
-    direction, rest = path[0], path[1:]
-    if direction == 0:
-        return NodeState(_replace_state(state.left, rest, replacement), state.right, state.output, state.multiplicity)
-    return NodeState(state.left, _replace_state(state.right, rest, replacement), state.output, state.multiplicity)
+    _local, ancestors = _state_zipper(state, path)
+    return _rebuild_state(ancestors, replacement)
 
 
-def _prune(vector: dict[State, complex], tolerance: float = TOLERANCE) -> dict[State, complex]:
+def _prune(vector: dict[Any, complex], tolerance: float = TOLERANCE) -> dict[Any, complex]:
     return {state: value for state, value in vector.items() if abs(value) > tolerance}
 
 
-def rotate_vector(category: Any, tree: Tree, vector: dict[State, complex], path: tuple[int, ...], direction: str):
+def _state_for_backend(tree: Tree, state: State, state_backend: Any) -> Any:
+    if isinstance(tree, Leaf):
+        if not isinstance(state, LeafState):
+            raise ValueError("leaf/tree state mismatch")
+        return state_backend.leaf(state.strand)
+    if not isinstance(state, NodeState):
+        raise ValueError("node/tree state mismatch")
+    return state_backend.node(
+        _state_for_backend(tree.left, state.left, state_backend),
+        _state_for_backend(tree.right, state.right, state_backend),
+        state.output,
+        state.multiplicity,
+    )
+
+
+def rotate_vector(
+    category: Any,
+    tree: Tree,
+    vector: dict[Any, complex],
+    path: tuple[int, ...],
+    direction: str,
+    *,
+    state_backend: Any = OBJECT_STATE_BACKEND,
+):
     local_tree = subtree_at(tree, path)
-    output: dict[State, complex] = defaultdict(complex)
+    output: dict[Any, complex] = defaultdict(complex)
+    zipper = state_backend.zipper
+    rebuild = state_backend.rebuild
+    node = state_backend.node
     for state, amplitude in vector.items():
-        local_state = _state_at(state, path)
+        local_state, ancestors = zipper(state, path)
         if direction == "left-to-right":
             if not isinstance(local_tree, Node) or not isinstance(local_tree.left, Node):
                 raise ValueError("bad left-to-right local tree")
-            if not isinstance(local_state, NodeState) or not isinstance(local_state.left, NodeState):
+            if not state_backend.is_node(local_state):
                 raise ValueError("bad left-to-right local state")
             a_tree, b_tree, c_tree = local_tree.left.left, local_tree.left.right, local_tree.right
-            ab_state, c_state = local_state.left, local_state.right
-            a_state, b_state = ab_state.left, ab_state.right
-            a = root_label(a_tree, a_state)
-            b = root_label(b_tree, b_state)
-            c = root_label(c_tree, c_state)
-            d = local_state.output
+            ab_state, c_state = state_backend.left(local_state), state_backend.right(local_state)
+            if not state_backend.is_node(ab_state):
+                raise ValueError("bad left-to-right local state")
+            a_state, b_state = state_backend.left(ab_state), state_backend.right(ab_state)
+            a = root_label(a_tree, a_state, state_backend)
+            b = root_label(b_tree, b_state, state_backend)
+            c = root_label(c_tree, c_state, state_backend)
+            d = state_backend.output(local_state)
             block = category.f_block(a, b, c, d)
-            left_key = (ab_state.output, ab_state.multiplicity, local_state.multiplicity)
+            left_key = (
+                state_backend.output(ab_state),
+                state_backend.multiplicity(ab_state),
+                state_backend.multiplicity(local_state),
+            )
             left_index = block["left_index"][left_key]
             inverse = block["left_to_right"]
             for right_index, right_key in enumerate(block["right_basis"]):
@@ -916,22 +1286,29 @@ def rotate_vector(category: Any, tree: Tree, vector: dict[State, complex], path:
                 if abs(coefficient) <= TOLERANCE:
                     continue
                 y, bc_mult, ay_mult = right_key
-                replacement = NodeState(a_state, NodeState(b_state, c_state, y, bc_mult), d, ay_mult)
-                output[_replace_state(state, path, replacement)] += coefficient * amplitude
+                bc_state = node(b_state, c_state, y, bc_mult)
+                replacement = node(a_state, bc_state, d, ay_mult)
+                output[rebuild(ancestors, replacement)] += coefficient * amplitude
         elif direction == "right-to-left":
             if not isinstance(local_tree, Node) or not isinstance(local_tree.right, Node):
                 raise ValueError("bad right-to-left local tree")
-            if not isinstance(local_state, NodeState) or not isinstance(local_state.right, NodeState):
+            if not state_backend.is_node(local_state):
                 raise ValueError("bad right-to-left local state")
             a_tree, b_tree, c_tree = local_tree.left, local_tree.right.left, local_tree.right.right
-            a_state, bc_state = local_state.left, local_state.right
-            b_state, c_state = bc_state.left, bc_state.right
-            a = root_label(a_tree, a_state)
-            b = root_label(b_tree, b_state)
-            c = root_label(c_tree, c_state)
-            d = local_state.output
+            a_state, bc_state = state_backend.left(local_state), state_backend.right(local_state)
+            if not state_backend.is_node(bc_state):
+                raise ValueError("bad right-to-left local state")
+            b_state, c_state = state_backend.left(bc_state), state_backend.right(bc_state)
+            a = root_label(a_tree, a_state, state_backend)
+            b = root_label(b_tree, b_state, state_backend)
+            c = root_label(c_tree, c_state, state_backend)
+            d = state_backend.output(local_state)
             block = category.f_block(a, b, c, d)
-            right_key = (bc_state.output, bc_state.multiplicity, local_state.multiplicity)
+            right_key = (
+                state_backend.output(bc_state),
+                state_backend.multiplicity(bc_state),
+                state_backend.multiplicity(local_state),
+            )
             right_index = block["right_index"][right_key]
             matrix = block["right_to_left"]
             for left_index, left_key in enumerate(block["left_basis"]):
@@ -939,25 +1316,34 @@ def rotate_vector(category: Any, tree: Tree, vector: dict[State, complex], path:
                 if abs(coefficient) <= TOLERANCE:
                     continue
                 x, ab_mult, xc_mult = left_key
-                replacement = NodeState(NodeState(a_state, b_state, x, ab_mult), c_state, d, xc_mult)
-                output[_replace_state(state, path, replacement)] += coefficient * amplitude
+                ab_state = node(a_state, b_state, x, ab_mult)
+                replacement = node(ab_state, c_state, d, xc_mult)
+                output[rebuild(ancestors, replacement)] += coefficient * amplitude
         else:
             raise ValueError(f"unknown rotation direction: {direction!r}")
     return rotate_shape(tree, path, direction), _prune(dict(output))
 
 
-def apply_rotation_plan(category: Any, tree: Tree, vector: dict[State, complex], plan):
+def apply_rotation_plan(
+    category: Any, tree: Tree, vector: dict[Any, complex], plan, *, state_backend=OBJECT_STATE_BACKEND
+):
     for path, direction in plan:
-        tree, vector = rotate_vector(category, tree, vector, path, direction)
+        tree, vector = rotate_vector(
+            category, tree, vector, path, direction, state_backend=state_backend
+        )
+        vector = state_backend.maybe_compact(vector)
     return tree, vector
 
 
 def project_vacuum_interval(
     category: Any,
     tree: Tree,
-    vector: dict[State, complex],
+    vector: dict[Any, complex],
     start: int,
     stop: int,
+    *,
+    path_range: tuple[int, int] | None = None,
+    state_backend: Any = OBJECT_STATE_BACKEND,
 ):
     """Apply the idempotent unit-channel projector to a leaf interval.
 
@@ -973,15 +1359,46 @@ def project_vacuum_interval(
     source = tree
     target, path = grouped_target(tree, start, stop)
     forward = rotation_plan(tree, target)
-    tree, vector = apply_rotation_plan(category, tree, vector, forward)
+    tree, vector = apply_rotation_plan(
+        category, tree, vector, forward, state_backend=state_backend
+    )
     local_tree = subtree_at(tree, path)
-    retained = {
-        state: amplitude
-        for state, amplitude in vector.items()
-        if root_label(local_tree, _state_at(state, path)) == category.unit
-    }
+    basis_rank = None
+    selected_basis = None
+    if path_range is not None:
+        basis_tree, basis = right_comb_fusion_path_basis(
+            category,
+            ((leaf.strand, leaf.label) for leaf in leaves(local_tree)),
+            target=category.unit,
+        )
+        if basis_tree != local_tree:
+            raise AssertionError("vacuum projector target is not the canonical right comb")
+        basis_rank = len(basis)
+        range_start, range_stop = map(int, path_range)
+        if not (0 <= range_start <= range_stop <= basis_rank):
+            raise ValueError(
+                "vacuum projector path range is outside its canonical basis: "
+                f"{path_range!r} for rank {basis_rank}"
+            )
+        selected_basis = frozenset(
+            _state_for_backend(basis_tree, basis_state, state_backend)
+            for basis_state in basis[range_start:range_stop]
+        )
+
+    retained = {}
+    selected_global_state_count = 0
+    for state, amplitude in vector.items():
+        local_state = state_backend.zipper(state, path)[0]
+        if root_label(local_tree, local_state, state_backend) != category.unit:
+            continue
+        if selected_basis is not None and local_state not in selected_basis:
+            continue
+        retained[state] = amplitude
+        selected_global_state_count += 1
     backward = rotation_plan(tree, source)
-    tree, retained = apply_rotation_plan(category, tree, retained, backward)
+    tree, retained = apply_rotation_plan(
+        category, tree, retained, backward, state_backend=state_backend
+    )
     if tree != source:
         raise AssertionError("vacuum projection failed to restore the source tree")
     return tree, _prune(retained), {
@@ -990,18 +1407,22 @@ def project_vacuum_interval(
         "support_before": len(vector),
         "support_after": len(retained),
         "subtree_path": list(path),
+        "canonical_path_basis_rank": basis_rank,
+        "selected_path_range": list(path_range) if path_range is not None else None,
+        "selected_global_state_count": selected_global_state_count,
     }
 
 
 def fuse_active_pair(
     category: Any,
     tree: Tree,
-    vector: dict[State, complex],
+    vector: dict[Any, complex],
     path: tuple[int, ...],
     *,
     output_strand: str,
     output_label: Any,
     multiplicity: int,
+    state_backend: Any = OBJECT_STATE_BACKEND,
 ):
     """Apply one orthonormal trivalent projection to a sibling pair."""
 
@@ -1018,23 +1439,27 @@ def fuse_active_pair(
             "fusion multiplicity index is out of range: "
             f"{multiplicity} not in [0, {available})"
         )
-    output: dict[State, complex] = defaultdict(complex)
+    output: dict[Any, complex] = defaultdict(complex)
     for state, amplitude in vector.items():
-        local_state = _state_at(state, path)
-        if not isinstance(local_state, NodeState):
+        local_state, ancestors = state_backend.zipper(state, path)
+        if not state_backend.is_node(local_state):
             raise ValueError("fusion input state is not a sibling pair")
-        if local_state.output != output_label:
+        if state_backend.output(local_state) != output_label:
             continue
         if _is_ribbon_category_v2(category):
             pairing = category.fusion_pairing(
                 local_tree.left.label, local_tree.right.label, output_label
             )
-            coefficient = complex(pairing[multiplicity][local_state.multiplicity])
+            coefficient = complex(
+                pairing[multiplicity][state_backend.multiplicity(local_state)]
+            )
         else:
-            coefficient = complex(local_state.multiplicity == multiplicity)
+            coefficient = complex(
+                state_backend.multiplicity(local_state) == multiplicity
+            )
         if abs(coefficient) > TOLERANCE:
-            replacement = LeafState(output_strand)
-            output[_replace_state(state, path, replacement)] += coefficient * amplitude
+            replacement = state_backend.leaf(output_strand)
+            output[state_backend.rebuild(ancestors, replacement)] += coefficient * amplitude
     replacement_tree = Leaf(output_strand, output_label)
     return replace_subtree(tree, path, replacement_tree), _prune(dict(output))
 
@@ -1042,7 +1467,7 @@ def fuse_active_pair(
 def split_active_wire(
     category: Any,
     tree: Tree,
-    vector: dict[State, complex],
+    vector: dict[Any, complex],
     path: tuple[int, ...],
     *,
     left_strand: str,
@@ -1050,6 +1475,7 @@ def split_active_wire(
     right_strand: str,
     right_label: Any,
     multiplicity: int,
+    state_backend: Any = OBJECT_STATE_BACKEND,
 ):
     """Apply the adjoint inclusion of one orthonormal trivalent basis map."""
 
@@ -1064,42 +1490,60 @@ def split_active_wire(
             "split multiplicity index is out of range: "
             f"{multiplicity} not in [0, {available})"
         )
-    output: dict[State, complex] = defaultdict(complex)
+    output: dict[Any, complex] = defaultdict(complex)
     for state, amplitude in vector.items():
-        local_state = _state_at(state, path)
-        if not isinstance(local_state, LeafState):
+        local_state, ancestors = state_backend.zipper(state, path)
+        if not state_backend.is_leaf(local_state):
             raise ValueError("split input state must be one active physical wire")
-        replacement = NodeState(
-            LeafState(left_strand),
-            LeafState(right_strand),
+        replacement = state_backend.node(
+            state_backend.leaf(left_strand),
+            state_backend.leaf(right_strand),
             local_tree.label,
             multiplicity,
         )
-        output[_replace_state(state, path, replacement)] += amplitude
+        output[state_backend.rebuild(ancestors, replacement)] += amplitude
     replacement_tree = Node(
         Leaf(left_strand, left_label), Leaf(right_strand, right_label)
     )
     return replace_subtree(tree, path, replacement_tree), _prune(dict(output))
 
 
-def braid_siblings(category: Any, tree: Tree, vector: dict[State, complex], path: tuple[int, ...], positive: bool):
+def braid_siblings(
+    category: Any,
+    tree: Tree,
+    vector: dict[Any, complex],
+    path: tuple[int, ...],
+    positive: bool,
+    *,
+    state_backend: Any = OBJECT_STATE_BACKEND,
+):
     local_tree = subtree_at(tree, path)
     if not isinstance(local_tree, Node):
         raise ValueError("braid needs a node")
-    output: dict[State, complex] = defaultdict(complex)
+    output: dict[Any, complex] = defaultdict(complex)
     for state, amplitude in vector.items():
-        local_state = _state_at(state, path)
-        if not isinstance(local_state, NodeState):
+        local_state, ancestors = state_backend.zipper(state, path)
+        if not state_backend.is_node(local_state):
             raise ValueError("braid needs a node state")
-        a = root_label(local_tree.left, local_state.left)
-        b = root_label(local_tree.right, local_state.right)
-        matrix = category.r_matrix(a, b, local_state.output, positive)
-        for target_mult in range(category.fusion_multiplicity(b, a, local_state.output)):
-            coefficient = matrix_entry(matrix, target_mult, local_state.multiplicity)
+        left_state = state_backend.left(local_state)
+        right_state = state_backend.right(local_state)
+        output_label = state_backend.output(local_state)
+        a = root_label(local_tree.left, left_state, state_backend)
+        b = root_label(local_tree.right, right_state, state_backend)
+        matrix = category.r_matrix(a, b, output_label, positive)
+        for target_mult in range(category.fusion_multiplicity(b, a, output_label)):
+            coefficient = matrix_entry(
+                matrix, target_mult, state_backend.multiplicity(local_state)
+            )
             if abs(coefficient) <= TOLERANCE:
                 continue
-            replacement = NodeState(local_state.right, local_state.left, local_state.output, target_mult)
-            output[_replace_state(state, path, replacement)] += coefficient * amplitude
+            replacement = state_backend.node(
+                right_state,
+                left_state,
+                output_label,
+                target_mult,
+            )
+            output[state_backend.rebuild(ancestors, replacement)] += coefficient * amplitude
     swapped = replace_subtree(tree, path, Node(local_tree.right, local_tree.left))
     return swapped, _prune(dict(output))
 
@@ -1296,7 +1740,16 @@ def fusion_index(category: Any, left: Any, right: Any, output: Any) -> int:
     return 0
 
 
-def insert_pair(category: Any, tree: Tree | None, state: State | None, gap: int, pair_tree: Node, pair_state: NodeState):
+def insert_pair(
+    category: Any,
+    tree: Tree | None,
+    state: Any | None,
+    gap: int,
+    pair_tree: Node,
+    pair_state: Any,
+    *,
+    state_backend: Any = OBJECT_STATE_BACKEND,
+):
     if tree is None:
         if gap != 0 or state is not None:
             raise ValueError("bad empty cup insertion")
@@ -1306,62 +1759,128 @@ def insert_pair(category: Any, tree: Tree | None, state: State | None, gap: int,
     count = leaf_count(tree)
     if not (0 <= gap <= count):
         raise ValueError("cup gap is outside active order")
-    current_root = root_label(tree, state)
+    current_root = root_label(tree, state, state_backend)
     if gap == 0:
         mult = fusion_index(category, category.unit, current_root, current_root)
-        return Node(pair_tree, tree), NodeState(pair_state, state, current_root, mult)
+        return Node(pair_tree, tree), state_backend.node(
+            pair_state, state, current_root, mult
+        )
     if gap == count:
         mult = fusion_index(category, current_root, category.unit, current_root)
-        return Node(tree, pair_tree), NodeState(state, pair_state, current_root, mult)
-    if not isinstance(tree, Node) or not isinstance(state, NodeState):
+        return Node(tree, pair_tree), state_backend.node(
+            state, pair_state, current_root, mult
+        )
+    if not isinstance(tree, Node) or not state_backend.is_node(state):
         raise ValueError("interior insertion requires a node")
     left_count = leaf_count(tree.left)
     if gap <= left_count:
-        new_left, new_left_state = insert_pair(category, tree.left, state.left, gap, pair_tree, pair_state)
-        return Node(new_left, tree.right), NodeState(new_left_state, state.right, state.output, state.multiplicity)
+        new_left, new_left_state = insert_pair(
+            category,
+            tree.left,
+            state_backend.left(state),
+            gap,
+            pair_tree,
+            pair_state,
+            state_backend=state_backend,
+        )
+        return Node(new_left, tree.right), state_backend.node(
+            new_left_state,
+            state_backend.right(state),
+            state_backend.output(state),
+            state_backend.multiplicity(state),
+        )
     new_right, new_right_state = insert_pair(
-        category, tree.right, state.right, gap - left_count, pair_tree, pair_state
+        category,
+        tree.right,
+        state_backend.right(state),
+        gap - left_count,
+        pair_tree,
+        pair_state,
+        state_backend=state_backend,
     )
-    return Node(tree.left, new_right), NodeState(state.left, new_right_state, state.output, state.multiplicity)
+    return Node(tree.left, new_right), state_backend.node(
+        state_backend.left(state),
+        new_right_state,
+        state_backend.output(state),
+        state_backend.multiplicity(state),
+    )
 
 
 _REMOVED = object()
 _REJECTED = object()
 
 
-def remove_pair(category: Any, tree: Tree, state: State, path: tuple[int, ...]):
+def remove_pair(
+    category: Any,
+    tree: Tree,
+    state: Any,
+    path: tuple[int, ...],
+    *,
+    state_backend: Any = OBJECT_STATE_BACKEND,
+):
     if not path:
-        if not isinstance(tree, Node) or not isinstance(state, NodeState):
+        if not isinstance(tree, Node) or not state_backend.is_node(state):
             raise ValueError("cap target is not a pair node")
-        if state.output != category.unit or state.multiplicity != 0:
+        if (
+            state_backend.output(state) != category.unit
+            or state_backend.multiplicity(state) != 0
+        ):
             return _REJECTED, _REJECTED
         return _REMOVED, _REMOVED
-    if not isinstance(tree, Node) or not isinstance(state, NodeState):
+    if not isinstance(tree, Node) or not state_backend.is_node(state):
         raise ValueError("cap path descends through a leaf")
     direction, rest = path[0], path[1:]
     if direction == 0:
-        new_tree, new_state = remove_pair(category, tree.left, state.left, rest)
+        new_tree, new_state = remove_pair(
+            category,
+            tree.left,
+            state_backend.left(state),
+            rest,
+            state_backend=state_backend,
+        )
         if new_tree is _REJECTED:
             return _REJECTED, _REJECTED
         if new_tree is _REMOVED:
-            sibling_label = root_label(tree.right, state.right)
-            if state.output != sibling_label or state.multiplicity != fusion_index(
-                category, category.unit, sibling_label, sibling_label
+            right_state = state_backend.right(state)
+            sibling_label = root_label(tree.right, right_state, state_backend)
+            if (
+                state_backend.output(state) != sibling_label
+                or state_backend.multiplicity(state)
+                != fusion_index(category, category.unit, sibling_label, sibling_label)
             ):
                 return _REJECTED, _REJECTED
-            return tree.right, state.right
-        return Node(new_tree, tree.right), NodeState(new_state, state.right, state.output, state.multiplicity)
-    new_tree, new_state = remove_pair(category, tree.right, state.right, rest)
+            return tree.right, right_state
+        return Node(new_tree, tree.right), state_backend.node(
+            new_state,
+            state_backend.right(state),
+            state_backend.output(state),
+            state_backend.multiplicity(state),
+        )
+    new_tree, new_state = remove_pair(
+        category,
+        tree.right,
+        state_backend.right(state),
+        rest,
+        state_backend=state_backend,
+    )
     if new_tree is _REJECTED:
         return _REJECTED, _REJECTED
     if new_tree is _REMOVED:
-        sibling_label = root_label(tree.left, state.left)
-        if state.output != sibling_label or state.multiplicity != fusion_index(
-            category, sibling_label, category.unit, sibling_label
+        left_state = state_backend.left(state)
+        sibling_label = root_label(tree.left, left_state, state_backend)
+        if (
+            state_backend.output(state) != sibling_label
+            or state_backend.multiplicity(state)
+            != fusion_index(category, sibling_label, category.unit, sibling_label)
         ):
             return _REJECTED, _REJECTED
-        return tree.left, state.left
-    return Node(tree.left, new_tree), NodeState(state.left, new_state, state.output, state.multiplicity)
+        return tree.left, left_state
+    return Node(tree.left, new_tree), state_backend.node(
+        state_backend.left(state),
+        new_state,
+        state_backend.output(state),
+        state_backend.multiplicity(state),
+    )
 
 
 @dataclass
@@ -1406,6 +1925,8 @@ class MorseEvaluator:
         r_weight: float | None = None,
         beam_width: int = 16,
         planner_mode: str = "hybrid",
+        state_backend: str = "object",
+        compact_state_threshold: int = 750_000,
         reversed_orientation_components: Iterable[str] = (),
     ):
         self.category = category
@@ -1416,6 +1937,12 @@ class MorseEvaluator:
         if planner_mode not in {"hybrid", "sequential"}:
             raise ValueError("planner_mode must be 'hybrid' or 'sequential'")
         self.planner_mode = planner_mode
+        if state_backend not in {"object", "compact"}:
+            raise ValueError("state_backend must be 'object' or 'compact'")
+        self.state_backend_mode = state_backend
+        self.compact_state_threshold = int(compact_state_threshold)
+        if self.compact_state_threshold < 1:
+            raise ValueError("compact_state_threshold must be positive")
         self.reversed_orientation_components = frozenset(
             reversed_orientation_components
         )
@@ -1442,7 +1969,16 @@ class MorseEvaluator:
             topology.component_order, topology.component_by_strand, orientations
         )
 
-    def _stats_payload(self, topology: MorseTopology, stats: EvaluationStats, **extra):
+    def _stats_payload(
+        self,
+        topology: MorseTopology,
+        stats: EvaluationStats,
+        *,
+        state_backend: Any = OBJECT_STATE_BACKEND,
+        **extra,
+    ):
+        rebuild_cache = _rebuilt_node_state.cache_info()
+        local_cache = _local_node_state.cache_info()
         return {
             "component_order": list(topology.component_order),
             "f_rotations": stats.f_rotations,
@@ -1458,6 +1994,20 @@ class MorseEvaluator:
             "evaluations": stats.evaluations,
             "max_active_strands": stats.max_active_strands,
             "max_state_support": stats.max_state_support,
+            "state_rebuild_cache": {
+                "hits": rebuild_cache.hits,
+                "misses": rebuild_cache.misses,
+                "maxsize": rebuild_cache.maxsize,
+                "currsize": rebuild_cache.currsize,
+            },
+            "state_local_cache": {
+                "hits": local_cache.hits,
+                "misses": local_cache.misses,
+                "maxsize": local_cache.maxsize,
+                "currsize": local_cache.currsize,
+            },
+            "state_backend": state_backend.name,
+            "state_backend_stats": state_backend.cache_stats(),
             "planner_weights": {"f": self.f_weight, "r": self.r_weight},
             "planner_mode": self.planner_mode,
             "reversed_orientation_components": sorted(
@@ -1508,9 +2058,15 @@ class MorseEvaluator:
             return order.index(form["after"]) + 1
         raise ValueError(f"unsupported cup placement: {form!r}")
 
-    def _rotate(self, tree, vector, target, stats):
+    def _rotate(self, tree, vector, target, stats, state_backend):
         plan = rotation_plan(tree, target)
-        tree, vector = apply_rotation_plan(self.category, tree, vector, plan)
+        tree, vector = apply_rotation_plan(
+            self.category,
+            tree,
+            vector,
+            plan,
+            state_backend=state_backend,
+        )
         stats.f_rotations += len(plan)
         return tree, vector, plan
 
@@ -1632,8 +2188,27 @@ class MorseEvaluator:
         self._frontier_plan_cache[cache_key] = (selected[0], selected[3])
         return selected
 
-    def fixed_label_value(self, forms: Iterable[dict[str, Any]], component_labels: dict[str, Any], *, _unit_pruned=False):
+    def fixed_label_value(
+        self,
+        forms: Iterable[dict[str, Any]],
+        component_labels: dict[str, Any],
+        *,
+        projector_path_ranges: Mapping[str, tuple[int, int]] | None = None,
+        _unit_pruned=False,
+    ):
         forms = forms if isinstance(forms, tuple) else tuple(forms)
+        projector_path_ranges = dict(projector_path_ranges or {})
+        projector_ids = {
+            form.get("projector_id")
+            for form in forms
+            if form.get("kind") == "vacuum-projector"
+        }
+        unknown_projectors = set(projector_path_ranges) - projector_ids
+        if unknown_projectors:
+            raise ValueError(
+                "projector path ranges reference absent projector ids: "
+                f"{sorted(unknown_projectors)!r}"
+            )
         required_pivotal = required_capabilities_for_forms(forms)
         if required_pivotal and not _is_ribbon_category_v2(self.category):
             require_pivotal_capabilities(self.category, required_pivotal)
@@ -1662,15 +2237,24 @@ class MorseEvaluator:
                 value, stats = self.fixed_label_value(
                     pruned,
                     {component: component_labels[component] for component in retained},
+                    projector_path_ranges=projector_path_ranges,
                     _unit_pruned=True,
                 )
                 stats = dict(stats)
                 stats["unit_pruned_components"] = sorted(set(topology.component_order) - retained)
                 stats["original_component_order"] = list(topology.component_order)
                 return value, stats
+        state_backend = (
+            CompactStateArena(
+                compact_threshold=self.compact_state_threshold
+            )
+            if self.state_backend_mode == "compact"
+            else OBJECT_STATE_BACKEND
+        )
+        state_backend.clear()
         order: list[str] = []
         tree: Tree | None = None
-        vector: dict[State | None, complex] = {None: 1.0 + 0.0j}
+        vector: dict[Any | None, complex] = {None: 1.0 + 0.0j}
         stats = EvaluationStats()
         index = 0
         while index < len(forms):
@@ -1685,8 +2269,10 @@ class MorseEvaluator:
                 left_label = label if topology.strand_orientation(left_strand) > 0 else self.category.dual(label)
                 right_label = label if topology.strand_orientation(right_strand) > 0 else self.category.dual(label)
                 pair_tree = Node(Leaf(left_strand, left_label), Leaf(right_strand, right_label))
-                pair_state = NodeState(
-                    LeafState(left_strand), LeafState(right_strand), self.category.unit,
+                pair_state = state_backend.node(
+                    state_backend.leaf(left_strand),
+                    state_backend.leaf(right_strand),
+                    self.category.unit,
                     fusion_index(self.category, left_label, right_label, self.category.unit),
                 )
                 coefficient = self._coevaluation_coefficient(
@@ -1696,7 +2282,13 @@ class MorseEvaluator:
                 new_tree = None
                 for state, amplitude in vector.items():
                     inserted_tree, inserted_state = insert_pair(
-                        self.category, tree, state, gap, pair_tree, pair_state
+                        self.category,
+                        tree,
+                        state,
+                        gap,
+                        pair_tree,
+                        pair_state,
+                        state_backend=state_backend,
                     )
                     new_tree = inserted_tree
                     new_vector[inserted_state] = new_vector.get(inserted_state, 0.0 + 0.0j) + coefficient * amplitude
@@ -1720,9 +2312,9 @@ class MorseEvaluator:
                 pair_tree = Node(
                     Leaf(strands[0], labels[0]), Leaf(strands[1], labels[1])
                 )
-                pair_state = NodeState(
-                    LeafState(strands[0]),
-                    LeafState(strands[1]),
+                pair_state = state_backend.node(
+                    state_backend.leaf(strands[0]),
+                    state_backend.leaf(strands[1]),
                     self.category.unit,
                     fusion_index(
                         self.category, labels[0], labels[1], self.category.unit
@@ -1742,6 +2334,7 @@ class MorseEvaluator:
                         gap,
                         pair_tree,
                         pair_state,
+                        state_backend=state_backend,
                     )
                     new_tree = inserted_tree
                     new_vector[inserted_state] += coefficient * amplitude
@@ -1763,7 +2356,9 @@ class MorseEvaluator:
                     plan = ()
                 except ValueError:
                     target, path = grouped_target(tree, lo, lo + 2, split=lo + 1)
-                    tree, vector, plan = self._rotate(tree, vector, target, stats)
+                    tree, vector, plan = self._rotate(
+                        tree, vector, target, stats, state_backend
+                    )
                 label = component_labels[topology.component_by_strand[left]]
                 geometric_left = order[lo]
                 reverse = topology.strand_orientation(geometric_left) < 0
@@ -1771,7 +2366,13 @@ class MorseEvaluator:
                 new_vector: dict[State | None, complex] = defaultdict(complex)
                 new_tree = None
                 for state, amplitude in vector.items():
-                    removed_tree, removed_state = remove_pair(self.category, tree, state, path)
+                    removed_tree, removed_state = remove_pair(
+                        self.category,
+                        tree,
+                        state,
+                        path,
+                        state_backend=state_backend,
+                    )
                     if removed_tree is _REJECTED:
                         continue
                     if removed_tree is _REMOVED:
@@ -1806,7 +2407,7 @@ class MorseEvaluator:
                         tree, lo, lo + 2, split=lo + 1
                     )
                     tree, vector, plan = self._rotate(
-                        tree, vector, target, stats
+                        tree, vector, target, stats, state_backend
                     )
                 dimension_label = form.get(
                     "dimension_label", subtree_at(tree, path).left.label
@@ -1818,7 +2419,11 @@ class MorseEvaluator:
                 new_tree = None
                 for state, amplitude in vector.items():
                     removed_tree, removed_state = remove_pair(
-                        self.category, tree, state, path
+                        self.category,
+                        tree,
+                        state,
+                        path,
+                        state_backend=state_backend,
                     )
                     if removed_tree is _REJECTED:
                         continue
@@ -1874,10 +2479,17 @@ class MorseEvaluator:
                     target, path = self._cross_target(
                         tree, order, form["over"], block_targets, direction
                     )
-                    tree, vector, plan = self._rotate(tree, vector, target, stats)
+                    tree, vector, plan = self._rotate(
+                        tree, vector, target, stats, state_backend
+                    )
                     chosen_f += len(plan)
                     tree, vector = braid_siblings(
-                        self.category, tree, vector, path, direction == "right"
+                        self.category,
+                        tree,
+                        vector,
+                        path,
+                        direction == "right",
+                        state_backend=state_backend,
                     )
                     if length == 1:
                         stats.leaf_r += 1
@@ -1947,7 +2559,13 @@ class MorseEvaluator:
                         "vacuum projector strands must be one contiguous ordered interval"
                     )
                 tree, vector, projector_stats = project_vacuum_interval(
-                    self.category, tree, vector, start, stop
+                    self.category,
+                    tree,
+                    vector,
+                    start,
+                    stop,
+                    path_range=projector_path_ranges.get(form.get("projector_id")),
+                    state_backend=state_backend,
                 )
                 stats.f_rotations += (
                     projector_stats["forward_f_rotations"]
@@ -1979,7 +2597,7 @@ class MorseEvaluator:
                     tree, positions[0], positions[1] + 1, split=positions[1]
                 )
                 tree, vector, plan = self._rotate(
-                    tree, vector, target, stats
+                    tree, vector, target, stats, state_backend
                 )
                 output_strand = form["output"]
                 if output_strand in order:
@@ -1992,6 +2610,7 @@ class MorseEvaluator:
                     output_strand=output_strand,
                     output_label=form["output_label"],
                     multiplicity=int(form.get("multiplicity", 0)),
+                    state_backend=state_backend,
                 )
                 order[positions[0] : positions[1] + 1] = [output_strand]
                 stats.fusions += 1
@@ -2031,6 +2650,7 @@ class MorseEvaluator:
                     right_strand=output_strands[1],
                     right_label=output_labels[1],
                     multiplicity=int(form.get("multiplicity", 0)),
+                    state_backend=state_backend,
                 )
                 order[input_position : input_position + 1] = output_strands
                 stats.splits += 1
@@ -2048,6 +2668,7 @@ class MorseEvaluator:
             else:
                 raise ValueError(f"unsupported Morse form: {form!r}")
 
+            vector = state_backend.maybe_compact(vector)
             stats.max_active_strands = max(stats.max_active_strands, len(order))
             stats.max_state_support = max(stats.max_state_support, len(vector))
 
@@ -2055,6 +2676,7 @@ class MorseEvaluator:
                 return 0.0 + 0.0j, self._stats_payload(
                     topology,
                     stats,
+                    state_backend=state_backend,
                     vanished_at_form=index,
                     vanishing_reason="empty support after fusion-channel projection",
                 )
@@ -2062,7 +2684,9 @@ class MorseEvaluator:
         if order or tree is not None:
             raise ValueError(f"Morse diagram did not close: {order!r}")
         value = complex(vector.get(None, 0.0 + 0.0j))
-        return value, self._stats_payload(topology, stats)
+        return value, self._stats_payload(
+            topology, stats, state_backend=state_backend
+        )
 
     def omega_value(self, forms, character_assignments: dict[str, Any] | None = None):
         topology = self._topology(forms)

@@ -4,6 +4,9 @@ from experiments.sage.morse_fusion_evaluator import (
     Node,
     NodeState,
     MorseEvaluator,
+    _local_node_state,
+    _rebuilt_node_state,
+    _replace_state,
     analyze_topology,
     compile_right_comb_projector_term,
     fuse_active_pair,
@@ -27,6 +30,30 @@ from experiments.scripts.special_dotted_morphism import (
     insert_horizontal_projector,
     linearize_horizontal_disk_projector,
 )
+
+
+def test_cached_node_state_hash_and_iterative_replacement_preserve_value_semantics():
+    a, b, c = LeafState("a"), LeafState("b"), LeafState("c")
+    left = NodeState(a, b, 1, 0)
+    root = NodeState(left, c, 0, 0)
+    replacement = NodeState(a, b, 0, 0)
+    observed = _replace_state(root, (0,), replacement)
+    expected = NodeState(replacement, c, 0, 0)
+    assert observed == expected
+    assert hash(observed) == hash(expected)
+    assert root.left == left
+
+    _rebuilt_node_state.cache_clear()
+    first = _rebuilt_node_state(replacement, c, 0, 0)
+    second = _rebuilt_node_state(replacement, c, 0, 0)
+    assert first is second
+    assert _rebuilt_node_state.cache_info().hits == 1
+
+    _local_node_state.cache_clear()
+    first_local = _local_node_state(a, b, 1, 0)
+    second_local = _local_node_state(a, b, 1, 0)
+    assert first_local is second_local
+    assert _local_node_state.cache_info().hits == 1
 
 
 class SemionCategory:
@@ -288,6 +315,36 @@ def test_unknot_and_kink_normalizations():
     assert evaluator.omega_value(tuple(unknot_forms()))[0] == 2.0
 
 
+def test_compact_state_backend_matches_object_backend_across_core_events():
+    category = SemionCategory()
+    ordinary = MorseEvaluator(category, state_backend="object")
+    compact = MorseEvaluator(
+        category, state_backend="compact", compact_state_threshold=8
+    )
+    cases = (
+        (unknot_forms(kink=True), {"A": 1}, None),
+        (block_r2_forms(), {"A": 1, "B": 1, "C": 0}, None),
+        (middle_vacuum_projector_forms(), {"A": 1, "B": 1}, None),
+        (trivalent_channel_projector_forms(), {"A": 1, "B": 1}, None),
+        (
+            middle_vacuum_projector_forms(),
+            {"A": 1, "B": 1},
+            {"middle-0": (0, 1)},
+        ),
+    )
+    for forms, labels, path_ranges in cases:
+        expected, _ = ordinary.fixed_label_value(
+            forms, labels, projector_path_ranges=path_ranges
+        )
+        observed, stats = compact.fixed_label_value(
+            forms, labels, projector_path_ranges=path_ranges
+        )
+        assert abs(observed - expected) < 1e-12
+        assert stats["state_backend"] == "compact-integer-arena"
+        assert stats["state_backend_stats"]["node_count"] is not None
+    assert stats["state_backend_stats"]["compactions"] > 0
+
+
 def test_cap_reuses_existing_pair_subtree_without_f_rotation():
     evaluator = MorseEvaluator(SemionCategory())
     value, stats = evaluator.fixed_label_value(
@@ -534,6 +591,78 @@ def test_compiled_path_sum_matches_horizontal_vacuum_projector():
         assert stats["splits"] == 1
         observed += value
     assert abs(observed - expected) < 1e-12
+
+
+def test_vacuum_projector_path_ranges_partition_canonical_basis():
+    category = TwoCopyBendCategory()
+    tree, basis = right_comb_fusion_path_basis(
+        category,
+        ((f"factor-{index}", 1) for index in range(4)),
+        target=category.unit,
+    )
+    assert tree is not None
+    assert len(basis) > 1
+    vector = {
+        state: complex(index + 1, -(index + 1))
+        for index, state in enumerate(basis)
+    }
+
+    full_tree, full, full_stats = project_vacuum_interval(
+        category, tree, vector, 0, 4
+    )
+    midpoint = len(basis) // 2
+    left_tree, left, left_stats = project_vacuum_interval(
+        category, tree, vector, 0, 4, path_range=(0, midpoint)
+    )
+    right_tree, right, right_stats = project_vacuum_interval(
+        category,
+        tree,
+        vector,
+        0,
+        4,
+        path_range=(midpoint, len(basis)),
+    )
+
+    assert full_tree == left_tree == right_tree == tree
+    assert {
+        state: left.get(state, 0.0) + right.get(state, 0.0)
+        for state in full
+    } == full
+    assert full_stats["canonical_path_basis_rank"] is None
+    assert left_stats["canonical_path_basis_rank"] == len(basis)
+    assert right_stats["canonical_path_basis_rank"] == len(basis)
+    assert left_stats["selected_path_range"] == [0, midpoint]
+    assert right_stats["selected_path_range"] == [midpoint, len(basis)]
+
+
+def test_fixed_label_projector_path_ranges_sum_to_monolithic_value():
+    category = SemionCategory()
+    evaluator = MorseEvaluator(category)
+    forms = middle_vacuum_projector_forms()
+    labels = {"A": 1, "B": 1}
+
+    expected, _ = evaluator.fixed_label_value(forms, labels)
+    first, first_stats = evaluator.fixed_label_value(
+        forms,
+        labels,
+        projector_path_ranges={"middle-0": (0, 1)},
+    )
+    empty, empty_stats = evaluator.fixed_label_value(
+        forms,
+        labels,
+        projector_path_ranges={"middle-0": (0, 0)},
+    )
+
+    assert abs(first + empty - expected) < 1e-12
+    projector_plan = next(
+        plan for plan in first_stats["plans"] if plan["kind"] == "vacuum-projector"
+    )
+    assert projector_plan["canonical_path_basis_rank"] == 1
+    assert projector_plan["selected_path_range"] == [0, 1]
+    assert empty == 0.0
+    assert empty_stats["vanishing_reason"] == (
+        "empty support after fusion-channel projection"
+    )
 
 
 def test_compiled_projector_terms_cover_every_rep_a4_unit_path():

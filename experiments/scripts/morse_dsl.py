@@ -125,6 +125,28 @@ class MorseBuilder:
             raise ValueError("kink times must be positive")
         return self._record({"kind": "kink", "strand": strand, "sign": sign, "times": times})
 
+    def vacuum_projector(
+        self, strands: Iterable[str] | None = None, *, projector_id: str
+    ) -> dict[str, Any]:
+        """Insert a collective unit-channel projector on a contiguous interval."""
+
+        selected = list(self.order if strands is None else strands)
+        if len(set(selected)) != len(selected):
+            raise ValueError("vacuum projector repeats an active strand")
+        if any(strand not in self.order for strand in selected):
+            raise ValueError("vacuum projector references an inactive strand")
+        if selected:
+            start = self.order.index(selected[0])
+            if self.order[start : start + len(selected)] != selected:
+                raise ValueError("vacuum projector strands are not contiguous")
+        return self._record(
+            {
+                "kind": "vacuum-projector",
+                "projector_id": projector_id,
+                "strands": selected,
+            }
+        )
+
     def _infer_target(self, strand: str, direction: Direction) -> str:
         index = self._index(strand)
         if direction == "left":
