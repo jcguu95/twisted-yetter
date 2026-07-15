@@ -7893,6 +7893,111 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
+      "logical_id": "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-ribbon-realization-catalog-v5",
+            "commit": "522edd6ea081936c884872369da24f49bf6ac76d",
+            "git_blob": "f39d74f8661863a44f9bbd4b5b90d1ebc8093910",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v5.json",
+            "sha256": "f7fe43f85782d2440bf4d6e42e75a017746ca5fa23de6880a74ceb1e4a5b08bb",
+            "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+          },
+          {
+            "artifact_id": "rank2-cyclic-z2-semion-plus-snapshot-v1",
+            "commit": "522edd6ea081936c884872369da24f49bf6ac76d",
+            "git_blob": "4d2c1ff1224539d97995d0a1a4315adba8422938",
+            "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-plus-snapshot-v1.json",
+            "sha256": "59f6af7150f723e17128ca4d2bfc86436ff430e93bb73e30a12228eadbde29c9",
+            "status": "RESOLVED_RIBBON_REALIZATION"
+          },
+          {
+            "artifact_id": "rank2-cyclic-z2-semion-minus-snapshot-v1",
+            "commit": "522edd6ea081936c884872369da24f49bf6ac76d",
+            "git_blob": "098399c751840b881b6a17d2704c206f54ebeba4",
+            "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-minus-snapshot-v1.json",
+            "sha256": "2551107897ac9e314f012acfd68c865c705ef8cf13844eb604ca59804fe6e360",
+            "status": "RESOLVED_RIBBON_REALIZATION"
+          },
+          {
+            "artifact_id": "formal-low-rank-scan-readiness-v5",
+            "commit": "522edd6ea081936c884872369da24f49bf6ac76d",
+            "git_blob": "6c3e3864751efc412bbc1eac5cf9450a2a9bd951",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v5.json",
+            "sha256": "cbd39545e940828f66da4f861be0e9d5bc7d9a0711ed39ecd9bb7f09b8d5e3d8",
+            "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+          }
+        ],
+        "created_at": "2026-07-15T23:49:41Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not authorize any formal scan plan.",
+          "This note does not resolve rank4 cyclic Z4 or rank4 Z2xZ2 even pointed rows.",
+          "This note does not resolve Ising, SU(2), PSU, PSU(3), or product rows.",
+          "This note does not publish a final ribbon denominator."
+        ],
+        "mathematical_status": "FOUR_ROWS_FORMAL_RIBBON_PROGRESS_TEN_ROWS_REMAIN_BLOCKED",
+        "note_id": "objective-note-2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_family_row_count": 10,
+          "formal_scan_plan_allowed": false,
+          "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY",
+          "ranks": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "resolved_family_ids": [
+            "rank2-cyclic-z2",
+            "rank2-fibonacci-yang-lee",
+            "rank3-cyclic-z3",
+            "rank5-su5-1"
+          ],
+          "resolved_family_row_count": 4
+        },
+        "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 48,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Rank 2 cyclic Z2 semion row resolved as partial low-rank ribbon progress",
+        "top_notice": "The rank2-cyclic-z2 family row now has two exact semion/anti-semion ribbon realization snapshots with explicit nontrivial associator omega(1,1,1)=-1. The low-rank ribbon catalog remains partial: 4 rows resolved, 10 rows blocked, and formal scan-plan generation is still disabled.",
+        "validated_behaviors": [
+          "The rank2 cyclic Z2 semion snapshots record omega(1,1,1)=-1 rather than pretending the associator is strict.",
+          "The exact Z2 checks pass pentagon, left and right hexagon, ribbon square, monodromy nondegeneracy, and twist/R compatibility.",
+          "The strict-associator semion negative control fails both left and right hexagon, preventing the previous silent-fail route.",
+          "The two rank2 cyclic Z2 snapshots pass validate_formal_evidence.",
+          "The v5 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+          "The v5 readiness artifact keeps scan_plan_generation_allowed=false."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
+        "created_at": "2026-07-15T23:49:41Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
       "logical_id": "claim:lab-note:2026-07-15-rank3-z3-ribbon-realization-partial-progress",
       "payload": {
@@ -16380,6 +16485,7 @@
       "claim:lab-note:2026-07-15-foundation-safety-substrate-v1": "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
       "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
       "claim:lab-note:2026-07-15-rank2-fibonacci-yang-lee-ribbon-realization-partial-progress": "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc",
+      "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress": "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
       "claim:lab-note:2026-07-15-rank3-z3-ribbon-realization-partial-progress": "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
@@ -16774,6 +16880,9 @@
       ],
       "claim:lab-note:2026-07-15-rank2-fibonacci-yang-lee-ribbon-realization-partial-progress": [
         "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc"
+      ],
+      "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress": [
+        "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35"
       ],
       "claim:lab-note:2026-07-15-rank3-z3-ribbon-realization-partial-progress": [
         "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a"
@@ -17579,6 +17688,7 @@
         "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6",
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
         "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+        "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
         "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
         "ctlobj-sha256:1d127c3d6d7a682e2ec937d899257925588eb4dff9aa247f1715c7b3f64264f0",
         "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
@@ -17909,6 +18019,7 @@
         "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
         "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
         "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+        "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
         "ctlobj-sha256:1d869ca15c5a7b414cc53d52028e0a58a88aadfe1c28d08b9640f42552044426",
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
@@ -24589,6 +24700,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:5a8af46468a7a526f9eee5fcb313cdf8b96086487cdacf1884ba74859568fc67",
+          "generated_at": "2026-07-15T23:49:41Z",
+          "logical_id": "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d9b07a689b7f92938eb58db52123e4a03d07c68c83f1045077094c20fde0b24d",
+          "path": "manifests/lab-note-2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59": [
         {
           "admission_batch_cid": null,
@@ -29818,6 +29949,23 @@
           "parent_root_cid": "ctlobj-sha256:688acc78219c20b27345e68a77b927de8551adb4749e3bb06c38b90334434efe",
           "path": "manifests/lab-note-2026-07-15-rank2-fibonacci-yang-lee-ribbon-realization-partial-progress.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-15-rank2-fibonacci-yang-lee-ribbon-realization-partial-progress.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:5a8af46468a7a526f9eee5fcb313cdf8b96086487cdacf1884ba74859568fc67",
+          "generated_at": "2026-07-15T23:49:41Z",
+          "logical_id": "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d9b07a689b7f92938eb58db52123e4a03d07c68c83f1045077094c20fde0b24d",
+          "path": "manifests/lab-note-2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -48986,6 +49134,36 @@
         },
         "word_count": 30
       },
+      "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
+        "created_at": "2026-07-15T23:49:41Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1367,
+        "gist": "The rank2-cyclic-z2 family row now has two exact semion/anti-semion ribbon realization snapshots with explicit nontrivial associator omega(1,1,1)=-1. The low-rank ribbon catalog remains partial: 4 rows resolved, 10 rows blocked, and formal scan-plan generation is still disabled.",
+        "logical_id": "claim:lab-note:2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-ribbon-realization-catalog-v5\",\"commit\":\"522edd6ea081936c884872369da24f49bf6ac76d\",\"git_blob\":\"f39d74f8661863a44f9bbd4b5b90d1ebc8093910\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v5.json\",\"sha256\":\"f7fe43f85782d2440bf4d6e42e75a017746ca5fa23de6880a74ceb1e4a5b08bb\",\"status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS\"},{\"artifact_id\":\"rank2-cyclic-z2-semion-plus-snapshot-v1\",\"commit\":\"522edd6ea081936c884872369da24f49bf6ac76d\",\"git_blob\":\"4d2c1ff1224539d97995d0a1a4315adba8422938\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-plus-snapshot-v1.json\",\"sha256\":\"59f6af7150f723e17128ca4d2bfc86436ff430e93bb73e30a12228eadbde29c9\",\"status\":\"RESOLVED_RIBBON_REALIZATION\"},{\"artifact_id\":\"rank2-cyclic-z2-semion-minus-snapshot-v1\",\"commit\":\"522edd6ea081936c884872369da24f49bf6ac76d\",\"git_blob\":\"098399c751840b881b6a17d2704c206f54ebeba4\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-minus-snapshot-v1.json\",\"sha256\":\"2551107897ac9e314f012acfd68c865c705ef8cf13844eb604ca59804fe6e360\",\"status\":\"RESOLVED_RIBBON_REALIZATION\"},{\"artifact_id\":\"formal-low-rank-scan-readiness-v5\",\"commit\":\"522edd6ea081936c884872369da24f49bf6ac76d\",\"git_blob\":\"6c3e3864751efc412bbc1eac5cf9450a2a9bd951\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v5.json\",\"sha256\":\"cbd39545e940828f66da4f861be0e9d5bc7d9a0711ed39ecd9bb7f09b8d5e3d8\",\"status\":\"BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY\"}],\"created_at\":\"2026-07-15T23:49:41Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not authorize any formal scan plan.\",\"This note does not resolve rank4 cyclic Z4 or rank4 Z2xZ2 even pointed rows.\",\"This note does not resolve Ising, SU(2), PSU, PSU(3), or product rows.\",\"This note does not publish a final ribbon denominator.\"],\"mathematical_status\":\"FOUR_ROWS_FORMAL_RIBBON_PROGRESS_TEN_ROWS_REMAIN_BLOCKED\",\"note_id\":\"objective-note-2026-07-15-rank2-z2-semion-ribbon-realization-partial-progress\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_family_row_count\":10,\"formal_scan_plan_allowed\":false,\"formal_scan_readiness_status\":\"BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY\",\"ranks\":[2,3,4,5],\"resolved_family_ids\":[\"rank2-cyclic-z2\",\"rank2-fibonacci-yang-lee\",\"rank3-cyclic-z3\",\"rank5-su5-1\"],\"resolved_family_row_count\":4},\"status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":48,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py\",\"status\":\"pass\"}],\"title\":\"Rank 2 cyclic Z2 semion row resolved as partial low-rank ribbon progress\",\"top_notice\":\"The rank2-cyclic-z2 family row now has two exact semion/anti-semion ribbon realization snapshots with explicit nontrivial associator omega(1,1,1)=-1. The low-rank ribbon catalog remains partial: 4 rows resolved, 10 rows blocked, and formal scan-plan generation is still disabled.\",\"validated_behaviors\":[\"The rank2 cyclic Z2 semion snapshots record omega(1,1,1)=-1 rather than pretending the associator is strict.\",\"The exact Z2 checks pass pentagon, left and right hexagon, ribbon square, monodromy nondegeneracy, and twist/R compatibility.\",\"The strict-associator semion negative control fails both left and right hexagon, preventing the previous silent-fail route.\",\"The two rank2 cyclic Z2 snapshots pass validate_formal_evidence.\",\"The v5 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.\",\"The v5 readiness artifact keeps scan_plan_generation_allowed=false.\"]}",
+        "title": "Rank 2 cyclic Z2 semion row resolved as partial low-rank ribbon progress",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4224,
+          "base_estimate": 1188,
+          "estimated_tokens": 1367,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 179,
+          "serialized_character_count": 4224,
+          "unicode_scalar_count": 4224,
+          "utf8_bytes": 4224
+        },
+        "word_count": 172
+      },
       "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59": {
         "active_state": "active",
         "cid": "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
@@ -59108,7 +59286,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-15T23:44:36Z",
+  "generated_at": "2026-07-15T23:52:28Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -61642,17 +61820,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:d9b07a689b7f92938eb58db52123e4a03d07c68c83f1045077094c20fde0b24d",
+  "root_cid": "ctlobj-sha256:5a8af46468a7a526f9eee5fcb313cdf8b96086487cdacf1884ba74859568fc67",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 60905,
+    "build_ms": 63996,
     "context_source": "current-context-replay",
-    "current_context_ms": 56911,
-    "discovery_index_ms": 3880,
-    "payload_summaries_ms": 35,
-    "resource_index_ms": 35,
-    "write_ms": 43
+    "current_context_ms": 59551,
+    "discovery_index_ms": 4321,
+    "payload_summaries_ms": 41,
+    "resource_index_ms": 40,
+    "write_ms": 42
   },
-  "transition_cid": "ctlobj-sha256:cb99a58e8595ec7c6b749240184d7e423f6258e5f1ed60025ac5299d25ca2d59"
+  "transition_cid": "ctlobj-sha256:212b9ea9921d187af874655708b7ccd4945b18f4203e24dc8c2c9e00013ed916"
 }
