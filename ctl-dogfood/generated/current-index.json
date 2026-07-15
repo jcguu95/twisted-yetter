@@ -1,6 +1,51 @@
 {
   "current_payload_summaries": [
     {
+      "cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+      "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+      "payload": {
+        "claim_id": "current-status-2026-07-15-yasui-character-twists-no-known-separation",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": "actor:codex",
+        "do_not_infer": [
+          "Do not infer theorem-level no-go.",
+          "Do not infer future exotic targets cannot be separated.",
+          "Do not infer standard-side baseline behavior is an obstruction.",
+          "Do not treat standard/split nonbaseline behavior as a success criterion."
+        ],
+        "evidence": {
+          "correction_ledger": {
+            "path": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+            "sha256": "20403934cf438ed2338c031aaa538ad49d99dd744a314c98d0b545fecb4f9ea5"
+          },
+          "correction_note": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "su3_coordinate_comparison": {
+            "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+            "sha256": "ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915"
+          }
+        },
+        "schema": "twisted-yetter/current-status-claim/1",
+        "statement": "Current artifacts contain nonbaseline character-twist phases, but no current evidence that Yasui Figure 3 a=1/a=3 character-twist functions differ from their standard functions after the correct character-coordinate identification. Standard-side constancy is not currently known to obstruct the exotic-vs-standard goal.",
+        "status": "CURRENT_GUARDRAIL",
+        "title": "Current Yasui character-twist artifacts show no known Yasui-vs-standard separation"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+        "created_at": "2026-07-15T17:15:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+        "parents": [
+          "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd"
+        ],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f",
       "logical_id": "claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06",
       "payload": {
@@ -7605,6 +7650,124 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+      "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+      "payload": {
+        "artifacts": [
+          {
+            "path": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+            "role": "primary correction ledger",
+            "schema": "twisted-yetter.yasui-character-twist-history-correction.v1",
+            "sha256": "20403934cf438ed2338c031aaa538ad49d99dd744a314c98d0b545fecb4f9ea5",
+            "status": "ESTABLISHED_NUMERIC_REINTERPRETATION"
+          },
+          {
+            "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+            "role": "SU(3)_2 Yasui-vs-split coordinate comparison",
+            "schema": "twisted-yetter.yasui-su3-2-coordinate-comparison.v1",
+            "sha256": "ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915",
+            "status": "pass"
+          }
+        ],
+        "case_corrections": [
+          {
+            "case_id": "su2-2-yasui-a1-a3",
+            "correction": "SU(2)_2 already had complete Yasui a=1 and a=3 all-alpha nonbaseline runs. Therefore SU(3)_2 should not be described as the first broad positive closed-four-manifold character-twist run.",
+            "status": "ESTABLISHED_FROM_SAVED_ARTIFACTS"
+          },
+          {
+            "case_id": "su3-2-yasui-a1",
+            "correction": "The SU(3)_2 Yasui a=1 all-character run is nonbaseline, but it matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The direct 18/27 same-tuple differences are coordinate artifacts.",
+            "status": "ESTABLISHED_NUMERIC"
+          },
+          {
+            "case_id": "dic12-yasui-a1",
+            "correction": "The D(Dic_12) witness changes +12 to -12 with ratio -1, and the split reference ratio is also -1. This is witness-level pointed bookkeeping, not Yasui-vs-standard separation evidence and not an all-alpha equivalence artifact.",
+            "status": "ESTABLISHED_NUMERIC_WITNESS_LEVEL"
+          },
+          {
+            "case_id": "special-handle-roadmap",
+            "correction": "The ordinary CP2/standard-side character-twist preflight in the special-handle roadmap should be read as optional sanity/candidate behavior, not a necessary preflight or success criterion.",
+            "status": "ROADMAP_INTERPRETATION_CORRECTION"
+          },
+          {
+            "case_id": "su2-k-k-0-mod-4",
+            "correction": "The saved split scan says SU(2)_k with k congruent 0 mod 4 has baseline standard/split behavior. This does not show such categories are useless for every future exotic target.",
+            "status": "INTERPRETATION_GUARDRAIL"
+          }
+        ],
+        "core_corrections": [
+          {
+            "id": "standard-side-nonbaseline-demotion",
+            "statement": "Ordinary standard/split nonbaseline character behavior should be treated as sanity/candidate bookkeeping, not as a positive success condition."
+          },
+          {
+            "id": "standard-side-constancy-not-known-obstruction",
+            "statement": "If a standard-side character-twist function is constant baseline, current project knowledge does not identify that as an obstruction to a future exotic-vs-standard separation."
+          },
+          {
+            "id": "coordinate-identification-required",
+            "statement": "Direct same-tuple comparison can be misleading. The comparison target is the full function after the correct diffeomorphism-induced character-coordinate identification."
+          }
+        ],
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": "actor:codex",
+        "future_agent_guardrail": "Do not stop at asking whether a character twist changes a value on the standard or Yasui presentation. Compare full functions after the correct basis identification, and treat coordinate-only differences as negative separation evidence.",
+        "mathematical_status": "NUMERIC_ARTIFACT_SYNTHESIS_AND_HISTORICAL_CORRECTION_NOT_THEOREM_LEVEL",
+        "note_id": "objective-note-2026-07-15-yasui-character-twist-history-correction",
+        "repo_snapshot": {
+          "base_commit": "a3b7c98aa52528eecad8d551ed967a5eb2f445ee",
+          "base_current_root_cid_before_correction": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "branch": "codex/yasui-character-twist-history-correction",
+          "worktree_note": "This correction branch was created from local main after leaving the earlier detached worktree state."
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "claim_boundary": "This note is an append-only correction of interpretation. It does not rewrite old CTL objects, prove a theorem-level no-go result, or claim future exotic targets cannot be separated by character-twist functions.",
+          "normative_source_policy": "The generated JSON artifacts listed here and the admitted CTL correction claims are normative. Chat discussion and old prose are not normative sources.",
+          "question": "Correct the current CTL interpretation of Yasui character-twist experiments so nonbaseline pointed/simple-current phases are not mistaken for Yasui-vs-standard or exotic-vs-standard separation evidence."
+        },
+        "status": "ESTABLISHED_NUMERIC_REINTERPRETATION",
+        "subject_layer_updates": {
+          "new_edges": [
+            "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+            "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+            "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+            "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+            "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+            "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation"
+          ],
+          "new_index": "subject-index:twisted-yetter:subject-layer-lane-v3",
+          "new_subjects": [
+            "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+            "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+            "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation"
+          ]
+        },
+        "terminology_correction": {
+          "exotic_vs_standard_separation": "After the diffeomorphism-induced handle and character-basis identification, the exotic target's full character-twist function differs from the standard function. This is the intended goal.",
+          "presentation_nonbaseline": "A Yasui or other presentation has Z(alpha) != Z(0). This is not separation unless the whole function is compared with the standard function under the correct coordinate identification.",
+          "standard_nonbaseline": "The standard/split presentation has Z(alpha) != Z(0). This is an ordinary pointed/simple-current phase and is not a success criterion."
+        },
+        "title": "Yasui character-twist history correction and no-known-separation guardrail"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+        "created_at": "2026-07-15T17:15:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+        "parents": [
+          "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
+        ],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -12000,6 +12163,168 @@
       "revision_kind": "subject-edge:definition"
     },
     {
+      "cid": "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+        "evidence_status": "interpretation_guardrail",
+        "explanation": "The correction distinguishes standard_nonbaseline, presentation_nonbaseline, and exotic_vs_standard_separation. Only the last is the intended target; saved Yasui a=1 artifacts currently support nonbaseline bookkeeping, not separation.",
+        "role": "clarifies",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+        "evidence_status": "roadmap_interpretation_correction",
+        "explanation": "The special-handle roadmap's ordinary CP2/standard-side character-twist preflight should be read as optional sanity/candidate behavior. Standard-side nonbaseline behavior is not a necessary preflight and not a success condition for exotic-vs-standard separation.",
+        "role": "corrects_motivation",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-07-special-handle-evaluation-roadmap"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+        "evidence_status": "established_numeric_reinterpretation",
+        "explanation": "The D(Dic_12) witness ratio -1 agrees with the split reference ratio -1, so the result should be read as pointed witness bookkeeping and component-translation validation, not Yasui-vs-standard separation evidence.",
+        "role": "reinterprets",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+        "evidence_status": "established_numeric_reinterpretation",
+        "explanation": "The correction ledger shows that the saved SU(3)_2 Yasui a=1 nonbaseline function matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The old first-positive wording is misleading outside a narrow pipeline-local sense.",
+        "role": "reinterprets",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+        "evidence_status": "current_status_guardrail",
+        "explanation": "The correction ledger supports the current-status claim that saved Yasui Figure 3 character-twist artifacts contain nonbaseline phases but no known Yasui-vs-standard separation after correct coordinate identification.",
+        "role": "supports",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
+      "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+      "payload": {
+        "edge_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+        "evidence_status": "interpretation_guardrail",
+        "explanation": "Seeing a character twist move the value on a standard/split presentation is ordinary pointed/simple-current phase bookkeeping. It should not be treated as a positive success condition or a substitute for comparing full exotic-vs-standard functions.",
+        "role": "warns_against",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "status": "active",
+        "target": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
       "cid": "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015",
       "logical_id": "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui",
       "payload": {
@@ -12815,6 +13140,63 @@
       "revision_kind": "subject-index"
     },
     {
+      "cid": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
+      "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+      "payload": {
+        "current_view_rule": "Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.",
+        "index_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+        "logical_id_prefixes": [
+          "subject-edge:",
+          "subject-index:",
+          "subject-operation:",
+          "subject:"
+        ],
+        "migration_notes": "This v3 index extends v2 with the Yasui character-twist history correction cluster, the no-known-separation current-status cluster, and edges that demote standard/split nonbaseline behavior from success criterion to bookkeeping.",
+        "physical_store": "Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.",
+        "profile_family": [
+          "twisted-yetter/subject-definition/0",
+          "twisted-yetter/subject-edge/0",
+          "twisted-yetter/subject-index/0",
+          "twisted-yetter/subject-operation/0"
+        ],
+        "purpose": "Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to generated topic-oriented wiki views.",
+        "schema": "twisted-yetter/subject-index/0",
+        "seed_edges": [
+          "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+          "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+          "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+          "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+          "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+          "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation"
+        ],
+        "seed_subjects": [
+          "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+          "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation"
+        ],
+        "status": "active",
+        "title": "Twisted Yetter downstream subject lane v3",
+        "upstream_review_contract": {
+          "downstream_scope": "This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.",
+          "migration_commitment": "Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.",
+          "upstream_may_replace_profiles": true
+        }
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-index"
+      },
+      "revision_kind": "subject-index"
+    },
+    {
       "cid": "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
       "logical_id": "subject:twisted-yetter:4-manifold:e1",
       "payload": {
@@ -13502,6 +13884,92 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+      "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+      "payload": {
+        "aliases": [
+          "yasui-character-twist-history-correction",
+          "yasui-character-twist-erratum",
+          "yasui-no-known-character-separation-guardrail"
+        ],
+        "current_view_hints": {
+          "guardrail": "Future agents should compare full character-twist functions after the correct coordinate identification, not just ask whether a presentation is nonbaseline.",
+          "headline": "Nonbaseline character-twist phases are not Yasui-vs-standard separation evidence.",
+          "primary_correction_note": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "primary_ledger": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+          "su3_coordinate_comparison": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json"
+        },
+        "display_name": "Yasui character-twist history correction cluster",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist",
+          "subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal",
+          "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Append-only correction cluster for the July 2026 Yasui character-twist history. It demotes standard/split nonbaseline behavior to sanity or candidate bookkeeping, records that SU(3)_2 matches the split function after coordinate identification, and marks D(Dic_12) as a pointed witness bookkeeping signal rather than separation evidence.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "subject_kind": "ty:claim-cluster",
+        "upstream_review_hints": [
+          "Lead generated views with: nonbaseline yes, separation no.",
+          "If a search finds the older phrase \"first positive closed-four-manifold character-twist signal\", route readers here: that wording is misleading outside a narrow SU(3)_2 pipeline-local sense because SU(2)_2 all-alpha nonbaseline Yasui runs already existed and nonbaseline is not separation.",
+          "The correction is append-only and does not rewrite the earlier SU(3)_2 or D(Dic_12) claims.",
+          "Standard-side constancy is not currently known to obstruct future exotic-vs-standard character-twist separation."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+        "created_at": "2026-07-15T18:18:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "parents": [
+          "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6"
+        ],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
+      "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
+      "payload": {
+        "aliases": [
+          "yasui-character-twists-no-known-separation",
+          "yasui-no-known-character-twist-separation"
+        ],
+        "current_view_hints": {
+          "current_status_claim": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "summary": "Current artifacts contain nonbaseline phases but no known Yasui-vs-standard separation after correct coordinate identification."
+        },
+        "display_name": "Yasui character twists: no known separation current status",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Current-status cluster recording that saved Yasui Figure 3 character-twist artifacts do not currently show Yasui-vs-standard separation. This does not assert a theorem-level no-go and does not rule out future exotic targets.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
+        "subject_kind": "ty:claim-cluster"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -14817,6 +15285,38 @@
       "revision_kind": "subject:definition"
     },
     {
+      "cid": "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
+      "logical_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+      "payload": {
+        "aliases": [
+          "standard-nonbaseline-as-success-condition",
+          "standard-split-nonbaseline-pitfall"
+        ],
+        "display_name": "Pitfall: treating standard nonbaseline character twist as a success condition",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "A navigation node for the corrected pitfall: seeing Z(alpha) != Z(0) on a standard/split presentation is ordinary pointed/simple-current bookkeeping, not exotic-vs-standard separation evidence and not a necessary success condition.",
+        "status": "active",
+        "subject_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+        "subject_kind": "ty:pitfall"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:a368585e70c8fb015ed0223b1ff0ada971f54020b910082ea2e318189b0fe8e0",
       "logical_id": "subject:twisted-yetter:presentation:akbulut-figure1-e1",
       "payload": {
@@ -15393,6 +15893,7 @@
   ],
   "discovery_index": {
     "active_bindings": {
+      "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
       "claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06": "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f",
       "claim:graph:computation-first-v1": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
       "claim:lab-note:2026-07-05-akbulut-figure38-pd-certification": "ctlobj-sha256:0ddbfd208b0f03f07f74812b63908a0f5c2230073f61466e85da2f1a37e7e37c",
@@ -15427,6 +15928,7 @@
       "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier": "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
       "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
       "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
+      "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -15575,6 +16077,12 @@
       "subject-edge:ty:yasui-a3-cluster:uses:da4-omega0": "ctlobj-sha256:b4b00e869fc0c0e3dea6f5994307405754167b96b2bbe51766a65fec08d48a07",
       "subject-edge:ty:yasui-a3-cluster:uses:singleton-route": "ctlobj-sha256:a107dc357f13308afa4228a6c456ba88060487642ee4174c548fbd821f1ba849",
       "subject-edge:ty:yasui-a3-note:about:partial-cluster": "ctlobj-sha256:e80e58425bb4524cf14227167fac72b997803566484b5832b9a48fb529db4f23",
+      "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist": "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+      "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap": "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+      "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal": "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+      "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal": "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
+      "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation": "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
+      "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition": "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
       "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui": "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015",
       "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-jdg-1991": "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
       "subject-edge:ty:yasui-email-2026-07-11:recommends:akbulut-yasui-0806-3010": "ctlobj-sha256:e6f959f0457352da57810cee1ef75dc6743bba93ae53db7b5a914405e389cb71",
@@ -15595,6 +16103,7 @@
       "subject-index:twisted-yetter:subject-layer-lane-v0": "ctlobj-sha256:4d04300de92cd9cb37f1dd3451c382c1200a78d3b7dcae24f53e5d13408ca81c",
       "subject-index:twisted-yetter:subject-layer-lane-v1": "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039",
       "subject-index:twisted-yetter:subject-layer-lane-v2": "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f",
+      "subject-index:twisted-yetter:subject-layer-lane-v3": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
       "subject:twisted-yetter:4-manifold:e1": "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
       "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
       "subject:twisted-yetter:category-family:drinfeld-double": "ctlobj-sha256:662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea",
@@ -15612,6 +16121,8 @@
       "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal": "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
       "subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal": "ctlobj-sha256:f9c7f1db4fe001e5a0a0f0d8b9790e9428c183c35680def86cd1fc9555df422e",
       "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial": "ctlobj-sha256:6822c3503b8c2bedaf113292a4095f4187b51d2c703f0ee8e438fc87fc459803",
+      "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+      "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation": "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
       "subject:twisted-yetter:claim-cluster:yasui-figure2-dic12-tham511-check": "ctlobj-sha256:6932ff4041d84de87d874b642a584d7f93ca94bf058220defb119a7adb39b2cc",
       "subject:twisted-yetter:correspondence:yasui-email-2026-07-11": "ctlobj-sha256:7292c08fc35f09cee901c0eae2c5c580c4e6a9b75116908b40c39cc18b897ed4",
       "subject:twisted-yetter:hub:yasui": "ctlobj-sha256:b22af862bd584522efc8efe8869436bfd156e3b1c20225ed11e19c8901a80874",
@@ -15639,6 +16150,7 @@
       "subject:twisted-yetter:paper:yetter-hepth-9311082": "ctlobj-sha256:146772621d22e5b58e21237fdf92fcaa3ec7282642dc924a85588766216f8c32",
       "subject:twisted-yetter:person:kouichi-yasui": "ctlobj-sha256:f4dfeb7b5adb557ebf8473f7ec8d90926d02b44695368158b6ced142de8f6f13",
       "subject:twisted-yetter:person:r-inanc-baykur": "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1",
+      "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition": "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
       "subject:twisted-yetter:presentation:akbulut-figure1-e1": "ctlobj-sha256:a368585e70c8fb015ed0223b1ff0ada971f54020b910082ea2e318189b0fe8e0",
       "subject:twisted-yetter:presentation:akbulut-figure38": "ctlobj-sha256:2a75044883754becc29478ea5b80d2ddc314b2f049dcfeb224bf317a1dbf8f1f",
       "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime": "ctlobj-sha256:46107f722b05d9e1b7f69557bcce58d21ce89fb962fd50b2b3654464a15b22f5",
@@ -15654,6 +16166,10 @@
       "sys:policy": "ctlobj-sha256:c1ec81b7dbe81f9bdd4ed7a558611dc8a6a7574a7b0a3224058f8d1c96c433c1"
     },
     "by_logical_id": {
+      "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation": [
+        "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+        "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd"
+      ],
       "claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06": [
         "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f"
       ],
@@ -15798,6 +16314,10 @@
       ],
       "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": [
         "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446"
+      ],
+      "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": [
+        "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+        "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
       ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
@@ -16245,6 +16765,24 @@
       "subject-edge:ty:yasui-a3-note:about:partial-cluster": [
         "ctlobj-sha256:e80e58425bb4524cf14227167fac72b997803566484b5832b9a48fb529db4f23"
       ],
+      "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist": [
+        "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37"
+      ],
+      "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap": [
+        "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e"
+      ],
+      "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal": [
+        "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974"
+      ],
+      "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal": [
+        "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2"
+      ],
+      "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation": [
+        "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092"
+      ],
+      "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition": [
+        "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf"
+      ],
       "subject-edge:ty:yasui-email-2026-07-11:authored-by:kouichi-yasui": [
         "ctlobj-sha256:dba3cf36a46c3ae56544bded6dadf7b1ba29c31f9fc3fae887152abc31c1f015"
       ],
@@ -16315,6 +16853,9 @@
         "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f",
         "ctlobj-sha256:f3642f26222b5efee9b30f7988bce08c5f1b46177d04a51583d5f1423f10c2c2"
       ],
+      "subject-index:twisted-yetter:subject-layer-lane-v3": [
+        "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5"
+      ],
       "subject:twisted-yetter:4-manifold:e1": [
         "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322"
       ],
@@ -16370,6 +16911,13 @@
       ],
       "subject:twisted-yetter:claim-cluster:yasui-a3-da4-partial": [
         "ctlobj-sha256:6822c3503b8c2bedaf113292a4095f4187b51d2c703f0ee8e438fc87fc459803"
+      ],
+      "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction": [
+        "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
+        "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3"
+      ],
+      "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation": [
+        "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc"
       ],
       "subject:twisted-yetter:claim-cluster:yasui-figure2-dic12-tham511-check": [
         "ctlobj-sha256:6932ff4041d84de87d874b642a584d7f93ca94bf058220defb119a7adb39b2cc",
@@ -16457,6 +17005,9 @@
       "subject:twisted-yetter:person:r-inanc-baykur": [
         "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1"
       ],
+      "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition": [
+        "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab"
+      ],
       "subject:twisted-yetter:presentation:akbulut-figure1-e1": [
         "ctlobj-sha256:a368585e70c8fb015ed0223b1ff0ada971f54020b910082ea2e318189b0fe8e0"
       ],
@@ -16516,10 +17067,12 @@
         "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
         "ctlobj-sha256:03572920fa6cb10bb575e0a5792d5d103c18f1ed406ff08eedc28d4ee4822fdc",
         "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
+        "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
         "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
         "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9",
         "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
         "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
+        "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
         "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59",
         "ctlobj-sha256:0817ccd68c2f64408cfc084a8968ae79bab7614f710e503e9f647b89cc36e10d",
         "ctlobj-sha256:08471b4d0e6e8cf1240d0116f180a471020d1cca29fec0e3fc931790da5756f4",
@@ -16542,18 +17095,22 @@
         "ctlobj-sha256:11245f615affc90c4099abc228d170dfa45ccb95d2c6a938d61db7bb7aea081b",
         "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
         "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+        "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
         "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
         "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
         "ctlobj-sha256:12b4635adc1425dd0847992bbd8b122bcfc91fbaccb080ff05c81ee5f7eb2bef",
         "ctlobj-sha256:146772621d22e5b58e21237fdf92fcaa3ec7282642dc924a85588766216f8c32",
         "ctlobj-sha256:15a0dc817aedf55436071c7e19fc92d9e2efabe7c56a7fd0e11393953ee2c447",
+        "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
         "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
         "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b",
+        "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
         "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
         "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
         "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
         "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6",
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
+        "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
         "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
         "ctlobj-sha256:1d127c3d6d7a682e2ec937d899257925588eb4dff9aa247f1715c7b3f64264f0",
         "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
@@ -16561,6 +17118,7 @@
         "ctlobj-sha256:1db2736ed1339d48d05a6c0e3deeb629eda0be30d1a6299b423f524563e1b0da",
         "ctlobj-sha256:1e2fdd365cfe72e755b8bad430f429623ea4598d0a0bc6bfe0f838f003c9cb26",
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
+        "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
         "ctlobj-sha256:207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
         "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0",
@@ -16587,6 +17145,7 @@
         "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
         "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
         "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
+        "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd",
         "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33",
         "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
         "ctlobj-sha256:3c207db77c4984592890f5d22914b2bebde1afd4c91d628be8be6d9dcbde8ad4",
@@ -16608,6 +17167,7 @@
         "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb",
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
         "ctlobj-sha256:4d04300de92cd9cb37f1dd3451c382c1200a78d3b7dcae24f53e5d13408ca81c",
+        "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
         "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
         "ctlobj-sha256:50dce79a5eb1726adb9acbedce80987ad3cb3f1ed08aea432b40cbcb384f55ca",
         "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0",
@@ -16620,6 +17180,7 @@
         "ctlobj-sha256:59d1e42c37b04367c7f574e90588b170c1fe43ddf75022be5f3ad4c50464fcfa",
         "ctlobj-sha256:5a0a4c8d5766aa42f69a790e7f016c7333c2f73b56a2da610a55c853dfeab2ee",
         "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
+        "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
         "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
         "ctlobj-sha256:5c4a6d487837fe3656ba5d8e1905fbd70f113acf172ea56ef5fb298508a5d1fa",
         "ctlobj-sha256:5d45e144aca6f48865aae9f3f61ebd3903290483dddf4dbf143097302870c87a",
@@ -16627,6 +17188,7 @@
         "ctlobj-sha256:5eef0248a902dd069f13d913c27618f0dfa05b7092440b96cf56eda32e8fd174",
         "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
         "ctlobj-sha256:60697aa9744a89c9d4c40432bfcf191008cf6afb5cb1825c826b3eac033cfccb",
+        "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
         "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296",
         "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
         "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed",
@@ -16730,7 +17292,9 @@
         "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
         "ctlobj-sha256:aa09d8108550315abb9a9a9041ad92caf950cffa2e21a586cef4e824ec148680",
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
+        "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
+        "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
         "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655",
         "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
         "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
@@ -16787,6 +17351,7 @@
         "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
         "ctlobj-sha256:e1610c59728c2ba73ad14dd79b73881ee540eea6d4dcf8c5dfaa3adbd1596e07",
+        "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
         "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
@@ -16834,6 +17399,7 @@
         "ctlobj-sha256:f9c7f1db4fe001e5a0a0f0d8b9790e9428c183c35680def86cd1fc9555df422e",
         "ctlobj-sha256:fa7738e1cf5422fc9a39441078edd192b0e329a2e886b59312201ec377febd2b",
         "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1",
+        "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
         "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
         "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a",
         "ctlobj-sha256:ff799a8064e7b0dcbf14d9967b3c68810d73a5beac95165adae72a796cd9a989",
@@ -16869,6 +17435,8 @@
         "ctlobj-sha256:1061dbdafe2bd26b05fff737598774ba8d4eee1f5629f05c275045d812d203cd",
         "ctlobj-sha256:10bde437b4e87170de6262f12341053f9d76871795b616542dd5a7520398bc4f",
         "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
+        "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+        "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
         "ctlobj-sha256:1d869ca15c5a7b414cc53d52028e0a58a88aadfe1c28d08b9640f42552044426",
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
@@ -16878,6 +17446,7 @@
         "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a",
         "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
         "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
+        "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd",
         "ctlobj-sha256:3c207db77c4984592890f5d22914b2bebde1afd4c91d628be8be6d9dcbde8ad4",
         "ctlobj-sha256:3f78d59d8fcc404c2629acab95bc3ca1f74e57110aae823a3292f0b7bf1cb80e",
         "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
@@ -16985,6 +17554,7 @@
         "ctlobj-sha256:f5519c0bf9f636f184e6e948b663c0c97b66e2bba9f8a117ed9ade8b2011acb5",
         "ctlobj-sha256:f8d642a74d38232616291f9effcdf6db102481c4a75dd0c06ce028992ef5f118",
         "ctlobj-sha256:f99e639d1963110b1a77655a8ef3c06a968f40209ebbcc4b2e449e6c888203aa",
+        "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
         "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
         "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a",
         "ctlobj-sha256:fff8a93c4bc7c4f6d4ad74adbee659e4dd55b05cd244c227c5917132b5b9dc61"
@@ -16999,7 +17569,9 @@
       "subject-definition": [
         "ctlobj-sha256:015872de37b52a26d68302d4c54fe469ce68724cc89ed2d5797b3c2cbd396f15",
         "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
+        "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
         "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
+        "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
         "ctlobj-sha256:15a0dc817aedf55436071c7e19fc92d9e2efabe7c56a7fd0e11393953ee2c447",
         "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
         "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b",
@@ -17017,6 +17589,7 @@
         "ctlobj-sha256:46107f722b05d9e1b7f69557bcce58d21ce89fb962fd50b2b3654464a15b22f5",
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
         "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
+        "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
         "ctlobj-sha256:65cb28c0812c1741b839f43203b8bcaaee69be127975db4f04d18e99565e1f5d",
         "ctlobj-sha256:662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea",
         "ctlobj-sha256:6822c3503b8c2bedaf113292a4095f4187b51d2c703f0ee8e438fc87fc459803",
@@ -17050,6 +17623,7 @@
         "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
         "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
+        "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
         "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
         "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf",
         "ctlobj-sha256:e5ed6853ad0e97cdc43f82240945deb380838efcfd8ec1414d8138b80d696614",
@@ -17062,6 +17636,7 @@
       ],
       "subject-edge": [
         "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
+        "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
         "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59",
         "ctlobj-sha256:0817ccd68c2f64408cfc084a8968ae79bab7614f710e503e9f647b89cc36e10d",
         "ctlobj-sha256:0863e62b13d210d58c5ee353811deb9e688b0c4f5f6ef60416b0b93038c50da0",
@@ -17076,6 +17651,7 @@
         "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
         "ctlobj-sha256:1a07693dc65f685ca6a0b9bc5c09370c728b1b4bc74a76fc096f433b94a3f665",
         "ctlobj-sha256:1b9b35afa845a768e183c9cb8aa9df341414211a29f7acc2b121202cac092fb5",
+        "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
         "ctlobj-sha256:1d1b91fb3609d58d48c80d08aeff7e0a1c2c0286b8324f0c1747d5091ac931d6",
         "ctlobj-sha256:1db2736ed1339d48d05a6c0e3deeb629eda0be30d1a6299b423f524563e1b0da",
         "ctlobj-sha256:1e2fdd365cfe72e755b8bad430f429623ea4598d0a0bc6bfe0f838f003c9cb26",
@@ -17093,9 +17669,11 @@
         "ctlobj-sha256:44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005",
         "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
         "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
+        "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
         "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
         "ctlobj-sha256:579caa852a85d29e7e501c793ece980b5dff4d57ba2965d73259277dbd00be24",
         "ctlobj-sha256:5a0a4c8d5766aa42f69a790e7f016c7333c2f73b56a2da610a55c853dfeab2ee",
+        "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
         "ctlobj-sha256:5c4a6d487837fe3656ba5d8e1905fbd70f113acf172ea56ef5fb298508a5d1fa",
         "ctlobj-sha256:5eef0248a902dd069f13d913c27618f0dfa05b7092440b96cf56eda32e8fd174",
         "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
@@ -17122,6 +17700,8 @@
         "ctlobj-sha256:a54d2743f76010c33354fd51d9a0031042a4c52084da045570e4e8d422231cee",
         "ctlobj-sha256:a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3",
         "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
+        "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
         "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
         "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5",
         "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
@@ -17174,6 +17754,7 @@
       ],
       "subject-index": [
         "ctlobj-sha256:0bf2442db3b1dd89af2e8335f9b79ccdc948dd6d0fff87d13cfe4491278ac547",
+        "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
         "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f",
         "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039",
         "ctlobj-sha256:e354866e0a727d51a9930ecdbcaad2914173186d3677cd9d5dac171b4f5cdb67",
@@ -17401,12 +17982,35 @@
           "target_cid": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27"
         }
       ],
+      "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+          "target_cid": "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd"
+        }
+      ],
       "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b": [
         {
           "basis": "ctl/revision.parents",
           "edge_type": "revision-parent",
           "source_cid": "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b",
           "target_cid": "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33"
+        }
+      ],
+      "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+          "target_cid": "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.repo_snapshot.base_current_root_cid_before_correction",
+          "source_cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+          "target_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50"
         }
       ],
       "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6": [
@@ -18114,6 +18718,14 @@
           "target_cid": "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436"
         }
       ],
+      "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+          "target_cid": "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6"
+        }
+      ],
       "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063": [
         {
           "basis": "ctl/revision.parents",
@@ -18316,6 +18928,15 @@
           "target_cid": "ctlobj-sha256:8b70ba3ab9e0a417255bc2c6248afc61d3f125427a78e02495e3b16571e51ed2"
         }
       ],
+      "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.repo_snapshot.base_current_root_cid_before_correction",
+          "source_cid": "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
+          "target_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50"
+        }
+      ],
       "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a": [
         {
           "basis": "ctl/revision.parents",
@@ -18398,6 +19019,9 @@
       "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98": [
         "ctlobj-sha256:86b07f0dd7226b7af1277a3ab9d6ddcfdf1413a668f5ad3fe759108e187accb3"
       ],
+      "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd": [
+        "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1"
+      ],
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": [
         "ctlobj-sha256:18bcfbc6e7821dc414187b4cd5b734b49a3d6c19d8ca0e153d5d2d59dbbc3a4b"
       ],
@@ -18430,6 +19054,9 @@
       ],
       "ctlobj-sha256:5e98d690dfc3d1c938acdfd7fc0ed2e6c7ea0168863946a3a1db2dfd0f616858": [
         "ctlobj-sha256:8e0cb3dac53dd0d78840dddaf2ccbeefc35f9c7ddcb9dccd8c4dfc11ad18aff2"
+      ],
+      "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6": [
+        "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3"
       ],
       "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed": [
         "ctlobj-sha256:878c8bc52da61d196d0e1fbda5417552321aff5ee798e003c88b2a1e817793b0"
@@ -18560,6 +19187,9 @@
       ],
       "ctlobj-sha256:f388ba6c65c96b5a591992aee69e5cec26a706bbafe40b1d7531ca370eaacd91": [
         "ctlobj-sha256:01422d62d62b354c1e75e6cc43a5666c2054e7a1e276b032e88586e02abc2bcc"
+      ],
+      "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": [
+        "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5"
       ],
       "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a": [
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063"
@@ -20238,6 +20868,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:59cd88c10163460ef883413de0f11ebeba9fb899cdeeb7f73a14e3479a732b33",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:7bb3f8e23c3e2425625a8e3e83af7aa714015a91259235bf3a207c97091cc3b2",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twists-no-known-separation.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twists-no-known-separation.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881": [
         {
           "admission_batch_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04",
@@ -20860,6 +21510,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e761faeb33a9fd905de031dad61b6bc02822a370e044e9c6886d955ae962bd28",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-reinterprets-yasui-a1-dic12-signal.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-dic12-signal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59": [
@@ -22405,6 +23075,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:7bb3f8e23c3e2425625a8e3e83af7aa714015a91259235bf3a207c97091cc3b2",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+          "path": "manifests/subject-definition-2026-07-15-pitfall-standard-nonbaseline-as-success-condition.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/pitfall-standard-nonbaseline-as-success-condition.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": [
         {
           "admission_batch_cid": null,
@@ -23049,6 +23739,43 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38": [
         {
           "admission_batch_cid": null,
@@ -23136,6 +23863,43 @@
           "parent_root_cid": "ctlobj-sha256:34695448a392a471d7ffb64d72878abc014aedd170fa9939cb9ab66aaae03391",
           "path": "manifests/subject-definition-2026-07-08-presentation-yasui-figure2-cp2-a1-r1.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-yasui-figure2-cp2-a1-r1.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:b0344b48d7aa6afce82d6b22fa2794d5e22c9235e181a24f73022e0328ed4fae",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -23291,6 +24055,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:13d7bf6d8284a52fcc939af073a93b71d3b18b97b4949280129511cb6907f5bd",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59": [
         {
           "admission_batch_cid": null,
@@ -23429,6 +24213,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:b0344b48d7aa6afce82d6b22fa2794d5e22c9235e181a24f73022e0328ed4fae",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4a62a90c25d0493890cebfbc1c6f9a573f7b8cf0f5a8ad759cb4e92861c97fcf",
+          "path": "manifests/subject-index-2026-07-15-subject-layer-lane-v3.json",
+          "payload_file": "ctl-dogfood/subject-layer/index/2026-07-15-subject-layer-lane-v3.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b": [
@@ -24556,6 +25360,43 @@
           "parent_root_cid": "ctlobj-sha256:4121a60c40eebb5b99c76134600836d2f6832729d03f5be2b64ab9c0baede6dd",
           "path": "manifests/lab-note-2026-07-06-twisted-yetter-subject-ontology-v0.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-06-twisted-yetter-subject-ontology-v0.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -27221,6 +28062,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4a62a90c25d0493890cebfbc1c6f9a573f7b8cf0f5a8ad759cb4e92861c97fcf",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:27869904fb2ab74c62dadbe62676d26e462614b45919c88dffd0847d41ad7396",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-supports-no-known-separation.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-supports-no-known-separation.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1": [
         {
           "admission_batch_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04",
@@ -27425,6 +28286,40 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/bootstrap-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "path": "manifests/current-status-2026-07-15-yasui-character-twists-no-known-separation.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twists-no-known-separation-current-status.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         },
         {
           "admission_batch_cid": null,
@@ -28375,6 +29270,40 @@
           "parent_root_cid": "ctlobj-sha256:8bf0f740fb37720da07c8dbdf762645da74406aade2ec053e82cde2c96d1d288",
           "path": "manifests/lab-note-2026-07-11-yasui-visual-dotted-caveat.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-11-yasui-visual-dotted-caveat.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:b0344b48d7aa6afce82d6b22fa2794d5e22c9235e181a24f73022e0328ed4fae",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -29582,6 +30511,74 @@
           "parent_root_cid": "ctlobj-sha256:e213d1cfe751eac64ab248da5c6c6ae15abf8cc0a501eb76ebfbdac5697563db",
           "path": "manifests/subject-definition-2026-07-11-presentation-wakamaki-figure19-r8.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/presentation-wakamaki-2024-figure19-r8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+          "generated_at": "2026-07-15T18:18:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:59cd88c10163460ef883413de0f11ebeba9fb899cdeeb7f73a14e3479a732b33",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:7bb3f8e23c3e2425625a8e3e83af7aa714015a91259235bf3a207c97091cc3b2",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twists-no-known-separation.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twists-no-known-separation.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:7bb3f8e23c3e2425625a8e3e83af7aa714015a91259235bf3a207c97091cc3b2",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+          "path": "manifests/subject-definition-2026-07-15-pitfall-standard-nonbaseline-as-success-condition.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/pitfall-standard-nonbaseline-as-success-condition.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -30898,6 +31895,108 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:13d7bf6d8284a52fcc939af073a93b71d3b18b97b4949280129511cb6907f5bd",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e761faeb33a9fd905de031dad61b6bc02822a370e044e9c6886d955ae962bd28",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:13d7bf6d8284a52fcc939af073a93b71d3b18b97b4949280129511cb6907f5bd",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e761faeb33a9fd905de031dad61b6bc02822a370e044e9c6886d955ae962bd28",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-reinterprets-yasui-a1-dic12-signal.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-dic12-signal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:59cd88c10163460ef883413de0f11ebeba9fb899cdeeb7f73a14e3479a732b33",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4a62a90c25d0493890cebfbc1c6f9a573f7b8cf0f5a8ad759cb4e92861c97fcf",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:27869904fb2ab74c62dadbe62676d26e462614b45919c88dffd0847d41ad7396",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-supports-no-known-separation.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-supports-no-known-separation.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:27869904fb2ab74c62dadbe62676d26e462614b45919c88dffd0847d41ad7396",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-warns-against-standard-nonbaseline-success-condition.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-warns-against-standard-nonbaseline-success-condition.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:ccce56085f41c4eb4a21558b8d1f9bef2001e88c66cedf6e590a38c5a6d75b19",
           "generated_at": "2026-07-06T23:39:00Z",
           "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v0",
@@ -31010,6 +32109,23 @@
           "parent_root_cid": "ctlobj-sha256:bccc2917e3614d238153c1f501c6073813942db42653f6244967581aad58873f",
           "path": "manifests/subject-index-2026-07-08-subject-layer-lane-v2.json",
           "payload_file": "ctl-dogfood/subject-layer/index/2026-07-08-subject-layer-lane-v2.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:b0344b48d7aa6afce82d6b22fa2794d5e22c9235e181a24f73022e0328ed4fae",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4a62a90c25d0493890cebfbc1c6f9a573f7b8cf0f5a8ad759cb4e92861c97fcf",
+          "path": "manifests/subject-index-2026-07-15-subject-layer-lane-v3.json",
+          "payload_file": "ctl-dogfood/subject-layer/index/2026-07-15-subject-layer-lane-v3.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -31301,6 +32417,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:59cd88c10163460ef883413de0f11ebeba9fb899cdeeb7f73a14e3479a732b33",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb": [
@@ -32002,6 +33138,43 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+          "generated_at": "2026-07-15T18:18:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296": [
@@ -38405,6 +39578,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:13d7bf6d8284a52fcc939af073a93b71d3b18b97b4949280129511cb6907f5bd",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e761faeb33a9fd905de031dad61b6bc02822a370e044e9c6886d955ae962bd28",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf": [
         {
           "admission_batch_cid": null,
@@ -38421,6 +39614,26 @@
           "parent_root_cid": "ctlobj-sha256:dc385a8e8f5832a6b4df76468af525d1ca02f65ca6c673b6c1405afb045a203c",
           "path": "manifests/subject-definition-2026-07-06-category-family-su3-k.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/category-family-su3-k.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:27869904fb2ab74c62dadbe62676d26e462614b45919c88dffd0847d41ad7396",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+          "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-warns-against-standard-nonbaseline-success-condition.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-warns-against-standard-nonbaseline-success-condition.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -41752,6 +42965,43 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+          "generated_at": "2026-07-15T18:18:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dc3eb056914f3bd5455a7be147788e623f4f40776598c81cc511035052aba5bf",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+          "path": "manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b": [
         {
           "admission_batch_cid": "ctlobj-sha256:40e4090d2389ed5c748ed7de517f266940d5b93413419250943eea120807ff64",
@@ -44865,6 +46115,43 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:1189474a0b06553466b234e363c7876f4df6a995124d8e576e8858e60dfb31c2",
+          "generated_at": "2026-07-15T17:15:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:b0344b48d7aa6afce82d6b22fa2794d5e22c9235e181a24f73022e0328ed4fae",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8444e91293a9c8249662c2447b99efca2802ecd4bb4c5dee63253c9911c6390e",
+          "generated_at": "2026-07-15T15:00:00Z",
+          "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+          "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644": [
         {
           "admission_batch_cid": "ctlobj-sha256:5a61a300075edaa01dda18b8af46c0f3945f1da7f1a35be96520ae3fac4ccc04",
@@ -45697,6 +46984,36 @@
         },
         "word_count": 22
       },
+      "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 318,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"yasui-character-twists-no-known-separation\",\"yasui-no-known-character-twist-separation\"],\"current_view_hints\":{\"current_status_claim\":\"claim:current-status:2026-07-15-yasui-character-twists-no-known-separation\",\"summary\":\"Current artifacts contain nonbaseline phases but no known Yasui-vs-standard separation after correct coordinate identification.\"},\"display_name\":\"Yasui character twists: no known separation current status\",\"parent_subject_ids\":[\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Current-status cluster recording that saved Yasui Figure 3 character-twist artifacts do not currently show Yasui-vs-standard separation. This does not assert a theorem-level no-go and does not rule out future exotic targets.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation\",\"subject_kind\":\"ty:claim-cluster\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 978,
+          "base_estimate": 276,
+          "estimated_tokens": 318,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 42,
+          "serialized_character_count": 978,
+          "unicode_scalar_count": 978,
+          "utf8_bytes": 978
+        },
+        "word_count": 51
+      },
       "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881": {
         "active_state": "active",
         "cid": "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
@@ -45816,6 +47133,36 @@
           "utf8_bytes": 538
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 211,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal\",\"evidence_status\":\"established_numeric_reinterpretation\",\"explanation\":\"The D(Dic_12) witness ratio -1 agrees with the split reference ratio -1, so the result should be read as pointed witness bookkeeping and component-translation validation, not Yasui-vs-standard separation evidence.\",\"role\":\"reinterprets\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 648,
+          "base_estimate": 183,
+          "estimated_tokens": 211,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 28,
+          "serialized_character_count": 648,
+          "unicode_scalar_count": 648,
+          "utf8_bytes": 648
+        },
+        "word_count": 29
       },
       "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59": {
         "active_state": "active",
@@ -46477,6 +47824,36 @@
         },
         "word_count": 10
       },
+      "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 234,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"standard-nonbaseline-as-success-condition\",\"standard-split-nonbaseline-pitfall\"],\"display_name\":\"Pitfall: treating standard nonbaseline character twist as a success condition\",\"parent_subject_ids\":[\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"A navigation node for the corrected pitfall: seeing Z(alpha) != Z(0) on a standard/split presentation is ordinary pointed/simple-current bookkeeping, not exotic-vs-standard separation evidence and not a necessary success condition.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition\",\"subject_kind\":\"ty:pitfall\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 720,
+          "base_estimate": 203,
+          "estimated_tokens": 234,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 31,
+          "serialized_character_count": 720,
+          "unicode_scalar_count": 720,
+          "utf8_bytes": 720
+        },
+        "word_count": 38
+      },
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
@@ -46627,6 +48004,36 @@
         },
         "word_count": 62
       },
+      "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+        "created_at": "2026-07-15T17:15:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 450,
+        "gist": "CURRENT_GUARDRAIL",
+        "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"claim_id\":\"current-status-2026-07-15-yasui-character-twists-no-known-separation\",\"created_at\":\"2026-07-15T15:00:00Z\",\"created_by\":\"actor:codex\",\"do_not_infer\":[\"Do not infer theorem-level no-go.\",\"Do not infer future exotic targets cannot be separated.\",\"Do not infer standard-side baseline behavior is an obstruction.\",\"Do not treat standard/split nonbaseline behavior as a success criterion.\"],\"evidence\":{\"correction_ledger\":{\"path\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"sha256\":\"20403934cf438ed2338c031aaa538ad49d99dd744a314c98d0b545fecb4f9ea5\"},\"correction_note\":\"claim:lab-note:2026-07-15-yasui-character-twist-history-correction\",\"su3_coordinate_comparison\":{\"path\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\",\"sha256\":\"ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915\"}},\"schema\":\"twisted-yetter/current-status-claim/1\",\"statement\":\"Current artifacts contain nonbaseline character-twist phases, but no current evidence that Yasui Figure 3 a=1/a=3 character-twist functions differ from their standard functions after the correct character-coordinate identification. Standard-side constancy is not currently known to obstruct the exotic-vs-standard goal.\",\"status\":\"CURRENT_GUARDRAIL\",\"title\":\"Current Yasui character-twist artifacts show no known Yasui-vs-standard separation\"}",
+        "title": "Current Yasui character-twist artifacts show no known Yasui-vs-standard separation",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1388,
+          "base_estimate": 391,
+          "estimated_tokens": 450,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 59,
+          "serialized_character_count": 1388,
+          "unicode_scalar_count": 1388,
+          "utf8_bytes": 1388
+        },
+        "word_count": 75
+      },
       "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38": {
         "active_state": "active",
         "cid": "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
@@ -46686,6 +48093,36 @@
           "utf8_bytes": 2642
         },
         "word_count": 186
+      },
+      "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+        "created_at": "2026-07-15T17:15:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1966,
+        "gist": "ESTABLISHED_NUMERIC_REINTERPRETATION",
+        "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"path\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"role\":\"primary correction ledger\",\"schema\":\"twisted-yetter.yasui-character-twist-history-correction.v1\",\"sha256\":\"20403934cf438ed2338c031aaa538ad49d99dd744a314c98d0b545fecb4f9ea5\",\"status\":\"ESTABLISHED_NUMERIC_REINTERPRETATION\"},{\"path\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\",\"role\":\"SU(3)_2 Yasui-vs-split coordinate comparison\",\"schema\":\"twisted-yetter.yasui-su3-2-coordinate-comparison.v1\",\"sha256\":\"ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915\",\"status\":\"pass\"}],\"case_corrections\":[{\"case_id\":\"su2-2-yasui-a1-a3\",\"correction\":\"SU(2)_2 already had complete Yasui a=1 and a=3 all-alpha nonbaseline runs. Therefore SU(3)_2 should not be described as the first broad positive closed-four-manifold character-twist run.\",\"status\":\"ESTABLISHED_FROM_SAVED_ARTIFACTS\"},{\"case_id\":\"su3-2-yasui-a1\",\"correction\":\"The SU(3)_2 Yasui a=1 all-character run is nonbaseline, but it matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The direct 18/27 same-tuple differences are coordinate artifacts.\",\"status\":\"ESTABLISHED_NUMERIC\"},{\"case_id\":\"dic12-yasui-a1\",\"correction\":\"The D(Dic_12) witness changes +12 to -12 with ratio -1, and the split reference ratio is also -1. This is witness-level pointed bookkeeping, not Yasui-vs-standard separation evidence and not an all-alpha equivalence artifact.\",\"status\":\"ESTABLISHED_NUMERIC_WITNESS_LEVEL\"},{\"case_id\":\"special-handle-roadmap\",\"correction\":\"The ordinary CP2/standard-side character-twist preflight in the special-handle roadmap should be read as optional sanity/candidate behavior, not a necessary preflight or success criterion.\",\"status\":\"ROADMAP_INTERPRETATION_CORRECTION\"},{\"case_id\":\"su2-k-k-0-mod-4\",\"correction\":\"The saved split scan says SU(2)_k with k congruent 0 mod 4 has baseline standard/split behavior. This does not show such categories are useless for every future exotic target.\",\"status\":\"INTERPRETATION_GUARDRAIL\"}],\"core_corrections\":[{\"id\":\"standard-side-nonbaseline-demotion\",\"statement\":\"Ordinary standard/split nonbaseline character behavior should be treated as sanity/candidate bookkeeping, not as a positive success condition.\"},{\"id\":\"standard-side-constancy-not-known-obstruction\",\"statement\":\"If a standard-side character-twist function is constant baseline, current project knowledge does not identify that as an obstruction to a future exotic-vs-standard separation.\"},{\"id\":\"coordinate-identification-required\",\"statement\":\"Direct same-tuple comparison can be misleading. The comparison target is the full function after the correct diffeomorphism-induced character-coordinate identification.\"}],\"created_at\":\"2026-07-15T15:00:00Z\",\"created_by\":\"actor:codex\",\"future_agent_guardrail\":\"Do not stop at asking whether a character twist changes a value on the standard or Yasui presentation. Compare full functions after the correct basis identification, and treat coordinate-only differences as negative separation evidence.\",\"mathematical_status\":\"NUMERIC_ARTIFACT_SYNTHESIS_AND_HISTORICAL_CORRECTION_NOT_THEOREM_LEVEL\",\"note_id\":\"objective-note-2026-07-15-yasui-character-twist-history-correction\",\"repo_snapshot\":{\"base_commit\":\"a3b7c98aa52528eecad8d551ed967a5eb2f445ee\",\"base_current_root_cid_before_correction\":\"ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50\",\"branch\":\"codex/yasui-character-twist-history-correction\",\"worktree_note\":\"This correction branch was created from local main after leaving the earlier detached worktree state.\"},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"claim_boundary\":\"This note is an append-only correction of interpretation. It does not rewrite old CTL objects, prove a theorem-level no-go result, or claim future exotic targets cannot be separated by character-twist functions.\",\"normative_source_policy\":\"The generated JSON artifacts listed here and the admitted CTL correction claims are normative. Chat discussion and old prose are not normative sources.\",\"question\":\"Correct the current CTL interpretation of Yasui character-twist experiments so nonbaseline pointed/simple-current phases are not mistaken for Yasui-vs-standard or exotic-vs-standard separation evidence.\"},\"status\":\"ESTABLISHED_NUMERIC_REINTERPRETATION\",\"subject_layer_updates\":{\"new_edges\":[\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist\",\"subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap\",\"subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition\",\"subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation\"],\"new_index\":\"subject-index:twisted-yetter:subject-layer-lane-v3\",\"new_subjects\":[\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition\",\"subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation\"]},\"terminology_correction\":{\"exotic_vs_standard_separation\":\"After the diffeomorphism-induced handle and character-basis identification, the exotic target's full character-twist function differs from the standard function. This is the intended goal.\",\"presentation_nonbaseline\":\"A Yasui or other presentation has Z(alpha) != Z(0). This is not separation unless the whole function is compared with the standard function under the correct coordinate identification.\",\"standard_nonbaseline\":\"The standard/split presentation has Z(alpha) != Z(0). This is an ordinary pointed/simple-current phase and is not a success criterion.\"},\"title\":\"Yasui character-twist history correction and no-known-separation guardrail\"}",
+        "title": "Yasui character-twist history correction and no-known-separation guardrail",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 6073,
+          "base_estimate": 1709,
+          "estimated_tokens": 1966,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 257,
+          "serialized_character_count": 6073,
+          "unicode_scalar_count": 6073,
+          "utf8_bytes": 6073
+        },
+        "word_count": 391
       },
       "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9": {
         "active_state": "active",
@@ -46836,6 +48273,36 @@
           "utf8_bytes": 429
         },
         "word_count": 18
+      },
+      "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 226,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap\",\"evidence_status\":\"roadmap_interpretation_correction\",\"explanation\":\"The special-handle roadmap's ordinary CP2/standard-side character-twist preflight should be read as optional sanity/candidate behavior. Standard-side nonbaseline behavior is not a necessary preflight and not a success condition for exotic-vs-standard separation.\",\"role\":\"corrects_motivation\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"claim:lab-note:2026-07-07-special-handle-evaluation-roadmap\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 694,
+          "base_estimate": 196,
+          "estimated_tokens": 226,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 30,
+          "serialized_character_count": 694,
+          "unicode_scalar_count": 694,
+          "utf8_bytes": 694
+        },
+        "word_count": 30
       },
       "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59": {
         "active_state": "active",
@@ -47046,6 +48513,36 @@
           "utf8_bytes": 3771
         },
         "word_count": 101
+      },
+      "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 822,
+        "gist": "active",
+        "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-index",
+        "search_text": "{\"current_view_rule\":\"Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.\",\"index_id\":\"subject-index:twisted-yetter:subject-layer-lane-v3\",\"logical_id_prefixes\":[\"subject-edge:\",\"subject-index:\",\"subject-operation:\",\"subject:\"],\"migration_notes\":\"This v3 index extends v2 with the Yasui character-twist history correction cluster, the no-known-separation current-status cluster, and edges that demote standard/split nonbaseline behavior from success criterion to bookkeeping.\",\"physical_store\":\"Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.\",\"profile_family\":[\"twisted-yetter/subject-definition/0\",\"twisted-yetter/subject-edge/0\",\"twisted-yetter/subject-index/0\",\"twisted-yetter/subject-operation/0\"],\"purpose\":\"Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to generated topic-oriented wiki views.\",\"schema\":\"twisted-yetter/subject-index/0\",\"seed_edges\":[\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist\",\"subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap\",\"subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition\",\"subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation\"],\"seed_subjects\":[\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition\",\"subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation\"],\"status\":\"active\",\"title\":\"Twisted Yetter downstream subject lane v3\",\"upstream_review_contract\":{\"downstream_scope\":\"This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.\",\"migration_commitment\":\"Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.\",\"upstream_may_replace_profiles\":true}}",
+        "title": "Twisted Yetter downstream subject lane v3",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 2536,
+          "base_estimate": 714,
+          "estimated_tokens": 822,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 108,
+          "serialized_character_count": 2536,
+          "unicode_scalar_count": 2536,
+          "utf8_bytes": 2536
+        },
+        "word_count": 147
       },
       "ctlobj-sha256:207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b": {
         "active_state": "active",
@@ -47827,6 +49324,36 @@
         },
         "word_count": 654
       },
+      "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd": {
+        "active_state": "superseded",
+        "cid": "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 450,
+        "gist": "CURRENT_GUARDRAIL",
+        "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"claim_id\":\"current-status-2026-07-15-yasui-character-twists-no-known-separation\",\"created_at\":\"2026-07-15T15:00:00Z\",\"created_by\":\"actor:codex\",\"do_not_infer\":[\"Do not infer theorem-level no-go.\",\"Do not infer future exotic targets cannot be separated.\",\"Do not infer standard-side baseline behavior is an obstruction.\",\"Do not treat standard/split nonbaseline behavior as a success criterion.\"],\"evidence\":{\"correction_ledger\":{\"path\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"sha256\":\"02d6b25d877327f8f7cbaf5e30cc99e794c91b556fb2214cf59aa1dc92b37aa2\"},\"correction_note\":\"claim:lab-note:2026-07-15-yasui-character-twist-history-correction\",\"su3_coordinate_comparison\":{\"path\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\",\"sha256\":\"7cfa69024db54d46d39ae04bf2a1b4ef41cdf21267da3ba8afafcd928076b3f3\"}},\"schema\":\"twisted-yetter/current-status-claim/1\",\"statement\":\"Current artifacts contain nonbaseline character-twist phases, but no current evidence that Yasui Figure 3 a=1/a=3 character-twist functions differ from their standard functions after the correct character-coordinate identification. Standard-side constancy is not currently known to obstruct the exotic-vs-standard goal.\",\"status\":\"CURRENT_GUARDRAIL\",\"title\":\"Current Yasui character-twist artifacts show no known Yasui-vs-standard separation\"}",
+        "title": "Current Yasui character-twist artifacts show no known Yasui-vs-standard separation",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1388,
+          "base_estimate": 391,
+          "estimated_tokens": 450,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 59,
+          "serialized_character_count": 1388,
+          "unicode_scalar_count": 1388,
+          "utf8_bytes": 1388
+        },
+        "word_count": 75
+      },
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33",
@@ -48457,6 +49984,36 @@
         },
         "word_count": 413
       },
+      "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 206,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation\",\"evidence_status\":\"current_status_guardrail\",\"explanation\":\"The correction ledger supports the current-status claim that saved Yasui Figure 3 character-twist artifacts contain nonbaseline phases but no known Yasui-vs-standard separation after correct coordinate identification.\",\"role\":\"supports\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 635,
+          "base_estimate": 179,
+          "estimated_tokens": 206,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 27,
+          "serialized_character_count": 635,
+          "unicode_scalar_count": 635,
+          "utf8_bytes": 635
+        },
+        "word_count": 26
+      },
       "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1": {
         "active_state": "active",
         "cid": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
@@ -48847,6 +50404,36 @@
         },
         "word_count": 1
       },
+      "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 234,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal\",\"evidence_status\":\"established_numeric_reinterpretation\",\"explanation\":\"The correction ledger shows that the saved SU(3)_2 Yasui a=1 nonbaseline function matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The old first-positive wording is misleading outside a narrow pipeline-local sense.\",\"role\":\"reinterprets\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 719,
+          "base_estimate": 203,
+          "estimated_tokens": 234,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 31,
+          "serialized_character_count": 719,
+          "unicode_scalar_count": 719,
+          "utf8_bytes": 719
+        },
+        "word_count": 36
+      },
       "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb": {
         "active_state": "active",
         "cid": "ctlobj-sha256:5bf2cbc31f9521caff0b1f04bae599cb9c49dbdc005fd7eaddfacb86a2400adb",
@@ -49056,6 +50643,36 @@
           "utf8_bytes": 501
         },
         "word_count": 22
+      },
+      "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6": {
+        "active_state": "superseded",
+        "cid": "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 609,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"yasui-character-twist-history-correction\",\"yasui-character-twist-erratum\",\"yasui-no-known-character-separation-guardrail\"],\"current_view_hints\":{\"guardrail\":\"Future agents should compare full character-twist functions after the correct coordinate identification, not just ask whether a presentation is nonbaseline.\",\"headline\":\"Nonbaseline character-twist phases are not Yasui-vs-standard separation evidence.\",\"primary_correction_note\":\"claim:lab-note:2026-07-15-yasui-character-twist-history-correction\",\"primary_ledger\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"su3_coordinate_comparison\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\"},\"display_name\":\"Yasui character-twist history correction cluster\",\"parent_subject_ids\":[\"subject:twisted-yetter:claim-cluster:yasui-a1-character-twist\",\"subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal\",\"subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Append-only correction cluster for the July 2026 Yasui character-twist history. It demotes standard/split nonbaseline behavior to sanity or candidate bookkeeping, records that SU(3)_2 matches the split function after coordinate identification, and marks D(Dic_12) as a pointed witness bookkeeping signal rather than separation evidence.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"subject_kind\":\"ty:claim-cluster\",\"upstream_review_hints\":[\"Lead generated views with: nonbaseline yes, separation no.\",\"The correction is append-only and does not rewrite the earlier SU(3)_2 or D(Dic_12) claims.\",\"Standard-side constancy is not currently known to obstruct future exotic-vs-standard character-twist separation.\"]}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1879,
+          "base_estimate": 529,
+          "estimated_tokens": 609,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 80,
+          "serialized_character_count": 1879,
+          "unicode_scalar_count": 1879,
+          "utf8_bytes": 1879
+        },
+        "word_count": 104
       },
       "ctlobj-sha256:622e6f2ce4119870f2fa30016233ca06ad5c8fcb7933f82804b70c1431e20296": {
         "active_state": "active",
@@ -52147,6 +53764,36 @@
         },
         "word_count": 97
       },
+      "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 210,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist\",\"evidence_status\":\"interpretation_guardrail\",\"explanation\":\"The correction distinguishes standard_nonbaseline, presentation_nonbaseline, and exotic_vs_standard_separation. Only the last is the intended target; saved Yasui a=1 artifacts currently support nonbaseline bookkeeping, not separation.\",\"role\":\"clarifies\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:yasui-a1-character-twist\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 641,
+          "base_estimate": 182,
+          "estimated_tokens": 210,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 28,
+          "serialized_character_count": 641,
+          "unicode_scalar_count": 641,
+          "utf8_bytes": 641
+        },
+        "word_count": 24
+      },
       "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf": {
         "active_state": "active",
         "cid": "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
@@ -52176,6 +53823,36 @@
           "utf8_bytes": 1000
         },
         "word_count": 99
+      },
+      "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 224,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition\",\"evidence_status\":\"interpretation_guardrail\",\"explanation\":\"Seeing a character twist move the value on a standard/split presentation is ordinary pointed/simple-current phase bookkeeping. It should not be treated as a positive success condition or a substitute for comparing full exotic-vs-standard functions.\",\"role\":\"warns_against\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 688,
+          "base_estimate": 194,
+          "estimated_tokens": 224,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 30,
+          "serialized_character_count": 688,
+          "unicode_scalar_count": 688,
+          "utf8_bytes": 688
+        },
+        "word_count": 34
       },
       "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655": {
         "active_state": "active",
@@ -53917,6 +55594,36 @@
         },
         "word_count": 14
       },
+      "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+        "created_at": "2026-07-15T18:18:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 704,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"yasui-character-twist-history-correction\",\"yasui-character-twist-erratum\",\"yasui-no-known-character-separation-guardrail\"],\"current_view_hints\":{\"guardrail\":\"Future agents should compare full character-twist functions after the correct coordinate identification, not just ask whether a presentation is nonbaseline.\",\"headline\":\"Nonbaseline character-twist phases are not Yasui-vs-standard separation evidence.\",\"primary_correction_note\":\"claim:lab-note:2026-07-15-yasui-character-twist-history-correction\",\"primary_ledger\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"su3_coordinate_comparison\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\"},\"display_name\":\"Yasui character-twist history correction cluster\",\"parent_subject_ids\":[\"subject:twisted-yetter:claim-cluster:yasui-a1-character-twist\",\"subject:twisted-yetter:claim-cluster:yasui-a1-su3-2-character-twist-signal\",\"subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Append-only correction cluster for the July 2026 Yasui character-twist history. It demotes standard/split nonbaseline behavior to sanity or candidate bookkeeping, records that SU(3)_2 matches the split function after coordinate identification, and marks D(Dic_12) as a pointed witness bookkeeping signal rather than separation evidence.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"subject_kind\":\"ty:claim-cluster\",\"upstream_review_hints\":[\"Lead generated views with: nonbaseline yes, separation no.\",\"If a search finds the older phrase \\\"first positive closed-four-manifold character-twist signal\\\", route readers here: that wording is misleading outside a narrow SU(3)_2 pipeline-local sense because SU(2)_2 all-alpha nonbaseline Yasui runs already existed and nonbaseline is not separation.\",\"The correction is append-only and does not rewrite the earlier SU(3)_2 or D(Dic_12) claims.\",\"Standard-side constancy is not currently known to obstruct future exotic-vs-standard character-twist separation.\"]}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 2173,
+          "base_estimate": 612,
+          "estimated_tokens": 704,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 92,
+          "serialized_character_count": 2173,
+          "unicode_scalar_count": 2173,
+          "utf8_bytes": 2173
+        },
+        "word_count": 141
+      },
       "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b": {
         "active_state": "active",
         "cid": "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
@@ -55327,6 +57034,36 @@
         },
         "word_count": 58
       },
+      "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": {
+        "active_state": "superseded",
+        "cid": "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
+        "created_at": "2026-07-15T15:00:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1966,
+        "gist": "ESTABLISHED_NUMERIC_REINTERPRETATION",
+        "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"path\":\"experiments/results/yasui/yasui-character-twist-history-correction-v1.json\",\"role\":\"primary correction ledger\",\"schema\":\"twisted-yetter.yasui-character-twist-history-correction.v1\",\"sha256\":\"02d6b25d877327f8f7cbaf5e30cc99e794c91b556fb2214cf59aa1dc92b37aa2\",\"status\":\"ESTABLISHED_NUMERIC_REINTERPRETATION\"},{\"path\":\"experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json\",\"role\":\"SU(3)_2 Yasui-vs-split coordinate comparison\",\"schema\":\"twisted-yetter.yasui-su3-2-coordinate-comparison.v1\",\"sha256\":\"7cfa69024db54d46d39ae04bf2a1b4ef41cdf21267da3ba8afafcd928076b3f3\",\"status\":\"pass\"}],\"case_corrections\":[{\"case_id\":\"su2-2-yasui-a1-a3\",\"correction\":\"SU(2)_2 already had complete Yasui a=1 and a=3 all-alpha nonbaseline runs. Therefore SU(3)_2 should not be described as the first broad positive closed-four-manifold character-twist run.\",\"status\":\"ESTABLISHED_FROM_SAVED_ARTIFACTS\"},{\"case_id\":\"su3-2-yasui-a1\",\"correction\":\"The SU(3)_2 Yasui a=1 all-character run is nonbaseline, but it matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The direct 18/27 same-tuple differences are coordinate artifacts.\",\"status\":\"ESTABLISHED_NUMERIC\"},{\"case_id\":\"dic12-yasui-a1\",\"correction\":\"The D(Dic_12) witness changes +12 to -12 with ratio -1, and the split reference ratio is also -1. This is witness-level pointed bookkeeping, not Yasui-vs-standard separation evidence and not an all-alpha equivalence artifact.\",\"status\":\"ESTABLISHED_NUMERIC_WITNESS_LEVEL\"},{\"case_id\":\"special-handle-roadmap\",\"correction\":\"The ordinary CP2/standard-side character-twist preflight in the special-handle roadmap should be read as optional sanity/candidate behavior, not a necessary preflight or success criterion.\",\"status\":\"ROADMAP_INTERPRETATION_CORRECTION\"},{\"case_id\":\"su2-k-k-0-mod-4\",\"correction\":\"The saved split scan says SU(2)_k with k congruent 0 mod 4 has baseline standard/split behavior. This does not show such categories are useless for every future exotic target.\",\"status\":\"INTERPRETATION_GUARDRAIL\"}],\"core_corrections\":[{\"id\":\"standard-side-nonbaseline-demotion\",\"statement\":\"Ordinary standard/split nonbaseline character behavior should be treated as sanity/candidate bookkeeping, not as a positive success condition.\"},{\"id\":\"standard-side-constancy-not-known-obstruction\",\"statement\":\"If a standard-side character-twist function is constant baseline, current project knowledge does not identify that as an obstruction to a future exotic-vs-standard separation.\"},{\"id\":\"coordinate-identification-required\",\"statement\":\"Direct same-tuple comparison can be misleading. The comparison target is the full function after the correct diffeomorphism-induced character-coordinate identification.\"}],\"created_at\":\"2026-07-15T15:00:00Z\",\"created_by\":\"actor:codex\",\"future_agent_guardrail\":\"Do not stop at asking whether a character twist changes a value on the standard or Yasui presentation. Compare full functions after the correct basis identification, and treat coordinate-only differences as negative separation evidence.\",\"mathematical_status\":\"NUMERIC_ARTIFACT_SYNTHESIS_AND_HISTORICAL_CORRECTION_NOT_THEOREM_LEVEL\",\"note_id\":\"objective-note-2026-07-15-yasui-character-twist-history-correction\",\"repo_snapshot\":{\"base_commit\":\"a3b7c98aa52528eecad8d551ed967a5eb2f445ee\",\"base_current_root_cid_before_correction\":\"ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50\",\"branch\":\"codex/yasui-character-twist-history-correction\",\"worktree_note\":\"This correction branch was created from local main after leaving the earlier detached worktree state.\"},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"claim_boundary\":\"This note is an append-only correction of interpretation. It does not rewrite old CTL objects, prove a theorem-level no-go result, or claim future exotic targets cannot be separated by character-twist functions.\",\"normative_source_policy\":\"The generated JSON artifacts listed here and the admitted CTL correction claims are normative. Chat discussion and old prose are not normative sources.\",\"question\":\"Correct the current CTL interpretation of Yasui character-twist experiments so nonbaseline pointed/simple-current phases are not mistaken for Yasui-vs-standard or exotic-vs-standard separation evidence.\"},\"status\":\"ESTABLISHED_NUMERIC_REINTERPRETATION\",\"subject_layer_updates\":{\"new_edges\":[\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal\",\"subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist\",\"subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap\",\"subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition\",\"subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation\"],\"new_index\":\"subject-index:twisted-yetter:subject-layer-lane-v3\",\"new_subjects\":[\"subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction\",\"subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition\",\"subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation\"]},\"terminology_correction\":{\"exotic_vs_standard_separation\":\"After the diffeomorphism-induced handle and character-basis identification, the exotic target's full character-twist function differs from the standard function. This is the intended goal.\",\"presentation_nonbaseline\":\"A Yasui or other presentation has Z(alpha) != Z(0). This is not separation unless the whole function is compared with the standard function under the correct coordinate identification.\",\"standard_nonbaseline\":\"The standard/split presentation has Z(alpha) != Z(0). This is an ordinary pointed/simple-current phase and is not a success criterion.\"},\"title\":\"Yasui character-twist history correction and no-known-separation guardrail\"}",
+        "title": "Yasui character-twist history correction and no-known-separation guardrail",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 6073,
+          "base_estimate": 1709,
+          "estimated_tokens": 1966,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 257,
+          "serialized_character_count": 6073,
+          "unicode_scalar_count": 6073,
+          "utf8_bytes": 6073
+        },
+        "word_count": 391
+      },
       "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644": {
         "active_state": "active",
         "cid": "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
@@ -55768,6 +57505,14 @@
           "target_cid": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27"
         }
       ],
+      "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
+          "target_cid": "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd"
+        }
+      ],
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": [
         {
           "basis": "ctl/revision.parents",
@@ -55923,6 +57668,14 @@
           "path": "$.revision_of.previous_graph_cid",
           "source_cid": "ctlobj-sha256:8e0cb3dac53dd0d78840dddaf2ccbeefc35f9c7ddcb9dccd8c4dfc11ad18aff2",
           "target_cid": "ctlobj-sha256:5e98d690dfc3d1c938acdfd7fc0ed2e6c7ea0168863946a3a1db2dfd0f616858"
+        }
+      ],
+      "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
+          "target_cid": "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6"
         }
       ],
       "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed": [
@@ -56377,6 +58130,22 @@
           "target_cid": "ctlobj-sha256:de803b85e5de3335818aae14a605ad22c703cddcffeb523369b76a8b5c54bc1e"
         }
       ],
+      "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.repo_snapshot.base_current_root_cid_before_correction",
+          "source_cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+          "target_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.repo_snapshot.base_current_root_cid_before_correction",
+          "source_cid": "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
+          "target_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50"
+        }
+      ],
       "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063": [
         {
           "basis": "ctl/revision.parents",
@@ -56567,6 +58336,14 @@
           "target_cid": "ctlobj-sha256:f388ba6c65c96b5a591992aee69e5cec26a706bbafe40b1d7531ca370eaacd91"
         }
       ],
+      "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+          "target_cid": "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
+        }
+      ],
       "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a": [
         {
           "basis": "ctl/revision.parents",
@@ -56589,7 +58366,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-15T14:47:18Z",
+  "generated_at": "2026-07-15T18:19:27Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -59123,16 +60900,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+  "root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 3632,
-    "context_source": "admission-validated-child-state",
-    "discovery_index_ms": 3520,
-    "payload_summaries_ms": 44,
-    "resource_index_ms": 44,
-    "write_ms": 21
+    "build_ms": 58332,
+    "context_source": "current-context-replay",
+    "current_context_ms": 54514,
+    "discovery_index_ms": 3711,
+    "payload_summaries_ms": 34,
+    "resource_index_ms": 34,
+    "write_ms": 39
   },
-  "transition_cid": "ctlobj-sha256:d2a4b79aef0eab2b3aebf504832424b8ae786f941e1363a1e50aa3e732234eb4"
+  "transition_cid": "ctlobj-sha256:73186c7725c7ff59772ca186c32e3e10ff5d4f6a9b8f28f1d1ea2f09c4359e9f"
 }

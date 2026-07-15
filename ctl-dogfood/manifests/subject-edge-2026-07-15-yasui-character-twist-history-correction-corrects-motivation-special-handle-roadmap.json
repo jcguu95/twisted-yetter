@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+  "generated_at": "2026-07-15T15:00:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:b8ae81195cb914b91c079807a628d86ac823e6c0fd343e5c916159e9b7e02ebb",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:1bd8e3bc9c5f344f08abeba8abdc647723c561baf93585705f4bca10725e707e",
+    "transition": "ctlobj-sha256:b2f809ce67ffd937967fce523489c35c36c13f003a58c00eb6e15041d50c7471"
+  },
+  "parent_root_cid": "ctlobj-sha256:13d7bf6d8284a52fcc939af073a93b71d3b18b97b4949280129511cb6907f5bd",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json --manifest manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-corrects-motivation-special-handle-roadmap.json --created-at 2026-07-15T15:00:00Z --admitted-at 2026-07-15T15:00:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "a3b7c98aa52528eecad8d551ed967a5eb2f445ee"
+}

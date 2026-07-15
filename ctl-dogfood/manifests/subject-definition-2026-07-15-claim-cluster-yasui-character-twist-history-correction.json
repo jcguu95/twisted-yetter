@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+  "generated_at": "2026-07-15T15:00:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:7a5f5f51f62820b8ac290840793635b9fe51770fad3e5c93ac6e19d3d63fd5b0",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
+    "transition": "ctlobj-sha256:5c13b1fee7416f83c10a9f5172193c57b4b981ab60fb3bcdf9468efc05bfc813"
+  },
+  "parent_root_cid": "ctlobj-sha256:91036dc286c786805eb86263709f64e4fd0d63f834df436ab77a3729a72878f1",
+  "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction --revision-kind subject-definition --payload-profile ctl-data/opaque-json/1 --payload subject-layer/definitions/claim-cluster-yasui-character-twist-history-correction.json --manifest manifests/subject-definition-2026-07-15-claim-cluster-yasui-character-twist-history-correction.json --created-at 2026-07-15T15:00:00Z --admitted-at 2026-07-15T15:00:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-definition",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "a3b7c98aa52528eecad8d551ed967a5eb2f445ee"
+}

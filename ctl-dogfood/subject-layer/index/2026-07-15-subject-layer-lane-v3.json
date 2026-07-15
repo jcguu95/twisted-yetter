@@ -1,0 +1,40 @@
+{
+  "current_view_rule": "Replay the CTL current root and project active bindings whose logical id starts with subject:, subject-edge:, subject-index:, or subject-operation:. Generated wiki pages are views over that projection, not the normative record.",
+  "index_id": "subject-index:twisted-yetter:subject-layer-lane-v3",
+  "logical_id_prefixes": [
+    "subject-edge:",
+    "subject-index:",
+    "subject-operation:",
+    "subject:"
+  ],
+  "migration_notes": "This v3 index extends v2 with the Yasui character-twist history correction cluster, the no-known-separation current-status cluster, and edges that demote standard/split nonbaseline behavior from success criterion to bookkeeping.",
+  "physical_store": "Same ctl-dogfood object store and refs/main current root as claims, graphs, policies, and role bindings; this is not a second CTL store.",
+  "profile_family": [
+    "twisted-yetter/subject-definition/0",
+    "twisted-yetter/subject-edge/0",
+    "twisted-yetter/subject-index/0",
+    "twisted-yetter/subject-operation/0"
+  ],
+  "purpose": "Make project-local subject identities, aliases, edge roles, and append-only correction intent visible to future agents and to generated topic-oriented wiki views.",
+  "schema": "twisted-yetter/subject-index/0",
+  "seed_edges": [
+    "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+    "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+    "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+    "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+    "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+    "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation"
+  ],
+  "seed_subjects": [
+    "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+    "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+    "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation"
+  ],
+  "status": "active",
+  "title": "Twisted Yetter downstream subject lane v3",
+  "upstream_review_contract": {
+    "downstream_scope": "This is a Twisted Yetter research-profile experiment. It is not a CTL Kernel feature and not yet an upstream ResearchCTL specification.",
+    "migration_commitment": "Twisted Yetter will consume an upstream design by append-only migration records and replacement subject revisions, preserving old subject ids as historical or redirected handles.",
+    "upstream_may_replace_profiles": true
+  }
+}

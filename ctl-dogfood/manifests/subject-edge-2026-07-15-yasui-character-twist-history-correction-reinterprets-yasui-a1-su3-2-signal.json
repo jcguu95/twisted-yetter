@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+  "generated_at": "2026-07-15T15:00:00Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:ec900d13575ed0f1cf3d3437bd977b60e30dd9e469d84eab3890d59f524a9bcf",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
+    "transition": "ctlobj-sha256:10a947881467da1e998ab2299c07dcdee297122a67b6e4cc921d4ff352b1c972"
+  },
+  "parent_root_cid": "ctlobj-sha256:59cd88c10163460ef883413de0f11ebeba9fb899cdeeb7f73a14e3479a732b33",
+  "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json --manifest manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-reinterprets-yasui-a1-su3-2-signal.json --created-at 2026-07-15T15:00:00Z --admitted-at 2026-07-15T15:00:00Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "a3b7c98aa52528eecad8d551ed967a5eb2f445ee"
+}

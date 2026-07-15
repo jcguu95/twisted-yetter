@@ -1,0 +1,112 @@
+{
+  "created_at": "2026-07-15T15:00:00Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-15-yasui-character-twist-history-correction",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "path": "experiments/results/yasui/yasui-character-twist-history-correction-v1.json",
+        "role": "primary correction ledger",
+        "schema": "twisted-yetter.yasui-character-twist-history-correction.v1",
+        "sha256": "02d6b25d877327f8f7cbaf5e30cc99e794c91b556fb2214cf59aa1dc92b37aa2",
+        "status": "ESTABLISHED_NUMERIC_REINTERPRETATION"
+      },
+      {
+        "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+        "role": "SU(3)_2 Yasui-vs-split coordinate comparison",
+        "schema": "twisted-yetter.yasui-su3-2-coordinate-comparison.v1",
+        "sha256": "7cfa69024db54d46d39ae04bf2a1b4ef41cdf21267da3ba8afafcd928076b3f3",
+        "status": "pass"
+      }
+    ],
+    "case_corrections": [
+      {
+        "case_id": "su2-2-yasui-a1-a3",
+        "correction": "SU(2)_2 already had complete Yasui a=1 and a=3 all-alpha nonbaseline runs. Therefore SU(3)_2 should not be described as the first broad positive closed-four-manifold character-twist run.",
+        "status": "ESTABLISHED_FROM_SAVED_ARTIFACTS"
+      },
+      {
+        "case_id": "su3-2-yasui-a1",
+        "correction": "The SU(3)_2 Yasui a=1 all-character run is nonbaseline, but it matches the CP2#2CPbar split function after the coordinate map standard(h,e1,e2)=(B,A+B,C+2B) for Yasui alpha=(C,A,B). The direct 18/27 same-tuple differences are coordinate artifacts.",
+        "status": "ESTABLISHED_NUMERIC"
+      },
+      {
+        "case_id": "dic12-yasui-a1",
+        "correction": "The D(Dic_12) witness changes +12 to -12 with ratio -1, and the split reference ratio is also -1. This is witness-level pointed bookkeeping, not Yasui-vs-standard separation evidence and not an all-alpha equivalence artifact.",
+        "status": "ESTABLISHED_NUMERIC_WITNESS_LEVEL"
+      },
+      {
+        "case_id": "special-handle-roadmap",
+        "correction": "The ordinary CP2/standard-side character-twist preflight in the special-handle roadmap should be read as optional sanity/candidate behavior, not a necessary preflight or success criterion.",
+        "status": "ROADMAP_INTERPRETATION_CORRECTION"
+      },
+      {
+        "case_id": "su2-k-k-0-mod-4",
+        "correction": "The saved split scan says SU(2)_k with k congruent 0 mod 4 has baseline standard/split behavior. This does not show such categories are useless for every future exotic target.",
+        "status": "INTERPRETATION_GUARDRAIL"
+      }
+    ],
+    "core_corrections": [
+      {
+        "id": "standard-side-nonbaseline-demotion",
+        "statement": "Ordinary standard/split nonbaseline character behavior should be treated as sanity/candidate bookkeeping, not as a positive success condition."
+      },
+      {
+        "id": "standard-side-constancy-not-known-obstruction",
+        "statement": "If a standard-side character-twist function is constant baseline, current project knowledge does not identify that as an obstruction to a future exotic-vs-standard separation."
+      },
+      {
+        "id": "coordinate-identification-required",
+        "statement": "Direct same-tuple comparison can be misleading. The comparison target is the full function after the correct diffeomorphism-induced character-coordinate identification."
+      }
+    ],
+    "created_at": "2026-07-15T15:00:00Z",
+    "created_by": "actor:codex",
+    "future_agent_guardrail": "Do not stop at asking whether a character twist changes a value on the standard or Yasui presentation. Compare full functions after the correct basis identification, and treat coordinate-only differences as negative separation evidence.",
+    "mathematical_status": "NUMERIC_ARTIFACT_SYNTHESIS_AND_HISTORICAL_CORRECTION_NOT_THEOREM_LEVEL",
+    "note_id": "objective-note-2026-07-15-yasui-character-twist-history-correction",
+    "repo_snapshot": {
+      "base_commit": "a3b7c98aa52528eecad8d551ed967a5eb2f445ee",
+      "base_current_root_cid_before_correction": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
+      "branch": "codex/yasui-character-twist-history-correction",
+      "worktree_note": "This correction branch was created from local main after leaving the earlier detached worktree state."
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "claim_boundary": "This note is an append-only correction of interpretation. It does not rewrite old CTL objects, prove a theorem-level no-go result, or claim future exotic targets cannot be separated by character-twist functions.",
+      "normative_source_policy": "The generated JSON artifacts listed here and the admitted CTL correction claims are normative. Chat discussion and old prose are not normative sources.",
+      "question": "Correct the current CTL interpretation of Yasui character-twist experiments so nonbaseline pointed/simple-current phases are not mistaken for Yasui-vs-standard or exotic-vs-standard separation evidence."
+    },
+    "status": "ESTABLISHED_NUMERIC_REINTERPRETATION",
+    "subject_layer_updates": {
+      "new_edges": [
+        "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-su3-2-signal",
+        "subject-edge:ty:yasui-character-twist-history-correction:reinterprets:yasui-a1-dic12-signal",
+        "subject-edge:ty:yasui-character-twist-history-correction:clarifies:yasui-a1-character-twist",
+        "subject-edge:ty:yasui-character-twist-history-correction:corrects-motivation:special-handle-roadmap",
+        "subject-edge:ty:yasui-character-twist-history-correction:warns-against:standard-nonbaseline-success-condition",
+        "subject-edge:ty:yasui-character-twist-history-correction:supports:no-known-separation"
+      ],
+      "new_index": "subject-index:twisted-yetter:subject-layer-lane-v3",
+      "new_subjects": [
+        "subject:twisted-yetter:claim-cluster:yasui-character-twist-history-correction",
+        "subject:twisted-yetter:pitfall:standard-nonbaseline-as-success-condition",
+        "subject:twisted-yetter:claim-cluster:yasui-character-twists-no-known-separation"
+      ]
+    },
+    "terminology_correction": {
+      "exotic_vs_standard_separation": "After the diffeomorphism-induced handle and character-basis identification, the exotic target's full character-twist function differs from the standard function. This is the intended goal.",
+      "presentation_nonbaseline": "A Yasui or other presentation has Z(alpha) != Z(0). This is not separation unless the whole function is compared with the standard function under the correct coordinate identification.",
+      "standard_nonbaseline": "The standard/split presentation has Z(alpha) != Z(0). This is an ordinary pointed/simple-current phase and is not a success criterion."
+    },
+    "title": "Yasui character-twist history correction and no-known-separation guardrail"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
