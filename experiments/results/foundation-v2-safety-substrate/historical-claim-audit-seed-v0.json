@@ -1,0 +1,58 @@
+{
+  "audit_id": "low-rank-ribbon-foundation-v2-historical-claim-audit-seed-v0",
+  "audit_status": "SEED_DISCOVERY_ONLY_NOT_COMPLETE_NOT_CURRENT_TRUTH",
+  "ctl_current_state_warning": "This artifact is not a CTL current-state lookup and must not be used as normative CTL truth.",
+  "excluded_prefixes": [
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "ctl-dogfood/generated",
+    "ctl-dogfood/objects",
+    "experiments/results/foundation-v2-safety-substrate"
+  ],
+  "formal_scan_status": "BLOCKED_FOR_FORMAL_SIGNAL_SCAN",
+  "generated_at_utc": "2026-07-15T22:09:20.270864Z",
+  "generator_script": "experiments/scripts/build_foundation_v2_safety_substrate_v0.py",
+  "git_commit": "59789663447b62da6511d7fc9c9adf1d9203fbd5",
+  "git_dirty_at_generation_start": true,
+  "match_count": 3,
+  "matches": [
+    {
+      "audit_status": "DISCOVERY_ONLY_REQUIRES_HUMAN_REVIEW",
+      "first_line": 101,
+      "path": "experiments/scripts/build_foundation_v2_safety_substrate_v0.py",
+      "pattern": "FOUNDATION_ESTABLISHED"
+    },
+    {
+      "audit_status": "DISCOVERY_ONLY_REQUIRES_HUMAN_REVIEW",
+      "first_line": 2,
+      "path": "experiments/scripts/build_low_rank_mtc_classification_matrix.py",
+      "pattern": "low-rank MTC"
+    },
+    {
+      "audit_status": "DISCOVERY_ONLY_REQUIRES_HUMAN_REVIEW",
+      "first_line": 53,
+      "path": "tests/test_foundation_v2_safety_substrate.py",
+      "pattern": "READY_FOR_SIGNAL_SCAN"
+    }
+  ],
+  "matches_truncated": false,
+  "normative_status": "NOT_NORMATIVE_NOT_CTL_ADMITTED",
+  "patterns": [
+    "FOUNDATION_ESTABLISHED",
+    "READY_FOR_SIGNAL_SCAN",
+    "complete-no-signal",
+    "complete no-signal",
+    "rank 2-5",
+    "rank 2\u20135",
+    "no signal",
+    "formal scan",
+    "all low-rank",
+    "low-rank MTC"
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "uv run python experiments/scripts/build_foundation_v2_safety_substrate_v0.py",
+  "schema": "twisted-yetter.foundation_v2.historical_claim_audit_seed.v0",
+  "status": "SEED_DRAFT_NOT_ADMITTED"
+}
