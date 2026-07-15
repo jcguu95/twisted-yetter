@@ -15,45 +15,38 @@ def test_matrix_scope_and_universal_groups() -> None:
     matrix = MODULE.build_matrix(MODULE.DEFAULT_SOURCES, MODULE.DEFAULT_FAMILIES)
     rows = {row["family_id"]: row for row in matrix["families"]}
 
-    assert {entry["rank"] for entry in matrix["coverage_by_rank"]} == set(range(2, 8))
-    assert "EXACT_MODULAR_RIBBON_REALIZATION_COUNT_UNKNOWN" == next(
-        entry["general_nonunitary_status"]
+    assert {entry["rank"] for entry in matrix["coverage_by_rank"]} == set(range(2, 6))
+    assert "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE" == next(
+        entry["proved_scope"]
         for entry in matrix["coverage_by_rank"]
         if entry["rank"] == 5
     )
     assert rows["rank5-su5-1"]["universal_grading_group"] == "Z5"
-    assert rows["rank6-ising-x-z2"]["universal_grading_group"] == "Z2xZ2"
-    assert rows["rank7-so7-2"]["universal_grading_group"] == "Z2"
     assert not rows["rank5-psu2-9"]["character_twist_eligible"]
     assert not rows["rank5-psu3-4"]["character_twist_eligible"]
     assert rows["rank5-psu3-4"]["fusion_multiplicity_max"] == 2
 
 
-def test_metaplectic_counts_and_open_gaps_are_loud() -> None:
+def test_braided_counts_and_ribbon_gap_are_loud() -> None:
     matrix = MODULE.build_matrix(MODULE.DEFAULT_SOURCES, MODULE.DEFAULT_FAMILIES)
     rows = {row["family_id"]: row for row in matrix["families"]}
 
-    for family_id in ("rank5-su2-4", "rank6-so5-2", "rank7-so7-2"):
-        assert rows[family_id]["realization_count"] == 4
+    totals = {entry["rank"]: entry for entry in matrix["coverage_by_rank"]}
+    assert [totals[rank]["modular_braided_class_count"] for rank in range(2, 6)] == [6, 16, 33, 22]
+    assert rows["rank5-su2-4"]["modular_braided_class_count"] == 4
+    assert rows["rank5-su2-4"]["spherical_structures_per_braided_class"] == 2
     joined = " ".join(matrix["open_gaps"]).lower()
-    assert "rank 5" in joined and "unknown" in joined
-    assert "ranks 6 and 7" in joined and "weakly integral" in joined
+    assert "braided-equivalence" in joined
+    assert "ribbon-equivalence" in joined
     notice = matrix["top_notice"].lower()
-    assert "do not interpret" in notice and "exhaustive list" in notice
+    assert "braided equivalence" in notice and "ribbon-equivalence" in notice
 
 
-def test_known_examples_are_not_promoted_to_classification() -> None:
+def test_modular_family_counts_match_rank_totals() -> None:
     matrix = MODULE.build_matrix(MODULE.DEFAULT_SOURCES, MODULE.DEFAULT_FAMILIES)
-    known_examples = [
-        row for row in matrix["families"]
-        if row["realization_status"] == "KNOWN_EXAMPLE_NOT_EXHAUSTIVE_CLASSIFICATION"
-    ]
-
-    assert {row["family_id"] for row in known_examples} == {
-        "rank6-su2-5-known-outside-weak-scope",
-        "rank7-su2-6-known-outside-weak-scope",
-    }
-    assert all("not evidence" in row["scope"] for row in known_examples)
+    totals = {entry["rank"]: entry["modular_braided_class_count"] for entry in matrix["coverage_by_rank"]}
+    for rank, expected in totals.items():
+        assert sum(row["modular_braided_class_count"] for row in matrix["families"] if row["rank"] == rank) == expected
 
 
 def test_checked_in_artifact_matches_curated_rows() -> None:

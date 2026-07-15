@@ -1,303 +1,197 @@
 {
   "schema": "twisted-yetter.low-rank-mtc-families.v1",
-  "status": "CURATED_CLASSIFICATION_SCOPE_INPUT",
-  "top_warning": "Rows classify fusion families only within the stated scope. They do not enumerate every ribbon realization unless realization_status explicitly says so.",
+  "status": "CURATED_RANK2_TO_5_BRAIDED_CLASSIFICATION_SCOPE",
+  "top_warning": "The 2024 source supplies braided-equivalence classes through rank 6. This input stops at rank 5 and does not equate braided, spherical, and ribbon equivalence without an explicit refinement certificate.",
   "coverage_by_rank": [
     {
       "rank": 2,
-      "proved_scope": "ALL_UNITARY_MTC_UP_TO_RIBBON_TENSOR_EQUIVALENCE; GENERAL_RANK2_FUSION_FAMILIES",
-      "general_nonunitary_status": "REFERENCE_CHAIN_IDENTIFIES_YANG_LEE_BUT_V1_DOES_NOT_ENUMERATE_ALL_RIBBON_REALIZATIONS",
-      "reference_id": "ref:rsw-low-rank-umtc-2009"
+      "premodular_braided_class_count": 8,
+      "modular_braided_class_count": 6,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "ribbon_refinement_status": "REQUIRES_SPHERICAL_STRUCTURE_AUDIT",
+      "reference_id": "ref:dong-schopieray-near-integral-2024"
     },
     {
       "rank": 3,
-      "proved_scope": "ALL_UNITARY_MTC_UP_TO_RIBBON_TENSOR_EQUIVALENCE; GENERAL_RANK3_FUSION_FAMILIES",
-      "general_nonunitary_status": "V1_DOES_NOT_ENUMERATE_ALL_RIBBON_REALIZATIONS",
-      "reference_id": "ref:rsw-low-rank-umtc-2009"
+      "premodular_braided_class_count": 20,
+      "modular_braided_class_count": 16,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "ribbon_refinement_status": "ISING_ROWS_HAVE_TWO_SPHERICAL_STRUCTURES_PER_BRAIDED_CLASS; OTHER_ROWS_REQUIRE_AUDIT",
+      "reference_id": "ref:dong-schopieray-near-integral-2024"
     },
     {
       "rank": 4,
-      "proved_scope": "ALL_UNITARY_MTC_UP_TO_RIBBON_TENSOR_EQUIVALENCE",
-      "general_nonunitary_status": "OPEN_OR_NOT_COVERED_BY_THE_PRIMARY_CLASSIFICATION_USED_HERE",
-      "reference_id": "ref:rsw-low-rank-umtc-2009"
+      "premodular_braided_class_count": 57,
+      "modular_braided_class_count": 33,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "ribbon_refinement_status": "REQUIRES_SPHERICAL_STRUCTURE_AUDIT",
+      "reference_id": "ref:dong-schopieray-near-integral-2024"
     },
     {
       "rank": 5,
-      "proved_scope": "ALL_MTC_GROTHENDIECK_FAMILIES",
-      "general_nonunitary_status": "EXACT_MODULAR_RIBBON_REALIZATION_COUNT_UNKNOWN",
-      "reference_id": "ref:bnrw-rank5-2016"
-    },
-    {
-      "rank": 6,
-      "proved_scope": "ALL_WEAKLY_INTEGRAL_MTC",
-      "general_nonunitary_status": "GENERAL_RANK6_CLASSIFICATION_OPEN; SOME_ADDITIONAL_GALOIS_CASES_AND_QUANTUM_GROUP_EXAMPLES_KNOWN",
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021"
-    },
-    {
-      "rank": 7,
-      "proved_scope": "ALL_WEAKLY_INTEGRAL_MTC",
-      "general_nonunitary_status": "GENERAL_RANK7_CLASSIFICATION_OPEN; QUANTUM_GROUP_EXAMPLES_KNOWN",
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021"
+      "premodular_braided_class_count": 55,
+      "modular_braided_class_count": 22,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "ribbon_refinement_status": "REP_S3_EXTENSION_ROWS_HAVE_TWO_SPHERICAL_STRUCTURES_PER_BRAIDED_CLASS; OTHER_ROWS_REQUIRE_AUDIT",
+      "reference_id": "ref:dong-schopieray-near-integral-2024"
     }
   ],
   "families": [
     {
       "family_id": "rank2-cyclic-z2",
       "rank": 2,
-      "family": "pointed cyclic Z2",
-      "scope": "unitary-complete family",
-      "weak_integrality": "integral",
+      "family": "C(C2,q), pointed cyclic Z2",
+      "modular_braided_class_count": 2,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z2",
       "invertible_group_order": 2,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank2-fibonacci-yang-lee",
       "rank": 2,
-      "family": "Fibonacci / Yang-Lee fusion family",
-      "scope": "unitary Fibonacci plus known nonunitary Galois realization",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A1,5,q)_ad, Fibonacci/Yang-Lee family",
+      "modular_braided_class_count": 4,
       "fusion_multiplicity_max": 1,
       "invertible_group": "trivial",
       "invertible_group_order": 1,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "V1_DOES_NOT_ENUMERATE_ALL_RIBBON_REALIZATIONS"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank3-cyclic-z3",
       "rank": 3,
-      "family": "pointed cyclic Z3",
-      "scope": "unitary-complete family",
-      "weak_integrality": "integral",
+      "family": "C(C3,q), pointed cyclic Z3",
+      "modular_braided_class_count": 2,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z3",
       "invertible_group_order": 3,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank3-ising",
       "rank": 3,
-      "family": "Ising fusion family",
-      "scope": "unitary-complete family",
-      "weak_integrality": "strictly-weakly-integral",
+      "family": "Ising",
+      "modular_braided_class_count": 8,
+      "spherical_structures_per_braided_class": 2,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z2",
       "invertible_group_order": 2,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "BRAIDED_CLASSES_AND_SPHERICAL_MULTIPLICITY_ENUMERATED"
     },
     {
       "family_id": "rank3-psu2-5",
       "rank": 3,
-      "family": "PSU(2)_5",
-      "scope": "unitary-complete family",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A1,7,q)_ad, PSU(2)_5 family",
+      "modular_braided_class_count": 6,
       "fusion_multiplicity_max": 1,
       "invertible_group": "trivial",
       "invertible_group_order": 1,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank4-pointed-z4",
       "rank": 4,
-      "family": "pointed cyclic Z4",
-      "scope": "unitary-complete family",
-      "weak_integrality": "integral",
+      "family": "C(C4,q), pointed cyclic Z4",
+      "modular_braided_class_count": 4,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z4",
       "invertible_group_order": 4,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank4-pointed-z2xz2",
       "rank": 4,
-      "family": "pointed Z2 x Z2",
-      "scope": "unitary-complete family",
-      "weak_integrality": "integral",
+      "family": "C(C2 x C2,q), pointed Klein four group",
+      "modular_braided_class_count": 5,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z2xZ2",
       "invertible_group_order": 4,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
-      "family_id": "rank4-su2-3",
+      "family_id": "rank4-semion-times-fibonacci",
       "rank": 4,
-      "family": "SU(2)_3 (Semion x Fibonacci fusion family)",
-      "scope": "unitary-complete family",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A1,5,q)_ad x C(C2,q), SU(2)_3 family",
+      "modular_braided_class_count": 8,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z2",
       "invertible_group_order": 2,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
-    },
-    {
-      "family_id": "rank4-psu2-7",
-      "rank": 4,
-      "family": "PSU(2)_7",
-      "scope": "unitary-complete family",
-      "weak_integrality": "not-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "trivial",
-      "invertible_group_order": 1,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank4-fibxfib",
       "rank": 4,
-      "family": "Fibonacci x Fibonacci",
-      "scope": "unitary-complete family",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A1,5,q)_ad x C(A1,5,q')_ad",
+      "modular_braided_class_count": 10,
       "fusion_multiplicity_max": 1,
       "invertible_group": "trivial",
       "invertible_group_order": 1,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "UNITARY_RIBBON_REALIZATIONS_CLASSIFIED"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
+    },
+    {
+      "family_id": "rank4-psu2-7",
+      "rank": 4,
+      "family": "C(A1,9,q)_ad, PSU(2)_7 family",
+      "modular_braided_class_count": 6,
+      "fusion_multiplicity_max": 1,
+      "invertible_group": "trivial",
+      "invertible_group_order": 1,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank5-su2-4",
       "rank": 5,
-      "family": "SU(2)_4 / SO(3)_2 metaplectic fusion family",
-      "scope": "all rank-5 Grothendieck families; unitary metaplectic realizations classified",
-      "weak_integrality": "strictly-weakly-integral",
+      "family": "(Rep(S3)^omega)^gamma, SU(2)_4 family",
+      "modular_braided_class_count": 4,
+      "spherical_structures_per_braided_class": 2,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z2",
       "invertible_group_order": 2,
-      "reference_id": "ref:bnrw-rank5-2016",
-      "realization_status": "FOUR_UNITARY_METAPLECTIC_RIBBON_EQUIVALENCE_CLASSES",
-      "realization_count": 4,
-      "realization_count_reference_id": "ref:acrw-metaplectic-2016"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "BRAIDED_CLASSES_AND_SPHERICAL_MULTIPLICITY_ENUMERATED"
     },
     {
       "family_id": "rank5-psu2-9",
       "rank": 5,
-      "family": "PSU(2)_9",
-      "scope": "all rank-5 Grothendieck families",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A1,11,q)_ad, PSU(2)_9 family",
+      "modular_braided_class_count": 10,
       "fusion_multiplicity_max": 1,
       "invertible_group": "trivial",
       "invertible_group_order": 1,
-      "reference_id": "ref:bnrw-rank5-2016",
-      "realization_status": "EXACT_MODULAR_RIBBON_REALIZATION_COUNT_UNKNOWN"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank5-su5-1",
       "rank": 5,
-      "family": "SU(5)_1 pointed cyclic Z5",
-      "scope": "all rank-5 Grothendieck families",
-      "weak_integrality": "integral",
+      "family": "C(C5,q), SU(5)_1 pointed cyclic Z5 family",
+      "modular_braided_class_count": 2,
       "fusion_multiplicity_max": 1,
       "invertible_group": "Z5",
       "invertible_group_order": 5,
-      "reference_id": "ref:bnrw-rank5-2016",
-      "realization_status": "RANK5_PAPER_DOES_NOT_ENUMERATE_EXACT_MODULAR_RIBBON_COUNT"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     },
     {
       "family_id": "rank5-psu3-4",
       "rank": 5,
-      "family": "PSU(3)_4",
-      "scope": "all rank-5 Grothendieck families",
-      "weak_integrality": "not-weakly-integral",
+      "family": "C(A2,7,q)_ad, PSU(3)_4 family",
+      "modular_braided_class_count": 6,
       "fusion_multiplicity_max": 2,
       "invertible_group": "trivial",
       "invertible_group_order": 1,
-      "reference_id": "ref:bnrw-rank5-2016",
-      "realization_status": "EXACT_MODULAR_RIBBON_REALIZATION_COUNT_UNKNOWN"
-    },
-    {
-      "family_id": "rank6-ising-x-z2",
-      "rank": 6,
-      "family": "Ising x pointed cyclic Z2",
-      "scope": "complete weakly-integral rank-6 classification",
-      "weak_integrality": "strictly-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z2xZ2",
-      "invertible_group_order": 4,
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021",
-      "realization_status": "FACTORIZABLE_FROM_CLASSIFIED_LOW_RANK_REALIZATIONS"
-    },
-    {
-      "family_id": "rank6-so5-2",
-      "rank": 6,
-      "family": "SO(5)_2 metaplectic fusion family",
-      "scope": "complete weakly-integral rank-6 classification",
-      "weak_integrality": "strictly-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z2",
-      "invertible_group_order": 2,
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021",
-      "realization_status": "FOUR_UNITARY_METAPLECTIC_RIBBON_EQUIVALENCE_CLASSES",
-      "realization_count": 4,
-      "realization_count_reference_id": "ref:acrw-metaplectic-2016"
-    },
-    {
-      "family_id": "rank6-pointed-z6",
-      "rank": 6,
-      "family": "pointed cyclic Z6",
-      "scope": "complete weakly-integral rank-6 classification",
-      "weak_integrality": "integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z6",
-      "invertible_group_order": 6,
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021",
-      "realization_status": "METRIC_GROUP_REALIZATIONS_REQUIRE_EXPLICIT_ENUMERATION"
-    },
-    {
-      "family_id": "rank7-so7-2",
-      "rank": 7,
-      "family": "SO(7)_2 metaplectic fusion family",
-      "scope": "complete strictly-weakly-integral rank-7 classification",
-      "weak_integrality": "strictly-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z2",
-      "invertible_group_order": 2,
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021",
-      "realization_status": "FOUR_UNITARY_METAPLECTIC_RIBBON_EQUIVALENCE_CLASSES",
-      "realization_count": 4,
-      "realization_count_reference_id": "ref:acrw-metaplectic-2016"
-    },
-    {
-      "family_id": "rank7-pointed-z7",
-      "rank": 7,
-      "family": "pointed cyclic Z7",
-      "scope": "complete integral rank-7 classification",
-      "weak_integrality": "integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z7",
-      "invertible_group_order": 7,
-      "reference_id": "ref:bgnprw-weakly-integral-rank7-2021",
-      "realization_status": "METRIC_GROUP_REALIZATIONS_REQUIRE_EXPLICIT_ENUMERATION"
-    },
-    {
-      "family_id": "rank6-su2-5-known-outside-weak-scope",
-      "rank": 6,
-      "family": "SU(2)_5",
-      "scope": "known standard quantum-group example; not evidence of general rank-6 classification",
-      "weak_integrality": "not-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z2",
-      "invertible_group_order": 2,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "KNOWN_EXAMPLE_NOT_EXHAUSTIVE_CLASSIFICATION"
-    },
-    {
-      "family_id": "rank7-su2-6-known-outside-weak-scope",
-      "rank": 7,
-      "family": "SU(2)_6",
-      "scope": "known standard quantum-group example; not evidence of general rank-7 classification",
-      "weak_integrality": "not-weakly-integral",
-      "fusion_multiplicity_max": 1,
-      "invertible_group": "Z2",
-      "invertible_group_order": 2,
-      "reference_id": "ref:rsw-low-rank-umtc-2009",
-      "realization_status": "KNOWN_EXAMPLE_NOT_EXHAUSTIVE_CLASSIFICATION"
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "realization_status": "MODULAR_BRAIDED_CLASSES_ENUMERATED_RIBBON_REFINEMENT_PENDING"
     }
   ]
 }

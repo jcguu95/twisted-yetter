@@ -38,14 +38,14 @@ def build_matrix(sources_path: Path, families_path: Path) -> dict[str, Any]:
     coverage = family_input["coverage_by_rank"]
     families = family_input["families"]
 
-    assert {entry["rank"] for entry in coverage} == set(range(2, 8))
+    assert {entry["rank"] for entry in coverage} == set(range(2, 6))
     family_ids = [entry["family_id"] for entry in families]
     assert len(family_ids) == len(set(family_ids))
 
     rows = []
     for entry in families:
         assert entry["reference_id"] in references
-        assert 2 <= entry["rank"] <= 7
+        assert 2 <= entry["rank"] <= 5
         assert entry["invertible_group_order"] >= 1
         assert entry["fusion_multiplicity_max"] >= 1
         row = dict(entry)
@@ -61,19 +61,18 @@ def build_matrix(sources_path: Path, families_path: Path) -> dict[str, Any]:
 
     eligible = [row for row in rows if row["character_twist_eligible"]]
     gaps = [
-        "Rank 5 is classified by fusion rules, but the exact number of modular ribbon structures is unknown.",
-        "Ranks 6 and 7 are classified here only in the weakly integral sector; general classifications remain open.",
-        "The rank-at-most-4 theorem is complete for unitary MTCs; this v1 matrix does not enumerate every nonunitary ribbon realization.",
-        "Known standard quantum-group examples outside the proved exhaustive scope are candidates, not classification rows.",
+        "The rank-2-through-5 premodular braided-equivalence classification is complete, but braided classes can admit multiple spherical or ribbon refinements.",
+        "This matrix does not claim a ribbon-equivalence exhaustion until every braided row has a spherical-structure audit.",
+        "The 2016 rank-5 modular theorem is a Grothendieck-level classification; the 2024 source supplies the stronger braided-equivalence refinement used here.",
     ]
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     dirty = bool(_git("status", "--porcelain"))
     return {
         "schema": "twisted-yetter.low-rank-mtc-classification-matrix.v1",
-        "status": "CLASSIFICATION_STRENGTH_MATRIX_WITH_EXPLICIT_OPEN_GAPS",
+        "status": "RANK2_TO_5_BRAIDED_CLASSIFICATION_MATRIX_WITH_RIBBON_REFINEMENT_GAP",
         "generated_at_utc": now,
         "mathematical_status": "LITERATURE_BACKED_SCOPE_MAP_NOT_A_NEW_CLASSIFICATION_THEOREM",
-        "top_notice": "Do not interpret this artifact as an exhaustive list of all rank-2-through-7 MTC ribbon equivalence classes.",
+        "top_notice": "Complete through rank 5 only up to braided equivalence; do not interpret the rows as an exhaustive ribbon-equivalence list until spherical refinements are audited.",
         "coverage_by_rank": coverage,
         "open_gaps": gaps,
         "families": rows,
