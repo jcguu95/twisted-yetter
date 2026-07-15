@@ -1,0 +1,82 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-15-rank3-z3-ribbon-realization-partial-progress",
+  "title": "Rank 3 cyclic Z3 row resolved as first formal low-rank ribbon realization progress",
+  "created_at": "2026-07-15T23:05:09Z",
+  "created_by": "actor:codex",
+  "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+  "top_notice": "The rank3-cyclic-z3 family row now has two exact pointed Z3 ribbon realization snapshots that pass the formal evidence validator. The low-rank ribbon catalog remains partial: 1 row resolved, 13 rows blocked, and formal scan-plan generation is still disabled.",
+  "scope": {
+    "ranks": [2, 3, 4, 5],
+    "resolved_family_ids": ["rank3-cyclic-z3"],
+    "resolved_family_row_count": 1,
+    "blocked_family_row_count": 13,
+    "formal_scan_plan_allowed": false,
+    "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-ribbon-realization-catalog-v2",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v2.json",
+      "commit": "f127948035ccc65e56359d9432a91c8e441cdc48",
+      "git_blob": "05bad0da3850c26063376809714e100eef54e5c7",
+      "sha256": "5fbf96f2902da1c248eaaea48b86fbd03f541d485b6e9bb5d200232ca917e26e",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    {
+      "artifact_id": "rank3-cyclic-z3-plus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-plus-snapshot-v1.json",
+      "commit": "f127948035ccc65e56359d9432a91c8e441cdc48",
+      "git_blob": "02806ba10f4b93b23325f6d1dc80953d6251edda",
+      "sha256": "aff5e8a17fd0c90ad598550295be1bbb68059b2b2ea76c15e00459cbd6223b23",
+      "content_hash": "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "rank3-cyclic-z3-minus-snapshot-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-minus-snapshot-v1.json",
+      "commit": "f127948035ccc65e56359d9432a91c8e441cdc48",
+      "git_blob": "84c762d04391c623831fec3e8896f2887183cb17",
+      "sha256": "95838621391959e3fe5c0ea2db60b931861b683f971ff66928cb065e22c09cfe",
+      "content_hash": "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af",
+      "status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "artifact_id": "formal-low-rank-scan-readiness-v2",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v2.json",
+      "commit": "f127948035ccc65e56359d9432a91c8e441cdc48",
+      "git_blob": "5c3a162a8f51e537aee17b3849f3e473c14a4331",
+      "sha256": "45220fd70fd5fcd028abb3677fb746e7bbd9f3578bfd234c9bafc83d2de2c284",
+      "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+    },
+    {
+      "artifact_id": "foundation-safety-validator-v2-support",
+      "path": "src/twisted_yetter/foundation_safety.py",
+      "commit": "f127948035ccc65e56359d9432a91c8e441cdc48",
+      "git_blob": "e9b1eebfbe4ad302fa9a30518c355b54ba459361",
+      "sha256": "208360e01f0edc995c870c9682906752c30b1ffe4c6a91e97b0067fa3b14ec0c",
+      "status": "PARTIAL_CATALOG_VALIDATOR_SUPPORT"
+    }
+  ],
+  "validated_behaviors": [
+    "The two rank3-cyclic-z3 snapshots pass validate_formal_evidence.",
+    "The v2 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+    "The v2 readiness artifact keeps scan_plan_generation_allowed=false.",
+    "The rank2-cyclic-z2 row remains blocked because semion/anti-semion require nontrivial Z2 abelian cocycle data, not a fake strict pointed associator."
+  ],
+  "tests": [
+    {
+      "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+      "status": "pass",
+      "collected": 29
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not authorize any formal scan plan.",
+    "This note does not resolve rank2 semion/anti-semion or the remaining 12 non-Z3 family rows."
+  ],
+  "mathematical_status": "ONE_ROW_FORMAL_RIBBON_REALIZATION_PROGRESS_REMAINDER_BLOCKED",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}
