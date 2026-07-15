@@ -1,0 +1,24 @@
+{
+  "evidence_claims": [
+    "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier"
+  ],
+  "profile": "ctl-resource/safety-status/1",
+  "replacement": null,
+  "safe_scopes": [
+    "bounded fixed-sector Figure 21 SU(2)_2 diagnostics",
+    "exact projector-rank and fusion-path workload generation",
+    "small topology and direct-versus-oracle controls",
+    "ranked calibration runs with explicit timeout and resume metadata"
+  ],
+  "status": "active",
+  "target_selector": {
+    "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+  },
+  "top_notice": "Active experimental runner with a severe hard-sector scaling barrier: sector 95378 has projector rank 8192 and active vacuum fusion dimension 2^27. Do not launch a full-state or full path-sharded evaluation without a new complexity calibration or a materially different algorithm.",
+  "unsafe_scopes": [
+    "claiming the Figure 21 draft transcription is proved identical to the source figure",
+    "claiming a completed Figure 21 invariant from the hard-sector calibration",
+    "launching sector 95378 with the preserved full-state backend as an unbounded job",
+    "treating the 64 worker-hour calibration floor as a theorem about every possible evaluator"
+  ]
+}

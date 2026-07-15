@@ -7332,6 +7332,112 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
+      "logical_id": "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+      "payload": {
+        "artifacts": {
+          "complexity_certificate": {
+            "git_blob": "42c210cfe97e9b201080d02b39743c62b20bc340",
+            "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-sector95378-complexity-certificate-v1.json",
+            "sha256": "39869ca4f3d46ed13d8d2cf750730d14ecaf14acd0223010890b6558f9161a61"
+          },
+          "runtime_barrier": {
+            "git_blob": "a519cbaabdff3244ea045158253c07fcc48c136b",
+            "path": "experiments/results/akbulut-yasui/figure21-right-su2-2-sector95378-runtime-barrier-v1.json",
+            "sha256": "6c4bb2cc92216b2f2ffc57b6231a7c17cfb88711c0bdc945c934139ed734a292"
+          }
+        },
+        "category": {
+          "category_id": "su2-k2",
+          "subject": "subject:twisted-yetter:category-family:su2-k"
+        },
+        "created_at": "2026-07-15T05:18:06Z",
+        "created_by": "actor:codex",
+        "exact_result": {
+          "active_label_multiplicities": {
+            "1": 56,
+            "2": 2
+          },
+          "active_root_counts": {
+            "0": 134217728,
+            "2": 134217728
+          },
+          "active_vacuum_fusion_dimension": 134217728,
+          "active_vacuum_fusion_dimension_power_of_two": 27,
+          "method": "Exact integer fusion-rule dynamic programming; no enumeration of 2^27 states.",
+          "projector_factor_count": 29,
+          "projector_label_multiplicities": {
+            "1": 28,
+            "2": 1
+          },
+          "projector_vacuum_rank": 8192,
+          "projector_vacuum_rank_power_of_two": 13,
+          "sector_id": 95378
+        },
+        "generator_code": {
+          "complexity_certificate": {
+            "commit": "ae238c03e947edf239a52a43437baa51bd10cc86",
+            "git_blob": "422fbbdfa4cfb7a1f98cb00b82c20d57e7141eb9",
+            "path": "experiments/sage/certify_figure21_su2_2_sector95378_complexity.sage.py",
+            "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" PYTHONPATH=. sage --python experiments/sage/certify_figure21_su2_2_sector95378_complexity.sage.py --write",
+            "sha256": "2a1c781693ebed3d3a677f60943532368b43b525599f157f215e61afe1835548"
+          },
+          "runtime_summary": {
+            "commit": "83ff13c22247b60e4e1147b375c50f95abb17081",
+            "git_blob": "89fd97f3334e013d4f66254807e632a8659a9474",
+            "path": "experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py",
+            "reproduce_command": "PYTHONPATH=. uv run python experiments/scripts/summarize_figure21_su2_2_hard_sector_evidence.py --write",
+            "sha256": "3a44b6ba712f72db8396ae49f10d6d51ac96bc761be06fe325e0d473f7ebf9b2"
+          }
+        },
+        "mathematical_status": {
+          "fusion_dimension": "ESTABLISHED_EXACT_INTEGER_COMPUTATION",
+          "runtime_barrier": "EMPIRICAL_CURRENT_BACKEND_LIMIT_NOT_COMPLEXITY_THEOREM"
+        },
+        "note_id": "objective-note-2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+        "presentation": {
+          "status": "DRAFT_TRANSCRIPTION_NOT_PROVED_IDENTICAL_TO_SOURCE_FIGURE",
+          "subject": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+        },
+        "resource": {
+          "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
+        },
+        "runtime_result": {
+          "frontier_probe": "16 Hetzner workers: 3 sectors passed and 13 timed out at about 1800 seconds; sector 95378 timed out at 1806.96 seconds.",
+          "historical_code_snapshot_sha256": "efc18beddbd67ad09751e5fe75ccd914376295296d943351c07fba63de370a00",
+          "ideal_wall_hour_floor_at_16_workers": "4.0026146417",
+          "path_shard_calibration": "Sector 95378 was divided into 128 shards of 64 projector paths; all 16 sampled shards timed out.",
+          "worker_hour_floor": "64.0418342672"
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "source_checkpoint": {
+          "git_commit": "fe27f243414a0ae1f4b18a80cb48c16d4ae4a1da",
+          "git_dirty": false
+        },
+        "status": "ESTABLISHED_EXACT_DIMENSION_AND_CURRENT_BACKEND_BARRIER",
+        "subjects": [
+          "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+          "subject:twisted-yetter:category-family:su2-k"
+        ],
+        "title": "Figure 21 SU(2)_2 sector 95378 complexity and runtime barrier",
+        "top_notice": "The exact 2^27 fusion dimension and the current evaluator's severe runtime barrier are established. This is not a completed Figure 21 invariant, not a proof of the draft transcription, and not a lower bound for every possible algorithm."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
+        "created_at": "2026-07-15T05:18:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -7409,6 +7515,34 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-handle:figure21-framing-verifier",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
+      "logical_id": "claim:resource-handle:figure21-special-disk-side-projector-runner",
+      "payload": {
+        "kind": "script",
+        "lookup_keys": [
+          "experiments/sage/figure21_su2_2_direct_side_projector.py",
+          "figure21_su2_2_direct_side_projector.py",
+          "figure21-special-disk-side-projector-runner"
+        ],
+        "owner_project": "project:twisted-yetter",
+        "profile": "ctl-resource/handle/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
+        "created_at": "2026-07-15T05:18:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-handle:figure21-special-disk-side-projector-runner",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -7931,6 +8065,47 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:0f046f5c698386ca4d33b0bdd263fa1713d4abebd4a941b9e9e58b82bdbd45c3",
+      "logical_id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
+      "payload": {
+        "evidence_claims": [
+          "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier"
+        ],
+        "profile": "ctl-resource/safety-status/1",
+        "replacement": null,
+        "safe_scopes": [
+          "bounded fixed-sector Figure 21 SU(2)_2 diagnostics",
+          "exact projector-rank and fusion-path workload generation",
+          "small topology and direct-versus-oracle controls",
+          "ranked calibration runs with explicit timeout and resume metadata"
+        ],
+        "status": "active",
+        "target_selector": {
+          "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+        },
+        "top_notice": "Active experimental runner with a severe hard-sector scaling barrier: sector 95378 has projector rank 8192 and active vacuum fusion dimension 2^27. Do not launch a full-state or full path-sharded evaluation without a new complexity calibration or a materially different algorithm.",
+        "unsafe_scopes": [
+          "claiming the Figure 21 draft transcription is proved identical to the source figure",
+          "claiming a completed Figure 21 invariant from the hard-sector calibration",
+          "launching sector 95378 with the preserved full-state backend as an unbounded job",
+          "treating the 64 worker-hour calibration floor as a theorem about every possible evaluator"
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:0f046f5c698386ca4d33b0bdd263fa1713d4abebd4a941b9e9e58b82bdbd45c3",
+        "created_at": "2026-07-15T05:18:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -8471,6 +8646,34 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:resource-snapshot:figure21-framing-verifier-5ab5c75",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9",
+      "logical_id": "claim:resource-snapshot:figure21-special-disk-side-projector-runner-6ad6ed65",
+      "payload": {
+        "capture_note": "Clean committed snapshot of the Figure 21 exact-side projector runner. The historical Hetzner run used the separately preserved deployment snapshot named in the runtime-barrier artifact.",
+        "captured_at": "2026-07-15T05:18:06Z",
+        "commit": "fe27f243414a0ae1f4b18a80cb48c16d4ae4a1da",
+        "git_blob": "349ad9ddf707e7797464d1a558b035a149866c5a",
+        "path": "experiments/sage/figure21_su2_2_direct_side_projector.py",
+        "profile": "ctl-resource/snapshot/1",
+        "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
+        "sha256": "6ad6ed654e30f3ad8f8a53120a6a3b11c0fb0c3490787606f0e2a20b10461cfd",
+        "snapshot_id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9",
+        "created_at": "2026-07-15T05:18:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:resource-snapshot:figure21-special-disk-side-projector-runner-6ad6ed65",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -9535,6 +9738,84 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-11-visual-dotted-caveat:corrects:yasui-correspondence-triage",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
+      "logical_id": "subject-edge:ty:2026-07-13-e2-su2-2-runtime-floor:uses:su2-k",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-13-e2-su2-2-runtime-floor:uses:su2-k",
+        "explanation": "The E(2) optimistic runtime-floor experiment specializes the SU(2)_k category family to k=2.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor",
+        "status": "active",
+        "target": "subject:twisted-yetter:category-family:su2-k"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
+        "created_at": "2026-07-15T05:38:42Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-13-e2-su2-2-runtime-floor:uses:su2-k",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
+      "logical_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:about:figure21-e3prime",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:about:figure21-e3prime",
+        "explanation": "The hard-sector complexity and runtime barrier were measured on the draft transcription of Akbulut-Yasui 2008 Figure 21 right.",
+        "role": "about",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+        "status": "active",
+        "target": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
+        "created_at": "2026-07-15T05:38:42Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:about:figure21-e3prime",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:ddb9ff855c744ea1ea08f0c709372d43a6ccf6bed447f4e81ffb88e42adcd6cd",
+      "logical_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:uses:su2-k",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:uses:su2-k",
+        "explanation": "The exact fusion-dimension certificate and runtime calibration specialize the SU(2)_k category family to k=2.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier",
+        "status": "active",
+        "target": "subject:twisted-yetter:category-family:su2-k"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ddb9ff855c744ea1ea08f0c709372d43a6ccf6bed447f4e81ffb88e42adcd6cd",
+        "created_at": "2026-07-15T05:38:42Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-14-figure21-hard-sector:uses:su2-k",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -12184,7 +12465,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
+      "cid": "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
       "logical_id": "subject:twisted-yetter:category-family:su2-k",
       "payload": {
         "aliases": [
@@ -12194,9 +12475,6 @@
         "display_name": "SU(2)_k modular tensor category family",
         "parent_subject_ids": [
           "subject:twisted-yetter:lie-group:su2"
-        ],
-        "related_experiments": [
-          "claim:lab-note:2026-07-13-e2-su2-2-optimistic-runtime-floor"
         ],
         "schema": "twisted-yetter/subject-definition/0",
         "scope_note": "The quantum group / WZW modular tensor category family indexed by the level k. This is deliberately separate from the Lie group SU(2).",
@@ -12210,14 +12488,14 @@
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
-        "created_at": "2026-07-13T02:00:41Z",
+        "cid": "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
+        "created_at": "2026-07-15T05:38:42Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:category-family:su2-k",
         "parents": [
-          "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b"
+          "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6"
         ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -13974,7 +14252,7 @@
       "revision_kind": "subject-definition"
     },
     {
-      "cid": "ctlobj-sha256:f2d9436e7b76429024c8ed8d7dcdec9a3c6646a76075e84d1e24cb5a06658070",
+      "cid": "ctlobj-sha256:46107f722b05d9e1b7f69557bcce58d21ce89fb962fd50b2b3654464a15b22f5",
       "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
       "payload": {
         "aliases": [
@@ -14008,14 +14286,14 @@
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:f2d9436e7b76429024c8ed8d7dcdec9a3c6646a76075e84d1e24cb5a06658070",
-        "created_at": "2026-07-11T16:24:00Z",
+        "cid": "ctlobj-sha256:46107f722b05d9e1b7f69557bcce58d21ce89fb962fd50b2b3654464a15b22f5",
+        "created_at": "2026-07-15T05:38:42Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
         "parents": [
-          "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3"
+          "ctlobj-sha256:8eb27ceda7ac23eb9bedfd24bb3aa8a3372c2f0d03885130fc126e6b5ed33cca"
         ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -14441,7 +14719,7 @@
       "revision_kind": "policy-set"
     }
   ],
-  "generated_at": "2026-07-14T02:28:29Z",
+  "generated_at": "2026-07-15T05:43:23Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -14451,6 +14729,9 @@
       ],
       "2ababb0b371210ff6226a236aaf8c028cdca525f": [
         "snapshot:twisted-yetter:script:morse-dsl@sha256-cdbd4c4c"
+      ],
+      "349ad9ddf707e7797464d1a558b035a149866c5a": [
+        "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
       ],
       "425fe5761a85711ab5d48d40091adfbc3566aaec": [
         "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
@@ -14538,6 +14819,9 @@
       "experiments/results/yasui/figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json": [
         "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge"
       ],
+      "experiments/sage/figure21_su2_2_direct_side_projector.py": [
+        "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+      ],
       "experiments/sage/figure21_su2_2_full_evaluation.sage.py": [
         "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
       ],
@@ -14589,11 +14873,17 @@
       "figure21-right-su2-2-untwisted-framed-evaluation-v1.json": [
         "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
       ],
+      "figure21-special-disk-side-projector-runner": [
+        "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+      ],
       "figure21-su2-2-framed-result": [
         "resource:twisted-yetter:artifact:figure21-su2-2-framed-result"
       ],
       "figure21-su2-2-full-evaluator": [
         "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
+      ],
+      "figure21_su2_2_direct_side_projector.py": [
+        "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
       ],
       "figure21_su2_2_full_evaluation.sage.py": [
         "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
@@ -14685,6 +14975,9 @@
       "resource:twisted-yetter:script:figure21-framing-verifier": [
         "resource:twisted-yetter:script:figure21-framing-verifier"
       ],
+      "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner": [
+        "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+      ],
       "resource:twisted-yetter:script:figure21-su2-2-full-evaluator": [
         "resource:twisted-yetter:script:figure21-su2-2-full-evaluator"
       ],
@@ -14765,6 +15058,9 @@
       "experiments/results/yasui/figure2-cp2-a1-r1-su2-2-singleton-braid-bridge-v1.json": [
         "snapshot:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge@sha256-e3e6e045"
       ],
+      "experiments/sage/figure21_su2_2_direct_side_projector.py": [
+        "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
+      ],
       "experiments/sage/figure21_su2_2_full_evaluation.sage.py": [
         "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22",
         "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
@@ -14828,6 +15124,9 @@
       ],
       "69670d4ce2ca1990aa94dfeb0318982290e0f5df1ffd53dadf5ec2def6dc65f2": [
         "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c"
+      ],
+      "6ad6ed654e30f3ad8f8a53120a6a3b11c0fb0c3490787606f0e2a20b10461cfd": [
+        "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
       ],
       "8193f5807994c32afc1261d035f46ce3246cfa8348d6682d022da366ff4f978c": [
         "snapshot:twisted-yetter:script:morse-category-adapters@sha256-8193f580"
@@ -15102,6 +15401,32 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-handle:figure21-framing-verifier",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner": {
+        "cid": "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
+        "logical_id": "claim:resource-handle:figure21-special-disk-side-projector-runner",
+        "payload": {
+          "kind": "script",
+          "lookup_keys": [
+            "experiments/sage/figure21_su2_2_direct_side_projector.py",
+            "figure21_su2_2_direct_side_projector.py",
+            "figure21-special-disk-side-projector-runner"
+          ],
+          "owner_project": "project:twisted-yetter",
+          "profile": "ctl-resource/handle/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
+          "created_at": "2026-07-15T05:18:06Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-handle:figure21-special-disk-side-projector-runner",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -15387,6 +15712,10 @@
         "id": "claim:resource-safety:su2k-fusion-braid-evaluator-active",
         "kind": "safety-status"
       },
+      "ctlobj-sha256:0f046f5c698386ca4d33b0bdd263fa1713d4abebd4a941b9e9e58b82bdbd45c3": {
+        "id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
+        "kind": "safety-status"
+      },
       "ctlobj-sha256:0f2ed3e38d8f2486d166d3e055900c3aac919af14eaf44f7baeb7d45438e0b67": {
         "id": "resource:twisted-yetter:script:su2k-fusion-braid-evaluator",
         "kind": "handle"
@@ -15470,6 +15799,10 @@
       "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad": {
         "id": "claim:resource-safety:figure21-su2-2-full-evaluator-189a1f8",
         "kind": "safety-status"
+      },
+      "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691": {
+        "id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
+        "kind": "handle"
       },
       "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211": {
         "id": "snapshot:twisted-yetter:script:morse-singleton-pool@sha256-ebf1c573",
@@ -15571,6 +15904,10 @@
         "id": "resource:twisted-yetter:result:yasui-figure2-su2-2-singleton-braid-bridge",
         "kind": "handle"
       },
+      "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9": {
+        "id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65",
+        "kind": "snapshot"
+      },
       "ctlobj-sha256:f4b5b22b4dfc2a2848af5ee9f94fe34214bc124e83aa8c7e41bd31dabddad4e0": {
         "id": "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-69670d4c",
         "kind": "snapshot"
@@ -15599,6 +15936,10 @@
       },
       "claim:resource-handle:figure21-framing-verifier": {
         "id": "resource:twisted-yetter:script:figure21-framing-verifier",
+        "kind": "handle"
+      },
+      "claim:resource-handle:figure21-special-disk-side-projector-runner": {
+        "id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
         "kind": "handle"
       },
       "claim:resource-handle:figure21-su2-2-framed-result": {
@@ -15673,6 +16014,10 @@
         "id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
         "kind": "safety-status"
       },
+      "claim:resource-safety:figure21-special-disk-side-projector-runner-active": {
+        "id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
+        "kind": "safety-status"
+      },
       "claim:resource-safety:figure21-su2-2-framed-result-e017bce": {
         "id": "claim:resource-safety:figure21-su2-2-framed-result-e017bce",
         "kind": "safety-status"
@@ -15731,6 +16076,10 @@
       },
       "claim:resource-snapshot:figure21-framing-verifier-5ab5c75": {
         "id": "snapshot:twisted-yetter:script:figure21-framing-verifier@sha256-c080074d",
+        "kind": "snapshot"
+      },
+      "claim:resource-snapshot:figure21-special-disk-side-projector-runner-6ad6ed65": {
+        "id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65",
         "kind": "snapshot"
       },
       "claim:resource-snapshot:figure21-su2-2-framed-result-e017bce": {
@@ -15870,6 +16219,45 @@
             "actor_id": "actor:codex"
           },
           "logical_id": "claim:resource-safety:figure21-framing-verifier-5ab5c75",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
+      {
+        "cid": "ctlobj-sha256:0f046f5c698386ca4d33b0bdd263fa1713d4abebd4a941b9e9e58b82bdbd45c3",
+        "logical_id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
+        "payload": {
+          "evidence_claims": [
+            "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier"
+          ],
+          "profile": "ctl-resource/safety-status/1",
+          "replacement": null,
+          "safe_scopes": [
+            "bounded fixed-sector Figure 21 SU(2)_2 diagnostics",
+            "exact projector-rank and fusion-path workload generation",
+            "small topology and direct-versus-oracle controls",
+            "ranked calibration runs with explicit timeout and resume metadata"
+          ],
+          "status": "active",
+          "target_selector": {
+            "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner"
+          },
+          "top_notice": "Active experimental runner with a severe hard-sector scaling barrier: sector 95378 has projector rank 8192 and active vacuum fusion dimension 2^27. Do not launch a full-state or full path-sharded evaluation without a new complexity calibration or a materially different algorithm.",
+          "unsafe_scopes": [
+            "claiming the Figure 21 draft transcription is proved identical to the source figure",
+            "claiming a completed Figure 21 invariant from the hard-sector calibration",
+            "launching sector 95378 with the preserved full-state backend as an unbounded job",
+            "treating the 64 worker-hour calibration floor as a theorem about every possible evaluator"
+          ]
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:0f046f5c698386ca4d33b0bdd263fa1713d4abebd4a941b9e9e58b82bdbd45c3",
+          "created_at": "2026-07-15T05:18:06Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-safety:figure21-special-disk-side-projector-runner-active",
           "parents": [],
           "payload_profile": "ctl-data/opaque-json/1",
           "revision_kind": "claim"
@@ -16537,6 +16925,32 @@
           "revision_kind": "claim"
         }
       },
+      "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65": {
+        "cid": "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9",
+        "logical_id": "claim:resource-snapshot:figure21-special-disk-side-projector-runner-6ad6ed65",
+        "payload": {
+          "capture_note": "Clean committed snapshot of the Figure 21 exact-side projector runner. The historical Hetzner run used the separately preserved deployment snapshot named in the runtime-barrier artifact.",
+          "captured_at": "2026-07-15T05:18:06Z",
+          "commit": "fe27f243414a0ae1f4b18a80cb48c16d4ae4a1da",
+          "git_blob": "349ad9ddf707e7797464d1a558b035a149866c5a",
+          "path": "experiments/sage/figure21_su2_2_direct_side_projector.py",
+          "profile": "ctl-resource/snapshot/1",
+          "resource_id": "resource:twisted-yetter:script:figure21-special-disk-side-projector-runner",
+          "sha256": "6ad6ed654e30f3ad8f8a53120a6a3b11c0fb0c3490787606f0e2a20b10461cfd",
+          "snapshot_id": "snapshot:twisted-yetter:script:figure21-special-disk-side-projector-runner@sha256-6ad6ed65"
+        },
+        "revision": {
+          "cid": "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9",
+          "created_at": "2026-07-15T05:18:06Z",
+          "created_by": {
+            "actor_id": "actor:codex"
+          },
+          "logical_id": "claim:resource-snapshot:figure21-special-disk-side-projector-runner-6ad6ed65",
+          "parents": [],
+          "payload_profile": "ctl-data/opaque-json/1",
+          "revision_kind": "claim"
+        }
+      },
       "snapshot:twisted-yetter:script:figure21-su2-2-full-evaluator@sha256-214b7a22": {
         "cid": "ctlobj-sha256:c12c85d144e00e5a6693d859445eb93eeb7fd07b3f10da32a005f3c4b2fac06c",
         "logical_id": "claim:resource-snapshot:figure21-su2-2-full-evaluator-30d00ff",
@@ -16839,8 +17253,8 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:94d03755c608e2fe86d5834dbce5cb1dc1b508dafe2e9c63d72589527e49da26",
+  "root_cid": "ctlobj-sha256:605df28612835bea196ec16e0a54851c4b30b412bdfd779df207c42c75059deb",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
-  "transition_cid": "ctlobj-sha256:482280a0e5328110e4063818f77846177104797ad7187180b57a5a8e8a2817ad"
+  "transition_cid": "ctlobj-sha256:5aca529dc2f8e739b4670c2dd102c6314af0cca97350c041682200b95009d026"
 }
