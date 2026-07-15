@@ -1,0 +1,211 @@
+{
+  "category_contract": "RibbonFusionCategoryV2",
+  "category_data": {
+    "basis_gauge": "Z2 pointed basis e_a tensor e_b -> e_{a+b}; omega_111=-1",
+    "category_id": "rank2-cyclic-z2-semion-minus",
+    "dimensions": {
+      "0": "1",
+      "1": "1"
+    },
+    "duals": {
+      "0": "0",
+      "1": "1"
+    },
+    "f_symbols": {
+      "all_other_normalized_omega_values": "1",
+      "associator": "omega(a,b,c)=(-1)^(a*b*c)",
+      "omega_111": "-1"
+    },
+    "family_id": "rank2-cyclic-z2",
+    "field": "Q(i)",
+    "field_embedding": {
+      "i": "sqrt(-1)",
+      "twist_1": "-i"
+    },
+    "fusion": {
+      "0*0": "0",
+      "0*1": "1",
+      "1*0": "1",
+      "1*1": "0"
+    },
+    "fusion_pairing": "unique one-dimensional pointed basis with nontrivial omega tracked",
+    "labels": [
+      "0",
+      "1"
+    ],
+    "left_coevaluation": {
+      "0": "1",
+      "1": "1"
+    },
+    "left_evaluation": {
+      "0": "1",
+      "1": "1"
+    },
+    "metric_group": "Z/2",
+    "monodromy_bicharacter": {
+      "b(1,1)": "-1"
+    },
+    "pivotal_scalars": {
+      "0": "1",
+      "1": "1"
+    },
+    "quadratic_form": "q(1)=-i",
+    "r_symbols": {
+      "R_11_to_0": "-i",
+      "all_other_channels": "1"
+    },
+    "right_coevaluation": {
+      "0": "1",
+      "1": "1"
+    },
+    "right_evaluation": {
+      "0": "1",
+      "1": "1"
+    },
+    "schema": "twisted-yetter.pointed-z2-semion-ribbon-data.v1",
+    "source_locators": [
+      {
+        "claim_used": "rank-2 cyclic Z2 pointed modular braided row count",
+        "locator": "rank tables, pages 26-33",
+        "reference_id": "ref:dong-schopieray-near-integral-2024"
+      },
+      {
+        "claim_used": "exact Z2 omega/R pentagon and hexagon checks",
+        "locator": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v5.py",
+        "reference_id": "self-contained-z2-semion-cocycle-check"
+      }
+    ],
+    "twists": {
+      "0": "1",
+      "1": "-i"
+    },
+    "unit": "0"
+  },
+  "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+  "certificates": {
+    "consumer_runtime_coherence": {
+      "basis_safety_checks": {
+        "field_embedding_q_i_recorded": "PASS",
+        "nontrivial_associator_recorded": "PASS",
+        "strict_associator_negative_control_fails": "PASS"
+      },
+      "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "certificate_kind": "consumer_runtime_coherence",
+      "checked_payload_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "content_hash": "sha256:83ca72a22c1ac32f48dc20eb1137f30ae160add86828bc368dfbfe8c441bb3e6",
+      "proof_boundary": "Runtime consumer certificate binds exact Z2 semion data.",
+      "runtime_contract": "RibbonFusionCategoryV2-compatible pointed one-dimensional fusion spaces with explicit nontrivial omega",
+      "status": "PASS"
+    },
+    "producer_exact_coherence": {
+      "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "certificate_kind": "producer_exact_coherence",
+      "checks": {
+        "left_hexagon": "PASS",
+        "monodromy_nontrivial_on_nonzero_simple": "PASS",
+        "nontrivial_associator_omega111_minus_one": "PASS",
+        "normalized_abelian_3_cocycle": "PASS",
+        "ribbon_square_unit_channel": "PASS",
+        "right_hexagon": "PASS",
+        "scan_details": {
+          "first_left_hexagon_failure": null,
+          "first_pentagon_failure": null,
+          "first_right_hexagon_failure": null,
+          "left_hexagon": "PASS",
+          "left_hexagon_failure_count": 0,
+          "pentagon": "PASS",
+          "pentagon_failure_count": 0,
+          "right_hexagon": "PASS",
+          "right_hexagon_failure_count": 0
+        },
+        "strict_associator_negative_control": {
+          "first_left_hexagon_failure": {
+            "a": 1,
+            "b": 1,
+            "c": 1,
+            "direct": "1",
+            "path": "-1"
+          },
+          "first_pentagon_failure": null,
+          "first_right_hexagon_failure": {
+            "a": 1,
+            "b": 1,
+            "c": 1,
+            "direct": "1",
+            "path": "-1"
+          },
+          "left_hexagon": "FAIL",
+          "left_hexagon_failure_count": 1,
+          "pentagon": "PASS",
+          "pentagon_failure_count": 0,
+          "right_hexagon": "FAIL",
+          "right_hexagon_failure_count": 1
+        },
+        "strict_associator_semion_hexagon_negative_control": "PASS",
+        "twist_equals_R_11": "PASS"
+      },
+      "content_hash": "sha256:ecfca782ec665a3e41fc0964015db3ee343558215a0fccbf23c4bb64ed8def94",
+      "field": "Q(i)",
+      "proof_boundary": "Exact finite Z2 pointed semion equations only; does not cover higher even-order pointed rows.",
+      "status": "PASS"
+    },
+    "ribbon_pivotal_compatibility": {
+      "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "certificate_kind": "ribbon_pivotal_compatibility",
+      "checks": {
+        "left_right_trace_agree": "PASS",
+        "monodromy_nondegenerate": "PASS",
+        "pivotal_scalar_unit": "PASS",
+        "quantum_dimensions_all_one": "PASS",
+        "ribbon_square_unit_channel": "PASS",
+        "twist_equals_R_11": "PASS"
+      },
+      "content_hash": "sha256:21e5db78467e12046dbb8befdadd950a8073c008dd846fe893deefbf2758eac8",
+      "proof_boundary": "Braided plus pivotal is accepted only with explicit omega/R/twist checks.",
+      "status": "PASS"
+    }
+  },
+  "claim_level": "formal-low-rank-category-evidence",
+  "content_hash": "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1",
+  "evidence_kind": "ribbon_realization_snapshot",
+  "explicit_non_claims": [
+    "This snapshot resolves only one rank2 cyclic Z2 semion branch.",
+    "This snapshot does not authorize a formal scan plan by itself.",
+    "This snapshot does not resolve rank4 even-order pointed rows."
+  ],
+  "family_id": "rank2-cyclic-z2",
+  "generated_at_utc": "2026-07-15T23:48:27Z",
+  "generator_script": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v5.py",
+  "git": {
+    "commit": "af419766291bbe981730a8ce958607a9fbb39845",
+    "dirty": true
+  },
+  "modular_braided_class_index": 1,
+  "mutable_alias_inputs": [],
+  "pinned_payload_hashes": {
+    "category_data": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+    "consumer_runtime_coherence": "sha256:83ca72a22c1ac32f48dc20eb1137f30ae160add86828bc368dfbfe8c441bb3e6",
+    "producer_exact_coherence": "sha256:ecfca782ec665a3e41fc0964015db3ee343558215a0fccbf23c4bb64ed8def94",
+    "ribbon_pivotal_compatibility": "sha256:21e5db78467e12046dbb8befdadd950a8073c008dd846fe893deefbf2758eac8"
+  },
+  "realization_id": "rank2-cyclic-z2-semion-minus",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_ribbon_realization_catalog_v5.py --write",
+  "schema": "twisted-yetter.ribbon-realization-snapshot.v1",
+  "source_status": "formal",
+  "status": "RESOLVED_RIBBON_REALIZATION",
+  "structural_checks": {
+    "balancing": "PASS",
+    "duality_involution": "PASS",
+    "fusion_pairing_invertible": "PASS",
+    "hexagon": "PASS",
+    "modularity": "PASS",
+    "pentagon": "PASS",
+    "r_inverse": "PASS",
+    "ribbon_pivotal_compatibility": "PASS",
+    "rigidity": "PASS"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
