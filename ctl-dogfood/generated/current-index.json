@@ -7575,6 +7575,116 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
+      "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "foundation-v2-formal-admission-policy-v1",
+            "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+            "git_blob": "46cf4125e52c15ed95be1e8ced54450505b2df0a",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json",
+            "sha256": "ce0869ca200b0f13e18818ffc1399972e6c74be16660ae0e1bd7073bca44706f",
+            "status": "ACTIVE_FAIL_CLOSED"
+          },
+          {
+            "artifact_id": "low-rank-ribbon-realization-catalog-v1",
+            "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+            "git_blob": "2a0af46f9e45098a9f79f6b3974a479f68560153",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v1.json",
+            "sha256": "b7812a8144c093a745eaf3562d711ac10346a78c7dc7ca7070f4375ddae62b52",
+            "status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+          },
+          {
+            "artifact_id": "formal-low-rank-scan-readiness-v1",
+            "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+            "git_blob": "4018150a3d2b3604fb5d50313dd8fdd1eac33bc5",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v1.json",
+            "sha256": "2d26c9f6299a6ce7bf42e5c7d2bb1ea6252d70726e65d3e80d517bf2db2b5bfe",
+            "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+          },
+          {
+            "artifact_id": "foundation-safety-validator",
+            "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+            "git_blob": "73732da416d65125558f9e5127f6c01573e782af",
+            "path": "src/twisted_yetter/foundation_safety.py",
+            "sha256": "88b8d51b14cdf050a162c1114e6ebb0e8c0d9916819eb8702ba0f5f4d123c3f6",
+            "status": "FAIL_CLOSED_VALIDATOR"
+          }
+        ],
+        "created_at": "2026-07-15T22:17:55Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a complete-no-signal result.",
+          "This note does not claim any global no-go theorem about TCY or low-rank MTCs."
+        ],
+        "mathematical_status": "SAFETY_GUARD_ESTABLISHED_CLASSIFICATION_BLOCKED_NOT_SCAN_RESULT",
+        "note_id": "objective-note-2026-07-15-foundation-safety-substrate-v1",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_family_rows": 14,
+          "formal_scan_readiness_status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG",
+          "foundation_status": "FOUNDATION_ESTABLISHED",
+          "ranks": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "resolved_family_rows": 0,
+          "ribbon_catalog_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+          "scan_plan_generation_allowed": false
+        },
+        "status": "FOUNDATION_ESTABLISHED_FORMAL_SCAN_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 15,
+            "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 8,
+            "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+            "status": "pass"
+          },
+          {
+            "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ribbon_category_v2.py",
+            "reason": "The current uv environment lacks numpy; collection raises ModuleNotFoundError before exercising this change.",
+            "status": "not_run_to_completion"
+          }
+        ],
+        "title": "Foundation v2 safety substrate activates fail-closed low-rank ribbon admission gates",
+        "top_notice": "The v1 foundation safety substrate is active as a fail-closed admission layer. It does not establish the rank 2-5 ribbon refinement catalog and does not admit any formal low-rank scan plan or no-signal result.",
+        "validated_behaviors": [
+          "Authored READY_FOR_SIGNAL_SCAN fields are rejected.",
+          "Mutable alias inputs are rejected for formal evidence.",
+          "Stale content_hash values are rejected.",
+          "Formula-preflight source_status cannot masquerade as formal evidence.",
+          "Ribbon snapshots require producer, consumer, and ribbon-pivotal compatibility certificates.",
+          "Scan aggregates require a complete denominator certificate.",
+          "The current rank 2-5 ribbon catalog cannot generate a scan plan while all family rows are blocked."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
+        "created_at": "2026-07-15T22:17:55Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
       "logical_id": "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope",
       "payload": {
@@ -15927,6 +16037,7 @@
       "claim:lab-note:2026-07-14-figure21-su2-2-framing-recovery": "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
       "claim:lab-note:2026-07-14-figure21-su2-2-hard-sector-complexity-barrier": "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
       "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
+      "claim:lab-note:2026-07-15-foundation-safety-substrate-v1": "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
       "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
@@ -16311,6 +16422,9 @@
       "claim:lab-note:2026-07-15-figure21-black-cancel-projection-search": [
         "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
         "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc"
+      ],
+      "claim:lab-note:2026-07-15-foundation-safety-substrate-v1": [
+        "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a"
       ],
       "claim:lab-note:2026-07-15-low-rank-mtc-classification-scope": [
         "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446"
@@ -17066,6 +17180,7 @@
         "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5",
         "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
         "ctlobj-sha256:03572920fa6cb10bb575e0a5792d5d103c18f1ed406ff08eedc28d4ee4822fdc",
+        "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
         "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
         "ctlobj-sha256:053e1f0a87fb5a685d5da283e6d58072be3bba48191c60bcaa890b85dca441fc",
         "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
@@ -17419,6 +17534,7 @@
         "ctlobj-sha256:01422d62d62b354c1e75e6cc43a5666c2054e7a1e276b032e88586e02abc2bcc",
         "ctlobj-sha256:020d25a9d41959f6ba9e3e1055707df795a9f6ae6bb5d2a4cc4ea6ac82e6314f",
         "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5",
+        "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
         "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
         "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9",
         "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
@@ -20844,6 +20960,26 @@
           "parent_root_cid": "ctlobj-sha256:45f6f596e9b1f51a3984e50af796d41e71def4e965b2ad0938b0bd70d9a62402",
           "path": "manifests/subject-edge-2026-07-07-tham-2108-13467-supports-dual-kirby-convention.json",
           "payload_file": "ctl-dogfood/subject-layer/edges/tham-2108-13467-supports-dual-kirby-convention.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:f144cb186456a5a84f1017797df0c692bb590813dd9a8e71064c821fb75d9e59",
+          "generated_at": "2026-07-15T22:17:55Z",
+          "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+          "path": "manifests/lab-note-2026-07-15-foundation-safety-substrate-v1.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-foundation-safety-substrate-v1.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -29270,6 +29406,23 @@
           "parent_root_cid": "ctlobj-sha256:8bf0f740fb37720da07c8dbdf762645da74406aade2ec053e82cde2c96d1d288",
           "path": "manifests/lab-note-2026-07-11-yasui-visual-dotted-caveat.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-11-yasui-visual-dotted-caveat.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:f144cb186456a5a84f1017797df0c692bb590813dd9a8e71064c821fb75d9e59",
+          "generated_at": "2026-07-15T22:17:55Z",
+          "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+          "path": "manifests/lab-note-2026-07-15-foundation-safety-substrate-v1.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-15-foundation-safety-substrate-v1.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -46954,6 +47107,36 @@
         },
         "word_count": 27
       },
+      "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
+        "created_at": "2026-07-15T22:17:55Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1247,
+        "gist": "The v1 foundation safety substrate is active as a fail-closed admission layer. It does not establish the rank 2-5 ribbon refinement catalog and does not admit any formal low-rank scan plan or no-signal result.",
+        "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"foundation-v2-formal-admission-policy-v1\",\"commit\":\"40235ea24d892fc94fe7deeff2ddd712e56a5bed\",\"git_blob\":\"46cf4125e52c15ed95be1e8ced54450505b2df0a\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json\",\"sha256\":\"ce0869ca200b0f13e18818ffc1399972e6c74be16660ae0e1bd7073bca44706f\",\"status\":\"ACTIVE_FAIL_CLOSED\"},{\"artifact_id\":\"low-rank-ribbon-realization-catalog-v1\",\"commit\":\"40235ea24d892fc94fe7deeff2ddd712e56a5bed\",\"git_blob\":\"2a0af46f9e45098a9f79f6b3974a479f68560153\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v1.json\",\"sha256\":\"b7812a8144c093a745eaf3562d711ac10346a78c7dc7ca7070f4375ddae62b52\",\"status\":\"BLOCKED_RIBBON_REFINEMENT_INCOMPLETE\"},{\"artifact_id\":\"formal-low-rank-scan-readiness-v1\",\"commit\":\"40235ea24d892fc94fe7deeff2ddd712e56a5bed\",\"git_blob\":\"4018150a3d2b3604fb5d50313dd8fdd1eac33bc5\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v1.json\",\"sha256\":\"2d26c9f6299a6ce7bf42e5c7d2bb1ea6252d70726e65d3e80d517bf2db2b5bfe\",\"status\":\"BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG\"},{\"artifact_id\":\"foundation-safety-validator\",\"commit\":\"40235ea24d892fc94fe7deeff2ddd712e56a5bed\",\"git_blob\":\"73732da416d65125558f9e5127f6c01573e782af\",\"path\":\"src/twisted_yetter/foundation_safety.py\",\"sha256\":\"88b8d51b14cdf050a162c1114e6ebb0e8c0d9916819eb8702ba0f5f4d123c3f6\",\"status\":\"FAIL_CLOSED_VALIDATOR\"}],\"created_at\":\"2026-07-15T22:17:55Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a complete-no-signal result.\",\"This note does not claim any global no-go theorem about TCY or low-rank MTCs.\"],\"mathematical_status\":\"SAFETY_GUARD_ESTABLISHED_CLASSIFICATION_BLOCKED_NOT_SCAN_RESULT\",\"note_id\":\"objective-note-2026-07-15-foundation-safety-substrate-v1\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_family_rows\":14,\"formal_scan_readiness_status\":\"BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG\",\"foundation_status\":\"FOUNDATION_ESTABLISHED\",\"ranks\":[2,3,4,5],\"resolved_family_rows\":0,\"ribbon_catalog_status\":\"BLOCKED_RIBBON_REFINEMENT_INCOMPLETE\",\"scan_plan_generation_allowed\":false},\"status\":\"FOUNDATION_ESTABLISHED_FORMAL_SCAN_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":15,\"command\":\"UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"},{\"collected\":8,\"command\":\"UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py\",\"status\":\"pass\"},{\"command\":\"UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ribbon_category_v2.py\",\"reason\":\"The current uv environment lacks numpy; collection raises ModuleNotFoundError before exercising this change.\",\"status\":\"not_run_to_completion\"}],\"title\":\"Foundation v2 safety substrate activates fail-closed low-rank ribbon admission gates\",\"top_notice\":\"The v1 foundation safety substrate is active as a fail-closed admission layer. It does not establish the rank 2-5 ribbon refinement catalog and does not admit any formal low-rank scan plan or no-signal result.\",\"validated_behaviors\":[\"Authored READY_FOR_SIGNAL_SCAN fields are rejected.\",\"Mutable alias inputs are rejected for formal evidence.\",\"Stale content_hash values are rejected.\",\"Formula-preflight source_status cannot masquerade as formal evidence.\",\"Ribbon snapshots require producer, consumer, and ribbon-pivotal compatibility certificates.\",\"Scan aggregates require a complete denominator certificate.\",\"The current rank 2-5 ribbon catalog cannot generate a scan plan while all family rows are blocked.\"]}",
+        "title": "Foundation v2 safety substrate activates fail-closed low-rank ribbon admission gates",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 3852,
+          "base_estimate": 1084,
+          "estimated_tokens": 1247,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 163,
+          "serialized_character_count": 3852,
+          "unicode_scalar_count": 3852,
+          "utf8_bytes": 3852
+        },
+        "word_count": 150
+      },
       "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38": {
         "active_state": "active",
         "cid": "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
@@ -58366,7 +58549,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-15T18:19:27Z",
+  "generated_at": "2026-07-15T22:21:02Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -60900,17 +61083,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:ad7997043dfb7ba103722b7375acff94cb8d6c198dac9bebbe019c4b81ed22e4",
+  "root_cid": "ctlobj-sha256:f144cb186456a5a84f1017797df0c692bb590813dd9a8e71064c821fb75d9e59",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 58332,
+    "build_ms": 55536,
     "context_source": "current-context-replay",
-    "current_context_ms": 54514,
-    "discovery_index_ms": 3711,
+    "current_context_ms": 51765,
+    "discovery_index_ms": 3664,
     "payload_summaries_ms": 34,
-    "resource_index_ms": 34,
-    "write_ms": 39
+    "resource_index_ms": 33,
+    "write_ms": 38
   },
-  "transition_cid": "ctlobj-sha256:73186c7725c7ff59772ca186c32e3e10ff5d4f6a9b8f28f1d1ea2f09c4359e9f"
+  "transition_cid": "ctlobj-sha256:1d52b7857b9aea592e812b01f2580a223962b375099d66eae61f6e1927d477f2"
 }

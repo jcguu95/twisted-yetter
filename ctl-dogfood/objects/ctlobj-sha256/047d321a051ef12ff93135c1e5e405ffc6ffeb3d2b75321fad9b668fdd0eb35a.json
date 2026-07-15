@@ -1,0 +1,106 @@
+{
+  "created_at": "2026-07-15T22:17:55Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-15-foundation-safety-substrate-v1",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "foundation-v2-formal-admission-policy-v1",
+        "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+        "git_blob": "46cf4125e52c15ed95be1e8ced54450505b2df0a",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json",
+        "sha256": "ce0869ca200b0f13e18818ffc1399972e6c74be16660ae0e1bd7073bca44706f",
+        "status": "ACTIVE_FAIL_CLOSED"
+      },
+      {
+        "artifact_id": "low-rank-ribbon-realization-catalog-v1",
+        "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+        "git_blob": "2a0af46f9e45098a9f79f6b3974a479f68560153",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v1.json",
+        "sha256": "b7812a8144c093a745eaf3562d711ac10346a78c7dc7ca7070f4375ddae62b52",
+        "status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+      },
+      {
+        "artifact_id": "formal-low-rank-scan-readiness-v1",
+        "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+        "git_blob": "4018150a3d2b3604fb5d50313dd8fdd1eac33bc5",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v1.json",
+        "sha256": "2d26c9f6299a6ce7bf42e5c7d2bb1ea6252d70726e65d3e80d517bf2db2b5bfe",
+        "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+      },
+      {
+        "artifact_id": "foundation-safety-validator",
+        "commit": "40235ea24d892fc94fe7deeff2ddd712e56a5bed",
+        "git_blob": "73732da416d65125558f9e5127f6c01573e782af",
+        "path": "src/twisted_yetter/foundation_safety.py",
+        "sha256": "88b8d51b14cdf050a162c1114e6ebb0e8c0d9916819eb8702ba0f5f4d123c3f6",
+        "status": "FAIL_CLOSED_VALIDATOR"
+      }
+    ],
+    "created_at": "2026-07-15T22:17:55Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim a complete-no-signal result.",
+      "This note does not claim any global no-go theorem about TCY or low-rank MTCs."
+    ],
+    "mathematical_status": "SAFETY_GUARD_ESTABLISHED_CLASSIFICATION_BLOCKED_NOT_SCAN_RESULT",
+    "note_id": "objective-note-2026-07-15-foundation-safety-substrate-v1",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_family_rows": 14,
+      "formal_scan_readiness_status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG",
+      "foundation_status": "FOUNDATION_ESTABLISHED",
+      "ranks": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "resolved_family_rows": 0,
+      "ribbon_catalog_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "scan_plan_generation_allowed": false
+    },
+    "status": "FOUNDATION_ESTABLISHED_FORMAL_SCAN_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 15,
+        "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+        "status": "pass"
+      },
+      {
+        "collected": 8,
+        "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+        "status": "pass"
+      },
+      {
+        "command": "UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ribbon_category_v2.py",
+        "reason": "The current uv environment lacks numpy; collection raises ModuleNotFoundError before exercising this change.",
+        "status": "not_run_to_completion"
+      }
+    ],
+    "title": "Foundation v2 safety substrate activates fail-closed low-rank ribbon admission gates",
+    "top_notice": "The v1 foundation safety substrate is active as a fail-closed admission layer. It does not establish the rank 2-5 ribbon refinement catalog and does not admit any formal low-rank scan plan or no-signal result.",
+    "validated_behaviors": [
+      "Authored READY_FOR_SIGNAL_SCAN fields are rejected.",
+      "Mutable alias inputs are rejected for formal evidence.",
+      "Stale content_hash values are rejected.",
+      "Formula-preflight source_status cannot masquerade as formal evidence.",
+      "Ribbon snapshots require producer, consumer, and ribbon-pivotal compatibility certificates.",
+      "Scan aggregates require a complete denominator certificate.",
+      "The current rank 2-5 ribbon catalog cannot generate a scan plan while all family rows are blocked."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
