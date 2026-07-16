@@ -1,0 +1,98 @@
+{
+  "created_at": "2026-07-16T01:13:22Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-ribbon-realization-catalog-v9",
+        "commit": "35218206a502b6790721fba11a1bfa834365fb46",
+        "git_blob": "f7598c27156c26196d7152d85a97a333ca1e277e",
+        "new_z2xz2_snapshot_count": 5,
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v9.json",
+        "sha256": "76f414ee37880fd89d72acceb4d327469d7b5aff28d3d8e48ef228f9bf6c9235",
+        "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+      },
+      {
+        "artifact_id": "formal-low-rank-scan-readiness-v9",
+        "commit": "35218206a502b6790721fba11a1bfa834365fb46",
+        "git_blob": "efd048f21c69ef603d57af4191e415f47b326303",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v9.json",
+        "sha256": "651ea6eda7599b9b3c2b63c4fc7c8e4b474095aa6f711d96c2320e5fe58ae2d7",
+        "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+      }
+    ],
+    "created_at": "2026-07-16T01:13:22Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not authorize any formal scan plan.",
+      "This note does not resolve Ising, SU(2), PSU, or PSU(3) rows.",
+      "This note does not publish a final ribbon denominator."
+    ],
+    "mathematical_status": "EIGHT_ROWS_FORMAL_RIBBON_PROGRESS_SIX_ROWS_REMAIN_BLOCKED",
+    "note_id": "objective-note-2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_family_ids": [
+        "rank3-ising",
+        "rank3-psu2-5",
+        "rank4-psu2-7",
+        "rank5-su2-4",
+        "rank5-psu2-9",
+        "rank5-psu3-4"
+      ],
+      "blocked_family_row_count": 6,
+      "formal_scan_plan_allowed": false,
+      "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY",
+      "ranks": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "resolved_family_ids": [
+        "rank2-cyclic-z2",
+        "rank2-fibonacci-yang-lee",
+        "rank3-cyclic-z3",
+        "rank4-pointed-z4",
+        "rank4-pointed-z2xz2",
+        "rank4-semion-times-fibonacci",
+        "rank4-fibxfib",
+        "rank5-su5-1"
+      ],
+      "resolved_family_row_count": 8
+    },
+    "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 68,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Rank 4 pointed Z2xZ2 row resolved as partial low-rank ribbon progress",
+    "top_notice": "The rank4-pointed-z2xz2 family row now has five hash-bound ribbon realization snapshots, one for each GL(2,2) orbit of nondegenerate quadratic forms on Z/2 x Z/2. The low-rank ribbon catalog remains partial: 8 rows resolved, 6 rows blocked, and formal scan-plan generation is still disabled.",
+    "validated_behaviors": [
+      "The five rank4 pointed Z2xZ2 snapshots pass validate_formal_evidence.",
+      "The builder independently enumerates 16 nondegenerate quadratic forms on Z/2 x Z/2 and five GL(2,2) orbits, matching the row denominator without copying the rank-4 braided total.",
+      "Each snapshot records an explicit normalized abelian 3-cocycle table, R-symbol table, twist table, pivotal scalars, evaluation/coevaluation data, basis/gauge, and Q(i) field embedding.",
+      "Exact mod-4 linear solving plus exhaustive scans check pentagon, both hexagon equations, R_aa=q(a), monodromy agreement with q-bilinearization, monodromy nondegeneracy, and ribbon/pivotal compatibility.",
+      "A strict-associator-with-same-R negative control satisfies pentagon but fails both hexagon checks for each selected representative.",
+      "The v9 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+      "The v9 readiness artifact keeps scan_plan_generation_allowed=false."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
