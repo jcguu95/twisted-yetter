@@ -1,0 +1,89 @@
+{
+  "actual_case_count": 0,
+  "admission_validator_route": {
+    "formal_scan_aggregate_candidate": null,
+    "reason": "No scan aggregate payload is emitted when scan case results and denominator certificate are absent.",
+    "result": "NOT_RUN_NO_AGGREGATE_CANDIDATE",
+    "validator": "twisted_yetter.foundation_safety.validate_formal_evidence"
+  },
+  "attempt_id": "formal-low-rank-scan-aggregate-attempt-v1",
+  "blocked_reason_ids": [
+    "no-formal-scan-plan",
+    "no-formal-control-pass",
+    "no-target-scan-case-results",
+    "no-enumerator-complete-denominator-certificate",
+    "catalog-remains-partial",
+    "six-nonpointed-family-rows-still-blocked"
+  ],
+  "claim_level": "not-formal-scan-evidence",
+  "content_hash": "sha256:ee91cc3d136b49b7b7f42fe18a796f13a5c07e9072a31895f3a85ce9457b1cea",
+  "enumerator_certificate": {
+    "complete_denominator_coverage": false,
+    "content_hash": null,
+    "status": "MISSING_NO_FORMAL_SCAN_PLAN"
+  },
+  "evidence_kind": "blocked_scan_aggregate_attempt",
+  "expected_case_count": null,
+  "explicit_non_claims": [
+    "This artifact is not a formal scan aggregate.",
+    "No complete denominator certificate exists.",
+    "No complete-no-signal aggregate is supported.",
+    "No FORMAL_LOW_RANK_SCAN_COMPLETE claim is supported."
+  ],
+  "fail_closed_checks": {
+    "admission_validator_not_given_empty_alias": "PASS",
+    "no_aggregate_without_scan_case_results": "PASS",
+    "no_complete_claim_without_denominator_certificate": "PASS",
+    "no_formal_scan_aggregate_payload_emitted": "PASS",
+    "no_no_signal_claim_emitted": "PASS"
+  },
+  "formal_scan_aggregate_hash": null,
+  "formal_scan_aggregate_id": null,
+  "formal_scan_aggregate_produced": false,
+  "generated_at_utc": "2026-07-16T03:59:23Z",
+  "generator_script": "experiments/scripts/build_formal_low_rank_scan_step9_gate_v1.py",
+  "git": {
+    "commit": "d3ce3de45c7704df2cb7a6b240bd87858071526c",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "catalog": {
+      "blocked_row_count": 6,
+      "content_hash": "sha256:36432a37a6ad404099747d6fd05a1fb8cfe8764e76f9aa03aebebf8abb6732c5",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+      "resolved_row_count": 8,
+      "sha256": "sha256:5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    "step6_scan_plan_generation_attempt": {
+      "content_hash": "sha256:e5f28a65365c0fd0537eb91a651fe440dda9607e3dbc96082d7c3d8a4a2b470d",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json",
+      "sha256": "sha256:21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059",
+      "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+    },
+    "step7_control_scan_attempt": {
+      "content_hash": "sha256:a5f78b0bd8d77bebe3e98fca5b1b64ae5124740663bdfa9bf26d3a12023d62db",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json",
+      "sha256": "sha256:ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a",
+      "status": "BLOCKED_NO_FORMAL_SCAN_PLAN"
+    },
+    "step8_target_scan_attempt": {
+      "content_hash": "sha256:68d5fc6739d3a3648cfa571bb51d27d5293b4c10f0e09bc62cc9a4dcf05f8d39",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-target-scan-attempt-v1.json",
+      "sha256": "sha256:2d30624a0c6db4762087913280bcae8d1a798052e6dac5a47f0fc6870aca01c1",
+      "status": "BLOCKED_NO_FORMAL_SCAN_PLAN_OR_CONTROL_PASS"
+    }
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_formal_low_rank_scan_step9_gate_v1.py --write",
+  "scan_case_result_count": 0,
+  "scan_case_result_hashes": [],
+  "schema": "twisted-yetter.formal-low-rank-scan-aggregate-attempt.v1",
+  "source_status": "blocked",
+  "status": "BLOCKED_NO_SCAN_CASE_RESULTS_OR_DENOMINATOR_CERTIFICATE",
+  "step": "implementation_order_step_9_scan_aggregate_and_admission_validator",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "would_be_formal_schema": "twisted-yetter.formal-low-rank-scan-aggregate.v1"
+}
