@@ -8538,6 +8538,119 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
+      "logical_id": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "ising-eval-coeval-pairing-materialization-v1",
+            "content_hash": "sha256:5732a023708c80f0ac36cbb303aafd78e4e29553881fda4ebe68850734698013",
+            "git_blob": "b81720328e312f84eec8a94d4747dae8d6c5ab0f",
+            "path": "experiments/results/foundation-v2-safety-substrate/ising-eval-coeval-pairing-materialization-v1.json",
+            "sha256": "53bf3138f86278e72d50ae5625dc21c7f104b080936129bbc845bf2ecc0b43f1",
+            "status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED"
+          },
+          {
+            "artifact_id": "ising-eval-coeval-pairing-materialization-builder-v1",
+            "git_blob": "ef3135c0dae7ff76593d5ff7a410bb3489533a90",
+            "path": "experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py",
+            "sha256": "d446837a7d722600b19c396f2e346dfba2218ba754900d90239de3d755e1fa50",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "ising-eval-coeval-pairing-materialization-tests-v1",
+            "git_blob": "36c6a13406d9c19c8a650533559de9ae7cb2793e",
+            "path": "tests/test_ising_eval_coeval_pairing_materialization_v1.py",
+            "sha256": "3e1912126586d2dcc5837eb1401847b60f12715f45d651c25b957d155a8069ea",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "blocking_requirements_summary": [
+          "Need a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge.",
+          "Need square-root branch choices for the candidate pivotal dimensions, including negative spherical lifts.",
+          "Need a formal proof that the recorded multiplicity-free q-6j path basis pairing is the pairing consumed by the evaluator.",
+          "Need producer/runtime/ribbon-pivotal certificates after maps and pairings are materialized."
+        ],
+        "checks": {
+          "all_attempts_blocked": "PASS",
+          "attempt_count_is_16": "PASS",
+          "attempt_hashes_are_unique": "PASS",
+          "every_attempt_records_square_root_branch_blocker": "PASS",
+          "input_candidate_payload_count_is_16": "PASS",
+          "input_preflight_blocked_all_16_payloads": "PASS",
+          "no_eval_coeval_maps_materialized": "PASS",
+          "no_formal_certificates_or_snapshots": "PASS",
+          "no_pairing_materialized": "PASS",
+          "numeric_pivotal_profile_is_not_formal_certificate": "PASS",
+          "scan_gates_remain_closed": "PASS"
+        },
+        "created_at": "2026-07-16T07:12:02Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not materialize formal evaluation/coevaluation maps.",
+          "This note does not certify fusion pairings.",
+          "This note does not produce ribbon_realization_snapshot formal evidence.",
+          "This note does not establish Ising row-complete ribbon classification."
+        ],
+        "mathematical_status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED_ON_FORMAL_MAP_SOURCE_AND_BRANCH_CONVENTION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-ising-eval-coeval-pairing-materialization",
+        "remaining_growth": [
+          "implement or source formal evaluation/coevaluation maps in the pinned SU(2)_2 branch gauge",
+          "pin square-root branches for every candidate pivotal dimension",
+          "certify multiplicity-free pairing invertibility in the exact field embedding",
+          "rerun materialization to produce ISING_EVAL_COEVAL_PAIRING_MATERIALIZED_NOT_CERTIFIED",
+          "only then run producer/runtime/ribbon-pivotal certificates"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_attempt_count": 16,
+          "candidate_payload_count": 16,
+          "family_id": "rank3-ising",
+          "formal_certificate_count": 0,
+          "formal_scan_plan_allowed_after_this_note": false,
+          "formal_snapshot_count": 0,
+          "materialization_id": "ising-eval-coeval-pairing-materialization-v1",
+          "materialized_map_count": 0,
+          "materialized_pairing_count": 0,
+          "prior_current_note": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+          "row_complete_status": "NOT_ROW_COMPLETE"
+        },
+        "status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 32,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Ising evaluation coevaluation pairing materialization attempt blocked",
+        "top_notice": "The next Ising formal-map substep was completed: all 16 candidate payloads were given explicit proposed evaluation/coevaluation scalar formulas and multiplicity-free pairing formulas, but the materialization correctly remained blocked. The blocker is now precise: the repo has numeric SU(2)_k pivotal-control convention evidence, but not a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge, not formally pinned square-root branches for candidate pivotal dimensions, and not a formal proof that the proposed pairing is the row-completion pairing consumed by the evaluator."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
+        "created_at": "2026-07-16T07:12:02Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
       "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads",
       "payload": {
@@ -18418,6 +18531,7 @@
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+      "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
@@ -18844,6 +18958,9 @@
       ],
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": [
         "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305"
+      ],
+      "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization": [
+        "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a"
       ],
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": [
         "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8"
@@ -19949,6 +20066,7 @@
         "ctlobj-sha256:e1610c59728c2ba73ad14dd79b73881ee540eea6d4dcf8c5dfaa3adbd1596e07",
         "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+        "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
         "ctlobj-sha256:e3454ff85e0db00290f4b94d1430da3a2b2752631ca669804922e73b40197bdc",
         "ctlobj-sha256:e34744e6e1cef4c3dc3fc1174015034242729d34aed74eb8d23299f666a54a91",
@@ -20155,6 +20273,7 @@
         "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
         "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
+        "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
         "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
@@ -32232,6 +32351,23 @@
           "parent_root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
           "path": "manifests/lab-note-2026-07-16-ising-braided-class-alignment-audit.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-braided-class-alignment-audit.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
+          "generated_at": "2026-07-16T07:12:02Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+          "path": "manifests/lab-note-2026-07-16-ising-eval-coeval-pairing-materialization.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-eval-coeval-pairing-materialization.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -46482,6 +46618,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
+          "generated_at": "2026-07-16T07:12:02Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+          "path": "manifests/lab-note-2026-07-16-ising-eval-coeval-pairing-materialization.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-eval-coeval-pairing-materialization.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063": [
         {
           "admission_batch_cid": null,
@@ -59794,6 +59950,36 @@
         },
         "word_count": 1
       },
+      "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
+        "created_at": "2026-07-16T07:12:02Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1654,
+        "gist": "The next Ising formal-map substep was completed: all 16 candidate payloads were given explicit proposed evaluation/coevaluation scalar formulas and multiplicity-free pairing formulas, but the materialization correctly remained blocked. The blocker is now precise: the repo has...",
+        "logical_id": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"ising-eval-coeval-pairing-materialization-v1\",\"content_hash\":\"sha256:5732a023708c80f0ac36cbb303aafd78e4e29553881fda4ebe68850734698013\",\"git_blob\":\"b81720328e312f84eec8a94d4747dae8d6c5ab0f\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ising-eval-coeval-pairing-materialization-v1.json\",\"sha256\":\"53bf3138f86278e72d50ae5625dc21c7f104b080936129bbc845bf2ecc0b43f1\",\"status\":\"ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED\"},{\"artifact_id\":\"ising-eval-coeval-pairing-materialization-builder-v1\",\"git_blob\":\"ef3135c0dae7ff76593d5ff7a410bb3489533a90\",\"path\":\"experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py\",\"sha256\":\"d446837a7d722600b19c396f2e346dfba2218ba754900d90239de3d755e1fa50\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"ising-eval-coeval-pairing-materialization-tests-v1\",\"git_blob\":\"36c6a13406d9c19c8a650533559de9ae7cb2793e\",\"path\":\"tests/test_ising_eval_coeval_pairing_materialization_v1.py\",\"sha256\":\"3e1912126586d2dcc5837eb1401847b60f12715f45d651c25b957d155a8069ea\",\"status\":\"TEST_ADDED\"}],\"blocking_requirements_summary\":[\"Need a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge.\",\"Need square-root branch choices for the candidate pivotal dimensions, including negative spherical lifts.\",\"Need a formal proof that the recorded multiplicity-free q-6j path basis pairing is the pairing consumed by the evaluator.\",\"Need producer/runtime/ribbon-pivotal certificates after maps and pairings are materialized.\"],\"checks\":{\"all_attempts_blocked\":\"PASS\",\"attempt_count_is_16\":\"PASS\",\"attempt_hashes_are_unique\":\"PASS\",\"every_attempt_records_square_root_branch_blocker\":\"PASS\",\"input_candidate_payload_count_is_16\":\"PASS\",\"input_preflight_blocked_all_16_payloads\":\"PASS\",\"no_eval_coeval_maps_materialized\":\"PASS\",\"no_formal_certificates_or_snapshots\":\"PASS\",\"no_pairing_materialized\":\"PASS\",\"numeric_pivotal_profile_is_not_formal_certificate\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\"},\"created_at\":\"2026-07-16T07:12:02Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not materialize formal evaluation/coevaluation maps.\",\"This note does not certify fusion pairings.\",\"This note does not produce ribbon_realization_snapshot formal evidence.\",\"This note does not establish Ising row-complete ribbon classification.\"],\"mathematical_status\":\"ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED_ON_FORMAL_MAP_SOURCE_AND_BRANCH_CONVENTION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-ising-eval-coeval-pairing-materialization\",\"remaining_growth\":[\"implement or source formal evaluation/coevaluation maps in the pinned SU(2)_2 branch gauge\",\"pin square-root branches for every candidate pivotal dimension\",\"certify multiplicity-free pairing invertibility in the exact field embedding\",\"rerun materialization to produce ISING_EVAL_COEVAL_PAIRING_MATERIALIZED_NOT_CERTIFIED\",\"only then run producer/runtime/ribbon-pivotal certificates\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_attempt_count\":16,\"candidate_payload_count\":16,\"family_id\":\"rank3-ising\",\"formal_certificate_count\":0,\"formal_scan_plan_allowed_after_this_note\":false,\"formal_snapshot_count\":0,\"materialization_id\":\"ising-eval-coeval-pairing-materialization-v1\",\"materialized_map_count\":0,\"materialized_pairing_count\":0,\"prior_current_note\":\"claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight\",\"row_complete_status\":\"NOT_ROW_COMPLETE\"},\"status\":\"ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py --write\",\"status\":\"pass\"},{\"collected\":32,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Ising evaluation coevaluation pairing materialization attempt blocked\",\"top_notice\":\"The next Ising formal-map substep was completed: all 16 candidate payloads were given explicit proposed evaluation/coevaluation scalar formulas and multiplicity-free pairing formulas, but the materialization correctly remained blocked. The blocker is now precise: the repo has numeric SU(2)_k pivotal-control convention evidence, but not a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge, not formally pinned square-root branches for candidate pivotal dimensions, and not a formal proof that the proposed pairing is the row-completion pairing consumed by the evaluator.\"}",
+        "title": "Ising evaluation coevaluation pairing materialization attempt blocked",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5110,
+          "base_estimate": 1438,
+          "estimated_tokens": 1654,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 216,
+          "serialized_character_count": 5110,
+          "unicode_scalar_count": 5110,
+          "utf8_bytes": 5110
+        },
+        "word_count": 237
+      },
       "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
@@ -62545,7 +62731,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T07:05:09Z",
+  "generated_at": "2026-07-16T07:14:54Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -65079,17 +65265,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+  "root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 66370,
+    "build_ms": 66689,
     "context_source": "current-context-replay",
-    "current_context_ms": 62019,
-    "discovery_index_ms": 4227,
+    "current_context_ms": 62335,
+    "discovery_index_ms": 4231,
     "payload_summaries_ms": 40,
     "resource_index_ms": 40,
     "write_ms": 41
   },
-  "transition_cid": "ctlobj-sha256:f90bba7db7c79024ee1c18909e16c607bb3837ba545c0f356475744df21d2d99"
+  "transition_cid": "ctlobj-sha256:93f624e2c6f4f212783fbe2fd1ca5e16e4eca932cc3b015efb4375e8a775dc30"
 }

@@ -1,0 +1,96 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-ising-eval-coeval-pairing-materialization",
+  "title": "Ising evaluation coevaluation pairing materialization attempt blocked",
+  "created_at": "2026-07-16T07:12:02Z",
+  "created_by": "actor:codex",
+  "status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED",
+  "top_notice": "The next Ising formal-map substep was completed: all 16 candidate payloads were given explicit proposed evaluation/coevaluation scalar formulas and multiplicity-free pairing formulas, but the materialization correctly remained blocked. The blocker is now precise: the repo has numeric SU(2)_k pivotal-control convention evidence, but not a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge, not formally pinned square-root branches for candidate pivotal dimensions, and not a formal proof that the proposed pairing is the row-completion pairing consumed by the evaluator.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+    "family_id": "rank3-ising",
+    "materialization_id": "ising-eval-coeval-pairing-materialization-v1",
+    "candidate_payload_count": 16,
+    "blocked_attempt_count": 16,
+    "materialized_map_count": 0,
+    "materialized_pairing_count": 0,
+    "formal_certificate_count": 0,
+    "formal_snapshot_count": 0,
+    "row_complete_status": "NOT_ROW_COMPLETE",
+    "formal_scan_plan_allowed_after_this_note": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "ising-eval-coeval-pairing-materialization-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-eval-coeval-pairing-materialization-v1.json",
+      "git_blob": "b81720328e312f84eec8a94d4747dae8d6c5ab0f",
+      "sha256": "53bf3138f86278e72d50ae5625dc21c7f104b080936129bbc845bf2ecc0b43f1",
+      "content_hash": "sha256:5732a023708c80f0ac36cbb303aafd78e4e29553881fda4ebe68850734698013",
+      "status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED"
+    },
+    {
+      "artifact_id": "ising-eval-coeval-pairing-materialization-builder-v1",
+      "path": "experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py",
+      "git_blob": "ef3135c0dae7ff76593d5ff7a410bb3489533a90",
+      "sha256": "d446837a7d722600b19c396f2e346dfba2218ba754900d90239de3d755e1fa50",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "ising-eval-coeval-pairing-materialization-tests-v1",
+      "path": "tests/test_ising_eval_coeval_pairing_materialization_v1.py",
+      "git_blob": "36c6a13406d9c19c8a650533559de9ae7cb2793e",
+      "sha256": "3e1912126586d2dcc5837eb1401847b60f12715f45d651c25b957d155a8069ea",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "input_candidate_payload_count_is_16": "PASS",
+    "input_preflight_blocked_all_16_payloads": "PASS",
+    "attempt_count_is_16": "PASS",
+    "attempt_hashes_are_unique": "PASS",
+    "all_attempts_blocked": "PASS",
+    "no_eval_coeval_maps_materialized": "PASS",
+    "no_pairing_materialized": "PASS",
+    "no_formal_certificates_or_snapshots": "PASS",
+    "numeric_pivotal_profile_is_not_formal_certificate": "PASS",
+    "every_attempt_records_square_root_branch_blocker": "PASS",
+    "scan_gates_remain_closed": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_ising_eval_coeval_pairing_materialization_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+      "status": "pass",
+      "collected": 32
+    }
+  ],
+  "blocking_requirements_summary": [
+    "Need a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge.",
+    "Need square-root branch choices for the candidate pivotal dimensions, including negative spherical lifts.",
+    "Need a formal proof that the recorded multiplicity-free q-6j path basis pairing is the pairing consumed by the evaluator.",
+    "Need producer/runtime/ribbon-pivotal certificates after maps and pairings are materialized."
+  ],
+  "remaining_growth": [
+    "implement or source formal evaluation/coevaluation maps in the pinned SU(2)_2 branch gauge",
+    "pin square-root branches for every candidate pivotal dimension",
+    "certify multiplicity-free pairing invertibility in the exact field embedding",
+    "rerun materialization to produce ISING_EVAL_COEVAL_PAIRING_MATERIALIZED_NOT_CERTIFIED",
+    "only then run producer/runtime/ribbon-pivotal certificates"
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not materialize formal evaluation/coevaluation maps.",
+    "This note does not certify fusion pairings.",
+    "This note does not produce ribbon_realization_snapshot formal evidence.",
+    "This note does not establish Ising row-complete ribbon classification."
+  ],
+  "mathematical_status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED_ON_FORMAL_MAP_SOURCE_AND_BRANCH_CONVENTION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}
