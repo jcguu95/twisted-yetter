@@ -8538,6 +8538,107 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
+      "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "ising-ribbon-lift-slot-ledger-v1",
+            "content_hash": "sha256:0f4e62c14be0acf8d7eefeaa0626858ff2f2a77af4c3d619843b70892eccd536",
+            "git_blob": "558b6c9eae8f7f67e2d473fcd19b102f83ed4cf4",
+            "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-slot-ledger-v1.json",
+            "sha256": "4c7498f67f0baa9a660bbc45d09cf3f3002623398c92b05054cc16b2f203c3ec",
+            "status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED"
+          },
+          {
+            "artifact_id": "ising-ribbon-lift-slot-ledger-builder-v1",
+            "git_blob": "05197f7ecacb4e3ae8770e218ad0685517eef4b5",
+            "path": "experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py",
+            "sha256": "cde7dae5700fcf166ba3946cfdc304b2324ef337b9de05058b137fca543506ca",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "ising-ribbon-lift-slot-ledger-tests-v1",
+            "git_blob": "ae90cf0d7613a6be1c04d4cf6314e8a4fdaf1cd5",
+            "path": "tests/test_ising_ribbon_lift_slot_ledger_v1.py",
+            "sha256": "d6d73dfc48dcefca648c607d428aa1c2cd9b5db686cc3519ac3b46a12a4d3df7",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "all_certificates_missing": "PASS",
+          "braided_class_count_is_8": "PASS",
+          "candidate_slot_count_is_16": "PASS",
+          "input_alignment_audit_passed": "PASS",
+          "no_formal_snapshots_produced": "PASS",
+          "scan_gates_remain_closed": "PASS",
+          "slot_ids_are_unique": "PASS",
+          "spherical_lifts_per_braided_class_is_2": "PASS"
+        },
+        "created_at": "2026-07-16T06:41:45Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not produce ribbon_realization_snapshot formal evidence.",
+          "This note does not prove that all sixteen slots survive ribbon compatibility.",
+          "This note does not establish Ising row-complete ribbon classification."
+        ],
+        "mathematical_status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED; ISING_RIBBON_SNAPSHOTS_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-ising-ribbon-lift-slot-ledger",
+        "remaining_growth": [
+          "materialize category data for each slot",
+          "check pivotal naturality, monoidality, and spherical trace per slot",
+          "check twist/balancing/ribbon compatibility per slot",
+          "produce producer/runtime/ribbon-pivotal certificates for every slot",
+          "promote only passing slots to ribbon_realization_snapshot artifacts"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "braided_class_count": 8,
+          "family_id": "rank3-ising",
+          "formal_scan_plan_allowed_after_this_note": false,
+          "formal_snapshot_count": 0,
+          "ledger_id": "ising-ribbon-lift-slot-ledger-v1",
+          "pending_ribbon_lift_slot_count": 16,
+          "prior_current_note": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+          "row_complete_status": "NOT_ROW_COMPLETE",
+          "spherical_structures_per_braided_class": 2
+        },
+        "status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 23,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Ising ribbon-lift slots enumerated",
+        "top_notice": "The next Ising row-completion substep was completed: the 8 aligned Ising braided classes were expanded into 16 pending ribbon-lift slots using the recorded two spherical structures per braided class. This is a denominator-slot ledger only. It records which slots must be materialized and certified, but it does not produce ribbon_realization_snapshot artifacts and does not prove that all sixteen slots survive ribbon/pivotal compatibility."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
+        "created_at": "2026-07-16T06:41:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "logical_id": "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review",
       "payload": {
@@ -18100,6 +18201,7 @@
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+      "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation": "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
       "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start": "ctlobj-sha256:0a2962b20fda6b32e609f1343100de7e46bb3b5b3c36a5d1ed65bccdf123d695",
@@ -18523,6 +18625,9 @@
       ],
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": [
         "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305"
+      ],
+      "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": [
+        "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87"
       ],
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": [
         "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2"
@@ -19460,6 +19565,7 @@
         "ctlobj-sha256:6b32bb8ab8e8715e7e6d0cbf0666519236b70ad4810a114a13512545a31282a1",
         "ctlobj-sha256:6c79cf7fa0ffb0078381f3104475ebddff5630286dacc9bc72325a25b5d38291",
         "ctlobj-sha256:6e01d811af25e8e34a2464cadd9cd5fa5c260aa1a3a7c4d8ea4a33e7bca0addd",
+        "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
         "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039",
         "ctlobj-sha256:7041352849d084486bf98bba31765a8d6307fbf59a587fa19e72a179680246e5",
         "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
@@ -19745,6 +19851,7 @@
         "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
         "ctlobj-sha256:6a007fb5b6c98709c909015d550dcb878eb8115cb90acc953428b32075329762",
         "ctlobj-sha256:6c79cf7fa0ffb0078381f3104475ebddff5630286dacc9bc72325a25b5d38291",
+        "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
         "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
         "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
         "ctlobj-sha256:70e688fdbba11ab8210164d34027a018dae6f3c8d1269ef6a3be99b3c4aeb2e8",
@@ -31903,6 +32010,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
+          "generated_at": "2026-07-16T06:41:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+          "path": "manifests/lab-note-2026-07-16-ising-ribbon-lift-slot-ledger.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-slot-ledger.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:6a5002ee5542cb183101e54eebb2ff9d0f2d7c5ebaa62351af5de638cdc134ad",
           "generated_at": "2026-07-16T04:18:00Z",
           "logical_id": "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review",
@@ -37414,6 +37538,26 @@
           "parent_root_cid": "ctlobj-sha256:6b0e2ed190d115cd13d37224bfd1426c85fcbcbc54b2451c62f0318b09991e21",
           "path": "manifests/subject-definition-2026-07-06-category-su3-2.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/category-su3-2.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
+          "generated_at": "2026-07-16T06:41:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+          "path": "manifests/lab-note-2026-07-16-ising-ribbon-lift-slot-ledger.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-slot-ledger.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -54517,6 +54661,36 @@
         },
         "word_count": 119
       },
+      "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
+        "created_at": "2026-07-16T06:41:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1271,
+        "gist": "The next Ising row-completion substep was completed: the 8 aligned Ising braided classes were expanded into 16 pending ribbon-lift slots using the recorded two spherical structures per braided class. This is a denominator-slot ledger only. It records which slots must be materi...",
+        "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"ising-ribbon-lift-slot-ledger-v1\",\"content_hash\":\"sha256:0f4e62c14be0acf8d7eefeaa0626858ff2f2a77af4c3d619843b70892eccd536\",\"git_blob\":\"558b6c9eae8f7f67e2d473fcd19b102f83ed4cf4\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-slot-ledger-v1.json\",\"sha256\":\"4c7498f67f0baa9a660bbc45d09cf3f3002623398c92b05054cc16b2f203c3ec\",\"status\":\"ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED\"},{\"artifact_id\":\"ising-ribbon-lift-slot-ledger-builder-v1\",\"git_blob\":\"05197f7ecacb4e3ae8770e218ad0685517eef4b5\",\"path\":\"experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py\",\"sha256\":\"cde7dae5700fcf166ba3946cfdc304b2324ef337b9de05058b137fca543506ca\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"ising-ribbon-lift-slot-ledger-tests-v1\",\"git_blob\":\"ae90cf0d7613a6be1c04d4cf6314e8a4fdaf1cd5\",\"path\":\"tests/test_ising_ribbon_lift_slot_ledger_v1.py\",\"sha256\":\"d6d73dfc48dcefca648c607d428aa1c2cd9b5db686cc3519ac3b46a12a4d3df7\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"all_certificates_missing\":\"PASS\",\"braided_class_count_is_8\":\"PASS\",\"candidate_slot_count_is_16\":\"PASS\",\"input_alignment_audit_passed\":\"PASS\",\"no_formal_snapshots_produced\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\",\"slot_ids_are_unique\":\"PASS\",\"spherical_lifts_per_braided_class_is_2\":\"PASS\"},\"created_at\":\"2026-07-16T06:41:45Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not produce ribbon_realization_snapshot formal evidence.\",\"This note does not prove that all sixteen slots survive ribbon compatibility.\",\"This note does not establish Ising row-complete ribbon classification.\"],\"mathematical_status\":\"ISING_RIBBON_LIFT_SLOTS_ENUMERATED; ISING_RIBBON_SNAPSHOTS_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-ising-ribbon-lift-slot-ledger\",\"remaining_growth\":[\"materialize category data for each slot\",\"check pivotal naturality, monoidality, and spherical trace per slot\",\"check twist/balancing/ribbon compatibility per slot\",\"produce producer/runtime/ribbon-pivotal certificates for every slot\",\"promote only passing slots to ribbon_realization_snapshot artifacts\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"braided_class_count\":8,\"family_id\":\"rank3-ising\",\"formal_scan_plan_allowed_after_this_note\":false,\"formal_snapshot_count\":0,\"ledger_id\":\"ising-ribbon-lift-slot-ledger-v1\",\"pending_ribbon_lift_slot_count\":16,\"prior_current_note\":\"claim:lab-note:2026-07-16-ising-braided-class-alignment-audit\",\"row_complete_status\":\"NOT_ROW_COMPLETE\",\"spherical_structures_per_braided_class\":2},\"status\":\"ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py --write\",\"status\":\"pass\"},{\"collected\":23,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Ising ribbon-lift slots enumerated\",\"top_notice\":\"The next Ising row-completion substep was completed: the 8 aligned Ising braided classes were expanded into 16 pending ribbon-lift slots using the recorded two spherical structures per braided class. This is a denominator-slot ledger only. It records which slots must be materialized and certified, but it does not produce ribbon_realization_snapshot artifacts and does not prove that all sixteen slots survive ribbon/pivotal compatibility.\"}",
+        "title": "Ising ribbon-lift slots enumerated",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 3928,
+          "base_estimate": 1105,
+          "estimated_tokens": 1271,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 166,
+          "serialized_character_count": 3928,
+          "unicode_scalar_count": 3928,
+          "utf8_bytes": 3928
+        },
+        "word_count": 153
+      },
       "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039": {
         "active_state": "active",
         "cid": "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039",
@@ -62008,7 +62182,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T06:36:30Z",
+  "generated_at": "2026-07-16T06:44:43Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -64542,17 +64716,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+  "root_cid": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 66529,
+    "build_ms": 65677,
     "context_source": "current-context-replay",
-    "current_context_ms": 62263,
-    "discovery_index_ms": 4142,
+    "current_context_ms": 61392,
+    "discovery_index_ms": 4164,
     "payload_summaries_ms": 39,
     "resource_index_ms": 39,
-    "write_ms": 43
+    "write_ms": 41
   },
-  "transition_cid": "ctlobj-sha256:265ddca2177f005c9fc96e4d85a8b80450c2f2d2eee441407b534b4565797648"
+  "transition_cid": "ctlobj-sha256:2227cb9a4848ca67257f4e94f9f037ff00b6ba16a4af5d0d4604d8eb1b5d9a06"
 }

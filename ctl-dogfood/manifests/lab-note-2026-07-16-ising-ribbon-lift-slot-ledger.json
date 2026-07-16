@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
+  "generated_at": "2026-07-16T06:41:45Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
+    "current_root": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:2227cb9a4848ca67257f4e94f9f037ff00b6ba16a4af5d0d4604d8eb1b5d9a06"
+  },
+  "parent_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-slot-ledger.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger --payload lab-notes/2026-07-16-ising-ribbon-lift-slot-ledger.json --manifest manifests/lab-note-2026-07-16-ising-ribbon-lift-slot-ledger.json --created-at 2026-07-16T06:41:45Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "ced50749e1499cc99b81f775c0be26c86e206c4c"
+}

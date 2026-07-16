@@ -1,0 +1,84 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-ising-ribbon-lift-slot-ledger",
+  "title": "Ising ribbon-lift slots enumerated",
+  "created_at": "2026-07-16T06:41:45Z",
+  "created_by": "actor:codex",
+  "status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED",
+  "top_notice": "The next Ising row-completion substep was completed: the 8 aligned Ising braided classes were expanded into 16 pending ribbon-lift slots using the recorded two spherical structures per braided class. This is a denominator-slot ledger only. It records which slots must be materialized and certified, but it does not produce ribbon_realization_snapshot artifacts and does not prove that all sixteen slots survive ribbon/pivotal compatibility.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+    "family_id": "rank3-ising",
+    "ledger_id": "ising-ribbon-lift-slot-ledger-v1",
+    "braided_class_count": 8,
+    "spherical_structures_per_braided_class": 2,
+    "pending_ribbon_lift_slot_count": 16,
+    "formal_snapshot_count": 0,
+    "row_complete_status": "NOT_ROW_COMPLETE",
+    "formal_scan_plan_allowed_after_this_note": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "ising-ribbon-lift-slot-ledger-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-slot-ledger-v1.json",
+      "git_blob": "558b6c9eae8f7f67e2d473fcd19b102f83ed4cf4",
+      "sha256": "4c7498f67f0baa9a660bbc45d09cf3f3002623398c92b05054cc16b2f203c3ec",
+      "content_hash": "sha256:0f4e62c14be0acf8d7eefeaa0626858ff2f2a77af4c3d619843b70892eccd536",
+      "status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED_NOT_MATERIALIZED"
+    },
+    {
+      "artifact_id": "ising-ribbon-lift-slot-ledger-builder-v1",
+      "path": "experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py",
+      "git_blob": "05197f7ecacb4e3ae8770e218ad0685517eef4b5",
+      "sha256": "cde7dae5700fcf166ba3946cfdc304b2324ef337b9de05058b137fca543506ca",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "ising-ribbon-lift-slot-ledger-tests-v1",
+      "path": "tests/test_ising_ribbon_lift_slot_ledger_v1.py",
+      "git_blob": "ae90cf0d7613a6be1c04d4cf6314e8a4fdaf1cd5",
+      "sha256": "d6d73dfc48dcefca648c607d428aa1c2cd9b5db686cc3519ac3b46a12a4d3df7",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "input_alignment_audit_passed": "PASS",
+    "braided_class_count_is_8": "PASS",
+    "spherical_lifts_per_braided_class_is_2": "PASS",
+    "candidate_slot_count_is_16": "PASS",
+    "slot_ids_are_unique": "PASS",
+    "no_formal_snapshots_produced": "PASS",
+    "all_certificates_missing": "PASS",
+    "scan_gates_remain_closed": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_ising_ribbon_lift_slot_ledger_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+      "status": "pass",
+      "collected": 23
+    }
+  ],
+  "remaining_growth": [
+    "materialize category data for each slot",
+    "check pivotal naturality, monoidality, and spherical trace per slot",
+    "check twist/balancing/ribbon compatibility per slot",
+    "produce producer/runtime/ribbon-pivotal certificates for every slot",
+    "promote only passing slots to ribbon_realization_snapshot artifacts"
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not produce ribbon_realization_snapshot formal evidence.",
+    "This note does not prove that all sixteen slots survive ribbon compatibility.",
+    "This note does not establish Ising row-complete ribbon classification."
+  ],
+  "mathematical_status": "ISING_RIBBON_LIFT_SLOTS_ENUMERATED; ISING_RIBBON_SNAPSHOTS_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}
