@@ -8515,6 +8515,131 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-step2-grocery-procurement-v1",
+            "content_hash": "sha256:b1c6b06b1f72b492e89aa2c08038f2c7305bab1e76d192be5656af7558aa6ab6",
+            "git_blob": "f71f33a5d25f362d363716c682c68efc1a0df90b",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-step2-grocery-procurement-v1.json",
+            "sha256": "235342a49dd872bde2eff77a291ca6a9bb790a266d159fc4bf28a3bd1bc2649e",
+            "status": "STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED"
+          },
+          {
+            "artifact_id": "low-rank-ribbon-realization-catalog-v11",
+            "content_hash": "sha256:f3e3565605dfe489d09088851d13a2737359ead760cd68ce292c5e65be50da13",
+            "git_blob": "6cd662651a5c2dcb9ef875e09f5cf955318c0007",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v11.json",
+            "sha256": "e906c8b79c23ceb2e4afb85d09fd932231ba4f68832079c691ee3239632a8ed0",
+            "status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+          },
+          {
+            "artifact_id": "formal-low-rank-scan-readiness-v11",
+            "content_hash": "sha256:fa83204b0acb5c9aa87eecae70657117d919efc90683c6d1498a8796c021770d",
+            "git_blob": "287544211fdc1aa404b9489e4e6d92eb19ebc4c1",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v11.json",
+            "sha256": "1d917abde2dd90e411616ea42cf499b44a170250f5f8ecac6699527c115a36d0",
+            "status": "BLOCKED_TERMINAL_PROCUREMENT_BLOCKED_CATALOG"
+          }
+        ],
+        "created_at": "2026-07-16T04:57:45Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim any of the six blocked rows are resolved.",
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not claim a control scan, target scan, aggregate, or no-signal result.",
+          "This note does not claim principal SU(2)_k payloads represent complete family rows.",
+          "This note does not claim the SU(2)_2 all-sigma backend is a full Ising category."
+        ],
+        "mathematical_status": "STEP2_GROCERY_PROCUREMENT_COMPLETE; TERMINAL_PROCUREMENT_BLOCKERS_REMAIN_FOR_SIX_NONPOINTED_ROWS",
+        "note_id": "objective-note-2026-07-16-low-rank-step2-grocery-procurement",
+        "row_statuses": [
+          {
+            "blocker": "rank3-ising-row-procurement-blocker-v1",
+            "family_id": "rank3-ising",
+            "partial_payload": "rank3-ising-principal-su2-level2-category-payload-v1",
+            "procurement_status": "PROCUREMENT_BLOCKED_BRANCH_ENUMERATION_INCOMPLETE"
+          },
+          {
+            "blocker": "rank3-psu2-5-row-procurement-blocker-v1",
+            "family_id": "rank3-psu2-5",
+            "partial_payload": "rank3-psu2-5-principal-adjoint-su2-level5-category-payload-v1",
+            "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING"
+          },
+          {
+            "blocker": "rank4-psu2-7-row-procurement-blocker-v1",
+            "family_id": "rank4-psu2-7",
+            "partial_payload": "rank4-psu2-7-principal-adjoint-su2-level7-category-payload-v1",
+            "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING"
+          },
+          {
+            "blocker": "rank5-su2-4-row-procurement-blocker-v1",
+            "family_id": "rank5-su2-4",
+            "partial_payload": "rank5-su2-4-principal-su2-level4-category-payload-v1",
+            "procurement_status": "PROCUREMENT_BLOCKED_EXTENSION_BRANCH_DATA_MISSING"
+          },
+          {
+            "blocker": "rank5-psu2-9-row-procurement-blocker-v1",
+            "family_id": "rank5-psu2-9",
+            "partial_payload": "rank5-psu2-9-principal-adjoint-su2-level9-category-payload-v1",
+            "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING"
+          },
+          {
+            "blocker": "rank5-psu3-4-row-procurement-blocker-v1",
+            "family_id": "rank5-psu3-4",
+            "partial_payload": null,
+            "procurement_status": "PROCUREMENT_BLOCKED_NO_REPO_LOCAL_PSU3_FR_SOURCE"
+          }
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "formal_scan_plan_allowed_after_procurement": false,
+          "input_catalog_id": "low-rank-ribbon-realization-catalog-v10",
+          "output_catalog_id": "low-rank-ribbon-realization-catalog-v11",
+          "output_catalog_status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+          "procurement_blocked_row_count_after_procurement": 6,
+          "resolved_row_count_after_procurement": 8,
+          "row_ribbon_realization_package_count": 0,
+          "step": "implementation_order_step_2_resolve_the_6_blocked_rows"
+        },
+        "status": "STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 46,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 68,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_completion_run_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank Step 2 grocery procurement completed with terminal blockers",
+        "top_notice": "Step 2 grocery procurement was completed as a fail-closed procurement pass over the six blocked non-pointed rows. The pass materialized repo-local SU(2)-family input skeletons where available, but produced zero row-ribbon-realization packages. Every blocked row now has a terminal row-procurement-blocker artifact. This note does not establish the low-rank ribbon classification and does not authorize a scan plan."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
+        "created_at": "2026-07-16T04:57:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
       "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-input-materialization",
       "payload": {
@@ -17334,6 +17459,7 @@
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
+      "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
       "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
@@ -17751,6 +17877,9 @@
       ],
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": [
         "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement": [
+        "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63"
       ],
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": [
         "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144"
@@ -18578,6 +18707,7 @@
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
         "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
         "ctlobj-sha256:207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b",
+        "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
         "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0",
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
@@ -18911,6 +19041,7 @@
         "ctlobj-sha256:1bf3078325bd2341cbf745368323d79d6b289fc83bbc21ccffda516880804f35",
         "ctlobj-sha256:1d869ca15c5a7b414cc53d52028e0a58a88aadfe1c28d08b9640f42552044426",
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
+        "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
         "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
         "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a",
@@ -25825,6 +25956,26 @@
           "schema": "ctl-dogfood/merge-manifest/1"
         }
       ],
+      "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
+          "generated_at": "2026-07-16T04:57:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6e55096609422dfbcab99e01281ba4a55e4de3e45fc7d02c4710f040d99c86ce",
+          "path": "manifests/lab-note-2026-07-16-low-rank-step2-grocery-procurement.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-step2-grocery-procurement.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435": [
         {
           "admission_batch_cid": null,
@@ -31054,6 +31205,23 @@
           "parent_root_cid": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
           "path": "manifests/lab-note-2026-07-16-low-rank-completion-run-terminal-blocked-review.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-completion-run-terminal-blocked-review.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
+          "generated_at": "2026-07-16T04:57:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:6e55096609422dfbcab99e01281ba4a55e4de3e45fc7d02c4710f040d99c86ce",
+          "path": "manifests/lab-note-2026-07-16-low-rank-step2-grocery-procurement.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-step2-grocery-procurement.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -50703,6 +50871,36 @@
         },
         "word_count": 153
       },
+      "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
+        "created_at": "2026-07-16T04:57:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1895,
+        "gist": "Step 2 grocery procurement was completed as a fail-closed procurement pass over the six blocked non-pointed rows. The pass materialized repo-local SU(2)-family input skeletons where available, but produced zero row-ribbon-realization packages. Every blocked row now has a termi...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-step2-grocery-procurement-v1\",\"content_hash\":\"sha256:b1c6b06b1f72b492e89aa2c08038f2c7305bab1e76d192be5656af7558aa6ab6\",\"git_blob\":\"f71f33a5d25f362d363716c682c68efc1a0df90b\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-step2-grocery-procurement-v1.json\",\"sha256\":\"235342a49dd872bde2eff77a291ca6a9bb790a266d159fc4bf28a3bd1bc2649e\",\"status\":\"STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED\"},{\"artifact_id\":\"low-rank-ribbon-realization-catalog-v11\",\"content_hash\":\"sha256:f3e3565605dfe489d09088851d13a2737359ead760cd68ce292c5e65be50da13\",\"git_blob\":\"6cd662651a5c2dcb9ef875e09f5cf955318c0007\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v11.json\",\"sha256\":\"e906c8b79c23ceb2e4afb85d09fd932231ba4f68832079c691ee3239632a8ed0\",\"status\":\"PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE\"},{\"artifact_id\":\"formal-low-rank-scan-readiness-v11\",\"content_hash\":\"sha256:fa83204b0acb5c9aa87eecae70657117d919efc90683c6d1498a8796c021770d\",\"git_blob\":\"287544211fdc1aa404b9489e4e6d92eb19ebc4c1\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v11.json\",\"sha256\":\"1d917abde2dd90e411616ea42cf499b44a170250f5f8ecac6699527c115a36d0\",\"status\":\"BLOCKED_TERMINAL_PROCUREMENT_BLOCKED_CATALOG\"}],\"created_at\":\"2026-07-16T04:57:45Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim any of the six blocked rows are resolved.\",\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not claim a control scan, target scan, aggregate, or no-signal result.\",\"This note does not claim principal SU(2)_k payloads represent complete family rows.\",\"This note does not claim the SU(2)_2 all-sigma backend is a full Ising category.\"],\"mathematical_status\":\"STEP2_GROCERY_PROCUREMENT_COMPLETE; TERMINAL_PROCUREMENT_BLOCKERS_REMAIN_FOR_SIX_NONPOINTED_ROWS\",\"note_id\":\"objective-note-2026-07-16-low-rank-step2-grocery-procurement\",\"row_statuses\":[{\"blocker\":\"rank3-ising-row-procurement-blocker-v1\",\"family_id\":\"rank3-ising\",\"partial_payload\":\"rank3-ising-principal-su2-level2-category-payload-v1\",\"procurement_status\":\"PROCUREMENT_BLOCKED_BRANCH_ENUMERATION_INCOMPLETE\"},{\"blocker\":\"rank3-psu2-5-row-procurement-blocker-v1\",\"family_id\":\"rank3-psu2-5\",\"partial_payload\":\"rank3-psu2-5-principal-adjoint-su2-level5-category-payload-v1\",\"procurement_status\":\"PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING\"},{\"blocker\":\"rank4-psu2-7-row-procurement-blocker-v1\",\"family_id\":\"rank4-psu2-7\",\"partial_payload\":\"rank4-psu2-7-principal-adjoint-su2-level7-category-payload-v1\",\"procurement_status\":\"PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING\"},{\"blocker\":\"rank5-su2-4-row-procurement-blocker-v1\",\"family_id\":\"rank5-su2-4\",\"partial_payload\":\"rank5-su2-4-principal-su2-level4-category-payload-v1\",\"procurement_status\":\"PROCUREMENT_BLOCKED_EXTENSION_BRANCH_DATA_MISSING\"},{\"blocker\":\"rank5-psu2-9-row-procurement-blocker-v1\",\"family_id\":\"rank5-psu2-9\",\"partial_payload\":\"rank5-psu2-9-principal-adjoint-su2-level9-category-payload-v1\",\"procurement_status\":\"PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING\"},{\"blocker\":\"rank5-psu3-4-row-procurement-blocker-v1\",\"family_id\":\"rank5-psu3-4\",\"partial_payload\":null,\"procurement_status\":\"PROCUREMENT_BLOCKED_NO_REPO_LOCAL_PSU3_FR_SOURCE\"}],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"formal_scan_plan_allowed_after_procurement\":false,\"input_catalog_id\":\"low-rank-ribbon-realization-catalog-v10\",\"output_catalog_id\":\"low-rank-ribbon-realization-catalog-v11\",\"output_catalog_status\":\"PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE\",\"procurement_blocked_row_count_after_procurement\":6,\"resolved_row_count_after_procurement\":8,\"row_ribbon_realization_package_count\":0,\"step\":\"implementation_order_step_2_resolve_the_6_blocked_rows\"},\"status\":\"STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":46,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"},{\"collected\":68,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_completion_run_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py\",\"status\":\"pass\"}],\"title\":\"Low-rank Step 2 grocery procurement completed with terminal blockers\",\"top_notice\":\"Step 2 grocery procurement was completed as a fail-closed procurement pass over the six blocked non-pointed rows. The pass materialized repo-local SU(2)-family input skeletons where available, but produced zero row-ribbon-realization packages. Every blocked row now has a terminal row-procurement-blocker artifact. This note does not establish the low-rank ribbon classification and does not authorize a scan plan.\"}",
+        "title": "Low-rank Step 2 grocery procurement completed with terminal blockers",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5856,
+          "base_estimate": 1647,
+          "estimated_tokens": 1895,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 248,
+          "serialized_character_count": 5856,
+          "unicode_scalar_count": 5856,
+          "utf8_bytes": 5856
+        },
+        "word_count": 162
+      },
       "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435": {
         "active_state": "active",
         "cid": "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
@@ -60804,7 +61002,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T04:33:11Z",
+  "generated_at": "2026-07-16T05:00:47Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -63338,17 +63536,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:6e55096609422dfbcab99e01281ba4a55e4de3e45fc7d02c4710f040d99c86ce",
+  "root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 62934,
+    "build_ms": 62518,
     "context_source": "current-context-replay",
-    "current_context_ms": 58881,
-    "discovery_index_ms": 3936,
-    "payload_summaries_ms": 36,
+    "current_context_ms": 58323,
+    "discovery_index_ms": 4076,
+    "payload_summaries_ms": 37,
     "resource_index_ms": 37,
     "write_ms": 42
   },
-  "transition_cid": "ctlobj-sha256:d49f5fc6e5a81bb530fdc41b2ebb712d700104eb0ecc972ba6947d49991f1bbc"
+  "transition_cid": "ctlobj-sha256:b8135e29fd6d734f745f03c29d13eaeb6064d1b357daab1a6fc194e7cf8bad60"
 }

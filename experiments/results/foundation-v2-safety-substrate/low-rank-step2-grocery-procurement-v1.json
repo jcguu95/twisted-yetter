@@ -1,0 +1,110 @@
+{
+  "blocked_family_ids": [
+    "rank3-ising",
+    "rank3-psu2-5",
+    "rank4-psu2-7",
+    "rank5-su2-4",
+    "rank5-psu2-9",
+    "rank5-psu3-4"
+  ],
+  "completion_semantics": "Step 2 grocery procurement is complete for this run: every blocked row has a terminal artifact, and no partial input was promoted to formal category evidence.",
+  "content_hash": "sha256:b1c6b06b1f72b492e89aa2c08038f2c7305bab1e76d192be5656af7558aa6ab6",
+  "explicit_non_claims": [
+    "No row-ribbon-realization-package was produced.",
+    "No low-rank ribbon classification established claim is supported.",
+    "No scan plan, controls, target scan, aggregate, or no-signal claim is supported."
+  ],
+  "formal_scan_plan_allowed_after_procurement": false,
+  "generated_at_utc": "2026-07-16T04:55:20Z",
+  "generator_script": "experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py",
+  "git": {
+    "commit": "8aeba5d0decde6399368785e8b1a3773dbe674be",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "catalog_v10": {
+      "content_hash": "sha256:36432a37a6ad404099747d6fd05a1fb8cfe8764e76f9aa03aebebf8abb6732c5",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+      "sha256": "sha256:5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    "step2_materialization": {
+      "content_hash": "sha256:5de86184a3570dcee23dcdc2eb1a571747fe3ccb34230e38d436e905fbe019b4",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-step2-input-materialization-v1.json",
+      "sha256": "sha256:1536d171aa585ba2aaf9d888f4ca6b904488f3f89436d8591fe2c36707580e4e",
+      "status": "STEP2_INPUT_MATERIALIZATION_COMPLETE_TERMINAL_BLOCKED"
+    },
+    "su2k_evaluator": {
+      "path": "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+      "sha256": "sha256:f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed"
+    }
+  },
+  "procurement_blocker_count": 6,
+  "procurement_id": "low-rank-step2-grocery-procurement-v1",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py --write",
+  "resolved_row_package_count": 0,
+  "row_procurement_records": [
+    {
+      "family_id": "rank3-ising",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": "sha256:1bff259327761f6e66afef981870bca29b791b8588dc95409ad2b8b00593fa1b",
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:651f68954a3aad70b3e73681cfebd1dfc2e35454944d1ce53e346168378f8805",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank3-ising-row-procurement-blocker-v1.json"
+    },
+    {
+      "family_id": "rank3-psu2-5",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": "sha256:135e2ff4d2b73b26cac9ae6641375f2571517e2e9d4e783fda25f69bf9a9b227",
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:12dd6727367c6307df9caca16e7320f70a50c3dc407bf04dda1763ed6810225e",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank3-psu2-5-row-procurement-blocker-v1.json"
+    },
+    {
+      "family_id": "rank4-psu2-7",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": "sha256:17b383b2492587d156386454e440235413744a38641adf41fc2d92b35212d33f",
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:cf094e1fa68107f761fc04b9a7383d94b368cfed9cfb5a093c2dba6820dcf0d6",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank4-psu2-7-row-procurement-blocker-v1.json"
+    },
+    {
+      "family_id": "rank5-su2-4",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": "sha256:c9b0123bfd354dd84a5a47b1c88351c4eb8a982d4d2821a94069790eeb2228b5",
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:ad914856af9a741059600a99b5a4da69b8bc08e46f546c0c651a018b74cf35ed",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank5-su2-4-row-procurement-blocker-v1.json"
+    },
+    {
+      "family_id": "rank5-psu2-9",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": "sha256:59c4190842d37bc50a8ad77c413d84df00318dd40a66a8b77be9db020e2c92d5",
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:d1cc907d4a7e8fab36030840da2fc55781a198f59c5659c8b3ca4beeaf9dcef6",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank5-psu2-9-row-procurement-blocker-v1.json"
+    },
+    {
+      "family_id": "rank5-psu3-4",
+      "grocery_status": "PROCUREMENT_BLOCKED",
+      "partial_payload_hash": null,
+      "resolved_package_hash": null,
+      "terminal_artifact_hash": "sha256:30c3cf5492609bcab57a916e0950742b8fc291889c2b0d27e1336ad64c14685d",
+      "terminal_artifact_kind": "row-procurement-blocker",
+      "terminal_artifact_path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank5-psu3-4-row-procurement-blocker-v1.json"
+    }
+  ],
+  "schema": "twisted-yetter.low-rank-step2-grocery-procurement.v1",
+  "status": "STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED",
+  "step": "implementation_order_step_2_resolve_the_6_blocked_rows",
+  "terminal_result_kind": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

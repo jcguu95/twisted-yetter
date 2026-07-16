@@ -1,0 +1,106 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-step2-grocery-procurement",
+  "title": "Low-rank Step 2 grocery procurement completed with terminal blockers",
+  "created_at": "2026-07-16T04:57:45Z",
+  "created_by": "actor:codex",
+  "status": "STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED",
+  "top_notice": "Step 2 grocery procurement was completed as a fail-closed procurement pass over the six blocked non-pointed rows. The pass materialized repo-local SU(2)-family input skeletons where available, but produced zero row-ribbon-realization packages. Every blocked row now has a terminal row-procurement-blocker artifact. This note does not establish the low-rank ribbon classification and does not authorize a scan plan.",
+  "scope": {
+    "step": "implementation_order_step_2_resolve_the_6_blocked_rows",
+    "input_catalog_id": "low-rank-ribbon-realization-catalog-v10",
+    "output_catalog_id": "low-rank-ribbon-realization-catalog-v11",
+    "output_catalog_status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+    "resolved_row_count_after_procurement": 8,
+    "procurement_blocked_row_count_after_procurement": 6,
+    "row_ribbon_realization_package_count": 0,
+    "formal_scan_plan_allowed_after_procurement": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-step2-grocery-procurement-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-step2-grocery-procurement-v1.json",
+      "git_blob": "f71f33a5d25f362d363716c682c68efc1a0df90b",
+      "sha256": "235342a49dd872bde2eff77a291ca6a9bb790a266d159fc4bf28a3bd1bc2649e",
+      "content_hash": "sha256:b1c6b06b1f72b492e89aa2c08038f2c7305bab1e76d192be5656af7558aa6ab6",
+      "status": "STEP2_GROCERY_PROCUREMENT_COMPLETE_PROCUREMENT_BLOCKED"
+    },
+    {
+      "artifact_id": "low-rank-ribbon-realization-catalog-v11",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v11.json",
+      "git_blob": "6cd662651a5c2dcb9ef875e09f5cf955318c0007",
+      "sha256": "e906c8b79c23ceb2e4afb85d09fd932231ba4f68832079c691ee3239632a8ed0",
+      "content_hash": "sha256:f3e3565605dfe489d09088851d13a2737359ead760cd68ce292c5e65be50da13",
+      "status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "artifact_id": "formal-low-rank-scan-readiness-v11",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v11.json",
+      "git_blob": "287544211fdc1aa404b9489e4e6d92eb19ebc4c1",
+      "sha256": "1d917abde2dd90e411616ea42cf499b44a170250f5f8ecac6699527c115a36d0",
+      "content_hash": "sha256:fa83204b0acb5c9aa87eecae70657117d919efc90683c6d1498a8796c021770d",
+      "status": "BLOCKED_TERMINAL_PROCUREMENT_BLOCKED_CATALOG"
+    }
+  ],
+  "row_statuses": [
+    {
+      "family_id": "rank3-ising",
+      "procurement_status": "PROCUREMENT_BLOCKED_BRANCH_ENUMERATION_INCOMPLETE",
+      "partial_payload": "rank3-ising-principal-su2-level2-category-payload-v1",
+      "blocker": "rank3-ising-row-procurement-blocker-v1"
+    },
+    {
+      "family_id": "rank3-psu2-5",
+      "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING",
+      "partial_payload": "rank3-psu2-5-principal-adjoint-su2-level5-category-payload-v1",
+      "blocker": "rank3-psu2-5-row-procurement-blocker-v1"
+    },
+    {
+      "family_id": "rank4-psu2-7",
+      "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING",
+      "partial_payload": "rank4-psu2-7-principal-adjoint-su2-level7-category-payload-v1",
+      "blocker": "rank4-psu2-7-row-procurement-blocker-v1"
+    },
+    {
+      "family_id": "rank5-su2-4",
+      "procurement_status": "PROCUREMENT_BLOCKED_EXTENSION_BRANCH_DATA_MISSING",
+      "partial_payload": "rank5-su2-4-principal-su2-level4-category-payload-v1",
+      "blocker": "rank5-su2-4-row-procurement-blocker-v1"
+    },
+    {
+      "family_id": "rank5-psu2-9",
+      "procurement_status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING",
+      "partial_payload": "rank5-psu2-9-principal-adjoint-su2-level9-category-payload-v1",
+      "blocker": "rank5-psu2-9-row-procurement-blocker-v1"
+    },
+    {
+      "family_id": "rank5-psu3-4",
+      "procurement_status": "PROCUREMENT_BLOCKED_NO_REPO_LOCAL_PSU3_FR_SOURCE",
+      "partial_payload": null,
+      "blocker": "rank5-psu3-4-row-procurement-blocker-v1"
+    }
+  ],
+  "tests": [
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+      "status": "pass",
+      "collected": 46
+    },
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_completion_run_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+      "status": "pass",
+      "collected": 68
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim any of the six blocked rows are resolved.",
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not claim a control scan, target scan, aggregate, or no-signal result.",
+    "This note does not claim principal SU(2)_k payloads represent complete family rows.",
+    "This note does not claim the SU(2)_2 all-sigma backend is a full Ising category."
+  ],
+  "mathematical_status": "STEP2_GROCERY_PROCUREMENT_COMPLETE; TERMINAL_PROCUREMENT_BLOCKERS_REMAIN_FOR_SIX_NONPOINTED_ROWS",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}

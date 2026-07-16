@@ -1,0 +1,67 @@
+{
+  "blocker_id": "rank5-su2-4-row-procurement-blocker-v1",
+  "blocker_ids": [
+    "rank5-su2-4:missing-ribbon-realization-snapshot",
+    "rank5-su2-4:missing-hash-bound-full-coherence-certificate",
+    "rank5-su2-4:missing-independent-ribbon-compatibility-check",
+    "rank5-su2-4:rep-s3-extension-explicit-branching-needed",
+    "rank5-su2-4:two-spherical-structures-per-braided-class-must-not-collapse"
+  ],
+  "content_hash": "sha256:ad914856af9a741059600a99b5a4da69b8bc08e46f546c0c651a018b74cf35ed",
+  "family_id": "rank5-su2-4",
+  "formal_admission_allowed": false,
+  "generated_at_utc": "2026-07-16T04:55:20Z",
+  "generator_script": "experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py",
+  "git": {
+    "commit": "8aeba5d0decde6399368785e8b1a3773dbe674be",
+    "dirty": true
+  },
+  "missing_evidence": [
+    "content-addressed F/R/twist/duality/pivotal/pairing realization",
+    "exact or symbolic producer coherence certificate",
+    "runtime consumer certificate bound to the same category_data_hash",
+    "explicit ribbon condition / balancing compatibility certificate",
+    "explicit Rep(S3)^omega extension data for each gamma branch",
+    "two spherical/ribbon refinements per braided class, if confirmed by the audit, recorded as separate snapshot hashes",
+    "producer and consumer certificates that distinguish pivotal sign changes from braided equivalence"
+  ],
+  "modular_braided_class_count": 4,
+  "partial_payload": {
+    "content_hash": "sha256:c9b0123bfd354dd84a5a47b1c88351c4eb8a982d4d2821a94069790eeb2228b5",
+    "formal_snapshot_produced": false,
+    "path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank5-su2-4-principal-su2-level4-category-payload-v1.json",
+    "status": "PARTIAL_PRINCIPAL_SU2_4_PAYLOAD_EXTENSION_BRANCHES_MISSING"
+  },
+  "procurement_attempt_result": "TERMINAL_BLOCKED_FOR_THIS_PASS",
+  "rank": 5,
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py --write",
+  "required_grocery_items": [
+    "full simples/fusion/duals",
+    "F symbols for every required branch",
+    "R symbols for every required branch",
+    "twists",
+    "pivotal/evaluation/coevaluation",
+    "fusion pairings and basis/gauge",
+    "field embedding",
+    "source locator or derivation artifact",
+    "producer exact/symbolic coherence certificate",
+    "runtime consumer coherence certificate",
+    "ribbon/pivotal compatibility certificate"
+  ],
+  "ribbon_realization_snapshot_hashes": [],
+  "row_ribbon_realization_package_produced": false,
+  "row_terminal_status": "PROCUREMENT_BLOCKED",
+  "schema": "twisted-yetter.low-rank-row-procurement-blocker.v1",
+  "status": "PROCUREMENT_BLOCKED_EXTENSION_BRANCH_DATA_MISSING",
+  "terminal_artifact_kind": "row-procurement-blocker",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "why_this_is_not_a_resolved_row": [
+    "No row-complete ribbon_realization_snapshot was produced.",
+    "No producer/runtime/ribbon certificate triple exists for this row.",
+    "No independently derived ribbon denominator contribution exists for this row.",
+    "Partial payloads are explicitly marked non-formal evidence."
+  ]
+}

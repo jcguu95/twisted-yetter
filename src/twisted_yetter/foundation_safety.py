@@ -29,6 +29,9 @@ FOUNDATION_STATUS: Final = "FOUNDATION_ESTABLISHED"
 RIBBON_CATALOG_ESTABLISHED: Final = "LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED"
 RIBBON_CATALOG_PARTIAL: Final = "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
 RIBBON_CATALOG_BLOCKED: Final = "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+RIBBON_CATALOG_PROCUREMENT_BLOCKED: Final = (
+    "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+)
 
 EVIDENCE_KIND_ALLOWLIST: Final = (
     "ribbon_realization_snapshot",
@@ -164,6 +167,7 @@ def validate_low_rank_ribbon_catalog(catalog: dict[str, Any]) -> None:
         RIBBON_CATALOG_ESTABLISHED,
         RIBBON_CATALOG_PARTIAL,
         RIBBON_CATALOG_BLOCKED,
+        RIBBON_CATALOG_PROCUREMENT_BLOCKED,
     ):
         raise FoundationSafetyError(f"unsupported catalog status: {status!r}")
     coverage = catalog.get("coverage_by_rank")
@@ -210,6 +214,21 @@ def validate_low_rank_ribbon_catalog(catalog: dict[str, Any]) -> None:
             raise FoundationSafetyError("partial catalog cannot allow scan plans")
         if catalog.get("ribbon_denominator_by_rank") not in ({}, None):
             raise FoundationSafetyError("partial catalog cannot publish final ribbon denominators")
+    elif status == RIBBON_CATALOG_PROCUREMENT_BLOCKED:
+        if blocked == 0:
+            raise FoundationSafetyError("procurement-blocked catalog needs at least one blocker")
+        if resolved == 0:
+            raise FoundationSafetyError(
+                "procurement-blocked catalog should preserve resolved rows"
+            )
+        if catalog.get("procurement_status") != "TERMINAL_PROCUREMENT_BLOCKED":
+            raise FoundationSafetyError("procurement-blocked catalog needs terminal procurement status")
+        if catalog.get("formal_scan_plan_allowed") is not False:
+            raise FoundationSafetyError("procurement-blocked catalog cannot allow scan plans")
+        if catalog.get("ribbon_denominator_by_rank") not in ({}, None):
+            raise FoundationSafetyError(
+                "procurement-blocked catalog cannot publish ribbon denominators"
+            )
     else:
         if blocked == 0:
             raise FoundationSafetyError("blocked catalog needs at least one blocker")
@@ -499,6 +518,7 @@ __all__ = [
     "RIBBON_CATALOG_BLOCKED",
     "RIBBON_CATALOG_ESTABLISHED",
     "RIBBON_CATALOG_PARTIAL",
+    "RIBBON_CATALOG_PROCUREMENT_BLOCKED",
     "TERMINAL_RIBBON_ROW_STATUSES",
     "add_content_hash",
     "stable_content_hash",

@@ -1,0 +1,69 @@
+{
+  "blocker_id": "rank3-ising-row-procurement-blocker-v1",
+  "blocker_ids": [
+    "rank3-ising:missing-ribbon-realization-snapshot",
+    "rank3-ising:missing-hash-bound-full-coherence-certificate",
+    "rank3-ising:missing-independent-ribbon-compatibility-check",
+    "rank3-ising:existing-su2-2-rf-local-backend-not-full-ribbon-category",
+    "rank3-ising:requires-explicit-ribbon-multiplicity-denominator",
+    "rank3-ising:requires-full-mixed-label-pentagon-hexagon-checker"
+  ],
+  "content_hash": "sha256:651f68954a3aad70b3e73681cfebd1dfc2e35454944d1ce53e346168378f8805",
+  "family_id": "rank3-ising",
+  "formal_admission_allowed": false,
+  "generated_at_utc": "2026-07-16T04:55:20Z",
+  "generator_script": "experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py",
+  "git": {
+    "commit": "8aeba5d0decde6399368785e8b1a3773dbe674be",
+    "dirty": true
+  },
+  "missing_evidence": [
+    "content-addressed F/R/twist/duality/pivotal/pairing realization",
+    "exact or symbolic producer coherence certificate",
+    "runtime consumer certificate bound to the same category_data_hash",
+    "explicit ribbon condition / balancing compatibility certificate",
+    "sixteen Ising ribbon realization snapshots if the recorded two spherical structures per braided class survive the audit",
+    "full mixed-label F/R/twist/pivotal/evaluation/coevaluation data in one gauge",
+    "machine checker for pentagon and both hexagon equations, not only all-sigma braid closures",
+    "negative controls for mirror, pivotal sign, sigma basis order, and stale SU(2)_2 local backend reuse"
+  ],
+  "modular_braided_class_count": 8,
+  "partial_payload": {
+    "content_hash": "sha256:1bff259327761f6e66afef981870bca29b791b8588dc95409ad2b8b00593fa1b",
+    "formal_snapshot_produced": false,
+    "path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank3-ising-principal-su2-level2-category-payload-v1.json",
+    "status": "PARTIAL_PRINCIPAL_SU2_2_PAYLOAD_NOT_ROW_COMPLETE"
+  },
+  "procurement_attempt_result": "TERMINAL_BLOCKED_FOR_THIS_PASS",
+  "rank": 3,
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py --write",
+  "required_grocery_items": [
+    "full simples/fusion/duals",
+    "F symbols for every required branch",
+    "R symbols for every required branch",
+    "twists",
+    "pivotal/evaluation/coevaluation",
+    "fusion pairings and basis/gauge",
+    "field embedding",
+    "source locator or derivation artifact",
+    "producer exact/symbolic coherence certificate",
+    "runtime consumer coherence certificate",
+    "ribbon/pivotal compatibility certificate"
+  ],
+  "ribbon_realization_snapshot_hashes": [],
+  "row_ribbon_realization_package_produced": false,
+  "row_terminal_status": "PROCUREMENT_BLOCKED",
+  "schema": "twisted-yetter.low-rank-row-procurement-blocker.v1",
+  "status": "PROCUREMENT_BLOCKED_BRANCH_ENUMERATION_INCOMPLETE",
+  "terminal_artifact_kind": "row-procurement-blocker",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "why_this_is_not_a_resolved_row": [
+    "No row-complete ribbon_realization_snapshot was produced.",
+    "No producer/runtime/ribbon certificate triple exists for this row.",
+    "No independently derived ribbon denominator contribution exists for this row.",
+    "Partial payloads are explicitly marked non-formal evidence."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "blocker_id": "rank3-psu2-5-row-procurement-blocker-v1",
+  "blocker_ids": [
+    "rank3-psu2-5:missing-ribbon-realization-snapshot",
+    "rank3-psu2-5:missing-hash-bound-full-coherence-certificate",
+    "rank3-psu2-5:missing-independent-ribbon-compatibility-check",
+    "rank3-psu2-5:requires-source-backed-q6j-symbols",
+    "rank3-psu2-5:requires-galois-branch-and-pivotal-audit"
+  ],
+  "content_hash": "sha256:12dd6727367c6307df9caca16e7320f70a50c3dc407bf04dda1763ed6810225e",
+  "family_id": "rank3-psu2-5",
+  "formal_admission_allowed": false,
+  "generated_at_utc": "2026-07-16T04:55:20Z",
+  "generator_script": "experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py",
+  "git": {
+    "commit": "8aeba5d0decde6399368785e8b1a3773dbe674be",
+    "dirty": true
+  },
+  "missing_evidence": [
+    "content-addressed F/R/twist/duality/pivotal/pairing realization",
+    "exact or symbolic producer coherence certificate",
+    "runtime consumer certificate bound to the same category_data_hash",
+    "explicit ribbon condition / balancing compatibility certificate",
+    "rank-3 adjoint SU(2) level-5 F/R data with field embedding and source locator",
+    "exact q6j or equivalent symbolic producer certificate for all fusion channels",
+    "independent balancing and ribbon/pivotal compatibility checks for every branch"
+  ],
+  "modular_braided_class_count": 6,
+  "partial_payload": {
+    "content_hash": "sha256:135e2ff4d2b73b26cac9ae6641375f2571517e2e9d4e783fda25f69bf9a9b227",
+    "formal_snapshot_produced": false,
+    "path": "experiments/results/foundation-v2-safety-substrate/grocery-procurement/rank3-psu2-5-principal-adjoint-su2-level5-category-payload-v1.json",
+    "status": "PARTIAL_PRINCIPAL_SU2K_PAYLOAD_NOT_GALOIS_COMPLETE"
+  },
+  "procurement_attempt_result": "TERMINAL_BLOCKED_FOR_THIS_PASS",
+  "rank": 3,
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py --write",
+  "required_grocery_items": [
+    "full simples/fusion/duals",
+    "F symbols for every required branch",
+    "R symbols for every required branch",
+    "twists",
+    "pivotal/evaluation/coevaluation",
+    "fusion pairings and basis/gauge",
+    "field embedding",
+    "source locator or derivation artifact",
+    "producer exact/symbolic coherence certificate",
+    "runtime consumer coherence certificate",
+    "ribbon/pivotal compatibility certificate"
+  ],
+  "ribbon_realization_snapshot_hashes": [],
+  "row_ribbon_realization_package_produced": false,
+  "row_terminal_status": "PROCUREMENT_BLOCKED",
+  "schema": "twisted-yetter.low-rank-row-procurement-blocker.v1",
+  "status": "PROCUREMENT_BLOCKED_GALOIS_PIVOTAL_BRANCH_AUDIT_MISSING",
+  "terminal_artifact_kind": "row-procurement-blocker",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "why_this_is_not_a_resolved_row": [
+    "No row-complete ribbon_realization_snapshot was produced.",
+    "No producer/runtime/ribbon certificate triple exists for this row.",
+    "No independently derived ribbon denominator contribution exists for this row.",
+    "Partial payloads are explicitly marked non-formal evidence."
+  ]
+}

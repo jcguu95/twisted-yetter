@@ -1,0 +1,222 @@
+{
+  "basis_gauge": {
+    "source": "SU2KBraidEvaluator multiplicity-free fusion-path basis",
+    "status": "MULTIPLICITY_FREE_FUSION_PATH_BASIS_RECORDED_NOT_ROW_CERTIFIED"
+  },
+  "blocking_summary": "Principal adjoint SU(2)_9 data cannot stand in for all Galois/pivotal branches.",
+  "certificates": {
+    "consumer_runtime_coherence": {
+      "status": "MISSING"
+    },
+    "producer_exact_coherence": {
+      "status": "MISSING"
+    },
+    "ribbon_pivotal_compatibility": {
+      "status": "MISSING"
+    }
+  },
+  "content_hash": "sha256:59c4190842d37bc50a8ad77c413d84df00318dd40a66a8b77be9db020e2c92d5",
+  "duals": {
+    "0": 0,
+    "2": 2,
+    "4": 4,
+    "6": 6,
+    "8": 8
+  },
+  "f_symbols": {
+    "q6j_source_method": "SU2KBraidEvaluator.quantum_6j",
+    "source_method": "SU2KBraidEvaluator.f_symbol",
+    "status": "FORMULA_SOURCE_PINNED_NOT_EXPORTED_FOR_ALL_BRANCHES"
+  },
+  "family_id": "rank5-psu2-9",
+  "field_embedding": {
+    "cyclotomic_root": "A = zeta_{44}",
+    "galois_branches_materialized": false,
+    "status": "FORMULA_RECORDED_NOT_BRANCH_CERTIFIED"
+  },
+  "formal_row_resolution_allowed": false,
+  "formal_snapshot_produced": false,
+  "fusion": {
+    "multiplicity": "multiplicity-free",
+    "source_method": "SU2KBraidEvaluator.fusion_outputs",
+    "table": {
+      "0x0": [
+        0
+      ],
+      "0x2": [
+        2
+      ],
+      "0x4": [
+        4
+      ],
+      "0x6": [
+        6
+      ],
+      "0x8": [
+        8
+      ],
+      "2x0": [
+        2
+      ],
+      "2x2": [
+        0,
+        2,
+        4
+      ],
+      "2x4": [
+        2,
+        4,
+        6
+      ],
+      "2x6": [
+        4,
+        6,
+        8
+      ],
+      "2x8": [
+        6,
+        8
+      ],
+      "4x0": [
+        4
+      ],
+      "4x2": [
+        2,
+        4,
+        6
+      ],
+      "4x4": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "4x6": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "4x8": [
+        4,
+        6
+      ],
+      "6x0": [
+        6
+      ],
+      "6x2": [
+        4,
+        6,
+        8
+      ],
+      "6x4": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "6x6": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "6x8": [
+        2,
+        4
+      ],
+      "8x0": [
+        8
+      ],
+      "8x2": [
+        6,
+        8
+      ],
+      "8x4": [
+        4,
+        6
+      ],
+      "8x6": [
+        2,
+        4
+      ],
+      "8x8": [
+        0,
+        2
+      ]
+    }
+  },
+  "generated_at_utc": "2026-07-16T04:55:20Z",
+  "generator_script": "experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py",
+  "git": {
+    "commit": "8aeba5d0decde6399368785e8b1a3773dbe674be",
+    "dirty": true
+  },
+  "level": 9,
+  "negative_checks": {
+    "stale_certificate": "NOT_RUN_NO_CERTIFICATE",
+    "wrong_basis_order": "NOT_RUN_NO_EXPORTED_BASIS_CERTIFICATE",
+    "wrong_branch": "NOT_RUN_NO_BRANCH_EXPORT",
+    "wrong_mirror": "NOT_RUN_NO_BRANCH_EXPORT",
+    "wrong_pivotal_scalar": "NOT_RUN_NO_PIVOTAL_CERTIFICATE"
+  },
+  "not_formal_evidence_reason": "missing row-complete branch enumeration and bound producer/runtime/ribbon certificates",
+  "pairing": {
+    "fusion_pairing_invertibility_checked": false,
+    "status": "NOT_CERTIFIED"
+  },
+  "payload_id": "rank5-psu2-9-principal-adjoint-su2-level9-category-payload-v1",
+  "payload_kind": "principal_su2k_category_input_skeleton",
+  "pivotal": {
+    "candidate_quantum_dimension_formula": "[label+1]_q via SU2KBraidEvaluator.dimension",
+    "evaluation_coevaluation_materialized": false,
+    "status": "FORMULA_RECORDED_NOT_CERTIFIED"
+  },
+  "r_symbols": {
+    "source_method": "SU2KBraidEvaluator.r_symbol",
+    "status": "FORMULA_SOURCE_PINNED_NOT_EXPORTED_FOR_ALL_BRANCHES"
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_step2_grocery_procurement_v1.py --write",
+  "root_order": 44,
+  "schema": "twisted-yetter.low-rank-step2-principal-category-payload.v1",
+  "simples": [
+    {
+      "dual": 0,
+      "label": 0
+    },
+    {
+      "dual": 2,
+      "label": 2
+    },
+    {
+      "dual": 4,
+      "label": 4
+    },
+    {
+      "dual": 6,
+      "label": 6
+    },
+    {
+      "dual": 8,
+      "label": 8
+    }
+  ],
+  "source_machinery": {
+    "path": "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+    "sha256": "sha256:f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed"
+  },
+  "status": "PARTIAL_PRINCIPAL_SU2K_PAYLOAD_NOT_GALOIS_COMPLETE",
+  "subcategory": "adjoint-even-labels",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "twists": {
+    "0": "A^(0*(0+2))",
+    "2": "A^(2*(2+2))",
+    "4": "A^(4*(4+2))",
+    "6": "A^(6*(6+2))",
+    "8": "A^(8*(8+2))"
+  }
+}
