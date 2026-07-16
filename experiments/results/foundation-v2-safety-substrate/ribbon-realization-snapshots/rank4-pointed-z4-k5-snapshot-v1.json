@@ -1,0 +1,269 @@
+{
+  "category_contract": "RibbonFusionCategoryV2",
+  "category_data": {
+    "basis_gauge": "Z4 pointed basis e_a tensor e_b -> e_{a+b}; omega_m carries wraparound",
+    "category_id": "rank4-pointed-z4-k5",
+    "dimensions": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "duals": {
+      "0": "0",
+      "1": "3",
+      "2": "2",
+      "3": "1"
+    },
+    "f_symbols": {
+      "associator": "omega_m(a,b,c)=zeta16^(m*a*(b+c-[b+c]_4))",
+      "note": "nontrivial associator is required; strict pointed Z4 would fail hexagon",
+      "parameter_m": 10
+    },
+    "family_id": "rank4-pointed-z4",
+    "field": "Q(zeta16)",
+    "field_embedding": {
+      "parameter_m": 10,
+      "zeta16": "exp(2*pi*i/16)"
+    },
+    "fusion": {
+      "0*0": "0",
+      "0*1": "1",
+      "0*2": "2",
+      "0*3": "3",
+      "1*0": "1",
+      "1*1": "2",
+      "1*2": "3",
+      "1*3": "0",
+      "2*0": "2",
+      "2*1": "3",
+      "2*2": "0",
+      "2*3": "1",
+      "3*0": "3",
+      "3*1": "0",
+      "3*2": "1",
+      "3*3": "2"
+    },
+    "fusion_pairing": "unique one-dimensional pointed basis with omega_m tracked",
+    "labels": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "left_coevaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "left_evaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "metric_group": "Z/4",
+    "monodromy_bicharacter": {
+      "b(0,0)": "1",
+      "b(0,1)": "1",
+      "b(0,2)": "1",
+      "b(0,3)": "1",
+      "b(1,0)": "1",
+      "b(1,1)": "i",
+      "b(1,2)": "-1",
+      "b(1,3)": "-i",
+      "b(2,0)": "1",
+      "b(2,1)": "-1",
+      "b(2,2)": "1",
+      "b(2,3)": "-1",
+      "b(3,0)": "1",
+      "b(3,1)": "-i",
+      "b(3,2)": "-1",
+      "b(3,3)": "i"
+    },
+    "pivotal_scalars": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "quadratic_form": "q(x)=zeta16^(10*x^2)",
+    "r_symbols": {
+      "R_0_0_to_0": "1",
+      "R_0_1_to_1": "1",
+      "R_0_2_to_2": "1",
+      "R_0_3_to_3": "1",
+      "R_1_0_to_1": "1",
+      "R_1_1_to_2": "zeta16^10",
+      "R_1_2_to_3": "i",
+      "R_1_3_to_0": "zeta16^14",
+      "R_2_0_to_2": "1",
+      "R_2_1_to_3": "i",
+      "R_2_2_to_0": "-1",
+      "R_2_3_to_1": "-i",
+      "R_3_0_to_3": "1",
+      "R_3_1_to_0": "zeta16^14",
+      "R_3_2_to_1": "-i",
+      "R_3_3_to_2": "zeta16^10"
+    },
+    "right_coevaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "right_evaluation": {
+      "0": "1",
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "schema": "twisted-yetter.pointed-cyclic-z4-ribbon-data.v1",
+    "source_locators": [
+      {
+        "claim_used": "rank-4 cyclic Z4 pointed modular braided row count",
+        "locator": "rank tables, pages 26-33",
+        "reference_id": "ref:dong-schopieray-near-integral-2024"
+      },
+      {
+        "claim_used": "exact Z4 abelian cocycle pentagon and hexagon checks",
+        "locator": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v8.py",
+        "reference_id": "self-contained-cyclic-z4-cocycle-check"
+      }
+    ],
+    "twists": {
+      "0": "1",
+      "1": "zeta16^10",
+      "2": "-1",
+      "3": "zeta16^10"
+    },
+    "unit": "0"
+  },
+  "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+  "certificates": {
+    "consumer_runtime_coherence": {
+      "basis_safety_checks": {
+        "field_embedding_q_zeta16_recorded": "PASS",
+        "nontrivial_associator_recorded": "PASS",
+        "strict_associator_negative_control_fails": "PASS"
+      },
+      "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+      "certificate_kind": "consumer_runtime_coherence",
+      "checked_payload_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+      "content_hash": "sha256:b2c664083ef54ff4b5a3f29c7c8d1ac7a227309e9befefb1e65d02de21a7010a",
+      "proof_boundary": "Runtime consumer certificate binds exact Z4 pointed data.",
+      "runtime_contract": "RibbonFusionCategoryV2-compatible pointed one-dimensional fusion spaces with explicit Z4 abelian omega",
+      "status": "PASS"
+    },
+    "producer_exact_coherence": {
+      "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+      "certificate_kind": "producer_exact_coherence",
+      "checks": {
+        "left_hexagon": "PASS",
+        "monodromy_nondegenerate": "PASS",
+        "nontrivial_associator_recorded": "PASS",
+        "normalized_abelian_3_cocycle": "PASS",
+        "right_hexagon": "PASS",
+        "scan_details": {
+          "first_left_hexagon_failure": null,
+          "first_pentagon_failure": null,
+          "first_right_hexagon_failure": null,
+          "left_hexagon": "PASS",
+          "left_hexagon_failure_count": 0,
+          "pentagon": "PASS",
+          "pentagon_failure_count": 0,
+          "right_hexagon": "PASS",
+          "right_hexagon_failure_count": 0
+        },
+        "strict_associator_negative_control": {
+          "first_left_hexagon_failure": {
+            "a": 1,
+            "b": 3,
+            "c": 1,
+            "direct": "1",
+            "path": "-1"
+          },
+          "first_pentagon_failure": null,
+          "first_right_hexagon_failure": {
+            "a": 1,
+            "b": 1,
+            "c": 3,
+            "direct": "1",
+            "path": "-1"
+          },
+          "left_hexagon": "FAIL",
+          "left_hexagon_failure_count": 12,
+          "pentagon": "PASS",
+          "pentagon_failure_count": 0,
+          "right_hexagon": "FAIL",
+          "right_hexagon_failure_count": 12
+        },
+        "strict_associator_z4_hexagon_negative_control": "PASS",
+        "twist_equals_R_aa": "PASS"
+      },
+      "content_hash": "sha256:d8431a8cc9decb062bc127750b2ebd3be49b1f15e7da344ee25c33c384e906f3",
+      "field": "Q(zeta16)",
+      "proof_boundary": "Exact cyclic Z4 pointed equations only.",
+      "status": "PASS"
+    },
+    "ribbon_pivotal_compatibility": {
+      "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+      "certificate_kind": "ribbon_pivotal_compatibility",
+      "checks": {
+        "balancing": "PASS",
+        "left_right_trace_agree": "PASS",
+        "monodromy_nondegenerate": "PASS",
+        "pivotal_scalar_unit": "PASS",
+        "quantum_dimensions_all_one": "PASS",
+        "twist_equals_R_aa": "PASS"
+      },
+      "content_hash": "sha256:76513aa1af05cbc240efc6a25c5a37aa1a720332d744f70a38a6547822eb21d7",
+      "proof_boundary": "Braided plus pivotal is accepted only with explicit omega/R/twist checks.",
+      "status": "PASS"
+    }
+  },
+  "claim_level": "formal-low-rank-category-evidence",
+  "content_hash": "sha256:467d41034048b43117d5353aac33927d62ae7970dc47d9096ae339c6b9d7db3e",
+  "evidence_kind": "ribbon_realization_snapshot",
+  "explicit_non_claims": [
+    "This snapshot resolves only one rank4 cyclic Z4 pointed branch.",
+    "This snapshot does not authorize a formal scan plan by itself.",
+    "This snapshot does not resolve the rank4 Z2xZ2 pointed row."
+  ],
+  "family_id": "rank4-pointed-z4",
+  "generated_at_utc": "2026-07-16T01:01:11Z",
+  "generator_script": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v8.py",
+  "git": {
+    "commit": "aec4aa463da7d2d1c9f78eb07ea26516a086d069",
+    "dirty": true
+  },
+  "modular_braided_class_index": 2,
+  "mutable_alias_inputs": [],
+  "pinned_payload_hashes": {
+    "category_data": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+    "consumer_runtime_coherence": "sha256:b2c664083ef54ff4b5a3f29c7c8d1ac7a227309e9befefb1e65d02de21a7010a",
+    "producer_exact_coherence": "sha256:d8431a8cc9decb062bc127750b2ebd3be49b1f15e7da344ee25c33c384e906f3",
+    "ribbon_pivotal_compatibility": "sha256:76513aa1af05cbc240efc6a25c5a37aa1a720332d744f70a38a6547822eb21d7"
+  },
+  "realization_id": "rank4-pointed-z4-k5",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_ribbon_realization_catalog_v8.py --write",
+  "schema": "twisted-yetter.ribbon-realization-snapshot.v1",
+  "source_status": "formal",
+  "status": "RESOLVED_RIBBON_REALIZATION",
+  "structural_checks": {
+    "balancing": "PASS",
+    "duality_involution": "PASS",
+    "fusion_pairing_invertible": "PASS",
+    "hexagon": "PASS",
+    "modularity": "PASS",
+    "pentagon": "PASS",
+    "r_inverse": "PASS",
+    "ribbon_pivotal_compatibility": "PASS",
+    "rigidity": "PASS"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

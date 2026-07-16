@@ -1,0 +1,1002 @@
+{
+  "blocked_family_ids": [
+    "rank3-ising",
+    "rank3-psu2-5",
+    "rank4-pointed-z2xz2",
+    "rank4-psu2-7",
+    "rank5-su2-4",
+    "rank5-psu2-9",
+    "rank5-psu3-4"
+  ],
+  "blocked_row_count": 7,
+  "braided_denominator_by_rank": {
+    "2": 6,
+    "3": 16,
+    "4": 33,
+    "5": 22
+  },
+  "catalog_id": "low-rank-ribbon-realization-catalog-v8",
+  "coverage_by_rank": [
+    {
+      "modular_braided_class_count": 6,
+      "premodular_braided_class_count": 8,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "rank": 2,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_refinement_status": "REQUIRES_SPHERICAL_STRUCTURE_AUDIT"
+    },
+    {
+      "modular_braided_class_count": 16,
+      "premodular_braided_class_count": 20,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "rank": 3,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_refinement_status": "ISING_ROWS_HAVE_TWO_SPHERICAL_STRUCTURES_PER_BRAIDED_CLASS; OTHER_ROWS_REQUIRE_AUDIT"
+    },
+    {
+      "modular_braided_class_count": 33,
+      "premodular_braided_class_count": 57,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_refinement_status": "REQUIRES_SPHERICAL_STRUCTURE_AUDIT"
+    },
+    {
+      "modular_braided_class_count": 22,
+      "premodular_braided_class_count": 55,
+      "proved_scope": "ALL_PREMODULAR_FUSION_CATEGORIES_UP_TO_BRAIDED_EQUIVALENCE",
+      "rank": 5,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_refinement_status": "REP_S3_EXTENSION_ROWS_HAVE_TWO_SPHERICAL_STRUCTURES_PER_BRAIDED_CLASS; OTHER_ROWS_REQUIRE_AUDIT"
+    }
+  ],
+  "explicit_non_claims": [
+    "This partial catalog does not establish the complete rank 2-5 ribbon classification.",
+    "This partial catalog does not authorize scan-plan generation.",
+    "Rank4 Z2xZ2 pointed, Ising, SU(2), PSU, and PSU(3) rows remain blocked."
+  ],
+  "families": [
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 2,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(C2,q), pointed cyclic Z2",
+      "family_id": "rank2-cyclic-z2",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 2,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 2,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved by exact Z2 semion/anti-semion cocycle snapshots with omega(1,1,1)=-1 and R(1,1)=+/-i.",
+      "resolved_modular_braided_class_count": 2,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:b6e1fcedc002a8bad19e62ce667a79bc4592557f4ad2667ee53b40db2f23c3cb",
+          "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:b6e1fcedc002a8bad19e62ce667a79bc4592557f4ad2667ee53b40db2f23c3cb",
+        "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 2,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 4,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,5,q)_ad, Fibonacci/Yang-Lee family",
+      "family_id": "rank2-fibonacci-yang-lee",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 4,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 2,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved by exact Sage rank-2 Fibonacci/Yang-Lee pentagon/hexagon/balancing/ribbon certificate.",
+      "resolved_modular_braided_class_count": 4,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:4d23d590d5850a77cf0abbc9b494ce9c11d4a3769ea681c7895ee6c793c031d2",
+          "sha256:d86b2988ab8e682e450b5c30dc4dc3e12ff1a3af12c44186bc3fc57bf5737d0a",
+          "sha256:734fc4f480dd731347b1f4ed0b1f5de28e9ae98b11cc67d0ec63f61e4447a241",
+          "sha256:b1cd5083778e29a93577b3226368c54658641e909e0d838b8d4d96be9c96ea11"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:4d23d590d5850a77cf0abbc9b494ce9c11d4a3769ea681c7895ee6c793c031d2",
+        "sha256:d86b2988ab8e682e450b5c30dc4dc3e12ff1a3af12c44186bc3fc57bf5737d0a",
+        "sha256:734fc4f480dd731347b1f4ed0b1f5de28e9ae98b11cc67d0ec63f61e4447a241",
+        "sha256:b1cd5083778e29a93577b3226368c54658641e909e0d838b8d4d96be9c96ea11"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 4,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 2,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(C3,q), pointed cyclic Z3",
+      "family_id": "rank3-cyclic-z3",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 2,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 3,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved by exact strict pointed Z3 metric group snapshots q(x)=zeta3^(+x^2) and q(x)=zeta3^(-x^2).",
+      "resolved_modular_braided_class_count": 2,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+          "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+        "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 2,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [
+        "rank3-ising:missing-ribbon-realization-snapshot",
+        "rank3-ising:missing-hash-bound-full-coherence-certificate",
+        "rank3-ising:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 8,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "Ising",
+      "family_id": "rank3-ising",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 8,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 3,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": 2,
+        "status": "PARTIAL_SPHERICAL_MULTIPLICITY_RECORDED_NOT_REALIZATION_SNAPSHOT"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [
+        "rank3-psu2-5:missing-ribbon-realization-snapshot",
+        "rank3-psu2-5:missing-hash-bound-full-coherence-certificate",
+        "rank3-psu2-5:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 6,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,7,q)_ad, PSU(2)_5 family",
+      "family_id": "rank3-psu2-5",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 6,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 3,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": null,
+        "status": "NOT_AUDITED"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 4,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(C4,q), pointed cyclic Z4",
+      "family_id": "rank4-pointed-z4",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 4,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved by exact cyclic Z4 abelian cocycle snapshots q(x)=zeta16^(m*x^2), m in {2,6,10,14}.",
+      "resolved_modular_braided_class_count": 4,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:9130fd7100685e598ed4c09d96a07a71e23c81c4b7bc9066e20c32242573275c",
+          "sha256:f8a53b75687a7fddfcdc6ece8df245ee4d53c6f067607c6e41d3847db37c735b",
+          "sha256:467d41034048b43117d5353aac33927d62ae7970dc47d9096ae339c6b9d7db3e",
+          "sha256:fea42779d4411598fccb71013164a10ac567b738bf2824749cdced4190c96ba2"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:9130fd7100685e598ed4c09d96a07a71e23c81c4b7bc9066e20c32242573275c",
+        "sha256:f8a53b75687a7fddfcdc6ece8df245ee4d53c6f067607c6e41d3847db37c735b",
+        "sha256:467d41034048b43117d5353aac33927d62ae7970dc47d9096ae339c6b9d7db3e",
+        "sha256:fea42779d4411598fccb71013164a10ac567b738bf2824749cdced4190c96ba2"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 4,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [
+        "rank4-pointed-z2xz2:missing-ribbon-realization-snapshot",
+        "rank4-pointed-z2xz2:missing-hash-bound-full-coherence-certificate",
+        "rank4-pointed-z2xz2:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 5,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(C2 x C2,q), pointed Klein four group",
+      "family_id": "rank4-pointed-z2xz2",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 5,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": null,
+        "status": "NOT_AUDITED"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 8,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,5,q)_ad x C(C2,q), SU(2)_3 family",
+      "family_id": "rank4-semion-times-fibonacci",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 8,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved as Deligne products of the two validated semion branches and four validated Fibonacci/Yang-Lee branches.",
+      "resolved_modular_braided_class_count": 8,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:6925f76737cc3a9d5c67a0a4d2100a722a345c8fdcc9753d4c14c0cc03a27fcf",
+          "sha256:36b49dbf4d606b178d79c422d333b24aa409ffc275fcbe17ea4e010dc3bd41cb",
+          "sha256:622355d1505e574dc6526f6f7c351e87e891c7815db3680dc9780344473e112a",
+          "sha256:449c653ccf72d97e4f1feaefb4819965a9448c55b7d65a07ea7452eb072a9e48",
+          "sha256:a8a953fe2a44d591c17008d6e948b95e7ab4b93bdc952eb36ca8a24fa63a6eb7",
+          "sha256:fd04f14f053b7ae8c97785ef8e2b8d66fcbc4fc923d07334c2a640f08942bf58",
+          "sha256:10f16029eea9f1722936fe8ba9896478b3bd99e9443c3028a81e3fc8bb7063a4",
+          "sha256:11dd9c41ea257df846fe315a8fff8b0ce734f3cbe87f5379c62c8021110c1ecf"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:6925f76737cc3a9d5c67a0a4d2100a722a345c8fdcc9753d4c14c0cc03a27fcf",
+        "sha256:36b49dbf4d606b178d79c422d333b24aa409ffc275fcbe17ea4e010dc3bd41cb",
+        "sha256:622355d1505e574dc6526f6f7c351e87e891c7815db3680dc9780344473e112a",
+        "sha256:449c653ccf72d97e4f1feaefb4819965a9448c55b7d65a07ea7452eb072a9e48",
+        "sha256:a8a953fe2a44d591c17008d6e948b95e7ab4b93bdc952eb36ca8a24fa63a6eb7",
+        "sha256:fd04f14f053b7ae8c97785ef8e2b8d66fcbc4fc923d07334c2a640f08942bf58",
+        "sha256:10f16029eea9f1722936fe8ba9896478b3bd99e9443c3028a81e3fc8bb7063a4",
+        "sha256:11dd9c41ea257df846fe315a8fff8b0ce734f3cbe87f5379c62c8021110c1ecf"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 8,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 10,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,5,q)_ad x C(A1,5,q')_ad",
+      "family_id": "rank4-fibxfib",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 10,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved as 10 canonical unordered Deligne products with repetition from the four validated rank2 Fibonacci/Yang-Lee branches.",
+      "resolved_modular_braided_class_count": 10,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:8d48dae2e6827ac28f166850d108a8c9554d5813eaf950be17e728e5de27956d",
+          "sha256:6d1ce18dabdf2b57e4ab64f2a4aedacf4ccd48298db940e3df4661057402d7a2",
+          "sha256:02aef1cdc507807d281cee0c79bf1594358a86249e70e8632edd44bcc5dad43a",
+          "sha256:daf8aff019df2fc0fe1cdb4df62919ac5ca478c418e821f9301d180b7368b877",
+          "sha256:ac09aae34e813ece5cd9d5ef93feaa9ebecf1c8aa476ef97f80d414cae1cc6ea",
+          "sha256:0d9981894446c9c573f809c0cf1f5c83d917ec49738372e898ba75aba81aa379",
+          "sha256:2d936350b0f0d343c365487f5ce1187ffbf788c1711380835a78e3b749215556",
+          "sha256:092e8d5da6ec966841438528a5eeed97f3fcc94ac67385b1e92f816fbf6f6550",
+          "sha256:1eff143dc882dfe1220ed70e243206a242ee723d95e37183e1656faec20c02d5",
+          "sha256:7054379a41f7cf1c0129ffd988ca7097565a00b44f46e209b8451947ff6b53da"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:8d48dae2e6827ac28f166850d108a8c9554d5813eaf950be17e728e5de27956d",
+        "sha256:6d1ce18dabdf2b57e4ab64f2a4aedacf4ccd48298db940e3df4661057402d7a2",
+        "sha256:02aef1cdc507807d281cee0c79bf1594358a86249e70e8632edd44bcc5dad43a",
+        "sha256:daf8aff019df2fc0fe1cdb4df62919ac5ca478c418e821f9301d180b7368b877",
+        "sha256:ac09aae34e813ece5cd9d5ef93feaa9ebecf1c8aa476ef97f80d414cae1cc6ea",
+        "sha256:0d9981894446c9c573f809c0cf1f5c83d917ec49738372e898ba75aba81aa379",
+        "sha256:2d936350b0f0d343c365487f5ce1187ffbf788c1711380835a78e3b749215556",
+        "sha256:092e8d5da6ec966841438528a5eeed97f3fcc94ac67385b1e92f816fbf6f6550",
+        "sha256:1eff143dc882dfe1220ed70e243206a242ee723d95e37183e1656faec20c02d5",
+        "sha256:7054379a41f7cf1c0129ffd988ca7097565a00b44f46e209b8451947ff6b53da"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 10,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [
+        "rank4-psu2-7:missing-ribbon-realization-snapshot",
+        "rank4-psu2-7:missing-hash-bound-full-coherence-certificate",
+        "rank4-psu2-7:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 6,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,9,q)_ad, PSU(2)_7 family",
+      "family_id": "rank4-psu2-7",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 6,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 4,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": null,
+        "status": "NOT_AUDITED"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [
+        "rank5-su2-4:missing-ribbon-realization-snapshot",
+        "rank5-su2-4:missing-hash-bound-full-coherence-certificate",
+        "rank5-su2-4:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 4,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "(Rep(S3)^omega)^gamma, SU(2)_4 family",
+      "family_id": "rank5-su2-4",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 4,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 5,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": 2,
+        "status": "PARTIAL_SPHERICAL_MULTIPLICITY_RECORDED_NOT_REALIZATION_SNAPSHOT"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [
+        "rank5-psu2-9:missing-ribbon-realization-snapshot",
+        "rank5-psu2-9:missing-hash-bound-full-coherence-certificate",
+        "rank5-psu2-9:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 10,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A1,11,q)_ad, PSU(2)_9 family",
+      "family_id": "rank5-psu2-9",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 10,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 5,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": null,
+        "status": "NOT_AUDITED"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "blocker_ids": [],
+      "braided_level": {
+        "class_count": 2,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(C5,q), SU(5)_1 pointed cyclic Z5 family",
+      "family_id": "rank5-su5-1",
+      "formal_admission_allowed": true,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 1,
+      "missing_evidence": [],
+      "modular_braided_class_count": 2,
+      "pivotal_level": {
+        "materialized_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "source": "resolved ribbon realization snapshots",
+        "status": "HASH_BOUND_PIVOTAL_DATA_MATERIALIZED"
+      },
+      "rank": 5,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "resolution_note": "Resolved by exact strict pointed Z5 metric group snapshots q_s(x)=zeta5^(s*x^2), s=1,2.",
+      "resolved_modular_braided_class_count": 2,
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "snapshot_hashes": [
+          "sha256:e4dda8682349c012b78fa55e43d602aa76aba03c65abfb9d61594ab188e0d778",
+          "sha256:53764e4181911cc7e6e5bd8856785c3157dcfadde621ce894d22f30edf653d0a"
+        ],
+        "status": "VERIFIED_BY_FORMAL_SNAPSHOT_CERTIFICATES"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "ribbon_realization_snapshot_hashes": [
+        "sha256:e4dda8682349c012b78fa55e43d602aa76aba03c65abfb9d61594ab188e0d778",
+        "sha256:53764e4181911cc7e6e5bd8856785c3157dcfadde621ce894d22f30edf653d0a"
+      ],
+      "spherical_level": {
+        "source": "resolved ribbon realization snapshots",
+        "spherical_structures_per_braided_class": 2,
+        "status": "HASH_BOUND_SPHERICAL_DATA_MATERIALIZED"
+      },
+      "terminal_status": "RESOLVED_RIBBON_REALIZATION"
+    },
+    {
+      "blocker_ids": [
+        "rank5-psu3-4:missing-ribbon-realization-snapshot",
+        "rank5-psu3-4:missing-hash-bound-full-coherence-certificate",
+        "rank5-psu3-4:missing-independent-ribbon-compatibility-check"
+      ],
+      "braided_level": {
+        "class_count": 6,
+        "equivalence": "braided",
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "MODULAR_BRAIDED_CLASSES_ENUMERATED"
+      },
+      "family": "C(A2,7,q)_ad, PSU(3)_4 family",
+      "family_id": "rank5-psu3-4",
+      "formal_admission_allowed": false,
+      "fusion_level": {
+        "source_reference_id": "ref:dong-schopieray-near-integral-2024",
+        "status": "LITERATURE_BACKED_FUSION_FAMILY"
+      },
+      "fusion_multiplicity_max": 2,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate"
+      ],
+      "modular_braided_class_count": 6,
+      "pivotal_level": {
+        "required_data": [
+          "duality",
+          "pivotal scalar",
+          "evaluation",
+          "coevaluation",
+          "fusion pairing",
+          "basis/gauge",
+          "field embedding"
+        ],
+        "status": "NOT_MATERIALIZED_AS_HASH_BOUND_PIVOTAL_DATA"
+      },
+      "rank": 5,
+      "reference_id": "ref:dong-schopieray-near-integral-2024",
+      "ribbon_level": {
+        "required_checks": [
+          "balancing",
+          "twist/pivotal compatibility",
+          "producer exact coherence",
+          "consumer runtime coherence",
+          "certificate/data-hash binding"
+        ],
+        "status": "NOT_VERIFIED"
+      },
+      "ribbon_realization_snapshot_hash": null,
+      "spherical_level": {
+        "spherical_structures_per_braided_class": null,
+        "status": "NOT_AUDITED"
+      },
+      "terminal_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    }
+  ],
+  "family_count": 14,
+  "formal_scan_plan_allowed": false,
+  "generated_at_utc": "2026-07-16T01:01:11Z",
+  "generator_script": "experiments/scripts/build_low_rank_ribbon_realization_catalog_v8.py",
+  "git": {
+    "commit": "aec4aa463da7d2d1c9f78eb07ea26516a086d069",
+    "dirty": true
+  },
+  "previous_catalog": {
+    "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v7.json",
+    "sha256": "sha256:98b4adc34a02c0459aeec70716d119845736cf8be94a3eaea65853b6fa270369",
+    "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_ribbon_realization_catalog_v8.py --write",
+  "resolved_family_ids": [
+    "rank2-cyclic-z2",
+    "rank2-fibonacci-yang-lee",
+    "rank3-cyclic-z3",
+    "rank4-pointed-z4",
+    "rank4-semion-times-fibonacci",
+    "rank4-fibxfib",
+    "rank5-su5-1"
+  ],
+  "resolved_row_count": 7,
+  "resolved_snapshot_paths": [
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank5-su5-1-s1-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank5-su5-1-s2-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-fibonacci-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-fibonacci-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-fibonacci-yang-lee-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-minus-x-fibonacci-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-minus-x-fibonacci-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-minus-x-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-minus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-plus-x-fibonacci-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-plus-x-fibonacci-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-plus-x-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-semion-times-fibonacci-semion-plus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-minus-x-fibonacci-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-minus-x-fibonacci-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-minus-x-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-minus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-plus-x-fibonacci-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-plus-x-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-fibonacci-plus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-yang-lee-minus-x-yang-lee-minus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-yang-lee-minus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-fibxfib-yang-lee-plus-x-yang-lee-plus-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k1-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k3-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k5-snapshot-v1.json",
+    "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k7-snapshot-v1.json"
+  ],
+  "ribbon_denominator_by_rank": {},
+  "ribbon_denominator_copied_from_braided": false,
+  "ribbon_denominator_status": "PARTIAL_DO_NOT_USE_AS_FINAL_DENOMINATOR",
+  "schema": "twisted-yetter.low-rank-ribbon-realization-catalog.v2",
+  "scope": {
+    "equivalence_target": "ribbon/pivotal refinements of modular braided classes",
+    "rank_6_or_higher_in_scope": false,
+    "rank_max": 5,
+    "rank_min": 2
+  },
+  "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
