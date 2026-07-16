@@ -8413,6 +8413,97 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
+      "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-ribbon-realization-catalog-v10",
+            "commit": "35ecb2e5e8d61f98a9b41222fbc7e5000213e32a",
+            "git_blob": "85f85068e6727ad3df2f1ef11a9261c1c35c5941",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+            "sha256": "5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+            "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+          },
+          {
+            "artifact_id": "formal-low-rank-scan-readiness-v10",
+            "commit": "35ecb2e5e8d61f98a9b41222fbc7e5000213e32a",
+            "git_blob": "81dc8006098c7e7e62a75e6234d3ab03bdc99697",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v10.json",
+            "sha256": "ea591405bd6bb947eefaebc26c3f53cf7fa652b2402f6043198cc7520c38677a",
+            "status": "BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN"
+          }
+        ],
+        "created_at": "2026-07-16T01:25:06Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not authorize any formal scan plan.",
+          "This note does not claim that controls S4, CP2, S2xS2, unlink/Hopf, or alpha=0 were run under formal scan semantics.",
+          "This note does not claim any no-signal result.",
+          "This note does not claim the checked-in SU(2)_2 local backend is a full Ising category realization."
+        ],
+        "mathematical_status": "EIGHT_ROWS_FORMAL_RIBBON_PROGRESS_SIX_NONPOINTED_ROWS_BLOCK_STEP_4_AND_STEP_5; STEPS_6_AND_7_NOT_STARTED",
+        "note_id": "objective-note-2026-07-16-nonpointed-ribbon-blocker-ledger",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_family_ids": [
+            "rank3-ising",
+            "rank3-psu2-5",
+            "rank4-psu2-7",
+            "rank5-su2-4",
+            "rank5-psu2-9",
+            "rank5-psu3-4"
+          ],
+          "blocked_family_row_count": 6,
+          "formal_scan_plan_allowed": false,
+          "formal_scan_readiness_status": "BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN",
+          "ranks": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "resolved_family_row_count": 8
+        },
+        "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_NONPOINTED_ROWS_BLOCK_FORMAL_SCAN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 80,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Non-pointed low-rank ribbon rows remain blocked after pointed-row progress",
+        "top_notice": "After resolving the pointed Z4 and Z2xZ2 rows, the catalog has 8 resolved rows and 6 blocked non-pointed rows. The remaining rows cannot be safely materialized from current repo data: the SU(2)_2 local R/F backend is only a fixed all-sigma braid-closure backend, not a full Ising RibbonFusionCategoryV2 realization. Formal scan-plan generation and controls remain blocked.",
+        "validated_behaviors": [
+          "The foundation validator now permits ribbon realization counts greater than braided class counts only when explicit ribbon multiplicity metadata is present.",
+          "The foundation validator rejects duplicate snapshot hashes in a resolved family row.",
+          "The v10 catalog keeps rank3-ising, rank3-psu2-5, rank4-psu2-7, rank5-su2-4, rank5-psu2-9, and rank5-psu3-4 blocked.",
+          "The rank3 Ising blocker records that experiments/results/local-piece/su2-2-rf-local-backend-v1.json is unsafe as a full category realization because its scope is fixed-label all-sigma braid closures and its not_scope includes mixed simple labels.",
+          "The PSU/SU rows record missing q6j/F/R/source/gauge certificates rather than guessing realizations.",
+          "The v10 readiness artifact states step 6 scan-plan generation is not started and blocked by the partial catalog, and step 7 controls are not started because no formal scan plan exists."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
+        "created_at": "2026-07-16T01:25:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
       "logical_id": "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress",
       "payload": {
@@ -16876,6 +16967,7 @@
       "claim:lab-note:2026-07-15-rank4-semion-times-fibonacci-ribbon-realization-partial-progress": "ctlobj-sha256:304688ff4278de7e1cdbe0437e5779aa231f0b0ad7b42771ffe76c88538eee57",
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+      "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
       "claim:lab-note:2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress": "ctlobj-sha256:4aae4b230c0d15dcf0d0798378aadd16c11e25dfc8d6a32497e56da989d22beb",
       "claim:lab-note:2026-07-16-rank4-z4-ribbon-realization-partial-progress": "ctlobj-sha256:72ed7ce71fb0ea9eca67c5fc11e3fe383c036856cdcab07f7eb7e0caa166f491",
@@ -17286,6 +17378,9 @@
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": [
         "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
         "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
+      ],
+      "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": [
+        "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a"
       ],
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": [
         "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2"
@@ -18333,6 +18428,7 @@
         "ctlobj-sha256:dc916b1496fc4f18826bf7f110d43b15d6705e34af1cbe936e190d2831d60796",
         "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
         "ctlobj-sha256:ddb9ff855c744ea1ea08f0c709372d43a6ccf6bed447f4e81ffb88e42adcd6cd",
+        "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
         "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
         "ctlobj-sha256:e1610c59728c2ba73ad14dd79b73881ee540eea6d4dcf8c5dfaa3adbd1596e07",
@@ -18528,6 +18624,7 @@
         "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
         "ctlobj-sha256:dc6fe7f7bbb961a5122f2d2cfe352764517a0945fc84af5cf959e261fd9cf15b",
         "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870",
+        "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
         "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
@@ -30521,6 +30618,23 @@
           "parent_root_cid": "ctlobj-sha256:e24d87182907e89642dbff5069e1b1d484bfe0eb25c7b4ec6968d2e030374d50",
           "path": "manifests/lab-note-2026-07-15-yasui-character-twist-history-correction.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-15-yasui-character-twist-history-correction.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
+          "generated_at": "2026-07-16T01:25:06Z",
+          "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fccfbb941d9f7544c9c48bbfe58679c2e3d8d5e8942ee6eb991644d0dfdd2842",
+          "path": "manifests/lab-note-2026-07-16-nonpointed-ribbon-blocker-ledger.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-nonpointed-ribbon-blocker-ledger.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -44161,6 +44275,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
+          "generated_at": "2026-07-16T01:25:06Z",
+          "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fccfbb941d9f7544c9c48bbfe58679c2e3d8d5e8942ee6eb991644d0dfdd2842",
+          "path": "manifests/lab-note-2026-07-16-nonpointed-ribbon-blocker-ledger.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-nonpointed-ribbon-blocker-ledger.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc": [
         {
           "admission_batch_cid": "ctlobj-sha256:36ec14cc96f9f3fa7d0427fdf346a7bf60ddec35c6feee89d520798c5b0fe4a3",
@@ -57042,6 +57176,36 @@
         },
         "word_count": 14
       },
+      "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
+        "created_at": "2026-07-16T01:25:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1366,
+        "gist": "After resolving the pointed Z4 and Z2xZ2 rows, the catalog has 8 resolved rows and 6 blocked non-pointed rows. The remaining rows cannot be safely materialized from current repo data: the SU(2)_2 local R/F backend is only a fixed all-sigma braid-closure backend, not a full Isi...",
+        "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-ribbon-realization-catalog-v10\",\"commit\":\"35ecb2e5e8d61f98a9b41222fbc7e5000213e32a\",\"git_blob\":\"85f85068e6727ad3df2f1ef11a9261c1c35c5941\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json\",\"sha256\":\"5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2\",\"status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS\"},{\"artifact_id\":\"formal-low-rank-scan-readiness-v10\",\"commit\":\"35ecb2e5e8d61f98a9b41222fbc7e5000213e32a\",\"git_blob\":\"81dc8006098c7e7e62a75e6234d3ab03bdc99697\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v10.json\",\"sha256\":\"ea591405bd6bb947eefaebc26c3f53cf7fa652b2402f6043198cc7520c38677a\",\"status\":\"BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN\"}],\"created_at\":\"2026-07-16T01:25:06Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not authorize any formal scan plan.\",\"This note does not claim that controls S4, CP2, S2xS2, unlink/Hopf, or alpha=0 were run under formal scan semantics.\",\"This note does not claim any no-signal result.\",\"This note does not claim the checked-in SU(2)_2 local backend is a full Ising category realization.\"],\"mathematical_status\":\"EIGHT_ROWS_FORMAL_RIBBON_PROGRESS_SIX_NONPOINTED_ROWS_BLOCK_STEP_4_AND_STEP_5; STEPS_6_AND_7_NOT_STARTED\",\"note_id\":\"objective-note-2026-07-16-nonpointed-ribbon-blocker-ledger\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_family_ids\":[\"rank3-ising\",\"rank3-psu2-5\",\"rank4-psu2-7\",\"rank5-su2-4\",\"rank5-psu2-9\",\"rank5-psu3-4\"],\"blocked_family_row_count\":6,\"formal_scan_plan_allowed\":false,\"formal_scan_readiness_status\":\"BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN\",\"ranks\":[2,3,4,5],\"resolved_family_row_count\":8},\"status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS_NONPOINTED_ROWS_BLOCK_FORMAL_SCAN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":80,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py\",\"status\":\"pass\"}],\"title\":\"Non-pointed low-rank ribbon rows remain blocked after pointed-row progress\",\"top_notice\":\"After resolving the pointed Z4 and Z2xZ2 rows, the catalog has 8 resolved rows and 6 blocked non-pointed rows. The remaining rows cannot be safely materialized from current repo data: the SU(2)_2 local R/F backend is only a fixed all-sigma braid-closure backend, not a full Ising RibbonFusionCategoryV2 realization. Formal scan-plan generation and controls remain blocked.\",\"validated_behaviors\":[\"The foundation validator now permits ribbon realization counts greater than braided class counts only when explicit ribbon multiplicity metadata is present.\",\"The foundation validator rejects duplicate snapshot hashes in a resolved family row.\",\"The v10 catalog keeps rank3-ising, rank3-psu2-5, rank4-psu2-7, rank5-su2-4, rank5-psu2-9, and rank5-psu3-4 blocked.\",\"The rank3 Ising blocker records that experiments/results/local-piece/su2-2-rf-local-backend-v1.json is unsafe as a full category realization because its scope is fixed-label all-sigma braid closures and its not_scope includes mixed simple labels.\",\"The PSU/SU rows record missing q6j/F/R/source/gauge certificates rather than guessing realizations.\",\"The v10 readiness artifact states step 6 scan-plan generation is not started and blocked by the partial catalog, and step 7 controls are not started because no formal scan plan exists.\"]}",
+        "title": "Non-pointed low-rank ribbon rows remain blocked after pointed-row progress",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4219,
+          "base_estimate": 1187,
+          "estimated_tokens": 1366,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 179,
+          "serialized_character_count": 4219,
+          "unicode_scalar_count": 4219,
+          "utf8_bytes": 4219
+        },
+        "word_count": 250
+      },
       "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc": {
         "active_state": "active",
         "cid": "ctlobj-sha256:ddddf8fb83ef67cd2c64d6192a6896e217a46a07a578535ca92fade575933dfc",
@@ -59964,7 +60128,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T01:15:58Z",
+  "generated_at": "2026-07-16T01:28:20Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -62498,17 +62662,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:fccfbb941d9f7544c9c48bbfe58679c2e3d8d5e8942ee6eb991644d0dfdd2842",
+  "root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 59765,
+    "build_ms": 61127,
     "context_source": "current-context-replay",
-    "current_context_ms": 55762,
-    "discovery_index_ms": 3888,
+    "current_context_ms": 57008,
+    "discovery_index_ms": 4005,
     "payload_summaries_ms": 36,
     "resource_index_ms": 36,
-    "write_ms": 42
+    "write_ms": 40
   },
-  "transition_cid": "ctlobj-sha256:d9a6fa3842dac764e4c75b9bd813a32904ef4e941b7482da1950e00a66876c44"
+  "transition_cid": "ctlobj-sha256:c8fa8e086ff0dbe254eaf242627560ead8764c14266ee9252b3069ee8e3853b8"
 }

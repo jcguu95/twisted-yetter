@@ -1,0 +1,87 @@
+{
+  "created_at": "2026-07-16T01:25:06Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-ribbon-realization-catalog-v10",
+        "commit": "35ecb2e5e8d61f98a9b41222fbc7e5000213e32a",
+        "git_blob": "85f85068e6727ad3df2f1ef11a9261c1c35c5941",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+        "sha256": "5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+        "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+      },
+      {
+        "artifact_id": "formal-low-rank-scan-readiness-v10",
+        "commit": "35ecb2e5e8d61f98a9b41222fbc7e5000213e32a",
+        "git_blob": "81dc8006098c7e7e62a75e6234d3ab03bdc99697",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v10.json",
+        "sha256": "ea591405bd6bb947eefaebc26c3f53cf7fa652b2402f6043198cc7520c38677a",
+        "status": "BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN"
+      }
+    ],
+    "created_at": "2026-07-16T01:25:06Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not authorize any formal scan plan.",
+      "This note does not claim that controls S4, CP2, S2xS2, unlink/Hopf, or alpha=0 were run under formal scan semantics.",
+      "This note does not claim any no-signal result.",
+      "This note does not claim the checked-in SU(2)_2 local backend is a full Ising category realization."
+    ],
+    "mathematical_status": "EIGHT_ROWS_FORMAL_RIBBON_PROGRESS_SIX_NONPOINTED_ROWS_BLOCK_STEP_4_AND_STEP_5; STEPS_6_AND_7_NOT_STARTED",
+    "note_id": "objective-note-2026-07-16-nonpointed-ribbon-blocker-ledger",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_family_ids": [
+        "rank3-ising",
+        "rank3-psu2-5",
+        "rank4-psu2-7",
+        "rank5-su2-4",
+        "rank5-psu2-9",
+        "rank5-psu3-4"
+      ],
+      "blocked_family_row_count": 6,
+      "formal_scan_plan_allowed": false,
+      "formal_scan_readiness_status": "BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN",
+      "ranks": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "resolved_family_row_count": 8
+    },
+    "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_NONPOINTED_ROWS_BLOCK_FORMAL_SCAN",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 80,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Non-pointed low-rank ribbon rows remain blocked after pointed-row progress",
+    "top_notice": "After resolving the pointed Z4 and Z2xZ2 rows, the catalog has 8 resolved rows and 6 blocked non-pointed rows. The remaining rows cannot be safely materialized from current repo data: the SU(2)_2 local R/F backend is only a fixed all-sigma braid-closure backend, not a full Ising RibbonFusionCategoryV2 realization. Formal scan-plan generation and controls remain blocked.",
+    "validated_behaviors": [
+      "The foundation validator now permits ribbon realization counts greater than braided class counts only when explicit ribbon multiplicity metadata is present.",
+      "The foundation validator rejects duplicate snapshot hashes in a resolved family row.",
+      "The v10 catalog keeps rank3-ising, rank3-psu2-5, rank4-psu2-7, rank5-su2-4, rank5-psu2-9, and rank5-psu3-4 blocked.",
+      "The rank3 Ising blocker records that experiments/results/local-piece/su2-2-rf-local-backend-v1.json is unsafe as a full category realization because its scope is fixed-label all-sigma braid closures and its not_scope includes mixed simple labels.",
+      "The PSU/SU rows record missing q6j/F/R/source/gauge certificates rather than guessing realizations.",
+      "The v10 readiness artifact states step 6 scan-plan generation is not started and blocked by the partial catalog, and step 7 controls are not started because no formal scan plan exists."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
