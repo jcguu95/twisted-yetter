@@ -8651,6 +8651,122 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
+      "logical_id": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "ising-formal-map-source-decision-v1",
+            "blocker_hash": "sha256:d248a2f78011ac6d031a021734c545b82484526e5c8b05a53613f982daaedf36",
+            "content_hash": "sha256:f605a7c03e372a0b29268114b1dca813e6bdc5fbdb597c46f08a1363a3311397",
+            "git_blob": "f14cdcca3b74b50cdbd74d0abedf7ca6087b21ce",
+            "path": "experiments/results/foundation-v2-safety-substrate/ising-formal-map-source-decision-v1.json",
+            "sha256": "434f30ac4f4c2af0349d15797563644d938eb96ab09830be205e6e9d913c8545",
+            "status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER"
+          },
+          {
+            "artifact_id": "ising-formal-map-source-decision-builder-v1",
+            "git_blob": "bbe6c6b3a1b681b25cc13a245ceb818f7c146500",
+            "path": "experiments/scripts/build_ising_formal_map_source_decision_v1.py",
+            "sha256": "8caa4b7dac8da61323e1e0df3dad6f233d794656464b5d3040eb47b9040c6fea",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "ising-formal-map-source-decision-tests-v1",
+            "git_blob": "f09c276804b32a4e47b9091dc1d01727078a81ca",
+            "path": "tests/test_ising_formal_map_source_decision_v1.py",
+            "sha256": "552d25de2b447d1e483ef0a102874b7225c52452318794e6410843d83cec7efa",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "all_reviewed_sources_are_hash_recorded": "PASS",
+          "decision_is_terminal_for_current_repo_local_ising_row_completion": "PASS",
+          "input_materialization_blocked": "PASS",
+          "no_repo_source_supports_formal_map_export": "PASS",
+          "numeric_profile_not_promoted": "PASS",
+          "required_source_gaps_are_explicit": "PASS",
+          "scan_gates_remain_closed": "PASS",
+          "source_inventory_nonempty": "PASS"
+        },
+        "created_at": "2026-07-16T07:21:59Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim the mathematical Ising row is impossible.",
+          "This note only blocks current repo-local formal snapshot production.",
+          "This note does not produce ribbon_realization_snapshot formal evidence.",
+          "This note does not establish low-rank ribbon classification.",
+          "This note does not authorize scan-plan generation."
+        ],
+        "mathematical_status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER_FOR_CURRENT_REPO_LOCAL_ROW_COMPLETION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-ising-formal-map-source-decision",
+        "remaining_growth_if_unblocked_later": [
+          "add a hash-bound formal SU(2)_2 evaluation/coevaluation derivation or exporter",
+          "pin square-root branches for every candidate pivotal dimension",
+          "certify q-6j path-basis pairing convention",
+          "rerun eval/coeval materialization and certification preflight",
+          "only then produce ribbon_realization_snapshot artifacts"
+        ],
+        "required_source_gaps": [
+          "formal SU(2)_2 evaluation/coevaluation map exporter in the pinned Galois branch gauge",
+          "formal square-root branch ledger for candidate pivotal dimensions, including negative spherical lifts",
+          "formal proof that the chosen q-6j path-basis pairing is the row-completion pairing consumed by evaluator certificates",
+          "producer exact/symbolic coherence certificate bound to exported maps and pairings",
+          "runtime consumer coherence certificate bound to exported maps and pairings",
+          "ribbon/pivotal compatibility certificate bound to exported maps and pairings"
+        ],
+        "reviewed_source_inventory": [
+          "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+          "experiments/inputs/category-pivotal/su2-k-standard-pivotal-v1.json",
+          "experiments/sage/ribbon_category_v2.py",
+          "experiments/sage/su2_2_rf_local_backend.sage.py",
+          "experiments/sage/su2_2_rf_omega_backend.sage.py",
+          "experiments/sage/README.org"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocker_id": "rank3-ising-formal-map-source-terminal-blocker-v1",
+          "can_promote_ising_candidate_payloads_to_snapshots": false,
+          "current_repo_local_exporter_available": false,
+          "decision_id": "ising-formal-map-source-decision-v1",
+          "family_id": "rank3-ising",
+          "formal_scan_plan_allowed_after_this_note": false,
+          "prior_current_note": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+          "row_complete_status": "TERMINAL_BLOCKED_UNTIL_NEW_FORMAL_MAP_SOURCE"
+        },
+        "status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_ising_formal_map_source_decision_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 36,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_formal_map_source_decision_v1.py tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Ising formal map source decision terminal blocker",
+        "top_notice": "The Ising formal-map source decision was completed. Current repo-local sources are insufficient to implement or cite a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge. The route to current repo-local Ising row-complete ribbon_realization_snapshot production is therefore terminal-blocked until a new formal map source, square-root branch ledger, and pairing proof are added. This does not claim that the mathematical Ising row is impossible; it blocks only the present repo-local formal evidence route."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
+        "created_at": "2026-07-16T07:21:59Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
       "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads",
       "payload": {
@@ -18532,6 +18648,7 @@
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
       "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
+      "claim:lab-note:2026-07-16-ising-formal-map-source-decision": "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
@@ -18961,6 +19078,9 @@
       ],
       "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization": [
         "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a"
+      ],
+      "claim:lab-note:2026-07-16-ising-formal-map-source-decision": [
+        "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7"
       ],
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": [
         "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8"
@@ -19941,6 +20061,7 @@
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
         "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
+        "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
         "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
         "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
         "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
@@ -20214,6 +20335,7 @@
         "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
+        "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
         "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
         "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
         "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
@@ -32375,6 +32497,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2c90fc0d3fbf2d557aabd74c14792d3584494c168851793c79414ea8df6269c1",
+          "generated_at": "2026-07-16T07:21:59Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
+          "path": "manifests/lab-note-2026-07-16-ising-formal-map-source-decision.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-formal-map-source-decision.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:ba547050bcccb9de807a2ba3d8d20b2645e14f2ea2abb4889a152c17e91b166f",
           "generated_at": "2026-07-16T06:53:29Z",
           "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads",
@@ -39159,6 +39298,26 @@
           "parent_root_cid": "ctlobj-sha256:4dc806b461e93299f89b1c87bc0b9d796bd02a023608e2993f9d4b17e4f6774c",
           "path": "manifests/resource-su2-2-braid-oracle-bug-audit-note-active.json",
           "payload_file": "ctl-dogfood/resources/su2-2-braid-oracle-bug-audit-note-active.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2c90fc0d3fbf2d557aabd74c14792d3584494c168851793c79414ea8df6269c1",
+          "generated_at": "2026-07-16T07:21:59Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
+          "path": "manifests/lab-note-2026-07-16-ising-formal-map-source-decision.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-formal-map-source-decision.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -56140,6 +56299,36 @@
         },
         "word_count": 37
       },
+      "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
+        "created_at": "2026-07-16T07:21:59Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1694,
+        "gist": "The Ising formal-map source decision was completed. Current repo-local sources are insufficient to implement or cite a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge. The route to current repo-local Ising row-complete ribbon...",
+        "logical_id": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"ising-formal-map-source-decision-v1\",\"blocker_hash\":\"sha256:d248a2f78011ac6d031a021734c545b82484526e5c8b05a53613f982daaedf36\",\"content_hash\":\"sha256:f605a7c03e372a0b29268114b1dca813e6bdc5fbdb597c46f08a1363a3311397\",\"git_blob\":\"f14cdcca3b74b50cdbd74d0abedf7ca6087b21ce\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ising-formal-map-source-decision-v1.json\",\"sha256\":\"434f30ac4f4c2af0349d15797563644d938eb96ab09830be205e6e9d913c8545\",\"status\":\"ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER\"},{\"artifact_id\":\"ising-formal-map-source-decision-builder-v1\",\"git_blob\":\"bbe6c6b3a1b681b25cc13a245ceb818f7c146500\",\"path\":\"experiments/scripts/build_ising_formal_map_source_decision_v1.py\",\"sha256\":\"8caa4b7dac8da61323e1e0df3dad6f233d794656464b5d3040eb47b9040c6fea\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"ising-formal-map-source-decision-tests-v1\",\"git_blob\":\"f09c276804b32a4e47b9091dc1d01727078a81ca\",\"path\":\"tests/test_ising_formal_map_source_decision_v1.py\",\"sha256\":\"552d25de2b447d1e483ef0a102874b7225c52452318794e6410843d83cec7efa\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"all_reviewed_sources_are_hash_recorded\":\"PASS\",\"decision_is_terminal_for_current_repo_local_ising_row_completion\":\"PASS\",\"input_materialization_blocked\":\"PASS\",\"no_repo_source_supports_formal_map_export\":\"PASS\",\"numeric_profile_not_promoted\":\"PASS\",\"required_source_gaps_are_explicit\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\",\"source_inventory_nonempty\":\"PASS\"},\"created_at\":\"2026-07-16T07:21:59Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim the mathematical Ising row is impossible.\",\"This note only blocks current repo-local formal snapshot production.\",\"This note does not produce ribbon_realization_snapshot formal evidence.\",\"This note does not establish low-rank ribbon classification.\",\"This note does not authorize scan-plan generation.\"],\"mathematical_status\":\"ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER_FOR_CURRENT_REPO_LOCAL_ROW_COMPLETION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-ising-formal-map-source-decision\",\"remaining_growth_if_unblocked_later\":[\"add a hash-bound formal SU(2)_2 evaluation/coevaluation derivation or exporter\",\"pin square-root branches for every candidate pivotal dimension\",\"certify q-6j path-basis pairing convention\",\"rerun eval/coeval materialization and certification preflight\",\"only then produce ribbon_realization_snapshot artifacts\"],\"required_source_gaps\":[\"formal SU(2)_2 evaluation/coevaluation map exporter in the pinned Galois branch gauge\",\"formal square-root branch ledger for candidate pivotal dimensions, including negative spherical lifts\",\"formal proof that the chosen q-6j path-basis pairing is the row-completion pairing consumed by evaluator certificates\",\"producer exact/symbolic coherence certificate bound to exported maps and pairings\",\"runtime consumer coherence certificate bound to exported maps and pairings\",\"ribbon/pivotal compatibility certificate bound to exported maps and pairings\"],\"reviewed_source_inventory\":[\"experiments/sage/su2k_fusion_braid_evaluator.sage.py\",\"experiments/inputs/category-pivotal/su2-k-standard-pivotal-v1.json\",\"experiments/sage/ribbon_category_v2.py\",\"experiments/sage/su2_2_rf_local_backend.sage.py\",\"experiments/sage/su2_2_rf_omega_backend.sage.py\",\"experiments/sage/README.org\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocker_id\":\"rank3-ising-formal-map-source-terminal-blocker-v1\",\"can_promote_ising_candidate_payloads_to_snapshots\":false,\"current_repo_local_exporter_available\":false,\"decision_id\":\"ising-formal-map-source-decision-v1\",\"family_id\":\"rank3-ising\",\"formal_scan_plan_allowed_after_this_note\":false,\"prior_current_note\":\"claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization\",\"row_complete_status\":\"TERMINAL_BLOCKED_UNTIL_NEW_FORMAL_MAP_SOURCE\"},\"status\":\"ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_ising_formal_map_source_decision_v1.py --write\",\"status\":\"pass\"},{\"collected\":36,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_formal_map_source_decision_v1.py tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Ising formal map source decision terminal blocker\",\"top_notice\":\"The Ising formal-map source decision was completed. Current repo-local sources are insufficient to implement or cite a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge. The route to current repo-local Ising row-complete ribbon_realization_snapshot production is therefore terminal-blocked until a new formal map source, square-root branch ledger, and pairing proof are added. This does not claim that the mathematical Ising row is impossible; it blocks only the present repo-local formal evidence route.\"}",
+        "title": "Ising formal map source decision terminal blocker",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5235,
+          "base_estimate": 1473,
+          "estimated_tokens": 1694,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 221,
+          "serialized_character_count": 5235,
+          "unicode_scalar_count": 5235,
+          "utf8_bytes": 5235
+        },
+        "word_count": 226
+      },
       "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad": {
         "active_state": "active",
         "cid": "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
@@ -62731,7 +62920,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T07:14:54Z",
+  "generated_at": "2026-07-16T07:24:58Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -65265,17 +65454,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:bcc12072b30d774970a9f6d0fad8a29ec0db9d0d97053027d846b506195141ed",
+  "root_cid": "ctlobj-sha256:2c90fc0d3fbf2d557aabd74c14792d3584494c168851793c79414ea8df6269c1",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 66689,
+    "build_ms": 67473,
     "context_source": "current-context-replay",
-    "current_context_ms": 62335,
-    "discovery_index_ms": 4231,
+    "current_context_ms": 63028,
+    "discovery_index_ms": 4319,
     "payload_summaries_ms": 40,
-    "resource_index_ms": 40,
-    "write_ms": 41
+    "resource_index_ms": 41,
+    "write_ms": 43
   },
-  "transition_cid": "ctlobj-sha256:93f624e2c6f4f212783fbe2fd1ca5e16e4eca932cc3b015efb4375e8a775dc30"
+  "transition_cid": "ctlobj-sha256:ab1f742cd7e487dccb37fbb268050b63aa942b4efaee2bc92b0b58d19643c355"
 }

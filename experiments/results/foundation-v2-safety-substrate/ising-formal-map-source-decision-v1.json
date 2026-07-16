@@ -1,0 +1,151 @@
+{
+  "checks": {
+    "all_reviewed_sources_are_hash_recorded": true,
+    "decision_is_terminal_for_current_repo_local_ising_row_completion": true,
+    "input_materialization_blocked": true,
+    "no_repo_source_supports_formal_map_export": true,
+    "numeric_profile_not_promoted": true,
+    "required_source_gaps_are_explicit": true,
+    "source_inventory_nonempty": true
+  },
+  "content_hash": "sha256:f605a7c03e372a0b29268114b1dca813e6bdc5fbdb597c46f08a1363a3311397",
+  "decision": {
+    "can_implement_formal_exporter_from_current_repo_local_sources": false,
+    "can_promote_ising_candidate_payloads_to_snapshots": false,
+    "formal_scan_plan_allowed": false,
+    "reason": "Current repo-local sources expose candidate F/R/twist/dimension data and numeric pivotal conventions, but not a formal eval/coeval map source or branch-pinned derivation sufficient for RibbonFusionCategoryV2 row-complete snapshots.",
+    "row_complete_status": "TERMINAL_BLOCKED_UNTIL_NEW_FORMAL_MAP_SOURCE"
+  },
+  "decision_id": "ising-formal-map-source-decision-v1",
+  "explicit_non_claims": [
+    "This artifact does not claim the mathematical Ising row is impossible.",
+    "This artifact only blocks current repo-local formal snapshot production.",
+    "This artifact does not produce ribbon_realization_snapshot formal evidence.",
+    "This artifact does not establish low-rank ribbon classification.",
+    "This artifact does not authorize scan-plan generation."
+  ],
+  "family_id": "rank3-ising",
+  "generated_at_utc": "2026-07-16T07:21:41Z",
+  "generator_script": "experiments/scripts/build_ising_formal_map_source_decision_v1.py",
+  "git": {
+    "commit": "20a5dd41bcc76def4506e420c49fdb669287111f",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "eval_coeval_pairing_materialization": {
+      "content_hash": "sha256:5732a023708c80f0ac36cbb303aafd78e4e29553881fda4ebe68850734698013",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-eval-coeval-pairing-materialization-v1.json",
+      "sha256": "sha256:53bf3138f86278e72d50ae5625dc21c7f104b080936129bbc845bf2ecc0b43f1",
+      "status": "ISING_EVAL_COEVAL_PAIRING_MATERIALIZATION_BLOCKED"
+    }
+  },
+  "remaining_growth_if_unblocked_later": [
+    "add a hash-bound formal SU(2)_2 evaluation/coevaluation derivation or exporter",
+    "pin square-root branches for every candidate pivotal dimension",
+    "certify q-6j path-basis pairing convention",
+    "rerun eval/coeval materialization and certification preflight",
+    "only then produce ribbon_realization_snapshot artifacts"
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_ising_formal_map_source_decision_v1.py --write",
+  "schema": "twisted-yetter.ising-formal-map-source-decision.v1",
+  "status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER",
+  "terminal_blocker": {
+    "blocked_scope": "current repo-local Ising row-complete ribbon realization snapshot production",
+    "blocker_hash": "sha256:d248a2f78011ac6d031a021734c545b82484526e5c8b05a53613f982daaedf36",
+    "blocker_id": "rank3-ising-formal-map-source-terminal-blocker-v1",
+    "family_id": "rank3-ising",
+    "not_blocked_scope": [
+      "future work that adds a source-backed formal SU(2)_2 eval/coeval derivation",
+      "future work that imports a hash-bound external theorem/source locator",
+      "ordinary numeric SU(2)_2 controls outside this formal low-rank catalog route"
+    ],
+    "required_source_gaps": [
+      "formal SU(2)_2 evaluation/coevaluation map exporter in the pinned Galois branch gauge",
+      "formal square-root branch ledger for candidate pivotal dimensions, including negative spherical lifts",
+      "formal proof that the chosen q-6j path-basis pairing is the row-completion pairing consumed by evaluator certificates",
+      "producer exact/symbolic coherence certificate bound to exported maps and pairings",
+      "runtime consumer coherence certificate bound to exported maps and pairings",
+      "ribbon/pivotal compatibility certificate bound to exported maps and pairings"
+    ],
+    "source_inventory_decisions": [
+      {
+        "blocking_finding": "No formal evaluation/coevaluation map exporter is exposed for row-complete ribbon snapshot production.",
+        "decision": "INSUFFICIENT_FOR_FORMAL_ISING_MAP_SOURCE",
+        "path": "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+        "reviewed_capabilities": [
+          "fusion_outputs",
+          "dimension",
+          "twist",
+          "q6j / F-symbol",
+          "R-symbol",
+          "fixed-label braid closure evaluation"
+        ],
+        "sha256": "sha256:f66dbacae2021323f0a80b71ddde89c2df73f4cd8181d5cdd66c16db418ae2ed",
+        "source_id": "su2k-fusion-braid-evaluator"
+      },
+      {
+        "blocking_finding": "Profile status is numeric controls only and explicitly not a formal row certificate.",
+        "decision": "USEFUL_CONVENTION_REFERENCE_NOT_FORMAL_CERTIFICATE",
+        "path": "experiments/inputs/category-pivotal/su2-k-standard-pivotal-v1.json",
+        "reviewed_capabilities": [
+          "numeric Morse controls",
+          "sqrt(quantum_dimension) normalization statement",
+          "orthonormal q-6j path-basis convention statement"
+        ],
+        "sha256": "sha256:56f922d12ea14abe1da0a6512a4835f1c35c7a63a5cc8c0513b147832c304e45",
+        "source_id": "su2-k-standard-pivotal-profile"
+      },
+      {
+        "blocking_finding": "Adapter docstring says production still requires a full hash-bound coherence certificate; it is not a row-complete formal source.",
+        "decision": "INSUFFICIENT_FOR_FORMAL_ISING_MAP_SOURCE",
+        "path": "experiments/sage/ribbon_category_v2.py",
+        "reviewed_capabilities": [
+          "legacy bridge left/right evaluation methods",
+          "legacy bridge pairing identities",
+          "numeric validation bridge"
+        ],
+        "sha256": "sha256:e9a67d094934b76eb9317916b11006a2dc4fe458de73589ec78d4fd8ced85acb",
+        "source_id": "legacy-ribbon-category-v2-adapter"
+      },
+      {
+        "blocking_finding": "File header says it is not a full label-mixed evaluator and not a general planar F/R/eval/coeval tensor graph.",
+        "decision": "INSUFFICIENT_FOR_FORMAL_ISING_MAP_SOURCE",
+        "path": "experiments/sage/su2_2_rf_local_backend.sage.py",
+        "reviewed_capabilities": [
+          "explicit R/F local backend",
+          "fixed all-sigma braid closures",
+          "categorical trace over fusion-path spaces"
+        ],
+        "sha256": "sha256:3249f6487357418c4375acad933f552c2008f5fb47d0f4bec4b50b9058120d9b",
+        "source_id": "su2-2-rf-local-backend"
+      },
+      {
+        "blocking_finding": "File scope excludes arbitrary planar tensor graph and cup/cap programs.",
+        "decision": "INSUFFICIENT_FOR_FORMAL_ISING_MAP_SOURCE",
+        "path": "experiments/sage/su2_2_rf_omega_backend.sage.py",
+        "reviewed_capabilities": [
+          "explicit R/F backend with Omega expansion",
+          "supported braid closures"
+        ],
+        "sha256": "sha256:e54a83e481ec8fc08f3d723c9daa26501baaf4815fe21f4381be4b09d4106453",
+        "source_id": "su2-2-rf-omega-backend"
+      },
+      {
+        "blocking_finding": "README records B0 as not a full F/R/eval/coeval evaluator and not supporting cup/cap or trivalent graph programs.",
+        "decision": "INSUFFICIENT_FOR_FORMAL_ISING_MAP_SOURCE",
+        "path": "experiments/sage/README.org",
+        "reviewed_capabilities": [
+          "repo-local evaluator track inventory",
+          "B0/B1/B2 scope descriptions"
+        ],
+        "sha256": "sha256:45b2f35d04204e92d9d1b68887919c343b08eded3bf42cfd60431300cfa22b79",
+        "source_id": "sage-readme-evaluator-map"
+      }
+    ],
+    "terminal_status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

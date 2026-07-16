@@ -1,0 +1,99 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-ising-formal-map-source-decision",
+  "title": "Ising formal map source decision terminal blocker",
+  "created_at": "2026-07-16T07:21:59Z",
+  "created_by": "actor:codex",
+  "status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER",
+  "top_notice": "The Ising formal-map source decision was completed. Current repo-local sources are insufficient to implement or cite a formal SU(2)_2 evaluation/coevaluation map exporter or derivation in the pinned Galois branch gauge. The route to current repo-local Ising row-complete ribbon_realization_snapshot production is therefore terminal-blocked until a new formal map source, square-root branch ledger, and pairing proof are added. This does not claim that the mathematical Ising row is impossible; it blocks only the present repo-local formal evidence route.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization",
+    "family_id": "rank3-ising",
+    "decision_id": "ising-formal-map-source-decision-v1",
+    "blocker_id": "rank3-ising-formal-map-source-terminal-blocker-v1",
+    "current_repo_local_exporter_available": false,
+    "can_promote_ising_candidate_payloads_to_snapshots": false,
+    "row_complete_status": "TERMINAL_BLOCKED_UNTIL_NEW_FORMAL_MAP_SOURCE",
+    "formal_scan_plan_allowed_after_this_note": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "ising-formal-map-source-decision-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-formal-map-source-decision-v1.json",
+      "git_blob": "f14cdcca3b74b50cdbd74d0abedf7ca6087b21ce",
+      "sha256": "434f30ac4f4c2af0349d15797563644d938eb96ab09830be205e6e9d913c8545",
+      "content_hash": "sha256:f605a7c03e372a0b29268114b1dca813e6bdc5fbdb597c46f08a1363a3311397",
+      "blocker_hash": "sha256:d248a2f78011ac6d031a021734c545b82484526e5c8b05a53613f982daaedf36",
+      "status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER"
+    },
+    {
+      "artifact_id": "ising-formal-map-source-decision-builder-v1",
+      "path": "experiments/scripts/build_ising_formal_map_source_decision_v1.py",
+      "git_blob": "bbe6c6b3a1b681b25cc13a245ceb818f7c146500",
+      "sha256": "8caa4b7dac8da61323e1e0df3dad6f233d794656464b5d3040eb47b9040c6fea",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "ising-formal-map-source-decision-tests-v1",
+      "path": "tests/test_ising_formal_map_source_decision_v1.py",
+      "git_blob": "f09c276804b32a4e47b9091dc1d01727078a81ca",
+      "sha256": "552d25de2b447d1e483ef0a102874b7225c52452318794e6410843d83cec7efa",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "input_materialization_blocked": "PASS",
+    "source_inventory_nonempty": "PASS",
+    "all_reviewed_sources_are_hash_recorded": "PASS",
+    "numeric_profile_not_promoted": "PASS",
+    "no_repo_source_supports_formal_map_export": "PASS",
+    "required_source_gaps_are_explicit": "PASS",
+    "decision_is_terminal_for_current_repo_local_ising_row_completion": "PASS",
+    "scan_gates_remain_closed": "PASS"
+  },
+  "reviewed_source_inventory": [
+    "experiments/sage/su2k_fusion_braid_evaluator.sage.py",
+    "experiments/inputs/category-pivotal/su2-k-standard-pivotal-v1.json",
+    "experiments/sage/ribbon_category_v2.py",
+    "experiments/sage/su2_2_rf_local_backend.sage.py",
+    "experiments/sage/su2_2_rf_omega_backend.sage.py",
+    "experiments/sage/README.org"
+  ],
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_ising_formal_map_source_decision_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_formal_map_source_decision_v1.py tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+      "status": "pass",
+      "collected": 36
+    }
+  ],
+  "required_source_gaps": [
+    "formal SU(2)_2 evaluation/coevaluation map exporter in the pinned Galois branch gauge",
+    "formal square-root branch ledger for candidate pivotal dimensions, including negative spherical lifts",
+    "formal proof that the chosen q-6j path-basis pairing is the row-completion pairing consumed by evaluator certificates",
+    "producer exact/symbolic coherence certificate bound to exported maps and pairings",
+    "runtime consumer coherence certificate bound to exported maps and pairings",
+    "ribbon/pivotal compatibility certificate bound to exported maps and pairings"
+  ],
+  "remaining_growth_if_unblocked_later": [
+    "add a hash-bound formal SU(2)_2 evaluation/coevaluation derivation or exporter",
+    "pin square-root branches for every candidate pivotal dimension",
+    "certify q-6j path-basis pairing convention",
+    "rerun eval/coeval materialization and certification preflight",
+    "only then produce ribbon_realization_snapshot artifacts"
+  ],
+  "explicit_non_claims": [
+    "This note does not claim the mathematical Ising row is impossible.",
+    "This note only blocks current repo-local formal snapshot production.",
+    "This note does not produce ribbon_realization_snapshot formal evidence.",
+    "This note does not establish low-rank ribbon classification.",
+    "This note does not authorize scan-plan generation."
+  ],
+  "mathematical_status": "ISING_FORMAL_MAP_SOURCE_TERMINAL_BLOCKER_FOR_CURRENT_REPO_LOCAL_ROW_COMPLETION; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}
