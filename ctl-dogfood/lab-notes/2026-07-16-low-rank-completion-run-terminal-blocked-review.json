@@ -1,0 +1,83 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-completion-run-terminal-blocked-review",
+  "title": "Low-rank ribbon completion run reached terminal-blocked review point",
+  "created_at": "2026-07-16T04:18:00Z",
+  "created_by": "actor:codex",
+  "status": "COMPLETION_RUN_TERMINAL_BLOCKED_REVIEW_READY_NO_FINAL_CLAIMS_ADMITTED",
+  "top_notice": "The end-to-end low-rank ribbon scan run now has a hash-bound terminal result candidate: it is terminal-blocked before formal scan planning because six non-pointed rows still lack content-addressed ribbon realization snapshots and required coherence/ribbon certificates. This note is a checkpoint and review notice only; it does not admit final classification or scan claims.",
+  "scope": {
+    "catalog_id": "low-rank-ribbon-realization-catalog-v10",
+    "catalog_status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+    "resolved_family_row_count": 8,
+    "blocked_family_row_count": 6,
+    "terminal_result_candidate": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+    "formal_scan_plan_produced": false,
+    "formal_control_results_produced": false,
+    "formal_target_scan_results_produced": false,
+    "formal_scan_aggregate_produced": false,
+    "final_claims_admitted": false,
+    "review_required_before_final_claims": true
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-completion-run-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-completion-run-v1.json",
+      "commit": "28ba2f49fd68a822e179e735c6c5b001f24b3684",
+      "git_blob": "d41051eff7d876e1bd3214d260fd4dd5da8111c8",
+      "sha256": "fefd7909c60e1dc0294143406fbded4db528a7023366993aa189bb7ecf8dd7e6",
+      "content_hash": "sha256:7ea4548c28ef69188d23e72da796f95373344bf0459eee0cbe3da466fa28cc8b",
+      "status": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED"
+    },
+    {
+      "artifact_id": "low-rank-ribbon-classification-terminal-blocked-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-classification-terminal-blocked-v1.json",
+      "commit": "28ba2f49fd68a822e179e735c6c5b001f24b3684",
+      "git_blob": "fd389cc56bbc1d9c5ebd9904dc0eacf378506c52",
+      "sha256": "062520be2313e4e74d6982a77c76ec8a1cc5442857dce8c0a206ac1825c8a2ef",
+      "content_hash": "sha256:6f9f2f01d71864ff6515e35694aba43e1ff32161e9e5a88dd8c4f46b9baafabb",
+      "status": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED"
+    },
+    {
+      "artifact_id": "low-rank-final-claim-review-package-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-final-claim-review-package-v1.json",
+      "commit": "28ba2f49fd68a822e179e735c6c5b001f24b3684",
+      "git_blob": "c74d5ba39a2a0ccec8ac6c6f6e4eb98a87a91135",
+      "sha256": "d5c9f482fe3e6fa5272438c6baecc493ece4e69030acd3c82a093a2cf9df475f",
+      "content_hash": "sha256:5285e79bae52b858ea525771148aaf465f7b80168186cb7c27864946ea5dfa6a",
+      "status": "READY_FOR_USER_REVIEW_BEFORE_FINAL_CLAIMS"
+    }
+  ],
+  "terminal_blocked_family_ids": [
+    "rank3-ising",
+    "rank3-psu2-5",
+    "rank4-psu2-7",
+    "rank5-su2-4",
+    "rank5-psu2-9",
+    "rank5-psu3-4"
+  ],
+  "validated_behaviors": [
+    "The completion run records the v10 partial catalog, blocked step 6 scan-plan generation attempt, blocked step 7 control attempt, blocked step 8 target scan attempt, and blocked step 9 aggregate attempt by hash.",
+    "All six remaining non-pointed rows have terminal-blocked row records with required evidence and missing evidence listed.",
+    "The terminal blocker candidate explicitly stops before scan planning and does not claim scan completion.",
+    "The review package records final_claims_admitted=false and proposes only a terminal blocker claim for later user review."
+  ],
+  "tests": [
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_completion_run_v1.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+      "status": "pass",
+      "collected": 97
+    }
+  ],
+  "explicit_non_claims": [
+    "This checkpoint does not admit LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This checkpoint does not admit FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This checkpoint does not admit a final terminal blocker claim.",
+    "This checkpoint does not claim a formal scan plan exists.",
+    "This checkpoint does not claim controls or target scans were run.",
+    "This checkpoint does not claim a scan aggregate or no-signal result.",
+    "This checkpoint does not claim a TCY no-go theorem."
+  ],
+  "mathematical_status": "TERMINAL_BLOCKED_CANDIDATE_READY_FOR_USER_REVIEW; FINAL_CLAIMS_NOT_ADMITTED",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}
