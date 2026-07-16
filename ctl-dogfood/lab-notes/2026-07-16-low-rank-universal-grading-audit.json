@@ -1,0 +1,98 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-universal-grading-audit",
+  "title": "Low-rank blocked-row universal grading audit",
+  "created_at": "2026-07-16T05:11:20Z",
+  "created_by": "actor:codex",
+  "status": "UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER",
+  "top_notice": "A fusion-rule-only universal grading audit was completed for the six procurement-blocked low-rank rows. The audit formally finds nontrivial universal character sectors for rank3-ising and rank5-su2-4, formally finds trivial universal grading for the three PSU(2) adjoint rows, and leaves rank5-psu3-4 blocked because no repo-local machine-readable fusion table is pinned. This note does not establish ribbon realization data and does not authorize scan-plan generation.",
+  "scope": {
+    "input_catalog_id": "low-rank-ribbon-realization-catalog-v11",
+    "input_catalog_status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+    "audit_id": "low-rank-universal-grading-audit-v1",
+    "audit_scope": "fusion_rule_universal_grading_only",
+    "formal_nontrivial_universal_group_family_ids": [
+      "rank3-ising",
+      "rank5-su2-4"
+    ],
+    "formal_trivial_universal_group_family_ids": [
+      "rank3-psu2-5",
+      "rank4-psu2-7",
+      "rank5-psu2-9"
+    ],
+    "universal_grading_audit_blocked_family_ids": [
+      "rank5-psu3-4"
+    ],
+    "formal_scan_plan_allowed_after_audit": false
+  },
+  "artifact": {
+    "artifact_id": "low-rank-universal-grading-audit-v1",
+    "path": "experiments/results/foundation-v2-safety-substrate/low-rank-universal-grading-audit-v1.json",
+    "git_blob": "00ebb0fad791c67aa3b360180e28060b4615da3c",
+    "sha256": "ef06f5c67e760b72b724c8e51cadd0db778f01bd611fbffcc6954b68698f0ce0",
+    "content_hash": "sha256:ed787ac27370aa3349c8d9c1ebc6fe00f3fe91aff645279405b757b92858d5da",
+    "status": "UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER"
+  },
+  "row_statuses": [
+    {
+      "family_id": "rank3-ising",
+      "universal_group": "Z2",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT"
+    },
+    {
+      "family_id": "rank3-psu2-5",
+      "universal_group": "trivial",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT"
+    },
+    {
+      "family_id": "rank4-psu2-7",
+      "universal_group": "trivial",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT"
+    },
+    {
+      "family_id": "rank5-su2-4",
+      "universal_group": "Z2",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT"
+    },
+    {
+      "family_id": "rank5-psu2-9",
+      "universal_group": "trivial",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT"
+    },
+    {
+      "family_id": "rank5-psu3-4",
+      "universal_group": "UNKNOWN",
+      "scan_relevance": "UNKNOWN_UNTIL_FUSION_TABLE_AUDIT",
+      "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+      "blocked_reason": "No repo-local machine-readable PSU(3)_4 fusion table is pinned; the '_ad' family name is not promoted into a formal trivial-universal-grading certificate."
+    }
+  ],
+  "tests": [
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_universal_grading_audit_v1.py tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_completion_run_v1.py",
+      "status": "pass",
+      "collected": 27
+    },
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+      "status": "pass",
+      "collected": 29
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not produce F/R/twist/pivotal/evaluation/coevaluation data.",
+    "This note does not resolve any procurement-blocked row as a ribbon realization.",
+    "This note does not decide PSU(3)_4 universal grading.",
+    "Rows with trivial universal grading are only vacuous for nontrivial universal-character twists; they are not completed category rows."
+  ],
+  "mathematical_status": "FUSION_RULE_UNIVERSAL_GRADING_TRIAGE_COMPLETE_FOR_SU2_FAMILY_ROWS; PSU3_ROW_BLOCKED_PENDING_FUSION_TABLE",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}

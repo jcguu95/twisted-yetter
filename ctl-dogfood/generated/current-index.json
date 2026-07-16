@@ -8727,6 +8727,123 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
+      "payload": {
+        "artifact": {
+          "artifact_id": "low-rank-universal-grading-audit-v1",
+          "content_hash": "sha256:ed787ac27370aa3349c8d9c1ebc6fe00f3fe91aff645279405b757b92858d5da",
+          "git_blob": "00ebb0fad791c67aa3b360180e28060b4615da3c",
+          "path": "experiments/results/foundation-v2-safety-substrate/low-rank-universal-grading-audit-v1.json",
+          "sha256": "ef06f5c67e760b72b724c8e51cadd0db778f01bd611fbffcc6954b68698f0ce0",
+          "status": "UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER"
+        },
+        "created_at": "2026-07-16T05:11:20Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not produce F/R/twist/pivotal/evaluation/coevaluation data.",
+          "This note does not resolve any procurement-blocked row as a ribbon realization.",
+          "This note does not decide PSU(3)_4 universal grading.",
+          "Rows with trivial universal grading are only vacuous for nontrivial universal-character twists; they are not completed category rows."
+        ],
+        "mathematical_status": "FUSION_RULE_UNIVERSAL_GRADING_TRIAGE_COMPLETE_FOR_SU2_FAMILY_ROWS; PSU3_ROW_BLOCKED_PENDING_FUSION_TABLE",
+        "note_id": "objective-note-2026-07-16-low-rank-universal-grading-audit",
+        "row_statuses": [
+          {
+            "family_id": "rank3-ising",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+            "universal_group": "Z2"
+          },
+          {
+            "family_id": "rank3-psu2-5",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+            "universal_group": "trivial"
+          },
+          {
+            "family_id": "rank4-psu2-7",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+            "universal_group": "trivial"
+          },
+          {
+            "family_id": "rank5-su2-4",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+            "universal_group": "Z2"
+          },
+          {
+            "family_id": "rank5-psu2-9",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+            "universal_group": "trivial"
+          },
+          {
+            "blocked_reason": "No repo-local machine-readable PSU(3)_4 fusion table is pinned; the '_ad' family name is not promoted into a formal trivial-universal-grading certificate.",
+            "family_id": "rank5-psu3-4",
+            "ribbon_realization_status": "NOT_PRODUCED_BY_THIS_AUDIT",
+            "scan_relevance": "UNKNOWN_UNTIL_FUSION_TABLE_AUDIT",
+            "universal_group": "UNKNOWN"
+          }
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "audit_id": "low-rank-universal-grading-audit-v1",
+          "audit_scope": "fusion_rule_universal_grading_only",
+          "formal_nontrivial_universal_group_family_ids": [
+            "rank3-ising",
+            "rank5-su2-4"
+          ],
+          "formal_scan_plan_allowed_after_audit": false,
+          "formal_trivial_universal_group_family_ids": [
+            "rank3-psu2-5",
+            "rank4-psu2-7",
+            "rank5-psu2-9"
+          ],
+          "input_catalog_id": "low-rank-ribbon-realization-catalog-v11",
+          "input_catalog_status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+          "universal_grading_audit_blocked_family_ids": [
+            "rank5-psu3-4"
+          ]
+        },
+        "status": "UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 27,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_universal_grading_audit_v1.py tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_completion_run_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 29,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank blocked-row universal grading audit",
+        "top_notice": "A fusion-rule-only universal grading audit was completed for the six procurement-blocked low-rank rows. The audit formally finds nontrivial universal character sectors for rank3-ising and rank5-su2-4, formally finds trivial universal grading for the three PSU(2) adjoint rows, and leaves rank5-psu3-4 blocked because no repo-local machine-readable fusion table is pinned. This note does not establish ribbon realization data and does not authorize scan-plan generation."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
+        "created_at": "2026-07-16T05:11:20Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
       "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
       "payload": {
@@ -17461,6 +17578,7 @@
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
+      "claim:lab-note:2026-07-16-low-rank-universal-grading-audit": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
       "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
       "claim:lab-note:2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress": "ctlobj-sha256:4aae4b230c0d15dcf0d0798378aadd16c11e25dfc8d6a32497e56da989d22beb",
@@ -17883,6 +18001,9 @@
       ],
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": [
         "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-universal-grading-audit": [
+        "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51"
       ],
       "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": [
         "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a"
@@ -18822,6 +18943,7 @@
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
         "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
         "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+        "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
         "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
@@ -19090,6 +19212,7 @@
         "ctlobj-sha256:792bad58e31ffa8fc5d5ab9ea77bf76bb75e7e55ecba0e0a63a3b10ee68d108b",
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
         "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+        "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
         "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
@@ -31246,6 +31369,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:9cf171a4223ccead919b46344ef0a668d997faa6b138f407c692644c708f8e2f",
+          "generated_at": "2026-07-16T05:11:20Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
+          "path": "manifests/lab-note-2026-07-16-low-rank-universal-grading-audit.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-universal-grading-audit.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
           "generated_at": "2026-07-16T01:25:06Z",
           "logical_id": "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger",
@@ -37660,6 +37800,26 @@
           "parent_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
           "path": "manifests/lab-note-2026-07-16-step8-fail-closed-target-scan-gate.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step8-fail-closed-target-scan-gate.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:9cf171a4223ccead919b46344ef0a668d997faa6b138f407c692644c708f8e2f",
+          "generated_at": "2026-07-16T05:11:20Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
+          "path": "manifests/lab-note-2026-07-16-low-rank-universal-grading-audit.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-universal-grading-audit.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -54351,6 +54511,36 @@
         },
         "word_count": 222
       },
+      "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
+        "created_at": "2026-07-16T05:11:20Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1425,
+        "gist": "A fusion-rule-only universal grading audit was completed for the six procurement-blocked low-rank rows. The audit formally finds nontrivial universal character sectors for rank3-ising and rank5-su2-4, formally finds trivial universal grading for the three PSU(2) adjoint rows,...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifact\":{\"artifact_id\":\"low-rank-universal-grading-audit-v1\",\"content_hash\":\"sha256:ed787ac27370aa3349c8d9c1ebc6fe00f3fe91aff645279405b757b92858d5da\",\"git_blob\":\"00ebb0fad791c67aa3b360180e28060b4615da3c\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-universal-grading-audit-v1.json\",\"sha256\":\"ef06f5c67e760b72b724c8e51cadd0db778f01bd611fbffcc6954b68698f0ce0\",\"status\":\"UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER\"},\"created_at\":\"2026-07-16T05:11:20Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not produce F/R/twist/pivotal/evaluation/coevaluation data.\",\"This note does not resolve any procurement-blocked row as a ribbon realization.\",\"This note does not decide PSU(3)_4 universal grading.\",\"Rows with trivial universal grading are only vacuous for nontrivial universal-character twists; they are not completed category rows.\"],\"mathematical_status\":\"FUSION_RULE_UNIVERSAL_GRADING_TRIAGE_COMPLETE_FOR_SU2_FAMILY_ROWS; PSU3_ROW_BLOCKED_PENDING_FUSION_TABLE\",\"note_id\":\"objective-note-2026-07-16-low-rank-universal-grading-audit\",\"row_statuses\":[{\"family_id\":\"rank3-ising\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST\",\"universal_group\":\"Z2\"},{\"family_id\":\"rank3-psu2-5\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS\",\"universal_group\":\"trivial\"},{\"family_id\":\"rank4-psu2-7\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS\",\"universal_group\":\"trivial\"},{\"family_id\":\"rank5-su2-4\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST\",\"universal_group\":\"Z2\"},{\"family_id\":\"rank5-psu2-9\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS\",\"universal_group\":\"trivial\"},{\"blocked_reason\":\"No repo-local machine-readable PSU(3)_4 fusion table is pinned; the '_ad' family name is not promoted into a formal trivial-universal-grading certificate.\",\"family_id\":\"rank5-psu3-4\",\"ribbon_realization_status\":\"NOT_PRODUCED_BY_THIS_AUDIT\",\"scan_relevance\":\"UNKNOWN_UNTIL_FUSION_TABLE_AUDIT\",\"universal_group\":\"UNKNOWN\"}],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"audit_id\":\"low-rank-universal-grading-audit-v1\",\"audit_scope\":\"fusion_rule_universal_grading_only\",\"formal_nontrivial_universal_group_family_ids\":[\"rank3-ising\",\"rank5-su2-4\"],\"formal_scan_plan_allowed_after_audit\":false,\"formal_trivial_universal_group_family_ids\":[\"rank3-psu2-5\",\"rank4-psu2-7\",\"rank5-psu2-9\"],\"input_catalog_id\":\"low-rank-ribbon-realization-catalog-v11\",\"input_catalog_status\":\"PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE\",\"universal_grading_audit_blocked_family_ids\":[\"rank5-psu3-4\"]},\"status\":\"UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_BLOCKER\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":27,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_universal_grading_audit_v1.py tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_completion_run_v1.py\",\"status\":\"pass\"},{\"collected\":29,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"}],\"title\":\"Low-rank blocked-row universal grading audit\",\"top_notice\":\"A fusion-rule-only universal grading audit was completed for the six procurement-blocked low-rank rows. The audit formally finds nontrivial universal character sectors for rank3-ising and rank5-su2-4, formally finds trivial universal grading for the three PSU(2) adjoint rows, and leaves rank5-psu3-4 blocked because no repo-local machine-readable fusion table is pinned. This note does not establish ribbon realization data and does not authorize scan-plan generation.\"}",
+        "title": "Low-rank blocked-row universal grading audit",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4404,
+          "base_estimate": 1239,
+          "estimated_tokens": 1425,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 186,
+          "serialized_character_count": 4404,
+          "unicode_scalar_count": 4404,
+          "utf8_bytes": 4404
+        },
+        "word_count": 164
+      },
       "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e": {
         "active_state": "active",
         "cid": "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
@@ -61002,7 +61192,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T05:00:47Z",
+  "generated_at": "2026-07-16T05:14:06Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -63536,17 +63726,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:a09ed453cc8eb198f9c9454592dd3c1ee5ee8348777a8658bcdb5ecdf2239b09",
+  "root_cid": "ctlobj-sha256:9cf171a4223ccead919b46344ef0a668d997faa6b138f407c692644c708f8e2f",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 62518,
+    "build_ms": 62080,
     "context_source": "current-context-replay",
-    "current_context_ms": 58323,
-    "discovery_index_ms": 4076,
+    "current_context_ms": 57916,
+    "discovery_index_ms": 4046,
     "payload_summaries_ms": 37,
-    "resource_index_ms": 37,
-    "write_ms": 42
+    "resource_index_ms": 38,
+    "write_ms": 41
   },
-  "transition_cid": "ctlobj-sha256:b8135e29fd6d734f745f03c29d13eaeb6064d1b357daab1a6fc194e7cf8bad60"
+  "transition_cid": "ctlobj-sha256:caf034e24ba6865de29d7692cff707bb5bb8fb4d909745dacbc1e2b8dab3a9e4"
 }
