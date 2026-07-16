@@ -1,0 +1,77 @@
+{
+  "admitted_target_scan_case_ids": [],
+  "admitted_target_set_status": "NOT_ENUMERATED_NO_FORMAL_SCAN_PLAN",
+  "attempt_id": "formal-low-rank-target-scan-attempt-v1",
+  "blocked_reason_ids": [
+    "no-formal-scan-plan",
+    "no-formal-control-pass",
+    "catalog-remains-partial",
+    "six-nonpointed-family-rows-still-blocked",
+    "no-scan-case-ids-to-dispatch",
+    "worker-cannot-revalidate-missing-pinned-scan-plan"
+  ],
+  "claim_level": "not-formal-scan-evidence",
+  "content_hash": "sha256:68d5fc6739d3a3648cfa571bb51d27d5293b4c10f0e09bc62cc9a4dcf05f8d39",
+  "evidence_kind": "blocked_target_scan_attempt",
+  "explicit_non_claims": [
+    "No admitted exotic or target scan case was enumerated.",
+    "No target scan worker was dispatched.",
+    "No target scan case result exists.",
+    "No scan aggregate or no-signal claim is supported."
+  ],
+  "fail_closed_checks": {
+    "no_result_cache_written": "PASS",
+    "no_scan_aggregate_candidate": "PASS",
+    "no_target_cases_without_scan_plan": "PASS",
+    "no_target_scan_result_emitted": "PASS",
+    "no_worker_dispatch_without_pinned_hashes": "PASS"
+  },
+  "formal_scan_aggregate_candidate": null,
+  "formal_target_scan_results_produced": false,
+  "generated_at_utc": "2026-07-16T03:44:59Z",
+  "generator_script": "experiments/scripts/build_formal_low_rank_scan_step8_gate_v1.py",
+  "git": {
+    "commit": "4a1a75d33297da1723ce7a8a1230dda0b70c5370",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "catalog": {
+      "blocked_row_count": 6,
+      "content_hash": "sha256:36432a37a6ad404099747d6fd05a1fb8cfe8764e76f9aa03aebebf8abb6732c5",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+      "resolved_row_count": 8,
+      "sha256": "sha256:5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    "step6_7_gate": {
+      "content_hash": "sha256:de570021cafab24809a2ad5d94eaae5bfad8f798c658d687f096d50e1c2a6bd7",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-step6-7-gate-v1.json",
+      "sha256": "sha256:9f9602f860e02af30d55994ca09a4f9467bcde44e1396c2470534523d1ee913c",
+      "status": "STEP6_7_FAIL_CLOSED_COMPLETE"
+    },
+    "step6_scan_plan_generation_attempt": {
+      "content_hash": "sha256:e5f28a65365c0fd0537eb91a651fe440dda9607e3dbc96082d7c3d8a4a2b470d",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json",
+      "sha256": "sha256:21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059",
+      "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+    },
+    "step7_control_scan_attempt": {
+      "content_hash": "sha256:a5f78b0bd8d77bebe3e98fca5b1b64ae5124740663bdfa9bf26d3a12023d62db",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json",
+      "sha256": "sha256:ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a",
+      "status": "BLOCKED_NO_FORMAL_SCAN_PLAN"
+    }
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_formal_low_rank_scan_step8_gate_v1.py --write",
+  "schema": "twisted-yetter.formal-low-rank-target-scan-attempt.v1",
+  "source_status": "blocked",
+  "status": "BLOCKED_NO_FORMAL_SCAN_PLAN_OR_CONTROL_PASS",
+  "step": "implementation_order_step_8_admitted_exotic_target_scan_cases",
+  "target_scan_case_results": [],
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "worker_jobs_dispatched": 0,
+  "worker_revalidation_possible": false
+}
