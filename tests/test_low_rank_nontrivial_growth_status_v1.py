@@ -30,11 +30,11 @@ def targets_by_family(status: dict) -> dict[str, dict]:
     return {target["family_id"]: target for target in status["growth_targets"]}
 
 
-def test_nontrivial_growth_status_records_principal_validation_without_completion() -> None:
+def test_nontrivial_growth_status_records_galois_candidate_validation_without_completion() -> None:
     status = load_status()
 
     assert_content_hash(status)
-    assert status["status"] == "PRINCIPAL_BRANCHES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED"
+    assert status["status"] == "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED"
     assert status["growth_target_family_ids"] == ["rank3-ising", "rank5-su2-4"]
     assert status["row_complete_growth_target_family_ids"] == []
     assert status["still_blocked_growth_target_family_ids"] == ["rank3-ising", "rank5-su2-4"]
@@ -57,15 +57,21 @@ def test_nontrivial_growth_status_keeps_all_unfinished_rows_explicit() -> None:
 
     targets = targets_by_family(status)
     assert targets["rank3-ising"]["growth_status"] == (
-        "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_NOT_ROW_COMPLETE"
+        "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_NOT_ROW_COMPLETE"
     )
     assert targets["rank5-su2-4"]["growth_status"] == (
-        "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING"
+        "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING"
     )
+    assert targets["rank3-ising"]["galois_powers"] == [1, 3, 5, 7, 9, 11, 13, 15]
+    assert targets["rank5-su2-4"]["galois_powers"] == [1, 5, 7, 11, 13, 17, 19, 23]
     for target in targets.values():
         assert target["strict_validation_certificate"]["status"] == (
             "PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION"
         )
+        assert target["galois_branch_candidate_certificate"]["status"] == (
+            "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION"
+        )
+        assert target["galois_candidate_branch_count"] == 8
         assert target["formal_row_resolution_allowed"] is False
         assert target["formal_ribbon_realization_snapshot_produced"] is False
         assert target["remaining_growth"]

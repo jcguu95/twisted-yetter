@@ -1,0 +1,54 @@
+{
+  "certificate_id": "rank3-ising-su2-level2-galois-branch-candidates-validation-v1",
+  "checked_entry_counts": {
+    "branch_count": 8,
+    "dimension_entries": 24,
+    "f_symbol_entries": 288,
+    "fusion_entries": 72,
+    "r_inverse_entries": 160,
+    "r_symbol_entries": 160,
+    "twist_entries": 24
+  },
+  "checks": {
+    "branch_hashes_fresh": "PASS",
+    "candidate_branch_count_matches": "PASS",
+    "dimension_entries_recomputed": "PASS",
+    "export_content_hash_fresh": "PASS",
+    "f_symbol_entries_recomputed": "PASS",
+    "fusion_entries_recomputed": "PASS",
+    "r_inverse_entries_recomputed": "PASS",
+    "r_symbol_entries_recomputed": "PASS",
+    "source_machinery_hash_matches": "PASS",
+    "twist_entries_recomputed": "PASS"
+  },
+  "content_hash": "sha256:bd14d53edebb9f7fdaee5944aa6d37735964a16ac6b63ecb84563fac5d089049",
+  "explicit_non_claims": [
+    "This certificate validates SU(2)_k Galois branch candidates only.",
+    "This certificate is not a row-complete ribbon realization certificate.",
+    "This certificate does not establish pivotal/ribbon lift completeness.",
+    "This certificate does not authorize scan-plan generation."
+  ],
+  "family_id": "rank3-ising",
+  "formal_ribbon_realization_snapshot_produced": false,
+  "formal_row_resolution_allowed": false,
+  "generated_at_utc": "2026-07-16T05:59:45Z",
+  "generator_script": "experiments/sage/export_su2k_galois_branch_candidates.sage.py",
+  "git": {
+    "commit": "e7391d3938ee372115a35d6cd46302b3c532cdf4",
+    "dirty": true
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/export_su2k_galois_branch_candidates.sage.py --family-id rank3-ising --write",
+  "schema": "twisted-yetter.su2k-galois-branch-candidates-validation.v1",
+  "status": "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION",
+  "tool_versions": {
+    "python": "3.13.7",
+    "sage": "10.8"
+  },
+  "validated_export": {
+    "content_hash": "sha256:dbf871eea82c2527e47ea7b81fdc086e925056c2e9219f2479ab2c975bb28856",
+    "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank3-ising-su2-level2-galois-branch-candidates-v1.json",
+    "sha256": "sha256:2a73d9ac4f57c558f190061c85ba8d7f04c2f80567b8bf39b5601fcedb7d31b2",
+    "status": "SU2K_GALOIS_BRANCH_CANDIDATES_EXPORTED_NOT_ROW_COMPLETE"
+  }
+}

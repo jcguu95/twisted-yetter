@@ -1,17 +1,18 @@
 {
   "classification_status": "NOT_ESTABLISHED_BY_THIS_STATUS",
-  "content_hash": "sha256:75219c9ad045b6df6bacdf898fd9818f9febeb67cc1d65afe36f98130f00a0bf",
+  "content_hash": "sha256:0a2e55c687f291ca48f46f12b18a0246237eec7ace501d43bcb77748852ef9ee",
   "explicit_non_claims": [
-    "Strict principal export validation is not row-complete ribbon realization evidence.",
+    "Strict principal and Galois candidate validation is not row-complete ribbon realization evidence.",
     "No growth target is resolved as a full family row by this status artifact.",
     "No formal scan plan is authorized.",
+    "Galois candidate branch payloads do not establish pivotal/ribbon lift completeness.",
     "Trivial rows are ignored only for nontrivial universal-character twist growth.",
     "Unknown rows are not treated as trivial."
   ],
-  "generated_at_utc": "2026-07-16T05:36:45Z",
+  "generated_at_utc": "2026-07-16T06:02:07Z",
   "generator_script": "experiments/scripts/build_low_rank_nontrivial_growth_status_v1.py",
   "git": {
-    "commit": "f473a5d8c0b950410160d82f0251063e5e5d1ca0",
+    "commit": "e7391d3938ee372115a35d6cd46302b3c532cdf4",
     "dirty": true
   },
   "growth_status_id": "low-rank-nontrivial-growth-status-v1",
@@ -21,7 +22,43 @@
   ],
   "growth_targets": [
     {
-      "checked_entry_counts": {
+      "family_id": "rank3-ising",
+      "formal_ribbon_realization_snapshot_produced": false,
+      "formal_row_resolution_allowed": false,
+      "galois_branch_candidate_certificate": {
+        "content_hash": "sha256:bd14d53edebb9f7fdaee5944aa6d37735964a16ac6b63ecb84563fac5d089049",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank3-ising-su2-level2-galois-branch-candidates-validation-v1.json",
+        "sha256": "sha256:056859d7134390144199c7818a5c918d083e8e33c78f0cefeb4f44bfebb34d96",
+        "status": "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION"
+      },
+      "galois_branch_candidate_export": {
+        "content_hash": "sha256:dbf871eea82c2527e47ea7b81fdc086e925056c2e9219f2479ab2c975bb28856",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank3-ising-su2-level2-galois-branch-candidates-v1.json",
+        "sha256": "sha256:2a73d9ac4f57c558f190061c85ba8d7f04c2f80567b8bf39b5601fcedb7d31b2",
+        "status": "SU2K_GALOIS_BRANCH_CANDIDATES_EXPORTED_NOT_ROW_COMPLETE"
+      },
+      "galois_candidate_branch_count": 8,
+      "galois_checked_entry_counts": {
+        "branch_count": 8,
+        "dimension_entries": 24,
+        "f_symbol_entries": 288,
+        "fusion_entries": 72,
+        "r_inverse_entries": 160,
+        "r_symbol_entries": 160,
+        "twist_entries": 24
+      },
+      "galois_powers": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "growth_status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_NOT_ROW_COMPLETE",
+      "principal_checked_entry_counts": {
         "dimension_entries": 3,
         "f_symbol_entries": 36,
         "fusion_entries": 9,
@@ -29,10 +66,6 @@
         "r_symbol_entries": 20,
         "twist_entries": 3
       },
-      "family_id": "rank3-ising",
-      "formal_ribbon_realization_snapshot_produced": false,
-      "formal_row_resolution_allowed": false,
-      "growth_status": "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_NOT_ROW_COMPLETE",
       "principal_export": {
         "content_hash": "sha256:29c54661ef40598390636d62380936f91c4930b14cc66da804b7a3bf5c9e8703",
         "path": "experiments/results/foundation-v2-safety-substrate/grown-category-data/rank3-ising-principal-su2-level2-category-data-export-v1.json",
@@ -40,8 +73,8 @@
         "status": "PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_ROW_COMPLETE"
       },
       "remaining_growth": [
-        "enumerate all Ising braided branches, not only the principal SU(2)_2 branch",
-        "materialize mirror/Galois branch payloads with source-backed field embeddings",
+        "identify which candidate Galois branches correspond to the eight braided Ising classes",
+        "materialize mirror/reverse equivalence conventions explicitly",
         "decide and materialize ribbon/pivotal lifts for each braided branch",
         "produce row-complete producer/runtime/ribbon certificates for every lift",
         "derive the row ribbon denominator without copying the braided denominator"
@@ -54,7 +87,43 @@
       }
     },
     {
-      "checked_entry_counts": {
+      "family_id": "rank5-su2-4",
+      "formal_ribbon_realization_snapshot_produced": false,
+      "formal_row_resolution_allowed": false,
+      "galois_branch_candidate_certificate": {
+        "content_hash": "sha256:ea4cf6269d1bfbc27c612396b2b7ca617470117b722c80d10fe9c6d3fef2aea5",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank5-su2-4-su2-level4-galois-branch-candidates-validation-v1.json",
+        "sha256": "sha256:4bafebad52fab3f6e37d117311f0aed052e9eab107881688e11f3eb9fcf7ce5d",
+        "status": "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION"
+      },
+      "galois_branch_candidate_export": {
+        "content_hash": "sha256:bd2e8b1740a199fae83c576ed1726ff089481b6995a160269a761f5b3aed2539",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank5-su2-4-su2-level4-galois-branch-candidates-v1.json",
+        "sha256": "sha256:15a637fed537de30edc8b960f38a3c276854ccba8c4afaad844c183c55510f50",
+        "status": "SU2K_GALOIS_BRANCH_CANDIDATES_EXPORTED_NOT_ROW_COMPLETE"
+      },
+      "galois_candidate_branch_count": 8,
+      "galois_checked_entry_counts": {
+        "branch_count": 8,
+        "dimension_entries": 40,
+        "f_symbol_entries": 2632,
+        "fusion_entries": 200,
+        "r_inverse_entries": 560,
+        "r_symbol_entries": 560,
+        "twist_entries": 40
+      },
+      "galois_powers": [
+        1,
+        5,
+        7,
+        11,
+        13,
+        17,
+        19,
+        23
+      ],
+      "growth_status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING",
+      "principal_checked_entry_counts": {
         "dimension_entries": 5,
         "f_symbol_entries": 329,
         "fusion_entries": 25,
@@ -62,10 +131,6 @@
         "r_symbol_entries": 70,
         "twist_entries": 5
       },
-      "family_id": "rank5-su2-4",
-      "formal_ribbon_realization_snapshot_produced": false,
-      "formal_row_resolution_allowed": false,
-      "growth_status": "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING",
       "principal_export": {
         "content_hash": "sha256:000a73ac6655518d04e5c54be614f6f8d04a4519d91846fc9606db94a8434068",
         "path": "experiments/results/foundation-v2-safety-substrate/grown-category-data/rank5-su2-4-principal-su2-level4-category-data-export-v1.json",
@@ -73,9 +138,9 @@
         "status": "PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_EXTENSION_COMPLETE"
       },
       "remaining_growth": [
+        "identify which SU(2)_4 Galois candidates correspond to the four braided family classes",
         "materialize Rep(S3)^omega / gamma extension branches",
         "separate the spherical/ribbon refinements by snapshot hash",
-        "decide whether the principal SU(2)_4 branch covers any row branch after quotient conventions",
         "produce row-complete producer/runtime/ribbon certificates for every branch",
         "derive the row ribbon denominator without copying the braided denominator"
       ],
@@ -100,7 +165,7 @@
   "row_complete_growth_target_family_ids": [],
   "scan_plan_status": "NOT_AUTHORIZED_BY_THIS_STATUS",
   "schema": "twisted-yetter.low-rank-nontrivial-growth-status.v1",
-  "status": "PRINCIPAL_BRANCHES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED",
+  "status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED",
   "still_blocked_growth_target_family_ids": [
     "rank3-ising",
     "rank5-su2-4"

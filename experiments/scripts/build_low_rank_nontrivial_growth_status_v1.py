@@ -23,16 +23,19 @@ from twisted_yetter.foundation_safety import stable_content_hash  # noqa: E402
 OUT_DIR = REPO_ROOT / "experiments" / "results" / "foundation-v2-safety-substrate"
 GROWN_DIR = OUT_DIR / "grown-category-data"
 CERT_DIR = OUT_DIR / "grown-category-certificates"
+BRANCH_DIR = OUT_DIR / "grown-category-branches"
 FULL_AUDIT = OUT_DIR / "low-rank-full-catalog-universal-grading-audit-v1.json"
 
 GROWTH_TARGETS = {
     "rank3-ising": {
         "export": GROWN_DIR / "rank3-ising-principal-su2-level2-category-data-export-v1.json",
         "certificate": CERT_DIR / "rank3-ising-principal-su2-level2-strict-export-validation-v1.json",
-        "status": "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_NOT_ROW_COMPLETE",
+        "galois_branch_export": BRANCH_DIR / "rank3-ising-su2-level2-galois-branch-candidates-v1.json",
+        "galois_branch_certificate": BRANCH_DIR / "rank3-ising-su2-level2-galois-branch-candidates-validation-v1.json",
+        "status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_NOT_ROW_COMPLETE",
         "remaining_growth": [
-            "enumerate all Ising braided branches, not only the principal SU(2)_2 branch",
-            "materialize mirror/Galois branch payloads with source-backed field embeddings",
+            "identify which candidate Galois branches correspond to the eight braided Ising classes",
+            "materialize mirror/reverse equivalence conventions explicitly",
             "decide and materialize ribbon/pivotal lifts for each braided branch",
             "produce row-complete producer/runtime/ribbon certificates for every lift",
             "derive the row ribbon denominator without copying the braided denominator",
@@ -41,11 +44,13 @@ GROWTH_TARGETS = {
     "rank5-su2-4": {
         "export": GROWN_DIR / "rank5-su2-4-principal-su2-level4-category-data-export-v1.json",
         "certificate": CERT_DIR / "rank5-su2-4-principal-su2-level4-strict-export-validation-v1.json",
-        "status": "PRINCIPAL_BRANCH_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING",
+        "galois_branch_export": BRANCH_DIR / "rank5-su2-4-su2-level4-galois-branch-candidates-v1.json",
+        "galois_branch_certificate": BRANCH_DIR / "rank5-su2-4-su2-level4-galois-branch-candidates-validation-v1.json",
+        "status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_EXTENSION_BRANCHES_MISSING",
         "remaining_growth": [
+            "identify which SU(2)_4 Galois candidates correspond to the four braided family classes",
             "materialize Rep(S3)^omega / gamma extension branches",
             "separate the spherical/ribbon refinements by snapshot hash",
-            "decide whether the principal SU(2)_4 branch covers any row branch after quotient conventions",
             "produce row-complete producer/runtime/ribbon certificates for every branch",
             "derive the row ribbon denominator without copying the braided denominator",
         ],
@@ -119,16 +124,31 @@ def target_record(family_id: str) -> dict[str, Any]:
     spec = GROWTH_TARGETS[family_id]
     export = load_json(spec["export"])
     cert = load_json(spec["certificate"])
+    branch_export = load_json(spec["galois_branch_export"])
+    branch_cert = load_json(spec["galois_branch_certificate"])
     if cert["validated_export"]["content_hash"] != export["content_hash"]:
         raise RuntimeError(f"{family_id} validation certificate is not bound to export")
     if cert["status"] != "PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION":
         raise RuntimeError(f"{family_id} strict validation did not pass")
+    if branch_cert["validated_export"]["content_hash"] != branch_export["content_hash"]:
+        raise RuntimeError(f"{family_id} Galois branch certificate is not bound to export")
+    if branch_cert["status"] != "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION":
+        raise RuntimeError(f"{family_id} Galois branch validation did not pass")
     return {
         "family_id": family_id,
         "growth_status": spec["status"],
         "principal_export": artifact_record(spec["export"], export),
         "strict_validation_certificate": artifact_record(spec["certificate"], cert),
-        "checked_entry_counts": cert["checked_entry_counts"],
+        "galois_branch_candidate_export": artifact_record(
+            spec["galois_branch_export"], branch_export
+        ),
+        "galois_branch_candidate_certificate": artifact_record(
+            spec["galois_branch_certificate"], branch_cert
+        ),
+        "principal_checked_entry_counts": cert["checked_entry_counts"],
+        "galois_checked_entry_counts": branch_cert["checked_entry_counts"],
+        "galois_candidate_branch_count": branch_export["candidate_branch_count"],
+        "galois_powers": branch_export["galois_powers"],
         "formal_row_resolution_allowed": False,
         "formal_ribbon_realization_snapshot_produced": False,
         "remaining_growth": spec["remaining_growth"],
@@ -142,7 +162,7 @@ def build_status(*, started_at_utc: str) -> dict[str, Any]:
         {
             **base_meta(
                 "twisted-yetter.low-rank-nontrivial-growth-status.v1",
-                "PRINCIPAL_BRANCHES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED",
+                "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED",
                 started_at_utc=started_at_utc,
             ),
             "growth_status_id": "low-rank-nontrivial-growth-status-v1",
@@ -160,9 +180,10 @@ def build_status(*, started_at_utc: str) -> dict[str, Any]:
             "scan_plan_status": "NOT_AUTHORIZED_BY_THIS_STATUS",
             "classification_status": "NOT_ESTABLISHED_BY_THIS_STATUS",
             "explicit_non_claims": [
-                "Strict principal export validation is not row-complete ribbon realization evidence.",
+                "Strict principal and Galois candidate validation is not row-complete ribbon realization evidence.",
                 "No growth target is resolved as a full family row by this status artifact.",
                 "No formal scan plan is authorized.",
+                "Galois candidate branch payloads do not establish pivotal/ribbon lift completeness.",
                 "Trivial rows are ignored only for nontrivial universal-character twist growth.",
                 "Unknown rows are not treated as trivial.",
             ],

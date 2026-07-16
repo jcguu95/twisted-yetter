@@ -1,0 +1,146 @@
+{
+  "created_at": "2026-07-16T06:03:18Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "su2k-galois-branch-candidate-exporter-v1",
+        "git_blob": "f50bedeb3686f96284a4681a4b85e92a100e1c31",
+        "path": "experiments/sage/export_su2k_galois_branch_candidates.sage.py",
+        "sha256": "f03aa3b92f760ff7b893941d3353a98ef7fb3f238a3edca38c9a0a2a9e39ae2e",
+        "status": "EXPORTER_AND_VALIDATOR_ADDED"
+      },
+      {
+        "artifact_id": "rank3-ising-su2-level2-galois-branch-candidates-v1",
+        "content_hash": "sha256:dbf871eea82c2527e47ea7b81fdc086e925056c2e9219f2479ab2c975bb28856",
+        "git_blob": "ed2e536bb00aac448ee64a36c86f513b09864ec7",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank3-ising-su2-level2-galois-branch-candidates-v1.json",
+        "sha256": "2a73d9ac4f57c558f190061c85ba8d7f04c2f80567b8bf39b5601fcedb7d31b2",
+        "status": "SU2K_GALOIS_BRANCH_CANDIDATES_EXPORTED_NOT_ROW_COMPLETE"
+      },
+      {
+        "artifact_id": "rank3-ising-su2-level2-galois-branch-candidates-validation-v1",
+        "content_hash": "sha256:bd14d53edebb9f7fdaee5944aa6d37735964a16ac6b63ecb84563fac5d089049",
+        "git_blob": "9b6eafd226ff18990b604ad3afb5af526ecd31ef",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank3-ising-su2-level2-galois-branch-candidates-validation-v1.json",
+        "sha256": "056859d7134390144199c7818a5c918d083e8e33c78f0cefeb4f44bfebb34d96",
+        "status": "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION"
+      },
+      {
+        "artifact_id": "rank5-su2-4-su2-level4-galois-branch-candidates-v1",
+        "content_hash": "sha256:bd2e8b1740a199fae83c576ed1726ff089481b6995a160269a761f5b3aed2539",
+        "git_blob": "5e6eb115034a244e623b644f3feaf571539a9c61",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank5-su2-4-su2-level4-galois-branch-candidates-v1.json",
+        "sha256": "15a637fed537de30edc8b960f38a3c276854ccba8c4afaad844c183c55510f50",
+        "status": "SU2K_GALOIS_BRANCH_CANDIDATES_EXPORTED_NOT_ROW_COMPLETE"
+      },
+      {
+        "artifact_id": "rank5-su2-4-su2-level4-galois-branch-candidates-validation-v1",
+        "content_hash": "sha256:ea4cf6269d1bfbc27c612396b2b7ca617470117b722c80d10fe9c6d3fef2aea5",
+        "git_blob": "0da39b891bb49554124ee7c3d796acdb358c81f2",
+        "path": "experiments/results/foundation-v2-safety-substrate/grown-category-branches/rank5-su2-4-su2-level4-galois-branch-candidates-validation-v1.json",
+        "sha256": "4bafebad52fab3f6e37d117311f0aed052e9eab107881688e11f3eb9fcf7ce5d",
+        "status": "PASS_STRICT_GALOIS_BRANCH_CANDIDATE_REVALIDATION"
+      },
+      {
+        "artifact_id": "low-rank-nontrivial-growth-status-v1",
+        "content_hash": "sha256:0a2e55c687f291ca48f46f12b18a0246237eec7ace501d43bcb77748852ef9ee",
+        "git_blob": "85c4dd814098c4a92509206151cc32e80d5db4dd",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-growth-status-v1.json",
+        "sha256": "239086ddb0df62a165a606f7c7b4bea55e2682de0294ed3460c7d7da1b257c59",
+        "status": "GALOIS_BRANCH_CANDIDATES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED"
+      },
+      {
+        "artifact_id": "low-rank-nontrivial-growth-status-builder-v1",
+        "git_blob": "48e251ae5a8cb1d1d735459ce7905fc9c351f04a",
+        "path": "experiments/scripts/build_low_rank_nontrivial_growth_status_v1.py",
+        "sha256": "cbe459d8d9c6ab0a554a6f47489be66bf90d7e3aad014bb045d5a4d49469451d",
+        "status": "STATUS_BUILDER_UPDATED"
+      },
+      {
+        "artifact_id": "su2k-galois-branch-candidate-tests-v1",
+        "git_blob": "211d127a524e47a00242d43065507f32781fbdd4",
+        "path": "tests/test_su2k_galois_branch_candidates.py",
+        "sha256": "e72cc2499bbfc68f0c9fe07a38b9f9fc44b72cd2b45f93c0fe11da1cc036602c",
+        "status": "TEST_ADDED"
+      },
+      {
+        "artifact_id": "nontrivial-growth-status-tests-v1",
+        "git_blob": "bd2e83ebc28e589af385d668eb9d57f9b69416ba",
+        "path": "tests/test_low_rank_nontrivial_growth_status_v1.py",
+        "sha256": "e6da22518a7ea1d33cc894d8526bdb1b0c4f9f2ab0b557455c55d8ad7b61d7bd",
+        "status": "TEST_UPDATED"
+      }
+    ],
+    "checks": {
+      "candidate_branch_hashes_fresh": "PASS",
+      "old_grocery_procurement_fail_closed_tests_still_pass": "PASS",
+      "rank3_ising_galois_candidate_export_revalidated": "PASS",
+      "rank5_su2_4_galois_candidate_export_revalidated": "PASS",
+      "scan_gates_remain_closed": "PASS"
+    },
+    "created_at": "2026-07-16T06:03:18Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim a formal scan plan exists.",
+      "Galois branch candidate payloads are not row-complete ribbon_realization_snapshot evidence.",
+      "This note does not prove Ising pivotal/ribbon lift completeness.",
+      "This note does not prove SU(2)_4 Rep(S3)^omega / gamma extension branch completeness.",
+      "This note does not derive a final ribbon denominator for either growth target."
+    ],
+    "mathematical_status": "SU2K_GALOIS_BRANCH_CANDIDATES_STRICTLY_REVALIDATED; NONTRIVIAL_ROW_COMPLETION_STILL_BLOCKED; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+    "note_id": "objective-note-2026-07-16-low-rank-galois-branch-growth-validation",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "candidate_branch_counts": {
+        "rank3-ising": 8,
+        "rank5-su2-4": 8
+      },
+      "classification_status_after_this_note": "NOT_ESTABLISHED",
+      "formal_scan_plan_allowed_after_this_note": false,
+      "growth_status_id": "low-rank-nontrivial-growth-status-v1",
+      "prior_current_note": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+      "row_complete_growth_target_family_ids": [],
+      "still_blocked_growth_target_family_ids": [
+        "rank3-ising",
+        "rank5-su2-4"
+      ],
+      "strictly_validated_galois_candidate_targets": [
+        "rank3-ising",
+        "rank5-su2-4"
+      ]
+    },
+    "status": "GALOIS_BRANCH_CANDIDATES_VALIDATED_ROW_COMPLETION_STILL_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/export_su2k_galois_branch_candidates.sage.py --family-id rank3-ising --write",
+        "status": "pass"
+      },
+      {
+        "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/export_su2k_galois_branch_candidates.sage.py --family-id rank5-su2-4 --write",
+        "status": "pass"
+      },
+      {
+        "collected": 43,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_su2k_principal_category_data_validation.py tests/test_su2k_principal_category_data_export.py tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_universal_grading_audit_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Low-rank nontrivial Galois branch candidate growth validated",
+    "top_notice": "The nontrivial row-growth pass was extended from principal SU(2)_k exports to SU(2)_k Galois branch candidate payloads. The rank3-ising target now has 8 exact Galois candidate branches for SU(2)_2, and rank5-su2-4 now has 8 exact Galois candidate branches for SU(2)_4. Both candidate exports passed strict revalidation against the Sage q6j/F/R/twist machinery. These are still candidate branch payloads, not row-complete ribbon_realization_snapshot evidence: pivotal/ribbon lifts, denominator derivation, equivalence matching, and SU(2)_4 Rep(S3)^omega / gamma extension branches remain unresolved."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
