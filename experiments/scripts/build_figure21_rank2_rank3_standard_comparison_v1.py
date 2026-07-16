@@ -24,6 +24,8 @@ from experiments.scripts.build_figure21_rank4_standard_comparison_v1 import (
     _standard_distribution,
 )
 from experiments.scripts.run_figure21_standard_pointed_modular_sweep_v1 import (
+    _complex_from_key,
+    _complex_key,
     _load_standard,
 )
 
@@ -43,6 +45,14 @@ REALIZATION_IDS = (
     "rank2-cyclic-z2-semion-plus",
     "rank3-cyclic-z3-minus",
     "rank3-cyclic-z3-plus",
+)
+ALIGNMENT_PHASE_KEYS = (
+    "+1+0i",
+    "-1+0i",
+    "+0+1i",
+    "+0-1i",
+    "-0.5+0.866025403784i",
+    "-0.5-0.866025403784i",
 )
 
 
@@ -69,6 +79,39 @@ def _figure21_distribution(realization_id: str, prefix_rows: dict[str, dict[str,
     return aggregate["value_distribution"]
 
 
+def _phase_align_distribution(
+    distribution: dict[str, int],
+    phase_key: str,
+) -> dict[str, int]:
+    phase = _complex_from_key(phase_key)
+    return _canonical_distribution(
+        {
+            _complex_key(_complex_from_key(key) * phase): count
+            for key, count in distribution.items()
+        }
+    )
+
+
+def _find_phase_alignment(
+    figure21_distribution: dict[str, int],
+    standard_distribution: dict[str, int],
+) -> dict[str, Any]:
+    for phase_key in ALIGNMENT_PHASE_KEYS:
+        aligned = _phase_align_distribution(figure21_distribution, phase_key)
+        diff = _distribution_diff(aligned, standard_distribution)
+        if not diff:
+            return {
+                "status": "PASS_PHASE_ALIGNED_MATCH",
+                "phase_multiplier_on_figure21_values": phase_key,
+                "aligned_figure21_nonzero_value_distribution": aligned,
+                "aligned_minus_standard_distribution": {},
+            }
+    return {
+        "status": "FAIL_NO_ALLOWED_PHASE_ALIGNMENT_MATCH",
+        "allowed_phase_multipliers": list(ALIGNMENT_PHASE_KEYS),
+    }
+
+
 def generate() -> dict[str, Any]:
     started = datetime.now(UTC)
     clock = time.perf_counter()
@@ -87,6 +130,7 @@ def generate() -> dict[str, Any]:
         standard_result["value_distribution_raw"] = standard_result["value_distribution"]
         standard_result["value_distribution"] = standard_distribution
         diff = _distribution_diff(figure21_distribution, standard_distribution)
+        alignment = _find_phase_alignment(figure21_distribution, standard_distribution)
         rows.append(
             {
                 "realization_id": realization_id,
@@ -105,6 +149,7 @@ def generate() -> dict[str, Any]:
                 "figure21_nonzero_value_distribution": figure21_distribution,
                 "standard_cp2_9cpbar": standard_result,
                 "figure21_nonzero_minus_standard_distribution": diff,
+                "phase_alignment": alignment,
                 "comparison_canonical_decimals": CANONICAL_DECIMALS,
                 "snapshot_content_hash": snapshot.get("content_hash"),
                 "category_data_hash": prefix_row["category_data_hash"],
@@ -119,10 +164,15 @@ def generate() -> dict[str, Any]:
     differing = [
         row for row in rows if row["status"] == "PASS_COMPUTED_DIFFERENT_DISTRIBUTION"
     ]
+    phase_aligned_matching = [
+        row
+        for row in rows
+        if row["phase_alignment"]["status"] == "PASS_PHASE_ALIGNED_MATCH"
+    ]
     status = (
-        "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH"
-        if not differing
-        else "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES"
+        "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED"
+        if len(phase_aligned_matching) == len(rows)
+        else "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_UNALIGNED_DIFFERENCES"
     )
     finished = datetime.now(UTC)
     payload = {
@@ -158,6 +208,14 @@ def generate() -> dict[str, Any]:
         "row_count": len(rows),
         "matching_row_count": len(matching),
         "differing_row_count": len(differing),
+        "phase_aligned_matching_row_count": len(phase_aligned_matching),
+        "phase_alignment_rule": (
+            "A row is phase-aligned by multiplying all nonzero Figure 21 output "
+            "values by one allowed root-of-unity scalar, then comparing the "
+            "resulting value-distribution buckets to the split standard side. "
+            "This records output-normalization alignment; it is not a label "
+            "automorphism or an H2 coordinate certificate."
+        ),
         "rows": rows,
         "claim_boundary": (
             "This is a same-label computed distribution comparison for rank-2 "
