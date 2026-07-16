@@ -1,0 +1,72 @@
+{
+  "alpha0_control_status": "NOT_RUN_NO_FORMAL_SCAN_PLAN",
+  "attempt_id": "formal-low-rank-control-scan-attempt-v1",
+  "blocked_reason_ids": [
+    "step6-produced-no-formal-scan-plan",
+    "worker-revalidation-has-no-pinned-scan-plan",
+    "control-targets-cannot-bind-category-manifold-character-hashes"
+  ],
+  "claim_level": "not-formal-scan-evidence",
+  "content_hash": "sha256:a5f78b0bd8d77bebe3e98fca5b1b64ae5124740663bdfa9bf26d3a12023d62db",
+  "control_case_results": [],
+  "control_targets": [
+    {
+      "control_id": "s4-empty",
+      "purpose": "empty closed 4-manifold normalization control",
+      "target": "S4"
+    },
+    {
+      "control_id": "cp2-plus-one-framed-unknot",
+      "purpose": "positive one-framed unknot control",
+      "target": "CP2"
+    },
+    {
+      "control_id": "s2xs2-hopf-zero-framed",
+      "purpose": "zero-framed Hopf control",
+      "target": "S2xS2"
+    },
+    {
+      "control_id": "unlink-and-hopf-link-controls",
+      "purpose": "link-level ordinary RT sanity controls",
+      "target": "unlink/Hopf"
+    },
+    {
+      "control_id": "alpha0-ordinary-invariant",
+      "purpose": "ordinary invariant comparison under the same pinned scan plan",
+      "target": "alpha=0"
+    }
+  ],
+  "evidence_kind": "blocked_control_scan_attempt",
+  "explicit_non_claims": [
+    "No S4/CP2/S2xS2/unlink/Hopf/alpha=0 control was run under formal scan semantics.",
+    "This artifact is not a scan case result.",
+    "This artifact does not test detector correctness."
+  ],
+  "fail_closed_checks": {
+    "alpha0_not_run_without_plan": "PASS",
+    "cp2_not_run_without_plan": "PASS",
+    "no_scan_case_result_emitted": "PASS",
+    "s2xs2_not_run_without_plan": "PASS",
+    "s4_not_run_without_plan": "PASS",
+    "unlink_hopf_not_run_without_plan": "PASS"
+  },
+  "formal_scan_case_results_produced": false,
+  "generated_at_utc": "2026-07-16T01:34:57Z",
+  "generator_script": "experiments/scripts/build_formal_low_rank_scan_step6_7_gate_v1.py",
+  "git": {
+    "commit": "84dab70654479106507a1c88e6f5ac203c5c75ea",
+    "dirty": true
+  },
+  "ordinary_control_status": "NOT_RUN_NO_FORMAL_SCAN_PLAN",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_formal_low_rank_scan_step6_7_gate_v1.py --write",
+  "required_formal_scan_plan_hash": null,
+  "scan_plan_generation_attempt_hash": "sha256:e5f28a65365c0fd0537eb91a651fe440dda9607e3dbc96082d7c3d8a4a2b470d",
+  "schema": "twisted-yetter.formal-low-rank-control-scan-attempt.v1",
+  "source_status": "blocked",
+  "status": "BLOCKED_NO_FORMAL_SCAN_PLAN",
+  "step": "implementation_order_step_7_controls",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

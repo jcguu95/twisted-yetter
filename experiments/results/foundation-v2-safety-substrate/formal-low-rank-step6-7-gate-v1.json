@@ -1,0 +1,45 @@
+{
+  "blocked_reason_ids": [
+    "catalog-formal-scan-plan-allowed-is-false",
+    "catalog-has-blocked-family-rows",
+    "catalog-status-is-not-established",
+    "control-targets-cannot-bind-category-manifold-character-hashes",
+    "readiness-scan-plan-generation-allowed-is-false",
+    "ribbon-denominator-is-not-final",
+    "step6-produced-no-formal-scan-plan",
+    "worker-revalidation-has-no-pinned-scan-plan"
+  ],
+  "completion_semantics": "Step 6 and step 7 are complete only as fail-closed gates under the current partial catalog. They did not produce a scan plan, control case result, scan aggregate, or no-signal claim.",
+  "content_hash": "sha256:de570021cafab24809a2ad5d94eaae5bfad8f798c658d687f096d50e1c2a6bd7",
+  "control_scan_attempt_hash": "sha256:a5f78b0bd8d77bebe3e98fca5b1b64ae5124740663bdfa9bf26d3a12023d62db",
+  "explicit_non_claims": [
+    "LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED is still not claimed.",
+    "FORMAL_LOW_RANK_SCAN_COMPLETE is still not claimed.",
+    "No formal control scan was run.",
+    "No no-signal conclusion is supported."
+  ],
+  "formal_outputs": {
+    "scan_aggregate": null,
+    "scan_case_results": [],
+    "scan_plan": null
+  },
+  "gate_id": "formal-low-rank-step6-7-gate-v1",
+  "generated_at_utc": "2026-07-16T01:34:57Z",
+  "generator_script": "experiments/scripts/build_formal_low_rank_scan_step6_7_gate_v1.py",
+  "git": {
+    "commit": "84dab70654479106507a1c88e6f5ac203c5c75ea",
+    "dirty": true
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_formal_low_rank_scan_step6_7_gate_v1.py --write",
+  "scan_plan_generation_attempt_hash": "sha256:e5f28a65365c0fd0537eb91a651fe440dda9607e3dbc96082d7c3d8a4a2b470d",
+  "schema": "twisted-yetter.formal-low-rank-step6-7-gate.v1",
+  "status": "STEP6_7_FAIL_CLOSED_COMPLETE",
+  "step_status": {
+    "implementation_order_step_6_scan_plan_generator": "COMPLETE_FAIL_CLOSED_BLOCKED",
+    "implementation_order_step_7_controls": "COMPLETE_FAIL_CLOSED_BLOCKED"
+  },
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
