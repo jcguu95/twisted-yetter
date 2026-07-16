@@ -285,13 +285,82 @@ def _validate_catalog_row(row: Any) -> None:
                 raise FoundationSafetyError("resolved row snapshot hash list is invalid")
             if any(not _is_sha256_id(value) for value in snapshot_hashes):
                 raise FoundationSafetyError("resolved row has an invalid snapshot hash")
-            expected = int(row["modular_braided_class_count"])
-            if len(snapshot_hashes) != expected:
-                raise FoundationSafetyError(
-                    "resolved row snapshot count must match braided class count"
-                )
+            if len(set(snapshot_hashes)) != len(snapshot_hashes):
+                raise FoundationSafetyError("resolved row snapshot hashes must be unique")
         elif not _is_sha256_id(snapshot_hash):
             raise FoundationSafetyError("resolved row needs a snapshot hash")
+        _validate_resolved_row_counts(row, snapshot_hashes, snapshot_hash)
+
+
+def _validate_resolved_row_counts(
+    row: dict[str, Any],
+    snapshot_hashes: Any,
+    snapshot_hash: Any,
+) -> None:
+    braided_count = int(row["modular_braided_class_count"])
+    resolved_braided_count = int(
+        row.get("resolved_modular_braided_class_count", braided_count)
+    )
+    if resolved_braided_count != braided_count:
+        raise FoundationSafetyError(
+            "resolved row must cover every modular braided class in the family"
+        )
+    if snapshot_hashes is None:
+        snapshot_count = 1 if _is_sha256_id(snapshot_hash) else 0
+    else:
+        snapshot_count = len(snapshot_hashes)
+
+    ribbon_count = row.get("resolved_ribbon_realization_count")
+    has_explicit_ribbon_count = ribbon_count is not None
+    if ribbon_count is None:
+        ribbon_count = snapshot_count
+    if not isinstance(ribbon_count, int):
+        raise FoundationSafetyError("resolved ribbon realization count must be an int")
+    if ribbon_count != snapshot_count:
+        raise FoundationSafetyError(
+            "resolved ribbon realization count must match snapshot hash count"
+        )
+    if ribbon_count < braided_count:
+        raise FoundationSafetyError(
+            "resolved row cannot have fewer ribbon realizations than braided classes"
+        )
+
+    per_braided = row.get("ribbon_realizations_per_braided_class")
+    multiplicities = row.get("ribbon_realization_multiplicity_by_braided_class")
+    if (
+        snapshot_count != braided_count
+        and (not has_explicit_ribbon_count or per_braided is None and multiplicities is None)
+    ):
+        raise FoundationSafetyError(
+            "resolved row with non-braided snapshot count must declare ribbon multiplicity"
+        )
+    if per_braided is not None:
+        if not isinstance(per_braided, int) or per_braided < 1:
+            raise FoundationSafetyError(
+                "ribbon realizations per braided class must be a positive int"
+            )
+        expected_ribbon_count = braided_count * per_braided
+        if ribbon_count != expected_ribbon_count:
+            raise FoundationSafetyError(
+                "resolved ribbon count does not match per-braided-class multiplicity"
+            )
+    if multiplicities is not None:
+        if (
+            not isinstance(multiplicities, list)
+            or len(multiplicities) != braided_count
+            or any(not isinstance(item, int) or item < 1 for item in multiplicities)
+        ):
+            raise FoundationSafetyError(
+                "ribbon multiplicity list must be positive ints for each braided class"
+            )
+        if sum(multiplicities) != ribbon_count:
+            raise FoundationSafetyError(
+                "resolved ribbon count does not match braided-class multiplicity list"
+            )
+        if per_braided is not None and any(item != per_braided for item in multiplicities):
+            raise FoundationSafetyError(
+                "ribbon multiplicity list disagrees with per-braided-class count"
+            )
 
 
 def _validate_ribbon_realization_snapshot(evidence: dict[str, Any]) -> None:

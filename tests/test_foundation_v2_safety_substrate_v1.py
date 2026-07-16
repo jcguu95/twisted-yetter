@@ -178,6 +178,59 @@ def test_catalog_cannot_claim_established_while_rows_are_blocked() -> None:
         validate_low_rank_ribbon_catalog(broken)
 
 
+def test_resolved_catalog_row_allows_ribbon_multiplicity_only_when_declared() -> None:
+    catalog = load_json("low-rank-ribbon-realization-catalog-v9.json")
+    row = {item["family_id"]: item for item in catalog["families"]}[
+        "rank4-pointed-z2xz2"
+    ]
+    extra_hash = sha("f")
+    extra_hashes = [sha(char) for char in "01234"]
+
+    broken = copy.deepcopy(catalog)
+    broken_row = {item["family_id"]: item for item in broken["families"]}[
+        "rank4-pointed-z2xz2"
+    ]
+    broken_row["ribbon_realization_snapshot_hashes"] = (
+        row["ribbon_realization_snapshot_hashes"] + [extra_hash]
+    )
+    with pytest.raises(FoundationSafetyError, match="ribbon multiplicity"):
+        validate_low_rank_ribbon_catalog(broken)
+
+    explicit = copy.deepcopy(broken)
+    explicit_row = {item["family_id"]: item for item in explicit["families"]}[
+        "rank4-pointed-z2xz2"
+    ]
+    explicit_row["resolved_ribbon_realization_count"] = 10
+    explicit_row["ribbon_realizations_per_braided_class"] = 2
+    explicit_row["ribbon_realization_snapshot_hashes"] = (
+        row["ribbon_realization_snapshot_hashes"] + extra_hashes
+    )
+    explicit_row["ribbon_level"]["snapshot_hashes"] = explicit_row[
+        "ribbon_realization_snapshot_hashes"
+    ]
+
+    validate_low_rank_ribbon_catalog(explicit)
+
+
+def test_resolved_catalog_row_rejects_duplicate_snapshot_hashes() -> None:
+    catalog = load_json("low-rank-ribbon-realization-catalog-v9.json")
+    row = {item["family_id"]: item for item in catalog["families"]}[
+        "rank4-pointed-z2xz2"
+    ]
+    broken = copy.deepcopy(catalog)
+    broken_row = {item["family_id"]: item for item in broken["families"]}[
+        "rank4-pointed-z2xz2"
+    ]
+    broken_row["ribbon_realization_snapshot_hashes"] = [
+        row["ribbon_realization_snapshot_hashes"][0],
+        row["ribbon_realization_snapshot_hashes"][0],
+    ]
+    broken_row["resolved_modular_braided_class_count"] = 2
+
+    with pytest.raises(FoundationSafetyError, match="unique"):
+        validate_low_rank_ribbon_catalog(broken)
+
+
 def test_ribbon_snapshot_gate_checks_pivotal_twist_and_certificates() -> None:
     valid = valid_ribbon_snapshot_payload()
     validate_formal_evidence(valid)
