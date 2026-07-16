@@ -8800,6 +8800,96 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
+      "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "formal-low-rank-scan-plan-generation-attempt-v1",
+            "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+            "git_blob": "edc9ac8703c9384ef80e5f3588ab7db247f42676",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json",
+            "sha256": "21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059",
+            "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+          },
+          {
+            "artifact_id": "formal-low-rank-control-scan-attempt-v1",
+            "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+            "git_blob": "ef4712aab416dfb0b0e6a651359e797ae7c1f51c",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json",
+            "sha256": "ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a",
+            "status": "BLOCKED_NO_FORMAL_SCAN_PLAN"
+          },
+          {
+            "artifact_id": "formal-low-rank-step6-7-gate-v1",
+            "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+            "git_blob": "18db99ef301e41c956c4cb0789ffee516b2b04e2",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-step6-7-gate-v1.json",
+            "sha256": "9f9602f860e02af30d55994ca09a4f9467bcde44e1396c2470534523d1ee913c",
+            "status": "STEP6_7_FAIL_CLOSED_COMPLETE"
+          }
+        ],
+        "created_at": "2026-07-16T01:35:45Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim any formal scan plan exists.",
+          "This note does not claim S4, CP2, S2xS2, unlink/Hopf, or alpha=0 controls were run.",
+          "This note does not claim detector correctness.",
+          "This note does not claim a no-signal result."
+        ],
+        "mathematical_status": "STEP6_AND_STEP7_FAIL_CLOSED_ONLY; FORMAL_SCAN_REMAINS_BLOCKED_BY_PARTIAL_RIBBON_CATALOG",
+        "note_id": "objective-note-2026-07-16-step6-7-fail-closed-scan-gates",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_family_row_count": 6,
+          "catalog_id": "low-rank-ribbon-realization-catalog-v10",
+          "catalog_status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+          "formal_control_results_produced": false,
+          "formal_scan_aggregate_produced": false,
+          "formal_scan_plan_produced": false,
+          "resolved_family_row_count": 8,
+          "step_6_status": "COMPLETE_FAIL_CLOSED_BLOCKED",
+          "step_7_status": "COMPLETE_FAIL_CLOSED_BLOCKED"
+        },
+        "status": "STEP6_7_FAIL_CLOSED_COMPLETE_NO_FORMAL_SCAN_PLAN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 84,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Formal low-rank scan steps 6 and 7 completed as fail-closed gates",
+        "top_notice": "Step 6 and step 7 are complete only in the fail-closed sense under the current partial catalog: the scan-plan generator rejects the v10 catalog because six non-pointed rows remain blocked, and the control runner gate rejects S4/CP2/S2xS2/unlink-Hopf/alpha=0 controls because no formal scan plan exists. No scan plan, scan case result, control result, aggregate, or no-signal claim is produced.",
+        "validated_behaviors": [
+          "Step 6 scan-plan generation attempt records formal_scan_plan_produced=false, formal_scan_plan_hash=null, and scan_case_ids=[].",
+          "Step 6 blocked reasons include catalog-status-is-not-established, catalog-formal-scan-plan-allowed-is-false, readiness-scan-plan-generation-allowed-is-false, catalog-has-blocked-family-rows, and ribbon-denominator-is-not-final.",
+          "Step 7 control attempt records formal_scan_case_results_produced=false and control_case_results=[].",
+          "S4, CP2, S2xS2, unlink/Hopf, and alpha=0 controls are recorded as NOT_RUN_NO_FORMAL_SCAN_PLAN rather than fake PASS results.",
+          "The blocked attempt artifacts are rejected by validate_formal_evidence as unsupported formal evidence kinds.",
+          "The gate summary records scan_plan=null, scan_case_results=[], and scan_aggregate=null."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
+        "created_at": "2026-07-16T01:35:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -16971,6 +17061,7 @@
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
       "claim:lab-note:2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress": "ctlobj-sha256:4aae4b230c0d15dcf0d0798378aadd16c11e25dfc8d6a32497e56da989d22beb",
       "claim:lab-note:2026-07-16-rank4-z4-ribbon-realization-partial-progress": "ctlobj-sha256:72ed7ce71fb0ea9eca67c5fc11e3fe383c036856cdcab07f7eb7e0caa166f491",
+      "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -17390,6 +17481,9 @@
       ],
       "claim:lab-note:2026-07-16-rank4-z4-ribbon-realization-partial-progress": [
         "ctlobj-sha256:72ed7ce71fb0ea9eca67c5fc11e3fe383c036856cdcab07f7eb7e0caa166f491"
+      ],
+      "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": [
+        "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc"
       ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
@@ -18285,6 +18379,7 @@
         "ctlobj-sha256:6e01d811af25e8e34a2464cadd9cd5fa5c260aa1a3a7c4d8ea4a33e7bca0addd",
         "ctlobj-sha256:6ee94be24ef5b432ee4f37e2c499bfe9741b2c16e7eedabc369aee03d14d0039",
         "ctlobj-sha256:7041352849d084486bf98bba31765a8d6307fbf59a587fa19e72a179680246e5",
+        "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
         "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
         "ctlobj-sha256:70e688fdbba11ab8210164d34027a018dae6f3c8d1269ef6a3be99b3c4aeb2e8",
         "ctlobj-sha256:71eed37d06525440b2f783bd1ef23891f4f98d19939ddc3ebb45588714c690b2",
@@ -18558,6 +18653,7 @@
         "ctlobj-sha256:65598753cc6c357256d11463645f965b28f1de0fde5c74531fb6f4ad7649dd47",
         "ctlobj-sha256:6a007fb5b6c98709c909015d550dcb878eb8115cb90acc953428b32075329762",
         "ctlobj-sha256:6c79cf7fa0ffb0078381f3104475ebddff5630286dacc9bc72325a25b5d38291",
+        "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
         "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
         "ctlobj-sha256:70e688fdbba11ab8210164d34027a018dae6f3c8d1269ef6a3be99b3c4aeb2e8",
         "ctlobj-sha256:71eed37d06525440b2f783bd1ef23891f4f98d19939ddc3ebb45588714c690b2",
@@ -30693,6 +30789,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+          "generated_at": "2026-07-16T01:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
+          "path": "manifests/lab-note-2026-07-16-step6-7-fail-closed-scan-gates.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step6-7-fail-closed-scan-gates.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:9df7bf3d2e8392c871d34218a3ff1d9096f1d88de7a30db0da024f116aea6252",
           "generated_at": "2026-07-06T23:17:10Z",
           "logical_id": "sys:policy",
@@ -36000,6 +36113,26 @@
           "parent_root_cid": "ctlobj-sha256:dd98008e1235a295a35ccdeb9ca0a22ae4a3cbd0761122c6072ce4f4e5ea33d5",
           "path": "manifests/subject-definition-2026-07-08-claim-cluster-yasui-figure2-dic12-tham511-check.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-yasui-figure2-dic12-tham511-check.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+          "generated_at": "2026-07-16T01:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
+          "path": "manifests/lab-note-2026-07-16-step6-7-fail-closed-scan-gates.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step6-7-fail-closed-scan-gates.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -52856,6 +52989,36 @@
         },
         "word_count": 182
       },
+      "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
+        "created_at": "2026-07-16T01:35:45Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1462,
+        "gist": "Step 6 and step 7 are complete only in the fail-closed sense under the current partial catalog: the scan-plan generator rejects the v10 catalog because six non-pointed rows remain blocked, and the control runner gate rejects S4/CP2/S2xS2/unlink-Hopf/alpha=0 controls because no...",
+        "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"formal-low-rank-scan-plan-generation-attempt-v1\",\"commit\":\"d8e765beb52f17894f6248811b5479c16ac797f5\",\"git_blob\":\"edc9ac8703c9384ef80e5f3588ab7db247f42676\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json\",\"sha256\":\"21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059\",\"status\":\"BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG\"},{\"artifact_id\":\"formal-low-rank-control-scan-attempt-v1\",\"commit\":\"d8e765beb52f17894f6248811b5479c16ac797f5\",\"git_blob\":\"ef4712aab416dfb0b0e6a651359e797ae7c1f51c\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json\",\"sha256\":\"ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a\",\"status\":\"BLOCKED_NO_FORMAL_SCAN_PLAN\"},{\"artifact_id\":\"formal-low-rank-step6-7-gate-v1\",\"commit\":\"d8e765beb52f17894f6248811b5479c16ac797f5\",\"git_blob\":\"18db99ef301e41c956c4cb0789ffee516b2b04e2\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-step6-7-gate-v1.json\",\"sha256\":\"9f9602f860e02af30d55994ca09a4f9467bcde44e1396c2470534523d1ee913c\",\"status\":\"STEP6_7_FAIL_CLOSED_COMPLETE\"}],\"created_at\":\"2026-07-16T01:35:45Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim any formal scan plan exists.\",\"This note does not claim S4, CP2, S2xS2, unlink/Hopf, or alpha=0 controls were run.\",\"This note does not claim detector correctness.\",\"This note does not claim a no-signal result.\"],\"mathematical_status\":\"STEP6_AND_STEP7_FAIL_CLOSED_ONLY; FORMAL_SCAN_REMAINS_BLOCKED_BY_PARTIAL_RIBBON_CATALOG\",\"note_id\":\"objective-note-2026-07-16-step6-7-fail-closed-scan-gates\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_family_row_count\":6,\"catalog_id\":\"low-rank-ribbon-realization-catalog-v10\",\"catalog_status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS\",\"formal_control_results_produced\":false,\"formal_scan_aggregate_produced\":false,\"formal_scan_plan_produced\":false,\"resolved_family_row_count\":8,\"step_6_status\":\"COMPLETE_FAIL_CLOSED_BLOCKED\",\"step_7_status\":\"COMPLETE_FAIL_CLOSED_BLOCKED\"},\"status\":\"STEP6_7_FAIL_CLOSED_COMPLETE_NO_FORMAL_SCAN_PLAN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":84,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py\",\"status\":\"pass\"}],\"title\":\"Formal low-rank scan steps 6 and 7 completed as fail-closed gates\",\"top_notice\":\"Step 6 and step 7 are complete only in the fail-closed sense under the current partial catalog: the scan-plan generator rejects the v10 catalog because six non-pointed rows remain blocked, and the control runner gate rejects S4/CP2/S2xS2/unlink-Hopf/alpha=0 controls because no formal scan plan exists. No scan plan, scan case result, control result, aggregate, or no-signal claim is produced.\",\"validated_behaviors\":[\"Step 6 scan-plan generation attempt records formal_scan_plan_produced=false, formal_scan_plan_hash=null, and scan_case_ids=[].\",\"Step 6 blocked reasons include catalog-status-is-not-established, catalog-formal-scan-plan-allowed-is-false, readiness-scan-plan-generation-allowed-is-false, catalog-has-blocked-family-rows, and ribbon-denominator-is-not-final.\",\"Step 7 control attempt records formal_scan_case_results_produced=false and control_case_results=[].\",\"S4, CP2, S2xS2, unlink/Hopf, and alpha=0 controls are recorded as NOT_RUN_NO_FORMAL_SCAN_PLAN rather than fake PASS results.\",\"The blocked attempt artifacts are rejected by validate_formal_evidence as unsupported formal evidence kinds.\",\"The gate summary records scan_plan=null, scan_case_results=[], and scan_aggregate=null.\"]}",
+        "title": "Formal low-rank scan steps 6 and 7 completed as fail-closed gates",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4513,
+          "base_estimate": 1271,
+          "estimated_tokens": 1462,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 191,
+          "serialized_character_count": 4513,
+          "unicode_scalar_count": 4513,
+          "utf8_bytes": 4513
+        },
+        "word_count": 193
+      },
       "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8": {
         "active_state": "active",
         "cid": "ctlobj-sha256:70c92fb3d96f999e1306302fa1ff8798df5207a8e13ba510372f3b322b0b8fc8",
@@ -60128,7 +60291,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T01:28:20Z",
+  "generated_at": "2026-07-16T01:38:31Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -62662,17 +62825,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:73a567414cce91cd843828bf19288d634c2930f756a31efab2881edf43df839c",
+  "root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 61127,
+    "build_ms": 63828,
     "context_source": "current-context-replay",
-    "current_context_ms": 57008,
-    "discovery_index_ms": 4005,
+    "current_context_ms": 59510,
+    "discovery_index_ms": 4204,
     "payload_summaries_ms": 36,
     "resource_index_ms": 36,
     "write_ms": 40
   },
-  "transition_cid": "ctlobj-sha256:c8fa8e086ff0dbe254eaf242627560ead8764c14266ee9252b3069ee8e3853b8"
+  "transition_cid": "ctlobj-sha256:27cc806f98ecc301efcebc04e0a31a3f24f9623153f57c42dbb5533bbba64df5"
 }

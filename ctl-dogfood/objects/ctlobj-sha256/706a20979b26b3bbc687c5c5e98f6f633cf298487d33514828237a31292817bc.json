@@ -1,0 +1,86 @@
+{
+  "created_at": "2026-07-16T01:35:45Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "formal-low-rank-scan-plan-generation-attempt-v1",
+        "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+        "git_blob": "edc9ac8703c9384ef80e5f3588ab7db247f42676",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json",
+        "sha256": "21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059",
+        "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+      },
+      {
+        "artifact_id": "formal-low-rank-control-scan-attempt-v1",
+        "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+        "git_blob": "ef4712aab416dfb0b0e6a651359e797ae7c1f51c",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json",
+        "sha256": "ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a",
+        "status": "BLOCKED_NO_FORMAL_SCAN_PLAN"
+      },
+      {
+        "artifact_id": "formal-low-rank-step6-7-gate-v1",
+        "commit": "d8e765beb52f17894f6248811b5479c16ac797f5",
+        "git_blob": "18db99ef301e41c956c4cb0789ffee516b2b04e2",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-step6-7-gate-v1.json",
+        "sha256": "9f9602f860e02af30d55994ca09a4f9467bcde44e1396c2470534523d1ee913c",
+        "status": "STEP6_7_FAIL_CLOSED_COMPLETE"
+      }
+    ],
+    "created_at": "2026-07-16T01:35:45Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim any formal scan plan exists.",
+      "This note does not claim S4, CP2, S2xS2, unlink/Hopf, or alpha=0 controls were run.",
+      "This note does not claim detector correctness.",
+      "This note does not claim a no-signal result."
+    ],
+    "mathematical_status": "STEP6_AND_STEP7_FAIL_CLOSED_ONLY; FORMAL_SCAN_REMAINS_BLOCKED_BY_PARTIAL_RIBBON_CATALOG",
+    "note_id": "objective-note-2026-07-16-step6-7-fail-closed-scan-gates",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_family_row_count": 6,
+      "catalog_id": "low-rank-ribbon-realization-catalog-v10",
+      "catalog_status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+      "formal_control_results_produced": false,
+      "formal_scan_aggregate_produced": false,
+      "formal_scan_plan_produced": false,
+      "resolved_family_row_count": 8,
+      "step_6_status": "COMPLETE_FAIL_CLOSED_BLOCKED",
+      "step_7_status": "COMPLETE_FAIL_CLOSED_BLOCKED"
+    },
+    "status": "STEP6_7_FAIL_CLOSED_COMPLETE_NO_FORMAL_SCAN_PLAN",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 84,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Formal low-rank scan steps 6 and 7 completed as fail-closed gates",
+    "top_notice": "Step 6 and step 7 are complete only in the fail-closed sense under the current partial catalog: the scan-plan generator rejects the v10 catalog because six non-pointed rows remain blocked, and the control runner gate rejects S4/CP2/S2xS2/unlink-Hopf/alpha=0 controls because no formal scan plan exists. No scan plan, scan case result, control result, aggregate, or no-signal claim is produced.",
+    "validated_behaviors": [
+      "Step 6 scan-plan generation attempt records formal_scan_plan_produced=false, formal_scan_plan_hash=null, and scan_case_ids=[].",
+      "Step 6 blocked reasons include catalog-status-is-not-established, catalog-formal-scan-plan-allowed-is-false, readiness-scan-plan-generation-allowed-is-false, catalog-has-blocked-family-rows, and ribbon-denominator-is-not-final.",
+      "Step 7 control attempt records formal_scan_case_results_produced=false and control_case_results=[].",
+      "S4, CP2, S2xS2, unlink/Hopf, and alpha=0 controls are recorded as NOT_RUN_NO_FORMAL_SCAN_PLAN rather than fake PASS results.",
+      "The blocked attempt artifacts are rejected by validate_formal_evidence as unsupported formal evidence kinds.",
+      "The gate summary records scan_plan=null, scan_case_results=[], and scan_aggregate=null."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
