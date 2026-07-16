@@ -9187,6 +9187,143 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "formal-low-rank-partial-toy-scan-plan-v1",
+            "content_hash": "sha256:ea295fc7dbf6f71b70e26e61a4d41e15733ab74f7d27c5b537468145d5698200",
+            "git_blob": "f0e87e439752c03ed8e5362a35ec70df3199f450",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-plan-v1.json",
+            "sha256": "456c39f88dca40478727fc280fcca240e463bb57830d5c3171ec156ce22ad069",
+            "status": "FORMAL_PARTIAL_TOY_SCAN_PLAN_ADMITTED_SCOPE"
+          },
+          {
+            "artifact_id": "formal-low-rank-partial-toy-scan-case-pointed-v1",
+            "content_hash": "sha256:82239ebd75d49f01b09de03a7d595ced2f84c79dc94eeb6c9c50b337672de289",
+            "git_blob": "9627f6520248c4bf0801df57a921c79cc29b48a9",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-pointed-v1.json",
+            "sha256": "aab4acc5eb82b9b280a01df90eb4dd9669ca6c02de24f1d695e5a706c21ec4e4",
+            "status": "PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK"
+          },
+          {
+            "artifact_id": "formal-low-rank-partial-toy-scan-case-product-v1",
+            "content_hash": "sha256:7bc787b88c321eb4177c29dd7270b83c28805931230a07afbbd902124d722338",
+            "git_blob": "48c9bac260c24eedafa6418a671aa03c5fcc42e6",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-product-v1.json",
+            "sha256": "6129821619c22e2dcfe8efce55c6f865bbaf552610b29c07781eadfadf3dee95",
+            "status": "PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK"
+          },
+          {
+            "artifact_id": "formal-low-rank-partial-toy-scan-aggregate-v1",
+            "content_hash": "sha256:3ffdc509f59a676c070035cd4a039d2eda7b25dca524730c9ca7d832271f4a54",
+            "git_blob": "40601987c774c1531f910bb6c09b446119b583b6",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-aggregate-v1.json",
+            "sha256": "83ee626fc504eec2f1ae043dd2159142f31a23bff550bcf26ab68a70242642d2",
+            "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE"
+          },
+          {
+            "artifact_id": "formal-partial-toy-scan-builder",
+            "git_blob": "36d0b8b2eb4f621c7c722b1ac4c560cd3e82601e",
+            "path": "experiments/scripts/build_low_rank_partial_toy_scan_v1.py",
+            "sha256": "87932e56a9ab16b931f01ea7980960ef26eeba0e983d4e83e9ab92d268c49de7",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "formal-partial-toy-scan-tests",
+            "git_blob": "f25c716b0508ff1ecf39a0eb6ea561e2dee59a7b",
+            "path": "tests/test_low_rank_partial_toy_scan_v1.py",
+            "sha256": "84e1a8de61b3ff95b6d1757ac03f7e6c291952d0692dcc96d083509947852716",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "aggregate_rejects_complete_no_signal_upgrade": "PASS",
+          "no_full_scan_claim": "PASS",
+          "partial_scan_aggregate_validates": "PASS",
+          "partial_scan_plan_validates": "PASS",
+          "pointed_scan_case_result_validates": "PASS",
+          "product_scan_case_result_validates": "PASS"
+        },
+        "created_at": "2026-07-16T14:06:28Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim complete-no-signal.",
+          "This note does not claim target exotic manifolds were scanned.",
+          "This note does not cover rank3-ising, rank5-su2-4, or rank5-psu3-4.",
+          "This note does not cover rank 6 or higher."
+        ],
+        "mathematical_status": "FORMAL_PARTIAL_TOY_SCAN_ONLY",
+        "next_required_work": [
+          "Do not treat this toy aggregate as a target scan.",
+          "Before admitted target scans, define a target manifold catalog and evaluator support boundary.",
+          "Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.",
+          "Keep rank5-psu3-4 explicit as unknown, not discarded."
+        ],
+        "note_id": "objective-note-2026-07-16-low-rank-formal-partial-toy-scan",
+        "runtime_findings": {
+          "aggregate_claim": "partial-toy-scan-complete-for-admitted-subset",
+          "chunk_count": 2,
+          "coverage_boundary": "admitted nontrivial universal-character toy chunks only",
+          "pointed_chunk_subcase_count": 291,
+          "product_chunk_subcase_count": 56,
+          "subcase_count": 347
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "formal_full_scan_complete_claim_allowed": false,
+          "formal_partial_scan_aggregate_emitted": true,
+          "formal_partial_scan_plan_emitted": true,
+          "formal_scan_case_result_chunks_emitted": 2,
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+          "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+          "toy_diagram_scope": [
+            "s4-empty-kirby-diagram",
+            "cp2-plus-one-framed-unknot",
+            "hopf-linking-1"
+          ]
+        },
+        "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_low_rank_partial_toy_scan_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 4,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 35,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank formal partial toy scan aggregate admitted",
+        "top_notice": "A formal partial toy scan plan, two formal scan_case_result chunks, and a formal partial toy aggregate now exist for the admitted nontrivial universal-character subset over the three checked-in toy diagrams. This is not the final low-rank scan, not a target exotic scan, and not a no-signal claim."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
+        "created_at": "2026-07-16T14:06:28Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
       "logical_id": "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation",
       "payload": {
@@ -9437,6 +9574,534 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-nontrivial-partial-scan-rule-v1",
+            "content_hash": "sha256:1f80b0af9d97b8dac6582ba6a2f8ebe3c8c7400cf85c5cac0627e7929ae3f7d7",
+            "git_blob": "4cfe0a05bf1c92cd248533e17552a8099bd8c26d",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-partial-scan-rule-v1.json",
+            "sha256": "205bfb57b3e594096c53f2142db21ba09309c6c29792fb2782095dea19065b2f",
+            "status": "NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN"
+          },
+          {
+            "artifact_id": "foundation-safety-validator",
+            "git_blob": "bab77fb2d1f8f491f2d2a107b8508a0969170f30",
+            "path": "src/twisted_yetter/foundation_safety.py",
+            "sha256": "d7156cc463e3bd804207b542954e6e2f6fbd3cbe18d86892da6a0f233a94745c",
+            "status": "UPDATED_PARTIAL_SCAN_VALIDATORS"
+          },
+          {
+            "artifact_id": "formal-admission-policy-v1",
+            "git_blob": "cf382f4acf5b329f23f194653f613c2a5d6d82d2",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json",
+            "sha256": "1bafe31e6f96f23609211386a957134bdc13dba3d333f7f4a7edd2a08bd76a8a",
+            "status": "FOUNDATION_ESTABLISHED_POLICY_ARTIFACT"
+          },
+          {
+            "artifact_id": "low-rank-full-catalog-universal-grading-audit-v1",
+            "content_hash": "sha256:6b572e43a4856dd560da342bf761cde77e175a16a5e252c424ab02fae3b84c82",
+            "git_blob": "c8fd290a97a6f6cda30fc3487e01dd280b63c36d",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-full-catalog-universal-grading-audit-v1.json",
+            "sha256": "309ee595f265681524c6c7da25ef3ea3e902c008b18c97cbd8cc4b2c270f80d4",
+            "status": "FULL_CATALOG_UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_UNKNOWN"
+          },
+          {
+            "artifact_id": "low-rank-nontrivial-partial-scan-rule-builder",
+            "git_blob": "53b8576acabf9f352b97347fac29b0ed44d9a69e",
+            "path": "experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py",
+            "sha256": "faa4e3f6108a3847c9c41c962e2c6721693ba28957936e46c770faba63717785",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-nontrivial-partial-scan-rule-tests",
+            "git_blob": "0ed10a09c0cfce39da34dfb2e7f95df593e514a6",
+            "path": "tests/test_low_rank_nontrivial_partial_scan_rule_v1.py",
+            "sha256": "7e862f3e7c2486e4fe65b5b5103b3a29947d12815830911f1b8dfbd8373ccb9b",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "full_route_fail_closed_tests_still_pass": "PASS",
+          "full_scan_claim_forbidden": "PASS",
+          "no_scan_plan_emitted_by_this_rule": "PASS",
+          "policy_allows_partial_scan_aggregate_kind": "PASS",
+          "policy_allows_partial_scan_plan_kind": "PASS",
+          "trivial_rows_marked_discarded": "PASS",
+          "unknown_rows_not_discarded": "PASS"
+        },
+        "created_at": "2026-07-16T13:02:30Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal partial scan plan has been emitted.",
+          "This note does not claim controls or target scans have been run.",
+          "This note does not claim no signal.",
+          "This note does not treat rank5-psu3-4 as trivial.",
+          "This note discards universal-group trivial rows only for nontrivial universal-character twists."
+        ],
+        "mathematical_status": "SAFETY_SUBSTRATE_RULE_UPDATE_ONLY",
+        "note_id": "objective-note-2026-07-16-low-rank-nontrivial-partial-scan-rule",
+        "row_scope": {
+          "admitted_resolved_nontrivial_family_ids": [
+            "rank2-cyclic-z2",
+            "rank3-cyclic-z3",
+            "rank4-pointed-z4",
+            "rank4-pointed-z2xz2",
+            "rank4-semion-times-fibonacci",
+            "rank5-su5-1"
+          ],
+          "discarded_trivial_universal_group_family_ids": [
+            "rank2-fibonacci-yang-lee",
+            "rank3-psu2-5",
+            "rank4-fibxfib",
+            "rank4-psu2-7",
+            "rank5-psu2-9"
+          ],
+          "excluded_blocked_nontrivial_family_ids": [
+            "rank3-ising",
+            "rank5-su2-4"
+          ],
+          "trivial_rows_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+          "unknown_rows_disposition": "EXCLUDED_NOT_DISCARDED",
+          "unknown_universal_group_family_ids": [
+            "rank5-psu3-4"
+          ]
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "formal_full_scan_complete_claim_allowed": false,
+          "formal_full_scan_plan_allowed": false,
+          "formal_partial_scan_aggregate_allowed_if_cases_complete": true,
+          "formal_partial_scan_plan_allowed_if_validator_accepts": true,
+          "formal_partial_scan_plan_emitted": false,
+          "full_rank_2_5_ribbon_classification_claim_allowed": false,
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2",
+          "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET"
+        },
+        "status": "NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "command": "python3 experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 22,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 16,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_low_rank_ribbon_classification_terminal_blocked_v2.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank nontrivial universal-character partial scan rule enabled",
+        "top_notice": "The safety substrate now distinguishes full low-rank scan completion from a validated partial scan over the already admitted nontrivial universal-character subset. Full FORMAL_LOW_RANK_SCAN_COMPLETE remains forbidden while rank3-ising and rank5-su2-4 are unresolved. Universal-group trivial rows are explicitly discarded for this nontrivial-character scan scope. No controls, targets, scan cases, aggregate, no-signal claim, or final scan claim is admitted by this note."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+        "created_at": "2026-07-16T13:02:30Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-pointed-partial-scan-benchmark-v1",
+            "content_hash": "sha256:c9ff5af7cc0e6eccb28857c9de923d5114cb60d074c975081b02cfa63cb3c73f",
+            "git_blob": "8f73ec6fc165630c2985a92e37e38c9c848121a2",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-pointed-partial-scan-benchmark-v1.json",
+            "sha256": "988b3d8b99e548bb1a7d3d08c53269f7b5b0e790bd023ad9fb0ae374a96c47c9",
+            "status": "PASS_POINTED_TOY_BENCHMARK_FAST"
+          },
+          {
+            "artifact_id": "low-rank-product-partial-scan-surface-probe-v1",
+            "content_hash": "sha256:157894d95089c266d367092b6f31e92c1198f1e62fc5f9767ded17cfd592cbcd",
+            "git_blob": "862182a145e4f815cb586b8e195fa0f3c5db061b",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-surface-probe-v1.json",
+            "sha256": "7d24c3b96351ece8d4e3b29775fa9fa7edc3bc09b4a4319cd6b966e4ecaa003c",
+            "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY"
+          },
+          {
+            "artifact_id": "low-rank-pointed-partial-scan-benchmark-runner",
+            "git_blob": "726bdb0719c7a04fc6a68b222a526c7469e38b9c",
+            "path": "experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py",
+            "sha256": "6e2e01488a7b898173a74063d9818f7f2fd6379338474cb717141be0a24a56ec",
+            "status": "RUNNER_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-product-partial-scan-surface-probe-runner",
+            "git_blob": "323244093832e9ef629ec4fe6cbef38f8f6198a2",
+            "path": "experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py",
+            "sha256": "f59fe2854112a43b89161e73fff5b057ff1aaf8e7cb4b58105f02c4b3bb589a2",
+            "status": "PROBE_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-pointed-partial-scan-benchmark-tests",
+            "git_blob": "6b3a2b80f25749a4a594399b7a503e31d7e7a49f",
+            "path": "tests/test_low_rank_pointed_partial_scan_benchmark_v1.py",
+            "sha256": "7b5cced6616a0c4263ae1e176aade71fda07b45b1bbc10494a67292edfb7d1bd",
+            "status": "TEST_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-product-partial-scan-surface-probe-tests",
+            "git_blob": "97c2956a439554a8d26c968b2c3de8a78c52de4d",
+            "path": "tests/test_low_rank_product_partial_scan_surface_probe_v1.py",
+            "sha256": "09f4b55075d3e9515c9bc64e175cc004030b81589db548b916ae3d7f5310d18b",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "no_formal_scan_evidence_claimed": "PASS",
+          "pointed_per_family_counts_are_cumulative": "PASS",
+          "pointed_toy_benchmark_case_count_bound": "PASS",
+          "product_row_blocker_recorded_fail_closed": "PASS",
+          "product_row_snapshots_validate": "PASS"
+        },
+        "created_at": "2026-07-16T13:28:10Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal partial scan plan has been emitted.",
+          "This note does not claim controls or target scans have been run.",
+          "This note does not claim no signal.",
+          "This note does not say rank4-semion-times-fibonacci data is missing.",
+          "This note says execution is blocked by the current product-row worker surface."
+        ],
+        "mathematical_status": "RUNTIME_BOTTLENECK_NOTE_ONLY",
+        "next_required_work": [
+          "Implement a product-category scan worker for Deligne product snapshots.",
+          "Add an exact composite-field expression layer for Q(i, zeta10, u), or a separately certified numeric consumer profile.",
+          "Pin universal-character projection for product labels such as 1|x instead of inferring it from label strings.",
+          "After those worker contracts exist, rerun the rank4-semion-times-fibonacci toy benchmark before generating any formal partial scan plan."
+        ],
+        "note_id": "objective-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+        "runtime_findings": {
+          "next_non_pointed_layer": {
+            "blocking_reasons": [
+              "product-row-formal-worker-not-implemented",
+              "composite-field-expression-runtime-not-implemented",
+              "universal-character-projection-for-product-labels-not-bound-to-worker"
+            ],
+            "bottleneck_kind": "IMPLEMENTATION_GAP_NOT_CATEGORY_DATA_GAP",
+            "family_id": "rank4-semion-times-fibonacci",
+            "snapshot_count": 8,
+            "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY",
+            "validated_snapshot_count": 8
+          },
+          "pointed_layer": {
+            "case_count": 291,
+            "elapsed_total_ms_decimal": "36.043624859303236",
+            "interpretation": "No runtime bottleneck was observed in the admitted pointed toy layer.",
+            "max_case_elapsed_ms_decimal": "0.15916721895337105",
+            "snapshot_count": 15,
+            "status": "PASS_POINTED_TOY_BENCHMARK_FAST"
+          }
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "formal_full_scan_complete_claim_allowed": false,
+          "formal_partial_scan_aggregate_emitted": false,
+          "formal_partial_scan_plan_emitted": false,
+          "formal_scan_case_result_emitted": false,
+          "pointed_toy_benchmark_completed": true,
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+          "product_row_surface_probe_completed": true,
+          "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET"
+        },
+        "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "command": "python3 experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 26,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank partial scan reached product-row worker bottleneck",
+        "top_notice": "The admitted pointed subset was benchmarked on toy diagrams and is fast. The next admitted non-pointed row, rank4-semion-times-fibonacci, has eight validated ribbon realization snapshots, but execution is blocked because the current runnable benchmark worker only supports pointed toy sectors. This note records an implementation bottleneck, not a scan result, not a no-signal result, and not a final CTL scan claim."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
+        "created_at": "2026-07-16T13:28:10Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-partial-target-readiness-probe-v1",
+            "content_hash": "sha256:5cd4befb1bb263db0eeefd4953107f8e80a2ef69b2d633907645a6a7e353915b",
+            "git_blob": "86a3f7c080bbed07a08b721737f116d86f1780ff",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-partial-target-readiness-probe-v1.json",
+            "sha256": "b8159319dd841484818a76d0c9cc66e95fcd7b0668e13eb04aed011c22323267",
+            "status": "BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN"
+          },
+          {
+            "artifact_id": "low-rank-partial-target-readiness-probe-builder",
+            "git_blob": "4f36f13e97b729fa923f2143774798e5e0e520f9",
+            "path": "experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py",
+            "sha256": "e2345be81681f71c32980cb6dfd61e46ac6b67f7dcb340dd53da467abc6867a2",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-partial-target-readiness-probe-tests",
+            "git_blob": "66a771e5fa5626cf3ff45f8cedabcefbf981fd56",
+            "path": "tests/test_low_rank_partial_target_readiness_probe_v1.py",
+            "sha256": "a3c7fec9f3bcf17ef17a977c1a4bb81679522a77237de7f26df3bc1d7e446954",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "blocked_reason_ids": [
+          "n70-blocked-no-certified-input",
+          "missing-machine-readable-exotic-kirby-diagrams",
+          "missing-h2-homeomorphism-marking-certificate",
+          "no-admitted-target-manifold-catalog",
+          "partial-toy-aggregate-cannot-substitute-target-scan"
+        ],
+        "checks": {
+          "n70_blocks_n80_route": "PASS",
+          "no_no_signal_claim": "PASS",
+          "no_target_case_ids_emitted": "PASS",
+          "no_target_worker_dispatched": "PASS",
+          "toy_aggregate_not_promoted_to_target_scan": "PASS"
+        },
+        "created_at": "2026-07-16T14:12:42Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim a target scan plan exists.",
+          "This note does not claim scan_case_result evidence for target manifolds.",
+          "This note does not claim no signal.",
+          "This note does not certify any exotic or target manifold input.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE."
+        ],
+        "mathematical_status": "TARGET_INPUT_BLOCKER_ONLY",
+        "next_required_work": [
+          "certify one machine-readable target or exotic-pair input",
+          "pin target manifold catalog and character assignments",
+          "prove evaluator support for that target beyond the current toy diagrams",
+          "generate a new partial target scan plan only after those hashes exist"
+        ],
+        "note_id": "objective-note-2026-07-16-low-rank-partial-target-readiness-blocked",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "certified_exotic_input_ready": false,
+          "formal_partial_toy_scan_aggregate_complete": true,
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+          "target_manifold_catalog_ready": false,
+          "target_scan_case_results_produced": false,
+          "worker_dispatch_allowed": false
+        },
+        "status": "BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 3,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 38,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank partial target scan blocked by missing certified target input",
+        "top_notice": "After the formal partial toy scan aggregate, the next route toward target scans is blocked because no certified target or exotic-pair input is available. The blocker is target-data certification, not the partial toy aggregate. No target worker was dispatched and no no-signal claim is made."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
+        "created_at": "2026-07-16T14:12:42Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
+      "cid": "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "low-rank-product-partial-scan-benchmark-v1",
+            "content_hash": "sha256:f3a0d28aa2f69e66ab0fb034bf3a533c7ba15c809308415140588a18613e0e03",
+            "git_blob": "9baf6e9fc22871dc97267e8ff8b0b12738f2c344",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-benchmark-v1.json",
+            "sha256": "0e8f5e1839b7cd87dc66fcdaa1ca898f49c3ff6b307291a01b662368d58af2de",
+            "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST"
+          },
+          {
+            "artifact_id": "low-rank-product-partial-scan-benchmark-runner",
+            "git_blob": "d71d75ae28936c6169f660476838cbd02212a2d1",
+            "path": "experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py",
+            "sha256": "ec8414590c48f3069b226177b3852516a2cb41b245d26163a66ccc23f7d04fe8",
+            "status": "RUNNER_ADDED"
+          },
+          {
+            "artifact_id": "low-rank-product-partial-scan-benchmark-tests",
+            "git_blob": "c1ba587efeb15517aa43ff532bcdf08ca4d1df3e",
+            "path": "tests/test_low_rank_product_partial_scan_benchmark_v1.py",
+            "sha256": "40b7cdbe4b9120165836443b00052d5eddee772282bd35d66761cace11a229ec",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "artifact_rejected_as_formal_evidence": "PASS",
+          "composite_expression_runtime_handles_product_twists": "PASS",
+          "no_formal_scan_evidence_claimed": "PASS",
+          "product_snapshot_count_is_eight": "PASS",
+          "product_toy_case_count_is_fifty_six": "PASS",
+          "projection_contract_rejects_unexpected_label_order": "PASS"
+        },
+        "created_at": "2026-07-16T13:56:21Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal partial scan plan has been emitted.",
+          "This note does not claim controls or target scans have been run.",
+          "This note does not claim no signal.",
+          "This note does not claim a general product-category evaluator.",
+          "This note does not claim support for unaudited categories or target manifolds."
+        ],
+        "mathematical_status": "TOY_RUNTIME_WORKER_NOTE_ONLY",
+        "next_required_work": [
+          "Unify pointed and product toy benchmark surfaces into a generated partial scan plan only after the formal partial_scan_plan validator can pin the exact evaluator profile.",
+          "Extend or block beyond two-component toy diagrams before any target scan.",
+          "Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.",
+          "Do not convert this benchmark into no-signal evidence."
+        ],
+        "note_id": "objective-note-2026-07-16-low-rank-product-toy-worker-added",
+        "runtime_findings": {
+          "product_layer": {
+            "case_count": 56,
+            "elapsed_total_ms_decimal": "36.130374763160944",
+            "interpretation": "The product row can now be evaluated in the narrow toy benchmark scope without using the pointed-only shortcut.",
+            "max_case_elapsed_ms_decimal": "2.2880001924932003",
+            "snapshot_count": 8,
+            "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST"
+          },
+          "worker_contracts": {
+            "character_projection": "explicit Semion-factor-first Z2 projection table is pinned per snapshot",
+            "expression_runtime": "sparse integer bookkeeping in zeta20 supports i, zeta10, product twists, and Fibonacci/Yang-Lee dimension expressions used by the snapshots",
+            "fail_closed_limits": [
+              "not a general Deligne product evaluator",
+              "not a general planar RT recoupling evaluator",
+              "does not support arbitrary algebraic simplification",
+              "does not support more than two components"
+            ],
+            "two_component_linking_profile": "fusion-channel trace sum_k N_ab^k (theta_k/(theta_a theta_b))^linking d_k"
+          }
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "family_id": "rank4-semion-times-fibonacci",
+          "formal_full_scan_complete_claim_allowed": false,
+          "formal_partial_scan_aggregate_emitted": false,
+          "formal_partial_scan_plan_emitted": false,
+          "formal_scan_case_result_emitted": false,
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+          "product_toy_worker_added": true,
+          "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET_TOY_BENCHMARK"
+        },
+        "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST_NO_FORMAL_SCAN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 5,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py",
+            "status": "pass"
+          },
+          {
+            "collected": 31,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank Semion x Fibonacci product toy worker added",
+        "top_notice": "The previous product-row executable-surface bottleneck has been resolved only for the current toy benchmark scope: rank4-semion-times-fibonacci Deligne product snapshots over the empty, CP2, and Hopf toy diagrams. This note does not admit a formal partial scan plan, does not admit scan_case_result evidence, and does not claim no signal."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
+        "created_at": "2026-07-16T13:56:21Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -18759,8 +19424,13 @@
       "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
+      "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan": "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
       "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation": "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
       "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start": "ctlobj-sha256:0a2962b20fda6b32e609f1343100de7e46bb3b5b3c36a5d1ed65bccdf123d695",
+      "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule": "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+      "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck": "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
+      "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked": "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
+      "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added": "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
       "claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2": "ctlobj-sha256:aa85149752765d1043d18d7d8a5c0880a1b26a285b41b404cdb46b22a57ae32d",
       "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
@@ -19201,11 +19871,26 @@
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": [
         "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2"
       ],
+      "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan": [
+        "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da"
+      ],
       "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation": [
         "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d"
       ],
       "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start": [
         "ctlobj-sha256:0a2962b20fda6b32e609f1343100de7e46bb3b5b3c36a5d1ed65bccdf123d695"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule": [
+        "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck": [
+        "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked": [
+        "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added": [
+        "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740"
       ],
       "claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2": [
         "ctlobj-sha256:aa85149752765d1043d18d7d8a5c0880a1b26a285b41b404cdb46b22a57ae32d"
@@ -20058,6 +20743,7 @@
         "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
         "ctlobj-sha256:29eb1722556a4086e8b8dba378f7eb5accd697260009ccaf7e9ad152f67be84f",
         "ctlobj-sha256:2a75044883754becc29478ea5b80d2ddc314b2f049dcfeb224bf317a1dbf8f1f",
+        "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
         "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a",
         "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
         "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
@@ -20105,6 +20791,7 @@
         "ctlobj-sha256:529bc5ee19037e6596460f0355d3f24c20cd8cd244e041b30f2d86e689b6b979",
         "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
         "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+        "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
         "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
         "ctlobj-sha256:579caa852a85d29e7e501c793ece980b5dff4d57ba2965d73259277dbd00be24",
         "ctlobj-sha256:59b1c90e2e7a567d84c7f8d5672dc3d301a6c87708a0dff545a03d7fe64b0531",
@@ -20203,6 +20890,7 @@
         "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
         "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
+        "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
@@ -20221,6 +20909,7 @@
         "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948",
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
         "ctlobj-sha256:a4c2d777e3e2d69b3ab178d113b775c230b6f18c532193b625a1bf587a6cac11",
+        "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
         "ctlobj-sha256:a54d2743f76010c33354fd51d9a0031042a4c52084da045570e4e8d422231cee",
         "ctlobj-sha256:a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3",
         "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
@@ -20273,6 +20962,7 @@
         "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+        "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
         "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
         "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
@@ -20394,6 +21084,7 @@
         "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
         "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
+        "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
         "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a",
         "ctlobj-sha256:2c8cd8d20780fc2178ee1158455135e4c5722c823f69279935ab4dc0863a17f0",
         "ctlobj-sha256:2eb497153d99151c52020ad31114063228f0197ce5525657b9dc72b3138ff66a",
@@ -20415,6 +21106,7 @@
         "ctlobj-sha256:50dce79a5eb1726adb9acbedce80987ad3cb3f1ed08aea432b40cbcb384f55ca",
         "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
         "ctlobj-sha256:5402292beb536927c1228eb0beb513041dc679a8d6fe6089f7a865de2e864794",
+        "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
         "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e",
         "ctlobj-sha256:59d1e42c37b04367c7f574e90588b170c1fe43ddf75022be5f3ad4c50464fcfa",
         "ctlobj-sha256:5b1ab23dc6162f6eedf0c0198ea97f55f2c9deb58def442d42ff1f5bad3da4f4",
@@ -20466,11 +21158,13 @@
         "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
         "ctlobj-sha256:9587a6f16e2ea20e0e2e0f1fa4648de4b929becded869b0b66d375697f58f196",
         "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb",
+        "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
         "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c",
         "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709",
         "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
+        "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
         "ctlobj-sha256:a62e9cfc1b9ad0f37f4453beca17803642c9b39a237d20a456e020423aeb5436",
         "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583",
         "ctlobj-sha256:a70e27b1192ee7b6ee65ca90a4a78a164b3ce8e65cbb2ccf0917b15a17bd56ce",
@@ -20495,6 +21189,7 @@
         "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+        "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
         "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
         "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc",
@@ -28170,6 +28865,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+          "generated_at": "2026-07-16T13:28:10Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+          "path": "manifests/lab-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-partial-scan-runtime-bottleneck.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a": [
         {
           "admission_batch_cid": "ctlobj-sha256:76d6703f483dac78e460bade79f9f9966e8aa21754479bcc9c29c20f32728134",
@@ -32694,6 +33409,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:46a85a076a59c45dab9a9183a24ef2f13bc84990c2136194feb2bb1cadba9a1b",
+          "generated_at": "2026-07-16T14:06:28Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fa299400b6e1f198366f443fe7bcf8f179a372a32c7d0bc9d87f5e9b278c4b5a",
+          "path": "manifests/lab-note-2026-07-16-low-rank-formal-partial-toy-scan.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-formal-partial-toy-scan.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
           "generated_at": "2026-07-16T06:03:18Z",
           "logical_id": "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation",
@@ -32721,6 +33453,74 @@
           "parent_root_cid": "ctlobj-sha256:9cf171a4223ccead919b46344ef0a668d997faa6b138f407c692644c708f8e2f",
           "path": "manifests/lab-note-2026-07-16-low-rank-nontrivial-growth-start.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-nontrivial-growth-start.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+          "generated_at": "2026-07-16T13:02:30Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d214a007cb207c720eb3b7bf149c27c30aaf33becf4480020ccfad98286b9960",
+          "path": "manifests/lab-note-2026-07-16-low-rank-nontrivial-partial-scan-rule.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-nontrivial-partial-scan-rule.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+          "generated_at": "2026-07-16T13:28:10Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+          "path": "manifests/lab-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-partial-scan-runtime-bottleneck.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:54070e5b8f60d87baf431a17da13a5f82f0ac968c8f8d5b83a22cc622bce0718",
+          "generated_at": "2026-07-16T14:12:42Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:46a85a076a59c45dab9a9183a24ef2f13bc84990c2136194feb2bb1cadba9a1b",
+          "path": "manifests/lab-note-2026-07-16-low-rank-partial-target-readiness-blocked.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-partial-target-readiness-blocked.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fa299400b6e1f198366f443fe7bcf8f179a372a32c7d0bc9d87f5e9b278c4b5a",
+          "generated_at": "2026-07-16T13:56:21Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+          "path": "manifests/lab-note-2026-07-16-low-rank-product-toy-worker-added.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-product-toy-worker-added.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -35922,6 +36722,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:54070e5b8f60d87baf431a17da13a5f82f0ac968c8f8d5b83a22cc622bce0718",
+          "generated_at": "2026-07-16T14:12:42Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:46a85a076a59c45dab9a9183a24ef2f13bc84990c2136194feb2bb1cadba9a1b",
+          "path": "manifests/lab-note-2026-07-16-low-rank-partial-target-readiness-blocked.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-partial-target-readiness-blocked.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": [
@@ -42159,6 +42979,26 @@
           "schema": "ctl-dogfood/merge-manifest/1"
         }
       ],
+      "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fa299400b6e1f198366f443fe7bcf8f179a372a32c7d0bc9d87f5e9b278c4b5a",
+          "generated_at": "2026-07-16T13:56:21Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+          "path": "manifests/lab-note-2026-07-16-low-rank-product-toy-worker-added.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-product-toy-worker-added.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3": [
         {
           "admission_batch_cid": "ctlobj-sha256:482280a0e5328110e4063818f77846177104797ad7187180b57a5a8e8a2817ad",
@@ -42650,6 +43490,26 @@
           "parent_root_cid": "ctlobj-sha256:ccce56085f41c4eb4a21558b8d1f9bef2001e88c66cedf6e590a38c5a6d75b19",
           "path": "manifests/subject-definition-2026-07-06-reference-crane-yetter-kirby-and-twisted-literature.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/reference-crane-yetter-kirby-and-twisted-literature.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:46a85a076a59c45dab9a9183a24ef2f13bc84990c2136194feb2bb1cadba9a1b",
+          "generated_at": "2026-07-16T14:06:28Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fa299400b6e1f198366f443fe7bcf8f179a372a32c7d0bc9d87f5e9b278c4b5a",
+          "path": "manifests/lab-note-2026-07-16-low-rank-formal-partial-toy-scan.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-formal-partial-toy-scan.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -46342,6 +47202,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+          "generated_at": "2026-07-16T13:02:30Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d214a007cb207c720eb3b7bf149c27c30aaf33becf4480020ccfad98286b9960",
+          "path": "manifests/lab-note-2026-07-16-low-rank-nontrivial-partial-scan-rule.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-nontrivial-partial-scan-rule.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": [
@@ -53028,6 +53908,36 @@
         },
         "word_count": 59
       },
+      "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
+        "created_at": "2026-07-16T13:28:10Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1911,
+        "gist": "The admitted pointed subset was benchmarked on toy diagrams and is fast. The next admitted non-pointed row, rank4-semion-times-fibonacci, has eight validated ribbon realization snapshots, but execution is blocked because the current runnable benchmark worker only supports poin...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-pointed-partial-scan-benchmark-v1\",\"content_hash\":\"sha256:c9ff5af7cc0e6eccb28857c9de923d5114cb60d074c975081b02cfa63cb3c73f\",\"git_blob\":\"8f73ec6fc165630c2985a92e37e38c9c848121a2\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-pointed-partial-scan-benchmark-v1.json\",\"sha256\":\"988b3d8b99e548bb1a7d3d08c53269f7b5b0e790bd023ad9fb0ae374a96c47c9\",\"status\":\"PASS_POINTED_TOY_BENCHMARK_FAST\"},{\"artifact_id\":\"low-rank-product-partial-scan-surface-probe-v1\",\"content_hash\":\"sha256:157894d95089c266d367092b6f31e92c1198f1e62fc5f9767ded17cfd592cbcd\",\"git_blob\":\"862182a145e4f815cb586b8e195fa0f3c5db061b\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-surface-probe-v1.json\",\"sha256\":\"7d24c3b96351ece8d4e3b29775fa9fa7edc3bc09b4a4319cd6b966e4ecaa003c\",\"status\":\"BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY\"},{\"artifact_id\":\"low-rank-pointed-partial-scan-benchmark-runner\",\"git_blob\":\"726bdb0719c7a04fc6a68b222a526c7469e38b9c\",\"path\":\"experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py\",\"sha256\":\"6e2e01488a7b898173a74063d9818f7f2fd6379338474cb717141be0a24a56ec\",\"status\":\"RUNNER_ADDED\"},{\"artifact_id\":\"low-rank-product-partial-scan-surface-probe-runner\",\"git_blob\":\"323244093832e9ef629ec4fe6cbef38f8f6198a2\",\"path\":\"experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py\",\"sha256\":\"f59fe2854112a43b89161e73fff5b057ff1aaf8e7cb4b58105f02c4b3bb589a2\",\"status\":\"PROBE_ADDED\"},{\"artifact_id\":\"low-rank-pointed-partial-scan-benchmark-tests\",\"git_blob\":\"6b3a2b80f25749a4a594399b7a503e31d7e7a49f\",\"path\":\"tests/test_low_rank_pointed_partial_scan_benchmark_v1.py\",\"sha256\":\"7b5cced6616a0c4263ae1e176aade71fda07b45b1bbc10494a67292edfb7d1bd\",\"status\":\"TEST_ADDED\"},{\"artifact_id\":\"low-rank-product-partial-scan-surface-probe-tests\",\"git_blob\":\"97c2956a439554a8d26c968b2c3de8a78c52de4d\",\"path\":\"tests/test_low_rank_product_partial_scan_surface_probe_v1.py\",\"sha256\":\"09f4b55075d3e9515c9bc64e175cc004030b81589db548b916ae3d7f5310d18b\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"no_formal_scan_evidence_claimed\":\"PASS\",\"pointed_per_family_counts_are_cumulative\":\"PASS\",\"pointed_toy_benchmark_case_count_bound\":\"PASS\",\"product_row_blocker_recorded_fail_closed\":\"PASS\",\"product_row_snapshots_validate\":\"PASS\"},\"created_at\":\"2026-07-16T13:28:10Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal partial scan plan has been emitted.\",\"This note does not claim controls or target scans have been run.\",\"This note does not claim no signal.\",\"This note does not say rank4-semion-times-fibonacci data is missing.\",\"This note says execution is blocked by the current product-row worker surface.\"],\"mathematical_status\":\"RUNTIME_BOTTLENECK_NOTE_ONLY\",\"next_required_work\":[\"Implement a product-category scan worker for Deligne product snapshots.\",\"Add an exact composite-field expression layer for Q(i, zeta10, u), or a separately certified numeric consumer profile.\",\"Pin universal-character projection for product labels such as 1|x instead of inferring it from label strings.\",\"After those worker contracts exist, rerun the rank4-semion-times-fibonacci toy benchmark before generating any formal partial scan plan.\"],\"note_id\":\"objective-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck\",\"runtime_findings\":{\"next_non_pointed_layer\":{\"blocking_reasons\":[\"product-row-formal-worker-not-implemented\",\"composite-field-expression-runtime-not-implemented\",\"universal-character-projection-for-product-labels-not-bound-to-worker\"],\"bottleneck_kind\":\"IMPLEMENTATION_GAP_NOT_CATEGORY_DATA_GAP\",\"family_id\":\"rank4-semion-times-fibonacci\",\"snapshot_count\":8,\"status\":\"BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY\",\"validated_snapshot_count\":8},\"pointed_layer\":{\"case_count\":291,\"elapsed_total_ms_decimal\":\"36.043624859303236\",\"interpretation\":\"No runtime bottleneck was observed in the admitted pointed toy layer.\",\"max_case_elapsed_ms_decimal\":\"0.15916721895337105\",\"snapshot_count\":15,\"status\":\"PASS_POINTED_TOY_BENCHMARK_FAST\"}},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"formal_full_scan_complete_claim_allowed\":false,\"formal_partial_scan_aggregate_emitted\":false,\"formal_partial_scan_plan_emitted\":false,\"formal_scan_case_result_emitted\":false,\"pointed_toy_benchmark_completed\":true,\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule\",\"product_row_surface_probe_completed\":true,\"scan_scope\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET\"},\"status\":\"BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py --write\",\"status\":\"pass\"},{\"command\":\"python3 experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py --write\",\"status\":\"pass\"},{\"collected\":26,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"}],\"title\":\"Low-rank partial scan reached product-row worker bottleneck\",\"top_notice\":\"The admitted pointed subset was benchmarked on toy diagrams and is fast. The next admitted non-pointed row, rank4-semion-times-fibonacci, has eight validated ribbon realization snapshots, but execution is blocked because the current runnable benchmark worker only supports pointed toy sectors. This note records an implementation bottleneck, not a scan result, not a no-signal result, and not a final CTL scan claim.\"}",
+        "title": "Low-rank partial scan reached product-row worker bottleneck",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5904,
+          "base_estimate": 1661,
+          "estimated_tokens": 1911,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 250,
+          "serialized_character_count": 5904,
+          "unicode_scalar_count": 5904,
+          "utf8_bytes": 5904
+        },
+        "word_count": 203
+      },
       "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a": {
         "active_state": "active",
         "cid": "ctlobj-sha256:2bc99945fb431ad1acd2cd8c94930894baa89d1eaba24a76178b616b98bc233a",
@@ -54467,6 +55377,36 @@
           "utf8_bytes": 227
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:559aa4e9fd677340e15997bd3fb9b31020cf12e1cad218fdee2a52360767e657",
+        "created_at": "2026-07-16T14:12:42Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1278,
+        "gist": "After the formal partial toy scan aggregate, the next route toward target scans is blocked because no certified target or exotic-pair input is available. The blocker is target-data certification, not the partial toy aggregate. No target worker was dispatched and no no-signal c...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-partial-target-readiness-probe-v1\",\"content_hash\":\"sha256:5cd4befb1bb263db0eeefd4953107f8e80a2ef69b2d633907645a6a7e353915b\",\"git_blob\":\"86a3f7c080bbed07a08b721737f116d86f1780ff\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-partial-target-readiness-probe-v1.json\",\"sha256\":\"b8159319dd841484818a76d0c9cc66e95fcd7b0668e13eb04aed011c22323267\",\"status\":\"BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN\"},{\"artifact_id\":\"low-rank-partial-target-readiness-probe-builder\",\"git_blob\":\"4f36f13e97b729fa923f2143774798e5e0e520f9\",\"path\":\"experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py\",\"sha256\":\"e2345be81681f71c32980cb6dfd61e46ac6b67f7dcb340dd53da467abc6867a2\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"low-rank-partial-target-readiness-probe-tests\",\"git_blob\":\"66a771e5fa5626cf3ff45f8cedabcefbf981fd56\",\"path\":\"tests/test_low_rank_partial_target_readiness_probe_v1.py\",\"sha256\":\"a3c7fec9f3bcf17ef17a977c1a4bb81679522a77237de7f26df3bc1d7e446954\",\"status\":\"TEST_ADDED\"}],\"blocked_reason_ids\":[\"n70-blocked-no-certified-input\",\"missing-machine-readable-exotic-kirby-diagrams\",\"missing-h2-homeomorphism-marking-certificate\",\"no-admitted-target-manifold-catalog\",\"partial-toy-aggregate-cannot-substitute-target-scan\"],\"checks\":{\"n70_blocks_n80_route\":\"PASS\",\"no_no_signal_claim\":\"PASS\",\"no_target_case_ids_emitted\":\"PASS\",\"no_target_worker_dispatched\":\"PASS\",\"toy_aggregate_not_promoted_to_target_scan\":\"PASS\"},\"created_at\":\"2026-07-16T14:12:42Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim a target scan plan exists.\",\"This note does not claim scan_case_result evidence for target manifolds.\",\"This note does not claim no signal.\",\"This note does not certify any exotic or target manifold input.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\"],\"mathematical_status\":\"TARGET_INPUT_BLOCKER_ONLY\",\"next_required_work\":[\"certify one machine-readable target or exotic-pair input\",\"pin target manifold catalog and character assignments\",\"prove evaluator support for that target beyond the current toy diagrams\",\"generate a new partial target scan plan only after those hashes exist\"],\"note_id\":\"objective-note-2026-07-16-low-rank-partial-target-readiness-blocked\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"certified_exotic_input_ready\":false,\"formal_partial_toy_scan_aggregate_complete\":true,\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan\",\"target_manifold_catalog_ready\":false,\"target_scan_case_results_produced\":false,\"worker_dispatch_allowed\":false},\"status\":\"BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py --write\",\"status\":\"pass\"},{\"collected\":3,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py\",\"status\":\"pass\"},{\"collected\":38,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"}],\"title\":\"Low-rank partial target scan blocked by missing certified target input\",\"top_notice\":\"After the formal partial toy scan aggregate, the next route toward target scans is blocked because no certified target or exotic-pair input is available. The blocker is target-data certification, not the partial toy aggregate. No target worker was dispatched and no no-signal claim is made.\"}",
+        "title": "Low-rank partial target scan blocked by missing certified target input",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 3946,
+          "base_estimate": 1111,
+          "estimated_tokens": 1278,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 167,
+          "serialized_character_count": 3946,
+          "unicode_scalar_count": 3946,
+          "utf8_bytes": 3946
+        },
+        "word_count": 147
       },
       "ctlobj-sha256:563499b8104eea845e73280ca65f5eac2c838df48914ab81974a4f61572aab8e": {
         "active_state": "active",
@@ -57408,6 +58348,36 @@
         },
         "word_count": 18
       },
+      "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
+        "created_at": "2026-07-16T13:56:21Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1656,
+        "gist": "The previous product-row executable-surface bottleneck has been resolved only for the current toy benchmark scope: rank4-semion-times-fibonacci Deligne product snapshots over the empty, CP2, and Hopf toy diagrams. This note does not admit a formal partial scan plan, does not a...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-product-partial-scan-benchmark-v1\",\"content_hash\":\"sha256:f3a0d28aa2f69e66ab0fb034bf3a533c7ba15c809308415140588a18613e0e03\",\"git_blob\":\"9baf6e9fc22871dc97267e8ff8b0b12738f2c344\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-benchmark-v1.json\",\"sha256\":\"0e8f5e1839b7cd87dc66fcdaa1ca898f49c3ff6b307291a01b662368d58af2de\",\"status\":\"PASS_PRODUCT_TOY_BENCHMARK_FAST\"},{\"artifact_id\":\"low-rank-product-partial-scan-benchmark-runner\",\"git_blob\":\"d71d75ae28936c6169f660476838cbd02212a2d1\",\"path\":\"experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py\",\"sha256\":\"ec8414590c48f3069b226177b3852516a2cb41b245d26163a66ccc23f7d04fe8\",\"status\":\"RUNNER_ADDED\"},{\"artifact_id\":\"low-rank-product-partial-scan-benchmark-tests\",\"git_blob\":\"c1ba587efeb15517aa43ff532bcdf08ca4d1df3e\",\"path\":\"tests/test_low_rank_product_partial_scan_benchmark_v1.py\",\"sha256\":\"40b7cdbe4b9120165836443b00052d5eddee772282bd35d66761cace11a229ec\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"artifact_rejected_as_formal_evidence\":\"PASS\",\"composite_expression_runtime_handles_product_twists\":\"PASS\",\"no_formal_scan_evidence_claimed\":\"PASS\",\"product_snapshot_count_is_eight\":\"PASS\",\"product_toy_case_count_is_fifty_six\":\"PASS\",\"projection_contract_rejects_unexpected_label_order\":\"PASS\"},\"created_at\":\"2026-07-16T13:56:21Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal partial scan plan has been emitted.\",\"This note does not claim controls or target scans have been run.\",\"This note does not claim no signal.\",\"This note does not claim a general product-category evaluator.\",\"This note does not claim support for unaudited categories or target manifolds.\"],\"mathematical_status\":\"TOY_RUNTIME_WORKER_NOTE_ONLY\",\"next_required_work\":[\"Unify pointed and product toy benchmark surfaces into a generated partial scan plan only after the formal partial_scan_plan validator can pin the exact evaluator profile.\",\"Extend or block beyond two-component toy diagrams before any target scan.\",\"Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.\",\"Do not convert this benchmark into no-signal evidence.\"],\"note_id\":\"objective-note-2026-07-16-low-rank-product-toy-worker-added\",\"runtime_findings\":{\"product_layer\":{\"case_count\":56,\"elapsed_total_ms_decimal\":\"36.130374763160944\",\"interpretation\":\"The product row can now be evaluated in the narrow toy benchmark scope without using the pointed-only shortcut.\",\"max_case_elapsed_ms_decimal\":\"2.2880001924932003\",\"snapshot_count\":8,\"status\":\"PASS_PRODUCT_TOY_BENCHMARK_FAST\"},\"worker_contracts\":{\"character_projection\":\"explicit Semion-factor-first Z2 projection table is pinned per snapshot\",\"expression_runtime\":\"sparse integer bookkeeping in zeta20 supports i, zeta10, product twists, and Fibonacci/Yang-Lee dimension expressions used by the snapshots\",\"fail_closed_limits\":[\"not a general Deligne product evaluator\",\"not a general planar RT recoupling evaluator\",\"does not support arbitrary algebraic simplification\",\"does not support more than two components\"],\"two_component_linking_profile\":\"fusion-channel trace sum_k N_ab^k (theta_k/(theta_a theta_b))^linking d_k\"}},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"family_id\":\"rank4-semion-times-fibonacci\",\"formal_full_scan_complete_claim_allowed\":false,\"formal_partial_scan_aggregate_emitted\":false,\"formal_partial_scan_plan_emitted\":false,\"formal_scan_case_result_emitted\":false,\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck\",\"product_toy_worker_added\":true,\"scan_scope\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET_TOY_BENCHMARK\"},\"status\":\"PASS_PRODUCT_TOY_BENCHMARK_FAST_NO_FORMAL_SCAN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py --write\",\"status\":\"pass\"},{\"collected\":5,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py\",\"status\":\"pass\"},{\"collected\":31,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"}],\"title\":\"Low-rank Semion x Fibonacci product toy worker added\",\"top_notice\":\"The previous product-row executable-surface bottleneck has been resolved only for the current toy benchmark scope: rank4-semion-times-fibonacci Deligne product snapshots over the empty, CP2, and Hopf toy diagrams. This note does not admit a formal partial scan plan, does not admit scan_case_result evidence, and does not claim no signal.\"}",
+        "title": "Low-rank Semion x Fibonacci product toy worker added",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5118,
+          "base_estimate": 1440,
+          "estimated_tokens": 1656,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 216,
+          "serialized_character_count": 5118,
+          "unicode_scalar_count": 5118,
+          "utf8_bytes": 5118
+        },
+        "word_count": 256
+      },
       "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3": {
         "active_state": "active",
         "cid": "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
@@ -57947,6 +58917,36 @@
           "utf8_bytes": 921
         },
         "word_count": 59
+      },
+      "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:a4cb9a09a49678257b60ba937271787596b003d8fdfd80553cebed24ded1b7da",
+        "created_at": "2026-07-16T14:06:28Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1767,
+        "gist": "A formal partial toy scan plan, two formal scan_case_result chunks, and a formal partial toy aggregate now exist for the admitted nontrivial universal-character subset over the three checked-in toy diagrams. This is not the final low-rank scan, not a target exotic scan, and no...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"formal-low-rank-partial-toy-scan-plan-v1\",\"content_hash\":\"sha256:ea295fc7dbf6f71b70e26e61a4d41e15733ab74f7d27c5b537468145d5698200\",\"git_blob\":\"f0e87e439752c03ed8e5362a35ec70df3199f450\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-plan-v1.json\",\"sha256\":\"456c39f88dca40478727fc280fcca240e463bb57830d5c3171ec156ce22ad069\",\"status\":\"FORMAL_PARTIAL_TOY_SCAN_PLAN_ADMITTED_SCOPE\"},{\"artifact_id\":\"formal-low-rank-partial-toy-scan-case-pointed-v1\",\"content_hash\":\"sha256:82239ebd75d49f01b09de03a7d595ced2f84c79dc94eeb6c9c50b337672de289\",\"git_blob\":\"9627f6520248c4bf0801df57a921c79cc29b48a9\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-pointed-v1.json\",\"sha256\":\"aab4acc5eb82b9b280a01df90eb4dd9669ca6c02de24f1d695e5a706c21ec4e4\",\"status\":\"PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK\"},{\"artifact_id\":\"formal-low-rank-partial-toy-scan-case-product-v1\",\"content_hash\":\"sha256:7bc787b88c321eb4177c29dd7270b83c28805931230a07afbbd902124d722338\",\"git_blob\":\"48c9bac260c24eedafa6418a671aa03c5fcc42e6\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-product-v1.json\",\"sha256\":\"6129821619c22e2dcfe8efce55c6f865bbaf552610b29c07781eadfadf3dee95\",\"status\":\"PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK\"},{\"artifact_id\":\"formal-low-rank-partial-toy-scan-aggregate-v1\",\"content_hash\":\"sha256:3ffdc509f59a676c070035cd4a039d2eda7b25dca524730c9ca7d832271f4a54\",\"git_blob\":\"40601987c774c1531f910bb6c09b446119b583b6\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-aggregate-v1.json\",\"sha256\":\"83ee626fc504eec2f1ae043dd2159142f31a23bff550bcf26ab68a70242642d2\",\"status\":\"FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE\"},{\"artifact_id\":\"formal-partial-toy-scan-builder\",\"git_blob\":\"36d0b8b2eb4f621c7c722b1ac4c560cd3e82601e\",\"path\":\"experiments/scripts/build_low_rank_partial_toy_scan_v1.py\",\"sha256\":\"87932e56a9ab16b931f01ea7980960ef26eeba0e983d4e83e9ab92d268c49de7\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"formal-partial-toy-scan-tests\",\"git_blob\":\"f25c716b0508ff1ecf39a0eb6ea561e2dee59a7b\",\"path\":\"tests/test_low_rank_partial_toy_scan_v1.py\",\"sha256\":\"84e1a8de61b3ff95b6d1757ac03f7e6c291952d0692dcc96d083509947852716\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"aggregate_rejects_complete_no_signal_upgrade\":\"PASS\",\"no_full_scan_claim\":\"PASS\",\"partial_scan_aggregate_validates\":\"PASS\",\"partial_scan_plan_validates\":\"PASS\",\"pointed_scan_case_result_validates\":\"PASS\",\"product_scan_case_result_validates\":\"PASS\"},\"created_at\":\"2026-07-16T14:06:28Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim complete-no-signal.\",\"This note does not claim target exotic manifolds were scanned.\",\"This note does not cover rank3-ising, rank5-su2-4, or rank5-psu3-4.\",\"This note does not cover rank 6 or higher.\"],\"mathematical_status\":\"FORMAL_PARTIAL_TOY_SCAN_ONLY\",\"next_required_work\":[\"Do not treat this toy aggregate as a target scan.\",\"Before admitted target scans, define a target manifold catalog and evaluator support boundary.\",\"Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.\",\"Keep rank5-psu3-4 explicit as unknown, not discarded.\"],\"note_id\":\"objective-note-2026-07-16-low-rank-formal-partial-toy-scan\",\"runtime_findings\":{\"aggregate_claim\":\"partial-toy-scan-complete-for-admitted-subset\",\"chunk_count\":2,\"coverage_boundary\":\"admitted nontrivial universal-character toy chunks only\",\"pointed_chunk_subcase_count\":291,\"product_chunk_subcase_count\":56,\"subcase_count\":347},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"formal_full_scan_complete_claim_allowed\":false,\"formal_partial_scan_aggregate_emitted\":true,\"formal_partial_scan_plan_emitted\":true,\"formal_scan_case_result_chunks_emitted\":2,\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-product-toy-worker-added\",\"scan_scope\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET\",\"toy_diagram_scope\":[\"s4-empty-kirby-diagram\",\"cp2-plus-one-framed-unknot\",\"hopf-linking-1\"]},\"status\":\"FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_low_rank_partial_toy_scan_v1.py --write\",\"status\":\"pass\"},{\"collected\":4,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py\",\"status\":\"pass\"},{\"collected\":35,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py\",\"status\":\"pass\"}],\"title\":\"Low-rank formal partial toy scan aggregate admitted\",\"top_notice\":\"A formal partial toy scan plan, two formal scan_case_result chunks, and a formal partial toy aggregate now exist for the admitted nontrivial universal-character subset over the three checked-in toy diagrams. This is not the final low-rank scan, not a target exotic scan, and not a no-signal claim.\"}",
+        "title": "Low-rank formal partial toy scan aggregate admitted",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5458,
+          "base_estimate": 1536,
+          "estimated_tokens": 1767,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 231,
+          "serialized_character_count": 5458,
+          "unicode_scalar_count": 5458,
+          "utf8_bytes": 5458
+        },
+        "word_count": 158
       },
       "ctlobj-sha256:a54d2743f76010c33354fd51d9a0031042a4c52084da045570e4e8d422231cee": {
         "active_state": "active",
@@ -59537,6 +60537,36 @@
           "utf8_bytes": 3576
         },
         "word_count": 132
+      },
+      "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+        "created_at": "2026-07-16T13:02:30Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1883,
+        "gist": "The safety substrate now distinguishes full low-rank scan completion from a validated partial scan over the already admitted nontrivial universal-character subset. Full FORMAL_LOW_RANK_SCAN_COMPLETE remains forbidden while rank3-ising and rank5-su2-4 are unresolved. Universal-...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"low-rank-nontrivial-partial-scan-rule-v1\",\"content_hash\":\"sha256:1f80b0af9d97b8dac6582ba6a2f8ebe3c8c7400cf85c5cac0627e7929ae3f7d7\",\"git_blob\":\"4cfe0a05bf1c92cd248533e17552a8099bd8c26d\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-partial-scan-rule-v1.json\",\"sha256\":\"205bfb57b3e594096c53f2142db21ba09309c6c29792fb2782095dea19065b2f\",\"status\":\"NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN\"},{\"artifact_id\":\"foundation-safety-validator\",\"git_blob\":\"bab77fb2d1f8f491f2d2a107b8508a0969170f30\",\"path\":\"src/twisted_yetter/foundation_safety.py\",\"sha256\":\"d7156cc463e3bd804207b542954e6e2f6fbd3cbe18d86892da6a0f233a94745c\",\"status\":\"UPDATED_PARTIAL_SCAN_VALIDATORS\"},{\"artifact_id\":\"formal-admission-policy-v1\",\"git_blob\":\"cf382f4acf5b329f23f194653f613c2a5d6d82d2\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json\",\"sha256\":\"1bafe31e6f96f23609211386a957134bdc13dba3d333f7f4a7edd2a08bd76a8a\",\"status\":\"FOUNDATION_ESTABLISHED_POLICY_ARTIFACT\"},{\"artifact_id\":\"low-rank-full-catalog-universal-grading-audit-v1\",\"content_hash\":\"sha256:6b572e43a4856dd560da342bf761cde77e175a16a5e252c424ab02fae3b84c82\",\"git_blob\":\"c8fd290a97a6f6cda30fc3487e01dd280b63c36d\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-full-catalog-universal-grading-audit-v1.json\",\"sha256\":\"309ee595f265681524c6c7da25ef3ea3e902c008b18c97cbd8cc4b2c270f80d4\",\"status\":\"FULL_CATALOG_UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_UNKNOWN\"},{\"artifact_id\":\"low-rank-nontrivial-partial-scan-rule-builder\",\"git_blob\":\"53b8576acabf9f352b97347fac29b0ed44d9a69e\",\"path\":\"experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py\",\"sha256\":\"faa4e3f6108a3847c9c41c962e2c6721693ba28957936e46c770faba63717785\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"low-rank-nontrivial-partial-scan-rule-tests\",\"git_blob\":\"0ed10a09c0cfce39da34dfb2e7f95df593e514a6\",\"path\":\"tests/test_low_rank_nontrivial_partial_scan_rule_v1.py\",\"sha256\":\"7e862f3e7c2486e4fe65b5b5103b3a29947d12815830911f1b8dfbd8373ccb9b\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"full_route_fail_closed_tests_still_pass\":\"PASS\",\"full_scan_claim_forbidden\":\"PASS\",\"no_scan_plan_emitted_by_this_rule\":\"PASS\",\"policy_allows_partial_scan_aggregate_kind\":\"PASS\",\"policy_allows_partial_scan_plan_kind\":\"PASS\",\"trivial_rows_marked_discarded\":\"PASS\",\"unknown_rows_not_discarded\":\"PASS\"},\"created_at\":\"2026-07-16T13:02:30Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal partial scan plan has been emitted.\",\"This note does not claim controls or target scans have been run.\",\"This note does not claim no signal.\",\"This note does not treat rank5-psu3-4 as trivial.\",\"This note discards universal-group trivial rows only for nontrivial universal-character twists.\"],\"mathematical_status\":\"SAFETY_SUBSTRATE_RULE_UPDATE_ONLY\",\"note_id\":\"objective-note-2026-07-16-low-rank-nontrivial-partial-scan-rule\",\"row_scope\":{\"admitted_resolved_nontrivial_family_ids\":[\"rank2-cyclic-z2\",\"rank3-cyclic-z3\",\"rank4-pointed-z4\",\"rank4-pointed-z2xz2\",\"rank4-semion-times-fibonacci\",\"rank5-su5-1\"],\"discarded_trivial_universal_group_family_ids\":[\"rank2-fibonacci-yang-lee\",\"rank3-psu2-5\",\"rank4-fibxfib\",\"rank4-psu2-7\",\"rank5-psu2-9\"],\"excluded_blocked_nontrivial_family_ids\":[\"rank3-ising\",\"rank5-su2-4\"],\"trivial_rows_disposition\":\"DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN\",\"unknown_rows_disposition\":\"EXCLUDED_NOT_DISCARDED\",\"unknown_universal_group_family_ids\":[\"rank5-psu3-4\"]},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"formal_full_scan_complete_claim_allowed\":false,\"formal_full_scan_plan_allowed\":false,\"formal_partial_scan_aggregate_allowed_if_cases_complete\":true,\"formal_partial_scan_plan_allowed_if_validator_accepts\":true,\"formal_partial_scan_plan_emitted\":false,\"full_rank_2_5_ribbon_classification_claim_allowed\":false,\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2\",\"scan_scope\":\"NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET\"},\"status\":\"NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write\",\"status\":\"pass\"},{\"command\":\"python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write\",\"status\":\"pass\"},{\"command\":\"python3 experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py --write\",\"status\":\"pass\"},{\"collected\":22,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py\",\"status\":\"pass\"},{\"collected\":16,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_low_rank_ribbon_classification_terminal_blocked_v2.py\",\"status\":\"pass\"}],\"title\":\"Low-rank nontrivial universal-character partial scan rule enabled\",\"top_notice\":\"The safety substrate now distinguishes full low-rank scan completion from a validated partial scan over the already admitted nontrivial universal-character subset. Full FORMAL_LOW_RANK_SCAN_COMPLETE remains forbidden while rank3-ising and rank5-su2-4 are unresolved. Universal-group trivial rows are explicitly discarded for this nontrivial-character scan scope. No controls, targets, scan cases, aggregate, no-signal claim, or final scan claim is admitted by this note.\"}",
+        "title": "Low-rank nontrivial universal-character partial scan rule enabled",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5820,
+          "base_estimate": 1637,
+          "estimated_tokens": 1883,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 246,
+          "serialized_character_count": 5820,
+          "unicode_scalar_count": 5820,
+          "utf8_bytes": 5820
+        },
+        "word_count": 144
       },
       "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": {
         "active_state": "active",
@@ -63099,7 +64129,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T07:35:08Z",
+  "generated_at": "2026-07-16T14:16:25Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -65633,17 +66663,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:d214a007cb207c720eb3b7bf149c27c30aaf33becf4480020ccfad98286b9960",
+  "root_cid": "ctlobj-sha256:54070e5b8f60d87baf431a17da13a5f82f0ac968c8f8d5b83a22cc622bce0718",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 67904,
+    "build_ms": 72009,
     "context_source": "current-context-replay",
-    "current_context_ms": 63311,
-    "discovery_index_ms": 4467,
-    "payload_summaries_ms": 41,
-    "resource_index_ms": 41,
-    "write_ms": 42
+    "current_context_ms": 67454,
+    "discovery_index_ms": 4426,
+    "payload_summaries_ms": 42,
+    "resource_index_ms": 42,
+    "write_ms": 43
   },
-  "transition_cid": "ctlobj-sha256:2e276034829b5d3ce7158525371f462838c78c8d530a17ed98d24498f81dc7eb"
+  "transition_cid": "ctlobj-sha256:6aa88610eb1845216dd13353fc6c938e1e33ee446c530ba9674ed18dfbe32f9e"
 }

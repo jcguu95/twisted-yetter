@@ -1,0 +1,107 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-product-toy-worker-added",
+  "title": "Low-rank Semion x Fibonacci product toy worker added",
+  "created_at": "2026-07-16T13:56:21Z",
+  "created_by": "actor:codex",
+  "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST_NO_FORMAL_SCAN",
+  "top_notice": "The previous product-row executable-surface bottleneck has been resolved only for the current toy benchmark scope: rank4-semion-times-fibonacci Deligne product snapshots over the empty, CP2, and Hopf toy diagrams. This note does not admit a formal partial scan plan, does not admit scan_case_result evidence, and does not claim no signal.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+    "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET_TOY_BENCHMARK",
+    "family_id": "rank4-semion-times-fibonacci",
+    "product_toy_worker_added": true,
+    "formal_partial_scan_plan_emitted": false,
+    "formal_scan_case_result_emitted": false,
+    "formal_partial_scan_aggregate_emitted": false,
+    "formal_full_scan_complete_claim_allowed": false
+  },
+  "runtime_findings": {
+    "product_layer": {
+      "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST",
+      "case_count": 56,
+      "snapshot_count": 8,
+      "elapsed_total_ms_decimal": "36.130374763160944",
+      "max_case_elapsed_ms_decimal": "2.2880001924932003",
+      "interpretation": "The product row can now be evaluated in the narrow toy benchmark scope without using the pointed-only shortcut."
+    },
+    "worker_contracts": {
+      "character_projection": "explicit Semion-factor-first Z2 projection table is pinned per snapshot",
+      "expression_runtime": "sparse integer bookkeeping in zeta20 supports i, zeta10, product twists, and Fibonacci/Yang-Lee dimension expressions used by the snapshots",
+      "two_component_linking_profile": "fusion-channel trace sum_k N_ab^k (theta_k/(theta_a theta_b))^linking d_k",
+      "fail_closed_limits": [
+        "not a general Deligne product evaluator",
+        "not a general planar RT recoupling evaluator",
+        "does not support arbitrary algebraic simplification",
+        "does not support more than two components"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-product-partial-scan-benchmark-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-benchmark-v1.json",
+      "git_blob": "9baf6e9fc22871dc97267e8ff8b0b12738f2c344",
+      "sha256": "0e8f5e1839b7cd87dc66fcdaa1ca898f49c3ff6b307291a01b662368d58af2de",
+      "content_hash": "sha256:f3a0d28aa2f69e66ab0fb034bf3a533c7ba15c809308415140588a18613e0e03",
+      "status": "PASS_PRODUCT_TOY_BENCHMARK_FAST"
+    },
+    {
+      "artifact_id": "low-rank-product-partial-scan-benchmark-runner",
+      "path": "experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py",
+      "git_blob": "d71d75ae28936c6169f660476838cbd02212a2d1",
+      "sha256": "ec8414590c48f3069b226177b3852516a2cb41b245d26163a66ccc23f7d04fe8",
+      "status": "RUNNER_ADDED"
+    },
+    {
+      "artifact_id": "low-rank-product-partial-scan-benchmark-tests",
+      "path": "tests/test_low_rank_product_partial_scan_benchmark_v1.py",
+      "git_blob": "c1ba587efeb15517aa43ff532bcdf08ca4d1df3e",
+      "sha256": "40b7cdbe4b9120165836443b00052d5eddee772282bd35d66761cace11a229ec",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "product_snapshot_count_is_eight": "PASS",
+    "product_toy_case_count_is_fifty_six": "PASS",
+    "projection_contract_rejects_unexpected_label_order": "PASS",
+    "composite_expression_runtime_handles_product_twists": "PASS",
+    "artifact_rejected_as_formal_evidence": "PASS",
+    "no_formal_scan_evidence_claimed": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/run_low_rank_product_partial_scan_benchmark_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py",
+      "status": "pass",
+      "collected": 5
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+      "status": "pass",
+      "collected": 31
+    }
+  ],
+  "next_required_work": [
+    "Unify pointed and product toy benchmark surfaces into a generated partial scan plan only after the formal partial_scan_plan validator can pin the exact evaluator profile.",
+    "Extend or block beyond two-component toy diagrams before any target scan.",
+    "Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.",
+    "Do not convert this benchmark into no-signal evidence."
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal partial scan plan has been emitted.",
+    "This note does not claim controls or target scans have been run.",
+    "This note does not claim no signal.",
+    "This note does not claim a general product-category evaluator.",
+    "This note does not claim support for unaudited categories or target manifolds."
+  ],
+  "mathematical_status": "TOY_RUNTIME_WORKER_NOTE_ONLY",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}

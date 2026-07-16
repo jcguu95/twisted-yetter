@@ -6,22 +6,26 @@
   "explicit_non_claims": [
     "This policy does not establish any rank 2-5 ribbon refinement.",
     "This policy does not authorize any formal scan plan while the catalog is blocked.",
+    "This policy only allows partial subset scans when their excluded rows are explicit.",
     "This policy does not turn formula preflight, candidate, or legacy FR-only outputs into evidence."
   ],
   "formal_evidence_kind_allowlist": [
     "ribbon_realization_snapshot",
     "scan_plan",
+    "partial_scan_plan",
     "scan_case_result",
-    "scan_aggregate"
+    "scan_aggregate",
+    "partial_scan_aggregate"
   ],
   "formal_scan_status": "BLOCKED_UNTIL_LOW_RANK_RIBBON_CATALOG_ESTABLISHED",
   "foundation_status": "FOUNDATION_ESTABLISHED",
-  "generated_at_utc": "2026-07-15T22:15:57Z",
+  "generated_at_utc": "2026-07-16T13:00:34Z",
   "generator_script": "experiments/scripts/build_foundation_v2_safety_substrate_v1.py",
   "git": {
-    "commit": "7a3a8e79a3487376f4438567feb45fb713f06c7b",
+    "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
     "dirty": true
   },
+  "partial_scan_status": "AUTHORIZED_ONLY_FOR_VALIDATED_NONTRIVIAL_UNIVERSAL_CHARACTER_SUBSETS",
   "policy_flags": {
     "braided_denominator_is_not_ribbon_denominator": true,
     "classification_must_be_ribbon_level": true,
@@ -29,7 +33,10 @@
     "derived_readiness_only": true,
     "formal_evidence_requires_content_hash": true,
     "formula_preflight_is_not_formal_evidence": true,
-    "mutable_aliases_are_not_formal_evidence": true
+    "mutable_aliases_are_not_formal_evidence": true,
+    "partial_scan_complete_claims_are_not_full_scan_claims": true,
+    "trivial_universal_group_rows_discarded_for_nontrivial_character_scan": true,
+    "unknown_universal_group_rows_cannot_be_silently_discarded": true
   },
   "policy_id": "low-rank-ribbon-foundation-v2-formal-admission-policy-v1",
   "policy_status": "ACTIVE_FAIL_CLOSED",
@@ -43,6 +50,28 @@
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "reproduce_command": "python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write",
   "required_pinned_hash_fields": {
+    "partial_scan_aggregate": [
+      "content_hash",
+      "scan_plan_hash",
+      "enumerator_certificate",
+      "expected_case_count",
+      "actual_case_count",
+      "excluded_blocked_family_ids",
+      "discarded_trivial_universal_group_family_ids"
+    ],
+    "partial_scan_plan": [
+      "content_hash",
+      "audit_snapshot_hash",
+      "classification_catalog_hash",
+      "universal_grading_audit_hash",
+      "category_subset_catalog",
+      "manifold_catalog",
+      "character_assignment_catalog",
+      "evaluator_profile",
+      "numeric_policy",
+      "execution_semantics",
+      "exclusion_ledger"
+    ],
     "ribbon_realization_snapshot": [
       "content_hash",
       "category_data_hash",

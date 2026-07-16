@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+  "generated_at": "2026-07-16T13:28:10Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
+    "current_root": "ctlobj-sha256:ea79b72a1cefefaf9fd77382784dd265cdc2b9c7c0c4882ed62d3d63c94f74b9",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:62028f9a3d1862f6bb4f9230bc2744b5fd4dc4a70f9f9240148e982ed146af0b"
+  },
+  "parent_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-partial-scan-runtime-bottleneck.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck --payload lab-notes/2026-07-16-low-rank-partial-scan-runtime-bottleneck.json --manifest manifests/lab-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck.json --created-at 2026-07-16T13:28:10Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf"
+}

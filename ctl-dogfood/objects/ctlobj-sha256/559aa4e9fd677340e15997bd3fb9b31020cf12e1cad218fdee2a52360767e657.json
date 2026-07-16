@@ -1,0 +1,101 @@
+{
+  "created_at": "2026-07-16T14:12:42Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-target-readiness-blocked",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-partial-target-readiness-probe-v1",
+        "content_hash": "sha256:5cd4befb1bb263db0eeefd4953107f8e80a2ef69b2d633907645a6a7e353915b",
+        "git_blob": "86a3f7c080bbed07a08b721737f116d86f1780ff",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-partial-target-readiness-probe-v1.json",
+        "sha256": "b8159319dd841484818a76d0c9cc66e95fcd7b0668e13eb04aed011c22323267",
+        "status": "BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN"
+      },
+      {
+        "artifact_id": "low-rank-partial-target-readiness-probe-builder",
+        "git_blob": "4f36f13e97b729fa923f2143774798e5e0e520f9",
+        "path": "experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py",
+        "sha256": "e2345be81681f71c32980cb6dfd61e46ac6b67f7dcb340dd53da467abc6867a2",
+        "status": "BUILDER_ADDED"
+      },
+      {
+        "artifact_id": "low-rank-partial-target-readiness-probe-tests",
+        "git_blob": "66a771e5fa5626cf3ff45f8cedabcefbf981fd56",
+        "path": "tests/test_low_rank_partial_target_readiness_probe_v1.py",
+        "sha256": "a3c7fec9f3bcf17ef17a977c1a4bb81679522a77237de7f26df3bc1d7e446954",
+        "status": "TEST_ADDED"
+      }
+    ],
+    "blocked_reason_ids": [
+      "n70-blocked-no-certified-input",
+      "missing-machine-readable-exotic-kirby-diagrams",
+      "missing-h2-homeomorphism-marking-certificate",
+      "no-admitted-target-manifold-catalog",
+      "partial-toy-aggregate-cannot-substitute-target-scan"
+    ],
+    "checks": {
+      "n70_blocks_n80_route": "PASS",
+      "no_no_signal_claim": "PASS",
+      "no_target_case_ids_emitted": "PASS",
+      "no_target_worker_dispatched": "PASS",
+      "toy_aggregate_not_promoted_to_target_scan": "PASS"
+    },
+    "created_at": "2026-07-16T14:12:42Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim a target scan plan exists.",
+      "This note does not claim scan_case_result evidence for target manifolds.",
+      "This note does not claim no signal.",
+      "This note does not certify any exotic or target manifold input.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE."
+    ],
+    "mathematical_status": "TARGET_INPUT_BLOCKER_ONLY",
+    "next_required_work": [
+      "certify one machine-readable target or exotic-pair input",
+      "pin target manifold catalog and character assignments",
+      "prove evaluator support for that target beyond the current toy diagrams",
+      "generate a new partial target scan plan only after those hashes exist"
+    ],
+    "note_id": "objective-note-2026-07-16-low-rank-partial-target-readiness-blocked",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "certified_exotic_input_ready": false,
+      "formal_partial_toy_scan_aggregate_complete": true,
+      "prior_current_note": "claim:lab-note:2026-07-16-low-rank-formal-partial-toy-scan",
+      "target_manifold_catalog_ready": false,
+      "target_scan_case_results_produced": false,
+      "worker_dispatch_allowed": false
+    },
+    "status": "BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "command": "python3 experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py --write",
+        "status": "pass"
+      },
+      {
+        "collected": 3,
+        "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py",
+        "status": "pass"
+      },
+      {
+        "collected": 38,
+        "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_target_readiness_probe_v1.py tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Low-rank partial target scan blocked by missing certified target input",
+    "top_notice": "After the formal partial toy scan aggregate, the next route toward target scans is blocked because no certified target or exotic-pair input is available. The blocker is target-data certification, not the partial toy aggregate. No target worker was dispatched and no no-signal claim is made."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

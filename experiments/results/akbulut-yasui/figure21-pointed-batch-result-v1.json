@@ -1,0 +1,422 @@
+{
+  "blocked_row_count": 0,
+  "blockers": [],
+  "claim_boundary": "Terminal status for the Figure 21 pointed modular fixed-label distribution batch only.",
+  "complete_row_count": 15,
+  "content_hash": "sha256:bf4f7251c4a1179b6294f0d3e1c6cb307eba45c21c92cf61e413c9fa91659ca2",
+  "elapsed_seconds": 0.002088666893541813,
+  "finished_at_utc": "2026-07-16T21:43:16.136302+00:00",
+  "generator_script": "experiments/scripts/build_figure21_pointed_batch_result_v1.py",
+  "git_commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+  "git_dirty": true,
+  "inputs": {
+    "prefix_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json",
+    "prefix_sweep_sha256": "sha256:6d0092a1a626a7a8e74e7ef3d1049c358a5b050dafae3b2c026ce08dc46929eb",
+    "prehetzner_smoke": {
+      "content_hash": "sha256:ab31c2892c43d50a7ce2a6fc505dd642ea0b843ab8c5c317202acea7c65c078f",
+      "path": "experiments/results/akbulut-yasui/figure21-pointed-prehetzner-smoke-v1.json",
+      "schema": "twisted-yetter.figure21-pointed-prehetzner-smoke.v1",
+      "sha256": "sha256:e32b92f14c3470ed534c8fe6f2e061747a07476ecb16e25fb3b58aec76ed98d3",
+      "status": "PASS_PREHETZNER_SMOKE"
+    },
+    "worker_plan": {
+      "content_hash": "sha256:9c46060c55a0f3a9db22b0a85eb31dcb32522588476deb98fb23ca00e038561d",
+      "path": "experiments/results/akbulut-yasui/figure21-pointed-worker-plan-v1.json",
+      "schema": "twisted-yetter.figure21-pointed-worker-plan.v1",
+      "sha256": "sha256:27fb74a66a62f32ad3560479ff2088e33108f25ebf1d01bae568e2d7e7c89feb",
+      "status": "PASS_WORKER_PLAN_READY"
+    },
+    "worker_smoke": {
+      "content_hash": "sha256:e2d5b7460ae2bf104949e615468c8c436561ff4e2608e2f37d20a88ae0cfc2cd",
+      "path": "experiments/results/akbulut-yasui/figure21-pointed-worker-smoke-v1.json",
+      "schema": "twisted-yetter.figure21-pointed-worker-smoke.v1",
+      "sha256": "sha256:025806d690ebe84de57ab07961c684d6b0657653bc63eda9c64c8d7933e5a360",
+      "status": "PASS_WORKER_SMOKE"
+    }
+  },
+  "local_smoke_checks": {
+    "paid_batch_preflight_pass": true,
+    "prehetzner_smoke_pass": true,
+    "prehetzner_smoked_all_ready_rows": false,
+    "worker_smoke_pass": true
+  },
+  "mathematical_status": "POINTED_FIGURE21_BATCH_TERMINAL_NOT_EXOTICNESS_CLAIM",
+  "non_claims": [
+    "Does not cover nonpointed low-rank categories.",
+    "Does not cover trivial-universal-group rows for nontrivial-character scans.",
+    "Does not compare Figure 21 to the standard side by H2 coordinates.",
+    "Does not claim Figure 21 is exotic or standard.",
+    "Does not claim no signal for all low-rank MTCs."
+  ],
+  "parameters": {
+    "logical_worker_shards": 16,
+    "remote_capacity_provided": false,
+    "work_root": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1"
+  },
+  "prelaunch_check_status": "TERMINAL_BLOCKED_LOCAL_SMOKE_FAILED",
+  "python_version": "3.11.15",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "row_count": 15,
+  "rows": [
+    {
+      "family_id": "rank2-cyclic-z2",
+      "full_sector_count": 2048,
+      "prefix_sweep_status": "FULL",
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-minus",
+      "row_status": "COMPLETE_FROM_PREFIX_SWEEP",
+      "sector_count": 2048,
+      "worker_plan_status": "SKIP_ALREADY_COMPLETE_IN_PREFIX_SWEEP"
+    },
+    {
+      "family_id": "rank2-cyclic-z2",
+      "full_sector_count": 2048,
+      "prefix_sweep_status": "FULL",
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-plus",
+      "row_status": "COMPLETE_FROM_PREFIX_SWEEP",
+      "sector_count": 2048,
+      "worker_plan_status": "SKIP_ALREADY_COMPLETE_IN_PREFIX_SWEEP"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank3-cyclic-z3-minus/aggregate.json",
+      "aggregate_sha256": "sha256:65e1acbf34e471f8b0f101672ece89b95d5daea4f33fd6b9406f296306d2a977",
+      "chunk_count": 20,
+      "elapsed_worker_seconds": 235.48808925133198,
+      "expected_sector_count": 177147,
+      "family_id": "rank3-cyclic-z3",
+      "full_sector_count": 177147,
+      "observed_sector_count": 177147,
+      "projector_rank_distribution": {
+        "0": 118098,
+        "1": 59049
+      },
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-minus",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 118098,
+        "+1+0i": 19845,
+        "-0.5+0.866025403784i": 19602,
+        "-0.5-0.866025403784i": 19602
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank3-cyclic-z3-plus/aggregate.json",
+      "aggregate_sha256": "sha256:681af404e7c6fe8e0899fc885e152837c67ac9a788427762f478dcf3aa2943f3",
+      "chunk_count": 20,
+      "elapsed_worker_seconds": 207.07263425039127,
+      "expected_sector_count": 177147,
+      "family_id": "rank3-cyclic-z3",
+      "full_sector_count": 177147,
+      "observed_sector_count": 177147,
+      "projector_rank_distribution": {
+        "0": 118098,
+        "1": 59049
+      },
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-plus",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 118098,
+        "+1+0i": 19845,
+        "-0.5+0.866025403784i": 19602,
+        "-0.5-0.866025403784i": 19602
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q002/aggregate.json",
+      "aggregate_sha256": "sha256:ba52b45ca958daa304009c9fa54e4f3f74c9906bf2c40a3d1042341b3ff349d3",
+      "chunk_count": 192,
+      "elapsed_worker_seconds": 7217.163386533002,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q013/aggregate.json",
+      "aggregate_sha256": "sha256:b4d1973344d4bfaccad18e726988be83b119befa5cc525fc6b7ba65463ecd060",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7315.503244978003,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q112/aggregate.json",
+      "aggregate_sha256": "sha256:7fbf7bfffc66d48ac2e71ef6ea7877298f69b2f0b771a8e5b71664e5aff6fb63",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7272.94147745,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q222/aggregate.json",
+      "aggregate_sha256": "sha256:4c48f49d3c22c3152b2747886706fb9c2cbfa3191963918b3cdc508a225b398f",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7256.227694024001,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q233/aggregate.json",
+      "aggregate_sha256": "sha256:d8a65eb7115d70d3f13c616ef932cd26cb1c594d9bff80782fa29bddc5b52117",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7316.335079104002,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k1/aggregate.json",
+      "aggregate_sha256": "sha256:98ee054afc4312bffb1d799025fd6a18cf469b3760ef116192ad7b1b06668dbd",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7364.516550083999,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k1",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781187+0.707106781187i": 131072,
+        "+0.707106781187-0.707106781187i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781187+0.707106781187i": 131072,
+        "-0.707106781187-0.707106781187i": 131072,
+        "-1+0i": 138752
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k3/aggregate.json",
+      "aggregate_sha256": "sha256:4c8d32d347a81a6ad911c51db82963123fc0aefc0b84a816cc6ced794fb85834",
+      "chunk_count": 128,
+      "elapsed_worker_seconds": 7344.655608457003,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k3",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781187+0.707106781187i": 131072,
+        "+0.707106781187-0.707106781187i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781187+0.707106781187i": 131072,
+        "-0.707106781187-0.707106781187i": 131072,
+        "-1+0i": 138752
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k5/aggregate.json",
+      "aggregate_sha256": "sha256:abe629e2cd548f7570fd28fba9f1d74a8fbedb47495ad1bf9e0debd228ed3fcc",
+      "chunk_count": 144,
+      "elapsed_worker_seconds": 7147.955402602997,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k5",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781187+0.707106781187i": 131072,
+        "+0.707106781187-0.707106781187i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781187+0.707106781187i": 131072,
+        "-0.707106781187-0.707106781187i": 131072,
+        "-1+0i": 138752
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k7/aggregate.json",
+      "aggregate_sha256": "sha256:1729a8d8f683e1af41c9c868b16eb15935797e7e2078b2358b82a3efe319760b",
+      "chunk_count": 144,
+      "elapsed_worker_seconds": 7210.476590516004,
+      "expected_sector_count": 4194304,
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "observed_sector_count": 4194304,
+      "projector_rank_distribution": {
+        "0": 3145728,
+        "1": 1048576
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k7",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 3145728,
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781187+0.707106781187i": 131072,
+        "+0.707106781187-0.707106781187i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781187+0.707106781187i": 131072,
+        "-0.707106781187-0.707106781187i": 131072,
+        "-1+0i": 138752
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank5-su5-1-s1/aggregate.json",
+      "aggregate_sha256": "sha256:afd134937b6ac957bb2c30e0e3b72a30398e2900e6585860f9384e075fdd230d",
+      "chunk_count": 304,
+      "elapsed_worker_seconds": 78061.01561699295,
+      "expected_sector_count": 48828125,
+      "family_id": "rank5-su5-1",
+      "full_sector_count": 48828125,
+      "observed_sector_count": 48828125,
+      "projector_rank_distribution": {
+        "0": 39062500,
+        "1": 9765625
+      },
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s1",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 39062500,
+        "+0.309016994375+0.951056516295i": 1952500,
+        "+0.309016994375-0.951056516295i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994375+0.587785252292i": 1952500,
+        "-0.809016994375-0.587785252292i": 1952500
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "aggregate_path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank5-su5-1-s2/aggregate.json",
+      "aggregate_sha256": "sha256:57bad2251e5fde1f4c07622a461557b8dd0f38c6b9afff96e75c24eadd3d3e36",
+      "chunk_count": 240,
+      "elapsed_worker_seconds": 77598.30793665399,
+      "expected_sector_count": 48828125,
+      "family_id": "rank5-su5-1",
+      "full_sector_count": 48828125,
+      "observed_sector_count": 48828125,
+      "projector_rank_distribution": {
+        "0": 39062500,
+        "1": 9765625
+      },
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s2",
+      "row_status": "COMPLETE_FROM_EXISTING_AGGREGATE",
+      "value_distribution": {
+        "+0+0i": 39062500,
+        "+0.309016994375+0.951056516295i": 1952500,
+        "+0.309016994375-0.951056516295i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994375+0.587785252292i": 1952500,
+        "-0.809016994375-0.587785252292i": 1952500
+      },
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    }
+  ],
+  "schema": "twisted-yetter.figure21-pointed-batch-result.v1",
+  "started_at_utc": "2026-07-16T21:43:16.134182+00:00",
+  "status": "PASS_POINTED_FIGURE21_BATCH_COMPLETE"
+}

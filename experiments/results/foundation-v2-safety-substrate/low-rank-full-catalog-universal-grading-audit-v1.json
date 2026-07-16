@@ -5,7 +5,14 @@
     "rank5-su2-4"
   ],
   "classification_status": "NOT_ESTABLISHED_BY_THIS_AUDIT",
-  "content_hash": "sha256:7ccfac524eceb54ae8b91bb773efaf9cddd4bde677605f786eb7c29c1e0bec74",
+  "content_hash": "sha256:6b572e43a4856dd560da342bf761cde77e175a16a5e252c424ab02fae3b84c82",
+  "discarded_trivial_universal_group_family_ids": [
+    "rank2-fibonacci-yang-lee",
+    "rank3-psu2-5",
+    "rank4-fibxfib",
+    "rank4-psu2-7",
+    "rank5-psu2-9"
+  ],
   "explicit_next_growth_targets": [
     "rank3-ising",
     "rank5-su2-4"
@@ -37,10 +44,10 @@
     "rank4-psu2-7",
     "rank5-psu2-9"
   ],
-  "generated_at_utc": "2026-07-16T05:23:34Z",
+  "generated_at_utc": "2026-07-16T13:00:34Z",
   "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
   "git": {
-    "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+    "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
     "dirty": true
   },
   "input_artifacts": {
@@ -57,6 +64,30 @@
       "status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
     }
   },
+  "nontrivial_universal_character_scan_dispositions": {
+    "admit_resolved_nontrivial_family_ids": [
+      "rank2-cyclic-z2",
+      "rank3-cyclic-z3",
+      "rank4-pointed-z4",
+      "rank4-pointed-z2xz2",
+      "rank4-semion-times-fibonacci",
+      "rank5-su5-1"
+    ],
+    "discard_trivial_family_ids": [
+      "rank2-fibonacci-yang-lee",
+      "rank3-psu2-5",
+      "rank4-fibxfib",
+      "rank4-psu2-7",
+      "rank5-psu2-9"
+    ],
+    "exclude_blocked_nontrivial_family_ids": [
+      "rank3-ising",
+      "rank5-su2-4"
+    ],
+    "exclude_unknown_not_discarded_family_ids": [
+      "rank5-psu3-4"
+    ]
+  },
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
   "resolved_nontrivial_family_ids": [
@@ -71,7 +102,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:46f3a81862236c7106ff3ecdc0013723518c7ec812d13bde35423006478f365b",
+      "content_hash": "sha256:5997802a241cddaca09de177ebb60b04382953683281a1ba8eb8a819820b756c",
       "derivation_method": "pointed metric group universal grading equals underlying group",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -80,14 +111,15 @@
       "family": "C(C2,q), pointed cyclic Z2",
       "family_id": "rank2-cyclic-z2",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 2,
       "nontrivial_character_count": 1,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 2,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -106,7 +138,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:15b3f689d3a49cab7e124101a9023a3ea64934092ba08e84667be03b51244d62",
+      "content_hash": "sha256:5df4756b751b6b60daa446ca3bed1fd0dce215a45a0d65216b38054f01b7f90f",
       "derivation_method": "adjoint rank-2 Fibonacci/Yang-Lee fusion rule audit",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -115,14 +147,15 @@
       "family": "C(A1,5,q)_ad, Fibonacci/Yang-Lee family",
       "family_id": "rank2-fibonacci-yang-lee",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 4,
       "nontrivial_character_count": 0,
+      "nontrivial_character_scan_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
       "rank": 2,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -143,7 +176,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:75273f984d3ce99302a845657025d7e4b0ccec7fd5185247f43a7ebfb4b9fda2",
+      "content_hash": "sha256:187c0c5fd262b5090710c02a127c5e360018e44480efd125ccadc5b444eec23e",
       "derivation_method": "pointed metric group universal grading equals underlying group",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -152,14 +185,15 @@
       "family": "C(C3,q), pointed cyclic Z3",
       "family_id": "rank3-cyclic-z3",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 2,
       "nontrivial_character_count": 2,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 3,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -178,7 +212,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:415ef44f4f3e208af124c1b20b895261904f556335d0c131b8bff8c55f31108e",
+      "content_hash": "sha256:aeeedc7f6678a2d8b5c11452ba9c003b010c34f5a56c16c9a292a0669d5a6881",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -186,14 +220,15 @@
       "family": "Ising",
       "family_id": "rank3-ising",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 8,
       "nontrivial_character_count": 1,
+      "nontrivial_character_scan_disposition": "EXCLUDED_BLOCKED_RIBBON_REALIZATION",
       "rank": 3,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -209,7 +244,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:b7237b0a5e98d7762315461e9937ece309b84f9214f3c2662122e12eca9af2cc",
+      "content_hash": "sha256:e1cc638f4646ab13828e1c96ee9c72bf49baec6d3857578491f3c5e5d1da809e",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -217,14 +252,15 @@
       "family": "C(A1,7,q)_ad, PSU(2)_5 family",
       "family_id": "rank3-psu2-5",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 6,
       "nontrivial_character_count": 0,
+      "nontrivial_character_scan_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
       "rank": 3,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -240,7 +276,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:6f08282da81a570b00e0dfae3d882b230438e9fa80943541c59da01166968b9c",
+      "content_hash": "sha256:7b43f511925d05c17aa6f86b25cf6104012d75b7ea569cca3ca3511364b0585f",
       "derivation_method": "pointed metric group universal grading equals underlying group",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -249,14 +285,15 @@
       "family": "C(C4,q), pointed cyclic Z4",
       "family_id": "rank4-pointed-z4",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 4,
       "nontrivial_character_count": 3,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 4,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -277,7 +314,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:de909c96afc0e484cccdba84996b5accaf817b3e0253f031d2a9d5dc32633736",
+      "content_hash": "sha256:5cafb6ba44971cb1297f456387b8b78525451c4ad7c5f77f039e7231330bc83a",
       "derivation_method": "pointed metric group universal grading equals underlying group",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -286,14 +323,15 @@
       "family": "C(C2 x C2,q), pointed Klein four group",
       "family_id": "rank4-pointed-z2xz2",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 5,
       "nontrivial_character_count": 3,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 4,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -315,7 +353,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:52db64c97cfc91dc1f8c612addb6d84c636cf8a32a8ef925d883b52cf6ce88b3",
+      "content_hash": "sha256:3c4264456391c058d0034e4ebcc786b3454f52f66fd551feac61158d71edf537",
       "derivation_method": "Deligne product universal grading from semion Z2 factor times Fibonacci/Yang-Lee trivial factor",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -324,14 +362,15 @@
       "family": "C(A1,5,q)_ad x C(C2,q), SU(2)_3 family",
       "family_id": "rank4-semion-times-fibonacci",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 8,
       "nontrivial_character_count": 1,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 4,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -356,7 +395,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:2b1d1047d3e6e7a8583d23c16a7aee3edc2638acbbb4de872814518adc8ef300",
+      "content_hash": "sha256:e73d90a44185d6b1edff37274f0c950924799f5ee1bb89180160b2a228b74b81",
       "derivation_method": "Deligne product of two trivial Fibonacci/Yang-Lee universal gradings",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -365,14 +404,15 @@
       "family": "C(A1,5,q)_ad x C(A1,5,q')_ad",
       "family_id": "rank4-fibxfib",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 10,
       "nontrivial_character_count": 0,
+      "nontrivial_character_scan_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
       "rank": 4,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -399,7 +439,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:c00da9d05f6f5dc119e9087a2fba8a2627f25ae7a84e4447e1b7526340eb8abe",
+      "content_hash": "sha256:d9169736de2cffcb1c0da2ba8ff2df68a30c3332b858c550fc592690c06e036a",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -407,14 +447,15 @@
       "family": "C(A1,9,q)_ad, PSU(2)_7 family",
       "family_id": "rank4-psu2-7",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 6,
       "nontrivial_character_count": 0,
+      "nontrivial_character_scan_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
       "rank": 4,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -430,7 +471,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:acfe4b5dc02c7f6062135a1d9cc7a8c2f6c0f0e74caef508d7533cd48cd5f3cc",
+      "content_hash": "sha256:96f91a9da8f5e9ebadc7222f136657d14c2d438c0a837860ef4228f2e66c7134",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -438,14 +479,15 @@
       "family": "(Rep(S3)^omega)^gamma, SU(2)_4 family",
       "family_id": "rank5-su2-4",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 4,
       "nontrivial_character_count": 1,
+      "nontrivial_character_scan_disposition": "EXCLUDED_BLOCKED_RIBBON_REALIZATION",
       "rank": 5,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -461,7 +503,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:5323e72e4de3c1ca1b82eb62ae1a39875fb58bda5e56f28d122748ab8738efb3",
+      "content_hash": "sha256:e5ba493e6046642ce07ef4f958b6d70cc9eda62a0123cc2d05f09f8098ed4b73",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -469,14 +511,15 @@
       "family": "C(A1,11,q)_ad, PSU(2)_9 family",
       "family_id": "rank5-psu2-9",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 10,
       "nontrivial_character_count": 0,
+      "nontrivial_character_scan_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
       "rank": 5,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -492,7 +535,7 @@
     {
       "audit_source": "catalog-family-structure-and-existing-resolved-snapshots",
       "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
-      "content_hash": "sha256:bf4056c22e73c82d04b7e8455e8a7318d600ce9168278a2b0506339791ec5a49",
+      "content_hash": "sha256:3b616130d8d16c3f1adbcac6f5a7caa9df48e57dcda2b5fabdf8a66d342b0ea3",
       "derivation_method": "pointed metric group universal grading equals underlying group",
       "explicit_non_claims": [
         "This row audit records universal grading only.",
@@ -501,14 +544,15 @@
       "family": "C(C5,q), SU(5)_1 pointed cyclic Z5 family",
       "family_id": "rank5-su5-1",
       "formal_ribbon_realization_status": "RESOLVED_RIBBON_REALIZATION",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 2,
       "nontrivial_character_count": 4,
+      "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
       "rank": 5,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
@@ -527,7 +571,7 @@
     {
       "audit_source": "blocked-row-universal-grading-audit-v1",
       "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "content_hash": "sha256:2627c3deb184e6f01249ab00bc944cfad5b73bc5b2079efdec6a3def42c487fb",
+      "content_hash": "sha256:2680ab0baf2ff8dbbd03b325fb861cc387f6761c485dbd36cf906c9e50081e35",
       "explicit_non_claims": [
         "This row audit does not change the ribbon realization status.",
         "This row audit does not authorize scan-plan generation."
@@ -535,14 +579,15 @@
       "family": "C(A2,7,q)_ad, PSU(3)_4 family",
       "family_id": "rank5-psu3-4",
       "formal_ribbon_realization_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
-      "generated_at_utc": "2026-07-16T05:23:34Z",
+      "generated_at_utc": "2026-07-16T13:00:34Z",
       "generator_script": "experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py",
       "git": {
-        "commit": "18cfce4b96a8c8df24256491a1448522be894135",
+        "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
         "dirty": true
       },
       "modular_braided_class_count": 6,
       "nontrivial_character_count": null,
+      "nontrivial_character_scan_disposition": "EXCLUDED_NOT_DISCARDED",
       "rank": 5,
       "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
       "reproduce_command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",

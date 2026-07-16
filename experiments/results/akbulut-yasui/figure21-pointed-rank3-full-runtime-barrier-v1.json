@@ -1,0 +1,50 @@
+{
+  "schema": "twisted-yetter.figure21-pointed-rank3-full-runtime-barrier.v1",
+  "status": "BLOCKED_DIRECT_UNCHUNKED_FULL_RUN_TOO_SLOW",
+  "mathematical_status": "NO_MATHEMATICAL_RESULT",
+  "recorded_at_utc": "2026-07-16T16:33:00Z",
+  "target": {
+    "figure21_input": "experiments/inputs/akbulut-yasui/figure21-right-morse-draft-v1.json",
+    "standard_input": "experiments/inputs/standard/e1-cp2-sum-9barcp2-morse-v1.json",
+    "category_scope": "resolved pointed modular snapshots of rank <= 3",
+    "rank3_full_figure21_sector_count_per_branch": 177147,
+    "rank3_branch_count": 2
+  },
+  "attempts": [
+    {
+      "attempt_id": "rank3-full-before-projected-ir-hash-cache",
+      "command": "UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=. uv run python experiments/scripts/run_figure21_standard_pointed_modular_sweep_v1.py --max-rank 3 --max-figure21-sectors 177147 --modular-cross-check-sectors 16 --output experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-rank3-full-v1.json",
+      "elapsed_wall_seconds_before_interrupt": 300,
+      "terminal_status": "INTERRUPTED_NO_ARTIFACT",
+      "observed_bottleneck": "repeated per-sector projected_ir stable_json_hash validation"
+    },
+    {
+      "attempt_id": "rank3-full-after-projected-ir-hash-cache",
+      "command": "UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=. uv run python experiments/scripts/run_figure21_standard_pointed_modular_sweep_v1.py --max-rank 3 --max-figure21-sectors 177147 --modular-cross-check-sectors 16 --output experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-rank3-full-v1.json",
+      "elapsed_wall_seconds_before_interrupt": 300,
+      "terminal_status": "INTERRUPTED_NO_ARTIFACT",
+      "observed_bottleneck": "per-sector pointed Morse contraction remains too slow for unchunked full Z3 Figure 21 evaluation"
+    }
+  ],
+  "completed_results_available": {
+    "rank2_semion_anti_semion_full_figure21": "experiments/results/akbulut-yasui/figure21-right-rank2-semion-modular-evaluation-v1.json",
+    "pointed_prefix_and_standard_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json"
+  },
+  "correct_next_step": {
+    "route": "replace direct unchunked run with chunked/resumable Figure 21 pointed fixed-label evaluator, or implement a certified pointed closed-form contraction for Figure 21",
+    "minimum_required_properties": [
+      "small independently writable chunks",
+      "resume without recomputing completed sectors",
+      "progress and elapsed time per chunk",
+      "input hash and snapshot hash revalidation per chunk",
+      "aggregate only when expected sector count equals completed sector count"
+    ]
+  },
+  "claim_boundary": "This artifact records an execution bottleneck, not a category-theoretic obstruction and not an exoticness result.",
+  "non_claims": [
+    "Does not claim rank3 categories cannot be evaluated.",
+    "Does not claim Figure 21 has or lacks exotic signal.",
+    "Does not claim any Z3 full-sector value.",
+    "Does not authorize extrapolating to Z4, Z5, or nonpointed categories."
+  ]
+}

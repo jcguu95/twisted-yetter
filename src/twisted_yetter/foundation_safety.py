@@ -36,8 +36,10 @@ RIBBON_CATALOG_PROCUREMENT_BLOCKED: Final = (
 EVIDENCE_KIND_ALLOWLIST: Final = (
     "ribbon_realization_snapshot",
     "scan_plan",
+    "partial_scan_plan",
     "scan_case_result",
     "scan_aggregate",
+    "partial_scan_aggregate",
 )
 FORMAL_CLAIM_LEVELS: Final = (
     "formal-low-rank-category-evidence",
@@ -146,10 +148,14 @@ def validate_formal_evidence(
         _validate_ribbon_realization_snapshot(evidence)
     elif kind == "scan_plan":
         _validate_scan_plan(evidence)
+    elif kind == "partial_scan_plan":
+        _validate_partial_scan_plan(evidence)
     elif kind == "scan_case_result":
         _validate_scan_case_result(evidence)
     elif kind == "scan_aggregate":
         _validate_scan_aggregate(evidence)
+    elif kind == "partial_scan_aggregate":
+        _validate_partial_scan_aggregate(evidence)
 
 
 def validate_low_rank_ribbon_catalog(catalog: dict[str, Any]) -> None:
@@ -425,6 +431,57 @@ def _validate_scan_plan(evidence: dict[str, Any]) -> None:
         raise FoundationSafetyError("scan plan needs scan_case_ids")
 
 
+def _validate_partial_scan_plan(evidence: dict[str, Any]) -> None:
+    _require_equal(
+        evidence,
+        "scan_scope",
+        "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+    )
+    _require_equal(evidence, "partial_scan_complete_claim_allowed", True)
+    _require_equal(evidence, "full_scan_complete_claim_allowed", False)
+    _require_equal(evidence, "audit_snapshot_state", "current-pinned")
+    _require_sha256(evidence, "audit_snapshot_hash")
+    _require_sha256(evidence, "classification_catalog_hash")
+    _require_sha256(evidence, "universal_grading_audit_hash")
+    pinned = _require_object(evidence, "pinned_hashes")
+    for field in (
+        "category_subset_catalog",
+        "manifold_catalog",
+        "character_assignment_catalog",
+        "evaluator_profile",
+        "numeric_policy",
+        "execution_semantics",
+        "exclusion_ledger",
+    ):
+        if not _is_sha256_id(pinned.get(field)):
+            raise FoundationSafetyError(f"partial scan plan missing pinned hash {field}")
+
+    admitted = evidence.get("admitted_family_ids")
+    excluded = evidence.get("excluded_blocked_family_ids")
+    discarded = evidence.get("discarded_trivial_universal_group_family_ids")
+    unknown = evidence.get("unknown_universal_group_family_ids")
+    if not isinstance(admitted, list) or not admitted:
+        raise FoundationSafetyError("partial scan plan needs admitted family ids")
+    if not isinstance(excluded, list) or not excluded:
+        raise FoundationSafetyError("partial scan plan needs excluded blockers")
+    if not isinstance(discarded, list):
+        raise FoundationSafetyError("partial scan plan needs discarded trivial rows")
+    if not isinstance(unknown, list):
+        raise FoundationSafetyError("partial scan plan needs explicit unknown rows")
+    if set(admitted) & (set(excluded) | set(discarded) | set(unknown)):
+        raise FoundationSafetyError("partial scan plan row sets overlap")
+    if set(excluded) & (set(discarded) | set(unknown)) or set(discarded) & set(unknown):
+        raise FoundationSafetyError("partial scan plan exclusion sets overlap")
+    if evidence.get("trivial_rows_disposition") != (
+        "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+    ):
+        raise FoundationSafetyError("partial scan plan must discard trivial rows explicitly")
+    if evidence.get("unknown_rows_disposition") != "EXCLUDED_NOT_DISCARDED":
+        raise FoundationSafetyError("partial scan plan must keep unknown rows explicit")
+    if not evidence.get("scan_case_ids"):
+        raise FoundationSafetyError("partial scan plan needs scan_case_ids")
+
+
 def _validate_scan_case_result(evidence: dict[str, Any]) -> None:
     _require_sha256(evidence, "scan_plan_hash")
     if not isinstance(evidence.get("scan_case_id"), str) or not evidence["scan_case_id"]:
@@ -450,6 +507,36 @@ def _validate_scan_aggregate(evidence: dict[str, Any]) -> None:
         raise FoundationSafetyError("aggregate case count is incomplete")
     if evidence.get("aggregate_claim") == "global-no-go-theorem":
         raise FoundationSafetyError("aggregate cannot claim a global no-go theorem")
+
+
+def _validate_partial_scan_aggregate(evidence: dict[str, Any]) -> None:
+    _require_sha256(evidence, "scan_plan_hash")
+    _require_equal(
+        evidence,
+        "scan_scope",
+        "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+    )
+    _require_equal(evidence, "partial_scan_complete_claim_allowed", True)
+    _require_equal(evidence, "full_scan_complete_claim_allowed", False)
+    enum = _require_object(evidence, "enumerator_certificate")
+    if enum.get("status") != "PASS_PARTIAL_DENOMINATOR":
+        raise FoundationSafetyError("partial aggregate lacks partial denominator certificate")
+    expected = evidence.get("expected_case_count")
+    actual = evidence.get("actual_case_count")
+    if not isinstance(expected, int) or not isinstance(actual, int) or expected != actual:
+        raise FoundationSafetyError("partial aggregate case count is incomplete")
+    if not isinstance(evidence.get("excluded_blocked_family_ids"), list):
+        raise FoundationSafetyError("partial aggregate must list excluded blockers")
+    if not isinstance(evidence.get("discarded_trivial_universal_group_family_ids"), list):
+        raise FoundationSafetyError("partial aggregate must list discarded trivial rows")
+    if not isinstance(evidence.get("unknown_universal_group_family_ids"), list):
+        raise FoundationSafetyError("partial aggregate must list unknown rows")
+    if evidence.get("aggregate_claim") in {
+        "complete-no-signal",
+        "formal-low-rank-scan-complete",
+        "global-no-go-theorem",
+    }:
+        raise FoundationSafetyError("partial aggregate cannot claim full completion")
 
 
 def _reject_authored_ready(value: Any) -> None:

@@ -59,6 +59,62 @@ def valid_scan_plan_payload() -> dict:
     )
 
 
+def valid_partial_scan_plan_payload() -> dict:
+    return add_content_hash(
+        {
+            "evidence_kind": "partial_scan_plan",
+            "claim_level": "formal-low-rank-scan-evidence",
+            "source_status": "formal",
+            "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+            "partial_scan_complete_claim_allowed": True,
+            "full_scan_complete_claim_allowed": False,
+            "audit_snapshot_state": "current-pinned",
+            "audit_snapshot_hash": sha("1"),
+            "classification_catalog_hash": sha("2"),
+            "universal_grading_audit_hash": sha("3"),
+            "pinned_hashes": {
+                "category_subset_catalog": sha("4"),
+                "manifold_catalog": sha("5"),
+                "character_assignment_catalog": sha("6"),
+                "evaluator_profile": sha("7"),
+                "numeric_policy": sha("8"),
+                "execution_semantics": sha("9"),
+                "exclusion_ledger": sha("a"),
+            },
+            "admitted_family_ids": ["rank2-cyclic-z2", "rank3-cyclic-z3"],
+            "excluded_blocked_family_ids": ["rank3-ising", "rank5-su2-4"],
+            "discarded_trivial_universal_group_family_ids": ["rank3-psu2-5"],
+            "unknown_universal_group_family_ids": ["rank5-psu3-4"],
+            "trivial_rows_disposition": (
+                "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+            ),
+            "unknown_rows_disposition": "EXCLUDED_NOT_DISCARDED",
+            "scan_case_ids": ["partial-case-0"],
+        }
+    )
+
+
+def valid_partial_scan_aggregate_payload() -> dict:
+    return add_content_hash(
+        {
+            "evidence_kind": "partial_scan_aggregate",
+            "claim_level": "formal-low-rank-scan-evidence",
+            "source_status": "formal",
+            "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+            "partial_scan_complete_claim_allowed": True,
+            "full_scan_complete_claim_allowed": False,
+            "scan_plan_hash": sha("b"),
+            "enumerator_certificate": {"status": "PASS_PARTIAL_DENOMINATOR"},
+            "expected_case_count": 1,
+            "actual_case_count": 1,
+            "excluded_blocked_family_ids": ["rank3-ising", "rank5-su2-4"],
+            "discarded_trivial_universal_group_family_ids": ["rank3-psu2-5"],
+            "unknown_universal_group_family_ids": ["rank5-psu3-4"],
+            "aggregate_claim": "partial-admitted-subset-no-signal",
+        }
+    )
+
+
 def valid_ribbon_snapshot_payload() -> dict:
     certs = {
         "producer_exact_coherence": {"status": "PASS", "content_hash": sha("a")},
@@ -99,8 +155,19 @@ def test_v1_policy_is_active_fail_closed() -> None:
     assert policy["formal_scan_status"] == (
         "BLOCKED_UNTIL_LOW_RANK_RIBBON_CATALOG_ESTABLISHED"
     )
+    assert policy["partial_scan_status"] == (
+        "AUTHORIZED_ONLY_FOR_VALIDATED_NONTRIVIAL_UNIVERSAL_CHARACTER_SUBSETS"
+    )
+    assert "partial_scan_plan" in policy["formal_evidence_kind_allowlist"]
+    assert "partial_scan_aggregate" in policy["formal_evidence_kind_allowlist"]
     assert policy["policy_flags"]["derived_readiness_only"] is True
     assert policy["policy_flags"]["braided_denominator_is_not_ribbon_denominator"] is True
+    assert (
+        policy["policy_flags"][
+            "trivial_universal_group_rows_discarded_for_nontrivial_character_scan"
+        ]
+        is True
+    )
 
 
 def test_formal_admission_rejects_authored_ready_aliases_and_stale_hashes() -> None:
@@ -147,6 +214,46 @@ def test_formal_admission_rejects_missing_hash_and_formula_masquerade() -> None:
     )
     with pytest.raises(FoundationSafetyError, match="source status"):
         validate_formal_evidence(masquerade, policy=policy)
+
+
+def test_partial_scan_plan_is_allowed_only_with_explicit_exclusions() -> None:
+    policy = load_json("formal-admission-policy-v1.json")
+
+    valid = valid_partial_scan_plan_payload()
+    validate_formal_evidence(valid, policy=policy)
+
+    missing_discarded = valid_partial_scan_plan_payload()
+    missing_discarded["discarded_trivial_universal_group_family_ids"] = None
+    missing_discarded = add_content_hash(missing_discarded)
+    with pytest.raises(FoundationSafetyError, match="discarded trivial"):
+        validate_formal_evidence(missing_discarded, policy=policy)
+
+    overlapping = valid_partial_scan_plan_payload()
+    overlapping["admitted_family_ids"] = ["rank3-ising"]
+    overlapping = add_content_hash(overlapping)
+    with pytest.raises(FoundationSafetyError, match="overlap"):
+        validate_formal_evidence(overlapping, policy=policy)
+
+
+def test_partial_scan_aggregate_cannot_claim_full_completion() -> None:
+    policy = load_json("formal-admission-policy-v1.json")
+
+    valid = valid_partial_scan_aggregate_payload()
+    validate_formal_evidence(valid, policy=policy)
+
+    complete = valid_partial_scan_aggregate_payload()
+    complete["aggregate_claim"] = "complete-no-signal"
+    complete = add_content_hash(complete)
+    with pytest.raises(FoundationSafetyError, match="full completion"):
+        validate_formal_evidence(complete, policy=policy)
+
+    wrong_denominator = valid_partial_scan_aggregate_payload()
+    wrong_denominator["enumerator_certificate"] = {
+        "status": "PASS_COMPLETE_DENOMINATOR"
+    }
+    wrong_denominator = add_content_hash(wrong_denominator)
+    with pytest.raises(FoundationSafetyError, match="partial denominator"):
+        validate_formal_evidence(wrong_denominator, policy=policy)
 
 
 def test_low_rank_ribbon_catalog_is_terminal_but_blocked() -> None:

@@ -1,0 +1,60 @@
+{
+  "actual_case_count": 2,
+  "aggregate_claim": "partial-toy-scan-complete-for-admitted-subset",
+  "claim_level": "formal-low-rank-scan-evidence",
+  "content_hash": "sha256:3ffdc509f59a676c070035cd4a039d2eda7b25dca524730c9ca7d832271f4a54",
+  "discarded_trivial_universal_group_family_ids": [
+    "rank2-fibonacci-yang-lee",
+    "rank3-psu2-5",
+    "rank4-fibxfib",
+    "rank4-psu2-7",
+    "rank5-psu2-9"
+  ],
+  "enumerator_certificate": {
+    "actual_chunk_case_ids": [
+      "partial-toy-pointed-chunk-v1",
+      "partial-toy-product-semion-times-fib-chunk-v1"
+    ],
+    "actual_subcase_count": 347,
+    "coverage_boundary": "admitted nontrivial universal-character toy chunks only",
+    "expected_chunk_case_ids": [
+      "partial-toy-pointed-chunk-v1",
+      "partial-toy-product-semion-times-fib-chunk-v1"
+    ],
+    "expected_subcase_count": 347,
+    "status": "PASS_PARTIAL_DENOMINATOR"
+  },
+  "evidence_kind": "partial_scan_aggregate",
+  "excluded_blocked_family_ids": [
+    "rank3-ising",
+    "rank5-su2-4"
+  ],
+  "expected_case_count": 2,
+  "explicit_non_claims": [
+    "This aggregate does not claim complete-no-signal.",
+    "This aggregate does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This aggregate does not cover rank3-ising, rank5-su2-4, or rank5-psu3-4.",
+    "This aggregate does not cover target exotic manifolds."
+  ],
+  "full_scan_complete_claim_allowed": false,
+  "generated_at_utc": "2026-07-16T14:05:13Z",
+  "generator_script": "experiments/scripts/build_low_rank_partial_toy_scan_v1.py",
+  "partial_scan_complete_claim_allowed": true,
+  "scan_case_result_hashes": [
+    "sha256:82239ebd75d49f01b09de03a7d595ced2f84c79dc94eeb6c9c50b337672de289",
+    "sha256:7bc787b88c321eb4177c29dd7270b83c28805931230a07afbbd902124d722338"
+  ],
+  "scan_case_result_statuses": {
+    "partial-toy-pointed-chunk-v1": "PASS",
+    "partial-toy-product-semion-times-fib-chunk-v1": "PASS"
+  },
+  "scan_plan_hash": "sha256:ea295fc7dbf6f71b70e26e61a4d41e15733ab74f7d27c5b537468145d5698200",
+  "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+  "schema": "twisted-yetter.formal-low-rank-partial-toy-scan-aggregate.v1",
+  "source_status": "formal",
+  "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE",
+  "toy_scope_notice": "Only the three checked-in toy diagrams are aggregated.",
+  "unknown_universal_group_family_ids": [
+    "rank5-psu3-4"
+  ]
+}

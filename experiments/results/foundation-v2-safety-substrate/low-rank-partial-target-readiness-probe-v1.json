@@ -1,0 +1,85 @@
+{
+  "blocked_reason_ids": [
+    "n70-blocked-no-certified-input",
+    "missing-machine-readable-exotic-kirby-diagrams",
+    "missing-h2-homeomorphism-marking-certificate",
+    "no-admitted-target-manifold-catalog",
+    "partial-toy-aggregate-cannot-substitute-target-scan"
+  ],
+  "claim_level": "not-formal-scan-evidence",
+  "content_hash": "sha256:5cd4befb1bb263db0eeefd4953107f8e80a2ef69b2d633907645a6a7e353915b",
+  "evidence_kind": "blocked_partial_target_scan_readiness_probe",
+  "explicit_non_claims": [
+    "This probe is not a formal scan plan.",
+    "This probe is not a scan_case_result.",
+    "This probe is not a scan_aggregate.",
+    "This probe does not claim no signal.",
+    "This probe does not certify any exotic or target manifold input."
+  ],
+  "fail_closed_checks": {
+    "n70_blocks_n80_route": "PASS",
+    "no_no_signal_claim": "PASS",
+    "no_target_case_ids_emitted": "PASS",
+    "no_target_worker_dispatched": "PASS",
+    "toy_aggregate_not_promoted_to_target_scan": "PASS"
+  },
+  "generated_at_utc": "2026-07-16T14:11:44Z",
+  "generator_script": "experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py",
+  "git": {
+    "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "formal_partial_toy_scan_aggregate": {
+      "content_hash": "sha256:3ffdc509f59a676c070035cd4a039d2eda7b25dca524730c9ca7d832271f4a54",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-aggregate-v1.json",
+      "sha256": "sha256:83ee626fc504eec2f1ae043dd2159142f31a23bff550bcf26ab68a70242642d2",
+      "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE"
+    },
+    "formal_partial_toy_scan_plan": {
+      "content_hash": "sha256:ea295fc7dbf6f71b70e26e61a4d41e15733ab74f7d27c5b537468145d5698200",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-plan-v1.json",
+      "sha256": "sha256:456c39f88dca40478727fc280fcca240e463bb57830d5c3171ec156ce22ad069",
+      "status": "FORMAL_PARTIAL_TOY_SCAN_PLAN_ADMITTED_SCOPE"
+    },
+    "n65_exotic_input_scout": {
+      "content_hash": "sha256:7bdad8b69bfb8a1349c1836b46df743776b73f8339965f371fb0c0be4d22620d",
+      "path": "experiments/results/exotic-input-scout/n65-exotic-input-scout.json",
+      "sha256": "sha256:d71fb599c72446f50af5bfc4efb976e699b8016c512d2f32f3a7e774775d61f0",
+      "status": "inconclusive"
+    },
+    "n70_exotic_input_certification": {
+      "content_hash": "sha256:be03533da98669ed8f8f5f0f00ce904abb1b6e2383fef742162390ed50b32fb2",
+      "path": "experiments/inputs/exotic-pairs/n70-exotic-input-certification.json",
+      "sha256": "sha256:b0656320549087bf3db224dc4e3929b415c9321fc59857a5e8dfdf23cf99fb75",
+      "status": "fail"
+    },
+    "n93_data_blocker": {
+      "content_hash": "sha256:a860571467224c904731aadc204f7cd3db891d8c074609171a645f28f44bf04e",
+      "path": "experiments/inputs/exotic-pairs/n93-data-blocker.json",
+      "sha256": "sha256:160a43f2ff3c2a95c8f828b1056a733649189d821470961a03500a5bfcc22555",
+      "status": "inconclusive"
+    }
+  },
+  "next_required_work": [
+    "certify one machine-readable target or exotic-pair input",
+    "pin target manifold catalog and character assignments",
+    "prove evaluator support for that target beyond the current toy diagrams",
+    "generate a new partial target scan plan only after those hashes exist"
+  ],
+  "readiness_probe": {
+    "certified_exotic_input_ready": false,
+    "formal_partial_toy_scan_aggregate_complete": true,
+    "target_manifold_catalog_ready": false,
+    "target_scan_case_results_produced": false,
+    "worker_dispatch_allowed": false
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_partial_target_readiness_probe_v1.py --write",
+  "schema": "twisted-yetter.low-rank-partial-target-readiness-probe.v1",
+  "source_status": "blocked",
+  "status": "BLOCKED_NO_CERTIFIED_TARGET_INPUT_FOR_PARTIAL_SCAN",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

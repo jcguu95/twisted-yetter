@@ -72,6 +72,17 @@ def test_full_catalog_trivial_rows_are_ignored_only_for_nontrivial_character_sca
     assert audit["trivial_rows_are_ignored_for_nontrivial_universal_character_scan"] == (
         audit["formal_trivial_universal_group_family_ids"]
     )
+    assert audit["discarded_trivial_universal_group_family_ids"] == (
+        audit["formal_trivial_universal_group_family_ids"]
+    )
+    dispositions = audit["nontrivial_universal_character_scan_dispositions"]
+    assert dispositions["discard_trivial_family_ids"] == (
+        audit["formal_trivial_universal_group_family_ids"]
+    )
+    rows = rows_by_family(audit)
+    assert rows["rank3-psu2-5"]["nontrivial_character_scan_disposition"] == (
+        "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+    )
     assert any("Trivial rows are ignored only" in item for item in audit["explicit_non_claims"])
 
 
@@ -81,6 +92,7 @@ def test_unknown_psu3_is_not_treated_as_trivial() -> None:
 
     assert psu3["universal_group"] == "UNKNOWN"
     assert psu3["scan_relevance"] == "UNKNOWN_UNTIL_FUSION_TABLE_AUDIT"
+    assert psu3["nontrivial_character_scan_disposition"] == "EXCLUDED_NOT_DISCARDED"
     assert psu3["catalog_row_status"] == "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
 
 

@@ -1,0 +1,992 @@
+{
+  "budgeted_prefix_row_count": 13,
+  "budgets": {
+    "max_figure21_sectors_per_category": 2048,
+    "max_rank": null,
+    "max_standard_sectors_per_category": 200000,
+    "modular_cross_check_sectors_per_category": 16
+  },
+  "claim_boundary": "This evaluates fixed-label pointed modular sectors on Figure 21 right and the split CP2#9CPbar standard presentation. It does not identify the H2 character-coordinate map between the two sides.",
+  "elapsed_seconds": 25.074910833034664,
+  "finished_at_utc": "2026-07-16T17:48:12.399056+00:00",
+  "full_row_count": 2,
+  "generator_script": "experiments/scripts/run_figure21_standard_pointed_modular_sweep_v1.py",
+  "git_commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+  "git_dirty": true,
+  "inputs": {
+    "figure21": {
+      "coupon_graph_hash": "sha256:f66f1ef64661c432c389b6c1db726de605055ea0cabe74005fa649ebbd32a26c",
+      "ordinary_component_order": [
+        "purple",
+        "mint",
+        "pink1",
+        "pink2",
+        "pink3",
+        "pink4",
+        "orange",
+        "blue",
+        "beige",
+        "green",
+        "black"
+      ],
+      "path": "experiments/inputs/akbulut-yasui/figure21-right-morse-draft-v1.json",
+      "projected_ir_hash": "sha256:7b96de795e98bf8b521e33c9977c5eccbbde63e1d4296554ad388c609ff71695",
+      "sha256": "b6f8459547a7cec415eb6c70acb89a40c37ab4cabd364330206685d8e579cbc5",
+      "source_status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
+    },
+    "standard": {
+      "component_count": 10,
+      "framings": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "manifold": "CP2 # 9(-CP2)",
+      "path": "experiments/inputs/standard/e1-cp2-sum-9barcp2-morse-v1.json",
+      "sha256": "48fb1689ce5ddfb8c420ab1d7a72e8a6950160d38db7a21faf217c15a586e980",
+      "signature": -8
+    }
+  },
+  "mathematical_status": "EVALUATOR_SWEEP_NOT_EXOTIC_COMPARISON_CLAIM",
+  "non_claims": [
+    "This is not a formal low-rank scan aggregate.",
+    "This is not an exotic-vs-standard separation or no-separation theorem.",
+    "Budgeted prefix rows are not complete category evaluations.",
+    "Nonpointed resolved rows are not included in this pointed sweep.",
+    "The Figure 21 transcription remains draft unless separately certified against the paper."
+  ],
+  "python_version": "3.11.15",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "row_count": 15,
+  "rows": [
+    {
+      "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "elapsed_seconds": 2.1848605419509113,
+      "family_id": "rank2-cyclic-z2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 2.1785826249979436,
+        "full_sector_count": 2048,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 1024,
+          "PRUNED_NO_VACUUM": 1024
+        },
+        "projector_rank_distribution": {
+          "0": 1024,
+          "1": 1024
+        },
+        "records_sha256": "ab7a086c63edb76057b6e8e5742d9e4fd0961c9f1a2727174c10a6f0ced0bd02",
+        "sector_count": 2048,
+        "status": "FULL",
+        "value_distribution": {
+          "+0+0i": 1024,
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 240,
+          "-1+0i": 272
+        }
+      },
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-minus",
+      "snapshot_content_hash": "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-minus-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0001384173519909382,
+        "full_sector_count": 1024,
+        "records_sha256": "76f01dfffc16d815c7a598ebd33779a3184ddf3ab8e26fddf432817dbb9fc2d6",
+        "sector_count": 1024,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:6f6f8391b0c99c9c8e178541ec4262ef0188b51ad7add48e9a1b89eb450ed3a8",
+      "elapsed_seconds": 2.3097880417481065,
+      "family_id": "rank2-cyclic-z2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 2.3040620842948556,
+        "full_sector_count": 2048,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 1024,
+          "PRUNED_NO_VACUUM": 1024
+        },
+        "projector_rank_distribution": {
+          "0": 1024,
+          "1": 1024
+        },
+        "records_sha256": "d229257a7ef2ac58c931fd4efbe7428ba3db69f2affc9d0935f5d5d8aa2c169f",
+        "sector_count": 2048,
+        "status": "FULL",
+        "value_distribution": {
+          "+0+0i": 1024,
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 240,
+          "-1+0i": 272
+        }
+      },
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-plus",
+      "snapshot_content_hash": "sha256:b6e1fcedc002a8bad19e62ce667a79bc4592557f4ad2667ee53b40db2f23c3cb",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank2-cyclic-z2-semion-plus-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0001321248710155487,
+        "full_sector_count": 1024,
+        "records_sha256": "76f01dfffc16d815c7a598ebd33779a3184ddf3ab8e26fddf432817dbb9fc2d6",
+        "sector_count": 1024,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:ef0fa273bd48c7ead003268c992d87f4520cfa80884412574a9fab1b05482628",
+      "elapsed_seconds": 1.532440165989101,
+      "family_id": "rank3-cyclic-z3",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.5272327503189445,
+        "full_sector_count": 177147,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 2.38374992562561e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 683,
+          "PRUNED_NO_VACUUM": 1365
+        },
+        "projector_rank_distribution": {
+          "0": 1365,
+          "1": 683
+        },
+        "records_sha256": "9773bb162646836661d586e99cc274375f5ec402d9a0606cfd179f1d5598fdce",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1365,
+          "+1+0i": 221,
+          "-0.5+0.866025403784i": 256,
+          "-0.5-0.866025403784i": 206
+        }
+      },
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-minus",
+      "snapshot_content_hash": "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-minus-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.00029724976047873497,
+        "full_sector_count": 59049,
+        "records_sha256": "b09969097907628324e5e89f48b5f38783bdc32a0b9d939880f9ac483a05013d",
+        "sector_count": 59049,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0.999999999997+0i": 9728,
+          "+0.999999999998+0i": 9408,
+          "+0.999999999999+0i": 708,
+          "+1+0i": 1,
+          "-0.499999999998+0.866025403781i": 4608,
+          "-0.499999999998-0.866025403781i": 1024,
+          "-0.499999999998-0.866025403782i": 13056,
+          "-0.499999999998-0.866025403784i": 5376,
+          "-0.499999999999+0.866025403782i": 12672,
+          "-0.499999999999-0.866025403784i": 144,
+          "-0.5+0.866025403783i": 2304,
+          "-0.5+0.866025403784i": 18,
+          "-0.5-0.866025403784i": 2
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "elapsed_seconds": 1.5437177908606827,
+      "family_id": "rank3-cyclic-z3",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.539218541700393,
+        "full_sector_count": 177147,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 2.9105000029879435e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 683,
+          "PRUNED_NO_VACUUM": 1365
+        },
+        "projector_rank_distribution": {
+          "0": 1365,
+          "1": 683
+        },
+        "records_sha256": "cced5dc3789da82e8064456ca41ffed9d6a1730e575e7f28cf7cb1d580685959",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1365,
+          "+1+0i": 221,
+          "-0.5+0.866025403784i": 206,
+          "-0.5-0.866025403784i": 256
+        }
+      },
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-plus",
+      "snapshot_content_hash": "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank3-cyclic-z3-plus-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.00029145926237106323,
+        "full_sector_count": 59049,
+        "records_sha256": "0c679483d23e814ec8cb3c61f17a7af573fef03a9caed42152bd13edab920f38",
+        "sector_count": 59049,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0.999999999997+0i": 9728,
+          "+0.999999999998+0i": 9408,
+          "+0.999999999999+0i": 708,
+          "+1+0i": 1,
+          "-0.499999999998+0.866025403781i": 1024,
+          "-0.499999999998+0.866025403782i": 13056,
+          "-0.499999999998+0.866025403784i": 5376,
+          "-0.499999999998-0.866025403781i": 4608,
+          "-0.499999999999+0.866025403784i": 144,
+          "-0.499999999999-0.866025403782i": 12672,
+          "-0.5+0.866025403784i": 2,
+          "-0.5-0.866025403783i": 2304,
+          "-0.5-0.866025403784i": 18
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:938cf851cc4e80ef77acaa2b00459a61c897e9c34d7c5c1388d6040855449bae",
+      "elapsed_seconds": 1.4994566249661148,
+      "family_id": "rank4-pointed-z2xz2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.4955838327296078,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "88de1e47c3dcc817484822a06075a3a37e2626413e73bcf95fee2daaf67ca39d",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+1+0i": 288,
+          "-1+0i": 224
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "snapshot_content_hash": "sha256:328f84e089e496e9685f39bb0193f4c2dcc045acf0fdb8a738b3ebe312acdf2b",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z2xz2-q002-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0001393752172589302,
+        "full_sector_count": 1048576,
+        "records_sha256": "cd92cdba03abce42e9ebb8fd1b92e5cf47733aa6b697bc829baf2cfc04cdd2c4",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+1+0i": 524800,
+          "-1+0i": 523776
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:7011c498e4292edda021b8f45201cefd066ae9d9b2bdded22ed7c856b943cb16",
+      "elapsed_seconds": 1.6147018750198185,
+      "family_id": "rank4-pointed-z2xz2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.6104206247255206,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "696be00f4af1b862f13e847ab807e4446507e9f7459789350f5e885327c245e3",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 128,
+          "+0-1i": 128,
+          "+1+0i": 128,
+          "-1+0i": 128
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "snapshot_content_hash": "sha256:165ecb5fb3f451140cca13a149a952c29e6456015090b3745791ce771d8fd5d8",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z2xz2-q013-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0002100002020597458,
+        "full_sector_count": 1048576,
+        "records_sha256": "22106197d8c2d3b78bfebf1483d948747244373ab7d22bea6528d2ddca564072",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 262144,
+          "+0-1i": 262144,
+          "+1+0i": 262656,
+          "-1+0i": 261632
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:f9e055fb5a06e6c4ea9bf77215191586deb3b1c42863df46a5b0a5b68663119e",
+      "elapsed_seconds": 1.762927541974932,
+      "family_id": "rank4-pointed-z2xz2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.7585370410233736,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "b50cb87301c67815253be769357f666b05470e42057e846d3a8bfcde01a33676",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 128,
+          "+0-1i": 128,
+          "+1+0i": 128,
+          "-1+0i": 128
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "snapshot_content_hash": "sha256:6c30bf416c3717b8de3f9f863ec29744c05604e4d4bdd4193156433e23095b38",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z2xz2-q112-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.00021616602316498756,
+        "full_sector_count": 1048576,
+        "records_sha256": "22106197d8c2d3b78bfebf1483d948747244373ab7d22bea6528d2ddca564072",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 262144,
+          "+0-1i": 262144,
+          "+1+0i": 262656,
+          "-1+0i": 261632
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:b422d65880e61a17c2ffb1f56631e016fe539616c7c69af4c40be8d75a5055aa",
+      "elapsed_seconds": 1.652989833150059,
+      "family_id": "rank4-pointed-z2xz2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.6489067915827036,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "d32d6960dba2001289f4ee12afea3817a60c773b94d73b67021dc0e9bb565461",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+1+0i": 224,
+          "-1+0i": 288
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "snapshot_content_hash": "sha256:4a395e0c9e5d5cc54b70873127cb16f91ccad476cb4ea99f165be0b5d8c3d3f9",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z2xz2-q222-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 9.995931759476662e-05,
+        "full_sector_count": 1048576,
+        "records_sha256": "cd92cdba03abce42e9ebb8fd1b92e5cf47733aa6b697bc829baf2cfc04cdd2c4",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+1+0i": 524800,
+          "-1+0i": 523776
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:9ef5f588ad0d396d268a463d652e90fb92e128404ba2dffda3aef195229535a9",
+      "elapsed_seconds": 1.5715764579363167,
+      "family_id": "rank4-pointed-z2xz2",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.5674315420910716,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 0.0,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "64baecf3cbc0bbad052b4748203a1513164d65d543eea3622e26503ea240af3c",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 128,
+          "+0-1i": 128,
+          "+1+0i": 128,
+          "-1+0i": 128
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "snapshot_content_hash": "sha256:a2d43d9be5099cc056f1110f2b8f5dc747c6d942615de88ecc203aa2d8d4bb38",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z2xz2-q233-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.00018679210916161537,
+        "full_sector_count": 1048576,
+        "records_sha256": "22106197d8c2d3b78bfebf1483d948747244373ab7d22bea6528d2ddca564072",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 262144,
+          "+0-1i": 262144,
+          "+1+0i": 262656,
+          "-1+0i": 261632
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:3690c9bd2acc18a423f1dea86fb5ba2a3ec18cf2b729b5211e8311723336a59d",
+      "elapsed_seconds": 1.5805165409110487,
+      "family_id": "rank4-pointed-z4",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.575816708151251,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 5.049130258771508e-16,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "ddd1f001d609ea171719cc11a804cf39b220bb5f5bc84b12d45ee646c0c41247",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 64,
+          "+0-1i": 64,
+          "+0.707106781187+0.707106781187i": 64,
+          "+0.707106781187-0.707106781187i": 48,
+          "+1+0i": 64,
+          "-0.707106781187+0.707106781187i": 80,
+          "-0.707106781187-0.707106781187i": 64,
+          "-1+0i": 64
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k1",
+      "snapshot_content_hash": "sha256:9130fd7100685e598ed4c09d96a07a71e23c81c4b7bc9066e20c32242573275c",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k1-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.00039462465792894363,
+        "full_sector_count": 1048576,
+        "records_sha256": "2ef669db554bebb147e8b0739d87ea7a1940a1950b41a6ab28fb0a01c266ac24",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 122880,
+          "+0-1i": 122880,
+          "+0.707106781187+0.707106781187i": 131072,
+          "+0.707106781187-0.707106781187i": 131072,
+          "+1+0i": 139776,
+          "-0.707106781187+0.707106781187i": 131072,
+          "-0.707106781187-0.707106781187i": 131072,
+          "-1+0i": 138752
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:03eb61f1e94897382538bd5c7cbd85a2ccddc847b37aa41e467bf76e6a281c59",
+      "elapsed_seconds": 1.7787973331287503,
+      "family_id": "rank4-pointed-z4",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.774242749903351,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 1.0456838680523894e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "1557a77e6750600b9f79400118afe38b38756adae974e24bfd8e513728befaa0",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 64,
+          "+0-1i": 64,
+          "+0.707106781187+0.707106781187i": 80,
+          "+0.707106781187-0.707106781187i": 64,
+          "+1+0i": 64,
+          "-0.707106781187+0.707106781187i": 64,
+          "-0.707106781187-0.707106781187i": 48,
+          "-1+0i": 64
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k3",
+      "snapshot_content_hash": "sha256:f8a53b75687a7fddfcdc6ece8df245ee4d53c6f067607c6e41d3847db37c735b",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k3-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0003925422206521034,
+        "full_sector_count": 1048576,
+        "records_sha256": "2ef669db554bebb147e8b0739d87ea7a1940a1950b41a6ab28fb0a01c266ac24",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 122880,
+          "+0-1i": 122880,
+          "+0.707106781187+0.707106781187i": 131072,
+          "+0.707106781187-0.707106781187i": 131072,
+          "+1+0i": 139776,
+          "-0.707106781187+0.707106781187i": 131072,
+          "-0.707106781187-0.707106781187i": 131072,
+          "-1+0i": 138752
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+      "elapsed_seconds": 1.59772758372128,
+      "family_id": "rank4-pointed-z4",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.5928955422714353,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 2.9706969588872144e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "5ac8c375f212519b3e3bc713f1aa7355a136c638b61ec0478bdd344634e6d5d1",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 64,
+          "+0-1i": 64,
+          "+0.707106781187+0.707106781187i": 64,
+          "+0.707106781187-0.707106781187i": 80,
+          "+1+0i": 64,
+          "-0.707106781187+0.707106781187i": 48,
+          "-0.707106781187-0.707106781187i": 64,
+          "-1+0i": 64
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k5",
+      "snapshot_content_hash": "sha256:467d41034048b43117d5353aac33927d62ae7970dc47d9096ae339c6b9d7db3e",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k5-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0004687500186264515,
+        "full_sector_count": 1048576,
+        "records_sha256": "2ef669db554bebb147e8b0739d87ea7a1940a1950b41a6ab28fb0a01c266ac24",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 122880,
+          "+0-1i": 122880,
+          "+0.707106781187+0.707106781187i": 131072,
+          "+0.707106781187-0.707106781187i": 131072,
+          "+1+0i": 139776,
+          "-0.707106781187+0.707106781187i": 131072,
+          "-0.707106781187-0.707106781187i": 131072,
+          "-1+0i": 138752
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:0d011e1d787deb105e0db8a08e4da2661c112e373d0287c31c41c0662f80a125",
+      "elapsed_seconds": 1.558948707766831,
+      "family_id": "rank4-pointed-z4",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.5543870409019291,
+        "full_sector_count": 4194304,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 4.3443253239286805e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 512,
+          "PRUNED_NO_VACUUM": 1536
+        },
+        "projector_rank_distribution": {
+          "0": 1536,
+          "1": 512
+        },
+        "records_sha256": "e2d246b03137de9e4e6a56345601b0d80b86ff0653f9a370f16600424fe08851",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1536,
+          "+0+1i": 64,
+          "+0-1i": 64,
+          "+0.707106781187+0.707106781187i": 48,
+          "+0.707106781187-0.707106781187i": 64,
+          "+1+0i": 64,
+          "-0.707106781187+0.707106781187i": 64,
+          "-0.707106781187-0.707106781187i": 80,
+          "-1+0i": 64
+        }
+      },
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k7",
+      "snapshot_content_hash": "sha256:fea42779d4411598fccb71013164a10ac567b738bf2824749cdced4190c96ba2",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank4-pointed-z4-k7-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0003839591518044472,
+        "full_sector_count": 1048576,
+        "records_sha256": "2ef669db554bebb147e8b0739d87ea7a1940a1950b41a6ab28fb0a01c266ac24",
+        "sector_count": 1048576,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 122880,
+          "+0-1i": 122880,
+          "+0.707106781187+0.707106781187i": 131072,
+          "+0.707106781187-0.707106781187i": 131072,
+          "+1+0i": 139776,
+          "-0.707106781187+0.707106781187i": 131072,
+          "-0.707106781187-0.707106781187i": 131072,
+          "-1+0i": 138752
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:51ad31b84da73d922f60cf449130c6a590c330828cb9e15557a3665c873e2ca8",
+      "elapsed_seconds": 1.3895768327638507,
+      "family_id": "rank5-su5-1",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.3839758331887424,
+        "full_sector_count": 48828125,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 9.155133597044475e-16,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 410,
+          "PRUNED_NO_VACUUM": 1638
+        },
+        "projector_rank_distribution": {
+          "0": 1638,
+          "1": 410
+        },
+        "records_sha256": "3f16cb1a39641324c143f94c32b0dd06e65cf9a213d945647e19ef982cc20c46",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1638,
+          "+0.309016994375+0.951056516295i": 86,
+          "+0.309016994375-0.951056516295i": 87,
+          "+1+0i": 72,
+          "-0.809016994375+0.587785252292i": 84,
+          "-0.809016994375-0.587785252292i": 81
+        }
+      },
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s1",
+      "snapshot_content_hash": "sha256:e4dda8682349c012b78fa55e43d602aa76aba03c65abfb9d61594ab188e0d778",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank5-su5-1-s1-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0012995828874409199,
+        "full_sector_count": 9765625,
+        "records_sha256": "128988c21b8c921d460ff1d289740e0c994e53abd8e193b015db0017dbbdf265",
+        "sector_count": 9765625,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0.309016994371+0.951056516294i": 5120,
+          "+0.309016994371-0.951056516294i": 5120,
+          "+0.309016994372+0.951056516293i": 5120,
+          "+0.309016994372+0.951056516294i": 40960,
+          "+0.309016994372-0.951056516293i": 5120,
+          "+0.309016994372-0.951056516294i": 40960,
+          "+0.309016994373+0.951056516295i": 171904,
+          "+0.309016994373-0.951056516295i": 171904,
+          "+0.309016994374+0.951056516292i": 2048,
+          "+0.309016994374+0.951056516293i": 49664,
+          "+0.309016994374+0.951056516295i": 209472,
+          "+0.309016994374-0.951056516292i": 2048,
+          "+0.309016994374-0.951056516293i": 49664,
+          "+0.309016994374-0.951056516295i": 209472,
+          "+0.309016994375+0.951056516294i": 892928,
+          "+0.309016994375+0.951056516295i": 238996,
+          "+0.309016994375-0.951056516294i": 892928,
+          "+0.309016994375-0.951056516295i": 238996,
+          "+0.309016994376+0.951056516291i": 1024,
+          "+0.309016994376+0.951056516292i": 17664,
+          "+0.309016994376+0.951056516293i": 88448,
+          "+0.309016994376+0.951056516294i": 228128,
+          "+0.309016994376-0.951056516291i": 1024,
+          "+0.309016994376-0.951056516292i": 17664,
+          "+0.309016994376-0.951056516293i": 88448,
+          "+0.309016994376-0.951056516294i": 228128,
+          "+0.309016994377+0.951056516291i": 1024,
+          "+0.309016994377-0.951056516291i": 1024,
+          "+0.999999999997+0i": 12288,
+          "+0.999999999998+0i": 141824,
+          "+0.999999999999+0i": 1463104,
+          "+1+0i": 338409,
+          "-0.809016994371+0.587785252292i": 5120,
+          "-0.809016994371+0.587785252293i": 5120,
+          "-0.809016994371-0.587785252292i": 5120,
+          "-0.809016994371-0.587785252293i": 5120,
+          "-0.809016994372+0.587785252293i": 46080,
+          "-0.809016994372-0.587785252293i": 46080,
+          "-0.809016994373+0.587785252289i": 1024,
+          "-0.809016994373+0.587785252291i": 14336,
+          "-0.809016994373+0.587785252293i": 171904,
+          "-0.809016994373-0.587785252289i": 1024,
+          "-0.809016994373-0.587785252291i": 14336,
+          "-0.809016994373-0.587785252293i": 171904,
+          "-0.809016994374+0.587785252288i": 1024,
+          "-0.809016994374+0.587785252289i": 18688,
+          "-0.809016994374+0.587785252292i": 576256,
+          "-0.809016994374+0.587785252293i": 381376,
+          "-0.809016994374-0.587785252288i": 1024,
+          "-0.809016994374-0.587785252289i": 18688,
+          "-0.809016994374-0.587785252292i": 576256,
+          "-0.809016994374-0.587785252293i": 381376,
+          "-0.809016994375+0.587785252288i": 1024,
+          "-0.809016994375+0.587785252289i": 16640,
+          "-0.809016994375+0.587785252291i": 316576,
+          "-0.809016994375+0.587785252292i": 308884,
+          "-0.809016994375+0.58778525229i": 88448,
+          "-0.809016994375-0.587785252288i": 1024,
+          "-0.809016994375-0.587785252289i": 16640,
+          "-0.809016994375-0.587785252291i": 316576,
+          "-0.809016994375-0.587785252292i": 308884,
+          "-0.809016994375-0.58778525229i": 88448
+        }
+      }
+    },
+    {
+      "category_data_hash": "sha256:149fecbc7cef2295b751f5ae1bcacd19a71a3fc1bc85e6dc1fdbd410b15237bd",
+      "elapsed_seconds": 1.4850100418552756,
+      "family_id": "rank5-su5-1",
+      "figure21_right": {
+        "backend": "POINTED_GRAPH_PROJECTOR",
+        "elapsed_seconds": 1.4773517912253737,
+        "full_sector_count": 48828125,
+        "modular_cross_check": {
+          "enabled": true,
+          "first_mismatch": null,
+          "max_abs_error": 1.1102230246251565e-15,
+          "sector_count": 16,
+          "status": "PASS"
+        },
+        "pointed_status_distribution": {
+          "EVALUATED_POINTED_VACUUM_SECTOR": 410,
+          "PRUNED_NO_VACUUM": 1638
+        },
+        "projector_rank_distribution": {
+          "0": 1638,
+          "1": 410
+        },
+        "records_sha256": "863ad9b8fe911db946b0ada550a8460634a842c74453a5d632d6ca1c1f3ab88d",
+        "sector_count": 2048,
+        "status": "PREFIX_BUDGETED",
+        "value_distribution": {
+          "+0+0i": 1638,
+          "+0.309016994375+0.951056516295i": 81,
+          "+0.309016994375-0.951056516295i": 84,
+          "+1+0i": 72,
+          "-0.809016994375+0.587785252292i": 86,
+          "-0.809016994375-0.587785252292i": 87
+        }
+      },
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s2",
+      "snapshot_content_hash": "sha256:53764e4181911cc7e6e5bd8856785c3157dcfadde621ce894d22f30edf653d0a",
+      "snapshot_path": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots/rank5-su5-1-s2-snapshot-v1.json",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "elapsed_seconds": 0.0010857079178094864,
+        "full_sector_count": 9765625,
+        "records_sha256": "cbf89cb396e7940b7e06543077c79a5a5df3491c6c472e51bf1ebda7ebe4ba1c",
+        "sector_count": 9765625,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0.309016994373+0.951056516293i": 166400,
+          "+0.309016994373+0.951056516295i": 609600,
+          "+0.309016994373-0.951056516293i": 166400,
+          "+0.309016994373-0.951056516295i": 609600,
+          "+0.309016994375+0.951056516292i": 196608,
+          "+0.309016994375+0.951056516293i": 227584,
+          "+0.309016994375-0.951056516292i": 196608,
+          "+0.309016994375-0.951056516293i": 227584,
+          "+0.309016994376+0.951056516294i": 752308,
+          "+0.309016994376-0.951056516294i": 752308,
+          "+0.999999999997+0i": 314368,
+          "+0.999999999998+0i": 455168,
+          "+0.999999999999+0i": 847680,
+          "+1+0i": 338409,
+          "-0.809016994372+0.587785252292i": 51712,
+          "-0.809016994372-0.587785252292i": 51712,
+          "-0.809016994373+0.587785252291i": 314880,
+          "-0.809016994373+0.587785252294i": 336288,
+          "-0.809016994373+0.58778525229i": 126976,
+          "-0.809016994373-0.587785252291i": 314880,
+          "-0.809016994373-0.587785252294i": 336288,
+          "-0.809016994373-0.58778525229i": 126976,
+          "-0.809016994374+0.587785252291i": 451072,
+          "-0.809016994374-0.587785252291i": 451072,
+          "-0.809016994375+0.587785252291i": 432576,
+          "-0.809016994375+0.587785252292i": 238996,
+          "-0.809016994375-0.587785252291i": 432576,
+          "-0.809016994375-0.587785252292i": 238996
+        }
+      }
+    }
+  ],
+  "schema": "twisted-yetter.figure21-standard-pointed-modular-sweep.v1",
+  "started_at_utc": "2026-07-16T17:47:47.323884+00:00",
+  "status": "PASS_POINTED_MODULAR_FIGURE21_STANDARD_SWEEP_WITH_BUDGETED_PREFIXES"
+}

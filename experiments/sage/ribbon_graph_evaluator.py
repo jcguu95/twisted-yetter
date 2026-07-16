@@ -27,12 +27,37 @@ from experiments.scripts.special_dotted_morphism import (
 
 
 SUPPORTED_KILLING_LOOP_CATEGORY_IDS = frozenset(
-    {"su2-k2", "su2-k3", "su2-k4", "su2-k5", "su2-k6", "su2-k8"}
+    {
+        "su2-k2",
+        "su2-k3",
+        "su2-k4",
+        "su2-k5",
+        "su2-k6",
+        "su2-k8",
+        "rank2-cyclic-z2-semion-plus",
+        "rank2-cyclic-z2-semion-minus",
+    }
 )
 
 
 class RibbonGraphContractError(ValueError):
     """Raised when a graph cannot be contracted by the certified backend."""
+
+
+def _has_snapshot_killing_loop_certificate(category: Any) -> bool:
+    certificate = getattr(category, "modular_killing_loop_certificate", None)
+    if not isinstance(certificate, dict):
+        return False
+    content_hash = certificate.get("snapshot_content_hash", "")
+    data_hash = certificate.get("category_data_hash", "")
+    return (
+        certificate.get("status") == "PASS"
+        and certificate.get("evidence_kind") == "ribbon_realization_snapshot"
+        and isinstance(content_hash, str)
+        and content_hash.startswith("sha256:")
+        and isinstance(data_hash, str)
+        and data_hash.startswith("sha256:")
+    )
 
 
 def _semantic_topology_components(
@@ -100,8 +125,12 @@ class RibbonGraphEvaluator:
         self.source_forms = tuple(dict(form) for form in source_forms)
         self.component_by_piece = dict(component_by_piece)
         self.projected_ir = projected_ir
+        self.projected_ir_hash = stable_json_hash(projected_ir)
         category_id = getattr(category, "category_id", None)
-        if category_id not in SUPPORTED_KILLING_LOOP_CATEGORY_IDS:
+        if (
+            category_id not in SUPPORTED_KILLING_LOOP_CATEGORY_IDS
+            and not _has_snapshot_killing_loop_certificate(category)
+        ):
             raise RibbonGraphContractError(
                 "modular killing-loop contraction is not certified for "
                 f"category {category_id!r}"
@@ -178,9 +207,7 @@ class RibbonGraphEvaluator:
         self.morse = MorseEvaluator(category)
 
     def _validate_graph(self, graph: dict[str, Any]) -> dict[str, Any]:
-        if graph.get("source_projected_ir_hash") != stable_json_hash(
-            self.projected_ir
-        ):
+        if graph.get("source_projected_ir_hash") != self.projected_ir_hash:
             raise RibbonGraphContractError(
                 "coupon graph was not built from the supplied projected IR"
             )
@@ -294,6 +321,7 @@ class DirectVacuumProjectorEvaluator:
         self.source_forms = tuple(dict(form) for form in source_forms)
         self.component_by_piece = dict(component_by_piece)
         self.projected_ir = projected_ir
+        self.projected_ir_hash = stable_json_hash(projected_ir)
         require_pivotal_capabilities(
             category,
             {"rigid_bends", "ribbon_twist", "vacuum_projector"},
@@ -378,9 +406,7 @@ class DirectVacuumProjectorEvaluator:
         self.morse = MorseEvaluator(category)
 
     def _validate_graph(self, graph: dict[str, Any]) -> dict[str, Any]:
-        if graph.get("source_projected_ir_hash") != stable_json_hash(
-            self.projected_ir
-        ):
+        if graph.get("source_projected_ir_hash") != self.projected_ir_hash:
             raise RibbonGraphContractError(
                 "coupon graph was not built from the supplied projected IR"
             )
@@ -475,6 +501,7 @@ class PointedVacuumProjectorEvaluator:
         self.source_forms = tuple(dict(form) for form in source_forms)
         self.component_by_piece = dict(component_by_piece)
         self.projected_ir = projected_ir
+        self.projected_ir_hash = stable_json_hash(projected_ir)
         require_pivotal_capabilities(
             category,
             {"rigid_bends", "ribbon_twist", "vacuum_projector"},
@@ -573,9 +600,7 @@ class PointedVacuumProjectorEvaluator:
                     )
 
     def _validate_graph(self, graph: dict[str, Any]) -> dict[str, Any]:
-        if graph.get("source_projected_ir_hash") != stable_json_hash(
-            self.projected_ir
-        ):
+        if graph.get("source_projected_ir_hash") != self.projected_ir_hash:
             raise RibbonGraphContractError(
                 "coupon graph was not built from the supplied projected IR"
             )

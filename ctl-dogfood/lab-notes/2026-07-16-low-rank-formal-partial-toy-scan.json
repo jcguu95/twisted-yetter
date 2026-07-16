@@ -1,0 +1,120 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-formal-partial-toy-scan",
+  "title": "Low-rank formal partial toy scan aggregate admitted",
+  "created_at": "2026-07-16T14:06:28Z",
+  "created_by": "actor:codex",
+  "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE",
+  "top_notice": "A formal partial toy scan plan, two formal scan_case_result chunks, and a formal partial toy aggregate now exist for the admitted nontrivial universal-character subset over the three checked-in toy diagrams. This is not the final low-rank scan, not a target exotic scan, and not a no-signal claim.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-low-rank-product-toy-worker-added",
+    "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+    "toy_diagram_scope": [
+      "s4-empty-kirby-diagram",
+      "cp2-plus-one-framed-unknot",
+      "hopf-linking-1"
+    ],
+    "formal_partial_scan_plan_emitted": true,
+    "formal_scan_case_result_chunks_emitted": 2,
+    "formal_partial_scan_aggregate_emitted": true,
+    "formal_full_scan_complete_claim_allowed": false
+  },
+  "runtime_findings": {
+    "chunk_count": 2,
+    "subcase_count": 347,
+    "pointed_chunk_subcase_count": 291,
+    "product_chunk_subcase_count": 56,
+    "aggregate_claim": "partial-toy-scan-complete-for-admitted-subset",
+    "coverage_boundary": "admitted nontrivial universal-character toy chunks only"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "formal-low-rank-partial-toy-scan-plan-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-plan-v1.json",
+      "git_blob": "f0e87e439752c03ed8e5362a35ec70df3199f450",
+      "sha256": "456c39f88dca40478727fc280fcca240e463bb57830d5c3171ec156ce22ad069",
+      "content_hash": "sha256:ea295fc7dbf6f71b70e26e61a4d41e15733ab74f7d27c5b537468145d5698200",
+      "status": "FORMAL_PARTIAL_TOY_SCAN_PLAN_ADMITTED_SCOPE"
+    },
+    {
+      "artifact_id": "formal-low-rank-partial-toy-scan-case-pointed-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-pointed-v1.json",
+      "git_blob": "9627f6520248c4bf0801df57a921c79cc29b48a9",
+      "sha256": "aab4acc5eb82b9b280a01df90eb4dd9669ca6c02de24f1d695e5a706c21ec4e4",
+      "content_hash": "sha256:82239ebd75d49f01b09de03a7d595ced2f84c79dc94eeb6c9c50b337672de289",
+      "status": "PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK"
+    },
+    {
+      "artifact_id": "formal-low-rank-partial-toy-scan-case-product-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-case-product-v1.json",
+      "git_blob": "48c9bac260c24eedafa6418a671aa03c5fcc42e6",
+      "sha256": "6129821619c22e2dcfe8efce55c6f865bbaf552610b29c07781eadfadf3dee95",
+      "content_hash": "sha256:7bc787b88c321eb4177c29dd7270b83c28805931230a07afbbd902124d722338",
+      "status": "PASS_FORMAL_PARTIAL_TOY_SCAN_CHUNK"
+    },
+    {
+      "artifact_id": "formal-low-rank-partial-toy-scan-aggregate-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-partial-toy-scan-aggregate-v1.json",
+      "git_blob": "40601987c774c1531f910bb6c09b446119b583b6",
+      "sha256": "83ee626fc504eec2f1ae043dd2159142f31a23bff550bcf26ab68a70242642d2",
+      "content_hash": "sha256:3ffdc509f59a676c070035cd4a039d2eda7b25dca524730c9ca7d832271f4a54",
+      "status": "FORMAL_PARTIAL_TOY_SCAN_AGGREGATE_COMPLETE"
+    },
+    {
+      "artifact_id": "formal-partial-toy-scan-builder",
+      "path": "experiments/scripts/build_low_rank_partial_toy_scan_v1.py",
+      "git_blob": "36d0b8b2eb4f621c7c722b1ac4c560cd3e82601e",
+      "sha256": "87932e56a9ab16b931f01ea7980960ef26eeba0e983d4e83e9ab92d268c49de7",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "formal-partial-toy-scan-tests",
+      "path": "tests/test_low_rank_partial_toy_scan_v1.py",
+      "git_blob": "f25c716b0508ff1ecf39a0eb6ea561e2dee59a7b",
+      "sha256": "84e1a8de61b3ff95b6d1757ac03f7e6c291952d0692dcc96d083509947852716",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "partial_scan_plan_validates": "PASS",
+    "pointed_scan_case_result_validates": "PASS",
+    "product_scan_case_result_validates": "PASS",
+    "partial_scan_aggregate_validates": "PASS",
+    "aggregate_rejects_complete_no_signal_upgrade": "PASS",
+    "no_full_scan_claim": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_low_rank_partial_toy_scan_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py",
+      "status": "pass",
+      "collected": 4
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+      "status": "pass",
+      "collected": 35
+    }
+  ],
+  "next_required_work": [
+    "Do not treat this toy aggregate as a target scan.",
+    "Before admitted target scans, define a target manifold catalog and evaluator support boundary.",
+    "Keep rank3-ising and rank5-su2-4 excluded until their ribbon realizations are resolved or separately terminal-blocked.",
+    "Keep rank5-psu3-4 explicit as unknown, not discarded."
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim complete-no-signal.",
+    "This note does not claim target exotic manifolds were scanned.",
+    "This note does not cover rank3-ising, rank5-su2-4, or rank5-psu3-4.",
+    "This note does not cover rank 6 or higher."
+  ],
+  "mathematical_status": "FORMAL_PARTIAL_TOY_SCAN_ONLY",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}

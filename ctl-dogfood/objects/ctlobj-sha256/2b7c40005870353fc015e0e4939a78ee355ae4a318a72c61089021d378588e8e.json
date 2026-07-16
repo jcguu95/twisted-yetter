@@ -1,0 +1,141 @@
+{
+  "created_at": "2026-07-16T13:28:10Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-pointed-partial-scan-benchmark-v1",
+        "content_hash": "sha256:c9ff5af7cc0e6eccb28857c9de923d5114cb60d074c975081b02cfa63cb3c73f",
+        "git_blob": "8f73ec6fc165630c2985a92e37e38c9c848121a2",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-pointed-partial-scan-benchmark-v1.json",
+        "sha256": "988b3d8b99e548bb1a7d3d08c53269f7b5b0e790bd023ad9fb0ae374a96c47c9",
+        "status": "PASS_POINTED_TOY_BENCHMARK_FAST"
+      },
+      {
+        "artifact_id": "low-rank-product-partial-scan-surface-probe-v1",
+        "content_hash": "sha256:157894d95089c266d367092b6f31e92c1198f1e62fc5f9767ded17cfd592cbcd",
+        "git_blob": "862182a145e4f815cb586b8e195fa0f3c5db061b",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-product-partial-scan-surface-probe-v1.json",
+        "sha256": "7d24c3b96351ece8d4e3b29775fa9fa7edc3bc09b4a4319cd6b966e4ecaa003c",
+        "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY"
+      },
+      {
+        "artifact_id": "low-rank-pointed-partial-scan-benchmark-runner",
+        "git_blob": "726bdb0719c7a04fc6a68b222a526c7469e38b9c",
+        "path": "experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py",
+        "sha256": "6e2e01488a7b898173a74063d9818f7f2fd6379338474cb717141be0a24a56ec",
+        "status": "RUNNER_ADDED"
+      },
+      {
+        "artifact_id": "low-rank-product-partial-scan-surface-probe-runner",
+        "git_blob": "323244093832e9ef629ec4fe6cbef38f8f6198a2",
+        "path": "experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py",
+        "sha256": "f59fe2854112a43b89161e73fff5b057ff1aaf8e7cb4b58105f02c4b3bb589a2",
+        "status": "PROBE_ADDED"
+      },
+      {
+        "artifact_id": "low-rank-pointed-partial-scan-benchmark-tests",
+        "git_blob": "6b3a2b80f25749a4a594399b7a503e31d7e7a49f",
+        "path": "tests/test_low_rank_pointed_partial_scan_benchmark_v1.py",
+        "sha256": "7b5cced6616a0c4263ae1e176aade71fda07b45b1bbc10494a67292edfb7d1bd",
+        "status": "TEST_ADDED"
+      },
+      {
+        "artifact_id": "low-rank-product-partial-scan-surface-probe-tests",
+        "git_blob": "97c2956a439554a8d26c968b2c3de8a78c52de4d",
+        "path": "tests/test_low_rank_product_partial_scan_surface_probe_v1.py",
+        "sha256": "09f4b55075d3e9515c9bc64e175cc004030b81589db548b916ae3d7f5310d18b",
+        "status": "TEST_ADDED"
+      }
+    ],
+    "checks": {
+      "no_formal_scan_evidence_claimed": "PASS",
+      "pointed_per_family_counts_are_cumulative": "PASS",
+      "pointed_toy_benchmark_case_count_bound": "PASS",
+      "product_row_blocker_recorded_fail_closed": "PASS",
+      "product_row_snapshots_validate": "PASS"
+    },
+    "created_at": "2026-07-16T13:28:10Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim a formal partial scan plan has been emitted.",
+      "This note does not claim controls or target scans have been run.",
+      "This note does not claim no signal.",
+      "This note does not say rank4-semion-times-fibonacci data is missing.",
+      "This note says execution is blocked by the current product-row worker surface."
+    ],
+    "mathematical_status": "RUNTIME_BOTTLENECK_NOTE_ONLY",
+    "next_required_work": [
+      "Implement a product-category scan worker for Deligne product snapshots.",
+      "Add an exact composite-field expression layer for Q(i, zeta10, u), or a separately certified numeric consumer profile.",
+      "Pin universal-character projection for product labels such as 1|x instead of inferring it from label strings.",
+      "After those worker contracts exist, rerun the rank4-semion-times-fibonacci toy benchmark before generating any formal partial scan plan."
+    ],
+    "note_id": "objective-note-2026-07-16-low-rank-partial-scan-runtime-bottleneck",
+    "runtime_findings": {
+      "next_non_pointed_layer": {
+        "blocking_reasons": [
+          "product-row-formal-worker-not-implemented",
+          "composite-field-expression-runtime-not-implemented",
+          "universal-character-projection-for-product-labels-not-bound-to-worker"
+        ],
+        "bottleneck_kind": "IMPLEMENTATION_GAP_NOT_CATEGORY_DATA_GAP",
+        "family_id": "rank4-semion-times-fibonacci",
+        "snapshot_count": 8,
+        "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY",
+        "validated_snapshot_count": 8
+      },
+      "pointed_layer": {
+        "case_count": 291,
+        "elapsed_total_ms_decimal": "36.043624859303236",
+        "interpretation": "No runtime bottleneck was observed in the admitted pointed toy layer.",
+        "max_case_elapsed_ms_decimal": "0.15916721895337105",
+        "snapshot_count": 15,
+        "status": "PASS_POINTED_TOY_BENCHMARK_FAST"
+      }
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "formal_full_scan_complete_claim_allowed": false,
+      "formal_partial_scan_aggregate_emitted": false,
+      "formal_partial_scan_plan_emitted": false,
+      "formal_scan_case_result_emitted": false,
+      "pointed_toy_benchmark_completed": true,
+      "prior_current_note": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+      "product_row_surface_probe_completed": true,
+      "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET"
+    },
+    "status": "BLOCKED_PRODUCT_ROW_EXECUTABLE_SURFACE_NOT_READY",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "command": "python3 experiments/scripts/run_low_rank_pointed_partial_scan_benchmark_v1.py --write",
+        "status": "pass"
+      },
+      {
+        "command": "python3 experiments/scripts/probe_low_rank_product_partial_scan_surface_v1.py --write",
+        "status": "pass"
+      },
+      {
+        "collected": 26,
+        "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_foundation_v2_safety_substrate_v1.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Low-rank partial scan reached product-row worker bottleneck",
+    "top_notice": "The admitted pointed subset was benchmarked on toy diagrams and is fast. The next admitted non-pointed row, rank4-semion-times-fibonacci, has eight validated ribbon realization snapshots, but execution is blocked because the current runnable benchmark worker only supports pointed toy sectors. This note records an implementation bottleneck, not a scan result, not a no-signal result, and not a final CTL scan claim."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

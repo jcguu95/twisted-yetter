@@ -132,6 +132,9 @@ def build_policy(*, started_at_utc: str) -> dict[str, Any]:
         "foundation_status": FOUNDATION_STATUS,
         "policy_status": "ACTIVE_FAIL_CLOSED",
         "formal_scan_status": "BLOCKED_UNTIL_LOW_RANK_RIBBON_CATALOG_ESTABLISHED",
+        "partial_scan_status": (
+            "AUTHORIZED_ONLY_FOR_VALIDATED_NONTRIVIAL_UNIVERSAL_CHARACTER_SUBSETS"
+        ),
         "formal_evidence_kind_allowlist": list(EVIDENCE_KIND_ALLOWLIST),
         "policy_flags": {
             "derived_readiness_only": True,
@@ -141,6 +144,9 @@ def build_policy(*, started_at_utc: str) -> dict[str, Any]:
             "formula_preflight_is_not_formal_evidence": True,
             "braided_denominator_is_not_ribbon_denominator": True,
             "ctl_claims_require_admission_validator": True,
+            "partial_scan_complete_claims_are_not_full_scan_claims": True,
+            "trivial_universal_group_rows_discarded_for_nontrivial_character_scan": True,
+            "unknown_universal_group_rows_cannot_be_silently_discarded": True,
         },
         "required_pinned_hash_fields": {
             "ribbon_realization_snapshot": [
@@ -161,6 +167,19 @@ def build_policy(*, started_at_utc: str) -> dict[str, Any]:
                 "numeric_policy",
                 "execution_semantics",
             ],
+            "partial_scan_plan": [
+                "content_hash",
+                "audit_snapshot_hash",
+                "classification_catalog_hash",
+                "universal_grading_audit_hash",
+                "category_subset_catalog",
+                "manifold_catalog",
+                "character_assignment_catalog",
+                "evaluator_profile",
+                "numeric_policy",
+                "execution_semantics",
+                "exclusion_ledger",
+            ],
             "scan_case_result": [
                 "content_hash",
                 "scan_plan_hash",
@@ -175,6 +194,15 @@ def build_policy(*, started_at_utc: str) -> dict[str, Any]:
                 "expected_case_count",
                 "actual_case_count",
             ],
+            "partial_scan_aggregate": [
+                "content_hash",
+                "scan_plan_hash",
+                "enumerator_certificate",
+                "expected_case_count",
+                "actual_case_count",
+                "excluded_blocked_family_ids",
+                "discarded_trivial_universal_group_family_ids",
+            ],
         },
         "rejected_source_statuses": list(REJECTED_SOURCE_STATUSES),
         "allowed_formal_claim_levels": [
@@ -184,6 +212,7 @@ def build_policy(*, started_at_utc: str) -> dict[str, Any]:
         "explicit_non_claims": [
             "This policy does not establish any rank 2-5 ribbon refinement.",
             "This policy does not authorize any formal scan plan while the catalog is blocked.",
+            "This policy only allows partial subset scans when their excluded rows are explicit.",
             "This policy does not turn formula preflight, candidate, or legacy FR-only outputs into evidence.",
         ],
         "v0_seed_inputs": v0_inputs,

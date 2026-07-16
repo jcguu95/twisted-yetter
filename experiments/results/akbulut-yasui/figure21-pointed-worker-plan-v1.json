@@ -1,0 +1,293 @@
+{
+  "blocked_count": 0,
+  "claim_boundary": "This only prepares Figure 21 pointed modular category worker chunks. It is not a scan aggregate and not an exoticness comparison.",
+  "content_hash": "sha256:9c46060c55a0f3a9db22b0a85eb31dcb32522588476deb98fb23ca00e038561d",
+  "elapsed_seconds": 0.007499875035136938,
+  "estimated_ready_worker_hours_max_hard_samples": 0.0,
+  "estimated_ready_worker_hours_mean_hard_samples": 0.0,
+  "finished_at_utc": "2026-07-16T21:43:16.062514+00:00",
+  "generator_script": "experiments/scripts/build_figure21_pointed_worker_plan_v1.py",
+  "git_commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+  "git_dirty": true,
+  "inputs": {
+    "prefix_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json",
+    "prefix_sweep_sha256": "sha256:6d0092a1a626a7a8e74e7ef3d1049c358a5b050dafae3b2c026ce08dc46929eb",
+    "runtime_ladder": "experiments/results/akbulut-yasui/figure21-pointed-runtime-ladder-v1.json",
+    "runtime_ladder_sha256": "sha256:7bed930b4773dc95cee5a8ffb499c74d0f37734180eeb57834846a81dd4768c7"
+  },
+  "mathematical_status": "RUNTIME_WORKER_PLAN_NOT_SCAN_RESULT",
+  "non_claims": [
+    "Does not cover nonpointed low-rank categories.",
+    "Does not compare Figure 21 against the standard side by H2 coordinates.",
+    "Does not claim no signal.",
+    "Does not prove runtime estimates are upper bounds."
+  ],
+  "paid_batch_preflight_status": "PASS_PAID_BATCH_PREFLIGHT",
+  "parameters": {
+    "command_work_root": "$PWD/experiments/results/akbulut-yasui/figure21-pointed-chunks-v1",
+    "logical_worker_shards": 16,
+    "min_chunks": 32,
+    "target_chunk_seconds": 300,
+    "work_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter/experiments/results/akbulut-yasui/figure21-pointed-chunks-v1",
+    "worker_count_hint": 16
+  },
+  "python_version": "3.11.15",
+  "ready_count": 0,
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "row_count": 15,
+  "rows": [
+    {
+      "existing_aggregate": null,
+      "family_id": "rank2-cyclic-z2",
+      "full_sector_count": 2048,
+      "prefix_figure21_status": "FULL",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-minus",
+      "reason": "Full sector space already completed by prefix sweep artifact.",
+      "worker_plan_status": "SKIP_ALREADY_COMPLETE_IN_PREFIX_SWEEP"
+    },
+    {
+      "existing_aggregate": null,
+      "family_id": "rank2-cyclic-z2",
+      "full_sector_count": 2048,
+      "prefix_figure21_status": "FULL",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-plus",
+      "reason": "Full sector space already completed by prefix sweep artifact.",
+      "worker_plan_status": "SKIP_ALREADY_COMPLETE_IN_PREFIX_SWEEP"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 177147,
+        "observed_sector_count": 177147,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank3-cyclic-z3-minus/aggregate.json",
+        "sha256": "sha256:65e1acbf34e471f8b0f101672ece89b95d5daea4f33fd6b9406f296306d2a977",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank3-cyclic-z3",
+      "full_sector_count": 177147,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-minus",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 177147,
+        "observed_sector_count": 177147,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank3-cyclic-z3-plus/aggregate.json",
+        "sha256": "sha256:681af404e7c6fe8e0899fc885e152837c67ac9a788427762f478dcf3aa2943f3",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank3-cyclic-z3",
+      "full_sector_count": 177147,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-plus",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q002/aggregate.json",
+        "sha256": "sha256:ba52b45ca958daa304009c9fa54e4f3f74c9906bf2c40a3d1042341b3ff349d3",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q013/aggregate.json",
+        "sha256": "sha256:b4d1973344d4bfaccad18e726988be83b119befa5cc525fc6b7ba65463ecd060",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q112/aggregate.json",
+        "sha256": "sha256:7fbf7bfffc66d48ac2e71ef6ea7877298f69b2f0b771a8e5b71664e5aff6fb63",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q222/aggregate.json",
+        "sha256": "sha256:4c48f49d3c22c3152b2747886706fb9c2cbfa3191963918b3cdc508a225b398f",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z2xz2-q233/aggregate.json",
+        "sha256": "sha256:d8a65eb7115d70d3f13c616ef932cd26cb1c594d9bff80782fa29bddc5b52117",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z2xz2",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k1/aggregate.json",
+        "sha256": "sha256:98ee054afc4312bffb1d799025fd6a18cf469b3760ef116192ad7b1b06668dbd",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k1",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k3/aggregate.json",
+        "sha256": "sha256:4c8d32d347a81a6ad911c51db82963123fc0aefc0b84a816cc6ced794fb85834",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k3",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k5/aggregate.json",
+        "sha256": "sha256:abe629e2cd548f7570fd28fba9f1d74a8fbedb47495ad1bf9e0debd228ed3fcc",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k5",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 4194304,
+        "observed_sector_count": 4194304,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank4-pointed-z4-k7/aggregate.json",
+        "sha256": "sha256:1729a8d8f683e1af41c9c868b16eb15935797e7e2078b2358b82a3efe319760b",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank4-pointed-z4",
+      "full_sector_count": 4194304,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 4,
+      "realization_id": "rank4-pointed-z4-k7",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 48828125,
+        "observed_sector_count": 48828125,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank5-su5-1-s1/aggregate.json",
+        "sha256": "sha256:afd134937b6ac957bb2c30e0e3b72a30398e2900e6585860f9384e075fdd230d",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank5-su5-1",
+      "full_sector_count": 48828125,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s1",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    },
+    {
+      "existing_aggregate": {
+        "expected_sector_count": 48828125,
+        "observed_sector_count": 48828125,
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1/rank5-su5-1-s2/aggregate.json",
+        "sha256": "sha256:57bad2251e5fde1f4c07622a461557b8dd0f38c6b9afff96e75c24eadd3d3e36",
+        "status": "PASS_AGGREGATE_COMPLETE"
+      },
+      "family_id": "rank5-su5-1",
+      "full_sector_count": 48828125,
+      "prefix_figure21_status": "PREFIX_BUDGETED",
+      "prefix_modular_cross_check_status": "PASS",
+      "rank": 5,
+      "realization_id": "rank5-su5-1-s2",
+      "reason": "Complete chunk aggregate already exists locally.",
+      "worker_plan_status": "SKIP_ALREADY_AGGREGATED_COMPLETE"
+    }
+  ],
+  "runbook": {
+    "execution_rule": "For each READY_FOR_WORKERS row, run worker_command_template with worker_index = 0..15 and worker_count = 16, then run aggregate_command after all chunks are synced.",
+    "logical_worker_shards": 16,
+    "remote_capacity_policy": "If no host list or remote capacity is provided, the terminal batch result must be TERMINAL_BLOCKED_REMOTE_CAPACITY_NOT_PROVIDED.",
+    "remote_work_root": "$PWD/experiments/results/akbulut-yasui/figure21-pointed-chunks-v1"
+  },
+  "schema": "twisted-yetter.figure21-pointed-worker-plan.v1",
+  "skipped_count": 15,
+  "started_at_utc": "2026-07-16T21:43:16.054983+00:00",
+  "status": "PASS_WORKER_PLAN_READY"
+}

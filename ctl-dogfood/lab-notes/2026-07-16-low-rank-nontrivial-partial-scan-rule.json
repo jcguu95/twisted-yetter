@@ -1,0 +1,137 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-nontrivial-partial-scan-rule",
+  "title": "Low-rank nontrivial universal-character partial scan rule enabled",
+  "created_at": "2026-07-16T13:02:30Z",
+  "created_by": "actor:codex",
+  "status": "NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN",
+  "top_notice": "The safety substrate now distinguishes full low-rank scan completion from a validated partial scan over the already admitted nontrivial universal-character subset. Full FORMAL_LOW_RANK_SCAN_COMPLETE remains forbidden while rank3-ising and rank5-su2-4 are unresolved. Universal-group trivial rows are explicitly discarded for this nontrivial-character scan scope. No controls, targets, scan cases, aggregate, no-signal claim, or final scan claim is admitted by this note.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2",
+    "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+    "formal_partial_scan_plan_allowed_if_validator_accepts": true,
+    "formal_partial_scan_plan_emitted": false,
+    "formal_partial_scan_aggregate_allowed_if_cases_complete": true,
+    "formal_full_scan_plan_allowed": false,
+    "formal_full_scan_complete_claim_allowed": false,
+    "full_rank_2_5_ribbon_classification_claim_allowed": false
+  },
+  "row_scope": {
+    "admitted_resolved_nontrivial_family_ids": [
+      "rank2-cyclic-z2",
+      "rank3-cyclic-z3",
+      "rank4-pointed-z4",
+      "rank4-pointed-z2xz2",
+      "rank4-semion-times-fibonacci",
+      "rank5-su5-1"
+    ],
+    "excluded_blocked_nontrivial_family_ids": [
+      "rank3-ising",
+      "rank5-su2-4"
+    ],
+    "discarded_trivial_universal_group_family_ids": [
+      "rank2-fibonacci-yang-lee",
+      "rank3-psu2-5",
+      "rank4-fibxfib",
+      "rank4-psu2-7",
+      "rank5-psu2-9"
+    ],
+    "unknown_universal_group_family_ids": [
+      "rank5-psu3-4"
+    ],
+    "trivial_rows_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+    "unknown_rows_disposition": "EXCLUDED_NOT_DISCARDED"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-nontrivial-partial-scan-rule-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-partial-scan-rule-v1.json",
+      "git_blob": "4cfe0a05bf1c92cd248533e17552a8099bd8c26d",
+      "sha256": "205bfb57b3e594096c53f2142db21ba09309c6c29792fb2782095dea19065b2f",
+      "content_hash": "sha256:1f80b0af9d97b8dac6582ba6a2f8ebe3c8c7400cf85c5cac0627e7929ae3f7d7",
+      "status": "NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN"
+    },
+    {
+      "artifact_id": "foundation-safety-validator",
+      "path": "src/twisted_yetter/foundation_safety.py",
+      "git_blob": "bab77fb2d1f8f491f2d2a107b8508a0969170f30",
+      "sha256": "d7156cc463e3bd804207b542954e6e2f6fbd3cbe18d86892da6a0f233a94745c",
+      "status": "UPDATED_PARTIAL_SCAN_VALIDATORS"
+    },
+    {
+      "artifact_id": "formal-admission-policy-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json",
+      "git_blob": "cf382f4acf5b329f23f194653f613c2a5d6d82d2",
+      "sha256": "1bafe31e6f96f23609211386a957134bdc13dba3d333f7f4a7edd2a08bd76a8a",
+      "status": "FOUNDATION_ESTABLISHED_POLICY_ARTIFACT"
+    },
+    {
+      "artifact_id": "low-rank-full-catalog-universal-grading-audit-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-full-catalog-universal-grading-audit-v1.json",
+      "git_blob": "c8fd290a97a6f6cda30fc3487e01dd280b63c36d",
+      "sha256": "309ee595f265681524c6c7da25ef3ea3e902c008b18c97cbd8cc4b2c270f80d4",
+      "content_hash": "sha256:6b572e43a4856dd560da342bf761cde77e175a16a5e252c424ab02fae3b84c82",
+      "status": "FULL_CATALOG_UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_UNKNOWN"
+    },
+    {
+      "artifact_id": "low-rank-nontrivial-partial-scan-rule-builder",
+      "path": "experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py",
+      "git_blob": "53b8576acabf9f352b97347fac29b0ed44d9a69e",
+      "sha256": "faa4e3f6108a3847c9c41c962e2c6721693ba28957936e46c770faba63717785",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "low-rank-nontrivial-partial-scan-rule-tests",
+      "path": "tests/test_low_rank_nontrivial_partial_scan_rule_v1.py",
+      "git_blob": "0ed10a09c0cfce39da34dfb2e7f95df593e514a6",
+      "sha256": "7e862f3e7c2486e4fe65b5b5103b3a29947d12815830911f1b8dfbd8373ccb9b",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "policy_allows_partial_scan_plan_kind": "PASS",
+    "policy_allows_partial_scan_aggregate_kind": "PASS",
+    "trivial_rows_marked_discarded": "PASS",
+    "unknown_rows_not_discarded": "PASS",
+    "full_scan_claim_forbidden": "PASS",
+    "no_scan_plan_emitted_by_this_rule": "PASS",
+    "full_route_fail_closed_tests_still_pass": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_foundation_v2_safety_substrate_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "python3 experiments/scripts/build_low_rank_full_catalog_universal_grading_audit_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "python3 experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py",
+      "status": "pass",
+      "collected": 22
+    },
+    {
+      "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_low_rank_ribbon_classification_terminal_blocked_v2.py",
+      "status": "pass",
+      "collected": 16
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal partial scan plan has been emitted.",
+    "This note does not claim controls or target scans have been run.",
+    "This note does not claim no signal.",
+    "This note does not treat rank5-psu3-4 as trivial.",
+    "This note discards universal-group trivial rows only for nontrivial universal-character twists."
+  ],
+  "mathematical_status": "SAFETY_SUBSTRATE_RULE_UPDATE_ONLY",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}

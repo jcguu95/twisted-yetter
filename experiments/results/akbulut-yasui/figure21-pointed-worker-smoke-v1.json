@@ -1,0 +1,850 @@
+{
+  "claim_boundary": "This only proves worker commands start and write tiny chunks locally.",
+  "content_hash": "sha256:e2d5b7460ae2bf104949e615468c8c436561ff4e2608e2f37d20a88ae0cfc2cd",
+  "elapsed_seconds": 1.1909627080895007,
+  "failed_case_count": 0,
+  "finished_at_utc": "2026-07-16T18:43:20.995428+00:00",
+  "generator_script": "experiments/scripts/run_figure21_pointed_worker_smoke_v1.py",
+  "git_commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+  "git_dirty": true,
+  "inputs": {
+    "worker_plan": "/Users/jin/.codex/worktrees/4e82/twisted-yetter/experiments/results/akbulut-yasui/figure21-pointed-worker-plan-v1.json",
+    "worker_plan_content_hash": "sha256:614ce5487f1f2e0e13767137435fd9ac7ee11b697b1ebcde9ceb979d858b2aad",
+    "worker_plan_sha256": "sha256:4ba4769c66f55755242e9d61f66ace514d2960c967b2b2149b9f37e6f7e9cbd1"
+  },
+  "mathematical_status": "RUNTIME_SMOKE_NOT_SCAN_RESULT",
+  "non_claims": [
+    "Does not prove the full worker run will finish within estimate.",
+    "Does not aggregate complete category results.",
+    "Does not compare Figure 21 to a standard side."
+  ],
+  "parameters": {
+    "max_rows": null,
+    "sectors_per_row": 2,
+    "smoke_root": "/tmp/figure21-pointed-worker-smoke-v1"
+  },
+  "python_version": "3.11.15",
+  "rank5_vacuum_smoke_failures": [],
+  "ready_row_count_smoked": 11,
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "results": [
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q002",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.058269333094358444,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018258299678564072,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q002",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018258299678564072, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q002\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q002",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.055408958811312914,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009286417160183191,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q002",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009286417160183191, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q002\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q013",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05250608315691352,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018583331257104874,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q013",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018583331257104874, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q013\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q013",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05468212487176061,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.00904762465506792,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q013",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.00904762465506792, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q013\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q112",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05273662507534027,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.0001882081851363182,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q112",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.0001882081851363182, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q112\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q112",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05273212492465973,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009061167016625404,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q112",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009061167016625404, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q112\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q222",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05274020880460739,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00019079213961958885,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q222",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00019079213961958885, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q222\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q222",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.052552124951034784,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009030125103890896,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q222",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009030125103890896, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q222\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q233",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05288804089650512,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018574995920062065,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q233",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018574995920062065, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q233\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z2xz2-q233",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05357795814052224,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.00910962512716651,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z2xz2-q233",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.00910962512716651, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z2xz2-q233\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k1",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05081016616895795,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.0001871669664978981,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z4-k1",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k1",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.0001871669664978981, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z4-k1\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k1",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.06025037495419383,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009077209047973156,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z4-k1",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k1",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009077209047973156, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z4-k1\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k3",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.061365250032395124,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018541701138019562,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z4-k3",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k3",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018541701138019562, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z4-k3\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k3",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05396054172888398,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009171584155410528,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z4-k3",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k3",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009171584155410528, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z4-k3\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k5",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.054907375015318394,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018450012430548668,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z4-k5",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k5",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018450012430548668, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z4-k5\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k5",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.053845500107854605,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009088541846722364,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z4-k5",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k5",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009088541846722364, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z4-k5\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k7",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "350550",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05357383284717798,
+      "parsed_last_stdout_json": {
+        "chunk_id": 350550,
+        "elapsed_seconds": 0.00018716603517532349,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank4-pointed-z4-k7",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k7",
+      "returncode": 0,
+      "sector_id": 350550,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 350550, \"elapsed_seconds\": 0.00018716603517532349, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank4-pointed-z4-k7\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 4194304,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank4-pointed-z4-k7",
+        "--chunk-count",
+        "4194304",
+        "--chunk-id",
+        "1137342",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05546529171988368,
+      "parsed_last_stdout_json": {
+        "chunk_id": 1137342,
+        "elapsed_seconds": 0.009227042086422443,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank4-pointed-z4-k7",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank4-pointed-z4-k7",
+      "returncode": 0,
+      "sector_id": 1137342,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 1137342, \"elapsed_seconds\": 0.009227042086422443, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank4-pointed-z4-k7\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 48828125,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank5-su5-1-s1",
+        "--chunk-count",
+        "48828125",
+        "--chunk-id",
+        "0",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.052490416914224625,
+      "parsed_last_stdout_json": {
+        "chunk_id": 0,
+        "elapsed_seconds": 0.00037841591984033585,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank5-su5-1-s1",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank5-su5-1-s1",
+      "returncode": 0,
+      "sector_id": 0,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 0, \"elapsed_seconds\": 0.00037841591984033585, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank5-su5-1-s1\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 48828125,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank5-su5-1-s1",
+        "--chunk-count",
+        "48828125",
+        "--chunk-id",
+        "2458111",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05217029107734561,
+      "parsed_last_stdout_json": {
+        "chunk_id": 2458111,
+        "elapsed_seconds": 0.00020441599190235138,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank5-su5-1-s1",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank5-su5-1-s1",
+      "returncode": 0,
+      "sector_id": 2458111,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 2458111, \"elapsed_seconds\": 0.00020441599190235138, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank5-su5-1-s1\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 48828125,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank5-su5-1-s2",
+        "--chunk-count",
+        "48828125",
+        "--chunk-id",
+        "0",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05021104170009494,
+      "parsed_last_stdout_json": {
+        "chunk_id": 0,
+        "elapsed_seconds": 0.00037733279168605804,
+        "projector_rank_distribution": {
+          "1": 1
+        },
+        "realization_id": "rank5-su5-1-s2",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank5-su5-1-s2",
+      "returncode": 0,
+      "sector_id": 0,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 0, \"elapsed_seconds\": 0.00037733279168605804, \"projector_rank_distribution\": {\"1\": 1}, \"realization_id\": \"rank5-su5-1-s2\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    },
+    {
+      "chunk_count": 48828125,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "experiments/scripts/run_figure21_pointed_category_chunks_v1.py",
+        "--realization-id",
+        "rank5-su5-1-s2",
+        "--chunk-count",
+        "48828125",
+        "--chunk-id",
+        "2458111",
+        "--work-root",
+        "/tmp/figure21-pointed-worker-smoke-v1",
+        "--no-aggregate"
+      ],
+      "elapsed_seconds": 0.05330737493932247,
+      "parsed_last_stdout_json": {
+        "chunk_id": 2458111,
+        "elapsed_seconds": 0.0002037077210843563,
+        "projector_rank_distribution": {
+          "0": 1
+        },
+        "realization_id": "rank5-su5-1-s2",
+        "sector_count": 1,
+        "status": "PASS_CHUNK_COMPLETE"
+      },
+      "realization_id": "rank5-su5-1-s2",
+      "returncode": 0,
+      "sector_id": 2458111,
+      "status": "PASS",
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{\"chunk_id\": 2458111, \"elapsed_seconds\": 0.0002037077210843563, \"projector_rank_distribution\": {\"0\": 1}, \"realization_id\": \"rank5-su5-1-s2\", \"sector_count\": 1, \"status\": \"PASS_CHUNK_COMPLETE\"}"
+      ]
+    }
+  ],
+  "schema": "twisted-yetter.figure21-pointed-worker-smoke.v1",
+  "smoke_case_count": 22,
+  "started_at_utc": "2026-07-16T18:43:19.804397+00:00",
+  "status": "PASS_WORKER_SMOKE"
+}

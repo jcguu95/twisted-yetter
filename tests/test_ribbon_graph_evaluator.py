@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 import runpy
 import sys
@@ -9,6 +10,8 @@ from experiments.sage.morse_pivotal_contract import (
     test_pivotal_profile as make_test_pivotal_profile,
 )
 from experiments.sage.pointed_premodular_categories import (
+    Rank2Z2SemionModularCategory,
+    SnapshotPointedModularCategory,
     SymmetricZ2PremodularCategory,
 )
 from experiments.sage.ribbon_graph_evaluator import (
@@ -27,6 +30,13 @@ from experiments.scripts.akbulut_yasui_figure21_morse_draft import (
 from experiments.scripts.special_dotted_morphism import (
     build_vacuum_coupon_graph,
     compile_projected_morphism,
+)
+from experiments.scripts.run_figure21_rank2_semion_modular_evaluation_v1 import (
+    generate as generate_figure21_semion_evaluation,
+)
+from experiments.scripts.run_figure21_standard_pointed_modular_sweep_v1 import (
+    _labels_from_id as figure21_labels_from_id,
+    _load_figure21 as load_figure21_sweep_context,
 )
 
 
@@ -445,6 +455,80 @@ def test_killing_loop_backend_fails_closed_on_uncertified_category():
             projected_ir=ir,
             total_framings={"red": 0, "A": 0},
         )
+
+
+@pytest.mark.parametrize("branch", ["plus", "minus"])
+def test_rank2_semion_snapshot_category_is_certified_for_killing_loop(branch):
+    forms, component_by_piece, ir, graph = hopf_special_disk_control()
+    category = Rank2Z2SemionModularCategory(branch=branch)
+    evaluator = RibbonGraphEvaluator(
+        category,
+        source_forms=forms,
+        component_by_piece=component_by_piece,
+        projected_ir=ir,
+        total_framings={"red": 0, "A": 0},
+    )
+    vacuum, _stats = evaluator.fixed_label_value(graph, {"A": 0})
+    nonvacuum, _stats = evaluator.fixed_label_value(graph, {"A": 1})
+    assert abs(vacuum - 1.0) < 1e-12
+    assert abs(nonvacuum) < 1e-12
+
+
+def test_figure21_rank2_semion_runner_prefix_checks_modular_against_pointed():
+    artifact = generate_figure21_semion_evaluation(max_sectors=4)
+    assert artifact["status"] == (
+        "PASS_FIGURE21_RANK2_SEMION_MODULAR_PREFIX_EVALUATION"
+    )
+    assert artifact["checks"]["modular_equals_pointed_for_each_branch"] is True
+    assert artifact["checks"]["full_rank2_z2_sector_space_evaluated"] is False
+    assert artifact["results"]["plus"]["sector_count"] == 4
+    assert artifact["results"]["minus"]["sector_count"] == 4
+
+
+def test_figure21_z2xz2_snapshot_negative_crossing_uses_opposite_braiding():
+    snapshot = json.loads(
+        Path(
+            "experiments/results/foundation-v2-safety-substrate/"
+            "ribbon-realization-snapshots/"
+            "rank4-pointed-z2xz2-q002-snapshot-v1.json"
+        ).read_text()
+    )
+    category = SnapshotPointedModularCategory(snapshot)
+    context = load_figure21_sweep_context()
+    graph = context["graph"]
+    labels_tuple = figure21_labels_from_id(
+        tuple(category.labels), 1, len(context["ordinary"])
+    )
+    labels = dict(zip(context["ordinary"], labels_tuple, strict=True))
+
+    pointed = PointedVacuumProjectorEvaluator(
+        category,
+        source_forms=context["forms"],
+        component_by_piece=context["source"]["component_by_piece"],
+        projected_ir=context["ir"],
+        total_framings=context["source"]["framing_labels"],
+    )
+    modular = RibbonGraphEvaluator(
+        category,
+        source_forms=context["forms"],
+        component_by_piece=context["source"]["component_by_piece"],
+        projected_ir=context["ir"],
+        total_framings=context["source"]["framing_labels"],
+    )
+    pointed_value, pointed_stats = pointed.fixed_label_value(graph, labels)
+    modular_value, modular_stats = modular.fixed_label_value(graph, labels)
+
+    assert labels["black"] == "10"
+    assert pointed_stats["status"] == "PRUNED_NO_VACUUM"
+    assert abs(pointed_value) < 1e-12
+    assert abs(modular_value - pointed_value) < 1e-12
+    contributions = modular_stats["special_label_contributions"]
+    assert [item["blackboard_source_value"] for item in contributions] == [
+        1.0 + 0.0j,
+        1.0 + 0.0j,
+        -1.0 + 0.0j,
+        -1.0 + 0.0j,
+    ]
 
 
 def test_coupon_graph_must_match_the_projected_ir():

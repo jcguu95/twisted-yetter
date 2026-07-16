@@ -48,6 +48,7 @@ FULL_CATALOG_POLICIES = {
         "method": "pointed metric group universal grading equals underlying group",
         "nontrivial_character_count": 1,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
     "rank2-fibonacci-yang-lee": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_TRIVIAL",
@@ -55,6 +56,9 @@ FULL_CATALOG_POLICIES = {
         "method": "adjoint rank-2 Fibonacci/Yang-Lee fusion rule audit",
         "nontrivial_character_count": 0,
         "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+        "nontrivial_character_scan_disposition": (
+            "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+        ),
     },
     "rank3-cyclic-z3": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_NONTRIVIAL",
@@ -62,6 +66,7 @@ FULL_CATALOG_POLICIES = {
         "method": "pointed metric group universal grading equals underlying group",
         "nontrivial_character_count": 2,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
     "rank4-pointed-z4": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_NONTRIVIAL",
@@ -69,6 +74,7 @@ FULL_CATALOG_POLICIES = {
         "method": "pointed metric group universal grading equals underlying group",
         "nontrivial_character_count": 3,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
     "rank4-pointed-z2xz2": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_NONTRIVIAL",
@@ -76,6 +82,7 @@ FULL_CATALOG_POLICIES = {
         "method": "pointed metric group universal grading equals underlying group",
         "nontrivial_character_count": 3,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
     "rank4-semion-times-fibonacci": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_NONTRIVIAL",
@@ -83,6 +90,7 @@ FULL_CATALOG_POLICIES = {
         "method": "Deligne product universal grading from semion Z2 factor times Fibonacci/Yang-Lee trivial factor",
         "nontrivial_character_count": 1,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
     "rank4-fibxfib": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_TRIVIAL",
@@ -90,6 +98,9 @@ FULL_CATALOG_POLICIES = {
         "method": "Deligne product of two trivial Fibonacci/Yang-Lee universal gradings",
         "nontrivial_character_count": 0,
         "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+        "nontrivial_character_scan_disposition": (
+            "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+        ),
     },
     "rank5-su5-1": {
         "status": "UNIVERSAL_GRADING_FORMALLY_DERIVED_NONTRIVIAL",
@@ -97,7 +108,16 @@ FULL_CATALOG_POLICIES = {
         "method": "pointed metric group universal grading equals underlying group",
         "nontrivial_character_count": 4,
         "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+        "nontrivial_character_scan_disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
     },
+}
+
+BLOCKED_ROW_SCAN_DISPOSITIONS = {
+    "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST": "EXCLUDED_BLOCKED_RIBBON_REALIZATION",
+    "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS": (
+        "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN"
+    ),
+    "UNKNOWN_UNTIL_FUSION_TABLE_AUDIT": "EXCLUDED_NOT_DISCARDED",
 }
 
 
@@ -204,6 +224,9 @@ def row_audit(
                     else None
                 ),
                 "scan_relevance": source["scan_relevance"],
+                "nontrivial_character_scan_disposition": BLOCKED_ROW_SCAN_DISPOSITIONS[
+                    source["scan_relevance"]
+                ],
                 "formal_ribbon_realization_status": row["terminal_status"],
                 "explicit_non_claims": [
                     "This row audit does not change the ribbon realization status.",
@@ -230,6 +253,9 @@ def row_audit(
             "universal_group": policy["universal_group"],
             "nontrivial_character_count": policy["nontrivial_character_count"],
             "scan_relevance": policy["scan_relevance"],
+            "nontrivial_character_scan_disposition": policy[
+                "nontrivial_character_scan_disposition"
+            ],
             "formal_ribbon_realization_status": row["terminal_status"],
             "resolved_snapshot_hashes": row.get("ribbon_realization_snapshot_hashes", []),
             "explicit_non_claims": [
@@ -297,8 +323,21 @@ def build_audit(*, started_at_utc: str) -> dict[str, Any]:
                 and row["catalog_row_status"] == "RESOLVED_RIBBON_REALIZATION"
             ],
             "trivial_rows_are_ignored_for_nontrivial_universal_character_scan": trivial,
+            "discarded_trivial_universal_group_family_ids": trivial,
             "explicit_next_growth_targets": blocked_nontrivial,
             "explicit_unknowns_not_ignored": unknown,
+            "nontrivial_universal_character_scan_dispositions": {
+                "admit_resolved_nontrivial_family_ids": [
+                    row["family_id"]
+                    for row in row_audits
+                    if row["nontrivial_character_scan_disposition"]
+                    == "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED"
+                    and row["catalog_row_status"] == "RESOLVED_RIBBON_REALIZATION"
+                ],
+                "exclude_blocked_nontrivial_family_ids": blocked_nontrivial,
+                "discard_trivial_family_ids": trivial,
+                "exclude_unknown_not_discarded_family_ids": unknown,
+            },
             "scan_plan_status": "NOT_AUTHORIZED_BY_THIS_AUDIT",
             "classification_status": "NOT_ESTABLISHED_BY_THIS_AUDIT",
             "explicit_non_claims": [

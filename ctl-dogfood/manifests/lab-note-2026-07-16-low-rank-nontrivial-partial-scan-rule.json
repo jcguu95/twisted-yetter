@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+  "generated_at": "2026-07-16T13:02:30Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+    "current_root": "ctlobj-sha256:4a380c06c17897a27cf138775d2810689bd3c34b910727a890261367285a919a",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:1a121370b82dd405f5adfb579c0588149606269d90d6b8348d5aaf3e3b1b52b3"
+  },
+  "parent_root_cid": "ctlobj-sha256:d214a007cb207c720eb3b7bf149c27c30aaf33becf4480020ccfad98286b9960",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-nontrivial-partial-scan-rule.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-low-rank-nontrivial-partial-scan-rule --payload lab-notes/2026-07-16-low-rank-nontrivial-partial-scan-rule.json --manifest manifests/lab-note-2026-07-16-low-rank-nontrivial-partial-scan-rule.json --created-at 2026-07-16T13:02:30Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf"
+}

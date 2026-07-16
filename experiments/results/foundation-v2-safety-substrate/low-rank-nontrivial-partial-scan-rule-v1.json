@@ -1,0 +1,213 @@
+{
+  "admitted_resolved_nontrivial_family_ids": [
+    "rank2-cyclic-z2",
+    "rank3-cyclic-z3",
+    "rank4-pointed-z4",
+    "rank4-pointed-z2xz2",
+    "rank4-semion-times-fibonacci",
+    "rank5-su5-1"
+  ],
+  "checks": {
+    "admitted_subset_nonempty": true,
+    "blocked_nontrivial_rows_explicit": true,
+    "full_scan_claim_forbidden": true,
+    "no_scan_plan_emitted_by_this_rule": true,
+    "policy_allows_partial_scan_aggregate_kind": true,
+    "policy_allows_partial_scan_plan_kind": true,
+    "trivial_rows_marked_discarded": true,
+    "unknown_rows_not_discarded": true
+  },
+  "content_hash": "sha256:1f80b0af9d97b8dac6582ba6a2f8ebe3c8c7400cf85c5cac0627e7929ae3f7d7",
+  "discarded_trivial_universal_group_family_ids": [
+    "rank2-fibonacci-yang-lee",
+    "rank3-psu2-5",
+    "rank4-fibxfib",
+    "rank4-psu2-7",
+    "rank5-psu2-9"
+  ],
+  "excluded_blocked_nontrivial_family_ids": [
+    "rank3-ising",
+    "rank5-su2-4"
+  ],
+  "explicit_non_claims": [
+    "This rule artifact is not a scan plan.",
+    "This rule artifact runs no controls and no target scans.",
+    "Partial scan completion under this rule is not FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "Discarded trivial rows are discarded only for nontrivial universal-character twists.",
+    "Unknown universal-group rows are excluded from the partial subset but not treated as trivial."
+  ],
+  "formal_full_scan_complete_claim_allowed": false,
+  "formal_full_scan_plan_allowed": false,
+  "formal_partial_scan_aggregate_allowed_if_cases_complete": true,
+  "formal_partial_scan_plan_allowed_if_validator_accepts": true,
+  "formal_partial_scan_plan_emitted": false,
+  "full_rank_2_5_ribbon_classification_claim_allowed": false,
+  "generated_at_utc": "2026-07-16T13:00:51Z",
+  "generator_script": "experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py",
+  "git": {
+    "commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "catalog_v11": {
+      "content_hash": "sha256:f3e3565605dfe489d09088851d13a2737359ead760cd68ce292c5e65be50da13",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v11.json",
+      "sha256": "sha256:e906c8b79c23ceb2e4afb85d09fd932231ba4f68832079c691ee3239632a8ed0",
+      "status": "PROCUREMENT_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    "formal_admission_policy": {
+      "content_hash": "sha256:375c1195dabc8b1af2f926a630b43d6ebf5ea0aa578e35183efdf8995f2abe2a",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-admission-policy-v1.json",
+      "sha256": "sha256:1bafe31e6f96f23609211386a957134bdc13dba3d333f7f4a7edd2a08bd76a8a",
+      "status": "FOUNDATION_ESTABLISHED_POLICY_ARTIFACT"
+    },
+    "universal_grading_audit": {
+      "content_hash": "sha256:6b572e43a4856dd560da342bf761cde77e175a16a5e252c424ab02fae3b84c82",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-full-catalog-universal-grading-audit-v1.json",
+      "sha256": "sha256:309ee595f265681524c6c7da25ef3ea3e902c008b18c97cbd8cc4b2c270f80d4",
+      "status": "FULL_CATALOG_UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_UNKNOWN"
+    }
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_nontrivial_partial_scan_rule_v1.py --write",
+  "row_dispositions": [
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank2-cyclic-z2",
+      "nontrivial_character_count": 1,
+      "row_audit_hash": "sha256:5997802a241cddaca09de177ebb60b04382953683281a1ba8eb8a819820b756c",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z2"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+      "family_id": "rank2-fibonacci-yang-lee",
+      "nontrivial_character_count": 0,
+      "row_audit_hash": "sha256:5df4756b751b6b60daa446ca3bed1fd0dce215a45a0d65216b38054f01b7f90f",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "universal_group": "trivial"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank3-cyclic-z3",
+      "nontrivial_character_count": 2,
+      "row_audit_hash": "sha256:187c0c5fd262b5090710c02a127c5e360018e44480efd125ccadc5b444eec23e",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z3"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "EXCLUDED_BLOCKED_RIBBON_REALIZATION",
+      "family_id": "rank3-ising",
+      "nontrivial_character_count": 1,
+      "row_audit_hash": "sha256:aeeedc7f6678a2d8b5c11452ba9c003b010c34f5a56c16c9a292a0669d5a6881",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z2"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+      "family_id": "rank3-psu2-5",
+      "nontrivial_character_count": 0,
+      "row_audit_hash": "sha256:e1cc638f4646ab13828e1c96ee9c72bf49baec6d3857578491f3c5e5d1da809e",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "universal_group": "trivial"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank4-pointed-z4",
+      "nontrivial_character_count": 3,
+      "row_audit_hash": "sha256:7b43f511925d05c17aa6f86b25cf6104012d75b7ea569cca3ca3511364b0585f",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z4"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank4-pointed-z2xz2",
+      "nontrivial_character_count": 3,
+      "row_audit_hash": "sha256:5cafb6ba44971cb1297f456387b8b78525451c4ad7c5f77f039e7231330bc83a",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z2xZ2"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank4-semion-times-fibonacci",
+      "nontrivial_character_count": 1,
+      "row_audit_hash": "sha256:3c4264456391c058d0034e4ebcc786b3454f52f66fd551feac61158d71edf537",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z2"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+      "family_id": "rank4-fibxfib",
+      "nontrivial_character_count": 0,
+      "row_audit_hash": "sha256:e73d90a44185d6b1edff37274f0c950924799f5ee1bb89180160b2a228b74b81",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "universal_group": "trivial"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+      "family_id": "rank4-psu2-7",
+      "nontrivial_character_count": 0,
+      "row_audit_hash": "sha256:d9169736de2cffcb1c0da2ba8ff2df68a30c3332b858c550fc592690c06e036a",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "universal_group": "trivial"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "EXCLUDED_BLOCKED_RIBBON_REALIZATION",
+      "family_id": "rank5-su2-4",
+      "nontrivial_character_count": 1,
+      "row_audit_hash": "sha256:96f91a9da8f5e9ebadc7222f136657d14c2d438c0a837860ef4228f2e66c7134",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z2"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+      "family_id": "rank5-psu2-9",
+      "nontrivial_character_count": 0,
+      "row_audit_hash": "sha256:e5ba493e6046642ce07ef4f958b6d70cc9eda62a0123cc2d05f09f8098ed4b73",
+      "scan_relevance": "NO_NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS",
+      "universal_group": "trivial"
+    },
+    {
+      "catalog_row_status": "RESOLVED_RIBBON_REALIZATION",
+      "disposition": "ADMIT_IF_RIBBON_SNAPSHOT_RESOLVED",
+      "family_id": "rank5-su5-1",
+      "nontrivial_character_count": 4,
+      "row_audit_hash": "sha256:3b616130d8d16c3f1adbcac6f5a7caa9df48e57dcda2b5fabdf8a66d342b0ea3",
+      "scan_relevance": "NONTRIVIAL_UNIVERSAL_CHARACTER_SECTORS_EXIST",
+      "universal_group": "Z5"
+    },
+    {
+      "catalog_row_status": "BLOCKED_RIBBON_REFINEMENT_INCOMPLETE",
+      "disposition": "EXCLUDED_NOT_DISCARDED",
+      "family_id": "rank5-psu3-4",
+      "nontrivial_character_count": null,
+      "row_audit_hash": "sha256:2680ab0baf2ff8dbbd03b325fb861cc387f6761c485dbd36cf906c9e50081e35",
+      "scan_relevance": "UNKNOWN_UNTIL_FUSION_TABLE_AUDIT",
+      "universal_group": "UNKNOWN"
+    }
+  ],
+  "rule_id": "low-rank-nontrivial-partial-scan-rule-v1",
+  "scan_scope": "NONTRIVIAL_UNIVERSAL_CHARACTER_ADMITTED_SUBSET",
+  "schema": "twisted-yetter.low-rank-nontrivial-partial-scan-rule.v1",
+  "status": "NONTRIVIAL_PARTIAL_SCAN_RULE_ACTIVE_NO_SCAN_RUN",
+  "tool_versions": {
+    "python": "3.14.6"
+  },
+  "trivial_rows_disposition": "DISCARDED_TRIVIAL_UNIVERSAL_GROUP_FOR_NONTRIVIAL_CHARACTER_SCAN",
+  "unknown_rows_disposition": "EXCLUDED_NOT_DISCARDED",
+  "unknown_universal_group_family_ids": [
+    "rank5-psu3-4"
+  ]
+}
