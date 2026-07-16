@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+  "generated_at": "2026-07-16T06:33:31Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+    "current_root": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:265ddca2177f005c9fc96e4d85a8b80450c2f2d2eee441407b534b4565797648"
+  },
+  "parent_root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-braided-class-alignment-audit.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-ising-braided-class-alignment-audit --payload lab-notes/2026-07-16-ising-braided-class-alignment-audit.json --manifest manifests/lab-note-2026-07-16-ising-braided-class-alignment-audit.json --created-at 2026-07-16T06:33:31Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "ee18f446bf6428372c613d308c6fcc7d063fda22"
+}

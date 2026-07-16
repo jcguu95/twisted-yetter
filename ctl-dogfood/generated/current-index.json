@@ -8413,6 +8413,131 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+      "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "ising-braided-class-alignment-audit-v1",
+            "content_hash": "sha256:179c2b9a161c04b11d010baed50b38688844cc339715e4c84218493278f3c0dd",
+            "git_blob": "29f641923fdbb94088457aca0232653b1bfbb85b",
+            "path": "experiments/results/foundation-v2-safety-substrate/ising-braided-class-alignment-audit-v1.json",
+            "sha256": "28dd59904ed6678ff8caaab9dc21c43799df18add30e8ea5cefde374dd5dab5e",
+            "status": "ISING_BRAIDED_CLASS_ALIGNMENT_BY_THETA_SIGMA_ESTABLISHED_RIBBON_LIFTS_PENDING"
+          },
+          {
+            "artifact_id": "ising-braided-class-alignment-builder-v1",
+            "git_blob": "d909604418c90d82d298877cd629f04776b062a8",
+            "path": "experiments/scripts/build_ising_braided_class_alignment_audit_v1.py",
+            "sha256": "5679050c87f1e8392e8180ba60f7f6c3574154f671841fcc2126aafbe18d1c7d",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "ising-braided-class-alignment-tests-v1",
+            "git_blob": "f1b4511359df5b6c92324b90ca34035264b98748",
+            "path": "tests/test_ising_braided_class_alignment_audit_v1.py",
+            "sha256": "a9cb77e4dfd38a23957e0103c15cd6cf56090967a0c14ffbe4e931bf69314d0e",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "candidate_count_matches_braided_count": "PASS",
+          "mirror_reverse_pairs_are_involutive": "PASS",
+          "scan_gates_remain_closed": "PASS",
+          "theta_psi_is_minus_one_for_all_candidates": "PASS",
+          "theta_sigma_exponents_are_all_odd_zeta16_powers": "PASS",
+          "theta_sigma_exponents_are_unique": "PASS"
+        },
+        "created_at": "2026-07-16T06:33:31Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not produce ribbon_realization_snapshot formal evidence.",
+          "This note does not establish Ising row-complete ribbon classification.",
+          "This note does not prove pivotal/ribbon lift completeness."
+        ],
+        "mathematical_status": "ISING_BRAIDED_CLASS_ALIGNMENT_PASS; ISING_RIBBON_LIFTS_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-ising-braided-class-alignment-audit",
+        "remaining_growth": [
+          "materialize pivotal/ribbon lifts for each theta_sigma braided class",
+          "prove whether the recorded two spherical structures per braided class produce sixteen ribbon snapshots",
+          "build row-complete ribbon_realization_snapshot artifacts",
+          "produce producer/runtime/ribbon-pivotal certificates for every Ising snapshot",
+          "derive the Ising row ribbon denominator without copying the braided denominator"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "audit_id": "ising-braided-class-alignment-audit-v1",
+          "braided_class_alignment_status": "PASS",
+          "family_id": "rank3-ising",
+          "formal_scan_plan_allowed_after_this_note": false,
+          "mirror_reverse_pairs_by_theta_sigma": [
+            [
+              1,
+              15
+            ],
+            [
+              3,
+              13
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              7,
+              9
+            ]
+          ],
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation",
+          "ribbon_lift_status": "NOT_MATERIALIZED",
+          "row_complete_status": "NOT_ROW_COMPLETE",
+          "theta_sigma_exponents": [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ]
+        },
+        "status": "ISING_BRAIDED_CLASS_ALIGNMENT_PASS_RIBBON_LIFTS_PENDING",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_ising_braided_class_alignment_audit_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 20,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Ising braided-class alignment audit completed",
+        "top_notice": "The next Ising row-completion substep was completed: the 8 SU(2)_2 Galois candidate branches were aligned with the 8 recorded low-rank Ising braided classes using the theta_sigma invariant. For A=zeta16^p, theta_sigma=A^3=zeta16^(3p); the audit verifies that the candidates cover exactly all odd zeta16 powers and records the mirror/reverse pairs. This does not produce ribbon_realization_snapshot evidence, does not establish pivotal/ribbon lift completeness, and does not authorize scan-plan generation."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+        "created_at": "2026-07-16T06:33:31Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "logical_id": "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review",
       "payload": {
@@ -17974,6 +18099,7 @@
       "claim:lab-note:2026-07-15-rank4-semion-times-fibonacci-ribbon-realization-partial-progress": "ctlobj-sha256:304688ff4278de7e1cdbe0437e5779aa231f0b0ad7b42771ffe76c88538eee57",
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
+      "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation": "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
       "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start": "ctlobj-sha256:0a2962b20fda6b32e609f1343100de7e46bb3b5b3c36a5d1ed65bccdf123d695",
@@ -18394,6 +18520,9 @@
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": [
         "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
         "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
+      ],
+      "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": [
+        "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305"
       ],
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": [
         "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2"
@@ -19420,6 +19549,7 @@
         "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583",
         "ctlobj-sha256:a70e27b1192ee7b6ee65ca90a4a78a164b3ce8e65cbb2ccf0917b15a17bd56ce",
         "ctlobj-sha256:a95f62caa595bc8cc2544cbea696d2c18e9ce114f4a9c8aec3352a1cc07dd3f3",
+        "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
         "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
         "ctlobj-sha256:aa09d8108550315abb9a9a9041ad92caf950cffa2e21a586cef4e824ec148680",
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
@@ -19659,6 +19789,7 @@
         "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583",
         "ctlobj-sha256:a70e27b1192ee7b6ee65ca90a4a78a164b3ce8e65cbb2ccf0917b15a17bd56ce",
         "ctlobj-sha256:a95f62caa595bc8cc2544cbea696d2c18e9ce114f4a9c8aec3352a1cc07dd3f3",
+        "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
         "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
         "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
@@ -31755,6 +31886,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+          "generated_at": "2026-07-16T06:33:31Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
+          "path": "manifests/lab-note-2026-07-16-ising-braided-class-alignment-audit.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-braided-class-alignment-audit.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:6a5002ee5542cb183101e54eebb2ff9d0f2d7c5ebaa62351af5de638cdc134ad",
           "generated_at": "2026-07-16T04:18:00Z",
           "logical_id": "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review",
@@ -42319,6 +42467,26 @@
           "parent_root_cid": "ctlobj-sha256:e33481c72b1c0a783526b2d869686ca7f5231b9f0526d884ab152ce6696b9821",
           "path": "manifests/resource-yasui-email-2026-07-11-source-capture.json",
           "payload_file": "ctl-dogfood/resources/yasui-email-2026-07-11-source-capture.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
+          "generated_at": "2026-07-16T06:33:31Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
+          "path": "manifests/lab-note-2026-07-16-ising-braided-class-alignment-audit.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-braided-class-alignment-audit.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -57019,6 +57187,36 @@
         },
         "word_count": 265
       },
+      "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
+        "created_at": "2026-07-16T06:33:31Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1343,
+        "gist": "The next Ising row-completion substep was completed: the 8 SU(2)_2 Galois candidate branches were aligned with the 8 recorded low-rank Ising braided classes using the theta_sigma invariant. For A=zeta16^p, theta_sigma=A^3=zeta16^(3p); the audit verifies that the candidates cov...",
+        "logical_id": "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"ising-braided-class-alignment-audit-v1\",\"content_hash\":\"sha256:179c2b9a161c04b11d010baed50b38688844cc339715e4c84218493278f3c0dd\",\"git_blob\":\"29f641923fdbb94088457aca0232653b1bfbb85b\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ising-braided-class-alignment-audit-v1.json\",\"sha256\":\"28dd59904ed6678ff8caaab9dc21c43799df18add30e8ea5cefde374dd5dab5e\",\"status\":\"ISING_BRAIDED_CLASS_ALIGNMENT_BY_THETA_SIGMA_ESTABLISHED_RIBBON_LIFTS_PENDING\"},{\"artifact_id\":\"ising-braided-class-alignment-builder-v1\",\"git_blob\":\"d909604418c90d82d298877cd629f04776b062a8\",\"path\":\"experiments/scripts/build_ising_braided_class_alignment_audit_v1.py\",\"sha256\":\"5679050c87f1e8392e8180ba60f7f6c3574154f671841fcc2126aafbe18d1c7d\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"ising-braided-class-alignment-tests-v1\",\"git_blob\":\"f1b4511359df5b6c92324b90ca34035264b98748\",\"path\":\"tests/test_ising_braided_class_alignment_audit_v1.py\",\"sha256\":\"a9cb77e4dfd38a23957e0103c15cd6cf56090967a0c14ffbe4e931bf69314d0e\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"candidate_count_matches_braided_count\":\"PASS\",\"mirror_reverse_pairs_are_involutive\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\",\"theta_psi_is_minus_one_for_all_candidates\":\"PASS\",\"theta_sigma_exponents_are_all_odd_zeta16_powers\":\"PASS\",\"theta_sigma_exponents_are_unique\":\"PASS\"},\"created_at\":\"2026-07-16T06:33:31Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not produce ribbon_realization_snapshot formal evidence.\",\"This note does not establish Ising row-complete ribbon classification.\",\"This note does not prove pivotal/ribbon lift completeness.\"],\"mathematical_status\":\"ISING_BRAIDED_CLASS_ALIGNMENT_PASS; ISING_RIBBON_LIFTS_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-ising-braided-class-alignment-audit\",\"remaining_growth\":[\"materialize pivotal/ribbon lifts for each theta_sigma braided class\",\"prove whether the recorded two spherical structures per braided class produce sixteen ribbon snapshots\",\"build row-complete ribbon_realization_snapshot artifacts\",\"produce producer/runtime/ribbon-pivotal certificates for every Ising snapshot\",\"derive the Ising row ribbon denominator without copying the braided denominator\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"audit_id\":\"ising-braided-class-alignment-audit-v1\",\"braided_class_alignment_status\":\"PASS\",\"family_id\":\"rank3-ising\",\"formal_scan_plan_allowed_after_this_note\":false,\"mirror_reverse_pairs_by_theta_sigma\":[[1,15],[3,13],[5,11],[7,9]],\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation\",\"ribbon_lift_status\":\"NOT_MATERIALIZED\",\"row_complete_status\":\"NOT_ROW_COMPLETE\",\"theta_sigma_exponents\":[1,3,5,7,9,11,13,15]},\"status\":\"ISING_BRAIDED_CLASS_ALIGNMENT_PASS_RIBBON_LIFTS_PENDING\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_ising_braided_class_alignment_audit_v1.py --write\",\"status\":\"pass\"},{\"collected\":20,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Ising braided-class alignment audit completed\",\"top_notice\":\"The next Ising row-completion substep was completed: the 8 SU(2)_2 Galois candidate branches were aligned with the 8 recorded low-rank Ising braided classes using the theta_sigma invariant. For A=zeta16^p, theta_sigma=A^3=zeta16^(3p); the audit verifies that the candidates cover exactly all odd zeta16 powers and records the mirror/reverse pairs. This does not produce ribbon_realization_snapshot evidence, does not establish pivotal/ribbon lift completeness, and does not authorize scan-plan generation.\"}",
+        "title": "Ising braided-class alignment audit completed",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4148,
+          "base_estimate": 1167,
+          "estimated_tokens": 1343,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 176,
+          "serialized_character_count": 4148,
+          "unicode_scalar_count": 4148,
+          "utf8_bytes": 4148
+        },
+        "word_count": 163
+      },
       "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac": {
         "active_state": "active",
         "cid": "ctlobj-sha256:a9a566ae7b47ed8aba83639a737227b5fb3d59ea08ad61c71a525b2538ec6cac",
@@ -61810,7 +62008,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T06:07:07Z",
+  "generated_at": "2026-07-16T06:36:30Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -64344,17 +64542,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:3ffaa3109450e5695cd414b1466ba7ee72dab9774ab7aa778ace8014b98e793b",
+  "root_cid": "ctlobj-sha256:2bf9c835f9796d01fd32c37c71a4f049c3a304c41da172cc324c1605b64d64bf",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 65636,
+    "build_ms": 66529,
     "context_source": "current-context-replay",
-    "current_context_ms": 61346,
-    "discovery_index_ms": 4169,
+    "current_context_ms": 62263,
+    "discovery_index_ms": 4142,
     "payload_summaries_ms": 39,
     "resource_index_ms": 39,
-    "write_ms": 41
+    "write_ms": 43
   },
-  "transition_cid": "ctlobj-sha256:c89ce1bac2bf78937ced59bcda9bf73ef3bbba0a689cf36dc333788382d61bde"
+  "transition_cid": "ctlobj-sha256:265ddca2177f005c9fc96e4d85a8b80450c2f2d2eee441407b534b4565797648"
 }
