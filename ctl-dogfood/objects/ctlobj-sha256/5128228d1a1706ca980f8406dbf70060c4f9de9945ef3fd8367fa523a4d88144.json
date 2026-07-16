@@ -1,0 +1,83 @@
+{
+  "created_at": "2026-07-16T04:30:27Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-step2-input-materialization",
+  "parents": [],
+  "payload": {
+    "artifact": {
+      "artifact_id": "low-rank-step2-input-materialization-v1",
+      "commit": "6dcb1a5a99e48c274f7a378aa7123d0322ad5cc3",
+      "content_hash": "sha256:5de86184a3570dcee23dcdc2eb1a571747fe3ccb34230e38d436e905fbe019b4",
+      "git_blob": "1a19fdfb542817d01669844747f07dc3ee19faa0",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-step2-input-materialization-v1.json",
+      "sha256": "1536d171aa585ba2aaf9d888f4ca6b904488f3f89436d8591fe2c36707580e4e",
+      "status": "STEP2_INPUT_MATERIALIZATION_COMPLETE_TERMINAL_BLOCKED"
+    },
+    "created_at": "2026-07-16T04:30:27Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim any of the six blocked rows are resolved.",
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim a formal scan plan exists.",
+      "This note does not claim a no-signal result."
+    ],
+    "mathematical_status": "STEP2_MATERIALIZATION_PASS_COMPLETE; SIX_ROWS_REMAIN_TERMINAL_BLOCKED_FOR_CURRENT_RUN",
+    "note_id": "objective-note-2026-07-16-low-rank-step2-input-materialization",
+    "row_statuses": [
+      {
+        "family_id": "rank3-ising",
+        "materialization_status": "PARTIAL_LOCAL_BRANCH_DATA_AVAILABLE_NOT_ROW_RESOLVED"
+      },
+      {
+        "family_id": "rank3-psu2-5",
+        "materialization_status": "PRINCIPAL_SU2K_Q6J_BACKEND_AVAILABLE_NOT_ROW_RESOLVED"
+      },
+      {
+        "family_id": "rank4-psu2-7",
+        "materialization_status": "PRINCIPAL_SU2K_Q6J_BACKEND_AVAILABLE_NOT_ROW_RESOLVED"
+      },
+      {
+        "family_id": "rank5-su2-4",
+        "materialization_status": "PRINCIPAL_SU2K_BACKEND_AVAILABLE_EXTENSION_BRANCHES_NOT_RESOLVED"
+      },
+      {
+        "family_id": "rank5-psu2-9",
+        "materialization_status": "PRINCIPAL_SU2K_Q6J_BACKEND_AVAILABLE_NOT_ROW_RESOLVED"
+      },
+      {
+        "family_id": "rank5-psu3-4",
+        "materialization_status": "NO_REPO_LOCAL_PSU3_FR_INPUT_AVAILABLE"
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "catalog_id": "low-rank-ribbon-realization-catalog-v10",
+      "formal_scan_plan_allowed_after_step2": false,
+      "input_materialization_artifact": "low-rank-step2-input-materialization-v1",
+      "resolved_row_count_after_step2": 0,
+      "step": "implementation_order_step_2_resolve_the_6_blocked_rows",
+      "terminal_blocked_row_count_after_step2": 6
+    },
+    "status": "STEP2_INPUT_MATERIALIZATION_COMPLETE_TERMINAL_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 101,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_input_materialization_v1.py tests/test_low_rank_completion_run_v1.py tests/test_formal_low_rank_scan_step9_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Low-rank Step 2 input materialization pass completed",
+    "top_notice": "Step 2 was completed as a materialization pass over the six blocked non-pointed rows. The pass found partial repo-local machinery for Ising and SU(2)/PSU(2) principal branches, but no row has enough content-addressed ribbon snapshots and certificates to become resolved. No scan plan, scan result, aggregate, or no-signal claim follows."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
