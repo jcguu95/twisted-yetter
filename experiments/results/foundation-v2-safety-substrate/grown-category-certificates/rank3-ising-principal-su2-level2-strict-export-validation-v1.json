@@ -1,0 +1,53 @@
+{
+  "certificate_id": "rank3-ising-principal-su2-level2-strict-export-validation-v1",
+  "checked_entry_counts": {
+    "dimension_entries": 3,
+    "f_symbol_entries": 36,
+    "fusion_entries": 9,
+    "r_inverse_entries": 20,
+    "r_symbol_entries": 20,
+    "twist_entries": 3
+  },
+  "checks": {
+    "category_data_hash_fresh": "PASS",
+    "dimension_entries_recomputed": "PASS",
+    "entry_counts_match": "PASS",
+    "export_content_hash_fresh": "PASS",
+    "f_symbol_entries_recomputed": "PASS",
+    "fusion_entries_recomputed": "PASS",
+    "r_inverse_entries_recomputed": "PASS",
+    "r_symbol_entries_recomputed": "PASS",
+    "source_machinery_hash_matches": "PASS",
+    "twist_entries_recomputed": "PASS"
+  },
+  "content_hash": "sha256:2164e7bad8ab71c9a17771d8b7e3bf9e460780017ae966f9ae767c91ab14a22e",
+  "explicit_non_claims": [
+    "This certificate validates a principal SU(2)_k export only.",
+    "This certificate does not enumerate all Galois/mirror/pivotal/ribbon branches.",
+    "This certificate is not a row-complete ribbon realization snapshot."
+  ],
+  "family_id": "rank3-ising",
+  "formal_ribbon_realization_snapshot_produced": false,
+  "formal_row_resolution_allowed": false,
+  "generated_at_utc": "2026-07-16T05:33:58Z",
+  "generator_script": "experiments/sage/validate_su2k_principal_category_data.sage.py",
+  "git": {
+    "commit": "f473a5d8c0b950410160d82f0251063e5e5d1ca0",
+    "dirty": true
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/validate_su2k_principal_category_data.sage.py --family-id rank3-ising --write",
+  "schema": "twisted-yetter.su2k-principal-export-validation-certificate.v1",
+  "status": "PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION",
+  "tool_versions": {
+    "python": "3.13.7",
+    "sage": "10.8"
+  },
+  "validated_export": {
+    "category_data_hash": "sha256:271cc4f022a0d626dfb5ae96f2ec6ba0c4c443e5de57d70542e8f12785b0d2e4",
+    "content_hash": "sha256:29c54661ef40598390636d62380936f91c4930b14cc66da804b7a3bf5c9e8703",
+    "path": "experiments/results/foundation-v2-safety-substrate/grown-category-data/rank3-ising-principal-su2-level2-category-data-export-v1.json",
+    "sha256": "sha256:7167b3ffa5f04cffd387db1110949f86bdb8f451917e2ce1adadbdbfaeade974",
+    "status": "PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_ROW_COMPLETE"
+  }
+}

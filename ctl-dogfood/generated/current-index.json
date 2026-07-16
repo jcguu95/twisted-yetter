@@ -8834,6 +8834,148 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
+      "logical_id": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "su2k-principal-export-validation-script-v1",
+            "git_blob": "cd0452818118283503414197705ab74cacc5005e",
+            "path": "experiments/sage/validate_su2k_principal_category_data.sage.py",
+            "sha256": "10bb91b62cfd18409376656e788b45e0ccaed612dfa62f1a73891a23a23cc6ed",
+            "status": "VALIDATION_SCRIPT_ADDED"
+          },
+          {
+            "artifact_id": "rank3-ising-principal-su2-level2-strict-export-validation-v1",
+            "content_hash": "sha256:2164e7bad8ab71c9a17771d8b7e3bf9e460780017ae966f9ae767c91ab14a22e",
+            "git_blob": "c587ac60d311260723fe59e345e7bcaa3a5b70c4",
+            "path": "experiments/results/foundation-v2-safety-substrate/grown-category-certificates/rank3-ising-principal-su2-level2-strict-export-validation-v1.json",
+            "sha256": "da884679a72c9c93b59ae3cf30a89951671bbcc4ef9e554ed52d85a2df94e918",
+            "status": "PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION"
+          },
+          {
+            "artifact_id": "rank5-su2-4-principal-su2-level4-strict-export-validation-v1",
+            "content_hash": "sha256:d554eb822c4ab9e87da79fca67d4c4053ef8e4dfdb3f9314f560bcc1e4fb5965",
+            "git_blob": "8fb2a282f36f957345db2700323694bc8e3876d6",
+            "path": "experiments/results/foundation-v2-safety-substrate/grown-category-certificates/rank5-su2-4-principal-su2-level4-strict-export-validation-v1.json",
+            "sha256": "67b1c3f46dd05ddb5241fc315c0d1a48e2778ca529300e4d66a6075be63e142d",
+            "status": "PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION"
+          },
+          {
+            "artifact_id": "low-rank-nontrivial-growth-status-v1",
+            "content_hash": "sha256:75219c9ad045b6df6bacdf898fd9818f9febeb67cc1d65afe36f98130f00a0bf",
+            "git_blob": "5aff0fc32a5fc7e1dc71aeeca6ee52ade1b30e25",
+            "path": "experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-growth-status-v1.json",
+            "sha256": "5ff213301c1223abec1186dc82abad7b4d5e74dbcd66c2ce5d08fb30fefae067",
+            "status": "PRINCIPAL_BRANCHES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED"
+          },
+          {
+            "artifact_id": "low-rank-nontrivial-growth-status-builder-v1",
+            "git_blob": "81951d5cdaf7ce6e8cb19dec1d8a4bf0b419bfb8",
+            "path": "experiments/scripts/build_low_rank_nontrivial_growth_status_v1.py",
+            "sha256": "bc95b5a4d8b406450be18606c95a32ebcad6339bbcf21643e3635f765d0ef51e",
+            "status": "STATUS_BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "strict-principal-validation-tests-v1",
+            "git_blob": "aa38420c28f5f1a93283248baa541bf545ff456b",
+            "path": "tests/test_su2k_principal_category_data_validation.py",
+            "sha256": "fbe88ec64039a4941c27185a52306894b10562142a20cb7b167a865207914c50",
+            "status": "TEST_ADDED"
+          },
+          {
+            "artifact_id": "nontrivial-growth-status-tests-v1",
+            "git_blob": "d1d6bcd782028a698037b061f90941198a870e15",
+            "path": "tests/test_low_rank_nontrivial_growth_status_v1.py",
+            "sha256": "4ad5c865084139d2f0675936b74c8175cee9c3f4a22fb7bf756551d502436803",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "checks": {
+          "certificate_hashes_bound_to_exports": "PASS",
+          "old_grocery_procurement_fail_closed_tests_still_pass": "PASS",
+          "rank3_ising_principal_export_revalidated": "PASS",
+          "rank5_su2_4_principal_export_revalidated": "PASS",
+          "scan_gates_remain_closed": "PASS"
+        },
+        "created_at": "2026-07-16T05:39:19Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not resolve rank3-ising as a full family row.",
+          "This note does not resolve rank5-su2-4 as a full family row.",
+          "Strict principal export validation is not row-complete ribbon realization evidence.",
+          "The Ising braided/mirror/Galois/ribbon lift denominator is still not fully materialized.",
+          "The SU(2)_4 Rep(S3)^omega / gamma extension branches are still not materialized.",
+          "The PSU(3)_4 row remains unknown for universal grading and is not treated as trivial."
+        ],
+        "mathematical_status": "PRINCIPAL_SU2_BRANCHES_STRICTLY_REVALIDATED; NONTRIVIAL_ROW_COMPLETION_STILL_BLOCKED; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-low-rank-strict-principal-growth-validation",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "classification_status_after_this_note": "NOT_ESTABLISHED",
+          "formal_scan_plan_allowed_after_this_note": false,
+          "growth_status_id": "low-rank-nontrivial-growth-status-v1",
+          "prior_current_note": "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start",
+          "row_complete_growth_target_family_ids": [],
+          "still_blocked_growth_target_family_ids": [
+            "rank3-ising",
+            "rank5-su2-4"
+          ],
+          "strictly_validated_principal_growth_targets": [
+            "rank3-ising",
+            "rank5-su2-4"
+          ],
+          "trivial_rows_not_grown_for_nontrivial_universal_character_scan": [
+            "rank2-fibonacci-yang-lee",
+            "rank3-psu2-5",
+            "rank4-fibxfib",
+            "rank4-psu2-7",
+            "rank5-psu2-9"
+          ],
+          "unknown_rows_not_ignored": [
+            "rank5-psu3-4"
+          ]
+        },
+        "status": "STRICT_PRINCIPAL_BRANCH_VALIDATION_PASSED_REMAINING_BRANCH_GROWTH_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/validate_su2k_principal_category_data.sage.py --family-id rank3-ising --write",
+            "status": "pass"
+          },
+          {
+            "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/validate_su2k_principal_category_data.sage.py --family-id rank5-su2-4 --write",
+            "status": "pass"
+          },
+          {
+            "collected": 41,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_su2k_principal_category_data_export.py tests/test_su2k_principal_category_data_validation.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_universal_grading_audit_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Low-rank nontrivial principal growth exports strictly revalidated",
+        "top_notice": "The newly grown principal SU(2)_2 and SU(2)_4 category-data exports were revalidated entry-by-entry against the Sage q6j/F/R/twist machinery. Both strict validation certificates pass, and the old grocery-procurement fail-closed tests still pass. This validates only the principal exported branches. It does not resolve rank3-ising or rank5-su2-4 as row-complete ribbon realization families, does not authorize a scan plan, and does not change the terminal blocker status for missing Ising branches or SU(2)_4 extension/gamma branches."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
+        "created_at": "2026-07-16T05:39:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
       "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
       "payload": {
@@ -17686,6 +17828,7 @@
       "claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start": "ctlobj-sha256:0a2962b20fda6b32e609f1343100de7e46bb3b5b3c36a5d1ed65bccdf123d695",
       "claim:lab-note:2026-07-16-low-rank-step2-grocery-procurement": "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144",
+      "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation": "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
       "claim:lab-note:2026-07-16-low-rank-universal-grading-audit": "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51",
       "claim:lab-note:2026-07-16-nonpointed-ribbon-blocker-ledger": "ctlobj-sha256:ddd5945bb187d9d0b0acf29014b0fd8cbd848192e75a7a629f67d03c3bec971a",
       "claim:lab-note:2026-07-16-rank4-fibxfib-ribbon-realization-partial-progress": "ctlobj-sha256:0acd23abeb2dcb1b4deccd81c104ba8867465c82e973c464f70e5e833ffa81e2",
@@ -18112,6 +18255,9 @@
       ],
       "claim:lab-note:2026-07-16-low-rank-step2-input-materialization": [
         "ctlobj-sha256:5128228d1a1706ca980f8406dbf70060c4f9de9945ef3fd8367fa523a4d88144"
+      ],
+      "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation": [
+        "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35"
       ],
       "claim:lab-note:2026-07-16-low-rank-universal-grading-audit": [
         "ctlobj-sha256:7f128f9fc94d66535ddffa60958afa66a585578dc4ca12e7ef6d0940f12bea51"
@@ -19083,6 +19229,7 @@
         "ctlobj-sha256:8fa9a1bf59f6baa2f22fae7a2c50bcefb792fd88e17c7998dc9fe35132bc6ad5",
         "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
         "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
+        "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
         "ctlobj-sha256:92961bbf175e8d547f65305ac3fca78e4741e691cb10aaafa071ad60417b370a",
         "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
         "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
@@ -19341,6 +19488,7 @@
         "ctlobj-sha256:8e0cb3dac53dd0d78840dddaf2ccbeefc35f9c7ddcb9dccd8c4dfc11ad18aff2",
         "ctlobj-sha256:8f6bfe851fe62f9c61b0b700c146b8af0b25a5d95a20a494a644005461fbde55",
         "ctlobj-sha256:8fdbac49f23fb39d345f83302d26063f97e3abe4f556fce93fd8509ed0dc86ef",
+        "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
         "ctlobj-sha256:92961bbf175e8d547f65305ac3fca78e4741e691cb10aaafa071ad60417b370a",
         "ctlobj-sha256:92da574f9fcb5231fdc47eb9c7a9d06088e4458ac3656bd0a48efc1c249b04ae",
         "ctlobj-sha256:931c1c95993374b4d19fbabdc4c487e1233a3ecfedfdd287ef8e924337f44939",
@@ -31519,6 +31667,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fbb722fff99501ac669849a2aa7920ad005ccb769bc2b4acdc0a55c7320c410f",
+          "generated_at": "2026-07-16T05:39:19Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:c66e30c67d0153fde5f084a3cf5b00e7bbfda0a83ece45c3e354e1f4eba2efcc",
+          "path": "manifests/lab-note-2026-07-16-low-rank-strict-principal-growth-validation.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-strict-principal-growth-validation.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:9cf171a4223ccead919b46344ef0a668d997faa6b138f407c692644c708f8e2f",
           "generated_at": "2026-07-16T05:11:20Z",
           "logical_id": "claim:lab-note:2026-07-16-low-rank-universal-grading-audit",
@@ -40090,6 +40255,26 @@
           "parent_root_cid": "ctlobj-sha256:d7f1a7a4ff2d05fce914653772171323f3ef8c4ac84114aab2b1ab368f53014f",
           "path": "manifests/subject-definition-2026-07-06-category-family-su2-k.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/category-family-su2-k.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fbb722fff99501ac669849a2aa7920ad005ccb769bc2b4acdc0a55c7320c410f",
+          "generated_at": "2026-07-16T05:39:19Z",
+          "logical_id": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:c66e30c67d0153fde5f084a3cf5b00e7bbfda0a83ece45c3e354e1f4eba2efcc",
+          "path": "manifests/lab-note-2026-07-16-low-rank-strict-principal-growth-validation.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-low-rank-strict-principal-growth-validation.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -55531,6 +55716,36 @@
         },
         "word_count": 63
       },
+      "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:910bc6fd47c237e001a3456d639e6a3286ecad5f65d5a9d2b19c6a6fe05bab35",
+        "created_at": "2026-07-16T05:39:19Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 2015,
+        "gist": "The newly grown principal SU(2)_2 and SU(2)_4 category-data exports were revalidated entry-by-entry against the Sage q6j/F/R/twist machinery. Both strict validation certificates pass, and the old grocery-procurement fail-closed tests still pass. This validates only the princip...",
+        "logical_id": "claim:lab-note:2026-07-16-low-rank-strict-principal-growth-validation",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"su2k-principal-export-validation-script-v1\",\"git_blob\":\"cd0452818118283503414197705ab74cacc5005e\",\"path\":\"experiments/sage/validate_su2k_principal_category_data.sage.py\",\"sha256\":\"10bb91b62cfd18409376656e788b45e0ccaed612dfa62f1a73891a23a23cc6ed\",\"status\":\"VALIDATION_SCRIPT_ADDED\"},{\"artifact_id\":\"rank3-ising-principal-su2-level2-strict-export-validation-v1\",\"content_hash\":\"sha256:2164e7bad8ab71c9a17771d8b7e3bf9e460780017ae966f9ae767c91ab14a22e\",\"git_blob\":\"c587ac60d311260723fe59e345e7bcaa3a5b70c4\",\"path\":\"experiments/results/foundation-v2-safety-substrate/grown-category-certificates/rank3-ising-principal-su2-level2-strict-export-validation-v1.json\",\"sha256\":\"da884679a72c9c93b59ae3cf30a89951671bbcc4ef9e554ed52d85a2df94e918\",\"status\":\"PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION\"},{\"artifact_id\":\"rank5-su2-4-principal-su2-level4-strict-export-validation-v1\",\"content_hash\":\"sha256:d554eb822c4ab9e87da79fca67d4c4053ef8e4dfdb3f9314f560bcc1e4fb5965\",\"git_blob\":\"8fb2a282f36f957345db2700323694bc8e3876d6\",\"path\":\"experiments/results/foundation-v2-safety-substrate/grown-category-certificates/rank5-su2-4-principal-su2-level4-strict-export-validation-v1.json\",\"sha256\":\"67b1c3f46dd05ddb5241fc315c0d1a48e2778ca529300e4d66a6075be63e142d\",\"status\":\"PASS_STRICT_PRINCIPAL_EXPORT_REVALIDATION\"},{\"artifact_id\":\"low-rank-nontrivial-growth-status-v1\",\"content_hash\":\"sha256:75219c9ad045b6df6bacdf898fd9818f9febeb67cc1d65afe36f98130f00a0bf\",\"git_blob\":\"5aff0fc32a5fc7e1dc71aeeca6ee52ade1b30e25\",\"path\":\"experiments/results/foundation-v2-safety-substrate/low-rank-nontrivial-growth-status-v1.json\",\"sha256\":\"5ff213301c1223abec1186dc82abad7b4d5e74dbcd66c2ce5d08fb30fefae067\",\"status\":\"PRINCIPAL_BRANCHES_STRICTLY_VALIDATED_REMAINING_BRANCHES_BLOCKED\"},{\"artifact_id\":\"low-rank-nontrivial-growth-status-builder-v1\",\"git_blob\":\"81951d5cdaf7ce6e8cb19dec1d8a4bf0b419bfb8\",\"path\":\"experiments/scripts/build_low_rank_nontrivial_growth_status_v1.py\",\"sha256\":\"bc95b5a4d8b406450be18606c95a32ebcad6339bbcf21643e3635f765d0ef51e\",\"status\":\"STATUS_BUILDER_ADDED\"},{\"artifact_id\":\"strict-principal-validation-tests-v1\",\"git_blob\":\"aa38420c28f5f1a93283248baa541bf545ff456b\",\"path\":\"tests/test_su2k_principal_category_data_validation.py\",\"sha256\":\"fbe88ec64039a4941c27185a52306894b10562142a20cb7b167a865207914c50\",\"status\":\"TEST_ADDED\"},{\"artifact_id\":\"nontrivial-growth-status-tests-v1\",\"git_blob\":\"d1d6bcd782028a698037b061f90941198a870e15\",\"path\":\"tests/test_low_rank_nontrivial_growth_status_v1.py\",\"sha256\":\"4ad5c865084139d2f0675936b74c8175cee9c3f4a22fb7bf756551d502436803\",\"status\":\"TEST_ADDED\"}],\"checks\":{\"certificate_hashes_bound_to_exports\":\"PASS\",\"old_grocery_procurement_fail_closed_tests_still_pass\":\"PASS\",\"rank3_ising_principal_export_revalidated\":\"PASS\",\"rank5_su2_4_principal_export_revalidated\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\"},\"created_at\":\"2026-07-16T05:39:19Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not resolve rank3-ising as a full family row.\",\"This note does not resolve rank5-su2-4 as a full family row.\",\"Strict principal export validation is not row-complete ribbon realization evidence.\",\"The Ising braided/mirror/Galois/ribbon lift denominator is still not fully materialized.\",\"The SU(2)_4 Rep(S3)^omega / gamma extension branches are still not materialized.\",\"The PSU(3)_4 row remains unknown for universal grading and is not treated as trivial.\"],\"mathematical_status\":\"PRINCIPAL_SU2_BRANCHES_STRICTLY_REVALIDATED; NONTRIVIAL_ROW_COMPLETION_STILL_BLOCKED; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-low-rank-strict-principal-growth-validation\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"classification_status_after_this_note\":\"NOT_ESTABLISHED\",\"formal_scan_plan_allowed_after_this_note\":false,\"growth_status_id\":\"low-rank-nontrivial-growth-status-v1\",\"prior_current_note\":\"claim:lab-note:2026-07-16-low-rank-nontrivial-growth-start\",\"row_complete_growth_target_family_ids\":[],\"still_blocked_growth_target_family_ids\":[\"rank3-ising\",\"rank5-su2-4\"],\"strictly_validated_principal_growth_targets\":[\"rank3-ising\",\"rank5-su2-4\"],\"trivial_rows_not_grown_for_nontrivial_universal_character_scan\":[\"rank2-fibonacci-yang-lee\",\"rank3-psu2-5\",\"rank4-fibxfib\",\"rank4-psu2-7\",\"rank5-psu2-9\"],\"unknown_rows_not_ignored\":[\"rank5-psu3-4\"]},\"status\":\"STRICT_PRINCIPAL_BRANCH_VALIDATION_PASSED_REMAINING_BRANCH_GROWTH_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"DOT_SAGE=\\\"$PWD/.sage\\\" sage experiments/sage/validate_su2k_principal_category_data.sage.py --family-id rank3-ising --write\",\"status\":\"pass\"},{\"command\":\"DOT_SAGE=\\\"$PWD/.sage\\\" sage experiments/sage/validate_su2k_principal_category_data.sage.py --family-id rank5-su2-4 --write\",\"status\":\"pass\"},{\"collected\":41,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_step2_grocery_procurement_v1.py tests/test_low_rank_step2_input_materialization_v1.py tests/test_su2k_principal_category_data_export.py tests/test_su2k_principal_category_data_validation.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_universal_grading_audit_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Low-rank nontrivial principal growth exports strictly revalidated\",\"top_notice\":\"The newly grown principal SU(2)_2 and SU(2)_4 category-data exports were revalidated entry-by-entry against the Sage q6j/F/R/twist machinery. Both strict validation certificates pass, and the old grocery-procurement fail-closed tests still pass. This validates only the principal exported branches. It does not resolve rank3-ising or rank5-su2-4 as row-complete ribbon realization families, does not authorize a scan plan, and does not change the terminal blocker status for missing Ising branches or SU(2)_4 extension/gamma branches.\"}",
+        "title": "Low-rank nontrivial principal growth exports strictly revalidated",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 6228,
+          "base_estimate": 1752,
+          "estimated_tokens": 2015,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 263,
+          "serialized_character_count": 6228,
+          "unicode_scalar_count": 6228,
+          "utf8_bytes": 6228
+        },
+        "word_count": 183
+      },
       "ctlobj-sha256:92961bbf175e8d547f65305ac3fca78e4741e691cb10aaafa071ad60417b370a": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:92961bbf175e8d547f65305ac3fca78e4741e691cb10aaafa071ad60417b370a",
@@ -61372,7 +61587,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T05:28:54Z",
+  "generated_at": "2026-07-16T05:44:00Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -63906,17 +64121,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:c66e30c67d0153fde5f084a3cf5b00e7bbfda0a83ece45c3e354e1f4eba2efcc",
+  "root_cid": "ctlobj-sha256:fbb722fff99501ac669849a2aa7920ad005ccb769bc2b4acdc0a55c7320c410f",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 64129,
+    "build_ms": 63227,
     "context_source": "current-context-replay",
-    "current_context_ms": 59992,
-    "discovery_index_ms": 4019,
-    "payload_summaries_ms": 37,
-    "resource_index_ms": 37,
+    "current_context_ms": 59078,
+    "discovery_index_ms": 4032,
+    "payload_summaries_ms": 38,
+    "resource_index_ms": 38,
     "write_ms": 40
   },
-  "transition_cid": "ctlobj-sha256:ef1c44e2194446ae3c1f1ea62c66e1901719b067ff67e8b26c438ebd87fba124"
+  "transition_cid": "ctlobj-sha256:4f9665aea62f8e9e06eeb880e648e30fe8aa970b04afb07a9f33fe0961e72b09"
 }
