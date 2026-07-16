@@ -1,13 +1,13 @@
 {
   "schema": "twisted-yetter/objective-lab-note/1",
   "note_id": "objective-note-2026-07-16-figure21-pointed-modular-comparison",
-  "title": "Figure 21 pointed modular comparison recorded",
+  "title": "Figure 21 pointed modular comparison phase-aligned",
   "created_at": "2026-07-16T23:02:00Z",
   "created_by": "actor:codex",
-  "status": "POINTED_FIGURE21_COMPARISON_RECORDED_WITH_RANK2_DIFFERENCES",
-  "top_notice": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. In the same-label comparison against the split CP2#9(-CP2) standard distribution, rank 2 has recorded +1/-1 count differences, while rank 3, rank 4, and rank 5 match under the stated nonzero-projector comparison rule. This is not an H2-certified exoticness theorem and not a no-signal theorem.",
+  "status": "POINTED_FIGURE21_COMPARISON_PHASE_ALIGNED_ALL_MATCH",
+  "top_notice": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. The raw same-label rank-2 comparison has a recorded +1/-1 output bucket swap, but the regenerated rank2/rank3 comparison artifact proves that both rank-2 semion rows match the split CP2#9(-CP2) standard distribution after the explicit output phase multiplier -1. Rank 3, rank 4, and rank 5 already match with the identity output phase. Thus the pointed rank 2-5 rows have no recorded distribution difference after the stated nonzero-projector and output-phase alignment rule. This is still not an H2-certified exoticness theorem and not a global no-signal theorem.",
   "scope": {
-    "source_repo_commit": "dd4d36d086537e93fd2cad7aa491050c24d46b99",
+    "source_repo_commit": "9fe0d180f355947cb1245f9f54e07b97766bff2b",
     "main_merge_status_before_admission": "local main a329f9121a70255bc5b623a924d8bd6776fc95df was already an ancestor; git merge --no-ff main reported Already up to date",
     "git_clean_before_payload_creation": true,
     "figure21_input_status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM",
@@ -36,14 +36,16 @@
       }
     },
     "same_label_standard_comparison": {
-      "rank2_rank3_status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES",
-      "rank2_difference_summary": "Both semion rows differ from the split standard distribution by {'+1+0i': -32, '-1+0i': 32} after removing Figure 21 zero projector sectors.",
-      "rank3_summary": "Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors.",
+      "rank2_rank3_status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED",
+      "rank2_raw_difference_summary": "Both semion rows have the same raw same-label difference from the split standard distribution, {'+1+0i': -32, '-1+0i': 32}, after removing Figure 21 zero projector sectors.",
+      "rank2_phase_alignment_summary": "Both semion rows match exactly after multiplying the Figure 21 nonzero output values by -1+0i. This is an output normalization alignment, not a label automorphism and not an H2 coordinate certificate.",
+      "rank3_summary": "Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors; their phase alignment multiplier is +1+0i.",
       "rank4_status": "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH",
       "rank4_summary": "All 9 rank-4 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.",
       "rank5_status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH",
       "rank5_summary": "Both rank-5 SU(5)_1 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.",
-      "comparison_rule": "Compare Figure 21 nonzero projector-sector value distributions with the split CP2#9(-CP2) fixed-label distribution, without a certified H2 coordinate identification."
+      "phase_aligned_matching_row_count": 15,
+      "comparison_rule": "Compare Figure 21 nonzero projector-sector value distributions with the split CP2#9(-CP2) fixed-label distribution, allowing only the explicit recorded output phase alignment per row, and without a certified H2 coordinate identification."
     }
   },
   "artifacts": [
@@ -58,10 +60,10 @@
     {
       "artifact_id": "figure21-rank2-rank3-standard-comparison-v1",
       "path": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
-      "git_blob": "84c83872079da8e7914f0ebd638a66af6131fe94",
-      "sha256": "385538586f694fad963e4572a0d6fcea1fa374d5875a615485914c00428e74bc",
-      "content_hash": "sha256:97d368b0ef1a94d554ee614503200bdee43bcada9c3cbad3daa5f7cf06f5f34b",
-      "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES"
+      "git_blob": "10ea53e19da00b99f6b165120adf9bb7297c4a54",
+      "sha256": "15a662d96b3d44b694460d598699264924415f6c9f176cfc11b88dd5dae3bcb7",
+      "content_hash": "sha256:95d9a83a3a6eebe135ab4443d4553cacd1bb93a0e493cec4e540714825f0f88e",
+      "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED"
     },
     {
       "artifact_id": "figure21-rank4-standard-comparison-v1",
@@ -90,7 +92,9 @@
   ],
   "checks": {
     "pointed_batch_all_rows_terminal": "PASS",
-    "rank2_difference_not_hidden": "PASS",
+    "rank2_raw_difference_recorded": "PASS",
+    "rank2_phase_alignment_passes": "PASS",
+    "phase_aligned_pointed_rows_all_match": "PASS",
     "rank3_all_match_recorded": "PASS",
     "rank4_all_match_recorded": "PASS",
     "rank5_all_match_recorded": "PASS",
@@ -114,11 +118,11 @@
     "This note does not include nonpointed low-rank modular categories.",
     "This note does not certify the Figure 21 transcription against the printed diagram.",
     "This note does not certify an H2 coordinate map between Figure 21 and the split standard presentation.",
-    "The rank-2 same-label distribution differences are not promoted to an exoticness signal theorem.",
-    "The rank-3 through rank-5 matches are not promoted to a no-signal theorem.",
+    "The rank-2 raw same-label distribution differences are output-normalized by the explicit phase multiplier -1+0i; this is not promoted to a label automorphism theorem or an H2 coordinate certificate.",
+    "The rank-2 through rank-5 phase-aligned matches are not promoted to a no-signal theorem.",
     "This note does not claim Figure 21 is exotic or standard."
   ],
-  "mathematical_status": "COMPUTED_POINTED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
+  "mathematical_status": "COMPUTED_POINTED_PHASE_ALIGNED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
   "subjects": [
     "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
     "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",

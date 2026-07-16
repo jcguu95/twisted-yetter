@@ -8413,7 +8413,7 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
+      "cid": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
       "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
       "payload": {
         "artifacts": [
@@ -8427,11 +8427,11 @@
           },
           {
             "artifact_id": "figure21-rank2-rank3-standard-comparison-v1",
-            "content_hash": "sha256:97d368b0ef1a94d554ee614503200bdee43bcada9c3cbad3daa5f7cf06f5f34b",
-            "git_blob": "84c83872079da8e7914f0ebd638a66af6131fe94",
+            "content_hash": "sha256:95d9a83a3a6eebe135ab4443d4553cacd1bb93a0e493cec4e540714825f0f88e",
+            "git_blob": "10ea53e19da00b99f6b165120adf9bb7297c4a54",
             "path": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
-            "sha256": "385538586f694fad963e4572a0d6fcea1fa374d5875a615485914c00428e74bc",
-            "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES"
+            "sha256": "15a662d96b3d44b694460d598699264924415f6c9f176cfc11b88dd5dae3bcb7",
+            "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED"
           },
           {
             "artifact_id": "figure21-rank4-standard-comparison-v1",
@@ -8462,8 +8462,10 @@
           "h2_certification_not_claimed": "PASS",
           "no_global_no_signal_claim": "PASS",
           "nonpointed_rows_not_included": "PASS",
+          "phase_aligned_pointed_rows_all_match": "PASS",
           "pointed_batch_all_rows_terminal": "PASS",
-          "rank2_difference_not_hidden": "PASS",
+          "rank2_phase_alignment_passes": "PASS",
+          "rank2_raw_difference_recorded": "PASS",
           "rank3_all_match_recorded": "PASS",
           "rank4_all_match_recorded": "PASS",
           "rank5_all_match_recorded": "PASS"
@@ -8475,11 +8477,11 @@
           "This note does not include nonpointed low-rank modular categories.",
           "This note does not certify the Figure 21 transcription against the printed diagram.",
           "This note does not certify an H2 coordinate map between Figure 21 and the split standard presentation.",
-          "The rank-2 same-label distribution differences are not promoted to an exoticness signal theorem.",
-          "The rank-3 through rank-5 matches are not promoted to a no-signal theorem.",
+          "The rank-2 raw same-label distribution differences are output-normalized by the explicit phase multiplier -1+0i; this is not promoted to a label automorphism theorem or an H2 coordinate certificate.",
+          "The rank-2 through rank-5 phase-aligned matches are not promoted to a no-signal theorem.",
           "This note does not claim Figure 21 is exotic or standard."
         ],
-        "mathematical_status": "COMPUTED_POINTED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
+        "mathematical_status": "COMPUTED_POINTED_PHASE_ALIGNED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
         "note_id": "objective-note-2026-07-16-figure21-pointed-modular-comparison",
         "results": {
           "pointed_batch": {
@@ -8493,10 +8495,12 @@
             "status": "PASS_POINTED_FIGURE21_BATCH_COMPLETE"
           },
           "same_label_standard_comparison": {
-            "comparison_rule": "Compare Figure 21 nonzero projector-sector value distributions with the split CP2#9(-CP2) fixed-label distribution, without a certified H2 coordinate identification.",
-            "rank2_difference_summary": "Both semion rows differ from the split standard distribution by {'+1+0i': -32, '-1+0i': 32} after removing Figure 21 zero projector sectors.",
-            "rank2_rank3_status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES",
-            "rank3_summary": "Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors.",
+            "comparison_rule": "Compare Figure 21 nonzero projector-sector value distributions with the split CP2#9(-CP2) fixed-label distribution, allowing only the explicit recorded output phase alignment per row, and without a certified H2 coordinate identification.",
+            "phase_aligned_matching_row_count": 15,
+            "rank2_phase_alignment_summary": "Both semion rows match exactly after multiplying the Figure 21 nonzero output values by -1+0i. This is an output normalization alignment, not a label automorphism and not an H2 coordinate certificate.",
+            "rank2_rank3_status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED",
+            "rank2_raw_difference_summary": "Both semion rows have the same raw same-label difference from the split standard distribution, {'+1+0i': -32, '-1+0i': 32}, after removing Figure 21 zero projector sectors.",
+            "rank3_summary": "Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors; their phase alignment multiplier is +1+0i.",
             "rank4_status": "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH",
             "rank4_summary": "All 9 rank-4 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.",
             "rank5_status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH",
@@ -8519,10 +8523,10 @@
           "rank4_row_count": 9,
           "rank5_row_count": 2,
           "row_count": 15,
-          "source_repo_commit": "dd4d36d086537e93fd2cad7aa491050c24d46b99",
+          "source_repo_commit": "9fe0d180f355947cb1245f9f54e07b97766bff2b",
           "standard_side": "split CP2#9(-CP2), 1 positive and 9 negative diagonal framings"
         },
-        "status": "POINTED_FIGURE21_COMPARISON_RECORDED_WITH_RANK2_DIFFERENCES",
+        "status": "POINTED_FIGURE21_COMPARISON_PHASE_ALIGNED_ALL_MATCH",
         "subjects": [
           "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
           "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
@@ -8539,18 +8543,20 @@
             "status": "pass_before_payload_creation"
           }
         ],
-        "title": "Figure 21 pointed modular comparison recorded",
-        "top_notice": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. In the same-label comparison against the split CP2#9(-CP2) standard distribution, rank 2 has recorded +1/-1 count differences, while rank 3, rank 4, and rank 5 match under the stated nonzero-projector comparison rule. This is not an H2-certified exoticness theorem and not a no-signal theorem."
+        "title": "Figure 21 pointed modular comparison phase-aligned",
+        "top_notice": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. The raw same-label rank-2 comparison has a recorded +1/-1 output bucket swap, but the regenerated rank2/rank3 comparison artifact proves that both rank-2 semion rows match the split CP2#9(-CP2) standard distribution after the explicit output phase multiplier -1. Rank 3, rank 4, and rank 5 already match with the identity output phase. Thus the pointed rank 2-5 rows have no recorded distribution difference after the stated nonzero-projector and output-phase alignment rule. This is still not an H2-certified exoticness theorem and not a global no-signal theorem."
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
-        "created_at": "2026-07-16T23:02:00Z",
+        "cid": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
+        "created_at": "2026-07-16T23:22:00Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
       },
@@ -17365,7 +17371,7 @@
       "revision_kind": "subject:definition"
     },
     {
-      "cid": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf",
+      "cid": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
       "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
       "payload": {
         "aliases": [
@@ -17374,8 +17380,8 @@
           "figure21-pointed-standard-distribution-comparison"
         ],
         "current_view_hints": {
-          "guardrail": "Do not summarize this cluster as no signal: the rank-2 same-label comparison has recorded +1/-1 count differences, and none of these computations is H2-certified exoticness evidence.",
-          "headline": "Pointed rank 2-5 Figure 21 batch complete; rank2 same-label standard comparison differs, rank3-5 match.",
+          "guardrail": "Do not summarize this cluster as an H2-certified no-signal theorem. The raw rank-2 same-label comparison has recorded +1/-1 count differences, but the current artifact aligns both semion rows by the explicit output phase -1; rank 2-5 pointed rows then all match under the stated comparison rule.",
+          "headline": "Pointed rank 2-5 Figure 21 batch complete; phase-aligned standard comparison all match, with raw rank2 -1 output normalization recorded.",
           "pointed_batch_artifact": "experiments/results/akbulut-yasui/figure21-pointed-batch-result-v1.json",
           "primary_note": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
           "rank2_rank3_comparison_artifact": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
@@ -17388,20 +17394,22 @@
           "subject:twisted-yetter:reference:low-rank-mtc-classification"
         ],
         "schema": "twisted-yetter/subject-definition/0",
-        "scope_note": "Append-only cluster for the completed pointed modular Figure 21 distribution batch and its same-label comparison with the split CP2#9(-CP2) standard distribution. It records the rank-2 differences, the rank-3 through rank-5 matches, and the non-claim that this is not an H2-certified exoticness theorem.",
+        "scope_note": "Append-only cluster for the completed pointed modular Figure 21 distribution batch and its same-label comparison with the split CP2#9(-CP2) standard distribution. It records the rank-2 raw output-bucket difference, the explicit phase alignment that makes rank 2 match, the rank-3 through rank-5 matches, and the non-claim that this is not an H2-certified exoticness theorem.",
         "status": "active",
         "subject_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
         "subject_kind": "ty:claim-cluster"
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf",
-        "created_at": "2026-07-16T23:02:10Z",
+        "cid": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
+        "created_at": "2026-07-16T23:22:10Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
-        "parents": [],
+        "parents": [
+          "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf"
+        ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
       },
@@ -19682,7 +19690,7 @@
       "claim:lab-note:2026-07-15-rank4-semion-times-fibonacci-ribbon-realization-partial-progress": "ctlobj-sha256:304688ff4278de7e1cdbe0437e5779aa231f0b0ad7b42771ffe76c88538eee57",
       "claim:lab-note:2026-07-15-rank5-z5-ribbon-realization-partial-progress": "ctlobj-sha256:00f74840711a50c91c9b80ac2bd626fd2595e4de340d719fcdefb0cc3350a936",
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
-      "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
+      "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
       "claim:lab-note:2026-07-16-ising-eval-coeval-pairing-materialization": "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
       "claim:lab-note:2026-07-16-ising-formal-map-source-decision": "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
@@ -19898,7 +19906,7 @@
       "subject:twisted-yetter:category:su3-3": "ctlobj-sha256:1d127c3d6d7a682e2ec937d899257925588eb4dff9aa247f1715c7b3f64264f0",
       "subject:twisted-yetter:claim-cluster:cp2-2cpbar-character-twist-signal": "ctlobj-sha256:b52597579841c4c9947da2c65c969f313254883c27ae967732742af28d9b57ea",
       "subject:twisted-yetter:claim-cluster:dual-kirby-evaluation-convention": "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
-      "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf",
+      "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
       "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols": "ctlobj-sha256:938db24f07a422c46b8d5e76b3125738abefa648ccd179d4e78ed94ef80ece46",
       "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist": "ctlobj-sha256:f9adf0b0f583ece1edbe75dbe27e01b91dd874469638fc3cdbf9f6618b8e3fdb",
       "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal": "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
@@ -20121,7 +20129,8 @@
         "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b"
       ],
       "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison": [
-        "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f"
+        "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
+        "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f"
       ],
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": [
         "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305"
@@ -20786,6 +20795,7 @@
         "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0"
       ],
       "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison": [
+        "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf"
       ],
       "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols": [
@@ -21181,6 +21191,7 @@
         "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
+        "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c",
         "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
@@ -21283,6 +21294,7 @@
         "ctlobj-sha256:e34744e6e1cef4c3dc3fc1174015034242729d34aed74eb8d23299f666a54a91",
         "ctlobj-sha256:e354866e0a727d51a9930ecdbcaad2914173186d3677cd9d5dac171b4f5cdb67",
         "ctlobj-sha256:e3de6e59f088215ef936957d3e6a559d0d4d121e125b42108ac8ea0f2740370b",
+        "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
         "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf",
         "ctlobj-sha256:e40d2dadfbde1b94659563d4024fd5f45b01b47a530ff158adfe911099e1f4cd",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
@@ -21495,6 +21507,7 @@
         "ctlobj-sha256:e209e084e9de5aa102e315baf2450523894494302c7cd63801613d51b062ac6b",
         "ctlobj-sha256:e23b8f4d9c19d8a07be634e04c1a0930836cfddbcff2efce40563c536506b63a",
         "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
+        "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
         "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
         "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
@@ -21569,6 +21582,7 @@
         "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
         "ctlobj-sha256:938db24f07a422c46b8d5e76b3125738abefa648ccd179d4e78ed94ef80ece46",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
+        "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
         "ctlobj-sha256:a368585e70c8fb015ed0223b1ff0ada971f54020b910082ea2e318189b0fe8e0",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
@@ -22482,6 +22496,14 @@
           "target_cid": "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709"
         }
       ],
+      "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
+          "target_cid": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf"
+        }
+      ],
       "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457": [
         {
           "basis": "ctl/revision.parents",
@@ -22727,6 +22749,14 @@
           "path": "$.known_proposal_notes.ontology_proposal.current_claim_cid_at_index_creation",
           "source_cid": "ctlobj-sha256:e354866e0a727d51a9930ecdbcaad2914173186d3677cd9d5dac171b4f5cdb67",
           "target_cid": "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27"
+        }
+      ],
+      "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
+          "target_cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f"
         }
       ],
       "ctlobj-sha256:eb66725cc63683646c6ccecbeec016e9cf21f13cc2305aeca348a8a6620ec1a4": [
@@ -22976,6 +23006,9 @@
       "ctlobj-sha256:1b6b909494ca213a676687c6a843b4e2b026ba07ce9401dff94115cf52d0f6d6": [
         "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c"
       ],
+      "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f": [
+        "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f"
+      ],
       "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0": [
         "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583"
       ],
@@ -23144,6 +23177,9 @@
       ],
       "ctlobj-sha256:e805be64446cdcd8374073f26ecb8cdacbe56229158e6dd5be540cc59aaf616b": [
         "ctlobj-sha256:6b32bb8ab8e8715e7e6d0cbf0666519236b70ad4810a114a13512545a31282a1"
+      ],
+      "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf": [
+        "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93"
       ],
       "ctlobj-sha256:f216f081e23070584e37143bd02e3262eef81a7c7e72f039a187cdea4d11b2b5": [
         "ctlobj-sha256:0fde6403007cb9edb343317bbe4660f57eabd80999085d941e36276b116ca5f8"
@@ -28351,15 +28387,14 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
-          "current_root_cid": "ctlobj-sha256:78636c8e3f2edabc2df4aa49638526ac1462db078fb1c8e2ec3d2193752ec7e2",
-          "generated_at": "2026-07-16T23:03:00Z",
+          "current_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
+          "generated_at": "2026-07-16T23:23:00Z",
           "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
           "manifest_kind": null,
           "matched_by": [
-            "cid",
             "logical_id"
           ],
-          "parent_root_cid": "ctlobj-sha256:54070e5b8f60d87baf431a17da13a5f82f0ac968c8f8d5b83a22cc622bce0718",
+          "parent_root_cid": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
           "path": "manifests/lab-note-2026-07-16-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-figure21-pointed-modular-comparison.json",
           "profile": null,
@@ -33605,14 +33640,14 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
-          "current_root_cid": "ctlobj-sha256:78636c8e3f2edabc2df4aa49638526ac1462db078fb1c8e2ec3d2193752ec7e2",
-          "generated_at": "2026-07-16T23:03:00Z",
+          "current_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
+          "generated_at": "2026-07-16T23:23:00Z",
           "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
           "manifest_kind": null,
           "matched_by": [
             "cid"
           ],
-          "parent_root_cid": "ctlobj-sha256:54070e5b8f60d87baf431a17da13a5f82f0ac968c8f8d5b83a22cc622bce0718",
+          "parent_root_cid": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
           "path": "manifests/lab-note-2026-07-16-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-figure21-pointed-modular-comparison.json",
           "profile": null,
@@ -35322,14 +35357,14 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
-          "current_root_cid": "ctlobj-sha256:ab46670b08c5676df694c58db90947b59d35613237835fd924d9b4a140a0ee6e",
-          "generated_at": "2026-07-16T23:03:10Z",
+          "current_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "generated_at": "2026-07-16T23:23:10Z",
           "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
           "manifest_kind": null,
           "matched_by": [
             "cid"
           ],
-          "parent_root_cid": "ctlobj-sha256:78636c8e3f2edabc2df4aa49638526ac1462db078fb1c8e2ec3d2193752ec7e2",
+          "parent_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
           "path": "manifests/subject-definition-2026-07-16-claim-cluster-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
           "profile": null,
@@ -43479,6 +43514,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "generated_at": "2026-07-16T23:23:10Z",
+          "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
+          "path": "manifests/subject-definition-2026-07-16-claim-cluster-figure21-pointed-modular-comparison.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457": [
         {
           "admission_batch_cid": null,
@@ -48947,6 +49002,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
+          "generated_at": "2026-07-16T23:23:00Z",
+          "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
+          "path": "manifests/lab-note-2026-07-16-figure21-pointed-modular-comparison.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-figure21-pointed-modular-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf": [
         {
           "admission_batch_cid": null,
@@ -49168,15 +49243,14 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
-          "current_root_cid": "ctlobj-sha256:ab46670b08c5676df694c58db90947b59d35613237835fd924d9b4a140a0ee6e",
-          "generated_at": "2026-07-16T23:03:10Z",
+          "current_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "generated_at": "2026-07-16T23:23:10Z",
           "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
           "manifest_kind": null,
           "matched_by": [
-            "cid",
             "logical_id"
           ],
-          "parent_root_cid": "ctlobj-sha256:78636c8e3f2edabc2df4aa49638526ac1462db078fb1c8e2ec3d2193752ec7e2",
+          "parent_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
           "path": "manifests/subject-definition-2026-07-16-claim-cluster-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
           "profile": null,
@@ -54059,7 +54133,7 @@
         "word_count": 162
       },
       "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f": {
-        "active_state": "active",
+        "active_state": "superseded",
         "cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
         "created_at": "2026-07-16T23:02:00Z",
         "created_by": {
@@ -59008,6 +59082,36 @@
         },
         "word_count": 38
       },
+      "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
+        "created_at": "2026-07-16T23:22:10Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 628,
+        "gist": "active",
+        "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"figure21-pointed-modular-comparison\",\"figure21-pointed-rank2-rank5-computation\",\"figure21-pointed-standard-distribution-comparison\"],\"current_view_hints\":{\"guardrail\":\"Do not summarize this cluster as an H2-certified no-signal theorem. The raw rank-2 same-label comparison has recorded +1/-1 count differences, but the current artifact aligns both semion rows by the explicit output phase -1; rank 2-5 pointed rows then all match under the stated comparison rule.\",\"headline\":\"Pointed rank 2-5 Figure 21 batch complete; phase-aligned standard comparison all match, with raw rank2 -1 output normalization recorded.\",\"pointed_batch_artifact\":\"experiments/results/akbulut-yasui/figure21-pointed-batch-result-v1.json\",\"primary_note\":\"claim:lab-note:2026-07-16-figure21-pointed-modular-comparison\",\"rank2_rank3_comparison_artifact\":\"experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json\",\"rank4_comparison_artifact\":\"experiments/results/akbulut-yasui/figure21-rank4-standard-comparison-v1.json\",\"rank5_comparison_artifact\":\"experiments/results/akbulut-yasui/figure21-rank5-standard-comparison-v1.json\"},\"display_name\":\"Figure 21 pointed modular comparison cluster\",\"parent_subject_ids\":[\"subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime\",\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Append-only cluster for the completed pointed modular Figure 21 distribution batch and its same-label comparison with the split CP2#9(-CP2) standard distribution. It records the rank-2 raw output-bucket difference, the explicit phase alignment that makes rank 2 match, the rank-3 through rank-5 matches, and the non-claim that this is not an H2-certified exoticness theorem.\",\"status\":\"active\",\"subject_id\":\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\",\"subject_kind\":\"ty:claim-cluster\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1939,
+          "base_estimate": 546,
+          "estimated_tokens": 628,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 82,
+          "serialized_character_count": 1939,
+          "unicode_scalar_count": 1939,
+          "utf8_bytes": 1939
+        },
+        "word_count": 121
+      },
       "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457": {
         "active_state": "active",
         "cid": "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
@@ -62128,6 +62232,36 @@
         },
         "word_count": 18
       },
+      "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
+        "created_at": "2026-07-16T23:22:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 2553,
+        "gist": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. The raw same-label rank-2 comparison has a recorded +1/-1 output bucket swap, but the regenerated rank2/rank3 comparison artifact proves that both rank-2 semion rows match the split CP2#9(-...",
+        "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"figure21-pointed-batch-result-v1\",\"content_hash\":\"sha256:8d666986b0a8b440276de8d90d5d48a14fdd3bf71bccd6b8c373a040418439f4\",\"git_blob\":\"4d98f7f4efae26d3140fb6d4c22c4e097d54f7a9\",\"path\":\"experiments/results/akbulut-yasui/figure21-pointed-batch-result-v1.json\",\"sha256\":\"b7d78b4f04ed013b763b5c853cfe570acb6e469bc829628a732e7bff2264763c\",\"status\":\"PASS_POINTED_FIGURE21_BATCH_COMPLETE\"},{\"artifact_id\":\"figure21-rank2-rank3-standard-comparison-v1\",\"content_hash\":\"sha256:95d9a83a3a6eebe135ab4443d4553cacd1bb93a0e493cec4e540714825f0f88e\",\"git_blob\":\"10ea53e19da00b99f6b165120adf9bb7297c4a54\",\"path\":\"experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json\",\"sha256\":\"15a662d96b3d44b694460d598699264924415f6c9f176cfc11b88dd5dae3bcb7\",\"status\":\"PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED\"},{\"artifact_id\":\"figure21-rank4-standard-comparison-v1\",\"content_hash\":\"sha256:80302549965499c555ecb3d42b2591cf338c5841ced708f003096b8fcef85629\",\"git_blob\":\"bdfa9612a414f4ea1413bf053eceecc06687fd9c\",\"path\":\"experiments/results/akbulut-yasui/figure21-rank4-standard-comparison-v1.json\",\"sha256\":\"1cbe94cbedae31fe54ccebbcb6a15da76e97be071ed7b33a17961a2bd46f6e86\",\"status\":\"PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH\"},{\"artifact_id\":\"figure21-rank5-standard-comparison-v1\",\"content_hash\":\"sha256:1c0c4be77a4351b5aff3f766dd02494c54d5b4f6cf255b80177e92466a264844\",\"git_blob\":\"0b44ab2b855397be991e82c238020a293e0401d9\",\"path\":\"experiments/results/akbulut-yasui/figure21-rank5-standard-comparison-v1.json\",\"sha256\":\"a92d837b22df1c2a566ee14897bd924c0216f6094b5e67736c1a409a3e46468b\",\"status\":\"PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH\"},{\"artifact_id\":\"current-low-rank-figure21-terminal-package-v1\",\"content_hash\":\"sha256:7f479aaf65dbbeecaaf430b26c207001d707d9509bbbe49f2cd37f0525c42616\",\"git_blob\":\"791b6bc1a2066abe4a5acb5e085ee0c4acc64d1e\",\"path\":\"experiments/results/akbulut-yasui/current-low-rank-figure21-terminal-package-v1.json\",\"sha256\":\"f7078919229b175485847c5b87421092df79f06c195281a5d56ba2d02ff41771\",\"status\":\"TERMINAL_WITH_EXPLICIT_BLOCKERS\"}],\"checks\":{\"h2_certification_not_claimed\":\"PASS\",\"no_global_no_signal_claim\":\"PASS\",\"nonpointed_rows_not_included\":\"PASS\",\"phase_aligned_pointed_rows_all_match\":\"PASS\",\"pointed_batch_all_rows_terminal\":\"PASS\",\"rank2_phase_alignment_passes\":\"PASS\",\"rank2_raw_difference_recorded\":\"PASS\",\"rank3_all_match_recorded\":\"PASS\",\"rank4_all_match_recorded\":\"PASS\",\"rank5_all_match_recorded\":\"PASS\"},\"created_at\":\"2026-07-16T23:02:00Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not complete all rank 2-5 MTC/ribbon scans.\",\"This note does not include nonpointed low-rank modular categories.\",\"This note does not certify the Figure 21 transcription against the printed diagram.\",\"This note does not certify an H2 coordinate map between Figure 21 and the split standard presentation.\",\"The rank-2 raw same-label distribution differences are output-normalized by the explicit phase multiplier -1+0i; this is not promoted to a label automorphism theorem or an H2 coordinate certificate.\",\"The rank-2 through rank-5 phase-aligned matches are not promoted to a no-signal theorem.\",\"This note does not claim Figure 21 is exotic or standard.\"],\"mathematical_status\":\"COMPUTED_POINTED_PHASE_ALIGNED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM\",\"note_id\":\"objective-note-2026-07-16-figure21-pointed-modular-comparison\",\"results\":{\"pointed_batch\":{\"complete_rows\":15,\"coverage\":{\"rank2\":\"2 rows complete from full prefix sweep\",\"rank3\":\"2 rows complete from chunk aggregate\",\"rank4\":\"9 rows complete from chunk aggregate\",\"rank5\":\"2 rows complete from chunk aggregate\"},\"status\":\"PASS_POINTED_FIGURE21_BATCH_COMPLETE\"},\"same_label_standard_comparison\":{\"comparison_rule\":\"Compare Figure 21 nonzero projector-sector value distributions with the split CP2#9(-CP2) fixed-label distribution, allowing only the explicit recorded output phase alignment per row, and without a certified H2 coordinate identification.\",\"phase_aligned_matching_row_count\":15,\"rank2_phase_alignment_summary\":\"Both semion rows match exactly after multiplying the Figure 21 nonzero output values by -1+0i. This is an output normalization alignment, not a label automorphism and not an H2 coordinate certificate.\",\"rank2_rank3_status\":\"PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED\",\"rank2_raw_difference_summary\":\"Both semion rows have the same raw same-label difference from the split standard distribution, {'+1+0i': -32, '-1+0i': 32}, after removing Figure 21 zero projector sectors.\",\"rank3_summary\":\"Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors; their phase alignment multiplier is +1+0i.\",\"rank4_status\":\"PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH\",\"rank4_summary\":\"All 9 rank-4 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.\",\"rank5_status\":\"PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH\",\"rank5_summary\":\"Both rank-5 SU(5)_1 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.\"}},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_row_count\":0,\"category_scope\":\"POINTED_MODULAR_RANK_2_TO_5_ROWS_ONLY\",\"complete_row_count\":15,\"exoticness_claim_made\":false,\"figure21_input_status\":\"DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM\",\"git_clean_before_payload_creation\":true,\"h2_coordinate_map_certified\":false,\"main_merge_status_before_admission\":\"local main a329f9121a70255bc5b623a924d8bd6776fc95df was already an ancestor; git merge --no-ff main reported Already up to date\",\"nonpointed_rows_included\":false,\"rank2_row_count\":2,\"rank3_row_count\":2,\"rank4_row_count\":9,\"rank5_row_count\":2,\"row_count\":15,\"source_repo_commit\":\"9fe0d180f355947cb1245f9f54e07b97766bff2b\",\"standard_side\":\"split CP2#9(-CP2), 1 positive and 9 negative diagonal framings\"},\"status\":\"POINTED_FIGURE21_COMPARISON_PHASE_ALIGNED_ALL_MATCH\",\"subjects\":[\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\",\"subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime\",\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":71,\"command\":\"env UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=. uv run pytest tests/test_figure21_rank2_rank3_standard_comparison_v1.py tests/test_figure21_pointed_worker_plan_v1.py tests/test_current_low_rank_figure21_terminal_package_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_partial_target_readiness_probe_v1.py tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_ribbon_graph_evaluator.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py\",\"status\":\"pass\"},{\"command\":\"CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify\",\"status\":\"pass_before_payload_creation\"}],\"title\":\"Figure 21 pointed modular comparison phase-aligned\",\"top_notice\":\"The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. The raw same-label rank-2 comparison has a recorded +1/-1 output bucket swap, but the regenerated rank2/rank3 comparison artifact proves that both rank-2 semion rows match the split CP2#9(-CP2) standard distribution after the explicit output phase multiplier -1. Rank 3, rank 4, and rank 5 already match with the identity output phase. Thus the pointed rank 2-5 rows have no recorded distribution difference after the stated nonzero-projector and output-phase alignment rule. This is still not an H2-certified exoticness theorem and not a global no-signal theorem.\"}",
+        "title": "Figure 21 pointed modular comparison phase-aligned",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 7892,
+          "base_estimate": 2220,
+          "estimated_tokens": 2553,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 333,
+          "serialized_character_count": 7892,
+          "unicode_scalar_count": 7892,
+          "utf8_bytes": 7892
+        },
+        "word_count": 398
+      },
       "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf": {
         "active_state": "active",
         "cid": "ctlobj-sha256:e3f8a55e1dbb12920eefec961b48cf2e8468157ce1ac84125a7eb351d8c282bf",
@@ -62429,7 +62563,7 @@
         "word_count": 17
       },
       "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf": {
-        "active_state": "active",
+        "active_state": "superseded",
         "cid": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf",
         "created_at": "2026-07-16T23:02:10Z",
         "created_by": {
@@ -63800,6 +63934,14 @@
           "target_cid": "ctlobj-sha256:20a8bc5427f70a0ccfc25ebc70bfbc5a898f9d43a1f940b57d479cafdd76fbfa"
         }
       ],
+      "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
+          "target_cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f"
+        }
+      ],
       "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0": [
         {
           "basis": "ctl/revision.parents",
@@ -64592,6 +64734,14 @@
           "target_cid": "ctlobj-sha256:e805be64446cdcd8374073f26ecb8cdacbe56229158e6dd5be540cc59aaf616b"
         }
       ],
+      "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
+          "target_cid": "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf"
+        }
+      ],
       "ctlobj-sha256:eeff026221e0caaeacae838de8b38fd0ec972423f499b3f116e18ff50c51ae19": [
         {
           "basis": "payload",
@@ -64759,7 +64909,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T23:12:21Z",
+  "generated_at": "2026-07-16T23:26:46Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -67293,17 +67443,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
+  "root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 73788,
+    "build_ms": 74837,
     "context_source": "current-context-replay",
-    "current_context_ms": 69151,
-    "discovery_index_ms": 4505,
+    "current_context_ms": 70120,
+    "discovery_index_ms": 4586,
     "payload_summaries_ms": 43,
     "resource_index_ms": 43,
     "write_ms": 44
   },
-  "transition_cid": "ctlobj-sha256:55939c4286a39daf88908160360b2558bfda39aa8920f08f365a3ccd393a8d6b"
+  "transition_cid": "ctlobj-sha256:2353487f621ed194c6fb54e35aa181af3868fe60efbcb3800ad83bbce9ebf2d0"
 }
