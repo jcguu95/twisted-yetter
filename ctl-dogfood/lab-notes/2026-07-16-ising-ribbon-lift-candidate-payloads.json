@@ -1,0 +1,90 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-ising-ribbon-lift-candidate-payloads",
+  "title": "Ising ribbon-lift candidate payloads materialized",
+  "created_at": "2026-07-16T06:53:29Z",
+  "created_by": "actor:codex",
+  "status": "ISING_RIBBON_LIFT_CANDIDATE_PAYLOADS_MATERIALIZED_NOT_CERTIFIED",
+  "top_notice": "The next Ising row-completion substep was completed: all 16 pending ribbon-lift slots were materialized as hash-bound candidate payloads by binding each slot to its source SU(2)_2 Galois branch F/R/twist/fusion data and candidate spherical dimension sign. This is still candidate input only. It does not materialize evaluation/coevaluation maps, does not produce formal ribbon_realization_snapshot artifacts, and does not certify pivotal/ribbon compatibility.",
+  "scope": {
+    "prior_current_note": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
+    "family_id": "rank3-ising",
+    "payload_set_id": "ising-ribbon-lift-candidate-payloads-v1",
+    "braided_class_count": 8,
+    "candidate_payload_count": 16,
+    "candidate_payloads_per_braided_class": 2,
+    "formal_snapshot_count": 0,
+    "pending_certificate_count": 48,
+    "row_complete_status": "NOT_ROW_COMPLETE",
+    "formal_scan_plan_allowed_after_this_note": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "ising-ribbon-lift-candidate-payloads-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-candidate-payloads-v1.json",
+      "git_blob": "439750d1fdbd646477170897d78fc7421a834d2a",
+      "sha256": "23fdf4fe4288238405155c351977162241cca08970c29b8cd61cbef7873eb836",
+      "content_hash": "sha256:f093eababb6541e7c90f7a7c24283fc0b11d64aed3175c8432cb2d8dd1abf5ba",
+      "status": "ISING_RIBBON_LIFT_CANDIDATE_PAYLOADS_MATERIALIZED_NOT_CERTIFIED"
+    },
+    {
+      "artifact_id": "ising-ribbon-lift-candidate-payloads-builder-v1",
+      "path": "experiments/scripts/build_ising_ribbon_lift_candidate_payloads_v1.py",
+      "git_blob": "693fab208e6a99a668b252c326ef11313652e0b5",
+      "sha256": "ef7d4fb02767b24fee6128e602fc6407ceae9bef9c3de4645b8a3501c9a5fdb5",
+      "status": "BUILDER_ADDED"
+    },
+    {
+      "artifact_id": "ising-ribbon-lift-candidate-payloads-tests-v1",
+      "path": "tests/test_ising_ribbon_lift_candidate_payloads_v1.py",
+      "git_blob": "ba12c04ebbdf3c2954bde1183792f8d04ac579b8",
+      "sha256": "0f8f0eaed7fecab23bde066b020cc7f3c6c8e2a73f205166105db8603030f8a4",
+      "status": "TEST_ADDED"
+    }
+  ],
+  "checks": {
+    "input_slot_ledger_has_16_pending_slots": "PASS",
+    "input_slot_ledger_has_no_formal_snapshots": "PASS",
+    "branch_export_has_8_candidates": "PASS",
+    "candidate_payload_count_is_16": "PASS",
+    "slot_ids_are_unique": "PASS",
+    "candidate_payload_hashes_are_unique": "PASS",
+    "two_payloads_per_braided_class": "PASS",
+    "all_payloads_are_not_formal_snapshots": "PASS",
+    "all_certificates_still_missing": "PASS",
+    "all_payloads_bind_source_branch_hash": "PASS",
+    "all_payloads_include_f_r_twist_fusion": "PASS",
+    "scan_gates_remain_closed": "PASS"
+  },
+  "tests": [
+    {
+      "command": "python3 experiments/scripts/build_ising_ribbon_lift_candidate_payloads_v1.py --write",
+      "status": "pass"
+    },
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_su2k_galois_branch_candidates.py tests/test_low_rank_nontrivial_growth_status_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+      "status": "pass",
+      "collected": 27
+    }
+  ],
+  "remaining_growth": [
+    "materialize evaluation and coevaluation maps for each of the 16 Ising candidate payloads",
+    "check pivotal naturality, monoidality, and spherical trace per payload",
+    "check twist/balancing/ribbon compatibility per payload",
+    "produce producer/runtime/ribbon-pivotal certificates for every surviving payload",
+    "promote only passing payloads to ribbon_realization_snapshot artifacts"
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not produce ribbon_realization_snapshot formal evidence.",
+    "This note does not certify pivotal naturality, monoidality, spherical trace, or twist/balancing/ribbon compatibility.",
+    "This note does not prove that all sixteen candidate payloads survive ribbon compatibility.",
+    "This note does not establish Ising row-complete ribbon classification."
+  ],
+  "mathematical_status": "ISING_RIBBON_LIFT_CANDIDATE_PAYLOADS_MATERIALIZED; ISING_RIBBON_CERTIFICATES_PENDING; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+  "subjects": [
+    "subject:twisted-yetter:reference:low-rank-mtc-classification"
+  ]
+}
