@@ -1,0 +1,86 @@
+{
+  "created_at": "2026-07-15T23:56:50Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-15-rank4-semion-times-fibonacci-ribbon-realization-partial-progress",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-ribbon-realization-catalog-v6",
+        "commit": "8b01c6fdf9c4c527051eecc7d7fc0797c052e6d6",
+        "git_blob": "8816e61902f0e5df72a845bd87e6234ecfdf891a",
+        "new_product_snapshot_count": 8,
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v6.json",
+        "sha256": "450c24f201bac822d66ee46a5b81cc36e48bf0870f1acc3b517ab4e6bf7918f7",
+        "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+      },
+      {
+        "artifact_id": "formal-low-rank-scan-readiness-v6",
+        "commit": "8b01c6fdf9c4c527051eecc7d7fc0797c052e6d6",
+        "git_blob": "51a34488994fac522fdcb80d9c97e8c07e4c052d",
+        "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v6.json",
+        "sha256": "7e58961edf4e7a557888357fdbbb29df0f49f90266ff0bce26dd7d0f9051bb66",
+        "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+      }
+    ],
+    "created_at": "2026-07-15T23:56:50Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not authorize any formal scan plan.",
+      "This note does not resolve rank4 pointed Z4, rank4 pointed Z2xZ2, or rank4 Fib x Fib rows.",
+      "This note does not resolve Ising, SU(2), PSU, or PSU(3) rows.",
+      "This note does not publish a final ribbon denominator."
+    ],
+    "mathematical_status": "FIVE_ROWS_FORMAL_RIBBON_PROGRESS_NINE_ROWS_REMAIN_BLOCKED",
+    "note_id": "objective-note-2026-07-15-rank4-semion-times-fibonacci-ribbon-realization-partial-progress",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_family_row_count": 9,
+      "formal_scan_plan_allowed": false,
+      "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY",
+      "ranks": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "resolved_family_ids": [
+        "rank2-cyclic-z2",
+        "rank2-fibonacci-yang-lee",
+        "rank3-cyclic-z3",
+        "rank4-semion-times-fibonacci",
+        "rank5-su5-1"
+      ],
+      "resolved_family_row_count": 5
+    },
+    "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 53,
+        "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Rank 4 Semion x Fibonacci/Yang-Lee row resolved as partial low-rank ribbon progress",
+    "top_notice": "The rank4-semion-times-fibonacci family row now has eight Deligne-product ribbon realization snapshots built from pinned validated semion and Fibonacci/Yang-Lee factor snapshots. The low-rank ribbon catalog remains partial: 5 rows resolved, 9 rows blocked, and formal scan-plan generation is still disabled.",
+    "validated_behaviors": [
+      "The eight rank4 Semion x Fibonacci/Yang-Lee product snapshots pass validate_formal_evidence.",
+      "Each product snapshot pins one validated rank2-cyclic-z2 semion factor snapshot and one validated rank2-fibonacci-yang-lee factor snapshot.",
+      "The product certificates record factorwise pentagon, hexagon, balancing, ribbon/pivotal compatibility, and modularity inheritance.",
+      "The v6 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+      "The v6 readiness artifact keeps scan_plan_generation_allowed=false."
+    ]
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
