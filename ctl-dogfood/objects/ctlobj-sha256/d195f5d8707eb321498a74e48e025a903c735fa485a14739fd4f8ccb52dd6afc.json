@@ -1,0 +1,106 @@
+{
+  "created_at": "2026-07-16T07:02:15Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+  "parents": [],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "ising-ribbon-lift-certification-preflight-v1",
+        "content_hash": "sha256:ed370de42dbcdf5aaf36857a290487b11032f48b5642e5c729a78555cc1494d6",
+        "git_blob": "57ad3b7f4955f0e732c8ddb059374254dfbac4e9",
+        "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-certification-preflight-v1.json",
+        "sha256": "5c631ca6edf4cf6ba224ae08dce6650b67a1bb4c203d0a068050a96aa19e7586",
+        "status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED"
+      },
+      {
+        "artifact_id": "ising-ribbon-lift-certification-preflight-builder-v1",
+        "git_blob": "b9d5a220e39e52c7fa80f32889692b08effc49f9",
+        "path": "experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py",
+        "sha256": "c232f692902cf04a0fb439b9c611d55049be8025e3412ba701977fe692c67031",
+        "status": "BUILDER_ADDED"
+      },
+      {
+        "artifact_id": "ising-ribbon-lift-certification-preflight-tests-v1",
+        "git_blob": "4f68de13c6383b8ce83e397a2800c15af8d32546",
+        "path": "tests/test_ising_ribbon_lift_certification_preflight_v1.py",
+        "sha256": "ab07a66adf8ebd1b917eb5232e2ec838674d7b56c4a7dd7ef3846fe8de04e5c7",
+        "status": "TEST_ADDED"
+      }
+    ],
+    "blocking_requirements_summary": [
+      "evaluation/coevaluation maps are not materialized in candidate payloads",
+      "fusion pairings are not formally certified for row completion",
+      "producer exact/symbolic coherence certificates are missing",
+      "runtime consumer coherence certificates are missing",
+      "ribbon/pivotal compatibility certificates are missing",
+      "candidate payloads have not been promoted to ribbon_realization_snapshot artifacts"
+    ],
+    "checks": {
+      "all_payloads_block_on_eval_coeval_maps": "PASS",
+      "all_payloads_block_on_pairing_certificate": "PASS",
+      "all_payloads_block_on_three_certificates": "PASS",
+      "candidate_payload_count_is_16": "PASS",
+      "no_payload_ready_for_snapshot_promotion": "PASS",
+      "numeric_pivotal_profile_is_not_formal_certificate": "PASS",
+      "preflight_record_hashes_are_unique": "PASS",
+      "scan_gates_remain_closed": "PASS"
+    },
+    "created_at": "2026-07-16T07:02:15Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim a formal scan plan exists.",
+      "This note does not produce ribbon_realization_snapshot formal evidence.",
+      "This note does not establish Ising row-complete ribbon classification.",
+      "This note does not say the Ising row is impossible; it records that candidate-only data cannot be promoted."
+    ],
+    "mathematical_status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED_ON_MISSING_FORMAL_MAPS_AND_CERTIFICATES; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+    "note_id": "objective-note-2026-07-16-ising-ribbon-lift-certification-preflight",
+    "remaining_growth": [
+      "derive or materialize evaluation and coevaluation maps in the pinned SU(2)_2 Galois branch gauge",
+      "certify fusion pairing invertibility in the pinned basis/gauge",
+      "run exact/symbolic producer coherence checks",
+      "run runtime consumer coherence checks",
+      "run twist/balancing/ribbon-pivotal compatibility checks",
+      "promote only passing records to formal ribbon_realization_snapshot artifacts"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_payload_count": 16,
+      "candidate_payload_count": 16,
+      "family_id": "rank3-ising",
+      "formal_scan_plan_allowed_after_this_note": false,
+      "formal_snapshot_count": 0,
+      "preflight_id": "ising-ribbon-lift-certification-preflight-v1",
+      "prior_current_note": "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads",
+      "ready_for_snapshot_promotion_count": 0,
+      "row_complete_status": "NOT_ROW_COMPLETE"
+    },
+    "status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "command": "python3 experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py --write",
+        "status": "pass"
+      },
+      {
+        "collected": 34,
+        "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Ising ribbon-lift certification preflight blocked candidate-only promotion",
+    "top_notice": "The next Ising certificate-layer substep was completed: all 16 hash-bound candidate payloads were run through a fail-closed formal snapshot promotion preflight. The preflight correctly blocked every payload because none has materialized evaluation/coevaluation maps, certified fusion pairing, or producer/runtime/ribbon-pivotal certificates. This is not a row-complete result; it is a precise blocker against silently promoting candidate-only data."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

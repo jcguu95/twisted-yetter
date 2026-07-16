@@ -1,0 +1,588 @@
+{
+  "blocked_payload_count": 16,
+  "blocking_requirements_summary": [
+    "evaluation/coevaluation maps are not materialized in candidate payloads",
+    "fusion pairings are not formally certified for row completion",
+    "producer exact/symbolic coherence certificates are missing",
+    "runtime consumer coherence certificates are missing",
+    "ribbon/pivotal compatibility certificates are missing",
+    "candidate payloads have not been promoted to ribbon_realization_snapshot artifacts"
+  ],
+  "candidate_payload_count": 16,
+  "checks": {
+    "all_payloads_block_on_eval_coeval_maps": true,
+    "all_payloads_block_on_pairing_certificate": true,
+    "all_payloads_block_on_three_certificates": true,
+    "candidate_payload_count_is_16": true,
+    "input_candidate_payload_set_hash_bound": true,
+    "no_payload_ready_for_snapshot_promotion": true,
+    "numeric_pivotal_profile_is_not_formal_certificate": true,
+    "preflight_record_hashes_are_unique": true
+  },
+  "content_hash": "sha256:ed370de42dbcdf5aaf36857a290487b11032f48b5642e5c729a78555cc1494d6",
+  "explicit_non_claims": [
+    "This preflight does not establish Ising row-complete ribbon classification.",
+    "This preflight does not produce ribbon_realization_snapshot formal evidence.",
+    "This preflight does not authorize scan-plan generation.",
+    "The recorded numeric SU(2)_k pivotal profile is not used as a formal certificate."
+  ],
+  "family_id": "rank3-ising",
+  "formal_scan_plan_allowed": false,
+  "formal_snapshot_count": 0,
+  "formal_snapshot_promotion_requirements": {
+    "balancing": "PASS_REQUIRED",
+    "category_contract": "RibbonFusionCategoryV2",
+    "category_data_hash": "REQUIRED_SHA256",
+    "consumer_runtime_coherence": "PASS_REQUIRED",
+    "duality_involution": "PASS_REQUIRED",
+    "fusion_pairing_invertible": "PASS_REQUIRED",
+    "hexagon": "PASS_REQUIRED",
+    "pentagon": "PASS_REQUIRED",
+    "producer_exact_coherence": "PASS_REQUIRED",
+    "r_inverse": "PASS_REQUIRED",
+    "ribbon_pivotal_compatibility_certificate": "PASS_REQUIRED",
+    "ribbon_pivotal_compatibility_structural_check": "PASS_REQUIRED",
+    "rigidity": "PASS_REQUIRED"
+  },
+  "generated_at_utc": "2026-07-16T07:01:48Z",
+  "generator_script": "experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py",
+  "git": {
+    "commit": "ae19271fa0202c4f57f4e3b8477c5833e4e3d439",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "candidate_payload_set": {
+      "content_hash": "sha256:f093eababb6541e7c90f7a7c24283fc0b11d64aed3175c8432cb2d8dd1abf5ba",
+      "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-candidate-payloads-v1.json",
+      "sha256": "sha256:23fdf4fe4288238405155c351977162241cca08970c29b8cd61cbef7873eb836",
+      "status": "ISING_RIBBON_LIFT_CANDIDATE_PAYLOADS_MATERIALIZED_NOT_CERTIFIED"
+    },
+    "formal_admission_validator": {
+      "path": "src/twisted_yetter/foundation_safety.py",
+      "sha256": "sha256:672ff6b57ac3985456c5bd6e235988371494995c2c154fd3a23413372e9d133a"
+    },
+    "numeric_pivotal_profile_reference": {
+      "formal_certificate": false,
+      "path": "experiments/inputs/category-pivotal/su2-k-standard-pivotal-v1.json",
+      "reason": "Numeric Morse control profile is useful convention evidence, but not a producer/runtime/ribbon-pivotal formal certificate.",
+      "sha256": "sha256:56f922d12ea14abe1da0a6512a4835f1c35c7a63a5cc8c0513b147832c304e45",
+      "status": "SUPPORTED_FOR_NUMERIC_MORSE_CONTROLS"
+    }
+  },
+  "preflight_id": "ising-ribbon-lift-certification-preflight-v1",
+  "preflight_records": [
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^1",
+      "candidate_payload_hash": "sha256:9c77988539ddbd8e0f8a6a40dcb56b917504960efa69c58d4e0135ed729b0c08",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:1180c7c7bb6c1fb1909025a06764d42bdd153a6180f7d755c28930106e020d7e",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^1:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:2a2004f256926e829ae3fb8ed0986af84b73aa7950a93639d53ee45207afe3c0",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-11",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^1",
+      "candidate_payload_hash": "sha256:1be3c874a024bd0d1c2589901bd8d450a3e083a496e91e6e6c9129a749241261",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:8604a4a1322a28cebbfeaa1b8f59ddc1db7a1df6d5135f0d83bbeba534479f14",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^1:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:2a2004f256926e829ae3fb8ed0986af84b73aa7950a93639d53ee45207afe3c0",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-11",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^3",
+      "candidate_payload_hash": "sha256:47a01037368cd5720ac0d3499caa0ae1c3c49b1099588f6746864cce291fde7f",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:c6deef0f1879deeb2526c1a840a427f3674201dba85f541b4ce8435740c92681",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^3:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:d6fc48be21c38f02d6b598fa6d5f11f252bdb03ec1eb0f809a4450934c794bcd",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-1",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^3",
+      "candidate_payload_hash": "sha256:ac6c24c61110e6b72aa68a53727f5abb774642780b01922aaadd7092cf3ca5e4",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:32e097ccef7001df576674c24b675005e84f4f5271067f566c164710ac74c2ff",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^3:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:d6fc48be21c38f02d6b598fa6d5f11f252bdb03ec1eb0f809a4450934c794bcd",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-1",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^5",
+      "candidate_payload_hash": "sha256:74366581ca6c801dd22061cc69360c271e8a2f946df720b6a3bfffcbd30e4494",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:975d01b2baf9a47c7e801c4a5e6bc00eaab361110f33b1a556c2b7381c25c6b9",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^5:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:7f7a866af9feecdcaef9cb110a79fb68c9933033766e79f415808d620bd57b36",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-7",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^5",
+      "candidate_payload_hash": "sha256:a5da00407a30f95321c684ba22354295f26cf0847cd5956bfc5d7900cfed32bb",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:97439d5ab4aca1650a32cc68fad3b6c3ed05e0df17f73e8f4c8e389995eeef80",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^5:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:7f7a866af9feecdcaef9cb110a79fb68c9933033766e79f415808d620bd57b36",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-7",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^7",
+      "candidate_payload_hash": "sha256:b338dfbccbc833e8e7e61519c832143a55cd348eb8135b99b33f4c034154bcbd",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:379c3669f7b556faed78962a114f956a4638f93393d39c5de0d86ea09a38d9f0",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^7:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:255410402831031b3e24649ae6c656f883de19e5e21982eda9db8f66c3127f6b",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-13",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^7",
+      "candidate_payload_hash": "sha256:809957260875f202e502d535d8d813bdd6265d541164aff7c4b14137d2630f62",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:49fa14f1993242261d73511bfb6d88bbfbd542be6904b7f129477d42eda097d5",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^7:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:255410402831031b3e24649ae6c656f883de19e5e21982eda9db8f66c3127f6b",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-13",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^9",
+      "candidate_payload_hash": "sha256:dc7ddbe010bfd9a71da2811cd58c434fccc9c832c19d39696ef67d7eece6273a",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:9fbc396b4a140a8041d5781d2bef0dc630e9cc4b05514a0b42c0872f71775624",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^9:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:e5c83f4872e150baca3e501583febb13cb5525e985695b71d30ca8dbb9ff2352",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-3",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^9",
+      "candidate_payload_hash": "sha256:90dc33a03ede5e9d99d9bc8a99b2512437ddc3b02ee28a34d638cf98430014c6",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:ebc0a2dad5c56b90bb6a613f4d159959e2a3a96151693e824f4d56a7a6021192",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^9:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:e5c83f4872e150baca3e501583febb13cb5525e985695b71d30ca8dbb9ff2352",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-3",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^11",
+      "candidate_payload_hash": "sha256:391001084624e614e110c61dccbca6f8f2adaf36734f80044a1707add032e560",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:6e05355b321fecf70ce17e216534effd8101c413faaf44befaf297242edad308",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^11:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:8e96053fb1cfbeada08c6fc760044515953c48694233ac058c73ae655f3f87b1",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-9",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^11",
+      "candidate_payload_hash": "sha256:9f8528150bc073581fbb4581aad8cc07722849f59b31c9e7f3b3f0ba25bcf0a8",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:0bdd288885b340b11e4c57fd859cde4c153db5543a93cdcdc09ae94b93339686",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^11:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:8e96053fb1cfbeada08c6fc760044515953c48694233ac058c73ae655f3f87b1",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-9",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^13",
+      "candidate_payload_hash": "sha256:132752f343025db22622bf3c4fbd61e25227970366d9dcc965317fd2d2e9e615",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:892b17ff4bb74375c25a93da48a8735facf5953140f31add8f6db58ae20a6c5d",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^13:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:967980884548227c04b4b14c144d87b97801a8ceb9b0e4e94f51fd920c664540",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-15",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^13",
+      "candidate_payload_hash": "sha256:c2fd5ae8eb69af3dba2f9289747365acad01d8452fd77985561c6a21adde1786",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:64d78204cc71538d188da69de537778024d2d27a1b72cca1836bacc747b4ac1c",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^13:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:967980884548227c04b4b14c144d87b97801a8ceb9b0e4e94f51fd920c664540",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-15",
+      "spherical_lift_label": "minus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^15",
+      "candidate_payload_hash": "sha256:34415bdfb93eb5d8c08aa60a83983102a1e03c12520e0f65bbffe8b1ddb4ea46",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:0007d953612063e0ddb2ad9d31964642f04c035c096123a1d434c77e08085ca5",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^15:spherical-lift=plus",
+      "source_branch_data_hash": "sha256:9f3518829151d747cc8a860187b70f6b21e4a75e3de240da4e0e28475ee5c9f0",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-5",
+      "spherical_lift_label": "plus"
+    },
+    {
+      "blocking_summary": "Candidate payload has F/R/twist/fusion data but lacks formal evaluation/coevaluation maps, certified fusion pairing, and producer/runtime/ribbon-pivotal certificates.",
+      "braided_class_id": "rank3-ising:theta_sigma=zeta16^15",
+      "candidate_payload_hash": "sha256:15ca8a2318406b700b9805441a5faf60f9d03720c97db98bbe6d0a0981b1098d",
+      "checks": {
+        "candidate_payload_hash_present": true,
+        "evaluation_coevaluation_maps_materialized": false,
+        "f_r_twist_fusion_payload_present": true,
+        "formal_snapshot_produced": false,
+        "fusion_pairing_certified": false,
+        "producer_exact_certificate_passed": false,
+        "ribbon_pivotal_certificate_passed": false,
+        "runtime_consumer_certificate_passed": false,
+        "source_branch_hash_present": true
+      },
+      "formal_snapshot_hash": null,
+      "missing_requirements": [
+        "evaluation_coevaluation_maps_materialized",
+        "fusion_pairing_certified",
+        "producer_exact_certificate_passed",
+        "runtime_consumer_certificate_passed",
+        "ribbon_pivotal_certificate_passed",
+        "formal_snapshot_produced"
+      ],
+      "preflight_record_hash": "sha256:72f0be09de2667be8e0e9a8681f8dfaaca20a26136bd70d8de571a6545c44159",
+      "preflight_status": "BLOCKED_MISSING_FORMAL_PIVOTAL_RIBBON_EVIDENCE",
+      "slot_id": "rank3-ising:theta_sigma=zeta16^15:spherical-lift=minus",
+      "source_branch_data_hash": "sha256:9f3518829151d747cc8a860187b70f6b21e4a75e3de240da4e0e28475ee5c9f0",
+      "source_branch_id": "rank3-ising-su2-level2-galois-power-5",
+      "spherical_lift_label": "minus"
+    }
+  ],
+  "ready_for_snapshot_promotion_count": 0,
+  "remaining_growth": [
+    "derive or materialize evaluation and coevaluation maps in the pinned SU(2)_2 Galois branch gauge",
+    "certify fusion pairing invertibility in the pinned basis/gauge",
+    "run exact/symbolic producer coherence checks",
+    "run runtime consumer coherence checks",
+    "run twist/balancing/ribbon-pivotal compatibility checks",
+    "promote only passing records to formal ribbon_realization_snapshot artifacts"
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py --write",
+  "row_complete_status": "NOT_ROW_COMPLETE",
+  "schema": "twisted-yetter.ising-ribbon-lift-certification-preflight.v1",
+  "status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

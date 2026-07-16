@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+  "generated_at": "2026-07-16T07:02:15Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
+    "current_root": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:f90bba7db7c79024ee1c18909e16c607bb3837ba545c0f356475744df21d2d99"
+  },
+  "parent_root_cid": "ctlobj-sha256:ba547050bcccb9de807a2ba3d8d20b2645e14f2ea2abb4889a152c17e91b166f",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-certification-preflight.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight --payload lab-notes/2026-07-16-ising-ribbon-lift-certification-preflight.json --manifest manifests/lab-note-2026-07-16-ising-ribbon-lift-certification-preflight.json --created-at 2026-07-16T07:02:15Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "ae19271fa0202c4f57f4e3b8477c5833e4e3d439"
+}

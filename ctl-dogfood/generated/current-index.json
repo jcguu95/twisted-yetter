@@ -8645,6 +8645,116 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
+      "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_id": "ising-ribbon-lift-certification-preflight-v1",
+            "content_hash": "sha256:ed370de42dbcdf5aaf36857a290487b11032f48b5642e5c729a78555cc1494d6",
+            "git_blob": "57ad3b7f4955f0e732c8ddb059374254dfbac4e9",
+            "path": "experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-certification-preflight-v1.json",
+            "sha256": "5c631ca6edf4cf6ba224ae08dce6650b67a1bb4c203d0a068050a96aa19e7586",
+            "status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED"
+          },
+          {
+            "artifact_id": "ising-ribbon-lift-certification-preflight-builder-v1",
+            "git_blob": "b9d5a220e39e52c7fa80f32889692b08effc49f9",
+            "path": "experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py",
+            "sha256": "c232f692902cf04a0fb439b9c611d55049be8025e3412ba701977fe692c67031",
+            "status": "BUILDER_ADDED"
+          },
+          {
+            "artifact_id": "ising-ribbon-lift-certification-preflight-tests-v1",
+            "git_blob": "4f68de13c6383b8ce83e397a2800c15af8d32546",
+            "path": "tests/test_ising_ribbon_lift_certification_preflight_v1.py",
+            "sha256": "ab07a66adf8ebd1b917eb5232e2ec838674d7b56c4a7dd7ef3846fe8de04e5c7",
+            "status": "TEST_ADDED"
+          }
+        ],
+        "blocking_requirements_summary": [
+          "evaluation/coevaluation maps are not materialized in candidate payloads",
+          "fusion pairings are not formally certified for row completion",
+          "producer exact/symbolic coherence certificates are missing",
+          "runtime consumer coherence certificates are missing",
+          "ribbon/pivotal compatibility certificates are missing",
+          "candidate payloads have not been promoted to ribbon_realization_snapshot artifacts"
+        ],
+        "checks": {
+          "all_payloads_block_on_eval_coeval_maps": "PASS",
+          "all_payloads_block_on_pairing_certificate": "PASS",
+          "all_payloads_block_on_three_certificates": "PASS",
+          "candidate_payload_count_is_16": "PASS",
+          "no_payload_ready_for_snapshot_promotion": "PASS",
+          "numeric_pivotal_profile_is_not_formal_certificate": "PASS",
+          "preflight_record_hashes_are_unique": "PASS",
+          "scan_gates_remain_closed": "PASS"
+        },
+        "created_at": "2026-07-16T07:02:15Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim a formal scan plan exists.",
+          "This note does not produce ribbon_realization_snapshot formal evidence.",
+          "This note does not establish Ising row-complete ribbon classification.",
+          "This note does not say the Ising row is impossible; it records that candidate-only data cannot be promoted."
+        ],
+        "mathematical_status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED_ON_MISSING_FORMAL_MAPS_AND_CERTIFICATES; FORMAL_SCAN_ROUTE_REMAINS_CLOSED",
+        "note_id": "objective-note-2026-07-16-ising-ribbon-lift-certification-preflight",
+        "remaining_growth": [
+          "derive or materialize evaluation and coevaluation maps in the pinned SU(2)_2 Galois branch gauge",
+          "certify fusion pairing invertibility in the pinned basis/gauge",
+          "run exact/symbolic producer coherence checks",
+          "run runtime consumer coherence checks",
+          "run twist/balancing/ribbon-pivotal compatibility checks",
+          "promote only passing records to formal ribbon_realization_snapshot artifacts"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "blocked_payload_count": 16,
+          "candidate_payload_count": 16,
+          "family_id": "rank3-ising",
+          "formal_scan_plan_allowed_after_this_note": false,
+          "formal_snapshot_count": 0,
+          "preflight_id": "ising-ribbon-lift-certification-preflight-v1",
+          "prior_current_note": "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads",
+          "ready_for_snapshot_promotion_count": 0,
+          "row_complete_status": "NOT_ROW_COMPLETE"
+        },
+        "status": "ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "command": "python3 experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py --write",
+            "status": "pass"
+          },
+          {
+            "collected": 34,
+            "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+            "status": "pass"
+          }
+        ],
+        "title": "Ising ribbon-lift certification preflight blocked candidate-only promotion",
+        "top_notice": "The next Ising certificate-layer substep was completed: all 16 hash-bound candidate payloads were run through a fail-closed formal snapshot promotion preflight. The preflight correctly blocked every payload because none has materialized evaluation/coevaluation maps, certified fusion pairing, or producer/runtime/ribbon-pivotal certificates. This is not a row-complete result; it is a precise blocker against silently promoting candidate-only data."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
+        "created_at": "2026-07-16T07:02:15Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
       "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger",
       "payload": {
@@ -18309,6 +18419,7 @@
       "claim:lab-note:2026-07-15-yasui-character-twist-history-correction": "ctlobj-sha256:18c8994cb482aa7f342184d2b3e02da404fb63bda4185ea3176f5eed813be5e5",
       "claim:lab-note:2026-07-16-ising-braided-class-alignment-audit": "ctlobj-sha256:a987157b8f640a6a881d07f2f59a5bdef7eb9668b696e79d7ad52746b5c94305",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
+      "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
       "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87",
       "claim:lab-note:2026-07-16-low-rank-completion-run-terminal-blocked-review": "ctlobj-sha256:31e455d00560c3b5346e618a1ff4e4e2a051c1152e13bb0557b24a75b1012ee2",
       "claim:lab-note:2026-07-16-low-rank-galois-branch-growth-validation": "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
@@ -18736,6 +18847,9 @@
       ],
       "claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads": [
         "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8"
+      ],
+      "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight": [
+        "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc"
       ],
       "claim:lab-note:2026-07-16-ising-ribbon-lift-slot-ledger": [
         "ctlobj-sha256:6e3a1f69a00f7807142eb972f94223f7de30a45968d6937cf549cd2cf8721e87"
@@ -19810,6 +19924,7 @@
         "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+        "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
         "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
         "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc",
@@ -20028,6 +20143,7 @@
         "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
+        "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
         "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc",
         "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
@@ -32133,6 +32249,23 @@
           "parent_root_cid": "ctlobj-sha256:6f5592cf71e336d6de7ec9b51309fed19ad9b2edb70776ea1c285c0fe74f09dd",
           "path": "manifests/lab-note-2026-07-16-ising-ribbon-lift-candidate-payloads.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-candidate-payloads.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+          "generated_at": "2026-07-16T07:02:15Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ba547050bcccb9de807a2ba3d8d20b2645e14f2ea2abb4889a152c17e91b166f",
+          "path": "manifests/lab-note-2026-07-16-ising-ribbon-lift-certification-preflight.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-certification-preflight.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -45767,6 +45900,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
+          "generated_at": "2026-07-16T07:02:15Z",
+          "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ba547050bcccb9de807a2ba3d8d20b2645e14f2ea2abb4889a152c17e91b166f",
+          "path": "manifests/lab-note-2026-07-16-ising-ribbon-lift-certification-preflight.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-ising-ribbon-lift-certification-preflight.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825": [
         {
           "admission_batch_cid": null,
@@ -58861,6 +59014,36 @@
         },
         "word_count": 132
       },
+      "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
+        "created_at": "2026-07-16T07:02:15Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1540,
+        "gist": "The next Ising certificate-layer substep was completed: all 16 hash-bound candidate payloads were run through a fail-closed formal snapshot promotion preflight. The preflight correctly blocked every payload because none has materialized evaluation/coevaluation maps, certified...",
+        "logical_id": "claim:lab-note:2026-07-16-ising-ribbon-lift-certification-preflight",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_id\":\"ising-ribbon-lift-certification-preflight-v1\",\"content_hash\":\"sha256:ed370de42dbcdf5aaf36857a290487b11032f48b5642e5c729a78555cc1494d6\",\"git_blob\":\"57ad3b7f4955f0e732c8ddb059374254dfbac4e9\",\"path\":\"experiments/results/foundation-v2-safety-substrate/ising-ribbon-lift-certification-preflight-v1.json\",\"sha256\":\"5c631ca6edf4cf6ba224ae08dce6650b67a1bb4c203d0a068050a96aa19e7586\",\"status\":\"ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED\"},{\"artifact_id\":\"ising-ribbon-lift-certification-preflight-builder-v1\",\"git_blob\":\"b9d5a220e39e52c7fa80f32889692b08effc49f9\",\"path\":\"experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py\",\"sha256\":\"c232f692902cf04a0fb439b9c611d55049be8025e3412ba701977fe692c67031\",\"status\":\"BUILDER_ADDED\"},{\"artifact_id\":\"ising-ribbon-lift-certification-preflight-tests-v1\",\"git_blob\":\"4f68de13c6383b8ce83e397a2800c15af8d32546\",\"path\":\"tests/test_ising_ribbon_lift_certification_preflight_v1.py\",\"sha256\":\"ab07a66adf8ebd1b917eb5232e2ec838674d7b56c4a7dd7ef3846fe8de04e5c7\",\"status\":\"TEST_ADDED\"}],\"blocking_requirements_summary\":[\"evaluation/coevaluation maps are not materialized in candidate payloads\",\"fusion pairings are not formally certified for row completion\",\"producer exact/symbolic coherence certificates are missing\",\"runtime consumer coherence certificates are missing\",\"ribbon/pivotal compatibility certificates are missing\",\"candidate payloads have not been promoted to ribbon_realization_snapshot artifacts\"],\"checks\":{\"all_payloads_block_on_eval_coeval_maps\":\"PASS\",\"all_payloads_block_on_pairing_certificate\":\"PASS\",\"all_payloads_block_on_three_certificates\":\"PASS\",\"candidate_payload_count_is_16\":\"PASS\",\"no_payload_ready_for_snapshot_promotion\":\"PASS\",\"numeric_pivotal_profile_is_not_formal_certificate\":\"PASS\",\"preflight_record_hashes_are_unique\":\"PASS\",\"scan_gates_remain_closed\":\"PASS\"},\"created_at\":\"2026-07-16T07:02:15Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim a formal scan plan exists.\",\"This note does not produce ribbon_realization_snapshot formal evidence.\",\"This note does not establish Ising row-complete ribbon classification.\",\"This note does not say the Ising row is impossible; it records that candidate-only data cannot be promoted.\"],\"mathematical_status\":\"ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED_ON_MISSING_FORMAL_MAPS_AND_CERTIFICATES; FORMAL_SCAN_ROUTE_REMAINS_CLOSED\",\"note_id\":\"objective-note-2026-07-16-ising-ribbon-lift-certification-preflight\",\"remaining_growth\":[\"derive or materialize evaluation and coevaluation maps in the pinned SU(2)_2 Galois branch gauge\",\"certify fusion pairing invertibility in the pinned basis/gauge\",\"run exact/symbolic producer coherence checks\",\"run runtime consumer coherence checks\",\"run twist/balancing/ribbon-pivotal compatibility checks\",\"promote only passing records to formal ribbon_realization_snapshot artifacts\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"blocked_payload_count\":16,\"candidate_payload_count\":16,\"family_id\":\"rank3-ising\",\"formal_scan_plan_allowed_after_this_note\":false,\"formal_snapshot_count\":0,\"preflight_id\":\"ising-ribbon-lift-certification-preflight-v1\",\"prior_current_note\":\"claim:lab-note:2026-07-16-ising-ribbon-lift-candidate-payloads\",\"ready_for_snapshot_promotion_count\":0,\"row_complete_status\":\"NOT_ROW_COMPLETE\"},\"status\":\"ISING_RIBBON_LIFT_CERTIFICATION_BLOCKED\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"command\":\"python3 experiments/scripts/build_ising_ribbon_lift_certification_preflight_v1.py --write\",\"status\":\"pass\"},{\"collected\":34,\"command\":\"env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_ising_ribbon_lift_certification_preflight_v1.py tests/test_ising_ribbon_lift_candidate_payloads_v1.py tests/test_ising_ribbon_lift_slot_ledger_v1.py tests/test_ising_braided_class_alignment_audit_v1.py tests/test_morse_pivotal_contract.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py\",\"status\":\"pass\"}],\"title\":\"Ising ribbon-lift certification preflight blocked candidate-only promotion\",\"top_notice\":\"The next Ising certificate-layer substep was completed: all 16 hash-bound candidate payloads were run through a fail-closed formal snapshot promotion preflight. The preflight correctly blocked every payload because none has materialized evaluation/coevaluation maps, certified fusion pairing, or producer/runtime/ribbon-pivotal certificates. This is not a row-complete result; it is a precise blocker against silently promoting candidate-only data.\"}",
+        "title": "Ising ribbon-lift certification preflight blocked candidate-only promotion",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4760,
+          "base_estimate": 1339,
+          "estimated_tokens": 1540,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 201,
+          "serialized_character_count": 4760,
+          "unicode_scalar_count": 4760,
+          "utf8_bytes": 4760
+        },
+        "word_count": 203
+      },
       "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825": {
         "active_state": "active",
         "cid": "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
@@ -62362,7 +62545,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T06:56:27Z",
+  "generated_at": "2026-07-16T07:05:09Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -64896,17 +65079,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:ba547050bcccb9de807a2ba3d8d20b2645e14f2ea2abb4889a152c17e91b166f",
+  "root_cid": "ctlobj-sha256:452022ac445a2c9bcd9c88a9d6f4d051f2933ee07dcc4e13a2adfc2698522abb",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 65818,
+    "build_ms": 66370,
     "context_source": "current-context-replay",
-    "current_context_ms": 61516,
-    "discovery_index_ms": 4180,
-    "payload_summaries_ms": 39,
-    "resource_index_ms": 39,
+    "current_context_ms": 62019,
+    "discovery_index_ms": 4227,
+    "payload_summaries_ms": 40,
+    "resource_index_ms": 40,
     "write_ms": 41
   },
-  "transition_cid": "ctlobj-sha256:326eb613853c0b10da485be5f80e0ea86dfa6e6d2a544b4f2363575c6284f03a"
+  "transition_cid": "ctlobj-sha256:f90bba7db7c79024ee1c18909e16c607bb3837ba545c0f356475744df21d2d99"
 }
