@@ -1,0 +1,78 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-rank4-z4-ribbon-realization-partial-progress",
+  "title": "Rank 4 pointed Z4 row resolved as partial low-rank ribbon progress",
+  "created_at": "2026-07-16T01:03:24Z",
+  "created_by": "actor:codex",
+  "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS_FORMAL_SCAN_BLOCKED",
+  "top_notice": "The rank4-pointed-z4 family row now has four hash-bound ribbon realization snapshots using an explicit cyclic Z4 abelian cocycle with parameters m in {2,6,10,14}. The low-rank ribbon catalog remains partial: 7 rows resolved, 7 rows blocked, and formal scan-plan generation is still disabled.",
+  "scope": {
+    "ranks": [2, 3, 4, 5],
+    "resolved_family_ids": [
+      "rank2-cyclic-z2",
+      "rank2-fibonacci-yang-lee",
+      "rank3-cyclic-z3",
+      "rank4-pointed-z4",
+      "rank4-semion-times-fibonacci",
+      "rank4-fibxfib",
+      "rank5-su5-1"
+    ],
+    "blocked_family_ids": [
+      "rank3-ising",
+      "rank3-psu2-5",
+      "rank4-pointed-z2xz2",
+      "rank4-psu2-7",
+      "rank5-su2-4",
+      "rank5-psu2-9",
+      "rank5-psu3-4"
+    ],
+    "resolved_family_row_count": 7,
+    "blocked_family_row_count": 7,
+    "formal_scan_plan_allowed": false,
+    "formal_scan_readiness_status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-ribbon-realization-catalog-v8",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v8.json",
+      "commit": "4da8df03335625c4e3e65b24f897e9575eea3b4c",
+      "git_blob": "77c09f19a4f4217e79b1dce8909f02acc96e29dc",
+      "sha256": "fbcbe640f6becb3a305722d67c76c82d5cc539de3e1d10439c4ccce042f06d3b",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+      "new_z4_snapshot_count": 4
+    },
+    {
+      "artifact_id": "formal-low-rank-scan-readiness-v8",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v8.json",
+      "commit": "4da8df03335625c4e3e65b24f897e9575eea3b4c",
+      "git_blob": "1b82807c81e15492d583a46ca6b5224fb4557608",
+      "sha256": "441b5bb53da907b4fa5d8b60a5253acdeffbcef2fded82f62fc932dd7df1fd0b",
+      "status": "BLOCKED_PARTIAL_RIBBON_CATALOG_ONLY"
+    }
+  ],
+  "validated_behaviors": [
+    "The four rank4 pointed Z4 snapshots pass validate_formal_evidence.",
+    "Each Z4 snapshot records an explicit omega_m(a,b,c)=zeta16^(m*a*(b+c-[b+c]_4)) associator, R-symbol table, twist table, pivotal scalars, evaluation/coevaluation data, basis/gauge, and field embedding.",
+    "Exact exponent scans check pentagon, both hexagon equations, monodromy nondegeneracy, twist equals R_aa, and ribbon/pivotal compatibility.",
+    "A strict-associator Z4 negative control still satisfies pentagon but fails both hexagon checks, preventing silent use of FR-only or strict pointed data for this even cyclic row.",
+    "The v8 catalog passes validate_low_rank_ribbon_catalog as PARTIAL_RIBBON_REFINEMENT_PROGRESS.",
+    "The v8 readiness artifact keeps scan_plan_generation_allowed=false."
+  ],
+  "tests": [
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py",
+      "status": "pass",
+      "collected": 33
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not authorize any formal scan plan.",
+    "This note does not resolve the rank4 pointed Z2xZ2 row.",
+    "This note does not resolve Ising, SU(2), PSU, or PSU(3) rows.",
+    "This note does not publish a final ribbon denominator."
+  ],
+  "mathematical_status": "SEVEN_ROWS_FORMAL_RIBBON_PROGRESS_SEVEN_ROWS_REMAIN_BLOCKED",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}
