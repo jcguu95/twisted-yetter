@@ -1,0 +1,217 @@
+{
+  "claim_boundary": "This is a same-label computed distribution comparison for rank-2 and rank-3 pointed modular rows. It is not a certified exoticness theorem because the H2 coordinate comparison remains outside this artifact.",
+  "comparison_rule": "Compare the nonzero Figure 21 projector distribution against the split CP2#9CPbar fixed-label distribution, with no H2 coordinate identification beyond the same category labels.",
+  "content_hash": "sha256:97d368b0ef1a94d554ee614503200bdee43bcada9c3cbad3daa5f7cf06f5f34b",
+  "differing_row_count": 2,
+  "elapsed_seconds": 0.0014793341979384422,
+  "finished_at_utc": "2026-07-16T23:00:36.688716+00:00",
+  "generator_script": "experiments/scripts/build_figure21_rank2_rank3_standard_comparison_v1.py",
+  "git_commit": "def66ee484e87b7b145654406e14a0e829d25841",
+  "git_dirty": true,
+  "inputs": {
+    "figure21_aggregate_root": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1",
+    "prefix_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json",
+    "standard": {
+      "component_count": 10,
+      "framings": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "manifold": "CP2 # 9(-CP2)",
+      "path": "experiments/inputs/standard/e1-cp2-sum-9barcp2-morse-v1.json",
+      "signature": -8
+    }
+  },
+  "matching_row_count": 2,
+  "mathematical_status": "COMPUTED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
+  "non_claims": [
+    "This does not certify that Figure 21 is exotic.",
+    "This does not certify equality or inequality under a marked H2 identification.",
+    "This does not include rank-4 or rank-5 rows.",
+    "This does not include non-pointed categories."
+  ],
+  "python_version": "3.11.15",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "row_count": 4,
+  "rows": [
+    {
+      "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+      "comparison_canonical_decimals": 9,
+      "family_id": "rank2-cyclic-z2",
+      "figure21_nonzero_minus_standard_distribution": {
+        "+1+0i": -32,
+        "-1+0i": 32
+      },
+      "figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 240,
+        "-1+0i": 272
+      },
+      "figure21_source": "PREFIX_FULL_SWEEP",
+      "nonzero_sector_count_matches_standard": true,
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-minus",
+      "snapshot_content_hash": "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "full_sector_count": 1024,
+        "records_sha256": "76f01dfffc16d815c7a598ebd33779a3184ddf3ab8e26fddf432817dbb9fc2d6",
+        "sector_count": 1024,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        },
+        "value_distribution_raw": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        }
+      },
+      "status": "PASS_COMPUTED_DIFFERENT_DISTRIBUTION"
+    },
+    {
+      "category_data_hash": "sha256:6f6f8391b0c99c9c8e178541ec4262ef0188b51ad7add48e9a1b89eb450ed3a8",
+      "comparison_canonical_decimals": 9,
+      "family_id": "rank2-cyclic-z2",
+      "figure21_nonzero_minus_standard_distribution": {
+        "+1+0i": -32,
+        "-1+0i": 32
+      },
+      "figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 240,
+        "-1+0i": 272
+      },
+      "figure21_source": "PREFIX_FULL_SWEEP",
+      "nonzero_sector_count_matches_standard": true,
+      "rank": 2,
+      "realization_id": "rank2-cyclic-z2-semion-plus",
+      "snapshot_content_hash": "sha256:b6e1fcedc002a8bad19e62ce667a79bc4592557f4ad2667ee53b40db2f23c3cb",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "full_sector_count": 1024,
+        "records_sha256": "76f01dfffc16d815c7a598ebd33779a3184ddf3ab8e26fddf432817dbb9fc2d6",
+        "sector_count": 1024,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        },
+        "value_distribution_raw": {
+          "+0+1i": 256,
+          "+0-1i": 256,
+          "+1+0i": 272,
+          "-1+0i": 240
+        }
+      },
+      "status": "PASS_COMPUTED_DIFFERENT_DISTRIBUTION"
+    },
+    {
+      "category_data_hash": "sha256:ef0fa273bd48c7ead003268c992d87f4520cfa80884412574a9fab1b05482628",
+      "comparison_canonical_decimals": 9,
+      "family_id": "rank3-cyclic-z3",
+      "figure21_nonzero_minus_standard_distribution": {},
+      "figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "figure21_source": "CHUNK_AGGREGATE",
+      "nonzero_sector_count_matches_standard": true,
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-minus",
+      "snapshot_content_hash": "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "full_sector_count": 59049,
+        "records_sha256": "b09969097907628324e5e89f48b5f38783bdc32a0b9d939880f9ac483a05013d",
+        "sector_count": 59049,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+1+0i": 19845,
+          "-0.5+0.866025404i": 19602,
+          "-0.5-0.866025404i": 19602
+        },
+        "value_distribution_raw": {
+          "+0.999999999997+0i": 9728,
+          "+0.999999999998+0i": 9408,
+          "+0.999999999999+0i": 708,
+          "+1+0i": 1,
+          "-0.499999999998+0.866025403781i": 4608,
+          "-0.499999999998-0.866025403781i": 1024,
+          "-0.499999999998-0.866025403782i": 13056,
+          "-0.499999999998-0.866025403784i": 5376,
+          "-0.499999999999+0.866025403782i": 12672,
+          "-0.499999999999-0.866025403784i": 144,
+          "-0.5+0.866025403783i": 2304,
+          "-0.5+0.866025403784i": 18,
+          "-0.5-0.866025403784i": 2
+        }
+      },
+      "status": "PASS_FIGURE21_NONZERO_MATCHES_STANDARD"
+    },
+    {
+      "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+      "comparison_canonical_decimals": 9,
+      "family_id": "rank3-cyclic-z3",
+      "figure21_nonzero_minus_standard_distribution": {},
+      "figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "figure21_source": "CHUNK_AGGREGATE",
+      "nonzero_sector_count_matches_standard": true,
+      "rank": 3,
+      "realization_id": "rank3-cyclic-z3-plus",
+      "snapshot_content_hash": "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930",
+      "standard_cp2_9cpbar": {
+        "backend": "SPLIT_UNLINK_CLOSED_FORM_FIXED_LABELS",
+        "full_sector_count": 59049,
+        "records_sha256": "0c679483d23e814ec8cb3c61f17a7af573fef03a9caed42152bd13edab920f38",
+        "sector_count": 59049,
+        "status": "FULL_CLOSED_FORM_DISTRIBUTION",
+        "value_distribution": {
+          "+1+0i": 19845,
+          "-0.5+0.866025404i": 19602,
+          "-0.5-0.866025404i": 19602
+        },
+        "value_distribution_raw": {
+          "+0.999999999997+0i": 9728,
+          "+0.999999999998+0i": 9408,
+          "+0.999999999999+0i": 708,
+          "+1+0i": 1,
+          "-0.499999999998+0.866025403781i": 1024,
+          "-0.499999999998+0.866025403782i": 13056,
+          "-0.499999999998+0.866025403784i": 5376,
+          "-0.499999999998-0.866025403781i": 4608,
+          "-0.499999999999+0.866025403784i": 144,
+          "-0.499999999999-0.866025403782i": 12672,
+          "-0.5+0.866025403784i": 2,
+          "-0.5-0.866025403783i": 2304,
+          "-0.5-0.866025403784i": 18
+        }
+      },
+      "status": "PASS_FIGURE21_NONZERO_MATCHES_STANDARD"
+    }
+  ],
+  "schema": "twisted-yetter.figure21-rank2-rank3-standard-comparison.v1",
+  "started_at_utc": "2026-07-16T23:00:36.687202+00:00",
+  "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_WITH_DIFFERENCES"
+}
