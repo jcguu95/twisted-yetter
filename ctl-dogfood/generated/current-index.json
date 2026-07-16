@@ -8890,6 +8890,93 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+      "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+      "payload": {
+        "artifacts": [
+          {
+            "artifact_generated_dirty": true,
+            "artifact_generated_from_commit": "4a1a75d33297da1723ce7a8a1230dda0b70c5370",
+            "artifact_id": "formal-low-rank-target-scan-attempt-v1",
+            "checked_in_commit": "d324ffd4f9df2da7c84ca3d760d8591b3a5bd0e7",
+            "content_hash": "sha256:68d5fc6739d3a3648cfa571bb51d27d5293b4c10f0e09bc62cc9a4dcf05f8d39",
+            "git_blob": "5d4d8f6243cf8e859a5a2b985ef9d0c1d5d98f52",
+            "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-target-scan-attempt-v1.json",
+            "sha256": "2d30624a0c6db4762087913280bcae8d1a798052e6dac5a47f0fc6870aca01c1",
+            "status": "BLOCKED_NO_FORMAL_SCAN_PLAN_OR_CONTROL_PASS"
+          }
+        ],
+        "created_at": "2026-07-16T03:47:53Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+          "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+          "This note does not claim any formal scan plan exists.",
+          "This note does not claim S4, CP2, S2xS2, unlink/Hopf, or alpha=0 controls were run.",
+          "This note does not claim any admitted exotic or target scan case was enumerated.",
+          "This note does not claim any target scan worker was dispatched.",
+          "This note does not claim any scan case result or scan aggregate exists.",
+          "This note does not claim detector correctness.",
+          "This note does not claim a no-signal result."
+        ],
+        "mathematical_status": "STEP8_FAIL_CLOSED_ONLY; FORMAL_SCAN_REMAINS_BLOCKED_BY_PARTIAL_RIBBON_CATALOG_AND_NO_FORMAL_SCAN_PLAN",
+        "note_id": "objective-note-2026-07-16-step8-fail-closed-target-scan-gate",
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "scope": {
+          "admitted_target_cases_enumerated": false,
+          "blocked_family_row_count": 6,
+          "catalog_id": "low-rank-ribbon-realization-catalog-v10",
+          "catalog_status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+          "formal_control_results_produced": false,
+          "formal_scan_aggregate_produced": false,
+          "formal_scan_plan_produced": false,
+          "formal_target_scan_results_produced": false,
+          "resolved_family_row_count": 8,
+          "step_6_status": "COMPLETE_FAIL_CLOSED_BLOCKED",
+          "step_7_status": "COMPLETE_FAIL_CLOSED_BLOCKED",
+          "step_8_status": "COMPLETE_FAIL_CLOSED_BLOCKED",
+          "target_workers_dispatched": 0
+        },
+        "status": "STEP8_FAIL_CLOSED_COMPLETE_NO_TARGET_SCAN",
+        "subjects": [
+          "subject:twisted-yetter:reference:low-rank-mtc-classification"
+        ],
+        "tests": [
+          {
+            "collected": 87,
+            "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py",
+            "status": "pass"
+          },
+          {
+            "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+            "root_cid_before_admission": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+            "status": "pass"
+          }
+        ],
+        "title": "Formal low-rank scan step 8 completed as a fail-closed target scan gate",
+        "top_notice": "Step 8 is complete only in the fail-closed sense under the current partial catalog and blocked step 6/7 gates: no admitted exotic or target scan cases are enumerated, no worker is dispatched, no target scan case result is produced, and no scan aggregate or no-signal claim is supported.",
+        "validated_behaviors": [
+          "Step 8 target scan attempt records admitted_target_scan_case_ids=[], target_scan_case_results=[], worker_jobs_dispatched=0, and formal_scan_aggregate_candidate=null.",
+          "The attempt pins the v10 partial ribbon catalog, the blocked step 6 scan-plan generation attempt, the blocked step 7 control attempt, and the step 6/7 fail-closed gate.",
+          "The blocked attempt artifact is rejected by validate_formal_evidence as an unsupported formal evidence kind.",
+          "The attempt records no-formal-scan-plan, no-formal-control-pass, no-scan-case-ids-to-dispatch, and worker-cannot-revalidate-missing-pinned-scan-plan as blocking reasons."
+        ]
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+        "created_at": "2026-07-16T03:47:53Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -17062,6 +17149,7 @@
       "claim:lab-note:2026-07-16-rank4-z2xz2-ribbon-realization-partial-progress": "ctlobj-sha256:4aae4b230c0d15dcf0d0798378aadd16c11e25dfc8d6a32497e56da989d22beb",
       "claim:lab-note:2026-07-16-rank4-z4-ribbon-realization-partial-progress": "ctlobj-sha256:72ed7ce71fb0ea9eca67c5fc11e3fe383c036856cdcab07f7eb7e0caa166f491",
       "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
+      "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -17484,6 +17572,9 @@
       ],
       "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": [
         "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc"
+      ],
+      "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": [
+        "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5"
       ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
@@ -18401,6 +18492,7 @@
         "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
         "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
+        "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
         "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
@@ -18665,6 +18757,7 @@
         "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
         "ctlobj-sha256:792bad58e31ffa8fc5d5ab9ea77bf76bb75e7e55ecba0e0a63a3b10ee68d108b",
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
+        "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
         "ctlobj-sha256:802f25ec47268a3c13e4ee36c984b3a8102c00d1ad66d88e1fe5058b5e77fb23",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
         "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
@@ -19549,6 +19642,15 @@
           "edge_type": "revision-parent",
           "source_cid": "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
           "target_cid": "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870"
+        }
+      ],
+      "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.tests[1].root_cid_before_admission",
+          "source_cid": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+          "target_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46"
         }
       ],
       "ctlobj-sha256:86b07f0dd7226b7af1277a3ab9d6ddcfdf1413a668f5ad3fe759108e187accb3": [
@@ -30806,6 +30908,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
+          "generated_at": "2026-07-16T03:47:53Z",
+          "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+          "path": "manifests/lab-note-2026-07-16-step8-fail-closed-target-scan-gate.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step8-fail-closed-target-scan-gate.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:9df7bf3d2e8392c871d34218a3ff1d9096f1d88de7a30db0da024f116aea6252",
           "generated_at": "2026-07-06T23:17:10Z",
           "logical_id": "sys:policy",
@@ -37080,6 +37199,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
+          "generated_at": "2026-07-16T03:47:53Z",
+          "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+          "path": "manifests/lab-note-2026-07-16-step8-fail-closed-target-scan-gate.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step8-fail-closed-target-scan-gate.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e": [
@@ -53649,6 +53788,36 @@
         },
         "word_count": 32
       },
+      "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+        "created_at": "2026-07-16T03:47:53Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1415,
+        "gist": "Step 8 is complete only in the fail-closed sense under the current partial catalog and blocked step 6/7 gates: no admitted exotic or target scan cases are enumerated, no worker is dispatched, no target scan case result is produced, and no scan aggregate or no-signal claim is s...",
+        "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_generated_dirty\":true,\"artifact_generated_from_commit\":\"4a1a75d33297da1723ce7a8a1230dda0b70c5370\",\"artifact_id\":\"formal-low-rank-target-scan-attempt-v1\",\"checked_in_commit\":\"d324ffd4f9df2da7c84ca3d760d8591b3a5bd0e7\",\"content_hash\":\"sha256:68d5fc6739d3a3648cfa571bb51d27d5293b4c10f0e09bc62cc9a4dcf05f8d39\",\"git_blob\":\"5d4d8f6243cf8e859a5a2b985ef9d0c1d5d98f52\",\"path\":\"experiments/results/foundation-v2-safety-substrate/formal-low-rank-target-scan-attempt-v1.json\",\"sha256\":\"2d30624a0c6db4762087913280bcae8d1a798052e6dac5a47f0fc6870aca01c1\",\"status\":\"BLOCKED_NO_FORMAL_SCAN_PLAN_OR_CONTROL_PASS\"}],\"created_at\":\"2026-07-16T03:47:53Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.\",\"This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.\",\"This note does not claim any formal scan plan exists.\",\"This note does not claim S4, CP2, S2xS2, unlink/Hopf, or alpha=0 controls were run.\",\"This note does not claim any admitted exotic or target scan case was enumerated.\",\"This note does not claim any target scan worker was dispatched.\",\"This note does not claim any scan case result or scan aggregate exists.\",\"This note does not claim detector correctness.\",\"This note does not claim a no-signal result.\"],\"mathematical_status\":\"STEP8_FAIL_CLOSED_ONLY; FORMAL_SCAN_REMAINS_BLOCKED_BY_PARTIAL_RIBBON_CATALOG_AND_NO_FORMAL_SCAN_PLAN\",\"note_id\":\"objective-note-2026-07-16-step8-fail-closed-target-scan-gate\",\"schema\":\"twisted-yetter/objective-lab-note/1\",\"scope\":{\"admitted_target_cases_enumerated\":false,\"blocked_family_row_count\":6,\"catalog_id\":\"low-rank-ribbon-realization-catalog-v10\",\"catalog_status\":\"PARTIAL_RIBBON_REFINEMENT_PROGRESS\",\"formal_control_results_produced\":false,\"formal_scan_aggregate_produced\":false,\"formal_scan_plan_produced\":false,\"formal_target_scan_results_produced\":false,\"resolved_family_row_count\":8,\"step_6_status\":\"COMPLETE_FAIL_CLOSED_BLOCKED\",\"step_7_status\":\"COMPLETE_FAIL_CLOSED_BLOCKED\",\"step_8_status\":\"COMPLETE_FAIL_CLOSED_BLOCKED\",\"target_workers_dispatched\":0},\"status\":\"STEP8_FAIL_CLOSED_COMPLETE_NO_TARGET_SCAN\",\"subjects\":[\"subject:twisted-yetter:reference:low-rank-mtc-classification\"],\"tests\":[{\"collected\":87,\"command\":\"env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_foundation_v2_safety_substrate.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_ribbon_realization_catalog_v2.py tests/test_low_rank_ribbon_realization_catalog_v3.py tests/test_low_rank_ribbon_realization_catalog_v4.py tests/test_low_rank_ribbon_realization_catalog_v5.py tests/test_low_rank_ribbon_realization_catalog_v6.py tests/test_low_rank_ribbon_realization_catalog_v7.py tests/test_low_rank_ribbon_realization_catalog_v8.py tests/test_low_rank_ribbon_realization_catalog_v9.py tests/test_low_rank_ribbon_realization_catalog_v10.py tests/test_low_rank_mtc_classification_matrix.py tests/test_mtc_candidate_data.py tests/test_su2_2_rf_local_backend.py\",\"status\":\"pass\"},{\"command\":\"CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify\",\"root_cid_before_admission\":\"ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46\",\"status\":\"pass\"}],\"title\":\"Formal low-rank scan step 8 completed as a fail-closed target scan gate\",\"top_notice\":\"Step 8 is complete only in the fail-closed sense under the current partial catalog and blocked step 6/7 gates: no admitted exotic or target scan cases are enumerated, no worker is dispatched, no target scan case result is produced, and no scan aggregate or no-signal claim is supported.\",\"validated_behaviors\":[\"Step 8 target scan attempt records admitted_target_scan_case_ids=[], target_scan_case_results=[], worker_jobs_dispatched=0, and formal_scan_aggregate_candidate=null.\",\"The attempt pins the v10 partial ribbon catalog, the blocked step 6 scan-plan generation attempt, the blocked step 7 control attempt, and the step 6/7 fail-closed gate.\",\"The blocked attempt artifact is rejected by validate_formal_evidence as an unsupported formal evidence kind.\",\"The attempt records no-formal-scan-plan, no-formal-control-pass, no-scan-case-ids-to-dispatch, and worker-cannot-revalidate-missing-pinned-scan-plan as blocking reasons.\"]}",
+        "title": "Formal low-rank scan step 8 completed as a fail-closed target scan gate",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 4370,
+          "base_estimate": 1230,
+          "estimated_tokens": 1415,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 185,
+          "serialized_character_count": 4370,
+          "unicode_scalar_count": 4370,
+          "utf8_bytes": 4370
+        },
+        "word_count": 222
+      },
       "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e": {
         "active_state": "active",
         "cid": "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
@@ -59149,6 +59318,15 @@
           "target_cid": "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5"
         }
       ],
+      "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.tests[1].root_cid_before_admission",
+          "source_cid": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+          "target_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46"
+        }
+      ],
       "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9": [
         {
           "basis": "ctl/revision.parents",
@@ -60291,7 +60469,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T01:38:31Z",
+  "generated_at": "2026-07-16T03:51:18Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -62825,17 +63003,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+  "root_cid": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 63828,
+    "build_ms": 61749,
     "context_source": "current-context-replay",
-    "current_context_ms": 59510,
-    "discovery_index_ms": 4204,
-    "payload_summaries_ms": 36,
+    "current_context_ms": 57724,
+    "discovery_index_ms": 3909,
+    "payload_summaries_ms": 37,
     "resource_index_ms": 36,
     "write_ms": 40
   },
-  "transition_cid": "ctlobj-sha256:27cc806f98ecc301efcebc04e0a31a3f24f9623153f57c42dbb5533bbba64df5"
+  "transition_cid": "ctlobj-sha256:160e0c4756357f7fc1e9ce986093194d7ab9c18f38c5d9fdfe5992487a919bee"
 }

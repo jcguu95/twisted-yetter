@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
+  "generated_at": "2026-07-16T03:47:53Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+    "current_root": "ctlobj-sha256:e92dadd6478c402577991373a38ce228d6999530d79666992152653affea1c38",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:160e0c4756357f7fc1e9ce986093194d7ab9c18f38c5d9fdfe5992487a919bee"
+  },
+  "parent_root_cid": "ctlobj-sha256:026a7022c613f0b96d8ced6e1847ad5924bf293fa5e99817e5c37a5a4aedba46",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-16-step8-fail-closed-target-scan-gate.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate --payload lab-notes/2026-07-16-step8-fail-closed-target-scan-gate.json --manifest manifests/lab-note-2026-07-16-step8-fail-closed-target-scan-gate.json --created-at 2026-07-16T03:47:53Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "d324ffd4f9df2da7c84ca3d760d8591b3a5bd0e7"
+}
