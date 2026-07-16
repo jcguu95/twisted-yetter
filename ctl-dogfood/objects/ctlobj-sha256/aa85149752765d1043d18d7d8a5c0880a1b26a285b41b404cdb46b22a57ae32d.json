@@ -1,0 +1,102 @@
+{
+  "created_at": "2026-07-16T07:32:13Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2",
+  "parents": [],
+  "payload": {
+    "allowed_future_unblockers": [
+      "add a hash-bound formal SU(2)_2 evaluation/coevaluation derivation or exporter",
+      "pin square-root branches for every Ising candidate pivotal dimension",
+      "certify Ising q-6j path-basis pairing convention",
+      "supersede the Ising terminal blocker with resolved ribbon_realization_snapshot artifacts",
+      "then regenerate the low-rank catalog and scan gates"
+    ],
+    "artifacts": [
+      {
+        "artifact_id": "low-rank-ribbon-classification-terminal-blocked-v2",
+        "classification_blocker_hash": "sha256:1ec1bf20857d18387b9fe0691394ef22f004114e72c1bcd9e34c1c533773ceba",
+        "content_hash": "sha256:387ddbae228ba023f0c3973dd215a8554edf149510a150781ecdd694f3777592",
+        "git_blob": "a3b417d30be90b928299c8f9d6e08d38e6950451",
+        "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-classification-terminal-blocked-v2.json",
+        "sha256": "8db045f1078aaf1ce5662fb3abd20940690c18f75a0099c366c00c05cdd37b65",
+        "status": "LOW_RANK_RIBBON_CLASSIFICATION_TERMINAL_BLOCKED"
+      },
+      {
+        "artifact_id": "low-rank-ribbon-classification-terminal-blocked-v2-builder",
+        "git_blob": "d079847ce483c5ee4a824b5d1ae474d29c8ee416",
+        "path": "experiments/scripts/build_low_rank_ribbon_classification_terminal_blocked_v2.py",
+        "sha256": "ad05a8430d1d315651a60f85922d07646088358182dd3a6131f5aabddd712acd",
+        "status": "BUILDER_ADDED"
+      },
+      {
+        "artifact_id": "low-rank-ribbon-classification-terminal-blocked-v2-tests",
+        "git_blob": "e1f509d307e1fbaffd1ae106936e4ed6ffddd4f2",
+        "path": "tests/test_low_rank_ribbon_classification_terminal_blocked_v2.py",
+        "sha256": "461db8b325a178fabc976fcddd657b23737406e01c1bbb7d7f3f21ce1f4d6f33",
+        "status": "TEST_ADDED"
+      }
+    ],
+    "checks": {
+      "aggregate_blocked": "PASS",
+      "catalog_not_established": "PASS",
+      "control_scan_blocked": "PASS",
+      "ising_terminal_blocker_pinned": "PASS",
+      "no_signal_claim_disallowed": "PASS",
+      "scan_complete_claim_disallowed": "PASS",
+      "scan_plan_generation_blocked": "PASS",
+      "target_scan_blocked": "PASS"
+    },
+    "created_at": "2026-07-16T07:32:13Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+      "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+      "This note does not claim no signal.",
+      "This note does not claim a TCY no-go theorem.",
+      "This note does not claim the mathematical Ising row is impossible."
+    ],
+    "mathematical_status": "LOW_RANK_RIBBON_CLASSIFICATION_TERMINAL_BLOCKED; FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+    "note_id": "objective-note-2026-07-16-low-rank-ribbon-classification-terminal-blocked-v2",
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "catalog_established": false,
+      "formal_aggregate_allowed": false,
+      "formal_scan_plan_allowed": false,
+      "formal_terminal_result": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+      "no_signal_claim_allowed": false,
+      "primary_blocking_family_id": "rank3-ising",
+      "prior_current_note": "claim:lab-note:2026-07-16-ising-formal-map-source-decision",
+      "scan_complete_claim_allowed": false,
+      "terminal_blocker_id": "low-rank-ribbon-classification-terminal-blocked-v2"
+    },
+    "status": "LOW_RANK_RIBBON_CLASSIFICATION_TERMINAL_BLOCKED",
+    "subjects": [
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "terminal_explanation": [
+      "The formal low-rank scan route cannot start because the rank 2-5 ribbon catalog is not established.",
+      "The catalog cannot be established because rank3-ising has a current repo-local terminal blocker for formal map source support.",
+      "This terminal result is a blocker, not a completed scan and not a no-signal theorem."
+    ],
+    "tests": [
+      {
+        "command": "python3 experiments/scripts/build_low_rank_ribbon_classification_terminal_blocked_v2.py --write",
+        "status": "pass"
+      },
+      {
+        "collected": 24,
+        "command": "env PYTHONPATH=. UV_CACHE_DIR=.uv-cache uv run pytest tests/test_low_rank_ribbon_classification_terminal_blocked_v2.py tests/test_ising_formal_map_source_decision_v1.py tests/test_ising_eval_coeval_pairing_materialization_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+        "status": "pass"
+      }
+    ],
+    "title": "Low-rank ribbon classification terminal blocker propagated from Ising",
+    "top_notice": "The latest Ising formal-map-source terminal blocker has been propagated to the low-rank classification/catalog route. The rank 2-5 ribbon catalog cannot be established in the current repo-local evidence state, because rank3-ising lacks a formal SU(2)_2 evaluation/coevaluation map source or branch-pinned derivation. Therefore the formal low-rank scan route has a terminal result: FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED. This is not a completed scan, not a no-signal claim, and not a mathematical impossibility claim for the Ising row."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
