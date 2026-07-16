@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
+  "generated_at": "2026-07-16T23:03:40Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:lab-note",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:f321619b61e5296bdc428c580441799495bc5532bed6298a28c238808e0f1d8d",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
+    "transition": "ctlobj-sha256:55939c4286a39daf88908160360b2558bfda39aa8920f08f365a3ccd393a8d6b"
+  },
+  "parent_root_cid": "ctlobj-sha256:0ce693472cf8dd5c15ee68b516195de59abb366498661ccb2a22520db157fdbb",
+  "payload_file": "ctl-dogfood/subject-layer/edges/figure21-pointed-comparison-records-lab-note.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:lab-note --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/figure21-pointed-comparison-records-lab-note.json --manifest manifests/subject-edge-2026-07-16-figure21-pointed-comparison-records-lab-note.json --created-at 2026-07-16T23:02:40Z --admitted-at 2026-07-16T23:03:40Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "dd4d36d086537e93fd2cad7aa491050c24d46b99"
+}
