@@ -16,6 +16,7 @@ from experiments.scripts.build_figure21_rank4_standard_comparison_v1 import (
     OUTPUT as _RANK4_OUTPUT,
     REPO_ROOT,
     _canonical_distribution,
+    _content_hash,
     _distribution_diff,
     _load_snapshot,
     _nonzero_distribution,
@@ -117,7 +118,7 @@ def generate() -> dict[str, object]:
     else:
         status = "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH"
     finished = datetime.now(UTC)
-    return {
+    payload = {
         "schema": "twisted-yetter.figure21-rank5-standard-comparison.v1",
         "status": status,
         "mathematical_status": "COMPUTED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
@@ -163,6 +164,8 @@ def generate() -> dict[str, object]:
             "Pending rows are not silently treated as matches.",
         ],
     }
+    payload["content_hash"] = _content_hash(payload)
+    return payload
 
 
 def main() -> None:

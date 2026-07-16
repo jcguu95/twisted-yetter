@@ -53,6 +53,11 @@ def _sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _content_hash(payload: Any) -> str:
+    data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return f"sha256:{hashlib.sha256(data).hexdigest()}"
+
+
 def _git(*args: str) -> str:
     return subprocess.run(
         ["git", *args],
@@ -223,7 +228,7 @@ def generate() -> dict[str, Any]:
     else:
         status = "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH"
     finished = datetime.now(UTC)
-    return {
+    payload = {
         "schema": "twisted-yetter.figure21-rank4-standard-comparison.v1",
         "status": status,
         "mathematical_status": "COMPUTED_COMPARISON_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
@@ -272,6 +277,8 @@ def generate() -> dict[str, Any]:
             "This does not include non-pointed categories.",
         ],
     }
+    payload["content_hash"] = _content_hash(payload)
+    return payload
 
 
 def main() -> None:

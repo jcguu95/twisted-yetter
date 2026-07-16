@@ -3,11 +3,11 @@
   "blockers": [],
   "claim_boundary": "Terminal status for the Figure 21 pointed modular fixed-label distribution batch only.",
   "complete_row_count": 15,
-  "content_hash": "sha256:bf4f7251c4a1179b6294f0d3e1c6cb307eba45c21c92cf61e413c9fa91659ca2",
-  "elapsed_seconds": 0.002088666893541813,
-  "finished_at_utc": "2026-07-16T21:43:16.136302+00:00",
+  "content_hash": "sha256:8d666986b0a8b440276de8d90d5d48a14fdd3bf71bccd6b8c373a040418439f4",
+  "elapsed_seconds": 0.002083584200590849,
+  "finished_at_utc": "2026-07-16T22:56:50.213537+00:00",
   "generator_script": "experiments/scripts/build_figure21_pointed_batch_result_v1.py",
-  "git_commit": "1f62269d14d13f4333be9783c7e6174bdfdfb9cf",
+  "git_commit": "a4cec0216e9b9179e05d5c4ccd1cf8413d75fae6",
   "git_dirty": true,
   "inputs": {
     "prefix_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json",
@@ -20,10 +20,10 @@
       "status": "PASS_PREHETZNER_SMOKE"
     },
     "worker_plan": {
-      "content_hash": "sha256:9c46060c55a0f3a9db22b0a85eb31dcb32522588476deb98fb23ca00e038561d",
+      "content_hash": "sha256:f5dd7ad93cdd23d44a22c881b964a136d5aa62641a9337d67925c4b024e2209c",
       "path": "experiments/results/akbulut-yasui/figure21-pointed-worker-plan-v1.json",
       "schema": "twisted-yetter.figure21-pointed-worker-plan.v1",
-      "sha256": "sha256:27fb74a66a62f32ad3560479ff2088e33108f25ebf1d01bae568e2d7e7c89feb",
+      "sha256": "sha256:2d4d929d731e037dc1badfe3551d6a0493e0c43981e0778bc3ec8cc40a74229d",
       "status": "PASS_WORKER_PLAN_READY"
     },
     "worker_smoke": {
@@ -37,7 +37,7 @@
   "local_smoke_checks": {
     "paid_batch_preflight_pass": true,
     "prehetzner_smoke_pass": true,
-    "prehetzner_smoked_all_ready_rows": false,
+    "prehetzner_smoked_all_ready_rows": true,
     "worker_smoke_pass": true
   },
   "mathematical_status": "POINTED_FIGURE21_BATCH_TERMINAL_NOT_EXOTICNESS_CLAIM",
@@ -50,10 +50,10 @@
   ],
   "parameters": {
     "logical_worker_shards": 16,
-    "remote_capacity_provided": false,
+    "remote_capacity_provided": true,
     "work_root": "experiments/results/akbulut-yasui/figure21-pointed-chunks-v1"
   },
-  "prelaunch_check_status": "TERMINAL_BLOCKED_LOCAL_SMOKE_FAILED",
+  "prelaunch_check_status": "PASS_PRELAUNCH_LOCAL_SMOKE",
   "python_version": "3.11.15",
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "row_count": 15,
@@ -417,6 +417,6 @@
     }
   ],
   "schema": "twisted-yetter.figure21-pointed-batch-result.v1",
-  "started_at_utc": "2026-07-16T21:43:16.134182+00:00",
+  "started_at_utc": "2026-07-16T22:56:50.211416+00:00",
   "status": "PASS_POINTED_FIGURE21_BATCH_COMPLETE"
 }

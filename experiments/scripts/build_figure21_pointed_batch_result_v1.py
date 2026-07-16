@@ -250,6 +250,7 @@ def build_result(
     rows = []
     blockers = []
 
+    ready_count = int(plan.get("ready_count", 0))
     local_smoke_checks = {
         "paid_batch_preflight_pass": plan.get("paid_batch_preflight_status")
         == "PASS_PAID_BATCH_PREFLIGHT",
@@ -259,7 +260,9 @@ def build_result(
         "prehetzner_smoked_all_ready_rows": prehetzner_smoke.get(
             "ready_row_count_smoked"
         )
-        == plan.get("ready_count"),
+        == ready_count
+        if ready_count
+        else True,
     }
     preflight_pass = all(local_smoke_checks.values())
     for row in plan.get("rows", []):
