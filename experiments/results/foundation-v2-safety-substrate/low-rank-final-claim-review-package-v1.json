@@ -1,0 +1,33 @@
+{
+  "claims_explicitly_not_proposed": [
+    "LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED",
+    "FORMAL_LOW_RANK_SCAN_COMPLETE",
+    "complete-no-signal-under-frozen-plan"
+  ],
+  "content_hash": "sha256:5285e79bae52b858ea525771148aaf465f7b80168186cb7c27864946ea5dfa6a",
+  "final_claims_admitted": false,
+  "generated_at_utc": "2026-07-16T04:16:40Z",
+  "generator_script": "experiments/scripts/build_low_rank_completion_run_v1.py",
+  "git": {
+    "commit": "2accf8d2029e36a7e13e27fe6e00ca455aaa1990",
+    "dirty": true
+  },
+  "proposed_final_ctl_claims": [
+    {
+      "claim": "The current end-to-end low-rank ribbon scan run is terminal-blocked before formal scan planning because six non-pointed rows lack formal ribbon realization snapshots and bound coherence certificates.",
+      "logical_id": "claim:low-rank-ribbon-classification-terminal-blocked",
+      "status": "PROPOSED_NOT_ADMITTED"
+    }
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_completion_run_v1.py --write",
+  "review_package_id": "low-rank-final-claim-review-package-v1",
+  "review_required_before_admission": true,
+  "run_ledger_hash": "sha256:7ea4548c28ef69188d23e72da796f95373344bf0459eee0cbe3da466fa28cc8b",
+  "schema": "twisted-yetter.low-rank-final-claim-review-package.v1",
+  "status": "READY_FOR_USER_REVIEW_BEFORE_FINAL_CLAIMS",
+  "terminal_blocker_hash": "sha256:6f9f2f01d71864ff6515e35694aba43e1ff32161e9e5a88dd8c4f46b9baafabb",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}

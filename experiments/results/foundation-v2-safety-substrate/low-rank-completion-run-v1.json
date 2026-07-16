@@ -1,0 +1,344 @@
+{
+  "content_hash": "sha256:7ea4548c28ef69188d23e72da796f95373344bf0459eee0cbe3da466fa28cc8b",
+  "explicit_non_claims": [
+    "This run does not establish the rank 2-5 ribbon classification.",
+    "This run does not produce a formal scan plan.",
+    "This run does not run formal controls or target scans.",
+    "This run does not produce a formal scan aggregate.",
+    "This run does not claim no-signal."
+  ],
+  "final_claims_admission_state": "PAUSED_FOR_USER_REVIEW",
+  "generated_at_utc": "2026-07-16T04:16:40Z",
+  "generator_script": "experiments/scripts/build_low_rank_completion_run_v1.py",
+  "git": {
+    "commit": "2accf8d2029e36a7e13e27fe6e00ca455aaa1990",
+    "dirty": true
+  },
+  "input_artifacts": {
+    "catalog": {
+      "content_hash": "sha256:36432a37a6ad404099747d6fd05a1fb8cfe8764e76f9aa03aebebf8abb6732c5",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-ribbon-realization-catalog-v10.json",
+      "sha256": "sha256:5023e2d9bd7ec2916634bfd8bf948417e08ae133887bf41727f923c3d62ac3e2",
+      "status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS"
+    },
+    "readiness": {
+      "content_hash": "sha256:c83ff611669140ccd3accb7e5f045fe16065beac9fbfc9a83fe40614c534b284",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-readiness-v10.json",
+      "sha256": "sha256:ea591405bd6bb947eefaebc26c3f53cf7fa652b2402f6043198cc7520c38677a",
+      "status": "BLOCKED_NONPOINTED_RIBBON_ROWS_REMAIN"
+    },
+    "step6_scan_plan_generation_attempt": {
+      "content_hash": "sha256:e5f28a65365c0fd0537eb91a651fe440dda9607e3dbc96082d7c3d8a4a2b470d",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-plan-generation-attempt-v1.json",
+      "sha256": "sha256:21cbd7c07deffde13203df51f8ff4092a1715190d5a42d9a521270a351221059",
+      "status": "BLOCKED_NO_ESTABLISHED_RIBBON_CATALOG"
+    },
+    "step7_control_scan_attempt": {
+      "content_hash": "sha256:a5f78b0bd8d77bebe3e98fca5b1b64ae5124740663bdfa9bf26d3a12023d62db",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-control-scan-attempt-v1.json",
+      "sha256": "sha256:ceb6574068f231067721f4ae09fef5f41ef5e309b1a2942256ea5015b215d01a",
+      "status": "BLOCKED_NO_FORMAL_SCAN_PLAN"
+    },
+    "step8_target_scan_attempt": {
+      "content_hash": "sha256:68d5fc6739d3a3648cfa571bb51d27d5293b4c10f0e09bc62cc9a4dcf05f8d39",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-target-scan-attempt-v1.json",
+      "sha256": "sha256:2d30624a0c6db4762087913280bcae8d1a798052e6dac5a47f0fc6870aca01c1",
+      "status": "BLOCKED_NO_FORMAL_SCAN_PLAN_OR_CONTROL_PASS"
+    },
+    "step9_aggregate_attempt": {
+      "content_hash": "sha256:ee91cc3d136b49b7b7f42fe18a796f13a5c07e9072a31895f3a85ce9457b1cea",
+      "path": "experiments/results/foundation-v2-safety-substrate/formal-low-rank-scan-aggregate-attempt-v1.json",
+      "sha256": "sha256:bfda582e051b1d4995f0877a4d70cbd489f35f7c2d7c8d2e5d899054e11e55a7",
+      "status": "BLOCKED_NO_SCAN_CASE_RESULTS_OR_DENOMINATOR_CERTIFICATE"
+    }
+  },
+  "next_allowed_action": "Review terminal-blocked candidate and proposed final CTL wording; do not admit final classification or scan claims before review.",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python3 experiments/scripts/build_low_rank_completion_run_v1.py --write",
+  "row_resolution_order": [
+    "rank3-ising",
+    "rank3-psu2-5",
+    "rank4-psu2-7",
+    "rank5-su2-4",
+    "rank5-psu2-9",
+    "rank5-psu3-4"
+  ],
+  "row_resolution_records": [
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row and known SU(2)_2 local backend scope",
+        "checked ribbon snapshot inventory for rank3-ising snapshots",
+        "rejected reuse of all-sigma local backend as full mixed-label RibbonFusionCategoryV2 evidence"
+      ],
+      "blocked_by": [
+        "rank3-ising:missing-ribbon-realization-snapshot",
+        "rank3-ising:missing-hash-bound-full-coherence-certificate",
+        "rank3-ising:missing-independent-ribbon-compatibility-check",
+        "rank3-ising:existing-su2-2-rf-local-backend-not-full-ribbon-category",
+        "rank3-ising:requires-explicit-ribbon-multiplicity-denominator",
+        "rank3-ising:requires-full-mixed-label-pentagon-hexagon-checker"
+      ],
+      "family_id": "rank3-ising",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "sixteen Ising ribbon realization snapshots if the recorded two spherical structures per braided class survive the audit",
+        "full mixed-label F/R/twist/pivotal/evaluation/coevaluation data in one gauge",
+        "machine checker for pentagon and both hexagon equations, not only all-sigma braid closures",
+        "negative controls for mirror, pivotal sign, sigma basis order, and stale SU(2)_2 local backend reuse"
+      ],
+      "modular_braided_class_count": 8,
+      "rank": 3,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row",
+        "checked ribbon snapshot inventory for family snapshots",
+        "rejected category-name or historical SU(2)_k control output as q6j-backed ribbon realization evidence"
+      ],
+      "blocked_by": [
+        "rank3-psu2-5:missing-ribbon-realization-snapshot",
+        "rank3-psu2-5:missing-hash-bound-full-coherence-certificate",
+        "rank3-psu2-5:missing-independent-ribbon-compatibility-check",
+        "rank3-psu2-5:requires-source-backed-q6j-symbols",
+        "rank3-psu2-5:requires-galois-branch-and-pivotal-audit"
+      ],
+      "family_id": "rank3-psu2-5",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "rank-3 adjoint SU(2) level-5 F/R data with field embedding and source locator",
+        "exact q6j or equivalent symbolic producer certificate for all fusion channels",
+        "independent balancing and ribbon/pivotal compatibility checks for every branch"
+      ],
+      "modular_braided_class_count": 6,
+      "rank": 3,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row",
+        "checked ribbon snapshot inventory for family snapshots",
+        "rejected category-name or historical SU(2)_k control output as q6j-backed ribbon realization evidence"
+      ],
+      "blocked_by": [
+        "rank4-psu2-7:missing-ribbon-realization-snapshot",
+        "rank4-psu2-7:missing-hash-bound-full-coherence-certificate",
+        "rank4-psu2-7:missing-independent-ribbon-compatibility-check",
+        "rank4-psu2-7:requires-source-backed-q6j-symbols",
+        "rank4-psu2-7:requires-galois-branch-and-pivotal-audit"
+      ],
+      "family_id": "rank4-psu2-7",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "rank-4 adjoint SU(2) level-7 F/R data with field embedding and source locator",
+        "exact q6j or equivalent symbolic producer certificate for all fusion channels",
+        "independent balancing and ribbon/pivotal compatibility checks for every branch"
+      ],
+      "modular_braided_class_count": 6,
+      "rank": 4,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row",
+        "checked ribbon snapshot inventory for rank5-su2-4 snapshots",
+        "rejected collapsing multiple spherical/ribbon branches to one representative"
+      ],
+      "blocked_by": [
+        "rank5-su2-4:missing-ribbon-realization-snapshot",
+        "rank5-su2-4:missing-hash-bound-full-coherence-certificate",
+        "rank5-su2-4:missing-independent-ribbon-compatibility-check",
+        "rank5-su2-4:rep-s3-extension-explicit-branching-needed",
+        "rank5-su2-4:two-spherical-structures-per-braided-class-must-not-collapse"
+      ],
+      "family_id": "rank5-su2-4",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "explicit Rep(S3)^omega extension data for each gamma branch",
+        "two spherical/ribbon refinements per braided class, if confirmed by the audit, recorded as separate snapshot hashes",
+        "producer and consumer certificates that distinguish pivotal sign changes from braided equivalence"
+      ],
+      "modular_braided_class_count": 4,
+      "rank": 5,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row",
+        "checked ribbon snapshot inventory for family snapshots",
+        "rejected category-name or historical SU(2)_k control output as q6j-backed ribbon realization evidence"
+      ],
+      "blocked_by": [
+        "rank5-psu2-9:missing-ribbon-realization-snapshot",
+        "rank5-psu2-9:missing-hash-bound-full-coherence-certificate",
+        "rank5-psu2-9:missing-independent-ribbon-compatibility-check",
+        "rank5-psu2-9:requires-source-backed-q6j-symbols",
+        "rank5-psu2-9:requires-galois-branch-and-pivotal-audit"
+      ],
+      "family_id": "rank5-psu2-9",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "rank-5 adjoint SU(2) level-9 F/R data with field embedding and source locator",
+        "exact q6j or equivalent symbolic producer certificate for all fusion channels",
+        "independent balancing and ribbon/pivotal compatibility checks for every branch"
+      ],
+      "modular_braided_class_count": 10,
+      "rank": 5,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    },
+    {
+      "attempted_resolution": [
+        "inspected v10 blocker row",
+        "checked ribbon snapshot inventory for rank5-psu3-4 snapshots",
+        "rejected summary fusion data without multiplicity-two basis/gauge/pairing certificates"
+      ],
+      "blocked_by": [
+        "rank5-psu3-4:missing-ribbon-realization-snapshot",
+        "rank5-psu3-4:missing-hash-bound-full-coherence-certificate",
+        "rank5-psu3-4:missing-independent-ribbon-compatibility-check",
+        "rank5-psu3-4:requires-source-backed-psu3-fr-symbols",
+        "rank5-psu3-4:multiplicity-two-fusion-spaces-require-explicit-basis-gauge"
+      ],
+      "family_id": "rank5-psu3-4",
+      "formal_admission_allowed": false,
+      "missing_evidence": [
+        "content-addressed F/R/twist/duality/pivotal/pairing realization",
+        "exact or symbolic producer coherence certificate",
+        "runtime consumer certificate bound to the same category_data_hash",
+        "explicit ribbon condition / balancing compatibility certificate",
+        "rank-5 PSU(3)_4 F/R data with source locator and field embedding",
+        "explicit multiplicity-two fusion-space basis and pairing convention",
+        "producer and runtime coherence certificates that check basis order and gauge changes fail closed"
+      ],
+      "modular_braided_class_count": 6,
+      "rank": 5,
+      "required_evidence": [
+        "ribbon_realization_snapshot",
+        "producer_exact_or_symbolic_coherence_certificate",
+        "runtime_consumer_coherence_certificate",
+        "ribbon_pivotal_compatibility_certificate",
+        "explicit_ribbon_denominator_contribution"
+      ],
+      "snapshot_inventory_count": 0,
+      "snapshot_inventory_paths": [],
+      "terminal_condition": "No formal scan route may start until this row has content-addressed ribbon realization snapshots and all required certificates, or this terminal blocker is explicitly superseded by a later resolved row artifact.",
+      "terminal_status": "TERMINAL_BLOCKED_RIBBON_REFINEMENT_INCOMPLETE"
+    }
+  ],
+  "run_id": "low-rank-completion-run-v1",
+  "schema": "twisted-yetter.low-rank-completion-run.v1",
+  "snapshot_inventory": {
+    "blocked_family_snapshot_count": {
+      "rank3-ising": 0,
+      "rank3-psu2-5": 0,
+      "rank4-psu2-7": 0,
+      "rank5-psu2-9": 0,
+      "rank5-psu3-4": 0,
+      "rank5-su2-4": 0
+    },
+    "blocked_family_snapshot_paths": {
+      "rank3-ising": [],
+      "rank3-psu2-5": [],
+      "rank4-psu2-7": [],
+      "rank5-psu2-9": [],
+      "rank5-psu3-4": [],
+      "rank5-su2-4": []
+    },
+    "snapshot_dir": "experiments/results/foundation-v2-safety-substrate/ribbon-realization-snapshots",
+    "total_snapshot_file_count": 37
+  },
+  "starting_state": {
+    "blocked_family_ids": [
+      "rank3-ising",
+      "rank3-psu2-5",
+      "rank4-psu2-7",
+      "rank5-su2-4",
+      "rank5-psu2-9",
+      "rank5-psu3-4"
+    ],
+    "blocked_row_count": 6,
+    "catalog_status": "PARTIAL_RIBBON_REFINEMENT_PROGRESS",
+    "formal_control_results_produced": false,
+    "formal_scan_aggregate_produced": false,
+    "formal_scan_plan_allowed": false,
+    "formal_scan_plan_produced": false,
+    "formal_target_scan_results_produced": false,
+    "resolved_row_count": 8,
+    "scan_plan_generation_allowed": false
+  },
+  "status": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+  "terminal_result_kind": "FORMAL_LOW_RANK_SCAN_TERMINAL_BLOCKED",
+  "tool_versions": {
+    "python": "3.14.6"
+  }
+}
