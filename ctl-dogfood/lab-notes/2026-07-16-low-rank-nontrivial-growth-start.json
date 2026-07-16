@@ -1,0 +1,88 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-low-rank-nontrivial-growth-start",
+  "title": "Low-rank nontrivial universal-character growth targets started",
+  "created_at": "2026-07-16T05:25:58Z",
+  "created_by": "actor:codex",
+  "status": "NONTRIVIAL_GROWTH_TARGETS_STARTED_PRINCIPAL_EXPORTS_COMPLETE",
+  "top_notice": "The full rank 2-5 catalog universal-grading audit was added to avoid missing resolved nontrivial rows. For the procurement-blocked rows, the formal nontrivial universal-character growth targets are rank3-ising and rank5-su2-4; the three PSU(2) adjoint rows are trivial for nontrivial universal-character twists; rank5-psu3-4 remains unknown and is not ignored. Principal SU(2)_2 and SU(2)_4 F/R/twist/dimension data exports were generated as first growth artifacts, but they are not row-complete ribbon realization snapshots.",
+  "scope": {
+    "input_catalog_id": "low-rank-ribbon-realization-catalog-v11",
+    "full_catalog_audit_id": "low-rank-full-catalog-universal-grading-audit-v1",
+    "resolved_nontrivial_family_ids": [
+      "rank2-cyclic-z2",
+      "rank3-cyclic-z3",
+      "rank4-pointed-z4",
+      "rank4-pointed-z2xz2",
+      "rank4-semion-times-fibonacci",
+      "rank5-su5-1"
+    ],
+    "blocked_nontrivial_growth_target_family_ids": [
+      "rank3-ising",
+      "rank5-su2-4"
+    ],
+    "trivial_ignored_for_nontrivial_universal_character_scan": [
+      "rank2-fibonacci-yang-lee",
+      "rank3-psu2-5",
+      "rank4-fibxfib",
+      "rank4-psu2-7",
+      "rank5-psu2-9"
+    ],
+    "unknown_not_ignored": [
+      "rank5-psu3-4"
+    ],
+    "formal_scan_plan_allowed_after_this_note": false
+  },
+  "artifacts": [
+    {
+      "artifact_id": "low-rank-full-catalog-universal-grading-audit-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/low-rank-full-catalog-universal-grading-audit-v1.json",
+      "git_blob": "c3f056b9650e3fe4697497550b16da73940721ea",
+      "sha256": "89877d71705530145c26a4df2604220feb3a77b9059726554fae2324c1162941",
+      "content_hash": "sha256:7ccfac524eceb54ae8b91bb773efaf9cddd4bde677605f786eb7c29c1e0bec74",
+      "status": "FULL_CATALOG_UNIVERSAL_GRADING_AUDIT_COMPLETE_WITH_ONE_UNKNOWN"
+    },
+    {
+      "artifact_id": "rank3-ising-principal-su2-level2-category-data-export-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/grown-category-data/rank3-ising-principal-su2-level2-category-data-export-v1.json",
+      "git_blob": "995e3dcc55ac23188cb06bb9269b9a69c23d9de8",
+      "sha256": "7167b3ffa5f04cffd387db1110949f86bdb8f451917e2ce1adadbdbfaeade974",
+      "content_hash": "sha256:29c54661ef40598390636d62380936f91c4930b14cc66da804b7a3bf5c9e8703",
+      "status": "PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_ROW_COMPLETE"
+    },
+    {
+      "artifact_id": "rank5-su2-4-principal-su2-level4-category-data-export-v1",
+      "path": "experiments/results/foundation-v2-safety-substrate/grown-category-data/rank5-su2-4-principal-su2-level4-category-data-export-v1.json",
+      "git_blob": "9e34c559cba184ce2e7a8593b89fcabcacd55717",
+      "sha256": "cf99dd189533fcdc8a5b44a85b88db78ae700d8e4855104ab4acb946c2b3aa74",
+      "content_hash": "sha256:000a73ac6655518d04e5c54be614f6f8d04a4519d91846fc9606db94a8434068",
+      "status": "PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_EXTENSION_COMPLETE"
+    }
+  ],
+  "tests": [
+    {
+      "command": "env UV_CACHE_DIR=.uv-cache uv run pytest tests/test_su2k_principal_category_data_export.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py tests/test_low_rank_universal_grading_audit_v1.py tests/test_formal_low_rank_scan_step6_7_gate.py tests/test_formal_low_rank_scan_step8_gate.py tests/test_formal_low_rank_scan_step9_gate.py",
+      "status": "pass",
+      "collected": 24
+    },
+    {
+      "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/export_su2k_principal_category_data.sage.py --family-id rank3-ising --write",
+      "status": "pass"
+    },
+    {
+      "command": "DOT_SAGE=\"$PWD/.sage\" sage experiments/sage/export_su2k_principal_category_data.sage.py --family-id rank5-su2-4 --write",
+      "status": "pass"
+    }
+  ],
+  "explicit_non_claims": [
+    "This note does not claim LOW_RANK_RIBBON_CLASSIFICATION_ESTABLISHED.",
+    "This note does not claim FORMAL_LOW_RANK_SCAN_COMPLETE.",
+    "This note does not claim a formal scan plan exists.",
+    "This note does not resolve rank3-ising or rank5-su2-4 as full family rows.",
+    "The principal SU(2)_k exports are not ribbon_realization_snapshot formal evidence.",
+    "The principal SU(2)_k exports do not enumerate Galois, mirror, pivotal, ribbon, or extension branches.",
+    "The PSU(3)_4 row remains unknown for universal grading and is not treated as trivial."
+  ],
+  "mathematical_status": "FULL_CATALOG_UNIVERSAL_GRADING_TRIAGE_COMPLETE; NONTRIVIAL_BLOCKED_TARGETS_IDENTIFIED; PRINCIPAL_SU2_BRANCH_DATA_EXPORTED_NOT_ROW_COMPLETE",
+  "subjects": ["subject:twisted-yetter:reference:low-rank-mtc-classification"]
+}
