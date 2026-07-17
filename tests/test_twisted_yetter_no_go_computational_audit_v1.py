@@ -20,6 +20,7 @@ SPEC.loader.exec_module(MODULE)
 AuditError = MODULE.AuditError
 build_audit = MODULE.build_audit
 comparison_inventory_entry = MODULE._comparison_inventory_entry
+content_hash = MODULE._content_hash
 
 
 def _mutated_input(tmp_path: Path, relative: str, mutate) -> Path:
@@ -119,3 +120,18 @@ def test_downgraded_comparison_cannot_silently_become_pass(tmp_path: Path) -> No
     )
     with pytest.raises(AuditError, match="inconsistent"):
         comparison_inventory_entry(path, "BLOCKED")
+
+
+def test_checked_in_audit_is_content_addressed_and_clean_generated() -> None:
+    path = (
+        REPO_ROOT
+        / "experiments/results/theory/"
+        "twisted-yetter-stable-no-go-computational-audit-v1.json"
+    )
+    payload = json.loads(path.read_text())
+    recorded_hash = payload.pop("content_hash")
+    assert content_hash(payload) == recorded_hash
+    assert payload["git_dirty_before_output_write"] is False
+    inventory = payload["comparison_file_inventory"]
+    assert len(inventory) == 24
+    assert all(row["sha256"].startswith("sha256:") for row in inventory)
