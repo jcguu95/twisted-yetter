@@ -24,6 +24,7 @@ SPEC.loader.exec_module(MODULE)
 
 NormalizationAuditError = MODULE.NormalizationAuditError
 build_audit = MODULE.build_audit
+content_hash = MODULE._content_hash
 
 
 def _mutated_rank23(tmp_path: Path, mutate) -> Path:
@@ -103,3 +104,16 @@ def test_stale_snapshot_hash_fails_closed(tmp_path: Path) -> None:
     path = _mutated_rank23(tmp_path, mutate)
     with pytest.raises(NormalizationAuditError, match="stale snapshot content hash"):
         build_audit({"rank2_rank3": path})
+
+
+def test_checked_in_normalization_artifact_is_content_addressed_and_clean() -> None:
+    path = (
+        REPO_ROOT
+        / "experiments/results/akbulut-yasui/"
+        "figure21-pointed-ordinary-normalization-audit-v1.json"
+    )
+    payload = json.loads(path.read_text())
+    recorded_hash = payload.pop("content_hash")
+    assert content_hash(payload) == recorded_hash
+    assert payload["git_dirty_before_output_write"] is False
+    assert all(row["sha256"].startswith("sha256:") for row in payload["inputs"])

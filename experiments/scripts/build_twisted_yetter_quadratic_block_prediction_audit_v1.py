@@ -728,13 +728,26 @@ def _audit_figure21(
 ) -> dict[str, Any]:
     _require(
         payload.get("status")
-        == "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY",
+        == (
+            "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_"
+            "FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
+        ),
         "Figure 21 compatibility audit status changed",
     )
     counts = payload["established_computational_theorem"]["machine_checked_counts"]
     _require(counts["figure21_pointed_realization_count"] == 15, "Figure 21 denominator changed")
-    _require(counts["figure21_raw_exact_pointed_rows"] == 13, "Figure 21 raw count changed")
-    _require(counts["figure21_phase_only_pointed_rows"] == 2, "Figure 21 phase count changed")
+    _require(
+        counts["figure21_raw_graph_exact_pointed_rows"] == 13,
+        "Figure 21 raw graph count changed",
+    )
+    _require(
+        counts["figure21_normalized_exact_pointed_rows"] == 15,
+        "Figure 21 normalized count changed",
+    )
+    _require(
+        counts["figure21_nonidentity_presentation_correction_rows"] == 2,
+        "Figure 21 correction count changed",
+    )
     _require(
         counts["figure21_certified_h2_marked_pointwise_rows"] == 0,
         "Figure 21 unexpectedly claims an H2-marked pointwise row",
@@ -749,8 +762,9 @@ def _audit_figure21(
             "signature": -8,
         },
         "pointed_modular_realization_count": 15,
-        "raw_distribution_match_count": 13,
-        "global_minus_one_phase_aligned_count": 2,
+        "raw_graph_distribution_match_count": 13,
+        "ordinary_normalized_distribution_match_count": 15,
+        "nonidentity_presentation_correction_count": 2,
         "certified_h2_marked_pointwise_row_count": 0,
         "why_not_all_alpha_verified": (
             "The saved Figure 21 computation records fixed-label distributions, "
@@ -1033,9 +1047,10 @@ def build_audit(
                 "from the invertible-object sector and the intersection form."
             ),
             "figure21_scope": (
-                "Figure 21 remains compatible at distribution level for 15 pointed "
-                "MTC realizations, but contributes zero H2-marked pointwise checks "
-                "of the quadratic formula."
+            "Figure 21 remains compatible at distribution level for 15 pointed "
+                "MTC realizations after independently derived ordinary-aggregate "
+                "presentation normalization, but contributes zero H2-marked "
+                "pointwise checks of the quadratic formula."
             ),
         },
         "explicit_non_claims": [
@@ -1043,7 +1058,8 @@ def build_audit(
             "This artifact does not turn the still-open 11/8 conjecture into a theorem.",
             "This artifact does not use the tangent-bundle Pontryagin class p1(TM).",
             "This artifact does not certify a Figure 21 H2 coordinate map.",
-            "This artifact does not remove the two Figure 21 semion global-phase discrepancies.",
+            "This artifact does not turn the Figure 21 presentation-normalization calibration into an H2 marking.",
+            "This artifact does not prove that the pointed normalization adapter extends to arbitrary MTCs.",
             "This artifact does not establish a premodular formula.",
             "This artifact does not cover torsion H2, non-simply-connected manifolds, or manifolds with boundary.",
             "Presentation-control agreement is not independent experimental proof of a universal theorem.",

@@ -35,7 +35,8 @@ def _mutated_input(tmp_path: Path, relative: str, mutate) -> Path:
 def test_audit_establishes_only_the_computational_theorem() -> None:
     payload = build_audit()
     assert payload["status"] == (
-        "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+        "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_"
+        "FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
     )
     assert payload["conditional_mathematical_theorem"]["status"] == (
         "CONDITIONAL_PROPOSITION_NOT_YET_ESTABLISHED_AS_PROJECT_THEOREM"
@@ -46,19 +47,22 @@ def test_audit_establishes_only_the_computational_theorem() -> None:
     )
     counts = theorem["machine_checked_counts"]
     assert counts["figure21_pointed_realization_count"] == 15
-    assert counts["figure21_raw_exact_pointed_rows"] == 13
-    assert counts["figure21_phase_only_pointed_rows"] == 2
+    assert counts["figure21_raw_graph_exact_pointed_rows"] == 13
+    assert counts["figure21_normalized_exact_pointed_rows"] == 15
+    assert counts["figure21_nonidentity_presentation_correction_rows"] == 2
     assert counts["figure21_certified_h2_marked_pointwise_rows"] == 0
     assert counts["certified_counterexample_count"] == 0
 
 
-def test_audit_keeps_rank2_phase_and_premodular_guardrails_visible() -> None:
+def test_audit_keeps_rank2_normalization_and_premodular_guardrails_visible() -> None:
     payload = build_audit()
     figure21 = next(
         row for row in payload["evidence_groups"] if row["id"] == "figure21-pointed-rank2-5"
     )
-    assert figure21["result"] == "13_RAW_EXACT_AND_2_PHASE_ALIGNED"
-    assert "global -1 discrepancy" in figure21["caveat"]
+    assert figure21["result"] == (
+        "15_EXACT_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+    )
+    assert "independently derived" in figure21["caveat"]
     dispositions = {
         row["id"]: row["disposition"] for row in payload["excluded_or_downgraded"]
     }
@@ -70,7 +74,7 @@ def test_audit_keeps_rank2_phase_and_premodular_guardrails_visible() -> None:
     )
 
 
-def test_audit_fails_if_rank2_raw_discrepancy_is_hidden(tmp_path: Path) -> None:
+def test_audit_fails_if_rank2_raw_diagnostic_is_hidden(tmp_path: Path) -> None:
     path = _mutated_input(
         tmp_path,
         "experiments/results/akbulut-yasui/"

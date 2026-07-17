@@ -70,8 +70,9 @@ def test_figure21_is_not_promoted_to_an_all_alpha_check() -> None:
         "DISTRIBUTION_LEVEL_COMPATIBLE_BLOCKED_FOR_POINTWISE_QUADRATIC_AUDIT"
     )
     assert figure21["certified_h2_marked_pointwise_row_count"] == 0
-    assert figure21["raw_distribution_match_count"] == 13
-    assert figure21["global_minus_one_phase_aligned_count"] == 2
+    assert figure21["raw_graph_distribution_match_count"] == 13
+    assert figure21["ordinary_normalized_distribution_match_count"] == 15
+    assert figure21["nonidentity_presentation_correction_count"] == 2
 
 
 def test_eleven_eighths_role_is_arithmetically_explicit() -> None:

@@ -26,6 +26,10 @@ PATHS = {
     "figure21_rank23": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
     "figure21_rank4": "experiments/results/akbulut-yasui/figure21-rank4-standard-comparison-v1.json",
     "figure21_rank5": "experiments/results/akbulut-yasui/figure21-rank5-standard-comparison-v1.json",
+    "figure21_normalization": (
+        "experiments/results/akbulut-yasui/"
+        "figure21-pointed-ordinary-normalization-audit-v1.json"
+    ),
     "figure21_budgeted_sweep": "experiments/results/akbulut-yasui/figure21-vs-standard-pointed-modular-sweep-v1.json",
     "figure21_untwisted_su22": "experiments/results/akbulut-yasui/figure21-right-su2-2-untwisted-framed-evaluation-v1.json",
     "figure21_semion_backend": "experiments/results/akbulut-yasui/figure21-right-rank2-semion-modular-evaluation-v1.json",
@@ -246,6 +250,7 @@ def build_audit(
     rank23 = payloads["figure21_rank23"]
     rank4 = payloads["figure21_rank4"]
     rank5 = payloads["figure21_rank5"]
+    normalization = payloads["figure21_normalization"]
     _require(
         batch.get("status") == "PASS_POINTED_FIGURE21_BATCH_COMPLETE",
         "Figure 21 pointed batch is not complete",
@@ -288,6 +293,25 @@ def build_audit(
         rank5.get("status") == "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH"
         and rank5.get("matching_row_count") == 2,
         "rank 5 comparison is no longer a 2-row exact match",
+    )
+    _require(
+        normalization.get("status")
+        == (
+            "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_"
+            "ORDINARY_AGGREGATE_NORMALIZATION"
+        ),
+        "Figure 21 ordinary-aggregate normalization audit no longer passes",
+    )
+    _require(
+        normalization.get("row_count") == 15
+        and normalization.get("normalized_distribution_match_count") == 15
+        and normalization.get("nonidentity_presentation_correction_count") == 2,
+        "Figure 21 normalized pointed denominator changed",
+    )
+    _require(
+        set(normalization["nonidentity_presentation_correction_realization_ids"])
+        == semion_ids,
+        "Figure 21 nonidentity correction rows are no longer exactly the semion pair",
     )
 
     untwisted = payloads["figure21_untwisted_su22"]
@@ -443,12 +467,12 @@ def build_audit(
     )
 
     comparison_inventory = _comparison_inventory()
-    exact_pointed_rows = (
+    raw_exact_pointed_rows = (
         rank23["matching_row_count"]
         + rank4["matching_row_count"]
         + rank5["matching_row_count"]
     )
-    _require(exact_pointed_rows == 13, "pointed raw exact-match count is not 13")
+    _require(raw_exact_pointed_rows == 13, "pointed raw exact-match count is not 13")
 
     evidence_groups = [
         {
@@ -457,11 +481,13 @@ def build_audit(
             "category_scope": "15 pointed modular realizations, ranks 2-5",
             "comparison_unit": "nonzero fixed-label value distribution",
             "declared_units": 15,
-            "result": "13_RAW_EXACT_AND_2_PHASE_ALIGNED",
+            "result": "15_EXACT_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION",
             "theorem_compatibility": "COMPATIBLE_BUT_NOT_MARKED_POINTWISE_VERIFICATION",
             "caveat": (
-                "The two rank-2 semion rows have a raw global -1 discrepancy. "
-                "No certified H2 coordinate map or proof of this normalization phase exists."
+                "The two rank-2 semion rows retain a raw graph-level -1 difference. "
+                "The correction is now independently derived from the ordinary "
+                "Kirby-color aggregate and the full normalized distribution then "
+                "matches. No certified H2 coordinate map exists."
             ),
             "artifacts": [
                 _ref(*loaded[key])
@@ -470,6 +496,7 @@ def build_audit(
                     "figure21_rank23",
                     "figure21_rank4",
                     "figure21_rank5",
+                    "figure21_normalization",
                 )
             ],
         },
@@ -653,26 +680,34 @@ def build_audit(
         "statement": (
             "For the frozen artifact denominator enumerated by this audit, every retained "
             "completed MTC presentation comparison satisfies its recorded tolerance, "
-            "coordinate map, witness rule, or explicitly disclosed output-phase alignment. "
+            "coordinate map, witness rule, or independently calibrated presentation "
+            "normalization. "
             "No retained artifact is a certified counterexample to the conditional marked "
             "stable no-go proposition. On the sole current exotic target, Figure 21, the "
-            "strongest result is only distribution-level compatibility: 13 pointed rows "
-            "match raw, two semion rows match only after a global -1 output phase, and no "
-            "H2-marked pointwise comparison is certified."
+            "strongest result is only distribution-level compatibility: all 15 pointed "
+            "rows match after ordinary-aggregate presentation normalization, two semion "
+            "rows use the independently derived correction -1, and no H2-marked pointwise "
+            "comparison is certified."
         ),
         "statement_zh_tw": (
             "在本 audit 明列並凍結的既有計算範圍內，所有保留的完整 MTC "
-            "presentation comparisons 都通過各自記錄的誤差、座標搬運、witness 或明示"
-            "的整體 phase 規則；沒有任何一份保留資料構成上述條件式 no-go 命題的"
-            "已認證反例。唯一真正的 exotic target Figure 21 目前只能說：13 個 pointed "
-            "rows 原始 distribution 完全相同，2 個 semion rows 要乘整體 -1 才相同，"
-            "而且尚無 H2-marked pointwise comparison。"
+            "presentation comparisons 都通過各自記錄的誤差、座標搬運、witness 或"
+            "獨立校準的 presentation normalization；沒有任何一份保留資料構成上述"
+            "條件式 no-go 命題的已認證反例。唯一真正的 exotic target Figure 21 "
+            "目前只能說：15 個 pointed rows 經 ordinary Kirby-color aggregate "
+            "獨立校準後 distribution 全部相同；其中 2 個 semion rows 的校準因子為 "
+            "-1，而且尚無 H2-marked pointwise comparison。"
         ),
         "machine_checked_counts": {
             "retained_evidence_group_count": len(evidence_groups),
             "figure21_pointed_realization_count": 15,
-            "figure21_raw_exact_pointed_rows": exact_pointed_rows,
-            "figure21_phase_only_pointed_rows": 2,
+            "figure21_raw_graph_exact_pointed_rows": raw_exact_pointed_rows,
+            "figure21_normalized_exact_pointed_rows": normalization[
+                "normalized_distribution_match_count"
+            ],
+            "figure21_nonidentity_presentation_correction_rows": normalization[
+                "nonidentity_presentation_correction_count"
+            ],
             "figure21_certified_h2_marked_pointwise_rows": 0,
             "certified_counterexample_count": 0,
             "declared_control_comparison_units_excluding_figure21_distributions": sum(
@@ -684,7 +719,10 @@ def build_audit(
     finished = datetime.now(UTC)
     result = {
         "schema": "twisted-yetter.stable-no-go-computational-audit.v1",
-        "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY",
+        "status": (
+            "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_"
+            "FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
+        ),
         "mathematical_status": (
             "COMPUTATIONAL_THEOREM_ESTABLISHED_CONDITIONAL_MATHEMATICAL_THEOREM_OPEN"
         ),
@@ -742,7 +780,8 @@ def build_audit(
             "The computations do not replace expert review of the marked stable-realization argument.",
             "The Figure 21 source transcription is not certified against the printed diagram.",
             "There is no certified H2 coordinate map for Figure 21 versus CP2#9(-CP2).",
-            "The two rank-2 Figure 21 semion rows have an unresolved raw global -1 discrepancy.",
+            "The two rank-2 semion rows retain a raw graph-level -1 difference before presentation normalization.",
+            "The pointed ordinary-aggregate adapter is not a proof of a general MTC normalization theorem.",
             "Distribution equality is weaker than pointwise equality under an H2 marking.",
             "No completed nonpointed twisted MTC Figure 21 comparison is included.",
             "No full premodular Figure 21 invariant is currently computable.",
