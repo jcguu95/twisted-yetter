@@ -1,0 +1,233 @@
+{
+  "argv": [
+    "experiments/scripts/build_lean_kirby_coupon_bootstrap_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "a29f8958331030b47ce87411aeb74e8a2f79f4f1be76a391aae70c71966b1027",
+      "status": "PASS_NO_SORRY_AX",
+      "theorem_count": 18,
+      "theorems": [
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_positive_crossing' depends on axioms: [propext, Quot.sound]",
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_negative_crossing' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cup' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cap' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cup' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cap' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.CategoricalTangle.Context.eval_plug_congr' does not depend on any axioms",
+        "'TwistedYetter.Kirby.CategoricalTangle.positiveCrossingMove_sound' depends on axioms: [propext, Quot.sound]",
+        "'TwistedYetter.Kirby.CategoricalTangle.negativeCrossingMove_sound' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.CategoricalTangle.leftCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CategoricalTangle.leftCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CategoricalTangle.rightCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CategoricalTangle.rightCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Kirby.CategoricalMovie.Movie.sound' does not depend on any axioms",
+        "'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound' depends on axioms: [propext,",
+        "'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_in_context_sound' depends on axioms: [propext,"
+      ]
+    },
+    "mutation_tests": {
+      "output_sha256": "f9c81f151fca02879eda68bc775bc62740301e8ce89f4824e40b94993c83b6ed",
+      "rejected_count": 3,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/InvalidComposition.lean",
+        "PASS expected rejection: lean/Mutations/InvalidDualCap.lean",
+        "PASS expected rejection: lean/Mutations/MissingMoveProof.lean"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "resource_guards": {
+      "concurrent_process_attempt": {
+        "expected_exit_code": 75,
+        "message_sha256": "3100c294076fa8e0801ef7d75b1b9aec0fc0bae73b2ebffecec4eddbb375b24c",
+        "observed_exit_code": 75
+      },
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_LOCAL_RESOURCE_GUARDS",
+      "three_thread_attempt": {
+        "expected_exit_code": 64,
+        "message_sha256": "3bcc6df58a7d9e7bd9d65902aeed87434a9ed97a2997d183865a0bc79a4e25f5",
+        "observed_exit_code": 64
+      }
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Kirby/CouponKernel.lean",
+        "lean/TwistedYetter/Kirby/CouponNaturality.lean",
+        "lean/TwistedYetter/Kirby/CategoricalTangle.lean",
+        "lean/TwistedYetter/Kirby/CategoricalMovie.lean",
+        "lean/TwistedYetter/Kirby/FramingNaturality.lean",
+        "lean/TwistedYetter/Kirby/HandleSlide.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 7,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/CouponKernel.lean",
+        "lean/TwistedYetter/Kirby/CouponNaturality.lean",
+        "lean/TwistedYetter/Kirby/CategoricalTangle.lean",
+        "lean/TwistedYetter/Kirby/CategoricalMovie.lean",
+        "lean/TwistedYetter/Kirby/FramingNaturality.lean",
+        "lean/TwistedYetter/Kirby/HandleSlide.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_OR_AXIOM_DECLARATIONS"
+    }
+  },
+  "conditional_boundary": {
+    "interface": "TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw",
+    "required_future_evidence": [
+      "Explicit before and after handle-slide diagrams for the selected invariant.",
+      "Proof that those diagrams evaluate to natural endomorphisms of the identity functor.",
+      "A category-level proof of the core sliding equality, intended to formalize the Barenz-Barrett generalized sliding property.",
+      "Content-hash binding between imported diagram data and the Lean constructor."
+    ],
+    "status": "INTERFACE_PROVED_INSTANCE_NOT_YET_CONSTRUCTED"
+  },
+  "content_hash": "sha256:ffa8471e5616f84a3c76779eadaf8f6f7afaee513e535832ed057dc777994821",
+  "elapsed_milliseconds": 35076,
+  "established_scope": [
+    "Typed strict tangle syntax rejects boundary and duality mismatches.",
+    "Typed categorical diagrams retain tensor parenthesization and visible named coupons.",
+    "Coupons transport through positive and negative crossings by braiding naturality.",
+    "Coupons transport through all left/right evaluation and coevaluation orientations by exact-pairing triangle identities.",
+    "Coupons transport through positive and negative framing twists by naturality of an explicitly supplied natural twist.",
+    "Every movie step contains evaluator equality, complete movies derive equality transitively, and local movies remain sound in arbitrary typed contexts.",
+    "Given an explicit diagram-backed SourcedSlidingLaw, arbitrary coupons transport through its handle-slide window without an additional coupon-sliding axiom."
+  ],
+  "explicit_non_claims": [
+    "This is not a formalization of the generalized sliding lemma itself.",
+    "This does not yet construct a SourcedSlidingLaw from modular or premodular fusion-category data.",
+    "NaturalTwist is not asserted to satisfy balancing or ribbon duality compatibility.",
+    "The syntax is not yet proved complete for framed tangles, framed links, Kirby diagrams, or Kirby movies.",
+    "No Reidemeister completeness, Kirby-calculus completeness, handle-cancellation theorem, or four-manifold invariance theorem is claimed.",
+    "No Twisted Crane-Yetter invariant is defined or proved invariant in this artifact."
+  ],
+  "finished_at_utc": "2026-07-17T17:12:11Z",
+  "generator_script": "experiments/scripts/build_lean_kirby_coupon_bootstrap_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "a25f52c411978f618dd15e9d78e6e276a274cd89",
+    "dirty": true
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "move_count": 10,
+      "path": "experiments/inputs/lean-kirby/coupon-move-obligation-matrix-v1.json",
+      "sha256": "d40da600291430f46463b2f2d59390133398d24ab75f98b7591200bda7c627f4"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+      "reference_count": 2,
+      "sha256": "bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/coupon-move-obligation-matrix-v1.json": {
+        "bytes": 4659,
+        "sha256": "d40da600291430f46463b2f2d59390133398d24ab75f98b7591200bda7c627f4"
+      },
+      "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json": {
+        "bytes": 3155,
+        "sha256": "bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/InvalidComposition.lean": {
+        "bytes": 661,
+        "sha256": "24e611ba529fc77a0a1bffde6c47fe859c00d73c166e053c45c54d43832902d2"
+      },
+      "lean/Mutations/InvalidDualCap.lean": {
+        "bytes": 519,
+        "sha256": "3e5679a48f620ddada7410a5c76a3c2c113193f9e56184bf971456084d51d430"
+      },
+      "lean/Mutations/MissingMoveProof.lean": {
+        "bytes": 596,
+        "sha256": "dfde7f53537d1c2e667b2d1afcb5de822bfe2040ed43ecc230f9ec11bbf3ca25"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 257,
+        "sha256": "b812b39b8a72e782b1fd1e7c95135e1bb4ba80276985848b73b6c13399ffd591"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 1591,
+        "sha256": "e774b53124d2f0e8f77ac1febfec4c64b24ab0b7a6bb489da60762c3a6817a69"
+      },
+      "lean/TwistedYetter/Kirby/CategoricalMovie.lean": {
+        "bytes": 6364,
+        "sha256": "a0bfb1cf30d7500991604155fe38878f022abf877e0a1bf2677b29b23fbcec35"
+      },
+      "lean/TwistedYetter/Kirby/CategoricalTangle.lean": {
+        "bytes": 13045,
+        "sha256": "74773b7c6a7ea15cde1c83fb29c0291c71a65f25fa4c2186709a17324255d301"
+      },
+      "lean/TwistedYetter/Kirby/CouponKernel.lean": {
+        "bytes": 8069,
+        "sha256": "3dd0bb2f772eec8de9456ed390a4570b1c321a0c355c9aa203508012ccad57de"
+      },
+      "lean/TwistedYetter/Kirby/CouponNaturality.lean": {
+        "bytes": 2550,
+        "sha256": "192c4545a72a95c2fbfa1b07d273714db7f0abb896b16dad67600e5b676b5ff5"
+      },
+      "lean/TwistedYetter/Kirby/FramingNaturality.lean": {
+        "bytes": 3504,
+        "sha256": "e519ae58ab9251463f14d17ca1918a1c7fbe1da07d13a884b0b0fd5450795cb3"
+      },
+      "lean/TwistedYetter/Kirby/HandleSlide.lean": {
+        "bytes": 4523,
+        "sha256": "fb3fe7474f2707e4303965d0dc3437f562f51010d9aa29718d48964c2bc22f58"
+      },
+      "scripts/lean_axiom_audit.sh": {
+        "bytes": 409,
+        "sha256": "ff823d379e56accdbd87e153a1d0af020ecedcee101f44fc5bdf43f438bb039c"
+      },
+      "scripts/lean_local_build.sh": {
+        "bytes": 518,
+        "sha256": "157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "scripts/lean_mutation_tests.sh": {
+        "bytes": 796,
+        "sha256": "7729b7170e6d01990eabd14ea0c74d16080ffe0e9e1f8667ce8eec1aa808973e"
+      }
+    }
+  },
+  "mathematical_status": "ESTABLISHED_BOOTSTRAP_WITH_CONDITIONAL_SLIDING_INTERFACE",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_lean_kirby_coupon_bootstrap_v1.py",
+  "schema": "twisted-yetter.lean-kirby-coupon-bootstrap.v1",
+  "started_at_utc": "2026-07-17T17:11:36Z",
+  "status": "PASS_KIRBY_COUPON_BOOTSTRAP",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}

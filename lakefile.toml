@@ -1,0 +1,19 @@
+name = "twisted-yetter-formal"
+version = "0.1.0"
+keywords = ["math", "topology", "kirby-calculus"]
+defaultTargets = ["TwistedYetter"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.29.1"
+
+[[lean_lib]]
+name = "TwistedYetter"
+srcDir = "lean"

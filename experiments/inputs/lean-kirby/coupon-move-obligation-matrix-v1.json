@@ -1,0 +1,126 @@
+{
+  "schema": "twisted-yetter.lean-kirby-coupon-obligation-matrix.v1",
+  "status": "BOOTSTRAP_OBLIGATIONS_DEFINED",
+  "category_scope": "braided rigid monoidal evaluator layer, with a separate natural twist interface",
+  "moves": [
+    {
+      "move_id": "coupon-through-positive-crossing",
+      "singularity": "positive_crossing",
+      "required_structure": [
+        "Category",
+        "MonoidalCategory",
+        "BraidedCategory"
+      ],
+      "proof_source": "BraidedCategory.braiding_naturality",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.positiveCrossingMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-negative-crossing",
+      "singularity": "negative_crossing",
+      "required_structure": [
+        "Category",
+        "MonoidalCategory",
+        "BraidedCategory"
+      ],
+      "proof_source": "BraidedCategory.braiding_inv_naturality",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.negativeCrossingMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-right-dual-cup",
+      "singularity": "right_coevaluation",
+      "required_structure": [
+        "MonoidalCategory",
+        "HasRightDual"
+      ],
+      "proof_source": "ExactPairing triangle identities",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.rightCupMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-right-dual-cap",
+      "singularity": "right_evaluation",
+      "required_structure": [
+        "MonoidalCategory",
+        "HasRightDual"
+      ],
+      "proof_source": "ExactPairing triangle identities",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.rightCapMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-left-dual-cup",
+      "singularity": "left_coevaluation",
+      "required_structure": [
+        "MonoidalCategory",
+        "HasLeftDual"
+      ],
+      "proof_source": "ExactPairing triangle identities",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.leftCupMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-left-dual-cap",
+      "singularity": "left_evaluation",
+      "required_structure": [
+        "MonoidalCategory",
+        "HasLeftDual"
+      ],
+      "proof_source": "ExactPairing triangle identities",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.leftCapMove_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-positive-framing-twist",
+      "singularity": "positive_framing_twist",
+      "required_structure": [
+        "NaturalTwist"
+      ],
+      "proof_source": "naturality of the twist natural isomorphism",
+      "lean_theorem": "TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-negative-framing-twist",
+      "singularity": "negative_framing_twist",
+      "required_structure": [
+        "NaturalTwist"
+      ],
+      "proof_source": "naturality of the inverse twist natural transformation",
+      "lean_theorem": "TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "move_id": "coupon-through-handle-slide-window",
+      "singularity": "handle_slide_window",
+      "required_structure": [
+        "SourcedSlidingLaw",
+        "explicit before diagram",
+        "explicit after diagram",
+        "diagram-to-natural-transformation evaluation proofs",
+        "core sliding equality"
+      ],
+      "proof_source": "core sliding equality plus naturality; intended category source is ref:baerenz-barrett-dichromatic-2018 Lemmas 3.3-3.4",
+      "lean_theorem": "TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound",
+      "status": "LEAN_PROVED_CONDITIONAL_INTERFACE"
+    },
+    {
+      "move_id": "local-move-inside-arbitrary-context",
+      "singularity": "context_boundary",
+      "required_structure": [
+        "typed one-hole Context",
+        "local evaluator equality"
+      ],
+      "proof_source": "category composition and tensor congruence",
+      "lean_theorem": "TwistedYetter.Kirby.CategoricalTangle.Context.eval_plug_congr",
+      "status": "LEAN_PROVED"
+    }
+  ],
+  "fail_closed_boundaries": [
+    "No global SourcedSlidingLaw instance is postulated.",
+    "NaturalTwist alone is not called a balanced or ribbon structure.",
+    "The current syntax does not claim a complete presentation of framed tangles.",
+    "The current bootstrap does not claim Kirby-calculus completeness or four-manifold invariance."
+  ]
+}
