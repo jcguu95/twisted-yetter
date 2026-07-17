@@ -1,0 +1,64 @@
+{
+  "actor_id": "actor:jin",
+  "admission_batch_cid": "ctlobj-sha256:b197eef3139f71b1fe5c069937eb5f0677eb4c1b36a1f1e9732eb7997a938683",
+  "admitted_at": "2026-07-17T05:11:36Z",
+  "binding_logical_ids": [
+    "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
+    "claim:lab-note:2026-07-16-figure21-pointed-ordinary-normalization-audit",
+    "claim:lab-note:2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit",
+    "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+    "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:ordinary-normalization-note",
+    "subject-edge:ty:2026-07-16-quadratic-block-audit:uses:figure21-ordinary-normalization",
+    "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula",
+    "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
+    "subject:twisted-yetter:claim-cluster:quadratic-block-computational-audit",
+    "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility"
+  ],
+  "child_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+  "created_at": "2026-07-17T05:11:36Z",
+  "current_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+  "kernel_profile": "ctl-kernel/1",
+  "manifest_kind": "batch-admission",
+  "mode": "dogfood",
+  "parent_root_cid": "ctlobj-sha256:7f9f9aefd35b539ffbe2ef83035910bc6ede2c00c2df18a968558491b76d8db3",
+  "payload_files": [
+    "lab-notes/2026-07-16-figure21-pointed-modular-comparison.json",
+    "subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
+    "lab-notes/2026-07-16-figure21-pointed-ordinary-normalization-audit.json",
+    "subject-layer/edges/figure21-pointed-comparison-records-normalization-note.json",
+    "lab-notes/2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit.json",
+    "subject-layer/definitions/claim-cluster-twisted-yetter-stable-no-go-computational-compatibility.json",
+    "lab-notes/2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit.json",
+    "subject-layer/definitions/argument-proposal-twisted-yetter-modular-quadratic-block-formula.json",
+    "subject-layer/definitions/claim-cluster-twisted-yetter-quadratic-block-computational-audit.json",
+    "subject-layer/edges/quadratic-block-audit-uses-figure21-normalization.json"
+  ],
+  "plan_schema": "ctl-dogfood/batch-admission-plan/1",
+  "principal_roles": [
+    "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1"
+  ],
+  "project_id": "project:twisted-yetter",
+  "revision_cids": [
+    "ctlobj-sha256:0155ab61d99498c82d93bfc81b4c10aa5f8188773136da1b05e8c2778f103a3e",
+    "ctlobj-sha256:28aa32af5fd69e5aed6aab7031d1260f80f4ac565c9467ccb552b6088d8378d3",
+    "ctlobj-sha256:3457bbddabebed90abf92aea060030bda8ea53a7ded6a765dc076f814cb3d15b",
+    "ctlobj-sha256:980ce9d106172182a3ff6a59d76bc7de24bd9062e3e74377109a17758aa2a0fa",
+    "ctlobj-sha256:a034fa36f29cd8fa1a7481f5d1c4a753150ea94cfe270c05803274320be6ddc9",
+    "ctlobj-sha256:a1c7e7a53365122447f092faaf521e587f55847c97fdb025e1aea591923155fb",
+    "ctlobj-sha256:a90315cce13ab335c911b874caeead9cd85ca251a8bfedd74bbe2dd8e90736c2",
+    "ctlobj-sha256:af0e3834a2de3277138cfc33d3ae449d14db00435ac23a535d99f05f70bd1755",
+    "ctlobj-sha256:c1e71c30cb8e6b1429922582ddfbbccf212cc77e1d6a3a152517feec99fe3176",
+    "ctlobj-sha256:e2e911bef3e329a2e427ce7dad5e6db3a34643990f10105782cf59fad39d2152"
+  ],
+  "schema": "ctl-dogfood/batch-admission-manifest/1",
+  "semantics": {
+    "adds_authority_semantics": false,
+    "adds_downstream_ontology": false,
+    "adds_evidence_semantics": false,
+    "manifest_role": "audit-and-reproduction-sidecar-only",
+    "validate_transition_input": false
+  },
+  "submitted_by": "actor:codex",
+  "tool": "scripts/admit_revisions_batch.py",
+  "transition_cid": "ctlobj-sha256:b197eef3139f71b1fe5c069937eb5f0677eb4c1b36a1f1e9732eb7997a938683"
+}

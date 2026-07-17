@@ -1,0 +1,161 @@
+{
+  "created_at": "2026-07-17T05:11:36Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-figure21-pointed-modular-comparison",
+  "parents": [
+    "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "figure21-pointed-batch-result-v1",
+        "content_hash": "sha256:8d666986b0a8b440276de8d90d5d48a14fdd3bf71bccd6b8c373a040418439f4",
+        "git_blob": "4d98f7f4efae26d3140fb6d4c22c4e097d54f7a9",
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-batch-result-v1.json",
+        "sha256": "b7d78b4f04ed013b763b5c853cfe570acb6e469bc829628a732e7bff2264763c",
+        "status": "PASS_POINTED_FIGURE21_BATCH_COMPLETE"
+      },
+      {
+        "artifact_id": "figure21-rank2-rank3-standard-comparison-v1",
+        "content_hash": "sha256:95d9a83a3a6eebe135ab4443d4553cacd1bb93a0e493cec4e540714825f0f88e",
+        "git_blob": "10ea53e19da00b99f6b165120adf9bb7297c4a54",
+        "path": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
+        "sha256": "15a662d96b3d44b694460d598699264924415f6c9f176cfc11b88dd5dae3bcb7",
+        "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED"
+      },
+      {
+        "artifact_id": "figure21-rank4-standard-comparison-v1",
+        "content_hash": "sha256:80302549965499c555ecb3d42b2591cf338c5841ced708f003096b8fcef85629",
+        "git_blob": "bdfa9612a414f4ea1413bf053eceecc06687fd9c",
+        "path": "experiments/results/akbulut-yasui/figure21-rank4-standard-comparison-v1.json",
+        "sha256": "1cbe94cbedae31fe54ccebbcb6a15da76e97be071ed7b33a17961a2bd46f6e86",
+        "status": "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH"
+      },
+      {
+        "artifact_id": "figure21-rank5-standard-comparison-v1",
+        "content_hash": "sha256:1c0c4be77a4351b5aff3f766dd02494c54d5b4f6cf255b80177e92466a264844",
+        "git_blob": "0b44ab2b855397be991e82c238020a293e0401d9",
+        "path": "experiments/results/akbulut-yasui/figure21-rank5-standard-comparison-v1.json",
+        "sha256": "a92d837b22df1c2a566ee14897bd924c0216f6094b5e67736c1a409a3e46468b",
+        "status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH"
+      },
+      {
+        "artifact_id": "figure21-pointed-ordinary-normalization-audit-v1",
+        "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+        "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+        "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+        "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+      },
+      {
+        "artifact_id": "current-low-rank-figure21-terminal-package-v1",
+        "content_hash": "sha256:7f479aaf65dbbeecaaf430b26c207001d707d9509bbbe49f2cd37f0525c42616",
+        "git_blob": "791b6bc1a2066abe4a5acb5e085ee0c4acc64d1e",
+        "path": "experiments/results/akbulut-yasui/current-low-rank-figure21-terminal-package-v1.json",
+        "sha256": "f7078919229b175485847c5b87421092df79f06c195281a5d56ba2d02ff41771",
+        "status": "TERMINAL_WITH_EXPLICIT_BLOCKERS"
+      }
+    ],
+    "checks": {
+      "h2_certification_not_claimed": "PASS",
+      "no_global_no_signal_claim": "PASS",
+      "nonpointed_rows_not_included": "PASS",
+      "normalization_does_not_use_bucket_alignment": "PASS",
+      "normalized_pointed_rows_all_match": "PASS",
+      "pointed_batch_all_rows_terminal": "PASS",
+      "preserved_aggregate_corrupted_distribution_negative_control": "PASS",
+      "rank2_ordinary_aggregate_correction_is_minus_one": "PASS",
+      "rank2_raw_difference_recorded": "PASS",
+      "rank3_all_match_recorded": "PASS",
+      "rank4_all_match_recorded": "PASS",
+      "rank5_all_match_recorded": "PASS"
+    },
+    "created_at": "2026-07-16T23:02:00Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not complete all rank 2-5 MTC/ribbon scans.",
+      "This note does not include nonpointed low-rank modular categories.",
+      "This note does not certify the Figure 21 transcription against the printed diagram.",
+      "This note does not certify an H2 coordinate map between Figure 21 and the split standard presentation.",
+      "The rank-2 raw graph-level distribution differences remain recorded; their independently calibrated presentation correction is not promoted to a label automorphism theorem or an H2 coordinate certificate.",
+      "The pointed dimension-one ordinary-aggregate adapter is not promoted to a general MTC normalization theorem.",
+      "The rank-2 through rank-5 normalized matches are not promoted to a no-signal theorem.",
+      "This note does not claim Figure 21 is exotic or standard."
+    ],
+    "mathematical_status": "COMPUTED_POINTED_PRESENTATION_NORMALIZATION_RESOLVED_NOT_H2_CERTIFIED_EXOTIC_CLAIM",
+    "note_id": "objective-note-2026-07-16-figure21-pointed-modular-comparison",
+    "results": {
+      "pointed_batch": {
+        "complete_rows": 15,
+        "coverage": {
+          "rank2": "2 rows complete from full prefix sweep",
+          "rank3": "2 rows complete from chunk aggregate",
+          "rank4": "9 rows complete from chunk aggregate",
+          "rank5": "2 rows complete from chunk aggregate"
+        },
+        "status": "PASS_POINTED_FIGURE21_BATCH_COMPLETE"
+      },
+      "same_label_standard_comparison": {
+        "comparison_rule": "For each validated pointed dimension-one category, derive nu_C=(sum standard fixed-label amplitudes)/(sum Figure 21 fixed-label amplitudes) before comparing buckets; require nu_C to be a unit scalar; then require the complete normalized distribution to equal the split CP2#9(-CP2) distribution. No certified H2 coordinate identification is used.",
+        "nonidentity_presentation_correction_row_count": 2,
+        "normalized_matching_row_count": 15,
+        "ordinary_normalization_status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION",
+        "rank2_presentation_normalization_summary": "Both semion rows have ordinary raw aggregates -32 on Figure 21 and +32 on the split standard side. The independently derived presentation correction is therefore -1+0i. Applying that correction makes the complete distribution match; bucket alignment was not used to select it.",
+        "rank2_rank3_status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED",
+        "rank2_raw_difference_summary": "Both semion rows have the same raw same-label difference from the split standard distribution, {'+1+0i': -32, '-1+0i': 32}, after removing Figure 21 zero projector sectors.",
+        "rank3_summary": "Both Z3 rows match the split standard distribution after removing Figure 21 zero projector sectors; their phase alignment multiplier is +1+0i.",
+        "rank4_status": "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH",
+        "rank4_summary": "All 9 rank-4 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.",
+        "rank5_status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH",
+        "rank5_summary": "Both rank-5 SU(5)_1 pointed rows match the split standard distribution after removing Figure 21 zero projector sectors.",
+        "raw_graph_matching_row_count": 13
+      }
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "scope": {
+      "blocked_row_count": 0,
+      "category_scope": "POINTED_MODULAR_RANK_2_TO_5_ROWS_ONLY",
+      "complete_row_count": 15,
+      "exoticness_claim_made": false,
+      "figure21_input_status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM",
+      "git_clean_before_payload_creation": true,
+      "h2_coordinate_map_certified": false,
+      "main_merge_status_before_admission": "local main a329f9121a70255bc5b623a924d8bd6776fc95df was already an ancestor; git merge --no-ff main reported Already up to date",
+      "nonpointed_rows_included": false,
+      "rank2_row_count": 2,
+      "rank3_row_count": 2,
+      "rank4_row_count": 9,
+      "rank5_row_count": 2,
+      "row_count": 15,
+      "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c",
+      "standard_side": "split CP2#9(-CP2), 1 positive and 9 negative diagonal framings"
+    },
+    "status": "POINTED_FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED_ALL_15_MATCH",
+    "subjects": [
+      "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
+      "subject:twisted-yetter:presentation:akbulut-yasui-2008-figure21-e3prime",
+      "subject:twisted-yetter:reference:low-rank-mtc-classification"
+    ],
+    "tests": [
+      {
+        "collected": 71,
+        "command": "env UV_CACHE_DIR=/tmp/uv-cache PYTHONPATH=. uv run pytest tests/test_figure21_rank2_rank3_standard_comparison_v1.py tests/test_figure21_pointed_worker_plan_v1.py tests/test_current_low_rank_figure21_terminal_package_v1.py tests/test_low_rank_nontrivial_partial_scan_rule_v1.py tests/test_low_rank_partial_scan_smoke_v1.py tests/test_low_rank_partial_target_readiness_probe_v1.py tests/test_low_rank_partial_toy_scan_v1.py tests/test_low_rank_pointed_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_benchmark_v1.py tests/test_low_rank_product_partial_scan_surface_probe_v1.py tests/test_ribbon_graph_evaluator.py tests/test_foundation_v2_safety_substrate_v1.py tests/test_low_rank_full_catalog_universal_grading_audit_v1.py",
+        "status": "pass"
+      },
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+        "status": "pass_before_payload_creation"
+      }
+    ],
+    "title": "Figure 21 pointed modular comparison with independently calibrated presentation normalization",
+    "top_notice": "The pointed modular Figure 21 batch is complete for the recorded rank 2-5 pointed rows. The historical raw graph comparison still records a +1/-1 bucket swap in both rank-2 semion rows. A separate fail-closed audit now derives the correction -1 solely from the ordinary Kirby-color aggregate (-32 on Figure 21 versus +32 on the split standard presentation), then independently verifies the full distribution. All 15 pointed rows match after this presentation normalization; the other 13 use correction +1. This remains distribution-level evidence, not an H2-certified exoticness theorem or a global no-signal theorem.",
+    "updated_at": "2026-07-17T05:12:00Z"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

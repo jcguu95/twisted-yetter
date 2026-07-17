@@ -1,0 +1,176 @@
+{
+  "created_at": "2026-07-17T05:11:36Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+  "parents": [
+    "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9"
+  ],
+  "payload": {
+    "conditional_mathematical_theorem": {
+      "proof_obligations": [
+        {
+          "id": "marked-stable-realization",
+          "status": "ARGUMENT_SUPPLIED_AWAITING_4_MANIFOLD_EXPERT_REVIEW"
+        },
+        {
+          "id": "marked-connected-sum-normalization",
+          "status": "NOT_FORMALIZED_FOR_YETTER_BACKGROUND_THEORY"
+        },
+        {
+          "id": "nonzero-stabilization-factor",
+          "status": "SUPPORTED_FOR_ORDINARY_SEMISIMPLE_CYK_BY_REUTTER_NOT_YET_NORMALIZATION_BRIDGED"
+        }
+      ],
+      "proof_route": [
+        "Use Wall to obtain an unmarked stable diffeomorphism.",
+        "Use Ruberman-Strle Theorem 2.1 after one further S2xS2 stabilization to realize the correction automorphism and obtain the prescribed H2 map.",
+        "Apply diffeomorphism invariance to the stabilized marked pairs.",
+        "Apply marked connected-sum multiplicativity on both sides.",
+        "Cancel the common nonzero stabilization scalar."
+      ],
+      "statement": "Let C be a ribbon fusion category, let A be a finite subgroup of Aut_tensor(Id_C), and let Z_C(M,alpha) be the homologically twisted Yetter invariant. Let M and N be closed connected oriented smooth simply connected 4-manifolds, and let f:H2(M;Z)->H2(N;Z) be an integral intersection-form isometry. If the marked connected-sum formula holds with the chosen normalization, the stabilization scalar Z_C(S2xS2,0)/Z_C(S4,0) is nonzero, and the marked stable-realization argument applies, then Z_C(M,alpha)=Z_C(N,(f tensor id_A)(alpha)) for every alpha in H2(M;A).",
+      "status": "CONDITIONAL_PROPOSITION_NOT_YET_ESTABLISHED_AS_PROJECT_THEOREM",
+      "theorem_id": "conditional-marked-stable-no-go-for-total-twisted-yetter"
+    },
+    "created_at": "2026-07-17T04:04:00Z",
+    "created_by": "actor:codex",
+    "data_quality_findings": [
+      {
+        "finding": "Both rank-2 semion rows retain the same raw +1/-1 bucket swap. Their raw ordinary aggregates are -32 on Figure 21 and +32 on the split standard presentation, independently forcing correction -1; the complete corrected distributions then match. A preserved-sum corrupted-distribution negative control fails closed.",
+        "id": "figure21-rank2-global-phase",
+        "status": "RESOLVED_AS_INDEPENDENTLY_CALIBRATED_PRESENTATION_NORMALIZATION"
+      },
+      {
+        "finding": "Distribution equality is weaker than pointwise equality under a prescribed H2 coordinate map.",
+        "id": "figure21-h2-marking",
+        "status": "NOT_CERTIFIED"
+      },
+      {
+        "finding": "The current Figure 21 input cannot support a source-certified theorem until checked against the printed diagram.",
+        "id": "figure21-source",
+        "status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
+      },
+      {
+        "finding": "The old sweep had only 2 full rows, 13 budgeted prefixes, and a dirty worktree; later complete rank-wise artifacts supersede it.",
+        "id": "figure21-historical-budgeted-sweep",
+        "status": "SUPERSEDED_PARTIAL_CHECKPOINT_NOT_THEOREM_EVIDENCE"
+      },
+      {
+        "finding": "The old nonmatch omitted total framings and is unsafe as invariant evidence.",
+        "id": "figure21-missing-framing-run",
+        "status": "REJECTED_HISTORICAL_RESULT_KNOWN_FRAMING_BUG"
+      },
+      {
+        "finding": "The Yasui a=1 SU(3)_2 comparison matches after the recorded coordinate map; direct same-tuple comparison has 18 of 27 mismatches and is not the accepted interpretation.",
+        "id": "yasui-su3-coordinate-map",
+        "status": "ESTABLISHED_NUMERIC_REINTERPRETATION"
+      }
+    ],
+    "established_computational_theorem": {
+      "figure21_specialization": "For the sole current exotic target, Figure 21, the strongest retained result is distribution-level compatibility for 15 pointed modular realizations of ranks 2 through 5: all 15 match the split CP2#9(-CP2) distribution after ordinary-aggregate presentation normalization; 13 match raw, the two semion rows use the independently derived correction -1, and zero rows have a certified H2-marked pointwise comparison.",
+      "scope_rule": "This is a theorem about the listed and hash-bound artifacts, not a theorem that twisted Yetter invariants are topologically unable to detect exotic smooth structures.",
+      "statement": "For the frozen artifact denominator enumerated by twisted-yetter-stable-no-go-computational-audit-v1, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or independently calibrated presentation normalization. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition.",
+      "status": "ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_RETAINED_ARTIFACTS",
+      "theorem_id": "frozen-computation-denominator-compatibility-theorem"
+    },
+    "evidence_scope": {
+      "akbulut_figure1_role": "HISTORICAL_PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET",
+      "figure21_premodular_full_evaluation": "NOT_COMPUTABLE_WITH_CURRENT_BACKEND",
+      "figure21_tractable_route": "MODULAR_SHORTCUT_MTC_ONLY",
+      "gompf_stipsicz_role": "STANDARD_MANIFOLD_IMPLEMENTATION_CONTROL",
+      "only_current_exotic_target": "Akbulut-Yasui 2008 Figure 21 / E3prime",
+      "yasui_figure2_role": "STANDARD_MANIFOLD_PRESENTATION_CONTROL",
+      "yasui_figure3_role": "PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET"
+    },
+    "explicit_non_claims": [
+      "This note does not establish the mathematical no-go theorem.",
+      "Compatibility of all retained computations is not a proof of the conditional proposition.",
+      "This note does not prove the marked connected-sum formula for homologically twisted Yetter theory.",
+      "This note does not replace expert review of the marked stable-realization argument.",
+      "This note does not bridge Reutter's ordinary semisimple CYK result to Yetter's background-twisted normalization.",
+      "This note does not certify the Figure 21 transcription or an H2 coordinate map.",
+      "The two rank-2 semion rows are not raw graph-level exact matches; their independently calibrated correction does not supply an H2 marking.",
+      "The pointed dimension-one normalization audit is not a proof of a general MTC normalization theorem.",
+      "No completed nonpointed twisted MTC Figure 21 comparison is included.",
+      "No full premodular Figure 21 exotic-vs-standard comparison is included.",
+      "This note does not claim a no-go result for manifolds with boundary, non-simply-connected manifolds, or other background fields."
+    ],
+    "figure21_normalization_artifact": {
+      "artifact_id": "figure21-pointed-ordinary-normalization-audit-v1",
+      "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+      "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+      "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+      "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+      "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+    },
+    "formal_mathematical_theorem_claim_made": false,
+    "frozen_audit_artifact": {
+      "artifact_id": "twisted-yetter-stable-no-go-computational-audit-v1",
+      "content_hash": "sha256:2f50cabea7e7e910a831053f167a06cd2f3fbeabf66a8556646bf9b685dc9f95",
+      "generator_commit": "bc0b21461bad379e57f69a946f12056114e0e328",
+      "git_blob": "034dfa8abe998946c043513288d408c68c54a694",
+      "git_dirty_before_output_write": false,
+      "path": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
+      "sha256": "eba9c63c2cad68478a165bab3f465ec91a89caf47813ba47423ddc3cc064aeb8",
+      "status": "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
+    },
+    "git_preflight": {
+      "clean_before_ctl_payload_creation": true,
+      "ctl_root_before_work": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+      "ctl_verify_before_work": "PASS",
+      "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c"
+    },
+    "machine_checked_computational_statement_made": true,
+    "machine_checked_denominator": {
+      "certified_counterexample_count": 0,
+      "comparison_named_artifact_count": 24,
+      "comparison_named_artifacts_all_classified_and_hashed": true,
+      "declared_control_comparison_units_excluding_figure21_distributions": 137,
+      "figure21_certified_h2_marked_pointwise_rows": 0,
+      "figure21_nonidentity_presentation_correction_rows": 2,
+      "figure21_normalized_exact_pointed_rows": 15,
+      "figure21_pointed_realization_count": 15,
+      "figure21_raw_graph_exact_pointed_rows": 13,
+      "retained_evidence_group_count": 7
+    },
+    "mathematical_status": "COMPUTATIONAL_THEOREM_ESTABLISHED_MATHEMATICAL_NO_GO_NOT_ESTABLISHED",
+    "note_id": "objective-note-2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+    "project_no_go_conclusion_adopted": false,
+    "reference_subjects": [
+      "subject:twisted-yetter:paper:yetter-hepth-9311082",
+      "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+      "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+      "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+      "subject:twisted-yetter:paper:reutter-2001-02288"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "status": "ESTABLISHED_COMPUTATIONAL_COMPATIBILITY_CONDITIONAL_THEOREM_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+      "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+      "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+    ],
+    "tests": [
+      {
+        "collected": 12,
+        "command": "pytest -q tests/test_figure21_pointed_ordinary_normalization_audit_v1.py tests/test_twisted_yetter_no_go_computational_audit_v1.py",
+        "status": "pass"
+      },
+      {
+        "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+        "root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+        "status": "pass_before_ctl_payload_creation"
+      }
+    ],
+    "title": "Computational compatibility audit for the candidate twisted Yetter stable no-go theorem",
+    "top_notice": "This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and therefore covers MTC inputs only. Full premodular Figure 21 evaluations remain unavailable. On Figure 21, all 15 pointed rows match the standard-side distribution after independently calibrated ordinary-aggregate presentation normalization; 13 already match raw and the two semion rows use correction -1. There is still no certified H2 marking, and the Figure 21 transcription remains unverified against the printed diagram.",
+    "updated_at": "2026-07-17T05:12:00Z"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

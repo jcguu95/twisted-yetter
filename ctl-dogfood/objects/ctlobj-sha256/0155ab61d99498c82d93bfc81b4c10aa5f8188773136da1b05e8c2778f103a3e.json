@@ -1,0 +1,140 @@
+{
+  "created_at": "2026-07-17T05:11:36Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit",
+  "parents": [
+    "ctlobj-sha256:857d029c5c695dc550fc164b7b0c1a1eed4424df5d72b3ab710400f2c8d74425"
+  ],
+  "payload": {
+    "candidate_modular_formula": {
+      "bilinearization": "b_C(a,b)=q_C(a+b)/(q_C(a)q_C(b))",
+      "coefficient_group": "A=Aut_tensor(Id_C), identified with invertible objects for modular C",
+      "covector_coordinate_rule": "If the saved marking is lambda_i=<alpha,x_i>, first convert a=Q^(-1)lambda. For q(a)=zeta^(c a^2), the phase is zeta^(c lambda^T Q^(-1) lambda).",
+      "epistemic_status": "THEOREM_CANDIDATE_NUMERICALLY_SUPPORTED_NOT_PROVED_HERE",
+      "full_value_prediction": "Z_C(M,alpha)=Z_C(M,0)*Phi_Q(alpha)",
+      "homology_coordinate_rule": "For alpha=sum_i x_i tensor a_i and Q_ij=x_i.x_j, Phi_Q(alpha)=product_i q_C(a_i)^(Q_ii) product_{i<j} b_C(a_i,a_j)^(Q_ij).",
+      "normalization_safe_calibration": "q_C(a)=Z_C(CP2,a)/Z_C(CP2,0) in a pinned orientation convention",
+      "ordinary_value_role": "Under the modular CKY normalization, Z_C(M,0) is already controlled by Euler characteristic and signature. The candidate formula adds the complete alpha-dependent quadratic phase.",
+      "premodular_extension_status": "CONJECTURAL_DIRECTION_NOT_ESTABLISHED. The same pessimistic conclusion may extend after separating transparent-sector and pi1 data, but neither the formula nor a premodular Figure 21 comparison is proved by this audit.",
+      "scope": "closed connected oriented smooth simply connected 4-manifolds with torsion-free H2 and modular category input"
+    },
+    "created_at": "2026-07-17T04:42:00Z",
+    "created_by": "actor:codex",
+    "data_quality_and_scope": {
+      "certified_counterexample_count": 0,
+      "da4_split_all_alpha_row_count": 27,
+      "eligible_h2_marked_artifact_row_count": 201,
+      "figure21_h2_marked_pointwise_row_count": 0,
+      "off_diagonal_mutual_intersection_witness_count": 18,
+      "su2_all_alpha_row_count": 72,
+      "su2_all_alpha_table_count": 9,
+      "su3_figure2_calibration_row_count": 3,
+      "su3_figure3_all_alpha_row_count": 27,
+      "su3_general_form_control_row_count": 72,
+      "wrong_direct_Q_model_mismatch_count": 8
+    },
+    "established_computational_theorem": {
+      "statement": "For every one of the 201 hash-bound eligible H2-marked artifact rows enumerated by twisted-yetter-quadratic-block-prediction-audit-v1, the saved Twisted Yetter value agrees within the recorded tolerance with the absolute basic-block evaluation and/or the induced quadratic-refinement prediction. The denominator includes 18 genuine off-diagonal mutual-intersection witnesses, and 8 rows reject the incorrect direct-Q covector formula. There are zero certified counterexamples in this frozen denominator.",
+      "status": "ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_FROZEN_DATA",
+      "theorem_id": "frozen-h2-marked-quadratic-block-compatibility-theorem"
+    },
+    "explicit_non_claims": [
+      "This note does not prove the modular quadratic formula for arbitrary MTCs.",
+      "This note does not turn the still-open 11/8 conjecture into a theorem.",
+      "This note does not use or evaluate the tangent-bundle Pontryagin class p1(TM).",
+      "This note does not certify a Figure 21 H2 coordinate map or a pointwise all-alpha Figure 21 comparison.",
+      "This note does not turn the independently calibrated Figure 21 presentation normalization into an H2 marking.",
+      "This note does not prove that the pointed dimension-one normalization adapter extends to arbitrary MTCs.",
+      "This note does not establish a premodular formula.",
+      "This note does not cover torsion H2, non-simply-connected manifolds, or manifolds with boundary.",
+      "Presentation-control agreement is not independent experimental proof of a universal theorem."
+    ],
+    "figure21_specialization": {
+      "distribution_level_result": "Across 15 pointed modular realizations of ranks 2 through 5, all 15 Figure 21 value distributions match CP2#9(-CP2) after presentation normalization independently calibrated from the ordinary Kirby-color aggregate. Thirteen rows already match raw; the two semion rows have raw graph sums -32 versus +32 and therefore use the derived correction -1.",
+      "normalization_audit": {
+        "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+        "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+        "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+        "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+      },
+      "pointwise_all_alpha_status": "BLOCKED_NO_CERTIFIED_H2_COORDINATE_MAP",
+      "pointwise_marked_row_count": 0,
+      "standard_topological_model": "CP2#9(-CP2)",
+      "why_distribution_is_weaker": "A matching multiset does not identify which alpha on Figure 21 maps to which alpha in the standard diagonal basis."
+    },
+    "formal_mathematical_theorem_claim_made": false,
+    "frozen_audit_artifact": {
+      "content_hash": "sha256:ecda1d144f6b58d442dd0392a26e9c265ed46db74e73996d38d5a4020455ee12",
+      "generator_commit": "c16e686a496ce2529a02bfe5e7000cfaf34ada3f",
+      "git_blob": "a23ddb8fc1a83b25141d9dcc775e6d8335829170",
+      "path": "experiments/results/theory/twisted-yetter-quadratic-block-prediction-audit-v1.json",
+      "sha256": "9c49f55a7379299af98d323a42f50233a3475f90453e86df44fcdff24dc7e522",
+      "status": "PASS_ALL_ELIGIBLE_H2_MARKED_DATA_MATCH_QUADRATIC_BLOCK_PREDICTION_FIGURE21_POINTWISE_BLOCKED"
+    },
+    "git_preflight": {
+      "clean_before_ctl_payload_creation": true,
+      "ctl_root_before_work": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+      "ctl_verify_before_work": "PASS",
+      "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c"
+    },
+    "machine_checked_computational_statement_made": true,
+    "mathematical_status": "ESTABLISHED_COMPUTATIONAL_PATTERN_THEOREM_CANDIDATE_NOT_PROVED",
+    "note_id": "objective-note-2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit",
+    "proof_obligations": [
+      {
+        "id": "twisted-kirby-color-simple-current-identification",
+        "status": "OPEN"
+      },
+      {
+        "id": "surface-defect-evaluation-and-normalization",
+        "status": "OPEN"
+      },
+      {
+        "id": "basis-independence-and-pontryagin-square-extension",
+        "status": "OPEN"
+      },
+      {
+        "id": "torsion-and-nonsimply-connected-extension",
+        "status": "OUT_OF_CURRENT_SCOPE"
+      }
+    ],
+    "reference_ledger": {
+      "git_blob": "c558ecb7765afee912ffbd5daa1273444b2814a1",
+      "path": "experiments/inputs/references/twisted-yetter-quadratic-block-primary-sources-v1.json",
+      "sha256": "44dce06620c8f2ed0bb46db32817505fea2d46856935838c8b65652fc5173412",
+      "status": "CURATED_PRIMARY_SOURCE_LEDGER"
+    },
+    "reference_subjects": [
+      "subject:twisted-yetter:paper:freedman-topology-four-dimensional-manifolds-1982",
+      "subject:twisted-yetter:paper:furuta-monopole-11-8-2001",
+      "subject:twisted-yetter:paper:yetter-hepth-9311082",
+      "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167"
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "simply_connected_standard_block_scope": {
+      "direct_prediction_does_not_need_11_8": "If the candidate quadratic formula is proved, the intersection form Q and alpha already determine the phase. A named connected-sum decomposition is convenient but not logically required.",
+      "even_case_conditional_on_11_8": "After orientation write Q=-2kE8+nH. Rokhlin makes k integral. The 11/8 conjecture is exactly n>=3k; if true, Freedman's classification gives the unstabilized topological model #k K3 #(n-3k)(S2xS2).",
+      "existing_exotic_pair_does_not_need_11_8": "For a specified homeomorphic exotic pair such as Figure 21 and its standard model, the shared topological type and intersection form are already known.",
+      "odd_case": "Odd indefinite unimodular forms are diagonal, and Donaldson supplies the smooth definite restriction. Freedman's classification then gives the smoothable topological model as a connected sum of CP2 and -CP2 blocks.",
+      "status_of_11_8": "OPEN_CONJECTURE_AS_OF_2026_NOT_ASSUMED_AS_THEOREM"
+    },
+    "status": "ESTABLISHED_QUADRATIC_BLOCK_COMPUTATIONAL_MATCH_MATHEMATICAL_FORMULA_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:claim-cluster:quadratic-block-computational-audit",
+      "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula",
+      "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+      "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+    ],
+    "title": "Explicit quadratic-block prediction audit for modular Twisted Yetter data",
+    "top_notice": "This note establishes an exact machine-checked statement about 201 frozen H2-marked rows. It does not prove the proposed formula for arbitrary modular tensor categories. Figure 21 now has 15 of 15 pointed distributions matching after an independently derived ordinary-aggregate presentation normalization, but remains distribution-level evidence only because no certified H2 marking exists. The finite-coefficient phase is described by a Pontryagin square or induced quadratic refinement, not by p1(TM).",
+    "updated_at": "2026-07-17T05:12:00Z"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
