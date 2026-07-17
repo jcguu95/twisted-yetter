@@ -10,14 +10,19 @@ import json
 from pathlib import Path
 import platform
 import subprocess
+import sys
 import time
 from typing import Any, Mapping
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from experiments.sage.pointed_premodular_categories import (
     SnapshotPointedModularCategory,
 )
 from experiments.scripts.build_figure21_rank4_standard_comparison_v1 import (
-    REPO_ROOT,
     _canonical_distribution,
     _distribution_diff,
     _load_snapshot,
