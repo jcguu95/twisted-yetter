@@ -1,0 +1,212 @@
+{
+  "argv": [
+    "experiments/scripts/build_generalized_sliding_linear_bootstrap_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "3f1a1c6c92143b5dd5f03bcdeab43e40a8dab1122773188e43f61a0337d48119",
+      "status": "PASS_NO_SORRY_AX",
+      "theorem_count": 13,
+      "theorems": [
+        "'TwistedYetter.Fusion.FiniteResolution.DualBasisData.pair_primal_dual' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.FiniteResolution.DualBasisData.coefficient_eq_repr' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.FiniteResolution.DualBasisData.reconstruct' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.FiniteResolution.DualBasisData.inverse_reconstruct' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.FiniteResolution.LinearResolution.reindex' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.FiniteResolution.LinearResolution.map' depends on axioms: [propext, Quot.sound]",
+        "'TwistedYetter.Fusion.FiniteResolution.WeightedFamily.total_reindex' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.PairingTransport.pair_primal_dual' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Fusion.PairingTransport.dualVector_eq_canonical' depends on axioms: [propext,",
+        "'TwistedYetter.Fusion.PairingTransport.coefficient_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Fusion.PairingTransport.channel_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Fusion.PairingTransport.reconstruct' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'TwistedYetter.Fusion.PairingTransport.mapped_resolution_term_eq' depends on axioms: [propext,"
+      ]
+    },
+    "mutation_tests": {
+      "output_sha256": "f595210633abdda75eb1cf7b7341d588f54a216f8cefd1939f58f694d1a1ea88",
+      "rejected_count": 3,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/MissingDualBasisProof.lean [diagnostic: Fields missing: `dual_eq`]",
+        "PASS expected rejection: lean/Mutations/MissingPairingPreservation.lean [diagnostic: Fields missing: `preserves_pairing`]",
+        "PASS expected rejection: lean/Mutations/WrongTransportedDualIndex.lean [diagnostic: if i = j then 1 else 0]"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "resource_guards": {
+      "concurrent_process_attempt": {
+        "expected_exit_code": 75,
+        "message_sha256": "3100c294076fa8e0801ef7d75b1b9aec0fc0bae73b2ebffecec4eddbb375b24c",
+        "observed_exit_code": 75
+      },
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_LOCAL_RESOURCE_GUARDS",
+      "three_thread_attempt": {
+        "expected_exit_code": 64,
+        "message_sha256": "3bcc6df58a7d9e7bd9d65902aeed87434a9ed97a2997d183865a0bc79a4e25f5",
+        "observed_exit_code": 64
+      }
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Fusion/FiniteResolution.lean",
+        "lean/TwistedYetter/Fusion/PairingTransport.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 3,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Fusion/FiniteResolution.lean",
+        "lean/TwistedYetter/Fusion/PairingTransport.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_OR_AXIOM_DECLARATIONS"
+    }
+  },
+  "conditional_boundary": {
+    "interface": "TwistedYetter.Fusion.PairingTransport",
+    "required_future_evidence": [
+      "Actual categorical left/right mate equivalences on the Hom spaces in B\u00e4renz-Barrett Lemma 3.3.",
+      "A pivotal-functor proof that those mate equivalences preserve the relevant trace pairing.",
+      "Explicit typed diagrams and a certified equality chain for equations (3.1.2)-(3.1.11).",
+      "Construction of TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw from that chain."
+    ],
+    "status": "LINEAR_SKELETON_PROVED_CATEGORY_INSTANCE_NOT_YET_CONSTRUCTED"
+  },
+  "content_hash": "sha256:29be8f9a852f74da60bf610760e8dbb0dc9e558ddef47d8d141a7f16d055cf92",
+  "elapsed_milliseconds": 21343,
+  "established_scope": [
+    "Finite weighted families have an explicit index type, weights, and reindex-invariant total.",
+    "A perfect pairing is an explicit linear equivalence to the linear dual.",
+    "DualBasisData binds a complete finite basis to actual paired vectors and exact algebraic dual-basis equality.",
+    "Dual-basis coefficients reconstruct every vector by a kernel-checked finite sum.",
+    "Linear resolutions remain sound under finite reindexing and linear maps.",
+    "Given explicit pairing-preserving primal and dual linear equivalences, transported dual vectors are the canonical dual basis.",
+    "Under that supplied transport proof, every insertion channel and the complete reconstructed sum agree after transport."
+  ],
+  "explicit_non_claims": [
+    "This does not define a fusion, pivotal, braided, ribbon, or modular category.",
+    "This does not construct categorical mate maps.",
+    "This does not prove that a pivotal functor preserves the trace pairing.",
+    "This does not formalize B\u00e4renz-Barrett Lemma 3.3 or Lemma 3.4.",
+    "This does not construct a SourcedSlidingLaw.",
+    "This does not establish handle-slide, Kirby-calculus, or four-manifold invariance."
+  ],
+  "finished_at_utc": "2026-07-17T18:35:48Z",
+  "generator_script": "experiments/scripts/build_generalized_sliding_linear_bootstrap_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "dfa9aba79d67f98a6c4fd85f3d97e220e12d1658",
+    "dirty": true
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "obligation_count": 16,
+      "path": "experiments/inputs/lean-kirby/generalized-sliding-linear-obligation-matrix-v1.json",
+      "sha256": "c56c3bb9abf56077e23b2f547b42daaa731a4d71209a8547e5d3d6ddc57463a8"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+      "reference_count": 2,
+      "sha256": "bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/generalized-sliding-linear-obligation-matrix-v1.json": {
+        "bytes": 5615,
+        "sha256": "c56c3bb9abf56077e23b2f547b42daaa731a4d71209a8547e5d3d6ddc57463a8"
+      },
+      "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json": {
+        "bytes": 3155,
+        "sha256": "bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87"
+      },
+      "experiments/scripts/build_generalized_sliding_linear_bootstrap_v1.py": {
+        "bytes": 13367,
+        "sha256": "965b482b4c1d8d4781520ecae581252caed1e37f9ea434bdd3e2840b51821827"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/MissingDualBasisProof.lean": {
+        "bytes": 747,
+        "sha256": "6c646d937375011a7c6a802b02e6a63473d3e153f44cb2f7c6b9456276ae34a5"
+      },
+      "lean/Mutations/MissingPairingPreservation.lean": {
+        "bytes": 951,
+        "sha256": "c2ad7477578b365aa70c9af2735f6711dd1946ab6f08736f96b22ba1f57351e1"
+      },
+      "lean/Mutations/WrongTransportedDualIndex.lean": {
+        "bytes": 1119,
+        "sha256": "d1000ca32720d02c36265c9bff8605789f35b603d5db08fcdc48b9cbf87b0393"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 347,
+        "sha256": "7fe07b9808d6c59d220ba469369f8091525bc79b067ab4f0e8254be828edd69b"
+      },
+      "lean/TwistedYetter/Fusion/AxiomAudit.lean": {
+        "bytes": 1200,
+        "sha256": "07a55947dcd35ac6e1b2690003c0ffeae53a7acc67e65ff56190da28d06b6bd4"
+      },
+      "lean/TwistedYetter/Fusion/FiniteResolution.lean": {
+        "bytes": 7057,
+        "sha256": "75ec1a1d97b0b0a6f2b54a10be8568bbdbb5a417fc0cb131b30d11c5d053fcd8"
+      },
+      "lean/TwistedYetter/Fusion/PairingTransport.lean": {
+        "bytes": 6467,
+        "sha256": "2df57e4777fd7552371c8f4164a799c41f35febee0cb7097c51ab828dbf47a97"
+      },
+      "scripts/lean_fusion_axiom_audit.sh": {
+        "bytes": 424,
+        "sha256": "793563390d0a1d0b9cdfe112fbb8eeae95426e0f77b935520ef35a156d196f5f"
+      },
+      "scripts/lean_fusion_mutation_tests.sh": {
+        "bytes": 1379,
+        "sha256": "50572012bf85a087546c7c2b7cff5c924bf8d57bac1d5bcca33bf12a049c01da"
+      },
+      "scripts/lean_local_build.sh": {
+        "bytes": 518,
+        "sha256": "157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_generalized_sliding_linear_bootstrap_v1.py": {
+        "bytes": 3292,
+        "sha256": "323f942058ea00b518b541e55450b692de2e63c972c9df64d1a51a1e5dcc9e80"
+      }
+    }
+  },
+  "mathematical_status": "ESTABLISHED_FINITE_RESOLUTION_AND_CONDITIONAL_PAIRING_TRANSPORT",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_generalized_sliding_linear_bootstrap_v1.py",
+  "schema": "twisted-yetter.generalized-sliding-linear-bootstrap.v1",
+  "started_at_utc": "2026-07-17T18:35:27Z",
+  "status": "PASS_GENERALIZED_SLIDING_LINEAR_BOOTSTRAP",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}

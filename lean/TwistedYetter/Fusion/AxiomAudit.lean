@@ -1,0 +1,22 @@
+import TwistedYetter.Fusion.PairingTransport
+
+/-!
+# Kernel axiom audit for the finite-resolution bootstrap
+
+This file is compiled by `scripts/lean_fusion_axiom_audit.sh`. The script fails
+if Lean reports `sorryAx`.
+-/
+
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.pair_primal_dual
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.coefficient_eq_repr
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.reconstruct
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.inverse_reconstruct
+#print axioms TwistedYetter.Fusion.FiniteResolution.LinearResolution.reindex
+#print axioms TwistedYetter.Fusion.FiniteResolution.LinearResolution.map
+#print axioms TwistedYetter.Fusion.FiniteResolution.WeightedFamily.total_reindex
+#print axioms TwistedYetter.Fusion.PairingTransport.pair_primal_dual
+#print axioms TwistedYetter.Fusion.PairingTransport.dualVector_eq_canonical
+#print axioms TwistedYetter.Fusion.PairingTransport.coefficient_eq
+#print axioms TwistedYetter.Fusion.PairingTransport.channel_eq
+#print axioms TwistedYetter.Fusion.PairingTransport.reconstruct
+#print axioms TwistedYetter.Fusion.PairingTransport.mapped_resolution_term_eq

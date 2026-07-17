@@ -1,0 +1,135 @@
+{
+  "schema": "twisted-yetter.generalized-sliding-linear-obligation-matrix.v1",
+  "status": "LINEAR_BOOTSTRAP_OBLIGATIONS_DEFINED",
+  "scope": "Finite linear resolutions and pairing-preserving transport used by the future generalized sliding proof.",
+  "primary_source": {
+    "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+    "reference_ledger": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+    "locator": "Lemma 3.3 and equations (3.1.2)-(3.1.11), journal pages 681-684"
+  },
+  "obligations": [
+    {
+      "obligation_id": "finite-weighted-family",
+      "roadmap_stage": "R1",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.WeightedFamily",
+      "status": "LEAN_PROVED_INTERFACE"
+    },
+    {
+      "obligation_id": "weighted-family-reindexing",
+      "roadmap_stage": "R1",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.WeightedFamily.total_reindex",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "perfect-pairing-explicit-data",
+      "roadmap_stage": "R1",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.PerfectPairing",
+      "status": "LEAN_PROVED_INTERFACE"
+    },
+    {
+      "obligation_id": "complete-dual-basis-data",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.DualBasisData",
+      "status": "LEAN_PROVED_INTERFACE"
+    },
+    {
+      "obligation_id": "dual-basis-kronecker-pairing",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.DualBasisData.pair_primal_dual",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "finite-insertion-reconstruction",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.DualBasisData.reconstruct",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "inverse-insertion-reconstruction",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.DualBasisData.inverse_reconstruct",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "resolution-reindexing",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.LinearResolution.reindex",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "resolution-linear-map",
+      "roadmap_stage": "R2",
+      "lean_declaration": "TwistedYetter.Fusion.FiniteResolution.LinearResolution.map",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "pairing-preserving-transport-interface",
+      "roadmap_stage": "R3",
+      "lean_declaration": "TwistedYetter.Fusion.PairingTransport",
+      "status": "LEAN_PROVED_CONDITIONAL_INTERFACE"
+    },
+    {
+      "obligation_id": "transported-dual-is-canonical",
+      "roadmap_stage": "R3",
+      "lean_declaration": "TwistedYetter.Fusion.PairingTransport.dualVector_eq_canonical",
+      "status": "LEAN_PROVED_CONDITIONAL_ON_PAIRING_TRANSPORT"
+    },
+    {
+      "obligation_id": "transported-channel-equality",
+      "roadmap_stage": "R3",
+      "lean_declaration": "TwistedYetter.Fusion.PairingTransport.channel_eq",
+      "status": "LEAN_PROVED_CONDITIONAL_ON_PAIRING_TRANSPORT"
+    },
+    {
+      "obligation_id": "transported-resolution-reconstruction",
+      "roadmap_stage": "R3",
+      "lean_declaration": "TwistedYetter.Fusion.PairingTransport.reconstruct",
+      "status": "LEAN_PROVED_CONDITIONAL_ON_PAIRING_TRANSPORT"
+    },
+    {
+      "obligation_id": "categorical-mate-equivalences",
+      "roadmap_stage": "R3",
+      "required_future_evidence": [
+        "Explicit left and right mate maps on the Hom spaces used by Lemma 3.3.",
+        "Proof that each mate map is a linear equivalence.",
+        "Source and target Hom-space types with visible dual and tensor conventions."
+      ],
+      "status": "NOT_FORMALIZED"
+    },
+    {
+      "obligation_id": "pivotal-pairing-preservation",
+      "roadmap_stage": "R3",
+      "required_future_evidence": [
+        "A pivotal functor interface with visible pivotality compatibility.",
+        "A proof that the concrete mate maps preserve the trace pairing.",
+        "A constructor of PairingTransport from those category-level proofs."
+      ],
+      "status": "NOT_FORMALIZED"
+    },
+    {
+      "obligation_id": "generalized-sliding-core-diagram-chain",
+      "roadmap_stage": "R4",
+      "required_future_evidence": [
+        "Explicit typed diagrams for equations (3.1.2)-(3.1.11).",
+        "Kirby-color expansion and all simple-object weights.",
+        "A certified chain from insertion through mate transport to inverse insertion.",
+        "Construction of a diagram-backed SourcedSlidingLaw."
+      ],
+      "status": "NOT_FORMALIZED"
+    }
+  ],
+  "fail_closed_checks": [
+    "DualBasisData cannot be constructed without exact dual-basis equality.",
+    "PairingTransport cannot be constructed without pairing preservation.",
+    "A transported dual vector with the wrong index cannot satisfy the claimed Kronecker equation.",
+    "No PairingTransport instance is inferred from a family name or from linear equivalences alone.",
+    "No linear theorem in this matrix is promoted to a fusion-category or Kirby theorem."
+  ],
+  "explicit_non_claims": [
+    "This matrix does not establish categorical mate equivalences.",
+    "This matrix does not establish pivotal preservation of the trace pairing.",
+    "This matrix does not formalize Bärenz-Barrett Lemma 3.3.",
+    "This matrix does not construct a SourcedSlidingLaw.",
+    "This matrix does not prove handle-slide or four-manifold invariance."
+  ]
+}

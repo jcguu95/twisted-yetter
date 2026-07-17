@@ -1,3 +1,5 @@
+import TwistedYetter.Fusion.FiniteResolution
+import TwistedYetter.Fusion.PairingTransport
 import TwistedYetter.Kirby.CouponKernel
 import TwistedYetter.Kirby.CouponNaturality
 import TwistedYetter.Kirby.CategoricalTangle
