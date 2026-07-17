@@ -46,8 +46,9 @@ def test_ctl_note_matches_the_frozen_audit_bytes_and_counts() -> None:
     for key in (
         "retained_evidence_group_count",
         "figure21_pointed_realization_count",
-        "figure21_raw_exact_pointed_rows",
-        "figure21_phase_only_pointed_rows",
+        "figure21_raw_graph_exact_pointed_rows",
+        "figure21_normalized_exact_pointed_rows",
+        "figure21_nonidentity_presentation_correction_rows",
         "figure21_certified_h2_marked_pointwise_rows",
         "declared_control_comparison_units_excluding_figure21_distributions",
         "certified_counterexample_count",
@@ -78,7 +79,7 @@ def test_figure21_caveats_are_top_level_and_machine_readable() -> None:
         row["id"]: row["status"] for row in note["data_quality_findings"]
     }
     assert findings["figure21-rank2-global-phase"] == (
-        "UNRESOLVED_NORMALIZATION_DISCREPANCY"
+        "RESOLVED_AS_INDEPENDENTLY_CALIBRATED_PRESENTATION_NORMALIZATION"
     )
     assert findings["figure21-h2-marking"] == "NOT_CERTIFIED"
     assert findings["figure21-source"] == (
@@ -98,6 +99,7 @@ def test_subject_and_reference_keep_the_guardrails_visible() -> None:
     assert subject["subject_kind"] == "ty:claim-cluster"
     guardrail = subject["current_view_hints"]["guardrail"].lower()
     assert "not a topological no-go theorem" in guardrail
+    assert "15 of 15" in guardrail
     assert "no full premodular run" in guardrail
     assert reutter["subject_kind"] == "ty:paper"
     assert "do not by themselves establish" in reutter["scope_note"].lower()

@@ -39,7 +39,7 @@ def test_note_pins_the_exact_audit_bytes_and_machine_checked_counts() -> None:
     frozen = note["frozen_audit_artifact"]
     assert hashlib.sha256(AUDIT.read_bytes()).hexdigest() == frozen["sha256"]
     assert frozen["content_hash"] == audit["content_hash"]
-    assert frozen["git_blob"] == "25caca316da982e9c1b53f7b2e4717a3cdbbbc80"
+    assert frozen["git_blob"] == "a23ddb8fc1a83b25141d9dcc775e6d8335829170"
     note_counts = note["data_quality_and_scope"]
     audit_counts = audit["machine_checked_result"]
     for key, value in note_counts.items():
@@ -80,8 +80,12 @@ def test_figure21_remains_distribution_only() -> None:
     assert figure21["pointwise_all_alpha_status"] == (
         "BLOCKED_NO_CERTIFIED_H2_COORDINATE_MAP"
     )
-    assert "13 rows match raw" in figure21["distribution_level_result"]
-    assert "2 semion rows" in figure21["distribution_level_result"]
+    assert "all 15" in figure21["distribution_level_result"]
+    assert "Thirteen rows already match raw" in figure21["distribution_level_result"]
+    assert figure21["normalization_audit"]["status"] == (
+        "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_"
+        "ORDINARY_AGGREGATE_NORMALIZATION"
+    )
 
 
 def test_subjects_keep_the_epistemic_status_visible() -> None:
@@ -93,6 +97,9 @@ def test_subjects_keep_the_epistemic_status_visible() -> None:
     assert "not a proved formula" in proposal["current_view_hints"][
         "guardrail"
     ]
+    assert proposal["formula_summary"]["premodular_extension"].startswith(
+        "CONJECTURAL_NOT_ESTABLISHED"
+    )
     assert cluster["status"] == (
         "active_established_computational_result_mathematical_formula_open"
     )
@@ -101,7 +108,7 @@ def test_subjects_keep_the_epistemic_status_visible() -> None:
 
 def test_subject_edges_connect_formula_audit_note_data_and_sources() -> None:
     paths = sorted(EDGE_ROOT.glob("quadratic-block-*.json"))
-    assert len(paths) == 8
+    assert len(paths) == 9
     edges = [load(path) for path in paths]
     assert {edge["target"] for edge in edges} == {
         "claim:lab-note:2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit",
@@ -112,4 +119,5 @@ def test_subject_edges_connect_formula_audit_note_data_and_sources() -> None:
         "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167",
         "subject:twisted-yetter:paper:freedman-topology-four-dimensional-manifolds-1982",
         "subject:twisted-yetter:paper:furuta-monopole-11-8-2001",
+        "claim:lab-note:2026-07-16-figure21-pointed-ordinary-normalization-audit",
     }

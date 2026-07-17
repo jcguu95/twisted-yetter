@@ -9,9 +9,9 @@
   "formal_mathematical_theorem_claim_made": false,
   "machine_checked_computational_statement_made": true,
   "project_no_go_conclusion_adopted": false,
-  "top_notice": "This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and therefore covers MTC inputs only. Full premodular Figure 21 evaluations remain unavailable. On Figure 21, 13 pointed MTC rows match the standard-side distribution raw and two rank-2 semion rows match only after an explicit global -1 output phase; there is no certified H2 marking and the Figure 21 transcription remains unverified against the printed diagram.",
+    "top_notice": "This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and therefore covers MTC inputs only. Full premodular Figure 21 evaluations remain unavailable. On Figure 21, all 15 pointed rows match the standard-side distribution after independently calibrated ordinary-aggregate presentation normalization; 13 already match raw and the two semion rows use correction -1. There is still no certified H2 marking, and the Figure 21 transcription remains unverified against the printed diagram.",
   "git_preflight": {
-    "source_repo_commit": "bc346eb437485d725bda0fbb3efc5bb3fd0cdbb0",
+        "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c",
     "clean_before_ctl_payload_creation": true,
     "ctl_verify_before_work": "PASS",
     "ctl_root_before_work": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614"
@@ -19,8 +19,8 @@
   "established_computational_theorem": {
     "theorem_id": "frozen-computation-denominator-compatibility-theorem",
     "status": "ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_RETAINED_ARTIFACTS",
-    "statement": "For the frozen artifact denominator enumerated by twisted-yetter-stable-no-go-computational-audit-v1, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or explicitly disclosed output-phase alignment. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition.",
-    "figure21_specialization": "For the sole current exotic target, Figure 21, the strongest retained result is distribution-level compatibility for 15 pointed modular realizations of ranks 2 through 5: 13 rows match the split CP2#9(-CP2) distribution raw, two semion rows match only after multiplying all Figure 21 nonzero values by -1, and zero rows have a certified H2-marked pointwise comparison.",
+        "statement": "For the frozen artifact denominator enumerated by twisted-yetter-stable-no-go-computational-audit-v1, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or independently calibrated presentation normalization. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition.",
+        "figure21_specialization": "For the sole current exotic target, Figure 21, the strongest retained result is distribution-level compatibility for 15 pointed modular realizations of ranks 2 through 5: all 15 match the split CP2#9(-CP2) distribution after ordinary-aggregate presentation normalization; 13 match raw, the two semion rows use the independently derived correction -1, and zero rows have a certified H2-marked pointwise comparison.",
     "scope_rule": "This is a theorem about the listed and hash-bound artifacts, not a theorem that twisted Yetter invariants are topologically unable to detect exotic smooth structures."
   },
   "conditional_mathematical_theorem": {
@@ -52,20 +52,29 @@
   "frozen_audit_artifact": {
     "artifact_id": "twisted-yetter-stable-no-go-computational-audit-v1",
     "path": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
-    "git_blob": "44b05c5c30423f77635ea1c7bba98e8e2e941506",
-    "sha256": "8d6c32048651843a2793f8dd188a3b020713bc1e6da29a859e55031879eb18a0",
-    "content_hash": "sha256:3c143f263f6fc0d86049fbffabaa4cbbae5b49f3e10b8c34540225441e0ac649",
-    "generator_commit": "9d31858ac0ad1116712195f13e8fee95d077be65",
+        "git_blob": "034dfa8abe998946c043513288d408c68c54a694",
+        "sha256": "eba9c63c2cad68478a165bab3f465ec91a89caf47813ba47423ddc3cc064aeb8",
+        "content_hash": "sha256:2f50cabea7e7e910a831053f167a06cd2f3fbeabf66a8556646bf9b685dc9f95",
+        "generator_commit": "bc0b21461bad379e57f69a946f12056114e0e328",
     "git_dirty_before_output_write": false,
-    "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+        "status": "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
+    },
+    "figure21_normalization_artifact": {
+        "artifact_id": "figure21-pointed-ordinary-normalization-audit-v1",
+        "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+        "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+        "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+        "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+        "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
   },
   "machine_checked_denominator": {
     "comparison_named_artifact_count": 24,
     "comparison_named_artifacts_all_classified_and_hashed": true,
     "retained_evidence_group_count": 7,
     "figure21_pointed_realization_count": 15,
-    "figure21_raw_exact_pointed_rows": 13,
-    "figure21_phase_only_pointed_rows": 2,
+        "figure21_raw_graph_exact_pointed_rows": 13,
+        "figure21_normalized_exact_pointed_rows": 15,
+        "figure21_nonidentity_presentation_correction_rows": 2,
     "figure21_certified_h2_marked_pointwise_rows": 0,
     "declared_control_comparison_units_excluding_figure21_distributions": 137,
     "certified_counterexample_count": 0
@@ -73,8 +82,8 @@
   "data_quality_findings": [
     {
       "id": "figure21-rank2-global-phase",
-      "status": "UNRESOLVED_NORMALIZATION_DISCREPANCY",
-      "finding": "Both rank-2 semion rows differ raw by the same +1/-1 bucket swap and agree only after a global -1 output phase."
+            "status": "RESOLVED_AS_INDEPENDENTLY_CALIBRATED_PRESENTATION_NORMALIZATION",
+            "finding": "Both rank-2 semion rows retain the same raw +1/-1 bucket swap. Their raw ordinary aggregates are -32 on Figure 21 and +32 on the split standard presentation, independently forcing correction -1; the complete corrected distributions then match. A preserved-sum corrupted-distribution negative control fails closed."
     },
     {
       "id": "figure21-h2-marking",
@@ -113,9 +122,9 @@
   },
   "tests": [
     {
-      "command": "PYTHONPATH=.:src UV_CACHE_DIR=/private/tmp/twisted-yetter-uv-cache uv run pytest tests/test_twisted_yetter_no_go_computational_audit_v1.py tests/test_twisted_yetter_no_go_argument_proposal_v1.py tests/test_figure21_rank2_rank3_standard_comparison_v1.py tests/test_current_low_rank_figure21_terminal_package_v1.py tests/test_figure21_pointed_worker_plan_v1.py -q",
-      "status": "pass",
-      "collected": 17
+            "command": "pytest -q tests/test_figure21_pointed_ordinary_normalization_audit_v1.py tests/test_twisted_yetter_no_go_computational_audit_v1.py",
+            "status": "pass",
+            "collected": 12
     },
     {
       "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
@@ -137,14 +146,16 @@
     "This note does not replace expert review of the marked stable-realization argument.",
     "This note does not bridge Reutter's ordinary semisimple CYK result to Yetter's background-twisted normalization.",
     "This note does not certify the Figure 21 transcription or an H2 coordinate map.",
-    "The two rank-2 semion rows are not raw exact matches.",
+        "The two rank-2 semion rows are not raw graph-level exact matches; their independently calibrated correction does not supply an H2 marking.",
+        "The pointed dimension-one normalization audit is not a proof of a general MTC normalization theorem.",
     "No completed nonpointed twisted MTC Figure 21 comparison is included.",
     "No full premodular Figure 21 exotic-vs-standard comparison is included.",
-    "This note does not claim a no-go result for manifolds with boundary, non-simply-connected manifolds, or other background fields."
+        "This note does not claim a no-go result for manifolds with boundary, non-simply-connected manifolds, or other background fields."
   ],
   "subjects": [
     "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
     "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
     "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
-  ]
+    ],
+    "updated_at": "2026-07-17T05:12:00Z"
 }

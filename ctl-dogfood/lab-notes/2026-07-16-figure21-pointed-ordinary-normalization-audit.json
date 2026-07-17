@@ -1,0 +1,102 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-figure21-pointed-ordinary-normalization-audit",
+  "title": "Figure 21 pointed ordinary-aggregate presentation normalization audit",
+  "created_at": "2026-07-17T05:12:00Z",
+  "created_by": "actor:codex",
+  "status": "ESTABLISHED_POINTED_PRESENTATION_NORMALIZATION_ALL_15_DISTRIBUTIONS_MATCH",
+  "mathematical_status": "ESTABLISHED_COMPUTATIONAL_ADAPTER_NOT_H2_MARKED_THEOREM",
+  "top_notice": "This note resolves the two raw semion -1 differences as presentation normalization for the validated pointed dimension-one comparison. It does not erase the raw values. The correction is derived from the ordinary Kirby-color aggregate before the complete value distribution is compared. All 15 pointed rows then match the split CP2#9(-CP2) distribution. No H2 marking, general MTC normalization theorem, premodular theorem, or exoticness theorem is claimed.",
+  "git_preflight": {
+    "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c",
+    "clean_before_ctl_payload_creation": true,
+    "ctl_verify_before_work": "PASS",
+    "ctl_root_before_work": "ctlobj-sha256:7f9f9aefd35b539ffbe2ef83035910bc6ede2c00c2df18a968558491b76d8db3"
+  },
+  "frozen_normalization_artifact": {
+    "artifact_id": "figure21-pointed-ordinary-normalization-audit-v1",
+    "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+    "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+    "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+    "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+    "generator_commit": "306e02a4c7d7528b078222fbc8999592ca6833b1",
+    "git_dirty_before_output_write": false,
+    "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+  },
+  "calibration_contract": {
+    "scope": "POINTED_CATEGORIES_WITH_ALL_QUANTUM_DIMENSIONS_ONE",
+    "why_unweighted_sum_is_ordinary": "For each validated pointed snapshot, every simple object has quantum dimension one. Summing all fixed-label amplitudes therefore inserts the ordinary Kirby color on each ordinary component.",
+    "figure21_raw_ordinary_aggregate": "S_F21(C)=sum_l A_F21,C^raw(l)",
+    "standard_raw_ordinary_aggregate": "S_std(C)=sum_l A_std,C^raw(l)",
+    "presentation_correction": "nu_C=S_std(C)/S_F21(C)",
+    "normalized_amplitude": "A_F21,C^normalized(l)=nu_C*A_F21,C^raw(l)",
+    "admission_requirements": [
+      "Both ordinary aggregates are nonzero.",
+      "The correction has unit modulus.",
+      "The correction is selected without inspecting distribution-bucket alignment.",
+      "The complete normalized distribution equals the standard distribution.",
+      "Every snapshot and category-data hash remains pinned."
+    ]
+  },
+  "machine_checked_result": {
+    "pointed_realization_count": 15,
+    "raw_graph_distribution_match_count": 13,
+    "normalized_distribution_match_count": 15,
+    "nonidentity_presentation_correction_count": 2,
+    "nonidentity_rows": [
+      "rank2-cyclic-z2-semion-minus",
+      "rank2-cyclic-z2-semion-plus"
+    ],
+    "semion_figure21_raw_ordinary_aggregate": "-32+0i",
+    "semion_standard_raw_ordinary_aggregate": "+32+0i",
+    "semion_derived_presentation_correction": "-1+0i",
+    "other_thirteen_presentation_corrections": "+1+0i",
+    "certified_h2_marked_pointwise_row_count": 0
+  },
+  "anti_silent_fail_controls": [
+    {
+      "id": "preserved-ordinary-sum-corrupted-distribution",
+      "status": "PASS_NEGATIVE_CONTROL_REJECTED",
+      "detail": "A semion distribution mutation was chosen to preserve both total sector count and ordinary aggregate -32 while changing four buckets. The adapter retained correction -1 but rejected the corrupted full distribution."
+    },
+    {
+      "id": "stale-snapshot-content-hash",
+      "status": "PASS_NEGATIVE_CONTROL_REJECTED",
+      "detail": "A stale snapshot hash is rejected before calibration."
+    },
+    {
+      "id": "pointed-dimension-one-scope",
+      "status": "PASS_FAIL_CLOSED_SCOPE_CHECK",
+      "detail": "The unweighted ordinary-sum identity is admitted only after every quantum dimension is checked to equal one."
+    }
+  ],
+  "impact_on_current_evidence": {
+    "figure21_distribution_claim": "The strongest current Figure 21 statement is now 15 of 15 pointed distributions matching after independently calibrated presentation normalization.",
+    "quadratic_formula_audit": "The separate 201-row H2-marked denominator remains 201 of 201 with zero counterexamples. Figure 21 still contributes zero H2-marked pointwise rows.",
+    "stable_no_go_audit": "The former unresolved semion normalization caveat is replaced by a resolved presentation-normalization certificate. The mathematical no-go proposition remains conditional."
+  },
+  "tests": [
+    {
+      "command": "pytest -q tests/test_figure21_pointed_ordinary_normalization_audit_v1.py tests/test_twisted_yetter_no_go_computational_audit_v1.py tests/test_twisted_yetter_quadratic_block_prediction_audit_v1.py",
+      "status": "pass",
+      "collected": 21
+    }
+  ],
+  "formal_mathematical_theorem_claim_made": false,
+  "machine_checked_computational_statement_made": true,
+  "explicit_non_claims": [
+    "This note does not rewrite the historical raw graph evaluations.",
+    "This note does not certify the Figure 21 transcription against the printed diagram.",
+    "This note does not provide an H2 coordinate map or a pointwise all-alpha comparison.",
+    "This note does not prove a presentation-normalization formula for arbitrary MTCs.",
+    "This note does not establish the conjectural premodular extension.",
+    "This note does not prove that Figure 21 is exotic or standard.",
+    "This note does not establish a global twisted Yetter no-go theorem."
+  ],
+  "subjects": [
+    "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
+    "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+    "subject:twisted-yetter:claim-cluster:quadratic-block-computational-audit",
+    "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula"
+  ]
+}

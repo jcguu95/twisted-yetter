@@ -8,6 +8,7 @@
     "homology_coordinate_rule": "For alpha=sum_i x_i tensor a_i and Q_ij=x_i.x_j, Phi_Q(alpha)=product_i q_C(a_i)^(Q_ii) product_{i<j} b_C(a_i,a_j)^(Q_ij).",
     "normalization_safe_calibration": "q_C(a)=Z_C(CP2,a)/Z_C(CP2,0) in a pinned orientation convention",
     "ordinary_value_role": "Under the modular CKY normalization, Z_C(M,0) is already controlled by Euler characteristic and signature. The candidate formula adds the complete alpha-dependent quadratic phase.",
+    "premodular_extension_status": "CONJECTURAL_DIRECTION_NOT_ESTABLISHED. The same pessimistic conclusion may extend after separating transparent-sector and pi1 data, but neither the formula nor a premodular Figure 21 comparison is proved by this audit.",
     "scope": "closed connected oriented smooth simply connected 4-manifolds with torsion-free H2 and modular category input"
   },
   "created_at": "2026-07-17T04:42:00Z",
@@ -35,13 +36,21 @@
     "This note does not turn the still-open 11/8 conjecture into a theorem.",
     "This note does not use or evaluate the tangent-bundle Pontryagin class p1(TM).",
     "This note does not certify a Figure 21 H2 coordinate map or a pointwise all-alpha Figure 21 comparison.",
-    "This note does not erase the two Figure 21 semion global -1 normalization discrepancies.",
+    "This note does not turn the independently calibrated Figure 21 presentation normalization into an H2 marking.",
+    "This note does not prove that the pointed dimension-one normalization adapter extends to arbitrary MTCs.",
     "This note does not establish a premodular formula.",
     "This note does not cover torsion H2, non-simply-connected manifolds, or manifolds with boundary.",
     "Presentation-control agreement is not independent experimental proof of a universal theorem."
   ],
   "figure21_specialization": {
-    "distribution_level_result": "Across 15 pointed modular realizations of ranks 2 through 5, the Figure 21 value distribution is compatible with the CP2#9(-CP2) standard-side prediction: 13 rows match raw and 2 semion rows match only after an explicit global -1 phase alignment.",
+    "distribution_level_result": "Across 15 pointed modular realizations of ranks 2 through 5, all 15 Figure 21 value distributions match CP2#9(-CP2) after presentation normalization independently calibrated from the ordinary Kirby-color aggregate. Thirteen rows already match raw; the two semion rows have raw graph sums -32 versus +32 and therefore use the derived correction -1.",
+    "normalization_audit": {
+      "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+      "git_blob": "3ef1ae7d1c6f1a0f76a57b7db3b135cf2509cefd",
+      "sha256": "53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+      "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+      "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
+    },
     "pointwise_all_alpha_status": "BLOCKED_NO_CERTIFIED_H2_COORDINATE_MAP",
     "pointwise_marked_row_count": 0,
     "standard_topological_model": "CP2#9(-CP2)",
@@ -49,18 +58,18 @@
   },
   "formal_mathematical_theorem_claim_made": false,
   "frozen_audit_artifact": {
-    "content_hash": "sha256:bfc0bc94c09cd00aa7a268f929c9a2a14b079ffeb3533f2db9656afb5f7dcd2d",
-    "generator_commit": "4b02fea2d0cddf0bae4715873eaa9f3213419c68",
-    "git_blob": "25caca316da982e9c1b53f7b2e4717a3cdbbbc80",
+    "content_hash": "sha256:ecda1d144f6b58d442dd0392a26e9c265ed46db74e73996d38d5a4020455ee12",
+    "generator_commit": "c16e686a496ce2529a02bfe5e7000cfaf34ada3f",
+    "git_blob": "a23ddb8fc1a83b25141d9dcc775e6d8335829170",
     "path": "experiments/results/theory/twisted-yetter-quadratic-block-prediction-audit-v1.json",
-    "sha256": "e93b1c543e0c2b0dc33134af1631f68778c80fc7983182998114054bd692130c",
+    "sha256": "9c49f55a7379299af98d323a42f50233a3475f90453e86df44fcdff24dc7e522",
     "status": "PASS_ALL_ELIGIBLE_H2_MARKED_DATA_MATCH_QUADRATIC_BLOCK_PREDICTION_FIGURE21_POINTWISE_BLOCKED"
   },
   "git_preflight": {
     "clean_before_ctl_payload_creation": true,
     "ctl_root_before_work": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
     "ctl_verify_before_work": "PASS",
-    "source_repo_commit": "05d2f76dc1b5776e02eab8e3125cf7e19d443144"
+    "source_repo_commit": "cef97233730fad0d6861e429f39447512e9c7a6c"
   },
   "machine_checked_computational_statement_made": true,
   "mathematical_status": "ESTABLISHED_COMPUTATIONAL_PATTERN_THEOREM_CANDIDATE_NOT_PROVED",
@@ -111,5 +120,6 @@
     "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
   ],
   "title": "Explicit quadratic-block prediction audit for modular Twisted Yetter data",
-  "top_notice": "This note establishes an exact machine-checked statement about 201 frozen H2-marked rows. It does not prove the proposed formula for arbitrary modular tensor categories. Figure 21 remains distribution-level evidence only because no certified H2 marking exists. The finite-coefficient phase is described by a Pontryagin square or induced quadratic refinement, not by p1(TM)."
+  "top_notice": "This note establishes an exact machine-checked statement about 201 frozen H2-marked rows. It does not prove the proposed formula for arbitrary modular tensor categories. Figure 21 now has 15 of 15 pointed distributions matching after an independently derived ordinary-aggregate presentation normalization, but remains distribution-level evidence only because no certified H2 marking exists. The finite-coefficient phase is described by a Pontryagin square or induced quadratic refinement, not by p1(TM).",
+  "updated_at": "2026-07-17T05:12:00Z"
 }
