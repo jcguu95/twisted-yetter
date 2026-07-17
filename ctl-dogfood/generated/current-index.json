@@ -11400,6 +11400,118 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+      "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+      "payload": {
+        "created_at": "2026-07-17T00:48:00Z",
+        "created_by": "actor:codex",
+        "explicit_non_claims": [
+          "This note is not an established theorem.",
+          "This note is not a completed proof or proof certificate.",
+          "The user's initial reading is not expert verification.",
+          "The proposed no-go statement is not the project's accepted current mathematical conclusion.",
+          "This note does not establish that all modular or premodular categories fail to detect exotic smooth structures.",
+          "This note does not establish the connected-sum formula with all Yetter normalizations.",
+          "This note does not establish nonvanishing of the stabilization factor in every stated categorical case.",
+          "This note does not claim that Wall or Ruberman-Strle have already been applied correctly; that application awaits expert review.",
+          "This note does not create a publication commitment."
+        ],
+        "formal_theorem_claim_made": false,
+        "git_preflight": {
+          "clean_before_work": true,
+          "commit": "5994dc788d7f804666204c549016903dbb7bf3f8",
+          "ctl_root_before_work": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "ctl_verify_before_work": "PASS"
+        },
+        "mathematical_status": "PROPOSED_NO_GO_ARGUMENT",
+        "note_id": "objective-note-2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+        "project_conclusion_adopted": false,
+        "proof_obligations": [
+          {
+            "id": "connected-sum-multiplicativity",
+            "remaining_review": "Extract and verify the exact Yetter normalization and write a category-independent proof or a source-backed derivation.",
+            "required_statement": "The homologically twisted invariant satisfies the claimed connected-sum formula for general coefficient group A, with the exact S4 normalization and with alpha direct-sum beta tracked correctly.",
+            "status": "LIKELY_BUT_NOT_FORMALIZED"
+          },
+          {
+            "candidate_derivation": "Choose a Wall stable diffeomorphism with induced isometry d; correct d by the source self-isometry d^{-1}(f direct-sum identity); realize that correction after one additional S2xS2 using Ruberman-Strle Theorem 2.1; then precompose.",
+            "id": "marked-stable-realization",
+            "remaining_review": "Ask a 4-manifold topology expert to check the use of Wall and Ruberman-Strle, connected-sum markings, orientation, and base-ball conventions.",
+            "required_statement": "A prescribed integral intersection-form isometry f is induced as f direct-sum identity after equal S2xS2 stabilization by an orientation-preserving diffeomorphism.",
+            "status": "ARGUMENT_SUPPLIED_AWAITING_EXPERT_REVIEW"
+          },
+          {
+            "id": "nonzero-stabilization-factor",
+            "remaining_review": "Verify the exact normalization and hypotheses, including bosonic and transparent-fermion premodular cases, without dividing by a possibly vanishing quantity.",
+            "required_statement": "Z_C(S2xS2,0) divided by Z_C(S4,0) is nonzero under the precise ribbon fusion category hypotheses used by Yetter's invariant.",
+            "status": "LIKELY_BUT_NOT_FORMALIZED"
+          }
+        ],
+        "proposal": {
+          "argument_outline": [
+            "Use connected-sum multiplicativity for the marked twisted invariant.",
+            "Use marked stable realization to realize the prescribed H2 isometry without mixing the original twist class into the stabilizing hyperbolic summands.",
+            "Stabilize both manifolds by equal numbers of S2xS2 summands.",
+            "Use diffeomorphism invariance on the stabilized marked pairs.",
+            "Cancel the common nonzero S2xS2 stabilization factor."
+          ],
+          "conditional_conclusion": "If all three proof obligations hold with the required markings and normalizations, then the total twisted Yetter invariant cannot distinguish such manifolds after transporting H2 coefficients through the prescribed intersection-form isometry.",
+          "conditional_scope": "Closed, connected, oriented, smooth, simply connected 4-manifolds with isometric integral intersection forms, for the total homologically twisted Yetter invariant associated to a ribbon fusion category, subject to the three proof obligations below."
+        },
+        "reference_subjects": [
+          "subject:twisted-yetter:paper:yetter-hepth-9311082",
+          "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+          "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+          "subject:twisted-yetter:paper:ruberman-strle-2210-16260"
+        ],
+        "review_gates": [
+          "An expert review of the marked stable realization corollary upgrades only that proof obligation, not the whole no-go proposal.",
+          "All three proof obligations must be written and checked before the proposal may become PROOF_DRAFT_COMPLETE.",
+          "A theorem-level status requires a separate reviewed revision; it cannot be inferred from this conversation or from the user's initial reading."
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "status": "OPEN_EXPERT_REVIEW",
+        "subjects": [
+          "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+        ],
+        "title": "Candidate stable no-go argument for twisted Yetter invariants",
+        "top_notice": "This note preserves and indexes a candidate proof route discussed on 2026-07-16. The user completed an initial reading and found no specific objection, but this is not expert verification, acceptance as a theorem, or the project's adopted current mathematical conclusion. Expert review and a complete written proof remain necessary.",
+        "transcript_artifact": {
+          "artifact_id": "twisted-yetter-no-go-proof-conversation-transcript-v1",
+          "formal_evidence": false,
+          "message_count": 14,
+          "model": "gpt-5.6-sol",
+          "path": "experiments/results/theory/twisted-yetter-no-go-proof-conversation-transcript-v1.json",
+          "reasoning_effort": "ultra",
+          "sha256": "9d857c5530288796c3f087bcd60f79d4789837751638e6456ad4af97aa0842c2",
+          "status": "ARCHIVAL_SOURCE_ONLY",
+          "turn_count": 3
+        },
+        "user_assessment": {
+          "expert_verification": false,
+          "follow_up_if_expert_review_is_positive": "The argument would still need to be written clearly and proved in full. The user may choose not to develop it into a publication even if correct.",
+          "publication_commitment": false,
+          "statement": "The user read the proposed argument and did not identify a specific objection on initial review, but considers expert review necessary.",
+          "status": "INITIAL_READING_NO_SPECIFIC_OBJECTION_FOUND",
+          "theorem_acceptance": false
+        }
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+        "created_at": "2026-07-17T00:50:04Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -14117,6 +14229,162 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+        "explanation": "The completed pointed Figure 21 computations motivated looking for a general no-go argument, but those computations do not prove the proposal.",
+        "role": "motivated-by",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
+        "created_at": "2026-07-17T00:50:07Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+        "explanation": "The lab note is the normative epistemic-status record for this open argument proposal; it explicitly does not establish a theorem.",
+        "role": "records",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
+        "created_at": "2026-07-17T00:50:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+        "explanation": "Ruberman-Strle Theorem 2.1 is proposed to realize the correction self-isometry after one additional stabilization. This application awaits expert review.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active_reference_application_awaiting_expert_review",
+        "target": "subject:twisted-yetter:paper:ruberman-strle-2210-16260"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+        "created_at": "2026-07-17T00:50:11Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+        "explanation": "Wall's realization theorem is a classical fallback for the correction automorphism. The precise hypotheses and marking conventions await expert review.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active_reference_application_awaiting_expert_review",
+        "target": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
+        "created_at": "2026-07-17T00:50:10Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+        "explanation": "Wall's stable classification is used to obtain an initial stable diffeomorphism. This edge records a proposed use, not a verified corollary.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active_reference_application_awaiting_expert_review",
+        "target": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
+        "created_at": "2026-07-17T00:50:09Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+        "explanation": "Yetter's paper is the primary source for the homologically twisted invariant and total-invariant definition; exact normalization extraction remains a proof obligation.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "status": "active_reference_not_proof",
+        "target": "subject:twisted-yetter:paper:yetter-hepth-9311082"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
+        "created_at": "2026-07-17T00:50:08Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -16939,6 +17207,51 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
+      "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+      "payload": {
+        "aliases": [
+          "candidate-twisted-yetter-no-go",
+          "stable-no-go-argument-proposal",
+          "marked-stabilization-twisted-yetter-argument"
+        ],
+        "current_view_hints": {
+          "guardrail": "This is an argument proposal, not a theorem, not a completed proof, and not the project's accepted current conclusion. The user's initial reading found no specific objection but is not expert verification.",
+          "headline": "Open expert review: candidate stable no-go argument for total twisted Yetter invariants on closed simply connected 4-manifolds.",
+          "primary_note": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+          "transcript_artifact": "experiments/results/theory/twisted-yetter-no-go-proof-conversation-transcript-v1.json"
+        },
+        "display_name": "Candidate stable no-go argument for twisted Yetter invariants",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:paper:yetter-hepth-9311082",
+          "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+        ],
+        "proof_obligation_ids": [
+          "connected-sum-multiplicativity",
+          "marked-stable-realization",
+          "nonzero-stabilization-factor"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Navigation subject for a candidate proof route proposed in a preserved research conversation on 2026-07-16. It indexes the conditional argument, its three unresolved proof obligations, primary references, and expert-review requirement. It deliberately does not assert the no-go statement as true.",
+        "status": "open_expert_review",
+        "subject_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "subject_kind": "ty:argument-proposal"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
+        "created_at": "2026-07-17T00:50:05Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
       "logical_id": "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus",
       "payload": {
@@ -18664,6 +18977,46 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
+      "logical_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+      "payload": {
+        "aliases": [
+          "ruberman-strle-stable-realization",
+          "walls-stable-realization-definite-4-manifolds"
+        ],
+        "display_name": "Ruberman-Strle, Wall's stable realization for diffeomorphisms of definite 4-manifolds",
+        "equivalent_external_ids": [
+          "arxiv:2210.16260"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/2210.16260",
+            "arxiv_id": "2210.16260",
+            "capture_date": "2026-07-16",
+            "kind": "arxiv"
+          }
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference subject for the one-additional-stabilization realization theorem invoked in the candidate marked-stable-realization correction argument. Theorem 2.1 is the proposed locator; its application remains awaiting expert review.",
+        "status": "active_reference_expert_application_review_required",
+        "subject_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
+        "created_at": "2026-07-17T00:50:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
       "logical_id": "subject:twisted-yetter:paper:tham-2108-13467",
       "payload": {
@@ -18803,6 +19156,78 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:paper:wakamaki-2307-16454",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
+      "logical_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+      "payload": {
+        "aliases": [
+          "wall-diffeomorphisms-of-4-manifolds",
+          "wall-1964-stable-realization"
+        ],
+        "display_name": "Wall, Diffeomorphisms of 4-manifolds",
+        "external_references": [
+          {
+            "capture_date": "2026-07-16",
+            "kind": "author-hosted-pdf",
+            "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/wdiff4.pdf"
+          }
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference subject for Wall's realization results on intersection-form automorphisms. The exact theorem hypotheses and their application to the candidate correction argument remain subject to expert review.",
+        "status": "active_reference_expert_application_review_required",
+        "subject_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
+        "created_at": "2026-07-17T00:50:02Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
+      "logical_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+      "payload": {
+        "aliases": [
+          "wall-on-simply-connected-4-manifolds",
+          "wall-1964-simply-connected-four-manifolds"
+        ],
+        "display_name": "Wall, On simply-connected 4-manifolds",
+        "external_references": [
+          {
+            "capture_date": "2026-07-16",
+            "kind": "author-hosted-pdf",
+            "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/w4.pdf"
+          }
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference subject for Wall's stable classification results used in the candidate marked-stable-realization argument. This subject does not assert that the proposed corollary has been checked or proved.",
+        "status": "active_reference_expert_application_review_required",
+        "subject_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
+        "created_at": "2026-07-17T00:50:01Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -19716,6 +20141,7 @@
       "claim:lab-note:2026-07-16-rank4-z4-ribbon-realization-partial-progress": "ctlobj-sha256:72ed7ce71fb0ea9eca67c5fc11e3fe383c036856cdcab07f7eb7e0caa166f491",
       "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
       "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
+      "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -19800,6 +20226,12 @@
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:about:figure21-e3prime": "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:lab-note": "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms": "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected": "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082": "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
       "subject-edge:ty:akbulut-figure1-e1:about:e1": "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948",
       "subject-edge:ty:akbulut-figure38-note:about:figure38": "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655",
       "subject-edge:ty:akbulut-figure38:about:e1": "ctlobj-sha256:2d7e2926e6556bdfda45b2c4025563c23924a6ac3fda37a2f9bcc67498a31e75",
@@ -19895,6 +20327,7 @@
       "subject-index:twisted-yetter:subject-layer-lane-v2": "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f",
       "subject-index:twisted-yetter:subject-layer-lane-v3": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
       "subject:twisted-yetter:4-manifold:e1": "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
+      "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
       "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
       "subject:twisted-yetter:category-family:drinfeld-double": "ctlobj-sha256:662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea",
       "subject:twisted-yetter:category-family:su2-k": "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
@@ -19934,8 +20367,11 @@
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e",
       "subject:twisted-yetter:paper:dong-schopieray-2407-15955": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
       "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
+      "subject:twisted-yetter:paper:ruberman-strle-2210-16260": "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
       "subject:twisted-yetter:paper:tham-2108-13467": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
       "subject:twisted-yetter:paper:wakamaki-2307-16454": "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
+      "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds": "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
+      "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds": "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
       "subject:twisted-yetter:paper:yasui-0807-0373": "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38",
       "subject:twisted-yetter:paper:yasui-1505-02551": "ctlobj-sha256:27d82f4aff90d2448ad76c260e09543da9639c49852066957e007ac1c17b4ae6",
       "subject:twisted-yetter:paper:yetter-hepth-9311082": "ctlobj-sha256:146772621d22e5b58e21237fdf92fcaa3ec7282642dc924a85588766216f8c32",
@@ -20207,6 +20643,9 @@
       "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": [
         "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5"
       ],
+      "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": [
+        "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b"
+      ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
       ],
@@ -20459,6 +20898,24 @@
       ],
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": [
         "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison": [
+        "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note": [
+        "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260": [
+        "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms": [
+        "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected": [
+        "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082": [
+        "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27"
       ],
       "subject-edge:ty:akbulut-figure1-e1:about:e1": [
         "ctlobj-sha256:a3dfd0ee5e8662169b522a5677d4e0c3e74741fd45cbb7c8be1cea4b2dd0f948"
@@ -20756,6 +21213,9 @@
       "subject:twisted-yetter:4-manifold:e1": [
         "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322"
       ],
+      "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds": [
+        "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5"
+      ],
       "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus": [
         "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc"
       ],
@@ -20882,6 +21342,9 @@
       "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": [
         "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e"
       ],
+      "subject:twisted-yetter:paper:ruberman-strle-2210-16260": [
+        "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69"
+      ],
       "subject:twisted-yetter:paper:tham-2108-13467": [
         "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef",
         "ctlobj-sha256:529bc5ee19037e6596460f0355d3f24c20cd8cd244e041b30f2d86e689b6b979",
@@ -20890,6 +21353,12 @@
       ],
       "subject:twisted-yetter:paper:wakamaki-2307-16454": [
         "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59"
+      ],
+      "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds": [
+        "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36"
+      ],
+      "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds": [
+        "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0"
       ],
       "subject:twisted-yetter:paper:yasui-0807-0373": [
         "ctlobj-sha256:18a1c3ea3012c374b59be4ae7f85a589343b9939dc9362ca32c2764ddbfeef38"
@@ -21030,6 +21499,7 @@
         "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
         "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0",
+        "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
         "ctlobj-sha256:238b43ce9cb239262eae619afe3f6f19ee76a40f1a778692089e7351a181544b",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
@@ -21099,6 +21569,7 @@
         "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
         "ctlobj-sha256:5c4a6d487837fe3656ba5d8e1905fbd70f113acf172ea56ef5fb298508a5d1fa",
         "ctlobj-sha256:5d45e144aca6f48865aae9f3f61ebd3903290483dddf4dbf143097302870c87a",
+        "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
         "ctlobj-sha256:5e98d690dfc3d1c938acdfd7fc0ed2e6c7ea0168863946a3a1db2dfd0f616858",
         "ctlobj-sha256:5eef0248a902dd069f13d913c27618f0dfa05b7092440b96cf56eda32e8fd174",
         "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
@@ -21108,6 +21579,7 @@
         "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
         "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed",
         "ctlobj-sha256:62874d12efe75fcfc37ca67e099a10b8237aa61eaddbc076d8c775386015fad1",
+        "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
         "ctlobj-sha256:6526f8e5348b6d4ea90a86c5ddc1795a7b66e642511aebf4eb0ed7b2fcc07fb1",
         "ctlobj-sha256:652ea63e096a38fb0e4ef40e95cb5f0568e9fcc0414e3b731e11f666f393f750",
         "ctlobj-sha256:65598753cc6c357256d11463645f965b28f1de0fde5c74531fb6f4ad7649dd47",
@@ -21157,6 +21629,7 @@
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
         "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
         "ctlobj-sha256:832a233203945bb9a4e206ca64b0be71b3604203749f8a9d08774cafd2f661ad",
+        "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
         "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
         "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691",
         "ctlobj-sha256:8639af7cf339cd035c891a2f2d59dce3b39f6a0b1f968b77f66c448a63fb9211",
@@ -21167,6 +21640,8 @@
         "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
         "ctlobj-sha256:878c8bc52da61d196d0e1fbda5417552321aff5ee798e003c88b2a1e817793b0",
         "ctlobj-sha256:888c919eee9800a96c0437b46223467a245f569241c2536d7956fdfd0ec0f5b3",
+        "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
+        "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
         "ctlobj-sha256:89864de938ebc1920bc2fd072c4db462c84abe423e8e39653766de6a938353c7",
         "ctlobj-sha256:899df7824c119fae9a8f174875b429a17948c49f5d0ee1c17648ee35bcc31445",
         "ctlobj-sha256:8b33e05f122f3d8b1d7a3d646addbbe49e06487d7faf7d382afbf4fed2fc2772",
@@ -21190,6 +21665,7 @@
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
         "ctlobj-sha256:98e5253dc8897b3c5457e8e5d59e29bfc3115a94447aa557256694b9302f4740",
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
+        "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
         "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
@@ -21223,6 +21699,7 @@
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
         "ctlobj-sha256:aa85149752765d1043d18d7d8a5c0880a1b26a285b41b404cdb46b22a57ae32d",
         "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
         "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
         "ctlobj-sha256:ae00a2e60e787c398e9bc5126d2a674ef56a1d7366cf881be63be61bfcb02655",
@@ -21263,15 +21740,18 @@
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
         "ctlobj-sha256:cfc2f01ecd6f3a7901ddb8ea349e545e321835b6aa997a52d07390538643cea4",
         "ctlobj-sha256:d066e07a424559da0d3a71640f17d9bca10251dd9dd7e2d27d41ddffbcac1202",
+        "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
         "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
         "ctlobj-sha256:d2470c3f56e88435297711ae988d25ffa2d68d248877f30f262be6be63379825",
         "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
         "ctlobj-sha256:d326d02305fdeb5bd5c1878b85ecac62d73444b4a16046b7f34526881cb00acc",
         "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
         "ctlobj-sha256:d521c0d284a30f35b1c21d70860851741ec190d72f208633e556d74255c1f446",
+        "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
         "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9",
         "ctlobj-sha256:d5f5c8ad81b2b2b1318ff8c6984ba49bf3b704538dd73f222c74482116027087",
         "ctlobj-sha256:d63602714a710e29b3efbc00c54758b028fb9e37fa1db7cceb4033a13f475b69",
+        "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
         "ctlobj-sha256:d8e812ad652f26b9ee65ba7c3b31d540b40293141dbec483d4cc51fec4214eb6",
         "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c",
         "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
@@ -21385,6 +21865,7 @@
         "ctlobj-sha256:1e43445156ec0b5c753d2199da1465d504e6b7a708a7e53ab2af2efc2d16dd8a",
         "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
         "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
+        "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
         "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
         "ctlobj-sha256:2b7c40005870353fc015e0e4939a78ee355ae4a318a72c61089021d378588e8e",
@@ -21562,6 +22043,7 @@
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
         "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
         "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
+        "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
         "ctlobj-sha256:65cb28c0812c1741b839f43203b8bcaaee69be127975db4f04d18e99565e1f5d",
         "ctlobj-sha256:662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea",
         "ctlobj-sha256:6822c3503b8c2bedaf113292a4095f4187b51d2c703f0ee8e438fc87fc459803",
@@ -21577,6 +22059,7 @@
         "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
         "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
         "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
+        "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
         "ctlobj-sha256:899df7824c119fae9a8f174875b429a17948c49f5d0ee1c17648ee35bcc31445",
         "ctlobj-sha256:8eb27ceda7ac23eb9bedfd24bb3aa8a3372c2f0d03885130fc126e6b5ed33cca",
         "ctlobj-sha256:9038dcdc06116a15bf5a0f65f137f100c1b39a61c2a912d84b2c26adf69c349b",
@@ -21594,6 +22077,8 @@
         "ctlobj-sha256:b9064132924c394251a56bd33867b0bab66551026023a065c830390f6b3d6df5",
         "ctlobj-sha256:cbed4b6bdca02afbb22f46ec914b22af4696b6926455a694e985902959a11056",
         "ctlobj-sha256:d30b58a5282019639351b6d48a0696d86e071f333f20c9b723975bb7f2c91cc6",
+        "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
+        "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
         "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
         "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
         "ctlobj-sha256:e19c803392df21aa78f3ec99f2b89be7f964a6b1e286344461332a599d2d5da3",
@@ -21650,6 +22135,7 @@
         "ctlobj-sha256:5b9475bb016b45548b73c4f4e3e8eee76fb97b675351cabb11cc83843ff838a2",
         "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
         "ctlobj-sha256:5c4a6d487837fe3656ba5d8e1905fbd70f113acf172ea56ef5fb298508a5d1fa",
+        "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
         "ctlobj-sha256:5eef0248a902dd069f13d913c27618f0dfa05b7092440b96cf56eda32e8fd174",
         "ctlobj-sha256:5f4c6c33e964942a6c363f550b466e3e863714f3544f58da51aee1e08de18315",
         "ctlobj-sha256:60697aa9744a89c9d4c40432bfcf191008cf6afb5cb1825c826b3eac033cfccb",
@@ -21662,13 +22148,16 @@
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
         "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
+        "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
         "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
         "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
         "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
+        "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
         "ctlobj-sha256:8fa9a1bf59f6baa2f22fae7a2c50bcefb792fd88e17c7998dc9fe35132bc6ad5",
         "ctlobj-sha256:9558ad3a4f8cb4eca48234bdcacd1b07380e5068d0a759cc2a550175f2ccbbe2",
         "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
+        "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
         "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
@@ -21677,6 +22166,7 @@
         "ctlobj-sha256:a583b12d16566e9f13deb8b240fed2600aeff48b5843fc92e125ba61263b8fb3",
         "ctlobj-sha256:a5987f227727bff8626d9b9e40f0b9a19d4f4f4f0a3a182ebefc16bc09e4b494",
         "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
         "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
         "ctlobj-sha256:ae7a058685e7ddbca411143e131e0b81e9b10f94f911307cad4d17f7fc549a10",
         "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5",
@@ -21688,6 +22178,7 @@
         "ctlobj-sha256:baebde2a674098a6f5d3014c2661f24d125b74c955ca13c5fdec49d7c35db8f6",
         "ctlobj-sha256:c4fd57320b91a748038c5eec0fe0fdf3fbf61ef2fa2f1f66a2bc80e0cc1ccfcb",
         "ctlobj-sha256:c7c7a1439b54c52f97655ec47a4800df6c84c4d8deb9565444bfc0cd1358681c",
+        "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
         "ctlobj-sha256:d5f5c8ad81b2b2b1318ff8c6984ba49bf3b704538dd73f222c74482116027087",
         "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
         "ctlobj-sha256:db6f26e588591bcc92f58081e3ae09ebb98b4f296b7c40e7606c7f233cc41cfa",
@@ -22004,6 +22495,15 @@
           "edge_type": "revision-parent",
           "source_cid": "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
           "target_cid": "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5"
+        }
+      ],
+      "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+          "target_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375"
         }
       ],
       "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0": [
@@ -28475,6 +28975,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ee69e8da6359ecfea310f4b9ca8ad50112af6fcfff16afdb0faf709ab10cf1e8",
+          "generated_at": "2026-07-17T00:50:04Z",
+          "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:2f05ec8d7ec8f9881cd3740fca21ab2f4013f8a76e3dfe1f4af7e744c30ff8d4",
+          "path": "manifests/lab-note-2026-07-16-twisted-yetter-stable-no-go-argument-proposal.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-twisted-yetter-stable-no-go-argument-proposal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc": [
         {
           "admission_batch_cid": null,
@@ -34082,6 +34602,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:ee69e8da6359ecfea310f4b9ca8ad50112af6fcfff16afdb0faf709ab10cf1e8",
+          "generated_at": "2026-07-17T00:50:04Z",
+          "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:2f05ec8d7ec8f9881cd3740fca21ab2f4013f8a76e3dfe1f4af7e744c30ff8d4",
+          "path": "manifests/lab-note-2026-07-16-twisted-yetter-stable-no-go-argument-proposal.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-16-twisted-yetter-stable-no-go-argument-proposal.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:9df7bf3d2e8392c871d34218a3ff1d9096f1d88de7a30db0da024f116aea6252",
           "generated_at": "2026-07-06T23:17:10Z",
           "logical_id": "sys:policy",
@@ -35357,6 +35894,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4bec403c760dd20a56e398c0187a7413bd647a451a5e8613939712e986da00a9",
+          "generated_at": "2026-07-17T00:50:05Z",
+          "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ee69e8da6359ecfea310f4b9ca8ad50112af6fcfff16afdb0faf709ab10cf1e8",
+          "path": "manifests/subject-definition-2026-07-16-argument-proposal-twisted-yetter-stable-no-go.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/argument-proposal-twisted-yetter-stable-no-go.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
           "generated_at": "2026-07-16T23:23:10Z",
           "logical_id": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison",
@@ -35367,6 +35921,57 @@
           "parent_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
           "path": "manifests/subject-definition-2026-07-16-claim-cluster-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2f05ec8d7ec8f9881cd3740fca21ab2f4013f8a76e3dfe1f4af7e744c30ff8d4",
+          "generated_at": "2026-07-17T00:50:03Z",
+          "logical_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:36a4b77019263a677445448dc73ce88e3f1cf6fc81209de3743747e7dad550e6",
+          "path": "manifests/subject-definition-2026-07-16-paper-ruberman-strle-2210-16260.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-ruberman-strle-2210-16260.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:36a4b77019263a677445448dc73ce88e3f1cf6fc81209de3743747e7dad550e6",
+          "generated_at": "2026-07-17T00:50:02Z",
+          "logical_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:617f1c6ad267b8d968bcbd404410bcfa6e5819734df081a1cf00562d85f09a11",
+          "path": "manifests/subject-definition-2026-07-16-paper-wall-diffeomorphisms-of-4-manifolds.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-wall-diffeomorphisms-of-4-manifolds.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:617f1c6ad267b8d968bcbd404410bcfa6e5819734df081a1cf00562d85f09a11",
+          "generated_at": "2026-07-17T00:50:01Z",
+          "logical_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "path": "manifests/subject-definition-2026-07-16-paper-wall-on-simply-connected-4-manifolds.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-wall-on-simply-connected-4-manifolds.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -36836,6 +37441,108 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+          "generated_at": "2026-07-17T00:50:07Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+          "generated_at": "2026-07-17T00:50:06Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4bec403c760dd20a56e398c0187a7413bd647a451a5e8613939712e986da00a9",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-records-lab-note.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-records-lab-note.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+          "generated_at": "2026-07-17T00:50:11Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d4cf0580e12226653dc3594f930cf2440e8630b63bf4e95808d05914afdcee20",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-ruberman-strle.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-ruberman-strle.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:d4cf0580e12226653dc3594f930cf2440e8630b63bf4e95808d05914afdcee20",
+          "generated_at": "2026-07-17T00:50:10Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e51f2d0e22b096ec64e0ef77ce0046cc494bdde86d8fcf4069b08dfe4154ede2",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-wall-diffeomorphisms.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-wall-diffeomorphisms.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e51f2d0e22b096ec64e0ef77ce0046cc494bdde86d8fcf4069b08dfe4154ede2",
+          "generated_at": "2026-07-17T00:50:09Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-wall-simply-connected.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-wall-simply-connected.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+          "generated_at": "2026-07-17T00:50:08Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-yetter.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-yetter.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:ccce56085f41c4eb4a21558b8d1f9bef2001e88c66cedf6e590a38c5a6d75b19",
           "generated_at": "2026-07-06T23:39:00Z",
           "logical_id": "subject-index:twisted-yetter:subject-layer-lane-v0",
@@ -37462,6 +38169,26 @@
           "parent_root_cid": "ctlobj-sha256:b6e75398bd16e6e8268300e9bf21eb0e589fb165e28362583bd7b10c353b67a3",
           "path": "manifests/subject-index-2026-07-06-subject-layer-lane-v0.json",
           "payload_file": "ctl-dogfood/subject-layer/index/2026-07-06-subject-layer-lane-v0.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e51f2d0e22b096ec64e0ef77ce0046cc494bdde86d8fcf4069b08dfe4154ede2",
+          "generated_at": "2026-07-17T00:50:09Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-wall-simply-connected.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-wall-simply-connected.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -38647,6 +39374,26 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:617f1c6ad267b8d968bcbd404410bcfa6e5819734df081a1cf00562d85f09a11",
+          "generated_at": "2026-07-17T00:50:01Z",
+          "logical_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+          "path": "manifests/subject-definition-2026-07-16-paper-wall-on-simply-connected-4-manifolds.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-wall-on-simply-connected-4-manifolds.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:6526f8e5348b6d4ea90a86c5ddc1795a7b66e642511aebf4eb0ed7b2fcc07fb1": [
@@ -40746,6 +41493,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+          "generated_at": "2026-07-17T00:50:06Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:4bec403c760dd20a56e398c0187a7413bd647a451a5e8613939712e986da00a9",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-records-lab-note.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-records-lab-note.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b": [
         {
           "admission_batch_cid": null,
@@ -41435,6 +42202,46 @@
           "parent_root_cid": "ctlobj-sha256:c73cf7a5248e501f17114c1cb71f20f52cd4499ba4dc4f289e277994f85c9696",
           "path": "manifests/lab-note-2026-07-05-drinfeld-double-a4-two-mtc-data.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-05-drinfeld-double-a4-two-mtc-data.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:2f05ec8d7ec8f9881cd3740fca21ab2f4013f8a76e3dfe1f4af7e744c30ff8d4",
+          "generated_at": "2026-07-17T00:50:03Z",
+          "logical_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:36a4b77019263a677445448dc73ce88e3f1cf6fc81209de3743747e7dad550e6",
+          "path": "manifests/subject-definition-2026-07-16-paper-ruberman-strle-2210-16260.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-ruberman-strle-2210-16260.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:d4cf0580e12226653dc3594f930cf2440e8630b63bf4e95808d05914afdcee20",
+          "generated_at": "2026-07-17T00:50:10Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e51f2d0e22b096ec64e0ef77ce0046cc494bdde86d8fcf4069b08dfe4154ede2",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-wall-diffeomorphisms.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-wall-diffeomorphisms.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -43494,6 +44301,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+          "generated_at": "2026-07-17T00:50:11Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:d4cf0580e12226653dc3594f930cf2440e8630b63bf4e95808d05914afdcee20",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-ruberman-strle.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-ruberman-strle.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861": [
         {
           "admission_batch_cid": null,
@@ -44793,6 +45620,26 @@
           "parent_root_cid": "ctlobj-sha256:e761faeb33a9fd905de031dad61b6bc02822a370e044e9c6886d955ae962bd28",
           "path": "manifests/subject-edge-2026-07-15-yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
           "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+          "generated_at": "2026-07-17T00:50:08Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-yetter.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-yetter.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -47739,6 +48586,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+          "generated_at": "2026-07-17T00:50:07Z",
+          "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+          "path": "manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json",
+          "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": [
         {
           "admission_batch_cid": null,
@@ -47859,6 +48726,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:4bec403c760dd20a56e398c0187a7413bd647a451a5e8613939712e986da00a9",
+          "generated_at": "2026-07-17T00:50:05Z",
+          "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ee69e8da6359ecfea310f4b9ca8ad50112af6fcfff16afdb0faf709ab10cf1e8",
+          "path": "manifests/subject-definition-2026-07-16-argument-proposal-twisted-yetter-stable-no-go.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/argument-proposal-twisted-yetter-stable-no-go.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9": [
         {
           "admission_batch_cid": "ctlobj-sha256:76d6703f483dac78e460bade79f9f9966e8aa21754479bcc9c29c20f32728134",
@@ -47913,6 +48800,26 @@
           "parent_root_cid": "ctlobj-sha256:30cd1837ef98e7e6abb4a179373188df41d3f51268638eff853148704444c661",
           "path": "manifests/subject-edge-2026-07-06-su3-2-depends-on-su3-k.json",
           "payload_file": "ctl-dogfood/subject-layer/edges/su3-2-under-su3-k.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:36a4b77019263a677445448dc73ce88e3f1cf6fc81209de3743747e7dad550e6",
+          "generated_at": "2026-07-17T00:50:02Z",
+          "logical_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:617f1c6ad267b8d968bcbd404410bcfa6e5819734df081a1cf00562d85f09a11",
+          "path": "manifests/subject-definition-2026-07-16-paper-wall-diffeomorphisms-of-4-manifolds.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-wall-diffeomorphisms-of-4-manifolds.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -54222,6 +55129,36 @@
         },
         "word_count": 17
       },
+      "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+        "created_at": "2026-07-17T00:50:04Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1959,
+        "gist": "This note preserves and indexes a candidate proof route discussed on 2026-07-16. The user completed an initial reading and found no specific objection, but this is not expert verification, acceptance as a theorem, or the project's adopted current mathematical conclusion. Exper...",
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"created_at\":\"2026-07-17T00:48:00Z\",\"created_by\":\"actor:codex\",\"explicit_non_claims\":[\"This note is not an established theorem.\",\"This note is not a completed proof or proof certificate.\",\"The user's initial reading is not expert verification.\",\"The proposed no-go statement is not the project's accepted current mathematical conclusion.\",\"This note does not establish that all modular or premodular categories fail to detect exotic smooth structures.\",\"This note does not establish the connected-sum formula with all Yetter normalizations.\",\"This note does not establish nonvanishing of the stabilization factor in every stated categorical case.\",\"This note does not claim that Wall or Ruberman-Strle have already been applied correctly; that application awaits expert review.\",\"This note does not create a publication commitment.\"],\"formal_theorem_claim_made\":false,\"git_preflight\":{\"clean_before_work\":true,\"commit\":\"5994dc788d7f804666204c549016903dbb7bf3f8\",\"ctl_root_before_work\":\"ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375\",\"ctl_verify_before_work\":\"PASS\"},\"mathematical_status\":\"PROPOSED_NO_GO_ARGUMENT\",\"note_id\":\"objective-note-2026-07-16-twisted-yetter-stable-no-go-argument-proposal\",\"project_conclusion_adopted\":false,\"proof_obligations\":[{\"id\":\"connected-sum-multiplicativity\",\"remaining_review\":\"Extract and verify the exact Yetter normalization and write a category-independent proof or a source-backed derivation.\",\"required_statement\":\"The homologically twisted invariant satisfies the claimed connected-sum formula for general coefficient group A, with the exact S4 normalization and with alpha direct-sum beta tracked correctly.\",\"status\":\"LIKELY_BUT_NOT_FORMALIZED\"},{\"candidate_derivation\":\"Choose a Wall stable diffeomorphism with induced isometry d; correct d by the source self-isometry d^{-1}(f direct-sum identity); realize that correction after one additional S2xS2 using Ruberman-Strle Theorem 2.1; then precompose.\",\"id\":\"marked-stable-realization\",\"remaining_review\":\"Ask a 4-manifold topology expert to check the use of Wall and Ruberman-Strle, connected-sum markings, orientation, and base-ball conventions.\",\"required_statement\":\"A prescribed integral intersection-form isometry f is induced as f direct-sum identity after equal S2xS2 stabilization by an orientation-preserving diffeomorphism.\",\"status\":\"ARGUMENT_SUPPLIED_AWAITING_EXPERT_REVIEW\"},{\"id\":\"nonzero-stabilization-factor\",\"remaining_review\":\"Verify the exact normalization and hypotheses, including bosonic and transparent-fermion premodular cases, without dividing by a possibly vanishing quantity.\",\"required_statement\":\"Z_C(S2xS2,0) divided by Z_C(S4,0) is nonzero under the precise ribbon fusion category hypotheses used by Yetter's invariant.\",\"status\":\"LIKELY_BUT_NOT_FORMALIZED\"}],\"proposal\":{\"argument_outline\":[\"Use connected-sum multiplicativity for the marked twisted invariant.\",\"Use marked stable realization to realize the prescribed H2 isometry without mixing the original twist class into the stabilizing hyperbolic summands.\",\"Stabilize both manifolds by equal numbers of S2xS2 summands.\",\"Use diffeomorphism invariance on the stabilized marked pairs.\",\"Cancel the common nonzero S2xS2 stabilization factor.\"],\"conditional_conclusion\":\"If all three proof obligations hold with the required markings and normalizations, then the total twisted Yetter invariant cannot distinguish such manifolds after transporting H2 coefficients through the prescribed intersection-form isometry.\",\"conditional_scope\":\"Closed, connected, oriented, smooth, simply connected 4-manifolds with isometric integral intersection forms, for the total homologically twisted Yetter invariant associated to a ribbon fusion category, subject to the three proof obligations below.\"},\"reference_subjects\":[\"subject:twisted-yetter:paper:yetter-hepth-9311082\",\"subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds\",\"subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds\",\"subject:twisted-yetter:paper:ruberman-strle-2210-16260\"],\"review_gates\":[\"An expert review of the marked stable realization corollary upgrades only that proof obligation, not the whole no-go proposal.\",\"All three proof obligations must be written and checked before the proposal may become PROOF_DRAFT_COMPLETE.\",\"A theorem-level status requires a separate reviewed revision; it cannot be inferred from this conversation or from the user's initial reading.\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"status\":\"OPEN_EXPERT_REVIEW\",\"subjects\":[\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"],\"title\":\"Candidate stable no-go argument for twisted Yetter invariants\",\"top_notice\":\"This note preserves and indexes a candidate proof route discussed on 2026-07-16. The user completed an initial reading and found no specific objection, but this is not expert verification, acceptance as a theorem, or the project's adopted current mathematical conclusion. Expert review and a complete written proof remain necessary.\",\"transcript_artifact\":{\"artifact_id\":\"twisted-yetter-no-go-proof-conversation-transcript-v1\",\"formal_evidence\":false,\"message_count\":14,\"model\":\"gpt-5.6-sol\",\"path\":\"experiments/results/theory/twisted-yetter-no-go-proof-conversation-transcript-v1.json\",\"reasoning_effort\":\"ultra\",\"sha256\":\"9d857c5530288796c3f087bcd60f79d4789837751638e6456ad4af97aa0842c2\",\"status\":\"ARCHIVAL_SOURCE_ONLY\",\"turn_count\":3},\"user_assessment\":{\"expert_verification\":false,\"follow_up_if_expert_review_is_positive\":\"The argument would still need to be written clearly and proved in full. The user may choose not to develop it into a publication even if correct.\",\"publication_commitment\":false,\"statement\":\"The user read the proposed argument and did not identify a specific objection on initial review, but considers expert review necessary.\",\"status\":\"INITIAL_READING_NO_SPECIFIC_OBJECTION_FOUND\",\"theorem_acceptance\":false}}",
+        "title": "Candidate stable no-go argument for twisted Yetter invariants",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 6052,
+          "base_estimate": 1703,
+          "estimated_tokens": 1959,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 256,
+          "serialized_character_count": 6052,
+          "unicode_scalar_count": 6052,
+          "utf8_bytes": 6052
+        },
+        "word_count": 503
+      },
       "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc": {
         "active_state": "active",
         "cid": "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
@@ -56322,6 +57259,36 @@
         },
         "word_count": 381
       },
+      "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:5e54462ffcc0616fad78fd3217bc917c37ab7972ba0067e62adf195190e9efdc",
+        "created_at": "2026-07-17T00:50:09Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 183,
+        "gist": "active_reference_application_awaiting_expert_review",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-simply-connected\",\"explanation\":\"Wall's stable classification is used to obtain an initial stable diffeomorphism. This edge records a proposed use, not a verified corollary.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active_reference_application_awaiting_expert_review\",\"target\":\"subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds\"}",
+        "title": "active_reference_application_awaiting_expert_review",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 562,
+          "base_estimate": 159,
+          "estimated_tokens": 183,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 24,
+          "serialized_character_count": 562,
+          "unicode_scalar_count": 562,
+          "utf8_bytes": 562
+        },
+        "word_count": 21
+      },
       "ctlobj-sha256:5e98d690dfc3d1c938acdfd7fc0ed2e6c7ea0168863946a3a1db2dfd0f616858": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:5e98d690dfc3d1c938acdfd7fc0ed2e6c7ea0168863946a3a1db2dfd0f616858",
@@ -56591,6 +57558,36 @@
           "utf8_bytes": 314
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
+        "created_at": "2026-07-17T00:50:01Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 237,
+        "gist": "active_reference_expert_application_review_required",
+        "logical_id": "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"wall-on-simply-connected-4-manifolds\",\"wall-1964-simply-connected-four-manifolds\"],\"display_name\":\"Wall, On simply-connected 4-manifolds\",\"external_references\":[{\"capture_date\":\"2026-07-16\",\"kind\":\"author-hosted-pdf\",\"url\":\"https://webhomes.maths.ed.ac.uk/~v1ranick/papers/w4.pdf\"}],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference subject for Wall's stable classification results used in the candidate marked-stable-realization argument. This subject does not assert that the proposed corollary has been checked or proved.\",\"status\":\"active_reference_expert_application_review_required\",\"subject_id\":\"subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active_reference_expert_application_review_required",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 730,
+          "base_estimate": 206,
+          "estimated_tokens": 237,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 31,
+          "serialized_character_count": 730,
+          "unicode_scalar_count": 730,
+          "utf8_bytes": 730
+        },
+        "word_count": 30
       },
       "ctlobj-sha256:6526f8e5348b6d4ea90a86c5ddc1795a7b66e642511aebf4eb0ed7b2fcc07fb1": {
         "active_state": "active",
@@ -58062,6 +59059,36 @@
         },
         "word_count": 68
       },
+      "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
+        "created_at": "2026-07-17T00:50:06Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 159,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note\",\"explanation\":\"The lab note is the normative epistemic-status record for this open argument proposal; it explicitly does not establish a theorem.\",\"role\":\"records\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active\",\"target\":\"claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 486,
+          "base_estimate": 138,
+          "estimated_tokens": 159,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 21,
+          "serialized_character_count": 486,
+          "unicode_scalar_count": 486,
+          "utf8_bytes": 486
+        },
+        "word_count": 20
+      },
       "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b": {
         "active_state": "active",
         "cid": "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
@@ -58361,6 +59388,66 @@
           "utf8_bytes": 5465
         },
         "word_count": 249
+      },
+      "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
+        "created_at": "2026-07-17T00:50:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 273,
+        "gist": "active_reference_expert_application_review_required",
+        "logical_id": "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"ruberman-strle-stable-realization\",\"walls-stable-realization-definite-4-manifolds\"],\"display_name\":\"Ruberman-Strle, Wall's stable realization for diffeomorphisms of definite 4-manifolds\",\"equivalent_external_ids\":[\"arxiv:2210.16260\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/2210.16260\",\"arxiv_id\":\"2210.16260\",\"capture_date\":\"2026-07-16\",\"kind\":\"arxiv\"}],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference subject for the one-additional-stabilization realization theorem invoked in the candidate marked-stable-realization correction argument. Theorem 2.1 is the proposed locator; its application remains awaiting expert review.\",\"status\":\"active_reference_expert_application_review_required\",\"subject_id\":\"subject:twisted-yetter:paper:ruberman-strle-2210-16260\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active_reference_expert_application_review_required",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 838,
+          "base_estimate": 237,
+          "estimated_tokens": 273,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 36,
+          "serialized_character_count": 838,
+          "unicode_scalar_count": 838,
+          "utf8_bytes": 838
+        },
+        "word_count": 34
+      },
+      "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
+        "created_at": "2026-07-17T00:50:10Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 186,
+        "gist": "active_reference_application_awaiting_expert_review",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:wall-diffeomorphisms\",\"explanation\":\"Wall's realization theorem is a classical fallback for the correction automorphism. The precise hypotheses and marking conventions await expert review.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active_reference_application_awaiting_expert_review\",\"target\":\"subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds\"}",
+        "title": "active_reference_application_awaiting_expert_review",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 571,
+          "base_estimate": 161,
+          "estimated_tokens": 186,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 25,
+          "serialized_character_count": 571,
+          "unicode_scalar_count": 571,
+          "utf8_bytes": 571
+        },
+        "word_count": 20
       },
       "ctlobj-sha256:89864de938ebc1920bc2fd072c4db462c84abe423e8e39653766de6a938353c7": {
         "active_state": "active",
@@ -59051,6 +60138,36 @@
           "utf8_bytes": 861
         },
         "word_count": 64
+      },
+      "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+        "created_at": "2026-07-17T00:50:11Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 184,
+        "gist": "active_reference_application_awaiting_expert_review",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260\",\"explanation\":\"Ruberman-Strle Theorem 2.1 is proposed to realize the correction self-isometry after one additional stabilization. This application awaits expert review.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active_reference_application_awaiting_expert_review\",\"target\":\"subject:twisted-yetter:paper:ruberman-strle-2210-16260\"}",
+        "title": "active_reference_application_awaiting_expert_review",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 568,
+          "base_estimate": 160,
+          "estimated_tokens": 184,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 24,
+          "serialized_character_count": 568,
+          "unicode_scalar_count": 568,
+          "utf8_bytes": 568
+        },
+        "word_count": 19
       },
       "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861": {
         "active_state": "active",
@@ -60041,6 +61158,36 @@
           "utf8_bytes": 641
         },
         "word_count": 24
+      },
+      "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
+        "created_at": "2026-07-17T00:50:08Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 179,
+        "gist": "active_reference_not_proof",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082\",\"explanation\":\"Yetter's paper is the primary source for the homologically twisted invariant and total-invariant definition; exact normalization extraction remains a proof obligation.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active_reference_not_proof\",\"target\":\"subject:twisted-yetter:paper:yetter-hepth-9311082\"}",
+        "title": "active_reference_not_proof",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 547,
+          "base_estimate": 155,
+          "estimated_tokens": 179,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 24,
+          "serialized_character_count": 547,
+          "unicode_scalar_count": 547,
+          "utf8_bytes": 547
+        },
+        "word_count": 21
       },
       "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf": {
         "active_state": "active",
@@ -61272,6 +62419,36 @@
         },
         "word_count": 144
       },
+      "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
+        "created_at": "2026-07-17T00:50:07Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 172,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison\",\"explanation\":\"The completed pointed Figure 21 computations motivated looking for a general no-go argument, but those computations do not prove the proposal.\",\"role\":\"motivated-by\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 528,
+          "base_estimate": 149,
+          "estimated_tokens": 172,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 528,
+          "unicode_scalar_count": 528,
+          "utf8_bytes": 528
+        },
+        "word_count": 21
+      },
       "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc": {
         "active_state": "active",
         "cid": "ctlobj-sha256:d195f5d8707eb321498a74e48e025a903c735fa485a14739fd4f8ccb52dd6afc",
@@ -61452,6 +62629,36 @@
         },
         "word_count": 66
       },
+      "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
+        "created_at": "2026-07-17T00:50:05Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 515,
+        "gist": "open_expert_review",
+        "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"candidate-twisted-yetter-no-go\",\"stable-no-go-argument-proposal\",\"marked-stabilization-twisted-yetter-argument\"],\"current_view_hints\":{\"guardrail\":\"This is an argument proposal, not a theorem, not a completed proof, and not the project's accepted current conclusion. The user's initial reading found no specific objection but is not expert verification.\",\"headline\":\"Open expert review: candidate stable no-go argument for total twisted Yetter invariants on closed simply connected 4-manifolds.\",\"primary_note\":\"claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal\",\"transcript_artifact\":\"experiments/results/theory/twisted-yetter-no-go-proof-conversation-transcript-v1.json\"},\"display_name\":\"Candidate stable no-go argument for twisted Yetter invariants\",\"parent_subject_ids\":[\"subject:twisted-yetter:paper:yetter-hepth-9311082\",\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"],\"proof_obligation_ids\":[\"connected-sum-multiplicativity\",\"marked-stable-realization\",\"nonzero-stabilization-factor\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Navigation subject for a candidate proof route proposed in a preserved research conversation on 2026-07-16. It indexes the conditional argument, its three unresolved proof obligations, primary references, and expert-review requirement. It deliberately does not assert the no-go statement as true.\",\"status\":\"open_expert_review\",\"subject_id\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"subject_kind\":\"ty:argument-proposal\"}",
+        "title": "open_expert_review",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1587,
+          "base_estimate": 447,
+          "estimated_tokens": 515,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 68,
+          "serialized_character_count": 1587,
+          "unicode_scalar_count": 1587,
+          "utf8_bytes": 1587
+        },
+        "word_count": 94
+      },
       "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9": {
         "active_state": "active",
         "cid": "ctlobj-sha256:d5e88f6c6c671e30149f3d3a082b9773834795336605870ad218fda80ac358e9",
@@ -61541,6 +62748,36 @@
           "utf8_bytes": 359
         },
         "word_count": 16
+      },
+      "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:d8b60cd994928fe7cd8028bf6b5c93151b36bd0f47310277e3a7f53cc0026f36",
+        "created_at": "2026-07-17T00:50:02Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 235,
+        "gist": "active_reference_expert_application_review_required",
+        "logical_id": "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"wall-diffeomorphisms-of-4-manifolds\",\"wall-1964-stable-realization\"],\"display_name\":\"Wall, Diffeomorphisms of 4-manifolds\",\"external_references\":[{\"capture_date\":\"2026-07-16\",\"kind\":\"author-hosted-pdf\",\"url\":\"https://webhomes.maths.ed.ac.uk/~v1ranick/papers/wdiff4.pdf\"}],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference subject for Wall's realization results on intersection-form automorphisms. The exact theorem hypotheses and their application to the candidate correction argument remain subject to expert review.\",\"status\":\"active_reference_expert_application_review_required\",\"subject_id\":\"subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active_reference_expert_application_review_required",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 722,
+          "base_estimate": 204,
+          "estimated_tokens": 235,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 31,
+          "serialized_character_count": 722,
+          "unicode_scalar_count": 722,
+          "utf8_bytes": 722
+        },
+        "word_count": 29
       },
       "ctlobj-sha256:d8e812ad652f26b9ee65ba7c3b31d540b40293141dbec483d4cc51fec4214eb6": {
         "active_state": "active",
@@ -63859,6 +65096,15 @@
           "target_cid": "ctlobj-sha256:101012812e844cfef0f5ca6d1f0267dbfd00c978cc674a20eb7ea497e2342cf3"
         }
       ],
+      "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+          "target_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375"
+        }
+      ],
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": [
         {
           "basis": "ctl/revision.parents",
@@ -64909,7 +66155,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-16T23:26:46Z",
+  "generated_at": "2026-07-17T01:06:14Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -67443,17 +68689,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375",
+  "root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 74837,
+    "build_ms": 80667,
     "context_source": "current-context-replay",
-    "current_context_ms": 70120,
-    "discovery_index_ms": 4586,
-    "payload_summaries_ms": 43,
-    "resource_index_ms": 43,
+    "current_context_ms": 75725,
+    "discovery_index_ms": 4805,
+    "payload_summaries_ms": 45,
+    "resource_index_ms": 46,
     "write_ms": 44
   },
-  "transition_cid": "ctlobj-sha256:2353487f621ed194c6fb54e35aa181af3868fe60efbcb3800ad83bbce9ebf2d0"
+  "transition_cid": "ctlobj-sha256:930ddecb6a2a65c24004e19c9fbd80438824f3ca8273dd23737cf7d4441c77b0"
 }

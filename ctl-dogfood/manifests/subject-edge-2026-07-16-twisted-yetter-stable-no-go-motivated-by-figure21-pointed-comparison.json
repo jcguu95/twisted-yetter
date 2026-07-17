@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+  "generated_at": "2026-07-17T00:50:07Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
+    "transition": "ctlobj-sha256:5ade49df9a542f9570fc7de82a5e9ee926ab39de94a762836f68c968ec4ae6f1"
+  },
+  "parent_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+  "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json --manifest manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-motivated-by-figure21-pointed-comparison.json --created-at 2026-07-17T00:50:07Z --admitted-at 2026-07-17T00:50:07Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5994dc788d7f804666204c549016903dbb7bf3f8"
+}

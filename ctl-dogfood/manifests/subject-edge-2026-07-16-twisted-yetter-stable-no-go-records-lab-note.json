@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+  "generated_at": "2026-07-17T00:50:06Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:1ef74712d16db2937e05264b034c088bc1ca3ebb13f6bcd0ad7c48691a1b7c35",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
+    "transition": "ctlobj-sha256:4daa09d3f8678710529d2d59b78ef2e66f03bf336f979b1fa416da5260d2f075"
+  },
+  "parent_root_cid": "ctlobj-sha256:4bec403c760dd20a56e398c0187a7413bd647a451a5e8613939712e986da00a9",
+  "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-records-lab-note.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/twisted-yetter-stable-no-go-records-lab-note.json --manifest manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-records-lab-note.json --created-at 2026-07-17T00:50:06Z --admitted-at 2026-07-17T00:50:06Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5994dc788d7f804666204c549016903dbb7bf3f8"
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "note_id": "objective-note-2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
+  "title": "Candidate stable no-go argument for twisted Yetter invariants",
+  "created_at": "2026-07-17T00:48:00Z",
+  "created_by": "actor:codex",
+  "status": "OPEN_EXPERT_REVIEW",
+  "mathematical_status": "PROPOSED_NO_GO_ARGUMENT",
+  "formal_theorem_claim_made": false,
+  "project_conclusion_adopted": false,
+  "top_notice": "This note preserves and indexes a candidate proof route discussed on 2026-07-16. The user completed an initial reading and found no specific objection, but this is not expert verification, acceptance as a theorem, or the project's adopted current mathematical conclusion. Expert review and a complete written proof remain necessary.",
+  "git_preflight": {
+    "commit": "5994dc788d7f804666204c549016903dbb7bf3f8",
+    "clean_before_work": true,
+    "ctl_verify_before_work": "PASS",
+    "ctl_root_before_work": "ctlobj-sha256:125f0231efc1db0226e98b2bbc8739388e62870b5c3107086767d4d894b90375"
+  },
+  "user_assessment": {
+    "status": "INITIAL_READING_NO_SPECIFIC_OBJECTION_FOUND",
+    "statement": "The user read the proposed argument and did not identify a specific objection on initial review, but considers expert review necessary.",
+    "expert_verification": false,
+    "theorem_acceptance": false,
+    "publication_commitment": false,
+    "follow_up_if_expert_review_is_positive": "The argument would still need to be written clearly and proved in full. The user may choose not to develop it into a publication even if correct."
+  },
+  "proposal": {
+    "conditional_scope": "Closed, connected, oriented, smooth, simply connected 4-manifolds with isometric integral intersection forms, for the total homologically twisted Yetter invariant associated to a ribbon fusion category, subject to the three proof obligations below.",
+    "conditional_conclusion": "If all three proof obligations hold with the required markings and normalizations, then the total twisted Yetter invariant cannot distinguish such manifolds after transporting H2 coefficients through the prescribed intersection-form isometry.",
+    "argument_outline": [
+      "Use connected-sum multiplicativity for the marked twisted invariant.",
+      "Use marked stable realization to realize the prescribed H2 isometry without mixing the original twist class into the stabilizing hyperbolic summands.",
+      "Stabilize both manifolds by equal numbers of S2xS2 summands.",
+      "Use diffeomorphism invariance on the stabilized marked pairs.",
+      "Cancel the common nonzero S2xS2 stabilization factor."
+    ]
+  },
+  "proof_obligations": [
+    {
+      "id": "connected-sum-multiplicativity",
+      "status": "LIKELY_BUT_NOT_FORMALIZED",
+      "required_statement": "The homologically twisted invariant satisfies the claimed connected-sum formula for general coefficient group A, with the exact S4 normalization and with alpha direct-sum beta tracked correctly.",
+      "remaining_review": "Extract and verify the exact Yetter normalization and write a category-independent proof or a source-backed derivation."
+    },
+    {
+      "id": "marked-stable-realization",
+      "status": "ARGUMENT_SUPPLIED_AWAITING_EXPERT_REVIEW",
+      "required_statement": "A prescribed integral intersection-form isometry f is induced as f direct-sum identity after equal S2xS2 stabilization by an orientation-preserving diffeomorphism.",
+      "candidate_derivation": "Choose a Wall stable diffeomorphism with induced isometry d; correct d by the source self-isometry d^{-1}(f direct-sum identity); realize that correction after one additional S2xS2 using Ruberman-Strle Theorem 2.1; then precompose.",
+      "remaining_review": "Ask a 4-manifold topology expert to check the use of Wall and Ruberman-Strle, connected-sum markings, orientation, and base-ball conventions."
+    },
+    {
+      "id": "nonzero-stabilization-factor",
+      "status": "LIKELY_BUT_NOT_FORMALIZED",
+      "required_statement": "Z_C(S2xS2,0) divided by Z_C(S4,0) is nonzero under the precise ribbon fusion category hypotheses used by Yetter's invariant.",
+      "remaining_review": "Verify the exact normalization and hypotheses, including bosonic and transparent-fermion premodular cases, without dividing by a possibly vanishing quantity."
+    }
+  ],
+  "transcript_artifact": {
+    "artifact_id": "twisted-yetter-no-go-proof-conversation-transcript-v1",
+    "path": "experiments/results/theory/twisted-yetter-no-go-proof-conversation-transcript-v1.json",
+    "sha256": "9d857c5530288796c3f087bcd60f79d4789837751638e6456ad4af97aa0842c2",
+    "status": "ARCHIVAL_SOURCE_ONLY",
+    "formal_evidence": false,
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "ultra",
+    "message_count": 14,
+    "turn_count": 3
+  },
+  "reference_subjects": [
+    "subject:twisted-yetter:paper:yetter-hepth-9311082",
+    "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+    "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+    "subject:twisted-yetter:paper:ruberman-strle-2210-16260"
+  ],
+  "review_gates": [
+    "An expert review of the marked stable realization corollary upgrades only that proof obligation, not the whole no-go proposal.",
+    "All three proof obligations must be written and checked before the proposal may become PROOF_DRAFT_COMPLETE.",
+    "A theorem-level status requires a separate reviewed revision; it cannot be inferred from this conversation or from the user's initial reading."
+  ],
+  "explicit_non_claims": [
+    "This note is not an established theorem.",
+    "This note is not a completed proof or proof certificate.",
+    "The user's initial reading is not expert verification.",
+    "The proposed no-go statement is not the project's accepted current mathematical conclusion.",
+    "This note does not establish that all modular or premodular categories fail to detect exotic smooth structures.",
+    "This note does not establish the connected-sum formula with all Yetter normalizations.",
+    "This note does not establish nonvanishing of the stabilization factor in every stated categorical case.",
+    "This note does not claim that Wall or Ruberman-Strle have already been applied correctly; that application awaits expert review.",
+    "This note does not create a publication commitment."
+  ],
+  "subjects": [
+    "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+    "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+  ]
+}

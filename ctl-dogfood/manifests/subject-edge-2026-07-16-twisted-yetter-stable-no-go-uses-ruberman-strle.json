@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+  "generated_at": "2026-07-17T00:50:11Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+    "transition": "ctlobj-sha256:930ddecb6a2a65c24004e19c9fbd80438824f3ca8273dd23737cf7d4441c77b0"
+  },
+  "parent_root_cid": "ctlobj-sha256:d4cf0580e12226653dc3594f930cf2440e8630b63bf4e95808d05914afdcee20",
+  "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-ruberman-strle.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/twisted-yetter-stable-no-go-uses-ruberman-strle.json --manifest manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-ruberman-strle.json --created-at 2026-07-17T00:50:11Z --admitted-at 2026-07-17T00:50:11Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5994dc788d7f804666204c549016903dbb7bf3f8"
+}

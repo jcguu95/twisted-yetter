@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+  "generated_at": "2026-07-17T00:50:08Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:19a47e9d14fbbeb5bf033e7e3e2e1165bf0cc37064d50797f0a54bbb99a12f60",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
+    "transition": "ctlobj-sha256:86caa6aef16ad5270f8ba95f35c2aa1111005ee997474ad9df1ad0e75877cbe0"
+  },
+  "parent_root_cid": "ctlobj-sha256:e5b441c1eb93ca4caef0f54228cc1238adce1f53cf4346b2e884dc4290c53885",
+  "payload_file": "ctl-dogfood/subject-layer/edges/twisted-yetter-stable-no-go-uses-yetter.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:yetter-hepth-9311082 --revision-kind subject-edge --payload-profile ctl-data/opaque-json/1 --payload subject-layer/edges/twisted-yetter-stable-no-go-uses-yetter.json --manifest manifests/subject-edge-2026-07-16-twisted-yetter-stable-no-go-uses-yetter.json --created-at 2026-07-17T00:50:08Z --admitted-at 2026-07-17T00:50:08Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "subject-edge",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "5994dc788d7f804666204c549016903dbb7bf3f8"
+}
