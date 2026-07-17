@@ -1,0 +1,106 @@
+{
+  "schema": "twisted-yetter.framed-link-presentation-obligation-matrix.v1",
+  "status": "FRAMED_LINK_PRESENTATION_SYNTAX_OBLIGATIONS_TERMINAL",
+  "scope": "R6 combinatorial syntax, executable admission, canonical JSON, and content-addressed framed-link/Kirby-presentation inputs.",
+  "primary_source": {
+    "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+    "reference_ledger": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+    "locator": "Definition 2.39 and Remarks 2.40, journal pages 675-676"
+  },
+  "obligations": [
+    {
+      "obligation_id": "component-identities-and-roles",
+      "implementation": "TwistedYetter.Kirby.Presentation.ComponentSpec",
+      "status": "LEAN_TYPED_AND_JSON_VALIDATED"
+    },
+    {
+      "obligation_id": "orientations-and-integer-framings",
+      "implementation": "TwistedYetter.Kirby.Presentation.ComponentSpec",
+      "status": "LEAN_TYPED_AND_JSON_VALIDATED"
+    },
+    {
+      "obligation_id": "blackboard-framing-relation",
+      "implementation": "RawPresentation.framingSound and validate_presentation",
+      "status": "EXECUTABLY_VALIDATED"
+    },
+    {
+      "obligation_id": "ordinary-dotted-special-dotted-roles",
+      "implementation": "TwistedYetter.Kirby.Presentation.ComponentRole",
+      "status": "LEAN_TYPED_AND_FIXTURE_COVERED"
+    },
+    {
+      "obligation_id": "kirby-labels-and-coupons",
+      "implementation": "ComponentSpec.kirbyLabel and SliceEvent.coupon",
+      "status": "LEAN_TYPED_AND_JSON_VALIDATED"
+    },
+    {
+      "obligation_id": "crossings-extrema-and-framing-twists",
+      "implementation": "TwistedYetter.Kirby.Presentation.SliceEvent",
+      "status": "LEAN_TYPED_AND_JSON_VALIDATED"
+    },
+    {
+      "obligation_id": "morse-slice-state-machine",
+      "implementation": "RawPresentation.applyEvent and runEvents",
+      "status": "LEAN_EXECUTABLE_VALIDATOR"
+    },
+    {
+      "obligation_id": "component-lineage-never-silently-disappears",
+      "implementation": "RawPresentation.validate and Python event simulation",
+      "status": "DUAL_VALIDATED"
+    },
+    {
+      "obligation_id": "terminal-closed-boundary",
+      "implementation": "RawPresentation.validate",
+      "status": "LEAN_AND_PYTHON_VALIDATED"
+    },
+    {
+      "obligation_id": "json-import-export",
+      "implementation": "RawPresentation.fromJson/toJson and kirby_presentation_v1.py",
+      "status": "IMPLEMENTED_AND_ROUND_TRIP_TESTED"
+    },
+    {
+      "obligation_id": "canonical-content-hash",
+      "implementation": "stable_content_hash",
+      "status": "SHA256_VALIDATED"
+    },
+    {
+      "obligation_id": "no-mutable-alias-formal-input",
+      "implementation": "FormalPresentation and exact-key JSON validator",
+      "status": "FAIL_CLOSED_BY_CONSTRUCTION"
+    },
+    {
+      "obligation_id": "formal-admission-witness",
+      "implementation": "FormalPresentation.admitted",
+      "status": "LEAN_PROOF_FIELD_REQUIRED"
+    },
+    {
+      "obligation_id": "declared-slices-match-execution",
+      "implementation": "validate_presentation",
+      "status": "EXECUTABLY_VALIDATED"
+    },
+    {
+      "obligation_id": "negative-tests",
+      "implementation": "lean_presentation_mutation_tests.sh and test_kirby_presentation_v1.py",
+      "status": "ALL_BAD_INPUTS_REJECTED"
+    }
+  ],
+  "silent_failure_guards": [
+    "Unknown or duplicate component, event, and strand IDs are rejected.",
+    "Birth, death, crossing, coupon, twist, and isotopy events may reference only the exact active boundary allowed by their move.",
+    "Death cannot join strands belonging to different components.",
+    "Every declared Morse slice is compared to a fresh event replay.",
+    "The terminal active boundary must be empty.",
+    "Blackboard writhe is recomputed from self-crossings and framing-twist events.",
+    "Integer framing must equal blackboard writhe plus the explicit correction.",
+    "The JSON validator accepts an exact key set and rejects alias or hidden extra fields.",
+    "Any payload mutation invalidates the canonical SHA-256 content hash.",
+    "Lean native_decide is not used as a proof oracle in admitted declarations."
+  ],
+  "explicit_non_claims": [
+    "This syntax does not by itself interpret a presentation in a ribbon category.",
+    "This does not prove Reidemeister or framed-link presentation independence.",
+    "This does not prove completeness of the listed slice events for ambient isotopy.",
+    "This does not prove Kirby handle-slide or cancellation invariance.",
+    "This does not prove four-manifold invariance."
+  ]
+}

@@ -44,3 +44,5 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound
 #print axioms TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4
 #print axioms TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound
+#print axioms TwistedYetter.Kirby.Presentation.FormalPresentation.validation_witness
+#print axioms TwistedYetter.Kirby.Presentation.FormalPresentation.pinned_source_hash_eq
