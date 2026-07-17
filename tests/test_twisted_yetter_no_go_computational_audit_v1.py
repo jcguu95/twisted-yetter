@@ -19,6 +19,7 @@ SPEC.loader.exec_module(MODULE)
 
 AuditError = MODULE.AuditError
 build_audit = MODULE.build_audit
+comparison_inventory_entry = MODULE._comparison_inventory_entry
 
 
 def _mutated_input(tmp_path: Path, relative: str, mutate) -> Path:
@@ -104,3 +105,17 @@ def test_audit_fails_if_known_bad_framing_run_loses_unsafe_status(
     )
     with pytest.raises(AuditError, match="unsafe marker"):
         build_audit({"figure21_bad_framing": path})
+
+
+def test_downgraded_comparison_cannot_silently_become_pass(tmp_path: Path) -> None:
+    path = tmp_path / "blocked-comparison.json"
+    path.write_text(
+        json.dumps(
+            {
+                "schema": "test.blocked-comparison.v1",
+                "status": "pass",
+            }
+        )
+    )
+    with pytest.raises(AuditError, match="inconsistent"):
+        comparison_inventory_entry(path, "BLOCKED")

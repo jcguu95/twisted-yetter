@@ -85,6 +85,14 @@ COMPARISON_FILE_DISPOSITIONS = {
     "experiments/results/yasui/figure3-a3-su2-6-all-alpha-chunked-comparison-v1.json": "RETAINED_CONTROL",
 }
 
+EXPECTED_DOWNGRADED_COMPARISON_STATUSES = {
+    "BLOCKED": {"blocked", "blocked-yasui-braid-payload-not-admitted"},
+    "NEEDS_REVIEW": {"needs-review"},
+    "DUPLICATE_SUBSET": {"pass"},
+    "IMPLEMENTATION_CONVENTION_CONTROL": {"pass_with_convention_warning"},
+    "SKIPPED_LEGACY_DIAGNOSTIC": {"skipped-legacy-jones-diagnostic"},
+}
+
 
 class AuditError(ValueError):
     """Raised when a pinned artifact no longer supports the declared result."""
@@ -145,6 +153,33 @@ def _ref(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _comparison_inventory_entry(
+    path: Path, disposition: str
+) -> dict[str, str | None]:
+    _require(path.is_file(), f"missing classified comparison artifact: {path}")
+    payload = json.loads(path.read_text())
+    expected_statuses = EXPECTED_DOWNGRADED_COMPARISON_STATUSES.get(disposition)
+    if expected_statuses is not None:
+        _require(
+            payload.get("status") in expected_statuses,
+            (
+                f"comparison disposition {disposition} is inconsistent with "
+                f"status {payload.get('status')!r}: {path}"
+            ),
+        )
+    try:
+        display_path = str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        display_path = str(path)
+    return {
+        "path": display_path,
+        "disposition": disposition,
+        "sha256": _sha256(path),
+        "schema": payload.get("schema"),
+        "status": payload.get("status"),
+    }
+
+
 def _decimal(value: Any) -> Decimal:
     return Decimal(str(value))
 
@@ -164,7 +199,7 @@ def _assert_numeric_pass(payload: dict[str, Any], *, expected_rows: int) -> None
     )
 
 
-def _comparison_inventory() -> list[dict[str, str]]:
+def _comparison_inventory() -> list[dict[str, str | None]]:
     discovered: set[str] = set()
     for directory in (
         REPO_ROOT / "experiments/results/akbulut-yasui",
@@ -178,8 +213,22 @@ def _comparison_inventory() -> list[dict[str, str]]:
     stale = sorted(classified - discovered)
     _require(not missing, f"unclassified comparison artifacts: {missing}")
     _require(not stale, f"classified comparison artifacts no longer present: {stale}")
+    retained = {
+        path
+        for path, disposition in COMPARISON_FILE_DISPOSITIONS.items()
+        if disposition in {"RETAINED", "RETAINED_CONTROL"}
+    }
+    _require(
+        retained <= set(PATHS.values()),
+        (
+            "retained comparison artifacts lack field-level validators: "
+            f"{sorted(retained - set(PATHS.values()))}"
+        ),
+    )
     return [
-        {"path": path, "disposition": COMPARISON_FILE_DISPOSITIONS[path]}
+        _comparison_inventory_entry(
+            REPO_ROOT / path, COMPARISON_FILE_DISPOSITIONS[path]
+        )
         for path in sorted(classified)
     ]
 
