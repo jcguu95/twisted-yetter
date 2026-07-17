@@ -1,0 +1,266 @@
+{
+  "argv": [
+    "experiments/scripts/build_framed_link_presentation_independence_v1.py"
+  ],
+  "chain_status": "R5_R6_R7_TERMINAL_RELATIVE_TO_EXPLICIT_STANDARD_INPUTS",
+  "checks": {
+    "closed_move_whitelist": {
+      "arbitrary_certified_move_constructor": false,
+      "constructor_count": 22,
+      "constructors": [
+        "planarIdentityBefore",
+        "planarIdentityAfter",
+        "planarCompAssoc",
+        "criticalInterchange",
+        "reidemeisterIIPositive",
+        "reidemeisterIINegative",
+        "reidemeisterIII",
+        "rightPrimalSnake",
+        "rightDualSnake",
+        "leftPrimalSnake",
+        "leftDualSnake",
+        "framedPositive",
+        "framedNegative",
+        "couponPositiveCrossing",
+        "couponNegativeCrossing",
+        "couponRightCup",
+        "couponRightCap",
+        "couponLeftCup",
+        "couponLeftCap",
+        "couponPositiveTwist",
+        "couponNegativeTwist",
+        "closureCut"
+      ],
+      "mandatory_source_metadata": [
+        "source_ref : String",
+        "source_locator : String",
+        "source_scope_caveat : String"
+      ],
+      "status": "PASS_CLOSED_WHITELIST"
+    },
+    "kirby_axiom_audit": {
+      "declaration_count": 57,
+      "new_r7_declaration_count": 18,
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "aaea6cc2a31871169fb5675d2d22a2f58a0712e66a34575e8b26a16463f558dd",
+      "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE"
+    },
+    "lean_mutation_tests": {
+      "output_sha256": "469dbf2eb460fda3ae013f92f8aebd892bc3782842ce2ece9c8664f4c473f775",
+      "rejected_count": 5,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/MissingFramedKinkCompatibility.lean [diagnostic: Fields missing: `negative_sound`]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]",
+        "PASS expected rejection: lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingPresentationCompleteness.lean [diagnostic: Fields missing: `connected`]",
+        "PASS expected rejection: lean/Mutations/MissingPresentationCompletenessCaveat.lean [diagnostic: Fields missing: `source_scope_caveat`]"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "previous_artifact_tests": {
+      "output_sha256": "f13bee078bfec6e494f2ecbee025dee2c9487eb81a6a514edf6346137ea85b38",
+      "status": "PASS",
+      "test_count": 17,
+      "test_files": [
+        "tests/test_generalized_sliding_framed_context_v1.py",
+        "tests/test_kirby_presentation_v1.py",
+        "tests/test_framed_link_presentation_syntax_v1.py"
+      ]
+    },
+    "resource_guards": {
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_INHERITED_AND_ENFORCED"
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 2,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    }
+  },
+  "content_hash": "sha256:3a92d8174d834c1707c90b3a7cc8394584b4d3415164cf832ea01f1429d7c385",
+  "elapsed_milliseconds": 34968,
+  "established_scope": [
+    "Planar identities, composition reassociation, and disjoint critical-point interchange preserve evaluation.",
+    "Both Reidemeister II orientations and Reidemeister III with visible associators preserve evaluation.",
+    "All four left/right primal/dual snake moves preserve evaluation.",
+    "Coupon transport through crossings, all extrema, and both framing-twist orientations is whitelisted and kernel checked.",
+    "Framed Reidemeister I follows from the separately supplied positive and negative ribbon-kink equations.",
+    "Closure cut independence follows from the separately supplied spherical trace cyclicity equation.",
+    "Every GeneratedIsotopy over the closed whitelist preserves evaluation, including inside arbitrary typed one-hole contexts.",
+    "Presentation independence follows from a separately supplied topology witness connecting two admitted diagrams of one framed link."
+  ],
+  "explicit_non_claims": [
+    "This does not formalize the full topological proof of framed-link regular-diagram completeness.",
+    "This does not remove Selinger Caveat 4.31 or prove that Shum Theorem 6.1 covers arbitrary repository coupon signatures.",
+    "This does not yet interpret every R6 serialized presentation as a categorical Diagram.",
+    "This does not prove any Kirby handle slide or handle cancellation.",
+    "This does not prove four-manifold presentation independence.",
+    "This does not define the homologically twisted Crane-Yetter invariant."
+  ],
+  "finished_at_utc": "2026-07-17T22:19:00Z",
+  "generator_script": "experiments/scripts/build_framed_link_presentation_independence_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "5899c54dd455f74283bb03646a33f56193b5c0f8",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "obligation_count": 24,
+      "path": "experiments/inputs/lean-kirby/framed-link-presentation-independence-obligation-matrix-v1.json",
+      "sha256": "eab6bfd0ede7bc687db3358eb0e959fcc3f9efbfe137c2ae61a8c8c5eeb2a249"
+    },
+    "r5_framed_sliding_artifact": {
+      "content_hash": "sha256:2f55ee33e3984152a0d847af25b313d717c44b07f74fc5a2883d9d1ac63137bd",
+      "path": "experiments/results/lean-kirby/generalized-sliding-framed-context-v1.json",
+      "sha256": "3fdd72f0c3c5980f2a9456882bfcc7d00665710bb5c69ebaff830dda08398e35",
+      "source_commit": "a4d6d24ae1c351ef36b969431835ea800d40b85a"
+    },
+    "r6_presentation_syntax_artifact": {
+      "content_hash": "sha256:c84d7ef62a82fadaf2c0a798773c23aef81d195a43c84520683fc56ddc25bc7c",
+      "path": "experiments/results/lean-kirby/framed-link-presentation-syntax-v1.json",
+      "sha256": "0e304e1b051fd410b4f7626b59b6fd5adff08f6f7842bb3467c6eed20d9e1cdf",
+      "source_commit": "db8dd374000747cd25e8957d3b8eaad290c21ac4"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json",
+      "reference_count": 4,
+      "sha256": "601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7"
+    },
+    "source_captures": [
+      {
+        "bytes": 906609,
+        "path": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+        "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+        "status": "PASS_LOCAL_CAPTURE_MATCH"
+      },
+      {
+        "bytes": 799834,
+        "path": "/private/tmp/selinger-graphical-languages-0908.3347.pdf",
+        "ref_id": "ref:selinger-graphical-languages-2010",
+        "sha256": "7ecac08962c1238739d2e4eb2da79ed197347d9046a136e1c39840e7a4d0bc44",
+        "status": "PASS_LOCAL_CAPTURE_MATCH"
+      }
+    ],
+    "source_files": {
+      "experiments/inputs/lean-kirby/framed-link-presentation-independence-obligation-matrix-v1.json": {
+        "bytes": 8032,
+        "sha256": "eab6bfd0ede7bc687db3358eb0e959fcc3f9efbfe137c2ae61a8c8c5eeb2a249"
+      },
+      "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json": {
+        "bytes": 5315,
+        "sha256": "601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7"
+      },
+      "experiments/scripts/build_framed_link_presentation_independence_v1.py": {
+        "bytes": 16461,
+        "sha256": "a26dfa211b3615c243a744c1db6902e64435ea9a3cb47a403724d5be95b481fb"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean": {
+        "bytes": 705,
+        "sha256": "c7a455fbadcf683dcb2307c428684ab226340a78ea808722802a50194a5bdbfd"
+      },
+      "lean/Mutations/MissingFramedKinkCompatibility.lean": {
+        "bytes": 831,
+        "sha256": "0a82098e6441737c189fb81d8522e0f21d96534c979fb443e1477acc579ab005"
+      },
+      "lean/Mutations/MissingPresentationCompleteness.lean": {
+        "bytes": 793,
+        "sha256": "b3c5032ea97483878886881833d8c3d1f0fac3aca1bb4ef06494d3186548d676"
+      },
+      "lean/Mutations/MissingPresentationCompletenessCaveat.lean": {
+        "bytes": 947,
+        "sha256": "b0996b352adf255cbb0798c6e5103af9385b2bb0429969c9fba10d66d63fed7a"
+      },
+      "lean/Mutations/MissingSphericalCutCyclicity.lean": {
+        "bytes": 631,
+        "sha256": "a5a30c6afecdf49cd958fba2209ed8e95151ebee4da40927e5c79593c5f735dc"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 805,
+        "sha256": "ba018acdf355ad0f45462a164d980fcd25d926239b3f59ebd4993257c0255299"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 4691,
+        "sha256": "d361b9e551a2976c8f411578ff84c3dbdf5a8ac0ac66b0d6e065689c3788412d"
+      },
+      "lean/TwistedYetter/Kirby/PresentationIsotopy.lean": {
+        "bytes": 29728,
+        "sha256": "0c14e3004bbca112383138e57d31234e81d4e487f075106f4cb1e36153fe8826"
+      },
+      "scripts/lean_presentation_isotopy_mutation_tests.sh": {
+        "bytes": 1555,
+        "sha256": "e343fa0b02e37a1a9afd92e50105e321f5237f13303ea88f6c72687cf1ad4b11"
+      },
+      "tests/test_framed_link_presentation_independence_v1.py": {
+        "bytes": 5375,
+        "sha256": "2e7901ffd33650bb2f88bfa953c20acc953ebb9f049962635482097da891b5d3"
+      }
+    }
+  },
+  "mathematical_status": "FRAMED_LINK_EVALUATOR_PRESENTATION_INDEPENDENCE_ESTABLISHED_RELATIVE_TO_EXPLICIT_RIBBON_TRACE_AND_TOPOLOGY_INPUTS",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_framed_link_presentation_independence_v1.py",
+  "schema": "twisted-yetter.framed-link-presentation-independence.v1",
+  "source_scope_warning": "Selinger Theorem 4.30 carries Caveat 4.31. Full diagram completeness is intentionally not claimed as Lean-proved; FramedLinkPresentationCompleteness.connected remains explicit.",
+  "started_at_utc": "2026-07-17T22:18:25Z",
+  "status": "PASS_FRAMED_LINK_EVALUATOR_PRESENTATION_INDEPENDENCE",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  },
+  "trusted_inputs": [
+    {
+      "exact_content": "The explicit cup-crossing-cap positive and negative kinks evaluate to the chosen twist and inverse twist.",
+      "input_id": "ribbon-kink-compatibility",
+      "lean_type": "FramedKinkCompatibility",
+      "not_assumed": "No arbitrary framed-link evaluator equality is included."
+    },
+    {
+      "exact_content": "close_X(f then g) equals close_Y(g then f).",
+      "input_id": "spherical-trace-cyclicity",
+      "lean_type": "SphericalCutTrace",
+      "not_assumed": "No Reidemeister, Kirby, or presentation equality is included."
+    },
+    {
+      "caveat": "Selinger Theorem 4.30 carries Caveat 4.31; this input is therefore visible and conditional rather than claimed as fully formalized topology.",
+      "exact_content": "Two admitted closed diagrams representing one framed link are connected by GeneratedIsotopy over the exact whitelist.",
+      "input_id": "framed-presentation-topology-completeness",
+      "lean_type": "FramedLinkPresentationCompleteness",
+      "not_assumed": "Evaluator equality is not a field and arbitrary CertifiedMove injection is impossible."
+    }
+  ]
+}
