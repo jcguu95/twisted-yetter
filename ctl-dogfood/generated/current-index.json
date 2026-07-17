@@ -11512,6 +11512,173 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+      "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+      "payload": {
+        "conditional_mathematical_theorem": {
+          "proof_obligations": [
+            {
+              "id": "marked-stable-realization",
+              "status": "ARGUMENT_SUPPLIED_AWAITING_4_MANIFOLD_EXPERT_REVIEW"
+            },
+            {
+              "id": "marked-connected-sum-normalization",
+              "status": "NOT_FORMALIZED_FOR_YETTER_BACKGROUND_THEORY"
+            },
+            {
+              "id": "nonzero-stabilization-factor",
+              "status": "SUPPORTED_FOR_ORDINARY_SEMISIMPLE_CYK_BY_REUTTER_NOT_YET_NORMALIZATION_BRIDGED"
+            }
+          ],
+          "proof_route": [
+            "Use Wall to obtain an unmarked stable diffeomorphism.",
+            "Use Ruberman-Strle Theorem 2.1 after one further S2xS2 stabilization to realize the correction automorphism and obtain the prescribed H2 map.",
+            "Apply diffeomorphism invariance to the stabilized marked pairs.",
+            "Apply marked connected-sum multiplicativity on both sides.",
+            "Cancel the common nonzero stabilization scalar."
+          ],
+          "statement": "Let C be a ribbon fusion category, let A be a finite subgroup of Aut_tensor(Id_C), and let Z_C(M,alpha) be the homologically twisted Yetter invariant. Let M and N be closed connected oriented smooth simply connected 4-manifolds, and let f:H2(M;Z)->H2(N;Z) be an integral intersection-form isometry. If the marked connected-sum formula holds with the chosen normalization, the stabilization scalar Z_C(S2xS2,0)/Z_C(S4,0) is nonzero, and the marked stable-realization argument applies, then Z_C(M,alpha)=Z_C(N,(f tensor id_A)(alpha)) for every alpha in H2(M;A).",
+          "status": "CONDITIONAL_PROPOSITION_NOT_YET_ESTABLISHED_AS_PROJECT_THEOREM",
+          "theorem_id": "conditional-marked-stable-no-go-for-total-twisted-yetter"
+        },
+        "created_at": "2026-07-17T04:04:00Z",
+        "created_by": "actor:codex",
+        "data_quality_findings": [
+          {
+            "finding": "Both rank-2 semion rows differ raw by the same +1/-1 bucket swap and agree only after a global -1 output phase.",
+            "id": "figure21-rank2-global-phase",
+            "status": "UNRESOLVED_NORMALIZATION_DISCREPANCY"
+          },
+          {
+            "finding": "Distribution equality is weaker than pointwise equality under a prescribed H2 coordinate map.",
+            "id": "figure21-h2-marking",
+            "status": "NOT_CERTIFIED"
+          },
+          {
+            "finding": "The current Figure 21 input cannot support a source-certified theorem until checked against the printed diagram.",
+            "id": "figure21-source",
+            "status": "DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM"
+          },
+          {
+            "finding": "The old sweep had only 2 full rows, 13 budgeted prefixes, and a dirty worktree; later complete rank-wise artifacts supersede it.",
+            "id": "figure21-historical-budgeted-sweep",
+            "status": "SUPERSEDED_PARTIAL_CHECKPOINT_NOT_THEOREM_EVIDENCE"
+          },
+          {
+            "finding": "The old nonmatch omitted total framings and is unsafe as invariant evidence.",
+            "id": "figure21-missing-framing-run",
+            "status": "REJECTED_HISTORICAL_RESULT_KNOWN_FRAMING_BUG"
+          },
+          {
+            "finding": "The Yasui a=1 SU(3)_2 comparison matches after the recorded coordinate map; direct same-tuple comparison has 18 of 27 mismatches and is not the accepted interpretation.",
+            "id": "yasui-su3-coordinate-map",
+            "status": "ESTABLISHED_NUMERIC_REINTERPRETATION"
+          }
+        ],
+        "established_computational_theorem": {
+          "figure21_specialization": "For the sole current exotic target, Figure 21, the strongest retained result is distribution-level compatibility for 15 pointed modular realizations of ranks 2 through 5: 13 rows match the split CP2#9(-CP2) distribution raw, two semion rows match only after multiplying all Figure 21 nonzero values by -1, and zero rows have a certified H2-marked pointwise comparison.",
+          "scope_rule": "This is a theorem about the listed and hash-bound artifacts, not a theorem that twisted Yetter invariants are topologically unable to detect exotic smooth structures.",
+          "statement": "For the frozen artifact denominator enumerated by twisted-yetter-stable-no-go-computational-audit-v1, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or explicitly disclosed output-phase alignment. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition.",
+          "status": "ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_RETAINED_ARTIFACTS",
+          "theorem_id": "frozen-computation-denominator-compatibility-theorem"
+        },
+        "evidence_scope": {
+          "akbulut_figure1_role": "HISTORICAL_PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET",
+          "figure21_premodular_full_evaluation": "NOT_COMPUTABLE_WITH_CURRENT_BACKEND",
+          "figure21_tractable_route": "MODULAR_SHORTCUT_MTC_ONLY",
+          "gompf_stipsicz_role": "STANDARD_MANIFOLD_IMPLEMENTATION_CONTROL",
+          "only_current_exotic_target": "Akbulut-Yasui 2008 Figure 21 / E3prime",
+          "yasui_figure2_role": "STANDARD_MANIFOLD_PRESENTATION_CONTROL",
+          "yasui_figure3_role": "PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET"
+        },
+        "explicit_non_claims": [
+          "This note does not establish the mathematical no-go theorem.",
+          "Compatibility of all retained computations is not a proof of the conditional proposition.",
+          "This note does not prove the marked connected-sum formula for homologically twisted Yetter theory.",
+          "This note does not replace expert review of the marked stable-realization argument.",
+          "This note does not bridge Reutter's ordinary semisimple CYK result to Yetter's background-twisted normalization.",
+          "This note does not certify the Figure 21 transcription or an H2 coordinate map.",
+          "The two rank-2 semion rows are not raw exact matches.",
+          "No completed nonpointed twisted MTC Figure 21 comparison is included.",
+          "No full premodular Figure 21 exotic-vs-standard comparison is included.",
+          "This note does not claim a no-go result for manifolds with boundary, non-simply-connected manifolds, or other background fields."
+        ],
+        "formal_mathematical_theorem_claim_made": false,
+        "frozen_audit_artifact": {
+          "artifact_id": "twisted-yetter-stable-no-go-computational-audit-v1",
+          "content_hash": "sha256:3c143f263f6fc0d86049fbffabaa4cbbae5b49f3e10b8c34540225441e0ac649",
+          "generator_commit": "9d31858ac0ad1116712195f13e8fee95d077be65",
+          "git_blob": "44b05c5c30423f77635ea1c7bba98e8e2e941506",
+          "git_dirty_before_output_write": false,
+          "path": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
+          "sha256": "8d6c32048651843a2793f8dd188a3b020713bc1e6da29a859e55031879eb18a0",
+          "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+        },
+        "git_preflight": {
+          "clean_before_ctl_payload_creation": true,
+          "ctl_root_before_work": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+          "ctl_verify_before_work": "PASS",
+          "source_repo_commit": "bc346eb437485d725bda0fbb3efc5bb3fd0cdbb0"
+        },
+        "machine_checked_computational_statement_made": true,
+        "machine_checked_denominator": {
+          "certified_counterexample_count": 0,
+          "comparison_named_artifact_count": 24,
+          "comparison_named_artifacts_all_classified_and_hashed": true,
+          "declared_control_comparison_units_excluding_figure21_distributions": 137,
+          "figure21_certified_h2_marked_pointwise_rows": 0,
+          "figure21_phase_only_pointed_rows": 2,
+          "figure21_pointed_realization_count": 15,
+          "figure21_raw_exact_pointed_rows": 13,
+          "retained_evidence_group_count": 7
+        },
+        "mathematical_status": "COMPUTATIONAL_THEOREM_ESTABLISHED_MATHEMATICAL_NO_GO_NOT_ESTABLISHED",
+        "note_id": "objective-note-2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+        "project_no_go_conclusion_adopted": false,
+        "reference_subjects": [
+          "subject:twisted-yetter:paper:yetter-hepth-9311082",
+          "subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds",
+          "subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds",
+          "subject:twisted-yetter:paper:ruberman-strle-2210-16260",
+          "subject:twisted-yetter:paper:reutter-2001-02288"
+        ],
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "status": "ESTABLISHED_COMPUTATIONAL_COMPATIBILITY_CONDITIONAL_THEOREM_OPEN",
+        "subjects": [
+          "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+          "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+        ],
+        "tests": [
+          {
+            "collected": 17,
+            "command": "PYTHONPATH=.:src UV_CACHE_DIR=/private/tmp/twisted-yetter-uv-cache uv run pytest tests/test_twisted_yetter_no_go_computational_audit_v1.py tests/test_twisted_yetter_no_go_argument_proposal_v1.py tests/test_figure21_rank2_rank3_standard_comparison_v1.py tests/test_current_low_rank_figure21_terminal_package_v1.py tests/test_figure21_pointed_worker_plan_v1.py -q",
+            "status": "pass"
+          },
+          {
+            "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify",
+            "root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+            "status": "pass_before_ctl_payload_creation"
+          }
+        ],
+        "title": "Computational compatibility audit for the candidate twisted Yetter stable no-go theorem",
+        "top_notice": "This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and therefore covers MTC inputs only. Full premodular Figure 21 evaluations remain unavailable. On Figure 21, 13 pointed MTC rows match the standard-side distribution raw and two rank-2 semion rows match only after an explicit global -1 output phase; there is no certified H2 marking and the Figure 21 transcription remains unverified against the printed diagram."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "logical_id": "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator",
       "payload": {
@@ -14229,6 +14396,162 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note",
+        "explanation": "The lab note is the normative epistemic-status record for the established computational compatibility statement and the still-conditional mathematical theorem.",
+        "role": "records",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal",
+        "explanation": "The frozen computation audit found no certified counterexample to the candidate proposition, but computational compatibility does not prove the proposal.",
+        "role": "tests-compatibility-of",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288",
+        "explanation": "Reutter Proposition 3.2, Theorem 3.5, and Example 3.6 support ordinary semisimple-TQFT connected sums and nonzero S2xS2 stabilization, without proving the twisted normalization bridge.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:reutter-2001-02288"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260",
+        "explanation": "Ruberman-Strle Theorem 2.1 supplies the proposed one-additional-stabilization correction step; its application remains subject to 4-manifold expert review.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:ruberman-strle-2210-16260"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082",
+        "explanation": "Yetter Proposition 4, Theorem 8, and Proposition 12 anchor the coefficient group, twisted-state-sum invariance, and the SU(2) surgery/state-sum relation used in the audit context.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:yetter-hepth-9311082"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
+      "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison",
+        "explanation": "Figure 21 is the sole current exotic target and supplies the primary pointed-MTC compatibility evidence, including the explicit rank-2 phase caveat.",
+        "role": "uses",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "status": "active",
+        "target": "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -17729,6 +18052,46 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
+      "logical_id": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+      "payload": {
+        "aliases": [
+          "twisted-yetter-no-go-computational-audit",
+          "stable-no-go-computation-compatibility",
+          "frozen-computation-denominator-theorem"
+        ],
+        "current_view_hints": {
+          "audit_artifact": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
+          "guardrail": "The established theorem is only about the hash-bound retained computation artifacts. It is not a topological no-go theorem. Figure 21 has 13 raw pointed matches and two phase-only semion matches, no certified H2 marking, an uncertified source transcription, and no full premodular run.",
+          "headline": "Established computational compatibility over the frozen artifact denominator; the mathematical stable no-go theorem remains conditional and under expert review.",
+          "primary_note": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit"
+        },
+        "display_name": "Twisted Yetter stable no-go computational compatibility audit",
+        "parent_subject_ids": [
+          "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Navigation cluster for the machine-checked audit of all classified top-level MTC comparison artifacts in the retained Akbulut-Yasui, Akbulut, and Yasui result roots. It records compatibility with the candidate stable no-go proposition while preserving every downgrade and blocker. It deliberately does not upgrade the conditional mathematical proposition to a theorem.",
+        "status": "active_established_computational_result_conditional_mathematical_statement_open",
+        "subject_id": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "subject_kind": "ty:claim-cluster"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:938db24f07a422c46b8d5e76b3125738abefa648ccd179d4e78ed94ef80ece46",
       "logical_id": "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols",
       "payload": {
@@ -18924,6 +19287,46 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
+      "cid": "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
+      "logical_id": "subject:twisted-yetter:paper:reutter-2001-02288",
+      "payload": {
+        "aliases": [
+          "reutter-semisimple-4d-tqft-exotic-smooth-structure",
+          "semisimple-4d-tqfts-cannot-detect-exotic-smooth-structure"
+        ],
+        "display_name": "Reutter, Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure",
+        "equivalent_external_ids": [
+          "arxiv:2001.02288"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/2001.02288",
+            "arxiv_id": "2001.02288",
+            "capture_date": "2026-07-16",
+            "kind": "arxiv"
+          }
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference subject for Proposition 3.2, Theorem 3.5, and Example 3.6: ordinary semisimple 4-dimensional TQFT connected-sum behavior and invertibility of the S2xS2 value. These results support the ordinary CYK stabilization discussion but do not by themselves establish the marked connected-sum formula or normalization bridge for Yetter's homologically twisted background theory.",
+        "status": "active_reference_normalization_bridge_open",
+        "subject_id": "subject:twisted-yetter:paper:reutter-2001-02288",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
+        "created_at": "2026-07-17T04:07:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:reutter-2001-02288",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-definition"
@@ -20142,6 +20545,7 @@
       "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
       "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
+      "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -20226,6 +20630,12 @@
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:about:figure21-e3prime": "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:lab-note": "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note": "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal": "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288": "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260": "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082": "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison": "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
       "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison": "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
       "subject-edge:ty:2026-07-16-stable-no-go-proposal:records:lab-note": "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
       "subject-edge:ty:2026-07-16-stable-no-go-proposal:uses-reference:ruberman-strle-2210-16260": "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
@@ -20340,6 +20750,7 @@
       "subject:twisted-yetter:claim-cluster:cp2-2cpbar-character-twist-signal": "ctlobj-sha256:b52597579841c4c9947da2c65c969f313254883c27ae967732742af28d9b57ea",
       "subject:twisted-yetter:claim-cluster:dual-kirby-evaluation-convention": "ctlobj-sha256:d497418371b520100b0ee34896c629c34380df6174dff6aa78add3b2419596f0",
       "subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison": "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
+      "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility": "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
       "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols": "ctlobj-sha256:938db24f07a422c46b8d5e76b3125738abefa648ccd179d4e78ed94ef80ece46",
       "subject:twisted-yetter:claim-cluster:yasui-a1-character-twist": "ctlobj-sha256:f9adf0b0f583ece1edbe75dbe27e01b91dd874469638fc3cdbf9f6618b8e3fdb",
       "subject:twisted-yetter:claim-cluster:yasui-a1-dic12-character-twist-signal": "ctlobj-sha256:e03c53738d6d7baa38b74fee3de4d2b0a5a0b7ee0dfb632f782b3a857a8df5b3",
@@ -20366,6 +20777,7 @@
       "subject:twisted-yetter:paper:burke-2402-15087-provisional": "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0",
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e",
       "subject:twisted-yetter:paper:dong-schopieray-2407-15955": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
+      "subject:twisted-yetter:paper:reutter-2001-02288": "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
       "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e",
       "subject:twisted-yetter:paper:ruberman-strle-2210-16260": "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
       "subject:twisted-yetter:paper:tham-2108-13467": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
@@ -20646,6 +21058,9 @@
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": [
         "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b"
       ],
+      "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit": [
+        "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9"
+      ],
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": [
         "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5"
       ],
@@ -20898,6 +21313,24 @@
       ],
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": [
         "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note": [
+        "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal": [
+        "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288": [
+        "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260": [
+        "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082": [
+        "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce"
+      ],
+      "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison": [
+        "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246"
       ],
       "subject-edge:ty:2026-07-16-stable-no-go-proposal:motivated-by:figure21-pointed-comparison": [
         "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2"
@@ -21258,6 +21691,9 @@
         "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:e84198261c3d1af8653c88b52701c5e831aceeff2f93eab6e2fbd2fd9925dabf"
       ],
+      "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility": [
+        "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1"
+      ],
       "subject:twisted-yetter:claim-cluster:su3-2-anyonwiki-fr-symbols": [
         "ctlobj-sha256:938db24f07a422c46b8d5e76b3125738abefa648ccd179d4e78ed94ef80ece46"
       ],
@@ -21338,6 +21774,9 @@
       ],
       "subject:twisted-yetter:paper:dong-schopieray-2407-15955": [
         "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26"
+      ],
+      "subject:twisted-yetter:paper:reutter-2001-02288": [
+        "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12"
       ],
       "subject:twisted-yetter:paper:rowell-stong-wang-0712-1377": [
         "ctlobj-sha256:86ad83c0ebd69c12fbad99886d56f165af71297867a1e56596c10d288d31aa9e"
@@ -21445,6 +21884,7 @@
         "ctlobj-sha256:058e80fdb40788222c3b029065928f1825b084b77055d40aa534c5af956cddc3",
         "ctlobj-sha256:06c6c0185149ca95fbbc103aae170001f00e2e6bdd5ab4393c26ed8a40821e52",
         "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+        "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
         "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59",
         "ctlobj-sha256:0817ccd68c2f64408cfc084a8968ae79bab7614f710e503e9f647b89cc36e10d",
         "ctlobj-sha256:08471b4d0e6e8cf1240d0116f180a471020d1cca29fec0e3fc931790da5756f4",
@@ -21470,6 +21910,7 @@
         "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
         "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
         "ctlobj-sha256:12180244bb57e496bf6f9812105002c5972e03cf7f5948242424542f0ff0fdab",
+        "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
         "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196",
         "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
         "ctlobj-sha256:12b4635adc1425dd0847992bbd8b122bcfc91fbaccb080ff05c81ee5f7eb2bef",
@@ -21504,6 +21945,7 @@
         "ctlobj-sha256:238b43ce9cb239262eae619afe3f6f19ee76a40f1a778692089e7351a181544b",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
         "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef",
+        "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
         "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
         "ctlobj-sha256:27d82f4aff90d2448ad76c260e09543da9639c49852066957e007ac1c17b4ae6",
         "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
@@ -21527,9 +21969,11 @@
         "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
         "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
         "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd",
+        "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
         "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33",
         "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
         "ctlobj-sha256:3c207db77c4984592890f5d22914b2bebde1afd4c91d628be8be6d9dcbde8ad4",
+        "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
         "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f",
         "ctlobj-sha256:3f78d59d8fcc404c2629acab95bc3ca1f74e57110aae823a3292f0b7bf1cb80e",
         "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
@@ -21616,6 +22060,7 @@
         "ctlobj-sha256:77f610d200affa4830b70a97f37d6fb789ab5988d40a40ea5a5ec295305575e5",
         "ctlobj-sha256:7866fc3b9c47ee4347aa72e2465fa14809a7f0f307de0339b1caafe187734e89",
         "ctlobj-sha256:792bad58e31ffa8fc5d5ab9ea77bf76bb75e7e55ecba0e0a63a3b10ee68d108b",
+        "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
         "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
         "ctlobj-sha256:7bf838e7151b9a95ea92de754808d114e566f28470576951dcd02769c7f0344c",
         "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
@@ -21676,6 +22121,7 @@
         "ctlobj-sha256:a0797de6f3c07faf30dbedaa3a3dcdcd353cac86991d8861994e858cba6514c5",
         "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
         "ctlobj-sha256:a107dc357f13308afa4228a6c456ba88060487642ee4174c548fbd821f1ba849",
+        "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
         "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709",
         "ctlobj-sha256:a223245f73de6b11f28fb9663696e0a9a8e7377147a48e585d8a66ce0e672e9d",
         "ctlobj-sha256:a2aafd5e8d1d6f6c71de57e8576d4185b84daa7978eaa136e030e77600e92f4a",
@@ -21699,6 +22145,7 @@
         "ctlobj-sha256:aa385554c44c5e8edb7d4f2e8ab3fb46e5df66e35186a850b78a792c33d66ffa",
         "ctlobj-sha256:aa85149752765d1043d18d7d8a5c0880a1b26a285b41b404cdb46b22a57ae32d",
         "ctlobj-sha256:aadd54a32b9e715183753cd3aba5c04718da7651392c317a53cb2b56f3895b37",
+        "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
         "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
         "ctlobj-sha256:adda9d997775599fcb41d5d6ac3e5f880ab69daf3f5c27c0b068001fe4cb3dbf",
@@ -21735,6 +22182,7 @@
         "ctlobj-sha256:caf4130991ba9505fa6f0fc4d07ea633ef81c597543e09a765d0fec914af1550",
         "ctlobj-sha256:cbed4b6bdca02afbb22f46ec914b22af4696b6926455a694e985902959a11056",
         "ctlobj-sha256:ccdf1b8d03ecccf6eaff05717a6ec197815d3fa8de3db7132a6c5954474dd5a1",
+        "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
         "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808",
         "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
         "ctlobj-sha256:cf1b968f4bd2cb56cc729efd435ab33e4cd64a9c97b30fb3af1d8a1d7c2ae658",
@@ -21877,6 +22325,7 @@
         "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
         "ctlobj-sha256:3543e1bde86d7087db0d545b317a1d1d28bcdd0ba47dfbb9dd974399aeb19e27",
         "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd",
+        "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
         "ctlobj-sha256:3c207db77c4984592890f5d22914b2bebde1afd4c91d628be8be6d9dcbde8ad4",
         "ctlobj-sha256:3f78d59d8fcc404c2629acab95bc3ca1f74e57110aae823a3292f0b7bf1cb80e",
         "ctlobj-sha256:4137d1785836f591a1b354927e7e4c6490f829c501515f7710ceb9cf18e36380",
@@ -22067,7 +22516,9 @@
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
         "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:a0c9b28a5aeceb1f950d453edabe63797e003346f9c6661aec562072510a7c71",
+        "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
         "ctlobj-sha256:a368585e70c8fb015ed0223b1ff0ada971f54020b910082ea2e318189b0fe8e0",
+        "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
         "ctlobj-sha256:acd335edff010f3814755b7e234f932afa665a92e38e5c4828103ce6d205e4cf",
         "ctlobj-sha256:ae8995c27016ded8c6c84f76b6719e8c5f3ad32bcfd806b95ca0114154c1428c",
         "ctlobj-sha256:b22af862bd584522efc8efe8869436bfd156e3b1c20225ed11e19c8901a80874",
@@ -22096,6 +22547,7 @@
       "subject-edge": [
         "ctlobj-sha256:0487f5c9672f103175a51594e1aa467b7547674f13c5442da1c99105e1d45d38",
         "ctlobj-sha256:07046c9b080716a40b154372b785ddbc91d20215e150a15738ac0817b7899974",
+        "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
         "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59",
         "ctlobj-sha256:0817ccd68c2f64408cfc084a8968ae79bab7614f710e503e9f647b89cc36e10d",
         "ctlobj-sha256:0863e62b13d210d58c5ee353811deb9e688b0c4f5f6ef60416b0b93038c50da0",
@@ -22105,6 +22557,7 @@
         "ctlobj-sha256:11245f615affc90c4099abc228d170dfa45ccb95d2c6a938d61db7bb7aea081b",
         "ctlobj-sha256:11739c726bd95f706b4dca1cc69ed1f6e2ae900c027eca6730f178486521b21a",
         "ctlobj-sha256:11ddedd3b6cea4792796da9c294fd2514760f7eb36b6adb810ef6f1808321895",
+        "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
         "ctlobj-sha256:12a1ab4ce758846d79913db22611efde9e80a25a47795bf4f36dfd9f63408e1f",
         "ctlobj-sha256:19626400eaa05c9751a79978fc783cfa91e9b41991dc8948333c7a6dd882c1c9",
         "ctlobj-sha256:199911573be689e6a4982527ee0af5c27647fd57edfb0e9d11cd088a48b5cc81",
@@ -22116,6 +22569,7 @@
         "ctlobj-sha256:1e2fdd365cfe72e755b8bad430f429623ea4598d0a0bc6bfe0f838f003c9cb26",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
+        "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
         "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
         "ctlobj-sha256:29eb1722556a4086e8b8dba378f7eb5accd697260009ccaf7e9ad152f67be84f",
         "ctlobj-sha256:2fa06e59b32ff82b42dba51ceff42cdae5ea30496924d419318bc19df00b15c6",
@@ -22123,6 +22577,7 @@
         "ctlobj-sha256:32fa6d3db52b3d26d6f8a59883b8497e3879b846f4f07924ba4cafaa8bc1bcc1",
         "ctlobj-sha256:33ce2eb85945afc99fe9a45b65697ce8944cc68803ebfaa360cd508a6556cba3",
         "ctlobj-sha256:340bb2539fe301f45f47850814692e67b711718e65e418cf10a375bda24469d6",
+        "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
         "ctlobj-sha256:41e27b6828f0ebc4863bccdb2d052ec0d5e4d1e6066fc80314d472c3093457e8",
         "ctlobj-sha256:4271de51023b030cfcccf51831ee8c03b2bbd12cdf51754c907737b520287222",
         "ctlobj-sha256:44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005",
@@ -22144,6 +22599,7 @@
         "ctlobj-sha256:72959d87c0bc4c1b7be61be2404a09d9ad00b92d2349b200ab1c401cf0a766f6",
         "ctlobj-sha256:7665f3b110165b7fba771ff337c4cf5650df2ea22c6a8ada9f000e59033356aa",
         "ctlobj-sha256:7866fc3b9c47ee4347aa72e2465fa14809a7f0f307de0339b1caafe187734e89",
+        "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
         "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
@@ -22178,6 +22634,7 @@
         "ctlobj-sha256:baebde2a674098a6f5d3014c2661f24d125b74c955ca13c5fdec49d7c35db8f6",
         "ctlobj-sha256:c4fd57320b91a748038c5eec0fe0fdf3fbf61ef2fa2f1f66a2bc80e0cc1ccfcb",
         "ctlobj-sha256:c7c7a1439b54c52f97655ec47a4800df6c84c4d8deb9565444bfc0cd1358681c",
+        "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
         "ctlobj-sha256:d0808864c2dc631f87bb4101c6d627637fe730d4c801e7bfdd7065030071e6a2",
         "ctlobj-sha256:d5f5c8ad81b2b2b1318ff8c6984ba49bf3b704538dd73f222c74482116027087",
         "ctlobj-sha256:db65c5ad04ae8f629c910149aa7b3563677763cd50e90fcf7f4dd62f839bb301",
@@ -22527,6 +22984,22 @@
           "edge_type": "revision-parent",
           "source_cid": "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98",
           "target_cid": "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c"
+        }
+      ],
+      "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+          "target_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.tests[1].root_cid",
+          "source_cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+          "target_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614"
         }
       ],
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": [
@@ -26080,6 +26553,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59": [
         {
           "admission_batch_cid": null,
@@ -27681,6 +28174,26 @@
           "payload_file": "ctl-dogfood/subject-layer/definitions/pitfall-standard-nonbaseline-as-success-condition.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": [
@@ -29618,6 +30131,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5": [
         {
           "admission_batch_cid": null,
@@ -30128,6 +30661,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": [
         {
           "admission_batch_cid": null,
@@ -30288,6 +30841,26 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-07-ctl-branch-store-merge-agent-feedback.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f": [
@@ -33013,6 +33586,23 @@
           ],
           "parent_root_cid": "ctlobj-sha256:6ecc8dd50dccb127d535bc4a9245b1873efd93a11c23371c686f2a5c60f53947",
           "path": "manifests/batch-admission-2026-07-15-d2a4b79aef0eab2b.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -35921,6 +36511,23 @@
           "parent_root_cid": "ctlobj-sha256:fc991d809816fcffe8bc509ccb11be0a3939360f5ccc52907a43b6552b0ff044",
           "path": "manifests/subject-definition-2026-07-16-claim-cluster-figure21-pointed-modular-comparison.json",
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-figure21-pointed-modular-comparison.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "generated_at": "2026-07-17T04:07:00Z",
+          "logical_id": "subject:twisted-yetter:paper:reutter-2001-02288",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+          "path": "manifests/subject-definition-2026-07-16-paper-reutter-2001-02288.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-reutter-2001-02288.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         },
@@ -41216,6 +41823,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57": [
         {
           "admission_batch_cid": null,
@@ -44606,6 +45233,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "generated_at": "2026-07-17T04:07:00Z",
+          "logical_id": "subject:twisted-yetter:paper:reutter-2001-02288",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+          "path": "manifests/subject-definition-2026-07-16-paper-reutter-2001-02288.json",
+          "payload_file": "ctl-dogfood/subject-layer/definitions/paper-reutter-2001-02288.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709": [
         {
           "admission_batch_cid": null,
@@ -45622,6 +46269,26 @@
           "payload_file": "ctl-dogfood/subject-layer/edges/yasui-character-twist-history-correction-clarifies-yasui-a1-character-twist.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27": [
@@ -47495,6 +48162,26 @@
           ],
           "parent_root_cid": "ctlobj-sha256:f03cd9a4d38435c19f2c03bb8103f02e682c3c917892b97e9391f524597ba0fc",
           "path": "manifests/batch-admission-2026-07-13-9c7ca5a8722a8c70.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+          "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "created_at": "2026-07-17T04:08:00Z",
+          "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+          "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -53509,6 +54196,36 @@
         },
         "word_count": 29
       },
+      "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 173,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note\",\"explanation\":\"The lab note is the normative epistemic-status record for the established computational compatibility statement and the still-conditional mathematical theorem.\",\"role\":\"records\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 530,
+          "base_estimate": 150,
+          "estimated_tokens": 173,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 530,
+          "unicode_scalar_count": 530,
+          "utf8_bytes": 530
+        },
+        "word_count": 19
+      },
       "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59": {
         "active_state": "active",
         "cid": "ctlobj-sha256:07c8850b2a4cf6e0bab74a10f1d38ac47e5f15091b098b037bbd4b30d4e5fd59",
@@ -54258,6 +54975,36 @@
           "utf8_bytes": 720
         },
         "word_count": 38
+      },
+      "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 171,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260\",\"explanation\":\"Ruberman-Strle Theorem 2.1 supplies the proposed one-additional-stabilization correction step; its application remains subject to 4-manifold expert review.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:ruberman-strle-2210-16260\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 524,
+          "base_estimate": 148,
+          "estimated_tokens": 171,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 524,
+          "unicode_scalar_count": 524,
+          "utf8_bytes": 524
+        },
+        "word_count": 17
       },
       "ctlobj-sha256:129cc7858aa1854b813ccab71cda6a6c2d0c2ddc1d6bb1faba4aa8ebd26fe196": {
         "active_state": "superseded",
@@ -55279,6 +56026,36 @@
         },
         "word_count": 73
       },
+      "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 175,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288\",\"explanation\":\"Reutter Proposition 3.2, Theorem 3.5, and Example 3.6 support ordinary semisimple-TQFT connected sums and nonzero S2xS2 stabilization, without proving the twisted normalization bridge.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:reutter-2001-02288\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 539,
+          "base_estimate": 152,
+          "estimated_tokens": 175,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 539,
+          "unicode_scalar_count": 539,
+          "utf8_bytes": 539
+        },
+        "word_count": 23
+      },
       "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5": {
         "active_state": "active",
         "cid": "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
@@ -55969,6 +56746,36 @@
         },
         "word_count": 75
       },
+      "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 2963,
+        "gist": "This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and...",
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"conditional_mathematical_theorem\":{\"proof_obligations\":[{\"id\":\"marked-stable-realization\",\"status\":\"ARGUMENT_SUPPLIED_AWAITING_4_MANIFOLD_EXPERT_REVIEW\"},{\"id\":\"marked-connected-sum-normalization\",\"status\":\"NOT_FORMALIZED_FOR_YETTER_BACKGROUND_THEORY\"},{\"id\":\"nonzero-stabilization-factor\",\"status\":\"SUPPORTED_FOR_ORDINARY_SEMISIMPLE_CYK_BY_REUTTER_NOT_YET_NORMALIZATION_BRIDGED\"}],\"proof_route\":[\"Use Wall to obtain an unmarked stable diffeomorphism.\",\"Use Ruberman-Strle Theorem 2.1 after one further S2xS2 stabilization to realize the correction automorphism and obtain the prescribed H2 map.\",\"Apply diffeomorphism invariance to the stabilized marked pairs.\",\"Apply marked connected-sum multiplicativity on both sides.\",\"Cancel the common nonzero stabilization scalar.\"],\"statement\":\"Let C be a ribbon fusion category, let A be a finite subgroup of Aut_tensor(Id_C), and let Z_C(M,alpha) be the homologically twisted Yetter invariant. Let M and N be closed connected oriented smooth simply connected 4-manifolds, and let f:H2(M;Z)->H2(N;Z) be an integral intersection-form isometry. If the marked connected-sum formula holds with the chosen normalization, the stabilization scalar Z_C(S2xS2,0)/Z_C(S4,0) is nonzero, and the marked stable-realization argument applies, then Z_C(M,alpha)=Z_C(N,(f tensor id_A)(alpha)) for every alpha in H2(M;A).\",\"status\":\"CONDITIONAL_PROPOSITION_NOT_YET_ESTABLISHED_AS_PROJECT_THEOREM\",\"theorem_id\":\"conditional-marked-stable-no-go-for-total-twisted-yetter\"},\"created_at\":\"2026-07-17T04:04:00Z\",\"created_by\":\"actor:codex\",\"data_quality_findings\":[{\"finding\":\"Both rank-2 semion rows differ raw by the same +1/-1 bucket swap and agree only after a global -1 output phase.\",\"id\":\"figure21-rank2-global-phase\",\"status\":\"UNRESOLVED_NORMALIZATION_DISCREPANCY\"},{\"finding\":\"Distribution equality is weaker than pointwise equality under a prescribed H2 coordinate map.\",\"id\":\"figure21-h2-marking\",\"status\":\"NOT_CERTIFIED\"},{\"finding\":\"The current Figure 21 input cannot support a source-certified theorem until checked against the printed diagram.\",\"id\":\"figure21-source\",\"status\":\"DRAFT_USER_TRANSCRIPTION_NOT_VERIFIED_AGAINST_PRINTED_DIAGRAM\"},{\"finding\":\"The old sweep had only 2 full rows, 13 budgeted prefixes, and a dirty worktree; later complete rank-wise artifacts supersede it.\",\"id\":\"figure21-historical-budgeted-sweep\",\"status\":\"SUPERSEDED_PARTIAL_CHECKPOINT_NOT_THEOREM_EVIDENCE\"},{\"finding\":\"The old nonmatch omitted total framings and is unsafe as invariant evidence.\",\"id\":\"figure21-missing-framing-run\",\"status\":\"REJECTED_HISTORICAL_RESULT_KNOWN_FRAMING_BUG\"},{\"finding\":\"The Yasui a=1 SU(3)_2 comparison matches after the recorded coordinate map; direct same-tuple comparison has 18 of 27 mismatches and is not the accepted interpretation.\",\"id\":\"yasui-su3-coordinate-map\",\"status\":\"ESTABLISHED_NUMERIC_REINTERPRETATION\"}],\"established_computational_theorem\":{\"figure21_specialization\":\"For the sole current exotic target, Figure 21, the strongest retained result is distribution-level compatibility for 15 pointed modular realizations of ranks 2 through 5: 13 rows match the split CP2#9(-CP2) distribution raw, two semion rows match only after multiplying all Figure 21 nonzero values by -1, and zero rows have a certified H2-marked pointwise comparison.\",\"scope_rule\":\"This is a theorem about the listed and hash-bound artifacts, not a theorem that twisted Yetter invariants are topologically unable to detect exotic smooth structures.\",\"statement\":\"For the frozen artifact denominator enumerated by twisted-yetter-stable-no-go-computational-audit-v1, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or explicitly disclosed output-phase alignment. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition.\",\"status\":\"ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_RETAINED_ARTIFACTS\",\"theorem_id\":\"frozen-computation-denominator-compatibility-theorem\"},\"evidence_scope\":{\"akbulut_figure1_role\":\"HISTORICAL_PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET\",\"figure21_premodular_full_evaluation\":\"NOT_COMPUTABLE_WITH_CURRENT_BACKEND\",\"figure21_tractable_route\":\"MODULAR_SHORTCUT_MTC_ONLY\",\"gompf_stipsicz_role\":\"STANDARD_MANIFOLD_IMPLEMENTATION_CONTROL\",\"only_current_exotic_target\":\"Akbulut-Yasui 2008 Figure 21 / E3prime\",\"yasui_figure2_role\":\"STANDARD_MANIFOLD_PRESENTATION_CONTROL\",\"yasui_figure3_role\":\"PRESENTATION_CONTROL_NOT_CURRENT_CERTIFIED_EXOTIC_TARGET\"},\"explicit_non_claims\":[\"This note does not establish the mathematical no-go theorem.\",\"Compatibility of all retained computations is not a proof of the conditional proposition.\",\"This note does not prove the marked connected-sum formula for homologically twisted Yetter theory.\",\"This note does not replace expert review of the marked stable-realization argument.\",\"This note does not bridge Reutter's ordinary semisimple CYK result to Yetter's background-twisted normalization.\",\"This note does not certify the Figure 21 transcription or an H2 coordinate map.\",\"The two rank-2 semion rows are not raw exact matches.\",\"No completed nonpointed twisted MTC Figure 21 comparison is included.\",\"No full premodular Figure 21 exotic-vs-standard comparison is included.\",\"This note does not claim a no-go result for manifolds with boundary, non-simply-connected manifolds, or other background fields.\"],\"formal_mathematical_theorem_claim_made\":false,\"frozen_audit_artifact\":{\"artifact_id\":\"twisted-yetter-stable-no-go-computational-audit-v1\",\"content_hash\":\"sha256:3c143f263f6fc0d86049fbffabaa4cbbae5b49f3e10b8c34540225441e0ac649\",\"generator_commit\":\"9d31858ac0ad1116712195f13e8fee95d077be65\",\"git_blob\":\"44b05c5c30423f77635ea1c7bba98e8e2e941506\",\"git_dirty_before_output_write\":false,\"path\":\"experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json\",\"sha256\":\"8d6c32048651843a2793f8dd188a3b020713bc1e6da29a859e55031879eb18a0\",\"status\":\"PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY\"},\"git_preflight\":{\"clean_before_ctl_payload_creation\":true,\"ctl_root_before_work\":\"ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614\",\"ctl_verify_before_work\":\"PASS\",\"source_repo_commit\":\"bc346eb437485d725bda0fbb3efc5bb3fd0cdbb0\"},\"machine_checked_computational_statement_made\":true,\"machine_checked_denominator\":{\"certified_counterexample_count\":0,\"comparison_named_artifact_count\":24,\"comparison_named_artifacts_all_classified_and_hashed\":true,\"declared_control_comparison_units_excluding_figure21_distributions\":137,\"figure21_certified_h2_marked_pointwise_rows\":0,\"figure21_phase_only_pointed_rows\":2,\"figure21_pointed_realization_count\":15,\"figure21_raw_exact_pointed_rows\":13,\"retained_evidence_group_count\":7},\"mathematical_status\":\"COMPUTATIONAL_THEOREM_ESTABLISHED_MATHEMATICAL_NO_GO_NOT_ESTABLISHED\",\"note_id\":\"objective-note-2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit\",\"project_no_go_conclusion_adopted\":false,\"reference_subjects\":[\"subject:twisted-yetter:paper:yetter-hepth-9311082\",\"subject:twisted-yetter:paper:wall-on-simply-connected-4-manifolds\",\"subject:twisted-yetter:paper:wall-diffeomorphisms-of-4-manifolds\",\"subject:twisted-yetter:paper:ruberman-strle-2210-16260\",\"subject:twisted-yetter:paper:reutter-2001-02288\"],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"status\":\"ESTABLISHED_COMPUTATIONAL_COMPATIBILITY_CONDITIONAL_THEOREM_OPEN\",\"subjects\":[\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"],\"tests\":[{\"collected\":17,\"command\":\"PYTHONPATH=.:src UV_CACHE_DIR=/private/tmp/twisted-yetter-uv-cache uv run pytest tests/test_twisted_yetter_no_go_computational_audit_v1.py tests/test_twisted_yetter_no_go_argument_proposal_v1.py tests/test_figure21_rank2_rank3_standard_comparison_v1.py tests/test_current_low_rank_figure21_terminal_package_v1.py tests/test_figure21_pointed_worker_plan_v1.py -q\",\"status\":\"pass\"},{\"command\":\"CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python ctl-dogfood/scripts/ctl_store.py verify\",\"root_cid\":\"ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614\",\"status\":\"pass_before_ctl_payload_creation\"}],\"title\":\"Computational compatibility audit for the candidate twisted Yetter stable no-go theorem\",\"top_notice\":\"This note establishes a theorem only about the frozen repo-local computation artifacts enumerated by the audit. It does not establish the candidate topological no-go theorem. The sole current exotic target is Figure 21, whose tractable evaluation uses the modular shortcut and therefore covers MTC inputs only. Full premodular Figure 21 evaluations remain unavailable. On Figure 21, 13 pointed MTC rows match the standard-side distribution raw and two rank-2 semion rows match only after an explicit global -1 output phase; there is no certified H2 marking and the Figure 21 transcription remains unverified against the printed diagram.\"}",
+        "title": "Computational compatibility audit for the candidate twisted Yetter stable no-go theorem",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 9154,
+          "base_estimate": 2576,
+          "estimated_tokens": 2963,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 387,
+          "serialized_character_count": 9154,
+          "unicode_scalar_count": 9154,
+          "utf8_bytes": 9154
+        },
+        "word_count": 576
+      },
       "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33",
@@ -56058,6 +56865,36 @@
           "utf8_bytes": 5210
         },
         "word_count": 574
+      },
+      "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 186,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal\",\"explanation\":\"The frozen computation audit found no certified counterexample to the candidate proposition, but computational compatibility does not prove the proposal.\",\"role\":\"tests-compatibility-of\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 569,
+          "base_estimate": 161,
+          "estimated_tokens": 186,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 25,
+          "serialized_character_count": 569,
+          "unicode_scalar_count": 569,
+          "utf8_bytes": 569
+        },
+        "word_count": 20
       },
       "ctlobj-sha256:3ecf774ad5b381ef35b4ad4985e3e917f1287f8b2b90c07874f20483b675733f": {
         "active_state": "active",
@@ -58669,6 +59506,36 @@
         },
         "word_count": 158
       },
+      "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 170,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison\",\"explanation\":\"Figure 21 is the sole current exotic target and supplies the primary pointed-MTC compatibility evidence, including the explicit rank-2 phase caveat.\",\"role\":\"uses\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 517,
+          "base_estimate": 147,
+          "estimated_tokens": 170,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 517,
+          "unicode_scalar_count": 517,
+          "utf8_bytes": 517
+        },
+        "word_count": 21
+      },
       "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57": {
         "active_state": "active",
         "cid": "ctlobj-sha256:7bded70b38252c5422c70aab70e20a1219ae296462d27e2465565854adf8af57",
@@ -60469,6 +61336,36 @@
         },
         "word_count": 15
       },
+      "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:a15f7904b2c88561f732229321c1b0365ba6311075488493893c7271017c8f12",
+        "created_at": "2026-07-17T04:07:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 328,
+        "gist": "active_reference_normalization_bridge_open",
+        "logical_id": "subject:twisted-yetter:paper:reutter-2001-02288",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"reutter-semisimple-4d-tqft-exotic-smooth-structure\",\"semisimple-4d-tqfts-cannot-detect-exotic-smooth-structure\"],\"display_name\":\"Reutter, Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure\",\"equivalent_external_ids\":[\"arxiv:2001.02288\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/2001.02288\",\"arxiv_id\":\"2001.02288\",\"capture_date\":\"2026-07-16\",\"kind\":\"arxiv\"}],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference subject for Proposition 3.2, Theorem 3.5, and Example 3.6: ordinary semisimple 4-dimensional TQFT connected-sum behavior and invertibility of the S2xS2 value. These results support the ordinary CYK stabilization discussion but do not by themselves establish the marked connected-sum formula or normalization bridge for Yetter's homologically twisted background theory.\",\"status\":\"active_reference_normalization_bridge_open\",\"subject_id\":\"subject:twisted-yetter:paper:reutter-2001-02288\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active_reference_normalization_bridge_open",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1011,
+          "base_estimate": 285,
+          "estimated_tokens": 328,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 43,
+          "serialized_character_count": 1011,
+          "unicode_scalar_count": 1011,
+          "utf8_bytes": 1011
+        },
+        "word_count": 59
+      },
       "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:a19008b72fc3e7fe88cf472599bd4531a9368fbd28fa4bab7207d04236e69709",
@@ -61158,6 +62055,36 @@
           "utf8_bytes": 641
         },
         "word_count": 24
+      },
+      "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 570,
+        "gist": "active_established_computational_result_conditional_mathematical_statement_open",
+        "logical_id": "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"twisted-yetter-no-go-computational-audit\",\"stable-no-go-computation-compatibility\",\"frozen-computation-denominator-theorem\"],\"current_view_hints\":{\"audit_artifact\":\"experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json\",\"guardrail\":\"The established theorem is only about the hash-bound retained computation artifacts. It is not a topological no-go theorem. Figure 21 has 13 raw pointed matches and two phase-only semion matches, no certified H2 marking, an uncertified source transcription, and no full premodular run.\",\"headline\":\"Established computational compatibility over the frozen artifact denominator; the mathematical stable no-go theorem remains conditional and under expert review.\",\"primary_note\":\"claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit\"},\"display_name\":\"Twisted Yetter stable no-go computational compatibility audit\",\"parent_subject_ids\":[\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"subject:twisted-yetter:claim-cluster:figure21-pointed-modular-comparison\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Navigation cluster for the machine-checked audit of all classified top-level MTC comparison artifacts in the retained Akbulut-Yasui, Akbulut, and Yasui result roots. It records compatibility with the candidate stable no-go proposition while preserving every downgrade and blocker. It deliberately does not upgrade the conditional mathematical proposition to a theorem.\",\"status\":\"active_established_computational_result_conditional_mathematical_statement_open\",\"subject_id\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"subject_kind\":\"ty:claim-cluster\"}",
+        "title": "active_established_computational_result_conditional_mathematical_statement_open",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1760,
+          "base_estimate": 495,
+          "estimated_tokens": 570,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 75,
+          "serialized_character_count": 1760,
+          "unicode_scalar_count": 1760,
+          "utf8_bytes": 1760
+        },
+        "word_count": 115
       },
       "ctlobj-sha256:aba58a3600bfb10865e07dc107caed934f932d1c8320cf1cf87fdc3a52cd8f27": {
         "active_state": "active",
@@ -62268,6 +63195,36 @@
           "utf8_bytes": 467
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce",
+        "created_at": "2026-07-17T04:08:00Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 175,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082\",\"explanation\":\"Yetter Proposition 4, Theorem 8, and Proposition 12 anchor the coefficient group, twisted-state-sum invariance, and the SU(2) surgery/state-sum relation used in the audit context.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:yetter-hepth-9311082\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 538,
+          "base_estimate": 152,
+          "estimated_tokens": 175,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 538,
+          "unicode_scalar_count": 538,
+          "utf8_bytes": 538
+        },
+        "word_count": 24
       },
       "ctlobj-sha256:cdc44dd1bb6379900dcab736d27dc25e516bc2e4b3087359bc93ff85ac16e808": {
         "active_state": "active",
@@ -65537,6 +66494,22 @@
           "target_cid": "ctlobj-sha256:732ef9c947ed95533d219183a81cea1749cd5b0ca0a119b6592e5ee5b73f5960"
         }
       ],
+      "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+          "target_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.tests[1].root_cid",
+          "source_cid": "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+          "target_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614"
+        }
+      ],
       "ctlobj-sha256:878c8bc52da61d196d0e1fbda5417552321aff5ee798e003c88b2a1e817793b0": [
         {
           "basis": "ctl/revision.parents",
@@ -66155,7 +67128,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-17T01:06:14Z",
+  "generated_at": "2026-07-17T04:08:00Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -68689,17 +69662,16 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:77aab34122bd5a1f995fd09a7eefa4e92d6fe0e5aa14cfde9ad1446d6d209614",
+  "root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 80667,
-    "context_source": "current-context-replay",
-    "current_context_ms": 75725,
-    "discovery_index_ms": 4805,
+    "build_ms": 5135,
+    "context_source": "admission-validated-child-state",
+    "discovery_index_ms": 4997,
     "payload_summaries_ms": 45,
     "resource_index_ms": 46,
-    "write_ms": 44
+    "write_ms": 46
   },
-  "transition_cid": "ctlobj-sha256:930ddecb6a2a65c24004e19c9fbd80438824f3ca8273dd23737cf7d4441c77b0"
+  "transition_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9"
 }

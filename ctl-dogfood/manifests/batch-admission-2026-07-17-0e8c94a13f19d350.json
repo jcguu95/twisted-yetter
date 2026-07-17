@@ -1,0 +1,58 @@
+{
+  "actor_id": "actor:jin",
+  "admission_batch_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9",
+  "admitted_at": "2026-07-17T04:08:00Z",
+  "binding_logical_ids": [
+    "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:records:lab-note",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:tests-compatibility-of:stable-no-go-proposal",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:reutter-2001-02288",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:ruberman-strle-2210-16260",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses-reference:yetter-hepth-9311082",
+    "subject-edge:ty:2026-07-16-stable-no-go-computational-audit:uses:figure21-pointed-comparison",
+    "subject:twisted-yetter:claim-cluster:stable-no-go-computational-compatibility"
+  ],
+  "child_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+  "created_at": "2026-07-17T04:08:00Z",
+  "current_root_cid": "ctlobj-sha256:9d5ba1d4421bd34a834db03b442947512c6de2887d7a495f4ad1e9e986efb5f0",
+  "kernel_profile": "ctl-kernel/1",
+  "manifest_kind": "batch-admission",
+  "mode": "dogfood",
+  "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
+  "payload_files": [
+    "subject-layer/definitions/claim-cluster-twisted-yetter-stable-no-go-computational-compatibility.json",
+    "lab-notes/2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit.json",
+    "subject-layer/edges/stable-no-go-computational-audit-records-lab-note.json",
+    "subject-layer/edges/stable-no-go-computational-audit-tests-proposal.json",
+    "subject-layer/edges/stable-no-go-computational-audit-uses-figure21-pointed.json",
+    "subject-layer/edges/stable-no-go-computational-audit-uses-yetter.json",
+    "subject-layer/edges/stable-no-go-computational-audit-uses-ruberman-strle.json",
+    "subject-layer/edges/stable-no-go-computational-audit-uses-reutter.json"
+  ],
+  "plan_schema": "ctl-dogfood/batch-admission-plan/1",
+  "principal_roles": [
+    "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1"
+  ],
+  "project_id": "project:twisted-yetter",
+  "revision_cids": [
+    "ctlobj-sha256:074149313982e3d647079c3f0055a58dea8e6cc28e95918e5c6f5472cc2b685c",
+    "ctlobj-sha256:1260b451e23a23faa836652f9c911b91641de56040ab2919fe9b2ec5b45fd0d0",
+    "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
+    "ctlobj-sha256:3ad6241ae9a393689f4a29f20c891f3f8dd766c1807628203d2ae89644a26cd9",
+    "ctlobj-sha256:3cb17e7da3c96f859b2b5c9d9b830f6842edf2e19461f20a40dbc5694c3bc389",
+    "ctlobj-sha256:7a0b0ab02b53e9cf0a613a64b478d04e8ffa15dc91708c6018675f27ea0c9246",
+    "ctlobj-sha256:ab02434192f6b13554f403376f7b3013bb4983cb388435b9d3b735c6aa814af1",
+    "ctlobj-sha256:cd6e8b0f2ebd22c5f1c1ab9897807a4042e0a66c8ef4a086d8b4f98597bacfce"
+  ],
+  "schema": "ctl-dogfood/batch-admission-manifest/1",
+  "semantics": {
+    "adds_authority_semantics": false,
+    "adds_downstream_ontology": false,
+    "adds_evidence_semantics": false,
+    "manifest_role": "audit-and-reproduction-sidecar-only",
+    "validate_transition_input": false
+  },
+  "submitted_by": "actor:codex",
+  "tool": "scripts/admit_revisions_batch.py",
+  "transition_cid": "ctlobj-sha256:0e8c94a13f19d3501dd02ba0a4202fa1b79f526ba9ace567a57982c37a3a26b9"
+}
