@@ -196,20 +196,21 @@
     "status": "CONDITIONAL_PROPOSITION_NOT_YET_ESTABLISHED_AS_PROJECT_THEOREM",
     "theorem_id": "conditional-marked-stable-no-go-for-total-twisted-yetter"
   },
-  "content_hash": "sha256:3c143f263f6fc0d86049fbffabaa4cbbae5b49f3e10b8c34540225441e0ac649",
-  "elapsed_seconds": 0.05095395818352699,
+  "content_hash": "sha256:2f50cabea7e7e910a831053f167a06cd2f3fbeabf66a8556646bf9b685dc9f95",
+  "elapsed_seconds": 0.04749454231932759,
   "established_computational_theorem": {
     "machine_checked_counts": {
       "certified_counterexample_count": 0,
       "declared_control_comparison_units_excluding_figure21_distributions": 137,
       "figure21_certified_h2_marked_pointwise_rows": 0,
-      "figure21_phase_only_pointed_rows": 2,
+      "figure21_nonidentity_presentation_correction_rows": 2,
+      "figure21_normalized_exact_pointed_rows": 15,
       "figure21_pointed_realization_count": 15,
-      "figure21_raw_exact_pointed_rows": 13,
+      "figure21_raw_graph_exact_pointed_rows": 13,
       "retained_evidence_group_count": 7
     },
-    "statement": "For the frozen artifact denominator enumerated by this audit, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or explicitly disclosed output-phase alignment. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition. On the sole current exotic target, Figure 21, the strongest result is only distribution-level compatibility: 13 pointed rows match raw, two semion rows match only after a global -1 output phase, and no H2-marked pointwise comparison is certified.",
-    "statement_zh_tw": "在本 audit 明列並凍結的既有計算範圍內，所有保留的完整 MTC presentation comparisons 都通過各自記錄的誤差、座標搬運、witness 或明示的整體 phase 規則；沒有任何一份保留資料構成上述條件式 no-go 命題的已認證反例。唯一真正的 exotic target Figure 21 目前只能說：13 個 pointed rows 原始 distribution 完全相同，2 個 semion rows 要乘整體 -1 才相同，而且尚無 H2-marked pointwise comparison。",
+    "statement": "For the frozen artifact denominator enumerated by this audit, every retained completed MTC presentation comparison satisfies its recorded tolerance, coordinate map, witness rule, or independently calibrated presentation normalization. No retained artifact is a certified counterexample to the conditional marked stable no-go proposition. On the sole current exotic target, Figure 21, the strongest result is only distribution-level compatibility: all 15 pointed rows match after ordinary-aggregate presentation normalization, two semion rows use the independently derived correction -1, and no H2-marked pointwise comparison is certified.",
+    "statement_zh_tw": "在本 audit 明列並凍結的既有計算範圍內，所有保留的完整 MTC presentation comparisons 都通過各自記錄的誤差、座標搬運、witness 或獨立校準的 presentation normalization；沒有任何一份保留資料構成上述條件式 no-go 命題的已認證反例。唯一真正的 exotic target Figure 21 目前只能說：15 個 pointed rows 經 ordinary Kirby-color aggregate 獨立校準後 distribution 全部相同；其中 2 個 semion rows 的校準因子為 -1，而且尚無 H2-marked pointwise comparison。",
     "status": "ESTABLISHED_MACHINE_CHECKED_STATEMENT_ABOUT_RETAINED_ARTIFACTS",
     "theorem_id": "frozen-computation-denominator-compatibility-theorem"
   },
@@ -239,14 +240,20 @@
           "schema": "twisted-yetter.figure21-rank5-standard-comparison.v1",
           "sha256": "sha256:a92d837b22df1c2a566ee14897bd924c0216f6094b5e67736c1a409a3e46468b",
           "status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH"
+        },
+        {
+          "path": "experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json",
+          "schema": "twisted-yetter.figure21-pointed-ordinary-normalization-audit.v1",
+          "sha256": "sha256:53b9a0d38a721a85b390a1caf20d3113827cca4246e5a71d77ad42a32bb91104",
+          "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION"
         }
       ],
       "category_scope": "15 pointed modular realizations, ranks 2-5",
-      "caveat": "The two rank-2 semion rows have a raw global -1 discrepancy. No certified H2 coordinate map or proof of this normalization phase exists.",
+      "caveat": "The two rank-2 semion rows retain a raw graph-level -1 difference. The correction is now independently derived from the ordinary Kirby-color aggregate and the full normalized distribution then matches. No certified H2 coordinate map exists.",
       "comparison_unit": "nonzero fixed-label value distribution",
       "declared_units": 15,
       "id": "figure21-pointed-rank2-5",
-      "result": "13_RAW_EXACT_AND_2_PHASE_ALIGNED",
+      "result": "15_EXACT_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION",
       "target_role": "ONLY_CURRENT_EXOTIC_TARGET",
       "theorem_compatibility": "COMPATIBLE_BUT_NOT_MARKED_POINTWISE_VERIFICATION"
     },
@@ -467,7 +474,8 @@
     "The computations do not replace expert review of the marked stable-realization argument.",
     "The Figure 21 source transcription is not certified against the printed diagram.",
     "There is no certified H2 coordinate map for Figure 21 versus CP2#9(-CP2).",
-    "The two rank-2 Figure 21 semion rows have an unresolved raw global -1 discrepancy.",
+    "The two rank-2 semion rows retain a raw graph-level -1 difference before presentation normalization.",
+    "The pointed ordinary-aggregate adapter is not a proof of a general MTC normalization theorem.",
     "Distribution equality is weaker than pointwise equality under an H2 marking.",
     "No completed nonpointed twisted MTC Figure 21 comparison is included.",
     "No full premodular Figure 21 invariant is currently computable.",
@@ -541,9 +549,9 @@
       "id": "figure21-target-certification"
     }
   ],
-  "finished_at_utc": "2026-07-17T04:02:54.106717+00:00",
+  "finished_at_utc": "2026-07-17T05:04:16.630593+00:00",
   "generator_script": "experiments/scripts/build_twisted_yetter_no_go_computational_audit_v1.py",
-  "git_commit": "9d31858ac0ad1116712195f13e8fee95d077be65",
+  "git_commit": "bc0b21461bad379e57f69a946f12056114e0e328",
   "git_dirty_before_output_write": false,
   "mathematical_status": "COMPUTATIONAL_THEOREM_ESTABLISHED_CONDITIONAL_MATHEMATICAL_THEOREM_OPEN",
   "python_version": "3.12.13",
@@ -574,6 +582,6 @@
       "use": "ordinary semisimple-TQFT connected sums and invertible S2xS2 value"
     }
   ],
-  "started_at_utc": "2026-07-17T04:02:54.055546+00:00",
-  "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+  "started_at_utc": "2026-07-17T05:04:16.583045+00:00",
+  "status": "PASS_ALL_RETAINED_COMPUTATIONS_COMPATIBLE_FIGURE21_PRESENTATION_NORMALIZATION_RESOLVED"
 }
