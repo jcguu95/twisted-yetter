@@ -1,0 +1,182 @@
+{
+  "schema": "twisted-yetter.framed-link-presentation-independence-obligation-matrix.v1",
+  "status": "PRESENTATION_ISOTOPY_OBLIGATIONS_TERMINAL_RELATIVE_TO_EXPLICIT_STANDARD_INPUTS",
+  "scope": "R7 evaluator invariance under an explicit closed whitelist of coupon-decorated framed-link diagram moves, plus a conditional presentation-independence theorem.",
+  "primary_sources": [
+    {
+      "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+      "locator": "Definitions 2.18, 2.20, 2.25-2.27, 2.39 and Remarks 2.40, journal pages 670-676"
+    },
+    {
+      "ref_id": "ref:selinger-graphical-languages-2010",
+      "locator": "Theorem 4.30 and Caveat 4.31, article page 29"
+    },
+    {
+      "ref_id": "ref:shum-tortile-1994",
+      "locator": "Theorem 6.1, only in the simple-signature scope recorded by Selinger Caveat 4.31"
+    }
+  ],
+  "obligations": [
+    {
+      "obligation_id": "parenthesized-boundaries-and-visible-coherence",
+      "implementation": "associatorHomDiagram, associatorInvDiagram, left/right unitor diagrams",
+      "status": "LEAN_TYPED"
+    },
+    {
+      "obligation_id": "planar-identity-before",
+      "implementation": "identityBefore_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "planar-identity-after",
+      "implementation": "identityAfter_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "vertical-composition-reassociation",
+      "implementation": "compAssoc_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "disjoint-critical-point-interchange",
+      "implementation": "tensorInterchange_sound",
+      "status": "LEAN_PROVED_FROM_TENSOR_BIFUNCTORIALITY"
+    },
+    {
+      "obligation_id": "positive-negative-reidemeister-II",
+      "implementation": "reidemeisterIIPositive_sound",
+      "status": "LEAN_PROVED_FROM_BRAIDING_INVERSE"
+    },
+    {
+      "obligation_id": "negative-positive-reidemeister-II",
+      "implementation": "reidemeisterIINegative_sound",
+      "status": "LEAN_PROVED_FROM_BRAIDING_INVERSE"
+    },
+    {
+      "obligation_id": "reidemeister-III-with-visible-associators",
+      "implementation": "reidemeisterIII_sound",
+      "status": "LEAN_PROVED_FROM_MATHLIB_YANG_BAXTER"
+    },
+    {
+      "obligation_id": "right-primal-snake",
+      "implementation": "rightPrimalSnake_sound",
+      "status": "LEAN_PROVED_FROM_EXACT_PAIRING"
+    },
+    {
+      "obligation_id": "right-dual-snake",
+      "implementation": "rightDualSnake_sound",
+      "status": "LEAN_PROVED_FROM_EXACT_PAIRING"
+    },
+    {
+      "obligation_id": "left-primal-snake",
+      "implementation": "leftPrimalSnake_sound",
+      "status": "LEAN_PROVED_FROM_EXACT_PAIRING"
+    },
+    {
+      "obligation_id": "left-dual-snake",
+      "implementation": "leftDualSnake_sound",
+      "status": "LEAN_PROVED_FROM_EXACT_PAIRING"
+    },
+    {
+      "obligation_id": "framed-reidemeister-I-positive-and-negative",
+      "implementation": "FramedKinkCompatibility.positiveMove and negativeMove",
+      "status": "LEAN_DERIVED_FROM_EXPLICIT_SOURCE_BACKED_RIBBON_KINK_INPUT"
+    },
+    {
+      "obligation_id": "coupon-through-positive-and-negative-crossings",
+      "implementation": "TaggedMove.couponPositiveCrossing and couponNegativeCrossing",
+      "status": "LEAN_PROVED_FROM_BRAIDING_NATURALITY"
+    },
+    {
+      "obligation_id": "coupon-through-all-four-extrema",
+      "implementation": "TaggedMove.couponRightCup/couponRightCap/couponLeftCup/couponLeftCap",
+      "status": "LEAN_PROVED_FROM_ADJOINT_MATE_IDENTITIES"
+    },
+    {
+      "obligation_id": "coupon-through-positive-and-negative-framing-twists",
+      "implementation": "TaggedMove.couponPositiveTwist and couponNegativeTwist",
+      "status": "LEAN_PROVED_FROM_NATURAL_TWIST"
+    },
+    {
+      "obligation_id": "closure-cut-independence",
+      "implementation": "SphericalCutTrace.cut_independence_sound",
+      "status": "LEAN_DERIVED_FROM_EXPLICIT_SOURCE_BACKED_TRACE_CYCLICITY_INPUT"
+    },
+    {
+      "obligation_id": "closed-move-whitelist",
+      "implementation": "TaggedMove inductive type",
+      "status": "FAIL_CLOSED_NO_ARBITRARY_CERTIFIED_MOVE_CONSTRUCTOR"
+    },
+    {
+      "obligation_id": "reflexive-symmetric-transitive-context-closure",
+      "implementation": "GeneratedIsotopy",
+      "status": "LEAN_TYPED"
+    },
+    {
+      "obligation_id": "generated-isotopy-preserves-evaluator",
+      "implementation": "GeneratedIsotopy.eval_eq",
+      "status": "LEAN_PROVED_BY_INDUCTION"
+    },
+    {
+      "obligation_id": "regular-framed-diagram-topological-completeness",
+      "implementation": "FramedLinkPresentationCompleteness.connected",
+      "status": "EXPLICIT_SOURCE_BACKED_INPUT_WITH_SELINGER_CAVEAT_4_31"
+    },
+    {
+      "obligation_id": "presentation-independence",
+      "implementation": "FramedLinkPresentationCompleteness.presentation_independent",
+      "status": "LEAN_PROVED_RELATIVE_TO_EXPLICIT_COMPLETENESS_INPUT"
+    },
+    {
+      "obligation_id": "source-metadata-and-coherence-caveat",
+      "implementation": "mandatory source_ref, source_locator, and source_scope_caveat fields",
+      "status": "LEAN_FIELDS_REQUIRED_AND_ARTIFACT_VALIDATED"
+    },
+    {
+      "obligation_id": "negative-tests",
+      "implementation": "lean_presentation_isotopy_mutation_tests.sh",
+      "status": "FIVE_BAD_INPUTS_REJECTED"
+    }
+  ],
+  "trusted_inputs": [
+    {
+      "input_id": "ribbon-kink-compatibility",
+      "lean_type": "FramedKinkCompatibility",
+      "exact_content": "The explicit cup-crossing-cap positive and negative kinks evaluate to the chosen twist and inverse twist.",
+      "not_assumed": "No arbitrary framed-link evaluator equality is included."
+    },
+    {
+      "input_id": "spherical-trace-cyclicity",
+      "lean_type": "SphericalCutTrace",
+      "exact_content": "close_X(f then g) equals close_Y(g then f).",
+      "not_assumed": "No Reidemeister, Kirby, or presentation equality is included."
+    },
+    {
+      "input_id": "framed-presentation-topology-completeness",
+      "lean_type": "FramedLinkPresentationCompleteness",
+      "exact_content": "Two admitted closed diagrams representing one framed link are connected by GeneratedIsotopy over the exact whitelist.",
+      "not_assumed": "Evaluator equality is not a field and arbitrary CertifiedMove injection is impossible.",
+      "caveat": "Selinger Theorem 4.30 carries Caveat 4.31; this input is therefore visible and conditional rather than claimed as fully formalized topology."
+    }
+  ],
+  "silent_failure_guards": [
+    "Tensor parenthesization is retained and every associator/unitor in Reidemeister III and snake expansions is visible.",
+    "Positive and negative Reidemeister II are separate declarations.",
+    "All four left/right primal/dual snake orientations are separate declarations.",
+    "Framed Reidemeister I cannot be used without both positive and negative kink equations.",
+    "Closure cut motion cannot be used without trace cyclicity.",
+    "TaggedMove is a closed inductive whitelist and has no arbitrary CertifiedMove constructor.",
+    "GeneratedIsotopy context closure uses the previously proved typed one-hole context congruence theorem.",
+    "The source coherence caveat is a mandatory field and is repeated in the reference ledger and terminal artifact.",
+    "Axiom audit rejects sorryAx and native_decide proof oracles.",
+    "All five omission/injection mutations fail for their expected Lean diagnostics."
+  ],
+  "explicit_non_claims": [
+    "This does not formalize the full topological proof of framed-link regular-diagram completeness.",
+    "This does not remove Selinger Caveat 4.31 or prove that Shum Theorem 6.1 covers arbitrary repository coupon signatures.",
+    "This does not yet interpret every R6 serialized presentation as a categorical Diagram.",
+    "This does not prove any Kirby handle slide or handle cancellation.",
+    "This does not prove four-manifold presentation independence.",
+    "This does not define the homologically twisted Crane-Yetter invariant."
+  ]
+}

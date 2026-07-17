@@ -16,3 +16,4 @@ import TwistedYetter.Kirby.HandleSlide
 import TwistedYetter.Kirby.GeneralizedSliding
 import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.Presentation
+import TwistedYetter.Kirby.PresentationIsotopy
