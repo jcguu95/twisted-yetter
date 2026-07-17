@@ -1,0 +1,1654 @@
+{
+  "argv": [],
+  "conclusions": {
+    "established_about_saved_data": "All 201 pinned eligible H2-marked rows agree with the absolute basic-block prediction and/or its induced quadratic-refinement formula within tolerance. The general-form SU(3)_2 controls include genuine off-diagonal witnesses and distinguish the correct Q^(-1) covector formula from the wrong direct-Q formula.",
+    "figure21_scope": "Figure 21 remains compatible at distribution level for 15 pointed MTC realizations, but contributes zero H2-marked pointwise checks of the quadratic formula.",
+    "supported_but_not_proved": "For modular input, the full twisted Yetter function appears to be the untwisted value multiplied by the quadratic phase induced from the invertible-object sector and the intersection form."
+  },
+  "content_hash": "sha256:bfc0bc94c09cd00aa7a268f929c9a2a14b079ffeb3533f2db9656afb5f7dcd2d",
+  "elapsed_seconds": 0.0328036667779088,
+  "even_form_arithmetic_examples": {
+    "K3": {
+      "b2": 22,
+      "e8_pair_count_abs": 1,
+      "eleven_eighths_inequality_holds": true,
+      "equivalent_inequality": "3 >= 3",
+      "hyperbolic_count": 3,
+      "minimum_algebraic_H_stabilizations_for_standard_block_form": 0,
+      "signature_abs": 16,
+      "stabilized_standard_model": {
+        "S2xS2_count_after_stabilizing_source": 0,
+        "signed_K3_count": 1
+      },
+      "unstabilized_standard_model": {
+        "S2xS2_count": 0,
+        "signed_K3_count": 1
+      }
+    },
+    "hypothetical_11_8_violating_form": {
+      "b2": 42,
+      "e8_pair_count_abs": 2,
+      "eleven_eighths_inequality_holds": false,
+      "equivalent_inequality": "5 >= 6",
+      "hyperbolic_count": 5,
+      "minimum_algebraic_H_stabilizations_for_standard_block_form": 1,
+      "signature_abs": 32,
+      "stabilized_standard_model": {
+        "S2xS2_count_after_stabilizing_source": 0,
+        "signed_K3_count": 2
+      },
+      "unstabilized_standard_model": null
+    },
+    "two_K3_boundary_case": {
+      "b2": 44,
+      "e8_pair_count_abs": 2,
+      "eleven_eighths_inequality_holds": true,
+      "equivalent_inequality": "6 >= 6",
+      "hyperbolic_count": 6,
+      "minimum_algebraic_H_stabilizations_for_standard_block_form": 0,
+      "signature_abs": 32,
+      "stabilized_standard_model": {
+        "S2xS2_count_after_stabilizing_source": 0,
+        "signed_K3_count": 2
+      },
+      "unstabilized_standard_model": {
+        "S2xS2_count": 0,
+        "signed_K3_count": 2
+      }
+    }
+  },
+  "evidence_groups": {
+    "da4_standard_split_all_alpha": {
+      "category_id": "D(A4)-c3w1",
+      "category_quadratic_function_observed": "q_eval(a)=1 for all a in Z/3",
+      "coefficient_group": "Z/3",
+      "intersection_form": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "max_component_product_error": "0.0",
+      "max_constant_error": "4.943171816410908e-12",
+      "row_count": 27,
+      "source": {
+        "path": "experiments/results/yasui/figure3-a1-standard-split-unlink-da4-c3w1-character-scan-v1.json",
+        "schema": "twisted-yetter.da4-c3w1-split-unlink-character-scan.v1",
+        "sha256": "sha256:a8521ff4a19834fcd3b73ea17b7e9236603fa04079bdaebad27cee1105e145db",
+        "status": "no-nonbaseline-character-found"
+      },
+      "status": "PASS_TRIVIAL_QUADRATIC_RESPONSE_AND_BLOCK_FACTORIZATION"
+    },
+    "figure21_exotic_target": {
+      "certified_h2_marked_pointwise_row_count": 0,
+      "global_minus_one_phase_aligned_count": 2,
+      "pointed_modular_realization_count": 15,
+      "raw_distribution_match_count": 13,
+      "source": {
+        "path": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
+        "schema": "twisted-yetter.stable-no-go-computational-audit.v1",
+        "sha256": "sha256:8d6c32048651843a2793f8dd188a3b020713bc1e6da29a859e55031879eb18a0",
+        "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+      },
+      "standard_intersection_form": {
+        "diagonal": [
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "rank": 10,
+        "signature": -8
+      },
+      "standard_topological_model": "CP2#9(-CP2)",
+      "status": "DISTRIBUTION_LEVEL_COMPATIBLE_BLOCKED_FOR_POINTWISE_QUADRATIC_AUDIT",
+      "target": "Akbulut-Yasui 2008 Figure 21 / E3prime",
+      "why_not_all_alpha_verified": "The saved Figure 21 computation records fixed-label distributions, not a certified H2 coordinate map from each alpha to the standard diagonal basis. Distribution equality cannot be promoted to the pointwise Pontryagin-square formula."
+    },
+    "su2_figure3_all_alpha": [
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_2",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1-1.2246467991473532e-16j",
+              "field": "complex128",
+              "imag": "-1.2246467991473532e-16",
+              "real": "-1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "8.188600426433445e-15",
+          "block_prediction_vs_target": "7.856740153113387e-15",
+          "direct_table_factorization": "0.0",
+          "quadratic_prediction_vs_standard": "7.993605777301127e-15"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "2.0000000000000004",
+              "display": "0.76536686473017945+1.8477590650225741j",
+              "field": "complex128",
+              "imag": "1.8477590650225741",
+              "real": "0.7653668647301795"
+            },
+            "1": {
+              "abs": "2.0000000000000004",
+              "display": "-0.76536686473018034-1.8477590650225737j",
+              "field": "complex128",
+              "imag": "-1.8477590650225737",
+              "real": "-0.7653668647301803"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "2.0000000000000004",
+              "display": "0.76536686473017945-1.8477590650225741j",
+              "field": "complex128",
+              "imag": "-1.8477590650225741",
+              "real": "0.7653668647301795"
+            },
+            "1": {
+              "abs": "2.0000000000000004",
+              "display": "-0.76536686473018034+1.8477590650225737j",
+              "field": "complex128",
+              "imag": "1.8477590650225737",
+              "real": "-0.7653668647301803"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a1",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-2-all-alpha-raw-comparison-v3.json",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+          "sha256": "sha256:f9115035445f66cba44f0a3c29945b4198deebf0ecfe64cf15c1d70f6cac0efb",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_3",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1.8369701987210297e-16+1j",
+              "field": "complex128",
+              "imag": "1.0",
+              "real": "-1.8369701987210297e-16"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "1.7763568394002505e-14",
+          "block_prediction_vs_target": "2.0374936843400458e-14",
+          "direct_table_factorization": "4.440892098500626e-16",
+          "quadratic_prediction_vs_standard": "1.2809491335957507e-14"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "2.6899940478558286",
+              "display": "0.42080777983773193+2.656875757337521j",
+              "field": "complex128",
+              "imag": "2.656875757337521",
+              "real": "0.42080777983773193"
+            },
+            "1": {
+              "abs": "2.689994047855829",
+              "display": "-2.656875757337521+0.42080777983773299j",
+              "field": "complex128",
+              "imag": "0.420807779837733",
+              "real": "-2.656875757337521"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "2.6899940478558286",
+              "display": "0.42080777983773193-2.656875757337521j",
+              "field": "complex128",
+              "imag": "-2.656875757337521",
+              "real": "0.42080777983773193"
+            },
+            "1": {
+              "abs": "2.689994047855829",
+              "display": "-2.656875757337521-0.42080777983773299j",
+              "field": "complex128",
+              "imag": "-0.420807779837733",
+              "real": "-2.656875757337521"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a1",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-3-all-alpha-raw-comparison-v2.json",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v2",
+          "sha256": "sha256:cd8901bd6423763469af1ebc39609f17ecdee88fe973311491b3401aa6164a8a",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_4",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "1+2.4492935982947064e-16j",
+              "field": "complex128",
+              "imag": "2.4492935982947064e-16",
+              "real": "1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "8.987733679556359e-14",
+          "block_prediction_vs_target": "1.1938306446505698e-13",
+          "direct_table_factorization": "7.2222372914521344e-34",
+          "quadratic_prediction_vs_standard": "6.038069105679079e-14"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "3.464101615137756",
+              "display": "0+3.4641016151377562j",
+              "field": "complex128",
+              "imag": "3.464101615137756",
+              "real": "0.0"
+            },
+            "1": {
+              "abs": "3.4641016151377553",
+              "display": "3.5527136788005009e-15+3.4641016151377553j",
+              "field": "complex128",
+              "imag": "3.4641016151377553",
+              "real": "3.552713678800501e-15"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "3.464101615137756",
+              "display": "0-3.4641016151377562j",
+              "field": "complex128",
+              "imag": "-3.464101615137756",
+              "real": "0.0"
+            },
+            "1": {
+              "abs": "3.4641016151377553",
+              "display": "3.5527136788005009e-15-3.4641016151377553j",
+              "field": "complex128",
+              "imag": "-3.4641016151377553",
+              "real": "3.552713678800501e-15"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a1",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-4-all-alpha-raw-comparison-v3.json",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+          "sha256": "sha256:35b0fe546a029a331c098cbce9e46026068894df89f9243791c2c4e871e991f2",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_6",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1-3.6739403974420594e-16j",
+              "field": "complex128",
+              "imag": "-3.6739403974420594e-16",
+              "real": "-1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "2.2086909783595207e-13",
+          "block_prediction_vs_target": "4.084384817189705e-13",
+          "direct_table_factorization": "3.695505376966208e-13",
+          "quadratic_prediction_vs_standard": "2.1316282072803006e-13"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "5.226251859505508",
+              "display": "-1.0195911582083199+5.1258308954830136j",
+              "field": "complex128",
+              "imag": "5.125830895483014",
+              "real": "-1.01959115820832"
+            },
+            "1": {
+              "abs": "5.226251859505507",
+              "display": "1.0195911582083177-5.1258308954830136j",
+              "field": "complex128",
+              "imag": "-5.125830895483014",
+              "real": "1.0195911582083177"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "5.226251859505507",
+              "display": "-1.0195911582083195-5.1258308954830136j",
+              "field": "complex128",
+              "imag": "-5.125830895483014",
+              "real": "-1.0195911582083195"
+            },
+            "1": {
+              "abs": "5.226251859505507",
+              "display": "1.0195911582083172+5.1258308954830136j",
+              "field": "complex128",
+              "imag": "5.125830895483014",
+              "real": "1.0195911582083172"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a1",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-6-all-alpha-raw-comparison-v2.json",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v2",
+          "sha256": "sha256:9de02cb9e1ed9f568567f155f42aeadea792b23df473139d4cb3db22d0541164",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_8",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "1+4.8985871965894128e-16j",
+              "field": "complex128",
+              "imag": "4.898587196589413e-16",
+              "real": "1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "1.141477561533475e-12",
+          "block_prediction_vs_target": "1.7658094938052576e-12",
+          "direct_table_factorization": "1.5992737043244892e-12",
+          "quadratic_prediction_vs_standard": "1.036613424778175e-12"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "7.236067977499787",
+              "display": "-2.236067977499784+6.8819096023558668j",
+              "field": "complex128",
+              "imag": "6.881909602355867",
+              "real": "-2.236067977499784"
+            },
+            "1": {
+              "abs": "7.236067977499799",
+              "display": "-2.2360679774997854+6.8819096023558792j",
+              "field": "complex128",
+              "imag": "6.881909602355879",
+              "real": "-2.2360679774997854"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "7.236067977499787",
+              "display": "-2.236067977499784-6.8819096023558668j",
+              "field": "complex128",
+              "imag": "-6.881909602355867",
+              "real": "-2.236067977499784"
+            },
+            "1": {
+              "abs": "7.236067977499798",
+              "display": "-2.2360679774997867-6.8819096023558775j",
+              "field": "complex128",
+              "imag": "-6.8819096023558775",
+              "real": "-2.2360679774997867"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a1",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-8-all-alpha-raw-comparison-v3.json",
+          "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+          "sha256": "sha256:00f3d89729387342c131565f091886f140e0955df428c2d603d83733fcd8fb27",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_2",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1-1.2246467991473532e-16j",
+              "field": "complex128",
+              "imag": "-1.2246467991473532e-16",
+              "real": "-1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "8.188600426433445e-15",
+          "block_prediction_vs_target": "1.512513347095137e-14",
+          "direct_table_factorization": "0.0",
+          "quadratic_prediction_vs_standard": "7.993605777301127e-15"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "2.0000000000000004",
+              "display": "0.76536686473017945+1.8477590650225741j",
+              "field": "complex128",
+              "imag": "1.8477590650225741",
+              "real": "0.7653668647301795"
+            },
+            "1": {
+              "abs": "2.0000000000000004",
+              "display": "-0.76536686473018034-1.8477590650225737j",
+              "field": "complex128",
+              "imag": "-1.8477590650225737",
+              "real": "-0.7653668647301803"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "2.0000000000000004",
+              "display": "0.76536686473017945-1.8477590650225741j",
+              "field": "complex128",
+              "imag": "-1.8477590650225741",
+              "real": "0.7653668647301795"
+            },
+            "1": {
+              "abs": "2.0000000000000004",
+              "display": "-0.76536686473018034+1.8477590650225737j",
+              "field": "complex128",
+              "imag": "1.8477590650225737",
+              "real": "-0.7653668647301803"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a3",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a3-su2-2-all-alpha-chunked-comparison-v1.json",
+          "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+          "sha256": "sha256:a132d980468293218a69a2e3c4d3e61200fdfc7eb82128ecc2ae6ee47f5968bb",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_3",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1.8369701987210297e-16+1j",
+              "field": "complex128",
+              "imag": "1.0",
+              "real": "-1.8369701987210297e-16"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "1.7763568394002505e-14",
+          "block_prediction_vs_target": "3.69662589812534e-14",
+          "direct_table_factorization": "4.440892098500626e-16",
+          "quadratic_prediction_vs_standard": "1.2809491335957507e-14"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "2.6899940478558286",
+              "display": "0.42080777983773193+2.656875757337521j",
+              "field": "complex128",
+              "imag": "2.656875757337521",
+              "real": "0.42080777983773193"
+            },
+            "1": {
+              "abs": "2.689994047855829",
+              "display": "-2.656875757337521+0.42080777983773299j",
+              "field": "complex128",
+              "imag": "0.420807779837733",
+              "real": "-2.656875757337521"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "2.6899940478558286",
+              "display": "0.42080777983773193-2.656875757337521j",
+              "field": "complex128",
+              "imag": "-2.656875757337521",
+              "real": "0.42080777983773193"
+            },
+            "1": {
+              "abs": "2.689994047855829",
+              "display": "-2.656875757337521-0.42080777983773299j",
+              "field": "complex128",
+              "imag": "-0.420807779837733",
+              "real": "-2.656875757337521"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a3",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a3-su2-3-all-alpha-chunked-comparison-v1.json",
+          "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+          "sha256": "sha256:7374d5c84c8cc33176d4e4af386268673a88c0781e69cd3acf3627ea88f2e610",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_4",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "1+2.4492935982947064e-16j",
+              "field": "complex128",
+              "imag": "2.4492935982947064e-16",
+              "real": "1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "8.987733679556359e-14",
+          "block_prediction_vs_target": "2.2784507555150144e-13",
+          "direct_table_factorization": "7.2222372914521344e-34",
+          "quadratic_prediction_vs_standard": "6.038069105679079e-14"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "3.464101615137756",
+              "display": "0+3.4641016151377562j",
+              "field": "complex128",
+              "imag": "3.464101615137756",
+              "real": "0.0"
+            },
+            "1": {
+              "abs": "3.4641016151377553",
+              "display": "3.5527136788005009e-15+3.4641016151377553j",
+              "field": "complex128",
+              "imag": "3.4641016151377553",
+              "real": "3.552713678800501e-15"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "3.464101615137756",
+              "display": "0-3.4641016151377562j",
+              "field": "complex128",
+              "imag": "-3.464101615137756",
+              "real": "0.0"
+            },
+            "1": {
+              "abs": "3.4641016151377553",
+              "display": "3.5527136788005009e-15-3.4641016151377553j",
+              "field": "complex128",
+              "imag": "-3.4641016151377553",
+              "real": "3.552713678800501e-15"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a3",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a3-su2-4-all-alpha-chunked-comparison-v1.json",
+          "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+          "sha256": "sha256:854760d692012f732e6bd1086aec1e6f8d4395c3c05714e574391e8392920bc8",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      },
+      {
+        "alpha_basis_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "category_id": "SU(2)_6",
+        "category_quadratic_function": {
+          "formula": "q_eval(a)=exp(-pi*i*k*a^2/2)",
+          "orientation_convention": "q_eval=theta_k^(-1) on the +1 block",
+          "simple_current_twist_formula": "theta_k=exp(pi*i*k/2)",
+          "values": {
+            "0": {
+              "abs": "1.0",
+              "display": "1+0j",
+              "field": "complex128",
+              "imag": "0.0",
+              "real": "1.0"
+            },
+            "1": {
+              "abs": "1.0",
+              "display": "-1-3.6739403974420594e-16j",
+              "field": "complex128",
+              "imag": "-3.6739403974420594e-16",
+              "real": "-1.0"
+            }
+          }
+        },
+        "coefficient_group": "Z/2",
+        "intersection_form": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        "max_errors": {
+          "block_prediction_vs_standard": "2.2086909783595207e-13",
+          "block_prediction_vs_target": "1.067825410281409e-12",
+          "direct_table_factorization": "3.695505376966208e-13",
+          "quadratic_prediction_vs_standard": "2.1316282072803006e-13"
+        },
+        "one_component_gauss_sums": {
+          "+1": {
+            "0": {
+              "abs": "5.226251859505508",
+              "display": "-1.0195911582083199+5.1258308954830136j",
+              "field": "complex128",
+              "imag": "5.125830895483014",
+              "real": "-1.01959115820832"
+            },
+            "1": {
+              "abs": "5.226251859505507",
+              "display": "1.0195911582083177-5.1258308954830136j",
+              "field": "complex128",
+              "imag": "-5.125830895483014",
+              "real": "1.0195911582083177"
+            }
+          },
+          "-1": {
+            "0": {
+              "abs": "5.226251859505507",
+              "display": "-1.0195911582083195-5.1258308954830136j",
+              "field": "complex128",
+              "imag": "-5.125830895483014",
+              "real": "-1.0195911582083195"
+            },
+            "1": {
+              "abs": "5.226251859505507",
+              "display": "1.0195911582083172+5.1258308954830136j",
+              "field": "complex128",
+              "imag": "5.125830895483014",
+              "real": "1.0195911582083172"
+            }
+          }
+        },
+        "presentation_id": "yasui-figure3-a3",
+        "row_count": 8,
+        "source": {
+          "path": "experiments/results/yasui/figure3-a3-su2-6-all-alpha-chunked-comparison-v1.json",
+          "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+          "sha256": "sha256:382b7ee02ae86cad3b84b14bfa106615f4065da1bf147a5f60759973de67735b",
+          "status": "pass"
+        },
+        "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION"
+      }
+    ],
+    "su3_figure2_cp2_calibration": {
+      "category_quadratic_function": {
+        "formula": "q_eval(a)=zeta3^(a^2)",
+        "invertible_object_twist": "theta=zeta3^(-1)",
+        "orientation_convention": "q_eval=theta^(-1) on the +1 block",
+        "values": {
+          "0": {
+            "abs": "1.0",
+            "display": "1+0j",
+            "field": "complex128",
+            "imag": "0.0",
+            "real": "1.0"
+          },
+          "1": {
+            "abs": "1.0",
+            "display": "-0.49999999999999983+0.86602540378443871j",
+            "field": "complex128",
+            "imag": "0.8660254037844387",
+            "real": "-0.49999999999999983"
+          },
+          "2": {
+            "abs": "0.9999999999999997",
+            "display": "-0.49999999999999933+0.86602540378443871j",
+            "field": "complex128",
+            "imag": "0.8660254037844387",
+            "real": "-0.49999999999999933"
+          }
+        }
+      },
+      "coefficient_group": "Z/3",
+      "max_figure2_absolute_error": "5.964543396834415e-15",
+      "max_gauss_ratio_error": "1.1389935954777104e-15",
+      "one_component_gauss_sums": {
+        "+1": {
+          "0": {
+            "abs": "3.2945564141853265",
+            "display": "-2.6653521280029184+1.9364916731037058j",
+            "field": "complex128",
+            "imag": "1.9364916731037058",
+            "real": "-2.6653521280029184"
+          },
+          "1": {
+            "abs": "3.294556414185327",
+            "display": "-0.34437491912338514-3.2765084894332932j",
+            "field": "complex128",
+            "imag": "-3.276508489433293",
+            "real": "-0.34437491912338514"
+          },
+          "2": {
+            "abs": "3.2945564141853265",
+            "display": "-0.34437491912338558-3.2765084894332928j",
+            "field": "complex128",
+            "imag": "-3.2765084894332928",
+            "real": "-0.3443749191233856"
+          }
+        },
+        "-1": {
+          "0": {
+            "abs": "3.2945564141853265",
+            "display": "-2.6653521280029184-1.9364916731037058j",
+            "field": "complex128",
+            "imag": "-1.9364916731037058",
+            "real": "-2.6653521280029184"
+          },
+          "1": {
+            "abs": "3.2945564141853265",
+            "display": "-0.34437491912338392+3.2765084894332928j",
+            "field": "complex128",
+            "imag": "3.2765084894332928",
+            "real": "-0.3443749191233839"
+          },
+          "2": {
+            "abs": "3.2945564141853265",
+            "display": "-0.34437491912338447+3.2765084894332928j",
+            "field": "complex128",
+            "imag": "3.2765084894332928",
+            "real": "-0.34437491912338447"
+          }
+        }
+      },
+      "row_count": 3,
+      "selected_braiding_convention": "anyonwiki_direct",
+      "selected_category_parameter": "cat_1_3_1",
+      "source": {
+        "path": "experiments/results/yasui/figure2-cp2-a1-r1-su3-2-anyonwiki-h2-character-check-v1.json",
+        "schema": "twisted-yetter.yasui-figure2-cp2-a1-r1-su3-2-anyonwiki-h2-character-check.v1",
+        "sha256": "sha256:c7417b3d7ac97c287d8a21ea1e8d7583f633c3ebe9e2bb57c8245a6644a78091",
+        "status": "pass_with_convention_warning"
+      },
+      "status": "PASS_CP2_BLOCK_CALIBRATION_AND_SIMPLE_CURRENT_SIGN"
+    },
+    "su3_figure3_all_alpha": {
+      "alpha_basis_order": [
+        "h",
+        "e1",
+        "e2"
+      ],
+      "category_id": "SU(3)_2",
+      "coefficient_group": "Z/3",
+      "coordinate_map": {
+        "formula": "standard(h,e1,e2) = (B, A+B, C+2B) mod 3 for Yasui alpha=(C,A,B)",
+        "matrix_rows_standard_from_yasui_CAB_mod_3": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            2
+          ]
+        ],
+        "standard_alpha_order": [
+          "h",
+          "e1",
+          "e2"
+        ],
+        "yasui_alpha_order": [
+          "C",
+          "A",
+          "B"
+        ]
+      },
+      "direct_same_tuple_nonmatching_count": 18,
+      "intersection_form": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "max_errors": {
+        "block_prediction_vs_standard": "3.5704330589399866e-14",
+        "block_prediction_vs_target": "3.1240152968627204e-13",
+        "direct_table_factorization": "1.0048591735576161e-14",
+        "quadratic_prediction_vs_standard": "5.904883742358415e-14"
+      },
+      "row_count": 27,
+      "source": {
+        "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+        "schema": "twisted-yetter.yasui-su3-2-coordinate-comparison.v1",
+        "sha256": "sha256:ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915",
+        "status": "pass"
+      },
+      "status": "PASS_ABSOLUTE_BLOCK_AND_QUADRATIC_PREDICTION_AFTER_COORDINATE_MAP"
+    },
+    "su3_general_intersection_forms": {
+      "category_id": "SU(3)_2",
+      "coefficient_group": "Z/3",
+      "coordinate_convention": "Stored character values are covector coordinates lambda. The homology coordinates are Q^(-1) lambda, so the scalar exponent is lambda^T Q^(-1) lambda mod 3.",
+      "example_count": 16,
+      "examples": [
+        {
+          "id": "cp2-visible-cancel-1-2",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-visible-cancel-1-2",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cp2-paired-one-handle",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-paired-one-handle",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cp2-uneven-incidence",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-uneven-incidence",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cp2-two-dotted-three-two-handles",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "s2xs2-one-dotted-three-two-handles",
+          "intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "max_error": "2.581835519377164e-14",
+          "row_count": 9,
+          "status": "PASS"
+        },
+        {
+          "id": "cp2-s1xs3-all-handles",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-s1xs3-all-handles",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "s2xs2-s1xs3-all-handles",
+          "intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "max_error": "2.581835519377164e-14",
+          "row_count": 9,
+          "status": "PASS"
+        },
+        {
+          "id": "cp2-kernel-image-all-handles",
+          "intersection_form": [
+            [
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              1
+            ]
+          ],
+          "max_error": "5.015702075040326e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-kernel-image-all-handles",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "cpbar-uneven-kernel-image-all-handles",
+          "intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1
+            ]
+          ],
+          "max_error": "4.365661774537291e-15",
+          "row_count": 3,
+          "status": "PASS"
+        },
+        {
+          "id": "s2xt2-product-chain",
+          "intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "max_error": "2.581835519377164e-14",
+          "row_count": 9,
+          "status": "PASS"
+        },
+        {
+          "id": "odd-s2-bundle-over-t2-chain",
+          "intersection_form": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "inverse_intersection_form": [
+            [
+              -1,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "max_error": "1.9720761300567452e-14",
+          "row_count": 9,
+          "status": "PASS"
+        }
+      ],
+      "formula": "phase(lambda)=zeta3^(lambda^T Q^(-1) lambda)",
+      "max_absolute_error": "2.581835519377164e-14",
+      "max_phase_error": "2.445012586343469e-15",
+      "off_diagonal_mutual_intersection_witness_count": 18,
+      "off_diagonal_row_count": 36,
+      "row_count": 72,
+      "source": {
+        "path": "experiments/results/small-handle-examples/su3-2-standard-form-character-controls-v1.json",
+        "schema": "twisted-yetter.small-handle-su3-2-standard-form-character-controls.v1",
+        "sha256": "sha256:1f23f3f3a86d963baf2695b6f518ea6d7202ce2dc226990d4162d7755b366d94",
+        "status": "pass"
+      },
+      "status": "PASS_GENERAL_UNIMODULAR_FORM_QUADRATIC_PREDICTION",
+      "wrong_direct_Q_model_mismatch_count": 8
+    }
+  },
+  "explicit_non_claims": [
+    "This artifact is not a proof of the modular quadratic formula.",
+    "This artifact does not turn the still-open 11/8 conjecture into a theorem.",
+    "This artifact does not use the tangent-bundle Pontryagin class p1(TM).",
+    "This artifact does not certify a Figure 21 H2 coordinate map.",
+    "This artifact does not remove the two Figure 21 semion global-phase discrepancies.",
+    "This artifact does not establish a premodular formula.",
+    "This artifact does not cover torsion H2, non-simply-connected manifolds, or manifolds with boundary.",
+    "Presentation-control agreement is not independent experimental proof of a universal theorem."
+  ],
+  "generator_script": "experiments/scripts/build_twisted_yetter_quadratic_block_prediction_audit_v1.py",
+  "input_artifacts": [
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-2-all-alpha-raw-comparison-v3.json",
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+      "sha256": "sha256:f9115035445f66cba44f0a3c29945b4198deebf0ecfe64cf15c1d70f6cac0efb",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-3-all-alpha-raw-comparison-v2.json",
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v2",
+      "sha256": "sha256:cd8901bd6423763469af1ebc39609f17ecdee88fe973311491b3401aa6164a8a",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-4-all-alpha-raw-comparison-v3.json",
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+      "sha256": "sha256:35b0fe546a029a331c098cbce9e46026068894df89f9243791c2c4e871e991f2",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-6-all-alpha-raw-comparison-v2.json",
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v2",
+      "sha256": "sha256:9de02cb9e1ed9f568567f155f42aeadea792b23df473139d4cb3db22d0541164",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-r1-normalized-su2-8-all-alpha-raw-comparison-v3.json",
+      "schema": "twisted-yetter.yasui-figure3-a1-r1-normalized-su2-raw-comparison.v3",
+      "sha256": "sha256:00f3d89729387342c131565f091886f140e0955df428c2d603d83733fcd8fb27",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a3-su2-2-all-alpha-chunked-comparison-v1.json",
+      "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+      "sha256": "sha256:a132d980468293218a69a2e3c4d3e61200fdfc7eb82128ecc2ae6ee47f5968bb",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a3-su2-3-all-alpha-chunked-comparison-v1.json",
+      "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+      "sha256": "sha256:7374d5c84c8cc33176d4e4af386268673a88c0781e69cd3acf3627ea88f2e610",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a3-su2-4-all-alpha-chunked-comparison-v1.json",
+      "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+      "sha256": "sha256:854760d692012f732e6bd1086aec1e6f8d4395c3c05714e574391e8392920bc8",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a3-su2-6-all-alpha-chunked-comparison-v1.json",
+      "schema": "twisted-yetter.yasui-figure3-a3-su2-chunked-comparison.v1",
+      "sha256": "sha256:382b7ee02ae86cad3b84b14bfa106615f4065da1bf147a5f60759973de67735b",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure2-cp2-a1-r1-su3-2-anyonwiki-h2-character-check-v1.json",
+      "schema": "twisted-yetter.yasui-figure2-cp2-a1-r1-su3-2-anyonwiki-h2-character-check.v1",
+      "sha256": "sha256:c7417b3d7ac97c287d8a21ea1e8d7583f633c3ebe9e2bb57c8245a6644a78091",
+      "status": "pass_with_convention_warning"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-su3-2-yasui-vs-split-coordinate-comparison-v1.json",
+      "schema": "twisted-yetter.yasui-su3-2-coordinate-comparison.v1",
+      "sha256": "sha256:ae76e8ea77a24f95c2f80508e15abf34d6ac2a9c2ac8c96221b3efd556907915",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/small-handle-examples/su3-2-standard-form-character-controls-v1.json",
+      "schema": "twisted-yetter.small-handle-su3-2-standard-form-character-controls.v1",
+      "sha256": "sha256:1f23f3f3a86d963baf2695b6f518ea6d7202ce2dc226990d4162d7755b366d94",
+      "status": "pass"
+    },
+    {
+      "path": "experiments/results/yasui/figure3-a1-standard-split-unlink-da4-c3w1-character-scan-v1.json",
+      "schema": "twisted-yetter.da4-c3w1-split-unlink-character-scan.v1",
+      "sha256": "sha256:a8521ff4a19834fcd3b73ea17b7e9236603fa04079bdaebad27cee1105e145db",
+      "status": "no-nonbaseline-character-found"
+    },
+    {
+      "path": "experiments/results/theory/twisted-yetter-stable-no-go-computational-audit-v1.json",
+      "schema": "twisted-yetter.stable-no-go-computational-audit.v1",
+      "sha256": "sha256:8d6c32048651843a2793f8dd188a3b020713bc1e6da29a859e55031879eb18a0",
+      "status": "PASS_COMPATIBLE_WITH_EXPLICIT_FIGURE21_NORMALIZATION_DISCREPANCY"
+    }
+  ],
+  "machine_checked_result": {
+    "certified_counterexample_count": 0,
+    "da4_split_all_alpha_row_count": 27,
+    "eligible_h2_marked_artifact_row_count": 201,
+    "figure21_h2_marked_pointwise_row_count": 0,
+    "off_diagonal_mutual_intersection_witness_count": 18,
+    "status": "PASS_NO_COUNTEREXAMPLE_IN_ELIGIBLE_MARKED_DATA",
+    "su2_all_alpha_row_count": 72,
+    "su2_all_alpha_table_count": 9,
+    "su3_figure2_calibration_row_count": 3,
+    "su3_figure3_all_alpha_row_count": 27,
+    "su3_general_form_control_row_count": 72,
+    "wrong_direct_Q_model_mismatch_count": 8
+  },
+  "mathematical_scope": {
+    "candidate_modular_formula": {
+      "bilinearization": "b_C(a,b)=q_C(a+b)/(q_C(a)q_C(b))",
+      "coefficient_group": "A=Aut_tensor(Id_C), identified with invertible objects when C is modular",
+      "dual_coordinate_formula_for_cyclic_examples": "If stored coordinates are lambda=<alpha,basis>, first use a=Q^(-1)lambda. For q(a)=zeta^(c a^2), Phi=zeta^(c lambda^T Q^(-1) lambda).",
+      "epistemic_status": "THEOREM_CANDIDATE_NUMERICALLY_SUPPORTED_NOT_PROVED_HERE",
+      "full_value_prediction": "Z_C(M,alpha)=Z_C(M,0)*Phi_Q(alpha)",
+      "homology_coordinate_formula": "Phi_Q(a_1,...,a_r)=product_i q_C(a_i)^(Q_ii) product_{i<j} b_C(a_i,a_j)^(Q_ij)",
+      "normalization_safe_definition": "q_C(a)=Z_C(CP2,a)/Z_C(CP2,0) in the pinned orientation convention"
+    },
+    "proof_obligations_not_discharged_by_data": [
+      "Prove the twisted Kirby-color/simple-current identification with the exact orientation convention.",
+      "Prove the surface-defect evaluation and all normalization factors for arbitrary MTCs.",
+      "Prove basis independence and the torsion/Pontryagin-square extension in the claimed generality.",
+      "Keep the separate marked-stable no-go proof obligations under expert review."
+    ],
+    "reference_locators": [
+      {
+        "locator": "Theorem 1.5, journal pages 368-370",
+        "reference_id": "ref:freedman-topology-four-dimensional-manifolds-1982",
+        "role": "classification by unimodular intersection form and Kirby-Siebenmann branch"
+      },
+      {
+        "locator": "Introduction, journal page 279",
+        "reference_id": "ref:furuta-monopole-11-8-2001",
+        "role": "11/8 statement, K3 equality, Donaldson definite case, and Rokhlin divisibility"
+      },
+      {
+        "locator": "Definition 9 and surrounding construction",
+        "reference_id": "ref:yetter-homologically-twisted-hepth-9311082",
+        "role": "homologically twisted invariant and total invariant"
+      },
+      {
+        "locator": "discussion of Yetter/Roberts 2-dimensional (co)homology refinements",
+        "reference_id": "ref:cky-state-sum-hepth-9409167",
+        "role": "historical surface-refinement and intersection-form context"
+      }
+    ],
+    "simply_connected_topological_models": {
+      "even_intersection_form": "After orienting, write Q=-2kE8+nH. Rokhlin makes k integral. The still-open 11/8 conjecture is exactly n>=3k, which would give the unstabilized topological model #k K3 #(n-3k)(S2xS2).",
+      "odd_intersection_form": "Unconditionally, the unimodular odd form is diagonal in the indefinite case; Donaldson handles the smooth definite case. Freedman then identifies the topological model with connected sums of CP2 and -CP2, with the smooth Kirby-Siebenmann branch.",
+      "scope": "closed connected oriented smooth simply connected 4-manifolds",
+      "stable_even_form_without_11_8": "Even without 11/8, adding max(0,3k-n) hyperbolic summands makes the lattice a K3/S2xS2 block sum. Turning this algebra into an invariant identity still uses marked stable realization, connected-sum normalization, and nonzero stabilization.",
+      "why_11_8_is_not_needed_for_an_existing_exotic_pair": "For a specified homeomorphic exotic pair, the shared intersection form is already known. Neither the pairwise no-go claim nor the direct quadratic formula needs 11/8.",
+      "why_11_8_is_not_needed_for_direct_prediction": "Once the quadratic formula is proved, Q and alpha themselves already determine the phase. Named connected-sum blocks are a convenient presentation, not a logical prerequisite."
+    },
+    "status": "CONDITIONAL_FORMULA_AND_TOPOLOGICAL_SCOPE_ANALYSIS_NOT_A_PROOF",
+    "terminology_correction": {
+      "not_the_operation": "the tangent-bundle Pontryagin class p1(TM)",
+      "reason": "The proposed phase evaluates a finite-coefficient H2 background against the manifold intersection pairing. It is not a pairing of p1(TM) with that background.",
+      "relevant_operation": "Pontryagin square / induced quadratic refinement"
+    }
+  },
+  "mathematical_status": "ESTABLISHED_COMPUTATIONAL_PATTERN_THEOREM_CANDIDATE_NOT_PROVED",
+  "repo": {
+    "dirty_before_output_write": false,
+    "git_commit": "4b02fea2d0cddf0bae4715873eaa9f3213419c68",
+    "root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+    "status_short_before_output_write": ""
+  },
+  "reproduce_command": "python experiments/scripts/build_twisted_yetter_quadratic_block_prediction_audit_v1.py",
+  "schema": "twisted-yetter.quadratic-block-prediction-audit.v1",
+  "status": "PASS_ALL_ELIGIBLE_H2_MARKED_DATA_MATCH_QUADRATIC_BLOCK_PREDICTION_FIGURE21_POINTWISE_BLOCKED",
+  "tolerance": 1e-08,
+  "tool_versions": {
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "top_notice": "This artifact machine-checks a closed-form modular prediction against all pinned eligible H2-marked data. It does not prove the formula for arbitrary MTCs. Figure 21 remains only distribution-level evidence because no certified H2 marking exists.",
+  "utc_finish": "2026-07-17T04:35:00.967996+00:00",
+  "utc_start": "2026-07-17T04:35:00.935134+00:00"
+}

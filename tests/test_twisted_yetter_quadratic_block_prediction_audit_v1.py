@@ -22,6 +22,11 @@ AuditError = MODULE.AuditError
 build_audit = MODULE.build_audit
 content_hash = MODULE._content_hash
 even_block_analysis = MODULE.even_block_analysis
+REFERENCE_LEDGER = (
+    REPO_ROOT
+    / "experiments/inputs/references/"
+    "twisted-yetter-quadratic-block-primary-sources-v1.json"
+)
 
 
 def _mutated_input(tmp_path: Path, relative: str, mutate) -> Path:
@@ -151,3 +156,30 @@ def test_checked_in_artifact_is_content_addressed_and_clean_generated() -> None:
         row["sha256"].startswith("sha256:")
         for row in payload["input_artifacts"]
     )
+
+
+def test_primary_source_ledger_pins_the_required_locators_and_guardrails() -> None:
+    ledger = json.loads(REFERENCE_LEDGER.read_text())
+    references = {
+        row["reference_id"]: row for row in ledger["references"]
+    }
+    assert set(references) == {
+        "ref:freedman-topology-four-dimensional-manifolds-1982",
+        "ref:furuta-monopole-11-8-2001",
+        "ref:yetter-homologically-twisted-hepth-9311082",
+        "ref:cky-state-sum-hepth-9409167",
+    }
+    assert all(
+        len(row["snapshot"]["sha256"]) == 64 for row in references.values()
+    )
+    assert references[
+        "ref:freedman-topology-four-dimensional-manifolds-1982"
+    ]["locators"][0]["location"] == "Theorem 1.5"
+    assert references["ref:furuta-monopole-11-8-2001"]["locators"][0][
+        "printed_page"
+    ] == 279
+    assert "still presented as a conjecture" in ledger[
+        "current_status_reference"
+    ]["status_fact"]
+    guardrails = " ".join(ledger["scope_guardrails"])
+    assert "not the tangent-bundle class p1(TM)" in guardrails
