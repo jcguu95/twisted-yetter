@@ -1,4 +1,5 @@
-import TwistedYetter.Fusion.PairingTransport
+import TwistedYetter.Fusion.PivotalMate
+import TwistedYetter.Fusion.Insertion
 
 /-!
 # Kernel axiom audit for the finite-resolution bootstrap
@@ -20,3 +21,13 @@ if Lean reports `sorryAx`.
 #print axioms TwistedYetter.Fusion.PairingTransport.channel_eq
 #print axioms TwistedYetter.Fusion.PairingTransport.reconstruct
 #print axioms TwistedYetter.Fusion.PairingTransport.mapped_resolution_term_eq
+#print axioms TwistedYetter.Fusion.FrobeniusLinear.mateLinearEquiv_apply
+#print axioms TwistedYetter.Fusion.FrobeniusLinear.mateLinearEquiv_symm_apply
+#print axioms TwistedYetter.Fusion.FrobeniusLinear.dualMateLinearEquiv_apply
+#print axioms TwistedYetter.Fusion.BiorthogonalFamily.ofDualBasisData
+#print axioms TwistedYetter.Fusion.PairingMap.mapFamily_pair_eq
+#print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.inverse_sound
+#print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.map_sound
+#print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.map_inverse_sound
+#print axioms TwistedYetter.Fusion.PivotalMate.equation_3_1_11
+#print axioms TwistedYetter.Fusion.PivotalMate.transformedDualFamily_pair

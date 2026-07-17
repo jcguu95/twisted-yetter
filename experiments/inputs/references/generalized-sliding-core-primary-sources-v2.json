@@ -1,0 +1,93 @@
+{
+  "schema": "twisted-yetter.reference-ledger.v2",
+  "status": "SOURCE_LOCATORS_RECORDED",
+  "captured_at_utc": "2026-07-17T00:00:00Z",
+  "scope": "Primary sources used by the Lean formalization of Bärenz--Barrett Lemma 3.3.",
+  "references": [
+    {
+      "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+      "type": "journal_article",
+      "title": "Dichromatic State Sum Models for Four-Manifolds from Pivotal Functors",
+      "authors": [
+        "Manuel Barenz",
+        "John W. Barrett"
+      ],
+      "journal": "Communications in Mathematical Physics",
+      "volume": "360",
+      "pages": "663-714",
+      "year": 2018,
+      "doi": "10.1007/s00220-017-3012-9",
+      "canonical_url": "https://doi.org/10.1007/s00220-017-3012-9",
+      "open_pdf_url": "https://link.springer.com/content/pdf/10.1007/s00220-017-3012-9.pdf",
+      "locators": [
+        {
+          "label": "spherical pairing and nondegeneracy",
+          "locator": "Definition 2.20 and Lemma 2.21, equation (2.1.15), journal pages 670-671"
+        },
+        {
+          "label": "pivotal functors preserve trace and pairing",
+          "locator": "Definition 2.22 and Lemma 2.23, equations (2.1.16)-(2.1.17), journal pages 671-672"
+        },
+        {
+          "label": "source identity resolution",
+          "locator": "Lemma 2.37 and equations (2.2.5)-(2.2.6), journal page 675"
+        },
+        {
+          "label": "pivotal-functor image insertion",
+          "locator": "Lemma 3.2, journal page 681"
+        },
+        {
+          "label": "generalized sliding property",
+          "locator": "Lemma 3.3 and equations (3.1.2)-(3.1.11), journal pages 681-684"
+        },
+        {
+          "label": "arbitrary framed knot and multiple strands",
+          "locator": "Lemma 3.4 and equation (3.1.12), journal page 684"
+        }
+      ],
+      "captured_pdf": {
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+        "bytes": 906609,
+        "pages": 52,
+        "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf"
+      },
+      "content_hash_status": "REMOTE_PRIMARY_SOURCE_BYTES_HASHED"
+    },
+    {
+      "ref_id": "ref:mathlib4-v4.29.1-braided-rigid",
+      "type": "software_source",
+      "title": "mathlib4 braided, rigid, and linear monoidal category library",
+      "version": "v4.29.1",
+      "git_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+      "canonical_url": "https://github.com/leanprover-community/mathlib4",
+      "locators": [
+        {
+          "label": "positive and inverse braiding naturality",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean; BraidedCategory.braiding_naturality and braiding_inv_naturality"
+        },
+        {
+          "label": "exact pairing and duality triangle identities",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; ExactPairing"
+        },
+        {
+          "label": "Frobenius reciprocity mate maps",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; tensorLeftHomEquiv and tensorRightHomEquiv"
+        },
+        {
+          "label": "linear monoidal structure",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Linear.lean; MonoidalLinear"
+        },
+        {
+          "label": "linear functor maps",
+          "locator": "Mathlib/CategoryTheory/Linear/LinearFunctor.lean; Functor.Linear and mapLinearMap"
+        }
+      ],
+      "content_hash_status": "PINNED_BY_LAKE_MANIFEST_GIT_COMMIT"
+    }
+  ],
+  "non_claims": [
+    "This ledger supplies source locators and hashes; it does not itself prove Lemma 3.3.",
+    "Mathlib v4.29.1 does not provide native pivotal or spherical category typeclasses.",
+    "The Bärenz--Barrett PDF bytes are hashed, but the PDF itself is kept outside the repository."
+  ]
+}

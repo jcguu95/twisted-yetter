@@ -22,6 +22,82 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [BraidedCategory C]
 
 /--
+A diagram-backed sliding law for an arbitrary endofunctor.
+
+Lemma 3.3 acts on `F(X) ⊗ A`, so its natural transformations belong to the
+functor `F(X) ⊗ -`, not generally to the identity functor.  The older
+`SourcedSlidingLaw` below is the identity-functor specialization used by the
+initial bootstrap.
+-/
+structure SourcedFunctorSlidingLaw
+    (G : C ⥤ C) where
+  before_diagram : (X : C) →
+    Diagram C (.atom (G.obj X)) (.atom (G.obj X))
+  after_diagram : (X : C) →
+    Diagram C (.atom (G.obj X)) (.atom (G.obj X))
+  before : G ⟶ G
+  after : G ⟶ G
+  before_eval : (X : C) →
+    Diagram.eval C (before_diagram X) = before.app X
+  after_eval : (X : C) →
+    Diagram.eval C (after_diagram X) = after.app X
+  core_sound : before = after
+  diagram_schema : String
+  diagram_content_hash : String
+  source_ref : String
+  source_locator : String
+
+namespace SourcedFunctorSlidingLaw
+
+variable {G : C ⥤ C}
+
+/-- The functorial slide window immediately before an arbitrary coupon. -/
+def beforeCoupon (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (name : String) (f : X ⟶ Y) :
+    Diagram C (.atom (G.obj X)) (.atom (G.obj Y)) :=
+  law.before_diagram X ≫ᵈ
+    atomicCoupon name (G.map f)
+
+/-- The functorial slide window after an arbitrary coupon. -/
+def afterCoupon (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (name : String) (f : X ⟶ Y) :
+    Diagram C (.atom (G.obj X)) (.atom (G.obj Y)) :=
+  atomicCoupon name (G.map f) ≫ᵈ
+    law.after_diagram Y
+
+/--
+An arbitrary coupon crosses a functor-valued slide window.  This uses the
+proved core equality and naturality of the resulting natural transformation.
+-/
+theorem coupon_transport_sound
+    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (name : String) (f : X ⟶ Y) :
+    Diagram.eval C (law.beforeCoupon name f) =
+      Diagram.eval C (law.afterCoupon name f) := by
+  change Diagram.eval C (law.before_diagram X) ≫ G.map f =
+    G.map f ≫ Diagram.eval C (law.after_diagram Y)
+  rw [law.before_eval, law.after_eval]
+  rw [law.core_sound]
+  exact (law.after.naturality f).symm
+
+/-- The functorial coupon transport as one certified movie step. -/
+def couponTransportMove
+    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (name : String) (f : X ⟶ Y) :
+    CertifiedMove (law.beforeCoupon name f) (law.afterCoupon name f) where
+  label := "coupon-through-functor-handle-slide-window:" ++ name
+  sound := law.coupon_transport_sound name f
+
+/-- The functorial coupon transport as a one-frame movie. -/
+def couponTransportMovie
+    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (name : String) (f : X ⟶ Y) :
+    Movie (law.beforeCoupon name f) (law.afterCoupon name f) :=
+  Movie.one (law.couponTransportMove name f)
+
+end SourcedFunctorSlidingLaw
+
+/--
 Evaluator-side interface to a proved handle-slide lemma.
 
 For the generalized dichromatic invariant, a future category module should

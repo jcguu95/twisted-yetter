@@ -7,9 +7,21 @@ mutations=(
   "lean/Mutations/InvalidComposition.lean"
   "lean/Mutations/InvalidDualCap.lean"
   "lean/Mutations/MissingMoveProof.lean"
+  "lean/Mutations/MissingBackwardInsertion.lean"
+  "lean/Mutations/MissingMateMovie.lean"
 )
 
-for mutation in "${mutations[@]}"; do
+expected_diagnostics=(
+  'Application type mismatch'
+  'Type mismatch'
+  'Fields missing: `sound`'
+  'Fields missing: `backwardSound`'
+  'Fields missing: `mateMovie`'
+)
+
+for index in "${!mutations[@]}"; do
+  mutation="${mutations[${index}]}"
+  expected_diagnostic="${expected_diagnostics[${index}]}"
   output="$(mktemp "${TMPDIR:-/tmp}/twisted-yetter-lean-mutation.XXXXXX")"
   if ./scripts/lean_local_check.sh "${mutation}" >"${output}" 2>&1; then
     printf 'Mutation unexpectedly compiled: %s\n' "${mutation}" >&2
@@ -22,6 +34,14 @@ for mutation in "${mutations[@]}"; do
     rm -f "${output}"
     exit 1
   fi
-  printf 'PASS expected rejection: %s\n' "${mutation}"
+  if ! rg -Fq "${expected_diagnostic}" "${output}"; then
+    printf 'Mutation failed for the wrong reason: %s\n' "${mutation}" >&2
+    printf 'Expected diagnostic: %s\n' "${expected_diagnostic}" >&2
+    cat "${output}" >&2
+    rm -f "${output}"
+    exit 1
+  fi
+  printf 'PASS expected rejection: %s [diagnostic: %s]\n' \
+    "${mutation}" "${expected_diagnostic}"
   rm -f "${output}"
 done

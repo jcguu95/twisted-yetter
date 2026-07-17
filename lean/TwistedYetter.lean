@@ -1,8 +1,16 @@
 import TwistedYetter.Fusion.FiniteResolution
+import TwistedYetter.Fusion.FrobeniusLinear
 import TwistedYetter.Fusion.PairingTransport
+import TwistedYetter.Fusion.Biorthogonal
+import TwistedYetter.Fusion.PivotalMate
+import TwistedYetter.Fusion.Insertion
 import TwistedYetter.Kirby.CouponKernel
 import TwistedYetter.Kirby.CouponNaturality
 import TwistedYetter.Kirby.CategoricalTangle
 import TwistedYetter.Kirby.CategoricalMovie
+import TwistedYetter.Kirby.LinearDiagram
+import TwistedYetter.Kirby.LinearContext
+import TwistedYetter.Kirby.MateDiagram
 import TwistedYetter.Kirby.FramingNaturality
 import TwistedYetter.Kirby.HandleSlide
+import TwistedYetter.Kirby.GeneralizedSliding

@@ -8,12 +8,18 @@ mutations=(
   "lean/Mutations/MissingDualBasisProof.lean"
   "lean/Mutations/MissingPairingPreservation.lean"
   "lean/Mutations/WrongTransportedDualIndex.lean"
+  "lean/Mutations/MissingIdentityResolutionSound.lean"
+  "lean/Mutations/MissingPivotalTraceProof.lean"
+  "lean/Mutations/WrongMateDualOrder.lean"
 )
 
 expected_diagnostics=(
   'Fields missing: `dual_eq`'
   'Fields missing: `preserves_pairing`'
   'if i = j then 1 else 0'
+  'Fields missing: `sound`'
+  'Fields missing: `preserves_trace_pairing`'
+  'Type mismatch'
 )
 
 for index in "${!mutations[@]}"; do

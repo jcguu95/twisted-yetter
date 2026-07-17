@@ -1,0 +1,162 @@
+{
+  "schema": "twisted-yetter.generalized-sliding-core-obligation-matrix.v1",
+  "status": "GENERALIZED_SLIDING_CORE_OBLIGATIONS_TERMINAL",
+  "scope": "Bärenz--Barrett Lemma 3.3, equations (3.1.2)-(3.1.11), relative to explicit standard pivotal, spherical, and semisimple inputs.",
+  "primary_source": {
+    "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+    "reference_ledger": "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json",
+    "locator": "Lemma 3.3 and equations (3.1.2)-(3.1.11), journal pages 681-684"
+  },
+  "trusted_input_boundary": [
+    {
+      "input": "IdentityResolution.sound",
+      "meaning": "The dimension-weighted simple-channel resolution of one identity.",
+      "source_locator": "Lemma 2.37 and Lemma 3.2",
+      "does_not_assume": "No sliding endpoint equality is assumed."
+    },
+    {
+      "input": "PivotalTraceCompatibility.preserves_trace_pairing",
+      "meaning": "A pivotal strong monoidal functor preserves the spherical trace pairing.",
+      "source_locator": "Lemma 2.23",
+      "does_not_assume": "No mate transport or sliding equality is assumed."
+    },
+    {
+      "input": "SphericalMateCompatibility.preserves_trace_pairing",
+      "meaning": "The two concrete Frobenius mate maps preserve the spherical pairing.",
+      "source_locator": "Equations (3.1.9)-(3.1.11)",
+      "does_not_assume": "Transported dual-family equations are derived, not supplied."
+    },
+    {
+      "input": "CategoricalMovie soundness proofs",
+      "meaning": "Each local braiding or cup/cap replacement carries its own evaluator equality.",
+      "source_locator": "Equation (3.1.5), equation (3.1.10), and Mathlib braided/rigid identities",
+      "does_not_assume": "There is no whole-chain or endpoint-equality field."
+    },
+    {
+      "input": "SlidingFamily endpoint naturality",
+      "meaning": "The two endpoint formal sums are natural in the strand object.",
+      "source_locator": "Braiding, evaluation, and coevaluation naturality",
+      "does_not_assume": "Pointwise generalized sliding is derived independently."
+    }
+  ],
+  "obligations": [
+    {
+      "obligation_id": "linear-left-frobenius-equivalence",
+      "lean_declaration": "TwistedYetter.Fusion.FrobeniusLinear.tensorLeftHomLinearEquiv",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "linear-right-frobenius-equivalence",
+      "lean_declaration": "TwistedYetter.Fusion.FrobeniusLinear.tensorRightHomLinearEquiv",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "equation-3.1.6-forward-mate-map",
+      "lean_declaration": "TwistedYetter.Fusion.FrobeniusLinear.mateLinearEquiv",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "equation-3.1.6-opposite-mate-map",
+      "lean_declaration": "TwistedYetter.Fusion.FrobeniusLinear.dualMateLinearEquiv",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "non-full-functor-safe-family-type",
+      "lean_declaration": "TwistedYetter.Fusion.BiorthogonalFamily",
+      "status": "LEAN_PROVED_INTERFACE"
+    },
+    {
+      "obligation_id": "pivotal-monoidal-image-maps",
+      "lean_declaration": "TwistedYetter.Fusion.PivotalMate.monoidalImagePrimal",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "pivotal-trace-standard-input",
+      "lean_declaration": "TwistedYetter.Fusion.PivotalMate.PivotalTraceCompatibility",
+      "status": "EXPLICIT_SOURCE_BACKED_ASSUMPTION"
+    },
+    {
+      "obligation_id": "spherical-mate-standard-input",
+      "lean_declaration": "TwistedYetter.Fusion.PivotalMate.SphericalMateCompatibility",
+      "status": "EXPLICIT_SOURCE_BACKED_ASSUMPTION"
+    },
+    {
+      "obligation_id": "equation-3.1.11-pairing-preservation",
+      "lean_declaration": "TwistedYetter.Fusion.PivotalMate.equation_3_1_11",
+      "status": "LEAN_PROVED_FROM_STANDARD_INPUTS"
+    },
+    {
+      "obligation_id": "equation-3.1.6-transformed-dual-family",
+      "lean_declaration": "TwistedYetter.Fusion.PivotalMate.transformedDualFamily_pair",
+      "status": "LEAN_PROVED_FROM_STANDARD_INPUTS"
+    },
+    {
+      "obligation_id": "lemma-2.37-identity-resolution",
+      "lean_declaration": "TwistedYetter.Fusion.Insertion.IdentityResolution",
+      "status": "EXPLICIT_SOURCE_BACKED_ASSUMPTION"
+    },
+    {
+      "obligation_id": "lemma-3.2-functor-image-insertion",
+      "lean_declaration": "TwistedYetter.Fusion.Insertion.IdentityResolution.map_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "linear-one-hole-context",
+      "lean_declaration": "TwistedYetter.Kirby.LinearContext.evalContextLinearMap_apply",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "contextual-insertion",
+      "lean_declaration": "TwistedYetter.Kirby.LinearContext.insertIdentity",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "kirby-colour-is-formal-linear-sum",
+      "lean_declaration": "TwistedYetter.Kirby.LinearDiagram.LinearDiagram",
+      "status": "LEAN_PROVED_INTERFACE"
+    },
+    {
+      "obligation_id": "equation-3.1.10-visible-forward-mate",
+      "lean_declaration": "TwistedYetter.Kirby.MateDiagram.mateExpanded_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "equation-3.1.10-visible-opposite-mate",
+      "lean_declaration": "TwistedYetter.Kirby.MateDiagram.dualMateExpanded_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "equations-3.1.3-through-3.1.8",
+      "lean_declaration": "TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.core_sound",
+      "status": "LEAN_PROVED_FROM_LOCAL_CERTIFICATES"
+    },
+    {
+      "obligation_id": "equation-3.1.2-natural-transformation-equality",
+      "lean_declaration": "TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.equation_3_1_2",
+      "status": "LEAN_PROVED_FROM_LOCAL_CERTIFICATES"
+    },
+    {
+      "obligation_id": "real-functor-valued-sliding-law",
+      "lean_declaration": "TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.sourcedFunctorSlidingLaw",
+      "status": "LEAN_CONSTRUCTED"
+    }
+  ],
+  "silent_failure_guards": [
+    "The image of a source basis is represented only as a biorthogonal family; fullness of the pivotal functor is never inferred.",
+    "The forward and oppositely oriented mate maps have different Hom-space types and exact-pairing orders.",
+    "Kirby colours remain free-module linear combinations until the final API collapse.",
+    "The slide law is an endomorphism of the functor fixed_tensor_minus, not incorrectly of the identity functor.",
+    "Forward and backward identity resolutions are both required.",
+    "The backward channels are definitionally the same mated family whose Kronecker pairing is certified.",
+    "Every braiding and mate channel change carries a kernel-checked movie.",
+    "The final core equality is a theorem and is not a structure field."
+  ],
+  "explicit_non_claims": [
+    "Mathlib v4.29.1 has no native pivotal or spherical category class; the two standard trace-pairing consequences are explicit source-backed hypotheses.",
+    "This does not formalize Lemma 3.4 for arbitrary framed knots and multiple linked strands.",
+    "This does not formalize all framed-link isotopy or Kirby-calculus completeness.",
+    "This does not prove four-manifold invariance.",
+    "This does not connect computation JSON artifacts to Lean.",
+    "This does not assert that an arbitrary linear strong monoidal functor is pivotal."
+  ]
+}
