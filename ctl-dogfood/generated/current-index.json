@@ -11678,6 +11678,279 @@
       "revision_kind": "claim"
     },
     {
+      "cid": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
+      "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+      "payload": {
+        "candidate_hierarchy": [
+          {
+            "formula_or_statement": "If the three separately recorded stable-no-go proof obligations are proved with the required markings and normalizations, the total homologically twisted Yetter invariant cannot distinguish closed simply connected homeomorphic smooth 4-manifolds after transporting the homology marking.",
+            "id": "level-0-conditional-stable-no-go",
+            "relationship_to_formula": "This conditional consequence does not imply that the alpha-dependence is quadratic and does not construct an explicit formula.",
+            "status": "INHERITED_CONDITIONAL_ARGUMENT_NOT_ESTABLISHED"
+          },
+          {
+            "formula_or_statement": "Z_C(M,alpha) ?= sum_{xi in S_C(M)} W_C(M,xi) F_C(M;xi,alpha)",
+            "id": "level-1-schematic-transparent-sector-ansatz",
+            "required_interpretation": [
+              "S_C(M) is an as-yet unconstructed set or groupoid of sectors associated with the transparent/symmetric part of C.",
+              "The notation does not assert that every sector is a flat principal G-bundle.",
+              "The notation does not assert a canonical measure, normalization, or scalar decomposition for arbitrary premodular C.",
+              "Until S_C(M), W_C, and F_C are constructed, this level is a structural ansatz rather than a predictive formula."
+            ],
+            "status": "PLAUSIBLE_SCHEMATIC_ANSATZ_NOT_SOURCE_PROVED"
+          },
+          {
+            "formula_or_statement": "For a fixed sector xi, F_C(M;xi,alpha)/F_C(M;xi,0) ?= <P_{q_C,xi}(PD(alpha)),[M]>; in a torsion-free constant-coefficient homology basis this becomes product_i q_C,xi(a_i)^(Q_ii) product_{i<j} b_C,xi(a_i,a_j)^(Q_ij).",
+            "id": "level-2-sectorwise-quadratic-refinement",
+            "required_hypotheses": [
+              "The relevant coefficient group or local system is defined by the actual twisted construction.",
+              "The reference amplitude in the chosen sector is nonzero.",
+              "The CP2 calibration values are nonzero where division is used.",
+              "The calibrated function satisfies q(0)=1 and has biadditive bilinearization b(a,b)=q(a+b)/(q(a)q(b)).",
+              "Basis independence and the appropriate Pontryagin-square or quadratic-cohomology operation are proved.",
+              "Any mixed coupling between xi and alpha is incorporated rather than silently discarded."
+            ],
+            "status": "STRONGER_CONJECTURE_NOT_IMPLIED_BY_LEVEL_0_OR_LEVEL_1"
+          },
+          {
+            "formula_or_statement": "Define K_C^+(a)=Z_C(CP2,a) and K_C^-(a)=Z_C(CPbar2,a). If the marked connected-sum law Z(X#Y,alpha+beta)=Z(X,alpha)Z(Y,beta)/Z(S4,0) is proved and M is actually presented as a marked connected sum of p positive and q negative projective-plane blocks, then Z(M,alpha) ?= Z(S4,0)^(1-p-q) product_i K_C^+(a_i) product_j K_C^-(b_j).",
+            "id": "level-3-zero-safe-block-ansatz",
+            "required_hypotheses": [
+              "No ratio by a vanishing vacuum amplitude is taken.",
+              "The exact Yetter connected-sum normalization is established.",
+              "The formula is applied to an actual marked connected-sum realization, not inferred merely from an isomorphic intersection form.",
+              "Fermionic and spin-dependent branches are kept explicit."
+            ],
+            "status": "CONDITIONAL_ZERO_SAFE_REFORMULATION_NOT_GENERAL_FORMULA"
+          }
+        ],
+        "coefficient_group_warning": {
+          "candidate": "A_C=Aut_tensor(Id_C)",
+          "source_backed_part": "Yetter's introductory categorical setup discusses a group A of functorial tensor automorphisms.",
+          "status": "INTERPRETIVE_GENERALIZATION_REQUIRES_DERIVATION",
+          "warning": "The printed four-dimensional Definitions 6 and 9 specialize the displayed homology coefficients to Z/2. This note does not promote the arbitrary-A four-dimensional extension to a theorem by interpretation."
+        },
+        "created_at": "2026-07-17T05:41:00Z",
+        "created_by": "actor:codex",
+        "ctl_storage_semantics": {
+          "mathematical_claim_semantics": false,
+          "note": "The CTL API stores admitted objective notes in a revision envelope whose revision_kind is named claim and whose logical-id prefix is claim:lab-note. Those storage words do not make the payload a mathematical claim.",
+          "requested_object_kind": "conversation-derived conjecture plus adversarial self-review"
+        },
+        "epistemic_status": {
+          "expert_review_completed": false,
+          "formal_mathematical_claim_made": false,
+          "formal_mathematical_theorem_claim_made": false,
+          "machine_checked_premodular_computational_statement_made": false,
+          "project_conclusion_adopted": false,
+          "status": "CONJECTURAL_SELF_REVIEWED_WITH_MATERIAL_QUALIFICATIONS"
+        },
+        "explicit_non_claims": [
+          "This note is not a theorem, proof, proof certificate, or mathematical claim.",
+          "This note does not assert that the proposed premodular formula is correct.",
+          "This note does not assert that every premodular Crane-Yetter theory canonically decomposes into transparent flat-connection sectors.",
+          "This note does not assert that simply connectedness collapses every possible arbitrary-premodular sector construction to one sector.",
+          "This note does not assert that every sector has quadratic alpha-dependence.",
+          "This note does not identify the radical of a conjectural coefficient-group quadratic form with transparent objects.",
+          "This note does not assert that CP2 ratios exist when a denominator or relevant numerator vanishes.",
+          "This note does not infer a connected-sum block product from an intersection-form diagonalization alone.",
+          "This note does not prove an arbitrary-A four-dimensional extension of Yetter's printed Z/2 construction.",
+          "This note does not prove a premodular no-go theorem for twisted Yetter invariants.",
+          "This note does not contain a premodular Figure 21 computation or any premodular machine-checked row.",
+          "The 201 modular quadratic compatibility rows support only the separate modular candidate on a frozen denominator and are not evidence that the premodular sector ansatz is universal.",
+          "Ordinary Crane-Yetter-Kauffman stable-diffeomorphism results are not silently promoted to an alpha-marked twisted theorem.",
+          "The user-reported and session-verified model/effort provenance is not evidence for mathematical correctness."
+        ],
+        "falsification_and_upgrade_program": [
+          {
+            "gate": "coefficient-definition",
+            "required_result": "Derive the exact four-dimensional coefficient group and action from Yetter's construction, including whether and how the introductory arbitrary-A setup extends the printed Z/2 definitions.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "sector-construction",
+            "required_result": "Construct S_C(M), its weighting/measure, and the gluing law for a genuinely premodular category; prove rather than assume a scalar sector decomposition.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "cp2-calibration",
+            "required_result": "Compute all marked CP2 block amplitudes, record zeros, and test q(0)=1 and quadratic identities before naming any ratio q.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "mixed-term-calibration",
+            "required_result": "Use marked S2xS2 or another certified off-diagonal form to test bilinearity and detect xi-alpha mixed coupling.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "rep-g-special-case",
+            "required_result": "Recover the B\u00e4renz-Barrett Rep(G) flat-connection count with the exact normalization, then add the homological twist and test whether the proposed sectorwise structure survives.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "non-tannakian-and-fermionic-cases",
+            "required_result": "Treat super-Tannakian/fermionic centers, spin dependence, and vanishing Gauss-sum branches without dividing by zero.",
+            "status": "OPEN"
+          },
+          {
+            "gate": "premodular-figure21",
+            "required_result": "Obtain a certified premodular evaluator and H2 marking before using Figure 21 as direct evidence.",
+            "status": "BLOCKED_CURRENT_BACKEND_CANNOT_RUN_FULL_PREMODULAR_FIGURE21"
+          }
+        ],
+        "git_preflight": {
+          "ctl_root_before_work": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "ctl_verify_before_work": "PASS",
+          "source_repo_clean_before_work": true,
+          "source_repo_commit_before_work": "f99571c8765bc2d0ac77f8793f21cabc394099c6"
+        },
+        "material_corrections_to_the_initial_proposal": [
+          {
+            "corrected_form": "Only the fully symmetric special case C=Rep(G) is source-backed here as a flat-G-connection model. For arbitrary premodular C, the sector sum remains schematic.",
+            "initial_form": "Transparent/Mueger-center data generally produce flat sectors over which the invariant sums.",
+            "reason": "B\u00e4renz-Barrett Theorem 6.12 does not prove that factorization for every category having Rep(G) as center.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "Simply connectedness collapses Hom(pi1(M),G) in the Rep(G) special case. No general arbitrary-premodular sector-collapse theorem is asserted.",
+            "initial_form": "A simply connected manifold normally has only the trivial transparent sector.",
+            "reason": "A general sector construction has not been defined, and super-Tannakian/fermionic data may require different structures.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "Quadratic alpha-dependence is an additional conjecture requiring CP2 and mixed-form checks sector by sector.",
+            "initial_form": "Inside each sector alpha contributes through a possibly degenerate quadratic refinement.",
+            "reason": "Neither stable invariance nor a sector decomposition implies quadraticity.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "A CP2 ratio is only a candidate q after nonvanishing and quadratic identities have been checked.",
+            "initial_form": "Define q_C(a)=Z_C(CP2,a)/Z_C(CP2,0).",
+            "reason": "The denominator or numerator can vanish, and a defined ratio need not be a quadratic function.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "The unnormalized K^+/K^- product is conditional on the exact connected-sum law and an actual marked connected-sum decomposition.",
+            "initial_form": "For a diagonal intersection form, multiply the projective-plane block amplitudes.",
+            "reason": "An intersection-form diagonalization does not by itself give a smooth marked connected-sum realization.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "A conjectural q may be degenerate, but its radical is not identified with transparent objects.",
+            "initial_form": "The transparent part eats invisible coefficient directions.",
+            "reason": "The coefficient group and the group of invertible objects are not canonically identified in the degenerate braided case.",
+            "severity": "MATERIAL"
+          },
+          {
+            "corrected_form": "General non-simply-connected dependence may involve pi1, the classifying-map image of the fundamental class, chi, sigma, spin/w2 data, and xi-alpha coupling.",
+            "initial_form": "The main new premodular information is pi1 and transparent sectors.",
+            "reason": "Known ordinary semisimple-TFT restrictions already permit more than the abstract group pi1 alone.",
+            "severity": "SCOPE"
+          }
+        ],
+        "mathematical_status": "LAYERED_ANSATZ_NOT_THEOREM_NOT_CLAIM",
+        "note_id": "objective-note-2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+        "provenance": {
+          "initial_proposal": {
+            "assistant_final_utc": "2026-07-17T05:25:35.510Z",
+            "local_time_range": "2026-07-16 23:22:11-23:25:35 America/Edmonton",
+            "model_verified_from_turn_context": "gpt-5.6-sol",
+            "reasoning_effort_verified_from_turn_context": "medium",
+            "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+          },
+          "provenance_reconciliation": "The user described the combined proposal/review episode as gpt-5.6-sol ultra around 23:30. The source session instead records the initial proposal turn as medium and the adversarial self-review turn beginning at 23:28:30 as ultra. Both facts are retained.",
+          "self_review": {
+            "local_start": "2026-07-16 23:28:30 America/Edmonton",
+            "model_verified_from_turn_context": "gpt-5.6-sol",
+            "reasoning_effort_verified_from_turn_context": "ultra",
+            "turn_id": "019f6e8c-379d-74f2-b3ac-3c2d2cc3f5dc",
+            "user_description": "5.6 sol ultra at approximately 23:30 on 2026-07-16"
+          },
+          "transcript_artifact": {
+            "artifact_id": "twisted-yetter-premodular-formula-conjecture-transcript-v1",
+            "formal_evidence": false,
+            "git_blob": "5b385246097062e39615982bb102d3aaa146a72d",
+            "path": "experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json",
+            "sha256": "cb7dea85f9548a6fd08beb5a4b5901e16e65cf769738528c086ce9de7b961fd5",
+            "status": "ARCHIVAL_SOURCE_ONLY"
+          }
+        },
+        "reference_ledger": {
+          "git_blob": "460ef5295276b3a036dfcef3e18f15dbc861f0f4",
+          "path": "experiments/inputs/references/twisted-yetter-premodular-formula-conjecture-primary-sources-v1.json",
+          "sha256": "0444df58d1d004ebfa1a9900f45309abd778669f7f8ab2cddbf53d438c42b472",
+          "status": "CURATED_PRIMARY_SOURCE_LEDGER_WITH_EXPLICIT_INTERPRETATION_GAPS"
+        },
+        "reference_subjects": [
+          "subject:twisted-yetter:paper:yetter-hepth-9311082",
+          "subject:twisted-yetter:paper:dgno-0906-0620",
+          "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+          "subject:twisted-yetter:paper:reutter-2001-02288",
+          "subject:twisted-yetter:paper:tham-2108-13467"
+        ],
+        "review_verdict": {
+          "accepted_for_object_store": true,
+          "bottom_line": "The corrected hierarchy is mathematically coherent and worth preserving as a research conjecture. The review does not establish that any displayed premodular formula is true.",
+          "initial_unqualified_answer_accepted_as_written": false,
+          "status": "PRESERVE_ONLY_WITH_MATERIAL_DOWNGRADES_AND_OPEN_GATES"
+        },
+        "schema": "twisted-yetter/objective-lab-note/1",
+        "source_backed_background": [
+          {
+            "statement": "For a nondegenerate braided fusion category, double braiding identifies invertible objects with tensor automorphisms of the identity; in the degenerate case transparent invertibles form the kernel of the same natural map.",
+            "status": "SOURCE_BACKED_DGNO_LEMMA_3_31"
+          },
+          {
+            "statement": "For the fully symmetric input Rep(G), B\u00e4renz-Barrett identify their stated Crane-Yetter invariant with a count of flat G-connections.",
+            "status": "SOURCE_BACKED_SPECIAL_CASE_ONLY"
+          },
+          {
+            "statement": "Ordinary semisimple four-dimensional TFTs, including ordinary Crane-Yetter-Kauffman theories from arbitrary ribbon fusion categories, obey stable-diffeomorphism restrictions and do not detect exotic smooth structure in Reutter's stated scope.",
+            "status": "SOURCE_BACKED_ORDINARY_UNTWISTED_RESULT_ONLY"
+          },
+          {
+            "statement": "Premodular handle maps retain categorical projection data, including a 3-handle unit-channel projection, before any modular scalar simplification.",
+            "status": "SOURCE_BACKED_WARNING_FROM_THAM_DEFINITION_5_11"
+          }
+        ],
+        "special_cases_and_reductions": {
+          "fully_symmetric_rep_g": {
+            "statement": "The untwisted Rep(G) special case supplies a calibration target for a future twisted sector construction. It does not prove the general level-1 ansatz.",
+            "status": "SOURCE_BACKED_ORDINARY_SPECIAL_CASE"
+          },
+          "modular": {
+            "statement": "If the Mueger center is trivial and all level-2 hypotheses hold, the ansatz reduces to the separately recorded modular quadratic-block candidate. That modular formula remains unproved despite 201 matching frozen rows.",
+            "status": "CONDITIONAL_REDUCTION_TO_SEPARATE_OPEN_CANDIDATE"
+          },
+          "simply_connected": {
+            "statement": "For Rep(G), pi1=1 leaves one flat homomorphism. For arbitrary premodular C, this note makes no general sector-collapse assertion. Even a one-sector reduction would not prove quadratic alpha-dependence.",
+            "status": "SPECIAL_CASE_ONLY_NO_GENERAL_COLLAPSE_THEOREM"
+          }
+        },
+        "status": "CONJECTURAL_SELF_REVIEWED_NOT_A_CLAIM",
+        "subjects": [
+          "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+          "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula",
+          "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds"
+        ],
+        "title": "Adversarial self-review of a premodular Twisted Yetter sector/quadratic formula conjecture",
+        "top_notice": "NOT A THEOREM, NOT A PROOF, NOT A MATHEMATICAL CLAIM, AND NOT AN ADOPTED PROJECT CONCLUSION. This note preserves a gpt-5.6-sol proposal and its ultra-effort adversarial self-review from 2026-07-16 around 23:30 America/Edmonton. The initial answer required material corrections. Only the corrected layered ansatz is retained, with every upgrade gate still open."
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
       "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal",
       "payload": {
@@ -14713,6 +14986,214 @@
           "actor_id": "actor:codex"
         },
         "logical_id": "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal",
+        "explanation": "The formula hierarchy is compatible with the conditional stable no-go route, but the no-go obligations do not imply a sector decomposition or quadratic alpha-dependence.",
+        "role": "compatible-with-conditional",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block",
+        "explanation": "Under trivial-center, nonvanishing, and quadraticity hypotheses, the premodular ansatz is intended to reduce to the separately open modular quadratic-block candidate; neither formula is proved by this edge.",
+        "role": "extends-conjecturally",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note",
+        "explanation": "The objective note is the normative epistemic-status record: it preserves the proposal only after material downgrades and explicitly denies theorem, proof, claim, and adopted-conclusion status.",
+        "role": "records",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580",
+        "explanation": "B\u00e4renz-Barrett Definition 6.10 and Theorem 6.12 provide the fully symmetric Rep(G) flat-connection calibration case only; they are not treated as a general transparent-sector factorization theorem.",
+        "role": "uses-special-case-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620",
+        "explanation": "DGNO Lemma 3.31 supports the double-braiding map, its transparent-invertible kernel, and the nondegenerate isomorphism. It does not supply the proposed premodular formula.",
+        "role": "uses-reference",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:dgno-0906-0620"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288",
+        "explanation": "Reutter supplies ordinary semisimple-TFT stable restrictions and the CYK fermionic/vanishing warning. Those ordinary results are not promoted to an alpha-marked twisted formula.",
+        "role": "uses-reference-with-scope-guardrail",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:reutter-2001-02288"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467",
+        "explanation": "Tham Definition 5.11 records premodular handle maps with categorical unit-channel projection data, warning against assuming an automatic scalar closed formula.",
+        "role": "uses-reference-as-failure-warning",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:tham-2108-13467"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-edge"
+      },
+      "revision_kind": "subject-edge"
+    },
+    {
+      "cid": "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
+      "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082",
+      "payload": {
+        "edge_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082",
+        "explanation": "Yetter is the primary source for the homologically twisted construction. The note keeps explicit the gap between its introductory arbitrary-A language and its printed Z/2 four-dimensional definitions.",
+        "role": "uses-reference-with-interpretation-gap",
+        "schema": "twisted-yetter/subject-edge/0",
+        "source": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "status": "active",
+        "target": "subject:twisted-yetter:paper:yetter-hepth-9311082"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082",
         "parents": [],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "subject-edge"
@@ -18136,6 +18617,74 @@
       "revision_kind": "subject-definition"
     },
     {
+      "cid": "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
+      "logical_id": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+      "payload": {
+        "aliases": [
+          "premodular-twisted-yetter-sector-sum-conjecture",
+          "premodular-sectorwise-quadratic-ansatz",
+          "transparent-sector-twisted-yetter-formula-proposal"
+        ],
+        "current_view_hints": {
+          "guardrail": "This is a materially qualified conjecture, not a theorem, proof, mathematical claim, adopted conclusion, or premodular computation. The general sector decomposition and the sectorwise quadratic law are separate open hypotheses.",
+          "headline": "Open conjectural hierarchy: an arbitrary premodular twisted value may admit a transparent-sector sum, with a stronger and independent sectorwise quadratic ansatz.",
+          "primary_note": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+          "source_transcript": "experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json"
+        },
+        "display_name": "Conjectural premodular Twisted Yetter sector/quadratic ansatz",
+        "formula_layers": [
+          {
+            "formula": "Z_C(M,alpha) ?= sum_{xi in S_C(M)} W_C(M,xi) F_C(M;xi,alpha)",
+            "id": "schematic-sector-sum",
+            "status": "PLAUSIBLE_SCHEMATIC_ANSATZ_NOT_CONSTRUCTED"
+          },
+          {
+            "formula": "F_C(M;xi,alpha)/F_C(M;xi,0) ?= <P_{q_C,xi}(PD(alpha)),[M]>",
+            "id": "sectorwise-quadratic-refinement",
+            "status": "STRONGER_INDEPENDENT_CONJECTURE_REQUIRES_NONVANISHING_AND_QUADRATICITY_CHECKS"
+          },
+          {
+            "formula": "Use unnormalized K_C^+ and K_C^- blocks when vacuum or marked amplitudes vanish; a block product is conditional on a proved marked connected-sum law and an actual connected-sum realization.",
+            "id": "zero-safe-block-version",
+            "status": "CONDITIONAL_REFORMULATION"
+          }
+        ],
+        "open_gates": [
+          "exact four-dimensional coefficient-group derivation from Yetter",
+          "construction and gluing law for the general premodular sector object S_C(M)",
+          "CP2 nonvanishing and quadraticity checks",
+          "S2xS2 mixed-term and basis-independence checks",
+          "local-coefficient and xi-alpha coupling",
+          "super-Tannakian/fermionic and spin branches",
+          "direct premodular computations"
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula",
+          "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
+          "subject:twisted-yetter:paper:yetter-hepth-9311082"
+        ],
+        "provenance_note": "The initial proposal was produced by gpt-5.6-sol at medium effort from 23:22-23:25 America/Edmonton; an ultra-effort adversarial self-review began at 23:28. The user's summary calls the episode 5.6-sol ultra around 23:30. The primary lab note preserves this distinction.",
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Navigation subject for a conjectural formula hierarchy for homologically twisted Yetter invariants with premodular ribbon fusion category input. The Rep(G) flat-connection example is retained only as a special calibration case. No general flat-sector factorization, simply-connected collapse, or quadratic alpha law is asserted.",
+        "status": "conjectural_self_reviewed_not_claim",
+        "subject_id": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "subject_kind": "ty:argument-proposal"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
       "logical_id": "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds",
       "payload": {
@@ -19901,6 +20450,52 @@
       "revision_kind": "subject:definition"
     },
     {
+      "cid": "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
+      "logical_id": "subject:twisted-yetter:paper:dgno-0906-0620",
+      "payload": {
+        "aliases": [
+          "dgno-on-braided-fusion-categories-i",
+          "invertibles-to-tensor-automorphisms-double-braiding"
+        ],
+        "display_name": "Drinfeld-Gelaki-Nikshych-Ostrik, On braided fusion categories I",
+        "equivalent_external_ids": [
+          "arxiv:0906.0620v3",
+          "doi:10.48550/arXiv.0906.0620"
+        ],
+        "external_references": [
+          {
+            "abs_url": "https://arxiv.org/abs/0906.0620",
+            "arxiv_id": "0906.0620",
+            "capture_date": "2026-07-16",
+            "kind": "arxiv",
+            "version": "v3",
+            "versioned_id": "0906.0620v3"
+          }
+        ],
+        "parent_subject_ids": [
+          "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature"
+        ],
+        "schema": "twisted-yetter/subject-definition/0",
+        "scope_note": "Reference subject for Lemma 3.31: double braiding maps invertible objects to tensor automorphisms of the identity, with transparent invertibles in the kernel, and gives an isomorphism for nondegenerate braided fusion categories. This reference does not construct a premodular Twisted Yetter coefficient theory or quadratic formula.",
+        "status": "active_reference_only",
+        "subject_id": "subject:twisted-yetter:paper:dgno-0906-0620",
+        "subject_kind": "ty:paper"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "subject:twisted-yetter:paper:dgno-0906-0620",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "subject-definition"
+      },
+      "revision_kind": "subject-definition"
+    },
+    {
       "cid": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
       "logical_id": "subject:twisted-yetter:paper:dong-schopieray-2407-15955",
       "payload": {
@@ -21281,6 +21876,7 @@
       "claim:lab-note:2026-07-16-step6-7-fail-closed-scan-gates": "ctlobj-sha256:706a20979b26b3bbc687c5c5e98f6f633cf298487d33514828237a31292817bc",
       "claim:lab-note:2026-07-16-step8-fail-closed-target-scan-gate": "ctlobj-sha256:7e345197a947aba1643ba113348081c95ac3a1afe33c950483bcb069f8fe22a5",
       "claim:lab-note:2026-07-16-twisted-yetter-modular-quadratic-block-prediction-audit": "ctlobj-sha256:0155ab61d99498c82d93bfc81b4c10aa5f8188773136da1b05e8c2778f103a3e",
+      "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit": "ctlobj-sha256:af0e3834a2de3277138cfc33d3ae449d14db00435ac23a535d99f05f70bd1755",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
@@ -21368,6 +21964,14 @@
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:lab-note": "ctlobj-sha256:5c3aadf49fe3c1aed9d00b2b13e5f75d33d43e297a479aeb0737b03e73e039c5",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:records:ordinary-normalization-note": "ctlobj-sha256:c1e71c30cb8e6b1429922582ddfbbccf212cc77e1d6a3a152517feec99fe3176",
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal": "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block": "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note": "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580": "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620": "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288": "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467": "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082": "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
       "subject-edge:ty:2026-07-16-quadratic-block-audit:records:lab-note": "ctlobj-sha256:f1bae1f2b08b5fca02c4061157c7a4585cb4f2494480adce3fefd96945b682ca",
       "subject-edge:ty:2026-07-16-quadratic-block-audit:refines:stable-no-go-computational-audit": "ctlobj-sha256:872110c5032c56efccbd1832dec44c42b306c3b4f85ab5a5cc26f11251491347",
       "subject-edge:ty:2026-07-16-quadratic-block-audit:tests-compatibility-of:modular-quadratic-formula": "ctlobj-sha256:e28b52d0e251c6760a62495927a935054c329128844b55a96e568d71e790e974",
@@ -21485,6 +22089,7 @@
       "subject-index:twisted-yetter:subject-layer-lane-v3": "ctlobj-sha256:1fc9df5165c01412e3e9c6dc023c40b40ee38cdb52d4284e042c1997464822d5",
       "subject:twisted-yetter:4-manifold:e1": "ctlobj-sha256:748cc297e76c916fcb4b165bfff96f12f0f7f8353c26314f36ddbd52fcecc322",
       "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula": "ctlobj-sha256:3457bbddabebed90abf92aea060030bda8ea53a7ded6a765dc076f814cb3d15b",
+      "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz": "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
       "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds": "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5",
       "subject:twisted-yetter:book:gompf-stipsicz-4-manifolds-and-kirby-calculus": "ctlobj-sha256:2cb54dcb4d9927bdb94e8124bf23587cfe142f6c222b9336c976e8c8fbb00cdc",
       "subject:twisted-yetter:category-family:drinfeld-double": "ctlobj-sha256:662d51c255660effd5cfab73d5b716a630c32ef46c65f22b3a85b15c01bd3cea",
@@ -21525,6 +22130,7 @@
       "subject:twisted-yetter:paper:bruillard-ortiz-1612-08769": "ctlobj-sha256:7caa2be62aed50c2d28c77f0935ec99b8a470559bd498870e6bfa2ba907a2a48",
       "subject:twisted-yetter:paper:burke-2402-15087-provisional": "ctlobj-sha256:50f6257773f7a5bb03537f2a92e5147df6468d593d1765975310ef411396eef0",
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e",
+      "subject:twisted-yetter:paper:dgno-0906-0620": "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
       "subject:twisted-yetter:paper:dong-schopieray-2407-15955": "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26",
       "subject:twisted-yetter:paper:freedman-topology-four-dimensional-manifolds-1982": "ctlobj-sha256:7121615e341f74d3942baf957fc6d59c65a11cd4bf6fe2aceac04ec1ac0864af",
       "subject:twisted-yetter:paper:furuta-monopole-11-8-2001": "ctlobj-sha256:933c99913202f55bafa3d1b9b96b3b938b5f17223620c4486eb18a53eafd3caf",
@@ -21814,6 +22420,9 @@
         "ctlobj-sha256:0155ab61d99498c82d93bfc81b4c10aa5f8188773136da1b05e8c2778f103a3e",
         "ctlobj-sha256:857d029c5c695dc550fc164b7b0c1a1eed4424df5d72b3ab710400f2c8d74425"
       ],
+      "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review": [
+        "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e"
+      ],
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": [
         "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b"
       ],
@@ -22076,6 +22685,30 @@
       ],
       "subject-edge:ty:2026-07-16-figure21-pointed-comparison:uses:low-rank-mtc-classification": [
         "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal": [
+        "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block": [
+        "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note": [
+        "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580": [
+        "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620": [
+        "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288": [
+        "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467": [
+        "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab"
+      ],
+      "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082": [
+        "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad"
       ],
       "subject-edge:ty:2026-07-16-quadratic-block-audit:records:lab-note": [
         "ctlobj-sha256:f1bae1f2b08b5fca02c4061157c7a4585cb4f2494480adce3fefd96945b682ca"
@@ -22440,6 +23073,9 @@
         "ctlobj-sha256:3457bbddabebed90abf92aea060030bda8ea53a7ded6a765dc076f814cb3d15b",
         "ctlobj-sha256:fbe65adcfc82b6c81665fee8949b7a0a2f3a44736f493ef2035f4f0c50eddeb0"
       ],
+      "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz": [
+        "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3"
+      ],
       "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds": [
         "ctlobj-sha256:d585280b1fffa3eb1c6ccbbf018911dabddfba1231f702019336fee1e03150f5"
       ],
@@ -22571,6 +23207,9 @@
       ],
       "subject:twisted-yetter:paper:crane-kauffman-yetter-hepth-9409167": [
         "ctlobj-sha256:9d430e9c1a0ec5ed0e25f34ad4d57707d4e4879b17686ca15f3eef55b31ec47e"
+      ],
+      "subject:twisted-yetter:paper:dgno-0906-0620": [
+        "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4"
       ],
       "subject:twisted-yetter:paper:dong-schopieray-2407-15955": [
         "ctlobj-sha256:da6229c9f4baa005a2f98fd478852fdd16fd3dab59d4b0dfdca51fcaed914a26"
@@ -22746,11 +23385,13 @@
         "ctlobj-sha256:20f6235a2eeaece3f052994dd8d92174f0f3aba62b7d565fcd82ea8a85355c63",
         "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
+        "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
         "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0",
         "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
         "ctlobj-sha256:238b43ce9cb239262eae619afe3f6f19ee76a40f1a778692089e7351a181544b",
         "ctlobj-sha256:24313f5ae5bfb588a6cc21f1b4421378963d379fd89368b644e96582201753e0",
+        "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
         "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef",
         "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
         "ctlobj-sha256:27371b8ed263820ddac3cc7cc9a298efd1d7d8b1e4ca26cc4384340e73b5efe5",
@@ -22801,8 +23442,10 @@
         "ctlobj-sha256:48a37a22e6629270bf33d257b2551b283c8412540a0ddc56f8c401aeb61f0c72",
         "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
         "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
+        "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
         "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb",
         "ctlobj-sha256:4aae4b230c0d15dcf0d0798378aadd16c11e25dfc8d6a32497e56da989d22beb",
+        "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
         "ctlobj-sha256:4d04300de92cd9cb37f1dd3451c382c1200a78d3b7dcae24f53e5d13408ca81c",
         "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
@@ -22836,6 +23479,7 @@
         "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
         "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed",
         "ctlobj-sha256:62874d12efe75fcfc37ca67e099a10b8237aa61eaddbc076d8c775386015fad1",
+        "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
         "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0",
         "ctlobj-sha256:6526f8e5348b6d4ea90a86c5ddc1795a7b66e642511aebf4eb0ed7b2fcc07fb1",
         "ctlobj-sha256:652ea63e096a38fb0e4ef40e95cb5f0568e9fcc0414e3b731e11f666f393f750",
@@ -22885,6 +23529,8 @@
         "ctlobj-sha256:80592b89ef38bf723f6b8ac80d543b073d728c52f9cdb505b07527275c87746f",
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
         "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
+        "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+        "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
         "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
         "ctlobj-sha256:82d311e77ff209621c724e149676cd74b4bcdbb94979758d03a9943a59efc1e7",
         "ctlobj-sha256:8323e04898d5c45bec52a6cb77b6d7e9ab619219054f07d53b173f2a78675558",
@@ -22901,6 +23547,7 @@
         "ctlobj-sha256:872110c5032c56efccbd1832dec44c42b306c3b4f85ab5a5cc26f11251491347",
         "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
         "ctlobj-sha256:878c8bc52da61d196d0e1fbda5417552321aff5ee798e003c88b2a1e817793b0",
+        "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
         "ctlobj-sha256:888c919eee9800a96c0437b46223467a245f569241c2536d7956fdfd0ec0f5b3",
         "ctlobj-sha256:89215b64debc20c4abaff99465210beead041b334d507c6e544a65f946daef69",
         "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
@@ -22931,6 +23578,7 @@
         "ctlobj-sha256:994e5c5d063a97c29dc86aab5c09973ba3f14c6de21acda523e780802d294eb3",
         "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
         "ctlobj-sha256:9aaa6f028b641e019668857586b41df426e2dbc75d4c85850768fbae5eecc861",
+        "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
         "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9bdca6b2754a0df0155933187407c71a369bc10b1d40a1f9b9f2608cd1d7f71c",
@@ -22984,6 +23632,7 @@
         "ctlobj-sha256:b49bd5353b27c1ea6db7aab4a135925533b86147737f3b78efe2fc7a2dbf467a",
         "ctlobj-sha256:b4b00e869fc0c0e3dea6f5994307405754167b96b2bbe51766a65fec08d48a07",
         "ctlobj-sha256:b52597579841c4c9947da2c65c969f313254883c27ae967732742af28d9b57ea",
+        "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
         "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f",
         "ctlobj-sha256:b5f892a503534eec578e317214d5a09931359dc60b278f64692323551e776d88",
         "ctlobj-sha256:b6f867a52a5a8d29fb6dc94ae49154b52f9228c63970ae5cc7e9666ce71a488f",
@@ -23073,6 +23722,7 @@
         "ctlobj-sha256:f09f1b037c03bae9d4abac36a09ba9ca397c02ede2174eaaf012a17543e606eb",
         "ctlobj-sha256:f1bae1f2b08b5fca02c4061157c7a4585cb4f2494480adce3fefd96945b682ca",
         "ctlobj-sha256:f216f081e23070584e37143bd02e3262eef81a7c7e72f039a187cdea4d11b2b5",
+        "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
         "ctlobj-sha256:f2a383248ce492ad0d7650eae18518f7a4bf688ca621e499673a75636212fb78",
         "ctlobj-sha256:f2d9436e7b76429024c8ed8d7dcdec9a3c6646a76075e84d1e24cb5a06658070",
         "ctlobj-sha256:f3642f26222b5efee9b30f7988bce08c5f1b46177d04a51583d5f1423f10c2c2",
@@ -23179,6 +23829,7 @@
         "ctlobj-sha256:623f94d2709dca2692b618620180e64dcc68b14c2de6810cf9ee56adaded0487",
         "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed",
         "ctlobj-sha256:62874d12efe75fcfc37ca67e099a10b8237aa61eaddbc076d8c775386015fad1",
+        "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
         "ctlobj-sha256:65598753cc6c357256d11463645f965b28f1de0fde5c74531fb6f4ad7649dd47",
         "ctlobj-sha256:660bfdbdd6a97a646473a97def9f995239dcfdc4630a96ecab04e34350c564e8",
         "ctlobj-sha256:66f79031ec324ce4e7b356da945fb5a21c05109fc06946c007068ead69c5162d",
@@ -23315,6 +23966,7 @@
         "ctlobj-sha256:1c05543b55ff41ef97d033eff3efe71dacd4c9297bf1a5497f05092f9ce8fb59",
         "ctlobj-sha256:1d127c3d6d7a682e2ec937d899257925588eb4dff9aa247f1715c7b3f64264f0",
         "ctlobj-sha256:207c84ad6c6dc276e4ea636033faa0b4e3b0a2eed27c573ca431e417deabb08b",
+        "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
         "ctlobj-sha256:27d82f4aff90d2448ad76c260e09543da9639c49852066957e007ac1c17b4ae6",
         "ctlobj-sha256:28aa32af5fd69e5aed6aab7031d1260f80f4ac565c9467ccb552b6088d8378d3",
         "ctlobj-sha256:2a75044883754becc29478ea5b80d2ddc314b2f049dcfeb224bf317a1dbf8f1f",
@@ -23325,6 +23977,7 @@
         "ctlobj-sha256:3b7a76a85ac169afc9860f57604e50fc5c1a593dc3ff676a00138ebe35495b33",
         "ctlobj-sha256:3bc5791d451189e540932ee352f99cc1f9180b49208cd69af3d245333c252725",
         "ctlobj-sha256:46107f722b05d9e1b7f69557bcce58d21ce89fb962fd50b2b3654464a15b22f5",
+        "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
         "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1",
         "ctlobj-sha256:52ec8eee2dea8777198c2afeef580e969a0ca72ffb0b21f13d4dc1859d81ded5",
         "ctlobj-sha256:60ae1a55e4fab7af93cd27aee93fa48961654ad26fa78be2104e34bbef674ea6",
@@ -23410,6 +24063,7 @@
         "ctlobj-sha256:1db2736ed1339d48d05a6c0e3deeb629eda0be30d1a6299b423f524563e1b0da",
         "ctlobj-sha256:1e2fdd365cfe72e755b8bad430f429623ea4598d0a0bc6bfe0f838f003c9cb26",
         "ctlobj-sha256:2150a8ef00fae5a53022cf9f4d18da1b1b9476b5ef86deb20c9667add29d9435",
+        "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
         "ctlobj-sha256:2368849dd3a4b86169cf719a984c9e2997769748685fdd02197537a55a6ebabc",
         "ctlobj-sha256:2691206320c1268f9fbfb62c8564b7fad8ab47d230fb9574b4ace45ff54f89e8",
         "ctlobj-sha256:27f04e6ce4a6d7a371659fd2e401f7ea7937e40f5017b7a156049611d86c84f9",
@@ -23428,6 +24082,7 @@
         "ctlobj-sha256:44f3ed1d785e04b12a40c62b58b06f7ea589fed2a2a7bc3d05c31027b59ea005",
         "ctlobj-sha256:48f6c4ff9532e2aeb86fc61c9ef9c3f6c5fcc5c47aa26c8f58e569bc3d01ec75",
         "ctlobj-sha256:4a6536b5e578319e84bcbb72ba499d233ef734d7e601670a68ffb898611af8cc",
+        "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
         "ctlobj-sha256:4f1cd34d9d822189581dd944d05fc0f417654319da55fba5e0f4c9e62dc4f092",
         "ctlobj-sha256:4fc3bea86d2d7e29c1bc964eaf7f87086216f997f45ec901d5a348b0e1be3b4b",
         "ctlobj-sha256:5145d018939ad86b0109d2d5e4801e2f231a43c666d462ad89c8c306c31ae6e6",
@@ -23450,18 +24105,22 @@
         "ctlobj-sha256:7fa0a6c97c992d35994b10dc66a0061a0bf3e46ab424fe4ff8943533840b393e",
         "ctlobj-sha256:80809409a3e1fe95af64f30f36dc1dc0ce46d2fc676cfcf487d8a3c69dc397fd",
         "ctlobj-sha256:80f0aa2e6a8f76329da2031f98cfcc7f276ea9e19e1966ceace9f4084756b8e2",
+        "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+        "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
         "ctlobj-sha256:8323e04898d5c45bec52a6cb77b6d7e9ab619219054f07d53b173f2a78675558",
         "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede",
         "ctlobj-sha256:856943fe9e8510e74934e0bcaf835be8583e1879fa9f588fd4ecda23ef55f68b",
         "ctlobj-sha256:868a6f0d50e24cb72b68a3c399841935e37f20b80fc35c53276a8c9dca717e7b",
         "ctlobj-sha256:872110c5032c56efccbd1832dec44c42b306c3b4f85ab5a5cc26f11251491347",
         "ctlobj-sha256:87218df30588ddd7896c57d6f77fb8774f179ce197dfb2a443c50e3b187d3e54",
+        "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
         "ctlobj-sha256:8923566d0278e57fbf225b5a22462fe1b00e1a91ee82d0c9785681b43a7fcaca",
         "ctlobj-sha256:8fa9a1bf59f6baa2f22fae7a2c50bcefb792fd88e17c7998dc9fe35132bc6ad5",
         "ctlobj-sha256:9558ad3a4f8cb4eca48234bdcacd1b07380e5068d0a759cc2a550175f2ccbbe2",
         "ctlobj-sha256:96e2108ec31d35883097344203578faa2fc69bf6809d153438ad82209447d512",
         "ctlobj-sha256:986e34ef34fab5d8a0950dadc1f20040b0ad24d0550fdf47766d6bc7bdd62c78",
         "ctlobj-sha256:9a88b88d912403f33bd82b58158b72a921d63276e0f0703d054314aef408f408",
+        "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
         "ctlobj-sha256:9bb269f498ecffa8e67deff22cdffecfb9cd49af0e58dc793db87ea05d70c457",
         "ctlobj-sha256:9c69cd65c96f75d66449162944595e2cad6217ee14622fce5f7806f191099cac",
         "ctlobj-sha256:9c8f89a612096875c9c762d11aa444a11db1a6cee3f4b2349c09dd14d201187f",
@@ -23477,6 +24136,7 @@
         "ctlobj-sha256:ae93b9f63a8520c46345b5a5d6f7a6ed936d242e9b5a7e262341943e32bbd8a5",
         "ctlobj-sha256:b096ffcc9a92870bd47c9bf13b78fcd0d3820ae527c9ec11497a164af3c9a33b",
         "ctlobj-sha256:b2228764e72bac7b0b0db87bd7bb5b251f572ba87d481995009058f13089028f",
+        "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
         "ctlobj-sha256:b5f892a503534eec578e317214d5a09931359dc60b278f64692323551e776d88",
         "ctlobj-sha256:b7cd2230324a3af0e982a2702b8509524105be72bf86116bf46f725b0107832c",
         "ctlobj-sha256:ba5082074b3f0ed6aa6eb9f1eb31ed897598dba0c1b4de55c79125eecfd36def",
@@ -23499,6 +24159,7 @@
         "ctlobj-sha256:eb3824eff7774d34231f5995a8c9268a9c98c82ff0bbcb52117ff2a20cd65811",
         "ctlobj-sha256:eee94193c60cd3c911b8c9547e968ffa079e2f33cb823195d7725ab29bae0360",
         "ctlobj-sha256:f1bae1f2b08b5fca02c4061157c7a4585cb4f2494480adce3fefd96945b682ca",
+        "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
         "ctlobj-sha256:f4364851020c3d2fee98f67eea11d0f3c2d4821f2b56dd4c7ded1727a003b52e",
         "ctlobj-sha256:f465e66f221c8819fdba20704f5ef85de1ffbf5975d2d7e444d09b9b18e4a8aa",
         "ctlobj-sha256:f4be37b8c787aa41f97b55b72d5d52eca7a0051ed008cec17fc890dbfaccd9f0"
@@ -24099,6 +24760,15 @@
           "path": "$.revision_of.previous_graph_cid",
           "source_cid": "ctlobj-sha256:6240e63b545744afd52554baa8fe03f3991c60180339698e106ba736a40af0ed",
           "target_cid": "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583"
+        }
+      ],
+      "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
+          "target_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44"
         }
       ],
       "ctlobj-sha256:65598753cc6c357256d11463645f965b28f1de0fde5c74531fb6f4ad7649dd47": [
@@ -30490,6 +31160,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0": [
         {
           "admission_batch_cid": null,
@@ -31080,6 +31770,26 @@
           "payload_file": "ctl-dogfood/graphs/computation-first-v9.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef": [
@@ -33915,6 +34625,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb": [
         {
           "admission_batch_cid": null,
@@ -34448,6 +35178,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1": [
         {
           "admission_batch_cid": null,
@@ -34776,6 +35526,23 @@
           ],
           "parent_root_cid": "ctlobj-sha256:fc58134b843d6146ce3f5b3fc1f8fcdf78afb4084a385ccd973fea382f6a302a",
           "path": "manifests/batch-admission-2026-07-17-0e8c94a13f19d350.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/batch-admission-manifest/1"
@@ -41210,6 +41977,26 @@
           "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0": [
         {
           "admission_batch_cid": null,
@@ -43307,6 +44094,46 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": [
         {
           "admission_batch_cid": null,
@@ -44135,6 +44962,26 @@
           "payload_file": "ctl-dogfood/graphs/computation-first-v9.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:888c919eee9800a96c0437b46223467a245f569241c2536d7956fdfd0ec0f5b3": [
@@ -46332,6 +47179,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93": [
         {
           "admission_batch_cid": "ctlobj-sha256:b197eef3139f71b1fe5c069937eb5f0677eb4c1b36a1f1e9732eb7997a938683",
@@ -48202,6 +49069,26 @@
           "payload_file": "ctl-dogfood/subject-layer/definitions/claim-cluster-cp2-2cpbar-character-twist-signal.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
         }
       ],
       "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f": [
@@ -53260,6 +54147,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29": [
+        {
+          "admission_batch_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d",
+          "child_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "created_at": "2026-07-17T05:44:03Z",
+          "current_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "generated_at": null,
+          "logical_id": null,
+          "manifest_kind": "batch-admission",
+          "matched_by": [
+            "binding_logical_ids",
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+          "path": "manifests/batch-admission-2026-07-17-77886b18b15b5dfb.json",
+          "payload_file": null,
+          "profile": null,
+          "schema": "ctl-dogfood/batch-admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:f2a383248ce492ad0d7650eae18518f7a4bf688ca621e499673a75636212fb78": [
         {
           "admission_batch_cid": null,
@@ -57610,6 +58517,36 @@
         },
         "word_count": 30
       },
+      "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:219c2685fb4c7bbd1ec3d35048ca9f0bd4ed005eb52d45905373592ed476c2d9",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 168,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:dgno-0906-0620\",\"explanation\":\"DGNO Lemma 3.31 supports the double-braiding map, its transparent-invertible kernel, and the nondegenerate isomorphism. It does not supply the proposed premodular formula.\",\"role\":\"uses-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:dgno-0906-0620\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 513,
+          "base_estimate": 146,
+          "estimated_tokens": 168,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 22,
+          "serialized_character_count": 513,
+          "unicode_scalar_count": 513,
+          "utf8_bytes": 513
+        },
+        "word_count": 22
+      },
       "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0": {
         "active_state": "active",
         "cid": "ctlobj-sha256:22a3b62031029887da2f10d5f93279abdbf8072b9324a6887c0a30918d6dddb0",
@@ -57759,6 +58696,36 @@
           "utf8_bytes": 81600
         },
         "word_count": 5840
+      },
+      "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:25bb2380c6a15954924c017399117093f4ce2b34ee64f172eae6055fc530f3a3",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 976,
+        "gist": "conjectural_self_reviewed_not_claim",
+        "logical_id": "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"premodular-twisted-yetter-sector-sum-conjecture\",\"premodular-sectorwise-quadratic-ansatz\",\"transparent-sector-twisted-yetter-formula-proposal\"],\"current_view_hints\":{\"guardrail\":\"This is a materially qualified conjecture, not a theorem, proof, mathematical claim, adopted conclusion, or premodular computation. The general sector decomposition and the sectorwise quadratic law are separate open hypotheses.\",\"headline\":\"Open conjectural hierarchy: an arbitrary premodular twisted value may admit a transparent-sector sum, with a stronger and independent sectorwise quadratic ansatz.\",\"primary_note\":\"claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review\",\"source_transcript\":\"experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json\"},\"display_name\":\"Conjectural premodular Twisted Yetter sector/quadratic ansatz\",\"formula_layers\":[{\"formula\":\"Z_C(M,alpha) ?= sum_{xi in S_C(M)} W_C(M,xi) F_C(M;xi,alpha)\",\"id\":\"schematic-sector-sum\",\"status\":\"PLAUSIBLE_SCHEMATIC_ANSATZ_NOT_CONSTRUCTED\"},{\"formula\":\"F_C(M;xi,alpha)/F_C(M;xi,0) ?= <P_{q_C,xi}(PD(alpha)),[M]>\",\"id\":\"sectorwise-quadratic-refinement\",\"status\":\"STRONGER_INDEPENDENT_CONJECTURE_REQUIRES_NONVANISHING_AND_QUADRATICITY_CHECKS\"},{\"formula\":\"Use unnormalized K_C^+ and K_C^- blocks when vacuum or marked amplitudes vanish; a block product is conditional on a proved marked connected-sum law and an actual connected-sum realization.\",\"id\":\"zero-safe-block-version\",\"status\":\"CONDITIONAL_REFORMULATION\"}],\"open_gates\":[\"exact four-dimensional coefficient-group derivation from Yetter\",\"construction and gluing law for the general premodular sector object S_C(M)\",\"CP2 nonvanishing and quadraticity checks\",\"S2xS2 mixed-term and basis-independence checks\",\"local-coefficient and xi-alpha coupling\",\"super-Tannakian/fermionic and spin branches\",\"direct premodular computations\"],\"parent_subject_ids\":[\"subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula\",\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\",\"subject:twisted-yetter:paper:yetter-hepth-9311082\"],\"provenance_note\":\"The initial proposal was produced by gpt-5.6-sol at medium effort from 23:22-23:25 America/Edmonton; an ultra-effort adversarial self-review began at 23:28. The user's summary calls the episode 5.6-sol ultra around 23:30. The primary lab note preserves this distinction.\",\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Navigation subject for a conjectural formula hierarchy for homologically twisted Yetter invariants with premodular ribbon fusion category input. The Rep(G) flat-connection example is retained only as a special calibration case. No general flat-sector factorization, simply-connected collapse, or quadratic alpha law is asserted.\",\"status\":\"conjectural_self_reviewed_not_claim\",\"subject_id\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"subject_kind\":\"ty:argument-proposal\"}",
+        "title": "conjectural_self_reviewed_not_claim",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 3011,
+          "base_estimate": 848,
+          "estimated_tokens": 976,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 128,
+          "serialized_character_count": 3011,
+          "unicode_scalar_count": 3011,
+          "utf8_bytes": 3011
+        },
+        "word_count": 198
       },
       "ctlobj-sha256:25fb50ddef9921f5f345fb865f61d581a5f60bcd446db6d9ed75d8f2948130ef": {
         "active_state": "superseded",
@@ -59260,6 +60227,36 @@
         },
         "word_count": 12
       },
+      "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:4a67bbd73b1cfed93d508fb9453c58be24ad859a102d1c5837e6741f2101c7f0",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 179,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:reutter-2001-02288\",\"explanation\":\"Reutter supplies ordinary semisimple-TFT stable restrictions and the CYK fermionic/vanishing warning. Those ordinary results are not promoted to an alpha-marked twisted formula.\",\"role\":\"uses-reference-with-scope-guardrail\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:reutter-2001-02288\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 548,
+          "base_estimate": 155,
+          "estimated_tokens": 179,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 24,
+          "serialized_character_count": 548,
+          "unicode_scalar_count": 548,
+          "utf8_bytes": 548
+        },
+        "word_count": 22
+      },
       "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb",
@@ -59319,6 +60316,36 @@
           "utf8_bytes": 4100
         },
         "word_count": 204
+      },
+      "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:4b171fe888284c830222cda047af65f5b765ecc60942e7f8fe3a0b77283064c4",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 344,
+        "gist": "active_reference_only",
+        "logical_id": "subject:twisted-yetter:paper:dgno-0906-0620",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-definition",
+        "search_text": "{\"aliases\":[\"dgno-on-braided-fusion-categories-i\",\"invertibles-to-tensor-automorphisms-double-braiding\"],\"display_name\":\"Drinfeld-Gelaki-Nikshych-Ostrik, On braided fusion categories I\",\"equivalent_external_ids\":[\"arxiv:0906.0620v3\",\"doi:10.48550/arXiv.0906.0620\"],\"external_references\":[{\"abs_url\":\"https://arxiv.org/abs/0906.0620\",\"arxiv_id\":\"0906.0620\",\"capture_date\":\"2026-07-16\",\"kind\":\"arxiv\",\"version\":\"v3\",\"versioned_id\":\"0906.0620v3\"}],\"parent_subject_ids\":[\"subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature\"],\"schema\":\"twisted-yetter/subject-definition/0\",\"scope_note\":\"Reference subject for Lemma 3.31: double braiding maps invertible objects to tensor automorphisms of the identity, with transparent invertibles in the kernel, and gives an isomorphism for nondegenerate braided fusion categories. This reference does not construct a premodular Twisted Yetter coefficient theory or quadratic formula.\",\"status\":\"active_reference_only\",\"subject_id\":\"subject:twisted-yetter:paper:dgno-0906-0620\",\"subject_kind\":\"ty:paper\"}",
+        "title": "active_reference_only",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 1057,
+          "base_estimate": 299,
+          "estimated_tokens": 344,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 45,
+          "serialized_character_count": 1057,
+          "unicode_scalar_count": 1057,
+          "utf8_bytes": 1057
+        },
+        "word_count": 50
       },
       "ctlobj-sha256:4b7a5b6ebf5dd01d9f17e724912fe8fee0a05e233c3c1a3d351c53acf1e4fcd1": {
         "active_state": "active",
@@ -60339,6 +61366,36 @@
           "utf8_bytes": 314
         },
         "word_count": 1
+      },
+      "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 4957,
+        "gist": "NOT A THEOREM, NOT A PROOF, NOT A MATHEMATICAL CLAIM, AND NOT AN ADOPTED PROJECT CONCLUSION. This note preserves a gpt-5.6-sol proposal and its ultra-effort adversarial self-review from 2026-07-16 around 23:30 America/Edmonton. The initial answer required material corrections....",
+        "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"candidate_hierarchy\":[{\"formula_or_statement\":\"If the three separately recorded stable-no-go proof obligations are proved with the required markings and normalizations, the total homologically twisted Yetter invariant cannot distinguish closed simply connected homeomorphic smooth 4-manifolds after transporting the homology marking.\",\"id\":\"level-0-conditional-stable-no-go\",\"relationship_to_formula\":\"This conditional consequence does not imply that the alpha-dependence is quadratic and does not construct an explicit formula.\",\"status\":\"INHERITED_CONDITIONAL_ARGUMENT_NOT_ESTABLISHED\"},{\"formula_or_statement\":\"Z_C(M,alpha) ?= sum_{xi in S_C(M)} W_C(M,xi) F_C(M;xi,alpha)\",\"id\":\"level-1-schematic-transparent-sector-ansatz\",\"required_interpretation\":[\"S_C(M) is an as-yet unconstructed set or groupoid of sectors associated with the transparent/symmetric part of C.\",\"The notation does not assert that every sector is a flat principal G-bundle.\",\"The notation does not assert a canonical measure, normalization, or scalar decomposition for arbitrary premodular C.\",\"Until S_C(M), W_C, and F_C are constructed, this level is a structural ansatz rather than a predictive formula.\"],\"status\":\"PLAUSIBLE_SCHEMATIC_ANSATZ_NOT_SOURCE_PROVED\"},{\"formula_or_statement\":\"For a fixed sector xi, F_C(M;xi,alpha)/F_C(M;xi,0) ?= <P_{q_C,xi}(PD(alpha)),[M]>; in a torsion-free constant-coefficient homology basis this becomes product_i q_C,xi(a_i)^(Q_ii) product_{i<j} b_C,xi(a_i,a_j)^(Q_ij).\",\"id\":\"level-2-sectorwise-quadratic-refinement\",\"required_hypotheses\":[\"The relevant coefficient group or local system is defined by the actual twisted construction.\",\"The reference amplitude in the chosen sector is nonzero.\",\"The CP2 calibration values are nonzero where division is used.\",\"The calibrated function satisfies q(0)=1 and has biadditive bilinearization b(a,b)=q(a+b)/(q(a)q(b)).\",\"Basis independence and the appropriate Pontryagin-square or quadratic-cohomology operation are proved.\",\"Any mixed coupling between xi and alpha is incorporated rather than silently discarded.\"],\"status\":\"STRONGER_CONJECTURE_NOT_IMPLIED_BY_LEVEL_0_OR_LEVEL_1\"},{\"formula_or_statement\":\"Define K_C^+(a)=Z_C(CP2,a) and K_C^-(a)=Z_C(CPbar2,a). If the marked connected-sum law Z(X#Y,alpha+beta)=Z(X,alpha)Z(Y,beta)/Z(S4,0) is proved and M is actually presented as a marked connected sum of p positive and q negative projective-plane blocks, then Z(M,alpha) ?= Z(S4,0)^(1-p-q) product_i K_C^+(a_i) product_j K_C^-(b_j).\",\"id\":\"level-3-zero-safe-block-ansatz\",\"required_hypotheses\":[\"No ratio by a vanishing vacuum amplitude is taken.\",\"The exact Yetter connected-sum normalization is established.\",\"The formula is applied to an actual marked connected-sum realization, not inferred merely from an isomorphic intersection form.\",\"Fermionic and spin-dependent branches are kept explicit.\"],\"status\":\"CONDITIONAL_ZERO_SAFE_REFORMULATION_NOT_GENERAL_FORMULA\"}],\"coefficient_group_warning\":{\"candidate\":\"A_C=Aut_tensor(Id_C)\",\"source_backed_part\":\"Yetter's introductory categorical setup discusses a group A of functorial tensor automorphisms.\",\"status\":\"INTERPRETIVE_GENERALIZATION_REQUIRES_DERIVATION\",\"warning\":\"The printed four-dimensional Definitions 6 and 9 specialize the displayed homology coefficients to Z/2. This note does not promote the arbitrary-A four-dimensional extension to a theorem by interpretation.\"},\"created_at\":\"2026-07-17T05:41:00Z\",\"created_by\":\"actor:codex\",\"ctl_storage_semantics\":{\"mathematical_claim_semantics\":false,\"note\":\"The CTL API stores admitted objective notes in a revision envelope whose revision_kind is named claim and whose logical-id prefix is claim:lab-note. Those storage words do not make the payload a mathematical claim.\",\"requested_object_kind\":\"conversation-derived conjecture plus adversarial self-review\"},\"epistemic_status\":{\"expert_review_completed\":false,\"formal_mathematical_claim_made\":false,\"formal_mathematical_theorem_claim_made\":false,\"machine_checked_premodular_computational_statement_made\":false,\"project_conclusion_adopted\":false,\"status\":\"CONJECTURAL_SELF_REVIEWED_WITH_MATERIAL_QUALIFICATIONS\"},\"explicit_non_claims\":[\"This note is not a theorem, proof, proof certificate, or mathematical claim.\",\"This note does not assert that the proposed premodular formula is correct.\",\"This note does not assert that every premodular Crane-Yetter theory canonically decomposes into transparent flat-connection sectors.\",\"This note does not assert that simply connectedness collapses every possible arbitrary-premodular sector construction to one sector.\",\"This note does not assert that every sector has quadratic alpha-dependence.\",\"This note does not identify the radical of a conjectural coefficient-group quadratic form with transparent objects.\",\"This note does not assert that CP2 ratios exist when a denominator or relevant numerator vanishes.\",\"This note does not infer a connected-sum block product from an intersection-form diagonalization alone.\",\"This note does not prove an arbitrary-A four-dimensional extension of Yetter's printed Z/2 construction.\",\"This note does not prove a premodular no-go theorem for twisted Yetter invariants.\",\"This note does not contain a premodular Figure 21 computation or any premodular machine-checked row.\",\"The 201 modular quadratic compatibility rows support only the separate modular candidate on a frozen denominator and are not evidence that the premodular sector ansatz is universal.\",\"Ordinary Crane-Yetter-Kauffman stable-diffeomorphism results are not silently promoted to an alpha-marked twisted theorem.\",\"The user-reported and session-verified model/effort provenance is not evidence for mathematical correctness.\"],\"falsification_and_upgrade_program\":[{\"gate\":\"coefficient-definition\",\"required_result\":\"Derive the exact four-dimensional coefficient group and action from Yetter's construction, including whether and how the introductory arbitrary-A setup extends the printed Z/2 definitions.\",\"status\":\"OPEN\"},{\"gate\":\"sector-construction\",\"required_result\":\"Construct S_C(M), its weighting/measure, and the gluing law for a genuinely premodular category; prove rather than assume a scalar sector decomposition.\",\"status\":\"OPEN\"},{\"gate\":\"cp2-calibration\",\"required_result\":\"Compute all marked CP2 block amplitudes, record zeros, and test q(0)=1 and quadratic identities before naming any ratio q.\",\"status\":\"OPEN\"},{\"gate\":\"mixed-term-calibration\",\"required_result\":\"Use marked S2xS2 or another certified off-diagonal form to test bilinearity and detect xi-alpha mixed coupling.\",\"status\":\"OPEN\"},{\"gate\":\"rep-g-special-case\",\"required_result\":\"Recover the B\u00e4renz-Barrett Rep(G) flat-connection count with the exact normalization, then add the homological twist and test whether the proposed sectorwise structure survives.\",\"status\":\"OPEN\"},{\"gate\":\"non-tannakian-and-fermionic-cases\",\"required_result\":\"Treat super-Tannakian/fermionic centers, spin dependence, and vanishing Gauss-sum branches without dividing by zero.\",\"status\":\"OPEN\"},{\"gate\":\"premodular-figure21\",\"required_result\":\"Obtain a certified premodular evaluator and H2 marking before using Figure 21 as direct evidence.\",\"status\":\"BLOCKED_CURRENT_BACKEND_CANNOT_RUN_FULL_PREMODULAR_FIGURE21\"}],\"git_preflight\":{\"ctl_root_before_work\":\"ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44\",\"ctl_verify_before_work\":\"PASS\",\"source_repo_clean_before_work\":true,\"source_repo_commit_before_work\":\"f99571c8765bc2d0ac77f8793f21cabc394099c6\"},\"material_corrections_to_the_initial_proposal\":[{\"corrected_form\":\"Only the fully symmetric special case C=Rep(G) is source-backed here as a flat-G-connection model. For arbitrary premodular C, the sector sum remains schematic.\",\"initial_form\":\"Transparent/Mueger-center data generally produce flat sectors over which the invariant sums.\",\"reason\":\"B\u00e4renz-Barrett Theorem 6.12 does not prove that factorization for every category having Rep(G) as center.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"Simply connectedness collapses Hom(pi1(M),G) in the Rep(G) special case. No general arbitrary-premodular sector-collapse theorem is asserted.\",\"initial_form\":\"A simply connected manifold normally has only the trivial transparent sector.\",\"reason\":\"A general sector construction has not been defined, and super-Tannakian/fermionic data may require different structures.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"Quadratic alpha-dependence is an additional conjecture requiring CP2 and mixed-form checks sector by sector.\",\"initial_form\":\"Inside each sector alpha contributes through a possibly degenerate quadratic refinement.\",\"reason\":\"Neither stable invariance nor a sector decomposition implies quadraticity.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"A CP2 ratio is only a candidate q after nonvanishing and quadratic identities have been checked.\",\"initial_form\":\"Define q_C(a)=Z_C(CP2,a)/Z_C(CP2,0).\",\"reason\":\"The denominator or numerator can vanish, and a defined ratio need not be a quadratic function.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"The unnormalized K^+/K^- product is conditional on the exact connected-sum law and an actual marked connected-sum decomposition.\",\"initial_form\":\"For a diagonal intersection form, multiply the projective-plane block amplitudes.\",\"reason\":\"An intersection-form diagonalization does not by itself give a smooth marked connected-sum realization.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"A conjectural q may be degenerate, but its radical is not identified with transparent objects.\",\"initial_form\":\"The transparent part eats invisible coefficient directions.\",\"reason\":\"The coefficient group and the group of invertible objects are not canonically identified in the degenerate braided case.\",\"severity\":\"MATERIAL\"},{\"corrected_form\":\"General non-simply-connected dependence may involve pi1, the classifying-map image of the fundamental class, chi, sigma, spin/w2 data, and xi-alpha coupling.\",\"initial_form\":\"The main new premodular information is pi1 and transparent sectors.\",\"reason\":\"Known ordinary semisimple-TFT restrictions already permit more than the abstract group pi1 alone.\",\"severity\":\"SCOPE\"}],\"mathematical_status\":\"LAYERED_ANSATZ_NOT_THEOREM_NOT_CLAIM\",\"note_id\":\"objective-note-2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review\",\"provenance\":{\"initial_proposal\":{\"assistant_final_utc\":\"2026-07-17T05:25:35.510Z\",\"local_time_range\":\"2026-07-16 23:22:11-23:25:35 America/Edmonton\",\"model_verified_from_turn_context\":\"gpt-5.6-sol\",\"reasoning_effort_verified_from_turn_context\":\"medium\",\"turn_id\":\"019f6e86-6c24-70b0-9d00-6d2f301f7c27\"},\"provenance_reconciliation\":\"The user described the combined proposal/review episode as gpt-5.6-sol ultra around 23:30. The source session instead records the initial proposal turn as medium and the adversarial self-review turn beginning at 23:28:30 as ultra. Both facts are retained.\",\"self_review\":{\"local_start\":\"2026-07-16 23:28:30 America/Edmonton\",\"model_verified_from_turn_context\":\"gpt-5.6-sol\",\"reasoning_effort_verified_from_turn_context\":\"ultra\",\"turn_id\":\"019f6e8c-379d-74f2-b3ac-3c2d2cc3f5dc\",\"user_description\":\"5.6 sol ultra at approximately 23:30 on 2026-07-16\"},\"transcript_artifact\":{\"artifact_id\":\"twisted-yetter-premodular-formula-conjecture-transcript-v1\",\"formal_evidence\":false,\"git_blob\":\"5b385246097062e39615982bb102d3aaa146a72d\",\"path\":\"experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json\",\"sha256\":\"cb7dea85f9548a6fd08beb5a4b5901e16e65cf769738528c086ce9de7b961fd5\",\"status\":\"ARCHIVAL_SOURCE_ONLY\"}},\"reference_ledger\":{\"git_blob\":\"460ef5295276b3a036dfcef3e18f15dbc861f0f4\",\"path\":\"experiments/inputs/references/twisted-yetter-premodular-formula-conjecture-primary-sources-v1.json\",\"sha256\":\"0444df58d1d004ebfa1a9900f45309abd778669f7f8ab2cddbf53d438c42b472\",\"status\":\"CURATED_PRIMARY_SOURCE_LEDGER_WITH_EXPLICIT_INTERPRETATION_GAPS\"},\"reference_subjects\":[\"subject:twisted-yetter:paper:yetter-hepth-9311082\",\"subject:twisted-yetter:paper:dgno-0906-0620\",\"subject:twisted-yetter:paper:baerenz-barrett-1601-03580\",\"subject:twisted-yetter:paper:reutter-2001-02288\",\"subject:twisted-yetter:paper:tham-2108-13467\"],\"review_verdict\":{\"accepted_for_object_store\":true,\"bottom_line\":\"The corrected hierarchy is mathematically coherent and worth preserving as a research conjecture. The review does not establish that any displayed premodular formula is true.\",\"initial_unqualified_answer_accepted_as_written\":false,\"status\":\"PRESERVE_ONLY_WITH_MATERIAL_DOWNGRADES_AND_OPEN_GATES\"},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"source_backed_background\":[{\"statement\":\"For a nondegenerate braided fusion category, double braiding identifies invertible objects with tensor automorphisms of the identity; in the degenerate case transparent invertibles form the kernel of the same natural map.\",\"status\":\"SOURCE_BACKED_DGNO_LEMMA_3_31\"},{\"statement\":\"For the fully symmetric input Rep(G), B\u00e4renz-Barrett identify their stated Crane-Yetter invariant with a count of flat G-connections.\",\"status\":\"SOURCE_BACKED_SPECIAL_CASE_ONLY\"},{\"statement\":\"Ordinary semisimple four-dimensional TFTs, including ordinary Crane-Yetter-Kauffman theories from arbitrary ribbon fusion categories, obey stable-diffeomorphism restrictions and do not detect exotic smooth structure in Reutter's stated scope.\",\"status\":\"SOURCE_BACKED_ORDINARY_UNTWISTED_RESULT_ONLY\"},{\"statement\":\"Premodular handle maps retain categorical projection data, including a 3-handle unit-channel projection, before any modular scalar simplification.\",\"status\":\"SOURCE_BACKED_WARNING_FROM_THAM_DEFINITION_5_11\"}],\"special_cases_and_reductions\":{\"fully_symmetric_rep_g\":{\"statement\":\"The untwisted Rep(G) special case supplies a calibration target for a future twisted sector construction. It does not prove the general level-1 ansatz.\",\"status\":\"SOURCE_BACKED_ORDINARY_SPECIAL_CASE\"},\"modular\":{\"statement\":\"If the Mueger center is trivial and all level-2 hypotheses hold, the ansatz reduces to the separately recorded modular quadratic-block candidate. That modular formula remains unproved despite 201 matching frozen rows.\",\"status\":\"CONDITIONAL_REDUCTION_TO_SEPARATE_OPEN_CANDIDATE\"},\"simply_connected\":{\"statement\":\"For Rep(G), pi1=1 leaves one flat homomorphism. For arbitrary premodular C, this note makes no general sector-collapse assertion. Even a one-sector reduction would not prove quadratic alpha-dependence.\",\"status\":\"SPECIAL_CASE_ONLY_NO_GENERAL_COLLAPSE_THEOREM\"}},\"status\":\"CONJECTURAL_SELF_REVIEWED_NOT_A_CLAIM\",\"subjects\":[\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula\",\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\"],\"title\":\"Adversarial self-review of a premodular Twisted Yetter sector/quadratic formula conjecture\",\"top_notice\":\"NOT A THEOREM, NOT A PROOF, NOT A MATHEMATICAL CLAIM, AND NOT AN ADOPTED PROJECT CONCLUSION. This note preserves a gpt-5.6-sol proposal and its ultra-effort adversarial self-review from 2026-07-16 around 23:30 America/Edmonton. The initial answer required material corrections. Only the corrected layered ansatz is retained, with every upgrade gate still open.\"}",
+        "title": "Adversarial self-review of a premodular Twisted Yetter sector/quadratic formula conjecture",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 15311,
+          "base_estimate": 4310,
+          "estimated_tokens": 4957,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 3,
+          "safety_margin": 647,
+          "serialized_character_count": 15314,
+          "unicode_scalar_count": 15314,
+          "utf8_bytes": 15317
+        },
+        "word_count": 1222
       },
       "ctlobj-sha256:637ce8ff6b32635cad7023753dde06e1675834e054f9318735cc44659c2cfad0": {
         "active_state": "active",
@@ -61810,6 +62867,66 @@
         },
         "word_count": 11
       },
+      "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:815ccf9830e9c768c2020d698bde10311bf5e5558ba5b83f7d00bf6ab85a03d1",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 195,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:extends-conjecturally:modular-quadratic-block\",\"explanation\":\"Under trivial-center, nonvanishing, and quadraticity hypotheses, the premodular ansatz is intended to reduce to the separately open modular quadratic-block candidate; neither formula is proved by this edge.\",\"role\":\"extends-conjecturally\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 600,
+          "base_estimate": 169,
+          "estimated_tokens": 195,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 26,
+          "serialized_character_count": 600,
+          "unicode_scalar_count": 600,
+          "utf8_bytes": 600
+        },
+        "word_count": 27
+      },
+      "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:816722866a6449ef301847c87607fb1e552a389973be23ca93bb1bd47ddf71ab",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 171,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:tham-2108-13467\",\"explanation\":\"Tham Definition 5.11 records premodular handle maps with categorical unit-channel projection data, warning against assuming an automatic scalar closed formula.\",\"role\":\"uses-reference-as-failure-warning\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:tham-2108-13467\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 522,
+          "base_estimate": 148,
+          "estimated_tokens": 171,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 23,
+          "serialized_character_count": 522,
+          "unicode_scalar_count": 522,
+          "utf8_bytes": 522
+        },
+        "word_count": 20
+      },
       "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df": {
         "active_state": "active",
         "cid": "ctlobj-sha256:8196b2119eea4ee06a91305a1abf16c16eb52f0479e0861c315344a9e0b0b0df",
@@ -62289,6 +63406,36 @@
           "utf8_bytes": 86118
         },
         "word_count": 6255
+      },
+      "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:87af7d99d61649c089fa880685961c69c72ff6e7072124c15e4b5017391d2f11",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 183,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:records:self-review-note\",\"explanation\":\"The objective note is the normative epistemic-status record: it preserves the proposal only after material downgrades and explicitly denies theorem, proof, claim, and adopted-conclusion status.\",\"role\":\"records\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 562,
+          "base_estimate": 159,
+          "estimated_tokens": 183,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 24,
+          "serialized_character_count": 562,
+          "unicode_scalar_count": 562,
+          "utf8_bytes": 562
+        },
+        "word_count": 25
       },
       "ctlobj-sha256:888c919eee9800a96c0437b46223467a245f569241c2536d7956fdfd0ec0f5b3": {
         "active_state": "active",
@@ -63189,6 +64336,36 @@
           "utf8_bytes": 884
         },
         "word_count": 38
+      },
+      "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:9ab4d7715036084b26e224c280ee5d4e273cb3a0b0e74e9c04760c42e3288300",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 189,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:compatible-with:stable-no-go-proposal\",\"explanation\":\"The formula hierarchy is compatible with the conditional stable no-go route, but the no-go obligations do not imply a sector decomposition or quadratic alpha-dependence.\",\"role\":\"compatible-with-conditional\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 578,
+          "base_estimate": 164,
+          "estimated_tokens": 189,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 25,
+          "serialized_character_count": 578,
+          "unicode_scalar_count": 578,
+          "utf8_bytes": 578
+        },
+        "word_count": 24
       },
       "ctlobj-sha256:9b237605b914383339103205e42798007fbb58bcf39266319ce9f0ddcb8a6f93": {
         "active_state": "superseded",
@@ -64779,6 +65956,36 @@
           "utf8_bytes": 862
         },
         "word_count": 66
+      },
+      "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:b56ab9e9cf7905ea148ab9fb7f38f8f52a516fdba574dd6a5b14930309d7f3ad",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 189,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:yetter-hepth-9311082\",\"explanation\":\"Yetter is the primary source for the homologically twisted construction. The note keeps explicit the gap between its introductory arbitrary-A language and its printed Z/2 four-dimensional definitions.\",\"role\":\"uses-reference-with-interpretation-gap\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:yetter-hepth-9311082\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 578,
+          "base_estimate": 164,
+          "estimated_tokens": 189,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 25,
+          "serialized_character_count": 578,
+          "unicode_scalar_count": 578,
+          "utf8_bytes": 578
+        },
+        "word_count": 27
       },
       "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f": {
         "active_state": "active",
@@ -67510,6 +68717,36 @@
         },
         "word_count": 5264
       },
+      "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:f296c42f97ac7844b2deb3343821ecc1e367ef22d52d3a196ff30d1abf547f29",
+        "created_at": "2026-07-17T05:44:03Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 188,
+        "gist": "active",
+        "logical_id": "subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "subject-edge",
+        "search_text": "{\"edge_id\":\"subject-edge:ty:2026-07-16-premodular-formula-conjecture:uses-reference:baerenz-barrett-1601-03580\",\"explanation\":\"B\u00e4renz-Barrett Definition 6.10 and Theorem 6.12 provide the fully symmetric Rep(G) flat-connection calibration case only; they are not treated as a general transparent-sector factorization theorem.\",\"role\":\"uses-special-case-reference\",\"schema\":\"twisted-yetter/subject-edge/0\",\"source\":\"subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz\",\"status\":\"active\",\"target\":\"subject:twisted-yetter:paper:baerenz-barrett-1601-03580\"}",
+        "title": "active",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 575,
+          "base_estimate": 163,
+          "estimated_tokens": 188,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 1,
+          "safety_margin": 25,
+          "serialized_character_count": 576,
+          "unicode_scalar_count": 576,
+          "utf8_bytes": 577
+        },
+        "word_count": 25
+      },
       "ctlobj-sha256:f2a383248ce492ad0d7650eae18518f7a4bf688ca621e499673a75636212fb78": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:f2a383248ce492ad0d7650eae18518f7a4bf688ca621e499673a75636212fb78",
@@ -69639,6 +70876,15 @@
           "source_cid": "ctlobj-sha256:e26df623ad4758ae1975d363744caa49c12664e1d75da20f2a0684b1b454d063",
           "target_cid": "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a"
         }
+      ],
+      "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.git_preflight.ctl_root_before_work",
+          "source_cid": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
+          "target_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44"
+        }
       ]
     },
     "schema": "ctl-dogfood/discovery-index/1",
@@ -69647,7 +70893,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-17T05:11:36Z",
+  "generated_at": "2026-07-17T05:44:03Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -72181,16 +73427,16 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+  "root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 5564,
+    "build_ms": 5422,
     "context_source": "admission-validated-child-state",
-    "discovery_index_ms": 5420,
-    "payload_summaries_ms": 49,
+    "discovery_index_ms": 5280,
+    "payload_summaries_ms": 48,
     "resource_index_ms": 48,
-    "write_ms": 46
+    "write_ms": 45
   },
-  "transition_cid": "ctlobj-sha256:b197eef3139f71b1fe5c069937eb5f0677eb4c1b36a1f1e9732eb7997a938683"
+  "transition_cid": "ctlobj-sha256:77886b18b15b5dfbeebda6f59d69d870ce73768da00c59c64767bb13414b0e3d"
 }

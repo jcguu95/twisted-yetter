@@ -1,0 +1,269 @@
+{
+  "created_at": "2026-07-17T05:44:03Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+  "parents": [],
+  "payload": {
+    "candidate_hierarchy": [
+      {
+        "formula_or_statement": "If the three separately recorded stable-no-go proof obligations are proved with the required markings and normalizations, the total homologically twisted Yetter invariant cannot distinguish closed simply connected homeomorphic smooth 4-manifolds after transporting the homology marking.",
+        "id": "level-0-conditional-stable-no-go",
+        "relationship_to_formula": "This conditional consequence does not imply that the alpha-dependence is quadratic and does not construct an explicit formula.",
+        "status": "INHERITED_CONDITIONAL_ARGUMENT_NOT_ESTABLISHED"
+      },
+      {
+        "formula_or_statement": "Z_C(M,alpha) ?= sum_{xi in S_C(M)} W_C(M,xi) F_C(M;xi,alpha)",
+        "id": "level-1-schematic-transparent-sector-ansatz",
+        "required_interpretation": [
+          "S_C(M) is an as-yet unconstructed set or groupoid of sectors associated with the transparent/symmetric part of C.",
+          "The notation does not assert that every sector is a flat principal G-bundle.",
+          "The notation does not assert a canonical measure, normalization, or scalar decomposition for arbitrary premodular C.",
+          "Until S_C(M), W_C, and F_C are constructed, this level is a structural ansatz rather than a predictive formula."
+        ],
+        "status": "PLAUSIBLE_SCHEMATIC_ANSATZ_NOT_SOURCE_PROVED"
+      },
+      {
+        "formula_or_statement": "For a fixed sector xi, F_C(M;xi,alpha)/F_C(M;xi,0) ?= <P_{q_C,xi}(PD(alpha)),[M]>; in a torsion-free constant-coefficient homology basis this becomes product_i q_C,xi(a_i)^(Q_ii) product_{i<j} b_C,xi(a_i,a_j)^(Q_ij).",
+        "id": "level-2-sectorwise-quadratic-refinement",
+        "required_hypotheses": [
+          "The relevant coefficient group or local system is defined by the actual twisted construction.",
+          "The reference amplitude in the chosen sector is nonzero.",
+          "The CP2 calibration values are nonzero where division is used.",
+          "The calibrated function satisfies q(0)=1 and has biadditive bilinearization b(a,b)=q(a+b)/(q(a)q(b)).",
+          "Basis independence and the appropriate Pontryagin-square or quadratic-cohomology operation are proved.",
+          "Any mixed coupling between xi and alpha is incorporated rather than silently discarded."
+        ],
+        "status": "STRONGER_CONJECTURE_NOT_IMPLIED_BY_LEVEL_0_OR_LEVEL_1"
+      },
+      {
+        "formula_or_statement": "Define K_C^+(a)=Z_C(CP2,a) and K_C^-(a)=Z_C(CPbar2,a). If the marked connected-sum law Z(X#Y,alpha+beta)=Z(X,alpha)Z(Y,beta)/Z(S4,0) is proved and M is actually presented as a marked connected sum of p positive and q negative projective-plane blocks, then Z(M,alpha) ?= Z(S4,0)^(1-p-q) product_i K_C^+(a_i) product_j K_C^-(b_j).",
+        "id": "level-3-zero-safe-block-ansatz",
+        "required_hypotheses": [
+          "No ratio by a vanishing vacuum amplitude is taken.",
+          "The exact Yetter connected-sum normalization is established.",
+          "The formula is applied to an actual marked connected-sum realization, not inferred merely from an isomorphic intersection form.",
+          "Fermionic and spin-dependent branches are kept explicit."
+        ],
+        "status": "CONDITIONAL_ZERO_SAFE_REFORMULATION_NOT_GENERAL_FORMULA"
+      }
+    ],
+    "coefficient_group_warning": {
+      "candidate": "A_C=Aut_tensor(Id_C)",
+      "source_backed_part": "Yetter's introductory categorical setup discusses a group A of functorial tensor automorphisms.",
+      "status": "INTERPRETIVE_GENERALIZATION_REQUIRES_DERIVATION",
+      "warning": "The printed four-dimensional Definitions 6 and 9 specialize the displayed homology coefficients to Z/2. This note does not promote the arbitrary-A four-dimensional extension to a theorem by interpretation."
+    },
+    "created_at": "2026-07-17T05:41:00Z",
+    "created_by": "actor:codex",
+    "ctl_storage_semantics": {
+      "mathematical_claim_semantics": false,
+      "note": "The CTL API stores admitted objective notes in a revision envelope whose revision_kind is named claim and whose logical-id prefix is claim:lab-note. Those storage words do not make the payload a mathematical claim.",
+      "requested_object_kind": "conversation-derived conjecture plus adversarial self-review"
+    },
+    "epistemic_status": {
+      "expert_review_completed": false,
+      "formal_mathematical_claim_made": false,
+      "formal_mathematical_theorem_claim_made": false,
+      "machine_checked_premodular_computational_statement_made": false,
+      "project_conclusion_adopted": false,
+      "status": "CONJECTURAL_SELF_REVIEWED_WITH_MATERIAL_QUALIFICATIONS"
+    },
+    "explicit_non_claims": [
+      "This note is not a theorem, proof, proof certificate, or mathematical claim.",
+      "This note does not assert that the proposed premodular formula is correct.",
+      "This note does not assert that every premodular Crane-Yetter theory canonically decomposes into transparent flat-connection sectors.",
+      "This note does not assert that simply connectedness collapses every possible arbitrary-premodular sector construction to one sector.",
+      "This note does not assert that every sector has quadratic alpha-dependence.",
+      "This note does not identify the radical of a conjectural coefficient-group quadratic form with transparent objects.",
+      "This note does not assert that CP2 ratios exist when a denominator or relevant numerator vanishes.",
+      "This note does not infer a connected-sum block product from an intersection-form diagonalization alone.",
+      "This note does not prove an arbitrary-A four-dimensional extension of Yetter's printed Z/2 construction.",
+      "This note does not prove a premodular no-go theorem for twisted Yetter invariants.",
+      "This note does not contain a premodular Figure 21 computation or any premodular machine-checked row.",
+      "The 201 modular quadratic compatibility rows support only the separate modular candidate on a frozen denominator and are not evidence that the premodular sector ansatz is universal.",
+      "Ordinary Crane-Yetter-Kauffman stable-diffeomorphism results are not silently promoted to an alpha-marked twisted theorem.",
+      "The user-reported and session-verified model/effort provenance is not evidence for mathematical correctness."
+    ],
+    "falsification_and_upgrade_program": [
+      {
+        "gate": "coefficient-definition",
+        "required_result": "Derive the exact four-dimensional coefficient group and action from Yetter's construction, including whether and how the introductory arbitrary-A setup extends the printed Z/2 definitions.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "sector-construction",
+        "required_result": "Construct S_C(M), its weighting/measure, and the gluing law for a genuinely premodular category; prove rather than assume a scalar sector decomposition.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "cp2-calibration",
+        "required_result": "Compute all marked CP2 block amplitudes, record zeros, and test q(0)=1 and quadratic identities before naming any ratio q.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "mixed-term-calibration",
+        "required_result": "Use marked S2xS2 or another certified off-diagonal form to test bilinearity and detect xi-alpha mixed coupling.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "rep-g-special-case",
+        "required_result": "Recover the Bärenz-Barrett Rep(G) flat-connection count with the exact normalization, then add the homological twist and test whether the proposed sectorwise structure survives.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "non-tannakian-and-fermionic-cases",
+        "required_result": "Treat super-Tannakian/fermionic centers, spin dependence, and vanishing Gauss-sum branches without dividing by zero.",
+        "status": "OPEN"
+      },
+      {
+        "gate": "premodular-figure21",
+        "required_result": "Obtain a certified premodular evaluator and H2 marking before using Figure 21 as direct evidence.",
+        "status": "BLOCKED_CURRENT_BACKEND_CANNOT_RUN_FULL_PREMODULAR_FIGURE21"
+      }
+    ],
+    "git_preflight": {
+      "ctl_root_before_work": "ctlobj-sha256:ffb1adb2d7ee43b7ad601b3b446297dd49acea3c305def015a8a6dfb6ab46d44",
+      "ctl_verify_before_work": "PASS",
+      "source_repo_clean_before_work": true,
+      "source_repo_commit_before_work": "f99571c8765bc2d0ac77f8793f21cabc394099c6"
+    },
+    "material_corrections_to_the_initial_proposal": [
+      {
+        "corrected_form": "Only the fully symmetric special case C=Rep(G) is source-backed here as a flat-G-connection model. For arbitrary premodular C, the sector sum remains schematic.",
+        "initial_form": "Transparent/Mueger-center data generally produce flat sectors over which the invariant sums.",
+        "reason": "Bärenz-Barrett Theorem 6.12 does not prove that factorization for every category having Rep(G) as center.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "Simply connectedness collapses Hom(pi1(M),G) in the Rep(G) special case. No general arbitrary-premodular sector-collapse theorem is asserted.",
+        "initial_form": "A simply connected manifold normally has only the trivial transparent sector.",
+        "reason": "A general sector construction has not been defined, and super-Tannakian/fermionic data may require different structures.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "Quadratic alpha-dependence is an additional conjecture requiring CP2 and mixed-form checks sector by sector.",
+        "initial_form": "Inside each sector alpha contributes through a possibly degenerate quadratic refinement.",
+        "reason": "Neither stable invariance nor a sector decomposition implies quadraticity.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "A CP2 ratio is only a candidate q after nonvanishing and quadratic identities have been checked.",
+        "initial_form": "Define q_C(a)=Z_C(CP2,a)/Z_C(CP2,0).",
+        "reason": "The denominator or numerator can vanish, and a defined ratio need not be a quadratic function.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "The unnormalized K^+/K^- product is conditional on the exact connected-sum law and an actual marked connected-sum decomposition.",
+        "initial_form": "For a diagonal intersection form, multiply the projective-plane block amplitudes.",
+        "reason": "An intersection-form diagonalization does not by itself give a smooth marked connected-sum realization.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "A conjectural q may be degenerate, but its radical is not identified with transparent objects.",
+        "initial_form": "The transparent part eats invisible coefficient directions.",
+        "reason": "The coefficient group and the group of invertible objects are not canonically identified in the degenerate braided case.",
+        "severity": "MATERIAL"
+      },
+      {
+        "corrected_form": "General non-simply-connected dependence may involve pi1, the classifying-map image of the fundamental class, chi, sigma, spin/w2 data, and xi-alpha coupling.",
+        "initial_form": "The main new premodular information is pi1 and transparent sectors.",
+        "reason": "Known ordinary semisimple-TFT restrictions already permit more than the abstract group pi1 alone.",
+        "severity": "SCOPE"
+      }
+    ],
+    "mathematical_status": "LAYERED_ANSATZ_NOT_THEOREM_NOT_CLAIM",
+    "note_id": "objective-note-2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review",
+    "provenance": {
+      "initial_proposal": {
+        "assistant_final_utc": "2026-07-17T05:25:35.510Z",
+        "local_time_range": "2026-07-16 23:22:11-23:25:35 America/Edmonton",
+        "model_verified_from_turn_context": "gpt-5.6-sol",
+        "reasoning_effort_verified_from_turn_context": "medium",
+        "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+      },
+      "provenance_reconciliation": "The user described the combined proposal/review episode as gpt-5.6-sol ultra around 23:30. The source session instead records the initial proposal turn as medium and the adversarial self-review turn beginning at 23:28:30 as ultra. Both facts are retained.",
+      "self_review": {
+        "local_start": "2026-07-16 23:28:30 America/Edmonton",
+        "model_verified_from_turn_context": "gpt-5.6-sol",
+        "reasoning_effort_verified_from_turn_context": "ultra",
+        "turn_id": "019f6e8c-379d-74f2-b3ac-3c2d2cc3f5dc",
+        "user_description": "5.6 sol ultra at approximately 23:30 on 2026-07-16"
+      },
+      "transcript_artifact": {
+        "artifact_id": "twisted-yetter-premodular-formula-conjecture-transcript-v1",
+        "formal_evidence": false,
+        "git_blob": "5b385246097062e39615982bb102d3aaa146a72d",
+        "path": "experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json",
+        "sha256": "cb7dea85f9548a6fd08beb5a4b5901e16e65cf769738528c086ce9de7b961fd5",
+        "status": "ARCHIVAL_SOURCE_ONLY"
+      }
+    },
+    "reference_ledger": {
+      "git_blob": "460ef5295276b3a036dfcef3e18f15dbc861f0f4",
+      "path": "experiments/inputs/references/twisted-yetter-premodular-formula-conjecture-primary-sources-v1.json",
+      "sha256": "0444df58d1d004ebfa1a9900f45309abd778669f7f8ab2cddbf53d438c42b472",
+      "status": "CURATED_PRIMARY_SOURCE_LEDGER_WITH_EXPLICIT_INTERPRETATION_GAPS"
+    },
+    "reference_subjects": [
+      "subject:twisted-yetter:paper:yetter-hepth-9311082",
+      "subject:twisted-yetter:paper:dgno-0906-0620",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+      "subject:twisted-yetter:paper:reutter-2001-02288",
+      "subject:twisted-yetter:paper:tham-2108-13467"
+    ],
+    "review_verdict": {
+      "accepted_for_object_store": true,
+      "bottom_line": "The corrected hierarchy is mathematically coherent and worth preserving as a research conjecture. The review does not establish that any displayed premodular formula is true.",
+      "initial_unqualified_answer_accepted_as_written": false,
+      "status": "PRESERVE_ONLY_WITH_MATERIAL_DOWNGRADES_AND_OPEN_GATES"
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_backed_background": [
+      {
+        "statement": "For a nondegenerate braided fusion category, double braiding identifies invertible objects with tensor automorphisms of the identity; in the degenerate case transparent invertibles form the kernel of the same natural map.",
+        "status": "SOURCE_BACKED_DGNO_LEMMA_3_31"
+      },
+      {
+        "statement": "For the fully symmetric input Rep(G), Bärenz-Barrett identify their stated Crane-Yetter invariant with a count of flat G-connections.",
+        "status": "SOURCE_BACKED_SPECIAL_CASE_ONLY"
+      },
+      {
+        "statement": "Ordinary semisimple four-dimensional TFTs, including ordinary Crane-Yetter-Kauffman theories from arbitrary ribbon fusion categories, obey stable-diffeomorphism restrictions and do not detect exotic smooth structure in Reutter's stated scope.",
+        "status": "SOURCE_BACKED_ORDINARY_UNTWISTED_RESULT_ONLY"
+      },
+      {
+        "statement": "Premodular handle maps retain categorical projection data, including a 3-handle unit-channel projection, before any modular scalar simplification.",
+        "status": "SOURCE_BACKED_WARNING_FROM_THAM_DEFINITION_5_11"
+      }
+    ],
+    "special_cases_and_reductions": {
+      "fully_symmetric_rep_g": {
+        "statement": "The untwisted Rep(G) special case supplies a calibration target for a future twisted sector construction. It does not prove the general level-1 ansatz.",
+        "status": "SOURCE_BACKED_ORDINARY_SPECIAL_CASE"
+      },
+      "modular": {
+        "statement": "If the Mueger center is trivial and all level-2 hypotheses hold, the ansatz reduces to the separately recorded modular quadratic-block candidate. That modular formula remains unproved despite 201 matching frozen rows.",
+        "status": "CONDITIONAL_REDUCTION_TO_SEPARATE_OPEN_CANDIDATE"
+      },
+      "simply_connected": {
+        "statement": "For Rep(G), pi1=1 leaves one flat homomorphism. For arbitrary premodular C, this note makes no general sector-collapse assertion. Even a one-sector reduction would not prove quadratic alpha-dependence.",
+        "status": "SPECIAL_CASE_ONLY_NO_GENERAL_COLLAPSE_THEOREM"
+      }
+    },
+    "status": "CONJECTURAL_SELF_REVIEWED_NOT_A_CLAIM",
+    "subjects": [
+      "subject:twisted-yetter:argument-proposal:premodular-sector-quadratic-ansatz",
+      "subject:twisted-yetter:argument-proposal:modular-quadratic-block-formula",
+      "subject:twisted-yetter:argument-proposal:stable-no-go-simply-connected-closed-4-manifolds"
+    ],
+    "title": "Adversarial self-review of a premodular Twisted Yetter sector/quadratic formula conjecture",
+    "top_notice": "NOT A THEOREM, NOT A PROOF, NOT A MATHEMATICAL CLAIM, AND NOT AN ADOPTED PROJECT CONCLUSION. This note preserves a gpt-5.6-sol proposal and its ultra-effort adversarial self-review from 2026-07-16 around 23:30 America/Edmonton. The initial answer required material corrections. Only the corrected layered ansatz is retained, with every upgrade gate still open."
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
