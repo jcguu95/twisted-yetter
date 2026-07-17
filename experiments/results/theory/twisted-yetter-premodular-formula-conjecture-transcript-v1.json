@@ -1,0 +1,86 @@
+{
+  "argv_template": "python3 experiments/scripts/build_twisted_yetter_premodular_formula_conjecture_transcript_v1.py --source-jsonl <original-codex-session.jsonl> --output experiments/results/theory/twisted-yetter-premodular-formula-conjecture-transcript-v1.json",
+  "artifact_id": "twisted-yetter-premodular-formula-conjecture-transcript-v1",
+  "conversation_scope": {
+    "end_utc": "2026-07-17T05:25:35.510Z",
+    "hidden_reasoning_included": false,
+    "local_date": "2026-07-16",
+    "local_time_range": "23:22:11-23:25:35",
+    "local_timezone": "America/Edmonton",
+    "start_utc": "2026-07-17T05:22:11.166Z",
+    "thread_id": "019f6650-fe21-7cf2-8a63-6d3d14064cb5",
+    "tool_calls_or_outputs_included": false,
+    "turn_ids": [
+      "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    ],
+    "visible_messages_only": true
+  },
+  "epistemic_status": "UNREVIEWED_INITIAL_CONJECTURE",
+  "explicit_non_claims": [
+    "The initial proposal is not an established theorem.",
+    "The initial proposal is not a proof or proof certificate.",
+    "The initial proposal is not the project's accepted current conclusion.",
+    "The initial proposal is not computationally validated on premodular Figure 21 data.",
+    "The initial proposal's unqualified formulas are superseded by the self-review note."
+  ],
+  "formal_evidence": false,
+  "generator_script": "experiments/scripts/build_twisted_yetter_premodular_formula_conjecture_transcript_v1.py",
+  "message_counts": {
+    "assistant_final_answers": 1,
+    "assistant_visible": 4,
+    "total": 5,
+    "user": 1
+  },
+  "messages": [
+    {
+      "phase": null,
+      "role": "user",
+      "text": "Modular 的 case，你已經做出了非常 concrete 的 formula candidate。在 pre-modular 的情況下，也請你來預測一下那個 candidate formula 要長什麼樣子吧。 \n",
+      "timestamp_utc": "2026-07-17T05:22:11.166Z",
+      "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    },
+    {
+      "phase": "commentary",
+      "role": "assistant",
+      "text": "我會先把 modular 公式中真正用到「nondegenerate braiding」的地方逐一拆開，再決定 premodular 版本應多出哪些變數。我的暫時猜測是：對 simply connected closed 4-manifold，公式外形可能幾乎不變，只是 coefficient group 不能再偷認成 invertible objects，quadratic form 也允許退化；對一般 \\(\\pi_1\\neq 0\\) 的情況，則應該是按 transparent-sector 的 flat sectors 分塊後逐塊套 quadratic formula，而不是只加一個單純常數。",
+      "timestamp_utc": "2026-07-17T05:22:46.366Z",
+      "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    },
+    {
+      "phase": "commentary",
+      "role": "assistant",
+      "text": "從 repo 既有的論證來看，premodular 版本至少有兩種不同層級，不能混成一條式子：一條是我們真正關心的 simply connected Figure 21，此時 \\(\\pi_1\\)-sector 應全部塌成 trivial sector；另一條是一般 closed 4-manifold，此時 symmetric/Müger-center 部分可產生 flat-connection sectors，公式必須先對這些 sectors 求和。接下來我會用原始論文核對這個分層，尤其不把常見的 Tannakian \\(\\operatorname{Rep}(G)\\) 情形冒充所有 premodular categories。",
+      "timestamp_utc": "2026-07-17T05:23:32.295Z",
+      "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    },
+    {
+      "phase": "commentary",
+      "role": "assistant",
+      "text": "我已經把候選式分成兩層了：對 simply connected 的 manifold，它應該仍是「intersection form 上的 quadratic phase」，只是可能退化或整體為零；真正新增的 premodular 現象，應該出現在透明中心所帶來的 \\(\\pi_1\\) sectors，而且可能與 \\(\\alpha\\) 有混合耦合。接下來我會把最強、但仍誠實標成 conjectural 的版本寫清楚。",
+      "timestamp_utc": "2026-07-17T05:24:47.326Z",
+      "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    },
+    {
+      "phase": "final_answer",
+      "role": "assistant",
+      "text": "**最短答案**\n\n我目前最相信的 premodular 候選公式不是一個單獨的 quadratic phase，而是：\n\n\\[\n\\boxed{\nZ_{\\mathcal C}(M,\\alpha)\n\\stackrel{?}{=}\n\\sum_{\\xi\\in \\mathrm{Sect}_{\\mathcal Z_2(\\mathcal C)}(M)}\nZ_{\\mathcal C}(M,0;\\xi)\\,\n\\Phi_{\\mathcal C}(M;\\xi,\\alpha)\n}\n\\]\n\n意思是：\n\n- \\(\\mathcal Z_2(\\mathcal C)\\) 是 Müger center，也就是 category 裡「跟所有東西交換都看不出差別」的透明部分。\n- \\(\\xi\\) 是透明部分在 \\(M\\) 上可能存在的 flat sector。\n- 每個 sector 裡，\\(\\alpha\\) 再透過一個可能退化的 quadratic refinement 產生 phase。\n- 最後把所有透明 sectors 的貢獻加起來。\n\n這是**候選公式，不是定理**。\n\n---\n\n**Simply Connected 的版本**\n\n如果 \\(M\\) simply connected，通常只剩 trivial transparent sector。這時我預測公式會退化成和 modular case 幾乎一樣：\n\n\\[\n\\boxed{\nZ_{\\mathcal C}(M,\\alpha)\n=\nZ_{\\mathcal C}(M,0)\\,\n\\Phi_{Q_M,q_{\\mathcal C}}(\\alpha)\n}\n\\]\n\n設\n\n\\[\nA_{\\mathcal C}\n=\n\\operatorname{Aut}_{\\otimes}(\\operatorname{Id}_{\\mathcal C}),\n\\qquad\n\\alpha\\in H_2(M;A_{\\mathcal C}).\n\\]\n\n選定 \\(H_2(M)\\) 的 basis，寫成\n\n\\[\n\\alpha=\\sum_i x_i\\otimes a_i,\n\\]\n\n而 \\(Q_{ij}=x_i\\cdot x_j\\) 是 intersection form。候選 phase 是\n\n\\[\n\\Phi_{Q_M,q_{\\mathcal C}}(\\alpha)\n=\n\\prod_i q_{\\mathcal C}(a_i)^{Q_{ii}}\n\\prod_{i<j}\nb_{\\mathcal C}(a_i,a_j)^{Q_{ij}},\n\\]\n\n其中\n\n\\[\nb_{\\mathcal C}(a,b)\n=\n\\frac{q_{\\mathcal C}(a+b)}\n     {q_{\\mathcal C}(a)q_{\\mathcal C}(b)}.\n\\]\n\nCoordinate-free 的說法，就是：\n\n\\[\n\\Phi_{Q_M,q_{\\mathcal C}}(\\alpha)\n=\n\\left\\langle\n\\mathfrak P_{q_{\\mathcal C}}(\\operatorname{PD}\\alpha),\n[M]\n\\right\\rangle ,\n\\]\n\n也就是由 \\(q_{\\mathcal C}\\) 決定的 Pontryagin-square 型 quadratic refinement。\n\n---\n\n**與 Modular Case 的真正差別**\n\nModular 時，有一個很方便的同構：\n\n\\[\n\\operatorname{Inv}(\\mathcal C)\n\\cong\n\\operatorname{Aut}_{\\otimes}(\\operatorname{Id}_{\\mathcal C}).\n\\]\n\n所以每個 coefficient \\(a\\) 都可以由唯一的 invertible object 表示，而 \\(q(a)\\) 可以直接從它的 twist 讀出來。\n\nPremodular 時，這件事壞掉了。double braiding 仍給出映射\n\n\\[\n\\operatorname{Inv}(\\mathcal C)\n\\longrightarrow\n\\operatorname{Aut}_{\\otimes}(\\operatorname{Id}_{\\mathcal C}),\n\\]\n\n但：\n\n- 它可能不是 injective，因為 transparent invertible objects 落在 kernel。\n- 它也可能不是 surjective。\n- 因此不能再把 \\(\\alpha\\) 偷換成一組 invertible-object labels。\n- \\(q_{\\mathcal C}\\) 也不能只靠某個 object 的 twist 草率定義。\n\n最保險的定義是直接用帶 marking 的 \\(\\mathbb{CP}^2\\) 計算校準：\n\n\\[\nq_{\\mathcal C}(a)\n\\stackrel{?}{=}\n\\frac{\nZ_{\\mathcal C}(\\mathbb{CP}^2,a)\n}{\nZ_{\\mathcal C}(\\mathbb{CP}^2,0)\n}.\n\\]\n\n再用 \\(S^2\\times S^2\\) 的 mixed marking 校準 \\(b_{\\mathcal C}(a,b)\\)。\n\n---\n\n**可能退化**\n\n在 premodular case，\\(q_{\\mathcal C}\\) 不一定 nondegenerate。可能存在非零的 \\(a\\)，滿足\n\n\\[\nb_{\\mathcal C}(a,x)=1\n\\qquad\n\\text{對所有 }x.\n\\]\n\n這表示某些非零 \\(\\alpha\\) 對 invariant 完全沒有作用。ELI5：你確實加了一個標記，但 category 的透明部分把它吃掉了，所以答案完全不變。\n\n因此 modular case 是 nondegenerate quadratic theory；premodular case 比較像是**帶有看不見方向的 degenerate quadratic theory**。\n\n---\n\n**如果 Vacuum Value 是零**\n\n還有一個重要危險：\n\n\\[\nZ_{\\mathcal C}(\\mathbb{CP}^2,0)=0\n\\]\n\n時，上面的 ratio 根本不能定義。這在 transparent fermion 存在時尤其可能發生；Reutter 證明 ribbon fusion category 的 fermionic objects 與 Gauss-sum vanishing 有直接關係。[Reutter](https://arxiv.org/abs/2001.02288)\n\n這時候不能假裝 quadratic formula 仍正常，而應保留未除法的 block amplitudes：\n\n\\[\nK_{\\mathcal C}^{+}(a)\n=\nZ_{\\mathcal C}(\\mathbb{CP}^2,a),\n\\qquad\nK_{\\mathcal C}^{-}(a)\n=\nZ_{\\mathcal C}(\\overline{\\mathbb{CP}}^{\\,2},a).\n\\]\n\n對 diagonal intersection form，候選式變成\n\n\\[\nZ_{\\mathcal C}(M,\\alpha)\n\\stackrel{?}{=}\nZ_{\\mathcal C}(S^4)^{1-b_2(M)}\n\\prod_{i=1}^{b_2^+}K_{\\mathcal C}^{+}(a_i)\n\\prod_{j=1}^{b_2^-}K_{\\mathcal C}^{-}(a_j).\n\\]\n\n這個版本即使某些 block 為零也仍有意義。\n\n---\n\n**一般 \\(\\pi_1\\neq 1\\) 的版本**\n\n這裡才是 premodular 真正比 modular 多出來的東西。\n\n例如透明中心是 Tannakian category\n\n\\[\n\\mathcal Z_2(\\mathcal C)\\simeq\\operatorname{Rep}(G)\n\\]\n\n時，透明 sectors 大致由 flat \\(G\\)-bundles表示：\n\n\\[\n\\xi=[\\rho],\n\\qquad\n\\rho:\\pi_1(M)\\longrightarrow G.\n\\]\n\n於是更具體的候選式是\n\n\\[\n\\boxed{\nZ_{\\mathcal C}(M,\\alpha)\n\\stackrel{?}{=}\n\\sum_{[\\rho:\\pi_1(M)\\to G]}\nW_{\\mathcal C}(M,\\rho)\\,\n\\Phi_{q_{\\mathcal C,\\rho}}\n(M,\\alpha)\n}\n\\]\n\n其中：\n\n- \\(W_{\\mathcal C}(M,\\rho)\\) 是 untwisted transparent sector 的權重。\n- \\(q_{\\mathcal C,\\rho}\\) 是該 sector 裡的 quadratic refinement。\n- 若 \\(\\rho\\) 作用在 coefficient group 上，\\(\\alpha\\) 可能落在 local-coefficient homology。\n- 可能存在 \\(\\rho\\) 與 \\(\\alpha\\) 的混合項，不能預先假設兩者完全獨立。\n\nBärenz–Barrett 已證明 arbitrary ribbon fusion category 的 nonmodular Crane–Yetter invariant 確實可能比單純的 signature/Euler characteristic 更強，並包含 untwisted finite-gauge-theory 型例子。[Bärenz–Barrett](https://arxiv.org/abs/1601.03580)\n\n但「新增資訊只有 \\(\\pi_1\\)」仍然太強。sector weight 還可能依賴：\n\n\\[\n\\chi(M),\\quad \\sigma(M),\\quad\nc_*[M]\\in H_4(B\\pi_1;\\mathbb Z),\n\\quad w_2(M),\n\\]\n\n以及 fermionic 情況下的 spin structure。\n\n---\n\n**對 Exoticness 的預測**\n\n對我們目前的 Figure 21 情境，兩邊都是 simply connected，且有相同的 intersection form。因此這個候選公式預測：\n\n\\[\nZ_{\\mathcal C}(M_{\\mathrm{exotic}},\\alpha)\n=\nZ_{\\mathcal C}(M_{\\mathrm{standard}},f_*\\alpha)\n\\]\n\n對任何保持 intersection form 的 marked identification \\(f_*\\) 都成立；或者在 fermionic/non-spin branch 裡，兩邊一起變成零。\n\n換句話說，premodular category 新增的主要能力可能是看見 \\(\\pi_1\\) 與 transparent sectors，而不是看見 simply connected exotic smooth structure。這也符合 semisimple 4D TFT 的 stable-diffeomorphism 限制。[Reutter](https://arxiv.org/abs/2001.02288)\n\n**但必須非常誠實地說：我們目前沒有 premodular Figure 21 計算來直接驗證這個公式。** Modular 版本有 201 份 quadratic checks；premodular 版本目前是由 modular formula、transparent-center 結構、finite-gauge examples 和 stable no-go argument 推出的候選模型。\n\n最值得測試的三個 falsification checks 是：\n\n1. 用 marked \\(\\mathbb{CP}^2\\) 測出全部 \\(K^+(a)\\)。\n2. 用 marked \\(S^2\\times S^2\\) 檢查 mixed term \\(b(a,b)\\)。\n3. 選一個 \\(\\pi_1\\neq1\\) 的小 manifold，檢查答案是否真的分解成 transparent-sector sum。\n\n只要其中一項失敗，這個簡單候選式就必須加入新的 sector coupling，而不能硬說它成立。Yetter 原始 twisted construction 本身確實是由 homology class refinement invariant；但它沒有直接替我們證明上述 premodular closed formula。[Yetter](https://arxiv.org/abs/hep-th/9311082)",
+      "timestamp_utc": "2026-07-17T05:25:35.510Z",
+      "turn_id": "019f6e86-6c24-70b0-9d00-6d2f301f7c27"
+    }
+  ],
+  "provenance": {
+    "messages_canonical_sha256": "ebf074873316062b9d07064c64426c363b846a7eb3b1a58172e4d86b1860e18a",
+    "model_verified_from_turn_context": "gpt-5.6-sol",
+    "provenance_discrepancy": "The user later described this as an ultra-effort turn, but the source session records medium. The verified session value is retained.",
+    "reasoning_effort_verified_from_turn_context": "medium",
+    "source_kind": "local_codex_session_jsonl",
+    "source_path_at_capture": "/Users/jin/.codex/sessions/2026/07/15/rollout-2026-07-15T09-06-51-019f6650-fe21-7cf2-8a63-6d3d14064cb5.jsonl",
+    "source_repo_clean_before_generation": false,
+    "source_repo_commit_before_generation": "f99571c8765bc2d0ac77f8793f21cabc394099c6",
+    "source_window_sha256": "ad71be9c891ca621eb62c0d0ef6e34a119ffafa9c1b1d05635bd0267bc82d937",
+    "user_later_described_effort_as": "ultra"
+  },
+  "schema": "twisted-yetter/research-conversation-transcript/1",
+  "status": "ARCHIVAL_SOURCE_ONLY",
+  "top_notice": "This artifact preserves the exact visible proposal turn. The proposal was materially qualified by the immediately following self-review and must not be read as a theorem, proof, accepted formula, or established project conclusion."
+}
