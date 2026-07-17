@@ -1,0 +1,962 @@
+{
+  "calibration_rule": {
+    "figure21_raw_ordinary_aggregate": "S_F21(C)=sum_l A_F21,C^raw(l)",
+    "non_circularity": "nu_C is determined from the single ordinary aggregate before the full value-distribution buckets are compared. A preserved-aggregate corrupted distribution is a required negative test.",
+    "normalized_amplitude": "A_F21,C^normalized(l)=nu_C*A_F21,C^raw(l)",
+    "presentation_correction": "nu_C=S_std(C)/S_F21(C)",
+    "scope": "POINTED_CATEGORIES_WITH_ALL_QUANTUM_DIMENSIONS_ONE",
+    "standard_raw_ordinary_aggregate": "S_std(C)=sum_l A_std,C^raw(l)"
+  },
+  "content_hash": "sha256:cac1b90fffc8d64b28a103db00f07f08904c275d0c0cd3fc6eac7e1c2b69d5e5",
+  "elapsed_seconds": 0.04083962505683303,
+  "explicit_non_claims": [
+    "This does not erase or rewrite the historical raw graph evaluations.",
+    "This does not certify the Figure 21 source transcription against the printed diagram.",
+    "This does not provide a Figure 21 H2 coordinate map.",
+    "This does not prove pointwise equality for every alpha.",
+    "This pointed dimension-one calibration is not a general MTC normalization theorem.",
+    "This does not establish a premodular formula or premodular exotic comparison."
+  ],
+  "finished_at_utc": "2026-07-17T05:02:35.499952+00:00",
+  "generator_script": "experiments/scripts/build_figure21_pointed_ordinary_normalization_audit_v1.py",
+  "git_commit": "306e02a4c7d7528b078222fbc8999592ca6833b1",
+  "git_dirty_before_output_write": false,
+  "inputs": [
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-rank2-rank3-standard-comparison-v1.json",
+      "role": "rank2_rank3",
+      "schema": "twisted-yetter.figure21-rank2-rank3-standard-comparison.v1",
+      "sha256": "sha256:15a662d96b3d44b694460d598699264924415f6c9f176cfc11b88dd5dae3bcb7",
+      "status": "PASS_RANK2_RANK3_STANDARD_COMPARISON_ALL_MATCH_PHASE_ALIGNED"
+    },
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-rank4-standard-comparison-v1.json",
+      "role": "rank4",
+      "schema": "twisted-yetter.figure21-rank4-standard-comparison.v1",
+      "sha256": "sha256:1cbe94cbedae31fe54ccebbcb6a15da76e97be071ed7b33a17961a2bd46f6e86",
+      "status": "PASS_RANK4_STANDARD_COMPARISON_ALL_MATCH"
+    },
+    {
+      "path": "experiments/results/akbulut-yasui/figure21-rank5-standard-comparison-v1.json",
+      "role": "rank5",
+      "schema": "twisted-yetter.figure21-rank5-standard-comparison.v1",
+      "sha256": "sha256:a92d837b22df1c2a566ee14897bd924c0216f6094b5e67736c1a409a3e46468b",
+      "status": "PASS_RANK5_STANDARD_COMPARISON_ALL_MATCH"
+    }
+  ],
+  "mathematical_status": "ESTABLISHED_COMPUTATIONAL_PRESENTATION_NORMALIZATION_NOT_H2_MARKED_POINTWISE_THEOREM",
+  "nonidentity_presentation_correction_count": 2,
+  "nonidentity_presentation_correction_realization_ids": [
+    "rank2-cyclic-z2-semion-minus",
+    "rank2-cyclic-z2-semion-plus"
+  ],
+  "normalized_distribution_match_count": 15,
+  "python_version": "3.12.13",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "python experiments/scripts/build_figure21_pointed_ordinary_normalization_audit_v1.py",
+  "row_count": 15,
+  "rows": [
+    {
+      "family_id": "rank2-cyclic-z2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 272,
+        "-1+0i": 240
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "32.0",
+          "canonical_key": "-32+0i",
+          "imag": "0.0",
+          "real": "-32.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "-1+0i",
+          "imag": "-0.0",
+          "real": "-1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "32.0",
+          "canonical_key": "+32+0i",
+          "imag": "0.0",
+          "real": "32.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 2
+      },
+      "rank": 2,
+      "raw_figure21_minus_standard_distribution": {
+        "+1+0i": -32,
+        "-1+0i": 32
+      },
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 240,
+        "-1+0i": 272
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 272,
+        "-1+0i": 240
+      },
+      "realization_id": "rank2-cyclic-z2-semion-minus",
+      "snapshot": {
+        "category_data_hash": "sha256:cb8423c8e0253a34069e41d94870a952cc5a552af5fec13f65a6f2833c760e3d",
+        "content_hash": "sha256:e52647abd74604ca450085f9df7d063fb39d8eb43b43847278868c2b3de39ba1"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank2-cyclic-z2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 272,
+        "-1+0i": 240
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "32.0",
+          "canonical_key": "-32+0i",
+          "imag": "0.0",
+          "real": "-32.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "-1+0i",
+          "imag": "-0.0",
+          "real": "-1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "32.0",
+          "canonical_key": "+32+0i",
+          "imag": "0.0",
+          "real": "32.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 2
+      },
+      "rank": 2,
+      "raw_figure21_minus_standard_distribution": {
+        "+1+0i": -32,
+        "-1+0i": 32
+      },
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 240,
+        "-1+0i": 272
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 256,
+        "+0-1i": 256,
+        "+1+0i": 272,
+        "-1+0i": 240
+      },
+      "realization_id": "rank2-cyclic-z2-semion-plus",
+      "snapshot": {
+        "category_data_hash": "sha256:6f6f8391b0c99c9c8e178541ec4262ef0188b51ad7add48e9a1b89eb450ed3a8",
+        "content_hash": "sha256:b6e1fcedc002a8bad19e62ce667a79bc4592557f4ad2667ee53b40db2f23c3cb"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank3-cyclic-z3",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "243.0",
+          "canonical_key": "+243+0i",
+          "imag": "0.0",
+          "real": "243.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "243.0",
+          "canonical_key": "+243+0i",
+          "imag": "0.0",
+          "real": "243.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 3
+      },
+      "rank": 3,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "realization_id": "rank3-cyclic-z3-minus",
+      "snapshot": {
+        "category_data_hash": "sha256:ef0fa273bd48c7ead003268c992d87f4520cfa80884412574a9fab1b05482628",
+        "content_hash": "sha256:181d796654800e7bbe1561ebf74a8b1f7d4a2898fa624af3359b0a3b4a35b5af"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank3-cyclic-z3",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "243.0",
+          "canonical_key": "+243+0i",
+          "imag": "0.0",
+          "real": "243.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "243.0",
+          "canonical_key": "+243+0i",
+          "imag": "0.0",
+          "real": "243.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 3
+      },
+      "rank": 3,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+1+0i": 19845,
+        "-0.5+0.866025404i": 19602,
+        "-0.5-0.866025404i": 19602
+      },
+      "realization_id": "rank3-cyclic-z3-plus",
+      "snapshot": {
+        "category_data_hash": "sha256:37f67932b8fe4efb70fa3cb138845b80df2a2205085718de4ed429441fb543fb",
+        "content_hash": "sha256:acc30096ffcec2b6a2d4f974dafda8fc6c8e77af1eda6ca3e971432364b4f930"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z4",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "realization_id": "rank4-pointed-z4-k1",
+      "snapshot": {
+        "category_data_hash": "sha256:3690c9bd2acc18a423f1dea86fb5ba2a3ec18cf2b729b5211e8311723336a59d",
+        "content_hash": "sha256:9130fd7100685e598ed4c09d96a07a71e23c81c4b7bc9066e20c32242573275c"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z4",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "realization_id": "rank4-pointed-z4-k3",
+      "snapshot": {
+        "category_data_hash": "sha256:03eb61f1e94897382538bd5c7cbd85a2ccddc847b37aa41e467bf76e6a281c59",
+        "content_hash": "sha256:f8a53b75687a7fddfcdc6ece8df245ee4d53c6f067607c6e41d3847db37c735b"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z4",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "realization_id": "rank4-pointed-z4-k5",
+      "snapshot": {
+        "category_data_hash": "sha256:77ca1abbcd1caddaee38efce21a94869dd641e57f654529373a07e806d8968c3",
+        "content_hash": "sha256:467d41034048b43117d5353aac33927d62ae7970dc47d9096ae339c6b9d7db3e"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z4",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 122880,
+        "+0-1i": 122880,
+        "+0.707106781+0.707106781i": 131072,
+        "+0.707106781-0.707106781i": 131072,
+        "+1+0i": 139776,
+        "-0.707106781+0.707106781i": 131072,
+        "-0.707106781-0.707106781i": 131072,
+        "-1+0i": 138752
+      },
+      "realization_id": "rank4-pointed-z4-k7",
+      "snapshot": {
+        "category_data_hash": "sha256:0d011e1d787deb105e0db8a08e4da2661c112e373d0287c31c41c0662f80a125",
+        "content_hash": "sha256:fea42779d4411598fccb71013164a10ac567b738bf2824749cdced4190c96ba2"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z2xz2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "realization_id": "rank4-pointed-z2xz2-q002",
+      "snapshot": {
+        "category_data_hash": "sha256:938cf851cc4e80ef77acaa2b00459a61c897e9c34d7c5c1388d6040855449bae",
+        "content_hash": "sha256:328f84e089e496e9685f39bb0193f4c2dcc045acf0fdb8a738b3ebe312acdf2b"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z2xz2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "realization_id": "rank4-pointed-z2xz2-q013",
+      "snapshot": {
+        "category_data_hash": "sha256:7011c498e4292edda021b8f45201cefd066ae9d9b2bdded22ed7c856b943cb16",
+        "content_hash": "sha256:165ecb5fb3f451140cca13a149a952c29e6456015090b3745791ce771d8fd5d8"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z2xz2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "realization_id": "rank4-pointed-z2xz2-q112",
+      "snapshot": {
+        "category_data_hash": "sha256:f9e055fb5a06e6c4ea9bf77215191586deb3b1c42863df46a5b0a5b68663119e",
+        "content_hash": "sha256:6c30bf416c3717b8de3f9f863ec29744c05604e4d4bdd4193156433e23095b38"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z2xz2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+1+0i": 524800,
+        "-1+0i": 523776
+      },
+      "realization_id": "rank4-pointed-z2xz2-q222",
+      "snapshot": {
+        "category_data_hash": "sha256:b422d65880e61a17c2ffb1f56631e016fe539616c7c69af4c40be8d75a5055aa",
+        "content_hash": "sha256:4a395e0c9e5d5cc54b70873127cb16f91ccad476cb4ea99f165be0b5d8c3d3f9"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank4-pointed-z2xz2",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "1024.0",
+          "canonical_key": "+1024+0i",
+          "imag": "0.0",
+          "real": "1024.0"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 4
+      },
+      "rank": 4,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0+1i": 262144,
+        "+0-1i": 262144,
+        "+1+0i": 262656,
+        "-1+0i": 261632
+      },
+      "realization_id": "rank4-pointed-z2xz2-q233",
+      "snapshot": {
+        "category_data_hash": "sha256:9ef5f588ad0d396d268a463d652e90fb92e128404ba2dffda3aef195229535a9",
+        "content_hash": "sha256:a2d43d9be5099cc056f1110f2b8f5dc747c6d942615de88ecc203aa2d8d4bb38"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank5-su5-1",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "3124.9999999995343",
+          "canonical_key": "+3125+0i",
+          "imag": "0.0",
+          "real": "3124.9999999995343"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "3124.9999999995343",
+          "canonical_key": "+3125+0i",
+          "imag": "0.0",
+          "real": "3124.9999999995343"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 5
+      },
+      "rank": 5,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "realization_id": "rank5-su5-1-s2",
+      "snapshot": {
+        "category_data_hash": "sha256:149fecbc7cef2295b751f5ae1bcacd19a71a3fc1bc85e6dc1fdbd410b15237bd",
+        "content_hash": "sha256:53764e4181911cc7e6e5bd8856785c3157dcfadde621ce894d22f30edf653d0a"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    },
+    {
+      "family_id": "rank5-su5-1",
+      "normalized_figure21_minus_standard_distribution": {},
+      "normalized_figure21_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "ordinary_kirby_aggregate_calibration": {
+        "calibration_input": "The unweighted sum of all fixed-label amplitudes. This equals the ordinary Kirby-color graph evaluation here because every simple object in the validated pointed snapshots has dimension one.",
+        "correction_derived_before_distribution_comparison": true,
+        "distribution_bucket_alignment_not_used_to_choose_correction": true,
+        "figure21_raw_ordinary_aggregate": {
+          "abs": "3124.9999999995343",
+          "canonical_key": "+3125+0i",
+          "imag": "0.0",
+          "real": "3124.9999999995343"
+        },
+        "presentation_correction_on_figure21": {
+          "abs": "1.0",
+          "canonical_key": "+1+0i",
+          "imag": "0.0",
+          "real": "1.0"
+        },
+        "standard_raw_ordinary_aggregate": {
+          "abs": "3124.9999999995343",
+          "canonical_key": "+3125+0i",
+          "imag": "0.0",
+          "real": "3124.9999999995343"
+        }
+      },
+      "pointed_dimension_check": {
+        "all_quantum_dimensions_equal_one": true,
+        "label_count": 5
+      },
+      "rank": 5,
+      "raw_figure21_minus_standard_distribution": {},
+      "raw_figure21_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "raw_standard_nonzero_value_distribution": {
+        "+0.309016994+0.951056516i": 1952500,
+        "+0.309016994-0.951056516i": 1952500,
+        "+1+0i": 1955625,
+        "-0.809016994+0.587785252i": 1952500,
+        "-0.809016994-0.587785252i": 1952500
+      },
+      "realization_id": "rank5-su5-1-s1",
+      "snapshot": {
+        "category_data_hash": "sha256:51ad31b84da73d922f60cf449130c6a590c330828cb9e15557a3665c873e2ca8",
+        "content_hash": "sha256:e4dda8682349c012b78fa55e43d602aa76aba03c65abfb9d61594ab188e0d778"
+      },
+      "status": "PASS_INDEPENDENT_ORDINARY_CALIBRATION_AND_FULL_DISTRIBUTION_MATCH"
+    }
+  ],
+  "schema": "twisted-yetter.figure21-pointed-ordinary-normalization-audit.v1",
+  "started_at_utc": "2026-07-17T05:02:35.459043+00:00",
+  "status": "PASS_ALL_15_POINTED_ROWS_MATCH_AFTER_INDEPENDENT_ORDINARY_AGGREGATE_NORMALIZATION",
+  "tolerance": 1e-08,
+  "top_notice": "The previous two semion -1 differences are raw presentation-level graph-normalization differences. For each pointed row, this artifact derives one correction using only the ordinary Kirby-color aggregate and then independently checks the complete fixed-label distribution. It does not construct an H2 marking or prove a general MTC normalization theorem."
+}
