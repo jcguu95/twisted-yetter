@@ -1,0 +1,71 @@
+{
+  "schema": "twisted-yetter.reference-ledger.v2",
+  "status": "SOURCE_LOCATORS_RECORDED",
+  "captured_at_utc": "2026-07-17T00:00:00Z",
+  "scope": "Primary sources used by the Lean formalization of Barenz--Barrett Lemma 3.4.",
+  "references": [
+    {
+      "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+      "type": "journal_article",
+      "title": "Dichromatic State Sum Models for Four-Manifolds from Pivotal Functors",
+      "authors": [
+        "Manuel Barenz",
+        "John W. Barrett"
+      ],
+      "journal": "Communications in Mathematical Physics",
+      "volume": "360",
+      "pages": "663-714",
+      "year": 2018,
+      "doi": "10.1007/s00220-017-3012-9",
+      "canonical_url": "https://doi.org/10.1007/s00220-017-3012-9",
+      "locators": [
+        {
+          "label": "graphical calculus for framed links",
+          "locator": "Definition 2.39 and Remarks 2.40, journal pages 675-676"
+        },
+        {
+          "label": "generalized sliding core",
+          "locator": "Lemma 3.3 and equations (3.1.2)-(3.1.11), journal pages 681-684"
+        },
+        {
+          "label": "arbitrary framed knot and multiple strands",
+          "locator": "Lemma 3.4 and equation (3.1.12), journal page 684"
+        }
+      ],
+      "captured_pdf": {
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+        "bytes": 906609,
+        "pages": 52,
+        "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf"
+      },
+      "content_hash_status": "REMOTE_PRIMARY_SOURCE_BYTES_HASHED"
+    },
+    {
+      "ref_id": "ref:mathlib4-v4.29.1-braided-rigid",
+      "type": "software_source",
+      "title": "mathlib4 braided, rigid, and linear monoidal category library",
+      "version": "v4.29.1",
+      "git_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+      "canonical_url": "https://github.com/leanprover-community/mathlib4",
+      "locators": [
+        {
+          "label": "braiding naturality",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean; BraidedCategory.braiding_naturality and braiding_inv_naturality"
+        },
+        {
+          "label": "tensor bifunctor map",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Category.lean; tensorLeft and tensorHom_comp_tensorHom"
+        },
+        {
+          "label": "typed dual extrema",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; ExactPairing"
+        }
+      ],
+      "content_hash_status": "PINNED_BY_LAKE_MANIFEST_GIT_COMMIT"
+    }
+  ],
+  "non_claims": [
+    "This ledger supplies source locators and hashes; it does not itself prove Lemma 3.4.",
+    "The Barenz--Barrett PDF bytes are hashed, but the PDF itself is kept outside the repository."
+  ]
+}

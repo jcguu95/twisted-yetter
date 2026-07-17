@@ -39,3 +39,8 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_7_to_3_1_8
 #print axioms TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.core_sound
 #print axioms TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.equation_3_1_2
+#print axioms TwistedYetter.Kirby.FramedSliding.liftExterior_eval
+#print axioms TwistedYetter.Kirby.FramedSliding.exterior_transport_sound
+#print axioms TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound
+#print axioms TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4
+#print axioms TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound

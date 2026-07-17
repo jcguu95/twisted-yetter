@@ -1,0 +1,93 @@
+{
+  "schema": "twisted-yetter.generalized-sliding-framed-context-obligation-matrix.v1",
+  "status": "GENERALIZED_SLIDING_FRAMED_CONTEXT_OBLIGATIONS_TERMINAL",
+  "scope": "Barenz--Barrett Lemma 3.4, derived from the established Lemma 3.3 law relative to its explicit standard inputs.",
+  "primary_source": {
+    "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+    "reference_ledger": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+    "locator": "Lemma 3.4 and equation (3.1.12), journal page 684"
+  },
+  "inherited_trusted_boundary": {
+    "artifact": "experiments/results/lean-kirby/generalized-sliding-core-v1.json",
+    "status": "PASS_GENERALIZED_SLIDING_CORE",
+    "meaning": "Lemma 3.4 starts from the actual functor-valued Lemma 3.3 law. It does not introduce a second sliding equality."
+  },
+  "obligations": [
+    {
+      "obligation_id": "visible-fixed-tensor-boundary-adapters",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.exposeTensorBoundary",
+      "status": "LEAN_CONSTRUCTED"
+    },
+    {
+      "obligation_id": "visible-exterior-lift",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.liftExterior",
+      "status": "LEAN_CONSTRUCTED"
+    },
+    {
+      "obligation_id": "exterior-lift-evaluator-compatibility",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.liftExterior_eval",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "arbitrary-exterior-naturality",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.exterior_transport_sound",
+      "status": "LEAN_PROVED_FROM_LEMMA_3_3"
+    },
+    {
+      "obligation_id": "certified-framed-exterior-movie",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.exteriorTransportMovie",
+      "status": "LEAN_CONSTRUCTED"
+    },
+    {
+      "obligation_id": "arbitrary-nested-context",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.exteriorTransportInContext",
+      "status": "LEAN_CONSTRUCTED"
+    },
+    {
+      "obligation_id": "nested-context-soundness",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "closed-framed-link-context",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.ClosedFramedContext",
+      "status": "LEAN_CONSTRUCTED_INTERFACE"
+    },
+    {
+      "obligation_id": "closed-lemma-3.4",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4",
+      "status": "LEAN_PROVED_FROM_LEMMA_3_3"
+    },
+    {
+      "obligation_id": "actual-sliding-family-constructor",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie",
+      "status": "LEAN_CONSTRUCTED_FROM_ACTUAL_LEMMA_3_3_FAMILY"
+    },
+    {
+      "obligation_id": "actual-sliding-family-soundness",
+      "lean_declaration": "TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound",
+      "status": "LEAN_PROVED"
+    },
+    {
+      "obligation_id": "wrong-boundary-and-missing-law-negative-tests",
+      "lean_declaration": "scripts/lean_framed_sliding_mutation_tests.sh",
+      "status": "MACHINE_REJECTED_MUTATIONS"
+    }
+  ],
+  "silent_failure_guards": [
+    "The multiple-strand bundle is a parenthesized Boundary, not an untyped strand count.",
+    "The arbitrary exterior is a typed Diagram whose crossings, extrema, coupons, and tensor structure remain visible.",
+    "The fixed-tensor boundary adapters evaluate to identities and are proved compatible with tensorLeft.map.",
+    "The exterior transport equality is derived from Lemma 3.3 core_sound and naturality.",
+    "A wrong target boundary is rejected before evaluation.",
+    "Omitting the actual Lemma 3.3 law makes the Lemma 3.4 constructor ill-typed.",
+    "Closed evaluation is a specialization to unit-to-unit diagrams, not an assumed scalar equality."
+  ],
+  "explicit_non_claims": [
+    "This does not yet define a serializable framed-link or Kirby-presentation input.",
+    "This does not prove that every two regular diagrams of one framed link are connected by the listed moves.",
+    "This does not establish all Reidemeister or presentation-independence generators.",
+    "This does not establish Kirby handle-slide or cancellation invariance.",
+    "This does not prove four-manifold invariance."
+  ]
+}

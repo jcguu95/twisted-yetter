@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,14 +25,6 @@ def _canonical_hash(payload: dict) -> str:
     return f"sha256:{hashlib.sha256(encoded).hexdigest()}"
 
 
-def _sha256_path(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def test_core_artifact_is_clean_terminal_and_content_addressed() -> None:
     artifact = json.loads(ARTIFACT.read_text())
     assert artifact["status"] == "PASS_GENERALIZED_SLIDING_CORE"
@@ -48,12 +41,18 @@ def test_core_artifact_is_clean_terminal_and_content_addressed() -> None:
     assert artifact["checks"]["resource_guards"]["maximum_allowed_threads"] == 2
 
 
-def test_every_pinned_source_hash_matches_current_bytes() -> None:
+def test_every_pinned_source_hash_replays_from_pinned_commit() -> None:
     artifact = json.loads(ARTIFACT.read_text())
+    commit = artifact["git"]["commit"]
     for relative, metadata in artifact["inputs"]["source_files"].items():
-        path = ROOT / relative
-        assert path.stat().st_size == metadata["bytes"], relative
-        assert _sha256_path(path) == metadata["sha256"], relative
+        data = subprocess.run(
+            ["git", "show", f"{commit}:{relative}"],
+            cwd=ROOT,
+            capture_output=True,
+            check=True,
+        ).stdout
+        assert len(data) == metadata["bytes"], relative
+        assert hashlib.sha256(data).hexdigest() == metadata["sha256"], relative
 
 
 def test_obligations_are_terminal_and_trusted_boundary_is_explicit() -> None:

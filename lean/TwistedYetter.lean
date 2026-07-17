@@ -14,3 +14,4 @@ import TwistedYetter.Kirby.MateDiagram
 import TwistedYetter.Kirby.FramingNaturality
 import TwistedYetter.Kirby.HandleSlide
 import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.FramedSliding
