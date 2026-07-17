@@ -1,0 +1,201 @@
+{
+  "argv": [
+    "experiments/scripts/build_generalized_sliding_framed_context_v1.py"
+  ],
+  "checks": {
+    "kirby_axiom_audit": {
+      "new_lemma_3_4_theorem_count": 5,
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "44cd6d2d1cf48e8f04c93fcd3ce2e38e5213aa5f1dc2b1d29e48213893aa3172",
+      "status": "PASS_NO_SORRY_AX",
+      "theorem_count": 37
+    },
+    "mutation_tests": {
+      "output_sha256": "0f581d4cfd02af32187e5f63ead2083e2f3f035531283c4e9af07e6859a5e75f",
+      "rejected_count": 2,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongFramedExteriorBoundary.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingLemma33Law.lean [diagnostic: Application type mismatch]"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "resource_guards": {
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_INHERITED_AND_ENFORCED"
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Kirby/FramedSliding.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 2,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/FramedSliding.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_OR_AXIOM_DECLARATIONS"
+    }
+  },
+  "content_hash": "sha256:2f55ee33e3984152a0d847af25b313d717c44b07f74fc5a2883d9d1ac63137bd",
+  "elapsed_milliseconds": 21815,
+  "established_scope": [
+    "Parenthesized boundaries encode arbitrary tensor products of strands.",
+    "The arbitrary exterior remains a typed diagram with visible crossings, extrema, coupons, and tensor structure.",
+    "The visible exterior lift is proved equal to tensorLeft.map of its evaluation.",
+    "Naturality and the actual Lemma 3.3 core equality derive framed exterior transport.",
+    "The transport is valid in arbitrary nested typed contexts and closed unit-to-unit contexts.",
+    "The public constructor starts from SlidingFamily.sourcedFunctorSlidingLaw; no arbitrary-knot endpoint equality is assumed."
+  ],
+  "explicit_non_claims": [
+    "This does not yet define a serializable framed-link or Kirby-presentation input.",
+    "This does not prove that every two regular diagrams of one framed link are connected by the listed moves.",
+    "This does not establish all Reidemeister or presentation-independence generators.",
+    "This does not establish Kirby handle-slide or cancellation invariance.",
+    "This does not prove four-manifold invariance."
+  ],
+  "finished_at_utc": "2026-07-17T21:25:37Z",
+  "generator_script": "experiments/scripts/build_generalized_sliding_framed_context_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "a4d6d24ae1c351ef36b969431835ea800d40b85a",
+    "dirty": false
+  },
+  "inherited_trusted_input_boundary": [
+    {
+      "does_not_assume": "No sliding endpoint equality is assumed.",
+      "input": "IdentityResolution.sound",
+      "meaning": "The dimension-weighted simple-channel resolution of one identity.",
+      "source_locator": "Lemma 2.37 and Lemma 3.2"
+    },
+    {
+      "does_not_assume": "No mate transport or sliding equality is assumed.",
+      "input": "PivotalTraceCompatibility.preserves_trace_pairing",
+      "meaning": "A pivotal strong monoidal functor preserves the spherical trace pairing.",
+      "source_locator": "Lemma 2.23"
+    },
+    {
+      "does_not_assume": "Transported dual-family equations are derived, not supplied.",
+      "input": "SphericalMateCompatibility.preserves_trace_pairing",
+      "meaning": "The two concrete Frobenius mate maps preserve the spherical pairing.",
+      "source_locator": "Equations (3.1.9)-(3.1.11)"
+    },
+    {
+      "does_not_assume": "There is no whole-chain or endpoint-equality field.",
+      "input": "CategoricalMovie soundness proofs",
+      "meaning": "Each local braiding or cup/cap replacement carries its own evaluator equality.",
+      "source_locator": "Equation (3.1.5), equation (3.1.10), and Mathlib braided/rigid identities"
+    },
+    {
+      "does_not_assume": "Pointwise generalized sliding is derived independently.",
+      "input": "SlidingFamily endpoint naturality",
+      "meaning": "The two endpoint formal sums are natural in the strand object.",
+      "source_locator": "Braiding, evaluation, and coevaluation naturality"
+    }
+  ],
+  "inputs": {
+    "lemma_3_3_artifact": {
+      "content_hash": "sha256:7928ace408a26e362643b84cbc92c2d07b60adacca01160a03751cd719b56272",
+      "path": "experiments/results/lean-kirby/generalized-sliding-core-v1.json",
+      "sha256": "3c46ff649b218ba1986bf235737b82ab1fa66280e7f81a680463b263089a29ee",
+      "source_commit": "22765f17e961cd1d1bf17d72bd6cf9a841bcb5bc"
+    },
+    "obligation_matrix": {
+      "obligation_count": 12,
+      "path": "experiments/inputs/lean-kirby/generalized-sliding-framed-context-obligation-matrix-v1.json",
+      "sha256": "5589568ee89b1826f5d5c735b61ee9ab3c0c58ff09541b244bbecdf84ceccd48"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+      "reference_count": 2,
+      "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
+    },
+    "source_capture": {
+      "bytes": 906609,
+      "path": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+      "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+      "status": "PASS_LOCAL_CAPTURE_MATCH"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/generalized-sliding-framed-context-obligation-matrix-v1.json": {
+        "bytes": 4372,
+        "sha256": "5589568ee89b1826f5d5c735b61ee9ab3c0c58ff09541b244bbecdf84ceccd48"
+      },
+      "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json": {
+        "bytes": 2760,
+        "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
+      },
+      "experiments/results/lean-kirby/generalized-sliding-core-v1.json": {
+        "bytes": 17042,
+        "sha256": "3c46ff649b218ba1986bf235737b82ab1fa66280e7f81a680463b263089a29ee"
+      },
+      "experiments/scripts/build_generalized_sliding_framed_context_v1.py": {
+        "bytes": 11462,
+        "sha256": "d3703a96bebc0758d71121dfd88fecd39e9a9cd149aafd1fb78c73a70b365f07"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/MissingLemma33Law.lean": {
+        "bytes": 666,
+        "sha256": "5155f2eaa29d093817e857f0975e8094ee9449f366105cb165b1a1d8b5202d77"
+      },
+      "lean/Mutations/WrongFramedExteriorBoundary.lean": {
+        "bytes": 898,
+        "sha256": "5fc74c30f1b1474f447dd7880a890ef02dc4380cbef6c4b2e38c1218b991f066"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 718,
+        "sha256": "c92d0ea4bc3d1e95ddcd8ac6a2cfdaece3652bc93e0fe95b92f75058c8492b12"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 3056,
+        "sha256": "ebaab6aa67765a14a9cc694536730c2c867e2f0c9a79caf06869f83d5e566acf"
+      },
+      "lean/TwistedYetter/Kirby/FramedSliding.lean": {
+        "bytes": 10908,
+        "sha256": "db70a29c6630160c2babb5ff8c98fcb3b312677d6ae76b30ccc103b14999dedb"
+      },
+      "scripts/lean_framed_sliding_mutation_tests.sh": {
+        "bytes": 1264,
+        "sha256": "0cce3823eb8e31f321285375ece7f953175326c2c0d959496bd2f0bb3ebc8d08"
+      },
+      "tests/test_generalized_sliding_framed_context_v1.py": {
+        "bytes": 3149,
+        "sha256": "3bbdaa89bd5d71b4f9baacd904fbaad987358059028b8c98537605a4df9f62f6"
+      }
+    }
+  },
+  "mathematical_status": "GENERALIZED_SLIDING_FRAMED_CONTEXT_ESTABLISHED_RELATIVE_TO_LEMMA_3_3_STANDARD_INPUTS",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_generalized_sliding_framed_context_v1.py",
+  "schema": "twisted-yetter.generalized-sliding-framed-context.v1",
+  "started_at_utc": "2026-07-17T21:25:15Z",
+  "status": "PASS_GENERALIZED_SLIDING_FRAMED_CONTEXT",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
