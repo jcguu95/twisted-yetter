@@ -63,8 +63,9 @@ The chain-derived item establishes the generic mechanism: a move supplies a
 chain homotopy equivalence and Lean derives the additive map on `H2`. The
 special-Kirby item is established relative to one separately audited,
 source-backed topology domain axiom, which returns only an unmarked topology
-movie. Binding concrete Kirby syntax to chain matrices and enriching that
-movie remains part of the three source-bound construction conditions below.
+movie. Every move in that movie now carries one typed local recipe shared by
+graphical and chain compilation. Interpreting those recipes in the two
+concrete compilers remains open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -73,13 +74,13 @@ def establishedFoundationConditions : List TargetCondition :=
     .chainDerivedMarkedH2Transport,
     .specialKirbyCalculusCompleteness,
     .exhaustiveEvaluatorCompilerMechanism,
-    .markedPairAssemblyMechanism
+    .markedPairAssemblyMechanism,
+    .sourceBoundLocalMoveRecipes
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
-    .sourceBoundLocalMoveRecipes,
     .sourceBoundEvaluatorCompilerInstance,
     .sourceBoundGeometricH2CompilerInstance
   ]
@@ -89,11 +90,11 @@ theorem target_condition_count :
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 6 := by
+    establishedFoundationConditions.length = 7 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 3 := by
+    openConstructionConditions.length = 2 := by
   rfl
 
 /-- Chain-derived marked `H2` transport is explicitly on the established side. -/
@@ -135,9 +136,18 @@ theorem marked_pair_assembly_mechanism_established :
       establishedFoundationConditions := by
   simp [establishedFoundationConditions]
 
-/-- The raw presentation schema still lacks typed local move recipes. -/
-theorem source_bound_local_move_recipes_open :
+/--
+Each topology move now carries a kind-indexed literal presentation-window
+recipe with one shared identity for graphical and chain compilation.
+-/
+theorem source_bound_local_move_recipes_established :
     TargetCondition.sourceBoundLocalMoveRecipes ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The typed-recipe mechanism cannot simultaneously remain open. -/
+theorem source_bound_local_move_recipes_not_open :
+    TargetCondition.sourceBoundLocalMoveRecipes ∉
       openConstructionConditions := by
   simp [openConstructionConditions]
 

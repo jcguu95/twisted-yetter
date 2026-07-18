@@ -28,6 +28,7 @@ open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uK uC vC uS uI uH
 
@@ -88,7 +89,7 @@ structure TableTwoEvaluatorCompiler
       DecoratedKirbyPresentation categoryData presentation
   framedIsotopy :
     {source target : SpecialKirbyPresentation manifold H2} →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .framedIsotopy source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -98,7 +99,7 @@ structure TableTwoEvaluatorCompiler
   oneOverOne :
     {source target : SpecialKirbyPresentation manifold H2} →
     (orientation : BandOrientation) →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .oneOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -108,7 +109,7 @@ structure TableTwoEvaluatorCompiler
   twoOverOne :
     {source target : SpecialKirbyPresentation manifold H2} →
     (orientation : BandOrientation) →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .twoOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -118,7 +119,7 @@ structure TableTwoEvaluatorCompiler
   twoOverTwo :
     {source target : SpecialKirbyPresentation manifold H2} →
     (orientation : BandOrientation) →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .twoOverTwo source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -127,7 +128,7 @@ structure TableTwoEvaluatorCompiler
         (.twoOverTwo orientation metadata counts_sound transport) alpha
   oneTwoBirth :
     {source target : SpecialKirbyPresentation manifold H2} →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .oneTwoBirth source target) →
     (counts_sound : target.counts = source.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -136,7 +137,7 @@ structure TableTwoEvaluatorCompiler
         (.oneTwoBirth metadata counts_sound transport) alpha
   oneTwoDeath :
     {source target : SpecialKirbyPresentation manifold H2} →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .oneTwoDeath source target) →
     (counts_sound : source.counts = target.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -145,7 +146,7 @@ structure TableTwoEvaluatorCompiler
         (.oneTwoDeath metadata counts_sound transport) alpha
   twoThreeBirth :
     {source target : SpecialKirbyPresentation manifold H2} →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .twoThreeBirth source target) →
     (counts_sound : target.counts = source.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -154,7 +155,7 @@ structure TableTwoEvaluatorCompiler
         (.twoThreeBirth metadata counts_sound transport) alpha
   twoThreeDeath :
     {source target : SpecialKirbyPresentation manifold H2} →
-    (metadata : TableTwoMoveMetadata source target) →
+    (metadata : TableTwoMoveMetadata .twoThreeDeath source target) →
     (counts_sound : source.counts = target.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
@@ -215,7 +216,7 @@ theorem compile_framedIsotopy
     (compiler :
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .framedIsotopy source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -233,7 +234,7 @@ theorem compile_oneOverOne
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
     (orientation : BandOrientation)
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .oneOverOne source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -253,7 +254,7 @@ theorem compile_twoOverOne
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
     (orientation : BandOrientation)
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .twoOverOne source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -273,7 +274,7 @@ theorem compile_twoOverTwo
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
     (orientation : BandOrientation)
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .twoOverTwo source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -292,7 +293,7 @@ theorem compile_oneTwoBirth
     (compiler :
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
     (counts : target.counts = source.counts.addOneTwo)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -309,7 +310,7 @@ theorem compile_oneTwoDeath
     (compiler :
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
     (counts : source.counts = target.counts.addOneTwo)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -326,7 +327,7 @@ theorem compile_twoThreeBirth
     (compiler :
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
     (counts : target.counts = source.counts.addTwoThree)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
@@ -343,7 +344,7 @@ theorem compile_twoThreeDeath
     (compiler :
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
     (counts : source.counts = target.counts.addTwoThree)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :

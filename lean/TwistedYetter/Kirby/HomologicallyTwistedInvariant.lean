@@ -33,6 +33,7 @@ open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.PresentationIsotopy
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uK uC vC uS uI uH
 
@@ -151,22 +152,21 @@ def twoOverTwoSlideMetadata
   match slide with
   | .twoOverTwo metadata _ _ _ _ _ => metadata
 
-/-- Extract the R10 metadata from every exact Table 2 constructor. -/
-def tableTwoMoveMetadata
+/-- Extract the shared source-bound recipe identity from every exact move. -/
+def tableTwoMoveId
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
-    (move : TableTwoMove source target) :
-    TableTwoMoveMetadata source target :=
+    (move : TableTwoMove source target) : String :=
   match move with
-  | .framedIsotopy metadata _ _ => metadata
-  | .oneOverOne _ metadata _ _ => metadata
-  | .twoOverOne _ metadata _ _ => metadata
-  | .twoOverTwo _ metadata _ _ => metadata
-  | .oneTwoBirth metadata _ _ => metadata
-  | .oneTwoDeath metadata _ _ => metadata
-  | .twoThreeBirth metadata _ _ => metadata
-  | .twoThreeDeath metadata _ _ => metadata
+  | .framedIsotopy metadata _ _ => metadata.moveId
+  | .oneOverOne _ metadata _ _ => metadata.moveId
+  | .twoOverOne _ metadata _ _ => metadata.moveId
+  | .twoOverTwo _ metadata _ _ => metadata.moveId
+  | .oneTwoBirth metadata _ _ => metadata.moveId
+  | .oneTwoDeath metadata _ _ => metadata.moveId
+  | .twoThreeBirth metadata _ _ => metadata.moveId
+  | .twoThreeDeath metadata _ _ => metadata.moveId
 
 /--
 Hash-bound assertion that one R7/R8/R9 proof object realizes the exact R10
@@ -178,7 +178,7 @@ structure LocalEvaluationBinding
     {source target : SpecialKirbyPresentation manifold H2}
     (move : TableTwoMove source target) where
   moveId : String
-  move_id_sound : moveId = (tableTwoMoveMetadata move).moveId
+  move_id_sound : moveId = tableTwoMoveId move
   sourcePresentationHash : String
   source_hash_sound :
     sourcePresentationHash = source.formal.pinnedSourceHash
@@ -209,7 +209,7 @@ inductive EvaluatedTableTwoStep
     (move : TableTwoMove source target) → H2 →
       Type (max (max (max uK uC) vC) (max (max uS uI) uH))
   | framedIsotopy
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .framedIsotopy source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -224,7 +224,7 @@ inductive EvaluatedTableTwoStep
         (TableTwoMove.framedIsotopy metadata counts_sound transport) alpha
   | oneOverOne
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -253,7 +253,7 @@ inductive EvaluatedTableTwoStep
           orientation metadata counts_sound transport) alpha
   | twoOverOne
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -282,7 +282,7 @@ inductive EvaluatedTableTwoStep
           orientation metadata counts_sound transport) alpha
   | twoOverTwo
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -309,7 +309,7 @@ inductive EvaluatedTableTwoStep
         (TableTwoMove.twoOverTwo
           orientation metadata counts_sound transport) alpha
   | oneTwoBirth
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -326,7 +326,7 @@ inductive EvaluatedTableTwoStep
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.oneTwoBirth metadata counts_sound transport) alpha
   | oneTwoDeath
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
       (counts_sound : source.counts = target.counts.addOneTwo)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -343,7 +343,7 @@ inductive EvaluatedTableTwoStep
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.oneTwoDeath metadata counts_sound transport) alpha
   | twoThreeBirth
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
       (counts_sound : target.counts = source.counts.addTwoThree)
       (transport : MarkedH2Transport source target)
       (alpha : H2)
@@ -360,7 +360,7 @@ inductive EvaluatedTableTwoStep
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.twoThreeBirth metadata counts_sound transport) alpha
   | twoThreeDeath
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
       (counts_sound : source.counts = target.counts.addTwoThree)
       (transport : MarkedH2Transport source target)
       (alpha : H2)

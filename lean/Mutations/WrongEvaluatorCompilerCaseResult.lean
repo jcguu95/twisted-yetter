@@ -7,6 +7,7 @@ open TwistedYetter.Kirby.GeneralizedSliding
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uK uC vC uS uI uH
 
@@ -30,7 +31,7 @@ example
       TableTwoEvaluatorCompiler categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
     (orientation : BandOrientation)
-    (metadata : TableTwoMoveMetadata source target)
+    (metadata : TableTwoMoveMetadata .oneOverOne source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :

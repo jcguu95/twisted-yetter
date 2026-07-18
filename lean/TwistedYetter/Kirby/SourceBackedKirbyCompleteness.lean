@@ -31,6 +31,7 @@ namespace TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uH
 
@@ -73,45 +74,45 @@ inductive TopologicalTableTwoMove
       SpecialKirbyPresentation manifold H2 → Type (uH + 1)
   | framedIsotopy
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .framedIsotopy source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | oneOverOne
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | twoOverOne
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | twoOverTwo
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | oneTwoBirth
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo) :
       TopologicalTableTwoMove source target
   | oneTwoDeath
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
       (counts_sound : source.counts = target.counts.addOneTwo) :
       TopologicalTableTwoMove source target
   | twoThreeBirth
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
       (counts_sound : target.counts = source.counts.addTwoThree) :
       TopologicalTableTwoMove source target
   | twoThreeDeath
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
       (counts_sound : source.counts = target.counts.addTwoThree) :
       TopologicalTableTwoMove source target
 

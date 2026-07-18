@@ -4,10 +4,11 @@ namespace TwistedYetter.Mutations.MissingLocalTopologyWitness
 
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe u
 
-/-- This must fail: hashes alone do not assert that a local move occurred. -/
+/-- This must fail: the complete typed local recipe cannot be omitted. -/
 def unsafeMetadata
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
@@ -17,7 +18,7 @@ def unsafeMetadata
     (targetSound : targetHash = target.formal.pinnedSourceHash)
     (certificateShape :
       RawPresentation.sha256Shape certificateHash = true) :
-    TableTwoMoveMetadata source target where
+    TableTwoMoveMetadata .framedIsotopy source target where
   moveId := moveId
   sourcePresentationHash := sourceHash
   targetPresentationHash := targetHash

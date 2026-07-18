@@ -25,7 +25,7 @@ expected_diagnostics=(
   'Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`'
   '`homologyEquiv` is not a field of structure `MarkedH2Transport`'
   'Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`'
-  'Fields missing: `locallyRealizesTableTwoMove`, `local_topology_witness`'
+  'Fields missing: `recipe`'
 )
 
 for index in "${!mutations[@]}"; do

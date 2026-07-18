@@ -17,7 +17,7 @@ expected_diagnostics=(
   '`prescription` is not a field of structure `FourManifoldInvariantInputs`'
   '`localStep` is not a field of structure `TableTwoEvaluatorCompiler`'
   'Fields missing: `twoThreeDeath`'
-  'TableTwoMove.twoOverOne'
+  'RecipeKind.twoOverOne'
 )
 
 for index in "${!mutations[@]}"; do

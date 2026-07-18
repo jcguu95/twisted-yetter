@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.HandleChainHomology
+import TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 /-!
 # Kirby completeness as an explicit topology boundary
@@ -30,6 +31,7 @@ open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.HandleChainHomology
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uH uA
 
@@ -281,23 +283,85 @@ structure SpecialKirbyPresentation
   handleChain : HandleChainModel counts
   h2ModelEquiv : handleChain.SecondHomology ≃+ H2
 
-/-- Hash-bound metadata for one special Table 2 link move. -/
+/--
+Typed metadata for one special Table 2 link move.
+
+The old arbitrary proposition `locallyRealizesTableTwoMove` has been removed.
+The sole field is now a source-bound, kind-indexed local recipe containing a
+literal component/event window replacement and a closed handle-edit program.
+-/
 structure TableTwoMoveMetadata
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
+    (kind : RecipeKind)
     (source target : SpecialKirbyPresentation manifold H2) where
-  moveId : String
-  sourcePresentationHash : String
-  targetPresentationHash : String
-  source_hash_sound :
-    sourcePresentationHash = source.formal.pinnedSourceHash
-  target_hash_sound :
-    targetPresentationHash = target.formal.pinnedSourceHash
-  localTopologyCertificateHash : String
-  local_certificate_hash_shape :
-    RawPresentation.sha256Shape localTopologyCertificateHash = true
-  locallyRealizesTableTwoMove : Prop
-  local_topology_witness : locallyRealizesTableTwoMove
+  recipe : SourceBoundRecipe kind source.formal target.formal
+
+namespace TableTwoMoveMetadata
+
+def moveId
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) : String :=
+  metadata.recipe.recipeId
+
+def sourcePresentationHash
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) : String :=
+  metadata.recipe.sourcePresentationHash
+
+def targetPresentationHash
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) : String :=
+  metadata.recipe.targetPresentationHash
+
+def localTopologyCertificateHash
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) : String :=
+  metadata.recipe.recipeSnapshotHash
+
+theorem source_hash_sound
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) :
+    metadata.sourcePresentationHash =
+      source.formal.pinnedSourceHash :=
+  metadata.recipe.source_hash_sound
+
+theorem target_hash_sound
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) :
+    metadata.targetPresentationHash =
+      target.formal.pinnedSourceHash :=
+  metadata.recipe.target_hash_sound
+
+theorem local_certificate_hash_shape
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {kind : RecipeKind}
+    {source target : SpecialKirbyPresentation manifold H2}
+    (metadata : TableTwoMoveMetadata kind source target) :
+    RawPresentation.sha256Shape
+        metadata.localTopologyCertificateHash = true :=
+  metadata.recipe.recipe_snapshot_hash_shape
+
+end TableTwoMoveMetadata
 
 /--
 Presentation-to-presentation chain data.
@@ -391,52 +455,52 @@ inductive TableTwoMove
       SpecialKirbyPresentation manifold H2 → Type (uH + 1)
   | framedIsotopy
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .framedIsotopy source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneOverOne
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoOverOne
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoOverTwo
       {source target : SpecialKirbyPresentation manifold H2}
       (orientation : BandOrientation)
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneTwoBirth
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneTwoDeath
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
       (counts_sound : source.counts = target.counts.addOneTwo)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoThreeBirth
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
       (counts_sound : target.counts = source.counts.addTwoThree)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoThreeDeath
       {source target : SpecialKirbyPresentation manifold H2}
-      (metadata : TableTwoMoveMetadata source target)
+      (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
       (counts_sound : source.counts = target.counts.addTwoThree)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
