@@ -1,0 +1,275 @@
+{
+  "admission": {
+    "ctl_claim_admitted": false,
+    "ctl_manifest_written": false,
+    "status": "REPO_LOCAL_GOAL_EVIDENCE_ONLY"
+  },
+  "argv": [
+    "experiments/scripts/build_four_manifold_invariant_target_v1.py"
+  ],
+  "checks": {
+    "contract": {
+      "forbidden_promotion_count": 0,
+      "required_token_count": 10,
+      "status": "PASS_TARGET_STATED_WITHOUT_CONCRETE_PROMOTION"
+    },
+    "scoped_pytest": {
+      "files": [
+        "tests/test_four_manifold_invariant_target_v1.py"
+      ],
+      "output": ".........                                                                [100%]\n9 passed in 0.01s",
+      "passed_count": 9,
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:25d44305e02c30db9f3697efda43b9c31ffd238967b252c8285e62530d116aa1",
+  "elapsed_milliseconds": 33404,
+  "explicit_non_claims": [
+    "This matrix does not establish a concrete four-manifold invariant.",
+    "This matrix does not derive special Kirby completeness from general Cerf theory in Lean.",
+    "This matrix does not derive marked H2 transport from a handle chain complex.",
+    "This matrix does not construct a concrete evaluator compiler.",
+    "An arbitrary inhabitant of FourManifoldInvariantInputs is not admissible evidence.",
+    "This matrix does not require or claim Crane-Yetter state-sum identification.",
+    "This matrix does not admit a CTL claim."
+  ],
+  "finished_at_utc": "2026-07-18T13:55:30Z",
+  "generator_script": "experiments/scripts/build_four_manifold_invariant_target_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "364244a76eb6fff14a3a6e4ea359c8445da47c99",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "condition_count": 6,
+      "file_sha256": "sha256:570b612c565db198de53c14abb7ac6e72cde1bce3088bb0dded2f5c3dda9bb17",
+      "open_condition_count": 4,
+      "path": "experiments/inputs/lean-kirby/four-manifold-invariant-target-obligation-matrix-v1.json"
+    },
+    "predecessor_artifacts": [
+      {
+        "content_hash": "sha256:b3683789e585a7183ad9e88ac8063c792e4314cd02c09dc5d10a641f83d75cad",
+        "file_sha256": "sha256:43ea028c86e02a4006f6d8ae29cedc97007ccca0200047414dc8d2cee462ee45",
+        "path": "experiments/results/lean-kirby/kirby-cancellation-v1.json",
+        "schema": "twisted-yetter.kirby-cancellation-and-normalization.v1",
+        "source_commit": "5bb5b770b03ab08eb63e7e7e06f59bc41ac60427",
+        "status": "PASS_ALL_BARENZ_BARRETT_TABLE2_LOCAL_KIRBY_MOVES"
+      },
+      {
+        "content_hash": "sha256:9c0805c9f0152750c8ee5e3ddd78995ea56fdb61474606dcd5658c544b5fdb45",
+        "file_sha256": "sha256:a70f7b66b20f4c2fa198e887584db57352527429281c46e05a46b53fb61eb6e0",
+        "path": "experiments/results/lean-kirby/kirby-completeness-v1.json",
+        "schema": "twisted-yetter.kirby-completeness-boundary.v1",
+        "source_commit": "d0683d91998211e444fdb39f85102a9a663b3da3",
+        "status": "PASS_KIRBY_CERF_TOPOLOGY_BOUNDARY"
+      },
+      {
+        "content_hash": "sha256:19575d5602f95b55011d4690c68d6333ed6ced74a94dbadcf0e111913f3b7da8",
+        "file_sha256": "sha256:0b0cf045827fdfc6784771cfda58136099ee2e8cc5f547aedc81865b37f7724d",
+        "path": "experiments/results/lean-kirby/homologically-twisted-invariant-v1.json",
+        "schema": "twisted-yetter.homologically-twisted-kirby-invariant.v1",
+        "source_commit": "30f397f9e7e90bdb842751bffc52a9aec8fea480",
+        "status": "PASS_HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT"
+      },
+      {
+        "content_hash": "sha256:b6bf68de16eba188db6db8177d0b24ad9777ef96c5248999ef4385eeb6cdc282",
+        "file_sha256": "sha256:6593b52e44c56d180f91a9c8ce7e275e31b9fec2d7e96508b1e277cd00137895",
+        "path": "experiments/results/lean-kirby/homologically-twisted-kirby-formalization-package-v1.json",
+        "schema": "twisted-yetter.final-formalization-package.v1",
+        "source_commit": "f8bf2a10e01e909bae3ed9a7ef04cade236b7f58",
+        "status": "PASS_R13_FORMALIZATION_PACKAGE_TERMINAL_WITH_EXPLICIT_FIGURE21_BLOCKERS"
+      }
+    ],
+    "reference_ledger": {
+      "file_sha256": "sha256:7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78",
+      "path": "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json",
+      "reference_count": 4
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/four-manifold-invariant-target-obligation-matrix-v1.json": {
+        "bytes": 2209,
+        "sha256": "sha256:570b612c565db198de53c14abb7ac6e72cde1bce3088bb0dded2f5c3dda9bb17"
+      },
+      "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json": {
+        "bytes": 2374,
+        "sha256": "sha256:7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78"
+      },
+      "experiments/scripts/build_four_manifold_invariant_target_v1.py": {
+        "bytes": 14913,
+        "sha256": "sha256:97797f953c9911339e2b94f88d83b75c2865de472e1184dcfad2940fdebca950"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/DropFourManifoldInvariantTargetCondition.lean": {
+        "bytes": 168,
+        "sha256": "sha256:77c5612a193a2f8cc4b538411755eb37dff76e936d33c2f6f63d590f2e4024f0"
+      },
+      "lean/Mutations/PromoteFourManifoldInvariantTarget.lean": {
+        "bytes": 164,
+        "sha256": "sha256:97fabebe132b2e59ca7a74221adadb21d6a5582a9d687629acf4454eef97c149"
+      },
+      "lean/Mutations/RequireCraneYetterIdentificationForTarget.lean": {
+        "bytes": 159,
+        "sha256": "sha256:dc8eea932e948379f29e2a86f450859103b00580d5e0cf781f6acdefbd4d7475"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 1159,
+        "sha256": "sha256:efded091f39f5ac35f0849394f1732f9a501e3874de5457d1e25cfbf8118b5e5"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean": {
+        "bytes": 6772,
+        "sha256": "sha256:6e88800dd4c73e514693e290c52322c6e76da9d55b8e869a5fce25739650e4b8"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean": {
+        "bytes": 1133,
+        "sha256": "sha256:69b672277d26f39ffd54177d8facfa3678475b904d6321781c3b3f18358b7004"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCancellation.lean": {
+        "bytes": 14030,
+        "sha256": "sha256:0f73c58414aa7517333d1b3ba21028ff1f3c69ef1ee3063bfe5338026cdfaaef"
+      },
+      "scripts/lean_four_manifold_invariant_target_axiom_audit.sh": {
+        "bytes": 502,
+        "sha256": "sha256:39e69f44079c12483b5f0cb98baf00ae540e5a7fbf73fe72818acfecd733a8a4"
+      },
+      "scripts/lean_four_manifold_invariant_target_mutation_tests.sh": {
+        "bytes": 1496,
+        "sha256": "sha256:462fe00e40d8c2c15c0bd6e741a7eb5afb4a3c6a6c12307292517e5f3d1bbc7b"
+      },
+      "src/twisted_yetter/four_manifold_invariant_target_v1.py": {
+        "bytes": 6938,
+        "sha256": "sha256:9c7c49ce7209b350a420baf82bfb8aeb91036b43429ff92390a3734d82f0a1e6"
+      },
+      "tests/test_four_manifold_invariant_target_artifact_v1.py": {
+        "bytes": 3290,
+        "sha256": "sha256:33c5e5d440970ec1e1daf143ea73650e107496a7d428a3c546911da21041a9d9"
+      },
+      "tests/test_four_manifold_invariant_target_v1.py": {
+        "bytes": 4141,
+        "sha256": "sha256:81fc23db40103472b01ee4ec39e7688f37504d4906883c75e07b5f3ed2a5e892"
+      }
+    }
+  },
+  "lean_certificate": {
+    "axiom_audit": {
+      "allowed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audited_declaration_count": 8,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "output": "'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.twoThreeFactor_mul_threeHandleWeight' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ratio_addTwoThree' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_with_explicit_three_handle' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.target_condition_count' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.target_condition_partition' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.current_target_has_open_conditions' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]",
+      "status": "PASS_ONLY_STANDARD_LEAN_AXIOMS",
+      "unexpected_axioms": []
+    },
+    "build_order": [
+      "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+      "lean/TwistedYetter.lean"
+    ],
+    "build_output": "",
+    "mutation_count": 3,
+    "mutation_rejections": [
+      "PASS expected rejection: lean/Mutations/PromoteFourManifoldInvariantTarget.lean [diagnostic: Tactic `rfl` failed]",
+      "PASS expected rejection: lean/Mutations/DropFourManifoldInvariantTargetCondition.lean [diagnostic: Tactic `rfl` failed]",
+      "PASS expected rejection: lean/Mutations/RequireCraneYetterIdentificationForTarget.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.FourManifoldInvariantTarget.TargetCondition.craneYetterIdentification`]"
+    ],
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
+        "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "status": "PASS_BUILD_AXIOM_AUDIT_AND_MUTATION_REJECTIONS"
+  },
+  "mathematical_status": "FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_four_manifold_invariant_target_v1.py",
+  "roadmap_status": "SIMPLE_FOUNDATION_GAPS_CLOSED_NEXT_CONCRETE_CONSTRUCTION",
+  "runtime_certificate": {
+    "condition_counts": {
+      "established": 2,
+      "open": 4,
+      "required": 6
+    },
+    "content_hash": "sha256:e7823a3bbe0ef5e99600a3a23f3298f2211c78eb67791242bc88112d5ce69053",
+    "established_conditions": [
+      "category_and_graphical_algebra",
+      "explicit_three_handle_normalization"
+    ],
+    "explicit_nonclaims": [
+      "This target artifact does not claim that a concrete four-manifold invariant has been established.",
+      "The special Kirby calculus completeness bridge remains an explicit source-backed topology input.",
+      "The marked H2 transport has not yet been derived from a handle chain complex in Lean.",
+      "A concrete evaluator compiler has not yet assembled the localStep proof for every presentation, move, and marked class.",
+      "An arbitrary inhabitant of FourManifoldInvariantInputs is not admissible until its nested semantic boundaries are concretely derived.",
+      "No identification with a Crane-Yetter state sum is required or claimed.",
+      "No CTL theorem, objective note, or claim is admitted by this artifact."
+    ],
+    "four_manifold_invariant_established": false,
+    "mathematical_status": "FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+    "open_conditions": [
+      "concrete_evaluator_compiler",
+      "special_kirby_calculus_completeness",
+      "chain_derived_marked_h2_transport",
+      "concrete_marked_pair_assembly"
+    ],
+    "required_conditions": [
+      "category_and_graphical_algebra",
+      "explicit_three_handle_normalization",
+      "concrete_evaluator_compiler",
+      "special_kirby_calculus_completeness",
+      "chain_derived_marked_h2_transport",
+      "concrete_marked_pair_assembly"
+    ],
+    "schema": "twisted-yetter.four-manifold-invariant-target-runtime.v1",
+    "status": "TARGET_STATED_SIMPLE_THREE_HANDLE_NORMALIZATION_ESTABLISHED_HARD_CONDITIONS_OPEN",
+    "target_theorem": {
+      "concrete_input_instance_constructed": false,
+      "lean_input_type": "FourManifoldInvariantInputs",
+      "lean_theorem": "FourManifoldInvariantInputs.four_manifold_invariant_target",
+      "statement": "Any two certified special Kirby realizations of the same marked pair have equal normalized evaluator values."
+    },
+    "three_handle_normalization": {
+      "cancelling_pair_product": "1",
+      "dimension_symbol": "d(C)",
+      "isolated_two_handle_factor": "d(C)",
+      "lean_witnesses": [
+        "GlobalDimensionProfile.twoThreeFactor_mul_threeHandleWeight",
+        "GlobalDimensionProfile.denominator_ratio_addTwoThree",
+        "TwoThreeLocalCalculation.raw_with_explicit_three_handle"
+      ],
+      "three_handle_weight": "d(C)^-1",
+      "total_quantum_dimension_warning": "If script-D^2 = d(C), this weight is script-D^-2."
+    }
+  },
+  "schema": "twisted-yetter.four-manifold-invariant-target.v1",
+  "started_at_utc": "2026-07-18T13:54:57Z",
+  "status": "PASS_TARGET_STATED_SIMPLE_THREE_HANDLE_GAP_CLOSED_FOUR_HARD_CONDITIONS_OPEN",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  }
+}
