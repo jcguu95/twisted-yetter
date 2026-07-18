@@ -1,0 +1,113 @@
+{
+  "explicit_non_claims": [
+    "R8 does not re-prove Bärenz-Barrett Lemma 3.1 from fusion-category axioms.",
+    "A handle-chain or linking-matrix certificate is bookkeeping only and is not a link-diagram or evaluator proof.",
+    "R8 does not formalize handle cancellations, normalization, Cerf theory, or Kirby-calculus completeness.",
+    "R8 does not yet define a four-manifold invariant or prove invariance of a homologically twisted construction.",
+    "The specially-dotted evaluator is not silently identified with the ordinary dotted one-handle color."
+  ],
+  "obligations": [
+    {
+      "obligation_id": "one-over-one-positive",
+      "status": "LEAN_PROVED_RELATIVE_TO_BB_LEMMA_3_1",
+      "witness": "OrdinaryHandleSlide.oneOverOne; OrdinaryHandleSlide.sound"
+    },
+    {
+      "obligation_id": "one-over-one-negative",
+      "status": "LEAN_PROVED_RELATIVE_TO_BB_LEMMA_3_1",
+      "witness": "BandOrientation.negative plus OrdinaryHandleSlide.sound"
+    },
+    {
+      "obligation_id": "two-over-one-positive",
+      "status": "LEAN_PROVED_RELATIVE_TO_BB_LEMMA_3_1",
+      "witness": "OrdinaryHandleSlide.twoOverOne; OrdinaryHandleSlide.sound"
+    },
+    {
+      "obligation_id": "two-over-one-negative",
+      "status": "LEAN_PROVED_RELATIVE_TO_BB_LEMMA_3_1",
+      "witness": "BandOrientation.negative plus OrdinaryHandleSlide.sound"
+    },
+    {
+      "obligation_id": "two-over-two-positive",
+      "status": "LEAN_PROVED_FROM_R4_R5_SLIDING_FAMILY",
+      "witness": "TwoHandleOverTwoSlide.twoOverTwo; TwoHandleOverTwoSlide.sound"
+    },
+    {
+      "obligation_id": "two-over-two-negative",
+      "status": "LEAN_PROVED_FROM_R4_R5_SLIDING_FAMILY",
+      "witness": "BandOrientation.negative plus TwoHandleOverTwoSlide.sound"
+    },
+    {
+      "obligation_id": "arbitrary-typed-exterior-and-outer-context",
+      "status": "LEAN_PROVED",
+      "witness": "ordinary_exterior_transport_sound and SlidingFamily.lemma34Movie_sound"
+    },
+    {
+      "obligation_id": "closed-slide-whitelists",
+      "status": "LEAN_PROVED_BY_INDUCTIVE_API_AND_MUTATION",
+      "witness": "OrdinaryHandleSlide and TwoHandleOverTwoSlide have exactly three total constructors and no arbitrary CertifiedMove injection"
+    },
+    {
+      "obligation_id": "component-role-compatibility",
+      "status": "LEAN_REQUIRED_AND_RUNTIME_VALIDATED",
+      "witness": "SlideMetadata.roles_sound and six runtime fixtures"
+    },
+    {
+      "obligation_id": "component-lineage",
+      "status": "LEAN_REQUIRED_AND_RUNTIME_VALIDATED",
+      "witness": "ComponentLineage plus exact stable-ID coverage"
+    },
+    {
+      "obligation_id": "one-handle-chain-basis-update",
+      "status": "EXACT_RUNTIME_CERTIFICATE",
+      "witness": "d2_target = P1^-1 * d2_source * P2"
+    },
+    {
+      "obligation_id": "two-handle-linking-form-update",
+      "status": "EXACT_RUNTIME_CERTIFICATE_TWO_OVER_TWO_ONLY",
+      "witness": "Q_target = P2^T * Q_source * P2"
+    },
+    {
+      "obligation_id": "framing-update-scope",
+      "status": "LEAN_INDEXED_AND_RUNTIME_VALIDATED",
+      "witness": "FramingBookkeeping does not assign integer framing arithmetic to a dotted one-handle"
+    },
+    {
+      "obligation_id": "h2-class-transport",
+      "status": "LEAN_ABSTRACT_AND_RUNTIME_EXACT",
+      "witness": "class coordinates P2^-1 mod 2"
+    },
+    {
+      "obligation_id": "homological-character-transport",
+      "status": "LEAN_DERIVED_AND_RUNTIME_EXACT",
+      "witness": "transportCharacter and character coordinates P2^T mod 2"
+    },
+    {
+      "obligation_id": "class-character-pairing",
+      "status": "LEAN_PROVED_AND_RUNTIME_EXHAUSTIVE",
+      "witness": "HomologicalTransport.pairing_preserved and exhaustive fixture checks"
+    }
+  ],
+  "schema": "twisted-yetter.kirby-handle-moves-obligation-matrix.v1",
+  "status": "R8_TERMINAL_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS",
+  "trusted_inputs": [
+    {
+      "exact_content": "The source-backed original Kirby-color sliding equality of Bärenz-Barrett Lemma 3.1, represented by SourcedSlidingLaw.",
+      "input_id": "bb-original-sliding-property",
+      "lean_type": "SourcedSlidingLaw",
+      "not_assumed": "No arbitrary handle-slide evaluator equality or CertifiedMove injection is included."
+    },
+    {
+      "exact_content": "The R4 SlidingFamily and R5 arbitrary framed-context theorem derived from the finite generalized-sliding calculation.",
+      "input_id": "r4-r5-generalized-sliding-family",
+      "lean_type": "SlidingFamily",
+      "not_assumed": "No independent two-over-two endpoint equality is accepted."
+    },
+    {
+      "exact_content": "For each concrete presentation, a topology-correct handle-chain basis equivalence and component lineage are supplied and validated.",
+      "input_id": "concrete-handle-bookkeeping",
+      "lean_type": "SlideMetadata; ComponentLineage; HomologicalTransport",
+      "not_assumed": "Matrix congruence is not treated as the graphical move proof."
+    }
+  ]
+}

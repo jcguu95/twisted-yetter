@@ -479,6 +479,9 @@ def _matrix_pair_artifact(pair: PresentationPair) -> dict[str, object]:
             "determinant_abs": 1,
         },
         "decoration_transform_mod2": _rows_to_lists(pair.decoration_transform_mod2),
+        "character_transform_mod2": _rows_to_lists(
+            pair.character_transform_mod2
+        ),
         "transformed_decorations_mod2": _rows_to_lists(
             pair.transformed_decorations_mod2()
         ),
@@ -594,6 +597,7 @@ def _matrix_pair_metadata_is_valid(pair: object) -> bool:
         "component_lineage",
         "basis_map",
         "decoration_transform_mod2",
+        "character_transform_mod2",
         "machine_checked_matrix_equivalence",
         "claim_boundary",
         "does_not_prove",

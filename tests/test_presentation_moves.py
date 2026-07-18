@@ -76,8 +76,41 @@ def test_assert_valid_detects_tampered_decoration_transform() -> None:
         basis_matrix=pair.basis_matrix,
         inverse_basis_matrix=pair.inverse_basis_matrix,
         decoration_transform_mod2=((1, 0), (0, 1)),
+        character_transform_mod2=pair.character_transform_mod2,
         metadata=pair.metadata,
     )
 
     with pytest.raises(ValueError, match="decoration transform"):
+        tampered.assert_valid()
+
+
+def test_character_transform_is_dual_and_preserves_every_mod2_pairing() -> None:
+    pair = next(
+        pair for pair in small_presentation_pairs()
+        if pair.name == "hyperbolic-shear"
+    )
+
+    assert pair.character_transform_mod2 == ((1, 0), (1, 1))
+    for character in ((0, 0), (1, 0), (0, 1), (1, 1)):
+        for decoration in ((0, 0), (1, 0), (0, 1), (1, 1)):
+            pair.assert_pairing_preserved(character, decoration)
+
+
+def test_tampered_character_transform_is_rejected() -> None:
+    pair = next(
+        pair for pair in small_presentation_pairs()
+        if pair.name == "odd-positive-shear"
+    )
+    tampered = PresentationPair(
+        name=pair.name,
+        source=pair.source,
+        target=pair.target,
+        basis_matrix=pair.basis_matrix,
+        inverse_basis_matrix=pair.inverse_basis_matrix,
+        decoration_transform_mod2=pair.decoration_transform_mod2,
+        character_transform_mod2=((1, 0), (0, 1)),
+        metadata=pair.metadata,
+    )
+
+    with pytest.raises(ValueError, match="character transform"):
         tampered.assert_valid()

@@ -80,6 +80,16 @@ def _matrix_mod2(matrix: Sequence[Sequence[int]]) -> tuple[tuple[int, ...], ...]
     return tuple(tuple(value % 2 for value in row) for row in matrix)
 
 
+def _transpose(
+    matrix: Sequence[Sequence[int]],
+) -> tuple[tuple[int, ...], ...]:
+    square = _as_square_int_matrix(matrix)
+    return tuple(
+        tuple(square[row][col] for row in range(len(square)))
+        for col in range(len(square))
+    )
+
+
 def _matvec_mod2(
     matrix: Sequence[Sequence[int]], vector: Sequence[int]
 ) -> tuple[int, ...]:
@@ -101,6 +111,7 @@ class PresentationPair:
     basis_matrix: tuple[tuple[int, ...], ...]
     inverse_basis_matrix: tuple[tuple[int, ...], ...]
     decoration_transform_mod2: tuple[tuple[int, ...], ...]
+    character_transform_mod2: tuple[tuple[int, ...], ...]
     metadata: Mapping[str, str]
 
     def transformed_decorations_mod2(self) -> tuple[tuple[int, ...], ...]:
@@ -110,6 +121,39 @@ class PresentationPair:
             _matvec_mod2(self.decoration_transform_mod2, vector)
             for vector in self.source.decorations_mod2
         )
+
+    def transformed_character_mod2(
+        self, character: Sequence[int]
+    ) -> tuple[int, ...]:
+        """Return source character coordinates in the target dual basis."""
+
+        if len(character) != self.source.size:
+            raise ValueError("character length must match presentation size")
+        return _matvec_mod2(self.character_transform_mod2, character)
+
+    @staticmethod
+    def pairing_mod2(character: Sequence[int], decoration: Sequence[int]) -> int:
+        if len(character) != len(decoration):
+            raise ValueError("character and decoration lengths must match")
+        return sum(
+            int(character[index]) * int(decoration[index])
+            for index in range(len(character))
+        ) % 2
+
+    def assert_pairing_preserved(
+        self, character: Sequence[int], decoration: Sequence[int]
+    ) -> None:
+        """Check the class/character dual transforms preserve evaluation."""
+
+        if len(decoration) != self.source.size:
+            raise ValueError("decoration length must match presentation size")
+        source_pairing = self.pairing_mod2(character, decoration)
+        target_pairing = self.pairing_mod2(
+            self.transformed_character_mod2(character),
+            _matvec_mod2(self.decoration_transform_mod2, decoration),
+        )
+        if target_pairing != source_pairing:
+            raise ValueError("class/character pairing changed under basis transport")
 
     def assert_valid(self) -> None:
         """Raise if the recorded pair is not a machine-checkable equivalence."""
@@ -124,6 +168,11 @@ class PresentationPair:
             raise ValueError("recorded inverse basis matrix is incorrect")
         if self.decoration_transform_mod2 != _matrix_mod2(expected_inverse):
             raise ValueError("recorded decoration transform must be inverse basis mod 2")
+        expected_character_transform = _matrix_mod2(_transpose(self.basis_matrix))
+        if self.character_transform_mod2 != expected_character_transform:
+            raise ValueError(
+                "recorded character transform must be transpose basis mod 2"
+            )
 
         expected_target = self.source.change_basis(
             self.basis_matrix,
@@ -139,6 +188,18 @@ class PresentationPair:
             raise ValueError("intersection form rank changed")
         if self.target.determinant != self.source.determinant:
             raise ValueError("intersection form determinant changed")
+
+        for character_bits in range(1 << self.source.size):
+            character = tuple(
+                (character_bits >> index) & 1
+                for index in range(self.source.size)
+            )
+            for decoration_bits in range(1 << self.source.size):
+                decoration = tuple(
+                    (decoration_bits >> index) & 1
+                    for index in range(self.source.size)
+                )
+                self.assert_pairing_preserved(character, decoration)
 
 
 def make_presentation_pair(
@@ -161,6 +222,7 @@ def make_presentation_pair(
         basis_matrix=basis,
         inverse_basis_matrix=inverse,
         decoration_transform_mod2=_matrix_mod2(inverse),
+        character_transform_mod2=_matrix_mod2(_transpose(basis)),
         metadata={
             "node": "n45-presentation-pair-generator",
             "scope": "matrix-level basis change fixture",

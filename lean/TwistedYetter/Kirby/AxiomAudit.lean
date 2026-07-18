@@ -64,3 +64,9 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.TaggedMove.sound
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.GeneratedIsotopy.eval_eq
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.FramedLinkPresentationCompleteness.presentation_independent
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.transportCharacter_apply
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.HomologicalTransport.pairing_preserved
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.liftOrdinaryExterior_eval
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.ordinary_exterior_transport_sound
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.sound
+#print axioms TwistedYetter.Kirby.KirbyHandleMoves.TwoHandleOverTwoSlide.sound

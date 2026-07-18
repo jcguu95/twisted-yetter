@@ -141,6 +141,7 @@ def test_matrix_level_basis_change_pairs_are_registered_separately() -> None:
     assert shear["basis_map"]["matrix"] == [[1, 1], [0, 1]]
     assert shear["basis_map"]["inverse_matrix"] == [[1, -1], [0, 1]]
     assert shear["decoration_transform_mod2"] == [[1, 1], [0, 1]]
+    assert shear["character_transform_mod2"] == [[1, 0], [1, 1]]
     assert shear["source"]["matrix"] == [[0, 1], [1, 0]]
     assert shear["target"]["matrix"] == [[0, 1], [1, 2]]
     assert "not a link-diagram handle-slide proof" in shear["claim_boundary"]
