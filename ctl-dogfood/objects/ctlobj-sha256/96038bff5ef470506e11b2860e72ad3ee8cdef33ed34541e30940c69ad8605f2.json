@@ -1,0 +1,161 @@
+{
+  "created_at": "2026-07-18T15:05:52Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+  "parents": [
+    "ctlobj-sha256:83ae591c2666dfa6c2e02153fb35c74fc33a25ad3ec6ad8a715b4538c1461d74"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_id": "four-manifold-invariant-target-v2",
+        "commit": "bf1030fe1a5015c066ebda2d6f068cdb3f343dca",
+        "content_hash": "sha256:496ec881658b472cceb838e72a1fc0773a7dcfc96e13b96cf76deecc765bd8c7",
+        "git_blob": "5517fab1f1450727b80f62211e2953271489a0a5",
+        "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v2.json",
+        "sha256": "e17f8cf0b54cc4fd8679a91476ed31f7e9176ccfeae0e20f845a096c6fa4be88",
+        "source_commit": "2086cde784c786773c28564acf1b3110900ec0e2",
+        "status": "PASS_TARGET_STATED_CHAIN_DERIVED_H2_GAP_CLOSED_THREE_HARD_CONDITIONS_OPEN"
+      },
+      {
+        "artifact_id": "lean-handle-chain-homology",
+        "commit": "2086cde784c786773c28564acf1b3110900ec0e2",
+        "path": "lean/TwistedYetter/Kirby/HandleChainHomology.lean",
+        "sha256": "d63f9c1f0a075861c002008c74c09f64d6852f3f664cb755e08994207f003020",
+        "status": "LEAN_CHAIN_DERIVED_SECOND_HOMOLOGY_TRANSPORT"
+      },
+      {
+        "artifact_id": "lean-four-manifold-invariant-target-v2",
+        "commit": "2086cde784c786773c28564acf1b3110900ec0e2",
+        "path": "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+        "sha256": "13d72380cffeeb6ed62ac9862f2b7d494c043504018b3a81391b25dde34ff6b9",
+        "status": "LEAN_TARGET_AND_FAIL_CLOSED_THREE_BY_THREE_CONDITION_PARTITION"
+      }
+    ],
+    "condition_ledger": {
+      "established": [
+        {
+          "caveat": "The concrete evaluator compiler that instantiates this interface for actual category data remains open.",
+          "condition": "category_and_graphical_algebra",
+          "scope": "Abstract algebraic interface and previously formalized local graphical consequences only."
+        },
+        {
+          "condition": "explicit_three_handle_normalization",
+          "formula": "three_handle_weight = d(C)^-1; isolated_two_handle_factor * three_handle_weight = 1",
+          "lean_witnesses": [
+            "GlobalDimensionProfile.twoThreeFactor_mul_threeHandleWeight",
+            "GlobalDimensionProfile.denominator_ratio_addTwoThree",
+            "TwoThreeLocalCalculation.raw_with_explicit_three_handle"
+          ],
+          "notation_warning": "If the total quantum dimension is written as script-D with script-D^2 = d(C), then the three-handle weight is script-D^-2, not script-D^-1.",
+          "scope": "The normalization contribution of a three-handle and its cancellation with the isolated two-handle factor are explicit Lean theorems."
+        },
+        {
+          "condition": "chain_derived_marked_h2_transport",
+          "lean_witnesses": [
+            "HandleChainEquivalence.secondHomologyLinearEquiv",
+            "HandleChainEquivalence.secondHomologyAddEquiv",
+            "HandleChainEquivalence.secondHomologyEquiv_refl_apply",
+            "MarkedH2Transport.targetClass_add",
+            "MarkedH2Transport.pairing_preserved",
+            "TableTwoMovie.targetClass_add",
+            "TableTwoMovie.homologyEquiv_trans"
+          ],
+          "remaining_boundary": "Binding each concrete Kirby diagram and move to its actual handle boundary matrices, bases, and chain equivalence remains part of concrete_marked_pair_assembly.",
+          "scope": "A presentation carries an integral handle chain complex. Every admitted move supplies a chain homotopy equivalence, and Lean derives the additive equivalence on second homology and the inverse-precomposition character transport.",
+          "silent_failure_guards": [
+            "MarkedH2Transport has no handwritten homologyEquiv field.",
+            "MarkedH2Transport has no handwritten targetCharacter field.",
+            "The ambient H2 coordinate model must be an AddCommGroup and the coordinate identification must be an AddEquiv."
+          ]
+        }
+      ],
+      "established_count": 3,
+      "open": [
+        {
+          "condition": "concrete_evaluator_compiler",
+          "failure_guard": "An arbitrary inhabitant of the prescription structure is rejected as evidence.",
+          "required_result": "Compile concrete category and coupon/link syntax into the abstract prescription and prove every local-step equation used by the presentation-independence theorem."
+        },
+        {
+          "condition": "special_kirby_calculus_completeness",
+          "failure_guard": "A finite list of verified local moves is not by itself accepted as a completeness theorem.",
+          "required_result": "Bind an exact source-backed theorem showing that any two allowed special presentations of the same closed oriented four-manifold are connected by the represented move system."
+        },
+        {
+          "condition": "concrete_marked_pair_assembly",
+          "failure_guard": "The generic H2 mechanism is not misreported as concrete diagram certification, and the target theorem is not promoted while the concrete input instance is absent.",
+          "required_result": "Bind concrete diagrams to handle chain matrices and move chain maps, prove marked-coordinate compatibility, and assemble the evaluator and complete presentation system into one admissible target input."
+        }
+      ],
+      "open_count": 3,
+      "required_count": 6
+    },
+    "created_at": "2026-07-18T15:05:52Z",
+    "created_by": "actor:codex",
+    "explicit_non_claims": [
+      "This note does not claim that a four-manifold invariant has been established.",
+      "This note does not claim special Kirby calculus completeness from the currently encoded local moves.",
+      "This note establishes the generic chain-derived H2 mechanism but does not certify concrete diagram boundary matrices or move chain maps.",
+      "This note does not claim that the abstract evaluator interfaces have been instantiated by a concrete category and link/coupon compiler.",
+      "This note does not identify the construction with the Crane-Yetter or Yetter state-sum invariant.",
+      "This note does not claim a theorem merely from the existence of abstract Lean structures with semantic proof fields."
+    ],
+    "mathematical_status": "FORMALIZATION_OBJECTIVE_ACTIVE_FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+    "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v2",
+    "objective": {
+      "acceptance_rule": "The target is established only after one concrete, source-backed construction supplies all six required conditions. Merely postulating or arbitrarily inhabiting the nested Lean structures is not admissible evidence.",
+      "goal": "Construct admissible FourManifoldInvariantInputs from concrete category, evaluator, Kirby-presentation, and marked-homology data, then prove that the normalized value is independent of the certified special Kirby presentation.",
+      "lean_input_type": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs",
+      "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target",
+      "target_statement": "For any marked closed oriented four-manifold pair and any two certified special Kirby realizations of that same marked pair, the two normalized evaluator values are equal."
+    },
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "status": "THREE_FOUNDATION_CONDITIONS_ESTABLISHED_THREE_HARD_CONDITIONS_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+      "subject:twisted-yetter:paper:tham-2108-13467",
+      "subject:twisted-yetter:paper:yetter-hepth-9311082"
+    ],
+    "title": "Lean target for a homologically twisted Kirby four-manifold invariant, revision 2",
+    "top_notice": "This is a formalization objective and obligation ledger, not a theorem claim. The explicit three-handle normalization and the generic chain-derived marked-H2 transport mechanism are established. No concrete four-manifold invariant has yet been constructed because three hard conditions remain open.",
+    "verification": {
+      "axiom_audit": {
+        "audited_declaration_count": 16,
+        "observed_axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "status": "PASS_ONLY_STANDARD_LEAN_AXIOMS"
+      },
+      "lean_build": "PASS",
+      "mutation_tests": {
+        "count": 22,
+        "h2_specific_rejections": [
+          "A handwritten H2 equivalence is not a field of MarkedH2Transport.",
+          "A handwritten transported character is not a field of MarkedH2Transport."
+        ],
+        "status": "PASS_ALL_EXPECTED_REJECTIONS"
+      },
+      "proof_hole_scan": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE",
+      "python_tests": {
+        "files": [
+          "tests/test_four_manifold_invariant_target_v2.py",
+          "tests/test_four_manifold_invariant_target_artifact_v2.py"
+        ],
+        "passed_count": 16,
+        "status": "PASS"
+      },
+      "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_four_manifold_invariant_target_v2.py"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
