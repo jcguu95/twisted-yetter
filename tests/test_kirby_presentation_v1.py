@@ -53,6 +53,15 @@ def test_stale_content_hash_is_rejected() -> None:
         validate_presentation(fixture)
 
 
+def test_uppercase_content_hash_is_rejected() -> None:
+    fixture = build_reference_fixture()
+    fixture["content_hash"] = (
+        "sha256:" + fixture["content_hash"][len("sha256:") :].upper()
+    )
+    with pytest.raises(PresentationValidationError, match="lowercase"):
+        validate_presentation(fixture)
+
+
 def test_inactive_strand_lineage_is_rejected() -> None:
     fixture = build_reference_fixture()
     fixture["events"][8]["first_strand"] = "not-active"
@@ -85,4 +94,47 @@ def test_nonadjacent_crossing_is_rejected() -> None:
     fixture["events"][4] = event
     fixture = repaired(fixture)
     with pytest.raises(PresentationValidationError, match="not adjacent"):
+        validate_presentation(fixture)
+
+
+def test_death_requires_opposite_orientations() -> None:
+    fixture = build_reference_fixture()
+    fixture["components"] = [fixture["components"][0]]
+    fixture["components"][0]["blackboard_writhe"] = 0
+    fixture["components"][0]["integer_framing"] = 0
+    fixture["events"] = [
+        {
+            "event_id": "e0",
+            "kind": "birth",
+            "component_id": "K0",
+            "positive_strand": "A+",
+            "negative_strand": "A-",
+            "insert_at": 0,
+        },
+        {
+            "event_id": "e1",
+            "kind": "birth",
+            "component_id": "K0",
+            "positive_strand": "B+",
+            "negative_strand": "B-",
+            "insert_at": 1,
+        },
+        {
+            "event_id": "e2",
+            "kind": "death",
+            "component_id": "K0",
+            "first_strand": "A+",
+            "second_strand": "B+",
+        },
+        {
+            "event_id": "e3",
+            "kind": "death",
+            "component_id": "K0",
+            "first_strand": "B-",
+            "second_strand": "A-",
+        },
+    ]
+    fixture["declared_slices"] = []
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="opposite"):
         validate_presentation(fixture)

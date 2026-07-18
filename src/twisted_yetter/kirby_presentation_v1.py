@@ -143,12 +143,11 @@ def _require_sha256(value: Any, where: str) -> str:
     text = _require_nonempty_string(value, where)
     if len(text) != 71 or not text.startswith(SHA256_PREFIX):
         raise PresentationValidationError(f"{where} is not a sha256 content hash")
-    try:
-        int(text[len(SHA256_PREFIX) :], 16)
-    except ValueError as exc:
+    digest = text[len(SHA256_PREFIX) :]
+    if any(character not in "0123456789abcdef" for character in digest):
         raise PresentationValidationError(
-            f"{where} contains non-hexadecimal bytes"
-        ) from exc
+            f"{where} is not lowercase hexadecimal"
+        )
     return text
 
 
@@ -253,6 +252,13 @@ def _simulate(
             ):
                 raise PresentationValidationError(
                     "death crosses component lineage"
+                )
+            if {
+                active[strand_id]["orientation"]
+                for strand_id in strand_ids
+            } != ORIENTATIONS:
+                raise PresentationValidationError(
+                    "death requires opposite strand orientations"
                 )
             for strand_id in strand_ids:
                 del active[strand_id]

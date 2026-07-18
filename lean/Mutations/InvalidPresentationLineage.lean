@@ -12,7 +12,7 @@ open TwistedYetter.Kirby.Presentation
 def invalid : RawPresentation where
   roundTripFixture with
   events := [
-    .birth "e0" "K0" "K0+" "K0-",
+    .birth "e0" "K0" "K0+" "K0-" 0,
     .death "e1" "K0" "K0+" "not-active"
   ]
 
