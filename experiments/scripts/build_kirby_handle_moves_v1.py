@@ -11,8 +11,13 @@ from pathlib import Path
 import platform
 import re
 import subprocess
+import sys
 import time
 from typing import Any
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from twisted_yetter.kirby_handle_moves_v1 import (
     all_handle_slide_bookkeeping_fixtures,
@@ -21,7 +26,6 @@ from twisted_yetter.kirby_handle_moves_v1 import (
 )
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = (
     REPO_ROOT
     / "experiments/results/lean-kirby/kirby-handle-moves-v1.json"
