@@ -15,8 +15,10 @@ def unsafeOneTwo
     (before after : EvaluationState (K := K))
     (counts_sound : before.counts = after.counts.addOneTwo)
     (disjoint :
+      True →
       before.rawNumerator = pairValue * after.rawNumerator)
-    (cutting : pairValue = profile.dDimension * cutValue) :
+    (cutting :
+      True → pairValue = profile.dDimension * cutValue) :
     OneTwoLocalCalculation profile where
   pairValue := pairValue
   cutValue := cutValue
@@ -26,8 +28,8 @@ def unsafeOneTwo
   isolated_from_rest := True
   isolated_from_rest_witness := True.intro
   disjoint_union_sound := disjoint
-  cutting_identity := cutting
   transparent_twist_trivial := True
   transparent_twist_witness := True.intro
+  cutting_identity := cutting
 
 end TwistedYetter.Mutations.MissingCancellationKillingIdentity

@@ -15,6 +15,7 @@ def unsafeTwoThree
     (before after : EvaluationState (K := K))
     (counts_sound : before.counts = after.counts.addTwoThree)
     (disjoint :
+      True →
       before.rawNumerator = unknotValue * after.rawNumerator) :
     TwoThreeLocalCalculation profile where
   unknotValue := unknotValue

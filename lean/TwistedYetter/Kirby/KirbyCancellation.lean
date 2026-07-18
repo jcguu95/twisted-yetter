@@ -197,13 +197,15 @@ structure OneTwoLocalCalculation
   isolated_from_rest : Prop
   isolated_from_rest_witness : isolated_from_rest
   disjoint_union_sound :
-    before.rawNumerator = pairValue * after.rawNumerator
-  cutting_identity :
-    pairValue = profile.dDimension * cutValue
-  killing_identity :
-    cutValue = profile.transparentDimension
+    isolated_from_rest →
+      before.rawNumerator = pairValue * after.rawNumerator
   transparent_twist_trivial : Prop
   transparent_twist_witness : transparent_twist_trivial
+  cutting_identity :
+    transparent_twist_trivial →
+      pairValue = profile.dDimension * cutValue
+  killing_identity :
+    cutValue = profile.transparentDimension
   source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
   source_locator : String :=
     "Theorem 3.9, equation (3.3.2), journal pages 686-687; Lemmas 2.46-2.47"
@@ -215,7 +217,9 @@ theorem raw_factor
     (calculation : OneTwoLocalCalculation profile) :
     calculation.before.rawNumerator =
       profile.oneTwoFactor * calculation.after.rawNumerator := by
-  rw [calculation.disjoint_union_sound, calculation.cutting_identity,
+  rw [calculation.disjoint_union_sound
+      calculation.isolated_from_rest_witness,
+    calculation.cutting_identity calculation.transparent_twist_witness,
     calculation.killing_identity]
   rfl
 
@@ -246,7 +250,8 @@ structure TwoThreeLocalCalculation
   unlinked_unknotted_zero_framed : Prop
   unlink_witness : unlinked_unknotted_zero_framed
   disjoint_union_sound :
-    before.rawNumerator = unknotValue * after.rawNumerator
+    unlinked_unknotted_zero_framed →
+      before.rawNumerator = unknotValue * after.rawNumerator
   pivotal_dimension_preserved :
     unknotValue = profile.cDimension
   source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
@@ -260,7 +265,7 @@ theorem raw_factor
     (calculation : TwoThreeLocalCalculation profile) :
     calculation.before.rawNumerator =
       profile.twoThreeFactor * calculation.after.rawNumerator := by
-  rw [calculation.disjoint_union_sound,
+  rw [calculation.disjoint_union_sound calculation.unlink_witness,
     calculation.pivotal_dimension_preserved]
   rfl
 
