@@ -1,0 +1,3010 @@
+{
+  "admission": {
+    "ctl_claim_admitted": false,
+    "ctl_manifest_written": false,
+    "status": "REPO_LOCAL_EVIDENCE_ONLY"
+  },
+  "argv": [
+    "experiments/scripts/build_final_formalization_package_v1.py"
+  ],
+  "checks": {
+    "contract": {
+      "new_axiom_declarations": 0,
+      "proof_relevant_negative_field_count": 6,
+      "required_token_count": 13,
+      "status": "PASS_TERMINAL_ROUTE_AND_NONCLAIMS_TYPE_SEPARATED"
+    },
+    "historical_replay": {
+      "milestone_artifact_count": 11,
+      "predecessor_nonclaim_count": 64,
+      "reference_ledger_count": 8,
+      "source_file_replay_count": 231,
+      "status": "PASS",
+      "unique_trusted_input_count": 25
+    },
+    "scoped_pytest": {
+      "files": [
+        "tests/test_final_formalization_package_v1.py",
+        "tests/test_computation_artifact_import_v1.py"
+      ],
+      "output": "................................                                         [100%]\n32 passed in 3.25s",
+      "passed_count": 32,
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:b6bf68de16eba188db6db8177d0b24ad9777ef96c5248999ef4385eeb6cdc282",
+  "elapsed_milliseconds": 47386,
+  "explicit_non_claims": [
+    "R13 does not identify the R11 Kirby invariant with the Crane-Yetter state sum.",
+    "R13 does not re-prove every imported category, graphical, or topology input from foundational axioms.",
+    "R13 does not prove Pachner-move invariance for a triangulated state sum.",
+    "R13 does not admit an exact Figure 21 invariant value.",
+    "R13 does not certify the Figure 21 transcription against the printed source.",
+    "R13 does not certify a Figure 21 exotic-versus-standard comparison without a marked H2 identification.",
+    "R13 does not treat a source-code hash as proof of an external evaluator's mathematical correctness.",
+    "R13 is not a byte-complete archive of every external primary source.",
+    "R13 makes no claim outside the R10 closed, connected, smooth, oriented four-manifold and special-presentation scope.",
+    "R13 does not create or admit a CTL theorem, objective note, or claim."
+  ],
+  "finished_at_utc": "2026-07-18T11:57:14Z",
+  "generator_script": "experiments/scripts/build_final_formalization_package_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "f8bf2a10e01e909bae3ed9a7ef04cade236b7f58",
+    "dirty": false
+  },
+  "inputs": {
+    "frozen_manifest": {
+      "file_sha256": "sha256:bcf53d4090508471bc296d52849a615d0ba49a81117751f1eb8157e27209356d",
+      "milestone_artifact_count": 11,
+      "path": "experiments/inputs/lean-kirby/final-formalization-package-manifest-v1.json",
+      "reference_ledger_count": 8
+    },
+    "obligation_matrix": {
+      "explicit_nonclaim_count": 10,
+      "file_sha256": "sha256:79522f2a52c08e5232c302bdb1016507905241ec40c59c9b7fd5c1c831ccae22",
+      "obligation_count": 24,
+      "path": "experiments/inputs/lean-kirby/final-formalization-package-obligation-matrix-v1.json"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/final-formalization-package-manifest-v1.json": {
+        "bytes": 11823,
+        "sha256": "sha256:bcf53d4090508471bc296d52849a615d0ba49a81117751f1eb8157e27209356d"
+      },
+      "experiments/inputs/lean-kirby/final-formalization-package-obligation-matrix-v1.json": {
+        "bytes": 5686,
+        "sha256": "sha256:79522f2a52c08e5232c302bdb1016507905241ec40c59c9b7fd5c1c831ccae22"
+      },
+      "experiments/scripts/build_final_formalization_package_v1.py": {
+        "bytes": 14174,
+        "sha256": "sha256:581a9c14642089adff95d6b3f1762281cf3e1f8ec72665bc9722c7648559d2f7"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/CraneYetterIdentificationPromotionR13.lean": {
+        "bytes": 188,
+        "sha256": "sha256:6e17c48b4784afb0f448a9b4a44a7cc67a9eac984940b781780a95e634851d3a"
+      },
+      "lean/Mutations/CtlClaimPromotionR13.lean": {
+        "bytes": 168,
+        "sha256": "sha256:4d4ac7f808cd4513c12b1a474020f3ed072359314027962675af0ca8f1e09b41"
+      },
+      "lean/Mutations/Figure21ComparisonPromotionR13.lean": {
+        "bytes": 184,
+        "sha256": "sha256:0894087c602950a899c201f04ceaac3cb3a3b642759b5e11cb3a409ce09b643e"
+      },
+      "lean/Mutations/Figure21ExactPromotionR13.lean": {
+        "bytes": 178,
+        "sha256": "sha256:317d1ee3d7d830e6a72ebe9ba4387e6d1bdfbc98885c79f3eca948ba5ed4ee49"
+      },
+      "lean/Mutations/InjectedAxiomR13.lean": {
+        "bytes": 90,
+        "sha256": "sha256:bbdb182414103f756b46c2834711df9f16e733cdc20e3cb2047198713aa2079b"
+      },
+      "lean/Mutations/MissingEvidenceLayerR13.lean": {
+        "bytes": 313,
+        "sha256": "sha256:7519b11c6b05fb18c1ecd90e944eec8c207bd80536807308d34aad6ac0684b91"
+      },
+      "lean/Mutations/MissingFigure21BlockerR13.lean": {
+        "bytes": 169,
+        "sha256": "sha256:a95032a43c6f9e20c99c9dc6157078b40728a267dd4b75bb61dd01d30fcba877"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 1104,
+        "sha256": "sha256:e86c80d8052e5ba7d6917f31e28432e3729c53756d5f994b29a2e6faf126b821"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 10423,
+        "sha256": "sha256:b996aaf654a4af9177680914640dc1c70de52a4cffbd45a0628f7f5b21410168"
+      },
+      "lean/TwistedYetter/Kirby/ComputationArtifactImporter.lean": {
+        "bytes": 25512,
+        "sha256": "sha256:13e0661b871e72cbf1452f252fc1dcd6f2b9aec58a1bb2cc87f62525e6da35b8"
+      },
+      "lean/TwistedYetter/Kirby/FinalFormalizationPackage.lean": {
+        "bytes": 6668,
+        "sha256": "sha256:bafd677ef35f9571698ccd6c95cc10198f099106b1a437c591fe8f1a23f34030"
+      },
+      "scripts/lean_axiom_audit.sh": {
+        "bytes": 409,
+        "sha256": "sha256:ff823d379e56accdbd87e153a1d0af020ecedcee101f44fc5bdf43f438bb039c"
+      },
+      "scripts/lean_final_formalization_package_mutation_tests.sh": {
+        "bytes": 1515,
+        "sha256": "sha256:a4434cc7cbf401644cd8652313e96ac84c8fc5bd7656792faa85be19645dcd47"
+      },
+      "scripts/lean_local_build.sh": {
+        "bytes": 518,
+        "sha256": "sha256:157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "sha256:6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "src/twisted_yetter/computation_artifact_import_v1.py": {
+        "bytes": 39445,
+        "sha256": "sha256:1630d9022f8ab2487b72200c99a6847ec17a9fef9c53f80737474c7c315e61ff"
+      },
+      "src/twisted_yetter/final_formalization_package_v1.py": {
+        "bytes": 23010,
+        "sha256": "sha256:74d576dc40a1e678ba8ef655254018f3cfcf9ef4de87ba766d2703c0edaa977b"
+      },
+      "tests/test_final_formalization_package_artifact_v1.py": {
+        "bytes": 4188,
+        "sha256": "sha256:88754e678cb331aa4967c0c56ec241fac3b75775bdc5ecc765e118851735970f"
+      },
+      "tests/test_final_formalization_package_v1.py": {
+        "bytes": 6829,
+        "sha256": "sha256:5949441f686d5cbe3d1901d3671d741d4a791c1feab0b1b2c0fd4be2a5b4cc6a"
+      }
+    }
+  },
+  "lean_certificate": {
+    "audited_declaration_count": 116,
+    "axiom_audit": {
+      "allowed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audited_declaration_count": 116,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "output": "'TwistedYetter.Kirby.CouponNaturality.slide_through_positive_crossing' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_negative_crossing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cup' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cap' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cup' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cap' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.Context.eval_plug_congr' does not depend on any axioms\n'TwistedYetter.Kirby.CategoricalTangle.positiveCrossingMove_sound' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.negativeCrossingMove_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalMovie.Movie.sound' does not depend on any axioms\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedFunctorSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_weightedSum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.evalContextLinearMap_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.insertIdentity' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.mateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.dualMateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingCategoryData.equation_3_1_9_to_3_1_11' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_5' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_6' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_7_to_3_1_8' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.core_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.equation_3_1_2' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.liftExterior_eval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.validation_witness' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.pinned_source_hash_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.identityBefore_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.identityAfter_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.compAssoc_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.tensorInterchange_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIIPositive_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIINegative_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIII_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.rightPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.rightDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.positiveMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.negativeMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cut_independence_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cutMove' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.TaggedMove.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.GeneratedIsotopy.eval_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedLinkPresentationCompleteness.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.transportCharacter_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.HomologicalTransport.pairing_preserved' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.liftOrdinaryExterior_eval' depends on axioms: [propext]\n'TwistedYetter.Kirby.KirbyHandleMoves.ordinary_exterior_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.TwoHandleOverTwoSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ne_zero' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addOneTwo' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addTwoThree' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyZero' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyFour' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.CancellationHomologyTransport.pairing_preserved' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.homologyTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv_trans' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoLinkCompleteness.markedTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_diagram_eval' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.move_invariant' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.targetClass_trans' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.movie_invariant' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.same_pair_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.homologically_twisted_kirby_invariant_established' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.ComputationArtifactImporter.DistributionCertificate.coverage_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.DistributionCertificate.values_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.DistributionCertificate.projectors_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.StructuralAggregateCertificate.coverage_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.StructuralAggregateCertificate.disposition_not_exact' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.ExactInvariantValueCertificate.output_eq_invariant' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.TerminalBlockedImport.disposition_not_exact' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.StructuralImportBatch.row_coverage_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.StructuralImportBatch.disposition_not_exact' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.toy_exact_control_admitted' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.ComputationArtifactImporter.figure21_pointed_row_count' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.figure21_structural_coverage_complete' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.figure21_terminal_blocker_count' depends on axioms: [propext]\n'TwistedYetter.Kirby.ComputationArtifactImporter.figure21_not_promoted_to_invariant_values' depends on axioms: [propext]\n'TwistedYetter.Kirby.FinalFormalizationPackage.evidence_layer_count' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.r11_conditional_invariant' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FinalFormalizationPackage.toy_exact_control_remains_admitted' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FinalFormalizationPackage.figure21_structural_row_count' depends on axioms: [propext]\n'TwistedYetter.Kirby.FinalFormalizationPackage.figure21_structural_not_exact' depends on axioms: [propext]\n'TwistedYetter.Kirby.FinalFormalizationPackage.figure21_blocker_count' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.formalization_route_is_terminal' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.crane_yetter_identification_not_established' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.figure21_exact_value_not_admitted' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.figure21_marked_comparison_not_admitted' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.all_imported_category_identities_not_reproved' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.source_archive_not_byte_complete' does not depend on any axioms\n'TwistedYetter.Kirby.FinalFormalizationPackage.ctl_claim_not_admitted' does not depend on any axioms",
+      "status": "PASS_ONLY_STANDARD_LEAN_AXIOMS",
+      "unexpected_axioms": []
+    },
+    "build_order": [
+      "lean/TwistedYetter/Kirby/FinalFormalizationPackage.lean",
+      "lean/TwistedYetter.lean"
+    ],
+    "build_output": "",
+    "mutation_count": 7,
+    "mutation_rejections": [
+      "PASS expected rejection: lean/Mutations/MissingEvidenceLayerR13.lean",
+      "PASS expected rejection: lean/Mutations/Figure21ExactPromotionR13.lean",
+      "PASS expected rejection: lean/Mutations/Figure21ComparisonPromotionR13.lean",
+      "PASS expected rejection: lean/Mutations/CraneYetterIdentificationPromotionR13.lean",
+      "PASS expected rejection: lean/Mutations/MissingFigure21BlockerR13.lean",
+      "PASS expected rejection: lean/Mutations/CtlClaimPromotionR13.lean",
+      "PASS expected static rejection: lean/Mutations/InjectedAxiomR13.lean [forbidden axiom]"
+    ],
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/FinalFormalizationPackage.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "status": "PASS_KERNEL_AXIOM_AUDIT_AND_ALL_R13_MUTATION_REJECTIONS"
+  },
+  "mathematical_status": "HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT_ESTABLISHED_RELATIVE_TO_LISTED_INPUTS_R12_IMPORTER_ESTABLISHED_FIGURE21_NOT_ADMITTED",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_final_formalization_package_v1.py",
+  "roadmap_status": "R13_TERMINAL_FORMALIZATION_ROUTE_COMPLETE_RELATIVE_TO_EXPLICIT_BOUNDARIES",
+  "runtime_certificate": {
+    "content_hash": "sha256:271968b69894ce753383d7db4af51218153aa6865b782705f1b28c70cf5ac5ea",
+    "evidence_layers": [
+      {
+        "layer_id": "CATEGORY_AND_GRAPHICAL_ALGEBRA",
+        "milestones": [
+          "R0",
+          "R1",
+          "R2_R4",
+          "R5"
+        ]
+      },
+      {
+        "layer_id": "PRESENTATION_AND_LOCAL_KIRBY_MOVES",
+        "milestones": [
+          "R6",
+          "R7",
+          "R8",
+          "R9"
+        ]
+      },
+      {
+        "layer_id": "TOPOLOGY_AND_MARKED_INVARIANT",
+        "milestones": [
+          "R10",
+          "R11"
+        ]
+      },
+      {
+        "layer_id": "COMPUTATION_IMPORT",
+        "milestones": [
+          "R12"
+        ]
+      }
+    ],
+    "explicit_non_claims": [
+      "R13 does not identify the R11 Kirby invariant with the Crane-Yetter state sum.",
+      "R13 does not re-prove every imported category, graphical, or topology input from foundational axioms.",
+      "R13 does not prove Pachner-move invariance for a triangulated state sum.",
+      "R13 does not admit an exact Figure 21 invariant value.",
+      "R13 does not certify the Figure 21 transcription against the printed source.",
+      "R13 does not certify a Figure 21 exotic-versus-standard comparison without a marked H2 identification.",
+      "R13 does not treat a source-code hash as proof of an external evaluator's mathematical correctness.",
+      "R13 is not a byte-complete archive of every external primary source.",
+      "R13 makes no claim outside the R10 closed, connected, smooth, oriented four-manifold and special-presentation scope.",
+      "R13 does not create or admit a CTL theorem, objective note, or claim."
+    ],
+    "external_source_capture_boundary": {
+      "capture_metadata": [
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 799834,
+          "capture_path_at_capture_time": "/private/tmp/selinger-graphical-languages-0908.3347.pdf",
+          "ledger_path": "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:7ecac08962c1238739d2e4eb2da79ed197347d9046a136e1c39840e7a4d0bc44"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/kirby-handle-moves-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 906609,
+          "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+          "ledger_path": "experiments/inputs/references/kirby-completeness-primary-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+        },
+        {
+          "bytes": 112687,
+          "capture_path_at_capture_time": "/private/tmp/yetter-homologically-twisted-9311082.pdf",
+          "ledger_path": "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json",
+          "repo_local_bytes": false,
+          "required_for_r13_replay": false,
+          "sha256": "sha256:e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b"
+        }
+      ],
+      "capture_metadata_occurrence_count": 9,
+      "source_byte_complete_archive": false,
+      "status": "EXTERNAL_BYTES_NOT_REQUIRED_FOR_R13_REPLAY",
+      "unsafe_interpretation": "Recorded external hashes and locators do not imply that all primary-source bytes are vendored in this repository."
+    },
+    "frozen_inputs": {
+      "manifest_file_sha256": "sha256:bcf53d4090508471bc296d52849a615d0ba49a81117751f1eb8157e27209356d",
+      "manifest_path": "experiments/inputs/lean-kirby/final-formalization-package-manifest-v1.json",
+      "obligation_count": 24,
+      "obligation_matrix_file_sha256": "sha256:79522f2a52c08e5232c302bdb1016507905241ec40c59c9b7fd5c1c831ccae22",
+      "obligation_matrix_path": "experiments/inputs/lean-kirby/final-formalization-package-obligation-matrix-v1.json",
+      "r13_explicit_nonclaims": [
+        "R13 does not identify the R11 Kirby invariant with the Crane-Yetter state sum.",
+        "R13 does not re-prove every imported category, graphical, or topology input from foundational axioms.",
+        "R13 does not prove Pachner-move invariance for a triangulated state sum.",
+        "R13 does not admit an exact Figure 21 invariant value.",
+        "R13 does not certify the Figure 21 transcription against the printed source.",
+        "R13 does not certify a Figure 21 exotic-versus-standard comparison without a marked H2 identification.",
+        "R13 does not treat a source-code hash as proof of an external evaluator's mathematical correctness.",
+        "R13 is not a byte-complete archive of every external primary source.",
+        "R13 makes no claim outside the R10 closed, connected, smooth, oriented four-manifold and special-presentation scope.",
+        "R13 does not create or admit a CTL theorem, objective note, or claim."
+      ]
+    },
+    "milestone_audit": {
+      "artifact_count": 11,
+      "artifacts": [
+        {
+          "content_hash": "sha256:a089f3d206d7207568181c462d2c8fbf82f281fae439b1bae12b045dc0c2ccf9",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:29ec640d6e12c45457293739408335f119981c89a39db0be2a13e9d8bc60dce9",
+          "mathematical_status": "ESTABLISHED_BOOTSTRAP_WITH_CONDITIONAL_SLIDING_INTERFACE",
+          "milestone_id": "R0",
+          "path": "experiments/results/lean-kirby/lean-kirby-coupon-bootstrap-v1.json",
+          "schema": "twisted-yetter.lean-kirby-coupon-bootstrap.v1",
+          "source_clean": true,
+          "source_commit": "1595c0942515f384626f0678e23136af7d897bd7",
+          "source_file_count": 20,
+          "source_replay_manifest_hash": "sha256:87c5f94623bbc772615c44e0328fbf553818b7710166c503a78c5a529db4a0a9",
+          "source_replayed_bytes": 55321,
+          "source_replays": [
+            {
+              "bytes": 4659,
+              "path": "experiments/inputs/lean-kirby/coupon-move-obligation-matrix-v1.json",
+              "sha256": "sha256:d40da600291430f46463b2f2d59390133398d24ab75f98b7591200bda7c627f4",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3155,
+              "path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+              "sha256": "sha256:bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 661,
+              "path": "lean/Mutations/InvalidComposition.lean",
+              "sha256": "sha256:24e611ba529fc77a0a1bffde6c47fe859c00d73c166e053c45c54d43832902d2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 519,
+              "path": "lean/Mutations/InvalidDualCap.lean",
+              "sha256": "sha256:3e5679a48f620ddada7410a5c76a3c2c113193f9e56184bf971456084d51d430",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 596,
+              "path": "lean/Mutations/MissingMoveProof.lean",
+              "sha256": "sha256:dfde7f53537d1c2e667b2d1afcb5de822bfe2040ed43ecc230f9ec11bbf3ca25",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 257,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:b812b39b8a72e782b1fd1e7c95135e1bb4ba80276985848b73b6c13399ffd591",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1591,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:e774b53124d2f0e8f77ac1febfec4c64b24ab0b7a6bb489da60762c3a6817a69",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6364,
+              "path": "lean/TwistedYetter/Kirby/CategoricalMovie.lean",
+              "sha256": "sha256:a0bfb1cf30d7500991604155fe38878f022abf877e0a1bf2677b29b23fbcec35",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 13045,
+              "path": "lean/TwistedYetter/Kirby/CategoricalTangle.lean",
+              "sha256": "sha256:74773b7c6a7ea15cde1c83fb29c0291c71a65f25fa4c2186709a17324255d301",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 8069,
+              "path": "lean/TwistedYetter/Kirby/CouponKernel.lean",
+              "sha256": "sha256:3dd0bb2f772eec8de9456ed390a4570b1c321a0c355c9aa203508012ccad57de",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2550,
+              "path": "lean/TwistedYetter/Kirby/CouponNaturality.lean",
+              "sha256": "sha256:192c4545a72a95c2fbfa1b07d273714db7f0abb896b16dad67600e5b676b5ff5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3504,
+              "path": "lean/TwistedYetter/Kirby/FramingNaturality.lean",
+              "sha256": "sha256:e519ae58ab9251463f14d17ca1918a1c7fbe1da07d13a884b0b0fd5450795cb3",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4523,
+              "path": "lean/TwistedYetter/Kirby/HandleSlide.lean",
+              "sha256": "sha256:fb3fe7474f2707e4303965d0dc3437f562f51010d9aa29718d48964c2bc22f58",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 409,
+              "path": "scripts/lean_axiom_audit.sh",
+              "sha256": "sha256:ff823d379e56accdbd87e153a1d0af020ecedcee101f44fc5bdf43f438bb039c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 518,
+              "path": "scripts/lean_local_build.sh",
+              "sha256": "sha256:157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 539,
+              "path": "scripts/lean_local_check.sh",
+              "sha256": "sha256:6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 796,
+              "path": "scripts/lean_mutation_tests.sh",
+              "sha256": "sha256:7729b7170e6d01990eabd14ea0c74d16080ffe0e9e1f8667ce8eec1aa808973e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_KIRBY_COUPON_BOOTSTRAP"
+        },
+        {
+          "content_hash": "sha256:a17762b7bd62dfcaaabd34488b60925d9e170cc50afe9abe29f765476cc693fd",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:b78c2bb69f33a5a4e9213a4153c051d8ffc15abd20d59f18d0c0f1b4898c9763",
+          "mathematical_status": "ESTABLISHED_FINITE_RESOLUTION_AND_CONDITIONAL_PAIRING_TRANSPORT",
+          "milestone_id": "R1",
+          "path": "experiments/results/lean-kirby/generalized-sliding-linear-bootstrap-v1.json",
+          "schema": "twisted-yetter.generalized-sliding-linear-bootstrap.v1",
+          "source_clean": true,
+          "source_commit": "e8debd00548b1488fee734ca1bdbd87655b6d796",
+          "source_file_count": 18,
+          "source_replay_manifest_hash": "sha256:bbaa3bf3a7a22fc9426ac8794745d80cbe0563904ece17d8ba17337cac5fb146",
+          "source_replayed_bytes": 49743,
+          "source_replays": [
+            {
+              "bytes": 5615,
+              "path": "experiments/inputs/lean-kirby/generalized-sliding-linear-obligation-matrix-v1.json",
+              "sha256": "sha256:c56c3bb9abf56077e23b2f547b42daaa731a4d71209a8547e5d3d6ddc57463a8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3155,
+              "path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+              "sha256": "sha256:bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 13367,
+              "path": "experiments/scripts/build_generalized_sliding_linear_bootstrap_v1.py",
+              "sha256": "sha256:965b482b4c1d8d4781520ecae581252caed1e37f9ea434bdd3e2840b51821827",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 747,
+              "path": "lean/Mutations/MissingDualBasisProof.lean",
+              "sha256": "sha256:6c646d937375011a7c6a802b02e6a63473d3e153f44cb2f7c6b9456276ae34a5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 951,
+              "path": "lean/Mutations/MissingPairingPreservation.lean",
+              "sha256": "sha256:c2ad7477578b365aa70c9af2735f6711dd1946ab6f08736f96b22ba1f57351e1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1119,
+              "path": "lean/Mutations/WrongTransportedDualIndex.lean",
+              "sha256": "sha256:d1000ca32720d02c36265c9bff8605789f35b603d5db08fcdc48b9cbf87b0393",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 347,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:7fe07b9808d6c59d220ba469369f8091525bc79b067ab4f0e8254be828edd69b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1200,
+              "path": "lean/TwistedYetter/Fusion/AxiomAudit.lean",
+              "sha256": "sha256:07a55947dcd35ac6e1b2690003c0ffeae53a7acc67e65ff56190da28d06b6bd4",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 7057,
+              "path": "lean/TwistedYetter/Fusion/FiniteResolution.lean",
+              "sha256": "sha256:75ec1a1d97b0b0a6f2b54a10be8568bbdbb5a417fc0cb131b30d11c5d053fcd8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6467,
+              "path": "lean/TwistedYetter/Fusion/PairingTransport.lean",
+              "sha256": "sha256:2df57e4777fd7552371c8f4164a799c41f35febee0cb7097c51ab828dbf47a97",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 424,
+              "path": "scripts/lean_fusion_axiom_audit.sh",
+              "sha256": "sha256:793563390d0a1d0b9cdfe112fbb8eeae95426e0f77b935520ef35a156d196f5f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1379,
+              "path": "scripts/lean_fusion_mutation_tests.sh",
+              "sha256": "sha256:50572012bf85a087546c7c2b7cff5c924bf8d57bac1d5bcca33bf12a049c01da",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 518,
+              "path": "scripts/lean_local_build.sh",
+              "sha256": "sha256:157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 539,
+              "path": "scripts/lean_local_check.sh",
+              "sha256": "sha256:6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3292,
+              "path": "tests/test_generalized_sliding_linear_bootstrap_v1.py",
+              "sha256": "sha256:323f942058ea00b518b541e55450b692de2e63c972c9df64d1a51a1e5dcc9e80",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_GENERALIZED_SLIDING_LINEAR_BOOTSTRAP"
+        },
+        {
+          "content_hash": "sha256:7928ace408a26e362643b84cbc92c2d07b60adacca01160a03751cd719b56272",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:3c46ff649b218ba1986bf235737b82ab1fa66280e7f81a680463b263089a29ee",
+          "mathematical_status": "GENERALIZED_SLIDING_CORE_ESTABLISHED_RELATIVE_TO_EXPLICIT_STANDARD_INPUTS",
+          "milestone_id": "R2_R4",
+          "path": "experiments/results/lean-kirby/generalized-sliding-core-v1.json",
+          "schema": "twisted-yetter.generalized-sliding-core.v1",
+          "source_clean": true,
+          "source_commit": "22765f17e961cd1d1bf17d72bd6cf9a841bcb5bc",
+          "source_file_count": 41,
+          "source_replay_manifest_hash": "sha256:b108d1083ccb98c0355609f9cbf99a99d2d120bed8dc3facd0d8016035f99365",
+          "source_replayed_bytes": 150240,
+          "source_replays": [
+            {
+              "bytes": 7451,
+              "path": "experiments/inputs/lean-kirby/generalized-sliding-core-obligation-matrix-v1.json",
+              "sha256": "sha256:47c51c1eef361023f861fc5088e5e9c4732a7bfe0ddb792a3b619b51b2d89e78",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3822,
+              "path": "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json",
+              "sha256": "sha256:ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 15673,
+              "path": "experiments/scripts/build_generalized_sliding_core_v1.py",
+              "sha256": "sha256:de2689818dd1b8b043d784e907950b9cda780be551fb0104333aa00e14a306f3",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 661,
+              "path": "lean/Mutations/InvalidComposition.lean",
+              "sha256": "sha256:24e611ba529fc77a0a1bffde6c47fe859c00d73c166e053c45c54d43832902d2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 519,
+              "path": "lean/Mutations/InvalidDualCap.lean",
+              "sha256": "sha256:3e5679a48f620ddada7410a5c76a3c2c113193f9e56184bf971456084d51d430",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1933,
+              "path": "lean/Mutations/MissingBackwardInsertion.lean",
+              "sha256": "sha256:00363eaae9ae807ad96a26315d2de36f6404a492d390f5a32f6a6765e0d2fb27",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 747,
+              "path": "lean/Mutations/MissingDualBasisProof.lean",
+              "sha256": "sha256:6c646d937375011a7c6a802b02e6a63473d3e153f44cb2f7c6b9456276ae34a5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 934,
+              "path": "lean/Mutations/MissingIdentityResolutionSound.lean",
+              "sha256": "sha256:5264c3c2cef6c987cb2b5a106a6233c68e3418d748dfc259639028c43bf66f4a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2026,
+              "path": "lean/Mutations/MissingMateMovie.lean",
+              "sha256": "sha256:35a8b85290967324ac134ceb32200d88077c8b95a6cdc0137f6c2c201fd71832",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 596,
+              "path": "lean/Mutations/MissingMoveProof.lean",
+              "sha256": "sha256:dfde7f53537d1c2e667b2d1afcb5de822bfe2040ed43ecc230f9ec11bbf3ca25",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 951,
+              "path": "lean/Mutations/MissingPairingPreservation.lean",
+              "sha256": "sha256:c2ad7477578b365aa70c9af2735f6711dd1946ab6f08736f96b22ba1f57351e1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1193,
+              "path": "lean/Mutations/MissingPivotalTraceProof.lean",
+              "sha256": "sha256:3e22544136e039c42d2b630b2e6be90339944717fde25684c4485c193dc49ae4",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 819,
+              "path": "lean/Mutations/WrongMateDualOrder.lean",
+              "sha256": "sha256:7614beccd462dd8f0a19696bc51b9f573bac96519607dc7625da78b0316bae4c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1119,
+              "path": "lean/Mutations/WrongTransportedDualIndex.lean",
+              "sha256": "sha256:d1000ca32720d02c36265c9bff8605789f35b603d5db08fcdc48b9cbf87b0393",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 677,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:4ebdc61ca52d03d95b14467b86670dd5a926a618e597bc0b843690c7c3d37873",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1966,
+              "path": "lean/TwistedYetter/Fusion/AxiomAudit.lean",
+              "sha256": "sha256:8b3a66a21d60d68037a36e21af845bd32f5a560895a331fd6785ed2a99e6b977",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3881,
+              "path": "lean/TwistedYetter/Fusion/Biorthogonal.lean",
+              "sha256": "sha256:17bd3154f89575c71a27f9612bd58a6b8eba2178624897408250bb4d325e2493",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 7057,
+              "path": "lean/TwistedYetter/Fusion/FiniteResolution.lean",
+              "sha256": "sha256:75ec1a1d97b0b0a6f2b54a10be8568bbdbb5a417fc0cb131b30d11c5d053fcd8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3917,
+              "path": "lean/TwistedYetter/Fusion/FrobeniusLinear.lean",
+              "sha256": "sha256:c50a445029d35816a781b751c530d7edf746c2aa223e121cb7b58b6a2cc7616d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3057,
+              "path": "lean/TwistedYetter/Fusion/Insertion.lean",
+              "sha256": "sha256:9ed4f06940f8c034ddee0f50f137f99fe0389c10d11a9555288a036ad12b6380",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6467,
+              "path": "lean/TwistedYetter/Fusion/PairingTransport.lean",
+              "sha256": "sha256:2df57e4777fd7552371c8f4164a799c41f35febee0cb7097c51ab828dbf47a97",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 8459,
+              "path": "lean/TwistedYetter/Fusion/PivotalMate.lean",
+              "sha256": "sha256:1505afa9e35808fd9652c5e79fcb38449e71aba48720c4927a8de0e3ce9b27d5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2674,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:85e50dc179e9ac1ab4976575ef9df30a789cf9b352f85209638a28fbe11fa529",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6364,
+              "path": "lean/TwistedYetter/Kirby/CategoricalMovie.lean",
+              "sha256": "sha256:a0bfb1cf30d7500991604155fe38878f022abf877e0a1bf2677b29b23fbcec35",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 13045,
+              "path": "lean/TwistedYetter/Kirby/CategoricalTangle.lean",
+              "sha256": "sha256:74773b7c6a7ea15cde1c83fb29c0291c71a65f25fa4c2186709a17324255d301",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 15022,
+              "path": "lean/TwistedYetter/Kirby/GeneralizedSliding.lean",
+              "sha256": "sha256:c57274a1f5cc96809ed5329f35368e59045a097c1a95c57cbc3b6217b71316d2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 7272,
+              "path": "lean/TwistedYetter/Kirby/HandleSlide.lean",
+              "sha256": "sha256:b5b3f4ba40a24be2b74f034a61cbf23f2cab5699ccaad41977adcebc4e01a428",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 7104,
+              "path": "lean/TwistedYetter/Kirby/LinearContext.lean",
+              "sha256": "sha256:edecf6ea8884540a214f808375191e1d9d3131b527a6ef766b3035dcfd526acd",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2977,
+              "path": "lean/TwistedYetter/Kirby/LinearDiagram.lean",
+              "sha256": "sha256:4bae7fe65d76d92abda3c3bd0bcd006ff6968c7caf51d30a8bbf53a4ca09db9b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5639,
+              "path": "lean/TwistedYetter/Kirby/MateDiagram.lean",
+              "sha256": "sha256:c885b7ee1c33951f8074fd40d32155d35e9fea974bd8bd2c154f482489aa23c5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 409,
+              "path": "scripts/lean_axiom_audit.sh",
+              "sha256": "sha256:ff823d379e56accdbd87e153a1d0af020ecedcee101f44fc5bdf43f438bb039c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 424,
+              "path": "scripts/lean_fusion_axiom_audit.sh",
+              "sha256": "sha256:793563390d0a1d0b9cdfe112fbb8eeae95426e0f77b935520ef35a156d196f5f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1618,
+              "path": "scripts/lean_fusion_mutation_tests.sh",
+              "sha256": "sha256:3c62b2990f7a976cd95d31fda0dbe76e603d4be65a34b5cc631be5fb8ec980b5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 518,
+              "path": "scripts/lean_local_build.sh",
+              "sha256": "sha256:157f38ddb0f5fcafa86b553150f406f3a6ddb7177af0d3a304c2867a7f305f71",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 539,
+              "path": "scripts/lean_local_check.sh",
+              "sha256": "sha256:6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1457,
+              "path": "scripts/lean_mutation_tests.sh",
+              "sha256": "sha256:87e8d41ad1f21e13e4eb598657bbec0bec5eff23bf45a0e8c9fba57ac93f8316",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4329,
+              "path": "tests/test_generalized_sliding_core_v1.py",
+              "sha256": "sha256:0c88ace7ec336bfc7b9a8d7d73883bd630c4a0cf831b274b80408e9413b4c44e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3358,
+              "path": "tests/test_generalized_sliding_linear_bootstrap_v1.py",
+              "sha256": "sha256:6d8a73da8b85896df6238577f92f7caf855bcafd9ce454cdfc7f2847e208d6c8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_GENERALIZED_SLIDING_CORE"
+        },
+        {
+          "content_hash": "sha256:2f55ee33e3984152a0d847af25b313d717c44b07f74fc5a2883d9d1ac63137bd",
+          "explicit_nonclaim_count": 5,
+          "file_sha256": "sha256:3fdd72f0c3c5980f2a9456882bfcc7d00665710bb5c69ebaff830dda08398e35",
+          "mathematical_status": "GENERALIZED_SLIDING_FRAMED_CONTEXT_ESTABLISHED_RELATIVE_TO_LEMMA_3_3_STANDARD_INPUTS",
+          "milestone_id": "R5",
+          "path": "experiments/results/lean-kirby/generalized-sliding-framed-context-v1.json",
+          "schema": "twisted-yetter.generalized-sliding-framed-context.v1",
+          "source_clean": true,
+          "source_commit": "a4d6d24ae1c351ef36b969431835ea800d40b85a",
+          "source_file_count": 14,
+          "source_replay_manifest_hash": "sha256:e04ea096f4362e6835f86d084a81b75828cf8b6a7ab1b9ffb91b175e141cc939",
+          "source_replayed_bytes": 59861,
+          "source_replays": [
+            {
+              "bytes": 4372,
+              "path": "experiments/inputs/lean-kirby/generalized-sliding-framed-context-obligation-matrix-v1.json",
+              "sha256": "sha256:5589568ee89b1826f5d5c735b61ee9ab3c0c58ff09541b244bbecdf84ceccd48",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2760,
+              "path": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+              "sha256": "sha256:bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 17042,
+              "path": "experiments/results/lean-kirby/generalized-sliding-core-v1.json",
+              "sha256": "sha256:3c46ff649b218ba1986bf235737b82ab1fa66280e7f81a680463b263089a29ee",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 11462,
+              "path": "experiments/scripts/build_generalized_sliding_framed_context_v1.py",
+              "sha256": "sha256:d3703a96bebc0758d71121dfd88fecd39e9a9cd149aafd1fb78c73a70b365f07",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 666,
+              "path": "lean/Mutations/MissingLemma33Law.lean",
+              "sha256": "sha256:5155f2eaa29d093817e857f0975e8094ee9449f366105cb165b1a1d8b5202d77",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 898,
+              "path": "lean/Mutations/WrongFramedExteriorBoundary.lean",
+              "sha256": "sha256:5fc74c30f1b1474f447dd7880a890ef02dc4380cbef6c4b2e38c1218b991f066",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 718,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:c92d0ea4bc3d1e95ddcd8ac6a2cfdaece3652bc93e0fe95b92f75058c8492b12",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3056,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:ebaab6aa67765a14a9cc694536730c2c867e2f0c9a79caf06869f83d5e566acf",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 10908,
+              "path": "lean/TwistedYetter/Kirby/FramedSliding.lean",
+              "sha256": "sha256:db70a29c6630160c2babb5ff8c98fcb3b312677d6ae76b30ccc103b14999dedb",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1264,
+              "path": "scripts/lean_framed_sliding_mutation_tests.sh",
+              "sha256": "sha256:0cce3823eb8e31f321285375ece7f953175326c2c0d959496bd2f0bb3ebc8d08",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "tests/test_generalized_sliding_framed_context_v1.py",
+              "sha256": "sha256:3bbdaa89bd5d71b4f9baacd904fbaad987358059028b8c98537605a4df9f62f6",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_GENERALIZED_SLIDING_FRAMED_CONTEXT"
+        },
+        {
+          "content_hash": "sha256:c84d7ef62a82fadaf2c0a798773c23aef81d195a43c84520683fc56ddc25bc7c",
+          "explicit_nonclaim_count": 5,
+          "file_sha256": "sha256:0e304e1b051fd410b4f7626b59b6fd5adff08f6f7842bb3467c6eed20d9e1cdf",
+          "mathematical_status": "FRAMED_LINK_KIRBY_PRESENTATION_SYNTAX_ESTABLISHED",
+          "milestone_id": "R6",
+          "path": "experiments/results/lean-kirby/framed-link-presentation-syntax-v1.json",
+          "schema": "twisted-yetter.framed-link-presentation-syntax.v1",
+          "source_clean": true,
+          "source_commit": "db8dd374000747cd25e8957d3b8eaad290c21ac4",
+          "source_file_count": 16,
+          "source_replay_manifest_hash": "sha256:5a692d2d429448454ad166ff236e3a60b94c01e90ebbde1bc393d3933218e6e8",
+          "source_replayed_bytes": 68575,
+          "source_replays": [
+            {
+              "bytes": 4575,
+              "path": "experiments/inputs/lean-kirby/framed-link-presentation-obligation-matrix-v1.json",
+              "sha256": "sha256:bea52f13f559f2b46ab46843414fd782fe5e1e186fd23c03e01657bcd3fbc4f6",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2760,
+              "path": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+              "sha256": "sha256:bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 11991,
+              "path": "experiments/scripts/build_framed_link_presentation_syntax_v1.py",
+              "sha256": "sha256:571b0fae66fe5cf499cd1f44ca569a8651002a62b8669f7da63667bb353d5628",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 549,
+              "path": "lean/Mutations/InvalidPresentationLineage.lean",
+              "sha256": "sha256:d5e17569d059a6780216846f530e8189e1d97f336d7199d0422e04a34e3868f1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 421,
+              "path": "lean/Mutations/MissingPresentationAdmission.lean",
+              "sha256": "sha256:ff0f9b9a094e407c3003fa5a7abb6950ddda246fd2b82d66152184b3ac5df08c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 418,
+              "path": "lean/Mutations/MutableAliasPresentation.lean",
+              "sha256": "sha256:0865f057be5b885219d14e6ee2091fcd21cb430728ba502c2aa3db1082bba867",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 758,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:9ecc04f4231c7106ceed96f27153952e0033d4804aac742fe5a0b4374128e73e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3229,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:c46c00471e42838614a4261fcd4f3e624ed842f40c77ad2b0fd772bf1aa5ce1e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 11872,
+              "path": "lean/TwistedYetter/Kirby/Presentation.lean",
+              "sha256": "sha256:90a32dd2fa589c662760b2b6144d4d5237d51245bf7173645890c49677b111f1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1338,
+              "path": "scripts/lean_presentation_mutation_tests.sh",
+              "sha256": "sha256:6dc144d1ae2bb6061013e13aeafddbac766f139030f87a5c88a79fd694427918",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 20332,
+              "path": "src/twisted_yetter/kirby_presentation_v1.py",
+              "sha256": "sha256:ed818e96a447867a98fa6422ae4c3d8b262ba537753a80c37e1079a0beed40ba",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3753,
+              "path": "tests/test_framed_link_presentation_syntax_v1.py",
+              "sha256": "sha256:f82029786b74e576737f47b5f689623a6662f462992c61131fa0831bd011d11d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3013,
+              "path": "tests/test_kirby_presentation_v1.py",
+              "sha256": "sha256:c1a6264c8ab65fabb9cc82f2fc9b9713224c8de1b01d89425670e99b8333cca7",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_FRAMED_LINK_PRESENTATION_SYNTAX"
+        },
+        {
+          "content_hash": "sha256:3a92d8174d834c1707c90b3a7cc8394584b4d3415164cf832ea01f1429d7c385",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:18822fe7b1d26899dc72b6ebf23a9251fb0441281ed81997283670d5aee3e9cc",
+          "mathematical_status": "FRAMED_LINK_EVALUATOR_PRESENTATION_INDEPENDENCE_ESTABLISHED_RELATIVE_TO_EXPLICIT_RIBBON_TRACE_AND_TOPOLOGY_INPUTS",
+          "milestone_id": "R7",
+          "path": "experiments/results/lean-kirby/framed-link-presentation-independence-v1.json",
+          "schema": "twisted-yetter.framed-link-presentation-independence.v1",
+          "source_clean": true,
+          "source_commit": "5899c54dd455f74283bb03646a33f56193b5c0f8",
+          "source_file_count": 16,
+          "source_replay_manifest_hash": "sha256:dad0b312f9048e70bba48d86a298d57d2066d7b658d56f7ba00b08f1a9c8f178",
+          "source_replayed_bytes": 79435,
+          "source_replays": [
+            {
+              "bytes": 8032,
+              "path": "experiments/inputs/lean-kirby/framed-link-presentation-independence-obligation-matrix-v1.json",
+              "sha256": "sha256:eab6bfd0ede7bc687db3358eb0e959fcc3f9efbfe137c2ae61a8c8c5eeb2a249",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5315,
+              "path": "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json",
+              "sha256": "sha256:601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 16461,
+              "path": "experiments/scripts/build_framed_link_presentation_independence_v1.py",
+              "sha256": "sha256:a26dfa211b3615c243a744c1db6902e64435ea9a3cb47a403724d5be95b481fb",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 705,
+              "path": "lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean",
+              "sha256": "sha256:c7a455fbadcf683dcb2307c428684ab226340a78ea808722802a50194a5bdbfd",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 831,
+              "path": "lean/Mutations/MissingFramedKinkCompatibility.lean",
+              "sha256": "sha256:0a82098e6441737c189fb81d8522e0f21d96534c979fb443e1477acc579ab005",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 793,
+              "path": "lean/Mutations/MissingPresentationCompleteness.lean",
+              "sha256": "sha256:b3c5032ea97483878886881833d8c3d1f0fac3aca1bb4ef06494d3186548d676",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 947,
+              "path": "lean/Mutations/MissingPresentationCompletenessCaveat.lean",
+              "sha256": "sha256:b0996b352adf255cbb0798c6e5103af9385b2bb0429969c9fba10d66d63fed7a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 631,
+              "path": "lean/Mutations/MissingSphericalCutCyclicity.lean",
+              "sha256": "sha256:a5a30c6afecdf49cd958fba2209ed8e95151ebee4da40927e5c79593c5f735dc",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 805,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:ba018acdf355ad0f45462a164d980fcd25d926239b3f59ebd4993257c0255299",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4691,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:d361b9e551a2976c8f411578ff84c3dbdf5a8ac0ac66b0d6e065689c3788412d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 29728,
+              "path": "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+              "sha256": "sha256:0c14e3004bbca112383138e57d31234e81d4e487f075106f4cb1e36153fe8826",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1555,
+              "path": "scripts/lean_presentation_isotopy_mutation_tests.sh",
+              "sha256": "sha256:e343fa0b02e37a1a9afd92e50105e321f5237f13303ea88f6c72687cf1ad4b11",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5375,
+              "path": "tests/test_framed_link_presentation_independence_v1.py",
+              "sha256": "sha256:2e7901ffd33650bb2f88bfa953c20acc953ebb9f049962635482097da891b5d3",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_FRAMED_LINK_EVALUATOR_PRESENTATION_INDEPENDENCE"
+        },
+        {
+          "content_hash": "sha256:40d02f3b06a5dd7803a227a6ba14df727b56c58df7da6fdf6a93b8568de5681b",
+          "explicit_nonclaim_count": 5,
+          "file_sha256": "sha256:db58721b674394b69742fbb9618afc83328a0d3089ae7c7b77f3798ea73a239d",
+          "mathematical_status": "KIRBY_HANDLE_SLIDES_EVALUATOR_INVARIANT_RELATIVE_TO_EXPLICIT_ORIGINAL_AND_GENERALIZED_SLIDING_INPUTS",
+          "milestone_id": "R8",
+          "path": "experiments/results/lean-kirby/kirby-handle-moves-v1.json",
+          "schema": "twisted-yetter.kirby-handle-moves.v1",
+          "source_clean": true,
+          "source_commit": "02cc43b52a937daf0fba20a1e4652d40b35a8b21",
+          "source_file_count": 20,
+          "source_replay_manifest_hash": "sha256:2bf75108b1fdf7ed3347e7a652ae1b7e45ba6b54263e292efec0d1ed492b5df8",
+          "source_replayed_bytes": 132032,
+          "source_replays": [
+            {
+              "bytes": 4957,
+              "path": "experiments/inputs/lean-kirby/kirby-handle-moves-obligation-matrix-v1.json",
+              "sha256": "sha256:7fa67f0ff3479764d7a9597295355c3c0bf4d15d64f7e2b95373f55c1404799c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2312,
+              "path": "experiments/inputs/references/kirby-handle-moves-primary-sources-v1.json",
+              "sha256": "sha256:c52b2d28f33a28d45e6cff81fa0cd4bea7e7a8a773f89505b46a165834288e7d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 14938,
+              "path": "experiments/scripts/build_kirby_handle_moves_v1.py",
+              "sha256": "sha256:6102531be418474dad065275fcb9a5f9e7a1ce62f964a8ab05a5df8975d1a7c7",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 739,
+              "path": "lean/Mutations/ArbitraryCertifiedMoveAsHandleSlide.lean",
+              "sha256": "sha256:da82cb5e5441f0e4d13180643f8cce5fbfe3478bdc524f58d19d8cda156c2861",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 517,
+              "path": "lean/Mutations/HandwrittenTargetCharacter.lean",
+              "sha256": "sha256:813917a575a57e1862f3a84e1e1b3cc0e9f1902f4c90a2abe03d5b53598e3f54",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 902,
+              "path": "lean/Mutations/MissingSlideRoleProof.lean",
+              "sha256": "sha256:398dd58f2b970ff0a61b7d85060f938179cd8b6a4ccd32cafa9fe7d501ac8e73",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 849,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:70ace65dba43333a3606ceff87d1bc36bfad67fbbad7a78e77e07f9a2dad4d84",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5175,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:7a8d67c8d63361d2dbba7ce1787beb180581c2198b7e3c44fcdd4a0a29076374",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 12691,
+              "path": "lean/TwistedYetter/Kirby/KirbyHandleMoves.lean",
+              "sha256": "sha256:8fbdf8c82968a4379cc61d079ee2225ae0d337e27f9cb8c48098489375d6ebb0",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1447,
+              "path": "scripts/lean_kirby_handle_move_mutation_tests.sh",
+              "sha256": "sha256:b0cb6ab6dcc2c040b22201209a88e438d9c4bd379195c218927edf2d6dc304da",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 26459,
+              "path": "src/twisted_yetter/kirby_handle_moves_v1.py",
+              "sha256": "sha256:e983663aa8866d15860ccfd6a36678cba6ced02b2395b1fdfa4d586793fa5efa",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 10716,
+              "path": "src/twisted_yetter/presentation_moves.py",
+              "sha256": "sha256:14d11e1ee96b0483c004b4046d00f4e6b500de6c045f12b51a6b521061796867",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 24484,
+              "path": "src/twisted_yetter/presentation_pairs.py",
+              "sha256": "sha256:f9628221d385c0ed840da814523d02f689115c6eaaaa5601da1e00298a62f81f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4414,
+              "path": "tests/test_kirby_handle_moves_artifact_v1.py",
+              "sha256": "sha256:faaf16638c8f6dd3d1a210384f9e5853cf95597b507371c67c366ebb1c8c45c3",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4135,
+              "path": "tests/test_kirby_handle_moves_v1.py",
+              "sha256": "sha256:c0ad14f5b40654f10636cf110a700ef17f204c4bc6640bdb28e821402cc15a97",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4193,
+              "path": "tests/test_presentation_moves.py",
+              "sha256": "sha256:871786d4da675d2bd27552828a3408daf19a0920876a103ab445079e2229ad07",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 9538,
+              "path": "tests/test_presentation_pairs.py",
+              "sha256": "sha256:e6e67d882ba0b61810d7841aabc216fc5fe79072c7258dc8265b392b70d2752e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_KIRBY_HANDLE_SLIDES"
+        },
+        {
+          "content_hash": "sha256:b3683789e585a7183ad9e88ac8063c792e4314cd02c09dc5d10a641f83d75cad",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:43ea028c86e02a4006f6d8ae29cedc97007ccca0200047414dc8d2cee462ee45",
+          "mathematical_status": "ALL_REQUIRED_KIRBY_MOVES_EVALUATOR_INVARIANT_RELATIVE_TO_EXPLICIT_SLIDING_CUTTING_KILLING_TWIST_PIVOTAL_AND_NORMALIZATION_INPUTS",
+          "milestone_id": "R9",
+          "path": "experiments/results/lean-kirby/kirby-cancellation-v1.json",
+          "schema": "twisted-yetter.kirby-cancellation-and-normalization.v1",
+          "source_clean": true,
+          "source_commit": "5bb5b770b03ab08eb63e7e7e06f59bc41ac60427",
+          "source_file_count": 18,
+          "source_replay_manifest_hash": "sha256:6050d1edb365789f22c8e4088ede96861f43e00000c733128af56fa562c0d4b0",
+          "source_replayed_bytes": 95750,
+          "source_replays": [
+            {
+              "bytes": 6517,
+              "path": "experiments/inputs/lean-kirby/kirby-cancellation-obligation-matrix-v1.json",
+              "sha256": "sha256:868cdd1669f80ff774bccd2b73689821e84ac0ec9d34394c81d24d0bf1b6eabc",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2156,
+              "path": "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json",
+              "sha256": "sha256:fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 15475,
+              "path": "experiments/scripts/build_kirby_cancellation_v1.py",
+              "sha256": "sha256:325311360011458f906b1d54f6865e4b69d7834eb8e7cb1c551f04e373b72c19",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 648,
+              "path": "lean/Mutations/ArbitraryNormalizedEqualityAsCancellation.lean",
+              "sha256": "sha256:6fad57ce03833fe580eb40951d4313c7c916406c205a1fca67b5cf948d486d8b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 547,
+              "path": "lean/Mutations/HandwrittenCancellationCharacter.lean",
+              "sha256": "sha256:12a6dc7687a4f27e91a705dbc4d260cc097b3b2cbb076b826c5af3f308bc59f7",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1077,
+              "path": "lean/Mutations/MissingCancellationKillingIdentity.lean",
+              "sha256": "sha256:8f0b950c09aac494db113ff33a4e36938d2c8ad42bfb1fd2aef0f57e15932d58",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 887,
+              "path": "lean/Mutations/MissingPivotalCancellationDimension.lean",
+              "sha256": "sha256:1e21d79ce85d0e49fb40627a7ea85e109eb98d9c1d95e37ae23774e699c0ef1d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1117,
+              "path": "lean/Mutations/MissingTransparentTwistWitness.lean",
+              "sha256": "sha256:0cdefddfeb20854d374b3c95ca44b5bb9d62fdea81ecbf10d596ce05740b8f5e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 894,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:4926b5fe9f0400f9017d282085bbdadcba608857ada600904e8a886446140706",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6205,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:6e17dab2419171b6b2d513d22ce759ef4b840e76c3f6f51afe284f2499dd0579",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 11738,
+              "path": "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
+              "sha256": "sha256:83fa517c779ce65db9881e5803b909a8d9cdb62ac9b7672e6009cb5c8e7c172c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1708,
+              "path": "scripts/lean_kirby_cancellation_mutation_tests.sh",
+              "sha256": "sha256:ae9951475ea6f0c5f030a913f50e2f66188ebead14573a53000b2f362c5e877e",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 32995,
+              "path": "src/twisted_yetter/kirby_cancellation_v1.py",
+              "sha256": "sha256:ad9996e3ab5676eee21621317a5a96aac44b9133cbf368d8d14ff8120da6d57a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5147,
+              "path": "tests/test_kirby_cancellation_artifact_v1.py",
+              "sha256": "sha256:b5cfa169d426ce95ea4cb3fab29e1d0cada8f065029264e33028657ee0e6d3c4",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 5073,
+              "path": "tests/test_kirby_cancellation_v1.py",
+              "sha256": "sha256:0bb8a91f95b793e9c830c161a959f881d33d169aa30d268534ddcc406668a0b4",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_ALL_BARENZ_BARRETT_TABLE2_LOCAL_KIRBY_MOVES"
+        },
+        {
+          "content_hash": "sha256:9c0805c9f0152750c8ee5e3ddd78995ea56fdb61474606dcd5658c544b5fdb45",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:a70f7b66b20f4c2fa198e887584db57352527429281c46e05a46b53fb61eb6e0",
+          "mathematical_status": "R10_TOPOLOGY_BOUNDARY_ESTABLISHED_AS_TWO_EXPLICIT_SOURCE_BACKED_INPUTS_NOT_REPROVED_IN_LEAN",
+          "milestone_id": "R10",
+          "path": "experiments/results/lean-kirby/kirby-completeness-v1.json",
+          "schema": "twisted-yetter.kirby-completeness-boundary.v1",
+          "source_clean": true,
+          "source_commit": "d0683d91998211e444fdb39f85102a9a663b3da3",
+          "source_file_count": 22,
+          "source_replay_manifest_hash": "sha256:705d2cbb4757f02a53ea20973051ba6af8bb68b91da65e2cbbb07ebe74d380b2",
+          "source_replayed_bytes": 116713,
+          "source_replays": [
+            {
+              "bytes": 8186,
+              "path": "experiments/inputs/lean-kirby/kirby-completeness-obligation-matrix-v1.json",
+              "sha256": "sha256:c1afb732e7757c5ead6097f8c22cb49b87cd95cfe1f9fc8e8edbd7e757718522",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4987,
+              "path": "experiments/inputs/references/kirby-completeness-primary-sources-v1.json",
+              "sha256": "sha256:664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 17538,
+              "path": "experiments/scripts/build_kirby_completeness_v1.py",
+              "sha256": "sha256:fc2463cf7452ed65937f3a22acab143584e4264d8f64d7a8dd4c350e684f0417",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 616,
+              "path": "lean/Mutations/ArbitraryTopologyMoveInjection.lean",
+              "sha256": "sha256:ffd32c6fe6a2b9a32c13a96a53e94f8a0785d4e92a576f5b8d0d074c93bdc54a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 984,
+              "path": "lean/Mutations/EvaluatorEqualityInsideKirbyCompleteness.lean",
+              "sha256": "sha256:fb7bdb722fc885a738b2e5ee185d2606a10c0d004ccc80eca45b1a5c476c424b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 951,
+              "path": "lean/Mutations/HandwrittenMovieTargetCharacter.lean",
+              "sha256": "sha256:ee4b3722452be80304497d13cc00124848cd73fa534bd16abac942b0fcff4008",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 798,
+              "path": "lean/Mutations/MissingInducedH2ChainWitness.lean",
+              "sha256": "sha256:54429bb49068e2f2bc296eaa48598adf690127d76d54113cf62ede125fe56150",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 840,
+              "path": "lean/Mutations/MissingKirbyCompletenessCaveat.lean",
+              "sha256": "sha256:915a1e435d17553dce273586293da7188d5cf9f1861c3658b6315e5246371a89",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1083,
+              "path": "lean/Mutations/MissingLocalTopologyWitness.lean",
+              "sha256": "sha256:e0026748d842f7bc2b122d22f4cdfb6dc8f98f0e87147e982cdc8eb56e026187",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1349,
+              "path": "lean/Mutations/MissingSpecialManifoldBinding.lean",
+              "sha256": "sha256:035267979bfc5e7e901942e70207a20922f3b3b88d17d148509d4f6a00e9dc25",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1633,
+              "path": "lean/Mutations/MissingUniqueFourHandle.lean",
+              "sha256": "sha256:877cff49cc848f58fdfd70dbfde2dfe76a22c2d6c5a79f3e9327e11da56f478f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 615,
+              "path": "lean/Mutations/ZeroOneAsTableTwoMove.lean",
+              "sha256": "sha256:25936a92fe10add2af18cca6d3ac16d7a8478c7394c239c99bf005bcff821bd6",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 939,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:e1ac72231dda96213f0f0009ed6341cf13f9a17326021ac0c3ebc2d35aa3039a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6719,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:cbfabb781a045a5624f8639e94f0f81535795c86143d0ffae0634cab2be160c8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 21041,
+              "path": "lean/TwistedYetter/Kirby/KirbyCompleteness.lean",
+              "sha256": "sha256:84ef951105d8818c5b9122860d722df86cae92ec7868175928c8091bf25b1f83",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2337,
+              "path": "scripts/lean_kirby_completeness_mutation_tests.sh",
+              "sha256": "sha256:10efbe8cb52cdfbcb53281c6df8ec086d65e9193f438b3ca2728834a2e460c64",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 29547,
+              "path": "src/twisted_yetter/kirby_completeness_v1.py",
+              "sha256": "sha256:b2f221a96c1a8ff991042e8345569b5a717b7e181e4b6ac81cda41f735f98d17",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6269,
+              "path": "tests/test_kirby_completeness_artifact_v1.py",
+              "sha256": "sha256:527afb8247b5cd03b054bdea25c8a2376251de674e83bd3814cd9565301cce70",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6715,
+              "path": "tests/test_kirby_completeness_v1.py",
+              "sha256": "sha256:cc0cb32a9ff7b3c221135f172b2efb8e3fb9301acf81b2598cef3f42e634a75a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_KIRBY_CERF_TOPOLOGY_BOUNDARY"
+        },
+        {
+          "content_hash": "sha256:19575d5602f95b55011d4690c68d6333ed6ced74a94dbadcf0e111913f3b7da8",
+          "explicit_nonclaim_count": 6,
+          "file_sha256": "sha256:0b0cf045827fdfc6784771cfda58136099ee2e8cc5f547aedc81865b37f7724d",
+          "mathematical_status": "HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT_ESTABLISHED_UNDER_LISTED_AXIOMS",
+          "milestone_id": "R11",
+          "path": "experiments/results/lean-kirby/homologically-twisted-invariant-v1.json",
+          "schema": "twisted-yetter.homologically-twisted-kirby-invariant.v1",
+          "source_clean": true,
+          "source_commit": "30f397f9e7e90bdb842751bffc52a9aec8fea480",
+          "source_file_count": 23,
+          "source_replay_manifest_hash": "sha256:0527e975866aa6bfaf8835afa20942a3d7ffa6dd80bb2c7b0edf8ac2c20c3db2",
+          "source_replayed_bytes": 132779,
+          "source_replays": [
+            {
+              "bytes": 9927,
+              "path": "experiments/inputs/lean-kirby/homologically-twisted-invariant-obligation-matrix-v1.json",
+              "sha256": "sha256:c64a70efc189aff746e309c3a97b25289a2ef3200dacfeb5fc18d0146480b57a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3627,
+              "path": "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json",
+              "sha256": "sha256:4a10bf855aff99341aa9d6c5e5aa9a0861cf2416c35b8117b913f6d8207f3aff",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 18783,
+              "path": "experiments/scripts/build_homologically_twisted_invariant_v1.py",
+              "sha256": "sha256:c185080277a95d110addee2b060438369ffe9a405a38625688abd7b6cd418f7f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 145,
+              "path": "lean/Mutations/ArbitraryNormalizedEqualityAsR11Step.lean",
+              "sha256": "sha256:745d0a30b47cf478050e2dec81821230a2522f756ce2d8cc14d202cb15b29f5c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 141,
+              "path": "lean/Mutations/CraneYetterIdentificationInjection.lean",
+              "sha256": "sha256:fe893262b52ca34addd063c60c5c85be1dfe2539a1c5d0c1aa1aa013bae541bb",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 165,
+              "path": "lean/Mutations/DirectFinalInvariantInjection.lean",
+              "sha256": "sha256:05da267bb6d20f5d1bd394b77fa50dfccc49a9e154b78d327056029d312ddf55",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 138,
+              "path": "lean/Mutations/HandwrittenR11TargetAlpha.lean",
+              "sha256": "sha256:47e473870d42f67d5c72e6a93418550ebee0111d3aebca04e70bc7dc66cb2e03",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2539,
+              "path": "lean/Mutations/MissingR11DecorationWitness.lean",
+              "sha256": "sha256:086a869fb5d9e94fb8f178859cc878de805c794272db7137f47d6f2eaae24a36",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 947,
+              "path": "lean/Mutations/MissingR11LocalBindingHashes.lean",
+              "sha256": "sha256:0c0a06543303b22e963e85c060377638358dfb1ca447df39a5ac7bf5c2d64cf2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1443,
+              "path": "lean/Mutations/MissingR11MarkedTransportSound.lean",
+              "sha256": "sha256:d3726f1cad6588cc4e0a42567d44802e1db8605fe39ec541e709595e790b7450",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2114,
+              "path": "lean/Mutations/MissingR11SingleSnapshotCoherence.lean",
+              "sha256": "sha256:8df882cde7024210e50a2f61a569bb0a5ea2f20388148a6362428edf247f18df",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1854,
+              "path": "lean/Mutations/MissingR11SourceScopeCaveat.lean",
+              "sha256": "sha256:c30a40be5801ce119d6e523c6088b40295853c84abc826d24f8dc90389c8251d",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 676,
+              "path": "lean/Mutations/WrongR11OrdinarySlideKind.lean",
+              "sha256": "sha256:cc306d0b731007efb2d5504851f46f2035fdbd57fef34a220be3fd8a6282c2ea",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 996,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:741d337bce8225802eb49aacacf81f087c048c5f2faa67fc77d498d203fddee6",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 7781,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:86f1c57e665ac138608244b37d0051ca59a4ea2f59fc44f3f6caa97707fb7dc1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 29371,
+              "path": "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+              "sha256": "sha256:09a823f896dba21c5d1f16b196dc31d75156be7e55046de8f968d00f1acad3cf",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 2530,
+              "path": "scripts/lean_homologically_twisted_invariant_mutation_tests.sh",
+              "sha256": "sha256:98b98916b96a47dc38c7b1e27e874ebf31b6ea076d24f9dde55e7760fa10f68b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 29769,
+              "path": "src/twisted_yetter/homologically_twisted_invariant_v1.py",
+              "sha256": "sha256:cf112fd9507672019122cae1d1f40ed918f2df8d8bb1df0d20f4cf68cc2909ea",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 6705,
+              "path": "tests/test_homologically_twisted_invariant_artifact_v1.py",
+              "sha256": "sha256:3bdd745c0d6bcce436fbedbc979477d1e6fe1e08c29698a7c6fe7f4097effb5f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 9562,
+              "path": "tests/test_homologically_twisted_invariant_v1.py",
+              "sha256": "sha256:5300dee462af69cf4683384331daa3f9b899b0b3bd0b51be76e79c81daf0a522",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "PASS_HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT"
+        },
+        {
+          "content_hash": "sha256:76942c755ddd853701fdcfcdaeaf52901eb46fc25f1843807e4e6f839e7ef7b6",
+          "explicit_nonclaim_count": 7,
+          "file_sha256": "sha256:98338a913cbc2304ab33e7a7539fc1dbb2a1ac838bfbbd5c090f76b3e1c0eacd",
+          "mathematical_status": "COMPUTATION_IMPORTER_ESTABLISHED_EXACT_CONTROL_VERIFIED_FIGURE21_NOT_ADMITTED",
+          "milestone_id": "R12",
+          "path": "experiments/results/lean-kirby/computation-artifact-import-v1.json",
+          "schema": "twisted-yetter.computation-artifact-import.v1",
+          "source_clean": true,
+          "source_commit": "3e916e46c0272ecd42ee55791366b5bd2b9c931b",
+          "source_file_count": 23,
+          "source_replay_manifest_hash": "sha256:28f8a14ef022979041a9078e793a0198e7ee71402d59df9222d42bebe6ea4c28",
+          "source_replayed_bytes": 136331,
+          "source_replays": [
+            {
+              "bytes": 15228,
+              "path": "experiments/inputs/lean-kirby/computation-artifact-import-manifest-v1.json",
+              "sha256": "sha256:192d23aa1d276d36ef5d44ae279ddebbc7bec0e95e6ff2c0bd2d6db3abedb4c2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 8345,
+              "path": "experiments/inputs/lean-kirby/computation-artifact-import-obligation-matrix-v1.json",
+              "sha256": "sha256:f85437974381c6dcf64ddb154914955e226fb4bf4cb7944ee1909ddd7038a0b5",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 15284,
+              "path": "experiments/scripts/build_computation_artifact_import_v1.py",
+              "sha256": "sha256:791f1af2e378b9582205499811c49de5a5459fdbc23487e2e3907a04470861a1",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 3149,
+              "path": "lake-manifest.json",
+              "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 392,
+              "path": "lakefile.toml",
+              "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25,
+              "path": "lean-toolchain",
+              "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 360,
+              "path": "lean/Mutations/DirtyArtifactAsExactR12.lean",
+              "sha256": "sha256:32b4aa23c4651edcae2a3ee6f8553bcbe16bc39ce98447936be1d3c16e7e5629",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 188,
+              "path": "lean/Mutations/Figure21ExactDispositionR12.lean",
+              "sha256": "sha256:b53612054e1374ea83742c45d4a1459729b2298a8af8aa0d46b5cc3eb00395ba",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 149,
+              "path": "lean/Mutations/Figure21ExactValueProjectionR12.lean",
+              "sha256": "sha256:fe885cb00b3843c349dcee404a3d890ddb774e1be6656a9661fd8b631b0bedb2",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 390,
+              "path": "lean/Mutations/IncompleteDistributionR12.lean",
+              "sha256": "sha256:cbebf9ab394d9cfef027b7d0368f97ff818ebb3dd7c358861d880a821931ee4a",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 385,
+              "path": "lean/Mutations/InconclusiveArtifactAsExactR12.lean",
+              "sha256": "sha256:607aa7b273c46c471d3955c132e7d810830f5612b089dc282834fbf6a90066ee",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 586,
+              "path": "lean/Mutations/MissingEvaluatorClosureR12.lean",
+              "sha256": "sha256:b9b2a03c7d3af9a91516a8ee076ef18f2f71c141b3bd1bbf22e5ad05628cc7cc",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 614,
+              "path": "lean/Mutations/MissingR11BindingR12.lean",
+              "sha256": "sha256:5304d6e0da257d3ca3b2fbc4e552568fa031923aef2478e01a751fcdf2678825",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 365,
+              "path": "lean/Mutations/MutableAliasArtifactAsExactR12.lean",
+              "sha256": "sha256:15c37e9084d8ec210ef14b50700b481f4428f7531159bbe0b2c5229928f04f4c",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 274,
+              "path": "lean/Mutations/RoundedArtifactAsExactR12.lean",
+              "sha256": "sha256:f60c96a981f578827aa35eb511c14693dbc36861fb3f78d74afe44229cec6e9f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 170,
+              "path": "lean/Mutations/StructuralAggregatePromotionR12.lean",
+              "sha256": "sha256:fd9dbe6d3aba72acd25f1a4aeaa63d48a467641f288f2375a6ddf5f1cbcf24cf",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1051,
+              "path": "lean/TwistedYetter.lean",
+              "sha256": "sha256:a5ed042a05ab742d18ddcb209fde9fa58554b722de2101f2e304d1dcab917a73",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 9226,
+              "path": "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+              "sha256": "sha256:33b126478b20144c78b4eb237ccce0c2223752ea4743561b25e570b6b8a1c6fd",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 25512,
+              "path": "lean/TwistedYetter/Kirby/ComputationArtifactImporter.lean",
+              "sha256": "sha256:13e0661b871e72cbf1452f252fc1dcd6f2b9aec58a1bb2cc87f62525e6da35b8",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 1931,
+              "path": "scripts/lean_computation_artifact_import_mutation_tests.sh",
+              "sha256": "sha256:5d98555627711f9149f47c49cddf3db56926cb61bdc5d8ea9cd89a77262aee5f",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 39445,
+              "path": "src/twisted_yetter/computation_artifact_import_v1.py",
+              "sha256": "sha256:1630d9022f8ab2487b72200c99a6847ec17a9fef9c53f80737474c7c315e61ff",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 4974,
+              "path": "tests/test_computation_artifact_import_artifact_v1.py",
+              "sha256": "sha256:2826f367e2bcc37c5c1fcaab0fd6e8f24c40c7017add6d691b55880c32b36a1b",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            },
+            {
+              "bytes": 8288,
+              "path": "tests/test_computation_artifact_import_v1.py",
+              "sha256": "sha256:065af47fec4dbd4fb158db2049d184829a1ae82d42705afee310e8ae71a34095",
+              "status": "PASS_HISTORICAL_GIT_REPLAY"
+            }
+          ],
+          "status": "R12_TERMINAL_WITH_EXPLICIT_BLOCKERS"
+        }
+      ],
+      "historical_source_file_replay_count": 231,
+      "status": "PASS_ALL_11_MILESTONES_CONTENT_AND_HISTORY_REPLAYED"
+    },
+    "predecessor_nonclaim_audit": {
+      "by_milestone": [
+        {
+          "milestone_id": "R0",
+          "nonclaims": [
+            "This is not a formalization of the generalized sliding lemma itself.",
+            "This does not yet construct a SourcedSlidingLaw from modular or premodular fusion-category data.",
+            "NaturalTwist is not asserted to satisfy balancing or ribbon duality compatibility.",
+            "The syntax is not yet proved complete for framed tangles, framed links, Kirby diagrams, or Kirby movies.",
+            "No Reidemeister completeness, Kirby-calculus completeness, handle-cancellation theorem, or four-manifold invariance theorem is claimed.",
+            "No Twisted Crane-Yetter invariant is defined or proved invariant in this artifact."
+          ]
+        },
+        {
+          "milestone_id": "R1",
+          "nonclaims": [
+            "This does not define a fusion, pivotal, braided, ribbon, or modular category.",
+            "This does not construct categorical mate maps.",
+            "This does not prove that a pivotal functor preserves the trace pairing.",
+            "This does not formalize B\u00e4renz-Barrett Lemma 3.3 or Lemma 3.4.",
+            "This does not construct a SourcedSlidingLaw.",
+            "This does not establish handle-slide, Kirby-calculus, or four-manifold invariance."
+          ]
+        },
+        {
+          "milestone_id": "R2_R4",
+          "nonclaims": [
+            "Mathlib v4.29.1 has no native pivotal or spherical category class; the two standard trace-pairing consequences are explicit source-backed hypotheses.",
+            "This does not formalize Lemma 3.4 for arbitrary framed knots and multiple linked strands.",
+            "This does not formalize all framed-link isotopy or Kirby-calculus completeness.",
+            "This does not prove four-manifold invariance.",
+            "This does not connect computation JSON artifacts to Lean.",
+            "This does not assert that an arbitrary linear strong monoidal functor is pivotal."
+          ]
+        },
+        {
+          "milestone_id": "R5",
+          "nonclaims": [
+            "This does not yet define a serializable framed-link or Kirby-presentation input.",
+            "This does not prove that every two regular diagrams of one framed link are connected by the listed moves.",
+            "This does not establish all Reidemeister or presentation-independence generators.",
+            "This does not establish Kirby handle-slide or cancellation invariance.",
+            "This does not prove four-manifold invariance."
+          ]
+        },
+        {
+          "milestone_id": "R6",
+          "nonclaims": [
+            "This syntax does not by itself interpret a presentation in a ribbon category.",
+            "This does not prove Reidemeister or framed-link presentation independence.",
+            "This does not prove completeness of the listed slice events for ambient isotopy.",
+            "This does not prove Kirby handle-slide or cancellation invariance.",
+            "This does not prove four-manifold invariance."
+          ]
+        },
+        {
+          "milestone_id": "R7",
+          "nonclaims": [
+            "This does not formalize the full topological proof of framed-link regular-diagram completeness.",
+            "This does not remove Selinger Caveat 4.31 or prove that Shum Theorem 6.1 covers arbitrary repository coupon signatures.",
+            "This does not yet interpret every R6 serialized presentation as a categorical Diagram.",
+            "This does not prove any Kirby handle slide or handle cancellation.",
+            "This does not prove four-manifold presentation independence.",
+            "This does not define the homologically twisted Crane-Yetter invariant."
+          ]
+        },
+        {
+          "milestone_id": "R8",
+          "nonclaims": [
+            "R8 does not re-prove B\u00e4renz-Barrett Lemma 3.1 from fusion-category axioms.",
+            "A handle-chain or linking-matrix certificate is bookkeeping only and is not a link-diagram or evaluator proof.",
+            "R8 does not formalize handle cancellations, normalization, Cerf theory, or Kirby-calculus completeness.",
+            "R8 does not yet define a four-manifold invariant or prove invariance of a homologically twisted construction.",
+            "The specially-dotted evaluator is not silently identified with the ordinary dotted one-handle color."
+          ]
+        },
+        {
+          "milestone_id": "R9",
+          "nonclaims": [
+            "R9 does not re-prove the cutting, killing, transparent-twist, or pivotal-dimension graphical identities from foundational category axioms.",
+            "R9 proves local normalized invariance for B\u00e4renz-Barrett Table 2; it does not prove Kirby/Cerf completeness.",
+            "R9 does not yet prove that a homologically twisted link prescription is an invariant of the pair (X, alpha).",
+            "R9 does not identify the generalized dichromatic invariant with Crane-Yetter.",
+            "R9 does not validate any numerical computation artifact.",
+            "The specially-dotted evaluator remains outside this local ordinary-dichromatic cancellation certificate."
+          ]
+        },
+        {
+          "milestone_id": "R10",
+          "nonclaims": [
+            "R10 does not re-prove Cerf theory in Lean.",
+            "R10 does not derive the five-family Table 2 link calculus from general Cerf theory in Lean.",
+            "R10 does not prove evaluator invariance along the topology movie; R7-R9 supply local algebraic inputs and R11 must connect them.",
+            "R10 does not yet define an invariant of the pair (X, alpha).",
+            "R10 does not identify any link prescription with Crane-Yetter.",
+            "R10 does not validate any numerical computation artifact."
+          ]
+        },
+        {
+          "milestone_id": "R11",
+          "nonclaims": [
+            "R11 does not identify the constructed Kirby invariant with the Crane-Yetter state sum.",
+            "R11 does not re-prove the category identities imported by R7-R9 from foundational ribbon-fusion axioms.",
+            "R11 does not attribute an arbitrary-coefficient or arbitrary-category Kirby formula to Yetter.",
+            "R11 does not import or validate a concrete category snapshot or numerical computation artifact; that is R12.",
+            "R11 does not prove Pachner-move invariance of a triangulated state sum.",
+            "R11 is restricted to the exact R10 closed, connected, smooth, oriented four-manifold and special-presentation scope."
+          ]
+        },
+        {
+          "milestone_id": "R12",
+          "nonclaims": [
+            "R12 does not identify the R11 Kirby invariant with the Crane-Yetter state sum and does not make a CTL claim.",
+            "R12 does not prove the correctness of an external evaluator from its source code hash or seal the transitive evaluator source closure.",
+            "R12 does not promote structurally complete distributions to invariant values without an exact R11 semantic binding.",
+            "R12 does not certify the draft Figure 21 transcription against the printed paper.",
+            "R12 does not erase dirty provenance recorded by legacy computation artifacts.",
+            "R12 does not turn rounded floating-point labels into exact cyclotomic values.",
+            "R12 does not certify an exotic-versus-standard comparison without a marked H2 identification."
+          ]
+        }
+      ],
+      "nonclaim_count": 64,
+      "status": "PASS_ALL_PREDECESSOR_NONCLAIMS_PRESERVED_VERBATIM"
+    },
+    "reference_audit": {
+      "ledger_count": 8,
+      "ledgers": [
+        {
+          "file_sha256": "sha256:bbd3655b6ec6fe83d30ba9c1bfcd8f920097b56fc3e3acfc5023972aa0b9aa87",
+          "path": "experiments/inputs/references/lean-kirby-coupon-bootstrap-primary-sources-v1.json",
+          "reference_count": 2,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:mathlib4-v4.29.1-braided-rigid"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v1",
+          "status": "SOURCE_LOCATORS_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed",
+          "path": "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json",
+          "reference_count": 2,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:mathlib4-v4.29.1-braided-rigid"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v2",
+          "status": "SOURCE_LOCATORS_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052",
+          "path": "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json",
+          "reference_count": 2,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:mathlib4-v4.29.1-braided-rigid"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v2",
+          "status": "SOURCE_LOCATORS_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7",
+          "path": "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json",
+          "reference_count": 4,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:selinger-graphical-languages-2010",
+            "ref:shum-tortile-1994",
+            "ref:mathlib4-v4.29.1-braided-rigid"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v2",
+          "status": "SOURCE_LOCATORS_HASHES_AND_CAVEATS_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:c52b2d28f33a28d45e6cff81fa0cd4bea7e7a8a773f89505b46a165834288e7d",
+          "path": "experiments/inputs/references/kirby-handle-moves-primary-sources-v1.json",
+          "reference_count": 3,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:local-r5-generalized-sliding-framed-context",
+            "ref:local-r6-framed-link-presentation-syntax"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v1",
+          "status": "SOURCE_LOCATORS_AND_CONTENT_HASHES_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a",
+          "path": "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json",
+          "reference_count": 2,
+          "reference_ids": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:local-r8-kirby-handle-moves"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v1",
+          "status": "SOURCE_LOCATORS_AND_CONTENT_HASHES_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885",
+          "path": "experiments/inputs/references/kirby-completeness-primary-sources-v1.json",
+          "reference_count": 5,
+          "reference_ids": [
+            "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+            "ref:de-sa-link-calculus-1979",
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:local-r9-kirby-cancellation",
+            "ref:local-r8-kirby-handle-moves"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v1",
+          "status": "SOURCE_SCOPE_AND_CAPTURE_LIMITATIONS_RECORDED"
+        },
+        {
+          "file_sha256": "sha256:4a10bf855aff99341aa9d6c5e5aa9a0861cf2416c35b8117b913f6d8207f3aff",
+          "path": "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json",
+          "reference_count": 5,
+          "reference_ids": [
+            "ref:yetter-homologically-twisted-1993",
+            "ref:local-r7-framed-link-presentation-independence",
+            "ref:local-r8-kirby-handle-moves",
+            "ref:local-r9-kirby-cancellation",
+            "ref:local-r10-kirby-completeness"
+          ],
+          "schema": "twisted-yetter.reference-ledger.v1",
+          "status": "SOURCE_SCOPE_AND_PREDECESSOR_CERTIFICATES_RECORDED"
+        }
+      ],
+      "reference_record_count": 25,
+      "status": "PASS_ALL_8_REFERENCE_LEDGERS_HASH_BOUND"
+    },
+    "roadmap_status": "R13_TERMINAL_FORMALIZATION_ROUTE_COMPLETE_RELATIVE_TO_EXPLICIT_BOUNDARIES",
+    "schema": "twisted-yetter.final-formalization-package-runtime.v1",
+    "status": "PASS_R13_FORMALIZATION_ROUTE_TERMINAL_WITH_EXPLICIT_FIGURE21_BLOCKERS",
+    "terminal_boundary": {
+      "all_imported_category_identities_reproved": false,
+      "crane_yetter_identification_established": false,
+      "ctl_claim_admitted": false,
+      "figure21_exact_value_admitted": false,
+      "figure21_marked_comparison_admitted": false,
+      "figure21_structural_denominators_complete": true,
+      "figure21_structural_row_count": 15,
+      "figure21_terminal_blockers": [
+        "DIRTY_PROVENANCE_RECORDED",
+        "DRAFT_FIGURE21_TRANSCRIPTION",
+        "ROUNDED_COMPLEX_OUTPUT_WITHOUT_EXACT_CYCLOTOMIC_CERTIFICATE",
+        "MISSING_CONCRETE_R11_SEMANTIC_BINDING",
+        "UNSEALED_TRANSITIVE_EVALUATOR_SOURCE_CLOSURE",
+        "MISSING_MARKED_H2_COMPARISON_CERTIFICATE"
+      ],
+      "formalization_route_terminal": true,
+      "r11_conditional_invariant_established": true,
+      "r12_exact_control_admitted": true,
+      "source_byte_complete_archive": false
+    },
+    "trusted_input_audit": {
+      "catalog": [
+        {
+          "exact_record": {
+            "does_not_assume": "No sliding endpoint equality is assumed.",
+            "input": "IdentityResolution.sound",
+            "meaning": "The dimension-weighted simple-channel resolution of one identity.",
+            "source_locator": "Lemma 2.37 and Lemma 3.2"
+          },
+          "input_id": "IdentityResolution.sound",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R2_R4"
+            },
+            {
+              "inherited": true,
+              "milestone_id": "R5"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "does_not_assume": "No mate transport or sliding equality is assumed.",
+            "input": "PivotalTraceCompatibility.preserves_trace_pairing",
+            "meaning": "A pivotal strong monoidal functor preserves the spherical trace pairing.",
+            "source_locator": "Lemma 2.23"
+          },
+          "input_id": "PivotalTraceCompatibility.preserves_trace_pairing",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R2_R4"
+            },
+            {
+              "inherited": true,
+              "milestone_id": "R5"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "does_not_assume": "Transported dual-family equations are derived, not supplied.",
+            "input": "SphericalMateCompatibility.preserves_trace_pairing",
+            "meaning": "The two concrete Frobenius mate maps preserve the spherical pairing.",
+            "source_locator": "Equations (3.1.9)-(3.1.11)"
+          },
+          "input_id": "SphericalMateCompatibility.preserves_trace_pairing",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R2_R4"
+            },
+            {
+              "inherited": true,
+              "milestone_id": "R5"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "does_not_assume": "There is no whole-chain or endpoint-equality field.",
+            "input": "CategoricalMovie soundness proofs",
+            "meaning": "Each local braiding or cup/cap replacement carries its own evaluator equality.",
+            "source_locator": "Equation (3.1.5), equation (3.1.10), and Mathlib braided/rigid identities"
+          },
+          "input_id": "CategoricalMovie soundness proofs",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R2_R4"
+            },
+            {
+              "inherited": true,
+              "milestone_id": "R5"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "does_not_assume": "Pointwise generalized sliding is derived independently.",
+            "input": "SlidingFamily endpoint naturality",
+            "meaning": "The two endpoint formal sums are natural in the strand object.",
+            "source_locator": "Braiding, evaluation, and coevaluation naturality"
+          },
+          "input_id": "SlidingFamily endpoint naturality",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R2_R4"
+            },
+            {
+              "inherited": true,
+              "milestone_id": "R5"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The explicit cup-crossing-cap positive and negative kinks evaluate to the chosen twist and inverse twist.",
+            "input_id": "ribbon-kink-compatibility",
+            "lean_type": "FramedKinkCompatibility",
+            "not_assumed": "No arbitrary framed-link evaluator equality is included."
+          },
+          "input_id": "ribbon-kink-compatibility",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R7"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "close_X(f then g) equals close_Y(g then f).",
+            "input_id": "spherical-trace-cyclicity",
+            "lean_type": "SphericalCutTrace",
+            "not_assumed": "No Reidemeister, Kirby, or presentation equality is included."
+          },
+          "input_id": "spherical-trace-cyclicity",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R7"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "caveat": "Selinger Theorem 4.30 carries Caveat 4.31; this input is therefore visible and conditional rather than claimed as fully formalized topology.",
+            "exact_content": "Two admitted closed diagrams representing one framed link are connected by GeneratedIsotopy over the exact whitelist.",
+            "input_id": "framed-presentation-topology-completeness",
+            "lean_type": "FramedLinkPresentationCompleteness",
+            "not_assumed": "Evaluator equality is not a field and arbitrary CertifiedMove injection is impossible."
+          },
+          "input_id": "framed-presentation-topology-completeness",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R7"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The source-backed original Kirby-color sliding equality of B\u00e4renz-Barrett Lemma 3.1, represented by SourcedSlidingLaw.",
+            "input_id": "bb-original-sliding-property",
+            "lean_type": "SourcedSlidingLaw",
+            "not_assumed": "No arbitrary handle-slide evaluator equality or CertifiedMove injection is included."
+          },
+          "input_id": "bb-original-sliding-property",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R8"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The R4 SlidingFamily and R5 arbitrary framed-context theorem derived from the finite generalized-sliding calculation.",
+            "input_id": "r4-r5-generalized-sliding-family",
+            "lean_type": "SlidingFamily",
+            "not_assumed": "No independent two-over-two endpoint equality is accepted."
+          },
+          "input_id": "r4-r5-generalized-sliding-family",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R8"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "For each concrete presentation, a topology-correct handle-chain basis equivalence and component lineage are supplied and validated.",
+            "input_id": "concrete-handle-bookkeeping",
+            "lean_type": "SlideMetadata; ComponentLineage; HomologicalTransport",
+            "not_assumed": "Matrix congruence is not treated as the graphical move proof."
+          },
+          "input_id": "concrete-handle-bookkeeping",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R8"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "Disjoint-union multiplicativity of the closed graphical evaluator.",
+            "input_id": "bb-disjoint-union-multiplicativity",
+            "lean_type": "OneTwoLocalCalculation.disjoint_union_sound; TwoThreeLocalCalculation.disjoint_union_sound",
+            "not_assumed": "No normalized equality is included."
+          },
+          "input_id": "bb-disjoint-union-multiplicativity",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R9"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The cutting and killing equations evaluating the isolated 1-2 pair to d(D) times the transparent-part dimension.",
+            "input_id": "bb-one-two-local-identities",
+            "lean_type": "cutting_identity; killing_identity",
+            "not_assumed": "The final raw-factor and normalized equalities are derived by Lean."
+          },
+          "input_id": "bb-one-two-local-identities",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R9"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The twist is trivial on every transparent object used by the 1-2 calculation.",
+            "input_id": "transparent-twist-triviality",
+            "lean_type": "transparent_twist_witness",
+            "not_assumed": "No arbitrary twist cancellation is accepted."
+          },
+          "input_id": "transparent-twist-triviality",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R9"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "Pivotality preserves the dimension of the image Kirby color, so the isolated 2-handle unknot evaluates to d(C).",
+            "input_id": "pivotal-dimension-preservation",
+            "lean_type": "pivotal_dimension_preserved",
+            "not_assumed": "Remark 3.11's non-pivotal case is explicitly excluded."
+          },
+          "input_id": "pivotal-dimension-preservation",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R9"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "Concrete cancellations carry an explicit chain-level equivalence inducing the H2 equivalence.",
+            "input_id": "cancellation-homology-equivalence",
+            "lean_type": "CancellationHomologyTransport.homologyEquiv",
+            "not_assumed": "The post-cancellation character cannot be handwritten."
+          },
+          "input_id": "cancellation-homology-equivalence",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R9"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "General Cerf completeness for two ordered relative handle decompositions of one compact smooth pair.",
+            "input_id": "gompf-stipsicz-general-cerf-completeness",
+            "lean_type": "GeneralCerfCompleteness.connected",
+            "not_assumed": "No evaluator value or equality; no five-family reduction."
+          },
+          "input_id": "gompf-stipsicz-general-cerf-completeness",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R10"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "For the admitted special closed four-dimensional link presentations, framed isotopy and the five B\u00e4renz-Barrett Table 2 move families connect presentations.",
+            "input_id": "table-two-link-calculus-refinement",
+            "lean_type": "TableTwoLinkCompleteness.tableTwoConnected",
+            "not_assumed": "No evaluator invariance and no Crane-Yetter identification."
+          },
+          "input_id": "table-two-link-calculus-refinement",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R10"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "One content-addressed category interpretation coherently supplies generalized sliding data, normalization dimensions, and closed-diagram scalarization.",
+            "input_id": "single-category-evaluator-coherence",
+            "lean_type": "AdmissibleKirbyCategory",
+            "not_assumed": "No concrete category snapshot is imported and no Crane-Yetter identification is supplied."
+          },
+          "input_id": "single-category-evaluator-coherence",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R11"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "For every special presentation and marked class, the typed diagram and decoration realize that formal presentation and class, and its raw numerator is the scalarized categorical evaluation.",
+            "input_id": "decorated-presentation-realization",
+            "lean_type": "DecoratedKirbyPresentation",
+            "not_assumed": "No final value equality and no presentation independence."
+          },
+          "input_id": "decorated-presentation-realization",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R11"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "Every R10 topology move and every marked class is realized by the exact corresponding closed R7, R8, or R9 proof object.",
+            "input_id": "all-alpha-local-evaluator-realization",
+            "lean_type": "HomologicallyTwistedKirbyPrescription.localStep",
+            "not_assumed": "The field returns proof objects, never a bare normalized equality."
+          },
+          "input_id": "all-alpha-local-evaluator-realization",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R11"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "Certified coordinates representing the same geometric class are related by the exact H2 transport of the R10 completeness movie.",
+            "input_id": "marked-pair-realization-compatibility",
+            "lean_type": "MarkedPairPresentationSystem.marked_transport_sound",
+            "not_assumed": "No evaluator statement and no state-sum or Crane-Yetter identification."
+          },
+          "input_id": "marked-pair-realization-compatibility",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R11"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "A cryptographic digest uniquely names the bytes supplied to the runtime validator.",
+            "input_id": "sha256-collision-resistance-and-runtime-file-access",
+            "lean_type": "Hash256",
+            "not_assumed": "A matching digest does not prove evaluator mathematics."
+          },
+          "input_id": "sha256-collision-resistance-and-runtime-file-access",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R12"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "An exact computation may be promoted only when an equality witness binds its output to the exact R11 invariant target.",
+            "input_id": "concrete-r11-semantic-binding",
+            "lean_type": "ExactInvariantValueCertificate.r11_semantic_binding",
+            "not_assumed": "Figure 21 currently supplies no such witness."
+          },
+          "input_id": "concrete-r11-semantic-binding",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R12"
+            }
+          ]
+        },
+        {
+          "exact_record": {
+            "exact_content": "The external producer correctly implements its declared evaluator profile and transitive source closure.",
+            "input_id": "external-evaluator-soundness",
+            "lean_type": "ExactInvariantValueCertificate.output_sound",
+            "not_assumed": "A script entry-point hash alone is insufficient."
+          },
+          "input_id": "external-evaluator-soundness",
+          "origins": [
+            {
+              "inherited": false,
+              "milestone_id": "R12"
+            }
+          ]
+        }
+      ],
+      "occurrence_count": 30,
+      "status": "PASS_ALL_TRUSTED_INPUTS_VISIBLE_AND_DEDUPLICATED",
+      "unique_count": 25
+    }
+  },
+  "schema": "twisted-yetter.final-formalization-package.v1",
+  "started_at_utc": "2026-07-18T11:56:26Z",
+  "status": "PASS_R13_FORMALIZATION_PACKAGE_TERMINAL_WITH_EXPLICIT_FIGURE21_BLOCKERS",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  },
+  "trusted_inputs": [
+    {
+      "exact_record": {
+        "does_not_assume": "No sliding endpoint equality is assumed.",
+        "input": "IdentityResolution.sound",
+        "meaning": "The dimension-weighted simple-channel resolution of one identity.",
+        "source_locator": "Lemma 2.37 and Lemma 3.2"
+      },
+      "input_id": "IdentityResolution.sound",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R2_R4"
+        },
+        {
+          "inherited": true,
+          "milestone_id": "R5"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "does_not_assume": "No mate transport or sliding equality is assumed.",
+        "input": "PivotalTraceCompatibility.preserves_trace_pairing",
+        "meaning": "A pivotal strong monoidal functor preserves the spherical trace pairing.",
+        "source_locator": "Lemma 2.23"
+      },
+      "input_id": "PivotalTraceCompatibility.preserves_trace_pairing",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R2_R4"
+        },
+        {
+          "inherited": true,
+          "milestone_id": "R5"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "does_not_assume": "Transported dual-family equations are derived, not supplied.",
+        "input": "SphericalMateCompatibility.preserves_trace_pairing",
+        "meaning": "The two concrete Frobenius mate maps preserve the spherical pairing.",
+        "source_locator": "Equations (3.1.9)-(3.1.11)"
+      },
+      "input_id": "SphericalMateCompatibility.preserves_trace_pairing",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R2_R4"
+        },
+        {
+          "inherited": true,
+          "milestone_id": "R5"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "does_not_assume": "There is no whole-chain or endpoint-equality field.",
+        "input": "CategoricalMovie soundness proofs",
+        "meaning": "Each local braiding or cup/cap replacement carries its own evaluator equality.",
+        "source_locator": "Equation (3.1.5), equation (3.1.10), and Mathlib braided/rigid identities"
+      },
+      "input_id": "CategoricalMovie soundness proofs",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R2_R4"
+        },
+        {
+          "inherited": true,
+          "milestone_id": "R5"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "does_not_assume": "Pointwise generalized sliding is derived independently.",
+        "input": "SlidingFamily endpoint naturality",
+        "meaning": "The two endpoint formal sums are natural in the strand object.",
+        "source_locator": "Braiding, evaluation, and coevaluation naturality"
+      },
+      "input_id": "SlidingFamily endpoint naturality",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R2_R4"
+        },
+        {
+          "inherited": true,
+          "milestone_id": "R5"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The explicit cup-crossing-cap positive and negative kinks evaluate to the chosen twist and inverse twist.",
+        "input_id": "ribbon-kink-compatibility",
+        "lean_type": "FramedKinkCompatibility",
+        "not_assumed": "No arbitrary framed-link evaluator equality is included."
+      },
+      "input_id": "ribbon-kink-compatibility",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R7"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "close_X(f then g) equals close_Y(g then f).",
+        "input_id": "spherical-trace-cyclicity",
+        "lean_type": "SphericalCutTrace",
+        "not_assumed": "No Reidemeister, Kirby, or presentation equality is included."
+      },
+      "input_id": "spherical-trace-cyclicity",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R7"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "caveat": "Selinger Theorem 4.30 carries Caveat 4.31; this input is therefore visible and conditional rather than claimed as fully formalized topology.",
+        "exact_content": "Two admitted closed diagrams representing one framed link are connected by GeneratedIsotopy over the exact whitelist.",
+        "input_id": "framed-presentation-topology-completeness",
+        "lean_type": "FramedLinkPresentationCompleteness",
+        "not_assumed": "Evaluator equality is not a field and arbitrary CertifiedMove injection is impossible."
+      },
+      "input_id": "framed-presentation-topology-completeness",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R7"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The source-backed original Kirby-color sliding equality of B\u00e4renz-Barrett Lemma 3.1, represented by SourcedSlidingLaw.",
+        "input_id": "bb-original-sliding-property",
+        "lean_type": "SourcedSlidingLaw",
+        "not_assumed": "No arbitrary handle-slide evaluator equality or CertifiedMove injection is included."
+      },
+      "input_id": "bb-original-sliding-property",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R8"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The R4 SlidingFamily and R5 arbitrary framed-context theorem derived from the finite generalized-sliding calculation.",
+        "input_id": "r4-r5-generalized-sliding-family",
+        "lean_type": "SlidingFamily",
+        "not_assumed": "No independent two-over-two endpoint equality is accepted."
+      },
+      "input_id": "r4-r5-generalized-sliding-family",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R8"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "For each concrete presentation, a topology-correct handle-chain basis equivalence and component lineage are supplied and validated.",
+        "input_id": "concrete-handle-bookkeeping",
+        "lean_type": "SlideMetadata; ComponentLineage; HomologicalTransport",
+        "not_assumed": "Matrix congruence is not treated as the graphical move proof."
+      },
+      "input_id": "concrete-handle-bookkeeping",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R8"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "Disjoint-union multiplicativity of the closed graphical evaluator.",
+        "input_id": "bb-disjoint-union-multiplicativity",
+        "lean_type": "OneTwoLocalCalculation.disjoint_union_sound; TwoThreeLocalCalculation.disjoint_union_sound",
+        "not_assumed": "No normalized equality is included."
+      },
+      "input_id": "bb-disjoint-union-multiplicativity",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R9"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The cutting and killing equations evaluating the isolated 1-2 pair to d(D) times the transparent-part dimension.",
+        "input_id": "bb-one-two-local-identities",
+        "lean_type": "cutting_identity; killing_identity",
+        "not_assumed": "The final raw-factor and normalized equalities are derived by Lean."
+      },
+      "input_id": "bb-one-two-local-identities",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R9"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The twist is trivial on every transparent object used by the 1-2 calculation.",
+        "input_id": "transparent-twist-triviality",
+        "lean_type": "transparent_twist_witness",
+        "not_assumed": "No arbitrary twist cancellation is accepted."
+      },
+      "input_id": "transparent-twist-triviality",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R9"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "Pivotality preserves the dimension of the image Kirby color, so the isolated 2-handle unknot evaluates to d(C).",
+        "input_id": "pivotal-dimension-preservation",
+        "lean_type": "pivotal_dimension_preserved",
+        "not_assumed": "Remark 3.11's non-pivotal case is explicitly excluded."
+      },
+      "input_id": "pivotal-dimension-preservation",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R9"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "Concrete cancellations carry an explicit chain-level equivalence inducing the H2 equivalence.",
+        "input_id": "cancellation-homology-equivalence",
+        "lean_type": "CancellationHomologyTransport.homologyEquiv",
+        "not_assumed": "The post-cancellation character cannot be handwritten."
+      },
+      "input_id": "cancellation-homology-equivalence",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R9"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "General Cerf completeness for two ordered relative handle decompositions of one compact smooth pair.",
+        "input_id": "gompf-stipsicz-general-cerf-completeness",
+        "lean_type": "GeneralCerfCompleteness.connected",
+        "not_assumed": "No evaluator value or equality; no five-family reduction."
+      },
+      "input_id": "gompf-stipsicz-general-cerf-completeness",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R10"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "For the admitted special closed four-dimensional link presentations, framed isotopy and the five B\u00e4renz-Barrett Table 2 move families connect presentations.",
+        "input_id": "table-two-link-calculus-refinement",
+        "lean_type": "TableTwoLinkCompleteness.tableTwoConnected",
+        "not_assumed": "No evaluator invariance and no Crane-Yetter identification."
+      },
+      "input_id": "table-two-link-calculus-refinement",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R10"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "One content-addressed category interpretation coherently supplies generalized sliding data, normalization dimensions, and closed-diagram scalarization.",
+        "input_id": "single-category-evaluator-coherence",
+        "lean_type": "AdmissibleKirbyCategory",
+        "not_assumed": "No concrete category snapshot is imported and no Crane-Yetter identification is supplied."
+      },
+      "input_id": "single-category-evaluator-coherence",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R11"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "For every special presentation and marked class, the typed diagram and decoration realize that formal presentation and class, and its raw numerator is the scalarized categorical evaluation.",
+        "input_id": "decorated-presentation-realization",
+        "lean_type": "DecoratedKirbyPresentation",
+        "not_assumed": "No final value equality and no presentation independence."
+      },
+      "input_id": "decorated-presentation-realization",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R11"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "Every R10 topology move and every marked class is realized by the exact corresponding closed R7, R8, or R9 proof object.",
+        "input_id": "all-alpha-local-evaluator-realization",
+        "lean_type": "HomologicallyTwistedKirbyPrescription.localStep",
+        "not_assumed": "The field returns proof objects, never a bare normalized equality."
+      },
+      "input_id": "all-alpha-local-evaluator-realization",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R11"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "Certified coordinates representing the same geometric class are related by the exact H2 transport of the R10 completeness movie.",
+        "input_id": "marked-pair-realization-compatibility",
+        "lean_type": "MarkedPairPresentationSystem.marked_transport_sound",
+        "not_assumed": "No evaluator statement and no state-sum or Crane-Yetter identification."
+      },
+      "input_id": "marked-pair-realization-compatibility",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R11"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "A cryptographic digest uniquely names the bytes supplied to the runtime validator.",
+        "input_id": "sha256-collision-resistance-and-runtime-file-access",
+        "lean_type": "Hash256",
+        "not_assumed": "A matching digest does not prove evaluator mathematics."
+      },
+      "input_id": "sha256-collision-resistance-and-runtime-file-access",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R12"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "An exact computation may be promoted only when an equality witness binds its output to the exact R11 invariant target.",
+        "input_id": "concrete-r11-semantic-binding",
+        "lean_type": "ExactInvariantValueCertificate.r11_semantic_binding",
+        "not_assumed": "Figure 21 currently supplies no such witness."
+      },
+      "input_id": "concrete-r11-semantic-binding",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R12"
+        }
+      ]
+    },
+    {
+      "exact_record": {
+        "exact_content": "The external producer correctly implements its declared evaluator profile and transitive source closure.",
+        "input_id": "external-evaluator-soundness",
+        "lean_type": "ExactInvariantValueCertificate.output_sound",
+        "not_assumed": "A script entry-point hash alone is insufficient."
+      },
+      "input_id": "external-evaluator-soundness",
+      "origins": [
+        {
+          "inherited": false,
+          "milestone_id": "R12"
+        }
+      ]
+    }
+  ]
+}
