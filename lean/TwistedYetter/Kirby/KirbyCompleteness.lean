@@ -139,6 +139,8 @@ structure GeneralCerfStepMetadata
   localTopologyCertificateHash : String
   local_certificate_hash_shape :
     RawPresentation.sha256Shape localTopologyCertificateHash = true
+  locallyRealizesCerfMove : Prop
+  local_topology_witness : locallyRealizesCerfMove
 
 /--
 The complete four-dimensional move whitelist in the general Cerf theorem.
@@ -264,6 +266,11 @@ structure SpecialKirbyPresentation
   uniqueFourHandle : counts.h4 = 1
   orderedByIncreasingIndex : Prop
   ordering_witness : orderedByIncreasingIndex
+  representedManifoldHash : String
+  represented_manifold_hash_sound :
+    representedManifoldHash = manifold.manifoldSnapshotHash
+  representsFixedManifold : Prop
+  representation_witness : representsFixedManifold
   representationCertificateHash : String
   representation_certificate_hash_shape :
     RawPresentation.sha256Shape representationCertificateHash = true
@@ -286,6 +293,8 @@ structure TableTwoMoveMetadata
   localTopologyCertificateHash : String
   local_certificate_hash_shape :
     RawPresentation.sha256Shape localTopologyCertificateHash = true
+  locallyRealizesTableTwoMove : Prop
+  local_topology_witness : locallyRealizesTableTwoMove
 
 /--
 Presentation-to-presentation `H2` equivalence with an independently pinned
@@ -299,6 +308,8 @@ structure MarkedH2Transport
   chainCertificateHash : String
   chain_certificate_hash_shape :
     RawPresentation.sha256Shape chainCertificateHash = true
+  inducedByCertifiedChainMap : Prop
+  induced_by_chain_map_witness : inducedByCertifiedChainMap
 
 namespace MarkedH2Transport
 

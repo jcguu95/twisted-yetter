@@ -17,7 +17,11 @@ def unsafePresentation
     (uniqueZero : counts.h0 = 1)
     (ordered : Prop)
     (orderedWitness : ordered)
-    (representationHash h2Hash : String)
+    (representedManifoldHash representationHash h2Hash : String)
+    (representedManifoldSound :
+      representedManifoldHash = manifold.manifoldSnapshotHash)
+    (representsFixedManifold : Prop)
+    (representationWitness : representsFixedManifold)
     (representationShape :
       RawPresentation.sha256Shape representationHash = true)
     (h2Shape : RawPresentation.sha256Shape h2Hash = true) :
@@ -27,6 +31,10 @@ def unsafePresentation
   uniqueZeroHandle := uniqueZero
   orderedByIncreasingIndex := ordered
   ordering_witness := orderedWitness
+  representedManifoldHash := representedManifoldHash
+  represented_manifold_hash_sound := representedManifoldSound
+  representsFixedManifold := representsFixedManifold
+  representation_witness := representationWitness
   representationCertificateHash := representationHash
   representation_certificate_hash_shape := representationShape
   h2ModelCertificateHash := h2Hash

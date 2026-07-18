@@ -89,6 +89,11 @@
       "witness": "SpecialKirbyPresentation.formal"
     },
     {
+      "obligation_id": "special-presentation-manifold-binding",
+      "status": "MANDATORY_PROOF_RELEVANT_FIELD_AND_MUTATION_TESTED",
+      "witness": "represented_manifold_hash_sound and representation_witness prevent phantom manifold relabelling"
+    },
+    {
       "obligation_id": "special-table-two-link-refinement",
       "status": "MANDATORY_SEPARATE_SOURCE_BACKED_INPUT_NOT_DERIVED_IN_LEAN",
       "witness": "TableTwoLinkCompleteness.tableTwoConnected; Bärenz-Barrett Theorem 3.9 and Table 2"
@@ -114,6 +119,11 @@
       "witness": "TableTwoMove has no zeroOne, threeSlide, or threeFour constructor"
     },
     {
+      "obligation_id": "local-topology-proof-relevance",
+      "status": "MANDATORY_LEAN_WITNESS_AND_MUTATION_TESTED",
+      "witness": "GeneralCerfStepMetadata.local_topology_witness and TableTwoMoveMetadata.local_topology_witness"
+    },
+    {
       "obligation_id": "no-arbitrary-topology-move-injection",
       "status": "LEAN_CLOSED_INDUCTIVE_AND_MUTATION_TESTED",
       "witness": "TableTwoMove has no fromEquality or arbitrary constructor"
@@ -132,6 +142,11 @@
       "obligation_id": "per-move-h2-equivalence",
       "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_INVERSE_CHECK",
       "witness": "MarkedH2Transport.homologyEquiv"
+    },
+    {
+      "obligation_id": "h2-equivalence-induced-by-certified-chain-map",
+      "status": "MANDATORY_PROOF_RELEVANT_FIELD_AND_MUTATION_TESTED",
+      "witness": "MarkedH2Transport.induced_by_chain_map_witness"
     },
     {
       "obligation_id": "derived-character-transport",

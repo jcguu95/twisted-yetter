@@ -120,7 +120,7 @@ def test_obligations_are_terminal_and_two_inputs_remain_visible() -> None:
     assert matrix["status"] == (
         "R10_TERMINAL_AS_EXPLICIT_SOURCE_BACKED_TOPOLOGY_BOUNDARY"
     )
-    assert len(matrix["obligations"]) == 31
+    assert len(matrix["obligations"]) == 34
     assert not any(
         row["status"] in {"NOT_FORMALIZED", "UNKNOWN"}
         for row in matrix["obligations"]

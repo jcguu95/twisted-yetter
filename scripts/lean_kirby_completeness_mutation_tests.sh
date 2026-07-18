@@ -11,6 +11,9 @@ mutations=(
   "lean/Mutations/HandwrittenMovieTargetCharacter.lean"
   "lean/Mutations/MissingUniqueFourHandle.lean"
   "lean/Mutations/ArbitraryTopologyMoveInjection.lean"
+  "lean/Mutations/MissingInducedH2ChainWitness.lean"
+  "lean/Mutations/MissingSpecialManifoldBinding.lean"
+  "lean/Mutations/MissingLocalTopologyWitness.lean"
 )
 
 expected_diagnostics=(
@@ -20,6 +23,9 @@ expected_diagnostics=(
   '`targetCharacter` is not a field of structure `MarkedH2Transport`'
   'Fields missing: `uniqueFourHandle`'
   'Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`'
+  'Fields missing: `inducedByCertifiedChainMap`, `induced_by_chain_map_witness`'
+  'Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`'
+  'Fields missing: `locallyRealizesTableTwoMove`, `local_topology_witness`'
 )
 
 for index in "${!mutations[@]}"; do

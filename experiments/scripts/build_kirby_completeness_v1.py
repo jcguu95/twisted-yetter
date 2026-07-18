@@ -58,6 +58,9 @@ MUTATIONS = [
     "lean/Mutations/HandwrittenMovieTargetCharacter.lean",
     "lean/Mutations/MissingUniqueFourHandle.lean",
     "lean/Mutations/ArbitraryTopologyMoveInjection.lean",
+    "lean/Mutations/MissingInducedH2ChainWitness.lean",
+    "lean/Mutations/MissingSpecialManifoldBinding.lean",
+    "lean/Mutations/MissingLocalTopologyWitness.lean",
 ]
 PYTEST_FILES = [
     "tests/test_kirby_completeness_v1.py",
@@ -226,9 +229,13 @@ def whitelist_check() -> dict[str, Any]:
     mandatory_fields = [
         "uniqueZeroHandle",
         "uniqueFourHandle",
+        "represented_manifold_hash_sound",
+        "representation_witness",
         "source_scope_caveat",
         "h2ModelCertificateHash",
         "homologyEquiv",
+        "induced_by_chain_map_witness",
+        "local_topology_witness",
         "tableTwoConnected",
     ]
     if any(field not in source for field in mandatory_fields):
@@ -259,7 +266,7 @@ def build() -> dict[str, Any]:
     obligations = json.loads(OBLIGATIONS.read_text())
     references = json.loads(REFERENCES.read_text())
     rows = obligations["obligations"]
-    if len(rows) != 31 or any(
+    if len(rows) != 34 or any(
         row["status"] in {"NOT_FORMALIZED", "UNKNOWN"}
         for row in rows
     ):
@@ -333,7 +340,9 @@ def build() -> dict[str, Any]:
         if line.startswith("PASS expected rejection:")
     ]
     if len(rejections) != len(MUTATIONS):
-        raise AssertionError("expected six rejected R10 Lean mutations")
+        raise AssertionError(
+            f"expected {len(MUTATIONS)} rejected R10 Lean mutations"
+        )
 
     pytest_result = run(["uv", "run", "pytest", "-q", *PYTEST_FILES])
     pytest_output = clean_output(pytest_result.stdout + pytest_result.stderr)
