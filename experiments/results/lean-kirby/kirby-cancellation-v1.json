@@ -1,0 +1,854 @@
+{
+  "argv": [
+    "experiments/scripts/build_kirby_cancellation_v1.py"
+  ],
+  "cancellation_coverage": {
+    "actual_count": 4,
+    "expected_count": 4,
+    "fixtures": [
+      {
+        "cancellation_id": "r9-one_two-fixture",
+        "chain_transport": {
+          "character_pairing_check": "PASS_EXHAUSTIVE_H2_CLASSES_AND_CHARACTERS_MOD2",
+          "forward_ambient_c2_mod2": [
+            [
+              0,
+              1
+            ]
+          ],
+          "forward_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_ambient_c2_mod2": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "inverse_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "removed_component_ids": [
+            "cancel-h1",
+            "cancel-h2"
+          ],
+          "source_c1_ids": [
+            "cancel-h1"
+          ],
+          "source_c2_ids": [
+            "cancel-h2",
+            "persistent-h2"
+          ],
+          "source_c3_ids": [],
+          "source_d2": [
+            [
+              1,
+              0
+            ]
+          ],
+          "source_d3": [
+            [],
+            []
+          ],
+          "source_h2_basis_representatives_mod2": [
+            [
+              0,
+              1
+            ]
+          ],
+          "source_h2_class_count_mod2": 2,
+          "target_c1_ids": [],
+          "target_c2_ids": [
+            "persistent-h2"
+          ],
+          "target_c3_ids": [],
+          "target_d2": [],
+          "target_d3": [
+            []
+          ],
+          "target_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "target_h2_class_count_mod2": 2
+        },
+        "claim_boundary": "NORMALIZED_INVARIANCE_IS_LEAN_DERIVED_FROM_EXPLICIT_LOCAL_IDENTITIES;KIRBY_COMPLETENESS_AND_FOUR_MANIFOLD_INVARIANCE_NOT_CLAIMED",
+        "content_hash": "sha256:4b89cffc9ebd81f7e79afc6379debda9ac0ff2655361c66f3b74f5c68c5438d0",
+        "kind": "one_two",
+        "local_evaluation": {
+          "cutting_identity": "PASS",
+          "disjoint_union_multiplicativity": "PASS",
+          "killing_identity": "PASS",
+          "normalized_equality_supplied_as_input": false,
+          "raw_factor": "d(D) * d(transparent(F(Omega_C)))",
+          "transparent_twist_trivial": "PASS"
+        },
+        "local_geometry": {
+          "isolated_from_rest": true,
+          "linked_to_other_handles": false,
+          "two_handle_may_be_knotted": true
+        },
+        "normalization": {
+          "c_dimension": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "d_dimension": {
+            "denominator": 1,
+            "numerator": 7
+          },
+          "formula": "d(C)^(h2-h1) * (d(D)*d(transparent(F(Omega_C))))^h1",
+          "recurrence_check": "PASS_DENOMINATOR_MULTIPLIES_BY_DD_TIMES_TRANSPARENT",
+          "source_denominator": {
+            "denominator": 1,
+            "numerator": 105
+          },
+          "source_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "source_raw_numerator": {
+            "denominator": 1,
+            "numerator": 231
+          },
+          "target_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "target_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "target_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "transparent_dimension": {
+            "denominator": 1,
+            "numerator": 3
+          }
+        },
+        "schema": "twisted-yetter.kirby-cancellation.v1",
+        "source_handle_counts": {
+          "h0": 1,
+          "h1": 1,
+          "h2": 2,
+          "h3": 0,
+          "h4": 1
+        },
+        "source_proof": {
+          "lean_module": "TwistedYetter.Kirby.KirbyCancellation",
+          "lean_theorem": "OneTwoLocalCalculation.normalized_sound",
+          "pivotality_failure_locator": "Remark 3.11, journal page 687",
+          "source_locator": "Definition 3.6, Lemma 3.8, Theorem 3.9, equations (3.2.1), (3.3.1), (3.3.2), journal pages 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "source_snapshot_hash": "sha256:cf10ede1e8bbaab1c4ebd0bb6efbb117f67d2e860a45e62f42ad724452980036",
+        "target_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 1
+        },
+        "target_snapshot_hash": "sha256:3655501f28a75466f40b9168f0e65e184fbcf655cb464ed0f2a9489b32ab05a7"
+      },
+      {
+        "cancellation_id": "r9-two_three-fixture",
+        "chain_transport": {
+          "character_pairing_check": "PASS_EXHAUSTIVE_H2_CLASSES_AND_CHARACTERS_MOD2",
+          "forward_ambient_c2_mod2": [
+            [
+              0,
+              1
+            ]
+          ],
+          "forward_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_ambient_c2_mod2": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "inverse_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "removed_component_ids": [
+            "cancel-h2",
+            "cancel-h3"
+          ],
+          "source_c1_ids": [],
+          "source_c2_ids": [
+            "cancel-h2",
+            "persistent-h2"
+          ],
+          "source_c3_ids": [
+            "cancel-h3"
+          ],
+          "source_d2": [],
+          "source_d3": [
+            [
+              1
+            ],
+            [
+              0
+            ]
+          ],
+          "source_h2_basis_representatives_mod2": [
+            [
+              0,
+              1
+            ]
+          ],
+          "source_h2_class_count_mod2": 2,
+          "target_c1_ids": [],
+          "target_c2_ids": [
+            "persistent-h2"
+          ],
+          "target_c3_ids": [],
+          "target_d2": [],
+          "target_d3": [
+            []
+          ],
+          "target_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "target_h2_class_count_mod2": 2
+        },
+        "claim_boundary": "NORMALIZED_INVARIANCE_IS_LEAN_DERIVED_FROM_EXPLICIT_LOCAL_IDENTITIES;KIRBY_COMPLETENESS_AND_FOUR_MANIFOLD_INVARIANCE_NOT_CLAIMED",
+        "content_hash": "sha256:2cb7ea2e19447c0f2a76080ca09926776a32f38ddff1f3d2dd37adf1061b3cfe",
+        "kind": "two_three",
+        "local_evaluation": {
+          "disjoint_union_multiplicativity": "PASS",
+          "normalized_equality_supplied_as_input": false,
+          "pivotal_dimension_preserved": "PASS",
+          "raw_factor": "d(C)"
+        },
+        "local_geometry": {
+          "unknotted": true,
+          "unlinked": true,
+          "zero_framed": true
+        },
+        "normalization": {
+          "c_dimension": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "d_dimension": {
+            "denominator": 1,
+            "numerator": 7
+          },
+          "formula": "d(C)^(h2-h1) * (d(D)*d(transparent(F(Omega_C))))^h1",
+          "recurrence_check": "PASS_DENOMINATOR_MULTIPLIES_BY_DC",
+          "source_denominator": {
+            "denominator": 1,
+            "numerator": 25
+          },
+          "source_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "source_raw_numerator": {
+            "denominator": 1,
+            "numerator": 55
+          },
+          "target_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "target_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "target_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "transparent_dimension": {
+            "denominator": 1,
+            "numerator": 3
+          }
+        },
+        "schema": "twisted-yetter.kirby-cancellation.v1",
+        "source_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 2,
+          "h3": 1,
+          "h4": 1
+        },
+        "source_proof": {
+          "lean_module": "TwistedYetter.Kirby.KirbyCancellation",
+          "lean_theorem": "TwoThreeLocalCalculation.normalized_sound",
+          "pivotality_failure_locator": "Remark 3.11, journal page 687",
+          "source_locator": "Definition 3.6, Lemma 3.8, Theorem 3.9, equations (3.2.1), (3.3.1), (3.3.2), journal pages 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "source_snapshot_hash": "sha256:b5478918938991168ae66e48bc9e9c1423b21f68877ad080b8df154ae37fddfc",
+        "target_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 1
+        },
+        "target_snapshot_hash": "sha256:3655501f28a75466f40b9168f0e65e184fbcf655cb464ed0f2a9489b32ab05a7"
+      },
+      {
+        "cancellation_id": "r9-empty_zero-fixture",
+        "chain_transport": {
+          "character_pairing_check": "PASS_EXHAUSTIVE_H2_CLASSES_AND_CHARACTERS_MOD2",
+          "forward_ambient_c2_mod2": [
+            [
+              1
+            ]
+          ],
+          "forward_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_ambient_c2_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "removed_component_ids": [],
+          "source_c1_ids": [],
+          "source_c2_ids": [
+            "persistent-h2"
+          ],
+          "source_c3_ids": [],
+          "source_d2": [],
+          "source_d3": [
+            []
+          ],
+          "source_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "source_h2_class_count_mod2": 2,
+          "target_c1_ids": [],
+          "target_c2_ids": [
+            "persistent-h2"
+          ],
+          "target_c3_ids": [],
+          "target_d2": [],
+          "target_d3": [
+            []
+          ],
+          "target_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "target_h2_class_count_mod2": 2
+        },
+        "claim_boundary": "NORMALIZED_INVARIANCE_IS_LEAN_DERIVED_FROM_EXPLICIT_LOCAL_IDENTITIES;KIRBY_COMPLETENESS_AND_FOUR_MANIFOLD_INVARIANCE_NOT_CLAIMED",
+        "content_hash": "sha256:3637857e0b7e88748081eaf6b1b0ad115558cc660cb300beac41c04f535e8eb4",
+        "kind": "empty_zero",
+        "local_evaluation": {
+          "normalized_equality_supplied_as_input": false,
+          "raw_factor": "1"
+        },
+        "local_geometry": {
+          "link_diagram_unchanged": true,
+          "normalization_uses_only_h1_h2": true
+        },
+        "normalization": {
+          "c_dimension": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "d_dimension": {
+            "denominator": 1,
+            "numerator": 7
+          },
+          "formula": "d(C)^(h2-h1) * (d(D)*d(transparent(F(Omega_C))))^h1",
+          "recurrence_check": "PASS_DENOMINATOR_UNCHANGED",
+          "source_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "source_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "source_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "target_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "target_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "target_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "transparent_dimension": {
+            "denominator": 1,
+            "numerator": 3
+          }
+        },
+        "schema": "twisted-yetter.kirby-cancellation.v1",
+        "source_handle_counts": {
+          "h0": 2,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 1
+        },
+        "source_proof": {
+          "lean_module": "TwistedYetter.Kirby.KirbyCancellation",
+          "lean_theorem": "GlobalDimensionProfile.denominator_addEmptyZero",
+          "pivotality_failure_locator": "Remark 3.11, journal page 687",
+          "source_locator": "Definition 3.6, Lemma 3.8, Theorem 3.9, equations (3.2.1), (3.3.1), (3.3.2), journal pages 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "source_snapshot_hash": "sha256:19a2da77e226db661bf8b004afe2372f23c1d24a26003f194162a642837b54de",
+        "target_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 1
+        },
+        "target_snapshot_hash": "sha256:3655501f28a75466f40b9168f0e65e184fbcf655cb464ed0f2a9489b32ab05a7"
+      },
+      {
+        "cancellation_id": "r9-empty_four-fixture",
+        "chain_transport": {
+          "character_pairing_check": "PASS_EXHAUSTIVE_H2_CLASSES_AND_CHARACTERS_MOD2",
+          "forward_ambient_c2_mod2": [
+            [
+              1
+            ]
+          ],
+          "forward_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_ambient_c2_mod2": [
+            [
+              1
+            ]
+          ],
+          "inverse_h2_coordinate_matrix_mod2": [
+            [
+              1
+            ]
+          ],
+          "removed_component_ids": [],
+          "source_c1_ids": [],
+          "source_c2_ids": [
+            "persistent-h2"
+          ],
+          "source_c3_ids": [],
+          "source_d2": [],
+          "source_d3": [
+            []
+          ],
+          "source_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "source_h2_class_count_mod2": 2,
+          "target_c1_ids": [],
+          "target_c2_ids": [
+            "persistent-h2"
+          ],
+          "target_c3_ids": [],
+          "target_d2": [],
+          "target_d3": [
+            []
+          ],
+          "target_h2_basis_representatives_mod2": [
+            [
+              1
+            ]
+          ],
+          "target_h2_class_count_mod2": 2
+        },
+        "claim_boundary": "NORMALIZED_INVARIANCE_IS_LEAN_DERIVED_FROM_EXPLICIT_LOCAL_IDENTITIES;KIRBY_COMPLETENESS_AND_FOUR_MANIFOLD_INVARIANCE_NOT_CLAIMED",
+        "content_hash": "sha256:0f1c9215c769bd1b0f6044da81fc458ef1641e047080ee6c85318a32a02b67df",
+        "kind": "empty_four",
+        "local_evaluation": {
+          "normalized_equality_supplied_as_input": false,
+          "raw_factor": "1"
+        },
+        "local_geometry": {
+          "link_diagram_unchanged": true,
+          "normalization_uses_only_h1_h2": true
+        },
+        "normalization": {
+          "c_dimension": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "d_dimension": {
+            "denominator": 1,
+            "numerator": 7
+          },
+          "formula": "d(C)^(h2-h1) * (d(D)*d(transparent(F(Omega_C))))^h1",
+          "recurrence_check": "PASS_DENOMINATOR_UNCHANGED",
+          "source_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "source_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "source_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "target_denominator": {
+            "denominator": 1,
+            "numerator": 5
+          },
+          "target_normalized_value": {
+            "denominator": 5,
+            "numerator": 11
+          },
+          "target_raw_numerator": {
+            "denominator": 1,
+            "numerator": 11
+          },
+          "transparent_dimension": {
+            "denominator": 1,
+            "numerator": 3
+          }
+        },
+        "schema": "twisted-yetter.kirby-cancellation.v1",
+        "source_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 2
+        },
+        "source_proof": {
+          "lean_module": "TwistedYetter.Kirby.KirbyCancellation",
+          "lean_theorem": "GlobalDimensionProfile.denominator_addEmptyFour",
+          "pivotality_failure_locator": "Remark 3.11, journal page 687",
+          "source_locator": "Definition 3.6, Lemma 3.8, Theorem 3.9, equations (3.2.1), (3.3.1), (3.3.2), journal pages 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "source_snapshot_hash": "sha256:c5a0afd5ebed22deb0b81e6107d8496577f609d16d6b2f112d89b13947e5c4bf",
+        "target_handle_counts": {
+          "h0": 1,
+          "h1": 0,
+          "h2": 1,
+          "h3": 0,
+          "h4": 1
+        },
+        "target_snapshot_hash": "sha256:3655501f28a75466f40b9168f0e65e184fbcf655cb464ed0f2a9489b32ab05a7"
+      }
+    ],
+    "status": "PASS_TWO_CANCELLATIONS_AND_EMPTY_END_HANDLES"
+  },
+  "checks": {
+    "closed_cancellation_whitelist": {
+      "bare_normalized_equality_constructor": false,
+      "constructor_count": 2,
+      "constructors": [
+        "oneTwo",
+        "twoThree"
+      ],
+      "mandatory_local_inputs": [
+        "killing_identity",
+        "transparent_twist_witness",
+        "pivotal_dimension_preserved"
+      ],
+      "status": "PASS_CLOSED_CANCELLATION_WHITELIST"
+    },
+    "homology_and_character_transport": {
+      "one_two": "acyclic C2-to-C1 pair removed",
+      "pairing_check": "exhaustive over all fixture H2 classes and characters",
+      "status": "PASS_EXACT_MOD2_QUOTIENT_AND_DUAL_PAIRING",
+      "two_three": "image d3 generator quotiented"
+    },
+    "kirby_axiom_audit": {
+      "declaration_count": 74,
+      "new_r9_declaration_count": 11,
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "bb4152ec42d04b415f624ca72a9c433c4a8a9fac4be6301ccd7dab58f65fcaf4",
+      "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE"
+    },
+    "lean_mutation_tests": {
+      "output_sha256": "3832f1969b53d726fcb091f363bb13f5b57e6cbbe51464e03cf51e9ad22cd0d4",
+      "rejected_count": 5,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/ArbitraryNormalizedEqualityAsCancellation.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.fromEquality`]",
+        "PASS expected rejection: lean/Mutations/MissingCancellationKillingIdentity.lean [diagnostic: Fields missing: `killing_identity`]",
+        "PASS expected rejection: lean/Mutations/MissingTransparentTwistWitness.lean [diagnostic: Fields missing: `transparent_twist_witness`]",
+        "PASS expected rejection: lean/Mutations/MissingPivotalCancellationDimension.lean [diagnostic: Fields missing: `pivotal_dimension_preserved`]",
+        "PASS expected rejection: lean/Mutations/HandwrittenCancellationCharacter.lean [diagnostic: `afterCharacter` is not a field of structure `CancellationHomologyTransport`]"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "normalization": {
+      "empty_zero_four_ignored": "LEAN_PROVED",
+      "final_normalized_equality_input_allowed": false,
+      "formula": "d(C)^(h2-h1) * (d(D)*d(transparent(F(Omega_C))))^h1",
+      "one_two_recurrence": "LEAN_PROVED",
+      "status": "PASS_EXACT_SIGNED_EXPONENT_FORMULA",
+      "two_three_recurrence": "LEAN_PROVED"
+    },
+    "resource_guards": {
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_INHERITED_AND_ENFORCED"
+    },
+    "scoped_pytest": {
+      "output_sha256": "53346a3edebc08ee94ffb379bfe981b2749731270a3827cc643666ded465a835",
+      "status": "PASS",
+      "test_count": 33,
+      "test_files": [
+        "tests/test_kirby_cancellation_v1.py",
+        "tests/test_kirby_handle_moves_v1.py",
+        "tests/test_kirby_handle_moves_artifact_v1.py",
+        "tests/test_framed_link_presentation_independence_v1.py"
+      ]
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 2,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    }
+  },
+  "content_hash": "sha256:723ae1b50c65c44c07f5729c70608026aae4728f5405221ba08c00e13597186a",
+  "elapsed_milliseconds": 27863,
+  "established_scope": [
+    "All five local move families in B\u00e4renz-Barrett Table 2 have evaluator-invariance proofs relative to the exact listed standard inputs.",
+    "The 1-2 raw factor is derived from disjoint union, cutting, killing, and transparent-twist witnesses.",
+    "The 2-3 raw factor requires and uses the pivotal dimension equation highlighted by Remark 3.11.",
+    "The exact signed-exponent denominator satisfies both cancellation recurrences, so normalized values agree.",
+    "Empty 0/4 handle bookkeeping does not alter the link numerator or h1/h2 denominator.",
+    "Concrete 1-2 and 2-3 chain fixtures preserve H2 and all enumerated mod-2 character pairings."
+  ],
+  "explicit_non_claims": [
+    "R9 does not re-prove the cutting, killing, transparent-twist, or pivotal-dimension graphical identities from foundational category axioms.",
+    "R9 proves local normalized invariance for B\u00e4renz-Barrett Table 2; it does not prove Kirby/Cerf completeness.",
+    "R9 does not yet prove that a homologically twisted link prescription is an invariant of the pair (X, alpha).",
+    "R9 does not identify the generalized dichromatic invariant with Crane-Yetter.",
+    "R9 does not validate any numerical computation artifact.",
+    "The specially-dotted evaluator remains outside this local ordinary-dichromatic cancellation certificate."
+  ],
+  "finished_at_utc": "2026-07-18T02:57:05Z",
+  "generator_script": "experiments/scripts/build_kirby_cancellation_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "d92c73326db0fd0da6abdff3c73d47bd151a7f58",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "obligation_count": 22,
+      "path": "experiments/inputs/lean-kirby/kirby-cancellation-obligation-matrix-v1.json",
+      "sha256": "868cdd1669f80ff774bccd2b73689821e84ac0ec9d34394c81d24d0bf1b6eabc"
+    },
+    "r8_handle_slide_artifact": {
+      "content_hash": "sha256:40d02f3b06a5dd7803a227a6ba14df727b56c58df7da6fdf6a93b8568de5681b",
+      "path": "experiments/results/lean-kirby/kirby-handle-moves-v1.json",
+      "sha256": "db58721b674394b69742fbb9618afc83328a0d3089ae7c7b77f3798ea73a239d",
+      "source_commit": "02cc43b52a937daf0fba20a1e4652d40b35a8b21"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json",
+      "reference_count": 2,
+      "sha256": "fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a"
+    },
+    "source_capture": {
+      "bytes": 906609,
+      "path": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+      "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+      "status": "PASS_LOCAL_CAPTURE_MATCH"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/kirby-cancellation-obligation-matrix-v1.json": {
+        "bytes": 6517,
+        "sha256": "868cdd1669f80ff774bccd2b73689821e84ac0ec9d34394c81d24d0bf1b6eabc"
+      },
+      "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json": {
+        "bytes": 2156,
+        "sha256": "fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a"
+      },
+      "experiments/scripts/build_kirby_cancellation_v1.py": {
+        "bytes": 15475,
+        "sha256": "325311360011458f906b1d54f6865e4b69d7834eb8e7cb1c551f04e373b72c19"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryNormalizedEqualityAsCancellation.lean": {
+        "bytes": 648,
+        "sha256": "6fad57ce03833fe580eb40951d4313c7c916406c205a1fca67b5cf948d486d8b"
+      },
+      "lean/Mutations/HandwrittenCancellationCharacter.lean": {
+        "bytes": 547,
+        "sha256": "12a6dc7687a4f27e91a705dbc4d260cc097b3b2cbb076b826c5af3f308bc59f7"
+      },
+      "lean/Mutations/MissingCancellationKillingIdentity.lean": {
+        "bytes": 1047,
+        "sha256": "4fb6047d570fe623b3c2bb441cc00b51b03636793b67f1ca4121c935f895d342"
+      },
+      "lean/Mutations/MissingPivotalCancellationDimension.lean": {
+        "bytes": 872,
+        "sha256": "cdb7d947a0cebf1df41a5cadfdd4c01410f4d07bce2e1cfa0f1e9564b189d9e8"
+      },
+      "lean/Mutations/MissingTransparentTwistWitness.lean": {
+        "bytes": 1087,
+        "sha256": "dbe5f2bf00b33427508a5baa58475670b265adea37502c9d9675cf11adbcbaef"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 894,
+        "sha256": "4926b5fe9f0400f9017d282085bbdadcba608857ada600904e8a886446140706"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 6205,
+        "sha256": "6e17dab2419171b6b2d513d22ce759ef4b840e76c3f6f51afe284f2499dd0579"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCancellation.lean": {
+        "bytes": 11518,
+        "sha256": "2e8c78397a1c4fbeb00e65e16685bfc1f721b7f1b5027cfef2e043e1537c61f1"
+      },
+      "scripts/lean_kirby_cancellation_mutation_tests.sh": {
+        "bytes": 1708,
+        "sha256": "ae9951475ea6f0c5f030a913f50e2f66188ebead14573a53000b2f362c5e877e"
+      },
+      "src/twisted_yetter/kirby_cancellation_v1.py": {
+        "bytes": 32995,
+        "sha256": "ad9996e3ab5676eee21621317a5a96aac44b9133cbf368d8d14ff8120da6d57a"
+      },
+      "tests/test_kirby_cancellation_artifact_v1.py": {
+        "bytes": 5147,
+        "sha256": "b5cfa169d426ce95ea4cb3fab29e1d0cada8f065029264e33028657ee0e6d3c4"
+      },
+      "tests/test_kirby_cancellation_v1.py": {
+        "bytes": 5073,
+        "sha256": "0bb8a91f95b793e9c830c161a959f881d33d169aa30d268534ddcc406668a0b4"
+      }
+    }
+  },
+  "mathematical_status": "ALL_REQUIRED_KIRBY_MOVES_EVALUATOR_INVARIANT_RELATIVE_TO_EXPLICIT_SLIDING_CUTTING_KILLING_TWIST_PIVOTAL_AND_NORMALIZATION_INPUTS",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_kirby_cancellation_v1.py",
+  "roadmap_status": "R8_R9_TERMINAL_RELATIVE_TO_LISTED_STANDARD_INPUTS",
+  "schema": "twisted-yetter.kirby-cancellation-and-normalization.v1",
+  "started_at_utc": "2026-07-18T02:56:37Z",
+  "status": "PASS_ALL_BARENZ_BARRETT_TABLE2_LOCAL_KIRBY_MOVES",
+  "table2_coverage": {
+    "actual_move_family_count": 5,
+    "empty_end_handle_checks": [
+      "empty_zero",
+      "empty_four"
+    ],
+    "expected_move_families": [
+      "one_over_one_slide",
+      "two_over_one_slide",
+      "two_over_two_slide",
+      "one_two_cancellation",
+      "two_three_cancellation"
+    ],
+    "r8_slide_family_count": 3,
+    "r9_cancellation_family_count": 2,
+    "status": "PASS_FIVE_OF_FIVE_LOCAL_MOVE_FAMILIES"
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  },
+  "trusted_inputs": [
+    {
+      "exact_content": "Disjoint-union multiplicativity of the closed graphical evaluator.",
+      "input_id": "bb-disjoint-union-multiplicativity",
+      "lean_type": "OneTwoLocalCalculation.disjoint_union_sound; TwoThreeLocalCalculation.disjoint_union_sound",
+      "not_assumed": "No normalized equality is included."
+    },
+    {
+      "exact_content": "The cutting and killing equations evaluating the isolated 1-2 pair to d(D) times the transparent-part dimension.",
+      "input_id": "bb-one-two-local-identities",
+      "lean_type": "cutting_identity; killing_identity",
+      "not_assumed": "The final raw-factor and normalized equalities are derived by Lean."
+    },
+    {
+      "exact_content": "The twist is trivial on every transparent object used by the 1-2 calculation.",
+      "input_id": "transparent-twist-triviality",
+      "lean_type": "transparent_twist_witness",
+      "not_assumed": "No arbitrary twist cancellation is accepted."
+    },
+    {
+      "exact_content": "Pivotality preserves the dimension of the image Kirby color, so the isolated 2-handle unknot evaluates to d(C).",
+      "input_id": "pivotal-dimension-preservation",
+      "lean_type": "pivotal_dimension_preserved",
+      "not_assumed": "Remark 3.11's non-pivotal case is explicitly excluded."
+    },
+    {
+      "exact_content": "Concrete cancellations carry an explicit chain-level equivalence inducing the H2 equivalence.",
+      "input_id": "cancellation-homology-equivalence",
+      "lean_type": "CancellationHomologyTransport.homologyEquiv",
+      "not_assumed": "The post-cancellation character cannot be handwritten."
+    }
+  ]
+}
