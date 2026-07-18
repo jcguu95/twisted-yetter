@@ -23,7 +23,7 @@ expected_diagnostics=(
   '`targetCharacter` is not a field of structure `MarkedH2Transport`'
   'Fields missing: `uniqueFourHandle`'
   'Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`'
-  'Fields missing: `inducedByCertifiedChainMap`, `induced_by_chain_map_witness`'
+  '`homologyEquiv` is not a field of structure `MarkedH2Transport`'
   'Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`'
   'Fields missing: `locallyRealizesTableTwoMove`, `local_topology_witness`'
 )

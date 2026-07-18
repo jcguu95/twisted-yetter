@@ -10,6 +10,7 @@ universe uH
 example
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
+    [AddCommGroup H2]
     (completeness : TableTwoLinkCompleteness manifold H2)
     (represents :
       (presentation : SpecialKirbyPresentation manifold H2) →

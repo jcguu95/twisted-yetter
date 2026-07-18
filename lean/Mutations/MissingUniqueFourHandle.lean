@@ -12,6 +12,7 @@ universe u
 def unsafePresentation
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type u)
+    [AddCommGroup H2]
     (formal : FormalPresentation)
     (counts : HandleCounts)
     (uniqueZero : counts.h0 = 1)

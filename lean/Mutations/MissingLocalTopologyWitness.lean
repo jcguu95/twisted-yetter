@@ -10,7 +10,7 @@ universe u
 /-- This must fail: hashes alone do not assert that a local move occurred. -/
 def unsafeMetadata
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type u}
+    {H2 : Type u} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (moveId sourceHash targetHash certificateHash : String)
     (sourceSound : sourceHash = source.formal.pinnedSourceHash)

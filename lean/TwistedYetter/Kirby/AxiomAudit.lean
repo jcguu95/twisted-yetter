@@ -81,10 +81,13 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.normalized_sound
 #print axioms TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.sound
 #print axioms TwistedYetter.Kirby.KirbyCancellation.CancellationHomologyTransport.pairing_preserved
+#print axioms TwistedYetter.Kirby.HandleChainHomology.HandleChainEquivalence.secondHomologyEquiv_refl_apply
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.pairing_preserved
+#print axioms TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.targetClass_add
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.homologyTransport
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.pairing_preserved
+#print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.targetClass_add
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv_trans
 #print axioms TwistedYetter.Kirby.KirbyCompleteness.TableTwoLinkCompleteness.markedTransport
 #print axioms TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw

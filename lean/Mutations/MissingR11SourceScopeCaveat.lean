@@ -24,6 +24,7 @@ example
         (K := K) (C := C) (S := S) (I := I))
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
+    [AddCommGroup H2]
     (evaluation :
       (presentation : SpecialKirbyPresentation manifold H2) →
         DecoratedKirbyPresentation categoryData presentation)

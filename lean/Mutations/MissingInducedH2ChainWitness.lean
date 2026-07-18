@@ -3,24 +3,25 @@ import TwistedYetter.Kirby.KirbyCompleteness
 namespace TwistedYetter.Mutations.MissingInducedH2ChainWitness
 
 open TwistedYetter.Kirby.KirbyCompleteness
+open TwistedYetter.Kirby.HandleChainHomology
 open TwistedYetter.Kirby.Presentation
 
 universe u
 
 /--
-This must fail: an arbitrary equivalence is not accepted without the explicit
-claim that the pinned chain map induces it.
+This must fail: a handwritten equivalence is no longer a field at all.
+The only admitted input is a chain homotopy equivalence, from which the map on
+second homology is derived.
 -/
 def unsafeTransport
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type u}
+    {H2 : Type u} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
-    (equiv : H2 ≃ H2)
-    (hash : String)
-    (hashShape : RawPresentation.sha256Shape hash = true) :
+    (chainEquivalence :
+      HandleChainEquivalence source.handleChain target.handleChain)
+    (equiv : H2 ≃ H2) :
     MarkedH2Transport source target where
+  chainEquivalence := chainEquivalence
   homologyEquiv := equiv
-  chainCertificateHash := hash
-  chain_certificate_hash_shape := hashShape
 
 end TwistedYetter.Mutations.MissingInducedH2ChainWitness

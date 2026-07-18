@@ -86,7 +86,7 @@ structure DecoratedKirbyPresentation
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (topology : SpecialKirbyPresentation manifold H2) where
   diagram : H2 → Diagram C .unit .unit
   evaluationState : H2 → EvaluationState (K := K)
@@ -117,7 +117,7 @@ def normalizedValue
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {topology : SpecialKirbyPresentation manifold H2}
     (presentation :
       DecoratedKirbyPresentation categoryData topology)
@@ -150,7 +150,7 @@ def twoOverTwoSlideMetadata
 /-- Extract the R10 metadata from every exact Table 2 constructor. -/
 def tableTwoMoveMetadata
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (move : TableTwoMove source target) :
     TableTwoMoveMetadata source target :=
@@ -170,7 +170,7 @@ topology step.  This does not contain an evaluator equality.
 -/
 structure LocalEvaluationBinding
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (move : TableTwoMove source target) where
   moveId : String
@@ -198,7 +198,7 @@ inductive EvaluatedTableTwoStep
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (sourceEvaluation :
       DecoratedKirbyPresentation categoryData source)
@@ -394,7 +394,7 @@ lemma normalized_eq_of_diagram_eval
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (sourceEvaluation :
       DecoratedKirbyPresentation categoryData source)
@@ -423,7 +423,7 @@ theorem normalized_sound
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     {sourceEvaluation :
       DecoratedKirbyPresentation categoryData source}
@@ -492,7 +492,7 @@ structure HomologicallyTwistedKirbyPrescription
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
-    (H2 : Type uH) where
+    (H2 : Type uH) [AddCommGroup H2] where
   evaluation :
     (presentation : SpecialKirbyPresentation manifold H2) →
       DecoratedKirbyPresentation categoryData presentation
@@ -517,7 +517,7 @@ def presentationValue
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (presentation : SpecialKirbyPresentation manifold H2)
@@ -530,7 +530,7 @@ theorem move_invariant
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
@@ -544,7 +544,7 @@ theorem move_invariant
 /-- Target-class transport along a composite movie is literal composition. -/
 theorem targetClass_trans
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source middle target : SpecialKirbyPresentation manifold H2}
     (first : TableTwoMovie source middle)
     (second : TableTwoMovie middle target)
@@ -559,7 +559,7 @@ theorem movie_invariant
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     {source target : SpecialKirbyPresentation manifold H2}
@@ -590,7 +590,7 @@ that this exact movie carries one coordinate to the other.
 -/
 structure MarkedPairPresentationSystem
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
-    (H2 : Type uH) where
+    (H2 : Type uH) [AddCommGroup H2] where
   completeness : TableTwoLinkCompleteness manifold H2
   represents :
     (presentation : SpecialKirbyPresentation manifold H2) →
@@ -627,7 +627,7 @@ noncomputable def invariant
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (system : MarkedPairPresentationSystem manifold H2)
@@ -641,7 +641,7 @@ theorem presentation_independent
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (system : MarkedPairPresentationSystem manifold H2)
@@ -667,7 +667,7 @@ theorem same_pair_value
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (system : MarkedPairPresentationSystem manifold H2)
@@ -692,7 +692,7 @@ theorem homologically_twisted_kirby_invariant_established
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (system : MarkedPairPresentationSystem manifold H2)

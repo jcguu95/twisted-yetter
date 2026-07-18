@@ -39,17 +39,25 @@ def requiredTargetConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
+    .chainDerivedMarkedH2Transport,
     .concreteEvaluatorCompiler,
     .specialKirbyCalculusCompleteness,
-    .chainDerivedMarkedH2Transport,
     .concreteMarkedPairAssembly
   ]
 
-/-- Conditions already discharged by the abstract categorical and R9 work. -/
+/--
+Conditions already discharged by kernel-checked constructions.
+
+The chain-derived item establishes the generic mechanism: a move supplies a
+chain homotopy equivalence and Lean derives the additive map on `H2`. Binding
+concrete Kirby syntax to the corresponding chain matrices remains part of
+`concreteMarkedPairAssembly`.
+-/
 def establishedFoundationConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
-    .explicitThreeHandleNormalization
+    .explicitThreeHandleNormalization,
+    .chainDerivedMarkedH2Transport
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
@@ -57,7 +65,6 @@ def openConstructionConditions : List TargetCondition :=
   [
     .concreteEvaluatorCompiler,
     .specialKirbyCalculusCompleteness,
-    .chainDerivedMarkedH2Transport,
     .concreteMarkedPairAssembly
   ]
 
@@ -66,17 +73,39 @@ theorem target_condition_count :
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 2 := by
+    establishedFoundationConditions.length = 3 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 4 := by
+    openConstructionConditions.length = 3 := by
   rfl
+
+/-- Chain-derived marked `H2` transport is explicitly on the established side. -/
+theorem chain_derived_marked_h2_transport_established :
+    TargetCondition.chainDerivedMarkedH2Transport ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The same condition cannot simultaneously remain in the open ledger. -/
+theorem chain_derived_marked_h2_transport_not_open :
+    TargetCondition.chainDerivedMarkedH2Transport ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
 
 theorem target_condition_partition :
     establishedFoundationConditions ++ openConstructionConditions =
       requiredTargetConditions := by
   rfl
+
+/--
+The partition contains exactly the required conditions, up to list order.
+Using `Perm` prevents a bookkeeping reorder from being mistaken for a changed
+mathematical denominator.
+-/
+theorem target_condition_partition_complete :
+    (establishedFoundationConditions ++ openConstructionConditions).Perm
+      requiredTargetConditions := by
+  decide
 
 /-- Machine-checked guard against silently calling the current target complete. -/
 theorem current_target_has_open_conditions :
@@ -114,7 +143,7 @@ structure FourManifoldInvariantInputs
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
-    (H2 : Type uH) where
+    (H2 : Type uH) [AddCommGroup H2] where
   prescription :
     HomologicallyTwistedKirbyPrescription categoryData manifold H2
   markedSystem : MarkedPairPresentationSystem manifold H2
@@ -127,7 +156,7 @@ noncomputable def value
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (inputs : FourManifoldInvariantInputs categoryData manifold H2)
     (alpha : H2) : K :=
   inputs.markedSystem.invariant inputs.prescription alpha
@@ -143,7 +172,7 @@ theorem presentation_independent
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (inputs : FourManifoldInvariantInputs categoryData manifold H2)
     {presentation : SpecialKirbyPresentation manifold H2}
     {coordinate alpha : H2}
@@ -166,7 +195,7 @@ theorem four_manifold_invariant_target
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (inputs : FourManifoldInvariantInputs categoryData manifold H2)
     {left right : SpecialKirbyPresentation manifold H2}
     {leftCoordinate rightCoordinate alpha : H2}

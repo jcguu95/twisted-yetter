@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.KirbyCancellation
+import TwistedYetter.Kirby.HandleChainHomology
 
 /-!
 # Kirby completeness as an explicit topology boundary
@@ -29,6 +29,7 @@ namespace TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.KirbyCancellation
+open TwistedYetter.Kirby.HandleChainHomology
 
 universe uH uA
 
@@ -259,7 +260,7 @@ the certificate identifying its handle-chain coordinates with that model.
 -/
 structure SpecialKirbyPresentation
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
-    (H2 : Type uH) where
+    (H2 : Type uH) [AddCommGroup H2] where
   formal : FormalPresentation
   counts : HandleCounts
   uniqueZeroHandle : counts.h0 = 1
@@ -277,11 +278,13 @@ structure SpecialKirbyPresentation
   h2ModelCertificateHash : String
   h2_model_certificate_hash_shape :
     RawPresentation.sha256Shape h2ModelCertificateHash = true
+  handleChain : HandleChainModel counts
+  h2ModelEquiv : handleChain.SecondHomology ≃+ H2
 
 /-- Hash-bound metadata for one special Table 2 link move. -/
 structure TableTwoMoveMetadata
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (source target : SpecialKirbyPresentation manifold H2) where
   moveId : String
   sourcePresentationHash : String
@@ -297,35 +300,53 @@ structure TableTwoMoveMetadata
   local_topology_witness : locallyRealizesTableTwoMove
 
 /--
-Presentation-to-presentation `H2` equivalence with an independently pinned
-chain certificate.  The target character is not a field.
+Presentation-to-presentation chain data.
+
+The map on `H2` is not a field.  It is forced by the chain homotopy
+equivalence and the two presentations' pinned coordinate identifications.
 -/
 structure MarkedH2Transport
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (source target : SpecialKirbyPresentation manifold H2) where
-  homologyEquiv : H2 ≃ H2
-  chainCertificateHash : String
-  chain_certificate_hash_shape :
-    RawPresentation.sha256Shape chainCertificateHash = true
-  inducedByCertifiedChainMap : Prop
-  induced_by_chain_map_witness : inducedByCertifiedChainMap
+  chainEquivalence :
+    HandleChainEquivalence source.handleChain target.handleChain
 
 namespace MarkedH2Transport
 
-/-- Transport a marked homology class covariantly. -/
-def targetClass
+/-- The ambient additive `H2` equivalence derived from concrete chain data. -/
+noncomputable def homologyAddEquiv
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation manifold H2}
+    (transport : MarkedH2Transport source target) :
+    H2 ≃+ H2 :=
+  source.h2ModelEquiv.symm.trans
+    (transport.chainEquivalence.secondHomologyAddEquiv.trans
+      target.h2ModelEquiv)
+
+/-- The underlying type equivalence; it cannot be supplied independently. -/
+noncomputable def homologyEquiv
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation manifold H2}
+    (transport : MarkedH2Transport source target) :
+    H2 ≃ H2 :=
+  transport.homologyAddEquiv.toEquiv
+
+/-- Transport a marked homology class covariantly. -/
+noncomputable def targetClass
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (transport : MarkedH2Transport source target)
     (alpha : H2) : H2 :=
   transport.homologyEquiv alpha
 
 /-- Derive the target character contravariantly. -/
-def targetCharacter
+noncomputable def targetCharacter
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (transport : MarkedH2Transport source target)
     (character : H2 → A) : H2 → A :=
@@ -334,7 +355,7 @@ def targetCharacter
 /-- Simultaneous transport of class and character preserves evaluation. -/
 theorem pairing_preserved
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (transport : MarkedH2Transport source target)
     (character : H2 → A)
@@ -342,6 +363,17 @@ theorem pairing_preserved
     transport.targetCharacter character (transport.targetClass alpha) =
       character alpha := by
   simp [targetCharacter, targetClass]
+
+/-- The chain-derived ambient transport preserves addition. -/
+theorem targetClass_add
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation manifold H2}
+    (transport : MarkedH2Transport source target)
+    (alpha beta : H2) :
+    transport.targetClass (alpha + beta) =
+      transport.targetClass alpha + transport.targetClass beta :=
+  transport.homologyAddEquiv.map_add alpha beta
 
 end MarkedH2Transport
 
@@ -354,7 +386,7 @@ three-over-three moves, and no constructor from a bare evaluator equality.
 -/
 inductive TableTwoMove
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} :
+    {H2 : Type uH} [AddCommGroup H2] :
     SpecialKirbyPresentation manifold H2 →
       SpecialKirbyPresentation manifold H2 → Type (uH + 1)
   | framedIsotopy
@@ -414,7 +446,7 @@ namespace TableTwoMove
 /-- Extract the mandatory `H2` transport from any admitted move. -/
 def homologyTransport
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (move : TableTwoMove source target) :
     MarkedH2Transport source target := by
@@ -433,7 +465,7 @@ end TableTwoMove
 /-- Typed finite Table 2 movie. -/
 inductive TableTwoMovie
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} :
+    {H2 : Type uH} [AddCommGroup H2] :
     SpecialKirbyPresentation manifold H2 →
       SpecialKirbyPresentation manifold H2 → Type (uH + 1)
   | refl (presentation : SpecialKirbyPresentation manifold H2) :
@@ -454,20 +486,20 @@ namespace TableTwoMovie
 /-- Compose all local `H2` equivalences along a movie. -/
 noncomputable def homologyEquiv
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (movie : TableTwoMovie source target) :
-    H2 ≃ H2 := by
+    H2 ≃+ H2 := by
   induction movie with
-  | refl _ => exact Equiv.refl H2
-  | step move => exact move.homologyTransport.homologyEquiv
+  | refl _ => exact AddEquiv.refl H2
+  | step move => exact move.homologyTransport.homologyAddEquiv
   | trans _ _ firstEquiv secondEquiv =>
       exact firstEquiv.trans secondEquiv
 
 /-- Transport a marked `H2` class through the complete movie. -/
 noncomputable def targetClass
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (movie : TableTwoMovie source target)
     (alpha : H2) : H2 :=
@@ -476,7 +508,7 @@ noncomputable def targetClass
 /-- Derive the target character through the inverse movie transport. -/
 noncomputable def targetCharacter
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (movie : TableTwoMovie source target)
     (character : H2 → A) : H2 → A :=
@@ -485,7 +517,7 @@ noncomputable def targetCharacter
 /-- The marked pairing is unchanged across an arbitrary composed movie. -/
 theorem pairing_preserved
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (movie : TableTwoMovie source target)
     (character : H2 → A)
@@ -494,10 +526,20 @@ theorem pairing_preserved
       character alpha := by
   simp [targetCharacter, targetClass]
 
+/-- A whole Table 2 movie transports `H2` additively. -/
+theorem targetClass_add
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation manifold H2}
+    (movie : TableTwoMovie source target)
+    (alpha beta : H2) :
+    movie.targetClass (alpha + beta) =
+      movie.targetClass alpha + movie.targetClass beta :=
+  movie.homologyEquiv.map_add alpha beta
 /-- Composition computes the same `H2` map as composing the two movies. -/
 theorem homologyEquiv_trans
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source middle target :
       SpecialKirbyPresentation manifold H2}
     (first : TableTwoMovie source middle)
@@ -517,7 +559,7 @@ and caveat because it is not proved from `generalCerf` in this module.
 -/
 structure TableTwoLinkCompleteness
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
-    (H2 : Type uH) where
+    (H2 : Type uH) [AddCommGroup H2] where
   generalCerf : GeneralCerfCompleteness manifold
   tableTwoConnected :
     (source target : SpecialKirbyPresentation manifold H2) →
@@ -536,11 +578,11 @@ Evaluator invariance is intentionally deferred to R11.
 -/
 noncomputable def markedTransport
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (completeness :
       TableTwoLinkCompleteness manifold H2)
     (source target : SpecialKirbyPresentation manifold H2) :
-    H2 ≃ H2 :=
+    H2 ≃+ H2 :=
   (completeness.tableTwoConnected source target).homologyEquiv
 
 end TableTwoLinkCompleteness

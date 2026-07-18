@@ -13,6 +13,7 @@ equality.
 def unsafeCompleteness
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type u)
+    [AddCommGroup H2]
     (general : GeneralCerfCompleteness manifold)
     (connected :
       (source target : SpecialKirbyPresentation manifold H2) →

@@ -3,26 +3,23 @@ import TwistedYetter.Kirby.KirbyCompleteness
 namespace TwistedYetter.Mutations.HandwrittenMovieTargetCharacter
 
 open TwistedYetter.Kirby.KirbyCompleteness
+open TwistedYetter.Kirby.HandleChainHomology
 open TwistedYetter.Kirby.Presentation
 
 universe u
 
-/-- This must fail: the target character is derived from the H2 equivalence. -/
+/--
+This must fail: even after supplying genuine chain data, the target character
+is derived contravariantly and cannot be supplied by hand.
+-/
 def unsafeTransport
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type u}
+    {H2 : Type u} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
-    (equiv : H2 ≃ H2)
-    (hash : String)
-    (hashShape : RawPresentation.sha256Shape hash = true)
-    (chainMapSound : Prop)
-    (chainMapWitness : chainMapSound) :
+    (chainEquivalence :
+      HandleChainEquivalence source.handleChain target.handleChain) :
     MarkedH2Transport source target where
-  homologyEquiv := equiv
-  chainCertificateHash := hash
-  chain_certificate_hash_shape := hashShape
-  inducedByCertifiedChainMap := chainMapSound
-  induced_by_chain_map_witness := chainMapWitness
+  chainEquivalence := chainEquivalence
   targetCharacter := fun _ => True
 
 end TwistedYetter.Mutations.HandwrittenMovieTargetCharacter

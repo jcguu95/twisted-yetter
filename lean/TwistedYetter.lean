@@ -19,6 +19,7 @@ import TwistedYetter.Kirby.Presentation
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.KirbyHandleMoves
 import TwistedYetter.Kirby.KirbyCancellation
+import TwistedYetter.Kirby.HandleChainHomology
 import TwistedYetter.Kirby.KirbyCompleteness
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 import TwistedYetter.Kirby.ComputationArtifactImporter

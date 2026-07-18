@@ -9,7 +9,7 @@ universe uH
 
 example
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     {source target : SpecialKirbyPresentation manifold H2}
     (move : TableTwoMove source target)
     (graphicalCertificateHash : String)

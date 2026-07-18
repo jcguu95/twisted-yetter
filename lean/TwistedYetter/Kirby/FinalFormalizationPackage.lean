@@ -174,7 +174,7 @@ theorem r11_conditional_invariant
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH}
+    {H2 : Type uH} [AddCommGroup H2]
     (prescription :
       HomologicallyTwistedKirbyPrescription categoryData manifold H2)
     (system : MarkedPairPresentationSystem manifold H2)
