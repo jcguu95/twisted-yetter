@@ -135,6 +135,131 @@ inductive HandleEdit : RecipeKind → Type
       HandleEdit .twoThreeDeath
 
 /--
+Closed category-neutral tags for the framed-link isotopy generators.
+
+These tags mirror the constructors of `PresentationIsotopy.TaggedMove`
+without importing a category object, morphism, diagram, or evaluator
+equality into the serialized topology recipe.
+-/
+inductive FramedIsotopyGenerator where
+  | planarIdentityBefore
+  | planarIdentityAfter
+  | planarCompAssoc
+  | criticalInterchange
+  | reidemeisterIIPositive
+  | reidemeisterIINegative
+  | reidemeisterIII
+  | rightPrimalSnake
+  | rightDualSnake
+  | leftPrimalSnake
+  | leftDualSnake
+  | framedPositive
+  | framedNegative
+  | couponPositiveCrossing
+  | couponNegativeCrossing
+  | couponRightCup
+  | couponRightCap
+  | couponLeftCup
+  | couponLeftCap
+  | couponPositiveTwist
+  | couponNegativeTwist
+  | closureCut
+  deriving Repr, BEq, DecidableEq
+
+/-- Exact denominator of category-neutral framed-isotopy generators. -/
+def requiredFramedIsotopyGenerators : List FramedIsotopyGenerator :=
+  [
+    .planarIdentityBefore,
+    .planarIdentityAfter,
+    .planarCompAssoc,
+    .criticalInterchange,
+    .reidemeisterIIPositive,
+    .reidemeisterIINegative,
+    .reidemeisterIII,
+    .rightPrimalSnake,
+    .rightDualSnake,
+    .leftPrimalSnake,
+    .leftDualSnake,
+    .framedPositive,
+    .framedNegative,
+    .couponPositiveCrossing,
+    .couponNegativeCrossing,
+    .couponRightCup,
+    .couponRightCap,
+    .couponLeftCup,
+    .couponLeftCap,
+    .couponPositiveTwist,
+    .couponNegativeTwist,
+    .closureCut
+  ]
+
+theorem framed_isotopy_generator_count :
+    requiredFramedIsotopyGenerators.length = 22 := by
+  rfl
+
+theorem framed_isotopy_generators_unique :
+    requiredFramedIsotopyGenerators.Nodup := by
+  decide
+
+/--
+Closed graphical program indexed by the exact handle edit.
+
+The framed-isotopy constructor retains an ordered generator script and pins
+its event IDs to the edit's touched-event denominator. Every other move has
+one constructor whose indices repeat the exact orientation and component IDs
+of its handle edit. There is no constructor from an arbitrary proposition,
+diagram, or evaluator equality.
+-/
+inductive GraphicalEditProgram :
+    {kind : RecipeKind} → HandleEdit kind → Type
+  | framedIsotopy
+      (touchedEventIds : List String)
+      (nonempty : touchedEventIds ≠ [])
+      (steps : List (String × FramedIsotopyGenerator))
+      (steps_nonempty : steps ≠ [])
+      (event_ids_sound :
+        steps.map (fun step => step.1) = touchedEventIds) :
+      GraphicalEditProgram
+        (.framedIsotopy touchedEventIds nonempty)
+  | oneOverOne
+      (orientation : BandOrientation)
+      (slidingDottedId stationaryDottedId : String)
+      (distinct : slidingDottedId ≠ stationaryDottedId) :
+      GraphicalEditProgram
+        (.oneOverOne orientation
+          slidingDottedId stationaryDottedId distinct)
+  | twoOverOne
+      (orientation : BandOrientation)
+      (slidingTwoHandleId stationaryDottedId : String)
+      (distinct : slidingTwoHandleId ≠ stationaryDottedId) :
+      GraphicalEditProgram
+        (.twoOverOne orientation
+          slidingTwoHandleId stationaryDottedId distinct)
+  | twoOverTwo
+      (orientation : BandOrientation)
+      (slidingTwoHandleId stationaryTwoHandleId : String)
+      (distinct : slidingTwoHandleId ≠ stationaryTwoHandleId) :
+      GraphicalEditProgram
+        (.twoOverTwo orientation
+          slidingTwoHandleId stationaryTwoHandleId distinct)
+  | oneTwoBirth
+      (newDottedId newTwoHandleId : String)
+      (distinct : newDottedId ≠ newTwoHandleId) :
+      GraphicalEditProgram
+        (.oneTwoBirth newDottedId newTwoHandleId distinct)
+  | oneTwoDeath
+      (removedDottedId removedTwoHandleId : String)
+      (distinct : removedDottedId ≠ removedTwoHandleId) :
+      GraphicalEditProgram
+        (.oneTwoDeath removedDottedId removedTwoHandleId distinct)
+  | twoThreeBirth
+      (newTwoHandleId : String) :
+      GraphicalEditProgram (.twoThreeBirth newTwoHandleId)
+  | twoThreeDeath
+      (removedTwoHandleId : String) :
+      GraphicalEditProgram (.twoThreeDeath removedTwoHandleId)
+
+/--
 One immutable local recipe shared by graphical and chain compilation.
 
 There is one identity and one content hash for both downstream consumers.
@@ -154,6 +279,7 @@ structure SourceBoundRecipe
     targetPresentationHash = target.pinnedSourceHash
   window : PresentationWindowEdit source target
   handleEdit : HandleEdit kind
+  graphicalProgram : GraphicalEditProgram handleEdit
   recipeSnapshotHash : String
   recipe_snapshot_hash_shape :
     RawPresentation.sha256Shape recipeSnapshotHash = true

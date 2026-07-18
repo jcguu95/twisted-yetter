@@ -14,3 +14,5 @@ import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 #print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_negative_twist
 #print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.ordinary_exterior
 #print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.generalized_framed_exterior
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.CancellationInput.one_two_pair_factor
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.CancellationInput.two_three_unknot_factor

@@ -9,11 +9,13 @@ export LEAN_NUM_THREADS=1
 mutations=(
   "lean/Mutations/FinalEvaluatorInsideRibbonKirbyAlgebra.lean"
   "lean/Mutations/FinalMoveEqualityInsideRibbonKirbyAlgebra.lean"
+  "lean/Mutations/FinalCancellationCalculationInsideRibbonKirbyAlgebra.lean"
 )
 
 diagnostics=(
   'Unknown constant `TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.presentationEvaluator`'
   'Unknown constant `TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.tableTwoMoveEquality`'
+  'TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.finalCancellationCalculation'
 )
 
 for index in "${!mutations[@]}"; do

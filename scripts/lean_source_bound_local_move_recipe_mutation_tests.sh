@@ -15,6 +15,8 @@ mutations=(
   "lean/Mutations/WrongKindLocalMoveRecipe.lean"
   "lean/Mutations/SwappedPresentationLocalMoveRecipe.lean"
   "lean/Mutations/SplitGraphicalChainRecipeIdentity.lean"
+  "lean/Mutations/MissingGraphicalProgramInLocalRecipe.lean"
+  "lean/Mutations/WrongGraphicalProgramKind.lean"
 )
 
 diagnostics=(
@@ -24,6 +26,8 @@ diagnostics=(
   'RecipeKind.twoThreeDeath'
   'Type mismatch'
   '`graphicalRecipeId` is not a field of structure `SourceBoundRecipe`'
+  'Fields missing: `graphicalProgram`'
+  'Type mismatch'
 )
 
 for index in "${!mutations[@]}"; do

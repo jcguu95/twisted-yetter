@@ -48,6 +48,7 @@ inductive TargetCondition where
   | sourceBoundLocalMoveRecipes
   | globalFiniteKirbyColorExpansionMechanism
   | sourceBoundGeometricH2CompilerInstance
+  | sourceBoundGraphicalMoveCompilerMechanism
   | globalFiniteKirbyColorExpansionInstance
   | sourceBoundGraphicalMoveCompilerInstance
   | sourceBoundEvaluatorCompilerInstance
@@ -68,6 +69,7 @@ def requiredTargetConditions : List TargetCondition :=
     .sourceBoundLocalMoveRecipes,
     .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance,
+    .sourceBoundGraphicalMoveCompilerMechanism,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
@@ -100,7 +102,8 @@ def establishedFoundationConditions : List TargetCondition :=
     .markedPairAssemblyMechanism,
     .sourceBoundLocalMoveRecipes,
     .globalFiniteKirbyColorExpansionMechanism,
-    .sourceBoundGeometricH2CompilerInstance
+    .sourceBoundGeometricH2CompilerInstance,
+    .sourceBoundGraphicalMoveCompilerMechanism
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
@@ -112,11 +115,11 @@ def openConstructionConditions : List TargetCondition :=
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 15 := by
+    requiredTargetConditions.length = 16 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 12 := by
+    establishedFoundationConditions.length = 13 := by
   rfl
 
 theorem open_construction_condition_count :
@@ -241,6 +244,23 @@ theorem global_finite_kirby_color_expansion_mechanism_not_open :
   simp [openConstructionConditions]
 
 /--
+The generic graphical compiler now consumes the exact source recipe and
+derives all eight final move proofs from typed isotopy programs, source-bound
+slide realizations, or local cancellation factorizations. It has no field for
+a pre-proved normalized equality.
+-/
+theorem source_bound_graphical_move_compiler_mechanism_established :
+    TargetCondition.sourceBoundGraphicalMoveCompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The generic graphical compiler mechanism is no longer an open gap. -/
+theorem source_bound_graphical_move_compiler_mechanism_not_open :
+    TargetCondition.sourceBoundGraphicalMoveCompilerMechanism ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
 The actual finite family, weights, and event interpretation for each
 presentation and marked class have not yet been constructed.
 -/
@@ -250,8 +270,8 @@ theorem global_finite_kirby_color_expansion_instance_open :
   simp [openConstructionConditions]
 
 /--
-The exact graphical rewrite programs producing all eight R7/R8/R9 proof
-objects from the shared local recipes have not yet been constructed.
+The generic compiler is established, but the exact category-bound graphical
+programs for every source recipe have not yet been constructed.
 -/
 theorem source_bound_graphical_move_compiler_instance_open :
     TargetCondition.sourceBoundGraphicalMoveCompilerInstance ∈

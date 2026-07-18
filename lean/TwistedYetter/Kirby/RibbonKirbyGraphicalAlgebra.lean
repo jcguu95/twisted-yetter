@@ -29,6 +29,7 @@ open TwistedYetter.Kirby.FramedSliding
 open TwistedYetter.Kirby.GeneralizedSliding
 open TwistedYetter.Kirby.HandleSlide
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
+open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.PresentationIsotopy
@@ -50,6 +51,53 @@ variable {categoryData :
     (K := K) (C := C) (S := S) (I := I)}
 
 /--
+Category-level scalar identities used by the two cancellation families.
+
+This package deliberately has no presentation, evaluation state,
+disjoint-union factorization, or completed local calculation. The graphical
+compiler must still prove that the exact source and target diagrams split off
+the recorded isolated local factor.
+-/
+structure CancellationInput
+    (profile : GlobalDimensionProfile (K := K)) where
+  oneTwoPairValue : K
+  oneTwoCutValue : K
+  transparentTwistTrivial : Prop
+  transparent_twist_witness : transparentTwistTrivial
+  cutting_identity :
+    transparentTwistTrivial →
+      oneTwoPairValue = profile.dDimension * oneTwoCutValue
+  killing_identity :
+    oneTwoCutValue = profile.transparentDimension
+  twoThreeUnknotValue : K
+  pivotal_dimension_preserved :
+    twoThreeUnknotValue = profile.cDimension
+  sourceRefs : List String
+  exactScope : String
+  sourceScopeCaveat : String
+
+namespace CancellationInput
+
+/-- The 1--2 local scalar is derived from cutting, killing, and transparency. -/
+theorem one_two_pair_factor
+    {profile : GlobalDimensionProfile (K := K)}
+    (input : CancellationInput profile) :
+    input.oneTwoPairValue = profile.oneTwoFactor := by
+  rw [input.cutting_identity input.transparent_twist_witness,
+    input.killing_identity]
+  rfl
+
+/-- The 2--3 local scalar is the recorded pivotal global dimension. -/
+theorem two_three_unknot_factor
+    {profile : GlobalDimensionProfile (K := K)}
+    (input : CancellationInput profile) :
+    input.twoThreeUnknotValue = profile.twoThreeFactor := by
+  rw [input.pivotal_dimension_preserved]
+  rfl
+
+end CancellationInput
+
+/--
 Exactly the standard graphical algebra accepted by the local compiler.
 
 The package is indexed by the same `categoryData` used by normalization and
@@ -64,6 +112,7 @@ structure Input
   sphericalCut : SphericalCutTrace (C := C)
   ordinarySliding : SourcedSlidingLaw C
   generalizedSliding : SlidingFamily categoryData.slidingData
+  cancellation : CancellationInput categoryData.dimensionProfile
   categorySnapshotHash : String
   category_snapshot_hash_sound :
     categorySnapshotHash = categoryData.categorySnapshotHash

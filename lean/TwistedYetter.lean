@@ -28,6 +28,7 @@ import TwistedYetter.Kirby.KirbyCompleteness
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
+import TwistedYetter.Kirby.SourceBoundGraphicalMoveCompiler
 import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
