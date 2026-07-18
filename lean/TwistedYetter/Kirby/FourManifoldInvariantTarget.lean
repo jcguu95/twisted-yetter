@@ -37,7 +37,9 @@ inductive TargetCondition where
   | categoryAndGraphicalAlgebra
   | explicitThreeHandleNormalization
   | closedTypedPresentationExecution
+  | primitiveCategoricalEventCompilerMechanism
   | chainDerivedMarkedH2Transport
+  | sourceBoundGeometricH2CompilerMechanism
   | specialKirbyCalculusCompleteness
   | exhaustiveEvaluatorCompilerMechanism
   | markedPairAssemblyMechanism
@@ -52,7 +54,9 @@ def requiredTargetConditions : List TargetCondition :=
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
     .closedTypedPresentationExecution,
+    .primitiveCategoricalEventCompilerMechanism,
     .chainDerivedMarkedH2Transport,
+    .sourceBoundGeometricH2CompilerMechanism,
     .specialKirbyCalculusCompleteness,
     .exhaustiveEvaluatorCompilerMechanism,
     .markedPairAssemblyMechanism,
@@ -77,7 +81,9 @@ def establishedFoundationConditions : List TargetCondition :=
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
     .closedTypedPresentationExecution,
+    .primitiveCategoricalEventCompilerMechanism,
     .chainDerivedMarkedH2Transport,
+    .sourceBoundGeometricH2CompilerMechanism,
     .specialKirbyCalculusCompleteness,
     .exhaustiveEvaluatorCompilerMechanism,
     .markedPairAssemblyMechanism,
@@ -92,11 +98,11 @@ def openConstructionConditions : List TargetCondition :=
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 10 := by
+    requiredTargetConditions.length = 12 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 8 := by
+    establishedFoundationConditions.length = 10 := by
   rfl
 
 theorem open_construction_condition_count :
@@ -119,6 +125,22 @@ theorem closed_typed_presentation_execution_not_open :
       openConstructionConditions := by
   simp [openConstructionConditions]
 
+/--
+Every raw event must compile to a sign-correct primitive inside a
+coherence-only structural context; whole diagrams and raw numerators are
+derived from the typed execution trace.
+-/
+theorem primitive_categorical_event_compiler_mechanism_established :
+    TargetCondition.primitiveCategoricalEventCompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The primitive event compiler mechanism is no longer an untracked gap. -/
+theorem primitive_categorical_event_compiler_mechanism_not_open :
+    TargetCondition.primitiveCategoricalEventCompilerMechanism ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
 /-- Chain-derived marked `H2` transport is explicitly on the established side. -/
 theorem chain_derived_marked_h2_transport_established :
     TargetCondition.chainDerivedMarkedH2Transport ∈
@@ -128,6 +150,21 @@ theorem chain_derived_marked_h2_transport_established :
 /-- The same condition cannot simultaneously remain in the open ledger. -/
 theorem chain_derived_marked_h2_transport_not_open :
     TargetCondition.chainDerivedMarkedH2Transport ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+Each local H2 identity is now derived from an exact chain equivalence, the
+shared recipe identity, and a geometric-coordinate naturality square.
+-/
+theorem source_bound_geometric_h2_compiler_mechanism_established :
+    TargetCondition.sourceBoundGeometricH2CompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The source-bound H2 mechanism is no longer an untracked gap. -/
+theorem source_bound_geometric_h2_compiler_mechanism_not_open :
+    TargetCondition.sourceBoundGeometricH2CompilerMechanism ∉
       openConstructionConditions := by
   simp [openConstructionConditions]
 
