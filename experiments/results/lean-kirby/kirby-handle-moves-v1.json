@@ -1,0 +1,1074 @@
+{
+  "argv": [
+    "experiments/scripts/build_kirby_handle_moves_v1.py"
+  ],
+  "checks": {
+    "closed_move_whitelist": {
+      "arbitrary_certified_move_constructor": false,
+      "constructor_count": 3,
+      "constructors": [
+        "oneOverOne",
+        "twoOverOne",
+        "twoOverTwo"
+      ],
+      "ordinary_standard_input": "SourcedSlidingLaw",
+      "status": "PASS_CLOSED_HANDLE_SLIDE_WHITELISTS",
+      "two_over_two_derived_input": "SlidingFamily"
+    },
+    "kirby_axiom_audit": {
+      "declaration_count": 63,
+      "new_r8_declaration_count": 6,
+      "observed_standard_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "output_sha256": "c7149bf46ad8559b79afd62a02ac120bbfa9f8a8892d1187e6fb29dc69b320a2",
+      "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE"
+    },
+    "lean_mutation_tests": {
+      "output_sha256": "0a5dee7af090fde6b90add62c41dc63bd59ae1c4ddab18e5e653f320e2451106",
+      "rejected_count": 3,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/ArbitraryCertifiedMoveAsHandleSlide.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.step`]",
+        "PASS expected rejection: lean/Mutations/HandwrittenTargetCharacter.lean [diagnostic: `targetCharacter` is not a field of structure `HomologicalTransport`]",
+        "PASS expected rejection: lean/Mutations/MissingSlideRoleProof.lean [diagnostic: Fields missing: `roles_sound`]"
+      ],
+      "status": "PASS_ALL_BAD_INPUTS_REJECTED"
+    },
+    "resource_guards": {
+      "default_threads": 1,
+      "execution_mode": "one Lean process at a time",
+      "maximum_allowed_threads": 2,
+      "status": "PASS_INHERITED_AND_ENFORCED"
+    },
+    "runtime_bookkeeping": {
+      "character_transform": "P2^T mod 2",
+      "class_transform": "P2^-1 mod 2",
+      "fixture_count": 6,
+      "pairing_check": "exhaustive over every fixture cycle and cochain",
+      "status": "PASS_FAIL_CLOSED_EXACT_CHAIN_AND_MOD2_CHECKS",
+      "two_over_two_only_q_congruence": true
+    },
+    "scoped_pytest": {
+      "output_sha256": "e2ee3302233b486a7d75940181630f5c6c2bd082c071f162d4fff764096775b5",
+      "status": "PASS",
+      "test_count": 32,
+      "test_files": [
+        "tests/test_presentation_moves.py",
+        "tests/test_presentation_pairs.py",
+        "tests/test_kirby_handle_moves_v1.py",
+        "tests/test_framed_link_presentation_independence_v1.py"
+      ]
+    },
+    "sequential_build": {
+      "build_order": [
+        "lean/TwistedYetter/Kirby/KirbyHandleMoves.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "module_count": 2,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/KirbyHandleMoves.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    }
+  },
+  "content_hash": "sha256:40d02f3b06a5dd7803a227a6ba14df727b56c58df7da6fdf6a93b8568de5681b",
+  "elapsed_milliseconds": 21210,
+  "established_scope": [
+    "One-over-one and two-over-one graphical evaluation invariance follows in arbitrary typed context from the explicit source-backed original sliding law.",
+    "Two-over-two graphical evaluation invariance follows in arbitrary framed context from the actual R4 SlidingFamily and R5 Lemma 3.4 construction.",
+    "Both band orientations are explicit and have independently validated bookkeeping fixtures.",
+    "Component roles and stable-ID lineage are mandatory.",
+    "Handle-chain coordinates satisfy d2_target = P1^-1 d2_source P2.",
+    "Only two-over-two uses Q_target = P2^T Q_source P2 and its diagonal framing formula.",
+    "H2 class and dual character coordinates transform contragrediently and preserve every checked mod-2 pairing."
+  ],
+  "explicit_non_claims": [
+    "R8 does not re-prove B\u00e4renz-Barrett Lemma 3.1 from fusion-category axioms.",
+    "A handle-chain or linking-matrix certificate is bookkeeping only and is not a link-diagram or evaluator proof.",
+    "R8 does not formalize handle cancellations, normalization, Cerf theory, or Kirby-calculus completeness.",
+    "R8 does not yet define a four-manifold invariant or prove invariance of a homologically twisted construction.",
+    "The specially-dotted evaluator is not silently identified with the ordinary dotted one-handle color."
+  ],
+  "finished_at_utc": "2026-07-18T02:33:54Z",
+  "generator_script": "experiments/scripts/build_kirby_handle_moves_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "02cc43b52a937daf0fba20a1e4652d40b35a8b21",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "obligation_count": 16,
+      "path": "experiments/inputs/lean-kirby/kirby-handle-moves-obligation-matrix-v1.json",
+      "sha256": "7fa67f0ff3479764d7a9597295355c3c0bf4d15d64f7e2b95373f55c1404799c"
+    },
+    "r5_framed_sliding_artifact": {
+      "content_hash": "sha256:2f55ee33e3984152a0d847af25b313d717c44b07f74fc5a2883d9d1ac63137bd",
+      "path": "experiments/results/lean-kirby/generalized-sliding-framed-context-v1.json",
+      "sha256": "3fdd72f0c3c5980f2a9456882bfcc7d00665710bb5c69ebaff830dda08398e35",
+      "source_commit": "a4d6d24ae1c351ef36b969431835ea800d40b85a"
+    },
+    "r6_presentation_syntax_artifact": {
+      "content_hash": "sha256:c84d7ef62a82fadaf2c0a798773c23aef81d195a43c84520683fc56ddc25bc7c",
+      "path": "experiments/results/lean-kirby/framed-link-presentation-syntax-v1.json",
+      "sha256": "0e304e1b051fd410b4f7626b59b6fd5adff08f6f7842bb3467c6eed20d9e1cdf",
+      "source_commit": "db8dd374000747cd25e8957d3b8eaad290c21ac4"
+    },
+    "r7_presentation_independence_artifact": {
+      "content_hash": "sha256:3a92d8174d834c1707c90b3a7cc8394584b4d3415164cf832ea01f1429d7c385",
+      "path": "experiments/results/lean-kirby/framed-link-presentation-independence-v1.json",
+      "sha256": "18822fe7b1d26899dc72b6ebf23a9251fb0441281ed81997283670d5aee3e9cc",
+      "source_commit": "5899c54dd455f74283bb03646a33f56193b5c0f8"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/kirby-handle-moves-primary-sources-v1.json",
+      "reference_count": 3,
+      "sha256": "c52b2d28f33a28d45e6cff81fa0cd4bea7e7a8a773f89505b46a165834288e7d"
+    },
+    "source_capture": {
+      "bytes": 906609,
+      "path": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+      "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+      "status": "PASS_LOCAL_CAPTURE_MATCH"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/kirby-handle-moves-obligation-matrix-v1.json": {
+        "bytes": 4957,
+        "sha256": "7fa67f0ff3479764d7a9597295355c3c0bf4d15d64f7e2b95373f55c1404799c"
+      },
+      "experiments/inputs/references/kirby-handle-moves-primary-sources-v1.json": {
+        "bytes": 2312,
+        "sha256": "c52b2d28f33a28d45e6cff81fa0cd4bea7e7a8a773f89505b46a165834288e7d"
+      },
+      "experiments/scripts/build_kirby_handle_moves_v1.py": {
+        "bytes": 14938,
+        "sha256": "6102531be418474dad065275fcb9a5f9e7a1ce62f964a8ab05a5df8975d1a7c7"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryCertifiedMoveAsHandleSlide.lean": {
+        "bytes": 739,
+        "sha256": "da82cb5e5441f0e4d13180643f8cce5fbfe3478bdc524f58d19d8cda156c2861"
+      },
+      "lean/Mutations/HandwrittenTargetCharacter.lean": {
+        "bytes": 517,
+        "sha256": "813917a575a57e1862f3a84e1e1b3cc0e9f1902f4c90a2abe03d5b53598e3f54"
+      },
+      "lean/Mutations/MissingSlideRoleProof.lean": {
+        "bytes": 902,
+        "sha256": "398dd58f2b970ff0a61b7d85060f938179cd8b6a4ccd32cafa9fe7d501ac8e73"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 849,
+        "sha256": "70ace65dba43333a3606ceff87d1bc36bfad67fbbad7a78e77e07f9a2dad4d84"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 5175,
+        "sha256": "7a8d67c8d63361d2dbba7ce1787beb180581c2198b7e3c44fcdd4a0a29076374"
+      },
+      "lean/TwistedYetter/Kirby/KirbyHandleMoves.lean": {
+        "bytes": 12691,
+        "sha256": "8fbdf8c82968a4379cc61d079ee2225ae0d337e27f9cb8c48098489375d6ebb0"
+      },
+      "scripts/lean_kirby_handle_move_mutation_tests.sh": {
+        "bytes": 1447,
+        "sha256": "b0cb6ab6dcc2c040b22201209a88e438d9c4bd379195c218927edf2d6dc304da"
+      },
+      "src/twisted_yetter/kirby_handle_moves_v1.py": {
+        "bytes": 26459,
+        "sha256": "e983663aa8866d15860ccfd6a36678cba6ced02b2395b1fdfa4d586793fa5efa"
+      },
+      "src/twisted_yetter/presentation_moves.py": {
+        "bytes": 10716,
+        "sha256": "14d11e1ee96b0483c004b4046d00f4e6b500de6c045f12b51a6b521061796867"
+      },
+      "src/twisted_yetter/presentation_pairs.py": {
+        "bytes": 24484,
+        "sha256": "f9628221d385c0ed840da814523d02f689115c6eaaaa5601da1e00298a62f81f"
+      },
+      "tests/test_kirby_handle_moves_artifact_v1.py": {
+        "bytes": 4414,
+        "sha256": "faaf16638c8f6dd3d1a210384f9e5853cf95597b507371c67c366ebb1c8c45c3"
+      },
+      "tests/test_kirby_handle_moves_v1.py": {
+        "bytes": 4135,
+        "sha256": "c0ad14f5b40654f10636cf110a700ef17f204c4bc6640bdb28e821402cc15a97"
+      },
+      "tests/test_presentation_moves.py": {
+        "bytes": 4193,
+        "sha256": "871786d4da675d2bd27552828a3408daf19a0920876a103ab445079e2229ad07"
+      },
+      "tests/test_presentation_pairs.py": {
+        "bytes": 9538,
+        "sha256": "e6e67d882ba0b61810d7841aabc216fc5fe79072c7258dc8265b392b70d2752e"
+      }
+    }
+  },
+  "mathematical_status": "KIRBY_HANDLE_SLIDES_EVALUATOR_INVARIANT_RELATIVE_TO_EXPLICIT_ORIGINAL_AND_GENERALIZED_SLIDING_INPUTS",
+  "move_coverage": {
+    "actual_count": 6,
+    "expected_count": 6,
+    "fixtures": [
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h1-b": "h1-b",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h1-a",
+          "sliding_role": "dotted",
+          "source_one_handle_ids": [
+            "h1-a",
+            "h1-b"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h1-b",
+          "stationary_role": "dotted",
+          "target_one_handle_ids": [
+            "h1-a",
+            "h1-b"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:cbf609b24eea887745014c8a51598c2e7ac1b8631c13b44f74cb9c1198342e0c",
+        "framing": {
+          "mode": "NOT_APPLICABLE_TO_DOTTED_ONE_HANDLE"
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:dfd5d52f679a30474aca39c3c6876012ed13a03a4c8ff3c0370f9f27ce243936",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "OrdinaryHandleSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "BB_LEMMA_3_1_ORIGINAL_SLIDING",
+          "source_locator": "Lemma 3.1 and Theorem 3.9, Table 2, journal pages 680-681, 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": null,
+          "target_d2_c2_to_c1": [
+            [
+              1,
+              1
+            ],
+            [
+              -1,
+              -1
+            ]
+          ],
+          "target_q2_linking_matrix": null
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 2,
+          "target_cycle_count_mod2": 2
+        },
+        "kind": "one_over_one",
+        "move_id": "one_over_one-positive",
+        "orientation_sign": 1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:6d7348088e7be86ab3bf920a249717a9ea5411688ec917a5be1922a8f51b4b7d",
+        "target_snapshot_hash": "sha256:543a717f8622e900ddd770303901ea5d8d0264ef4b076444f1730247b28296a0"
+      },
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h1-b": "h1-b",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h1-a",
+          "sliding_role": "dotted",
+          "source_one_handle_ids": [
+            "h1-a",
+            "h1-b"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h1-b",
+          "stationary_role": "dotted",
+          "target_one_handle_ids": [
+            "h1-a",
+            "h1-b"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:5405a9f21b84da21427b2fc3bfd1d7c713b7911be717d863959e8cf415ca6f22",
+        "framing": {
+          "mode": "NOT_APPLICABLE_TO_DOTTED_ONE_HANDLE"
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:99b7afd3fc1b12ca982acee15ff81181f746ec4b1ec9dd14bd7e5c89624caebf",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "OrdinaryHandleSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "BB_LEMMA_3_1_ORIGINAL_SLIDING",
+          "source_locator": "Lemma 3.1 and Theorem 3.9, Table 2, journal pages 680-681, 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": null,
+          "target_d2_c2_to_c1": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "target_q2_linking_matrix": null
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 2,
+          "target_cycle_count_mod2": 2
+        },
+        "kind": "one_over_one",
+        "move_id": "one_over_one-negative",
+        "orientation_sign": -1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:6d7348088e7be86ab3bf920a249717a9ea5411688ec917a5be1922a8f51b4b7d",
+        "target_snapshot_hash": "sha256:9f1e6ed39f53495ff18a7085009e42d0ab60ac55e41369b110b5504802e38644"
+      },
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h2-a",
+          "sliding_role": "ordinary",
+          "source_one_handle_ids": [
+            "h1-a"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h1-a",
+          "stationary_role": "dotted",
+          "target_one_handle_ids": [
+            "h1-a"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:127dda0e97bb8ece9e0487bf25ee05ce914a0b2652e8d5da7c78da54555984e7",
+        "framing": {
+          "diagram_tracking_witness_hash": "sha256:1cd7397f861a64650d60038bb4acff18f78beea2eb87ec14155119a60fb4339f",
+          "mode": "PINNED_BY_TYPED_DIAGRAM_NOT_Q_CONGRUENCE",
+          "source_sliding_framing": 0,
+          "target_sliding_framing": 0
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:1cd7397f861a64650d60038bb4acff18f78beea2eb87ec14155119a60fb4339f",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "OrdinaryHandleSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "BB_LEMMA_3_1_ORIGINAL_SLIDING",
+          "source_locator": "Lemma 3.1 and Theorem 3.9, Table 2, journal pages 680-681, 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": null,
+          "target_d2_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "target_q2_linking_matrix": null
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 2,
+          "target_cycle_count_mod2": 2
+        },
+        "kind": "two_over_one",
+        "move_id": "two_over_one-positive",
+        "orientation_sign": 1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:9cf32b317e38fd75bbb2fb637337e8342003cfc036b81450a06a90bf717ad8e5",
+        "target_snapshot_hash": "sha256:9cf32b317e38fd75bbb2fb637337e8342003cfc036b81450a06a90bf717ad8e5"
+      },
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h2-a",
+          "sliding_role": "ordinary",
+          "source_one_handle_ids": [
+            "h1-a"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h1-a",
+          "stationary_role": "dotted",
+          "target_one_handle_ids": [
+            "h1-a"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:59f2f3fde63ff988d796f145d12e94784709879bf2dfd159ea347f8287ae5e45",
+        "framing": {
+          "diagram_tracking_witness_hash": "sha256:46e2b3ab079e20912859b6ef929a8e066ed2bef4f517ecbe86be42fcb1373fec",
+          "mode": "PINNED_BY_TYPED_DIAGRAM_NOT_Q_CONGRUENCE",
+          "source_sliding_framing": 0,
+          "target_sliding_framing": 0
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:46e2b3ab079e20912859b6ef929a8e066ed2bef4f517ecbe86be42fcb1373fec",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "OrdinaryHandleSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "BB_LEMMA_3_1_ORIGINAL_SLIDING",
+          "source_locator": "Lemma 3.1 and Theorem 3.9, Table 2, journal pages 680-681, 685-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": null,
+          "target_d2_c2_to_c1": [
+            [
+              1,
+              0
+            ]
+          ],
+          "target_q2_linking_matrix": null
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 2,
+          "target_cycle_count_mod2": 2
+        },
+        "kind": "two_over_one",
+        "move_id": "two_over_one-negative",
+        "orientation_sign": -1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:9cf32b317e38fd75bbb2fb637337e8342003cfc036b81450a06a90bf717ad8e5",
+        "target_snapshot_hash": "sha256:9cf32b317e38fd75bbb2fb637337e8342003cfc036b81450a06a90bf717ad8e5"
+      },
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h2-a",
+          "sliding_role": "ordinary",
+          "source_one_handle_ids": [
+            "h1-a"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h2-b",
+          "stationary_role": "ordinary",
+          "target_one_handle_ids": [
+            "h1-a"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:3f5776435ef3229428e4d608552d53d13b8dfed60f7588feab402c6736be9a06",
+        "framing": {
+          "formula": "f_i' = f_i + 2*sign*lk(i,j) + f_j",
+          "mode": "DERIVED_FROM_Q_PRIME_EQUALS_PT_Q_P",
+          "mutual_linking": 2,
+          "source_sliding_framing": 1,
+          "stationary_framing": -1,
+          "target_sliding_framing": 4
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:00f8b6f4e011815ff66270ca725ce484d551f966e1318f0ca370a2a7b63e6aeb",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "TwoHandleOverTwoSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "R5_LEMMA_3_3_3_4_DERIVED_MOVIE",
+          "source_locator": "Lemmas 3.3-3.4 and Theorem 3.9, Table 2, journal pages 681-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              0,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -1
+            ]
+          ],
+          "target_d2_c2_to_c1": [
+            [
+              0,
+              0
+            ]
+          ],
+          "target_q2_linking_matrix": [
+            [
+              4,
+              1
+            ],
+            [
+              1,
+              -1
+            ]
+          ]
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 4,
+          "target_cycle_count_mod2": 4
+        },
+        "kind": "two_over_two",
+        "move_id": "two_over_two-positive",
+        "orientation_sign": 1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:f6bb3bea908cf140ca0627d5f976f2f3c387221d74ce3e48299db2fb08daee38",
+        "target_snapshot_hash": "sha256:94beee783bdde5ec17a4e86a2889ae6197aef57ba34cf62edf3a68847965af3d"
+      },
+      {
+        "claim_boundary": "GRAPHICAL_EQUALITY_IS_LEAN_PROVED_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS;CHAIN_AND_MATRIX_DATA_ONLY_CERTIFY_BOOKKEEPING",
+        "components": {
+          "lineage": {
+            "h1-a": "h1-a",
+            "h2-a": "h2-a",
+            "h2-b": "h2-b"
+          },
+          "sliding_id": "h2-a",
+          "sliding_role": "ordinary",
+          "source_one_handle_ids": [
+            "h1-a"
+          ],
+          "source_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ],
+          "stationary_id": "h2-b",
+          "stationary_role": "ordinary",
+          "target_one_handle_ids": [
+            "h1-a"
+          ],
+          "target_two_handle_ids": [
+            "h2-a",
+            "h2-b"
+          ]
+        },
+        "content_hash": "sha256:d7bf8cb4786699e46dd6dbbcb446ad273d785e1987ff18a53115f0179808ec41",
+        "framing": {
+          "formula": "f_i' = f_i + 2*sign*lk(i,j) + f_j",
+          "mode": "DERIVED_FROM_Q_PRIME_EQUALS_PT_Q_P",
+          "mutual_linking": 2,
+          "source_sliding_framing": 1,
+          "stationary_framing": -1,
+          "target_sliding_framing": -4
+        },
+        "graphical_proof": {
+          "diagram_input_hash": "sha256:84929c799dc7fab17869147b0a3a542664893c7b897cf365b6fe7f8d11a89ceb",
+          "lean_module": "TwistedYetter.Kirby.KirbyHandleMoves",
+          "lean_theorem": "TwoHandleOverTwoSlide.sound",
+          "matrix_certificate_scope": "BOOKKEEPING_ONLY_NOT_A_LINK_DIAGRAM_OR_EVALUATOR_PROOF",
+          "route": "R5_LEMMA_3_3_3_4_DERIVED_MOVIE",
+          "source_locator": "Lemmas 3.3-3.4 and Theorem 3.9, Table 2, journal pages 681-687",
+          "source_ref": "ref:baerenz-barrett-dichromatic-2018"
+        },
+        "handle_chain": {
+          "c1_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c1_inverse_basis_matrix": [
+            [
+              1
+            ]
+          ],
+          "c2_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "c2_inverse_basis_matrix": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "equation": "d2_target = P1^-1 * d2_source * P2",
+          "source_d2_c2_to_c1": [
+            [
+              0,
+              0
+            ]
+          ],
+          "source_q2_linking_matrix": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -1
+            ]
+          ],
+          "target_d2_c2_to_c1": [
+            [
+              0,
+              0
+            ]
+          ],
+          "target_q2_linking_matrix": [
+            [
+              -4,
+              3
+            ],
+            [
+              3,
+              -1
+            ]
+          ]
+        },
+        "homological_transport": {
+          "character_transform_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "class_transform_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "pairing_check": "PASS_EXHAUSTIVE_MOD2_CYCLES_AND_COCHAINS",
+          "source_cycle_count_mod2": 4,
+          "target_cycle_count_mod2": 4
+        },
+        "kind": "two_over_two",
+        "move_id": "two_over_two-negative",
+        "orientation_sign": -1,
+        "schema": "twisted-yetter.kirby-handle-slide-bookkeeping.v1",
+        "source_snapshot_hash": "sha256:f6bb3bea908cf140ca0627d5f976f2f3c387221d74ce3e48299db2fb08daee38",
+        "target_snapshot_hash": "sha256:0f1f1e4f9a1eb71f1bc2e33ba5d02fd0ec0d4b4d613fb57a5477a55290de0aa3"
+      }
+    ],
+    "status": "PASS_ALL_THREE_KINDS_BOTH_ORIENTATIONS"
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_kirby_handle_moves_v1.py",
+  "roadmap_status": "R8_TERMINAL_RELATIVE_TO_EXPLICIT_SLIDING_INPUTS",
+  "schema": "twisted-yetter.kirby-handle-moves.v1",
+  "started_at_utc": "2026-07-18T02:33:33Z",
+  "status": "PASS_KIRBY_HANDLE_SLIDES",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  },
+  "trusted_inputs": [
+    {
+      "exact_content": "The source-backed original Kirby-color sliding equality of B\u00e4renz-Barrett Lemma 3.1, represented by SourcedSlidingLaw.",
+      "input_id": "bb-original-sliding-property",
+      "lean_type": "SourcedSlidingLaw",
+      "not_assumed": "No arbitrary handle-slide evaluator equality or CertifiedMove injection is included."
+    },
+    {
+      "exact_content": "The R4 SlidingFamily and R5 arbitrary framed-context theorem derived from the finite generalized-sliding calculation.",
+      "input_id": "r4-r5-generalized-sliding-family",
+      "lean_type": "SlidingFamily",
+      "not_assumed": "No independent two-over-two endpoint equality is accepted."
+    },
+    {
+      "exact_content": "For each concrete presentation, a topology-correct handle-chain basis equivalence and component lineage are supplied and validated.",
+      "input_id": "concrete-handle-bookkeeping",
+      "lean_type": "SlideMetadata; ComponentLineage; HomologicalTransport",
+      "not_assumed": "Matrix congruence is not treated as the graphical move proof."
+    }
+  ]
+}
