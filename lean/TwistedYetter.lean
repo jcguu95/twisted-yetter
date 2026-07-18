@@ -20,3 +20,4 @@ import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.KirbyHandleMoves
 import TwistedYetter.Kirby.KirbyCancellation
 import TwistedYetter.Kirby.KirbyCompleteness
+import TwistedYetter.Kirby.HomologicallyTwistedInvariant

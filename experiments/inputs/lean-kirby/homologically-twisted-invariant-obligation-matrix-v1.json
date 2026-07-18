@@ -1,0 +1,230 @@
+{
+  "explicit_non_claims": [
+    "R11 does not identify the constructed Kirby invariant with the Crane-Yetter state sum.",
+    "R11 does not re-prove the category identities imported by R7-R9 from foundational ribbon-fusion axioms.",
+    "R11 does not attribute an arbitrary-coefficient or arbitrary-category Kirby formula to Yetter.",
+    "R11 does not import or validate a concrete category snapshot or numerical computation artifact; that is R12.",
+    "R11 does not prove Pachner-move invariance of a triangulated state sum.",
+    "R11 is restricted to the exact R10 closed, connected, smooth, oriented four-manifold and special-presentation scope."
+  ],
+  "obligations": [
+    {
+      "obligation_id": "category-content-addressing",
+      "status": "MANDATORY_LEAN_HASH_FIELD_AND_RUNTIME_CHECK",
+      "witness": "AdmissibleKirbyCategory.categorySnapshotHash"
+    },
+    {
+      "obligation_id": "global-dimension-profile",
+      "status": "PINNED_R9_INPUT",
+      "witness": "AdmissibleKirbyCategory.dimensionProfile"
+    },
+    {
+      "obligation_id": "generalized-sliding-data",
+      "status": "PINNED_R5_R8_INPUT",
+      "witness": "AdmissibleKirbyCategory.slidingData"
+    },
+    {
+      "obligation_id": "closed-diagram-scalarization",
+      "status": "MANDATORY_PROOF_RELEVANT_INPUT",
+      "witness": "closedScalar and scalarization_witness"
+    },
+    {
+      "obligation_id": "single-category-snapshot-coherence",
+      "status": "MANDATORY_PROOF_RELEVANT_INPUT_AND_MUTATION_TESTED",
+      "witness": "single_snapshot_witness prevents mixing normalization, sliding, and scalarization data"
+    },
+    {
+      "obligation_id": "category-coherence-content-hash",
+      "status": "MANDATORY_LEAN_HASH_FIELD_AND_RUNTIME_CHECK",
+      "witness": "AdmissibleKirbyCategory.coherenceCertificateHash"
+    },
+    {
+      "obligation_id": "formal-presentation-interpretation",
+      "status": "MANDATORY_PROOF_RELEVANT_INPUT",
+      "witness": "DecoratedKirbyPresentation.diagram_representation_witness"
+    },
+    {
+      "obligation_id": "marked-class-decoration-interpretation",
+      "status": "MANDATORY_PROOF_RELEVANT_INPUT_AND_MUTATION_TESTED",
+      "witness": "DecoratedKirbyPresentation.decoration_representation_witness"
+    },
+    {
+      "obligation_id": "handle-count-binding",
+      "status": "LEAN_TYPED_FOR_EVERY_ALPHA",
+      "witness": "DecoratedKirbyPresentation.counts_sound"
+    },
+    {
+      "obligation_id": "raw-numerator-binding",
+      "status": "LEAN_TYPED_FOR_EVERY_ALPHA",
+      "witness": "raw_numerator_sound binds EvaluationState to closed categorical diagram evaluation"
+    },
+    {
+      "obligation_id": "diagram-and-decoration-certificates",
+      "status": "MANDATORY_CONTENT_HASHES",
+      "witness": "diagramCertificateHash and decorationCertificateHash"
+    },
+    {
+      "obligation_id": "local-proof-topology-binding",
+      "status": "MANDATORY_PROOF_RELEVANT_AND_HASH_BOUND",
+      "witness": "LocalEvaluationBinding is indexed by the exact TableTwoMove and pins move ID plus source and target hashes"
+    },
+    {
+      "obligation_id": "framed-isotopy-evaluator-proof",
+      "status": "R7_PROOF_OBJECT_REQUIRED",
+      "witness": "EvaluatedTableTwoStep.framedIsotopy requires GeneratedIsotopy"
+    },
+    {
+      "obligation_id": "one-over-one-evaluator-proof",
+      "status": "R8_PROOF_OBJECT_AND_EXACT_KIND_BINDING_REQUIRED",
+      "witness": "EvaluatedTableTwoStep.oneOverOne"
+    },
+    {
+      "obligation_id": "two-over-one-evaluator-proof",
+      "status": "R8_PROOF_OBJECT_AND_EXACT_KIND_BINDING_REQUIRED",
+      "witness": "EvaluatedTableTwoStep.twoOverOne"
+    },
+    {
+      "obligation_id": "two-over-two-evaluator-proof",
+      "status": "R8_GENERALIZED_SLIDING_PROOF_AND_EXACT_BINDING_REQUIRED",
+      "witness": "EvaluatedTableTwoStep.twoOverTwo"
+    },
+    {
+      "obligation_id": "slide-orientation-binding",
+      "status": "LEAN_EQUALITY_REQUIRED_AND_MUTATION_TESTED",
+      "witness": "graphical_orientation_sound in every slide constructor"
+    },
+    {
+      "obligation_id": "slide-id-and-endpoint-hash-binding",
+      "status": "LEAN_EQUALITIES_REQUIRED_AND_RUNTIME_CHECKED",
+      "witness": "graphical_move_id_sound, graphical_source_hash_sound, and graphical_target_hash_sound"
+    },
+    {
+      "obligation_id": "one-two-birth-calculation",
+      "status": "R9_LOCAL_CALCULATION_REQUIRED_WITH_DIRECTIONAL_STATE_BINDING",
+      "witness": "EvaluatedTableTwoStep.oneTwoBirth"
+    },
+    {
+      "obligation_id": "one-two-death-calculation",
+      "status": "R9_LOCAL_CALCULATION_REQUIRED_WITH_DIRECTIONAL_STATE_BINDING",
+      "witness": "EvaluatedTableTwoStep.oneTwoDeath"
+    },
+    {
+      "obligation_id": "two-three-birth-calculation",
+      "status": "R9_LOCAL_CALCULATION_REQUIRED_WITH_DIRECTIONAL_STATE_BINDING",
+      "witness": "EvaluatedTableTwoStep.twoThreeBirth"
+    },
+    {
+      "obligation_id": "two-three-death-calculation",
+      "status": "R9_LOCAL_CALCULATION_REQUIRED_WITH_DIRECTIONAL_STATE_BINDING",
+      "witness": "EvaluatedTableTwoStep.twoThreeDeath"
+    },
+    {
+      "obligation_id": "no-arbitrary-normalized-equality-constructor",
+      "status": "LEAN_API_ABSENCE_SOURCE_SCAN_AND_MUTATION_TESTED",
+      "witness": "EvaluatedTableTwoStep has exactly eight constructor-indexed proof routes"
+    },
+    {
+      "obligation_id": "local-normalized-invariance",
+      "status": "LEAN_PROVED_FROM_R7_R8_R9_OBJECTS",
+      "witness": "EvaluatedTableTwoStep.normalized_sound"
+    },
+    {
+      "obligation_id": "all-alpha-local-coverage",
+      "status": "MANDATORY_DEPENDENT_FUNCTION",
+      "witness": "HomologicallyTwistedKirbyPrescription.localStep"
+    },
+    {
+      "obligation_id": "one-move-invariance",
+      "status": "LEAN_PROVED",
+      "witness": "HomologicallyTwistedKirbyPrescription.move_invariant"
+    },
+    {
+      "obligation_id": "movie-target-class-composition",
+      "status": "LEAN_PROVED",
+      "witness": "HomologicallyTwistedKirbyPrescription.targetClass_trans"
+    },
+    {
+      "obligation_id": "full-movie-invariance",
+      "status": "LEAN_PROVED_BY_TABLE_TWO_MOVIE_INDUCTION",
+      "witness": "HomologicallyTwistedKirbyPrescription.movie_invariant"
+    },
+    {
+      "obligation_id": "marked-presentation-representation-relation",
+      "status": "MANDATORY_EXPLICIT_TOPOLOGY_INPUT",
+      "witness": "MarkedPairPresentationSystem.represents"
+    },
+    {
+      "obligation_id": "chosen-marked-presentation-exists",
+      "status": "MANDATORY_EXPLICIT_TOPOLOGY_INPUT",
+      "witness": "chosenPresentation, chosenCoordinate, and chosen_represents"
+    },
+    {
+      "obligation_id": "r10-completeness-reused-exactly",
+      "status": "PINNED_R10_INPUT",
+      "witness": "MarkedPairPresentationSystem.completeness"
+    },
+    {
+      "obligation_id": "marked-coordinate-transport-soundness",
+      "status": "MANDATORY_EXPLICIT_INPUT_AND_MUTATION_TESTED",
+      "witness": "marked_transport_sound applies to the exact R10 completeness movie"
+    },
+    {
+      "obligation_id": "pair-invariant-definition",
+      "status": "LEAN_DEFINED",
+      "witness": "MarkedPairPresentationSystem.invariant"
+    },
+    {
+      "obligation_id": "presentation-independence",
+      "status": "LEAN_PROVED",
+      "witness": "MarkedPairPresentationSystem.presentation_independent"
+    },
+    {
+      "obligation_id": "two-realization-equality",
+      "status": "LEAN_PROVED",
+      "witness": "MarkedPairPresentationSystem.same_pair_value"
+    },
+    {
+      "obligation_id": "terminal-r11-theorem",
+      "status": "LEAN_PROVED_UNDER_LISTED_INPUTS",
+      "witness": "homologically_twisted_kirby_invariant_established"
+    },
+    {
+      "obligation_id": "crane-yetter-identification-excluded",
+      "status": "LEAN_API_ABSENCE_AND_MUTATION_TESTED",
+      "witness": "No Crane-Yetter value or identification field exists in the R11 contract"
+    },
+    {
+      "obligation_id": "source-scope-honesty",
+      "status": "TERMINAL_WITH_EXPLICIT_YETTER_SCOPE_LIMITATION",
+      "witness": "Yetter Definition 10 and Theorem 11 are recorded only for the simply-connected Z2 Uq(sl2) twisted Broda case"
+    }
+  ],
+  "schema": "twisted-yetter.homologically-twisted-invariant-obligation-matrix.v1",
+  "status": "R11_CONTRACT_COMPLETE_PENDING_KERNEL_AND_RUNTIME_CERTIFICATE",
+  "trusted_inputs": [
+    {
+      "exact_content": "One content-addressed category interpretation coherently supplies generalized sliding data, normalization dimensions, and closed-diagram scalarization.",
+      "input_id": "single-category-evaluator-coherence",
+      "lean_type": "AdmissibleKirbyCategory",
+      "not_assumed": "No concrete category snapshot is imported and no Crane-Yetter identification is supplied."
+    },
+    {
+      "exact_content": "For every special presentation and marked class, the typed diagram and decoration realize that formal presentation and class, and its raw numerator is the scalarized categorical evaluation.",
+      "input_id": "decorated-presentation-realization",
+      "lean_type": "DecoratedKirbyPresentation",
+      "not_assumed": "No final value equality and no presentation independence."
+    },
+    {
+      "exact_content": "Every R10 topology move and every marked class is realized by the exact corresponding closed R7, R8, or R9 proof object.",
+      "input_id": "all-alpha-local-evaluator-realization",
+      "lean_type": "HomologicallyTwistedKirbyPrescription.localStep",
+      "not_assumed": "The field returns proof objects, never a bare normalized equality."
+    },
+    {
+      "exact_content": "Certified coordinates representing the same geometric class are related by the exact H2 transport of the R10 completeness movie.",
+      "input_id": "marked-pair-realization-compatibility",
+      "lean_type": "MarkedPairPresentationSystem.marked_transport_sound",
+      "not_assumed": "No evaluator statement and no state-sum or Crane-Yetter identification."
+    }
+  ]
+}
