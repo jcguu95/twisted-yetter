@@ -1,0 +1,230 @@
+{
+  "argv": [
+    "experiments/scripts/build_four_manifold_invariant_target_v10.py"
+  ],
+  "checks": {
+    "integral_character_compiler": {
+      "arbitrary_weight_compiler_rejected": true,
+      "custom_domain_axiom_count": 0,
+      "missing_cycle_class_soundness_rejected": true,
+      "missing_tensor_law_rejected": true,
+      "mutation_count": 3,
+      "status": "PASS_KERNEL_CHECKED_MECHANISM"
+    },
+    "target_theorem": {
+      "custom_domain_axioms": [
+        "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+        "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+      ],
+      "mutation_count": 5,
+      "status": "PASS_CONDITIONAL_TARGET_ONLY"
+    },
+    "umbrella_build": {
+      "lean_num_threads": 1,
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:e2b9826fac7e326792605110e07a8c5087c3bdfdc0160a752019c53074677adf",
+  "domain_axiom_boundary": {
+    "axioms": [
+      "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+      "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+    ],
+    "count": 2,
+    "integral_character_mechanism_custom_axioms": []
+  },
+  "elapsed_seconds": 112.418365,
+  "finished_at_utc": "2026-07-18T22:18:27Z",
+  "generator_script": "experiments/scripts/build_four_manifold_invariant_target_v10.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "745a360d4424887c39b5016abbdcb6631be9703e",
+    "dirty_before_generation": false
+  },
+  "inputs": {
+    "predecessor": {
+      "content_hash": "sha256:64cbca97f4ce8f0a42332bdd5a13fd9d384ef1cfa53be27a0dad71e71be467ce",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v9.json",
+      "source_commit": "f82c79f856faa4ab36702bc4996c1c1a44b47647"
+    },
+    "source_files": {
+      "experiments/scripts/build_four_manifold_invariant_target_v10.py": {
+        "bytes": 13359,
+        "sha256": "sha256:05dcf17e64c23c9cf034c955cb6c15eab22c1a51afd2787627ae111d3bb1fb6a"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/GenericCategoryBoundAsIntegralCharacterCompiler.lean": {
+        "bytes": 1572,
+        "sha256": "sha256:d06dabc99c5a0cdf96a4cb0b96071f7c52f23ad7a3acb834838eeb821b8db9c5"
+      },
+      "lean/Mutations/MissingIntegralCycleClassSoundness.lean": {
+        "bytes": 1756,
+        "sha256": "sha256:e8f8bcc2738a2838a4bf1585baafc60f6ba8a67b26a07954c1d42d80bf82ffc9"
+      },
+      "lean/Mutations/MissingTensorAutomorphismLaw.lean": {
+        "bytes": 1740,
+        "sha256": "sha256:310619f0016ea534832be85f84d8bb57a9feca3d383198e91ba83bbf85e3b05d"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2013,
+        "sha256": "sha256:c2388f0458bcfdfee1608e4f2d3f4914f234aa59475c1876e9b8691ad834be7b"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean": {
+        "bytes": 22456,
+        "sha256": "sha256:5fe72b5d7e7012dddbaafce9cbaa8d710bb605d3af16fc42a66efc46cc139666"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean": {
+        "bytes": 6168,
+        "sha256": "sha256:2b99ccf1f4a0c4eba097b7645aa3407743d676d8d5128c36efa2a35b09b8712a"
+      },
+      "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompiler.lean": {
+        "bytes": 18320,
+        "sha256": "sha256:c4e7e9bc97aa0f535cd1ab5e0784fb28649c918323855ffeaf954c7d381800be"
+      },
+      "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompilerAxiomAudit.lean": {
+        "bytes": 1638,
+        "sha256": "sha256:4f4214e7e5985f8e94fe2c4615169c727a0a22b14f0cd4616575e3319902c569"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean": {
+        "bytes": 9500,
+        "sha256": "sha256:fc6ba182d2a72de1a5373d9455758f3fa275a20346d25b683317fed8692d331a"
+      },
+      "scripts/lean_four_manifold_invariant_target_axiom_audit.sh": {
+        "bytes": 1426,
+        "sha256": "sha256:8188ec4d46086dd52cff6a60ea6b16e8b7aeada4718ca5dca6fd039132128b10"
+      },
+      "scripts/lean_four_manifold_invariant_target_mutation_tests.sh": {
+        "bytes": 1961,
+        "sha256": "sha256:79e069396281010000b05da7e412ba19656471fe8933b4a7f947d4be901606ad"
+      },
+      "scripts/lean_integral_character_kirby_color_compiler_axiom_audit.sh": {
+        "bytes": 742,
+        "sha256": "sha256:e7a2e39cc582c7b758ea2c5a49cc22eb4f30c6acce5389ef548dc964eab4d39a"
+      },
+      "scripts/lean_integral_character_kirby_color_compiler_mutation_tests.sh": {
+        "bytes": 1414,
+        "sha256": "sha256:efaf15ba3a9fe2558d2271438ac435bc9da31cc282b0ebe0f258e364913ba611"
+      },
+      "tests/test_four_manifold_invariant_target_artifact_v10.py": {
+        "bytes": 3514,
+        "sha256": "sha256:a97700889b74946360313500fdbf8fb8888533805338b9e0fd248ebcc261be9b"
+      }
+    }
+  },
+  "integral_character_scope": {
+    "coefficient_formula": "ordinaryWeight(simple) * simpleScalar(simple)^cycleCoefficient(component)",
+    "component_binding": "all ordinary components indexed by the degree-two handle basis",
+    "marked_group": "integral H2 model carried by SpecialKirbyPresentation",
+    "representative": "additive section into actual degree-two cycles, with homology-class equality",
+    "specially_dotted_status": "excluded until a source-backed translation to direct two-cycle coordinates exists",
+    "tensor_character_source": "monoidal natural automorphism of the identity, with exact scalar action on admitted simples"
+  },
+  "mathematical_status": "CONDITIONAL_TARGET_THEOREM_ESTABLISHED_CONCRETE_FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+  "non_claims": [
+    "No concrete four-manifold invariant instance is established.",
+    "No arbitrary H2(X; A) coefficient system is formalized.",
+    "No specially-dotted presentation is admitted by the direct integral-cycle compiler.",
+    "No identification with the original Crane-Yetter state sum.",
+    "No theorem says the invariant detects or cannot detect exoticness."
+  ],
+  "open_instance_details": [
+    {
+      "condition": "integralCycleRepresentativeSystemInstance",
+      "missing": "Concrete component-to-two-handle indexing and additive cycle representatives for every admitted presentation."
+    },
+    {
+      "condition": "tensorAutomorphismGeneratorInstance",
+      "missing": "Concrete monoidal natural automorphism and verified simple scalar action."
+    },
+    {
+      "condition": "globalFiniteKirbyColorExpansionInstance",
+      "missing": "Concrete event interpreter for every globally labelled presentation trace."
+    },
+    {
+      "condition": "sourceBoundGraphicalMoveCompilerInstance",
+      "missing": "Concrete R7/R8/R9 graphical programs for every source recipe."
+    },
+    {
+      "condition": "sourceBoundEvaluatorCompilerInstance",
+      "missing": "Final assembly after the four preceding concrete inputs."
+    }
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_four_manifold_invariant_target_v10.py",
+  "schema": "twisted-yetter.four-manifold-invariant-target.v10",
+  "started_at_utc": "2026-07-18T22:16:34Z",
+  "status": "PASS_FIFTEEN_FOUNDATION_CONDITIONS_ESTABLISHED_FIVE_CONCRETE_INSTANCES_OPEN",
+  "target_condition_ledger": {
+    "counts": {
+      "established": 15,
+      "open": 5,
+      "required": 20
+    },
+    "established_conditions": [
+      "categoryAndGraphicalAlgebra",
+      "explicitThreeHandleNormalization",
+      "closedTypedPresentationExecution",
+      "primitiveCategoricalEventCompilerMechanism",
+      "chainDerivedMarkedH2Transport",
+      "sourceBoundGeometricH2CompilerMechanism",
+      "specialKirbyCalculusCompleteness",
+      "exhaustiveEvaluatorCompilerMechanism",
+      "markedPairAssemblyMechanism",
+      "sourceBoundLocalMoveRecipes",
+      "globalFiniteKirbyColorExpansionMechanism",
+      "sourceBoundGeometricH2CompilerInstance",
+      "sourceBoundGraphicalMoveCompilerMechanism",
+      "categoryBoundKirbyColorCompilerMechanism",
+      "integralCharacterKirbyColorCompilerMechanism"
+    ],
+    "open_conditions": [
+      "integralCycleRepresentativeSystemInstance",
+      "tensorAutomorphismGeneratorInstance",
+      "globalFiniteKirbyColorExpansionInstance",
+      "sourceBoundGraphicalMoveCompilerInstance",
+      "sourceBoundEvaluatorCompilerInstance"
+    ],
+    "required_conditions": [
+      "categoryAndGraphicalAlgebra",
+      "explicitThreeHandleNormalization",
+      "closedTypedPresentationExecution",
+      "primitiveCategoricalEventCompilerMechanism",
+      "chainDerivedMarkedH2Transport",
+      "sourceBoundGeometricH2CompilerMechanism",
+      "specialKirbyCalculusCompleteness",
+      "exhaustiveEvaluatorCompilerMechanism",
+      "markedPairAssemblyMechanism",
+      "sourceBoundLocalMoveRecipes",
+      "globalFiniteKirbyColorExpansionMechanism",
+      "sourceBoundGeometricH2CompilerInstance",
+      "sourceBoundGraphicalMoveCompilerMechanism",
+      "categoryBoundKirbyColorCompilerMechanism",
+      "integralCharacterKirbyColorCompilerMechanism",
+      "integralCycleRepresentativeSystemInstance",
+      "tensorAutomorphismGeneratorInstance",
+      "globalFiniteKirbyColorExpansionInstance",
+      "sourceBoundGraphicalMoveCompilerInstance",
+      "sourceBoundEvaluatorCompilerInstance"
+    ]
+  },
+  "target_theorem": {
+    "conclusion": "Any two certified special Kirby presentations representing the same marked pair have equal normalized evaluations.",
+    "concrete_inputs_constructed": false,
+    "conditional_on_concrete_inputs": true,
+    "lean_name": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target"
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  }
+}
