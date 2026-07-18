@@ -6,6 +6,7 @@ export LEAN_NUM_THREADS=1
 ./scripts/lean_local_build.sh \
   lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean \
   lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean \
+  lean/TwistedYetter/Kirby/SourceBoundGeometricH2Compiler.lean \
   lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean \
   lean/TwistedYetter.lean >/dev/null
 
@@ -14,6 +15,7 @@ mutations=(
   "lean/Mutations/DropFourManifoldInvariantTargetCondition.lean"
   "lean/Mutations/RequireCraneYetterIdentificationForTarget.lean"
   "lean/Mutations/ArbitraryEvaluatorCompilerAsTargetInput.lean"
+  "lean/Mutations/DirectGeometricH2CompilerAsTargetInput.lean"
 )
 
 diagnostics=(
@@ -21,6 +23,7 @@ diagnostics=(
   'Tactic `rfl` failed'
   'Unknown constant `TwistedYetter.Kirby.FourManifoldInvariantTarget.TargetCondition.craneYetterIdentification`'
   'TableTwoEvaluatorCompiler categoryData manifold H2'
+  'GeometricMarkedH2Compiler manifold H2'
 )
 
 for index in "${!mutations[@]}"; do

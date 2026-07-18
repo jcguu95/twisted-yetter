@@ -1,6 +1,7 @@
 import TwistedYetter.Kirby.FinalFormalizationPackage
 import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
+import TwistedYetter.Kirby.SourceBoundGeometricH2Compiler
 import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler
 
 /-!
@@ -29,6 +30,7 @@ open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 open TwistedYetter.Kirby.EvaluatorCompiler
 open TwistedYetter.Kirby.SourceBoundEvaluatorCompilation
+open TwistedYetter.Kirby.SourceBoundGeometricH2Compilation
 
 /-- Exact denominator of conditions for the intended four-manifold theorem. -/
 inductive TargetCondition where
@@ -242,7 +244,7 @@ structure FourManifoldInvariantInputs
     (H2 : Type uH) [AddCommGroup H2] where
   evaluatorCompiler :
     SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2
-  markedH2Compiler : GeometricMarkedH2Compiler manifold H2
+  markedH2Compiler : SourceBoundGeometricH2Compiler manifold H2
   generalCerf : GeneralCerfCompleteness manifold
   basePresentation : SpecialKirbyPresentation manifold H2
 
@@ -268,7 +270,7 @@ noncomputable def markedSystem
     {H2 : Type uH} [AddCommGroup H2]
     (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
     MarkedPairPresentationSystem manifold H2 :=
-  inputs.markedH2Compiler.markedPairSystem
+  inputs.markedH2Compiler.toGeometricMarkedH2Compiler.markedPairSystem
     inputs.generalCerf inputs.basePresentation
 
 /-- The value assigned to the marked pair by the chosen certified presentation. -/

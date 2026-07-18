@@ -9,6 +9,7 @@ trap 'rm -f "${output}"' EXIT
 ./scripts/lean_local_build.sh \
   lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean \
   lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean \
+  lean/TwistedYetter/Kirby/SourceBoundGeometricH2Compiler.lean \
   lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean
 
 ./scripts/lean_local_check.sh \

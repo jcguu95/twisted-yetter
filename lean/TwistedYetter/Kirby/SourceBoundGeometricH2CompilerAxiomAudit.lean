@@ -1,0 +1,12 @@
+import TwistedYetter.Kirby.SourceBoundGeometricH2Compiler
+
+/-!
+# Kernel axiom audit for source-bound geometric H2 compilation
+-/
+
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.topologicalMoveRecipeId
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.SourceBoundChainMoveCertificate.transport
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.SourceBoundChainMoveCertificate.transport_homologyAddEquiv_eq_refl
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.SourceBoundGeometricH2Compiler.localCompiler
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.SourceBoundGeometricH2Compiler.local_transport_is_identity
+#print axioms TwistedYetter.Kirby.SourceBoundGeometricH2Compilation.SourceBoundGeometricH2Compiler.toGeometricMarkedH2Compiler

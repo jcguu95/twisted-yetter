@@ -30,6 +30,7 @@ import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
+import TwistedYetter.Kirby.SourceBoundGeometricH2Compiler
 import TwistedYetter.Kirby.ComputationArtifactImporter
 import TwistedYetter.Kirby.FinalFormalizationPackage
 import TwistedYetter.Kirby.FourManifoldInvariantTarget
