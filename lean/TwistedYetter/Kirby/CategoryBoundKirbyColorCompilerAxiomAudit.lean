@@ -1,0 +1,15 @@
+import TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler
+
+/-!
+# Kernel axiom audit for category-bound Kirby colours
+-/
+
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.HomologicalKirbyColorWeights.toComponentExpansion
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.HomologicalKirbyColorWeights.label_fiber_is_simple_index
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.HomologicalKirbyColorWeights.component_weight_eq
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.HomologicalKirbyColorWeights.zero_component_weight_eq_category_weight
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.strandObject
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.labelledBoundary
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.CategoryBoundPresentationCompiler.toComponentwise
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.CategoryBoundPresentationCompiler.event_twist_is_graphical_twist
+#print axioms TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler.CategoryBoundPresentationCompiler.event_boundary_is_labelled_boundary

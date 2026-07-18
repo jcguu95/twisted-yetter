@@ -6,6 +6,7 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalPresentationCompiler
 open TwistedYetter.Kirby.CategoricalTangle
+open TwistedYetter.Kirby.FramingNaturality
 open TwistedYetter.Kirby.Presentation
 
 universe u v
@@ -18,6 +19,7 @@ def unsafeCompiler
     (raw : RawPresentation)
     (boundary : List StrandState → Boundary C)
     (emptyBoundarySound : boundary [] = .unit)
+    (framingTwistData : NaturalTwist C)
     (birth :
       (eventId componentId positiveStrand negativeStrand : String) →
       (insertAt : Nat) →
@@ -56,7 +58,7 @@ def unsafeCompiler
         raw.applyEvent before
             (.framingTwist eventId strandId sign) =
           Except.ok after) →
-        CompiledCategoricalEvent C (twistPrimitiveKind sign)
+        CompiledFramingTwistEvent C framingTwistData sign
           (boundary before) (boundary after))
     (planarIsotopy :
       (eventId : String) →
@@ -72,6 +74,7 @@ def unsafeCompiler
     (compilerHashShape :
       RawPresentation.sha256Shape compilerSnapshotHash = true) :
     CategoricalEventCompiler C raw where
+  framingTwistData := framingTwistData
   boundary := boundary
   empty_boundary_sound := emptyBoundarySound
   birth := birth

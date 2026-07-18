@@ -49,6 +49,8 @@ inductive TargetCondition where
   | globalFiniteKirbyColorExpansionMechanism
   | sourceBoundGeometricH2CompilerInstance
   | sourceBoundGraphicalMoveCompilerMechanism
+  | categoryBoundKirbyColorCompilerMechanism
+  | homologicalKirbyColorWeightsInstance
   | globalFiniteKirbyColorExpansionInstance
   | sourceBoundGraphicalMoveCompilerInstance
   | sourceBoundEvaluatorCompilerInstance
@@ -70,6 +72,8 @@ def requiredTargetConditions : List TargetCondition :=
     .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance,
     .sourceBoundGraphicalMoveCompilerMechanism,
+    .categoryBoundKirbyColorCompilerMechanism,
+    .homologicalKirbyColorWeightsInstance,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
@@ -85,9 +89,13 @@ source-backed topology domain axiom, which returns only an unmarked topology
 movie. The handle-chain compiler instance is established relative to a second
 separately audited standard homology-domain axiom. Every move carries one
 typed local recipe shared by graphical and chain compilation. A formal Kirby
-colour is now represented by a global finite sum of complete labelled traces,
-never by one fake category object. The actual label/event interpretation and
-the exact R7/R8/R9 graphical assembly remain open.
+colour is represented by a global finite sum of complete labelled traces,
+never by one fake category object. The final route also forces every label to
+be the category's simple-index type, zero-class coefficients to be the
+recorded category weights, strand objects to use the same simple/dual-simple
+data, and framing events to use the graphical algebra's exact twist. The
+nonzero homological coefficients, concrete event interpretation, and exact
+R7/R8/R9 graphical assembly remain open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -103,27 +111,29 @@ def establishedFoundationConditions : List TargetCondition :=
     .sourceBoundLocalMoveRecipes,
     .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance,
-    .sourceBoundGraphicalMoveCompilerMechanism
+    .sourceBoundGraphicalMoveCompilerMechanism,
+    .categoryBoundKirbyColorCompilerMechanism
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
+    .homologicalKirbyColorWeightsInstance,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 16 := by
+    requiredTargetConditions.length = 18 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 13 := by
+    establishedFoundationConditions.length = 14 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 3 := by
+    openConstructionConditions.length = 4 := by
   rfl
 
 /--
@@ -261,8 +271,34 @@ theorem source_bound_graphical_move_compiler_mechanism_not_open :
   simp [openConstructionConditions]
 
 /--
+The final evaluator route rejects generic finite state sums. Labels,
+zero-class weights, strand objects, duals, and framing twists are bound to the
+same admitted category and graphical algebra.
+-/
+theorem category_bound_kirby_color_compiler_mechanism_established :
+    TargetCondition.categoryBoundKirbyColorCompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The category-bound compiler mechanism is no longer an untracked gap. -/
+theorem category_bound_kirby_color_compiler_mechanism_not_open :
+    TargetCondition.categoryBoundKirbyColorCompilerMechanism ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+The actual nonzero-class coefficients and their marking certificate have not
+yet been constructed. The zero-class specialization is already mandatory.
+-/
+theorem homological_kirby_color_weights_instance_open :
+    TargetCondition.homologicalKirbyColorWeightsInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
 The actual finite family, weights, and event interpretation for each
-presentation and marked class have not yet been constructed.
+presentation and marked class have not yet been constructed. This now means
+a category-bound event compiler, not the older generic expansion.
 -/
 theorem global_finite_kirby_color_expansion_instance_open :
     TargetCondition.globalFiniteKirbyColorExpansionInstance ∈
@@ -342,8 +378,11 @@ marked four-manifold invariant.
 This structure does not accept an arbitrary compact evaluator prescription,
 an arbitrary decorated-presentation function, or an already-complete marked
 presentation system. Its evaluator field is the source-bound exhaustive
-eight-case compiler: every formal Kirby-colour term uses one global labeling,
-each complete labelled diagram is compiled event-by-event from the typed raw
+eight-case compiler. Its presentation compiler is category-bound: every
+formal Kirby-colour term uses one global simple labeling, zero marked class
+uses the category's recorded ordinary weights, strand objects use the same
+simple/dual-simple data, framing events use the same accepted twist, each
+complete labelled diagram is compiled event-by-event from the typed raw
 execution trace, and only then are the terms summed. Its marked system is
 derived from local chain transport by movie induction.
 

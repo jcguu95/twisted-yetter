@@ -347,6 +347,56 @@ def diagram
 end CompiledCategoricalEvent
 
 /--
+A framing event whose local primitive is definitionally built from one fixed
+twist.
+
+The surrounding structural context may reassociate or insert unitors, but it
+cannot replace the positive or negative twist by an unrelated natural
+automorphism.
+-/
+structure CompiledFramingTwistEvent
+    (C : Type uC) [Category.{vC} C] [MonoidalCategory C]
+    [BraidedCategory C]
+    (twist : NaturalTwist C)
+    (sign : Presentation.CrossingSign)
+    (wholeSource wholeTarget : Boundary C) where
+  object : C
+  context :
+    StructuralContext C
+      (.atom object) (.atom object) wholeSource wholeTarget
+
+namespace CompiledFramingTwistEvent
+
+/-- The sign-indexed primitive uses exactly the retained twist. -/
+def primitive
+    {twist : NaturalTwist C}
+    {sign : Presentation.CrossingSign}
+    {wholeSource wholeTarget : Boundary C}
+    (event :
+      CompiledFramingTwistEvent
+        C twist sign wholeSource wholeTarget) :
+    PrimitiveEventDiagram C (twistPrimitiveKind sign)
+      (.atom event.object) (.atom event.object) :=
+  match sign with
+  | .positive =>
+      PrimitiveEventDiagram.twistPositive twist event.object
+  | .negative =>
+      PrimitiveEventDiagram.twistNegative twist event.object
+
+/-- Plug the fixed-twist primitive into its coherence-only context. -/
+def diagram
+    {twist : NaturalTwist C}
+    {sign : Presentation.CrossingSign}
+    {wholeSource wholeTarget : Boundary C}
+    (event :
+      CompiledFramingTwistEvent
+        C twist sign wholeSource wholeTarget) :
+    Diagram C wholeSource wholeTarget :=
+  event.context.plug event.primitive.diagram
+
+end CompiledFramingTwistEvent
+
+/--
 One local categorical compiler for every raw slice-event constructor.
 
 The result boundary is indexed by the exact before/after states accepted by
@@ -357,6 +407,7 @@ structure CategoricalEventCompiler
     (C : Type uC) [Category.{vC} C] [MonoidalCategory C]
     [BraidedCategory C]
     (raw : RawPresentation) where
+  framingTwistData : NaturalTwist C
   boundary : List StrandState → Boundary C
   empty_boundary_sound : boundary [] = .unit
   birth :
@@ -406,7 +457,7 @@ structure CategoricalEventCompiler
       raw.applyEvent before
           (.framingTwist eventId strandId sign) =
         Except.ok after) →
-      CompiledCategoricalEvent C (twistPrimitiveKind sign)
+      CompiledFramingTwistEvent C framingTwistData sign
         (boundary before) (boundary after)
   planarIsotopy :
     (eventId : String) →
