@@ -1,0 +1,183 @@
+{
+  "explicit_non_claims": [
+    "R10 does not re-prove Cerf theory in Lean.",
+    "R10 does not derive the five-family Table 2 link calculus from general Cerf theory in Lean.",
+    "R10 does not prove evaluator invariance along the topology movie; R7-R9 supply local algebraic inputs and R11 must connect them.",
+    "R10 does not yet define an invariant of the pair (X, alpha).",
+    "R10 does not identify any link prescription with Crane-Yetter.",
+    "R10 does not validate any numerical computation artifact."
+  ],
+  "obligations": [
+    {
+      "obligation_id": "fixed-manifold-scope",
+      "status": "LEAN_TYPED_AND_RUNTIME_FAIL_CLOSED",
+      "witness": "requiredClosedFourScope fixes dimension 4, smooth, compact, connected, closed, and oriented"
+    },
+    {
+      "obligation_id": "content-addressed-manifold-input",
+      "status": "LEAN_TYPED_AND_RUNTIME_HASH_CHECKED",
+      "witness": "ClosedConnectedSmoothOrientedFourManifoldInput"
+    },
+    {
+      "obligation_id": "general-relative-presentation-scope",
+      "status": "EXPLICIT_SOURCE_BACKED_TOPOLOGY_INPUT",
+      "witness": "GeneralHandlePresentation and GeneralCerfCompleteness"
+    },
+    {
+      "obligation_id": "general-level-isotopies",
+      "status": "LEAN_CLOSED_CONSTRUCTOR",
+      "witness": "GeneralCerfMove.levelIsotopy"
+    },
+    {
+      "obligation_id": "general-index-one-slide",
+      "status": "LEAN_CLOSED_CONSTRUCTOR",
+      "witness": "GeneralCerfMove.oneSlide"
+    },
+    {
+      "obligation_id": "general-index-two-slide",
+      "status": "LEAN_CLOSED_CONSTRUCTOR",
+      "witness": "GeneralCerfMove.twoSlide"
+    },
+    {
+      "obligation_id": "general-index-three-slide",
+      "status": "LEAN_CLOSED_CONSTRUCTOR_AND_SPECIAL_EXCLUSION_RECORDED",
+      "witness": "GeneralCerfMove.threeSlide"
+    },
+    {
+      "obligation_id": "general-zero-one-birth-death",
+      "status": "LEAN_CLOSED_CONSTRUCTORS_AND_SPECIAL_EXCLUSION_RECORDED",
+      "witness": "GeneralCerfMove.zeroOneBirth and zeroOneDeath"
+    },
+    {
+      "obligation_id": "general-one-two-birth-death",
+      "status": "LEAN_CLOSED_CONSTRUCTORS",
+      "witness": "GeneralCerfMove.oneTwoBirth and oneTwoDeath"
+    },
+    {
+      "obligation_id": "general-two-three-birth-death",
+      "status": "LEAN_CLOSED_CONSTRUCTORS",
+      "witness": "GeneralCerfMove.twoThreeBirth and twoThreeDeath"
+    },
+    {
+      "obligation_id": "general-three-four-birth-death",
+      "status": "LEAN_CLOSED_CONSTRUCTORS_AND_SPECIAL_EXCLUSION_RECORDED",
+      "witness": "GeneralCerfMove.threeFourBirth and threeFourDeath"
+    },
+    {
+      "obligation_id": "general-cerf-completeness",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_NOT_LEAN_REPROVED",
+      "witness": "GeneralCerfCompleteness.connected; Gompf-Stipsicz Theorem 4.2.12"
+    },
+    {
+      "obligation_id": "unique-zero-handle-normal-form",
+      "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_CHECK",
+      "witness": "SpecialKirbyPresentation.uniqueZeroHandle; Gompf-Stipsicz Proposition 4.2.13"
+    },
+    {
+      "obligation_id": "unique-four-handle-normal-form",
+      "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_CHECK",
+      "witness": "SpecialKirbyPresentation.uniqueFourHandle; Gompf-Stipsicz Proposition 4.2.13 and duality"
+    },
+    {
+      "obligation_id": "special-ordered-handle-presentation",
+      "status": "MANDATORY_LEAN_FIELD",
+      "witness": "SpecialKirbyPresentation.ordering_witness"
+    },
+    {
+      "obligation_id": "special-presentation-admission",
+      "status": "PINNED_TO_R6_FORMAL_PRESENTATION",
+      "witness": "SpecialKirbyPresentation.formal"
+    },
+    {
+      "obligation_id": "special-table-two-link-refinement",
+      "status": "MANDATORY_SEPARATE_SOURCE_BACKED_INPUT_NOT_DERIVED_IN_LEAN",
+      "witness": "TableTwoLinkCompleteness.tableTwoConnected; Bärenz-Barrett Theorem 3.9 and Table 2"
+    },
+    {
+      "obligation_id": "special-framed-isotopy",
+      "status": "LEAN_CLOSED_CONSTRUCTOR",
+      "witness": "TableTwoMove.framedIsotopy"
+    },
+    {
+      "obligation_id": "special-three-slide-families",
+      "status": "LEAN_CLOSED_CONSTRUCTORS",
+      "witness": "TableTwoMove.oneOverOne, twoOverOne, and twoOverTwo"
+    },
+    {
+      "obligation_id": "special-two-cancellation-families-bidirectional",
+      "status": "LEAN_CLOSED_CONSTRUCTORS",
+      "witness": "oneTwoBirth/death and twoThreeBirth/death"
+    },
+    {
+      "obligation_id": "special-general-move-separation",
+      "status": "LEAN_TYPE_SEPARATION_AND_MUTATION_TESTED",
+      "witness": "TableTwoMove has no zeroOne, threeSlide, or threeFour constructor"
+    },
+    {
+      "obligation_id": "no-arbitrary-topology-move-injection",
+      "status": "LEAN_CLOSED_INDUCTIVE_AND_MUTATION_TESTED",
+      "witness": "TableTwoMove has no fromEquality or arbitrary constructor"
+    },
+    {
+      "obligation_id": "no-evaluator-equality-in-completeness",
+      "status": "LEAN_API_ABSENCE_RUNTIME_SCAN_AND_MUTATION_TESTED",
+      "witness": "TableTwoLinkCompleteness contains only topology movie and source metadata"
+    },
+    {
+      "obligation_id": "per-presentation-h2-model-certificate",
+      "status": "MANDATORY_HASHED_FIELD_AND_RUNTIME_CHECK",
+      "witness": "SpecialKirbyPresentation.h2ModelCertificateHash"
+    },
+    {
+      "obligation_id": "per-move-h2-equivalence",
+      "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_INVERSE_CHECK",
+      "witness": "MarkedH2Transport.homologyEquiv"
+    },
+    {
+      "obligation_id": "derived-character-transport",
+      "status": "LEAN_DERIVED_AND_MUTATION_TESTED",
+      "witness": "MarkedH2Transport.targetCharacter"
+    },
+    {
+      "obligation_id": "local-pairing-preservation",
+      "status": "LEAN_PROVED_AND_RUNTIME_EXHAUSTIVE",
+      "witness": "MarkedH2Transport.pairing_preserved"
+    },
+    {
+      "obligation_id": "typed-movie-composition",
+      "status": "LEAN_PROVED_BY_INDEXED_INDUCTIVE",
+      "witness": "TableTwoMovie.trans"
+    },
+    {
+      "obligation_id": "composite-h2-transport",
+      "status": "LEAN_DERIVED_AND_RUNTIME_RECOMPUTED",
+      "witness": "TableTwoMovie.homologyEquiv and homologyEquiv_trans"
+    },
+    {
+      "obligation_id": "movie-pairing-preservation",
+      "status": "LEAN_PROVED_AND_RUNTIME_EXHAUSTIVE",
+      "witness": "TableTwoMovie.pairing_preserved"
+    },
+    {
+      "obligation_id": "source-capture-honesty",
+      "status": "TERMINAL_WITH_EXPLICIT_CAPTURE_LIMITATION",
+      "witness": "GS locators verified without local book bytes; de Sa is metadata-only; Bärenz-Barrett PDF is byte-pinned"
+    }
+  ],
+  "schema": "twisted-yetter.kirby-completeness-obligation-matrix.v1",
+  "status": "R10_TERMINAL_AS_EXPLICIT_SOURCE_BACKED_TOPOLOGY_BOUNDARY",
+  "trusted_inputs": [
+    {
+      "exact_content": "General Cerf completeness for two ordered relative handle decompositions of one compact smooth pair.",
+      "input_id": "gompf-stipsicz-general-cerf-completeness",
+      "lean_type": "GeneralCerfCompleteness.connected",
+      "not_assumed": "No evaluator value or equality; no five-family reduction."
+    },
+    {
+      "exact_content": "For the admitted special closed four-dimensional link presentations, framed isotopy and the five Bärenz-Barrett Table 2 move families connect presentations.",
+      "input_id": "table-two-link-calculus-refinement",
+      "lean_type": "TableTwoLinkCompleteness.tableTwoConnected",
+      "not_assumed": "No evaluator invariance and no Crane-Yetter identification."
+    }
+  ]
+}
