@@ -1,0 +1,21 @@
+import TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
+
+/-!
+# Kernel axiom audit for integral-character Kirby colours
+
+This audit checks the construction mechanism only. Concrete cycle
+representatives, tensor automorphisms, event interpreters, and graphical move
+compilers remain explicit inputs.
+-/
+
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralTwoHandleCycleModel.handleCoefficients
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralTwoHandleCycleModel.componentExponent_zero
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralTwoHandleCycleModel.componentExponent_add
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralTwoHandleCycleModel.two_handle_component_exponent
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralTwoHandleCycleModel.nonordinary_component_exponent
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.TensorAutomorphismGenerator.scalarPower_zero
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.TensorAutomorphismGenerator.scalarPower_add
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.integralCharacterWeights
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.integral_character_coefficient_formula
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralCharacterBoundPresentationCompiler.toCategoryBound
+#print axioms TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler.IntegralCharacterBoundPresentationCompiler.weights_are_integral_character_weights

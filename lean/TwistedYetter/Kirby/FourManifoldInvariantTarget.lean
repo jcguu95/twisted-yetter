@@ -30,6 +30,7 @@ open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 open TwistedYetter.Kirby.EvaluatorCompiler
+open TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
 open TwistedYetter.Kirby.SourceBoundEvaluatorCompilation
 open TwistedYetter.Kirby.SourceBoundGeometricH2Compilation
 open TwistedYetter.Kirby.SourceBackedHandleChainNaturality
@@ -50,7 +51,9 @@ inductive TargetCondition where
   | sourceBoundGeometricH2CompilerInstance
   | sourceBoundGraphicalMoveCompilerMechanism
   | categoryBoundKirbyColorCompilerMechanism
-  | homologicalKirbyColorWeightsInstance
+  | integralCharacterKirbyColorCompilerMechanism
+  | integralCycleRepresentativeSystemInstance
+  | tensorAutomorphismGeneratorInstance
   | globalFiniteKirbyColorExpansionInstance
   | sourceBoundGraphicalMoveCompilerInstance
   | sourceBoundEvaluatorCompilerInstance
@@ -73,7 +76,9 @@ def requiredTargetConditions : List TargetCondition :=
     .sourceBoundGeometricH2CompilerInstance,
     .sourceBoundGraphicalMoveCompilerMechanism,
     .categoryBoundKirbyColorCompilerMechanism,
-    .homologicalKirbyColorWeightsInstance,
+    .integralCharacterKirbyColorCompilerMechanism,
+    .integralCycleRepresentativeSystemInstance,
+    .tensorAutomorphismGeneratorInstance,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
@@ -93,9 +98,11 @@ colour is represented by a global finite sum of complete labelled traces,
 never by one fake category object. The final route also forces every label to
 be the category's simple-index type, zero-class coefficients to be the
 recorded category weights, strand objects to use the same simple/dual-simple
-data, and framing events to use the graphical algebra's exact twist. The
-nonzero homological coefficients, concrete event interpretation, and exact
-R7/R8/R9 graphical assembly remain open.
+data, and framing events to use the graphical algebra's exact twist. The final
+evaluator route now also derives every nonzero homological coefficient from a
+certified integral two-cycle representative and one tensor automorphism
+scalar. Concrete cycle representatives, a concrete tensor automorphism, event
+interpretation, and exact R7/R8/R9 graphical assembly remain open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -112,28 +119,30 @@ def establishedFoundationConditions : List TargetCondition :=
     .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance,
     .sourceBoundGraphicalMoveCompilerMechanism,
-    .categoryBoundKirbyColorCompilerMechanism
+    .categoryBoundKirbyColorCompilerMechanism,
+    .integralCharacterKirbyColorCompilerMechanism
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
-    .homologicalKirbyColorWeightsInstance,
+    .integralCycleRepresentativeSystemInstance,
+    .tensorAutomorphismGeneratorInstance,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 18 := by
+    requiredTargetConditions.length = 20 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 14 := by
+    establishedFoundationConditions.length = 15 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 4 := by
+    openConstructionConditions.length = 5 := by
   rfl
 
 /--
@@ -287,18 +296,43 @@ theorem category_bound_kirby_color_compiler_mechanism_not_open :
   simp [openConstructionConditions]
 
 /--
-The actual nonzero-class coefficients and their marking certificate have not
-yet been constructed. The zero-class specialization is already mandatory.
+The final evaluator route derives all homological coefficients from an
+integral cycle representative and a tensor automorphism; it no longer accepts
+an arbitrary coefficient function.
 -/
-theorem homological_kirby_color_weights_instance_open :
-    TargetCondition.homologicalKirbyColorWeightsInstance ∈
+theorem integral_character_kirby_color_compiler_mechanism_established :
+    TargetCondition.integralCharacterKirbyColorCompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The integral-character compiler mechanism cannot remain in the open ledger. -/
+theorem integral_character_kirby_color_compiler_mechanism_not_open :
+    TargetCondition.integralCharacterKirbyColorCompilerMechanism ∉
       openConstructionConditions := by
   simp [openConstructionConditions]
 
 /--
-The actual finite family, weights, and event interpretation for each
-presentation and marked class have not yet been constructed. This now means
-a category-bound event compiler, not the older generic expansion.
+Concrete source-backed two-cycle representatives, tied to every admitted
+presentation's actual degree-two handle basis, have not yet been constructed.
+-/
+theorem integral_cycle_representative_system_instance_open :
+    TargetCondition.integralCycleRepresentativeSystemInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+The concrete monoidal natural automorphism and its verified scalar action on
+the admitted simple objects have not yet been constructed.
+-/
+theorem tensor_automorphism_generator_instance_open :
+    TargetCondition.tensorAutomorphismGeneratorInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+The actual finite family and event interpretation for each presentation and
+marked class have not yet been constructed. This now means an
+integral-character-bound event compiler, not the older generic expansion.
 -/
 theorem global_finite_kirby_color_expansion_instance_open :
     TargetCondition.globalFiniteKirbyColorExpansionInstance ∈
@@ -306,8 +340,9 @@ theorem global_finite_kirby_color_expansion_instance_open :
   simp [openConstructionConditions]
 
 /--
-The generic compiler is established, but the exact category-bound graphical
-programs for every source recipe have not yet been constructed.
+The generic compiler is established, but the exact
+integral-character-bound graphical programs for every source recipe have not
+yet been constructed.
 -/
 theorem source_bound_graphical_move_compiler_instance_open :
     TargetCondition.sourceBoundGraphicalMoveCompilerInstance ∈
@@ -378,12 +413,14 @@ marked four-manifold invariant.
 This structure does not accept an arbitrary compact evaluator prescription,
 an arbitrary decorated-presentation function, or an already-complete marked
 presentation system. Its evaluator field is the source-bound exhaustive
-eight-case compiler. Its presentation compiler is category-bound: every
-formal Kirby-colour term uses one global simple labeling, zero marked class
-uses the category's recorded ordinary weights, strand objects use the same
-simple/dual-simple data, framing events use the same accepted twist, each
+eight-case compiler. Its presentation compiler is integral-character-bound:
+every formal Kirby-colour term uses one global simple labeling; each exponent
+is read from a certified integral two-cycle representative; each scalar is the
+action of one tensor automorphism on the recorded simple; zero marked class
+uses the category's ordinary weights; strand objects use the same
+simple/dual-simple data; framing events use the same accepted twist; each
 complete labelled diagram is compiled event-by-event from the typed raw
-execution trace, and only then are the terms summed. Its marked system is
+execution trace; and only then are the terms summed. Its marked system is
 derived from local chain transport by movie induction.
 
 An arbitrary inhabitant is still only a conditional theorem input, not
