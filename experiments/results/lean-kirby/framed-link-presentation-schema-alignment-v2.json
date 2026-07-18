@@ -1,0 +1,180 @@
+{
+  "admission": {
+    "ctl_manifest_written": false,
+    "ctl_theorem_claim_admitted": false,
+    "status": "REPO_LOCAL_ENGINEERING_CHECKPOINT_ONLY"
+  },
+  "argv": [
+    "experiments/scripts/build_presentation_schema_alignment_v2.py"
+  ],
+  "checks": {
+    "lean_kernel_regressions": {
+      "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES",
+      "theorem_count": 7,
+      "theorems": [
+        "formal_identity_is_content_hash",
+        "provenance_projection_is_source_snapshot_hash",
+        "adjacent_crossing_swaps_boundary_order",
+        "nonadjacent_crossing_rejected",
+        "same_orientation_death_rejected",
+        "planar_reordering_rejected",
+        "unknown_json_field_rejected"
+      ]
+    },
+    "lean_runtime_replay": {
+      "event_count": 12,
+      "fail_closed_mutation_count": 2,
+      "slice_count": 13,
+      "status": "PASS"
+    },
+    "python_and_artifact_tests": {
+      "status": "PASS",
+      "test_count": 15
+    },
+    "shared_semantics": {
+      "adjacent_crossing_swaps_boundary": true,
+      "birth_insert_at": true,
+      "blackboard_writhe_recomputed": true,
+      "coupon_requires_contiguous_window": true,
+      "death_requires_adjacency": true,
+      "death_requires_opposite_orientations": true,
+      "declared_slices_replayed": true,
+      "exact_object_keys": true,
+      "formal_identity_uses_content_hash": true,
+      "planar_isotopy_preserves_boundary_order": true,
+      "provenance_hash_is_not_formal_identity": true,
+      "strict_snake_case_codec": true
+    }
+  },
+  "content_hash": "sha256:2c328820d6243994ceefc7796ba06ca215966d4e45fef4ef5c8fe3df6fd55cb3",
+  "elapsed_seconds": 7.290135,
+  "explicit_nonclaims": [
+    "This artifact does not prove Kirby-move completeness.",
+    "This artifact does not construct the eight-case evaluator compiler.",
+    "This artifact does not construct geometric H2 transport.",
+    "This artifact does not establish a four-manifold invariant.",
+    "Lean does not recompute canonical SHA-256 inside the kernel.",
+    "This artifact does not identify the construction with Crane-Yetter.",
+    "This artifact does not admit a CTL theorem claim."
+  ],
+  "finished_at_utc": "2026-07-18T18:12:43Z",
+  "generator_script": "experiments/scripts/build_presentation_schema_alignment_v2.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "bd8d5c4abee208c82e3e05acd6e3c06fff331ed6",
+    "dirty_before_generation": false
+  },
+  "inputs": {
+    "fixture": {
+      "component_count": 3,
+      "content_hash": "sha256:42eef430c68ffdc02d687958e0e1d702c3cee7ba3638cc15b664985c8e6779aa",
+      "event_count": 12,
+      "file_sha256": "sha256:412692b0c3d795b41fa264cfcf837770f25446bed24947334ce0a8b6cb46b1ee",
+      "path": "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json",
+      "slice_count": 13,
+      "source_snapshot_hash": "sha256:bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json": {
+        "bytes": 5288,
+        "sha256": "sha256:412692b0c3d795b41fa264cfcf837770f25446bed24947334ce0a8b6cb46b1ee"
+      },
+      "experiments/scripts/build_presentation_schema_alignment_v2.py": {
+        "bytes": 10623,
+        "sha256": "sha256:630698b94fec9df3d95e4f3e91fe328a7c3af5f5d8732f08c25184ab62f53139"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/PresentationArtifactReplay.lean": {
+        "bytes": 2778,
+        "sha256": "sha256:cfb69e9966df38379b848ef5dceb87ca2ce86ed28337908ce417daef2e029eb7"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 1480,
+        "sha256": "sha256:eb088b5b38c48a89af43b0aa1b3bc91db1e105333dd0cb4f522e825553b4b64a"
+      },
+      "lean/TwistedYetter/Kirby/Presentation.lean": {
+        "bytes": 28283,
+        "sha256": "sha256:02937e33b37de4b61da2d15a4af7eef6f2f2736594b0ab0e8e0f9e4f4b603df5"
+      },
+      "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean": {
+        "bytes": 2366,
+        "sha256": "sha256:52d03e993ca1d5239551f285bdfdd8aee043c52bac90405cc772049f514bb2b9"
+      },
+      "lean/TwistedYetter/Kirby/PresentationSchemaRegressionAxiomAudit.lean": {
+        "bytes": 801,
+        "sha256": "sha256:e9931ba80dee4a9ca181d68fa8a43abd3e68a98db3412a7a01f15d25a29a8cd3"
+      },
+      "scripts/lean_presentation_artifact_replay.sh": {
+        "bytes": 950,
+        "sha256": "sha256:7b28f99b8357a1e85b8f1663c5a28edd44e0a5219ed0dfc5d50713db0c0c07cf"
+      },
+      "src/twisted_yetter/kirby_presentation_v1.py": {
+        "bytes": 20627,
+        "sha256": "sha256:7ba5fa4e653977647ab8928382de3da92f00ff811b1e204bef1e3afef8ac33f3"
+      },
+      "tests/test_framed_link_presentation_syntax_v1.py": {
+        "bytes": 3753,
+        "sha256": "sha256:f82029786b74e576737f47b5f689623a6662f462992c61131fa0831bd011d11d"
+      },
+      "tests/test_kirby_presentation_v1.py": {
+        "bytes": 4597,
+        "sha256": "sha256:2d426cd8b0376419db637231e2c2034e34c180b1fec3ebc4417b046162b558a5"
+      }
+    }
+  },
+  "mathematical_status": "COMBINATORIAL_INPUT_ALIGNMENT_ESTABLISHED_FOUR_MANIFOLD_INVARIANCE_NOT_ESTABLISHED",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_presentation_schema_alignment_v2.py",
+  "schema": "twisted-yetter.framed-link-presentation-schema-alignment.v2",
+  "silent_failure_corrections": [
+    {
+      "current_guard": "Lean now has an exact-key manual parser/serializer and round-trips the repository fixture bytes.",
+      "old_risk": "Lean's derived JSON codec used a shape incompatible with the repository's snake-case Python artifact schema."
+    },
+    {
+      "current_guard": "Both validators now require adjacency and swap the pair.",
+      "old_risk": "Python crossings swapped adjacent strands while Lean left the active boundary unchanged."
+    },
+    {
+      "current_guard": "FormalPresentation.pinnedSourceHash now projects contentHash; provenance has a separate projection.",
+      "old_risk": "Lean pinned source_snapshot_hash, which is provenance, instead of the presentation content_hash."
+    },
+    {
+      "current_guard": "Formal admission replays all events, compares all slices, and recomputes self-crossing/framing-twist writhe.",
+      "old_risk": "Lean did not replay declared slices or recompute writhe."
+    }
+  ],
+  "started_at_utc": "2026-07-18T18:12:36Z",
+  "status": "PASS_PYTHON_LEAN_PRESENTATION_SCHEMA_AND_EXECUTION_ALIGNED",
+  "target_impact": {
+    "four_manifold_invariant": "NOT_YET_ESTABLISHED",
+    "presentation_input_alignment": "ESTABLISHED",
+    "source_bound_evaluator_compiler_instance": "OPEN",
+    "source_bound_geometric_h2_compiler_instance": "OPEN",
+    "source_bound_local_move_recipes": "ESTABLISHED_MECHANISM"
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  },
+  "trust_boundary": {
+    "canonical_sha256_recomputed_by": "src/twisted_yetter/kirby_presentation_v1.py",
+    "lean_checks": "strict schema, lowercase sha256 shape, event execution, declared slices, writhe, and the pinned hash string",
+    "lean_kernel_recomputes_sha256": false,
+    "status": "CRYPTOGRAPHIC_CONTENT_HASH_VALIDATION_IS_AN_EXPLICIT_EXTERNAL_ADMISSION_GATE"
+  }
+}
