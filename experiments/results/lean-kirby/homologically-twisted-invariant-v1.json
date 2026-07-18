@@ -1,0 +1,2903 @@
+{
+  "argv": [
+    "experiments/scripts/build_homologically_twisted_invariant_v1.py"
+  ],
+  "checks": {
+    "contract": {
+      "constructor_count": 8,
+      "constructors": [
+        "framedIsotopy",
+        "oneOverOne",
+        "twoOverOne",
+        "twoOverTwo",
+        "oneTwoBirth",
+        "oneTwoDeath",
+        "twoThreeBirth",
+        "twoThreeDeath"
+      ],
+      "forbidden_equality_or_identification_apis": [
+        "fromEquality",
+        "normalizedEquality",
+        "finalInvariant",
+        "craneYetterIdentification"
+      ],
+      "mandatory_fields_and_theorems": [
+        "single_snapshot_witness",
+        "decoration_representation_witness",
+        "raw_numerator_sound",
+        "graphical_kind_sound",
+        "graphical_orientation_sound",
+        "graphical_move_id_sound",
+        "graphical_source_hash_sound",
+        "graphical_target_hash_sound",
+        "marked_transport_sound",
+        "movie_invariant",
+        "presentation_independent",
+        "same_pair_value",
+        "homologically_twisted_kirby_invariant_established"
+      ],
+      "ordinary_slide_kind_binding": true,
+      "slide_orientation_and_hash_binding": true,
+      "status": "PASS_CLOSED_EIGHT_CONSTRUCTOR_R11_BRIDGE"
+    },
+    "predecessor_binding": {
+      "predecessor_count": 4,
+      "status": "PASS_R7_R8_R9_R10_HASH_BOUND"
+    },
+    "runtime_denominator": {
+      "alpha_count_per_move": 4,
+      "checked_move_alpha_count": 32,
+      "move_count": 8,
+      "status": "PASS_EXACT_ALL_ALPHA_ALL_DIRECTED_MOVES"
+    },
+    "scoped_pytest": {
+      "files": [
+        "tests/test_homologically_twisted_invariant_v1.py",
+        "tests/test_kirby_completeness_v1.py",
+        "tests/test_kirby_completeness_artifact_v1.py",
+        "tests/test_kirby_cancellation_v1.py",
+        "tests/test_kirby_cancellation_artifact_v1.py",
+        "tests/test_kirby_handle_moves_v1.py",
+        "tests/test_kirby_handle_moves_artifact_v1.py",
+        "tests/test_framed_link_presentation_independence_v1.py"
+      ],
+      "output": "........................................................................ [ 94%]\n....                                                                     [100%]\n76 passed in 1.17s",
+      "passed_count": 76,
+      "status": "PASS"
+    },
+    "source_scope_honesty": {
+      "arbitrary_category_result_is_conditional": true,
+      "status": "PASS_YETTER_SCOPE_NOT_UPGRADED",
+      "yetter_pdf_hash_recorded": true,
+      "yetter_pdf_repo_local": false,
+      "yetter_theorem_11_used_as_general_identification": false
+    }
+  },
+  "content_hash": "sha256:19575d5602f95b55011d4690c68d6333ed6ced74a94dbadcf0e111913f3b7da8",
+  "elapsed_milliseconds": 57409,
+  "explicit_non_claims": [
+    "R11 does not identify the constructed Kirby invariant with the Crane-Yetter state sum.",
+    "R11 does not re-prove the category identities imported by R7-R9 from foundational ribbon-fusion axioms.",
+    "R11 does not attribute an arbitrary-coefficient or arbitrary-category Kirby formula to Yetter.",
+    "R11 does not import or validate a concrete category snapshot or numerical computation artifact; that is R12.",
+    "R11 does not prove Pachner-move invariance of a triangulated state sum.",
+    "R11 is restricted to the exact R10 closed, connected, smooth, oriented four-manifold and special-presentation scope."
+  ],
+  "finished_at_utc": "2026-07-18T05:08:01Z",
+  "generator_script": "experiments/scripts/build_homologically_twisted_invariant_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "30f397f9e7e90bdb842751bffc52a9aec8fea480",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "obligation_count": 38,
+      "path": "experiments/inputs/lean-kirby/homologically-twisted-invariant-obligation-matrix-v1.json",
+      "sha256": "c64a70efc189aff746e309c3a97b25289a2ef3200dacfeb5fc18d0146480b57a",
+      "trusted_input_count": 4
+    },
+    "predecessor_artifacts": {
+      "r10_completeness": {
+        "content_hash": "sha256:9c0805c9f0152750c8ee5e3ddd78995ea56fdb61474606dcd5658c544b5fdb45",
+        "path": "experiments/results/lean-kirby/kirby-completeness-v1.json",
+        "sha256": "a70f7b66b20f4c2fa198e887584db57352527429281c46e05a46b53fb61eb6e0",
+        "source_commit": "d0683d91998211e444fdb39f85102a9a663b3da3",
+        "status": "PASS_KIRBY_CERF_TOPOLOGY_BOUNDARY"
+      },
+      "r7_framed_link_presentation": {
+        "content_hash": "sha256:3a92d8174d834c1707c90b3a7cc8394584b4d3415164cf832ea01f1429d7c385",
+        "path": "experiments/results/lean-kirby/framed-link-presentation-independence-v1.json",
+        "sha256": "18822fe7b1d26899dc72b6ebf23a9251fb0441281ed81997283670d5aee3e9cc",
+        "source_commit": "5899c54dd455f74283bb03646a33f56193b5c0f8",
+        "status": "PASS_FRAMED_LINK_EVALUATOR_PRESENTATION_INDEPENDENCE"
+      },
+      "r8_handle_moves": {
+        "content_hash": "sha256:40d02f3b06a5dd7803a227a6ba14df727b56c58df7da6fdf6a93b8568de5681b",
+        "path": "experiments/results/lean-kirby/kirby-handle-moves-v1.json",
+        "sha256": "db58721b674394b69742fbb9618afc83328a0d3089ae7c7b77f3798ea73a239d",
+        "source_commit": "02cc43b52a937daf0fba20a1e4652d40b35a8b21",
+        "status": "PASS_KIRBY_HANDLE_SLIDES"
+      },
+      "r9_cancellation": {
+        "content_hash": "sha256:b3683789e585a7183ad9e88ac8063c792e4314cd02c09dc5d10a641f83d75cad",
+        "path": "experiments/results/lean-kirby/kirby-cancellation-v1.json",
+        "sha256": "43ea028c86e02a4006f6d8ae29cedc97007ccca0200047414dc8d2cee462ee45",
+        "source_commit": "5bb5b770b03ab08eb63e7e7e06f59bc41ac60427",
+        "status": "PASS_ALL_BARENZ_BARRETT_TABLE2_LOCAL_KIRBY_MOVES"
+      }
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json",
+      "reference_count": 5,
+      "sha256": "4a10bf855aff99341aa9d6c5e5aa9a0861cf2416c35b8117b913f6d8207f3aff"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/homologically-twisted-invariant-obligation-matrix-v1.json": {
+        "bytes": 9927,
+        "sha256": "c64a70efc189aff746e309c3a97b25289a2ef3200dacfeb5fc18d0146480b57a"
+      },
+      "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json": {
+        "bytes": 3627,
+        "sha256": "4a10bf855aff99341aa9d6c5e5aa9a0861cf2416c35b8117b913f6d8207f3aff"
+      },
+      "experiments/scripts/build_homologically_twisted_invariant_v1.py": {
+        "bytes": 18783,
+        "sha256": "c185080277a95d110addee2b060438369ffe9a405a38625688abd7b6cd418f7f"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryNormalizedEqualityAsR11Step.lean": {
+        "bytes": 145,
+        "sha256": "745d0a30b47cf478050e2dec81821230a2522f756ce2d8cc14d202cb15b29f5c"
+      },
+      "lean/Mutations/CraneYetterIdentificationInjection.lean": {
+        "bytes": 141,
+        "sha256": "fe893262b52ca34addd063c60c5c85be1dfe2539a1c5d0c1aa1aa013bae541bb"
+      },
+      "lean/Mutations/DirectFinalInvariantInjection.lean": {
+        "bytes": 165,
+        "sha256": "05da267bb6d20f5d1bd394b77fa50dfccc49a9e154b78d327056029d312ddf55"
+      },
+      "lean/Mutations/HandwrittenR11TargetAlpha.lean": {
+        "bytes": 138,
+        "sha256": "47e473870d42f67d5c72e6a93418550ebee0111d3aebca04e70bc7dc66cb2e03"
+      },
+      "lean/Mutations/MissingR11DecorationWitness.lean": {
+        "bytes": 2539,
+        "sha256": "086a869fb5d9e94fb8f178859cc878de805c794272db7137f47d6f2eaae24a36"
+      },
+      "lean/Mutations/MissingR11LocalBindingHashes.lean": {
+        "bytes": 947,
+        "sha256": "0c0a06543303b22e963e85c060377638358dfb1ca447df39a5ac7bf5c2d64cf2"
+      },
+      "lean/Mutations/MissingR11MarkedTransportSound.lean": {
+        "bytes": 1443,
+        "sha256": "d3726f1cad6588cc4e0a42567d44802e1db8605fe39ec541e709595e790b7450"
+      },
+      "lean/Mutations/MissingR11SingleSnapshotCoherence.lean": {
+        "bytes": 2114,
+        "sha256": "8df882cde7024210e50a2f61a569bb0a5ea2f20388148a6362428edf247f18df"
+      },
+      "lean/Mutations/MissingR11SourceScopeCaveat.lean": {
+        "bytes": 1854,
+        "sha256": "c30a40be5801ce119d6e523c6088b40295853c84abc826d24f8dc90389c8251d"
+      },
+      "lean/Mutations/WrongR11OrdinarySlideKind.lean": {
+        "bytes": 676,
+        "sha256": "cc306d0b731007efb2d5504851f46f2035fdbd57fef34a220be3fd8a6282c2ea"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 996,
+        "sha256": "741d337bce8225802eb49aacacf81f087c048c5f2faa67fc77d498d203fddee6"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 7781,
+        "sha256": "86f1c57e665ac138608244b37d0051ca59a4ea2f59fc44f3f6caa97707fb7dc1"
+      },
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean": {
+        "bytes": 29371,
+        "sha256": "09a823f896dba21c5d1f16b196dc31d75156be7e55046de8f968d00f1acad3cf"
+      },
+      "scripts/lean_homologically_twisted_invariant_mutation_tests.sh": {
+        "bytes": 2530,
+        "sha256": "98b98916b96a47dc38c7b1e27e874ebf31b6ea076d24f9dde55e7760fa10f68b"
+      },
+      "src/twisted_yetter/homologically_twisted_invariant_v1.py": {
+        "bytes": 29769,
+        "sha256": "cf112fd9507672019122cae1d1f40ed918f2df8d8bb1df0d20f4cf68cc2909ea"
+      },
+      "tests/test_homologically_twisted_invariant_artifact_v1.py": {
+        "bytes": 6705,
+        "sha256": "3bdd745c0d6bcce436fbedbc979477d1e6fe1e08c29698a7c6fe7f4097effb5f"
+      },
+      "tests/test_homologically_twisted_invariant_v1.py": {
+        "bytes": 9562,
+        "sha256": "5300dee462af69cf4683384331daa3f9b899b0b3bd0b51be76e79c81daf0a522"
+      }
+    },
+    "yetter_primary_source_capture": {
+      "arxiv_id": "hep-th/9311082v1",
+      "bytes": 112687,
+      "pages": 6,
+      "repo_local_bytes": false,
+      "scope_caveat": "Definition 10 and Theorem 11 concern a simply-connected four-manifold, Z2 marking, and the Uq(sl2) Kauffman-bracket setting. They do not state the arbitrary-category conditional Kirby theorem formalized in R11.",
+      "sha256": "e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b",
+      "status": "HASH_AND_LOCATORS_RECORDED_BYTES_NOT_REPO_LOCAL"
+    }
+  },
+  "invariant_contract": {
+    "bare_normalized_equality_constructor": false,
+    "category_contract": "AdmissibleKirbyCategory",
+    "crane_yetter_identification_field": false,
+    "handwritten_target_alpha_field": false,
+    "local_bridge": "EvaluatedTableTwoStep",
+    "local_directed_constructor_count": 8,
+    "local_proof_object_kinds": {
+      "framed_isotopy": "R7_GeneratedIsotopy",
+      "one_over_one": "R8_OrdinaryHandleSlide.oneOverOne",
+      "one_two_birth": "R9_OneTwoLocalCalculation.birth_direction",
+      "one_two_death": "R9_OneTwoLocalCalculation.death_direction",
+      "two_over_one": "R8_OrdinaryHandleSlide.twoOverOne",
+      "two_over_two": "R8_TwoHandleOverTwoSlide.twoOverTwo",
+      "two_three_birth": "R9_TwoThreeLocalCalculation.birth_direction",
+      "two_three_death": "R9_TwoThreeLocalCalculation.death_direction"
+    },
+    "marked_pair_system": "MarkedPairPresentationSystem",
+    "prescription": "HomologicallyTwistedKirbyPrescription",
+    "presentation_contract": "DecoratedKirbyPresentation",
+    "status": "PASS_PRESENTATION_INDEPENDENT_PAIR_VALUE",
+    "terminal_theorem": "MarkedPairPresentationSystem.homologically_twisted_kirby_invariant_established"
+  },
+  "lean_certificate": {
+    "audited_declaration_count": 89,
+    "axiom_audit": {
+      "output": "'TwistedYetter.Kirby.CouponNaturality.slide_through_positive_crossing' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_negative_crossing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cup' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cap' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cup' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cap' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.Context.eval_plug_congr' does not depend on any axioms\n'TwistedYetter.Kirby.CategoricalTangle.positiveCrossingMove_sound' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.negativeCrossingMove_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalMovie.Movie.sound' does not depend on any axioms\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedFunctorSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_weightedSum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.evalContextLinearMap_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.insertIdentity' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.mateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.dualMateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingCategoryData.equation_3_1_9_to_3_1_11' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_5' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_6' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_7_to_3_1_8' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.core_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.equation_3_1_2' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.liftExterior_eval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.validation_witness' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.pinned_source_hash_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.identityBefore_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.identityAfter_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.compAssoc_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.tensorInterchange_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIIPositive_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIINegative_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIII_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.rightPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.rightDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.positiveMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.negativeMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cut_independence_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cutMove' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.TaggedMove.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.GeneratedIsotopy.eval_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedLinkPresentationCompleteness.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.transportCharacter_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.HomologicalTransport.pairing_preserved' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.liftOrdinaryExterior_eval' depends on axioms: [propext]\n'TwistedYetter.Kirby.KirbyHandleMoves.ordinary_exterior_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.TwoHandleOverTwoSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ne_zero' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addOneTwo' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addTwoThree' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyZero' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyFour' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.CancellationHomologyTransport.pairing_preserved' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.homologyTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv_trans' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoLinkCompleteness.markedTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_diagram_eval' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.move_invariant' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.targetClass_trans' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.HomologicallyTwistedKirbyPrescription.movie_invariant' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.same_pair_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.homologically_twisted_kirby_invariant_established' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]",
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "build_order": [
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+      "lean/TwistedYetter.lean"
+    ],
+    "build_output": "",
+    "mutation_count": 10,
+    "mutation_rejections": [
+      "PASS expected rejection: lean/Mutations/ArbitraryNormalizedEqualityAsR11Step.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.r11StepFromNormalizedEquality`]",
+      "PASS expected rejection: lean/Mutations/DirectFinalInvariantInjection.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.finalInvariant`]",
+      "PASS expected rejection: lean/Mutations/CraneYetterIdentificationInjection.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.craneYetterIdentification`]",
+      "PASS expected rejection: lean/Mutations/HandwrittenR11TargetAlpha.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.handwrittenTargetAlpha`]",
+      "PASS expected rejection: lean/Mutations/MissingR11SingleSnapshotCoherence.lean [diagnostic: Fields missing: `single_snapshot_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingR11DecorationWitness.lean [diagnostic: Fields missing: `decoration_representation_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingR11LocalBindingHashes.lean [diagnostic: Fields missing: `moveId`, `move_id_sound`, `sourcePresentationHash`, `source_hash_sound`, `targetPresentationHash`, `target_hash_sound`]",
+      "PASS expected rejection: lean/Mutations/WrongR11OrdinarySlideKind.lean [diagnostic: SlideKind.oneOverOne]",
+      "PASS expected rejection: lean/Mutations/MissingR11MarkedTransportSound.lean [diagnostic: Fields missing: `marked_transport_sound`]",
+      "PASS expected rejection: lean/Mutations/MissingR11SourceScopeCaveat.lean [diagnostic: Fields missing: `sourceScopeCaveat`]"
+    ],
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "status": "PASS_LEAN_KERNEL_AND_NEGATIVE_MUTATIONS"
+  },
+  "mathematical_status": "HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT_ESTABLISHED_UNDER_LISTED_AXIOMS",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_homologically_twisted_invariant_v1.py",
+  "roadmap_status": "R11_TERMINAL_R12_NOT_STARTED",
+  "runtime_certificate": {
+    "category": {
+      "category_snapshot_hash": "sha256:b57342819b976cdfc071c2a13197bfe1de92f9727ce02fa534724d386add8f20",
+      "coefficient_field": "Q-exact-runtime-fixture",
+      "coherence_certificate_hash": "sha256:117bf045c8a99f753284f9ea0990cff4bfbc320b473925241b93053ec27384f2",
+      "dimension_profile": {
+        "c_dimension": 2,
+        "d_dimension": 3,
+        "transparent_dimension": 5
+      },
+      "scalarization_matches_ground_field": true,
+      "single_snapshot_coherent": true
+    },
+    "claim_boundary": {
+      "explicit_non_claims": [
+        "This fixture does not identify the Kirby invariant with Crane-Yetter.",
+        "This fixture does not import a concrete category snapshot.",
+        "This fixture does not validate a numerical experiment artifact.",
+        "This fixture does not replace the Lean proof."
+      ],
+      "mathematical_status": "HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT_ESTABLISHED_UNDER_LISTED_AXIOMS",
+      "status": "R11_RUNTIME_INTEGRATION_ONLY_NOT_A_CATEGORY_IMPORT"
+    },
+    "content_hash": "sha256:a08805a763e56bd5a469534c0f00b986eac0c99c5e84b7b7c6315e480a3b6036",
+    "marked_pair_system": {
+      "cases": [
+        {
+          "chosen_coordinate": [
+            0,
+            0
+          ],
+          "chosen_value": {
+            "denominator": 450,
+            "numerator": 101
+          },
+          "geometric_alpha": [
+            0,
+            0
+          ],
+          "target_coordinate_derived": [
+            0,
+            0
+          ],
+          "target_value": {
+            "denominator": 450,
+            "numerator": 101
+          }
+        },
+        {
+          "chosen_coordinate": [
+            1,
+            0
+          ],
+          "chosen_value": {
+            "denominator": 25,
+            "numerator": 6
+          },
+          "geometric_alpha": [
+            1,
+            0
+          ],
+          "target_coordinate_derived": [
+            1,
+            1
+          ],
+          "target_value": {
+            "denominator": 25,
+            "numerator": 6
+          }
+        },
+        {
+          "chosen_coordinate": [
+            0,
+            1
+          ],
+          "chosen_value": {
+            "denominator": 90,
+            "numerator": 23
+          },
+          "geometric_alpha": [
+            0,
+            1
+          ],
+          "target_coordinate_derived": [
+            0,
+            1
+          ],
+          "target_value": {
+            "denominator": 90,
+            "numerator": 23
+          }
+        },
+        {
+          "chosen_coordinate": [
+            1,
+            1
+          ],
+          "chosen_value": {
+            "denominator": 225,
+            "numerator": 61
+          },
+          "geometric_alpha": [
+            1,
+            1
+          ],
+          "target_coordinate_derived": [
+            1,
+            0
+          ],
+          "target_value": {
+            "denominator": 225,
+            "numerator": 61
+          }
+        }
+      ],
+      "geometric_alpha_count": 4,
+      "marked_transport_is_derived": true,
+      "status": "PASS_CHOSEN_AND_TARGET_REALIZATIONS_ALL_ALPHA",
+      "uses_exact_r10_completeness_movie": true
+    },
+    "movie_result": {
+      "alpha_count_per_step": 4,
+      "checked_step_alpha_count": 32,
+      "composite_h2_matrix_mod2": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "directed_constructor_coverage": [
+        "framed_isotopy",
+        "one_over_one",
+        "two_over_one",
+        "two_over_two",
+        "one_two_birth",
+        "one_two_death",
+        "two_three_birth",
+        "two_three_death"
+      ],
+      "status": "PASS_MOVIE_INVARIANCE_EXACT_ALL_ALPHA",
+      "step_count": 8
+    },
+    "runtime_id": "r11-eight-move-all-alpha-exact-fixture",
+    "schema": "twisted-yetter.homologically-twisted-kirby-runtime.v1",
+    "steps": [
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:3e0ef0a661d25d91c4d168f74e779594748b12ea7903683f27293e87805d100d",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-00-framed_isotopy",
+          "proof_object_kind": "R7_GeneratedIsotopy",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+          "target_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488"
+        },
+        "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-00-framed_isotopy",
+        "step_index": 0,
+        "target_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+        "topology_kind": "framed_isotopy",
+        "topology_orientation": "not_applicable"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:c97fd2f6311f42779e19aae2a74f0f8ab0bd0b024a14cc58b57bed2ab802193d",
+          "graphical_orientation": "positive",
+          "graphical_slide_kind": "one_over_one",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-01-one_over_one",
+          "proof_object_kind": "R8_OrdinaryHandleSlide.oneOverOne",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+          "target_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778"
+        },
+        "source_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-01-one_over_one",
+        "step_index": 1,
+        "target_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+        "topology_kind": "one_over_one",
+        "topology_orientation": "positive"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:291ea5c3f07dd86f5e00f6de84758dc42fdb8aac5ed2e35578bdfb4a62584463",
+          "graphical_orientation": "negative",
+          "graphical_slide_kind": "two_over_one",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-02-two_over_one",
+          "proof_object_kind": "R8_OrdinaryHandleSlide.twoOverOne",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+          "target_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae"
+        },
+        "source_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-02-two_over_one",
+        "step_index": 2,
+        "target_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+        "topology_kind": "two_over_one",
+        "topology_orientation": "negative"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:318f535aa80c64b595a1f3b1177f82f445ad39b98103d1e76d3cc0c4186c87fe",
+          "graphical_orientation": "positive",
+          "graphical_slide_kind": "two_over_two",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-03-two_over_two",
+          "proof_object_kind": "R8_TwoHandleOverTwoSlide.twoOverTwo",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+          "target_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a"
+        },
+        "source_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-03-two_over_two",
+        "step_index": 3,
+        "target_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+        "topology_kind": "two_over_two",
+        "topology_orientation": "positive"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1515
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1830
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1725
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1620
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:fa704f73addd248348b6fb6abedbe5efab0e40280cb7552d65a221a5a8ae6bbb",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-04-one_two_birth",
+          "proof_object_kind": "R9_OneTwoLocalCalculation.birth_direction",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+          "target_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c"
+        },
+        "source_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-04-one_two_birth",
+        "step_index": 4,
+        "target_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+        "topology_kind": "one_two_birth",
+        "topology_orientation": "not_applicable"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1515
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1830
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1620
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 6750
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 3,
+                "h2": 4,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 1725
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:db3fc7e89e20813a168461feba97b569da1e56507e0830851374f0e796f22e19",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-05-one_two_death",
+          "proof_object_kind": "R9_OneTwoLocalCalculation.death_direction",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+          "target_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a"
+        },
+        "source_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-05-one_two_death",
+        "step_index": 5,
+        "target_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+        "topology_kind": "one_two_death",
+        "topology_orientation": "not_applicable"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 202
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 244
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 230
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 216
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:b725813f5488b17a05acd75b790a245c093c216afaeb051b6b6d8751c19953c1",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-06-two_three_birth",
+          "proof_object_kind": "R9_TwoThreeLocalCalculation.birth_direction",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+          "target_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0"
+        },
+        "source_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-06-two_three_birth",
+        "step_index": 6,
+        "target_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+        "topology_kind": "two_three_birth",
+        "topology_orientation": "not_applicable"
+      },
+      {
+        "alpha_cases": [
+          {
+            "source_alpha": [
+              0,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 202
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 450,
+                "numerator": 101
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 101
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              0
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 216
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 25,
+                "numerator": 6
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 108
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              0,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 230
+              }
+            },
+            "target_alpha_derived": [
+              0,
+              1
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 90,
+                "numerator": 23
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 115
+              }
+            }
+          },
+          {
+            "source_alpha": [
+              1,
+              1
+            ],
+            "source_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 900
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 4,
+                "h3": 3,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 244
+              }
+            },
+            "target_alpha_derived": [
+              1,
+              0
+            ],
+            "target_state": {
+              "denominator": {
+                "denominator": 1,
+                "numerator": 450
+              },
+              "handle_counts": {
+                "h0": 1,
+                "h1": 2,
+                "h2": 3,
+                "h3": 2,
+                "h4": 1
+              },
+              "normalized_value": {
+                "denominator": 225,
+                "numerator": 61
+              },
+              "raw_numerator": {
+                "denominator": 1,
+                "numerator": 122
+              }
+            }
+          }
+        ],
+        "local_proof_binding": {
+          "graphical_certificate_hash": "sha256:43f1e611d52599412f4c70048f5b6067f971374279e2ebe08923496f821a16fa",
+          "move_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-07-two_three_death",
+          "proof_object_kind": "R9_TwoThreeLocalCalculation.death_direction",
+          "realizes_exact_topology_move": true,
+          "source_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+          "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52"
+        },
+        "source_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+        "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-07-two_three_death",
+        "step_index": 7,
+        "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52",
+        "topology_kind": "two_three_death",
+        "topology_orientation": "not_applicable"
+      }
+    ],
+    "topology_movie": {
+      "content_hash": "sha256:055ff74e68bdd1b07fd0898a635777aa98f639652a3b43e527e0af11c86cf946",
+      "fixture": {
+        "claim_boundary": {
+          "explicit_non_claims": [
+            "R10 does not re-prove Cerf theory in Lean.",
+            "R10 does not derive the Table 2 refinement from general Cerf theory in Lean.",
+            "R10 does not contain or prove an evaluator equality.",
+            "R10 does not yet define the twisted four-manifold invariant.",
+            "R10 does not identify that invariant with Crane-Yetter."
+          ],
+          "lean_proves": [
+            "the general and special move whitelists are distinct types",
+            "special movies compose only typed Table 2 moves",
+            "every special move carries an H2 equivalence",
+            "movie H2 equivalences compose",
+            "derived character transport preserves every pairing"
+          ],
+          "mathematical_status": "R10_TOPOLOGY_BOUNDARY_ESTABLISHED_AS_EXPLICIT_SOURCE_BACKED_INPUT",
+          "trusted_topology_inputs": [
+            "general Cerf completeness for compact relative handle decompositions",
+            "special five-family Table 2 link-calculus refinement"
+          ]
+        },
+        "completeness_boundary": {
+          "evaluator_equality_included": false,
+          "general_cerf": {
+            "exact_scope": "two ordered relative handle decompositions of one compact smooth pair (X, boundary-minus X)",
+            "move_families": [
+              "level_isotopy_indices_0_through_4",
+              "same_index_slide_1",
+              "same_index_slide_2",
+              "same_index_slide_3",
+              "zero_one_birth_death",
+              "one_two_birth_death",
+              "two_three_birth_death",
+              "three_four_birth_death"
+            ],
+            "source_locator": "Definition 4.2.1, Theorem 4.2.12, and Proposition 4.2.13, printed pages 104 and 110-111",
+            "source_ref": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+            "source_scope_caveat": "Theorem 4.2.12 contains all adjacent-index births and deaths and index-three slides; it is not by itself the five-family Table 2 link theorem.",
+            "status": "IMPORTED_SOURCE_BACKED_TOPOLOGY_INPUT"
+          },
+          "table_two_link_refinement": {
+            "derived_from_general_cerf_in_lean": false,
+            "endpoint_normal_form": {
+              "diagrammed_handle_indices": [
+                1,
+                2
+              ],
+              "higher_handles_closed_implicitly": [
+                3,
+                4
+              ],
+              "ordered_by_increasing_index": true,
+              "unique_four_handle": true,
+              "unique_zero_handle": true
+            },
+            "excluded_general_moves": [
+              "zero_one_birth_death",
+              "three_over_three_slide",
+              "three_four_birth_death"
+            ],
+            "move_families": [
+              "framed_isotopy",
+              "one_over_one",
+              "two_over_one",
+              "two_over_two",
+              "one_two_birth",
+              "one_two_death",
+              "two_three_birth",
+              "two_three_death"
+            ],
+            "source_locator": "B\u00e4renz-Barrett Theorem 3.9 and Table 2, journal pages 685-687; Gompf-Stipsicz Section 5.1, printed pages 139-148; de Sa, pages 16-30",
+            "source_refs": [
+              "ref:baerenz-barrett-dichromatic-2018",
+              "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+              "ref:de-sa-link-calculus-1979"
+            ],
+            "source_scope_caveat": "Lean does not derive the special link calculus from general Cerf theory. This refinement is a separately visible topology input and is exactly where a source scope error must fail.",
+            "status": "IMPORTED_SOURCE_BACKED_LINK_CALCULUS_REFINEMENT"
+          }
+        },
+        "composite_h2_transport": {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "inverse_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "matrix_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "status": "PASS_COMPOSED_H2_TRANSPORT",
+          "step_count": 8
+        },
+        "content_hash": "sha256:055ff74e68bdd1b07fd0898a635777aa98f639652a3b43e527e0af11c86cf946",
+        "manifold": {
+          "boundary_mode": "closed",
+          "compact": true,
+          "connected": true,
+          "dimension": 4,
+          "manifold_id": "r10-formal-topology-fixture-X",
+          "manifold_snapshot_hash": "sha256:97a082dca9a22123f3ac690b83d7e85c8889cc1b14a59d841e940f3d17ef9694",
+          "orientation_mode": "oriented",
+          "scope_certificate_hash": "sha256:85d3bd20a2ebfb84686c9054552377d847952843c12348b30993b5ac094dc536",
+          "smooth": true
+        },
+        "movie_id": "r10-table-two-whitelist-and-h2-composition-fixture",
+        "schema": "twisted-yetter.kirby-completeness-movie.v1",
+        "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+        "steps": [
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "framed_isotopy",
+            "local_topology_certificate_hash": "sha256:ff7333a85d2309463bbd2169aa5a9a54f69c820a7d9c6b2bce2b58f78cece236",
+            "orientation": "not_applicable",
+            "source_h2_model_certificate_hash": "sha256:da7d31fc9c0b105f10ffeeb6ee2eb4c694c98d343c00ac247a6ec72d7f5086a7",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-00",
+            "source_proof": {
+              "source_locator": "Theorem 4.2.12, printed page 110",
+              "source_ref": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-00-framed_isotopy",
+            "target_h2_model_certificate_hash": "sha256:01dc412c01e3f13dded44636201cfb44a1b9d4f12db45bd8e6c3da5d1572bbd7",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-01"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "one_over_one",
+            "local_topology_certificate_hash": "sha256:e70acc398673b6b625254fd11996a290b7bc955416e7ae64523fc025b5e82291",
+            "orientation": "positive",
+            "source_h2_model_certificate_hash": "sha256:01dc412c01e3f13dded44636201cfb44a1b9d4f12db45bd8e6c3da5d1572bbd7",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-01",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-01-one_over_one",
+            "target_h2_model_certificate_hash": "sha256:0b84bbfa8b82c935d8033da6bb3dbb0dcbe2422f5f20d7e2c7bf776e67f497bd",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-02"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "kind": "two_over_one",
+            "local_topology_certificate_hash": "sha256:e08b00e4c59b9c2c634552324b519b742237dd8fc26be1e638abf728fb73fc38",
+            "orientation": "negative",
+            "source_h2_model_certificate_hash": "sha256:0b84bbfa8b82c935d8033da6bb3dbb0dcbe2422f5f20d7e2c7bf776e67f497bd",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-02",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-02-two_over_one",
+            "target_h2_model_certificate_hash": "sha256:ef008e4be2d6781d21f9321ebeadf29623c18723c8dd05185ac6822817cffd21",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-03"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "kind": "two_over_two",
+            "local_topology_certificate_hash": "sha256:be01b3159d3171885dbf58bdd8855c1cfbafa63ce84be5d133d70f02677d4a51",
+            "orientation": "positive",
+            "source_h2_model_certificate_hash": "sha256:ef008e4be2d6781d21f9321ebeadf29623c18723c8dd05185ac6822817cffd21",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-03",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-03-two_over_two",
+            "target_h2_model_certificate_hash": "sha256:630fe10bf79151206677a27bedc46de5920fc04251cea1b71c2e138c75ebe17e",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-04"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "one_two_birth",
+            "local_topology_certificate_hash": "sha256:cb44a9ba4fb15cc3a3d6d4a89ddda1b0e21c14df56b4095cdc5800172d5b9dc3",
+            "orientation": "not_applicable",
+            "source_h2_model_certificate_hash": "sha256:630fe10bf79151206677a27bedc46de5920fc04251cea1b71c2e138c75ebe17e",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-04",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-04-one_two_birth",
+            "target_h2_model_certificate_hash": "sha256:28238c49a627742f6c30d00a5a9f7f09bc294157c7a17dbfa81cfb5c440935f0",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 3,
+              "h2": 4,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-05"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "kind": "one_two_death",
+            "local_topology_certificate_hash": "sha256:e0402bc8155942fc9c826cd84a3de3ae39851ccdebcc646e72b0c829d1359d9c",
+            "orientation": "not_applicable",
+            "source_h2_model_certificate_hash": "sha256:28238c49a627742f6c30d00a5a9f7f09bc294157c7a17dbfa81cfb5c440935f0",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 3,
+              "h2": 4,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-05",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-05-one_two_death",
+            "target_h2_model_certificate_hash": "sha256:78d719cc2b61607b283eb4ffcd58ce3b5a592da22e2d3c29f86fd9ce60731898",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-06"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "kind": "two_three_birth",
+            "local_topology_certificate_hash": "sha256:4ea78cc8e080913b5ab060aabcc2a1959e10374f43664d5edb9aa68a153d2fea",
+            "orientation": "not_applicable",
+            "source_h2_model_certificate_hash": "sha256:78d719cc2b61607b283eb4ffcd58ce3b5a592da22e2d3c29f86fd9ce60731898",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-06",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-06-two_three_birth",
+            "target_h2_model_certificate_hash": "sha256:caabbe660030edf31118ea2d80f2c9c1db4b7deae4a9cb85931e3a1a29175911",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 4,
+              "h3": 3,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-07"
+          },
+          {
+            "character_pairing_certificate": {
+              "checked_pair_count": 16,
+              "coefficient_field": "F2",
+              "h2_dimension": 2,
+              "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+              "target_character_rule": "(M^-1)^T chi"
+            },
+            "h2_inverse_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "h2_matrix_mod2": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "kind": "two_three_death",
+            "local_topology_certificate_hash": "sha256:0f650d9bf900fb0255004987173b14ee44b8c6b1ebda18e1382c8dc1e9f9295c",
+            "orientation": "not_applicable",
+            "source_h2_model_certificate_hash": "sha256:caabbe660030edf31118ea2d80f2c9c1db4b7deae4a9cb85931e3a1a29175911",
+            "source_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 4,
+              "h3": 3,
+              "h4": 1
+            },
+            "source_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+            "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-07",
+            "source_proof": {
+              "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+              "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+              "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+            },
+            "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-07-two_three_death",
+            "target_h2_model_certificate_hash": "sha256:49d980626b6fd28cea0df541a45c45efd1f09cea62719c69afe5466e8d817914",
+            "target_handle_counts": {
+              "h0": 1,
+              "h1": 2,
+              "h2": 3,
+              "h3": 2,
+              "h4": 1
+            },
+            "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52",
+            "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-08"
+          }
+        ],
+        "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52"
+      },
+      "movie_id": "r10-table-two-whitelist-and-h2-composition-fixture",
+      "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+      "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52"
+    }
+  },
+  "schema": "twisted-yetter.homologically-twisted-kirby-invariant.v1",
+  "started_at_utc": "2026-07-18T05:07:03Z",
+  "status": "PASS_HOMOLOGICALLY_TWISTED_KIRBY_INVARIANT",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  },
+  "trusted_inputs": [
+    {
+      "exact_content": "One content-addressed category interpretation coherently supplies generalized sliding data, normalization dimensions, and closed-diagram scalarization.",
+      "input_id": "single-category-evaluator-coherence",
+      "lean_type": "AdmissibleKirbyCategory",
+      "not_assumed": "No concrete category snapshot is imported and no Crane-Yetter identification is supplied."
+    },
+    {
+      "exact_content": "For every special presentation and marked class, the typed diagram and decoration realize that formal presentation and class, and its raw numerator is the scalarized categorical evaluation.",
+      "input_id": "decorated-presentation-realization",
+      "lean_type": "DecoratedKirbyPresentation",
+      "not_assumed": "No final value equality and no presentation independence."
+    },
+    {
+      "exact_content": "Every R10 topology move and every marked class is realized by the exact corresponding closed R7, R8, or R9 proof object.",
+      "input_id": "all-alpha-local-evaluator-realization",
+      "lean_type": "HomologicallyTwistedKirbyPrescription.localStep",
+      "not_assumed": "The field returns proof objects, never a bare normalized equality."
+    },
+    {
+      "exact_content": "Certified coordinates representing the same geometric class are related by the exact H2 transport of the R10 completeness movie.",
+      "input_id": "marked-pair-realization-compatibility",
+      "lean_type": "MarkedPairPresentationSystem.marked_transport_sound",
+      "not_assumed": "No evaluator statement and no state-sum or Crane-Yetter identification."
+    }
+  ]
+}
