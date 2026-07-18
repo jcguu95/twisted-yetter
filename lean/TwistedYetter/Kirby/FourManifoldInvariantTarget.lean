@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.FinalFormalizationPackage
+import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 
 /-!
 # Target theorem for a marked four-manifold invariant
@@ -40,8 +41,8 @@ def requiredTargetConditions : List TargetCondition :=
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
     .chainDerivedMarkedH2Transport,
-    .concreteEvaluatorCompiler,
     .specialKirbyCalculusCompleteness,
+    .concreteEvaluatorCompiler,
     .concreteMarkedPairAssembly
   ]
 
@@ -49,22 +50,24 @@ def requiredTargetConditions : List TargetCondition :=
 Conditions already discharged by kernel-checked constructions.
 
 The chain-derived item establishes the generic mechanism: a move supplies a
-chain homotopy equivalence and Lean derives the additive map on `H2`. Binding
-concrete Kirby syntax to the corresponding chain matrices remains part of
-`concreteMarkedPairAssembly`.
+chain homotopy equivalence and Lean derives the additive map on `H2`. The
+special-Kirby item is established relative to one separately audited,
+source-backed topology domain axiom, which returns only an unmarked topology
+movie. Binding concrete Kirby syntax to chain matrices and enriching that
+movie remains part of `concreteMarkedPairAssembly`.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
-    .chainDerivedMarkedH2Transport
+    .chainDerivedMarkedH2Transport,
+    .specialKirbyCalculusCompleteness
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
     .concreteEvaluatorCompiler,
-    .specialKirbyCalculusCompleteness,
     .concreteMarkedPairAssembly
   ]
 
@@ -73,11 +76,11 @@ theorem target_condition_count :
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 3 := by
+    establishedFoundationConditions.length = 4 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 3 := by
+    openConstructionConditions.length = 2 := by
   rfl
 
 /-- Chain-derived marked `H2` transport is explicitly on the established side. -/
@@ -89,6 +92,21 @@ theorem chain_derived_marked_h2_transport_established :
 /-- The same condition cannot simultaneously remain in the open ledger. -/
 theorem chain_derived_marked_h2_transport_not_open :
     TargetCondition.chainDerivedMarkedH2Transport ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+Special Kirby completeness is established only as the explicitly audited
+topology domain axiom in `SourceBackedKirbyCompleteness`.
+-/
+theorem special_kirby_calculus_completeness_established :
+    TargetCondition.specialKirbyCalculusCompleteness ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The source-backed topology condition is no longer in the open ledger. -/
+theorem special_kirby_calculus_completeness_not_open :
+    TargetCondition.specialKirbyCalculusCompleteness ∉
       openConstructionConditions := by
   simp [openConstructionConditions]
 

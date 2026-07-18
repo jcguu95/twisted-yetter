@@ -1,0 +1,90 @@
+{
+  "schema": "twisted-yetter.reference-ledger.v1",
+  "status": "EXACT_SPECIAL_KIRBY_DOMAIN_AXIOM_SOURCE_BOUNDARY_RECORDED",
+  "captured_at_utc": "2026-07-18T15:14:10Z",
+  "formalized_statement": {
+    "lean_axiom": "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+    "scope": "Any two certified special framed-link presentations arising from handle decompositions of the same smooth, oriented, closed, connected four-manifold are connected by framed isotopy and the five reversible move families in Bärenz-Barrett Table 2.",
+    "output": "TopologicalTableTwoMovie only",
+    "excluded_outputs": [
+      "evaluator equality",
+      "chain map",
+      "map on H2",
+      "marked-class compatibility",
+      "Crane-Yetter identification"
+    ]
+  },
+  "references": [
+    {
+      "ref_id": "ref:baerenz-barrett-dichromatic-2018",
+      "type": "journal_article",
+      "authors": [
+        "Manuel Barenz",
+        "John W. Barrett"
+      ],
+      "title": "Dichromatic State Sum Models for Four-Manifolds from Pivotal Functors",
+      "doi": "10.1007/s00220-017-3012-9",
+      "canonical_url": "https://doi.org/10.1007/s00220-017-3012-9",
+      "captured_pdf": {
+        "capture_path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+        "bytes": 906609,
+        "pages": 52,
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+      },
+      "locators": [
+        {
+          "label": "special framed links",
+          "locator": "Section 2.3.2 and Definition 2.49, journal pages 678-680"
+        },
+        {
+          "label": "connectivity premise and exact move table",
+          "locator": "paragraph immediately before Theorem 3.9 and Table 2, journal pages 685-686"
+        },
+        {
+          "label": "handle-decomposition independence",
+          "locator": "Theorem 3.9 and Remark 3.10, journal pages 685-687"
+        }
+      ],
+      "source_reading": "The article explicitly invokes the standard connectivity of handle decompositions by slides and cancellations, identifies the relevant link-diagram moves with Table 2, proves invariance under those five families, and concludes independence from the chosen special framed link.",
+      "interpretation_limit": "The article supplies the accepted topology premise and evaluator-invariance proof in prose. Lean imports only the topology premise as a named domain axiom."
+    },
+    {
+      "ref_id": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+      "type": "book",
+      "authors": [
+        "Robert E. Gompf",
+        "Andras I. Stipsicz"
+      ],
+      "title": "4-Manifolds and Kirby Calculus",
+      "year": 1999,
+      "locators": [
+        {
+          "label": "general handle-decomposition connectivity",
+          "locator": "Theorem 4.2.12, printed page 110"
+        },
+        {
+          "label": "four-dimensional Kirby diagrams and moves",
+          "locator": "Section 5.1, printed pages 139-148"
+        }
+      ],
+      "capture_status": "LOCATORS_PREVIOUSLY_VERIFIED_NO_REPO_LOCAL_BOOK_BYTES"
+    },
+    {
+      "ref_id": "ref:de-sa-link-calculus-1979",
+      "type": "conference_paper",
+      "authors": [
+        "Eugenia Cesar de Sa"
+      ],
+      "title": "A link calculus for 4-manifolds",
+      "doi": "10.1007/BFb0063185",
+      "pages": "16-30",
+      "capture_status": "METADATA_ONLY_NO_CHAPTER_BYTES",
+      "use_limit": "Bibliographic support only; no standalone exact theorem is attributed to this source."
+    }
+  ],
+  "honesty": {
+    "status": "ONE_EXPLICIT_DOMAIN_AXIOM_NOT_A_LEAN_PROOF",
+    "why_acceptable": "The imported statement is the standard special Kirby-calculus completeness fact used explicitly in the proof of Bärenz-Barrett Theorem 3.9.",
+    "remaining_gap": "A separate compiler must enrich every topology step with concrete handle-chain equivalences before R11 can use the movie."
+  }
+}
