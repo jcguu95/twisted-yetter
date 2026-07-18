@@ -1,0 +1,225 @@
+{
+  "explicit_non_claims": [
+    "R12 does not identify the R11 Kirby invariant with the Crane-Yetter state sum and does not make a CTL claim.",
+    "R12 does not prove the correctness of an external evaluator from its source code hash or seal the transitive evaluator source closure.",
+    "R12 does not promote structurally complete distributions to invariant values without an exact R11 semantic binding.",
+    "R12 does not certify the draft Figure 21 transcription against the printed paper.",
+    "R12 does not erase dirty provenance recorded by legacy computation artifacts.",
+    "R12 does not turn rounded floating-point labels into exact cyclotomic values.",
+    "R12 does not certify an exotic-versus-standard comparison without a marked H2 identification."
+  ],
+  "obligations": [
+    {
+      "obligation_id": "artifact-file-hash",
+      "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_REHASH",
+      "witness": "ArtifactEnvelope.fileHash"
+    },
+    {
+      "obligation_id": "artifact-schema",
+      "status": "MANDATORY_LEAN_FIELD_AND_RUNTIME_SCHEMA_CHECK",
+      "witness": "ArtifactEnvelope.schema"
+    },
+    {
+      "obligation_id": "artifact-status",
+      "status": "MANDATORY_PASS_STATUS_FOR_EXACT_ADMISSION",
+      "witness": "ArtifactEnvelope.statusPass"
+    },
+    {
+      "obligation_id": "artifact-source-commit",
+      "status": "MANDATORY_PINNED_SOURCE_COMMIT",
+      "witness": "ArtifactEnvelope.sourceCommit"
+    },
+    {
+      "obligation_id": "dirty-provenance",
+      "status": "FAIL_CLOSED_FOR_EXACT_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.clean_source"
+    },
+    {
+      "obligation_id": "mutable-alias",
+      "status": "FAIL_CLOSED_FOR_EXACT_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.alias_free"
+    },
+    {
+      "obligation_id": "category-snapshot-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ComputationIdentity.categorySnapshotHash"
+    },
+    {
+      "obligation_id": "category-data-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ComputationIdentity.categoryDataHash"
+    },
+    {
+      "obligation_id": "diagram-input-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ComputationIdentity.diagramInputHash"
+    },
+    {
+      "obligation_id": "projected-ir-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ComputationIdentity.projectedIrHash"
+    },
+    {
+      "obligation_id": "coupon-graph-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ComputationIdentity.couponGraphHash"
+    },
+    {
+      "obligation_id": "character-assignment-hash",
+      "status": "MANDATORY_FOR_EXACT_VALUE_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.characterAssignmentHash"
+    },
+    {
+      "obligation_id": "evaluator-profile-hash",
+      "status": "MANDATORY_FOR_EXACT_VALUE_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.evaluatorProfileHash"
+    },
+    {
+      "obligation_id": "evaluator-source-closure",
+      "status": "MANDATORY_FOR_EXACT_VALUE_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.evaluatorClosureHash"
+    },
+    {
+      "obligation_id": "arithmetic-mode",
+      "status": "EXACT_RATIONAL_OR_EXACT_CYCLOTOMIC_ONLY",
+      "witness": "ExactInvariantValueCertificate.exact_arithmetic"
+    },
+    {
+      "obligation_id": "expected-sector-denominator",
+      "status": "MANDATORY",
+      "witness": "DistributionCertificate.expectedSectorCount"
+    },
+    {
+      "obligation_id": "observed-sector-denominator",
+      "status": "MANDATORY",
+      "witness": "DistributionCertificate.observedSectorCount"
+    },
+    {
+      "obligation_id": "complete-sector-denominator",
+      "status": "LEAN_PROVED",
+      "witness": "DistributionCertificate.observed_eq_expected"
+    },
+    {
+      "obligation_id": "value-bucket-sum",
+      "status": "LEAN_PROVED",
+      "witness": "DistributionCertificate.value_bucket_sum"
+    },
+    {
+      "obligation_id": "projector-bucket-sum",
+      "status": "LEAN_PROVED",
+      "witness": "DistributionCertificate.projector_bucket_sum"
+    },
+    {
+      "obligation_id": "no-inconclusive-case",
+      "status": "MANDATORY_FOR_EXACT_ADMISSION",
+      "witness": "ExactInvariantValueCertificate.no_inconclusive"
+    },
+    {
+      "obligation_id": "exact-output-binding",
+      "status": "MANDATORY_EQUALITY_WITNESS",
+      "witness": "ExactInvariantValueCertificate.output_sound"
+    },
+    {
+      "obligation_id": "r11-semantic-binding",
+      "status": "MANDATORY_EQUALITY_WITNESS",
+      "witness": "ExactInvariantValueCertificate.r11_semantic_binding"
+    },
+    {
+      "obligation_id": "r11-binding-certificate-hash",
+      "status": "MANDATORY_HASH_BOUND",
+      "witness": "ExactInvariantValueCertificate.r11BindingCertificateHash"
+    },
+    {
+      "obligation_id": "structural-exact-separation",
+      "status": "LEAN_TYPE_BOUNDARY_ESTABLISHED",
+      "witness": "StructuralAggregateCertificate is not ExactInvariantValueCertificate"
+    },
+    {
+      "obligation_id": "exact-control-import",
+      "status": "LEAN_PROVED",
+      "witness": "toyExactControl.output_eq_invariant"
+    },
+    {
+      "obligation_id": "figure21-row-denominator",
+      "status": "LEAN_AND_RUNTIME_PROVED_FOR_15_ROWS",
+      "witness": "figure21PointedBatch.structural_coverage_complete"
+    },
+    {
+      "obligation_id": "figure21-chunk-content-hashes",
+      "status": "RUNTIME_REHASHED_FOR_ALL_CHUNKS",
+      "witness": "runtime Figure 21 chunk replay"
+    },
+    {
+      "obligation_id": "figure21-chunk-range-partition",
+      "status": "RUNTIME_PROVED_FOR_ALL_AGGREGATES",
+      "witness": "runtime contiguous disjoint range replay"
+    },
+    {
+      "obligation_id": "figure21-category-snapshot-coherence",
+      "status": "RUNTIME_REHASHED_BUT_DIRTY_PROVENANCE_RETAINED",
+      "witness": "runtime snapshot and certificate replay"
+    },
+    {
+      "obligation_id": "figure21-draft-input",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.draftDiagram"
+    },
+    {
+      "obligation_id": "figure21-rounded-values",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.roundedOutput"
+    },
+    {
+      "obligation_id": "figure21-dirty-runs",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.dirtyProvenance"
+    },
+    {
+      "obligation_id": "figure21-missing-r11-binding",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.missingR11Binding"
+    },
+    {
+      "obligation_id": "figure21-unsealed-evaluator-closure",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.unsealedEvaluatorClosure"
+    },
+    {
+      "obligation_id": "standard-comparison-h2-marking",
+      "status": "TERMINAL_BLOCKER",
+      "witness": "BlockerReason.missingMarkedH2Comparison"
+    },
+    {
+      "obligation_id": "blocked-artifact-no-promotion",
+      "status": "LEAN_CLOSED_CONSTRUCTOR_BOUNDARY",
+      "witness": "TerminalBlockedImport has no exact-admission constructor"
+    },
+    {
+      "obligation_id": "terminal-package",
+      "status": "R12_TERMINAL_WITH_EXPLICIT_BLOCKERS",
+      "witness": "computation-artifact-import-v1.json"
+    }
+  ],
+  "schema": "twisted-yetter.computation-artifact-import-obligation-matrix.v1",
+  "status": "R12_CONTRACT_TERMINAL_IMPLEMENTED_PENDING_GENERATED_CERTIFICATE",
+  "trusted_inputs": [
+    {
+      "exact_content": "A cryptographic digest uniquely names the bytes supplied to the runtime validator.",
+      "input_id": "sha256-collision-resistance-and-runtime-file-access",
+      "lean_type": "Hash256",
+      "not_assumed": "A matching digest does not prove evaluator mathematics."
+    },
+    {
+      "exact_content": "An exact computation may be promoted only when an equality witness binds its output to the exact R11 invariant target.",
+      "input_id": "concrete-r11-semantic-binding",
+      "lean_type": "ExactInvariantValueCertificate.r11_semantic_binding",
+      "not_assumed": "Figure 21 currently supplies no such witness."
+    },
+    {
+      "exact_content": "The external producer correctly implements its declared evaluator profile and transitive source closure.",
+      "input_id": "external-evaluator-soundness",
+      "lean_type": "ExactInvariantValueCertificate.output_sound",
+      "not_assumed": "A script entry-point hash alone is insufficient."
+    }
+  ]
+}
