@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LEAN_NUM_THREADS=1 ./scripts/lean_local_check.sh \
+LEAN_NUM_THREADS=1 ./scripts/lean_local_build.sh \
+  lean/TwistedYetter/Kirby/PresentationExecutionTrace.lean \
+  lean/TwistedYetter/Kirby/KirbyCompleteness.lean \
   lean/TwistedYetter.lean >/dev/null
 
 mutations=(
@@ -14,6 +16,7 @@ mutations=(
   "lean/Mutations/MissingInducedH2ChainWitness.lean"
   "lean/Mutations/MissingSpecialManifoldBinding.lean"
   "lean/Mutations/MissingLocalTopologyWitness.lean"
+  "lean/Mutations/MissingPresentationExecutionTrace.lean"
 )
 
 expected_diagnostics=(
@@ -26,6 +29,7 @@ expected_diagnostics=(
   '`homologyEquiv` is not a field of structure `MarkedH2Transport`'
   'Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`'
   'Fields missing: `recipe`'
+  'Fields missing: `execution`'
 )
 
 for index in "${!mutations[@]}"; do

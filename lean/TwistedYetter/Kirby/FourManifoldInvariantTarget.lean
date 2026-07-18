@@ -33,6 +33,7 @@ open TwistedYetter.Kirby.EvaluatorCompiler
 inductive TargetCondition where
   | categoryAndGraphicalAlgebra
   | explicitThreeHandleNormalization
+  | closedTypedPresentationExecution
   | chainDerivedMarkedH2Transport
   | specialKirbyCalculusCompleteness
   | exhaustiveEvaluatorCompilerMechanism
@@ -47,6 +48,7 @@ def requiredTargetConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
+    .closedTypedPresentationExecution,
     .chainDerivedMarkedH2Transport,
     .specialKirbyCalculusCompleteness,
     .exhaustiveEvaluatorCompilerMechanism,
@@ -71,6 +73,7 @@ def establishedFoundationConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
+    .closedTypedPresentationExecution,
     .chainDerivedMarkedH2Transport,
     .specialKirbyCalculusCompleteness,
     .exhaustiveEvaluatorCompilerMechanism,
@@ -86,16 +89,32 @@ def openConstructionConditions : List TargetCondition :=
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 9 := by
+    requiredTargetConditions.length = 10 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 7 := by
+    establishedFoundationConditions.length = 8 := by
   rfl
 
 theorem open_construction_condition_count :
     openConstructionConditions.length = 2 := by
   rfl
+
+/--
+Every special presentation now carries a kernel-checked event-by-event trace
+from the empty boundary back to the empty boundary, bound to its declared
+Morse slices.
+-/
+theorem closed_typed_presentation_execution_established :
+    TargetCondition.closedTypedPresentationExecution ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- Raw presentation execution is no longer an untracked construction gap. -/
+theorem closed_typed_presentation_execution_not_open :
+    TargetCondition.closedTypedPresentationExecution ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
 
 /-- Chain-derived marked `H2` transport is explicitly on the established side. -/
 theorem chain_derived_marked_h2_transport_established :

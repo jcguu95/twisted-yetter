@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Presentation
+import TwistedYetter.Kirby.PresentationExecutionTrace
 import Lean.Data.Json.Parser
 
 /-!
@@ -14,6 +14,7 @@ namespace TwistedYetter.Kirby.PresentationArtifactReplay
 
 open Lean
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.PresentationExecutionTrace
 
 def expectedFixtureContentHash : String :=
   "sha256:42eef430c68ffdc02d687958e0e1d702c3cee7ba3638cc15b664985c8e6779aa"
@@ -35,6 +36,11 @@ def main (args : List String) : IO Unit := do
     match FormalPresentation.fromJson json with
     | .ok accepted => pure accepted
     | .error message => fail ("Lean presentation admission failed: " ++ message)
+  let execution ←
+    match buildClosedExecutionCertificate formal with
+    | .ok certificate => pure certificate
+    | .error message =>
+        fail ("typed closed-execution certificate failed: " ++ message)
   unless RawPresentation.toJson formal.raw == json do
     fail "Lean snake-case codec did not round-trip the repository JSON"
   unless formal.pinnedSourceHash == expectedFixtureContentHash do
@@ -45,6 +51,16 @@ def main (args : List String) : IO Unit := do
     fail "unexpected fixture event count"
   unless formal.raw.declaredSlices.length == 13 do
     fail "unexpected fixture slice count"
+  unless execution.trace.stepCount == 12 do
+    fail "typed execution trace did not execute all 12 events"
+  unless execution.trace.states.length == 13 do
+    fail "typed execution trace did not expose all 13 slices"
+  unless execution.trace.eventIds ==
+      formal.raw.events.map SliceEvent.eventId do
+    fail "typed execution trace silently reordered event IDs"
+  unless formal.raw.declaredSlices ==
+      RawPresentation.declareSlicesFrom 0 execution.trace.states do
+    fail "typed execution trace silently diverged from declared slices"
   let staleSlices : RawPresentation :=
     { formal.raw with declaredSlices := [] }
   match staleSlices.validate with
@@ -60,8 +76,8 @@ def main (args : List String) : IO Unit := do
       fail ("unknown-field mutation failed for the wrong reason: " ++ message)
   | .ok _ => fail "unknown presentation field was silently admitted"
   IO.println
-    ("PASS Lean replay + 2 fail-closed mutations: " ++
-      "events=12 slices=13 content_hash=" ++
+    ("PASS Lean replay + closed typed trace + 2 fail-closed mutations: " ++
+      "events=12 slices=13 trace_steps=12 content_hash=" ++
       formal.pinnedSourceHash)
 
 end TwistedYetter.Kirby.PresentationArtifactReplay

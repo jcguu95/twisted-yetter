@@ -11,6 +11,7 @@ uv run pytest -q \
   tests/test_framed_link_presentation_syntax_v1.py
 
 ./scripts/lean_local_build.sh \
+  lean/TwistedYetter/Kirby/PresentationExecutionTrace.lean \
   lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean
 
 audit_output="$(mktemp \
@@ -21,9 +22,13 @@ trap 'rm -f "${audit_output}"' EXIT
   lean/TwistedYetter/Kirby/PresentationSchemaRegressionAxiomAudit.lean \
   >"${audit_output}" 2>&1
 
+./scripts/lean_local_check.sh \
+  lean/TwistedYetter/Kirby/PresentationExecutionTraceAxiomAudit.lean \
+  >>"${audit_output}" 2>&1
+
 if rg -q 'sorryAx|declaration uses `sorry`|native_decide\.ax' \
     "${audit_output}"; then
-  printf 'Presentation schema regression axiom audit failed:\n' >&2
+  printf 'Presentation schema/trace axiom audit failed:\n' >&2
   cat "${audit_output}" >&2
   exit 1
 fi

@@ -6,6 +6,9 @@ export LEAN_NUM_THREADS=1
 output="$(mktemp "${TMPDIR:-/tmp}/twisted-yetter-4mf-target-axioms.XXXXXX")"
 trap 'rm -f "${output}"' EXIT
 
+./scripts/lean_local_build.sh \
+  lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean
+
 ./scripts/lean_local_check.sh \
   lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean \
   >"${output}" 2>&1

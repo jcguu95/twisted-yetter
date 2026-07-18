@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.HandleChainHomology
+import TwistedYetter.Kirby.PresentationExecutionTrace
 import TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 /-!
@@ -28,6 +29,7 @@ completeness structure contains an evaluator value or evaluator equality.
 namespace TwistedYetter.Kirby.KirbyCompleteness
 
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.PresentationExecutionTrace
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.HandleChainHomology
@@ -264,6 +266,7 @@ structure SpecialKirbyPresentation
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   formal : FormalPresentation
+  execution : ClosedExecutionCertificate formal
   counts : HandleCounts
   uniqueZeroHandle : counts.h0 = 1
   uniqueFourHandle : counts.h4 = 1

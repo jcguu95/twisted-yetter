@@ -4,7 +4,9 @@ namespace TwistedYetter.Mutations.MissingUniqueFourHandle
 
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyCancellation
+open TwistedYetter.Kirby.HandleChainHomology
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.PresentationExecutionTrace
 
 universe u
 
@@ -14,6 +16,7 @@ def unsafePresentation
     (H2 : Type u)
     [AddCommGroup H2]
     (formal : FormalPresentation)
+    (execution : ClosedExecutionCertificate formal)
     (counts : HandleCounts)
     (uniqueZero : counts.h0 = 1)
     (ordered : Prop)
@@ -25,9 +28,12 @@ def unsafePresentation
     (representationWitness : representsFixedManifold)
     (representationShape :
       RawPresentation.sha256Shape representationHash = true)
-    (h2Shape : RawPresentation.sha256Shape h2Hash = true) :
+    (h2Shape : RawPresentation.sha256Shape h2Hash = true)
+    (handleChain : HandleChainModel counts)
+    (h2ModelEquiv : handleChain.SecondHomology ≃+ H2) :
     SpecialKirbyPresentation manifold H2 where
   formal := formal
+  execution := execution
   counts := counts
   uniqueZeroHandle := uniqueZero
   orderedByIncreasingIndex := ordered
@@ -40,5 +46,7 @@ def unsafePresentation
   representation_certificate_hash_shape := representationShape
   h2ModelCertificateHash := h2Hash
   h2_model_certificate_hash_shape := h2Shape
+  handleChain := handleChain
+  h2ModelEquiv := h2ModelEquiv
 
 end TwistedYetter.Mutations.MissingUniqueFourHandle

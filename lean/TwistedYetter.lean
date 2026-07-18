@@ -17,6 +17,7 @@ import TwistedYetter.Kirby.GeneralizedSliding
 import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.Presentation
 import TwistedYetter.Kirby.PresentationSchemaRegression
+import TwistedYetter.Kirby.PresentationExecutionTrace
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.KirbyHandleMoves
 import TwistedYetter.Kirby.KirbyCancellation
