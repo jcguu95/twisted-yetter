@@ -1,0 +1,160 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "four-manifold-invariant-target-v10",
+      "artifact_commit": "745a360d4424887c39b5016abbdcb6631be9703e",
+      "content_hash": "sha256:e2b9826fac7e326792605110e07a8c5087c3bdfdc0160a752019c53074677adf",
+      "git_blob": "0426ac879e54d5b84575645bc42a766db4ca2ac5",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v10.json",
+      "sha256": "4d5af6d2c7700faa227814147d89cb606dbf3c5f30e0b02fc182bd3c4d5c4447",
+      "status": "PASS_FIFTEEN_FOUNDATION_CONDITIONS_ESTABLISHED_FIVE_CONCRETE_INSTANCES_OPEN"
+    },
+    {
+      "artifact_id": "lean-four-manifold-invariant-target",
+      "git_blob": "a38d70e1f215bd596c531d71005e2b94831d794d",
+      "path": "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+      "sha256": "5fe72b5d7e7012dddbaafce9cbaa8d710bb605d3af16fc42a66efc46cc139666",
+      "status": "LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_TWENTY_BY_FIFTEEN_BY_FIVE_LEDGER"
+    },
+    {
+      "artifact_id": "lean-integral-character-kirby-colour-compiler",
+      "git_blob": "b09dea93044dd281ae1c8515b71a0f4b95bfceee",
+      "path": "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompiler.lean",
+      "sha256": "c4e7e9bc97aa0f535cd1ab5e0784fb28649c918323855ffeaf954c7d381800be",
+      "status": "LEAN_INTEGRAL_TWO_CYCLE_AND_TENSOR_AUTOMORPHISM_WEIGHT_MECHANISM_ESTABLISHED_INSTANCES_OPEN"
+    },
+    {
+      "artifact_id": "lean-source-bound-table-two-evaluator-compiler",
+      "git_blob": "43f0e49dfc3cfdb6d13e288477cdc3de4817145a",
+      "path": "lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean",
+      "sha256": "fc6ba182d2a72de1a5373d9455758f3fa275a20346d25b683317fed8692d331a",
+      "status": "LEAN_FINAL_ROUTE_REQUIRES_INTEGRAL_CHARACTER_PRESENTATION_AND_SOURCE_BOUND_GRAPHICAL_COMPILERS"
+    }
+  ],
+  "condition_ledger": {
+    "established": [
+      "category_and_graphical_algebra_mechanism",
+      "explicit_three_handle_normalization",
+      "closed_typed_presentation_execution",
+      "primitive_categorical_event_compiler_mechanism",
+      "chain_derived_marked_h2_transport",
+      "source_bound_geometric_h2_compiler_mechanism",
+      "source_backed_special_kirby_calculus_completeness",
+      "exhaustive_evaluator_compiler_mechanism",
+      "marked_pair_assembly_mechanism",
+      "source_bound_local_move_recipes",
+      "global_finite_componentwise_kirby_colour_expansion_mechanism",
+      "source_bound_geometric_h2_compiler_instance_relative_to_visible_domain_axiom",
+      "source_bound_graphical_move_compiler_mechanism",
+      "category_bound_kirby_colour_compiler_mechanism",
+      "integral_character_kirby_colour_compiler_mechanism"
+    ],
+    "established_count": 15,
+    "open": [
+      {
+        "condition": "integral_cycle_representative_system_instance",
+        "required_result": "For every admitted special presentation, index every ordinary component by the actual degree-two handle basis and construct an additive cycle representative whose image in handle-chain homology is the requested geometric class.",
+        "silent_failure_guard": "A basis of H2 cannot be identified with individual two-handles. Nonbasis two-handle coefficients cannot be silently set to zero, and specially-dotted components are excluded until a separate translation certificate exists."
+      },
+      {
+        "condition": "tensor_automorphism_generator_instance",
+        "required_result": "Construct a monoidal natural automorphism of the identity and prove its exact invertible scalar action on every admitted simple object.",
+        "silent_failure_guard": "An arbitrary scalar table on simple names is rejected unless naturality, tensor, unit, category-hash, and scalar-action equations all hold."
+      },
+      {
+        "condition": "global_finite_kirby_colour_expansion_instance",
+        "required_result": "Construct an integral-character-bound event interpreter for every complete global simple labeling, using the pinned strand objects, duals, framing twist, cycle exponents, and tensor-automorphism scalars.",
+        "silent_failure_guard": "The final route rejects arbitrary label types, arbitrary nonzero weights, unrelated boundaries, a second twist convention, eventwise relabeling, and handwritten whole-link weights."
+      },
+      {
+        "condition": "source_bound_graphical_move_compiler_instance",
+        "required_result": "Construct the concrete integral-character-bound typed isotopy programs, source-bound slide realizations, and local cancellation factorizations for every shared source recipe.",
+        "silent_failure_guard": "The generic compiler has no completed EvaluatedTableTwoStep field, no constructor from a preassembled GeneratedIsotopy, and no final normalized-equality field."
+      },
+      {
+        "condition": "source_bound_evaluator_compiler_instance",
+        "required_result": "Assemble the concrete SourceBoundTableTwoEvaluatorCompiler only from the preceding four concrete instances.",
+        "silent_failure_guard": "Neither a compact arbitrary TableTwoEvaluatorCompiler nor the older arbitrary-weight CategoryBoundPresentationCompiler can be supplied directly as target input."
+      }
+    ],
+    "open_count": 5,
+    "required_count": 20
+  },
+  "created_at": "2026-07-18T22:21:14Z",
+  "created_by": "actor:codex",
+  "domain_axiom_boundary": {
+    "axiom_count": 2,
+    "axioms": [
+      {
+        "caveat": "Attaching maps, boundary matrices, basis changes, contractible summand homotopies, and the geometric semantics of each H2 certificate are not reconstructed in Lean.",
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "final H2 identity",
+          "integral cycle representative"
+        ],
+        "name": "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+        "role": "For each certified local Kirby move, supply the actual handle-chain equivalence, shared recipe binding, coordinate-naturality square, and provenance hash."
+      },
+      {
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "chain equivalence",
+          "H2 map",
+          "integral cycle representative"
+        ],
+        "name": "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+        "role": "Connect any two certified special presentations of the same marked closed connected smooth oriented four-manifold by the exact topology move whitelist."
+      }
+    ]
+  },
+  "explicit_non_claims": [
+    "This note does not claim that a concrete four-manifold invariant has been established.",
+    "No concrete integral cycle representative system has been constructed.",
+    "No concrete tensor automorphism generator has been constructed.",
+    "No concrete integral-character-bound event interpreter has been constructed.",
+    "No concrete source-bound graphical rewrite instance has been constructed.",
+    "No concrete source-bound evaluator compiler instance has been constructed.",
+    "The current direct-coordinate route does not admit specially-dotted presentations.",
+    "The current route does not formalize arbitrary H2(X; A) coefficients.",
+    "Handle-chain naturality and special Kirby completeness remain two visible domain axioms.",
+    "Content hashes establish identity and freshness, not mathematical semantics.",
+    "This note does not identify the construction with Crane-Yetter or Yetter's state sum.",
+    "This note makes no exotic-detection or no-go theorem claim."
+  ],
+  "mathematical_status": "FORMALIZATION_OBJECTIVE_ACTIVE_CONDITIONAL_TARGET_ESTABLISHED_CONCRETE_INVARIANT_NOT_ESTABLISHED",
+  "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v9",
+  "objective": {
+    "acceptance_rule": "Promotion requires all twenty machine-visible target conditions. In particular, concrete integral cycle representatives, a concrete tensor automorphism, an integral-character-bound event interpreter, and a source-bound graphical move compiler must be assembled into one hash-bound SourceBoundTableTwoEvaluatorCompiler. The two visible domain axioms and a conditional Lean theorem alone are not a concrete invariant construction.",
+    "goal": "Construct an integral-character-twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove that any two certified special Kirby presentations representing the same marked pair have equal normalized values.",
+    "lean_input_type": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs",
+    "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target",
+    "target_semantics": "The desired output is a well-defined function of the marked oriented diffeomorphism class of the pair (X, alpha), within the admitted direct integral-cycle scope, defined through normalized Kirby evaluation and independent of all certified presentation choices."
+  },
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit_at_note": "0b0b9c1c347c0725835b0e5cd9b9529e2af05357",
+    "dirty_at_note": false
+  },
+  "status": "FIFTEEN_FOUNDATION_CONDITIONS_ESTABLISHED_FIVE_CONCRETE_INSTANCES_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+    "subject:twisted-yetter:paper:tham-2108-13467",
+    "subject:twisted-yetter:paper:yetter-hepth-9311082"
+  ],
+  "title": "Lean target for an integral-character Kirby four-manifold invariant, revision 9",
+  "top_notice": "This is a formalization objective and exact obligation ledger, not a theorem claim. Fifteen of twenty target conditions are established. Five concrete categorical and cycle-level instances remain open, so no concrete four-manifold invariant has yet been constructed.",
+  "verification": {
+    "artifact_content_hash": "sha256:e2b9826fac7e326792605110e07a8c5087c3bdfdc0160a752019c53074677adf",
+    "artifact_tests_historical_v1_through_v10": "PASS_63",
+    "domain_axioms_exact": 2,
+    "full_umbrella_build": "PASS",
+    "integral_character_compiler_custom_axiom_count": 0,
+    "mutation_counts": {
+      "integral_character_kirby_colour_compiler": 3,
+      "target": 5
+    },
+    "proof_oracle_count": 0
+  }
+}
