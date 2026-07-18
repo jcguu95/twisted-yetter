@@ -1,0 +1,979 @@
+{
+  "argv": [
+    "experiments/scripts/build_kirby_completeness_v1.py"
+  ],
+  "checks": {
+    "scoped_pytest": {
+      "files": [
+        "tests/test_kirby_completeness_v1.py",
+        "tests/test_kirby_cancellation_v1.py",
+        "tests/test_kirby_cancellation_artifact_v1.py",
+        "tests/test_framed_link_presentation_independence_v1.py"
+      ],
+      "output": "....................................                                     [100%]\n36 passed in 0.45s",
+      "passed_count": 36,
+      "status": "PASS"
+    },
+    "source_scope_honesty": {
+      "baerenz_barrett_bytes_locally_pinned": true,
+      "de_sa_bytes_locally_pinned": false,
+      "general_cerf_and_table_two_are_distinct_inputs": true,
+      "gs_bytes_locally_pinned": false,
+      "status": "PASS_NO_SCOPE_COLLAPSE"
+    },
+    "whitelists": {
+      "evaluator_state_or_equality_included": false,
+      "general_constructor_count": 12,
+      "general_constructors": [
+        "levelIsotopy",
+        "oneSlide",
+        "twoSlide",
+        "threeSlide",
+        "zeroOneBirth",
+        "zeroOneDeath",
+        "oneTwoBirth",
+        "oneTwoDeath",
+        "twoThreeBirth",
+        "twoThreeDeath",
+        "threeFourBirth",
+        "threeFourDeath"
+      ],
+      "mandatory_fields": [
+        "uniqueZeroHandle",
+        "uniqueFourHandle",
+        "represented_manifold_hash_sound",
+        "representation_witness",
+        "source_scope_caveat",
+        "h2ModelCertificateHash",
+        "homologyEquiv",
+        "induced_by_chain_map_witness",
+        "local_topology_witness",
+        "tableTwoConnected"
+      ],
+      "special_constructor_count": 8,
+      "special_constructors": [
+        "framedIsotopy",
+        "oneOverOne",
+        "twoOverOne",
+        "twoOverTwo",
+        "oneTwoBirth",
+        "oneTwoDeath",
+        "twoThreeBirth",
+        "twoThreeDeath"
+      ],
+      "special_excluded_general_or_arbitrary_constructors": [
+        "zeroOneBirth",
+        "zeroOneDeath",
+        "threeSlide",
+        "threeFourBirth",
+        "threeFourDeath",
+        "fromEquality",
+        "fromArbitraryRelation"
+      ],
+      "status": "PASS_DISTINCT_GENERAL_AND_SPECIAL_CLOSED_WHITELISTS"
+    }
+  },
+  "content_hash": "sha256:9c0805c9f0152750c8ee5e3ddd78995ea56fdb61474606dcd5658c544b5fdb45",
+  "elapsed_milliseconds": 40389,
+  "explicit_non_claims": [
+    "R10 does not re-prove Cerf theory in Lean.",
+    "R10 does not derive the five-family Table 2 link calculus from general Cerf theory in Lean.",
+    "R10 does not prove evaluator invariance along the topology movie; R7-R9 supply local algebraic inputs and R11 must connect them.",
+    "R10 does not yet define an invariant of the pair (X, alpha).",
+    "R10 does not identify any link prescription with Crane-Yetter.",
+    "R10 does not validate any numerical computation artifact."
+  ],
+  "finished_at_utc": "2026-07-18T04:04:41Z",
+  "generator_script": "experiments/scripts/build_kirby_completeness_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "d0683d91998211e444fdb39f85102a9a663b3da3",
+    "dirty": false
+  },
+  "inputs": {
+    "byte_pinned_primary_source": {
+      "bytes": 906609,
+      "path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+      "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+      "status": "PASS_BARENZ_BARRETT_CAPTURE_MATCH"
+    },
+    "obligation_matrix": {
+      "obligation_count": 34,
+      "path": "experiments/inputs/lean-kirby/kirby-completeness-obligation-matrix-v1.json",
+      "sha256": "c1afb732e7757c5ead6097f8c22cb49b87cd95cfe1f9fc8e8edbd7e757718522",
+      "trusted_input_count": 2
+    },
+    "r9_local_move_artifact": {
+      "content_hash": "sha256:b3683789e585a7183ad9e88ac8063c792e4314cd02c09dc5d10a641f83d75cad",
+      "path": "experiments/results/lean-kirby/kirby-cancellation-v1.json",
+      "sha256": "43ea028c86e02a4006f6d8ae29cedc97007ccca0200047414dc8d2cee462ee45",
+      "source_commit": "5bb5b770b03ab08eb63e7e7e06f59bc41ac60427"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/kirby-completeness-primary-sources-v1.json",
+      "reference_count": 5,
+      "sha256": "664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885"
+    },
+    "source_capture_limitations": {
+      "de_sa": {
+        "status": "METADATA_ONLY_NO_CHAPTER_BYTES",
+        "unsafe_interpretation": "This record establishes bibliographic identity and page range only. R10 does not attribute an exact theorem statement to de Sa without the chapter bytes."
+      },
+      "gompf_stipsicz": {
+        "status": "NO_REPO_LOCAL_PRIMARY_BYTES",
+        "unsafe_interpretation": "The book metadata and exact locators were checked, but this record is not a byte-pinned local copy of the book."
+      },
+      "status": "PASS_LIMITATIONS_NOT_HIDDEN"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/kirby-completeness-obligation-matrix-v1.json": {
+        "bytes": 8186,
+        "sha256": "c1afb732e7757c5ead6097f8c22cb49b87cd95cfe1f9fc8e8edbd7e757718522"
+      },
+      "experiments/inputs/references/kirby-completeness-primary-sources-v1.json": {
+        "bytes": 4987,
+        "sha256": "664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885"
+      },
+      "experiments/scripts/build_kirby_completeness_v1.py": {
+        "bytes": 17538,
+        "sha256": "fc2463cf7452ed65937f3a22acab143584e4264d8f64d7a8dd4c350e684f0417"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryTopologyMoveInjection.lean": {
+        "bytes": 616,
+        "sha256": "ffd32c6fe6a2b9a32c13a96a53e94f8a0785d4e92a576f5b8d0d074c93bdc54a"
+      },
+      "lean/Mutations/EvaluatorEqualityInsideKirbyCompleteness.lean": {
+        "bytes": 984,
+        "sha256": "fb7bdb722fc885a738b2e5ee185d2606a10c0d004ccc80eca45b1a5c476c424b"
+      },
+      "lean/Mutations/HandwrittenMovieTargetCharacter.lean": {
+        "bytes": 951,
+        "sha256": "ee4b3722452be80304497d13cc00124848cd73fa534bd16abac942b0fcff4008"
+      },
+      "lean/Mutations/MissingInducedH2ChainWitness.lean": {
+        "bytes": 798,
+        "sha256": "54429bb49068e2f2bc296eaa48598adf690127d76d54113cf62ede125fe56150"
+      },
+      "lean/Mutations/MissingKirbyCompletenessCaveat.lean": {
+        "bytes": 840,
+        "sha256": "915a1e435d17553dce273586293da7188d5cf9f1861c3658b6315e5246371a89"
+      },
+      "lean/Mutations/MissingLocalTopologyWitness.lean": {
+        "bytes": 1083,
+        "sha256": "e0026748d842f7bc2b122d22f4cdfb6dc8f98f0e87147e982cdc8eb56e026187"
+      },
+      "lean/Mutations/MissingSpecialManifoldBinding.lean": {
+        "bytes": 1349,
+        "sha256": "035267979bfc5e7e901942e70207a20922f3b3b88d17d148509d4f6a00e9dc25"
+      },
+      "lean/Mutations/MissingUniqueFourHandle.lean": {
+        "bytes": 1633,
+        "sha256": "877cff49cc848f58fdfd70dbfde2dfe76a22c2d6c5a79f3e9327e11da56f478f"
+      },
+      "lean/Mutations/ZeroOneAsTableTwoMove.lean": {
+        "bytes": 615,
+        "sha256": "25936a92fe10add2af18cca6d3ac16d7a8478c7394c239c99bf005bcff821bd6"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 939,
+        "sha256": "e1ac72231dda96213f0f0009ed6341cf13f9a17326021ac0c3ebc2d35aa3039a"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 6719,
+        "sha256": "cbfabb781a045a5624f8639e94f0f81535795c86143d0ffae0634cab2be160c8"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean": {
+        "bytes": 21041,
+        "sha256": "84ef951105d8818c5b9122860d722df86cae92ec7868175928c8091bf25b1f83"
+      },
+      "scripts/lean_kirby_completeness_mutation_tests.sh": {
+        "bytes": 2337,
+        "sha256": "10efbe8cb52cdfbcb53281c6df8ec086d65e9193f438b3ca2728834a2e460c64"
+      },
+      "src/twisted_yetter/kirby_completeness_v1.py": {
+        "bytes": 29547,
+        "sha256": "b2f221a96c1a8ff991042e8345569b5a717b7e181e4b6ac81cda41f735f98d17"
+      },
+      "tests/test_kirby_completeness_artifact_v1.py": {
+        "bytes": 6269,
+        "sha256": "527afb8247b5cd03b054bdea25c8a2376251de674e83bd3814cd9565301cce70"
+      },
+      "tests/test_kirby_completeness_v1.py": {
+        "bytes": 6715,
+        "sha256": "cc0cb32a9ff7b3c221135f172b2efb8e3fb9301acf81b2598cef3f42e634a75a"
+      }
+    }
+  },
+  "lean_certificate": {
+    "audited_declaration_count": 80,
+    "axiom_audit": {
+      "output": "'TwistedYetter.Kirby.CouponNaturality.slide_through_positive_crossing' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_negative_crossing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cup' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_left_cap' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cup' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CouponNaturality.slide_through_right_cap' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.Context.eval_plug_congr' does not depend on any axioms\n'TwistedYetter.Kirby.CategoricalTangle.positiveCrossingMove_sound' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.negativeCrossingMove_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.leftCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCupMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalTangle.rightCapMove_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.CategoricalMovie.Movie.sound' does not depend on any axioms\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleSlide.SourcedFunctorSlidingLaw.coupon_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_weightedSum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearDiagram.eval_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.evalContextLinearMap_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.LinearContext.insertIdentity' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.mateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.MateDiagram.dualMateExpanded_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingCategoryData.equation_3_1_9_to_3_1_11' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_5' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_6' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.equation_3_1_7_to_3_1_8' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.core_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.GeneralizedSliding.SlidingFamily.equation_3_1_2' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.liftExterior_eval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.exterior_transport_in_context_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.ClosedFramedContext.lemma_3_4' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FramedSliding.SlidingFamily.lemma34Movie_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.validation_witness' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.Presentation.FormalPresentation.pinned_source_hash_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.identityBefore_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.identityAfter_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.compAssoc_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.tensorInterchange_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIIPositive_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIINegative_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.reidemeisterIII_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.rightPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.rightDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftPrimalSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.leftDualSnake_sound' depends on axioms: [propext]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.positiveMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.negativeMove' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cut_independence_sound' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cutMove' does not depend on any axioms\n'TwistedYetter.Kirby.PresentationIsotopy.TaggedMove.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.GeneratedIsotopy.eval_eq' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.PresentationIsotopy.FramedLinkPresentationCompleteness.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.transportCharacter_apply' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.HomologicalTransport.pairing_preserved' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.liftOrdinaryExterior_eval' depends on axioms: [propext]\n'TwistedYetter.Kirby.KirbyHandleMoves.ordinary_exterior_transport_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyHandleMoves.TwoHandleOverTwoSlide.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ne_zero' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addOneTwo' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addTwoThree' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyZero' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyFour' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_factor' depends on axioms: [propext, Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.normalized_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.CancellationHomologyTransport.pairing_preserved' depends on axioms: [propext,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.homologyTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.pairing_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.homologyEquiv_trans' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoLinkCompleteness.markedTransport' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]",
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "build_order": [
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean",
+      "lean/TwistedYetter.lean"
+    ],
+    "build_output": "",
+    "mutation_count": 9,
+    "mutation_rejections": [
+      "PASS expected rejection: lean/Mutations/EvaluatorEqualityInsideKirbyCompleteness.lean [diagnostic: `evaluatorEquality` is not a field of structure `TableTwoLinkCompleteness`]",
+      "PASS expected rejection: lean/Mutations/MissingKirbyCompletenessCaveat.lean [diagnostic: Fields missing: `source_scope_caveat`]",
+      "PASS expected rejection: lean/Mutations/ZeroOneAsTableTwoMove.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.zeroOneBirth`]",
+      "PASS expected rejection: lean/Mutations/HandwrittenMovieTargetCharacter.lean [diagnostic: `targetCharacter` is not a field of structure `MarkedH2Transport`]",
+      "PASS expected rejection: lean/Mutations/MissingUniqueFourHandle.lean [diagnostic: Fields missing: `uniqueFourHandle`]",
+      "PASS expected rejection: lean/Mutations/ArbitraryTopologyMoveInjection.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`]",
+      "PASS expected rejection: lean/Mutations/MissingInducedH2ChainWitness.lean [diagnostic: Fields missing: `inducedByCertifiedChainMap`, `induced_by_chain_map_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingSpecialManifoldBinding.lean [diagnostic: Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingLocalTopologyWitness.lean [diagnostic: Fields missing: `locallyRealizesTableTwoMove`, `local_topology_witness`]"
+    ],
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/KirbyCompleteness.lean",
+        "lean/TwistedYetter.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "status": "PASS_LEAN_KERNEL_AND_NEGATIVE_MUTATIONS"
+  },
+  "mathematical_status": "R10_TOPOLOGY_BOUNDARY_ESTABLISHED_AS_TWO_EXPLICIT_SOURCE_BACKED_INPUTS_NOT_REPROVED_IN_LEAN",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_kirby_completeness_v1.py",
+  "roadmap_status": "R10_TERMINAL_R11_NOT_STARTED",
+  "runtime_certificate": {
+    "composite_h2_transport": {
+      "character_pairing_certificate": {
+        "checked_pair_count": 16,
+        "coefficient_field": "F2",
+        "h2_dimension": 2,
+        "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+        "target_character_rule": "(M^-1)^T chi"
+      },
+      "inverse_mod2": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "matrix_mod2": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "status": "PASS_COMPOSED_H2_TRANSPORT",
+      "step_count": 8
+    },
+    "fixture": {
+      "claim_boundary": {
+        "explicit_non_claims": [
+          "R10 does not re-prove Cerf theory in Lean.",
+          "R10 does not derive the Table 2 refinement from general Cerf theory in Lean.",
+          "R10 does not contain or prove an evaluator equality.",
+          "R10 does not yet define the twisted four-manifold invariant.",
+          "R10 does not identify that invariant with Crane-Yetter."
+        ],
+        "lean_proves": [
+          "the general and special move whitelists are distinct types",
+          "special movies compose only typed Table 2 moves",
+          "every special move carries an H2 equivalence",
+          "movie H2 equivalences compose",
+          "derived character transport preserves every pairing"
+        ],
+        "mathematical_status": "R10_TOPOLOGY_BOUNDARY_ESTABLISHED_AS_EXPLICIT_SOURCE_BACKED_INPUT",
+        "trusted_topology_inputs": [
+          "general Cerf completeness for compact relative handle decompositions",
+          "special five-family Table 2 link-calculus refinement"
+        ]
+      },
+      "completeness_boundary": {
+        "evaluator_equality_included": false,
+        "general_cerf": {
+          "exact_scope": "two ordered relative handle decompositions of one compact smooth pair (X, boundary-minus X)",
+          "move_families": [
+            "level_isotopy_indices_0_through_4",
+            "same_index_slide_1",
+            "same_index_slide_2",
+            "same_index_slide_3",
+            "zero_one_birth_death",
+            "one_two_birth_death",
+            "two_three_birth_death",
+            "three_four_birth_death"
+          ],
+          "source_locator": "Definition 4.2.1, Theorem 4.2.12, and Proposition 4.2.13, printed pages 104 and 110-111",
+          "source_ref": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+          "source_scope_caveat": "Theorem 4.2.12 contains all adjacent-index births and deaths and index-three slides; it is not by itself the five-family Table 2 link theorem.",
+          "status": "IMPORTED_SOURCE_BACKED_TOPOLOGY_INPUT"
+        },
+        "table_two_link_refinement": {
+          "derived_from_general_cerf_in_lean": false,
+          "endpoint_normal_form": {
+            "diagrammed_handle_indices": [
+              1,
+              2
+            ],
+            "higher_handles_closed_implicitly": [
+              3,
+              4
+            ],
+            "ordered_by_increasing_index": true,
+            "unique_four_handle": true,
+            "unique_zero_handle": true
+          },
+          "excluded_general_moves": [
+            "zero_one_birth_death",
+            "three_over_three_slide",
+            "three_four_birth_death"
+          ],
+          "move_families": [
+            "framed_isotopy",
+            "one_over_one",
+            "two_over_one",
+            "two_over_two",
+            "one_two_birth",
+            "one_two_death",
+            "two_three_birth",
+            "two_three_death"
+          ],
+          "source_locator": "B\u00e4renz-Barrett Theorem 3.9 and Table 2, journal pages 685-687; Gompf-Stipsicz Section 5.1, printed pages 139-148; de Sa, pages 16-30",
+          "source_refs": [
+            "ref:baerenz-barrett-dichromatic-2018",
+            "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+            "ref:de-sa-link-calculus-1979"
+          ],
+          "source_scope_caveat": "Lean does not derive the special link calculus from general Cerf theory. This refinement is a separately visible topology input and is exactly where a source scope error must fail.",
+          "status": "IMPORTED_SOURCE_BACKED_LINK_CALCULUS_REFINEMENT"
+        }
+      },
+      "composite_h2_transport": {
+        "character_pairing_certificate": {
+          "checked_pair_count": 16,
+          "coefficient_field": "F2",
+          "h2_dimension": 2,
+          "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+          "target_character_rule": "(M^-1)^T chi"
+        },
+        "inverse_mod2": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "matrix_mod2": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "status": "PASS_COMPOSED_H2_TRANSPORT",
+        "step_count": 8
+      },
+      "content_hash": "sha256:055ff74e68bdd1b07fd0898a635777aa98f639652a3b43e527e0af11c86cf946",
+      "manifold": {
+        "boundary_mode": "closed",
+        "compact": true,
+        "connected": true,
+        "dimension": 4,
+        "manifold_id": "r10-formal-topology-fixture-X",
+        "manifold_snapshot_hash": "sha256:97a082dca9a22123f3ac690b83d7e85c8889cc1b14a59d841e940f3d17ef9694",
+        "orientation_mode": "oriented",
+        "scope_certificate_hash": "sha256:85d3bd20a2ebfb84686c9054552377d847952843c12348b30993b5ac094dc536",
+        "smooth": true
+      },
+      "movie_id": "r10-table-two-whitelist-and-h2-composition-fixture",
+      "schema": "twisted-yetter.kirby-completeness-movie.v1",
+      "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+      "steps": [
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kind": "framed_isotopy",
+          "local_topology_certificate_hash": "sha256:ff7333a85d2309463bbd2169aa5a9a54f69c820a7d9c6b2bce2b58f78cece236",
+          "orientation": "not_applicable",
+          "source_h2_model_certificate_hash": "sha256:da7d31fc9c0b105f10ffeeb6ee2eb4c694c98d343c00ac247a6ec72d7f5086a7",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:43843db4f4b746b2811168d74f0979f4c73c28edd97bc84dd9bd154b89416edc",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-00",
+          "source_proof": {
+            "source_locator": "Theorem 4.2.12, printed page 110",
+            "source_ref": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-00-framed_isotopy",
+          "target_h2_model_certificate_hash": "sha256:01dc412c01e3f13dded44636201cfb44a1b9d4f12db45bd8e6c3da5d1572bbd7",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-01"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kind": "one_over_one",
+          "local_topology_certificate_hash": "sha256:e70acc398673b6b625254fd11996a290b7bc955416e7ae64523fc025b5e82291",
+          "orientation": "positive",
+          "source_h2_model_certificate_hash": "sha256:01dc412c01e3f13dded44636201cfb44a1b9d4f12db45bd8e6c3da5d1572bbd7",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:101db395b8a5536b65228ecf05acbfa0951e1c8ba9ebfdcc4b7ad83270660488",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-01",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-01-one_over_one",
+          "target_h2_model_certificate_hash": "sha256:0b84bbfa8b82c935d8033da6bb3dbb0dcbe2422f5f20d7e2c7bf776e67f497bd",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-02"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "kind": "two_over_one",
+          "local_topology_certificate_hash": "sha256:e08b00e4c59b9c2c634552324b519b742237dd8fc26be1e638abf728fb73fc38",
+          "orientation": "negative",
+          "source_h2_model_certificate_hash": "sha256:0b84bbfa8b82c935d8033da6bb3dbb0dcbe2422f5f20d7e2c7bf776e67f497bd",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:5052d88e83f1950f08890a73d849fdcc8467aff8558efb6a461db14a92324778",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-02",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-02-two_over_one",
+          "target_h2_model_certificate_hash": "sha256:ef008e4be2d6781d21f9321ebeadf29623c18723c8dd05185ac6822817cffd21",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-03"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "kind": "two_over_two",
+          "local_topology_certificate_hash": "sha256:be01b3159d3171885dbf58bdd8855c1cfbafa63ce84be5d133d70f02677d4a51",
+          "orientation": "positive",
+          "source_h2_model_certificate_hash": "sha256:ef008e4be2d6781d21f9321ebeadf29623c18723c8dd05185ac6822817cffd21",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:d1bd1f7e6150821bb15b44381a0b96a466974ac69692181621792c1df4a341ae",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-03",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-03-two_over_two",
+          "target_h2_model_certificate_hash": "sha256:630fe10bf79151206677a27bedc46de5920fc04251cea1b71c2e138c75ebe17e",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-04"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kind": "one_two_birth",
+          "local_topology_certificate_hash": "sha256:cb44a9ba4fb15cc3a3d6d4a89ddda1b0e21c14df56b4095cdc5800172d5b9dc3",
+          "orientation": "not_applicable",
+          "source_h2_model_certificate_hash": "sha256:630fe10bf79151206677a27bedc46de5920fc04251cea1b71c2e138c75ebe17e",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:b1cd852db9dbd4a1061c2a69166d7d49a5c957370e2a592068bd8297bbc23d6a",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-04",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-04-one_two_birth",
+          "target_h2_model_certificate_hash": "sha256:28238c49a627742f6c30d00a5a9f7f09bc294157c7a17dbfa81cfb5c440935f0",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 3,
+            "h2": 4,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-05"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "kind": "one_two_death",
+          "local_topology_certificate_hash": "sha256:e0402bc8155942fc9c826cd84a3de3ae39851ccdebcc646e72b0c829d1359d9c",
+          "orientation": "not_applicable",
+          "source_h2_model_certificate_hash": "sha256:28238c49a627742f6c30d00a5a9f7f09bc294157c7a17dbfa81cfb5c440935f0",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 3,
+            "h2": 4,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:a3bb0f6677230c38ef4d0fc4a63aca110766c6d68c1eabd30a2d79ace106d07c",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-05",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-05-one_two_death",
+          "target_h2_model_certificate_hash": "sha256:78d719cc2b61607b283eb4ffcd58ce3b5a592da22e2d3c29f86fd9ce60731898",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-06"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "kind": "two_three_birth",
+          "local_topology_certificate_hash": "sha256:4ea78cc8e080913b5ab060aabcc2a1959e10374f43664d5edb9aa68a153d2fea",
+          "orientation": "not_applicable",
+          "source_h2_model_certificate_hash": "sha256:78d719cc2b61607b283eb4ffcd58ce3b5a592da22e2d3c29f86fd9ce60731898",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:45bcff5d0128ca5169ea311c8bcdc753acbfb0d9fe7bceb44d8e4f562d52da2a",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-06",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-06-two_three_birth",
+          "target_h2_model_certificate_hash": "sha256:caabbe660030edf31118ea2d80f2c9c1db4b7deae4a9cb85931e3a1a29175911",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 4,
+            "h3": 3,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-07"
+        },
+        {
+          "character_pairing_certificate": {
+            "checked_pair_count": 16,
+            "coefficient_field": "F2",
+            "h2_dimension": 2,
+            "status": "PASS_EXHAUSTIVE_CLASS_CHARACTER_PAIRING",
+            "target_character_rule": "(M^-1)^T chi"
+          },
+          "h2_inverse_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "h2_matrix_mod2": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "kind": "two_three_death",
+          "local_topology_certificate_hash": "sha256:0f650d9bf900fb0255004987173b14ee44b8c6b1ebda18e1382c8dc1e9f9295c",
+          "orientation": "not_applicable",
+          "source_h2_model_certificate_hash": "sha256:caabbe660030edf31118ea2d80f2c9c1db4b7deae4a9cb85931e3a1a29175911",
+          "source_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 4,
+            "h3": 3,
+            "h4": 1
+          },
+          "source_presentation_hash": "sha256:7daf504e54019a9f409837d6df1e34c2f0e012684c9dde268c65e9a6737d52d0",
+          "source_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-07",
+          "source_proof": {
+            "source_locator": "Theorem 3.9 and Table 2, journal pages 685-687",
+            "source_ref": "ref:baerenz-barrett-dichromatic-2018",
+            "status": "SOURCE_BACKED_TOPOLOGY_WITNESS"
+          },
+          "step_id": "r10-table-two-whitelist-and-h2-composition-fixture-step-07-two_three_death",
+          "target_h2_model_certificate_hash": "sha256:49d980626b6fd28cea0df541a45c45efd1f09cea62719c69afe5466e8d817914",
+          "target_handle_counts": {
+            "h0": 1,
+            "h1": 2,
+            "h2": 3,
+            "h3": 2,
+            "h4": 1
+          },
+          "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52",
+          "target_presentation_id": "r10-table-two-whitelist-and-h2-composition-fixture-presentation-08"
+        }
+      ],
+      "target_presentation_hash": "sha256:a2ed3c61f212bcd4bd744a43d422b714e7839b4ceb7811efd13418c2cf90ef52"
+    },
+    "special_move_coverage": "PASS_EIGHT_OF_EIGHT_DIRECTED_CONSTRUCTORS",
+    "status": "PASS_HASHED_MOVIE_AND_H2_TRANSPORT"
+  },
+  "schema": "twisted-yetter.kirby-completeness-boundary.v1",
+  "started_at_utc": "2026-07-18T04:04:00Z",
+  "status": "PASS_KIRBY_CERF_TOPOLOGY_BOUNDARY",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  },
+  "topology_boundary": {
+    "derived_from_general_cerf_in_lean": false,
+    "evaluator_equality_included": false,
+    "general_cerf": {
+      "exact_scope": "two ordered relative handle decompositions of one compact smooth pair (X, boundary-minus X)",
+      "move_families": [
+        "level_isotopy_indices_0_through_4",
+        "same_index_slide_1",
+        "same_index_slide_2",
+        "same_index_slide_3",
+        "zero_one_birth_death",
+        "one_two_birth_death",
+        "two_three_birth_death",
+        "three_four_birth_death"
+      ],
+      "source_locator": "Definition 4.2.1, Theorem 4.2.12, and Proposition 4.2.13, printed pages 104 and 110-111",
+      "source_ref": "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+      "source_scope_caveat": "Theorem 4.2.12 contains all adjacent-index births and deaths and index-three slides; it is not by itself the five-family Table 2 link theorem.",
+      "status": "IMPORTED_SOURCE_BACKED_TOPOLOGY_INPUT"
+    },
+    "general_move_family_count": 8,
+    "special_directed_constructor_count": 8,
+    "special_excluded_general_moves": [
+      "zero_one_birth_death",
+      "three_over_three_slide",
+      "three_four_birth_death"
+    ],
+    "status": "PASS_TWO_LAYERS_SEPARATELY_VISIBLE",
+    "table_two_link_refinement": {
+      "derived_from_general_cerf_in_lean": false,
+      "endpoint_normal_form": {
+        "diagrammed_handle_indices": [
+          1,
+          2
+        ],
+        "higher_handles_closed_implicitly": [
+          3,
+          4
+        ],
+        "ordered_by_increasing_index": true,
+        "unique_four_handle": true,
+        "unique_zero_handle": true
+      },
+      "excluded_general_moves": [
+        "zero_one_birth_death",
+        "three_over_three_slide",
+        "three_four_birth_death"
+      ],
+      "move_families": [
+        "framed_isotopy",
+        "one_over_one",
+        "two_over_one",
+        "two_over_two",
+        "one_two_birth",
+        "one_two_death",
+        "two_three_birth",
+        "two_three_death"
+      ],
+      "source_locator": "B\u00e4renz-Barrett Theorem 3.9 and Table 2, journal pages 685-687; Gompf-Stipsicz Section 5.1, printed pages 139-148; de Sa, pages 16-30",
+      "source_refs": [
+        "ref:baerenz-barrett-dichromatic-2018",
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+        "ref:de-sa-link-calculus-1979"
+      ],
+      "source_scope_caveat": "Lean does not derive the special link calculus from general Cerf theory. This refinement is a separately visible topology input and is exactly where a source scope error must fail.",
+      "status": "IMPORTED_SOURCE_BACKED_LINK_CALCULUS_REFINEMENT"
+    }
+  },
+  "trusted_topology_inputs": [
+    {
+      "exact_content": "General Cerf completeness for two ordered relative handle decompositions of one compact smooth pair.",
+      "input_id": "gompf-stipsicz-general-cerf-completeness",
+      "lean_type": "GeneralCerfCompleteness.connected",
+      "not_assumed": "No evaluator value or equality; no five-family reduction."
+    },
+    {
+      "exact_content": "For the admitted special closed four-dimensional link presentations, framed isotopy and the five B\u00e4renz-Barrett Table 2 move families connect presentations.",
+      "input_id": "table-two-link-calculus-refinement",
+      "lean_type": "TableTwoLinkCompleteness.tableTwoConnected",
+      "not_assumed": "No evaluator invariance and no Crane-Yetter identification."
+    }
+  ]
+}
