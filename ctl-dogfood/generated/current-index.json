@@ -12243,40 +12243,32 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683",
+      "cid": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
       "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
       "payload": {
         "artifacts": [
           {
-            "artifact_commit": "2fd59d8abf1a11dc5e36c6e1cd747b02eec8c62a",
-            "artifact_id": "four-manifold-invariant-target-v5",
-            "content_hash": "sha256:3a19b818d36d00a5caa522221c593db112363e51fd710289dfb710865aaf1132",
-            "git_blob": "014e2a2d87a0d9a2c15fbddf9254b3b920b9b919",
-            "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v5.json",
-            "sha256": "e7b7877ee0fbf6d34e69d88d1e136146c245d4ef42d10056310e5b7b6b1b2cff",
-            "source_commit": "555e285c6fe3b53f3aac1b8fa0df15ec9024e88a",
-            "status": "PASS_TEN_FOUNDATION_CONDITIONS_ESTABLISHED_TWO_SOURCE_BOUND_INSTANCES_OPEN"
+            "artifact_commit": "1e003df1e5e3ba72d7956b9344492ec47dea73d5",
+            "artifact_id": "four-manifold-invariant-target-v6",
+            "content_hash": "sha256:960dfa4d248167bbef0943411201a5172f5d6bb513e10edd7fcf1c613ae6b4e5",
+            "git_blob": "6bb411edb37cd04c164c3ef3d93c245f689ffaf2",
+            "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v6.json",
+            "sha256": "23d5158463f73e2b40cf5515b7d6a8c181ddf41f4680e541131bda1db25c4a4c",
+            "status": "PASS_ELEVEN_FOUNDATION_CONDITIONS_ESTABLISHED_ONE_SOURCE_BOUND_EVALUATOR_INSTANCE_OPEN"
+          },
+          {
+            "artifact_id": "lean-source-backed-handle-chain-naturality",
+            "git_blob": "fcd69b572064da2bd6146b424f7d411bbb82e027",
+            "path": "lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturality.lean",
+            "sha256": "9da95908abb5d058ec78aee0cea9a50bf3f1c6388d6e830d8babcccb32bfdde7",
+            "status": "LEAN_ONE_VISIBLE_HOMOLOGY_DOMAIN_AXIOM_FINAL_H2_IDENTITY_DERIVED"
           },
           {
             "artifact_id": "lean-four-manifold-invariant-target",
-            "git_blob": "a0849d51ce79afaf98ee2fbbe53b19fce075e9f2",
+            "git_blob": "e6015ddc23e1659b6af449a0d52a3e3f87f09e93",
             "path": "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
-            "sha256": "bedd5179ce7e9906a51f1c3ea8e6be0c4f762361f13da6eef7fabe8ae6870f0c",
-            "status": "LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_TWELVE_CONDITION_LEDGER"
-          },
-          {
-            "artifact_id": "lean-source-bound-geometric-h2-compiler",
-            "git_blob": "3e5168023a6ab76f08e21192f868ee6ce7016800",
-            "path": "lean/TwistedYetter/Kirby/SourceBoundGeometricH2Compiler.lean",
-            "sha256": "15bae90abc473ee840044c6e773ceefc93e53ae14b6485888112a6bc7456c288",
-            "status": "LEAN_H2_IDENTITY_DERIVED_FROM_CHAIN_EQUIVALENCE_AND_COORDINATE_NATURALITY"
-          },
-          {
-            "artifact_id": "lean-categorical-presentation-compiler",
-            "git_blob": "12a79dade9d0f07227135a42c34e0ee40da64f3e",
-            "path": "lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean",
-            "sha256": "ed3a21f32c77dfa60fbcf1c643c39ff1b87678a29d0ebe585acbfd83e7862446",
-            "status": "LEAN_TYPED_EVENT_TO_PRIMITIVE_COMPILER_MECHANISM"
+            "sha256": "8e7187a022c6c78d6b16621c3740404e210bfdac8c3cc5bd54c1b9b3a2ba0ba3",
+            "status": "LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_TWELVE_BY_ELEVEN_BY_ONE_LEDGER"
           }
         ],
         "condition_ledger": {
@@ -12290,84 +12282,100 @@
             "source_backed_special_kirby_calculus_completeness",
             "exhaustive_evaluator_compiler_mechanism",
             "marked_pair_assembly_mechanism",
-            "source_bound_local_move_recipes"
+            "source_bound_local_move_recipes",
+            "source_bound_geometric_h2_compiler_instance_relative_to_visible_domain_axiom"
           ],
-          "established_count": 10,
+          "established_count": 11,
           "open": [
             {
               "condition": "source_bound_evaluator_compiler_instance",
-              "required_result": "A concrete six-event categorical interpreter and all eight source-bound R7/R8/R9 local proof objects, compiled from each exact presentation trace and move recipe.",
-              "silent_failure_guard": "A whole closed diagram, raw numerator, arbitrary evaluator equality, wrong crossing sign, or coupon hidden in a structural context is not admissible input."
-            },
-            {
-              "condition": "source_bound_geometric_h2_compiler_instance",
-              "required_result": "For every exact source-backed topology move, construct the handle-chain homotopy equivalence and prove its naturality in the common geometric H2 coordinates.",
-              "silent_failure_guard": "The final H2 identity is a derived theorem. It cannot be supplied directly, inferred from matching ranks, or replaced by a hash."
+              "required_result": "Construct a concrete six-event categorical interpreter and all eight source-bound R7/R8/R9 proof objects from exact presentation traces and local move recipes.",
+              "silent_failure_guard": "Whole diagrams, raw numerators, arbitrary evaluator equalities, wrong crossing signs, and coupons hidden in structural contexts remain inadmissible."
             }
           ],
-          "open_count": 2,
+          "open_count": 1,
           "required_count": 12
         },
-        "created_at": "2026-07-18T19:12:44Z",
+        "created_at": "2026-07-18T19:34:49Z",
         "created_by": "actor:codex",
+        "domain_axiom_boundary": {
+          "axiom_count": 2,
+          "axioms": [
+            {
+              "caveat": "Attaching maps, boundary matrices, basis changes, contractible summand homotopies, and the geometric semantics of each H2 certificate are not reconstructed in Lean.",
+              "does_not_supply": [
+                "categorical evaluator equality",
+                "final H2 identity"
+              ],
+              "name": "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+              "role": "For each certified local Kirby move, supply the actual handle-chain equivalence, shared recipe binding, coordinate-naturality square, and provenance hash."
+            },
+            {
+              "does_not_supply": [
+                "categorical evaluator equality",
+                "chain equivalence",
+                "H2 map"
+              ],
+              "name": "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+              "role": "Connect any two certified special presentations by the exact topology move whitelist."
+            }
+          ]
+        },
         "explicit_non_claims": [
           "This note does not claim that a concrete four-manifold invariant has been established.",
-          "This note does not claim that either source-bound compiler instance has been constructed.",
-          "This note does not claim a Lean proof of special Kirby calculus; one explicit source-backed topology domain axiom remains visible.",
-          "The topology domain axiom supplies no evaluator equality, chain equivalence, H2 map, or marked-coordinate compatibility.",
+          "The source-bound categorical evaluator instance remains open.",
+          "Handle-chain naturality is imported as one visible standard homology-domain axiom, not proved from serialized attaching maps.",
+          "The geometric semantics of presentation H2 certificates remain external to Lean.",
+          "The final H2 identity is derived in Lean and is not a field of either domain axiom.",
           "Content hashes establish identity and freshness, not mathematical semantics.",
           "This note does not identify the construction with Crane-Yetter or Yetter's state sum."
         ],
         "mathematical_status": "FORMALIZATION_OBJECTIVE_ACTIVE_CONDITIONAL_TARGET_ESTABLISHED_CONCRETE_INVARIANT_NOT_ESTABLISHED",
-        "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v4",
+        "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v5",
         "objective": {
-          "acceptance_rule": "Promotion requires concrete, hash-bound values of both remaining source-bound compiler types and a replay showing that all twelve target conditions are established. A conditional Lean theorem or arbitrary inhabitant is not admissible construction evidence.",
-          "goal": "Construct a homologically twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove that any two certified special Kirby presentations of the same marked pair have equal normalized evaluations.",
+          "acceptance_rule": "Promotion requires one concrete hash-bound SourceBoundTableTwoEvaluatorCompiler and a replay proving all twelve target conditions established. The two visible domain axioms and a conditional Lean theorem alone are not a concrete invariant construction.",
+          "goal": "Construct a homologically twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove equality of normalized evaluations for any two certified special presentations of the same marked pair.",
           "lean_input_type": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs",
-          "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target",
-          "target_statement": "Given both concrete source-bound compilers and the visible topology inputs, two certified presentations representing the same pair (X, alpha) have equal normalized evaluator values."
+          "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target"
         },
         "schema": "twisted-yetter/objective-lab-note/1",
         "source_repo": {
           "branch": "codex/lean-kirby-coupon-bootstrap",
-          "commit_at_note": "2fd59d8abf1a11dc5e36c6e1cd747b02eec8c62a",
+          "commit_at_note": "1e003df1e5e3ba72d7956b9344492ec47dea73d5",
           "dirty_at_note": false
         },
-        "status": "TEN_FOUNDATION_CONDITIONS_ESTABLISHED_TWO_SOURCE_BOUND_INSTANCES_OPEN",
+        "status": "ELEVEN_FOUNDATION_CONDITIONS_ESTABLISHED_ONE_SOURCE_BOUND_EVALUATOR_INSTANCE_OPEN",
         "subjects": [
           "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
           "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
           "subject:twisted-yetter:paper:tham-2108-13467",
           "subject:twisted-yetter:paper:yetter-hepth-9311082"
         ],
-        "title": "Lean target for a homologically twisted Kirby four-manifold invariant, revision 4",
-        "top_notice": "This is a formalization objective and exact obligation ledger, not a theorem claim. Lean now checks ten of twelve mechanism-level conditions. The concrete categorical evaluator instance and concrete geometric H2 compiler instance remain open, so no concrete four-manifold invariant has yet been constructed.",
+        "title": "Lean target for a homologically twisted Kirby four-manifold invariant, revision 5",
+        "top_notice": "This is a formalization objective and exact obligation ledger, not a theorem claim. Eleven of twelve target conditions are established, with handle-chain naturality explicitly imported as one auditable homology-domain axiom. The concrete categorical evaluator remains open, so no concrete four-manifold invariant has yet been constructed.",
         "verification": {
-          "categorical_compiler_mutations": 3,
+          "artifact_tests": "PASS_11",
+          "domain_axioms_exact": 2,
           "full_umbrella_build": "PASS",
-          "geometric_h2_compiler_mutations": 2,
-          "presentation_trace": {
-            "event_count": 12,
-            "slice_count": 13,
-            "status": "PASS"
+          "mutation_counts": {
+            "categorical_compiler": 3,
+            "geometric_h2_mechanism": 2,
+            "handle_chain_domain": 2,
+            "target": 5
           },
-          "proof_oracle_count": 0,
-          "target_custom_axioms": [
-            "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
-          ],
-          "target_mutations": 5
+          "proof_oracle_count": 0
         }
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683",
-        "created_at": "2026-07-18T19:12:44Z",
+        "cid": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
+        "created_at": "2026-07-18T19:34:49Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
         "parents": [
-          "ctlobj-sha256:a939bb013444131883c709576a92e67056a6558ec534c3c10d13059833597855"
+          "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683"
         ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -22011,7 +22019,7 @@
       "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit": "ctlobj-sha256:af0e3834a2de3277138cfc33d3ae449d14db00435ac23a535d99f05f70bd1755",
-      "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683",
+      "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
       "claim:resource-handle:figure21-framing-verifier": "ctlobj-sha256:bebda156270412592aacde975ef6d0e144152043bf3896bcb8bc1ef6b86e80b0",
@@ -22564,6 +22572,7 @@
         "ctlobj-sha256:af0e3834a2de3277138cfc33d3ae449d14db00435ac23a535d99f05f70bd1755"
       ],
       "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1": [
+        "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
         "ctlobj-sha256:83ae591c2666dfa6c2e02153fb35c74fc33a25ad3ec6ad8a715b4538c1461d74",
         "ctlobj-sha256:96038bff5ef470506e11b2860e72ad3ee8cdef33ed34541e30940c69ad8605f2",
         "ctlobj-sha256:a939bb013444131883c709576a92e67056a6558ec534c3c10d13059833597855",
@@ -23459,6 +23468,7 @@
         "ctlobj-sha256:015872de37b52a26d68302d4c54fe469ce68724cc89ed2d5797b3c2cbd396f15",
         "ctlobj-sha256:020d25a9d41959f6ba9e3e1055707df795a9f6ae6bb5d2a4cc4ea6ac82e6314f",
         "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5",
+        "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
         "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2",
         "ctlobj-sha256:03572920fa6cb10bb575e0a5792d5d103c18f1ed406ff08eedc28d4ee4822fdc",
         "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
@@ -23910,6 +23920,7 @@
         "ctlobj-sha256:0155ab61d99498c82d93bfc81b4c10aa5f8188773136da1b05e8c2778f103a3e",
         "ctlobj-sha256:020d25a9d41959f6ba9e3e1055707df795a9f6ae6bb5d2a4cc4ea6ac82e6314f",
         "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5",
+        "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
         "ctlobj-sha256:047d321a051ef12ff93135c1e5e405ffc6ffeb3d2b75321fad9b668fdd0eb35a",
         "ctlobj-sha256:055ab8fc2ea8f4553af2cf30c8f48c818683c774cff3bc60c8cf5884afedd881",
         "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9",
@@ -24444,6 +24455,14 @@
           "path": "$.revision_of.previous_graph_cid",
           "source_cid": "ctlobj-sha256:02681dad0bdf980b0e6320e7253f8a4c8be4683e4f8b112f251e41b5fbddefc5",
           "target_cid": "ctlobj-sha256:a6da935ac8f6e66a5c5e0100d835dbfc6f4058681f37558b2b6b3fd0016bb583"
+        }
+      ],
+      "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
+          "target_cid": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683"
         }
       ],
       "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2": [
@@ -25934,6 +25953,9 @@
       ],
       "ctlobj-sha256:d63602714a710e29b3efbc00c54758b028fb9e37fa1db7cceb4033a13f475b69": [
         "ctlobj-sha256:0cb6f71da1eab125bdb4e23522e8088c4b6e5dd47d6721b5f9dade1dd34404cf"
+      ],
+      "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683": [
+        "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692"
       ],
       "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c": [
         "ctlobj-sha256:33e4058f19c230e65b4492934ff05e140432e32fb4e5ec976a7059db12c35b98"
@@ -27643,6 +27665,94 @@
           "parent_root_cid": "ctlobj-sha256:52c4fc4b902b750189f8fccdb2db3bd362d9e6ae36d2480c00aef02991deb2ff",
           "path": "manifests/graph-computation-first-v9-2026-06-27.json",
           "payload_file": "ctl-dogfood/graphs/computation-first-v9.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:c45a5452a09ca404a852894d24270763e84fe2ade497a4ec46775e77023e2e14",
+          "generated_at": "2026-07-18T14:03:58Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:987fe5b633bdabeeff9faa2a09d3fe9d7915128ab47a47668b69e6208b15020c",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v1.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v1.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:0174b88b0c03281c6299e8201af5da5b8fb235594b3080ac1a7a7e72cbcc866c",
+          "generated_at": "2026-07-18T15:08:00Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:c45a5452a09ca404a852894d24270763e84fe2ade497a4ec46775e77023e2e14",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v2.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:27028039314fd572131ba44f10700c4805c55ec8ea5c3787d27ce87bbd379d20",
+          "generated_at": "2026-07-18T16:00:08Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:0174b88b0c03281c6299e8201af5da5b8fb235594b3080ac1a7a7e72cbcc866c",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v3.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v3.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "generated_at": "2026-07-18T19:13:40Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:27028039314fd572131ba44f10700c4805c55ec8ea5c3787d27ce87bbd379d20",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v4.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v4.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -37431,6 +37541,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:9df7bf3d2e8392c871d34218a3ff1d9096f1d88de7a30db0da024f116aea6252",
           "generated_at": "2026-07-06T23:17:10Z",
           "logical_id": "sys:policy",
@@ -44531,6 +44658,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v4.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:854018f646481568b230035b607a9f48bd7d7343ce3afd80efcaa30fea877ede": [
@@ -47408,6 +47552,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v4.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:9698289093bc8b38677a375c6cb46cc5f3083971faf113e3f1582729f73ff9cb": [
@@ -48930,6 +49091,23 @@
           "parent_root_cid": "ctlobj-sha256:27028039314fd572131ba44f10700c4805c55ec8ea5c3787d27ce87bbd379d20",
           "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v4.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v4.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -52455,6 +52633,23 @@
           "parent_root_cid": "ctlobj-sha256:27028039314fd572131ba44f10700c4805c55ec8ea5c3787d27ce87bbd379d20",
           "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v4.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v4.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+          "generated_at": "2026-07-18T19:35:45Z",
+          "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+          "path": "manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v5.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -57098,6 +57293,36 @@
           "utf8_bytes": 85121
         },
         "word_count": 6181
+      },
+      "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
+        "created_at": "2026-07-18T19:34:49Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 1909,
+        "gist": "This is a formalization objective and exact obligation ledger, not a theorem claim. Eleven of twelve target conditions are established, with handle-chain naturality explicitly imported as one auditable homology-domain axiom. The concrete categorical evaluator remains open, so...",
+        "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_commit\":\"1e003df1e5e3ba72d7956b9344492ec47dea73d5\",\"artifact_id\":\"four-manifold-invariant-target-v6\",\"content_hash\":\"sha256:960dfa4d248167bbef0943411201a5172f5d6bb513e10edd7fcf1c613ae6b4e5\",\"git_blob\":\"6bb411edb37cd04c164c3ef3d93c245f689ffaf2\",\"path\":\"experiments/results/lean-kirby/four-manifold-invariant-target-v6.json\",\"sha256\":\"23d5158463f73e2b40cf5515b7d6a8c181ddf41f4680e541131bda1db25c4a4c\",\"status\":\"PASS_ELEVEN_FOUNDATION_CONDITIONS_ESTABLISHED_ONE_SOURCE_BOUND_EVALUATOR_INSTANCE_OPEN\"},{\"artifact_id\":\"lean-source-backed-handle-chain-naturality\",\"git_blob\":\"fcd69b572064da2bd6146b424f7d411bbb82e027\",\"path\":\"lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturality.lean\",\"sha256\":\"9da95908abb5d058ec78aee0cea9a50bf3f1c6388d6e830d8babcccb32bfdde7\",\"status\":\"LEAN_ONE_VISIBLE_HOMOLOGY_DOMAIN_AXIOM_FINAL_H2_IDENTITY_DERIVED\"},{\"artifact_id\":\"lean-four-manifold-invariant-target\",\"git_blob\":\"e6015ddc23e1659b6af449a0d52a3e3f87f09e93\",\"path\":\"lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean\",\"sha256\":\"8e7187a022c6c78d6b16621c3740404e210bfdac8c3cc5bd54c1b9b3a2ba0ba3\",\"status\":\"LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_TWELVE_BY_ELEVEN_BY_ONE_LEDGER\"}],\"condition_ledger\":{\"established\":[\"category_and_graphical_algebra\",\"explicit_three_handle_normalization\",\"closed_typed_presentation_execution\",\"primitive_categorical_event_compiler_mechanism\",\"chain_derived_marked_h2_transport\",\"source_bound_geometric_h2_compiler_mechanism\",\"source_backed_special_kirby_calculus_completeness\",\"exhaustive_evaluator_compiler_mechanism\",\"marked_pair_assembly_mechanism\",\"source_bound_local_move_recipes\",\"source_bound_geometric_h2_compiler_instance_relative_to_visible_domain_axiom\"],\"established_count\":11,\"open\":[{\"condition\":\"source_bound_evaluator_compiler_instance\",\"required_result\":\"Construct a concrete six-event categorical interpreter and all eight source-bound R7/R8/R9 proof objects from exact presentation traces and local move recipes.\",\"silent_failure_guard\":\"Whole diagrams, raw numerators, arbitrary evaluator equalities, wrong crossing signs, and coupons hidden in structural contexts remain inadmissible.\"}],\"open_count\":1,\"required_count\":12},\"created_at\":\"2026-07-18T19:34:49Z\",\"created_by\":\"actor:codex\",\"domain_axiom_boundary\":{\"axiom_count\":2,\"axioms\":[{\"caveat\":\"Attaching maps, boundary matrices, basis changes, contractible summand homotopies, and the geometric semantics of each H2 certificate are not reconstructed in Lean.\",\"does_not_supply\":[\"categorical evaluator equality\",\"final H2 identity\"],\"name\":\"TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput\",\"role\":\"For each certified local Kirby move, supply the actual handle-chain equivalence, shared recipe binding, coordinate-naturality square, and provenance hash.\"},{\"does_not_supply\":[\"categorical evaluator equality\",\"chain equivalence\",\"H2 map\"],\"name\":\"TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected\",\"role\":\"Connect any two certified special presentations by the exact topology move whitelist.\"}]},\"explicit_non_claims\":[\"This note does not claim that a concrete four-manifold invariant has been established.\",\"The source-bound categorical evaluator instance remains open.\",\"Handle-chain naturality is imported as one visible standard homology-domain axiom, not proved from serialized attaching maps.\",\"The geometric semantics of presentation H2 certificates remain external to Lean.\",\"The final H2 identity is derived in Lean and is not a field of either domain axiom.\",\"Content hashes establish identity and freshness, not mathematical semantics.\",\"This note does not identify the construction with Crane-Yetter or Yetter's state sum.\"],\"mathematical_status\":\"FORMALIZATION_OBJECTIVE_ACTIVE_CONDITIONAL_TARGET_ESTABLISHED_CONCRETE_INVARIANT_NOT_ESTABLISHED\",\"note_id\":\"objective-note-2026-07-18-four-manifold-invariant-formalization-target-v5\",\"objective\":{\"acceptance_rule\":\"Promotion requires one concrete hash-bound SourceBoundTableTwoEvaluatorCompiler and a replay proving all twelve target conditions established. The two visible domain axioms and a conditional Lean theorem alone are not a concrete invariant construction.\",\"goal\":\"Construct a homologically twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove equality of normalized evaluations for any two certified special presentations of the same marked pair.\",\"lean_input_type\":\"TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs\",\"lean_target_theorem\":\"TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target\"},\"schema\":\"twisted-yetter/objective-lab-note/1\",\"source_repo\":{\"branch\":\"codex/lean-kirby-coupon-bootstrap\",\"commit_at_note\":\"1e003df1e5e3ba72d7956b9344492ec47dea73d5\",\"dirty_at_note\":false},\"status\":\"ELEVEN_FOUNDATION_CONDITIONS_ESTABLISHED_ONE_SOURCE_BOUND_EVALUATOR_INSTANCE_OPEN\",\"subjects\":[\"subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature\",\"subject:twisted-yetter:paper:baerenz-barrett-1601-03580\",\"subject:twisted-yetter:paper:tham-2108-13467\",\"subject:twisted-yetter:paper:yetter-hepth-9311082\"],\"title\":\"Lean target for a homologically twisted Kirby four-manifold invariant, revision 5\",\"top_notice\":\"This is a formalization objective and exact obligation ledger, not a theorem claim. Eleven of twelve target conditions are established, with handle-chain naturality explicitly imported as one auditable homology-domain axiom. The concrete categorical evaluator remains open, so no concrete four-manifold invariant has yet been constructed.\",\"verification\":{\"artifact_tests\":\"PASS_11\",\"domain_axioms_exact\":2,\"full_umbrella_build\":\"PASS\",\"mutation_counts\":{\"categorical_compiler\":3,\"geometric_h2_mechanism\":2,\"handle_chain_domain\":2,\"target\":5},\"proof_oracle_count\":0}}",
+        "title": "Lean target for a homologically twisted Kirby four-manifold invariant, revision 5",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 5897,
+          "base_estimate": 1660,
+          "estimated_tokens": 1909,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 0,
+          "safety_margin": 249,
+          "serialized_character_count": 5897,
+          "unicode_scalar_count": 5897,
+          "utf8_bytes": 5897
+        },
+        "word_count": 290
       },
       "ctlobj-sha256:02e4d794bd46863de7a028602dcf0fddb2cabb7c6604ca41455a5111be6cf4f2": {
         "active_state": "active",
@@ -67810,7 +68035,7 @@
         "word_count": 16
       },
       "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683": {
-        "active_state": "active",
+        "active_state": "superseded",
         "cid": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683",
         "created_at": "2026-07-18T19:12:44Z",
         "created_by": {
@@ -71268,6 +71493,14 @@
           "target_cid": "ctlobj-sha256:d63602714a710e29b3efbc00c54758b028fb9e37fa1db7cceb4033a13f475b69"
         }
       ],
+      "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:02b7080548561fce117bfebc6bb48b2ff8c4fb589578369da5c6c78962a9d692",
+          "target_cid": "ctlobj-sha256:d746ec255f5e316ce78eb55699140d122d8d8096cab1a2bdb0e99ff292111683"
+        }
+      ],
       "ctlobj-sha256:da36014802e6b2c720bca4d660901c3841643d719407cab47842218e2d40028c": [
         {
           "basis": "ctl/revision.parents",
@@ -71569,7 +71802,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-18T19:17:11Z",
+  "generated_at": "2026-07-18T19:38:47Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -74103,17 +74336,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:a07d84cfd33aa3100bb3c31c7efa17ab3c797a725ea45acd5f6d29289d656521",
+  "root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 87563,
+    "build_ms": 99770,
     "context_source": "current-context-replay",
-    "current_context_ms": 81629,
-    "discovery_index_ms": 5781,
-    "payload_summaries_ms": 51,
-    "resource_index_ms": 51,
-    "write_ms": 49
+    "current_context_ms": 92771,
+    "discovery_index_ms": 6834,
+    "payload_summaries_ms": 55,
+    "resource_index_ms": 55,
+    "write_ms": 53
   },
-  "transition_cid": "ctlobj-sha256:848b1383322dc61d3138f778210a9b8c83b48a0514ffa5cf62869474b2924174"
+  "transition_cid": "ctlobj-sha256:6916840c763cd5ed81eeb930a26323295f33ff71bad4f2bcf1c77b492ac76e6d"
 }
