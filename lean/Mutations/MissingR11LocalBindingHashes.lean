@@ -14,13 +14,9 @@ example
     (move : TableTwoMove source target)
     (graphicalCertificateHash : String)
     (graphical_hash_shape :
-      RawPresentation.sha256Shape graphicalCertificateHash = true)
-    (realizesExactTopologyMove : Prop)
-    (witness : realizesExactTopologyMove) :
+      RawPresentation.sha256Shape graphicalCertificateHash = true) :
     LocalEvaluationBinding move where
   graphicalCertificateHash := graphicalCertificateHash
   graphical_certificate_hash_shape := graphical_hash_shape
-  realizesExactTopologyMove := realizesExactTopologyMove
-  exact_topology_move_witness := witness
 
 end TwistedYetter.Kirby.HomologicallyTwistedInvariant.Mutations

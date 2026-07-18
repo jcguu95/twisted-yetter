@@ -23,6 +23,8 @@ import TwistedYetter.Kirby.HandleChainHomology
 import TwistedYetter.Kirby.KirbyCompleteness
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
+import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
+import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 import TwistedYetter.Kirby.ComputationArtifactImporter
 import TwistedYetter.Kirby.FinalFormalizationPackage
 import TwistedYetter.Kirby.FourManifoldInvariantTarget

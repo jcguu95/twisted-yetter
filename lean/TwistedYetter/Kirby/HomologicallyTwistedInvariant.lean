@@ -77,9 +77,10 @@ A typed evaluator realization of one special Kirby presentation for every
 marked class.
 
 The raw numerator is not a free field: it must be the chosen scalarization of
-the categorical evaluation of the recorded closed diagram.  The two semantic
-realization propositions remain explicit inputs rather than being hidden in
-the name of the structure.
+the categorical evaluation of the recorded closed diagram.  Category,
+presentation, and marked-homology certificate identities are pinned by
+equalities rather than by arbitrary semantic propositions that could be
+instantiated with `True`.
 -/
 structure DecoratedKirbyPresentation
     (categoryData :
@@ -96,12 +97,15 @@ structure DecoratedKirbyPresentation
     (alpha : H2) →
       (evaluationState alpha).rawNumerator =
         categoryData.closedScalar (Diagram.eval C (diagram alpha))
-  diagramRepresentsFormalPresentation : H2 → Prop
-  diagram_representation_witness :
-    (alpha : H2) → diagramRepresentsFormalPresentation alpha
-  decorationRepresentsClass : H2 → Prop
-  decoration_representation_witness :
-    (alpha : H2) → decorationRepresentsClass alpha
+  compiledCategorySnapshotHash : String
+  category_snapshot_hash_sound :
+    compiledCategorySnapshotHash = categoryData.categorySnapshotHash
+  compiledPresentationSnapshotHash : String
+  presentation_snapshot_hash_sound :
+    compiledPresentationSnapshotHash = topology.formal.pinnedSourceHash
+  compiledH2ModelCertificateHash : String
+  h2_model_certificate_hash_sound :
+    compiledH2ModelCertificateHash = topology.h2ModelCertificateHash
   diagramCertificateHash : String
   diagram_certificate_hash_shape :
     RawPresentation.sha256Shape diagramCertificateHash = true
@@ -184,8 +188,6 @@ structure LocalEvaluationBinding
   graphicalCertificateHash : String
   graphical_certificate_hash_shape :
     RawPresentation.sha256Shape graphicalCertificateHash = true
-  realizesExactTopologyMove : Prop
-  exact_topology_move_witness : realizesExactTopologyMove
 
 /--
 The only admitted bridge from an R10 topology step to evaluator data.

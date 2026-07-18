@@ -1,5 +1,7 @@
 import TwistedYetter.Kirby.FinalFormalizationPackage
+import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
+import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 
 /-!
 # Target theorem for a marked four-manifold invariant
@@ -24,15 +26,20 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
+open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
+open TwistedYetter.Kirby.EvaluatorCompiler
 
 /-- Exact denominator of conditions for the intended four-manifold theorem. -/
 inductive TargetCondition where
   | categoryAndGraphicalAlgebra
   | explicitThreeHandleNormalization
-  | concreteEvaluatorCompiler
-  | specialKirbyCalculusCompleteness
   | chainDerivedMarkedH2Transport
-  | concreteMarkedPairAssembly
+  | specialKirbyCalculusCompleteness
+  | exhaustiveEvaluatorCompilerMechanism
+  | markedPairAssemblyMechanism
+  | sourceBoundLocalMoveRecipes
+  | sourceBoundEvaluatorCompilerInstance
+  | sourceBoundGeometricH2CompilerInstance
   deriving Repr, BEq, DecidableEq
 
 /-- Every condition that must be closed before the target can be promoted. -/
@@ -42,8 +49,11 @@ def requiredTargetConditions : List TargetCondition :=
     .explicitThreeHandleNormalization,
     .chainDerivedMarkedH2Transport,
     .specialKirbyCalculusCompleteness,
-    .concreteEvaluatorCompiler,
-    .concreteMarkedPairAssembly
+    .exhaustiveEvaluatorCompilerMechanism,
+    .markedPairAssemblyMechanism,
+    .sourceBoundLocalMoveRecipes,
+    .sourceBoundEvaluatorCompilerInstance,
+    .sourceBoundGeometricH2CompilerInstance
   ]
 
 /--
@@ -54,33 +64,36 @@ chain homotopy equivalence and Lean derives the additive map on `H2`. The
 special-Kirby item is established relative to one separately audited,
 source-backed topology domain axiom, which returns only an unmarked topology
 movie. Binding concrete Kirby syntax to chain matrices and enriching that
-movie remains part of `concreteMarkedPairAssembly`.
+movie remains part of the three source-bound construction conditions below.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
     .categoryAndGraphicalAlgebra,
     .explicitThreeHandleNormalization,
     .chainDerivedMarkedH2Transport,
-    .specialKirbyCalculusCompleteness
+    .specialKirbyCalculusCompleteness,
+    .exhaustiveEvaluatorCompilerMechanism,
+    .markedPairAssemblyMechanism
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
-    .concreteEvaluatorCompiler,
-    .concreteMarkedPairAssembly
+    .sourceBoundLocalMoveRecipes,
+    .sourceBoundEvaluatorCompilerInstance,
+    .sourceBoundGeometricH2CompilerInstance
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 6 := by
+    requiredTargetConditions.length = 9 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 4 := by
+    establishedFoundationConditions.length = 6 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 2 := by
+    openConstructionConditions.length = 3 := by
   rfl
 
 /-- Chain-derived marked `H2` transport is explicitly on the established side. -/
@@ -107,6 +120,36 @@ theorem special_kirby_calculus_completeness_established :
 /-- The source-backed topology condition is no longer in the open ledger. -/
 theorem special_kirby_calculus_completeness_not_open :
     TargetCondition.specialKirbyCalculusCompleteness ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/-- Exhaustive dispatch is established as a mechanism, not as an instance. -/
+theorem exhaustive_evaluator_compiler_mechanism_established :
+    TargetCondition.exhaustiveEvaluatorCompilerMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The marked-pair transport theorem is now derived by movie induction. -/
+theorem marked_pair_assembly_mechanism_established :
+    TargetCondition.markedPairAssemblyMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The raw presentation schema still lacks typed local move recipes. -/
+theorem source_bound_local_move_recipes_open :
+    TargetCondition.sourceBoundLocalMoveRecipes ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/-- No concrete eight-case evaluator compiler value is defined yet. -/
+theorem source_bound_evaluator_compiler_instance_open :
+    TargetCondition.sourceBoundEvaluatorCompilerInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/-- No concrete local handle-chain compiler value is defined yet. -/
+theorem source_bound_geometric_h2_compiler_instance_open :
+    TargetCondition.sourceBoundGeometricH2CompilerInstance ∈
       openConstructionConditions := by
   simp [openConstructionConditions]
 
@@ -146,15 +189,18 @@ variable [∀ y z, DecidableEq (I y z)]
 The exact mathematical inputs whose concrete construction will establish the
 marked four-manifold invariant.
 
-This structure adds no proposition that can be filled by an arbitrary
-`True` witness.  Its fields are the closed evaluator prescription and marked
-presentation system already required by the kernel-checked R11 theorem.
+This structure does not accept an arbitrary compact evaluator prescription or
+an already-complete marked presentation system.  Its evaluator field is the
+exhaustive eight-case compiler, and its marked system is derived from local
+chain transport by movie induction.
 
-The nested R11 structures still expose semantic propositions at the external
-topology boundary.  Consequently, an arbitrary inhabitant of this structure
-is not by itself admissible evidence.  The eventual concrete value must be
-generated by the evaluator compiler, exact special-Kirby source binding, and
-chain-derived marked-homology construction listed above.
+An arbitrary inhabitant is still only a conditional theorem input, not
+admissible construction evidence.  The eventual concrete value must be
+generated from source-bound local move recipes.  Those recipes must compile
+both the exact graphical R7/R8/R9 proof objects and the exact handle-chain
+equivalences; a caller may not merely postulate the two compiler values.
+`generalCerf` is also a visible standard topology-domain input, not a theorem
+proved in this module.
 -/
 structure FourManifoldInvariantInputs
     (categoryData :
@@ -162,11 +208,36 @@ structure FourManifoldInvariantInputs
         (K := K) (C := C) (S := S) (I := I))
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  prescription :
-    HomologicallyTwistedKirbyPrescription categoryData manifold H2
-  markedSystem : MarkedPairPresentationSystem manifold H2
+  evaluatorCompiler :
+    TableTwoEvaluatorCompiler categoryData manifold H2
+  markedH2Compiler : GeometricMarkedH2Compiler manifold H2
+  generalCerf : GeneralCerfCompleteness manifold
+  basePresentation : SpecialKirbyPresentation manifold H2
 
 namespace FourManifoldInvariantInputs
+
+/-- The compact R11 prescription derived from the exhaustive compiler. -/
+noncomputable def prescription
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
+    HomologicallyTwistedKirbyPrescription categoryData manifold H2 :=
+  inputs.evaluatorCompiler.toPrescription
+
+/-- Marked presentation system derived from local chain functoriality. -/
+noncomputable def markedSystem
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
+    MarkedPairPresentationSystem manifold H2 :=
+  inputs.markedH2Compiler.markedPairSystem
+    inputs.generalCerf inputs.basePresentation
 
 /-- The value assigned to the marked pair by the chosen certified presentation. -/
 noncomputable def value

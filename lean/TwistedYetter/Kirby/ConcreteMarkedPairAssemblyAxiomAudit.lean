@@ -1,0 +1,19 @@
+import TwistedYetter.Kirby.FourManifoldInvariantTarget
+
+/-!
+# Kernel axiom audit for marked-pair assembly
+
+Local and movie identity results use only standard Lean axioms.  The canonical
+marked system and final target additionally expose the separately audited
+source-backed special Kirby topology domain axiom.
+-/
+
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.local_targetClass_eq
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.enrichMove_targetClass_eq
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.enrichMovie_targetClass_eq
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.tableTwoCompleteness
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.completeness_targetClass_eq
+#print axioms TwistedYetter.Kirby.ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.markedPairSystem
+#print axioms TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.markedSystem
+#print axioms TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.presentation_independent
+#print axioms TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target

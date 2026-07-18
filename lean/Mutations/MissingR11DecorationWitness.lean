@@ -37,9 +37,12 @@ example
       (alpha : H2) →
         (evaluationState alpha).rawNumerator =
           categoryData.closedScalar (Diagram.eval C (diagram alpha)))
-    (diagramRepresents : H2 → Prop)
-    (diagram_witness : (alpha : H2) → diagramRepresents alpha)
-    (decorationRepresents : H2 → Prop)
+    (compiledCategorySnapshotHash : String)
+    (category_hash_sound :
+      compiledCategorySnapshotHash = categoryData.categorySnapshotHash)
+    (compiledPresentationSnapshotHash : String)
+    (presentation_hash_sound :
+      compiledPresentationSnapshotHash = topology.formal.pinnedSourceHash)
     (diagramCertificateHash decorationCertificateHash : String)
     (diagram_hash_shape :
       TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
@@ -52,9 +55,10 @@ example
   evaluationState := evaluationState
   counts_sound := counts_sound
   raw_numerator_sound := raw_sound
-  diagramRepresentsFormalPresentation := diagramRepresents
-  diagram_representation_witness := diagram_witness
-  decorationRepresentsClass := decorationRepresents
+  compiledCategorySnapshotHash := compiledCategorySnapshotHash
+  category_snapshot_hash_sound := category_hash_sound
+  compiledPresentationSnapshotHash := compiledPresentationSnapshotHash
+  presentation_snapshot_hash_sound := presentation_hash_sound
   diagramCertificateHash := diagramCertificateHash
   diagram_certificate_hash_shape := diagram_hash_shape
   decorationCertificateHash := decorationCertificateHash

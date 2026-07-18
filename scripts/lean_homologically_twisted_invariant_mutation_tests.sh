@@ -24,7 +24,7 @@ expected_diagnostics=(
   'Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.craneYetterIdentification`'
   'Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.handwrittenTargetAlpha`'
   'Fields missing: `single_snapshot_witness`'
-  'Fields missing: `decoration_representation_witness`'
+  'Fields missing: `compiledH2ModelCertificateHash`, `h2_model_certificate_hash_sound`'
   'Fields missing: `moveId`, `move_id_sound`, `sourcePresentationHash`, `source_hash_sound`, `targetPresentationHash`, `target_hash_sound`'
   'SlideKind.oneOverOne'
   'Fields missing: `marked_transport_sound`'
