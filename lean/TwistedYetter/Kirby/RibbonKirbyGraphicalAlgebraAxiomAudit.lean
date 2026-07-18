@@ -1,0 +1,16 @@
+import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
+
+/-!
+# Axiom audit for the transparent ribbon-Kirby algebra boundary
+-/
+
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_positive_crossing
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_negative_crossing
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_right_cup
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_right_cap
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_left_cup
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_left_cap
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_positive_twist
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.coupon_negative_twist
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.ordinary_exterior
+#print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input.generalized_framed_exterior

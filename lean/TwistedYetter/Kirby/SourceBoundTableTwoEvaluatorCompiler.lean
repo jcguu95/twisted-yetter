@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.CategoricalPresentationCompiler
+import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 
 /-!
@@ -9,25 +10,29 @@ field can in principle be filled by an arbitrary decorated presentation.
 This module closes that path.
 
 The evaluation used by every one of the eight cases below is definitionally
-`SourceBoundPresentationCompiler.decorate`: its closed diagram is compiled
-event-by-event from the presentation's typed execution trace, and its raw
-numerator is the scalarization of that exact diagram.
+produced by `ComponentwiseFiniteLabelPresentationCompiler.decorate`.  Its
+closed diagram is a finite global-label sum of complete event-by-event traces.
+The formal Kirby colour is collapsed only after every component has received
+one globally consistent label and every resulting trace has been compiled.
 
 The eight R7/R8/R9 proof objects remain explicit fields. This module does not
-pretend that a categorical event interpreter or those local proofs have
-already been constructed.
+pretend that a categorical event interpreter, a label expansion, or those
+local proofs have already been constructed.
 -/
 
 namespace TwistedYetter.Kirby.SourceBoundEvaluatorCompilation
 
+open scoped BigOperators
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
+open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalPresentationCompiler
 open TwistedYetter.Kirby.EvaluatorCompiler
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
 open TwistedYetter.Kirby.Presentation
+open TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 
 universe uK uC vC uS uI uH
 
@@ -35,6 +40,7 @@ variable {K : Type uK} [Field K]
 variable {C : Type uC} [Category.{vC} C] [Preadditive C]
 variable [CategoryTheory.Linear K C]
 variable [MonoidalCategory C] [BraidedCategory C]
+variable [RightRigidCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type uS} [Fintype S] [DecidableEq S]
 variable {I : S → S → Type uI}
@@ -44,8 +50,12 @@ variable [∀ y z, DecidableEq (I y z)]
 /--
 The exhaustive compiler whose presentation evaluator is source-compiled.
 
-There is no `evaluation` field. All eight result types mention
-`presentationCompiler.decorate` directly.
+There is no `evaluation` field.  The presentation compiler is specifically
+the global finite-label compiler, and all eight result types mention its
+derived `decorate` method directly.  A single-label compiler cannot silently
+stand in for a formal Kirby-colour expansion on this route, and a caller
+cannot replace the componentwise product of weights by a handwritten
+whole-link coefficient.
 -/
 structure SourceBoundTableTwoEvaluatorCompiler
     (categoryData :
@@ -54,7 +64,9 @@ structure SourceBoundTableTwoEvaluatorCompiler
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   presentationCompiler :
-    SourceBoundPresentationCompiler categoryData manifold H2
+    ComponentwiseFiniteLabelPresentationCompiler
+      categoryData manifold H2
+  graphicalAlgebra : RibbonKirbyGraphicalAlgebra.Input categoryData
   framedIsotopy :
     {source target : SpecialKirbyPresentation manifold H2} →
     (metadata : TableTwoMoveMetadata .framedIsotopy source target) →
@@ -166,7 +178,8 @@ noncomputable def toTableTwo
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
+      SourceBoundTableTwoEvaluatorCompiler
+        categoryData manifold H2) :
     TableTwoEvaluatorCompiler categoryData manifold H2 where
   evaluation := compiler.presentationCompiler.decorate
   framedIsotopy := compiler.framedIsotopy
@@ -193,11 +206,54 @@ theorem toTableTwo_evaluation_is_trace_compiled
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2)
+      SourceBoundTableTwoEvaluatorCompiler
+        categoryData manifold H2)
     (presentation : SpecialKirbyPresentation manifold H2) :
     compiler.toTableTwo.evaluation presentation =
       compiler.presentationCompiler.decorate presentation := by
   rfl
+
+/-- The accepted graphical algebra is bound to the evaluator category hash. -/
+theorem graphical_algebra_snapshot_bound
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
+    compiler.graphicalAlgebra.categorySnapshotHash =
+      categoryData.categorySnapshotHash :=
+  compiler.graphicalAlgebra.category_snapshot_hash_sound
+
+/--
+The diagram evaluated by the compact R11 compiler is exactly the
+componentwise product-weighted sum of complete globally labelled traces.
+-/
+theorem toTableTwo_evaluation_is_componentwise_global_sum
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2)
+    (presentation : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram.eval C
+        ((compiler.toTableTwo.evaluation presentation).diagram alpha) =
+      letI :=
+        compiler.presentationCompiler.expansion.globalFintype presentation
+      ∑ labeling,
+        compiler.presentationCompiler.expansion.globalWeight
+            presentation alpha labeling •
+          Diagram.eval C
+            ((compiler.presentationCompiler.eventCompiler
+                presentation alpha labeling).compileClosed
+              presentation.execution) := by
+  exact
+    compiler.presentationCompiler.compileDiagram_eval_eq_componentwise_sum
+      presentation alpha
 
 end SourceBoundTableTwoEvaluatorCompiler
 

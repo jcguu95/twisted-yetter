@@ -10,12 +10,18 @@ mutations=(
   "lean/Mutations/MissingCategoricalCouponEventCompiler.lean"
   "lean/Mutations/WrongPositiveCrossingEventPrimitive.lean"
   "lean/Mutations/ArbitraryCouponInsideStructuralEventContext.lean"
+  "lean/Mutations/EventwiseLabelingInFiniteCompiler.lean"
+  "lean/Mutations/ArbitraryWholeDiagramInFiniteCompiler.lean"
+  "lean/Mutations/HandwrittenWholeLinkWeight.lean"
 )
 
 diagnostics=(
   'Fields missing: `coupon`'
   'Type mismatch'
   'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.StructuralDiagram.coupon`'
+  'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.FiniteLabelPresentationCompiler.eventLabeling`'
+  'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.FiniteLabelPresentationCompiler.diagram`'
+  'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.ComponentLabelExpansion.wholeLinkWeight`'
 )
 
 for index in "${!mutations[@]}"; do

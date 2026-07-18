@@ -46,8 +46,11 @@ inductive TargetCondition where
   | exhaustiveEvaluatorCompilerMechanism
   | markedPairAssemblyMechanism
   | sourceBoundLocalMoveRecipes
-  | sourceBoundEvaluatorCompilerInstance
+  | globalFiniteKirbyColorExpansionMechanism
   | sourceBoundGeometricH2CompilerInstance
+  | globalFiniteKirbyColorExpansionInstance
+  | sourceBoundGraphicalMoveCompilerInstance
+  | sourceBoundEvaluatorCompilerInstance
   deriving Repr, BEq, DecidableEq
 
 /-- Every condition that must be closed before the target can be promoted. -/
@@ -63,7 +66,10 @@ def requiredTargetConditions : List TargetCondition :=
     .exhaustiveEvaluatorCompilerMechanism,
     .markedPairAssemblyMechanism,
     .sourceBoundLocalMoveRecipes,
+    .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance,
+    .globalFiniteKirbyColorExpansionInstance,
+    .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
   ]
 
@@ -76,8 +82,10 @@ special-Kirby item is established relative to one separately audited,
 source-backed topology domain axiom, which returns only an unmarked topology
 movie. The handle-chain compiler instance is established relative to a second
 separately audited standard homology-domain axiom. Every move carries one
-typed local recipe shared by graphical and chain compilation. Constructing
-the concrete categorical evaluator remains open.
+typed local recipe shared by graphical and chain compilation. A formal Kirby
+colour is now represented by a global finite sum of complete labelled traces,
+never by one fake category object. The actual label/event interpretation and
+the exact R7/R8/R9 graphical assembly remain open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -91,25 +99,28 @@ def establishedFoundationConditions : List TargetCondition :=
     .exhaustiveEvaluatorCompilerMechanism,
     .markedPairAssemblyMechanism,
     .sourceBoundLocalMoveRecipes,
+    .globalFiniteKirbyColorExpansionMechanism,
     .sourceBoundGeometricH2CompilerInstance
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
+    .globalFiniteKirbyColorExpansionInstance,
+    .sourceBoundGraphicalMoveCompilerInstance,
     .sourceBoundEvaluatorCompilerInstance
   ]
 
 theorem target_condition_count :
-    requiredTargetConditions.length = 12 := by
+    requiredTargetConditions.length = 15 := by
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 11 := by
+    establishedFoundationConditions.length = 12 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 1 := by
+    openConstructionConditions.length = 3 := by
   rfl
 
 /--
@@ -213,7 +224,44 @@ theorem source_bound_local_move_recipes_not_open :
       openConstructionConditions := by
   simp [openConstructionConditions]
 
-/-- No concrete eight-case evaluator compiler value is defined yet. -/
+/--
+Formal Kirby colours are compiled as finite sums over complete globally
+labelled traces. The mechanism does not admit eventwise relabelling or an
+arbitrary whole-diagram field.
+-/
+theorem global_finite_kirby_color_expansion_mechanism_established :
+    TargetCondition.globalFiniteKirbyColorExpansionMechanism ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- The global finite-sum mechanism cannot simultaneously remain open. -/
+theorem global_finite_kirby_color_expansion_mechanism_not_open :
+    TargetCondition.globalFiniteKirbyColorExpansionMechanism ∉
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+The actual finite family, weights, and event interpretation for each
+presentation and marked class have not yet been constructed.
+-/
+theorem global_finite_kirby_color_expansion_instance_open :
+    TargetCondition.globalFiniteKirbyColorExpansionInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+The exact graphical rewrite programs producing all eight R7/R8/R9 proof
+objects from the shared local recipes have not yet been constructed.
+-/
+theorem source_bound_graphical_move_compiler_instance_open :
+    TargetCondition.sourceBoundGraphicalMoveCompilerInstance ∈
+      openConstructionConditions := by
+  simp [openConstructionConditions]
+
+/--
+No concrete eight-case evaluator compiler value is defined yet. This is the
+final assembly condition after the two more precise open instances above.
+-/
 theorem source_bound_evaluator_compiler_instance_open :
     TargetCondition.sourceBoundEvaluatorCompilerInstance ∈
       openConstructionConditions := by
@@ -260,6 +308,7 @@ variable {K : Type uK} [Field K]
 variable {C : Type uC} [Category.{vC} C] [Preadditive C]
 variable [CategoryTheory.Linear K C]
 variable [MonoidalCategory C] [BraidedCategory C]
+variable [RightRigidCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type uS} [Fintype S] [DecidableEq S]
 variable {I : S → S → Type uI}
@@ -273,9 +322,10 @@ marked four-manifold invariant.
 This structure does not accept an arbitrary compact evaluator prescription,
 an arbitrary decorated-presentation function, or an already-complete marked
 presentation system. Its evaluator field is the source-bound exhaustive
-eight-case compiler: every closed diagram is compiled event-by-event from the
-typed raw execution trace. Its marked system is derived from local chain
-transport by movie induction.
+eight-case compiler: every formal Kirby-colour term uses one global labeling,
+each complete labelled diagram is compiled event-by-event from the typed raw
+execution trace, and only then are the terms summed. Its marked system is
+derived from local chain transport by movie induction.
 
 An arbitrary inhabitant is still only a conditional theorem input, not
 admissible construction evidence. The evaluator must be generated from
@@ -292,7 +342,8 @@ structure FourManifoldInvariantInputs
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   evaluatorCompiler :
-    SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2
+    SourceBoundTableTwoEvaluatorCompiler
+      categoryData manifold H2
   generalCerf : GeneralCerfCompleteness manifold
   basePresentation : SpecialKirbyPresentation manifold H2
 

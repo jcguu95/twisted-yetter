@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
+import TwistedYetter.Kirby.LinearDiagram
 import TwistedYetter.Kirby.PresentationExecutionTrace
 
 /-!
@@ -21,6 +22,7 @@ morphisms, and planar identities remains an explicit instance obligation.
 
 namespace TwistedYetter.Kirby.CategoricalPresentationCompiler
 
+open scoped BigOperators
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
@@ -593,5 +595,473 @@ theorem decorate_raw_numerator_is_compiled_scalar
   rfl
 
 end SourceBoundPresentationCompiler
+
+/--
+A source-bound compiler for a genuine formal Kirby-colour expansion.
+
+`Labeling topology alpha` is one *global* assignment for the complete
+presentation.  The same assignment is passed to every event in the closed
+execution trace.  This rules out the incorrect eventwise interpretation in
+which one component could silently change its simple label between two
+Morse slices.
+
+The result is a finite linear combination of complete closed diagrams.  It is
+collapsed to an ordinary unit endomorphism only after the whole trace for
+every global labeling has been compiled.  Thus a formal Kirby colour is never
+pretended to be one object of `C`.
+-/
+structure FiniteLabelPresentationCompiler
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I))
+    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+    (H2 : Type uH) [AddCommGroup H2] where
+  Labeling :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) → Type uS
+  labelingFintype :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) → Fintype (Labeling topology alpha)
+  weight :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) → Labeling topology alpha → K
+  eventCompiler :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) →
+    (labeling : Labeling topology alpha) →
+      CategoricalEventCompiler C topology.formal.raw
+  diagramCertificateHash :
+    SpecialKirbyPresentation manifold H2 → String
+  diagram_certificate_hash_shape :
+    (topology : SpecialKirbyPresentation manifold H2) →
+      RawPresentation.sha256Shape
+        (diagramCertificateHash topology) = true
+  decorationCertificateHash :
+    SpecialKirbyPresentation manifold H2 → String
+  decoration_certificate_hash_shape :
+    (topology : SpecialKirbyPresentation manifold H2) →
+      RawPresentation.sha256Shape
+        (decorationCertificateHash topology) = true
+  labelExpansionCertificateHash :
+    SpecialKirbyPresentation manifold H2 → String
+  label_expansion_certificate_hash_shape :
+    (topology : SpecialKirbyPresentation manifold H2) →
+      RawPresentation.sha256Shape
+        (labelExpansionCertificateHash topology) = true
+  sourceRefs : List String
+  exactEventScope : String
+  exactLabelScope : String
+  sourceScopeCaveat : String
+
+namespace FiniteLabelPresentationCompiler
+
+/-- The retained formal sum of globally and consistently labelled traces. -/
+noncomputable def linearDiagram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    LinearDiagram (R := K) (C := C) .unit .unit := by
+  letI := compiler.labelingFintype topology alpha
+  exact LinearDiagram.weightedSum
+    (compiler.weight topology alpha)
+    (fun labeling =>
+      (compiler.eventCompiler topology alpha labeling).compileClosed
+        topology.execution)
+
+/--
+Collapse only after compiling each complete globally labelled trace.
+
+The collapsed coupon is an API representation of the already formed linear
+combination; it is not an object-level interpretation of a Kirby colour.
+-/
+noncomputable def compileDiagram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram C .unit .unit :=
+  LinearDiagram.collapse
+    (R := K) "global-finite-kirby-colour-expansion"
+    (compiler.linearDiagram topology alpha)
+
+omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
+@[simp]
+theorem compileDiagram_eval
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram.eval C (compiler.compileDiagram topology alpha) =
+      LinearDiagram.eval (R := K)
+        (compiler.linearDiagram topology alpha) := by
+  rfl
+
+omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
+/-- Evaluation exposes the exact finite sum of complete trace evaluations. -/
+theorem compileDiagram_eval_eq_global_weighted_sum
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram.eval C (compiler.compileDiagram topology alpha) =
+      letI := compiler.labelingFintype topology alpha
+      ∑ labeling,
+        compiler.weight topology alpha labeling •
+          Diagram.eval C
+            ((compiler.eventCompiler topology alpha labeling).compileClosed
+              topology.execution) := by
+  rw [compiler.compileDiagram_eval]
+  letI := compiler.labelingFintype topology alpha
+  exact LinearDiagram.eval_weightedSum
+    (compiler.weight topology alpha)
+    (fun labeling =>
+      (compiler.eventCompiler topology alpha labeling).compileClosed
+        topology.execution)
+
+/-- Derive the decorated presentation without a free whole-diagram field. -/
+noncomputable def decorate
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2) :
+    DecoratedKirbyPresentation categoryData topology where
+  diagram := compiler.compileDiagram topology
+  evaluationState := fun alpha => {
+    counts := topology.counts
+    rawNumerator :=
+      categoryData.closedScalar
+        (Diagram.eval C (compiler.compileDiagram topology alpha))
+  }
+  counts_sound := fun _ => rfl
+  raw_numerator_sound := fun _ => rfl
+  compiledCategorySnapshotHash := categoryData.categorySnapshotHash
+  category_snapshot_hash_sound := rfl
+  compiledPresentationSnapshotHash := topology.formal.pinnedSourceHash
+  presentation_snapshot_hash_sound := rfl
+  compiledH2ModelCertificateHash := topology.h2ModelCertificateHash
+  h2_model_certificate_hash_sound := rfl
+  diagramCertificateHash := compiler.diagramCertificateHash topology
+  diagram_certificate_hash_shape :=
+    compiler.diagram_certificate_hash_shape topology
+  decorationCertificateHash := compiler.decorationCertificateHash topology
+  decoration_certificate_hash_shape :=
+    compiler.decoration_certificate_hash_shape topology
+
+omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
+theorem decorate_diagram_is_global_label_expansion
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    (compiler.decorate topology).diagram alpha =
+      compiler.compileDiagram topology alpha := by
+  rfl
+
+omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
+theorem decorate_raw_numerator_is_global_label_scalar
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      FiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    ((compiler.decorate topology).evaluationState alpha).rawNumerator =
+      categoryData.closedScalar
+        (Diagram.eval C (compiler.compileDiagram topology alpha)) := by
+  rfl
+
+end FiniteLabelPresentationCompiler
+
+/--
+Componentwise data from which the global finite labeling is derived.
+
+Every component has its own finite label fiber.  The component weight may
+depend on the presentation and marked class, but the global weight is not a
+field: it is the product of all recorded component weights.
+-/
+structure ComponentLabelExpansion
+    (S : Type uS)
+    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+    (H2 : Type uH) [AddCommGroup H2] where
+  Label : ComponentSpec → Type uS
+  labelFintype : (component : ComponentSpec) → Fintype (Label component)
+  componentWeight :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) →
+    (component : ComponentSpec) → Label component → K
+  expansionSchema : String
+  expansionSnapshotHash : String
+  expansion_snapshot_hash_shape :
+    RawPresentation.sha256Shape expansionSnapshotHash = true
+  sourceRefs : List String
+  exactComponentScope : String
+  sourceScopeCaveat : String
+
+namespace ComponentLabelExpansion
+
+/-- One label for every component, indexed by its immutable list position. -/
+abbrev GlobalLabeling
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (expansion : ComponentLabelExpansion (K := K) (S := S) manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2) :=
+  (index : Fin topology.formal.raw.components.length) →
+    expansion.Label (topology.formal.raw.components.get index)
+
+/-- Finiteness is derived component-by-component. -/
+@[implicit_reducible]
+noncomputable def globalFintype
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (expansion : ComponentLabelExpansion (K := K) (S := S) manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2) :
+    Fintype (expansion.GlobalLabeling topology) := by
+  letI (index : Fin topology.formal.raw.components.length) :=
+    expansion.labelFintype (topology.formal.raw.components.get index)
+  infer_instance
+
+/-- The global Kirby-colour coefficient is the product of component weights. -/
+noncomputable def globalWeight
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (expansion : ComponentLabelExpansion (K := K) (S := S) manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2)
+    (labeling : expansion.GlobalLabeling topology) : K :=
+  ∏ index : Fin topology.formal.raw.components.length,
+    expansion.componentWeight topology alpha
+      (topology.formal.raw.components.get index) (labeling index)
+
+end ComponentLabelExpansion
+
+/--
+The intended presentation compiler boundary for a formal Kirby-coloured link.
+
+The caller supplies only component fibers/weights and a trace compiler for one
+complete global assignment.  `toFiniteLabel` derives both the assignment type
+and the total coefficient; neither can be replaced by an unrelated finite
+index set or handwritten whole-link weight.
+-/
+structure ComponentwiseFiniteLabelPresentationCompiler
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I))
+    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+    (H2 : Type uH) [AddCommGroup H2] where
+  expansion : ComponentLabelExpansion (K := K) (S := S) manifold H2
+  eventCompiler :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) →
+    (labeling :
+      ComponentLabelExpansion.GlobalLabeling expansion topology) →
+      CategoricalEventCompiler C topology.formal.raw
+  diagramCertificateHash :
+    SpecialKirbyPresentation manifold H2 → String
+  diagram_certificate_hash_shape :
+    (topology : SpecialKirbyPresentation manifold H2) →
+      RawPresentation.sha256Shape
+        (diagramCertificateHash topology) = true
+  decorationCertificateHash :
+    SpecialKirbyPresentation manifold H2 → String
+  decoration_certificate_hash_shape :
+    (topology : SpecialKirbyPresentation manifold H2) →
+      RawPresentation.sha256Shape
+        (decorationCertificateHash topology) = true
+  sourceRefs : List String
+  exactEventScope : String
+  sourceScopeCaveat : String
+
+namespace ComponentwiseFiniteLabelPresentationCompiler
+
+/-- Forget no semantics: derive the generic global-label compiler exactly. -/
+noncomputable def toFiniteLabel
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      ComponentwiseFiniteLabelPresentationCompiler
+        categoryData manifold H2) :
+    FiniteLabelPresentationCompiler categoryData manifold H2 where
+  Labeling := fun topology _ =>
+    compiler.expansion.GlobalLabeling topology
+  labelingFintype := fun topology _ =>
+    compiler.expansion.globalFintype topology
+  weight := fun topology alpha labeling =>
+    compiler.expansion.globalWeight topology alpha labeling
+  eventCompiler := compiler.eventCompiler
+  diagramCertificateHash := compiler.diagramCertificateHash
+  diagram_certificate_hash_shape :=
+    compiler.diagram_certificate_hash_shape
+  decorationCertificateHash := compiler.decorationCertificateHash
+  decoration_certificate_hash_shape :=
+    compiler.decoration_certificate_hash_shape
+  labelExpansionCertificateHash := fun _ =>
+    compiler.expansion.expansionSnapshotHash
+  label_expansion_certificate_hash_shape := fun _ =>
+    compiler.expansion.expansion_snapshot_hash_shape
+  sourceRefs := compiler.sourceRefs ++ compiler.expansion.sourceRefs
+  exactEventScope := compiler.exactEventScope
+  exactLabelScope := compiler.expansion.exactComponentScope
+  sourceScopeCaveat :=
+    compiler.sourceScopeCaveat ++ " " ++
+      compiler.expansion.sourceScopeCaveat
+
+/-- The retained whole-link formal sum for the componentwise expansion. -/
+noncomputable def linearDiagram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      ComponentwiseFiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    LinearDiagram (R := K) (C := C) .unit .unit :=
+  compiler.toFiniteLabel.linearDiagram topology alpha
+
+/-- The API diagram is the collapse of the retained componentwise sum. -/
+noncomputable def compileDiagram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      ComponentwiseFiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram C .unit .unit :=
+  compiler.toFiniteLabel.compileDiagram topology alpha
+
+/-- Derive the R11 decoration from the componentwise global expansion. -/
+noncomputable def decorate
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      ComponentwiseFiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2) :
+    DecoratedKirbyPresentation categoryData topology :=
+  compiler.toFiniteLabel.decorate topology
+
+omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
+/-- The final scalar is visibly the componentwise global weighted sum. -/
+theorem compileDiagram_eval_eq_componentwise_sum
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      ComponentwiseFiniteLabelPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    Diagram.eval C (compiler.compileDiagram topology alpha) =
+      letI := compiler.expansion.globalFintype topology
+      ∑ labeling,
+        compiler.expansion.globalWeight topology alpha labeling •
+          Diagram.eval C
+            ((compiler.eventCompiler topology alpha labeling).compileClosed
+              topology.execution) :=
+  compiler.toFiniteLabel.compileDiagram_eval_eq_global_weighted_sum
+    topology alpha
+
+end ComponentwiseFiniteLabelPresentationCompiler
+
+/--
+Closed whitelist of source-bound presentation compiler mechanisms.
+
+The second constructor is the only admitted route for a formal Kirby-colour
+sum.  In particular, there is no constructor from an arbitrary
+`SpecialKirbyPresentation → H2 → Diagram`.
+-/
+inductive AdmittedSourceBoundPresentationCompiler
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I))
+    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+    (H2 : Type uH) [AddCommGroup H2]
+  | singleLabel
+      (compiler :
+        SourceBoundPresentationCompiler categoryData manifold H2) :
+      AdmittedSourceBoundPresentationCompiler
+        categoryData manifold H2
+  | finiteGlobalLabel
+      (compiler :
+        FiniteLabelPresentationCompiler
+          categoryData manifold H2) :
+      AdmittedSourceBoundPresentationCompiler
+        categoryData manifold H2
+
+namespace AdmittedSourceBoundPresentationCompiler
+
+/-- Evaluate only through one of the two closed source-bound mechanisms. -/
+noncomputable def decorate
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (compiler :
+      AdmittedSourceBoundPresentationCompiler
+        categoryData manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2) :
+    DecoratedKirbyPresentation categoryData topology :=
+  match compiler with
+  | .singleLabel compiler =>
+      compiler.decorate topology
+  | .finiteGlobalLabel compiler =>
+      compiler.decorate topology
+
+end AdmittedSourceBoundPresentationCompiler
 
 end TwistedYetter.Kirby.CategoricalPresentationCompiler
