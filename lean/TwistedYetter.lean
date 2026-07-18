@@ -18,6 +18,7 @@ import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.Presentation
 import TwistedYetter.Kirby.PresentationSchemaRegression
 import TwistedYetter.Kirby.PresentationExecutionTrace
+import TwistedYetter.Kirby.CategoricalPresentationCompiler
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.KirbyHandleMoves
 import TwistedYetter.Kirby.KirbyCancellation
@@ -27,6 +28,7 @@ import TwistedYetter.Kirby.KirbyCompleteness
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
+import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 import TwistedYetter.Kirby.ComputationArtifactImporter
 import TwistedYetter.Kirby.FinalFormalizationPackage

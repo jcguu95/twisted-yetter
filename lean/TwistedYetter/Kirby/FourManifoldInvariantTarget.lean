@@ -1,7 +1,7 @@
 import TwistedYetter.Kirby.FinalFormalizationPackage
 import TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 import TwistedYetter.Kirby.SourceBackedKirbyCompleteness
-import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
+import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler
 
 /-!
 # Target theorem for a marked four-manifold invariant
@@ -28,6 +28,7 @@ open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 open TwistedYetter.Kirby.EvaluatorCompiler
+open TwistedYetter.Kirby.SourceBoundEvaluatorCompilation
 
 /-- Exact denominator of conditions for the intended four-manifold theorem. -/
 inductive TargetCondition where
@@ -218,10 +219,12 @@ variable [∀ y z, DecidableEq (I y z)]
 The exact mathematical inputs whose concrete construction will establish the
 marked four-manifold invariant.
 
-This structure does not accept an arbitrary compact evaluator prescription or
-an already-complete marked presentation system.  Its evaluator field is the
-exhaustive eight-case compiler, and its marked system is derived from local
-chain transport by movie induction.
+This structure does not accept an arbitrary compact evaluator prescription,
+an arbitrary decorated-presentation function, or an already-complete marked
+presentation system. Its evaluator field is the source-bound exhaustive
+eight-case compiler: every closed diagram is compiled event-by-event from the
+typed raw execution trace. Its marked system is derived from local chain
+transport by movie induction.
 
 An arbitrary inhabitant is still only a conditional theorem input, not
 admissible construction evidence.  The eventual concrete value must be
@@ -238,7 +241,7 @@ structure FourManifoldInvariantInputs
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   evaluatorCompiler :
-    TableTwoEvaluatorCompiler categoryData manifold H2
+    SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2
   markedH2Compiler : GeometricMarkedH2Compiler manifold H2
   generalCerf : GeneralCerfCompleteness manifold
   basePresentation : SpecialKirbyPresentation manifold H2
@@ -254,7 +257,7 @@ noncomputable def prescription
     {H2 : Type uH} [AddCommGroup H2]
     (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
     HomologicallyTwistedKirbyPrescription categoryData manifold H2 :=
-  inputs.evaluatorCompiler.toPrescription
+  inputs.evaluatorCompiler.toTableTwo.toPrescription
 
 /-- Marked presentation system derived from local chain functoriality. -/
 noncomputable def markedSystem

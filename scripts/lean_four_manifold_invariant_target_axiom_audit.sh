@@ -7,6 +7,8 @@ output="$(mktemp "${TMPDIR:-/tmp}/twisted-yetter-4mf-target-axioms.XXXXXX")"
 trap 'rm -f "${output}"' EXIT
 
 ./scripts/lean_local_build.sh \
+  lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean \
+  lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean \
   lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean
 
 ./scripts/lean_local_check.sh \
