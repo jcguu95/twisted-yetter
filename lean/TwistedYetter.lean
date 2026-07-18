@@ -23,3 +23,4 @@ import TwistedYetter.Kirby.KirbyCompleteness
 import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 import TwistedYetter.Kirby.ComputationArtifactImporter
 import TwistedYetter.Kirby.FinalFormalizationPackage
+import TwistedYetter.Kirby.FourManifoldInvariantTarget

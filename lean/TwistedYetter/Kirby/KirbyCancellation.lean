@@ -77,11 +77,35 @@ def oneTwoFactor (profile : GlobalDimensionProfile (K := K)) : K :=
 def twoThreeFactor (profile : GlobalDimensionProfile (K := K)) : K :=
   profile.cDimension
 
+/--
+Explicit scalar weight of one 3-handle.
+
+Here `cDimension` is the global dimension `d(C)` in Bärenz--Barrett's
+equation (3.2.1).  Authors who instead write `𝒟² = d(C)` should therefore
+read this weight as `𝒟⁻²`, not `𝒟⁻¹`.
+-/
+def threeHandleWeight (profile : GlobalDimensionProfile (K := K)) : K :=
+  profile.cDimension⁻¹
+
 theorem oneTwoFactor_ne_zero
     (profile : GlobalDimensionProfile (K := K)) :
     profile.oneTwoFactor ≠ 0 :=
   mul_ne_zero profile.dDimension_ne_zero
     profile.transparentDimension_ne_zero
+
+theorem threeHandleWeight_ne_zero
+    (profile : GlobalDimensionProfile (K := K)) :
+    profile.threeHandleWeight ≠ 0 :=
+  inv_ne_zero profile.cDimension_ne_zero
+
+/--
+The isolated 2-handle contributes `d(C)` and its cancelling 3-handle
+contributes `d(C)⁻¹`, so their explicit scalar contribution is one.
+-/
+theorem twoThreeFactor_mul_threeHandleWeight
+    (profile : GlobalDimensionProfile (K := K)) :
+    profile.twoThreeFactor * profile.threeHandleWeight = 1 := by
+  simp [twoThreeFactor, threeHandleWeight, profile.cDimension_ne_zero]
 
 /--
 Exact denominator from equation (3.2.1):
@@ -147,6 +171,23 @@ theorem denominator_addTwoThree
   rw [exponent, zpow_add₀ profile.cDimension_ne_zero]
   simp only [zpow_one]
   simp only [mul_assoc, mul_comm]
+
+/--
+Equivalent inverse-dimension form of the 2--3 normalization recurrence.
+
+The ratio between the old denominator and the denominator after adding a
+cancelling 2--3 pair is exactly the explicit 3-handle weight `d(C)⁻¹`.
+-/
+theorem denominator_ratio_addTwoThree
+    (profile : GlobalDimensionProfile (K := K))
+    (counts : HandleCounts) :
+    profile.denominator counts /
+        profile.denominator counts.addTwoThree =
+      profile.threeHandleWeight := by
+  rw [profile.denominator_addTwoThree]
+  rw [div_mul_eq_div_div_swap]
+  simp [threeHandleWeight, twoThreeFactor,
+    profile.denominator_ne_zero counts]
 
 /-- Empty 0-handles are absent from the link normalization. -/
 theorem denominator_addEmptyZero
@@ -268,6 +309,25 @@ theorem raw_factor
   rw [calculation.disjoint_union_sound calculation.unlink_witness,
     calculation.pivotal_dimension_preserved]
   rfl
+
+/--
+Handle-by-handle form of the same local calculation: after inserting the
+explicit 3-handle weight, the cancelling 2--3 pair contributes no scalar.
+-/
+theorem raw_with_explicit_three_handle
+    {profile : GlobalDimensionProfile (K := K)}
+    (calculation : TwoThreeLocalCalculation profile) :
+    calculation.before.rawNumerator * profile.threeHandleWeight =
+      calculation.after.rawNumerator := by
+  rw [calculation.raw_factor]
+  calc
+    (profile.twoThreeFactor * calculation.after.rawNumerator) *
+          profile.threeHandleWeight =
+        calculation.after.rawNumerator *
+          (profile.twoThreeFactor * profile.threeHandleWeight) := by
+            ac_rfl
+    _ = calculation.after.rawNumerator := by
+      rw [profile.twoThreeFactor_mul_threeHandleWeight, mul_one]
 
 theorem normalized_sound
     {profile : GlobalDimensionProfile (K := K)}
