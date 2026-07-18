@@ -1,0 +1,156 @@
+{
+  "explicit_non_claims": [
+    "R9 does not re-prove the cutting, killing, transparent-twist, or pivotal-dimension graphical identities from foundational category axioms.",
+    "R9 proves local normalized invariance for Bärenz-Barrett Table 2; it does not prove Kirby/Cerf completeness.",
+    "R9 does not yet prove that a homologically twisted link prescription is an invariant of the pair (X, alpha).",
+    "R9 does not identify the generalized dichromatic invariant with Crane-Yetter.",
+    "R9 does not validate any numerical computation artifact.",
+    "The specially-dotted evaluator remains outside this local ordinary-dichromatic cancellation certificate."
+  ],
+  "obligations": [
+    {
+      "obligation_id": "exact-signed-exponent-normalization",
+      "status": "LEAN_PROVED_DEFINITION",
+      "witness": "GlobalDimensionProfile.denominator uses Int powers in equation (3.2.1)"
+    },
+    {
+      "obligation_id": "normalization-nonzero",
+      "status": "LEAN_PROVED",
+      "witness": "GlobalDimensionProfile.denominator_ne_zero"
+    },
+    {
+      "obligation_id": "one-two-isolated-geometry",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_AND_RUNTIME_FIXTURE",
+      "witness": "OneTwoLocalCalculation.isolated_from_rest_witness"
+    },
+    {
+      "obligation_id": "one-two-disjoint-union",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT",
+      "witness": "OneTwoLocalCalculation.disjoint_union_sound"
+    },
+    {
+      "obligation_id": "one-two-cutting",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT",
+      "witness": "OneTwoLocalCalculation.cutting_identity"
+    },
+    {
+      "obligation_id": "one-two-killing",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_AND_MUTATION_TESTED",
+      "witness": "OneTwoLocalCalculation.killing_identity"
+    },
+    {
+      "obligation_id": "transparent-twist-triviality",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_AND_MUTATION_TESTED",
+      "witness": "OneTwoLocalCalculation.transparent_twist_witness"
+    },
+    {
+      "obligation_id": "one-two-raw-factor",
+      "status": "LEAN_DERIVED",
+      "witness": "OneTwoLocalCalculation.raw_factor"
+    },
+    {
+      "obligation_id": "one-two-denominator-recurrence",
+      "status": "LEAN_PROVED",
+      "witness": "GlobalDimensionProfile.denominator_addOneTwo"
+    },
+    {
+      "obligation_id": "one-two-normalized-invariance",
+      "status": "LEAN_PROVED",
+      "witness": "OneTwoLocalCalculation.normalized_sound"
+    },
+    {
+      "obligation_id": "two-three-local-geometry",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_AND_RUNTIME_FIXTURE",
+      "witness": "TwoThreeLocalCalculation.unlink_witness"
+    },
+    {
+      "obligation_id": "two-three-disjoint-union",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT",
+      "witness": "TwoThreeLocalCalculation.disjoint_union_sound"
+    },
+    {
+      "obligation_id": "pivotal-dimension-preservation",
+      "status": "MANDATORY_SOURCE_BACKED_INPUT_AND_MUTATION_TESTED",
+      "witness": "TwoThreeLocalCalculation.pivotal_dimension_preserved; Remark 3.11"
+    },
+    {
+      "obligation_id": "two-three-raw-factor",
+      "status": "LEAN_DERIVED",
+      "witness": "TwoThreeLocalCalculation.raw_factor"
+    },
+    {
+      "obligation_id": "two-three-denominator-recurrence",
+      "status": "LEAN_PROVED",
+      "witness": "GlobalDimensionProfile.denominator_addTwoThree"
+    },
+    {
+      "obligation_id": "two-three-normalized-invariance",
+      "status": "LEAN_PROVED",
+      "witness": "TwoThreeLocalCalculation.normalized_sound"
+    },
+    {
+      "obligation_id": "empty-zero-handle",
+      "status": "LEAN_PROVED_LINK_NORMALIZATION_UNCHANGED",
+      "witness": "GlobalDimensionProfile.denominator_addEmptyZero"
+    },
+    {
+      "obligation_id": "empty-four-handle",
+      "status": "LEAN_PROVED_LINK_NORMALIZATION_UNCHANGED",
+      "witness": "GlobalDimensionProfile.denominator_addEmptyFour"
+    },
+    {
+      "obligation_id": "closed-cancellation-whitelist",
+      "status": "LEAN_PROVED_BY_INDUCTIVE_API_AND_MUTATION",
+      "witness": "AdmittedCancellation has only oneTwo and twoThree constructors"
+    },
+    {
+      "obligation_id": "one-two-h2-equivalence",
+      "status": "EXACT_RUNTIME_CHAIN_CERTIFICATE",
+      "witness": "acyclic C2-to-C1 pair removal preserves the enumerated mod-2 quotient"
+    },
+    {
+      "obligation_id": "two-three-h2-equivalence",
+      "status": "EXACT_RUNTIME_CHAIN_CERTIFICATE",
+      "witness": "C3 boundary quotient removes the paired C2 coordinate and preserves H2"
+    },
+    {
+      "obligation_id": "cancellation-character-transport",
+      "status": "LEAN_DERIVED_AND_RUNTIME_EXHAUSTIVE",
+      "witness": "CancellationHomologyTransport.pairing_preserved"
+    }
+  ],
+  "schema": "twisted-yetter.kirby-cancellation-obligation-matrix.v1",
+  "status": "R9_TERMINAL_RELATIVE_TO_EXPLICIT_LOCAL_GRAPHICAL_AND_DIMENSION_INPUTS",
+  "trusted_inputs": [
+    {
+      "exact_content": "Disjoint-union multiplicativity of the closed graphical evaluator.",
+      "input_id": "bb-disjoint-union-multiplicativity",
+      "lean_type": "OneTwoLocalCalculation.disjoint_union_sound; TwoThreeLocalCalculation.disjoint_union_sound",
+      "not_assumed": "No normalized equality is included."
+    },
+    {
+      "exact_content": "The cutting and killing equations evaluating the isolated 1-2 pair to d(D) times the transparent-part dimension.",
+      "input_id": "bb-one-two-local-identities",
+      "lean_type": "cutting_identity; killing_identity",
+      "not_assumed": "The final raw-factor and normalized equalities are derived by Lean."
+    },
+    {
+      "exact_content": "The twist is trivial on every transparent object used by the 1-2 calculation.",
+      "input_id": "transparent-twist-triviality",
+      "lean_type": "transparent_twist_witness",
+      "not_assumed": "No arbitrary twist cancellation is accepted."
+    },
+    {
+      "exact_content": "Pivotality preserves the dimension of the image Kirby color, so the isolated 2-handle unknot evaluates to d(C).",
+      "input_id": "pivotal-dimension-preservation",
+      "lean_type": "pivotal_dimension_preserved",
+      "not_assumed": "Remark 3.11's non-pivotal case is explicitly excluded."
+    },
+    {
+      "exact_content": "Concrete cancellations carry an explicit chain-level equivalence inducing the H2 equivalence.",
+      "input_id": "cancellation-homology-equivalence",
+      "lean_type": "CancellationHomologyTransport.homologyEquiv",
+      "not_assumed": "The post-cancellation character cannot be handwritten."
+    }
+  ]
+}

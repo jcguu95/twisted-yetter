@@ -70,3 +70,14 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.KirbyHandleMoves.ordinary_exterior_transport_sound
 #print axioms TwistedYetter.Kirby.KirbyHandleMoves.OrdinaryHandleSlide.sound
 #print axioms TwistedYetter.Kirby.KirbyHandleMoves.TwoHandleOverTwoSlide.sound
+#print axioms TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ne_zero
+#print axioms TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addOneTwo
+#print axioms TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addTwoThree
+#print axioms TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyZero
+#print axioms TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_addEmptyFour
+#print axioms TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.raw_factor
+#print axioms TwistedYetter.Kirby.KirbyCancellation.OneTwoLocalCalculation.normalized_sound
+#print axioms TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_factor
+#print axioms TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.normalized_sound
+#print axioms TwistedYetter.Kirby.KirbyCancellation.AdmittedCancellation.sound
+#print axioms TwistedYetter.Kirby.KirbyCancellation.CancellationHomologyTransport.pairing_preserved
