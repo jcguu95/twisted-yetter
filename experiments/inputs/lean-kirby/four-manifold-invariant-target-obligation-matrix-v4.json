@@ -1,0 +1,88 @@
+{
+  "schema": "twisted-yetter.four-manifold-invariant-target-obligation-matrix.v4",
+  "status": "TARGET_CONTRACT_FROZEN_WITH_THREE_SOURCE_BOUND_CONDITIONS_OPEN",
+  "conditions": [
+    {
+      "condition_id": "category_and_graphical_algebra",
+      "status": "ESTABLISHED_RELATIVE_TO_STANDARD_CATEGORY_INPUTS",
+      "witness": "R0-R8 Lean Kirby modules"
+    },
+    {
+      "condition_id": "explicit_three_handle_normalization",
+      "status": "ESTABLISHED",
+      "witness": "KirbyCancellation.GlobalDimensionProfile.twoThreeFactor_mul_threeHandleWeight",
+      "exact_scope": "A 3-handle has weight d(C)^-1; an isolated cancelling 2-handle contributes d(C); 0- and 4-handle counts do not alter the link denominator."
+    },
+    {
+      "condition_id": "chain_derived_marked_h2_transport",
+      "status": "ESTABLISHED_GENERIC_MECHANISM",
+      "witness": "HandleChainHomology.HandleChainEquivalence.secondHomologyAddEquiv",
+      "remaining_boundary": "A source-bound local move must still compile to the exact chain homotopy equivalence."
+    },
+    {
+      "condition_id": "source_backed_special_kirby_calculus_completeness",
+      "status": "ESTABLISHED_RELATIVE_TO_EXACTLY_ONE_DOMAIN_AXIOM",
+      "witness": "SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+      "scope": "The axiom returns only an unmarked TopologicalTableTwoMovie.",
+      "remaining_boundary": "Evaluator equality and local marked-H2 enrichment are not outputs of the axiom."
+    },
+    {
+      "condition_id": "exhaustive_evaluator_compiler_mechanism",
+      "status": "ESTABLISHED_GENERIC_MECHANISM",
+      "witness": "EvaluatorCompiler.TableTwoEvaluatorCompiler.compile",
+      "denominator": [
+        "framed_isotopy",
+        "one_over_one",
+        "two_over_one",
+        "two_over_two",
+        "one_two_birth",
+        "one_two_death",
+        "two_three_birth",
+        "two_three_death"
+      ],
+      "remaining_boundary": "No source-bound value fills these eight fields."
+    },
+    {
+      "condition_id": "marked_pair_assembly_mechanism",
+      "status": "ESTABLISHED_GENERIC_MECHANISM",
+      "witness": "ConcreteMarkedPairAssembly.GeometricMarkedH2Compiler.markedPairSystem",
+      "scope": "Local identity in a shared geometric H2 model is propagated through every movie and marked_transport_sound is derived.",
+      "remaining_boundary": "No source-bound local geometric H2 compiler value exists."
+    },
+    {
+      "condition_id": "source_bound_local_move_recipes",
+      "status": "OPEN_DATA_MODEL_AND_CONSTRUCTION_REQUIRED",
+      "required_result": "Replace opaque local topology assertions with typed graphical and handle-chain edit recipes bound to exact source and target presentation hashes.",
+      "failure_guard": "A hash and a Prop witness are not a local edit recipe."
+    },
+    {
+      "condition_id": "source_bound_evaluator_compiler_instance",
+      "status": "OPEN_CONSTRUCTION_REQUIRED",
+      "required_result": "Compile every typed local graphical recipe into the exact matching R7, R8, or R9 proof object for every alpha.",
+      "failure_guard": "A direct localStep or compact prescription is rejected as construction evidence."
+    },
+    {
+      "condition_id": "source_bound_geometric_h2_compiler_instance",
+      "status": "OPEN_CONSTRUCTION_REQUIRED",
+      "required_result": "Compile every typed handle edit into a chain homotopy equivalence and prove that its induced H2 map is identity in the shared geometric coordinates.",
+      "failure_guard": "An arbitrary chain equivalence cannot discharge the geometric identity law by reflexivity."
+    }
+  ],
+  "target_theorem": {
+    "lean_input_type": "FourManifoldInvariantInputs",
+    "lean_theorem": "FourManifoldInvariantInputs.four_manifold_invariant_target",
+    "statement": "Any two certified special Kirby realizations of one marked pair (X, alpha) have equal normalized evaluator values.",
+    "promotion_rule": "All nine conditions require hash-bound evidence. The final three conditions must construct an admissible source-bound FourManifoldInvariantInputs value; arbitrary inhabitants are not evidence."
+  },
+  "explicit_non_claims": [
+    "This matrix does not establish a concrete four-manifold invariant.",
+    "Special Kirby completeness is relative to one explicit source-backed topology axiom, not proved in Lean.",
+    "The topology axiom supplies no evaluator equality or marked-H2 transport.",
+    "The exhaustive evaluator compiler mechanism is not a concrete compiler instance.",
+    "The marked-pair assembly mechanism is not a concrete local H2 compiler instance.",
+    "The current raw presentation schema is not yet a sufficient local move recipe.",
+    "An arbitrary inhabitant of FourManifoldInvariantInputs is not admissible evidence.",
+    "This matrix does not require or claim Crane-Yetter state-sum identification.",
+    "This matrix does not admit a CTL theorem claim."
+  ]
+}
