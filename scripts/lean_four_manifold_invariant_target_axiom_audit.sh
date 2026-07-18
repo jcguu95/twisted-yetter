@@ -22,4 +22,22 @@ if rg -q 'sorryAx|declaration uses `sorry`|native_decide\.ax' "${output}"; then
   exit 1
 fi
 
+expected="$(
+  printf '%s\n' \
+    "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput" \
+    "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected" \
+    | sort
+)"
+observed="$(
+  rg -o \
+    'TwistedYetter\.[A-Za-z0-9_.]*(standardHandleChainNaturalityInput|standardSpecialKirbyCalculusConnected)' \
+    "${output}" | sort -u
+)"
+if [[ "${observed}" != "${expected}" ]]; then
+  printf 'Four-manifold target custom axiom denominator changed.\n' >&2
+  printf 'Expected:\n%s\nObserved:\n%s\n' "${expected}" "${observed}" >&2
+  cat "${output}" >&2
+  exit 1
+fi
+
 cat "${output}"

@@ -34,12 +34,10 @@ def unsafeInputs
     (H2 : Type uH)
     [AddCommGroup H2]
     (compiler : TableTwoEvaluatorCompiler categoryData manifold H2)
-    (markedH2Compiler : GeometricMarkedH2Compiler manifold H2)
     (generalCerf : GeneralCerfCompleteness manifold)
     (basePresentation : SpecialKirbyPresentation manifold H2) :
     FourManifoldInvariantInputs categoryData manifold H2 where
   evaluatorCompiler := compiler
-  markedH2Compiler := markedH2Compiler
   generalCerf := generalCerf
   basePresentation := basePresentation
 
