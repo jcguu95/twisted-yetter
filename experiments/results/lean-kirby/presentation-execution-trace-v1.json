@@ -1,0 +1,165 @@
+{
+  "admission": {
+    "ctl_manifest_written": false,
+    "ctl_theorem_claim_admitted": false,
+    "status": "REPO_LOCAL_ENGINEERING_CHECKPOINT_ONLY"
+  },
+  "argv": [
+    "experiments/scripts/build_presentation_execution_trace_v1.py"
+  ],
+  "axiom_boundary": {
+    "categorical_event_interpretation_assumed": false,
+    "custom_topology_axioms": [
+      "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+    ],
+    "project_proof_oracles": []
+  },
+  "checks": {
+    "closed_trace_runtime_replay": {
+      "declared_slice_count": 13,
+      "event_count": 12,
+      "initial_boundary": [],
+      "status": "PASS",
+      "terminal_boundary": [],
+      "trace_state_count": 13,
+      "trace_step_count": 12
+    },
+    "fail_closed_mutations": {
+      "missing_execution_trace_rejected": true,
+      "status": "PASS",
+      "total_mutation_count": 10
+    },
+    "fresh_olean_guard": {
+      "mutation_script_rebuilds_trace_and_completeness": true,
+      "presentation_script_rebuilds_trace_module": true,
+      "status": "PASS",
+      "target_audit_rebuilds_target_module": true
+    },
+    "target_condition_ledger": {
+      "closed_typed_presentation_execution": "ESTABLISHED",
+      "established_foundation": 8,
+      "open_construction": 2,
+      "required": 10
+    },
+    "trace_kernel_theorems": {
+      "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES",
+      "theorem_count": 6
+    }
+  },
+  "content_hash": "sha256:ac336890095548c9a266436f8e7f8f7d4a99298cdc032abafd1fa5301b52371e",
+  "elapsed_seconds": 74.971891,
+  "explicit_nonclaims": [
+    "A successful raw event trace does not prove that any event has the intended categorical morphism interpretation.",
+    "This artifact does not construct the eight-case evaluator compiler.",
+    "This artifact does not construct geometric H2 transport.",
+    "This artifact does not establish a four-manifold invariant.",
+    "This artifact does not identify the invariant with Crane-Yetter.",
+    "This artifact does not admit a CTL theorem claim."
+  ],
+  "finished_at_utc": "2026-07-18T18:38:05Z",
+  "generator_script": "experiments/scripts/build_presentation_execution_trace_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "3496437d86151d0b5e35eb344d94371c1bee7cae",
+    "dirty_before_generation": false
+  },
+  "inputs": {
+    "fixture": {
+      "content_hash": "sha256:42eef430c68ffdc02d687958e0e1d702c3cee7ba3638cc15b664985c8e6779aa",
+      "declared_slice_count": 13,
+      "event_count": 12,
+      "path": "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json": {
+        "bytes": 5288,
+        "sha256": "sha256:412692b0c3d795b41fa264cfcf837770f25446bed24947334ce0a8b6cb46b1ee"
+      },
+      "experiments/scripts/build_presentation_execution_trace_v1.py": {
+        "bytes": 9556,
+        "sha256": "sha256:da797e7fea1811ad1d47a787d70d7f75ea410f007277d7575cdae0e05214d175"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/MissingPresentationExecutionTrace.lean": {
+        "bytes": 2014,
+        "sha256": "sha256:b19b788a7fc47cba2b293546ce90097e7670259ba748ca5d0998daca42af1fd1"
+      },
+      "lean/PresentationArtifactReplay.lean": {
+        "bytes": 3636,
+        "sha256": "sha256:6954b911596c16f22273385ed48e146c8a3da1f303abea3ceeb2448e4b0b6163"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 1534,
+        "sha256": "sha256:4f718e44cfeb013832d801f6c55c36d49d0450d76f529a313975a390fd10fcbb"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean": {
+        "bytes": 13138,
+        "sha256": "sha256:ae4bab7a533192083d1755ade3ce650deee144365ee308634820c10de2f3c326"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean": {
+        "bytes": 2998,
+        "sha256": "sha256:66e31828188f9a67a7df33ea21f11084025ec2bfa7e28300144e41149bf0e89b"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean": {
+        "bytes": 25857,
+        "sha256": "sha256:c9a685fde0c9e7719a26e93716c14b7db354ff7e346284b54972459772cdf44e"
+      },
+      "lean/TwistedYetter/Kirby/PresentationExecutionTrace.lean": {
+        "bytes": 6298,
+        "sha256": "sha256:84ed86a1e8f0cc0cd9e33f64773ed9df170642e2cae82f9e7c03312b524b95c8"
+      },
+      "lean/TwistedYetter/Kirby/PresentationExecutionTraceAxiomAudit.lean": {
+        "bytes": 903,
+        "sha256": "sha256:9bd640156950e6bd26ea82e4e945232d51477a4a821df36a1e5f97e4499d25ef"
+      },
+      "scripts/lean_four_manifold_invariant_target_axiom_audit.sh": {
+        "bytes": 595,
+        "sha256": "sha256:169ca48a193635a0580495e8b58962d2cf1fd8c94fb790ee793b27bd56f4c60e"
+      },
+      "scripts/lean_kirby_completeness_mutation_tests.sh": {
+        "bytes": 2480,
+        "sha256": "sha256:f948323736f9aecdb843259bdf85749b83823e1480c3a634cca01ef463bf5d43"
+      },
+      "scripts/lean_presentation_artifact_replay.sh": {
+        "bytes": 1137,
+        "sha256": "sha256:7fed737cdad14eb569eb56a2fb31fdb35225f401bdac27dd610de76d2b61d6fc"
+      }
+    }
+  },
+  "mathematical_status": "COMBINATORIAL_EXECUTION_ESTABLISHED_CATEGORICAL_INTERPRETATION_OPEN",
+  "remaining_construction_gaps": [
+    {
+      "condition": "sourceBoundEvaluatorCompilerInstance",
+      "exact_gap": "No categorical interpreter yet derives the eight local evaluator proofs from the typed raw event trace and source-bound move recipes.",
+      "status": "OPEN"
+    },
+    {
+      "condition": "sourceBoundGeometricH2CompilerInstance",
+      "exact_gap": "No concrete geometric compiler yet proves every local chain transport agrees with the shared H2 coordinates.",
+      "status": "OPEN"
+    }
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_presentation_execution_trace_v1.py",
+  "schema": "twisted-yetter.presentation-execution-trace.v1",
+  "started_at_utc": "2026-07-18T18:36:50Z",
+  "status": "PASS_CLOSED_TYPED_PRESENTATION_EXECUTION_ESTABLISHED",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  }
+}
