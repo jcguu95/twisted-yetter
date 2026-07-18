@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:5543242799293131a01fe34f5e9147144670ffc44deceb8898208f8586fa7815",
+  "generated_at": "2026-07-18T20:20:09Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:5543242799293131a01fe34f5e9147144670ffc44deceb8898208f8586fa7815",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:b5201a5f1653b5a083aa29ab046a640ebfc9f7968d8865f51631c966a6448720",
+    "transition": "ctlobj-sha256:28f3f9426d7aee5db4780fa8482d90259f30e516caebb5309285a1cac13cdcd3"
+  },
+  "parent_root_cid": "ctlobj-sha256:8ec7eac39447c2f1c2317c92fbc0c2438a025da516fdb1190cd12af03cca334a",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v6.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1 --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v6.json --manifest manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v6.json --created-at 2026-07-18T20:19:25Z --admitted-at 2026-07-18T20:20:09Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "178883d30c0ceddae0067eace2acb1bb7b8c7a82"
+}

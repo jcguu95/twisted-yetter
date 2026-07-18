@@ -1,0 +1,151 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "four-manifold-invariant-target-v7",
+      "artifact_commit": "178883d30c0ceddae0067eace2acb1bb7b8c7a82",
+      "content_hash": "sha256:fd19f1c5bf3d8fd906f2c1e09d0cb8dfac45b24210ca6f63c580dbb1fa65d5bb",
+      "git_blob": "cbc52b3adfefd457a55521c86fe7d8f956ac50cf",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v7.json",
+      "sha256": "49b04ee26240875686f58f9e6d45bd9392c1decf4c527bc723778ca4682c54a8",
+      "status": "PASS_TWELVE_FOUNDATION_CONDITIONS_ESTABLISHED_THREE_CONCRETE_INSTANCES_OPEN"
+    },
+    {
+      "artifact_id": "lean-four-manifold-invariant-target",
+      "git_blob": "7b17a4b9204690fca996f6ad98b82067ba0e8335",
+      "path": "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+      "sha256": "e711293ecb705d3a859251775cb53cb9c15bccb333ab0f201a5d2a8712cd18a4",
+      "status": "LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_FIFTEEN_BY_TWELVE_BY_THREE_LEDGER"
+    },
+    {
+      "artifact_id": "lean-componentwise-global-kirby-colour-expansion",
+      "git_blob": "e6bc817cdb3ac96ec030cd07b782edae5e978017",
+      "path": "lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean",
+      "sha256": "2dc81f8a8c597019ae6db9adf3ef903e014517e1fde125df9ef05cd65684dfec",
+      "status": "LEAN_GLOBAL_FINITE_COMPONENTWISE_FORMAL_SUM_MECHANISM_ESTABLISHED_INSTANCE_OPEN"
+    },
+    {
+      "artifact_id": "lean-ribbon-kirby-graphical-algebra",
+      "git_blob": "62178fa8a21754ceb6fd1a6cf2cc59659df1f8cf",
+      "path": "lean/TwistedYetter/Kirby/RibbonKirbyGraphicalAlgebra.lean",
+      "sha256": "84f49e4fe250b4b6503ebbcda956b0000efab580f51a80deaa0de26b741c9764",
+      "status": "LEAN_TRANSPARENT_CATEGORY_ALGEBRA_BOUNDARY_NO_FINAL_EVALUATOR_OR_MOVE_EQUALITY"
+    },
+    {
+      "artifact_id": "lean-source-bound-table-two-evaluator-compiler",
+      "git_blob": "f5107ee284cb0476c1047dae8c22561c793f07d1",
+      "path": "lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean",
+      "sha256": "ffd108047f8e8dcb728ba8a59ea27b345081b4ae0a08f97510886df23342a355",
+      "status": "LEAN_REQUIRES_COMPONENTWISE_GLOBAL_EXPANSION_AND_HASH_BOUND_GRAPHICAL_ALGEBRA_EIGHT_PROOF_OBJECTS_OPEN"
+    }
+  ],
+  "condition_ledger": {
+    "established": [
+      "category_and_graphical_algebra_mechanism",
+      "explicit_three_handle_normalization",
+      "closed_typed_presentation_execution",
+      "primitive_categorical_event_compiler_mechanism",
+      "chain_derived_marked_h2_transport",
+      "source_bound_geometric_h2_compiler_mechanism",
+      "source_backed_special_kirby_calculus_completeness",
+      "exhaustive_evaluator_compiler_mechanism",
+      "marked_pair_assembly_mechanism",
+      "source_bound_local_move_recipes",
+      "global_finite_componentwise_kirby_colour_expansion_mechanism",
+      "source_bound_geometric_h2_compiler_instance_relative_to_visible_domain_axiom"
+    ],
+    "established_count": 12,
+    "open": [
+      {
+        "condition": "global_finite_kirby_colour_expansion_instance",
+        "required_result": "Construct the exact finite label fiber and Kirby-colour weight for every component, and a category-bound event interpreter for every complete global labeling.",
+        "silent_failure_guard": "Eventwise relabeling, arbitrary whole diagrams, and handwritten whole-link weights are rejected."
+      },
+      {
+        "condition": "source_bound_graphical_move_compiler_instance",
+        "required_result": "Compile all eight directed R7/R8/R9 graphical proof objects from the shared source-bound recipes and the hash-bound ribbon-Kirby algebra.",
+        "silent_failure_guard": "The algebra boundary contains neither a final evaluator nor a preassumed whole-move equality."
+      },
+      {
+        "condition": "source_bound_evaluator_compiler_instance",
+        "required_result": "Assemble the concrete SourceBoundTableTwoEvaluatorCompiler only from the preceding two concrete instances.",
+        "silent_failure_guard": "A compact arbitrary TableTwoEvaluatorCompiler cannot be supplied directly as target input."
+      }
+    ],
+    "open_count": 3,
+    "required_count": 15
+  },
+  "created_at": "2026-07-18T20:19:25Z",
+  "created_by": "actor:codex",
+  "domain_axiom_boundary": {
+    "axiom_count": 2,
+    "axioms": [
+      {
+        "name": "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+        "role": "For each certified local Kirby move, supply the actual handle-chain equivalence, shared recipe binding, coordinate-naturality square, and provenance hash.",
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "final H2 identity"
+        ],
+        "caveat": "Attaching maps, boundary matrices, basis changes, contractible summand homotopies, and the geometric semantics of each H2 certificate are not reconstructed in Lean."
+      },
+      {
+        "name": "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+        "role": "Connect any two certified special presentations by the exact topology move whitelist.",
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "chain equivalence",
+          "H2 map"
+        ]
+      }
+    ]
+  },
+  "explicit_non_claims": [
+    "This note does not claim that a concrete four-manifold invariant has been established.",
+    "No concrete global Kirby-colour expansion instance has been constructed.",
+    "No source-bound graphical eight-case compiler has been constructed.",
+    "No concrete source-bound evaluator compiler instance has been constructed.",
+    "Handle-chain naturality is imported as one visible standard homology-domain axiom, not proved from serialized attaching maps.",
+    "The geometric semantics of presentation H2 certificates remain external to Lean.",
+    "The final H2 identity is derived in Lean and is not a field of either domain axiom.",
+    "Content hashes establish identity and freshness, not mathematical semantics.",
+    "This note does not identify the construction with Crane-Yetter or Yetter's state sum."
+  ],
+  "mathematical_status": "FORMALIZATION_OBJECTIVE_ACTIVE_CONDITIONAL_TARGET_ESTABLISHED_CONCRETE_INVARIANT_NOT_ESTABLISHED",
+  "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v6",
+  "objective": {
+    "acceptance_rule": "Promotion requires concrete instances for the componentwise global Kirby-colour expansion and source-bound graphical move compiler, followed by assembly of one hash-bound SourceBoundTableTwoEvaluatorCompiler and replay proving all fifteen target conditions established. The two visible domain axioms and a conditional Lean theorem alone are not a concrete invariant construction.",
+    "goal": "Construct a homologically twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove equality of normalized evaluations for any two certified special presentations of the same marked pair.",
+    "lean_input_type": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs",
+    "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target"
+  },
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit_at_note": "178883d30c0ceddae0067eace2acb1bb7b8c7a82",
+    "dirty_at_note": false
+  },
+  "status": "TWELVE_FOUNDATION_CONDITIONS_ESTABLISHED_THREE_CONCRETE_INSTANCES_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+    "subject:twisted-yetter:paper:tham-2108-13467",
+    "subject:twisted-yetter:paper:yetter-hepth-9311082"
+  ],
+  "title": "Lean target for a homologically twisted Kirby four-manifold invariant, revision 6",
+  "top_notice": "This is a formalization objective and exact obligation ledger, not a theorem claim. Twelve of fifteen target conditions are established. Three concrete categorical instances remain open, so no concrete four-manifold invariant has yet been constructed.",
+  "verification": {
+    "artifact_tests_current": "PASS_7",
+    "artifact_tests_historical_v1_through_v7": "PASS_43",
+    "domain_axioms_exact": 2,
+    "full_umbrella_build": "PASS",
+    "mutation_counts": {
+      "categorical_compiler": 6,
+      "geometric_h2_mechanism": 2,
+      "handle_chain_domain": 2,
+      "local_move_recipe": 6,
+      "ribbon_graphical_algebra": 2,
+      "target": 5
+    },
+    "proof_oracle_count": 0
+  }
+}
