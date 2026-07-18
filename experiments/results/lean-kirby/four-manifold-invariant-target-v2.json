@@ -1,0 +1,288 @@
+{
+  "admission": {
+    "ctl_manifest_written": false,
+    "ctl_theorem_claim_admitted": false,
+    "status": "REPO_LOCAL_GOAL_EVIDENCE_ONLY"
+  },
+  "argv": [
+    "experiments/scripts/build_four_manifold_invariant_target_v2.py"
+  ],
+  "checks": {
+    "scoped_pytest": {
+      "files": [
+        "tests/test_four_manifold_invariant_target_v2.py"
+      ],
+      "output": "..........                                                               [100%]\n10 passed in 0.02s",
+      "passed_count": 10,
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:496ec881658b472cceb838e72a1fc0773a7dcfc96e13b96cf76deecc765bd8c7",
+  "elapsed_milliseconds": 115159,
+  "explicit_nonclaims": [
+    "This matrix does not establish a concrete four-manifold invariant.",
+    "This matrix does not derive special Kirby completeness from general Cerf theory in Lean.",
+    "This matrix establishes only the generic chain-derived H2 mechanism, not concrete diagram boundary matrices.",
+    "This matrix does not construct a concrete evaluator compiler.",
+    "An arbitrary inhabitant of FourManifoldInvariantInputs is not admissible evidence.",
+    "This matrix does not require or claim Crane-Yetter state-sum identification.",
+    "This matrix does not admit a CTL theorem claim."
+  ],
+  "finished_at_utc": "2026-07-18T15:04:13Z",
+  "generator_script": "experiments/scripts/build_four_manifold_invariant_target_v2.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "2086cde784c786773c28564acf1b3110900ec0e2",
+    "dirty": false
+  },
+  "inputs": {
+    "obligation_matrix": {
+      "condition_count": 6,
+      "file_sha256": "sha256:8942b492e15881e905b37afd41d54e507d71aec5981c16ede7357ef8487c444b",
+      "open_condition_count": 3,
+      "path": "experiments/inputs/lean-kirby/four-manifold-invariant-target-obligation-matrix-v2.json"
+    },
+    "predecessor_artifact": {
+      "content_hash": "sha256:25d44305e02c30db9f3697efda43b9c31ffd238967b252c8285e62530d116aa1",
+      "file_sha256": "sha256:4879a3dfd77cc9405409f9e90ca0963b5fd7a61cbb3d43380787ca1a7cb1d212",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v1.json",
+      "schema": "twisted-yetter.four-manifold-invariant-target.v1",
+      "source_commit": "364244a76eb6fff14a3a6e4ea359c8445da47c99",
+      "status": "PASS_TARGET_STATED_SIMPLE_THREE_HANDLE_GAP_CLOSED_FOUR_HARD_CONDITIONS_OPEN"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/four-manifold-invariant-target-obligation-matrix-v2.json": {
+        "bytes": 2511,
+        "sha256": "sha256:8942b492e15881e905b37afd41d54e507d71aec5981c16ede7357ef8487c444b"
+      },
+      "experiments/scripts/build_four_manifold_invariant_target_v2.py": {
+        "bytes": 13069,
+        "sha256": "sha256:e8c0dc88519e400d68c651e36f851ac2a5a57dcf3558b2bad87054eb591b6887"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "sha256:f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/HandwrittenMovieTargetCharacter.lean": {
+        "bytes": 846,
+        "sha256": "sha256:5f2d88a2323ac9890c64d091167b51b066ce6201422ba238f74b848b9f83e55d"
+      },
+      "lean/Mutations/MissingInducedH2ChainWitness.lean": {
+        "bytes": 895,
+        "sha256": "sha256:dda94979b548e987682c169e8646046833ce1f03c36c2fa39cdbc24bd6b6f12b"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 1206,
+        "sha256": "sha256:ca46feb0b3e5a6b695751ea2b99c347a9ebbbca44f6fdf2a9d74b7813dc7dfab"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 10699,
+        "sha256": "sha256:6d9dd876fa8c25fa244a351c28d18c890c29211f311ac2551309990a8262182e"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean": {
+        "bytes": 7982,
+        "sha256": "sha256:13d72380cffeeb6ed62ac9862f2b7d494c043504018b3a81391b25dde34ff6b9"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean": {
+        "bytes": 1917,
+        "sha256": "sha256:b09e456de3914ab612addd0c2bc3014fd4b12197bcdda0954abb556306da38ad"
+      },
+      "lean/TwistedYetter/Kirby/HandleChainHomology.lean": {
+        "bytes": 5495,
+        "sha256": "sha256:d63f9c1f0a075861c002008c74c09f64d6852f3f664cb755e08994207f003020"
+      },
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean": {
+        "bytes": 29677,
+        "sha256": "sha256:667278454debff7998db275ac9cd605d84149bc0f02c6bdba5e8cb64d4a5c2cd"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean": {
+        "bytes": 23159,
+        "sha256": "sha256:781a7fd95bc7546cd7295ec8916ca7663feee6a7b895455902c7f5757b8753cf"
+      },
+      "scripts/lean_four_manifold_invariant_target_axiom_audit.sh": {
+        "bytes": 502,
+        "sha256": "sha256:39e69f44079c12483b5f0cb98baf00ae540e5a7fbf73fe72818acfecd733a8a4"
+      },
+      "scripts/lean_kirby_completeness_mutation_tests.sh": {
+        "bytes": 2324,
+        "sha256": "sha256:7d73c4989b67574bc65da61151c5587e597109bdbce26f02e19585b831e43698"
+      },
+      "src/twisted_yetter/four_manifold_invariant_target_v2.py": {
+        "bytes": 8858,
+        "sha256": "sha256:11420338a5396a8069f0b185f0a5d26ee59b3e5b121e9cd2178c4a5fe27d71ad"
+      },
+      "tests/test_four_manifold_invariant_target_artifact_v2.py": {
+        "bytes": 3131,
+        "sha256": "sha256:775ced03e28e52d384b5ee2767dd2f85ca8089724cd185d7c6baacb8e17166db"
+      },
+      "tests/test_four_manifold_invariant_target_v2.py": {
+        "bytes": 4437,
+        "sha256": "sha256:4a6d094ecd36e3676183a04e694db3075312429ba2eef71ba5dbb6ed50963830"
+      }
+    }
+  },
+  "lean_certificate": {
+    "axiom_audit": {
+      "allowed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audited_declaration_count": 16,
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "output": "'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.twoThreeFactor_mul_threeHandleWeight' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.GlobalDimensionProfile.denominator_ratio_addTwoThree' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCancellation.TwoThreeLocalCalculation.raw_with_explicit_three_handle' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.HandleChainHomology.HandleChainEquivalence.secondHomologyEquiv_refl_apply' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.MarkedH2Transport.targetClass_add' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.KirbyCompleteness.TableTwoMovie.targetClass_add' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.target_condition_count' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.established_foundation_condition_count' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.open_construction_condition_count' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.chain_derived_marked_h2_transport_established' depends on axioms: [propext]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.chain_derived_marked_h2_transport_not_open' depends on axioms: [propext]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.target_condition_partition' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.target_condition_partition_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.current_target_has_open_conditions' does not depend on any axioms\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.presentation_independent' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]",
+      "status": "PASS_ONLY_STANDARD_LEAN_AXIOMS",
+      "unexpected_axioms": []
+    },
+    "build_order": [
+      "lean/TwistedYetter/Kirby/HandleChainHomology.lean",
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean",
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+      "lean/TwistedYetter.lean"
+    ],
+    "build_output": "",
+    "mutation_count": 22,
+    "mutation_rejections": [
+      "PASS expected rejection: lean/Mutations/EvaluatorEqualityInsideKirbyCompleteness.lean [diagnostic: `evaluatorEquality` is not a field of structure `TableTwoLinkCompleteness`]",
+      "PASS expected rejection: lean/Mutations/MissingKirbyCompletenessCaveat.lean [diagnostic: Fields missing: `source_scope_caveat`]",
+      "PASS expected rejection: lean/Mutations/ZeroOneAsTableTwoMove.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.zeroOneBirth`]",
+      "PASS expected rejection: lean/Mutations/HandwrittenMovieTargetCharacter.lean [diagnostic: `targetCharacter` is not a field of structure `MarkedH2Transport`]",
+      "PASS expected rejection: lean/Mutations/MissingUniqueFourHandle.lean [diagnostic: Fields missing: `uniqueFourHandle`]",
+      "PASS expected rejection: lean/Mutations/ArbitraryTopologyMoveInjection.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`]",
+      "PASS expected rejection: lean/Mutations/MissingInducedH2ChainWitness.lean [diagnostic: `homologyEquiv` is not a field of structure `MarkedH2Transport`]",
+      "PASS expected rejection: lean/Mutations/MissingSpecialManifoldBinding.lean [diagnostic: Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingLocalTopologyWitness.lean [diagnostic: Fields missing: `locallyRealizesTableTwoMove`, `local_topology_witness`]",
+      "PASS expected rejection: lean/Mutations/ArbitraryNormalizedEqualityAsR11Step.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.r11StepFromNormalizedEquality`]",
+      "PASS expected rejection: lean/Mutations/DirectFinalInvariantInjection.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.HomologicallyTwistedInvariant.MarkedPairPresentationSystem.finalInvariant`]",
+      "PASS expected rejection: lean/Mutations/CraneYetterIdentificationInjection.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.craneYetterIdentification`]",
+      "PASS expected rejection: lean/Mutations/HandwrittenR11TargetAlpha.lean [diagnostic: Unknown identifier `TwistedYetter.Kirby.HomologicallyTwistedInvariant.handwrittenTargetAlpha`]",
+      "PASS expected rejection: lean/Mutations/MissingR11SingleSnapshotCoherence.lean [diagnostic: Fields missing: `single_snapshot_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingR11DecorationWitness.lean [diagnostic: Fields missing: `decoration_representation_witness`]",
+      "PASS expected rejection: lean/Mutations/MissingR11LocalBindingHashes.lean [diagnostic: Fields missing: `moveId`, `move_id_sound`, `sourcePresentationHash`, `source_hash_sound`, `targetPresentationHash`, `target_hash_sound`]",
+      "PASS expected rejection: lean/Mutations/WrongR11OrdinarySlideKind.lean [diagnostic: SlideKind.oneOverOne]",
+      "PASS expected rejection: lean/Mutations/MissingR11MarkedTransportSound.lean [diagnostic: Fields missing: `marked_transport_sound`]",
+      "PASS expected rejection: lean/Mutations/MissingR11SourceScopeCaveat.lean [diagnostic: Fields missing: `sourceScopeCaveat`]",
+      "PASS expected rejection: lean/Mutations/PromoteFourManifoldInvariantTarget.lean [diagnostic: Tactic `rfl` failed]",
+      "PASS expected rejection: lean/Mutations/DropFourManifoldInvariantTargetCondition.lean [diagnostic: Tactic `rfl` failed]",
+      "PASS expected rejection: lean/Mutations/RequireCraneYetterIdentificationForTarget.lean [diagnostic: Unknown constant `TwistedYetter.Kirby.FourManifoldInvariantTarget.TargetCondition.craneYetterIdentification`]"
+    ],
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter/Kirby/HandleChainHomology.lean",
+        "lean/TwistedYetter/Kirby/KirbyCompleteness.lean",
+        "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+        "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "status": "PASS_BUILD_AXIOM_AUDIT_AND_MUTATION_REJECTIONS"
+  },
+  "mathematical_status": "FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_four_manifold_invariant_target_v2.py",
+  "roadmap_status": "THREE_FOUNDATION_CONDITIONS_ESTABLISHED_THREE_CONCRETE_CONDITIONS_OPEN",
+  "runtime_certificate": {
+    "chain_derived_marked_h2_transport": {
+      "chain_degrees": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "chain_ring": "Z",
+      "character_transport": "precomposition_with_inverse",
+      "derived_output": "additive_equivalence_on_second_homology",
+      "handwritten_h2_equivalence_admitted": false,
+      "handwritten_target_character_admitted": false,
+      "lean_witnesses": [
+        "HandleChainEquivalence.secondHomologyLinearEquiv",
+        "HandleChainEquivalence.secondHomologyAddEquiv",
+        "HandleChainEquivalence.secondHomologyEquiv_refl_apply",
+        "MarkedH2Transport.targetClass_add",
+        "MarkedH2Transport.pairing_preserved",
+        "TableTwoMovie.targetClass_add",
+        "TableTwoMovie.homologyEquiv_trans"
+      ],
+      "move_input": "chain_homotopy_equivalence",
+      "remaining_concrete_boundary": "Bind each concrete Kirby presentation and move to its handle boundary matrices, bases, and chain equivalence.",
+      "second_homology_degree": 2,
+      "status": "ESTABLISHED_GENERIC_MECHANISM"
+    },
+    "condition_counts": {
+      "established": 3,
+      "open": 3,
+      "required": 6
+    },
+    "content_hash": "sha256:019923e9f5b09d6d195c65049fd6a58864324c9d23d5a76a4ecff07d8c313b3c",
+    "established_conditions": [
+      "category_and_graphical_algebra",
+      "explicit_three_handle_normalization",
+      "chain_derived_marked_h2_transport"
+    ],
+    "explicit_nonclaims": [
+      "This artifact does not claim that a concrete four-manifold invariant has been established.",
+      "The special Kirby calculus completeness theorem remains an explicit source-backed topology input.",
+      "A concrete evaluator compiler has not yet assembled every local-step proof from coupon and link syntax.",
+      "The generic chain-derived H2 mechanism is established, but concrete Kirby diagrams are not yet bound to boundary matrices and chain maps.",
+      "An arbitrary inhabitant of FourManifoldInvariantInputs is not admissible evidence.",
+      "No identification with a Crane-Yetter state sum is required or claimed.",
+      "No CTL theorem claim is admitted by this repo-local artifact."
+    ],
+    "four_manifold_invariant_established": false,
+    "mathematical_status": "FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+    "open_conditions": [
+      "concrete_evaluator_compiler",
+      "special_kirby_calculus_completeness",
+      "concrete_marked_pair_assembly"
+    ],
+    "required_conditions": [
+      "category_and_graphical_algebra",
+      "explicit_three_handle_normalization",
+      "chain_derived_marked_h2_transport",
+      "concrete_evaluator_compiler",
+      "special_kirby_calculus_completeness",
+      "concrete_marked_pair_assembly"
+    ],
+    "schema": "twisted-yetter.four-manifold-invariant-target-runtime.v2",
+    "status": "TARGET_STATED_THREE_FOUNDATION_CONDITIONS_ESTABLISHED_THREE_HARD_CONDITIONS_OPEN",
+    "target_theorem": {
+      "concrete_input_instance_constructed": false,
+      "lean_input_type": "FourManifoldInvariantInputs",
+      "lean_theorem": "FourManifoldInvariantInputs.four_manifold_invariant_target",
+      "statement": "Any two certified special Kirby realizations of the same marked pair have equal normalized evaluator values."
+    },
+    "three_handle_normalization": {
+      "cancelling_pair_product": "1",
+      "dimension_symbol": "d(C)",
+      "isolated_two_handle_factor": "d(C)",
+      "three_handle_weight": "d(C)^-1",
+      "total_quantum_dimension_warning": "If script-D^2 = d(C), this weight is script-D^-2."
+    }
+  },
+  "schema": "twisted-yetter.four-manifold-invariant-target.v2",
+  "started_at_utc": "2026-07-18T15:02:17Z",
+  "status": "PASS_TARGET_STATED_CHAIN_DERIVED_H2_GAP_CLOSED_THREE_HARD_CONDITIONS_OPEN",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  }
+}
