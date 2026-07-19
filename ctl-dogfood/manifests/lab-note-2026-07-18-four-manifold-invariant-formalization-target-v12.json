@@ -1,0 +1,28 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:dc6ac1abbdcd9f0471ab55ea900977151c15fe109029a54ba017f56b11927b6a",
+  "generated_at": "2026-07-19T03:42:04Z",
+  "generator": "ctl-dogfood/scripts/admit_revision.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
+  "mode": "shadow",
+  "objects": {
+    "current_root": "ctlobj-sha256:dc6ac1abbdcd9f0471ab55ea900977151c15fe109029a54ba017f56b11927b6a",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "revision": "ctlobj-sha256:bab7a20763797978872899f56a7013b14cf0d0a5389d4ef326309a09db12bf34",
+    "transition": "ctlobj-sha256:0ce7298df0030dc330b56d8b6b84061ad4af0c97b76a4540bd3abeed2a3890fd"
+  },
+  "parent_root_cid": "ctlobj-sha256:14bfe264ed6766a0c94d5f162fa00947f37732560fc530d3ddc9eea20e32f9bf",
+  "payload_file": "ctl-dogfood/lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v12.json",
+  "payload_profile": "ctl-data/opaque-json/1",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_revision.py --logical-id claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1 --revision-kind claim --payload-profile ctl-data/opaque-json/1 --payload lab-notes/2026-07-18-four-manifold-invariant-formalization-target-v12.json --manifest manifests/lab-note-2026-07-18-four-manifold-invariant-formalization-target-v12.json --created-at 2026-07-19T03:42:04Z --admitted-at 2026-07-19T03:42:04Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "revision_kind": "claim",
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "a0f1fbcd1de6bd7bd1571bfa3908e039734c551b"
+}
