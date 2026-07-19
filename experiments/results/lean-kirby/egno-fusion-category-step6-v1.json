@@ -1,0 +1,262 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_fusion_category_step6_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 57,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "closed_scalar_origin": "PASS_SCHUR_DERIVED_NOT_CALLER_FIELD",
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (2236 jobs).",
+      "status": "PASS"
+    },
+    "identity_resolution_origin": "PASS_ACTUAL_BIPRODUCT_ISOMORPHISM_NOT_NUMERICAL_TABLE",
+    "mutations": {
+      "rejected_count": 22,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldNaturalityWitness.lean [diagnostic: could not synthesize default value]",
+        "PASS expected rejection: lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldNaturalityTarget.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongMonodromyMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldMonodromyDefect.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/BalancedTwistIsNotSpherical.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonLoopMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonDualInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongTraceCyclicityDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]",
+        "PASS expected rejection: lean/Mutations/FusionListWithoutCompleteness.lean [diagnostic: Fields missing: `simple_complete`]",
+        "PASS expected rejection: lean/Mutations/NumericalMultiplicityIsNotDecomposition.lean [diagnostic: Fields missing: `decomposition`]",
+        "PASS expected rejection: lean/Mutations/DuplicateSimpleListWithoutGuard.lean [diagnostic: Fields missing: `simple_pairwise`]",
+        "PASS expected rejection: lean/Mutations/FusionUnitNeedsSimpleRepresentative.lean [diagnostic: Fields missing: `unitIso`]",
+        "PASS expected rejection: lean/Mutations/FusionDualNeedsRepresentative.lean [diagnostic: Fields missing: `dualIso`]",
+        "PASS expected rejection: lean/Mutations/ArbitraryClosedScalarIsNotFusionData.lean [diagnostic: `closedScalar` is not a field of structure `FusionCategoryData`]",
+        "PASS expected rejection: lean/Mutations/FusionDataWithoutRibbonIsNotRibbonData.lean [diagnostic: Fields missing: `ribbon`]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbon.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean",
+        "lean/TwistedYetter/Fusion/EGNOTraceCyclicity.lean",
+        "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean",
+        "lean/TwistedYetter/Fusion/EGNOFusionCategoryAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/Insertion.lean",
+        "lean/Mutations/FusionListWithoutCompleteness.lean",
+        "lean/Mutations/NumericalMultiplicityIsNotDecomposition.lean",
+        "lean/Mutations/DuplicateSimpleListWithoutGuard.lean",
+        "lean/Mutations/FusionUnitNeedsSimpleRepresentative.lean",
+        "lean/Mutations/FusionDualNeedsRepresentative.lean",
+        "lean/Mutations/ArbitraryClosedScalarIsNotFusionData.lean",
+        "lean/Mutations/FusionDataWithoutRibbonIsNotRibbonData.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
+  },
+  "content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
+  "definition_boundary": {
+    "semisimplicity_encoding": "Every object carries an explicit finite biproduct isomorphism to listed simple representatives.",
+    "source": "EGNO Definitions 1.8.1, 1.8.6, and 4.1.1; Proposition 1.8.4",
+    "unit_condition_encoding": "The interface stores the unit as a simple representative. In the finite semisimple algebraically closed setting this is the strengthened proof-relevant form used to derive, rather than assume, End(1) \u2243 K."
+  },
+  "elapsed_milliseconds": 92721,
+  "established": [
+    "FusionCategoryData records a finite duplicate-free complete simple skeleton and an actual finite simple decomposition of every object.",
+    "Finite Hom spaces plus the explicit decomposition encode the finite semisimple content of EGNO Definition 4.1.1.",
+    "Schur's lemma derives the canonical K-linear equivalence K \u2243 End(1) from the listed simple tensor unit.",
+    "Closed-diagram scalarization preserves identity, addition, scalar multiplication, and composition.",
+    "Every object and every tensor product of simples has a kernel-checked finite identity resolution.",
+    "RibbonFusionCategoryData binds the Step 1-5 pivotal, spherical, trace, and quantum-dimension constructions to one finite semisimple category package."
+  ],
+  "explicit_non_claims": [
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because pivotal cyclicity is the only cut-moving theorem needed here.",
+    "The nondegenerate trace pairing and its mate and functor compatibility have not yet been derived from the fusion interface.",
+    "No Kirby-colour expansion or category-bound Kirby move has yet been derived.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T08:41:40Z",
+  "generator_script": "experiments/scripts/build_egno_fusion_category_step6_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "ca1342fece2b26122494dbce2cf026231c4dc769",
+    "dirty": false
+  },
+  "inputs": {
+    "egno_pdf": {
+      "bytes": 6216438,
+      "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json",
+      "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "c5cf80f909e5fb51dd02f3179dc13ecf507a682a000d571f9e02335af3626ba2"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 11192,
+        "sha256": "c5cf80f909e5fb51dd02f3179dc13ecf507a682a000d571f9e02335af3626ba2"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/scripts/build_egno_fusion_category_step6_v1.py": {
+        "bytes": 14586,
+        "sha256": "a1c0ea2db7b1296d0046e0849bab18c732dbb846dbf815643254266aca8d29dc"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryClosedScalarIsNotFusionData.lean": {
+        "bytes": 845,
+        "sha256": "ffafbab23e7db0091bf7db305aa98c5714cf0321bc41e822865005187388c27d"
+      },
+      "lean/Mutations/DuplicateSimpleListWithoutGuard.lean": {
+        "bytes": 1113,
+        "sha256": "35e64bc93b91bd49855d3a9c37e42daa6a07e26d874897f44a5d3c7d4eb1de2b"
+      },
+      "lean/Mutations/FusionDataWithoutRibbonIsNotRibbonData.lean": {
+        "bytes": 900,
+        "sha256": "e9ae33c5c7d2edb4fb00144e434e164adaf4c37dda85a63da35dc4aa4d821859"
+      },
+      "lean/Mutations/FusionDualNeedsRepresentative.lean": {
+        "bytes": 1113,
+        "sha256": "c96a1c927ffc8937a620ed6edd1e0ca070763f97d740b0341e3bbb31a9cdc9bf"
+      },
+      "lean/Mutations/FusionListWithoutCompleteness.lean": {
+        "bytes": 1092,
+        "sha256": "81ce50a096cbbde4c9da13af9741298086ef4ee2f22853dd6a75f257e58474e2"
+      },
+      "lean/Mutations/FusionUnitNeedsSimpleRepresentative.lean": {
+        "bytes": 1103,
+        "sha256": "dccffcd8987e9961352331ccec3bdc7f3a7c290fd362e6d3a97202a9b71439bd"
+      },
+      "lean/Mutations/NumericalMultiplicityIsNotDecomposition.lean": {
+        "bytes": 1120,
+        "sha256": "5be1ddd2d1ad058090bd6726eb8fbbd4f628d2b047463d326631b45c7f5439f0"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2246,
+        "sha256": "5ccf1c05377083a038297380d4a8bd98272fdd7d90362a8456bc6635c0736f1d"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean": {
+        "bytes": 15622,
+        "sha256": "a1fdc129d847b6a28022b94026a63d2c068609f1b9b30fc8209d9ead7c716d3a"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean": {
+        "bytes": 9882,
+        "sha256": "61e7034996be4c399c3fd2f6a5a4826dac499f7196e869897955382f3bc56108"
+      },
+      "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean": {
+        "bytes": 13924,
+        "sha256": "81f394abdc17334bdae00146212e32a2a3ca8e8605266b04e62d3f1b701b50c4"
+      },
+      "lean/TwistedYetter/Fusion/EGNOFusionCategoryAxiomAudit.lean": {
+        "bytes": 1862,
+        "sha256": "f308b6a15757dffd5514519dcf67820892eb8ea5f453f57ff8ccb27b2254e314"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
+        "bytes": 5386,
+        "sha256": "d720bb43b22f89d1ae838368996f4bd2627399b79dcafc1ef055d27b0e7551a7"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTraceCyclicity.lean": {
+        "bytes": 4014,
+        "sha256": "fed1ae8137bab74cd5ee7a570baa8a3df0511c2cdd133870da43b259e5f9502c"
+      },
+      "lean/TwistedYetter/Fusion/Insertion.lean": {
+        "bytes": 3057,
+        "sha256": "9ed4f06940f8c034ddee0f50f137f99fe0389c10d11a9555288a036ad12b6380"
+      },
+      "scripts/lean_egno_fusion_category_axiom_audit.sh": {
+        "bytes": 471,
+        "sha256": "5ece92cb5397540f5b20a27c6f69b13a5288e3658e79a621235c5b8cf5110156"
+      },
+      "scripts/lean_egno_fusion_category_mutation_tests.sh": {
+        "bytes": 1705,
+        "sha256": "dbd19f16ea474d6cabbfb3db77e0280af910ad9e87652e9f6e3e13564dc6260f"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_fusion_category_step6_v1.py": {
+        "bytes": 3306,
+        "sha256": "da7712021b68e122e55e0e0dcfd75da9113b51d6f5b503ea1eb9bb029b28ecd1"
+      }
+    }
+  },
+  "mathematical_status": "GENERIC_PROOF_RELEVANT_FUSION_AND_RIBBON_INTERFACE_ESTABLISHED",
+  "proof_scope": {
+    "ambient_typeclasses": [
+      "Field K",
+      "IsAlgClosed K",
+      "Abelian C",
+      "Linear K C",
+      "MonoidalCategory C",
+      "RigidCategory C",
+      "MonoidalPreadditive C",
+      "MonoidalLinear K C"
+    ],
+    "derived_not_assumed": [
+      "simple Hom dimensions",
+      "K-linear scalar equivalence K \u2243 End(1)",
+      "closed-diagram scalarization laws",
+      "finite identity resolutions",
+      "canonical pivotal and spherical structures after ribbon input"
+    ],
+    "stored_fusion_data": [
+      "finite simple index type",
+      "simple representatives and simplicity proofs",
+      "pairwise non-isomorphic guard",
+      "completeness among all simple objects",
+      "finite-dimensional Hom spaces",
+      "actual biproduct decompositions",
+      "simple unit representative",
+      "right-dual representatives"
+    ]
+  },
+  "remaining_blockers": [
+    "Derive the nondegenerate trace pairing and its mate compatibility.",
+    "Derive Kirby-colour expansion from the fusion data.",
+    "Bind category laws to Kirby moves and assemble the invariant."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 UV_CACHE_DIR=.uv-cache uv run python experiments/scripts/build_egno_fusion_category_step6_v1.py",
+  "schema": "twisted-yetter.egno-fusion-category-step6.v1",
+  "started_at_utc": "2026-07-19T08:40:07Z",
+  "status": "PASS_STEP_6_FINITE_SEMISIMPLE_FUSION_INTERFACE_ESTABLISHED",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
