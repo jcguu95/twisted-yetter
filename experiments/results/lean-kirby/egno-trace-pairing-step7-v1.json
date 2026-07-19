@@ -1,0 +1,236 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_trace_pairing_step7_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 73,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (2238 jobs).",
+      "status": "PASS"
+    },
+    "local_transport_origin": "PASS_DERIVED_FROM_GLOBAL_LAWS_NOT_LOCAL_PAIRING_FIELDS",
+    "mutations": {
+      "rejected_count": 24,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldNaturalityWitness.lean [diagnostic: could not synthesize default value]",
+        "PASS expected rejection: lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldNaturalityTarget.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongMonodromyMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldMonodromyDefect.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/BalancedTwistIsNotSpherical.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonLoopMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonDualInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongTraceCyclicityDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]",
+        "PASS expected rejection: lean/Mutations/FusionListWithoutCompleteness.lean [diagnostic: Fields missing: `simple_complete`]",
+        "PASS expected rejection: lean/Mutations/NumericalMultiplicityIsNotDecomposition.lean [diagnostic: Fields missing: `decomposition`]",
+        "PASS expected rejection: lean/Mutations/DuplicateSimpleListWithoutGuard.lean [diagnostic: Fields missing: `simple_pairwise`]",
+        "PASS expected rejection: lean/Mutations/FusionUnitNeedsSimpleRepresentative.lean [diagnostic: Fields missing: `unitIso`]",
+        "PASS expected rejection: lean/Mutations/FusionDualNeedsRepresentative.lean [diagnostic: Fields missing: `dualIso`]",
+        "PASS expected rejection: lean/Mutations/ArbitraryClosedScalarIsNotFusionData.lean [diagnostic: `closedScalar` is not a field of structure `FusionCategoryData`]",
+        "PASS expected rejection: lean/Mutations/FusionDataWithoutRibbonIsNotRibbonData.lean [diagnostic: Fields missing: `ribbon`]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalMateTraceLaw.lean [diagnostic contains: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingPivotalFunctorTraceLaw.lean [diagnostic contains: Application type mismatch]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "nondegeneracy_origin": "PASS_DERIVED_FROM_ACTUAL_FINITE_SEMISIMPLE_DECOMPOSITION",
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNOTracePairing.lean",
+        "lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean",
+        "lean/TwistedYetter/Fusion/EGNOTracePairingAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/PivotalMate.lean",
+        "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean",
+        "lean/TwistedYetter/Fusion/FrobeniusLinear.lean",
+        "lean/TwistedYetter/Fusion/PairingTransport.lean",
+        "lean/Mutations/MissingSphericalMateTraceLaw.lean",
+        "lean/Mutations/MissingPivotalFunctorTraceLaw.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_BOTH_LOCAL_PRIMARY_SOURCE_HASHES_MATCH"
+  },
+  "content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+  "elapsed_milliseconds": 111467,
+  "explicit_non_claims": [
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized; Step 7 uses the explicitly source-bound B\u00e4renz--Barrett mate trace law instead of silently deriving it.",
+    "The spherical mate trace law from B\u00e4renz--Barrett Lemma 3.3 remains an explicit all-objects theorem input; it has not been rederived solely from the SphericalStructure fields in Lean.",
+    "Pivotal-functor trace preservation from B\u00e4renz--Barrett Lemma 2.23 remains an explicit all-endomorphisms theorem input; a native pivotal-functor structure has not been formalized in Mathlib.",
+    "No Kirby-colour expansion or category-bound Kirby move has yet been derived.",
+    "No concrete category has been instantiated."
+  ],
+  "explicit_standard_theorem_inputs": [
+    {
+      "name": "SphericalMateTraceLaw",
+      "scope": "all objects X, Y, Z and all matching morphisms",
+      "source": "B\u00e4renz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684"
+    },
+    {
+      "name": "PivotalFunctorTraceLaw",
+      "scope": "all source objects and all endomorphisms",
+      "source": "B\u00e4renz--Barrett Lemma 2.23, equation (2.1.17), journal pages 671-672"
+    }
+  ],
+  "finished_at_utc": "2026-07-19T09:42:52Z",
+  "generator_script": "experiments/scripts/build_egno_trace_pairing_step7_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "fa2c99b6818abc31e4f4f1342ea4d7bcef447d12",
+    "dirty": false
+  },
+  "inputs": {
+    "reference_ledgers": {
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json": {
+        "sha256": "ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed"
+      }
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "aa8f7fedc42fcb14f8a8cc87104044ddd525aefb65f42af8d3027ff6d9d7dd53"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 15246,
+        "sha256": "aa8f7fedc42fcb14f8a8cc87104044ddd525aefb65f42af8d3027ff6d9d7dd53"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json": {
+        "bytes": 3822,
+        "sha256": "ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed"
+      },
+      "experiments/scripts/build_egno_trace_pairing_step7_v1.py": {
+        "bytes": 14188,
+        "sha256": "f298309038511b65b432bb3a7065a5bca7e3f71442aa54171b6bfac261030645"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/MissingPivotalFunctorTraceLaw.lean": {
+        "bytes": 1306,
+        "sha256": "d408443d05ed893cdc3c7362e5779cd0223111709fddd4ef60a46f228abdbb1a"
+      },
+      "lean/Mutations/MissingSphericalMateTraceLaw.lean": {
+        "bytes": 1122,
+        "sha256": "63b7eef8fb17b1998256e2c37da8307e334f5d0a033d8ecdd2d4c51c269252df"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2344,
+        "sha256": "49c9ba914a3f82338474a22526f9b21b2ca2c1501b87ab47cc819d44f3363499"
+      },
+      "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean": {
+        "bytes": 13924,
+        "sha256": "81f394abdc17334bdae00146212e32a2a3ca8e8605266b04e62d3f1b701b50c4"
+      },
+      "lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean": {
+        "bytes": 3557,
+        "sha256": "a01432fc27456ac669d25614a99ecab4e6643fe356737bfd553cefef625f0283"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTracePairing.lean": {
+        "bytes": 19457,
+        "sha256": "3e553ea74b77f9c174833dddddc7ff6a7c69da16b76f850bafbb485e9e18fbdb"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTracePairingAxiomAudit.lean": {
+        "bytes": 1621,
+        "sha256": "9654f8cbc5dc064f11643f63a71f2959561b0ac9bcc7b28572bd3bd8ce7e3380"
+      },
+      "lean/TwistedYetter/Fusion/FrobeniusLinear.lean": {
+        "bytes": 3917,
+        "sha256": "c50a445029d35816a781b751c530d7edf746c2aa223e121cb7b58b6a2cc7616d"
+      },
+      "lean/TwistedYetter/Fusion/PairingTransport.lean": {
+        "bytes": 6467,
+        "sha256": "2df57e4777fd7552371c8f4164a799c41f35febee0cb7097c51ab828dbf47a97"
+      },
+      "lean/TwistedYetter/Fusion/PivotalMate.lean": {
+        "bytes": 9112,
+        "sha256": "fd5928630077a6def9d6c495319f814bafc86fcdd0f3a26c11a73be6416f67d9"
+      },
+      "scripts/lean_egno_trace_pairing_axiom_audit.sh": {
+        "bytes": 476,
+        "sha256": "0f488672be793375ddafabde4611b8115d73a12d5ffeff8fc9061f24d8ce7b7c"
+      },
+      "scripts/lean_egno_trace_pairing_mutation_tests.sh": {
+        "bytes": 1222,
+        "sha256": "2d1092a6108e1056141f59fcbb39580a8e7ac38e4f7e7fb9082294bd173d2232"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_trace_pairing_step7_v1.py": {
+        "bytes": 3328,
+        "sha256": "8e27b3f781e725970658ad5f8becb607e4865ab49d2fdb59aa3bd5528fadb32e"
+      }
+    },
+    "source_pdfs": {
+      "baerenz_barrett": {
+        "bytes": 906609,
+        "path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+      },
+      "egno": {
+        "bytes": 6216438,
+        "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+        "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+      }
+    }
+  },
+  "lean_derived": [
+    "composition through every simple object is a perfect pairing",
+    "composition through the tensor unit is a perfect pairing",
+    "Frobenius cup and pivotal cap are linear equivalences",
+    "joining the cup and cap is exactly the pivotal trace",
+    "the pivotal trace pairing on arbitrary Hom spaces is perfect",
+    "one pivotal structure determines both reverse exact pairings and mate maps",
+    "the global spherical mate law yields every local PairingTransport",
+    "strong monoidal tensorators cancel in a composite image coupon",
+    "the global pivotal-functor trace law yields every local pairing compatibility"
+  ],
+  "mathematical_status": "PERFECT_TRACE_PAIRING_DERIVED_AND_LOCAL_COMPATIBILITY_ESTABLISHED_RELATIVE_TO_TWO_EXPLICIT_GLOBAL_THEOREM_INPUTS",
+  "remaining_blockers": [
+    "Derive the Kirby-colour expansion from the established fusion data.",
+    "Bind the category laws to the Kirby moves.",
+    "Assemble the four-manifold invariant from the category-bound moves."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 UV_CACHE_DIR=.uv-cache uv run python experiments/scripts/build_egno_trace_pairing_step7_v1.py",
+  "schema": "twisted-yetter.egno-trace-pairing-step7.v1",
+  "started_at_utc": "2026-07-19T09:41:01Z",
+  "status": "PASS_STEP_7_TRACE_PAIRING_COMPATIBILITY_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
