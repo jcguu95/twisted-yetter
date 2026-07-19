@@ -53,26 +53,33 @@
     },
     "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
   },
-  "content_hash": "sha256:85f17f853ae691e5961aedc90706de41e842ea16bd8c038c90cf5d8019e93fcf",
-  "elapsed_milliseconds": 40771,
+  "content_hash": "sha256:1c62c41598e01d62263962735c4a5cef8191cd7e27b536c9e218ab3dcd3d72e0",
+  "definition_boundary": {
+    "adopted_characterization": "EGNO Proposition 8.9.3 and equation (8.31), printed pages 214-215",
+    "lean_established": "The characterized tensorator is coherent and makes the canonical pivotal natural isomorphism monoidal.",
+    "not_independently_established": "Equality with a separately constructed braiding-free, duality-induced double-dual tensorator.",
+    "status": "SOURCE_CHARACTERIZATION_ADOPTED"
+  },
+  "elapsed_milliseconds": 106944,
   "established": [
     "The positive double braiding is the tensorator inherited from the monoidal-opposite round trip.",
     "Transport across the Drinfeld natural isomorphism gives a coherent monoidal structure on the right double dual.",
     "The Drinfeld tensor defect is exactly positive monodromy, matching EGNO equation (8.31).",
     "The balancing law cancels the defect, so theta_X followed by u_X is a monoidal natural isomorphism.",
-    "Every RibbonStructure now determines a kernel-checked canonical PivotalStructure."
+    "Every RibbonStructure now determines a kernel-checked PivotalStructure relative to the equation-(8.31)-characterized double-dual tensorator."
   ],
   "explicit_non_claims": [
     "No spherical structure has yet been derived.",
     "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
     "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "No concrete category has been instantiated."
   ],
-  "finished_at_utc": "2026-07-19T06:45:49Z",
+  "finished_at_utc": "2026-07-19T06:52:53Z",
   "generator_script": "experiments/scripts/build_egno_canonical_pivotal_step3_v1.py",
   "git": {
     "branch": "codex/lean-kirby-coupon-bootstrap",
-    "commit": "04b12299da52f4ef85d8609f4f5a3ff570328606",
+    "commit": "74076ff0ee9be21e6e0efb0877517e2de27237c2",
     "dirty": false
   },
   "inputs": {
@@ -87,20 +94,20 @@
     },
     "roadmap": {
       "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
-      "sha256": "575875e2678eb82e5d3064069be3f23a5fa43297cc9beb8fe56fb22f88aa95f9"
+      "sha256": "06c83ff3739ea7ab3d7d9a1c7cbfa57ff778b0f54f388b7f3c7412bb80cc09fa"
     },
     "source_files": {
       "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
-        "bytes": 4514,
-        "sha256": "575875e2678eb82e5d3064069be3f23a5fa43297cc9beb8fe56fb22f88aa95f9"
+        "bytes": 4794,
+        "sha256": "06c83ff3739ea7ab3d7d9a1c7cbfa57ff778b0f54f388b7f3c7412bb80cc09fa"
       },
       "experiments/inputs/references/egno-canonical-pivotal-primary-sources-v1.json": {
         "bytes": 2622,
         "sha256": "e1cd58c06b6002f5a8249085fd7aa25e37c3370fb60fd562ca4d3d59c371a7d3"
       },
       "experiments/scripts/build_egno_canonical_pivotal_step3_v1.py": {
-        "bytes": 12207,
-        "sha256": "0aac67a72787e5c6a77be5a30f487ef69c3470607dde7b1d3a6ba48fe9a8fc28"
+        "bytes": 12928,
+        "sha256": "579abd7d3430c48e87753e053f9ede92cb21e8435a16127bf148af5815bbe117"
       },
       "lake-manifest.json": {
         "bytes": 3149,
@@ -155,8 +162,8 @@
         "sha256": "e9a6fe0fec677d1eb7e078311b24cb72bf477ce85fbd948898b73b2d1198ad45"
       },
       "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean": {
-        "bytes": 15330,
-        "sha256": "af561193750e5713385fa86fe2f57a2c6b1e402a2bfbded51b2a6e6e2774dd04"
+        "bytes": 15622,
+        "sha256": "a1fdc129d847b6a28022b94026a63d2c068609f1b9b30fc8209d9ead7c716d3a"
       },
       "lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean": {
         "bytes": 1360,
@@ -167,8 +174,8 @@
         "sha256": "e6311b316ba198d090dee8b5cf52424629ac0f65d08ddbba70de40b8a797a2a8"
       },
       "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
-        "bytes": 5087,
-        "sha256": "4c2219e44a46c38e0b2a32b74d6c4280ea4d1700d8d5f40719b985a6154e8295"
+        "bytes": 5318,
+        "sha256": "8dccad77f11395c92c9f3b0c7d84e9b89849d41697daa5f68c9c3b2370f64070"
       },
       "scripts/lean_egno_canonical_pivotal_axiom_audit.sh": {
         "bytes": 490,
@@ -183,8 +190,8 @@
         "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
       },
       "tests/test_egno_canonical_pivotal_step3_v1.py": {
-        "bytes": 2375,
-        "sha256": "743988444159e0e78858bab24aa08ec26dc740a6130f1eeb1707b91ccdbf185f"
+        "bytes": 2592,
+        "sha256": "95921d76feff96d737a23b3fc5703783f565739eb19af976ed2d7c04b9844b18"
       }
     }
   },
@@ -197,7 +204,7 @@
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "reproduce_command": "LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_egno_canonical_pivotal_step3_v1.py",
   "schema": "twisted-yetter.egno-canonical-pivotal-step3.v1",
-  "started_at_utc": "2026-07-19T06:45:08Z",
+  "started_at_utc": "2026-07-19T06:51:06Z",
   "status": "PASS_STEP_3_MONOIDAL_PIVOTAL_STRUCTURE_ESTABLISHED",
   "tool_versions": {
     "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
