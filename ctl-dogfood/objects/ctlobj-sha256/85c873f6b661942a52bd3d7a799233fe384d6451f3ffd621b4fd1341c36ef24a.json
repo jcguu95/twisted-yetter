@@ -1,0 +1,157 @@
+{
+  "created_at": "2026-07-19T06:53:19Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+  "parents": [
+    "ctlobj-sha256:9e9ee556b26f600c3e478695131b267698f6b065a672b386421fe7399fff232a"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_commit": "56d62787bc5bf6206341006982dd4358a274ba6e",
+        "artifact_id": "egno-canonical-pivotal-step3-v1",
+        "content_hash": "sha256:1c62c41598e01d62263962735c4a5cef8191cd7e27b536c9e218ab3dcd3d72e0",
+        "git_blob": "621f5be8c1f2f2bfff74723705a61eb23170bbc5",
+        "path": "experiments/results/lean-kirby/egno-canonical-pivotal-step3-v1.json",
+        "sha256": "4eb9b99d51271f0d0a4cad3eff45593b413be3f960c55631460d98dce17b8b8d",
+        "status": "PASS_STEP_3_MONOIDAL_PIVOTAL_STRUCTURE_ESTABLISHED"
+      },
+      {
+        "artifact_commit": "56d62787bc5bf6206341006982dd4358a274ba6e",
+        "artifact_id": "lean-egno-canonical-pivotal",
+        "git_blob": "04f1c7ca55f881dea65ccc21291a84d1acdd293c",
+        "path": "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "sha256": "a1fdc129d847b6a28022b94026a63d2c068609f1b9b30fc8209d9ead7c716d3a",
+        "status": "LEAN_KERNEL_CHECKED_MONOIDAL_PIVOTAL_STRUCTURE"
+      },
+      {
+        "artifact_commit": "56d62787bc5bf6206341006982dd4358a274ba6e",
+        "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+        "git_blob": "43bbfa56fc05787993888845e8c59f0b53ad396e",
+        "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+        "sha256": "06c83ff3739ea7ab3d7d9a1c7cbfa57ff778b0f54f388b7f3c7412bb80cc09fa",
+        "status": "STEP_3_ESTABLISHED_STEPS_4_TO_10_EXPLICIT"
+      },
+      {
+        "artifact_commit": "582580a56c1d846a937c7178e1b3845b8dc9f37b",
+        "artifact_id": "egno-canonical-pivotal-step2-v1",
+        "content_hash": "sha256:690d14c7d6730e0d9adec3f45a950a8e664c8c6ce924ee5cddef82472dfa0631",
+        "path": "experiments/results/lean-kirby/egno-canonical-pivotal-step2-v1.json",
+        "status": "HISTORICAL_PREDECESSOR_STEP_2"
+      },
+      {
+        "artifact_id": "egno-category-foundation-v1",
+        "content_hash": "sha256:a584128bf147d46091ba362a764252ffc16049b18eaca635ef794d8df5f8986f",
+        "path": "experiments/results/lean-kirby/egno-category-foundation-v1.json",
+        "status": "HISTORICAL_GENERIC_INTERFACE_FOUNDATION"
+      }
+    ],
+    "created_at": "2026-07-19T06:53:19Z",
+    "created_by": "actor:codex",
+    "definition_boundary": {
+      "adopted_characterization": "EGNO Proposition 8.9.3 and equation (8.31), printed pages 214-215",
+      "lean_established": "The equation-(8.31)-characterized tensorator is coherent and makes the canonical pivotal natural isomorphism monoidal.",
+      "not_independently_established": "Equality with a separately constructed braiding-free, duality-induced double-dual tensorator.",
+      "status": "SOURCE_CHARACTERIZATION_ADOPTED"
+    },
+    "established": [
+      "The Step 1 objectwise formula and Step 2 natural-isomorphism result remain established.",
+      "The positive double braiding is realized as the tensorator inherited from the monoidal-opposite round trip mopFunctor followed by unmopFunctor.",
+      "Transport across the Drinfeld natural isomorphism gives a coherent monoidal structure on the right double-dual functor.",
+      "The transported tensorator satisfies the explicit EGNO (8.31) defect equation: the Drinfeld tensor defect is positive monodromy.",
+      "The balancing law and naturality imply that the twist at the monoidal unit is the identity.",
+      "Balancing cancels the Drinfeld monodromy defect, so theta_X followed by u_X is a monoidal natural isomorphism.",
+      "Every RibbonStructure therefore determines a Lean PivotalStructure relative to the equation-(8.31)-characterized double-dual tensorator.",
+      "Nine mutation tests reject the Step 1 and Step 2 errors, mirror monodromy, accidental ordinary-identity tensorator selection, and omission of the Drinfeld monodromy defect.",
+      "Nineteen declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+      "Historical Step 1 and Step 2 replay tests now read their pinned roadmap bytes from their recorded clean commits instead of assuming that the current roadmap never advances."
+    ],
+    "explicit_nonclaims": [
+      "This objective note is not a theorem claim about a concrete category or a four-manifold invariant.",
+      "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean.",
+      "No SphericalStructure has yet been derived from RibbonStructure.",
+      "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
+      "The finite semisimple fusion-category layer remains open.",
+      "The two Bärenz-Barrett trace-pairing compatibility inputs remain open.",
+      "No concrete fusion or modular category has been instantiated by this step.",
+      "No Kirby-colour expansion, category-bound Kirby move, or four-manifold invariant is established by this step."
+    ],
+    "mathematical_status": "CANONICAL_PIVOTAL_STEP_3_ESTABLISHED_UNDER_EGNO_8_31_CHARACTERIZATION_SPHERICALITY_OPEN",
+    "note_id": "objective-note-2026-07-18-egno-category-foundation-v4",
+    "objective": {
+      "current_step": "Step 3 of 10 is complete in the source-characterization sense; Step 4 sphericality is next.",
+      "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+      "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+    },
+    "prior_current_object": {
+      "cid": "ctlobj-sha256:9e9ee556b26f600c3e478695131b267698f6b065a672b386421fe7399fff232a",
+      "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+    },
+    "remaining_roadmap": [
+      {
+        "id": "4-sphericality",
+        "status": "NEXT_NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "5-trace-cyclicity",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "6-finite-semisimple-fusion-interface",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "7-pairing-compatibility",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "8-kirby-colour-expansion",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "9-category-bound-kirby-moves",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "10-four-manifold-invariant-assembly",
+        "status": "NOT_YET_ESTABLISHED"
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_repo": {
+      "artifact_commit": "56d62787bc5bf6206341006982dd4358a274ba6e",
+      "branch": "codex/lean-kirby-coupon-bootstrap",
+      "dirty_at_clean_checkpoint": false,
+      "source_implementation_commit": "74076ff0ee9be21e6e0efb0877517e2de27237c2"
+    },
+    "status": "STEP_3_ESTABLISHED_STEP_4_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+    ],
+    "title": "EGNO category foundation for the Lean Kirby route, revision 4",
+    "top_notice": "Step 3 establishes a monoidal pivotal structure using the EGNO (8.31) characterization of the double-dual tensorator. It does not independently compare that tensorator with a separate braiding-free duality construction, and it does not yet establish sphericality, trace cyclicity, a concrete category, or a four-manifold invariant.",
+    "verification": {
+      "artifact_content_hash": "sha256:1c62c41598e01d62263962735c4a5cef8191cd7e27b536c9e218ab3dcd3d72e0",
+      "artifact_file_sha256": "4eb9b99d51271f0d0a4cad3eff45593b413be3f960c55631460d98dce17b8b8d",
+      "axiom_audit": "PASS_19_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+      "canonical_ctl_current_root_replay_before_admission": {
+        "root_cid": "ctlobj-sha256:c7e59b0426903dcd42a056dda868a4a7d78c4e6943e37a6f40bf09dfc6dbe06f",
+        "status": "PASS"
+      },
+      "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+      "full_umbrella_build": "PASS_1598_JOBS_LEAN_NUM_THREADS_1",
+      "mutation_tests": "PASS_9_OF_9_EXPECTED_REJECTIONS",
+      "proof_oracle_count": 0,
+      "related_pytests": "PASS_13_OF_13"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
