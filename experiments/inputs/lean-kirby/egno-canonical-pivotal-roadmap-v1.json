@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_9_ESTABLISHED_STEP_10_EXPLICIT",
+  "status": "TEN_STEP_CATEGORY_TO_MARKED_FOUR_MANIFOLD_INVARIANT_ROUTE_ESTABLISHED_RELATIVE_TO_EXPLICIT_DOMAIN_INPUTS",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -249,7 +249,64 @@
     },
     {
       "id": "10-four-manifold-invariant-assembly",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN_RELATIVE_TO_EXPLICIT_SOURCE_BOUND_COMPILERS_AND_STANDARD_TOPOLOGY_DOMAIN_INPUTS",
+      "implementations": [
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.closedTensorScalar_multiplicative",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.componentExponent",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.componentWeight",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.globalWeight",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.PresentationCompiler",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.PresentationCompiler.linearDiagram",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.PresentationCompiler.linearDiagram_eval",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.PackageTaggedMove",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.PackageIsotopy",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LinearIsotopy",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.BoundOrdinarySlide",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.BoundGeneralizedSlide",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.OneTwoFactorization",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.TwoThreeFactorization",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LocalMoveCompiler",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LocalMoveCompiler.move_invariant",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LocalMoveCompiler.movie_invariant",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.InvariantInputs",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.InvariantInputs.presentation_independent",
+        "TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.InvariantInputs.four_manifold_invariant"
+      ],
+      "source_locators": [
+        "Bärenz--Barrett Theorem 3.9, Table 2, and Remark 3.10, journal pages 685-687",
+        "Gompf--Stipsicz Theorem 4.2.12 and Section 5.1",
+        "de Sá, A link calculus for 4-manifolds, pages 16-30",
+        "The Step 7-9 EGNO, Bärenz--Barrett, Selinger, and Shum locators inherited by the exact category package"
+      ],
+      "formal_proof_route": [
+        "Every serialized link component receives one label from a single global simple-label assignment; labels cannot be changed event by event.",
+        "The exponent is forced by the canonical integral two-handle cycle model, and each component coefficient is exactly dim(s) times the derived tensor-automorphism scalar to that exponent.",
+        "The whole-presentation compiler interprets the validated execution trace event by event for each complete global labeling; only then does Lean form the finite weighted sum.",
+        "Multiplicativity of closed scalar evaluation under disjoint union is derived from monoidal coherence, Eckmann--Hilton on End(1), and the Schur-derived equivalence End(1) isomorphic to K.",
+        "Package-bound framed isotopy, ordinary sliding, generalized 2-over-2 sliding, and cancellation factorization remain four separate proof grammars.",
+        "The eight directed Table 2 constructors each require the matching proof object; a bare equality of final normalized values cannot construct the local-move compiler.",
+        "The normalization algebra turns the three slide evaluations and four cancellation factorizations into equality of normalized values for one move.",
+        "Structural induction over TableTwoMovie proves invariance under every finite source-bound movie.",
+        "The source-backed special-Kirby and handle-chain inputs construct a marked presentation system whose transported coordinate is derived from chain homotopy equivalences.",
+        "Marked-pair presentation independence follows by applying movie invariance to the completeness movie and then using the proved coordinate-transport equality."
+      ],
+      "visible_domain_input_classes": [
+        "global graphical theorem package from Step 9",
+        "source-bound eventwise whole-presentation compiler",
+        "source-bound eight-family local-move compiler",
+        "general Cerf completeness input",
+        "standard special-Kirby completeness axiom",
+        "standard handle-chain H2 naturality axiom"
+      ],
+      "standard_theorem_inputs_not_reproved": [
+        "The named global graphical laws retained in EGNOModularKirbyMoves.Package.",
+        "A concrete source-bound PresentationCompiler instance for each intended serialized presentation family.",
+        "A concrete source-bound LocalMoveCompiler instance covering all eight directed Table 2 constructors.",
+        "GeneralCerfCompleteness for the admitted smooth four-manifold scope.",
+        "SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected, source-located to Bärenz--Barrett, Gompf--Stipsicz, and de Sá.",
+        "SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput, the standard handle-complex basis-change and contractible-summand naturality fact."
+      ],
+      "scope_note": "The terminal Lean theorem is a conditional presentation-independence theorem for marked pairs consisting of a smooth, oriented, closed, connected four-manifold in the special Kirby-presentation scope and a class in the fixed integral H2 model. Given the exact modular ribbon fusion data, tensor identity automorphism, Step 9 graphical package, source-bound presentation compiler, all-eight-family local-move compiler, and the explicitly listed topology inputs, any two certified presentations of the same marked pair have equal normalized evaluations. This is not an unconditional concrete-category instance and is not an identification with the original Crane--Yetter or Yetter state sum."
     }
   ],
   "step_1_guards": [
@@ -320,6 +377,18 @@
     "category, coherence, ordinary-slide, and generalized-movie hashes must have canonical sha256 shape",
     "the selected right-dual convention is shared by ribbon pivotal data, trace pairings, framed kinks, and cut closure"
   ],
+  "step_10_guards": [
+    "a generic TaggedMove cannot be promoted to a package-bound isotopy constructor",
+    "framing, twist, and closure proofs from a different Step 9 package cannot be rebound",
+    "ordinary 1-over-1 or 2-over-1 sliding and generalized 2-over-2 sliding cannot replace one another",
+    "the component coefficient cannot be supplied independently of quantum dimension, tensor-automorphism scalar, and canonical integral exponent",
+    "eventwise labels without one globally coherent component resolver are rejected",
+    "a bare equality of final normalized values cannot replace the eight-family LocalMoveCompiler",
+    "omitting any of the eight directed local move families leaves the compiler structurally incomplete",
+    "presentation, local-move, category, graphical, and terminal assembly identities retain canonical sha256-shaped bindings",
+    "local move invariance is proved before movie induction; presentation independence is proved only after marked H2 transport is attached",
+    "the terminal axiom audit exposes exactly the named special-Kirby and handle-chain topology axioms in addition to Lean's standard logical axioms"
+  ],
   "explicit_non_claims": [
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
@@ -330,6 +399,12 @@
     "Step 9 is restricted to the modular identity-functor normalization profile; it does not establish the general premodular functor case.",
     "No whole-presentation evaluator or four-manifold presentation-independence theorem is established by Step 9 alone.",
     "No nontrivial tensor identity automorphism has been constructed for a concrete ribbon fusion category.",
-    "No concrete category has been instantiated."
+    "No concrete category has been instantiated.",
+    "No concrete source-bound PresentationCompiler or LocalMoveCompiler instance is constructed by Step 10; the terminal theorem is relative to those visible inputs.",
+    "The two source-backed topology facts standardSpecialKirbyCalculusConnected and standardHandleChainNaturalityInput remain explicit custom axioms and are not reproved from smooth manifold foundations in Lean.",
+    "The theorem does not identify this link prescription with the original Crane--Yetter or Yetter state-sum construction.",
+    "The theorem does not cover the general premodular functor-valued invariant.",
+    "The theorem does not certify that an arbitrary JSON Kirby diagram presents a claimed manifold; only certified SpecialKirbyPresentation inputs are in scope.",
+    "No numerical Figure 21 artifact is imported as an exact value theorem by this category-to-invariant assembly."
   ]
 }
