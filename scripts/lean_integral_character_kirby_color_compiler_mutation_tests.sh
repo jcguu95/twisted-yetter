@@ -10,12 +10,14 @@ mutations=(
   "lean/Mutations/GenericCategoryBoundAsIntegralCharacterCompiler.lean"
   "lean/Mutations/MissingIntegralCycleClassSoundness.lean"
   "lean/Mutations/MissingTensorAutomorphismLaw.lean"
+  "lean/Mutations/OverrideTrivialGeneratorScalar.lean"
 )
 
 diagnostics=(
   "Type mismatch"
   'Fields missing: `cycle_class_sound`'
   'Fields missing: `tensor_hom`'
+  "Type mismatch"
 )
 
 for index in "${!mutations[@]}"; do

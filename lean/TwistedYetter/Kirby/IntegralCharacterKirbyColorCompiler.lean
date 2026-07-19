@@ -258,6 +258,41 @@ structure TensorAutomorphismGenerator
 
 namespace TensorAutomorphismGenerator
 
+/--
+The identity tensor automorphism, derived without a caller-supplied scalar
+table or certificate.
+
+This is the formal untwisted control. Its certificate provenance is the
+category's already pinned coherence certificate, while all mathematical
+laws below are kernel-checked consequences of identity morphisms.
+-/
+noncomputable def trivial
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)) :
+    TensorAutomorphismGenerator categoryData where
+  automorphism := Iso.refl (𝟭 C)
+  tensor_hom := by
+    intro left right
+    simp
+  unit_hom := by
+    simp
+  simpleScalar := fun _ => 1
+  simple_scalar_sound := by
+    intro simple
+    simp
+  categorySnapshotHash := categoryData.categorySnapshotHash
+  category_snapshot_hash_sound := rfl
+  automorphismCertificateHash := categoryData.coherenceCertificateHash
+  automorphism_certificate_hash_shape :=
+    categoryData.coherence_certificate_hash_shape
+  sourceRefs := categoryData.sourceRefs
+  exactScope :=
+    "Identity monoidal natural automorphism control; every simple scalar is 1."
+  sourceScopeCaveat :=
+    "This control is alpha-insensitive and does not witness a nontrivial "
+      ++ "universal-grading character or nontrivial tensor automorphism."
+
 /-- Scalar by which the integral power of the generator acts on one simple. -/
 def scalarPower
     {categoryData :
@@ -288,6 +323,25 @@ theorem scalarPower_add
       generator.scalarPower simple left *
         generator.scalarPower simple right := by
   simp [scalarPower, zpow_add₀]
+
+/-- Every simple scalar in the identity control is definitionally one. -/
+theorem trivial_simpleScalar
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I))
+    (simple : S) :
+    (trivial categoryData).simpleScalar simple = 1 := by
+  rfl
+
+/-- Every integral power of the identity control acts by the scalar one. -/
+theorem trivial_scalarPower
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I))
+    (simple : S)
+    (exponent : ℤ) :
+    (trivial categoryData).scalarPower simple exponent = 1 := by
+  simp [scalarPower, trivial]
 
 end TensorAutomorphismGenerator
 
@@ -349,6 +403,31 @@ theorem integral_character_coefficient_formula
         generator.scalarPower simple
           ((cycleSystem.model topology).componentExponent alpha component) := by
   rfl
+
+/--
+The identity-generator control is untwisted for every marked class, not only
+at `alpha = 0`.
+
+This theorem is a reusable oracle against accidental dependence on cycle
+coordinates in the ordinary control path.
+-/
+theorem trivial_generator_coefficient_is_ordinary
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (cycleSystem : IntegralCycleRepresentativeSystem manifold H2)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2)
+    (component : ComponentSpec)
+    (simple : S) :
+    (integralCharacterWeights cycleSystem
+        (TensorAutomorphismGenerator.trivial categoryData)).coefficient
+          topology alpha component simple =
+      categoryData.slidingData.weight simple := by
+  simp [integralCharacterWeights,
+    TensorAutomorphismGenerator.trivial_scalarPower]
 
 /--
 The final presentation compiler for the integral-character route.
