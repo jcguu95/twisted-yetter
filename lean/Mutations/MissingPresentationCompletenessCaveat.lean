@@ -9,7 +9,7 @@ open TwistedYetter.Kirby.PresentationIsotopy
 universe u v w
 
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
-  [BraidedCategory C]
+  [BraidedCategory C] [RigidCategory C]
 variable {Link : Type w}
 variable
   (represents : Diagram C .unit .unit → Link → Prop)

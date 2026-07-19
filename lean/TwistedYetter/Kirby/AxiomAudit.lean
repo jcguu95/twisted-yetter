@@ -23,6 +23,8 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.CategoricalMovie.Movie.sound
 #print axioms TwistedYetter.Kirby.FramingNaturality.NaturalTwist.positive_transport_sound
 #print axioms TwistedYetter.Kirby.FramingNaturality.NaturalTwist.negative_transport_sound
+#print axioms TwistedYetter.Kirby.FramingNaturality.NaturalTwist.ofBalanced
+#print axioms TwistedYetter.Kirby.FramingNaturality.NaturalTwist.ofRibbon
 #print axioms TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_sound
 #print axioms TwistedYetter.Kirby.HandleSlide.SourcedSlidingLaw.coupon_transport_in_context_sound
 #print axioms TwistedYetter.Kirby.HandleSlide.SourcedFunctorSlidingLaw.coupon_transport_sound
@@ -59,6 +61,8 @@ Lean reports `sorryAx`.
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.leftDualSnake_sound
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.positiveMove
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.FramedKinkCompatibility.negativeMove
+#print axioms TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.close
+#print axioms TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cyclic
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cut_independence_sound
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.cutMove
 #print axioms TwistedYetter.Kirby.PresentationIsotopy.TaggedMove.sound

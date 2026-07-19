@@ -10,7 +10,7 @@ open TwistedYetter.Kirby.PresentationIsotopy
 universe u v
 
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
-  [BraidedCategory C]
+  [BraidedCategory C] [RigidCategory C]
 
 /--
 This must fail: a generic evaluator equality cannot be injected into the

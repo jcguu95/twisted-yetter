@@ -1,0 +1,94 @@
+{
+  "schema": "twisted-yetter.reference-ledger.v1",
+  "status": "SOURCE_LOCATORS_RECORDED",
+  "captured_at_utc": "2026-07-19T04:20:00Z",
+  "scope": "EGNO definitions and standard results used by the Lean category foundation.",
+  "references": [
+    {
+      "ref_id": "ref:egno-tensor-categories-2015",
+      "type": "book",
+      "title": "Tensor Categories",
+      "authors": [
+        "Pavel Etingof",
+        "Shlomo Gelaki",
+        "Dmitri Nikshych",
+        "Victor Ostrik"
+      ],
+      "publisher": "American Mathematical Society",
+      "series": "Mathematical Surveys and Monographs",
+      "volume": 205,
+      "year": 2015,
+      "isbn": "978-1-4704-2024-6",
+      "canonical_url": "https://www.ams.org/books/surv/205/",
+      "locators": [
+        {
+          "label": "fusion category",
+          "locator": "Definition 4.1.1, printed page 65"
+        },
+        {
+          "label": "left and right categorical traces",
+          "locator": "Definition 4.7.1 and equations (4.8)-(4.9), printed pages 73-74"
+        },
+        {
+          "label": "pivotal structure",
+          "locator": "Definition 4.7.7, printed page 74"
+        },
+        {
+          "label": "spherical structure and trace theorem",
+          "locator": "Definition 4.7.14 and Theorem 4.7.15, printed page 75"
+        },
+        {
+          "label": "balancing and ribbon structure",
+          "locator": "Definition 8.10.1 and equation (8.32), printed page 216"
+        },
+        {
+          "label": "universal framed tangle category",
+          "locator": "Remark 8.10.3, printed pages 216-217"
+        },
+        {
+          "label": "ribbon twist versus spherical pivotal structure",
+          "locator": "Proposition 8.10.12 and equation (8.40), printed page 220"
+        },
+        {
+          "label": "premodular category",
+          "locator": "Definition 8.13.1, printed page 224"
+        }
+      ],
+      "captured_pdf": {
+        "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+        "bytes": 6216438,
+        "pages": 362,
+        "capture_path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf"
+      },
+      "content_hash_status": "LOCAL_PRIMARY_SOURCE_BYTES_HASHED"
+    },
+    {
+      "ref_id": "ref:mathlib4-v4.29.1-pivotal-gap",
+      "type": "software_source",
+      "title": "mathlib4 monoidal rigid category implementation",
+      "version": "v4.29.1",
+      "git_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+      "canonical_url": "https://github.com/leanprover-community/mathlib4",
+      "locators": [
+        {
+          "label": "dual functors",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean"
+        },
+        {
+          "label": "pivotal categories listed as future work",
+          "locator": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Future work"
+        },
+        {
+          "label": "monoidal natural transformations",
+          "locator": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; NatTrans.IsMonoidal"
+        }
+      ],
+      "content_hash_status": "PINNED_BY_LAKE_MANIFEST_GIT_COMMIT"
+    }
+  ],
+  "non_claims": [
+    "This ledger does not prove the cited EGNO results.",
+    "This ledger does not formalize finite semisimplicity or the definition of a fusion category.",
+    "This ledger does not identify the repository evaluator with the original Crane-Yetter state sum."
+  ]
+}

@@ -2,6 +2,7 @@ import TwistedYetter.Fusion.FiniteResolution
 import TwistedYetter.Fusion.FrobeniusLinear
 import TwistedYetter.Fusion.PairingTransport
 import TwistedYetter.Fusion.Biorthogonal
+import TwistedYetter.Fusion.EGNORibbon
 import TwistedYetter.Fusion.PivotalMate
 import TwistedYetter.Fusion.Insertion
 import TwistedYetter.Kirby.CouponKernel

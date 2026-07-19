@@ -1,5 +1,6 @@
 import TwistedYetter.Fusion.PivotalMate
 import TwistedYetter.Fusion.Insertion
+import TwistedYetter.Fusion.EGNORibbon
 
 /-!
 # Kernel axiom audit for the finite-resolution bootstrap
@@ -29,5 +30,9 @@ if Lean reports `sorryAx`.
 #print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.inverse_sound
 #print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.map_sound
 #print axioms TwistedYetter.Fusion.Insertion.IdentityResolution.map_inverse_sound
+#print axioms TwistedYetter.Fusion.EGNO.rightDoubleDualFunctor
+#print axioms TwistedYetter.Fusion.EGNO.leftCategoricalTrace
+#print axioms TwistedYetter.Fusion.EGNO.pivotalTrace
+#print axioms TwistedYetter.Fusion.EGNO.pivotalDimension
 #print axioms TwistedYetter.Fusion.PivotalMate.equation_3_1_11
 #print axioms TwistedYetter.Fusion.PivotalMate.transformedDualFamily_pair

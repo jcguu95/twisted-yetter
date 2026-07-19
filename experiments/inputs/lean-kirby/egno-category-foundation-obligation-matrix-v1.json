@@ -1,0 +1,104 @@
+{
+  "schema": "twisted-yetter.egno-category-foundation-obligation-matrix.v1",
+  "status": "PARTIAL_FOUNDATION_WITH_EXPLICIT_BLOCKERS",
+  "source_ref": "ref:egno-tensor-categories-2015",
+  "scope": "General category interfaces needed by the Lean Kirby evaluator; no concrete category.",
+  "obligations": [
+    {
+      "id": "right-double-dual-functor",
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementation": "TwistedYetter.Fusion.EGNO.rightDoubleDualFunctor"
+    },
+    {
+      "id": "double-dual-monoidal-structure",
+      "status": "EXPLICIT_STANDARD_DATA_INPUT",
+      "implementation": "PivotalStructure.doubleDualMonoidal",
+      "reason": "Mathlib v4.29.1 lists monoidal dual functors as future work."
+    },
+    {
+      "id": "pivotal-monoidal-isomorphism",
+      "status": "ESTABLISHED_AS_TYPED_CONTRACT",
+      "implementation": "PivotalStructure.monoidal : NatTrans.IsMonoidal"
+    },
+    {
+      "id": "egno-left-pivotal-trace",
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementation": "leftCategoricalTrace, pivotalTrace, pivotalDimension"
+    },
+    {
+      "id": "spherical-dual-dimension-condition",
+      "status": "ESTABLISHED_AS_TYPED_CONTRACT",
+      "implementation": "SphericalStructure.dimension_dual"
+    },
+    {
+      "id": "spherical-trace-cyclicity",
+      "status": "EXPLICIT_SOURCE_BACKED_THEOREM_INPUT",
+      "implementation": "SphericalTraceLaws.cyclic",
+      "source_locator": "EGNO Proposition 4.7.3 and Theorem 4.7.15, printed pages 74-75"
+    },
+    {
+      "id": "balancing-equation",
+      "status": "ESTABLISHED_AS_TYPED_CONTRACT",
+      "implementation": "BalancedTwist.tensor",
+      "source_locator": "EGNO Definition 8.10.1, equation (8.32), printed page 216"
+    },
+    {
+      "id": "ribbon-dual-compatibility",
+      "status": "ESTABLISHED_AS_TYPED_CONTRACT",
+      "implementation": "RibbonStructure.dual",
+      "source_locator": "EGNO Definition 8.10.1, printed page 216"
+    },
+    {
+      "id": "ribbon-to-kirby-natural-twist",
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementation": "NaturalTwist.ofRibbon"
+    },
+    {
+      "id": "framed-kink-convention-bridge",
+      "status": "EXPLICIT_SOURCE_BACKED_CONVENTION_INPUT",
+      "implementation": "FramedKinkCompatibility.positive_sound and negative_sound",
+      "reason": "The repository diagram orientation must still be matched to the EGNO ribbon convention."
+    },
+    {
+      "id": "spherical-to-cut-trace",
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementation": "SphericalCutTrace.close and SphericalCutTrace.cyclic"
+    },
+    {
+      "id": "rigidity-on-final-invariant-route",
+      "status": "ESTABLISHED_AS_EXPLICIT_TYPECLASS_REQUIREMENT",
+      "implementation": "RigidCategory C in HomologicallyTwistedInvariant, TableTwoEvaluatorCompiler, and FinalFormalizationPackage"
+    },
+    {
+      "id": "finite-semisimple-fusion-category",
+      "status": "NOT_YET_FORMALIZED",
+      "source_locator": "EGNO Definition 4.1.1, printed page 65"
+    },
+    {
+      "id": "canonical-ribbon-to-spherical-pivotal-equivalence",
+      "status": "NOT_YET_FORMALIZED",
+      "source_locator": "EGNO Proposition 8.10.12, printed page 220"
+    },
+    {
+      "id": "pivotal-functor-preserves-trace-pairing",
+      "status": "NOT_YET_DERIVED_FROM_CATEGORY_STRUCTURES",
+      "current_input": "PivotalTraceCompatibility.preserves_trace_pairing"
+    },
+    {
+      "id": "spherical-mate-preserves-trace-pairing",
+      "status": "NOT_YET_DERIVED_FROM_CATEGORY_STRUCTURES",
+      "current_input": "SphericalMateCompatibility.preserves_trace_pairing"
+    }
+  ],
+  "terminal_counts": {
+    "established_or_explicit_standard_input": 12,
+    "not_yet_formalized_or_not_yet_derived": 4,
+    "total": 16
+  },
+  "explicit_non_claims": [
+    "The fusion-category layer is not complete.",
+    "RibbonStructure alone has not yet been converted to SphericalStructure in Lean.",
+    "The two Bärenz-Barrett trace-pairing inputs have not yet been derived from the new EGNO structures.",
+    "No concrete category has been instantiated."
+  ]
+}

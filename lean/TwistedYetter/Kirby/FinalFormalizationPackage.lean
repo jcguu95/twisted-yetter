@@ -159,6 +159,7 @@ variable {K : Type uK} [Field K]
 variable {C : Type uC} [Category.{vC} C] [Preadditive C]
 variable [CategoryTheory.Linear K C]
 variable [MonoidalCategory C] [BraidedCategory C]
+variable [RigidCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type uS} [Fintype S] [DecidableEq S]
 variable {I : S → S → Type uI}

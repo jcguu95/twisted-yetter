@@ -1,3 +1,4 @@
+import TwistedYetter.Fusion.EGNORibbon
 import TwistedYetter.Kirby.CategoricalMovie
 
 /-!
@@ -11,6 +12,7 @@ compatibility laws belong to the later category-theory layer.
 namespace TwistedYetter.Kirby.FramingNaturality
 
 open CategoryTheory
+open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.CategoricalMovie
@@ -28,6 +30,16 @@ structure NaturalTwist (C : Type u) [Category.{v} C] where
   iso : 𝟭 C ≅ 𝟭 C
 
 namespace NaturalTwist
+
+/-- Forget the balancing law while retaining the underlying natural twist. -/
+def ofBalanced [RigidCategory C]
+    (twist : BalancedTwist C) : NaturalTwist C where
+  iso := twist.iso
+
+/-- Every ribbon structure supplies the natural twist used for coupon transport. -/
+def ofRibbon [RigidCategory C]
+    (ribbon : RibbonStructure C) : NaturalTwist C :=
+  ofBalanced ribbon.toBalancedTwist
 
 /-- Coupon followed by a positive framing twist. -/
 def positiveBefore (twist : NaturalTwist C) {X Y : C}

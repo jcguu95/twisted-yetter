@@ -4,11 +4,12 @@ import TwistedYetter.Kirby.Presentation
 /-!
 # Presentation independence for coupon-decorated framed links
 
-The algebraic move generators are explicit typed diagrams.  Reidemeister II
+The algebraic move generators are explicit typed diagrams. Reidemeister II
 and III, duality snakes, critical-point interchange, and coupon transport are
-proved from Mathlib's braided and rigid category laws.  Framed Reidemeister I
-and cut independence expose the two standard ribbon/spherical inputs that
-Mathlib v4.29.1 does not package as typeclasses.
+proved from Mathlib's braided and rigid category laws. Framed Reidemeister I
+is tied to an EGNO ribbon structure through two explicit convention equations.
+Cut independence is tied to an EGNO spherical structure through the
+source-labelled spherical trace theorem.
 
 The final theorem also keeps regular-diagram completeness as a separate
 source-backed topology input.  It is not hidden inside the evaluator.
@@ -21,6 +22,7 @@ open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.CategoricalMovie
+open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.FramingNaturality
 
 universe u v w
@@ -346,19 +348,26 @@ def negativeKink (X : C) : Diagram C (atom X) (atom X) :=
 
 /--
 The standard ribbon graphical input identifying blackboard kinks with the
-positive and negative twist.  Mathlib v4.29.1 has no ribbon-category class, so
-these two equations remain explicit and source-backed.
+positive and negative twist.  The repository's EGNO ribbon interface supplies
+the twist and its balancing/duality laws; these two diagrammatic evaluation
+equations remain explicit and source-backed.
 -/
 structure FramedKinkCompatibility where
-  twist : NaturalTwist C
+  ribbon : RibbonStructure C
   positive_sound : (X : C) →
-    Diagram.eval C (positiveKink X) = twist.iso.hom.app X
+    Diagram.eval C (positiveKink X) =
+      (NaturalTwist.ofRibbon ribbon).iso.hom.app X
   negative_sound : (X : C) →
-    Diagram.eval C (negativeKink X) = twist.iso.inv.app X
+    Diagram.eval C (negativeKink X) =
+      (NaturalTwist.ofRibbon ribbon).iso.inv.app X
   source_ref : String
   source_locator : String
 
 namespace FramedKinkCompatibility
+
+/-- The ribbon twist, viewed through the smaller coupon-transport interface. -/
+def twist (data : FramedKinkCompatibility (C := C)) : NaturalTwist C :=
+  NaturalTwist.ofRibbon data.ribbon
 
 def positiveTwistDiagram (data : FramedKinkCompatibility (C := C)) (X : C) :
     Diagram C (atom X) (atom X) :=
@@ -386,18 +395,34 @@ end Framing
 
 section Closure
 
+variable [RigidCategory C]
+
 /--
 The spherical trace input needed to move a cut around a closed component.
 Its cyclicity equation is exactly the algebraic content of cut independence.
 -/
 structure SphericalCutTrace where
-  close : (X : C) → (X ⟶ X) → (𝟙_ C ⟶ 𝟙_ C)
-  cyclic : {X Y : C} → (f : X ⟶ Y) → (g : Y ⟶ X) →
-    close X (f ≫ g) = close Y (g ≫ f)
-  source_ref : String
-  source_locator : String
+  spherical : SphericalStructure (C := C)
+  traceLaws : SphericalTraceLaws spherical
 
 namespace SphericalCutTrace
+
+/-- The closure is the EGNO pivotal trace, not an arbitrary scalar function. -/
+def close
+    (trace : SphericalCutTrace (C := C))
+    (X : C)
+    (f : X ⟶ X) :
+    𝟙_ C ⟶ 𝟙_ C :=
+  pivotalTrace trace.spherical.toPivotalStructure f
+
+/-- Cyclicity is exactly the source-backed spherical trace theorem. -/
+theorem cyclic
+    (trace : SphericalCutTrace (C := C))
+    {X Y : C}
+    (f : X ⟶ Y)
+    (g : Y ⟶ X) :
+    trace.close X (f ≫ g) = trace.close Y (g ≫ f) :=
+  trace.traceLaws.cyclic f g
 
 def cutBefore
     (trace : SphericalCutTrace (C := C))
@@ -436,6 +461,8 @@ def cutMove
 end SphericalCutTrace
 
 end Closure
+
+variable [RigidCategory C]
 
 /--
 The closed whitelist of evaluator-preserving presentation moves.

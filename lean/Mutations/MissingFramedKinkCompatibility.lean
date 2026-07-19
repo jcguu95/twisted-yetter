@@ -3,6 +3,7 @@ import TwistedYetter.Kirby.PresentationIsotopy
 namespace TwistedYetter.Mutations.MissingFramedKinkCompatibility
 
 open CategoryTheory
+open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.FramingNaturality
 open TwistedYetter.Kirby.PresentationIsotopy
@@ -13,13 +14,14 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [BraidedCategory C] [RigidCategory C]
 
 variable
-  (twist : NaturalTwist C)
+  (ribbon : RibbonStructure C)
   (positiveSound : (X : C) →
-    eval C (positiveKink X) = twist.iso.hom.app X)
+    eval C (positiveKink X) =
+      (NaturalTwist.ofRibbon ribbon).iso.hom.app X)
 
 /-- This must fail: inverse-kink compatibility cannot be omitted. -/
 def missingNegativeSound : FramedKinkCompatibility (C := C) where
-  twist := twist
+  ribbon := ribbon
   positive_sound := positiveSound
   source_ref := "ref:mutation"
   source_locator := "deliberately incomplete"
