@@ -185,8 +185,9 @@ theorem toTableTwo_evaluation_is_componentwise_global_sum
         ((compiler.toTableTwo.evaluation presentation).diagram alpha) =
       let expansion :=
         (integralCharacterWeights
-          compiler.presentationCompiler.cycleSystem
-          compiler.presentationCompiler.generator).toComponentExpansion
+          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          compiler.presentationCompiler.selectedGenerator.generator
+        ).toComponentExpansion
       letI := expansion.globalFintype presentation
       ∑ labeling,
         expansion.globalWeight presentation alpha labeling •
@@ -213,8 +214,8 @@ theorem presentation_weights_are_integral_character_weights
       SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
     compiler.presentationCompiler.toCategoryBound.weights =
       integralCharacterWeights
-        compiler.presentationCompiler.cycleSystem
-        compiler.presentationCompiler.generator := by
+        (IntegralCycleRepresentativeSystem.canonical manifold H2)
+        compiler.presentationCompiler.selectedGenerator.generator := by
   rfl
 
 end SourceBoundTableTwoEvaluatorCompiler

@@ -11,6 +11,8 @@ mutations=(
   "lean/Mutations/MissingIntegralCycleClassSoundness.lean"
   "lean/Mutations/MissingTensorAutomorphismLaw.lean"
   "lean/Mutations/OverrideTrivialGeneratorScalar.lean"
+  "lean/Mutations/ArbitraryCycleSystemAsCanonicalCompiler.lean"
+  "lean/Mutations/TrivialGeneratorAsNontrivial.lean"
 )
 
 diagnostics=(
@@ -18,6 +20,8 @@ diagnostics=(
   'Fields missing: `cycle_class_sound`'
   'Fields missing: `tensor_hom`'
   "Type mismatch"
+  '`cycleSystem` is not a field'
+  'Fields missing: `witness_nontrivial`'
 )
 
 for index in "${!mutations[@]}"; do

@@ -10,9 +10,10 @@ component, and simple object could be supplied.
 
 This module narrows that field for one precise scope.  The marked class is an
 integral class in the `H2` model already carried by a special Kirby
-presentation.  Every presentation supplies a source-backed additive choice
-of integral two-cycle representative, together with a complete indexing of
-ordinary framed components by the two-handle basis of the handle chain.
+presentation.  Every presentation supplies a complete, content-addressed
+indexing of its two-handle-bearing components by the degree-two handle basis.
+Mathlib's epimorphic homology quotient then supplies a normalized choice of
+integral cycle representative for each class.
 A monoidal natural automorphism of the identity supplies one invertible
 scalar on every recorded simple object.  The coefficient on an ordinary
 two-handle component is then forced to be
@@ -22,9 +23,8 @@ two-handle component is then forced to be
 This is an integral-character construction mechanism.  It is not a model of
 arbitrary `H2(X; A)`, and it does not construct the presentation bases,
 cycle representatives, tensor automorphism, event interpreter, or Kirby-move
-realizations.  Presentations containing `speciallyDotted` components are
-excluded from this direct-coordinate route until a separate, source-backed
-translation into two-cycle coordinates is constructed.
+realizations.  A specially-dotted component is treated as two-handle-bearing
+and therefore receives the coefficient of its pinned degree-two handle.
 -/
 
 namespace TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
@@ -59,44 +59,22 @@ One source-backed integral two-cycle model inside one Kirby presentation.
 
 `cycleRepresentative` lands in the actual degree-two cycles of the pinned
 handle-chain complex. `cycle_class_sound` then forces its homology class to be
-the requested geometric class. The component index is complete for ordinary
-components and is definitionally tied to the degree-two handle basis.
+the requested geometric class. The representative is intentionally only a
+normalized choice function, not an additive section: an additive section of
+cycles onto integral homology need not exist when `H₂` has torsion.
+
+The component index is no longer duplicated here. It is mandatory data of
+`SpecialKirbyPresentation`, so the handle chain and framed-link component
+coordinates cannot drift apart between evaluator instances.
 -/
 structure IntegralTwoHandleCycleModel
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (topology : SpecialKirbyPresentation manifold H2) where
-  twoHandleComponent : Fin topology.counts.h2 → ComponentSpec
-  two_handle_component_mem :
-    (index : Fin topology.counts.h2) →
-      twoHandleComponent index ∈ topology.formal.raw.components
-  two_handle_component_role :
-    (index : Fin topology.counts.h2) →
-      (twoHandleComponent index).role = .ordinary
-  twoHandleIndex? : String → Option (Fin topology.counts.h2)
-  two_handle_index_roundtrip :
-    (index : Fin topology.counts.h2) →
-      twoHandleIndex? (twoHandleComponent index).componentId = some index
-  two_handle_index_sound :
-    (componentId : String) →
-    (index : Fin topology.counts.h2) →
-      twoHandleIndex? componentId = some index →
-        componentId = (twoHandleComponent index).componentId
-  every_ordinary_component_indexed :
-    (component : ComponentSpec) →
-      component ∈ topology.formal.raw.components →
-      component.role = .ordinary →
-        ∃ index, twoHandleIndex? component.componentId = some index
-  nonordinary_component_unindexed :
-    (component : ComponentSpec) →
-      component.role ≠ .ordinary →
-        twoHandleIndex? component.componentId = none
-  no_specially_dotted_components :
-    (component : ComponentSpec) →
-      component ∈ topology.formal.raw.components →
-        component.role ≠ .speciallyDotted
   cycleRepresentative :
-    H2 →+ topology.handleChain.complex.cycles 2
+    H2 → topology.handleChain.complex.cycles 2
+  cycle_zero_sound :
+    cycleRepresentative 0 = 0
   cycle_class_sound :
     (alpha : H2) →
       topology.h2ModelEquiv
@@ -106,14 +84,83 @@ structure IntegralTwoHandleCycleModel
   cycleCertificateHash : String
   cycle_certificate_hash_shape :
     RawPresentation.sha256Shape cycleCertificateHash = true
-  componentIndexCertificateHash : String
-  component_index_certificate_hash_shape :
-    RawPresentation.sha256Shape componentIndexCertificateHash = true
   sourceRefs : List String
   exactScope : String
   sourceScopeCaveat : String
 
 namespace IntegralTwoHandleCycleModel
+
+/--
+Choose a representative of one homology class using the epimorphic homology
+quotient.  The zero class is normalized to the zero cycle.
+
+No additive splitting is asserted or used.
+-/
+noncomputable def normalizedCycleRepresentative
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    topology.handleChain.complex.cycles 2 := by
+  classical
+  by_cases zeroClass : alpha = 0
+  · exact 0
+  · exact Function.surjInv
+      ((ModuleCat.epi_iff_surjective
+        (topology.handleChain.complex.homologyπ 2)).mp inferInstance)
+      (topology.h2ModelEquiv.symm alpha)
+
+@[simp]
+theorem normalizedCycleRepresentative_zero
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (topology : SpecialKirbyPresentation manifold H2) :
+    normalizedCycleRepresentative topology 0 = 0 := by
+  simp [normalizedCycleRepresentative]
+
+theorem normalizedCycleRepresentative_class
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2) :
+    topology.h2ModelEquiv
+        (topology.handleChain.complex.homologyπ 2
+          (normalizedCycleRepresentative topology alpha)) =
+      alpha := by
+  classical
+  by_cases zeroClass : alpha = 0
+  · subst alpha
+    simp
+  · rw [normalizedCycleRepresentative]
+    simp only [zeroClass, ↓reduceDIte]
+    rw [Function.rightInverse_surjInv
+      ((ModuleCat.epi_iff_surjective
+        (topology.handleChain.complex.homologyπ 2)).mp inferInstance)]
+    exact topology.h2ModelEquiv.apply_symm_apply alpha
+
+/-- Canonical cycle model derived from one fully admitted presentation. -/
+noncomputable def canonical
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (topology : SpecialKirbyPresentation manifold H2) :
+    IntegralTwoHandleCycleModel topology where
+  cycleRepresentative := normalizedCycleRepresentative topology
+  cycle_zero_sound := normalizedCycleRepresentative_zero topology
+  cycle_class_sound := normalizedCycleRepresentative_class topology
+  cycleCertificateHash := topology.h2ModelCertificateHash
+  cycle_certificate_hash_shape := topology.h2_model_certificate_hash_shape
+  sourceRefs := [
+    "mathlib:HomologicalComplex.homologyPi-epi",
+    "presentation:" ++ topology.formal.pinnedSourceHash
+  ]
+  exactScope :=
+    "Normalized integral cycle representative selected from the pinned "
+      ++ "handle-chain homology quotient; two-handle coordinates use the "
+      ++ "presentation's mandatory component index."
+  sourceScopeCaveat :=
+    "The representative choice is not asserted additive. Invariance under "
+      ++ "changing representatives must be discharged by the graphical "
+      ++ "Kirby-move compiler."
 
 /--
 The degree-two handle coefficients of the certified cycle representative.
@@ -132,9 +179,9 @@ noncomputable def handleCoefficients
 /--
 The exponent attached to one raw component.
 
-Every ordinary framed component receives the coefficient of its corresponding
-two-handle in the certified cycle representative. Dotted components receive
-zero. Specially dotted components are excluded by the model contract.
+Every two-handle-bearing framed component, ordinary or specially dotted,
+receives the coefficient of its corresponding handle in the certified cycle
+representative. Dotted one-handle components receive zero.
 -/
 noncomputable def componentExponent
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
@@ -143,7 +190,7 @@ noncomputable def componentExponent
     (model : IntegralTwoHandleCycleModel topology)
     (alpha : H2)
     (component : ComponentSpec) : ℤ :=
-  match model.twoHandleIndex? component.componentId with
+  match topology.twoHandleIndex? component.componentId with
   | none => 0
   | some index => model.handleCoefficients alpha index
 
@@ -156,25 +203,11 @@ theorem componentExponent_zero
     (component : ComponentSpec) :
     model.componentExponent 0 component = 0 := by
   have coefficients_zero : model.handleCoefficients 0 = 0 := by
-    simp [handleCoefficients]
+    simp [handleCoefficients, model.cycle_zero_sound]
   unfold componentExponent
   split
   · rfl
   · simpa using congrFun coefficients_zero _
-
-/-- Integral exponents are additive in the marked homology class. -/
-theorem componentExponent_add
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} [AddCommGroup H2]
-    {topology : SpecialKirbyPresentation manifold H2}
-    (model : IntegralTwoHandleCycleModel topology)
-    (alpha beta : H2)
-    (component : ComponentSpec) :
-    model.componentExponent (alpha + beta) component =
-      model.componentExponent alpha component +
-        model.componentExponent beta component := by
-  unfold componentExponent
-  split <;> simp [handleCoefficients, map_add]
 
 /-- A recorded two-handle component reads the matching cycle coefficient. -/
 theorem two_handle_component_exponent
@@ -184,22 +217,22 @@ theorem two_handle_component_exponent
     (model : IntegralTwoHandleCycleModel topology)
     (alpha : H2)
     (index : Fin topology.counts.h2) :
-    model.componentExponent alpha (model.twoHandleComponent index) =
+    model.componentExponent alpha (topology.twoHandleComponent index) =
       model.handleCoefficients alpha index := by
-  simp [componentExponent, model.two_handle_index_roundtrip index]
+  simp [componentExponent, topology.two_handle_index_roundtrip index]
 
 /-- Dotted one-handle components carry no degree-two cycle coefficient. -/
-theorem nonordinary_component_exponent
+theorem dotted_component_exponent
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {topology : SpecialKirbyPresentation manifold H2}
     (model : IntegralTwoHandleCycleModel topology)
     (alpha : H2)
     (component : ComponentSpec)
-    (nonordinary : component.role ≠ .ordinary) :
+    (dotted : component.role = .dotted) :
     model.componentExponent alpha component = 0 := by
   simp [componentExponent,
-    model.nonordinary_component_unindexed component nonordinary]
+    topology.dotted_component_unindexed component dotted]
 
 end IntegralTwoHandleCycleModel
 
@@ -220,6 +253,36 @@ structure IntegralCycleRepresentativeSystem
   sourceRefs : List String
   exactScope : String
   sourceScopeCaveat : String
+
+namespace IntegralCycleRepresentativeSystem
+
+/--
+Canonical system for every admitted presentation.
+
+All presentation-specific indexing is already bound into
+`SpecialKirbyPresentation`; all cycle representatives are selected from the
+actual Mathlib homology quotient and checked against `h2ModelEquiv`.
+-/
+noncomputable def canonical
+    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+    (H2 : Type uH) [AddCommGroup H2] :
+    IntegralCycleRepresentativeSystem manifold H2 where
+  model := IntegralTwoHandleCycleModel.canonical
+  systemCertificateHash := manifold.manifoldSnapshotHash
+  system_certificate_hash_shape := manifold.manifold_snapshot_hash_shape
+  sourceRefs := [
+    "mathlib:HomologicalComplex.homologyPi-epi",
+    "presentation:mandatory-two-handle-component-index"
+  ]
+  exactScope :=
+    "All admitted presentations use their pinned two-handle component index "
+      ++ "and a normalized representative of the requested integral H2 class."
+  sourceScopeCaveat :=
+    "Representative selection is noncomputable and not additive; the final "
+      ++ "move compiler must prove independence from presentation-specific "
+      ++ "representatives."
+
+end IntegralCycleRepresentativeSystem
 
 /--
 A monoidal natural automorphism generator with its exact scalar action on
@@ -255,6 +318,36 @@ structure TensorAutomorphismGenerator
   sourceRefs : List String
   exactScope : String
   sourceScopeCaveat : String
+
+/--
+A selected genuinely nontrivial tensor automorphism.
+
+Nontriviality is not asserted for every admissible category. It is explicit
+category-domain data: the caller supplies one simple object on which the
+verified categorical automorphism acts by a scalar different from one.
+-/
+structure NontrivialTensorAutomorphismGenerator
+    (categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)) where
+  generator : TensorAutomorphismGenerator categoryData
+  witnessSimple : S
+  witness_nontrivial :
+    generator.simpleScalar witnessSimple ≠ 1
+
+namespace NontrivialTensorAutomorphismGenerator
+
+/-- The selected character cannot definitionally collapse to the identity control. -/
+theorem not_all_scalars_one
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    (selected : NontrivialTensorAutomorphismGenerator categoryData) :
+    ¬ ∀ simple, selected.generator.simpleScalar simple = 1 := by
+  intro allTrivial
+  exact selected.witness_nontrivial (allTrivial selected.witnessSimple)
+
+end NontrivialTensorAutomorphismGenerator
 
 namespace TensorAutomorphismGenerator
 
@@ -443,14 +536,15 @@ structure IntegralCharacterBoundPresentationCompiler
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData) where
-  cycleSystem : IntegralCycleRepresentativeSystem manifold H2
-  generator : TensorAutomorphismGenerator categoryData
+  selectedGenerator : NontrivialTensorAutomorphismGenerator categoryData
   eventCompiler :
     (topology : SpecialKirbyPresentation manifold H2) →
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
-        (integralCharacterWeights cycleSystem generator).toComponentExpansion
+        (integralCharacterWeights
+          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          selectedGenerator.generator).toComponentExpansion
           topology) →
       CategoricalEventCompiler C topology.formal.raw
   eventCompilerBinding :
@@ -458,10 +552,14 @@ structure IntegralCharacterBoundPresentationCompiler
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
-        (integralCharacterWeights cycleSystem generator).toComponentExpansion
+        (integralCharacterWeights
+          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          selectedGenerator.generator).toComponentExpansion
           topology) →
       EventCompilerBinding
-        (integralCharacterWeights cycleSystem generator)
+        (integralCharacterWeights
+          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          selectedGenerator.generator)
         topology labeling algebra (eventCompiler topology alpha labeling)
   diagramCertificateHash :
     SpecialKirbyPresentation manifold H2 → String
@@ -495,7 +593,9 @@ noncomputable def toCategoryBound
     CategoryBoundPresentationCompiler
       categoryData manifold H2 algebra where
   weights :=
-    integralCharacterWeights compiler.cycleSystem compiler.generator
+    integralCharacterWeights
+      (IntegralCycleRepresentativeSystem.canonical manifold H2)
+      compiler.selectedGenerator.generator
   eventCompiler := compiler.eventCompiler
   eventCompilerBinding := compiler.eventCompilerBinding
   diagramCertificateHash := compiler.diagramCertificateHash
@@ -505,13 +605,15 @@ noncomputable def toCategoryBound
   decoration_certificate_hash_shape :=
     compiler.decoration_certificate_hash_shape
   sourceRefs :=
-    compiler.sourceRefs ++ compiler.cycleSystem.sourceRefs ++
-      compiler.generator.sourceRefs
+    compiler.sourceRefs ++
+      (IntegralCycleRepresentativeSystem.canonical manifold H2).sourceRefs ++
+      compiler.selectedGenerator.generator.sourceRefs
   exactEventScope := compiler.exactEventScope
   sourceScopeCaveat :=
     compiler.sourceScopeCaveat ++ " " ++
-      compiler.cycleSystem.sourceScopeCaveat ++ " " ++
-      compiler.generator.sourceScopeCaveat
+      (IntegralCycleRepresentativeSystem.canonical manifold H2).sourceScopeCaveat
+        ++ " " ++
+      compiler.selectedGenerator.generator.sourceScopeCaveat
 
 /-- The derived coefficients are definitionally the integral-character formula. -/
 theorem weights_are_integral_character_weights
@@ -525,8 +627,25 @@ theorem weights_are_integral_character_weights
       IntegralCharacterBoundPresentationCompiler
       categoryData manifold H2 algebra) :
     compiler.toCategoryBound.weights =
-      integralCharacterWeights compiler.cycleSystem compiler.generator := by
+      integralCharacterWeights
+        (IntegralCycleRepresentativeSystem.canonical manifold H2)
+        compiler.selectedGenerator.generator := by
   rfl
+
+/-- Every admitted final presentation compiler carries a witnessed nontrivial character. -/
+theorem selected_generator_is_nontrivial
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
+    (compiler :
+      IntegralCharacterBoundPresentationCompiler
+        categoryData manifold H2 algebra) :
+    ¬ ∀ simple,
+      compiler.selectedGenerator.generator.simpleScalar simple = 1 :=
+  compiler.selectedGenerator.not_all_scalars_one
 
 end IntegralCharacterBoundPresentationCompiler
 

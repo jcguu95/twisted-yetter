@@ -100,9 +100,11 @@ be the category's simple-index type, zero-class coefficients to be the
 recorded category weights, strand objects to use the same simple/dual-simple
 data, and framing events to use the graphical algebra's exact twist. The final
 evaluator route now also derives every nonzero homological coefficient from a
-certified integral two-cycle representative and one tensor automorphism
-scalar. Concrete cycle representatives, a concrete tensor automorphism, event
-interpretation, and exact R7/R8/R9 graphical assembly remain open.
+normalized representative selected from the actual Mathlib homology quotient
+and one tensor automorphism scalar. Every presentation carries a complete
+two-handle component index, so the canonical cycle system is no longer a
+caller field. A concrete nontrivial tensor automorphism, event interpretation,
+and exact R7/R8/R9 graphical assembly remain open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -120,13 +122,13 @@ def establishedFoundationConditions : List TargetCondition :=
     .sourceBoundGeometricH2CompilerInstance,
     .sourceBoundGraphicalMoveCompilerMechanism,
     .categoryBoundKirbyColorCompilerMechanism,
-    .integralCharacterKirbyColorCompilerMechanism
+    .integralCharacterKirbyColorCompilerMechanism,
+    .integralCycleRepresentativeSystemInstance
   ]
 
 /-- Conditions deliberately left open for the concrete invariant construction. -/
 def openConstructionConditions : List TargetCondition :=
   [
-    .integralCycleRepresentativeSystemInstance,
     .tensorAutomorphismGeneratorInstance,
     .globalFiniteKirbyColorExpansionInstance,
     .sourceBoundGraphicalMoveCompilerInstance,
@@ -138,11 +140,11 @@ theorem target_condition_count :
   rfl
 
 theorem established_foundation_condition_count :
-    establishedFoundationConditions.length = 15 := by
+    establishedFoundationConditions.length = 16 := by
   rfl
 
 theorem open_construction_condition_count :
-    openConstructionConditions.length = 5 := by
+    openConstructionConditions.length = 4 := by
   rfl
 
 /--
@@ -312,11 +314,18 @@ theorem integral_character_kirby_color_compiler_mechanism_not_open :
   simp [openConstructionConditions]
 
 /--
-Concrete source-backed two-cycle representatives, tied to every admitted
-presentation's actual degree-two handle basis, have not yet been constructed.
+The integral cycle system is canonical: every admitted presentation carries
+its exact two-handle component index, and representatives are normalized
+choices from the epimorphic Mathlib homology quotient.
 -/
-theorem integral_cycle_representative_system_instance_open :
+theorem integral_cycle_representative_system_instance_established :
     TargetCondition.integralCycleRepresentativeSystemInstance ∈
+      establishedFoundationConditions := by
+  simp [establishedFoundationConditions]
+
+/-- No caller-supplied cycle system remains in the open construction ledger. -/
+theorem integral_cycle_representative_system_instance_not_open :
+    TargetCondition.integralCycleRepresentativeSystemInstance ∉
       openConstructionConditions := by
   simp [openConstructionConditions]
 

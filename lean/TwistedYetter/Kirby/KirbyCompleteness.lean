@@ -268,6 +268,39 @@ structure SpecialKirbyPresentation
   formal : FormalPresentation
   execution : ClosedExecutionCertificate formal
   counts : HandleCounts
+  /--
+  The exact framed-link component representing each degree-two handle basis
+  vector.  Ordinary and specially-dotted components are both two-handle
+  bearing; dotted components represent one-handles and are excluded.
+  -/
+  twoHandleComponent : Fin counts.h2 → ComponentSpec
+  two_handle_component_mem :
+    (index : Fin counts.h2) →
+      twoHandleComponent index ∈ formal.raw.components
+  two_handle_component_role :
+    (index : Fin counts.h2) →
+      (twoHandleComponent index).role ≠ .dotted
+  twoHandleIndex? : String → Option (Fin counts.h2)
+  two_handle_index_roundtrip :
+    (index : Fin counts.h2) →
+      twoHandleIndex? (twoHandleComponent index).componentId = some index
+  two_handle_index_sound :
+    (componentId : String) →
+    (index : Fin counts.h2) →
+      twoHandleIndex? componentId = some index →
+        componentId = (twoHandleComponent index).componentId
+  every_two_handle_component_indexed :
+    (component : ComponentSpec) →
+      component ∈ formal.raw.components →
+      component.role ≠ .dotted →
+        ∃ index, twoHandleIndex? component.componentId = some index
+  dotted_component_unindexed :
+    (component : ComponentSpec) →
+      component.role = .dotted →
+        twoHandleIndex? component.componentId = none
+  componentIndexCertificateHash : String
+  component_index_certificate_hash_shape :
+    RawPresentation.sha256Shape componentIndexCertificateHash = true
   uniqueZeroHandle : counts.h0 = 1
   uniqueFourHandle : counts.h4 = 1
   orderedByIncreasingIndex : Prop
