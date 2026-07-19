@@ -1,0 +1,186 @@
+{
+  "created_at": "2026-07-19T10:17:27Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+  "parents": [
+    "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+        "artifact_id": "egno-kirby-color-step8-v1",
+        "content_hash": "sha256:45a78335b35d548559264cd22781eb5f5a20fc65533d2366f6f578df115d2411",
+        "git_blob": "a5deadee2080408e2b5f96c99a1014b2acfe6b04",
+        "path": "experiments/results/lean-kirby/egno-kirby-color-step8-v1.json",
+        "sha256": "3e976c445e30168213841812fb4d1e9d4e4c5f1b8284936489e9ccecffcb5938",
+        "status": "PASS_STEP_8_KIRBY_COLOR_EXPANSION"
+      },
+      {
+        "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+        "artifact_id": "lean-egno-tensor-automorphism",
+        "git_blob": "80fd124d1a226ce8f6b07539760f540597661d30",
+        "path": "lean/TwistedYetter/Fusion/EGNOTensorAutomorphism.lean",
+        "sha256": "a80269cd6f8b6b31effa2b295aacef21a43d0a8f8fb9a237a7897b2c746ebcc0",
+        "status": "LEAN_KERNEL_CHECKED_MONOIDAL_IDENTITY_AUTOMORPHISM_SCALARS"
+      },
+      {
+        "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+        "artifact_id": "lean-egno-kirby-color-expansion",
+        "git_blob": "422570f721ead097a9189911f39fb9172f2672e7",
+        "path": "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansion.lean",
+        "sha256": "b0a7465e1567725e442867498708929fbfc7780b1aa2bfc35a1f7336b3cef54b",
+        "status": "LEAN_KERNEL_CHECKED_ORDINARY_AND_INTEGRAL_CHARACTER_EXPANSIONS"
+      },
+      {
+        "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+        "artifact_id": "lean-egno-kirby-color-axiom-audit",
+        "git_blob": "17d62e27509182f1785d916881d0c84bcd81f88a",
+        "path": "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansionAxiomAudit.lean",
+        "sha256": "f05b98ced68b959c194e97250424fc4a734dce0c3f26a20588f473614fe8da6d",
+        "status": "PASS_94_DECLARATIONS_NO_PROOF_ORACLE"
+      },
+      {
+        "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+        "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+        "git_blob": "5d67e19b7019e0256dd13d9649f0e89430e3f6ac",
+        "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+        "sha256": "ab11360fe9131fcc5acefdf3e8731e83606aa7c6d6298b6caf807e9041b850eb",
+        "status": "STEP_8_ESTABLISHED_STEPS_9_TO_10_EXPLICIT"
+      },
+      {
+        "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+        "artifact_id": "egno-trace-pairing-step7-v1",
+        "content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+        "path": "experiments/results/lean-kirby/egno-trace-pairing-step7-v1.json",
+        "status": "HISTORICAL_PREDECESSOR_STEP_7"
+      }
+    ],
+    "created_at": "2026-07-19T10:17:27Z",
+    "created_by": "actor:codex",
+    "derived_boundary": {
+      "fully_lean_derived": [
+        "monoidality of the natural automorphism gives its tensor and unit laws",
+        "Schur's lemma derives the unique scalar action on every listed simple object",
+        "invertibility of the natural isomorphism proves every simple scalar is nonzero",
+        "the nonzero scalar is packaged as a field unit and therefore has integral powers",
+        "the ordinary Kirby-colour coefficient is the canonical ribbon quantum dimension",
+        "the twisted coefficient is dim(s) times the derived scalar to the integral exponent",
+        "zero exponent and the identity automorphism each recover the ordinary colour",
+        "formal colour evaluation is exactly the finite weighted sum of complete simple-labelled diagrams"
+      ],
+      "input_not_constructed_here": [
+        "a concrete ribbon fusion category",
+        "a nontrivial monoidal natural automorphism of its identity functor"
+      ],
+      "status": "KIRBY_COLOR_COEFFICIENTS_DERIVED_FROM_VISIBLE_GENERIC_CATEGORY_INPUTS"
+    },
+    "established": [
+      "Steps 1 through 7 remain established with the Step 7 global-law boundary unchanged.",
+      "The tensor identity automorphism is actual categorical data: a natural isomorphism with a monoidality proof.",
+      "There is no caller-supplied character or simple-scalar table.",
+      "Schur's lemma derives the scalar action on each listed simple, and the natural isomorphism proves it nonzero.",
+      "The ordinary Kirby colour is the formal finite family with coefficient dim(s).",
+      "The integral-character colour is the formal finite family with coefficient dim(s) chi_s^n.",
+      "The formal colour is not misrepresented as an object of the category.",
+      "Lean proves the exact finite weighted-diagram evaluation formula.",
+      "Twenty-eight cumulative mutation tests reject all Step 1-8 convention and interface errors.",
+      "Ninety-four declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+      "The full 2240-job umbrella build and all six Step 8 artifact tests pass with LEAN_NUM_THREADS=1."
+    ],
+    "explicit_nonclaims": [
+      "This objective note is not a theorem claim about a complete four-manifold invariant.",
+      "This step does not instantiate a concrete fusion, premodular, or modular category.",
+      "This step does not construct a nontrivial tensor identity automorphism for any concrete category.",
+      "The Step 7 SphericalMateTraceLaw and PivotalFunctorTraceLaw remain explicit source-bound global theorem parameters.",
+      "No category-bound Kirby move is established by this step.",
+      "No handle-slide, blow-up, cancellation, or presentation-independence theorem follows from the colour formula alone.",
+      "No identification with the original Crane--Yetter or Yetter state sum is claimed.",
+      "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean."
+    ],
+    "mathematical_status": "ORDINARY_AND_INTEGRAL_CHARACTER_KIRBY_COLOR_EXPANSIONS_DERIVED_FROM_RIBBON_FUSION_DATA_AND_A_MONOIDAL_IDENTITY_AUTOMORPHISM",
+    "note_id": "objective-note-2026-07-18-egno-category-foundation-v9",
+    "objective": {
+      "current_step": "Step 8 of 10 is terminal; Step 9 category-bound Kirby moves is next.",
+      "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+      "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+    },
+    "prior_current_object": {
+      "cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+      "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+    },
+    "proof_scope": {
+      "ambient_lean_assumptions": [
+        "Field K",
+        "IsAlgClosed K",
+        "Abelian C",
+        "Linear K C",
+        "MonoidalCategory C",
+        "BraidedCategory C",
+        "RigidCategory C",
+        "MonoidalPreadditive C",
+        "MonoidalLinear K C",
+        "Fintype S",
+        "DecidableEq S"
+      ],
+      "concrete_category_instantiated": false,
+      "generic_explicit_inputs": [
+        "RibbonFusionCategoryData over the listed simple skeleton S",
+        "TensorIdentityAutomorphism C",
+        "an integral exponent for one marked component"
+      ],
+      "source_capture_sha256": {
+        "baerenz_barrett": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+        "egno": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+        "yetter_remote_snapshot_ledger": "e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b"
+      }
+    },
+    "remaining_roadmap": [
+      {
+        "id": "9-category-bound-kirby-moves",
+        "status": "NEXT_NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "10-four-manifold-invariant-assembly",
+        "status": "NOT_YET_ESTABLISHED"
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_repo": {
+      "artifact_commit": "99e7dbadb48f2162927b12d679194530e3e26e40",
+      "branch": "codex/lean-kirby-coupon-bootstrap",
+      "dirty_at_clean_checkpoint": false,
+      "source_implementation_commit": "b86fa2c8f3e3dba1420b4a914eb3b086e49fa5c0"
+    },
+    "status": "STEP_8_KIRBY_COLOR_EXPANSION_ESTABLISHED_STEP_9_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+    ],
+    "title": "EGNO category foundation for the Lean Kirby route, revision 9",
+    "top_notice": "Step 8 derives ordinary and integral-character Kirby-colour expansions from visible generic category inputs. It does not instantiate a category, construct a nontrivial automorphism, establish any Kirby move, or complete a four-manifold invariant.",
+    "verification": {
+      "artifact_content_hash": "sha256:45a78335b35d548559264cd22781eb5f5a20fc65533d2366f6f578df115d2411",
+      "artifact_file_sha256": "3e976c445e30168213841812fb4d1e9d4e4c5f1b8284936489e9ccecffcb5938",
+      "axiom_audit": "PASS_94_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+      "canonical_ctl_current_root_replay_before_admission": {
+        "current_object_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+        "root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+        "source_state": "current-ctl-binding-after-verified-root-replay",
+        "status": "PASS"
+      },
+      "full_umbrella_build": "PASS_2240_JOBS_LEAN_NUM_THREADS_1",
+      "mutation_tests": "PASS_28_OF_28_EXPECTED_REJECTIONS",
+      "proof_oracle_count": 0,
+      "step8_pytests": "PASS_6_OF_6"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
