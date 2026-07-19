@@ -204,6 +204,10 @@ def build() -> dict[str, Any]:
         REPO_ROOT
         / "lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean"
     ).read_text()
+    fusion_text = (
+        REPO_ROOT
+        / "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean"
+    ).read_text()
     required_contracts = [
         "noncomputable def simpleCompositionPerfectPairing",
         "noncomputable def unitCompositionPerfectPairing",
@@ -220,10 +224,10 @@ def build() -> dict[str, Any]:
         raise AssertionError("missing global pivotal-functor trace law")
     if "noncomputable def localCompatibility" not in compatibility_text:
         raise AssertionError("missing global-to-local functor constructor")
-    structure_prefix = pairing_text.split(
-        "structure FusionCategoryData", maxsplit=1
-    )[0]
-    if "pivotalTracePerfectPairing" in structure_prefix:
+    fusion_structure_fields = fusion_text.split(
+        "structure FusionCategoryData where", maxsplit=1
+    )[1].split("namespace FusionCategoryData", maxsplit=1)[0]
+    if "pivotalTracePerfectPairing" in fusion_structure_fields:
         raise AssertionError("trace pairing became pre-fusion arbitrary data")
 
     build_result = run(["lake", "build", "TwistedYetter"])
