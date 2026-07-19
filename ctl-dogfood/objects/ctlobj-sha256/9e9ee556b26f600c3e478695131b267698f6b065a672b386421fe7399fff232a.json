@@ -1,0 +1,156 @@
+{
+  "created_at": "2026-07-19T05:55:03Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+  "parents": [
+    "ctlobj-sha256:b827d9ee8ef7101153f3b76dd69b65d6266f7f7edc0aec64ac6a2b8784f62053"
+  ],
+  "payload": {
+    "artifacts": [
+      {
+        "artifact_commit": "582580a56c1d846a937c7178e1b3845b8dc9f37b",
+        "artifact_id": "egno-canonical-pivotal-step2-v1",
+        "content_hash": "sha256:690d14c7d6730e0d9adec3f45a950a8e664c8c6ce924ee5cddef82472dfa0631",
+        "git_blob": "384e992419f023381555f5650fc012d982a164bc",
+        "path": "experiments/results/lean-kirby/egno-canonical-pivotal-step2-v1.json",
+        "sha256": "d36f5c8e15e3ac3d219223afd1242eba820b95f252875b400b41f99ffe4bb4e0",
+        "status": "PASS_STEP_2_NATURAL_ISOMORPHISM_ESTABLISHED"
+      },
+      {
+        "artifact_commit": "582580a56c1d846a937c7178e1b3845b8dc9f37b",
+        "artifact_id": "lean-egno-canonical-pivotal",
+        "git_blob": "c09047702dcf2319333bbecc0ae8f8ebef411377",
+        "path": "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "sha256": "eece73fdd13ab43f592e120eb1af2f1a799847f0b7d646765c40b9b99143c94e",
+        "status": "LEAN_KERNEL_CHECKED_NATURAL_ISOMORPHISM"
+      },
+      {
+        "artifact_commit": "582580a56c1d846a937c7178e1b3845b8dc9f37b",
+        "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+        "git_blob": "dfb3831f04f0f088ddd6e374daa5187df5785dd9",
+        "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+        "sha256": "79b7b6047c16978126e387d6aca5d084a4822befcb950e29b755a83cbf6f2ede",
+        "status": "STEP_2_ESTABLISHED_STEPS_3_TO_10_EXPLICIT"
+      },
+      {
+        "artifact_commit": "48eccc766373e3ab03da5c5e5df128fc8d4382ba",
+        "artifact_id": "egno-canonical-pivotal-step1-v1",
+        "content_hash": "sha256:4b9acf6a1d26367527c4a0bc70201b66db94bed2f55b3f950913d9a8ccae65cb",
+        "path": "experiments/results/lean-kirby/egno-canonical-pivotal-step1-v1.json",
+        "status": "HISTORICAL_PREDECESSOR_STEP_1"
+      },
+      {
+        "artifact_id": "egno-category-foundation-v1",
+        "content_hash": "sha256:a584128bf147d46091ba362a764252ffc16049b18eaca635ef794d8df5f8986f",
+        "path": "experiments/results/lean-kirby/egno-category-foundation-v1.json",
+        "status": "PASS_EGNO_CATEGORY_INTERFACES_AND_KIRBY_BINDINGS"
+      }
+    ],
+    "created_at": "2026-07-19T05:55:03Z",
+    "created_by": "actor:codex",
+    "established": [
+      "Generic pivotal, spherical, balancing, and ribbon contracts remain established as typed Lean interfaces.",
+      "The Drinfeld morphism is the unique right-dual comparison whose forward map expands exactly to EGNO equation (8.30).",
+      "The Drinfeld morphism is objectwise invertible by uniqueness of right duals.",
+      "The cup-crossing-cap formula is natural: the Lean proof uses braiding naturality and the evaluation and coevaluation mate identities.",
+      "The Drinfeld components assemble into a natural isomorphism from the identity functor to the chosen right double-dual functor.",
+      "Composing the ribbon twist with the Drinfeld natural isomorphism gives the canonical pivotal candidate as a natural isomorphism, matching EGNO equation (8.35) objectwise.",
+      "Six mutation tests reject the Step 1 convention errors, a missing naturality witness, hom-only components without inverses, and replacement of f** by f*.",
+      "The right double-dual functor now requires only RightRigidCategory, and a no-braiding regression module prevents reintroduction of the right-left-right instance diamond."
+    ],
+    "explicit_non_claims": [
+      "This objective note is not a theorem claim.",
+      "The canonical pivotal candidate is a natural isomorphism, but it has not yet been proved monoidal.",
+      "The canonical monoidal structure on the right double-dual functor has not yet been constructed in this repository.",
+      "No canonical PivotalStructure or SphericalStructure has yet been derived from RibbonStructure.",
+      "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
+      "The finite semisimple fusion-category layer remains open.",
+      "The two Bärenz-Barrett trace-pairing compatibility inputs remain open.",
+      "No concrete category has been instantiated.",
+      "This note does not establish a concrete four-manifold invariant."
+    ],
+    "mathematical_status": "CANONICAL_PIVOTAL_STEP_2_NATURAL_ISOMORPHISM_ESTABLISHED_MONOIDALITY_OPEN",
+    "note_id": "objective-note-2026-07-18-egno-category-foundation-v3",
+    "objective": {
+      "current_step": "Step 2 of 10 complete; Step 3 monoidality is next.",
+      "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+      "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+    },
+    "prior_current_object": {
+      "cid": "ctlobj-sha256:b827d9ee8ef7101153f3b76dd69b65d6266f7f7edc0aec64ac6a2b8784f62053",
+      "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+    },
+    "remaining_roadmap": [
+      {
+        "id": "3-monoidality",
+        "status": "NEXT_NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "4-sphericality",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "5-trace-cyclicity",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "6-finite-semisimple-fusion-interface",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "7-pairing-compatibility",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "8-kirby-colour-expansion",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "9-category-bound-kirby-moves",
+        "status": "NOT_YET_ESTABLISHED"
+      },
+      {
+        "id": "10-four-manifold-invariant-assembly",
+        "status": "NOT_YET_ESTABLISHED"
+      }
+    ],
+    "schema": "twisted-yetter/objective-lab-note/1",
+    "source_repo": {
+      "artifact_commit": "582580a56c1d846a937c7178e1b3845b8dc9f37b",
+      "branch": "codex/lean-kirby-coupon-bootstrap",
+      "dirty_at_clean_checkpoint": false,
+      "source_implementation_commit": "430efa12310690089f178026a77950cde993010b",
+      "v12_freshness_status": "PASS_7_OF_7_CURRENT_SOURCE_HASH_TESTS"
+    },
+    "status": "STEP_2_ESTABLISHED_STEP_3_OPEN",
+    "subjects": [
+      "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+      "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+      "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+    ],
+    "title": "EGNO category foundation for the Lean Kirby route, revision 3",
+    "top_notice": "Step 2 establishes a natural isomorphism id_C to the chosen right double-dual functor. It does not yet establish monoidality, a PivotalStructure, sphericality, or a concrete category.",
+    "verification": {
+      "artifact_content_hash": "sha256:690d14c7d6730e0d9adec3f45a950a8e664c8c6ce924ee5cddef82472dfa0631",
+      "artifact_file_sha256": "d36f5c8e15e3ac3d219223afd1242eba820b95f252875b400b41f99ffe4bb4e0",
+      "axiom_audit": "PASS_9_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+      "canonical_ctl_current_root_replay_before_admission": {
+        "root_cid": "ctlobj-sha256:0c555e701849ed2ea399b6e5a4a776dea2af42703329ea42bba68eb22d49594e",
+        "status": "PASS"
+      },
+      "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+      "full_umbrella_build": "PASS_1598_JOBS_LEAN_NUM_THREADS_1",
+      "minimal_right_dual_regression": "PASS_RIGHT_RIGID_ONLY_WITHOUT_BRAIDING",
+      "mutation_tests": "PASS_6_OF_6_EXPECTED_REJECTIONS",
+      "proof_oracle_count": 0,
+      "related_pytests": "PASS_16_OF_16"
+    }
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}
