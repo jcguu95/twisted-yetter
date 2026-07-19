@@ -32,12 +32,12 @@ structure NaturalTwist (C : Type u) [Category.{v} C] where
 namespace NaturalTwist
 
 /-- Forget the balancing law while retaining the underlying natural twist. -/
-def ofBalanced [RigidCategory C]
+def ofBalanced [RightRigidCategory C]
     (twist : BalancedTwist C) : NaturalTwist C where
   iso := twist.iso
 
 /-- Every ribbon structure supplies the natural twist used for coupon transport. -/
-def ofRibbon [RigidCategory C]
+def ofRibbon [RightRigidCategory C]
     (ribbon : RibbonStructure C) : NaturalTwist C :=
   ofBalanced ribbon.toBalancedTwist
 

@@ -330,6 +330,9 @@ section Framing
 
 variable [RigidCategory C]
 
+local instance selectedRigidRightDualFraming : RightRigidCategory C :=
+  (inferInstance : RigidCategory C).toRightRigidCategory
+
 /-- Positive blackboard kink expanded into cup, crossing, and cap. -/
 def positiveKink (X : C) : Diagram C (atom X) (atom X) :=
   leftUnitorInvDiagram X ≫ᵈ
@@ -398,6 +401,9 @@ end Framing
 section Closure
 
 variable [RigidCategory C]
+
+local instance selectedRigidRightDualClosure : RightRigidCategory C :=
+  (inferInstance : RigidCategory C).toRightRigidCategory
 
 /--
 The spherical trace input needed to move a cut around a closed component.

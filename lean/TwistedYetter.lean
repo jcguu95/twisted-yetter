@@ -8,6 +8,7 @@ import TwistedYetter.Fusion.EGNOCanonicalSpherical
 import TwistedYetter.Fusion.EGNOTraceCyclicity
 import TwistedYetter.Fusion.EGNOFusionCategory
 import TwistedYetter.Fusion.EGNOTracePairing
+import TwistedYetter.Fusion.EGNOSphericalInsertion
 import TwistedYetter.Fusion.EGNOPairingCompatibility
 import TwistedYetter.Fusion.EGNOTensorAutomorphism
 import TwistedYetter.Fusion.PivotalMate
@@ -39,6 +40,8 @@ import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 import TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler
 import TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
 import TwistedYetter.Kirby.EGNOKirbyColorExpansion
+import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.EGNOModularKirbyMoves
 import TwistedYetter.Kirby.SourceBoundGraphicalMoveCompiler
 import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 import TwistedYetter.Kirby.SourceBoundTableTwoEvaluatorCompiler

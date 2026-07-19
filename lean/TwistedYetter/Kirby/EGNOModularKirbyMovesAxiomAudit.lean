@@ -1,0 +1,43 @@
+import TwistedYetter.Kirby.EGNOModularKirbyMoves
+
+/-!
+# Axiom audit for EGNO-bound modular Kirby moves
+
+These commands expose the kernel axioms used by Step 9.  The audit covers
+the all-object insertion law, label-indexed generalized sliding, derived
+dimension profile, cancellation factors, framing, and package exports.
+-/
+
+#print axioms TwistedYetter.Fusion.EGNO.SphericalInsertionLaw.resolves
+#print axioms TwistedYetter.Fusion.EGNO.RibbonFusionCategoryData.sphericalIdentityResolution
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.reverse_primal
+#print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.reverse_dual
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingSourcePairingCyclic
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingMateTransport
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingPairingCyclic
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingForwardSound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingBackwardSound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingCategoryData
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.LabelIndexedSlidingMovies.ClosedWindow.term_sound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.LabelIndexedSlidingMovies.ClosedWindow.linear_eval_sound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.LabelIndexedSlidingMovies.ClosedWindow.collapsed_eval_sound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.toSourcedSlidingLaw
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.before_is_dimension_weighted
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.after_is_dimension_weighted
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.IsTransparent
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.globalDimension
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.transparentGlobalDimension
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.transparentGlobalDimension_eq_one
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.dimensionProfile
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.dimensionProfile_cDimension
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.dimensionProfile_dDimension
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.dimensionProfile_transparentDimension
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw.toCancellationInput
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw.one_two_factor
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw.two_three_factor
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.RibbonFramedKinkLaw.toFramedKinkCompatibility
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.profile
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.cancellationInput
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.framedKinkCompatibility
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.sphericalCutTrace
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.ordinarySlidingLaw

@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_8_ESTABLISHED_STEPS_9_TO_10_EXPLICIT",
+  "status": "STEP_9_ESTABLISHED_STEP_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -201,7 +201,51 @@
     },
     {
       "id": "9-category-bound-kirby-moves",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN_RELATIVE_TO_EXPLICIT_GLOBAL_STANDARD_GRAPHICAL_LAWS",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.SphericalInsertionLaw",
+        "TwistedYetter.Fusion.EGNO.RibbonFusionCategoryData.sphericalIdentityResolution",
+        "TwistedYetter.Fusion.FiniteResolution.DualBasisData.reversed",
+        "TwistedYetter.Kirby.EGNOCategoryBoundSliding.CategoryData.slidingCategoryData",
+        "TwistedYetter.Kirby.EGNOCategoryBoundSliding.LabelIndexedSlidingMovies",
+        "TwistedYetter.Kirby.EGNOCategoryBoundSliding.LabelIndexedSlidingMovies.ClosedWindow.linear_eval_sound",
+        "TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularSimpleCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.transparentGlobalDimension_eq_one",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.dimensionProfile",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.RibbonFramedKinkLaw",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.Package"
+      ],
+      "source_locators": [
+        "Bärenz--Barrett Lemma 2.37, equations (2.2.5)-(2.2.6), journal page 675",
+        "Bärenz--Barrett Lemmas 3.1 and 3.3-3.4, equations (3.1.1) and (3.1.3)-(3.1.11), journal pages 680-684",
+        "Bärenz--Barrett Definitions 2.35 and 2.44 and equation (3.2.1), journal pages 675-676 and 685",
+        "Bärenz--Barrett Lemmas 2.46-2.47 and Theorem 3.9, journal pages 677 and 686-687",
+        "Shum, Tortile tensor categories, ribbon graphical coherence for framed kinks"
+      ],
+      "formal_proof_route": [
+        "The all-objects spherical insertion law selects finite trace-dual resolutions from the actual complete simple skeleton.",
+        "Cyclicity reverses each trace-dual basis, the pivotal mate equivalence transports it, and cyclicity reverses it again for inverse insertion.",
+        "Generalized sliding is constructed separately for every actual simple label; the formal Kirby colour is never used as one category object.",
+        "Each fixed-label graphical movie is proved first, then Lean lifts the equality termwise to any unchanged finite coefficient family.",
+        "The ordinary slide is accepted only with endpoints proved to evaluate the exact quantum-dimension-weighted formal colour.",
+        "The modular transparent-simple dimension is defined as an actual finite sum and proved equal to one from the simple-centre condition and the unit-dimension theorem input.",
+        "Both ambient dimensions are the same derived sum of squared ribbon quantum dimensions; callers supply only the two visible standard scalar certificates.",
+        "Cutting, killing, and isolated-unknot equations derive the 1--2 and 2--3 factors used by the existing normalization algebra.",
+        "Framed kinks and cut independence use the same ribbon-derived pivotal and right-dual convention as the trace-pairing layer.",
+        "Category, coherence, ordinary-slide, and generalized-movie identities are all content-hash shaped before package export."
+      ],
+      "standard_theorem_inputs_not_reproved": [
+        "SphericalInsertionLaw: Bärenz--Barrett Lemma 2.37 for every object and every finite trace-dual basis",
+        "SphericalMateTraceLaw: Bärenz--Barrett Lemma 3.3 mate trace identity, inherited from Step 7",
+        "OrdinaryKirbySlidingLaw: Bärenz--Barrett Lemma 3.1 with exact formal-colour endpoints",
+        "LabelIndexedSlidingMovies: Bärenz--Barrett Lemmas 3.3-3.4, quantified over every simple label",
+        "ModularSimpleCenter and ModularDimensionCertificate: transparent simples are exactly the unit, the unit quantum dimension is one, and the derived global dimension is nonzero",
+        "ModularCancellationLaw: Bärenz--Barrett cutting, killing, and isolated-unknot graphical identities",
+        "RibbonFramedKinkLaw: blackboard positive and negative kinks evaluate to the recorded ribbon twist and its inverse"
+      ],
+      "scope_note": "Step 9 establishes the generic category-side Kirby algebra for the modular identity-functor route. All finite-sum, pairing-transport, dimension, and normalization consequences are kernel-checked. The named global graphical theorems remain explicit, source-located inputs. No whole-presentation evaluator, move-completeness theorem, marked-pair transport, or concrete category instance is claimed here."
     },
     {
       "id": "10-four-manifold-invariant-assembly",
@@ -264,13 +308,27 @@
     "a formal Kirby colour cannot silently be treated as an object of the category",
     "evaluation remains the exact finite weighted sum over complete simple-labelled diagrams"
   ],
+  "step_9_guards": [
+    "the formal Kirby colour cannot be reintroduced as one fixed category object in generalized sliding",
+    "the generalized graphical movie must be supplied for every simple label, not one preferred label",
+    "the ordinary slide endpoints must evaluate the exact quantum-dimension-weighted formal colour",
+    "the global dimension cannot be replaced by a caller-selected scalar",
+    "the transparent dimension is an actual transparent-simple sum and cannot be replaced by a hard-coded zero or unrelated value",
+    "the unit quantum-dimension theorem input and derived global-dimension nonvanishing certificate cannot be omitted",
+    "a framed-kink law from another ribbon snapshot cannot be substituted into the package",
+    "an unbound legacy sliding law cannot replace the category-bound ordinary sliding law",
+    "category, coherence, ordinary-slide, and generalized-movie hashes must have canonical sha256 shape",
+    "the selected right-dual convention is shared by ribbon pivotal data, trace pairings, framed kinks, and cut closure"
+  ],
   "explicit_non_claims": [
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
     "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized; Step 7 uses the explicitly source-bound Bärenz--Barrett mate trace law instead of silently deriving it.",
     "The spherical mate trace law from Bärenz--Barrett Lemma 3.3 remains an explicit all-objects theorem input; it has not been rederived solely from the SphericalStructure fields in Lean.",
     "Pivotal-functor trace preservation from Bärenz--Barrett Lemma 2.23 remains an explicit all-endomorphisms theorem input; a native pivotal-functor structure has not been formalized in Mathlib.",
-    "No category-bound Kirby move has yet been derived from the Step 8 colour expansion.",
+    "The source-backed global insertion, ordinary-slide, generalized graphical-movie, cancellation, and framed-kink laws remain explicit theorem parameters; Step 9 does not claim to have reconstructed the full graphical calculus from Mathlib primitives alone.",
+    "Step 9 is restricted to the modular identity-functor normalization profile; it does not establish the general premodular functor case.",
+    "No whole-presentation evaluator or four-manifold presentation-independence theorem is established by Step 9 alone.",
     "No nontrivial tensor identity automorphism has been constructed for a concrete ribbon fusion category.",
     "No concrete category has been instantiated."
   ]

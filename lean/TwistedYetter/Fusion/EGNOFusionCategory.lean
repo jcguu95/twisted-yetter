@@ -338,6 +338,15 @@ section Ribbon
 variable [BraidedCategory C]
 
 /--
+Keep every ribbon-derived construction on the right dual selected by the
+ambient `RigidCategory`.  Without this local priority, Mathlib can select the
+alternative right dual reconstructed from the left dual and the braiding,
+creating a type-level convention mismatch with the trace-pairing layer.
+-/
+local instance selectedRigidRightDual : RightRigidCategory C :=
+  (inferInstance : RigidCategory C).toRightRigidCategory
+
+/--
 The finite semisimple data and ribbon structure bound to one category.
 
 All pivotal, spherical, trace, and dimension data below are derived; none are
