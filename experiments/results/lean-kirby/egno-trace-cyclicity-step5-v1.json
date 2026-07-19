@@ -1,0 +1,206 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_trace_cyclicity_step5_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 37,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (1600 jobs).",
+      "status": "PASS"
+    },
+    "mutations": {
+      "rejected_count": 15,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldNaturalityWitness.lean [diagnostic: could not synthesize default value]",
+        "PASS expected rejection: lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldNaturalityTarget.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongMonodromyMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldMonodromyDefect.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/BalancedTwistIsNotSpherical.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonLoopMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonDualInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongTraceCyclicityDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbon.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean",
+        "lean/TwistedYetter/Fusion/EGNOTraceCyclicity.lean",
+        "lean/TwistedYetter/Fusion/EGNOTraceCyclicityAxiomAudit.lean",
+        "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+        "lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean",
+        "lean/Mutations/WrongTraceCyclicityDualOrder.lean",
+        "lean/Mutations/MissingSphericalCutCyclicity.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
+  },
+  "content_hash": "sha256:664bb105a40519dbcbeb8fed4d257499e2eab3813fc7258deb0d96f4cf79741d",
+  "elapsed_milliseconds": 61261,
+  "established": [
+    "The pivotal trace is cyclic in every right-rigid monoidal category equipped with a PivotalStructure.",
+    "The proof uses cup and cap mate identities plus naturality of the pivotal isomorphism; it does not assume the result.",
+    "Every SphericalStructure supplies SphericalTraceLaws without a caller-provided cyclicity proof.",
+    "Every RibbonStructure supplies a canonical SphericalCutTrace for the Kirby presentation layer."
+  ],
+  "explicit_non_claims": [
+    "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because pivotal cyclicity is the only cut-moving theorem needed here.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T07:56:52Z",
+  "generator_script": "experiments/scripts/build_egno_trace_cyclicity_step5_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "70df9ab0b018c445fb5cf31c5b466e282a4cda28",
+    "dirty": false
+  },
+  "inputs": {
+    "egno_pdf": {
+      "bytes": 6216438,
+      "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json",
+      "sha256": "9f2e7a1daba634415606ea6a0ac77577ef014d620156d8646eccc8128b2fb465"
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "d2ccdac557288c3503937045c4f7834303baf57e37afff621a7a33de0190c188"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 8402,
+        "sha256": "d2ccdac557288c3503937045c4f7834303baf57e37afff621a7a33de0190c188"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3618,
+        "sha256": "9f2e7a1daba634415606ea6a0ac77577ef014d620156d8646eccc8128b2fb465"
+      },
+      "experiments/scripts/build_egno_trace_cyclicity_step5_v1.py": {
+        "bytes": 11939,
+        "sha256": "7d8666cbf509d3117d0e0ae925b7fd70727f4ac5dcf4687b750bac9bb62f0e82"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/MissingSphericalCutCyclicity.lean": {
+        "bytes": 650,
+        "sha256": "601fb83943c8e5f841a98591c9cdbe55590f350b133ad0d8759768d63dd54ee6"
+      },
+      "lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean": {
+        "bytes": 712,
+        "sha256": "a1299ece7832036923f3501f9fc993189d9d0c03c12bf3a62ed81d1f6afb7051"
+      },
+      "lean/Mutations/WrongTraceCyclicityDualOrder.lean": {
+        "bytes": 667,
+        "sha256": "de91ae5e106245d52220ec75638ec77b522396a94329cd16876bc8b6c4b9347f"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2199,
+        "sha256": "1a218defa6e2a354f6d3019c0afd9a49f93fcb7204c16160d633baed676c56b6"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean": {
+        "bytes": 15622,
+        "sha256": "a1fdc129d847b6a28022b94026a63d2c068609f1b9b30fc8209d9ead7c716d3a"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean": {
+        "bytes": 9882,
+        "sha256": "61e7034996be4c399c3fd2f6a5a4826dac499f7196e869897955382f3bc56108"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
+        "bytes": 5386,
+        "sha256": "d720bb43b22f89d1ae838368996f4bd2627399b79dcafc1ef055d27b0e7551a7"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTraceCyclicity.lean": {
+        "bytes": 4014,
+        "sha256": "fed1ae8137bab74cd5ee7a570baa8a3df0511c2cdd133870da43b259e5f9502c"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTraceCyclicityAxiomAudit.lean": {
+        "bytes": 518,
+        "sha256": "e6e717d5bcca9b7a593b111e674649674e686dfc3e75603ea5bf94853b8ca89d"
+      },
+      "lean/TwistedYetter/Kirby/PresentationIsotopy.lean": {
+        "bytes": 31187,
+        "sha256": "e3355d5b7fe2ced54c1ab524a1479fe22003dbbae4ed64b6d70402bd79fce9b5"
+      },
+      "scripts/lean_egno_trace_cyclicity_axiom_audit.sh": {
+        "bytes": 474,
+        "sha256": "b56fb8c33a6268eb8f1a44f847e74a80cb6d0f5667eabd62ce3922766219997c"
+      },
+      "scripts/lean_egno_trace_cyclicity_mutation_tests.sh": {
+        "bytes": 1279,
+        "sha256": "57b4080287f681bd083e502134ca763e116ec3ce4a030ad551ac561935247857"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_trace_cyclicity_step5_v1.py": {
+        "bytes": 2782,
+        "sha256": "e4c4bf6c53f491607b58568c8ce36431a7e95333f047dbcfb9a26725b87ff79c"
+      }
+    }
+  },
+  "mathematical_status": "PIVOTAL_TRACE_CYCLICITY_AND_RIBBON_CUT_TRACE_ESTABLISHED",
+  "proof_scope": {
+    "lean_assumptions_for_cyclicity": [
+      "Category",
+      "MonoidalCategory",
+      "RightRigidCategory",
+      "PivotalStructure"
+    ],
+    "not_used": [
+      "sphericality",
+      "semisimplicity",
+      "finitely many simple objects",
+      "a concrete fusion category"
+    ],
+    "source": "EGNO Proposition 4.7.3(4), printed page 74",
+    "theorem_4_7_15_status": "LEFT_RIGHT_TRACE_EQUALITY_NOT_FORMALIZED_NOT_NEEDED"
+  },
+  "remaining_blockers": [
+    "Build the finite semisimple fusion interface.",
+    "Connect pairings, Kirby-colour expansion, and category-bound moves."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_egno_trace_cyclicity_step5_v1.py",
+  "schema": "twisted-yetter.egno-trace-cyclicity-step5.v1",
+  "started_at_utc": "2026-07-19T07:55:51Z",
+  "status": "PASS_STEP_5_PIVOTAL_TRACE_CYCLICITY_ESTABLISHED",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.6"
+  }
+}
