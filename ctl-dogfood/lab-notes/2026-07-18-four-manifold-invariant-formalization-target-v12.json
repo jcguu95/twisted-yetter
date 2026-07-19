@@ -1,0 +1,233 @@
+{
+  "artifacts": [
+    {
+      "artifact_commit": "d37b72f9ad9492cbe8c1b604228e8cc398ddf561",
+      "artifact_id": "four-manifold-invariant-target-v12",
+      "content_hash": "sha256:b7aed764b6f797cb61521054e0a45c8f7f7b5b8ceb4e1d497ca95989babd67a1",
+      "git_blob": "29db068af6a2866e20d77d30dc36a55842fa978a",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v12.json",
+      "sha256": "04d99344334e76a4e5b4071717f65abdba35a1eb1cd91760cb9d70bdc28634f9",
+      "status": "PASS_LAST_FIVE_TERMINALIZED_WITH_EXPLICIT_CONCRETE_INPUT_BLOCKERS"
+    },
+    {
+      "artifact_id": "lean-four-manifold-invariant-target",
+      "git_blob": "c25e2e36e9bba7109d399d7b8adfef784d111bdc",
+      "path": "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean",
+      "sha256": "66b081f2ac20f297a5393e2cc7c7ccaa2ddae0ac5781862f86fad16a80f2d196",
+      "status": "LEAN_CONDITIONAL_TARGET_WITH_MACHINE_VISIBLE_TWENTY_BY_SIXTEEN_BY_FOUR_LEDGER"
+    },
+    {
+      "artifact_id": "lean-source-bound-table-two-evaluator-compiler",
+      "git_blob": "6674e32455c28fefb37edd74847304070ce59089",
+      "path": "lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean",
+      "sha256": "ec65a75b79be410f311c8984f14873b058e2a20c956270f82a2507617466971e",
+      "status": "LEAN_FINAL_ASSEMBLER_KERNEL_CHECKED_NO_EVALUATOR_OR_MOVE_EQUALITY_INPUT"
+    },
+    {
+      "artifact_id": "lean-integral-character-kirby-colour-compiler",
+      "git_blob": "f04cf4ec0af519d2c9d0f2fae35274e8e23724d7",
+      "path": "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompiler.lean",
+      "sha256": "14ec9c3c43eca7d70faaf81e50f27d988248f112ab167a1715f466766bc383b7",
+      "status": "LEAN_INTEGRAL_CYCLE_REPRESENTATIVES_ESTABLISHED_NONTRIVIAL_CATEGORY_VALUE_OPEN"
+    },
+    {
+      "artifact_id": "lean-source-bound-graphical-move-compiler",
+      "git_blob": "489cab1544010181c7f37a853a43cb046ec0d12c",
+      "path": "lean/TwistedYetter/Kirby/SourceBoundGraphicalMoveCompiler.lean",
+      "sha256": "7092e7e246b3ebec83f27562c6811fb5124baf7121cac1a77f47eda630815fec",
+      "status": "LEAN_EIGHT_CASE_TYPED_FACTOR_COMPILER_ESTABLISHED_CONCRETE_RECIPE_REALIZATIONS_OPEN"
+    }
+  ],
+  "condition_ledger": {
+    "established": [
+      "category_and_graphical_algebra_mechanism",
+      "explicit_three_handle_normalization",
+      "closed_typed_presentation_execution",
+      "primitive_categorical_event_compiler_mechanism",
+      "chain_derived_marked_h2_transport",
+      "source_bound_geometric_h2_compiler_mechanism",
+      "source_backed_special_kirby_calculus_completeness",
+      "exhaustive_evaluator_compiler_mechanism",
+      "marked_pair_assembly_mechanism",
+      "source_bound_local_move_recipes",
+      "global_finite_componentwise_kirby_colour_expansion_mechanism",
+      "source_bound_geometric_h2_compiler_instance_relative_to_visible_domain_axiom",
+      "source_bound_graphical_move_compiler_mechanism",
+      "category_bound_kirby_colour_compiler_mechanism",
+      "integral_character_kirby_colour_compiler_mechanism",
+      "integral_cycle_representative_system_instance"
+    ],
+    "established_count": 16,
+    "open": [
+      {
+        "condition": "tensor_automorphism_generator_instance",
+        "required_result": "Supply one admitted category-specific monoidal natural automorphism, its exact invertible scalar action on every retained simple, and one witnessed scalar distinct from one.",
+        "silent_failure_guard": "The interface now requires an explicit nontrivial witness. The identity control and an arbitrary scalar table cannot satisfy this condition.",
+        "terminal_status": "TERMINAL_BLOCKED_MISSING_CONCRETE_CATEGORY_VALUE"
+      },
+      {
+        "condition": "global_finite_kirby_colour_expansion_instance",
+        "required_result": "Supply category-valued component resolution, exact dual pairings, and coupon morphisms for every admitted raw presentation event.",
+        "silent_failure_guard": "Whole event compilers are derived from source-bound local windows. Component IDs, ordered strand IDs, orientations, coupon identity, framing strand, and active planar order cannot be silently changed.",
+        "terminal_status": "TERMINAL_BLOCKED_MISSING_CATEGORY_VALUED_EVENT_SEMANTICS"
+      },
+      {
+        "condition": "source_bound_graphical_move_compiler_instance",
+        "required_result": "Supply typed categorical contexts for every source recipe's R7, R8, and R9 script, slide exterior, and cancellation factorization.",
+        "silent_failure_guard": "The eight-case compiler accepts no final move equality. Cancellation equality is derived from exact syntax-level factorization and closed-tensor multiplicativity.",
+        "terminal_status": "TERMINAL_BLOCKED_MISSING_TYPED_RECIPE_REALIZATIONS"
+      },
+      {
+        "condition": "source_bound_evaluator_compiler_instance",
+        "required_result": "Assemble a concrete source-bound evaluator compiler from the preceding category-bound presentation compiler and graphical move compiler values.",
+        "silent_failure_guard": "The final assembler accepts no evaluator function and no move equality; it remains blocked until the two transitive concrete inputs exist.",
+        "terminal_status": "TERMINAL_BLOCKED_TRANSITIVE_INPUTS"
+      }
+    ],
+    "open_count": 4,
+    "required_count": 20
+  },
+  "created_at": "2026-07-19T03:34:13Z",
+  "created_by": "actor:codex",
+  "domain_axiom_boundary": {
+    "axiom_count": 2,
+    "axioms": [
+      {
+        "caveat": "Attaching maps, boundary matrices, basis changes, contractible summand homotopies, and the geometric semantics of each H2 certificate are not reconstructed in Lean.",
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "final H2 identity",
+          "integral cycle representative"
+        ],
+        "name": "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+        "role": "For each certified local Kirby move, supply the actual handle-chain equivalence, shared recipe binding, coordinate-naturality square, and provenance hash."
+      },
+      {
+        "does_not_supply": [
+          "categorical evaluator equality",
+          "chain equivalence",
+          "H2 map",
+          "integral cycle representative"
+        ],
+        "name": "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected",
+        "role": "Connect any two certified special presentations of the same marked closed connected smooth oriented four-manifold by the exact topology move whitelist."
+      }
+    ]
+  },
+  "explicit_non_claims": [
+    "This note does not claim that a concrete four-manifold invariant has been established.",
+    "Terminalizing all five obligations does not mean that all five concrete mathematical instances were constructed.",
+    "No concrete nontrivial tensor automorphism generator has been supplied.",
+    "No concrete category-valued event interpreter has been supplied.",
+    "No concrete typed realization of every source-bound graphical recipe has been supplied.",
+    "No numerical category artifact has been promoted to a Lean category.",
+    "No category-neutral move tag has been promoted to a graphical proof.",
+    "The normalized integral cycle representative choice is not asserted additive.",
+    "Handle-chain naturality and special Kirby completeness remain two visible domain axioms.",
+    "Content hashes establish identity and freshness, not mathematical semantics.",
+    "This note does not identify the construction with Crane-Yetter or Yetter's state sum.",
+    "This note makes no exotic-detection or no-go theorem claim."
+  ],
+  "last_five_terminal_outcomes": [
+    {
+      "condition": "integral_cycle_representative_system_instance",
+      "non_claim": "The normalized representative choice is not asserted additive.",
+      "ordinal": 1,
+      "result": "Normalized representatives are selected from the actual Mathlib H2 quotient and use each presentation's mandatory two-handle component index.",
+      "status": "ESTABLISHED_KERNEL_CHECKED"
+    },
+    {
+      "condition": "tensor_automorphism_generator_instance",
+      "mechanism_status": "PASS_EXPLICIT_WITNESSED_NONTRIVIAL_INTERFACE",
+      "missing": "One admitted category-specific monoidal natural automorphism, its exact scalar action on every retained simple, and one scalar-not-one witness.",
+      "ordinal": 2,
+      "status": "TERMINAL_BLOCKED_MISSING_CONCRETE_CATEGORY_VALUE"
+    },
+    {
+      "condition": "global_finite_kirby_colour_expansion_instance",
+      "mechanism_status": "PASS_GLOBAL_FINITE_SUM_AND_SOURCE_BOUND_WINDOWS",
+      "missing": "Category-valued component resolution, exact dual pairings, and coupon morphisms for every admitted raw presentation event.",
+      "ordinal": 3,
+      "status": "TERMINAL_BLOCKED_MISSING_CATEGORY_VALUED_EVENT_SEMANTICS"
+    },
+    {
+      "condition": "source_bound_graphical_move_compiler_instance",
+      "mechanism_status": "PASS_EIGHT_CASE_COMPILER_WITH_TYPED_FACTOR_ONLY",
+      "missing": "Typed categorical contexts for each source recipe's R7, R8, and R9 script, slide exterior, and cancellation factorization.",
+      "ordinal": 4,
+      "status": "TERMINAL_BLOCKED_MISSING_TYPED_RECIPE_REALIZATIONS"
+    },
+    {
+      "condition": "source_bound_evaluator_compiler_instance",
+      "mechanism_status": "PASS_FINAL_ASSEMBLER_KERNEL_CHECKED",
+      "missing": "The category-bound presentation compiler and graphical move compiler values from outcomes three and four.",
+      "ordinal": 5,
+      "status": "TERMINAL_BLOCKED_TRANSITIVE_INPUTS"
+    }
+  ],
+  "mathematical_status": "FORMALIZATION_OBJECTIVE_TERMINALIZED_CONDITIONAL_TARGET_ESTABLISHED_CONCRETE_INVARIANT_NOT_ESTABLISHED",
+  "note_id": "objective-note-2026-07-18-four-manifold-invariant-formalization-target-v12",
+  "objective": {
+    "acceptance_rule": "A concrete invariant is established only after all twenty machine-visible target conditions are established. A terminal blocker is a complete and honest result for this implementation pass, but it does not count as an established mathematical instance.",
+    "goal": "Construct an integral-character-twisted Kirby value for a marked closed connected smooth oriented four-manifold and prove that any two certified special Kirby presentations representing the same marked pair have equal normalized values.",
+    "lean_input_type": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs",
+    "lean_target_theorem": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target",
+    "target_semantics": "The conditional theorem proves presentation independence once a concrete category-valued presentation compiler and source-bound graphical move compiler satisfying the visible obligations are supplied."
+  },
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "artifact_commit": "d37b72f9ad9492cbe8c1b604228e8cc398ddf561",
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit_at_clean_checkpoint": "d37b72f9ad9492cbe8c1b604228e8cc398ddf561",
+    "dirty_at_clean_checkpoint": false,
+    "source_implementation_commit": "68cf795204cccd1c2f5fcab5b41e57a1f75c6a26"
+  },
+  "status": "LAST_FIVE_TERMINALIZED_ONE_ESTABLISHED_FOUR_EXPLICITLY_BLOCKED",
+  "subjects": [
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580",
+    "subject:twisted-yetter:paper:tham-2108-13467",
+    "subject:twisted-yetter:paper:yetter-hepth-9311082"
+  ],
+  "terminal_blocker_boundary": {
+    "blockers_can_be_closed_by_hash_only": false,
+    "blockers_can_be_closed_by_numerical_artifacts_only": false,
+    "category_neutral_recipes_include_typed_category_morphisms": false,
+    "repo_has_category_neutral_source_recipes": true,
+    "repo_has_concrete_lean_mtc_fixture": false,
+    "required_evidence_to_resume": [
+      "A Lean category model or separately admitted categorical domain package with tensor automorphism and exact pairings.",
+      "A category-valued interpretation of every retained coupon and event window.",
+      "A typed realization of every source-bound graphical recipe."
+    ]
+  },
+  "title": "Lean target for an integral-character Kirby four-manifold invariant, revision 12",
+  "top_notice": "This is a formalization objective and terminal obligation ledger, not a theorem claim about a concrete invariant. Sixteen of twenty target conditions are established. Of the final five requested obligations, the integral cycle representative system is kernel-checked; the other four have completed fail-closed mechanisms but remain explicitly blocked on concrete category-valued data.",
+  "verification": {
+    "artifact_content_hash": "sha256:b7aed764b6f797cb61521054e0a45c8f7f7b5b8ceb4e1d497ca95989babd67a1",
+    "artifact_file_sha256": "04d99344334e76a4e5b4071717f65abdba35a1eb1cd91760cb9d70bdc28634f9",
+    "artifact_tests_v11_and_v12": "PASS_13_OF_13",
+    "canonical_ctl_current_root_replay_before_admission": {
+      "root_cid": "ctlobj-sha256:14bfe264ed6766a0c94d5f162fa00947f37732560fc530d3ddc9eea20e32f9bf",
+      "status": "PASS"
+    },
+    "domain_axioms_exact": 2,
+    "full_umbrella_build": "PASS_LEAN_NUM_THREADS_1",
+    "legacy_monolithic_ctl_verifier": {
+      "current_provider_observation": "With ctl-meta at e8fef2b4f2fd36428f3055946d96ccb810edd805, verification stops at the older admitted provider pin.",
+      "pinned_provider_observation": "With ctl-meta at the admitted pin 337ae56ed5b9afbf08b2d2109afb66c25041a665, verification proceeds farther and stops at the pre-existing undisambiguated subject alias yasui.",
+      "scope": "This discrepancy predates this revision and is separate from canonical current-root chain replay, which passes.",
+      "status": "PREEXISTING_BLOCKED_PROVIDER_POLICY_AND_SUBJECT_ALIAS_COLLISION"
+    },
+    "mechanism_custom_domain_axiom_count": 0,
+    "mutation_counts": {
+      "categorical_event_compiler": 9,
+      "four_manifold_target": 5,
+      "integral_character_compiler": 7,
+      "source_bound_graphical_compiler": 5,
+      "total": 26
+    },
+    "proof_oracle_count": 0,
+    "ruff": "NOT_RUN_TOOL_UNAVAILABLE_IN_REPO_ENVIRONMENT"
+  }
+}
