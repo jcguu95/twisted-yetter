@@ -48,6 +48,22 @@ variable [∀ y z, Fintype (I y z)]
 variable [∀ y z, DecidableEq (I y z)]
 
 /--
+Disjoint union of two closed diagrams, with the unitors retained explicitly.
+-/
+def closedTensorDiagram
+    (left right : Diagram C .unit .unit) :
+    Diagram C .unit .unit :=
+  (Diagram.coupon
+      (source := .unit)
+      (target := .tensor .unit .unit)
+      "closed-tensor-left-unitor-inv" (λ_ (𝟙_ C)).inv) ≫ᵈ
+    (left ⊗ᵈ right) ≫ᵈ
+    Diagram.coupon
+      (source := .tensor .unit .unit)
+      (target := .unit)
+      "closed-tensor-left-unitor-hom" (λ_ (𝟙_ C)).hom
+
+/--
 All category-level data used by the R11 Kirby route.
 
 The two proof-relevant coherence fields prevent a dimension profile,
@@ -63,8 +79,26 @@ structure AdmissibleKirbyCategory where
   slidingData :
     SlidingCategoryData (R := K) (D := C) (S := S) (I := I)
   closedScalar : (𝟙_ C ⟶ 𝟙_ C) → K
-  scalarizationMatchesGroundField : Prop
-  scalarization_witness : scalarizationMatchesGroundField
+  closed_scalar_identity :
+    closedScalar (𝟙 (𝟙_ C)) = 1
+  closed_scalar_add :
+    (left right : 𝟙_ C ⟶ 𝟙_ C) →
+      closedScalar (left + right) =
+        closedScalar left + closedScalar right
+  closed_scalar_smul :
+    (scalar : K) →
+    (morphism : 𝟙_ C ⟶ 𝟙_ C) →
+      closedScalar (scalar • morphism) =
+        scalar * closedScalar morphism
+  closed_scalar_comp :
+    (left right : 𝟙_ C ⟶ 𝟙_ C) →
+      closedScalar (left ≫ right) =
+        closedScalar left * closedScalar right
+  closed_tensor_multiplicative :
+    (left right : Diagram C .unit .unit) →
+      closedScalar (Diagram.eval C (closedTensorDiagram left right)) =
+        closedScalar (Diagram.eval C left) *
+          closedScalar (Diagram.eval C right)
   singleSnapshotCoherent : Prop
   single_snapshot_witness : singleSnapshotCoherent
   coherenceCertificateHash : String

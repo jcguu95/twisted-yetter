@@ -13,6 +13,7 @@ mutations=(
   "lean/Mutations/PreassembledGeneratedIsotopyAsInterpretedProgram.lean"
   "lean/Mutations/DirectFinalCaseInsideSourceBoundTableTwoCompiler.lean"
   "lean/Mutations/FinalNormalizedEqualityInsideOneTwoFactorization.lean"
+  "lean/Mutations/HandwrittenRawFactorInsideOneTwoFactorization.lean"
 )
 
 diagnostics=(
@@ -20,6 +21,7 @@ diagnostics=(
   'InterpretedFramedIsotopyProgram.fromGeneratedIsotopy'
   '`framedIsotopy` is not a field of structure `SourceBoundTableTwoEvaluatorCompiler`'
   '`normalizedEquality` is not a field of structure `OneTwoFactorizationProgram`'
+  '`disjoint_union_sound` is not a field of structure `OneTwoFactorizationProgram`'
 )
 
 for index in "${!mutations[@]}"; do

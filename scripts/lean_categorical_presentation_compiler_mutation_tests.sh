@@ -13,6 +13,9 @@ mutations=(
   "lean/Mutations/EventwiseLabelingInFiniteCompiler.lean"
   "lean/Mutations/ArbitraryWholeDiagramInFiniteCompiler.lean"
   "lean/Mutations/HandwrittenWholeLinkWeight.lean"
+  "lean/Mutations/WrongRecordedDualInBirthPrimitive.lean"
+  "lean/Mutations/UnboundFramingStrandInWindow.lean"
+  "lean/Mutations/RenamedCouponInBoundWindow.lean"
 )
 
 diagnostics=(
@@ -22,6 +25,9 @@ diagnostics=(
   'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.FiniteLabelPresentationCompiler.eventLabeling`'
   'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.FiniteLabelPresentationCompiler.diagram`'
   'Unknown constant `TwistedYetter.Kirby.CategoricalPresentationCompiler.ComponentLabelExpansion.wholeLinkWeight`'
+  "Type mismatch"
+  'Fields missing: `strand_id_sound`'
+  "Type mismatch"
 )
 
 for index in "${!mutations[@]}"; do

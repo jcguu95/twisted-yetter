@@ -10,6 +10,7 @@ four-manifold-invariance axiom.
 
 #print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.CancellationInput.one_two_pair_factor
 #print axioms TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.CancellationInput.two_three_unknot_factor
+#print axioms TwistedYetter.Kirby.HomologicallyTwistedInvariant.closedTensorDiagram
 #print axioms TwistedYetter.Kirby.SourceBoundGraphicalMoveCompilation.InterpretedFramedIsotopyStep.toGeneratedIsotopy
 #print axioms TwistedYetter.Kirby.SourceBoundGraphicalMoveCompilation.InterpretedFramedIsotopyProgram.toGeneratedIsotopy
 #print axioms TwistedYetter.Kirby.SourceBoundGraphicalMoveCompilation.OneTwoFactorizationProgram.toCalculation

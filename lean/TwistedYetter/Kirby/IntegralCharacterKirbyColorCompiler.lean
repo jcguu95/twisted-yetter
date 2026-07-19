@@ -537,7 +537,7 @@ structure IntegralCharacterBoundPresentationCompiler
     (H2 : Type uH) [AddCommGroup H2]
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData) where
   selectedGenerator : NontrivialTensorAutomorphismGenerator categoryData
-  eventCompiler :
+  resolver :
     (topology : SpecialKirbyPresentation manifold H2) →
     (alpha : H2) →
     (labeling :
@@ -546,21 +546,24 @@ structure IntegralCharacterBoundPresentationCompiler
           (IntegralCycleRepresentativeSystem.canonical manifold H2)
           selectedGenerator.generator).toComponentExpansion
           topology) →
-      CategoricalEventCompiler C topology.formal.raw
-  eventCompilerBinding :
-    (topology : SpecialKirbyPresentation manifold H2) →
-    (alpha : H2) →
-    (labeling :
-      ComponentLabelExpansion.GlobalLabeling
-        (integralCharacterWeights
-          (IntegralCycleRepresentativeSystem.canonical manifold H2)
-          selectedGenerator.generator).toComponentExpansion
-          topology) →
-      EventCompilerBinding
+      LabelledComponentResolver
         (integralCharacterWeights
           (IntegralCycleRepresentativeSystem.canonical manifold H2)
           selectedGenerator.generator)
-        topology labeling algebra (eventCompiler topology alpha labeling)
+        topology labeling
+  eventSemantics :
+    (topology : SpecialKirbyPresentation manifold H2) →
+    (alpha : H2) →
+    (labeling :
+      ComponentLabelExpansion.GlobalLabeling
+        (integralCharacterWeights
+          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          selectedGenerator.generator).toComponentExpansion
+          topology) →
+      WindowedCategoricalEventSemantics
+        topology.formal.raw
+        (strandObject (resolver topology alpha labeling))
+        algebra.framedKink.twist
   diagramCertificateHash :
     SpecialKirbyPresentation manifold H2 → String
   diagram_certificate_hash_shape :
@@ -596,8 +599,8 @@ noncomputable def toCategoryBound
     integralCharacterWeights
       (IntegralCycleRepresentativeSystem.canonical manifold H2)
       compiler.selectedGenerator.generator
-  eventCompiler := compiler.eventCompiler
-  eventCompilerBinding := compiler.eventCompilerBinding
+  resolver := compiler.resolver
+  eventSemantics := compiler.eventSemantics
   diagramCertificateHash := compiler.diagramCertificateHash
   diagram_certificate_hash_shape :=
     compiler.diagram_certificate_hash_shape

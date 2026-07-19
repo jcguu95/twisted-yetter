@@ -13,6 +13,7 @@ mutations=(
   "lean/Mutations/OverrideTrivialGeneratorScalar.lean"
   "lean/Mutations/ArbitraryCycleSystemAsCanonicalCompiler.lean"
   "lean/Mutations/TrivialGeneratorAsNontrivial.lean"
+  "lean/Mutations/ArbitraryWholeCompilerInIntegralRoute.lean"
 )
 
 diagnostics=(
@@ -22,6 +23,7 @@ diagnostics=(
   "Type mismatch"
   '`cycleSystem` is not a field'
   'Fields missing: `witness_nontrivial`'
+  '`eventCompiler` is not a field'
 )
 
 for index in "${!mutations[@]}"; do

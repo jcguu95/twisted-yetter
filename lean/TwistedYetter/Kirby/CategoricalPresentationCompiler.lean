@@ -45,6 +45,17 @@ variable {I : S → S → Type uI}
 variable [∀ y z, Fintype (I y z)]
 variable [∀ y z, DecidableEq (I y z)]
 
+/-- Deterministic right-associated boundary word with no redundant unit. -/
+def boundaryWord
+    {A : Type*}
+    (objectOf : A → C) :
+    List A → Boundary C
+  | [] => .unit
+  | value :: [] => .atom (objectOf value)
+  | value :: next :: rest =>
+      .tensor (.atom (objectOf value))
+        (boundaryWord objectOf (next :: rest))
+
 /-- Machine-visible denominator of serialized event compiler cases. -/
 inductive EventCompilerCase where
   | birth
@@ -108,18 +119,26 @@ inductive PrimitiveEventDiagram
     [BraidedCategory C] :
     PrimitiveEventKind → Boundary C → Boundary C →
       Type (max uC vC)
-  | birthRight (object : C) [HasRightDual object] :
+  | birthRight
+      (object dual : C)
+      (pairing : ExactPairing object dual) :
       PrimitiveEventDiagram C .birth .unit
-        (.tensor (.atom object) (.atom objectᘁ))
-  | birthLeft (object : C) [HasLeftDual object] :
+        (.tensor (.atom object) (.atom dual))
+  | birthLeft
+      (object dual : C)
+      (pairing : ExactPairing dual object) :
       PrimitiveEventDiagram C .birth .unit
-        (.tensor (.atom (ᘁobject)) (.atom object))
-  | deathRight (object : C) [HasRightDual object] :
+        (.tensor (.atom dual) (.atom object))
+  | deathRight
+      (object dual : C)
+      (pairing : ExactPairing object dual) :
       PrimitiveEventDiagram C .death
-        (.tensor (.atom objectᘁ) (.atom object)) .unit
-  | deathLeft (object : C) [HasLeftDual object] :
+        (.tensor (.atom dual) (.atom object)) .unit
+  | deathLeft
+      (object dual : C)
+      (pairing : ExactPairing dual object) :
       PrimitiveEventDiagram C .death
-        (.tensor (.atom object) (.atom (ᘁobject))) .unit
+        (.tensor (.atom object) (.atom dual)) .unit
   | crossingPositive (left right : Boundary C) :
       PrimitiveEventDiagram C .crossingPositive
         (.tensor left right) (.tensor right left)
@@ -128,7 +147,7 @@ inductive PrimitiveEventDiagram
         (.tensor left right) (.tensor right left)
   | coupon
       {source target : Boundary C}
-      (name : String)
+      (couponId label : String)
       (morphism : source.denote ⟶ target.denote) :
       PrimitiveEventDiagram C .coupon source target
   | twistPositive (twist : NaturalTwist C) (object : C) :
@@ -149,20 +168,20 @@ def diagram
     (primitive : PrimitiveEventDiagram C kind source target) :
     Diagram C source target := by
   cases primitive with
-  | birthRight object =>
-      exact Diagram.cup object
-  | birthLeft object =>
-      exact Diagram.leftCup object
-  | deathRight object =>
-      exact Diagram.cap object
-  | deathLeft object =>
-      exact Diagram.leftCap object
+  | birthRight object dual pairing =>
+      exact Diagram.exactCup object dual pairing
+  | birthLeft object dual pairing =>
+      exact Diagram.exactCup dual object pairing
+  | deathRight object dual pairing =>
+      exact Diagram.exactCap object dual pairing
+  | deathLeft object dual pairing =>
+      exact Diagram.exactCap dual object pairing
   | crossingPositive left right =>
       exact Diagram.crossing left right
   | crossingNegative left right =>
       exact Diagram.crossingInv left right
-  | coupon name morphism =>
-      exact Diagram.coupon name morphism
+  | coupon couponId label morphism =>
+      exact Diagram.coupon (couponId ++ ":" ++ label) morphism
   | twistPositive twist object =>
       exact atomicCoupon
         "positive-framing-twist" (twist.iso.hom.app object)
@@ -171,6 +190,26 @@ def diagram
         "negative-framing-twist" (twist.iso.inv.app object)
   | planarIdentity =>
       exact Diagram.identity _
+
+/-- Retain the serialized coupon identity in the primitive syntax. -/
+def couponId?
+    {kind : PrimitiveEventKind}
+    {source target : Boundary C}
+    (primitive : PrimitiveEventDiagram C kind source target) :
+    Option String :=
+  match primitive with
+  | .coupon couponId _ _ => some couponId
+  | _ => none
+
+/-- Retain the serialized coupon label in the primitive syntax. -/
+def couponLabel?
+    {kind : PrimitiveEventKind}
+    {source target : Boundary C}
+    (primitive : PrimitiveEventDiagram C kind source target) :
+    Option String :=
+  match primitive with
+  | .coupon _ label _ => some label
+  | _ => none
 
 end PrimitiveEventDiagram
 
@@ -245,6 +284,64 @@ def diagram
   | .comp first second =>
       first.diagram ≫ᵈ second.diagram
 
+/--
+Expose one list concatenation as an explicit tensor product.
+
+The recursion emits only associators and unitors. It is the shared structural
+adapter used by every event window; individual fixtures cannot choose a
+different parenthesization convention.
+-/
+def splitBoundaryWord
+    {A : Type*}
+    (objectOf : A → C) :
+    (left right : List A) →
+      StructuralDiagram C
+        (boundaryWord objectOf (left ++ right))
+        (.tensor
+          (boundaryWord objectOf left)
+          (boundaryWord objectOf right))
+  | [], right =>
+      .leftUnitorInv (boundaryWord objectOf right)
+  | [value], [] =>
+      .rightUnitorInv (.atom (objectOf value))
+  | [_value], _ :: _ =>
+      .identity _
+  | value :: next :: rest, right =>
+      .comp
+        (.tensor
+          (.identity (.atom (objectOf value)))
+          (splitBoundaryWord objectOf (next :: rest) right))
+        (.associatorInv
+          (.atom (objectOf value))
+          (boundaryWord objectOf (next :: rest))
+          (boundaryWord objectOf right))
+
+/-- Reassemble the tensor product exposed by `splitBoundaryWord`. -/
+def joinBoundaryWord
+    {A : Type*}
+    (objectOf : A → C) :
+    (left right : List A) →
+      StructuralDiagram C
+        (.tensor
+          (boundaryWord objectOf left)
+          (boundaryWord objectOf right))
+        (boundaryWord objectOf (left ++ right))
+  | [], right =>
+      .leftUnitorHom (boundaryWord objectOf right)
+  | [value], [] =>
+      .rightUnitorHom (.atom (objectOf value))
+  | [_value], _ :: _ =>
+      .identity _
+  | value :: next :: rest, right =>
+      .comp
+        (.associatorHom
+          (.atom (objectOf value))
+          (boundaryWord objectOf (next :: rest))
+          (boundaryWord objectOf right))
+        (.tensor
+          (.identity (.atom (objectOf value)))
+          (joinBoundaryWord objectOf (next :: rest) right))
+
 end StructuralDiagram
 
 /--
@@ -310,6 +407,50 @@ def plug
       Diagram.identity left ⊗ᵈ piece
   | .compose inner outer =>
       outer.plug (inner.plug piece)
+
+/--
+Place one local list window inside exact prefix and suffix tensor words.
+
+All surrounding morphisms are generated by `splitBoundaryWord`,
+`joinBoundaryWord`, identities, associators, and unitors. No caller-supplied
+coupon or crossing can enter the exterior through this constructor.
+-/
+def surroundBoundaryWord
+    {A : Type*}
+    (objectOf : A → C)
+    (leading localSource localTarget suffix : List A) :
+    StructuralContext C
+      (boundaryWord objectOf localSource)
+      (boundaryWord objectOf localTarget)
+      (boundaryWord objectOf (leading ++ (localSource ++ suffix)))
+      (boundaryWord objectOf (leading ++ (localTarget ++ suffix))) := by
+  let suffixContext :
+      StructuralContext C
+        (boundaryWord objectOf localSource)
+        (boundaryWord objectOf localTarget)
+        (boundaryWord objectOf (localSource ++ suffix))
+        (boundaryWord objectOf (localTarget ++ suffix)) :=
+    .compose
+      (.compose
+        (.tensorLeft (boundaryWord objectOf suffix))
+        (.compLeft
+          (StructuralDiagram.splitBoundaryWord
+            objectOf localSource suffix)))
+      (.compRight
+        (StructuralDiagram.joinBoundaryWord
+          objectOf localTarget suffix))
+  exact
+    .compose
+      (.compose
+        suffixContext
+        (.tensorRight (boundaryWord objectOf leading)))
+      (.compose
+        (.compLeft
+          (StructuralDiagram.splitBoundaryWord objectOf leading
+            (localSource ++ suffix)))
+        (.compRight
+          (StructuralDiagram.joinBoundaryWord objectOf leading
+            (localTarget ++ suffix))))
 
 end StructuralContext
 
@@ -528,6 +669,384 @@ def compileClosed
   exact compiler.compileTrace execution.trace
 
 end CategoricalEventCompiler
+
+/--
+One local primitive together with an exact list window.
+
+This is the narrow semantic input accepted by the final event route. The
+caller chooses the actual coupon morphism or recorded dual pairing inside the
+primitive, but cannot choose the surrounding categorical diagram. Prefix,
+suffix, and parenthesization are compiled by `surroundBoundaryWord`.
+-/
+structure WindowedCategoricalEvent
+    (objectOf : StrandState → C)
+    (kind : PrimitiveEventKind)
+    (before after : List StrandState) where
+  leading : List StrandState
+  localSource : List StrandState
+  localTarget : List StrandState
+  suffix : List StrandState
+  before_sound :
+    before = leading ++ (localSource ++ suffix)
+  after_sound :
+    after = leading ++ (localTarget ++ suffix)
+  primitive :
+    PrimitiveEventDiagram C kind
+      (boundaryWord objectOf localSource)
+      (boundaryWord objectOf localTarget)
+
+namespace WindowedCategoricalEvent
+
+/-- Compile a retained local window into the unique coherence-only exterior. -/
+def toCompiled
+    {objectOf : StrandState → C}
+    {kind : PrimitiveEventKind}
+    {before after : List StrandState}
+    (event : WindowedCategoricalEvent objectOf kind before after) :
+    CompiledCategoricalEvent C kind
+      (boundaryWord objectOf before)
+      (boundaryWord objectOf after) := by
+  let compiled :
+      CompiledCategoricalEvent C kind
+        (boundaryWord objectOf
+          (event.leading ++ (event.localSource ++ event.suffix)))
+        (boundaryWord objectOf
+          (event.leading ++ (event.localTarget ++ event.suffix))) := {
+    localSource := boundaryWord objectOf event.localSource
+    localTarget := boundaryWord objectOf event.localTarget
+    primitive := event.primitive
+    context :=
+      StructuralContext.surroundBoundaryWord objectOf
+        event.leading event.localSource event.localTarget event.suffix
+  }
+  simpa only [event.before_sound, event.after_sound] using compiled
+
+end WindowedCategoricalEvent
+
+/--
+A birth window bound to the exact serialized component and strand records.
+
+The four equalities prevent a valid cup on two unrelated but
+category-isomorphic strands from being substituted for the requested birth.
+-/
+structure BoundBirthEvent
+    (objectOf : StrandState → C)
+    (componentId positiveStrand negativeStrand : String)
+    (before after : List StrandState) where
+  window :
+    WindowedCategoricalEvent objectOf .birth before after
+  local_source_empty :
+    window.localSource = []
+  local_target_ids_sound :
+    window.localTarget.map (fun strand => strand.strandId) =
+      [positiveStrand, negativeStrand]
+  local_target_components_sound :
+    window.localTarget.map (fun strand => strand.componentId) =
+      [componentId, componentId]
+  local_target_orientations_sound :
+    window.localTarget.map (fun strand => strand.orientation) =
+      [.positive, .negative]
+
+/--
+A death window bound to the exact serialized component and two strand IDs.
+
+The local source order is retained by the window because it selects the
+right- or left-dual cap. The serialized pair may be listed in either order,
+so the ID check uses the same finite-set predicate as the validator.
+-/
+structure BoundDeathEvent
+    (objectOf : StrandState → C)
+    (componentId firstStrand secondStrand : String)
+    (before after : List StrandState) where
+  window :
+    WindowedCategoricalEvent objectOf .death before after
+  local_target_empty :
+    window.localTarget = []
+  local_source_ids_sound :
+    RawPresentation.sameStringSet
+        (window.localSource.map (fun strand => strand.strandId))
+        [firstStrand, secondStrand] =
+      true
+  local_source_components_sound :
+    window.localSource.map (fun strand => strand.componentId) =
+      [componentId, componentId]
+
+/--
+A crossing window bound to the exact ordered over/under pair.
+
+The raw validator accepts only adjacent strands but does not record a
+category morphism. This wrapper fixes the convention used by the categorical
+compiler: the over strand is the left tensor factor before the crossing.
+Presentations using the opposite serialization convention must first pass an
+explicit convention adapter.
+-/
+structure BoundCrossingEvent
+    (objectOf : StrandState → C)
+    (kind : PrimitiveEventKind)
+    (overStrand underStrand : String)
+    (before after : List StrandState) where
+  window :
+    WindowedCategoricalEvent objectOf kind before after
+  left : StrandState
+  right : StrandState
+  local_source_sound :
+    window.localSource = [left, right]
+  local_target_sound :
+    window.localTarget = [right, left]
+  ordered_ids_sound :
+    [left.strandId, right.strandId] =
+      [overStrand, underStrand]
+
+/--
+A coupon window bound to its exact ordered strand list, coupon ID, and label.
+
+The morphism remains genuine category input. Its source and target, however,
+must be the requested contiguous boundary window, and its serialized identity
+cannot be silently renamed.
+-/
+structure BoundCouponEvent
+    (objectOf : StrandState → C)
+    (couponId label : String)
+    (strands : List String)
+    (before after : List StrandState) where
+  window :
+    WindowedCategoricalEvent objectOf .coupon before after
+  localWindow : List StrandState
+  local_source_sound :
+    window.localSource = localWindow
+  local_target_sound :
+    window.localTarget = localWindow
+  ordered_ids_sound :
+    localWindow.map (fun strand => strand.strandId) = strands
+  coupon_id_sound :
+    window.primitive.couponId? = some couponId
+  coupon_label_sound :
+    window.primitive.couponLabel? = some label
+
+/--
+One framing event localized to exactly one retained strand.
+
+The primitive is not an input: `toCompiled` always uses the single twist
+stored by the surrounding compiler.
+-/
+structure WindowedFramingTwistEvent
+    (objectOf : StrandState → C)
+    (strandId : String)
+    (before after : List StrandState) where
+  leading : List StrandState
+  strand : StrandState
+  suffix : List StrandState
+  strand_id_sound :
+    strand.strandId = strandId
+  before_sound :
+    before = leading ++ ([strand] ++ suffix)
+  after_sound :
+    after = leading ++ ([strand] ++ suffix)
+
+namespace WindowedFramingTwistEvent
+
+/-- Compile the one-strand window using exactly the retained framing twist. -/
+def toCompiled
+    {objectOf : StrandState → C}
+    {strandId : String}
+    {before after : List StrandState}
+    (event :
+      WindowedFramingTwistEvent objectOf strandId before after)
+    (twist : NaturalTwist C)
+    (sign : Presentation.CrossingSign) :
+    CompiledFramingTwistEvent C twist sign
+      (boundaryWord objectOf before)
+      (boundaryWord objectOf after) := by
+  let compiled :
+      CompiledFramingTwistEvent C twist sign
+        (boundaryWord objectOf
+          (event.leading ++ ([event.strand] ++ event.suffix)))
+        (boundaryWord objectOf
+          (event.leading ++ ([event.strand] ++ event.suffix))) := {
+    object := objectOf event.strand
+    context :=
+      StructuralContext.surroundBoundaryWord objectOf
+        event.leading [event.strand] [event.strand] event.suffix
+  }
+  simpa only [event.before_sound, event.after_sound] using compiled
+
+end WindowedFramingTwistEvent
+
+/--
+A planar-isotopy marker bound to the complete declared active order.
+
+The current serialized event is an identity marker, not a free boundary
+permutation. Consequently the categorical primitive must cover the complete
+boundary and remain the identity there.
+-/
+structure BoundPlanarIsotopyEvent
+    (objectOf : StrandState → C)
+    (activeOrder : List String)
+    (before after : List StrandState) where
+  window :
+    WindowedCategoricalEvent objectOf .planarIdentity before after
+  local_source_sound :
+    window.localSource = before
+  local_target_sound :
+    window.localTarget = after
+  active_order_sound :
+    before.map (fun strand => strand.strandId) = activeOrder
+
+/--
+The complete local semantic denominator for one serialized presentation.
+
+Every field returns a single primitive in an exact list window. This is
+strictly narrower than `CategoricalEventCompiler`: no field may return a
+whole diagram or an arbitrary categorical exterior.
+-/
+structure WindowedCategoricalEventSemantics
+    (raw : RawPresentation)
+    (objectOf : StrandState → C)
+    (framingTwistData : NaturalTwist C) where
+  birth :
+    (eventId componentId positiveStrand negativeStrand : String) →
+    (insertAt : Nat) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.birth eventId componentId positiveStrand negativeStrand insertAt) =
+        Except.ok after) →
+      BoundBirthEvent objectOf componentId
+        positiveStrand negativeStrand before after
+  death :
+    (eventId componentId firstStrand secondStrand : String) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.death eventId componentId firstStrand secondStrand) =
+        Except.ok after) →
+      BoundDeathEvent objectOf componentId
+        firstStrand secondStrand before after
+  crossing :
+    (eventId overStrand underStrand : String) →
+    (sign : Presentation.CrossingSign) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.crossing eventId overStrand underStrand sign) =
+        Except.ok after) →
+      BoundCrossingEvent objectOf
+        (crossingPrimitiveKind sign)
+        overStrand underStrand before after
+  coupon :
+    (eventId couponId label : String) →
+    (strands : List String) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.coupon eventId couponId label strands) =
+        Except.ok after) →
+      BoundCouponEvent objectOf couponId label strands before after
+  framingTwist :
+    (eventId strandId : String) →
+    (sign : Presentation.CrossingSign) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.framingTwist eventId strandId sign) =
+        Except.ok after) →
+      WindowedFramingTwistEvent objectOf strandId before after
+  planarIsotopy :
+    (eventId : String) →
+    (activeOrder : List String) →
+    {before after : List StrandState} →
+    (step_sound :
+      raw.applyEvent before
+          (.planarIsotopy eventId activeOrder) =
+        Except.ok after) →
+      BoundPlanarIsotopyEvent objectOf activeOrder before after
+  semanticsSchema : String
+  semanticsSnapshotHash : String
+  semantics_snapshot_hash_shape :
+    RawPresentation.sha256Shape semanticsSnapshotHash = true
+  sourceRefs : List String
+  exactScope : String
+  sourceScopeCaveat : String
+
+namespace WindowedCategoricalEventSemantics
+
+/--
+Derive the old six-case compiler by exhaustive dispatch.
+
+The boundary, framing twist, local contexts, and whole event diagrams are all
+definitions; none remains a caller field.
+-/
+def toCategoricalEventCompiler
+    {raw : RawPresentation}
+    {objectOf : StrandState → C}
+    {framingTwistData : NaturalTwist C}
+    (semantics :
+      WindowedCategoricalEventSemantics
+        (C := C) raw objectOf framingTwistData) :
+    CategoricalEventCompiler C raw where
+  framingTwistData := framingTwistData
+  boundary := boundaryWord objectOf
+  empty_boundary_sound := rfl
+  birth := fun eventId componentId positiveStrand negativeStrand
+      insertAt before after step_sound =>
+    (semantics.birth eventId componentId positiveStrand negativeStrand
+      insertAt (before := before) (after := after) step_sound)
+      |>.window.toCompiled
+  death := fun eventId componentId firstStrand secondStrand
+      before after step_sound =>
+    (semantics.death eventId componentId firstStrand secondStrand
+      (before := before) (after := after) step_sound)
+      |>.window.toCompiled
+  crossing := fun eventId overStrand underStrand sign
+      before after step_sound =>
+    (semantics.crossing eventId overStrand underStrand sign
+      (before := before) (after := after) step_sound)
+      |>.window.toCompiled
+  coupon := fun eventId couponId label strands before after step_sound =>
+    (semantics.coupon eventId couponId label strands
+      (before := before) (after := after) step_sound)
+      |>.window.toCompiled
+  framingTwist := fun eventId strandId sign before after step_sound =>
+    (semantics.framingTwist eventId strandId sign
+      (before := before) (after := after) step_sound).toCompiled
+      framingTwistData sign
+  planarIsotopy := fun eventId activeOrder before after step_sound =>
+    (semantics.planarIsotopy eventId activeOrder
+      (before := before) (after := after) step_sound)
+      |>.window.toCompiled
+  compilerSchema :=
+    "twisted-yetter.windowed-categorical-event-compiler.v1"
+  compilerSnapshotHash := semantics.semanticsSnapshotHash
+  compiler_snapshot_hash_shape := semantics.semantics_snapshot_hash_shape
+  sourceRefs := semantics.sourceRefs
+  exactScope := semantics.exactScope
+  sourceScopeCaveat := semantics.sourceScopeCaveat
+
+omit [Preadditive C] [MonoidalPreadditive C] in
+theorem derived_boundary_is_boundaryWord
+    {raw : RawPresentation}
+    {objectOf : StrandState → C}
+    {framingTwistData : NaturalTwist C}
+    (semantics :
+      WindowedCategoricalEventSemantics
+        (C := C) raw objectOf framingTwistData) :
+    semantics.toCategoricalEventCompiler.boundary =
+      boundaryWord objectOf := by
+  rfl
+
+omit [Preadditive C] [MonoidalPreadditive C] in
+theorem derived_twist_is_retained_twist
+    {raw : RawPresentation}
+    {objectOf : StrandState → C}
+    {framingTwistData : NaturalTwist C}
+    (semantics :
+      WindowedCategoricalEventSemantics
+        (C := C) raw objectOf framingTwistData) :
+    semantics.toCategoricalEventCompiler.framingTwistData =
+      framingTwistData := by
+  rfl
+
+end WindowedCategoricalEventSemantics
 
 /--
 A source-bound presentation compiler for one manifold and shared `H2` model.

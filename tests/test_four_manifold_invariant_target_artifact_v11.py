@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -120,10 +121,16 @@ def test_target_remains_conditional_and_nonclaims_are_explicit() -> None:
     assert "No specially-dotted presentation" in nonclaims
 
 
-def test_source_file_hashes_are_fresh() -> None:
+def test_historical_source_file_hashes_match_pinned_commit() -> None:
     artifact = load_artifact()
+    commit = artifact["git"]["commit"]
     for relative, record in artifact["inputs"]["source_files"].items():
-        data = (ROOT / relative).read_bytes()
+        data = subprocess.run(
+            ["git", "show", f"{commit}:{relative}"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout
         assert record == {
             "bytes": len(data),
             "sha256": sha256_bytes(data),

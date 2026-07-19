@@ -111,8 +111,6 @@ noncomputable def toComponentExpansion
   exactComponentScope := weights.exactScope
   sourceScopeCaveat := weights.sourceScopeCaveat
 
-omit [BraidedCategory C] [RightRigidCategory C]
-  [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
 /-- No private or unrelated finite label type may enter this expansion. -/
 theorem label_fiber_is_simple_index
     {categoryData :
@@ -126,8 +124,6 @@ theorem label_fiber_is_simple_index
     (weights.toComponentExpansion.Label component) = S := by
   rfl
 
-omit [BraidedCategory C] [RightRigidCategory C]
-  [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
 /-- The retained component coefficient is exactly the source-backed weight. -/
 theorem component_weight_eq
     {categoryData :
@@ -146,8 +142,6 @@ theorem component_weight_eq
       weights.coefficient topology alpha component simple := by
   rfl
 
-omit [BraidedCategory C] [RightRigidCategory C]
-  [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
 /-- At `alpha = 0`, every component is the ordinary Kirby colour. -/
 theorem zero_component_weight_eq_category_weight
     {categoryData :
@@ -230,12 +224,8 @@ def labelledBoundary
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology}
     (resolver : LabelledComponentResolver weights topology labeling) :
-    List StrandState → Boundary C
-  | [] => .unit
-  | strand :: [] => .atom (strandObject resolver strand)
-  | strand :: next :: rest =>
-      .tensor (.atom (strandObject resolver strand))
-        (labelledBoundary resolver (next :: rest))
+    List StrandState → Boundary C :=
+  boundaryWord (strandObject resolver)
 
 /--
 Semantic binding for one concrete event compiler.
@@ -279,21 +269,23 @@ structure CategoryBoundPresentationCompiler
     (H2 : Type uH) [AddCommGroup H2]
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData) where
   weights : HomologicalKirbyColorWeights categoryData manifold H2
-  eventCompiler :
+  resolver :
     (topology : SpecialKirbyPresentation manifold H2) →
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology) →
-      CategoricalEventCompiler C topology.formal.raw
-  eventCompilerBinding :
+      LabelledComponentResolver weights topology labeling
+  eventSemantics :
     (topology : SpecialKirbyPresentation manifold H2) →
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology) →
-      EventCompilerBinding weights topology labeling algebra
-        (eventCompiler topology alpha labeling)
+      WindowedCategoricalEventSemantics
+        topology.formal.raw
+        (strandObject (resolver topology alpha labeling))
+        algebra.framedKink.twist
   diagramCertificateHash :
     SpecialKirbyPresentation manifold H2 → String
   diagram_certificate_hash_shape :
@@ -311,6 +303,53 @@ structure CategoryBoundPresentationCompiler
   sourceScopeCaveat : String
 
 namespace CategoryBoundPresentationCompiler
+
+/--
+Derive every whole event compiler from local windowed semantics.
+
+There is no arbitrary `CategoricalEventCompiler` field on the admitted final
+route.
+-/
+def eventCompiler
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
+    (compiler :
+      CategoryBoundPresentationCompiler
+        categoryData manifold H2 algebra)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2)
+    (labeling :
+      ComponentLabelExpansion.GlobalLabeling
+        compiler.weights.toComponentExpansion topology) :
+    CategoricalEventCompiler C topology.formal.raw :=
+  (compiler.eventSemantics topology alpha labeling)
+    |>.toCategoricalEventCompiler
+
+/-- The old binding certificate is now a theorem-by-construction. -/
+def eventCompilerBinding
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
+    (compiler :
+      CategoryBoundPresentationCompiler
+        categoryData manifold H2 algebra)
+    (topology : SpecialKirbyPresentation manifold H2)
+    (alpha : H2)
+    (labeling :
+      ComponentLabelExpansion.GlobalLabeling
+        compiler.weights.toComponentExpansion topology) :
+    EventCompilerBinding compiler.weights topology labeling algebra
+      (compiler.eventCompiler topology alpha labeling) where
+  resolver := compiler.resolver topology alpha labeling
+  boundary_sound := rfl
+  framing_twist_sound := rfl
 
 /-- Derive the older generic compiler only after all category bindings exist. -/
 noncomputable def toComponentwise
@@ -358,7 +397,7 @@ theorem event_twist_is_graphical_twist
         compiler.weights.toComponentExpansion topology) :
     (compiler.eventCompiler topology alpha labeling).framingTwistData =
       algebra.framedKink.twist :=
-  (compiler.eventCompilerBinding topology alpha labeling).framing_twist_sound
+  rfl
 
 omit [MonoidalPreadditive C] [MonoidalLinear K C] [DecidableEq S] in
 /-- Every derived boundary is built from the same global simple labeling. -/
@@ -379,8 +418,8 @@ theorem event_boundary_is_labelled_boundary
         compiler.weights.toComponentExpansion topology) :
     (compiler.eventCompiler topology alpha labeling).boundary =
       labelledBoundary
-        (compiler.eventCompilerBinding topology alpha labeling).resolver :=
-  (compiler.eventCompilerBinding topology alpha labeling).boundary_sound
+        (compiler.resolver topology alpha labeling) := by
+  rfl
 
 end CategoryBoundPresentationCompiler
 

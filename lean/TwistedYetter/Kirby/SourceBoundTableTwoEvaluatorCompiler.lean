@@ -93,6 +93,102 @@ structure SourceBoundTableTwoEvaluatorCompiler
 
 namespace SourceBoundTableTwoEvaluatorCompiler
 
+/--
+The unique final assembly from the two independently audited compilers.
+
+No evaluator function or local move equality is accepted here. The category
+hash is copied from `categoryData`, and the exact presentation and move
+compiler values are retained definitionally.
+-/
+def assemble
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (graphicalAlgebra :
+      RibbonKirbyGraphicalAlgebra.Input categoryData)
+    (presentationCompiler :
+      IntegralCharacterBoundPresentationCompiler
+        categoryData manifold H2 graphicalAlgebra)
+    (moveCompiler :
+      SourceBoundGraphicalMoveCompiler
+        categoryData manifold H2
+          presentationCompiler.toCategoryBound.toComponentwise
+          graphicalAlgebra)
+    (compilerCertificateHash : String)
+    (compiler_certificate_hash_shape :
+      RawPresentation.sha256Shape compilerCertificateHash = true)
+    (sourceRefs : List String)
+    (exactFormulaScope sourceScopeCaveat : String) :
+    SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2 where
+  graphicalAlgebra := graphicalAlgebra
+  presentationCompiler := presentationCompiler
+  moveCompiler := moveCompiler
+  categorySnapshotHash := categoryData.categorySnapshotHash
+  category_snapshot_hash_sound := rfl
+  compilerCertificateHash := compilerCertificateHash
+  compiler_certificate_hash_shape := compiler_certificate_hash_shape
+  sourceRefs := sourceRefs
+  exactFormulaScope := exactFormulaScope
+  sourceScopeCaveat := sourceScopeCaveat
+
+/-- Final assembly retains the exact presentation compiler by definition. -/
+theorem assemble_presentationCompiler
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (graphicalAlgebra :
+      RibbonKirbyGraphicalAlgebra.Input categoryData)
+    (presentationCompiler :
+      IntegralCharacterBoundPresentationCompiler
+        categoryData manifold H2 graphicalAlgebra)
+    (moveCompiler :
+      SourceBoundGraphicalMoveCompiler
+        categoryData manifold H2
+          presentationCompiler.toCategoryBound.toComponentwise
+          graphicalAlgebra)
+    (compilerCertificateHash : String)
+    (hashShape :
+      RawPresentation.sha256Shape compilerCertificateHash = true)
+    (sourceRefs : List String)
+    (exactFormulaScope sourceScopeCaveat : String) :
+    (assemble graphicalAlgebra presentationCompiler moveCompiler
+      compilerCertificateHash hashShape sourceRefs
+      exactFormulaScope sourceScopeCaveat).presentationCompiler =
+        presentationCompiler := by
+  rfl
+
+/-- Final assembly retains the exact source-bound move compiler. -/
+theorem assemble_moveCompiler
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
+    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+    {H2 : Type uH} [AddCommGroup H2]
+    (graphicalAlgebra :
+      RibbonKirbyGraphicalAlgebra.Input categoryData)
+    (presentationCompiler :
+      IntegralCharacterBoundPresentationCompiler
+        categoryData manifold H2 graphicalAlgebra)
+    (moveCompiler :
+      SourceBoundGraphicalMoveCompiler
+        categoryData manifold H2
+          presentationCompiler.toCategoryBound.toComponentwise
+          graphicalAlgebra)
+    (compilerCertificateHash : String)
+    (hashShape :
+      RawPresentation.sha256Shape compilerCertificateHash = true)
+    (sourceRefs : List String)
+    (exactFormulaScope sourceScopeCaveat : String) :
+    (assemble graphicalAlgebra presentationCompiler moveCompiler
+      compilerCertificateHash hashShape sourceRefs
+      exactFormulaScope sourceScopeCaveat).moveCompiler =
+        moveCompiler := by
+  rfl
+
 /-- Forget only the source-compilation wrapper after deriving its evaluator. -/
 noncomputable def toTableTwo
     {categoryData :
@@ -192,7 +288,7 @@ theorem toTableTwo_evaluation_is_componentwise_global_sum
       ∑ labeling,
         expansion.globalWeight presentation alpha labeling •
           Diagram.eval C
-            ((compiler.presentationCompiler.eventCompiler
+            ((compiler.presentationCompiler.toCategoryBound.eventCompiler
                 presentation alpha labeling).compileClosed
               presentation.execution) := by
   exact

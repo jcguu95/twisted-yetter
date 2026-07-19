@@ -510,34 +510,58 @@ Only the disjoint-union decomposition is local input. Cutting, killing, and
 transparent-twist data come from the shared category algebra.
 -/
 structure OneTwoFactorizationProgram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
     {profile : GlobalDimensionProfile (K := K)}
     (algebra : CancellationInput profile)
+    (beforeDiagram afterDiagram : Diagram C .unit .unit)
     (before after : EvaluationState (K := K)) where
   counts_sound : before.counts = after.counts.addOneTwo
-  isolatedFromRest : Prop
-  isolated_witness : isolatedFromRest
-  disjoint_union_sound :
-    isolatedFromRest →
-      before.rawNumerator =
-        algebra.oneTwoPairValue * after.rawNumerator
+  localPairDiagram : Diagram C .unit .unit
+  diagram_factorization :
+    beforeDiagram =
+      closedTensorDiagram localPairDiagram afterDiagram
+  local_pair_scalar :
+    categoryData.closedScalar
+        (Diagram.eval C localPairDiagram) =
+      algebra.oneTwoPairValue
 
 namespace OneTwoFactorizationProgram
 
 /-- Derive the complete R9 calculation from separated local inputs. -/
 def toCalculation
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
     {profile : GlobalDimensionProfile (K := K)}
     {algebra : CancellationInput profile}
+    {beforeDiagram afterDiagram : Diagram C .unit .unit}
     {before after : EvaluationState (K := K)}
-    (program : OneTwoFactorizationProgram algebra before after) :
+    (program :
+      OneTwoFactorizationProgram
+        (categoryData := categoryData)
+        algebra beforeDiagram afterDiagram before after)
+    (before_raw_sound :
+      before.rawNumerator =
+        categoryData.closedScalar (Diagram.eval C beforeDiagram))
+    (after_raw_sound :
+      after.rawNumerator =
+        categoryData.closedScalar (Diagram.eval C afterDiagram)) :
     OneTwoLocalCalculation profile where
   pairValue := algebra.oneTwoPairValue
   cutValue := algebra.oneTwoCutValue
   before := before
   after := after
   counts_sound := program.counts_sound
-  isolated_from_rest := program.isolatedFromRest
-  isolated_from_rest_witness := program.isolated_witness
-  disjoint_union_sound := program.disjoint_union_sound
+  isolated_from_rest :=
+    beforeDiagram =
+      closedTensorDiagram program.localPairDiagram afterDiagram
+  isolated_from_rest_witness := program.diagram_factorization
+  disjoint_union_sound := fun _ => by
+    rw [before_raw_sound, program.diagram_factorization,
+      categoryData.closed_tensor_multiplicative,
+      program.local_pair_scalar, after_raw_sound]
   transparent_twist_trivial := algebra.transparentTwistTrivial
   transparent_twist_witness := algebra.transparent_twist_witness
   cutting_identity := algebra.cutting_identity
@@ -552,34 +576,57 @@ The local program proves only that an unlinked zero-framed unknot splits from
 the exact numerator. Its value is fixed by the shared pivotal input.
 -/
 structure TwoThreeFactorizationProgram
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
     {profile : GlobalDimensionProfile (K := K)}
     (algebra : CancellationInput profile)
+    (beforeDiagram afterDiagram : Diagram C .unit .unit)
     (before after : EvaluationState (K := K)) where
   counts_sound : before.counts = after.counts.addTwoThree
-  unlinkedUnknottedZeroFramed : Prop
-  unlink_witness : unlinkedUnknottedZeroFramed
-  disjoint_union_sound :
-    unlinkedUnknottedZeroFramed →
-      before.rawNumerator =
-        algebra.twoThreeUnknotValue * after.rawNumerator
+  localUnknotDiagram : Diagram C .unit .unit
+  diagram_factorization :
+    beforeDiagram =
+      closedTensorDiagram localUnknotDiagram afterDiagram
+  local_unknot_scalar :
+    categoryData.closedScalar
+        (Diagram.eval C localUnknotDiagram) =
+      algebra.twoThreeUnknotValue
 
 namespace TwoThreeFactorizationProgram
 
 /-- Derive the complete R9 calculation from separated local inputs. -/
 def toCalculation
+    {categoryData :
+      AdmissibleKirbyCategory
+        (K := K) (C := C) (S := S) (I := I)}
     {profile : GlobalDimensionProfile (K := K)}
     {algebra : CancellationInput profile}
+    {beforeDiagram afterDiagram : Diagram C .unit .unit}
     {before after : EvaluationState (K := K)}
-    (program : TwoThreeFactorizationProgram algebra before after) :
+    (program :
+      TwoThreeFactorizationProgram
+        (categoryData := categoryData)
+        algebra beforeDiagram afterDiagram before after)
+    (before_raw_sound :
+      before.rawNumerator =
+        categoryData.closedScalar (Diagram.eval C beforeDiagram))
+    (after_raw_sound :
+      after.rawNumerator =
+        categoryData.closedScalar (Diagram.eval C afterDiagram)) :
     TwoThreeLocalCalculation profile where
   unknotValue := algebra.twoThreeUnknotValue
   before := before
   after := after
   counts_sound := program.counts_sound
   unlinked_unknotted_zero_framed :=
-    program.unlinkedUnknottedZeroFramed
-  unlink_witness := program.unlink_witness
-  disjoint_union_sound := program.disjoint_union_sound
+    beforeDiagram =
+      closedTensorDiagram program.localUnknotDiagram afterDiagram
+  unlink_witness := program.diagram_factorization
+  disjoint_union_sound := fun _ => by
+    rw [before_raw_sound, program.diagram_factorization,
+      categoryData.closed_tensor_multiplicative,
+      program.local_unknot_scalar, after_raw_sound]
   pivotal_dimension_preserved :=
     algebra.pivotal_dimension_preserved
 
@@ -668,7 +715,11 @@ structure SourceBoundGraphicalMoveCompiler
     (counts_sound : target.counts = source.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      OneTwoFactorizationProgram algebra.cancellation
+      OneTwoFactorizationProgram
+        (categoryData := categoryData) algebra.cancellation
+        ((presentationCompiler.decorate target).diagram
+          (transport.targetClass alpha))
+        ((presentationCompiler.decorate source).diagram alpha)
         ((presentationCompiler.decorate target).evaluationState
           (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
@@ -678,7 +729,11 @@ structure SourceBoundGraphicalMoveCompiler
     (counts_sound : source.counts = target.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      OneTwoFactorizationProgram algebra.cancellation
+      OneTwoFactorizationProgram
+        (categoryData := categoryData) algebra.cancellation
+        ((presentationCompiler.decorate source).diagram alpha)
+        ((presentationCompiler.decorate target).diagram
+          (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
         ((presentationCompiler.decorate target).evaluationState
           (transport.targetClass alpha))
@@ -688,7 +743,11 @@ structure SourceBoundGraphicalMoveCompiler
     (counts_sound : target.counts = source.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      TwoThreeFactorizationProgram algebra.cancellation
+      TwoThreeFactorizationProgram
+        (categoryData := categoryData) algebra.cancellation
+        ((presentationCompiler.decorate target).diagram
+          (transport.targetClass alpha))
+        ((presentationCompiler.decorate source).diagram alpha)
         ((presentationCompiler.decorate target).evaluationState
           (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
@@ -698,7 +757,11 @@ structure SourceBoundGraphicalMoveCompiler
     (counts_sound : source.counts = target.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      TwoThreeFactorizationProgram algebra.cancellation
+      TwoThreeFactorizationProgram
+        (categoryData := categoryData) algebra.cancellation
+        ((presentationCompiler.decorate source).diagram alpha)
+        ((presentationCompiler.decorate target).diagram
+          (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
         ((presentationCompiler.decorate target).evaluationState
           (transport.targetClass alpha))
@@ -790,7 +853,11 @@ noncomputable def compile
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
-        program.toCalculation rfl rfl
+        (program.toCalculation
+          ((presentationCompiler.decorate target).raw_numerator_sound
+            (transport.targetClass alpha))
+          ((presentationCompiler.decorate source).raw_numerator_sound alpha))
+        rfl rfl
   | oneTwoDeath metadata counts transport =>
       let program :=
         compiler.oneTwoDeath metadata counts transport alpha
@@ -799,7 +866,11 @@ noncomputable def compile
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
-        program.toCalculation rfl rfl
+        (program.toCalculation
+          ((presentationCompiler.decorate source).raw_numerator_sound alpha)
+          ((presentationCompiler.decorate target).raw_numerator_sound
+            (transport.targetClass alpha)))
+        rfl rfl
   | twoThreeBirth metadata counts transport =>
       let program :=
         compiler.twoThreeBirth metadata counts transport alpha
@@ -808,7 +879,11 @@ noncomputable def compile
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
-        program.toCalculation rfl rfl
+        (program.toCalculation
+          ((presentationCompiler.decorate target).raw_numerator_sound
+            (transport.targetClass alpha))
+          ((presentationCompiler.decorate source).raw_numerator_sound alpha))
+        rfl rfl
   | twoThreeDeath metadata counts transport =>
       let program :=
         compiler.twoThreeDeath metadata counts transport alpha
@@ -817,7 +892,11 @@ noncomputable def compile
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
-        program.toCalculation rfl rfl
+        (program.toCalculation
+          ((presentationCompiler.decorate source).raw_numerator_sound alpha)
+          ((presentationCompiler.decorate target).raw_numerator_sound
+            (transport.targetClass alpha)))
+        rfl rfl
 
 end SourceBoundGraphicalMoveCompiler
 

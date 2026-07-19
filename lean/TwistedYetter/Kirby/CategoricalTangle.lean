@@ -54,6 +54,10 @@ inductive Diagram (C : Type u) [Category.{v} C] [MonoidalCategory C]
       Diagram C .unit (.tensor (.atom object) (.atom objectᘁ))
   | cap (object : C) [HasRightDual object] :
       Diagram C (.tensor (.atom objectᘁ) (.atom object)) .unit
+  | exactCup (object dual : C) (pairing : ExactPairing object dual) :
+      Diagram C .unit (.tensor (.atom object) (.atom dual))
+  | exactCap (object dual : C) (pairing : ExactPairing object dual) :
+      Diagram C (.tensor (.atom dual) (.atom object)) .unit
   | leftCup (object : C) [HasLeftDual object] :
       Diagram C .unit (.tensor (.atom (ᘁobject)) (.atom object))
   | leftCap (object : C) [HasLeftDual object] :
@@ -87,6 +91,10 @@ def eval {source target : Boundary C} :
   | @cap _ _ _ _ object dualWitness =>
       letI : HasRightDual object := dualWitness
       ε_ object objectᘁ
+  | .exactCup object dual pairing =>
+      @ExactPairing.coevaluation _ _ _ object dual pairing
+  | .exactCap object dual pairing =>
+      @ExactPairing.evaluation _ _ _ object dual pairing
   | @leftCup _ _ _ _ object dualWitness =>
       letI : HasLeftDual object := dualWitness
       η_ (ᘁobject) object

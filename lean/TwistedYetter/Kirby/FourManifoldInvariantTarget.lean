@@ -16,10 +16,12 @@ complete evaluator prescription and a marked-presentation system.  The target
 below keeps that valid implication while making the remaining construction
 obligations impossible to confuse with an established concrete invariant.
 
-No current value of `FourManifoldInvariantInputs` is defined here. Producing
-one from concrete Kirby syntax and the remaining source-bound evaluator
-compiler is the construction goal. Special Kirby completeness and handle-chain
-naturality are separate, visible topology and homology domain axioms.
+No current value of `FourManifoldInvariantInputs` is defined here. The final
+assembler exists, but it cannot manufacture the missing category-valued event
+semantics or source-recipe graphical realizations. Producing those values from
+concrete Kirby syntax is the construction goal. Special Kirby completeness
+and handle-chain naturality are separate, visible topology and homology domain
+axioms.
 -/
 
 namespace TwistedYetter.Kirby.FourManifoldInvariantTarget
@@ -98,13 +100,19 @@ colour is represented by a global finite sum of complete labelled traces,
 never by one fake category object. The final route also forces every label to
 be the category's simple-index type, zero-class coefficients to be the
 recorded category weights, strand objects to use the same simple/dual-simple
-data, and framing events to use the graphical algebra's exact twist. The final
-evaluator route now also derives every nonzero homological coefficient from a
-normalized representative selected from the actual Mathlib homology quotient
-and one tensor automorphism scalar. Every presentation carries a complete
-two-handle component index, so the canonical cycle system is no longer a
-caller field. A concrete nontrivial tensor automorphism, event interpretation,
-and exact R7/R8/R9 graphical assembly remain open.
+data, and framing events to use the graphical algebra's exact twist. Every
+local event window is additionally bound to the serialized strand IDs,
+component IDs, orientations, coupon ID, coupon label, and active order as
+applicable. The final evaluator route now also derives every nonzero
+homological coefficient from a normalized representative selected from the
+actual Mathlib homology quotient and one tensor automorphism scalar. Every
+presentation carries a complete two-handle component index, so the canonical
+cycle system is no longer a caller field. Cancellation calculations derive
+raw scalar factorization from equality of the exact compiled diagrams and
+the category's closed-tensor multiplicativity law; they cannot accept a
+handwritten raw or normalized scalar equality. A concrete nontrivial tensor
+automorphism, category-valued event interpretation, and exact R7/R8/R9
+graphical realization remain open.
 -/
 def establishedFoundationConditions : List TargetCondition :=
   [
@@ -339,9 +347,10 @@ theorem tensor_automorphism_generator_instance_open :
   simp [openConstructionConditions]
 
 /--
-The actual finite family and event interpretation for each presentation and
-marked class have not yet been constructed. This now means an
-integral-character-bound event compiler, not the older generic expansion.
+The finite global-label enumeration is derived, but the category-valued
+component resolver and strand/component/coupon-bound local semantics have not
+yet been constructed. This means an integral-character-bound event compiler,
+not the older generic expansion.
 -/
 theorem global_finite_kirby_color_expansion_instance_open :
     TargetCondition.globalFiniteKirbyColorExpansionInstance ∈
@@ -359,8 +368,9 @@ theorem source_bound_graphical_move_compiler_instance_open :
   simp [openConstructionConditions]
 
 /--
-No concrete eight-case evaluator compiler value is defined yet. This is the
-final assembly condition after the two more precise open instances above.
+The final assembler is defined and accepts no evaluator function or move
+equality. No concrete assembled value exists because the two more precise
+open compiler instances above do not yet exist.
 -/
 theorem source_bound_evaluator_compiler_instance_open :
     TargetCondition.sourceBoundEvaluatorCompilerInstance ∈
