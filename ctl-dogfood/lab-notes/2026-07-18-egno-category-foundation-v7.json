@@ -1,0 +1,168 @@
+{
+  "artifacts": [
+    {
+      "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+      "artifact_id": "egno-fusion-category-step6-v1",
+      "content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
+      "git_blob": "dfc1f02997f9373eefe6490e88874c23834fa2aa",
+      "path": "experiments/results/lean-kirby/egno-fusion-category-step6-v1.json",
+      "sha256": "bf993d3674f23ceda3e5fb70e5119dc79858c09fc4d6243f1edde33b6ef6f25b",
+      "status": "PASS_STEP_6_FINITE_SEMISIMPLE_FUSION_INTERFACE_ESTABLISHED"
+    },
+    {
+      "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+      "artifact_id": "lean-egno-fusion-category",
+      "git_blob": "683ac8e38b3e43bd359716a34a629c59774bc798",
+      "path": "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean",
+      "sha256": "81f394abdc17334bdae00146212e32a2a3ca8e8605266b04e62d3f1b701b50c4",
+      "status": "LEAN_KERNEL_CHECKED_GENERIC_FUSION_AND_RIBBON_INTERFACE"
+    },
+    {
+      "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+      "artifact_id": "lean-egno-fusion-category-axiom-audit",
+      "git_blob": "40d95d923ea269da54e045e4d4d96d4d82b72c34",
+      "path": "lean/TwistedYetter/Fusion/EGNOFusionCategoryAxiomAudit.lean",
+      "sha256": "f308b6a15757dffd5514519dcf67820892eb8ea5f453f57ff8ccb27b2254e314",
+      "status": "PASS_57_DECLARATIONS_NO_PROOF_ORACLE"
+    },
+    {
+      "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+      "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+      "git_blob": "6e0be84e4a48a6df929f7be1189dbeb39c0611bd",
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "c5cf80f909e5fb51dd02f3179dc13ecf507a682a000d571f9e02335af3626ba2",
+      "status": "STEP_6_ESTABLISHED_STEPS_7_TO_10_EXPLICIT"
+    },
+    {
+      "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+      "artifact_id": "egno-trace-cyclicity-step5-v1",
+      "content_hash": "sha256:664bb105a40519dbcbeb8fed4d257499e2eab3813fc7258deb0d96f4cf79741d",
+      "path": "experiments/results/lean-kirby/egno-trace-cyclicity-step5-v1.json",
+      "status": "HISTORICAL_PREDECESSOR_STEP_5"
+    }
+  ],
+  "created_at": "2026-07-19T08:45:10Z",
+  "created_by": "actor:codex",
+  "definition_boundary": {
+    "derived_not_assumed": [
+      "Hom dimensions between listed simples",
+      "the K-linear equivalence K isomorphic to End(1)",
+      "closed-diagram scalarization and its algebraic laws",
+      "identity resolutions for every object and every tensor product of simples",
+      "canonical pivotal, spherical, trace, and quantum-dimension data after a RibbonStructure is supplied"
+    ],
+    "source_locators": [
+      "EGNO Definitions 1.8.1 and 1.8.6, printed pages 9-10",
+      "EGNO Proposition 1.8.4, printed page 9",
+      "EGNO Definition 4.1.1, printed page 65"
+    ],
+    "status": "PROOF_RELEVANT_FINITE_SEMISIMPLE_INTERFACE_ESTABLISHED",
+    "stored_domain_data": [
+      "a finite duplicate-free complete simple skeleton",
+      "finite-dimensional Hom spaces",
+      "an actual finite biproduct decomposition of every object",
+      "a simple representative isomorphic to the tensor unit",
+      "right-dual representatives",
+      "a RibbonStructure only for the ribbon refinement"
+    ],
+    "unit_condition_encoding": "The Lean interface stores the tensor unit as a listed simple representative and derives the canonical scalar map by Schur's lemma. It does not separately formalize the equivalence of this encoding with every formulation of EGNO's End(1) isomorphic to K condition."
+  },
+  "established": [
+    "Steps 1 through 5 remain established: the canonical pivotal formula, naturality, monoidality, ribbon-to-spherical construction, and pivotal trace cyclicity.",
+    "FusionCategoryData now records a finite duplicate-free complete set of simple representatives.",
+    "Every object has an actual finite biproduct isomorphism to listed simple summands; a numerical fusion table alone cannot inhabit the interface.",
+    "Finite-dimensional Hom spaces and explicit simple decompositions supply the proof-relevant locally finite and semisimple content used in EGNO's fusion-category definition.",
+    "The tensor unit is represented by a listed simple, and Schur's lemma derives a canonical K-linear equivalence from K to End(1).",
+    "Closed categorical morphisms are scalarized through that derived equivalence; identity, addition, scalar multiplication, and composition laws are Lean-proved.",
+    "Every object, including every tensor product of simple representatives, has a Lean-proved finite identity resolution.",
+    "RibbonFusionCategoryData binds one RibbonStructure to the fusion data and derives the previously proved pivotal, spherical, trace, categorical-dimension, and scalar quantum-dimension constructions.",
+    "Twenty-two cumulative mutation tests reject all Step 1-6 convention errors and the seven Step 6 omissions or unauthorized promotions.",
+    "Fifty-seven declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+    "The full 2236-job umbrella build and all thirty-four related artifact replay tests pass with LEAN_NUM_THREADS=1."
+  ],
+  "explicit_nonclaims": [
+    "This objective note is not a theorem claim about a complete four-manifold invariant.",
+    "This step defines the generic finite semisimple interface; it does not construct its fields for any concrete fusion, premodular, or modular category.",
+    "The equivalence between the stored simple-unit encoding and every abstract formulation of EGNO's End(1) isomorphic to K condition has not been separately formalized in Lean.",
+    "Nondegeneracy of the categorical trace pairing has not yet been derived from this interface.",
+    "Compatibility of mate maps, pivotal functors, and basis transport with the derived trace pairing remains open.",
+    "No Kirby-colour expansion, category-bound Kirby move, or complete four-manifold invariant is established by this step.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean.",
+    "EGNO Theorem 4.7.15, equality of left and right traces, remains unformalized because Step 5 only required pivotal trace cyclicity."
+  ],
+  "mathematical_status": "GENERIC_PROOF_RELEVANT_FUSION_AND_RIBBON_INTERFACE_ESTABLISHED",
+  "note_id": "objective-note-2026-07-18-egno-category-foundation-v7",
+  "objective": {
+    "current_step": "Step 6 of 10 is complete; Step 7 trace-pairing compatibility is next.",
+    "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+    "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+  },
+  "prior_current_object": {
+    "cid": "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33",
+    "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+  },
+  "proof_scope": {
+    "ambient_lean_assumptions": [
+      "Field K",
+      "IsAlgClosed K",
+      "Abelian C",
+      "Linear K C",
+      "MonoidalCategory C",
+      "RigidCategory C",
+      "MonoidalPreadditive C",
+      "MonoidalLinear K C"
+    ],
+    "concrete_category_instantiated": false,
+    "simple_index_universe": "small finite Type",
+    "source_capture_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+  },
+  "remaining_roadmap": [
+    {
+      "id": "7-pairing-compatibility",
+      "status": "NEXT_NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "8-kirby-colour-expansion",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "9-category-bound-kirby-moves",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "10-four-manifold-invariant-assembly",
+      "status": "NOT_YET_ESTABLISHED"
+    }
+  ],
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "dirty_at_clean_checkpoint": false,
+    "source_implementation_commit": "ca1342fece2b26122494dbce2cf026231c4dc769"
+  },
+  "status": "STEP_6_ESTABLISHED_STEP_7_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+  ],
+  "title": "EGNO category foundation for the Lean Kirby route, revision 7",
+  "top_notice": "Step 6 establishes a generic proof-relevant finite semisimple fusion-category interface and binds ribbon data to the Step 1-5 pivotal and trace constructions. It does not instantiate a concrete category, establish trace-pairing nondegeneracy, prove Kirby-colour sliding, or complete a four-manifold invariant.",
+  "verification": {
+    "artifact_content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
+    "artifact_file_sha256": "bf993d3674f23ceda3e5fb70e5119dc79858c09fc4d6243f1edde33b6ef6f25b",
+    "axiom_audit": "PASS_57_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+    "canonical_ctl_current_root_replay_before_admission": {
+      "current_object_cid": "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33",
+      "root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
+      "source_state": "current-ctl-object",
+      "status": "PASS"
+    },
+    "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+    "full_umbrella_build": "PASS_2236_JOBS_LEAN_NUM_THREADS_1",
+    "mutation_tests": "PASS_22_OF_22_EXPECTED_REJECTIONS",
+    "proof_oracle_count": 0,
+    "related_pytests": "PASS_34_OF_34"
+  }
+}
