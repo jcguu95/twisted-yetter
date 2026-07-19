@@ -1,0 +1,125 @@
+{
+  "artifacts": [
+    {
+      "artifact_commit": "48eccc766373e3ab03da5c5e5df128fc8d4382ba",
+      "artifact_id": "egno-canonical-pivotal-step1-v1",
+      "content_hash": "sha256:4b9acf6a1d26367527c4a0bc70201b66db94bed2f55b3f950913d9a8ccae65cb",
+      "git_blob": "54a72eb543fcad0a50e11e23e214dbecef379dfd",
+      "path": "experiments/results/lean-kirby/egno-canonical-pivotal-step1-v1.json",
+      "sha256": "c7275bca5f15e5a2361d4d96dd0a419c39c9a0d9e7f4b25de6b18386ee852cda",
+      "status": "PASS_STEP_1_OBJECTWISE_CANONICAL_PIVOTAL_FORMULA"
+    },
+    {
+      "artifact_id": "lean-egno-canonical-pivotal",
+      "git_blob": "0434ddd6a9770b9e75f7c6861d87497938838afe",
+      "path": "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+      "sha256": "e81e16a31e02190069d6969ad7b237aaf74c4bd32696d1d942a187bd8ce06bf1",
+      "status": "LEAN_KERNEL_CHECKED_OBJECTWISE_FORMULA"
+    },
+    {
+      "artifact_id": "egno-category-foundation-v1",
+      "content_hash": "sha256:a584128bf147d46091ba362a764252ffc16049b18eaca635ef794d8df5f8986f",
+      "path": "experiments/results/lean-kirby/egno-category-foundation-v1.json",
+      "status": "PASS_EGNO_CATEGORY_INTERFACES_AND_KIRBY_BINDINGS"
+    }
+  ],
+  "created_at": "2026-07-19T05:07:00Z",
+  "created_by": "actor:codex",
+  "established": [
+    "Generic pivotal, spherical, balancing, and ribbon contracts remain established as typed Lean interfaces.",
+    "The non-strict Drinfeld morphism is fixed to EGNO equation (8.30), using the positive braiding and the chosen right double dual.",
+    "The objectwise canonical pivotal candidate is fixed to theta_X followed by the Drinfeld morphism, as in EGNO equation (8.35).",
+    "Mirror braiding, inverse twist, and left/right double-dual conflation are rejected by dedicated mutation tests.",
+    "The final Kirby route continues to expose its rigidity requirement."
+  ],
+  "explicit_non_claims": [
+    "This objective note is not a theorem claim.",
+    "The objectwise canonical pivotal candidate has not yet been proved natural.",
+    "No inverse natural transformation has yet been constructed.",
+    "No monoidal double-dual structure has yet been constructed.",
+    "No canonical PivotalStructure or SphericalStructure has yet been derived from RibbonStructure.",
+    "The finite semisimple fusion-category layer remains open.",
+    "The two Bärenz-Barrett trace-pairing compatibility inputs remain open.",
+    "No concrete category has been instantiated.",
+    "This note does not establish a concrete four-manifold invariant."
+  ],
+  "mathematical_status": "CANONICAL_PIVOTAL_STEP_1_OBJECTWISE_FORMULA_ESTABLISHED_LATER_STEPS_OPEN",
+  "note_id": "objective-note-2026-07-18-egno-category-foundation-v2",
+  "objective": {
+    "current_step": "Step 1 of 10 complete; Step 2 naturality and invertibility is next.",
+    "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+    "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+  },
+  "prior_current_object": {
+    "cid": "ctlobj-sha256:c688539318b8532804e37469814c9164b5f0aa218ed8f0f60bde72e1b3090b38",
+    "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+  },
+  "remaining_roadmap": [
+    {
+      "id": "2-naturality-and-invertibility",
+      "status": "NEXT_NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "3-monoidality",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "4-sphericality",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "5-trace-cyclicity",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "6-finite-semisimple-fusion-interface",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "7-pairing-compatibility",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "8-kirby-colour-expansion",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "9-category-bound-kirby-moves",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "10-four-manifold-invariant-assembly",
+      "status": "NOT_YET_ESTABLISHED"
+    }
+  ],
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "artifact_commit": "48eccc766373e3ab03da5c5e5df128fc8d4382ba",
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "dirty_at_clean_checkpoint": false,
+    "source_implementation_commit": "24dab9e0d240a727e2359f9d183477e8fc7a797f",
+    "v12_freshness_commit": "aa1a6fcb5f1823515f6c549f6a025d8c7aee13af"
+  },
+  "status": "STEP_1_ESTABLISHED_STEP_2_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+  ],
+  "title": "EGNO category foundation for the Lean Kirby route, revision 2",
+  "top_notice": "Step 1 establishes only the objectwise EGNO canonical pivotal formula. It does not establish a natural isomorphism, a pivotal structure, sphericality, or a concrete category.",
+  "verification": {
+    "artifact_content_hash": "sha256:4b9acf6a1d26367527c4a0bc70201b66db94bed2f55b3f950913d9a8ccae65cb",
+    "artifact_file_sha256": "c7275bca5f15e5a2361d4d96dd0a419c39c9a0d9e7f4b25de6b18386ee852cda",
+    "axiom_audit": "PASS_3_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+    "canonical_ctl_current_root_replay_before_admission": {
+      "root_cid": "ctlobj-sha256:f56f232647f3663c735df970fb64729c4754b3e6a89cf5a8919d17ad4890edc6",
+      "status": "PASS"
+    },
+    "convention_mutation_tests": "PASS_3_OF_3_EXPECTED_REJECTIONS",
+    "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+    "full_umbrella_build": "PASS_1598_JOBS_LEAN_NUM_THREADS_1",
+    "proof_oracle_count": 0,
+    "related_pytests": "PASS_17_OF_17"
+  }
+}
