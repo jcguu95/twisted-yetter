@@ -1,0 +1,312 @@
+{
+  "argv": [
+    "experiments/scripts/build_four_manifold_invariant_target_v12.py"
+  ],
+  "checks": {
+    "mechanism_custom_domain_axioms": [],
+    "mutation_denominators": {
+      "categorical_event_compiler": 9,
+      "four_manifold_target": 5,
+      "integral_character_compiler": 7,
+      "source_bound_graphical_compiler": 5
+    },
+    "proof_oracles": [],
+    "target_domain_axioms": [
+      "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+      "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+    ],
+    "umbrella_build": {
+      "lean_num_threads": 1,
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:b7aed764b6f797cb61521054e0a45c8f7f7b5b8ceb4e1d497ca95989babd67a1",
+  "elapsed_seconds": 184.814287,
+  "finished_at_utc": "2026-07-19T03:27:24Z",
+  "generator_script": "experiments/scripts/build_four_manifold_invariant_target_v12.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "68cf795204cccd1c2f5fcab5b41e57a1f75c6a26",
+    "dirty_before_generation": false
+  },
+  "inputs": {
+    "predecessor": {
+      "content_hash": "sha256:308f59bf706352bbe1146089af729cbe0598930099059566630c086b2f05b4d7",
+      "path": "experiments/results/lean-kirby/four-manifold-invariant-target-v11.json",
+      "source_commit": "a43397fe81dbe287b9612abfde491a9e3a011a01"
+    },
+    "source_files": {
+      "experiments/scripts/build_four_manifold_invariant_target_v12.py": {
+        "bytes": 17511,
+        "sha256": "sha256:e7164f3ea2f9da6c7cf7ef2019997da1cb49b44a824756ec076cd1ac39399874"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "sha256:4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "sha256:7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryWholeCompilerInIntegralRoute.lean": {
+        "bytes": 2017,
+        "sha256": "sha256:067cef48490814c0a9c3cbdd74243b841709d472b393059a7860c06d07763b4d"
+      },
+      "lean/Mutations/HandwrittenRawFactorInsideOneTwoFactorization.lean": {
+        "bytes": 1758,
+        "sha256": "sha256:eafc5809a9d04110422ef625c0eb446a0d68e00e3387695f70ed5e7fd4c54d5c"
+      },
+      "lean/Mutations/RenamedCouponInBoundWindow.lean": {
+        "bytes": 1374,
+        "sha256": "sha256:9426058c4879427274912666fff13e5cf1e653256159b05fe56047ebd58c782e"
+      },
+      "lean/Mutations/UnboundFramingStrandInWindow.lean": {
+        "bytes": 950,
+        "sha256": "sha256:64527dc34d39d8c45bdfa50116340c6bcf6f4c926cdf0e995ea1274e8073509a"
+      },
+      "lean/Mutations/WrongRecordedDualInBirthPrimitive.lean": {
+        "bytes": 770,
+        "sha256": "sha256:89dbe249a2ca954308dd30dc799c498919281b5d39588274339ac1fdfa29a8b0"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2013,
+        "sha256": "sha256:c2388f0458bcfdfee1608e4f2d3f4914f234aa59475c1876e9b8691ad834be7b"
+      },
+      "lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean": {
+        "bytes": 60370,
+        "sha256": "sha256:cf7dfaceb944f2663d0c339d2b5b68cc6bcc5a30292f650ae912cb82c2ee4075"
+      },
+      "lean/TwistedYetter/Kirby/CategoricalPresentationCompilerAxiomAudit.lean": {
+        "bytes": 5647,
+        "sha256": "sha256:6323d41b3ffdf4a0b23eb0e5296df85f309c0d09784859d22e732cc0f942cc88"
+      },
+      "lean/TwistedYetter/Kirby/CategoricalTangle.lean": {
+        "bytes": 13495,
+        "sha256": "sha256:bf6a7279f5e3c1958ea0abb0df62d0e5846c9810a446f194fbf4fb549f62f422"
+      },
+      "lean/TwistedYetter/Kirby/CategoryBoundKirbyColorCompiler.lean": {
+        "bytes": 16536,
+        "sha256": "sha256:fbf143ebeaa7eaf4f57a90987dc37ebd15a436135850411d68590018e50125ea"
+      },
+      "lean/TwistedYetter/Kirby/CategoryBoundKirbyColorCompilerAxiomAudit.lean": {
+        "bytes": 1392,
+        "sha256": "sha256:f3b84772548dbacf99a02c12977ae8483b2c7eaacda6d843a7af09673b283733"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTarget.lean": {
+        "bytes": 23549,
+        "sha256": "sha256:66b081f2ac20f297a5393e2cc7c7ccaa2ddae0ac5781862f86fad16a80f2d196"
+      },
+      "lean/TwistedYetter/Kirby/FourManifoldInvariantTargetAxiomAudit.lean": {
+        "bytes": 6292,
+        "sha256": "sha256:a3f526e4888c39133dfebf3813afba16d5dded2771386845811eb6caee20cb31"
+      },
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean": {
+        "bytes": 31141,
+        "sha256": "sha256:54b4a5391042a71976dc7936a751816c568acd2801da629995b109008d6aa5ec"
+      },
+      "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompiler.lean": {
+        "bytes": 25779,
+        "sha256": "sha256:14ec9c3c43eca7d70faaf81e50f27d988248f112ab167a1715f466766bc383b7"
+      },
+      "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompilerAxiomAudit.lean": {
+        "bytes": 2726,
+        "sha256": "sha256:f2b2f0bb5cd69f46c954c4194773d8f0e1e6d6ae8e7a1143b8877e0e224df834"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundGraphicalMoveCompiler.lean": {
+        "bytes": 36982,
+        "sha256": "sha256:7092e7e246b3ebec83f27562c6811fb5124baf7121cac1a77f47eda630815fec"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundGraphicalMoveCompilerAxiomAudit.lean": {
+        "bytes": 1262,
+        "sha256": "sha256:132fad11e3cde85a9142eabcf1f296f79d756718e99aeb32f6f579b3e4e316e6"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundTableTwoEvaluatorCompiler.lean": {
+        "bytes": 13438,
+        "sha256": "sha256:ec65a75b79be410f311c8984f14873b058e2a20c956270f82a2507617466971e"
+      },
+      "scripts/lean_categorical_presentation_compiler_axiom_audit.sh": {
+        "bytes": 695,
+        "sha256": "sha256:92e2390821e99cd9a9399906098e0cd62bbded8662add5e7a2b5ae0910736ef3"
+      },
+      "scripts/lean_categorical_presentation_compiler_mutation_tests.sh": {
+        "bytes": 2232,
+        "sha256": "sha256:acacec349867a307ac2072c7357175826f60477633676d24045ef0a72e788c18"
+      },
+      "scripts/lean_four_manifold_invariant_target_axiom_audit.sh": {
+        "bytes": 1426,
+        "sha256": "sha256:8188ec4d46086dd52cff6a60ea6b16e8b7aeada4718ca5dca6fd039132128b10"
+      },
+      "scripts/lean_four_manifold_invariant_target_mutation_tests.sh": {
+        "bytes": 1961,
+        "sha256": "sha256:79e069396281010000b05da7e412ba19656471fe8933b4a7f947d4be901606ad"
+      },
+      "scripts/lean_integral_character_kirby_color_compiler_axiom_audit.sh": {
+        "bytes": 742,
+        "sha256": "sha256:e7a2e39cc582c7b758ea2c5a49cc22eb4f30c6acce5389ef548dc964eab4d39a"
+      },
+      "scripts/lean_integral_character_kirby_color_compiler_mutation_tests.sh": {
+        "bytes": 1775,
+        "sha256": "sha256:5a0949c3f3266790bf9715434c8fcfe4e240c6e3222f5ea5baab25e98bf91a30"
+      },
+      "scripts/lean_source_bound_graphical_move_compiler_axiom_audit.sh": {
+        "bytes": 472,
+        "sha256": "sha256:d5649c3139ac8ffe8fa16356cd84c7c729da6166872bb0ef151c21baf3e38d24"
+      },
+      "scripts/lean_source_bound_graphical_move_compiler_mutation_tests.sh": {
+        "bytes": 1989,
+        "sha256": "sha256:e4901a317c1f28a29b57af90991914d3fc707ab57f369fdace275b801608b7a2"
+      },
+      "tests/test_four_manifold_invariant_target_artifact_v12.py": {
+        "bytes": 5473,
+        "sha256": "sha256:fb34aad2b60f5249ef997547f6540bee78cf77ce59ebe248b559ec7f52646e78"
+      }
+    }
+  },
+  "last_five_terminal_outcomes": [
+    {
+      "condition": "integralCycleRepresentativeSystemInstance",
+      "non_claim": "The representative choice is not asserted additive.",
+      "ordinal": 1,
+      "result": "Normalized representatives are selected from the actual Mathlib H2 quotient and use each presentation's mandatory two-handle component index.",
+      "status": "ESTABLISHED_KERNEL_CHECKED"
+    },
+    {
+      "condition": "tensorAutomorphismGeneratorInstance",
+      "mechanism_status": "PASS_EXPLICIT_WITNESSED_NONTRIVIAL_INTERFACE",
+      "missing": "One admitted category-specific monoidal natural automorphism, its exact scalar action on every retained simple, and one scalar-not-one witness.",
+      "ordinal": 2,
+      "status": "TERMINAL_BLOCKED_MISSING_CONCRETE_CATEGORY_VALUE"
+    },
+    {
+      "condition": "globalFiniteKirbyColorExpansionInstance",
+      "mechanism_status": "PASS_GLOBAL_FINITE_SUM_AND_SOURCE_BOUND_WINDOWS",
+      "missing": "Category-valued component resolution, exact dual pairings, and coupon morphisms for every admitted raw presentation event.",
+      "ordinal": 3,
+      "status": "TERMINAL_BLOCKED_MISSING_CATEGORY_VALUED_EVENT_SEMANTICS"
+    },
+    {
+      "condition": "sourceBoundGraphicalMoveCompilerInstance",
+      "mechanism_status": "PASS_EIGHT_CASE_COMPILER_WITH_TYPED_FACTOR_ONLY",
+      "missing": "Typed categorical contexts for each source recipe's R7/R8/R9 script, slide exterior, and cancellation factorization.",
+      "ordinal": 4,
+      "status": "TERMINAL_BLOCKED_MISSING_TYPED_RECIPE_REALIZATIONS"
+    },
+    {
+      "condition": "sourceBoundEvaluatorCompilerInstance",
+      "mechanism_status": "PASS_FINAL_ASSEMBLER_KERNEL_CHECKED",
+      "missing": "The category-bound presentation compiler and graphical move compiler values from outcomes 3 and 4.",
+      "ordinal": 5,
+      "status": "TERMINAL_BLOCKED_TRANSITIVE_INPUTS"
+    }
+  ],
+  "mathematical_status": "CONDITIONAL_TARGET_THEOREM_ESTABLISHED_CONCRETE_FOUR_MANIFOLD_INVARIANT_NOT_YET_ESTABLISHED",
+  "non_claims": [
+    "No concrete four-manifold invariant instance is established.",
+    "No open condition was renamed or counted as established.",
+    "No numerical category artifact was promoted to a Lean category.",
+    "No category-neutral move tag was promoted to a graphical proof.",
+    "No identification with the original Crane-Yetter state sum.",
+    "No theorem says the invariant detects or cannot detect exoticness."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_four_manifold_invariant_target_v12.py",
+  "safety_hardening": {
+    "birth_and_death_use_explicit_exact_pairings": true,
+    "cancellation_raw_factor_is_derived_from_diagram_factorization": true,
+    "category_dual_cannot_be_silently_replaced": true,
+    "event_exterior_is_coherence_only": true,
+    "event_windows_bind": [
+      "component IDs",
+      "ordered strand IDs",
+      "strand orientations at birth",
+      "coupon ID and label",
+      "framing-twist strand ID",
+      "complete planar active order"
+    ],
+    "final_assembler_accepts_no_evaluator_function": true,
+    "final_assembler_accepts_no_move_equality": true,
+    "handwritten_raw_or_normalized_move_equality_rejected": true,
+    "whole_event_compiler_is_derived": true
+  },
+  "schema": "twisted-yetter.four-manifold-invariant-target.v12",
+  "started_at_utc": "2026-07-19T03:24:20Z",
+  "status": "PASS_LAST_FIVE_TERMINALIZED_WITH_EXPLICIT_CONCRETE_INPUT_BLOCKERS",
+  "target_condition_ledger": {
+    "counts": {
+      "established": 16,
+      "open": 4,
+      "required": 20
+    },
+    "established_conditions": [
+      "categoryAndGraphicalAlgebra",
+      "explicitThreeHandleNormalization",
+      "closedTypedPresentationExecution",
+      "primitiveCategoricalEventCompilerMechanism",
+      "chainDerivedMarkedH2Transport",
+      "sourceBoundGeometricH2CompilerMechanism",
+      "specialKirbyCalculusCompleteness",
+      "exhaustiveEvaluatorCompilerMechanism",
+      "markedPairAssemblyMechanism",
+      "sourceBoundLocalMoveRecipes",
+      "globalFiniteKirbyColorExpansionMechanism",
+      "sourceBoundGeometricH2CompilerInstance",
+      "sourceBoundGraphicalMoveCompilerMechanism",
+      "categoryBoundKirbyColorCompilerMechanism",
+      "integralCharacterKirbyColorCompilerMechanism",
+      "integralCycleRepresentativeSystemInstance"
+    ],
+    "open_conditions": [
+      "tensorAutomorphismGeneratorInstance",
+      "globalFiniteKirbyColorExpansionInstance",
+      "sourceBoundGraphicalMoveCompilerInstance",
+      "sourceBoundEvaluatorCompilerInstance"
+    ],
+    "required_conditions": [
+      "categoryAndGraphicalAlgebra",
+      "explicitThreeHandleNormalization",
+      "closedTypedPresentationExecution",
+      "primitiveCategoricalEventCompilerMechanism",
+      "chainDerivedMarkedH2Transport",
+      "sourceBoundGeometricH2CompilerMechanism",
+      "specialKirbyCalculusCompleteness",
+      "exhaustiveEvaluatorCompilerMechanism",
+      "markedPairAssemblyMechanism",
+      "sourceBoundLocalMoveRecipes",
+      "globalFiniteKirbyColorExpansionMechanism",
+      "sourceBoundGeometricH2CompilerInstance",
+      "sourceBoundGraphicalMoveCompilerMechanism",
+      "categoryBoundKirbyColorCompilerMechanism",
+      "integralCharacterKirbyColorCompilerMechanism",
+      "integralCycleRepresentativeSystemInstance",
+      "tensorAutomorphismGeneratorInstance",
+      "globalFiniteKirbyColorExpansionInstance",
+      "sourceBoundGraphicalMoveCompilerInstance",
+      "sourceBoundEvaluatorCompilerInstance"
+    ]
+  },
+  "target_theorem": {
+    "conclusion": "Any two certified special Kirby presentations representing the same marked pair have equal normalized evaluations.",
+    "concrete_inputs_constructed": false,
+    "conditional_on_concrete_inputs": true,
+    "lean_name": "TwistedYetter.Kirby.FourManifoldInvariantTarget.FourManifoldInvariantInputs.four_manifold_invariant_target"
+  },
+  "terminal_blocker_boundary": {
+    "blockers_can_be_closed_by_hash_only": false,
+    "blockers_can_be_closed_by_numerical_artifacts_only": false,
+    "category_neutral_recipes_include_typed_category_morphisms": false,
+    "repo_has_category_neutral_source_recipes": true,
+    "repo_has_concrete_lean_mtc_fixture": false,
+    "required_next_evidence": [
+      "A Lean category model or separately admitted categorical domain package with tensor automorphism and pairings.",
+      "Category-valued interpretation of each retained coupon and event window.",
+      "Typed realization of each source-bound graphical recipe."
+    ]
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15",
+    "uv": "uv 0.11.11 (aarch64-apple-darwin)"
+  }
+}
