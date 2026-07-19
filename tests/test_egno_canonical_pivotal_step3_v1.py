@@ -63,6 +63,12 @@ def test_step3_guards_and_axiom_audit_passed() -> None:
     assert checks["proof_hole_scan"]["status"] == (
         "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
     )
+    assert artifact["definition_boundary"]["status"] == (
+        "SOURCE_CHARACTERIZATION_ADOPTED"
+    )
+    assert "braiding-free" in (
+        artifact["definition_boundary"]["not_independently_established"]
+    )
 
 
 def test_pinned_sources_replay_from_clean_source_commit() -> None:

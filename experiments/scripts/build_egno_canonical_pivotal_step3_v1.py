@@ -327,9 +327,25 @@ def build() -> dict[str, Any]:
             ),
             (
                 "Every RibbonStructure now determines a kernel-checked "
-                "canonical PivotalStructure."
+                "PivotalStructure relative to the equation-(8.31)-"
+                "characterized double-dual tensorator."
             ),
         ],
+        "definition_boundary": {
+            "status": "SOURCE_CHARACTERIZATION_ADOPTED",
+            "adopted_characterization": (
+                "EGNO Proposition 8.9.3 and equation (8.31), printed "
+                "pages 214-215"
+            ),
+            "lean_established": (
+                "The characterized tensorator is coherent and makes the "
+                "canonical pivotal natural isomorphism monoidal."
+            ),
+            "not_independently_established": (
+                "Equality with a separately constructed braiding-free, "
+                "duality-induced double-dual tensorator."
+            ),
+        },
         "remaining_blockers": [
             "Derive sphericality from ribbon dual compatibility.",
             "Derive or source-bind spherical trace cyclicity.",

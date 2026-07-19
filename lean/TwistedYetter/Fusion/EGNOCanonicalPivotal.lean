@@ -280,6 +280,9 @@ Transport the monodromy monoidal structure across the Drinfeld isomorphism.
 
 This construction obtains coherence from Mathlib's monoidal-opposite functors
 and transport theorem; it does not assume the desired pivotal structure.
+This module adopts EGNO equation (8.31) as the characterization of the
+standard double-dual tensorator. It does not separately construct a
+braiding-independent tensorator from raw duality data and compare the two.
 -/
 @[implicit_reducible]
 def drinfeldDoubleDualMonoidal :
@@ -420,7 +423,10 @@ theorem canonicalPivotal_isMonoidal (ribbon : RibbonStructure C) :
               (ribbon.toBalancedTwist.iso.hom.app Y)
               (drinfeldHom X) (drinfeldHom Y)))
 
-/-- The canonical pivotal structure determined by a ribbon structure. -/
+/--
+The canonical pivotal structure determined by a ribbon structure, using the
+equation-(8.31)-characterized double-dual monoidal structure above.
+-/
 def canonicalPivotalStructure (ribbon : RibbonStructure C) :
     PivotalStructure C where
   doubleDualMonoidal := drinfeldDoubleDualMonoidal (C := C)

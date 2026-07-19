@@ -62,9 +62,12 @@ def IsPivotalIso
 /--
 A pivotal structure in the sense of EGNO Definition 4.7.7.
 
-The field `doubleDualMonoidal` is the standard monoidal structure on `(**)`;
+The field `doubleDualMonoidal` is a selected monoidal structure on `(**)`;
 `monoidal` says that `iso : id_C ≅ (**)` is an isomorphism of monoidal
-functors, not merely a natural isomorphism.
+functors, not merely a natural isomorphism. The type alone cannot assert that
+the selected structure agrees with an independently constructed
+duality-induced standard structure. Any such identification must be recorded
+by the construction or its source-bound characterization.
 -/
 structure PivotalStructure where
   doubleDualMonoidal : (rightDoubleDualFunctor C).Monoidal
