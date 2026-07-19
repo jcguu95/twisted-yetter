@@ -1,0 +1,168 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_canonical_pivotal_step1_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 3,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "convention_mutations": {
+      "rejected_count": 3,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (1598 jobs).",
+      "status": "PASS"
+    },
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbon.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/AxiomAudit.lean",
+        "lean/Mutations/WrongDrinfeldMirror.lean",
+        "lean/Mutations/WrongCanonicalInverseTwist.lean",
+        "lean/Mutations/WrongDoubleDualOrder.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
+  },
+  "content_hash": "sha256:4b9acf6a1d26367527c4a0bc70201b66db94bed2f55b3f950913d9a8ccae65cb",
+  "elapsed_milliseconds": 22996,
+  "established": [
+    "The non-strict Drinfeld morphism has the EGNO (8.30) crossing and dual order.",
+    "The objectwise canonical pivotal candidate is theta_X followed by u_X.",
+    "Mirror braiding, inverse twist, and left/right double-dual conflation fail closed."
+  ],
+  "explicit_non_claims": [
+    "The objectwise canonical pivotal candidate is not yet a natural isomorphism.",
+    "No monoidal pivotal structure has yet been constructed from RibbonStructure.",
+    "No spherical structure has yet been derived.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T05:00:44Z",
+  "generator_script": "experiments/scripts/build_egno_canonical_pivotal_step1_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "24dab9e0d240a727e2359f9d183477e8fc7a797f",
+    "dirty": false
+  },
+  "inputs": {
+    "egno_pdf": {
+      "bytes": 6216438,
+      "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/egno-canonical-pivotal-primary-sources-v1.json",
+      "sha256": "e1cd58c06b6002f5a8249085fd7aa25e37c3370fb60fd562ca4d3d59c371a7d3"
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "98aa74a0ae2836afde0420329c56683302a88c39d5af4e7ebea8cbc0cb065374"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 1944,
+        "sha256": "98aa74a0ae2836afde0420329c56683302a88c39d5af4e7ebea8cbc0cb065374"
+      },
+      "experiments/inputs/references/egno-canonical-pivotal-primary-sources-v1.json": {
+        "bytes": 2622,
+        "sha256": "e1cd58c06b6002f5a8249085fd7aa25e37c3370fb60fd562ca4d3d59c371a7d3"
+      },
+      "experiments/scripts/build_egno_canonical_pivotal_step1_v1.py": {
+        "bytes": 10645,
+        "sha256": "4478cd796d6928f45389689d1f42d5428ce10201de62b06e111ec1314e8e3a00"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/WrongCanonicalInverseTwist.lean": {
+        "bytes": 557,
+        "sha256": "5924ab9ba493d11184ff1cd6db9db68b1b80059ed106fd62c359e6dc58465ede"
+      },
+      "lean/Mutations/WrongDoubleDualOrder.lean": {
+        "bytes": 526,
+        "sha256": "fc2c213d63d63585918de611f56b4ef4019e946fb591be0b3dd8a335f8899e52"
+      },
+      "lean/Mutations/WrongDrinfeldMirror.lean": {
+        "bytes": 834,
+        "sha256": "517bb9566ed57cf38fa5b3fb735005090bdd6ab6b3271d4a087661322a303860"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2101,
+        "sha256": "3ef518567ddbadebcc7e49cf6f40773e89c71d42c64396bd18a1ac840c4cafbc"
+      },
+      "lean/TwistedYetter/Fusion/AxiomAudit.lean": {
+        "bytes": 2463,
+        "sha256": "0dc3c860f5002c5c50e66fb61ded771cc848e7a73c4b95bdccadd80f0cb04e0a"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean": {
+        "bytes": 1916,
+        "sha256": "e81e16a31e02190069d6969ad7b237aaf74c4bd32696d1d942a187bd8ce06bf1"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean": {
+        "bytes": 367,
+        "sha256": "add6393f671c178842060377de3cafd9099295f3a2b9757b930b5d5c5f4d988a"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
+        "bytes": 5009,
+        "sha256": "736925d0e07a1240ceed4a08c3b72e2648ddb96a433b153d9f3ad1e39ed75405"
+      },
+      "scripts/lean_egno_canonical_pivotal_axiom_audit.sh": {
+        "bytes": 376,
+        "sha256": "8dab395292a0ccbe4358935e3bada26a635a8931f5a18725f7a37a6932f83517"
+      },
+      "scripts/lean_egno_canonical_pivotal_mutation_tests.sh": {
+        "bytes": 1148,
+        "sha256": "e88dcba71417a6ff5baf3842a544dd131597c185cf9650fc563e5957fd928948"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_canonical_pivotal_step1_v1.py": {
+        "bytes": 2719,
+        "sha256": "3e736d1ca80a3827198a7e4b899b48954c3cf7276e463471ebe308495415f5ed"
+      }
+    }
+  },
+  "mathematical_status": "OBJECTWISE_FORMULA_ESTABLISHED_NATURALITY_INVERTIBILITY_MONOIDALITY_OPEN",
+  "remaining_blockers": [
+    "Prove naturality of the Drinfeld and canonical pivotal components.",
+    "Construct and prove an objectwise inverse.",
+    "Construct the monoidal double-dual functor.",
+    "Prove canonical pivotal monoidality and sphericality."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_egno_canonical_pivotal_step1_v1.py",
+  "schema": "twisted-yetter.egno-canonical-pivotal-step1.v1",
+  "started_at_utc": "2026-07-19T05:00:21Z",
+  "status": "PASS_STEP_1_OBJECTWISE_CANONICAL_PIVOTAL_FORMULA",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
