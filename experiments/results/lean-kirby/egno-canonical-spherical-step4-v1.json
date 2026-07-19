@@ -1,0 +1,266 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_canonical_spherical_step4_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 32,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (1599 jobs).",
+      "status": "PASS"
+    },
+    "mutations": {
+      "rejected_count": 12,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldNaturalityWitness.lean [diagnostic: could not synthesize default value]",
+        "PASS expected rejection: lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldNaturalityTarget.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongMonodromyMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldMonodromyDefect.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/BalancedTwistIsNotSpherical.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonLoopMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonDualInverseTwist.lean [diagnostic: rfl]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbon.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/EGNOCanonicalSphericalAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/EGNODoubleDualRegression.lean",
+        "lean/TwistedYetter/Fusion/AxiomAudit.lean",
+        "lean/Mutations/WrongDrinfeldMirror.lean",
+        "lean/Mutations/WrongCanonicalInverseTwist.lean",
+        "lean/Mutations/WrongDoubleDualOrder.lean",
+        "lean/Mutations/MissingDrinfeldNaturalityWitness.lean",
+        "lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean",
+        "lean/Mutations/WrongDrinfeldNaturalityTarget.lean",
+        "lean/Mutations/WrongMonodromyMirror.lean",
+        "lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean",
+        "lean/Mutations/MissingDrinfeldMonodromyDefect.lean",
+        "lean/Mutations/BalancedTwistIsNotSpherical.lean",
+        "lean/Mutations/WrongRibbonLoopMirror.lean",
+        "lean/Mutations/WrongRibbonDualInverseTwist.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
+  },
+  "content_hash": "sha256:11d4ada29b12c1d543c9a1d2336b3021f469f9532448376fa35de3c804365365",
+  "elapsed_milliseconds": 48493,
+  "established": [
+    "The Drinfeld right-dual comparison preserves the selected evaluation and coevaluation maps.",
+    "The canonical pivotal dimension equals the explicit positive-crossing ribbon loop of EGNO equation (8.41).",
+    "The ribbon dual law, twist naturality, mate identities, and braiding naturality identify the loops of X and X*.",
+    "Every RibbonStructure now determines a kernel-checked SphericalStructure whose pivotal structure is the Step 3 canonical pivotal structure."
+  ],
+  "explicit_non_claims": [
+    "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
+    "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T07:27:48Z",
+  "generator_script": "experiments/scripts/build_egno_canonical_spherical_step4_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "0d85620ced67cf98199422517b98d2ab99c72f31",
+    "dirty": false
+  },
+  "inputs": {
+    "egno_pdf": {
+      "bytes": 6216438,
+      "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/egno-canonical-pivotal-primary-sources-v1.json",
+      "sha256": "2492431e0cd55113d1f9e8d8978fda1314e91f004e2a29842cba2343c8861024"
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "7c7863fc005fe8d8efe08f20e7629f4ca14c1580ffb55905d4a4c01664863d07"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 6660,
+        "sha256": "7c7863fc005fe8d8efe08f20e7629f4ca14c1580ffb55905d4a4c01664863d07"
+      },
+      "experiments/inputs/references/egno-canonical-pivotal-primary-sources-v1.json": {
+        "bytes": 2767,
+        "sha256": "2492431e0cd55113d1f9e8d8978fda1314e91f004e2a29842cba2343c8861024"
+      },
+      "experiments/scripts/build_egno_canonical_spherical_step4_v1.py": {
+        "bytes": 12893,
+        "sha256": "cebcdc957f10dab8c5532d74743d02579646582b98d4b94bc9c72c40fae2a23c"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/BalancedTwistIsNotSpherical.lean": {
+        "bytes": 583,
+        "sha256": "e57accf1212ddb3345a514ed2ee638cd220165e9eecc0f63f2d10e12967a9668"
+      },
+      "lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean": {
+        "bytes": 617,
+        "sha256": "7da5bccd33fe4e28be90d25738d4356e98538c694561e026c727c7bd6de9c380"
+      },
+      "lean/Mutations/MissingDrinfeldMonodromyDefect.lean": {
+        "bytes": 755,
+        "sha256": "d562dfbd3403dbb4e08796e5cc0a360c2e35264ae18280abab0d47b649b2abc6"
+      },
+      "lean/Mutations/MissingDrinfeldNaturalityWitness.lean": {
+        "bytes": 625,
+        "sha256": "945091ed77a48b016c2a56d432effc0208e74db8aecc501144b5dc764e2597ad"
+      },
+      "lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean": {
+        "bytes": 1023,
+        "sha256": "e2726a1710e12ff1036463ac97f8af039311337bd52108bbe74b932c3003004f"
+      },
+      "lean/Mutations/WrongCanonicalInverseTwist.lean": {
+        "bytes": 557,
+        "sha256": "5924ab9ba493d11184ff1cd6db9db68b1b80059ed106fd62c359e6dc58465ede"
+      },
+      "lean/Mutations/WrongDoubleDualOrder.lean": {
+        "bytes": 526,
+        "sha256": "fc2c213d63d63585918de611f56b4ef4019e946fb591be0b3dd8a335f8899e52"
+      },
+      "lean/Mutations/WrongDrinfeldMirror.lean": {
+        "bytes": 834,
+        "sha256": "517bb9566ed57cf38fa5b3fb735005090bdd6ab6b3271d4a087661322a303860"
+      },
+      "lean/Mutations/WrongDrinfeldNaturalityTarget.lean": {
+        "bytes": 657,
+        "sha256": "529eaec54f30fadb1fb94be4dc748f91ed638dc5b7847ba845553ce1ca2f8dae"
+      },
+      "lean/Mutations/WrongMonodromyMirror.lean": {
+        "bytes": 517,
+        "sha256": "ecf89e60c1104e24d0840682c7748137ff76a4255f9efa870fcb67d5c393119e"
+      },
+      "lean/Mutations/WrongRibbonDualInverseTwist.lean": {
+        "bytes": 611,
+        "sha256": "ac37d9cd22a1e184605257a8905c2ce2a43368245ec883b454666db0bdf4067f"
+      },
+      "lean/Mutations/WrongRibbonLoopMirror.lean": {
+        "bytes": 650,
+        "sha256": "1ab27ec612fbdf0363417b8dcca5fc22228491b60bcefedf2c51d0a326f965f8"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2152,
+        "sha256": "ca7d44d7b32cb25489e7405955975ca140a01c03c4d078d9aca7dbafae98c525"
+      },
+      "lean/TwistedYetter/Fusion/AxiomAudit.lean": {
+        "bytes": 3360,
+        "sha256": "2f9045ef41a50e7773a67cb5cd8ed0b6a3e781e38040dfc2f57c5f5155f1ff13"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotal.lean": {
+        "bytes": 15622,
+        "sha256": "a1fdc129d847b6a28022b94026a63d2c068609f1b9b30fc8209d9ead7c716d3a"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean": {
+        "bytes": 1360,
+        "sha256": "d46d8a2e4a7270ea1a34eed030d1e5f152f4c2ccb3e8072828e11dde3eb00c6b"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalSpherical.lean": {
+        "bytes": 9882,
+        "sha256": "61e7034996be4c399c3fd2f6a5a4826dac499f7196e869897955382f3bc56108"
+      },
+      "lean/TwistedYetter/Fusion/EGNOCanonicalSphericalAxiomAudit.lean": {
+        "bytes": 1091,
+        "sha256": "8e65ba3b061ac8b694003a6c1bf98938972d45e16be14f64883add52568b6f9f"
+      },
+      "lean/TwistedYetter/Fusion/EGNODoubleDualRegression.lean": {
+        "bytes": 791,
+        "sha256": "e6311b316ba198d090dee8b5cf52424629ac0f65d08ddbba70de40b8a797a2a8"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
+        "bytes": 5318,
+        "sha256": "8dccad77f11395c92c9f3b0c7d84e9b89849d41697daa5f68c9c3b2370f64070"
+      },
+      "scripts/lean_egno_canonical_pivotal_axiom_audit.sh": {
+        "bytes": 490,
+        "sha256": "7a33157dfc53a0d7cb9272b817dd55e962cee7181ff4e6ecebe4633420e3772e"
+      },
+      "scripts/lean_egno_canonical_pivotal_mutation_tests.sh": {
+        "bytes": 1589,
+        "sha256": "0a21b386346cc6ead25754e20ccbeb7ab6d3905830dccf7b1afe805ee27672a3"
+      },
+      "scripts/lean_egno_canonical_spherical_axiom_audit.sh": {
+        "bytes": 480,
+        "sha256": "37de991d2d7adcdc6472761d191fc9b55fa4af58dee24a7a535348ecb0cbe08b"
+      },
+      "scripts/lean_egno_canonical_spherical_mutation_tests.sh": {
+        "bytes": 1229,
+        "sha256": "8842e516014d0c3879f046c3b005b61552f25a8faea65418072222ca1cbdba6f"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_canonical_pivotal_step3_v1.py": {
+        "bytes": 2721,
+        "sha256": "ed881d0d03b77d117fe5aa03cbcc36d7ca3eed433aa6f683a40519e5bddd3542"
+      },
+      "tests/test_egno_canonical_spherical_step4_v1.py": {
+        "bytes": 2875,
+        "sha256": "efc5896bd94d876b71a412a1c20263ac8c70b2d9d1e8383e0766132705ef6c8d"
+      }
+    }
+  },
+  "mathematical_status": "CANONICAL_SPHERICAL_STRUCTURE_ESTABLISHED_TRACE_CYCLICITY_OPEN",
+  "proof_scope": {
+    "converse_status": "NOT_FORMALIZED_NOT_NEEDED_DOWNSTREAM",
+    "direction": "RIBBON_IMPLIES_CANONICAL_PIVOTAL_IS_SPHERICAL",
+    "lean_assumptions": [
+      "Category",
+      "MonoidalCategory",
+      "BraidedCategory",
+      "RightRigidCategory",
+      "RibbonStructure"
+    ],
+    "not_used": [
+      "semisimplicity",
+      "finitely many simple objects",
+      "a concrete fusion category"
+    ],
+    "source": "EGNO Proposition 8.10.12 and equation (8.41), printed page 220"
+  },
+  "remaining_blockers": [
+    "Derive or source-bind spherical trace cyclicity.",
+    "Build the finite semisimple fusion and later Kirby interfaces."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_egno_canonical_spherical_step4_v1.py",
+  "schema": "twisted-yetter.egno-canonical-spherical-step4.v1",
+  "started_at_utc": "2026-07-19T07:27:00Z",
+  "status": "PASS_STEP_4_CANONICAL_SPHERICAL_STRUCTURE_ESTABLISHED",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
