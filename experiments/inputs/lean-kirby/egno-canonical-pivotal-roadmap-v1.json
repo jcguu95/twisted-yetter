@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEPS_8_TO_10_EXPLICIT",
+  "status": "STEP_8_ESTABLISHED_STEPS_9_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -165,7 +165,39 @@
     },
     {
       "id": "8-kirby-colour-expansion",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.TensorIdentityAutomorphism",
+        "TwistedYetter.Fusion.EGNO.TensorIdentityAutomorphism.tensor_hom",
+        "TwistedYetter.Fusion.EGNO.TensorIdentityAutomorphism.unit_hom",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.automorphismSimpleScalar",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.automorphism_app_eq_smul_identity",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.automorphismSimpleScalar_ne_zero",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.automorphismSimpleUnit",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.automorphismScalarPower",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.ordinary",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.integralCharacter",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.integralCharacter_zero",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.integralCharacter_identity",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.diagramExpansion",
+        "TwistedYetter.Kirby.EGNOKirbyColorExpansion.eval_integralCharacter_expansion"
+      ],
+      "source_locators": [
+        "EGNO Definitions 1.8.1 and 1.8.6 and Proposition 1.8.4, printed pages 9-10",
+        "Yetter categorical setup immediately before Definition 6, PDF page 2",
+        "Bärenz--Barrett Definition 2.39 and Remarks 2.40, journal pages 675-676"
+      ],
+      "formal_proof_route": [
+        "The input is an actual natural isomorphism of the identity functor together with its monoidality proof; no simple-object scalar table is accepted.",
+        "Schur's lemma derives the unique scalar action on every listed simple object.",
+        "Invertibility of the natural isomorphism proves every derived scalar is nonzero and therefore defines an element of K-units with integral powers.",
+        "The ribbon fusion structure supplies the quantum dimension of every simple.",
+        "The ordinary coefficient is forced to be dim(s), while the twisted coefficient is forced to be dim(s) times chi_s to the integral exponent.",
+        "The Kirby colour is represented as a formal finite weighted family, not as a nonexistent categorical object with arbitrary scalar multiplicities.",
+        "Diagram expansion and evaluation are proved to be exactly the corresponding finite weighted sum.",
+        "Exponent zero and the identity tensor automorphism both reduce definitionally or theoremically to the ordinary colour."
+      ],
+      "scope_note": "This step is generic in a ribbon fusion category and a monoidal natural automorphism of its identity functor. It derives the formal colour expansion but does not construct a nontrivial automorphism for any concrete category and does not yet prove a Kirby move."
     },
     {
       "id": "9-category-bound-kirby-moves",
@@ -223,13 +255,23 @@
     "tensorator cancellation is a Lean theorem rather than a source input",
     "neither global standard law may be supplied independently for one basis or one Kirby diagram"
   ],
+  "step_8_guards": [
+    "a natural automorphism without its monoidality proof is rejected",
+    "a caller-supplied simple scalar table cannot replace the scalar derived by Schur's lemma",
+    "invertibility of every simple scalar is proved from the natural isomorphism and cannot be asserted independently",
+    "the ordinary Kirby colour coefficient cannot be changed independently of the derived quantum dimension",
+    "the identity automorphism and exponent zero must both recover the ordinary colour",
+    "a formal Kirby colour cannot silently be treated as an object of the category",
+    "evaluation remains the exact finite weighted sum over complete simple-labelled diagrams"
+  ],
   "explicit_non_claims": [
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
     "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized; Step 7 uses the explicitly source-bound Bärenz--Barrett mate trace law instead of silently deriving it.",
     "The spherical mate trace law from Bärenz--Barrett Lemma 3.3 remains an explicit all-objects theorem input; it has not been rederived solely from the SphericalStructure fields in Lean.",
     "Pivotal-functor trace preservation from Bärenz--Barrett Lemma 2.23 remains an explicit all-endomorphisms theorem input; a native pivotal-functor structure has not been formalized in Mathlib.",
-    "No Kirby-colour expansion or category-bound Kirby move has yet been derived.",
+    "No category-bound Kirby move has yet been derived from the Step 8 colour expansion.",
+    "No nontrivial tensor identity automorphism has been constructed for a concrete ribbon fusion category.",
     "No concrete category has been instantiated."
   ]
 }
