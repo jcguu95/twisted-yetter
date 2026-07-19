@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_3_ESTABLISHED_STEPS_4_TO_10_EXPLICIT",
+  "status": "STEP_4_ESTABLISHED_STEPS_5_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -56,7 +56,24 @@
     },
     {
       "id": "4-sphericality",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.canonicalPivotalDimension_eq_ribbonLoop",
+        "TwistedYetter.Fusion.EGNO.drinfeldHom_tensor_twist_evaluation",
+        "TwistedYetter.Fusion.EGNO.ribbonLoop_dual",
+        "TwistedYetter.Fusion.EGNO.canonicalPivotal_dimension_dual",
+        "TwistedYetter.Fusion.EGNO.canonicalSphericalStructure"
+      ],
+      "source_locator": "EGNO Proposition 8.10.12 and equation (8.41), printed page 220",
+      "formal_proof_route": [
+        "Dual uniqueness proves that the Drinfeld comparison preserves evaluation and coevaluation.",
+        "The canonical pivotal dimension reduces to the explicit ribbon loop in equation (8.41).",
+        "Braiding naturality cancels the inverse crossing from the swapped coevaluation against the positive crossing in the dual loop.",
+        "The evaluation mate law moves theta_(X*) across the cap.",
+        "The ribbon dual law identifies its mate with theta_(X**), and twist naturality moves that twist through the Drinfeld comparison.",
+        "The resulting ribbon loop for X* equals the ribbon loop for X, proving dim(X)=dim(X*)."
+      ],
+      "scope_note": "The Lean proof establishes the ribbon-to-spherical direction directly for braided right-rigid categories. It does not use semisimplicity or prove the converse direction."
     },
     {
       "id": "5-trace-cyclicity",
@@ -100,11 +117,17 @@
     "the Drinfeld morphism cannot be treated as monoidal without its positive-monodromy defect",
     "the canonical pivotal structure is constructed only after NatTrans.IsMonoidal is proved"
   ],
+  "step_4_guards": [
+    "a balanced twist without the ribbon dual law cannot authorize the spherical construction",
+    "the positive crossing in the ribbon loop cannot silently be replaced by its mirror",
+    "the dual twist theta_(X*) cannot silently be replaced by its inverse",
+    "sphericality is derived as a theorem rather than inserted as an independent field value"
+  ],
   "explicit_non_claims": [
-    "No spherical structure has yet been derived.",
     "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
     "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
     "No concrete category has been instantiated."
   ]
 }
