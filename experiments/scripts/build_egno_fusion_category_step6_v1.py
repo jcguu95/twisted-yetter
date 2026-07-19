@@ -248,7 +248,7 @@ def build() -> dict[str, Any]:
             "experiments/scripts/build_egno_fusion_category_step6_v1.py"
         ],
         "reproduce_command": (
-            "LEAN_NUM_THREADS=1 uv run python "
+            "LEAN_NUM_THREADS=1 UV_CACHE_DIR=.uv-cache uv run python "
             "experiments/scripts/build_egno_fusion_category_step6_v1.py"
         ),
         "tool_versions": {
