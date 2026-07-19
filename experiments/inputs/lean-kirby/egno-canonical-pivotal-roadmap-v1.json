@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_1_ESTABLISHED_LATER_STEPS_EXPLICIT",
+  "status": "STEP_2_ESTABLISHED_STEPS_3_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -15,7 +15,24 @@
     },
     {
       "id": "2-naturality-and-invertibility",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.drinfeldIso",
+        "TwistedYetter.Fusion.EGNO.drinfeldExpandedHom_naturality",
+        "TwistedYetter.Fusion.EGNO.drinfeldHom_naturality",
+        "TwistedYetter.Fusion.EGNO.drinfeldNatIso",
+        "TwistedYetter.Fusion.EGNO.canonicalPivotalIso"
+      ],
+      "source_locators": [
+        "EGNO calls (8.30) a natural transformation, printed page 214",
+        "EGNO Proposition 8.10.6, printed page 217"
+      ],
+      "formal_proof_route": [
+        "Braiding swaps the chosen exact pairing, making X a right dual of X*.",
+        "Uniqueness of right duals gives the objectwise inverse.",
+        "Braiding naturality plus evaluation and coevaluation mate identities prove naturality.",
+        "NatIso.ofComponents derives inverse naturality from objectwise isomorphisms."
+      ]
     },
     {
       "id": "3-monoidality",
@@ -55,10 +72,16 @@
     "inverse twist cannot definitionally replace equation (8.35)",
     "left double dual cannot silently replace the chosen right double dual"
   ],
+  "step_2_guards": [
+    "objectwise isomorphisms without a naturality witness are rejected",
+    "a forward morphism without inverse data is rejected as a NatIso component",
+    "single-dual f* cannot replace the required double-dual f**",
+    "the right double-dual functor compiles from RightRigidCategory alone"
+  ],
   "explicit_non_claims": [
-    "The objectwise canonical pivotal candidate is not yet a natural isomorphism.",
     "No monoidal pivotal structure has yet been constructed from RibbonStructure.",
     "No spherical structure has yet been derived.",
+    "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
     "No concrete category has been instantiated."
   ]
 }

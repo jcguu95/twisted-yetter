@@ -8,6 +8,10 @@ trap 'rm -f "${output}"' EXIT
   lean/TwistedYetter/Fusion/EGNOCanonicalPivotalAxiomAudit.lean \
   >"${output}" 2>&1
 
+./scripts/lean_local_check.sh \
+  lean/TwistedYetter/Fusion/EGNODoubleDualRegression.lean \
+  >>"${output}" 2>&1
+
 if rg -q 'sorryAx|native_decide\.ax' "${output}"; then
   cat "${output}" >&2
   exit 1

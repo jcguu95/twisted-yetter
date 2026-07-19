@@ -36,7 +36,11 @@ if Lean reports `sorryAx`.
 #print axioms TwistedYetter.Fusion.EGNO.pivotalTrace
 #print axioms TwistedYetter.Fusion.EGNO.pivotalDimension
 #print axioms TwistedYetter.Fusion.EGNO.drinfeldHom
+#print axioms TwistedYetter.Fusion.EGNO.drinfeldIso
+#print axioms TwistedYetter.Fusion.EGNO.drinfeldHom_naturality
+#print axioms TwistedYetter.Fusion.EGNO.drinfeldNatIso
 #print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalHom
 #print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalHom_eq
+#print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalIso
 #print axioms TwistedYetter.Fusion.PivotalMate.equation_3_1_11
 #print axioms TwistedYetter.Fusion.PivotalMate.transformedDualFamily_pair

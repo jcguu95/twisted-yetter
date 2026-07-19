@@ -36,12 +36,13 @@ universe u v
 section Pivotal
 
 variable (C : Type u) [Category.{v} C] [MonoidalCategory C]
-  [RigidCategory C]
+  [RightRigidCategory C]
 
 /--
 The right double-dual endofunctor `X ↦ X**`.
 
-The underlying functor is available from Mathlib's chosen right duals. A
+The underlying functor is available from Mathlib's chosen right duals, so this
+definition deliberately asks only for `RightRigidCategory`. A
 canonical monoidal structure exists mathematically, but is not yet supplied by
 Mathlib v4.29.1.
 -/
@@ -120,7 +121,7 @@ end Pivotal
 section Ribbon
 
 variable (C : Type u) [Category.{v} C] [MonoidalCategory C]
-  [BraidedCategory C] [RigidCategory C]
+  [BraidedCategory C] [RightRigidCategory C]
 
 /--
 A twist or balancing transformation from EGNO Definition 8.10.1,

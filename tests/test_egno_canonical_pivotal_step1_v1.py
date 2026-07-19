@@ -49,16 +49,22 @@ def test_artifact_is_content_addressed_and_clean() -> None:
     assert artifact["content_hash"] == canonical_hash(artifact)
 
 
-def test_only_step_1_is_established() -> None:
-    roadmap = json.loads(ROADMAP.read_text())
-    assert roadmap["steps"][0]["status"] == "ESTABLISHED_IN_LEAN"
-    assert all(
-        step["status"] == "NOT_YET_ESTABLISHED"
-        for step in roadmap["steps"][1:]
-    )
+def test_step_1_artifact_preserves_its_historical_scope() -> None:
     artifact = json.loads(ARTIFACT.read_text())
     assert "NATURALITY_INVERTIBILITY_MONOIDALITY_OPEN" in (
         artifact["mathematical_status"]
+    )
+    commit = artifact["git"]["commit"]
+    historical = json.loads(
+        git_bytes(
+            commit,
+            str(ROADMAP.relative_to(ROOT)),
+        )
+    )
+    assert historical["steps"][0]["status"] == "ESTABLISHED_IN_LEAN"
+    assert all(
+        step["status"] == "NOT_YET_ESTABLISHED"
+        for step in historical["steps"][1:]
     )
 
 

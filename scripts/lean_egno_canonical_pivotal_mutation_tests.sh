@@ -8,12 +8,18 @@ mutations=(
   "lean/Mutations/WrongDrinfeldMirror.lean"
   "lean/Mutations/WrongCanonicalInverseTwist.lean"
   "lean/Mutations/WrongDoubleDualOrder.lean"
+  "lean/Mutations/MissingDrinfeldNaturalityWitness.lean"
+  "lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean"
+  "lean/Mutations/WrongDrinfeldNaturalityTarget.lean"
 )
 
 expected_diagnostics=(
   "rfl"
   "rfl"
   "Type mismatch"
+  "could not synthesize default value"
+  "Type mismatch"
+  "Application type mismatch"
 )
 
 for index in "${!mutations[@]}"; do
