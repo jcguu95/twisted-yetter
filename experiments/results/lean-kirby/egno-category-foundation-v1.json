@@ -1,0 +1,244 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_category_foundation_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 9,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "category_mutations": {
+      "rejected_count": 4,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/MissingPivotalMonoidality.lean [diagnostic: Fields missing: `monoidal`]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalDimensionDual.lean [diagnostic: Fields missing: `dimension_dual`]",
+        "PASS expected rejection: lean/Mutations/MissingBalancingTensor.lean [diagnostic: Fields missing: `tensor`]",
+        "PASS expected rejection: lean/Mutations/MissingRibbonDual.lean [diagnostic: Fields missing: `dual`]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (1597 jobs).",
+      "status": "PASS"
+    },
+    "presentation_mutations": {
+      "rejected_count": 5,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/MissingFramedKinkCompatibility.lean [diagnostic: Fields missing: `negative_sound`]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]",
+        "PASS expected rejection: lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingPresentationCompleteness.lean [diagnostic: Fields missing: `connected`]",
+        "PASS expected rejection: lean/Mutations/MissingPresentationCompletenessCaveat.lean [diagnostic: Fields missing: `source_scope_caveat`]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbon.lean",
+        "lean/TwistedYetter/Fusion/EGNORibbonAxiomAudit.lean",
+        "lean/TwistedYetter/Fusion/AxiomAudit.lean",
+        "lean/TwistedYetter/Kirby/FramingNaturality.lean",
+        "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+        "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+        "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean",
+        "lean/TwistedYetter/Kirby/TableTwoEvaluatorCompiler.lean",
+        "lean/TwistedYetter/Kirby/FinalFormalizationPackage.lean",
+        "lean/Mutations/MissingPivotalMonoidality.lean",
+        "lean/Mutations/MissingSphericalDimensionDual.lean",
+        "lean/Mutations/MissingBalancingTensor.lean",
+        "lean/Mutations/MissingRibbonDual.lean",
+        "lean/Mutations/MissingFramedKinkCompatibility.lean",
+        "lean/Mutations/MissingSphericalCutCyclicity.lean",
+        "lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean",
+        "lean/Mutations/MissingPresentationCompleteness.lean",
+        "lean/Mutations/MissingPresentationCompletenessCaveat.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "source_capture": "PASS_LOCAL_EGNO_PDF_HASH_MATCH"
+  },
+  "content_hash": "sha256:a584128bf147d46091ba362a764252ffc16049b18eaca635ef794d8df5f8986f",
+  "elapsed_milliseconds": 98745,
+  "established": [
+    "PivotalStructure requires a monoidal double-dual isomorphism.",
+    "The EGNO left pivotal trace and pivotal dimension are explicit Lean morphisms.",
+    "SphericalStructure requires equality of dimensions under duality.",
+    "BalancedTwist enforces equation (8.32).",
+    "RibbonStructure enforces dual compatibility.",
+    "Kirby framing accepts a ribbon twist instead of an arbitrary natural automorphism.",
+    "Kirby closure is the pivotal trace attached to a spherical structure.",
+    "The final invariant route now exposes its rigidity requirement."
+  ],
+  "explicit_non_claims": [
+    "The fusion-category layer is not complete.",
+    "RibbonStructure alone has not yet been converted to SphericalStructure in Lean.",
+    "The two B\u00e4renz-Barrett trace-pairing inputs have not yet been derived from the new EGNO structures.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T04:27:39Z",
+  "generator_script": "experiments/scripts/build_egno_category_foundation_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "e5d0e257534ab312ea85882df982405fe66fd211",
+    "dirty": false
+  },
+  "inputs": {
+    "egno_pdf": {
+      "bytes": 6216438,
+      "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    "obligation_matrix": {
+      "path": "experiments/inputs/lean-kirby/egno-category-foundation-obligation-matrix-v1.json",
+      "sha256": "7ccd1f046e80074d293b78406cfce0e7c8484cd2d35215eac09613d959b86bb8"
+    },
+    "reference_ledger": {
+      "path": "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json",
+      "sha256": "b8def2ae6dbddc6554bcb836e111975dc4ac8dff58d5d0f3bcabc929166c7499"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-category-foundation-obligation-matrix-v1.json": {
+        "bytes": 4054,
+        "sha256": "7ccd1f046e80074d293b78406cfce0e7c8484cd2d35215eac09613d959b86bb8"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3476,
+        "sha256": "b8def2ae6dbddc6554bcb836e111975dc4ac8dff58d5d0f3bcabc929166c7499"
+      },
+      "experiments/scripts/build_egno_category_foundation_v1.py": {
+        "bytes": 12226,
+        "sha256": "9fadfbcaebb08468d834435abea8d2dc139a80f84d1a73abb3052b21b4129353"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/ArbitraryCertifiedMoveAsIsotopy.lean": {
+        "bytes": 723,
+        "sha256": "0798255fab283e4ca658258d7a14cb4a074491880ade65fda02999f562256c08"
+      },
+      "lean/Mutations/MissingBalancingTensor.lean": {
+        "bytes": 483,
+        "sha256": "ab4e1840e6f659f067f8dc43774a3b2909223a12ab6eaf26d3e725a65044cc31"
+      },
+      "lean/Mutations/MissingFramedKinkCompatibility.lean": {
+        "bytes": 899,
+        "sha256": "bf74a1d0d244f357f3af66da64804a26af298e430455eef606314af151d4ed51"
+      },
+      "lean/Mutations/MissingPivotalMonoidality.lean": {
+        "bytes": 601,
+        "sha256": "e43dbf2de3e3dbaf7ab5d3b158036d8eb0468ef2fecc145692f3cdd8e76eb452"
+      },
+      "lean/Mutations/MissingPresentationCompleteness.lean": {
+        "bytes": 811,
+        "sha256": "48b03f928e8e987e54db643431021d86540cf067e0aaee88820cc677ecc4b7bf"
+      },
+      "lean/Mutations/MissingPresentationCompletenessCaveat.lean": {
+        "bytes": 965,
+        "sha256": "e910a094962b56cc6636283e74f96d268d3c501849d52bb69e3fea1f96e53433"
+      },
+      "lean/Mutations/MissingRibbonDual.lean": {
+        "bytes": 500,
+        "sha256": "a3a6404154590f47313cebcf244b1b6e6b6172752d71272cdc6461543ea9869e"
+      },
+      "lean/Mutations/MissingSphericalCutCyclicity.lean": {
+        "bytes": 650,
+        "sha256": "601fb83943c8e5f841a98591c9cdbe55590f350b133ad0d8759768d63dd54ee6"
+      },
+      "lean/Mutations/MissingSphericalDimensionDual.lean": {
+        "bytes": 524,
+        "sha256": "97dc979505ecf26295e404ce2916c13e444f4834ab0465d85da05cddcdd1401f"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2052,
+        "sha256": "ab0b551460d852b35f2227977044fbc8a8509be9e79be7afdf2c764a20ddd3f0"
+      },
+      "lean/TwistedYetter/Fusion/AxiomAudit.lean": {
+        "bytes": 2239,
+        "sha256": "c41bdad424fd92f99106e09733ace5d2f9d6e60633d8ac948fffe014d7b3f19a"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbon.lean": {
+        "bytes": 5009,
+        "sha256": "736925d0e07a1240ceed4a08c3b72e2648ddb96a433b153d9f3ad1e39ed75405"
+      },
+      "lean/TwistedYetter/Fusion/EGNORibbonAxiomAudit.lean": {
+        "bytes": 880,
+        "sha256": "20b8d99ba11c3a761e75511186f75fef1e08f7680631a467f31b14286d8146fc"
+      },
+      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
+        "bytes": 11006,
+        "sha256": "03ec5e239f3bfe704928c991998fccd7f313e16186aeb33e68d2c2b2b6b9e569"
+      },
+      "lean/TwistedYetter/Kirby/FinalFormalizationPackage.lean": {
+        "bytes": 6713,
+        "sha256": "a5c84de8a1c50966db5af75cd93db1fc9ab5a6da2ca40fb635bac2c8b2c6ca1e"
+      },
+      "lean/TwistedYetter/Kirby/FramingNaturality.lean": {
+        "bytes": 3963,
+        "sha256": "eb7ce89a55f5f846572eca7bf138d66c950f1a7a25b229ae55e84029fbc6195a"
+      },
+      "lean/TwistedYetter/Kirby/HomologicallyTwistedInvariant.lean": {
+        "bytes": 31168,
+        "sha256": "741c9e2b5d5d3f5dd6139a4a136a144e5c0c8e94be4463300323880d774a3461"
+      },
+      "lean/TwistedYetter/Kirby/PresentationIsotopy.lean": {
+        "bytes": 30583,
+        "sha256": "4d72d05bd87fb5cb4600e789d15d30667953685d9a10244f0e597fa379e9db47"
+      },
+      "lean/TwistedYetter/Kirby/TableTwoEvaluatorCompiler.lean": {
+        "bytes": 15292,
+        "sha256": "8f1bf182b577ac535d995031ebff58c7134f07b41b8502bb2a624540cea6c208"
+      },
+      "scripts/lean_egno_ribbon_axiom_audit.sh": {
+        "bytes": 334,
+        "sha256": "f64def34e51808484cb38e0d527ae462fddb30edc138c20afc437b4463aa817c"
+      },
+      "scripts/lean_egno_ribbon_mutation_tests.sh": {
+        "bytes": 1258,
+        "sha256": "47aae93ff8f3f6f8d82013c6e0110446fea9c1bf7b5665f9ba2536eb9168f986"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "scripts/lean_presentation_isotopy_mutation_tests.sh": {
+        "bytes": 1555,
+        "sha256": "e343fa0b02e37a1a9afd92e50105e321f5237f13303ea88f6c72687cf1ad4b11"
+      },
+      "tests/test_egno_category_foundation_v1.py": {
+        "bytes": 3102,
+        "sha256": "67c05f4b1bf3c7a791c73a40deab4079f375e2999a9c5e6d7f962bd9464431e7"
+      }
+    }
+  },
+  "mathematical_status": "PARTIAL_CATEGORY_FOUNDATION_ESTABLISHED_WITH_EXPLICIT_STANDARD_THEOREM_INPUTS",
+  "remaining_blockers": [
+    "Formalize a finite semisimple fusion-category interface.",
+    "Formalize the canonical ribbon-to-spherical pivotal construction of EGNO Proposition 8.10.12.",
+    "Derive PivotalTraceCompatibility from a formal pivotal functor.",
+    "Derive SphericalMateCompatibility from the formal spherical trace calculus."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_egno_category_foundation_v1.py",
+  "schema": "twisted-yetter.egno-category-foundation.v1",
+  "started_at_utc": "2026-07-19T04:26:01Z",
+  "status": "PASS_EGNO_CATEGORY_INTERFACES_AND_KIRBY_BINDINGS",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
