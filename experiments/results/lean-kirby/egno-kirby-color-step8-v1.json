@@ -1,0 +1,240 @@
+{
+  "argv": [
+    "experiments/scripts/build_egno_kirby_color_step8_v1.py"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "audited_declaration_count": 94,
+      "status": "PASS_NO_SORRYAX_OR_NATIVE_ORACLE"
+    },
+    "colour_representation": "PASS_FORMAL_FINITE_WEIGHTED_FAMILY_NOT_CATEGORY_OBJECT",
+    "full_lean_build": {
+      "command": "LEAN_NUM_THREADS=1 lake build TwistedYetter",
+      "output_tail": "Build completed successfully (2240 jobs).",
+      "status": "PASS"
+    },
+    "local_source_capture": "PASS_EGNO_AND_BAERENZ_BARRETT_LOCAL_PDF_HASHES_MATCH",
+    "mutations": {
+      "rejected_count": 28,
+      "rejections": [
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongCanonicalInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongDoubleDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldNaturalityWitness.lean [diagnostic: could not synthesize default value]",
+        "PASS expected rejection: lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongDrinfeldNaturalityTarget.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongMonodromyMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/MissingDrinfeldMonodromyDefect.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/BalancedTwistIsNotSpherical.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonLoopMirror.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/WrongRibbonDualInverseTwist.lean [diagnostic: rfl]",
+        "PASS expected rejection: lean/Mutations/ObjectwisePivotalMapsDoNotGiveTraceCyclicity.lean [diagnostic: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/WrongTraceCyclicityDualOrder.lean [diagnostic: Type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalCutCyclicity.lean [diagnostic: Fields missing: `cyclic`]",
+        "PASS expected rejection: lean/Mutations/FusionListWithoutCompleteness.lean [diagnostic: Fields missing: `simple_complete`]",
+        "PASS expected rejection: lean/Mutations/NumericalMultiplicityIsNotDecomposition.lean [diagnostic: Fields missing: `decomposition`]",
+        "PASS expected rejection: lean/Mutations/DuplicateSimpleListWithoutGuard.lean [diagnostic: Fields missing: `simple_pairwise`]",
+        "PASS expected rejection: lean/Mutations/FusionUnitNeedsSimpleRepresentative.lean [diagnostic: Fields missing: `unitIso`]",
+        "PASS expected rejection: lean/Mutations/FusionDualNeedsRepresentative.lean [diagnostic: Fields missing: `dualIso`]",
+        "PASS expected rejection: lean/Mutations/ArbitraryClosedScalarIsNotFusionData.lean [diagnostic: `closedScalar` is not a field of structure `FusionCategoryData`]",
+        "PASS expected rejection: lean/Mutations/FusionDataWithoutRibbonIsNotRibbonData.lean [diagnostic: Fields missing: `ribbon`]",
+        "PASS expected rejection: lean/Mutations/MissingSphericalMateTraceLaw.lean [diagnostic contains: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingPivotalFunctorTraceLaw.lean [diagnostic contains: Application type mismatch]",
+        "PASS expected rejection: lean/Mutations/MissingTensorAutomorphismMonoidality.lean [diagnostic contains: Fields missing]",
+        "PASS expected rejection: lean/Mutations/FreeTensorAutomorphismScalarTable.lean [diagnostic contains: `simpleScalar` is not a field]",
+        "PASS expected rejection: lean/Mutations/WrongOrdinaryKirbyColorWeight.lean [diagnostic contains: Tactic `rfl` failed]",
+        "PASS expected rejection: lean/Mutations/KirbyColorIsNotCategoryObject.lean [diagnostic contains: Type mismatch]"
+      ],
+      "status": "PASS_FAIL_CLOSED"
+    },
+    "ordinary_weight_origin": "PASS_DERIVED_FROM_CANONICAL_RIBBON_QUANTUM_DIMENSION",
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNOTensorAutomorphism.lean",
+        "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansion.lean",
+        "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansionAxiomAudit.lean",
+        "lean/Mutations/MissingTensorAutomorphismMonoidality.lean",
+        "lean/Mutations/FreeTensorAutomorphismScalarTable.lean",
+        "lean/Mutations/WrongOrdinaryKirbyColorWeight.lean",
+        "lean/Mutations/KirbyColorIsNotCategoryObject.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
+    },
+    "scalar_invertibility": "PASS_DERIVED_FROM_NATURAL_ISOMORPHISM",
+    "scalar_origin": "PASS_DERIVED_BY_SCHUR_NOT_CALLER_SUPPLIED"
+  },
+  "content_hash": "sha256:45a78335b35d548559264cd22781eb5f5a20fc65533d2366f6f578df115d2411",
+  "elapsed_milliseconds": 138408,
+  "explicit_non_claims": [
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
+    "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized; Step 7 uses the explicitly source-bound B\u00e4renz--Barrett mate trace law instead of silently deriving it.",
+    "The spherical mate trace law from B\u00e4renz--Barrett Lemma 3.3 remains an explicit all-objects theorem input; it has not been rederived solely from the SphericalStructure fields in Lean.",
+    "Pivotal-functor trace preservation from B\u00e4renz--Barrett Lemma 2.23 remains an explicit all-endomorphisms theorem input; a native pivotal-functor structure has not been formalized in Mathlib.",
+    "No category-bound Kirby move has yet been derived from the Step 8 colour expansion.",
+    "No nontrivial tensor identity automorphism has been constructed for a concrete ribbon fusion category.",
+    "No concrete category has been instantiated."
+  ],
+  "finished_at_utc": "2026-07-19T10:15:53Z",
+  "generator_script": "experiments/scripts/build_egno_kirby_color_step8_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "b86fa2c8f3e3dba1420b4a914eb3b086e49fa5c0",
+    "dirty": false
+  },
+  "inputs": {
+    "reference_ledgers": {
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json": {
+        "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
+      },
+      "experiments/inputs/references/twisted-yetter-premodular-formula-conjecture-primary-sources-v1.json": {
+        "sha256": "0444df58d1d004ebfa1a9900f45309abd778669f7f8ab2cddbf53d438c42b472"
+      }
+    },
+    "roadmap": {
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "ab11360fe9131fcc5acefdf3e8731e83606aa7c6d6298b6caf807e9041b850eb"
+    },
+    "source_files": {
+      "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json": {
+        "bytes": 18785,
+        "sha256": "ab11360fe9131fcc5acefdf3e8731e83606aa7c6d6298b6caf807e9041b850eb"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/generalized-sliding-framed-context-primary-sources-v1.json": {
+        "bytes": 2760,
+        "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
+      },
+      "experiments/inputs/references/twisted-yetter-premodular-formula-conjecture-primary-sources-v1.json": {
+        "bytes": 6251,
+        "sha256": "0444df58d1d004ebfa1a9900f45309abd778669f7f8ab2cddbf53d438c42b472"
+      },
+      "experiments/scripts/build_egno_kirby_color_step8_v1.py": {
+        "bytes": 15183,
+        "sha256": "32d450c6734dd46cac2b0754f186ad38063352a2bb5b7cedb41366734cbe2dda"
+      },
+      "lake-manifest.json": {
+        "bytes": 3149,
+        "sha256": "f112059942c957bdbc7f5bb0d16b15e59d39756b473ae962dda87cb64af91e75"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/Mutations/FreeTensorAutomorphismScalarTable.lean": {
+        "bytes": 500,
+        "sha256": "1614e179b01b68950de13545d22d10b535e68fbd338caa563209c569e7a662d4"
+      },
+      "lean/Mutations/KirbyColorIsNotCategoryObject.lean": {
+        "bytes": 711,
+        "sha256": "80f389d7583492b57f07c723ab41bf22362e39772b77aa66c543bb1f8614db1f"
+      },
+      "lean/Mutations/MissingTensorAutomorphismMonoidality.lean": {
+        "bytes": 394,
+        "sha256": "11178d42b752226dd253a71fbe46f1bd061523f5a6f662938a5603cbec8b902e"
+      },
+      "lean/Mutations/WrongOrdinaryKirbyColorWeight.lean": {
+        "bytes": 747,
+        "sha256": "5fe0ff3fa60de9339b010ac8b8ec37da83a00a3cd9acd990d0899f1f0d4ab923"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 2446,
+        "sha256": "5f348ee612ffb10b2d9bb6a8280e6771e3648697798e480bf988ab8eec73ff5e"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTensorAutomorphism.lean": {
+        "bytes": 7279,
+        "sha256": "a80269cd6f8b6b31effa2b295aacef21a43d0a8f8fb9a237a7897b2c746ebcc0"
+      },
+      "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansion.lean": {
+        "bytes": 5913,
+        "sha256": "b0a7465e1567725e442867498708929fbfc7780b1aa2bfc35a1f7336b3cef54b"
+      },
+      "lean/TwistedYetter/Kirby/EGNOKirbyColorExpansionAxiomAudit.lean": {
+        "bytes": 2068,
+        "sha256": "f05b98ced68b959c194e97250424fc4a734dce0c3f26a20588f473614fe8da6d"
+      },
+      "scripts/lean_egno_kirby_color_axiom_audit.sh": {
+        "bytes": 478,
+        "sha256": "354c3eb3d4a5debc6cdabd94e4b1b8071c2ba99eb531039a645f965667f168a7"
+      },
+      "scripts/lean_egno_kirby_color_mutation_tests.sh": {
+        "bytes": 1375,
+        "sha256": "3a0a91d86c937eaa3bda2656041c19e94ffa6f0d5cd2c7eed04093f8861e320b"
+      },
+      "scripts/lean_egno_trace_pairing_axiom_audit.sh": {
+        "bytes": 476,
+        "sha256": "0f488672be793375ddafabde4611b8115d73a12d5ffeff8fc9061f24d8ce7b7c"
+      },
+      "scripts/lean_egno_trace_pairing_mutation_tests.sh": {
+        "bytes": 1222,
+        "sha256": "2d1092a6108e1056141f59fcbb39580a8e7ac38e4f7e7fb9082294bd173d2232"
+      },
+      "scripts/lean_local_check.sh": {
+        "bytes": 539,
+        "sha256": "6525ffdc8eed55fa4da2b6d1841830ff923554fe0f0f81820ac2e0154be6b6c9"
+      },
+      "tests/test_egno_kirby_color_step8_v1.py": {
+        "bytes": 3262,
+        "sha256": "564f9883120f0fa1c6a5ee98f0d3620775b260b88564309c4c47637cac15e74a"
+      }
+    },
+    "source_pdfs": {
+      "baerenz_barrett": {
+        "bytes": 906609,
+        "path_at_capture_time": "/private/tmp/baerenz-barrett-dichromatic-2018.pdf",
+        "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+      },
+      "egno": {
+        "bytes": 6216438,
+        "path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+        "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+      },
+      "yetter": {
+        "arxiv_version": "https://arxiv.org/pdf/hep-th/9311082v1",
+        "bytes_status": "NOT_STORED_IN_REPOSITORY",
+        "sha256": "e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b",
+        "status": "HASHED_REMOTE_SNAPSHOT_LEDGER_ONLY"
+      }
+    }
+  },
+  "lean_derived": [
+    "monoidality gives the tensor and unit laws of the identity automorphism",
+    "Schur's lemma gives the unique scalar action on every listed simple",
+    "the natural isomorphism makes each simple scalar nonzero",
+    "integral powers are powers of a derived field unit",
+    "ordinary Kirby coefficients are the canonical ribbon quantum dimensions",
+    "twisted coefficients are dim(s) times the derived scalar to the integral exponent",
+    "zero exponent and the identity automorphism recover the ordinary colour",
+    "evaluation of a formal colour is the exact finite weighted diagram sum"
+  ],
+  "mathematical_status": "ORDINARY_AND_INTEGRAL_CHARACTER_KIRBY_COLOR_EXPANSIONS_DERIVED_FROM_RIBBON_FUSION_DATA_AND_A_MONOIDAL_IDENTITY_AUTOMORPHISM",
+  "remaining_blockers": [
+    "Bind the derived colour and pairing laws to category-level Kirby moves.",
+    "Assemble the four-manifold invariant from the category-bound moves."
+  ],
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 UV_CACHE_DIR=.uv-cache uv run python experiments/scripts/build_egno_kirby_color_step8_v1.py",
+  "schema": "twisted-yetter.egno-kirby-color-step8.v1",
+  "started_at_utc": "2026-07-19T10:13:34Z",
+  "status": "PASS_STEP_8_KIRBY_COLOR_EXPANSION",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "mathlib_tag": "v4.29.1",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "python": "3.11.15"
+  }
+}
