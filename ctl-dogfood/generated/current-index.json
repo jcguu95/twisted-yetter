@@ -12243,109 +12243,122 @@
       "revision_kind": "claim"
     },
     {
-      "cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
+      "cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
       "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
       "payload": {
         "artifacts": [
           {
+            "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+            "artifact_id": "egno-trace-pairing-step7-v1",
+            "content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+            "git_blob": "d90b496e2888af763d0c7cb815f12ce079049030",
+            "path": "experiments/results/lean-kirby/egno-trace-pairing-step7-v1.json",
+            "sha256": "c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872",
+            "status": "PASS_STEP_7_TRACE_PAIRING_COMPATIBILITY_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS"
+          },
+          {
+            "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+            "artifact_id": "lean-egno-trace-pairing",
+            "git_blob": "0ac7a4f327c3c157ac71a5412ec9498f2c4c1a2a",
+            "path": "lean/TwistedYetter/Fusion/EGNOTracePairing.lean",
+            "sha256": "3e553ea74b77f9c174833dddddc7ff6a7c69da16b76f850bafbb485e9e18fbdb",
+            "status": "LEAN_KERNEL_CHECKED_PERFECT_TRACE_PAIRING_AND_MATE_TRANSPORT"
+          },
+          {
+            "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+            "artifact_id": "lean-egno-pairing-compatibility",
+            "git_blob": "55a81f78aecce5fae8251aca868544d309637f6b",
+            "path": "lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean",
+            "sha256": "a01432fc27456ac669d25614a99ecab4e6643fe356737bfd553cefef625f0283",
+            "status": "LEAN_KERNEL_CHECKED_GLOBAL_TO_LOCAL_FUNCTOR_COMPATIBILITY"
+          },
+          {
+            "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+            "artifact_id": "lean-egno-trace-pairing-axiom-audit",
+            "git_blob": "91c6b04259db5adb7fbb0925a4790421f1c64829",
+            "path": "lean/TwistedYetter/Fusion/EGNOTracePairingAxiomAudit.lean",
+            "sha256": "9654f8cbc5dc064f11643f63a71f2959561b0ac9bcc7b28572bd3bd8ce7e3380",
+            "status": "PASS_73_DECLARATIONS_NO_PROOF_ORACLE"
+          },
+          {
+            "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+            "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+            "git_blob": "f98fe659423dc8ecab2dcf1aaa53d9331322b561",
+            "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+            "sha256": "aa8f7fedc42fcb14f8a8cc87104044ddd525aefb65f42af8d3027ff6d9d7dd53",
+            "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEPS_8_TO_10_EXPLICIT"
+          },
+          {
             "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
             "artifact_id": "egno-fusion-category-step6-v1",
             "content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
-            "git_blob": "dfc1f02997f9373eefe6490e88874c23834fa2aa",
             "path": "experiments/results/lean-kirby/egno-fusion-category-step6-v1.json",
-            "sha256": "bf993d3674f23ceda3e5fb70e5119dc79858c09fc4d6243f1edde33b6ef6f25b",
-            "status": "PASS_STEP_6_FINITE_SEMISIMPLE_FUSION_INTERFACE_ESTABLISHED"
-          },
-          {
-            "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
-            "artifact_id": "lean-egno-fusion-category",
-            "git_blob": "683ac8e38b3e43bd359716a34a629c59774bc798",
-            "path": "lean/TwistedYetter/Fusion/EGNOFusionCategory.lean",
-            "sha256": "81f394abdc17334bdae00146212e32a2a3ca8e8605266b04e62d3f1b701b50c4",
-            "status": "LEAN_KERNEL_CHECKED_GENERIC_FUSION_AND_RIBBON_INTERFACE"
-          },
-          {
-            "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
-            "artifact_id": "lean-egno-fusion-category-axiom-audit",
-            "git_blob": "40d95d923ea269da54e045e4d4d96d4d82b72c34",
-            "path": "lean/TwistedYetter/Fusion/EGNOFusionCategoryAxiomAudit.lean",
-            "sha256": "f308b6a15757dffd5514519dcf67820892eb8ea5f453f57ff8ccb27b2254e314",
-            "status": "PASS_57_DECLARATIONS_NO_PROOF_ORACLE"
-          },
-          {
-            "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
-            "artifact_id": "egno-canonical-pivotal-roadmap-v1",
-            "git_blob": "6e0be84e4a48a6df929f7be1189dbeb39c0611bd",
-            "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
-            "sha256": "c5cf80f909e5fb51dd02f3179dc13ecf507a682a000d571f9e02335af3626ba2",
-            "status": "STEP_6_ESTABLISHED_STEPS_7_TO_10_EXPLICIT"
-          },
-          {
-            "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
-            "artifact_id": "egno-trace-cyclicity-step5-v1",
-            "content_hash": "sha256:664bb105a40519dbcbeb8fed4d257499e2eab3813fc7258deb0d96f4cf79741d",
-            "path": "experiments/results/lean-kirby/egno-trace-cyclicity-step5-v1.json",
-            "status": "HISTORICAL_PREDECESSOR_STEP_5"
+            "status": "HISTORICAL_PREDECESSOR_STEP_6"
           }
         ],
-        "created_at": "2026-07-19T08:45:10Z",
+        "created_at": "2026-07-19T09:44:36Z",
         "created_by": "actor:codex",
-        "definition_boundary": {
-          "derived_not_assumed": [
-            "Hom dimensions between listed simples",
-            "the K-linear equivalence K isomorphic to End(1)",
-            "closed-diagram scalarization and its algebraic laws",
-            "identity resolutions for every object and every tensor product of simples",
-            "canonical pivotal, spherical, trace, and quantum-dimension data after a RibbonStructure is supplied"
+        "derived_boundary": {
+          "fully_lean_derived": [
+            "composition through every simple object separates morphisms on both sides",
+            "composition through every simple object is a perfect pairing",
+            "composition through the tensor unit is a perfect pairing",
+            "the two Frobenius bending maps are linear equivalences",
+            "the joined cup and pivotal cap equal the pivotal trace",
+            "the pivotal trace pairing on arbitrary Hom spaces is perfect",
+            "the pivotal structure determines the coherent reverse exact pairings and both mate maps",
+            "one global mate law generates every local PairingTransport",
+            "strong monoidal tensorators cancel in a composite image coupon",
+            "one global functor trace law generates every local PivotalTraceCompatibility"
           ],
-          "source_locators": [
-            "EGNO Definitions 1.8.1 and 1.8.6, printed pages 9-10",
-            "EGNO Proposition 1.8.4, printed page 9",
-            "EGNO Definition 4.1.1, printed page 65"
+          "standard_theorem_inputs_not_reproved": [
+            {
+              "name": "SphericalMateTraceLaw",
+              "scope": "all objects X, Y, Z and all matching morphisms",
+              "source_locator": "B\u00e4renz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684"
+            },
+            {
+              "name": "PivotalFunctorTraceLaw",
+              "scope": "all source objects and all endomorphisms",
+              "source_locator": "B\u00e4renz--Barrett Lemma 2.23, equation (2.1.17), journal pages 671-672"
+            }
           ],
-          "status": "PROOF_RELEVANT_FINITE_SEMISIMPLE_INTERFACE_ESTABLISHED",
-          "stored_domain_data": [
-            "a finite duplicate-free complete simple skeleton",
-            "finite-dimensional Hom spaces",
-            "an actual finite biproduct decomposition of every object",
-            "a simple representative isomorphic to the tensor unit",
-            "right-dual representatives",
-            "a RibbonStructure only for the ribbon refinement"
-          ],
-          "unit_condition_encoding": "The Lean interface stores the tensor unit as a listed simple representative and derives the canonical scalar map by Schur's lemma. It does not separately formalize the equivalence of this encoding with every formulation of EGNO's End(1) isomorphic to K condition."
+          "status": "LOCAL_COMPATIBILITY_DERIVED_FROM_TWO_EXPLICIT_GLOBAL_STANDARD_LAWS"
         },
         "established": [
-          "Steps 1 through 5 remain established: the canonical pivotal formula, naturality, monoidality, ribbon-to-spherical construction, and pivotal trace cyclicity.",
-          "FusionCategoryData now records a finite duplicate-free complete set of simple representatives.",
-          "Every object has an actual finite biproduct isomorphism to listed simple summands; a numerical fusion table alone cannot inhabit the interface.",
-          "Finite-dimensional Hom spaces and explicit simple decompositions supply the proof-relevant locally finite and semisimple content used in EGNO's fusion-category definition.",
-          "The tensor unit is represented by a listed simple, and Schur's lemma derives a canonical K-linear equivalence from K to End(1).",
-          "Closed categorical morphisms are scalarized through that derived equivalence; identity, addition, scalar multiplication, and composition laws are Lean-proved.",
-          "Every object, including every tensor product of simple representatives, has a Lean-proved finite identity resolution.",
-          "RibbonFusionCategoryData binds one RibbonStructure to the fusion data and derives the previously proved pivotal, spherical, trace, categorical-dimension, and scalar quantum-dimension constructions.",
-          "Twenty-two cumulative mutation tests reject all Step 1-6 convention errors and the seven Step 6 omissions or unauthorized promotions.",
-          "Fifty-seven declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
-          "The full 2236-job umbrella build and all thirty-four related artifact replay tests pass with LEAN_NUM_THREADS=1."
+          "Steps 1 through 6 remain established.",
+          "The actual finite simple decomposition proves both left and right separation for composition through a simple object.",
+          "Finite-dimensionality upgrades the separating composition map to a perfect pairing; nondegeneracy is not a caller-supplied field.",
+          "Frobenius reciprocity bends arbitrary Hom spaces into cup and cap spaces through the simple tensor unit.",
+          "Lean proves that joining the cup and pivotal cap is exactly the pivotal trace.",
+          "Consequently the pivotal trace pairing on every pair of objects is perfect.",
+          "The reverse exact pairing and the two mate maps are all derived from one pivotal structure, preventing a mixed dual convention.",
+          "The source-bound SphericalMateTraceLaw is one all-objects input and produces every local pairing transport.",
+          "The source and target tensorators in a composite monoidal image coupon cancel by a Lean theorem.",
+          "The source-bound PivotalFunctorTraceLaw is one all-endomorphisms input and produces every local functor pairing compatibility.",
+          "Twenty-four cumulative mutation tests reject all Step 1-7 convention errors, including missing mate and functor global laws.",
+          "Seventy-three declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+          "The full 2238-job umbrella build and all six Step 7 artifact tests pass with LEAN_NUM_THREADS=1."
         ],
         "explicit_nonclaims": [
           "This objective note is not a theorem claim about a complete four-manifold invariant.",
-          "This step defines the generic finite semisimple interface; it does not construct its fields for any concrete fusion, premodular, or modular category.",
-          "The equivalence between the stored simple-unit encoding and every abstract formulation of EGNO's End(1) isomorphic to K condition has not been separately formalized in Lean.",
-          "Nondegeneracy of the categorical trace pairing has not yet been derived from this interface.",
-          "Compatibility of mate maps, pivotal functors, and basis transport with the derived trace pairing remains open.",
-          "No Kirby-colour expansion, category-bound Kirby move, or complete four-manifold invariant is established by this step.",
-          "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean.",
-          "EGNO Theorem 4.7.15, equality of left and right traces, remains unformalized because Step 5 only required pivotal trace cyclicity."
+          "This step does not instantiate a concrete fusion, premodular, or modular category.",
+          "SphericalMateTraceLaw is an explicit source-bound theorem parameter; it has not been rederived solely from the fields of SphericalStructure in Lean.",
+          "PivotalFunctorTraceLaw is an explicit source-bound theorem parameter; a native pivotal-functor structure and its trace theorem have not been formalized in Mathlib.",
+          "EGNO Theorem 4.7.15, equality of left and right traces, remains unformalized.",
+          "No Kirby-colour expansion is established by this step.",
+          "No category-bound Kirby move or complete four-manifold invariant is established by this step.",
+          "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean."
         ],
-        "mathematical_status": "GENERIC_PROOF_RELEVANT_FUSION_AND_RIBBON_INTERFACE_ESTABLISHED",
-        "note_id": "objective-note-2026-07-18-egno-category-foundation-v7",
+        "mathematical_status": "PERFECT_TRACE_PAIRING_DERIVED_AND_LOCAL_COMPATIBILITY_ESTABLISHED_RELATIVE_TO_TWO_EXPLICIT_GLOBAL_THEOREM_INPUTS",
+        "note_id": "objective-note-2026-07-18-egno-category-foundation-v8",
         "objective": {
-          "current_step": "Step 6 of 10 is complete; Step 7 trace-pairing compatibility is next.",
+          "current_step": "Step 7 of 10 is terminal relative to two explicit global standard theorem inputs; Step 8 Kirby-colour expansion is next.",
           "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
           "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
         },
         "prior_current_object": {
-          "cid": "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33",
+          "cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
           "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
         },
         "proof_scope": {
@@ -12360,17 +12373,15 @@
             "MonoidalLinear K C"
           ],
           "concrete_category_instantiated": false,
-          "simple_index_universe": "small finite Type",
-          "source_capture_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+          "source_capture_sha256": {
+            "baerenz_barrett": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+            "egno": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+          }
         },
         "remaining_roadmap": [
           {
-            "id": "7-pairing-compatibility",
-            "status": "NEXT_NOT_YET_ESTABLISHED"
-          },
-          {
             "id": "8-kirby-colour-expansion",
-            "status": "NOT_YET_ESTABLISHED"
+            "status": "NEXT_NOT_YET_ESTABLISHED"
           },
           {
             "id": "9-category-bound-kirby-moves",
@@ -12383,46 +12394,45 @@
         ],
         "schema": "twisted-yetter/objective-lab-note/1",
         "source_repo": {
-          "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+          "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
           "branch": "codex/lean-kirby-coupon-bootstrap",
           "dirty_at_clean_checkpoint": false,
-          "source_implementation_commit": "ca1342fece2b26122494dbce2cf026231c4dc769"
+          "source_implementation_commit": "fa2c99b6818abc31e4f4f1342ea4d7bcef447d12"
         },
-        "status": "STEP_6_ESTABLISHED_STEP_7_OPEN",
+        "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEP_8_OPEN",
         "subjects": [
           "subject:twisted-yetter:paper:egno-tensor-categories-2015",
           "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
           "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
         ],
-        "title": "EGNO category foundation for the Lean Kirby route, revision 7",
-        "top_notice": "Step 6 establishes a generic proof-relevant finite semisimple fusion-category interface and binds ribbon data to the Step 1-5 pivotal and trace constructions. It does not instantiate a concrete category, establish trace-pairing nondegeneracy, prove Kirby-colour sliding, or complete a four-manifold invariant.",
+        "title": "EGNO category foundation for the Lean Kirby route, revision 8",
+        "top_notice": "Step 7 derives the nondegenerate pivotal trace pairing from actual finite semisimple data and derives all local mate and functor pairing compatibility from two explicit global standard theorem inputs. It does not hide those inputs, instantiate a concrete category, establish Kirby-colour expansion, or complete a four-manifold invariant.",
         "verification": {
-          "artifact_content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
-          "artifact_file_sha256": "bf993d3674f23ceda3e5fb70e5119dc79858c09fc4d6243f1edde33b6ef6f25b",
-          "axiom_audit": "PASS_57_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+          "artifact_content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+          "artifact_file_sha256": "c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872",
+          "axiom_audit": "PASS_73_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
           "canonical_ctl_current_root_replay_before_admission": {
-            "current_object_cid": "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33",
-            "root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
-            "source_state": "current-ctl-object",
+            "current_object_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
+            "root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+            "source_state": "current-ctl-binding-after-verified-root-replay",
             "status": "PASS"
           },
-          "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
-          "full_umbrella_build": "PASS_2236_JOBS_LEAN_NUM_THREADS_1",
-          "mutation_tests": "PASS_22_OF_22_EXPECTED_REJECTIONS",
+          "full_umbrella_build": "PASS_2238_JOBS_LEAN_NUM_THREADS_1",
+          "mutation_tests": "PASS_24_OF_24_EXPECTED_REJECTIONS",
           "proof_oracle_count": 0,
-          "related_pytests": "PASS_34_OF_34"
+          "step7_pytests": "PASS_6_OF_6"
         }
       },
       "payload_profile": "ctl-data/opaque-json/1",
       "revision": {
-        "cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
-        "created_at": "2026-07-19T08:45:10Z",
+        "cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+        "created_at": "2026-07-19T09:44:36Z",
         "created_by": {
           "actor_id": "actor:codex"
         },
         "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
         "parents": [
-          "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33"
+          "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
         ],
         "payload_profile": "ctl-data/opaque-json/1",
         "revision_kind": "claim"
@@ -22367,7 +22377,7 @@
       "claim:lab-note:2026-07-16-twisted-yetter-premodular-formula-conjecture-self-review": "ctlobj-sha256:6322372778806a5dfc64cc5a0c89a385d75b4db571ebfaec00669c7e600faf5e",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal": "ctlobj-sha256:22b26fc01c15d9bfe82aba136119979e9852534268e4a00e0d984a068e9d230b",
       "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-computational-compatibility-audit": "ctlobj-sha256:af0e3834a2de3277138cfc33d3ae449d14db00435ac23a535d99f05f70bd1755",
-      "claim:lab-note:2026-07-18-egno-category-foundation-v1": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
+      "claim:lab-note:2026-07-18-egno-category-foundation-v1": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
       "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1": "ctlobj-sha256:bab7a20763797978872899f56a7013b14cf0d0a5389d4ef326309a09db12bf34",
       "claim:resource-handle:e2-su2-2-optimistic-runtime-floor-generator": "ctlobj-sha256:a3fa4629e5b8bc3751412851bb681cf527e63af0ac0bec3c9b700650c9a585f5",
       "claim:resource-handle:figure21-framing-recovery": "ctlobj-sha256:0b7ca379a96bf7c75c429a9a121e767a4631861d281a6cb384fb5970aa444341",
@@ -22928,7 +22938,8 @@
         "ctlobj-sha256:9e9ee556b26f600c3e478695131b267698f6b065a672b386421fe7399fff232a",
         "ctlobj-sha256:b827d9ee8ef7101153f3b76dd69b65d6266f7f7edc0aec64ac6a2b8784f62053",
         "ctlobj-sha256:c688539318b8532804e37469814c9164b5f0aa218ed8f0f60bde72e1b3090b38",
-        "ctlobj-sha256:cb50045e547bcd527f819bd9fecadc44596f8fc4b65ded5f8d6bb0ff9cbf8ccc"
+        "ctlobj-sha256:cb50045e547bcd527f819bd9fecadc44596f8fc4b65ded5f8d6bb0ff9cbf8ccc",
+        "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe"
       ],
       "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1": [
         "ctlobj-sha256:00db40d51d67da4baef3562b8cafd42f09620a370a1476d2906147d2d1255432",
@@ -24236,6 +24247,7 @@
         "ctlobj-sha256:e40d2dadfbde1b94659563d4024fd5f45b01b47a530ff158adfe911099e1f4cd",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
         "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
+        "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
         "ctlobj-sha256:e5ed6853ad0e97cdc43f82240945deb380838efcfd8ec1414d8138b80d696614",
         "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
         "ctlobj-sha256:e6c62a5d0247e741429a174383f8f95c5d7f8907002b4b8a153b080fe51e47b5",
@@ -24478,6 +24490,7 @@
         "ctlobj-sha256:e3ed2290f334640928649b0a495dbd524b4c3b59ffcc1c576bb5d27d70f0384f",
         "ctlobj-sha256:e4d3764c054820a57da06336e1463567e9a4a789712c2204ee332d3d397e6a47",
         "ctlobj-sha256:e4f092bd9edef93f1a0cc26327edbbc8e3e2c7022d5f697c157f31b2e2a4967a",
+        "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
         "ctlobj-sha256:e68c7baadc9cac3e9465393ef6c997f70ad3c8a0bbfb8a3e3f4029aa52ec6381",
         "ctlobj-sha256:e892ec75447bd73e636f0e574cec8b8d9479893cfa2509f3feafcffc77a90a13",
         "ctlobj-sha256:ead0f9e8b97eac8a0f155c6c3bb70a5e3ed240ddca970c49e1727d2bab78eae9",
@@ -26145,6 +26158,35 @@
           "target_cid": "ctlobj-sha256:2139288672c3f227287bc5e7e84a01ad2374b59238a2656c749760c07d76dd0f"
         }
       ],
+      "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.prior_current_object.cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.verification.canonical_ctl_current_root_replay_before_admission.current_object_cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.verification.canonical_ctl_current_root_replay_before_admission.root_cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c"
+        }
+      ],
       "ctlobj-sha256:eb66725cc63683646c6ccecbeec016e9cf21f13cc2305aeca348a8a6620ec1a4": [
         {
           "basis": "payload",
@@ -26451,6 +26493,9 @@
       ],
       "ctlobj-sha256:4a811c04772dfff6805223d569a7d294d46da5f138c3191f7ab2106a483625cb": [
         "ctlobj-sha256:05754be822e9389e63c3b61a62d933e391551927cb9d6d6c173e1a605babffd9"
+      ],
+      "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51": [
+        "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe"
       ],
       "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33": [
         "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
@@ -38906,6 +38951,23 @@
           "admission_batch_cid": null,
           "child_root_cid": null,
           "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
           "current_root_cid": "ctlobj-sha256:c45a5452a09ca404a852894d24270763e84fe2ade497a4ec46775e77023e2e14",
           "generated_at": "2026-07-18T14:03:58Z",
           "logical_id": "claim:lab-note:2026-07-18-four-manifold-invariant-formalization-target-v1",
@@ -42403,6 +42465,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33": [
@@ -42523,6 +42602,23 @@
           "parent_root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
           "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v7.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -46962,6 +47058,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:85e956a4c084eaf8268de84e896279aedd63935939be34da2db821192cdc1691": [
@@ -50336,6 +50449,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:a034fa36f29cd8fa1a7481f5d1c4a753150ea94cfe270c05803274320be6ddc9": [
@@ -52707,6 +52837,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:b9064132924c394251a56bd33867b0bab66551026023a065c830390f6b3d6df5": [
@@ -53750,6 +53897,23 @@
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
       "ctlobj-sha256:c7c7a1439b54c52f97655ec47a4800df6c84c4d8deb9565444bfc0cd1358681c": [
@@ -54463,6 +54627,23 @@
           "parent_root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
           "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v7.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -57313,6 +57494,145 @@
           "parent_root_cid": "ctlobj-sha256:f144cb186456a5a84f1017797df0c692bb590813dd9a8e71064c821fb75d9e59",
           "path": "manifests/lab-note-2026-07-15-rank3-z3-ribbon-realization-partial-progress.json",
           "payload_file": "ctl-dogfood/lab-notes/2026-07-15-rank3-z3-ribbon-realization-partial-progress.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
+      "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:f56f232647f3663c735df970fb64729c4754b3e6a89cf5a8919d17ad4890edc6",
+          "generated_at": "2026-07-19T04:41:00Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:59143d1ae92ba83352371200d240503894973437af7ee61f7d1aa902ab4fb5a6",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v1.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v1.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:0c555e701849ed2ea399b6e5a4a776dea2af42703329ea42bba68eb22d49594e",
+          "generated_at": "2026-07-19T05:07:00Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:f56f232647f3663c735df970fb64729c4754b3e6a89cf5a8919d17ad4890edc6",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v2.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v2.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:c7e59b0426903dcd42a056dda868a4a7d78c4e6943e37a6f40bf09dfc6dbe06f",
+          "generated_at": "2026-07-19T05:55:03Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:0c555e701849ed2ea399b6e5a4a776dea2af42703329ea42bba68eb22d49594e",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v3.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v3.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:c12bfa401b54316ac06045b3c7307bcca17e50339528eb0949691608c49b7ac5",
+          "generated_at": "2026-07-19T06:53:19Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:c7e59b0426903dcd42a056dda868a4a7d78c4e6943e37a6f40bf09dfc6dbe06f",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v4.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v4.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:91d9e68b52cd41cafc48fc351ffba48c95672e09ed8b498dfd92bfbfc60bd2bd",
+          "generated_at": "2026-07-19T07:31:20Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:c12bfa401b54316ac06045b3c7307bcca17e50339528eb0949691608c49b7ac5",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v5.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v5.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
+          "generated_at": "2026-07-19T08:01:25Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:91d9e68b52cd41cafc48fc351ffba48c95672e09ed8b498dfd92bfbfc60bd2bd",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v6.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v6.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "generated_at": "2026-07-19T08:45:10Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:aa5a73f71e5eb7d69d1508cb1e939cee2e0406ff98e15e6afd7ff7700e2b2202",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v7.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v7.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
+          "generated_at": "2026-07-19T09:44:36Z",
+          "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+          "path": "manifests/lab-note-2026-07-18-egno-category-foundation-v8.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-07-18-egno-category-foundation-v8.json",
           "profile": null,
           "schema": "ctl-dogfood/admission-manifest/1"
         }
@@ -64869,7 +65189,7 @@
         "word_count": 19
       },
       "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51": {
-        "active_state": "active",
+        "active_state": "superseded",
         "cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
         "created_at": "2026-07-19T08:45:10Z",
         "created_by": {
@@ -72788,6 +73108,36 @@
         },
         "word_count": 123
       },
+      "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+        "created_at": "2026-07-19T09:44:36Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 2927,
+        "gist": "Step 7 derives the nondegenerate pivotal trace pairing from actual finite semisimple data and derives all local mate and functor pairing compatibility from two explicit global standard theorem inputs. It does not hide those inputs, instantiate a concrete category, establish Ki...",
+        "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"artifacts\":[{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"artifact_id\":\"egno-trace-pairing-step7-v1\",\"content_hash\":\"sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782\",\"git_blob\":\"d90b496e2888af763d0c7cb815f12ce079049030\",\"path\":\"experiments/results/lean-kirby/egno-trace-pairing-step7-v1.json\",\"sha256\":\"c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872\",\"status\":\"PASS_STEP_7_TRACE_PAIRING_COMPATIBILITY_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS\"},{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"artifact_id\":\"lean-egno-trace-pairing\",\"git_blob\":\"0ac7a4f327c3c157ac71a5412ec9498f2c4c1a2a\",\"path\":\"lean/TwistedYetter/Fusion/EGNOTracePairing.lean\",\"sha256\":\"3e553ea74b77f9c174833dddddc7ff6a7c69da16b76f850bafbb485e9e18fbdb\",\"status\":\"LEAN_KERNEL_CHECKED_PERFECT_TRACE_PAIRING_AND_MATE_TRANSPORT\"},{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"artifact_id\":\"lean-egno-pairing-compatibility\",\"git_blob\":\"55a81f78aecce5fae8251aca868544d309637f6b\",\"path\":\"lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean\",\"sha256\":\"a01432fc27456ac669d25614a99ecab4e6643fe356737bfd553cefef625f0283\",\"status\":\"LEAN_KERNEL_CHECKED_GLOBAL_TO_LOCAL_FUNCTOR_COMPATIBILITY\"},{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"artifact_id\":\"lean-egno-trace-pairing-axiom-audit\",\"git_blob\":\"91c6b04259db5adb7fbb0925a4790421f1c64829\",\"path\":\"lean/TwistedYetter/Fusion/EGNOTracePairingAxiomAudit.lean\",\"sha256\":\"9654f8cbc5dc064f11643f63a71f2959561b0ac9bcc7b28572bd3bd8ce7e3380\",\"status\":\"PASS_73_DECLARATIONS_NO_PROOF_ORACLE\"},{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"artifact_id\":\"egno-canonical-pivotal-roadmap-v1\",\"git_blob\":\"f98fe659423dc8ecab2dcf1aaa53d9331322b561\",\"path\":\"experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json\",\"sha256\":\"aa8f7fedc42fcb14f8a8cc87104044ddd525aefb65f42af8d3027ff6d9d7dd53\",\"status\":\"STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEPS_8_TO_10_EXPLICIT\"},{\"artifact_commit\":\"6874b518cc1c5d505166f27bca863e61ac04cf45\",\"artifact_id\":\"egno-fusion-category-step6-v1\",\"content_hash\":\"sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe\",\"path\":\"experiments/results/lean-kirby/egno-fusion-category-step6-v1.json\",\"status\":\"HISTORICAL_PREDECESSOR_STEP_6\"}],\"created_at\":\"2026-07-19T09:44:36Z\",\"created_by\":\"actor:codex\",\"derived_boundary\":{\"fully_lean_derived\":[\"composition through every simple object separates morphisms on both sides\",\"composition through every simple object is a perfect pairing\",\"composition through the tensor unit is a perfect pairing\",\"the two Frobenius bending maps are linear equivalences\",\"the joined cup and pivotal cap equal the pivotal trace\",\"the pivotal trace pairing on arbitrary Hom spaces is perfect\",\"the pivotal structure determines the coherent reverse exact pairings and both mate maps\",\"one global mate law generates every local PairingTransport\",\"strong monoidal tensorators cancel in a composite image coupon\",\"one global functor trace law generates every local PivotalTraceCompatibility\"],\"standard_theorem_inputs_not_reproved\":[{\"name\":\"SphericalMateTraceLaw\",\"scope\":\"all objects X, Y, Z and all matching morphisms\",\"source_locator\":\"B\u00e4renz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684\"},{\"name\":\"PivotalFunctorTraceLaw\",\"scope\":\"all source objects and all endomorphisms\",\"source_locator\":\"B\u00e4renz--Barrett Lemma 2.23, equation (2.1.17), journal pages 671-672\"}],\"status\":\"LOCAL_COMPATIBILITY_DERIVED_FROM_TWO_EXPLICIT_GLOBAL_STANDARD_LAWS\"},\"established\":[\"Steps 1 through 6 remain established.\",\"The actual finite simple decomposition proves both left and right separation for composition through a simple object.\",\"Finite-dimensionality upgrades the separating composition map to a perfect pairing; nondegeneracy is not a caller-supplied field.\",\"Frobenius reciprocity bends arbitrary Hom spaces into cup and cap spaces through the simple tensor unit.\",\"Lean proves that joining the cup and pivotal cap is exactly the pivotal trace.\",\"Consequently the pivotal trace pairing on every pair of objects is perfect.\",\"The reverse exact pairing and the two mate maps are all derived from one pivotal structure, preventing a mixed dual convention.\",\"The source-bound SphericalMateTraceLaw is one all-objects input and produces every local pairing transport.\",\"The source and target tensorators in a composite monoidal image coupon cancel by a Lean theorem.\",\"The source-bound PivotalFunctorTraceLaw is one all-endomorphisms input and produces every local functor pairing compatibility.\",\"Twenty-four cumulative mutation tests reject all Step 1-7 convention errors, including missing mate and functor global laws.\",\"Seventy-three declarations pass the kernel axiom audit without sorryAx or a native proof oracle.\",\"The full 2238-job umbrella build and all six Step 7 artifact tests pass with LEAN_NUM_THREADS=1.\"],\"explicit_nonclaims\":[\"This objective note is not a theorem claim about a complete four-manifold invariant.\",\"This step does not instantiate a concrete fusion, premodular, or modular category.\",\"SphericalMateTraceLaw is an explicit source-bound theorem parameter; it has not been rederived solely from the fields of SphericalStructure in Lean.\",\"PivotalFunctorTraceLaw is an explicit source-bound theorem parameter; a native pivotal-functor structure and its trace theorem have not been formalized in Mathlib.\",\"EGNO Theorem 4.7.15, equality of left and right traces, remains unformalized.\",\"No Kirby-colour expansion is established by this step.\",\"No category-bound Kirby move or complete four-manifold invariant is established by this step.\",\"No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean.\"],\"mathematical_status\":\"PERFECT_TRACE_PAIRING_DERIVED_AND_LOCAL_COMPATIBILITY_ESTABLISHED_RELATIVE_TO_TWO_EXPLICIT_GLOBAL_THEOREM_INPUTS\",\"note_id\":\"objective-note-2026-07-18-egno-category-foundation-v8\",\"objective\":{\"current_step\":\"Step 7 of 10 is terminal relative to two explicit global standard theorem inputs; Step 8 Kirby-colour expansion is next.\",\"goal\":\"Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.\",\"success_boundary\":\"The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact.\"},\"prior_current_object\":{\"cid\":\"ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51\",\"logical_id\":\"claim:lab-note:2026-07-18-egno-category-foundation-v1\"},\"proof_scope\":{\"ambient_lean_assumptions\":[\"Field K\",\"IsAlgClosed K\",\"Abelian C\",\"Linear K C\",\"MonoidalCategory C\",\"RigidCategory C\",\"MonoidalPreadditive C\",\"MonoidalLinear K C\"],\"concrete_category_instantiated\":false,\"source_capture_sha256\":{\"baerenz_barrett\":\"cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de\",\"egno\":\"5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc\"}},\"remaining_roadmap\":[{\"id\":\"8-kirby-colour-expansion\",\"status\":\"NEXT_NOT_YET_ESTABLISHED\"},{\"id\":\"9-category-bound-kirby-moves\",\"status\":\"NOT_YET_ESTABLISHED\"},{\"id\":\"10-four-manifold-invariant-assembly\",\"status\":\"NOT_YET_ESTABLISHED\"}],\"schema\":\"twisted-yetter/objective-lab-note/1\",\"source_repo\":{\"artifact_commit\":\"6af3b3f27b92f241cfbdad0c35ef86feec10e6af\",\"branch\":\"codex/lean-kirby-coupon-bootstrap\",\"dirty_at_clean_checkpoint\":false,\"source_implementation_commit\":\"fa2c99b6818abc31e4f4f1342ea4d7bcef447d12\"},\"status\":\"STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEP_8_OPEN\",\"subjects\":[\"subject:twisted-yetter:paper:egno-tensor-categories-2015\",\"subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature\",\"subject:twisted-yetter:paper:baerenz-barrett-1601-03580\"],\"title\":\"EGNO category foundation for the Lean Kirby route, revision 8\",\"top_notice\":\"Step 7 derives the nondegenerate pivotal trace pairing from actual finite semisimple data and derives all local mate and functor pairing compatibility from two explicit global standard theorem inputs. It does not hide those inputs, instantiate a concrete category, establish Kirby-colour expansion, or complete a four-manifold invariant.\",\"verification\":{\"artifact_content_hash\":\"sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782\",\"artifact_file_sha256\":\"c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872\",\"axiom_audit\":\"PASS_73_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE\",\"canonical_ctl_current_root_replay_before_admission\":{\"current_object_cid\":\"ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51\",\"root_cid\":\"ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c\",\"source_state\":\"current-ctl-binding-after-verified-root-replay\",\"status\":\"PASS\"},\"full_umbrella_build\":\"PASS_2238_JOBS_LEAN_NUM_THREADS_1\",\"mutation_tests\":\"PASS_24_OF_24_EXPECTED_REJECTIONS\",\"proof_oracle_count\":0,\"step7_pytests\":\"PASS_6_OF_6\"}}",
+        "title": "EGNO category foundation for the Lean Kirby route, revision 8",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 9037,
+          "base_estimate": 2545,
+          "estimated_tokens": 2927,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 2,
+          "safety_margin": 382,
+          "serialized_character_count": 9039,
+          "unicode_scalar_count": 9039,
+          "utf8_bytes": 9041
+        },
+        "word_count": 513
+      },
       "ctlobj-sha256:e5ed6853ad0e97cdc43f82240945deb380838efcfd8ec1414d8138b80d696614": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:e5ed6853ad0e97cdc43f82240945deb380838efcfd8ec1414d8138b80d696614",
@@ -74765,6 +75115,28 @@
           "target_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280"
         }
       ],
+      "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51": [
+        {
+          "basis": "ctl/revision.parents",
+          "edge_type": "revision-parent",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.prior_current_object.cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        },
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.verification.canonical_ctl_current_root_replay_before_admission.current_object_cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51"
+        }
+      ],
       "ctlobj-sha256:5290a0a98dad91791f9d44669d0e40f792554391acfd37d46b22056390039a33": [
         {
           "basis": "ctl/revision.parents",
@@ -75558,6 +75930,15 @@
           "target_cid": "ctlobj-sha256:dd164a6790e40f095b1cc2fb640b80f5f6afb5a0ba71fb6d39c146ab4177a870"
         }
       ],
+      "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.verification.canonical_ctl_current_root_replay_before_admission.root_cid",
+          "source_cid": "ctlobj-sha256:e5d6027a0bc7899f6e1828861d8976e3dcd35e729654f4849558eeb02c8ad5fe",
+          "target_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c"
+        }
+      ],
       "ctlobj-sha256:de803b85e5de3335818aae14a605ad22c703cddcffeb523369b76a8b5c54bc1e": [
         {
           "basis": "ctl/revision.parents",
@@ -75852,7 +76233,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-19T08:50:26Z",
+  "generated_at": "2026-07-19T09:49:46Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -78386,17 +78767,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+  "root_cid": "ctlobj-sha256:313f6616c1d2c86c25f79e131c1f90b7fb1ce65e1706a1c1d0de350816ff4804",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 92854,
+    "build_ms": 93779,
     "context_source": "current-context-replay",
-    "current_context_ms": 86867,
-    "discovery_index_ms": 5835,
+    "current_context_ms": 87734,
+    "discovery_index_ms": 5891,
     "payload_summaries_ms": 50,
     "resource_index_ms": 50,
     "write_ms": 51
   },
-  "transition_cid": "ctlobj-sha256:ce68e2509900fbd2afb9a330dc2ab28b0a40c9682ab65fdb5b3311a0a9a24bfb"
+  "transition_cid": "ctlobj-sha256:64580091dd6b6c4691364d9d2dd6d597c718feced134a795f2e76431790124f2"
 }
