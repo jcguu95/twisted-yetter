@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_6_ESTABLISHED_STEPS_7_TO_10_EXPLICIT",
+  "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEPS_8_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -122,11 +122,46 @@
         "Every object, and in particular every tensor product of simples, receives a proved finite identity resolution.",
         "Binding a RibbonStructure to the fusion data derives the previously established pivotal, spherical, trace, and quantum-dimension interfaces."
       ],
-      "scope_note": "This is a generic proof-relevant fusion-category interface. It does not instantiate a concrete category or yet prove nondegeneracy and transport compatibility of the trace pairing."
+      "scope_note": "This is a generic proof-relevant fusion-category interface. It does not instantiate a concrete category. Step 7 separately derives nondegeneracy and binds transport compatibility to two explicit global standard theorem inputs."
     },
     {
       "id": "7-pairing-compatibility",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN_RELATIVE_TO_TWO_EXPLICIT_GLOBAL_STANDARD_TRACE_LAWS",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.simpleCompositionPerfectPairing",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.unitCompositionPerfectPairing",
+        "TwistedYetter.Fusion.EGNO.rightDualCupLinearEquiv",
+        "TwistedYetter.Fusion.EGNO.pivotalCapLinearEquiv",
+        "TwistedYetter.Fusion.EGNO.pivotalCup_comp_cap",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.pivotalTracePerfectPairing",
+        "TwistedYetter.Fusion.EGNO.pivotalMateLinearEquiv",
+        "TwistedYetter.Fusion.EGNO.pivotalDualMateLinearEquiv",
+        "TwistedYetter.Fusion.EGNO.SphericalMateTraceLaw",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.sphericalMatePairingTransport",
+        "TwistedYetter.Fusion.EGNO.PivotalFunctorTraceLaw",
+        "TwistedYetter.Fusion.EGNO.PivotalFunctorTraceLaw.localCompatibility"
+      ],
+      "source_locators": [
+        "Bärenz--Barrett Definition 2.8 and Lemma 2.9, journal pages 667-668",
+        "Bärenz--Barrett Definition 2.20 and Lemma 2.21, journal pages 670-671",
+        "Bärenz--Barrett Lemma 2.23, equation (2.1.17), journal pages 671-672",
+        "Bärenz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684"
+      ],
+      "formal_proof_route": [
+        "The explicit finite simple decomposition proves that composition through every simple object separates morphisms on both sides.",
+        "Finite-dimensionality upgrades the two separating composition maps to a perfect pairing.",
+        "Frobenius reciprocity bends arbitrary Hom spaces into cup and cap spaces through the simple tensor unit.",
+        "The cup-cap composite is proved equal to the pivotal trace, so nondegeneracy of the trace pairing is derived rather than stored.",
+        "The pivotal structure constructs the reverse exact pairings and both concrete mate linear equivalences with one coherent dual convention.",
+        "One all-objects SphericalMateTraceLaw produces every local mate PairingTransport; no basis-specific or diagram-specific equality is accepted.",
+        "The source and target tensorators are proved to cancel in a composite monoidal image coupon.",
+        "One all-endomorphisms PivotalFunctorTraceLaw produces every local functor pairing compatibility from the derived source and target perfect pairings."
+      ],
+      "standard_theorem_inputs_not_reproved": [
+        "SphericalMateTraceLaw: Bärenz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11)",
+        "PivotalFunctorTraceLaw: Bärenz--Barrett Lemma 2.23, equation (2.1.17)"
+      ],
+      "scope_note": "Perfectness and all local transport constructors are kernel-checked. The two named global trace laws remain explicit theorem parameters because Mathlib v4.29.1 has no pivotal-functor or spherical graphical-calculus theorem from which to construct them automatically."
     },
     {
       "id": "8-kirby-colour-expansion",
@@ -179,11 +214,21 @@
     "closed-diagram scalarization cannot be overridden as a data field",
     "fusion data without a RibbonStructure cannot authorize canonical pivotal, spherical, or quantum-dimension data"
   ],
+  "step_7_guards": [
+    "FR-only or arbitrary pairing input cannot construct the derived perfect trace pairing",
+    "trace-pairing nondegeneracy is derived from the actual finite semisimple decomposition and cannot be caller-overridden",
+    "the reverse exact pairings and both mate maps come from the same pivotal structure",
+    "a spherical structure without the global all-objects mate trace law cannot construct local mate transport",
+    "a linear strong monoidal functor without the global all-endomorphisms pivotal trace law cannot construct local functor compatibility",
+    "tensorator cancellation is a Lean theorem rather than a source input",
+    "neither global standard law may be supplied independently for one basis or one Kirby diagram"
+  ],
   "explicit_non_claims": [
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
-    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because pivotal cyclicity is the only cut-moving theorem needed here.",
-    "The nondegenerate trace pairing and its mate and functor compatibility have not yet been derived from the fusion interface.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized; Step 7 uses the explicitly source-bound Bärenz--Barrett mate trace law instead of silently deriving it.",
+    "The spherical mate trace law from Bärenz--Barrett Lemma 3.3 remains an explicit all-objects theorem input; it has not been rederived solely from the SphericalStructure fields in Lean.",
+    "Pivotal-functor trace preservation from Bärenz--Barrett Lemma 2.23 remains an explicit all-endomorphisms theorem input; a native pivotal-functor structure has not been formalized in Mathlib.",
     "No Kirby-colour expansion or category-bound Kirby move has yet been derived.",
     "No concrete category has been instantiated."
   ]

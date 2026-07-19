@@ -1,4 +1,5 @@
 import TwistedYetter.Fusion.Biorthogonal
+import TwistedYetter.Fusion.EGNOTracePairing
 import TwistedYetter.Fusion.FrobeniusLinear
 
 /-!
@@ -22,6 +23,7 @@ namespace TwistedYetter.Fusion.PivotalMate
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Fusion
+open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Fusion.FiniteResolution
 open TwistedYetter.Fusion.FrobeniusLinear
 
@@ -63,6 +65,18 @@ noncomputable def monoidalImageDual
   toFun f := (Functor.Monoidal.μIso F X Y').hom ≫ F.map f
   map_add' f g := by simp
   map_smul' scalar f := by simp
+
+omit [MonoidalPreadditive C] [MonoidalLinear R C]
+  [MonoidalPreadditive D] [MonoidalLinear R D] in
+/-- The tensorators cancel when the two monoidal image coupons compose. -/
+theorem monoidalImagePrimal_comp_dual
+    (X Y' Z : C)
+    (f : Z ⟶ X ⊗ Y')
+    (g : X ⊗ Y' ⟶ Z) :
+    monoidalImagePrimal (R := R) F X Y' Z f ≫
+        monoidalImageDual (R := R) F X Y' Z g =
+      F.map (f ≫ g) := by
+  simp [monoidalImagePrimal, monoidalImageDual, Category.assoc]
 
 /--
 The precise local consequence of pivotality used by Lemma 3.3.
@@ -188,6 +202,7 @@ noncomputable def pivotalMatePairingMap
   (pivotal.pairingMap).comp
     (PairingMap.ofTransport spherical.pairingTransport)
 
+omit [MonoidalPreadditive C] [MonoidalLinear R C] in
 /-- Equation (3.1.11): the fully transformed coupons retain their pairing. -/
 theorem equation_3_1_11
     (pivotal :
@@ -221,6 +236,7 @@ noncomputable def transformedDualFamily
   (pivotalMatePairingMap F pivotal spherical).mapFamily
     (BiorthogonalFamily.ofDualBasisData data)
 
+omit [MonoidalPreadditive C] [MonoidalLinear R C] in
 /-- The transformed source basis satisfies the exact Kronecker equations. -/
 theorem transformedDualFamily_pair
     {ι : Type uI} [Fintype ι] [DecidableEq ι]
