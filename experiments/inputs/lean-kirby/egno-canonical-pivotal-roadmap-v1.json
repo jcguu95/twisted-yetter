@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_5_ESTABLISHED_STEPS_6_TO_10_EXPLICIT",
+  "status": "STEP_6_ESTABLISHED_STEPS_7_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -97,7 +97,32 @@
     },
     {
       "id": "6-finite-semisimple-fusion-interface",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.simpleHom_finrank",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.unitEndLinearEquiv",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.closedScalar",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.identityResolution",
+        "TwistedYetter.Fusion.EGNO.FusionCategoryData.tensorIdentityResolution",
+        "TwistedYetter.Fusion.EGNO.RibbonFusionCategoryData"
+      ],
+      "source_locators": [
+        "EGNO Definitions 1.8.1 and 1.8.6, printed pages 9-10",
+        "EGNO Proposition 1.8.4, printed page 9",
+        "EGNO Definition 4.1.1, printed page 65"
+      ],
+      "formal_proof_route": [
+        "The interface stores a finite duplicate-free complete skeleton of simple representatives.",
+        "Every object comes with an actual finite biproduct isomorphism to listed simple summands; numerical multiplicities alone are not accepted.",
+        "Finite-dimensional Hom spaces record local finiteness, while the explicit decomposition records finite semisimplicity.",
+        "The tensor unit is stored as a listed simple representative, a strengthened finite-semisimple presentation of EGNO's End(1)=K condition.",
+        "Schur's lemma over the pinned algebraically closed field derives the canonical scalar equivalence K ≃ End(1).",
+        "Closed-diagram scalarization and its identity, additive, scalar, and composition laws are derived from that equivalence and cannot be caller-overridden.",
+        "Every object, and in particular every tensor product of simples, receives a proved finite identity resolution.",
+        "Binding a RibbonStructure to the fusion data derives the previously established pivotal, spherical, trace, and quantum-dimension interfaces."
+      ],
+      "scope_note": "This is a generic proof-relevant fusion-category interface. It does not instantiate a concrete category or yet prove nondegeneracy and transport compatibility of the trace pairing."
     },
     {
       "id": "7-pairing-compatibility",
@@ -145,11 +170,21 @@
     "SphericalCutTrace is constructed from a proved trace law instead of a hand-written cyclic equality",
     "trace cyclicity does not silently claim equality of left and right traces"
   ],
+  "step_6_guards": [
+    "a finite list without a completeness proof is rejected",
+    "numerical fusion multiplicities without actual biproduct isomorphisms are rejected",
+    "isomorphic duplicate simple representatives without a pairwise guard are rejected",
+    "a unit label without an isomorphism to the tensor unit is rejected",
+    "a dual label without an isomorphism from the selected categorical dual is rejected",
+    "closed-diagram scalarization cannot be overridden as a data field",
+    "fusion data without a RibbonStructure cannot authorize canonical pivotal, spherical, or quantum-dimension data"
+  ],
   "explicit_non_claims": [
-    "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
     "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because pivotal cyclicity is the only cut-moving theorem needed here.",
+    "The nondegenerate trace pairing and its mate and functor compatibility have not yet been derived from the fusion interface.",
+    "No Kirby-colour expansion or category-bound Kirby move has yet been derived.",
     "No concrete category has been instantiated."
   ]
 }
