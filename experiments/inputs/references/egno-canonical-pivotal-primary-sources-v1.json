@@ -1,0 +1,69 @@
+{
+  "schema": "twisted-yetter.reference-ledger.v1",
+  "status": "SOURCE_LOCATORS_RECORDED",
+  "captured_at_utc": "2026-07-19T04:50:00Z",
+  "scope": "EGNO Drinfeld and canonical pivotal morphisms used by the Lean category foundation.",
+  "references": [
+    {
+      "ref_id": "ref:egno-tensor-categories-2015",
+      "type": "book",
+      "title": "Tensor Categories",
+      "authors": [
+        "Pavel Etingof",
+        "Shlomo Gelaki",
+        "Dmitri Nikshych",
+        "Victor Ostrik"
+      ],
+      "publisher": "American Mathematical Society",
+      "series": "Mathematical Surveys and Monographs",
+      "volume": 205,
+      "year": 2015,
+      "isbn": "978-1-4704-2024-6",
+      "canonical_url": "https://www.ams.org/books/surv/205/",
+      "locators": [
+        {
+          "label": "Drinfeld morphism formula",
+          "locator": "Equation (8.30), printed page 214"
+        },
+        {
+          "label": "Drinfeld tensor defect",
+          "locator": "Proposition 8.9.3 and equation (8.31), printed pages 214-215"
+        },
+        {
+          "label": "Drinfeld morphism name",
+          "locator": "Definition 8.9.4, printed page 215"
+        },
+        {
+          "label": "Drinfeld morphism invertibility in a braided tensor category",
+          "locator": "Proposition 8.10.6 and equation (8.34), printed page 217"
+        },
+        {
+          "label": "canonical pivotal morphism from a twist",
+          "locator": "Equation (8.35), printed page 217"
+        },
+        {
+          "label": "canonical pivotal spherical iff ribbon",
+          "locator": "Proposition 8.10.12, printed page 220"
+        }
+      ],
+      "captured_pdf": {
+        "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+        "bytes": 6216438,
+        "pages": 362,
+        "capture_path_at_capture_time": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf"
+      },
+      "content_hash_status": "LOCAL_PRIMARY_SOURCE_BYTES_HASHED"
+    }
+  ],
+  "convention": {
+    "canonical_pivotal_composition": "theta_X followed by u_X in Lean left-to-right composition",
+    "drinfeld_crossing": "positive braiding c_(X,X*)",
+    "double_dual": "chosen right double dual (X*)*",
+    "non_strict_expansion": "right unitor inverse, coevaluation, associator inverse, positive braiding, evaluation, left unitor"
+  },
+  "non_claims": [
+    "This ledger does not prove naturality, invertibility, monoidality, or sphericality.",
+    "This ledger does not identify left and right chosen duals.",
+    "This ledger does not instantiate a concrete category."
+  ]
+}
