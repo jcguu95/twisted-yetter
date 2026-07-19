@@ -1,0 +1,178 @@
+{
+  "artifacts": [
+    {
+      "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+      "artifact_id": "egno-trace-pairing-step7-v1",
+      "content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+      "git_blob": "d90b496e2888af763d0c7cb815f12ce079049030",
+      "path": "experiments/results/lean-kirby/egno-trace-pairing-step7-v1.json",
+      "sha256": "c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872",
+      "status": "PASS_STEP_7_TRACE_PAIRING_COMPATIBILITY_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS"
+    },
+    {
+      "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+      "artifact_id": "lean-egno-trace-pairing",
+      "git_blob": "0ac7a4f327c3c157ac71a5412ec9498f2c4c1a2a",
+      "path": "lean/TwistedYetter/Fusion/EGNOTracePairing.lean",
+      "sha256": "3e553ea74b77f9c174833dddddc7ff6a7c69da16b76f850bafbb485e9e18fbdb",
+      "status": "LEAN_KERNEL_CHECKED_PERFECT_TRACE_PAIRING_AND_MATE_TRANSPORT"
+    },
+    {
+      "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+      "artifact_id": "lean-egno-pairing-compatibility",
+      "git_blob": "55a81f78aecce5fae8251aca868544d309637f6b",
+      "path": "lean/TwistedYetter/Fusion/EGNOPairingCompatibility.lean",
+      "sha256": "a01432fc27456ac669d25614a99ecab4e6643fe356737bfd553cefef625f0283",
+      "status": "LEAN_KERNEL_CHECKED_GLOBAL_TO_LOCAL_FUNCTOR_COMPATIBILITY"
+    },
+    {
+      "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+      "artifact_id": "lean-egno-trace-pairing-axiom-audit",
+      "git_blob": "91c6b04259db5adb7fbb0925a4790421f1c64829",
+      "path": "lean/TwistedYetter/Fusion/EGNOTracePairingAxiomAudit.lean",
+      "sha256": "9654f8cbc5dc064f11643f63a71f2959561b0ac9bcc7b28572bd3bd8ce7e3380",
+      "status": "PASS_73_DECLARATIONS_NO_PROOF_ORACLE"
+    },
+    {
+      "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+      "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+      "git_blob": "f98fe659423dc8ecab2dcf1aaa53d9331322b561",
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "aa8f7fedc42fcb14f8a8cc87104044ddd525aefb65f42af8d3027ff6d9d7dd53",
+      "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEPS_8_TO_10_EXPLICIT"
+    },
+    {
+      "artifact_commit": "6874b518cc1c5d505166f27bca863e61ac04cf45",
+      "artifact_id": "egno-fusion-category-step6-v1",
+      "content_hash": "sha256:7a1674126761a3b873ea4137abe6f4cc3ab94a12cdd50bbbd443428f8c50b7fe",
+      "path": "experiments/results/lean-kirby/egno-fusion-category-step6-v1.json",
+      "status": "HISTORICAL_PREDECESSOR_STEP_6"
+    }
+  ],
+  "created_at": "2026-07-19T09:44:36Z",
+  "created_by": "actor:codex",
+  "derived_boundary": {
+    "fully_lean_derived": [
+      "composition through every simple object separates morphisms on both sides",
+      "composition through every simple object is a perfect pairing",
+      "composition through the tensor unit is a perfect pairing",
+      "the two Frobenius bending maps are linear equivalences",
+      "the joined cup and pivotal cap equal the pivotal trace",
+      "the pivotal trace pairing on arbitrary Hom spaces is perfect",
+      "the pivotal structure determines the coherent reverse exact pairings and both mate maps",
+      "one global mate law generates every local PairingTransport",
+      "strong monoidal tensorators cancel in a composite image coupon",
+      "one global functor trace law generates every local PivotalTraceCompatibility"
+    ],
+    "standard_theorem_inputs_not_reproved": [
+      {
+        "name": "SphericalMateTraceLaw",
+        "scope": "all objects X, Y, Z and all matching morphisms",
+        "source_locator": "Bärenz--Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684"
+      },
+      {
+        "name": "PivotalFunctorTraceLaw",
+        "scope": "all source objects and all endomorphisms",
+        "source_locator": "Bärenz--Barrett Lemma 2.23, equation (2.1.17), journal pages 671-672"
+      }
+    ],
+    "status": "LOCAL_COMPATIBILITY_DERIVED_FROM_TWO_EXPLICIT_GLOBAL_STANDARD_LAWS"
+  },
+  "established": [
+    "Steps 1 through 6 remain established.",
+    "The actual finite simple decomposition proves both left and right separation for composition through a simple object.",
+    "Finite-dimensionality upgrades the separating composition map to a perfect pairing; nondegeneracy is not a caller-supplied field.",
+    "Frobenius reciprocity bends arbitrary Hom spaces into cup and cap spaces through the simple tensor unit.",
+    "Lean proves that joining the cup and pivotal cap is exactly the pivotal trace.",
+    "Consequently the pivotal trace pairing on every pair of objects is perfect.",
+    "The reverse exact pairing and the two mate maps are all derived from one pivotal structure, preventing a mixed dual convention.",
+    "The source-bound SphericalMateTraceLaw is one all-objects input and produces every local pairing transport.",
+    "The source and target tensorators in a composite monoidal image coupon cancel by a Lean theorem.",
+    "The source-bound PivotalFunctorTraceLaw is one all-endomorphisms input and produces every local functor pairing compatibility.",
+    "Twenty-four cumulative mutation tests reject all Step 1-7 convention errors, including missing mate and functor global laws.",
+    "Seventy-three declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+    "The full 2238-job umbrella build and all six Step 7 artifact tests pass with LEAN_NUM_THREADS=1."
+  ],
+  "explicit_nonclaims": [
+    "This objective note is not a theorem claim about a complete four-manifold invariant.",
+    "This step does not instantiate a concrete fusion, premodular, or modular category.",
+    "SphericalMateTraceLaw is an explicit source-bound theorem parameter; it has not been rederived solely from the fields of SphericalStructure in Lean.",
+    "PivotalFunctorTraceLaw is an explicit source-bound theorem parameter; a native pivotal-functor structure and its trace theorem have not been formalized in Mathlib.",
+    "EGNO Theorem 4.7.15, equality of left and right traces, remains unformalized.",
+    "No Kirby-colour expansion is established by this step.",
+    "No category-bound Kirby move or complete four-manifold invariant is established by this step.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean."
+  ],
+  "mathematical_status": "PERFECT_TRACE_PAIRING_DERIVED_AND_LOCAL_COMPATIBILITY_ESTABLISHED_RELATIVE_TO_TWO_EXPLICIT_GLOBAL_THEOREM_INPUTS",
+  "note_id": "objective-note-2026-07-18-egno-category-foundation-v8",
+  "objective": {
+    "current_step": "Step 7 of 10 is terminal relative to two explicit global standard theorem inputs; Step 8 Kirby-colour expansion is next.",
+    "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+    "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+  },
+  "prior_current_object": {
+    "cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
+    "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+  },
+  "proof_scope": {
+    "ambient_lean_assumptions": [
+      "Field K",
+      "IsAlgClosed K",
+      "Abelian C",
+      "Linear K C",
+      "MonoidalCategory C",
+      "RigidCategory C",
+      "MonoidalPreadditive C",
+      "MonoidalLinear K C"
+    ],
+    "concrete_category_instantiated": false,
+    "source_capture_sha256": {
+      "baerenz_barrett": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de",
+      "egno": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    }
+  },
+  "remaining_roadmap": [
+    {
+      "id": "8-kirby-colour-expansion",
+      "status": "NEXT_NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "9-category-bound-kirby-moves",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "10-four-manifold-invariant-assembly",
+      "status": "NOT_YET_ESTABLISHED"
+    }
+  ],
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "artifact_commit": "6af3b3f27b92f241cfbdad0c35ef86feec10e6af",
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "dirty_at_clean_checkpoint": false,
+    "source_implementation_commit": "fa2c99b6818abc31e4f4f1342ea4d7bcef447d12"
+  },
+  "status": "STEP_7_ESTABLISHED_RELATIVE_TO_TWO_GLOBAL_STANDARD_LAWS_STEP_8_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+  ],
+  "title": "EGNO category foundation for the Lean Kirby route, revision 8",
+  "top_notice": "Step 7 derives the nondegenerate pivotal trace pairing from actual finite semisimple data and derives all local mate and functor pairing compatibility from two explicit global standard theorem inputs. It does not hide those inputs, instantiate a concrete category, establish Kirby-colour expansion, or complete a four-manifold invariant.",
+  "verification": {
+    "artifact_content_hash": "sha256:1cdf8e15ea83a4d8415dec970bc345a76311938edaf2a4212ece8ca62f5d0782",
+    "artifact_file_sha256": "c3d8f316dc5ea8d27cde837b245a01527d3d78fa519bfb8c473973bd35ac5872",
+    "axiom_audit": "PASS_73_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+    "canonical_ctl_current_root_replay_before_admission": {
+      "current_object_cid": "ctlobj-sha256:5199f07c4ed3573ac70f38ec478473b5d700a28292dd40aa06e9ef553dcf7d51",
+      "root_cid": "ctlobj-sha256:dddfeba83b17f107de6cf654c9a39732e50f7382efda549be7e65cf94654f00c",
+      "source_state": "current-ctl-binding-after-verified-root-replay",
+      "status": "PASS"
+    },
+    "full_umbrella_build": "PASS_2238_JOBS_LEAN_NUM_THREADS_1",
+    "mutation_tests": "PASS_24_OF_24_EXPECTED_REJECTIONS",
+    "proof_oracle_count": 0,
+    "step7_pytests": "PASS_6_OF_6"
+  }
+}
