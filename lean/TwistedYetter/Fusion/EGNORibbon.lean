@@ -20,10 +20,11 @@ explicit data here. Its compatibility with the pivotal natural isomorphism is
 an actual `NatTrans.IsMonoidal` proposition, rather than an opaque boolean or
 an untyped source claim.
 
-The cyclicity of the spherical trace is isolated in `SphericalTraceLaws`.
-It is a standard category theorem, but is not silently derived from dual
-choices that Mathlib has not yet made coherent. No concrete fusion category is
-selected in this module.
+The operational cyclicity statement is isolated in `SphericalTraceLaws`, so
+the Kirby layer exposes exactly which theorem it consumes.  The separate
+`EGNOTraceCyclicity` module constructs this structure from a pivotal structure
+by a direct proof using mate identities and pivotal naturality.  No concrete
+fusion category is selected in this module.
 -/
 
 namespace TwistedYetter.Fusion.EGNO
@@ -105,10 +106,10 @@ structure SphericalStructure extends PivotalStructure C where
 /--
 The operational trace theorem used to move a cut around a closed component.
 
-For a spherical tensor category this is the standard cyclicity consequence of
-EGNO Proposition 4.7.3 and Theorem 4.7.15. It remains a named, source-labelled
-input until Mathlib has coherent left/right dual functors and the corresponding
-trace theorem.
+This interface keeps the source and the exact equation visible at the Kirby
+boundary.  `EGNOTraceCyclicity.sphericalTraceLaws` derives it from the pivotal
+structure using EGNO Proposition 4.7.3(4); callers do not supply the equality
+by hand.
 -/
 structure SphericalTraceLaws
     (spherical : SphericalStructure (C := C)) where
@@ -117,7 +118,7 @@ structure SphericalTraceLaws
       pivotalTrace spherical.toPivotalStructure (g ≫ f)
   source_ref : String := "ref:egno-tensor-categories-2015"
   source_locator : String :=
-    "Proposition 4.7.3 and Theorem 4.7.15, printed pages 74-75"
+    "Proposition 4.7.3(4), printed page 74"
 
 end Pivotal
 

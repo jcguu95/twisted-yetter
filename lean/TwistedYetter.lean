@@ -5,6 +5,7 @@ import TwistedYetter.Fusion.Biorthogonal
 import TwistedYetter.Fusion.EGNORibbon
 import TwistedYetter.Fusion.EGNOCanonicalPivotal
 import TwistedYetter.Fusion.EGNOCanonicalSpherical
+import TwistedYetter.Fusion.EGNOTraceCyclicity
 import TwistedYetter.Fusion.PivotalMate
 import TwistedYetter.Fusion.Insertion
 import TwistedYetter.Kirby.CouponKernel

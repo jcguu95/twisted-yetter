@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.Presentation
+import TwistedYetter.Fusion.EGNOTraceCyclicity
 
 /-!
 # Presentation independence for coupon-decorated framed links
@@ -8,8 +9,9 @@ The algebraic move generators are explicit typed diagrams. Reidemeister II
 and III, duality snakes, critical-point interchange, and coupon transport are
 proved from Mathlib's braided and rigid category laws. Framed Reidemeister I
 is tied to an EGNO ribbon structure through two explicit convention equations.
-Cut independence is tied to an EGNO spherical structure through the
-source-labelled spherical trace theorem.
+Cut independence is derived from an EGNO pivotal structure by the formal
+trace-cyclicity theorem; a ribbon structure supplies the canonical spherical
+instance automatically.
 
 The final theorem also keeps regular-diagram completeness as a separate
 source-backed topology input.  It is not hidden inside the evaluator.
@@ -406,6 +408,22 @@ structure SphericalCutTrace where
   traceLaws : SphericalTraceLaws spherical
 
 namespace SphericalCutTrace
+
+/-- Construct the Kirby cut trace from any spherical structure. -/
+def ofSpherical
+    (spherical : SphericalStructure (C := C)) :
+    SphericalCutTrace (C := C) where
+  spherical := spherical
+  traceLaws := sphericalTraceLaws spherical
+
+/--
+Construct the Kirby cut trace directly from a ribbon structure, using the
+canonical spherical pivotal structure.
+-/
+def ofRibbon
+    (ribbon : RibbonStructure C) :
+    SphericalCutTrace (C := C) :=
+  ofSpherical (canonicalSphericalStructure ribbon)
 
 /-- The closure is the EGNO pivotal trace, not an arbitrary scalar function. -/
 def close

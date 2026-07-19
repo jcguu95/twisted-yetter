@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_4_ESTABLISHED_STEPS_5_TO_10_EXPLICIT",
+  "status": "STEP_5_ESTABLISHED_STEPS_6_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -77,7 +77,23 @@
     },
     {
       "id": "5-trace-cyclicity",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.pivotalTrace_cyclic",
+        "TwistedYetter.Fusion.EGNO.sphericalTraceLaws",
+        "TwistedYetter.Fusion.EGNO.canonicalSphericalTraceLaws",
+        "TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.ofSpherical",
+        "TwistedYetter.Kirby.PresentationIsotopy.SphericalCutTrace.ofRibbon"
+      ],
+      "source_locator": "EGNO Proposition 4.7.3(4), printed page 74",
+      "formal_proof_route": [
+        "Expand the pivotal trace as coevaluation, the coupon composite followed by the pivotal map, and evaluation.",
+        "Move the first coupon across the coevaluation; the mate identity turns it into its right dual.",
+        "Move that right dual across the evaluation; the second mate identity turns it into the right double dual.",
+        "Naturality of the pivotal isomorphism rewrites a_X followed by f** as f followed by a_Y.",
+        "The remaining composite is exactly the trace cut after the other coupon."
+      ],
+      "scope_note": "Cyclicity is proved for every pivotal right-rigid monoidal category. Sphericality and semisimplicity are not used. EGNO Theorem 4.7.15 concerns equality of left and right traces and is not claimed here."
     },
     {
       "id": "6-finite-semisimple-fusion-interface",
@@ -123,11 +139,17 @@
     "the dual twist theta_(X*) cannot silently be replaced by its inverse",
     "sphericality is derived as a theorem rather than inserted as an independent field value"
   ],
+  "step_5_guards": [
+    "objectwise maps X -> X** without naturality and monoidality cannot be used as a pivotal structure",
+    "cut movement reverses the cyclic order g after f and does not silently dualize the coupons",
+    "SphericalCutTrace is constructed from a proved trace law instead of a hand-written cyclic equality",
+    "trace cyclicity does not silently claim equality of left and right traces"
+  ],
   "explicit_non_claims": [
-    "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
     "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
     "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator.",
     "The converse implication from sphericality of a canonical pivotal structure to the ribbon dual law has not been formalized because the downstream construction only needs ribbon-to-spherical.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because pivotal cyclicity is the only cut-moving theorem needed here.",
     "No concrete category has been instantiated."
   ]
 }
