@@ -1,0 +1,149 @@
+{
+  "artifacts": [
+    {
+      "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+      "artifact_id": "egno-trace-cyclicity-step5-v1",
+      "content_hash": "sha256:664bb105a40519dbcbeb8fed4d257499e2eab3813fc7258deb0d96f4cf79741d",
+      "git_blob": "c371b94cb3cf95e7d77d3d1e002a0ed9a66c648e",
+      "path": "experiments/results/lean-kirby/egno-trace-cyclicity-step5-v1.json",
+      "sha256": "42f5133922b90d8794789f82c0cae35003b3194f31db857173b8c2eb38b7edc2",
+      "status": "PASS_STEP_5_PIVOTAL_TRACE_CYCLICITY_ESTABLISHED"
+    },
+    {
+      "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+      "artifact_id": "lean-egno-trace-cyclicity",
+      "git_blob": "55a7c62cbd6e282fc2661fd430003631a3d55a2f",
+      "path": "lean/TwistedYetter/Fusion/EGNOTraceCyclicity.lean",
+      "sha256": "fed1ae8137bab74cd5ee7a570baa8a3df0511c2cdd133870da43b259e5f9502c",
+      "status": "LEAN_KERNEL_CHECKED_PIVOTAL_TRACE_CYCLICITY"
+    },
+    {
+      "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+      "artifact_id": "lean-presentation-isotopy-cut-trace",
+      "git_blob": "ac74473aa51bc2bb2c71ce87ba1d641627cfdd95",
+      "path": "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
+      "sha256": "e3355d5b7fe2ced54c1ab524a1479fe22003dbbae4ed64b6d70402bd79fce9b5",
+      "status": "LEAN_KERNEL_CHECKED_RIBBON_TO_KIRBY_CUT_TRACE"
+    },
+    {
+      "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+      "artifact_id": "egno-canonical-pivotal-roadmap-v1",
+      "git_blob": "9475aa82f3b8d73f6db1c3c5f04e138f563f6486",
+      "path": "experiments/inputs/lean-kirby/egno-canonical-pivotal-roadmap-v1.json",
+      "sha256": "d2ccdac557288c3503937045c4f7834303baf57e37afff621a7a33de0190c188",
+      "status": "STEP_5_ESTABLISHED_STEPS_6_TO_10_EXPLICIT"
+    },
+    {
+      "artifact_commit": "083b79e1c32ef0f2e4a3c3885b07a7a1a99fec87",
+      "artifact_id": "egno-canonical-spherical-step4-v1",
+      "content_hash": "sha256:11d4ada29b12c1d543c9a1d2336b3021f469f9532448376fa35de3c804365365",
+      "path": "experiments/results/lean-kirby/egno-canonical-spherical-step4-v1.json",
+      "status": "HISTORICAL_PREDECESSOR_STEP_4"
+    }
+  ],
+  "created_at": "2026-07-19T08:01:25Z",
+  "created_by": "actor:codex",
+  "definition_boundary": {
+    "adopted_characterization": "EGNO Proposition 4.7.3(4), printed page 74",
+    "lean_established": "Pivotal trace cyclicity follows from the right-dual mate identities and naturality of the pivotal isomorphism; the Kirby cut trace is constructed from this theorem.",
+    "not_established": "Equality of left and right traces from EGNO Theorem 4.7.15; that stronger statement is not needed for cut movement.",
+    "status": "DIRECT_PROOF_ESTABLISHED"
+  },
+  "established": [
+    "Steps 1 through 4 remain established: objectwise canonical pivotal formula, natural isomorphism, monoidality, and ribbon-to-canonical-spherical construction.",
+    "For any pivotal right-rigid monoidal category and composable coupons f : X -> Y and g : Y -> X, the pivotal traces of f followed by g and g followed by f are Lean-proved equal.",
+    "The proof moves f across the cup as f*, across the cap as f**, and then uses naturality of the pivotal isomorphism.",
+    "The cyclicity proof does not assume sphericality, semisimplicity, finitely many simples, or a concrete category.",
+    "Every SphericalStructure now determines SphericalTraceLaws without a caller-supplied cyclicity equality.",
+    "Every RibbonStructure now determines the canonical SphericalCutTrace consumed by the Kirby presentation-isotopy layer.",
+    "Fifteen mutation tests reject all Step 1-5 convention errors, objectwise non-natural pivotal maps, wrong dualized cyclic order, and missing cut cyclicity.",
+    "Thirty-seven Step 1-5 and downstream constructor declarations pass the kernel axiom audit without sorryAx or a native proof oracle.",
+    "The full 1600-job umbrella build and all ten Step 4-5 artifact replay tests pass."
+  ],
+  "explicit_nonclaims": [
+    "This objective note is not yet a theorem claim about a complete four-manifold invariant.",
+    "EGNO Theorem 4.7.15, equality of left and right traces in a spherical tensor category, has not been formalized because it is not needed for pivotal trace cyclicity.",
+    "The finite semisimple fusion-category interface remains open.",
+    "The trace-pairing and coupon compatibility layer remains open.",
+    "No independent braiding-free construction of the duality-induced double-dual tensorator has been compared with the equation-(8.31)-characterized tensorator in Lean.",
+    "No concrete fusion, premodular, or modular category has been instantiated by this step.",
+    "No Kirby-colour expansion, category-bound Kirby move, or complete four-manifold invariant is established by this step."
+  ],
+  "mathematical_status": "PIVOTAL_TRACE_CYCLICITY_AND_RIBBON_CUT_TRACE_ESTABLISHED",
+  "note_id": "objective-note-2026-07-18-egno-category-foundation-v6",
+  "objective": {
+    "current_step": "Step 5 of 10 is complete; Step 6 finite semisimple fusion interface is next.",
+    "goal": "Formalize the generic category structures required by the Kirby and coupon route without choosing a concrete category.",
+    "success_boundary": "The category line is complete only after the ten-step roadmap reaches a source-bound terminal artifact."
+  },
+  "prior_current_object": {
+    "cid": "ctlobj-sha256:cb50045e547bcd527f819bd9fecadc44596f8fc4b65ded5f8d6bb0ff9cbf8ccc",
+    "logical_id": "claim:lab-note:2026-07-18-egno-category-foundation-v1"
+  },
+  "proof_scope": {
+    "lean_assumptions": [
+      "Category",
+      "MonoidalCategory",
+      "RightRigidCategory",
+      "PivotalStructure"
+    ],
+    "not_used": [
+      "sphericality",
+      "semisimplicity",
+      "finitely many simple objects",
+      "a concrete fusion category"
+    ],
+    "source_locator": "EGNO Proposition 4.7.3(4), printed page 74"
+  },
+  "remaining_roadmap": [
+    {
+      "id": "6-finite-semisimple-fusion-interface",
+      "status": "NEXT_NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "7-pairing-compatibility",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "8-kirby-colour-expansion",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "9-category-bound-kirby-moves",
+      "status": "NOT_YET_ESTABLISHED"
+    },
+    {
+      "id": "10-four-manifold-invariant-assembly",
+      "status": "NOT_YET_ESTABLISHED"
+    }
+  ],
+  "schema": "twisted-yetter/objective-lab-note/1",
+  "source_repo": {
+    "artifact_commit": "cd12e4e0617c5c7c161e476fed34e8796d6d784b",
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "dirty_at_clean_checkpoint": false,
+    "source_implementation_commit": "70df9ab0b018c445fb5cf31c5b466e282a4cda28"
+  },
+  "status": "STEP_5_ESTABLISHED_STEP_6_OPEN",
+  "subjects": [
+    "subject:twisted-yetter:paper:egno-tensor-categories-2015",
+    "subject:twisted-yetter:reference:crane-yetter-kirby-and-twisted-literature",
+    "subject:twisted-yetter:paper:baerenz-barrett-1601-03580"
+  ],
+  "title": "EGNO category foundation for the Lean Kirby route, revision 6",
+  "top_notice": "Step 5 establishes pivotal trace cyclicity and removes the hand-written cut-cyclicity input from the ribbon-to-Kirby route. It does not establish finite semisimplicity, Kirby-colour sliding, a concrete category, or a complete four-manifold invariant.",
+  "verification": {
+    "artifact_content_hash": "sha256:664bb105a40519dbcbeb8fed4d257499e2eab3813fc7258deb0d96f4cf79741d",
+    "artifact_file_sha256": "42f5133922b90d8794789f82c0cae35003b3194f31db857173b8c2eb38b7edc2",
+    "axiom_audit": "PASS_37_DECLARATIONS_NO_SORRYAX_OR_NATIVE_ORACLE",
+    "canonical_ctl_current_root_replay_before_admission": {
+      "root_cid": "ctlobj-sha256:91d9e68b52cd41cafc48fc351ffba48c95672e09ed8b498dfd92bfbfc60bd2bd",
+      "status": "PASS"
+    },
+    "egno_pdf_sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc",
+    "full_umbrella_build": "PASS_1600_JOBS_LEAN_NUM_THREADS_1",
+    "mutation_tests": "PASS_15_OF_15_EXPECTED_REJECTIONS",
+    "proof_oracle_count": 0,
+    "related_pytests": "PASS_10_OF_10"
+  }
+}
