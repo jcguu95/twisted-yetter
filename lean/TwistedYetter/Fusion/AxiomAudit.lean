@@ -39,8 +39,12 @@ if Lean reports `sorryAx`.
 #print axioms TwistedYetter.Fusion.EGNO.drinfeldIso
 #print axioms TwistedYetter.Fusion.EGNO.drinfeldHom_naturality
 #print axioms TwistedYetter.Fusion.EGNO.drinfeldNatIso
+#print axioms TwistedYetter.Fusion.EGNO.drinfeldDoubleDualMonoidal
+#print axioms TwistedYetter.Fusion.EGNO.drinfeld_tensor_defect
 #print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalHom
 #print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalHom_eq
 #print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalIso
+#print axioms TwistedYetter.Fusion.EGNO.canonicalPivotal_isMonoidal
+#print axioms TwistedYetter.Fusion.EGNO.canonicalPivotalStructure
 #print axioms TwistedYetter.Fusion.PivotalMate.equation_3_1_11
 #print axioms TwistedYetter.Fusion.PivotalMate.transformedDualFamily_pair

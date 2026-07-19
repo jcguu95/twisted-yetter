@@ -1,6 +1,6 @@
 {
   "schema": "twisted-yetter.egno-canonical-pivotal-roadmap.v1",
-  "status": "STEP_2_ESTABLISHED_STEPS_3_TO_10_EXPLICIT",
+  "status": "STEP_3_ESTABLISHED_STEPS_4_TO_10_EXPLICIT",
   "source_ref": "ref:egno-tensor-categories-2015",
   "scope": "Generic canonical pivotal construction; no concrete category.",
   "steps": [
@@ -36,7 +36,22 @@
     },
     {
       "id": "3-monoidality",
-      "status": "NOT_YET_ESTABLISHED"
+      "status": "ESTABLISHED_IN_LEAN",
+      "implementations": [
+        "TwistedYetter.Fusion.EGNO.monodromyIdMonoidal",
+        "TwistedYetter.Fusion.EGNO.drinfeldDoubleDualMonoidal",
+        "TwistedYetter.Fusion.EGNO.drinfeld_tensor_defect",
+        "TwistedYetter.Fusion.EGNO.canonicalPivotal_isMonoidal",
+        "TwistedYetter.Fusion.EGNO.canonicalPivotalStructure"
+      ],
+      "source_locator": "EGNO Proposition 8.9.3 and equation (8.31), printed pages 214-215",
+      "formal_proof_route": [
+        "The composite mopFunctor followed by unmopFunctor has positive double braiding as its tensorator.",
+        "Mathlib monoidal composition supplies the tensorator coherence laws.",
+        "Transport across the Drinfeld natural isomorphism constructs a coherent monoidal structure on the right double-dual functor.",
+        "The transported tensorator makes the Drinfeld monoidal defect exactly positive monodromy.",
+        "The balancing law cancels that monodromy and proves theta_X followed by u_X is monoidal."
+      ]
     },
     {
       "id": "4-sphericality",
@@ -78,10 +93,16 @@
     "single-dual f* cannot replace the required double-dual f**",
     "the right double-dual functor compiles from RightRigidCategory alone"
   ],
+  "step_3_guards": [
+    "mirror monodromy cannot replace positive monodromy",
+    "the ordinary identity tensorator cannot silently replace the monodromy tensorator",
+    "the Drinfeld morphism cannot be treated as monoidal without its positive-monodromy defect",
+    "the canonical pivotal structure is constructed only after NatTrans.IsMonoidal is proved"
+  ],
   "explicit_non_claims": [
-    "No monoidal pivotal structure has yet been constructed from RibbonStructure.",
     "No spherical structure has yet been derived.",
     "No trace-cyclicity theorem has yet been derived from the canonical pivotal structure.",
+    "No finite semisimple fusion interface has yet been connected to the canonical pivotal structure.",
     "No concrete category has been instantiated."
   ]
 }

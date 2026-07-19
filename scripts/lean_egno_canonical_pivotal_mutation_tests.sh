@@ -11,6 +11,9 @@ mutations=(
   "lean/Mutations/MissingDrinfeldNaturalityWitness.lean"
   "lean/Mutations/DrinfeldHomIsNotObjectwiseIso.lean"
   "lean/Mutations/WrongDrinfeldNaturalityTarget.lean"
+  "lean/Mutations/WrongMonodromyMirror.lean"
+  "lean/Mutations/OrdinaryIdentityIsNotMonodromyTensorator.lean"
+  "lean/Mutations/MissingDrinfeldMonodromyDefect.lean"
 )
 
 expected_diagnostics=(
@@ -20,6 +23,9 @@ expected_diagnostics=(
   "could not synthesize default value"
   "Type mismatch"
   "Application type mismatch"
+  "rfl"
+  "rfl"
+  "rfl"
 )
 
 for index in "${!mutations[@]}"; do
