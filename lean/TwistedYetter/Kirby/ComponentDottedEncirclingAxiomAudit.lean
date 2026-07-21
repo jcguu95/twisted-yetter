@@ -1,0 +1,5 @@
+import TwistedYetter.Kirby.ComponentDottedEncircling
+
+set_option pp.universes false in
+#print axioms
+  TwistedYetter.Kirby.ComponentDottedEncircling.ComponentDiagram.openDottedEncircling_interpret_eval

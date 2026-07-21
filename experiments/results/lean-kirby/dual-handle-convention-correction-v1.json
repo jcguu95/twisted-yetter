@@ -1,0 +1,170 @@
+{
+  "argv": [
+    "experiments/scripts/build_dual_handle_convention_correction_v1.py"
+  ],
+  "checks": {
+    "build_command": [
+      "lake",
+      "-Kjobs=2",
+      "build",
+      "TwistedYetter.Kirby.DualHandleConventionAxiomAudit",
+      "TwistedYetter.Kirby.BoundaryCertifiedKirbyPresentationAxiomAudit",
+      "TwistedYetter.Kirby.ModularDottedVacuumBridgeAxiomAudit"
+    ],
+    "build_stdout": {
+      "bytes": 57437,
+      "sha256": "d1823ee34f3c3c5d1a2006139faad525ceb2ded612766795d1c049bc191ed927"
+    },
+    "git_diff_check": {
+      "returncode": 0
+    },
+    "lean_build": "PASS",
+    "lean_threads": 1,
+    "max_parallel_jobs": 2,
+    "source_guards": {
+      "cancellation_indices_swapped": true,
+      "dual_handle_chain_forced": true,
+      "old_no_go_retracted": true,
+      "primal_counts_preserved": true,
+      "proof_holes": [],
+      "status": "PASS_FAIL_CLOSED_DUAL_CONVENTION_GUARDS",
+      "transpose_certificate_required": true,
+      "wrong_primal_regression_quarantined": true
+    }
+  },
+  "content_hash": "sha256:892bc4f7c79630a97b48384110471cb354e1e551c758252cc42050677e6227dc",
+  "correct_convention": {
+    "homology_chain": "C_primal_1 --transpose(d2)--> C_primal_2 --transpose(d3)--> C_primal_3",
+    "normalization_counts": "primal counts, not reversed",
+    "primal_1_handle": "Tham k=3 vacuum projector",
+    "primal_2_handle": "Tham k=2 link component",
+    "primal_3_handle": "Tham k=1 inverse-dimension map"
+  },
+  "elapsed_seconds": 7.901501,
+  "established": {
+    "boundary_adapter": "A DualBoundaryCertificate proves both transpose/adjoint identities and derives the dual d_squared=0 theorem.",
+    "dotted_vacuum": "For every integral exponent, the exact positive Hopf-pair sum equals the global dimension.",
+    "presentation_type_separation": "SpecialKirbyPresentation keeps primal counts and forces handleChain : HandleChainModel counts.turnedOver.",
+    "primal_one_two": "It is dual 2-3; zero and one differ by a dual boundary.",
+    "primal_two_three": "It is dual 1-2; the new coefficient one is not a cycle.",
+    "retracted_interpretation": "The old primal-chain toy counterexample is not an invariant no-go theorem."
+  },
+  "explicit_axiom_boundary": [
+    {
+      "axiom": "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_hopfKirbyKillingFiber",
+      "role": "Label-resolved modular killing lemma; Lean derives the all-exponent finite-sum identity from it."
+    },
+    {
+      "axiom": "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+      "role": "The tensor unit has quantum dimension one."
+    }
+  ],
+  "explicit_nonclaims": [
+    "This artifact does not yet establish the final closed four-manifold invariant.",
+    "It does not prove the global dual-boundary movie integration.",
+    "It does not identify the construction with the original Crane-Yetter state sum.",
+    "The old primal-chain numerical calculation remains only a regression test for the wrong adapter."
+  ],
+  "finished_at_utc": "2026-07-21T01:41:08Z",
+  "generator_script": "experiments/scripts/build_dual_handle_convention_correction_v1.py",
+  "inputs": {
+    "experiments/inputs/references/general-h2-kirby-route-source-audit-v1.json": {
+      "bytes": 5244,
+      "sha256": "3c5ceadda637039346a6ffda9440cafb4a07deb0741c45da9380964423e159a3"
+    },
+    "experiments/results/lean-kirby/cycle-representative-descent-counterexample-v1.json": {
+      "bytes": 4178,
+      "sha256": "963c26fb133aec4d6c35ad80cb17ba546d4e39007e187449c5dffe0473495bc2"
+    },
+    "experiments/scripts/build_dual_handle_convention_correction_v1.py": {
+      "bytes": 15670,
+      "sha256": "9ccae43ed59095a1e72a6149e761b4c01974c8c7669e9a2b3b57be4e64faecff"
+    },
+    "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentation.lean": {
+      "bytes": 14203,
+      "sha256": "2d92cbba87301da83a6bb62fb659c08570af0ac6d4f16f24d573fc7eb4ad7408"
+    },
+    "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentationAxiomAudit.lean": {
+      "bytes": 910,
+      "sha256": "c9b58858a0080b27f40c23a463f1799cead1e1415a54c351ffa98c72136f28eb"
+    },
+    "lean/TwistedYetter/Kirby/DualHandleConvention.lean": {
+      "bytes": 9035,
+      "sha256": "2aeab20276065995a8b9c7b44d2918028447817a8fb874589d29d0158ef068c6"
+    },
+    "lean/TwistedYetter/Kirby/DualHandleConventionAxiomAudit.lean": {
+      "bytes": 817,
+      "sha256": "0f1f5f6a98d6624bf6b13b5fadd7964a912f54933a0f2c8082f0f8c00b5106e5"
+    },
+    "lean/TwistedYetter/Kirby/GeneralH2RawKirbyNoGo.lean": {
+      "bytes": 4705,
+      "sha256": "d132d5e13b9fb9ab1ff8f86fd17eec9be3de69647e38fe3627bd5460fb0851ad"
+    },
+    "lean/TwistedYetter/Kirby/KirbyCancellation.lean": {
+      "bytes": 15295,
+      "sha256": "cd8a1fce0bc0bd9b496dbbbb6f14ea19fe74364ab3f883a2a8c24423444a2978"
+    },
+    "lean/TwistedYetter/Kirby/KirbyCompleteness.lean": {
+      "bytes": 27515,
+      "sha256": "b60acb0117169750dba09c41180332de83309a6da12bf9b279e5e33fdac7ed19"
+    },
+    "lean/TwistedYetter/Kirby/ModularDottedVacuumBridge.lean": {
+      "bytes": 10673,
+      "sha256": "17cea71f52211718d2b469751d6f3059e2372deaf0f28982e171a87d22f7cf41"
+    },
+    "lean/TwistedYetter/Kirby/ModularDottedVacuumBridgeAxiomAudit.lean": {
+      "bytes": 582,
+      "sha256": "f5a40cfce29cf474dee6aae830b6045000c9b6e970de4ac1353dd590e339c80b"
+    },
+    "lean/TwistedYetter/Kirby/ThamThreeHandleVacuum.lean": {
+      "bytes": 6248,
+      "sha256": "a32b0fa206e4abd923698a0ec89dcd931bdda64ecd46e6e4f1157adea660d32e"
+    }
+  },
+  "mathematical_status": "ESTABLISHED_LOCAL_CORRECTION_GLOBAL_INTEGRATION_OPEN",
+  "remaining_global_obligation": {
+    "description": "Connect every generated dual d3 boundary movie in a full serialized presentation to the proved local dotted Hopf vacuum theorem. The local theorem is complete; the global factorization/compiler connection is not yet derived.",
+    "not_missing": [
+      "an actual category instance",
+      "the primal 2-3 cycle check",
+      "the all-exponent modular dotted-vacuum identity"
+    ],
+    "status": "BLOCKED_GLOBAL_DUAL_BOUNDARY_MOVIE_INTEGRATION"
+  },
+  "repo": {
+    "dirty": true,
+    "git_branch": "codex/lean-kirby-coupon-bootstrap",
+    "git_commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+    "status_porcelain_sha256": "8b398612751508e8a1bbedad2a4e967777f444d96dc726df7d3b12bb9286d086"
+  },
+  "reproduce_command": "LEAN_NUM_THREADS=1 python3 experiments/scripts/build_dual_handle_convention_correction_v1.py",
+  "resource_safety": {
+    "safe_scope": "Their syntactic local-move work may be reused only after revalidation against the dual handle chain.",
+    "unsafe_prior_artifacts": [
+      "experiments/results/lean-kirby/canonical-modular-four-manifold-invariant-v1.json",
+      "experiments/results/lean-kirby/canonical-modular-four-manifold-invariant-v2.json",
+      "experiments/results/lean-kirby/general-h2-marked-kirby-status-v1.json",
+      "experiments/results/lean-kirby/h2-and-label-indexed-sliding-proof-status-v1.json",
+      "experiments/results/lean-kirby/homological-four-manifold-final-target-status-v1.json",
+      "experiments/results/lean-kirby/integral-h2-cycle-basis-status-v1.json"
+    ],
+    "unsafe_prior_generators": [
+      "experiments/scripts/build_canonical_modular_four_manifold_invariant_v1.py",
+      "experiments/scripts/build_canonical_modular_four_manifold_invariant_v2.py",
+      "experiments/scripts/build_general_h2_marked_kirby_status_v1.py",
+      "experiments/scripts/build_h2_and_label_indexed_sliding_proof_status_v1.py",
+      "experiments/scripts/build_homological_four_manifold_final_target_status_v1.py",
+      "experiments/scripts/build_integral_h2_cycle_basis_status_v1.py"
+    ],
+    "unsafe_scope": "Any claim in these artifacts that arbitrary representative descent was refuted by a primal cancelling 2-3 pair."
+  },
+  "schema": "twisted-yetter.dual-handle-convention-correction.v1",
+  "started_at_utc": "2026-07-21T01:41:00Z",
+  "status": "PASS_DUAL_HANDLE_CONVENTION_CORRECTED_LOCAL_REGRESSIONS",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "python": "3.14.6"
+  }
+}

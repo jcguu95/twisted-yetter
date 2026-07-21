@@ -1,0 +1,372 @@
+{
+  "argv": [
+    "experiments/scripts/build_canonical_modular_four_manifold_invariant_v1.py"
+  ],
+  "checks": {
+    "canonical_axiom_audit": {
+      "foundational_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "project_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_labelIndexedSlidingMovies",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalInsertion",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalMateTrace",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ]
+    },
+    "canonical_axiom_audit_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter.Kirby.CanonicalModularKirbyInvarianceAxiomAudit"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 50001,
+      "stdout_sha256": "9901450bb3b142ba75229604ac1961f9baaa7e80cca3ddc4b8e5c573c83c573a",
+      "warning_count": 83
+    },
+    "source_guards": {
+      "canonical_eval_has_no_compiler_argument": true,
+      "local_realization_has_eight_named_fields": true,
+      "local_realization_has_no_final_scalar_equality_field": true,
+      "proof_holes": [],
+      "recipe_data_audit": {
+        "basis": [
+          "The H2-level component exponent uses a separately chosen normalized cycle representative in each presentation; no theorem proves naturality under the stored chain equivalence or independence of the representative.",
+          "MarkedH2Transport stores a chain equivalence, but the current type does not bind that equivalence to the specific source-bound HandleEdit.",
+          "GraphicalEditProgram stores generator tags and component IDs but no typed categorical contexts.",
+          "PresentationWindowEdit does not supply a proved source-target component correspondence or the global simple-label bijection required by the finite sums.",
+          "The recipe does not prove preservation of global homological weights under the label and chain transport.",
+          "Cancellation constructors do not supply the exact diagram factorization needed by normalization."
+        ],
+        "source_binds_chain_equivalence_to_handle_edit": false,
+        "source_contains_cancellation_factorization": false,
+        "source_contains_global_weight_transport": false,
+        "source_contains_label_bijection": false,
+        "source_contains_representative_independence_theorem": false,
+        "source_contains_typed_context": false,
+        "source_uses_per_presentation_choice_of_cycle_representative": true,
+        "status": "INSUFFICIENT_FOR_TOTAL_CANONICAL_REALIZATION"
+      },
+      "status": "PASS_GUARDS",
+      "topology_theory_is_category_neutral": true
+    },
+    "topology_axiom_audit_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter.Kirby.LiteratureBackedFourManifoldTopologyAxiomAudit"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 10085,
+      "stdout_sha256": "7b8af70e144c1bb5bc9f9d2c526cf3ff9bfbabd9e589a1203502e5a86c7b8d36",
+      "warning_count": 21
+    },
+    "topology_derived_layer_axiom_audit": {
+      "foundational_axioms": [
+        "Quot.sound"
+      ],
+      "project_axioms": []
+    },
+    "umbrella_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 40742,
+      "stdout_sha256": "9e60bafcec6f71a2c688f8f8e2d973ec0134cde2125abbadaa0fa07b40acc256",
+      "warning_count": 81
+    }
+  },
+  "conditional_final_theorem": {
+    "caller_supplies_final_scalar_equality": false,
+    "caller_supplies_local_move_realization": true,
+    "caller_supplies_topology_assumptions": true,
+    "is_unconditional_closed_four_manifold_invariant": false,
+    "lean_diffeomorphism_theorem": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds_diffeomorphism_invariant",
+    "lean_function": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds",
+    "status": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_TOPOLOGY_AND_LOCAL_MOVE_REALIZATION"
+  },
+  "content_hash": "sha256:dca654420ca578a855f7fb36ae3c229fec71ae669f5cca1414b76a5df684cae2",
+  "elapsed_seconds": 9.965155,
+  "explicit_non_claims": [
+    "This artifact does not claim that the canonical modular evaluation is already an unconditional four-manifold invariant.",
+    "Lean does not formalize smooth manifolds, Morse theory, Cerf theory, or the cited special Kirby completeness theorems here.",
+    "No value of LocalMoveRealization has yet been constructed from the current SourceBoundRecipe interface.",
+    "The current recipe tags do not by themselves certify typed categorical contexts, global label and weight transport, chain-edit compatibility, or cancellation factorizations.",
+    "The current use of a separately chosen normalized cycle representative in each presentation has not been proved natural under handle moves or independent of representative.",
+    "This artifact does not identify EvalC with the original Crane-Yetter state sum.",
+    "This artifact proves no premodular-category theorem and instantiates no concrete modular category."
+  ],
+  "finished_at_utc": "2026-07-20T03:13:01Z",
+  "first_block": {
+    "assumption_count": 4,
+    "assumption_source_mapping": {
+      "elementaryMoveSoundness": [
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus#Section-5.1",
+        "ref:baerenz-barrett-dichromatic-2018#Table-2"
+      ],
+      "markedKirbyCerfCompleteness": [
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus#Theorem-4.2.12",
+        "ref:baerenz-barrett-dichromatic-2018#Theorem-3.9",
+        "ref:de-sa-link-calculus-1979"
+      ],
+      "markedPresentationExistence": [
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus#Proposition-4.2.13",
+        "ref:laudenbach-poenaru-4d-handlebodies-1972"
+      ],
+      "markedRealization": [
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus#Definition-4.2.1",
+        "ref:gompf-stipsicz-4-manifolds-kirby-calculus#Proposition-4.2.13"
+      ]
+    },
+    "assumptions": [
+      "markedRealization",
+      "elementaryMoveSoundness",
+      "markedPresentationExistence",
+      "markedKirbyCerfCompleteness"
+    ],
+    "derived_in_lean": [
+      "Kirby quotient equivalence",
+      "descent of any locally invariant evaluation",
+      "oriented-diffeomorphism invariance",
+      "recovery of the presentation formula"
+    ],
+    "imported_not_formalized": [
+      "marked realization by special handle presentations",
+      "geometric soundness of elementary moves",
+      "existence of a marked presentation",
+      "marked Kirby-Cerf completeness"
+    ],
+    "lean_type": "TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.Assumptions",
+    "source_refs": [
+      "ref:gompf-stipsicz-4-manifolds-kirby-calculus",
+      "ref:baerenz-barrett-dichromatic-2018",
+      "ref:de-sa-link-calculus-1979",
+      "ref:laudenbach-poenaru-4d-handlebodies-1972"
+    ],
+    "status": "COMPLETE_AS_EXPLICIT_FOUR_ASSUMPTION_LITERATURE_BOUNDARY",
+    "topology_move_relation": "category-neutral TableTwoMove"
+  },
+  "generator_script": "experiments/scripts/build_canonical_modular_four_manifold_invariant_v1.py",
+  "inputs": {
+    "reference_records": {
+      "experiments/inputs/references/boundary-standardization-primary-sources-v1.json": {
+        "bytes": 4492,
+        "sha256": "01ee8650352d54a52689c08fc7e9990ead102922e293f73e257f85ccb66012d8"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json": {
+        "bytes": 2374,
+        "sha256": "7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78"
+      },
+      "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json": {
+        "bytes": 5315,
+        "sha256": "601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7"
+      },
+      "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json": {
+        "bytes": 3822,
+        "sha256": "ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed"
+      },
+      "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json": {
+        "bytes": 2156,
+        "sha256": "fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a"
+      },
+      "experiments/inputs/references/kirby-completeness-primary-sources-v1.json": {
+        "bytes": 4987,
+        "sha256": "664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885"
+      }
+    },
+    "source_files": {
+      "experiments/scripts/build_canonical_modular_four_manifold_invariant_v1.py": {
+        "bytes": 26200,
+        "sha256": "6bc9ef03781272c0ebb9db64e7805676af0a62847f97dec7be3a2b7f6cd4f0d4"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 3395,
+        "sha256": "99b55721da659f53d593afffc24450e8413f9086eaa861bf45effcb0f09f583e"
+      },
+      "lean/TwistedYetter/Fusion/EGNOPremodularModular.lean": {
+        "bytes": 7291,
+        "sha256": "42df960084398562ee9aaf922fb2c586494bdc72eaed8339acd2bcf4f903a171"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalKirbyTrace.lean": {
+        "bytes": 8141,
+        "sha256": "507b6f40dc5c641a62b64a7847048e0b11030d3b022b564878518d6b6be65761"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalKirbyTraceAxiomAudit.lean": {
+        "bytes": 457,
+        "sha256": "2c06ba97c6ce4f2669fd4fc56805b58b3a1c744d13548003deef76659d1246f7"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyEvaluator.lean": {
+        "bytes": 17851,
+        "sha256": "4f97ed0fd1c17330f19fadebc757197843e0274702f6833fab3fd4ccda318a97"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyEvaluatorAxiomAudit.lean": {
+        "bytes": 846,
+        "sha256": "ada76125dea26839aa167e914ce8f19beb80d2ac7996c61fb93edb4ecdffae92"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvariance.lean": {
+        "bytes": 25791,
+        "sha256": "1b57faca67d7100159f5de2af852f42f550a23c88fbe83e530f5ae96013c584b"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvarianceAxiomAudit.lean": {
+        "bytes": 1107,
+        "sha256": "32ab655ac68ef247d14df46bab5f9c58576621da628b5581578492d5605adbf2"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularFourManifoldInvariant.lean": {
+        "bytes": 48631,
+        "sha256": "37383b353efad1733df03d6fc3b6cd30a38c898c91b3118ed52e4a0659739778"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularKirbyMoves.lean": {
+        "bytes": 21914,
+        "sha256": "734b5949c61fe0b6dc1fd496728e067434b7790ff3356dd04179664106b2a372"
+      },
+      "lean/TwistedYetter/Kirby/IntegralCharacterKirbyColorCompiler.lean": {
+        "bytes": 25779,
+        "sha256": "14ec9c3c43eca7d70faaf81e50f27d988248f112ab167a1715f466766bc383b7"
+      },
+      "lean/TwistedYetter/Kirby/KirbyCompleteness.lean": {
+        "bytes": 27299,
+        "sha256": "79b89b9687d596eae7beafe934425cad5d757be145e9592f6895860887ca7bb5"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldTopology.lean": {
+        "bytes": 6463,
+        "sha256": "55139d365950b81a9e80a8223a39b04a3918d0d639466614cb8bd8387156e0f4"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldTopologyAxiomAudit.lean": {
+        "bytes": 980,
+        "sha256": "b555ca90d0fc893e944113a01adc5e97bb2dbaa3f04769cb9d01d3e7d902f796"
+      },
+      "lean/TwistedYetter/Kirby/ModularFourManifoldInvariantFinalTarget.lean": {
+        "bytes": 20424,
+        "sha256": "72618b4bfc6e6f12c5c36a60255e8831fc3b96753d4ae811d3a387fe48faeb22"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundGraphicalMoveCompiler.lean": {
+        "bytes": 36982,
+        "sha256": "7092e7e246b3ebec83f27562c6811fb5124baf7121cac1a77f47eda630815fec"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundLocalMoveRecipe.lean": {
+        "bytes": 10341,
+        "sha256": "37579e7ce9ac32305a8016a4fc160a4f56c55ca53feb85bdc6c05b178f9c2cda"
+      },
+      "pyproject.toml": {
+        "bytes": 335,
+        "sha256": "79b5da14c3f60ad06eb0187084eb97dcf1163a855325ab5919505017e0f69465"
+      },
+      "tests/test_canonical_modular_four_manifold_invariant_v1.py": {
+        "bytes": 5999,
+        "sha256": "020efa0cd9705684b4dd38b29770bfb93602e65c8f0d564870bfa65960af6f8f"
+      }
+    }
+  },
+  "repo": {
+    "dirty": true,
+    "git_branch": "codex/lean-kirby-coupon-bootstrap",
+    "git_commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+    "status_porcelain_sha256": "b52f9739b13247792903ddc16b47996abfdb7808125aba00af326b252909f0f7"
+  },
+  "reproduce_command": "LEAN_NUM_THREADS=1 python3 experiments/scripts/build_canonical_modular_four_manifold_invariant_v1.py",
+  "schema": "canonical-modular-four-manifold-invariant-v1",
+  "second_block": {
+    "canonical_evaluator": {
+      "caller_supplies_compiler": false,
+      "caller_supplies_evaluator": false,
+      "caller_supplies_evidence_hash": false,
+      "lean_name": "TwistedYetter.Kirby.CanonicalModularKirbyEvaluator.CanonicalPresentation.EvalC",
+      "status": "KERNEL_CHECKED"
+    },
+    "current_recipe_gap": {
+      "basis": [
+        "The H2-level component exponent uses a separately chosen normalized cycle representative in each presentation; no theorem proves naturality under the stored chain equivalence or independence of the representative.",
+        "MarkedH2Transport stores a chain equivalence, but the current type does not bind that equivalence to the specific source-bound HandleEdit.",
+        "GraphicalEditProgram stores generator tags and component IDs but no typed categorical contexts.",
+        "PresentationWindowEdit does not supply a proved source-target component correspondence or the global simple-label bijection required by the finite sums.",
+        "The recipe does not prove preservation of global homological weights under the label and chain transport.",
+        "Cancellation constructors do not supply the exact diagram factorization needed by normalization."
+      ],
+      "source_binds_chain_equivalence_to_handle_edit": false,
+      "source_contains_cancellation_factorization": false,
+      "source_contains_global_weight_transport": false,
+      "source_contains_label_bijection": false,
+      "source_contains_representative_independence_theorem": false,
+      "source_contains_typed_context": false,
+      "source_uses_per_presentation_choice_of_cycle_representative": true,
+      "status": "INSUFFICIENT_FOR_TOTAL_CANONICAL_REALIZATION"
+    },
+    "local_calculation_soundness": {
+      "classes": [
+        "framedIsotopy",
+        "oneOverOne",
+        "twoOverOne",
+        "twoOverTwo",
+        "oneTwoBirth",
+        "oneTwoDeath",
+        "twoThreeBirth",
+        "twoThreeDeath"
+      ],
+      "count": 8,
+      "lean_name": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.LocalCalculation.sound",
+      "status": "KERNEL_CHECKED_FOR_ALL_EIGHT_CONSTRUCTORS"
+    },
+    "missing_realization": {
+      "classes": [
+        "framedIsotopy",
+        "oneOverOne",
+        "twoOverOne",
+        "twoOverTwo",
+        "oneTwoBirth",
+        "oneTwoDeath",
+        "twoThreeBirth",
+        "twoThreeDeath"
+      ],
+      "count": 8,
+      "lean_type": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.LocalMoveRealization",
+      "meaning": "For every concrete TableTwoMove and every marking, construct the corresponding typed local graphical calculation from the source-bound recipe.",
+      "not_equivalent_to": "a final equality of EvalC values",
+      "status": "OPEN_ESSENTIAL_OBLIGATION"
+    },
+    "required_completion_order": [
+      "Define the evaluator first on explicit degree-two cycles, without Classical.choice.",
+      "Prove invariance under addition of a degree-three boundary and descend the cycle evaluation to H2.",
+      "Bind each TableTwoMove chain equivalence to its exact source-bound handle edit.",
+      "Derive source-target component and global-label transport together with global-weight preservation.",
+      "Compile the exact local trace contexts, slide windows, and cancellation factorizations.",
+      "Construct all eight LocalMoveRealization fields and remove that parameter from the final theorem."
+    ],
+    "status": "PARTIAL_BLOCKED_BY_H2_REPRESENTATIVE_DESCENT_AND_EIGHT_CANONICAL_LOCAL_REALIZATION_OBLIGATIONS"
+  },
+  "started_at_utc": "2026-07-20T03:12:51Z",
+  "status": "TOPOLOGY_BOUNDARY_SEPARATED_CANONICAL_EVAL_KERNEL_CHECKED_LOCAL_REALIZATION_OPEN",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "python": "3.14.6"
+  }
+}

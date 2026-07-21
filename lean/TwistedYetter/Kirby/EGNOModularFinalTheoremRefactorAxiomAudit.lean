@@ -1,0 +1,28 @@
+import TwistedYetter.Kirby.EGNOModularFinalTheoremRefactor
+
+/-!
+# Axiom audit for the clean Kirby-descent boundary
+
+The generic quotient proofs below should use only Lean's ordinary quotient
+principles.  They do not import a presentation compiler or a topology
+classification theorem.
+
+The concrete implementation checks are separate.  They show that the current
+source-bound compiler proves elementary-move invariance and therefore gives a
+function on the Kirby quotient.  They do not claim that this quotient has
+already been identified with closed smooth four-manifolds.
+-/
+
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.HandlePresentationTheory.kirbyEquivalent_equivalence
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.PresentationEvaluation.respectsKirbyMovie
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.PresentationEvaluation.respectsKirbyEquivalent
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.PresentationEvaluation.descendToKirbyClass
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.ElementaryMoveGeometricSoundness.kirbyMovieDiffeomorphism
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.kirbyClassEquivDiffeomorphismClass
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant_diffeomorphism_invariant
+#print axioms TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant_on_presentation
+
+#print axioms TwistedYetter.Kirby.EGNOModularFinalTheoremRefactor.h2ModelEquiv_transport
+#print axioms TwistedYetter.Kirby.EGNOModularFinalTheoremRefactor.CompiledEvaluatorEvidence.evalC_local_move_invariant
+#print axioms TwistedYetter.Kirby.EGNOModularFinalTheoremRefactor.compiledEvaluationOnKirbyClass
+#print axioms TwistedYetter.Kirby.EGNOModularFinalTheoremRefactor.compiledEvaluationOnKirbyClass_mk

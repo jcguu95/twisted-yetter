@@ -1,3 +1,4 @@
+import Mathlib.Data.Fintype.BigOperators
 import TwistedYetter.Kirby.KirbyHandleMoves
 
 /-!
@@ -133,6 +134,495 @@ inductive HandleEdit : RecipeKind → Type
   | twoThreeDeath
       (removedTwoHandleId : String) :
       HandleEdit .twoThreeDeath
+
+namespace HandleEdit
+
+/-- Orientation recorded inside an exact 1-over-1 recipe. -/
+def oneOverOneOrientation : HandleEdit .oneOverOne → BandOrientation
+  | .oneOverOne orientation _ _ _ => orientation
+
+/-- Sliding component recorded inside an exact 1-over-1 recipe. -/
+def oneOverOneSlidingId : HandleEdit .oneOverOne → String
+  | .oneOverOne _ sliding _ _ => sliding
+
+/-- Stationary component recorded inside an exact 1-over-1 recipe. -/
+def oneOverOneStationaryId : HandleEdit .oneOverOne → String
+  | .oneOverOne _ _ stationary _ => stationary
+
+/-- Orientation recorded inside an exact 2-over-1 recipe. -/
+def twoOverOneOrientation : HandleEdit .twoOverOne → BandOrientation
+  | .twoOverOne orientation _ _ _ => orientation
+
+/-- Sliding component recorded inside an exact 2-over-1 recipe. -/
+def twoOverOneSlidingId : HandleEdit .twoOverOne → String
+  | .twoOverOne _ sliding _ _ => sliding
+
+/-- Stationary component recorded inside an exact 2-over-1 recipe. -/
+def twoOverOneStationaryId : HandleEdit .twoOverOne → String
+  | .twoOverOne _ _ stationary _ => stationary
+
+/-- Orientation recorded inside an exact 2-over-2 recipe. -/
+def twoOverTwoOrientation : HandleEdit .twoOverTwo → BandOrientation
+  | .twoOverTwo orientation _ _ _ => orientation
+
+/-- Sliding component recorded inside an exact 2-over-2 recipe. -/
+def twoOverTwoSlidingId : HandleEdit .twoOverTwo → String
+  | .twoOverTwo _ sliding _ _ => sliding
+
+/-- Stationary component recorded inside an exact 2-over-2 recipe. -/
+def twoOverTwoStationaryId : HandleEdit .twoOverTwo → String
+  | .twoOverTwo _ _ stationary _ => stationary
+
+end HandleEdit
+
+/-- Finite component index of one exact serialized presentation. -/
+abbrev ComponentIndex (presentation : FormalPresentation) :=
+  Fin presentation.raw.components.length
+
+/-- Read the exact component at one proved finite index. -/
+def componentAt
+    (presentation : FormalPresentation)
+    (index : ComponentIndex presentation) : ComponentSpec :=
+  presentation.raw.components.get index
+
+/--
+Component correspondence for a move that neither creates nor removes a link
+component.
+
+The equivalence is oriented from target indices to source indices so that a
+source global labeling transports by precomposition.  Stable component IDs
+are checked at every index; an arbitrary permutation with unrelated IDs is
+not accepted.
+-/
+structure SameComponentIndexChange
+    (source target : FormalPresentation) where
+  targetToSource :
+    ComponentIndex target ≃ ComponentIndex source
+  component_id_sound :
+    (targetIndex : ComponentIndex target) →
+      (componentAt target targetIndex).componentId =
+        (componentAt source (targetToSource targetIndex)).componentId
+
+/--
+Exact finite-set decomposition when target contains new local components.
+
+The common summand is indexed by the source presentation.  The finite added
+summand is kept separate so later finite-sum proofs cannot silently forget
+the labels of a newly born Kirby component.
+-/
+structure AddedComponentIndexChange
+    (source target : FormalPresentation)
+    (addedCount : Nat) where
+  targetDecomposition :
+    ComponentIndex target ≃
+      Sum (ComponentIndex source) (Fin addedCount)
+  common_component_id_sound :
+    (sourceIndex : ComponentIndex source) →
+      (componentAt target
+        (targetDecomposition.symm (Sum.inl sourceIndex))).componentId =
+          (componentAt source sourceIndex).componentId
+
+/-- Exact finite-set decomposition when source contains removed components. -/
+structure RemovedComponentIndexChange
+    (source target : FormalPresentation)
+    (removedCount : Nat) where
+  sourceDecomposition :
+    ComponentIndex source ≃
+      Sum (ComponentIndex target) (Fin removedCount)
+  common_component_id_sound :
+    (targetIndex : ComponentIndex target) →
+      (componentAt source
+        (sourceDecomposition.symm (Sum.inl targetIndex))).componentId =
+          (componentAt target targetIndex).componentId
+
+/-- First distinguished index in a two-element local summand. -/
+def firstOfTwo : Fin 2 := ⟨0, by decide⟩
+
+/-- Second distinguished index in a two-element local summand. -/
+def secondOfTwo : Fin 2 := ⟨1, by decide⟩
+
+/-- The sole distinguished index in a one-element local summand. -/
+def onlyOne : Fin 1 := ⟨0, by decide⟩
+
+/--
+Complete category-neutral component geometry for the exact handle edit.
+
+The constructors enforce the correct number and roles of added or removed
+components.  This is finite-set and link-role data only: it contains no
+category object, morphism, scalar, evaluator, or equality of evaluations.
+-/
+inductive ComponentIndexChange
+    (source target : FormalPresentation) :
+    {kind : RecipeKind} → HandleEdit kind → Type
+  | framedIsotopy
+      (touchedEventIds : List String)
+      (nonempty : touchedEventIds ≠ [])
+      (same : SameComponentIndexChange source target) :
+      ComponentIndexChange source target
+        (.framedIsotopy touchedEventIds nonempty)
+  | oneOverOne
+      (orientation : BandOrientation)
+      (slidingDottedId stationaryDottedId : String)
+      (distinct : slidingDottedId ≠ stationaryDottedId)
+      (same : SameComponentIndexChange source target) :
+      ComponentIndexChange source target
+        (.oneOverOne orientation
+          slidingDottedId stationaryDottedId distinct)
+  | twoOverOne
+      (orientation : BandOrientation)
+      (slidingTwoHandleId stationaryDottedId : String)
+      (distinct : slidingTwoHandleId ≠ stationaryDottedId)
+      (same : SameComponentIndexChange source target) :
+      ComponentIndexChange source target
+        (.twoOverOne orientation
+          slidingTwoHandleId stationaryDottedId distinct)
+  | twoOverTwo
+      (orientation : BandOrientation)
+      (slidingTwoHandleId stationaryTwoHandleId : String)
+      (distinct : slidingTwoHandleId ≠ stationaryTwoHandleId)
+      (same : SameComponentIndexChange source target) :
+      ComponentIndexChange source target
+        (.twoOverTwo orientation
+          slidingTwoHandleId stationaryTwoHandleId distinct)
+  | oneTwoBirth
+      (newDottedId newTwoHandleId : String)
+      (distinct : newDottedId ≠ newTwoHandleId)
+      (added : AddedComponentIndexChange source target 2)
+      (dotted_id_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr firstOfTwo))).componentId =
+          newDottedId)
+      (dotted_role_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr firstOfTwo))).role = .dotted)
+      (two_handle_id_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr secondOfTwo))).componentId =
+          newTwoHandleId)
+      (two_handle_role_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr secondOfTwo))).role ≠ .dotted) :
+      ComponentIndexChange source target
+        (.oneTwoBirth newDottedId newTwoHandleId distinct)
+  | oneTwoDeath
+      (removedDottedId removedTwoHandleId : String)
+      (distinct : removedDottedId ≠ removedTwoHandleId)
+      (removed : RemovedComponentIndexChange source target 2)
+      (dotted_id_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr firstOfTwo))).componentId =
+          removedDottedId)
+      (dotted_role_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr firstOfTwo))).role = .dotted)
+      (two_handle_id_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr secondOfTwo))).componentId =
+          removedTwoHandleId)
+      (two_handle_role_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr secondOfTwo))).role ≠ .dotted) :
+      ComponentIndexChange source target
+        (.oneTwoDeath
+          removedDottedId removedTwoHandleId distinct)
+  | twoThreeBirth
+      (newTwoHandleId : String)
+      (added : AddedComponentIndexChange source target 1)
+      (two_handle_id_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr onlyOne))).componentId =
+          newTwoHandleId)
+      (two_handle_role_sound :
+        (componentAt target
+          (added.targetDecomposition.symm
+            (Sum.inr onlyOne))).role ≠ .dotted) :
+      ComponentIndexChange source target
+        (.twoThreeBirth newTwoHandleId)
+  | twoThreeDeath
+      (removedTwoHandleId : String)
+      (removed : RemovedComponentIndexChange source target 1)
+      (two_handle_id_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr onlyOne))).componentId =
+          removedTwoHandleId)
+      (two_handle_role_sound :
+        (componentAt source
+          (removed.sourceDecomposition.symm
+            (Sum.inr onlyOne))).role ≠ .dotted) :
+      ComponentIndexChange source target
+        (.twoThreeDeath removedTwoHandleId)
+
+namespace SameComponentIndexChange
+
+/-- Reindex all global labels along an exact same-component move. -/
+def labelingEquiv
+    {source target : FormalPresentation}
+    (change : SameComponentIndexChange source target)
+    (Label : Type*) :
+    (ComponentIndex source → Label) ≃
+      (ComponentIndex target → Label) where
+  toFun sourceLabeling :=
+    sourceLabeling ∘ change.targetToSource
+  invFun targetLabeling :=
+    targetLabeling ∘ change.targetToSource.symm
+  left_inv sourceLabeling := by
+    funext sourceIndex
+    simp
+  right_inv targetLabeling := by
+    funext targetIndex
+    simp
+
+/--
+Reindexing the complete finite labeling sum along a same-component move
+neither loses nor duplicates a summand.
+-/
+theorem sum_reindex
+    {source target : FormalPresentation}
+    (change : SameComponentIndexChange source target)
+    {Label Value : Type*}
+    [Fintype Label]
+    [AddCommMonoid Value]
+    (summand : (ComponentIndex target → Label) → Value) :
+    (∑ sourceLabeling,
+        summand (change.labelingEquiv Label sourceLabeling)) =
+      ∑ targetLabeling, summand targetLabeling :=
+  Equiv.sum_comp (change.labelingEquiv Label) summand
+
+end SameComponentIndexChange
+
+namespace AddedComponentIndexChange
+
+/--
+Split one target labeling into the labels on common source components and
+the labels on the newly added local components.
+-/
+def labelingEquiv
+    {source target : FormalPresentation}
+    {addedCount : Nat}
+    (change : AddedComponentIndexChange source target addedCount)
+    (Label : Type*) :
+    (ComponentIndex target → Label) ≃
+      ((ComponentIndex source → Label) × (Fin addedCount → Label)) where
+  toFun targetLabeling :=
+    (fun sourceIndex =>
+      targetLabeling
+        (change.targetDecomposition.symm (Sum.inl sourceIndex)),
+    fun addedIndex =>
+      targetLabeling
+        (change.targetDecomposition.symm (Sum.inr addedIndex)))
+  invFun splitLabeling := fun targetIndex =>
+    match change.targetDecomposition targetIndex with
+    | Sum.inl sourceIndex => splitLabeling.1 sourceIndex
+    | Sum.inr addedIndex => splitLabeling.2 addedIndex
+  left_inv targetLabeling := by
+    funext targetIndex
+    cases decomposition : change.targetDecomposition targetIndex with
+    | inl sourceIndex =>
+        change
+          (match change.targetDecomposition targetIndex with
+          | Sum.inl sourceIndex =>
+              targetLabeling
+                (change.targetDecomposition.symm
+                  (Sum.inl sourceIndex))
+          | Sum.inr addedIndex =>
+              targetLabeling
+                (change.targetDecomposition.symm
+                  (Sum.inr addedIndex))) =
+            targetLabeling targetIndex
+        have inverse :
+            change.targetDecomposition.symm (Sum.inl sourceIndex) =
+              targetIndex := by
+          exact change.targetDecomposition.injective
+            (by simp [decomposition])
+        simpa [decomposition] using congrArg targetLabeling inverse
+    | inr addedIndex =>
+        change
+          (match change.targetDecomposition targetIndex with
+          | Sum.inl sourceIndex =>
+              targetLabeling
+                (change.targetDecomposition.symm
+                  (Sum.inl sourceIndex))
+          | Sum.inr addedIndex =>
+              targetLabeling
+                (change.targetDecomposition.symm
+                  (Sum.inr addedIndex))) =
+            targetLabeling targetIndex
+        have inverse :
+            change.targetDecomposition.symm (Sum.inr addedIndex) =
+              targetIndex := by
+          exact change.targetDecomposition.injective
+            (by simp [decomposition])
+        simpa [decomposition] using congrArg targetLabeling inverse
+  right_inv splitLabeling := by
+    apply Prod.ext
+    · funext sourceIndex
+      simp
+    · funext addedIndex
+      simp
+
+/--
+The target labeling denominator is exactly the product of the common-source
+labelings and the newly added local labelings.
+-/
+theorem sum_split
+    {source target : FormalPresentation}
+    {addedCount : Nat}
+    (change : AddedComponentIndexChange source target addedCount)
+    {Label Value : Type*}
+    [Fintype Label]
+    [AddCommMonoid Value]
+    (summand : (ComponentIndex target → Label) → Value) :
+    (∑ targetLabeling, summand targetLabeling) =
+      ∑ splitLabeling,
+        summand
+          ((change.labelingEquiv Label).symm splitLabeling) :=
+  (Equiv.sum_comp (change.labelingEquiv Label).symm summand).symm
+
+/--
+A product over target components factors into the common and newly added
+component products.  This is the component-level algebra used later by the
+1--2 and 2--3 finite-sum calculations.
+-/
+theorem component_product_split
+    {source target : FormalPresentation}
+    {addedCount : Nat}
+    (change : AddedComponentIndexChange source target addedCount)
+    {Value : Type*}
+    [CommMonoid Value]
+    (weight : ComponentIndex target → Value) :
+    (∏ targetIndex, weight targetIndex) =
+      (∏ sourceIndex,
+          weight
+            (change.targetDecomposition.symm
+              (Sum.inl sourceIndex))) *
+        ∏ addedIndex,
+          weight
+            (change.targetDecomposition.symm
+              (Sum.inr addedIndex)) := by
+  rw [← Equiv.prod_comp change.targetDecomposition.symm weight]
+  exact Fintype.prod_sum_type _
+
+end AddedComponentIndexChange
+
+namespace RemovedComponentIndexChange
+
+/--
+Split one source labeling into the labels retained by the target and the
+labels on the removed local components.
+-/
+def labelingEquiv
+    {source target : FormalPresentation}
+    {removedCount : Nat}
+    (change : RemovedComponentIndexChange source target removedCount)
+    (Label : Type*) :
+    (ComponentIndex source → Label) ≃
+      ((ComponentIndex target → Label) × (Fin removedCount → Label)) where
+  toFun sourceLabeling :=
+    (fun targetIndex =>
+      sourceLabeling
+        (change.sourceDecomposition.symm (Sum.inl targetIndex)),
+    fun removedIndex =>
+      sourceLabeling
+        (change.sourceDecomposition.symm (Sum.inr removedIndex)))
+  invFun splitLabeling := fun sourceIndex =>
+    match change.sourceDecomposition sourceIndex with
+    | Sum.inl targetIndex => splitLabeling.1 targetIndex
+    | Sum.inr removedIndex => splitLabeling.2 removedIndex
+  left_inv sourceLabeling := by
+    funext sourceIndex
+    cases decomposition : change.sourceDecomposition sourceIndex with
+    | inl targetIndex =>
+        change
+          (match change.sourceDecomposition sourceIndex with
+          | Sum.inl targetIndex =>
+              sourceLabeling
+                (change.sourceDecomposition.symm
+                  (Sum.inl targetIndex))
+          | Sum.inr removedIndex =>
+              sourceLabeling
+                (change.sourceDecomposition.symm
+                  (Sum.inr removedIndex))) =
+            sourceLabeling sourceIndex
+        have inverse :
+            change.sourceDecomposition.symm (Sum.inl targetIndex) =
+              sourceIndex := by
+          exact change.sourceDecomposition.injective
+            (by simp [decomposition])
+        simpa [decomposition] using congrArg sourceLabeling inverse
+    | inr removedIndex =>
+        change
+          (match change.sourceDecomposition sourceIndex with
+          | Sum.inl targetIndex =>
+              sourceLabeling
+                (change.sourceDecomposition.symm
+                  (Sum.inl targetIndex))
+          | Sum.inr removedIndex =>
+              sourceLabeling
+                (change.sourceDecomposition.symm
+                  (Sum.inr removedIndex))) =
+            sourceLabeling sourceIndex
+        have inverse :
+            change.sourceDecomposition.symm (Sum.inr removedIndex) =
+              sourceIndex := by
+          exact change.sourceDecomposition.injective
+            (by simp [decomposition])
+        simpa [decomposition] using congrArg sourceLabeling inverse
+  right_inv splitLabeling := by
+    apply Prod.ext
+    · funext targetIndex
+      simp
+    · funext removedIndex
+      simp
+
+/--
+The source labeling denominator is exactly the product of retained target
+labelings and removed local labelings.
+-/
+theorem sum_split
+    {source target : FormalPresentation}
+    {removedCount : Nat}
+    (change : RemovedComponentIndexChange source target removedCount)
+    {Label Value : Type*}
+    [Fintype Label]
+    [AddCommMonoid Value]
+    (summand : (ComponentIndex source → Label) → Value) :
+    (∑ sourceLabeling, summand sourceLabeling) =
+      ∑ splitLabeling,
+        summand
+          ((change.labelingEquiv Label).symm splitLabeling) :=
+  (Equiv.sum_comp (change.labelingEquiv Label).symm summand).symm
+
+/-- Source-component products split into retained and removed factors. -/
+theorem component_product_split
+    {source target : FormalPresentation}
+    {removedCount : Nat}
+    (change : RemovedComponentIndexChange source target removedCount)
+    {Value : Type*}
+    [CommMonoid Value]
+    (weight : ComponentIndex source → Value) :
+    (∏ sourceIndex, weight sourceIndex) =
+      (∏ targetIndex,
+          weight
+            (change.sourceDecomposition.symm
+              (Sum.inl targetIndex))) *
+        ∏ removedIndex,
+          weight
+            (change.sourceDecomposition.symm
+              (Sum.inr removedIndex)) := by
+  rw [← Equiv.prod_comp change.sourceDecomposition.symm weight]
+  exact Fintype.prod_sum_type _
+
+end RemovedComponentIndexChange
 
 /--
 Closed category-neutral tags for the framed-link isotopy generators.
@@ -279,6 +769,8 @@ structure SourceBoundRecipe
     targetPresentationHash = target.pinnedSourceHash
   window : PresentationWindowEdit source target
   handleEdit : HandleEdit kind
+  componentIndexChange :
+    ComponentIndexChange source target handleEdit
   graphicalProgram : GraphicalEditProgram handleEdit
   recipeSnapshotHash : String
   recipe_snapshot_hash_shape :

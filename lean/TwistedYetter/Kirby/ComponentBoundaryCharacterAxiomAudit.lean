@@ -1,0 +1,13 @@
+import TwistedYetter.Kirby.ComponentBoundaryCharacter
+
+set_option pp.universes false in
+#print axioms
+  TwistedYetter.Kirby.ComponentBoundaryCharacter.automorphismObjectPower_eq_boundaryCharacterPower_smul_identity
+
+set_option pp.universes false in
+#print axioms
+  TwistedYetter.Kirby.ComponentBoundaryCharacter.boundaryCharacterPower_negative
+
+set_option pp.universes false in
+#print axioms
+  TwistedYetter.Kirby.ComponentBoundaryCharacter.boundaryCharacterPower_eq_of_eq_on_componentIds

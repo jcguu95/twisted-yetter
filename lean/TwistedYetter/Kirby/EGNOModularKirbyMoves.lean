@@ -1,7 +1,9 @@
 import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.ComponentRibbonDiagram
 import TwistedYetter.Kirby.KirbyCancellation
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
+import TwistedYetter.Fusion.EGNOPremodularModular
 
 /-!
 # Category-bound Kirby-move data for a modular ribbon fusion category
@@ -27,6 +29,7 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
+open TwistedYetter.Kirby.ComponentRibbonDiagram
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
 open TwistedYetter.Kirby.FramingNaturality
 open TwistedYetter.Kirby.KirbyCancellation
@@ -282,24 +285,79 @@ def toFramedKinkCompatibility
 end RibbonFramedKinkLaw
 
 /--
-Complete category-side denominator for modular identity-functor Kirby moves.
+The exact mathematical laws used by framed-link isotopy proofs.
 
-This package has no whole-presentation evaluator and no equality for a Table
-2 move.  It supplies only the algebra that a source-bound local compiler may
-use.
+This structure deliberately contains no content hash or evidence metadata.
+Planar coherence, braiding naturality, duality, and coupon naturality are
+already theorems of the categorical diagram language; the only selected
+structures needed here are the category's ribbon kink and spherical cut.
 -/
-structure Package
+structure FramedIsotopyLaws
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
-  insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data
-  mateTraceLaw : SphericalMateTraceLaw (K := K) data.spherical
-  ordinarySliding : OrdinaryKirbySlidingLaw data
-  generalizedSliding :
-    LabelIndexedSlidingMovies data insertionLaw mateTraceLaw
+  framedKinkLaw : RibbonFramedKinkLaw data
+
+namespace FramedIsotopyLaws
+
+/-- The selected kink convention is forced by the category's ribbon twist. -/
+def framedKinkCompatibility
+    {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
+    (laws : FramedIsotopyLaws data) :
+    FramedKinkCompatibility (C := C) :=
+  laws.framedKinkLaw.toFramedKinkCompatibility
+
+/-- Closure-cut invariance uses the spherical trace induced by that ribbon. -/
+def sphericalCutTrace
+    {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
+    (_laws : FramedIsotopyLaws data) :
+    SphericalCutTrace (C := C) :=
+  SphericalCutTrace.ofRibbon data.ribbon
+
+end FramedIsotopyLaws
+
+/--
+The three non-derived graphical rule classes required by the modular
+identity-functor Kirby argument.
+
+Fixed-label 2-over-2 sliding is now derived from ordinary sliding and
+naturality, so it is not a separate assumption class.
+-/
+inductive GraphicalRuleClass where
+  | ordinarySliding
+  | cancellation
+  | framedKink
+  deriving Repr, BEq, DecidableEq
+
+/-- The exact three-rule denominator of the graphical proof. -/
+def requiredGraphicalRuleClasses : List GraphicalRuleClass :=
+  [
+    .ordinarySliding,
+    .cancellation,
+    .framedKink
+  ]
+
+/-- Machine-checked confirmation that the visible denominator has three rules. -/
+theorem required_graphical_rule_class_count :
+    requiredGraphicalRuleClasses.length = 3 := by
+  decide
+
+/--
+Low-level environment containing the three non-derived graphical rule classes.
+
+The public modular evaluator does not ask its caller to construct this
+environment. `LiteratureBackedModularGraphicalEnvironment.build` fixes its
+mathematical fields from explicitly named literature axioms. The remaining
+fields bind those laws to one category snapshot and its normalization data.
+-/
+structure GraphicalInvarianceEnvironment
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
+  ordinaryKirbySlidingLaw :
+    OrdinaryKirbySlidingLaw data
   modularCenter : ModularSimpleCenter data
   dimensions : ModularDimensionCertificate data modularCenter
-  cancellation :
+  cancellationLaw :
     ModularCancellationLaw data modularCenter dimensions
-  framedKink : RibbonFramedKinkLaw data
+  framedKinkLaw :
+    RibbonFramedKinkLaw data
   categorySnapshotHash : String
   category_snapshot_hash_shape :
     TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
@@ -312,35 +370,234 @@ structure Package
   exactScope : String
   sourceScopeCaveat : String
 
-namespace Package
+namespace GraphicalInvarianceEnvironment
 
 variable {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
 
-/-- The package normalization profile is definitionally category-derived. -/
-noncomputable def profile (package : Package data) :
+/-- Forget audit metadata and retain exactly the framed-isotopy mathematics. -/
+def framedIsotopyLaws
+    (graphical : GraphicalInvarianceEnvironment data) :
+    FramedIsotopyLaws data where
+  framedKinkLaw := graphical.framedKinkLaw
+
+/-- The normalization profile is definitionally category-derived. -/
+noncomputable def profile
+    (graphical : GraphicalInvarianceEnvironment data) :
     GlobalDimensionProfile (K := K) :=
-  dimensionProfile data package.modularCenter package.dimensions
+  dimensionProfile data
+    graphical.modularCenter graphical.dimensions
 
-/-- The package cancellation input cannot substitute independent dimensions. -/
-def cancellationInput (package : Package data) :
-    CancellationInput package.profile :=
-  package.cancellation.toCancellationInput
+/-- Export the cancellation law with fixed category-derived dimensions. -/
+def cancellationInput
+    (graphical : GraphicalInvarianceEnvironment data) :
+    CancellationInput graphical.profile :=
+  graphical.cancellationLaw.toCancellationInput
 
-/-- Framed isotopy uses the package's exact ribbon twist. -/
-def framedKinkCompatibility (package : Package data) :
+/-- Export the literature-backed framed-kink law. -/
+def framedKinkCompatibility
+    (graphical : GraphicalInvarianceEnvironment data) :
     FramedKinkCompatibility (C := C) :=
-  package.framedKink.toFramedKinkCompatibility
+  graphical.framedKinkLaw.toFramedKinkCompatibility
 
 /-- Cut independence is derived from the same canonical ribbon pivotal structure. -/
-def sphericalCutTrace (_package : Package data) :
+def sphericalCutTrace
+    (_graphical : GraphicalInvarianceEnvironment data) :
     SphericalCutTrace (C := C) :=
   SphericalCutTrace.ofRibbon data.ribbon
 
-/-- The ordinary slide exported by the package remains formally colour-bound. -/
-noncomputable def ordinarySlidingLaw (package : Package data) :
+/-- Export the literature-backed ordinary sliding law. -/
+noncomputable def ordinarySlidingLaw
+    (graphical : GraphicalInvarianceEnvironment data) :
     HandleSlide.SourcedSlidingLaw C :=
-  package.ordinarySliding.toSourcedSlidingLaw
+  graphical.ordinaryKirbySlidingLaw.toSourcedSlidingLaw
 
-end Package
+end GraphicalInvarianceEnvironment
+
+namespace LiteratureBackedModularGraphicalEnvironment
+
+variable [CharZero K]
+
+/--
+EGNO's unit-dimension theorem for the canonical pivotal structure of a ribbon
+fusion category.
+
+This is an explicit textbook axiom boundary, not a caller-supplied field.
+-/
+axiom egno_quantumDimension_unit
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    𝒞.premodular.quantumDimension
+        𝒞.premodular.toFusionCategoryData.unitIndex = 1
+
+/--
+Bärenz--Barrett Lemma 3.1, with the exact formal Kirby colour retained by the
+diagram-backed interface.
+-/
+axiom baerenzBarrett_ordinaryKirbySliding
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    OrdinaryKirbySlidingLaw 𝒞.premodular
+
+/--
+Bärenz--Barrett's cutting/killing calculation for the exact positive Hopf
+pair representing a cancelling 1--2 handle pair.
+
+Only the isolated two-component finite sum occurs in this source-backed
+boundary.  The surrounding presentation factorization, homology-exponent
+transport, global-label reindexing, and normalization are proved downstream.
+-/
+axiom baerenzBarrett_oneTwoHopfPairSum
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (dottedId twoHandleId : String)
+    (_distinct : dottedId ≠ twoHandleId)
+    (labelOf : (Fin 2 → S) → String → S)
+    (dotted_label_sound :
+      (labels : Fin 2 → S) →
+        labelOf labels dottedId = labels 0)
+    (two_handle_label_sound :
+      (labels : Fin 2 → S) →
+        labelOf labels twoHandleId = labels 1) :
+    (∑ labels : Fin 2 → S,
+      (𝒞.premodular.quantumDimension (labels 0) *
+        𝒞.premodular.quantumDimension (labels 1)) *
+      𝒞.premodular.toFusionCategoryData.closedScalar
+        (Diagram.eval C
+          ((ComponentDiagram.oneTwoHopfPair
+            dottedId twoHandleId).interpret
+              𝒞.premodular (labelOf labels)))) =
+      globalDimension 𝒞.premodular
+
+/--
+Bärenz--Barrett's killing lemma before summing the label on the strand being
+encircled.  A Kirby-coloured dotted meridian kills every nontransparent
+simple channel.  In a modular category the only surviving channel is the
+tensor unit, where the value is the global dimension.
+
+This label-resolved form is the standard categorical input needed to prove
+that a homological tensor-automorphism coupon is invisible after the Tham
+`k = 3` vacuum projection.  It still contains no whole-presentation
+evaluation and no Kirby-invariance conclusion.
+-/
+axiom baerenzBarrett_hopfKirbyKillingFiber
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (dottedId twoHandleId : String)
+    (_distinct : dottedId ≠ twoHandleId)
+    (labelOf : S → S → String → S)
+    (dotted_label_sound :
+      (dottedLabel twoHandleLabel : S) →
+        labelOf dottedLabel twoHandleLabel dottedId = dottedLabel)
+    (two_handle_label_sound :
+      (dottedLabel twoHandleLabel : S) →
+        labelOf dottedLabel twoHandleLabel twoHandleId = twoHandleLabel)
+    (twoHandleLabel : S) :
+    (∑ dottedLabel : S,
+      𝒞.premodular.quantumDimension dottedLabel *
+        𝒞.premodular.toFusionCategoryData.closedScalar
+          (Diagram.eval C
+            ((ComponentDiagram.oneTwoHopfPair
+              dottedId twoHandleId).interpret
+                𝒞.premodular
+                (labelOf dottedLabel twoHandleLabel)))) =
+      if twoHandleLabel =
+          𝒞.premodular.toFusionCategoryData.unitIndex then
+        globalDimension 𝒞.premodular
+      else
+        0
+
+/--
+Shum's coherence theorem for tortile categories, specialized to the positive
+and negative blackboard-kink evaluations used by the local compiler.
+-/
+axiom shum_ribbonFramedKink
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    RibbonFramedKinkLaw 𝒞.premodular
+
+/--
+The hash-free framed-isotopy laws canonically selected by a modular category.
+-/
+noncomputable def framedIsotopyLaws
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    FramedIsotopyLaws 𝒞.premodular where
+  framedKinkLaw := shum_ribbonFramedKink 𝒞
+
+/-- The trivial Mueger centre derived from S-matrix nondegeneracy. -/
+def modularSimpleCenter
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    ModularSimpleCenter 𝒞.premodular where
+  transparent_iff_unit := 𝒞.transparent_iff_unit
+  source_ref := "ref:egno-tensor-categories-2015"
+  source_locator :=
+    "Definition 8.13.4, Remark 8.19.3, and Theorem 8.20.7"
+
+/-- Both normalization facts derived from the named EGNO theorem boundary. -/
+def modularDimensionCertificate
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    ModularDimensionCertificate 𝒞.premodular
+      (modularSimpleCenter 𝒞) where
+  unit_quantum_dimension := egno_quantumDimension_unit 𝒞
+  global_dimension_ne_zero := 𝒞.globalDimension_ne_zero
+  source_ref := "ref:egno-tensor-categories-2015"
+  source_locator := "Proposition 8.14.2 and the unit-dimension identity"
+
+/--
+The cancellation scalar law has no independent mathematical field: its three
+values are the dimensions required by the normalization formula.
+
+The source-bound local compiler must still prove that the concrete isolated
+link factors evaluate to these values.
+-/
+noncomputable def modularCancellationLaw
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
+    ModularCancellationLaw 𝒞.premodular
+      (modularSimpleCenter 𝒞)
+      (modularDimensionCertificate 𝒞) where
+  oneTwoPairValue :=
+    globalDimension 𝒞.premodular *
+      transparentGlobalDimension 𝒞.premodular
+  oneTwoCutValue := transparentGlobalDimension 𝒞.premodular
+  cutting_identity := rfl
+  killing_identity := rfl
+  twoThreeUnknotValue := globalDimension 𝒞.premodular
+  pivotal_dimension_identity := rfl
+
+/--
+Only content-addressed evidence binding remains caller supplied. It contains no
+graphical equality.
+-/
+structure EvidenceBinding where
+  categorySnapshotHash : String
+  category_snapshot_hash_shape :
+    TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
+      categorySnapshotHash = true
+  categoryCoherenceCertificateHash : String
+  category_coherence_certificate_hash_shape :
+    TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
+      categoryCoherenceCertificateHash = true
+  sourceRefs : List String
+  exactScope : String
+  sourceScopeCaveat : String
+
+/--
+Construct the compiler environment without asking the final theorem caller to
+supply any of the three non-derived graphical laws.
+-/
+noncomputable def build
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (binding : EvidenceBinding) :
+    GraphicalInvarianceEnvironment 𝒞.premodular where
+  ordinaryKirbySlidingLaw := baerenzBarrett_ordinaryKirbySliding 𝒞
+  modularCenter := modularSimpleCenter 𝒞
+  dimensions := modularDimensionCertificate 𝒞
+  cancellationLaw := modularCancellationLaw 𝒞
+  framedKinkLaw := shum_ribbonFramedKink 𝒞
+  categorySnapshotHash := binding.categorySnapshotHash
+  category_snapshot_hash_shape := binding.category_snapshot_hash_shape
+  categoryCoherenceCertificateHash :=
+    binding.categoryCoherenceCertificateHash
+  category_coherence_certificate_hash_shape :=
+    binding.category_coherence_certificate_hash_shape
+  sourceRefs := binding.sourceRefs
+  exactScope := binding.exactScope
+  sourceScopeCaveat := binding.sourceScopeCaveat
+
+end LiteratureBackedModularGraphicalEnvironment
 
 end TwistedYetter.Kirby.EGNOModularKirbyMoves

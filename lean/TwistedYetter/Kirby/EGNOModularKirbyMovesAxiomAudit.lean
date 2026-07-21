@@ -1,11 +1,11 @@
 import TwistedYetter.Kirby.EGNOModularKirbyMoves
 
 /-!
-# Axiom audit for EGNO-bound modular Kirby moves
+# Axiom audit for literature-backed modular Kirby moves
 
-These commands expose the kernel axioms used by Step 9.  The audit covers
-the all-object insertion law, label-indexed generalized sliding, derived
-dimension profile, cancellation factors, framing, and package exports.
+These commands expose the three non-derived graphical rule classes.  The
+fixed-label 2-over-2 theorem is audited separately below: it is derived from
+ordinary Kirby-colour sliding and naturality, not accepted as another axiom.
 -/
 
 #print axioms TwistedYetter.Fusion.EGNO.SphericalInsertionLaw.resolves
@@ -24,6 +24,9 @@ dimension profile, cancellation factors, framing, and package exports.
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.toSourcedSlidingLaw
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.before_is_dimension_weighted
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryKirbySlidingLaw.after_is_dimension_weighted
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.open_term_sound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.term_sound
+#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.linear_eval_sound
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.IsTransparent
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.globalDimension
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.transparentGlobalDimension
@@ -36,8 +39,16 @@ dimension profile, cancellation factors, framing, and package exports.
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw.one_two_factor
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.ModularCancellationLaw.two_three_factor
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.RibbonFramedKinkLaw.toFramedKinkCompatibility
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.profile
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.cancellationInput
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.framedKinkCompatibility
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.sphericalCutTrace
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.Package.ordinarySlidingLaw
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.required_graphical_rule_class_count
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.GraphicalInvarianceEnvironment.profile
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.GraphicalInvarianceEnvironment.cancellationInput
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.GraphicalInvarianceEnvironment.framedKinkCompatibility
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.GraphicalInvarianceEnvironment.sphericalCutTrace
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.GraphicalInvarianceEnvironment.ordinarySlidingLaw
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_hopfKirbyKillingFiber
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.modularCancellationLaw
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.build

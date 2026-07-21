@@ -1,0 +1,399 @@
+{
+  "argv": [
+    "experiments/scripts/build_canonical_modular_four_manifold_invariant_v2.py"
+  ],
+  "checks": {
+    "final_axiom_audit": {
+      "foundational_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "project_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_labelIndexedSlidingMovies",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalInsertion",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalMateTrace",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink",
+        "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardCycleBoundaryGraphicalRealization",
+        "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardLocalCycleCalculation",
+        "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput"
+      ]
+    },
+    "final_axiom_audit_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter.Kirby.CanonicalModularKirbyInvarianceAxiomAudit"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 90816,
+      "stdout_sha256": "3977a08b976f647643522f9f420e987354445b4833817e1f67c6e6fd78203449",
+      "warning_count": 160
+    },
+    "layer_axiom_audit_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInputAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalRawLocalMoveTargetAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalCycleMoveGeometryAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalCycleSlideGeometryAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalCycleLocalInvarianceAxiomAudit",
+        "TwistedYetter.Kirby.LiteratureBackedFourManifoldTopologyAxiomAudit",
+        "TwistedYetter.Kirby.LiteratureBackedFourManifoldInputsAxiomAudit"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 95680,
+      "stdout_sha256": "f16a7d639603d638e8dd2e2e2af34210533501439ca845244cf3f4b2c5fc480a",
+      "warning_count": 177
+    },
+    "source_guards": {
+      "diagrammatic_axiom_count": 2,
+      "explicit_cycle_uses_forward_chain_map": true,
+      "final_accepts_caller_compiler": false,
+      "final_accepts_caller_scalar_equality": false,
+      "final_ambient_h2_coordinate_bridge_absent": true,
+      "local_move_class_count": 8,
+      "proof_holes": [],
+      "public_eval_alpha_is_actual_second_homology": true,
+      "raw_instruction_accepts_target_hash": false,
+      "raw_instruction_accepts_whole_target": false,
+      "raw_planar_compiler_present": false,
+      "raw_planar_compiler_target_pinned": true,
+      "raw_planar_compiler_target_status": "TARGET_PINNED_NOT_IMPLEMENTED",
+      "retired_chosen_representative_slide_route_absent": true,
+      "retired_local_move_realization_absent": true,
+      "status": "PASS_FAIL_CLOSED_SOURCE_GUARDS",
+      "whole_sum_slide_endpoints_required": true
+    },
+    "umbrella_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter"
+      ],
+      "completed_successfully": true,
+      "returncode": 0,
+      "stdout_bytes": 107827,
+      "stdout_sha256": "4548553caa99303bd3142f95c152a76f31ff50f0ab76bb4a933667879ab4b5dc",
+      "warning_count": 173
+    }
+  },
+  "content_hash": "sha256:79896a27309cbfc8cdf50c178c5a147025c9ad199cd717099572b1d7ce1a8512",
+  "elapsed_seconds": 18.819129,
+  "explicit_non_claims": [
+    "This is not an axiom-free formalization of smooth four-manifolds, Morse theory, or Cerf theory.",
+    "The two diagrammatic realization statements are still axioms. The raw serialized-planar compiler completion type is pinned, but no Engine or Completion value constructs them.",
+    "A restricted proof grammar is safer than a scalar-equality axiom, but inhabiting that grammar remains substantive geometric content and is not reported as proved in Lean.",
+    "The result is for modular categories, not arbitrary premodular categories.",
+    "The result is not identified here with Yetter's original state-sum invariant.",
+    "No concrete category or concrete four-manifold is instantiated by this theorem artifact."
+  ],
+  "external_statement_denominator": {
+    "category_literature_axioms": {
+      "count": 9,
+      "items": [
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_labelIndexedSlidingMovies",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalInsertion",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_sphericalMateTrace",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ]
+    },
+    "diagrammatic_realization_axioms": {
+      "count": 2,
+      "items": [
+        "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardCycleBoundaryGraphicalRealization",
+        "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardLocalCycleCalculation"
+      ]
+    },
+    "foundational_lean_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "handle_chain_axioms": {
+      "count": 1,
+      "items": [
+        "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput"
+      ]
+    },
+    "smooth_topology_arguments": {
+      "count": 4,
+      "items": [
+        "markedRealization",
+        "elementaryMoveSoundness",
+        "markedPresentationExistence",
+        "markedKirbyCerfCompleteness"
+      ],
+      "representation": "explicit fields of LiteratureBackedFourManifoldTopology.Assumptions"
+    },
+    "total_count": 16
+  },
+  "final_theorem": {
+    "alpha_interface": "Each presentation is evaluated directly on its actual handle-chain SecondHomology; a move transports alpha by the chain equivalence's secondHomologyAddEquiv.",
+    "is_axiom_free": false,
+    "is_kernel_checked_relative_to_inputs": true,
+    "lean_diffeomorphism_theorem": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds_diffeomorphism_invariant",
+    "lean_function": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds",
+    "lean_presentation_formula": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds_on_presentation",
+    "scope": "marked closed connected oriented smooth four-manifolds represented by the cited special Kirby calculus, over an algebraically closed characteristic-zero field, for a ModularCategory and a tensor automorphism of the identity"
+  },
+  "finished_at_utc": "2026-07-20T14:45:21Z",
+  "first_block": {
+    "not_formalized": [
+      "smooth manifolds from foundations",
+      "Morse and Cerf theory",
+      "attaching maps and handle-chain matrices from geometry",
+      "raw planar coordinates and attaching-band neighborhoods"
+    ],
+    "proved_in_lean": [
+      "the four imported topology classes form a fixed denominator",
+      "Kirby-class quotient descent",
+      "oriented-diffeomorphism invariance after local invariance",
+      "presentation formula recovery",
+      "chain-induced H2 transport from an actual chain map"
+    ],
+    "public_alpha_type": "presentation.topology.handleChain.SecondHomology",
+    "status": "COMPLETE_AS_EXPLICIT_LITERATURE_BOUNDARY"
+  },
+  "generator_script": "experiments/scripts/build_canonical_modular_four_manifold_invariant_v2.py",
+  "inputs": {
+    "reference_records": {
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json": {
+        "bytes": 2374,
+        "sha256": "7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78"
+      },
+      "experiments/inputs/references/framed-link-presentation-independence-primary-sources-v1.json": {
+        "bytes": 5315,
+        "sha256": "601e65a7019a0242687db26e185e1fe4a3861d379095b97834a87b289b1892b7"
+      },
+      "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json": {
+        "bytes": 3822,
+        "sha256": "ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed"
+      },
+      "experiments/inputs/references/homologically-twisted-kirby-invariant-sources-v1.json": {
+        "bytes": 3627,
+        "sha256": "4a10bf855aff99341aa9d6c5e5aa9a0861cf2416c35b8117b913f6d8207f3aff"
+      },
+      "experiments/inputs/references/kirby-cancellation-primary-sources-v1.json": {
+        "bytes": 2156,
+        "sha256": "fced29ac871a6de859eb00cdc00c5277db70214379c8ee870e4e74f67f91749a"
+      },
+      "experiments/inputs/references/kirby-completeness-primary-sources-v1.json": {
+        "bytes": 4987,
+        "sha256": "664391133c6f2b260af4f67b1a3eb16763351d76f827bcfbb554b2cb86fd2885"
+      }
+    },
+    "source_files": {
+      "experiments/scripts/build_canonical_modular_four_manifold_invariant_v2.py": {
+        "bytes": 27419,
+        "sha256": "84b7be59547db327c38dc7e99e37c87bdfb5a43f97b3d13a345bdeede8644b99"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 4721,
+        "sha256": "54eb05b4d81871972ff5ff3e1cd0c9de10ac56f6394e5b56fb164ad286ad4782"
+      },
+      "lean/TwistedYetter/Fusion/EGNOPremodularModular.lean": {
+        "bytes": 7291,
+        "sha256": "42df960084398562ee9aaf922fb2c586494bdc72eaed8339acd2bcf4f903a171"
+      },
+      "lean/TwistedYetter/Fusion/EGNOTensorAutomorphism.lean": {
+        "bytes": 9615,
+        "sha256": "75384807caa3497c0858fe3b9acb09466c904fa92058ae779ef7f4c56e84676d"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleLocalInvariance.lean": {
+        "bytes": 26040,
+        "sha256": "3a39c9740231e588f0358b2437f6271e13161c7697ed7514cfc4821f8d59eb35"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleLocalInvarianceAxiomAudit.lean": {
+        "bytes": 494,
+        "sha256": "1fb2080ba5cf3301986fbb284cfbaec91fb2d33d2364e17a37f7344bb79c3e48"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleMoveGeometry.lean": {
+        "bytes": 34510,
+        "sha256": "7940c6e3bccd319c692c011d88e71bf3a0c1802ef6596d5add1d5237122e299e"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleMoveGeometryAxiomAudit.lean": {
+        "bytes": 677,
+        "sha256": "e3f4536de8b3c295e132f0662d299ded0fac09198b26f7f49416b9db1681acd8"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleSlideGeometry.lean": {
+        "bytes": 16177,
+        "sha256": "559942f9539b767f7e44e4bf467cc48fa025263fb60dc3e37394f7136748dff1"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleSlideGeometryAxiomAudit.lean": {
+        "bytes": 556,
+        "sha256": "9f7ca36e60d513596633d51e531d4e0fcad75c63e642ad860e4ec47a1f8bbd13"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalKirbyTrace.lean": {
+        "bytes": 8141,
+        "sha256": "507b6f40dc5c641a62b64a7847048e0b11030d3b022b564878518d6b6be65761"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyEvaluator.lean": {
+        "bytes": 29147,
+        "sha256": "b2f5b0e8502e035b502f6da1281d33089e90637b2f90382c3c0bc746697033a1"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvariance.lean": {
+        "bytes": 8814,
+        "sha256": "e1c4d2e6698fe99c3909d000f6db18d94ae1c66ea5502c0ec45860188792d184"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvarianceAxiomAudit.lean": {
+        "bytes": 1472,
+        "sha256": "6e34cb7a40e989dcae3354253312fef4253fa706221379358f23c9d079f9418d"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalMoveGeometry.lean": {
+        "bytes": 45103,
+        "sha256": "87736c211747fc78cebfa7bdb0107fc8fa647c1ebe5f968017bb5e6739d838d3"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalRawLocalMoveTarget.lean": {
+        "bytes": 9225,
+        "sha256": "70b0c8014a22d9c3890735c9cd73511244f1094d3bedf3e4e621f64edfdaf931"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalRawLocalMoveTargetAxiomAudit.lean": {
+        "bytes": 665,
+        "sha256": "e5c1b59203bded3ab68e40f11e2bcbaa3e5a4e7641fa9aa4382313859d701858"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalSourceBackedMove.lean": {
+        "bytes": 1190,
+        "sha256": "d868384d4b8770e50e465383f70ee0b4f308c5a501fbf325c939dec7c66b356b"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularKirbyMoves.lean": {
+        "bytes": 23200,
+        "sha256": "93b333004f732551180929acd0d417ca10f3eac0b84ce23be6d88a05a0d34a49"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedCanonicalGraphicalInput.lean": {
+        "bytes": 5887,
+        "sha256": "47855c180afbdd11fdee867413e98f438e7943d46a1c79befde16591515d3d52"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedCanonicalGraphicalInputAxiomAudit.lean": {
+        "bytes": 648,
+        "sha256": "21cc680725b305240027694f343cead6d859259839a749651fc7b9c6ba2ab9db"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldInputs.lean": {
+        "bytes": 3685,
+        "sha256": "75432fe826e2f11906494cf69e6c31a3dce7d68aeea98c27c52bf50c542f8193"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldInputsAxiomAudit.lean": {
+        "bytes": 789,
+        "sha256": "0e15c734ec174d3f21b0f3e987c155eae978dbc51afe3fceee9a8286fef35291"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldTopology.lean": {
+        "bytes": 8923,
+        "sha256": "71a89908f1ebf66e35cbd5cdbd83794655b48f39eda9ef4bea14c6bbf22bd1e9"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedFourManifoldTopologyAxiomAudit.lean": {
+        "bytes": 1192,
+        "sha256": "686af753b4a7e668fc236115ffc25606b804f29a7a5525f7f5f042f4081665bd"
+      },
+      "lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturality.lean": {
+        "bytes": 5082,
+        "sha256": "9da95908abb5d058ec78aee0cea9a50bf3f1c6388d6e830d8babcccb32bfdde7"
+      },
+      "lean/TwistedYetter/Kirby/TensorAutomorphismCouponCalculus.lean": {
+        "bytes": 22555,
+        "sha256": "d88caebaafac1fcc81d8cc0117505df15cfe0c8b409f52be76efe0a4cc04e07d"
+      },
+      "pyproject.toml": {
+        "bytes": 335,
+        "sha256": "79b5da14c3f60ad06eb0187084eb97dcf1163a855325ab5919505017e0f69465"
+      },
+      "tests/test_canonical_modular_four_manifold_invariant_v2.py": {
+        "bytes": 5326,
+        "sha256": "bc692b0107981a48db1df905823042a269355e9466c82720c0146943c88ffa07"
+      }
+    }
+  },
+  "mathematical_status": "ESTABLISHED_RELATIVE_TO_NAMED_INPUTS",
+  "repo": {
+    "dirty": true,
+    "git_branch": "codex/lean-kirby-coupon-bootstrap",
+    "git_commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+    "status_porcelain_sha256": "96442c12f7a5e7fcee44b14f4cfdfb66f3365fee70632d5100f51075a0c3c55f"
+  },
+  "reproduce_command": "LEAN_NUM_THREADS=1 python3 experiments/scripts/build_canonical_modular_four_manifold_invariant_v2.py",
+  "resource_safety": {
+    "experiments/results/lean-kirby/canonical-modular-four-manifold-invariant-v1.json": "HISTORICAL_SUPERSEDED_NOT_CURRENT_COMPLETION_STATUS",
+    "lean/TwistedYetter/Kirby/CanonicalMoveGeometry.lean": "REUSE_ONLY_INDEX_AND_COMPONENT_CHANGE_TYPES; ITS CHOSEN-TARGET-REPRESENTATIVE GEOMETRIES DO NOT SUPPORT THE V2 FINAL THEOREM",
+    "lean/TwistedYetter/Kirby/CanonicalSlideGeometry.lean": "RETIRED_FILE_ABSENT"
+  },
+  "schema": "canonical-modular-four-manifold-invariant-v2",
+  "second_block": {
+    "caller_supplies_final_equality": false,
+    "caller_supplies_local_realization": false,
+    "local_move_classes": [
+      "framedIsotopy",
+      "oneOverOne",
+      "twoOverOne",
+      "twoOverTwo",
+      "oneTwoBirth",
+      "oneTwoDeath",
+      "twoThreeBirth",
+      "twoThreeDeath"
+    ],
+    "proved_in_lean": [
+      "target cycle is the image under the actual forward chain map",
+      "coupon naturality, tensor, unit, duality, and cancellation",
+      "representative independence from a generated coupon movie",
+      "ordinary slides at whole-linear-sum level",
+      "generalized slides at whole-linear-sum level",
+      "one-two cancellation finite sum and normalization",
+      "two-three cancellation finite sum and normalization",
+      "birth and death directions without strict representative naturality",
+      "all eight local move classes preserve canonical EvalC",
+      "finite-movie descent to oriented diffeomorphism classes"
+    ],
+    "raw_planar_endpoint_compiler": {
+      "completion_type": "TwistedYetter.Kirby.CanonicalRawLocalMoveTarget.Completion",
+      "instruction_contains_target_hash": false,
+      "instruction_contains_whole_target": false,
+      "meaning": "Lean does not reconstruct the exact planar placement of every slide/coupon from serialized embeddings. A source-only deterministic Engine and its exact Completion obligations are now pinned, but no Engine or Completion value is constructed. The two existing axioms still return restricted proof terms, not scalar or EvalC equalities.",
+      "required_obligations": [
+        "generated components equal the local splice",
+        "generated events equal the local splice",
+        "the generated formal presentation is the exact topology target",
+        "the generated move compiles to LocalCycleCalculation"
+      ],
+      "status": "TARGET_PINNED_NOT_IMPLEMENTED"
+    },
+    "status": "CATEGORY_CALCULATION_COMPLETE_AFTER_TWO_EXPLICIT_DIAGRAMMATIC_REALIZATION_INPUTS"
+  },
+  "started_at_utc": "2026-07-20T14:45:03Z",
+  "status": "KERNEL_CHECKED_CLOSED_FOUR_MANIFOLD_INVARIANT_RELATIVE_TO_EXPLICIT_LITERATURE_BOUNDARY",
+  "supersedes": {
+    "artifact": "experiments/results/lean-kirby/canonical-modular-four-manifold-invariant-v1.json",
+    "reason": "v1 correctly recorded that canonical cycle descent and the eight source-bound local realizations were open. v2 adds explicit-cycle transport, restricted proof grammars, the eight-case soundness proof, and two conspicuous diagrammatic literature inputs."
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "python": "3.14.6"
+  }
+}

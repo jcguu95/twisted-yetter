@@ -1,0 +1,21 @@
+{
+  "profile": "ctl-resource/safety-status/1",
+  "target_selector": {
+    "resource_id": "resource:twisted-yetter:lean-module:canonical-move-geometry"
+  },
+  "status": "caution",
+  "top_notice": "CanonicalMoveGeometry.lean is reusable only for its component-index and component-change infrastructure. Its chosen-target-representative geometry must not support the v2 final invariant route.",
+  "evidence_claims": [],
+  "replacement": "resource:twisted-yetter:lean-module:canonical-cycle-move-geometry",
+  "safe_scopes": [
+    "SameComponentIndexChange and related finite reindexing lemmas",
+    "AddedComponentIndexChange and related finite splitting lemmas",
+    "category-neutral component registry bookkeeping"
+  ],
+  "unsafe_scopes": [
+    "assuming chosen H2 representatives commute strictly with Kirby moves",
+    "supporting canonical slide invariance at homology-class level",
+    "supporting the v2 closed four-manifold invariant theorem",
+    "replacing forward-chain-map transport by an independently chosen target cycle"
+  ]
+}

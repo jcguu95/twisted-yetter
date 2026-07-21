@@ -1,0 +1,6 @@
+import TwistedYetter.Kirby.ModularDottedEncircling
+
+#print axioms
+  TwistedYetter.Kirby.ModularDottedEncircling.automorphism_power_openKirbyEncircling_left
+#print axioms
+  TwistedYetter.Kirby.ModularDottedEncircling.powerThenOpenKirbyEncircling_eval_eq_inContext

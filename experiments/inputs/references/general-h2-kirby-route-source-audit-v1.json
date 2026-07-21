@@ -1,0 +1,98 @@
+{
+  "captured_at_utc": "2026-07-21T00:45:00Z",
+  "references": [
+    {
+      "authors": [
+        "David N. Yetter"
+      ],
+      "arxiv_id": "hep-th/9311082v1",
+      "canonical_url": "https://arxiv.org/abs/hep-th/9311082",
+      "captured_pdf": {
+        "bytes": 112687,
+        "capture_path_at_capture_time": "/private/tmp/yetter-homologically-twisted-9311082.pdf",
+        "pages": 6,
+        "repo_local_bytes": false,
+        "sha256": "e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b"
+      },
+      "locators": [
+        {
+          "finding": "Representative independence is proved for the triangulated state sum.",
+          "locator": "Theorems 7-8 and proof, printed pages 3-4"
+        },
+        {
+          "finding": "The surgical construction is explicitly restricted to simply connected four-manifolds to avoid nonspherical homology representatives.",
+          "locator": "Section 'A Surgical Version', opening paragraph, printed page 4"
+        },
+        {
+          "finding": "The marked surgery formula chooses two-handle components whose associated spheres form a basis of H2(W; Z2).",
+          "locator": "Definition 10, printed page 5"
+        },
+        {
+          "finding": "The Kirby-move theorem applies to that restricted surgical construction.",
+          "locator": "Theorem 11 and proof, printed page 5"
+        }
+      ],
+      "ref_id": "ref:yetter-homologically-twisted-1993",
+      "title": "Homologically Twisted Invariants Related to (2+1)- and (3+1)-Dimensional State-Sum Topological Quantum Field Theories",
+      "type": "preprint",
+      "year": 1993
+    },
+    {
+      "authors": [
+        "Ying Hong Tham"
+      ],
+      "arxiv_id": "2108.13467v1",
+      "canonical_url": "https://arxiv.org/abs/2108.13467",
+      "captured_pdf": {
+        "bytes": 1647339,
+        "capture_path_at_capture_time": "/private/tmp/tham-2108.13467v1.pdf",
+        "pages": 112,
+        "repo_local_bytes": false,
+        "sha256": "e375f7b05aab7f3baa8f88d6e7c5e7d6d0ad6a966a5afb7cb53bb8555260959b"
+      },
+      "ctl_current_binding": {
+        "cid": "ctlobj-sha256:f58a14d8c7ecf94a1834dcf6ade8230688a307b25b5a2c220e75a434a7180992",
+        "logical_id": "subject:twisted-yetter:paper:tham-2108-13467",
+        "root_cid_at_audit": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83"
+      },
+      "locators": [
+        {
+          "finding": "The index-three handle map intersects the co-core, decomposes into simple channels, and retains only the tensor-unit channel. Under this repository's upside-down convention, this is the map attached to a primal dotted one-handle.",
+          "locator": "Definition 5.11, k=3 case, PDF page 59, printed page 53"
+        },
+        {
+          "finding": "Well-definedness of the index-three map is attributed to Lemma 2.28 and equation (5.16).",
+          "locator": "Definition 5.11, paragraph after the case list, PDF page 59, printed page 53"
+        },
+        {
+          "finding": "The unmarked skein map is independent of handle decomposition.",
+          "locator": "Proposition 5.13, PDF pages 59-60, printed pages 53-54"
+        },
+        {
+          "finding": "For a Tham-index 2-3 cancelling pair, the regular-coloured two-handle core meets the index-three co-core once and the unit strand alone survives. Under the repository's upside-down convention, this is a primal 1-2 cancellation, not a primal 2-3 cancellation.",
+          "locator": "Proof of Proposition 5.13, PDF page 60, printed page 54"
+        }
+      ],
+      "ref_id": "ref:tham-extended-crane-yetter-2021",
+      "title": "On the Category of Boundary Values in the Extended Crane-Yetter TQFT",
+      "type": "thesis-preprint",
+      "year": 2021
+    }
+  ],
+  "schema": "twisted-yetter.general-h2-kirby-route-source-audit.v1",
+  "scope_findings": {
+    "established_by_sources": [
+      "Yetter proves arbitrary representative independence on the triangulated state-sum route.",
+      "Yetter's surgery route does not establish the arbitrary-H2 marked Kirby formula currently under audit.",
+      "Tham's index-three skein map is a vacuum projection; under the repository's upside-down convention it belongs to primal dotted one-handles.",
+      "Primal three-handles are Tham index-one handles and contribute inverse-dimension normalization rather than the index-three vacuum projection.",
+      "Tham proves handle-decomposition independence for the unmarked premodular skein construction."
+    ],
+    "inference_under_audit": "A generalized marked surgery evaluator must use the dual handle complex. Primal 2-3 cancellation is enforced by the dual cycle kernel, while primal dotted 1-handles must implement the Tham index-three vacuum projection for dual d3-boundaries.",
+    "not_established_by_sources": [
+      "Tham does not state the arbitrary-H2 homologically twisted surgery evaluator proposed in this repository.",
+      "Neither source by itself proves the repository's generalized integral-H2 representative descent; the missing integration is the dual-chain boundary movie together with the primal dotted-component vacuum calculation."
+    ]
+  },
+  "status": "PRIMARY_SOURCE_SCOPE_AUDITED_DUAL_HANDLE_CONVENTION_CORRECTED"
+}

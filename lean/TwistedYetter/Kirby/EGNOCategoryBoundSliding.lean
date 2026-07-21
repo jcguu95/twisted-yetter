@@ -434,4 +434,134 @@ theorem after_is_dimension_weighted
 
 end OrdinaryKirbySlidingLaw
 
+/--
+One closed fixed-label slide window derived from the ordinary Kirby-colour
+sliding law.
+
+For the identity ribbon functor used by the modular invariant, the object
+called `F(X)` in Bärenz--Barrett is just the actual object `X`.  Hence, after
+expanding the possibly twisted colour on the sliding component into simple
+labels, every fixed label `x` is an ordinary Kirby-colour slide with
+`X = simple x ⊗ exterior`.  This is the formal content of Remark 3.5.
+
+No equality is stored in this structure.
+-/
+structure OrdinaryLabelIndexedSlidingWindow
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (law : OrdinaryKirbySlidingLaw data) where
+  source : Boundary C
+  target : Boundary C
+  exterior : Diagram C source target
+  context :
+    (x : S) →
+      Context C
+        (.atom (data.simple x ⊗ source.denote))
+        (.atom (data.simple x ⊗ target.denote))
+        .unit .unit
+
+namespace OrdinaryLabelIndexedSlidingWindow
+
+variable
+    {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
+    {law : OrdinaryKirbySlidingLaw data}
+    (window : OrdinaryLabelIndexedSlidingWindow data law)
+
+/-- The open fixed-label diagram before ordinary Kirby-colour sliding. -/
+noncomputable def openBefore (x : S) :
+    Diagram C
+      (.atom (data.simple x ⊗ window.source.denote))
+      (.atom (data.simple x ⊗ window.target.denote)) :=
+  law.toSourcedSlidingLaw.before_diagram
+      (data.simple x ⊗ window.source.denote) ≫ᵈ
+    liftExterior (data.simple x) window.exterior
+
+/-- The open fixed-label diagram after ordinary Kirby-colour sliding. -/
+noncomputable def openAfter (x : S) :
+    Diagram C
+      (.atom (data.simple x ⊗ window.source.denote))
+      (.atom (data.simple x ⊗ window.target.denote)) :=
+  liftExterior (data.simple x) window.exterior ≫ᵈ
+    law.toSourcedSlidingLaw.after_diagram
+      (data.simple x ⊗ window.target.denote)
+
+/--
+The fixed-label open slide follows from the ordinary sliding theorem and
+naturality.  Crossings, extrema, and coupons remain visible in `exterior`.
+-/
+theorem open_term_sound (x : S) :
+    Diagram.eval C (window.openBefore x) =
+      Diagram.eval C (window.openAfter x) := by
+  let ordinary := law.toSourcedSlidingLaw
+  let exteriorMap :=
+    (tensorLeft (data.simple x)).map
+      (Diagram.eval C window.exterior)
+  change
+    Diagram.eval C
+          (ordinary.before_diagram
+            (data.simple x ⊗ window.source.denote)) ≫
+        Diagram.eval C
+          (liftExterior (data.simple x) window.exterior) =
+      Diagram.eval C
+          (liftExterior (data.simple x) window.exterior) ≫
+        Diagram.eval C
+          (ordinary.after_diagram
+            (data.simple x ⊗ window.target.denote))
+  calc
+    _ = ordinary.before.app
+          (data.simple x ⊗ window.source.denote) ≫ exteriorMap := by
+      rw [ordinary.before_eval,
+        liftExterior_eval (data.simple x) window.exterior]
+      rfl
+    _ = ordinary.after.app
+          (data.simple x ⊗ window.source.denote) ≫ exteriorMap := by
+      rw [ordinary.core_sound]
+    _ = exteriorMap ≫
+          ordinary.after.app
+            (data.simple x ⊗ window.target.denote) :=
+      (ordinary.after.naturality exteriorMap).symm
+    _ = _ := by
+      rw [liftExterior_eval (data.simple x) window.exterior,
+        ordinary.after_eval]
+      rfl
+
+/-- Complete closed fixed-label diagram before the slide. -/
+noncomputable def before (x : S) : Diagram C .unit .unit :=
+  Context.plug C (window.context x) (window.openBefore x)
+
+/-- Complete closed fixed-label diagram after the slide. -/
+noncomputable def after (x : S) : Diagram C .unit .unit :=
+  Context.plug C (window.context x) (window.openAfter x)
+
+/-- Closing in an arbitrary typed context preserves the fixed-label proof. -/
+theorem term_sound (x : S) :
+    Diagram.eval C (window.before x) =
+      Diagram.eval C (window.after x) :=
+  Context.eval_plug_congr C (window.context x)
+    (window.open_term_sound x)
+
+/-- Formal coefficient-weighted sum before the fixed-label slides. -/
+noncomputable def linearBefore (coefficient : S → K) :
+    LinearDiagram (R := K) (C := C) .unit .unit :=
+  weightedSum (R := K) coefficient window.before
+
+/-- Formal coefficient-weighted sum after the fixed-label slides. -/
+noncomputable def linearAfter (coefficient : S → K) :
+    LinearDiagram (R := K) (C := C) .unit .unit :=
+  weightedSum (R := K) coefficient window.after
+
+/--
+Any finite coefficient system, including a homologically twisted Kirby
+colour, slides term by term over the ordinary Kirby colour.
+-/
+theorem linear_eval_sound (coefficient : S → K) :
+    eval (R := K) (window.linearBefore coefficient) =
+      eval (R := K) (window.linearAfter coefficient) := by
+  simp only [linearBefore, linearAfter, eval_weightedSum]
+  apply Finset.sum_congr rfl
+  intro x _
+  exact congrArg (fun morphism => coefficient x • morphism)
+    (window.term_sound x)
+
+end OrdinaryLabelIndexedSlidingWindow
+
 end TwistedYetter.Kirby.EGNOCategoryBoundSliding

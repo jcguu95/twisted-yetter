@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+  "generated_at": "2026-07-20T07:36:19Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-snapshot:canonical-move-geometry-a1ef71af",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:99da8e0a7ea6220900578503a51fe31b7a7f13a0d2102e21295cf878ebe0626c",
+    "current_root": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:c2d6c3280ffe1ecd506353ff22f316b138ea01a6d8c9fe6bd8872f681563a6c5"
+  },
+  "parent_root_cid": "ctlobj-sha256:9e2e3e98e71576c656aaf1d3ce1b4c95986293c0bd2a48521685d3ed161a265a",
+  "payload_file": "ctl-dogfood/resources/canonical-move-geometry-snapshot-a1ef71af.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:resource-snapshot:canonical-move-geometry-a1ef71af --payload resources/canonical-move-geometry-snapshot-a1ef71af.json --manifest manifests/resource-canonical-move-geometry-snapshot-a1ef71af.json --created-at 2026-07-20T07:36:19Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "f92a08f24175943d8c2dbb906575ab7afb7572d8"
+}

@@ -1,0 +1,243 @@
+{
+  "argv": [
+    "experiments/scripts/build_dotted_boundary_h2_descent_v1.py"
+  ],
+  "axiom_audit": {
+    "audit_stdout": {
+      "bytes": 137492,
+      "sha256": "2723abd2e6e4282885d7eb6a17fda131c360b7cf44e77fa4102f58702d4575ba"
+    },
+    "expected_final_project_axioms": [
+      "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+      "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+      "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardLocalCycleCalculation",
+      "TwistedYetter.Kirby.ModularDottedEncircling.baerenzBarrett_tham_openKirbyKilling",
+      "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+    ],
+    "foundational_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "retired_inputs_absent": [
+      "tham_dualBoundaryGraphicalRealization",
+      "baerenzBarrett_labelIndexedSlidingMovies",
+      "standardDottedDiskGeometry"
+    ]
+  },
+  "checks": {
+    "git_diff_check": {
+      "returncode": 0
+    },
+    "source_guards": {
+      "actual_h2_quotient_descent": true,
+      "caller_supplied_geometry_absent_from_terminal_surface": true,
+      "clean_descent_interface": true,
+      "final_theorem_derives_representative_independence": true,
+      "final_theorem_uses_certified_standard_dotted_domain": true,
+      "finite_dotted_sum_theorem": true,
+      "integral_generator_invariance": true,
+      "overbroad_global_geometry_axiom_absent": true,
+      "proof_holes": [],
+      "retired_global_graphical_descent_absent": true,
+      "status": "PASS_FAIL_CLOSED_SOURCE_GUARDS"
+    },
+    "targeted_axiom_audit": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter.Kirby.CanonicalModularKirbyEvaluatorAxiomAudit",
+        "TwistedYetter.Kirby.DottedBoundaryGeometryAxiomAudit",
+        "TwistedYetter.Kirby.DottedBoundaryFiniteSumAxiomAudit",
+        "TwistedYetter.Kirby.DottedBoundaryGeneratorInvarianceAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalCycleLocalInvarianceAxiomAudit",
+        "TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometryAxiomAudit",
+        "TwistedYetter.Kirby.CanonicalModularKirbyInvarianceAxiomAudit"
+      ],
+      "returncode": 0
+    },
+    "umbrella_build": {
+      "argv": [
+        "lake",
+        "-Kjobs=2",
+        "build",
+        "TwistedYetter"
+      ],
+      "returncode": 0,
+      "stdout_bytes": 207972,
+      "stdout_sha256": "174b681e5db4668c05c0bceadfe05151029a4f526ec6fd543545862c620b336b"
+    }
+  },
+  "content_hash": "sha256:4d7cf9d7c5c8181c35094bc0a7d3252ce50d0a431a4261327267e6339d665e0f",
+  "elapsed_seconds": 134.413023,
+  "explicit_nonclaims": [
+    "This does not provide an executable parser that constructs dotted spanning-disk geometry from arbitrary raw pixels or planar coordinates.",
+    "This is not an axiom-free reconstruction of Kirby-Cerf theory.",
+    "The restricted local Table 2 endpoint realization remains a named literature axiom.",
+    "This does not establish the premodular case.",
+    "This does not identify the evaluator with Yetter's original state-sum definition."
+  ],
+  "finished_at_utc": "2026-07-21T06:14:00Z",
+  "generator_script": "experiments/scripts/build_dotted_boundary_h2_descent_v1.py",
+  "inputs": {
+    "reference_records": {
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json": {
+        "bytes": 2374,
+        "sha256": "7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78"
+      },
+      "experiments/inputs/references/general-h2-kirby-route-source-audit-v1.json": {
+        "bytes": 5244,
+        "sha256": "3c5ceadda637039346a6ffda9440cafb4a07deb0741c45da9380964423e159a3"
+      },
+      "experiments/inputs/references/generalized-sliding-core-primary-sources-v2.json": {
+        "bytes": 3822,
+        "sha256": "ff577e6e70a4bac2b09aeda45429ac9fc29218e83df15644eedd2b7872a284ed"
+      }
+    },
+    "source_files": {
+      "experiments/scripts/build_dotted_boundary_h2_descent_v1.py": {
+        "bytes": 16847,
+        "sha256": "93ab72d8420bcad933f54b6a467073dbb0a61020b381baab72e3c0f2002ba613"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 8760,
+        "sha256": "979b3cc65968a676cace1f9a85d18d51e5440384d93aecb1a03b17292bdb915e"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalCycleLocalInvariance.lean": {
+        "bytes": 27108,
+        "sha256": "e64c11b55eecefbf8ca0faf3f6455b70a771527fd74fae06a07326de290ba731"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyEvaluator.lean": {
+        "bytes": 34121,
+        "sha256": "bc38012f0cdc9c05ba2c891ae470235d2a857b3689f6e60f1461f3b18f6b80f1"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyEvaluatorAxiomAudit.lean": {
+        "bytes": 1225,
+        "sha256": "06b935920e676bf9c5521623928fe18822a6b609194f036f58f4d366ec081287"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvariance.lean": {
+        "bytes": 10663,
+        "sha256": "0814b74a7979465ad2282f32297e4f0d96a863bb94413358f425bd94d26ae4de"
+      },
+      "lean/TwistedYetter/Kirby/CanonicalModularKirbyInvarianceAxiomAudit.lean": {
+        "bytes": 2263,
+        "sha256": "521483ab83df283c67e7b96fd81d59a57b52fe975825edd50869308eb15cf9f5"
+      },
+      "lean/TwistedYetter/Kirby/ComponentBoundaryCharacter.lean": {
+        "bytes": 12825,
+        "sha256": "0c11ce53e9f1bf8c68b0bf68954915647570491547b3a7f5f7b91cf84b6f5952"
+      },
+      "lean/TwistedYetter/Kirby/ComponentBoundarySignedProduct.lean": {
+        "bytes": 6954,
+        "sha256": "2bea1b0a4fd92511b37340fdb85e7b2ec553512770671da6a0754b989b052f13"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryFiniteSum.lean": {
+        "bytes": 12748,
+        "sha256": "91904a660315dea34a0971a1f5f3e921204df83a079901a0e0630a3dd6ecacd5"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryFiniteSumAxiomAudit.lean": {
+        "bytes": 197,
+        "sha256": "300009cdb7ab84bc43b04d799c0b801151ac4c3b4de1c6a13bed674566278c66"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryGeneratorInvariance.lean": {
+        "bytes": 12652,
+        "sha256": "7841940c518dc93fa1911cbd760d34103c575506d4838825acb00671484bff81"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryGeneratorInvarianceAxiomAudit.lean": {
+        "bytes": 337,
+        "sha256": "b115bd961c3518e23b4d7d6abf0bcdf3f4731d8e1f3e3e331cbfb6baad78d9e9"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryGeometry.lean": {
+        "bytes": 36726,
+        "sha256": "0fc6d28d6d7b7c4d986a3a83fdb4ee5e5d04f3ebcbe3483d549cf76481146dca"
+      },
+      "lean/TwistedYetter/Kirby/DottedBoundaryGeometryAxiomAudit.lean": {
+        "bytes": 985,
+        "sha256": "1774b7d83638227b948e40705a66ba1ca8a584cab7e735c846a132eb6277dd18"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedCanonicalGraphicalInput.lean": {
+        "bytes": 4926,
+        "sha256": "130933da19577f34efdb6116041ed8eef512dac16369c1ba08480638834b64ac"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedDottedBoundaryGeometry.lean": {
+        "bytes": 4295,
+        "sha256": "f9ffb8ad7ff3b6f6465dd6e0d254dceb3b9e6bdbb9140717f6cadab0325fe832"
+      },
+      "lean/TwistedYetter/Kirby/LiteratureBackedDottedBoundaryGeometryAxiomAudit.lean": {
+        "bytes": 905,
+        "sha256": "b1345723186f127cdca93658fd031afe350348aab04832364df68a46fc9267c8"
+      }
+    }
+  },
+  "mathematical_status": "ESTABLISHED_MODULAR_CASE_RELATIVE_TO_EXPLICIT_NAMED_LITERATURE_FACTS",
+  "proved_chain": [
+    {
+      "stage": "one_dotted_generator_fixed_exterior",
+      "status": "PROVED",
+      "theorem": "TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.fixedRemaining_dottedSum_invariant"
+    },
+    {
+      "stage": "one_dotted_generator_complete_label_sum",
+      "status": "PROVED",
+      "theorem": "TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.cycleLinearDiagram_eval_add_integralGenerator"
+    },
+    {
+      "stage": "one_integral_generator_normalized_evaluation",
+      "status": "PROVED",
+      "theorem": "TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.cycleEvalC_add_integralGenerator"
+    },
+    {
+      "stage": "all_boundaries_actual_h2_descent",
+      "status": "PROVED",
+      "theorem": "TwistedYetter.Kirby.DottedBoundaryGeometry.GeometrySystem.respects_homology_class"
+    },
+    {
+      "stage": "eight_local_kirby_moves",
+      "status": "PROVED_RELATIVE_TO_VISIBLE_INPUTS",
+      "theorem": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.evalC_local_move_invariant"
+    },
+    {
+      "stage": "closed_four_manifold_oriented_diffeomorphism",
+      "status": "PROVED_RELATIVE_TO_VISIBLE_INPUTS",
+      "theorem": "TwistedYetter.Kirby.CanonicalModularKirbyInvariance.EvalCOnClosedFourManifolds_diffeomorphism_invariant"
+    }
+  ],
+  "remaining_topology_side_obligation": {
+    "description": "No executable raw-diagram geometry parser is required for the theorem. Standard spanning-disk, dual-incidence, and trace-factorization certificates are part of the admitted presentation domain; their existence and Kirby-Cerf completeness remain visible in the topology assumptions.",
+    "status": "CLOSED_BY_CERTIFIED_STANDARD_DOTTED_PRESENTATION_DOMAIN"
+  },
+  "repo": {
+    "dirty": true,
+    "git_branch": "codex/lean-kirby-coupon-bootstrap",
+    "git_commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+    "status_porcelain_sha256": "98a68acd22918389007306e9a66fcc305923eaec1fdfc10550a956130c9feb96"
+  },
+  "reproduce_command": "LEAN_NUM_THREADS=1 python3 experiments/scripts/build_dotted_boundary_h2_descent_v1.py",
+  "resource_limits": {
+    "lean_threads": 1,
+    "max_parallel_jobs": 2
+  },
+  "schema": "twisted-yetter.dotted-boundary-h2-descent.v1",
+  "started_at_utc": "2026-07-21T06:11:45Z",
+  "status": "KERNEL_CHECKED_MODULAR_CLOSED_FOUR_MANIFOLD_INVARIANT_RELATIVE_TO_CERTIFIED_DOMAIN_AND_NAMED_LITERATURE_BOUNDARY",
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "python": "Python 3.14.6"
+  },
+  "visible_input_boundary": {
+    "dotted_geometry": "The final handle-presentation theory ranges only over StandardDottedCanonicalPresentation. Each term carries one category-neutral GeometrySystem; no global axiom asserts geometry for malformed raw syntax.",
+    "local_move_geometry": "standardLocalCycleCalculation supplies a restricted local Table 2 geometry term, never a scalar equality.",
+    "smooth_topology": "LiteratureBackedFourManifoldTopology.Assumptions supplies Kirby-Cerf realization and completeness."
+  }
+}

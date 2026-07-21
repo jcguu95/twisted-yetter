@@ -1,0 +1,14 @@
+import TwistedYetter.Kirby.LiteratureBackedFourManifoldInputs
+
+/-!
+# Axiom audit for the complete literature boundary
+
+The denominator bookkeeping is proved in Lean.  The actual handle-chain
+naturality theorem remains the one explicitly named project axiom.
+-/
+
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldInputs.required_imported_statement_class_count
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldInputs.required_imported_statement_classes_unique
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldInputs.complete_imported_statement_partition
+#print axioms TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput
+#print axioms TwistedYetter.Kirby.SourceBackedHandleChainNaturality.local_transport_is_identity

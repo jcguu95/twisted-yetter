@@ -1,0 +1,461 @@
+{
+  "anti_hack_guards": {
+    "forbidden_legacy_interfaces": [
+      "ClosedFourManifoldKirbyCorrespondence",
+      "kirbyCerfAndThreeHandleCompletion",
+      "inductive KirbyEquivalent"
+    ],
+    "required_design_properties": [
+      "KirbyMovie is proof-relevant Type data",
+      "KirbyEquivalent erases only movie existence",
+      "h3 is the certified standard-boundary genus",
+      "d3 is derived from transported sphere intersections",
+      "closed-completion independence is a proved theorem",
+      "BoundaryCertifiedPresentation has no handleChain field",
+      "the legacy adapter handleChain is definitionally derived",
+      "the evaluator marking is the boundary-derived handle-chain H2",
+      "BoundaryCertifiedMove has no homology transport field",
+      "move transport is derived from the visible standard handle-chain naturality axiom"
+    ],
+    "status": "PASS_FORBIDDEN_SHORTCUTS_ABSENT"
+  },
+  "argv": [
+    "experiments/scripts/build_egno_modular_final_theorem_refactor_v1.py"
+  ],
+  "available_but_not_used_topology_axioms": [
+    "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+  ],
+  "checks": {
+    "axiom_audit": {
+      "all_project_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ],
+      "audited_declaration_count": 12,
+      "graphical_environment_axioms": [
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ],
+      "status": "PASS_NO_PROOF_ORACLE_AND_EXACT_EXPECTED_AXIOM_SET",
+      "topology_axioms_used_by_quotient_descent": []
+    },
+    "boundary_axiom_audit": {
+      "files": {
+        "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentationAxiomAudit.lean": {
+          "audited_declaration_count": 4,
+          "lean_foundational_axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "project_axioms": [],
+          "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES"
+        },
+        "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainAxiomAudit.lean": {
+          "audited_declaration_count": 6,
+          "lean_foundational_axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "project_axioms": [],
+          "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES"
+        },
+        "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainModelAxiomAudit.lean": {
+          "audited_declaration_count": 5,
+          "lean_foundational_axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "project_axioms": [],
+          "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES"
+        },
+        "lean/TwistedYetter/Kirby/BoundaryStandardizationAxiomAudit.lean": {
+          "audited_declaration_count": 5,
+          "lean_foundational_axioms": [],
+          "project_axioms": [],
+          "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES"
+        },
+        "lean/TwistedYetter/Kirby/StandardCapClosureAxiomAudit.lean": {
+          "audited_declaration_count": 3,
+          "lean_foundational_axioms": [],
+          "project_axioms": [],
+          "status": "PASS_NO_PROJECT_AXIOMS_OR_PROOF_ORACLES"
+        }
+      },
+      "status": "PASS_ALL_BOUNDARY_LAYERS_AUDITED"
+    },
+    "boundary_evaluator_axiom_audit": {
+      "audited_declaration_count": 6,
+      "file": "lean/TwistedYetter/Kirby/BoundaryCertifiedModularEvaluatorAxiomAudit.lean",
+      "project_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink",
+        "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput"
+      ],
+      "status": "PASS_EXACT_GRAPHICAL_AXIOMS_PLUS_VISIBLE_HANDLE_CHAIN_NATURALITY_AXIOM"
+    },
+    "boundary_standardization_movie": "PASS_EXACT_WHITELIST_ISOTOPY_SLIDE_AND_SIGNED_STABILIZATION",
+    "certified_legacy_adapter": "PASS_NO_CALLER_SUPPLIED_HANDLE_CHAIN",
+    "derived_d3_and_h2": "PASS_D3_DERIVED_FROM_TRANSPORTED_SPHERES_AND_INTERSECTION_NUMBERS",
+    "derived_mathlib_handle_chain_model": "PASS_CHAIN_COMPLEX_D2_D3_AND_H2_ARE_BOUNDARY_DERIVED",
+    "elementary_transport": "PASS_DERIVED_FROM_CHAIN_HOMOTOPY_EQUIVALENCE",
+    "generated_equivalence_soundness": "PASS_REFL_SYMM_TRANS_INDUCTION",
+    "graphical_axiom_audit": {
+      "all_graphical_environment_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ],
+      "graphical_literature_axioms": [
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+        "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+      ],
+      "status": "PASS_EXACTLY_FOUR_NAMED_LITERATURE_AXIOMS_PLUS_TWO_EXISTING_MODULAR_CATEGORY_AXIOMS"
+    },
+    "kirby_quotient_descent": "PASS_QUOTIENT_LIFT",
+    "legacy_evaluator_bridge": "PASS_EVALUATOR_CONSUMES_BOUNDARY_DERIVED_HANDLE_CHAIN_H2_AND_MOVE_TRANSPORT_IS_DERIVED_FROM_VISIBLE_AXIOM",
+    "local_move_soundness": "PASS_FROM_CONCRETE_EIGHT_CASE_COMPILER_AND_FIXED_LITERATURE_BACKED_GRAPHICAL_ENVIRONMENT",
+    "presentation_marking": "PASS_MARKING_IS_EACH_PRESENTATION_HANDLE_CHAIN_H2",
+    "proof_hole_scan": {
+      "checked_files": [
+        "lean/TwistedYetter.lean",
+        "lean/TwistedYetter/Fusion/EGNOPremodularModular.lean",
+        "lean/TwistedYetter/Kirby/EGNOModularKirbyMoves.lean",
+        "lean/TwistedYetter/Kirby/EGNOModularFourManifoldInvariant.lean",
+        "lean/TwistedYetter/Kirby/BoundaryStandardization.lean",
+        "lean/TwistedYetter/Kirby/StandardCapClosure.lean",
+        "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChain.lean",
+        "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainModel.lean",
+        "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentation.lean",
+        "lean/TwistedYetter/Kirby/SourceBackedKirbyCompleteness.lean",
+        "lean/TwistedYetter/Kirby/SourceBoundGeometricH2Compiler.lean",
+        "lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturality.lean",
+        "lean/TwistedYetter/Kirby/BoundaryCertifiedModularEvaluator.lean",
+        "lean/TwistedYetter/Kirby/ModularFourManifoldInvariantFinalTarget.lean",
+        "lean/TwistedYetter/Kirby/EGNOModularFinalTheoremRefactor.lean"
+      ],
+      "status": "PASS_NO_SORRY_ADMIT_OR_NATIVE_DECIDE"
+    },
+    "proof_relevant_kirby_movie": "PASS_MOVIE_LIVES_IN_TYPE_AND_ONLY_EXISTENCE_IS_ERASED",
+    "standard_cap_closure": "PASS_CHOICE_INDEPENDENCE_DERIVED_FROM_GENUS_DETECTION_LAUDENBACH_POENARU_AND_GLUING",
+    "textbook_axiom_audit": {
+      "status": "PASS_EXACTLY_THREE_NAMED_EGNO_AXIOMS",
+      "textbook_axioms": [
+        "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+        "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+        "TwistedYetter.Fusion.EGNO.sphericalRibbonReconstruction"
+      ]
+    },
+    "three_handle_geometry": "PASS_ARCHITECTURE_BOUNDARY_CERTIFICATE_DERIVES_H3_AND_STANDARD_CAP_CLOSED_COMPLETION",
+    "topology_descent": "PASS_GENERIC_DERIVATION_FROM_SPLIT_MOVE_SOUNDNESS_EXISTENCE_AND_KIRBY_CERF_COMPLETENESS_INPUTS",
+    "umbrella_build": {
+      "lake_jobs": 2,
+      "lean_num_threads": 1,
+      "output_tail": "Build completed successfully (2311 jobs).",
+      "status": "PASS"
+    }
+  },
+  "content_hash": "sha256:0f211f1015f9e98d02406f8cd80a7c7ddc8a81aeb5810839414cfdf179146276",
+  "elapsed_seconds": 68.992235,
+  "explicit_graphical_literature_axioms": [
+    "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+    "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+    "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+    "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+  ],
+  "explicit_non_claims": [
+    "No axiom-free derivation of the four named graphical literature interfaces has been formalized.",
+    "This historical refactor did not provide the canonical Eval_C constructor. The superseding artifact now provides that constructor and records the remaining local-move gap.",
+    "No concrete framed-surgery semantics, boundary standardization certificate generator, or Kirby-Cerf instance has been constructed.",
+    "The standard handle-chain naturality statement is a visible domain axiom; Lean has not reconstructed its chain maps from the attaching data of each local Kirby move.",
+    "No concrete modular category instance is constructed here.",
+    "No numerical artifact is promoted to an exact Lean theorem.",
+    "The adapter accepts no independent legacy handle chain and no equivalence between two independently supplied chain complexes. It does retain an explicit marked-coordinate equivalence from the derived handle-chain H2 to the fixed H2 type expected by the event compiler.",
+    "The generic quotient-to-diffeomorphism equivalence is not a concrete closed-four-manifold invariant until its split topology inputs are instantiated.",
+    "The boundary-certified calculus is currently parameterized by one fixed manifold input; no global family over all closed oriented smooth four-manifolds is assembled here.",
+    "No identification with the original Crane--Yetter or Yetter state sum is claimed.",
+    "No premodular-category four-manifold theorem is claimed."
+  ],
+  "explicit_standard_textbook_axioms": [
+    "TwistedYetter.Fusion.EGNO.sphericalRibbonReconstruction",
+    "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+    "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero"
+  ],
+  "finished_at_utc": "2026-07-20T16:00:56Z",
+  "four_manifold_boundary": {
+    "boundary_route": [
+      "TwistedYetter.Kirby.BoundaryStandardization.BoundaryStandardizationCertificate",
+      "TwistedYetter.Kirby.StandardCapClosure.closedCompletionChoiceDiffeomorphism",
+      "TwistedYetter.Kirby.BoundaryDerivedHandleChain.CertifiedClosedPresentation.derivedSecondHomology",
+      "TwistedYetter.Kirby.BoundaryDerivedHandleChainModel.CertifiedClosedPresentation.derivedHandleChainModel",
+      "TwistedYetter.Kirby.BoundaryCertifiedKirbyPresentation.BoundaryCertifiedPresentation.toSpecialKirbyPresentation",
+      "TwistedYetter.Kirby.BoundaryCertifiedModularEvaluator.boundaryCertifiedEvaluationOnKirbyClass"
+    ],
+    "concrete_instance_status": "BLOCKED_NO_CONCRETE_BOUNDARY_CERTIFICATES_OR_GLOBAL_TOPOLOGY_INSTANCES",
+    "generic_descent_theorem": "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant_on_presentation",
+    "generic_equivalence_theorem": "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.kirbyClassEquivDiffeomorphismClass",
+    "lean_types": [
+      "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.MarkedFourManifoldRealization",
+      "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.ElementaryMoveGeometricSoundness",
+      "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.MarkedPresentationExistence",
+      "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.MarkedKirbyCerfCompleteness"
+    ],
+    "status": "GENERIC_DERIVATION_KERNEL_CHECKED_CONCRETE_INSTANCES_OPEN",
+    "three_handle_caveat": "h3 is derived from a movie to the standard boundary. Uniqueness of the closed completion additionally uses boundary genus detection, cap extension, and gluing."
+  },
+  "generator_script": "experiments/scripts/build_egno_modular_final_theorem_refactor_v1.py",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "dirty": true
+  },
+  "graphical_rule_boundary": {
+    "caller_supplies_graphical_laws": false,
+    "cancellation_status": "LEAN_DERIVED_FROM_CATEGORY_DIMENSIONS_AND_NORMALIZATION",
+    "honesty_caveat": "Ordinary sliding, the isolated one-two Hopf-pair sum, framed-kink coherence, and the unit-dimension fact are explicit literature axioms. Fixed-label 2-over-2 sliding is derived term by term.",
+    "literature_axioms": [
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+    ],
+    "rule_count": 3,
+    "rules": [
+      "ordinary Kirby-colour sliding",
+      "1--2 and 2--3 cancellation identities",
+      "positive and negative ribbon framed-kink identities"
+    ],
+    "status": "DISCHARGED_RELATIVE_TO_EXPLICIT_LITERATURE_AXIOMS"
+  },
+  "graphical_target_predicate": {
+    "lean_predicate": "TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.IsInvariantUnderElementaryMoves",
+    "proof_status": "KERNEL_CHECKED",
+    "rule_independent_public_eval_constructor_status": "AVAILABLE_IN_SUPERSEDING_ARTIFACT"
+  },
+  "inputs": {
+    "design_records": {
+      "experiments/inputs/lean-kirby/boundary-standardization-obligation-matrix-v1.json": {
+        "bytes": 2570,
+        "sha256": "6d423f22007ceea74c27a87d6e6a789067270b611e295b364cf513b82079ac69"
+      }
+    },
+    "reference_records": {
+      "experiments/inputs/references/boundary-standardization-primary-sources-v1.json": {
+        "bytes": 4492,
+        "sha256": "01ee8650352d54a52689c08fc7e9990ead102922e293f73e257f85ccb66012d8"
+      },
+      "experiments/inputs/references/egno-category-foundations-primary-sources-v1.json": {
+        "bytes": 3924,
+        "sha256": "e0adc6281f8f3a846deccdb3864308ce28c578d181988d522b01314958721c74"
+      },
+      "experiments/inputs/references/four-manifold-invariant-target-primary-sources-v1.json": {
+        "bytes": 2374,
+        "sha256": "7f21a9ec4e6c08394e15c3c9de54c457dbeb72545ad96cae7fa97ccd800ffd78"
+      }
+    },
+    "source_files": {
+      "experiments/scripts/build_egno_modular_final_theorem_refactor_v1.py": {
+        "bytes": 44553,
+        "sha256": "42b7b32b52e72e2cf5dec3a48a1695031bcd015975ee1d5367af2eb4d0ddbc15"
+      },
+      "lakefile.toml": {
+        "bytes": 392,
+        "sha256": "4e054c965c8584c41aa09e0e1478f0d6f67a33253a3d5894b6d71181eef66e28"
+      },
+      "lean-toolchain": {
+        "bytes": 25,
+        "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+      },
+      "lean/TwistedYetter.lean": {
+        "bytes": 5050,
+        "sha256": "50166f6494a298b65ac556616bfff634267867b438f53e0472090a6787b038c4"
+      },
+      "lean/TwistedYetter/Fusion/EGNOPremodularModular.lean": {
+        "bytes": 7291,
+        "sha256": "42df960084398562ee9aaf922fb2c586494bdc72eaed8339acd2bcf4f903a171"
+      },
+      "lean/TwistedYetter/Fusion/EGNOPremodularModularAxiomAudit.lean": {
+        "bytes": 941,
+        "sha256": "e34eed1425fbd5dacfa0c12945627fcb858ebee03eab284f9aa24a34910fdb78"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentation.lean": {
+        "bytes": 12286,
+        "sha256": "ada2bbb568c5def2885a264fd558ed2088a9f3f4bfc4dd85fff521fcd6a9bb90"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryCertifiedKirbyPresentationAxiomAudit.lean": {
+        "bytes": 775,
+        "sha256": "54ea52eec5274f01f16b7b49b5e84578aa7b8a9e58cba0f40535a14f00950ee2"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryCertifiedModularEvaluator.lean": {
+        "bytes": 10399,
+        "sha256": "8d05c579f78db653f49ab641900b7d51f4ddc0c33263a9b99311f928047bef93"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryCertifiedModularEvaluatorAxiomAudit.lean": {
+        "bytes": 941,
+        "sha256": "b495508b3fca39ab7caa2bb8906523c4fedee7c6562fc28c1ee5d0d9f17dde20"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChain.lean": {
+        "bytes": 11902,
+        "sha256": "a934a7842b714919abf5194db1ec6632e2668ab83e6b7a194b3993e99d06d727"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainAxiomAudit.lean": {
+        "bytes": 926,
+        "sha256": "5124465f4a883ac786f026ce38a950636c4df3bacda689fce84d53545ccb3fb3"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainModel.lean": {
+        "bytes": 6545,
+        "sha256": "16df456c78c4fd6ac8b907301cf9abce61e942765c9c1981e66227e2d5c0e2b5"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryDerivedHandleChainModelAxiomAudit.lean": {
+        "bytes": 773,
+        "sha256": "dd0891d1f5306a128d51c274ec81c4b5600c9849c30188160a5533702b914672"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryStandardization.lean": {
+        "bytes": 12712,
+        "sha256": "eb7077c8ee20163d89cfbf2aa11fcac30140161f4c378776bdc9097a8817cc19"
+      },
+      "lean/TwistedYetter/Kirby/BoundaryStandardizationAxiomAudit.lean": {
+        "bytes": 841,
+        "sha256": "4425f6ebda65cfa3b4c457d2de52c780cbd8fe257ee6960c7a61d944089c927f"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularFinalTheoremRefactor.lean": {
+        "bytes": 8800,
+        "sha256": "96af40f59432d6ec66cbec40d9727d353c244f2cda64509682d372c518fdb295"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularFinalTheoremRefactorAxiomAudit.lean": {
+        "bytes": 1939,
+        "sha256": "b7c4b2d4a9269c339baa2293dfedb638cfb3ec30ec7a54e22499389b5e882131"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularFourManifoldInvariant.lean": {
+        "bytes": 48302,
+        "sha256": "37f3019bbf3be74991db4ab439d8279e608c30145d14e4934328ca1a9a9be39e"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularKirbyMoves.lean": {
+        "bytes": 21770,
+        "sha256": "fb091536b4241bf9136c146b15f150466d320bd38dc52c906c2440c75e189aaa"
+      },
+      "lean/TwistedYetter/Kirby/EGNOModularKirbyMovesAxiomAudit.lean": {
+        "bytes": 4624,
+        "sha256": "a335836404daacc85eede2d3676df3d273345f764615a78d62bd4b1ec97f51c0"
+      },
+      "lean/TwistedYetter/Kirby/ModularFourManifoldInvariantFinalTarget.lean": {
+        "bytes": 20424,
+        "sha256": "72618b4bfc6e6f12c5c36a60255e8831fc3b96753d4ae811d3a387fe48faeb22"
+      },
+      "lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturality.lean": {
+        "bytes": 5082,
+        "sha256": "9da95908abb5d058ec78aee0cea9a50bf3f1c6388d6e830d8babcccb32bfdde7"
+      },
+      "lean/TwistedYetter/Kirby/SourceBackedHandleChainNaturalityAxiomAudit.lean": {
+        "bytes": 329,
+        "sha256": "355ec056b964ffd71fcf9810b9b968f97fc27ad4822f08ca9b42ea5cf9e46545"
+      },
+      "lean/TwistedYetter/Kirby/SourceBackedKirbyCompleteness.lean": {
+        "bytes": 14469,
+        "sha256": "8ed839c82f7d0d1f9e8e71666fe5d8bbf1cffa84b508b6fd261c01030134df46"
+      },
+      "lean/TwistedYetter/Kirby/SourceBoundGeometricH2Compiler.lean": {
+        "bytes": 6834,
+        "sha256": "15bae90abc473ee840044c6e773ceefc93e53ae14b6485888112a6bc7456c288"
+      },
+      "lean/TwistedYetter/Kirby/StandardCapClosure.lean": {
+        "bytes": 11010,
+        "sha256": "02a3fc9c868efa30263e8aac9c85e5284d9d8bd0add626709801f21d43b8f117"
+      },
+      "lean/TwistedYetter/Kirby/StandardCapClosureAxiomAudit.lean": {
+        "bytes": 605,
+        "sha256": "707951d6ca7bbeb0cfb978ff4cdb3fee67d5685576d9230611bad8e07da35079"
+      },
+      "tests/test_egno_modular_final_theorem_refactor_v1.py": {
+        "bytes": 7111,
+        "sha256": "bfc2090c3e61ef1b98bcccd4db12041d1326a8ddbd38ac884e1fb7c2e3027648"
+      }
+    }
+  },
+  "lean_derived": [
+    "chain-induced transport on each presentation's handle H2",
+    "compatibility with the legacy pinned H2 coordinate equivalences",
+    "local graphical proof from the eight-case compiler and the fixed literature-backed graphical environment",
+    "invariance under the equivalence relation generated by marked moves",
+    "a well-defined scalar function on the marked Kirby quotient",
+    "3-handle count from the certified standard boundary genus",
+    "closed completion and independence of the selected boundary standardization certificate from split topology inputs",
+    "d3 and handle-chain H2 from transported attaching spheres and intersection numbers",
+    "the legacy evaluator input from a boundary-certified presentation has a definitionally derived handle chain",
+    "the modular evaluator descends on the boundary-certified marked Kirby quotient",
+    "generic equivalence between the Kirby quotient and diffeomorphism classes from separately stated soundness, existence, and completeness inputs"
+  ],
+  "mathematical_status": "HISTORICAL_BOUNDARY_CERTIFIED_KIRBY_QUOTIENT_RESULT_SUPERSEDED",
+  "remaining_concrete_instantiation_boundary": {
+    "meaning": "The evaluator bridge is closed: its chain complex and H2 come from the boundary certificate, and each move transport comes from the one visible standard handle-chain naturality axiom rather than a move field. Lean checks every subsequent algebraic descent. The listed geometric theories, global assembly, certificate constructors, compilers, and Kirby-Cerf inputs still require concrete mathematical instances before this becomes an instantiated closed-four-manifold invariant.",
+    "not_a_global_graphical_law": true,
+    "required_fields": [
+      "concrete FramedSurgeryDiagramTheory",
+      "concrete SurgerySemantics for the three primitive moves",
+      "boundary standardization certificates for presentations",
+      "standard boundary genus detection",
+      "Laudenbach-Poenaru cap-extension theorem",
+      "standard-cap gluing semantics",
+      "sphere-system transport through each primitive move",
+      "attaching-sphere intersection-number theory",
+      "concrete lower-Kirby-diagram semantics binding serialized evaluator inputs to boundary surgery diagrams",
+      "canonical presentation and local-move compilers",
+      "a global family over manifold inputs, or an equivalent construction assembling the fixed-manifold calculi",
+      "concrete marked realization and move soundness",
+      "marked presentation existence",
+      "marked Kirby-Cerf completeness"
+    ],
+    "status": "CONCRETE_TOPOLOGY_GLOBAL_FAMILY_AND_COMPILER_INSTANCES_REMAIN_OPEN",
+    "terminal_blocker": null
+  },
+  "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
+  "reproduce_command": "LEAN_NUM_THREADS=1 python3 experiments/scripts/build_egno_modular_final_theorem_refactor_v1.py",
+  "schema": "twisted-yetter.egno-modular-final-theorem-refactor.v1",
+  "started_at_utc": "2026-07-20T15:59:47Z",
+  "status": "SUPERSEDED_BY_CANONICAL_MODULAR_FOUR_MANIFOLD_INVARIANT_V1",
+  "supersession": {
+    "artifact": "experiments/results/lean-kirby/canonical-modular-four-manifold-invariant-v1.json",
+    "content_hash": "sha256:dca654420ca578a855f7fb36ae3c229fec71ae669f5cca1414b76a5df684cae2",
+    "reason": "The superseding artifact constructs canonical EvalC, separates the category-neutral topology calculus, and exposes the still-open local-move realization obligations."
+  },
+  "target_theorem": {
+    "caller_supplies_graphical_laws": false,
+    "conclusion": "For one fixed manifold input, the compiled modular evaluation defines a well-defined scalar on the generated boundary-certified marked Kirby quotient.",
+    "explicit_axiom_boundary": [
+      "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput",
+      "TwistedYetter.Fusion.EGNO.sMatrixNondegenerate_iff_trivialMuegerCenter",
+      "TwistedYetter.Fusion.EGNO.ModularCategory.globalDimension_ne_zero",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.egno_quantumDimension_unit",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding",
+      "TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink"
+    ],
+    "lean_name": "TwistedYetter.Kirby.BoundaryCertifiedModularEvaluator.boundaryCertifiedEvaluationOnKirbyClass_mk",
+    "status": "KERNEL_CHECKED_BOUNDARY_CERTIFIED_KIRBY_QUOTIENT_DESCENT_RELATIVE_TO_EXPLICIT_GRAPHICAL_AND_HANDLE_CHAIN_NATURALITY_AXIOMS"
+  },
+  "tool_versions": {
+    "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
+    "lean": "Lean (version 4.29.1, arm64-apple-darwin24.6.0, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "mathlib_commit": "5e932f97dd25535344f80f9dd8da3aab83df0fe6",
+    "platform": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.6"
+  },
+  "used_topology_axioms": [
+    "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput"
+  ]
+}

@@ -1,30 +1,25 @@
 import TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler
 
 /-!
-# Integral-character-bound Kirby colours
+# Cycle-section integral-character Kirby colours
 
 The category-bound compiler fixes the simple labels, ordinary weights,
 strand objects, duals, and framing twist.  Its remaining coefficient field is
 still too broad: an arbitrary function of a presentation, marked class,
 component, and simple object could be supplied.
 
-This module narrows that field for one precise scope.  The marked class is an
-integral class in the `H2` model already carried by a special Kirby
-presentation.  Every presentation supplies a complete, content-addressed
-indexing of its two-handle-bearing components by the degree-two handle basis.
-Mathlib's epimorphic homology quotient then supplies a normalized choice of
-integral cycle representative for each class.
+This module records the older cycle-section implementation.  The marked class
+is lifted noncomputably to one degree-two cycle, and its raw coefficients are
+used as component exponents.
 A monoidal natural automorphism of the identity supplies one invertible
 scalar on every recorded simple object.  The coefficient on an ordinary
 two-handle component is then forced to be
 
 `ordinaryWeight * simpleScalar ^ integralCoordinate`.
 
-This is an integral-character construction mechanism.  It is not a model of
-arbitrary `H2(X; A)`, and it does not construct the presentation bases,
-cycle representatives, tensor automorphism, event interpreter, or Kirby-move
-realizations.  A specially-dotted component is treated as two-handle-bearing
-and therefore receives the coefficient of its pinned degree-two handle.
+This file alone does not prove an `H₂`-level invariant: one still needs the
+dual-chain representative-independence theorem.  The former primal
+cancelling 2--3 calculation is not a counterexample to that theorem.
 -/
 
 namespace TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
@@ -138,7 +133,13 @@ theorem normalizedCycleRepresentative_class
         (topology.handleChain.complex.homologyπ 2)).mp inferInstance)]
     exact topology.h2ModelEquiv.apply_symm_apply alpha
 
-/-- Canonical cycle model derived from one fully admitted presentation. -/
+/--
+A normalized choice of cycle representative derived from one presentation.
+
+This construction is canonical only as a Lean choice term.  It is not by
+itself evidence that the cycle-colour evaluation descends to homology; that
+requires the dual-boundary graphical realization.
+-/
 noncomputable def canonical
     {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
@@ -158,9 +159,10 @@ noncomputable def canonical
       ++ "handle-chain homology quotient; two-handle coordinates use the "
       ++ "presentation's mandatory component index."
   sourceScopeCaveat :=
-    "The representative choice is not asserted additive. Invariance under "
-      ++ "changing representatives must be discharged by the graphical "
-      ++ "Kirby-move compiler."
+    "This is a normalized choice term, not by itself a homology-level "
+      ++ "evaluator. Representative descent must be proved in the dual "
+      ++ "handle complex using the primal dotted one-handle / Tham k=3 "
+      ++ "vacuum projector."
 
 /--
 The degree-two handle coefficients of the certified cycle representative.
@@ -203,7 +205,9 @@ theorem componentExponent_zero
     (component : ComponentSpec) :
     model.componentExponent 0 component = 0 := by
   have coefficients_zero : model.handleCoefficients 0 = 0 := by
-    simp [handleCoefficients, model.cycle_zero_sound]
+    simp only [handleCoefficients, model.cycle_zero_sound]
+    rw [map_zero, map_zero]
+    rfl
   unfold componentExponent
   split
   · rfl
@@ -257,11 +261,11 @@ structure IntegralCycleRepresentativeSystem
 namespace IntegralCycleRepresentativeSystem
 
 /--
-Canonical system for every admitted presentation.
+A normalized choice system for every admitted presentation.
 
-All presentation-specific indexing is already bound into
-`SpecialKirbyPresentation`; all cycle representatives are selected from the
-actual Mathlib homology quotient and checked against `h2ModelEquiv`.
+All representatives map to the requested quotient class, but the choices
+are neither natural under Kirby moves nor safe inputs for the naive
+cycle-colour evaluator.  This object is bookkeeping only.
 -/
 noncomputable def canonical
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
@@ -278,9 +282,9 @@ noncomputable def canonical
     "All admitted presentations use their pinned two-handle component index "
       ++ "and a normalized representative of the requested integral H2 class."
   sourceScopeCaveat :=
-    "Representative selection is noncomputable and not additive; the final "
-      ++ "move compiler must prove independence from presentation-specific "
-      ++ "representatives."
+    "Representative selection is noncomputable, not additive, and not "
+      ++ "evaluation-independent. It must not authorize a homology-level "
+      ++ "claim; use cancellation-safe geometric basis data instead."
 
 end IntegralCycleRepresentativeSystem
 
@@ -523,11 +527,13 @@ theorem trivial_generator_coefficient_is_ordinary
     TensorAutomorphismGenerator.trivial_scalarPower]
 
 /--
-The final presentation compiler for the integral-character route.
+Presentation compiler for the not-yet-certified cycle-section route.
 
 Its category-bound predecessor is derived below.  Callers cannot supply a
-    different `HomologicalKirbyColorWeights` value after the cycle model and tensor
-automorphism have been fixed.
+different `HomologicalKirbyColorWeights` value after the cycle model and
+tensor automorphism have been fixed.  This restriction does not prove
+descent to `H₂`, so this compiler cannot support a final invariant claim
+until the dual-boundary bridge is integrated.
 -/
 structure IntegralCharacterBoundPresentationCompiler
     (categoryData :

@@ -1,0 +1,10 @@
+import TwistedYetter.Kirby.CanonicalCycleSlideGeometry
+
+/-!
+# Axiom audit for whole-linear-sum slide geometry
+-/
+
+#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.BoundOrdinaryLinearSlide.eval_eq
+#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.BoundGeneralizedLinearSlide.eval_eq
+#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.OrdinaryCycleSlideGeometry.cycleLinearDiagram_eval_transport
+#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.GeneralizedCycleSlideGeometry.cycleLinearDiagram_eval_transport

@@ -316,7 +316,12 @@ structure SpecialKirbyPresentation
   h2ModelCertificateHash : String
   h2_model_certificate_hash_shape :
     RawPresentation.sha256Shape h2ModelCertificateHash = true
-  handleChain : HandleChainModel counts
+  /--
+  The homology marking uses the upside-down handle decomposition.  The
+  primal `counts` remain unchanged because they also control the Kirby-link
+  normalization and the names of primal moves.
+  -/
+  handleChain : HandleChainModel counts.turnedOver
   h2ModelEquiv : handleChain.SecondHomology ≃+ H2
 
 /--

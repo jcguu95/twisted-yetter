@@ -1,0 +1,11 @@
+import TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput
+
+/-!
+# Axiom audit for the remaining explicit diagrammatic literature input
+-/
+
+#print axioms TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardLocalCycleCalculation
+
+#check TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.requiredAssumptionClasses
+#check TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.dualBoundaryIntegrationScope
+#check TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.sourceScopeCaveat

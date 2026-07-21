@@ -38,6 +38,46 @@ def addOneTwo (counts : HandleCounts) : HandleCounts :=
 def addTwoThree (counts : HandleCounts) : HandleCounts :=
   { counts with h2 := counts.h2 + 1, h3 := counts.h3 + 1 }
 
+/-- Handle counts after turning a four-dimensional decomposition upside down. -/
+def turnedOver (counts : HandleCounts) : HandleCounts where
+  h0 := counts.h4
+  h1 := counts.h3
+  h2 := counts.h2
+  h3 := counts.h1
+  h4 := counts.h0
+
+@[simp] theorem turnedOver_h0 (counts : HandleCounts) :
+    counts.turnedOver.h0 = counts.h4 := rfl
+
+@[simp] theorem turnedOver_h1 (counts : HandleCounts) :
+    counts.turnedOver.h1 = counts.h3 := rfl
+
+@[simp] theorem turnedOver_h2 (counts : HandleCounts) :
+    counts.turnedOver.h2 = counts.h2 := rfl
+
+@[simp] theorem turnedOver_h3 (counts : HandleCounts) :
+    counts.turnedOver.h3 = counts.h1 := rfl
+
+@[simp] theorem turnedOver_h4 (counts : HandleCounts) :
+    counts.turnedOver.h4 = counts.h0 := rfl
+
+@[simp] theorem turnedOver_involutive (counts : HandleCounts) :
+    counts.turnedOver.turnedOver = counts := by
+  cases counts
+  rfl
+
+/-- A primal 1--2 birth is a dual 2--3 birth. -/
+theorem turnedOver_addOneTwo (counts : HandleCounts) :
+    counts.addOneTwo.turnedOver = counts.turnedOver.addTwoThree := by
+  cases counts
+  rfl
+
+/-- A primal 2--3 birth is a dual 1--2 birth. -/
+theorem turnedOver_addTwoThree (counts : HandleCounts) :
+    counts.addTwoThree.turnedOver = counts.turnedOver.addOneTwo := by
+  cases counts
+  rfl
+
 /-- Add an empty 0-handle bookkeeping entry. -/
 def addEmptyZero (counts : HandleCounts) : HandleCounts :=
   { counts with h0 := counts.h0 + 1 }

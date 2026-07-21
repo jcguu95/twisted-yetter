@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+RELATIVE = (
+    "experiments/results/lean-kirby/"
+    "homological-four-manifold-final-target-status-v1.json"
+)
+ARTIFACT = ROOT / RELATIVE
+CORRECTION = (
+    ROOT
+    / "experiments/results/lean-kirby/"
+    "dual-handle-convention-correction-v1.json"
+)
+
+
+def canonical_hash(payload: dict) -> str:
+    body = dict(payload)
+    body.pop("content_hash", None)
+    encoded = json.dumps(
+        body, sort_keys=True, separators=(",", ":")
+    ).encode()
+    return f"sha256:{hashlib.sha256(encoded).hexdigest()}"
+
+
+def load(path: Path) -> dict:
+    return json.loads(path.read_text())
+
+
+def stale_inputs(artifact: dict) -> list[str]:
+    stale = []
+    for relative, metadata in artifact["inputs"].items():
+        data = (ROOT / relative).read_bytes()
+        if (
+            len(data) != metadata["bytes"]
+            or hashlib.sha256(data).hexdigest() != metadata["sha256"]
+        ):
+            stale.append(relative)
+    return stale
+
+
+def test_historical_snapshot_is_quarantined_after_dual_correction() -> None:
+    historical = load(ARTIFACT)
+    correction = load(CORRECTION)
+    assert historical["content_hash"] == canonical_hash(historical)
+    assert correction["content_hash"] == canonical_hash(correction)
+    assert stale_inputs(historical)
+    assert RELATIVE in correction["resource_safety"][
+        "unsafe_prior_artifacts"
+    ]
+    assert correction["correct_convention"]["primal_1_handle"] == (
+        "Tham k=3 vacuum projector"
+    )
+    assert correction["correct_convention"]["primal_3_handle"] == (
+        "Tham k=1 inverse-dimension map"
+    )

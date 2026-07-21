@@ -720,7 +720,7 @@ theorem same_pair_value
     system.presentation_independent prescription rightRepresents]
 
 /--
-Terminal R11 theorem: the normalized Kirby prescription is an invariant of
+Legacy R11 theorem: the normalized Kirby prescription is invariant under
 the marked pair, relative exactly to the category, local-move, topology, and
 marking inputs visible above.
 -/

@@ -160,6 +160,55 @@ theorem automorphismSimpleUnit_val
       data.automorphismSimpleScalar automorphism s :=
   rfl
 
+/--
+Scalar units act as genuine categorical automorphisms.
+
+This is the multiplicative bridge needed to compare an integral power of a
+tensor-automorphism coupon with the scalar power used in a homological Kirby
+colour.
+-/
+noncomputable def scalarUnitAut
+    (X : C) :
+    Kˣ →* Aut X where
+  toFun unit := {
+    hom := (unit : K) • 𝟙 X
+    inv := ((unit⁻¹ : Kˣ) : K) • 𝟙 X
+    hom_inv_id := by
+      simp [← mul_smul]
+    inv_hom_id := by
+      simp [← mul_smul]
+  }
+  map_one' := by
+    apply Aut.ext
+    change ((1 : Kˣ) : K) • 𝟙 X = 𝟙 X
+    simp
+  map_mul' left right := by
+    apply Aut.ext
+    change
+      (((left * right : Kˣ) : K) • 𝟙 X) =
+        ((right : K) • 𝟙 X) ≫ ((left : K) • 𝟙 X)
+    simp [mul_smul]
+
+/-- The automorphism component on a simple is its derived scalar unit. -/
+theorem automorphism_app_iso_eq_scalarUnitAut
+    (automorphism : TensorIdentityAutomorphism C)
+    (s : S) :
+    automorphism.iso.app (data.simple s) =
+      scalarUnitAut (K := K) (data.simple s)
+        (data.automorphismSimpleUnit automorphism s) := by
+  apply Aut.ext
+  exact data.automorphism_app_eq_smul_identity automorphism s
+
+/-- Integral powers of the actual coupon, retained as categorical morphisms. -/
+noncomputable def automorphismCouponPower
+    (automorphism : TensorIdentityAutomorphism C)
+    (s : S)
+    (exponent : ℤ) :
+    data.simple s ⟶ data.simple s :=
+  let component : Aut (data.simple s) :=
+    automorphism.iso.app (data.simple s)
+  (component ^ exponent).hom
+
 /-- Integral powers of the derived simple unit. -/
 noncomputable def automorphismScalarPower
     (automorphism : TensorIdentityAutomorphism C)
@@ -186,6 +235,27 @@ theorem automorphismScalarPower_add
       (fun unit : Kˣ => (unit : K))
       (zpow_add
         (data.automorphismSimpleUnit automorphism s) left right)
+
+/--
+The scalar coefficient used by the evaluator is exactly the same morphism as
+the corresponding integral power of the tensor-automorphism coupon.
+-/
+theorem automorphismCouponPower_eq_smul_identity
+    (automorphism : TensorIdentityAutomorphism C)
+    (s : S)
+    (exponent : ℤ) :
+    data.automorphismCouponPower automorphism s exponent =
+      data.automorphismScalarPower automorphism s exponent •
+        𝟙 (data.simple s) := by
+  rw [automorphismCouponPower,
+    data.automorphism_app_iso_eq_scalarUnitAut automorphism s]
+  change
+    ((scalarUnitAut (K := K) (data.simple s)
+      (data.automorphismSimpleUnit automorphism s)) ^ exponent).hom =
+        (((data.automorphismSimpleUnit automorphism s) ^ exponent :
+          Kˣ) : K) • 𝟙 (data.simple s)
+  rw [← map_zpow]
+  rfl
 
 @[simp]
 theorem identity_automorphism_simple_scalar

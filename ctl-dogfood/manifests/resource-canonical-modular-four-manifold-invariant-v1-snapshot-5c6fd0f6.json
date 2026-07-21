@@ -1,0 +1,26 @@
+{
+  "ctl_meta_commit_at_admission": "e8fef2b4f2fd36428f3055946d96ccb810edd805",
+  "current_root_cid": "ctlobj-sha256:9e2e3e98e71576c656aaf1d3ce1b4c95986293c0bd2a48521685d3ed161a265a",
+  "generated_at": "2026-07-20T07:36:18Z",
+  "generator": "ctl-dogfood/scripts/admit_claim.py",
+  "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:resource-snapshot:canonical-modular-four-manifold-invariant-v1-5c6fd0f6",
+  "mode": "shadow",
+  "objects": {
+    "claim": "ctlobj-sha256:6d05ed929562d895507413dd8162ec2627c1745fe179a6582be2db8a20b22470",
+    "current_root": "ctlobj-sha256:9e2e3e98e71576c656aaf1d3ce1b4c95986293c0bd2a48521685d3ed161a265a",
+    "principal_role_binding": "ctlobj-sha256:4f998c798efe01c37959dad96eff5bf459a8752197f1139df16c9e0ab88fcec1",
+    "transition": "ctlobj-sha256:a45a6fbe720c3ceffbba97baf95b09e11a5f571478b5c1aff067df8716387632"
+  },
+  "parent_root_cid": "ctlobj-sha256:f5f063c7d0a0ee466eba9268ac1913202b235f87318562f0fb7f30765265dac8",
+  "payload_file": "ctl-dogfood/resources/canonical-modular-four-manifold-invariant-v1-snapshot-5c6fd0f6.json",
+  "project_id": "project:twisted-yetter",
+  "reproduce": [
+    "cd ctl-dogfood",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/admit_claim.py --logical-id claim:resource-snapshot:canonical-modular-four-manifold-invariant-v1-5c6fd0f6 --payload resources/canonical-modular-four-manifold-invariant-v1-snapshot-5c6fd0f6.json --manifest manifests/resource-canonical-modular-four-manifold-invariant-v1-snapshot-5c6fd0f6.json --created-at 2026-07-20T07:36:18Z --update",
+    "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python scripts/verify.py"
+  ],
+  "schema": "ctl-dogfood/admission-manifest/1",
+  "source_repo_commit_before_admission": "f92a08f24175943d8c2dbb906575ab7afb7572d8"
+}

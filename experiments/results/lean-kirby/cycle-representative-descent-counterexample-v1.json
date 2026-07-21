@@ -1,0 +1,91 @@
+{
+  "schema": "twisted-yetter.cycle-representative-descent-counterexample.v1",
+  "status": "REGRESSION_ONLY_WRONG_PRIMAL_CHAIN_NOT_FORMAL_EVIDENCE",
+  "formal_evidence_admissible": false,
+  "recorded_at_utc": "2026-07-20T15:26:09Z",
+  "corrected_at_utc": "2026-07-20T17:41:19Z",
+  "correction_reason": "The numerical calculation is valid only for the wrong primal-chain adapter. The intended evaluator uses the upside-down dual handle complex, so this artifact cannot refute H2 representative descent.",
+  "git": {
+    "branch": "codex/lean-kirby-coupon-bootstrap",
+    "commit": "f92a08f24175943d8c2dbb906575ab7afb7572d8",
+    "dirty": true,
+    "dirty_entry_count_at_recording": 115
+  },
+  "tool_versions": {
+    "lean": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b"
+  },
+  "refuted_target": {
+    "statement": "The wrong primal-chain toy formula has the same value on every pair of representatives in its primal quotient.",
+    "former_axiom": "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardCycleBoundaryGraphicalRealization",
+    "reason_refuted": "The toy primal quotient has d3 equal to the identity, so coefficients 0 and 1 have different toy values. In the intended dual convention, a primal cancelling 2-3 pair is a dual 1-2 pair and coefficient 1 is not a legal cycle."
+  },
+  "counterexample": {
+    "handle_chain": {
+      "c3": "Z",
+      "c2": "Z",
+      "d3": "identity",
+      "h2": "0",
+      "same_class_representatives": [
+        0,
+        1
+      ]
+    },
+    "category_test": {
+      "simple_count": 2,
+      "quantum_dimensions": [
+        1,
+        1
+      ],
+      "tensor_automorphism_scalars": [
+        1,
+        -1
+      ],
+      "zero_framed_unknot_formula": "1^n + (-1)^n",
+      "value_at_0": 2,
+      "value_at_1": 0
+    },
+    "lean_theorem": "TwistedYetter.Kirby.CycleRepresentativeCounterexample.no_naive_representative_descent",
+    "lean_source": {
+      "path": "lean/TwistedYetter/Kirby/CycleRepresentativeCounterexample.lean",
+      "sha256": "a9ace4bde89fb3ede51237803b5cd8beeda58da1313570b1a1078dbf797abf4d"
+    },
+    "axiom_audit": {
+      "path": "lean/TwistedYetter/Kirby/CycleRepresentativeCounterexampleAxiomAudit.lean",
+      "project_axioms": [],
+      "allowed_kernel_dependencies": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "primary_source_check": {
+    "reference": "ref:yetter-homologically-twisted-1993",
+    "local_pdf_sha256": "e9e72e8a3ee58f9070c3e3a17d6e60181eaa91249d3265fbf348c590b101b96b",
+    "locators": [
+      {
+        "locator": "Theorem 8, PDF pages 3-4",
+        "meaning": "State-sum representative independence is proved simplex-locally by moving automorphisms through a 15j morphism. It is not a theorem about the naive surgery cycle-colour formula."
+      },
+      {
+        "locator": "Definition 10 and Theorem 11, PDF pages 4-5",
+        "meaning": "The surgical formula chooses basis components. A cancellable two-handle is never in that basis and is always labelled by the ordinary Kirby colour."
+      }
+    ]
+  },
+  "implementation_effect": {
+    "removed_global_axiom": false,
+    "final_theorem_now_conditional": true,
+    "required_replacement": "Use the certified dual handle chain and derive representative descent from dual-boundary movies plus the primal dotted one-handle / Tham k=3 vacuum projector."
+  },
+  "reproduce_command": "LEAN_NUM_THREADS=1 lake -Kjobs=2 build TwistedYetter.Kirby.CycleRepresentativeCounterexample TwistedYetter.Kirby.CycleRepresentativeCounterexampleAxiomAudit TwistedYetter.Kirby.CanonicalModularKirbyInvarianceAxiomAudit",
+  "explicit_nonclaims": [
+    "This does not refute Yetter's state-sum representative-independence theorem.",
+    "This does not refute Yetter's basis-based simply connected surgical invariant.",
+    "This does not prove that no corrected homologically twisted Kirby invariant exists.",
+    "This does not refute representative descent for the intended dual-chain cycle-colour evaluator.",
+    "This artifact is retained only to catch accidental reintroduction of the wrong primal-chain adapter."
+  ]
+}

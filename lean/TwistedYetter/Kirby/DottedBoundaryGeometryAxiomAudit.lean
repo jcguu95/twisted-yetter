@@ -1,0 +1,19 @@
+import TwistedYetter.Kirby.DottedBoundaryGeometry
+
+set_option pp.universes false in
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.termDiagram_eval_eq_factorized
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.exteriorContext_interpret_heq
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.factorizedTerm_eval_eq_contextOpen
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.cycleHandleCoefficients_add_integralGenerator
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.cycleComponentExponent_add_integralGenerator
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.cycleGlobalWeight_add_integralGenerator
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.cycleGlobalWeight_split_dotted
+#print axioms
+  TwistedYetter.Kirby.DottedBoundaryGeometry.GeneratorGeometry.boundaryCharacterPower_eq_rawRegistryProduct

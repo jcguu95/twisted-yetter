@@ -167,7 +167,7 @@ variable [∀ y z, Fintype (I y z)]
 variable [∀ y z, DecidableEq (I y z)]
 
 /--
-The exact terminal R11 theorem, forwarded without hiding any of its category,
+The legacy R11 theorem, forwarded without hiding any of its category,
 diagram, local-move, topology, or marking inputs.
 -/
 theorem r11_conditional_invariant
