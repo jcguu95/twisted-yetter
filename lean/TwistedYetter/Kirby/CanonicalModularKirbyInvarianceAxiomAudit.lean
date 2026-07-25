@@ -31,4 +31,4 @@ that certificate and the modular finite-label calculation.
 #check TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometry.StandardDottedCanonicalPresentation
 #check TwistedYetter.Kirby.CanonicalRawLocalMoveTarget.Completion
 #check TwistedYetter.Kirby.CanonicalRawLocalMoveTarget.currentStatus
-#check TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.Assumptions
+#check TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary

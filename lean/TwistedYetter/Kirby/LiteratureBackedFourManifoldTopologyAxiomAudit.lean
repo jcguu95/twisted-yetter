@@ -3,7 +3,8 @@ import TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology
 /-!
 # Axiom audit for the literature-backed topology boundary
 
-The four topology statements are explicit parameters of `Assumptions`.
+The four topology statements are explicit parameters of
+`FourManifoldTopologyBoundary`.
 Consequently the derived Lean theorems below must introduce no project axiom
 and no proof oracle.  Their signatures, rather than a hidden kernel axiom,
 show the exact imported mathematical boundary.
@@ -13,6 +14,6 @@ show the exact imported mathematical boundary.
 #print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.required_assumption_classes_unique
 #print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.assumption_citation_count
 #print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.assumption_citations_cover_required_classes
-#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.Assumptions.kirbyClassEquivDiffeomorphismClass
-#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.Assumptions.fourManifoldInvariant_diffeomorphism_invariant
-#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.Assumptions.fourManifoldInvariant_on_presentation
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary.kirbyClassEquivDiffeomorphismClass
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary.fourManifoldInvariant_diffeomorphism_invariant
+#print axioms TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary.fourManifoldInvariant_on_presentation

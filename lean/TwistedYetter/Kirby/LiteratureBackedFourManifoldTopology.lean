@@ -77,7 +77,8 @@ def sourceRefs : List String :=
 /--
 One reviewable citation for one imported topology statement.
 
-This is audit metadata, not mathematical evidence inside `Assumptions`.
+This is audit metadata, not mathematical evidence inside
+`FourManifoldTopologyBoundary`.
 In particular, a citation cannot manufacture a realization, a move, a
 diffeomorphism, or a Kirby movie.
 -/
@@ -147,7 +148,7 @@ This structure is intentionally mathematical data only.  It has no
 provenance metadata and no evaluator field.  The source locators live in the
 module documentation and the repository reference ledger.
 -/
-structure Assumptions
+structure FourManifoldTopologyBoundary
     (theory : HandlePresentationTheory.{uP, uM, uMove}) where
   realization :
     MarkedFourManifoldRealization.{uP, uM, uMove, uX, uXHom} theory
@@ -158,7 +159,7 @@ structure Assumptions
   markedKirbyCerfCompleteness :
     MarkedKirbyCerfCompleteness realization
 
-namespace Assumptions
+namespace FourManifoldTopologyBoundary
 
 /--
 The literature boundary identifies marked Kirby classes with oriented
@@ -166,12 +167,14 @@ diffeomorphism classes.  The equivalence itself is derived in Lean.
 -/
 def kirbyClassEquivDiffeomorphismClass
     {theory : HandlePresentationTheory.{uP, uM, uMove}}
-    (topology : Assumptions.{uP, uM, uMove, uX, uXHom} theory) :
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary.{uP, uM, uMove, uX, uXHom} theory) :
+    let topology := fourManifoldTopology
     theory.KirbyClass ≃ topology.realization.DiffeomorphismClass :=
   TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.kirbyClassEquivDiffeomorphismClass
-    topology.elementaryMoveSoundness
-    topology.markedPresentationExistence
-    topology.markedKirbyCerfCompleteness
+    fourManifoldTopology.elementaryMoveSoundness
+    fourManifoldTopology.markedPresentationExistence
+    fourManifoldTopology.markedKirbyCerfCompleteness
 
 /--
 Any locally Kirby-invariant presentation evaluation therefore defines an
@@ -179,50 +182,53 @@ actual invariant of marked closed oriented smooth four-manifolds.
 -/
 def fourManifoldInvariant
     {theory : HandlePresentationTheory.{uP, uM, uMove}}
-    (topology : Assumptions.{uP, uM, uMove, uX, uXHom} theory)
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary.{uP, uM, uMove, uX, uXHom} theory)
     (evaluation : PresentationEvaluation theory K)
     (localInvariant : IsInvariantUnderElementaryMoves evaluation) :
-    topology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
+    fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
   TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant
-    topology.elementaryMoveSoundness
-    topology.markedPresentationExistence
-    topology.markedKirbyCerfCompleteness
+    fourManifoldTopology.elementaryMoveSoundness
+    fourManifoldTopology.markedPresentationExistence
+    fourManifoldTopology.markedKirbyCerfCompleteness
     evaluation localInvariant
 
 /-- The resulting function is constant under oriented diffeomorphism. -/
 theorem fourManifoldInvariant_diffeomorphism_invariant
     {theory : HandlePresentationTheory.{uP, uM, uMove}}
-    (topology : Assumptions.{uP, uM, uMove, uX, uXHom} theory)
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary.{uP, uM, uMove, uX, uXHom} theory)
     (evaluation : PresentationEvaluation theory K)
     (localInvariant : IsInvariantUnderElementaryMoves evaluation)
-    {left right :
-      topology.realization.MarkedClosedOrientedSmoothFourManifold}
+    {X Y :
+      fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold}
     (diffeomorphism :
-      topology.realization.orientedDiffeomorphism.Hom left right) :
-    topology.fourManifoldInvariant evaluation localInvariant left =
-      topology.fourManifoldInvariant evaluation localInvariant right :=
+      fourManifoldTopology.realization.orientedDiffeomorphism.Hom X Y) :
+    fourManifoldTopology.fourManifoldInvariant evaluation localInvariant X =
+      fourManifoldTopology.fourManifoldInvariant evaluation localInvariant Y :=
   TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant_diffeomorphism_invariant
-    topology.elementaryMoveSoundness
-    topology.markedPresentationExistence
-    topology.markedKirbyCerfCompleteness
+    fourManifoldTopology.elementaryMoveSoundness
+    fourManifoldTopology.markedPresentationExistence
+    fourManifoldTopology.markedKirbyCerfCompleteness
     evaluation localInvariant diffeomorphism
 
 /-- Pullback along realization recovers the original presentation formula. -/
 theorem fourManifoldInvariant_on_presentation
     {theory : HandlePresentationTheory.{uP, uM, uMove}}
-    (topology : Assumptions.{uP, uM, uMove, uX, uXHom} theory)
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary.{uP, uM, uMove, uX, uXHom} theory)
     (evaluation : PresentationEvaluation theory K)
     (localInvariant : IsInvariantUnderElementaryMoves evaluation)
     (marked : theory.MarkedPresentation) :
-    topology.fourManifoldInvariant evaluation localInvariant
-        (topology.realization.realize marked) =
+    fourManifoldTopology.fourManifoldInvariant evaluation localInvariant
+        (fourManifoldTopology.realization.realize marked) =
       evaluation.markedValue marked :=
   TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget.fourManifoldInvariant_on_presentation
-    topology.elementaryMoveSoundness
-    topology.markedPresentationExistence
-    topology.markedKirbyCerfCompleteness
+    fourManifoldTopology.elementaryMoveSoundness
+    fourManifoldTopology.markedPresentationExistence
+    fourManifoldTopology.markedKirbyCerfCompleteness
     evaluation localInvariant marked
 
-end Assumptions
+end FourManifoldTopologyBoundary
 
 end TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology

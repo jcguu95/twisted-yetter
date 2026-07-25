@@ -5,6 +5,10 @@ import TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology
 /-!
 # Arbitrary-H2 four-manifold descent from checked local moves
 
+Status: kernel-checked alternative route retained for audit.  This is not the
+public theorem entry point.  See
+`Kirby.Final.ModularClosedFourManifoldInvariant`.
+
 This is the fail-closed replacement for the former `Completion` route.
 An elementary move contains an actual kernel-checked eight-case graphical
 certificate and topology-only representative compatibility.  The final
@@ -109,7 +113,7 @@ abbrev TopologyInput
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :=
-  Assumptions.{_, _, _, uX, uXHom}
+  FourManifoldTopologyBoundary.{_, _, _, uX, uXHom}
     (presentationTheory 𝒞 automorphism manifold H2 alpha)
 
 /-- The resulting scalar on marked closed oriented smooth four-manifolds. -/

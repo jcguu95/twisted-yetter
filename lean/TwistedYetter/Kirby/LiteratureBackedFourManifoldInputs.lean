@@ -11,7 +11,7 @@ route.
 There are two deliberately different groups:
 
 * four smooth-topology correspondence statements, passed explicitly through
-  `LiteratureBackedFourManifoldTopology.Assumptions`; and
+  `LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary`; and
 * one handle-chain naturality statement, isolated as
   `SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput`.
 

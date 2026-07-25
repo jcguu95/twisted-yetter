@@ -6,6 +6,10 @@ import TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology
 /-!
 # Four-manifold descent for the arbitrary-H2 modular evaluator
 
+Status: alternative implementation route retained for comparison.  This is
+not the public theorem entry point.  See
+`Kirby.Final.ModularClosedFourManifoldInvariant`.
+
 This module assembles the paper-facing descent theorem without a
 simply-connected or finite-free hypothesis.
 
@@ -144,7 +148,7 @@ abbrev TopologyInput
     (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :=
-  Assumptions.{_, _, _, uX, uXHom}
+  FourManifoldTopologyBoundary.{_, _, _, uX, uXHom}
     (canonicalMarkedPresentationTheory
       𝒞 automorphism completion manifold H2 alpha)
 

@@ -108,8 +108,8 @@ import TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometry
 import TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometryAxiomAudit
 import TwistedYetter.Kirby.CanonicalRawLocalMoveTarget
 import TwistedYetter.Kirby.CanonicalRawLocalMoveTargetAxiomAudit
-import TwistedYetter.Kirby.CanonicalModularKirbyInvariance
-import TwistedYetter.Kirby.CanonicalModularKirbyInvarianceAxiomAudit
+import TwistedYetter.Kirby.Final.ModularClosedFourManifoldInvariant
+import TwistedYetter.Kirby.Final.ModularClosedFourManifoldInvariantAxiomAudit
 import TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget
 import TwistedYetter.Kirby.LiteratureBackedFourManifoldTopology
 import TwistedYetter.Kirby.LiteratureBackedFourManifoldInputs
@@ -153,3 +153,5 @@ import TwistedYetter.Kirby.ModularVacuumProjector
 import TwistedYetter.Kirby.ModularVacuumProjectorAxiomAudit
 import TwistedYetter.Kirby.GeneralH2RawKirbyNoGo
 import TwistedYetter.Kirby.GeneralH2RawKirbyNoGoAxiomAudit
+import TwistedYetter.Kirby.Final.TwistedYetter
+import TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit

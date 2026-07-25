@@ -201,11 +201,11 @@ noncomputable def EvalCOnClosedFourManifolds
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (topology :
-      Assumptions
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary
         (handlePresentationTheory manifold H2)) :
-    topology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
-  topology.fourManifoldInvariant
+    fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
+  fourManifoldTopology.fourManifoldInvariant
     (presentationEvaluation 𝒞 automorphism manifold H2)
     (evalC_local_move_invariant 𝒞 automorphism)
 
@@ -215,18 +215,18 @@ theorem EvalCOnClosedFourManifolds_diffeomorphism_invariant
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (topology :
-      Assumptions
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary
         (handlePresentationTheory manifold H2))
-    {left right :
-      topology.realization.MarkedClosedOrientedSmoothFourManifold}
+    {X Y :
+      fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold}
     (diffeomorphism :
-      topology.realization.orientedDiffeomorphism.Hom left right) :
+      fourManifoldTopology.realization.orientedDiffeomorphism.Hom X Y) :
     EvalCOnClosedFourManifolds
-        𝒞 automorphism topology left =
+        𝒞 automorphism fourManifoldTopology X =
       EvalCOnClosedFourManifolds
-        𝒞 automorphism topology right :=
-  topology.fourManifoldInvariant_diffeomorphism_invariant
+        𝒞 automorphism fourManifoldTopology Y :=
+  fourManifoldTopology.fourManifoldInvariant_diffeomorphism_invariant
     (presentationEvaluation 𝒞 automorphism manifold H2)
     (evalC_local_move_invariant 𝒞 automorphism)
     diffeomorphism
@@ -237,18 +237,18 @@ theorem EvalCOnClosedFourManifolds_on_presentation
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (topology :
-      Assumptions
+    (fourManifoldTopology :
+      FourManifoldTopologyBoundary
         (handlePresentationTheory manifold H2))
     (presentation : StandardDottedCanonicalPresentation manifold H2)
     (alpha :
       presentation.canonicalPresentation.topology.handleChain.SecondHomology) :
     EvalCOnClosedFourManifolds
-        𝒞 automorphism topology
-        (topology.realization.realize ⟨presentation, alpha⟩) =
+        𝒞 automorphism fourManifoldTopology
+        (fourManifoldTopology.realization.realize ⟨presentation, alpha⟩) =
       presentation.canonicalPresentation.EvalC
         𝒞 automorphism alpha :=
-  topology.fourManifoldInvariant_on_presentation
+  fourManifoldTopology.fourManifoldInvariant_on_presentation
     (presentationEvaluation 𝒞 automorphism manifold H2)
     (evalC_local_move_invariant 𝒞 automorphism)
     ⟨presentation, alpha⟩
