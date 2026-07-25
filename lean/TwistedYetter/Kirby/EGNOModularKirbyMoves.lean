@@ -91,11 +91,11 @@ noncomputable def transparentGlobalDimension
 /--
 Nonvanishing needed by the normalization denominator.
 
-Neither dimension value is caller supplied.  This certificate records the
-two standard scalar facts not yet derived from the local EGNO interface:
-the unit has quantum dimension one, and the derived global sum is nonzero.
-The latter is automatic over the usual characteristic-zero modular setting
-but not over every algebraically closed field.
+Neither dimension value is caller supplied.  The unit quantum dimension is
+derived below from the canonical ribbon pivotal structure.  This certificate
+retains the nonvanishing of the derived global sum, which is automatic over
+the usual characteristic-zero modular setting but not over every
+algebraically closed field.
 -/
 structure ModularDimensionCertificate
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
@@ -421,12 +421,124 @@ variable [CharZero K]
 EGNO's unit-dimension theorem for the canonical pivotal structure of a ribbon
 fusion category.
 
-This is an explicit textbook axiom boundary, not a caller-supplied field.
+The proof transports the selected right dual of the tensor unit to Mathlib's
+standard unit pairing, then closes the resulting snake identity.
 -/
-axiom egno_quantumDimension_unit
+theorem egno_quantumDimension_unit
     (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
     𝒞.premodular.quantumDimension
-        𝒞.premodular.toFusionCategoryData.unitIndex = 1
+        𝒞.premodular.toFusionCategoryData.unitIndex = 1 := by
+  let data := 𝒞.premodular
+  let p := data.pivotal
+  have hIsoDimension :
+      pivotalDimension p
+          (data.simple data.toFusionCategoryData.unitIndex) =
+        pivotalDimension p (𝟙_ C) := by
+    simpa [pivotalDimension, pivotalTrace] using
+      (pivotalTrace_cyclic p
+        data.toFusionCategoryData.unitIso.hom
+        data.toFusionCategoryData.unitIso.inv)
+  have hUnitDimension :
+      pivotalDimension p (𝟙_ C) = 𝟙 (𝟙_ C) := by
+    simp [p, RibbonFusionCategoryData.pivotal,
+      pivotalDimension, leftCategoricalTrace,
+      canonicalPivotalStructure, canonicalPivotalIso_hom_app,
+      canonicalPivotalHom, drinfeldHom,
+      balancedTwist_unit]
+    rw [drinfeldIso_hom]
+    rw [← tensorHom_id]
+    slice_lhs 2 3 =>
+      exact drinfeldHom_tensor_evaluation (𝟙_ C)
+    rw [braiding_tensorUnit_left]
+    let selectedDual : C :=
+      @HasRightDual.rightDual C _ _ (𝟙_ C)
+        (RightRigidCategory.rightDual (𝟙_ C))
+    let selectedPairing :
+        ExactPairing (𝟙_ C) selectedDual :=
+      @HasRightDual.exact C _ _ (𝟙_ C)
+        (RightRigidCategory.rightDual (𝟙_ C))
+    let unitPairing : ExactPairing (𝟙_ C) (𝟙_ C) :=
+      inferInstance
+    let comparison :=
+      rightDualIso selectedPairing unitPairing
+    let selectedCoevaluation :=
+      @ExactPairing.coevaluation C _ _ (𝟙_ C) selectedDual
+        selectedPairing
+    let selectedEvaluation :=
+      @ExactPairing.evaluation C _ _ (𝟙_ C) selectedDual
+        selectedPairing
+    let unitCoevaluation :=
+      @ExactPairing.coevaluation C _ _ (𝟙_ C) (𝟙_ C)
+        unitPairing
+    let unitEvaluation :=
+      @ExactPairing.evaluation C _ _ (𝟙_ C) (𝟙_ C)
+        unitPairing
+    have hCoevaluation :
+        selectedCoevaluation ≫
+            ((𝟙_ C) ◁ comparison.hom) =
+          unitCoevaluation := by
+      exact rightDualIso_coevaluation_hom
+        selectedPairing unitPairing
+    have hEvaluation :
+        (comparison.hom ▷ (𝟙_ C)) ≫
+            unitEvaluation =
+          selectedEvaluation := by
+      exact rightDualIso_hom_evaluation
+        selectedPairing unitPairing
+    have hMiddle :
+        ((λ_ selectedDual).hom ≫ (ρ_ selectedDual).inv) ≫
+            (comparison.hom ▷ (𝟙_ C)) =
+          ((𝟙_ C) ◁ comparison.hom) ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) := by
+      simp [comparison]
+    change
+      selectedCoevaluation ≫
+          ((λ_ selectedDual).hom ≫
+            (ρ_ selectedDual).inv) ≫
+          selectedEvaluation =
+        𝟙 (𝟙_ C)
+    calc
+      _ =
+          selectedCoevaluation ≫
+            ((λ_ selectedDual).hom ≫
+              (ρ_ selectedDual).inv) ≫
+            (comparison.hom ▷ (𝟙_ C)) ≫
+            unitEvaluation := by
+              rw [hEvaluation]
+      _ =
+          selectedCoevaluation ≫
+            ((𝟙_ C) ◁ comparison.hom) ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+            unitEvaluation := by
+              simpa only [Category.assoc] using
+                congrArg
+                  (fun f =>
+                    selectedCoevaluation ≫ f ≫
+                      unitEvaluation)
+                  hMiddle
+      _ =
+          unitCoevaluation ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+            unitEvaluation := by
+              simpa only [Category.assoc] using
+                congrArg
+                  (fun f =>
+                    f ≫ ((λ_ (𝟙_ C)).hom ≫
+                      (ρ_ (𝟙_ C)).inv) ≫
+                      unitEvaluation)
+                  hCoevaluation
+      _ = 𝟙 (𝟙_ C) := by
+        dsimp [unitCoevaluation, unitEvaluation, unitPairing]
+        change
+          (ρ_ (𝟙_ C)).inv ≫
+              ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+              (ρ_ (𝟙_ C)).hom =
+            𝟙 (𝟙_ C)
+        monoidal
+  rw [RibbonFusionCategoryData.quantumDimension,
+    RibbonFusionCategoryData.categoricalDimension]
+  rw [hIsoDimension, hUnitDimension]
+  exact 𝒞.premodular.toFusionCategoryData.closedScalar_identity
 
 /--
 Bärenz--Barrett Lemma 3.1, with the exact formal Kirby colour retained by the
