@@ -117,11 +117,11 @@ inductive AlgebraBoundTaggedMove
         (leftDualSnakeBefore X) (Diagram.identity (atom (ᘁX)))
   | framedPositive (X : C) :
       AlgebraBoundTaggedMove algebra .framedPositive
-        (positiveKink X)
+        (positiveKink algebra.framedKink.ribbon X)
         (algebra.framedKink.positiveTwistDiagram X)
   | framedNegative (X : C) :
       AlgebraBoundTaggedMove algebra .framedNegative
-        (negativeKink X)
+        (negativeKink algebra.framedKink.ribbon X)
         (algebra.framedKink.negativeTwistDiagram X)
   | couponPositiveCrossing
       {X X' Y Y' : C}

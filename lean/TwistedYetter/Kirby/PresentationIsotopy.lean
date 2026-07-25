@@ -1,6 +1,7 @@
 import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.Presentation
 import TwistedYetter.Fusion.EGNOTraceCyclicity
+import TwistedYetter.Fusion.EGNOTracePairing
 
 /-!
 # Presentation independence for coupon-decorated framed links
@@ -333,23 +334,43 @@ variable [RigidCategory C]
 local instance selectedRigidRightDualFraming : RightRigidCategory C :=
   (inferInstance : RigidCategory C).toRightRigidCategory
 
-/-- Positive blackboard kink expanded into cup, crossing, and cap. -/
-def positiveKink (X : C) : Diagram C (atom X) (atom X) :=
-  leftUnitorInvDiagram X ≫ᵈ
-    (Diagram.cup X ⊗ᵈ Diagram.identity (atom X)) ≫ᵈ
-    (Diagram.crossing (atom X) (atom Xᘁ) ⊗ᵈ
-      Diagram.identity (atom X)) ≫ᵈ
-    (Diagram.cap X ⊗ᵈ Diagram.identity (atom X)) ≫ᵈ
-    leftUnitorHomDiagram X
+/--
+Positive blackboard kink expanded into cup, crossing, and the pivotal reverse
+cap.
 
-/-- Negative blackboard kink with inverse crossing. -/
-def negativeKink (X : C) : Diagram C (atom X) (atom X) :=
+The incoming strand is the third strand after the cup.  It crosses the dual
+strand and is then paired with that dual, leaving the cup's primal strand as
+the outgoing strand.  Thus this is a kink of the open strand, not a detached
+closed loop tensored with its identity.
+-/
+def positiveKink
+    (ribbon : RibbonStructure C)
+    (X : C) : Diagram C (atom X) (atom X) :=
   leftUnitorInvDiagram X ≫ᵈ
     (Diagram.cup X ⊗ᵈ Diagram.identity (atom X)) ≫ᵈ
-    (Diagram.crossingInv (atom X) (atom Xᘁ) ⊗ᵈ
-      Diagram.identity (atom X)) ≫ᵈ
-    (Diagram.cap X ⊗ᵈ Diagram.identity (atom X)) ≫ᵈ
-    leftUnitorHomDiagram X
+    associatorHomDiagram X Xᘁ X ≫ᵈ
+    (Diagram.identity (atom X) ⊗ᵈ
+      Diagram.crossing (atom Xᘁ) (atom X)) ≫ᵈ
+    (Diagram.identity (atom X) ⊗ᵈ
+      Diagram.exactCap Xᘁ X
+        (pivotalReverseExactPairing
+          (canonicalPivotalStructure ribbon) X)) ≫ᵈ
+    rightUnitorHomDiagram X
+
+/-- Negative blackboard kink with the inverse open-strand crossing. -/
+def negativeKink
+    (ribbon : RibbonStructure C)
+    (X : C) : Diagram C (atom X) (atom X) :=
+  leftUnitorInvDiagram X ≫ᵈ
+    (Diagram.cup X ⊗ᵈ Diagram.identity (atom X)) ≫ᵈ
+    associatorHomDiagram X Xᘁ X ≫ᵈ
+    (Diagram.identity (atom X) ⊗ᵈ
+      Diagram.crossingInv (atom Xᘁ) (atom X)) ≫ᵈ
+    (Diagram.identity (atom X) ⊗ᵈ
+      Diagram.exactCap Xᘁ X
+        (pivotalReverseExactPairing
+          (canonicalPivotalStructure ribbon) X)) ≫ᵈ
+    rightUnitorHomDiagram X
 
 /--
 The standard ribbon graphical input identifying blackboard kinks with the
@@ -360,10 +381,12 @@ equations remain explicit and source-backed.
 structure FramedKinkCompatibility where
   ribbon : RibbonStructure C
   positive_sound : (X : C) →
-    Diagram.eval C (positiveKink X) =
+    Diagram.eval C
+        (positiveKink ribbon X) =
       (NaturalTwist.ofRibbon ribbon).iso.hom.app X
   negative_sound : (X : C) →
-    Diagram.eval C (negativeKink X) =
+    Diagram.eval C
+        (negativeKink ribbon X) =
       (NaturalTwist.ofRibbon ribbon).iso.inv.app X
   source_ref : String
   source_locator : String
@@ -384,13 +407,17 @@ def negativeTwistDiagram (data : FramedKinkCompatibility (C := C)) (X : C) :
 
 /-- Framed Reidemeister I transfers a positive kink into framing data. -/
 def positiveMove (data : FramedKinkCompatibility (C := C)) (X : C) :
-    CertifiedMove (positiveKink X) (data.positiveTwistDiagram X) where
+    CertifiedMove
+      (positiveKink data.ribbon X)
+      (data.positiveTwistDiagram X) where
   label := "framed-Reidemeister-I-positive-to-twist"
   sound := data.positive_sound X
 
 /-- Framed Reidemeister I transfers a negative kink into framing data. -/
 def negativeMove (data : FramedKinkCompatibility (C := C)) (X : C) :
-    CertifiedMove (negativeKink X) (data.negativeTwistDiagram X) where
+    CertifiedMove
+      (negativeKink data.ribbon X)
+      (data.negativeTwistDiagram X) where
   label := "framed-Reidemeister-I-negative-to-inverse-twist"
   sound := data.negative_sound X
 
@@ -556,11 +583,15 @@ inductive TaggedMove :
   | framedPositive [RigidCategory C]
       (data : FramedKinkCompatibility (C := C))
       (X : C) :
-      TaggedMove (positiveKink X) (data.positiveTwistDiagram X)
+      TaggedMove
+        (positiveKink data.ribbon X)
+        (data.positiveTwistDiagram X)
   | framedNegative [RigidCategory C]
       (data : FramedKinkCompatibility (C := C))
       (X : C) :
-      TaggedMove (negativeKink X) (data.negativeTwistDiagram X)
+      TaggedMove
+        (negativeKink data.ribbon X)
+        (data.negativeTwistDiagram X)
   | couponPositiveCrossing
       {X X' Y Y' : C}
       (f : X ⟶ Y)
@@ -811,13 +842,17 @@ def leftDualSnakeIsotopy (X : C) [HasLeftDual X] :
 def framedPositiveIsotopy [RigidCategory C]
     (data : FramedKinkCompatibility (C := C))
     (X : C) :
-    GeneratedIsotopy (positiveKink X) (data.positiveTwistDiagram X) :=
+    GeneratedIsotopy
+      (positiveKink data.ribbon X)
+      (data.positiveTwistDiagram X) :=
   .step (.framedPositive data X)
 
 def framedNegativeIsotopy [RigidCategory C]
     (data : FramedKinkCompatibility (C := C))
     (X : C) :
-    GeneratedIsotopy (negativeKink X) (data.negativeTwistDiagram X) :=
+    GeneratedIsotopy
+      (negativeKink data.ribbon X)
+      (data.negativeTwistDiagram X) :=
   .step (.framedNegative data X)
 
 def positiveCouponIsotopy

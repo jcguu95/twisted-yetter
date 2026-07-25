@@ -396,11 +396,11 @@ inductive KirbyProofTaggedMove
         (leftDualSnakeBefore X) (Diagram.identity (.atom (ᘁX)))
   | framedPositive (X : C) :
       KirbyProofTaggedMove graphical
-        (positiveKink X)
+        (positiveKink graphical.framedKinkCompatibility.ribbon X)
         (graphical.framedKinkCompatibility.positiveTwistDiagram X)
   | framedNegative (X : C) :
       KirbyProofTaggedMove graphical
-        (negativeKink X)
+        (negativeKink graphical.framedKinkCompatibility.ribbon X)
         (graphical.framedKinkCompatibility.negativeTwistDiagram X)
   | couponPositiveCrossing
       {X X' Y Y' : C}

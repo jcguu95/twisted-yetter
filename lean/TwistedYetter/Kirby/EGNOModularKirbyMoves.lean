@@ -259,11 +259,11 @@ structure RibbonFramedKinkLaw
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
   positive_sound :
     (X : C) →
-      Diagram.eval C (positiveKink X) =
+      Diagram.eval C (positiveKink data.ribbon X) =
         (NaturalTwist.ofRibbon data.ribbon).iso.hom.app X
   negative_sound :
     (X : C) →
-      Diagram.eval C (negativeKink X) =
+      Diagram.eval C (negativeKink data.ribbon X) =
         (NaturalTwist.ofRibbon data.ribbon).iso.inv.app X
   source_ref : String := "ref:shum-tortile-1994"
   source_locator : String :=
@@ -693,8 +693,10 @@ theorem baerenzBarrett_oneTwoHopfPairSum
         exact (unitMissing (Finset.mem_univ _)).elim
 
 /--
-Shum's coherence theorem for tortile categories, specialized to the positive
-and negative blackboard-kink evaluations used by the local compiler.
+Shum's coherence theorem for tortile categories, specialized to the corrected
+open-strand kink diagrams.  Expanding the positive diagram gives
+`coevaluation`, a crossing between the old strand and its dual, and the
+pivotal reverse evaluation; the negative diagram uses the inverse crossing.
 -/
 axiom shum_ribbonFramedKink
     (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :

@@ -178,13 +178,17 @@ def positiveKink (componentId : String) :
   .leftUnitorInv (.atom (positiveAtom componentId)) ≫ᶜ
     (.cupPositiveNegative componentId ⊗ᶜ
       .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    (.crossingPositive
-        (.atom (positiveAtom componentId))
-        (.atom (negativeAtom componentId)) ⊗ᶜ
-      .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    (.capNegativePositive componentId ⊗ᶜ
-      .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    .leftUnitorHom (.atom (positiveAtom componentId))
+    .associatorHom
+      (.atom (positiveAtom componentId))
+      (.atom (negativeAtom componentId))
+      (.atom (positiveAtom componentId)) ≫ᶜ
+    (.identity (.atom (positiveAtom componentId)) ⊗ᶜ
+      .crossingPositive
+        (.atom (negativeAtom componentId))
+        (.atom (positiveAtom componentId))) ≫ᶜ
+    (.identity (.atom (positiveAtom componentId)) ⊗ᶜ
+      .capPositiveNegative componentId) ≫ᶜ
+    .rightUnitorHom (.atom (positiveAtom componentId))
 
 /-- Negative blackboard kink on a positively oriented component. -/
 def negativeKink (componentId : String) :
@@ -194,13 +198,17 @@ def negativeKink (componentId : String) :
   .leftUnitorInv (.atom (positiveAtom componentId)) ≫ᶜ
     (.cupPositiveNegative componentId ⊗ᶜ
       .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    (.crossingNegative
-        (.atom (positiveAtom componentId))
-        (.atom (negativeAtom componentId)) ⊗ᶜ
-      .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    (.capNegativePositive componentId ⊗ᶜ
-      .identity (.atom (positiveAtom componentId))) ≫ᶜ
-    .leftUnitorHom (.atom (positiveAtom componentId))
+    .associatorHom
+      (.atom (positiveAtom componentId))
+      (.atom (negativeAtom componentId))
+      (.atom (positiveAtom componentId)) ≫ᶜ
+    (.identity (.atom (positiveAtom componentId)) ⊗ᶜ
+      .crossingNegative
+        (.atom (negativeAtom componentId))
+        (.atom (positiveAtom componentId))) ≫ᶜ
+    (.identity (.atom (positiveAtom componentId)) ⊗ᶜ
+      .capPositiveNegative componentId) ≫ᶜ
+    .rightUnitorHom (.atom (positiveAtom componentId))
 
 end FreeTemplates
 
@@ -376,7 +384,8 @@ theorem eval_eq
       simpa [FreeTemplates.positiveKink, ComponentDiagram.interpret,
         TwistedYetter.Kirby.PresentationIsotopy.positiveKink,
         TwistedYetter.Kirby.PresentationIsotopy.leftUnitorInvDiagram,
-        TwistedYetter.Kirby.PresentationIsotopy.leftUnitorHomDiagram,
+        TwistedYetter.Kirby.PresentationIsotopy.associatorHomDiagram,
+        TwistedYetter.Kirby.PresentationIsotopy.rightUnitorHomDiagram,
         Diagram.eval, Boundary.denote] using
         (shum_ribbonFramedKink 𝒞).positive_sound X
   | framedNegative componentId =>
@@ -384,7 +393,8 @@ theorem eval_eq
       simpa [FreeTemplates.negativeKink, ComponentDiagram.interpret,
         TwistedYetter.Kirby.PresentationIsotopy.negativeKink,
         TwistedYetter.Kirby.PresentationIsotopy.leftUnitorInvDiagram,
-        TwistedYetter.Kirby.PresentationIsotopy.leftUnitorHomDiagram,
+        TwistedYetter.Kirby.PresentationIsotopy.associatorHomDiagram,
+        TwistedYetter.Kirby.PresentationIsotopy.rightUnitorHomDiagram,
         Diagram.eval, Boundary.denote] using
         (shum_ribbonFramedKink 𝒞).negative_sound X
   | eraseIdentityCoupon couponId boundary =>
