@@ -549,35 +549,6 @@ axiom baerenzBarrett_ordinaryKirbySliding
     OrdinaryKirbySlidingLaw 𝒞.premodular
 
 /--
-Bärenz--Barrett's cutting/killing calculation for the exact positive Hopf
-pair representing a cancelling 1--2 handle pair.
-
-Only the isolated two-component finite sum occurs in this source-backed
-boundary.  The surrounding presentation factorization, homology-exponent
-transport, global-label reindexing, and normalization are proved downstream.
--/
-axiom baerenzBarrett_oneTwoHopfPairSum
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (dottedId twoHandleId : String)
-    (_distinct : dottedId ≠ twoHandleId)
-    (labelOf : (Fin 2 → S) → String → S)
-    (dotted_label_sound :
-      (labels : Fin 2 → S) →
-        labelOf labels dottedId = labels 0)
-    (two_handle_label_sound :
-      (labels : Fin 2 → S) →
-        labelOf labels twoHandleId = labels 1) :
-    (∑ labels : Fin 2 → S,
-      (𝒞.premodular.quantumDimension (labels 0) *
-        𝒞.premodular.quantumDimension (labels 1)) *
-      𝒞.premodular.toFusionCategoryData.closedScalar
-        (Diagram.eval C
-          ((ComponentDiagram.oneTwoHopfPair
-            dottedId twoHandleId).interpret
-              𝒞.premodular (labelOf labels)))) =
-      globalDimension 𝒞.premodular
-
-/--
 Bärenz--Barrett's killing lemma before summing the label on the strand being
 encircled.  A Kirby-coloured dotted meridian kills every nontransparent
 simple channel.  In a modular category the only surviving channel is the
@@ -613,6 +584,113 @@ axiom baerenzBarrett_hopfKirbyKillingFiber
         globalDimension 𝒞.premodular
       else
         0
+
+/--
+Bärenz--Barrett's cutting/killing calculation for the exact positive Hopf
+pair representing a cancelling 1--2 handle pair.
+
+This is the finite sum of `baerenzBarrett_hopfKirbyKillingFiber`, not a
+separate graphical axiom.
+-/
+theorem baerenzBarrett_oneTwoHopfPairSum
+    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (dottedId twoHandleId : String)
+    (distinct : dottedId ≠ twoHandleId)
+    (labelOf : (Fin 2 → S) → String → S)
+    (dotted_label_sound :
+      (labels : Fin 2 → S) →
+        labelOf labels dottedId = labels 0)
+    (two_handle_label_sound :
+      (labels : Fin 2 → S) →
+        labelOf labels twoHandleId = labels 1) :
+    (∑ labels : Fin 2 → S,
+      (𝒞.premodular.quantumDimension (labels 0) *
+        𝒞.premodular.quantumDimension (labels 1)) *
+      𝒞.premodular.toFusionCategoryData.closedScalar
+        (Diagram.eval C
+          ((ComponentDiagram.oneTwoHopfPair
+            dottedId twoHandleId).interpret
+              𝒞.premodular (labelOf labels)))) =
+      globalDimension 𝒞.premodular := by
+  classical
+  let pairEquiv : (Fin 2 → S) ≃ S × S :=
+    piFinTwoEquiv (fun _ : Fin 2 => S)
+  let summand : (Fin 2 → S) → K := fun labels =>
+    (𝒞.premodular.quantumDimension (labels 0) *
+      𝒞.premodular.quantumDimension (labels 1)) *
+    𝒞.premodular.toFusionCategoryData.closedScalar
+      (Diagram.eval C
+        ((ComponentDiagram.oneTwoHopfPair
+          dottedId twoHandleId).interpret
+            𝒞.premodular (labelOf labels)))
+  have reindex :
+      (∑ labels : Fin 2 → S, summand labels) =
+        ∑ labels : S × S, summand (pairEquiv.symm labels) :=
+    (Equiv.sum_comp pairEquiv.symm summand).symm
+  change (∑ labels : Fin 2 → S, summand labels) = _
+  rw [reindex, Fintype.sum_prod_type, Finset.sum_comm]
+  calc
+    (∑ twoHandleLabel : S, ∑ dottedLabel : S,
+        summand (pairEquiv.symm
+          (dottedLabel, twoHandleLabel))) =
+        ∑ twoHandleLabel : S,
+          𝒞.premodular.quantumDimension twoHandleLabel *
+            (∑ dottedLabel : S,
+              𝒞.premodular.quantumDimension dottedLabel *
+                𝒞.premodular.toFusionCategoryData.closedScalar
+                  (Diagram.eval C
+                    ((ComponentDiagram.oneTwoHopfPair
+                      dottedId twoHandleId).interpret
+                        𝒞.premodular
+                        (labelOf
+                          (pairEquiv.symm
+                            (dottedLabel, twoHandleLabel)))))) := by
+      apply Finset.sum_congr rfl
+      intro twoHandleLabel _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro dottedLabel _
+      simp only [summand, pairEquiv, piFinTwoEquiv,
+        Equiv.coe_fn_symm_mk, Fin.cons_zero, Fin.cons_one]
+      ring
+    _ = ∑ twoHandleLabel : S,
+          𝒞.premodular.quantumDimension twoHandleLabel *
+            (if twoHandleLabel =
+                𝒞.premodular.toFusionCategoryData.unitIndex then
+              globalDimension 𝒞.premodular
+            else
+              0) := by
+      apply Finset.sum_congr rfl
+      intro twoHandleLabel _
+      apply congrArg
+      exact baerenzBarrett_hopfKirbyKillingFiber
+        𝒞 dottedId twoHandleId distinct
+        (fun dottedLabel twoLabel =>
+          labelOf
+            (pairEquiv.symm (dottedLabel, twoLabel)))
+        (by
+          intro dottedLabel twoLabel
+          simpa only [pairEquiv, piFinTwoEquiv,
+            Equiv.coe_fn_symm_mk, Fin.cons_zero,
+            Fin.cons_one] using
+              dotted_label_sound
+                (pairEquiv.symm (dottedLabel, twoLabel)))
+        (by
+          intro dottedLabel twoLabel
+          simpa only [pairEquiv, piFinTwoEquiv,
+            Equiv.coe_fn_symm_mk, Fin.cons_zero,
+            Fin.cons_one] using
+              two_handle_label_sound
+                (pairEquiv.symm (dottedLabel, twoLabel)))
+        twoHandleLabel
+    _ = globalDimension 𝒞.premodular := by
+      rw [Finset.sum_eq_single
+        𝒞.premodular.toFusionCategoryData.unitIndex]
+      · simp [egno_quantumDimension_unit 𝒞]
+      · intro simple _ notUnit
+        simp [notUnit]
+      · intro unitMissing
+        exact (unitMissing (Finset.mem_univ _)).elim
 
 /--
 Shum's coherence theorem for tortile categories, specialized to the positive
