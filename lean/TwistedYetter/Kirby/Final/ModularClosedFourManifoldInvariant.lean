@@ -120,14 +120,14 @@ theorem EvalC_diffeomorphism_invariant
         (handlePresentationTheory presentationScope auxiliaryH2)
         geometry)
     {X Y : geometry.FourManifold}
-    (diffeomorphism :
+    (f :
       geometry.orientedDiffeomorphism.Hom X Y)
     (alpha : geometry.SecondHomology X) :
     EvalC 𝒞 automorphism fourManifoldTopology X alpha =
       EvalC 𝒞 automorphism fourManifoldTopology Y
-        (geometry.homologyMap diffeomorphism alpha) :=
+        (geometry.homologyMap f alpha) :=
   (constructEvalC 𝒞 automorphism fourManifoldTopology)
-    |>.diffeomorphismInvariant diffeomorphism alpha
+    |>.diffeomorphismInvariant f alpha
 
 /--
 On a supplied marked Kirby presentation, the manifold-level invariant is the

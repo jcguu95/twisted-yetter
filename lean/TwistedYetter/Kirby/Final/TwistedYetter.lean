@@ -1,5 +1,6 @@
 import Mathlib.Algebra.Category.Grp.Basic
 import TwistedYetter.Kirby.Final.ModularClosedFourManifoldInvariant
+import TwistedYetter.Kirby.ModularAlgebraicSurface
 
 /-!
 # Intrinsic public interface for the homologically twisted Yetter invariant
@@ -19,32 +20,6 @@ current canonical special-Kirby calculus are explicit axioms in
 `SpecialKirbyFoundation`.  The existing local categorical calculations and
 the descent from Kirby movies are proved in Lean.
 -/
-
-namespace TwistedYetter.Fusion.EGNO.ModularCategory
-
-open CategoryTheory
-open TwistedYetter.Kirby.BoundaryStandardization
-open TwistedYetter.Fusion.EGNO
-
-universe uK uC vC
-
-/--
-Tensor automorphisms of the identity functor, displayed as depending on the
-chosen modular category.
-
-The underlying notion only requires the monoidal category `C`; the dependent
-display makes Lean check that the supplied automorphism belongs to the
-underlying category of the preceding modular-category argument.
--/
-abbrev TensorIdentityAutomorphism
-    {K : Type uK} [Field K] [IsAlgClosed K]
-    {C : Type uC} [Category.{vC} C] [Abelian C] [Linear K C]
-    [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
-    {S : Type} [Fintype S] [DecidableEq S]
-    (_𝒞 : ModularCategory (K := K) (C := C) (S := S)) :=
-  TwistedYetter.Fusion.EGNO.TensorIdentityAutomorphism C
-
-end TwistedYetter.Fusion.EGNO.ModularCategory
 
 namespace TwistedYetter.Kirby.Final
 
@@ -267,10 +242,10 @@ theorem TwistedYetter_on_specialKirbyPresentation
 theorem TwistedYetter_diffeomorphism_invariant
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
     {X Y : ClosedOrientedSmoothFourManifold}
-    (diffeomorphism : orientedDiffeomorphism.Hom X Y)
+    (f : orientedDiffeomorphism.Hom X Y)
     (α : H₂ X) :
     TwistedYetter 𝒞η ⟨X, α⟩ =
-      TwistedYetter 𝒞η ⟨Y, inducedH₂ diffeomorphism α⟩ := by
+      TwistedYetter 𝒞η ⟨Y, inducedH₂ f α⟩ := by
   simpa [TwistedYetter] using
     (SpecialKirbyFoundation.topologyBoundary.constructInvariant
         (presentationEvaluation
@@ -278,7 +253,7 @@ theorem TwistedYetter_diffeomorphism_invariant
           SpecialKirbyFoundation.presentationScope
           SpecialKirbyFoundation.AuxiliaryH₂)
         (evalC_local_move_invariant 𝒞η.1 𝒞η.2))
-      |>.diffeomorphismInvariant diffeomorphism α
+      |>.diffeomorphismInvariant f α
 
 namespace TwistedYetter
 

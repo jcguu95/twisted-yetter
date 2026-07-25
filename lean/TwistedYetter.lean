@@ -155,3 +155,5 @@ import TwistedYetter.Kirby.GeneralH2RawKirbyNoGo
 import TwistedYetter.Kirby.GeneralH2RawKirbyNoGoAxiomAudit
 import TwistedYetter.Kirby.Final.TwistedYetter
 import TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit
+import TwistedYetter.Kirby.ModularAlgebraicSurface
+import TwistedYetter.Kirby.ModularAlgebraicSurfaceAxiomAudit
