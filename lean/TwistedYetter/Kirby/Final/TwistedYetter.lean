@@ -269,6 +269,10 @@ class Computable
   compute :
     {Xα : HomologicalFourManifold} →
       SpecialKirbyPresentation Xα → K
+  correct :
+    {Xα : HomologicalFourManifold} →
+      (presentation : SpecialKirbyPresentation Xα) →
+        TwistedYetter 𝒞η Xα = compute presentation
 
 /-- Execute the installed presentation-level implementation. -/
 def compute
@@ -279,18 +283,19 @@ def compute
   implementation.compute presentation
 
 /--
-External correctness boundary between the executable implementation and the
-intrinsic invariant.
+The correctness proof required from the installed executable implementation.
 
-This is intentionally an axiom at the current project stage.
+This theorem introduces no global axiom: constructing a `Computable` instance
+requires supplying the proof together with the executable function.
 -/
-axiom compute_correct
+theorem compute_correct
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    [Computable 𝒞η]
+    [implementation : Computable 𝒞η]
     {Xα : HomologicalFourManifold}
     (presentation : SpecialKirbyPresentation Xα) :
     TwistedYetter 𝒞η Xα =
-      compute 𝒞η presentation
+      compute 𝒞η presentation := by
+  exact implementation.correct presentation
 
 end TwistedYetter
 
