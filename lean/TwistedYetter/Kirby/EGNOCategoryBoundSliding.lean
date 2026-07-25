@@ -356,6 +356,11 @@ actual formal family `sum_s dim(s) s`.
 The one global `core_sound` field is the cited sliding theorem.  The two
 endpoint diagrams and their evaluations are forced to be the dimension-
 weighted expansions of the category's listed simples.
+
+This mathematical structure deliberately contains no evidence hash.  The
+current endpoint diagrams are Lean functions rather than serialized syntax,
+so pretending that the literature theorem can manufacture a content hash
+would give provenance metadata mathematical force that it does not have.
 -/
 structure OrdinaryKirbySlidingLaw
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
@@ -378,15 +383,6 @@ structure OrdinaryKirbySlidingLaw
             (fun s => afterSimple s X)) =
         after.app X
   core_sound : before = after
-  diagram_schema : String :=
-    "twisted-yetter.egno-ordinary-kirby-slide.v1"
-  diagram_content_hash : String
-  diagram_content_hash_shape :
-    TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
-      diagram_content_hash = true
-  source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
-  source_locator : String :=
-    "Lemma 3.1, equation (3.1.1), journal pages 680-681"
 
 namespace OrdinaryKirbySlidingLaw
 
@@ -409,10 +405,12 @@ noncomputable def toSourcedSlidingLaw
   before_eval := law.before_eval
   after_eval := law.after_eval
   core_sound := law.core_sound
-  diagram_schema := law.diagram_schema
-  diagram_content_hash := law.diagram_content_hash
-  source_ref := law.source_ref
-  source_locator := law.source_locator
+  diagram_schema := "twisted-yetter.egno-ordinary-kirby-slide.v1"
+  diagram_content_hash :=
+    "UNAVAILABLE-NON-SERIALIZED-CATEGORICAL-DIAGRAM"
+  source_ref := "ref:baerenz-barrett-dichromatic-2018"
+  source_locator :=
+    "Lemma 3.1, equation (3.1.1), journal pages 680-681"
 
 /-- The exported ordinary law still evaluates the exact quantum-dimension sum. -/
 theorem before_is_dimension_weighted
