@@ -15,7 +15,7 @@ Special Kirby presentations occur only in the construction and computation
 interfaces.  They are not part of the intrinsic invariant's input.
 
 The smooth-manifold universe and the four category-neutral topology
-boundaries are explicit axioms in `SpecialKirbyFoundation`.  Representative
+boundaries are explicit axioms in `SpecialKirbyHandleTheory.Axioms`.  Representative
 independence, all eight local evaluator equalities, finite-movie descent, and
 the modular specialization are proved in Lean.
 -/
@@ -98,7 +98,7 @@ abbrev fourManifoldGeometry :
 abbrev HomologicalFourManifold :=
   Σ X : ClosedOrientedSmoothFourManifold, H₂ X
 
-namespace SpecialKirbyFoundation
+namespace SpecialKirbyHandleTheory
 
 /-- Integral auxiliary coordinates used by the canonical presentation type. -/
 abbrev AuxiliaryH₂ := ℤ
@@ -114,58 +114,43 @@ axiom localGeometry :
 noncomputable def handles : HandlePresentationTheory.{1, 0, 1} :=
   handlePresentationTheory AuxiliaryH₂ localGeometry
 
-/--
-T2: external manifold and homology realization of the role-aware special
-Kirby presentation theory.
-
-Repository provenance is not part of this mathematical input.  It may be
-attached to a stored value with `KirbyCompleteness.StoredArtifact`.
--/
-structure CertifiedSpecialKirbyPresentationTheory
-    (geometry : HomologicalFourManifoldTheory.{uX, uX, uX}) where
-  realization :
-    HandlePresentationRealization.{1, 0, 1, uX, uX, uX}
-      handles
-      geometry
+namespace Axioms
 
 /--
-The one imported topology object at this boundary: the canonical
-special-Kirby presentation theory tied to its manifold realization.
--/
-axiom certifiedPresentationTheory :
-  CertifiedSpecialKirbyPresentationTheory fourManifoldGeometry
+The handle-theory realization of canonical special Kirby presentations.
 
-/--
-The realization carried by the certified presentation theory.
+This is an explicit external handle-theory input, not a wrapper advertised as
+an internally certified theory.
 -/
-noncomputable def realization :
-    HandlePresentationRealization handles fourManifoldGeometry :=
-  by
-    simpa [handles] using
-      certifiedPresentationTheory.{uX}.realization
+axiom realization :
+  HandlePresentationRealization.{1, 0, 1, uX, uX, uX}
+    handles
+    fourManifoldGeometry
+
+end Axioms
 
 /-- T2: every elementary move realizes the transported marked pair. -/
 axiom elementaryMoveSoundness :
-  ElementaryMoveHomologicalSoundness realization
+  ElementaryMoveHomologicalSoundness Axioms.realization
 
 /-- T1: every intrinsic pair has a role-aware special Kirby presentation. -/
 axiom presentationExistence :
-  MarkedPresentationExistence realization
+  MarkedPresentationExistence Axioms.realization
 
 /-- T3: marked-diffeomorphic presentations are connected by admitted movies. -/
 axiom kirbyCerfCompleteness :
-  MarkedKirbyCerfCompleteness realization
+  MarkedKirbyCerfCompleteness Axioms.realization
 
 /-- The separately reviewable topology boundary assembled from the axioms above. -/
 noncomputable def topologyBoundary :
     HomologicalFourManifoldTopologyBoundary
       handles fourManifoldGeometry where
-  realization := realization
+  realization := Axioms.realization
   elementaryMoveSoundness := elementaryMoveSoundness
   markedPresentationExistence := presentationExistence
   markedKirbyCerfCompleteness := kirbyCerfCompleteness
 
-end SpecialKirbyFoundation
+end SpecialKirbyHandleTheory
 
 /-- Interpret the intrinsic dependent pair in the internal descent language. -/
 def homologicalPair
@@ -185,14 +170,14 @@ handle-chain class with `α`.
 abbrev SpecialKirbyPresentation
     (Xα : HomologicalFourManifold.{uX}) :=
   MarkedPresentationOf
-    SpecialKirbyFoundation.realization
+    SpecialKirbyHandleTheory.Axioms.realization
     (homologicalPair Xα)
 
 /-- Every intrinsic homological four-manifold pair has a special presentation. -/
 theorem specialKirbyPresentationExists
     (Xα : HomologicalFourManifold.{uX}) :
     Nonempty (SpecialKirbyPresentation Xα) :=
-  SpecialKirbyFoundation.presentationExistence.presentation
+  SpecialKirbyHandleTheory.presentationExistence.presentation
     (homologicalPair Xα)
 
 /-- The intrinsic premodular dependent pair `⟨𝒞, η⟩`. -/
@@ -222,8 +207,8 @@ noncomputable def specialKirbyEvaluation
     (presentation : SpecialKirbyPresentation Xα) : K :=
   (presentationEvaluation
       𝒞η.1 𝒞η.2
-      SpecialKirbyFoundation.AuxiliaryH₂
-      SpecialKirbyFoundation.localGeometry).markedValue
+      SpecialKirbyHandleTheory.AuxiliaryH₂
+      SpecialKirbyHandleTheory.localGeometry).markedValue
     presentation.markedPresentation
 
 /--
@@ -236,15 +221,15 @@ manifold pair.
 noncomputable def TwistedYetter
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     (Xα : HomologicalFourManifold.{uX}) : K :=
-  (SpecialKirbyFoundation.topologyBoundary.constructInvariant
+  (SpecialKirbyHandleTheory.topologyBoundary.constructInvariant
       (presentationEvaluation
         𝒞η.1 𝒞η.2
-        SpecialKirbyFoundation.AuxiliaryH₂
-        SpecialKirbyFoundation.localGeometry)
+        SpecialKirbyHandleTheory.AuxiliaryH₂
+        SpecialKirbyHandleTheory.localGeometry)
       (presentationEvaluation_localInvariant
         𝒞η.1 𝒞η.2
-        SpecialKirbyFoundation.AuxiliaryH₂
-        SpecialKirbyFoundation.localGeometry)).EvalC
+        SpecialKirbyHandleTheory.AuxiliaryH₂
+        SpecialKirbyHandleTheory.localGeometry)).EvalC
     Xα.1 Xα.2
 
 /--
@@ -258,22 +243,22 @@ theorem TwistedYetter_on_specialKirbyPresentation
     TwistedYetter 𝒞η Xα =
       specialKirbyEvaluation 𝒞η presentation := by
   simpa [TwistedYetter, specialKirbyEvaluation] using
-    SpecialKirbyFoundation.topologyBoundary.admissibleKirbyCerfTheorem
+    SpecialKirbyHandleTheory.topologyBoundary.admissibleKirbyCerfTheorem
       |>.constructInvariant_EvalC_eq_presentation
-        (SpecialKirbyFoundation.topologyBoundary.admissibleFormula
+        (SpecialKirbyHandleTheory.topologyBoundary.admissibleFormula
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.AuxiliaryH₂
-            SpecialKirbyFoundation.localGeometry))
-        (SpecialKirbyFoundation.topologyBoundary.admissibleFormula_movieInvariant
+            SpecialKirbyHandleTheory.AuxiliaryH₂
+            SpecialKirbyHandleTheory.localGeometry))
+        (SpecialKirbyHandleTheory.topologyBoundary.admissibleFormula_movieInvariant
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.AuxiliaryH₂
-            SpecialKirbyFoundation.localGeometry)
+            SpecialKirbyHandleTheory.AuxiliaryH₂
+            SpecialKirbyHandleTheory.localGeometry)
           (presentationEvaluation_localInvariant
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.AuxiliaryH₂
-            SpecialKirbyFoundation.localGeometry))
+            SpecialKirbyHandleTheory.AuxiliaryH₂
+            SpecialKirbyHandleTheory.localGeometry))
         Xα.1 Xα.2 presentation
 
 /-- Diffeomorphism invariance with the displayed class transported on `H₂`. -/
@@ -285,15 +270,15 @@ theorem TwistedYetter_diffeomorphism_invariant
     TwistedYetter 𝒞η ⟨X, α⟩ =
       TwistedYetter 𝒞η ⟨Y, inducedH₂ f α⟩ := by
   simpa [TwistedYetter] using
-    (SpecialKirbyFoundation.topologyBoundary.constructInvariant
+    (SpecialKirbyHandleTheory.topologyBoundary.constructInvariant
         (presentationEvaluation
           𝒞η.1 𝒞η.2
-          SpecialKirbyFoundation.AuxiliaryH₂
-          SpecialKirbyFoundation.localGeometry)
+          SpecialKirbyHandleTheory.AuxiliaryH₂
+          SpecialKirbyHandleTheory.localGeometry)
         (presentationEvaluation_localInvariant
           𝒞η.1 𝒞η.2
-          SpecialKirbyFoundation.AuxiliaryH₂
-          SpecialKirbyFoundation.localGeometry))
+          SpecialKirbyHandleTheory.AuxiliaryH₂
+          SpecialKirbyHandleTheory.localGeometry))
       |>.diffeomorphismInvariant f α
 
 /-- The modular value is exactly the premodular invariant after forgetting

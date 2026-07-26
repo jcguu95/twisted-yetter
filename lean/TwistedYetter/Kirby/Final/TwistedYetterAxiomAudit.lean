@@ -12,16 +12,15 @@ Kirby-calculus development.
 #print axioms TwistedYetter.Kirby.Final.ClosedOrientedSmoothFourManifold
 #print axioms TwistedYetter.Kirby.Final.H₂
 #print axioms
-  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.certifiedPresentationTheory
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.realization
 #print axioms
-  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.localGeometry
-#print axioms TwistedYetter.Kirby.Final.SpecialKirbyFoundation.realization
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.localGeometry
 #print axioms
-  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.elementaryMoveSoundness
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.elementaryMoveSoundness
 #print axioms
-  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.presentationExistence
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.presentationExistence
 #print axioms
-  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.kirbyCerfCompleteness
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.kirbyCerfCompleteness
 
 #print axioms TwistedYetter.Kirby.Final.TwistedYetter
 #print axioms
