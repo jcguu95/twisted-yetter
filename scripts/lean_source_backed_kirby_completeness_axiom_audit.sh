@@ -16,7 +16,7 @@ if rg -q 'sorryAx|declaration uses `sorry`|native_decide\.ax' "${output}"; then
   exit 1
 fi
 
-expected="TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected"
+expected="TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyPresentationsConnected"
 if ! rg -Fq "${expected}" "${output}"; then
   printf 'Expected topology domain axiom is absent from audit output.\n' >&2
   cat "${output}" >&2

@@ -174,12 +174,11 @@ theorem r11_conditional_invariant
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (system : MarkedPairPresentationSystem manifold H2)
-    {presentation : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (system : MarkedPairPresentationSystem H2)
+    {presentation : SpecialKirbyPresentation H2}
     {coordinate alpha : H2}
     (represents : system.represents presentation coordinate alpha) :
     prescription.presentationValue presentation coordinate =

@@ -42,49 +42,38 @@ variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type} [Fintype S] [DecidableEq S]
 
-/--
-An implementation-only index for the concrete presentation calculus.
-
-This is not the manifold argument of `EvalC`.  The actual manifold type and
-its second homology are supplied by `FourManifoldGeometry` below.
--/
-abbrev PresentationScope :=
-  ClosedConnectedSmoothOrientedFourManifoldInput
-
 /-- The public type of closed oriented smooth four-manifolds and their `H₂`. -/
 abbrev FourManifoldGeometry :=
   HomologicalFourManifoldTheory
 
 /-- The explicit formula on one marked Kirby presentation. -/
 noncomputable abbrev PresentationEvalC
-    {presentationScope : PresentationScope}
     {auxiliaryH2 : Type uAuxH2} [AddCommGroup auxiliaryH2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C) :=
-  presentationEvaluation 𝒞 automorphism presentationScope auxiliaryH2
+  presentationEvaluation 𝒞 automorphism auxiliaryH2
 
 /--
 Construct the genuine homological four-manifold invariant from the explicit
 presentation formula and the category-neutral topology boundary.
 
-`presentationScope` and `auxiliaryH2` index the concrete implementation of
+`calculus` and `auxiliaryH2` index the concrete implementation of
 the handle-presentation calculus.  They are discharged by this construction;
 the resulting invariant accepts only `X` and `alpha : H₂(X; ℤ)`.
 -/
 noncomputable def constructEvalC
-    {presentationScope : PresentationScope}
     {auxiliaryH2 : Type uAuxH2} [AddCommGroup auxiliaryH2]
     {geometry : FourManifoldGeometry.{uX, uH, uD}}
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       HomologicalFourManifoldTopologyBoundary
-        (handlePresentationTheory presentationScope auxiliaryH2)
+        (handlePresentationTheory auxiliaryH2)
         geometry) :
     HomologicalFourManifoldInvariant geometry K :=
   fourManifoldTopology.constructInvariant
     (presentationEvaluation
-      𝒞 automorphism presentationScope auxiliaryH2)
+      𝒞 automorphism auxiliaryH2)
     (evalC_local_move_invariant 𝒞 automorphism)
 
 /--
@@ -92,14 +81,13 @@ The public scalar.  After the category and topology boundary are fixed, its
 only mathematical inputs are a manifold `X` and a class `alpha : H₂(X; ℤ)`.
 -/
 noncomputable def EvalC
-    {presentationScope : PresentationScope}
     {auxiliaryH2 : Type uAuxH2} [AddCommGroup auxiliaryH2]
     {geometry : FourManifoldGeometry.{uX, uH, uD}}
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       HomologicalFourManifoldTopologyBoundary
-        (handlePresentationTheory presentationScope auxiliaryH2)
+        (handlePresentationTheory auxiliaryH2)
         geometry)
     (X : geometry.FourManifold)
     (alpha : geometry.SecondHomology X) : K :=
@@ -110,14 +98,13 @@ noncomputable def EvalC
 transported by the induced map on actual manifold `H₂`.
 -/
 theorem EvalC_diffeomorphism_invariant
-    {presentationScope : PresentationScope}
     {auxiliaryH2 : Type uAuxH2} [AddCommGroup auxiliaryH2]
     {geometry : FourManifoldGeometry.{uX, uH, uD}}
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       HomologicalFourManifoldTopologyBoundary
-        (handlePresentationTheory presentationScope auxiliaryH2)
+        (handlePresentationTheory auxiliaryH2)
         geometry)
     {X Y : geometry.FourManifold}
     (f :
@@ -134,17 +121,16 @@ On a supplied marked Kirby presentation, the manifold-level invariant is the
 explicit presentation formula.
 -/
 theorem EvalC_on_presentation
-    {presentationScope : PresentationScope}
     {auxiliaryH2 : Type uAuxH2} [AddCommGroup auxiliaryH2]
     {geometry : FourManifoldGeometry.{uX, uH, uD}}
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       HomologicalFourManifoldTopologyBoundary
-        (handlePresentationTheory presentationScope auxiliaryH2)
+        (handlePresentationTheory auxiliaryH2)
         geometry)
     (presentation :
-      StandardDottedCanonicalPresentation presentationScope auxiliaryH2)
+      StandardDottedCanonicalPresentation auxiliaryH2)
     (alpha :
       presentation.canonicalPresentation.topology.handleChain.SecondHomology) :
     EvalC 𝒞 automorphism fourManifoldTopology
@@ -154,7 +140,7 @@ theorem EvalC_on_presentation
       presentation.canonicalPresentation.EvalC 𝒞 automorphism alpha :=
   fourManifoldTopology.constructInvariant_on_presentation
     (presentationEvaluation
-      𝒞 automorphism presentationScope auxiliaryH2)
+      𝒞 automorphism auxiliaryH2)
     (evalC_local_move_invariant 𝒞 automorphism)
     ⟨presentation, alpha⟩
 

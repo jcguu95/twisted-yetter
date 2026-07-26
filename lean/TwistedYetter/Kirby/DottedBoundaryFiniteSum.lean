@@ -36,11 +36,10 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 /-- The puncture character is independent of the isolated dotted label. -/
 theorem boundaryCharacterPower_labelingWithDotted_eq_reference
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (dottedLabel : S)
@@ -48,7 +47,7 @@ theorem boundaryCharacterPower_labelingWithDotted_eq_reference
     (coefficient : ℤ) :
     boundaryCharacterPower
         category.premodular.toFusionCategoryData automorphism
-        (presentation.labelOf category
+        (presentation.labelOf category.premodular
           (geometry.labelingWithDotted dottedLabel remaining))
         geometry.punctureBoundary coefficient =
       boundaryCharacterPower
@@ -82,11 +81,10 @@ theorem boundaryCharacterPower_smul_openKirbyEncirclingOperator
 
 /-- The common boundary character after fixing all non-dotted labels. -/
 noncomputable def referenceBoundaryCharacter
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -98,10 +96,9 @@ noncomputable def referenceBoundaryCharacter
 
 /-- One simple-labelled open-meridian evaluation in the fixed boundary type. -/
 noncomputable def referenceOpenEvaluation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -119,10 +116,9 @@ noncomputable def referenceOpenEvaluation
 
 /-- Closed evaluation of the factorized term at one dotted label. -/
 noncomputable def factorizedEvaluation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -133,15 +129,14 @@ noncomputable def factorizedEvaluation
         geometry.dottedComponent.componentId
         geometry.punctureBoundary)).interpret
       category.premodular
-      (presentation.labelOf category
+      (presentation.labelOf category.premodular
         (geometry.labelingWithDotted dottedLabel remaining)))
 
 /-- The factorized closed term is the common context applied to the opening. -/
 theorem factorizedEvaluation_eq_context
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -156,11 +151,10 @@ theorem factorizedEvaluation_eq_context
 
 /-- Specialization of character-neutrality to the fixed reference boundary. -/
 theorem referenceBoundaryCharacter_smul_openOperator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -183,11 +177,10 @@ The exact finite sum over the selected dotted label is unchanged after
 inserting any integral boundary-character power.
 -/
 theorem fixedRemaining_dottedSum_invariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
@@ -195,7 +188,7 @@ theorem fixedRemaining_dottedSum_invariant
     (∑ dottedLabel,
       (boundaryCharacterPower
           category.premodular.toFusionCategoryData automorphism
-          (presentation.labelOf category
+          (presentation.labelOf category.premodular
             (geometry.labelingWithDotted dottedLabel remaining))
           geometry.punctureBoundary coefficient *
         category.premodular.quantumDimension dottedLabel) •

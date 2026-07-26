@@ -58,8 +58,8 @@ inductive EventWindow :
         (.birth eventId componentId positiveId negativeId leading.length)
         (leading ++ suffix)
         (leading ++
-          [positiveStrand positiveId componentId,
-            negativeStrand negativeId componentId] ++ suffix)
+          ([positiveStrand positiveId componentId,
+            negativeStrand negativeId componentId] ++ suffix))
   | deathPositiveNegative
       (eventId componentId firstId secondId positiveId negativeId : String)
       (listed_ids_sound :
@@ -69,8 +69,8 @@ inductive EventWindow :
       EventWindow
         (.death eventId componentId firstId secondId)
         (leading ++
-          [positiveStrand positiveId componentId,
-            negativeStrand negativeId componentId] ++ suffix)
+          ([positiveStrand positiveId componentId,
+            negativeStrand negativeId componentId] ++ suffix))
         (leading ++ suffix)
   | deathNegativePositive
       (eventId componentId firstId secondId negativeId positiveId : String)
@@ -81,8 +81,8 @@ inductive EventWindow :
       EventWindow
         (.death eventId componentId firstId secondId)
         (leading ++
-          [negativeStrand negativeId componentId,
-            positiveStrand positiveId componentId] ++ suffix)
+          ([negativeStrand negativeId componentId,
+            positiveStrand positiveId componentId] ++ suffix))
         (leading ++ suffix)
   | crossing
       (eventId overId underId : String)
@@ -93,7 +93,7 @@ inductive EventWindow :
       EventWindow
         (.crossing eventId overId underId sign)
         (leading ++
-          [
+          ([
             {
               strandId := overId
               componentId := overComponent
@@ -104,9 +104,9 @@ inductive EventWindow :
               componentId := underComponent
               orientation := underOrientation
             }
-          ] ++ suffix)
+          ] ++ suffix))
         (leading ++
-          [
+          ([
             {
               strandId := underId
               componentId := underComponent
@@ -117,15 +117,15 @@ inductive EventWindow :
               componentId := overComponent
               orientation := overOrientation
             }
-          ] ++ suffix)
+          ] ++ suffix))
   | identityCoupon
       (eventId couponId : String)
       (localWindow leading suffix : List StrandState) :
       EventWindow
         (.coupon eventId couponId "identity"
           (localWindow.map StrandState.strandId))
-        (leading ++ localWindow ++ suffix)
-        (leading ++ localWindow ++ suffix)
+        (leading ++ (localWindow ++ suffix))
+        (leading ++ (localWindow ++ suffix))
   | framingTwist
       (eventId strandId : String)
       (sign : CrossingSign)
@@ -134,8 +134,8 @@ inductive EventWindow :
       (leading suffix : List StrandState) :
       EventWindow
         (.framingTwist eventId strandId sign)
-        (leading ++ [strand] ++ suffix)
-        (leading ++ [strand] ++ suffix)
+        (leading ++ ([strand] ++ suffix))
+        (leading ++ ([strand] ++ suffix))
   | planarIdentity
       (eventId : String)
       (state : List StrandState) :
@@ -174,6 +174,125 @@ def toExecutionTrace
       .nil state
   | .cons _ step_sound tail =>
       .cons step_sound tail.toExecutionTrace
+
+/--
+Concatenate two typed canonical traces whose intermediate strand states
+agree definitionally.
+
+The intermediate state is an index of both inputs, so this operation cannot
+silently splice traces with incompatible open boundaries.
+-/
+def append
+    {raw : RawPresentation}
+    {firstEvents secondEvents : List SliceEvent}
+    {initial middle final : List StrandState} :
+    Trace raw firstEvents initial middle →
+    Trace raw secondEvents middle final →
+      Trace raw (firstEvents ++ secondEvents) initial final
+  | .nil _, second =>
+      second
+  | .cons window stepSound tail, second =>
+      .cons window stepSound (tail.append second)
+
+/--
+Split a typed trace at an exact event-list prefix.
+
+The existential middle state is reconstructed from the trace itself.  Both
+returned traces retain their original `EventWindow` and `applyEvent`
+certificates; no replay evidence is discarded or regenerated.
+-/
+def splitAppend
+    {raw : RawPresentation}
+    (firstEvents secondEvents : List SliceEvent)
+    {initial final : List StrandState}
+    (trace : Trace raw (firstEvents ++ secondEvents) initial final) :
+    Σ middle : List StrandState,
+      Trace raw firstEvents initial middle ×
+        Trace raw secondEvents middle final := by
+  induction firstEvents generalizing initial with
+  | nil =>
+      exact ⟨initial, .nil initial, trace⟩
+  | cons event rest inductionHypothesis =>
+      cases trace with
+      | cons window stepSound tail =>
+          obtain ⟨middle, prefixTrace, suffixTrace⟩ :=
+            inductionHypothesis tail
+          exact
+            ⟨middle, .cons window stepSound prefixTrace, suffixTrace⟩
+
+/-- Appending and then splitting recovers an extensionally identical replay. -/
+theorem append_splitAppend
+    {raw : RawPresentation}
+    (firstEvents secondEvents : List SliceEvent)
+    {initial final : List StrandState}
+    (trace : Trace raw (firstEvents ++ secondEvents) initial final) :
+    let split := trace.splitAppend firstEvents secondEvents
+    split.2.1.append split.2.2 = trace := by
+  induction firstEvents generalizing initial with
+  | nil =>
+      rfl
+  | cons event rest inductionHypothesis =>
+      cases trace with
+      | cons window stepSound tail =>
+          simpa [splitAppend, append] using inductionHypothesis tail
+
+/--
+An exact prefix/window/suffix decomposition of one typed canonical trace.
+
+The three traces retain every original replay certificate.  The final field
+proves that the pieces reconstruct the supplied trace; callers therefore
+cannot replace the selected local window by an unrelated event script.
+-/
+structure ThreeWaySplit
+    {raw : RawPresentation}
+    (prefixEvents windowEvents suffixEvents : List SliceEvent)
+    {initial final : List StrandState} where
+  wholeTrace :
+    Trace raw
+      (prefixEvents ++ windowEvents ++ suffixEvents)
+      initial final
+  afterPrefix : List StrandState
+  afterWindow : List StrandState
+  prefixTrace :
+    Trace raw prefixEvents initial afterPrefix
+  windowTrace :
+    Trace raw windowEvents afterPrefix afterWindow
+  suffixTrace :
+    Trace raw suffixEvents afterWindow final
+  reassembles :
+    (prefixTrace.append windowTrace).append suffixTrace = wholeTrace
+
+/-- Compute the exact three-way split from a typed trace. -/
+def splitThree
+    {raw : RawPresentation}
+    (prefixEvents windowEvents suffixEvents : List SliceEvent)
+    {initial final : List StrandState}
+    (trace :
+      Trace raw
+        (prefixEvents ++ windowEvents ++ suffixEvents)
+        initial final) :
+    ThreeWaySplit (raw := raw) (initial := initial) (final := final)
+      prefixEvents windowEvents suffixEvents := by
+  let outer :=
+    trace.splitAppend (prefixEvents ++ windowEvents) suffixEvents
+  let inner :=
+    outer.2.1.splitAppend prefixEvents windowEvents
+  refine
+    {
+      wholeTrace := trace
+      afterPrefix := inner.1
+      afterWindow := outer.1
+      prefixTrace := inner.2.1
+      windowTrace := inner.2.2
+      suffixTrace := outer.2.2
+      reassembles := ?_
+    }
+  calc
+    (inner.2.1.append inner.2.2).append outer.2.2 =
+        outer.2.1.append outer.2.2 := by
+      rw [append_splitAppend]
+    _ = trace := by
+      rw [append_splitAppend]
 
 /-- Number of canonical windows in a trace. -/
 def stepCount

@@ -59,27 +59,23 @@ noncomputable section
 /--
 A category-neutral special Kirby diagram in the admitted canonical syntax.
 
-The scope records which closed connected oriented smooth four-manifold input
-the diagram belongs to.  It is implicit in every public algebraic operation.
+The mathematical diagram carries no repository scope or artifact identity.
 -/
-abbrev SpecialKirbyDiagram
-    (scope : ClosedConnectedSmoothOrientedFourManifoldInput) :=
-  StandardDottedCanonicalPresentation scope ℤ
+abbrev SpecialKirbyDiagram :=
+  StandardDottedCanonicalPresentation ℤ
 
 namespace SpecialKirbyDiagram
 
 /-- The second homology computed directly from the diagram's handle complex. -/
 abbrev HandleH₂
-    {scope : ClosedConnectedSmoothOrientedFourManifoldInput}
-    (P : SpecialKirbyDiagram scope) :=
+    (P : SpecialKirbyDiagram) :=
   P.canonicalPresentation.topology.handleChain.SecondHomology
 
 end SpecialKirbyDiagram
 
 /-- One elementary Kirby move between two special diagrams. -/
 abbrev ElementaryKirbyMove
-    {scope : ClosedConnectedSmoothOrientedFourManifoldInput}
-    (P Q : SpecialKirbyDiagram scope) :=
+    (P Q : SpecialKirbyDiagram) :=
   TopologicalTableTwoMove
     P.canonicalPresentation.topology
     Q.canonicalPresentation.topology
@@ -93,8 +89,7 @@ For a two-handle slide this performs the corresponding basis change; it does
 not leave the coordinate vector artificially fixed.
 -/
 noncomputable def transportH₂
-    {scope : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {P Q : SpecialKirbyDiagram scope}
+    {P Q : SpecialKirbyDiagram}
     (m : ElementaryKirbyMove P Q) :
     P.HandleH₂ ≃+ Q.HandleH₂ :=
   (enrichedMove m).homologyTransport.chainEquivalence
@@ -109,8 +104,7 @@ diagram and one class in its handle-chain `H₂`.
 noncomputable def TwistedKirbyEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (η : 𝒞.TensorIdentityAutomorphism)
-    {scope : ClosedConnectedSmoothOrientedFourManifoldInput}
-    (P : SpecialKirbyDiagram scope)
+    (P : SpecialKirbyDiagram)
     (a : P.HandleH₂) : K :=
   P.canonicalPresentation.EvalC 𝒞 η a
 
@@ -123,15 +117,14 @@ No graphical law or local-invariance proof is accepted as an argument.
 theorem TwistedKirbyEvaluation_elementaryMove_invariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (η : 𝒞.TensorIdentityAutomorphism)
-    {scope : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {P Q : SpecialKirbyDiagram scope}
+    {P Q : SpecialKirbyDiagram}
     (m : ElementaryKirbyMove P Q)
     (a : P.HandleH₂) :
     TwistedKirbyEvaluation 𝒞 η P a =
       TwistedKirbyEvaluation 𝒞 η Q (m.transportH₂ a) := by
   exact
     evalC_local_move_invariant
-      (manifold := scope) (H2 := ℤ) 𝒞 η m a
+      (H2 := ℤ) 𝒞 η m a
 
 end
 

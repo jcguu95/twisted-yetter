@@ -20,10 +20,9 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 def rejected
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {package : Package data}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : InvariantInputs data package manifold H2) :
-    InvariantInputs data package manifold H2 :=
+    (inputs : InvariantInputs data package H2) :
+    InvariantInputs data package H2 :=
   { inputs with
     assemblyCertificateHash := "mutable-alias"
     assembly_certificate_hash_shape := by decide }

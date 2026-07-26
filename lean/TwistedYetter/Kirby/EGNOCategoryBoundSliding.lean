@@ -2,6 +2,7 @@ import TwistedYetter.Fusion.EGNOSphericalInsertion
 import TwistedYetter.Kirby.EGNOKirbyColorExpansion
 import TwistedYetter.Kirby.FramedSliding
 import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.LinearContext
 import TwistedYetter.Kirby.Presentation
 
 /-!
@@ -530,12 +531,192 @@ noncomputable def before (x : S) : Diagram C .unit .unit :=
 noncomputable def after (x : S) : Diagram C .unit .unit :=
   Context.plug C (window.context x) (window.openAfter x)
 
+/-- Fully expanded fixed-simple endpoint before the ordinary-colour slide. -/
+noncomputable def expandedBeforeTerm (x stationaryLabel : S) :
+    Diagram C .unit .unit :=
+  Context.plug C (window.context x)
+    (law.beforeSimple stationaryLabel
+        (data.simple x ⊗ window.source.denote) ≫ᵈ
+      liftExterior (data.simple x) window.exterior)
+
+/-- Fully expanded fixed-simple endpoint after the ordinary-colour slide. -/
+noncomputable def expandedAfterTerm (x stationaryLabel : S) :
+    Diagram C .unit .unit :=
+  Context.plug C (window.context x)
+    (liftExterior (data.simple x) window.exterior ≫ᵈ
+      law.afterSimple stationaryLabel
+        (data.simple x ⊗ window.target.denote))
+
+/-- Explicit double sum before the slide; no Kirby colour is collapsed. -/
+noncomputable def expandedLinearBefore (coefficient : S → K) :
+    LinearDiagram (R := K) (C := C) .unit .unit :=
+  ∑ x : S, coefficient x •
+    ∑ stationaryLabel : S,
+      data.quantumDimension stationaryLabel •
+        LinearDiagram.atom (R := K)
+          (window.expandedBeforeTerm x stationaryLabel)
+
+/-- Explicit double sum after the slide; no Kirby colour is collapsed. -/
+noncomputable def expandedLinearAfter (coefficient : S → K) :
+    LinearDiagram (R := K) (C := C) .unit .unit :=
+  ∑ x : S, coefficient x •
+    ∑ stationaryLabel : S,
+      data.quantumDimension stationaryLabel •
+        LinearDiagram.atom (R := K)
+          (window.expandedAfterTerm x stationaryLabel)
+
+/-- The expanded before-fiber evaluates to the collapsed ordinary window. -/
+theorem expanded_before_fiber_eval (x : S) :
+    LinearDiagram.eval
+        (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            LinearDiagram.atom (R := K)
+              (window.expandedBeforeTerm x stationaryLabel)) =
+      Diagram.eval C (window.before x) := by
+  let exterior :=
+    liftExterior (data.simple x) window.exterior
+  let linearContext :=
+    LinearContext.evalContextLinearMap (R := K) (window.context x)
+  have openExpansion :
+      (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            Diagram.eval C
+              (law.beforeSimple stationaryLabel
+                  (data.simple x ⊗ window.source.denote) ≫ᵈ exterior)) =
+        Diagram.eval C (window.openBefore x) := by
+    calc
+      _ =
+          (∑ stationaryLabel : S,
+              data.quantumDimension stationaryLabel •
+                Diagram.eval C
+                  (law.beforeSimple stationaryLabel
+                    (data.simple x ⊗ window.source.denote))) ≫
+            Diagram.eval C exterior := by
+        rw [Preadditive.sum_comp]
+        simp [Diagram.eval]
+      _ =
+          Diagram.eval C
+              (law.toSourcedSlidingLaw.before_diagram
+                (data.simple x ⊗ window.source.denote)) ≫
+            Diagram.eval C exterior := by
+        rw [law.before_is_dimension_weighted]
+      _ = Diagram.eval C (window.openBefore x) := by
+        rfl
+  calc
+    _ = ∑ stationaryLabel : S,
+        data.quantumDimension stationaryLabel •
+          Diagram.eval C
+            (window.expandedBeforeTerm x stationaryLabel) := by
+      simp
+    _ = linearContext
+        (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            Diagram.eval C
+              (law.beforeSimple stationaryLabel
+                  (data.simple x ⊗ window.source.denote) ≫ᵈ exterior)) := by
+      rw [map_sum]
+      apply Finset.sum_congr rfl
+      intro stationaryLabel _
+      rw [map_smul]
+      exact congrArg
+        (fun value => data.quantumDimension stationaryLabel • value)
+        (LinearContext.evalContextLinearMap_diagram
+          (window.context x)
+          (law.beforeSimple stationaryLabel
+              (data.simple x ⊗ window.source.denote) ≫ᵈ exterior)).symm
+    _ = linearContext (Diagram.eval C (window.openBefore x)) :=
+      congrArg linearContext openExpansion
+    _ = Diagram.eval C (window.before x) :=
+      LinearContext.evalContextLinearMap_diagram
+        (window.context x) (window.openBefore x)
+
+/-- The expanded after-fiber evaluates to the collapsed ordinary window. -/
+theorem expanded_after_fiber_eval (x : S) :
+    LinearDiagram.eval
+        (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            LinearDiagram.atom (R := K)
+              (window.expandedAfterTerm x stationaryLabel)) =
+      Diagram.eval C (window.after x) := by
+  let exterior :=
+    liftExterior (data.simple x) window.exterior
+  let linearContext :=
+    LinearContext.evalContextLinearMap (R := K) (window.context x)
+  have openExpansion :
+      (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            Diagram.eval C
+              (exterior ≫ᵈ
+                law.afterSimple stationaryLabel
+                  (data.simple x ⊗ window.target.denote))) =
+        Diagram.eval C (window.openAfter x) := by
+    calc
+      _ =
+          Diagram.eval C exterior ≫
+            (∑ stationaryLabel : S,
+              data.quantumDimension stationaryLabel •
+                Diagram.eval C
+                  (law.afterSimple stationaryLabel
+                    (data.simple x ⊗ window.target.denote))) := by
+        rw [Preadditive.comp_sum]
+        simp [Diagram.eval]
+      _ =
+          Diagram.eval C exterior ≫
+            Diagram.eval C
+              (law.toSourcedSlidingLaw.after_diagram
+                (data.simple x ⊗ window.target.denote)) := by
+        rw [law.after_is_dimension_weighted]
+      _ = Diagram.eval C (window.openAfter x) := by
+        rfl
+  calc
+    _ = ∑ stationaryLabel : S,
+        data.quantumDimension stationaryLabel •
+          Diagram.eval C
+            (window.expandedAfterTerm x stationaryLabel) := by
+      simp
+    _ = linearContext
+        (∑ stationaryLabel : S,
+          data.quantumDimension stationaryLabel •
+            Diagram.eval C
+              (exterior ≫ᵈ
+                law.afterSimple stationaryLabel
+                  (data.simple x ⊗ window.target.denote))) := by
+      rw [map_sum]
+      apply Finset.sum_congr rfl
+      intro stationaryLabel _
+      rw [map_smul]
+      exact congrArg
+        (fun value => data.quantumDimension stationaryLabel • value)
+        (LinearContext.evalContextLinearMap_diagram
+          (window.context x)
+          (exterior ≫ᵈ
+            law.afterSimple stationaryLabel
+              (data.simple x ⊗ window.target.denote))).symm
+    _ = linearContext (Diagram.eval C (window.openAfter x)) :=
+      congrArg linearContext openExpansion
+    _ = Diagram.eval C (window.after x) :=
+      LinearContext.evalContextLinearMap_diagram
+        (window.context x) (window.openAfter x)
+
 /-- Closing in an arbitrary typed context preserves the fixed-label proof. -/
 theorem term_sound (x : S) :
     Diagram.eval C (window.before x) =
       Diagram.eval C (window.after x) :=
   Context.eval_plug_congr C (window.context x)
     (window.open_term_sound x)
+
+/-- The explicit double sum is the same evaluator-side slide calculation. -/
+theorem expanded_linear_eval_sound (coefficient : S → K) :
+    LinearDiagram.eval (window.expandedLinearBefore coefficient) =
+      LinearDiagram.eval (window.expandedLinearAfter coefficient) := by
+  simp only [expandedLinearBefore, expandedLinearAfter, map_sum, map_smul]
+  apply Finset.sum_congr rfl
+  intro x _
+  exact congrArg (fun value => coefficient x • value) (by
+    simpa only [map_sum, map_smul, LinearDiagram.eval_atom] using
+      ((window.expanded_before_fiber_eval x).trans
+        ((window.term_sound x).trans
+          (window.expanded_after_fiber_eval x).symm)))
 
 /-- Formal coefficient-weighted sum before the fixed-label slides. -/
 noncomputable def linearBefore (coefficient : S → K) :

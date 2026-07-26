@@ -56,10 +56,9 @@ structure CanonicalMarkedMove
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {alpha : H2}
-    (source target : AdmissiblePresentation manifold H2 alpha) where
+    (source target : AdmissiblePresentation H2 alpha) where
   topologyMove :
     TopologicalTableTwoMove
       source.state.presentation.topology
@@ -77,11 +76,10 @@ noncomputable def canonicalMarkedPresentationTheory
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     HandlePresentationTheory where
-  Presentation := AdmissiblePresentation manifold H2 alpha
+  Presentation := AdmissiblePresentation H2 alpha
   Marking := fun _ => PUnit
   ElementaryMove := fun source target =>
     CanonicalMarkedMove 𝒞 automorphism completion source target
@@ -92,12 +90,11 @@ noncomputable def canonicalMarkedEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     PresentationEvaluation
       (canonicalMarkedPresentationTheory
-        𝒞 automorphism completion manifold H2 alpha) K where
+        𝒞 automorphism completion H2 alpha) K where
   value := fun presentation _ => presentation.value 𝒞 automorphism
 
 /--
@@ -110,12 +107,11 @@ theorem canonicalMarkedEvaluation_localInvariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     IsInvariantUnderElementaryMoves
       (canonicalMarkedEvaluation
-        𝒞 automorphism completion manifold H2 alpha) := by
+        𝒞 automorphism completion H2 alpha) := by
   intro source target move _
   exact eval_sound
     (localCycleCalculation_of_completion completion move.topologyMove)
@@ -127,15 +123,14 @@ noncomputable def evaluationOnCanonicalKirbyClass
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     (canonicalMarkedPresentationTheory
-      𝒞 automorphism completion manifold H2 alpha).KirbyClass → K :=
+      𝒞 automorphism completion H2 alpha).KirbyClass → K :=
   (canonicalMarkedEvaluation
-    𝒞 automorphism completion manifold H2 alpha).descendToKirbyClass
+    𝒞 automorphism completion H2 alpha).descendToKirbyClass
       (canonicalMarkedEvaluation_localInvariant
-        𝒞 automorphism completion manifold H2 alpha)
+        𝒞 automorphism completion H2 alpha)
 
 /--
 The category-free topology input needed to identify the generated quotient
@@ -145,12 +140,11 @@ abbrev TopologyInput
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :=
   FourManifoldTopologyBoundary.{_, _, _, uX, uXHom}
     (canonicalMarkedPresentationTheory
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
 
 /--
 The resulting scalar on marked closed oriented smooth four-manifolds.
@@ -159,41 +153,39 @@ noncomputable def EvalC
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism completion manifold H2 alpha) :
+        𝒞 automorphism completion H2 alpha) :
     topology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
   topology.fourManifoldInvariant
     (canonicalMarkedEvaluation
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
     (canonicalMarkedEvaluation_localInvariant
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
 
 /-- `EvalC` is constant under every oriented diffeomorphism. -/
 theorem EvalC_diffeomorphism_invariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism completion manifold H2 alpha)
+        𝒞 automorphism completion H2 alpha)
     {left right :
       topology.realization.MarkedClosedOrientedSmoothFourManifold}
     (diffeomorphism :
       topology.realization.orientedDiffeomorphism.Hom left right) :
-    EvalC 𝒞 automorphism completion manifold H2 alpha topology left =
-      EvalC 𝒞 automorphism completion manifold H2 alpha topology right :=
+    EvalC 𝒞 automorphism completion H2 alpha topology left =
+      EvalC 𝒞 automorphism completion H2 alpha topology right :=
   topology.fourManifoldInvariant_diffeomorphism_invariant
     (canonicalMarkedEvaluation
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
     (canonicalMarkedEvaluation_localInvariant
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
     diffeomorphism
 
 /-- Pulling `EvalC` back to a presentation gives the explicit formula. -/
@@ -201,14 +193,13 @@ theorem EvalC_on_presentation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (completion : Completion 𝒞 automorphism)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism completion manifold H2 alpha)
-    (presentation : AdmissiblePresentation manifold H2 alpha) :
-    EvalC 𝒞 automorphism completion manifold H2 alpha topology
+        𝒞 automorphism completion H2 alpha)
+    (presentation : AdmissiblePresentation H2 alpha) :
+    EvalC 𝒞 automorphism completion H2 alpha topology
         (topology.realization.realize
           {
             presentation := presentation
@@ -217,9 +208,9 @@ theorem EvalC_on_presentation
       presentation.value 𝒞 automorphism := by
   exact topology.fourManifoldInvariant_on_presentation
     (canonicalMarkedEvaluation
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
     (canonicalMarkedEvaluation_localInvariant
-      𝒞 automorphism completion manifold H2 alpha)
+      𝒞 automorphism completion H2 alpha)
     {
       presentation := presentation
       marking := PUnit.unit

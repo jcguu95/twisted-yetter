@@ -1,0 +1,286 @@
+{
+  "schema": "lean-graphical-axiom-elimination-decisions-v1",
+  "status": "IN_PROGRESS",
+  "started_at_utc": "2026-07-25T20:35:15Z",
+  "git_commit": "00d6cb179059804b2bd985834aec0347bb4b785e",
+  "git_dirty": true,
+  "target_theorem": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+  "target_axioms_to_eliminate": [
+    "TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie.standardMovie",
+    "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardFramedIsotopyTypedDerivation",
+    "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardOneTwoBirthTypedDerivation",
+    "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardOneTwoDeathTypedDerivation",
+    "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardTwoThreeBirthTypedDerivation",
+    "TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput.standardTwoThreeDeathTypedDerivation"
+  ],
+  "decisions": [
+    {
+      "timestamp_utc": "2026-07-25T20:35:15Z",
+      "decision": "Eliminate the four cancellation derivation axioms before framed isotopy and the shared slide movie.",
+      "reason": "Cancellation moves have fixed local diagrams and finite handle-role changes, making them the smallest obligations and the best test of whether the serialized recipe contains enough proof-relevant geometry."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:35:15Z",
+      "decision": "Do not replace an axiom with a renamed constructor or an unchecked equality.",
+      "reason": "Each replacement must derive exponent transport, diagram factorization, component support, and zero-exponent facts from existing source-bound data or from a strictly smaller, explicitly disclosed boundary."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:35:15Z",
+      "decision": "Run at most one single-threaded Lean process for this project while the other Lean project is active.",
+      "reason": "The machine permits at most two Lean processes in total and one slot is already occupied by another project."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:55:38Z",
+      "decision": "Use the authorized Hetzner host as a controlled Lean validation worker with at most four concurrent Lean processes.",
+      "reason": "The host has 16 vCPUs and 30 GiB RAM. Start with one smoke process, use Lean 4.29.1 and the manifest-pinned Mathlib revision, download precompiled Mathlib cache, and verify process count and resources before and after every batch."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:59:20Z",
+      "decision": "Temporarily cap this project's remote Lean concurrency at one.",
+      "reason": "The shared Hetzner host already has unrelated Sage and Python computations consuming multiple full CPU cores. Do not terminate or interfere with them; reassess free capacity before every Lean batch and increase concurrency only when the host is actually idle enough."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:29:20Z",
+      "decision": "Derive canonical component support once from the executable trace and remove it from all four cancellation derivation boundaries.",
+      "reason": "The canonical event windows, applyEvent certificates, and serialized component registry already prove that every component ID inspected by the generated ribbon diagram has a finite presentation index. Keeping four separate support fields would duplicate a theorem as an external assumption and enlarge the silent-failure surface."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:32:22Z",
+      "decision": "Remove component-support fields from the generic added-component endpoint and cycle geometries as well.",
+      "reason": "Component support is a theorem of every CanonicalPresentation, not move-specific geometry. The evaluator now invokes the canonical trace theorem directly, preventing future move constructors from reintroducing this theorem as caller-supplied data."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:32:54Z",
+      "decision": "Do not launch another remote Lean validation yet.",
+      "reason": "The Hetzner host has zero Lean processes but roughly fourteen unrelated Python workers each consuming a full core on a sixteen-vCPU machine. Starting even one Lean now would oversubscribe the host; continue single-threaded local proof work and recheck before the final audit."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:38:19Z",
+      "decision": "Replace literal syntax equality of canonical ribbon diagrams with a kernel-checked GeneratedIsotopy witness.",
+      "reason": "Canonical traces may differ by parenthesization and insertion of common graphical context even when they represent the same framed ribbon movie. Requiring literal equality is stronger than the mathematics and encourages opaque equality transports; GeneratedIsotopy states the intended geometric relation, and its eval_eq theorem derives the scalar equality."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:40:44Z",
+      "decision": "Keep the four cancellation derivations unresolved after the isotopy-interface correction.",
+      "reason": "The source-bound recipe currently identifies component indices and trace windows, but it does not yet certify that the cancellation window is the concrete standard Hopf or unknot movie; the accepted handle-chain naturality axiom also does not expose the degree-two basis action needed to prove common-coordinate transport and zero new coefficients. Marking either fact proved now would be a silent semantic gap."
+    },
+    {
+      "timestamp_utc": "2026-07-25T21:40:44Z",
+      "decision": "Validate the corrected interfaces with one local single-threaded final-target build.",
+      "reason": "The LiteratureBackedCanonicalGraphicalInput module and TwistedYetterAxiomAudit both compiled successfully. The final audit still reports the same six explicit removable axioms, confirming that this change tightened their statements without hiding or falsely eliminating an obligation."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:06:12Z",
+      "decision": "Move the four cancellation degree-two coordinate obligations into the sole standard handle-chain naturality boundary and derive all four exponent transports in Lean.",
+      "reason": "The cancellation basis action is standard topology rather than graphical input. The downstream proofs now derive retained exponents and zero coefficients on newly inserted cancelling 2-handles; each cancellation graphical axiom contains only its exact GeneratedIsotopy obligation."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:06:12Z",
+      "decision": "Validate the relocated cancellation-coordinate boundary with a single-threaded local build.",
+      "reason": "SourceBackedHandleChainNaturality and LiteratureBackedCanonicalGraphicalInput compiled successfully in one LEAN_NUM_THREADS=1 process. No sorry or admit was introduced."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:11:27Z",
+      "decision": "Repair downstream dotted-boundary proofs by unfolding the relocated lower-level component exponent explicitly.",
+      "reason": "The first final-target audit exposed two tactic failures caused solely by the changed definitional shape of cycleComponentExponent. The repaired proof case-splits on the actual two-handle lookup and reuses the existing coordinate theorem; it does not add an assumption."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:11:27Z",
+      "decision": "Accept the single-threaded final TwistedYetter axiom audit after the H2 relocation.",
+      "reason": "The complete final target compiled successfully. The audit still exposes the same six removable graphical axioms, while each of the four cancellation axioms is now reduced to one GeneratedIsotopy statement and no longer assumes H2 coordinate transport, component support, or evaluator equality."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:11:27Z",
+      "decision": "Do not pretend the four remaining cancellation isotopies follow from the current serialized recipe.",
+      "reason": "PresentationWindowEdit pins event-list replacement and GraphicalEditProgram pins only component IDs for cancellation moves. Neither currently certifies the concrete local event movie needed to derive the endpoint GeneratedIsotopy. The next replacement must add a restricted, checkable cancellation-window script certificate and prove its ribbon-diagram interpretation, not move the same isotopy into another opaque field."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:13:31Z",
+      "decision": "Derive framed-isotopy degree-two exponent transport from the standard handle-chain naturality boundary.",
+      "reason": "Framed isotopy preserves the two-handle component correspondence and its transported degree-two coordinates. This belongs to standard topology rather than graphical input, exactly as the cancellation coordinate laws do."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:17:07Z",
+      "decision": "Reduce the framed-isotopy graphical axiom to one exact GeneratedIsotopy field.",
+      "reason": "The new ForwardSameDegreeTwoNaturality law and kernel-checked framedIsotopyExponentTransport remove the last H2 claim from FramedIsotopyTypedDerivation. SourceBackedHandleChainNaturality and LiteratureBackedCanonicalGraphicalInput compile successfully with no sorry or admit."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:17:07Z",
+      "decision": "Do not compile the current list of twenty-two framed-isotopy tags into a movie yet.",
+      "reason": "The serialized tags identify generator kinds and touched event IDs but omit the typed diagram parameters and contexts required to instantiate ComponentRibbonIsotopy.TaggedMove. Treating the names alone as a proof would be a semantic silent failure; the program must first carry a typed, checkable generator script."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:42:34Z",
+      "decision": "Separate the concrete local cancellation movie from the still-missing whole-presentation binding.",
+      "reason": "The existing cancellation GraphicalEditProgram records component IDs but does not bind the source or target event window to a typed EventWindow script. Proving the isolated ribbon calculation is valid progress; using it as the endpoint theorem without that binding would be a silent semantic gap."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:43:16Z",
+      "decision": "Kernel-check the isolated two--three birth/death event movie against the canonical zero-framed unknot.",
+      "reason": "The exact typed birth and death windows now form a GeneratedIsotopy primitive whose categorical soundness is proved by expansion plus Mathlib monoidal coherence. Both the graphical module and its isolated cancellation theorem compile with LEAN_NUM_THREADS=1 and no sorry or admit."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:46:03Z",
+      "decision": "Kernel-check the isolated one--two cancellation event movie against the canonical positive Hopf pair.",
+      "reason": "The six-event script explicitly births the meridian and dotted circle, performs the two positive crossings, and removes both circles. Lean proves its categorical interpretation equals the existing oneTwoHopfPair using only definitions and monoidal coherence. This closes the local algebraic core but not the endpoint trace-window binding."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:47:03Z",
+      "decision": "Import the local cancellation movie module into the formal graphical-input dependency chain and rerun the final axiom audit.",
+      "reason": "TwistedYetterAxiomAudit compiled successfully with LEAN_NUM_THREADS=1; git diff validation, JSON parsing, and the no-sorry/no-admit check also passed. The four cancellation axioms remain visible because the source/target canonical traces are not yet bound to these exact local scripts."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:52:45Z",
+      "decision": "Prove the category-neutral whole-trace lifting theorem before changing any source-bound recipe type.",
+      "reason": "GeneratedIsotopy.verticalTriple and traceTripleReplacement now derive a whole closed-diagram isotopy from typed prefix, local-window, and suffix isotopies. This removes the generic composition step from every cancellation obligation without adding a graphical or evaluator assumption."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:54:20Z",
+      "decision": "Reject unrestricted EventWindow uniqueness as the endpoint-binding proof.",
+      "reason": "Dependent elimination exposed that EventWindow alone does not encode the active-strand uniqueness and deterministic placement facts needed to identify two windows. Raw event equality and matching boundary indices are insufficient without the validated-presentation invariants. The failed experimental theorem was removed, and the module was rebuilt successfully."
+    },
+    {
+      "timestamp_utc": "2026-07-25T22:54:52Z",
+      "decision": "Narrow the remaining cancellation binding gap to validated trace locality.",
+      "reason": "The local one--two and two--three scripts and the generic whole-trace lifting are now proved. What remains is a theorem using FormalPresentation validation and canonical execution certificates to show that common recipe prefixes and suffixes select matching typed windows and that the cancellation event window is the exact isolated script."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:07:47Z",
+      "decision": "Build validated trace locality from the executable list operations rather than add uniqueness to CanonicalPresentation as a new field.",
+      "reason": "The validator already executes insertAt?, removeAdjacentPair?, and swapAdjacentPair?. Their preservation laws can be proved once in Lean and reused by every canonical trace, avoiding a caller-supplied coherence certificate."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:12:17Z",
+      "decision": "Kernel-check the first three active-strand uniqueness preservation lemmas.",
+      "reason": "CanonicalTraceLocality now proves insertion preserves uniqueness under explicit freshness, removal returns a sublist, and crossing returns a permutation. The module builds with LEAN_NUM_THREADS=1 and is imported by the cancellation movie module. The next step is to extract birth freshness from applyEvent success and lift these lemmas inductively over a canonical trace."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:37:36Z",
+      "decision": "Derive birth strand distinctness and freshness from successful executable validation.",
+      "reason": "CanonicalTraceLocality.birth_step_fresh now unfolds RawPresentation.applyEvent and proves that every successful birth has two distinct IDs absent from the incoming active boundary. All validator rejection branches are eliminated by contradiction; no new field or axiom was added."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:40:37Z",
+      "decision": "Lift active-strand uniqueness through every canonical event and every trace prefix.",
+      "reason": "EventWindow.preserves_activeIdsUnique handles all six event constructors: birth uses validator-derived freshness, death is a sublist, crossing is a permutation, and coupon, twist, and planar events retain the state. Trace.preserves_activeIdsUnique and splitPrefix_activeIdsUnique then prove the invariant for every validated trace cut. The module compiled with one Lean thread and contains no sorry or admit."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:42:30Z",
+      "decision": "Do not yet strengthen GraphicalEditProgram with an underspecified cancellation script field.",
+      "reason": "The exact cancellation binding must describe both the nonempty source event window and the target insertion/deletion window inside an arbitrary active boundary. Recording only the isolated target Hopf or unknot event list would not prove that the source window is the corresponding identity nor that the surrounding trace contexts agree. The next construction must be a typed contextual cancellation-window certificate, not a renamed endpoint isotopy axiom."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:43:54Z",
+      "decision": "Accept the single-threaded downstream audit after adding canonical trace uniqueness.",
+      "reason": "CanonicalCancellationRibbonMovies, LiteratureBackedCanonicalGraphicalInput, and the final TwistedYetterAxiomAudit all compiled successfully with LEAN_NUM_THREADS=1. JSON parsing, git diff checking, and the no-sorry/no-admit scan passed. The visible removable-axiom denominator remains six; this round established infrastructure without falsely claiming one of those six endpoint obligations complete."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:54:47Z",
+      "decision": "Prove successful event execution has a presentation-independent target state.",
+      "reason": "RawPresentation.applyEvent reads the presentation registry only during birth. CanonicalTraceLocality now proves that a successful component lookup returns the queried component ID and then normalizes the two birth executions to the same pure body. Death, crossing, coupon, twist, and planar events are definitionally presentation-independent."
+    },
+    {
+      "timestamp_utc": "2026-07-25T23:56:56Z",
+      "decision": "Kernel-check common-prefix state determinism across different presentations.",
+      "reason": "Trace.final_eq_of_same_events proves by induction that equal event lists from an equal initial active boundary reach equal final boundaries, even for different raw presentations. Trace.splitPrefix_state_eq applies this to exact prefix cuts with unrelated suffixes. This supplies the shared intermediate-state index required by the existing traceTripleReplacement theorem without adding an axiom."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:00:40Z",
+      "decision": "Begin eventwise free-diagram determinism with the birth constructor.",
+      "reason": "CanonicalTraceDiagramDeterminism reconstructs the birth primitive from the incoming boundary using take/drop at the serialized insertion index, proves every typed birth window is HEq to that canonical primitive, and derives equality for any two witnesses. The new module and its cancellation downstream import compile with one Lean thread and no sorry or admit."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:02:06Z",
+      "decision": "Prove planar event-window diagram determinism and validate the first two event cases.",
+      "reason": "Every planar-isotopy marker now reduces to the identity on its incoming component boundary, so any two witnesses compile to the same free diagram. Birth and planar cases, the cancellation downstream module, JSON ledger, diff check, and no-sorry/no-admit scan all pass. Death, crossing, coupon, and framing-twist window determinism remain explicit next obligations."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:18:41Z",
+      "decision": "Derive framing-window diagram determinism from active-strand uniqueness.",
+      "reason": "CanonicalTraceLocality.unique_strand_split proves that a fixed strand ID has only one prefix/strand/suffix cut. CanonicalTraceDiagramDeterminism packages the cut, proves it unique without dependent-elimination shortcuts, and derives equality of any two framing-twist primitives."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:21:08Z",
+      "decision": "Derive crossing-window diagram determinism from the same unique-cut theorem.",
+      "reason": "The ordered over-strand position uniquely fixes the adjacent under strand and suffix. CrossingCut is reconstructed from each witness, proved unique, and interpreted by one deterministic free crossing primitive. Birth, planar, framing, and crossing event cases now compile; death and coupon remain."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:38:37Z",
+      "decision": "Derive identity-coupon window determinism from a nonempty serialized strand list.",
+      "reason": "CouponCut records only the concrete prefix/window/suffix decomposition and its strand-ID list. Active-ID uniqueness plus nonemptiness makes that cut unique, so any two accepted witnesses compile to the same contextual identity-coupon diagram. The production module compiles with one Lean thread; death is the only remaining event constructor."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:43:43Z",
+      "decision": "Complete eventwise free-diagram determinism with the death constructor.",
+      "reason": "CanonicalTraceLocality now proves that deleting an adjacent pair from a duplicate-free boundary has a unique prefix/pair/suffix cut once source and target are fixed. The death proof also derives the positive-negative versus negative-positive cap order from the concrete strand states. All six event kinds now have kernel-checked deterministic primitives, and the downstream cancellation module compiles single-threaded."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:46:39Z",
+      "decision": "Lift eventwise determinism to complete validated traces.",
+      "reason": "EventWindow.componentPrimitive_eq dispatches all six event kinds and derives coupon nonemptiness from successful executable validation. Trace.componentDiagram_eq_of_same_events then proves inductively that equal serialized event lists with equal endpoints produce equal free diagrams across different presentation records. The changed modules, downstream cancellation import, JSON ledger, diff check, and no-sorry/no-admit scan all pass with one Lean thread."
+    },
+    {
+      "timestamp_utc": "2026-07-26T00:49:48Z",
+      "decision": "Strengthen cancellation graphical programs with literal finite event scripts instead of assuming endpoint isotopy.",
+      "reason": "The old one--two and two--three GraphicalEditProgram constructors retained only component IDs, which cannot determine the local ribbon movie. They now carry exact identity/Hopf or identity/zero-framed scripts, and SourceBoundRecipe requires those concrete lists to equal the admitted source and target event windows. These are executable list equalities, not diagram or evaluator equalities."
+    },
+    {
+      "timestamp_utc": "2026-07-26T01:11:03Z",
+      "decision": "Kernel-check exact cancellation trace binding and the complete contextual two--three local normalization.",
+      "reason": "CanonicalCancellationTraceBinding now derives all four source/target three-way trace splits from recipe data. For the shortest two--three script it proves boundary restoration, deterministic compilation, and normalization to one contextual zero-framed unknot. A narrowly scoped surroundPairComp graphical rule was added with categorical soundness proved by monoidal coherence. The attempted broader closed-insertion factor rule was rejected and removed because its soundness proof was not yet kernel-closed; no endpoint axiom is falsely marked eliminated."
+    },
+    {
+      "timestamp_utc": "2026-07-26T01:30:37Z",
+      "decision": "Kernel-check the previously rejected closed-insertion factor through two smaller graphical rules.",
+      "reason": "The direct broad rule mixed free-context normalization with scalar centrality and obscured the failing step. The proof is now split into surroundClosedInsertion, which is pure monoidal coherence for the concrete free context, and closedInsertionFactor, whose soundness is the explicit Eckmann--Hilton/naturality calculation for End(1). ComponentRibbonIsotopy compiles single-threaded. This closes the algebraic factor needed by the two--three endpoint movie, but the endpoint axiom is not removed until the full source/target trace lift is kernel-checked."
+    },
+    {
+      "timestamp_utc": "2026-07-26T01:51:08Z",
+      "decision": "Eliminate standardTwoThreeBirthTypedDerivation from the final axiom denominator.",
+      "reason": "The recipe-bound identity and zero-framed scripts are split from both canonical traces. Lean derives the common prefix state, active-ID uniqueness, deterministic prefix/suffix diagrams, local zero-framed normalization, closed insertion factorization, and reattachment to both complete canonical traces. The final axiom audit no longer lists the two--three birth input; the corresponding death direction remains the next explicit obligation."
+    },
+    {
+      "timestamp_utc": "2026-07-26T04:20:18Z",
+      "decision": "Kernel-check boundary restoration for the complete six-event one--two Hopf trace.",
+      "reason": "oneTwoTrace_final_eq unfolds the executable birth, crossing, and death steps; derives strand freshness from successful validation; and proves that the final active boundary equals the initial boundary. This closes the raw execution calculation without assuming any diagram isotopy or evaluator equality."
+    },
+    {
+      "timestamp_utc": "2026-07-26T04:20:18Z",
+      "decision": "Reject an unproved contextual Hopf normalization constructor.",
+      "reason": "A trial constructor correctly exposed the desired statement, but its categorical soundness did not close by definitional simplification and monoidal automation. The trial was removed. The remaining one--two gap is therefore precisely the monoidal coherence relating six contextual event primitives to a closed Hopf-pair insertion; it is not silently admitted as a new graphical rule."
+    },
+    {
+      "timestamp_utc": "2026-07-26T04:20:18Z",
+      "decision": "Do not treat the framed-isotopy tag list as a typed graphical proof.",
+      "reason": "The serialized list records only event IDs and one of twenty-two generator names. It does not record the objects, coupons, local source and target boundaries, contexts, or intermediate diagrams required to instantiate a typed move. The framed endpoint axiom must be replaced by a proof-relevant typed program only after those parameters are supplied or reconstructed."
+    },
+    {
+      "timestamp_utc": "2026-07-26T04:45:27Z",
+      "decision": "Explode the premodular two-over-two attach and detach axioms into atomic endpoint geometry and exponent transport.",
+      "reason": "The former attach/detach assumptions simultaneously hid finite-product coefficient factorization, source-to-target exponent transport, coupon insertion/removal, and endpoint diagram binding. They are now kernel-checked definitions. Their only non-derived inputs are one ordinary sliding window, one SameComponentCycleExponentTransport, and explicit attach/detach contexts with exact identity/coupon endpoint equations."
+    },
+    {
+      "timestamp_utc": "2026-07-26T04:45:27Z",
+      "decision": "Kernel-check both stationary-weight factorizations and the source-to-target common coefficient equality for premodular two-over-two sliding.",
+      "reason": "SelectedCoordinateFiniteSum proves the two chosen coordinates and complement-label independence. CanonicalCycleSlideGeometry then factors source and target global weights at the stationary component, using only finite products, quantumDimension(unit)=1, and trivial tensor-automorphism power on the unit. CanonicalSourceBoundSlideMovie derives equality of the unit-specialized source and target coefficients from the explicitly named exponent transport. The final axiom audit passes and no longer lists the broad premodularTwoOverTwoAttach or premodularTwoOverTwoDetach axioms."
+    },
+    {
+      "timestamp_utc": "2026-07-26T05:07:26Z",
+      "decision": "Eliminate the custom premodular two-over-two exponent-transport axiom.",
+      "reason": "The standard handle-chain naturality boundary now states the explicit coordinate action of a two-handle slide. Lean derives SameComponentCycleExponentTransport from that accepted topology input, so no character exponent or twisted coefficient transport is assumed separately."
+    },
+    {
+      "timestamp_utc": "2026-07-26T05:07:26Z",
+      "decision": "Kernel-check the complete premodular two-over-two cycle-coloured evaluation equality and expose its exact axiom denominator.",
+      "reason": "The public theorem decomposes the full finite label sum into blocks, proves each character-dependent attach-slide-detach calculation, and reaggregates every block. Its dedicated #print axioms audit contains no twisted evaluation-equality axiom: only standard handle-chain naturality, ordinary Kirby-colour sliding, and six explicit diagram-endpoint bindings remain as human/literature-facing inputs."
+    }
+  ],
+  "obligations": {
+    "one_two_birth": "RAW_TRACE_AND_ISOLATED_CORE_KERNEL_CHECKED_CONTEXTUAL_MONOIDAL_COHERENCE_PENDING",
+    "one_two_death": "RAW_TRACE_AND_ISOLATED_CORE_KERNEL_CHECKED_CONTEXTUAL_MONOIDAL_COHERENCE_PENDING",
+    "two_three_birth": "KERNEL_CHECKED_AXIOM_ELIMINATED",
+    "two_three_death": "KERNEL_CHECKED_AXIOM_ELIMINATED",
+    "framed_isotopy": "TAG_NAMES_PRESENT_TYPED_PARAMETERS_CONTEXTS_AND_INTERMEDIATE_DIAGRAMS_MISSING",
+    "source_bound_slide_movie": "PREMODULAR_TWO_OVER_TWO_FULL_EVALUATION_THEOREM_KERNEL_CHECKED; CUSTOM_EXPONENT_TRANSPORT_AXIOM_ELIMINATED; ONE_LITERATURE_ORDINARY_SLIDE_INPUT_AND_SIX_EXPLICIT_HUMAN_DIAGRAM_ENDPOINT_BINDINGS_REMAIN_VISIBLE"
+  }
+}

@@ -2,13 +2,13 @@ import TwistedYetter.Kirby.CancellationSafeH2Transport
 import TwistedYetter.Kirby.KernelCheckedLocalMoveCompiler
 
 /-!
-# One-sided total representative transport for every certified move
+# Representative transport and the extra strict-death boundary
 
 Forward transport is total for framed isotopy, all three slides, and both
 births.  A directed cancellation death is not forward-total on arbitrary
-source cycles: the disappearing coefficient must be zero.  Its retained
-strict cycle retraction instead makes transport total in the reverse
-direction.
+source cycles: the disappearing coefficient must be zero.  Reverse totality
+at the raw-cycle level therefore requires a separately supplied strict cycle
+retraction; it does not follow from chain homotopy equivalence alone.
 
 This file proves that dichotomy for all eight checked constructors.  It is a
 chain-level theorem and contains no scalar evaluation field.
@@ -39,9 +39,8 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 def ForwardTotal
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move) : Prop :=
   ∀ {sourceAlpha : source.topology.handleChain.SecondHomology},
@@ -57,9 +56,8 @@ def ForwardTotal
 def BackwardTotal
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move) : Prop :=
   ∀ {targetAlpha : target.topology.handleChain.SecondHomology},
@@ -75,9 +73,8 @@ def BackwardTotal
 theorem forwardTotal_of_automaticallySafe
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     (automatic : AutomaticallySafe calculation) :
@@ -94,9 +91,8 @@ theorem forwardTotal_of_automaticallySafe
 theorem oneTwoDeath_backwardTotal
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (metadata :
       TableTwoMoveMetadata .oneTwoDeath
         source.topology target.topology)
@@ -104,19 +100,16 @@ theorem oneTwoDeath_backwardTotal
       source.topology.counts = target.topology.counts.addOneTwo)
     (transport : MarkedH2Transport source.topology target.topology)
     (geometry : OneTwoDeathCycleGeometry source target transport) :
+    StrictCycleRetraction
+      (LocalCycleCalculation.oneTwoDeath
+        (𝒞 := 𝒞) (automorphism := automorphism)
+        metadata countsSound transport geometry) →
     BackwardTotal
       (LocalCycleCalculation.oneTwoDeath
         (𝒞 := 𝒞) (automorphism := automorphism)
         metadata countsSound transport geometry) := by
+  intro retraction
   intro targetAlpha targetRepresentative
-  let calculation :=
-    LocalCycleCalculation.oneTwoDeath
-      (𝒞 := 𝒞) (automorphism := automorphism)
-      metadata countsSound transport geometry
-  let retraction :=
-    StrictCycleRetraction.ofOneTwoDeath
-      (𝒞 := 𝒞) (automorphism := automorphism)
-      metadata countsSound transport geometry
   exact ⟨retraction.liftRepresentative targetRepresentative,
     retraction.liftedStep targetRepresentative⟩
 
@@ -124,9 +117,8 @@ theorem oneTwoDeath_backwardTotal
 theorem twoThreeDeath_backwardTotal
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (metadata :
       TableTwoMoveMetadata .twoThreeDeath
         source.topology target.topology)
@@ -134,80 +126,17 @@ theorem twoThreeDeath_backwardTotal
       source.topology.counts = target.topology.counts.addTwoThree)
     (transport : MarkedH2Transport source.topology target.topology)
     (geometry : TwoThreeDeathCycleGeometry source target transport) :
+    StrictCycleRetraction
+      (LocalCycleCalculation.twoThreeDeath
+        (𝒞 := 𝒞) (automorphism := automorphism)
+        metadata countsSound transport geometry) →
     BackwardTotal
       (LocalCycleCalculation.twoThreeDeath
         (𝒞 := 𝒞) (automorphism := automorphism)
         metadata countsSound transport geometry) := by
+  intro retraction
   intro targetAlpha targetRepresentative
-  let calculation :=
-    LocalCycleCalculation.twoThreeDeath
-      (𝒞 := 𝒞) (automorphism := automorphism)
-      metadata countsSound transport geometry
-  let retraction :=
-    StrictCycleRetraction.ofTwoThreeDeath
-      (𝒞 := 𝒞) (automorphism := automorphism)
-      metadata countsSound transport geometry
   exact ⟨retraction.liftRepresentative targetRepresentative,
     retraction.liftedStep targetRepresentative⟩
-
-/-- Every term of the closed calculation grammar is total in a safe direction. -/
-theorem calculation_one_sided_total
-    {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
-    {move : TableTwoMove source.topology target.topology}
-    (calculation : LocalCycleCalculation 𝒞 automorphism move) :
-    ForwardTotal calculation ∨ BackwardTotal calculation := by
-  cases calculation with
-  | framedIsotopy metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.framedIsotopy metadata counts transport geometry) (by trivial))
-  | oneOverOne orientation metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.oneOverOne orientation metadata counts transport geometry)
-          (by trivial))
-  | twoOverOne orientation metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.twoOverOne orientation metadata counts transport geometry)
-          (by trivial))
-  | twoOverTwo orientation metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.twoOverTwo orientation metadata counts transport geometry)
-          (by trivial))
-  | oneTwoBirth metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.oneTwoBirth metadata counts transport geometry) (by trivial))
-  | oneTwoDeath metadata counts transport geometry =>
-      exact Or.inr
-        (oneTwoDeath_backwardTotal metadata counts transport geometry)
-  | twoThreeBirth metadata counts transport geometry =>
-      exact Or.inl
-        (forwardTotal_of_automaticallySafe
-          (.twoThreeBirth metadata counts transport geometry) (by trivial))
-  | twoThreeDeath metadata counts transport geometry =>
-      exact Or.inr
-        (twoThreeDeath_backwardTotal metadata counts transport geometry)
-
-/--
-Exhaustive transport theorem: every checked move is total in its safe
-direction, with deaths oriented backwards.
--/
-theorem one_sided_total
-    {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
-    (certificate : CertifiedMove 𝒞 automorphism source target) :
-    ForwardTotal certificate.compile ∨
-      BackwardTotal certificate.compile :=
-  calculation_one_sided_total certificate.compile
 
 end TwistedYetter.Kirby.CertifiedH2RepresentativeTransport

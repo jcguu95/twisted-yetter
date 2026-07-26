@@ -22,14 +22,13 @@ example
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
     [AddCommGroup H2]
     (evaluation :
-      (presentation : SpecialKirbyPresentation manifold H2) →
+      (presentation : SpecialKirbyPresentation H2) →
         DecoratedKirbyPresentation categoryData presentation)
     (localStep :
-      {source target : SpecialKirbyPresentation manifold H2} →
+      {source target : SpecialKirbyPresentation H2} →
       (move : TableTwoMove source target) →
       (alpha : H2) →
         EvaluatedTableTwoStep
@@ -40,7 +39,7 @@ example
         prescriptionCertificateHash = true)
     (sourceRefs : List String)
     (exactFormulaScope : String) :
-    HomologicallyTwistedKirbyPrescription categoryData manifold H2 where
+    HomologicallyTwistedKirbyPrescription categoryData H2 where
   evaluation := evaluation
   localStep := localStep
   prescriptionCertificateHash := prescriptionCertificateHash

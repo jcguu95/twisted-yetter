@@ -1,6 +1,7 @@
 import TwistedYetter.Kirby.EGNOCategoryBoundSliding
 import TwistedYetter.Kirby.ComponentRibbonDiagram
 import TwistedYetter.Kirby.KirbyCancellation
+import TwistedYetter.Kirby.ModularOpenKilling
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 import TwistedYetter.Fusion.EGNOPremodularModular
@@ -33,6 +34,7 @@ open TwistedYetter.Kirby.ComponentRibbonDiagram
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
 open TwistedYetter.Kirby.FramingNaturality
 open TwistedYetter.Kirby.KirbyCancellation
+open TwistedYetter.Kirby.ModularOpenKilling
 open TwistedYetter.Kirby.PresentationIsotopy
 open TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 
@@ -428,138 +430,26 @@ theorem egno_quantumDimension_unit
     (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
     𝒞.premodular.quantumDimension
         𝒞.premodular.toFusionCategoryData.unitIndex = 1 := by
-  let data := 𝒞.premodular
-  let p := data.pivotal
-  have hIsoDimension :
-      pivotalDimension p
-          (data.simple data.toFusionCategoryData.unitIndex) =
-        pivotalDimension p (𝟙_ C) := by
-    simpa [pivotalDimension, pivotalTrace] using
-      (pivotalTrace_cyclic p
-        data.toFusionCategoryData.unitIso.hom
-        data.toFusionCategoryData.unitIso.inv)
-  have hUnitDimension :
-      pivotalDimension p (𝟙_ C) = 𝟙 (𝟙_ C) := by
-    simp [p, RibbonFusionCategoryData.pivotal,
-      pivotalDimension, leftCategoricalTrace,
-      canonicalPivotalStructure, canonicalPivotalIso_hom_app,
-      canonicalPivotalHom, drinfeldHom,
-      balancedTwist_unit]
-    rw [drinfeldIso_hom]
-    rw [← tensorHom_id]
-    slice_lhs 2 3 =>
-      exact drinfeldHom_tensor_evaluation (𝟙_ C)
-    rw [braiding_tensorUnit_left]
-    let selectedDual : C :=
-      @HasRightDual.rightDual C _ _ (𝟙_ C)
-        (RightRigidCategory.rightDual (𝟙_ C))
-    let selectedPairing :
-        ExactPairing (𝟙_ C) selectedDual :=
-      @HasRightDual.exact C _ _ (𝟙_ C)
-        (RightRigidCategory.rightDual (𝟙_ C))
-    let unitPairing : ExactPairing (𝟙_ C) (𝟙_ C) :=
-      inferInstance
-    let comparison :=
-      rightDualIso selectedPairing unitPairing
-    let selectedCoevaluation :=
-      @ExactPairing.coevaluation C _ _ (𝟙_ C) selectedDual
-        selectedPairing
-    let selectedEvaluation :=
-      @ExactPairing.evaluation C _ _ (𝟙_ C) selectedDual
-        selectedPairing
-    let unitCoevaluation :=
-      @ExactPairing.coevaluation C _ _ (𝟙_ C) (𝟙_ C)
-        unitPairing
-    let unitEvaluation :=
-      @ExactPairing.evaluation C _ _ (𝟙_ C) (𝟙_ C)
-        unitPairing
-    have hCoevaluation :
-        selectedCoevaluation ≫
-            ((𝟙_ C) ◁ comparison.hom) =
-          unitCoevaluation := by
-      exact rightDualIso_coevaluation_hom
-        selectedPairing unitPairing
-    have hEvaluation :
-        (comparison.hom ▷ (𝟙_ C)) ≫
-            unitEvaluation =
-          selectedEvaluation := by
-      exact rightDualIso_hom_evaluation
-        selectedPairing unitPairing
-    have hMiddle :
-        ((λ_ selectedDual).hom ≫ (ρ_ selectedDual).inv) ≫
-            (comparison.hom ▷ (𝟙_ C)) =
-          ((𝟙_ C) ◁ comparison.hom) ≫
-            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) := by
-      simp [comparison]
-    change
-      selectedCoevaluation ≫
-          ((λ_ selectedDual).hom ≫
-            (ρ_ selectedDual).inv) ≫
-          selectedEvaluation =
-        𝟙 (𝟙_ C)
-    calc
-      _ =
-          selectedCoevaluation ≫
-            ((λ_ selectedDual).hom ≫
-              (ρ_ selectedDual).inv) ≫
-            (comparison.hom ▷ (𝟙_ C)) ≫
-            unitEvaluation := by
-              rw [hEvaluation]
-      _ =
-          selectedCoevaluation ≫
-            ((𝟙_ C) ◁ comparison.hom) ≫
-            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
-            unitEvaluation := by
-              simpa only [Category.assoc] using
-                congrArg
-                  (fun f =>
-                    selectedCoevaluation ≫ f ≫
-                      unitEvaluation)
-                  hMiddle
-      _ =
-          unitCoevaluation ≫
-            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
-            unitEvaluation := by
-              simpa only [Category.assoc] using
-                congrArg
-                  (fun f =>
-                    f ≫ ((λ_ (𝟙_ C)).hom ≫
-                      (ρ_ (𝟙_ C)).inv) ≫
-                      unitEvaluation)
-                  hCoevaluation
-      _ = 𝟙 (𝟙_ C) := by
-        dsimp [unitCoevaluation, unitEvaluation, unitPairing]
-        change
-          (ρ_ (𝟙_ C)).inv ≫
-              ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
-              (ρ_ (𝟙_ C)).hom =
-            𝟙 (𝟙_ C)
-        monoidal
-  rw [RibbonFusionCategoryData.quantumDimension,
-    RibbonFusionCategoryData.categoricalDimension]
-  rw [hIsoDimension, hUnitDimension]
-  exact 𝒞.premodular.toFusionCategoryData.closedScalar_identity
+  exact 𝒞.premodular.quantumDimension_unit
 
 /--
 Bärenz--Barrett Lemma 3.1, with the exact formal Kirby colour retained by the
 diagram-backed interface.
 -/
 axiom baerenzBarrett_ordinaryKirbySliding
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
-    OrdinaryKirbySlidingLaw 𝒞.premodular
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    OrdinaryKirbySlidingLaw 𝒞
 
 /--
-Bärenz--Barrett's killing lemma before summing the label on the strand being
-encircled.  A Kirby-coloured dotted meridian kills every nontransparent
-simple channel.  In a modular category the only surviving channel is the
-tensor unit, where the value is the global dimension.
+The closed Hopf-fiber killing identity derived from the open modular theorem.
 
-This label-resolved form is the standard categorical input needed to prove
-that a homological tensor-automorphism coupon is invisible after the Tham
-`k = 3` vacuum projection.  It still contains no whole-presentation
-evaluation and no Kirby-invariance conclusion.
+The free Hopf pair is definitionally the pivotal closure of the open dotted
+meridian.  Linearity moves the finite Kirby-colour sum through that closure;
+the imported simple open-killing identity then leaves only the tensor-unit
+channel.  Thus this closed statement is no longer an independent graphical
+axiom.
 -/
-axiom baerenzBarrett_hopfKirbyKillingFiber
+theorem baerenzBarrett_hopfKirbyKillingFiber
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (dottedId twoHandleId : String)
     (_distinct : dottedId ≠ twoHandleId)
@@ -583,7 +473,66 @@ axiom baerenzBarrett_hopfKirbyKillingFiber
           𝒞.premodular.toFusionCategoryData.unitIndex then
         globalDimension 𝒞.premodular
       else
-        0
+        0 := by
+  classical
+  let data := 𝒞.premodular
+  let X := data.simple twoHandleLabel
+  let fixed := fun dottedLabel =>
+    Diagram.eval C (openEncirclingDiagram data dottedLabel X)
+  have hcomponent (dottedLabel : S) :
+      Diagram.eval C
+          ((ComponentDiagram.oneTwoHopfPair
+            dottedId twoHandleId).interpret data
+              (labelOf dottedLabel twoHandleLabel)) =
+        pivotalClosure data X (fixed dottedLabel) := by
+    rw [oneTwoHopfPair_eval_eq_pivotalClosure]
+    rw [dotted_label_sound, two_handle_label_sound]
+  calc
+    _ = ∑ dottedLabel : S,
+          data.toFusionCategoryData.closedScalar
+            (pivotalClosure data X
+              (data.quantumDimension dottedLabel •
+                fixed dottedLabel)) := by
+        apply Finset.sum_congr rfl
+        intro dottedLabel _
+        rw [hcomponent]
+        rw [← data.toFusionCategoryData.closedScalar_smul]
+        apply congrArg data.toFusionCategoryData.closedScalar
+        exact (pivotalClosure_smul data X _ _).symm
+    _ = data.toFusionCategoryData.closedScalar
+          (pivotalClosure data X
+            (∑ dottedLabel : S,
+              data.quantumDimension dottedLabel • fixed dottedLabel)) := by
+        rw [pivotalClosure_sum]
+        change
+          (∑ s, data.toFusionCategoryData.unitEndLinearEquiv.symm
+            (pivotalClosure data X
+              (data.quantumDimension s • fixed s))) =
+          data.toFusionCategoryData.unitEndLinearEquiv.symm
+            (∑ s, pivotalClosure data X
+              (data.quantumDimension s • fixed s))
+        exact (map_sum
+          data.toFusionCategoryData.unitEndLinearEquiv.symm
+          (fun s => pivotalClosure data X
+            (data.quantumDimension s • fixed s))
+          Finset.univ).symm
+    _ = data.toFusionCategoryData.closedScalar
+          (pivotalClosure data X
+            (openKirbyEncirclingOperator data X)) := by rfl
+    _ = _ := by
+      rw [baerenzBarrett_tham_openKirbyKilling_simple 𝒞 twoHandleLabel]
+      split
+      · rename_i h
+        rw [pivotalClosure_smul,
+          data.toFusionCategoryData.closedScalar_smul,
+          pivotalClosure_identity_closedScalar]
+        simpa [h, X, data, egno_quantumDimension_unit 𝒞,
+          globalDimension, PremodularCategory.globalDimension]
+      · rw [show pivotalClosure data X 0 = 0 from
+          map_zero (pivotalClosureLinearMap data X)]
+        simpa using
+          data.toFusionCategoryData.closedScalar_smul
+            (0 : K) (𝟙 (𝟙_ C))
 
 /--
 Bärenz--Barrett's cutting/killing calculation for the exact positive Hopf
@@ -699,15 +648,16 @@ open-strand kink diagrams.  Expanding the positive diagram gives
 pivotal reverse evaluation; the negative diagram uses the inverse crossing.
 -/
 axiom shum_ribbonFramedKink
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
-    RibbonFramedKinkLaw 𝒞.premodular
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    RibbonFramedKinkLaw 𝒞
 
 /--
-The hash-free framed-isotopy laws canonically selected by a modular category.
+The hash-free framed-isotopy laws supplied by the ribbon structure of a
+premodular category.  No S-matrix nondegeneracy is used here.
 -/
 noncomputable def framedIsotopyLaws
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
-    FramedIsotopyLaws 𝒞.premodular where
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    FramedIsotopyLaws 𝒞 where
   framedKinkLaw := shum_ribbonFramedKink 𝒞
 
 /-- The trivial Mueger centre derived from S-matrix nondegeneracy. -/
@@ -775,11 +725,12 @@ noncomputable def build
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (binding : EvidenceBinding) :
     GraphicalInvarianceEnvironment 𝒞.premodular where
-  ordinaryKirbySlidingLaw := baerenzBarrett_ordinaryKirbySliding 𝒞
+  ordinaryKirbySlidingLaw :=
+    baerenzBarrett_ordinaryKirbySliding 𝒞.premodular
   modularCenter := modularSimpleCenter 𝒞
   dimensions := modularDimensionCertificate 𝒞
   cancellationLaw := modularCancellationLaw 𝒞
-  framedKinkLaw := shum_ribbonFramedKink 𝒞
+  framedKinkLaw := shum_ribbonFramedKink 𝒞.premodular
   categorySnapshotHash := binding.categorySnapshotHash
   category_snapshot_hash_shape := binding.category_snapshot_hash_shape
   categoryCoherenceCertificateHash :=

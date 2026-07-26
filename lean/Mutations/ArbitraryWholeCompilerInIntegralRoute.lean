@@ -30,24 +30,23 @@ def unsafeOverride
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : Input categoryData}
     (compiler :
       IntegralCharacterBoundPresentationCompiler
-        categoryData manifold H2 algebra)
+        categoryData H2 algebra)
     (whole :
-      (topology : SpecialKirbyPresentation manifold H2) →
+      (topology : SpecialKirbyPresentation H2) →
       (alpha : H2) →
       (labeling :
         ComponentLabelExpansion.GlobalLabeling
           (integralCharacterWeights
-            (IntegralCycleRepresentativeSystem.canonical manifold H2)
+            (IntegralCycleRepresentativeSystem.canonical H2)
             compiler.selectedGenerator.generator).toComponentExpansion
             topology) →
         CategoricalEventCompiler C topology.formal.raw) :
     IntegralCharacterBoundPresentationCompiler
-      categoryData manifold H2 algebra :=
+      categoryData H2 algebra :=
   { compiler with eventCompiler := whole }
 
 end TwistedYetter.Mutations.ArbitraryWholeCompilerInIntegralRoute

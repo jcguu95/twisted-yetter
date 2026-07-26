@@ -20,7 +20,7 @@ if rg -q 'sorryAx|declaration uses `sorry`|native_decide\.ax' "${output}"; then
   exit 1
 fi
 
-expected="TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput"
+expected="TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturality"
 if ! rg -Fq "${expected}" "${output}"; then
   printf 'Expected handle-homology domain axiom is absent.\n' >&2
   cat "${output}" >&2
@@ -29,7 +29,7 @@ fi
 
 custom="$(
   rg -o \
-    'TwistedYetter\.[A-Za-z0-9_.]*standardHandleChainNaturalityInput' \
+    'TwistedYetter\.[A-Za-z0-9_.]*standardHandleChainNaturality' \
     "${output}" | sort -u
 )"
 if [[ "${custom}" != "${expected}" ]]; then

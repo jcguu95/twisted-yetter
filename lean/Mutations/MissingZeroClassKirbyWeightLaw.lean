@@ -26,10 +26,9 @@ def unsafeWeights
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (coefficient :
-      (topology : SpecialKirbyPresentation manifold H2) →
+      (topology : SpecialKirbyPresentation H2) →
       H2 → ComponentSpec → S → K)
     (categorySnapshotHash coefficientCertificateHash
       markingCertificateHash : String)
@@ -39,7 +38,7 @@ def unsafeWeights
       RawPresentation.sha256Shape coefficientCertificateHash = true)
     (markingHashShape :
       RawPresentation.sha256Shape markingCertificateHash = true) :
-    HomologicalKirbyColorWeights categoryData manifold H2 where
+    HomologicalKirbyColorWeights categoryData H2 where
   coefficient := coefficient
   categorySnapshotHash := categorySnapshotHash
   category_snapshot_hash_sound := categoryHashSound

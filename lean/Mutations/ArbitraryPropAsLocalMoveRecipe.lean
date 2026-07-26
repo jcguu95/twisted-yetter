@@ -12,9 +12,8 @@ This must fail: metadata no longer accepts an arbitrary proposition and its
 witness as a substitute for a typed local recipe.
 -/
 def unsafeMetadata
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (claim : Prop)
     (witness : claim) :
     TableTwoMoveMetadata .framedIsotopy source target where

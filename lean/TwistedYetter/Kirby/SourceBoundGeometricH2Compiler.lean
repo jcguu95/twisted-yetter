@@ -31,18 +31,17 @@ universe uH
 
 /-- Exact recipe identity carried by a bare topology move. -/
 def topologicalMoveRecipeId
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) : String :=
   match move with
   | .framedIsotopy metadata _ =>
       metadata.recipe.chainCompilerRecipeId
-  | .oneOverOne _ metadata _ =>
+  | .oneOverOne metadata _ =>
       metadata.recipe.chainCompilerRecipeId
-  | .twoOverOne _ metadata _ =>
+  | .twoOverOne metadata _ =>
       metadata.recipe.chainCompilerRecipeId
-  | .twoOverTwo _ metadata _ =>
+  | .twoOverTwo metadata _ =>
       metadata.recipe.chainCompilerRecipeId
   | .oneTwoBirth metadata _ =>
       metadata.recipe.chainCompilerRecipeId
@@ -61,9 +60,8 @@ then reading target geometric coordinates equals reading source geometric
 coordinates directly.
 -/
 structure SourceBoundChainMoveCertificate
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) where
   recipeId : String
   recipe_id_sound : recipeId = topologicalMoveRecipeId move
@@ -81,9 +79,8 @@ namespace SourceBoundChainMoveCertificate
 
 /-- The marked transport is forced by the certificate's chain equivalence. -/
 noncomputable def transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     {move : TopologicalTableTwoMove source target}
     (certificate : SourceBoundChainMoveCertificate move) :
     MarkedH2Transport source target where
@@ -96,9 +93,8 @@ This is the theorem that was previously accepted directly as a compiler
 field.
 -/
 theorem transport_homologyAddEquiv_eq_refl
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     {move : TopologicalTableTwoMove source target}
     (certificate : SourceBoundChainMoveCertificate move) :
     certificate.transport.homologyAddEquiv = AddEquiv.refl H2 := by
@@ -122,35 +118,26 @@ Every output is indexed by the exact topology move and therefore by its exact
 source-bound recipe.
 -/
 structure SourceBoundGeometricH2Compiler
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   compile :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (move : TopologicalTableTwoMove source target) →
       SourceBoundChainMoveCertificate move
-  assemblyCertificateHash : String
-  assembly_certificate_hash_shape :
-    RawPresentation.sha256Shape assemblyCertificateHash = true
-  sourceRefs : List String
-  exactMarkedScope : String
-  sourceScopeCaveat : String
 
 namespace SourceBoundGeometricH2Compiler
 
 /-- Derive the old local transport interface from exact move certificates. -/
 noncomputable def localCompiler
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : SourceBoundGeometricH2Compiler manifold H2) :
-    LocalMarkedH2Compiler manifold H2 where
+    (compiler : SourceBoundGeometricH2Compiler H2) :
+    LocalMarkedH2Compiler H2 where
   transport := fun move => (compiler.compile move).transport
 
 /-- Every derived local ambient transport is the identity. -/
 theorem local_transport_is_identity
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : SourceBoundGeometricH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : SourceBoundGeometricH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     (compiler.localCompiler.transport move).homologyAddEquiv =
       AddEquiv.refl H2 :=
@@ -158,18 +145,11 @@ theorem local_transport_is_identity
 
 /-- Derive the existing marked-pair assembly compiler without a direct law. -/
 noncomputable def toGeometricMarkedH2Compiler
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : SourceBoundGeometricH2Compiler manifold H2) :
-    GeometricMarkedH2Compiler manifold H2 where
+    (compiler : SourceBoundGeometricH2Compiler H2) :
+    GeometricMarkedH2Compiler H2 where
   localCompiler := compiler.localCompiler
   transport_is_identity := compiler.local_transport_is_identity
-  assemblyCertificateHash := compiler.assemblyCertificateHash
-  assembly_certificate_hash_shape :=
-    compiler.assembly_certificate_hash_shape
-  sourceRefs := compiler.sourceRefs
-  exactMarkedScope := compiler.exactMarkedScope
-  sourceScopeCaveat := compiler.sourceScopeCaveat
 
 end SourceBoundGeometricH2Compiler
 

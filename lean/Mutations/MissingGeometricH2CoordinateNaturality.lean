@@ -15,10 +15,9 @@ This must fail: a chain equivalence and matching recipe ID do not by
 themselves identify the source and target geometric H2 coordinates.
 -/
 def unsafeCertificate
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH}
     [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target)
     (recipeId : String)
     (recipeIdSound : recipeId = topologicalMoveRecipeId move)

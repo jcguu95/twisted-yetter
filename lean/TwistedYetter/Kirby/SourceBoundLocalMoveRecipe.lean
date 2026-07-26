@@ -173,6 +173,44 @@ def twoOverTwoSlidingId : HandleEdit .twoOverTwo → String
 def twoOverTwoStationaryId : HandleEdit .twoOverTwo → String
   | .twoOverTwo _ _ stationary _ => stationary
 
+/-- Newly created dotted component in an exact 1--2 birth recipe. -/
+def oneTwoBirthDottedId : HandleEdit .oneTwoBirth → String
+  | .oneTwoBirth dotted _ _ => dotted
+
+/-- Newly created ordinary component in an exact 1--2 birth recipe. -/
+def oneTwoBirthTwoHandleId : HandleEdit .oneTwoBirth → String
+  | .oneTwoBirth _ twoHandle _ => twoHandle
+
+/-- Distinctness certificate retained by an exact 1--2 birth recipe. -/
+def oneTwoBirthDistinct
+    (edit : HandleEdit .oneTwoBirth) :
+    oneTwoBirthDottedId edit ≠ oneTwoBirthTwoHandleId edit :=
+  match edit with
+  | .oneTwoBirth _ _ distinct => distinct
+
+/-- Removed dotted component in an exact 1--2 death recipe. -/
+def oneTwoDeathDottedId : HandleEdit .oneTwoDeath → String
+  | .oneTwoDeath dotted _ _ => dotted
+
+/-- Removed ordinary component in an exact 1--2 death recipe. -/
+def oneTwoDeathTwoHandleId : HandleEdit .oneTwoDeath → String
+  | .oneTwoDeath _ twoHandle _ => twoHandle
+
+/-- Distinctness certificate retained by an exact 1--2 death recipe. -/
+def oneTwoDeathDistinct
+    (edit : HandleEdit .oneTwoDeath) :
+    oneTwoDeathDottedId edit ≠ oneTwoDeathTwoHandleId edit :=
+  match edit with
+  | .oneTwoDeath _ _ distinct => distinct
+
+/-- Newly created ordinary component in an exact 2--3 birth recipe. -/
+def twoThreeBirthTwoHandleId : HandleEdit .twoThreeBirth → String
+  | .twoThreeBirth twoHandle => twoHandle
+
+/-- Removed ordinary component in an exact 2--3 death recipe. -/
+def twoThreeDeathTwoHandleId : HandleEdit .twoThreeDeath → String
+  | .twoThreeDeath twoHandle => twoHandle
+
 end HandleEdit
 
 /-- Finite component index of one exact serialized presentation. -/
@@ -202,6 +240,33 @@ structure SameComponentIndexChange
     (targetIndex : ComponentIndex target) →
       (componentAt target targetIndex).componentId =
         (componentAt source (targetToSource targetIndex)).componentId
+  component_role_sound :
+    (targetIndex : ComponentIndex target) →
+      (componentAt target targetIndex).role =
+        (componentAt source (targetToSource targetIndex)).role
+
+/--
+The two actual source-component indices named by a same-component slide.
+
+String IDs alone are not enough to select coordinates in the finite Kirby
+colour sum.  This certificate resolves both IDs against the exact source
+registry and proves that the two selected indices are distinct.  Their target
+indices are then forced by the move's component correspondence.
+-/
+structure ResolvedSlideComponentPair
+    (source target : FormalPresentation)
+    (same : SameComponentIndexChange source target)
+    (slidingComponentId stationaryComponentId : String) where
+  slidingSourceIndex : ComponentIndex source
+  stationarySourceIndex : ComponentIndex source
+  sliding_source_id_sound :
+    (componentAt source slidingSourceIndex).componentId =
+      slidingComponentId
+  stationary_source_id_sound :
+    (componentAt source stationarySourceIndex).componentId =
+      stationaryComponentId
+  source_indices_distinct :
+    slidingSourceIndex ≠ stationarySourceIndex
 
 /--
 Exact finite-set decomposition when target contains new local components.
@@ -264,7 +329,16 @@ inductive ComponentIndexChange
       (orientation : BandOrientation)
       (slidingDottedId stationaryDottedId : String)
       (distinct : slidingDottedId ≠ stationaryDottedId)
-      (same : SameComponentIndexChange source target) :
+      (same : SameComponentIndexChange source target)
+      (components :
+        ResolvedSlideComponentPair source target same
+          slidingDottedId stationaryDottedId)
+      (sliding_role_sound :
+        (componentAt source components.slidingSourceIndex).role =
+          .dotted)
+      (stationary_role_sound :
+        (componentAt source components.stationarySourceIndex).role =
+          .dotted) :
       ComponentIndexChange source target
         (.oneOverOne orientation
           slidingDottedId stationaryDottedId distinct)
@@ -272,7 +346,16 @@ inductive ComponentIndexChange
       (orientation : BandOrientation)
       (slidingTwoHandleId stationaryDottedId : String)
       (distinct : slidingTwoHandleId ≠ stationaryDottedId)
-      (same : SameComponentIndexChange source target) :
+      (same : SameComponentIndexChange source target)
+      (components :
+        ResolvedSlideComponentPair source target same
+          slidingTwoHandleId stationaryDottedId)
+      (sliding_role_sound :
+        (componentAt source components.slidingSourceIndex).role ≠
+          .dotted)
+      (stationary_role_sound :
+        (componentAt source components.stationarySourceIndex).role =
+          .dotted) :
       ComponentIndexChange source target
         (.twoOverOne orientation
           slidingTwoHandleId stationaryDottedId distinct)
@@ -280,7 +363,16 @@ inductive ComponentIndexChange
       (orientation : BandOrientation)
       (slidingTwoHandleId stationaryTwoHandleId : String)
       (distinct : slidingTwoHandleId ≠ stationaryTwoHandleId)
-      (same : SameComponentIndexChange source target) :
+      (same : SameComponentIndexChange source target)
+      (components :
+        ResolvedSlideComponentPair source target same
+          slidingTwoHandleId stationaryTwoHandleId)
+      (sliding_role_sound :
+        (componentAt source components.slidingSourceIndex).role ≠
+          .dotted)
+      (stationary_role_sound :
+        (componentAt source components.stationarySourceIndex).role ≠
+          .dotted) :
       ComponentIndexChange source target
         (.twoOverTwo orientation
           slidingTwoHandleId stationaryTwoHandleId distinct)
@@ -400,6 +492,70 @@ theorem sum_reindex
 
 end SameComponentIndexChange
 
+namespace ResolvedSlideComponentPair
+
+/-- Target index of the moving component, forced by component lineage. -/
+def slidingTargetIndex
+    {source target : FormalPresentation}
+    {same : SameComponentIndexChange source target}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair source target same
+        slidingComponentId stationaryComponentId) :
+    ComponentIndex target :=
+  same.targetToSource.symm components.slidingSourceIndex
+
+/-- Target index of the stationary component, forced by component lineage. -/
+def stationaryTargetIndex
+    {source target : FormalPresentation}
+    {same : SameComponentIndexChange source target}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair source target same
+        slidingComponentId stationaryComponentId) :
+    ComponentIndex target :=
+  same.targetToSource.symm components.stationarySourceIndex
+
+theorem sliding_target_id_sound
+    {source target : FormalPresentation}
+    {same : SameComponentIndexChange source target}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair source target same
+        slidingComponentId stationaryComponentId) :
+    (componentAt target components.slidingTargetIndex).componentId =
+      slidingComponentId := by
+  rw [same.component_id_sound]
+  simpa [slidingTargetIndex] using components.sliding_source_id_sound
+
+theorem stationary_target_id_sound
+    {source target : FormalPresentation}
+    {same : SameComponentIndexChange source target}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair source target same
+        slidingComponentId stationaryComponentId) :
+    (componentAt target components.stationaryTargetIndex).componentId =
+      stationaryComponentId := by
+  rw [same.component_id_sound]
+  simpa [stationaryTargetIndex] using
+    components.stationary_source_id_sound
+
+theorem target_indices_distinct
+    {source target : FormalPresentation}
+    {same : SameComponentIndexChange source target}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair source target same
+        slidingComponentId stationaryComponentId) :
+    components.slidingTargetIndex ≠ components.stationaryTargetIndex := by
+  intro equal
+  apply components.source_indices_distinct
+  simpa [slidingTargetIndex, stationaryTargetIndex] using
+    congrArg same.targetToSource equal
+
+end ResolvedSlideComponentPair
+
 namespace AddedComponentIndexChange
 
 /--
@@ -515,6 +671,21 @@ theorem component_product_split
 end AddedComponentIndexChange
 
 namespace RemovedComponentIndexChange
+
+/--
+Read a removal backwards as the corresponding finite component insertion.
+
+This reuses the same finite equivalence; no reverse correspondence is
+selected independently.
+-/
+def reverseAdded
+    {source target : FormalPresentation}
+    {removedCount : Nat}
+    (change :
+      RemovedComponentIndexChange source target removedCount) :
+    AddedComponentIndexChange target source removedCount where
+  targetDecomposition := change.sourceDecomposition
+  common_component_id_sound := change.common_component_id_sound
 
 /--
 Split one source labeling into the labels retained by the target and the
@@ -692,6 +863,90 @@ theorem framed_isotopy_generators_unique :
   decide
 
 /--
+Exact event-level script for one cancelling one--two Hopf pair.
+
+The source-side identity marker is retained separately because every
+`PresentationWindowEdit` requires a nonempty window on both sides.
+-/
+structure OneTwoCancellationScript
+    (dottedId twoHandleId : String) where
+  identityEventId : String
+  identityOrder : List String
+  twoBirthId : String
+  dottedBirthId : String
+  firstCrossingId : String
+  secondCrossingId : String
+  dottedDeathId : String
+  twoDeathId : String
+  dottedPositiveId : String
+  dottedNegativeId : String
+  twoPositiveId : String
+  twoNegativeId : String
+
+namespace OneTwoCancellationScript
+
+/-- Nonempty identity-side window of a one--two cancellation. -/
+def identityEvents
+    {dottedId twoHandleId : String}
+    (script : OneTwoCancellationScript dottedId twoHandleId) :
+    List SliceEvent :=
+  [.planarIsotopy script.identityEventId script.identityOrder]
+
+/-- Exact six-event positive Hopf-pair window. -/
+def hopfEvents
+    {dottedId twoHandleId : String}
+    (script : OneTwoCancellationScript dottedId twoHandleId) :
+    List SliceEvent :=
+  [
+    .birth script.twoBirthId twoHandleId
+      script.twoPositiveId script.twoNegativeId 0,
+    .birth script.dottedBirthId dottedId
+      script.dottedPositiveId script.dottedNegativeId 0,
+    .crossing script.firstCrossingId
+      script.dottedNegativeId script.twoPositiveId .positive,
+    .crossing script.secondCrossingId
+      script.twoPositiveId script.dottedNegativeId .positive,
+    .death script.dottedDeathId dottedId
+      script.dottedPositiveId script.dottedNegativeId,
+    .death script.twoDeathId twoHandleId
+      script.twoPositiveId script.twoNegativeId
+  ]
+
+end OneTwoCancellationScript
+
+/-- Exact event-level script for one cancelling two--three pair. -/
+structure TwoThreeCancellationScript (twoHandleId : String) where
+  identityEventId : String
+  identityOrder : List String
+  birthEventId : String
+  deathEventId : String
+  positiveId : String
+  negativeId : String
+
+namespace TwoThreeCancellationScript
+
+/-- Nonempty identity-side window of a two--three cancellation. -/
+def identityEvents
+    {twoHandleId : String}
+    (script : TwoThreeCancellationScript twoHandleId) :
+    List SliceEvent :=
+  [.planarIsotopy script.identityEventId script.identityOrder]
+
+/-- Exact birth/death window of the isolated zero-framed component. -/
+def zeroFramedEvents
+    {twoHandleId : String}
+    (script : TwoThreeCancellationScript twoHandleId) :
+    List SliceEvent :=
+  [
+    .birth script.birthEventId twoHandleId
+      script.positiveId script.negativeId 0,
+    .death script.deathEventId twoHandleId
+      script.positiveId script.negativeId
+  ]
+
+end TwoThreeCancellationScript
+
+/--
 Closed graphical program indexed by the exact handle edit.
 
 The framed-isotopy constructor retains an ordered generator script and pins
@@ -734,20 +989,188 @@ inductive GraphicalEditProgram :
           slidingTwoHandleId stationaryTwoHandleId distinct)
   | oneTwoBirth
       (newDottedId newTwoHandleId : String)
-      (distinct : newDottedId ≠ newTwoHandleId) :
+      (distinct : newDottedId ≠ newTwoHandleId)
+      (script :
+        OneTwoCancellationScript newDottedId newTwoHandleId) :
       GraphicalEditProgram
         (.oneTwoBirth newDottedId newTwoHandleId distinct)
   | oneTwoDeath
       (removedDottedId removedTwoHandleId : String)
-      (distinct : removedDottedId ≠ removedTwoHandleId) :
+      (distinct : removedDottedId ≠ removedTwoHandleId)
+      (script :
+        OneTwoCancellationScript removedDottedId removedTwoHandleId) :
       GraphicalEditProgram
         (.oneTwoDeath removedDottedId removedTwoHandleId distinct)
   | twoThreeBirth
-      (newTwoHandleId : String) :
+      (newTwoHandleId : String)
+      (script : TwoThreeCancellationScript newTwoHandleId) :
       GraphicalEditProgram (.twoThreeBirth newTwoHandleId)
   | twoThreeDeath
-      (removedTwoHandleId : String) :
+      (removedTwoHandleId : String)
+      (script : TwoThreeCancellationScript removedTwoHandleId) :
       GraphicalEditProgram (.twoThreeDeath removedTwoHandleId)
+
+/--
+Concrete event-window obligation imposed by a graphical program.
+
+Cancellation cases are literal list equalities.  They do not assert
+isotopy, evaluator equality, or handle-chain transport.
+-/
+def GraphicalEditProgram.MatchesWindow
+    {kind : RecipeKind}
+    {source target : FormalPresentation}
+    {edit : HandleEdit kind}
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target) : Prop :=
+  match program with
+  | .framedIsotopy .. => True
+  | .oneOverOne .. => True
+  | .twoOverOne .. => True
+  | .twoOverTwo .. => True
+  | .oneTwoBirth _ _ _ script =>
+      window.sourceEventWindow = script.identityEvents ∧
+        window.targetEventWindow = script.hopfEvents
+  | .oneTwoDeath _ _ _ script =>
+      window.sourceEventWindow = script.hopfEvents ∧
+        window.targetEventWindow = script.identityEvents
+  | .twoThreeBirth _ script =>
+      window.sourceEventWindow = script.identityEvents ∧
+        window.targetEventWindow = script.zeroFramedEvents
+  | .twoThreeDeath _ script =>
+      window.sourceEventWindow = script.zeroFramedEvents ∧
+        window.targetEventWindow = script.identityEvents
+
+namespace GraphicalEditProgram
+
+/-- Read a one--two birth script without exposing the edit constructor. -/
+def oneTwoBirthScriptOfEdit
+    (edit : HandleEdit .oneTwoBirth)
+    (program : GraphicalEditProgram edit) :
+    OneTwoCancellationScript
+      (HandleEdit.oneTwoBirthDottedId edit)
+      (HandleEdit.oneTwoBirthTwoHandleId edit) :=
+  match edit, program with
+  | .oneTwoBirth _ _ _, .oneTwoBirth _ _ _ script => script
+
+/-- Read the exact one--two birth script from its indexed program. -/
+def oneTwoBirthScript
+    {dottedId twoHandleId : String}
+    {distinct : dottedId ≠ twoHandleId} :
+    GraphicalEditProgram (.oneTwoBirth dottedId twoHandleId distinct) →
+      OneTwoCancellationScript dottedId twoHandleId
+  | .oneTwoBirth _ _ _ script => script
+
+/-- Read a one--two death script without exposing the edit constructor. -/
+def oneTwoDeathScriptOfEdit
+    (edit : HandleEdit .oneTwoDeath)
+    (program : GraphicalEditProgram edit) :
+    OneTwoCancellationScript
+      (HandleEdit.oneTwoDeathDottedId edit)
+      (HandleEdit.oneTwoDeathTwoHandleId edit) :=
+  match edit, program with
+  | .oneTwoDeath _ _ _, .oneTwoDeath _ _ _ script => script
+
+/-- Read the exact one--two death script from its indexed program. -/
+def oneTwoDeathScript
+    {dottedId twoHandleId : String}
+    {distinct : dottedId ≠ twoHandleId} :
+    GraphicalEditProgram (.oneTwoDeath dottedId twoHandleId distinct) →
+      OneTwoCancellationScript dottedId twoHandleId
+  | .oneTwoDeath _ _ _ script => script
+
+/-- Read a two--three birth script without exposing the edit constructor. -/
+def twoThreeBirthScriptOfEdit
+    (edit : HandleEdit .twoThreeBirth)
+    (program : GraphicalEditProgram edit) :
+    TwoThreeCancellationScript
+      (HandleEdit.twoThreeBirthTwoHandleId edit) :=
+  match edit, program with
+  | .twoThreeBirth _, .twoThreeBirth _ script => script
+
+/-- Read the exact two--three birth script from its indexed program. -/
+def twoThreeBirthScript
+    {twoHandleId : String} :
+    GraphicalEditProgram (.twoThreeBirth twoHandleId) →
+      TwoThreeCancellationScript twoHandleId
+  | .twoThreeBirth _ script => script
+
+/-- Read a two--three death script without exposing the edit constructor. -/
+def twoThreeDeathScriptOfEdit
+    (edit : HandleEdit .twoThreeDeath)
+    (program : GraphicalEditProgram edit) :
+    TwoThreeCancellationScript
+      (HandleEdit.twoThreeDeathTwoHandleId edit) :=
+  match edit, program with
+  | .twoThreeDeath _, .twoThreeDeath _ script => script
+
+/-- Read the exact two--three death script from its indexed program. -/
+def twoThreeDeathScript
+    {twoHandleId : String} :
+    GraphicalEditProgram (.twoThreeDeath twoHandleId) →
+      TwoThreeCancellationScript twoHandleId
+  | .twoThreeDeath _ script => script
+
+/-- Expand a one--two birth window certificate to its two literal scripts. -/
+theorem oneTwoBirth_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .oneTwoBirth)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (oneTwoBirthScriptOfEdit edit program).identityEvents ∧
+      window.targetEventWindow =
+        (oneTwoBirthScriptOfEdit edit program).hopfEvents := by
+  cases edit
+  cases program
+  exact sound
+
+/-- Expand a one--two death window certificate to its two literal scripts. -/
+theorem oneTwoDeath_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .oneTwoDeath)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (oneTwoDeathScriptOfEdit edit program).hopfEvents ∧
+      window.targetEventWindow =
+        (oneTwoDeathScriptOfEdit edit program).identityEvents := by
+  cases edit
+  cases program
+  exact sound
+
+/-- Expand a two--three birth window certificate to its two literal scripts. -/
+theorem twoThreeBirth_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .twoThreeBirth)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (twoThreeBirthScriptOfEdit edit program).identityEvents ∧
+      window.targetEventWindow =
+        (twoThreeBirthScriptOfEdit edit program).zeroFramedEvents := by
+  cases edit
+  cases program
+  exact sound
+
+/-- Expand a two--three death window certificate to its two literal scripts. -/
+theorem twoThreeDeath_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .twoThreeDeath)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (twoThreeDeathScriptOfEdit edit program).zeroFramedEvents ∧
+      window.targetEventWindow =
+        (twoThreeDeathScriptOfEdit edit program).identityEvents := by
+  cases edit
+  cases program
+  exact sound
+
+end GraphicalEditProgram
 
 /--
 One immutable local recipe shared by graphical and chain compilation.
@@ -772,6 +1195,8 @@ structure SourceBoundRecipe
   componentIndexChange :
     ComponentIndexChange source target handleEdit
   graphicalProgram : GraphicalEditProgram handleEdit
+  graphical_window_sound :
+    graphicalProgram.MatchesWindow window
   recipeSnapshotHash : String
   recipe_snapshot_hash_shape :
     RawPresentation.sha256Shape recipeSnapshotHash = true

@@ -343,9 +343,8 @@ structure FramedIsotopyRealization
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .framedIsotopy source target)
     (before after : Diagram C .unit .unit) where
   program :
@@ -405,9 +404,8 @@ structure OneOverOneRealization
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (orientation : BandOrientation)
     (metadata : TableTwoMoveMetadata .oneOverOne source target)
     (before after : Diagram C .unit .unit) where
@@ -439,9 +437,8 @@ structure TwoOverOneRealization
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (orientation : BandOrientation)
     (metadata : TableTwoMoveMetadata .twoOverOne source target)
     (before after : Diagram C .unit .unit) where
@@ -473,9 +470,8 @@ structure TwoOverTwoRealization
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (orientation : BandOrientation)
     (metadata : TableTwoMoveMetadata .twoOverTwo source target)
     (before after : Diagram C .unit .unit) where
@@ -634,9 +630,8 @@ end TwoThreeFactorizationProgram
 
 /-- Derive a hash-bound local binding without free move or presentation IDs. -/
 def localEvaluationBinding
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (certificateHash : String)
     (hashShape : RawPresentation.sha256Shape certificateHash = true) :
@@ -660,14 +655,13 @@ structure SourceBoundGraphicalMoveCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (presentationCompiler :
       ComponentwiseFiniteLabelPresentationCompiler
-        categoryData manifold H2)
+        categoryData H2)
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData) where
   framedIsotopy :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .framedIsotopy source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
@@ -677,40 +671,40 @@ structure SourceBoundGraphicalMoveCompiler
         ((presentationCompiler.decorate target).diagram
           (transport.targetClass alpha))
   oneOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      OneOverOneRealization algebra orientation metadata
+      OneOverOneRealization algebra
+        (HandleEdit.oneOverOneOrientation metadata.recipe.handleEdit) metadata
         ((presentationCompiler.decorate source).diagram alpha)
         ((presentationCompiler.decorate target).diagram
           (transport.targetClass alpha))
   twoOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      TwoOverOneRealization algebra orientation metadata
+      TwoOverOneRealization algebra
+        (HandleEdit.twoOverOneOrientation metadata.recipe.handleEdit) metadata
         ((presentationCompiler.decorate source).diagram alpha)
         ((presentationCompiler.decorate target).diagram
           (transport.targetClass alpha))
   twoOverTwo :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverTwo source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      TwoOverTwoRealization algebra orientation metadata
+      TwoOverTwoRealization algebra
+        (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit) metadata
         ((presentationCompiler.decorate source).diagram alpha)
         ((presentationCompiler.decorate target).diagram
           (transport.targetClass alpha))
   oneTwoBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoBirth source target) →
     (counts_sound : target.counts = source.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -724,7 +718,7 @@ structure SourceBoundGraphicalMoveCompiler
           (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
   oneTwoDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoDeath source target) →
     (counts_sound : source.counts = target.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -738,7 +732,7 @@ structure SourceBoundGraphicalMoveCompiler
         ((presentationCompiler.decorate target).evaluationState
           (transport.targetClass alpha))
   twoThreeBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeBirth source target) →
     (counts_sound : target.counts = source.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -752,7 +746,7 @@ structure SourceBoundGraphicalMoveCompiler
           (transport.targetClass alpha))
         ((presentationCompiler.decorate source).evaluationState alpha)
   twoThreeDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeDeath source target) →
     (counts_sound : source.counts = target.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -767,11 +761,11 @@ structure SourceBoundGraphicalMoveCompiler
           (transport.targetClass alpha))
   graphicalCertificateHash :
     {kind : RecipeKind} →
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
       TableTwoMoveMetadata kind source target → H2 → String
   graphical_certificate_hash_shape :
     {kind : RecipeKind} →
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata kind source target) →
     (alpha : H2) →
       RawPresentation.sha256Shape
@@ -787,16 +781,15 @@ noncomputable def compile
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {presentationCompiler :
       ComponentwiseFiniteLabelPresentationCompiler
-        categoryData manifold H2}
+        categoryData H2}
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       SourceBoundGraphicalMoveCompiler
-        categoryData manifold H2 presentationCompiler algebra)
-    {source target : SpecialKirbyPresentation manifold H2}
+        categoryData H2 presentationCompiler algebra)
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (alpha : H2) :
     EvaluatedTableTwoStep categoryData
@@ -812,33 +805,33 @@ noncomputable def compile
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
         realization.program.toGeneratedIsotopy
-  | oneOverOne orientation metadata counts transport =>
+  | oneOverOne metadata counts transport =>
       let realization :=
-        compiler.oneOverOne orientation metadata counts transport alpha
+        compiler.oneOverOne metadata counts transport alpha
       exact EvaluatedTableTwoStep.oneOverOne
-        orientation metadata counts transport alpha
+        metadata counts transport alpha
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
         realization.slide realization.kind_sound
         realization.orientation_sound realization.move_id_sound
         realization.source_hash_sound realization.target_hash_sound
-  | twoOverOne orientation metadata counts transport =>
+  | twoOverOne metadata counts transport =>
       let realization :=
-        compiler.twoOverOne orientation metadata counts transport alpha
+        compiler.twoOverOne metadata counts transport alpha
       exact EvaluatedTableTwoStep.twoOverOne
-        orientation metadata counts transport alpha
+        metadata counts transport alpha
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))
         realization.slide realization.kind_sound
         realization.orientation_sound realization.move_id_sound
         realization.source_hash_sound realization.target_hash_sound
-  | twoOverTwo orientation metadata counts transport =>
+  | twoOverTwo metadata counts transport =>
       let realization :=
-        compiler.twoOverTwo orientation metadata counts transport alpha
+        compiler.twoOverTwo metadata counts transport alpha
       exact EvaluatedTableTwoStep.twoOverTwo
-        orientation metadata counts transport alpha
+        metadata counts transport alpha
         (localEvaluationBinding _
           (compiler.graphicalCertificateHash metadata alpha)
           (compiler.graphical_certificate_hash_shape metadata alpha))

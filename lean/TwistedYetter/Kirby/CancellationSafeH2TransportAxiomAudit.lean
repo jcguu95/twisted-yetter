@@ -10,8 +10,6 @@ theorems.  It is not a project axiom and cannot contain a scalar equality.
 #print axioms TwistedYetter.Kirby.CancellationSafeH2Transport.transportedRepresentative
 #print axioms
   TwistedYetter.Kirby.CancellationSafeH2Transport.isCancellationSafe_of_automaticallySafe
-#print axioms TwistedYetter.Kirby.CancellationSafeH2Transport.StrictCycleRetraction.ofOneTwoDeath
-#print axioms TwistedYetter.Kirby.CancellationSafeH2Transport.StrictCycleRetraction.ofTwoThreeDeath
 #print axioms
   TwistedYetter.Kirby.CancellationSafeH2Transport.StrictCycleRetraction.liftRepresentative
 #print axioms TwistedYetter.Kirby.CancellationSafeH2Transport.StrictCycleRetraction.liftedStep

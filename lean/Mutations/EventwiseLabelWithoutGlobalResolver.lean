@@ -11,9 +11,8 @@ universe uH
 variable {S : Type}
 
 def rejected
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (labeling : GlobalLabeling (S := S) topology)
     (eventwiseLabel : String → S) :
     LabelledComponentResolver topology labeling where

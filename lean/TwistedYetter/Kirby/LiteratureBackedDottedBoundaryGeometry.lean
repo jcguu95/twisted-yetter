@@ -99,9 +99,8 @@ only generated framed-isotopy terms. The modular evaluation and homological
 descent are proved downstream.
 -/
 structure StandardDottedCanonicalPresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  canonicalPresentation : CanonicalPresentation manifold H2
+  canonicalPresentation : CanonicalPresentation H2
   dottedGeometry : GeometrySystem canonicalPresentation
 
 end TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometry

@@ -22,7 +22,7 @@ diagnostics=(
   'Tactic `rfl` failed'
   'Tactic `rfl` failed'
   'Unknown constant `TwistedYetter.Kirby.FourManifoldInvariantTarget.TargetCondition.craneYetterIdentification`'
-  'TableTwoEvaluatorCompiler categoryData manifold H2'
+  'TableTwoEvaluatorCompiler categoryData H2'
   '`markedH2Compiler` is not a field of structure `FourManifoldInvariantInputs`'
 )
 

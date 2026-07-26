@@ -20,7 +20,7 @@ if rg -q 'sorryAx|declaration uses `sorry`|native_decide\.ax' "${output}"; then
 fi
 
 if rg -q \
-    'TwistedYetter\.[A-Za-z0-9_.]*(standardSpecialKirbyCalculusConnected|standardHandleChainNaturalityInput)' \
+    'TwistedYetter\.[A-Za-z0-9_.]*(standardSpecialKirbyPresentationsConnected|standardHandleChainNaturality)' \
     "${output}"; then
   printf 'Ribbon-Kirby algebra unexpectedly depends on a topology/domain axiom:\n' >&2
   cat "${output}" >&2

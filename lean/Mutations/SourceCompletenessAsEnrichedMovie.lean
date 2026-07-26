@@ -12,10 +12,9 @@ This must fail: the source axiom gives only a topology movie.  It cannot be
 used as a movie carrying chain-derived marked-homology transport.
 -/
 def unsafeMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    (source target : SpecialKirbyPresentation manifold H2) :
+    (source target : SpecialKirbyPresentation H2) :
     TableTwoMovie source target :=
-  standardSpecialKirbyCalculusConnected source target
+  standardSpecialKirbyPresentationsConnected source target
 
 end TwistedYetter.Mutations.SourceCompletenessAsEnrichedMovie

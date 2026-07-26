@@ -7,9 +7,8 @@ This module isolates the exact chain-level fact needed to transport an
 arbitrary integral second-homology class through a cancellation death.
 
 For every non-death calculation, the source representative transports
-forward directly.  For a death, the topology compiler must exhibit a strict
-cycle retraction: every target cycle has a source lift, forward transport
-returns the target cycle, and delete-then-reinsert returns the source lift.
+forward directly.  A strict raw-cycle retraction for a death is a separate
+optional input; it is not implied by a chain homotopy equivalence.
 
 The retraction contains no category scalar and no evaluator equality.  Lean
 derives from it that the lifted source cycle represents the inverse-transported
@@ -42,11 +41,10 @@ The representative obtained by applying the calculation's actual forward
 chain map to a source representative.
 -/
 noncomputable def transportedRepresentative
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     {sourceAlpha : source.topology.handleChain.SecondHomology}
@@ -63,11 +61,10 @@ Once the source cycle is known to be cancellation-safe, forward transport
 constructs the complete compatible representative step.
 -/
 def transportedStep
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     {sourceAlpha : source.topology.handleChain.SecondHomology}
@@ -80,11 +77,10 @@ def transportedStep
 
 /-- Exactly the two directed death constructors require an extra check. -/
 def AutomaticallySafe
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move) : Prop :=
   match calculation with
@@ -94,11 +90,10 @@ def AutomaticallySafe
 
 /-- Every non-death constructor is cancellation-safe by definition. -/
 theorem isCancellationSafe_of_automaticallySafe
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     (sourceCycle : source.DegreeTwoCycle)
@@ -115,11 +110,10 @@ returns the chosen target cycle.  `returned_lift` says that applying the
 death and then its retained reverse birth returns the source lift literally.
 -/
 structure StrictCycleRetraction
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move) where
   lift : target.DegreeTwoCycle → source.DegreeTwoCycle
@@ -133,80 +127,12 @@ structure StrictCycleRetraction
 
 namespace StrictCycleRetraction
 
-/--
-The strict retraction carried by every 1--2 death calculation.
-
-This constructor extracts only chain-level cycle data already required by
-`OneTwoDeathCycleGeometry`; no evaluator equality is assumed.
--/
-noncomputable def ofOneTwoDeath
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} [AddCommGroup H2]
-    {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
-    (metadata :
-      TableTwoMoveMetadata .oneTwoDeath
-        source.topology target.topology)
-    (countsSound :
-      source.topology.counts = target.topology.counts.addOneTwo)
-    (transport : MarkedH2Transport source.topology target.topology)
-    (geometry : OneTwoDeathCycleGeometry source target transport) :
-    StrictCycleRetraction
-      (LocalCycleCalculation.oneTwoDeath
-        (𝒞 := 𝒞) (automorphism := automorphism)
-        metadata countsSound transport geometry) where
-  lift := geometry.reverseBirth.added.cycleTransport.targetCycle
-  forward_lift := geometry.forward_reverse_cycle
-  returned_lift := by
-    intro targetCycleValue
-    change
-      geometry.reverseBirth.added.cycleTransport.targetCycle
-          ((CycleTransport.ofMarkedH2Transport source target transport).targetCycle
-            (geometry.reverseBirth.added.cycleTransport.targetCycle
-              targetCycleValue)) =
-        geometry.reverseBirth.added.cycleTransport.targetCycle targetCycleValue
-    rw [geometry.forward_reverse_cycle]
-
-/--
-The strict retraction carried by every 2--3 death calculation.
--/
-noncomputable def ofTwoThreeDeath
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    {H2 : Type uH} [AddCommGroup H2]
-    {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
-    (metadata :
-      TableTwoMoveMetadata .twoThreeDeath
-        source.topology target.topology)
-    (countsSound :
-      source.topology.counts = target.topology.counts.addTwoThree)
-    (transport : MarkedH2Transport source.topology target.topology)
-    (geometry : TwoThreeDeathCycleGeometry source target transport) :
-    StrictCycleRetraction
-      (LocalCycleCalculation.twoThreeDeath
-        (𝒞 := 𝒞) (automorphism := automorphism)
-        metadata countsSound transport geometry) where
-  lift := geometry.reverseBirth.added.cycleTransport.targetCycle
-  forward_lift := geometry.forward_reverse_cycle
-  returned_lift := by
-    intro targetCycleValue
-    change
-      geometry.reverseBirth.added.cycleTransport.targetCycle
-          ((CycleTransport.ofMarkedH2Transport source target transport).targetCycle
-            (geometry.reverseBirth.added.cycleTransport.targetCycle
-              targetCycleValue)) =
-        geometry.reverseBirth.added.cycleTransport.targetCycle targetCycleValue
-    rw [geometry.forward_reverse_cycle]
-
 /-- The source class forced by inverse transport of a target class. -/
 noncomputable def sourceClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     {calculation : LocalCycleCalculation 𝒞 automorphism move}
     (_retraction : StrictCycleRetraction calculation)
@@ -222,11 +148,10 @@ The proof that the result represents the inverse-transported class is
 derived from homology naturality; it is not a field of the retraction.
 -/
 noncomputable def liftRepresentative
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     {calculation : LocalCycleCalculation 𝒞 automorphism move}
     (retraction : StrictCycleRetraction calculation)
@@ -245,11 +170,10 @@ noncomputable def liftRepresentative
 
 /-- The lifted representative is visibly safe for the death. -/
 theorem liftRepresentative_safe
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     {calculation : LocalCycleCalculation 𝒞 automorphism move}
     (retraction : StrictCycleRetraction calculation)
@@ -261,11 +185,10 @@ theorem liftRepresentative_safe
 
 /-- The retraction constructs the complete compatible death step. -/
 def liftedStep
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     {calculation : LocalCycleCalculation 𝒞 automorphism move}
     (retraction : StrictCycleRetraction calculation)
@@ -282,11 +205,10 @@ The scalar equality across a cancellation death is a theorem derived from
 the strict topology-only retraction and the categorical local calculation.
 -/
 theorem eval_lift_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     {calculation : LocalCycleCalculation 𝒞 automorphism move}
     (retraction : StrictCycleRetraction calculation)

@@ -26,9 +26,8 @@ example
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (diagram : H2 → Diagram C .unit .unit)
     (evaluationState : H2 → EvaluationState (K := K))
     (counts_sound :

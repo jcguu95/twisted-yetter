@@ -8,7 +8,7 @@ LEAN_NUM_THREADS=1 ./scripts/lean_local_check.sh \
   lean/TwistedYetter/Kirby/TableTwoEvaluatorCompilerAxiomAudit.lean \
   >"${output}" 2>&1
 
-if rg -q 'sorryAx|standardSpecialKirbyCalculusConnected' "${output}"; then
+if rg -q 'sorryAx|standardSpecialKirbyPresentationsConnected' "${output}"; then
   cat "${output}" >&2
   exit 1
 fi

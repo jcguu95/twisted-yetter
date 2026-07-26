@@ -26,4 +26,4 @@ upside-down dual complex.
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.open_term_sound
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.term_sound
 #print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.linear_eval_sound
-#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.BoundGeneralizedLinearSlide.eval_eq
+#print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.BoundKirbyColourLinearSlide.eval_eq

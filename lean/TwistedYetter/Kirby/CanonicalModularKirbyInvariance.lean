@@ -96,9 +96,8 @@ theorem required_local_calculation_classes_unique :
 
 /-- Public alias for the canonical chain enrichment used throughout this file. -/
 noncomputable def enrichedMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (move : TopologicalTableTwoMove source.topology target.topology) :
     TableTwoMove source.topology target.topology :=
   CanonicalSourceBackedMove.enrichedMove move
@@ -111,10 +110,9 @@ complexes.  Its elementary relation is exactly the eight source-bound
 topology moves.
 -/
 noncomputable def handlePresentationTheory
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     HandlePresentationTheory where
-  Presentation := StandardDottedCanonicalPresentation manifold H2
+  Presentation := StandardDottedCanonicalPresentation H2
   Marking := fun presentation =>
     presentation.canonicalPresentation.topology.handleChain.SecondHomology
   ElementaryMove := fun source target =>
@@ -132,10 +130,9 @@ handle-chain coordinates.
 noncomputable def presentationEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     PresentationEvaluation
-      (handlePresentationTheory manifold H2) K where
+      (handlePresentationTheory H2) K where
   value := fun presentation alpha =>
     presentation.canonicalPresentation.EvalC 𝒞 automorphism alpha
 
@@ -146,11 +143,10 @@ calculation and integral handle-chain generator reduction established in
 `DottedBoundaryGeneratorInvariance`.
 -/
 theorem representativeIndependenceOfStandardDottedPresentation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : StandardDottedCanonicalPresentation manifold H2) :
+    (presentation : StandardDottedCanonicalPresentation H2) :
     CanonicalPresentation.CycleRepresentativeIndependence
       𝒞 automorphism presentation.canonicalPresentation := by
   intro left right sameClass
@@ -166,12 +162,11 @@ terms. `LocalCycleCalculation.soundOfEndpoints` performs the actual category
 calculation, representative-independence bridge, and normalization proof.
 -/
 theorem evalC_local_move_invariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C) :
     IsInvariantUnderElementaryMoves
-      (presentationEvaluation 𝒞 automorphism manifold H2) := by
+      (presentationEvaluation 𝒞 automorphism H2) := by
   intro source target move alpha
   change
     source.canonicalPresentation.EvalC 𝒞 automorphism alpha =
@@ -197,27 +192,25 @@ separately named handle-chain and diagrammatic literature inputs remain
 visible in the theorem's axiom audit.
 -/
 noncomputable def EvalCOnClosedFourManifolds
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       FourManifoldTopologyBoundary
-        (handlePresentationTheory manifold H2)) :
+        (handlePresentationTheory H2)) :
     fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
   fourManifoldTopology.fourManifoldInvariant
-    (presentationEvaluation 𝒞 automorphism manifold H2)
+    (presentationEvaluation 𝒞 automorphism H2)
     (evalC_local_move_invariant 𝒞 automorphism)
 
 /-- The resulting function is invariant under oriented diffeomorphism. -/
 theorem EvalCOnClosedFourManifolds_diffeomorphism_invariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       FourManifoldTopologyBoundary
-        (handlePresentationTheory manifold H2))
+        (handlePresentationTheory H2))
     {X Y :
       fourManifoldTopology.realization.MarkedClosedOrientedSmoothFourManifold}
     (diffeomorphism :
@@ -227,20 +220,19 @@ theorem EvalCOnClosedFourManifolds_diffeomorphism_invariant
       EvalCOnClosedFourManifolds
         𝒞 automorphism fourManifoldTopology Y :=
   fourManifoldTopology.fourManifoldInvariant_diffeomorphism_invariant
-    (presentationEvaluation 𝒞 automorphism manifold H2)
+    (presentationEvaluation 𝒞 automorphism H2)
     (evalC_local_move_invariant 𝒞 automorphism)
     diffeomorphism
 
 /-- Pullback along geometric realization recovers the canonical `EvalC`. -/
 theorem EvalCOnClosedFourManifolds_on_presentation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (fourManifoldTopology :
       FourManifoldTopologyBoundary
-        (handlePresentationTheory manifold H2))
-    (presentation : StandardDottedCanonicalPresentation manifold H2)
+        (handlePresentationTheory H2))
+    (presentation : StandardDottedCanonicalPresentation H2)
     (alpha :
       presentation.canonicalPresentation.topology.handleChain.SecondHomology) :
     EvalCOnClosedFourManifolds
@@ -249,7 +241,7 @@ theorem EvalCOnClosedFourManifolds_on_presentation
       presentation.canonicalPresentation.EvalC
         𝒞 automorphism alpha :=
   fourManifoldTopology.fourManifoldInvariant_on_presentation
-    (presentationEvaluation 𝒞 automorphism manifold H2)
+    (presentationEvaluation 𝒞 automorphism H2)
     (evalC_local_move_invariant 𝒞 automorphism)
     ⟨presentation, alpha⟩
 

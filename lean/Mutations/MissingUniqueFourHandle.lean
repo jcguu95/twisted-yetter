@@ -12,41 +12,30 @@ universe u
 
 /-- This must fail: the special endpoint normal form requires one 4-handle. -/
 def unsafePresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type u)
     [AddCommGroup H2]
-    (formal : FormalPresentation)
-    (execution : ClosedExecutionCertificate formal)
-    (counts : HandleCounts)
-    (uniqueZero : counts.h0 = 1)
-    (ordered : Prop)
-    (orderedWitness : ordered)
-    (representedManifoldHash representationHash h2Hash : String)
-    (representedManifoldSound :
-      representedManifoldHash = manifold.manifoldSnapshotHash)
-    (representsFixedManifold : Prop)
-    (representationWitness : representsFixedManifold)
-    (representationShape :
-      RawPresentation.sha256Shape representationHash = true)
-    (h2Shape : RawPresentation.sha256Shape h2Hash = true)
-    (handleChain : HandleChainModel counts)
-    (h2ModelEquiv : handleChain.SecondHomology ≃+ H2) :
-    SpecialKirbyPresentation manifold H2 where
-  formal := formal
-  execution := execution
-  counts := counts
-  uniqueZeroHandle := uniqueZero
-  orderedByIncreasingIndex := ordered
-  ordering_witness := orderedWitness
-  representedManifoldHash := representedManifoldHash
-  represented_manifold_hash_sound := representedManifoldSound
-  representsFixedManifold := representsFixedManifold
-  representation_witness := representationWitness
-  representationCertificateHash := representationHash
-  representation_certificate_hash_shape := representationShape
-  h2ModelCertificateHash := h2Hash
-  h2_model_certificate_hash_shape := h2Shape
-  handleChain := handleChain
-  h2ModelEquiv := h2ModelEquiv
+    (base : SpecialKirbyPresentation H2) :
+    SpecialKirbyPresentation H2 where
+  formal := base.formal
+  execution := base.execution
+  counts := base.counts
+  twoHandleComponent := base.twoHandleComponent
+  two_handle_component_mem := base.two_handle_component_mem
+  two_handle_component_role := base.two_handle_component_role
+  twoHandleIndex? := base.twoHandleIndex?
+  two_handle_index_roundtrip := base.two_handle_index_roundtrip
+  two_handle_index_sound := base.two_handle_index_sound
+  every_two_handle_component_indexed := base.every_two_handle_component_indexed
+  dotted_component_unindexed := base.dotted_component_unindexed
+  componentIndexCertificateHash := base.componentIndexCertificateHash
+  component_index_certificate_hash_shape :=
+    base.component_index_certificate_hash_shape
+  uniqueZeroHandle := base.uniqueZeroHandle
+  orderedByIncreasingIndex := base.orderedByIncreasingIndex
+  ordering_witness := base.ordering_witness
+  h2ModelCertificateHash := base.h2ModelCertificateHash
+  h2_model_certificate_hash_shape := base.h2_model_certificate_hash_shape
+  handleChain := base.handleChain
+  h2ModelEquiv := base.h2ModelEquiv
 
 end TwistedYetter.Mutations.MissingUniqueFourHandle

@@ -100,6 +100,106 @@ theorem sum_splitAt
             summand (combineAt selected selectedLabel remaining) :=
       Finset.sum_comm
 
+/-- View a second, distinct coordinate among the indices remaining after the first. -/
+def remainingSelected
+    {I : Type uI}
+    (first second : I)
+    (distinct : second ≠ first) :
+    RemainingIndex first :=
+  ⟨second, distinct⟩
+
+/-- Reconstruct a labeling after fixing two distinct selected coordinates. -/
+def combineAtTwo
+    {I : Type uI} [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS}
+    (firstLabel secondLabel : S)
+    (remaining : RemainingIndex (remainingSelected first second distinct) → S) :
+    I → S :=
+  combineAt first firstLabel
+    (combineAt (remainingSelected first second distinct)
+      secondLabel remaining)
+
+@[simp] theorem combineAtTwo_first
+    {I : Type uI} [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS}
+    (firstLabel secondLabel : S)
+    (remaining : RemainingIndex (remainingSelected first second distinct) → S) :
+    combineAtTwo first second distinct
+      firstLabel secondLabel remaining first = firstLabel := by
+  simp [combineAtTwo]
+
+@[simp] theorem combineAtTwo_second
+    {I : Type uI} [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS}
+    (firstLabel secondLabel : S)
+    (remaining : RemainingIndex (remainingSelected first second distinct) → S) :
+    combineAtTwo first second distinct
+      firstLabel secondLabel remaining second = secondLabel := by
+  unfold combineAtTwo
+  change
+    combineAt first firstLabel
+        (combineAt (remainingSelected first second distinct)
+          secondLabel remaining)
+        (remainingSelected first second distinct).1 =
+      secondLabel
+  rw [combineAt_remaining first firstLabel
+    (combineAt (remainingSelected first second distinct)
+      secondLabel remaining)
+    (remainingSelected first second distinct)]
+  exact combineAt_selected
+    (remainingSelected first second distinct) secondLabel remaining
+
+/--
+Changing the first selected label leaves every other coordinate unchanged.
+This is the pointwise fact needed to split one component weight from a global
+product without changing any of its complementary factors.
+-/
+theorem combineAtTwo_eq_of_ne_first
+    {I : Type uI} [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS}
+    (firstLabel firstLabel' secondLabel : S)
+    (remaining : RemainingIndex (remainingSelected first second distinct) → S)
+    {index : I}
+    (index_ne_first : index ≠ first) :
+    combineAtTwo first second distinct
+        firstLabel secondLabel remaining index =
+      combineAtTwo first second distinct
+        firstLabel' secondLabel remaining index := by
+  simp [combineAtTwo, combineAt, splitAt, index_ne_first]
+
+/--
+The complete finite sum splits exactly into all labels away from two distinct
+coordinates, followed by the second selected label and the first selected
+label.  The order is chosen for slide blocks: moving label first, stationary
+Kirby-colour label second.
+-/
+theorem sum_splitAtTwo
+    {I : Type uI} [Fintype I] [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS} [Fintype S]
+    {V : Type uV} [AddCommMonoid V]
+    (summand : (I → S) → V) :
+    (∑ labeling, summand labeling) =
+      ∑ remaining :
+          RemainingIndex (remainingSelected first second distinct) → S,
+        ∑ secondLabel : S,
+          ∑ firstLabel : S,
+            summand
+              (combineAtTwo first second distinct
+                firstLabel secondLabel remaining) := by
+  rw [sum_splitAt first]
+  rw [sum_splitAt (remainingSelected first second distinct)]
+  rfl
+
 /-- Machine-visible status of the exact denominator split. -/
 def currentStatus : String :=
   "PASS_SELECTED_COORDINATE_FINITE_LABEL_SUM_SPLIT"

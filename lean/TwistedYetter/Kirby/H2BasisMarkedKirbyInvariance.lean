@@ -57,11 +57,10 @@ field is the explicit no-hidden-coefficient condition for cancellation
 deaths.  There is no field in `K`.
 -/
 structure BasisMarkedMoveCompatibility
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     (sourceBasis : H2BasisRealization source)
@@ -83,11 +82,10 @@ One basis-compatible local Kirby calculation preserves the corrected
 `H₂`-level presentation value.
 -/
 theorem presentationValue_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation : LocalCycleCalculation 𝒞 automorphism move)
     (sourceBasis : H2BasisRealization source)
@@ -112,9 +110,8 @@ end BasisMarkedMoveCompatibility
 
 /-- One canonical presentation equipped with a certified sphere basis. -/
 structure BasisMarkedPresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  presentation : CanonicalPresentation manifold H2
+  presentation : CanonicalPresentation H2
   basis : H2BasisRealization presentation
 
 /--
@@ -126,9 +123,8 @@ There is no constructor from a scalar equality.
 structure BasisMarkedMove
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : BasisMarkedPresentation manifold H2) where
+    (source target : BasisMarkedPresentation H2) where
   move :
     TableTwoMove
       source.presentation.topology target.presentation.topology
@@ -144,10 +140,9 @@ moves.
 noncomputable def basisMarkedPresentationTheory
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     HandlePresentationTheory where
-  Presentation := BasisMarkedPresentation manifold H2
+  Presentation := BasisMarkedPresentation H2
   Marking := fun marked =>
     marked.presentation.topology.handleChain.SecondHomology
   ElementaryMove := fun source target =>
@@ -160,10 +155,9 @@ noncomputable def basisMarkedPresentationTheory
 noncomputable def basisMarkedEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     PresentationEvaluation
-      (basisMarkedPresentationTheory 𝒞 automorphism manifold H2) K where
+      (basisMarkedPresentationTheory 𝒞 automorphism H2) K where
   value := fun marked alpha =>
     basisMarkedPresentationValue
       𝒞 automorphism marked.presentation marked.basis alpha
@@ -176,10 +170,9 @@ This theorem derives the equality; `BasisMarkedMove` itself cannot store it.
 theorem basisMarkedEvaluation_localInvariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     IsInvariantUnderElementaryMoves
-      (basisMarkedEvaluation 𝒞 automorphism manifold H2) := by
+      (basisMarkedEvaluation 𝒞 automorphism H2) := by
   intro source target move alpha
   exact move.compatibility.presentationValue_eq
     𝒞 automorphism move.calculation source.basis target.basis alpha
@@ -191,27 +184,25 @@ Kirby quotient.
 noncomputable def basisMarkedEvaluationOnKirbyClass
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
     (basisMarkedPresentationTheory
-      𝒞 automorphism manifold H2).KirbyClass → K :=
-  (basisMarkedEvaluation 𝒞 automorphism manifold H2).descendToKirbyClass
+      𝒞 automorphism H2).KirbyClass → K :=
+  (basisMarkedEvaluation 𝒞 automorphism H2).descendToKirbyClass
     (basisMarkedEvaluation_localInvariant
-      𝒞 automorphism manifold H2)
+      𝒞 automorphism H2)
 
 /-- Quotient evaluation agrees with the explicit presentation formula. -/
 theorem basisMarkedEvaluationOnKirbyClass_mk
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (marked :
       (basisMarkedPresentationTheory
-        𝒞 automorphism manifold H2).MarkedPresentation) :
+        𝒞 automorphism H2).MarkedPresentation) :
     basisMarkedEvaluationOnKirbyClass
-        𝒞 automorphism manifold H2 (Quotient.mk _ marked) =
+        𝒞 automorphism H2 (Quotient.mk _ marked) =
       (basisMarkedEvaluation
-        𝒞 automorphism manifold H2).markedValue marked :=
+        𝒞 automorphism H2).markedValue marked :=
   rfl
 
 end TwistedYetter.Kirby.H2BasisMarkedKirbyInvariance

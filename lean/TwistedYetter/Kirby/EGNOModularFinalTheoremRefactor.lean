@@ -56,10 +56,9 @@ The ambient `H2` parameter remains only because the legacy presentation schema
 stores a coordinate equivalence to it. It is not the public marking type.
 -/
 noncomputable def handleHomologyCalculus
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type) [AddCommGroup H2] :
     HandlePresentationTheory.{1, 0, 1} where
-  Presentation := SpecialKirbyPresentation manifold H2
+  Presentation := SpecialKirbyPresentation H2
   Marking := fun presentation =>
     presentation.handleChain.SecondHomology
   ElementaryMove := fun source target =>
@@ -72,13 +71,12 @@ The old ambient-coordinate transport is exactly the chain-induced transport,
 conjugated by the two presentations' coordinate equivalences.
 -/
 theorem h2ModelEquiv_transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (alpha : source.handleChain.SecondHomology) :
     target.h2ModelEquiv
-        ((handleHomologyCalculus manifold H2).transport move alpha) =
+        ((handleHomologyCalculus H2).transport move alpha) =
       move.homologyTransport.targetClass
         (source.h2ModelEquiv alpha) := by
   simp [handleHomologyCalculus, MarkedH2Transport.targetClass,
@@ -96,7 +94,6 @@ the general graphical calculus.
 -/
 structure CompiledEvaluatorEvidence
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type) [AddCommGroup H2] where
   evidenceBinding :
     LiteratureBackedModularGraphicalEnvironment.EvidenceBinding
@@ -105,12 +102,12 @@ structure CompiledEvaluatorEvidence
     PresentationCompiler 𝒞.premodular
       (LiteratureBackedModularGraphicalEnvironment.build
         𝒞 evidenceBinding)
-      automorphism manifold H2
+      automorphism H2
   localMoveCompiler :
     LocalMoveCompiler 𝒞.premodular
       (LiteratureBackedModularGraphicalEnvironment.build
         𝒞 evidenceBinding)
-      automorphism manifold H2 presentationCompiler
+      automorphism H2 presentationCompiler
   assemblyCertificateHash : String
   assembly_certificate_hash_shape :
     RawPresentation.sha256Shape assemblyCertificateHash = true
@@ -128,11 +125,10 @@ will be introduced only after its canonical construction no longer requires a
 caller-supplied compiler.
 -/
 noncomputable def compiledEvaluation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
-    PresentationEvaluation (handleHomologyCalculus manifold H2) K where
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
+    PresentationEvaluation (handleHomologyCalculus H2) K where
   value := fun presentation alpha =>
     inputs.presentationCompiler.value presentation
       (presentation.h2ModelEquiv alpha)
@@ -146,10 +142,9 @@ against the six fixed literature-backed graphical laws, and rewrites the target
 coordinate by `h2ModelEquiv_transport`.
 -/
 theorem evalC_local_move_invariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
     IsInvariantUnderElementaryMoves
       (compiledEvaluation 𝒞 inputs) := by
   intro source target move alpha
@@ -157,7 +152,7 @@ theorem evalC_local_move_invariant
     inputs.presentationCompiler.value source (source.h2ModelEquiv alpha) =
       inputs.presentationCompiler.value target
         (target.h2ModelEquiv
-          ((handleHomologyCalculus manifold H2).transport move alpha))
+          ((handleHomologyCalculus H2).transport move alpha))
   rw [h2ModelEquiv_transport move alpha]
   exact inputs.localMoveCompiler.move_invariant move
     (source.h2ModelEquiv alpha)
@@ -173,11 +168,10 @@ closed-four-manifold correspondence. It does not use the old
 `representsFixedManifold` witness.
 -/
 noncomputable def compiledEvaluationOnKirbyClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
-    (handleHomologyCalculus manifold H2).KirbyClass → K :=
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
+    (handleHomologyCalculus H2).KirbyClass → K :=
   (inputs.compiledEvaluation 𝒞).descendToKirbyClass
     inputs.evalC_local_move_invariant
 
@@ -186,12 +180,11 @@ The quotient evaluation agrees definitionally with the compiled presentation
 formula.
 -/
 theorem compiledEvaluationOnKirbyClass_mk
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2)
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2)
     (marked :
-      (handleHomologyCalculus manifold H2).MarkedPresentation) :
+      (handleHomologyCalculus H2).MarkedPresentation) :
     compiledEvaluationOnKirbyClass inputs (Quotient.mk _ marked) =
       (inputs.compiledEvaluation 𝒞).markedValue marked :=
   rfl

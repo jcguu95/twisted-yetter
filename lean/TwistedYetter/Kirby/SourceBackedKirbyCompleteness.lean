@@ -68,88 +68,82 @@ The five Table 2 topology families plus framed-link presentation isotopy,
 without marked-homology transport.
 -/
 inductive TopologicalTableTwoMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2] :
-    SpecialKirbyPresentation manifold H2 →
-      SpecialKirbyPresentation manifold H2 → Type (uH + 1)
+    SpecialKirbyPresentation H2 →
+      SpecialKirbyPresentation H2 → Type (uH + 1)
   | framedIsotopy
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .framedIsotopy source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | oneOverOne
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | twoOverOne
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | twoOverTwo
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts) :
       TopologicalTableTwoMove source target
   | oneTwoBirth
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo) :
       TopologicalTableTwoMove source target
   | oneTwoDeath
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
       (counts_sound : source.counts = target.counts.addOneTwo) :
       TopologicalTableTwoMove source target
   | twoThreeBirth
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
       (counts_sound : target.counts = source.counts.addTwoThree) :
       TopologicalTableTwoMove source target
   | twoThreeDeath
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
       (counts_sound : source.counts = target.counts.addTwoThree) :
       TopologicalTableTwoMove source target
 
 /-- A finite movie made only from the source-backed topology whitelist. -/
 inductive TopologicalTableTwoMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2] :
-    SpecialKirbyPresentation manifold H2 →
-      SpecialKirbyPresentation manifold H2 → Type (uH + 1)
-  | refl (presentation : SpecialKirbyPresentation manifold H2) :
+    SpecialKirbyPresentation H2 →
+      SpecialKirbyPresentation H2 → Type (uH + 1)
+  | refl (presentation : SpecialKirbyPresentation H2) :
       TopologicalTableTwoMovie presentation presentation
   | step
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (move : TopologicalTableTwoMove source target) :
       TopologicalTableTwoMovie source target
   | trans
-      {source middle target : SpecialKirbyPresentation manifold H2}
+      {source middle target : SpecialKirbyPresentation H2}
       (first : TopologicalTableTwoMovie source middle)
       (second : TopologicalTableTwoMovie middle target) :
       TopologicalTableTwoMovie source target
 
 /-- Forget the chain-derived marked-homology enrichment of one move. -/
 def forgetMoveTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target) :
     TopologicalTableTwoMove source target := by
   cases move with
   | framedIsotopy metadata counts _ =>
       exact .framedIsotopy metadata counts
-  | oneOverOne orientation metadata counts _ =>
-      exact .oneOverOne orientation metadata counts
-  | twoOverOne orientation metadata counts _ =>
-      exact .twoOverOne orientation metadata counts
-  | twoOverTwo orientation metadata counts _ =>
-      exact .twoOverTwo orientation metadata counts
+  | oneOverOne metadata counts _ =>
+      exact .oneOverOne metadata counts
+  | twoOverOne metadata counts _ =>
+      exact .twoOverOne metadata counts
+  | twoOverTwo metadata counts _ =>
+      exact .twoOverTwo metadata counts
   | oneTwoBirth metadata counts _ =>
       exact .oneTwoBirth metadata counts
   | oneTwoDeath metadata counts _ =>
@@ -161,9 +155,8 @@ def forgetMoveTransport
 
 /-- Forget marked-homology enrichment throughout a movie. -/
 noncomputable def forgetMovieTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target) :
     TopologicalTableTwoMovie source target :=
   match movie with
@@ -180,26 +173,23 @@ The sole imported special-Kirby topology axiom.
 This is the formal boundary corresponding to the cited standard theorem.  It
 returns no chain equivalence and no evaluator statement.
 -/
-axiom standardSpecialKirbyCalculusConnected
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
+axiom standardSpecialKirbyPresentationsConnected
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : SpecialKirbyPresentation manifold H2) :
+    (source target : SpecialKirbyPresentation H2) :
     TopologicalTableTwoMovie source target
 
 /-- The source-backed topology interface, containing no evaluator field. -/
 structure TopologicalTableTwoCompleteness
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   connected :
-    (source target : SpecialKirbyPresentation manifold H2) →
+    (source target : SpecialKirbyPresentation H2) →
       TopologicalTableTwoMovie source target
 
 /-- The canonical instance backed by the single visible domain axiom. -/
 noncomputable def sourceBackedTopologicalCompleteness
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] :
-    TopologicalTableTwoCompleteness manifold H2 where
-  connected := standardSpecialKirbyCalculusConnected
+    TopologicalTableTwoCompleteness H2 where
+  connected := standardSpecialKirbyPresentationsConnected
 
 /--
 The concrete assembly boundary for marked homology, reduced to one local
@@ -209,34 +199,32 @@ The output is an actual `MarkedH2Transport`, so its map on second homology is
 forced by a chain homotopy equivalence.
 -/
 structure LocalMarkedH2Compiler
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   transport :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
       TopologicalTableTwoMove source target →
         MarkedH2Transport source target
 
 /-- Reattach chain-derived marked-homology data to one topology move. -/
 def enrichMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : LocalMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : LocalMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     TableTwoMove source target := by
   cases move with
   | framedIsotopy metadata counts =>
       exact .framedIsotopy metadata counts
         (compiler.transport (.framedIsotopy metadata counts))
-  | oneOverOne orientation metadata counts =>
-      exact .oneOverOne orientation metadata counts
-        (compiler.transport (.oneOverOne orientation metadata counts))
-  | twoOverOne orientation metadata counts =>
-      exact .twoOverOne orientation metadata counts
-        (compiler.transport (.twoOverOne orientation metadata counts))
-  | twoOverTwo orientation metadata counts =>
-      exact .twoOverTwo orientation metadata counts
-        (compiler.transport (.twoOverTwo orientation metadata counts))
+  | oneOverOne metadata counts =>
+      exact .oneOverOne metadata counts
+        (compiler.transport (.oneOverOne metadata counts))
+  | twoOverOne metadata counts =>
+      exact .twoOverOne metadata counts
+        (compiler.transport (.twoOverOne metadata counts))
+  | twoOverTwo metadata counts =>
+      exact .twoOverTwo metadata counts
+        (compiler.transport (.twoOverTwo metadata counts))
   | oneTwoBirth metadata counts =>
       exact .oneTwoBirth metadata counts
         (compiler.transport (.oneTwoBirth metadata counts))
@@ -252,20 +240,18 @@ def enrichMove
 
 /-- Local enrichment preserves the exact topology constructor and metadata. -/
 theorem forget_enrichMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : LocalMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : LocalMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     forgetMoveTransport (enrichMove compiler move) = move := by
   cases move <;> rfl
 
 /-- Recursively enrich a whole source-backed topology movie. -/
 noncomputable def enrichMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : LocalMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : LocalMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (movie : TopologicalTableTwoMovie source target) :
     TableTwoMovie source target :=
   match movie with
@@ -278,10 +264,9 @@ noncomputable def enrichMovie
 
 /-- Whole-movie enrichment leaves the source topology movie unchanged. -/
 theorem forget_enrichMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : LocalMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : LocalMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (movie : TopologicalTableTwoMovie source target) :
     forgetMovieTransport (enrichMovie compiler movie) = movie := by
   induction movie with
@@ -297,23 +282,21 @@ The still-open bridge from a topology movie to a movie carrying actual handle
 chain equivalences.  Its law prevents changing the underlying topology movie.
 -/
 structure TableTwoMovieEnrichment
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   enrich :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
       TopologicalTableTwoMovie source target →
         TableTwoMovie source target
   forget_sound :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (movie : TopologicalTableTwoMovie source target) →
       forgetMovieTransport (enrich movie) = movie
 
 /-- Build the whole-movie enrichment from local chain data. -/
 noncomputable def movieEnrichmentOfLocalCompiler
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : LocalMarkedH2Compiler manifold H2) :
-    TableTwoMovieEnrichment manifold H2 where
+    (compiler : LocalMarkedH2Compiler H2) :
+    TableTwoMovieEnrichment H2 where
   enrich := enrichMovie compiler
   forget_sound := forget_enrichMovie compiler
 
@@ -322,15 +305,14 @@ Combine the source-backed topology axiom with independently constructed chain
 enrichment.  No evaluator data enters this construction.
 -/
 noncomputable def buildTableTwoLinkCompleteness
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (general : GeneralCerfCompleteness manifold)
-    (enrichment : TableTwoMovieEnrichment manifold H2) :
-    TableTwoLinkCompleteness manifold H2 where
+    (general : GeneralCerfCompleteness)
+    (enrichment : TableTwoMovieEnrichment H2) :
+    TableTwoLinkCompleteness H2 where
   generalCerf := general
   tableTwoConnected := fun source target =>
     enrichment.enrich
-      (standardSpecialKirbyCalculusConnected source target)
+      (standardSpecialKirbyPresentationsConnected source target)
   link_calculus_source_refs := sourceRefs
   link_calculus_source_locator := sourceLocator
   normal_form_statement := exactScope

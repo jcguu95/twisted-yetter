@@ -23,10 +23,9 @@ def rejected
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     (first second : Package data)
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
-    (compiler : PresentationCompiler data first automorphism manifold H2) :
-    PresentationCompiler data second automorphism manifold H2 :=
+    (compiler : PresentationCompiler data first automorphism H2) :
+    PresentationCompiler data second automorphism H2 :=
   compiler
 
 end TwistedYetter.Mutations.ReboundPresentationCompilerPackage

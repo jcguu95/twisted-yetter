@@ -44,7 +44,6 @@ The exact equality `boundary_diagram_sound` binds the serialized evaluator
 input to the surgery diagram standardized by the boundary movie.
 -/
 structure LowerKirbyDiagramSemantics
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     (lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus) where
@@ -104,21 +103,6 @@ structure LowerKirbyDiagramSemantics
   ordering_witness :
     (lower : lowerTheory.Presentation) →
       orderedByIncreasingIndex lower
-  representedManifoldHash :
-    lowerTheory.Presentation → String
-  represented_manifold_hash_sound :
-    (lower : lowerTheory.Presentation) →
-      representedManifoldHash lower = manifold.manifoldSnapshotHash
-  representsFixedManifold : lowerTheory.Presentation → Prop
-  representation_witness :
-    (lower : lowerTheory.Presentation) →
-      representsFixedManifold lower
-  representationCertificateHash :
-    lowerTheory.Presentation → String
-  representation_certificate_hash_shape :
-    (lower : lowerTheory.Presentation) →
-      RawPresentation.sha256Shape
-        (representationCertificateHash lower) = true
 
 /--
 A special Kirby presentation whose evaluator-side dual handle chain is
@@ -127,7 +111,6 @@ forced by its certified boundary completion.
 There is deliberately no `handleChain` field.
 -/
 structure BoundaryCertifiedPresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
@@ -162,7 +145,6 @@ namespace BoundaryCertifiedPresentation
 
 /-- The dual/upside-down handle chain forced by the boundary certificate. -/
 def handleChain
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
@@ -174,7 +156,7 @@ def handleChain
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (presentation :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) :
     HandleChainModel (dualCounts presentation.closure.handleCounts) :=
   BoundaryDerivedHandleChainModel.derivedHandleChainModel
@@ -190,11 +172,10 @@ counts and boundary data come from `closure`; the handle chain is their
 certified dual.  No independent chain model is caller-supplied here.
 -/
 def toSpecialKirbyPresentation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -203,9 +184,9 @@ def toSpecialKirbyPresentation
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (presentation :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) :
-    SpecialKirbyPresentation manifold H2 where
+    SpecialKirbyPresentation H2 where
   formal := semantics.formal presentation.closure.lower
   execution := semantics.execution presentation.closure.lower
   counts := presentation.closure.handleCounts
@@ -236,19 +217,6 @@ def toSpecialKirbyPresentation
     semantics.orderedByIncreasingIndex presentation.closure.lower
   ordering_witness :=
     semantics.ordering_witness presentation.closure.lower
-  representedManifoldHash :=
-    semantics.representedManifoldHash presentation.closure.lower
-  represented_manifold_hash_sound :=
-    semantics.represented_manifold_hash_sound presentation.closure.lower
-  representsFixedManifold :=
-    semantics.representsFixedManifold presentation.closure.lower
-  representation_witness :=
-    semantics.representation_witness presentation.closure.lower
-  representationCertificateHash :=
-    semantics.representationCertificateHash presentation.closure.lower
-  representation_certificate_hash_shape :=
-    semantics.representation_certificate_hash_shape
-      presentation.closure.lower
   h2ModelCertificateHash := presentation.h2ModelCertificateHash
   h2_model_certificate_hash_shape :=
     presentation.h2_model_certificate_hash_shape
@@ -257,11 +225,10 @@ def toSpecialKirbyPresentation
 
 /-- The adapter's legacy handle chain is definitionally the certified dual. -/
 theorem toSpecialKirbyPresentation_handleChain
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -270,7 +237,7 @@ theorem toSpecialKirbyPresentation_handleChain
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (presentation :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) :
     (presentation.toSpecialKirbyPresentation semantics).handleChain =
       presentation.handleChain :=
@@ -278,11 +245,10 @@ theorem toSpecialKirbyPresentation_handleChain
 
 /-- The adapter keeps the primal counts used by link normalization. -/
 theorem toSpecialKirbyPresentation_counts
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -291,7 +257,7 @@ theorem toSpecialKirbyPresentation_counts
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (presentation :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) :
     (presentation.toSpecialKirbyPresentation semantics).counts =
       presentation.closure.handleCounts :=
@@ -299,11 +265,10 @@ theorem toSpecialKirbyPresentation_counts
 
 /-- The serialized link and the standardized surgery boundary are bound. -/
 theorem formal_boundary_diagram_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -312,7 +277,7 @@ theorem formal_boundary_diagram_sound
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (presentation :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) :
     semantics.formalSurgeryDiagram
         (presentation.toSpecialKirbyPresentation semantics).formal =

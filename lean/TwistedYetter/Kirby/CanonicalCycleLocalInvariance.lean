@@ -48,19 +48,20 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 /-- Equal counts and equal explicit-cycle linear evaluations give equal values. -/
 theorem cycleEvalC_eq_of_counts_and_linear_eval
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (sourceCycle : source.DegreeTwoCycle)
     (targetCycle : target.DegreeTwoCycle)
     (countsEq : source.topology.counts = target.topology.counts)
     (linearEvalEq :
       LinearDiagram.eval
-          (source.cycleLinearDiagram 𝒞 automorphism sourceCycle) =
+          (source.cycleLinearDiagram
+            𝒞.premodular automorphism sourceCycle) =
         LinearDiagram.eval
-          (target.cycleLinearDiagram 𝒞 automorphism targetCycle)) :
+          (target.cycleLinearDiagram
+            𝒞.premodular automorphism targetCycle)) :
     source.cycleEvalC 𝒞 automorphism sourceCycle =
       target.cycleEvalC 𝒞 automorphism targetCycle := by
   apply EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw
@@ -70,11 +71,10 @@ theorem cycleEvalC_eq_of_counts_and_linear_eval
 
 /-- Exact 1--2 birth geometry gives equality of normalized cycle values. -/
 theorem oneTwoBirth_cycleEvalC
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (countsSound :
       target.topology.counts = source.topology.counts.addOneTwo)
@@ -90,10 +90,11 @@ theorem oneTwoBirth_cycleEvalC
     pairValue := globalDimension 𝒞.premodular
     cutValue := 1
     before :=
-      target.cycleEvaluationState 𝒞 automorphism
+      target.cycleEvaluationState 𝒞.premodular automorphism
         (geometry.added.cycleTransport.targetCycle sourceCycle)
     after :=
-      source.cycleEvaluationState 𝒞 automorphism sourceCycle
+      source.cycleEvaluationState
+        𝒞.premodular automorphism sourceCycle
     counts_sound := countsSound
     isolated_from_rest := True
     isolated_from_rest_witness := True.intro
@@ -112,11 +113,10 @@ theorem oneTwoBirth_cycleEvalC
 
 /-- Exact 2--3 birth geometry gives equality of normalized cycle values. -/
 theorem twoThreeBirth_cycleEvalC
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (countsSound :
       target.topology.counts = source.topology.counts.addTwoThree)
@@ -131,16 +131,17 @@ theorem twoThreeBirth_cycleEvalC
         (CanonicalPresentation.normalizationProfile 𝒞) := {
     unknotValue := globalDimension 𝒞.premodular
     before :=
-      target.cycleEvaluationState 𝒞 automorphism
+      target.cycleEvaluationState 𝒞.premodular automorphism
         (geometry.added.cycleTransport.targetCycle sourceCycle)
     after :=
-      source.cycleEvaluationState 𝒞 automorphism sourceCycle
+      source.cycleEvaluationState
+        𝒞.premodular automorphism sourceCycle
     counts_sound := countsSound
     unlinked_unknotted_zero_framed := True
     unlink_witness := True.intro
     disjoint_union_sound := fun _ =>
       geometry.cycleRawNumerator_factor
-        𝒞 automorphism sourceCycle
+        𝒞.premodular automorphism sourceCycle
     pivotal_dimension_preserved := rfl
   }
   simpa only [CanonicalPresentation.cycleEvalC] using
@@ -155,9 +156,8 @@ calculation cannot substitute a separately selected homology map.
 inductive LocalCycleCalculation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2} :
+    {source target : CanonicalPresentation H2} :
     TableTwoMove source.topology target.topology →
       Type (max (max uK uC) (max vC (uH + 1)))
   | framedIsotopy
@@ -172,58 +172,55 @@ inductive LocalCycleCalculation
       LocalCycleCalculation 𝒞 automorphism
         (.framedIsotopy metadata countsSound transport)
   | oneOverOne
-      (orientation : BandOrientation)
       (metadata :
         TableTwoMoveMetadata .oneOverOne
           source.topology target.topology)
       (countsSound : source.topology.counts = target.topology.counts)
       (transport : MarkedH2Transport source.topology target.topology)
       (geometry :
-        OrdinaryCycleSlideGeometry 𝒞 automorphism
+        OrdinaryCycleSlideGeometry 𝒞.premodular automorphism
           source target transport
           .oneOverOne
           (HandleEdit.oneOverOneOrientation metadata.recipe.handleEdit)
-          orientation metadata.moveId
+          metadata.moveId
           metadata.sourcePresentationHash metadata.targetPresentationHash
           (HandleEdit.oneOverOneSlidingId metadata.recipe.handleEdit)
           (HandleEdit.oneOverOneStationaryId metadata.recipe.handleEdit)) :
       LocalCycleCalculation 𝒞 automorphism
-        (.oneOverOne orientation metadata countsSound transport)
+        (.oneOverOne metadata countsSound transport)
   | twoOverOne
-      (orientation : BandOrientation)
       (metadata :
         TableTwoMoveMetadata .twoOverOne
           source.topology target.topology)
       (countsSound : source.topology.counts = target.topology.counts)
       (transport : MarkedH2Transport source.topology target.topology)
       (geometry :
-        OrdinaryCycleSlideGeometry 𝒞 automorphism
+        OrdinaryCycleSlideGeometry 𝒞.premodular automorphism
           source target transport
           .twoOverOne
           (HandleEdit.twoOverOneOrientation metadata.recipe.handleEdit)
-          orientation metadata.moveId
+          metadata.moveId
           metadata.sourcePresentationHash metadata.targetPresentationHash
           (HandleEdit.twoOverOneSlidingId metadata.recipe.handleEdit)
           (HandleEdit.twoOverOneStationaryId metadata.recipe.handleEdit)) :
       LocalCycleCalculation 𝒞 automorphism
-        (.twoOverOne orientation metadata countsSound transport)
+        (.twoOverOne metadata countsSound transport)
   | twoOverTwo
-      (orientation : BandOrientation)
       (metadata :
         TableTwoMoveMetadata .twoOverTwo
           source.topology target.topology)
       (countsSound : source.topology.counts = target.topology.counts)
       (transport : MarkedH2Transport source.topology target.topology)
       (geometry :
-        GeneralizedCycleSlideGeometry 𝒞 automorphism
+        GeneralizedCycleSlideGeometry 𝒞.premodular automorphism
           source target transport
           (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-          orientation metadata.moveId
+          metadata.moveId
           metadata.sourcePresentationHash metadata.targetPresentationHash
           (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
           (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)) :
       LocalCycleCalculation 𝒞 automorphism
-        (.twoOverTwo orientation metadata countsSound transport)
+        (.twoOverTwo metadata countsSound transport)
   | oneTwoBirth
       (metadata :
         TableTwoMoveMetadata .oneTwoBirth
@@ -275,9 +272,8 @@ namespace LocalCycleCalculation
 
 /-- The cycle selected by the public evaluator represents its input class. -/
 private theorem chosenCycleClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     presentation.topology.handleChain.complex.homologyπ 2
         (presentation.chosenCycle alpha) =
@@ -289,9 +285,8 @@ A direct cycle transport sends the selected source cycle to the actual
 target handle-chain homology class induced by the chain equivalence.
 -/
 private theorem transportedChosenCycleClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (markedTransport :
       MarkedH2Transport source.topology target.topology)
     (cycleTransport :
@@ -309,9 +304,8 @@ private theorem transportedChosenCycleClass
 
 /-- Reverse transport after forward transport returns to the original class. -/
 private theorem reverseTransportedCycleClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (transport : MarkedH2Transport source.topology target.topology)
     (forward : CycleTransport source target transport.targetClass)
     (reverse :
@@ -334,11 +328,10 @@ Every restricted local calculation preserves the public homology-level value
 once representative independence is known at its two endpoints.
 -/
 theorem soundOfEndpoints
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (sourceRepresentativeIndependence :
       CanonicalPresentation.CycleRepresentativeIndependence
@@ -369,7 +362,7 @@ theorem soundOfEndpoints
               exact cycleEvalC_eq_of_counts_and_linear_eval
                 𝒞 automorphism sourceCycle targetCycle counts
                 (geometry.cycleLinearDiagram_eval_transport
-                  𝒞 automorphism sourceCycle)
+                  𝒞.premodular automorphism sourceCycle)
         _ = target.EvalC 𝒞 automorphism
               (transport.chainEquivalence
                 |>.secondHomologyAddEquiv alpha) := by
@@ -381,7 +374,7 @@ theorem soundOfEndpoints
                   |>.secondHomologyAddEquiv alpha) targetCycle
                 (transportedChosenCycleClass
                   transport geometry.cycleTransport alpha)
-  | oneOverOne orientation metadata counts transport geometry =>
+  | oneOverOne metadata counts transport geometry =>
       let cycleTransport :=
         CycleTransport.ofMarkedH2Transport source target transport
       let sourceCycle := source.chosenCycle alpha
@@ -397,7 +390,7 @@ theorem soundOfEndpoints
               exact cycleEvalC_eq_of_counts_and_linear_eval
                 𝒞 automorphism sourceCycle targetCycle counts
                 (geometry.cycleLinearDiagram_eval_transport
-                  𝒞 automorphism sourceCycle)
+                  𝒞.premodular automorphism sourceCycle)
         _ = target.EvalC 𝒞 automorphism
               (transport.chainEquivalence
                 |>.secondHomologyAddEquiv alpha) := by
@@ -409,7 +402,7 @@ theorem soundOfEndpoints
                   |>.secondHomologyAddEquiv alpha) targetCycle
                 (transportedChosenCycleClass
                   transport cycleTransport alpha)
-  | twoOverOne orientation metadata counts transport geometry =>
+  | twoOverOne metadata counts transport geometry =>
       let cycleTransport :=
         CycleTransport.ofMarkedH2Transport source target transport
       let sourceCycle := source.chosenCycle alpha
@@ -425,7 +418,7 @@ theorem soundOfEndpoints
               exact cycleEvalC_eq_of_counts_and_linear_eval
                 𝒞 automorphism sourceCycle targetCycle counts
                 (geometry.cycleLinearDiagram_eval_transport
-                  𝒞 automorphism sourceCycle)
+                  𝒞.premodular automorphism sourceCycle)
         _ = target.EvalC 𝒞 automorphism
               (transport.chainEquivalence
                 |>.secondHomologyAddEquiv alpha) := by
@@ -437,7 +430,7 @@ theorem soundOfEndpoints
                   |>.secondHomologyAddEquiv alpha) targetCycle
                 (transportedChosenCycleClass
                   transport cycleTransport alpha)
-  | twoOverTwo orientation metadata counts transport geometry =>
+  | twoOverTwo metadata counts transport geometry =>
       let cycleTransport :=
         CycleTransport.ofMarkedH2Transport source target transport
       let sourceCycle := source.chosenCycle alpha
@@ -453,7 +446,7 @@ theorem soundOfEndpoints
               exact cycleEvalC_eq_of_counts_and_linear_eval
                 𝒞 automorphism sourceCycle targetCycle counts
                 (geometry.cycleLinearDiagram_eval_transport
-                  𝒞 automorphism sourceCycle)
+                  𝒞.premodular automorphism sourceCycle)
         _ = target.EvalC 𝒞 automorphism
               (transport.chainEquivalence
                 |>.secondHomologyAddEquiv alpha) := by
@@ -578,15 +571,14 @@ theorem soundOfEndpoints
 
 /-- Backward-compatible global-system wrapper around `soundOfEndpoints`. -/
 theorem sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (representativeIndependence :
       CanonicalPresentation.CycleRepresentativeIndependenceSystem
-        𝒞 automorphism manifold H2)
+        𝒞 automorphism H2)
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
     (alpha : source.topology.handleChain.SecondHomology) :

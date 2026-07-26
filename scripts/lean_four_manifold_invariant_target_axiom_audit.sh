@@ -24,13 +24,13 @@ fi
 
 expected="$(
   printf '%s\n' \
-    "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput" \
-    "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyCalculusConnected" \
+    "TwistedYetter.Kirby.SourceBackedHandleChainNaturality.standardHandleChainNaturality" \
+    "TwistedYetter.Kirby.SourceBackedKirbyCompleteness.standardSpecialKirbyPresentationsConnected" \
     | sort
 )"
 observed="$(
   rg -o \
-    'TwistedYetter\.[A-Za-z0-9_.]*(standardHandleChainNaturalityInput|standardSpecialKirbyCalculusConnected)' \
+    'TwistedYetter\.[A-Za-z0-9_.]*(standardHandleChainNaturality|standardSpecialKirbyPresentationsConnected)' \
     "${output}" | sort -u
 )"
 if [[ "${observed}" != "${expected}" ]]; then

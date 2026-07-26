@@ -14,7 +14,7 @@ universe uK uC vC uS uI uH
 variable {K : Type uK} [Field K]
 variable {C : Type uC} [Category.{vC} C] [Preadditive C]
 variable [CategoryTheory.Linear K C]
-variable [MonoidalCategory C] [BraidedCategory C]
+variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type uS} [Fintype S] [DecidableEq S]
 variable {I : S → S → Type uI}
@@ -25,11 +25,10 @@ example
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (orientation : BandOrientation)
     (metadata : TableTwoMoveMetadata .oneOverOne source target)
     (counts : source.counts = target.counts)

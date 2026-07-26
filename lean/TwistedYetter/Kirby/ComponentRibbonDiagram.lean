@@ -314,42 +314,49 @@ def zeroFramedUnknot (componentId : String) :
     .capPositiveNegative componentId
 
 /--
-Free positive Hopf pair used by a cancelling 1--2 handle pair.
+The dotted meridian of a cancelling 1--2 pair, cut open along the two-handle
+strand.
 
-The first component is the dotted one-handle circle and the second is its
-zero-framed meridian.  The two positive middle crossings are written
-explicitly, as are all reassociations and unitors; no strict-monoidal or
-picture-level identification is hidden in the definition.
+Writing this open tangle in the free component syntax makes its later pivotal
+closure literal rather than an unproved picture-level identification.
 -/
-def oneTwoHopfPair
+def openDottedEncircling
     (dottedId twoHandleId : String) :
-    ComponentDiagram .unit .unit :=
+    ComponentDiagram
+      (.atom (positiveAtom twoHandleId))
+      (.atom (positiveAtom twoHandleId)) :=
   let dotted : ComponentBoundary :=
     .atom (positiveAtom dottedId)
   let dottedDual : ComponentBoundary :=
     .atom (negativeAtom dottedId)
   let twoHandle : ComponentBoundary :=
     .atom (positiveAtom twoHandleId)
+  .leftUnitorInv twoHandle ≫ᶜ
+    (.cupPositiveNegative dottedId ⊗ᶜ .identity twoHandle) ≫ᶜ
+    .associatorHom dotted dottedDual twoHandle ≫ᶜ
+    (.identity dotted ⊗ᶜ
+      (.crossingPositive dottedDual twoHandle ≫ᶜ
+        .crossingPositive twoHandle dottedDual)) ≫ᶜ
+    .associatorInv dotted dottedDual twoHandle ≫ᶜ
+    (.capPositiveNegative dottedId ⊗ᶜ .identity twoHandle) ≫ᶜ
+    .leftUnitorHom twoHandle
+
+/--
+Free positive Hopf pair used by a cancelling 1--2 handle pair.
+
+The first component is the dotted one-handle circle and the second is its
+zero-framed meridian.  This is definitionally the pivotal closure of
+`openDottedEncircling`; both positive crossings remain explicit.
+-/
+def oneTwoHopfPair
+    (dottedId twoHandleId : String) :
+    ComponentDiagram .unit .unit :=
   let twoHandleDual : ComponentBoundary :=
     .atom (negativeAtom twoHandleId)
-  .leftUnitorInv .unit ≫ᶜ
-    (.cupPositiveNegative dottedId ⊗ᶜ
-      .cupPositiveNegative twoHandleId) ≫ᶜ
-    .associatorHom dotted dottedDual
-      (.tensor twoHandle twoHandleDual) ≫ᶜ
-    (.identity dotted ⊗ᶜ
-      .associatorInv dottedDual twoHandle twoHandleDual) ≫ᶜ
-    (.identity dotted ⊗ᶜ
-      ((.crossingPositive dottedDual twoHandle ≫ᶜ
-          .crossingPositive twoHandle dottedDual) ⊗ᶜ
-        .identity twoHandleDual)) ≫ᶜ
-    (.identity dotted ⊗ᶜ
-      .associatorHom dottedDual twoHandle twoHandleDual) ≫ᶜ
-    .associatorInv dotted dottedDual
-      (.tensor twoHandle twoHandleDual) ≫ᶜ
-    (.capPositiveNegative dottedId ⊗ᶜ
-      .capPositiveNegative twoHandleId) ≫ᶜ
-    .leftUnitorHom .unit
+  .cupPositiveNegative twoHandleId ≫ᶜ
+    (openDottedEncircling dottedId twoHandleId ⊗ᶜ
+      .identity twoHandleDual) ≫ᶜ
+    .capPositiveNegative twoHandleId
 
 /-- Every component ID inspected by a free diagram. -/
 def componentIds :
@@ -1943,38 +1950,35 @@ def componentPrimitive :
         (ComponentBoundary.word before)
         (ComponentBoundary.word after)
   | _, _, _, .birth eventId componentId positiveId negativeId
-      leading suffix => by
-      simpa only [List.nil_append, List.append_assoc] using
-        (ComponentDiagram.Context.surroundBoundaryWord
-          leading []
-          [
-            positiveStrand positiveId componentId,
-            negativeStrand negativeId componentId
-          ]
-          suffix).plug
-            (.cupPositiveNegative componentId)
+      leading suffix =>
+      (ComponentDiagram.Context.surroundBoundaryWord
+        leading []
+        [
+          positiveStrand positiveId componentId,
+          negativeStrand negativeId componentId
+        ]
+        suffix).plug
+          (.cupPositiveNegative componentId)
   | _, _, _, .deathPositiveNegative eventId componentId firstId secondId
-      positiveId negativeId listedIds leading suffix => by
-      simpa only [List.nil_append, List.append_assoc] using
-        (ComponentDiagram.Context.surroundBoundaryWord
-          leading
-          [
-            positiveStrand positiveId componentId,
-            negativeStrand negativeId componentId
-          ]
-          [] suffix).plug
-            (.capPositiveNegative componentId)
+      positiveId negativeId listedIds leading suffix =>
+      (ComponentDiagram.Context.surroundBoundaryWord
+        leading
+        [
+          positiveStrand positiveId componentId,
+          negativeStrand negativeId componentId
+        ]
+        [] suffix).plug
+          (.capPositiveNegative componentId)
   | _, _, _, .deathNegativePositive eventId componentId firstId secondId
-      negativeId positiveId listedIds leading suffix => by
-      simpa only [List.nil_append, List.append_assoc] using
-        (ComponentDiagram.Context.surroundBoundaryWord
-          leading
-          [
-            negativeStrand negativeId componentId,
-            positiveStrand positiveId componentId
-          ]
-          [] suffix).plug
-            (.capNegativePositive componentId)
+      negativeId positiveId listedIds leading suffix =>
+      (ComponentDiagram.Context.surroundBoundaryWord
+        leading
+        [
+          negativeStrand negativeId componentId,
+          positiveStrand positiveId componentId
+        ]
+        [] suffix).plug
+          (.capNegativePositive componentId)
   | _, _, _, .crossing eventId overId underId sign
       overComponent underComponent overOrientation underOrientation
       leading suffix => by
@@ -1998,16 +2002,15 @@ def componentPrimitive :
             ComponentDiagram.crossingNegative
               (.atom (ComponentBoundary.ofStrand over))
               (.atom (ComponentBoundary.ofStrand under))
-      simpa only [List.append_assoc] using
+      exact
         (ComponentDiagram.Context.surroundBoundaryWord
           leading [over, under] [under, over] suffix).plug localDiagram
   | _, _, _, .identityCoupon eventId couponId localWindow
-      leading suffix => by
-      simpa only [List.append_assoc] using
-        (ComponentDiagram.Context.surroundBoundaryWord
-          leading localWindow localWindow suffix).plug
-            (.identityCoupon couponId
-              (ComponentBoundary.word localWindow))
+      leading suffix =>
+      (ComponentDiagram.Context.surroundBoundaryWord
+        leading localWindow localWindow suffix).plug
+          (.identityCoupon couponId
+            (ComponentBoundary.word localWindow))
   | _, _, _, .framingTwist eventId strandId sign strand strandIdSound
       leading suffix => by
       let localDiagram :=
@@ -2018,7 +2021,7 @@ def componentPrimitive :
         | .negative =>
             ComponentDiagram.twistNegative
               (ComponentBoundary.ofStrand strand)
-      simpa only [List.append_assoc] using
+      exact
         (ComponentDiagram.Context.surroundBoundaryWord
           leading [strand] [strand] suffix).plug localDiagram
   | _, _, _, .planarIdentity eventId state =>

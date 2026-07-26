@@ -31,13 +31,12 @@ def unsafeInputs
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
     [AddCommGroup H2]
-    (compiler : TableTwoEvaluatorCompiler categoryData manifold H2)
-    (generalCerf : GeneralCerfCompleteness manifold)
-    (basePresentation : SpecialKirbyPresentation manifold H2) :
-    FourManifoldInvariantInputs categoryData manifold H2 where
+    (compiler : TableTwoEvaluatorCompiler categoryData H2)
+    (generalCerf : GeneralCerfCompleteness)
+    (basePresentation : SpecialKirbyPresentation H2) :
+    FourManifoldInvariantInputs categoryData H2 where
   evaluatorCompiler := compiler
   generalCerf := generalCerf
   basePresentation := basePresentation

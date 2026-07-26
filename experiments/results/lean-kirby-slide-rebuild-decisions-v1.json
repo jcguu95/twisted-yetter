@@ -1,0 +1,60 @@
+{
+  "schema": "lean-kirby-slide-rebuild-decisions-v1",
+  "status": "COMPLETED",
+  "started_at_utc": "2026-07-25T19:54:34Z",
+  "completed_at_utc": "2026-07-25T20:13:54Z",
+  "git_commit": "00d6cb179059804b2bd985834aec0347bb4b785e",
+  "git_dirty": true,
+  "dirty_entry_count": 131,
+  "tool_versions": {
+    "lake": "5.0.0-src+f72c35b",
+    "lean": "4.29.1",
+    "platform": "arm64-apple-darwin24.6.0"
+  },
+  "decisions": [
+    {
+      "timestamp_utc": "2026-07-25T19:54:34Z",
+      "decision": "Reuse the kernel-checked prefix/window/suffix trace split as the sole endpoint-binding foundation.",
+      "reason": "A local slide proof must be tied to the exact source and target trace windows; component IDs and a move name are insufficient."
+    },
+    {
+      "timestamp_utc": "2026-07-25T19:56:47Z",
+      "decision": "Build one shared source-bound attach-transport-detach movie interface, then instantiate it in order for one-over-one, two-over-one, and two-over-two.",
+      "reason": "The three cases share endpoint binding and coupon transport; only the handle roles and exponent transport differ."
+    },
+    {
+      "timestamp_utc": "2026-07-25T19:56:47Z",
+      "decision": "Do not treat equality of differently parenthesized free diagram syntax as definitional equality.",
+      "reason": "Reassembly is represented by explicit GeneratedIsotopy proofs, preserving the distinction between syntax and graphical isotopy."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:09:26Z",
+      "decision": "Project each dependent component correspondence through one shared edit-indexed helper before constructing the three request families.",
+      "reason": "Lean correctly refused to identify proof-relevant values produced by two separate dependent pattern matches; the shared projection preserves the exact metadata and introduces no axiom or cast."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:13:54Z",
+      "decision": "Replace the three per-case term-window axioms by derived definitions specialized from one exact source-bound slide movie.",
+      "reason": "All three handle roles now share the same trace binding and attach-transport-detach contract, while their request constructors keep the role-specific metadata and cycle transport explicit."
+    },
+    {
+      "timestamp_utc": "2026-07-25T20:13:54Z",
+      "decision": "Retain CanonicalSourceBoundSlideMovie.standardMovie as the single disclosed diagrammatic procurement boundary.",
+      "reason": "The kernel proves every downstream specialization and evaluator consequence from this structured input, but it does not yet reconstruct ambient ribbon isotopy and coupon placement from raw planar coordinates."
+    }
+  ],
+  "validation": {
+    "legacy_per_case_slide_axioms_found": 0,
+    "sorry_or_admit_in_touched_files_found": 0,
+    "required_graphical_assumption_classes": 6,
+    "commands": [
+      "LEAN_NUM_THREADS=1 lake build TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie",
+      "LEAN_NUM_THREADS=1 lake build TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput",
+      "LEAN_NUM_THREADS=1 lake build TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInputAxiomAudit",
+      "LEAN_NUM_THREADS=1 lake build TwistedYetter.Kirby.FinalFormalizationPackage",
+      "LEAN_NUM_THREADS=1 lake build TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit"
+    ],
+    "all_commands_passed": true,
+    "final_axiom_audit_observation": "TwistedYetter and all three derived slide families depend on the one shared CanonicalSourceBoundSlideMovie.standardMovie axiom; the three former per-case term-window axioms are absent."
+  }
+}

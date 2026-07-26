@@ -11,39 +11,14 @@ open TwistedYetter.Kirby.PresentationExecutionTrace
 universe u
 
 /--
-This must fail: a formal link cannot be relabelled as a presentation of an
-arbitrary manifold without an explicit representation witness.
+This must fail: a mathematical presentation does not silently become a stored
+repository artifact.  The outer provenance wrapper must be supplied explicitly.
 -/
-def unsafePresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
+def unsafeStoredPresentation
     (H2 : Type u)
     [AddCommGroup H2]
-    (formal : FormalPresentation)
-    (execution : ClosedExecutionCertificate formal)
-    (counts : HandleCounts)
-    (uniqueZero : counts.h0 = 1)
-    (uniqueFour : counts.h4 = 1)
-    (ordered : Prop)
-    (orderedWitness : ordered)
-    (representationHash h2Hash : String)
-    (representationShape :
-      RawPresentation.sha256Shape representationHash = true)
-    (h2Shape : RawPresentation.sha256Shape h2Hash = true)
-    (handleChain : HandleChainModel counts)
-    (h2ModelEquiv : handleChain.SecondHomology ≃+ H2) :
-    SpecialKirbyPresentation manifold H2 where
-  formal := formal
-  execution := execution
-  counts := counts
-  uniqueZeroHandle := uniqueZero
-  uniqueFourHandle := uniqueFour
-  orderedByIncreasingIndex := ordered
-  ordering_witness := orderedWitness
-  representationCertificateHash := representationHash
-  representation_certificate_hash_shape := representationShape
-  h2ModelCertificateHash := h2Hash
-  h2_model_certificate_hash_shape := h2Shape
-  handleChain := handleChain
-  h2ModelEquiv := h2ModelEquiv
+    (presentation : SpecialKirbyPresentation H2) :
+    StoredArtifact (SpecialKirbyPresentation H2) where
+  payload := presentation
 
 end TwistedYetter.Mutations.MissingSpecialManifoldBinding

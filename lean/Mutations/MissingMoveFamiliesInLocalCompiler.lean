@@ -23,11 +23,10 @@ def rejected
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {package : Package data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {presentation :
-      PresentationCompiler data package automorphism manifold H2} :
-    LocalMoveCompiler data package automorphism manifold H2 presentation where
+      PresentationCompiler data package automorphism H2} :
+    LocalMoveCompiler data package automorphism H2 presentation where
   categorySnapshotHash := package.categorySnapshotHash
 
 end TwistedYetter.Mutations.MissingMoveFamiliesInLocalCompiler

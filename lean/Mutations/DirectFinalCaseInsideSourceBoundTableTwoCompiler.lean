@@ -27,12 +27,10 @@ def unsafeCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold :
-      TwistedYetter.Kirby.KirbyCompleteness.ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (base :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
-    SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2 :=
+      SourceBoundTableTwoEvaluatorCompiler categoryData H2) :
+    SourceBoundTableTwoEvaluatorCompiler categoryData H2 :=
   { base with framedIsotopy := True }
 
 end TwistedYetter.Mutations.DirectFinalCaseInsideSourceBoundTableTwoCompiler

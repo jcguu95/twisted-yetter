@@ -83,9 +83,8 @@ a term externally, but only the term below has mathematical force.
 structure CertifiedMove
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2) where
+    (source target : CanonicalPresentation H2) where
   topologyMove :
     TopologicalTableTwoMove source.topology target.topology
   calculation :
@@ -98,9 +97,8 @@ namespace CertifiedMove
 def compile
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (certificate : CertifiedMove 𝒞 automorphism source target) :
     LocalCycleCalculation 𝒞 automorphism
       (CanonicalSourceBackedMove.enrichedMove certificate.topologyMove) :=
@@ -110,9 +108,8 @@ def compile
 theorem generated_core_is_exact_target
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (certificate : CertifiedMove 𝒞 automorphism source target) :
     canonicalEngine.apply
         (instructionOfMove certificate.topologyMove) =
@@ -121,9 +118,8 @@ theorem generated_core_is_exact_target
 
 /-- Read the directed class of an exact source-backed topology move. -/
 def topologyMoveClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (move : TopologicalTableTwoMove source.topology target.topology) :
     CertificateClass :=
   match move with
@@ -140,18 +136,16 @@ def topologyMoveClass
 def certificateClass
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (certificate : CertifiedMove 𝒞 automorphism source target) :
     CertificateClass :=
   topologyMoveClass certificate.topologyMove
 
 /-- Every exact topology move belongs to the closed directed denominator. -/
 theorem topologyMoveClass_mem_required
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (move : TopologicalTableTwoMove source.topology target.topology) :
     topologyMoveClass move ∈ requiredCertificateClasses := by
   cases move <;> simp [topologyMoveClass, requiredCertificateClasses]
@@ -160,9 +154,8 @@ theorem topologyMoveClass_mem_required
 theorem certificateClass_mem_required
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (certificate : CertifiedMove 𝒞 automorphism source target) :
     certificate.certificateClass ∈ requiredCertificateClasses := by
   exact topologyMoveClass_mem_required certificate.topologyMove

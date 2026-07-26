@@ -12,7 +12,7 @@ universe uK uC vC uS uI uH
 variable {K : Type uK} [Field K]
 variable {C : Type uC} [Category.{vC} C] [Preadditive C]
 variable [CategoryTheory.Linear K C]
-variable [MonoidalCategory C] [BraidedCategory C]
+variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type uS} [Fintype S] [DecidableEq S]
 variable {I : S → S → Type uI}
@@ -23,12 +23,11 @@ example
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (markedSystem : MarkedPairPresentationSystem manifold H2) :
-    FourManifoldInvariantInputs categoryData manifold H2 where
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (markedSystem : MarkedPairPresentationSystem H2) :
+    FourManifoldInvariantInputs categoryData H2 where
   prescription := prescription
   markedSystem := markedSystem
 

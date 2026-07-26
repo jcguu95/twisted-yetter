@@ -41,20 +41,19 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 The marked handle-chain transport retained by one local calculation.
 -/
 noncomputable def markedTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move) :
     MarkedH2Transport source.topology target.topology :=
   match calculation with
   | .framedIsotopy _ _ transport _ => transport
-  | .oneOverOne _ _ _ transport _ => transport
-  | .twoOverOne _ _ _ transport _ => transport
-  | .twoOverTwo _ _ _ transport _ => transport
+  | .oneOverOne _ _ transport _ => transport
+  | .twoOverOne _ _ transport _ => transport
+  | .twoOverTwo _ _ transport _ => transport
   | .oneTwoBirth _ _ transport _ => transport
   | .oneTwoDeath _ _ transport _ =>
       transport
@@ -64,11 +63,10 @@ noncomputable def markedTransport
 
 /-- The chain-level cycle transport selected by the same calculation. -/
 noncomputable def cycleTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move) :
@@ -77,11 +75,11 @@ noncomputable def cycleTransport
   match calculation with
   | .framedIsotopy _ _ _ geometry =>
       geometry.cycleTransport
-  | .oneOverOne _ _ _ transport _ =>
+  | .oneOverOne _ _ transport _ =>
       CycleTransport.ofMarkedH2Transport source target transport
-  | .twoOverOne _ _ _ transport _ =>
+  | .twoOverOne _ _ transport _ =>
       CycleTransport.ofMarkedH2Transport source target transport
-  | .twoOverTwo _ _ _ transport _ =>
+  | .twoOverTwo _ _ transport _ =>
       CycleTransport.ofMarkedH2Transport source target transport
   | .oneTwoBirth _ _ _ geometry =>
       geometry.added.cycleTransport
@@ -94,11 +92,10 @@ noncomputable def cycleTransport
 
 /-- The target cycle forced by the calculation and source cycle. -/
 noncomputable def targetCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -111,11 +108,10 @@ The forced target cycle represents exactly the class induced by the retained
 handle-chain equivalence.
 -/
 theorem targetCycle_class
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -136,11 +132,10 @@ After a death move, transport the proposed target cycle back through the
 reverse birth.  Other move types leave the source cycle unchanged here.
 -/
 noncomputable def returnedSourceCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -164,11 +159,10 @@ cycle, so no nonzero homology coefficient was hidden on the deleted
 two-handle.
 -/
 def IsCancellationSafe
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -180,11 +174,10 @@ Every local calculation preserves the explicit-cycle value on a
 cancellation-safe source cycle.
 -/
 theorem cycleEvalC_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -201,7 +194,7 @@ theorem cycleEvalC_sound
         counts
         (geometry.cycleLinearDiagram_eval_transport
           𝒞 automorphism sourceCycle)
-  | oneOverOne orientation metadata counts transport geometry =>
+  | oneOverOne metadata counts transport geometry =>
       exact cycleEvalC_eq_of_counts_and_linear_eval
         𝒞 automorphism sourceCycle
         ((CycleTransport.ofMarkedH2Transport
@@ -209,7 +202,7 @@ theorem cycleEvalC_sound
         counts
         (geometry.cycleLinearDiagram_eval_transport
           𝒞 automorphism sourceCycle)
-  | twoOverOne orientation metadata counts transport geometry =>
+  | twoOverOne metadata counts transport geometry =>
       exact cycleEvalC_eq_of_counts_and_linear_eval
         𝒞 automorphism sourceCycle
         ((CycleTransport.ofMarkedH2Transport
@@ -217,7 +210,7 @@ theorem cycleEvalC_sound
         counts
         (geometry.cycleLinearDiagram_eval_transport
           𝒞 automorphism sourceCycle)
-  | twoOverTwo orientation metadata counts transport geometry =>
+  | twoOverTwo metadata counts transport geometry =>
       exact cycleEvalC_eq_of_counts_and_linear_eval
         𝒞 automorphism sourceCycle
         ((CycleTransport.ofMarkedH2Transport
@@ -265,9 +258,8 @@ The public index is `alpha : H2`; the cycle is internal evidence and must be
 proved to represent that class.
 -/
 structure GeometricRepresentative
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (alpha : presentation.topology.handleChain.SecondHomology) where
   cycle : presentation.DegreeTwoCycle
   represents :
@@ -275,11 +267,10 @@ structure GeometricRepresentative
 
 /-- Evaluate an `H2` class through its explicit geometric representative. -/
 noncomputable def eval
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (representative : GeometricRepresentative presentation alpha) : K :=
   presentation.cycleEvalC 𝒞 automorphism representative.cycle
@@ -292,11 +283,10 @@ produced by the move geometry, and the source must pass the visible
 cancellation-safety predicate.
 -/
 structure CancellationSafeStep
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -321,11 +311,10 @@ Compatibility forces the public target `H2` class to be the actual
 chain-equivalence transport of the public source class.
 -/
 theorem alpha_transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -355,11 +344,10 @@ The corrected local `H2` theorem: compatible cancellation-safe geometric
 representatives give equal evaluations.
 -/
 theorem eval_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {move : TableTwoMove source.topology target.topology}
     (calculation :
       LocalCycleCalculation 𝒞 automorphism move)
@@ -385,9 +373,8 @@ One presentation together with an actual `H2` class and a certified geometric
 representative of that class.
 -/
 structure GeometricH2State
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  presentation : CanonicalPresentation manifold H2
+  presentation : CanonicalPresentation H2
   alpha : presentation.topology.handleChain.SecondHomology
   representative : GeometricRepresentative presentation alpha
 
@@ -395,11 +382,10 @@ namespace GeometricH2State
 
 /-- Evaluation of a geometrically represented `H2` state. -/
 noncomputable def value
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (state : GeometricH2State manifold H2) : K :=
+    (state : GeometricH2State H2) : K :=
   eval 𝒞 automorphism state.presentation state.alpha
     state.representative
 
@@ -415,10 +401,9 @@ inside `state`.  In particular, callers of the eventual manifold invariant
 will not supply a cycle.
 -/
 structure AdmissiblePresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) where
-  state : GeometricH2State manifold H2
+  state : GeometricH2State H2
   representsPublicClass :
     state.presentation.topology.h2ModelEquiv state.alpha = alpha
 
@@ -431,11 +416,10 @@ presentation; it does not assert that two such choices are connected by a
 cancellation-safe movie.
 -/
 noncomputable def ofCanonicalPresentation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (alpha : H2) :
-    AdmissiblePresentation manifold H2 alpha where
+    AdmissiblePresentation H2 alpha where
   state :=
     {
       presentation := presentation
@@ -455,12 +439,11 @@ noncomputable def ofCanonicalPresentation
 
 /-- Evaluate an admissible presentation using its internal cycle witness. -/
 noncomputable def value
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     {alpha : H2}
-    (presentation : AdmissiblePresentation manifold H2 alpha) : K :=
+    (presentation : AdmissiblePresentation H2 alpha) : K :=
   presentation.state.value 𝒞 automorphism
 
 end AdmissiblePresentation
@@ -474,15 +457,14 @@ The step constructor stores no equality in `K`.
 inductive CancellationSafeMovie
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2] :
-    GeometricH2State manifold H2 →
-      GeometricH2State manifold H2 →
+    GeometricH2State H2 →
+      GeometricH2State H2 →
         Type (max 2 (max uK (max uC (max vC (uH + 1)))))
-  | refl (state : GeometricH2State manifold H2) :
+  | refl (state : GeometricH2State H2) :
       CancellationSafeMovie 𝒞 automorphism state state
   | step
-      {source target : GeometricH2State manifold H2}
+      {source target : GeometricH2State H2}
       {move :
         TableTwoMove
           source.presentation.topology
@@ -494,7 +476,7 @@ inductive CancellationSafeMovie
           source.representative target.representative) :
       CancellationSafeMovie 𝒞 automorphism source target
   | trans
-      {source middle target : GeometricH2State manifold H2} :
+      {source middle target : GeometricH2State H2} :
       CancellationSafeMovie 𝒞 automorphism source middle →
       CancellationSafeMovie 𝒞 automorphism middle target →
       CancellationSafeMovie 𝒞 automorphism source target
@@ -506,11 +488,10 @@ The corrected movie-level `H2` theorem: a finite sequence of visibly
 compatible, cancellation-safe moves preserves the evaluation.
 -/
 theorem value_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
-    {source target : GeometricH2State manifold H2}
+    {source target : GeometricH2State H2}
     (movie : CancellationSafeMovie 𝒞 automorphism source target) :
     source.value 𝒞 automorphism =
       target.value 𝒞 automorphism := by
@@ -533,12 +514,11 @@ global input is existence of such a movie between any two admissible
 presentations of the same public pair `(X, alpha)`.
 -/
 theorem AdmissiblePresentation.value_eq_of_movie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
     {alpha : H2}
-    {source target : AdmissiblePresentation manifold H2 alpha}
+    {source target : AdmissiblePresentation H2 alpha}
     (movie :
       CancellationSafeMovie 𝒞 automorphism source.state target.state) :
     source.value 𝒞 automorphism =

@@ -54,9 +54,8 @@ An explicit target cycle representing the transported class of each source
 cycle.  No choice of representative is required to be natural.
 -/
 structure CycleTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (targetClass : H2 → H2) where
   targetCycle :
     source.DegreeTwoCycle → target.DegreeTwoCycle
@@ -79,9 +78,8 @@ This construction is the reason no move compiler is allowed to choose a
 target cycle independently of the chain-level topology input.
 -/
 noncomputable def ofMarkedH2Transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (transport :
       MarkedH2Transport source.topology target.topology) :
     CycleTransport source target transport.targetClass where
@@ -112,13 +110,69 @@ noncomputable def ofMarkedH2Transport
           (i := 2))
     simpa only [ConcreteCategory.comp_apply] using naturality.symm
 
+/--
+Transport a target cycle backwards by the inverse chain map of the same
+marked handle-chain equivalence.
+-/
+noncomputable def ofMarkedH2TransportInverse
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (transport :
+      MarkedH2Transport source.topology target.topology) :
+    CycleTransport target source transport.homologyEquiv.symm where
+  targetCycle targetCycle :=
+    (HomologicalComplex.cyclesMap
+      transport.chainEquivalence.homotopyEquiv.inv 2) targetCycle
+  class_sound targetCycle := by
+    change
+      source.topology.h2ModelEquiv
+          ((HomologicalComplex.cyclesMap
+              transport.chainEquivalence.homotopyEquiv.inv 2 ≫
+            source.topology.handleChain.complex.homologyπ 2)
+            targetCycle) =
+        transport.homologyEquiv.symm
+          (target.topology.h2ModelEquiv
+            (target.topology.handleChain.complex.homologyπ 2 targetCycle))
+    apply transport.homologyEquiv.injective
+    simp only [Equiv.apply_symm_apply]
+    simp [MarkedH2Transport.homologyEquiv,
+      MarkedH2Transport.homologyAddEquiv,
+      HandleChainEquivalence.secondHomologyAddEquiv,
+      HandleChainEquivalence.secondHomologyLinearEquiv]
+    have naturality :=
+      congrArg
+        (fun morphism =>
+          (ConcreteCategory.hom morphism) targetCycle)
+        (HomologicalComplex.homologyπ_naturality
+          (φ := transport.chainEquivalence.homotopyEquiv.inv)
+          (i := 2))
+    have cycleClass :
+        source.topology.handleChain.complex.homologyπ 2
+            ((HomologicalComplex.cyclesMap
+                transport.chainEquivalence.homotopyEquiv.inv 2)
+              targetCycle) =
+          (HomologicalComplex.homologyMap
+              transport.chainEquivalence.homotopyEquiv.inv 2)
+            (target.topology.handleChain.complex.homologyπ 2 targetCycle) := by
+      simpa only [ConcreteCategory.comp_apply] using naturality.symm
+    rw [cycleClass]
+    let homologyIso :=
+      transport.chainEquivalence.homotopyEquiv.toHomologyIso 2
+    have inverseLaw :=
+      congrArg
+        (fun morphism =>
+          (ConcreteCategory.hom morphism)
+            (target.topology.handleChain.complex.homologyπ 2 targetCycle))
+        homologyIso.inv_hom_id
+    simpa only [homologyIso, HomotopyEquiv.toHomologyIso,
+      ConcreteCategory.comp_apply, ConcreteCategory.id_apply] using inverseLaw
+
 end CycleTransport
 
 /-- Exact exponent transport for one pair of explicit cycles. -/
 structure SameComponentCycleExponentTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (change :
       SameComponentIndexChange
         source.topology.formal target.topology.formal)
@@ -136,11 +190,10 @@ namespace SameComponentCycleExponentTransport
 
 /-- Exact-cycle component weights are preserved under reindexing. -/
 theorem cycleGlobalWeight_transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (change :
       SameComponentIndexChange
         source.topology.formal target.topology.formal)
@@ -150,8 +203,8 @@ theorem cycleGlobalWeight_transport
       SameComponentCycleExponentTransport
         source target change sourceCycle targetCycle)
     (sourceLabeling : source.GlobalLabeling (S := S)) :
-    source.cycleGlobalWeight 𝒞 automorphism sourceCycle sourceLabeling =
-      target.cycleGlobalWeight 𝒞 automorphism targetCycle
+    source.cycleGlobalWeight 𝒞.premodular automorphism sourceCycle sourceLabeling =
+      target.cycleGlobalWeight 𝒞.premodular automorphism targetCycle
         (change.labelingEquiv S sourceLabeling) := by
   classical
   unfold CanonicalPresentation.cycleGlobalWeight
@@ -169,9 +222,8 @@ end SameComponentCycleExponentTransport
 
 /-- Complete cycle-safe geometry of a framed isotopy. -/
 structure FramedIsotopyCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (targetClass : H2 → H2) where
   cycleTransport : CycleTransport source target targetClass
   componentChange :
@@ -185,47 +237,92 @@ structure FramedIsotopyCycleGeometry
     GeneratedIsotopy
       source.componentTermDiagram target.componentTermDiagram
 
+/--
+Endpoint-bound local movie data for a framed isotopy.
+
+Unlike `FramedIsotopyCycleGeometry`, this structure cannot choose its own
+cycle transport.  The target cycle is forced by the marked handle-chain map.
+The remaining fields are exactly the local geometric facts that must be read
+from the source and target diagrams.
+-/
+structure FramedIsotopyEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (transport : MarkedH2Transport source.topology target.topology) where
+  componentChange :
+    SameComponentIndexChange
+      source.topology.formal target.topology.formal
+  exponentTransport :
+    (sourceCycle : source.DegreeTwoCycle) →
+      SameComponentCycleExponentTransport source target componentChange
+        sourceCycle
+        ((CycleTransport.ofMarkedH2Transport source target transport).targetCycle
+          sourceCycle)
+  termIsotopy :
+    GeneratedIsotopy
+      source.componentTermDiagram target.componentTermDiagram
+
+namespace FramedIsotopyEndpointMovie
+
+/--
+Promote an endpoint-bound movie to complete cycle geometry.  The cycle map is
+derived from the marked handle-chain equivalence rather than supplied by the
+movie.
+-/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {transport : MarkedH2Transport source.topology target.topology}
+    (movie : FramedIsotopyEndpointMovie source target transport) :
+    FramedIsotopyCycleGeometry source target transport.targetClass where
+  cycleTransport :=
+    CycleTransport.ofMarkedH2Transport source target transport
+  componentChange := movie.componentChange
+  exponentTransport := movie.exponentTransport
+  termIsotopy := movie.termIsotopy
+
+end FramedIsotopyEndpointMovie
+
 namespace FramedIsotopyCycleGeometry
 
 /-- A cycle-safe framed isotopy preserves the complete linear sum. -/
 theorem cycleLinearDiagram_eval_transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry :
       FramedIsotopyCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle) :
     LinearDiagram.eval
-        (source.cycleLinearDiagram 𝒞 automorphism sourceCycle) =
+        (source.cycleLinearDiagram 𝒞.premodular automorphism sourceCycle) =
       LinearDiagram.eval
-        (target.cycleLinearDiagram 𝒞 automorphism
+        (target.cycleLinearDiagram 𝒞.premodular automorphism
           (geometry.cycleTransport.targetCycle sourceCycle)) := by
   classical
-  rw [source.cycleLinearDiagram_eval 𝒞 automorphism sourceCycle]
-  rw [target.cycleLinearDiagram_eval 𝒞 automorphism
+  rw [source.cycleLinearDiagram_eval 𝒞.premodular automorphism sourceCycle]
+  rw [target.cycleLinearDiagram_eval 𝒞.premodular automorphism
     (geometry.cycleTransport.targetCycle sourceCycle)]
   rw [← geometry.componentChange.sum_reindex
     (fun targetLabeling =>
-      target.cycleGlobalWeight 𝒞 automorphism
+      target.cycleGlobalWeight 𝒞.premodular automorphism
           (geometry.cycleTransport.targetCycle sourceCycle) targetLabeling •
-        Diagram.eval C (target.termDiagram 𝒞 targetLabeling))]
+        Diagram.eval C (target.termDiagram 𝒞.premodular targetLabeling))]
   apply Finset.sum_congr rfl
   intro sourceLabeling _
   rw [SameComponentCycleExponentTransport.cycleGlobalWeight_transport
     𝒞 automorphism geometry.componentChange
     (geometry.exponentTransport sourceCycle) sourceLabeling]
   have termEval :
-      Diagram.eval C (source.termDiagram 𝒞 sourceLabeling) =
+      Diagram.eval C (source.termDiagram 𝒞.premodular sourceLabeling) =
         Diagram.eval C
-          (target.termDiagram 𝒞
+          (target.termDiagram 𝒞.premodular
             (geometry.componentChange.labelingEquiv S sourceLabeling)) := by
     have labels :
-        target.labelOf 𝒞
+        target.labelOf 𝒞.premodular
             (geometry.componentChange.labelingEquiv S sourceLabeling) =
-          source.labelOf 𝒞 sourceLabeling := by
+          source.labelOf 𝒞.premodular sourceLabeling := by
       funext componentId
       exact
         CanonicalMoveGeometry.SameComponentIndexChange.labelOf_transport
@@ -234,10 +331,10 @@ theorem cycleLinearDiagram_eval_transport
     unfold CanonicalPresentation.termDiagram
     rw [labels]
     exact geometry.termIsotopy.eval_eq
-      𝒞 (source.labelOf 𝒞 sourceLabeling)
+      𝒞 (source.labelOf 𝒞.premodular sourceLabeling)
   exact congrArg
     (fun value =>
-      target.cycleGlobalWeight 𝒞 automorphism
+      target.cycleGlobalWeight 𝒞.premodular automorphism
           (geometry.cycleTransport.targetCycle sourceCycle)
           (geometry.componentChange.labelingEquiv S sourceLabeling) • value)
     termEval
@@ -246,9 +343,8 @@ end FramedIsotopyCycleGeometry
 
 /-- Exact exponent transport when the target has a finite local summand. -/
 structure AddedComponentCycleExponentTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     {addedCount : Nat}
     (change :
       AddedComponentIndexChange
@@ -276,11 +372,10 @@ namespace AddedComponentCycleExponentTransport
 
 /-- The exact coefficient of the newly inserted local components. -/
 noncomputable def localWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {addedCount : Nat}
     {change :
       AddedComponentIndexChange
@@ -299,11 +394,10 @@ noncomputable def localWeight
 
 /-- The target weight splits into common and local exact-cycle weights. -/
 theorem cycleGlobalWeight_split
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {addedCount : Nat}
     {change :
       AddedComponentIndexChange
@@ -315,10 +409,10 @@ theorem cycleGlobalWeight_split
         sourceCycle targetCycle)
     (sourceLabeling : source.GlobalLabeling (S := S))
     (addedLabeling : Fin addedCount → S) :
-    target.cycleGlobalWeight 𝒞 automorphism targetCycle
+    target.cycleGlobalWeight 𝒞.premodular automorphism targetCycle
         ((change.labelingEquiv S).symm
           (sourceLabeling, addedLabeling)) =
-      source.cycleGlobalWeight 𝒞 automorphism sourceCycle sourceLabeling *
+      source.cycleGlobalWeight 𝒞.premodular automorphism sourceCycle sourceLabeling *
         transport.localWeight 𝒞 automorphism addedLabeling := by
   classical
   unfold CanonicalPresentation.cycleGlobalWeight
@@ -344,9 +438,8 @@ end AddedComponentCycleExponentTransport
 
 /-- Category-neutral cancellation geometry for explicit cycles. -/
 structure AddedClosedCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (addedCount : Nat)
     (targetClass : H2 → H2) where
   cycleTransport : CycleTransport source target targetClass
@@ -358,25 +451,65 @@ structure AddedClosedCycleGeometry
       AddedComponentCycleExponentTransport source target componentChange
         sourceCycle (cycleTransport.targetCycle sourceCycle)
   localDiagram : ComponentDiagram .unit .unit
-  diagram_factorization :
-    target.componentTermDiagram =
-      ComponentDiagram.closedTensor
-        localDiagram source.componentTermDiagram
-  source_component_support :
-    (componentId : String) →
-    componentId ∈ source.componentTermDiagram.componentIds →
-      ∃ sourceIndex : ComponentIndex source.topology.formal,
-        componentId =
-          (componentAt source.topology.formal sourceIndex).componentId
+  diagram_isotopy :
+    GeneratedIsotopy target.componentTermDiagram
+      (ComponentDiagram.closedTensor
+        localDiagram source.componentTermDiagram)
+
+/--
+Endpoint data for inserting a finite closed local diagram.
+
+The target cycle is fixed by `transport`; this structure records only the
+component split, exponent calculation, and generated framed-diagram isotopy.
+-/
+structure AddedClosedEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (addedCount : Nat)
+    (targetClass : H2 → H2)
+    (cycleTransport : CycleTransport source target targetClass) where
+  componentChange :
+    AddedComponentIndexChange
+      source.topology.formal target.topology.formal addedCount
+  exponentTransport :
+    (sourceCycle : source.DegreeTwoCycle) →
+      AddedComponentCycleExponentTransport source target componentChange
+        sourceCycle
+        (cycleTransport.targetCycle sourceCycle)
+  localDiagram : ComponentDiagram .unit .unit
+  diagram_isotopy :
+    GeneratedIsotopy target.componentTermDiagram
+      (ComponentDiagram.closedTensor
+        localDiagram source.componentTermDiagram)
+
+namespace AddedClosedEndpointMovie
+
+/-- Add the forced chain-level cycle transport to an endpoint movie. -/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {addedCount : Nat}
+    {targetClass : H2 → H2}
+    {cycleTransport : CycleTransport source target targetClass}
+    (movie :
+      AddedClosedEndpointMovie source target addedCount
+        targetClass cycleTransport) :
+    AddedClosedCycleGeometry source target addedCount targetClass where
+  cycleTransport := cycleTransport
+  componentChange := movie.componentChange
+  exponentTransport := movie.exponentTransport
+  localDiagram := movie.localDiagram
+  diagram_isotopy := movie.diagram_isotopy
+
+end AddedClosedEndpointMovie
 
 namespace AddedClosedCycleGeometry
 
 /-- The retained source term uses exactly the original source labels. -/
 theorem source_term_eval_transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {addedCount : Nat}
     {targetClass : H2 → H2}
     (geometry :
@@ -385,26 +518,28 @@ theorem source_term_eval_transport
     (addedLabeling : Fin addedCount → S) :
     Diagram.eval C
         (source.componentTermDiagram.interpret 𝒞.premodular
-          (target.labelOf 𝒞
+          (target.labelOf 𝒞.premodular
             ((geometry.componentChange.labelingEquiv S).symm
               (sourceLabeling, addedLabeling)))) =
       Diagram.eval C
         (source.componentTermDiagram.interpret 𝒞.premodular
-          (source.labelOf 𝒞 sourceLabeling)) := by
+          (source.labelOf 𝒞.premodular sourceLabeling)) := by
   apply ComponentDiagram.eval_interpret_eq_of_eq_on_componentIds
   intro componentId membership
   obtain ⟨sourceIndex, componentIdEq⟩ :=
-    geometry.source_component_support componentId membership
+    TwistedYetter.Kirby.ComponentRibbonDiagram.CanonicalPresentation.componentTermDiagram_component_support
+      source componentId membership
   subst componentId
   rw [AddedComponentIndexChange.labelOf_common]
-  exact (source.labelOf_component 𝒞 sourceLabeling sourceIndex).symm
+  exact
+    (source.labelOf_component
+      𝒞.premodular sourceLabeling sourceIndex).symm
 
 /-- The target closed term scalar splits into local and retained factors. -/
 theorem term_closedScalar_split
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {addedCount : Nat}
     {targetClass : H2 → H2}
     (geometry :
@@ -413,20 +548,20 @@ theorem term_closedScalar_split
     (addedLabeling : Fin addedCount → S) :
     𝒞.premodular.toFusionCategoryData.closedScalar
         (Diagram.eval C
-          (target.termDiagram 𝒞
+          (target.termDiagram 𝒞.premodular
             ((geometry.componentChange.labelingEquiv S).symm
               (sourceLabeling, addedLabeling)))) =
       𝒞.premodular.toFusionCategoryData.closedScalar
           (Diagram.eval C
             (geometry.localDiagram.interpret 𝒞.premodular
-              (target.labelOf 𝒞
+              (target.labelOf 𝒞.premodular
                 ((geometry.componentChange.labelingEquiv S).symm
                   (sourceLabeling, addedLabeling))))) *
         𝒞.premodular.toFusionCategoryData.closedScalar
           (Diagram.eval C
-            (source.termDiagram 𝒞 sourceLabeling)) := by
+            (source.termDiagram 𝒞.premodular sourceLabeling)) := by
   let targetLabelOf :=
-    target.labelOf 𝒞
+    target.labelOf 𝒞.premodular
       ((geometry.componentChange.labelingEquiv S).symm
         (sourceLabeling, addedLabeling))
   have sourceEval :=
@@ -438,7 +573,9 @@ theorem term_closedScalar_split
           (target.componentTermDiagram.interpret
             𝒞.premodular targetLabelOf)) =
       _
-  rw [geometry.diagram_factorization]
+  have factorizationEval :=
+    geometry.diagram_isotopy.eval_eq 𝒞 targetLabelOf
+  rw [factorizationEval]
   change
     𝒞.premodular.toFusionCategoryData.closedScalar
         (Diagram.eval C
@@ -459,9 +596,8 @@ end AddedClosedCycleGeometry
 
 /-- Cycle-safe insertion geometry for a cancelling 1--2 pair. -/
 structure OneTwoBirthCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (targetClass : H2 → H2) where
   added : AddedClosedCycleGeometry source target 2 targetClass
   newDottedId : String
@@ -485,18 +621,68 @@ structure OneTwoBirthCycleGeometry
     (addedIndex : Fin 2) →
       (added.exponentTransport sourceCycle).added_exponent addedIndex = 0
 
+/-- Endpoint-bound input for creating a cancelling 1--2 pair. -/
+structure OneTwoBirthEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (targetClass : H2 → H2)
+    (cycleTransport : CycleTransport source target targetClass) where
+  added :
+    AddedClosedEndpointMovie source target 2 targetClass cycleTransport
+  newDottedId : String
+  newTwoHandleId : String
+  distinct_ids : newDottedId ≠ newTwoHandleId
+  added_dotted_component_id :
+    (componentAt target.topology.formal
+      (added.componentChange.targetDecomposition.symm
+        (Sum.inr firstOfTwo))).componentId =
+      newDottedId
+  added_two_handle_component_id :
+    (componentAt target.topology.formal
+      (added.componentChange.targetDecomposition.symm
+        (Sum.inr secondOfTwo))).componentId =
+      newTwoHandleId
+  local_diagram_sound :
+    added.localDiagram =
+      ComponentDiagram.oneTwoHopfPair newDottedId newTwoHandleId
+  added_exponent_zero :
+    (sourceCycle : source.DegreeTwoCycle) →
+    (addedIndex : Fin 2) →
+      (added.exponentTransport sourceCycle).added_exponent addedIndex = 0
+
+namespace OneTwoBirthEndpointMovie
+
+/-- Promote the endpoint movie using the forced chain-level cycle map. -/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {targetClass : H2 → H2}
+    {cycleTransport : CycleTransport source target targetClass}
+    (movie :
+      OneTwoBirthEndpointMovie source target targetClass cycleTransport) :
+    OneTwoBirthCycleGeometry source target targetClass where
+  added := movie.added.toCycleGeometry
+  newDottedId := movie.newDottedId
+  newTwoHandleId := movie.newTwoHandleId
+  distinct_ids := movie.distinct_ids
+  added_dotted_component_id := movie.added_dotted_component_id
+  added_two_handle_component_id := movie.added_two_handle_component_id
+  local_diagram_sound := movie.local_diagram_sound
+  added_exponent_zero := movie.added_exponent_zero
+
+end OneTwoBirthEndpointMovie
+
 namespace OneTwoBirthCycleGeometry
 
 theorem dotted_label_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : OneTwoBirthCycleGeometry source target targetClass)
     (sourceLabeling : source.GlobalLabeling (S := S))
     (addedLabeling : Fin 2 → S) :
-    target.labelOf 𝒞
+    target.labelOf 𝒞.premodular
         ((geometry.added.componentChange.labelingEquiv S).symm
           (sourceLabeling, addedLabeling))
         geometry.newDottedId =
@@ -507,15 +693,14 @@ theorem dotted_label_sound
   simp [AddedComponentIndexChange.labelingEquiv]
 
 theorem two_handle_label_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : OneTwoBirthCycleGeometry source target targetClass)
     (sourceLabeling : source.GlobalLabeling (S := S))
     (addedLabeling : Fin 2 → S) :
-    target.labelOf 𝒞
+    target.labelOf 𝒞.premodular
         ((geometry.added.componentChange.labelingEquiv S).symm
           (sourceLabeling, addedLabeling))
         geometry.newTwoHandleId =
@@ -526,17 +711,16 @@ theorem two_handle_label_sound
   simp [AddedComponentIndexChange.labelingEquiv]
 
 theorem localWeight_eq_quantumDimensions
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : OneTwoBirthCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle)
     (addedLabeling : Fin 2 → S) :
     (geometry.added.exponentTransport sourceCycle).localWeight
-        𝒞 automorphism addedLabeling =
+        𝒞.premodular automorphism addedLabeling =
       𝒞.premodular.quantumDimension (addedLabeling firstOfTwo) *
         𝒞.premodular.quantumDimension
           (addedLabeling secondOfTwo) := by
@@ -551,104 +735,104 @@ theorem localWeight_eq_quantumDimensions
   congr 2 <;> apply Fin.ext <;> rfl
 
 theorem localPairSum_eq_globalDimension
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : OneTwoBirthCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle)
     (sourceLabeling : source.GlobalLabeling (S := S)) :
     (∑ addedLabeling : Fin 2 → S,
       (geometry.added.exponentTransport sourceCycle).localWeight
-          𝒞 automorphism addedLabeling *
+          𝒞.premodular automorphism addedLabeling *
         𝒞.premodular.toFusionCategoryData.closedScalar
           (Diagram.eval C
             (geometry.added.localDiagram.interpret
               𝒞.premodular
-              (target.labelOf 𝒞
+              (target.labelOf 𝒞.premodular
                 ((geometry.added.componentChange.labelingEquiv S).symm
                   (sourceLabeling, addedLabeling)))))) =
       globalDimension 𝒞.premodular := by
   classical
   simp_rw [geometry.localWeight_eq_quantumDimensions
-    𝒞 automorphism sourceCycle]
+    𝒞.premodular automorphism sourceCycle]
   rw [geometry.local_diagram_sound]
   exact baerenzBarrett_oneTwoHopfPairSum
     𝒞 geometry.newDottedId geometry.newTwoHandleId
     geometry.distinct_ids
     (fun addedLabeling =>
-      target.labelOf 𝒞
+      target.labelOf 𝒞.premodular
         ((geometry.added.componentChange.labelingEquiv S).symm
           (sourceLabeling, addedLabeling)))
     (fun addedLabeling =>
-      geometry.dotted_label_sound 𝒞 sourceLabeling addedLabeling)
+      geometry.dotted_label_sound
+        𝒞.premodular sourceLabeling addedLabeling)
     (fun addedLabeling =>
-      geometry.two_handle_label_sound 𝒞 sourceLabeling addedLabeling)
+      geometry.two_handle_label_sound
+        𝒞.premodular sourceLabeling addedLabeling)
 
 /-- The explicit-cycle numerator gains exactly one global dimension. -/
 theorem cycleRawNumerator_factor
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : OneTwoBirthCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle) :
-    target.cycleRawNumerator 𝒞 automorphism
+    target.cycleRawNumerator 𝒞.premodular automorphism
         (geometry.added.cycleTransport.targetCycle sourceCycle) =
       globalDimension 𝒞.premodular *
-        source.cycleRawNumerator 𝒞 automorphism sourceCycle := by
+        source.cycleRawNumerator 𝒞.premodular automorphism sourceCycle := by
   classical
-  rw [target.cycleRawNumerator_eq_sum 𝒞 automorphism]
-  rw [source.cycleRawNumerator_eq_sum 𝒞 automorphism]
+  rw [target.cycleRawNumerator_eq_sum 𝒞.premodular automorphism]
+  rw [source.cycleRawNumerator_eq_sum 𝒞.premodular automorphism]
   rw [geometry.added.componentChange.sum_split]
   rw [Fintype.sum_prod_type]
   calc
     _ =
       ∑ sourceLabeling,
         globalDimension 𝒞.premodular *
-          (source.cycleGlobalWeight 𝒞 automorphism
+          (source.cycleGlobalWeight 𝒞.premodular automorphism
               sourceCycle sourceLabeling *
             𝒞.premodular.toFusionCategoryData.closedScalar
               (Diagram.eval C
-                (source.termDiagram 𝒞 sourceLabeling))) := by
+                (source.termDiagram 𝒞.premodular sourceLabeling))) := by
         apply Finset.sum_congr rfl
         intro sourceLabeling _
         calc
           _ =
             ∑ addedLabeling : Fin 2 → S,
               ((geometry.added.exponentTransport sourceCycle).localWeight
-                  𝒞 automorphism addedLabeling *
+                  𝒞.premodular automorphism addedLabeling *
                 𝒞.premodular.toFusionCategoryData.closedScalar
                   (Diagram.eval C
                     (geometry.added.localDiagram.interpret
                       𝒞.premodular
-                      (target.labelOf 𝒞
+                      (target.labelOf 𝒞.premodular
                         ((geometry.added.componentChange.labelingEquiv S).symm
                           (sourceLabeling, addedLabeling)))))) *
-              (source.cycleGlobalWeight 𝒞 automorphism
+              (source.cycleGlobalWeight 𝒞.premodular automorphism
                   sourceCycle sourceLabeling *
                 𝒞.premodular.toFusionCategoryData.closedScalar
                   (Diagram.eval C
-                    (source.termDiagram 𝒞 sourceLabeling))) := by
+                    (source.termDiagram 𝒞.premodular sourceLabeling))) := by
               apply Finset.sum_congr rfl
               intro addedLabeling _
               rw [(geometry.added.exponentTransport sourceCycle)
                 |>.cycleGlobalWeight_split
-                  𝒞 automorphism sourceLabeling addedLabeling]
+                  𝒞.premodular automorphism sourceLabeling addedLabeling]
               rw [geometry.added.term_closedScalar_split
-                𝒞 sourceLabeling addedLabeling]
+                𝒞.premodular sourceLabeling addedLabeling]
               ring
           _ =
             globalDimension 𝒞.premodular *
-              (source.cycleGlobalWeight 𝒞 automorphism
+              (source.cycleGlobalWeight 𝒞.premodular automorphism
                   sourceCycle sourceLabeling *
                 𝒞.premodular.toFusionCategoryData.closedScalar
                   (Diagram.eval C
-                    (source.termDiagram 𝒞 sourceLabeling))) := by
+                    (source.termDiagram 𝒞.premodular sourceLabeling))) := by
               rw [← Finset.sum_mul,
                 geometry.localPairSum_eq_globalDimension
                   𝒞 automorphism sourceCycle sourceLabeling]
@@ -659,9 +843,8 @@ end OneTwoBirthCycleGeometry
 
 /-- Cycle-safe insertion geometry for a cancelling 2--3 pair. -/
 structure TwoThreeBirthCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
+    (source target : CanonicalPresentation H2)
     (targetClass : H2 → H2) where
   added : AddedClosedCycleGeometry source target 1 targetClass
   newTwoHandleId : String
@@ -677,18 +860,57 @@ structure TwoThreeBirthCycleGeometry
     (sourceCycle : source.DegreeTwoCycle) →
       (added.exponentTransport sourceCycle).added_exponent onlyOne = 0
 
+/-- Endpoint-bound input for creating a cancelling 2--3 pair. -/
+structure TwoThreeBirthEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (targetClass : H2 → H2)
+    (cycleTransport : CycleTransport source target targetClass) where
+  added :
+    AddedClosedEndpointMovie source target 1 targetClass cycleTransport
+  newTwoHandleId : String
+  added_component_id :
+    (componentAt target.topology.formal
+      (added.componentChange.targetDecomposition.symm
+        (Sum.inr onlyOne))).componentId =
+      newTwoHandleId
+  local_diagram_sound :
+    added.localDiagram =
+      ComponentDiagram.zeroFramedUnknot newTwoHandleId
+  added_exponent_zero :
+    (sourceCycle : source.DegreeTwoCycle) →
+      (added.exponentTransport sourceCycle).added_exponent onlyOne = 0
+
+namespace TwoThreeBirthEndpointMovie
+
+/-- Promote the endpoint movie using the forced chain-level cycle map. -/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {targetClass : H2 → H2}
+    {cycleTransport : CycleTransport source target targetClass}
+    (movie :
+      TwoThreeBirthEndpointMovie source target targetClass cycleTransport) :
+    TwoThreeBirthCycleGeometry source target targetClass where
+  added := movie.added.toCycleGeometry
+  newTwoHandleId := movie.newTwoHandleId
+  added_component_id := movie.added_component_id
+  local_diagram_sound := movie.local_diagram_sound
+  added_exponent_zero := movie.added_exponent_zero
+
+end TwoThreeBirthEndpointMovie
+
 namespace TwoThreeBirthCycleGeometry
 
 theorem added_label_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : TwoThreeBirthCycleGeometry source target targetClass)
     (sourceLabeling : source.GlobalLabeling (S := S))
     (addedLabeling : Fin 1 → S) :
-    target.labelOf 𝒞
+    target.labelOf 𝒞.premodular
         ((geometry.added.componentChange.labelingEquiv S).symm
           (sourceLabeling, addedLabeling))
         geometry.newTwoHandleId =
@@ -699,11 +921,10 @@ theorem added_label_sound
   simp [AddedComponentIndexChange.labelingEquiv]
 
 theorem localWeight_eq_quantumDimension
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : TwoThreeBirthCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle)
@@ -720,10 +941,9 @@ theorem localWeight_eq_quantumDimension
     FusionCategoryData.automorphismScalarPower_zero, mul_one]
 
 theorem localDiagram_closedScalar_eq_quantumDimension
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    {source target : CanonicalPresentation manifold H2}
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : TwoThreeBirthCycleGeometry source target targetClass)
     (sourceLabeling : source.GlobalLabeling (S := S))
@@ -731,7 +951,7 @@ theorem localDiagram_closedScalar_eq_quantumDimension
     𝒞.premodular.toFusionCategoryData.closedScalar
         (Diagram.eval C
           (geometry.added.localDiagram.interpret 𝒞.premodular
-            (target.labelOf 𝒞
+            (target.labelOf 𝒞.premodular
               ((geometry.added.componentChange.labelingEquiv S).symm
                 (sourceLabeling, addedLabeling))))) =
       𝒞.premodular.quantumDimension
@@ -742,21 +962,20 @@ theorem localDiagram_closedScalar_eq_quantumDimension
 
 /-- The explicit-cycle numerator gains exactly one global dimension. -/
 theorem cycleRawNumerator_factor
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     {targetClass : H2 → H2}
     (geometry : TwoThreeBirthCycleGeometry source target targetClass)
     (sourceCycle : source.DegreeTwoCycle) :
-    target.cycleRawNumerator 𝒞 automorphism
+    target.cycleRawNumerator 𝒞.premodular automorphism
         (geometry.added.cycleTransport.targetCycle sourceCycle) =
       globalDimension 𝒞.premodular *
-        source.cycleRawNumerator 𝒞 automorphism sourceCycle := by
+        source.cycleRawNumerator 𝒞.premodular automorphism sourceCycle := by
   classical
-  rw [target.cycleRawNumerator_eq_sum 𝒞 automorphism]
-  rw [source.cycleRawNumerator_eq_sum 𝒞 automorphism]
+  rw [target.cycleRawNumerator_eq_sum 𝒞.premodular automorphism]
+  rw [source.cycleRawNumerator_eq_sum 𝒞.premodular automorphism]
   rw [geometry.added.componentChange.sum_split]
   rw [Fintype.sum_prod_type]
   have addedSum :
@@ -774,11 +993,11 @@ theorem cycleRawNumerator_factor
     _ =
       ∑ sourceLabeling,
         globalDimension 𝒞.premodular *
-          (source.cycleGlobalWeight 𝒞 automorphism
+          (source.cycleGlobalWeight 𝒞.premodular automorphism
               sourceCycle sourceLabeling *
             𝒞.premodular.toFusionCategoryData.closedScalar
               (Diagram.eval C
-                (source.termDiagram 𝒞 sourceLabeling))) := by
+                (source.termDiagram 𝒞.premodular sourceLabeling))) := by
         apply Finset.sum_congr rfl
         intro sourceLabeling _
         calc
@@ -786,11 +1005,11 @@ theorem cycleRawNumerator_factor
             ∑ addedLabeling : Fin 1 → S,
               (𝒞.premodular.quantumDimension (addedLabeling onlyOne) *
                 𝒞.premodular.quantumDimension (addedLabeling onlyOne)) *
-              (source.cycleGlobalWeight 𝒞 automorphism
+              (source.cycleGlobalWeight 𝒞.premodular automorphism
                   sourceCycle sourceLabeling *
                 𝒞.premodular.toFusionCategoryData.closedScalar
                   (Diagram.eval C
-                    (source.termDiagram 𝒞 sourceLabeling))) := by
+                    (source.termDiagram 𝒞.premodular sourceLabeling))) := by
               apply Finset.sum_congr rfl
               intro addedLabeling _
               rw [(geometry.added.exponentTransport sourceCycle)
@@ -805,11 +1024,11 @@ theorem cycleRawNumerator_factor
               ring
           _ =
             globalDimension 𝒞.premodular *
-              (source.cycleGlobalWeight 𝒞 automorphism
+              (source.cycleGlobalWeight 𝒞.premodular automorphism
                   sourceCycle sourceLabeling *
                 𝒞.premodular.toFusionCategoryData.closedScalar
                   (Diagram.eval C
-                    (source.termDiagram 𝒞 sourceLabeling))) := by
+                    (source.termDiagram 𝒞.premodular sourceLabeling))) := by
               rw [← Finset.sum_mul, addedSum]
     _ = _ := by
       rw [Finset.mul_sum]
@@ -819,38 +1038,73 @@ end TwoThreeBirthCycleGeometry
 /--
 Cycle geometry for deleting a cancelling 1--2 pair.
 
-The reverse birth is not enough by itself: the forward deletion must be a
-strict left inverse on the cycles produced by that reverse birth.  This is
-the exact no-hidden-coefficient law needed for arbitrary-H2 cancellation.
+The reverse birth is expressed using an inverse-class cycle transport.  No
+strict equality of raw cycle representatives is required.
 -/
 structure OneTwoDeathCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
-    (transport : MarkedH2Transport source.topology target.topology) where
+    (source target : CanonicalPresentation H2)
+  (transport : MarkedH2Transport source.topology target.topology) where
   reverseBirth :
     OneTwoBirthCycleGeometry target source transport.homologyEquiv.symm
-  forward_reverse_cycle :
-    (targetCycleValue : target.DegreeTwoCycle) →
-      (CycleTransport.ofMarkedH2Transport source target transport).targetCycle
-          (reverseBirth.added.cycleTransport.targetCycle targetCycleValue) =
-        targetCycleValue
+
+/--
+Endpoint-bound deletion movie for a cancelling 1--2 pair.
+
+Both directions use the two chain maps of the same marked equivalence.
+-/
+structure OneTwoDeathEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (transport : MarkedH2Transport source.topology target.topology) where
+  reverseBirth :
+    OneTwoBirthEndpointMovie target source transport.homologyEquiv.symm
+      (CycleTransport.ofMarkedH2TransportInverse source target transport)
+
+namespace OneTwoDeathEndpointMovie
+
+/-- Promote the two endpoint-bound directions to complete death geometry. -/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {transport : MarkedH2Transport source.topology target.topology}
+    (movie : OneTwoDeathEndpointMovie source target transport) :
+    OneTwoDeathCycleGeometry source target transport where
+  reverseBirth := movie.reverseBirth.toCycleGeometry
+
+end OneTwoDeathEndpointMovie
 
 /--
 Cycle geometry for deleting a cancelling 2--3 pair, with the same strict
 cycle-retraction requirement.
 -/
 structure TwoThreeDeathCycleGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation manifold H2)
-    (transport : MarkedH2Transport source.topology target.topology) where
+    (source target : CanonicalPresentation H2)
+  (transport : MarkedH2Transport source.topology target.topology) where
   reverseBirth :
     TwoThreeBirthCycleGeometry target source transport.homologyEquiv.symm
-  forward_reverse_cycle :
-    (targetCycleValue : target.DegreeTwoCycle) →
-      (CycleTransport.ofMarkedH2Transport source target transport).targetCycle
-          (reverseBirth.added.cycleTransport.targetCycle targetCycleValue) =
-        targetCycleValue
+
+/-- Endpoint-bound deletion movie for a cancelling 2--3 pair. -/
+structure TwoThreeDeathEndpointMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (transport : MarkedH2Transport source.topology target.topology) where
+  reverseBirth :
+    TwoThreeBirthEndpointMovie target source transport.homologyEquiv.symm
+      (CycleTransport.ofMarkedH2TransportInverse source target transport)
+
+namespace TwoThreeDeathEndpointMovie
+
+/-- Promote the two endpoint-bound directions to complete death geometry. -/
+noncomputable def toCycleGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {transport : MarkedH2Transport source.topology target.topology}
+    (movie : TwoThreeDeathEndpointMovie source target transport) :
+    TwoThreeDeathCycleGeometry source target transport where
+  reverseBirth := movie.reverseBirth.toCycleGeometry
+
+end TwoThreeDeathEndpointMovie
 
 end TwistedYetter.Kirby.CanonicalCycleMoveGeometry

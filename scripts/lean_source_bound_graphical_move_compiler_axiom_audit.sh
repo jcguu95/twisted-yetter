@@ -9,7 +9,7 @@ LEAN_NUM_THREADS=1 ./scripts/lean_local_check.sh \
   >"${output}" 2>&1
 
 if rg -q \
-    'sorryAx|standardSpecialKirbyCalculusConnected|standardHandleChainNaturality' \
+    'sorryAx|standardSpecialKirbyPresentationsConnected|standardHandleChainNaturality' \
     "${output}"; then
   cat "${output}" >&2
   exit 1

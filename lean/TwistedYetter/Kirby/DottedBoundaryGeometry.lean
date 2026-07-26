@@ -52,9 +52,8 @@ unit generator boundary to the zero cycle and then read the stored
 degree-two basis coordinate.  It is not an independently supplied matrix.
 -/
 noncomputable def integralGeneratorBoundaryRow
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (generator : Fin presentation.topology.counts.turnedOver.h3)
     (twoHandle : Fin presentation.topology.counts.h2) : ℤ :=
   presentation.cycleHandleCoefficients
@@ -68,9 +67,8 @@ handle chain complex: adding coefficient `n` of generator `i` adds `n` times
 the unit-generator row to every two-handle coordinate.
 -/
 theorem cycleHandleCoefficients_add_integralGenerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (cycle : presentation.DegreeTwoCycle)
     (generator : Fin presentation.topology.counts.turnedOver.h3)
     (coefficient : ℤ)
@@ -105,9 +103,8 @@ theorem cycleHandleCoefficients_add_integralGenerator
 One exact topology-side dotted-disk factorization for one dual generator.
 -/
 structure GeneratorGeometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (generator : Fin presentation.topology.counts.turnedOver.h3) where
   dottedComponentIndex :
     Fin presentation.topology.formal.raw.components.length
@@ -165,9 +162,8 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 /-- Reconstruct a complete labeling after isolating the dotted coordinate. -/
 def labelingWithDotted
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (dottedLabel : S)
@@ -176,9 +172,8 @@ def labelingWithDotted
   combineAt geometry.dottedComponentIndex dottedLabel remaining
 
 @[simp] theorem labelingWithDotted_selected
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (dottedLabel : S)
@@ -189,15 +184,14 @@ def labelingWithDotted
 
 /-- The isolated coordinate really labels the selected dotted component. -/
 theorem labelOf_dotted
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (dottedLabel : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
-    presentation.labelOf 𝒞
+    presentation.labelOf 𝒞.premodular
         (geometry.labelingWithDotted dottedLabel remaining)
         geometry.dottedComponent.componentId = dottedLabel := by
   rw [geometry.dotted_component_def]
@@ -206,19 +200,18 @@ theorem labelOf_dotted
 
 /-- Changing the dotted coordinate leaves every different component ID fixed. -/
 theorem labelOf_labelingWithDotted_eq_of_ne
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (leftDotted rightDotted : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
     (componentId : String)
     (different : componentId ≠ geometry.dottedComponent.componentId) :
-    presentation.labelOf 𝒞
+    presentation.labelOf 𝒞.premodular
         (geometry.labelingWithDotted leftDotted remaining) componentId =
-      presentation.labelOf 𝒞
+      presentation.labelOf 𝒞.premodular
         (geometry.labelingWithDotted rightDotted remaining) componentId := by
   unfold CanonicalPresentation.labelOf
   cases lookup : presentation.componentIndexing.indexOf componentId with
@@ -237,18 +230,17 @@ theorem labelOf_labelingWithDotted_eq_of_ne
 
 /-- Puncture labels are independent of the isolated dotted coordinate. -/
 theorem labelOf_eq_on_punctures
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (leftDotted rightDotted : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
     ∀ componentId ∈ geometry.punctureBoundary.componentIds,
-      presentation.labelOf 𝒞
+      presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted leftDotted remaining) componentId =
-        presentation.labelOf 𝒞
+        presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted rightDotted remaining) componentId := by
   intro componentId membership
   apply geometry.labelOf_labelingWithDotted_eq_of_ne
@@ -259,18 +251,17 @@ theorem labelOf_eq_on_punctures
 
 /-- Exterior labels are independent of the isolated dotted coordinate. -/
 theorem labelOf_eq_on_exterior
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (leftDotted rightDotted : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
     ∀ componentId ∈ geometry.exteriorContext.componentIds,
-      presentation.labelOf 𝒞
+      presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted leftDotted remaining) componentId =
-        presentation.labelOf 𝒞
+        presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted rightDotted remaining) componentId := by
   intro componentId membership
   apply geometry.labelOf_labelingWithDotted_eq_of_ne
@@ -281,19 +272,18 @@ theorem labelOf_eq_on_exterior
 
 /-- The interpreted puncture object is fixed while the dotted label varies. -/
 theorem punctureBoundary_interpret_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (leftDotted rightDotted : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
     geometry.punctureBoundary.interpret 𝒞.premodular
-        (presentation.labelOf 𝒞
+        (presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted leftDotted remaining)) =
       geometry.punctureBoundary.interpret 𝒞.premodular
-        (presentation.labelOf 𝒞
+        (presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted rightDotted remaining)) := by
   exact geometry.punctureBoundary.interpret_eq_of_eq_on_componentIds
     𝒞.premodular _ _
@@ -302,20 +292,19 @@ theorem punctureBoundary_interpret_eq
 
 /-- The interpreted exterior context is fixed while the dotted label varies. -/
 theorem exteriorContext_interpret_heq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (leftDotted rightDotted : S)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
     HEq
       (geometry.exteriorContext.interpret 𝒞.premodular
-        (presentation.labelOf 𝒞
+        (presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted leftDotted remaining)))
       (geometry.exteriorContext.interpret 𝒞.premodular
-        (presentation.labelOf 𝒞
+        (presentation.labelOf 𝒞.premodular
           (geometry.labelingWithDotted rightDotted remaining))) := by
   exact geometry.exteriorContext.interpret_heq_of_eq_on_hole_and_componentIds
     𝒞.premodular _ _
@@ -328,10 +317,9 @@ theorem exteriorContext_interpret_heq
 
 /-- A fixed complete labeling used to type the common exterior context. -/
 def referenceLabeling
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
@@ -341,23 +329,21 @@ def referenceLabeling
 
 /-- Component-label lookup associated to the fixed reference labeling. -/
 def referenceLabelOf
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
     String → S :=
-  presentation.labelOf category
+  presentation.labelOf category.premodular
     (geometry.referenceLabeling category remaining)
 
 /-- The common exterior context after all labels except the dotted one are fixed. -/
 def referenceExteriorContext
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S) :
@@ -429,10 +415,9 @@ With every other label fixed, a summand is one common linear exterior
 context applied to a simple-labelled open meridian.
 -/
 theorem factorizedTerm_eval_eq_contextOpen
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (dottedLabel : S)
@@ -443,7 +428,7 @@ theorem factorizedTerm_eval_eq_contextOpen
             geometry.dottedComponent.componentId
             geometry.punctureBoundary)).interpret
           category.premodular
-          (presentation.labelOf category
+          (presentation.labelOf category.premodular
             (geometry.labelingWithDotted dottedLabel remaining))) =
       evalContextLinearMap (R := K)
         (geometry.referenceExteriorContext category presentation remaining)
@@ -469,7 +454,7 @@ theorem factorizedTerm_eval_eq_contextOpen
   have localEq :=
     ComponentDiagram.openDottedEncircling_interpret_eval
       category.premodular
-      (presentation.labelOf category
+      (presentation.labelOf category.premodular
         (geometry.labelingWithDotted dottedLabel remaining))
       geometry.dottedComponent.componentId geometry.punctureBoundary
   rw [geometry.labelOf_dotted category presentation dottedLabel remaining]
@@ -483,24 +468,23 @@ The stored free factorization is sound after interpretation in every modular
 category and under every complete component labeling.
 -/
 theorem termDiagram_eval_eq_factorized
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (labeling : presentation.GlobalLabeling (S := S)) :
-    Diagram.eval C (presentation.termDiagram 𝒞 labeling) =
+    Diagram.eval C (presentation.termDiagram 𝒞.premodular labeling) =
       Diagram.eval C
         ((geometry.exteriorContext.plug
           (ComponentDiagram.openDottedEncircling
             geometry.dottedComponent.componentId
             geometry.punctureBoundary)).interpret
-          𝒞.premodular (presentation.labelOf 𝒞 labeling)) := by
+          𝒞.premodular (presentation.labelOf 𝒞.premodular labeling)) := by
   simpa only [CanonicalPresentation.termDiagram,
     CanonicalPresentation.componentTermDiagram] using
     geometry.factorization.eval_eq
-      𝒞 (presentation.labelOf 𝒞 labeling)
+      𝒞.premodular (presentation.labelOf 𝒞.premodular labeling)
 
 /--
 For every serialized component, the exponent shift is exactly the signed
@@ -509,9 +493,8 @@ Unindexed components are handled by proving that they do not occur among the
 punctures; they are not silently dropped.
 -/
 theorem cycleComponentExponent_add_integralGenerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -525,30 +508,42 @@ theorem cycleComponentExponent_add_integralGenerator
         signedMultiplicity component.componentId
           geometry.punctureBoundary * coefficient := by
   unfold CanonicalPresentation.cycleComponentExponent
-  split <;> rename_i handleIndex
-  · have absent :
+  cases handleIndexEq :
+      presentation.topology.twoHandleIndex? component.componentId with
+  | none =>
+    simp only [SpecialKirbyPresentation.cycleComponentExponent, handleIndexEq]
+    have absent :
         component.componentId ∉ geometry.punctureBoundary.componentIds := by
       intro present
       obtain ⟨twoHandle, indexed⟩ :=
         geometry.puncture_ids_are_two_handles component.componentId present
-      rw [handleIndex] at indexed
+      rw [handleIndexEq] at indexed
       contradiction
     rw [signedMultiplicity_eq_zero_of_not_mem
       component.componentId geometry.punctureBoundary absent]
     simp
-  · rw [cycleHandleCoefficients_add_integralGenerator]
+  | some handleIndex =>
+    simp only [SpecialKirbyPresentation.cycleComponentExponent, handleIndexEq]
+    change
+      presentation.cycleHandleCoefficients
+          (addBoundary presentation.topology.handleChain cycle
+            (coordinateChain presentation.topology.handleChain
+              generator coefficient)) handleIndex =
+        presentation.cycleHandleCoefficients cycle handleIndex +
+          signedMultiplicity component.componentId
+            geometry.punctureBoundary * coefficient
+    rw [cycleHandleCoefficients_add_integralGenerator]
     have component_id :=
       presentation.topology.two_handle_index_sound
-        component.componentId _ handleIndex
+        component.componentId _ handleIndexEq
     rw [component_id, geometry.incidence_sound]
 
 /-- Product of all component weights except the isolated dotted coordinate. -/
 noncomputable def remainingGlobalWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -560,11 +555,10 @@ noncomputable def remainingGlobalWeight
 
 /-- A dotted component contributes quantum dimension and no cycle character. -/
 theorem cycleComponentWeight_dotted
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -576,16 +570,16 @@ theorem cycleComponentWeight_dotted
     geometry.dottedComponent geometry.dotted_role
   unfold CanonicalPresentation.cycleComponentWeight
   unfold CanonicalPresentation.cycleComponentExponent
+  unfold SpecialKirbyPresentation.cycleComponentExponent
   rw [unindexed]
   simp
 
 /-- The complete global weight splits at the selected dotted coordinate. -/
 theorem cycleGlobalWeight_split_dotted
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -613,18 +607,17 @@ theorem cycleGlobalWeight_split_dotted
 
 /-- Internal reindexing lemma used before the public named corollary below. -/
 private theorem boundaryCharacterPower_eq_rawRegistryProduct_aux
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (labeling : presentation.GlobalLabeling (S := S))
     (coefficient : ℤ) :
     boundaryCharacterPower
         category.premodular.toFusionCategoryData automorphism
-        (presentation.labelOf category labeling)
+        (presentation.labelOf category.premodular labeling)
         geometry.punctureBoundary coefficient =
       ↑(∏ componentIndex,
         (category.premodular.toFusionCategoryData.automorphismSimpleUnit
@@ -637,7 +630,7 @@ private theorem boundaryCharacterPower_eq_rawRegistryProduct_aux
   rw [signedProduct_eq_indexedProduct
     (value := fun componentId =>
       category.premodular.toFusionCategoryData.automorphismSimpleUnit
-        automorphism (presentation.labelOf category labeling componentId))
+        automorphism (presentation.labelOf category.premodular labeling componentId))
     (coefficient := coefficient)
     (indexOf := presentation.componentIndexing.indexOf)
     (idOf := fun componentIndex =>
@@ -650,7 +643,8 @@ private theorem boundaryCharacterPower_eq_rawRegistryProduct_aux
   congr 1
   apply Finset.prod_congr rfl
   intro componentIndex _
-  rw [presentation.labelOf_component category labeling componentIndex]
+  rw [presentation.labelOf_component
+    category.premodular labeling componentIndex]
 
 /--
 The complete global-label coefficient acquires exactly one boundary-character
@@ -658,11 +652,10 @@ factor under an integral generator boundary.  This is a finite product over
 the exact raw component registry, so no component or exponent is implicit.
 -/
 theorem cycleGlobalWeight_add_integralGenerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -674,7 +667,7 @@ theorem cycleGlobalWeight_add_integralGenerator
             generator coefficient)) labeling =
       boundaryCharacterPower
           𝒞.premodular.toFusionCategoryData automorphism
-          (presentation.labelOf 𝒞 labeling)
+          (presentation.labelOf 𝒞.premodular labeling)
           geometry.punctureBoundary coefficient *
         presentation.cycleGlobalWeight 𝒞 automorphism cycle labeling := by
   classical
@@ -715,18 +708,17 @@ registry.  This proves that no puncture occurrence is lost or duplicated
 before the dotted-label sum is isolated.
 -/
 theorem boundaryCharacterPower_eq_rawRegistryProduct
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (labeling : presentation.GlobalLabeling (S := S))
     (coefficient : ℤ) :
     boundaryCharacterPower
         𝒞.premodular.toFusionCategoryData automorphism
-        (presentation.labelOf 𝒞 labeling)
+        (presentation.labelOf 𝒞.premodular labeling)
         geometry.punctureBoundary coefficient =
       ↑(∏ componentIndex,
         (𝒞.premodular.toFusionCategoryData.automorphismSimpleUnit
@@ -739,7 +731,7 @@ theorem boundaryCharacterPower_eq_rawRegistryProduct
   rw [signedProduct_eq_indexedProduct
     (value := fun componentId =>
       𝒞.premodular.toFusionCategoryData.automorphismSimpleUnit
-        automorphism (presentation.labelOf 𝒞 labeling componentId))
+        automorphism (presentation.labelOf 𝒞.premodular labeling componentId))
     (coefficient := coefficient)
     (indexOf := presentation.componentIndexing.indexOf)
     (idOf := fun componentIndex =>
@@ -752,7 +744,8 @@ theorem boundaryCharacterPower_eq_rawRegistryProduct
   congr 1
   apply Finset.prod_congr rfl
   intro componentIndex _
-  rw [presentation.labelOf_component 𝒞 labeling componentIndex]
+  rw [presentation.labelOf_component
+    𝒞.premodular labeling componentIndex]
 
 end GeneratorGeometry
 
@@ -762,9 +755,8 @@ degree-three generator, with no two generators silently sharing one dotted
 component and no raw dotted component silently omitted.
 -/
 structure GeometrySystem
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2) where
+    (presentation : CanonicalPresentation H2) where
   geometry :
     (generator : Fin presentation.topology.counts.turnedOver.h3) →
       GeneratorGeometry presentation generator

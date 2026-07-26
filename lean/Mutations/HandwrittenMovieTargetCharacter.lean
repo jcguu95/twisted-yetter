@@ -13,9 +13,8 @@ This must fail: even after supplying genuine chain data, the target character
 is derived contravariantly and cannot be supplied by hand.
 -/
 def unsafeTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (chainEquivalence :
       HandleChainEquivalence source.handleChain target.handleChain) :
     MarkedH2Transport source target where

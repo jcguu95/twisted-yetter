@@ -29,19 +29,17 @@ def unsafeCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold :
-      TwistedYetter.Kirby.KirbyCompleteness.ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (presentationCompiler :
       ComponentwiseFiniteLabelPresentationCompiler
-        categoryData manifold H2)
+        categoryData H2)
     (algebra :
       TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra.Input categoryData)
     (base :
       SourceBoundGraphicalMoveCompiler
-        categoryData manifold H2 presentationCompiler algebra) :
+        categoryData H2 presentationCompiler algebra) :
     SourceBoundGraphicalMoveCompiler
-      categoryData manifold H2 presentationCompiler algebra :=
+      categoryData H2 presentationCompiler algebra :=
   { base with evaluatedStep := True }
 
 end TwistedYetter.Mutations.DirectEvaluatedStepInsideSourceBoundGraphicalCompiler

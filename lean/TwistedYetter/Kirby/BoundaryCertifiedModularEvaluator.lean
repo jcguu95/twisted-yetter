@@ -48,11 +48,10 @@ equivalence is compiled below from the one visible standard handle-chain
 naturality axiom.
 -/
 structure BoundaryCertifiedMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -61,7 +60,7 @@ structure BoundaryCertifiedMove
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     (source target :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2) where
   underlying :
     TopologicalTableTwoMove
@@ -74,11 +73,10 @@ namespace BoundaryCertifiedMove
 Enrich a topology-only move with its source-bound handle-chain equivalence.
 -/
 noncomputable def enriched
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    {semantics : LowerKirbyDiagramSemantics manifold lowerTheory}
+    {semantics : LowerKirbyDiagramSemantics lowerTheory}
     {lowerBoundary : LowerHandleBoundaryData lowerTheory}
     {sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus}
@@ -87,14 +85,14 @@ noncomputable def enriched
         lowerTheory lowerBoundary sphereTransport}
     {H2 : Type uH} [AddCommGroup H2]
     {source target :
-      BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+      BoundaryCertifiedPresentation lowerBoundary sphereTransport
         intersection H2}
     (move : BoundaryCertifiedMove semantics source target) :
     TableTwoMove
       (source.toSpecialKirbyPresentation semantics)
       (target.toSpecialKirbyPresentation semantics) :=
   enrichMove
-    (sourceBackedGeometricH2Compiler manifold H2).localCompiler
+    (sourceBackedGeometricH2Compiler H2).localCompiler
     move.underlying
 
 end BoundaryCertifiedMove
@@ -103,11 +101,10 @@ end BoundaryCertifiedMove
 The marked-presentation calculus whose markings are derived handle homology.
 -/
 noncomputable def boundaryCertifiedCalculus
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     (lowerBoundary : LowerHandleBoundaryData lowerTheory)
     (sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus)
@@ -117,7 +114,7 @@ noncomputable def boundaryCertifiedCalculus
     (H2 : Type uH) [AddCommGroup H2] :
     HandlePresentationTheory where
   Presentation :=
-    BoundaryCertifiedPresentation manifold lowerBoundary sphereTransport
+    BoundaryCertifiedPresentation lowerBoundary sphereTransport
       intersection H2
   Marking := fun presentation =>
     presentation.handleChain.SecondHomology
@@ -140,11 +137,10 @@ The existing event-by-event modular evaluator, restricted to certified
 presentations and their boundary-derived handle homology.
 -/
 noncomputable def boundaryCertifiedEvaluation
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     (lowerBoundary : LowerHandleBoundaryData lowerTheory)
     (sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus)
@@ -153,7 +149,7 @@ noncomputable def boundaryCertifiedEvaluation
         lowerTheory lowerBoundary sphereTransport)
     (H2 : Type) [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
     PresentationEvaluation
       (boundaryCertifiedCalculus semantics lowerBoundary sphereTransport
         intersection H2) K where
@@ -169,11 +165,10 @@ The proof uses only the existing move compiler and the chain-induced homology
 transport.  No equality of final evaluator values is accepted as input.
 -/
 theorem boundaryCertifiedEvaluation_localInvariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     (lowerBoundary : LowerHandleBoundaryData lowerTheory)
     (sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus)
@@ -182,7 +177,7 @@ theorem boundaryCertifiedEvaluation_localInvariant
         lowerTheory lowerBoundary sphereTransport)
     (H2 : Type) [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
     IsInvariantUnderElementaryMoves
       (boundaryCertifiedEvaluation semantics lowerBoundary sphereTransport
         intersection H2 𝒞 inputs) := by
@@ -195,11 +190,10 @@ theorem boundaryCertifiedEvaluation_localInvariant
 
 /-- The boundary-certified evaluation on its generated Kirby quotient. -/
 noncomputable def boundaryCertifiedEvaluationOnKirbyClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     (lowerBoundary : LowerHandleBoundaryData lowerTheory)
     (sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus)
@@ -208,7 +202,7 @@ noncomputable def boundaryCertifiedEvaluationOnKirbyClass
         lowerTheory lowerBoundary sphereTransport)
     (H2 : Type) [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2) :
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2) :
     (boundaryCertifiedCalculus semantics lowerBoundary sphereTransport
       intersection H2).KirbyClass → K :=
   (boundaryCertifiedEvaluation semantics lowerBoundary sphereTransport
@@ -218,11 +212,10 @@ noncomputable def boundaryCertifiedEvaluationOnKirbyClass
 
 /-- Quotient evaluation agrees with the certified presentation formula. -/
 theorem boundaryCertifiedEvaluationOnKirbyClass_mk
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
-    (semantics : LowerKirbyDiagramSemantics manifold lowerTheory)
+    (semantics : LowerKirbyDiagramSemantics lowerTheory)
     (lowerBoundary : LowerHandleBoundaryData lowerTheory)
     (sphereTransport :
       SphereSystemTransport.{uD, uIso, uSlide, uSphere} calculus)
@@ -231,7 +224,7 @@ theorem boundaryCertifiedEvaluationOnKirbyClass_mk
         lowerTheory lowerBoundary sphereTransport)
     (H2 : Type) [AddCommGroup H2]
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
-    (inputs : CompiledEvaluatorEvidence 𝒞 manifold H2)
+    (inputs : CompiledEvaluatorEvidence 𝒞 H2)
     (marked :
       (boundaryCertifiedCalculus semantics lowerBoundary sphereTransport
         intersection H2).MarkedPresentation) :

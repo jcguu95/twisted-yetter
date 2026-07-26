@@ -14,9 +14,8 @@ The only admitted input is a chain homotopy equivalence, from which the map on
 second homology is derived.
 -/
 def unsafeTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (chainEquivalence :
       HandleChainEquivalence source.handleChain target.handleChain)
     (equiv : H2 ≃ H2) :

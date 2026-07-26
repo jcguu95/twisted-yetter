@@ -8,15 +8,14 @@ open TwistedYetter.Kirby.Presentation
 universe uH
 
 example
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
     [AddCommGroup H2]
-    (completeness : TableTwoLinkCompleteness manifold H2)
+    (completeness : TableTwoLinkCompleteness H2)
     (represents :
-      (presentation : SpecialKirbyPresentation manifold H2) →
+      (presentation : SpecialKirbyPresentation H2) →
         H2 → H2 → Prop)
     (chosenPresentation :
-      H2 → SpecialKirbyPresentation manifold H2)
+      H2 → SpecialKirbyPresentation H2)
     (chosenCoordinate : H2 → H2)
     (chosen_represents :
       (alpha : H2) →
@@ -26,7 +25,7 @@ example
       RawPresentation.sha256Shape markingCertificateHash = true)
     (sourceRefs : List String)
     (exactMarkedScope sourceScopeCaveat : String) :
-    MarkedPairPresentationSystem manifold H2 where
+    MarkedPairPresentationSystem H2 where
   completeness := completeness
   represents := represents
   chosenPresentation := chosenPresentation

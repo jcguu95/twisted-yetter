@@ -32,30 +32,29 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 /-- One fixed exterior-label sector is invariant under a generator boundary. -/
 theorem fixedRemaining_completeSummand_invariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
     (remaining : RemainingIndex geometry.dottedComponentIndex → S)
     (coefficient : ℤ) :
     (∑ dottedLabel,
-      presentation.cycleGlobalWeight category automorphism
+      presentation.cycleGlobalWeight category.premodular automorphism
           (addBoundary presentation.topology.handleChain cycle
             (coordinateChain presentation.topology.handleChain
               generator coefficient))
           (geometry.labelingWithDotted dottedLabel remaining) •
         Diagram.eval C
-          (presentation.termDiagram category
+          (presentation.termDiagram category.premodular
             (geometry.labelingWithDotted dottedLabel remaining))) =
       ∑ dottedLabel,
-        presentation.cycleGlobalWeight category automorphism cycle
+        presentation.cycleGlobalWeight category.premodular automorphism cycle
             (geometry.labelingWithDotted dottedLabel remaining) •
           Diagram.eval C
-            (presentation.termDiagram category
+            (presentation.termDiagram category.premodular
               (geometry.labelingWithDotted dottedLabel remaining)) := by
   classical
   let remainingWeight := geometry.remainingGlobalWeight
@@ -64,7 +63,7 @@ theorem fixedRemaining_completeSummand_invariant
     _ = ∑ dottedLabel,
         (boundaryCharacterPower
             category.premodular.toFusionCategoryData automorphism
-            (presentation.labelOf category
+            (presentation.labelOf category.premodular
               (geometry.labelingWithDotted dottedLabel remaining))
             geometry.punctureBoundary coefficient *
           (category.premodular.quantumDimension dottedLabel *
@@ -85,7 +84,7 @@ theorem fixedRemaining_completeSummand_invariant
         (∑ dottedLabel,
           (boundaryCharacterPower
               category.premodular.toFusionCategoryData automorphism
-              (presentation.labelOf category
+              (presentation.labelOf category.premodular
                 (geometry.labelingWithDotted dottedLabel remaining))
               geometry.punctureBoundary coefficient *
             category.premodular.quantumDimension dottedLabel) •
@@ -127,9 +126,8 @@ theorem fixedRemaining_completeSummand_invariant
 
 /-- Reindex a global labeling through this geometry's selected dotted slot. -/
 theorem sum_splitAt_geometry
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     {V : Type*} [AddCommMonoid V]
@@ -142,38 +140,37 @@ theorem sum_splitAt_geometry
 
 /-- The complete global finite sum is invariant under one integral generator. -/
 theorem cycleLinearDiagram_eval_add_integralGenerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
     (coefficient : ℤ) :
     LinearDiagram.eval
-        (presentation.cycleLinearDiagram category automorphism
+        (presentation.cycleLinearDiagram category.premodular automorphism
           (addBoundary presentation.topology.handleChain cycle
             (coordinateChain presentation.topology.handleChain
               generator coefficient))) =
       LinearDiagram.eval
-        (presentation.cycleLinearDiagram category automorphism cycle) := by
+        (presentation.cycleLinearDiagram category.premodular automorphism cycle) := by
   classical
-  rw [presentation.cycleLinearDiagram_eval category automorphism]
-  rw [presentation.cycleLinearDiagram_eval category automorphism]
+  rw [presentation.cycleLinearDiagram_eval category.premodular automorphism]
+  rw [presentation.cycleLinearDiagram_eval category.premodular automorphism]
   let shiftedCycle :=
     addBoundary presentation.topology.handleChain cycle
       (coordinateChain presentation.topology.handleChain
         generator coefficient)
   let shiftedSummand : presentation.GlobalLabeling (S := S) →
       (𝟙_ C ⟶ 𝟙_ C) := fun labeling =>
-    presentation.cycleGlobalWeight category automorphism
+    presentation.cycleGlobalWeight category.premodular automorphism
         shiftedCycle labeling •
-      Diagram.eval C (presentation.termDiagram category labeling)
+      Diagram.eval C (presentation.termDiagram category.premodular labeling)
   let originalSummand : presentation.GlobalLabeling (S := S) →
       (𝟙_ C ⟶ 𝟙_ C) := fun labeling =>
-    presentation.cycleGlobalWeight category automorphism cycle labeling •
-      Diagram.eval C (presentation.termDiagram category labeling)
+    presentation.cycleGlobalWeight category.premodular automorphism cycle labeling •
+      Diagram.eval C (presentation.termDiagram category.premodular labeling)
   change (∑ labeling, shiftedSummand labeling) =
     ∑ labeling, originalSummand labeling
   rw [geometry.sum_splitAt_geometry shiftedSummand]
@@ -186,11 +183,10 @@ theorem cycleLinearDiagram_eval_add_integralGenerator
 
 /-- The normalized explicit-cycle evaluator is invariant under one generator. -/
 theorem cycleEvalC_add_integralGenerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     {generator : Fin presentation.topology.counts.turnedOver.h3}
     (geometry : GeneratorGeometry presentation generator)
     (cycle : presentation.DegreeTwoCycle)
@@ -233,11 +229,10 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 /-- A complete geometry system supplies every finite generator check. -/
 theorem GeometrySystem.generatorInvariant
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (system : GeometrySystem presentation) :
     IntegralGeneratorBoundaryInvariant
       presentation.topology.handleChain
@@ -248,11 +243,10 @@ theorem GeometrySystem.generatorInvariant
 
 /-- Therefore the evaluator depends only on the actual handle-chain H2 class. -/
 theorem GeometrySystem.respects_homology_class
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (category : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (system : GeometrySystem presentation)
     (left right : presentation.DegreeTwoCycle)
     (sameClass :

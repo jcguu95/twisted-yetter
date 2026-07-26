@@ -25,12 +25,11 @@ example
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (evaluatorCompiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    (markedSystem : MarkedPairPresentationSystem manifold H2) :
-    FourManifoldInvariantInputs categoryData manifold H2 where
+      TableTwoEvaluatorCompiler categoryData H2)
+    (markedSystem : MarkedPairPresentationSystem H2) :
+    FourManifoldInvariantInputs categoryData H2 where
   evaluatorCompiler := evaluatorCompiler
   markedSystem := markedSystem
 

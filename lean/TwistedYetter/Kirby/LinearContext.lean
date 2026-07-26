@@ -92,6 +92,27 @@ theorem evalContextLinearMap_apply
       rw [innerIH, outerIH]
       exact Context.eval_plug_congr C outer rfl
 
+/--
+The context linear map agrees with plugging any typed diagram, not only an
+explicit coupon carrying the same morphism.
+-/
+theorem evalContextLinearMap_diagram
+    {holeSource holeTarget wholeSource wholeTarget : Boundary C}
+    (context :
+      Context C holeSource holeTarget wholeSource wholeTarget)
+    (diagram : Diagram C holeSource holeTarget) :
+    evalContextLinearMap (R := R) context (Diagram.eval C diagram) =
+      Diagram.eval C (Context.plug C context diagram) := by
+  calc
+    evalContextLinearMap (R := R) context (Diagram.eval C diagram) =
+        Diagram.eval C
+          (Context.plug C context
+            (Diagram.coupon "context-linear-map" (Diagram.eval C diagram))) :=
+      evalContextLinearMap_apply
+        context "context-linear-map" (Diagram.eval C diagram)
+    _ = Diagram.eval C (Context.plug C context diagram) :=
+      Context.eval_plug_congr C context rfl
+
 /- Compatibility alias retaining the coupon-oriented API name. -/
 noncomputable def evalCouponLinearMap
     {holeSource holeTarget wholeSource wholeTarget : Boundary C}

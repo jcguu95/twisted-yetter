@@ -27,7 +27,7 @@ expected_diagnostics=(
   'Fields missing: `uniqueFourHandle`'
   'Unknown constant `TwistedYetter.Kirby.KirbyCompleteness.TableTwoMove.fromArbitraryRelation`'
   '`homologyEquiv` is not a field of structure `MarkedH2Transport`'
-  'Fields missing: `representedManifoldHash`, `represented_manifold_hash_sound`, `representsFixedManifold`, `representation_witness`'
+  'Fields missing: `provenance`'
   'Fields missing: `recipe`'
   'Fields missing: `execution`'
 )

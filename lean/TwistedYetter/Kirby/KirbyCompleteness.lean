@@ -73,20 +73,75 @@ def requiredClosedFourScope : ManifoldScope where
   orientationMode := .oriented
 
 /--
-An external input asserting that one content-addressed manifold belongs to
-the exact R10 scope.  This is an interface to manifold topology, not a
-replacement definition of a smooth manifold.
+A content-addressed repository artifact.
+
+This is reproducibility metadata, not a mathematical manifold, category, or
+presentation.  Keeping it in a separate structure prevents a hash-bearing
+record from masquerading as one of those mathematical objects.
 -/
-structure ClosedConnectedSmoothOrientedFourManifoldInput where
-  manifoldId : String
-  manifoldSnapshotHash : String
-  manifold_snapshot_hash_shape :
-    RawPresentation.sha256Shape manifoldSnapshotHash = true
-  scope : ManifoldScope
-  scope_sound : scope = requiredClosedFourScope
-  scopeCertificateHash : String
-  scope_certificate_hash_shape :
-    RawPresentation.sha256Shape scopeCertificateHash = true
+structure ContentAddressedArtifact where
+  logicalId : String
+  snapshotHash : String
+  snapshot_hash_shape :
+    RawPresentation.sha256Shape snapshotHash = true
+
+/--
+External certification that an artifact lies in the exact closed,
+connected, smooth, oriented four-dimensional scope used by this calculus.
+
+The certificate is provenance.  The mathematical scope is fixed by
+`requiredClosedFourScope`; it is not a caller-selectable field.
+-/
+structure ClosedFourManifoldScopeCertificate where
+  artifact : ContentAddressedArtifact
+  certifiedScope : ManifoldScope
+  certifies_required_scope :
+    certifiedScope = requiredClosedFourScope
+
+/-- Repository provenance for one stored special-Kirby artifact. -/
+structure SpecialKirbyArtifactProvenance where
+  representedManifoldArtifact : ContentAddressedArtifact
+  scopeCertificate : ClosedFourManifoldScopeCertificate
+
+/--
+Attach repository provenance to a mathematical payload.
+
+The wrapper is deliberately absent from presentations, moves, movies, and
+evaluators.  Forgetting `.provenance` recovers the complete mathematical
+payload, so content hashes cannot affect any theorem in the Kirby kernel.
+-/
+structure StoredArtifact (A : Type uH) where
+  payload : A
+  provenance : SpecialKirbyArtifactProvenance
+
+namespace StoredArtifact
+
+def logicalId (artifact : StoredArtifact A) : String :=
+  artifact.provenance.representedManifoldArtifact.logicalId
+
+def snapshotHash (artifact : StoredArtifact A) : String :=
+  artifact.provenance.representedManifoldArtifact.snapshotHash
+
+theorem snapshot_hash_shape (artifact : StoredArtifact A) :
+    RawPresentation.sha256Shape artifact.snapshotHash = true :=
+  artifact.provenance.representedManifoldArtifact.snapshot_hash_shape
+
+def certifiedScope (artifact : StoredArtifact A) : ManifoldScope :=
+  artifact.provenance.scopeCertificate.certifiedScope
+
+theorem certified_scope_sound (artifact : StoredArtifact A) :
+    artifact.certifiedScope = requiredClosedFourScope :=
+  artifact.provenance.scopeCertificate.certifies_required_scope
+
+def scopeCertificateHash (artifact : StoredArtifact A) : String :=
+  artifact.provenance.scopeCertificate.artifact.snapshotHash
+
+theorem scope_certificate_hash_shape
+    (artifact : StoredArtifact A) :
+    RawPresentation.sha256Shape artifact.scopeCertificateHash = true :=
+  artifact.provenance.scopeCertificate.artifact.snapshot_hash_shape
+
+end StoredArtifact
 
 /-- Handle indices appearing in a four-dimensional Cerf movie. -/
 inductive HandleIndex
@@ -115,8 +170,7 @@ def addThreeFourCounts (counts : HandleCounts) : HandleCounts :=
 A general ordered relative handle presentation of one fixed compact
 four-manifold.  No unique-zero/unique-four normal form is assumed here.
 -/
-structure GeneralHandlePresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput) where
+structure GeneralHandlePresentation where
   presentationId : String
   presentationSnapshotHash : String
   presentation_snapshot_hash_shape :
@@ -132,8 +186,7 @@ structure GeneralHandlePresentation
 
 /-- Hash-bound metadata for one general Cerf step. -/
 structure GeneralCerfStepMetadata
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
-    (source target : GeneralHandlePresentation manifold) where
+    (source target : GeneralHandlePresentation) where
   stepId : String
   sourcePresentationHash : String
   targetPresentationHash : String
@@ -154,87 +207,85 @@ Slides of index zero or four are absent, as in the standard definition of
 handle slide.  Every adjacent cancelling pair is present in both directions.
 -/
 inductive GeneralCerfMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput} :
-    GeneralHandlePresentation manifold →
-      GeneralHandlePresentation manifold → Type
+    : GeneralHandlePresentation →
+      GeneralHandlePresentation → Type
   | levelIsotopy
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (index : HandleIndex)
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts) :
       GeneralCerfMove source target
   | oneSlide
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (orientation : BandOrientation)
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts) :
       GeneralCerfMove source target
   | twoSlide
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (orientation : BandOrientation)
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts) :
       GeneralCerfMove source target
   | threeSlide
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (orientation : BandOrientation)
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts) :
       GeneralCerfMove source target
   | zeroOneBirth
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : target.counts = addZeroOneCounts source.counts) :
       GeneralCerfMove source target
   | zeroOneDeath
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = addZeroOneCounts target.counts) :
       GeneralCerfMove source target
   | oneTwoBirth
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : target.counts = source.counts.addOneTwo) :
       GeneralCerfMove source target
   | oneTwoDeath
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts.addOneTwo) :
       GeneralCerfMove source target
   | twoThreeBirth
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : target.counts = source.counts.addTwoThree) :
       GeneralCerfMove source target
   | twoThreeDeath
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = target.counts.addTwoThree) :
       GeneralCerfMove source target
   | threeFourBirth
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : target.counts = addThreeFourCounts source.counts) :
       GeneralCerfMove source target
   | threeFourDeath
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (metadata : GeneralCerfStepMetadata source target)
       (counts_sound : source.counts = addThreeFourCounts target.counts) :
       GeneralCerfMove source target
 
 /-- Typed finite composition of general Cerf moves. -/
 inductive GeneralCerfMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput} :
-    GeneralHandlePresentation manifold →
-      GeneralHandlePresentation manifold → Type
-  | refl (presentation : GeneralHandlePresentation manifold) :
+    : GeneralHandlePresentation →
+      GeneralHandlePresentation → Type
+  | refl (presentation : GeneralHandlePresentation) :
       GeneralCerfMovie presentation presentation
   | step
-      {source target : GeneralHandlePresentation manifold}
+      {source target : GeneralHandlePresentation}
       (move : GeneralCerfMove source target) :
       GeneralCerfMovie source target
   | trans
-      {source middle target : GeneralHandlePresentation manifold}
+      {source middle target : GeneralHandlePresentation}
       (first : GeneralCerfMovie source middle)
       (second : GeneralCerfMovie middle target) :
       GeneralCerfMovie source target
@@ -245,10 +296,9 @@ Visible external form of Gompf--Stipsicz Theorem 4.2.12.
 The source theorem concerns compact relative handle decompositions and does
 not itself say that the five Bärenz--Barrett Table 2 link families suffice.
 -/
-structure GeneralCerfCompleteness
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput) where
+structure GeneralCerfCompleteness where
   connected :
-    (source target : GeneralHandlePresentation manifold) →
+    (source target : GeneralHandlePresentation) →
       GeneralCerfMovie source target
   source_ref : String
   source_locator : String
@@ -263,7 +313,6 @@ of one movie use a fixed ambient `H2` model; each presentation separately pins
 the certificate identifying its handle-chain coordinates with that model.
 -/
 structure SpecialKirbyPresentation
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   formal : FormalPresentation
   execution : ClosedExecutionCertificate formal
@@ -305,14 +354,6 @@ structure SpecialKirbyPresentation
   uniqueFourHandle : counts.h4 = 1
   orderedByIncreasingIndex : Prop
   ordering_witness : orderedByIncreasingIndex
-  representedManifoldHash : String
-  represented_manifold_hash_sound :
-    representedManifoldHash = manifold.manifoldSnapshotHash
-  representsFixedManifold : Prop
-  representation_witness : representsFixedManifold
-  representationCertificateHash : String
-  representation_certificate_hash_shape :
-    RawPresentation.sha256Shape representationCertificateHash = true
   h2ModelCertificateHash : String
   h2_model_certificate_hash_shape :
     RawPresentation.sha256Shape h2ModelCertificateHash = true
@@ -324,6 +365,38 @@ structure SpecialKirbyPresentation
   handleChain : HandleChainModel counts.turnedOver
   h2ModelEquiv : handleChain.SecondHomology ≃+ H2
 
+namespace SpecialKirbyPresentation
+
+/-- Degree-two cycles in the presentation's certified handle chain. -/
+noncomputable abbrev DegreeTwoCycle
+    {H2 : Type uH} [AddCommGroup H2]
+    (presentation : SpecialKirbyPresentation H2) :=
+  presentation.handleChain.complex.cycles 2
+
+/-- Coordinates of an explicit cycle in the certified two-handle basis. -/
+noncomputable def cycleHandleCoefficients
+    {H2 : Type uH} [AddCommGroup H2]
+    (presentation : SpecialKirbyPresentation H2)
+    (cycle : presentation.DegreeTwoCycle) :
+    Fin presentation.counts.h2 → ℤ :=
+  presentation.handleChain.degreeTwoBasis.hom
+    (presentation.handleChain.complex.iCycles 2 cycle)
+
+/--
+Coefficient of an explicit cycle on the two-handle represented by one link
+component. Dotted one-handle components have coefficient zero.
+-/
+noncomputable def cycleComponentExponent
+    {H2 : Type uH} [AddCommGroup H2]
+    (presentation : SpecialKirbyPresentation H2)
+    (cycle : presentation.DegreeTwoCycle)
+    (component : ComponentSpec) : ℤ :=
+  match presentation.twoHandleIndex? component.componentId with
+  | none => 0
+  | some index => presentation.cycleHandleCoefficients cycle index
+
+end SpecialKirbyPresentation
+
 /--
 Typed metadata for one special Table 2 link move.
 
@@ -332,71 +405,63 @@ The sole field is now a source-bound, kind-indexed local recipe containing a
 literal component/event window replacement and a closed handle-edit program.
 -/
 structure TableTwoMoveMetadata
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (kind : RecipeKind)
-    (source target : SpecialKirbyPresentation manifold H2) where
+    (source target : SpecialKirbyPresentation H2) where
   recipe : SourceBoundRecipe kind source.formal target.formal
 
 namespace TableTwoMoveMetadata
 
 def moveId
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) : String :=
   metadata.recipe.recipeId
 
 def sourcePresentationHash
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) : String :=
   metadata.recipe.sourcePresentationHash
 
 def targetPresentationHash
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) : String :=
   metadata.recipe.targetPresentationHash
 
 def localTopologyCertificateHash
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) : String :=
   metadata.recipe.recipeSnapshotHash
 
 theorem source_hash_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) :
     metadata.sourcePresentationHash =
       source.formal.pinnedSourceHash :=
   metadata.recipe.source_hash_sound
 
 theorem target_hash_sound
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) :
     metadata.targetPresentationHash =
       target.formal.pinnedSourceHash :=
   metadata.recipe.target_hash_sound
 
 theorem local_certificate_hash_shape
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {kind : RecipeKind}
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata kind source target) :
     RawPresentation.sha256Shape
         metadata.localTopologyCertificateHash = true :=
@@ -411,9 +476,8 @@ The map on `H2` is not a field.  It is forced by the chain homotopy
 equivalence and the two presentations' pinned coordinate identifications.
 -/
 structure MarkedH2Transport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : SpecialKirbyPresentation manifold H2) where
+    (source target : SpecialKirbyPresentation H2) where
   chainEquivalence :
     HandleChainEquivalence source.handleChain target.handleChain
 
@@ -421,9 +485,8 @@ namespace MarkedH2Transport
 
 /-- The ambient additive `H2` equivalence derived from concrete chain data. -/
 noncomputable def homologyAddEquiv
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target) :
     H2 ≃+ H2 :=
   source.h2ModelEquiv.symm.trans
@@ -432,36 +495,32 @@ noncomputable def homologyAddEquiv
 
 /-- The underlying type equivalence; it cannot be supplied independently. -/
 noncomputable def homologyEquiv
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target) :
     H2 ≃ H2 :=
   transport.homologyAddEquiv.toEquiv
 
 /-- Transport a marked homology class covariantly. -/
 noncomputable def targetClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target)
     (alpha : H2) : H2 :=
   transport.homologyEquiv alpha
 
 /-- Derive the target character contravariantly. -/
 noncomputable def targetCharacter
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target)
     (character : H2 → A) : H2 → A :=
   character ∘ transport.homologyEquiv.symm
 
 /-- Simultaneous transport of class and character preserves evaluation. -/
 theorem pairing_preserved
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target)
     (character : H2 → A)
     (alpha : H2) :
@@ -471,9 +530,8 @@ theorem pairing_preserved
 
 /-- The chain-derived ambient transport preserves addition. -/
 theorem targetClass_add
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (transport : MarkedH2Transport source target)
     (alpha beta : H2) :
     transport.targetClass (alpha + beta) =
@@ -490,57 +548,53 @@ There is deliberately no constructor for zero--one, three--four, or
 three-over-three moves, and no constructor from a bare evaluator equality.
 -/
 inductive TableTwoMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2] :
-    SpecialKirbyPresentation manifold H2 →
-      SpecialKirbyPresentation manifold H2 → Type (uH + 1)
+    SpecialKirbyPresentation H2 →
+      SpecialKirbyPresentation H2 → Type (uH + 1)
   | framedIsotopy
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .framedIsotopy source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneOverOne
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoOverOne
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoOverTwo
-      {source target : SpecialKirbyPresentation manifold H2}
-      (orientation : BandOrientation)
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneTwoBirth
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | oneTwoDeath
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
       (counts_sound : source.counts = target.counts.addOneTwo)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoThreeBirth
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
       (counts_sound : target.counts = source.counts.addTwoThree)
       (transport : MarkedH2Transport source target) :
       TableTwoMove source target
   | twoThreeDeath
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
       (counts_sound : source.counts = target.counts.addTwoThree)
       (transport : MarkedH2Transport source target) :
@@ -550,16 +604,15 @@ namespace TableTwoMove
 
 /-- Extract the mandatory `H2` transport from any admitted move. -/
 def homologyTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target) :
     MarkedH2Transport source target := by
   cases move with
   | framedIsotopy _ _ transport => exact transport
-  | oneOverOne _ _ _ transport => exact transport
-  | twoOverOne _ _ _ transport => exact transport
-  | twoOverTwo _ _ _ transport => exact transport
+  | oneOverOne _ _ transport => exact transport
+  | twoOverOne _ _ transport => exact transport
+  | twoOverTwo _ _ transport => exact transport
   | oneTwoBirth _ _ transport => exact transport
   | oneTwoDeath _ _ transport => exact transport
   | twoThreeBirth _ _ transport => exact transport
@@ -569,19 +622,18 @@ end TableTwoMove
 
 /-- Typed finite Table 2 movie. -/
 inductive TableTwoMovie
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2] :
-    SpecialKirbyPresentation manifold H2 →
-      SpecialKirbyPresentation manifold H2 → Type (uH + 1)
-  | refl (presentation : SpecialKirbyPresentation manifold H2) :
+    SpecialKirbyPresentation H2 →
+      SpecialKirbyPresentation H2 → Type (uH + 1)
+  | refl (presentation : SpecialKirbyPresentation H2) :
       TableTwoMovie presentation presentation
   | step
-      {source target : SpecialKirbyPresentation manifold H2}
+      {source target : SpecialKirbyPresentation H2}
       (move : TableTwoMove source target) :
       TableTwoMovie source target
   | trans
       {source middle target :
-        SpecialKirbyPresentation manifold H2}
+        SpecialKirbyPresentation H2}
       (first : TableTwoMovie source middle)
       (second : TableTwoMovie middle target) :
       TableTwoMovie source target
@@ -590,9 +642,8 @@ namespace TableTwoMovie
 
 /-- Compose all local `H2` equivalences along a movie. -/
 noncomputable def homologyEquiv
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target) :
     H2 ≃+ H2 := by
   induction movie with
@@ -603,27 +654,24 @@ noncomputable def homologyEquiv
 
 /-- Transport a marked `H2` class through the complete movie. -/
 noncomputable def targetClass
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (alpha : H2) : H2 :=
   movie.homologyEquiv alpha
 
 /-- Derive the target character through the inverse movie transport. -/
 noncomputable def targetCharacter
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (character : H2 → A) : H2 → A :=
   character ∘ movie.homologyEquiv.symm
 
 /-- The marked pairing is unchanged across an arbitrary composed movie. -/
 theorem pairing_preserved
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (character : H2 → A)
     (alpha : H2) :
@@ -633,9 +681,8 @@ theorem pairing_preserved
 
 /-- A whole Table 2 movie transports `H2` additively. -/
 theorem targetClass_add
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (alpha beta : H2) :
     movie.targetClass (alpha + beta) =
@@ -643,10 +690,9 @@ theorem targetClass_add
   movie.homologyEquiv.map_add alpha beta
 /-- Composition computes the same `H2` map as composing the two movies. -/
 theorem homologyEquiv_trans
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {source middle target :
-      SpecialKirbyPresentation manifold H2}
+      SpecialKirbyPresentation H2}
     (first : TableTwoMovie source middle)
     (second : TableTwoMovie middle target) :
     homologyEquiv (.trans first second) =
@@ -663,11 +709,10 @@ imports the link-calculus refinement.  The latter must carry its own sources
 and caveat because it is not proved from `generalCerf` in this module.
 -/
 structure TableTwoLinkCompleteness
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  generalCerf : GeneralCerfCompleteness manifold
+  generalCerf : GeneralCerfCompleteness
   tableTwoConnected :
-    (source target : SpecialKirbyPresentation manifold H2) →
+    (source target : SpecialKirbyPresentation H2) →
       TableTwoMovie source target
   link_calculus_source_refs : List String
   link_calculus_source_locator : String
@@ -682,11 +727,10 @@ Completeness supplies only a topology movie and its induced `H2` map.
 Evaluator invariance is intentionally deferred to R11.
 -/
 noncomputable def markedTransport
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (completeness :
-      TableTwoLinkCompleteness manifold H2)
-    (source target : SpecialKirbyPresentation manifold H2) :
+      TableTwoLinkCompleteness H2)
+    (source target : SpecialKirbyPresentation H2) :
     H2 ≃+ H2 :=
   (completeness.tableTwoConnected source target).homologyEquiv
 

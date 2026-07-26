@@ -9,9 +9,8 @@ universe u
 
 /-- This must fail: zero--one moves belong to general Cerf, not Table 2. -/
 def unsafeMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
     (transport : MarkedH2Transport source target) :
     TableTwoMove source target :=

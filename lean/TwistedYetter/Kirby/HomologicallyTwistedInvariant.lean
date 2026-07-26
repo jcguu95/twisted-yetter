@@ -122,9 +122,8 @@ structure DecoratedKirbyPresentation
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2) where
+    (topology : SpecialKirbyPresentation H2) where
   diagram : H2 → Diagram C .unit .unit
   evaluationState : H2 → EvaluationState (K := K)
   counts_sound :
@@ -156,9 +155,8 @@ def normalizedValue
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {topology : SpecialKirbyPresentation manifold H2}
+    {topology : SpecialKirbyPresentation H2}
     (presentation :
       DecoratedKirbyPresentation categoryData topology)
     (alpha : H2) : K :=
@@ -189,15 +187,14 @@ def twoOverTwoSlideMetadata
 
 /-- Extract the shared source-bound recipe identity from every exact move. -/
 def tableTwoMoveId
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target) : String :=
   match move with
   | .framedIsotopy metadata _ _ => metadata.moveId
-  | .oneOverOne _ metadata _ _ => metadata.moveId
-  | .twoOverOne _ metadata _ _ => metadata.moveId
-  | .twoOverTwo _ metadata _ _ => metadata.moveId
+  | .oneOverOne metadata _ _ => metadata.moveId
+  | .twoOverOne metadata _ _ => metadata.moveId
+  | .twoOverTwo metadata _ _ => metadata.moveId
   | .oneTwoBirth metadata _ _ => metadata.moveId
   | .oneTwoDeath metadata _ _ => metadata.moveId
   | .twoThreeBirth metadata _ _ => metadata.moveId
@@ -208,9 +205,8 @@ Hash-bound assertion that one R7/R8/R9 proof object realizes the exact R10
 topology step.  This does not contain an evaluator equality.
 -/
 structure LocalEvaluationBinding
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target) where
   moveId : String
   move_id_sound : moveId = tableTwoMoveId move
@@ -234,9 +230,8 @@ inductive EvaluatedTableTwoStep
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (sourceEvaluation :
       DecoratedKirbyPresentation categoryData source)
     (targetEvaluation :
@@ -258,7 +253,6 @@ inductive EvaluatedTableTwoStep
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.framedIsotopy metadata counts_sound transport) alpha
   | oneOverOne
-      (orientation : BandOrientation)
       (metadata : TableTwoMoveMetadata .oneOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
@@ -266,7 +260,7 @@ inductive EvaluatedTableTwoStep
       (binding :
         LocalEvaluationBinding
           (TableTwoMove.oneOverOne
-            orientation metadata counts_sound transport))
+            metadata counts_sound transport))
       (slide :
         OrdinaryHandleSlide
           (sourceEvaluation.diagram alpha)
@@ -274,7 +268,8 @@ inductive EvaluatedTableTwoStep
       (graphical_kind_sound :
         (ordinarySlideMetadata slide).kind = .oneOverOne)
       (graphical_orientation_sound :
-        (ordinarySlideMetadata slide).orientation = orientation)
+        (ordinarySlideMetadata slide).orientation =
+          HandleEdit.oneOverOneOrientation metadata.recipe.handleEdit)
       (graphical_move_id_sound :
         (ordinarySlideMetadata slide).moveId = metadata.moveId)
       (graphical_source_hash_sound :
@@ -285,9 +280,8 @@ inductive EvaluatedTableTwoStep
           metadata.targetPresentationHash) :
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.oneOverOne
-          orientation metadata counts_sound transport) alpha
+          metadata counts_sound transport) alpha
   | twoOverOne
-      (orientation : BandOrientation)
       (metadata : TableTwoMoveMetadata .twoOverOne source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
@@ -295,7 +289,7 @@ inductive EvaluatedTableTwoStep
       (binding :
         LocalEvaluationBinding
           (TableTwoMove.twoOverOne
-            orientation metadata counts_sound transport))
+            metadata counts_sound transport))
       (slide :
         OrdinaryHandleSlide
           (sourceEvaluation.diagram alpha)
@@ -303,7 +297,8 @@ inductive EvaluatedTableTwoStep
       (graphical_kind_sound :
         (ordinarySlideMetadata slide).kind = .twoOverOne)
       (graphical_orientation_sound :
-        (ordinarySlideMetadata slide).orientation = orientation)
+        (ordinarySlideMetadata slide).orientation =
+          HandleEdit.twoOverOneOrientation metadata.recipe.handleEdit)
       (graphical_move_id_sound :
         (ordinarySlideMetadata slide).moveId = metadata.moveId)
       (graphical_source_hash_sound :
@@ -314,9 +309,8 @@ inductive EvaluatedTableTwoStep
           metadata.targetPresentationHash) :
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.twoOverOne
-          orientation metadata counts_sound transport) alpha
+          metadata counts_sound transport) alpha
   | twoOverTwo
-      (orientation : BandOrientation)
       (metadata : TableTwoMoveMetadata .twoOverTwo source target)
       (counts_sound : source.counts = target.counts)
       (transport : MarkedH2Transport source target)
@@ -324,14 +318,15 @@ inductive EvaluatedTableTwoStep
       (binding :
         LocalEvaluationBinding
           (TableTwoMove.twoOverTwo
-            orientation metadata counts_sound transport))
+            metadata counts_sound transport))
       (slide :
         TwoHandleOverTwoSlide
           (data := categoryData.slidingData)
           (sourceEvaluation.diagram alpha)
           (targetEvaluation.diagram (transport.targetClass alpha)))
       (graphical_orientation_sound :
-        (twoOverTwoSlideMetadata slide).orientation = orientation)
+        (twoOverTwoSlideMetadata slide).orientation =
+          HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
       (graphical_move_id_sound :
         (twoOverTwoSlideMetadata slide).moveId = metadata.moveId)
       (graphical_source_hash_sound :
@@ -342,7 +337,7 @@ inductive EvaluatedTableTwoStep
           metadata.targetPresentationHash) :
       EvaluatedTableTwoStep categoryData sourceEvaluation targetEvaluation
         (TableTwoMove.twoOverTwo
-          orientation metadata counts_sound transport) alpha
+          metadata counts_sound transport) alpha
   | oneTwoBirth
       (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
       (counts_sound : target.counts = source.counts.addOneTwo)
@@ -430,9 +425,8 @@ lemma normalized_eq_of_diagram_eval
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (sourceEvaluation :
       DecoratedKirbyPresentation categoryData source)
     (targetEvaluation :
@@ -459,9 +453,8 @@ theorem normalized_sound
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     {sourceEvaluation :
       DecoratedKirbyPresentation categoryData source}
     {targetEvaluation :
@@ -479,21 +472,21 @@ theorem normalized_sound
       exact normalized_eq_of_diagram_eval
         sourceEvaluation targetEvaluation alpha
           (transport.targetClass alpha) counts isotopy.eval_eq
-  | oneOverOne orientation metadata counts transport alpha binding slide
+  | oneOverOne metadata counts transport alpha binding slide
       graphical_kind_sound graphical_orientation_sound
       graphical_move_id_sound graphical_source_hash_sound
       graphical_target_hash_sound =>
       exact normalized_eq_of_diagram_eval
         sourceEvaluation targetEvaluation alpha
           (transport.targetClass alpha) counts slide.sound
-  | twoOverOne orientation metadata counts transport alpha binding slide
+  | twoOverOne metadata counts transport alpha binding slide
       graphical_kind_sound graphical_orientation_sound
       graphical_move_id_sound graphical_source_hash_sound
       graphical_target_hash_sound =>
       exact normalized_eq_of_diagram_eval
         sourceEvaluation targetEvaluation alpha
           (transport.targetClass alpha) counts slide.sound
-  | twoOverTwo orientation metadata counts transport alpha binding slide
+  | twoOverTwo metadata counts transport alpha binding slide
       graphical_orientation_sound graphical_move_id_sound
       graphical_source_hash_sound graphical_target_hash_sound =>
       exact normalized_eq_of_diagram_eval
@@ -528,13 +521,12 @@ structure HomologicallyTwistedKirbyPrescription
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   evaluation :
-    (presentation : SpecialKirbyPresentation manifold H2) →
+    (presentation : SpecialKirbyPresentation H2) →
       DecoratedKirbyPresentation categoryData presentation
   localStep :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (move : TableTwoMove source target) →
     (alpha : H2) →
       EvaluatedTableTwoStep
@@ -553,11 +545,10 @@ def presentationValue
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (presentation : SpecialKirbyPresentation manifold H2)
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (presentation : SpecialKirbyPresentation H2)
     (alpha : H2) : K :=
   (prescription.evaluation presentation).normalizedValue alpha
 
@@ -566,11 +557,10 @@ theorem move_invariant
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (alpha : H2) :
     prescription.presentationValue source alpha =
@@ -580,9 +570,8 @@ theorem move_invariant
 
 /-- Target-class transport along a composite movie is literal composition. -/
 theorem targetClass_trans
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source middle target : SpecialKirbyPresentation manifold H2}
+    {source middle target : SpecialKirbyPresentation H2}
     (first : TableTwoMovie source middle)
     (second : TableTwoMovie middle target)
     (alpha : H2) :
@@ -595,11 +584,10 @@ theorem movie_invariant
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (alpha : H2) :
     prescription.presentationValue source alpha =
@@ -626,32 +614,25 @@ certified coordinates represent the same geometric class still has to say
 that this exact movie carries one coordinate to the other.
 -/
 structure MarkedPairPresentationSystem
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  completeness : TableTwoLinkCompleteness manifold H2
+  completeness : TableTwoLinkCompleteness H2
   represents :
-    (presentation : SpecialKirbyPresentation manifold H2) →
+    (presentation : SpecialKirbyPresentation H2) →
       H2 → H2 → Prop
   chosenPresentation :
-    H2 → SpecialKirbyPresentation manifold H2
+    H2 → SpecialKirbyPresentation H2
   chosenCoordinate : H2 → H2
   chosen_represents :
     (alpha : H2) →
       represents (chosenPresentation alpha) (chosenCoordinate alpha) alpha
   marked_transport_sound :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     {sourceCoordinate targetCoordinate geometricClass : H2} →
     represents source sourceCoordinate geometricClass →
     represents target targetCoordinate geometricClass →
       (completeness.tableTwoConnected source target).targetClass
           sourceCoordinate =
         targetCoordinate
-  markingCertificateHash : String
-  marking_certificate_hash_shape :
-    RawPresentation.sha256Shape markingCertificateHash = true
-  sourceRefs : List String
-  exactMarkedScope : String
-  sourceScopeCaveat : String
 
 namespace MarkedPairPresentationSystem
 
@@ -663,11 +644,10 @@ noncomputable def invariant
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (system : MarkedPairPresentationSystem manifold H2)
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (system : MarkedPairPresentationSystem H2)
     (alpha : H2) : K :=
   prescription.presentationValue
     (system.chosenPresentation alpha) (system.chosenCoordinate alpha)
@@ -677,12 +657,11 @@ theorem presentation_independent
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (system : MarkedPairPresentationSystem manifold H2)
-    {presentation : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (system : MarkedPairPresentationSystem H2)
+    {presentation : SpecialKirbyPresentation H2}
     {coordinate alpha : H2}
     (represents : system.represents presentation coordinate alpha) :
     prescription.presentationValue presentation coordinate =
@@ -703,12 +682,11 @@ theorem same_pair_value
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (system : MarkedPairPresentationSystem manifold H2)
-    {left right : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (system : MarkedPairPresentationSystem H2)
+    {left right : SpecialKirbyPresentation H2}
     {leftCoordinate rightCoordinate alpha : H2}
     (leftRepresents :
       system.represents left leftCoordinate alpha)
@@ -728,12 +706,11 @@ theorem homologically_twisted_kirby_invariant_established
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (prescription :
-      HomologicallyTwistedKirbyPrescription categoryData manifold H2)
-    (system : MarkedPairPresentationSystem manifold H2)
-    {presentation : SpecialKirbyPresentation manifold H2}
+      HomologicallyTwistedKirbyPrescription categoryData H2)
+    (system : MarkedPairPresentationSystem H2)
+    {presentation : SpecialKirbyPresentation H2}
     {coordinate alpha : H2}
     (represents : system.represents presentation coordinate alpha) :
     prescription.presentationValue presentation coordinate =

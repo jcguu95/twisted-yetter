@@ -454,13 +454,12 @@ structure FourManifoldInvariantInputs
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   evaluatorCompiler :
     SourceBoundTableTwoEvaluatorCompiler
-      categoryData manifold H2
-  generalCerf : GeneralCerfCompleteness manifold
-  basePresentation : SpecialKirbyPresentation manifold H2
+      categoryData H2
+  generalCerf : GeneralCerfCompleteness
+  basePresentation : SpecialKirbyPresentation H2
 
 namespace FourManifoldInvariantInputs
 
@@ -469,10 +468,9 @@ noncomputable def prescription
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
-    HomologicallyTwistedKirbyPrescription categoryData manifold H2 :=
+    (inputs : FourManifoldInvariantInputs categoryData H2) :
+    HomologicallyTwistedKirbyPrescription categoryData H2 :=
   inputs.evaluatorCompiler.toTableTwo.toPrescription
 
 /-- Marked presentation system derived from local chain functoriality. -/
@@ -480,11 +478,10 @@ noncomputable def markedSystem
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : FourManifoldInvariantInputs categoryData manifold H2) :
-    MarkedPairPresentationSystem manifold H2 :=
-  (sourceBackedGeometricH2Compiler manifold H2).toGeometricMarkedH2Compiler
+    (inputs : FourManifoldInvariantInputs categoryData H2) :
+    MarkedPairPresentationSystem H2 :=
+  (sourceBackedGeometricH2Compiler H2).toGeometricMarkedH2Compiler
     |>.markedPairSystem inputs.generalCerf inputs.basePresentation
 
 /-- The value assigned to the marked pair by the chosen certified presentation. -/
@@ -492,9 +489,8 @@ noncomputable def value
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : FourManifoldInvariantInputs categoryData manifold H2)
+    (inputs : FourManifoldInvariantInputs categoryData H2)
     (alpha : H2) : K :=
   inputs.markedSystem.invariant inputs.prescription alpha
 
@@ -508,10 +504,9 @@ theorem presentation_independent
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : FourManifoldInvariantInputs categoryData manifold H2)
-    {presentation : SpecialKirbyPresentation manifold H2}
+    (inputs : FourManifoldInvariantInputs categoryData H2)
+    {presentation : SpecialKirbyPresentation H2}
     {coordinate alpha : H2}
     (represents :
       inputs.markedSystem.represents presentation coordinate alpha) :
@@ -531,10 +526,9 @@ theorem four_manifold_invariant_target
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (inputs : FourManifoldInvariantInputs categoryData manifold H2)
-    {left right : SpecialKirbyPresentation manifold H2}
+    (inputs : FourManifoldInvariantInputs categoryData H2)
+    {left right : SpecialKirbyPresentation H2}
     {leftCoordinate rightCoordinate alpha : H2}
     (leftRepresents :
       inputs.markedSystem.represents left leftCoordinate alpha)

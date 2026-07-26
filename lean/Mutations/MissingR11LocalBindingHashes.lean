@@ -8,9 +8,8 @@ open TwistedYetter.Kirby.Presentation
 universe uH
 
 example
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (graphicalCertificateHash : String)
     (graphical_hash_shape :

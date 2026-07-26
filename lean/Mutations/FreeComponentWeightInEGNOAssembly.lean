@@ -21,9 +21,8 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 example
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (component : ComponentSpec)
     (simple : S)

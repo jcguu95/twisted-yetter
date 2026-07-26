@@ -12,8 +12,8 @@ mutations=(
 )
 
 diagnostics=(
-  '`transport_is_identity` is not a field of structure `StandardHandleChainNaturalityInput`'
-  '`evaluatorEquality` is not a field of structure `StandardHandleChainNaturalityInput`'
+  '`transport_is_identity` is not a field of structure `StandardHandleChainNaturality`'
+  '`evaluatorEquality` is not a field of structure `StandardHandleChainNaturality`'
 )
 
 for index in "${!mutations[@]}"; do

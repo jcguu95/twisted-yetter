@@ -13,7 +13,7 @@ There are two deliberately different groups:
 * four smooth-topology correspondence statements, passed explicitly through
   `LiteratureBackedFourManifoldTopology.FourManifoldTopologyBoundary`; and
 * one handle-chain naturality statement, isolated as
-  `SourceBackedHandleChainNaturality.standardHandleChainNaturalityInput`.
+  `SourceBackedHandleChainNaturality.standardHandleChainNaturality`.
 
 The fifth item does not say that an evaluator is invariant.  It supplies an
 actual chain-homotopy equivalence and its coordinate-naturality square for

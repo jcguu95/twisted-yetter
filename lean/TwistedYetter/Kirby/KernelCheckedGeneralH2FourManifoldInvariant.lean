@@ -52,10 +52,9 @@ the desired scalar equality.
 structure CertifiedMarkedMove
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {alpha : H2}
-    (source target : AdmissiblePresentation manifold H2 alpha) where
+    (source target : AdmissiblePresentation H2 alpha) where
   certificate :
     CertifiedMove 𝒞 automorphism
       source.state.presentation target.state.presentation
@@ -67,11 +66,10 @@ structure CertifiedMarkedMove
 noncomputable def presentationTheory
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     HandlePresentationTheory where
-  Presentation := AdmissiblePresentation manifold H2 alpha
+  Presentation := AdmissiblePresentation H2 alpha
   Marking := fun _ => PUnit
   ElementaryMove := fun source target =>
     CertifiedMarkedMove 𝒞 automorphism source target
@@ -81,22 +79,20 @@ noncomputable def presentationTheory
 noncomputable def presentationEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     PresentationEvaluation
-      (presentationTheory 𝒞 automorphism manifold H2 alpha) K where
+      (presentationTheory 𝒞 automorphism H2 alpha) K where
   value := fun presentation _ => presentation.value 𝒞 automorphism
 
 /-- Every accepted elementary move preserves the explicit evaluation. -/
 theorem presentationEvaluation_localInvariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     IsInvariantUnderElementaryMoves
-      (presentationEvaluation 𝒞 automorphism manifold H2 alpha) := by
+      (presentationEvaluation 𝒞 automorphism H2 alpha) := by
   intro source target move _
   exact eval_sound move.certificate.compile
     source.state.representative target.state.representative
@@ -110,69 +106,65 @@ an elementary certificate records which graphical laws were checked.
 abbrev TopologyInput
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :=
   FourManifoldTopologyBoundary.{_, _, _, uX, uXHom}
-    (presentationTheory 𝒞 automorphism manifold H2 alpha)
+    (presentationTheory 𝒞 automorphism H2 alpha)
 
 /-- The resulting scalar on marked closed oriented smooth four-manifolds. -/
 noncomputable def EvalC
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism manifold H2 alpha) :
+        𝒞 automorphism H2 alpha) :
     topology.realization.MarkedClosedOrientedSmoothFourManifold → K :=
   topology.fourManifoldInvariant
-    (presentationEvaluation 𝒞 automorphism manifold H2 alpha)
+    (presentationEvaluation 𝒞 automorphism H2 alpha)
     (presentationEvaluation_localInvariant
-      𝒞 automorphism manifold H2 alpha)
+      𝒞 automorphism H2 alpha)
 
 /-- The checked evaluator is invariant under oriented diffeomorphism. -/
 theorem EvalC_diffeomorphism_invariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism manifold H2 alpha)
+        𝒞 automorphism H2 alpha)
     {left right :
       topology.realization.MarkedClosedOrientedSmoothFourManifold}
     (diffeomorphism :
       topology.realization.orientedDiffeomorphism.Hom left right) :
-    EvalC 𝒞 automorphism manifold H2 alpha topology left =
-      EvalC 𝒞 automorphism manifold H2 alpha topology right :=
+    EvalC 𝒞 automorphism H2 alpha topology left =
+      EvalC 𝒞 automorphism H2 alpha topology right :=
   topology.fourManifoldInvariant_diffeomorphism_invariant
-    (presentationEvaluation 𝒞 automorphism manifold H2 alpha)
+    (presentationEvaluation 𝒞 automorphism H2 alpha)
     (presentationEvaluation_localInvariant
-      𝒞 automorphism manifold H2 alpha)
+      𝒞 automorphism H2 alpha)
     diffeomorphism
 
 /-- Pullback to an admitted presentation is the explicit link formula. -/
 theorem EvalC_on_presentation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
     (topology :
       TopologyInput.{uK, uC, vC, uH, uX, uXHom}
-        𝒞 automorphism manifold H2 alpha)
-    (presentation : AdmissiblePresentation manifold H2 alpha) :
-    EvalC 𝒞 automorphism manifold H2 alpha topology
+        𝒞 automorphism H2 alpha)
+    (presentation : AdmissiblePresentation H2 alpha) :
+    EvalC 𝒞 automorphism H2 alpha topology
         (topology.realization.realize
           { presentation := presentation, marking := PUnit.unit }) =
       presentation.value 𝒞 automorphism :=
   topology.fourManifoldInvariant_on_presentation
-    (presentationEvaluation 𝒞 automorphism manifold H2 alpha)
+    (presentationEvaluation 𝒞 automorphism H2 alpha)
     (presentationEvaluation_localInvariant
-      𝒞 automorphism manifold H2 alpha)
+      𝒞 automorphism H2 alpha)
     { presentation := presentation, marking := PUnit.unit }
 
 end TwistedYetter.Kirby.KernelCheckedGeneralH2FourManifoldInvariant

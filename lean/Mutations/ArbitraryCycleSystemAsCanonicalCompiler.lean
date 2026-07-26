@@ -29,15 +29,14 @@ def unsafeOverride
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : Input categoryData}
     (compiler :
       IntegralCharacterBoundPresentationCompiler
-        categoryData manifold H2 algebra)
-    (replacement : IntegralCycleRepresentativeSystem manifold H2) :
+        categoryData H2 algebra)
+    (replacement : IntegralCycleRepresentativeSystem H2) :
     IntegralCharacterBoundPresentationCompiler
-      categoryData manifold H2 algebra :=
+      categoryData H2 algebra :=
   { compiler with cycleSystem := replacement }
 
 end TwistedYetter.Mutations.ArbitraryCycleSystemAsCanonicalCompiler

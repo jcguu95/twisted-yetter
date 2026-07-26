@@ -7,8 +7,9 @@ import TwistedYetter.Kirby.PresentationIsotopy
 This module states the standard modular killing identity at its useful open
 tangle boundary.  The weighted Kirby-coloured meridian around an arbitrary
 object is the global dimension times the projector onto all tensor-unit
-summands.  Unlike the earlier closed Hopf-link scalar identity, this version
-can be inserted into an arbitrary exterior tangle.
+summands.  The open version can be inserted into an arbitrary exterior
+tangle; its closed Hopf-link specialization is now derived from pivotal
+closure rather than imported separately.
 
 The open killing identity itself is an explicit literature axiom, sourced to
 Bärenz--Barrett Lemmas 2.46--2.47 and Tham Definition 5.11 (`k = 3`).
@@ -26,6 +27,7 @@ open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.EGNOModularKirbyMoves
+open TwistedYetter.Kirby.ModularOpenKilling
 open TwistedYetter.Kirby.ModularVacuumProjector
 open TwistedYetter.Kirby.PresentationIsotopy
 
@@ -42,31 +44,17 @@ local instance selectedRigidRightDual : RightRigidCategory C :=
   (inferInstance : RigidCategory C).toRightRigidCategory
 
 /-- One simple-labelled meridian, left open on the encircled object `X`. -/
-noncomputable def openEncirclingDiagram
+noncomputable abbrev openEncirclingDiagram
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (simple : S)
     (X : C) : Diagram C (.atom X) (.atom X) :=
-  let Y := data.simple simple
-  leftUnitorInvDiagram X ≫ᵈ
-    (Diagram.exactCup Y Yᘁ inferInstance ⊗ᵈ
-      Diagram.identity (.atom X)) ≫ᵈ
-    associatorHomDiagram Y Yᘁ X ≫ᵈ
-    (Diagram.identity (.atom Y) ⊗ᵈ
-      (Diagram.crossing (.atom Yᘁ) (.atom X) ≫ᵈ
-        Diagram.crossing (.atom X) (.atom Yᘁ))) ≫ᵈ
-    associatorInvDiagram Y Yᘁ X ≫ᵈ
-    (Diagram.exactCap Yᘁ Y
-        (pivotalReverseExactPairing data.pivotal Y) ⊗ᵈ
-      Diagram.identity (.atom X)) ≫ᵈ
-    leftUnitorHomDiagram X
+  ModularOpenKilling.openEncirclingDiagram data simple X
 
 /-- The finite dimension-weighted open meridian operator. -/
-noncomputable def openKirbyEncirclingOperator
+noncomputable abbrev openKirbyEncirclingOperator
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (X : C) : X ⟶ X :=
-  ∑ simple,
-    data.quantumDimension simple •
-      Diagram.eval C (openEncirclingDiagram data simple X)
+  ModularOpenKilling.openKirbyEncirclingOperator data X
 
 /--
 Sliding a coupon through one fixed-label open meridian.
@@ -82,7 +70,8 @@ theorem openEncirclingDiagram_naturality
   (f : X ⟶ Y) :
     f ≫ Diagram.eval C (openEncirclingDiagram data simple Y) =
       Diagram.eval C (openEncirclingDiagram data simple X) ≫ f := by
-  simp only [openEncirclingDiagram, leftUnitorInvDiagram,
+  simp only [openEncirclingDiagram,
+    ModularOpenKilling.openEncirclingDiagram, leftUnitorInvDiagram,
     leftUnitorHomDiagram, associatorHomDiagram, associatorInvDiagram,
     leftAssociated, rightAssociated, atom, Diagram.eval, Boundary.denote]
   let A := data.simple simple
@@ -148,7 +137,8 @@ theorem openKirbyEncirclingOperator_naturality
     f ≫ openKirbyEncirclingOperator data Y =
       openKirbyEncirclingOperator data X ≫ f := by
   classical
-  simp only [openKirbyEncirclingOperator]
+  simp only [openKirbyEncirclingOperator,
+    ModularOpenKilling.openKirbyEncirclingOperator]
   rw [Preadditive.comp_sum, Preadditive.sum_comp]
   apply Finset.sum_congr rfl
   intro simple _
@@ -169,11 +159,10 @@ theorem openKirbyEncirclingOperator_naturality
 
 /-- Stable source metadata for the one imported open graphical identity. -/
 def openKillingSourceRef : String :=
-  "ref:baerenz-barrett-dichromatic-2018;ref:tham-extended-crane-yetter-2021"
+  ModularOpenKilling.openKillingSourceRef
 
 def openKillingSourceLocator : String :=
-  "Barenz-Barrett Lemmas 2.46-2.47; Tham Definition 5.11, k=3, "
-    ++ "PDF page 59 / printed page 53"
+  ModularOpenKilling.openKillingSourceLocator
 
 /--
 The label-resolved open modular killing identity on a simple strand.
@@ -182,7 +171,7 @@ This is the irreducible graphical input.  The arbitrary-object projector
 formula below is derived from it, naturality, and the stored semisimple
 decomposition.
 -/
-axiom baerenzBarrett_tham_openKirbyKilling_simple
+theorem baerenzBarrett_tham_openKirbyKilling_simple
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (simple : S) :
     openKirbyEncirclingOperator 𝒞.premodular
@@ -192,7 +181,11 @@ axiom baerenzBarrett_tham_openKirbyKilling_simple
         globalDimension 𝒞.premodular •
           𝟙 (𝒞.premodular.simple simple)
       else
-        0
+        0 := by
+  simpa only [openKirbyEncirclingOperator, globalDimension,
+    PremodularCategory.globalDimension] using
+    ModularOpenKilling.baerenzBarrett_tham_openKirbyKilling_simple
+      𝒞 simple
 
 /--
 The standard open modular killing identity on an arbitrary fusion object.

@@ -1,0 +1,56 @@
+{
+  "schema": "lean-canonical-move-category-boundary-v1",
+  "status": "PASS_SINGLE_THREADED_BUILD",
+  "started_at_utc": "2026-07-26T03:20:44Z",
+  "finished_at_utc": "2026-07-26T03:36:49Z",
+  "git_commit": "00d6cb179059804b2bd985834aec0347bb4b785e",
+  "git_dirty": true,
+  "decision": "Explode canonical move geometry by mathematical obligation and require the weakest category structure visible in each declaration.",
+  "category_neutral_geometry": [
+    "SourceBoundTraceWindow",
+    "SameComponentExponentTransport",
+    "FramedIsotopyGeometry",
+    "AddedComponentExponentTransport",
+    "AddedClosedDiagramGeometry",
+    "OneTwoBirthGeometry",
+    "TwoThreeBirthGeometry",
+    "CycleTransport"
+  ],
+  "premodular_obligations": [
+    "component-label transport",
+    "degree-two exponent transport",
+    "framed ribbon isotopy evaluation",
+    "added-component coefficient factorization",
+    "closed-diagram tensor factorization",
+    "one-two local label identification",
+    "one-two local coefficient simplification",
+    "two-three cancellation factorization",
+    "ordinary two-over-two slide",
+    "direct tensor-unit cutting route for one-over-one and two-over-one"
+  ],
+  "strictly_modular_obligations": [
+    "one-two Hopf-pair sum equals global dimension via open killing",
+    "one-two raw numerator factorization that consumes that Hopf-pair identity",
+    "current one-over-one dotted-boundary replacement route",
+    "current two-over-one dotted-boundary replacement route",
+    "current assembled standardMovie using those modular replacements"
+  ],
+  "explicit_non_claims": [
+    "The direct premodular tensor-unit cutting calculations for one-over-one and two-over-one are exposed as proof inputs but are not yet proved.",
+    "Renaming a modular obligation does not eliminate its axiom.",
+    "No transparent-sector projector is substituted for the required tensor-unit cutting rule."
+  ],
+  "validation": {
+    "commands": [
+      "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.CanonicalMoveGeometryCategoryBoundaryAudit",
+      "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.DottedBoundaryGeneratorInvariance",
+      "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit"
+    ],
+    "result": "PASS",
+    "final_build_jobs": 2306,
+    "lean_version": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "os": "Darwin 24.6.0 arm64",
+    "max_project_lean_processes": 1
+  }
+}

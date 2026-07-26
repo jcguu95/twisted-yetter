@@ -10,9 +10,8 @@ universe u
 
 /-- This must fail: the complete typed local recipe cannot be omitted. -/
 def unsafeMetadata
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type u} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (moveId sourceHash targetHash certificateHash : String)
     (sourceSound : sourceHash = source.formal.pinnedSourceHash)
     (targetSound : targetHash = target.formal.pinnedSourceHash)

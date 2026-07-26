@@ -537,6 +537,10 @@ inductive FusionLinearGeneratedCalculation
       (calculation :
         LinearGeneratedCalculation automorphism before after) :
       FusionLinearGeneratedCalculation data automorphism before after
+  | refl
+      (diagram :
+        LinearDiagram (R := K) (C := C) .unit .unit) :
+      FusionLinearGeneratedCalculation data automorphism diagram diagram
   | simplePower
       (simple : S)
       (exponent : ℤ)
@@ -604,6 +608,8 @@ theorem eval_eq
   induction calculation with
   | generated calculation =>
       exact calculation.eval_eq
+  | refl =>
+      rfl
   | simplePower simple exponent context =>
       simpa only [LinearDiagram.eval_atom, map_smul] using
         eval_plug_automorphismCouponPower
@@ -618,6 +624,70 @@ theorem eval_eq
       exact sound.symm
   | trans _ _ firstSound secondSound =>
       exact firstSound.trans secondSound
+
+/--
+Assemble a finite family of coupon calculations term by term.
+
+This constructor is derived from reflexivity and addition.  In particular,
+it cannot cancel unrelated labels or introduce a new evaluator equality.
+-/
+noncomputable def finsetSum
+    {data : FusionCategoryData (K := K) (C := C) (S := S)}
+    {automorphism : TensorIdentityAutomorphism C}
+    {ι : Type*} [DecidableEq ι]
+    (indices : Finset ι)
+    {before after :
+      ι → LinearDiagram (R := K) (C := C) .unit .unit}
+    (calculation :
+      (index : ι) → index ∈ indices →
+        FusionLinearGeneratedCalculation
+          data automorphism (before index) (after index)) :
+    FusionLinearGeneratedCalculation data automorphism
+      (∑ index ∈ indices, before index)
+      (∑ index ∈ indices, after index) := by
+  classical
+  apply Classical.choice
+  induction indices using Finset.induction_on with
+  | empty =>
+      exact ⟨by
+        simpa using
+          (FusionLinearGeneratedCalculation.refl
+            (data := data) (automorphism := automorphism)
+            (0 : LinearDiagram (R := K) (C := C) .unit .unit))⟩
+  | @insert index indices notMem inductionHypothesis =>
+      have head :
+          FusionLinearGeneratedCalculation data automorphism
+            (before index) (after index) :=
+        calculation index (Finset.mem_insert_self index indices)
+      obtain ⟨tail⟩ := inductionHypothesis fun item itemMem =>
+        calculation item (Finset.mem_insert_of_mem itemMem)
+      exact ⟨by
+        simpa [Finset.sum_insert notMem] using
+          FusionLinearGeneratedCalculation.add head tail⟩
+
+/--
+Assemble a rectangular finite family of coupon calculations one term at a
+time.
+-/
+noncomputable def doubleSum
+    {data : FusionCategoryData (K := K) (C := C) (S := S)}
+    {automorphism : TensorIdentityAutomorphism C}
+    {ι κ : Type*} [Fintype ι] [DecidableEq ι]
+    [Fintype κ] [DecidableEq κ]
+    {before after :
+      ι → κ → LinearDiagram (R := K) (C := C) .unit .unit}
+    (calculation :
+      (first : ι) → (second : κ) →
+        FusionLinearGeneratedCalculation data automorphism
+          (before first second) (after first second)) :
+    FusionLinearGeneratedCalculation data automorphism
+      (∑ first, ∑ second, before first second)
+      (∑ first, ∑ second, after first second) := by
+  apply finsetSum (data := data) (automorphism := automorphism) Finset.univ
+  intro first _
+  apply finsetSum (data := data) (automorphism := automorphism) Finset.univ
+  intro second _
+  exact calculation first second
 
 end FusionLinearGeneratedCalculation
 

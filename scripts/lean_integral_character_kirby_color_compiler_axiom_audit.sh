@@ -15,7 +15,7 @@ trap 'rm -f "${output}"' EXIT
   >"${output}" 2>&1
 
 if rg -q \
-    'sorryAx|declaration uses `sorry`|native_decide\.ax|standardHandleChainNaturalityInput|standardSpecialKirbyCalculusConnected' \
+    'sorryAx|declaration uses `sorry`|native_decide\.ax|standardHandleChainNaturality|standardSpecialKirbyPresentationsConnected' \
     "${output}"; then
   printf 'Integral-character compiler axiom audit found a proof oracle or domain axiom:\n' >&2
   cat "${output}" >&2

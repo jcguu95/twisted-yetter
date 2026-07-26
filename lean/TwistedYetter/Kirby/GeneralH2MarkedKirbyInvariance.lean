@@ -51,10 +51,9 @@ scalar equality used below is proved by `eval_sound`; it is not an input.
 structure MarkedMove
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {alpha : H2}
-    (source target : AdmissiblePresentation manifold H2 alpha) where
+    (source target : AdmissiblePresentation H2 alpha) where
   move :
     TableTwoMove
       source.state.presentation.topology
@@ -76,11 +75,10 @@ indexed presentation.
 noncomputable def markedPresentationTheory
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     HandlePresentationTheory where
-  Presentation := AdmissiblePresentation manifold H2 alpha
+  Presentation := AdmissiblePresentation H2 alpha
   Marking := fun _ => PUnit
   ElementaryMove := fun source target =>
     MarkedMove 𝒞 automorphism source target
@@ -90,11 +88,10 @@ noncomputable def markedPresentationTheory
 noncomputable def markedEvaluation
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     PresentationEvaluation
-      (markedPresentationTheory 𝒞 automorphism manifold H2 alpha) K where
+      (markedPresentationTheory 𝒞 automorphism H2 alpha) K where
   value := fun presentation _ =>
     presentation.value 𝒞 automorphism
 
@@ -107,11 +104,10 @@ basis, rank, freeness, torsion-free, or simply-connected assumption occurs.
 theorem markedEvaluation_localInvariant
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     IsInvariantUnderElementaryMoves
-      (markedEvaluation 𝒞 automorphism manifold H2 alpha) := by
+      (markedEvaluation 𝒞 automorphism H2 alpha) := by
   intro source target move _
   exact eval_sound move.calculation
     source.state.representative target.state.representative
@@ -121,24 +117,22 @@ theorem markedEvaluation_localInvariant
 noncomputable def evaluationOnKirbyClass
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2) :
     (markedPresentationTheory
-      𝒞 automorphism manifold H2 alpha).KirbyClass → K :=
-  (markedEvaluation 𝒞 automorphism manifold H2 alpha).descendToKirbyClass
+      𝒞 automorphism H2 alpha).KirbyClass → K :=
+  (markedEvaluation 𝒞 automorphism H2 alpha).descendToKirbyClass
     (markedEvaluation_localInvariant
-      𝒞 automorphism manifold H2 alpha)
+      𝒞 automorphism H2 alpha)
 
 /-- The quotient value agrees with every displayed representative formula. -/
 theorem evaluationOnKirbyClass_mk
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (alpha : H2)
-    (presentation : AdmissiblePresentation manifold H2 alpha) :
-    evaluationOnKirbyClass 𝒞 automorphism manifold H2 alpha
+    (presentation : AdmissiblePresentation H2 alpha) :
+    evaluationOnKirbyClass 𝒞 automorphism H2 alpha
         (Quotient.mk _
           {
             presentation := presentation

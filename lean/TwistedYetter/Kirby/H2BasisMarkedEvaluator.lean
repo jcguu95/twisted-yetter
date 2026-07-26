@@ -73,9 +73,8 @@ corresponding homology basis vector.  A caller therefore cannot choose
 unrelated handles, cycles, and abstract basis data.
 -/
 structure H2BasisRealization
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2) where
+    (presentation : CanonicalPresentation H2) where
   rank : Nat
   coordinates :
     presentation.topology.handleChain.SecondHomology ≃+
@@ -119,9 +118,8 @@ namespace H2BasisRealization
 
 /-- The selected handle map is injective, derived from its proved inverse. -/
 theorem basisHandle_injective
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation) :
     Function.Injective realization.basisHandle := by
   intro left right equality
@@ -136,9 +134,8 @@ This is a linear combination of actual cycles, not a choice of an arbitrary
 representative from the homology quotient.
 -/
 noncomputable def markedCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     presentation.DegreeTwoCycle :=
@@ -148,9 +145,8 @@ noncomputable def markedCycle
 
 /-- The canonical marked cycle represents exactly the requested `H₂` class. -/
 theorem markedCycle_class
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     presentation.topology.handleChain.complex.homologyπ 2
@@ -164,9 +160,8 @@ theorem markedCycle_class
 
 /-- Coordinate expansion of the canonical marked cycle in the handle basis. -/
 theorem markedCycle_coefficient_eq_sum
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2) :
@@ -202,9 +197,8 @@ On a selected basis handle, the marked cycle has exactly the corresponding
 coordinate of `alpha`.
 -/
 theorem markedCycle_coefficient_basisHandle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (index : Fin realization.rank) :
@@ -223,9 +217,8 @@ On every handle outside the selected basis, the canonical marked cycle has
 coefficient zero.
 -/
 theorem markedCycle_coefficient_of_not_selected
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2)
@@ -250,9 +243,8 @@ Only handles in the certified sphere basis read a coordinate of `alpha`.
 Every non-basis handle receives zero.
 -/
 noncomputable def handleExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2) : ℤ :=
@@ -262,9 +254,8 @@ noncomputable def handleExponent
 
 /-- A selected basis handle reads exactly the matching coordinate of `alpha`. -/
 theorem handleExponent_basisHandle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (index : Fin realization.rank) :
@@ -274,9 +265,8 @@ theorem handleExponent_basisHandle
 
 /-- A certified non-basis handle has exponent zero. -/
 theorem handleExponent_of_not_selected
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2)
@@ -289,9 +279,8 @@ The basis-marked handle exponent is exactly the corresponding coefficient of
 the canonical marked cycle.
 -/
 theorem markedCycle_coefficient_eq_handleExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2) :
@@ -314,9 +303,8 @@ theorem markedCycle_coefficient_eq_handleExponent
 
 /-- Read the basis exponent of one serialized link component. -/
 noncomputable def componentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (component : ComponentSpec) : ℤ :=
@@ -329,9 +317,8 @@ The component exponent used by the basis-marked evaluator is exactly the raw
 cycle exponent of its canonical marked cycle.
 -/
 theorem componentExponent_eq_cycleComponentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (component : ComponentSpec) :
@@ -351,9 +338,8 @@ theorem componentExponent_eq_cycleComponentExponent
 
 /-- Dotted one-handle components always receive exponent zero. -/
 theorem dotted_componentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (component : ComponentSpec)
@@ -364,9 +350,8 @@ theorem dotted_componentExponent
 
 /-- A selected basis component reads its matching `H₂` coordinate. -/
 theorem basis_componentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (index : Fin realization.rank) :
@@ -386,9 +371,8 @@ two-handle is harmless once the topology proof certifies that it is absent
 from the selected homology basis.
 -/
 theorem nonbasis_componentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (handle : Fin presentation.topology.counts.h2)
@@ -401,9 +385,8 @@ theorem nonbasis_componentExponent
 
 /-- The zero `H₂` class gives exponent zero on every component. -/
 theorem componentExponent_zero
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (realization : H2BasisRealization presentation)
     (component : ComponentSpec) :
     realization.componentExponent 0 component = 0 := by
@@ -416,11 +399,10 @@ end H2BasisRealization
 
 /-- Component coefficient forced by one marked `H₂` class and sphere basis. -/
 noncomputable def basisMarkedComponentWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (component : ComponentSpec)
@@ -432,11 +414,10 @@ noncomputable def basisMarkedComponentWeight
 
 /-- The basis-marked component weight is the canonical marked-cycle weight. -/
 theorem basisMarkedComponentWeight_eq_cycleComponentWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (component : ComponentSpec)
@@ -451,11 +432,10 @@ theorem basisMarkedComponentWeight_eq_cycleComponentWeight
 
 /-- Product coefficient for one global simple labeling. -/
 noncomputable def basisMarkedGlobalWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (labeling : presentation.GlobalLabeling (S := S)) : K :=
@@ -466,11 +446,10 @@ noncomputable def basisMarkedGlobalWeight
 
 /-- Every complete-label coefficient agrees with the canonical marked cycle. -/
 theorem basisMarkedGlobalWeight_eq_cycleGlobalWeight
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology)
     (labeling : presentation.GlobalLabeling (S := S)) :
@@ -490,11 +469,10 @@ theorem basisMarkedGlobalWeight_eq_cycleGlobalWeight
 
 /-- Formal basis-marked Kirby-colour sum. -/
 noncomputable def basisMarkedLinearDiagram
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     LinearDiagram (R := K) (C := C) .unit .unit :=
@@ -507,11 +485,10 @@ The complete basis-marked finite sum is definitionally tied to the raw-cycle
 sum at the canonical marked cycle.
 -/
 theorem basisMarkedLinearDiagram_eq_cycleLinearDiagram
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     basisMarkedLinearDiagram
@@ -527,11 +504,10 @@ theorem basisMarkedLinearDiagram_eq_cycleLinearDiagram
 
 /-- Raw scalar before handle normalization. -/
 noncomputable def basisMarkedRawNumerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) : K :=
   𝒞.premodular.toFusionCategoryData.closedScalar
@@ -541,11 +517,10 @@ noncomputable def basisMarkedRawNumerator
 
 /-- The raw basis-marked scalar equals its canonical marked-cycle scalar. -/
 theorem basisMarkedRawNumerator_eq_cycleRawNumerator
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     basisMarkedRawNumerator
@@ -558,11 +533,10 @@ theorem basisMarkedRawNumerator_eq_cycleRawNumerator
 
 /-- Normalization state of the basis-marked formula. -/
 noncomputable def basisMarkedEvaluationState
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     EvaluationState (K := K) where
@@ -578,11 +552,10 @@ not yet named the final four-manifold invariant because basis-change and
 Kirby-movie independence must still be proved.
 -/
 noncomputable def basisMarkedPresentationValue
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) : K :=
   (basisMarkedEvaluationState
@@ -596,11 +569,10 @@ basis-marked representative.  No claim is made for arbitrary homologous
 cycles.
 -/
 theorem basisMarkedPresentationValue_eq_rawCycleColourEval
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (realization : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     basisMarkedPresentationValue
@@ -621,9 +593,8 @@ commute with the same equivalence.  This is stronger than merely asserting
 that the two ranks agree.
 -/
 structure BasisReindexing
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (left right : H2BasisRealization presentation) where
   indexEquiv : Fin left.rank ≃ Fin right.rank
   basisHandle_sound :
@@ -640,9 +611,8 @@ namespace BasisReindexing
 
 /-- The two proved partial inverses differ exactly by the basis reindexing. -/
 theorem basisIndex?_eq_map
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (handle : Fin presentation.topology.counts.h2) :
@@ -694,9 +664,8 @@ theorem basisIndex?_eq_map
 
 /-- Reindexing a certified basis leaves every two-handle exponent unchanged. -/
 theorem handleExponent_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (alpha : presentation.topology.handleChain.SecondHomology)
@@ -713,9 +682,8 @@ theorem handleExponent_eq
 
 /-- Reindexing leaves the exponent of every serialized component unchanged. -/
 theorem componentExponent_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (alpha : presentation.topology.handleChain.SecondHomology)
@@ -729,11 +697,10 @@ theorem componentExponent_eq
 
 /-- Reindexing leaves every global-label coefficient unchanged. -/
 theorem globalWeight_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (alpha : presentation.topology.handleChain.SecondHomology)
@@ -751,11 +718,10 @@ theorem globalWeight_eq
 
 /-- Reindexing leaves the complete formal Kirby-colour sum unchanged. -/
 theorem linearDiagram_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (alpha : presentation.topology.handleChain.SecondHomology) :
@@ -771,11 +737,10 @@ theorem linearDiagram_eq
 
 /-- The normalized basis-marked value is independent of basis ordering. -/
 theorem presentationValue_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     {left right : H2BasisRealization presentation}
     (reindexing : BasisReindexing left right)
     (alpha : presentation.topology.handleChain.SecondHomology) :
@@ -804,11 +769,10 @@ term in the closed tensor-automorphism coupon calculus connecting the two
 finite sums.  No scalar equality is accepted as input.
 -/
 structure BasisChangeGraphicalRealization
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (left right : H2BasisRealization presentation) where
   calculate :
     (alpha : presentation.topology.handleChain.SecondHomology) →
@@ -823,11 +787,10 @@ namespace BasisChangeGraphicalRealization
 
 /-- A graphical basis-change calculation implies equality of normalized values. -/
 theorem presentationValue_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (left right : H2BasisRealization presentation)
     (realization :
       BasisChangeGraphicalRealization
@@ -862,11 +825,10 @@ remaining basis-independence proof object that must be constructed from
 handle slides and coupon motion.
 -/
 structure BasisIndependenceProof
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation manifold H2) where
+    (presentation : CanonicalPresentation H2) where
   selected : H2BasisRealization presentation
   compare :
     (other : H2BasisRealization presentation) →
@@ -881,11 +843,10 @@ The corrected `H₂`-level evaluator for one presentation.
 The public argument is an actual handle-chain second-homology class.
 -/
 noncomputable def EvalC
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (proof : BasisIndependenceProof 𝒞 automorphism presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) : K :=
   basisMarkedPresentationValue
@@ -893,11 +854,10 @@ noncomputable def EvalC
 
 /-- The selected basis is immaterial among all certified sphere bases. -/
 theorem EvalC_eq_basisMarkedPresentationValue
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (proof : BasisIndependenceProof 𝒞 automorphism presentation)
     (other : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
@@ -915,11 +875,10 @@ No cycle representative occurs in this statement.  Equality of its inputs is
 ordinary equality in the homology quotient.
 -/
 theorem EvalC_congr
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (proof : BasisIndependenceProof 𝒞 automorphism presentation)
     (alpha beta :
       presentation.topology.handleChain.SecondHomology)

@@ -30,14 +30,13 @@ def unsafeCompiler
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra) :
+        categoryData H2 algebra) :
     IntegralCharacterBoundPresentationCompiler
-      categoryData manifold H2 algebra :=
+      categoryData H2 algebra :=
   compiler
 
 end TwistedYetter.Mutations.GenericCategoryBoundAsIntegralCharacterCompiler

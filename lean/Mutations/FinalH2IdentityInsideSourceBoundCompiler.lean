@@ -14,17 +14,16 @@ This must fail: the source-bound compiler has no field for a directly supplied
 final identity law.
 -/
 def unsafeCompiler
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH)
     [AddCommGroup H2]
     (compile :
-      {source target : SpecialKirbyPresentation manifold H2} →
+      {source target : SpecialKirbyPresentation H2} →
       (move : TopologicalTableTwoMove source target) →
         SourceBoundChainMoveCertificate move)
     (assemblyCertificateHash : String)
     (hashShape :
       RawPresentation.sha256Shape assemblyCertificateHash = true) :
-    SourceBoundGeometricH2Compiler manifold H2 where
+    SourceBoundGeometricH2Compiler H2 where
   compile := compile
   transport_is_identity := by
     intros

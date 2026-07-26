@@ -12,9 +12,8 @@ This must fail: a cycle vector cannot stand for a marked class until its
 projection to handle-chain homology is proved to be that class.
 -/
 def unsafeModel
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {topology : SpecialKirbyPresentation manifold H2}
+    {topology : SpecialKirbyPresentation H2}
     (model : IntegralTwoHandleCycleModel topology) :
     IntegralTwoHandleCycleModel topology where
   cycleRepresentative := model.cycleRepresentative

@@ -37,6 +37,7 @@ open TwistedYetter.Kirby.CanonicalCycleLocalInvariance
 open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalSourceBackedMove
 open TwistedYetter.Kirby.KirbyCompleteness
+open TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput
 open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
@@ -185,19 +186,18 @@ end Instruction
 
 /-- Project the source-local instruction from one topology move. -/
 def instructionOfMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     Instruction source.formal :=
   match move with
   | .framedIsotopy metadata _ =>
       Instruction.ofRecipe metadata.recipe
-  | .oneOverOne _ metadata _ =>
+  | .oneOverOne metadata _ =>
       Instruction.ofRecipe metadata.recipe
-  | .twoOverOne _ metadata _ =>
+  | .twoOverOne metadata _ =>
       Instruction.ofRecipe metadata.recipe
-  | .twoOverTwo _ metadata _ =>
+  | .twoOverTwo metadata _ =>
       Instruction.ofRecipe metadata.recipe
   | .oneTwoBirth metadata _ =>
       Instruction.ofRecipe metadata.recipe
@@ -238,9 +238,8 @@ theorem events_sound
 
 /-- Every admitted topology move endpoint has the generated core. -/
 theorem generates_exact_target
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     canonicalEngine.apply (instructionOfMove move) =
       PresentationCore.ofFormal target.formal := by
@@ -248,13 +247,13 @@ theorem generates_exact_target
   | framedIsotopy metadata counts =>
       exact Instruction.rewrittenCore_ofRecipe_eq_target
         metadata.recipe
-  | oneOverOne orientation metadata counts =>
+  | oneOverOne metadata counts =>
       exact Instruction.rewrittenCore_ofRecipe_eq_target
         metadata.recipe
-  | twoOverOne orientation metadata counts =>
+  | twoOverOne metadata counts =>
       exact Instruction.rewrittenCore_ofRecipe_eq_target
         metadata.recipe
-  | twoOverTwo orientation metadata counts =>
+  | twoOverTwo metadata counts =>
       exact Instruction.rewrittenCore_ofRecipe_eq_target
         metadata.recipe
   | oneTwoBirth metadata counts =>
@@ -283,10 +282,9 @@ structure Completion
     (𝒞 : ModularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C) where
   generated_move_calculation :
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput} →
     {H2 : Type uH} →
     [AddCommGroup H2] →
-    {source target : CanonicalPresentation manifold H2} →
+    {source target : CanonicalPresentation H2} →
     (move :
       TopologicalTableTwoMove source.topology target.topology) →
       LocalCycleCalculation 𝒞 automorphism
@@ -297,25 +295,43 @@ def localCycleCalculation_of_completion
     {𝒞 : ModularCategory (K := K) (C := C) (S := S)}
     {automorphism : TensorIdentityAutomorphism C}
     (completion : Completion 𝒞 automorphism)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation manifold H2}
+    {source target : CanonicalPresentation H2}
     (move :
       TopologicalTableTwoMove source.topology target.topology) :
     LocalCycleCalculation 𝒞 automorphism
       (CanonicalSourceBackedMove.enrichedMove move) :=
   completion.generated_move_calculation move
 
+/--
+The standard completion assembled from transparent graphical realizations.
+
+The external inputs are the eight separately named local geometry facts.
+Their exhaustive assembly and translation to `LocalCycleCalculation` are
+kernel checked.
+-/
+noncomputable def standardCompletion
+    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C) :
+    Completion 𝒞 η where
+  generated_move_calculation := fun move =>
+    standardLocalCycleCalculation 𝒞 η move
+
 /-- Machine-visible status of the two separate stages. -/
 def currentStatus : String :=
   "CORE_REWRITE_ENGINE_KERNEL_CHECKED;"
-    ++ "LOCAL_GRAPHICAL_COMPILER_NOT_IMPLEMENTED"
+    ++ "EIGHT_CASE_GRAPHICAL_COMPILER_KERNEL_CHECKED;"
+    ++ "EIGHT_LOCAL_GEOMETRY_INPUTS_EXPLICIT;"
+    ++ "THREE_SLIDE_INPUTS_ARE_CATEGORY_DEPENDENT"
 
 /-- Exact non-claim attached to this target module. -/
 def explicitNonClaim : String :=
   "The canonical core rewrite engine and exact-target theorem are complete. "
-    ++ "No Completion value compiling all eight moves to "
-    ++ "LocalCycleCalculation is constructed; "
-    ++ "standardLocalCycleCalculation remains an explicit axiom."
+    ++ "The eight-case compiler from GraphicalMoveRealization to "
+    ++ "LocalCycleCalculation is complete, and standardCompletion is "
+    ++ "constructed. Lean imports eight separately audited local geometry "
+    ++ "facts; only the three slide facts mention the modular category. "
+    ++ "It does not reconstruct planar "
+    ++ "coordinates and coupon neighbourhoods from serialized events."
 
 end TwistedYetter.Kirby.CanonicalRawLocalMoveTarget

@@ -37,29 +37,21 @@ identity law only certifies that the source and target coordinate
 identifications both refer to the same geometric `H2(X)`.
 -/
 structure GeometricMarkedH2Compiler
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
-  localCompiler : LocalMarkedH2Compiler manifold H2
+  localCompiler : LocalMarkedH2Compiler H2
   transport_is_identity :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (move : TopologicalTableTwoMove source target) →
       (localCompiler.transport move).homologyAddEquiv =
         AddEquiv.refl H2
-  assemblyCertificateHash : String
-  assembly_certificate_hash_shape :
-    RawPresentation.sha256Shape assemblyCertificateHash = true
-  sourceRefs : List String
-  exactMarkedScope : String
-  sourceScopeCaveat : String
 
 namespace GeometricMarkedH2Compiler
 
 /-- Every locally compiled transport fixes each geometric marked class. -/
 theorem local_targetClass_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : GeometricMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target)
     (alpha : H2) :
     (compiler.localCompiler.transport move).targetClass alpha = alpha := by
@@ -70,10 +62,9 @@ theorem local_targetClass_eq
 
 /-- Enriching one bare topology move preserves its geometric class. -/
 theorem enrichMove_targetClass_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : GeometricMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target)
     (alpha : H2) :
     (enrichMove compiler.localCompiler move).homologyTransport.targetClass
@@ -83,15 +74,15 @@ theorem enrichMove_targetClass_eq
   | framedIsotopy metadata counts =>
       exact compiler.local_targetClass_eq
         (.framedIsotopy metadata counts) alpha
-  | oneOverOne orientation metadata counts =>
+  | oneOverOne metadata counts =>
       exact compiler.local_targetClass_eq
-        (.oneOverOne orientation metadata counts) alpha
-  | twoOverOne orientation metadata counts =>
+        (.oneOverOne metadata counts) alpha
+  | twoOverOne metadata counts =>
       exact compiler.local_targetClass_eq
-        (.twoOverOne orientation metadata counts) alpha
-  | twoOverTwo orientation metadata counts =>
+        (.twoOverOne metadata counts) alpha
+  | twoOverTwo metadata counts =>
       exact compiler.local_targetClass_eq
-        (.twoOverTwo orientation metadata counts) alpha
+        (.twoOverTwo metadata counts) alpha
   | oneTwoBirth metadata counts =>
       exact compiler.local_targetClass_eq
         (.oneTwoBirth metadata counts) alpha
@@ -107,10 +98,9 @@ theorem enrichMove_targetClass_eq
 
 /-- Every enriched source-backed movie fixes the geometric marked class. -/
 theorem enrichMovie_targetClass_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+    (compiler : GeometricMarkedH2Compiler H2)
+    {source target : SpecialKirbyPresentation H2}
     (movie : TopologicalTableTwoMovie source target)
     (alpha : H2) :
     (enrichMovie compiler.localCompiler movie).targetClass alpha =
@@ -129,27 +119,25 @@ theorem enrichMovie_targetClass_eq
 
 /-- Source-backed completeness enriched with the supplied local chain maps. -/
 noncomputable def tableTwoCompleteness
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    (generalCerf : GeneralCerfCompleteness manifold) :
-    TableTwoLinkCompleteness manifold H2 :=
+    (compiler : GeometricMarkedH2Compiler H2)
+    (generalCerf : GeneralCerfCompleteness) :
+    TableTwoLinkCompleteness H2 :=
   buildTableTwoLinkCompleteness generalCerf
     (movieEnrichmentOfLocalCompiler compiler.localCompiler)
 
 /-- The exact completeness movie used by the assembly fixes geometric `H2`. -/
 theorem completeness_targetClass_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    (generalCerf : GeneralCerfCompleteness manifold)
-    (source target : SpecialKirbyPresentation manifold H2)
+    (compiler : GeometricMarkedH2Compiler H2)
+    (generalCerf : GeneralCerfCompleteness)
+    (source target : SpecialKirbyPresentation H2)
     (alpha : H2) :
     ((compiler.tableTwoCompleteness generalCerf).tableTwoConnected
         source target).targetClass alpha =
       alpha := by
   exact compiler.enrichMovie_targetClass_eq
-    (standardSpecialKirbyCalculusConnected source target) alpha
+    (standardSpecialKirbyPresentationsConnected source target) alpha
 
 /--
 Canonical marked-pair system.
@@ -159,12 +147,11 @@ transport law is derived from the local chain compiler rather than supplied
 as an independent proposition.
 -/
 noncomputable def markedPairSystem
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (compiler : GeometricMarkedH2Compiler manifold H2)
-    (generalCerf : GeneralCerfCompleteness manifold)
-    (basePresentation : SpecialKirbyPresentation manifold H2) :
-    MarkedPairPresentationSystem manifold H2 where
+    (compiler : GeometricMarkedH2Compiler H2)
+    (generalCerf : GeneralCerfCompleteness)
+    (basePresentation : SpecialKirbyPresentation H2) :
+    MarkedPairPresentationSystem H2 where
   completeness := compiler.tableTwoCompleteness generalCerf
   represents := fun _ coordinate geometricClass =>
     coordinate = geometricClass
@@ -177,12 +164,6 @@ noncomputable def markedPairSystem
     rw [sourceRepresents, targetRepresents]
     exact compiler.completeness_targetClass_eq
       generalCerf source target geometricClass
-  markingCertificateHash := compiler.assemblyCertificateHash
-  marking_certificate_hash_shape :=
-    compiler.assembly_certificate_hash_shape
-  sourceRefs := compiler.sourceRefs
-  exactMarkedScope := compiler.exactMarkedScope
-  sourceScopeCaveat := compiler.sourceScopeCaveat
 
 end GeometricMarkedH2Compiler
 

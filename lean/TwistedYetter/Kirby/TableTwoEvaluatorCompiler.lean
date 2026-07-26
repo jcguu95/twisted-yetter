@@ -83,13 +83,12 @@ structure TableTwoEvaluatorCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   evaluation :
-    (presentation : SpecialKirbyPresentation manifold H2) →
+    (presentation : SpecialKirbyPresentation H2) →
       DecoratedKirbyPresentation categoryData presentation
   framedIsotopy :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .framedIsotopy source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
@@ -98,37 +97,34 @@ structure TableTwoEvaluatorCompiler
         categoryData (evaluation source) (evaluation target)
         (.framedIsotopy metadata counts_sound transport) alpha
   oneOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
       EvaluatedTableTwoStep
         categoryData (evaluation source) (evaluation target)
-        (.oneOverOne orientation metadata counts_sound transport) alpha
+        (.oneOverOne metadata counts_sound transport) alpha
   twoOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
       EvaluatedTableTwoStep
         categoryData (evaluation source) (evaluation target)
-        (.twoOverOne orientation metadata counts_sound transport) alpha
+        (.twoOverOne metadata counts_sound transport) alpha
   twoOverTwo :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverTwo source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
       EvaluatedTableTwoStep
         categoryData (evaluation source) (evaluation target)
-        (.twoOverTwo orientation metadata counts_sound transport) alpha
+        (.twoOverTwo metadata counts_sound transport) alpha
   oneTwoBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoBirth source target) →
     (counts_sound : target.counts = source.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -137,7 +133,7 @@ structure TableTwoEvaluatorCompiler
         categoryData (evaluation source) (evaluation target)
         (.oneTwoBirth metadata counts_sound transport) alpha
   oneTwoDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoDeath source target) →
     (counts_sound : source.counts = target.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -146,7 +142,7 @@ structure TableTwoEvaluatorCompiler
         categoryData (evaluation source) (evaluation target)
         (.oneTwoDeath metadata counts_sound transport) alpha
   twoThreeBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeBirth source target) →
     (counts_sound : target.counts = source.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -155,7 +151,7 @@ structure TableTwoEvaluatorCompiler
         categoryData (evaluation source) (evaluation target)
         (.twoThreeBirth metadata counts_sound transport) alpha
   twoThreeDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeDeath source target) →
     (counts_sound : source.counts = target.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -180,11 +176,10 @@ def compile
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (alpha : H2) :
     EvaluatedTableTwoStep
@@ -193,12 +188,12 @@ def compile
   cases move with
   | framedIsotopy metadata counts transport =>
       exact compiler.framedIsotopy metadata counts transport alpha
-  | oneOverOne orientation metadata counts transport =>
-      exact compiler.oneOverOne orientation metadata counts transport alpha
-  | twoOverOne orientation metadata counts transport =>
-      exact compiler.twoOverOne orientation metadata counts transport alpha
-  | twoOverTwo orientation metadata counts transport =>
-      exact compiler.twoOverTwo orientation metadata counts transport alpha
+  | oneOverOne metadata counts transport =>
+      exact compiler.oneOverOne metadata counts transport alpha
+  | twoOverOne metadata counts transport =>
+      exact compiler.twoOverOne metadata counts transport alpha
+  | twoOverTwo metadata counts transport =>
+      exact compiler.twoOverTwo metadata counts transport alpha
   | oneTwoBirth metadata counts transport =>
       exact compiler.oneTwoBirth metadata counts transport alpha
   | oneTwoDeath metadata counts transport =>
@@ -212,11 +207,10 @@ theorem compile_framedIsotopy
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .framedIsotopy source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
@@ -229,71 +223,64 @@ theorem compile_oneOverOne
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
-    (orientation : BandOrientation)
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .oneOverOne source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
     compiler.compile
-        (.oneOverOne orientation metadata counts transport) alpha =
+        (.oneOverOne metadata counts transport) alpha =
       compiler.oneOverOne
-        orientation metadata counts transport alpha := by
+        metadata counts transport alpha := by
   rfl
 
 theorem compile_twoOverOne
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
-    (orientation : BandOrientation)
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .twoOverOne source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
     compiler.compile
-        (.twoOverOne orientation metadata counts transport) alpha =
+        (.twoOverOne metadata counts transport) alpha =
       compiler.twoOverOne
-        orientation metadata counts transport alpha := by
+        metadata counts transport alpha := by
   rfl
 
 theorem compile_twoOverTwo
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
-    (orientation : BandOrientation)
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .twoOverTwo source target)
     (counts : source.counts = target.counts)
     (transport : MarkedH2Transport source target)
     (alpha : H2) :
     compiler.compile
-        (.twoOverTwo orientation metadata counts transport) alpha =
+        (.twoOverTwo metadata counts transport) alpha =
       compiler.twoOverTwo
-        orientation metadata counts transport alpha := by
+        metadata counts transport alpha := by
   rfl
 
 theorem compile_oneTwoBirth
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .oneTwoBirth source target)
     (counts : target.counts = source.counts.addOneTwo)
     (transport : MarkedH2Transport source target)
@@ -306,11 +293,10 @@ theorem compile_oneTwoDeath
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .oneTwoDeath source target)
     (counts : source.counts = target.counts.addOneTwo)
     (transport : MarkedH2Transport source target)
@@ -323,11 +309,10 @@ theorem compile_twoThreeBirth
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .twoThreeBirth source target)
     (counts : target.counts = source.counts.addTwoThree)
     (transport : MarkedH2Transport source target)
@@ -340,11 +325,10 @@ theorem compile_twoThreeDeath
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2)
-    {source target : SpecialKirbyPresentation manifold H2}
+      TableTwoEvaluatorCompiler categoryData H2)
+    {source target : SpecialKirbyPresentation H2}
     (metadata : TableTwoMoveMetadata .twoThreeDeath source target)
     (counts : source.counts = target.counts.addTwoThree)
     (transport : MarkedH2Transport source target)
@@ -361,11 +345,10 @@ def toPrescription
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      TableTwoEvaluatorCompiler categoryData manifold H2) :
-    HomologicallyTwistedKirbyPrescription categoryData manifold H2 where
+      TableTwoEvaluatorCompiler categoryData H2) :
+    HomologicallyTwistedKirbyPrescription categoryData H2 where
   evaluation := compiler.evaluation
   localStep := compiler.compile
   prescriptionCertificateHash := compiler.compilerCertificateHash

@@ -133,14 +133,42 @@ def SMatrixNondegenerate
   Matrix.det (premodularSMatrix 𝒞) ≠ 0
 
 /--
-EGNO Definition 8.13.4: a modular category is premodular and has
-nondegenerate S-matrix.
+EGNO Definition 8.13.4, with the ambient fusion hypothesis made explicit in
+the Lean name: a modular fusion category is premodular and has nondegenerate
+S-matrix.
 -/
-structure ModularCategory where
+structure ModularFusionCategory where
   toPremodularCategory :
     PremodularCategory (K := K) (C := C) (S := S)
   sMatrix_nondegenerate :
     SMatrixNondegenerate toPremodularCategory
+
+/--
+A modular fusion category may be used wherever only its underlying
+premodular structure is required.
+-/
+instance :
+    Coe
+      (ModularFusionCategory (K := K) (C := C) (S := S))
+      (PremodularCategory (K := K) (C := C) (S := S)) :=
+  ⟨ModularFusionCategory.toPremodularCategory⟩
+
+namespace ModularFusionCategory
+
+/-- The underlying premodular category, with modularity deliberately forgotten. -/
+abbrev premodular
+    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S)) :
+    PremodularCategory (K := K) (C := C) (S := S) :=
+  𝒞.toPremodularCategory
+
+end ModularFusionCategory
+
+/--
+Compatibility name for older internal modules.  New public declarations
+should say `ModularFusionCategory`.
+-/
+abbrev ModularCategory :=
+  ModularFusionCategory (K := K) (C := C) (S := S)
 
 namespace ModularCategory
 
@@ -158,6 +186,22 @@ theorem sMatrixNondegenerate :
   𝒞.sMatrix_nondegenerate
 
 end ModularCategory
+
+namespace PremodularCategory
+
+variable
+  (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+
+/--
+Compatibility projection used by evaluator code that only needs the
+underlying premodular category.  For an already premodular category this is
+the identity.
+-/
+abbrev premodular :
+    PremodularCategory (K := K) (C := C) (S := S) :=
+  𝒞
+
+end PremodularCategory
 
 /-- Double braiding with every object is categorical transparency. -/
 def IsTransparentObject (X : C) : Prop :=
@@ -188,6 +232,127 @@ theorem ModularCategory.transparent_iff_unit
 noncomputable def PremodularCategory.globalDimension
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) : K :=
   ∑ s, 𝒞.quantumDimension s * 𝒞.quantumDimension s
+
+/--
+The tensor unit has quantum dimension one for the canonical pivotal structure
+of a ribbon fusion category.
+
+The proof transports the selected right dual of the tensor unit to Mathlib's
+standard unit pairing, then closes the resulting snake identity.
+-/
+theorem PremodularCategory.quantumDimension_unit
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    𝒞.quantumDimension 𝒞.toFusionCategoryData.unitIndex = 1 := by
+  let p := 𝒞.pivotal
+  have hIsoDimension :
+      pivotalDimension p
+          (𝒞.simple 𝒞.toFusionCategoryData.unitIndex) =
+        pivotalDimension p (𝟙_ C) := by
+    simpa [pivotalDimension, pivotalTrace] using
+      (pivotalTrace_cyclic p
+        𝒞.toFusionCategoryData.unitIso.hom
+        𝒞.toFusionCategoryData.unitIso.inv)
+  have hUnitDimension :
+      pivotalDimension p (𝟙_ C) = 𝟙 (𝟙_ C) := by
+    simp [p, RibbonFusionCategoryData.pivotal,
+      pivotalDimension, leftCategoricalTrace,
+      canonicalPivotalStructure, canonicalPivotalIso_hom_app,
+      canonicalPivotalHom, drinfeldHom,
+      balancedTwist_unit]
+    rw [drinfeldIso_hom]
+    rw [← tensorHom_id]
+    slice_lhs 2 3 =>
+      exact drinfeldHom_tensor_evaluation (𝟙_ C)
+    rw [braiding_tensorUnit_left]
+    let selectedDual : C :=
+      @HasRightDual.rightDual C _ _ (𝟙_ C)
+        (RightRigidCategory.rightDual (𝟙_ C))
+    let selectedPairing :
+        ExactPairing (𝟙_ C) selectedDual :=
+      @HasRightDual.exact C _ _ (𝟙_ C)
+        (RightRigidCategory.rightDual (𝟙_ C))
+    let unitPairing : ExactPairing (𝟙_ C) (𝟙_ C) :=
+      inferInstance
+    let comparison :=
+      rightDualIso selectedPairing unitPairing
+    let selectedCoevaluation :=
+      @ExactPairing.coevaluation C _ _ (𝟙_ C) selectedDual
+        selectedPairing
+    let selectedEvaluation :=
+      @ExactPairing.evaluation C _ _ (𝟙_ C) selectedDual
+        selectedPairing
+    let unitCoevaluation :=
+      @ExactPairing.coevaluation C _ _ (𝟙_ C) (𝟙_ C)
+        unitPairing
+    let unitEvaluation :=
+      @ExactPairing.evaluation C _ _ (𝟙_ C) (𝟙_ C)
+        unitPairing
+    have hCoevaluation :
+        selectedCoevaluation ≫
+            ((𝟙_ C) ◁ comparison.hom) =
+          unitCoevaluation := by
+      exact rightDualIso_coevaluation_hom
+        selectedPairing unitPairing
+    have hEvaluation :
+        (comparison.hom ▷ (𝟙_ C)) ≫
+            unitEvaluation =
+          selectedEvaluation := by
+      exact rightDualIso_hom_evaluation
+        selectedPairing unitPairing
+    have hMiddle :
+        ((λ_ selectedDual).hom ≫ (ρ_ selectedDual).inv) ≫
+            (comparison.hom ▷ (𝟙_ C)) =
+          ((𝟙_ C) ◁ comparison.hom) ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) := by
+      simp [comparison]
+    change
+      selectedCoevaluation ≫
+          ((λ_ selectedDual).hom ≫
+            (ρ_ selectedDual).inv) ≫
+          selectedEvaluation =
+        𝟙 (𝟙_ C)
+    calc
+      _ =
+          selectedCoevaluation ≫
+            ((λ_ selectedDual).hom ≫
+              (ρ_ selectedDual).inv) ≫
+            (comparison.hom ▷ (𝟙_ C)) ≫
+            unitEvaluation := by
+              rw [hEvaluation]
+      _ =
+          selectedCoevaluation ≫
+            ((𝟙_ C) ◁ comparison.hom) ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+            unitEvaluation := by
+              simpa only [Category.assoc] using
+                congrArg
+                  (fun f =>
+                    selectedCoevaluation ≫ f ≫
+                      unitEvaluation)
+                  hMiddle
+      _ =
+          unitCoevaluation ≫
+            ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+            unitEvaluation := by
+              simpa only [Category.assoc] using
+                congrArg
+                  (fun f =>
+                    f ≫ ((λ_ (𝟙_ C)).hom ≫
+                      (ρ_ (𝟙_ C)).inv) ≫
+                      unitEvaluation)
+                  hCoevaluation
+      _ = 𝟙 (𝟙_ C) := by
+        dsimp [unitCoevaluation, unitEvaluation, unitPairing]
+        change
+          (ρ_ (𝟙_ C)).inv ≫
+              ((λ_ (𝟙_ C)).hom ≫ (ρ_ (𝟙_ C)).inv) ≫
+              (ρ_ (𝟙_ C)).hom =
+            𝟙 (𝟙_ C)
+        monoidal
+  rw [RibbonFusionCategoryData.quantumDimension,
+    RibbonFusionCategoryData.categoricalDimension]
+  rw [hIsoDimension, hUnitDimension]
+  exact 𝒞.toFusionCategoryData.closedScalar_identity
 
 /--
 Characteristic-zero modular categories have nonzero global dimension.

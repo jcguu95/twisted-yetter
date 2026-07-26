@@ -58,15 +58,14 @@ structure HomologicalKirbyColorWeights
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   coefficient :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (alpha : H2) →
     (component : ComponentSpec) →
     S → K
   zero_class_sound :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (component : ComponentSpec) →
     (simple : S) →
       coefficient topology 0 component simple =
@@ -94,11 +93,10 @@ noncomputable def toComponentExpansion
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2) :
-    ComponentLabelExpansion (K := K) (S := S) manifold H2 where
+      HomologicalKirbyColorWeights categoryData H2) :
+    ComponentLabelExpansion (K := K) (S := S) H2 where
   Label := fun _ => S
   labelFintype := fun _ => inferInstance
   componentWeight := weights.coefficient
@@ -116,10 +114,9 @@ theorem label_fiber_is_simple_index
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2)
+      HomologicalKirbyColorWeights categoryData H2)
     (component : ComponentSpec) :
     (weights.toComponentExpansion.Label component) = S := by
   rfl
@@ -129,11 +126,10 @@ theorem component_weight_eq
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      HomologicalKirbyColorWeights categoryData H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (component : ComponentSpec)
     (simple : S) :
@@ -147,11 +143,10 @@ theorem zero_component_weight_eq_category_weight
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      HomologicalKirbyColorWeights categoryData H2)
+    (topology : SpecialKirbyPresentation H2)
     (component : ComponentSpec)
     (simple : S) :
     weights.toComponentExpansion.componentWeight
@@ -172,11 +167,10 @@ structure LabelledComponentResolver
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      HomologicalKirbyColorWeights categoryData H2)
+    (topology : SpecialKirbyPresentation H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology) where
@@ -192,11 +186,10 @@ def strandObject
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {weights :
-      HomologicalKirbyColorWeights categoryData manifold H2}
-    {topology : SpecialKirbyPresentation manifold H2}
+      HomologicalKirbyColorWeights categoryData H2}
+    {topology : SpecialKirbyPresentation H2}
     {labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology}
@@ -215,11 +208,10 @@ def labelledBoundary
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {weights :
-      HomologicalKirbyColorWeights categoryData manifold H2}
-    {topology : SpecialKirbyPresentation manifold H2}
+      HomologicalKirbyColorWeights categoryData H2}
+    {topology : SpecialKirbyPresentation H2}
     {labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology}
@@ -238,11 +230,10 @@ structure EventCompilerBinding
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (weights :
-      HomologicalKirbyColorWeights categoryData manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      HomologicalKirbyColorWeights categoryData H2)
+    (topology : SpecialKirbyPresentation H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology)
@@ -265,19 +256,18 @@ structure CategoryBoundPresentationCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (algebra : RibbonKirbyGraphicalAlgebra.Input categoryData) where
-  weights : HomologicalKirbyColorWeights categoryData manifold H2
+  weights : HomologicalKirbyColorWeights categoryData H2
   resolver :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
         weights.toComponentExpansion topology) →
       LabelledComponentResolver weights topology labeling
   eventSemantics :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (alpha : H2) →
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
@@ -287,15 +277,15 @@ structure CategoryBoundPresentationCompiler
         (strandObject (resolver topology alpha labeling))
         algebra.framedKink.twist
   diagramCertificateHash :
-    SpecialKirbyPresentation manifold H2 → String
+    SpecialKirbyPresentation H2 → String
   diagram_certificate_hash_shape :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
       RawPresentation.sha256Shape
         (diagramCertificateHash topology) = true
   decorationCertificateHash :
-    SpecialKirbyPresentation manifold H2 → String
+    SpecialKirbyPresentation H2 → String
   decoration_certificate_hash_shape :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
       RawPresentation.sha256Shape
         (decorationCertificateHash topology) = true
   sourceRefs : List String
@@ -314,13 +304,12 @@ def eventCompiler
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra)
-    (topology : SpecialKirbyPresentation manifold H2)
+        categoryData H2 algebra)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
@@ -334,13 +323,12 @@ def eventCompilerBinding
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra)
-    (topology : SpecialKirbyPresentation manifold H2)
+        categoryData H2 algebra)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
@@ -356,14 +344,13 @@ noncomputable def toComponentwise
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra) :
+        categoryData H2 algebra) :
     ComponentwiseFiniteLabelPresentationCompiler
-      categoryData manifold H2 where
+      categoryData H2 where
   expansion := compiler.weights.toComponentExpansion
   eventCompiler := compiler.eventCompiler
   diagramCertificateHash := compiler.diagramCertificateHash
@@ -384,13 +371,12 @@ theorem event_twist_is_graphical_twist
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra)
-    (topology : SpecialKirbyPresentation manifold H2)
+        categoryData H2 algebra)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling
@@ -405,13 +391,12 @@ theorem event_boundary_is_labelled_boundary
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {algebra : RibbonKirbyGraphicalAlgebra.Input categoryData}
     (compiler :
       CategoryBoundPresentationCompiler
-        categoryData manifold H2 algebra)
-    (topology : SpecialKirbyPresentation manifold H2)
+        categoryData H2 algebra)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling :
       ComponentLabelExpansion.GlobalLabeling

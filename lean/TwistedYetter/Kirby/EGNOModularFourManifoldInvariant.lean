@@ -47,6 +47,7 @@ open TwistedYetter.Kirby.LinearDiagram
 open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.PresentationIsotopy
 open TwistedYetter.Kirby.SourceBackedHandleChainNaturality
+open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 
 universe uK uC vC uH
 
@@ -87,16 +88,14 @@ theorem closedTensorScalar_multiplicative
 
 /-- One global assignment of a simple label to every serialized component. -/
 abbrev GlobalLabeling
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2) :=
+    (topology : SpecialKirbyPresentation H2) :=
   Fin topology.formal.raw.components.length → S
 
 /-- The canonical integral exponent carried by one serialized component. -/
 noncomputable def componentExponent
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (component : ComponentSpec) : ℤ :=
   (IntegralTwoHandleCycleModel.canonical topology).componentExponent
@@ -108,9 +107,8 @@ The only component coefficient admitted by the legacy modular route.
 noncomputable def componentWeight
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (component : ComponentSpec)
     (simple : S) : K :=
@@ -123,9 +121,8 @@ noncomputable def componentWeight
 theorem componentWeight_zero
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (component : ComponentSpec)
     (simple : S) :
     componentWeight data automorphism topology 0 component simple =
@@ -137,9 +134,8 @@ theorem componentWeight_zero
 noncomputable def globalWeight
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling : GlobalLabeling (S := S) topology) : K :=
   ∏ index,
@@ -154,9 +150,8 @@ a listed component.  This witness records the unique lookup used by the
 categorical event semantics.
 -/
 structure LabelledComponentResolver
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (topology : SpecialKirbyPresentation manifold H2)
+    (topology : SpecialKirbyPresentation H2)
     (labeling : GlobalLabeling (S := S) topology) where
   labelOf : String → S
   component_sound :
@@ -168,9 +163,8 @@ structure LabelledComponentResolver
 /-- Interpret strand orientation using the selected categorical right dual. -/
 def strandObject
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {topology : SpecialKirbyPresentation manifold H2}
+    {topology : SpecialKirbyPresentation H2}
     {labeling : GlobalLabeling (S := S) topology}
     (resolver : LabelledComponentResolver topology labeling)
     (strand : StrandState) : C :=
@@ -188,15 +182,14 @@ structure PresentationCompiler
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (graphical : GraphicalInvarianceEnvironment data)
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   resolver :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (alpha : H2) →
     (labeling : GlobalLabeling (S := S) topology) →
       LabelledComponentResolver topology labeling
   eventSemantics :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
     (alpha : H2) →
     (labeling : GlobalLabeling (S := S) topology) →
       WindowedCategoricalEventSemantics
@@ -204,9 +197,9 @@ structure PresentationCompiler
         (strandObject data (resolver topology alpha labeling))
         (NaturalTwist.ofRibbon data.ribbon)
   diagramCertificateHash :
-    SpecialKirbyPresentation manifold H2 → String
+    SpecialKirbyPresentation H2 → String
   diagram_certificate_hash_shape :
-    (topology : SpecialKirbyPresentation manifold H2) →
+    (topology : SpecialKirbyPresentation H2) →
       RawPresentation.sha256Shape
         (diagramCertificateHash topology) = true
   compilerCertificateHash : String
@@ -226,11 +219,10 @@ def eventCompiler
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling : GlobalLabeling (S := S) topology) :
     CategoricalEventCompiler C topology.formal.raw :=
@@ -242,11 +234,10 @@ def termDiagram
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2)
     (labeling : GlobalLabeling (S := S) topology) :
     Diagram C .unit .unit :=
@@ -258,11 +249,10 @@ noncomputable def linearDiagram
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2) :
     LinearDiagram (R := K) (C := C) .unit .unit :=
   weightedSum
@@ -274,11 +264,10 @@ noncomputable def rawNumerator
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2) : K :=
   data.toFusionCategoryData.closedScalar
     (LinearDiagram.eval (compiler.linearDiagram topology alpha))
@@ -288,11 +277,10 @@ noncomputable def evaluationState
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2) :
     EvaluationState (K := K) where
   counts := topology.counts
@@ -303,11 +291,10 @@ noncomputable def value
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2) : K :=
   (compiler.evaluationState topology alpha).normalized graphical.profile
 
@@ -316,11 +303,10 @@ theorem linearDiagram_eval
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      PresentationCompiler data graphical automorphism manifold H2)
-    (topology : SpecialKirbyPresentation manifold H2)
+      PresentationCompiler data graphical automorphism H2)
+    (topology : SpecialKirbyPresentation H2)
     (alpha : H2) :
     LinearDiagram.eval (compiler.linearDiagram topology alpha) =
       ∑ labeling,
@@ -775,9 +761,8 @@ end BoundGeneralizedSlide
 Hash binding for one exact topology move and one graphical proof object.
 -/
 structure LocalMoveBinding
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target) where
   moveId : String
   move_id_sound : moveId = tableTwoMoveId move
@@ -798,9 +783,8 @@ structure LocalMoveBinding
 def localMoveBinding
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (certificateHash : String)
     (certificateShape :
@@ -938,12 +922,11 @@ structure LocalMoveCompiler
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (graphical : GraphicalInvarianceEnvironment data)
     (automorphism : TensorIdentityAutomorphism C)
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2]
     (presentation :
-      PresentationCompiler data graphical automorphism manifold H2) where
+      PresentationCompiler data graphical automorphism H2) where
   framedIsotopy :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .framedIsotopy source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
@@ -953,36 +936,35 @@ structure LocalMoveCompiler
         (presentation.linearDiagram target
           (transport.targetClass alpha))
   oneOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
       BoundOrdinarySlide graphical.ordinarySlidingLaw
-        .oneOverOne orientation
+        .oneOverOne
+        (HandleEdit.oneOverOneOrientation metadata.recipe.handleEdit)
         metadata.moveId metadata.sourcePresentationHash
         metadata.targetPresentationHash
         (presentation.linearDiagram source alpha)
         (presentation.linearDiagram target
           (transport.targetClass alpha))
   twoOverOne :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverOne source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
       BoundOrdinarySlide graphical.ordinarySlidingLaw
-        .twoOverOne orientation
+        .twoOverOne
+        (HandleEdit.twoOverOneOrientation metadata.recipe.handleEdit)
         metadata.moveId metadata.sourcePresentationHash
         metadata.targetPresentationHash
         (presentation.linearDiagram source alpha)
         (presentation.linearDiagram target
           (transport.targetClass alpha))
   twoOverTwo :
-    {source target : SpecialKirbyPresentation manifold H2} →
-    (orientation : BandOrientation) →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoOverTwo source target) →
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
@@ -992,7 +974,7 @@ structure LocalMoveCompiler
         (presentation.linearDiagram target
           (transport.targetClass alpha))
   oneTwoBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoBirth source target) →
     (counts_sound : target.counts = source.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -1002,7 +984,7 @@ structure LocalMoveCompiler
           (transport.targetClass alpha))
         (presentation.linearDiagram source alpha)
   oneTwoDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .oneTwoDeath source target) →
     (counts_sound : source.counts = target.counts.addOneTwo) →
     (transport : MarkedH2Transport source target) →
@@ -1012,7 +994,7 @@ structure LocalMoveCompiler
         (presentation.linearDiagram target
           (transport.targetClass alpha))
   twoThreeBirth :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeBirth source target) →
     (counts_sound : target.counts = source.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -1022,7 +1004,7 @@ structure LocalMoveCompiler
           (transport.targetClass alpha))
         (presentation.linearDiagram source alpha)
   twoThreeDeath :
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata .twoThreeDeath source target) →
     (counts_sound : source.counts = target.counts.addTwoThree) →
     (transport : MarkedH2Transport source target) →
@@ -1033,11 +1015,11 @@ structure LocalMoveCompiler
           (transport.targetClass alpha))
   graphicalCertificateHash :
     {kind : SourceBoundLocalMoveRecipe.RecipeKind} →
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
       TableTwoMoveMetadata kind source target → H2 → String
   graphical_certificate_hash_shape :
     {kind : SourceBoundLocalMoveRecipe.RecipeKind} →
-    {source target : SpecialKirbyPresentation manifold H2} →
+    {source target : SpecialKirbyPresentation H2} →
     (metadata : TableTwoMoveMetadata kind source target) →
     (alpha : H2) →
       RawPresentation.sha256Shape
@@ -1059,11 +1041,10 @@ theorem normalized_eq_of_linear_eval
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {presentation :
-      PresentationCompiler data graphical automorphism manifold H2}
-    {source target : SpecialKirbyPresentation manifold H2}
+      PresentationCompiler data graphical automorphism H2}
+    {source target : SpecialKirbyPresentation H2}
     (alpha beta : H2)
     (counts_eq : source.counts = target.counts)
     (linear_eval_eq :
@@ -1080,14 +1061,13 @@ theorem move_invariant
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {presentation :
-      PresentationCompiler data graphical automorphism manifold H2}
+      PresentationCompiler data graphical automorphism H2}
     (compiler :
       LocalMoveCompiler
-        data graphical automorphism manifold H2 presentation)
-    {source target : SpecialKirbyPresentation manifold H2}
+        data graphical automorphism H2 presentation)
+    {source target : SpecialKirbyPresentation H2}
     (move : TableTwoMove source target)
     (alpha : H2) :
     presentation.value source alpha =
@@ -1098,21 +1078,21 @@ theorem move_invariant
       exact normalized_eq_of_linear_eval alpha
         (transport.targetClass alpha) counts
         (compiler.framedIsotopy metadata counts transport alpha).eval_eq
-  | oneOverOne orientation metadata counts transport =>
+  | oneOverOne metadata counts transport =>
       exact normalized_eq_of_linear_eval alpha
         (transport.targetClass alpha) counts
         (BoundOrdinarySlide.eval_eq
-          (compiler.oneOverOne orientation metadata counts transport alpha))
-  | twoOverOne orientation metadata counts transport =>
+          (compiler.oneOverOne metadata counts transport alpha))
+  | twoOverOne metadata counts transport =>
       exact normalized_eq_of_linear_eval alpha
         (transport.targetClass alpha) counts
         (BoundOrdinarySlide.eval_eq
-          (compiler.twoOverOne orientation metadata counts transport alpha))
-  | twoOverTwo orientation metadata counts transport =>
+          (compiler.twoOverOne metadata counts transport alpha))
+  | twoOverTwo metadata counts transport =>
       exact normalized_eq_of_linear_eval alpha
         (transport.targetClass alpha) counts
         (BoundGeneralizedSlide.eval_eq
-          (compiler.twoOverTwo orientation metadata counts transport alpha))
+          (compiler.twoOverTwo metadata counts transport alpha))
   | oneTwoBirth metadata counts transport =>
       let calculation :=
         (compiler.oneTwoBirth metadata counts transport alpha)
@@ -1151,14 +1131,13 @@ theorem movie_invariant
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {graphical : GraphicalInvarianceEnvironment data}
     {automorphism : TensorIdentityAutomorphism C}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     {presentation :
-      PresentationCompiler data graphical automorphism manifold H2}
+      PresentationCompiler data graphical automorphism H2}
     (compiler :
       LocalMoveCompiler
-        data graphical automorphism manifold H2 presentation)
-    {source target : SpecialKirbyPresentation manifold H2}
+        data graphical automorphism H2 presentation)
+    {source target : SpecialKirbyPresentation H2}
     (movie : TableTwoMovie source target)
     (alpha : H2) :
     presentation.value source alpha =

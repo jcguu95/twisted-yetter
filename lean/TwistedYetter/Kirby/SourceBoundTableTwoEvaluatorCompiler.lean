@@ -71,15 +71,14 @@ structure SourceBoundTableTwoEvaluatorCompiler
     (categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I))
-    (manifold : ClosedConnectedSmoothOrientedFourManifoldInput)
     (H2 : Type uH) [AddCommGroup H2] where
   graphicalAlgebra : RibbonKirbyGraphicalAlgebra.Input categoryData
   presentationCompiler :
     IntegralCharacterBoundPresentationCompiler
-      categoryData manifold H2 graphicalAlgebra
+      categoryData H2 graphicalAlgebra
   moveCompiler :
     SourceBoundGraphicalMoveCompiler
-      categoryData manifold H2
+      categoryData H2
         presentationCompiler.toCategoryBound.toComponentwise graphicalAlgebra
   categorySnapshotHash : String
   category_snapshot_hash_sound :
@@ -104,16 +103,15 @@ def assemble
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (graphicalAlgebra :
       RibbonKirbyGraphicalAlgebra.Input categoryData)
     (presentationCompiler :
       IntegralCharacterBoundPresentationCompiler
-        categoryData manifold H2 graphicalAlgebra)
+        categoryData H2 graphicalAlgebra)
     (moveCompiler :
       SourceBoundGraphicalMoveCompiler
-        categoryData manifold H2
+        categoryData H2
           presentationCompiler.toCategoryBound.toComponentwise
           graphicalAlgebra)
     (compilerCertificateHash : String)
@@ -121,7 +119,7 @@ def assemble
       RawPresentation.sha256Shape compilerCertificateHash = true)
     (sourceRefs : List String)
     (exactFormulaScope sourceScopeCaveat : String) :
-    SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2 where
+    SourceBoundTableTwoEvaluatorCompiler categoryData H2 where
   graphicalAlgebra := graphicalAlgebra
   presentationCompiler := presentationCompiler
   moveCompiler := moveCompiler
@@ -138,16 +136,15 @@ theorem assemble_presentationCompiler
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (graphicalAlgebra :
       RibbonKirbyGraphicalAlgebra.Input categoryData)
     (presentationCompiler :
       IntegralCharacterBoundPresentationCompiler
-        categoryData manifold H2 graphicalAlgebra)
+        categoryData H2 graphicalAlgebra)
     (moveCompiler :
       SourceBoundGraphicalMoveCompiler
-        categoryData manifold H2
+        categoryData H2
           presentationCompiler.toCategoryBound.toComponentwise
           graphicalAlgebra)
     (compilerCertificateHash : String)
@@ -166,16 +163,15 @@ theorem assemble_moveCompiler
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (graphicalAlgebra :
       RibbonKirbyGraphicalAlgebra.Input categoryData)
     (presentationCompiler :
       IntegralCharacterBoundPresentationCompiler
-        categoryData manifold H2 graphicalAlgebra)
+        categoryData H2 graphicalAlgebra)
     (moveCompiler :
       SourceBoundGraphicalMoveCompiler
-        categoryData manifold H2
+        categoryData H2
           presentationCompiler.toCategoryBound.toComponentwise
           graphicalAlgebra)
     (compilerCertificateHash : String)
@@ -194,26 +190,25 @@ noncomputable def toTableTwo
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
       SourceBoundTableTwoEvaluatorCompiler
-        categoryData manifold H2) :
-    TableTwoEvaluatorCompiler categoryData manifold H2 where
+        categoryData H2) :
+    TableTwoEvaluatorCompiler categoryData H2 where
   evaluation :=
     compiler.presentationCompiler.toCategoryBound.toComponentwise.decorate
   framedIsotopy := fun metadata counts transport alpha =>
     compiler.moveCompiler.compile
       (.framedIsotopy metadata counts transport) alpha
-  oneOverOne := fun orientation metadata counts transport alpha =>
+  oneOverOne := fun metadata counts transport alpha =>
     compiler.moveCompiler.compile
-      (.oneOverOne orientation metadata counts transport) alpha
-  twoOverOne := fun orientation metadata counts transport alpha =>
+      (.oneOverOne metadata counts transport) alpha
+  twoOverOne := fun metadata counts transport alpha =>
     compiler.moveCompiler.compile
-      (.twoOverOne orientation metadata counts transport) alpha
-  twoOverTwo := fun orientation metadata counts transport alpha =>
+      (.twoOverOne metadata counts transport) alpha
+  twoOverTwo := fun metadata counts transport alpha =>
     compiler.moveCompiler.compile
-      (.twoOverTwo orientation metadata counts transport) alpha
+      (.twoOverTwo metadata counts transport) alpha
   oneTwoBirth := fun metadata counts transport alpha =>
     compiler.moveCompiler.compile
       (.oneTwoBirth metadata counts transport) alpha
@@ -239,12 +234,11 @@ theorem toTableTwo_evaluation_is_trace_compiled
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
       SourceBoundTableTwoEvaluatorCompiler
-        categoryData manifold H2)
-    (presentation : SpecialKirbyPresentation manifold H2) :
+        categoryData H2)
+    (presentation : SpecialKirbyPresentation H2) :
     compiler.toTableTwo.evaluation presentation =
       compiler.presentationCompiler.toCategoryBound.toComponentwise.decorate
         presentation := by
@@ -255,10 +249,9 @@ theorem graphical_algebra_snapshot_bound
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
+      SourceBoundTableTwoEvaluatorCompiler categoryData H2) :
     compiler.graphicalAlgebra.categorySnapshotHash =
       categoryData.categorySnapshotHash :=
   compiler.graphicalAlgebra.category_snapshot_hash_sound
@@ -271,17 +264,19 @@ theorem toTableTwo_evaluation_is_componentwise_global_sum
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2)
-    (presentation : SpecialKirbyPresentation manifold H2)
+      SourceBoundTableTwoEvaluatorCompiler categoryData H2)
+    (presentation : SpecialKirbyPresentation H2)
     (alpha : H2) :
     Diagram.eval C
         ((compiler.toTableTwo.evaluation presentation).diagram alpha) =
       let expansion :=
         (integralCharacterWeights
-          (IntegralCycleRepresentativeSystem.canonical manifold H2)
+          (IntegralCycleRepresentativeSystem.canonical
+            compiler.presentationCompiler.cycleSystemCertificateHash
+            compiler.presentationCompiler.cycle_system_certificate_hash_shape
+            H2)
           compiler.presentationCompiler.selectedGenerator.generator
         ).toComponentExpansion
       letI := expansion.globalFintype presentation
@@ -304,13 +299,15 @@ theorem presentation_weights_are_integral_character_weights
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)}
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
     (compiler :
-      SourceBoundTableTwoEvaluatorCompiler categoryData manifold H2) :
+      SourceBoundTableTwoEvaluatorCompiler categoryData H2) :
     compiler.presentationCompiler.toCategoryBound.weights =
       integralCharacterWeights
-        (IntegralCycleRepresentativeSystem.canonical manifold H2)
+        (IntegralCycleRepresentativeSystem.canonical
+          compiler.presentationCompiler.cycleSystemCertificateHash
+          compiler.presentationCompiler.cycle_system_certificate_hash_shape
+          H2)
         compiler.presentationCompiler.selectedGenerator.generator := by
   rfl
 

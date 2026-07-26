@@ -102,30 +102,41 @@ abbrev HomologicalFourManifold :=
 
 namespace SpecialKirbyFoundation
 
-/-!
-The current canonical evaluator is indexed by a content-addressed
-presentation scope and an auxiliary additive group.  Those are implementation
-coordinates of the established special-Kirby calculus, not arguments of the
-intrinsic invariant.
--/
-
-/-- Fixed implementation scope of the admitted special-Kirby calculus. -/
-axiom presentationScope :
-  ClosedConnectedSmoothOrientedFourManifoldInput
-
 /-- Integral auxiliary coordinates used by the canonical presentation type. -/
 abbrev AuxiliaryH₂ := ℤ
 
-/-- The canonical handle-presentation theory used by the formal evaluator. -/
-noncomputable def handles : HandlePresentationTheory :=
-  handlePresentationTheory presentationScope AuxiliaryH₂
+/--
+External realization of the canonical special-Kirby presentation theory.
+
+Repository provenance is not part of this mathematical input.  It may be
+attached to a stored value with `KirbyCompleteness.StoredArtifact`.
+-/
+structure CertifiedSpecialKirbyPresentationTheory
+    (geometry : HomologicalFourManifoldTheory.{uX, uX, uX}) where
+  realization :
+    HandlePresentationRealization.{1, 0, 1, uX, uX, uX}
+      (handlePresentationTheory AuxiliaryH₂)
+      geometry
 
 /--
-External realization of canonical handle-chain markings as actual manifold
-homology classes.
+The one imported topology object at this boundary: the canonical
+special-Kirby presentation theory tied to its manifold realization.
 -/
-axiom realization :
-  HandlePresentationRealization handles fourManifoldGeometry
+axiom certifiedPresentationTheory :
+  CertifiedSpecialKirbyPresentationTheory fourManifoldGeometry
+
+/-- The canonical handle-presentation theory used by the formal evaluator. -/
+noncomputable def handles : HandlePresentationTheory.{1, 0, 1} :=
+  handlePresentationTheory AuxiliaryH₂
+
+/--
+The realization carried by the certified presentation theory.
+-/
+noncomputable def realization :
+    HandlePresentationRealization handles fourManifoldGeometry :=
+  by
+    simpa [handles] using
+      certifiedPresentationTheory.{uX}.realization
 
 /-- Every elementary canonical move realizes the transported marked pair. -/
 axiom elementaryMoveSoundness :
@@ -152,7 +163,7 @@ end SpecialKirbyFoundation
 
 /-- Interpret the intrinsic dependent pair in the internal descent language. -/
 def homologicalPair
-    (Xα : HomologicalFourManifold) :
+    (Xα : HomologicalFourManifold.{uX}) :
     fourManifoldGeometry.MarkedManifold where
   manifold := Xα.1
   alpha := Xα.2
@@ -166,14 +177,14 @@ also records the external realization and the equality of its transported
 handle-chain class with `α`.
 -/
 abbrev SpecialKirbyPresentation
-    (Xα : HomologicalFourManifold) :=
+    (Xα : HomologicalFourManifold.{uX}) :=
   MarkedPresentationOf
     SpecialKirbyFoundation.realization
     (homologicalPair Xα)
 
 /-- Every intrinsic homological four-manifold pair has a special presentation. -/
 theorem specialKirbyPresentationExists
-    (Xα : HomologicalFourManifold) :
+    (Xα : HomologicalFourManifold.{uX}) :
     Nonempty (SpecialKirbyPresentation Xα) :=
   SpecialKirbyFoundation.presentationExistence.presentation
     (homologicalPair Xα)
@@ -186,11 +197,10 @@ abbrev TwistedModularCategory :=
 /-- The formal scalar attached to one accepted special Kirby presentation. -/
 noncomputable def specialKirbyEvaluation
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    {Xα : HomologicalFourManifold}
+    {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) : K :=
   (presentationEvaluation
       𝒞η.1 𝒞η.2
-      SpecialKirbyFoundation.presentationScope
       SpecialKirbyFoundation.AuxiliaryH₂).markedValue
     presentation.markedPresentation
 
@@ -203,11 +213,10 @@ manifold pair.
 -/
 noncomputable def TwistedYetter
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    (Xα : HomologicalFourManifold) : K :=
+    (Xα : HomologicalFourManifold.{uX}) : K :=
   (SpecialKirbyFoundation.topologyBoundary.constructInvariant
       (presentationEvaluation
         𝒞η.1 𝒞η.2
-        SpecialKirbyFoundation.presentationScope
         SpecialKirbyFoundation.AuxiliaryH₂)
       (evalC_local_move_invariant 𝒞η.1 𝒞η.2)).EvalC
     Xα.1 Xα.2
@@ -218,7 +227,7 @@ special Kirby presentation.
 -/
 theorem TwistedYetter_on_specialKirbyPresentation
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    {Xα : HomologicalFourManifold}
+    {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
     TwistedYetter 𝒞η Xα =
       specialKirbyEvaluation 𝒞η presentation := by
@@ -228,12 +237,10 @@ theorem TwistedYetter_on_specialKirbyPresentation
         (SpecialKirbyFoundation.topologyBoundary.admissibleFormula
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.presentationScope
             SpecialKirbyFoundation.AuxiliaryH₂))
         (SpecialKirbyFoundation.topologyBoundary.admissibleFormula_movieInvariant
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.presentationScope
             SpecialKirbyFoundation.AuxiliaryH₂)
           (evalC_local_move_invariant 𝒞η.1 𝒞η.2))
         Xα.1 Xα.2 presentation
@@ -241,7 +248,7 @@ theorem TwistedYetter_on_specialKirbyPresentation
 /-- Diffeomorphism invariance with the displayed class transported on `H₂`. -/
 theorem TwistedYetter_diffeomorphism_invariant
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedOrientedSmoothFourManifold.{uX}}
     (f : orientedDiffeomorphism.Hom X Y)
     (α : H₂ X) :
     TwistedYetter 𝒞η ⟨X, α⟩ =
@@ -250,7 +257,6 @@ theorem TwistedYetter_diffeomorphism_invariant
     (SpecialKirbyFoundation.topologyBoundary.constructInvariant
         (presentationEvaluation
           𝒞η.1 𝒞η.2
-          SpecialKirbyFoundation.presentationScope
           SpecialKirbyFoundation.AuxiliaryH₂)
         (evalC_local_move_invariant 𝒞η.1 𝒞η.2))
       |>.diffeomorphismInvariant f α
@@ -267,10 +273,10 @@ instance.  Merely assuming the class does not manufacture executable code.
 class Computable
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S)) where
   compute :
-    {Xα : HomologicalFourManifold} →
+    {Xα : HomologicalFourManifold.{uX}} →
       SpecialKirbyPresentation Xα → K
   correct :
-    {Xα : HomologicalFourManifold} →
+    {Xα : HomologicalFourManifold.{uX}} →
       (presentation : SpecialKirbyPresentation Xα) →
         TwistedYetter 𝒞η Xα = compute presentation
 
@@ -278,7 +284,7 @@ class Computable
 def compute
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
     [implementation : Computable 𝒞η]
-    {Xα : HomologicalFourManifold}
+    {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) : K :=
   implementation.compute presentation
 
@@ -291,7 +297,7 @@ requires supplying the proof together with the executable function.
 theorem compute_correct
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
     [implementation : Computable 𝒞η]
-    {Xα : HomologicalFourManifold}
+    {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
     TwistedYetter 𝒞η Xα =
       compute 𝒞η presentation := by

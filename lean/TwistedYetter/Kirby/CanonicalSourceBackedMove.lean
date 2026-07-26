@@ -24,13 +24,12 @@ Enrich a category-neutral topology move by the source-backed handle-chain
 transport.
 -/
 noncomputable def enrichedMove
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {source target : SpecialKirbyPresentation manifold H2}
+    {source target : SpecialKirbyPresentation H2}
     (move : TopologicalTableTwoMove source target) :
     TableTwoMove source target :=
   SourceBackedKirbyCompleteness.enrichMove
-    (sourceBackedGeometricH2Compiler manifold H2).localCompiler
+    (sourceBackedGeometricH2Compiler H2).localCompiler
     move
 
 end TwistedYetter.Kirby.CanonicalSourceBackedMove

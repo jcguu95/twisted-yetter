@@ -75,9 +75,8 @@ linear combinations of two-handles.  No selected-handle or zero-on-all-other-
 handles statement is included.
 -/
 structure CycleBasis
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2) where
+    (presentation : CanonicalPresentation H2) where
   rank : Nat
   coordinates :
     presentation.topology.handleChain.SecondHomology ≃+
@@ -96,18 +95,16 @@ namespace CycleBasis
 
 /-- Integral linear combination of the chosen cycle lifts. -/
 noncomputable def cycleLinearMap
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation) :
     (Fin basis.rank → ℤ) →ₗ[ℤ] presentation.DegreeTwoCycle :=
   Fintype.linearCombination ℤ basis.basisCycle
 
 /-- Applying the cycle linear map is the expected finite sum. -/
 theorem cycleLinearMap_apply
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (coefficients : Fin basis.rank → ℤ) :
     basis.cycleLinearMap coefficients =
@@ -127,9 +124,8 @@ The homology coordinates of an arbitrary integral combination of the lifted
 basis cycles are exactly its coefficients.
 -/
 theorem cycleLinearMap_homology_coordinates
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (coefficients : Fin basis.rank → ℤ)
     (coordinate : Fin basis.rank) :
@@ -148,9 +144,8 @@ class of a lifted integral combination recovers the complete coefficient
 vector.
 -/
 theorem cycleLinearMap_homology_coordinates_eq
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (coefficients : Fin basis.rank → ℤ) :
     basis.coordinates
@@ -169,9 +164,8 @@ fact that epis in `ModuleCat` are surjective.  It does not choose a handle
 normal form.
 -/
 noncomputable def liftedBasisCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (rank : Nat)
     (coordinates :
       presentation.topology.handleChain.SecondHomology ≃+
@@ -186,9 +180,8 @@ noncomputable def liftedBasisCycle
 
 /-- The chosen lift represents the requested integral basis class. -/
 theorem liftedBasisCycle_class
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (rank : Nat)
     (coordinates :
       presentation.topology.handleChain.SecondHomology ≃+
@@ -211,9 +204,8 @@ The construction is noncomputable because it chooses preimages under the
 homology quotient.  The resulting proof object records the chosen cycles.
 -/
 noncomputable def ofFreeCoordinates
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    (presentation : CanonicalPresentation manifold H2)
+    (presentation : CanonicalPresentation H2)
     (rank : Nat)
     (coordinates :
       presentation.topology.handleChain.SecondHomology ≃+
@@ -232,9 +224,8 @@ The marked degree-two cycle obtained by expanding `alpha` in the chosen
 integral homology basis.
 -/
 noncomputable def markedCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     presentation.DegreeTwoCycle :=
@@ -242,9 +233,8 @@ noncomputable def markedCycle
 
 /-- The integral marked cycle represents exactly the public `H₂` class. -/
 theorem markedCycle_class
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     presentation.topology.handleChain.complex.homologyπ 2
@@ -264,9 +254,8 @@ is a change of coordinates inside the same lifted cycle submodule, not a
 change by a degree-three boundary.
 -/
 noncomputable def rebase
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (change :
       (Fin basis.rank → ℤ) ≃ₗ[ℤ] (Fin basis.rank → ℤ)) :
@@ -296,9 +285,8 @@ An arbitrary unimodular integral rebasing leaves the actual marked cycle
 unchanged, not merely homologous.
 -/
 theorem rebase_markedCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (change :
       (Fin basis.rank → ℤ) ≃ₗ[ℤ] (Fin basis.rank → ℤ))
@@ -339,9 +327,8 @@ basis.  This conversion does not assert that every integral cycle basis is
 handle-supported.
 -/
 def ofHandleSupportedNormalForm
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (normalForm : H2BasisRealization presentation) :
     CycleBasis presentation where
   rank := normalForm.rank
@@ -352,9 +339,8 @@ def ofHandleSupportedNormalForm
 
 /-- The conversion preserves the marked cycle definition literally. -/
 theorem ofHandleSupportedNormalForm_markedCycle
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (normalForm : H2BasisRealization presentation)
     (alpha : presentation.topology.handleChain.SecondHomology) :
     (ofHandleSupportedNormalForm normalForm).markedCycle alpha =
@@ -371,9 +357,8 @@ be safe, but it intentionally does not cover bases whose lifts differ by an
 uncontrolled degree-three boundary.
 -/
 structure StrictComparison
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (left right : CycleBasis presentation) where
   marked_cycle_eq :
     (alpha : presentation.topology.handleChain.SecondHomology) →
@@ -381,9 +366,8 @@ structure StrictComparison
 
 /-- Every integral rebasing supplies a strict cycle-basis comparison. -/
 noncomputable def rebaseStrictComparison
-    {manifold : ClosedConnectedSmoothOrientedFourManifoldInput}
     {H2 : Type uH} [AddCommGroup H2]
-    {presentation : CanonicalPresentation manifold H2}
+    {presentation : CanonicalPresentation H2}
     (basis : CycleBasis presentation)
     (change :
       (Fin basis.rank → ℤ) ≃ₗ[ℤ] (Fin basis.rank → ℤ)) :

@@ -10,9 +10,9 @@ the stored finite biproduct decomposition and proves the algebraic fact needed
 by homological twisting: every integral power of a monoidal natural
 automorphism of the identity is invisible on either side of the projector.
 
-Unlike the earlier isolated Hopf-pair calculation, `X` is arbitrary.  It may
-therefore stand for a parenthesized tensor product of all strands puncturing a
-dotted-handle disk.  The result below is the category-theoretic core of the
+Unlike the closed Hopf-pair specialization, `X` is arbitrary.  It may
+therefore stand for a parenthesized tensor product of all strands puncturing
+a dotted-handle disk.  The result below is the category-theoretic core of the
 general dual `d3` boundary movie.
 
 This module does not identify a raw serialized dotted neighborhood with this
