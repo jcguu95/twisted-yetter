@@ -1,5 +1,5 @@
 import TwistedYetter.Kirby.EGNOModularFourManifoldInvariant
-import TwistedYetter.Kirby.LiteratureBackedCanonicalGraphicalInput
+import TwistedYetter.Kirby.CanonicalCycleMoveGeometry
 import TwistedYetter.Kirby.PremodularOneTwoCutCancellation
 import TwistedYetter.Kirby.RoleAwareAddedOrdinaryTransport
 
