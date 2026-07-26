@@ -85,7 +85,8 @@ theorem elementaryMove_invariant
       roleAwareEvalH2 𝒞 η target
         (ElementaryMove.transport move alpha) := by
   cases move with
-  | framedIsotopy metadata countsSound geometry sourceGeometry targetGeometry =>
+  | framedIsotopy metadata countsSound geometry componentChangeSound
+      sourceGeometry targetGeometry =>
       let topologyMove : TopologicalTableTwoMove
           source.canonicalPresentation.topology
           target.canonicalPresentation.topology :=
@@ -107,7 +108,10 @@ theorem elementaryMove_invariant
               target.simultaneousGeometry targetCycle := by
               simpa [sourceGeometry, targetGeometry, topologyMove, transport,
                 sourceCycle, targetCycle] using
-                geometry.roleAwareCycleEval_eq countsSound 𝒞 η sourceCycle
+                geometry.roleAwareCycleEval_eq transport
+                  (framedIsotopyExponentTransport metadata countsSound
+                    geometry componentChangeSound)
+                  countsSound 𝒞 η sourceCycle
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
@@ -228,7 +232,7 @@ theorem elementaryMove_invariant
                 (data.topology.roleAwareCycleEval_birth countsSound
                   𝒞 η sourceCycle targetCycle
                   (data.exponentTransport sourceCycle)
-                  (data.addedExponentZero sourceCycle)).symm
+                  (data.exponentTransport_addedExponent_zero sourceCycle)).symm
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
@@ -263,7 +267,7 @@ theorem elementaryMove_invariant
                 data.reverseBirth.roleAwareCycleEval_death countsSound
                   𝒞 η targetCycle returnedSourceCycle
                   (data.exponentTransport targetCycle)
-                  (data.addedExponentZero targetCycle)
+                  (data.exponentTransport_addedExponent_zero targetCycle)
         _ = _ := by
               rfl
   | twoThreeBirth metadata countsSound data =>
@@ -291,7 +295,7 @@ theorem elementaryMove_invariant
                 (data.topology.roleAwareCycleEval_birth countsSound
                   𝒞 η sourceCycle targetCycle
                   (data.exponentTransport sourceCycle)
-                  (data.addedExponentZero sourceCycle)).symm
+                  (data.exponentTransport_addedExponent_zero sourceCycle)).symm
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
@@ -326,7 +330,7 @@ theorem elementaryMove_invariant
                 data.reverseBirth.roleAwareCycleEval_death countsSound
                   𝒞 η targetCycle returnedSourceCycle
                   (data.exponentTransport targetCycle)
-                  (data.addedExponentZero targetCycle)
+                  (data.exponentTransport_addedExponent_zero targetCycle)
         _ = _ := by
               rfl
 

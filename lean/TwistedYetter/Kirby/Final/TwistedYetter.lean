@@ -31,6 +31,7 @@ open TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget
 open TwistedYetter.Kirby.PremodularRoleAwareFourManifoldInvariant
 open TwistedYetter.Kirby.RoleAwareSpecialKirbyPresentation
 open TwistedYetter.Kirby.RoleAwareTableTwoMove
+open TwistedYetter.Kirby.SourceBackedKirbyCompleteness
 
 universe uK uC vC uX
 
@@ -103,12 +104,38 @@ namespace SpecialKirbyHandleTheory
 /-- Integral auxiliary coordinates used by the canonical presentation type. -/
 abbrev AuxiliaryH₂ := ℤ
 
+namespace Axioms
+
 /--
-T4: each standard Table 2 move has category-neutral role-aware local
-geometry.  It contains no category, character, scalar, or evaluator equality.
+T4: every genuine standard Table 2 move admits a common-exterior
+factorization into its canonical source and target local pieces.
+
+The witness type is category-neutral and contains no character, scalar, or
+evaluator equality.
 -/
-axiom localGeometry :
-  LocalGeometryRealization AuxiliaryH₂
+axiom standardMoveLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (move :
+      TopologicalTableTwoMove
+        source.canonicalPresentation.topology
+        target.canonicalPresentation.topology) :
+    Nonempty (StandardMoveLocalFactorization move)
+
+end Axioms
+
+/--
+Compile the imported local factorization by an exhaustive eight-event
+constructor dispatch.
+-/
+noncomputable def localGeometry :
+    LocalGeometryRealization AuxiliaryH₂ where
+  realize := fun move =>
+    (Classical.choice
+      (Axioms.standardMoveLocalFactorization move)).compile
+  forget_realize := fun move =>
+    StandardMoveLocalFactorization.forget_compile
+      (Classical.choice
+        (Axioms.standardMoveLocalFactorization move))
 
 /-- The role-aware handle-presentation theory used by the formal evaluator. -/
 noncomputable def handles : HandlePresentationTheory.{1, 0, 1} :=

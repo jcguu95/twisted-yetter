@@ -14,6 +14,8 @@ Kirby-calculus development.
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.realization
 #print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.standardMoveLocalFactorization
+#print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.localGeometry
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.elementaryMoveSoundness

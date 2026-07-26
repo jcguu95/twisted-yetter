@@ -32,22 +32,12 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 /-- Category-neutral source-bound geometry of one framed isotopy. -/
 structure Geometry
     {H2 : Type uH} [AddCommGroup H2]
-    (source target : CanonicalPresentation H2)
-    (transport :
-      KirbyCompleteness.MarkedH2Transport
-        source.topology target.topology) where
+    (source target : CanonicalPresentation H2) where
   sourceGeometry : SimultaneousDottedCutGeometry.Geometry source
   targetGeometry : SimultaneousDottedCutGeometry.Geometry target
   componentChange :
     SameComponentIndexChange
       source.topology.formal target.topology.formal
-  exponentTransport :
-    (sourceCycle : source.DegreeTwoCycle) →
-      SameComponentCycleExponentTransport source target componentChange
-        sourceCycle
-        ((CycleTransport.ofMarkedH2Transport source target
-          transport)
-          |>.targetCycle sourceCycle)
   cut_isotopy :
     RoleAwareDiagram.GeneratedIsotopy
       sourceGeometry.cutDiagram targetGeometry.cutDiagram
@@ -58,10 +48,16 @@ namespace Geometry
 theorem roleAwareCycleEval_eq
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
-    {transport :
+    (transport :
       KirbyCompleteness.MarkedH2Transport
-        source.topology target.topology}
-    (geometry : Geometry source target transport)
+        source.topology target.topology)
+    (geometry : Geometry source target)
+    (exponentTransport :
+      (sourceCycle : source.DegreeTwoCycle) →
+        SameComponentCycleExponentTransport source target
+          geometry.componentChange sourceCycle
+          ((CycleTransport.ofMarkedH2Transport source target transport)
+            |>.targetCycle sourceCycle))
     (countsSound : source.topology.counts = target.topology.counts)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
@@ -75,7 +71,7 @@ theorem roleAwareCycleEval_eq
   apply RoleAwareSameComponentTransport.roleAwareCycleEval_transport
     𝒞 η geometry.sourceGeometry geometry.targetGeometry countsSound
     geometry.componentChange
-    (geometry.exponentTransport sourceCycle)
+    (exponentTransport sourceCycle)
   intro sourceLabeling
   let targetLabeling :=
     OrdinaryTransport.ordinaryLabelingEquiv
