@@ -5,7 +5,7 @@ import TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget
 # Internal implementation of the modular presentation evaluation
 
 Status: historical implementation route.  This is not the public theorem
-entry point.  See `Kirby.Final.ModularClosedFourManifoldInvariant`.
+entry point.  See `Kirby.Final.TwistedYetter`.
 
 This module removes the shared `H2` shell from the public marking type.
 

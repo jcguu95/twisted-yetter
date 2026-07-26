@@ -7,7 +7,7 @@ import TwistedYetter.Kirby.SourceBackedHandleChainNaturality
 # Modular category data to a marked four-manifold invariant
 
 Status: historical ten-step assembly.  This is not the public theorem entry
-point.  See `Kirby.Final.ModularClosedFourManifoldInvariant`.
+point.  See `Kirby.Final.TwistedYetter`.
 
 This is the terminal assembly for the ten-step EGNO route.  The formal Kirby
 colour remains a finite sum of complete globally labelled diagrams.  Local
