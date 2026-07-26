@@ -211,14 +211,15 @@ inductive LocalCycleCalculation
           source.topology target.topology)
       (countsSound : source.topology.counts = target.topology.counts)
       (transport : MarkedH2Transport source.topology target.topology)
-      (geometry :
-        GeneralizedCycleSlideGeometry 𝒞.premodular automorphism
-          source target transport
-          (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-          metadata.moveId
-          metadata.sourcePresentationHash metadata.targetPresentationHash
-          (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-          (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)) :
+      (evaluationSound :
+        (sourceCycle : source.DegreeTwoCycle) →
+          LinearDiagram.eval
+              (source.cycleLinearDiagram
+                𝒞.premodular automorphism sourceCycle) =
+            LinearDiagram.eval
+              (target.cycleLinearDiagram 𝒞.premodular automorphism
+                ((CycleTransport.ofMarkedH2Transport
+                  source target transport).targetCycle sourceCycle))) :
       LocalCycleCalculation 𝒞 automorphism
         (.twoOverTwo metadata countsSound transport)
   | oneTwoBirth
@@ -430,7 +431,7 @@ theorem soundOfEndpoints
                   |>.secondHomologyAddEquiv alpha) targetCycle
                 (transportedChosenCycleClass
                   transport cycleTransport alpha)
-  | twoOverTwo metadata counts transport geometry =>
+  | twoOverTwo metadata counts transport evaluationSound =>
       let cycleTransport :=
         CycleTransport.ofMarkedH2Transport source target transport
       let sourceCycle := source.chosenCycle alpha
@@ -445,8 +446,7 @@ theorem soundOfEndpoints
         _ = target.cycleEvalC 𝒞 automorphism targetCycle := by
               exact cycleEvalC_eq_of_counts_and_linear_eval
                 𝒞 automorphism sourceCycle targetCycle counts
-                (geometry.cycleLinearDiagram_eval_transport
-                  𝒞.premodular automorphism sourceCycle)
+                (evaluationSound sourceCycle)
         _ = target.EvalC 𝒞 automorphism
               (transport.chainEquivalence
                 |>.secondHomologyAddEquiv alpha) := by

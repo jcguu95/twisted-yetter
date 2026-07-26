@@ -83,13 +83,13 @@ Only the tensor-unit simple survives.  This is the scalar shadow of Tham's
 `k = 3` handle map, not a replacement for the full skein map.
 -/
 noncomputable def vacuumProjectedRegularWeight
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (exponent : ℤ) : K :=
   ∑ simple,
-    if simple = 𝒞.premodular.toFusionCategoryData.unitIndex then
-      𝒞.premodular.quantumDimension simple *
-        𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+    if simple = 𝒞.toFusionCategoryData.unitIndex then
+      𝒞.quantumDimension simple *
+        𝒞.toFusionCategoryData.automorphismScalarPower
           automorphism simple exponent
     else
       0
@@ -99,21 +99,21 @@ The vacuum-projected regular colour is independent of the homological
 coefficient and has unit weight.
 -/
 theorem vacuumProjectedRegularWeight_eq_one
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (exponent : ℤ) :
     vacuumProjectedRegularWeight 𝒞 automorphism exponent = 1 := by
   classical
   simp [vacuumProjectedRegularWeight,
-    egno_quantumDimension_unit 𝒞,
+    𝒞.quantumDimension_unit,
     automorphismScalarPower_unitIndex
-      𝒞.premodular.toFusionCategoryData automorphism exponent]
+      𝒞.toFusionCategoryData automorphism exponent]
 
 /--
 Unit-sector neutrality for a dual cancelling 2--3 pair.
 -/
 theorem cancelingTwoThreeBoundaryCoefficient_is_vacuum_neutral
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (left right : ℤ) :
     vacuumProjectedRegularWeight 𝒞 automorphism left =
@@ -126,7 +126,7 @@ The same theorem in primal language: the dotted component of a cancelling
 1--2 pair is the Tham `k = 3` vacuum projector.
 -/
 theorem primalOneTwoBoundaryCoefficient_is_vacuum_neutral
-    (𝒞 : ModularCategory (K := K) (C := C) (S := S))
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (left right : ℤ) :
     vacuumProjectedRegularWeight 𝒞 automorphism left =

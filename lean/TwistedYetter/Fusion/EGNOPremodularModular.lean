@@ -49,6 +49,13 @@ abbrev PremodularCategory :=
   RibbonFusionCategoryData (K := K) (C := C) (S := S)
 
 /--
+Paper-facing name emphasizing that the premodular object is already a fusion
+category.  The shorter historical name remains definitionally equal.
+-/
+abbrev PremodularFusionCategory :=
+  PremodularCategory (K := K) (C := C) (S := S)
+
+/--
 The equivalent EGNO presentation as a braided fusion category equipped with a
 spherical structure.
 -/
@@ -355,13 +362,23 @@ theorem PremodularCategory.quantumDimension_unit
   exact 𝒞.toFusionCategoryData.closedScalar_identity
 
 /--
-Characteristic-zero modular categories have nonzero global dimension.
+Characteristic-zero spherical fusion categories have nonzero global
+dimension.
 
-This is EGNO Proposition 8.14.2 and Remark 8.14.3, retained as a standard
-domain theorem input until their semisimple proof is expanded locally.
+This is the premodular-strength form of EGNO Proposition 8.14.2 and
+Remark 8.14.3.  It is an accepted category-theory theorem input, not a
+graphical move or an evaluator equality.
 -/
-axiom ModularCategory.globalDimension_ne_zero
+axiom PremodularCategory.globalDimension_ne_zero
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    𝒞.globalDimension ≠ 0
+
+/--
+The modular specialization is a theorem, not a second independent axiom.
+-/
+theorem ModularCategory.globalDimension_ne_zero
     (𝒞 : ModularCategory (K := K) (C := C) (S := S)) :
-    𝒞.premodular.globalDimension ≠ 0
+    𝒞.premodular.globalDimension ≠ 0 :=
+  𝒞.premodular.globalDimension_ne_zero
 
 end TwistedYetter.Fusion.EGNO

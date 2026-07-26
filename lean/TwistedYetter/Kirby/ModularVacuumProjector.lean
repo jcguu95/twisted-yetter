@@ -47,6 +47,86 @@ noncomputable def unitSummandProjector
     data.projection X ⟨data.unitIndex, i⟩ ≫
       data.inclusion X ⟨data.unitIndex, i⟩
 
+/-- There are no nonzero morphisms between distinct listed simples. -/
+theorem hom_simple_eq_zero_of_ne
+    (data : FusionCategoryData (K := K) (C := C) (S := S))
+    {s t : S}
+    (different : s ≠ t)
+    (f : data.simple s ⟶ data.simple t) :
+    f = 0 := by
+  letI : FiniteDimensional K (data.simple s ⟶ data.simple t) :=
+    data.hom_finite _ _
+  have rankZero :
+      Module.finrank K (data.simple s ⟶ data.simple t) = 0 := by
+    rw [data.simpleHom_finrank]
+    simp [different]
+  letI : Subsingleton (data.simple s ⟶ data.simple t) :=
+    (Module.finrank_eq_zero_iff_of_free K
+      (data.simple s ⟶ data.simple t)).mp rankZero
+  exact Subsingleton.elim _ _
+
+/--
+On a listed simple object, the tensor-unit projector is the expected
+Kronecker projector.
+
+This is derived from the stored biproduct decomposition and Schur's lemma;
+it is not an additional semisimplicity axiom.
+-/
+theorem unitSummandProjector_simple
+    (data : FusionCategoryData (K := K) (C := C) (S := S))
+    (s : S) :
+    unitSummandProjector data (data.simple s) =
+      if s = data.unitIndex then
+        𝟙 (data.simple s)
+      else
+        0 := by
+  classical
+  by_cases unitCase : s = data.unitIndex
+  · subst s
+    have nonunitTerms :
+        ∑ p : data.SummandIndex (data.simple data.unitIndex),
+            data.projection (data.simple data.unitIndex) p ≫
+              data.inclusion (data.simple data.unitIndex) p =
+          ∑ i : Fin
+              (data.multiplicity (data.simple data.unitIndex) data.unitIndex),
+            data.projection (data.simple data.unitIndex)
+                ⟨data.unitIndex, i⟩ ≫
+              data.inclusion (data.simple data.unitIndex)
+                ⟨data.unitIndex, i⟩ := by
+      rw [Fintype.sum_sigma]
+      symm
+      calc
+        _ = ∑ t : S, if t = data.unitIndex then
+              ∑ i : Fin
+                  (data.multiplicity
+                    (data.simple data.unitIndex) t),
+                data.projection (data.simple data.unitIndex) ⟨t, i⟩ ≫
+                  data.inclusion (data.simple data.unitIndex) ⟨t, i⟩
+            else 0 := by
+          simp
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro t _
+          by_cases same : t = data.unitIndex
+          · subst t
+            simp
+          · simp only [same, ↓reduceIte]
+            symm
+            apply Finset.sum_eq_zero
+            intro i _
+            rw [hom_simple_eq_zero_of_ne data (fun equality => same equality.symm)
+              (data.projection (data.simple data.unitIndex) ⟨t, i⟩)]
+            simp
+    simp only [unitSummandProjector]
+    rw [← nonunitTerms, data.sum_projection_inclusion]
+    simp
+  · simp only [unitSummandProjector, if_neg unitCase]
+    apply Finset.sum_eq_zero
+    intro i _
+    rw [hom_simple_eq_zero_of_ne data unitCase
+      (data.projection (data.simple s) ⟨data.unitIndex, i⟩)]
+    simp
+
 /-- The forward component of a tensor automorphism is identity on the unit. -/
 theorem automorphism_hom_unit_simple
     (data : FusionCategoryData (K := K) (C := C) (S := S))

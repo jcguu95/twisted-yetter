@@ -13,6 +13,8 @@ Kirby-calculus development.
 #print axioms TwistedYetter.Kirby.Final.H₂
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyFoundation.certifiedPresentationTheory
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyFoundation.localGeometry
 #print axioms TwistedYetter.Kirby.Final.SpecialKirbyFoundation.realization
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyFoundation.elementaryMoveSoundness
@@ -26,5 +28,7 @@ Kirby-calculus development.
   TwistedYetter.Kirby.Final.TwistedYetter_on_specialKirbyPresentation
 #print axioms
   TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant
+#print axioms
+  TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant
 #print axioms TwistedYetter.Kirby.Final.TwistedYetter.compute
 #print axioms TwistedYetter.Kirby.Final.TwistedYetter.compute_correct

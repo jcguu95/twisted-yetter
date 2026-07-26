@@ -158,6 +158,48 @@ def framedIsotopySameChange
   framedIsotopySameChangeOfEdit
     metadata.recipe.handleEdit metadata.recipe.componentIndexChange
 
+/-- Extract the unchanged-component correspondence from a 1-over-1 slide. -/
+def oneOverOneSameChangeOfEdit
+    {source target : FormalPresentation}
+    (edit : HandleEdit .oneOverOne)
+    (change : ComponentIndexChange source target edit) :
+    SameComponentIndexChange source target :=
+  match edit, change with
+  | .oneOverOne _ _ _ _,
+      .oneOverOne _ _ _ _ same _ _ _ =>
+      same
+
+/-- Unchanged-component correspondence retained by a 1-over-1 recipe. -/
+def oneOverOneSameChange
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation H2}
+    (metadata :
+      TableTwoMoveMetadata .oneOverOne source target) :
+    SameComponentIndexChange source.formal target.formal :=
+  oneOverOneSameChangeOfEdit
+    metadata.recipe.handleEdit metadata.recipe.componentIndexChange
+
+/-- Extract the unchanged-component correspondence from a 2-over-1 slide. -/
+def twoOverOneSameChangeOfEdit
+    {source target : FormalPresentation}
+    (edit : HandleEdit .twoOverOne)
+    (change : ComponentIndexChange source target edit) :
+    SameComponentIndexChange source target :=
+  match edit, change with
+  | .twoOverOne _ _ _ _,
+      .twoOverOne _ _ _ _ same _ _ _ =>
+      same
+
+/-- Unchanged-component correspondence retained by a 2-over-1 recipe. -/
+def twoOverOneSameChange
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : SpecialKirbyPresentation H2}
+    (metadata :
+      TableTwoMoveMetadata .twoOverOne source target) :
+    SameComponentIndexChange source.formal target.formal :=
+  twoOverOneSameChangeOfEdit
+    metadata.recipe.handleEdit metadata.recipe.componentIndexChange
+
 /-- Extract the unchanged-component correspondence from a 2-over-2 slide. -/
 def twoOverTwoSameChangeOfEdit
     {source target : FormalPresentation}
@@ -315,6 +357,24 @@ structure StandardHandleChainNaturality
         (framedIsotopySameChange metadata)
         (compile
           (.framedIsotopy metadata countsSound)).chainEquivalence
+  oneOverOneCoordinates :
+    {source target : SpecialKirbyPresentation H2} →
+    (metadata :
+      TableTwoMoveMetadata .oneOverOne source target) →
+    (countsSound : source.counts = target.counts) →
+      ForwardSameDegreeTwoNaturality source target
+        (oneOverOneSameChange metadata)
+        (compile
+          (.oneOverOne metadata countsSound)).chainEquivalence
+  twoOverOneCoordinates :
+    {source target : SpecialKirbyPresentation H2} →
+    (metadata :
+      TableTwoMoveMetadata .twoOverOne source target) →
+    (countsSound : source.counts = target.counts) →
+      ForwardSameDegreeTwoNaturality source target
+        (twoOverOneSameChange metadata)
+        (compile
+          (.twoOverOne metadata countsSound)).chainEquivalence
   twoOverTwoCoordinates :
     {source target : SpecialKirbyPresentation H2} →
     (metadata :

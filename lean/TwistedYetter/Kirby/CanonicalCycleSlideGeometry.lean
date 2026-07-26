@@ -407,6 +407,28 @@ def sourceLabeling
     components.source_indices_distinct
     stationaryLabel movingLabel remaining
 
+@[simp] theorem sourceLabeling_moving
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    sourceLabeling components remaining movingLabel stationaryLabel
+        components.slidingSourceIndex =
+      movingLabel := by
+  exact combineAtTwo_second
+    components.stationarySourceIndex
+    components.slidingSourceIndex
+    components.source_indices_distinct
+    stationaryLabel movingLabel remaining
+
 theorem sourceLabeling_eq_away_from_stationary
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -430,6 +452,30 @@ theorem sourceLabeling_eq_away_from_stationary
     components.source_indices_distinct
     stationaryLabel stationaryLabel' movingLabel remaining
     index_ne_stationary
+
+theorem sourceLabeling_eq_away_from_moving
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (remaining : Block (S := S) components)
+    (movingLabel movingLabel' stationaryLabel : S)
+    {index : ComponentIndex source.topology.formal}
+    (index_ne_moving : index ≠ components.slidingSourceIndex) :
+    sourceLabeling components remaining movingLabel stationaryLabel index =
+      sourceLabeling components remaining movingLabel' stationaryLabel index := by
+  exact combineAtTwo_eq_of_ne_second
+    components.stationarySourceIndex
+    components.slidingSourceIndex
+    components.source_indices_distinct
+    stationaryLabel movingLabel movingLabel' remaining
+    index_ne_moving
 
 /-- Transport one reassembled source labeling to the target presentation. -/
 def targetLabeling
@@ -468,6 +514,25 @@ def targetLabeling
   simp [targetLabeling, SameComponentIndexChange.labelingEquiv,
     ResolvedSlideComponentPair.stationaryTargetIndex]
 
+@[simp] theorem targetLabeling_moving
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal)
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    targetLabeling same components remaining movingLabel stationaryLabel
+        components.slidingTargetIndex =
+      movingLabel := by
+  simp [targetLabeling, SameComponentIndexChange.labelingEquiv,
+    ResolvedSlideComponentPair.slidingTargetIndex]
+
 theorem targetLabeling_eq_away_from_stationary
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -491,6 +556,31 @@ theorem targetLabeling_eq_away_from_stationary
   apply index_ne_stationary
   apply same.targetToSource.injective
   simpa [ResolvedSlideComponentPair.stationaryTargetIndex] using
+    source_index_eq
+
+theorem targetLabeling_eq_away_from_moving
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal)
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (remaining : Block (S := S) components)
+    (movingLabel movingLabel' stationaryLabel : S)
+    {index : ComponentIndex target.topology.formal}
+    (index_ne_moving : index ≠ components.slidingTargetIndex) :
+    targetLabeling same components remaining movingLabel stationaryLabel index =
+      targetLabeling same components remaining movingLabel'
+        stationaryLabel index := by
+  apply sourceLabeling_eq_away_from_moving
+  intro source_index_eq
+  apply index_ne_moving
+  apply same.targetToSource.injective
+  simpa [ResolvedSlideComponentPair.slidingTargetIndex] using
     source_index_eq
 
 /-- Exact source coefficient in one visible two-label sector. -/
@@ -581,6 +671,105 @@ theorem sourceWeight_factor_stationary
     (sourceLabeling_eq_away_from_stationary
       components remaining movingLabel stationaryLabel
         𝒞.premodular.toFusionCategoryData.unitIndex index.property)
+
+/-- The moving component weight also factors from the source coefficient. -/
+theorem sourceWeight_factor_moving
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (automorphism : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    sourceWeight 𝒞 automorphism components sourceCycle remaining
+        movingLabel stationaryLabel =
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+          (componentAt source.topology.formal
+            components.slidingSourceIndex) movingLabel *
+        sourceWeight 𝒞 automorphism components sourceCycle remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex stationaryLabel := by
+  classical
+  unfold sourceWeight CanonicalPresentation.cycleGlobalWeight
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+        (source.topology.formal.raw.components.get index)
+        (sourceLabeling components remaining movingLabel stationaryLabel index))
+    components.slidingSourceIndex]
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+        (source.topology.formal.raw.components.get index)
+        (sourceLabeling components remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex
+          stationaryLabel index))
+    components.slidingSourceIndex]
+  rw [sourceLabeling_moving, sourceLabeling_moving]
+  have unitWeight :
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+          (source.topology.formal.raw.components.get
+            components.slidingSourceIndex)
+          𝒞.premodular.toFusionCategoryData.unitIndex = 1 := by
+    unfold CanonicalPresentation.cycleComponentWeight
+    rw [𝒞.premodular.quantumDimension_unit]
+    rw [ThamThreeHandleVacuum.automorphismScalarPower_unitIndex]
+    simp
+  rw [unitWeight]
+  simp only [one_mul, componentAt]
+  congr 1
+  apply Finset.prod_congr rfl
+  intro index _
+  exact congrArg
+    (fun label =>
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+        (source.topology.formal.raw.components.get index.1) label)
+    (sourceLabeling_eq_away_from_moving
+      components remaining movingLabel
+        𝒞.premodular.toFusionCategoryData.unitIndex
+        stationaryLabel index.property)
+
+/--
+Both selected handle weights factor, leaving the coefficient with both
+selected labels specialized to the tensor unit.
+-/
+theorem sourceWeight_factor_both
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (automorphism : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal}
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    sourceWeight 𝒞 automorphism components sourceCycle remaining
+        movingLabel stationaryLabel =
+      source.cycleComponentWeight 𝒞 automorphism sourceCycle
+          (componentAt source.topology.formal
+            components.slidingSourceIndex) movingLabel *
+        source.cycleComponentWeight 𝒞 automorphism sourceCycle
+          (componentAt source.topology.formal
+            components.stationarySourceIndex) stationaryLabel *
+        sourceWeight 𝒞 automorphism components sourceCycle remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex
+          𝒞.premodular.toFusionCategoryData.unitIndex := by
+  rw [sourceWeight_factor_moving]
+  rw [sourceWeight_factor_stationary]
+  simp only [mul_assoc]
 
 /-- Exact source closed diagram in one visible two-label sector. -/
 def sourceTerm
@@ -688,6 +877,103 @@ theorem targetWeight_factor_stationary
     (targetLabeling_eq_away_from_stationary
       same components remaining movingLabel stationaryLabel
         𝒞.premodular.toFusionCategoryData.unitIndex index.property)
+
+/-- The moving component weight factors from the target coefficient. -/
+theorem targetWeight_factor_moving
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (automorphism : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal)
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (targetCycle : target.DegreeTwoCycle)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    targetWeight 𝒞 automorphism same components targetCycle remaining
+        movingLabel stationaryLabel =
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+          (componentAt target.topology.formal
+            components.slidingTargetIndex) movingLabel *
+        targetWeight 𝒞 automorphism same components targetCycle remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex stationaryLabel := by
+  classical
+  unfold targetWeight CanonicalPresentation.cycleGlobalWeight
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+        (target.topology.formal.raw.components.get index)
+        (targetLabeling same components remaining
+          movingLabel stationaryLabel index))
+    components.slidingTargetIndex]
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+        (target.topology.formal.raw.components.get index)
+        (targetLabeling same components remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex
+          stationaryLabel index))
+    components.slidingTargetIndex]
+  rw [targetLabeling_moving, targetLabeling_moving]
+  have unitWeight :
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+          (target.topology.formal.raw.components.get
+            components.slidingTargetIndex)
+          𝒞.premodular.toFusionCategoryData.unitIndex = 1 := by
+    unfold CanonicalPresentation.cycleComponentWeight
+    rw [𝒞.premodular.quantumDimension_unit]
+    rw [ThamThreeHandleVacuum.automorphismScalarPower_unitIndex]
+    simp
+  rw [unitWeight]
+  simp only [one_mul, componentAt]
+  congr 1
+  apply Finset.prod_congr rfl
+  intro index _
+  exact congrArg
+    (fun label =>
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+        (target.topology.formal.raw.components.get index.1) label)
+    (targetLabeling_eq_away_from_moving
+      same components remaining movingLabel
+        𝒞.premodular.toFusionCategoryData.unitIndex
+        stationaryLabel index.property)
+
+/-- Both selected handle weights factor from the target coefficient. -/
+theorem targetWeight_factor_both
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (automorphism : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (same :
+      SameComponentIndexChange
+        source.topology.formal target.topology.formal)
+    {slidingComponentId stationaryComponentId : String}
+    (components :
+      ResolvedSlideComponentPair
+        source.topology.formal target.topology.formal same
+        slidingComponentId stationaryComponentId)
+    (targetCycle : target.DegreeTwoCycle)
+    (remaining : Block (S := S) components)
+    (movingLabel stationaryLabel : S) :
+    targetWeight 𝒞 automorphism same components targetCycle remaining
+        movingLabel stationaryLabel =
+      target.cycleComponentWeight 𝒞 automorphism targetCycle
+          (componentAt target.topology.formal
+            components.slidingTargetIndex) movingLabel *
+        target.cycleComponentWeight 𝒞 automorphism targetCycle
+          (componentAt target.topology.formal
+            components.stationaryTargetIndex) stationaryLabel *
+        targetWeight 𝒞 automorphism same components targetCycle remaining
+          𝒞.premodular.toFusionCategoryData.unitIndex
+          𝒞.premodular.toFusionCategoryData.unitIndex := by
+  rw [targetWeight_factor_moving]
+  rw [targetWeight_factor_stationary]
+  simp only [mul_assoc]
 
 /-- Exact target closed diagram in one visible two-label sector. -/
 def targetTerm

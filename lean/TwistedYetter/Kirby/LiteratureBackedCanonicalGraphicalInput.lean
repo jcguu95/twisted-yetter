@@ -3,6 +3,7 @@ import TwistedYetter.Kirby.CanonicalCancellationTraceBinding
 import TwistedYetter.Kirby.CanonicalComponentSupport
 import TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 import TwistedYetter.Kirby.CanonicalSourceBackedMove
+import TwistedYetter.Kirby.TwoOverTwoOrientationComplete
 
 /-!
 # Literature boundary for canonical graphical endpoint realization
@@ -189,15 +190,17 @@ inductive GraphicalMoveRealization
         TableTwoMoveMetadata .twoOverTwo
           source.topology target.topology)
       (countsSound : source.topology.counts = target.topology.counts)
-      (geometry :
-        GeneralizedCycleSlideGeometry 𝒞.premodular η source target
-          (enrichedMove
-            (.twoOverTwo metadata countsSound)).homologyTransport
-          (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-          metadata.moveId
-          metadata.sourcePresentationHash metadata.targetPresentationHash
-          (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-          (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)) :
+      (evaluationSound :
+        (sourceCycle : source.DegreeTwoCycle) →
+          LinearDiagram.eval
+              (source.cycleLinearDiagram
+                𝒞.premodular η sourceCycle) =
+            LinearDiagram.eval
+              (target.cycleLinearDiagram 𝒞.premodular η
+                ((CycleTransport.ofMarkedH2Transport source target
+                  (enrichedMove
+                    (.twoOverTwo metadata countsSound)).homologyTransport)
+                  |>.targetCycle sourceCycle))) :
       GraphicalMoveRealization 𝒞 η
         (.twoOverTwo metadata countsSound)
   | oneTwoBirth
@@ -278,11 +281,11 @@ noncomputable def toLocalCycleCalculation
         (enrichedMove
           (.twoOverOne metadata countsSound)).homologyTransport
         geometry
-  | twoOverTwo metadata countsSound geometry =>
+  | twoOverTwo metadata countsSound evaluationSound =>
       exact .twoOverTwo metadata countsSound
         (enrichedMove
           (.twoOverTwo metadata countsSound)).homologyTransport
-        geometry
+        evaluationSound
   | oneTwoBirth metadata countsSound geometry =>
       exact .oneTwoBirth metadata countsSound
         (enrichedMove (.oneTwoBirth metadata countsSound)).homologyTransport
@@ -589,8 +592,8 @@ noncomputable def standardOneOverOneCycleTermWindow
     oneOverOneResolvedComponentsOfEdit,
     id_eq
   ] using
-    (CanonicalSourceBoundSlideMovie.standardMovie
-      𝒞 η request sourceCycle requestRemaining).toTermWindow
+    (CanonicalSourceBoundSlideMovie.Legacy.standardOneOverOneMovie
+      𝒞 η metadata countsSound sourceCycle requestRemaining).toTermWindow
 
 /--
 Reassemble the exact 1-over-1 double-sum window from its labelwise coupon
@@ -836,8 +839,8 @@ noncomputable def standardTwoOverOneCycleTermWindow
     twoOverOneResolvedComponentsOfEdit,
     id_eq
   ] using
-    (CanonicalSourceBoundSlideMovie.standardMovie
-      𝒞 η request sourceCycle requestRemaining).toTermWindow
+    (CanonicalSourceBoundSlideMovie.Legacy.standardTwoOverOneMovie
+      𝒞 η metadata countsSound sourceCycle requestRemaining).toTermWindow
 
 /--
 Reassemble the exact 2-over-1 double-sum window from its labelwise coupon
@@ -1011,15 +1014,15 @@ def twoOverTwoResolvedComponents
   CanonicalSourceBoundSlideMovie.twoOverTwoComponents metadata
 
 /--
-The coupon-adapted local two-handle-over-two-handle window for one canonical
-block.
+The orientation-complete premodular band-movie theorem, transported to the
+exact `MarkedH2Transport` carried by the source-backed topological move.
 
-Both participating component labels remain visibly summed.  This input must
-identify each twisted endpoint with the corresponding ordinary Kirby-colour
-double sum through the restricted coupon grammar; all evaluation and
-denominator reasoning is derived elsewhere.
+Unlike the deleted term-window route, this theorem does not postulate four
+equalities between evaluator terms and auxiliary attach/detach graphs.  The
+positive and negative endpoint constructions are typed directly against the
+canonical evaluator terms.
 -/
-noncomputable def standardTwoOverTwoCycleTermWindow
+theorem standardTwoOverTwoCycleEvaluationSound
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -1028,185 +1031,21 @@ noncomputable def standardTwoOverTwoCycleTermWindow
       TableTwoMoveMetadata .twoOverTwo
         source.topology target.topology)
     (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      CanonicalSlideBlocks.Block (S := S)
-        (twoOverTwoResolvedComponents metadata)) :
-    TermwiseCouponAdaptedKirbyColourSlideWindow 𝒞.premodular η
-      .twoOverTwo
-      (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-      metadata.moveId
-      metadata.sourcePresentationHash metadata.targetPresentationHash
-      (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-      (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)
-      (CanonicalSlideBlocks.sourceWeight
-        𝒞.premodular η (twoOverTwoResolvedComponents metadata)
-        sourceCycle remaining)
-      (CanonicalSlideBlocks.targetWeight
-        𝒞.premodular η (twoOverTwoComponentChange metadata)
-        (twoOverTwoResolvedComponents metadata)
-        ((CycleTransport.ofMarkedH2Transport source target
-          (enrichedMove
-            (.twoOverTwo metadata countsSound)).homologyTransport)
-          |>.targetCycle sourceCycle)
-        remaining)
-      (CanonicalSlideBlocks.sourceTerm
-        𝒞.premodular (twoOverTwoResolvedComponents metadata) remaining)
-      (CanonicalSlideBlocks.targetTerm
-        𝒞.premodular (twoOverTwoComponentChange metadata)
-        (twoOverTwoResolvedComponents metadata) remaining) := by
-  let request :
-      CanonicalSourceBoundSlideMovie.Request source target :=
-    .twoOverTwo metadata countsSound
-  let requestRemaining :
-      request.Block (S := S) := by
-    simpa only [
-      request,
-      CanonicalSourceBoundSlideMovie.Request.Block,
-      CanonicalSourceBoundSlideMovie.Request.resolvedComponents,
-      twoOverTwoResolvedComponents,
-      twoOverTwoResolvedComponentsOfEdit,
-      id_eq
-    ] using remaining
+    (sourceCycle : source.DegreeTwoCycle) :
+    LinearDiagram.eval
+        (source.cycleLinearDiagram 𝒞.premodular η sourceCycle) =
+      LinearDiagram.eval
+        (target.cycleLinearDiagram 𝒞.premodular η
+          ((CycleTransport.ofMarkedH2Transport source target
+            (enrichedMove
+              (.twoOverTwo metadata countsSound)).homologyTransport)
+            |>.targetCycle sourceCycle)) := by
   simpa only [
-    request,
-    requestRemaining,
-    CanonicalSourceBoundSlideMovie.Request.slideKind,
-    CanonicalSourceBoundSlideMovie.Request.orientation,
-    CanonicalSourceBoundSlideMovie.Request.moveId,
-    CanonicalSourceBoundSlideMovie.Request.sourceHash,
-    CanonicalSourceBoundSlideMovie.Request.targetHash,
-    CanonicalSourceBoundSlideMovie.Request.slidingComponentId,
-    CanonicalSourceBoundSlideMovie.Request.stationaryComponentId,
-    CanonicalSourceBoundSlideMovie.Request.sameComponentChange,
-    CanonicalSourceBoundSlideMovie.Request.resolvedComponents,
     CanonicalSourceBoundSlideMovie.Request.targetCycle,
-    CanonicalSourceBoundSlideMovie.Request.topologicalMove,
-    twoOverTwoComponentChange,
-    twoOverTwoComponentChangeOfEdit,
-    twoOverTwoResolvedComponents,
-    twoOverTwoResolvedComponentsOfEdit,
-    id_eq
+    CanonicalSourceBoundSlideMovie.Request.topologicalMove
   ] using
-    (CanonicalSourceBoundSlideMovie.standardMovie
-      𝒞 η request sourceCycle requestRemaining).toTermWindow
-
-/--
-Reassemble the exact 2-over-2 double-sum window from its labelwise coupon
-movies.
--/
-noncomputable def standardTwoOverTwoCycleBlockWindow
-    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo
-        source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      CanonicalSlideBlocks.Block (S := S)
-        (twoOverTwoResolvedComponents metadata)) :
-    CouponAdaptedKirbyColourSlideWindow 𝒞.premodular η
-      .twoOverTwo
-      (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-      metadata.moveId
-      metadata.sourcePresentationHash metadata.targetPresentationHash
-      (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-      (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)
-      (CanonicalSlideBlocks.sourceBlock
-        𝒞.premodular η (twoOverTwoResolvedComponents metadata)
-        sourceCycle remaining)
-      (CanonicalSlideBlocks.targetBlock
-        𝒞.premodular η (twoOverTwoComponentChange metadata)
-        (twoOverTwoResolvedComponents metadata)
-        ((CycleTransport.ofMarkedH2Transport source target
-          (enrichedMove
-            (.twoOverTwo metadata countsSound)).homologyTransport)
-          |>.targetCycle sourceCycle)
-        remaining) := by
-  simpa only [
-    CanonicalSlideBlocks.sourceBlock,
-    CanonicalSlideBlocks.targetBlock
-  ] using
-    (standardTwoOverTwoCycleTermWindow
-      𝒞 η metadata countsSound sourceCycle remaining).toWindow
-
-/-- Package the complete generalized proof grammar from coupon-adapted windows. -/
-noncomputable def standardTwoOverTwoCycleBlockProof
-    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo
-        source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle) :
-    CanonicalGeneralizedSlideBlockProof
-      𝒞.premodular η source target
-      (twoOverTwoComponentChange metadata)
-      (twoOverTwoResolvedComponents metadata)
-      sourceCycle
-      ((CycleTransport.ofMarkedH2Transport source target
-        (enrichedMove
-          (.twoOverTwo metadata countsSound)).homologyTransport)
-        |>.targetCycle sourceCycle)
-      (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-      metadata.moveId
-      metadata.sourcePresentationHash metadata.targetPresentationHash where
-  slide remaining :=
-    standardTwoOverTwoCycleBlockWindow
-      𝒞 η metadata countsSound sourceCycle remaining
-
-/-- Reassemble the exact 2-over-2 whole-sum decomposition in the kernel. -/
-noncomputable def standardTwoOverTwoCycleBlockDecomposition
-    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo
-        source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle) :
-    GeneralizedSlideBlockDecomposition 𝒞.premodular η
-      (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-      metadata.moveId
-      metadata.sourcePresentationHash metadata.targetPresentationHash
-      (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-      (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit)
-      (source.cycleLinearDiagram 𝒞.premodular η sourceCycle)
-      (target.cycleLinearDiagram 𝒞.premodular η
-        ((CycleTransport.ofMarkedH2Transport source target
-          (enrichedMove
-            (.twoOverTwo metadata countsSound)).homologyTransport)
-          |>.targetCycle sourceCycle)) :=
-  (standardTwoOverTwoCycleBlockProof
-    𝒞 η metadata countsSound sourceCycle).toDecomposition
-
-/-- Assemble complete 2-over-2 geometry from its coupon-adapted slide input. -/
-noncomputable def standardTwoOverTwoCycleSlideGeometry
-    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo
-        source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts) :
-    GeneralizedCycleSlideGeometry 𝒞.premodular η source target
-      (enrichedMove
-        (.twoOverTwo metadata countsSound)).homologyTransport
-      (HandleEdit.twoOverTwoOrientation metadata.recipe.handleEdit)
-      metadata.moveId
-      metadata.sourcePresentationHash metadata.targetPresentationHash
-      (HandleEdit.twoOverTwoSlidingId metadata.recipe.handleEdit)
-      (HandleEdit.twoOverTwoStationaryId metadata.recipe.handleEdit) where
-  blockDecomposition :=
-    standardTwoOverTwoCycleBlockDecomposition
-      𝒞 η metadata countsSound
+    TwoOverTwoOrientationComplete.cycleLinearDiagram_eval_eq
+      𝒞.premodular η metadata countsSound sourceCycle
 
 /-- Recipe-owned finite component data for a 1--2 birth. -/
 structure OneTwoBirthIndexData
@@ -2125,7 +1964,7 @@ noncomputable def standardGraphicalMoveRealization
           𝒞 η metadata countsSound)
   | twoOverTwo metadata countsSound =>
       exact .twoOverTwo metadata countsSound
-        (standardTwoOverTwoCycleSlideGeometry
+        (standardTwoOverTwoCycleEvaluationSound
           𝒞 η metadata countsSound)
   | oneTwoBirth metadata countsSound =>
       exact .oneTwoBirth metadata countsSound

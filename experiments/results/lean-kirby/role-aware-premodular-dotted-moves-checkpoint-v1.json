@@ -1,0 +1,161 @@
+{
+  "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
+  "generated_at": "2026-07-26T14:54:50-06:00",
+  "status": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED",
+  "terminal_states": {
+    "premodular_mainline": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED",
+    "modular_specialization": "MODULAR_SPECIALIZATION_ESTABLISHED",
+    "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
+  },
+  "scope": {
+    "ground_field": "algebraically closed characteristic-zero field",
+    "category": "premodular fusion category, definitionally a ribbon fusion category",
+    "twist": "tensor automorphism of the identity functor",
+    "topological_input": "closed oriented smooth four-manifold X with alpha in integral H2(X)",
+    "presentation_language": "role-aware special Kirby presentations with ordinary 2-handles and special dotted 1-handles",
+    "dotted_semantics": "globalDimension times the complete tensor-unit projector",
+    "local_moves": [
+      "framedIsotopy",
+      "oneOverOne",
+      "twoOverOne",
+      "twoOverTwo",
+      "oneTwoBirth",
+      "oneTwoDeath",
+      "twoThreeBirth",
+      "twoThreeDeath"
+    ]
+  },
+  "public_results": [
+    {
+      "name": "TwistedYetter.Kirby.Final.TwistedYetter",
+      "status": "KERNEL_CHECKED_DEFINITION",
+      "meaning": "The public invariant takes the dependent pairs <premodular fusion category, tensor-identity automorphism> and <closed oriented smooth four-manifold, integral H2 class>."
+    },
+    {
+      "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+      "status": "KERNEL_CHECKED_RELATIVE_TO_LISTED_AXIOMS",
+      "meaning": "Orientation-preserving diffeomorphisms preserve TwistedYetter after transporting alpha by the induced H2 map."
+    },
+    {
+      "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
+      "status": "KERNEL_CHECKED_SPECIALIZATION",
+      "meaning": "The modular theorem is obtained only by forgetting S-matrix nondegeneracy and invoking the premodular theorem."
+    }
+  ],
+  "proved_internal_obligations": [
+    {
+      "id": "ROLE_AWARE_EVALUATOR",
+      "evidence": "RoleAwarePremodularEvaluator and RoleAwarePresentationEvaluation",
+      "meaning": "Ordinary components use the ordinary Kirby colour; dotted components use only the normalized tensor-unit cut."
+    },
+    {
+      "id": "H2_REPRESENTATIVE_INDEPENDENCE",
+      "evidence": "RoleAwareRepresentativeIndependence.Presentation.roleAwareCycleEval_respects_homology_class",
+      "meaning": "The cycle-level formula descends to the handle-chain H2 class without modular killing."
+    },
+    {
+      "id": "EIGHT_EVENT_LOCAL_INVARIANCE",
+      "evidence": "PremodularRoleAwareLocalInvariance.elementaryMove_invariant",
+      "meaning": "A case split over the eight directed role-aware moves proves equality of the H2-level presentation evaluator."
+    },
+    {
+      "id": "FINITE_MOVIE_DESCENT",
+      "evidence": "PremodularRoleAwareFourManifoldInvariant.presentationEvaluation_localInvariant",
+      "meaning": "Every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
+    },
+    {
+      "id": "MODULAR_SPECIALIZATION",
+      "evidence": "Final.TwistedModularCategory.toPremodular and Final.TwistedYetterModular_diffeomorphism_invariant",
+      "meaning": "No second modular invariance proof or modular killing assumption is used by the public modular theorem."
+    }
+  ],
+  "final_axiom_closure": {
+    "standard_lean": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ambient_manifold_foundation": [
+      "Final.ClosedOrientedSmoothFourManifold",
+      "Final.H2",
+      "Final.orientedDiffeomorphism",
+      "Final.inducedH2",
+      "Final.inducedH2_identity",
+      "Final.inducedH2_compose"
+    ],
+    "category_and_graphical_literature": [
+      "PremodularCategory.globalDimension_ne_zero",
+      "standardHandleChainNaturality",
+      "shum_ribbonFramedKink",
+      "RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_positiveBandMovie",
+      "RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_negativeBandMovie"
+    ],
+    "topology_boundaries": [
+      {
+        "id": "T1",
+        "name": "SpecialKirbyFoundation.presentationExistence",
+        "meaning": "Every intrinsic pair has an accepted role-aware special Kirby presentation."
+      },
+      {
+        "id": "T2a",
+        "name": "SpecialKirbyFoundation.certifiedPresentationTheory",
+        "meaning": "The presentation calculus realizes the external manifold and handle-chain H2."
+      },
+      {
+        "id": "T2b",
+        "name": "SpecialKirbyFoundation.elementaryMoveSoundness",
+        "meaning": "An elementary presentation move realizes the transported marked manifold pair."
+      },
+      {
+        "id": "T3",
+        "name": "SpecialKirbyFoundation.kirbyCerfCompleteness",
+        "meaning": "Presentations of the same marked pair are connected by a finite admitted movie."
+      },
+      {
+        "id": "T4",
+        "name": "SpecialKirbyFoundation.localGeometry",
+        "meaning": "Each topology-only Table 2 move realizes one exact role-aware local geometry certificate."
+      }
+    ],
+    "forbidden_dependencies_absent": [
+      "S-matrix nondegeneracy",
+      "modular open killing",
+      "ordinary dotted-label evaluator",
+      "legacy oneOverOne and twoOverOne slide axioms",
+      "arbitrary evaluator-equality compiler",
+      "sorry",
+      "admit"
+    ]
+  },
+  "legacy_status": {
+    "public_mainline_dependency": "ABSENT",
+    "old_public_axiom_names": "ABSENT",
+    "isolated_archaeology_declarations": "PRESENT_IN_LEGACY_NAMESPACE",
+    "compatibility_theorem": "BLOCKED",
+    "blocker": "The full dotted-label legacy modular sum has not been proved equal to the collected role-aware evaluator for every simultaneous dotted cut.",
+    "safety": "The legacy declarations are not imported into the new theorem's axiom closure and cannot support a claim that old computation artifacts were re-certified."
+  },
+  "verification": {
+    "timestamp": "2026-07-26T14:54:50-06:00",
+    "git_commit": "da6c97b1bda3c015b23309a70f583b6c9df7f4a8",
+    "git_dirty": true,
+    "dirty_path_count_at_capture": 53,
+    "lean_version": "4.29.1",
+    "lake_version": "5.0.0-src+f72c35b",
+    "os": "Darwin 24.6.0 arm64",
+    "lean_process_limit": 1,
+    "mainline_build": "PASS_2329_JOBS",
+    "mainline_axiom_audit": "PASS",
+    "final_public_axiom_audit": "PASS",
+    "full_repository_build": "FAIL_IN_LEGACY_H2BasisMarkedEvaluator_AND_CancellationSafeH2Representative",
+    "full_repository_failure_scope": "Outside the new premodular final theorem import closure; H2BasisMarkedEvaluator also contains a pre-existing sorry.",
+    "new_route_sorry_or_admit": false
+  },
+  "explicit_nonclaims": [
+    "No equality with the original Crane-Yetter or Yetter state sum is claimed.",
+    "Existing Figure 21 or other legacy numerical artifacts are not re-certified by this theorem.",
+    "The legacy full dotted-label modular evaluator is not yet proved equal to the role-aware evaluator.",
+    "T1-T4 and the listed category or graphical literature inputs are not proved from smooth-manifold or category foundations inside Lean.",
+    "The repository-wide build is not clean because two legacy modules remain broken."
+  ]
+}

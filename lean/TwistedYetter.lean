@@ -157,3 +157,7 @@ import TwistedYetter.Kirby.Final.TwistedYetter
 import TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit
 import TwistedYetter.Kirby.ModularAlgebraicSurface
 import TwistedYetter.Kirby.ModularAlgebraicSurfaceAxiomAudit
+import TwistedYetter.Kirby.RoleAwareTableTwoMove
+import TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance
+import TwistedYetter.Kirby.PremodularRoleAwareFourManifoldInvariant
+import TwistedYetter.Kirby.PremodularRoleAwareMainlineAxiomAudit

@@ -240,7 +240,7 @@ theorem agrees_with_unitSector
     (exponent : ℤ) :
     twistedHopfPairSum 𝒞 automorphism dottedId twoHandleId exponent =
       globalDimension 𝒞.premodular *
-        vacuumProjectedRegularWeight 𝒞 automorphism exponent := by
+        vacuumProjectedRegularWeight 𝒞.premodular automorphism exponent := by
   rw [bridge exponent, vacuumProjectedRegularWeight_eq_one, mul_one]
 
 end RealizesThamK3Vacuum

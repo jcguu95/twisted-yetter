@@ -531,7 +531,7 @@ noncomputable def premodularMovieOfExplicitCalculations
   detach := directUnitCutDetach
 
 /-
-The old `standardMovie` axiom bundled every item below into one opaque value.
+The old all-slide movie axiom bundled every item below into one opaque value.
 The declarations are deliberately split so an axiom audit exposes the exact
 remaining obligations.
 -/
@@ -555,7 +555,9 @@ tensor-unit cutting rule at a dotted component.
 
 /-! #### One-handle over one-handle -/
 
-axiom premodularOneOverOneOrdinaryWindow
+namespace Legacy
+
+axiom legacyPremodularOneOverOneOrdinaryWindow
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -564,7 +566,7 @@ axiom premodularOneOverOneOrdinaryWindow
     (countsSound : source.topology.counts = target.topology.counts) :
     OrdinaryWindow 𝒞
 
-axiom premodularOneOverOneCoefficient
+axiom legacyPremodularOneOverOneCoefficient
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -577,7 +579,7 @@ axiom premodularOneOverOneCoefficient
       (Request.oneOverOne metadata countsSound).Block (S := S)) :
     S → K
 
-axiom modularOneOverOneAttach
+axiom legacyModularOneOverOneAttach
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -590,12 +592,12 @@ axiom modularOneOverOneAttach
       (Request.oneOverOne metadata countsSound).Block (S := S)) :
     AttachCalculation 𝒞.premodular η
       (Request.oneOverOne metadata countsSound) sourceCycle remaining
-      (premodularOneOverOneOrdinaryWindow
+      (legacyPremodularOneOverOneOrdinaryWindow
         𝒞.premodular metadata countsSound)
-      (premodularOneOverOneCoefficient
+      (legacyPremodularOneOverOneCoefficient
         𝒞.premodular η metadata countsSound sourceCycle remaining)
 
-axiom modularOneOverOneDetach
+axiom legacyModularOneOverOneDetach
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -608,14 +610,14 @@ axiom modularOneOverOneDetach
       (Request.oneOverOne metadata countsSound).Block (S := S)) :
     DetachCalculation 𝒞.premodular η
       (Request.oneOverOne metadata countsSound) sourceCycle remaining
-      (premodularOneOverOneOrdinaryWindow
+      (legacyPremodularOneOverOneOrdinaryWindow
         𝒞.premodular metadata countsSound)
-      (premodularOneOverOneCoefficient
+      (legacyPremodularOneOverOneCoefficient
         𝒞.premodular η metadata countsSound sourceCycle remaining)
 
 /-! #### Two-handle over one-handle -/
 
-axiom premodularTwoOverOneOrdinaryWindow
+axiom legacyPremodularTwoOverOneOrdinaryWindow
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -624,7 +626,7 @@ axiom premodularTwoOverOneOrdinaryWindow
     (countsSound : source.topology.counts = target.topology.counts) :
     OrdinaryWindow 𝒞
 
-axiom premodularTwoOverOneCoefficient
+axiom legacyPremodularTwoOverOneCoefficient
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -637,7 +639,7 @@ axiom premodularTwoOverOneCoefficient
       (Request.twoOverOne metadata countsSound).Block (S := S)) :
     S → K
 
-axiom modularTwoOverOneAttach
+axiom legacyModularTwoOverOneAttach
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -650,12 +652,12 @@ axiom modularTwoOverOneAttach
       (Request.twoOverOne metadata countsSound).Block (S := S)) :
     AttachCalculation 𝒞.premodular η
       (Request.twoOverOne metadata countsSound) sourceCycle remaining
-      (premodularTwoOverOneOrdinaryWindow
+      (legacyPremodularTwoOverOneOrdinaryWindow
         𝒞.premodular metadata countsSound)
-      (premodularTwoOverOneCoefficient
+      (legacyPremodularTwoOverOneCoefficient
         𝒞.premodular η metadata countsSound sourceCycle remaining)
 
-axiom modularTwoOverOneDetach
+axiom legacyModularTwoOverOneDetach
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -668,10 +670,12 @@ axiom modularTwoOverOneDetach
       (Request.twoOverOne metadata countsSound).Block (S := S)) :
     DetachCalculation 𝒞.premodular η
       (Request.twoOverOne metadata countsSound) sourceCycle remaining
-      (premodularTwoOverOneOrdinaryWindow
+      (legacyPremodularTwoOverOneOrdinaryWindow
         𝒞.premodular metadata countsSound)
-      (premodularTwoOverOneCoefficient
+      (legacyPremodularTwoOverOneCoefficient
         𝒞.premodular η metadata countsSound sourceCycle remaining)
+
+end Legacy
 
 /-!
 ### Fundamental two-handle over two-handle theorem
@@ -816,23 +820,6 @@ theorem premodularTwoOverTwoCoefficient_eq_targetUnitWeight
         remaining movingLabel
         𝒞.premodular.toFusionCategoryData.unitIndex)
 
-noncomputable axiom premodularTwoOverTwoAttachContext
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    Context C
-      (.atom (𝒞.premodular.simple stationaryLabel))
-      (.atom (𝒞.premodular.simple stationaryLabel))
-      .unit .unit
-
 noncomputable def premodularTwoOverTwoSourceStationaryExponent
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -844,103 +831,6 @@ noncomputable def premodularTwoOverTwoSourceStationaryExponent
     (componentAt source.topology.formal
       (Request.resolvedComponents
         (Request.twoOverTwo metadata countsSound)).stationarySourceIndex)
-
-axiom premodularTwoOverTwoSourceTerm_eq_attachIdentity
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    CanonicalSlideBlocks.sourceTerm 𝒞
-        (Request.twoOverTwo metadata countsSound).resolvedComponents
-        remaining movingLabel stationaryLabel =
-      Context.plug C
-        (premodularTwoOverTwoAttachContext
-          𝒞 η metadata countsSound sourceCycle remaining
-          movingLabel stationaryLabel)
-        (atomicCoupon "identity"
-          (𝟙 (𝒞.premodular.simple stationaryLabel)))
-
-axiom premodularTwoOverTwoExpandedBefore_eq_attachCoupon
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    OrdinaryLabelIndexedSlidingWindow.expandedBeforeTerm
-        (premodularTwoOverTwoOrdinaryWindow 𝒞 metadata countsSound)
-        movingLabel stationaryLabel =
-      Context.plug C
-        (premodularTwoOverTwoAttachContext
-          𝒞 η metadata countsSound sourceCycle remaining
-          movingLabel stationaryLabel)
-        (atomicCoupon "tensor-automorphism-power"
-          (𝒞.premodular.toFusionCategoryData.automorphismCouponPower
-            η stationaryLabel
-            (premodularTwoOverTwoSourceStationaryExponent
-              metadata countsSound sourceCycle)))
-
-noncomputable def premodularTwoOverTwoAttach
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S)) :
-    AttachCalculation 𝒞 η
-      (Request.twoOverTwo metadata countsSound) sourceCycle remaining
-      (premodularTwoOverTwoOrdinaryWindow 𝒞 metadata countsSound)
-      (premodularTwoOverTwoCoefficient
-        𝒞 η metadata countsSound sourceCycle remaining) := by
-  intro movingLabel stationaryLabel
-  let request := Request.twoOverTwo metadata countsSound
-  let context :=
-    premodularTwoOverTwoAttachContext
-      𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel
-  let exponent :=
-    premodularTwoOverTwoSourceStationaryExponent
-      metadata countsSound sourceCycle
-  have calculation :=
-    FusionLinearGeneratedCalculation.symm
-      (FusionLinearGeneratedCalculation.simplePower
-        (data := 𝒞.premodular.toFusionCategoryData)
-        (automorphism := η)
-        stationaryLabel exponent context)
-  have scaled :=
-    FusionLinearGeneratedCalculation.smul
-      (premodularTwoOverTwoCoefficient
-          𝒞 η metadata countsSound sourceCycle remaining movingLabel *
-        𝒞.premodular.quantumDimension stationaryLabel)
-      calculation
-  rw [CanonicalSlideBlocks.sourceWeight_factor_stationary]
-  rw [premodularTwoOverTwoSourceTerm_eq_attachIdentity
-    𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel]
-  rw [premodularTwoOverTwoExpandedBefore_eq_attachCoupon
-    𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel]
-  unfold CanonicalPresentation.cycleComponentWeight
-  simpa only [request, context, exponent,
-    premodularTwoOverTwoCoefficient,
-    premodularTwoOverTwoSourceStationaryExponent,
-    smul_smul, mul_assoc, mul_left_comm, mul_comm] using scaled
 
 noncomputable def premodularTwoOverTwoTargetStationaryExponent
     {H2 : Type uH} [AddCommGroup H2]
@@ -954,293 +844,71 @@ noncomputable def premodularTwoOverTwoTargetStationaryExponent
     (componentAt target.topology.formal
       request.resolvedComponents.stationaryTargetIndex)
 
-noncomputable axiom premodularTwoOverTwoDetachContext
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    Context C
-      (.atom (𝒞.premodular.simple stationaryLabel))
-      (.atom (𝒞.premodular.simple stationaryLabel))
-      .unit .unit
-
-axiom premodularTwoOverTwoExpandedAfter_eq_detachCoupon
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    OrdinaryLabelIndexedSlidingWindow.expandedAfterTerm
-        (premodularTwoOverTwoOrdinaryWindow 𝒞 metadata countsSound)
-        movingLabel stationaryLabel =
-      Context.plug C
-        (premodularTwoOverTwoDetachContext
-          𝒞 η metadata countsSound sourceCycle remaining
-          movingLabel stationaryLabel)
-        (atomicCoupon "tensor-automorphism-power"
-          (𝒞.premodular.toFusionCategoryData.automorphismCouponPower
-            η stationaryLabel
-            (premodularTwoOverTwoTargetStationaryExponent
-              metadata countsSound sourceCycle)))
-
-axiom premodularTwoOverTwoTargetTerm_eq_detachIdentity
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S))
-    (movingLabel stationaryLabel : S) :
-    CanonicalSlideBlocks.targetTerm 𝒞
-        (Request.twoOverTwo metadata countsSound).sameComponentChange
-        (Request.twoOverTwo metadata countsSound).resolvedComponents
-        remaining movingLabel stationaryLabel =
-      Context.plug C
-        (premodularTwoOverTwoDetachContext
-          𝒞 η metadata countsSound sourceCycle remaining
-          movingLabel stationaryLabel)
-        (atomicCoupon "identity"
-          (𝟙 (𝒞.premodular.simple stationaryLabel)))
-
-noncomputable def premodularTwoOverTwoDetach
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S)) :
-    DetachCalculation 𝒞 η
-      (Request.twoOverTwo metadata countsSound) sourceCycle remaining
-      (premodularTwoOverTwoOrdinaryWindow 𝒞 metadata countsSound)
-      (premodularTwoOverTwoCoefficient
-        𝒞 η metadata countsSound sourceCycle remaining) := by
-  intro movingLabel stationaryLabel
-  let request := Request.twoOverTwo metadata countsSound
-  let context :=
-    premodularTwoOverTwoDetachContext
-      𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel
-  let exponent :=
-    premodularTwoOverTwoTargetStationaryExponent
-      metadata countsSound sourceCycle
-  have calculation :=
-    FusionLinearGeneratedCalculation.simplePower
-      (data := 𝒞.premodular.toFusionCategoryData)
-      (automorphism := η)
-      stationaryLabel exponent context
-  have scaled :=
-    FusionLinearGeneratedCalculation.smul
-      (premodularTwoOverTwoCoefficient
-          𝒞 η metadata countsSound sourceCycle remaining movingLabel *
-        𝒞.premodular.quantumDimension stationaryLabel)
-      calculation
-  rw [CanonicalSlideBlocks.targetWeight_factor_stationary]
-  rw [premodularTwoOverTwoExpandedAfter_eq_detachCoupon
-    𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel]
-  rw [premodularTwoOverTwoTargetTerm_eq_detachIdentity
-    𝒞 η metadata countsSound sourceCycle remaining
-      movingLabel stationaryLabel]
-  rw [← premodularTwoOverTwoCoefficient_eq_targetUnitWeight
-    𝒞 η metadata countsSound sourceCycle remaining movingLabel]
-  unfold CanonicalPresentation.cycleComponentWeight
-  simpa only [request, context, exponent,
-    premodularTwoOverTwoTargetStationaryExponent,
-    smul_smul, mul_assoc, mul_left_comm, mul_comm] using scaled
-
-/--
-The complete source-bound 2-over-2 movie needs only a premodular category.
-
-All character-dependent coefficient and coupon calculations are the derived
-definitions above.  The remaining inputs are the standard ordinary sliding
-window and its exact diagrammatic endpoint binding.
+/-!
+The legacy two-over-two attach/detach movie has been removed.  The exact
+positive and negative endpoint theorems now live in the orientation-complete
+band-movie route and are connected directly to the canonical evaluator.
 -/
-noncomputable def premodularTwoOverTwoMovie
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+namespace Legacy
+
+noncomputable def standardOneOverOneMovie
+    (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
+      TableTwoMoveMetadata .oneOverOne source.topology target.topology)
     (countsSound : source.topology.counts = target.topology.counts)
     (sourceCycle : source.DegreeTwoCycle)
     (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S)) :
-    Movie 𝒞 η (Request.twoOverTwo metadata countsSound)
+      (Request.oneOverOne metadata countsSound).Block (S := S)) :
+    Movie 𝒞.premodular η (Request.oneOverOne metadata countsSound)
       sourceCycle remaining where
   traceWindow :=
     SourceBoundTraceWindow.ofPresentationWindow
       source target metadata.recipe.window
   ordinaryWindow :=
-    premodularTwoOverTwoOrdinaryWindow 𝒞 metadata countsSound
+    legacyPremodularOneOverOneOrdinaryWindow
+      𝒞.premodular metadata countsSound
   coefficient :=
-    premodularTwoOverTwoCoefficient
-      𝒞 η metadata countsSound sourceCycle remaining
+    legacyPremodularOneOverOneCoefficient
+      𝒞.premodular η metadata countsSound sourceCycle remaining
   attach :=
-    premodularTwoOverTwoAttach
+    legacyModularOneOverOneAttach
       𝒞 η metadata countsSound sourceCycle remaining
   detach :=
-    premodularTwoOverTwoDetach
+    legacyModularOneOverOneDetach
       𝒞 η metadata countsSound sourceCycle remaining
 
-/--
-One complete fixed-complement 2-over-2 block preserves evaluation.
-
-The moving and stationary labels are both still summed.  Therefore this
-statement cannot hide cancellation by dropping a simple-label sector.
--/
-theorem premodularTwoOverTwoBlock_eval_eq
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle)
-    (remaining :
-      (Request.twoOverTwo metadata countsSound).Block (S := S)) :
-    LinearDiagram.eval
-        (CanonicalSlideBlocks.sourceBlock
-          𝒞 η
-          (Request.twoOverTwo metadata countsSound).resolvedComponents
-          sourceCycle remaining) =
-      LinearDiagram.eval
-        (CanonicalSlideBlocks.targetBlock
-          𝒞 η
-          (Request.twoOverTwo metadata countsSound).sameComponentChange
-          (Request.twoOverTwo metadata countsSound).resolvedComponents
-          ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle)
-          remaining) := by
-  exact
-    CouponAdaptedKirbyColourSlideWindow.eval_eq
-      ((premodularTwoOverTwoMovie
-        𝒞 η metadata countsSound sourceCycle remaining).toTermWindow.toWindow)
-
-/--
-Premodular twisted evaluation is invariant under the complete 2-over-2
-handle slide, before normalization.
-
-This is the full finite-label statement: Lean derives both denominator
-decompositions and sums the blockwise theorem over every complementary
-labeling.
--/
-theorem premodularTwoOverTwo_cycleLinearDiagram_eval_eq
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    (metadata :
-      TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
-    (countsSound : source.topology.counts = target.topology.counts)
-    (sourceCycle : source.DegreeTwoCycle) :
-    LinearDiagram.eval
-        (source.cycleLinearDiagram 𝒞 η sourceCycle) =
-      LinearDiagram.eval
-        (target.cycleLinearDiagram 𝒞 η
-          ((Request.twoOverTwo metadata countsSound).targetCycle
-            sourceCycle)) := by
-  classical
-  rw [CanonicalSlideBlocks.source_decomposition
-    𝒞 η
-    (Request.twoOverTwo metadata countsSound).resolvedComponents
-    sourceCycle]
-  rw [CanonicalSlideBlocks.target_decomposition
-    𝒞 η
-    (Request.twoOverTwo metadata countsSound).sameComponentChange
-    (Request.twoOverTwo metadata countsSound).resolvedComponents
-    ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle)]
-  simp only [map_sum]
-  apply Finset.sum_congr rfl
-  intro remaining _
-  exact premodularTwoOverTwoBlock_eval_eq
-    𝒞 η metadata countsSound sourceCycle remaining
-
-/--
-Assemble the explicitly listed obligations.  This theorem is no longer an
-axiom and contributes no additional mathematical assumption.
--/
-noncomputable def standardMovie
+noncomputable def standardTwoOverOneMovie
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
-    (request : Request source target)
+    (metadata :
+      TableTwoMoveMetadata .twoOverOne source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts)
     (sourceCycle : source.DegreeTwoCycle)
-    (remaining : request.Block (S := S)) :
-    Movie 𝒞.premodular η request sourceCycle remaining := by
-  cases request with
-  | oneOverOne metadata countsSound =>
-      exact
-        { traceWindow :=
-            SourceBoundTraceWindow.ofPresentationWindow
-              source target metadata.recipe.window
-          ordinaryWindow :=
-            premodularOneOverOneOrdinaryWindow
-              𝒞.premodular metadata countsSound
-          coefficient :=
-            premodularOneOverOneCoefficient
-              𝒞.premodular η metadata countsSound sourceCycle remaining
-          attach :=
-            modularOneOverOneAttach
-              𝒞 η metadata countsSound sourceCycle remaining
-          detach :=
-            modularOneOverOneDetach
-              𝒞 η metadata countsSound sourceCycle remaining }
-  | twoOverOne metadata countsSound =>
-      exact
-        { traceWindow :=
-            SourceBoundTraceWindow.ofPresentationWindow
-              source target metadata.recipe.window
-          ordinaryWindow :=
-            premodularTwoOverOneOrdinaryWindow
-              𝒞.premodular metadata countsSound
-          coefficient :=
-            premodularTwoOverOneCoefficient
-              𝒞.premodular η metadata countsSound sourceCycle remaining
-          attach :=
-            modularTwoOverOneAttach
-              𝒞 η metadata countsSound sourceCycle remaining
-          detach :=
-            modularTwoOverOneDetach
-              𝒞 η metadata countsSound sourceCycle remaining }
-  | twoOverTwo metadata countsSound =>
-      exact
-        { traceWindow :=
-            SourceBoundTraceWindow.ofPresentationWindow
-              source target metadata.recipe.window
-          ordinaryWindow :=
-            premodularTwoOverTwoOrdinaryWindow
-              𝒞.premodular metadata countsSound
-          coefficient :=
-            premodularTwoOverTwoCoefficient
-              𝒞.premodular η metadata countsSound sourceCycle remaining
-          attach :=
-            premodularTwoOverTwoAttach
-              𝒞.premodular η metadata countsSound sourceCycle remaining
-          detach :=
-            premodularTwoOverTwoDetach
-              𝒞.premodular η metadata countsSound sourceCycle remaining }
+    (remaining :
+      (Request.twoOverOne metadata countsSound).Block (S := S)) :
+    Movie 𝒞.premodular η (Request.twoOverOne metadata countsSound)
+      sourceCycle remaining where
+  traceWindow :=
+    SourceBoundTraceWindow.ofPresentationWindow
+      source target metadata.recipe.window
+  ordinaryWindow :=
+    legacyPremodularTwoOverOneOrdinaryWindow
+      𝒞.premodular metadata countsSound
+  coefficient :=
+    legacyPremodularTwoOverOneCoefficient
+      𝒞.premodular η metadata countsSound sourceCycle remaining
+  attach :=
+    legacyModularTwoOverOneAttach
+      𝒞 η metadata countsSound sourceCycle remaining
+  detach :=
+    legacyModularTwoOverOneDetach
+      𝒞 η metadata countsSound sourceCycle remaining
+
+end Legacy
 
 end TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie

@@ -176,6 +176,34 @@ theorem combineAtTwo_eq_of_ne_first
   simp [combineAtTwo, combineAt, splitAt, index_ne_first]
 
 /--
+Changing the second selected label leaves every other coordinate unchanged.
+-/
+theorem combineAtTwo_eq_of_ne_second
+    {I : Type uI} [DecidableEq I]
+    (first second : I)
+    (distinct : second ≠ first)
+    {S : Type uS}
+    (firstLabel secondLabel secondLabel' : S)
+    (remaining : RemainingIndex (remainingSelected first second distinct) → S)
+    {index : I}
+    (index_ne_second : index ≠ second) :
+    combineAtTwo first second distinct
+        firstLabel secondLabel remaining index =
+      combineAtTwo first second distinct
+        firstLabel secondLabel' remaining index := by
+  unfold combineAtTwo
+  by_cases index_eq_first : index = first
+  · subst index
+    simp
+  · have remaining_ne :
+        (⟨index, index_eq_first⟩ : RemainingIndex first) ≠
+          remainingSelected first second distinct := by
+      intro equal
+      apply index_ne_second
+      exact congrArg Subtype.val equal
+    simp [combineAt, splitAt, index_eq_first, remaining_ne]
+
+/--
 The complete finite sum splits exactly into all labels away from two distinct
 coordinates, followed by the second selected label and the first selected
 label.  The order is chosen for slide blocks: moving label first, stationary

@@ -1,13 +1,12 @@
 import Mathlib.Algebra.Category.Grp.Basic
-import TwistedYetter.Kirby.Final.ModularClosedFourManifoldInvariant
-import TwistedYetter.Kirby.ModularAlgebraicSurface
+import TwistedYetter.Kirby.PremodularRoleAwareFourManifoldInvariant
 
 /-!
 # Intrinsic public interface for the homologically twisted Yetter invariant
 
 The public mathematical arguments are exactly the dependent pairs
 
-* `⟨𝒞, η⟩`, where `𝒞` is modular and `η` is a tensor automorphism of its
+* `⟨𝒞, η⟩`, where `𝒞` is premodular and `η` is a tensor automorphism of its
   identity functor; and
 * `⟨X, α⟩`, where `X` is a closed oriented smooth four-manifold and
   `α ∈ H₂(X; ℤ)`.
@@ -15,10 +14,10 @@ The public mathematical arguments are exactly the dependent pairs
 Special Kirby presentations occur only in the construction and computation
 interfaces.  They are not part of the intrinsic invariant's input.
 
-The smooth-manifold universe and the literature-backed realization of the
-current canonical special-Kirby calculus are explicit axioms in
-`SpecialKirbyFoundation`.  The existing local categorical calculations and
-the descent from Kirby movies are proved in Lean.
+The smooth-manifold universe and the four category-neutral topology
+boundaries are explicit axioms in `SpecialKirbyFoundation`.  Representative
+independence, all eight local evaluator equalities, finite-movie descent, and
+the modular specialization are proved in Lean.
 -/
 
 namespace TwistedYetter.Kirby.Final
@@ -26,13 +25,12 @@ namespace TwistedYetter.Kirby.Final
 open CategoryTheory
 open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.BoundaryStandardization
-open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
-open TwistedYetter.Kirby.CanonicalModularKirbyInvariance
 open TwistedYetter.Kirby.HomologicalFourManifoldInvariantFinalTarget
-open TwistedYetter.Kirby.KirbyCompleteness
-open TwistedYetter.Kirby.LiteratureBackedDottedBoundaryGeometry
 open TwistedYetter.Kirby.LiteratureBackedHomologicalFourManifoldTopology
 open TwistedYetter.Kirby.ModularFourManifoldInvariantFinalTarget
+open TwistedYetter.Kirby.PremodularRoleAwareFourManifoldInvariant
+open TwistedYetter.Kirby.RoleAwareSpecialKirbyPresentation
+open TwistedYetter.Kirby.RoleAwareTableTwoMove
 
 universe uK uC vC uX
 
@@ -106,7 +104,19 @@ namespace SpecialKirbyFoundation
 abbrev AuxiliaryH₂ := ℤ
 
 /--
-External realization of the canonical special-Kirby presentation theory.
+T4: each standard Table 2 move has category-neutral role-aware local
+geometry.  It contains no category, character, scalar, or evaluator equality.
+-/
+axiom localGeometry :
+  LocalGeometryRealization AuxiliaryH₂
+
+/-- The role-aware handle-presentation theory used by the formal evaluator. -/
+noncomputable def handles : HandlePresentationTheory.{1, 0, 1} :=
+  handlePresentationTheory AuxiliaryH₂ localGeometry
+
+/--
+T2: external manifold and homology realization of the role-aware special
+Kirby presentation theory.
 
 Repository provenance is not part of this mathematical input.  It may be
 attached to a stored value with `KirbyCompleteness.StoredArtifact`.
@@ -115,7 +125,7 @@ structure CertifiedSpecialKirbyPresentationTheory
     (geometry : HomologicalFourManifoldTheory.{uX, uX, uX}) where
   realization :
     HandlePresentationRealization.{1, 0, 1, uX, uX, uX}
-      (handlePresentationTheory AuxiliaryH₂)
+      handles
       geometry
 
 /--
@@ -124,10 +134,6 @@ special-Kirby presentation theory tied to its manifold realization.
 -/
 axiom certifiedPresentationTheory :
   CertifiedSpecialKirbyPresentationTheory fourManifoldGeometry
-
-/-- The canonical handle-presentation theory used by the formal evaluator. -/
-noncomputable def handles : HandlePresentationTheory.{1, 0, 1} :=
-  handlePresentationTheory AuxiliaryH₂
 
 /--
 The realization carried by the certified presentation theory.
@@ -138,15 +144,15 @@ noncomputable def realization :
     simpa [handles] using
       certifiedPresentationTheory.{uX}.realization
 
-/-- Every elementary canonical move realizes the transported marked pair. -/
+/-- T2: every elementary move realizes the transported marked pair. -/
 axiom elementaryMoveSoundness :
   ElementaryMoveHomologicalSoundness realization
 
-/-- Every intrinsic pair `⟨X, α⟩` has a canonical special-Kirby presentation. -/
+/-- T1: every intrinsic pair has a role-aware special Kirby presentation. -/
 axiom presentationExistence :
   MarkedPresentationExistence realization
 
-/-- Marked-diffeomorphic presentations are connected by the admitted movies. -/
+/-- T3: marked-diffeomorphic presentations are connected by admitted movies. -/
 axiom kirbyCerfCompleteness :
   MarkedKirbyCerfCompleteness realization
 
@@ -189,19 +195,35 @@ theorem specialKirbyPresentationExists
   SpecialKirbyFoundation.presentationExistence.presentation
     (homologicalPair Xα)
 
-/-- The intrinsic dependent pair `⟨𝒞, η⟩`. -/
+/-- The intrinsic premodular dependent pair `⟨𝒞, η⟩`. -/
+abbrev TwistedPremodularCategory :=
+  Σ 𝒞 : PremodularFusionCategory (K := K) (C := C) (S := S),
+    TensorIdentityAutomorphism C
+
+/-- The modular subcase, retained only as an input to specialization. -/
 abbrev TwistedModularCategory :=
-  Σ 𝒞 : ModularCategory (K := K) (C := C) (S := S),
-    𝒞.TensorIdentityAutomorphism
+  Σ 𝒞 : ModularFusionCategory (K := K) (C := C) (S := S),
+    TensorIdentityAutomorphism C
+
+namespace TwistedModularCategory
+
+/-- Forget only S-matrix nondegeneracy; all ribbon-fusion data are retained. -/
+def toPremodular
+    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S)) :
+    TwistedPremodularCategory (K := K) (C := C) (S := S) :=
+  ⟨𝒞η.1.premodular, 𝒞η.2⟩
+
+end TwistedModularCategory
 
 /-- The formal scalar attached to one accepted special Kirby presentation. -/
 noncomputable def specialKirbyEvaluation
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) : K :=
   (presentationEvaluation
       𝒞η.1 𝒞η.2
-      SpecialKirbyFoundation.AuxiliaryH₂).markedValue
+      SpecialKirbyFoundation.AuxiliaryH₂
+      SpecialKirbyFoundation.localGeometry).markedValue
     presentation.markedPresentation
 
 /--
@@ -212,13 +234,17 @@ Noncomputability comes solely from selecting a presentation of an abstract
 manifold pair.
 -/
 noncomputable def TwistedYetter
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     (Xα : HomologicalFourManifold.{uX}) : K :=
   (SpecialKirbyFoundation.topologyBoundary.constructInvariant
       (presentationEvaluation
         𝒞η.1 𝒞η.2
-        SpecialKirbyFoundation.AuxiliaryH₂)
-      (evalC_local_move_invariant 𝒞η.1 𝒞η.2)).EvalC
+        SpecialKirbyFoundation.AuxiliaryH₂
+        SpecialKirbyFoundation.localGeometry)
+      (presentationEvaluation_localInvariant
+        𝒞η.1 𝒞η.2
+        SpecialKirbyFoundation.AuxiliaryH₂
+        SpecialKirbyFoundation.localGeometry)).EvalC
     Xα.1 Xα.2
 
 /--
@@ -226,7 +252,7 @@ The intrinsic invariant agrees with the formal evaluation of every accepted
 special Kirby presentation.
 -/
 theorem TwistedYetter_on_specialKirbyPresentation
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
     TwistedYetter 𝒞η Xα =
@@ -237,17 +263,22 @@ theorem TwistedYetter_on_specialKirbyPresentation
         (SpecialKirbyFoundation.topologyBoundary.admissibleFormula
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.AuxiliaryH₂))
+            SpecialKirbyFoundation.AuxiliaryH₂
+            SpecialKirbyFoundation.localGeometry))
         (SpecialKirbyFoundation.topologyBoundary.admissibleFormula_movieInvariant
           (presentationEvaluation
             𝒞η.1 𝒞η.2
-            SpecialKirbyFoundation.AuxiliaryH₂)
-          (evalC_local_move_invariant 𝒞η.1 𝒞η.2))
+            SpecialKirbyFoundation.AuxiliaryH₂
+            SpecialKirbyFoundation.localGeometry)
+          (presentationEvaluation_localInvariant
+            𝒞η.1 𝒞η.2
+            SpecialKirbyFoundation.AuxiliaryH₂
+            SpecialKirbyFoundation.localGeometry))
         Xα.1 Xα.2 presentation
 
 /-- Diffeomorphism invariance with the displayed class transported on `H₂`. -/
 theorem TwistedYetter_diffeomorphism_invariant
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     {X Y : ClosedOrientedSmoothFourManifold.{uX}}
     (f : orientedDiffeomorphism.Hom X Y)
     (α : H₂ X) :
@@ -257,9 +288,30 @@ theorem TwistedYetter_diffeomorphism_invariant
     (SpecialKirbyFoundation.topologyBoundary.constructInvariant
         (presentationEvaluation
           𝒞η.1 𝒞η.2
-          SpecialKirbyFoundation.AuxiliaryH₂)
-        (evalC_local_move_invariant 𝒞η.1 𝒞η.2))
+          SpecialKirbyFoundation.AuxiliaryH₂
+          SpecialKirbyFoundation.localGeometry)
+        (presentationEvaluation_localInvariant
+          𝒞η.1 𝒞η.2
+          SpecialKirbyFoundation.AuxiliaryH₂
+          SpecialKirbyFoundation.localGeometry))
       |>.diffeomorphismInvariant f α
+
+/-- The modular value is exactly the premodular invariant after forgetting
+S-matrix nondegeneracy. -/
+noncomputable def TwistedYetterModular
+    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (Xα : HomologicalFourManifold.{uX}) : K :=
+  TwistedYetter 𝒞η.toPremodular Xα
+
+/-- Modular diffeomorphism invariance is a specialization, not a second proof. -/
+theorem TwistedYetterModular_diffeomorphism_invariant
+    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    {X Y : ClosedOrientedSmoothFourManifold.{uX}}
+    (f : orientedDiffeomorphism.Hom X Y)
+    (α : H₂ X) :
+    TwistedYetterModular 𝒞η ⟨X, α⟩ =
+      TwistedYetterModular 𝒞η ⟨Y, inducedH₂ f α⟩ :=
+  TwistedYetter_diffeomorphism_invariant 𝒞η.toPremodular f α
 
 namespace TwistedYetter
 
@@ -271,7 +323,7 @@ Lean-native implementation or a verified foreign-function bridge supplies an
 instance.  Merely assuming the class does not manufacture executable code.
 -/
 class Computable
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S)) where
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S)) where
   compute :
     {Xα : HomologicalFourManifold.{uX}} →
       SpecialKirbyPresentation Xα → K
@@ -282,7 +334,7 @@ class Computable
 
 /-- Execute the installed presentation-level implementation. -/
 def compute
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     [implementation : Computable 𝒞η]
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) : K :=
@@ -295,7 +347,7 @@ This theorem introduces no global axiom: constructing a `Computable` instance
 requires supplying the proof together with the executable function.
 -/
 theorem compute_correct
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
     [implementation : Computable 𝒞η]
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
