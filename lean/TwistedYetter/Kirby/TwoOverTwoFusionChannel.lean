@@ -776,13 +776,15 @@ theorem unequalExponentChannelDiagram_eval
           data x y channel.1).dual channel.2))
 
 /--
-The actual character coupon on an internal simple channel crosses a
-Bärenz--Barrett band window by naturality.
+A character coupon on the external input strand of a Bärenz--Barrett
+functor-valued band window crosses that window by naturality.
 
-This is the twisted transport step.  The coupon is not replaced by a scalar
-placeholder, and no modularity or dotted-component killing is used.
+This theorem is intentionally named `external`: the functor here exposes
+`simple movingLabel ⊗ simple channelLabel`.  It does not by itself transport
+the internal fusion-channel coupon occurring between the two trivalent
+vertices of a 2/2 resolution.
 -/
-theorem internalCharacterCoupon_bandTransport
+theorem externalCharacterCoupon_bandTransport
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
@@ -806,14 +808,13 @@ theorem internalCharacterCoupon_bandTransport
       η channelLabel exponent)
 
 /--
-The internal-character transport remains valid after inserting the entire
-local band window into any explicitly typed exterior context.
+The external-input coupon transport remains valid after insertion into any
+explicitly typed outer context.
 
-All fusion projections, inclusions, closures, and untouched Kirby components
-may therefore remain outside this theorem.  The only required endpoint fact is
-that both sides expose the same typed band-window boundary.
+This remains useful graphical naturality, but it is not the missing theorem
+for the internal `z`-edge between the fusion projection and inclusion.
 -/
-theorem internalCharacterCoupon_bandTransport_inContext
+theorem externalCharacterCoupon_bandTransport_inContext
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
@@ -840,7 +841,7 @@ theorem internalCharacterCoupon_bandTransport_inContext
             (data.toFusionCategoryData.automorphismCouponPower
               η channelLabel exponent))) :=
   Context.eval_plug_congr C context
-    (internalCharacterCoupon_bandTransport
+    (externalCharacterCoupon_bandTransport
       data insertionLaw mateLaw movies η movingLabel channelLabel exponent)
 
 /--
