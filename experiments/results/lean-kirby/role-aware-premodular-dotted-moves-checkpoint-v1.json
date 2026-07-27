@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-26T23:49:17-06:00",
+  "generated_at": "2026-07-27T00:09:11-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,9 +9,9 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, and positive/negative local boundary objects are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is the clean graphical factorization from those exact contexts to the explicit Bärenz-Barrett ClosedWindow endpoints.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, and the orientation-dependent residual moving-character coefficient are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Construct StandardBandEndpointCompiler from StandardOrientedBandTransport and the exact role-aware contexts. The three category-level literature laws are now separate and cannot manufacture presentation endpoints. The compiler must derive the ClosedWindow, moving coefficient, and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
+    "required_resolution": "Construct StandardBandEndpointCompiler from StandardOrientedBandTransport and the exact role-aware contexts. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The moving coefficient is now derived rather than supplied. The compiler must still derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "logic_safety_correction": {
@@ -93,6 +93,11 @@
       "meaning": "The source and target evaluator terms are tied to one role-aware exterior. The moving and stationary ordinary labels and both oriented two-strand boundary objects are derived from the same structural binding, so the new route no longer borrows the legacy local-boundary decoder."
     },
     {
+      "id": "ROLE_AWARE_TWO_OVER_TWO_COEFFICIENT_TRANSPORT",
+      "evidence": "RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetWeight_eq_endpointCoefficient; targetBlock_eq_commonCoefficient; movingCoefficient",
+      "meaning": "For every remaining-label block and every moving/stationary simple pair, the target coefficient is proved equal to the exact source coefficient, including both character powers. The outer moving coefficient is computed from the unit/unit complement, moving quantum dimension, orientation, and residual exponent; it is no longer a field of the unresolved endpoint obligation."
+    },
+    {
       "id": "MODULAR_SPECIALIZATION",
       "evidence": "Final.TwistedModularCategory.toPremodular and Final.TwistedYetterModular_diffeomorphism_invariant",
       "meaning": "No second modular invariance proof or modular killing assumption is used by the public modular theorem."
@@ -166,8 +171,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-26T23:49:17-06:00",
-    "base_checkpoint_commit": "6cf32583fff75b027c2073cdc00cac76692c6804",
+    "timestamp": "2026-07-27T00:09:11-06:00",
+    "base_checkpoint_commit": "ba966c8",
     "git_dirty": true,
     "dirty_path_count_at_capture": 2,
     "lean_version": "4.29.1",
