@@ -1162,6 +1162,37 @@ theorem sum_unequalNegativeChannelMorphism
       negativeResidual_comp_commonPower
         data η x y movingExponent stationaryExponent
 
+/--
+The negative-orientation unequal-exponent identity remains valid in any
+explicitly identified boundary context.
+-/
+theorem sum_unequalNegativeChannelMorphism_inBoundaryContext
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ)
+    {hole wholeSource wholeTarget : Boundary C}
+    (objectSound :
+      hole.denote = NegativeTensorObject data x y)
+    (context :
+      Context C hole hole wholeSource wholeTarget) :
+    ∑ channel : NegativeChannel data x y,
+        evalContextLinearMap (R := K) context
+          (transportEndomorphism objectSound
+            (unequalNegativeChannelMorphism
+              data η x y movingExponent stationaryExponent channel)) =
+      evalContextLinearMap (R := K) context
+        (transportEndomorphism objectSound
+          (negativeCharacterCoupon
+            data η x y movingExponent stationaryExponent)) := by
+  rw [← map_sum]
+  apply congrArg (evalContextLinearMap (R := K) context)
+  simp only [transportEndomorphism]
+  rw [← Preadditive.comp_sum, ← Preadditive.sum_comp]
+  rw [sum_unequalNegativeChannelMorphism
+    data insertionLaw η x y movingExponent stationaryExponent]
+
 end OrientedSlidingResolution
 
 end TwistedYetter.Kirby.TwoOverTwoFusionChannel

@@ -53,6 +53,9 @@ axioms.
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism
 
 #print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism_inBoundaryContext
+
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands
 
 #print axioms
