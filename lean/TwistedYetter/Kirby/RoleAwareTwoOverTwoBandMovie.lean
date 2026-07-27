@@ -24,6 +24,7 @@ open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentRibbonIsotopy
 open TwistedYetter.Kirby.ComponentRibbonDiagram
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.LinearContext
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
 open TwistedYetter.Kirby.RoleAwareSameComponentTransport
@@ -1512,6 +1513,120 @@ theorem endpointCoefficient_eq_movingCoefficient_mul_channel
         omega
       rw [← movingPowers]
       ring
+
+/--
+For a positive clean endpoint, the complete character-bearing fusion-channel
+sum is valid inside the exact source presentation context.
+-/
+theorem positiveChannelSum_in_sourceTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (insertionLaw :
+      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    let labeling :=
+      sourceLabeling window remaining movingLabel stationaryLabel
+    let objectSound :
+        ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+          (CanonicalPresentation.roleAwareLabelOf
+            𝒞 source labeling)).denote =
+          OrientedTensorObject 𝒞.premodular movingLabel stationaryLabel :=
+      by
+        simpa [OrientedTensorObject] using
+          congrArg (fun boundary : Boundary C => boundary.denote)
+            (sourceLocalBoundary_interpret_positive
+              window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+    ∑ channel : OrientedChannel
+        𝒞.premodular movingLabel stationaryLabel,
+      evalContextLinearMap (R := K)
+        (window.sourceTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (unequalExponentChannelMorphism
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (-(stationaryExponent window sourceCycle)) channel)) =
+      evalContextLinearMap (R := K)
+        (window.sourceTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (globalPositiveEndpointCoupon
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle))) := by
+  dsimp only
+  exact sum_unequalExponentChannelMorphism_inBoundaryContext
+    𝒞.premodular insertionLaw η movingLabel stationaryLabel
+    (movingExponent window sourceCycle)
+    (-(stationaryExponent window sourceCycle))
+    _ (window.sourceTermContext 𝒞 η
+      (sourceLabeling window remaining movingLabel stationaryLabel))
+
+/--
+For a negative clean endpoint, the independently proved negative
+fusion-channel sum is valid inside the exact source presentation context.
+-/
+theorem negativeChannelSum_in_sourceTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (insertionLaw :
+      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    let labeling :=
+      sourceLabeling window remaining movingLabel stationaryLabel
+    let objectSound :
+        ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+          (CanonicalPresentation.roleAwareLabelOf
+            𝒞 source labeling)).denote =
+          NegativeTensorObject 𝒞.premodular movingLabel stationaryLabel :=
+      by
+        simpa [NegativeTensorObject] using
+          congrArg (fun boundary : Boundary C => boundary.denote)
+            (sourceLocalBoundary_interpret_negative
+              window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+    ∑ channel : NegativeChannel
+        𝒞.premodular movingLabel stationaryLabel,
+      evalContextLinearMap (R := K)
+        (window.sourceTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (unequalNegativeChannelMorphism
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle) channel)) =
+      evalContextLinearMap (R := K)
+        (window.sourceTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (negativeCharacterCoupon
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle))) := by
+  dsimp only
+  exact sum_unequalNegativeChannelMorphism_inBoundaryContext
+    𝒞.premodular insertionLaw η movingLabel stationaryLabel
+    (movingExponent window sourceCycle)
+    (stationaryExponent window sourceCycle)
+    _ (window.sourceTermContext 𝒞 η
+      (sourceLabeling window remaining movingLabel stationaryLabel))
 
 /-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock

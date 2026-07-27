@@ -47,6 +47,12 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.endpointCoefficient_eq_movingCoefficient_mul_channel
 
 #print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.positiveChannelSum_in_sourceTermContext
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.negativeChannelSum_in_sourceTermContext
+
+#print axioms
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_negativeChannelCouponMorphism
 
 #print axioms
