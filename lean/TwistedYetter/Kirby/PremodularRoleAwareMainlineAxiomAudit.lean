@@ -29,6 +29,9 @@ axioms.
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.externalCharacterCoupon_bandTransport_inContext
 
 #print axioms
+  TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.channelWeighted_transport
+
+#print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
 #check

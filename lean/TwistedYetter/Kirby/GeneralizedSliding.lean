@@ -228,6 +228,138 @@ noncomputable def stage318 :
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   weightedSum (R := R) data.weight fiber.rightTerm
 
+/--
+Equation (3.1.4) with an additional scalar weight attached to the internal
+simple channel `z`.
+
+For the homologically twisted application this weight will be the scalar by
+which the tensor-identity automorphism acts on `z`.
+-/
+noncomputable def channelWeightedStage314
+    (channelWeight : S → R) :
+    LinearDiagram (R := R)
+      (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
+  ∑ y, ∑ z, ∑ i : I y z,
+    ((data.weight y * data.weight z) * channelWeight z) •
+      atom (R := R) (fiber.insertedChannel y z i)
+
+/-- The channel-weighted stage after the braiding movie. -/
+noncomputable def channelWeightedStage315
+    (channelWeight : S → R) :
+    LinearDiagram (R := R)
+      (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
+  ∑ y, ∑ z, ∑ i : I y z,
+    ((data.weight y * data.weight z) * channelWeight z) •
+      atom (R := R) (fiber.braidedChannel y z i)
+
+/-- The channel-weighted stage after the pivotal mate movie. -/
+noncomputable def channelWeightedStage316
+    (channelWeight : S → R) :
+    LinearDiagram (R := R)
+      (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
+  ∑ y, ∑ z, ∑ i : I y z,
+    ((data.weight y * data.weight z) * channelWeight z) •
+      atom (R := R) (fiber.matedChannel y z i)
+
+/--
+The weighted target endpoint.  The internal weight remains attached to the
+surviving `z`-label after inverse insertion.
+-/
+noncomputable def channelWeightedStage318
+    (channelWeight : S → R) :
+    LinearDiagram (R := R)
+      (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
+  weightedSum (R := R)
+    (fun z => data.weight z * channelWeight z) fiber.rightTerm
+
+/-- Every channel weight survives the braiding movie term by term. -/
+theorem channelWeighted_equation_3_1_5
+    (channelWeight : S → R) :
+    eval (R := R) (fiber.channelWeightedStage314 channelWeight) =
+      eval (R := R) (fiber.channelWeightedStage315 channelWeight) := by
+  simp only [channelWeightedStage314, channelWeightedStage315,
+    map_sum, map_smul, eval_atom]
+  apply Finset.sum_congr rfl
+  intro y _
+  apply Finset.sum_congr rfl
+  intro z _
+  apply Finset.sum_congr rfl
+  intro i _
+  exact congrArg
+    (fun value =>
+      ((data.weight y * data.weight z) * channelWeight z) • value)
+    (by
+      simpa only [insertedChannel] using
+        (fiber.braidingMovie y z i).sound)
+
+/-- Every channel weight survives the mate movie term by term. -/
+theorem channelWeighted_equation_3_1_6
+    (channelWeight : S → R) :
+    eval (R := R) (fiber.channelWeightedStage315 channelWeight) =
+      eval (R := R) (fiber.channelWeightedStage316 channelWeight) := by
+  simp only [channelWeightedStage315, channelWeightedStage316,
+    map_sum, map_smul, eval_atom]
+  apply Finset.sum_congr rfl
+  intro y _
+  apply Finset.sum_congr rfl
+  intro z _
+  apply Finset.sum_congr rfl
+  intro i _
+  exact congrArg
+    (fun value =>
+      ((data.weight y * data.weight z) * channelWeight z) • value)
+    (by
+      simpa only [matedChannel] using
+        (fiber.mateMovie y z i).sound)
+
+/--
+Inverse insertion removes only the `y`-resolution.  An arbitrary scalar
+depending on `z` remains visible on the target endpoint.
+-/
+theorem channelWeighted_equation_3_1_7_to_3_1_8
+    (channelWeight : S → R) :
+    eval (R := R) (fiber.channelWeightedStage316 channelWeight) =
+      eval (R := R) (fiber.channelWeightedStage318 channelWeight) := by
+  simp only [channelWeightedStage316, channelWeightedStage318,
+    map_sum, map_smul, eval_atom, eval_weightedSum]
+  calc
+    (∑ y, ∑ z, ∑ i : I y z,
+        ((data.weight y * data.weight z) * channelWeight z) •
+          Diagram.eval D (fiber.matedChannel y z i)) =
+      ∑ z, ∑ y, ∑ i : I y z,
+        ((data.weight y * data.weight z) * channelWeight z) •
+          Diagram.eval D (fiber.matedChannel y z i) := by
+        rw [Finset.sum_comm]
+    _ = ∑ z, (data.weight z * channelWeight z) •
+        (∑ y, ∑ i : I y z,
+          data.weight y • Diagram.eval D (fiber.matedChannel y z i)) := by
+      apply Finset.sum_congr rfl
+      intro z _
+      simp only [Finset.smul_sum, smul_smul]
+      apply Finset.sum_congr rfl
+      intro y _
+      apply Finset.sum_congr rfl
+      intro i _
+      congr 1
+      ac_rfl
+    _ = ∑ z, (data.weight z * channelWeight z) •
+        Diagram.eval D (fiber.rightTerm z) := by
+      apply Finset.sum_congr rfl
+      intro z _
+      exact congrArg
+        (fun value => (data.weight z * channelWeight z) • value)
+        (insertIdentity (data.backwardResolution z)
+          (fiber.backwardContext z) "BB-3.1.6-mated-channel")
+
+/-- The complete channel-weighted transport from insertion to target. -/
+theorem channelWeighted_transport
+    (channelWeight : S → R) :
+    eval (R := R) (fiber.channelWeightedStage314 channelWeight) =
+      eval (R := R) (fiber.channelWeightedStage318 channelWeight) :=
+  fiber.channelWeighted_equation_3_1_5 channelWeight |>.trans <|
+    fiber.channelWeighted_equation_3_1_6 channelWeight |>.trans <|
+      fiber.channelWeighted_equation_3_1_7_to_3_1_8 channelWeight
+
 /-- Equation (3.1.4): forward insertion, including both dimension weights. -/
 theorem equation_3_1_4 :
     eval (R := R) fiber.stage313 =
