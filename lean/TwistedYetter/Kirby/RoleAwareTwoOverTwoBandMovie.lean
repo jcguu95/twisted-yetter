@@ -2175,18 +2175,22 @@ abbrev StandardEndpointObligation
   Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
 
 /--
-The still-unproved categorical compiler from one exact clean role-aware
-window to the explicit Bärenz--Barrett finite-sum endpoints.
+The three still-unproved endpoint obligations, exposed as separate fields.
 
-Unlike the former resolver, this compiler cannot be applied to an arbitrary
-clean-looking syntax fragment: `resolve` must consume the exact `CleanWindow`
-bound to the source recipe.  No instance or axiom constructs this compiler.
+This is deliberately not a single `resolve : ... → BandEndpointInterpretation`
+black box.  A future construction must visibly:
+
+1. build the exact Bärenz--Barrett closed window for every exterior block;
+2. identify the source block with its `before` endpoint; and
+3. identify the target block with its `after` endpoint.
+
+No instance or axiom constructs this compiler.
 -/
 structure StandardBandEndpointCompiler
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (H2 : Type uH) [AddCommGroup H2] where
-  resolve :
+  closedWindow :
     {source target : CanonicalPresentation H2} →
     (metadata :
       KirbyCompleteness.TableTwoMoveMetadata
@@ -2194,7 +2198,67 @@ structure StandardBandEndpointCompiler
     (countsSound : source.topology.counts = target.topology.counts) →
     (clean : CleanWindow source target metadata countsSound) →
     (sourceCycle : source.DegreeTwoCycle) →
-      StandardEndpointObligation clean 𝒞 η sourceCycle
+    Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window →
+      LabelIndexedSlidingMovies.ClosedWindow
+        (Window.StandardPremodularBandLaws.labelIndexedMovies 𝒞)
+  source_endpoint :
+    {source target : CanonicalPresentation H2} →
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology) →
+    (countsSound : source.topology.counts = target.topology.counts) →
+    (clean : CleanWindow source target metadata countsSound) →
+    (sourceCycle : source.DegreeTwoCycle) →
+    (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window) →
+      Window.RoleAwareFiniteSumBlocks.sourceBlock
+          clean.window 𝒞 η sourceCycle block =
+        linearEndpoint Side.before
+          (closedWindow metadata countsSound clean sourceCycle block)
+          (Window.RoleAwareFiniteSumBlocks.movingCoefficient
+            clean.window 𝒞 η sourceCycle block)
+  target_endpoint :
+    {source target : CanonicalPresentation H2} →
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology) →
+    (countsSound : source.topology.counts = target.topology.counts) →
+    (clean : CleanWindow source target metadata countsSound) →
+    (sourceCycle : source.DegreeTwoCycle) →
+    (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window) →
+      Window.RoleAwareFiniteSumBlocks.targetBlock
+          clean.window 𝒞 η sourceCycle block =
+        linearEndpoint Side.after
+          (closedWindow metadata countsSound clean sourceCycle block)
+          (Window.RoleAwareFiniteSumBlocks.movingCoefficient
+            clean.window 𝒞 η sourceCycle block)
+
+namespace StandardBandEndpointCompiler
+
+/--
+Assemble the old per-window record only after all three explicit fields have
+been supplied.  This definition adds no proof obligation and no equality.
+-/
+noncomputable def resolve
+    {H2 : Type uH} [AddCommGroup H2]
+    {𝒞 : PremodularCategory (K := K) (C := C) (S := S)}
+    {η : TensorIdentityAutomorphism C}
+    (compiler : StandardBandEndpointCompiler 𝒞 η H2)
+    {source target : CanonicalPresentation H2}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts)
+    (clean : CleanWindow source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle) :
+    StandardEndpointObligation clean 𝒞 η sourceCycle where
+  closedWindow :=
+    compiler.closedWindow metadata countsSound clean sourceCycle
+  source_endpoint :=
+    compiler.source_endpoint metadata countsSound clean sourceCycle
+  target_endpoint :=
+    compiler.target_endpoint metadata countsSound clean sourceCycle
+
+end StandardBandEndpointCompiler
 
 /--
 Once the standard-normal-form endpoint interpretation is supplied, every

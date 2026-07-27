@@ -91,8 +91,10 @@ axioms.
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.roleAwareCycleEval_eq
 
-#check
+#print
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler.resolve
 
 #print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant
