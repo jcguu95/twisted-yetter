@@ -1,8 +1,8 @@
 import TwistedYetter.Kirby.RoleAwareSameComponentTransport
+import TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 import TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
 import TwistedYetter.Kirby.SelectedCoordinateFiniteSum
 import TwistedYetter.Kirby.TwoOverTwoFusionChannel
-import TwistedYetter.Kirby.TwoOverTwoSourceFreeFactorization
 
 /-!
 # A role-aware exterior for the premodular 2/2 band movie
@@ -33,7 +33,6 @@ open TwistedYetter.Kirby.SelectedCoordinateFiniteSum
 open TwistedYetter.Kirby.SimultaneousDottedCutGeometry
 open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 open TwistedYetter.Kirby.TwoOverTwoFusionChannel
-open TwistedYetter.Kirby.TwoOverTwoSourceFreeFactorization
 
 universe uK uC vC uH
 
