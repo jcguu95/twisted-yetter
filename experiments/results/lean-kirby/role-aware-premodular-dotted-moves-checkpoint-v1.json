@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T07:16:51-06:00",
+  "generated_at": "2026-07-27T07:31:26-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,9 +9,9 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. The remaining compiler has been split into three visible fields: closedWindow, source_endpoint, and target_endpoint. None is constructed globally.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Construct StandardBandEndpointCompiler directly from the exact CleanWindow, or first add a genuinely explicit category-neutral standard-band normal-form language carrying enough data to derive that compiler. The former StandardOrientedBandTransport shell has been deleted because its hidden body carried no mathematical information. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The compiler must derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
+    "required_resolution": "Construct the three exposed StandardBandEndpointCompiler fields from the exact CleanWindow: first a Bärenz-Barrett closedWindow for each exterior-label block, then the exact source_endpoint and target_endpoint identifications. The current planar SliceEvent grammar has no trivalent band-attachment constructor, so an honest resolution requires an explicit band/fusion endpoint syntax or an equivalently inspectable clean-normal-form bridge. The deleted broad endpoint axiom and content-free transport shell may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "logic_safety_correction": {
@@ -86,6 +86,16 @@
       "id": "EMPTY_STANDARD_TRANSPORT_SHELL_REMOVED",
       "evidence": "Commit 2cad41d40b2f469d8d0be02c6dd20eb82bb456cd",
       "meaning": "The opaque StandardOrientedBandTransport shell and CleanWindow.transport_standard field were deleted because their hidden body was only Nonempty Unit. The explicit StandardBandEndpointCompiler now consumes the exact CleanWindow directly, so no content-free certificate can be mistaken for a proved normal form."
+    },
+    {
+      "id": "LEGACY_SHARED_FREE_WINDOW_REMOVED_FROM_MAINLINE",
+      "evidence": "Commit bb738afab27ea205d0813083424a9218680ecb27; PremodularRoleAwareMainlineAxiomAudit",
+      "meaning": "The role-aware two-over-two module now imports CanonicalSourceBoundSlideMovie directly. The old standardSharedFreeWindow axiom is no longer in the new mainline dependency closure."
+    },
+    {
+      "id": "STANDARD_BAND_ENDPOINT_OBLIGATIONS_EXPOSED",
+      "evidence": "Commit c34d387; StandardBandEndpointCompiler.closedWindow; StandardBandEndpointCompiler.source_endpoint; StandardBandEndpointCompiler.target_endpoint",
+      "meaning": "The remaining endpoint bridge can no longer be supplied as one opaque resolve function. Lean separately requires the Bärenz-Barrett closed window and the exact source and target endpoint identifications. The derived resolve definition merely reassembles those three fields."
     },
     {
       "id": "ROLE_AWARE_TWO_OVER_TWO_EXACT_CATEGORICAL_CONTEXTS",
@@ -176,8 +186,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T07:16:51-06:00",
-    "base_checkpoint_commit": "2cad41d40b2f469d8d0be02c6dd20eb82bb456cd",
+    "timestamp": "2026-07-27T07:31:26-06:00",
+    "base_checkpoint_commit": "c34d387",
     "git_dirty": false,
     "dirty_path_count_at_capture": 0,
     "lean_version": "4.29.1",
@@ -195,6 +205,9 @@
     "target_context_channel_binding_build": "PASS_2026-07-27T07:10:39-06:00",
     "target_context_channel_binding_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T07:11:05-06:00",
     "post_empty_transport_shell_final_build": "PASS_CONDITIONAL_2319_JOBS_2026-07-27T07:16:19-06:00",
+    "post_legacy_shared_window_removal_axiom_audit": "PASS_2026-07-27T07:21:55-06:00",
+    "split_endpoint_obligations_mainline_build": "PASS_CONDITIONAL_2319_JOBS_2026-07-27T07:30:15-06:00",
+    "split_endpoint_obligations_axiom_audit": "PASS_EXPLICIT_THREE_FIELDS_2026-07-27T07:30:15-06:00",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
