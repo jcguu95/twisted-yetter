@@ -41,7 +41,13 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.internalChannelWeight_transport
 
 #print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+
+#print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
+
+#print axioms
+  TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.ChannelWeightedClosedWindow.linear_eval_eq
 
 #check
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion

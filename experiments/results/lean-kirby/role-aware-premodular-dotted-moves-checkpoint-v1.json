@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T08:31:00-06:00",
+  "generated_at": "2026-07-27T08:41:00-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,9 +9,9 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. Positive and negative channel terms are now also visible Diagram syntax containing the two trivalent coupons, internal simple channel, character coupon, and quantum-dimension weight. The remaining compiler has been split into three visible fields: closedWindow, source_endpoint, and target_endpoint. None is constructed globally.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. Positive and negative channel terms are visible Diagram syntax containing the two trivalent coupons, internal simple channel, character coupon, and quantum-dimension weight. The old untwisted closed-window endpoint type has been replaced by a channel-weighted endpoint type. The weighted window is now constructed from the common role-aware exterior. The remaining compiler has only two visible fields: source_endpoint and target_endpoint.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Construct the three exposed StandardBandEndpointCompiler fields from the exact CleanWindow. The eta-twisted Bärenz-Barrett SlidingFiber calculation is now proved: an arbitrary internal channel weight survives all braiding, mate, and inverse-insertion stages, and this is specialized to the actual character scalar eta_z^n with the role-aware orientation rule n=-b for positive slides and n=b for negative slides. The remaining obligation is strictly the geometric endpoint bridge: identify the exact role-aware source and target evaluator blocks with those proved weighted stages. The deleted broad endpoint axiom and content-free transport shell may not be restored or renamed.",
+    "required_resolution": "Construct the two exposed StandardBandEndpointCompiler endpoint fields from the exact CleanWindow. The eta-twisted Bärenz-Barrett SlidingFiber calculation and the channel-weighted closed window are now proved and constructed. The remaining obligation is strictly the geometric endpoint bridge: identify the exact role-aware source and target evaluator blocks with those proved weighted stages. The deleted broad endpoint axiom and content-free transport shell may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "logic_safety_correction": {
@@ -102,8 +102,8 @@
     },
     {
       "id": "STANDARD_BAND_ENDPOINT_OBLIGATIONS_EXPOSED",
-      "evidence": "Commit c34d387; StandardBandEndpointCompiler.closedWindow; StandardBandEndpointCompiler.source_endpoint; StandardBandEndpointCompiler.target_endpoint",
-      "meaning": "The remaining endpoint bridge can no longer be supplied as one opaque resolve function. Lean separately requires the Bärenz-Barrett closed window and the exact source and target endpoint identifications. The derived resolve definition merely reassembles those three fields."
+      "evidence": "RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow; StandardBandEndpointCompiler.source_endpoint; StandardBandEndpointCompiler.target_endpoint; PremodularTwoOverTwoBandEndpoints.ChannelWeightedClosedWindow.linear_eval_eq",
+      "meaning": "The remaining endpoint bridge can no longer be supplied as one opaque resolve function or as an untwisted Bärenz-Barrett endpoint. Lean constructs the channel-weighted closed window from the exact common exterior and separately requires only the source and target evaluation identifications. The weighted endpoint equality itself is a theorem derived from the internal character transport. The resolve definition merely reassembles the two remaining geometric fields."
     },
     {
       "id": "ROLE_AWARE_TWO_OVER_TWO_EXACT_CATEGORICAL_CONTEXTS",

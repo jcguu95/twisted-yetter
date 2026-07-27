@@ -1957,6 +1957,76 @@ axiom labelIndexedMovies
 end StandardPremodularBandLaws
 
 /--
+The common role-aware exterior canonically closes the channel-weighted
+Bärenz--Barrett calculation.
+
+The stationary label is set to the tensor unit in the exterior because the
+stationary Kirby-colour sum is generated inside the weighted sliding fiber.
+Positive orientation exposes the dual of the unit; negative orientation
+exposes the unit itself.
+-/
+noncomputable def RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (remaining : RoleAwareFiniteSumBlocks.Block (S := S) window) :
+    ChannelWeightedClosedWindow
+      (StandardPremodularBandLaws.labelIndexedMovies 𝒞) where
+  strand :=
+    match window.recipeStructuralBinding.orientation with
+    | .positive =>
+        (𝒞.simple 𝒞.toFusionCategoryData.unitIndex)ᘁ
+    | .negative =>
+        𝒞.simple 𝒞.toFusionCategoryData.unitIndex
+  closure movingLabel := by
+    cases orientation :
+        window.recipeStructuralBinding.orientation with
+    | positive =>
+        let labeling :=
+          RoleAwareFiniteSumBlocks.sourceLabeling
+            window remaining movingLabel
+              𝒞.toFusionCategoryData.unitIndex
+        let context := window.sourceExteriorContext 𝒞 η labeling
+        have boundarySound :=
+          RoleAwareFiniteSumBlocks.sourceLocalBoundary_interpret_positive
+            window 𝒞 orientation remaining movingLabel
+              𝒞.toFusionCategoryData.unitIndex
+        rw [boundarySound] at context
+        change
+          Context C
+            (.tensor (.atom (𝒞.simple movingLabel))
+              (.atom ((𝒞.simple 𝒞.toFusionCategoryData.unitIndex)ᘁ)))
+            (.tensor (.atom (𝒞.simple movingLabel))
+              (.atom ((𝒞.simple 𝒞.toFusionCategoryData.unitIndex)ᘁ)))
+            .unit .unit at context
+        exact evalContextLinearMap (R := K) context
+    | negative =>
+        let labeling :=
+          RoleAwareFiniteSumBlocks.sourceLabeling
+            window remaining movingLabel
+              𝒞.toFusionCategoryData.unitIndex
+        let context := window.sourceExteriorContext 𝒞 η labeling
+        have boundarySound :=
+          RoleAwareFiniteSumBlocks.sourceLocalBoundary_interpret_negative
+            window 𝒞 orientation remaining movingLabel
+              𝒞.toFusionCategoryData.unitIndex
+        rw [boundarySound] at context
+        change
+          Context C
+            (.tensor (.atom (𝒞.simple movingLabel))
+              (.atom (𝒞.simple 𝒞.toFusionCategoryData.unitIndex)))
+            (.tensor (.atom (𝒞.simple movingLabel))
+              (.atom (𝒞.simple 𝒞.toFusionCategoryData.unitIndex)))
+            .unit .unit at context
+        exact evalContextLinearMap (R := K) context
+
+/--
 The internal character weight, with the orientation sign fixed by the
 role-aware window, survives the full generalized-sliding calculation.
 
@@ -2030,21 +2100,25 @@ structure FiniteSumBinding
         𝒞 η target window.targetGeometry
           ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle) =
       ∑ block, targetBlock block
-  closedWindow :
+  weightedWindow :
     Block →
-      LabelIndexedSlidingMovies.ClosedWindow
+      ChannelWeightedClosedWindow
         (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   movingCoefficient : Block → S → K
   source_endpoint :
     (block : Block) →
-      sourceBlock block =
-        linearEndpoint Side.before
-          (closedWindow block) (movingCoefficient block)
+      LinearDiagram.eval (sourceBlock block) =
+        (weightedWindow block).linearBeforeEval
+          (movingCoefficient block)
+          (RoleAwareFiniteSumBlocks.internalChannelWeight
+            window 𝒞 η sourceCycle)
   target_endpoint :
     (block : Block) →
-      targetBlock block =
-        linearEndpoint Side.after
-          (closedWindow block) (movingCoefficient block)
+      LinearDiagram.eval (targetBlock block) =
+        (weightedWindow block).linearAfterEval
+          (movingCoefficient block)
+          (RoleAwareFiniteSumBlocks.internalChannelWeight
+            window 𝒞 η sourceCycle)
 
 namespace FiniteSumBinding
 
@@ -2097,8 +2171,10 @@ theorem linear_eval_eq
   apply Finset.sum_congr rfl
   intro block _
   rw [binding.source_endpoint block, binding.target_endpoint block]
-  exact PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
-    (binding.closedWindow block) (binding.movingCoefficient block)
+  exact (binding.weightedWindow block).linear_eval_eq
+    (binding.movingCoefficient block)
+    (RoleAwareFiniteSumBlocks.internalChannelWeight
+      window 𝒞 η sourceCycle)
 
 /-- The complete finite-sum proof descends to the normalized evaluator. -/
 theorem roleAwareCycleEval_eq
@@ -2146,26 +2222,28 @@ structure BandEndpointInterpretation
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) where
-  closedWindow :
-    RoleAwareFiniteSumBlocks.Block (S := S) window →
-      LabelIndexedSlidingMovies.ClosedWindow
-        (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   source_endpoint :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
-      RoleAwareFiniteSumBlocks.sourceBlock
-          window 𝒞 η sourceCycle block =
-        linearEndpoint Side.before
-          (closedWindow block)
+      LinearDiagram.eval
+          (RoleAwareFiniteSumBlocks.sourceBlock
+            window 𝒞 η sourceCycle block) =
+        (RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          window 𝒞 η block).linearBeforeEval
           (RoleAwareFiniteSumBlocks.movingCoefficient
             window 𝒞 η sourceCycle block)
+          (RoleAwareFiniteSumBlocks.internalChannelWeight
+            window 𝒞 η sourceCycle)
   target_endpoint :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
-      RoleAwareFiniteSumBlocks.targetBlock
-          window 𝒞 η sourceCycle block =
-        linearEndpoint Side.after
-          (closedWindow block)
+      LinearDiagram.eval
+          (RoleAwareFiniteSumBlocks.targetBlock
+            window 𝒞 η sourceCycle block) =
+        (RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          window 𝒞 η block).linearAfterEval
           (RoleAwareFiniteSumBlocks.movingCoefficient
             window 𝒞 η sourceCycle block)
+          (RoleAwareFiniteSumBlocks.internalChannelWeight
+            window 𝒞 η sourceCycle)
 
 namespace BandEndpointInterpretation
 
@@ -2194,7 +2272,8 @@ noncomputable def toFiniteSumBinding
     RoleAwareFiniteSumBlocks.sourceDecomposition window 𝒞 η sourceCycle
   target_decomposition :=
     RoleAwareFiniteSumBlocks.targetDecomposition window 𝒞 η sourceCycle
-  closedWindow := interpretation.closedWindow
+  weightedWindow :=
+    RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow window 𝒞 η
   movingCoefficient :=
     RoleAwareFiniteSumBlocks.movingCoefficient window 𝒞 η sourceCycle
   source_endpoint := interpretation.source_endpoint
@@ -2251,14 +2330,16 @@ abbrev StandardEndpointObligation
   Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
 
 /--
-The three still-unproved endpoint obligations, exposed as separate fields.
+The two still-unproved endpoint obligations, exposed as separate fields.
 
 This is deliberately not a single `resolve : ... → BandEndpointInterpretation`
 black box.  A future construction must visibly:
 
-1. build the exact Bärenz--Barrett closed window for every exterior block;
-2. identify the source block with its `before` endpoint; and
-3. identify the target block with its `after` endpoint.
+1. identify the source block with its weighted `before` endpoint; and
+2. identify the target block with its weighted `after` endpoint.
+
+The weighted window itself is constructed from the exact common exterior;
+it is no longer supplied by this compiler.
 
 No instance or axiom constructs this compiler.
 -/
@@ -2266,17 +2347,6 @@ structure StandardBandEndpointCompiler
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (H2 : Type uH) [AddCommGroup H2] where
-  closedWindow :
-    {source target : CanonicalPresentation H2} →
-    (metadata :
-      KirbyCompleteness.TableTwoMoveMetadata
-        .twoOverTwo source.topology target.topology) →
-    (countsSound : source.topology.counts = target.topology.counts) →
-    (clean : CleanWindow source target metadata countsSound) →
-    (sourceCycle : source.DegreeTwoCycle) →
-    Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window →
-      LabelIndexedSlidingMovies.ClosedWindow
-        (Window.StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   source_endpoint :
     {source target : CanonicalPresentation H2} →
     (metadata :
@@ -2286,12 +2356,15 @@ structure StandardBandEndpointCompiler
     (clean : CleanWindow source target metadata countsSound) →
     (sourceCycle : source.DegreeTwoCycle) →
     (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window) →
-      Window.RoleAwareFiniteSumBlocks.sourceBlock
-          clean.window 𝒞 η sourceCycle block =
-        linearEndpoint Side.before
-          (closedWindow metadata countsSound clean sourceCycle block)
+      LinearDiagram.eval
+          (Window.RoleAwareFiniteSumBlocks.sourceBlock
+            clean.window 𝒞 η sourceCycle block) =
+        (Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          clean.window 𝒞 η block).linearBeforeEval
           (Window.RoleAwareFiniteSumBlocks.movingCoefficient
             clean.window 𝒞 η sourceCycle block)
+          (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
+            clean.window 𝒞 η sourceCycle)
   target_endpoint :
     {source target : CanonicalPresentation H2} →
     (metadata :
@@ -2301,17 +2374,20 @@ structure StandardBandEndpointCompiler
     (clean : CleanWindow source target metadata countsSound) →
     (sourceCycle : source.DegreeTwoCycle) →
     (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window) →
-      Window.RoleAwareFiniteSumBlocks.targetBlock
-          clean.window 𝒞 η sourceCycle block =
-        linearEndpoint Side.after
-          (closedWindow metadata countsSound clean sourceCycle block)
+      LinearDiagram.eval
+          (Window.RoleAwareFiniteSumBlocks.targetBlock
+            clean.window 𝒞 η sourceCycle block) =
+        (Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          clean.window 𝒞 η block).linearAfterEval
           (Window.RoleAwareFiniteSumBlocks.movingCoefficient
             clean.window 𝒞 η sourceCycle block)
+          (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
+            clean.window 𝒞 η sourceCycle)
 
 namespace StandardBandEndpointCompiler
 
 /--
-Assemble the old per-window record only after all three explicit fields have
+Assemble the per-window record only after both explicit fields have
 been supplied.  This definition adds no proof obligation and no equality.
 -/
 noncomputable def resolve
@@ -2327,8 +2403,6 @@ noncomputable def resolve
     (clean : CleanWindow source target metadata countsSound)
     (sourceCycle : source.DegreeTwoCycle) :
     StandardEndpointObligation clean 𝒞 η sourceCycle where
-  closedWindow :=
-    compiler.closedWindow metadata countsSound clean sourceCycle
   source_endpoint :=
     compiler.source_endpoint metadata countsSound clean sourceCycle
   target_endpoint :=
