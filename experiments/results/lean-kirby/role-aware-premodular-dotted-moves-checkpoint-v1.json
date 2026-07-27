@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-26T23:14:41-06:00",
+  "generated_at": "2026-07-26T23:26:48-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -13,6 +13,13 @@
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
     "required_resolution": "Construct StandardBandEndpointCompiler from StandardOrientedBandTransport and the separately listed category laws. The compiler must derive the explicit Bärenz-Barrett endpoints; the deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
+  },
+  "logic_safety_correction": {
+    "unsafe_commit": "ca9cb63b2573f76bd176c85d7bc918133633601c",
+    "unsafe_encoding": "StandardOrientedBandTransport was accidentally declared as an inductive proposition with no constructors.",
+    "failure_mode": "Any T4 witness of that empty proposition implied False and could silently discharge every categorical endpoint obligation by explosion.",
+    "correction": "StandardOrientedBandTransport is now an opaque inhabited predicate. It has no public constructor or eliminator, remains category-neutral, and cannot prove endpoint equalities by ex-falso.",
+    "claim_effect": "No established theorem claim was made from the unsafe checkpoint. The mainline remains blocked on the explicit StandardBandEndpointCompiler."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -153,8 +160,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-26T23:14:41-06:00",
-    "base_checkpoint_commit": "78153200ea02a8f4442117d0624dadbd968d8e90",
+    "timestamp": "2026-07-26T23:26:48-06:00",
+    "base_checkpoint_commit": "ca9cb63234fb76acb67a496bd8c5d65ce1bfec3e",
     "git_dirty": true,
     "dirty_path_count_at_capture": 7,
     "lean_version": "4.29.1",
@@ -162,6 +169,7 @@
     "os": "Darwin 24.6.0 arm64",
     "lean_process_limit": 1,
     "mainline_build": "PASS_CONDITIONAL_2375_JOBS",
+    "post_safety_correction_targeted_build": "PASS_CONDITIONAL_2319_JOBS",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
