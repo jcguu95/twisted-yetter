@@ -1628,6 +1628,120 @@ theorem negativeChannelSum_in_sourceTermContext
     _ (window.sourceTermContext 𝒞 η
       (sourceLabeling window remaining movingLabel stationaryLabel))
 
+/--
+The positive fusion-channel identity also holds in the exact transported
+target presentation context.
+-/
+theorem positiveChannelSum_in_targetTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (insertionLaw :
+      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    let labeling :=
+      targetLabeling window remaining movingLabel stationaryLabel
+    let objectSound :
+        ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+          (CanonicalPresentation.roleAwareLabelOf
+            𝒞 target labeling)).denote =
+          OrientedTensorObject 𝒞.premodular movingLabel stationaryLabel :=
+      by
+        simpa [OrientedTensorObject] using
+          congrArg (fun boundary : Boundary C => boundary.denote)
+            (targetLocalBoundary_interpret_positive
+              window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+    ∑ channel : OrientedChannel
+        𝒞.premodular movingLabel stationaryLabel,
+      evalContextLinearMap (R := K)
+        (window.targetTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (unequalExponentChannelMorphism
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (-(stationaryExponent window sourceCycle)) channel)) =
+      evalContextLinearMap (R := K)
+        (window.targetTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (globalPositiveEndpointCoupon
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle))) := by
+  dsimp only
+  exact sum_unequalExponentChannelMorphism_inBoundaryContext
+    𝒞.premodular insertionLaw η movingLabel stationaryLabel
+    (movingExponent window sourceCycle)
+    (-(stationaryExponent window sourceCycle))
+    _ (window.targetTermContext 𝒞 η
+      (targetLabeling window remaining movingLabel stationaryLabel))
+
+/--
+The negative fusion-channel identity also holds in the exact transported
+target presentation context.
+-/
+theorem negativeChannelSum_in_targetTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (insertionLaw :
+      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    let labeling :=
+      targetLabeling window remaining movingLabel stationaryLabel
+    let objectSound :
+        ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+          (CanonicalPresentation.roleAwareLabelOf
+            𝒞 target labeling)).denote =
+          NegativeTensorObject 𝒞.premodular movingLabel stationaryLabel :=
+      by
+        simpa [NegativeTensorObject] using
+          congrArg (fun boundary : Boundary C => boundary.denote)
+            (targetLocalBoundary_interpret_negative
+              window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+    ∑ channel : NegativeChannel
+        𝒞.premodular movingLabel stationaryLabel,
+      evalContextLinearMap (R := K)
+        (window.targetTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (unequalNegativeChannelMorphism
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle) channel)) =
+      evalContextLinearMap (R := K)
+        (window.targetTermContext 𝒞 η labeling)
+        (transportEndomorphism objectSound
+          (negativeCharacterCoupon
+            𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (stationaryExponent window sourceCycle))) := by
+  dsimp only
+  exact sum_unequalNegativeChannelMorphism_inBoundaryContext
+    𝒞.premodular insertionLaw η movingLabel stationaryLabel
+    (movingExponent window sourceCycle)
+    (stationaryExponent window sourceCycle)
+    _ (window.targetTermContext 𝒞 η
+      (targetLabeling window remaining movingLabel stationaryLabel))
+
 /-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock
     {H2 : Type uH} [AddCommGroup H2]
