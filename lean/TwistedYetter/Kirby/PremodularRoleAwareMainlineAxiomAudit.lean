@@ -44,6 +44,9 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetDecomposition
 
 #print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.endpointCoefficient_eq_movingCoefficient_mul_channel
+
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands
 
 #print axioms
