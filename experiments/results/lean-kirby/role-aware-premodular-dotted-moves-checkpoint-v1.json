@@ -1,11 +1,18 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-26T15:16:29-06:00",
-  "status": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED",
+  "generated_at": "2026-07-26T22:14:46-06:00",
+  "status": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
   "terminal_states": {
-    "premodular_mainline": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED",
-    "modular_specialization": "MODULAR_SPECIALIZATION_ESTABLISHED",
+    "premodular_mainline": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
+    "modular_specialization": "BLOCKED_ON_PREMODULAR_MAINLINE",
     "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
+  },
+  "active_blocker": {
+    "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked, but the exact clean attach/transport/detach source and target syntax has not yet been derived as the Bärenz-Barrett before/after endpoints.",
+    "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
+    "required_resolution": "Construct CleanEndpointObligation from the exact category-neutral clean band-slide script and the separately listed categorical laws. The deleted broad endpoint axiom may not be restored or renamed.",
+    "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit CleanBandEndpointResolver is supplied, so the complete premodular four-manifold invariant is not currently established."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -28,18 +35,18 @@
   "public_results": [
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter",
-      "status": "KERNEL_CHECKED_DEFINITION",
-      "meaning": "The public invariant takes the dependent pairs <premodular fusion category, tensor-identity automorphism> and <closed oriented smooth four-manifold, integral H2 class>."
+      "status": "KERNEL_CHECKED_CONDITIONAL_DEFINITION",
+      "meaning": "The public candidate takes the two dependent pairs plus an explicit unresolved CleanBandEndpointResolver. It is not yet an intrinsic invariant with only the intended mathematical inputs."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
-      "status": "KERNEL_CHECKED_RELATIVE_TO_LISTED_AXIOMS",
-      "meaning": "Orientation-preserving diffeomorphisms preserve TwistedYetter after transporting alpha by the induced H2 map."
+      "status": "RETRACTED_PENDING_CLEAN_BAND_RECONNECTION",
+      "meaning": "The theorem is kernel checked only as a conditional theorem taking an explicit CleanBandEndpointResolver. No axiom or instance constructs that resolver, so it is not admitted as established."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
-      "status": "KERNEL_CHECKED_SPECIALIZATION",
-      "meaning": "The modular theorem is obtained only by forgetting S-matrix nondegeneracy and invoking the premodular theorem."
+      "status": "BLOCKED_ON_PREMODULAR_MAINLINE",
+      "meaning": "The specialization is syntactically available but inherits the unresolved clean-band endpoint obligation."
     }
   ],
   "proved_internal_obligations": [
@@ -54,14 +61,14 @@
       "meaning": "The cycle-level formula descends to the handle-chain H2 class without modular killing."
     },
     {
-      "id": "EIGHT_EVENT_LOCAL_INVARIANCE",
+      "id": "EIGHT_EVENT_LOCAL_INVARIANCE_CONDITIONAL",
       "evidence": "PremodularRoleAwareLocalInvariance.elementaryMove_invariant",
-      "meaning": "A case split over the eight directed role-aware moves proves equality of the H2-level presentation evaluator."
+      "meaning": "The case split is source-bound for all eight moves, but the two-over-two branch explicitly requires the unresolved CleanBandEndpointResolver and is therefore conditional."
     },
     {
       "id": "FINITE_MOVIE_DESCENT",
       "evidence": "PremodularRoleAwareFourManifoldInvariant.presentationEvaluation_localInvariant",
-      "meaning": "Every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
+      "meaning": "Conditional on CleanBandEndpointResolver, every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
     },
     {
       "id": "MODULAR_SPECIALIZATION",
@@ -136,22 +143,23 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-26T15:16:29-06:00",
-    "base_checkpoint_commit": "bc046d33e42d37bdec903b545b39e95ec0c51c7a",
+    "timestamp": "2026-07-26T22:14:46-06:00",
+    "base_checkpoint_commit": "91c2ea8578c9d70527ad9e64d29aab61d94a9029",
     "git_dirty": true,
-    "dirty_path_count_at_capture": 6,
+    "dirty_path_count_at_capture": 9,
     "lean_version": "4.29.1",
     "lake_version": "5.0.0-src+f72c35b",
     "os": "Darwin 24.6.0 arm64",
     "lean_process_limit": 1,
-    "mainline_build": "PASS_2329_JOBS",
-    "mainline_axiom_audit": "PASS",
-    "final_public_axiom_audit": "PASS",
-    "full_repository_build": "PASS_2374_JOBS",
+    "mainline_build": "PASS_CONDITIONAL_2319_JOBS",
+    "mainline_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
+    "final_public_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
+    "full_repository_build": "PASS_2375_JOBS",
     "unsupported_legacy_aggregate_imports_removed": true,
     "new_route_sorry_or_admit": false
   },
   "explicit_nonclaims": [
+    "The premodular and modular four-manifold invariants are not established until CleanBandEndpointResolver is constructed without a new endpoint or evaluation axiom.",
     "No equality with the original Crane-Yetter or Yetter state sum is claimed.",
     "Existing Figure 21 or other legacy numerical artifacts are not re-certified by this theorem.",
     "The legacy full dotted-label modular evaluator is not yet proved equal to the role-aware evaluator.",

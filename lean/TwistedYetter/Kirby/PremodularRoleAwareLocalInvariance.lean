@@ -78,6 +78,8 @@ theorem elementaryMove_invariant
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {source target : Presentation H2}
+    (twoOverTwoEndpoints :
+      RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver 𝒞 η H2)
     (move : ElementaryMove source target)
     (alpha :
       source.canonicalPresentation.topology.handleChain.SecondHomology) :
@@ -117,7 +119,7 @@ theorem elementaryMove_invariant
               simpa [ElementaryMove.transport, ElementaryMove.forget,
                 topologyMove, transport, targetCycle] using
                 forwardCycleClass transport alpha
-  | oneOverOne metadata countsSound movie sourceGeometry targetGeometry =>
+  | oneOverOne metadata countsSound compiled sourceGeometry targetGeometry =>
       let topologyMove : TopologicalTableTwoMove
           source.canonicalPresentation.topology
           target.canonicalPresentation.topology :=
@@ -137,17 +139,21 @@ theorem elementaryMove_invariant
             RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
               𝒞 η target.canonicalPresentation
               target.simultaneousGeometry targetCycle := by
-              simpa [sourceGeometry, targetGeometry, topologyMove, transport,
-                sourceCycle, targetCycle,
+              change compiled.movie.sourceGeometry =
+                source.simultaneousGeometry at sourceGeometry
+              change compiled.movie.targetGeometry =
+                target.simultaneousGeometry at targetGeometry
+              rw [← sourceGeometry, ← targetGeometry]
+              simpa [topologyMove, transport, sourceCycle, targetCycle,
                 CanonicalSourceBoundSlideMovie.Request.targetCycle] using
                 SourceBoundUnitCutGeometry.oneOverOne_roleAwareCycleEval_eq
-                  metadata countsSound movie 𝒞 η sourceCycle
+                  metadata countsSound compiled.movie 𝒞 η sourceCycle
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
                 topologyMove, transport, targetCycle] using
                 forwardCycleClass transport alpha
-  | twoOverOne metadata countsSound movie sourceGeometry targetGeometry =>
+  | twoOverOne metadata countsSound compiled sourceGeometry targetGeometry =>
       let topologyMove : TopologicalTableTwoMove
           source.canonicalPresentation.topology
           target.canonicalPresentation.topology :=
@@ -167,17 +173,21 @@ theorem elementaryMove_invariant
             RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
               𝒞 η target.canonicalPresentation
               target.simultaneousGeometry targetCycle := by
-              simpa [sourceGeometry, targetGeometry, topologyMove, transport,
-                sourceCycle, targetCycle,
+              change compiled.movie.sourceGeometry =
+                source.simultaneousGeometry at sourceGeometry
+              change compiled.movie.targetGeometry =
+                target.simultaneousGeometry at targetGeometry
+              rw [← sourceGeometry, ← targetGeometry]
+              simpa [topologyMove, transport, sourceCycle, targetCycle,
                 CanonicalSourceBoundSlideMovie.Request.targetCycle] using
                 SourceBoundUnitCutGeometry.twoOverOne_roleAwareCycleEval_eq
-                  metadata countsSound movie 𝒞 η sourceCycle
+                  metadata countsSound compiled.movie 𝒞 η sourceCycle
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
                 topologyMove, transport, targetCycle] using
                 forwardCycleClass transport alpha
-  | twoOverTwo metadata countsSound window sourceGeometry targetGeometry =>
+  | twoOverTwo metadata countsSound clean sourceGeometry targetGeometry =>
       let topologyMove : TopologicalTableTwoMove
           source.canonicalPresentation.topology
           target.canonicalPresentation.topology :=
@@ -197,11 +207,17 @@ theorem elementaryMove_invariant
             RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
               𝒞 η target.canonicalPresentation
               target.simultaneousGeometry targetCycle := by
-              simpa [sourceGeometry, targetGeometry, topologyMove, transport,
-                sourceCycle, targetCycle,
+              change clean.window.sourceGeometry =
+                source.simultaneousGeometry at sourceGeometry
+              change clean.window.targetGeometry =
+                target.simultaneousGeometry at targetGeometry
+              rw [← sourceGeometry, ← targetGeometry]
+              simpa [topologyMove, transport, sourceCycle, targetCycle,
                 CanonicalSourceBoundSlideMovie.Request.targetCycle] using
-                window.roleAwareCycleEval_eq
+                clean.roleAwareCycleEval_eq
                   metadata countsSound 𝒞 η sourceCycle
+                    (twoOverTwoEndpoints.resolve
+                      metadata countsSound clean sourceCycle)
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,

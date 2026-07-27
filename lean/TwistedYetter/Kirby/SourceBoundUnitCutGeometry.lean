@@ -219,6 +219,16 @@ structure OneOverOneMovie
 
 namespace TwoOverOneMovie
 
+/-- The dotted component selected by the exact local 2/1 movie. -/
+def dottedId
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      TableTwoMoveMetadata .twoOverOne source.topology target.topology} :
+    TwoOverOneMovie source target metadata → String
+  | .positive _ _ dottedId _ _ _ _ _ _ => dottedId
+  | .negative _ _ dottedId _ _ _ _ _ _ => dottedId
+
 /-- Source simultaneous-cut geometry selected by the exact movie. -/
 def sourceGeometry
     {H2 : Type uH} [AddCommGroup H2]
@@ -548,6 +558,89 @@ theorem roleAwareTerm_eval_eq
     movie.leftBoundary movie.rightBoundary movie.context
 
 end OneOverOneMovie
+
+/--
+A 1/1 movie certified against the unique clean script in the source recipe.
+
+The caller may provide the category-neutral realization, but cannot silently
+swap the moving and stationary dotted components.
+-/
+structure CleanOneOverOneMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (metadata :
+      TableTwoMoveMetadata .oneOverOne source.topology target.topology) where
+  movie : OneOverOneMovie source target metadata
+  moving_id_sound :
+    movie.leftDottedId =
+      metadata.recipe.oneOverOneCleanScript.attach.movingSource.componentId
+  stationary_id_sound :
+    movie.rightDottedId =
+      metadata.recipe.oneOverOneCleanScript.attach.stationarySource.componentId
+
+namespace CleanOneOverOneMovie
+
+/-- Source simultaneous-cut geometry of the compiled clean movie. -/
+def sourceGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      TableTwoMoveMetadata .oneOverOne source.topology target.topology}
+    (compiled : CleanOneOverOneMovie source target metadata) :
+    Geometry source :=
+  compiled.movie.sourceGeometry
+
+/-- Target simultaneous-cut geometry of the compiled clean movie. -/
+def targetGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      TableTwoMoveMetadata .oneOverOne source.topology target.topology}
+    (compiled : CleanOneOverOneMovie source target metadata) :
+    Geometry target :=
+  compiled.movie.targetGeometry
+
+end CleanOneOverOneMovie
+
+/--
+A 2/1 movie certified against the unique clean script in the source recipe.
+
+Orientation is already indexed by `TwoOverOneMovie`; this additional binding
+prevents a movie around a different dotted component from being reused.
+-/
+structure CleanTwoOverOneMovie
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (metadata :
+      TableTwoMoveMetadata .twoOverOne source.topology target.topology) where
+  movie : TwoOverOneMovie source target metadata
+  stationary_id_sound :
+    movie.dottedId =
+      metadata.recipe.twoOverOneCleanScript.attach.stationarySource.componentId
+
+namespace CleanTwoOverOneMovie
+
+/-- Source simultaneous-cut geometry of the compiled clean movie. -/
+def sourceGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      TableTwoMoveMetadata .twoOverOne source.topology target.topology}
+    (compiled : CleanTwoOverOneMovie source target metadata) :
+    Geometry source :=
+  compiled.movie.sourceGeometry
+
+/-- Target simultaneous-cut geometry of the compiled clean movie. -/
+def targetGeometry
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      TableTwoMoveMetadata .twoOverOne source.topology target.topology}
+    (compiled : CleanTwoOverOneMovie source target metadata) :
+    Geometry target :=
+  compiled.movie.targetGeometry
+
+end CleanTwoOverOneMovie
 
 /--
 Complete denominator-safe role-aware 2/1 evaluation equality.

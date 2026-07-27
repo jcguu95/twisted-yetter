@@ -35,13 +35,13 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetDecomposition
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation
-
-#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.toFiniteSumBinding
 
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.roleAwareCycleEval_eq
+
+#check
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver
 
 #print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant

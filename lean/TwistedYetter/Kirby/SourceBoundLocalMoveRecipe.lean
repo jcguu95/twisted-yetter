@@ -947,6 +947,106 @@ def zeroFramedEvents
 end TwoThreeCancellationScript
 
 /--
+One clean endpoint of a band-slide movie.
+
+The selected moving and stationary strands are adjacent in both endpoint
+slices.  Everything to their left and right is retained explicitly, so
+adjacency cannot be faked by forgetting foreign strands.  The collar itself
+contains no event: crossings, coupons, twists, births, and deaths belong to
+the transport region, never to attach or detach.
+-/
+structure CleanBandEndpointScript
+    (movingComponentId stationaryComponentId : String) where
+  sourceSlice : DeclaredSlice
+  targetSlice : DeclaredSlice
+  movingSource : StrandState
+  stationarySource : StrandState
+  movingTarget : StrandState
+  stationaryTarget : StrandState
+  sourceLeft : List StrandState
+  sourceRight : List StrandState
+  targetLeft : List StrandState
+  targetRight : List StrandState
+  source_order_sound :
+    sourceSlice.activeStrands =
+      sourceLeft ++ [movingSource, stationarySource] ++ sourceRight
+  target_order_sound :
+    targetSlice.activeStrands =
+      targetLeft ++ [movingTarget, stationaryTarget] ++ targetRight
+  moving_source_component_sound :
+    movingSource.componentId = movingComponentId
+  stationary_source_component_sound :
+    stationarySource.componentId = stationaryComponentId
+  moving_target_component_sound :
+    movingTarget.componentId = movingComponentId
+  stationary_target_component_sound :
+    stationaryTarget.componentId = stationaryComponentId
+  source_strands_distinct :
+    movingSource.strandId ≠ stationarySource.strandId
+  target_strands_distinct :
+    movingTarget.strandId ≠ stationaryTarget.strandId
+  sourceCollarEvents : List SliceEvent
+  targetCollarEvents : List SliceEvent
+  source_collar_clean : sourceCollarEvents = []
+  target_collar_clean : targetCollarEvents = []
+
+/--
+The exact category-neutral attach--transport--detach script of one band slide.
+
+The role indices distinguish the three Kirby operations without mentioning a
+category or evaluator.  Source and target transport windows are retained
+literally; `MatchesWindow` binds them to the admitted presentations.
+-/
+structure CleanBandSlideScript
+    (orientation : BandOrientation)
+    (movingComponentId stationaryComponentId : String)
+    (movingRole stationaryRole : ComponentRole) where
+  attach :
+    CleanBandEndpointScript movingComponentId stationaryComponentId
+  detach :
+    CleanBandEndpointScript movingComponentId stationaryComponentId
+  sourceTransportEvents : List SliceEvent
+  targetTransportEvents : List SliceEvent
+  source_transport_nonempty : sourceTransportEvents ≠ []
+  target_transport_nonempty : targetTransportEvents ≠ []
+  source_attach_before_detach :
+    attach.sourceSlice.index < detach.sourceSlice.index
+  target_attach_before_detach :
+    attach.targetSlice.index < detach.targetSlice.index
+  pushOffOrientation : BandOrientation
+  push_off_orientation_sound : pushOffOrientation = orientation
+  recordedMovingRole : ComponentRole
+  recordedStationaryRole : ComponentRole
+  moving_role_sound : recordedMovingRole = movingRole
+  stationary_role_sound : recordedStationaryRole = stationaryRole
+
+namespace CleanBandSlideScript
+
+/-- The complete source event window of a clean band-slide script. -/
+def sourceEvents
+    {orientation : BandOrientation}
+    {movingComponentId stationaryComponentId : String}
+    {movingRole stationaryRole : ComponentRole}
+    (script :
+      CleanBandSlideScript orientation movingComponentId stationaryComponentId
+        movingRole stationaryRole) : List SliceEvent :=
+  script.attach.sourceCollarEvents ++ script.sourceTransportEvents ++
+    script.detach.sourceCollarEvents
+
+/-- The complete target event window of a clean band-slide script. -/
+def targetEvents
+    {orientation : BandOrientation}
+    {movingComponentId stationaryComponentId : String}
+    {movingRole stationaryRole : ComponentRole}
+    (script :
+      CleanBandSlideScript orientation movingComponentId stationaryComponentId
+        movingRole stationaryRole) : List SliceEvent :=
+  script.attach.targetCollarEvents ++ script.targetTransportEvents ++
+    script.detach.targetCollarEvents
+
+end CleanBandSlideScript
+
+/--
 Closed graphical program indexed by the exact handle edit.
 
 The framed-isotopy constructor retains an ordered generator script and pins
@@ -969,21 +1069,30 @@ inductive GraphicalEditProgram :
   | oneOverOne
       (orientation : BandOrientation)
       (slidingDottedId stationaryDottedId : String)
-      (distinct : slidingDottedId ≠ stationaryDottedId) :
+      (distinct : slidingDottedId ≠ stationaryDottedId)
+      (script :
+        CleanBandSlideScript orientation
+          slidingDottedId stationaryDottedId .dotted .dotted) :
       GraphicalEditProgram
         (.oneOverOne orientation
           slidingDottedId stationaryDottedId distinct)
   | twoOverOne
       (orientation : BandOrientation)
       (slidingTwoHandleId stationaryDottedId : String)
-      (distinct : slidingTwoHandleId ≠ stationaryDottedId) :
+      (distinct : slidingTwoHandleId ≠ stationaryDottedId)
+      (script :
+        CleanBandSlideScript orientation
+          slidingTwoHandleId stationaryDottedId .ordinary .dotted) :
       GraphicalEditProgram
         (.twoOverOne orientation
           slidingTwoHandleId stationaryDottedId distinct)
   | twoOverTwo
       (orientation : BandOrientation)
       (slidingTwoHandleId stationaryTwoHandleId : String)
-      (distinct : slidingTwoHandleId ≠ stationaryTwoHandleId) :
+      (distinct : slidingTwoHandleId ≠ stationaryTwoHandleId)
+      (script :
+        CleanBandSlideScript orientation
+          slidingTwoHandleId stationaryTwoHandleId .ordinary .ordinary) :
       GraphicalEditProgram
         (.twoOverTwo orientation
           slidingTwoHandleId stationaryTwoHandleId distinct)
@@ -1024,9 +1133,27 @@ def GraphicalEditProgram.MatchesWindow
     (window : PresentationWindowEdit source target) : Prop :=
   match program with
   | .framedIsotopy .. => True
-  | .oneOverOne .. => True
-  | .twoOverOne .. => True
-  | .twoOverTwo .. => True
+  | .oneOverOne _ _ _ _ script =>
+      window.sourceEventWindow = script.sourceEvents ∧
+        window.targetEventWindow = script.targetEvents ∧
+        script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.attach.targetSlice ∈ target.raw.declaredSlices ∧
+        script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.detach.targetSlice ∈ target.raw.declaredSlices
+  | .twoOverOne _ _ _ _ script =>
+      window.sourceEventWindow = script.sourceEvents ∧
+        window.targetEventWindow = script.targetEvents ∧
+        script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.attach.targetSlice ∈ target.raw.declaredSlices ∧
+        script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.detach.targetSlice ∈ target.raw.declaredSlices
+  | .twoOverTwo _ _ _ _ script =>
+      window.sourceEventWindow = script.sourceEvents ∧
+        window.targetEventWindow = script.targetEvents ∧
+        script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.attach.targetSlice ∈ target.raw.declaredSlices ∧
+        script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
+        script.detach.targetSlice ∈ target.raw.declaredSlices
   | .oneTwoBirth _ _ _ script =>
       window.sourceEventWindow = script.identityEvents ∧
         window.targetEventWindow = script.hopfEvents
@@ -1041,6 +1168,144 @@ def GraphicalEditProgram.MatchesWindow
         window.targetEventWindow = script.identityEvents
 
 namespace GraphicalEditProgram
+
+/-- Read a clean 1-over-1 script without exposing the edit constructor. -/
+def oneOverOneCleanScriptOfEdit
+    (edit : HandleEdit .oneOverOne)
+    (program : GraphicalEditProgram edit) :
+    CleanBandSlideScript
+      edit.oneOverOneOrientation
+      edit.oneOverOneSlidingId
+      edit.oneOverOneStationaryId
+      .dotted .dotted :=
+  match edit, program with
+  | .oneOverOne _ _ _ _, .oneOverOne _ _ _ _ script => script
+
+/-- Read the exact clean script from a 1-over-1 graphical program. -/
+def oneOverOneCleanScript
+    {orientation : BandOrientation}
+    {slidingDottedId stationaryDottedId : String}
+    {distinct : slidingDottedId ≠ stationaryDottedId} :
+    GraphicalEditProgram
+        (.oneOverOne orientation slidingDottedId stationaryDottedId distinct) →
+      CleanBandSlideScript orientation
+        slidingDottedId stationaryDottedId .dotted .dotted
+  | .oneOverOne _ _ _ _ script => script
+
+/-- Read a clean 2-over-1 script without exposing the edit constructor. -/
+def twoOverOneCleanScriptOfEdit
+    (edit : HandleEdit .twoOverOne)
+    (program : GraphicalEditProgram edit) :
+    CleanBandSlideScript
+      edit.twoOverOneOrientation
+      edit.twoOverOneSlidingId
+      edit.twoOverOneStationaryId
+      .ordinary .dotted :=
+  match edit, program with
+  | .twoOverOne _ _ _ _, .twoOverOne _ _ _ _ script => script
+
+/-- Read the exact clean script from a 2-over-1 graphical program. -/
+def twoOverOneCleanScript
+    {orientation : BandOrientation}
+    {slidingTwoHandleId stationaryDottedId : String}
+    {distinct : slidingTwoHandleId ≠ stationaryDottedId} :
+    GraphicalEditProgram
+        (.twoOverOne orientation slidingTwoHandleId stationaryDottedId distinct) →
+      CleanBandSlideScript orientation
+        slidingTwoHandleId stationaryDottedId .ordinary .dotted
+  | .twoOverOne _ _ _ _ script => script
+
+/-- Read a clean 2-over-2 script without exposing the edit constructor. -/
+def twoOverTwoCleanScriptOfEdit
+    (edit : HandleEdit .twoOverTwo)
+    (program : GraphicalEditProgram edit) :
+    CleanBandSlideScript
+      edit.twoOverTwoOrientation
+      edit.twoOverTwoSlidingId
+      edit.twoOverTwoStationaryId
+      .ordinary .ordinary :=
+  match edit, program with
+  | .twoOverTwo _ _ _ _, .twoOverTwo _ _ _ _ script => script
+
+/-- Read the exact clean script from a 2-over-2 graphical program. -/
+def twoOverTwoCleanScript
+    {orientation : BandOrientation}
+    {slidingTwoHandleId stationaryTwoHandleId : String}
+    {distinct : slidingTwoHandleId ≠ stationaryTwoHandleId} :
+    GraphicalEditProgram
+        (.twoOverTwo orientation slidingTwoHandleId stationaryTwoHandleId distinct) →
+      CleanBandSlideScript orientation
+        slidingTwoHandleId stationaryTwoHandleId .ordinary .ordinary
+  | .twoOverTwo _ _ _ _ script => script
+
+/-- Expand a clean 1-over-1 window certificate to its literal checks. -/
+theorem oneOverOne_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .oneOverOne)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (oneOverOneCleanScriptOfEdit edit program).sourceEvents ∧
+      window.targetEventWindow =
+          (oneOverOneCleanScriptOfEdit edit program).targetEvents ∧
+        (oneOverOneCleanScriptOfEdit edit program).attach.sourceSlice ∈
+            source.raw.declaredSlices ∧
+          (oneOverOneCleanScriptOfEdit edit program).attach.targetSlice ∈
+              target.raw.declaredSlices ∧
+            (oneOverOneCleanScriptOfEdit edit program).detach.sourceSlice ∈
+                source.raw.declaredSlices ∧
+              (oneOverOneCleanScriptOfEdit edit program).detach.targetSlice ∈
+                target.raw.declaredSlices := by
+  cases edit
+  cases program
+  exact sound
+
+/-- Expand a clean 2-over-1 window certificate to its literal checks. -/
+theorem twoOverOne_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .twoOverOne)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (twoOverOneCleanScriptOfEdit edit program).sourceEvents ∧
+      window.targetEventWindow =
+          (twoOverOneCleanScriptOfEdit edit program).targetEvents ∧
+        (twoOverOneCleanScriptOfEdit edit program).attach.sourceSlice ∈
+            source.raw.declaredSlices ∧
+          (twoOverOneCleanScriptOfEdit edit program).attach.targetSlice ∈
+              target.raw.declaredSlices ∧
+            (twoOverOneCleanScriptOfEdit edit program).detach.sourceSlice ∈
+                source.raw.declaredSlices ∧
+              (twoOverOneCleanScriptOfEdit edit program).detach.targetSlice ∈
+                target.raw.declaredSlices := by
+  cases edit
+  cases program
+  exact sound
+
+/-- Expand a clean 2-over-2 window certificate to its literal checks. -/
+theorem twoOverTwo_matchesWindow
+    {source target : FormalPresentation}
+    (edit : HandleEdit .twoOverTwo)
+    (program : GraphicalEditProgram edit)
+    (window : PresentationWindowEdit source target)
+    (sound : program.MatchesWindow window) :
+    window.sourceEventWindow =
+        (twoOverTwoCleanScriptOfEdit edit program).sourceEvents ∧
+      window.targetEventWindow =
+          (twoOverTwoCleanScriptOfEdit edit program).targetEvents ∧
+        (twoOverTwoCleanScriptOfEdit edit program).attach.sourceSlice ∈
+            source.raw.declaredSlices ∧
+          (twoOverTwoCleanScriptOfEdit edit program).attach.targetSlice ∈
+              target.raw.declaredSlices ∧
+            (twoOverTwoCleanScriptOfEdit edit program).detach.sourceSlice ∈
+                source.raw.declaredSlices ∧
+              (twoOverTwoCleanScriptOfEdit edit program).detach.targetSlice ∈
+                target.raw.declaredSlices := by
+  cases edit
+  cases program
+  exact sound
 
 /-- Read a one--two birth script without exposing the edit constructor. -/
 def oneTwoBirthScriptOfEdit
@@ -1205,6 +1470,63 @@ structure SourceBoundRecipe
   sourceScopeCaveat : String
 
 namespace SourceBoundRecipe
+
+/-- The clean 1-over-1 band script pinned by one exact source recipe. -/
+def oneOverOneCleanScript
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .oneOverOne source target) :
+    CleanBandSlideScript
+      recipe.handleEdit.oneOverOneOrientation
+      recipe.handleEdit.oneOverOneSlidingId
+      recipe.handleEdit.oneOverOneStationaryId
+      .dotted .dotted :=
+  GraphicalEditProgram.oneOverOneCleanScriptOfEdit
+    recipe.handleEdit recipe.graphicalProgram
+
+/-- The clean 2-over-1 band script pinned by one exact source recipe. -/
+def twoOverOneCleanScript
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverOne source target) :
+    CleanBandSlideScript
+      recipe.handleEdit.twoOverOneOrientation
+      recipe.handleEdit.twoOverOneSlidingId
+      recipe.handleEdit.twoOverOneStationaryId
+      .ordinary .dotted :=
+  GraphicalEditProgram.twoOverOneCleanScriptOfEdit
+    recipe.handleEdit recipe.graphicalProgram
+
+/-- The clean 2-over-2 band script pinned by one exact source recipe. -/
+def twoOverTwoCleanScript
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverTwo source target) :
+    CleanBandSlideScript
+      recipe.handleEdit.twoOverTwoOrientation
+      recipe.handleEdit.twoOverTwoSlidingId
+      recipe.handleEdit.twoOverTwoStationaryId
+      .ordinary .ordinary :=
+  GraphicalEditProgram.twoOverTwoCleanScriptOfEdit
+    recipe.handleEdit recipe.graphicalProgram
+
+/-- The clean 1-over-1 script reconstructs the admitted source/target window. -/
+theorem oneOverOneCleanScript_matchesWindow
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .oneOverOne source target) :
+    recipe.graphicalProgram.MatchesWindow recipe.window :=
+  recipe.graphical_window_sound
+
+/-- The clean 2-over-1 script reconstructs the admitted source/target window. -/
+theorem twoOverOneCleanScript_matchesWindow
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverOne source target) :
+    recipe.graphicalProgram.MatchesWindow recipe.window :=
+  recipe.graphical_window_sound
+
+/-- The clean 2-over-2 script reconstructs the admitted source/target window. -/
+theorem twoOverTwoCleanScript_matchesWindow
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverTwo source target) :
+    recipe.graphicalProgram.MatchesWindow recipe.window :=
+  recipe.graphical_window_sound
 
 /--
 The category-neutral structural binding extracted from one exact 2-over-2

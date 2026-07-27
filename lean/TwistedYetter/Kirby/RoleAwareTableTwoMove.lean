@@ -659,13 +659,13 @@ inductive ElementaryMove
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (movie :
-        SourceBoundUnitCutGeometry.OneOverOneMovie
+      (compiled :
+        SourceBoundUnitCutGeometry.CleanOneOverOneMovie
           source.canonicalPresentation target.canonicalPresentation metadata)
       (sourceGeometry :
-        movie.sourceGeometry = source.simultaneousGeometry)
+        compiled.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        movie.targetGeometry = target.simultaneousGeometry) :
+        compiled.targetGeometry = target.simultaneousGeometry) :
       ElementaryMove source target
   | twoOverOne
       {source target : Presentation H2}
@@ -676,13 +676,13 @@ inductive ElementaryMove
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (movie :
-        SourceBoundUnitCutGeometry.TwoOverOneMovie
+      (compiled :
+        SourceBoundUnitCutGeometry.CleanTwoOverOneMovie
           source.canonicalPresentation target.canonicalPresentation metadata)
       (sourceGeometry :
-        movie.sourceGeometry = source.simultaneousGeometry)
+        compiled.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        movie.targetGeometry = target.simultaneousGeometry) :
+        compiled.targetGeometry = target.simultaneousGeometry) :
       ElementaryMove source target
   | twoOverTwo
       {source target : Presentation H2}
@@ -693,14 +693,14 @@ inductive ElementaryMove
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (window :
-        RoleAwareTwoOverTwoBandMovie.Window
+      (clean :
+        RoleAwareTwoOverTwoBandMovie.CleanWindow
           source.canonicalPresentation target.canonicalPresentation
           metadata countsSound)
       (sourceGeometry :
-        window.sourceGeometry = source.simultaneousGeometry)
+        clean.window.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        window.targetGeometry = target.simultaneousGeometry) :
+        clean.window.targetGeometry = target.simultaneousGeometry) :
       ElementaryMove source target
   | oneTwoBirth
       {source target : Presentation H2}
@@ -832,13 +832,13 @@ inductive StandardMoveLocalFactorization
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (movie :
-        SourceBoundUnitCutGeometry.OneOverOneMovie
+      (compiled :
+        SourceBoundUnitCutGeometry.CleanOneOverOneMovie
           source.canonicalPresentation target.canonicalPresentation metadata)
       (sourceGeometry :
-        movie.sourceGeometry = source.simultaneousGeometry)
+        compiled.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        movie.targetGeometry = target.simultaneousGeometry) :
+        compiled.targetGeometry = target.simultaneousGeometry) :
       StandardMoveLocalFactorization
         (.oneOverOne metadata countsSound)
   | twoOverOne
@@ -849,13 +849,13 @@ inductive StandardMoveLocalFactorization
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (movie :
-        SourceBoundUnitCutGeometry.TwoOverOneMovie
+      (compiled :
+        SourceBoundUnitCutGeometry.CleanTwoOverOneMovie
           source.canonicalPresentation target.canonicalPresentation metadata)
       (sourceGeometry :
-        movie.sourceGeometry = source.simultaneousGeometry)
+        compiled.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        movie.targetGeometry = target.simultaneousGeometry) :
+        compiled.targetGeometry = target.simultaneousGeometry) :
       StandardMoveLocalFactorization
         (.twoOverOne metadata countsSound)
   | twoOverTwo
@@ -866,14 +866,14 @@ inductive StandardMoveLocalFactorization
       (countsSound :
         source.canonicalPresentation.topology.counts =
           target.canonicalPresentation.topology.counts)
-      (window :
-        RoleAwareTwoOverTwoBandMovie.Window
+      (clean :
+        RoleAwareTwoOverTwoBandMovie.CleanWindow
           source.canonicalPresentation target.canonicalPresentation
           metadata countsSound)
       (sourceGeometry :
-        window.sourceGeometry = source.simultaneousGeometry)
+        clean.window.sourceGeometry = source.simultaneousGeometry)
       (targetGeometry :
-        window.targetGeometry = target.simultaneousGeometry) :
+        clean.window.targetGeometry = target.simultaneousGeometry) :
       StandardMoveLocalFactorization
         (.twoOverTwo metadata countsSound)
   | oneTwoBirth
@@ -941,12 +941,12 @@ def compile
       sourceGeometry targetGeometry =>
       .framedIsotopy metadata countsSound geometry componentChangeSound
         sourceGeometry targetGeometry
-  | .oneOverOne metadata countsSound movie sourceGeometry targetGeometry =>
-      .oneOverOne metadata countsSound movie sourceGeometry targetGeometry
-  | .twoOverOne metadata countsSound movie sourceGeometry targetGeometry =>
-      .twoOverOne metadata countsSound movie sourceGeometry targetGeometry
-  | .twoOverTwo metadata countsSound window sourceGeometry targetGeometry =>
-      .twoOverTwo metadata countsSound window sourceGeometry targetGeometry
+  | .oneOverOne metadata countsSound compiled sourceGeometry targetGeometry =>
+      .oneOverOne metadata countsSound compiled sourceGeometry targetGeometry
+  | .twoOverOne metadata countsSound compiled sourceGeometry targetGeometry =>
+      .twoOverOne metadata countsSound compiled sourceGeometry targetGeometry
+  | .twoOverTwo metadata countsSound clean sourceGeometry targetGeometry =>
+      .twoOverTwo metadata countsSound clean sourceGeometry targetGeometry
   | .oneTwoBirth metadata countsSound data =>
       .oneTwoBirth metadata countsSound data
   | .oneTwoDeath metadata countsSound data =>

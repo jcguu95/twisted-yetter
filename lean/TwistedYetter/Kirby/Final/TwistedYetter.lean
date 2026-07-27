@@ -244,6 +244,18 @@ def toPremodular
 
 end TwistedModularCategory
 
+/--
+The explicit unresolved clean 2/2 endpoint obligation for the public
+presentation calculus.
+
+No axiom or instance constructs this resolver.  Its presence in the
+conditional interface prevents the clean-band proof gap from being hidden.
+-/
+abbrev CleanBandEndpointResolver
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S)) :=
+  RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver
+    𝒞η.1 𝒞η.2 SpecialKirbyHandleTheory.AuxiliaryH₂
+
 /-- The formal scalar attached to one accepted special Kirby presentation. -/
 noncomputable def specialKirbyEvaluation
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
@@ -256,14 +268,16 @@ noncomputable def specialKirbyEvaluation
     presentation.markedPresentation
 
 /--
-The intrinsic homologically twisted Yetter invariant.
+The conditional homologically twisted Yetter candidate.
 
-Its only mathematical arguments are `⟨𝒞, η⟩` and `⟨X, α⟩`.
-Noncomputability comes solely from selecting a presentation of an abstract
-manifold pair.
+Besides `⟨𝒞, η⟩` and `⟨X, α⟩`, this definition deliberately requires the
+still-unproved clean 2/2 endpoint resolver.  It must not be presented as an
+established intrinsic invariant until that resolver is constructed as a
+theorem from the clean band-slide syntax.
 -/
 noncomputable def TwistedYetter
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η)
     (Xα : HomologicalFourManifold.{uX}) : K :=
   (SpecialKirbyHandleTheory.topologyBoundary.constructInvariant
       (presentationEvaluation
@@ -273,18 +287,20 @@ noncomputable def TwistedYetter
       (presentationEvaluation_localInvariant
         𝒞η.1 𝒞η.2
         SpecialKirbyHandleTheory.AuxiliaryH₂
+        twoOverTwoEndpoints
         SpecialKirbyHandleTheory.localGeometry)).EvalC
     Xα.1 Xα.2
 
 /--
-The intrinsic invariant agrees with the formal evaluation of every accepted
-special Kirby presentation.
+Conditional on the clean endpoint resolver, the candidate agrees with the
+formal evaluation of every accepted special Kirby presentation.
 -/
 theorem TwistedYetter_on_specialKirbyPresentation
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η)
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
-    TwistedYetter 𝒞η Xα =
+    TwistedYetter 𝒞η twoOverTwoEndpoints Xα =
       specialKirbyEvaluation 𝒞η presentation := by
   simpa [TwistedYetter, specialKirbyEvaluation] using
     SpecialKirbyHandleTheory.topologyBoundary.admissibleKirbyCerfTheorem
@@ -302,17 +318,19 @@ theorem TwistedYetter_on_specialKirbyPresentation
           (presentationEvaluation_localInvariant
             𝒞η.1 𝒞η.2
             SpecialKirbyHandleTheory.AuxiliaryH₂
+            twoOverTwoEndpoints
             SpecialKirbyHandleTheory.localGeometry))
         Xα.1 Xα.2 presentation
 
-/-- Diffeomorphism invariance with the displayed class transported on `H₂`. -/
+/-- Conditional diffeomorphism invariance, with the class transported on `H₂`. -/
 theorem TwistedYetter_diffeomorphism_invariant
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η)
     {X Y : ClosedOrientedSmoothFourManifold.{uX}}
     (f : orientedDiffeomorphism.Hom X Y)
     (α : H₂ X) :
-    TwistedYetter 𝒞η ⟨X, α⟩ =
-      TwistedYetter 𝒞η ⟨Y, inducedH₂ f α⟩ := by
+    TwistedYetter 𝒞η twoOverTwoEndpoints ⟨X, α⟩ =
+      TwistedYetter 𝒞η twoOverTwoEndpoints ⟨Y, inducedH₂ f α⟩ := by
   simpa [TwistedYetter] using
     (SpecialKirbyHandleTheory.topologyBoundary.constructInvariant
         (presentationEvaluation
@@ -322,25 +340,30 @@ theorem TwistedYetter_diffeomorphism_invariant
         (presentationEvaluation_localInvariant
           𝒞η.1 𝒞η.2
           SpecialKirbyHandleTheory.AuxiliaryH₂
+          twoOverTwoEndpoints
           SpecialKirbyHandleTheory.localGeometry))
       |>.diffeomorphismInvariant f α
 
-/-- The modular value is exactly the premodular invariant after forgetting
-S-matrix nondegeneracy. -/
+/-- The conditional modular candidate is the premodular candidate after
+forgetting S-matrix nondegeneracy. -/
 noncomputable def TwistedYetterModular
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η.toPremodular)
     (Xα : HomologicalFourManifold.{uX}) : K :=
-  TwistedYetter 𝒞η.toPremodular Xα
+  TwistedYetter 𝒞η.toPremodular twoOverTwoEndpoints Xα
 
-/-- Modular diffeomorphism invariance is a specialization, not a second proof. -/
+/-- Conditional modular invariance is a specialization, not a second proof. -/
 theorem TwistedYetterModular_diffeomorphism_invariant
     (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η.toPremodular)
     {X Y : ClosedOrientedSmoothFourManifold.{uX}}
     (f : orientedDiffeomorphism.Hom X Y)
     (α : H₂ X) :
-    TwistedYetterModular 𝒞η ⟨X, α⟩ =
-      TwistedYetterModular 𝒞η ⟨Y, inducedH₂ f α⟩ :=
-  TwistedYetter_diffeomorphism_invariant 𝒞η.toPremodular f α
+    TwistedYetterModular 𝒞η twoOverTwoEndpoints ⟨X, α⟩ =
+      TwistedYetterModular 𝒞η twoOverTwoEndpoints
+        ⟨Y, inducedH₂ f α⟩ :=
+  TwistedYetter_diffeomorphism_invariant
+    𝒞η.toPremodular twoOverTwoEndpoints f α
 
 namespace TwistedYetter
 
@@ -352,19 +375,21 @@ Lean-native implementation or a verified foreign-function bridge supplies an
 instance.  Merely assuming the class does not manufacture executable code.
 -/
 class Computable
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S)) where
+    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η) where
   compute :
     {Xα : HomologicalFourManifold.{uX}} →
       SpecialKirbyPresentation Xα → K
   correct :
     {Xα : HomologicalFourManifold.{uX}} →
       (presentation : SpecialKirbyPresentation Xα) →
-        TwistedYetter 𝒞η Xα = compute presentation
+        TwistedYetter 𝒞η twoOverTwoEndpoints Xα = compute presentation
 
 /-- Execute the installed presentation-level implementation. -/
 def compute
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    [implementation : Computable 𝒞η]
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η)
+    [implementation : Computable 𝒞η twoOverTwoEndpoints]
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) : K :=
   implementation.compute presentation
@@ -377,11 +402,12 @@ requires supplying the proof together with the executable function.
 -/
 theorem compute_correct
     (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    [implementation : Computable 𝒞η]
+    (twoOverTwoEndpoints : CleanBandEndpointResolver 𝒞η)
+    [implementation : Computable 𝒞η twoOverTwoEndpoints]
     {Xα : HomologicalFourManifold.{uX}}
     (presentation : SpecialKirbyPresentation Xα) :
-    TwistedYetter 𝒞η Xα =
-      compute 𝒞η presentation := by
+    TwistedYetter 𝒞η twoOverTwoEndpoints Xα =
+      compute 𝒞η twoOverTwoEndpoints presentation := by
   exact implementation.correct presentation
 
 end TwistedYetter

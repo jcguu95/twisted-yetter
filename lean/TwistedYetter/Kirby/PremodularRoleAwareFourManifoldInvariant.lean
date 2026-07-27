@@ -61,12 +61,15 @@ theorem presentationEvaluation_localInvariant
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (H2 : Type uH) [AddCommGroup H2]
+    (twoOverTwoEndpoints :
+      RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver 𝒞 η H2)
     (localGeometry : LocalGeometryRealization H2) :
     IsInvariantUnderElementaryMoves
       (presentationEvaluation 𝒞 η H2 localGeometry) := by
   intro source target move alpha
   have calculation :=
-    elementaryMove_invariant 𝒞 η (localGeometry.realize move) alpha
+    elementaryMove_invariant 𝒞 η twoOverTwoEndpoints
+      (localGeometry.realize move) alpha
   simpa [handlePresentationTheory, ElementaryMove.transport,
     localGeometry.forget_realize move] using calculation
 

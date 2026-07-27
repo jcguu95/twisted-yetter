@@ -86,6 +86,96 @@ structure Window
             (ComponentRibbonDiagram.ComponentDiagram.identity
               (localBoundary metadata countsSound))))
 
+/--
+A role-aware 2/2 window whose source and target are pinned to the clean
+attach--transport--detach script stored by the admitted recipe.
+
+This wrapper is still category-neutral.  It records no labels, character,
+fusion channels, evaluator values, or scalar equalities.  In particular, it
+does not solve the separate categorical endpoint-interpretation obligation.
+-/
+structure CleanWindow
+    {H2 : Type uH} [AddCommGroup H2]
+    (source target : CanonicalPresentation H2)
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts) where
+  window : Window source target metadata countsSound
+  source_events_sound :
+    metadata.recipe.window.sourceEventWindow =
+      metadata.recipe.twoOverTwoCleanScript.sourceEvents
+  target_events_sound :
+    metadata.recipe.window.targetEventWindow =
+      metadata.recipe.twoOverTwoCleanScript.targetEvents
+  attach_source_declared :
+    metadata.recipe.twoOverTwoCleanScript.attach.sourceSlice ∈
+      source.topology.formal.raw.declaredSlices
+  attach_target_declared :
+    metadata.recipe.twoOverTwoCleanScript.attach.targetSlice ∈
+      target.topology.formal.raw.declaredSlices
+  detach_source_declared :
+    metadata.recipe.twoOverTwoCleanScript.detach.sourceSlice ∈
+      source.topology.formal.raw.declaredSlices
+  detach_target_declared :
+    metadata.recipe.twoOverTwoCleanScript.detach.targetSlice ∈
+      target.topology.formal.raw.declaredSlices
+
+namespace CleanWindow
+
+/--
+Compile the clean-window certificate already checked by the source recipe.
+No caller may substitute a second script or a second source/target window.
+-/
+def ofWindow
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound) :
+    CleanWindow source target metadata countsSound := by
+  let sound := metadata.recipe.twoOverTwoCleanScript_matchesWindow
+  have facts :
+      metadata.recipe.window.sourceEventWindow =
+          metadata.recipe.twoOverTwoCleanScript.sourceEvents ∧
+        metadata.recipe.window.targetEventWindow =
+          metadata.recipe.twoOverTwoCleanScript.targetEvents ∧
+        metadata.recipe.twoOverTwoCleanScript.attach.sourceSlice ∈
+          source.topology.formal.raw.declaredSlices ∧
+        metadata.recipe.twoOverTwoCleanScript.attach.targetSlice ∈
+          target.topology.formal.raw.declaredSlices ∧
+        metadata.recipe.twoOverTwoCleanScript.detach.sourceSlice ∈
+          source.topology.formal.raw.declaredSlices ∧
+        metadata.recipe.twoOverTwoCleanScript.detach.targetSlice ∈
+          target.topology.formal.raw.declaredSlices := by
+    simpa [SourceBoundRecipe.twoOverTwoCleanScript] using
+      GraphicalEditProgram.twoOverTwo_matchesWindow
+        metadata.recipe.handleEdit metadata.recipe.graphicalProgram
+        metadata.recipe.window sound
+  exact
+    { window := window
+      source_events_sound := facts.1
+      target_events_sound := facts.2.1
+      attach_source_declared := facts.2.2.1
+      attach_target_declared := facts.2.2.2.1
+      detach_source_declared := facts.2.2.2.2.1
+      detach_target_declared := facts.2.2.2.2.2 }
+
+/-- The exact clean script selected by this window's source-bound recipe. -/
+def script
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (_clean : CleanWindow source target metadata countsSound) :=
+  metadata.recipe.twoOverTwoCleanScript
+
+end CleanWindow
+
 namespace Window
 
 /--
@@ -489,26 +579,6 @@ structure BandEndpointInterpretation
         linearEndpoint Side.after
           (closedWindow block) (movingCoefficient block)
 
-/--
-Bärenz--Barrett Lemmas 3.3--3.4 identify a standard oriented 2-over-2 band
-window with the explicit finite-sum endpoints above.
-
-This boundary is intentionally structural: its result is retained diagram
-syntax, never an evaluator equality or scalar equality.
--/
-axiom standardBandEndpointInterpretation
-    {H2 : Type uH} [AddCommGroup H2]
-    {source target : CanonicalPresentation H2}
-    {metadata :
-      KirbyCompleteness.TableTwoMoveMetadata
-        .twoOverTwo source.topology target.topology}
-    {countsSound : source.topology.counts = target.topology.counts}
-    (window : Window source target metadata countsSound)
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    (sourceCycle : source.DegreeTwoCycle) :
-    BandEndpointInterpretation window 𝒞 η sourceCycle
-
 namespace BandEndpointInterpretation
 
 /-- Assemble the exact whole-sum binding from the recipe-derived blocks. -/
@@ -571,27 +641,73 @@ theorem roleAwareCycleEval_eq
 
 end BandEndpointInterpretation
 
-/-- Complete normalized role-aware 2/2 invariance. -/
-theorem roleAwareCycleEval_eq
+end Window
+
+/--
+The one intentionally unfilled proof obligation left after deleting the broad
+endpoint axiom.
+
+A value must be constructed from the clean source/target syntax and the
+listed categorical sliding laws.  Merely possessing a clean topology window
+does not manufacture this value.
+-/
+abbrev CleanEndpointObligation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) :=
+  Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
+
+/--
+A resolver for all clean 2/2 endpoint obligations over one handle-chain
+coefficient group.
+
+No instance or axiom constructs this structure.  It is the explicit blocker
+that must disappear once clean free-syntax endpoint interpretation is proved.
+-/
+structure CleanEndpointResolver
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (H2 : Type uH) [AddCommGroup H2] where
+  resolve :
+    {source target : CanonicalPresentation H2} →
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology) →
+    (countsSound : source.topology.counts = target.topology.counts) →
+    (clean : CleanWindow source target metadata countsSound) →
+    (sourceCycle : source.DegreeTwoCycle) →
+      CleanEndpointObligation clean 𝒞 η sourceCycle
+
+/--
+Once the clean endpoint obligation is supplied, every remaining step is the
+kernel-checked finite-sum proof.  This theorem is deliberately conditional;
+there is no global axiom producing the obligation.
+-/
+theorem CleanWindow.roleAwareCycleEval_eq
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     (metadata :
       KirbyCompleteness.TableTwoMoveMetadata
         .twoOverTwo source.topology target.topology)
     (countsSound : source.topology.counts = target.topology.counts)
-    (window : Window source target metadata countsSound)
+    (clean : CleanWindow source target metadata countsSound)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
-    (sourceCycle : source.DegreeTwoCycle) :
+    (sourceCycle : source.DegreeTwoCycle)
+    (endpoint : CleanEndpointObligation clean 𝒞 η sourceCycle) :
     CanonicalPresentation.roleAwareCycleEval
-        𝒞 η source window.sourceGeometry sourceCycle =
+        𝒞 η source clean.window.sourceGeometry sourceCycle =
       CanonicalPresentation.roleAwareCycleEval
-        𝒞 η target window.targetGeometry
+        𝒞 η target clean.window.targetGeometry
           ((Request.twoOverTwo metadata countsSound).targetCycle
             sourceCycle) :=
-  (standardBandEndpointInterpretation
-    window 𝒞 η sourceCycle).roleAwareCycleEval_eq
-
-end Window
+  endpoint.roleAwareCycleEval_eq
 
 end TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie
