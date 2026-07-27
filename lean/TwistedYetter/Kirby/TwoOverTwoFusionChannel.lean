@@ -878,6 +878,290 @@ theorem positiveEndpoint_residualExponent
       movingExponent + stationaryExponent := by
   omega
 
+/-!
+## Negative endpoint convention
+
+For a negative band the exposed object is `x ⊗ y`, not `x ⊗ yᘁ`.
+The common stationary exponent therefore acts with the same sign on both
+tensor factors.  This section proves that case independently; it does not
+obtain it by reusing the positive endpoint through an unrecorded mirror.
+-/
+
+/-- The two-strand object exposed by a negative 2/2 endpoint. -/
+abbrev NegativeTensorObject
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (x y : S) : C :=
+  data.simple x ⊗ data.simple y
+
+/-- The genuine internal `(z, μ)` channel for `x ⊗ y`. -/
+abbrev NegativeChannel
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (x y : S) : Type vC :=
+  Σ z, data.InsertionIndex (NegativeTensorObject data x y) z
+
+/-- The trace-dual insertion basis for one negative channel. -/
+noncomputable def negativeForwardBasis
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (x y z : S) :=
+  data.insertionDualBasis (NegativeTensorObject data x y) z
+
+/-- A fixed free boundary realizing the negative pair `x ⊗ y`. -/
+private def negativeBoundary : ComponentBoundary :=
+  .tensor
+    (.atom (positiveAtom "two-over-two-negative-left"))
+    (.atom (positiveAtom "two-over-two-negative-right"))
+
+/-- Labels for the two distinguished atoms of `negativeBoundary`. -/
+private def negativeLabelOf (x y : S) : String → S :=
+  fun componentId =>
+    if componentId = "two-over-two-negative-left" then x else y
+
+/-- The negative free boundary interprets to `x ⊗ y`. -/
+private theorem negativeBoundary_interpret
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (x y : S) :
+    (negativeBoundary.interpret data (negativeLabelOf x y)).denote =
+      NegativeTensorObject data x y := by
+  rfl
+
+/-- The original character coupons on `x ⊗ y`. -/
+noncomputable def negativeCharacterCoupon
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (xExponent yExponent : ℤ) :
+    NegativeTensorObject data x y ⟶ NegativeTensorObject data x y :=
+  data.toFusionCategoryData.automorphismCouponPower η x xExponent ⊗ₘ
+    data.toFusionCategoryData.automorphismCouponPower η y yExponent
+
+/-- The scalar represented by the two negative-endpoint coupons. -/
+noncomputable def negativeCharacterScalar
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (xExponent yExponent : ℤ) : K :=
+  data.toFusionCategoryData.automorphismScalarPower η x xExponent *
+    data.toFusionCategoryData.automorphismScalarPower η y yExponent
+
+/-- The two coupons on `x ⊗ y` are their product scalar times the identity. -/
+theorem negativeCharacterCoupon_eq_smul_identity
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (xExponent yExponent : ℤ) :
+    negativeCharacterCoupon data η x y xExponent yExponent =
+      negativeCharacterScalar data η x y xExponent yExponent •
+        𝟙 (NegativeTensorObject data x y) := by
+  rw [negativeCharacterCoupon,
+    data.toFusionCategoryData.automorphismCouponPower_eq_smul_identity,
+    data.toFusionCategoryData.automorphismCouponPower_eq_smul_identity]
+  simp [negativeCharacterScalar, NegativeTensorObject, tensorHom_def',
+    mul_smul]
+
+/-- A common exponent on `x ⊗ y` has scalar `χ_x^n χ_y^n`. -/
+theorem automorphismObjectPower_negative_eq_smul_identity
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (exponent : ℤ) :
+    automorphismObjectPower η (NegativeTensorObject data x y) exponent =
+      negativeCharacterScalar data η x y exponent exponent •
+        𝟙 (NegativeTensorObject data x y) := by
+  have boundaryFormula :=
+    automorphismObjectPower_eq_boundaryCharacterPower_smul_identity
+      data η (negativeLabelOf x y) negativeBoundary exponent
+  rw [negativeBoundary_interpret] at boundaryFormula
+  simpa [
+    boundaryCharacterPower_tensor,
+    boundaryCharacterPower_positive,
+    negativeCharacterScalar,
+    negativeBoundary,
+    negativeLabelOf,
+  ] using boundaryFormula
+
+/-- The common exponent placed on one internal negative channel. -/
+noncomputable def negativeChannelCouponMorphism
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (exponent : ℤ)
+    (channel : NegativeChannel data x y) :
+    NegativeTensorObject data x y ⟶ NegativeTensorObject data x y :=
+  data.quantumDimension channel.1 •
+    ((negativeForwardBasis data x y channel.1).primal channel.2 ≫
+      data.toFusionCategoryData.automorphismCouponPower
+        η channel.1 exponent ≫
+      (negativeForwardBasis data x y channel.1).dual channel.2)
+
+/-- Summing all negative channels moves the common coupon onto `x ⊗ y`. -/
+theorem sum_negativeChannelCouponMorphism
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (exponent : ℤ) :
+    ∑ channel : NegativeChannel data x y,
+        negativeChannelCouponMorphism data η x y exponent channel =
+      automorphismObjectPower η
+        (NegativeTensorObject data x y) exponent := by
+  classical
+  rw [Fintype.sum_sigma]
+  calc
+    (∑ z, ∑ i : data.InsertionIndex
+        (NegativeTensorObject data x y) z,
+        negativeChannelCouponMorphism data η x y exponent ⟨z, i⟩) =
+      automorphismObjectPower η (NegativeTensorObject data x y) exponent ≫
+        (∑ z, ∑ i : data.InsertionIndex
+            (NegativeTensorObject data x y) z,
+          data.quantumDimension z •
+            ((negativeForwardBasis data x y z).primal i ≫
+              (negativeForwardBasis data x y z).dual i)) := by
+        rw [Preadditive.comp_sum]
+        apply Finset.sum_congr rfl
+        intro z _
+        rw [Preadditive.comp_sum]
+        apply Finset.sum_congr rfl
+        intro i _
+        unfold negativeChannelCouponMorphism
+        rw [CategoryTheory.Linear.comp_smul]
+        apply congrArg (fun morphism => data.quantumDimension z • morphism)
+        have naturality :=
+          automorphismObjectPower_naturality η
+            ((negativeForwardBasis data x y z).primal i) exponent
+        simpa only [FusionCategoryData.automorphismCouponPower,
+          automorphismObjectPower, NegativeTensorObject, Category.assoc] using
+          (congrArg
+            (fun morphism =>
+              morphism ≫ (negativeForwardBasis data x y z).dual i)
+            naturality.symm)
+    _ =
+      automorphismObjectPower η (NegativeTensorObject data x y) exponent ≫
+        𝟙 (NegativeTensorObject data x y) := by
+      rw [insertionLaw.resolves
+        (NegativeTensorObject data x y) (negativeForwardBasis data x y)]
+    _ = _ := Category.comp_id _
+
+/-- The residual moving coupon left after extracting the common exponent. -/
+noncomputable def negativeResidualCoupon
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ) :
+    NegativeTensorObject data x y ⟶ NegativeTensorObject data x y :=
+  data.toFusionCategoryData.automorphismCouponPower
+      η x (movingExponent - stationaryExponent) ⊗ₘ
+    𝟙 (data.simple y)
+
+/-- The residual coupon has the expected scalar on `x ⊗ y`. -/
+theorem negativeResidualCoupon_eq_smul_identity
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ) :
+    negativeResidualCoupon data η x y movingExponent stationaryExponent =
+      data.toFusionCategoryData.automorphismScalarPower
+          η x (movingExponent - stationaryExponent) •
+        𝟙 (NegativeTensorObject data x y) := by
+  rw [negativeResidualCoupon,
+    data.toFusionCategoryData.automorphismCouponPower_eq_smul_identity]
+  simp [NegativeTensorObject, tensorHom_def']
+
+/-- Residual and common coupons reconstruct the original negative endpoint. -/
+theorem negativeResidual_comp_commonPower
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ) :
+    negativeResidualCoupon data η x y movingExponent stationaryExponent ≫
+        automorphismObjectPower η
+          (NegativeTensorObject data x y) stationaryExponent =
+      negativeCharacterCoupon
+        data η x y movingExponent stationaryExponent := by
+  rw [negativeResidualCoupon_eq_smul_identity,
+    automorphismObjectPower_negative_eq_smul_identity,
+    negativeCharacterCoupon_eq_smul_identity]
+  simp only [CategoryTheory.Linear.smul_comp,
+    CategoryTheory.Linear.comp_smul, Category.comp_id, smul_smul]
+  apply congrArg (fun scalar : K =>
+    scalar • 𝟙 (NegativeTensorObject data x y))
+  unfold negativeCharacterScalar
+  calc
+    (data.toFusionCategoryData.automorphismScalarPower
+          η x stationaryExponent *
+        data.toFusionCategoryData.automorphismScalarPower
+          η y stationaryExponent) *
+      data.toFusionCategoryData.automorphismScalarPower
+        η x (movingExponent - stationaryExponent) =
+      (data.toFusionCategoryData.automorphismScalarPower
+            η x (movingExponent - stationaryExponent) *
+          data.toFusionCategoryData.automorphismScalarPower
+            η x stationaryExponent) *
+        data.toFusionCategoryData.automorphismScalarPower
+          η y stationaryExponent := by ring
+    _ =
+      data.toFusionCategoryData.automorphismScalarPower η x movingExponent *
+        data.toFusionCategoryData.automorphismScalarPower
+          η y stationaryExponent := by
+      rw [← data.toFusionCategoryData.automorphismScalarPower_add]
+      congr 2
+      omega
+
+/-- One negative `(z, μ)` channel with both residual and common coupons. -/
+noncomputable def unequalNegativeChannelMorphism
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ)
+    (channel : NegativeChannel data x y) :
+    NegativeTensorObject data x y ⟶ NegativeTensorObject data x y :=
+  data.quantumDimension channel.1 •
+    (negativeResidualCoupon data η x y movingExponent stationaryExponent ≫
+      (negativeForwardBasis data x y channel.1).primal channel.2 ≫
+      data.toFusionCategoryData.automorphismCouponPower
+        η channel.1 stationaryExponent ≫
+      (negativeForwardBasis data x y channel.1).dual channel.2)
+
+/--
+The complete negative channel sum is exactly the original two character
+coupons.  This is the morphism-level negative-orientation theorem required by
+the role-aware 2/2 compiler.
+-/
+theorem sum_unequalNegativeChannelMorphism
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ) :
+    ∑ channel : NegativeChannel data x y,
+        unequalNegativeChannelMorphism
+          data η x y movingExponent stationaryExponent channel =
+      negativeCharacterCoupon
+        data η x y movingExponent stationaryExponent := by
+  classical
+  calc
+    (∑ channel : NegativeChannel data x y,
+        unequalNegativeChannelMorphism
+          data η x y movingExponent stationaryExponent channel) =
+      negativeResidualCoupon data η x y movingExponent stationaryExponent ≫
+        (∑ channel : NegativeChannel data x y,
+          negativeChannelCouponMorphism
+            data η x y stationaryExponent channel) := by
+        rw [Preadditive.comp_sum]
+        apply Finset.sum_congr rfl
+        intro channel _
+        unfold unequalNegativeChannelMorphism
+        unfold negativeChannelCouponMorphism
+        rw [CategoryTheory.Linear.comp_smul]
+    _ =
+      negativeResidualCoupon data η x y movingExponent stationaryExponent ≫
+        automorphismObjectPower η
+          (NegativeTensorObject data x y) stationaryExponent := by
+      rw [sum_negativeChannelCouponMorphism
+        data insertionLaw η x y stationaryExponent]
+    _ = _ :=
+      negativeResidual_comp_commonPower
+        data η x y movingExponent stationaryExponent
+
 end OrientedSlidingResolution
 
 end TwistedYetter.Kirby.TwoOverTwoFusionChannel
