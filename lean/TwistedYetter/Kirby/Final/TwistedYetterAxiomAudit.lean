@@ -14,6 +14,22 @@ Kirby-calculus development.
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.realization
 #print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.framedIsotopyLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.oneOverOneLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.twoOverOneLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.twoOverTwoLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.oneTwoBirthLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.oneTwoDeathLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.twoThreeBirthLocalFactorization
+#print axioms
+  TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.twoThreeDeathLocalFactorization
+#print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.Axioms.standardMoveLocalFactorization
 #print axioms
   TwistedYetter.Kirby.Final.SpecialKirbyHandleTheory.localGeometry

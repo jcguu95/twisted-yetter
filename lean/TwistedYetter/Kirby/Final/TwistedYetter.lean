@@ -106,20 +106,147 @@ abbrev AuxiliaryH₂ := ℤ
 
 namespace Axioms
 
-/--
-T4: every genuine standard Table 2 move admits a common-exterior
-factorization into its canonical source and target local pieces.
+/-- T4a: a framed isotopy admits its canonical local factorization. -/
+axiom framedIsotopyLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .framedIsotopy source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.framedIsotopy metadata countsSound))
 
-The witness type is category-neutral and contains no character, scalar, or
-evaluator equality.
+/-- T4b: a 1-over-1 slide admits its canonical unit-cut factorization. -/
+axiom oneOverOneLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .oneOverOne source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.oneOverOne metadata countsSound))
+
+/-- T4c: a 2-over-1 slide admits its canonical unit-cut factorization. -/
+axiom twoOverOneLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverOne source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.twoOverOne metadata countsSound))
+
+/-- T4d: a 2-over-2 slide admits its canonical band-window factorization. -/
+axiom twoOverTwoLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.twoOverTwo metadata countsSound))
+
+/-- T4e: a 1-2 birth admits its canonical cancellation factorization. -/
+axiom oneTwoBirthLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .oneTwoBirth source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      target.canonicalPresentation.topology.counts =
+        source.canonicalPresentation.topology.counts.addOneTwo) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.oneTwoBirth metadata countsSound))
+
+/-- T4f: a 1-2 death admits its canonical cancellation factorization. -/
+axiom oneTwoDeathLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .oneTwoDeath source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts.addOneTwo) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.oneTwoDeath metadata countsSound))
+
+/-- T4g: a 2-3 birth admits its canonical cancellation factorization. -/
+axiom twoThreeBirthLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoThreeBirth source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      target.canonicalPresentation.topology.counts =
+        source.canonicalPresentation.topology.counts.addTwoThree) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.twoThreeBirth metadata countsSound))
+
+/-- T4h: a 2-3 death admits its canonical cancellation factorization. -/
+axiom twoThreeDeathLocalFactorization
+    {source target : Presentation AuxiliaryH₂}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoThreeDeath source.canonicalPresentation.topology
+          target.canonicalPresentation.topology)
+    (countsSound :
+      source.canonicalPresentation.topology.counts =
+        target.canonicalPresentation.topology.counts.addTwoThree) :
+    Nonempty
+      (StandardMoveLocalFactorization
+        (.twoThreeDeath metadata countsSound))
+
+/--
+Every genuine standard Table 2 move admits its canonical local
+factorization.  Unlike the former wholesale axiom, this theorem visibly
+dispatches to one separately reviewable topology input per event kind.
 -/
-axiom standardMoveLocalFactorization
+theorem standardMoveLocalFactorization
     {source target : Presentation AuxiliaryH₂}
     (move :
       TopologicalTableTwoMove
         source.canonicalPresentation.topology
         target.canonicalPresentation.topology) :
-    Nonempty (StandardMoveLocalFactorization move)
+    Nonempty (StandardMoveLocalFactorization move) := by
+  cases move with
+  | framedIsotopy metadata countsSound =>
+      exact framedIsotopyLocalFactorization metadata countsSound
+  | oneOverOne metadata countsSound =>
+      exact oneOverOneLocalFactorization metadata countsSound
+  | twoOverOne metadata countsSound =>
+      exact twoOverOneLocalFactorization metadata countsSound
+  | twoOverTwo metadata countsSound =>
+      exact twoOverTwoLocalFactorization metadata countsSound
+  | oneTwoBirth metadata countsSound =>
+      exact oneTwoBirthLocalFactorization metadata countsSound
+  | oneTwoDeath metadata countsSound =>
+      exact oneTwoDeathLocalFactorization metadata countsSound
+  | twoThreeBirth metadata countsSound =>
+      exact twoThreeBirthLocalFactorization metadata countsSound
+  | twoThreeDeath metadata countsSound =>
+      exact twoThreeDeathLocalFactorization metadata countsSound
 
 end Axioms
 
