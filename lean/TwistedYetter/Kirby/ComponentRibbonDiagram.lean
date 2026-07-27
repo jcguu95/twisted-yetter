@@ -2045,6 +2045,22 @@ def componentDiagram
   | .cons window _ tail =>
       EventWindow.componentPrimitive window ≫ᶜ componentDiagram tail
 
+/--
+Changing only the event-list index of a typed trace does not change the free
+diagram it compiles.  The proof eliminates the index equality before any
+diagram reasoning.
+-/
+theorem componentDiagram_transport_events
+    {raw : RawPresentation}
+    {events replacement : List SliceEvent}
+    {before final : List StrandState}
+    (eventLists : events = replacement)
+    (trace : Trace raw events before final) :
+    componentDiagram (eventLists ▸ trace) =
+      componentDiagram trace := by
+  cases eventLists
+  rfl
+
 end Trace
 
 end TwistedYetter.Kirby.ComponentRibbonDiagram

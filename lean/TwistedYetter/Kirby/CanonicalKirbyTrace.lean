@@ -195,6 +195,81 @@ def append
       .cons window stepSound (tail.append second)
 
 /--
+The state reached after the first part of a three-part replay occurs at the
+correct declared-slice index of the left-associated full trace.
+-/
+theorem boundary_slice_mem_declareSlicesFrom_append_append
+    {raw : RawPresentation}
+    {firstEvents secondEvents thirdEvents : List SliceEvent}
+    {initial firstMiddle secondMiddle final : List StrandState}
+    (start : Nat)
+    (first : Trace raw firstEvents initial firstMiddle)
+    (second : Trace raw secondEvents firstMiddle secondMiddle)
+    (third : Trace raw thirdEvents secondMiddle final) :
+    ({ index := start + firstEvents.length
+       activeStrands := firstMiddle } : DeclaredSlice) ∈
+      RawPresentation.declareSlicesFrom start
+        ((first.append second).append third).toExecutionTrace.states := by
+  induction first generalizing start with
+  | nil state =>
+      cases second <;> cases third <;>
+        simp [append, toExecutionTrace,
+          PresentationExecutionTrace.ExecutionTrace.states,
+          RawPresentation.declareSlicesFrom]
+  | @cons event rest before after final window stepSound tail
+      inductionHypothesis =>
+      simp only [append, toExecutionTrace,
+        PresentationExecutionTrace.ExecutionTrace.states,
+        RawPresentation.declareSlicesFrom, List.length_cons,
+        List.mem_cons]
+      right
+      simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
+        inductionHypothesis (start := start + 1) second
+
+/-- Transporting only the event-list index preserves every replayed state. -/
+theorem toExecutionTrace_states_transport_events
+    {raw : RawPresentation}
+    {events replacement : List SliceEvent}
+    {before final : List StrandState}
+    (eventLists : events = replacement)
+    (trace : Trace raw events before final) :
+    (eventLists ▸ trace).toExecutionTrace.states =
+      trace.toExecutionTrace.states := by
+  cases eventLists
+  rfl
+
+/--
+The state reached after an exact prefix appears at the corresponding index in
+the declared-slice ledger of the concatenated trace.
+-/
+theorem boundary_slice_mem_declareSlicesFrom_append
+    {raw : RawPresentation}
+    {firstEvents secondEvents : List SliceEvent}
+    {initial middle final : List StrandState}
+    (start : Nat)
+    (first : Trace raw firstEvents initial middle)
+    (second : Trace raw secondEvents middle final) :
+    ({ index := start + firstEvents.length
+       activeStrands := middle } : DeclaredSlice) ∈
+      RawPresentation.declareSlicesFrom start
+        (first.append second).toExecutionTrace.states := by
+  induction first generalizing start with
+  | nil state =>
+      cases second <;>
+        simp [append, toExecutionTrace,
+          PresentationExecutionTrace.ExecutionTrace.states,
+          RawPresentation.declareSlicesFrom]
+  | @cons event rest before after final window stepSound tail
+      inductionHypothesis =>
+      simp only [append, toExecutionTrace,
+        PresentationExecutionTrace.ExecutionTrace.states,
+        RawPresentation.declareSlicesFrom, List.length_cons,
+        List.mem_cons]
+      right
+      simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
+        inductionHypothesis (start := start + 1) second
+
+/--
 Split a typed trace at an exact event-list prefix.
 
 The existential middle state is reconstructed from the trace itself.  Both

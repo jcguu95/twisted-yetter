@@ -422,6 +422,59 @@ def declareSlicesFrom :
       { index := index, activeStrands := state } ::
         declareSlicesFrom (index + 1) rest
 
+/-- Every generated slice index is at least the ledger's starting index. -/
+theorem index_le_of_mem_declareSlicesFrom
+    {start : Nat}
+    {states : List (List StrandState)}
+    {slice : DeclaredSlice}
+    (member : slice ∈ declareSlicesFrom start states) :
+    start ≤ slice.index := by
+  induction states generalizing start with
+  | nil =>
+      simp [declareSlicesFrom] at member
+  | cons state rest inductionHypothesis =>
+      simp only [declareSlicesFrom, List.mem_cons] at member
+      rcases member with rfl | member
+      · exact Nat.le_refl start
+      · have lower :=
+          inductionHypothesis (start := start + 1) member
+        omega
+
+/--
+Generated declared slices are uniquely determined by their index.
+
+This prevents a clean-move certificate from selecting a different slice with
+the same advertised position.
+-/
+theorem eq_of_mem_declareSlicesFrom_of_index_eq
+    {start : Nat}
+    {states : List (List StrandState)}
+    {first second : DeclaredSlice}
+    (firstMember : first ∈ declareSlicesFrom start states)
+    (secondMember : second ∈ declareSlicesFrom start states)
+    (sameIndex : first.index = second.index) :
+    first = second := by
+  induction states generalizing start with
+  | nil =>
+      simp [declareSlicesFrom] at firstMember
+  | cons state rest inductionHypothesis =>
+      simp only [declareSlicesFrom, List.mem_cons] at firstMember secondMember
+      rcases firstMember with rfl | firstMember
+      · rcases secondMember with rfl | secondMember
+        · rfl
+        · have lower :=
+            index_le_of_mem_declareSlicesFrom
+              (start := start + 1) secondMember
+          simp at sameIndex
+          omega
+      · rcases secondMember with rfl | secondMember
+        · have lower :=
+            index_le_of_mem_declareSlicesFrom
+              (start := start + 1) firstMember
+          simp at sameIndex
+          omega
+        · exact inductionHypothesis firstMember secondMember
+
 /-- Fail-closed executable admission validator. -/
 def validate (raw : RawPresentation) : Except String Unit := do
   if raw.schema != expectedSchema then

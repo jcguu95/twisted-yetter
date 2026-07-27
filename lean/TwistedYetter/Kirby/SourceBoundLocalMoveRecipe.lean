@@ -1022,6 +1022,29 @@ structure CleanBandSlideScript
 
 namespace CleanBandSlideScript
 
+/--
+The four clean endpoint slices are exactly the boundary slices of the
+recipe-selected replacement window.
+
+Membership in the presentation's declared-slice ledger is not enough: an
+unrelated clean slice elsewhere in the diagram must not certify this move.
+-/
+def EndpointsMatchWindow
+    {source target : FormalPresentation}
+    {orientation : BandOrientation}
+    {movingComponentId stationaryComponentId : String}
+    {movingRole stationaryRole : ComponentRole}
+    (script :
+      CleanBandSlideScript orientation movingComponentId stationaryComponentId
+        movingRole stationaryRole)
+    (window : PresentationWindowEdit source target) : Prop :=
+  script.attach.sourceSlice.index = window.commonEventPrefix.length ∧
+    script.attach.targetSlice.index = window.commonEventPrefix.length ∧
+    script.detach.sourceSlice.index =
+      (window.commonEventPrefix ++ window.sourceEventWindow).length ∧
+    script.detach.targetSlice.index =
+      (window.commonEventPrefix ++ window.targetEventWindow).length
+
 /-- The complete source event window of a clean band-slide script. -/
 def sourceEvents
     {orientation : BandOrientation}
@@ -1136,6 +1159,7 @@ def GraphicalEditProgram.MatchesWindow
   | .oneOverOne _ _ _ _ script =>
       window.sourceEventWindow = script.sourceEvents ∧
         window.targetEventWindow = script.targetEvents ∧
+        script.EndpointsMatchWindow window ∧
         script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
         script.attach.targetSlice ∈ target.raw.declaredSlices ∧
         script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
@@ -1143,6 +1167,7 @@ def GraphicalEditProgram.MatchesWindow
   | .twoOverOne _ _ _ _ script =>
       window.sourceEventWindow = script.sourceEvents ∧
         window.targetEventWindow = script.targetEvents ∧
+        script.EndpointsMatchWindow window ∧
         script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
         script.attach.targetSlice ∈ target.raw.declaredSlices ∧
         script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
@@ -1150,6 +1175,7 @@ def GraphicalEditProgram.MatchesWindow
   | .twoOverTwo _ _ _ _ script =>
       window.sourceEventWindow = script.sourceEvents ∧
         window.targetEventWindow = script.targetEvents ∧
+        script.EndpointsMatchWindow window ∧
         script.attach.sourceSlice ∈ source.raw.declaredSlices ∧
         script.attach.targetSlice ∈ target.raw.declaredSlices ∧
         script.detach.sourceSlice ∈ source.raw.declaredSlices ∧
@@ -1249,6 +1275,8 @@ theorem oneOverOne_matchesWindow
         (oneOverOneCleanScriptOfEdit edit program).sourceEvents ∧
       window.targetEventWindow =
           (oneOverOneCleanScriptOfEdit edit program).targetEvents ∧
+        (oneOverOneCleanScriptOfEdit edit program).EndpointsMatchWindow
+            window ∧
         (oneOverOneCleanScriptOfEdit edit program).attach.sourceSlice ∈
             source.raw.declaredSlices ∧
           (oneOverOneCleanScriptOfEdit edit program).attach.targetSlice ∈
@@ -1272,6 +1300,8 @@ theorem twoOverOne_matchesWindow
         (twoOverOneCleanScriptOfEdit edit program).sourceEvents ∧
       window.targetEventWindow =
           (twoOverOneCleanScriptOfEdit edit program).targetEvents ∧
+        (twoOverOneCleanScriptOfEdit edit program).EndpointsMatchWindow
+            window ∧
         (twoOverOneCleanScriptOfEdit edit program).attach.sourceSlice ∈
             source.raw.declaredSlices ∧
           (twoOverOneCleanScriptOfEdit edit program).attach.targetSlice ∈
@@ -1295,6 +1325,8 @@ theorem twoOverTwo_matchesWindow
         (twoOverTwoCleanScriptOfEdit edit program).sourceEvents ∧
       window.targetEventWindow =
           (twoOverTwoCleanScriptOfEdit edit program).targetEvents ∧
+        (twoOverTwoCleanScriptOfEdit edit program).EndpointsMatchWindow
+            window ∧
         (twoOverTwoCleanScriptOfEdit edit program).attach.sourceSlice ∈
             source.raw.declaredSlices ∧
           (twoOverTwoCleanScriptOfEdit edit program).attach.targetSlice ∈

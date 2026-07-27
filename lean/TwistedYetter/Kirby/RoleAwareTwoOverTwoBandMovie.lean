@@ -21,6 +21,7 @@ open TwistedYetter.Kirby.CanonicalCycleMoveGeometry
 open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 open TwistedYetter.Kirby.CategoricalTangle
+open TwistedYetter.Kirby.ComponentRibbonIsotopy
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
@@ -108,6 +109,9 @@ structure CleanWindow
   target_events_sound :
     metadata.recipe.window.targetEventWindow =
       metadata.recipe.twoOverTwoCleanScript.targetEvents
+  endpoints_match_window :
+    metadata.recipe.twoOverTwoCleanScript.EndpointsMatchWindow
+      metadata.recipe.window
   attach_source_declared :
     metadata.recipe.twoOverTwoCleanScript.attach.sourceSlice ∈
       source.topology.formal.raw.declaredSlices
@@ -142,6 +146,8 @@ def ofWindow
           metadata.recipe.twoOverTwoCleanScript.sourceEvents ∧
         metadata.recipe.window.targetEventWindow =
           metadata.recipe.twoOverTwoCleanScript.targetEvents ∧
+        metadata.recipe.twoOverTwoCleanScript.EndpointsMatchWindow
+            metadata.recipe.window ∧
         metadata.recipe.twoOverTwoCleanScript.attach.sourceSlice ∈
           source.topology.formal.raw.declaredSlices ∧
         metadata.recipe.twoOverTwoCleanScript.attach.targetSlice ∈
@@ -158,10 +164,11 @@ def ofWindow
     { window := window
       source_events_sound := facts.1
       target_events_sound := facts.2.1
-      attach_source_declared := facts.2.2.1
-      attach_target_declared := facts.2.2.2.1
-      detach_source_declared := facts.2.2.2.2.1
-      detach_target_declared := facts.2.2.2.2.2 }
+      endpoints_match_window := facts.2.2.1
+      attach_source_declared := facts.2.2.2.1
+      attach_target_declared := facts.2.2.2.2.1
+      detach_source_declared := facts.2.2.2.2.2.1
+      detach_target_declared := facts.2.2.2.2.2.2 }
 
 /-- The exact clean script selected by this window's source-bound recipe. -/
 def script
@@ -173,6 +180,279 @@ def script
     {countsSound : source.topology.counts = target.topology.counts}
     (_clean : CleanWindow source target metadata countsSound) :=
   metadata.recipe.twoOverTwoCleanScript
+
+/--
+The source replacement window is exactly the script's transport region.
+Clean attach and detach collars contain no serialized events.
+-/
+theorem sourceEventWindow_eq_transportEvents
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    metadata.recipe.window.sourceEventWindow =
+      clean.script.sourceTransportEvents := by
+  rw [clean.source_events_sound]
+  unfold CleanBandSlideScript.sourceEvents
+  have attachClean :
+      metadata.recipe.twoOverTwoCleanScript.attach.sourceCollarEvents = [] := by
+    simpa only [script] using
+      clean.script.attach.source_collar_clean
+  have detachClean :
+      metadata.recipe.twoOverTwoCleanScript.detach.sourceCollarEvents = [] := by
+    simpa only [script] using
+      clean.script.detach.source_collar_clean
+  rw [attachClean, detachClean]
+  simpa only [List.nil_append, List.append_nil, script]
+
+/--
+The target replacement window is exactly the script's transport region.
+Clean attach and detach collars contain no serialized events.
+-/
+theorem targetEventWindow_eq_transportEvents
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    metadata.recipe.window.targetEventWindow =
+      clean.script.targetTransportEvents := by
+  rw [clean.target_events_sound]
+  unfold CleanBandSlideScript.targetEvents
+  have attachClean :
+      metadata.recipe.twoOverTwoCleanScript.attach.targetCollarEvents = [] := by
+    simpa only [script] using
+      clean.script.attach.target_collar_clean
+  have detachClean :
+      metadata.recipe.twoOverTwoCleanScript.detach.targetCollarEvents = [] := by
+    simpa only [script] using
+      clean.script.detach.target_collar_clean
+  rw [attachClean, detachClean]
+  simpa only [List.nil_append, List.append_nil, script]
+
+/--
+Compute the unique typed prefix/window/suffix split from the admitted source
+and target traces and the recipe-owned event window.  A caller cannot provide
+a second replay.
+-/
+def traceWindow
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (_clean : CleanWindow source target metadata countsSound) :
+    CanonicalMoveGeometry.SourceBoundTraceWindow
+      source target metadata.recipe.window :=
+  CanonicalMoveGeometry.SourceBoundTraceWindow.ofPresentationWindow
+    source target metadata.recipe.window
+
+/-- The source attach slice is the actual state at the local window entrance. -/
+theorem attach_source_activeStrands
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    clean.script.attach.sourceSlice.activeStrands =
+      clean.traceWindow.sourceSplit.afterPrefix := by
+  let expected : Presentation.DeclaredSlice :=
+    { index := metadata.recipe.window.commonEventPrefix.length
+      activeStrands := clean.traceWindow.sourceSplit.afterPrefix }
+  have generatedMember :
+      expected ∈
+        Presentation.RawPresentation.declareSlicesFrom 0
+          clean.traceWindow.sourceSplit.wholeTrace.toExecutionTrace.states := by
+    rw [← clean.traceWindow.sourceSplit.reassembles]
+    simpa [expected] using
+      CanonicalKirbyTrace.Trace.boundary_slice_mem_declareSlicesFrom_append_append
+          0
+          clean.traceWindow.sourceSplit.prefixTrace
+          clean.traceWindow.sourceSplit.windowTrace
+          clean.traceWindow.sourceSplit.suffixTrace
+  have attachGenerated := clean.attach_source_declared
+  rw [clean.traceWindow.source_declared_slices_sound] at attachGenerated
+  have sameSlice :
+      clean.script.attach.sourceSlice = expected := by
+    apply
+      Presentation.RawPresentation.eq_of_mem_declareSlicesFrom_of_index_eq
+        attachGenerated generatedMember
+    simpa [expected] using clean.endpoints_match_window.1
+  exact congrArg Presentation.DeclaredSlice.activeStrands sameSlice
+
+/-- The target attach slice is the actual state at the local window entrance. -/
+theorem attach_target_activeStrands
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    clean.script.attach.targetSlice.activeStrands =
+      clean.traceWindow.targetSplit.afterPrefix := by
+  let expected : Presentation.DeclaredSlice :=
+    { index := metadata.recipe.window.commonEventPrefix.length
+      activeStrands := clean.traceWindow.targetSplit.afterPrefix }
+  have generatedMember :
+      expected ∈
+        Presentation.RawPresentation.declareSlicesFrom 0
+          clean.traceWindow.targetSplit.wholeTrace.toExecutionTrace.states := by
+    rw [← clean.traceWindow.targetSplit.reassembles]
+    simpa [expected] using
+      CanonicalKirbyTrace.Trace.boundary_slice_mem_declareSlicesFrom_append_append
+          0
+          clean.traceWindow.targetSplit.prefixTrace
+          clean.traceWindow.targetSplit.windowTrace
+          clean.traceWindow.targetSplit.suffixTrace
+  have attachGenerated := clean.attach_target_declared
+  rw [clean.traceWindow.target_declared_slices_sound] at attachGenerated
+  have sameSlice :
+      clean.script.attach.targetSlice = expected := by
+    apply
+      Presentation.RawPresentation.eq_of_mem_declareSlicesFrom_of_index_eq
+        attachGenerated generatedMember
+    simpa [expected] using clean.endpoints_match_window.2.1
+  exact congrArg Presentation.DeclaredSlice.activeStrands sameSlice
+
+/-- The source detach slice is the actual state at the local window exit. -/
+theorem detach_source_activeStrands
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    clean.script.detach.sourceSlice.activeStrands =
+      clean.traceWindow.sourceSplit.afterWindow := by
+  let expected : Presentation.DeclaredSlice :=
+    { index :=
+        (metadata.recipe.window.commonEventPrefix ++
+          metadata.recipe.window.sourceEventWindow).length
+      activeStrands := clean.traceWindow.sourceSplit.afterWindow }
+  have generatedMember :
+      expected ∈
+        Presentation.RawPresentation.declareSlicesFrom 0
+          clean.traceWindow.sourceSplit.wholeTrace.toExecutionTrace.states := by
+    rw [← clean.traceWindow.sourceSplit.reassembles]
+    simpa [expected] using
+      CanonicalKirbyTrace.Trace.boundary_slice_mem_declareSlicesFrom_append
+        0
+        (clean.traceWindow.sourceSplit.prefixTrace.append
+          clean.traceWindow.sourceSplit.windowTrace)
+        clean.traceWindow.sourceSplit.suffixTrace
+  have detachGenerated := clean.detach_source_declared
+  rw [clean.traceWindow.source_declared_slices_sound] at detachGenerated
+  have sameSlice :
+      clean.script.detach.sourceSlice = expected := by
+    apply
+      Presentation.RawPresentation.eq_of_mem_declareSlicesFrom_of_index_eq
+        detachGenerated generatedMember
+    simpa [expected] using clean.endpoints_match_window.2.2.1
+  exact congrArg Presentation.DeclaredSlice.activeStrands sameSlice
+
+/-- The target detach slice is the actual state at the local window exit. -/
+theorem detach_target_activeStrands
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    clean.script.detach.targetSlice.activeStrands =
+      clean.traceWindow.targetSplit.afterWindow := by
+  let expected : Presentation.DeclaredSlice :=
+    { index :=
+        (metadata.recipe.window.commonEventPrefix ++
+          metadata.recipe.window.targetEventWindow).length
+      activeStrands := clean.traceWindow.targetSplit.afterWindow }
+  have generatedMember :
+      expected ∈
+        Presentation.RawPresentation.declareSlicesFrom 0
+          clean.traceWindow.targetSplit.wholeTrace.toExecutionTrace.states := by
+    rw [← clean.traceWindow.targetSplit.reassembles]
+    simpa [expected] using
+      CanonicalKirbyTrace.Trace.boundary_slice_mem_declareSlicesFrom_append
+        0
+        (clean.traceWindow.targetSplit.prefixTrace.append
+          clean.traceWindow.targetSplit.windowTrace)
+        clean.traceWindow.targetSplit.suffixTrace
+  have detachGenerated := clean.detach_target_declared
+  rw [clean.traceWindow.target_declared_slices_sound] at detachGenerated
+  have sameSlice :
+      clean.script.detach.targetSlice = expected := by
+    apply
+      Presentation.RawPresentation.eq_of_mem_declareSlicesFrom_of_index_eq
+        detachGenerated generatedMember
+    simpa [expected] using clean.endpoints_match_window.2.2.2
+  exact congrArg Presentation.DeclaredSlice.activeStrands sameSlice
+
+/--
+The admitted source diagram is generated-isotopic to the exact typed
+prefix--clean-window--suffix split selected by the source-bound recipe.
+-/
+theorem source_componentTermDiagram_split
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    GeneratedIsotopy
+      source.componentTermDiagram
+      ((ComponentRibbonDiagram.Trace.componentDiagram
+            clean.traceWindow.sourceSplit.prefixTrace ≫ᶜ
+          ComponentRibbonDiagram.Trace.componentDiagram
+            clean.traceWindow.sourceSplit.windowTrace) ≫ᶜ
+        ComponentRibbonDiagram.Trace.componentDiagram
+          clean.traceWindow.sourceSplit.suffixTrace) := by
+  rw [← clean.traceWindow.source_whole_diagram_sound]
+  exact
+    GeneratedIsotopy.componentDiagram_splitThree
+      metadata.recipe.window.commonEventPrefix
+      metadata.recipe.window.sourceEventWindow
+      metadata.recipe.window.commonEventSuffix
+      clean.traceWindow.sourceSplit
+
+/--
+The admitted target diagram has the corresponding exact typed
+prefix--clean-window--suffix split, with the same recipe-owned exterior event
+lists.
+-/
+theorem target_componentTermDiagram_split
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound) :
+    GeneratedIsotopy
+      target.componentTermDiagram
+      ((ComponentRibbonDiagram.Trace.componentDiagram
+            clean.traceWindow.targetSplit.prefixTrace ≫ᶜ
+          ComponentRibbonDiagram.Trace.componentDiagram
+            clean.traceWindow.targetSplit.windowTrace) ≫ᶜ
+        ComponentRibbonDiagram.Trace.componentDiagram
+          clean.traceWindow.targetSplit.suffixTrace) := by
+  rw [← clean.traceWindow.target_whole_diagram_sound]
+  exact
+    GeneratedIsotopy.componentDiagram_splitThree
+      metadata.recipe.window.commonEventPrefix
+      metadata.recipe.window.targetEventWindow
+      metadata.recipe.window.commonEventSuffix
+      clean.traceWindow.targetSplit
 
 end CleanWindow
 

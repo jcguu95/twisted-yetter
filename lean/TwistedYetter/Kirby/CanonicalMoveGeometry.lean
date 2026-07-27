@@ -76,6 +76,20 @@ structure SourceBoundTraceWindow
       window.commonEventPrefix
       window.targetEventWindow
       window.commonEventSuffix
+  source_whole_diagram_sound :
+    ComponentRibbonDiagram.Trace.componentDiagram sourceSplit.wholeTrace =
+      source.componentTermDiagram
+  target_whole_diagram_sound :
+    ComponentRibbonDiagram.Trace.componentDiagram targetSplit.wholeTrace =
+      target.componentTermDiagram
+  source_declared_slices_sound :
+    source.topology.formal.raw.declaredSlices =
+      Presentation.RawPresentation.declareSlicesFrom 0
+        sourceSplit.wholeTrace.toExecutionTrace.states
+  target_declared_slices_sound :
+    target.topology.formal.raw.declaredSlices =
+      Presentation.RawPresentation.declareSlicesFrom 0
+        targetSplit.wholeTrace.toExecutionTrace.states
 
 namespace SourceBoundTraceWindow
 
@@ -87,27 +101,57 @@ def ofPresentationWindow
       PresentationWindowEdit
         source.topology.formal target.topology.formal) :
     SourceBoundTraceWindow source target window := by
-  have sourceTrace :
+  let sourceTrace :
       CanonicalKirbyTrace.Trace source.topology.formal.raw
         (window.commonEventPrefix ++ window.sourceEventWindow ++
-          window.commonEventSuffix) [] [] := by
-    simpa only [window.source_events_sound] using
-      source.canonicalTrace.trace
-  have targetTrace :
+          window.commonEventSuffix) [] [] :=
+    window.source_events_sound ▸ source.canonicalTrace.trace
+  let targetTrace :
       CanonicalKirbyTrace.Trace target.topology.formal.raw
         (window.commonEventPrefix ++ window.targetEventWindow ++
-          window.commonEventSuffix) [] [] := by
-    simpa only [window.target_events_sound] using
-      target.canonicalTrace.trace
-  exact
-    { sourceSplit :=
-        CanonicalKirbyTrace.Trace.splitThree
-          window.commonEventPrefix window.sourceEventWindow
-          window.commonEventSuffix sourceTrace
-      targetSplit :=
-        CanonicalKirbyTrace.Trace.splitThree
-          window.commonEventPrefix window.targetEventWindow
-          window.commonEventSuffix targetTrace }
+          window.commonEventSuffix) [] [] :=
+    window.target_events_sound ▸ target.canonicalTrace.trace
+  let sourceSplit :=
+    CanonicalKirbyTrace.Trace.splitThree
+      window.commonEventPrefix window.sourceEventWindow
+      window.commonEventSuffix sourceTrace
+  let targetSplit :=
+    CanonicalKirbyTrace.Trace.splitThree
+      window.commonEventPrefix window.targetEventWindow
+      window.commonEventSuffix targetTrace
+  refine
+    { sourceSplit := sourceSplit
+      targetSplit := targetSplit
+      source_whole_diagram_sound := ?_
+      target_whole_diagram_sound := ?_
+      source_declared_slices_sound := ?_
+      target_declared_slices_sound := ?_ }
+  · change
+      ComponentRibbonDiagram.Trace.componentDiagram sourceTrace =
+        source.componentTermDiagram
+    simpa only [sourceTrace, CanonicalPresentation.componentTermDiagram] using
+      ComponentRibbonDiagram.Trace.componentDiagram_transport_events
+        window.source_events_sound source.canonicalTrace.trace
+  · change
+      ComponentRibbonDiagram.Trace.componentDiagram targetTrace =
+        target.componentTermDiagram
+    simpa only [targetTrace, CanonicalPresentation.componentTermDiagram] using
+      ComponentRibbonDiagram.Trace.componentDiagram_transport_events
+        window.target_events_sound target.canonicalTrace.trace
+  · change
+      source.topology.formal.raw.declaredSlices =
+        Presentation.RawPresentation.declareSlicesFrom 0
+          sourceTrace.toExecutionTrace.states
+    rw [CanonicalKirbyTrace.Trace.toExecutionTrace_states_transport_events
+      window.source_events_sound source.canonicalTrace.trace]
+    exact source.canonicalTrace.declared_slices_sound
+  · change
+      target.topology.formal.raw.declaredSlices =
+        Presentation.RawPresentation.declareSlicesFrom 0
+          targetTrace.toExecutionTrace.states
+    rw [CanonicalKirbyTrace.Trace.toExecutionTrace_states_transport_events
+      window.target_events_sound target.canonicalTrace.trace]
+    exact target.canonicalTrace.declared_slices_sound
 
 end SourceBoundTraceWindow
 

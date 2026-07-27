@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-26T22:14:46-06:00",
+  "generated_at": "2026-07-26T22:51:15-06:00",
   "status": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
@@ -9,9 +9,9 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked, but the exact clean attach/transport/detach source and target syntax has not yet been derived as the Bärenz-Barrett before/after endpoints.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, and source/target transport event lists are now kernel-bound. What remains is to certify that the two nonempty transport event lists realize the two sides of one standard oriented Bärenz-Barrett band normal form.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Construct CleanEndpointObligation from the exact category-neutral clean band-slide script and the separately listed categorical laws. The deleted broad endpoint axiom may not be restored or renamed.",
+    "required_resolution": "Introduce a narrow category-neutral normal-form certificate relating the exact source and target transport windows as clean attach, one specified oriented band transport, and clean detach. Derive the Bärenz-Barrett categorical endpoints from that certificate and the separately listed category laws. The deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit CleanBandEndpointResolver is supplied, so the complete premodular four-manifold invariant is not currently established."
   },
   "scope": {
@@ -69,6 +69,11 @@
       "id": "FINITE_MOVIE_DESCENT",
       "evidence": "PremodularRoleAwareFourManifoldInvariant.presentationEvaluation_localInvariant",
       "meaning": "Conditional on CleanBandEndpointResolver, every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
+    },
+    {
+      "id": "CLEAN_TWO_OVER_TWO_TRACE_ENDPOINT_BINDING",
+      "evidence": "SourceBoundLocalMoveRecipe.CleanBandSlideScript.EndpointsMatchWindow; CanonicalMoveGeometry.SourceBoundTraceWindow; RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands; attach_target_activeStrands; detach_source_activeStrands; detach_target_activeStrands",
+      "meaning": "A clean 2/2 certificate can no longer point at unrelated declared slices. Its attach and detach slices are uniquely tied to the exact canonical trace states at the replacement-window entrance and exit, and the replacement windows are exactly the recorded transport event lists."
     },
     {
       "id": "MODULAR_SPECIALIZATION",
@@ -143,15 +148,15 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-26T22:14:46-06:00",
-    "base_checkpoint_commit": "91c2ea8578c9d70527ad9e64d29aab61d94a9029",
+    "timestamp": "2026-07-26T22:51:15-06:00",
+    "base_checkpoint_commit": "a5aed3e007b6eb83f50bda02f1c9e613ac4c9e3a",
     "git_dirty": true,
-    "dirty_path_count_at_capture": 9,
+    "dirty_path_count_at_capture": 7,
     "lean_version": "4.29.1",
     "lake_version": "5.0.0-src+f72c35b",
     "os": "Darwin 24.6.0 arm64",
     "lean_process_limit": 1,
-    "mainline_build": "PASS_CONDITIONAL_2319_JOBS",
+    "mainline_build": "PASS_CONDITIONAL_2375_JOBS",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
     "full_repository_build": "PASS_2375_JOBS",
