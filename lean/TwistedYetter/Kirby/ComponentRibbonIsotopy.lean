@@ -1,5 +1,5 @@
 import TwistedYetter.Kirby.ComponentRibbonDiagram
-import TwistedYetter.Kirby.EGNOModularKirbyMoves
+import TwistedYetter.Kirby.PremodularFramedKink
 import TwistedYetter.Kirby.PresentationIsotopy
 
 /-!

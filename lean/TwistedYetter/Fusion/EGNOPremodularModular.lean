@@ -362,12 +362,14 @@ theorem PremodularCategory.quantumDimension_unit
   exact 𝒞.toFusionCategoryData.closedScalar_identity
 
 /--
-Characteristic-zero spherical fusion categories have nonzero global
-dimension.
+Characteristic-zero fusion categories have nonzero categorical dimension.
 
-This is the premodular-strength form of EGNO Proposition 8.14.2 and
-Remark 8.14.3.  It is an accepted category-theory theorem input, not a
-graphical move or an evaluator equality.
+Reference: Etingof--Gelaki--Nikshych--Ostrik, *Tensor Categories*,
+Theorem 7.21.12.  For the spherical structure carried by a premodular
+category, the categorical dimension is the displayed sum of squared quantum
+dimensions.  This declaration imports that textbook theorem verbatim at the
+level needed by the normalization denominator; it is not a Kirby-move or
+evaluator-equality assumption.
 -/
 axiom PremodularCategory.globalDimension_ne_zero
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :

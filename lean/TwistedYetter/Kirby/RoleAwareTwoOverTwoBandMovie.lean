@@ -1917,8 +1917,8 @@ theorem targetDecomposition
 end RoleAwareFiniteSumBlocks
 
 /-
-These three inputs are category-level literature boundaries.  They do not
-mention a Kirby presentation, a clean band script, a homology class, a
+These three declarations import the cited category-theory statements.  They
+do not mention a Kirby presentation, a clean band script, a homology class, a
 character exponent, or an evaluator endpoint.
 -/
 namespace StandardPremodularBandLaws
@@ -1926,7 +1926,9 @@ namespace StandardPremodularBandLaws
 /--
 Spherical insertion of a complete dual basis.
 
-Reference boundary: Bärenz--Barrett, Lemma 2.37 and equation (2.2.5).
+Reference: Bärenz--Barrett, *Dichromatic State Sum Models for
+Four-Manifolds from Pivotal Functors*, Lemma 2.37, equations (2.2.5)--(2.2.6),
+journal page 675.
 -/
 axiom sphericalInsertion
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
@@ -1935,8 +1937,8 @@ axiom sphericalInsertion
 /--
 Compatibility of the pivotal trace pairing with the mate operation.
 
-Reference boundary: Bärenz--Barrett, Lemma 3.3, equations
-(3.1.3)--(3.1.8).
+Reference: Bärenz--Barrett, Lemma 3.3, equations (3.1.9)--(3.1.11),
+journal pages 683--684.
 -/
 axiom sphericalMateTrace
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
@@ -1948,6 +1950,9 @@ The label-indexed graphical movie of Bärenz--Barrett Lemmas 3.3--3.4.
 This law is quantified over the arbitrary exposed strand used by
 `SlidingFamily`.  It does not know the role-aware exterior into which that
 movie will later be plugged.
+
+Reference: Bärenz--Barrett, Lemmas 3.3--3.4, equations
+(3.1.3)--(3.1.11), journal pages 681--684.
 -/
 axiom labelIndexedMovies
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :

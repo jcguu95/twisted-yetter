@@ -2,6 +2,7 @@ import TwistedYetter.Kirby.EGNOCategoryBoundSliding
 import TwistedYetter.Kirby.ComponentRibbonDiagram
 import TwistedYetter.Kirby.KirbyCancellation
 import TwistedYetter.Kirby.ModularOpenKilling
+import TwistedYetter.Kirby.PremodularFramedKink
 import TwistedYetter.Kirby.PresentationIsotopy
 import TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
 import TwistedYetter.Fusion.EGNOPremodularModular
@@ -252,24 +253,10 @@ theorem two_three_factor
 
 end ModularCancellationLaw
 
-/--
-Blackboard-framing conventions bound to the category's exact ribbon
-structure.  These are the two explicit graphical equalities already isolated
-by `PresentationIsotopy`.
+/-!
+`RibbonFramedKinkLaw` now lives in `PremodularFramedKink`; this legacy
+modular environment only adds compatibility adapters.
 -/
-structure RibbonFramedKinkLaw
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
-  positive_sound :
-    (X : C) →
-      Diagram.eval C (positiveKink data.ribbon X) =
-        (NaturalTwist.ofRibbon data.ribbon).iso.hom.app X
-  negative_sound :
-    (X : C) →
-      Diagram.eval C (negativeKink data.ribbon X) =
-        (NaturalTwist.ofRibbon data.ribbon).iso.inv.app X
-  source_ref : String := "ref:shum-tortile-1994"
-  source_locator : String :=
-    "Ribbon graphical coherence identifying blackboard kinks with twist"
 
 namespace RibbonFramedKinkLaw
 
@@ -641,15 +628,10 @@ theorem baerenzBarrett_oneTwoHopfPairSum
       · intro unitMissing
         exact (unitMissing (Finset.mem_univ _)).elim
 
-/--
-Shum's coherence theorem for tortile categories, specialized to the corrected
-open-strand kink diagrams.  Expanding the positive diagram gives
-`coevaluation`, a crossing between the old strand and its dual, and the
-pivotal reverse evaluation; the negative diagram uses the inverse crossing.
+/-!
+`shum_ribbonFramedKink` is imported from `PremodularFramedKink`, next to its
+exact Shum and Crane--Yetter locators.
 -/
-axiom shum_ribbonFramedKink
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
-    RibbonFramedKinkLaw 𝒞
 
 /--
 The hash-free framed-isotopy laws supplied by the ribbon structure of a

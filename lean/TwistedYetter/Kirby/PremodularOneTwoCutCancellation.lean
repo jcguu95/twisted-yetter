@@ -1,7 +1,7 @@
 import TwistedYetter.Kirby.RoleAwarePremodularEvaluator
 import TwistedYetter.Kirby.RoleAwareComponentDiagram
 import TwistedYetter.Kirby.ThamThreeHandleVacuum
-import TwistedYetter.Kirby.ModularOpenKilling
+import TwistedYetter.Kirby.PivotalClosure
 
 /-!
 # Premodular 1--2 cancellation after special dotted cutting
@@ -20,7 +20,7 @@ open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator.CanonicalPresentation
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
-open TwistedYetter.Kirby.ModularOpenKilling
+open TwistedYetter.Kirby.PremodularPivotalClosure
 open TwistedYetter.Kirby.PremodularDottedCutting
 open TwistedYetter.Kirby.ThamThreeHandleVacuum
 

@@ -1,0 +1,120 @@
+/-
+Twisted Yetter Lean archive
+Retired: 2026-07-27
+Status: COMMENTED ARCHIVE / EXCLUDED FROM THE NORMATIVE THEOREM CLOSURE
+
+Decision
+========
+
+The eleven declarations below do not occur in the axiom closure of
+`Final.TwistedYetter_diffeomorphism_invariant` or its modular specialization.
+They belong to superseded reconstruction, modular-open-killing,
+ordinary-window, legacy band-movie, or legacy completeness routes.
+
+They are retained here as comments for archaeology.  Their historical source
+modules may still be compiled so that old imports do not break, but none of
+these declarations occurs in the dependency closure of the current theorem.
+They are not evidence for the current theorem, and no current claim may cite
+them.
+
+1. EGNO spherical-to-ribbon reconstruction (unused converse interface)
+----------------------------------------------------------------------
+
+axiom sphericalRibbonReconstruction
+    (C : BraidedSphericalFusionCategory ...) :
+    SphericalRibbonReconstruction C
+
+Judgment: the current public category is supplied as a premodular fusion
+category already.  Reconstructing ribbon data from a second spherical
+presentation is outside the theorem's input and proof route.
+
+2. S-matrix nondegeneracy versus trivial Mueger center
+------------------------------------------------------
+
+axiom sMatrixNondegenerate_iff_trivialMuegerCenter
+    (C : PremodularCategory ...) :
+    SMatrixNondegenerate C ↔
+      ∀ s, IsTransparentObject (C.simple s) ↔ s = C.unitIndex
+
+Judgment: the current theorem is premodular and never collapses the
+transparent sector by modularity.  The modular theorem is only a
+specialization of the premodular theorem.
+
+3--5. Legacy modular open-killing scalar route
+-----------------------------------------------
+
+axiom egno_partialTraceCharacter ...
+axiom egno_weightedSColumn ...
+axiom egno_simpleQuantumDimension_ne_zero ...
+
+Judgment: these supported the old replacement of a dotted component by an
+ordinary modular Kirby-coloured component.  The role-aware evaluator instead
+uses the normalized tensor-unit projector at every dotted component, so the
+three modular-only formulas are not part of the invariant proof.
+
+6. Legacy ordinary 2/2 window existence
+----------------------------------------
+
+axiom premodularTwoOverTwoOrdinaryWindow ...
+
+Judgment: the current 2/2 route constructs its clean source-bound,
+channel-weighted band window directly.  It does not ask for an arbitrary
+ordinary-window witness.
+
+7. Legacy ordinary Kirby sliding package
+-----------------------------------------
+
+axiom baerenzBarrett_ordinaryKirbySliding ...
+
+Judgment: the current 2/2 proof uses the smaller source-faithful
+label-indexed spherical insertion, mate/trace, and sliding-movie inputs.
+The old all-in-one ordinary Kirby-colour package is unnecessary.
+
+8. Legacy positive band movie
+------------------------------
+
+axiom baerenzBarrett_positiveBandMovie ...
+
+Judgment: replaced by the orientation-explicit channel-weighted theorem in
+the role-aware 2/2 route.
+
+9. Legacy shared free window
+-----------------------------
+
+axiom standardSharedFreeWindow ...
+
+Judgment: replaced by the exact clean attach/transport/detach script and its
+source/target structural bindings.
+
+10. Legacy negative band movie
+-------------------------------
+
+axiom baerenzBarrett_negativeBandMovie ...
+
+Judgment: replaced by the orientation-explicit channel-weighted theorem in
+the role-aware 2/2 route.
+
+11. Legacy special-presentation connectedness package
+------------------------------------------------------
+
+axiom standardSpecialKirbyPresentationsConnected ...
+
+Judgment: the final public boundary is now split into explicit presentation
+existence, realization, elementary-move soundness, and Kirby--Cerf
+completeness axioms.  The old bundled connectedness package is not used.
+
+Archived source clusters
+========================
+
+The normative root no longer exports the following superseded routes:
+
+* ModularOpenKilling and its modular dotted-evaluator descendants;
+* TwoOverTwoBandMovie / TwoOverTwoNegativeBandMovie;
+* TwoOverTwoSourceFreeFactorization and old endpoint wrappers;
+* SourceBackedKirbyCompleteness / ConcreteMarkedPairAssembly;
+* EGNOModularFourManifoldInvariant and legacy modular evaluator assembly;
+* old mutation and compatibility modules.
+
+Git history is the authoritative byte-for-byte archive of those source
+versions.  This file records why they are outside the normative main line.
+-/

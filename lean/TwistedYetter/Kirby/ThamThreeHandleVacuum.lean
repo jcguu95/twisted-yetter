@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.DualHandleConvention
-import TwistedYetter.Kirby.EGNOModularKirbyMoves
+import TwistedYetter.Fusion.EGNOPremodularModular
+import TwistedYetter.Fusion.EGNOTensorAutomorphism
 
 /-!
 # The Tham `k = 3` vacuum check in the dual convention
@@ -30,8 +31,6 @@ namespace TwistedYetter.Kirby.ThamThreeHandleVacuum
 open scoped BigOperators
 open CategoryTheory
 open TwistedYetter.Fusion.EGNO
-open TwistedYetter.Kirby.EGNOModularKirbyMoves
-open TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment
 
 universe uK uC vC
 

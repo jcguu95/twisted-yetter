@@ -361,6 +361,14 @@ noncomputable def targetCycle
 
 end Request
 
+/-
+RETIRED LEGACY ROUTE (2026-07-27)
+
+This block encoded the old ordinary-window attach/slide/detach movie.  The
+role-aware main line now constructs clean source-bound unit-cut and
+channel-weighted movies directly.  In particular the former
+`premodularTwoOverTwoOrdinaryWindow` axiom is archived rather than compiled.
+
 /-- The ordinary fixed-label graphical window used in the middle phase. -/
 abbrev OrdinaryWindow
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :=
@@ -545,6 +553,7 @@ axiom premodularTwoOverTwoOrdinaryWindow
       TableTwoMoveMetadata .twoOverTwo source.topology target.topology)
     (countsSound : source.topology.counts = target.topology.counts) :
     OrdinaryWindow 𝒞
+-/
 
 /--
 The common coefficient in a 2-over-2 block is the source weight with the

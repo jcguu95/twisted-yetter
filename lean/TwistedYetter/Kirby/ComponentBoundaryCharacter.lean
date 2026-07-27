@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.ComponentDottedEncircling
+import TwistedYetter.Kirby.ModularVacuumProjector
 import TwistedYetter.Kirby.TensorAutomorphismDuality
 
 /-!

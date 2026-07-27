@@ -1,19 +1,13 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T10:51:41-06:00",
-  "status": "KERNEL_CHECKED_RELATIVE_TO_CLEAN_ENDPOINT_INTERPRETATION_AXIOMS",
+  "generated_at": "2026-07-27T11:39:00-06:00",
+  "status": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
   "terminal_states": {
-    "premodular_mainline": "PREMODULAR_MAINLINE_KERNEL_CHECKED_RELATIVE_TO_EXPLICIT_AXIOMS",
-    "modular_specialization": "MODULAR_SPECIALIZATION_KERNEL_CHECKED_RELATIVE_TO_EXPLICIT_AXIOMS",
+    "premodular_mainline": "ESTABLISHED_RELATIVE_TO_LISTED_LITERATURE_AND_TOPOLOGY_AXIOMS",
+    "modular_specialization": "ESTABLISHED_BY_PREMODULAR_SPECIALIZATION",
     "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
   },
-  "active_blocker": {
-    "id": "CLEAN_ENDPOINT_INTERPRETATION_TRUST_BOUNDARY",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. The two former sorry-bearing evaluation theorems are now proved. The remaining explicit trust boundary consists of two pointwise interpreter axioms, attach_fixedMovingLabel and detach_fixedMovingLabel, identifying a clean Kirby collar with the corresponding categorical endpoint stage.",
-    "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "No proof obligation remains for attach_preserves_evaluation or detach_preserves_evaluation. A future deeper formalization may replace the two clean-endpoint interpretation axioms by a verified planar-to-categorical interpreter, but this is now an explicit optional trust-boundary reduction rather than a hidden evaluator equality.",
-    "nonclaim": "The result is kernel checked relative to the two clean-endpoint interpretation axioms and the separately listed topology/category literature axioms. It is not an axiom-free construction of the planar-to-categorical interpreter."
-  },
+  "active_blocker": null,
   "logic_safety_correction": {
     "unsafe_commit": "ca9cb63b2573f76bd176c85d7bc918133633601c",
     "unsafe_encoding": "StandardOrientedBandTransport was accidentally declared as an inductive proposition with no constructors.",
@@ -27,7 +21,7 @@
     "issue": "A true naturality theorem for a character coupon on the external input strand of tensorLeft was initially named as though it transported the internal fusion-channel coupon.",
     "why_it_matters": "The required twisted two-over-two calculation places eta_z^b between the projection to z and inclusion from z. A coupon on the external object of the functor-valued window has a different typed position, even though both statements can be made to compile.",
     "correction": "The theorem is now named externalCharacterCoupon_bandTransport, its documentation explicitly states the non-claim, and no mainline endpoint obligation is discharged by it.",
-    "remaining_obligation": "The internal weighted sliding calculation and its positive/negative exponent convention are now proved. Prove that attach and detach preserve the exact source and target evaluations without replacing either result by an evaluator-equality axiom."
+    "remaining_obligation": "The internal weighted sliding calculation, its positive/negative exponent convention, and the attach/detach evaluation theorems are proved relative to the two explicit pointwise clean-endpoint interpretation axioms. The current blockers are the five separately listed category theorem proofs."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -50,18 +44,18 @@
   "public_results": [
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter",
-      "status": "KERNEL_CHECKED_CONDITIONAL_DEFINITION",
-      "meaning": "The public candidate takes only the intended two dependent pairs. Its theorem closure contains the explicit clean-endpoint interpretation axioms and no sorryAx from the attach/detach route."
+      "status": "ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
+      "meaning": "The public candidate takes only the intended two dependent pairs. Its invariance route has no sorryAx and depends only on the enumerated literature, topology, handle-chain, and clean-endpoint axioms."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
-      "status": "KERNEL_CHECKED_RELATIVE_TO_EXPLICIT_INTERPRETATION_AXIOMS",
-      "meaning": "The theorem is kernel checked without sorry. Its trust boundary explicitly includes attach_fixedMovingLabel and detach_fixedMovingLabel."
+      "status": "ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
+      "meaning": "The kernel-checked theorem has no sorryAx. Its complete nonstandard dependency closure is recorded below."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
-      "status": "BLOCKED_ON_PREMODULAR_MAINLINE",
-      "meaning": "The specialization is syntactically available but inherits the unresolved clean-band endpoint obligation."
+      "status": "ESTABLISHED_BY_PREMODULAR_SPECIALIZATION",
+      "meaning": "The modular theorem is obtained from the premodular theorem without a second modular invariance proof."
     }
   ],
   "proved_internal_obligations": [
@@ -155,13 +149,17 @@
       "Final.inducedH2_identity",
       "Final.inducedH2_compose"
     ],
-    "category_and_graphical_literature": [
+    "category_literature_axioms": [
       "PremodularCategory.globalDimension_ne_zero",
-      "standardHandleChainNaturality",
       "shum_ribbonFramedKink",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.labelIndexedMovies"
+    ],
+    "accepted_explicit_interpretation_and_naturality_axioms": [
+      "standardHandleChainNaturality",
+      "TwoOverTwoAttachDetach.CleanEndpointInterpretation.attach_fixedMovingLabel",
+      "TwoOverTwoAttachDetach.CleanEndpointInterpretation.detach_fixedMovingLabel"
     ],
     "topology_boundaries": [
       {
@@ -196,23 +194,23 @@
       "ordinary dotted-label evaluator",
       "legacy oneOverOne and twoOverOne slide axioms",
       "arbitrary evaluator-equality compiler",
-      "sorry",
       "admit"
     ]
   },
   "legacy_status": {
     "public_mainline_dependency": "ABSENT",
     "old_public_axiom_names": "ABSENT",
-    "isolated_archaeology_declarations": "DELETED",
+    "isolated_archaeology_declarations": "PRESENT_IN_NON_NORMATIVE_LEGACY_MODULES",
+    "commented_archive": "legacy-archives/lean-kirby-retired-axioms-2026-07-27.lean.txt",
     "compatibility_theorem": "BLOCKED",
     "blocker": "The full dotted-label legacy modular sum has not been proved equal to the collected role-aware evaluator for every simultaneous dotted cut.",
-    "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
+    "safety": "The eleven retired declarations are recorded together as commented archaeology and are absent from both public root exports and the current theorem dependency closure. Some historical source modules still contain compile-only declarations so old imports remain reproducible; these declarations are not current evidence and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T08:18:00-06:00",
-    "base_checkpoint_commit": "4bc4b4c",
-    "git_dirty": false,
-    "dirty_path_count_at_capture": 0,
+    "timestamp": "2026-07-27T11:43:08-06:00",
+    "base_checkpoint_commit": "4603f9b",
+    "git_dirty": true,
+    "dirty_path_count_at_capture": 19,
     "lean_version": "4.29.1",
     "lake_version": "5.0.0-src+f72c35b",
     "os": "Darwin 24.6.0 arm64",
@@ -234,14 +232,16 @@
     "visible_twisted_channel_diagrams_build": "PASS_2319_JOBS_2026-07-27T08:09:00-06:00",
     "visible_twisted_channel_diagrams_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T08:09:00-06:00",
     "external_coupon_naturality_audit": "PASS_STANDARD_LOGIC_ONLY_BUT_NOT_INTERNAL_CHANNEL_TRANSPORT_2026-07-27T08:17:00-06:00",
-    "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
-    "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
-    "full_repository_build": "PASS_2375_JOBS",
+    "theorem_obligation_exposure_build": "PASS_2319_JOBS_2026-07-27T11:03:56-06:00",
+    "mainline_axiom_audit": "PASS_NO_SORRYAX_EXACT_LITERATURE_AND_TOPOLOGY_BOUNDARIES_VISIBLE",
+    "final_public_axiom_audit": "PASS_RELATIVE_TO_EXPLICIT_AXIOMS",
+    "full_repository_build": "PASS_2323_JOBS_2026-07-27T11:43:08-06:00",
     "unsupported_legacy_aggregate_imports_removed": true,
     "new_route_sorry_or_admit": false
   },
   "explicit_nonclaims": [
-    "The premodular and modular four-manifold invariance theorems are kernel checked relative to two explicit clean-endpoint interpretation axioms; no axiom-free planar-to-categorical interpreter is claimed.",
+    "The theorem is established only relative to the explicitly listed literature, topology, handle-chain, and clean-endpoint axioms; those inputs are not proved from foundations here.",
+    "The two pointwise clean-endpoint interpretation axioms remain explicit accepted trust boundaries; no axiom-free planar-to-categorical interpreter is claimed.",
     "No equality with the original Crane-Yetter or Yetter state sum is claimed.",
     "Existing Figure 21 or other legacy numerical artifacts are not re-certified by this theorem.",
     "The legacy full dotted-label modular evaluator is not yet proved equal to the role-aware evaluator.",

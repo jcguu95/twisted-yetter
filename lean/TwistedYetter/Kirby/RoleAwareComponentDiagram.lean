@@ -1,6 +1,7 @@
 import TwistedYetter.Kirby.ComponentDottedEncircling
 import TwistedYetter.Kirby.ComponentRibbonIsotopy
 import TwistedYetter.Kirby.PremodularDottedCutting
+import TwistedYetter.Kirby.PivotalClosure
 
 /-!
 # Component-role-aware free ribbon diagrams
@@ -481,14 +482,14 @@ theorem oneTwoCutPair_eval_eq_pivotalClosure
     (labelOf : String → S) :
     Diagram.eval C
         ((oneTwoCutPair dottedId twoHandleId).interpret 𝒞 η labelOf) =
-      TwistedYetter.Kirby.ModularOpenKilling.pivotalClosure
+      TwistedYetter.Kirby.PremodularPivotalClosure.pivotalClosure
         𝒞 (𝒞.simple (labelOf twoHandleId))
         (specialDottedCutOperator 𝒞
           (𝒞.simple (labelOf twoHandleId))) := by
   simp only [oneTwoCutPair, interpret, ordinary,
     ComponentDiagram.interpret, interpretSpecialDottedCut,
     Diagram.eval, ComponentBoundary.interpret, Boundary.denote,
-    TwistedYetter.Kirby.ModularOpenKilling.pivotalClosure,
+    TwistedYetter.Kirby.PremodularPivotalClosure.pivotalClosure,
     pivotalTrace, leftCategoricalTrace,
     pivotalReverseExactPairing,
     CategoryTheory.ExactPairing.evaluation,

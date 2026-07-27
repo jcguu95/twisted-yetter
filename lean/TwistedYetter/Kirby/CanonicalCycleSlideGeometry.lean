@@ -57,6 +57,14 @@ variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type} [Fintype S] [DecidableEq S]
 
+/-
+RETIRED LEGACY ROUTE (2026-07-27)
+
+The declarations through `TermwiseCouponAdaptedKirbyColourSlideWindow` used
+the old ordinary-Kirby-colour slide environment.  The role-aware premodular
+main line uses `CanonicalSlideBlocks` below and the label-indexed band laws
+directly.  This block is intentionally excluded from compilation.
+
 /--
 Linear closure of complete fixed-label ordinary-slide windows with
 source-bound metadata.
@@ -335,6 +343,7 @@ noncomputable def toWindow
         window.afterTermConversion
 
 end TermwiseCouponAdaptedKirbyColourSlideWindow
+-/
 
 /-
 Canonical finite blocks obtained by leaving both the moving label and the
@@ -1099,6 +1108,13 @@ theorem target_decomposition
 
 end CanonicalSlideBlocks
 
+/-
+RETIRED LEGACY ROUTE (2026-07-27)
+
+The remaining ordinary/generalized slide wrappers belonged to the replaced
+modular evaluator route.  The role-aware main line closes 1/1 and 2/1 through
+unit cutting and 2/2 through the explicit channel-weighted band movie.
+
 /--
 A syntactic finite partition of one complete ordinary slide sum into
 admitted ordinary Kirby-colour windows.
@@ -1503,5 +1519,6 @@ theorem cycleLinearDiagram_eval_transport
   (geometry.blockDecomposition sourceCycle).eval_eq
 
 end GeneralizedCycleSlideGeometry
+-/
 
 end TwistedYetter.Kirby.CanonicalCycleSlideGeometry

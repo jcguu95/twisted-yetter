@@ -43,14 +43,20 @@ axioms.
 #print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.ChannelWeightedClosedWindow.linear_eval_eq
 
-#check
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion
 
-#check
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace
 
-#check
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.labelIndexedMovies
+
+#print axioms
+  TwistedYetter.Fusion.EGNO.PremodularCategory.globalDimension_ne_zero
+
+#print axioms
+  TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink
 
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding.roleAwareCycleEval_eq

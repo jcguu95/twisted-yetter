@@ -122,9 +122,9 @@ def openDottedEncircling
     .leftUnitorHom inside
 
 /--
-Interpreting the free window gives exactly the simple-labelled open
-encircling morphism.  The two diagrams use different boundary syntax, so the
-statement compares their evaluated morphisms.
+Legacy compatibility bridge: interpreting the free window gives the
+simple-labelled modular open-encircling morphism.  The role-aware
+premodular evaluator does not use this theorem.
 -/
 theorem openDottedEncircling_interpret_eval
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))

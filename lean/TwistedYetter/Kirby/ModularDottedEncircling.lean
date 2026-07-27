@@ -1,3 +1,5 @@
+import TwistedYetter.Kirby.EGNOModularKirbyMoves
+import TwistedYetter.Kirby.ModularOpenKilling
 import TwistedYetter.Kirby.ModularVacuumProjector
 import TwistedYetter.Kirby.PresentationIsotopy
 

@@ -256,10 +256,6 @@ structure LabelIndexedSlidingMovies
   source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
   source_locator : String :=
     "Lemmas 3.3-3.4, equations (3.1.3)-(3.1.11), journal pages 681-684"
-  graphicalCertificateHash : String
-  graphical_certificate_hash_shape :
-    TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape
-      graphicalCertificateHash = true
 
 namespace LabelIndexedSlidingMovies
 
