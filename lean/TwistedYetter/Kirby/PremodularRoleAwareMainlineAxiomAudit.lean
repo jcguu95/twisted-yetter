@@ -32,6 +32,15 @@ axioms.
   TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.channelWeighted_transport
 
 #print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterWeight_transport
+
+#print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterWeight_transport_inContext
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.internalChannelWeight_transport
+
+#print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
 #check

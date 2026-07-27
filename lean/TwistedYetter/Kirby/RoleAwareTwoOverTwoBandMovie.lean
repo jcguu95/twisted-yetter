@@ -1340,6 +1340,41 @@ noncomputable def stationaryExponent
     (componentAt source.topology.formal (stationarySourceIndex window).1)
 
 /--
+The exponent carried by the internal fusion channel.
+
+For the positive endpoint the stationary strand is dual, so its exponent
+changes sign.  For the negative endpoint both exposed strands are positive.
+-/
+noncomputable def internalChannelExponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle) : ℤ :=
+  match window.recipeStructuralBinding.orientation with
+  | .positive => -(stationaryExponent window sourceCycle)
+  | .negative => stationaryExponent window sourceCycle
+
+/-- The actual character scalar attached to an internal simple channel `z`. -/
+noncomputable def internalChannelWeight
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (z : S) : K :=
+  TwoOverTwoFusionChannel.internalCharacterWeight
+    𝒞.premodular η (internalChannelExponent window sourceCycle) z
+
+/--
 The residual character exponent carried by the exposed moving strand.
 
 For the positive endpoint the stationary occurrence is dual, so extracting
@@ -1920,6 +1955,47 @@ axiom labelIndexedMovies
       (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
 
 end StandardPremodularBandLaws
+
+/--
+The internal character weight, with the orientation sign fixed by the
+role-aware window, survives the full generalized-sliding calculation.
+
+This closes the character-bearing categorical movie.  It does not assert
+that the source or target presentation syntax is already one of these two
+stages.
+-/
+theorem RoleAwareFiniteSumBlocks.internalChannelWeight_transport
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (movingLabel : S)
+    (strand : C) :
+    LinearDiagram.eval
+        (((StandardPremodularBandLaws.labelIndexedMovies 𝒞).family
+            movingLabel).fiber strand
+          |>.channelWeightedStage314
+            (RoleAwareFiniteSumBlocks.internalChannelWeight
+              window 𝒞 η sourceCycle)) =
+      LinearDiagram.eval
+        (((StandardPremodularBandLaws.labelIndexedMovies 𝒞).family
+            movingLabel).fiber strand
+          |>.channelWeightedStage318
+            (RoleAwareFiniteSumBlocks.internalChannelWeight
+              window 𝒞 η sourceCycle)) :=
+  TwoOverTwoFusionChannel.internalCharacterWeight_transport
+    𝒞.premodular
+    (StandardPremodularBandLaws.sphericalInsertion 𝒞)
+    (StandardPremodularBandLaws.sphericalMateTrace 𝒞)
+    (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
+    η movingLabel strand
+    (RoleAwareFiniteSumBlocks.internalChannelExponent window sourceCycle)
 
 /--
 Exact structural binding of a role-aware 2/2 move to the explicit

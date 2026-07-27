@@ -3,6 +3,7 @@ import TwistedYetter.Kirby.CategoricalTangle
 import TwistedYetter.Kirby.ComponentBoundaryCharacter
 import TwistedYetter.Kirby.ComponentRibbonDiagram
 import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.GeneralizedSliding
 import TwistedYetter.Kirby.LinearContext
 import TwistedYetter.Kirby.LinearDiagram
 
@@ -31,6 +32,7 @@ open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentBoundaryCharacter
 open TwistedYetter.Kirby.ComponentRibbonDiagram
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.GeneralizedSliding
 open TwistedYetter.Kirby.LinearContext
 open TwistedYetter.Kirby.LinearDiagram
 open TwistedYetter.Kirby.ModularVacuumProjector
@@ -46,6 +48,82 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 local instance twoOverTwoFusionChannelRightRigid : RightRigidCategory C :=
   (inferInstance : RigidCategory C).toRightRigidCategory
+
+/-!
+## Character weights on the internal generalized-sliding channel
+
+The `z` below is the simple label on the edge between the two trivalent
+coupons.  It is not an exterior strand and not a third Kirby component.
+-/
+
+/-- The scalar by which `η^exponent` acts on the internal simple channel. -/
+noncomputable def internalCharacterWeight
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (exponent : ℤ)
+    (z : S) : K :=
+  data.toFusionCategoryData.automorphismScalarPower η z exponent
+
+/--
+The Bärenz--Barrett generalized-sliding calculation transports the actual
+homological character weight on the internal fusion channel.
+
+This theorem does not identify a role-aware Kirby-presentation endpoint.
+It closes only the categorical calculation after a clean endpoint has been
+expanded into the generalized-sliding stages.
+-/
+theorem internalCharacterWeight_transport
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw)
+    (η : TensorIdentityAutomorphism C)
+    (movingLabel : S)
+    (strand : C)
+    (exponent : ℤ) :
+    LinearDiagram.eval
+        ((movies.family movingLabel).fiber strand
+          |>.channelWeightedStage314
+            (internalCharacterWeight data η exponent)) =
+      LinearDiagram.eval
+        ((movies.family movingLabel).fiber strand
+          |>.channelWeightedStage318
+            (internalCharacterWeight data η exponent)) :=
+  ((movies.family movingLabel).fiber strand).channelWeighted_transport
+    (internalCharacterWeight data η exponent)
+
+/--
+The same internal-character transport remains valid after inserting the
+generalized-sliding calculation into an arbitrary unchanged exterior.
+-/
+theorem internalCharacterWeight_transport_inContext
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw)
+    (η : TensorIdentityAutomorphism C)
+    (movingLabel : S)
+    (strand : C)
+    (exponent : ℤ)
+    {wholeSource wholeTarget : Boundary C}
+    (context :
+      Context C
+        (.atom (data.simple movingLabel ⊗ strand))
+        (.atom (data.simple movingLabel ⊗ strand))
+        wholeSource wholeTarget) :
+    evalContextLinearMap (R := K) context
+        (LinearDiagram.eval
+          ((movies.family movingLabel).fiber strand
+            |>.channelWeightedStage314
+              (internalCharacterWeight data η exponent))) =
+      evalContextLinearMap (R := K) context
+        (LinearDiagram.eval
+          ((movies.family movingLabel).fiber strand
+            |>.channelWeightedStage318
+              (internalCharacterWeight data η exponent))) :=
+  congrArg (evalContextLinearMap (R := K) context)
+    (internalCharacterWeight_transport
+      data insertionLaw mateLaw movies η movingLabel strand exponent)
 
 /-- The actual object meeting the two trivalent coupons. -/
 abbrev TensorObject
