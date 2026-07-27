@@ -776,6 +776,36 @@ theorem unequalExponentChannelDiagram_eval
           data x y channel.1).dual channel.2))
 
 /--
+The actual character coupon on an internal simple channel crosses a
+Bärenz--Barrett band window by naturality.
+
+This is the twisted transport step.  The coupon is not replaced by a scalar
+placeholder, and no modularity or dotted-component killing is used.
+-/
+theorem internalCharacterCoupon_bandTransport
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw)
+    (η : TensorIdentityAutomorphism C)
+    (movingLabel channelLabel : S)
+    (exponent : ℤ) :
+    Diagram.eval C
+        ((movies.family movingLabel).sourcedFunctorSlidingLaw.beforeCoupon
+          "two-over-two-internal-character"
+          (data.toFusionCategoryData.automorphismCouponPower
+            η channelLabel exponent)) =
+      Diagram.eval C
+        ((movies.family movingLabel).sourcedFunctorSlidingLaw.afterCoupon
+          "two-over-two-internal-character"
+          (data.toFusionCategoryData.automorphismCouponPower
+            η channelLabel exponent)) :=
+  (movies.family movingLabel).sourcedFunctorSlidingLaw.coupon_transport_sound
+    "two-over-two-internal-character"
+    (data.toFusionCategoryData.automorphismCouponPower
+      η channelLabel exponent)
+
+/--
 The residual `a-b` coupon followed by the common `b` coupon is exactly the
 original pair of oriented coupons with exponents `a` and `b`.
 -/
