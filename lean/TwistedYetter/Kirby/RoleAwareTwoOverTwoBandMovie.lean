@@ -1161,6 +1161,82 @@ theorem targetWeight_eq_endpointCoefficient
       metadata countsSound sourceCycle)
     (sourceLabeling window remaining movingLabel stationaryLabel)
 
+/-- Source-cycle exponent on the moving ordinary component. -/
+noncomputable def movingExponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle) : ℤ :=
+  source.cycleComponentExponent sourceCycle
+    (componentAt source.topology.formal (movingSourceIndex window).1)
+
+/-- Source-cycle exponent on the stationary ordinary component. -/
+noncomputable def stationaryExponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle) : ℤ :=
+  source.cycleComponentExponent sourceCycle
+    (componentAt source.topology.formal (stationarySourceIndex window).1)
+
+/--
+The residual character exponent carried by the exposed moving strand.
+
+For the positive endpoint the stationary occurrence is dual, so extracting
+the common channel coupon changes `a - (-b)` to `a + b`.  For the negative
+endpoint it is the ordinary tensor product and the residual is `a - b`.
+-/
+noncomputable def residualMovingExponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle) : ℤ :=
+  match window.recipeStructuralBinding.orientation with
+  | .positive =>
+      movingExponent window sourceCycle + stationaryExponent window sourceCycle
+  | .negative =>
+      movingExponent window sourceCycle - stationaryExponent window sourceCycle
+
+/--
+The outer coefficient after the stationary character coupon has been moved
+inside the generalized-sliding channel calculation.
+
+The unit/unit sector is exactly the product of all unchanged component
+weights.  The remaining factors are the moving quantum dimension and its
+orientation-correct residual character.
+-/
+noncomputable def movingCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel : S) : K :=
+  endpointCoefficient window 𝒞 η sourceCycle remaining
+      𝒞.toFusionCategoryData.unitIndex
+      𝒞.toFusionCategoryData.unitIndex *
+    𝒞.quantumDimension movingLabel *
+    𝒞.toFusionCategoryData.automorphismScalarPower
+      η movingLabel (residualMovingExponent window sourceCycle)
+
 /-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock
     {H2 : Type uH} [AddCommGroup H2]
@@ -1501,20 +1577,22 @@ structure BandEndpointInterpretation
     RoleAwareFiniteSumBlocks.Block (S := S) window →
       LabelIndexedSlidingMovies.ClosedWindow
         (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
-  movingCoefficient :
-    RoleAwareFiniteSumBlocks.Block (S := S) window → S → K
   source_endpoint :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
       RoleAwareFiniteSumBlocks.sourceBlock
           window 𝒞 η sourceCycle block =
         linearEndpoint Side.before
-          (closedWindow block) (movingCoefficient block)
+          (closedWindow block)
+          (RoleAwareFiniteSumBlocks.movingCoefficient
+            window 𝒞 η sourceCycle block)
   target_endpoint :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
       RoleAwareFiniteSumBlocks.targetBlock
           window 𝒞 η sourceCycle block =
         linearEndpoint Side.after
-          (closedWindow block) (movingCoefficient block)
+          (closedWindow block)
+          (RoleAwareFiniteSumBlocks.movingCoefficient
+            window 𝒞 η sourceCycle block)
 
 namespace BandEndpointInterpretation
 
@@ -1544,7 +1622,8 @@ noncomputable def toFiniteSumBinding
   target_decomposition :=
     RoleAwareFiniteSumBlocks.targetDecomposition window 𝒞 η sourceCycle
   closedWindow := interpretation.closedWindow
-  movingCoefficient := interpretation.movingCoefficient
+  movingCoefficient :=
+    RoleAwareFiniteSumBlocks.movingCoefficient window 𝒞 η sourceCycle
   source_endpoint := interpretation.source_endpoint
   target_endpoint := interpretation.target_endpoint
 
