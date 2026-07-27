@@ -22,6 +22,7 @@ open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentRibbonIsotopy
+open TwistedYetter.Kirby.ComponentRibbonDiagram
 open TwistedYetter.Kirby.EGNOCategoryBoundSliding
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
@@ -42,6 +43,32 @@ variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable {S : Type} [Fintype S] [DecidableEq S]
 
+local instance roleAwareTwoOverTwoRightRigid : RightRigidCategory C :=
+  (inferInstance : RigidCategory C).toRightRigidCategory
+
+/--
+The two exposed ordinary strands of the role-aware 2/2 band movie.
+
+Unlike the legacy boundary, this definition reads the component IDs and
+orientation from the same structural binding that supplies the ordinary-role
+proofs and finite-sum coordinates below.
+-/
+def roleAwareLocalBoundary
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (_countsSound : source.topology.counts = target.topology.counts) :
+    ComponentBoundary :=
+  let binding := metadata.recipe.twoOverTwoStructuralBinding
+  .tensor
+    (.atom (positiveAtom binding.slidingTwoHandleId))
+    (.atom
+      (match binding.orientation with
+      | .positive => negativeAtom binding.stationaryTwoHandleId
+      | .negative => positiveAtom binding.stationaryTwoHandleId))
+
 /--
 One shared role-aware exterior exposing the two ordinary strands of a 2/2
 slide.  This is free diagram syntax only.
@@ -57,35 +84,174 @@ structure Window
   targetGeometry : Geometry target
   exterior :
     RoleAwareDiagram.Context
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
       .unit .unit
   sourceLocal :
     ComponentRibbonDiagram.ComponentDiagram.Context
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
   targetLocal :
     ComponentRibbonDiagram.ComponentDiagram.Context
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
-      (localBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
+      (roleAwareLocalBoundary metadata countsSound)
   source_factorization :
     sourceGeometry.cutDiagram =
       exterior.plug
         ((RoleAwareDiagram.Context.ordinary sourceLocal).plug
           (.ordinary
             (ComponentRibbonDiagram.ComponentDiagram.identity
-              (localBoundary metadata countsSound))))
+              (roleAwareLocalBoundary metadata countsSound))))
   target_factorization :
     targetGeometry.cutDiagram =
       exterior.plug
         ((RoleAwareDiagram.Context.ordinary targetLocal).plug
           (.ordinary
             (ComponentRibbonDiagram.ComponentDiagram.identity
-              (localBoundary metadata countsSound))))
+              (roleAwareLocalBoundary metadata countsSound))))
+
+namespace Window
+
+/-- Interpret only the shared role-aware exterior with a source labeling. -/
+noncomputable def sourceExteriorContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) source) :=
+  window.exterior.interpret 𝒞 η
+    (CanonicalPresentation.roleAwareLabelOf 𝒞 source labeling)
+
+/-- Interpret the same exterior with a transported target labeling. -/
+noncomputable def targetExteriorContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) target) :=
+  window.exterior.interpret 𝒞 η
+    (CanonicalPresentation.roleAwareLabelOf 𝒞 target labeling)
+
+/--
+The exact categorical source context obtained by interpreting the shared
+role-aware exterior and the source local band context.
+
+The hole is the interpreted two-strand local boundary.  Dotted cuts and all
+other exterior character coupons remain in the outer context.
+-/
+noncomputable def sourceTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) source) :=
+  let labelOf :=
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source labeling
+  CategoricalTangle.Context.compose
+    ((RoleAwareDiagram.Context.ordinary window.sourceLocal).interpret
+      𝒞 η labelOf)
+    (window.sourceExteriorContext 𝒞 η labeling)
+
+/--
+The exact categorical target context obtained from the same role-aware
+exterior and the target local band context.
+-/
+noncomputable def targetTermContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) target) :=
+  let labelOf :=
+    CanonicalPresentation.roleAwareLabelOf 𝒞 target labeling
+  CategoricalTangle.Context.compose
+    ((RoleAwareDiagram.Context.ordinary window.targetLocal).interpret
+      𝒞 η labelOf)
+    (window.targetExteriorContext 𝒞 η labeling)
+
+/--
+The source evaluator term is definitionally bound to the exact source band
+context selected by the role-aware topology window.
+-/
+theorem sourceTermDiagram_eq_plug_identity
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) source) :
+    CanonicalPresentation.roleAwareTermDiagram
+        𝒞 η source window.sourceGeometry labeling =
+      CategoricalTangle.Context.plug C
+        (window.sourceTermContext 𝒞 η labeling)
+        (CategoricalTangle.Diagram.identity
+          ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+            (CanonicalPresentation.roleAwareLabelOf
+              𝒞 source labeling))) := by
+  unfold CanonicalPresentation.roleAwareTermDiagram sourceTermContext
+  rw [window.source_factorization]
+  rw [RoleAwareDiagram.Context.interpret_plug]
+  rw [RoleAwareDiagram.Context.interpret_plug]
+  rfl
+
+/--
+The target evaluator term is bound to the exact target band context selected
+by the same source-bound move recipe.
+-/
+theorem targetTermDiagram_eq_plug_identity
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labeling : CanonicalPresentation.OrdinaryLabeling (S := S) target) :
+    CanonicalPresentation.roleAwareTermDiagram
+        𝒞 η target window.targetGeometry labeling =
+      CategoricalTangle.Context.plug C
+        (window.targetTermContext 𝒞 η labeling)
+        (CategoricalTangle.Diagram.identity
+          ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+            (CanonicalPresentation.roleAwareLabelOf
+              𝒞 target labeling))) := by
+  unfold CanonicalPresentation.roleAwareTermDiagram targetTermContext
+  rw [window.target_factorization]
+  rw [RoleAwareDiagram.Context.interpret_plug]
+  rw [RoleAwareDiagram.Context.interpret_plug]
+  rfl
+
+end Window
 
 /--
 A role-aware 2/2 window whose source and target are pinned to the clean
@@ -582,6 +748,364 @@ def targetLabeling
   OrdinaryTransport.ordinaryLabelingEquiv
     (Request.twoOverTwo metadata countsSound).sameComponentChange
     (sourceLabeling window remaining movingLabel stationaryLabel)
+
+/-- The source moving component receives exactly the selected moving label. -/
+theorem sourceLabelOf_movingComponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel)
+        window.recipeStructuralBinding.slidingTwoHandleId =
+      movingLabel := by
+  rw [← window.recipeStructuralBinding.components.sliding_source_id_sound]
+  unfold componentAt
+  change
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel)
+        (source.topology.formal.raw.components.get
+          (movingSourceIndex window).1).componentId =
+      movingLabel
+  rw [CanonicalPresentation.roleAwareLabelOf_ordinary
+    𝒞 source
+    (sourceLabeling window remaining movingLabel stationaryLabel)
+    (movingSourceIndex window)]
+  exact combineAtTwo_second
+    (stationarySourceIndex window)
+    (movingSourceIndex window)
+    (sourceIndicesDistinct window)
+    stationaryLabel movingLabel remaining
+
+/--
+The source stationary component receives exactly the selected stationary
+label.
+-/
+theorem sourceLabelOf_stationaryComponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel)
+        window.recipeStructuralBinding.stationaryTwoHandleId =
+      stationaryLabel := by
+  rw [← window.recipeStructuralBinding.components.stationary_source_id_sound]
+  unfold componentAt
+  change
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel)
+        (source.topology.formal.raw.components.get
+          (stationarySourceIndex window).1).componentId =
+      stationaryLabel
+  rw [CanonicalPresentation.roleAwareLabelOf_ordinary
+    𝒞 source
+    (sourceLabeling window remaining movingLabel stationaryLabel)
+    (stationarySourceIndex window)]
+  exact combineAtTwo_first
+    (stationarySourceIndex window)
+    (movingSourceIndex window)
+    (sourceIndicesDistinct window)
+    stationaryLabel movingLabel remaining
+
+/--
+The transported target labeling selects exactly the same role-aware simple
+object at every stable component ID.  Dotted IDs remain forced to the tensor
+unit on both sides.
+-/
+theorem targetLabelOf_eq_sourceLabelOf
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (componentId : String) :
+    CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel)
+        componentId =
+      CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel)
+        componentId := by
+  exact RoleAwareSameComponentTransport.roleAwareLabelOf_transport
+    𝒞 source target
+    (Request.twoOverTwo metadata countsSound).sameComponentChange
+    (sourceLabeling window remaining movingLabel stationaryLabel)
+    componentId
+
+/-- The transported target moving component retains the moving label. -/
+theorem targetLabelOf_movingComponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel)
+        window.recipeStructuralBinding.slidingTwoHandleId =
+      movingLabel := by
+  rw [targetLabelOf_eq_sourceLabelOf
+    window 𝒞 remaining movingLabel stationaryLabel]
+  exact sourceLabelOf_movingComponent
+    window 𝒞 remaining movingLabel stationaryLabel
+
+/-- The transported target stationary component retains the stationary label. -/
+theorem targetLabelOf_stationaryComponent
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel)
+        window.recipeStructuralBinding.stationaryTwoHandleId =
+      stationaryLabel := by
+  rw [targetLabelOf_eq_sourceLabelOf
+    window 𝒞 remaining movingLabel stationaryLabel]
+  exact sourceLabelOf_stationaryComponent
+    window 𝒞 remaining movingLabel stationaryLabel
+
+/-- In positive orientation the exact source hole is `x tensor y-dual`. -/
+theorem sourceLocalBoundary_interpret_positive
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+        (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)) =
+      .tensor
+        (.atom (𝒞.simple movingLabel))
+        (.atom ((𝒞.simple stationaryLabel)ᘁ)) := by
+  change
+    metadata.recipe.twoOverTwoStructuralBinding.orientation = .positive
+      at orientationSound
+  have movingSound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.slidingTwoHandleId =
+        movingLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      sourceLabelOf_movingComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  have stationarySound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.stationaryTwoHandleId =
+        stationaryLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      sourceLabelOf_stationaryComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  simp only [roleAwareLocalBoundary, orientationSound,
+    ComponentBoundary.interpret, ComponentAtom.interpret,
+    positiveAtom, negativeAtom]
+  rw [movingSound, stationarySound]
+
+/-- In negative orientation the exact source hole is `x tensor y`. -/
+theorem sourceLocalBoundary_interpret_negative
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+        (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)) =
+      .tensor
+        (.atom (𝒞.simple movingLabel))
+        (.atom (𝒞.simple stationaryLabel)) := by
+  change
+    metadata.recipe.twoOverTwoStructuralBinding.orientation = .negative
+      at orientationSound
+  have movingSound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.slidingTwoHandleId =
+        movingLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      sourceLabelOf_movingComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  have stationarySound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.stationaryTwoHandleId =
+        stationaryLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      sourceLabelOf_stationaryComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  simp only [roleAwareLocalBoundary, orientationSound,
+    ComponentBoundary.interpret, ComponentAtom.interpret, positiveAtom]
+  rw [movingSound, stationarySound]
+
+/-- In positive orientation the transported target hole is also `x tensor y-dual`. -/
+theorem targetLocalBoundary_interpret_positive
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+        (CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)) =
+      .tensor
+        (.atom (𝒞.simple movingLabel))
+        (.atom ((𝒞.simple stationaryLabel)ᘁ)) := by
+  change
+    metadata.recipe.twoOverTwoStructuralBinding.orientation = .positive
+      at orientationSound
+  have movingSound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.slidingTwoHandleId =
+        movingLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      targetLabelOf_movingComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  have stationarySound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.stationaryTwoHandleId =
+        stationaryLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      targetLabelOf_stationaryComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  simp only [roleAwareLocalBoundary, orientationSound,
+    ComponentBoundary.interpret, ComponentAtom.interpret,
+    positiveAtom, negativeAtom]
+  rw [movingSound, stationarySound]
+
+/-- In negative orientation the transported target hole is also `x tensor y`. -/
+theorem targetLocalBoundary_interpret_negative
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+        (CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)) =
+      .tensor
+        (.atom (𝒞.simple movingLabel))
+        (.atom (𝒞.simple stationaryLabel)) := by
+  change
+    metadata.recipe.twoOverTwoStructuralBinding.orientation = .negative
+      at orientationSound
+  have movingSound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.slidingTwoHandleId =
+        movingLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      targetLabelOf_movingComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  have stationarySound :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel)
+          metadata.recipe.twoOverTwoStructuralBinding.stationaryTwoHandleId =
+        stationaryLabel := by
+    simpa [Window.recipeStructuralBinding] using
+      targetLabelOf_stationaryComponent
+        window 𝒞 remaining movingLabel stationaryLabel
+  simp only [roleAwareLocalBoundary, orientationSound,
+    ComponentBoundary.interpret, ComponentAtom.interpret, positiveAtom]
+  rw [movingSound, stationarySound]
+
+/--
+Consequently the role-aware exterior is literally common after transport.
+`HEq` is used because its typed hole boundary is indexed by the label
+function that has just been proved equal.
+-/
+theorem sourceExteriorContext_heq_targetExteriorContext
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    HEq
+      (window.sourceExteriorContext 𝒞 η
+        (sourceLabeling window remaining movingLabel stationaryLabel))
+      (window.targetExteriorContext 𝒞 η
+        (targetLabeling window remaining movingLabel stationaryLabel)) := by
+  have labels :
+      CanonicalPresentation.roleAwareLabelOf 𝒞 target
+          (targetLabeling window remaining movingLabel stationaryLabel) =
+        CanonicalPresentation.roleAwareLabelOf 𝒞 source
+          (sourceLabeling window remaining movingLabel stationaryLabel) := by
+    funext componentId
+    exact targetLabelOf_eq_sourceLabelOf
+      window 𝒞 remaining movingLabel stationaryLabel componentId
+  unfold Window.sourceExteriorContext Window.targetExteriorContext
+  generalize
+    CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel) =
+      sourceLabels at labels ⊢
+  generalize
+    CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel) =
+      targetLabels at labels ⊢
+  cases labels
+  rfl
 
 /-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock
