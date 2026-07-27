@@ -35,6 +35,24 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetDecomposition
 
 #print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_target_activeStrands
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.detach_source_activeStrands
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.detach_target_activeStrands
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.source_componentTermDiagram_split
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.target_componentTermDiagram_split
+
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.toFiniteSumBinding
 
 #print axioms
