@@ -1108,6 +1108,60 @@ theorem sourceExteriorContext_heq_targetExteriorContext
   rfl
 
 /-- One exact source block, retaining both selected finite label sums. -/
+noncomputable def endpointCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) : K :=
+  CanonicalPresentation.roleAwareGlobalWeight
+    𝒞 η source sourceCycle
+    (sourceLabeling window remaining movingLabel stationaryLabel)
+
+/--
+The target evaluator uses exactly the same coefficient in every
+`(movingLabel, stationaryLabel)` sector.
+
+This is the complete character bookkeeping theorem for the role-aware 2/2
+move.  It includes both selected component exponents and every unchanged
+ordinary component.  No graphical sliding statement is used.
+-/
+theorem targetWeight_eq_endpointCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    CanonicalPresentation.roleAwareGlobalWeight
+        𝒞 η target
+        ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle)
+        (targetLabeling window remaining movingLabel stationaryLabel) =
+      endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel := by
+  unfold endpointCoefficient targetLabeling
+  symm
+  exact RoleAwareSameComponentTransport.roleAwareGlobalWeight_transport
+    𝒞 η
+    (Request.twoOverTwo metadata countsSound).sameComponentChange
+    (CanonicalSourceBoundSlideMovie.premodularTwoOverTwoExponentTransport
+      metadata countsSound sourceCycle)
+    (sourceLabeling window remaining movingLabel stationaryLabel)
+
+/-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -1122,9 +1176,8 @@ noncomputable def sourceBlock
     (remaining : Block (S := S) window) :
     LinearDiagram (R := K) (C := C) .unit .unit :=
   ∑ movingLabel : S, ∑ stationaryLabel : S,
-    CanonicalPresentation.roleAwareGlobalWeight
-        𝒞 η source sourceCycle
-        (sourceLabeling window remaining movingLabel stationaryLabel) •
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
       LinearDiagram.atom (R := K)
         (CanonicalPresentation.roleAwareTermDiagram
           𝒞 η source window.sourceGeometry
@@ -1155,6 +1208,41 @@ noncomputable def targetBlock
           𝒞 η target window.targetGeometry
           (targetLabeling window remaining movingLabel stationaryLabel))
 
+/--
+After the proved handle-chain transport, the target block can be written
+with the literal source-indexed coefficient.  The remaining difference
+between the two blocks is therefore entirely graphical.
+-/
+theorem targetBlock_eq_commonCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window) :
+    targetBlock window 𝒞 η sourceCycle remaining =
+      ∑ movingLabel : S, ∑ stationaryLabel : S,
+        endpointCoefficient
+            window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
+          LinearDiagram.atom (R := K)
+            (CanonicalPresentation.roleAwareTermDiagram
+              𝒞 η target window.targetGeometry
+              (targetLabeling
+                window remaining movingLabel stationaryLabel)) := by
+  classical
+  unfold targetBlock
+  apply Finset.sum_congr rfl
+  intro movingLabel _
+  apply Finset.sum_congr rfl
+  intro stationaryLabel _
+  rw [targetWeight_eq_endpointCoefficient
+    window 𝒞 η sourceCycle remaining movingLabel stationaryLabel]
+
 /-- The source role-aware evaluator is exactly the sum of canonical blocks. -/
 theorem sourceDecomposition
     {H2 : Type uH} [AddCommGroup H2]
@@ -1178,6 +1266,7 @@ theorem sourceDecomposition
     (stationarySourceIndex window)
     (movingSourceIndex window)
     (sourceIndicesDistinct window)]
+  rfl
 
 /-- The target role-aware evaluator is the same source-indexed block sum. -/
 theorem targetDecomposition
