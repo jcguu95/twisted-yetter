@@ -26,6 +26,9 @@ axioms.
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterCoupon_bandTransport
 
 #print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterCoupon_bandTransport_inContext
+
+#print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
 #check

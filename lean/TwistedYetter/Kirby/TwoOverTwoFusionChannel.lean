@@ -806,6 +806,44 @@ theorem internalCharacterCoupon_bandTransport
       η channelLabel exponent)
 
 /--
+The internal-character transport remains valid after inserting the entire
+local band window into any explicitly typed exterior context.
+
+All fusion projections, inclusions, closures, and untouched Kirby components
+may therefore remain outside this theorem.  The only required endpoint fact is
+that both sides expose the same typed band-window boundary.
+-/
+theorem internalCharacterCoupon_bandTransport_inContext
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw)
+    (η : TensorIdentityAutomorphism C)
+    (movingLabel channelLabel : S)
+    (exponent : ℤ)
+    {wholeSource wholeTarget : Boundary C}
+    (context :
+      Context C
+        (.atom (data.simple movingLabel ⊗ data.simple channelLabel))
+        (.atom (data.simple movingLabel ⊗ data.simple channelLabel))
+        wholeSource wholeTarget) :
+    Diagram.eval C
+        (Context.plug C context
+          ((movies.family movingLabel).sourcedFunctorSlidingLaw.beforeCoupon
+            "two-over-two-internal-character"
+            (data.toFusionCategoryData.automorphismCouponPower
+              η channelLabel exponent))) =
+      Diagram.eval C
+        (Context.plug C context
+          ((movies.family movingLabel).sourcedFunctorSlidingLaw.afterCoupon
+            "two-over-two-internal-character"
+            (data.toFusionCategoryData.automorphismCouponPower
+              η channelLabel exponent))) :=
+  Context.eval_plug_congr C context
+    (internalCharacterCoupon_bandTransport
+      data insertionLaw mateLaw movies η movingLabel channelLabel exponent)
+
+/--
 The residual `a-b` coupon followed by the common `b` coupon is exactly the
 original pair of oriented coupons with exponents `a` and `b`.
 -/
