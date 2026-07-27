@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T06:57:23-06:00",
+  "generated_at": "2026-07-27T07:06:36-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,7 +9,7 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, and independent positive- and negative-orientation morphism-level fusion-channel sums are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source presentation context are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
     "required_resolution": "Replace the presently constructor-free StandardOrientedBandTransport shell by an explicit category-neutral standard-band normal-form witness, then construct StandardBandEndpointCompiler from that witness and the exact role-aware contexts. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The moving coefficient and its channel-character reconstruction are now derived rather than supplied. The compiler must still derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
@@ -99,8 +99,8 @@
     },
     {
       "id": "NEGATIVE_TWO_OVER_TWO_FUSION_CHANNEL",
-      "evidence": "TwoOverTwoFusionChannel.sum_negativeChannelCouponMorphism; TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism",
-      "meaning": "For the negative endpoint x tensor y, Lean independently sums every simple z and every multiplicity coordinate mu, transports the common character coupon through that internal channel, and proves that the residual moving coupon plus the channel coupon reconstruct the two original handle coupons. This does not reuse the positive endpoint through an unrecorded mirror."
+      "evidence": "TwoOverTwoFusionChannel.sum_negativeChannelCouponMorphism; TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism; TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism_inBoundaryContext; RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.positiveChannelSum_in_sourceTermContext; negativeChannelSum_in_sourceTermContext",
+      "meaning": "For the negative endpoint x tensor y, Lean independently sums every simple z and every multiplicity coordinate mu, transports the common character coupon through that internal channel, and proves that the residual moving coupon plus the channel coupon reconstruct the two original handle coupons. This does not reuse the positive endpoint through an unrecorded mirror. Both orientations are also transported through the exact source presentation context selected by the role-aware move."
     },
     {
       "id": "MODULAR_SPECIALIZATION",
@@ -176,8 +176,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T06:57:23-06:00",
-    "base_checkpoint_commit": "c075e0d6090e5b529d9b5ee8263ffaa50b7a8d5d",
+    "timestamp": "2026-07-27T07:06:36-06:00",
+    "base_checkpoint_commit": "bc3abe0e3d6a79df6e963ba5f07c09fb2d53b4dc",
     "git_dirty": false,
     "dirty_path_count_at_capture": 0,
     "lean_version": "4.29.1",
@@ -190,6 +190,8 @@
     "role_aware_two_over_two_targeted_build": "PASS_2026-07-27T06:41:21-06:00",
     "negative_two_over_two_fusion_channel_build": "PASS_2026-07-27T06:54:27-06:00",
     "negative_two_over_two_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T06:55:07-06:00",
+    "source_context_channel_binding_build": "PASS_2026-07-27T07:04:58-06:00",
+    "source_context_channel_binding_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T07:05:24-06:00",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
