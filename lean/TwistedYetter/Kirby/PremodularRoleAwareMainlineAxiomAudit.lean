@@ -14,9 +14,6 @@ axioms.
   TwistedYetter.Kirby.RoleAwareRepresentativeIndependence.Presentation.roleAwareCycleEval_respects_homology_class
 
 #print axioms
-  TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.fixedMovingLabel_eval_eq
-
-#print axioms
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.unequalExponentChannelDiagram_eval
 
 #print axioms
@@ -42,9 +39,6 @@ axioms.
 
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
-
-#print axioms
-  TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
 #print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.ChannelWeightedClosedWindow.linear_eval_eq
