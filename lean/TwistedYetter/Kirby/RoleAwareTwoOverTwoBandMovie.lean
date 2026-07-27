@@ -1161,6 +1161,165 @@ theorem targetWeight_eq_endpointCoefficient
       metadata countsSound sourceCycle)
     (sourceLabeling window remaining movingLabel stationaryLabel)
 
+/-- The moving-component factor splits from the exact role-aware weight. -/
+theorem endpointCoefficient_factor_moving
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      source.cycleComponentWeight 𝒞 η sourceCycle
+          (componentAt source.topology.formal
+            (movingSourceIndex window).1) movingLabel *
+        endpointCoefficient window 𝒞 η sourceCycle remaining
+          𝒞.toFusionCategoryData.unitIndex stationaryLabel := by
+  classical
+  unfold endpointCoefficient
+    CanonicalPresentation.roleAwareGlobalWeight
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1)
+        (sourceLabeling
+          window remaining movingLabel stationaryLabel index))
+    (movingSourceIndex window)]
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1)
+        (sourceLabeling window remaining
+          𝒞.toFusionCategoryData.unitIndex stationaryLabel index))
+    (movingSourceIndex window)]
+  simp only [sourceLabeling]
+  rw [combineAtTwo_second, combineAtTwo_second]
+  have unitWeight :
+      source.cycleComponentWeight 𝒞 η sourceCycle
+          (source.topology.formal.raw.components.get
+            (movingSourceIndex window).1)
+          𝒞.toFusionCategoryData.unitIndex = 1 := by
+    unfold CanonicalPresentation.cycleComponentWeight
+    rw [𝒞.quantumDimension_unit]
+    rw [ThamThreeHandleVacuum.automorphismScalarPower_unitIndex]
+    simp
+  rw [unitWeight]
+  simp only [one_mul, componentAt]
+  congr 1
+  apply Finset.prod_congr rfl
+  intro index _
+  exact congrArg
+    (fun label =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1) label)
+    (combineAtTwo_eq_of_ne_second
+      (stationarySourceIndex window)
+      (movingSourceIndex window)
+      (sourceIndicesDistinct window)
+      stationaryLabel movingLabel
+      𝒞.toFusionCategoryData.unitIndex remaining index.property)
+
+/-- The stationary-component factor also splits from the exact weight. -/
+theorem endpointCoefficient_factor_stationary
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      source.cycleComponentWeight 𝒞 η sourceCycle
+          (componentAt source.topology.formal
+            (stationarySourceIndex window).1) stationaryLabel *
+        endpointCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel 𝒞.toFusionCategoryData.unitIndex := by
+  classical
+  unfold endpointCoefficient
+    CanonicalPresentation.roleAwareGlobalWeight
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1)
+        (sourceLabeling
+          window remaining movingLabel stationaryLabel index))
+    (stationarySourceIndex window)]
+  rw [Fintype.prod_eq_mul_prod_subtype_ne
+    (fun index =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1)
+        (sourceLabeling window remaining movingLabel
+          𝒞.toFusionCategoryData.unitIndex index))
+    (stationarySourceIndex window)]
+  simp only [sourceLabeling]
+  rw [combineAtTwo_first, combineAtTwo_first]
+  have unitWeight :
+      source.cycleComponentWeight 𝒞 η sourceCycle
+          (source.topology.formal.raw.components.get
+            (stationarySourceIndex window).1)
+          𝒞.toFusionCategoryData.unitIndex = 1 := by
+    unfold CanonicalPresentation.cycleComponentWeight
+    rw [𝒞.quantumDimension_unit]
+    rw [ThamThreeHandleVacuum.automorphismScalarPower_unitIndex]
+    simp
+  rw [unitWeight]
+  simp only [one_mul, componentAt]
+  congr 1
+  apply Finset.prod_congr rfl
+  intro index _
+  exact congrArg
+    (fun label =>
+      source.cycleComponentWeight 𝒞 η sourceCycle
+        (source.topology.formal.raw.components.get index.1) label)
+    (combineAtTwo_eq_of_ne_first
+      (stationarySourceIndex window)
+      (movingSourceIndex window)
+      (sourceIndicesDistinct window)
+      stationaryLabel 𝒞.toFusionCategoryData.unitIndex movingLabel
+      remaining index.property)
+
+/-- Both selected factors split, leaving the literal unit/unit complement. -/
+theorem endpointCoefficient_factor_both
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      source.cycleComponentWeight 𝒞 η sourceCycle
+          (componentAt source.topology.formal
+            (movingSourceIndex window).1) movingLabel *
+        source.cycleComponentWeight 𝒞 η sourceCycle
+          (componentAt source.topology.formal
+            (stationarySourceIndex window).1) stationaryLabel *
+        endpointCoefficient window 𝒞 η sourceCycle remaining
+          𝒞.toFusionCategoryData.unitIndex
+          𝒞.toFusionCategoryData.unitIndex := by
+  rw [endpointCoefficient_factor_moving]
+  rw [endpointCoefficient_factor_stationary]
+  simp only [mul_assoc]
+
 /-- Source-cycle exponent on the moving ordinary component. -/
 noncomputable def movingExponent
     {H2 : Type uH} [AddCommGroup H2]
