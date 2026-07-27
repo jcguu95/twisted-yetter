@@ -629,6 +629,32 @@ inductive Context :
 
 namespace Context
 
+/--
+Embed an ordinary free-diagram context into the role-aware language.
+
+Every stored piece is wrapped by `RoleAwareDiagram.ordinary`; consequently
+the resulting context contains no special dotted cut and no character
+coupon.  This is the type-level boundary used by the ordinary 2/2 band core.
+-/
+def ordinary :
+    {holeSource holeTarget wholeSource wholeTarget :
+      ComponentBoundary} →
+    ComponentRibbonDiagram.ComponentDiagram.Context
+        holeSource holeTarget wholeSource wholeTarget →
+      Context holeSource holeTarget wholeSource wholeTarget
+  | _, _, _, _, .hole source target =>
+      .hole source target
+  | _, _, _, _, .compLeft before =>
+      .compLeft (.ordinary before)
+  | _, _, _, _, .compRight after =>
+      .compRight (.ordinary after)
+  | _, _, _, _, .tensorLeft right =>
+      .tensorLeft (.ordinary right)
+  | _, _, _, _, .tensorRight left =>
+      .tensorRight (.ordinary left)
+  | _, _, _, _, .compose inner outer =>
+      .compose (ordinary inner) (ordinary outer)
+
 /-- Fill the unique free hole with a role-aware diagram. -/
 def plug
     {holeSource holeTarget wholeSource wholeTarget :
@@ -678,6 +704,38 @@ noncomputable def interpret
       .compose
         (inner.interpret 𝒞 η labelOf)
         (outer.interpret 𝒞 η labelOf)
+
+/--
+Interpreting an embedded ordinary context recovers its ordinary
+interpretation.  Thus the embedding adds no dotted-cut or character
+semantics.
+-/
+theorem interpret_ordinary
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labelOf : String → S)
+    {holeSource holeTarget wholeSource wholeTarget :
+      ComponentBoundary}
+    (context :
+      ComponentRibbonDiagram.ComponentDiagram.Context
+        holeSource holeTarget wholeSource wholeTarget) :
+    (ordinary context).interpret 𝒞 η labelOf =
+      context.interpret 𝒞 labelOf := by
+  induction context with
+  | hole =>
+      rfl
+  | compLeft =>
+      rfl
+  | compRight =>
+      rfl
+  | tensorLeft =>
+      rfl
+  | tensorRight =>
+      rfl
+  | compose inner outer innerIH outerIH =>
+      simp only [ordinary, interpret,
+        ComponentRibbonDiagram.ComponentDiagram.Context.interpret,
+        innerIH, outerIH]
 
 /-- Interpretation commutes with filling the role-aware free hole. -/
 theorem interpret_plug

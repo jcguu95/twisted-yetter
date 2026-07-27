@@ -55,13 +55,13 @@ structure Window
       (localBoundary metadata countsSound)
       .unit .unit
   sourceLocal :
-    RoleAwareDiagram.Context
+    ComponentRibbonDiagram.ComponentDiagram.Context
       (localBoundary metadata countsSound)
       (localBoundary metadata countsSound)
       (localBoundary metadata countsSound)
       (localBoundary metadata countsSound)
   targetLocal :
-    RoleAwareDiagram.Context
+    ComponentRibbonDiagram.ComponentDiagram.Context
       (localBoundary metadata countsSound)
       (localBoundary metadata countsSound)
       (localBoundary metadata countsSound)
@@ -69,14 +69,14 @@ structure Window
   source_factorization :
     sourceGeometry.cutDiagram =
       exterior.plug
-        (sourceLocal.plug
+        ((RoleAwareDiagram.Context.ordinary sourceLocal).plug
           (.ordinary
             (ComponentRibbonDiagram.ComponentDiagram.identity
               (localBoundary metadata countsSound))))
   target_factorization :
     targetGeometry.cutDiagram =
       exterior.plug
-        (targetLocal.plug
+        ((RoleAwareDiagram.Context.ordinary targetLocal).plug
           (.ordinary
             (ComponentRibbonDiagram.ComponentDiagram.identity
               (localBoundary metadata countsSound))))
@@ -96,7 +96,7 @@ noncomputable def sourceContext
     (η : TensorIdentityAutomorphism C)
     (labelOf : String → S) :=
   CategoricalTangle.Context.compose
-    (window.sourceLocal.interpret 𝒞 η labelOf)
+    (window.sourceLocal.interpret 𝒞 labelOf)
     (window.exterior.interpret 𝒞 η labelOf)
 
 /-- The categorical target endpoint context after interpreting the exterior. -/
@@ -112,23 +112,73 @@ noncomputable def targetContext
     (η : TensorIdentityAutomorphism C)
     (labelOf : String → S) :=
   CategoricalTangle.Context.compose
-    (window.targetLocal.interpret 𝒞 η labelOf)
+    (window.targetLocal.interpret 𝒞 labelOf)
     (window.exterior.interpret 𝒞 η labelOf)
 
 /--
-The single premodular graphical input used by the open band movie.
+The untwisted Bärenz--Barrett band core.
 
-An arbitrary endomorphism coupon may be transported through the exact
-source-bound ribbon band recorded by `window`.  The statement is deliberately
-independent of the orientation of the band: positive and negative
-Bärenz--Barrett movies are the two orientation-specialized theorems below.
-
-The input does not select a tensor-identity automorphism component, a
-character exponent, a fusion channel, a Kirby weight, or a closed evaluator
-value.  Those data enter only when the already proved channel calculation
-chooses the endomorphism `f`.
+The local before and after contexts are components of one natural
+endomorphism of the identity functor.  The two endpoint equations contain no
+tensor-identity automorphism, character exponent, or closed scalar equality.
+They are the literature-backed ordinary band-slide input; arbitrary coupon
+transport is proved from their naturality below.
 -/
-axiom premodularCouponTransport
+structure PremodularBandCore
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (labelOf : String → S) where
+  transformation : 𝟭 C ⟶ 𝟭 C
+  source_local :
+    (f :
+      ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote ⟶
+        ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote) →
+      LinearContext.evalContextLinearMap (R := K)
+          (window.sourceLocal.interpret 𝒞 labelOf) f =
+        transformation.app
+            ((localBoundary metadata countsSound).interpret
+              𝒞 labelOf).denote ≫ f
+  target_local :
+    (f :
+      ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote ⟶
+        ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote) →
+      LinearContext.evalContextLinearMap (R := K)
+          (window.targetLocal.interpret 𝒞 labelOf) f =
+        f ≫ transformation.app
+          ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote
+
+/--
+Bärenz--Barrett's ordinary open band-slide law, bound to the exact ordinary
+local contexts selected by `window`.
+
+This is the remaining literature input.  It has no `η` argument and cannot
+state the twisted answer.
+-/
+axiom baerenzBarrettPremodularBandCore
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (labelOf : String → S) :
+    PremodularBandCore window 𝒞 labelOf
+
+/--
+An arbitrary coupon crosses the band by naturality of the untwisted core.
+
+Unlike the former axiom, this theorem makes `f` visible only after the
+ordinary Bärenz--Barrett input has been fixed.
+-/
+theorem premodularCouponTransport
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -145,7 +195,22 @@ axiom premodularCouponTransport
     LinearContext.evalContextLinearMap (R := K)
         (window.sourceContext 𝒞 η labelOf) f =
       LinearContext.evalContextLinearMap (R := K)
-        (window.targetContext 𝒞 η labelOf) f
+        (window.targetContext 𝒞 η labelOf) f := by
+  let core := window.baerenzBarrettPremodularBandCore 𝒞 labelOf
+  change
+    LinearContext.evalContextLinearMap (R := K)
+        (window.exterior.interpret 𝒞 η labelOf)
+        (LinearContext.evalContextLinearMap (R := K)
+          (window.sourceLocal.interpret 𝒞 labelOf) f) =
+      LinearContext.evalContextLinearMap (R := K)
+        (window.exterior.interpret 𝒞 η labelOf)
+        (LinearContext.evalContextLinearMap (R := K)
+          (window.targetLocal.interpret 𝒞 labelOf) f)
+  rw [core.source_local f, core.target_local f]
+  apply congrArg
+    (LinearContext.evalContextLinearMap (R := K)
+      (window.exterior.interpret 𝒞 η labelOf))
+  simpa using (core.transformation.naturality f).symm
 
 /--
 The positive open Bärenz--Barrett band movie, derived from the common
@@ -254,7 +319,9 @@ theorem source_eval_eq_identity
   rw [window.source_factorization]
   rw [RoleAwareDiagram.Context.interpret_plug]
   rw [RoleAwareDiagram.Context.interpret_plug]
-  let inner := window.sourceLocal.interpret 𝒞 η labelOf
+  simp only [RoleAwareDiagram.Context.interpret_ordinary,
+    RoleAwareDiagram.interpret, sourceContext]
+  let inner := window.sourceLocal.interpret 𝒞 labelOf
   let outer := window.exterior.interpret 𝒞 η labelOf
   let identityDiagram :=
     Diagram.identity
@@ -264,7 +331,7 @@ theorem source_eval_eq_identity
       (CategoricalTangle.Context.plug C inner identityDiagram)).symm.trans
       (congrArg
         (LinearContext.evalContextLinearMap (R := K) outer)
-        (LinearContext.evalContextLinearMap_diagram
+        (LinearContext.evalContextLinearMap_diagram (R := K)
           inner identityDiagram).symm)
 
 /-- Plugging identity into the target endpoint recovers the target term. -/
@@ -288,7 +355,9 @@ theorem target_eval_eq_identity
   rw [window.target_factorization]
   rw [RoleAwareDiagram.Context.interpret_plug]
   rw [RoleAwareDiagram.Context.interpret_plug]
-  let inner := window.targetLocal.interpret 𝒞 η labelOf
+  simp only [RoleAwareDiagram.Context.interpret_ordinary,
+    RoleAwareDiagram.interpret, targetContext]
+  let inner := window.targetLocal.interpret 𝒞 labelOf
   let outer := window.exterior.interpret 𝒞 η labelOf
   let identityDiagram :=
     Diagram.identity
@@ -298,7 +367,7 @@ theorem target_eval_eq_identity
       (CategoricalTangle.Context.plug C inner identityDiagram)).symm.trans
       (congrArg
         (LinearContext.evalContextLinearMap (R := K) outer)
-        (LinearContext.evalContextLinearMap_diagram
+        (LinearContext.evalContextLinearMap_diagram (R := K)
           inner identityDiagram).symm)
 
 /--
