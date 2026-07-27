@@ -62,7 +62,7 @@ theorem presentationEvaluation_localInvariant
     (η : TensorIdentityAutomorphism C)
     (H2 : Type uH) [AddCommGroup H2]
     (twoOverTwoEndpoints :
-      RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver 𝒞 η H2)
+      RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler 𝒞 η H2)
     (localGeometry : LocalGeometryRealization H2) :
     IsInvariantUnderElementaryMoves
       (presentationEvaluation 𝒞 η H2 localGeometry) := by

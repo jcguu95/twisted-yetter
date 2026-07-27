@@ -124,6 +124,9 @@ structure CleanWindow
   detach_target_declared :
     metadata.recipe.twoOverTwoCleanScript.detach.targetSlice ∈
       target.topology.formal.raw.declaredSlices
+  transport_standard :
+    CleanBandSlideScript.StandardOrientedBandTransport
+      metadata.recipe.twoOverTwoCleanScript
 
 namespace CleanWindow
 
@@ -138,7 +141,10 @@ def ofWindow
       KirbyCompleteness.TableTwoMoveMetadata
         .twoOverTwo source.topology target.topology}
     {countsSound : source.topology.counts = target.topology.counts}
-    (window : Window source target metadata countsSound) :
+    (window : Window source target metadata countsSound)
+    (transportStandard :
+      CleanBandSlideScript.StandardOrientedBandTransport
+        metadata.recipe.twoOverTwoCleanScript) :
     CleanWindow source target metadata countsSound := by
   let sound := metadata.recipe.twoOverTwoCleanScript_matchesWindow
   have facts :
@@ -168,7 +174,8 @@ def ofWindow
       attach_source_declared := facts.2.2.2.1
       attach_target_declared := facts.2.2.2.2.1
       detach_source_declared := facts.2.2.2.2.2.1
-      detach_target_declared := facts.2.2.2.2.2.2 }
+      detach_target_declared := facts.2.2.2.2.2.2
+      transport_standard := transportStandard }
 
 /-- The exact clean script selected by this window's source-bound recipe. -/
 def script
@@ -931,7 +938,7 @@ A value must be constructed from the clean source/target syntax and the
 listed categorical sliding laws.  Merely possessing a clean topology window
 does not manufacture this value.
 -/
-abbrev CleanEndpointObligation
+abbrev StandardEndpointObligation
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -939,19 +946,22 @@ abbrev CleanEndpointObligation
         .twoOverTwo source.topology target.topology}
     {countsSound : source.topology.counts = target.topology.counts}
     (clean : CleanWindow source target metadata countsSound)
+    (_normalForm :
+      CleanBandSlideScript.StandardOrientedBandTransport clean.script)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) :=
   Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
 
 /--
-A resolver for all clean 2/2 endpoint obligations over one handle-chain
-coefficient group.
+The still-unproved categorical compiler from a topology-certified standard
+band normal form to the explicit Bärenz--Barrett finite-sum endpoints.
 
-No instance or axiom constructs this structure.  It is the explicit blocker
-that must disappear once clean free-syntax endpoint interpretation is proved.
+Unlike the former resolver, this compiler cannot be applied to an arbitrary
+clean-looking window: `resolve` must consume the exact normal-form witness
+stored by that window.  No instance or axiom constructs this compiler.
 -/
-structure CleanEndpointResolver
+structure StandardBandEndpointCompiler
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (H2 : Type uH) [AddCommGroup H2] where
@@ -962,13 +972,16 @@ structure CleanEndpointResolver
         .twoOverTwo source.topology target.topology) →
     (countsSound : source.topology.counts = target.topology.counts) →
     (clean : CleanWindow source target metadata countsSound) →
+    (normalForm :
+      CleanBandSlideScript.StandardOrientedBandTransport clean.script) →
     (sourceCycle : source.DegreeTwoCycle) →
-      CleanEndpointObligation clean 𝒞 η sourceCycle
+      StandardEndpointObligation clean normalForm 𝒞 η sourceCycle
 
 /--
-Once the clean endpoint obligation is supplied, every remaining step is the
-kernel-checked finite-sum proof.  This theorem is deliberately conditional;
-there is no global axiom producing the obligation.
+Once the standard-normal-form endpoint interpretation is supplied, every
+remaining step is the kernel-checked finite-sum proof.  This theorem remains
+deliberately conditional; there is no global axiom producing the categorical
+compiler.
 -/
 theorem CleanWindow.roleAwareCycleEval_eq
     {H2 : Type uH} [AddCommGroup H2]
@@ -981,7 +994,9 @@ theorem CleanWindow.roleAwareCycleEval_eq
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
-    (endpoint : CleanEndpointObligation clean 𝒞 η sourceCycle) :
+    (endpoint :
+      StandardEndpointObligation clean clean.transport_standard
+        𝒞 η sourceCycle) :
     CanonicalPresentation.roleAwareCycleEval
         𝒞 η source clean.window.sourceGeometry sourceCycle =
       CanonicalPresentation.roleAwareCycleEval

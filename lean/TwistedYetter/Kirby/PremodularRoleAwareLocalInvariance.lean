@@ -79,7 +79,7 @@ theorem elementaryMove_invariant
     (η : TensorIdentityAutomorphism C)
     {source target : Presentation H2}
     (twoOverTwoEndpoints :
-      RoleAwareTwoOverTwoBandMovie.CleanEndpointResolver 𝒞 η H2)
+      RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler 𝒞 η H2)
     (move : ElementaryMove source target)
     (alpha :
       source.canonicalPresentation.topology.handleChain.SecondHomology) :
@@ -217,7 +217,8 @@ theorem elementaryMove_invariant
                 clean.roleAwareCycleEval_eq
                   metadata countsSound 𝒞 η sourceCycle
                     (twoOverTwoEndpoints.resolve
-                      metadata countsSound clean sourceCycle)
+                      metadata countsSound clean clean.transport_standard
+                        sourceCycle)
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,

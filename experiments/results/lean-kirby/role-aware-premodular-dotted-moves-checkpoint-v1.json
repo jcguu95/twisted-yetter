@@ -1,18 +1,18 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-26T22:51:15-06:00",
-  "status": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
+  "generated_at": "2026-07-26T23:14:41-06:00",
+  "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
-    "premodular_mainline": "BLOCKED_CLEAN_BAND_GEOMETRY_NOT_YET_RECONNECTED",
+    "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
     "modular_specialization": "BLOCKED_ON_PREMODULAR_MAINLINE",
     "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, and source/target transport event lists are now kernel-bound. What remains is to certify that the two nonempty transport event lists realize the two sides of one standard oriented Bärenz-Barrett band normal form.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, and source/target transport event lists are kernel-bound. The exact CleanWindow now also requires a category-neutral StandardOrientedBandTransport witness supplied only through the T4 topology boundary. What remains is the categorical compiler from that certified normal form to the explicit Bärenz-Barrett finite-sum endpoints.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Introduce a narrow category-neutral normal-form certificate relating the exact source and target transport windows as clean attach, one specified oriented band transport, and clean detach. Derive the Bärenz-Barrett categorical endpoints from that certificate and the separately listed category laws. The deleted broad endpoint axiom may not be restored or renamed.",
-    "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit CleanBandEndpointResolver is supplied, so the complete premodular four-manifold invariant is not currently established."
+    "required_resolution": "Construct StandardBandEndpointCompiler from StandardOrientedBandTransport and the separately listed category laws. The compiler must derive the explicit Bärenz-Barrett endpoints; the deleted broad endpoint axiom may not be restored or renamed.",
+    "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -36,12 +36,12 @@
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter",
       "status": "KERNEL_CHECKED_CONDITIONAL_DEFINITION",
-      "meaning": "The public candidate takes the two dependent pairs plus an explicit unresolved CleanBandEndpointResolver. It is not yet an intrinsic invariant with only the intended mathematical inputs."
+      "meaning": "The public candidate takes the two dependent pairs plus an explicit unresolved StandardBandEndpointCompiler. It is not yet an intrinsic invariant with only the intended mathematical inputs."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
-      "status": "RETRACTED_PENDING_CLEAN_BAND_RECONNECTION",
-      "meaning": "The theorem is kernel checked only as a conditional theorem taking an explicit CleanBandEndpointResolver. No axiom or instance constructs that resolver, so it is not admitted as established."
+      "status": "CONDITIONAL_PENDING_STANDARD_BAND_ENDPOINT_COMPILER",
+      "meaning": "The theorem is kernel checked only as a conditional theorem taking an explicit StandardBandEndpointCompiler. No axiom or instance constructs that compiler, so it is not admitted as established."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
@@ -63,17 +63,22 @@
     {
       "id": "EIGHT_EVENT_LOCAL_INVARIANCE_CONDITIONAL",
       "evidence": "PremodularRoleAwareLocalInvariance.elementaryMove_invariant",
-      "meaning": "The case split is source-bound for all eight moves, but the two-over-two branch explicitly requires the unresolved CleanBandEndpointResolver and is therefore conditional."
+      "meaning": "The case split is source-bound for all eight moves, but the two-over-two branch explicitly requires the unresolved StandardBandEndpointCompiler and is therefore conditional."
     },
     {
       "id": "FINITE_MOVIE_DESCENT",
       "evidence": "PremodularRoleAwareFourManifoldInvariant.presentationEvaluation_localInvariant",
-      "meaning": "Conditional on CleanBandEndpointResolver, every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
+      "meaning": "Conditional on StandardBandEndpointCompiler, every admitted elementary move preserves the presentation formula, so finite Kirby movies preserve it."
     },
     {
       "id": "CLEAN_TWO_OVER_TWO_TRACE_ENDPOINT_BINDING",
       "evidence": "SourceBoundLocalMoveRecipe.CleanBandSlideScript.EndpointsMatchWindow; CanonicalMoveGeometry.SourceBoundTraceWindow; RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands; attach_target_activeStrands; detach_source_activeStrands; detach_target_activeStrands",
       "meaning": "A clean 2/2 certificate can no longer point at unrelated declared slices. Its attach and detach slices are uniquely tied to the exact canonical trace states at the replacement-window entrance and exit, and the replacement windows are exactly the recorded transport event lists."
+    },
+    {
+      "id": "STANDARD_ORIENTED_BAND_NORMAL_FORM_BOUNDARY",
+      "evidence": "SourceBoundLocalMoveRecipe.CleanBandSlideScript.StandardOrientedBandTransport; RoleAwareTwoOverTwoBandMovie.CleanWindow.transport_standard",
+      "meaning": "The exact source-bound clean window cannot enter the categorical endpoint route unless T4 certifies its literal transport event lists as the two sides of the standard oriented band normal form. This topology witness contains no category, character, label, evaluator, or scalar equality."
     },
     {
       "id": "MODULAR_SPECIALIZATION",
@@ -148,8 +153,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-26T22:51:15-06:00",
-    "base_checkpoint_commit": "a5aed3e007b6eb83f50bda02f1c9e613ac4c9e3a",
+    "timestamp": "2026-07-26T23:14:41-06:00",
+    "base_checkpoint_commit": "78153200ea02a8f4442117d0624dadbd968d8e90",
     "git_dirty": true,
     "dirty_path_count_at_capture": 7,
     "lean_version": "4.29.1",
@@ -157,14 +162,14 @@
     "os": "Darwin 24.6.0 arm64",
     "lean_process_limit": 1,
     "mainline_build": "PASS_CONDITIONAL_2375_JOBS",
-    "mainline_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
-    "final_public_axiom_audit": "BLOCKED_EXPLICIT_CLEAN_ENDPOINT_RESOLVER",
+    "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
+    "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
     "unsupported_legacy_aggregate_imports_removed": true,
     "new_route_sorry_or_admit": false
   },
   "explicit_nonclaims": [
-    "The premodular and modular four-manifold invariants are not established until CleanBandEndpointResolver is constructed without a new endpoint or evaluation axiom.",
+    "The premodular and modular four-manifold invariants are not established until StandardBandEndpointCompiler is constructed from the normal-form witness and listed category laws without a new endpoint or evaluation axiom.",
     "No equality with the original Crane-Yetter or Yetter state sum is claimed.",
     "Existing Figure 21 or other legacy numerical artifacts are not re-certified by this theorem.",
     "The legacy full dotted-label modular evaluator is not yet proved equal to the role-aware evaluator.",
