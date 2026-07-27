@@ -1369,6 +1369,38 @@ noncomputable def residualMovingExponent
       movingExponent window sourceCycle - stationaryExponent window sourceCycle
 
 /--
+The common character coupon carried through the internal fusion channel.
+
+At a positive endpoint the stationary strand is dual, hence exponent `-b`
+acts by `χ_x^{-b} χ_y^b`.  At a negative endpoint both strands are positive,
+hence exponent `b` acts by `χ_x^b χ_y^b`.
+-/
+noncomputable def channelCharacterScalar
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (movingLabel stationaryLabel : S) : K :=
+  let b := stationaryExponent window sourceCycle
+  match window.recipeStructuralBinding.orientation with
+  | .positive =>
+      𝒞.toFusionCategoryData.automorphismScalarPower
+          η movingLabel (-b) *
+        𝒞.toFusionCategoryData.automorphismScalarPower
+          η stationaryLabel b
+  | .negative =>
+      𝒞.toFusionCategoryData.automorphismScalarPower
+          η movingLabel b *
+        𝒞.toFusionCategoryData.automorphismScalarPower
+          η stationaryLabel b
+
+/--
 The outer coefficient after the stationary character coupon has been moved
 inside the generalized-sliding channel calculation.
 
@@ -1395,6 +1427,91 @@ noncomputable def movingCoefficient
     𝒞.quantumDimension movingLabel *
     𝒞.toFusionCategoryData.automorphismScalarPower
       η movingLabel (residualMovingExponent window sourceCycle)
+
+/--
+The derived residual coefficient and the visible channel coupon reconstruct
+the exact original `(x,y)` coefficient.
+
+This is the scalar heart of the twisted 2/2 bookkeeping.  No band-movie or
+graphical equality is used.
+-/
+theorem endpointCoefficient_eq_movingCoefficient_mul_channel
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      movingCoefficient window 𝒞 η sourceCycle remaining movingLabel *
+        𝒞.quantumDimension stationaryLabel *
+        channelCharacterScalar
+          window 𝒞 η sourceCycle movingLabel stationaryLabel := by
+  rw [endpointCoefficient_factor_both]
+  unfold CanonicalPresentation.cycleComponentWeight movingCoefficient
+    channelCharacterScalar residualMovingExponent movingExponent
+    stationaryExponent
+  cases orientation :
+      window.recipeStructuralBinding.orientation with
+  | positive =>
+      simp only
+      have movingPowers :
+          𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+                η movingLabel
+                  (source.cycleComponentExponent sourceCycle
+                      (componentAt source.topology.formal
+                        ↑(movingSourceIndex window)) +
+                    source.cycleComponentExponent sourceCycle
+                      (componentAt source.topology.formal
+                        ↑(stationarySourceIndex window))) *
+              𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+                η movingLabel
+                  (-source.cycleComponentExponent sourceCycle
+                    (componentAt source.topology.formal
+                      ↑(stationarySourceIndex window))) =
+            𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+              η movingLabel
+                (source.cycleComponentExponent sourceCycle
+                  (componentAt source.topology.formal
+                    ↑(movingSourceIndex window))) := by
+        rw [← 𝒞.toFusionCategoryData.automorphismScalarPower_add]
+        congr 1
+        omega
+      rw [← movingPowers]
+      ring
+  | negative =>
+      simp only
+      have movingPowers :
+          𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+                η movingLabel
+                  (source.cycleComponentExponent sourceCycle
+                      (componentAt source.topology.formal
+                        ↑(movingSourceIndex window)) -
+                    source.cycleComponentExponent sourceCycle
+                      (componentAt source.topology.formal
+                        ↑(stationarySourceIndex window))) *
+              𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+                η movingLabel
+                  (source.cycleComponentExponent sourceCycle
+                    (componentAt source.topology.formal
+                      ↑(stationarySourceIndex window))) =
+            𝒞.premodular.toFusionCategoryData.automorphismScalarPower
+              η movingLabel
+                (source.cycleComponentExponent sourceCycle
+                  (componentAt source.topology.formal
+                    ↑(movingSourceIndex window))) := by
+        rw [← 𝒞.toFusionCategoryData.automorphismScalarPower_add]
+        congr 1
+        omega
+      rw [← movingPowers]
+      ring
 
 /-- One exact source block, retaining both selected finite label sums. -/
 noncomputable def sourceBlock
