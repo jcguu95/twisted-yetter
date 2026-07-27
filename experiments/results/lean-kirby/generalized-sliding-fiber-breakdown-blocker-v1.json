@@ -1,0 +1,82 @@
+{
+  "artifact_type": "generalized-sliding-fiber-breakdown-blocker-v1",
+  "generated_at": "2026-07-27T13:41:11-06:00",
+  "status": "BLOCKED_INTENTIONAL_LEAN_COMPILE_FAILURE",
+  "decision": {
+    "timestamp": "2026-07-27T13:41:11-06:00",
+    "reason": "Expose the mathematical content hidden by two oversized generalized-sliding assumptions, even though the resulting checkpoint does not compile.",
+    "requested_terminal_state": "CLEAN_GIT_COMMIT_WITH_KNOWN_COMPILE_FAILURE"
+  },
+  "base_commit": "5cc0525e39448f3c37cb9a347455003388677861",
+  "target_module": "TwistedYetter.Kirby.EGNOCategoryBoundSliding",
+  "source_file": "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean",
+  "declaration_changes": [
+    {
+      "name": "LiteratureInput.generalizedSlidingFiber",
+      "before": "AXIOM_RETURNING_COMPLETE_SLIDING_FIBER",
+      "after": "UNFINISHED_NONCOMPUTABLE_DEFINITION_WITH_FIVE_EXPLICIT_GOALS",
+      "status": "OLD_AXIOM_REMOVED"
+    },
+    {
+      "name": "LiteratureInput.generalizedSlidingBeforeNaturality",
+      "before": "AXIOM",
+      "after": "THEOREM_DERIVED_FROM_CORE_SOUND_AND_AFTER_NATURALITY",
+      "status": "PROVED_BEFORE_FIBER_WAS_OPENED"
+    },
+    {
+      "name": "LiteratureInput.generalizedSlidingAfterNaturality",
+      "before": "AXIOM",
+      "after": "AXIOM",
+      "status": "REMAINS_EXPLICIT"
+    }
+  ],
+  "exposed_obligations": [
+    {
+      "constructor_field": "forwardContext",
+      "meaning": "Construct the canonical forward insertion context for each simple label y.",
+      "lean_target_summary": "(y : S) -> Context C (fixed tensor dualSimple y) (fixed tensor dualSimple y) (fixed tensor strand) (fixed tensor strand)"
+    },
+    {
+      "constructor_field": "backwardContext",
+      "meaning": "Construct the canonical backward insertion context for each simple label z.",
+      "lean_target_summary": "(z : S) -> Context C (dualSimple z tensor fixed) (dualSimple z tensor fixed) (fixed tensor strand) (fixed tensor strand)"
+    },
+    {
+      "constructor_field": "braidedChannel",
+      "meaning": "Construct the explicit intermediate ribbon diagram after the braiding step for every fusion channel.",
+      "lean_target_summary": "(y z : S) -> SlidingIndex data x y z -> Diagram C (fixed tensor strand) (fixed tensor strand)"
+    },
+    {
+      "constructor_field": "braidingMovie",
+      "meaning": "Construct the graphical movie from the forward projection-inclusion coupon in its canonical context to the braided intermediate channel.",
+      "lean_target_summary": "forall y z i, Movie (forwardContext[y].plug(coupon(forwardProjection >>> forwardInclusion))) (braidedChannel[y,z,i])"
+    },
+    {
+      "constructor_field": "mateMovie",
+      "meaning": "Construct the graphical movie from the braided intermediate channel to the mated dual-primal coupon in its canonical backward context.",
+      "lean_target_summary": "forall y z i, Movie (braidedChannel[y,z,i]) (backwardContext[z].plug(coupon(matedDual >>> matedPrimal)))"
+    }
+  ],
+  "remaining_relevant_axioms_in_target_module": [
+    {
+      "name": "LiteratureInput.generalizedSlidingAfterNaturality",
+      "meaning": "For every morphism f : A -> B, the after-slide endpoint is natural in the exposed strand."
+    }
+  ],
+  "verification": {
+    "command": "lake -Kjobs=1 build TwistedYetter.Kirby.EGNOCategoryBoundSliding",
+    "exit_code": 1,
+    "failure_location": "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean:302:16",
+    "unsolved_goal_count": 5,
+    "actual_sorry_or_admit": false,
+    "full_build_run": false,
+    "full_build_reason": "The targeted dependency already fails at the intended construction site."
+  },
+  "nonclaims": [
+    "The current premodular four-manifold invariant theorem is not buildable.",
+    "The current modular specialization theorem is not buildable.",
+    "The five graphical obligations are not proved.",
+    "The remaining after-endpoint naturality axiom is not proved.",
+    "No final axiom closure can be produced from a module that does not compile."
+  ]
+}

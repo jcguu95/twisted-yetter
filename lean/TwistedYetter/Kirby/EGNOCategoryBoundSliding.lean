@@ -258,15 +258,17 @@ structure LabelIndexedSlidingMovies
     "Lemmas 3.3-3.4, equations (3.1.3)-(3.1.11), journal pages 681-684"
 
 /-
-The following three inputs follow the proof boundary in Bärenz--Barrett
-literally.  Unlike the former `labelIndexedMovies` axiom, none returns the
-completed all-label family.
+This namespace follows the proof boundary in Bärenz--Barrett literally.
+Unlike the former `labelIndexedMovies` axiom, it does not assume the completed
+all-label family.
 
-* `generalizedSlidingFiber` is one fixed pair `(X, A)` in Lemma 3.3 and
-  records precisely the diagrammatic transitions (3.1.4)--(3.1.7).
-* `generalizedSlidingBeforeNaturality` and
-  `generalizedSlidingAfterNaturality` are the two endpoint naturality
-  statements used in Lemma 3.4 to pass an arbitrary framed exterior.
+* `generalizedSlidingFiber` is now an intentionally unfinished construction
+  for one fixed pair `(X, A)` in Lemma 3.3.  Its constructor exposes the
+  precise graphical data still to be built.
+* `generalizedSlidingAfterNaturality` is the one remaining endpoint
+  naturality input from Lemma 3.4.
+* `generalizedSlidingBeforeNaturality` is a theorem derived from pointwise
+  generalized sliding and after-endpoint naturality.
 
 The insertion and mate/trace equalities inside this calculation are supplied
 separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
@@ -274,18 +276,24 @@ separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
 namespace LiteratureInput
 
 /--
-The pointwise graphical calculation in Bärenz--Barrett Lemma 3.3.
+Assembly target for the pointwise graphical calculation in Bärenz--Barrett
+Lemma 3.3.
 
-`x` is the object `X` in the paper and `strand` is the arbitrary object `A`.
-The returned fiber records the insertion, braiding-naturality, mate, and
-inverse-insertion stages (3.1.3)--(3.1.8).  Its only certified movie fields are
-the two displayed graphical transitions (3.1.4)--(3.1.6); it does not assume
-the final endpoint equality.
+The former declaration was one axiom returning the entire `SlidingFiber`.
+That hid five independent obligations.  It is now deliberately an unfinished
+definition whose constructor exposes them separately:
 
-Reference: Bärenz--Barrett, Lemma 3.3, equation (3.1.2) and its displayed
-calculation (3.1.3)--(3.1.11), journal pages 681--684.
+1. the canonical forward insertion context;
+2. the canonical backward insertion context;
+3. the canonical braided intermediate channel;
+4. the braiding-naturality movie;
+5. the pivotal mate movie.
+
+This definition intentionally does not compile until those five graphical
+constructions are implemented.  No `sorry`, replacement equality axiom, or
+arbitrary context witness is admitted.
 -/
-axiom generalizedSlidingFiber
+noncomputable def generalizedSlidingFiber
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
@@ -293,31 +301,12 @@ axiom generalizedSlidingFiber
     (strand : C) :
     SlidingFiber
       (CategoryData.slidingCategoryData data insertionLaw mateLaw x)
-      strand
-
-/--
-Naturality of the left endpoint in the exposed object `A`.
-
-This is the before-slide half of Bärenz--Barrett Lemma 3.4: braidings,
-twists, and the graphical operations in Lemma 3.3 are natural, so an arbitrary
-morphism `f : A ⟶ B` may be moved past the left endpoint.
-
-Reference: Bärenz--Barrett, Lemma 3.4 and its proof immediately following
-equation (3.1.11), journal page 684.
--/
-axiom generalizedSlidingBeforeNaturality
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
-    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
-    (x : S)
-    {A B : C}
-    (f : A ⟶ B) :
-    (tensorLeft (data.simple x)).map f ≫
-        LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage313 =
-      LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage313 ≫
-        (tensorLeft (data.simple x)).map f
+      strand := by
+  constructor
+  case insertion_source_ref =>
+    exact "ref:baerenz-barrett-dichromatic-2018"
+  case insertion_source_locator =>
+    exact "Lemma 3.3, equations (3.1.3)-(3.1.8), journal pages 681-683"
 
 /--
 Naturality of the right endpoint in the exposed object `A`.
@@ -341,6 +330,41 @@ axiom generalizedSlidingAfterNaturality
       LinearDiagram.eval
           (generalizedSlidingFiber data insertionLaw mateLaw x A).stage318 ≫
         (tensorLeft (data.simple x)).map f
+
+/--
+Naturality of the left endpoint is derived rather than assumed.
+
+Pointwise generalized sliding identifies each before endpoint with its after
+endpoint.  Naturality of the after endpoint therefore transports the before
+endpoint across the same arbitrary morphism.
+-/
+theorem generalizedSlidingBeforeNaturality
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (x : S)
+    {A B : C}
+    (f : A ⟶ B) :
+    (tensorLeft (data.simple x)).map f ≫
+        LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage313 =
+      LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage313 ≫
+        (tensorLeft (data.simple x)).map f := by
+  calc
+    _ = (tensorLeft (data.simple x)).map f ≫
+        LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage318 := by
+      rw [(generalizedSlidingFiber
+        data insertionLaw mateLaw x B).core_sound]
+    _ = LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage318 ≫
+        (tensorLeft (data.simple x)).map f :=
+      generalizedSlidingAfterNaturality
+        data insertionLaw mateLaw x f
+    _ = _ := by
+      rw [(generalizedSlidingFiber
+        data insertionLaw mateLaw x A).core_sound]
 
 end LiteratureInput
 

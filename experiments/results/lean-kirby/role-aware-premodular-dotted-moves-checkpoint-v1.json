@@ -1,13 +1,13 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T11:39:00-06:00",
-  "status": "PREMODULAR_FOUR_MANIFOLD_INVARIANT_ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
+  "generated_at": "2026-07-27T13:41:11-06:00",
+  "status": "BLOCKED_GENERALIZED_SLIDING_FIBER_CONSTRUCTION",
   "terminal_states": {
-    "premodular_mainline": "ESTABLISHED_RELATIVE_TO_LISTED_LITERATURE_AND_TOPOLOGY_AXIOMS",
-    "modular_specialization": "ESTABLISHED_BY_PREMODULAR_SPECIALIZATION",
+    "premodular_mainline": "BLOCKED_INTENTIONAL_LEAN_COMPILE_FAILURE",
+    "modular_specialization": "BLOCKED_BY_PREMODULAR_MAINLINE",
     "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
   },
-  "active_blocker": null,
+  "active_blocker": "experiments/results/lean-kirby/generalized-sliding-fiber-breakdown-blocker-v1.json",
   "logic_safety_correction": {
     "unsafe_commit": "ca9cb63b2573f76bd176c85d7bc918133633601c",
     "unsafe_encoding": "StandardOrientedBandTransport was accidentally declared as an inductive proposition with no constructors.",
@@ -21,7 +21,7 @@
     "issue": "A true naturality theorem for a character coupon on the external input strand of tensorLeft was initially named as though it transported the internal fusion-channel coupon.",
     "why_it_matters": "The required twisted two-over-two calculation places eta_z^b between the projection to z and inclusion from z. A coupon on the external object of the functor-valued window has a different typed position, even though both statements can be made to compile.",
     "correction": "The theorem is now named externalCharacterCoupon_bandTransport, its documentation explicitly states the non-claim, and no mainline endpoint obligation is discharged by it.",
-    "remaining_obligation": "The internal weighted sliding calculation, its positive/negative exponent convention, and the attach/detach evaluation theorems are proved relative to the two explicit pointwise clean-endpoint interpretation axioms. Four source-close category statements remain direct literature axioms. The former labelIndexedMovies axiom is now derived from three smaller Bärenz-Barrett graphical inputs."
+    "remaining_obligation": "The former generalizedSlidingFiber axiom has been removed. Its attempted constructor deliberately leaves five explicit graphical obligations unsolved. generalizedSlidingBeforeNaturality is now a theorem; generalizedSlidingAfterNaturality remains the sole endpoint-naturality axiom in this module."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -44,18 +44,18 @@
   "public_results": [
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter",
-      "status": "ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
-      "meaning": "The public candidate takes only the intended two dependent pairs. Its invariance route has no sorryAx and depends only on the enumerated literature, topology, handle-chain, and clean-endpoint axioms."
+      "status": "BLOCKED_NOT_CURRENTLY_COMPILABLE",
+      "meaning": "The public candidate is not currently buildable because the generalized-sliding fiber constructor has five exposed graphical obligations."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
-      "status": "ESTABLISHED_RELATIVE_TO_EXPLICIT_AXIOMS",
-      "meaning": "The kernel-checked theorem has no sorryAx. Its complete nonstandard dependency closure is recorded below."
+      "status": "BLOCKED_NOT_CURRENTLY_COMPILABLE",
+      "meaning": "No current axiom closure is available while the generalized-sliding dependency fails to compile."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
-      "status": "ESTABLISHED_BY_PREMODULAR_SPECIALIZATION",
-      "meaning": "The modular theorem is obtained from the premodular theorem without a second modular invariance proof."
+      "status": "BLOCKED_BY_PREMODULAR_MAINLINE",
+      "meaning": "The specialization route remains designed but is not currently buildable."
     }
   ],
   "proved_internal_obligations": [
@@ -136,6 +136,7 @@
     }
   ],
   "final_axiom_closure": {
+    "closure_status": "UNAVAILABLE_WHILE_GENERALIZED_SLIDING_FIBER_DOES_NOT_COMPILE",
     "standard_lean": [
       "propext",
       "Classical.choice",
@@ -154,8 +155,6 @@
       "shum_ribbonFramedKink",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace",
-      "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingFiber",
-      "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingBeforeNaturality",
       "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingAfterNaturality"
     ],
     "accepted_explicit_interpretation_and_naturality_axioms": [
@@ -209,8 +208,8 @@
     "safety": "The eleven retired declarations are recorded together as commented archaeology and are absent from both public root exports and the current theorem dependency closure. Some historical source modules still contain compile-only declarations so old imports remain reproducible; these declarations are not current evidence and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T13:08:23-06:00",
-    "base_checkpoint_commit": "9ad04e1",
+    "timestamp": "2026-07-27T13:41:11-06:00",
+    "base_checkpoint_commit": "5cc0525e39448f3c37cb9a347455003388677861",
     "git_dirty": true,
     "dirty_path_count_at_capture": 4,
     "lean_version": "4.29.1",
@@ -235,9 +234,10 @@
     "visible_twisted_channel_diagrams_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T08:09:00-06:00",
     "external_coupon_naturality_audit": "PASS_STANDARD_LOGIC_ONLY_BUT_NOT_INTERNAL_CHANNEL_TRANSPORT_2026-07-27T08:17:00-06:00",
     "theorem_obligation_exposure_build": "PASS_2319_JOBS_2026-07-27T11:03:56-06:00",
-    "mainline_axiom_audit": "PASS_NO_SORRYAX_OLD_LABEL_INDEXED_AXIOM_ABSENT_THREE_SMALLER_BAERENZ_BARRETT_INPUTS_VISIBLE_2026-07-27T13:08:23-06:00",
-    "final_public_axiom_audit": "PASS_RELATIVE_TO_EXPLICIT_AXIOMS",
-    "full_repository_build": "PASS_2323_JOBS_2026-07-27T13:08:07-06:00",
+    "mainline_axiom_audit": "UNAVAILABLE_INTENTIONAL_COMPILE_FAILURE_2026-07-27T13:40:57-06:00",
+    "final_public_axiom_audit": "UNAVAILABLE_INTENTIONAL_COMPILE_FAILURE",
+    "full_repository_build": "NOT_RUN_TARGETED_DEPENDENCY_ALREADY_FAILS",
+    "generalized_sliding_targeted_build": "FAIL_EXPECTED_FIVE_EXPOSED_CONSTRUCTION_GOALS_2026-07-27T13:40:57-06:00",
     "unsupported_legacy_aggregate_imports_removed": true,
     "new_route_sorry_or_admit": false
   },
