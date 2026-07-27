@@ -14,6 +14,15 @@ axioms.
   TwistedYetter.Kirby.RoleAwareRepresentativeIndependence.Presentation.roleAwareCycleEval_respects_homology_class
 
 #print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_positiveBandMovie
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_negativeBandMovie
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_bandMovie
+
+#print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant
 
 #print axioms

@@ -116,13 +116,45 @@ noncomputable def targetContext
     (window.exterior.interpret 𝒞 η labelOf)
 
 /--
-The positive open Bärenz--Barrett band movie.
+The single premodular graphical input used by the open band movie.
 
-It transports an arbitrary endomorphism through the exact source-bound
-positive local band.  Character coupons and their exponents are not part of
-this input.
+An arbitrary endomorphism coupon may be transported through the exact
+source-bound ribbon band recorded by `window`.  The statement is deliberately
+independent of the orientation of the band: positive and negative
+Bärenz--Barrett movies are the two orientation-specialized theorems below.
+
+The input does not select a tensor-identity automorphism component, a
+character exponent, a fusion channel, a Kirby weight, or a closed evaluator
+value.  Those data enter only when the already proved channel calculation
+chooses the endomorphism `f`.
 -/
-axiom baerenzBarrett_positiveBandMovie
+axiom premodularCouponTransport
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (labelOf : String → S)
+    (f :
+      ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote ⟶
+        ((localBoundary metadata countsSound).interpret 𝒞 labelOf).denote) :
+    LinearContext.evalContextLinearMap (R := K)
+        (window.sourceContext 𝒞 η labelOf) f =
+      LinearContext.evalContextLinearMap (R := K)
+        (window.targetContext 𝒞 η labelOf) f
+
+/--
+The positive open Bärenz--Barrett band movie, derived from the common
+premodular coupon-transport input.
+
+The orientation proof prevents a positive endpoint from being silently used
+as a negative endpoint.  It contributes no evaluator equality.
+-/
+theorem baerenzBarrett_positiveBandMovie
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -141,15 +173,17 @@ axiom baerenzBarrett_positiveBandMovie
     LinearContext.evalContextLinearMap (R := K)
         (window.sourceContext 𝒞 η labelOf) f =
       LinearContext.evalContextLinearMap (R := K)
-        (window.targetContext 𝒞 η labelOf) f
+        (window.targetContext 𝒞 η labelOf) f :=
+  window.premodularCouponTransport 𝒞 η labelOf f
 
 /--
-The negative open Bärenz--Barrett band movie.
+The negative open Bärenz--Barrett band movie, derived from the same common
+premodular coupon-transport input.
 
-It is deliberately separate from the positive input, so the local topology
-boundary cannot silently identify an unspecified orientation.
+As above, the orientation proof only binds this theorem to the negative
+endpoint convention.
 -/
-axiom baerenzBarrett_negativeBandMovie
+theorem baerenzBarrett_negativeBandMovie
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -168,9 +202,10 @@ axiom baerenzBarrett_negativeBandMovie
     LinearContext.evalContextLinearMap (R := K)
         (window.sourceContext 𝒞 η labelOf) f =
       LinearContext.evalContextLinearMap (R := K)
-        (window.targetContext 𝒞 η labelOf) f
+        (window.targetContext 𝒞 η labelOf) f :=
+  window.premodularCouponTransport 𝒞 η labelOf f
 
-/-- Exhaustive orientation dispatch for the two literature inputs above. -/
+/-- Exhaustive orientation dispatch for the two derived theorems above. -/
 theorem baerenzBarrett_bandMovie
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
