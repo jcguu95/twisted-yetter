@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T07:31:26-06:00",
+  "generated_at": "2026-07-27T08:11:00-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,7 +9,7 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. The remaining compiler has been split into three visible fields: closedWindow, source_endpoint, and target_endpoint. None is constructed globally.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. Positive and negative channel terms are now also visible Diagram syntax containing the two trivalent coupons, internal simple channel, character coupon, and quantum-dimension weight. The remaining compiler has been split into three visible fields: closedWindow, source_endpoint, and target_endpoint. None is constructed globally.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
     "required_resolution": "Construct the three exposed StandardBandEndpointCompiler fields from the exact CleanWindow: first a Bärenz-Barrett closedWindow for each exterior-label block, then the exact source_endpoint and target_endpoint identifications. The current planar SliceEvent grammar has no trivalent band-attachment constructor, so an honest resolution requires an explicit band/fusion endpoint syntax or an equivalently inspectable clean-normal-form bridge. The deleted broad endpoint axiom and content-free transport shell may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
@@ -113,6 +113,11 @@
       "meaning": "For the negative endpoint x tensor y, Lean independently sums every simple z and every multiplicity coordinate mu, transports the common character coupon through that internal channel, and proves that the residual moving coupon plus the channel coupon reconstruct the two original handle coupons. This does not reuse the positive endpoint through an unrecorded mirror. Both orientations are also transported through the exact source presentation context selected by the role-aware move."
     },
     {
+      "id": "VISIBLE_TWISTED_TWO_OVER_TWO_CHANNEL_DIAGRAMS",
+      "evidence": "Commit c72939a; TwoOverTwoFusionChannel.unequalExponentChannelDiagram; unequalExponentChannelDiagram_eval; unequalNegativeChannelDiagram; unequalNegativeChannelDiagram_eval",
+      "meaning": "For both orientations, the internal simple z, fusion projection, character coupon on z, fusion inclusion, and quantum-dimension weight are explicit categorical Diagram syntax. Lean proves that evaluating each visible diagram gives the previously verified channel morphism. These theorems use only standard Lean logic; they do not fill or assume the remaining clean-band transport."
+    },
+    {
       "id": "MODULAR_SPECIALIZATION",
       "evidence": "Final.TwistedModularCategory.toPremodular and Final.TwistedYetterModular_diffeomorphism_invariant",
       "meaning": "No second modular invariance proof or modular killing assumption is used by the public modular theorem."
@@ -186,8 +191,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T07:31:26-06:00",
-    "base_checkpoint_commit": "c34d387",
+    "timestamp": "2026-07-27T08:11:00-06:00",
+    "base_checkpoint_commit": "c72939a",
     "git_dirty": false,
     "dirty_path_count_at_capture": 0,
     "lean_version": "4.29.1",
@@ -208,6 +213,8 @@
     "post_legacy_shared_window_removal_axiom_audit": "PASS_2026-07-27T07:21:55-06:00",
     "split_endpoint_obligations_mainline_build": "PASS_CONDITIONAL_2319_JOBS_2026-07-27T07:30:15-06:00",
     "split_endpoint_obligations_axiom_audit": "PASS_EXPLICIT_THREE_FIELDS_2026-07-27T07:30:15-06:00",
+    "visible_twisted_channel_diagrams_build": "PASS_2319_JOBS_2026-07-27T08:09:00-06:00",
+    "visible_twisted_channel_diagrams_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T08:09:00-06:00",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
