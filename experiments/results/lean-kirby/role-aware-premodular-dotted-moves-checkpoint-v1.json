@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T07:06:36-06:00",
+  "generated_at": "2026-07-27T07:16:51-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,16 +9,16 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source presentation context are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, exact scalar reconstruction, independent positive- and negative-orientation morphism-level fusion-channel sums, and both channel sums inside the exact source and target presentation contexts are kernel-bound. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Replace the presently constructor-free StandardOrientedBandTransport shell by an explicit category-neutral standard-band normal-form witness, then construct StandardBandEndpointCompiler from that witness and the exact role-aware contexts. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The moving coefficient and its channel-character reconstruction are now derived rather than supplied. The compiler must still derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
+    "required_resolution": "Construct StandardBandEndpointCompiler directly from the exact CleanWindow, or first add a genuinely explicit category-neutral standard-band normal-form language carrying enough data to derive that compiler. The former StandardOrientedBandTransport shell has been deleted because its hidden body carried no mathematical information. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The compiler must derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "logic_safety_correction": {
     "unsafe_commit": "ca9cb63b2573f76bd176c85d7bc918133633601c",
     "unsafe_encoding": "StandardOrientedBandTransport was accidentally declared as an inductive proposition with no constructors.",
     "failure_mode": "Any T4 witness of that empty proposition implied False and could silently discharge every categorical endpoint obligation by explosion.",
-    "correction": "StandardOrientedBandTransport is now an opaque inhabited predicate. It has no public constructor or eliminator, remains category-neutral, and cannot prove endpoint equalities by ex-falso.",
+    "correction": "The initially empty inductive was first replaced by an opaque inhabited shell to stop ex-falso. That shell was subsequently deleted because it carried no inspectable mathematical content. The unresolved compiler now consumes the exact CleanWindow directly.",
     "claim_effect": "No established theorem claim was made from the unsafe checkpoint. The mainline remains blocked on the explicit StandardBandEndpointCompiler."
   },
   "scope": {
@@ -83,9 +83,9 @@
       "meaning": "A clean 2/2 certificate can no longer point at unrelated declared slices. Its attach and detach slices are uniquely tied to the exact canonical trace states at the replacement-window entrance and exit, and the replacement windows are exactly the recorded transport event lists."
     },
     {
-      "id": "STANDARD_ORIENTED_BAND_NORMAL_FORM_BOUNDARY",
-      "evidence": "SourceBoundLocalMoveRecipe.CleanBandSlideScript.StandardOrientedBandTransport; RoleAwareTwoOverTwoBandMovie.CleanWindow.transport_standard",
-      "meaning": "The exact source-bound clean window cannot enter the categorical endpoint route unless T4 certifies its literal transport event lists as the two sides of the standard oriented band normal form. This topology witness contains no category, character, label, evaluator, or scalar equality."
+      "id": "EMPTY_STANDARD_TRANSPORT_SHELL_REMOVED",
+      "evidence": "Commit 2cad41d40b2f469d8d0be02c6dd20eb82bb456cd",
+      "meaning": "The opaque StandardOrientedBandTransport shell and CleanWindow.transport_standard field were deleted because their hidden body was only Nonempty Unit. The explicit StandardBandEndpointCompiler now consumes the exact CleanWindow directly, so no content-free certificate can be mistaken for a proved normal form."
     },
     {
       "id": "ROLE_AWARE_TWO_OVER_TWO_EXACT_CATEGORICAL_CONTEXTS",
@@ -176,8 +176,8 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T07:06:36-06:00",
-    "base_checkpoint_commit": "bc3abe0e3d6a79df6e963ba5f07c09fb2d53b4dc",
+    "timestamp": "2026-07-27T07:16:51-06:00",
+    "base_checkpoint_commit": "2cad41d40b2f469d8d0be02c6dd20eb82bb456cd",
     "git_dirty": false,
     "dirty_path_count_at_capture": 0,
     "lean_version": "4.29.1",
@@ -192,6 +192,9 @@
     "negative_two_over_two_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T06:55:07-06:00",
     "source_context_channel_binding_build": "PASS_2026-07-27T07:04:58-06:00",
     "source_context_channel_binding_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T07:05:24-06:00",
+    "target_context_channel_binding_build": "PASS_2026-07-27T07:10:39-06:00",
+    "target_context_channel_binding_axiom_audit": "PASS_STANDARD_LOGIC_ONLY_2026-07-27T07:11:05-06:00",
+    "post_empty_transport_shell_final_build": "PASS_CONDITIONAL_2319_JOBS_2026-07-27T07:16:19-06:00",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
