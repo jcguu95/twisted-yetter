@@ -725,6 +725,57 @@ noncomputable def unequalExponentChannelMorphism
       (CategoryData.slidingForwardBasis data x y channel.1).dual channel.2)
 
 /--
+The positive-orientation channel as visible syntax with two trivalent
+coupons and the internal character-bearing simple edge kept separate.
+-/
+noncomputable def unequalExponentChannelDiagram
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (xExponent yExponent : ℤ)
+    (channel : OrientedChannel data x y) :
+    Diagram C
+      (.atom (OrientedTensorObject data x y))
+      (.atom (OrientedTensorObject data x y)) :=
+  atomicCoupon "two-over-two-positive-residual"
+      (data.quantumDimension channel.1 •
+        leftResidualCoupon data η x y xExponent yExponent) ≫ᵈ
+    atomicCoupon "two-over-two-positive-fusion-projection"
+      ((CategoryData.slidingForwardBasis
+        data x y channel.1).primal channel.2) ≫ᵈ
+    atomicCoupon "two-over-two-positive-internal-character"
+      (data.toFusionCategoryData.automorphismCouponPower
+        η channel.1 yExponent) ≫ᵈ
+    atomicCoupon "two-over-two-positive-fusion-inclusion"
+      ((CategoryData.slidingForwardBasis
+        data x y channel.1).dual channel.2)
+
+@[simp]
+theorem unequalExponentChannelDiagram_eval
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (xExponent yExponent : ℤ)
+    (channel : OrientedChannel data x y) :
+    Diagram.eval C
+        (unequalExponentChannelDiagram
+          data η x y xExponent yExponent channel) =
+      unequalExponentChannelMorphism
+        data η x y xExponent yExponent channel := by
+  unfold unequalExponentChannelDiagram unequalExponentChannelMorphism
+  simp only [Diagram.eval, atomicCoupon]
+  simpa only [Category.assoc] using
+    (CategoryTheory.Linear.smul_comp _ _ _
+      (data.quantumDimension channel.1)
+      (leftResidualCoupon data η x y xExponent yExponent)
+      ((CategoryData.slidingForwardBasis
+          data x y channel.1).primal channel.2 ≫
+        data.toFusionCategoryData.automorphismCouponPower
+          η channel.1 yExponent ≫
+        (CategoryData.slidingForwardBasis
+          data x y channel.1).dual channel.2))
+
+/--
 The residual `a-b` coupon followed by the common `b` coupon is exactly the
 original pair of oriented coupons with exponents `a` and `b`.
 -/
@@ -1120,6 +1171,56 @@ noncomputable def unequalNegativeChannelMorphism
       data.toFusionCategoryData.automorphismCouponPower
         η channel.1 stationaryExponent ≫
       (negativeForwardBasis data x y channel.1).dual channel.2)
+
+/--
+The negative-orientation channel as visible syntax.  It is defined
+independently on `x ⊗ y`; no unrecorded mirror converts it from the positive
+endpoint.
+-/
+noncomputable def unequalNegativeChannelDiagram
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ)
+    (channel : NegativeChannel data x y) :
+    Diagram C
+      (.atom (NegativeTensorObject data x y))
+      (.atom (NegativeTensorObject data x y)) :=
+  atomicCoupon "two-over-two-negative-residual"
+      (data.quantumDimension channel.1 •
+        negativeResidualCoupon
+          data η x y movingExponent stationaryExponent) ≫ᵈ
+    atomicCoupon "two-over-two-negative-fusion-projection"
+      ((negativeForwardBasis data x y channel.1).primal channel.2) ≫ᵈ
+    atomicCoupon "two-over-two-negative-internal-character"
+      (data.toFusionCategoryData.automorphismCouponPower
+        η channel.1 stationaryExponent) ≫ᵈ
+    atomicCoupon "two-over-two-negative-fusion-inclusion"
+      ((negativeForwardBasis data x y channel.1).dual channel.2)
+
+@[simp]
+theorem unequalNegativeChannelDiagram_eval
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (x y : S)
+    (movingExponent stationaryExponent : ℤ)
+    (channel : NegativeChannel data x y) :
+    Diagram.eval C
+        (unequalNegativeChannelDiagram
+          data η x y movingExponent stationaryExponent channel) =
+      unequalNegativeChannelMorphism
+        data η x y movingExponent stationaryExponent channel := by
+  unfold unequalNegativeChannelDiagram unequalNegativeChannelMorphism
+  simp only [Diagram.eval, atomicCoupon]
+  simpa only [Category.assoc] using
+    (CategoryTheory.Linear.smul_comp _ _ _
+      (data.quantumDimension channel.1)
+      (negativeResidualCoupon
+        data η x y movingExponent stationaryExponent)
+      ((negativeForwardBasis data x y channel.1).primal channel.2 ≫
+        data.toFusionCategoryData.automorphismCouponPower
+          η channel.1 stationaryExponent ≫
+        (negativeForwardBasis data x y channel.1).dual channel.2))
 
 /--
 The complete negative channel sum is exactly the original two character

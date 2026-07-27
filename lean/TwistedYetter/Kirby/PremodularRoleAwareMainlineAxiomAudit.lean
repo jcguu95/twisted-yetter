@@ -17,6 +17,12 @@ axioms.
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.fixedMovingLabel_eval_eq
 
 #print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.unequalExponentChannelDiagram_eval
+
+#print axioms
+  TwistedYetter.Kirby.TwoOverTwoFusionChannel.unequalNegativeChannelDiagram_eval
+
+#print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
 #check
