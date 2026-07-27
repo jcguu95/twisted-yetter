@@ -19,6 +19,15 @@ axioms.
 #print axioms
   TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
 
+#check
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion
+
+#check
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace
+
+#check
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.labelIndexedMovies
+
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding.roleAwareCycleEval_eq
 
