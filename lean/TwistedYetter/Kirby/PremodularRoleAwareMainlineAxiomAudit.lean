@@ -85,12 +85,6 @@ axioms.
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.target_componentTermDiagram_split
 
-#check
-  TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.CleanBandSlideScript.StandardOrientedBandTransport
-
-#check
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.transport_standard
-
 #print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.toFiniteSumBinding
 

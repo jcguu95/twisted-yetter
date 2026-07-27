@@ -1023,35 +1023,6 @@ structure CleanBandSlideScript
 namespace CleanBandSlideScript
 
 /--
-The narrow topology proposition that the two exact transport event lists of
-one clean script are the source and target sides of the standard oriented
-band-transport normal form.
-
-This opaque proposition deliberately has no public constructor or eliminator.
-Its indices retain the exact orientation, component IDs, component roles,
-endpoint slices, and literal source/target event lists through `script`.  It
-contains no category, label, character, fusion channel, evaluator, or scalar
-equality.
-
-An inhabitant is therefore a topology realization boundary, not a substitute
-for the categorical Bärenz--Barrett calculation.  The latter must consume this
-normal form and prove evaluation invariance separately.
-
-The hidden body is inhabited rather than empty.  This matters logically:
-modeling an external topology fact as an empty inductive proposition would let
-its assumed inhabitant prove `False`, and hence silently prove every endpoint
-equality by explosion.
--/
-opaque StandardOrientedBandTransport
-    {orientation : BandOrientation}
-    {movingComponentId stationaryComponentId : String}
-    {movingRole stationaryRole : ComponentRole}
-    (script :
-      CleanBandSlideScript orientation movingComponentId stationaryComponentId
-        movingRole stationaryRole) : Prop :=
-  Nonempty Unit
-
-/--
 The four clean endpoint slices are exactly the boundary slices of the
 recipe-selected replacement window.
 

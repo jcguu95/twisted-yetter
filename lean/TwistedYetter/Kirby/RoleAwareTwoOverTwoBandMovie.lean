@@ -291,9 +291,6 @@ structure CleanWindow
   detach_target_declared :
     metadata.recipe.twoOverTwoCleanScript.detach.targetSlice ∈
       target.topology.formal.raw.declaredSlices
-  transport_standard :
-    CleanBandSlideScript.StandardOrientedBandTransport
-      metadata.recipe.twoOverTwoCleanScript
 
 namespace CleanWindow
 
@@ -308,10 +305,7 @@ def ofWindow
       KirbyCompleteness.TableTwoMoveMetadata
         .twoOverTwo source.topology target.topology}
     {countsSound : source.topology.counts = target.topology.counts}
-    (window : Window source target metadata countsSound)
-    (transportStandard :
-      CleanBandSlideScript.StandardOrientedBandTransport
-        metadata.recipe.twoOverTwoCleanScript) :
+    (window : Window source target metadata countsSound) :
     CleanWindow source target metadata countsSound := by
   let sound := metadata.recipe.twoOverTwoCleanScript_matchesWindow
   have facts :
@@ -341,8 +335,7 @@ def ofWindow
       attach_source_declared := facts.2.2.2.1
       attach_target_declared := facts.2.2.2.2.1
       detach_source_declared := facts.2.2.2.2.2.1
-      detach_target_declared := facts.2.2.2.2.2.2
-      transport_standard := transportStandard }
+      detach_target_declared := facts.2.2.2.2.2.2 }
 
 /-- The exact clean script selected by this window's source-bound recipe. -/
 def script
@@ -2177,20 +2170,18 @@ abbrev StandardEndpointObligation
         .twoOverTwo source.topology target.topology}
     {countsSound : source.topology.counts = target.topology.counts}
     (clean : CleanWindow source target metadata countsSound)
-    (_normalForm :
-      CleanBandSlideScript.StandardOrientedBandTransport clean.script)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) :=
   Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
 
 /--
-The still-unproved categorical compiler from a topology-certified standard
-band normal form to the explicit Bärenz--Barrett finite-sum endpoints.
+The still-unproved categorical compiler from one exact clean role-aware
+window to the explicit Bärenz--Barrett finite-sum endpoints.
 
 Unlike the former resolver, this compiler cannot be applied to an arbitrary
-clean-looking window: `resolve` must consume the exact normal-form witness
-stored by that window.  No instance or axiom constructs this compiler.
+clean-looking syntax fragment: `resolve` must consume the exact `CleanWindow`
+bound to the source recipe.  No instance or axiom constructs this compiler.
 -/
 structure StandardBandEndpointCompiler
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
@@ -2203,10 +2194,8 @@ structure StandardBandEndpointCompiler
         .twoOverTwo source.topology target.topology) →
     (countsSound : source.topology.counts = target.topology.counts) →
     (clean : CleanWindow source target metadata countsSound) →
-    (normalForm :
-      CleanBandSlideScript.StandardOrientedBandTransport clean.script) →
     (sourceCycle : source.DegreeTwoCycle) →
-      StandardEndpointObligation clean normalForm 𝒞 η sourceCycle
+      StandardEndpointObligation clean 𝒞 η sourceCycle
 
 /--
 Once the standard-normal-form endpoint interpretation is supplied, every
@@ -2226,8 +2215,7 @@ theorem CleanWindow.roleAwareCycleEval_eq
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (endpoint :
-      StandardEndpointObligation clean clean.transport_standard
-        𝒞 η sourceCycle) :
+      StandardEndpointObligation clean 𝒞 η sourceCycle) :
     CanonicalPresentation.roleAwareCycleEval
         𝒞 η source clean.window.sourceGeometry sourceCycle =
       CanonicalPresentation.roleAwareCycleEval

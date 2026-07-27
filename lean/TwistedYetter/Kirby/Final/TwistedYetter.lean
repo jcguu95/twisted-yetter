@@ -112,9 +112,7 @@ T4: a certified standard Kirby move is local in the exact role-aware sense.
 The recipe already pins the source and target windows, move kind, participating
 component identifiers, roles, orientation, and any components added or
 removed.  This topology input supplies only the common-exterior realization
-of that certified replacement.  For a 2/2 slide it must additionally inhabit
-the constructor-free `StandardOrientedBandTransport` proposition indexed by
-the recipe's exact clean script.  Its indexed result has eight public
+of that certified replacement.  Its indexed result has eight public
 constructors, so it cannot substitute an unrelated move, reverse an
 orientation, change a component role, or assert an evaluator equality.
 -/

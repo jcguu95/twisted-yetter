@@ -217,8 +217,7 @@ theorem elementaryMove_invariant
                 clean.roleAwareCycleEval_eq
                   metadata countsSound 𝒞 η sourceCycle
                     (twoOverTwoEndpoints.resolve
-                      metadata countsSound clean clean.transport_standard
-                        sourceCycle)
+                      metadata countsSound clean sourceCycle)
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,
