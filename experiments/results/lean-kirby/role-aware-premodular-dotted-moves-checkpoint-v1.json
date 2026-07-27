@@ -1,6 +1,6 @@
 {
   "artifact_type": "role-aware-premodular-dotted-moves-checkpoint-v1",
-  "generated_at": "2026-07-27T00:09:11-06:00",
+  "generated_at": "2026-07-27T06:48:20-06:00",
   "status": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
   "terminal_states": {
     "premodular_mainline": "BLOCKED_STANDARD_BAND_ENDPOINT_COMPILER_NOT_YET_CONSTRUCTED",
@@ -9,9 +9,9 @@
   },
   "active_blocker": {
     "id": "CLEAN_TWO_OVER_TWO_ENDPOINT_BINDING",
-    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, and the orientation-dependent residual moving-character coefficient are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
+    "meaning": "The role-aware two-over-two finite-sum algebra is kernel checked. The recipe window, canonical typed trace, exact attach/detach slice indices, all four active-strand endpoint states, source/target transport event lists, exact interpreted source/target contexts, common role-aware exterior, moving/stationary labels, positive/negative local boundary objects, complete source-to-target coefficient transport, the orientation-dependent residual moving-character coefficient, and the exact scalar reconstruction of the original two character weights are kernel-bound. The exact CleanWindow requires a category-neutral StandardOrientedBandTransport witness supplied only through T4. What remains is construction of the clean graphical ClosedWindow and its exact source/target endpoint factorizations.",
     "unsafe_old_input": "RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation",
-    "required_resolution": "Construct StandardBandEndpointCompiler from StandardOrientedBandTransport and the exact role-aware contexts. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The moving coefficient is now derived rather than supplied. The compiler must still derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
+    "required_resolution": "Replace the presently constructor-free StandardOrientedBandTransport shell by an explicit category-neutral standard-band normal-form witness, then construct StandardBandEndpointCompiler from that witness and the exact role-aware contexts. The three category-level literature laws are separate and cannot manufacture presentation endpoints. The moving coefficient and its channel-character reconstruction are now derived rather than supplied. The compiler must still derive the ClosedWindow and exact source/target syntax factorizations; the deleted broad endpoint axiom may not be restored or renamed.",
     "nonclaim": "The unsafe old axiom has been deleted. The public route now compiles only when an explicit StandardBandEndpointCompiler is supplied. No axiom or instance constructs that compiler, so the complete premodular four-manifold invariant is not currently established."
   },
   "logic_safety_correction": {
@@ -94,8 +94,8 @@
     },
     {
       "id": "ROLE_AWARE_TWO_OVER_TWO_COEFFICIENT_TRANSPORT",
-      "evidence": "RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetWeight_eq_endpointCoefficient; targetBlock_eq_commonCoefficient; movingCoefficient",
-      "meaning": "For every remaining-label block and every moving/stationary simple pair, the target coefficient is proved equal to the exact source coefficient, including both character powers. The outer moving coefficient is computed from the unit/unit complement, moving quantum dimension, orientation, and residual exponent; it is no longer a field of the unresolved endpoint obligation."
+      "evidence": "RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetWeight_eq_endpointCoefficient; targetBlock_eq_commonCoefficient; movingCoefficient; channelCharacterScalar; endpointCoefficient_eq_movingCoefficient_mul_channel",
+      "meaning": "For every remaining-label block and every moving/stationary simple pair, the target coefficient is proved equal to the exact source coefficient, including both character powers. The outer moving coefficient is computed from the unit/unit complement, moving quantum dimension, orientation, and residual exponent; it is no longer a field of the unresolved endpoint obligation. Lean also proves that the residual moving coefficient times the visible channel coupon reconstructs the exact original coefficient: positive orientation uses (a+b)+(-b)=a, while negative orientation uses (a-b)+b=a."
     },
     {
       "id": "MODULAR_SPECIALIZATION",
@@ -171,17 +171,18 @@
     "safety": "The obsolete one-over-one and two-over-one legacy movie axioms and their constructors were physically deleted. The legacy evaluator remains only as the right side of a future compatibility theorem and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T00:09:11-06:00",
-    "base_checkpoint_commit": "ba966c8",
+    "timestamp": "2026-07-27T06:48:20-06:00",
+    "base_checkpoint_commit": "a74804e",
     "git_dirty": true,
-    "dirty_path_count_at_capture": 2,
+    "dirty_path_count_at_capture": 1,
     "lean_version": "4.29.1",
     "lake_version": "5.0.0-src+f72c35b",
     "os": "Darwin 24.6.0 arm64",
     "lean_process_limit": 1,
     "mainline_build": "PASS_CONDITIONAL_2375_JOBS",
     "post_safety_correction_targeted_build": "PASS_CONDITIONAL_2234_JOBS",
-    "post_category_law_split_mainline_and_audit_build": "PASS_CONDITIONAL_2320_JOBS",
+    "post_category_law_split_mainline_and_audit_build": "PASS_CONDITIONAL_2026-07-27T06:45:12-06:00",
+    "role_aware_two_over_two_targeted_build": "PASS_2026-07-27T06:41:21-06:00",
     "mainline_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "final_public_axiom_audit": "BLOCKED_EXPLICIT_STANDARD_BAND_ENDPOINT_COMPILER",
     "full_repository_build": "PASS_2375_JOBS",
