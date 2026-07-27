@@ -1,0 +1,87 @@
+{
+  "artifact_type": "five-category-literature-input-semantic-audit-v1",
+  "generated_at": "2026-07-27T13:05:50-06:00",
+  "base_commit": "9ad04e129fa9898d687260419b595e547483260a",
+  "policy": "Retain an axiom only when its mathematical quantifiers, direction, normalization, and graphical scope are very close to the cited statement. Otherwise replace it by a Lean-derived construction from smaller source-close inputs.",
+  "sources": [
+    {
+      "id": "egno-tensor-categories",
+      "path": "/Users/jin/data/jin/readings/math-phys/Tensor Categories-[Etingof, Gelaki, Nikshych, and Ostrik].pdf",
+      "sha256": "5d3cfde5b6ec7b8aef10d020f1627377b482ee8ee352feb368eff6e477ebc0dc"
+    },
+    {
+      "id": "baerenz-barrett-dichromatic",
+      "path": "/Users/jin/data/jin/readings/math-phys/Dichromatic State Sum Models for Four-Manifolds from Pivotal Functors-[Barenz and Barrett].pdf",
+      "sha256": "cf14c9d316c563cbf1bceec0b5309b561083585dc702fd24f579eadb216ff5de"
+    },
+    {
+      "id": "crane-kauffman-yetter-state-sum-i",
+      "url": "https://arxiv.org/abs/hep-th/9409167",
+      "locator": "Theorem 2.6, quoting Shum's framed-tangle coherence theorem"
+    }
+  ],
+  "decisions": [
+    {
+      "original_name": "PremodularCategory.globalDimension_ne_zero",
+      "decision": "RETAIN_AS_SOURCE_CLOSE_AXIOM",
+      "source_locator": "EGNO Theorem 7.21.12, book page 181",
+      "source_statement": "The categorical dimension of a fusion category over an algebraically closed characteristic-zero field is nonzero.",
+      "formal_specialization": "The premodular spherical global dimension, defined as the sum of squared quantum dimensions, is nonzero.",
+      "semantic_gap": "Only specialization from fusion-category categorical dimension to the stored spherical presentation."
+    },
+    {
+      "original_name": "shum_ribbonFramedKink",
+      "decision": "RETAIN_AS_SOURCE_CLOSE_AXIOM",
+      "source_locator": "Crane-Kauffman-Yetter Theorem 2.6; Shum, Tortile Tensor Categories, main framed-tangle coherence theorem",
+      "source_statement": "The free tortile category on one object is monoidally equivalent to the category of framed tangles.",
+      "formal_specialization": "Positive and negative framed kinks evaluate to the ribbon twist and its inverse.",
+      "semantic_gap": "Direct generator-level specialization of framed-tangle coherence; the Shum article locator should still be sharpened if a theorem number is recovered."
+    },
+    {
+      "original_name": "sphericalInsertion",
+      "decision": "RETAIN_AS_SOURCE_CLOSE_AXIOM",
+      "source_locator": "Bärenz-Barrett Lemma 2.37, equations (2.2.5)-(2.2.6), journal page 675",
+      "source_statement": "For every object X, a basis of Hom(X,Z) and its spherical-trace dual basis resolve the identity of X with weights d(Z).",
+      "formal_specialization": "The same identity resolution, quantified over every object and every finite dual basis.",
+      "semantic_gap": "Lean makes the finite index type and dual-basis quantifiers explicit."
+    },
+    {
+      "original_name": "sphericalMateTrace",
+      "decision": "RETAIN_AS_SOURCE_CLOSE_AXIOM",
+      "source_locator": "Bärenz-Barrett Lemma 3.3, equations (3.1.9)-(3.1.11), journal pages 683-684",
+      "source_statement": "The mate change used in generalized sliding preserves the spherical dual-basis pairing.",
+      "formal_specialization": "The pivotal trace pairing of arbitrary composable morphisms is preserved by the two explicit mate equivalences.",
+      "semantic_gap": "The graphical mate convention is expressed by named Lean linear equivalences and must be checked against equation (3.1.10)."
+    },
+    {
+      "original_name": "labelIndexedMovies",
+      "decision": "REPLACED_BY_DERIVED_DEFINITION",
+      "reason": "The former axiom returned an all-label engineering package containing contexts, movies, naturality, provenance strings, and a content hash. That type was not semantically close to either Lemma 3.3 or Lemma 3.4.",
+      "replacement_definition": "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.labelIndexedMovies",
+      "smaller_source_close_inputs": [
+        {
+          "name": "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingFiber",
+          "source_locator": "Bärenz-Barrett Lemma 3.3, equations (3.1.2)-(3.1.11), journal pages 681-684",
+          "meaning": "One fixed X and exposed strand A, retaining exactly the insertion, braiding, mate, and inverse-insertion graphical calculation; no final endpoint equality field."
+        },
+        {
+          "name": "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingBeforeNaturality",
+          "source_locator": "Bärenz-Barrett Lemma 3.4 and its proof, journal page 684",
+          "meaning": "Naturality of the before-slide endpoint in the arbitrary exposed strand."
+        },
+        {
+          "name": "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingAfterNaturality",
+          "source_locator": "Bärenz-Barrett Lemma 3.4 and its proof, journal page 684",
+          "meaning": "Naturality of the after-slide endpoint in the arbitrary exposed strand."
+        }
+      ],
+      "lean_derived_work": "Lean assembles the all-simple family, retains the internal fusion-channel calculation, derives the endpoint equality, and transports it through arbitrary unchanged exterior contexts."
+    }
+  ],
+  "verification": {
+    "targeted_build": "PASS_2302_JOBS_2026-07-27T13:05:20-06:00",
+    "full_build": "PASS_2323_JOBS_2026-07-27T13:08:07-06:00",
+    "final_axiom_audit": "PASS_OLD_LABEL_INDEXED_AXIOM_ABSENT_THREE_SMALLER_INPUTS_VISIBLE_2026-07-27T13:08:23-06:00",
+    "new_sorry_or_admit": false
+  }
+}

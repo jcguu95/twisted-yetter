@@ -257,6 +257,121 @@ structure LabelIndexedSlidingMovies
   source_locator : String :=
     "Lemmas 3.3-3.4, equations (3.1.3)-(3.1.11), journal pages 681-684"
 
+/-
+The following three inputs follow the proof boundary in Bärenz--Barrett
+literally.  Unlike the former `labelIndexedMovies` axiom, none returns the
+completed all-label family.
+
+* `generalizedSlidingFiber` is one fixed pair `(X, A)` in Lemma 3.3 and
+  records precisely the diagrammatic transitions (3.1.4)--(3.1.7).
+* `generalizedSlidingBeforeNaturality` and
+  `generalizedSlidingAfterNaturality` are the two endpoint naturality
+  statements used in Lemma 3.4 to pass an arbitrary framed exterior.
+
+The insertion and mate/trace equalities inside this calculation are supplied
+separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
+-/
+namespace LiteratureInput
+
+/--
+The pointwise graphical calculation in Bärenz--Barrett Lemma 3.3.
+
+`x` is the object `X` in the paper and `strand` is the arbitrary object `A`.
+The returned fiber records the insertion, braiding-naturality, mate, and
+inverse-insertion stages (3.1.3)--(3.1.8).  Its only certified movie fields are
+the two displayed graphical transitions (3.1.4)--(3.1.6); it does not assume
+the final endpoint equality.
+
+Reference: Bärenz--Barrett, Lemma 3.3, equation (3.1.2) and its displayed
+calculation (3.1.3)--(3.1.11), journal pages 681--684.
+-/
+axiom generalizedSlidingFiber
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (x : S)
+    (strand : C) :
+    SlidingFiber
+      (CategoryData.slidingCategoryData data insertionLaw mateLaw x)
+      strand
+
+/--
+Naturality of the left endpoint in the exposed object `A`.
+
+This is the before-slide half of Bärenz--Barrett Lemma 3.4: braidings,
+twists, and the graphical operations in Lemma 3.3 are natural, so an arbitrary
+morphism `f : A ⟶ B` may be moved past the left endpoint.
+
+Reference: Bärenz--Barrett, Lemma 3.4 and its proof immediately following
+equation (3.1.11), journal page 684.
+-/
+axiom generalizedSlidingBeforeNaturality
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (x : S)
+    {A B : C}
+    (f : A ⟶ B) :
+    (tensorLeft (data.simple x)).map f ≫
+        LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage313 =
+      LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage313 ≫
+        (tensorLeft (data.simple x)).map f
+
+/--
+Naturality of the right endpoint in the exposed object `A`.
+
+This is the after-slide half of Bärenz--Barrett Lemma 3.4, with the same
+arbitrary morphism `f : A ⟶ B`.
+
+Reference: Bärenz--Barrett, Lemma 3.4 and its proof immediately following
+equation (3.1.11), journal page 684.
+-/
+axiom generalizedSlidingAfterNaturality
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
+    (x : S)
+    {A B : C}
+    (f : A ⟶ B) :
+    (tensorLeft (data.simple x)).map f ≫
+        LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage318 =
+      LinearDiagram.eval
+          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage318 ≫
+        (tensorLeft (data.simple x)).map f
+
+end LiteratureInput
+
+/--
+Assemble the label-indexed family from the pointwise Lemma 3.3 calculation and
+the two endpoint naturality statements of Lemma 3.4.
+
+This is a definition, not a literature axiom.  Lean performs the all-simple
+indexing and supplies the provenance fields.
+-/
+noncomputable def labelIndexedSlidingMovies
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical) :
+    LabelIndexedSlidingMovies data insertionLaw mateLaw where
+  family x :=
+    { fiber := fun strand =>
+        LiteratureInput.generalizedSlidingFiber
+          data insertionLaw mateLaw x strand
+      before_naturality := fun f =>
+        LiteratureInput.generalizedSlidingBeforeNaturality
+          data insertionLaw mateLaw x f
+      after_naturality := fun f =>
+        LiteratureInput.generalizedSlidingAfterNaturality
+          data insertionLaw mateLaw x f
+      diagram_content_hash :=
+        "source:baerenz-barrett-lemma-3.3-3.4-label-indexed" }
+  source_ref := "ref:baerenz-barrett-dichromatic-2018"
+  source_locator :=
+    "Lemmas 3.3-3.4, equations (3.1.2)-(3.1.11), journal pages 681-684"
+
 namespace LabelIndexedSlidingMovies
 
 variable

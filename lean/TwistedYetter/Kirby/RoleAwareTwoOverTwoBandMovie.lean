@@ -1945,19 +1945,19 @@ axiom sphericalMateTrace
     SphericalMateTraceLaw (K := K) 𝒞.spherical
 
 /--
-The label-indexed graphical movie of Bärenz--Barrett Lemmas 3.3--3.4.
+The label-indexed graphical family assembled from the pointwise inputs matching
+Bärenz--Barrett Lemmas 3.3--3.4.
 
-This law is quantified over the arbitrary exposed strand used by
-`SlidingFamily`.  It does not know the role-aware exterior into which that
-movie will later be plugged.
-
-Reference: Bärenz--Barrett, Lemmas 3.3--3.4, equations
-(3.1.3)--(3.1.11), journal pages 681--684.
+Unlike the previous declaration with this name, this is not an axiom.  The
+all-label family and its provenance are constructed by Lean from the
+pointwise Lemma 3.3 fibers and the two Lemma 3.4 naturality inputs.
 -/
-axiom labelIndexedMovies
+noncomputable def labelIndexedMovies
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
     LabelIndexedSlidingMovies 𝒞
-      (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
+      (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞) :=
+  TwistedYetter.Kirby.EGNOCategoryBoundSliding.labelIndexedSlidingMovies
+    𝒞 (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
 
 end StandardPremodularBandLaws
 
