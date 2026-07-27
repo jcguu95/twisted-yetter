@@ -29,19 +29,19 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.recipeStructuralBinding
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrettPremodularBandCore
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.sourceDecomposition
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.premodularCouponTransport
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetDecomposition
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_positiveBandMovie
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.standardBandEndpointInterpretation
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_negativeBandMovie
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.toFiniteSumBinding
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrett_bandMovie
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.roleAwareCycleEval_eq
 
 #print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant
