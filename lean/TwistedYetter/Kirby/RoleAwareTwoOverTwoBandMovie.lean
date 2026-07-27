@@ -1219,6 +1219,46 @@ theorem targetDecomposition
 
 end RoleAwareFiniteSumBlocks
 
+/-
+These three inputs are category-level literature boundaries.  They do not
+mention a Kirby presentation, a clean band script, a homology class, a
+character exponent, or an evaluator endpoint.
+-/
+namespace StandardPremodularBandLaws
+
+/--
+Spherical insertion of a complete dual basis.
+
+Reference boundary: Bärenz--Barrett, Lemma 2.37 and equation (2.2.5).
+-/
+axiom sphericalInsertion
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞
+
+/--
+Compatibility of the pivotal trace pairing with the mate operation.
+
+Reference boundary: Bärenz--Barrett, Lemma 3.3, equations
+(3.1.3)--(3.1.8).
+-/
+axiom sphericalMateTrace
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    SphericalMateTraceLaw (K := K) 𝒞.spherical
+
+/--
+The label-indexed graphical movie of Bärenz--Barrett Lemmas 3.3--3.4.
+
+This law is quantified over the arbitrary exposed strand used by
+`SlidingFamily`.  It does not know the role-aware exterior into which that
+movie will later be plugged.
+-/
+axiom labelIndexedMovies
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    LabelIndexedSlidingMovies 𝒞
+      (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
+
+end StandardPremodularBandLaws
+
 /--
 Exact structural binding of a role-aware 2/2 move to the explicit
 Bärenz--Barrett finite-sum endpoints.
@@ -1252,11 +1292,10 @@ structure FiniteSumBinding
         𝒞 η target window.targetGeometry
           ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle) =
       ∑ block, targetBlock block
-  insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞
-  mateLaw : SphericalMateTraceLaw (K := K) 𝒞.spherical
-  movies : LabelIndexedSlidingMovies 𝒞 insertionLaw mateLaw
   closedWindow :
-    Block → LabelIndexedSlidingMovies.ClosedWindow movies
+    Block →
+      LabelIndexedSlidingMovies.ClosedWindow
+        (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   movingCoefficient : Block → S → K
   source_endpoint :
     (block : Block) →
@@ -1369,12 +1408,10 @@ structure BandEndpointInterpretation
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) where
-  insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞
-  mateLaw : SphericalMateTraceLaw (K := K) 𝒞.spherical
-  movies : LabelIndexedSlidingMovies 𝒞 insertionLaw mateLaw
   closedWindow :
     RoleAwareFiniteSumBlocks.Block (S := S) window →
-      LabelIndexedSlidingMovies.ClosedWindow movies
+      LabelIndexedSlidingMovies.ClosedWindow
+        (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   movingCoefficient :
     RoleAwareFiniteSumBlocks.Block (S := S) window → S → K
   source_endpoint :
@@ -1417,9 +1454,6 @@ noncomputable def toFiniteSumBinding
     RoleAwareFiniteSumBlocks.sourceDecomposition window 𝒞 η sourceCycle
   target_decomposition :=
     RoleAwareFiniteSumBlocks.targetDecomposition window 𝒞 η sourceCycle
-  insertionLaw := interpretation.insertionLaw
-  mateLaw := interpretation.mateLaw
-  movies := interpretation.movies
   closedWindow := interpretation.closedWindow
   movingCoefficient := interpretation.movingCoefficient
   source_endpoint := interpretation.source_endpoint
