@@ -78,8 +78,6 @@ theorem elementaryMove_invariant
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     {source target : Presentation H2}
-    (twoOverTwoEndpoints :
-      RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler 𝒞 η H2)
     (move : ElementaryMove source target)
     (alpha :
       source.canonicalPresentation.topology.handleChain.SecondHomology) :
@@ -216,7 +214,7 @@ theorem elementaryMove_invariant
                 CanonicalSourceBoundSlideMovie.Request.targetCycle] using
                 clean.roleAwareCycleEval_eq
                   metadata countsSound 𝒞 η sourceCycle
-                    (twoOverTwoEndpoints.resolve
+                    (RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.resolve
                       metadata countsSound clean sourceCycle)
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2

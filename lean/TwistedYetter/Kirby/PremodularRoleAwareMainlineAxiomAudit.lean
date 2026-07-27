@@ -110,15 +110,22 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.target_componentTermDiagram_split
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.toFiniteSumBinding
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.AttachDetachInterpretation.toFiniteSumBinding
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.BandEndpointInterpretation.roleAwareCycleEval_eq
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.AttachDetachInterpretation.roleAwareCycleEval_eq
 
-#print
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.StandardBandEndpointCompiler.resolve
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.CleanEndpointInterpretation.attach_fixedMovingLabel
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.CleanEndpointInterpretation.detach_fixedMovingLabel
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.attach_preserves_evaluation
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.detach_preserves_evaluation
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.resolve
 
 #print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant

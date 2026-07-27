@@ -46,7 +46,7 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 local instance roleAwareTwoOverTwoRightRigid : RightRigidCategory C :=
   (inferInstance : RigidCategory C).toRightRigidCategory
 
-/--
+/-
 The two exposed ordinary strands of the role-aware 2/2 band movie.
 
 Unlike the legacy boundary, this definition reads the component IDs and
@@ -2068,10 +2068,11 @@ theorem RoleAwareFiniteSumBlocks.internalChannelWeight_transport
     (RoleAwareFiniteSumBlocks.internalChannelExponent window sourceCycle)
 
 /--
-Exact structural binding of a role-aware 2/2 move to the explicit
-Bärenz--Barrett finite-sum endpoints.
+Exact structural binding of a role-aware 2/2 move to its explicit
+finite-sum attach and detach stages.
 
-The two endpoint fields are equalities of retained `LinearDiagram` syntax.
+The two compatibility fields are equalities of retained `LinearDiagram`
+syntax.
 There is deliberately no field asserting equality after evaluation.
 -/
 structure FiniteSumBinding
@@ -2105,14 +2106,14 @@ structure FiniteSumBinding
       ChannelWeightedClosedWindow
         (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
   movingCoefficient : Block → S → K
-  source_endpoint :
+  attach_preserves_evaluation :
     (block : Block) →
       LinearDiagram.eval (sourceBlock block) =
         (weightedWindow block).linearBeforeEval
           (movingCoefficient block)
           (RoleAwareFiniteSumBlocks.internalChannelWeight
             window 𝒞 η sourceCycle)
-  target_endpoint :
+  detach_preserves_evaluation :
     (block : Block) →
       LinearDiagram.eval (targetBlock block) =
         (weightedWindow block).linearAfterEval
@@ -2170,7 +2171,8 @@ theorem linear_eval_eq
   simp only [map_sum]
   apply Finset.sum_congr rfl
   intro block _
-  rw [binding.source_endpoint block, binding.target_endpoint block]
+  rw [binding.attach_preserves_evaluation block,
+    binding.detach_preserves_evaluation block]
   exact (binding.weightedWindow block).linear_eval_eq
     (binding.movingCoefficient block)
     (RoleAwareFiniteSumBlocks.internalChannelWeight
@@ -2211,7 +2213,7 @@ Bärenz--Barrett stages (3.1.3) and (3.1.8).  It does not assert equality of
 their evaluations.  In particular, the stationary Kirby-colour label and all
 fusion channels remain inside `closedWindow`.
 -/
-structure BandEndpointInterpretation
+structure AttachDetachInterpretation
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -2222,7 +2224,7 @@ structure BandEndpointInterpretation
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) where
-  source_endpoint :
+  attach_preserves_evaluation :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
       LinearDiagram.eval
           (RoleAwareFiniteSumBlocks.sourceBlock
@@ -2233,7 +2235,7 @@ structure BandEndpointInterpretation
             window 𝒞 η sourceCycle block)
           (RoleAwareFiniteSumBlocks.internalChannelWeight
             window 𝒞 η sourceCycle)
-  target_endpoint :
+  detach_preserves_evaluation :
     (block : RoleAwareFiniteSumBlocks.Block (S := S) window) →
       LinearDiagram.eval
           (RoleAwareFiniteSumBlocks.targetBlock
@@ -2245,7 +2247,7 @@ structure BandEndpointInterpretation
           (RoleAwareFiniteSumBlocks.internalChannelWeight
             window 𝒞 η sourceCycle)
 
-namespace BandEndpointInterpretation
+namespace AttachDetachInterpretation
 
 /-- Assemble the exact whole-sum binding from the recipe-derived blocks. -/
 noncomputable def toFiniteSumBinding
@@ -2260,7 +2262,7 @@ noncomputable def toFiniteSumBinding
     {η : TensorIdentityAutomorphism C}
     {sourceCycle : source.DegreeTwoCycle}
     (interpretation :
-      BandEndpointInterpretation window 𝒞 η sourceCycle) :
+      AttachDetachInterpretation window 𝒞 η sourceCycle) :
     FiniteSumBinding window 𝒞 η sourceCycle where
   Block := RoleAwareFiniteSumBlocks.Block (S := S) window
   blockFintype := inferInstance
@@ -2276,8 +2278,8 @@ noncomputable def toFiniteSumBinding
     RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow window 𝒞 η
   movingCoefficient :=
     RoleAwareFiniteSumBlocks.movingCoefficient window 𝒞 η sourceCycle
-  source_endpoint := interpretation.source_endpoint
-  target_endpoint := interpretation.target_endpoint
+  attach_preserves_evaluation := interpretation.attach_preserves_evaluation
+  detach_preserves_evaluation := interpretation.detach_preserves_evaluation
 
 /--
 The standard endpoint interpretation and the kernel-checked generalized
@@ -2295,7 +2297,7 @@ theorem roleAwareCycleEval_eq
     {η : TensorIdentityAutomorphism C}
     {sourceCycle : source.DegreeTwoCycle}
     (interpretation :
-      BandEndpointInterpretation window 𝒞 η sourceCycle) :
+      AttachDetachInterpretation window 𝒞 η sourceCycle) :
     CanonicalPresentation.roleAwareCycleEval
         𝒞 η source window.sourceGeometry sourceCycle =
       CanonicalPresentation.roleAwareCycleEval
@@ -2304,7 +2306,7 @@ theorem roleAwareCycleEval_eq
             sourceCycle) :=
   interpretation.toFiniteSumBinding.roleAwareCycleEval_eq
 
-end BandEndpointInterpretation
+end AttachDetachInterpretation
 
 end Window
 
@@ -2316,7 +2318,7 @@ A value must be constructed from the clean source/target syntax and the
 listed categorical sliding laws.  Merely possessing a clean topology window
 does not manufacture this value.
 -/
-abbrev StandardEndpointObligation
+abbrev StandardAttachDetachObligation
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
     {metadata :
@@ -2327,27 +2329,123 @@ abbrev StandardEndpointObligation
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle) :=
-  Window.BandEndpointInterpretation clean.window 𝒞 η sourceCycle
+  Window.AttachDetachInterpretation clean.window 𝒞 η sourceCycle
 
-/--
-The two still-unproved endpoint obligations, exposed as separate fields.
+/-
+The two still-unproved attach and detach obligations, exposed as separate
+fields.
 
-This is deliberately not a single `resolve : ... → BandEndpointInterpretation`
+This is deliberately not a single
+`resolve : ... → AttachDetachInterpretation`
 black box.  A future construction must visibly:
 
-1. identify the source block with its weighted `before` endpoint; and
-2. identify the target block with its weighted `after` endpoint.
+1. prove that attaching the standard fusion resolution preserves the source
+   evaluation; and
+2. prove that detaching the transported fusion resolution preserves the target
+   evaluation.
 
-The weighted window itself is constructed from the exact common exterior;
-it is no longer supplied by this compiler.
-
-No instance or axiom constructs this compiler.
+The weighted window itself is constructed from the exact common exterior.
+The two endpoint interpretation boundaries and their derived evaluation
+theorems are declared immediately below.  The axioms are pointwise
+topology-to-category translations; the evaluation equalities are theorems.
 -/
-structure StandardBandEndpointCompiler
+namespace TwoOverTwoAttachDetach
+
+/-
+These are the two narrow topology-to-category interpretation boundaries.
+
+They are deliberately pointwise in the moving simple label.  Neither axiom
+states that source and target evaluations are equal, and neither mentions the
+sliding theorem or the normalized four-manifold invariant.  Each only says
+that interpreting the corresponding clean Kirby collar produces the standard
+categorical attach/detach stage already constructed above.
+-/
+namespace CleanEndpointInterpretation
+
+/--
+For one fixed moving simple label, interpreting the clean Kirby attaching
+collar gives the standard channel-resolved categorical attach stage.
+
+This is an interpreter boundary, not an invariance statement: it identifies
+one endpoint with one categorical expression and says nothing about the
+target endpoint.
+-/
+axiom attach_fixedMovingLabel
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (η : TensorIdentityAutomorphism C)
-    (H2 : Type uH) [AddCommGroup H2] where
-  source_endpoint :
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts)
+    (clean : CleanWindow source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle)
+    (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window)
+    (movingLabel : S) :
+    (∑ stationaryLabel : S,
+      Window.RoleAwareFiniteSumBlocks.endpointCoefficient
+          clean.window 𝒞 η sourceCycle block movingLabel stationaryLabel •
+        Diagram.eval C
+          (CanonicalPresentation.roleAwareTermDiagram
+            𝒞 η source clean.window.sourceGeometry
+            (Window.RoleAwareFiniteSumBlocks.sourceLabeling
+              clean.window block movingLabel stationaryLabel))) =
+      Window.RoleAwareFiniteSumBlocks.movingCoefficient
+          clean.window 𝒞 η sourceCycle block movingLabel •
+        (Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          clean.window 𝒞 η block).beforeEval
+          (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
+            clean.window 𝒞 η sourceCycle) movingLabel
+
+/--
+For one fixed moving simple label, interpreting the clean Kirby detaching
+collar gives the standard transported categorical detach stage.
+
+This is again only an endpoint interpretation.  The equality between the
+attach and detach stages is the separately proved weighted sliding theorem.
+-/
+axiom detach_fixedMovingLabel
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts)
+    (clean : CleanWindow source target metadata countsSound)
+    (sourceCycle : source.DegreeTwoCycle)
+    (block : Window.RoleAwareFiniteSumBlocks.Block (S := S) clean.window)
+    (movingLabel : S) :
+    (∑ stationaryLabel : S,
+      Window.RoleAwareFiniteSumBlocks.endpointCoefficient
+          clean.window 𝒞 η sourceCycle block movingLabel stationaryLabel •
+        Diagram.eval C
+          (CanonicalPresentation.roleAwareTermDiagram
+            𝒞 η target clean.window.targetGeometry
+            (Window.RoleAwareFiniteSumBlocks.targetLabeling
+              clean.window block movingLabel stationaryLabel))) =
+      Window.RoleAwareFiniteSumBlocks.movingCoefficient
+          clean.window 𝒞 η sourceCycle block movingLabel •
+        (Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
+          clean.window 𝒞 η block).afterEval
+          (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
+            clean.window 𝒞 η sourceCycle) movingLabel
+
+end CleanEndpointInterpretation
+
+/--
+Attaching the standard complete fusion resolution to a clean role-aware
+two-over-two source window preserves its evaluation.
+
+The proof expands the complete source block, then applies the pointwise clean
+attach interpretation under the outer finite sum.
+-/
+theorem attach_preserves_evaluation
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2] :
     {source target : CanonicalPresentation H2} →
     (metadata :
       KirbyCompleteness.TableTwoMoveMetadata
@@ -2364,8 +2462,29 @@ structure StandardBandEndpointCompiler
           (Window.RoleAwareFiniteSumBlocks.movingCoefficient
             clean.window 𝒞 η sourceCycle block)
           (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
-            clean.window 𝒞 η sourceCycle)
-  target_endpoint :
+            clean.window 𝒞 η sourceCycle) := by
+  classical
+  intro source target metadata countsSound clean sourceCycle block
+  unfold Window.RoleAwareFiniteSumBlocks.sourceBlock
+  unfold ChannelWeightedClosedWindow.linearBeforeEval
+  simp only [map_sum, map_smul, LinearDiagram.eval_atom]
+  apply Finset.sum_congr rfl
+  intro movingLabel _
+  exact CleanEndpointInterpretation.attach_fixedMovingLabel
+    𝒞 η metadata countsSound clean sourceCycle block movingLabel
+
+/--
+Detaching the transported complete fusion resolution from a clean
+role-aware two-over-two target window preserves its evaluation.
+
+The proof first rewrites the transported target coefficient to the exact
+source-indexed coefficient, then applies the pointwise clean detach
+interpretation under the outer finite sum.
+-/
+theorem detach_preserves_evaluation
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2] :
     {source target : CanonicalPresentation H2} →
     (metadata :
       KirbyCompleteness.TableTwoMoveMetadata
@@ -2382,19 +2501,28 @@ structure StandardBandEndpointCompiler
           (Window.RoleAwareFiniteSumBlocks.movingCoefficient
             clean.window 𝒞 η sourceCycle block)
           (Window.RoleAwareFiniteSumBlocks.internalChannelWeight
-            clean.window 𝒞 η sourceCycle)
-
-namespace StandardBandEndpointCompiler
+            clean.window 𝒞 η sourceCycle) := by
+  classical
+  intro source target metadata countsSound clean sourceCycle block
+  unfold Window.RoleAwareFiniteSumBlocks.targetBlock
+  unfold ChannelWeightedClosedWindow.linearAfterEval
+  simp only [map_sum, map_smul, LinearDiagram.eval_atom]
+  simp_rw
+    [Window.RoleAwareFiniteSumBlocks.targetWeight_eq_endpointCoefficient
+      clean.window 𝒞 η sourceCycle]
+  apply Finset.sum_congr rfl
+  intro movingLabel _
+  exact CleanEndpointInterpretation.detach_fixedMovingLabel
+    𝒞 η metadata countsSound clean sourceCycle block movingLabel
 
 /--
-Assemble the per-window record only after both explicit fields have
-been supplied.  This definition adds no proof obligation and no equality.
+Assemble the per-window record from the two explicit attach/detach theorems.
+This definition adds no further assumption.
 -/
 noncomputable def resolve
     {H2 : Type uH} [AddCommGroup H2]
     {𝒞 : PremodularCategory (K := K) (C := C) (S := S)}
     {η : TensorIdentityAutomorphism C}
-    (compiler : StandardBandEndpointCompiler 𝒞 η H2)
     {source target : CanonicalPresentation H2}
     (metadata :
       KirbyCompleteness.TableTwoMoveMetadata
@@ -2402,13 +2530,15 @@ noncomputable def resolve
     (countsSound : source.topology.counts = target.topology.counts)
     (clean : CleanWindow source target metadata countsSound)
     (sourceCycle : source.DegreeTwoCycle) :
-    StandardEndpointObligation clean 𝒞 η sourceCycle where
-  source_endpoint :=
-    compiler.source_endpoint metadata countsSound clean sourceCycle
-  target_endpoint :=
-    compiler.target_endpoint metadata countsSound clean sourceCycle
+    StandardAttachDetachObligation clean 𝒞 η sourceCycle where
+  attach_preserves_evaluation :=
+    attach_preserves_evaluation 𝒞 η
+      metadata countsSound clean sourceCycle
+  detach_preserves_evaluation :=
+    detach_preserves_evaluation 𝒞 η
+      metadata countsSound clean sourceCycle
 
-end StandardBandEndpointCompiler
+end TwoOverTwoAttachDetach
 
 /--
 Once the standard-normal-form endpoint interpretation is supplied, every
@@ -2428,7 +2558,7 @@ theorem CleanWindow.roleAwareCycleEval_eq
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (endpoint :
-      StandardEndpointObligation clean 𝒞 η sourceCycle) :
+      StandardAttachDetachObligation clean 𝒞 η sourceCycle) :
     CanonicalPresentation.roleAwareCycleEval
         𝒞 η source clean.window.sourceGeometry sourceCycle =
       CanonicalPresentation.roleAwareCycleEval
