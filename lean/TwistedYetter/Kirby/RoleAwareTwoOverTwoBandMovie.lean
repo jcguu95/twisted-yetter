@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.RoleAwareSameComponentTransport
+import TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
 import TwistedYetter.Kirby.TwoOverTwoFusionChannel
 import TwistedYetter.Kirby.TwoOverTwoSourceFreeFactorization
 
@@ -19,9 +20,11 @@ open TwistedYetter.Kirby.CanonicalCycleMoveGeometry
 open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 open TwistedYetter.Kirby.CategoricalTangle
+open TwistedYetter.Kirby.EGNOCategoryBoundSliding
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
 open TwistedYetter.Kirby.RoleAwareSameComponentTransport
+open TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
 open TwistedYetter.Kirby.SimultaneousDottedCutGeometry
 open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 open TwistedYetter.Kirby.TwoOverTwoFusionChannel
@@ -82,6 +85,96 @@ structure Window
               (localBoundary metadata countsSound))))
 
 namespace Window
+
+/--
+Exact structural binding of a role-aware 2/2 move to the explicit
+Bärenz--Barrett finite-sum endpoints.
+
+The two endpoint fields are equalities of retained `LinearDiagram` syntax.
+There is deliberately no field asserting equality after evaluation.
+-/
+structure FiniteSumBinding
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) where
+  insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞
+  mateLaw : SphericalMateTraceLaw (K := K) 𝒞.spherical
+  movies : LabelIndexedSlidingMovies 𝒞 insertionLaw mateLaw
+  closedWindow : LabelIndexedSlidingMovies.ClosedWindow movies
+  movingCoefficient : S → K
+  source_endpoint :
+    CanonicalPresentation.roleAwareLinearDiagram
+        𝒞 η source window.sourceGeometry sourceCycle =
+      linearEndpoint Side.before closedWindow movingCoefficient
+  target_endpoint :
+    CanonicalPresentation.roleAwareLinearDiagram
+        𝒞 η target window.targetGeometry
+          ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle) =
+      linearEndpoint Side.after closedWindow movingCoefficient
+
+namespace FiniteSumBinding
+
+/--
+The explicit endpoint binding and generalized sliding prove equality of the
+two complete role-aware finite sums.
+-/
+theorem linear_eval_eq
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    {window : Window source target metadata countsSound}
+    {𝒞 : PremodularCategory (K := K) (C := C) (S := S)}
+    {η : TensorIdentityAutomorphism C}
+    {sourceCycle : source.DegreeTwoCycle}
+    (binding : FiniteSumBinding window 𝒞 η sourceCycle) :
+    LinearDiagram.eval
+        (CanonicalPresentation.roleAwareLinearDiagram
+          𝒞 η source window.sourceGeometry sourceCycle) =
+      LinearDiagram.eval
+        (CanonicalPresentation.roleAwareLinearDiagram
+          𝒞 η target window.targetGeometry
+            ((Request.twoOverTwo metadata countsSound).targetCycle
+              sourceCycle)) := by
+  rw [binding.source_endpoint, binding.target_endpoint]
+  exact PremodularTwoOverTwoBandEndpoints.linearEndpoint_eval_eq
+    binding.closedWindow binding.movingCoefficient
+
+/-- The complete finite-sum proof descends to the normalized evaluator. -/
+theorem roleAwareCycleEval_eq
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    {window : Window source target metadata countsSound}
+    {𝒞 : PremodularCategory (K := K) (C := C) (S := S)}
+    {η : TensorIdentityAutomorphism C}
+    {sourceCycle : source.DegreeTwoCycle}
+    (binding : FiniteSumBinding window 𝒞 η sourceCycle) :
+    CanonicalPresentation.roleAwareCycleEval
+        𝒞 η source window.sourceGeometry sourceCycle =
+      CanonicalPresentation.roleAwareCycleEval
+        𝒞 η target window.targetGeometry
+          ((Request.twoOverTwo metadata countsSound).targetCycle
+            sourceCycle) :=
+  RoleAwareSameComponentTransport.roleAwareCycleEval_eq_of_linearDiagram_eval_eq
+    𝒞 η window.sourceGeometry window.targetGeometry countsSound
+    sourceCycle
+    ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle)
+    binding.linear_eval_eq
+
+end FiniteSumBinding
 
 /-- The categorical source endpoint context after interpreting the exterior. -/
 noncomputable def sourceContext

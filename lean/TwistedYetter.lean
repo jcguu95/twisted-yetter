@@ -71,6 +71,7 @@ import TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler
 import TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
 import TwistedYetter.Kirby.EGNOKirbyColorExpansion
 import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
 import TwistedYetter.Kirby.EGNOModularKirbyMoves
 import TwistedYetter.Kirby.EGNOModularFourManifoldInvariant
 import TwistedYetter.Kirby.CanonicalModularKirbyEvaluator

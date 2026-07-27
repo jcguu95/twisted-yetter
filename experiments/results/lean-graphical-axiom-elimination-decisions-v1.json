@@ -278,6 +278,11 @@
       "timestamp_utc": "2026-07-26T20:29:36-06:00",
       "decision": "Reject fixed-label termwise two-over-two band invariance as the replacement target and add a complete-finite-sum normalization interface.",
       "reason": "The current RoleAwareTwoOverTwoBandMovie.baerenzBarrettPremodularBandCore quantifies over one fixed labeling and therefore asks for more than Bärenz--Barrett generalized sliding proves. Lemma 3.3 inserts and sums over intermediate fusion channels (z, mu), exchanges the two Kirby-colour sums, and only then obtains the endpoint equality. RoleAwareSameComponentTransport.roleAwareCycleEval_eq_of_linearDiagram_eval_eq now accepts exactly that complete finite-sum equality. The remaining work is to bind the exact source/target presentations to explicit positive/negative band endpoint syntax and instantiate the already formalized generalized-sliding calculation; no termwise equality or renamed evaluator-equality axiom is admissible."
+    },
+    {
+      "timestamp_utc": "2026-07-26T20:37:25-06:00",
+      "decision": "Add explicit Bärenz--Barrett finite-sum endpoints and a structural role-aware binding.",
+      "reason": "PremodularTwoOverTwoBandEndpoints distinguishes before and after endpoints by constructors, keeps the stationary Kirby-colour sum and all intermediate (z, mu) channels inside the existing generalized-sliding calculation, and proves both fixed-moving-label and complete-moving-sum evaluation equalities without axioms. RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding may bind exact source and target LinearDiagram syntax to those endpoints, but cannot contain an evaluator equality. Its normalized role-aware equality is a theorem derived from those structural bindings and generalized sliding."
     }
   ],
   "obligations": {
@@ -286,6 +291,6 @@
     "two_three_birth": "KERNEL_CHECKED_AXIOM_ELIMINATED",
     "two_three_death": "KERNEL_CHECKED_AXIOM_ELIMINATED",
     "framed_isotopy": "TAG_NAMES_PRESENT_TYPED_PARAMETERS_CONTEXTS_AND_INTERMEDIATE_DIAGRAMS_MISSING",
-    "source_bound_slide_movie": "BLOCKED_OVERSTRONG_FIXED_LABEL_BAND_CORE_REJECTED; COMPLETE_FINITE_SUM_NORMALIZATION_INTERFACE_KERNEL_CHECKED; EXPLICIT_POSITIVE_NEGATIVE_BAND_ENDPOINT_SYNTAX_AND_GENERALIZED_SLIDING_BINDING_REQUIRED"
+    "source_bound_slide_movie": "EXPLICIT_FINITE_SUM_ENDPOINTS_AND_NORMALIZED_BINDING_KERNEL_CHECKED; FIXED_LABEL_BAND_CORE_REJECTED; SOURCE_RECIPE_MUST_STILL_CONSTRUCT_THE_STRUCTURAL_FINITE_SUM_BINDING_BEFORE_OLD_AXIOM_CAN_BE_REMOVED"
   }
 }
