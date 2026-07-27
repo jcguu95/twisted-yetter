@@ -388,4 +388,44 @@ theorem roleAwareCycleEval_transport
   · exact roleAwareRawNumerator_transport
       𝒞 η sourceGeometry targetGeometry change transport term_sound
 
+/--
+Equal complete role-aware finite sums give equal normalized evaluations.
+
+Unlike `roleAwareCycleEval_transport`, this theorem does not require
+fixed-label term equality.  It is the correct interface for a 2/2 Kirby
+slide, whose proof may reindex and resolve the stationary Kirby colour
+through intermediate fusion channels before the two complete sums agree.
+-/
+theorem roleAwareCycleEval_eq_of_linearDiagram_eval_eq
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (sourceGeometry :
+      SimultaneousDottedCutGeometry.Geometry source)
+    (targetGeometry :
+      SimultaneousDottedCutGeometry.Geometry target)
+    (countsSound : source.topology.counts = target.topology.counts)
+    (sourceCycle : source.DegreeTwoCycle)
+    (targetCycle : target.DegreeTwoCycle)
+    (sum_sound :
+      LinearDiagram.eval
+          (RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareLinearDiagram
+            𝒞 η source sourceGeometry sourceCycle) =
+        LinearDiagram.eval
+          (RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareLinearDiagram
+            𝒞 η target targetGeometry targetCycle)) :
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
+        𝒞 η source sourceGeometry sourceCycle =
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
+        𝒞 η target targetGeometry targetCycle := by
+  unfold
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareEvaluationState
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareRawNumerator
+  apply
+    TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw
+  · exact countsSound
+  · exact congrArg 𝒞.toFusionCategoryData.closedScalar sum_sound
+
 end TwistedYetter.Kirby.RoleAwareSameComponentTransport
