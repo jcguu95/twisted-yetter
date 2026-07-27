@@ -23,6 +23,12 @@ axioms.
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding.roleAwareCycleEval_eq
 
 #print axioms
+  TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.SourceBoundRecipe.twoOverTwoStructuralBinding
+
+#print axioms
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.recipeStructuralBinding
+
+#print axioms
   TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.baerenzBarrettPremodularBandCore
 
 #print axioms

@@ -87,6 +87,26 @@ structure Window
 namespace Window
 
 /--
+The exact category-neutral source-recipe binding underlying this interpreted
+2-over-2 window.
+
+This is computed from `metadata.recipe`; callers do not supply a second
+binding certificate.  Its orientation, moving/stationary components,
+ordinary roles, and literal source/target windows therefore cannot drift
+away from the move being evaluated.
+-/
+def recipeStructuralBinding
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (_window : Window source target metadata countsSound) :
+    SourceBoundRecipe.TwoOverTwoStructuralBinding metadata.recipe :=
+  metadata.recipe.twoOverTwoStructuralBinding
+
+/--
 Exact structural binding of a role-aware 2/2 move to the explicit
 Bärenz--Barrett finite-sum endpoints.
 
@@ -120,6 +140,25 @@ structure FiniteSumBinding
       linearEndpoint Side.after closedWindow movingCoefficient
 
 namespace FiniteSumBinding
+
+/--
+Every interpreted finite-sum binding exposes the exact source recipe that
+selected its local move.  This certificate is computed, not supplied.
+-/
+def recipeBinding
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    {window : Window source target metadata countsSound}
+    {𝒞 : PremodularCategory (K := K) (C := C) (S := S)}
+    {η : TensorIdentityAutomorphism C}
+    {sourceCycle : source.DegreeTwoCycle}
+    (_binding : FiniteSumBinding window 𝒞 η sourceCycle) :
+    SourceBoundRecipe.TwoOverTwoStructuralBinding metadata.recipe :=
+  window.recipeStructuralBinding
 
 /--
 The explicit endpoint binding and generalized sliding prove equality of the

@@ -1206,6 +1206,99 @@ structure SourceBoundRecipe
 
 namespace SourceBoundRecipe
 
+/--
+The category-neutral structural binding extracted from one exact 2-over-2
+source recipe.
+
+This record contains only data already checked by `SourceBoundRecipe`: the
+literal common exterior, exact source/target reconstruction, oriented moving
+and stationary components, their common-component correspondence, and their
+ordinary roles.  It contains no category, character, graphical evaluation, or
+scalar equality.
+-/
+structure TwoOverTwoStructuralBinding
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverTwo source target) where
+  commonComponentPrefix : List ComponentSpec
+  sourceComponentWindow : List ComponentSpec
+  targetComponentWindow : List ComponentSpec
+  commonComponentSuffix : List ComponentSpec
+  source_components_sound :
+    source.raw.components =
+      commonComponentPrefix ++ sourceComponentWindow ++
+        commonComponentSuffix
+  target_components_sound :
+    target.raw.components =
+      commonComponentPrefix ++ targetComponentWindow ++
+        commonComponentSuffix
+  commonEventPrefix : List SliceEvent
+  sourceEventWindow : List SliceEvent
+  targetEventWindow : List SliceEvent
+  commonEventSuffix : List SliceEvent
+  source_events_sound :
+    source.raw.events =
+      commonEventPrefix ++ sourceEventWindow ++ commonEventSuffix
+  target_events_sound :
+    target.raw.events =
+      commonEventPrefix ++ targetEventWindow ++ commonEventSuffix
+  source_event_window_nonempty : sourceEventWindow ≠ []
+  target_event_window_nonempty : targetEventWindow ≠ []
+  orientation : BandOrientation
+  slidingTwoHandleId : String
+  stationaryTwoHandleId : String
+  component_ids_distinct :
+    slidingTwoHandleId ≠ stationaryTwoHandleId
+  sameComponents : SameComponentIndexChange source target
+  components :
+    ResolvedSlideComponentPair source target sameComponents
+      slidingTwoHandleId stationaryTwoHandleId
+  sliding_role_sound :
+    (componentAt source components.slidingSourceIndex).role ≠ .dotted
+  stationary_role_sound :
+    (componentAt source components.stationarySourceIndex).role ≠ .dotted
+
+/--
+Build the complete category-neutral 2-over-2 structural binding directly
+from the source recipe.
+
+The dependent pattern match is exhaustive: a recipe indexed by
+`.twoOverTwo` can only contain the 2-over-2 handle edit and matching component
+change.  No new certificate or choice is supplied by the caller.
+-/
+def twoOverTwoStructuralBinding
+    {source target : FormalPresentation}
+    (recipe : SourceBoundRecipe .twoOverTwo source target) :
+    TwoOverTwoStructuralBinding recipe :=
+  match recipe.handleEdit, recipe.componentIndexChange with
+  | .twoOverTwo orientation sliding stationary distinct,
+      .twoOverTwo _ _ _ _ same components slidingRole stationaryRole =>
+      {
+        commonComponentPrefix := recipe.window.commonComponentPrefix
+        sourceComponentWindow := recipe.window.sourceComponentWindow
+        targetComponentWindow := recipe.window.targetComponentWindow
+        commonComponentSuffix := recipe.window.commonComponentSuffix
+        source_components_sound := recipe.window.source_components_sound
+        target_components_sound := recipe.window.target_components_sound
+        commonEventPrefix := recipe.window.commonEventPrefix
+        sourceEventWindow := recipe.window.sourceEventWindow
+        targetEventWindow := recipe.window.targetEventWindow
+        commonEventSuffix := recipe.window.commonEventSuffix
+        source_events_sound := recipe.window.source_events_sound
+        target_events_sound := recipe.window.target_events_sound
+        source_event_window_nonempty :=
+          recipe.window.source_event_window_nonempty
+        target_event_window_nonempty :=
+          recipe.window.target_event_window_nonempty
+        orientation := orientation
+        slidingTwoHandleId := sliding
+        stationaryTwoHandleId := stationary
+        component_ids_distinct := distinct
+        sameComponents := same
+        components := components
+        sliding_role_sound := slidingRole
+        stationary_role_sound := stationaryRole
+      }
+
 /-- Graphical compilation is pinned to the sole shared recipe identity. -/
 def graphicalCompilerRecipeId
     {kind : RecipeKind}

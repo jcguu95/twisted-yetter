@@ -283,6 +283,11 @@
       "timestamp_utc": "2026-07-26T20:37:25-06:00",
       "decision": "Add explicit Bärenz--Barrett finite-sum endpoints and a structural role-aware binding.",
       "reason": "PremodularTwoOverTwoBandEndpoints distinguishes before and after endpoints by constructors, keeps the stationary Kirby-colour sum and all intermediate (z, mu) channels inside the existing generalized-sliding calculation, and proves both fixed-moving-label and complete-moving-sum evaluation equalities without axioms. RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding may bind exact source and target LinearDiagram syntax to those endpoints, but cannot contain an evaluator equality. Its normalized role-aware equality is a theorem derived from those structural bindings and generalized sliding."
+    },
+    {
+      "timestamp_utc": "2026-07-27T02:46:25Z",
+      "decision": "Derive the category-neutral two-over-two structural binding automatically from the sole source recipe.",
+      "reason": "SourceBoundRecipe.twoOverTwoStructuralBinding now exposes the literal common component/event exterior, exact source/target reconstruction, orientation, moving and stationary component IDs, common-component index correspondence, and ordinary-role proofs by exhaustive dependent pattern matching. RoleAwareTwoOverTwoBandMovie.Window.recipeStructuralBinding and FiniteSumBinding.recipeBinding compute this certificate from metadata.recipe, so callers cannot provide an independently drifting topology binding. The remaining endpoint-interpretation obligation is deliberately not hidden here: converting these raw structural windows into the explicit categorical finite-sum endpoints still requires a kernel-checked interpreter theorem."
     }
   ],
   "obligations": {
@@ -291,6 +296,6 @@
     "two_three_birth": "KERNEL_CHECKED_AXIOM_ELIMINATED",
     "two_three_death": "KERNEL_CHECKED_AXIOM_ELIMINATED",
     "framed_isotopy": "TAG_NAMES_PRESENT_TYPED_PARAMETERS_CONTEXTS_AND_INTERMEDIATE_DIAGRAMS_MISSING",
-    "source_bound_slide_movie": "EXPLICIT_FINITE_SUM_ENDPOINTS_AND_NORMALIZED_BINDING_KERNEL_CHECKED; FIXED_LABEL_BAND_CORE_REJECTED; SOURCE_RECIPE_MUST_STILL_CONSTRUCT_THE_STRUCTURAL_FINITE_SUM_BINDING_BEFORE_OLD_AXIOM_CAN_BE_REMOVED"
+    "source_bound_slide_movie": "CATEGORY_NEUTRAL_SOURCE_RECIPE_STRUCTURAL_BINDING_AUTOMATIC_AND_KERNEL_CHECKED; EXPLICIT_FINITE_SUM_ENDPOINTS_AND_NORMALIZED_BINDING_KERNEL_CHECKED; FIXED_LABEL_BAND_CORE_REJECTED; RAW_WINDOW_TO_CATEGORICAL_ENDPOINT_INTERPRETER_THEOREM_REMAINS_BEFORE_OLD_AXIOM_CAN_BE_REMOVED"
   }
 }

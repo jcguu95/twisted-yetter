@@ -17,3 +17,5 @@ theorems must use no project-specific axioms.
 #print axioms TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.RemovedComponentIndexChange.sum_split
 #print axioms TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.RemovedComponentIndexChange.component_product_split
 #print axioms TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.SourceBoundRecipe.graphicalCompilerRecipeId
+#print axioms
+  TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.SourceBoundRecipe.twoOverTwoStructuralBinding
