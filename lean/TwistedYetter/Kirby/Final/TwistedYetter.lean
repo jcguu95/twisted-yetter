@@ -122,8 +122,22 @@ The explicit movie transports the source marking to the target marking.
 
 This is a topology/homology statement only.  It cannot assert equality of
 category evaluations.
+
+This is deliberately a theorem-shaped proof obligation rather than an axiom.
+It should follow by combining:
+
+* Gompf--Stipsicz, Theorem 4.2.12, for the finite Cerf sequence;
+* Durst--Geiges--Kegel, Section 4, for the chain maps induced by handle slides
+  and cancelling-pair births/deaths; and
+* naturality of the handle-chain comparison with singular homology.
+
+We have not yet written that integration proof.  If the cited results do not
+support the exact marked statement for a prescribed diffeomorphism, this may
+have to be promoted back to an explicit topology axiom.  Until that decision
+is made, `sorry` keeps the unresolved proof boundary visible to `#print
+axioms`.
 -/
-axiom kirbyCerfMovie_transports_marking
+theorem kirbyCerfMovie_transports_marking
     {X Y : ClosedOrientedSmoothFourManifold}
     (f : orientedDiffeomorphism.Hom X Y)
     (source : {presentation : Presentation (H₂ X) //
@@ -134,7 +148,8 @@ axiom kirbyCerfMovie_transports_marking
     (kirbyCerfMovie f source target).transport
         (source.1.canonicalPresentation.topology.h2ModelEquiv.symm alpha) =
       target.1.canonicalPresentation.topology.h2ModelEquiv.symm
-        (inducedH₂ f alpha)
+        (inducedH₂ f alpha) := by
+  sorry
 
 end Axioms
 
