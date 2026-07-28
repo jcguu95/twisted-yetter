@@ -8,8 +8,8 @@ fixed-label 2-over-2 theorem is audited separately below: it is derived from
 ordinary Kirby-colour sliding and naturality, not accepted as another axiom.
 -/
 
-#print axioms TwistedYetter.Fusion.EGNO.SphericalInsertionLaw.resolves
-#print axioms TwistedYetter.Fusion.EGNO.RibbonFusionCategoryData.sphericalIdentityResolution
+#print axioms TwistedYetter.Fusion.EGNO.PivotalInsertionLaw.resolves
+#print axioms TwistedYetter.Fusion.EGNO.RibbonFusionCategoryData.pivotalIdentityResolution
 #print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.reverse_primal
 #print axioms TwistedYetter.Fusion.FiniteResolution.DualBasisData.reverse_dual
 #print axioms TwistedYetter.Kirby.EGNOKirbyColorEncircling.CategoryData.encirclingSourcePairingCyclic
@@ -49,6 +49,6 @@ ordinary Kirby-colour sliding and naturality, not accepted as another axiom.
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_ordinaryKirbySliding
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_oneTwoHopfPairSum
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.baerenzBarrett_hopfKirbyKillingFiber
-#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink
+#print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.ribbonFramedKinkEvaluation
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.modularCancellationLaw
 #print axioms TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.build

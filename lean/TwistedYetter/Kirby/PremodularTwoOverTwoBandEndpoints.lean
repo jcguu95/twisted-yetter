@@ -41,7 +41,7 @@ No endpoint equality is stored here.
 -/
 structure ChannelWeightedClosedWindow
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
-    {insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data}
+    {insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data}
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
     (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw) where
   strand : C
@@ -55,7 +55,7 @@ namespace ChannelWeightedClosedWindow
 
 variable
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
-    {insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data}
+    {insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data}
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
     {movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw}
     (window : ChannelWeightedClosedWindow movies)

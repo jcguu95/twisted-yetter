@@ -1,6 +1,6 @@
 import TwistedYetter.Kirby.RoleAwareSameComponentTransport
 import TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
-import TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
+import TwistedYetter.Kirby.FiniteCouponTransport
 import TwistedYetter.Kirby.SelectedCoordinateFiniteSum
 import TwistedYetter.Kirby.TwoOverTwoFusionChannel
 
@@ -23,18 +23,17 @@ open TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentRibbonIsotopy
 open TwistedYetter.Kirby.ComponentRibbonDiagram
-open TwistedYetter.Kirby.EGNOKirbyColorEncircling
+open TwistedYetter.Kirby.FiniteCouponTransport
 open TwistedYetter.Kirby.LinearContext
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
 open TwistedYetter.Kirby.RoleAwareSameComponentTransport
-open TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints
 open TwistedYetter.Kirby.SelectedCoordinateFiniteSum
 open TwistedYetter.Kirby.SimultaneousDottedCutGeometry
 open TwistedYetter.Kirby.SourceBoundLocalMoveRecipe
 open TwistedYetter.Kirby.TwoOverTwoFusionChannel
 
-universe uK uC vC uH
+universe uK uC vC uH uI
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 variable {C : Type uC} [Category.{vC} C] [Abelian C]
@@ -1555,7 +1554,7 @@ theorem positiveChannelSum_in_sourceTermContext
     (window : Window source target metadata countsSound)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (insertionLaw :
-      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+      PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (orientationSound :
@@ -1612,7 +1611,7 @@ theorem negativeChannelSum_in_sourceTermContext
     (window : Window source target metadata countsSound)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (insertionLaw :
-      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+      PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (orientationSound :
@@ -1669,7 +1668,7 @@ theorem positiveChannelSum_in_targetTermContext
     (window : Window source target metadata countsSound)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (insertionLaw :
-      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+      PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (orientationSound :
@@ -1726,7 +1725,7 @@ theorem negativeChannelSum_in_targetTermContext
     (window : Window source target metadata countsSound)
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (insertionLaw :
-      SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+      PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     (sourceCycle : source.DegreeTwoCycle)
     (orientationSound :
@@ -1917,6 +1916,12 @@ theorem targetDecomposition
 end RoleAwareFiniteSumBlocks
 
 /-
+Legacy generalized-sliding route, retained temporarily as archaeology.
+It is deliberately outside the compiled environment: the direct proof below
+uses only fusion completeness, finite coupon transport, and exact endpoint
+contexts.
+
+/-
 These three declarations import the cited category-theory statements.  They
 do not mention a Kirby presentation, a clean band script, a homology class, a
 character exponent, or an evaluator endpoint.
@@ -1930,9 +1935,9 @@ Reference: Bärenz--Barrett, *Dichromatic State Sum Models for
 Four-Manifolds from Pivotal Functors*, Lemma 2.37, equations (2.2.5)--(2.2.6),
 journal page 675.
 -/
-axiom sphericalInsertion
+axiom pivotalInsertion
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
-    SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞
+    PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞
 
 /--
 Compatibility of the pivotal trace pairing with the mate operation.
@@ -1955,9 +1960,9 @@ pointwise Lemma 3.3 fibers and the two Lemma 3.4 naturality inputs.
 noncomputable def labelIndexedMovies
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
     LabelIndexedEncirclingMovies 𝒞
-      (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞) :=
+      (pivotalInsertion 𝒞) (sphericalMateTrace 𝒞) :=
   TwistedYetter.Kirby.EGNOKirbyColorEncircling.labelIndexedEncirclingMovies
-    𝒞 (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
+    𝒞 (pivotalInsertion 𝒞) (sphericalMateTrace 𝒞)
 
 end StandardPremodularBandLaws
 
@@ -2066,7 +2071,7 @@ theorem RoleAwareFiniteSumBlocks.internalChannelWeight_transport
               window 𝒞 η sourceCycle)) :=
   TwoOverTwoFusionChannel.internalCharacterWeight_transport
     𝒞.premodular
-    (StandardPremodularBandLaws.sphericalInsertion 𝒞)
+    (StandardPremodularBandLaws.pivotalInsertion 𝒞)
     (StandardPremodularBandLaws.sphericalMateTrace 𝒞)
     (StandardPremodularBandLaws.labelIndexedMovies 𝒞)
     η movingLabel strand
@@ -2571,5 +2576,1028 @@ theorem CleanWindow.roleAwareCycleEval_eq
           ((Request.twoOverTwo metadata countsSound).targetCycle
             sourceCycle) :=
   endpoint.roleAwareCycleEval_eq
+
+-/
+
+end Window
+
+namespace DirectTwoOverTwo
+
+/--
+The complete pivotal-trace-dual-basis resolution used at attach and detach.
+
+This is the standard pivotal insertion law.  It is category theory, not a
+Kirby-move or evaluator-equality assumption.
+-/
+axiom pivotalInsertion
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
+    PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞
+
+open Window.RoleAwareFiniteSumBlocks
+
+/-- The character-free coefficient outside one resolved `(x,y)` sector. -/
+noncomputable def baseCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) : K :=
+  endpointCoefficient window 𝒞 η sourceCycle remaining
+      𝒞.toFusionCategoryData.unitIndex
+      𝒞.toFusionCategoryData.unitIndex *
+    𝒞.quantumDimension movingLabel *
+    𝒞.quantumDimension stationaryLabel
+
+/-- Positive endpoint weight equals the untwisted coefficient times its two character scalars. -/
+theorem positiveEndpointCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel *
+        orientedCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (-(stationaryExponent window sourceCycle)) := by
+  rw [endpointCoefficient_factor_both]
+  unfold baseCoefficient orientedCharacterScalar
+    CanonicalPresentation.cycleComponentWeight
+    movingExponent stationaryExponent
+  ring
+
+/-- Negative endpoint weight equals the untwisted coefficient times its two character scalars. -/
+theorem negativeEndpointCoefficient
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel =
+      baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel *
+        negativeCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (stationaryExponent window sourceCycle) := by
+  rw [endpointCoefficient_factor_both]
+  unfold baseCoefficient negativeCharacterScalar
+    CanonicalPresentation.cycleComponentWeight
+    movingExponent stationaryExponent
+  ring
+
+/-- Exact source object identification for a positive clean endpoint. -/
+theorem sourcePositiveObject
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive) :
+    ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+      (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel))).denote =
+      OrientedTensorObject 𝒞.premodular movingLabel stationaryLabel := by
+  simpa [OrientedTensorObject] using
+    congrArg (fun boundary : Boundary C => boundary.denote)
+      (sourceLocalBoundary_interpret_positive
+        window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+
+/-- Exact target object identification for a positive clean endpoint. -/
+theorem targetPositiveObject
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive) :
+    ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+      (CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel))).denote =
+      OrientedTensorObject 𝒞.premodular movingLabel stationaryLabel := by
+  simpa [OrientedTensorObject] using
+    congrArg (fun boundary : Boundary C => boundary.denote)
+      (targetLocalBoundary_interpret_positive
+        window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+
+/-- Exact source object identification for a negative clean endpoint. -/
+theorem sourceNegativeObject
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative) :
+    ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+      (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+        (sourceLabeling window remaining movingLabel stationaryLabel))).denote =
+      NegativeTensorObject 𝒞.premodular movingLabel stationaryLabel := by
+  simpa [NegativeTensorObject] using
+    congrArg (fun boundary : Boundary C => boundary.denote)
+      (sourceLocalBoundary_interpret_negative
+        window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+
+/-- Exact target object identification for a negative clean endpoint. -/
+theorem targetNegativeObject
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative) :
+    ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+      (CanonicalPresentation.roleAwareLabelOf 𝒞 target
+        (targetLabeling window remaining movingLabel stationaryLabel))).denote =
+      NegativeTensorObject 𝒞.premodular movingLabel stationaryLabel := by
+  simpa [NegativeTensorObject] using
+    congrArg (fun boundary : Boundary C => boundary.denote)
+      (targetLocalBoundary_interpret_negative
+        window 𝒞 orientationSound remaining movingLabel stationaryLabel)
+
+/-- One positive channel in the exact source exterior. -/
+noncomputable def positiveSourceChannelDiagram
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (channel :
+      OrientedChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram C .unit .unit :=
+  let labeling :=
+    sourceLabeling window remaining movingLabel stationaryLabel
+  Context.plug C
+    (window.sourceTermContext 𝒞 η labeling)
+    (Diagram.coupon "positive-attached-channel"
+      (transportEndomorphism
+        (sourcePositiveObject window 𝒞 remaining movingLabel stationaryLabel
+          orientationSound)
+        (unequalExponentChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (-(stationaryExponent window sourceCycle)) channel)))
+
+/-- The same positive channel in the exact target exterior. -/
+noncomputable def positiveTargetChannelDiagram
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (channel :
+      OrientedChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram C .unit .unit :=
+  let labeling :=
+    targetLabeling window remaining movingLabel stationaryLabel
+  Context.plug C
+    (window.targetTermContext 𝒞 η labeling)
+    (Diagram.coupon "positive-detached-channel"
+      (transportEndomorphism
+        (targetPositiveObject window 𝒞 remaining movingLabel stationaryLabel
+          orientationSound)
+        (unequalExponentChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (-(stationaryExponent window sourceCycle)) channel)))
+
+/-- One negative channel in the exact source exterior. -/
+noncomputable def negativeSourceChannelDiagram
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (channel :
+      NegativeChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram C .unit .unit :=
+  let labeling :=
+    sourceLabeling window remaining movingLabel stationaryLabel
+  Context.plug C
+    (window.sourceTermContext 𝒞 η labeling)
+    (Diagram.coupon "negative-attached-channel"
+      (transportEndomorphism
+        (sourceNegativeObject window 𝒞 remaining movingLabel stationaryLabel
+          orientationSound)
+        (unequalNegativeChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (stationaryExponent window sourceCycle) channel)))
+
+/-- The same negative channel in the exact target exterior. -/
+noncomputable def negativeTargetChannelDiagram
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (channel :
+      NegativeChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram C .unit .unit :=
+  let labeling :=
+    targetLabeling window remaining movingLabel stationaryLabel
+  Context.plug C
+    (window.targetTermContext 𝒞 η labeling)
+    (Diagram.coupon "negative-detached-channel"
+      (transportEndomorphism
+        (targetNegativeObject window 𝒞 remaining movingLabel stationaryLabel
+          orientationSound)
+        (unequalNegativeChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (stationaryExponent window sourceCycle) channel)))
+
+/--
+The sole topology/compiler boundary for the middle of a 2/2 slide.
+
+It supplies a finite ordered event path between the exact attached and
+detached diagrams.  It contains no scalar equality; every event is checked by
+tensor-identity naturality in `FiniteCouponTransport.Path.eval_eq`.
+-/
+structure FiniteTransportCertificate
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) where
+  positive :
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive) →
+    (remaining : Block (S := S) window) →
+    (movingLabel stationaryLabel : S) →
+    (channel :
+      OrientedChannel 𝒞.premodular movingLabel stationaryLabel) →
+      Σ events : List EventKind,
+        Path η (internalChannelExponent window sourceCycle) events
+          (positiveSourceChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)
+          (positiveTargetChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)
+  negative :
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative) →
+    (remaining : Block (S := S) window) →
+    (movingLabel stationaryLabel : S) →
+    (channel :
+      NegativeChannel 𝒞.premodular movingLabel stationaryLabel) →
+      Σ events : List EventKind,
+        Path η (internalChannelExponent window sourceCycle) events
+          (negativeSourceChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)
+          (negativeTargetChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)
+
+/--
+Every clean 2/2 band route meets only finitely many local coupon-transport
+events.  This is the only new Kirby-topology assumption in the direct route.
+-/
+axiom finiteCouponTransportEvents
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) :
+    FiniteTransportCertificate clean.window 𝒞 η sourceCycle
+
+/-- Finite coupon transport preserves every positive channel evaluation. -/
+theorem positive_transport_preserves_evaluation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      clean.window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) clean.window)
+    (movingLabel stationaryLabel : S)
+    (channel :
+      OrientedChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram.eval C
+        (positiveSourceChannelDiagram clean.window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel orientationSound channel) =
+      Diagram.eval C
+        (positiveTargetChannelDiagram clean.window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel orientationSound channel) := by
+  rcases (finiteCouponTransportEvents clean 𝒞 η sourceCycle).positive
+      orientationSound remaining movingLabel stationaryLabel channel with
+    ⟨events, path⟩
+  exact path.eval_eq
+
+/-- Finite coupon transport preserves every negative channel evaluation. -/
+theorem negative_transport_preserves_evaluation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      clean.window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) clean.window)
+    (movingLabel stationaryLabel : S)
+    (channel :
+      NegativeChannel 𝒞.premodular movingLabel stationaryLabel) :
+    Diagram.eval C
+        (negativeSourceChannelDiagram clean.window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel orientationSound channel) =
+      Diagram.eval C
+        (negativeTargetChannelDiagram clean.window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel orientationSound channel) := by
+  rcases (finiteCouponTransportEvents clean 𝒞 η sourceCycle).negative
+      orientationSound remaining movingLabel stationaryLabel channel with
+    ⟨events, path⟩
+  exact path.eval_eq
+
+/--
+Linear-algebra core shared by attach and detach.
+
+If a complete channel resolution evaluates to a scalar character coupon in
+one fixed exterior context, then multiplying by the character-free endpoint
+weight identifies the original identity strand with the fully weighted
+channel sum.  No topology or modularity enters this lemma.
+-/
+theorem weightedResolutionInContext
+    {I : Type uI} [Fintype I]
+    {hole : Boundary C}
+    {T : C}
+    (context : Context C hole hole .unit .unit)
+    (objectSound : hole.denote = T)
+    (channelMorphism : I → (T ⟶ T))
+    (channelName : String)
+    (base character : K)
+    (channelSum :
+      ∑ channel : I,
+          LinearContext.evalContextLinearMap (R := K) context
+            (transportEndomorphism objectSound
+              (channelMorphism channel)) =
+        character •
+          LinearContext.evalContextLinearMap (R := K) context
+            (𝟙 hole.denote)) :
+    (base * character) •
+        Diagram.eval C (Context.plug C context (Diagram.identity hole)) =
+      ∑ channel : I,
+        base • Diagram.eval C
+          (Context.plug C context
+            (Diagram.coupon channelName
+              (transportEndomorphism objectSound
+                (channelMorphism channel)))) := by
+  have localIdentity :
+      Diagram.eval C (Diagram.identity hole) =
+        Diagram.eval C (Diagram.coupon "identity" (𝟙 hole.denote)) := by
+    rfl
+  have identityEval :
+      Diagram.eval C (Context.plug C context (Diagram.identity hole)) =
+        LinearContext.evalContextLinearMap (R := K) context
+          (𝟙 hole.denote) := by
+    calc
+      _ = Diagram.eval C
+          (Context.plug C context
+            (Diagram.coupon "identity" (𝟙 hole.denote))) :=
+        Context.eval_plug_congr C context localIdentity
+      _ = _ :=
+        (LinearContext.evalContextLinearMap_apply
+          (R := K) context "identity" _).symm
+  calc
+    _ = (base * character) •
+        LinearContext.evalContextLinearMap (R := K) context
+          (𝟙 hole.denote) :=
+      congrArg (fun value => (base * character) • value) identityEval
+    _ = base •
+        (character •
+          LinearContext.evalContextLinearMap (R := K) context
+            (𝟙 hole.denote)) := by
+      simp only [smul_smul]
+    _ = base •
+        (∑ channel : I,
+          LinearContext.evalContextLinearMap (R := K) context
+            (transportEndomorphism objectSound
+              (channelMorphism channel))) :=
+      congrArg (fun value => base • value) channelSum.symm
+    _ = _ := by
+      rw [Finset.smul_sum]
+      apply Finset.sum_congr rfl
+      intro channel _
+      rw [LinearContext.evalContextLinearMap_apply]
+
+/--
+Character-aware positive attach: the original `(x,y)` endpoint term equals
+the complete `z,μ` channel sum in the exact source exterior.
+-/
+theorem positive_attach_sector
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
+      Diagram.eval C
+        (CanonicalPresentation.roleAwareTermDiagram
+          𝒞 η source window.sourceGeometry
+          (sourceLabeling window remaining movingLabel stationaryLabel)) =
+      ∑ channel :
+          OrientedChannel 𝒞.premodular movingLabel stationaryLabel,
+        baseCoefficient window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel •
+          Diagram.eval C
+            (positiveSourceChannelDiagram window 𝒞 η sourceCycle remaining
+              movingLabel stationaryLabel orientationSound channel) := by
+  classical
+  let labeling :=
+    sourceLabeling window remaining movingLabel stationaryLabel
+  let objectSound :=
+    sourcePositiveObject window 𝒞 remaining movingLabel stationaryLabel
+      orientationSound
+  have channelSum :=
+    positiveChannelSum_in_sourceTermContext
+      window 𝒞 (pivotalInsertion 𝒞) η sourceCycle orientationSound
+        remaining movingLabel stationaryLabel
+  dsimp only at channelSum
+  unfold globalPositiveEndpointCoupon at channelSum
+  rw [orientedCharacterCoupon_eq_smul_identity,
+    transportEndomorphism_smul_identity, map_smul] at channelSum
+  rw [positiveEndpointCoefficient]
+  rw [Window.sourceTermDiagram_eq_plug_identity]
+  have identityEval :
+      Diagram.eval C
+          (Context.plug C (window.sourceTermContext 𝒞 η labeling)
+            (Diagram.identity
+              ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+                (CanonicalPresentation.roleAwareLabelOf
+                  𝒞 source labeling)))) =
+        LinearContext.evalContextLinearMap (R := K)
+          (window.sourceTermContext 𝒞 η labeling)
+          (𝟙 ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+            (CanonicalPresentation.roleAwareLabelOf 𝒞 source labeling)).denote) := by
+    have localIdentity :
+        Diagram.eval C
+            (Diagram.identity
+              ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+                (CanonicalPresentation.roleAwareLabelOf 𝒞 source labeling))) =
+          Diagram.eval C
+            (Diagram.coupon "identity"
+              (𝟙 ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+                (CanonicalPresentation.roleAwareLabelOf
+                  𝒞 source labeling)).denote)) := by
+      rfl
+    calc
+      _ = Diagram.eval C
+          (Context.plug C (window.sourceTermContext 𝒞 η labeling)
+            (Diagram.coupon "identity"
+              (𝟙 ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+                (CanonicalPresentation.roleAwareLabelOf
+                  𝒞 source labeling)).denote))) :=
+        Context.eval_plug_congr C
+          (window.sourceTermContext 𝒞 η labeling) localIdentity
+      _ = _ :=
+        (LinearContext.evalContextLinearMap_apply
+          (R := K) (window.sourceTermContext 𝒞 η labeling) "identity" _).symm
+  dsimp only [labeling] at identityEval
+  calc
+    _ = (baseCoefficient window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel *
+          orientedCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (-(stationaryExponent window sourceCycle))) •
+        LinearContext.evalContextLinearMap (R := K)
+          (window.sourceTermContext 𝒞 η
+            (sourceLabeling window remaining movingLabel stationaryLabel))
+          (𝟙 ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+            (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+              (sourceLabeling window remaining
+                movingLabel stationaryLabel))).denote) :=
+      congrArg
+        (fun value =>
+          (baseCoefficient window 𝒞 η sourceCycle remaining
+              movingLabel stationaryLabel *
+            orientedCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+              (movingExponent window sourceCycle)
+              (-(stationaryExponent window sourceCycle))) • value)
+        identityEval
+    _ = baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel •
+        (orientedCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+            (movingExponent window sourceCycle)
+            (-(stationaryExponent window sourceCycle)) •
+          LinearContext.evalContextLinearMap (R := K)
+            (window.sourceTermContext 𝒞 η
+              (sourceLabeling window remaining movingLabel stationaryLabel))
+            (𝟙 ((roleAwareLocalBoundary metadata countsSound).interpret 𝒞
+              (CanonicalPresentation.roleAwareLabelOf 𝒞 source
+                (sourceLabeling window remaining
+                  movingLabel stationaryLabel))).denote)) := by
+      simp only [smul_smul]
+    _ = baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel •
+        (∑ channel :
+            OrientedChannel 𝒞.premodular movingLabel stationaryLabel,
+          LinearContext.evalContextLinearMap (R := K)
+            (window.sourceTermContext 𝒞 η
+              (sourceLabeling window remaining movingLabel stationaryLabel))
+            (transportEndomorphism objectSound
+              (unequalExponentChannelMorphism
+                𝒞.premodular η movingLabel stationaryLabel
+                (movingExponent window sourceCycle)
+                (-(stationaryExponent window sourceCycle)) channel))) :=
+      congrArg
+        (fun value =>
+          baseCoefficient window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel • value)
+        channelSum.symm
+    _ = _ := by
+      rw [Finset.smul_sum]
+      apply Finset.sum_congr rfl
+      intro channel _
+      rw [LinearContext.evalContextLinearMap_apply]
+      rfl
+
+/--
+Character-aware negative attach, with residual exponent `a-b` and internal
+channel coupon `η_z^b`.
+-/
+theorem negative_attach_sector
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient
+        window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
+      Diagram.eval C
+        (CanonicalPresentation.roleAwareTermDiagram
+          𝒞 η source window.sourceGeometry
+          (sourceLabeling window remaining movingLabel stationaryLabel)) =
+      ∑ channel :
+          NegativeChannel 𝒞.premodular movingLabel stationaryLabel,
+        baseCoefficient window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel •
+          Diagram.eval C
+            (negativeSourceChannelDiagram window 𝒞 η sourceCycle remaining
+              movingLabel stationaryLabel orientationSound channel) := by
+  classical
+  let labeling :=
+    sourceLabeling window remaining movingLabel stationaryLabel
+  let objectSound :=
+    sourceNegativeObject window 𝒞 remaining movingLabel stationaryLabel
+      orientationSound
+  have channelSum :=
+    negativeChannelSum_in_sourceTermContext
+      window 𝒞 (pivotalInsertion 𝒞) η sourceCycle orientationSound
+        remaining movingLabel stationaryLabel
+  dsimp only at channelSum
+  rw [negativeCharacterCoupon_eq_smul_identity,
+    transportEndomorphism_smul_identity, map_smul] at channelSum
+  rw [negativeEndpointCoefficient]
+  rw [Window.sourceTermDiagram_eq_plug_identity]
+  simpa only [negativeSourceChannelDiagram] using
+    weightedResolutionInContext
+      (window.sourceTermContext 𝒞 η labeling)
+      objectSound
+      (fun channel =>
+        unequalNegativeChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (stationaryExponent window sourceCycle) channel)
+      "negative-attached-channel"
+      (baseCoefficient window 𝒞 η sourceCycle remaining
+        movingLabel stationaryLabel)
+      (negativeCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+        (movingExponent window sourceCycle)
+        (stationaryExponent window sourceCycle))
+      channelSum
+
+/--
+Character-aware positive detach: the transported channel sum recombines into
+the exact target endpoint term.
+-/
+theorem positive_detach_sector
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .positive)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (∑ channel :
+        OrientedChannel 𝒞.premodular movingLabel stationaryLabel,
+      baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel •
+        Diagram.eval C
+          (positiveTargetChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)) =
+      endpointCoefficient
+          window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
+        Diagram.eval C
+          (CanonicalPresentation.roleAwareTermDiagram
+            𝒞 η target window.targetGeometry
+            (targetLabeling window remaining
+              movingLabel stationaryLabel)) := by
+  classical
+  let labeling :=
+    targetLabeling window remaining movingLabel stationaryLabel
+  let objectSound :=
+    targetPositiveObject window 𝒞 remaining movingLabel stationaryLabel
+      orientationSound
+  have channelSum :=
+    positiveChannelSum_in_targetTermContext
+      window 𝒞 (pivotalInsertion 𝒞) η sourceCycle orientationSound
+        remaining movingLabel stationaryLabel
+  dsimp only at channelSum
+  unfold globalPositiveEndpointCoupon at channelSum
+  rw [orientedCharacterCoupon_eq_smul_identity,
+    transportEndomorphism_smul_identity, map_smul] at channelSum
+  rw [positiveEndpointCoefficient]
+  rw [Window.targetTermDiagram_eq_plug_identity]
+  simpa only [positiveTargetChannelDiagram] using
+    (weightedResolutionInContext
+      (window.targetTermContext 𝒞 η labeling)
+      objectSound
+      (fun channel =>
+        unequalExponentChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (-(stationaryExponent window sourceCycle)) channel)
+      "positive-detached-channel"
+      (baseCoefficient window 𝒞 η sourceCycle remaining
+        movingLabel stationaryLabel)
+      (orientedCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+        (movingExponent window sourceCycle)
+        (-(stationaryExponent window sourceCycle)))
+      channelSum).symm
+
+/--
+Character-aware negative detach, restoring the target exponent transport from
+the same channel formula used at attach.
+-/
+theorem negative_detach_sector
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (window : Window source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (orientationSound :
+      window.recipeStructuralBinding.orientation = .negative)
+    (remaining : Block (S := S) window)
+    (movingLabel stationaryLabel : S) :
+    (∑ channel :
+        NegativeChannel 𝒞.premodular movingLabel stationaryLabel,
+      baseCoefficient window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel •
+        Diagram.eval C
+          (negativeTargetChannelDiagram window 𝒞 η sourceCycle remaining
+            movingLabel stationaryLabel orientationSound channel)) =
+      endpointCoefficient
+          window 𝒞 η sourceCycle remaining movingLabel stationaryLabel •
+        Diagram.eval C
+          (CanonicalPresentation.roleAwareTermDiagram
+            𝒞 η target window.targetGeometry
+            (targetLabeling window remaining
+              movingLabel stationaryLabel)) := by
+  classical
+  let labeling :=
+    targetLabeling window remaining movingLabel stationaryLabel
+  let objectSound :=
+    targetNegativeObject window 𝒞 remaining movingLabel stationaryLabel
+      orientationSound
+  have channelSum :=
+    negativeChannelSum_in_targetTermContext
+      window 𝒞 (pivotalInsertion 𝒞) η sourceCycle orientationSound
+        remaining movingLabel stationaryLabel
+  dsimp only at channelSum
+  rw [negativeCharacterCoupon_eq_smul_identity,
+    transportEndomorphism_smul_identity, map_smul] at channelSum
+  rw [negativeEndpointCoefficient]
+  rw [Window.targetTermDiagram_eq_plug_identity]
+  simpa only [negativeTargetChannelDiagram] using
+    (weightedResolutionInContext
+      (window.targetTermContext 𝒞 η labeling)
+      objectSound
+      (fun channel =>
+        unequalNegativeChannelMorphism
+          𝒞.premodular η movingLabel stationaryLabel
+          (movingExponent window sourceCycle)
+          (stationaryExponent window sourceCycle) channel)
+      "negative-detached-channel"
+      (baseCoefficient window 𝒞 η sourceCycle remaining
+        movingLabel stationaryLabel)
+      (negativeCharacterScalar 𝒞.premodular η movingLabel stationaryLabel
+        (movingExponent window sourceCycle)
+        (stationaryExponent window sourceCycle))
+      channelSum).symm
+
+/--
+One fixed `(remaining,x,y)` sector is invariant under the complete
+attach--finite-transport--detach movie.
+-/
+theorem sector_preserves_evaluation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) clean.window)
+    (movingLabel stationaryLabel : S) :
+    endpointCoefficient clean.window 𝒞 η sourceCycle remaining
+        movingLabel stationaryLabel •
+      Diagram.eval C
+        (CanonicalPresentation.roleAwareTermDiagram
+          𝒞 η source clean.window.sourceGeometry
+          (sourceLabeling clean.window remaining
+            movingLabel stationaryLabel)) =
+      endpointCoefficient clean.window 𝒞 η sourceCycle remaining
+          movingLabel stationaryLabel •
+        Diagram.eval C
+          (CanonicalPresentation.roleAwareTermDiagram
+            𝒞 η target clean.window.targetGeometry
+            (targetLabeling clean.window remaining
+              movingLabel stationaryLabel)) := by
+  classical
+  cases orientationSound :
+      clean.window.recipeStructuralBinding.orientation with
+  | positive =>
+      calc
+        _ = ∑ channel :
+              OrientedChannel 𝒞.premodular movingLabel stationaryLabel,
+            baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel •
+              Diagram.eval C
+                (positiveSourceChannelDiagram clean.window 𝒞 η sourceCycle
+                  remaining movingLabel stationaryLabel
+                    orientationSound channel) :=
+          positive_attach_sector clean.window 𝒞 η sourceCycle
+            orientationSound remaining movingLabel stationaryLabel
+        _ = ∑ channel :
+              OrientedChannel 𝒞.premodular movingLabel stationaryLabel,
+            baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel •
+              Diagram.eval C
+                (positiveTargetChannelDiagram clean.window 𝒞 η sourceCycle
+                  remaining movingLabel stationaryLabel
+                    orientationSound channel) := by
+          apply Finset.sum_congr rfl
+          intro channel _
+          exact congrArg
+            (fun value =>
+              baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel • value)
+            (positive_transport_preserves_evaluation
+              clean 𝒞 η sourceCycle orientationSound remaining
+                movingLabel stationaryLabel channel)
+        _ = _ :=
+          positive_detach_sector clean.window 𝒞 η sourceCycle
+            orientationSound remaining movingLabel stationaryLabel
+  | negative =>
+      calc
+        _ = ∑ channel :
+              NegativeChannel 𝒞.premodular movingLabel stationaryLabel,
+            baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel •
+              Diagram.eval C
+                (negativeSourceChannelDiagram clean.window 𝒞 η sourceCycle
+                  remaining movingLabel stationaryLabel
+                    orientationSound channel) :=
+          negative_attach_sector clean.window 𝒞 η sourceCycle
+            orientationSound remaining movingLabel stationaryLabel
+        _ = ∑ channel :
+              NegativeChannel 𝒞.premodular movingLabel stationaryLabel,
+            baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel •
+              Diagram.eval C
+                (negativeTargetChannelDiagram clean.window 𝒞 η sourceCycle
+                  remaining movingLabel stationaryLabel
+                    orientationSound channel) := by
+          apply Finset.sum_congr rfl
+          intro channel _
+          exact congrArg
+            (fun value =>
+              baseCoefficient clean.window 𝒞 η sourceCycle remaining
+                movingLabel stationaryLabel • value)
+            (negative_transport_preserves_evaluation
+              clean 𝒞 η sourceCycle orientationSound remaining
+                movingLabel stationaryLabel channel)
+        _ = _ :=
+          negative_detach_sector clean.window 𝒞 η sourceCycle
+            orientationSound remaining movingLabel stationaryLabel
+
+/-- Every fixed remaining-label block is invariant. -/
+theorem block_preserves_evaluation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle)
+    (remaining : Block (S := S) clean.window) :
+    LinearDiagram.eval
+        (sourceBlock clean.window 𝒞 η sourceCycle remaining) =
+      LinearDiagram.eval
+        (targetBlock clean.window 𝒞 η sourceCycle remaining) := by
+  classical
+  rw [targetBlock_eq_commonCoefficient]
+  unfold sourceBlock
+  simp only [map_sum, map_smul, LinearDiagram.eval_atom]
+  apply Finset.sum_congr rfl
+  intro movingLabel _
+  apply Finset.sum_congr rfl
+  intro stationaryLabel _
+  exact sector_preserves_evaluation clean 𝒞 η sourceCycle remaining
+    movingLabel stationaryLabel
+
+/-- The complete source and target role-aware finite sums have equal evaluation. -/
+theorem linearDiagram_preserves_evaluation
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    {metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology}
+    {countsSound : source.topology.counts = target.topology.counts}
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) :
+    LinearDiagram.eval
+        (CanonicalPresentation.roleAwareLinearDiagram
+          𝒞 η source clean.window.sourceGeometry sourceCycle) =
+      LinearDiagram.eval
+        (CanonicalPresentation.roleAwareLinearDiagram
+          𝒞 η target clean.window.targetGeometry
+            ((Request.twoOverTwo metadata countsSound).targetCycle
+              sourceCycle)) := by
+  classical
+  rw [sourceDecomposition, targetDecomposition]
+  simp only [map_sum]
+  apply Finset.sum_congr rfl
+  intro remaining _
+  exact block_preserves_evaluation clean 𝒞 η sourceCycle remaining
+
+/--
+The source-bound role-aware premodular evaluator is invariant under a clean
+2/2 slide.  This is the public theorem assembled from attach, finite coupon
+transport, and detach.
+-/
+theorem roleAwareCycleEval_eq
+    {H2 : Type uH} [AddCommGroup H2]
+    {source target : CanonicalPresentation H2}
+    (metadata :
+      KirbyCompleteness.TableTwoMoveMetadata
+        .twoOverTwo source.topology target.topology)
+    (countsSound : source.topology.counts = target.topology.counts)
+    (clean : CleanWindow source target metadata countsSound)
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (sourceCycle : source.DegreeTwoCycle) :
+    CanonicalPresentation.roleAwareCycleEval
+        𝒞 η source clean.window.sourceGeometry sourceCycle =
+      CanonicalPresentation.roleAwareCycleEval
+        𝒞 η target clean.window.targetGeometry
+          ((Request.twoOverTwo metadata countsSound).targetCycle
+            sourceCycle) :=
+  roleAwareCycleEval_eq_of_linearDiagram_eval_eq
+    𝒞 η clean.window.sourceGeometry clean.window.targetGeometry
+      countsSound sourceCycle
+      ((Request.twoOverTwo metadata countsSound).targetCycle sourceCycle)
+      (linearDiagram_preserves_evaluation clean 𝒞 η sourceCycle)
+
+end DirectTwoOverTwo
 
 end TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie

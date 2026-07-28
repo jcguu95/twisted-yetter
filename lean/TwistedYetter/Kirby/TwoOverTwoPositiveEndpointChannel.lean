@@ -321,7 +321,7 @@ The full internal-channel identity holds inside the exact source exterior.
 -/
 theorem sourceChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -370,7 +370,7 @@ exterior.
 -/
 theorem targetChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -418,7 +418,7 @@ The exact source exterior with two independent character exponents.
 -/
 theorem sourceUnequalExponentChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -468,7 +468,7 @@ The exact target exterior with two independent character exponents.
 -/
 theorem targetUnequalExponentChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -519,7 +519,7 @@ handle-chain cycle.
 -/
 theorem sourceGlobalPositiveEndpointResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -576,7 +576,7 @@ The positive target endpoint with exponents read from the transported cycle.
 -/
 theorem targetGlobalPositiveEndpointResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -634,7 +634,7 @@ admits the explicit arbitrary-exponent channel resolution.
 -/
 theorem sourceExactEndpointChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -692,7 +692,7 @@ admits the corresponding explicit channel resolution.
 -/
 theorem targetExactEndpointChannelResolution
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} 𝒞)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} 𝒞)
     (η : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}

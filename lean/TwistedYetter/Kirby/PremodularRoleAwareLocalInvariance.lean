@@ -212,10 +212,8 @@ theorem elementaryMove_invariant
               rw [← sourceGeometry, ← targetGeometry]
               simpa [topologyMove, transport, sourceCycle, targetCycle,
                 CanonicalSourceBoundSlideMovie.Request.targetCycle] using
-                clean.roleAwareCycleEval_eq
-                  metadata countsSound 𝒞 η sourceCycle
-                    (RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.resolve
-                      metadata countsSound clean sourceCycle)
+                RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.roleAwareCycleEval_eq
+                  metadata countsSound clean 𝒞 η sourceCycle
         _ = _ := by
               apply roleAwareCycleEval_eq_roleAwareEvalH2
               simpa [ElementaryMove.transport, ElementaryMove.forget,

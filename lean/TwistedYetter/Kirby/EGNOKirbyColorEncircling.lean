@@ -1,4 +1,4 @@
-import TwistedYetter.Fusion.EGNOSphericalInsertion
+import TwistedYetter.Fusion.EGNOPivotalInsertion
 import TwistedYetter.Kirby.EGNOKirbyColorExpansion
 import TwistedYetter.Kirby.FramedEncirclingTransport
 import TwistedYetter.Kirby.KirbyColorEncirclingTransport
@@ -17,7 +17,7 @@ label.  The forward insertion, mate transport, and inverse insertion are
 derived from:
 
 * a ribbon fusion category;
-* the all-objects spherical insertion law;
+* the all-objects pivotal insertion law;
 * the all-objects spherical mate trace law.
 
 Only the framed graphical movies remain a separate all-label input.  No field
@@ -169,7 +169,7 @@ noncomputable def encirclingBackwardBasis
 
 /-- Forward dimension-weighted insertion is an instance of the global law. -/
 theorem encirclingForwardSound
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (x y : S) :
     ∑ z, ∑ i : EncirclingChannelIndex data x y z,
       data.quantumDimension z •
@@ -182,7 +182,7 @@ theorem encirclingForwardSound
 
 /-- Inverse insertion after the mate change is derived from the same law. -/
 theorem encirclingBackwardSound
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x z : S) :
     ∑ y, ∑ i : EncirclingChannelIndex data x y z,
@@ -206,7 +206,7 @@ The Kirby-colour encircling algebra for one actual simple label `x`.
 Every algebraic equality is now derived from the two global standard laws.
 -/
 noncomputable def encirclingTransportData
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S) :
     EncirclingTransportData
@@ -247,7 +247,7 @@ not a field of this structure.
 -/
 structure LabelIndexedEncirclingMovies
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical) where
   family :
     (x : S) →
@@ -270,41 +270,27 @@ There is no source category, target category, or pivotal functor parameter.
   equality and target-endpoint naturality.
 
 The insertion and mate/trace equalities inside this calculation are supplied
-separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
+separately by `PivotalInsertionLaw` and `SphericalMateTraceLaw`.
 -/
 namespace LiteratureInput
 
 /--
-Assembly target for the identity-functor Kirby-colour encircling calculation.
+Legacy identity-functor Kirby-colour encircling input.
 
-The former declaration was one axiom returning the entire `EncirclingTransportFiber`.
-That hid five independent obligations.  It is now deliberately an unfinished
-definition whose constructor exposes them separately:
-
-1. the canonical forward insertion context;
-2. the canonical backward insertion context;
-3. the canonical braided intermediate channel;
-4. the braiding-naturality movie;
-5. the pivotal mate movie.
-
-This definition intentionally does not compile until those five graphical
-constructions are implemented.  No `sorry`, replacement equality axiom, or
-arbitrary context witness is admitted.
+The role-aware premodular 2/2 proof does not use this declaration.  It remains
+an explicit axiom only so archived modular encircling routes continue to
+compile while the direct attach--finite-transport--detach route is audited
+separately.
 -/
-noncomputable def kirbyColorEncirclingFiber
+axiom kirbyColorEncirclingFiber
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     (strand : C) :
     EncirclingTransportFiber
       (CategoryData.encirclingTransportData data insertionLaw mateLaw x)
-      strand := by
-  constructor
-  case insertion_source_ref =>
-    exact "ref:baerenz-barrett-dichromatic-2018"
-  case insertion_source_locator =>
-    exact "Lemma 3.3, equations (3.1.3)-(3.1.8), journal pages 681-683"
+      strand
 
 /--
 Naturality of the right endpoint in the exposed object `A`.
@@ -317,7 +303,7 @@ equation (3.1.11), journal page 684.
 -/
 axiom targetEncircling_natural
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     {A B : C}
@@ -337,7 +323,7 @@ endpoint.  Target naturality therefore implies source naturality.
 -/
 theorem sourceEncircling_natural
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     {A B : C}
@@ -374,7 +360,7 @@ indexing and supplies the provenance fields.
 -/
 noncomputable def labelIndexedEncirclingMovies
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical) :
     LabelIndexedEncirclingMovies data insertionLaw mateLaw where
   family x :=
@@ -397,7 +383,7 @@ namespace LabelIndexedEncirclingMovies
 
 variable
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
-    {insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data}
+    {insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data}
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
 
 /--

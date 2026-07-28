@@ -14,124 +14,31 @@ axioms.
   TwistedYetter.Kirby.RoleAwareRepresentativeIndependence.Presentation.roleAwareCycleEval_respects_homology_class
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.unequalExponentChannelDiagram_eval
+  TwistedYetter.Kirby.FiniteCouponTransport.Event.eval_eq
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.unequalNegativeChannelDiagram_eval
+  TwistedYetter.Kirby.FiniteCouponTransport.Path.eval_eq
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.externalCharacterCoupon_bandTransport
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.positive_attach_sector
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.externalCharacterCoupon_bandTransport_inContext
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.negative_attach_sector
 
 #print axioms
-  TwistedYetter.Kirby.KirbyColorEncirclingTransport.EncirclingTransportFiber.channelWeighted_transport
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.positive_transport_preserves_evaluation
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterWeight_transport
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.negative_transport_preserves_evaluation
 
 #print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterWeight_transport_inContext
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.positive_detach_sector
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.internalChannelWeight_transport
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.negative_detach_sector
 
 #print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.canonicalChannelWeightedWindow
-
-#print axioms
-  TwistedYetter.Kirby.PremodularTwoOverTwoBandEndpoints.ChannelWeightedClosedWindow.linear_eval_eq
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.labelIndexedMovies
-
-#print axioms
-  TwistedYetter.Fusion.EGNO.PremodularCategory.globalDimension_ne_zero
-
-#print axioms
-  TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.shum_ribbonFramedKink
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.FiniteSumBinding.roleAwareCycleEval_eq
-
-#print axioms
-  TwistedYetter.Kirby.SourceBoundLocalMoveRecipe.SourceBoundRecipe.twoOverTwoStructuralBinding
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.recipeStructuralBinding
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.sourceDecomposition
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.targetDecomposition
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.endpointCoefficient_eq_movingCoefficient_mul_channel
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.positiveChannelSum_in_sourceTermContext
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.negativeChannelSum_in_sourceTermContext
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.positiveChannelSum_in_targetTermContext
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.negativeChannelSum_in_targetTermContext
-
-#print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_negativeChannelCouponMorphism
-
-#print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism
-
-#print axioms
-  TwistedYetter.Kirby.TwoOverTwoFusionChannel.sum_unequalNegativeChannelMorphism_inBoundaryContext
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_source_activeStrands
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.attach_target_activeStrands
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.detach_source_activeStrands
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.detach_target_activeStrands
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.source_componentTermDiagram_split
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.CleanWindow.target_componentTermDiagram_split
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.AttachDetachInterpretation.toFiniteSumBinding
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.Window.AttachDetachInterpretation.roleAwareCycleEval_eq
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.CleanEndpointInterpretation.attach_fixedMovingLabel
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.CleanEndpointInterpretation.detach_fixedMovingLabel
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.attach_preserves_evaluation
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.detach_preserves_evaluation
-#print axioms
-  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.TwoOverTwoAttachDetach.resolve
+  TwistedYetter.Kirby.RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.roleAwareCycleEval_eq
 
 #print axioms
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant

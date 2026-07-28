@@ -608,7 +608,7 @@ theorem eval_eq
         TwistedYetter.Kirby.PresentationIsotopy.associatorHomDiagram,
         TwistedYetter.Kirby.PresentationIsotopy.rightUnitorHomDiagram,
         Diagram.eval, Boundary.denote] using
-        (shum_ribbonFramedKink 𝒞).positive_sound X
+        (ribbonFramedKinkEvaluation 𝒞).positive_sound X
   | framedNegative componentId =>
       let X := 𝒞.premodular.simple (labelOf componentId)
       simpa [FreeTemplates.negativeKink, ComponentDiagram.interpret,
@@ -617,7 +617,7 @@ theorem eval_eq
         TwistedYetter.Kirby.PresentationIsotopy.associatorHomDiagram,
         TwistedYetter.Kirby.PresentationIsotopy.rightUnitorHomDiagram,
         Diagram.eval, Boundary.denote] using
-        (shum_ribbonFramedKink 𝒞).negative_sound X
+        (ribbonFramedKinkEvaluation 𝒞).negative_sound X
   | eraseIdentityCoupon couponId boundary =>
       simp [ComponentDiagram.interpret, Diagram.eval]
   | surroundPairComp firstStrand secondStrand suffix first second =>

@@ -18,7 +18,7 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 #check fun
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertion : SphericalInsertionLaw data)
+    (insertion : PivotalInsertionLaw data)
     (mate : SphericalMateTraceLaw (K := K) data.spherical) =>
   CategoryData.encirclingTransportData data insertion mate (ordinary data)
 

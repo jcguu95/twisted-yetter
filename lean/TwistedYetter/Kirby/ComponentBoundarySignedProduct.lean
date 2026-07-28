@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.ComponentBoundaryCharacter
+import TwistedYetter.Kirby.ComponentDottedEncircling
 
 /-!
 # Reindexing signed puncture products
@@ -77,7 +78,7 @@ theorem signedProduct_eq_indexedProduct
           (signedMultiplicity (idOf index) boundary * coefficient) := by
   induction boundary with
   | unit =>
-      simp [signedProduct]
+      simp [signedProduct, signedMultiplicity]
   | atom component =>
       cases component with
       | mk componentId orientation =>

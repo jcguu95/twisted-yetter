@@ -1,11 +1,11 @@
 import TwistedYetter.Fusion.EGNOTensorAutomorphism
+import TwistedYetter.Fusion.EGNOPivotalInsertion
 import TwistedYetter.Kirby.CategoricalTangle
 import TwistedYetter.Kirby.ComponentBoundaryCharacter
 import TwistedYetter.Kirby.ComponentRibbonDiagram
-import TwistedYetter.Kirby.EGNOKirbyColorEncircling
-import TwistedYetter.Kirby.KirbyColorEncirclingTransport
 import TwistedYetter.Kirby.LinearContext
 import TwistedYetter.Kirby.LinearDiagram
+import TwistedYetter.Kirby.ModularVacuumProjector
 
 /-!
 # Explicit fusion channels for the twisted two-over-two calculation
@@ -31,8 +31,6 @@ open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentBoundaryCharacter
 open TwistedYetter.Kirby.ComponentRibbonDiagram
-open TwistedYetter.Kirby.EGNOKirbyColorEncircling
-open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.LinearContext
 open TwistedYetter.Kirby.LinearDiagram
 open TwistedYetter.Kirby.ModularVacuumProjector
@@ -50,7 +48,7 @@ local instance twoOverTwoFusionChannelRightRigid : RightRigidCategory C :=
   (inferInstance : RigidCategory C).toRightRigidCategory
 
 /-!
-## Character weights on the internal encircling channel
+## Character weights on the internal fusion channel
 
 The `z` below is the simple label on the edge between the two trivalent
 coupons.  It is not an exterior strand and not a third Kirby component.
@@ -63,67 +61,6 @@ noncomputable def internalCharacterWeight
     (exponent : ℤ)
     (z : S) : K :=
   data.toFusionCategoryData.automorphismScalarPower η z exponent
-
-/--
-The Kirby-colour encircling calculation transports the actual
-homological character weight on the internal fusion channel.
-
-This theorem does not identify a role-aware Kirby-presentation endpoint.
-It closes only the categorical calculation after a clean endpoint has been
-expanded into the source, inserted, braided, mated, and target sums.
--/
-theorem internalCharacterWeight_transport
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
-    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
-    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw)
-    (η : TensorIdentityAutomorphism C)
-    (movingLabel : S)
-    (strand : C)
-    (exponent : ℤ) :
-    LinearDiagram.eval
-        ((movies.family movingLabel).fiber strand
-          |>.channelWeightedInsertedSum
-            (internalCharacterWeight data η exponent)) =
-      LinearDiagram.eval
-        ((movies.family movingLabel).fiber strand
-          |>.channelWeightedTargetSum
-            (internalCharacterWeight data η exponent)) :=
-  ((movies.family movingLabel).fiber strand).channelWeighted_transport
-    (internalCharacterWeight data η exponent)
-
-/--
-The same internal-character transport remains valid after inserting the
-encircling calculation into an arbitrary unchanged exterior.
--/
-theorem internalCharacterWeight_transport_inContext
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
-    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
-    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw)
-    (η : TensorIdentityAutomorphism C)
-    (movingLabel : S)
-    (strand : C)
-    (exponent : ℤ)
-    {wholeSource wholeTarget : Boundary C}
-    (context :
-      Context C
-        (.atom (data.simple movingLabel ⊗ strand))
-        (.atom (data.simple movingLabel ⊗ strand))
-        wholeSource wholeTarget) :
-    evalContextLinearMap (R := K) context
-        (LinearDiagram.eval
-          ((movies.family movingLabel).fiber strand
-            |>.channelWeightedInsertedSum
-              (internalCharacterWeight data η exponent))) =
-      evalContextLinearMap (R := K) context
-        (LinearDiagram.eval
-          ((movies.family movingLabel).fiber strand
-            |>.channelWeightedTargetSum
-              (internalCharacterWeight data η exponent))) :=
-  congrArg (evalContextLinearMap (R := K) context)
-    (internalCharacterWeight_transport
-      data insertionLaw mateLaw movies η movingLabel strand exponent)
 
 /-- The actual object meeting the two trivalent coupons. -/
 abbrev TensorObject
@@ -317,8 +254,8 @@ theorem resolvedCharacterDiagram_eval
 /-!
 ## The oriented trace-dual resolution used by the actual 2/2 slide
 
-The generic biproduct resolution above is useful algebra, but the
-The encircling transport has a specific orientation. Its insertion object is
+The generic biproduct resolution above is useful algebra, but the oriented
+transport has a specific orientation. Its insertion object is
 `x ⊗ yᘁ`; its dual basis is normalized by pivotal trace; and consequently the
 `z`-channel carries the quantum-dimension factor `d_z`.
 -/
@@ -340,6 +277,16 @@ abbrev OrientedChannel
     (x y : S) : Type vC :=
   Σ z, data.InsertionIndex
     (data.simple x ⊗ (data.simple y)ᘁ) z
+
+/--
+The trace-dual basis for the oriented tensor object, obtained directly from
+the fusion-category insertion data.  No Kirby-colour encircling structure is
+involved.
+-/
+noncomputable def orientedForwardBasis
+    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
+    (x y z : S) :=
+  data.insertionDualBasis (OrientedTensorObject data x y) z
 
 /-- A fixed free boundary realizing the oriented pair `x ⊗ yᘁ`. -/
 private def orientedBoundary : ComponentBoundary :=
@@ -431,7 +378,7 @@ theorem orientedCharacterCoupon_eq_smul_identity
 
 /--
 One visible trace-dual channel, including the `d_z` coefficient required by
-the spherical insertion law.
+the pivotal insertion law.
 -/
 noncomputable def orientedChannelMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
@@ -441,10 +388,10 @@ noncomputable def orientedChannelMorphism
     (channel : OrientedChannel data x y) :
     OrientedTensorObject data x y ⟶ OrientedTensorObject data x y :=
   data.quantumDimension channel.1 •
-    ((CategoryData.encirclingForwardBasis data x y channel.1).primal channel.2 ≫
+    ((orientedForwardBasis data x y channel.1).primal channel.2 ≫
       (orientedCharacterScalar data η x y xExponent yExponent •
         𝟙 (data.simple channel.1)) ≫
-      (CategoryData.encirclingForwardBasis data x y channel.1).dual channel.2)
+      (orientedForwardBasis data x y channel.1).dual channel.2)
 
 /--
 After summing every simple channel `z` and every multiplicity coordinate
@@ -453,7 +400,7 @@ oriented character coupon.
 -/
 theorem sum_orientedChannelMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (xExponent yExponent : ℤ) :
@@ -471,8 +418,8 @@ theorem sum_orientedChannelMorphism
           (∑ z, ∑ i : data.InsertionIndex
               (data.simple x ⊗ (data.simple y)ᘁ) z,
             data.quantumDimension z •
-              ((CategoryData.encirclingForwardBasis data x y z).primal i ≫
-                (CategoryData.encirclingForwardBasis data x y z).dual i)) by
+              ((orientedForwardBasis data x y z).primal i ≫
+                (orientedForwardBasis data x y z).dual i)) by
     rw [Fintype.sum_sigma]
     simp only [orientedChannelMorphism, Finset.smul_sum]
     apply Finset.sum_congr rfl
@@ -487,7 +434,8 @@ theorem sum_orientedChannelMorphism
     rw [mul_comm
       (data.quantumDimension z)
       (orientedCharacterScalar data η x y xExponent yExponent)]]
-  rw [CategoryData.encirclingForwardSound data insertionLaw x y]
+  rw [insertionLaw.resolves
+    (OrientedTensorObject data x y) (orientedForwardBasis data x y)]
 
 /--
 Integral powers of a tensor-identity automorphism remain natural.  This is
@@ -582,10 +530,10 @@ noncomputable def orientedChannelCouponMorphism
     (channel : OrientedChannel data x y) :
     OrientedTensorObject data x y ⟶ OrientedTensorObject data x y :=
   data.quantumDimension channel.1 •
-    ((CategoryData.encirclingForwardBasis data x y channel.1).primal channel.2 ≫
+    ((orientedForwardBasis data x y channel.1).primal channel.2 ≫
       data.toFusionCategoryData.automorphismCouponPower
         η channel.1 exponent ≫
-      (CategoryData.encirclingForwardBasis data x y channel.1).dual channel.2)
+      (orientedForwardBasis data x y channel.1).dual channel.2)
 
 /--
 The full `d_z`-weighted channel sum transports the character coupon exactly:
@@ -594,7 +542,7 @@ placing `η_z^n` on every internal edge is the same as placing `η^n` on
 -/
 theorem sum_orientedChannelCouponMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (exponent : ℤ) :
@@ -612,8 +560,8 @@ theorem sum_orientedChannelCouponMorphism
         (∑ z, ∑ i : data.InsertionIndex
             (data.simple x ⊗ (data.simple y)ᘁ) z,
           data.quantumDimension z •
-            ((CategoryData.encirclingForwardBasis data x y z).primal i ≫
-              (CategoryData.encirclingForwardBasis data x y z).dual i)) := by
+            ((orientedForwardBasis data x y z).primal i ≫
+              (orientedForwardBasis data x y z).dual i)) := by
         rw [Preadditive.comp_sum]
         apply Finset.sum_congr rfl
         intro z _
@@ -626,7 +574,7 @@ theorem sum_orientedChannelCouponMorphism
           data.quantumDimension z • morphism)
         have naturality :=
           automorphismObjectPower_naturality η
-            ((CategoryData.encirclingForwardBasis data x y z).primal i)
+            ((orientedForwardBasis data x y z).primal i)
             exponent
         simpa only [
           FusionCategoryData.automorphismCouponPower,
@@ -637,12 +585,13 @@ theorem sum_orientedChannelCouponMorphism
           (congrArg
             (fun morphism =>
               morphism ≫
-                (CategoryData.encirclingForwardBasis data x y z).dual i)
+                (orientedForwardBasis data x y z).dual i)
             naturality.symm)
     _ =
       automorphismObjectPower η (OrientedTensorObject data x y) exponent ≫
         𝟙 (OrientedTensorObject data x y) := by
-      rw [CategoryData.encirclingForwardSound data insertionLaw x y]
+      rw [insertionLaw.resolves
+        (OrientedTensorObject data x y) (orientedForwardBasis data x y)]
     _ = _ := Category.comp_id _
 
 /--
@@ -652,7 +601,7 @@ the complete `z, μ` sum.
 -/
 theorem sum_orientedChannelMorphism_eq_sum_orientedChannelCouponMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (exponent : ℤ) :
@@ -676,7 +625,7 @@ inside the original diagram, not a new closed Kirby component.
 -/
 theorem sum_orientedChannelCouponMorphism_inContext
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (exponent : ℤ)
@@ -717,6 +666,16 @@ theorem transportEndomorphism_rfl
     transportEndomorphism (C := C) rfl morphism = morphism := by
   simp [transportEndomorphism]
 
+@[simp]
+theorem transportEndomorphism_smul_identity
+    {X Y : C}
+    (objectSound : X = Y)
+    (scalar : K) :
+    transportEndomorphism objectSound (scalar • 𝟙 Y) =
+      scalar • 𝟙 X := by
+  subst objectSound
+  simp [transportEndomorphism]
+
 /--
 Boundary-syntax version of the context theorem.  It is the bridge from a
 two-strand free-diagram hole to the single tensor object used by the fusion
@@ -724,7 +683,7 @@ calculation.
 -/
 theorem sum_orientedChannelCouponMorphism_inBoundaryContext
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (exponent : ℤ)
@@ -797,10 +756,10 @@ noncomputable def unequalExponentChannelMorphism
     OrientedTensorObject data x y ⟶ OrientedTensorObject data x y :=
   data.quantumDimension channel.1 •
     (leftResidualCoupon data η x y xExponent yExponent ≫
-      (CategoryData.encirclingForwardBasis data x y channel.1).primal channel.2 ≫
+      (orientedForwardBasis data x y channel.1).primal channel.2 ≫
       data.toFusionCategoryData.automorphismCouponPower
         η channel.1 yExponent ≫
-      (CategoryData.encirclingForwardBasis data x y channel.1).dual channel.2)
+      (orientedForwardBasis data x y channel.1).dual channel.2)
 
 /--
 The positive-orientation channel as visible syntax with two trivalent
@@ -819,13 +778,13 @@ noncomputable def unequalExponentChannelDiagram
       (data.quantumDimension channel.1 •
         leftResidualCoupon data η x y xExponent yExponent) ≫ᵈ
     atomicCoupon "two-over-two-positive-fusion-projection"
-      ((CategoryData.encirclingForwardBasis
+      ((orientedForwardBasis
         data x y channel.1).primal channel.2) ≫ᵈ
     atomicCoupon "two-over-two-positive-internal-character"
       (data.toFusionCategoryData.automorphismCouponPower
         η channel.1 yExponent) ≫ᵈ
     atomicCoupon "two-over-two-positive-fusion-inclusion"
-      ((CategoryData.encirclingForwardBasis
+      ((orientedForwardBasis
         data x y channel.1).dual channel.2)
 
 @[simp]
@@ -846,81 +805,12 @@ theorem unequalExponentChannelDiagram_eval
     (CategoryTheory.Linear.smul_comp _ _ _
       (data.quantumDimension channel.1)
       (leftResidualCoupon data η x y xExponent yExponent)
-      ((CategoryData.encirclingForwardBasis
-          data x y channel.1).primal channel.2 ≫
+      ((orientedForwardBasis
+        data x y channel.1).primal channel.2 ≫
         data.toFusionCategoryData.automorphismCouponPower
           η channel.1 yExponent ≫
-        (CategoryData.encirclingForwardBasis
+        (orientedForwardBasis
           data x y channel.1).dual channel.2))
-
-/--
-A character coupon on the external input strand of the fixed-object
-encircling window crosses that window by naturality.
-
-This theorem is intentionally named `external`: the functor here exposes
-`simple movingLabel ⊗ simple channelLabel`.  It does not by itself transport
-the internal fusion-channel coupon occurring between the two trivalent
-vertices of a 2/2 resolution.
--/
-theorem externalCharacterCoupon_bandTransport
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
-    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
-    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw)
-    (η : TensorIdentityAutomorphism C)
-    (movingLabel channelLabel : S)
-    (exponent : ℤ) :
-    Diagram.eval C
-        ((movies.family movingLabel).sourcedEncirclingLaw.sourceWithCoupon
-          "two-over-two-internal-character"
-          (data.toFusionCategoryData.automorphismCouponPower
-            η channelLabel exponent)) =
-      Diagram.eval C
-        ((movies.family movingLabel).sourcedEncirclingLaw.targetWithCoupon
-          "two-over-two-internal-character"
-          (data.toFusionCategoryData.automorphismCouponPower
-            η channelLabel exponent)) :=
-  (movies.family movingLabel).sourcedEncirclingLaw.coupon_transport_sound
-    "two-over-two-internal-character"
-    (data.toFusionCategoryData.automorphismCouponPower
-      η channelLabel exponent)
-
-/--
-The external-input coupon transport remains valid after insertion into any
-explicitly typed outer context.
-
-This remains useful graphical naturality, but it is not the missing theorem
-for the internal `z`-edge between the fusion projection and inclusion.
--/
-theorem externalCharacterCoupon_bandTransport_inContext
-    (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
-    (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
-    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw)
-    (η : TensorIdentityAutomorphism C)
-    (movingLabel channelLabel : S)
-    (exponent : ℤ)
-    {wholeSource wholeTarget : Boundary C}
-    (context :
-      Context C
-        (.atom (data.simple movingLabel ⊗ data.simple channelLabel))
-        (.atom (data.simple movingLabel ⊗ data.simple channelLabel))
-        wholeSource wholeTarget) :
-    Diagram.eval C
-        (Context.plug C context
-          ((movies.family movingLabel).sourcedEncirclingLaw.sourceWithCoupon
-            "two-over-two-internal-character"
-            (data.toFusionCategoryData.automorphismCouponPower
-              η channelLabel exponent))) =
-      Diagram.eval C
-        (Context.plug C context
-          ((movies.family movingLabel).sourcedEncirclingLaw.targetWithCoupon
-            "two-over-two-internal-character"
-            (data.toFusionCategoryData.automorphismCouponPower
-              η channelLabel exponent))) :=
-  Context.eval_plug_congr C context
-    (externalCharacterCoupon_bandTransport
-      data insertionLaw mateLaw movies η movingLabel channelLabel exponent)
 
 /--
 The residual `a-b` coupon followed by the common `b` coupon is exactly the
@@ -970,7 +860,7 @@ twisted 2/2 handle-slide proof.
 -/
 theorem sum_unequalExponentChannelMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (xExponent yExponent : ℤ) :
@@ -1009,7 +899,7 @@ identified boundary context.
 -/
 theorem sum_unequalExponentChannelMorphism_inBoundaryContext
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (xExponent yExponent : ℤ)
@@ -1057,7 +947,7 @@ residual moving-strand coupon carries `a+b`.
 -/
 theorem sum_globalPositiveEndpointChannelMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (movingExponent stationaryExponent : ℤ) :
@@ -1194,7 +1084,7 @@ noncomputable def negativeChannelCouponMorphism
 /-- Summing all negative channels moves the common coupon onto `x ⊗ y`. -/
 theorem sum_negativeChannelCouponMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (exponent : ℤ) :
@@ -1376,7 +1266,7 @@ the role-aware 2/2 compiler.
 -/
 theorem sum_unequalNegativeChannelMorphism
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (movingExponent stationaryExponent : ℤ) :
@@ -1416,7 +1306,7 @@ explicitly identified boundary context.
 -/
 theorem sum_unequalNegativeChannelMorphism_inBoundaryContext
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
+    (insertionLaw : PivotalInsertionLaw.{uK, uC, vC, vC} data)
     (η : TensorIdentityAutomorphism C)
     (x y : S)
     (movingExponent stationaryExponent : ℤ)

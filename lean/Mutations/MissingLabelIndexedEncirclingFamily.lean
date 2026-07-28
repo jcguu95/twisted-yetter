@@ -18,7 +18,7 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 
 noncomputable def rejected
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
-    (insertion : SphericalInsertionLaw data)
+    (insertion : PivotalInsertionLaw data)
     (mate : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     (oneLabel :

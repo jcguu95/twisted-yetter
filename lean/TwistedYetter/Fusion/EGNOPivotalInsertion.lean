@@ -2,10 +2,10 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import TwistedYetter.Fusion.EGNOTracePairing
 
 /-!
-# Spherical insertion from finite trace-dual bases
+# Pivotal insertion from finite trace-dual bases
 
 Bärenz--Barrett Lemma 2.37 states one global theorem: for every object of a
-spherical fusion category and every finite trace-dual basis, the
+pivotal fusion category and every finite pivotal-trace-dual basis, the
 dimension-weighted simple channels resolve the identity.  This module records
 that standard theorem at its natural all-objects boundary and derives the
 concrete finite resolutions used by Kirby-colour encircling transport.
@@ -36,13 +36,19 @@ local instance braidedRightRigidCategory : RightRigidCategory C :=
   BraidedCategory.rightRigidCategoryOfLeftRigidCategory
 
 /--
-The all-objects, all-bases form of the spherical insertion lemma.
+The all-objects, all-bases form of the pivotal insertion lemma.
 
 The field is precisely Bärenz--Barrett Lemma 2.37.  Quantifying over every
 finite index family prevents a caller from proving only the basis used by one
 chosen Kirby diagram.
+
+This project packages the law over `RibbonFusionCategoryData` because its
+main evaluator already works with ribbon data and does not need a separate
+public pivotal-only hierarchy.  The statement itself uses only the pivotal
+trace pairing, pivotal dimensions, and fusion semisimplicity; ribbon
+braiding/twist and spherical left-right trace equality are not used.
 -/
-structure SphericalInsertionLaw
+structure PivotalInsertionLaw
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S)) where
   resolves :
     {I : S → Type uI} →
@@ -90,11 +96,11 @@ noncomputable def insertionDualBasis (X : C) (s : S) :
     (Module.Free.chooseBasis K (X ⟶ data.simple s))
 
 /--
-The dimension-weighted identity resolution selected canonically from the
-category's finite Hom spaces.
+The pivotal-dimension-weighted identity resolution selected canonically from
+the category's finite Hom spaces.
 -/
-noncomputable def sphericalIdentityResolution
-    (law : SphericalInsertionLaw data)
+noncomputable def pivotalIdentityResolution
+    (law : PivotalInsertionLaw data)
     (X : C) :
     IdentityResolution
       (R := K) (S := S) (I := data.InsertionIndex X) X where

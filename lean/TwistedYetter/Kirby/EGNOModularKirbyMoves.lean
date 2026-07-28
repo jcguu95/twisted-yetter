@@ -629,7 +629,7 @@ theorem baerenzBarrett_oneTwoHopfPairSum
         exact (unitMissing (Finset.mem_univ _)).elim
 
 /-!
-`shum_ribbonFramedKink` is imported from `PremodularFramedKink`, next to its
+`ribbonFramedKinkEvaluation` is imported from `PremodularFramedKink`, next to its
 exact Shum and Crane--Yetter locators.
 -/
 
@@ -640,7 +640,7 @@ premodular category.  No S-matrix nondegeneracy is used here.
 noncomputable def framedIsotopyLaws
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
     FramedIsotopyLaws 𝒞 where
-  framedKinkLaw := shum_ribbonFramedKink 𝒞
+  framedKinkLaw := ribbonFramedKinkEvaluation 𝒞
 
 /-- The trivial Mueger centre derived from S-matrix nondegeneracy. -/
 def modularSimpleCenter
@@ -712,7 +712,7 @@ noncomputable def build
   modularCenter := modularSimpleCenter 𝒞
   dimensions := modularDimensionCertificate 𝒞
   cancellationLaw := modularCancellationLaw 𝒞
-  framedKinkLaw := shum_ribbonFramedKink 𝒞.premodular
+  framedKinkLaw := ribbonFramedKinkEvaluation 𝒞.premodular
   categorySnapshotHash := binding.categorySnapshotHash
   category_snapshot_hash_shape := binding.category_snapshot_hash_shape
   categoryCoherenceCertificateHash :=

@@ -61,7 +61,7 @@ References:
   Theorem 2.6, which states that the free tortile category on one object is
   monoidally equivalent to framed tangles.
 -/
-axiom shum_ribbonFramedKink
+axiom ribbonFramedKinkEvaluation
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
     RibbonFramedKinkLaw 𝒞
 
