@@ -9,14 +9,16 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
 /-!
 # Independent semantics: unique entry
 
-This is the only public import for the frozen human semantic specification.
+This is the only public import for the normative human semantic
+specification.  Its topology-side input starts at
+`CombinatorialSpecialKirbyDiagram`.
 
 Dependency order:
 
 `Algebra → Diagram → Homology → Moves → Graphical → Evaluator → Invariant`.
 
 Implementation bridges, legacy evaluators, computation code, axiom audits,
-and conformance checks are intentionally outside this entry.
+and conformance checks are intentionally outside this entry.  In particular,
+this import closure must not contain an existing presentation, evaluator,
+move compiler, or comparison bridge.
 -/
-
--- sha256-padding: 1237
