@@ -1,0 +1,331 @@
+#+title: Ribbon Graphical Calculus：獨立人類語意規格
+#+date: 2026-07-28T07:04:05-0600
+#+options: toc:2
+
+* 0. 文件地位
+
+這份文件只釘死：
+
+\[
+  \text{typed ribbon diagram}
+  \longmapsto
+  \text{morphism in }\mathcal C
+  \longmapsto
+  \text{closed scalar in }K.
+\]
+
+它不看repo既有graphical calculus、evaluator、Kirby proofs、Sage code或
+bridge。
+
+它不包含Kirby moves、dotted handles、\(H_2\)、four-manifold descent或
+evaluator equality。
+
+* 1. Directed Tensor Words
+
+Graphical boundary是一個由左至右排列的有限tensor word：
+
+\[
+  X_1^{\varepsilon_1}\otimes\cdots\otimes X_m^{\varepsilon_m}.
+\]
+
+正向strand解讀為 \(X\)，反向strand解讀為chosen dual \(X^*\)。
+空word解讀為tensor unit \(\mathbf1\)。
+
+這是expanded ribbon graph的局部方向，不是 =SpecialKirbyDiagram=
+component orientation。
+
+Tensor words固定right-associated。所有associators及unitors必須由
+interpretation插入，不得以definitional equality偷偷刪除。
+
+* 2. 一般 Morphism Coupon
+
+一般coupon具有有序的input word及output word：
+
+\[
+  f:
+  X_1\otimes\cdots\otimes X_m
+  \longrightarrow
+  Y_1\otimes\cdots\otimes Y_n.
+\]
+
+它是multi-input、multi-output typed coupon，不限於 \(f:X\to Y\)。
+
+以下全部是一般coupon：
+
+- fusion basis
+  \[
+    b_{z,\mu}:z\to x\otimes y;
+  \]
+- dual fusion basis
+  \[
+    \bar b_{z,\mu}:x\otimes y\to z;
+  \]
+- unit-cut maps
+  \[
+    p_\mu:V\to\mathbf1,\qquad q_\mu:\mathbf1\to V;
+  \]
+- character coupon
+  \[
+    \eta_X^a:X\to X.
+  \]
+
+Input/output ports的順序是coupon型別的一部分。
+
+* 3. Diagram Generators
+
+圖由下往上讀；horizontal order由左往右讀。
+
+唯一的generators是：
+
+1. identity strand；
+2. 一般morphism coupon；
+3. vertical composition；
+4. horizontal tensor；
+5. positive crossing；
+6. negative crossing；
+7. left evaluation；
+8. left coevaluation；
+9. right evaluation；
+10. right coevaluation；
+11. positive twist；
+12. negative twist。
+
+沒有「任意graph equality」constructor。
+
+* 4. Category Interpretation
+
+定義
+
+\[
+  \llbracket-\rrbracket_{\mathcal C}:
+  \operatorname{Diagram}(A,B)
+  \longrightarrow
+  \operatorname{Hom}_{\mathcal C}(A,B).
+\]
+
+它逐項滿足：
+
+\[
+\begin{aligned}
+\llbracket\operatorname{id}_A\rrbracket
+  &=\operatorname{id}_A,\\
+\llbracket D_2\circ D_1\rrbracket
+  &=\llbracket D_2\rrbracket\circ\llbracket D_1\rrbracket,\\
+\llbracket D_1\otimes D_2\rrbracket
+  &=\llbracket D_1\rrbracket\otimes\llbracket D_2\rrbracket
+    \quad\text{with explicit coherence maps},\\
+\llbracket\text{positive crossing}\rrbracket
+  &=c_{X,Y},\\
+\llbracket\text{negative crossing}\rrbracket
+  &=c_{X,Y}^{-1},\\
+\llbracket\text{evaluation/coevaluation}\rrbracket
+  &=\operatorname{ev}/\operatorname{coev},\\
+\llbracket\text{positive/negative twist}\rrbracket
+  &=\theta_X^{\pm1},\\
+\llbracket\text{coupon }f\rrbracket
+  &=f.
+\end{aligned}
+\]
+
+* 5. 明列的 Local Relations
+
+Graphical quotient只允許以下具名relations：
+
+1. category identity及associativity；
+2. tensor identity及associativity；
+3. tensor interchange；
+4. braiding naturality：
+   \[
+     c_{X',Y'}(f\otimes g)
+     =
+     (g\otimes f)c_{X,Y};
+   \]
+5. positive/negative crossing cancellation；
+6. 兩條hexagon equations；
+7. left snake：
+   \[
+     (\operatorname{id}_X\otimes\operatorname{ev}_X)
+     (\operatorname{coev}_X\otimes\operatorname{id}_X)
+     =
+     \operatorname{id}_X;
+   \]
+8. right snake；
+9. twist naturality：
+   \[
+     \theta_Yf=f\theta_X;
+   \]
+10. balancing：
+    \[
+      \theta_{X\otimes Y}
+      =
+      c_{Y,X}c_{X,Y}
+      (\theta_X\otimes\theta_Y);
+    \]
+11. twist與dual相容；
+12. coupon composition；
+13. coupon tensor；
+14. coupon穿過cup時變成mate；
+15. coupon穿過cap時變成mate；
+16. spherical closure。
+
+這份list不得換成 =allGraphicalMovesAreSound= 之類的catch-all axiom。
+
+* 6. 一般 Coupon 的移動
+
+一般coupon不能無條件隨便移動。
+
+**穿過crossing：** 使用braiding naturality。
+
+\[
+  c_{X',Y'}(f\otimes g)
+  =
+  (g\otimes f)c_{X,Y}.
+\]
+
+**穿過cup/cap：** coupon必須變成對應mate。例如
+
+\[
+  f:X\to Y
+  \quad\leadsto\quad
+  f^*:Y^*\to X^*.
+\]
+
+**旋轉coupon：** 改變input/output ports時必須使用pivotal mate，不能繼續
+標記原本的 \(f\)。
+
+**穿過任意另一個coupon：** 一般不允許交換，只能使用composition、
+tensor與interchange。
+
+* 7. Character Coupon 的額外性質
+
+Character coupon是一般coupon
+
+\[
+  \eta_X^a:X\to X.
+\]
+
+它額外滿足naturality：
+
+\[
+  \eta_Y^a f=f\eta_X^a
+\]
+
+及monoidality：
+
+\[
+  \eta_{X\otimes Y}^a
+  =
+  \eta_X^a\otimes\eta_Y^a,
+  \qquad
+  \eta_{\mathbf1}^a=\operatorname{id}_{\mathbf1}.
+\]
+
+所以character coupon可以穿過任意morphism coupon。這不是一般coupon的性質。
+
+* 8. Fusion Resolution
+
+對每個object \(V\)、simple label \(s\)及multiplicity index \(\mu\)，選
+
+\[
+  i_{s,\mu}:X_s\to V,
+  \qquad
+  p_{s,\mu}:V\to X_s.
+\]
+
+要求orthogonality與completeness：
+
+\[
+  p_{t,\nu}i_{s,\mu}
+  =
+  \delta_{s,t}\delta_{\mu,\nu}\operatorname{id}_{X_s},
+\]
+
+\[
+  \operatorname{id}_V
+  =
+  \sum_{s,\mu}i_{s,\mu}p_{s,\mu}.
+\]
+
+所有simple channels和multiplicity indices都必須出現。
+
+* 9. Tensor-Unit Projector
+
+若 \(u\) 是tensor unit的simple label，定義
+
+\[
+  P_{\mathbf1,V}
+  :=
+  \sum_\mu i_{u,\mu}p_{u,\mu}.
+\]
+
+它只保留tensor-unit summand。
+
+它不是：
+
+- full identity resolution；
+- ordinary Kirby colour；
+- transparent-sector projector。
+
+Projector不依賴所選dual bases必須是後續theorem。
+
+* 10. Closed Scalar
+
+Closed diagram的型別是
+
+\[
+  D:\mathbf1\to\mathbf1.
+\]
+
+先取得
+
+\[
+  \llbracket D\rrbracket_{\mathcal C}
+  \in\operatorname{End}_{\mathcal C}(\mathbf1),
+\]
+
+再使用fusion-category identification
+
+\[
+  \operatorname{End}_{\mathcal C}(\mathbf1)\cong K
+\]
+
+得到唯一scalar \(Z_{\mathcal C}(D)\in K\)：
+
+\[
+  \llbracket D\rrbracket_{\mathcal C}
+  =
+  Z_{\mathcal C}(D)\operatorname{id}_{\mathbf1}.
+\]
+
+不存在獨立的任意函數 =Diagram → K=。
+
+* 11. Narrow Literature Boundary
+
+允許保留一條狹窄的ribbon graphical coherence輸入：
+
+#+begin_quote
+上述逐條明列的local ribbon relations對framed-ribbon isotopy sound，
+而且typed diagram的category interpretation只依賴其ribbon-isotopy class。
+#+end_quote
+
+它不得提及：
+
+- Kirby moves；
+- handle slides；
+- dotted components；
+- character-twisted evaluator equality；
+- \(H_2\)；
+- four-manifold invariance。
+
+* 12. 尚未證明的義務
+
+1. interpretation可由premodular category structure構造；
+2. 每條local relation sound；
+3. mate formulas正確；
+4. fusion resolution可由semisimplicity構造；
+5. tensor-unit projector不依賴bases；
+6. character coupon移動由naturality推出；
+7. closed scalar唯一；
+8. planar projection的選擇不影響結果。
+
+本文件目前只釘死語意，不宣稱上述義務已完成。

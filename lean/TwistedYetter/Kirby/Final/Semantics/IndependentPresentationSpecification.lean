@@ -58,7 +58,7 @@ structure KirbyGeometrySemantics where
 
   bunchesExactly :
     BunchingDatum →
-      List IntersectionPoint →
+      List (IntersectionPoint × ℕ) →
       Prop
 
   boundaryAfterZeroOneTwoHandles :
@@ -134,7 +134,8 @@ structure DottedSpanningDiskData
   bunching_exact :
     geometry.bunchesExactly
       bunching
-      (punctures.map DottedPuncture.point)
+      (punctures.map fun puncture =>
+        (puncture.point, puncture.ordinaryComponent.val))
 
 /--
 The complete independent semantic input called a "special Kirby diagram" in

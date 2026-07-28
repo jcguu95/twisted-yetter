@@ -9,6 +9,7 @@ import TwistedYetter.Kirby.Final.Semantics.MoveAssembly
 import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicInput
 import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge
 import TwistedYetter.Kirby.Final.Semantics.IndependentPresentationSpecification
+import TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentEvaluatorSpecification
 import TwistedYetter.Kirby.Final.Semantics.TopologicalInput
 import TwistedYetter.Kirby.Final.Semantics.Evaluator
@@ -33,11 +34,13 @@ defines nothing; it points to thirteen reviewable layers in dependency order:
 11. `Semantics/TopologicalInput.lean`: manifolds, realization, and Kirby--Cerf data.
 12. `Semantics/IndependentPresentationSpecification.lean`: the normative
     special-Kirby-diagram input, independent of the implementation.
-13. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
+13. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
+    typed ribbon-diagram language, general coupons, and closed scalar semantics.
+14. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
     role-aware finite-sum formula, written independently of the implementation.
-14. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
+15. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
     certified against the independent specification.
-15. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
+16. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
 
 The compatibility facades `SemanticHandleChain.lean` and
 `SemanticEightMoves.lean`, together with `Semantics/Moves.lean` and

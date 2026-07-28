@@ -1,0 +1,67 @@
+{
+  "schema": "independent-graphical-calculus-semantics-checkpoint-v1",
+  "recorded_at_utc": "2026-07-28T13:04:05Z",
+  "recorded_at_local": "2026-07-28T07:04:05-0600",
+  "git_base_commit": "075803bc6d3b6c7d2a5f6c23ac423b5b7aa449ca",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "independence_policy": {
+    "existing_graphical_calculus_read": false,
+    "existing_evaluator_read": false,
+    "existing_kirby_proofs_read": false,
+    "sage_code_read": false,
+    "compatibility_bridge_read": false
+  },
+  "pinned_semantics": {
+    "diagram_reading": "bottom-to-top, tensor factors left-to-right",
+    "boundary": "ordered directed tensor words",
+    "general_coupon": "ordered finite multi-input and multi-output morphism coupon",
+    "character_coupon": "unary special case of a general morphism coupon",
+    "positive_crossing": "braiding",
+    "negative_crossing": "inverse braiding",
+    "coupon_across_turn": "appropriate mate, never the unchanged arbitrary morphism",
+    "closed_evaluation": "diagram to End(unit), then unique scalar in K",
+    "fusion_resolution": "all simple labels and all multiplicity indices",
+    "unit_projector": "unit-label part of the fusion resolution",
+    "unit_projector_is_transparent_projector": false,
+    "catch_all_graph_equality_allowed": false
+  },
+  "explicit_relation_kinds": [
+    "category identity",
+    "category associativity",
+    "tensor identity",
+    "tensor associativity",
+    "tensor interchange",
+    "braiding naturality",
+    "positive-negative crossing cancellation",
+    "first hexagon",
+    "second hexagon",
+    "left snake",
+    "right snake",
+    "twist naturality",
+    "balancing",
+    "twist-dual compatibility",
+    "coupon composition",
+    "coupon tensor",
+    "coupon across cup as mate",
+    "coupon across cap as mate",
+    "spherical closure"
+  ],
+  "presentation_correction": {
+    "bunching_now_retains_component_identity": true,
+    "previous_problem": "bunching received only intersection points and could forget which ordinary component owned a puncture"
+  },
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_run": false,
+    "axiom_audit_run": false,
+    "reason": "All semantic entrances are being pinned before any conformance check."
+  },
+  "non_claims": [
+    "The Lean file has not been compiled.",
+    "The existing graphical implementation has not been inspected or checked.",
+    "No Kirby-move invariance is established.",
+    "No evaluator conformance is established.",
+    "No arbitrary coupon is assumed to commute unchanged through cups, caps, crossings, or other coupons."
+  ]
+}
