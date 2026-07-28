@@ -1,302 +1,264 @@
 #+title: Role-Aware Twisted Yetter Evaluator：獨立人類語意規格
-#+date: 2026-07-28T06:20:47-0600
+#+date: 2026-07-28T08:02:00-0600
 #+options: toc:2
 
 * 0. 文件地位
 
-這份文件是 evaluator 的 normative human specification。
+這份文件只依賴已獨立釘死的：
 
-它只使用：
-
-1. EGNO 對 fusion、ribbon、premodular category 的定義；
-2. monoidal natural automorphism
+1. premodular fusion category \(\mathcal C\) 與 character
    \(\eta:\mathrm{Id}_{\mathcal C}\Rightarrow\mathrm{Id}_{\mathcal C}\)；
-3. Tham thesis, Definition 5.11, thesis page 52（PDF page 58）；
-4. 本文件明寫的 special Kirby presentation convention。
+2. =SpecialKirbyDiagram=；
+3. \(H_2^{\mathrm{Kirby}}(D)=\ker\partial_2/\operatorname{im}\partial_3\)；
+4. typed ribbon graphical calculus；
+5. Tham thesis Definition 5.11，thesis page 52／PDF page 58。
 
-它不是從 repo 既有 evaluator、Sage code、numerical artifacts 或
-compatibility bridge 反推而來。
+它不讀 repo 既有 evaluator、Sage、bridge 或 numerical artifacts。
 
-本文件目前只釘死 evaluator 的語意。它不宣稱既有實作符合此規格，也不宣稱
-Kirby invariance 或 \(H_2\)-representative independence 已經證明。
+舊版獨立 evaluator 自己重複建立的 =IntegralHandleChain= 與
+=SpecialKirbyPresentationSemantics= 已刪除。現在 evaluator 只能使用同一份
+=SpecialKirbyDiagram= 與 =KirbyH₂=。
 
-* 1. Category 與 Character
+* 1. 真正輸入與 Auxiliary Choices
 
-令 \(\mathcal C\) 是 characteristic zero algebraically closed field \(K\)
-上的 premodular fusion category。令
-
-\[
-  \operatorname{Irr}(\mathcal C)
-\]
-
-是 simple objects 的有限索引集，\(d_i\) 是 simple object \(i\) 的
-quantum dimension。
-
-依 Tham 的記號，category dimension 是
+公開 diagram-level 數學輸入是：
 
 \[
-  D_{\mathcal C}
-  :=
-  \sum_{i\in\operatorname{Irr}(\mathcal C)} d_i^2.
+  (\mathcal C,\eta),\qquad
+  (D,\alpha),\qquad
+  \alpha\in H_2^{\mathrm{Kirby}}(D).
 \]
 
-這裡的 \(D_{\mathcal C}\) 不是上述和式的平方根。
+實際展開公式時暫時選：
 
-Twist 是一個 monoidal natural automorphism
+1. cycle representative \(a\in\ker\partial_2\)，且 \([a]=\alpha\)；
+2. 每一條 handle orientation line 的 generator；
+3. 把 \(C_2\) element 解成逐 ordinary-handle integer coordinates 的 map；
+4. 與上述 generators 相容的 dotted-puncture directions。
+
+這些都不是公開 invariant 的 inputs。最後必須證明換任何一項都不改變數值。
+
+* 2. Character Exponents
+
+選定 chart 後：
 
 \[
-  \eta:\operatorname{Id}_{\mathcal C}
-  \Longrightarrow
-  \operatorname{Id}_{\mathcal C}.
+  a=\sum_{j=1}^{h_2}a_j e_j,
+  \qquad a_j\in\mathbb Z.
 \]
 
-因此每個 object \(X\) 和 \(n\in\mathbb Z\) 都有 coupon
-
-\[
-  \eta_X^n:X\longrightarrow X,
-\]
-
-而且
-
-\[
-  \eta_{X\otimes Y}
-  =
-  \eta_X\otimes\eta_Y,
-  \qquad
-  \eta_{\mathbf1}=\operatorname{id}_{\mathbf1}.
-\]
-
-* 2. Topological Input
-
-輸入是一個 closed oriented smooth four-manifold 的 special Kirby
-presentation \(P\)。它具有：
-
-- 一個 primal \(0\)-handle；
-- \(h_1\) 個 dotted primal \(1\)-handles；
-- \(h_2\) 個 ordinary framed primal \(2\)-handles；
-- \(h_3\) 個 primal \(3\)-handles；
-- 一個 primal \(4\)-handle。
-
-Dotted components 與 ordinary framed components 是不同 roles，不能互換。
-
-Handle chain complex 是
-
-\[
-  C_3(P;\mathbb Z)
-  \xrightarrow{\partial_3}
-  C_2(P;\mathbb Z)
-  \xrightarrow{\partial_2}
-  C_1(P;\mathbb Z).
-\]
-
-一個 integral \(2\)-cycle 是
-
-\[
-  a=(a_1,\ldots,a_{h_2})\in\ker\partial_2.
-\]
-
-兩個 cycles \(a,b\) 代表同一個 \(H_2\) class，exactly when
-
-\[
-  b-a\in\operatorname{im}\partial_3.
-\]
-
-本規格禁止把 \(H_2\) 全域縮寫成 \(\mathbb Z\)。
-
-* 3. Tham Definition 5.11
-
-Tham 對 elementary handle maps 的 convention 是：
-
-- index \(0\)：乘上 \(D_{\mathcal C}\)；
-- index \(1\)：乘上 \(D_{\mathcal C}^{-1}\)；
-- index \(2\)：在 belt circle 加入 regular colour
-  \[
-    \Omega_{\mathcal C}=\sum_i d_i\,i;
-  \]
-- index \(3\)：沿 co-core 切開，且只保留 tensor-unit summand；
-- index \(4\)：在 \(S^3\) 中做 Reshetikhin--Turaev evaluation。
-
-我們以 dual handle decomposition 讀 primal special Kirby presentation。
-因此 primal indices \(4,3,2,1,0\) 分別使用 Tham indices \(0,1,2,3,4\)。
-
-所以：
-
-- primal ordinary \(2\)-handle 使用 regular colour；
-- primal dotted \(1\)-handle 使用 tensor-unit-only cut；
-- primal \(3\)-handle 貢獻 \(D_{\mathcal C}^{-1}\)；
-- 唯一 primal \(4\)-handle 貢獻 \(D_{\mathcal C}\)；
-- 最後在 primal \(0\)-handle 的邊界做 ribbon evaluation。
-
-* 4. Ordinary 2-Handle
-
-對每一個 ordinary \(2\)-handle component \(j\)，遍歷
-
-\[
-  \ell_j\in\operatorname{Irr}(\mathcal C).
-\]
-
-該 summand 的 scalar weight 是 \(d_{\ell_j}\)，並在同一 component 上
-插入 coupon
+ordinary component \(j\) 上的 character coupon 是：
 
 \[
   \eta_{\ell_j}^{a_j}.
 \]
 
-所以 ordinary component 的完整展開是
+正 exponent 使用 \(\eta\)，負 exponent 使用 \(\eta^{-1}\)，零 exponent 是
+identity。
+
+這裡沒有 \(H_2=\mathbb Z\)，也沒有「整張 diagram 只有一個 exponent」。
+
+* 3. Quantum Dimension 與 \(D\)
+
+Quantum dimension不再是任意輸入的 scalar table。
+
+對 simple object \(X_s\)，先在 typed graphical calculus 裡做標準 closed
+pivotal loop，然後取它在
 
 \[
-  \sum_{\ell_j\in\operatorname{Irr}(\mathcal C)}
-    d_{\ell_j}
-    \left(
-      \ell_j\text{-labelled component carrying }
-      \eta_{\ell_j}^{a_j}
-    \right).
+  \operatorname{End}(\mathbf1)\cong K
 \]
 
-* 5. Dotted 1-Handle
-
-對每個 dotted component，沿其 co-core disk 同時切開穿過該 disk 的
-所有 ribbons。依 puncture orientations 得到 tensor word
+下的 scalar：
 
 \[
-  V=X_1^{\varepsilon_1}\otimes\cdots\otimes X_m^{\varepsilon_m},
+  d_s=\operatorname{ev}_{\mathcal C}(\bigcirc_{X_s}).
 \]
 
-其中負 orientation 使用所選 dual。
-
-在這個 cut 上只保留 \(V\) 的 tensor-unit summand。選擇 dual bases
+再定義：
 
 \[
-  p_\mu:V\to\mathbf1,
-  \qquad
-  q_\mu:\mathbf1\to V,
-\]
-
-其 graphical instruction 是 unit-summand resolution
-
-\[
-  P_{\mathbf1,V}
+  D_{\mathcal C}
   =
-  \sum_\mu q_\mu p_\mu.
+  \sum_{s\in\operatorname{Irr}(\mathcal C)}d_s^2.
 \]
 
-這裡不額外把 dotted component 染成 regular colour。它也不是
-transparent-sector projector。
+這是 Tham 的 \(D\)，不是它的平方根。Normalization需要明列
+\(D_{\mathcal C}\ne0\)。
 
-因為 \(\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}\)，unit cut 吸收任何
-通過它的 character：
+* 4. Ordinary Components
+
+對每個 ordinary framed \(2\)-handle component \(j\)，有限求和：
 
 \[
-  P_{\mathbf1,V}\eta_V^n
+  \ell_j\in\operatorname{Irr}(\mathcal C).
+\]
+
+該 component：
+
+- label 是 simple object \(X_{\ell_j}\)；
+- scalar weight 是 \(d_{\ell_j}\)；
+- coupon 是 \(\eta_{X_{\ell_j}}^{a_j}\)；
+- framing由原 =SpecialKirbyDiagram= 的 framed knot保留。
+
+所有 ordinary labels 的總 weight：
+
+\[
+  \prod_{j=1}^{h_2}d_{\ell_j}.
+\]
+
+* 5. Dotted Components
+
+對 dotted component \(i\)，使用它已選定的 spanning disk 與完整 puncture
+list。依暫時 puncture directions，形成：
+
+\[
+  V_i
   =
-  P_{\mathbf1,V}
+  X_{\ell_{j_1}}^{\varepsilon_1}
+  \otimes\cdots\otimes
+  X_{\ell_{j_m}}^{\varepsilon_m}.
+\]
+
+在 cut 上插入：
+
+\[
+  P_{\mathbf1,V_i}
   =
-  \eta_V^nP_{\mathbf1,V}.
+  \sum_{\mu}
+    q_\mu p_\mu,
 \]
 
-這個等式將來必須是 theorem，而不是 evaluator definition 偷放進去的答案。
+只保留 tensor-unit summand。
 
-* 6. Closed Ribbon Evaluation
+明確禁止：
 
-固定：
+- dotted component進入 ordinary simple-label sum；
+- dotted component被染成 ordinary Kirby colour；
+- 使用 transparent-sector projector；
+- 使用 modular killing。
 
-- 所有 ordinary labels \(\ell_j\)；
-- 所有 character coupons \(\eta_{\ell_j}^{a_j}\)；
-- 所有 dotted unit-only cuts；
-- cut 和 fusion decomposition 需要的所有 multiplicity indices 與 dual bases。
+* 6. Topology-to-Graph Translation
 
-這些資料形成一張 closed coloured ribbon graph
+對固定的 labels、character coupons與unit projectors，必須建造一張：
 
 \[
-  \Gamma(P,\ell,a)\subset S^3.
+  \Gamma(D,\ell,a):
+  \varnothing\longrightarrow\varnothing
 \]
 
-用 \(\mathcal C\) 的 ribbon graphical calculus 評價：
+的 typed closed ribbon diagram。
+
+這一步只做 literal translation：
+
+- 每條 ordinary framed component出現一次；
+- 每個 character coupon出現在對應 ordinary component；
+- 每個 dotted component不再作為 ordinary circle出現；
+- 每張 chosen dotted disk切一次；
+- 每個 cut只插入 \(P_{\mathbf1}\)；
+- exterior crossings、cups、caps、twists及一般 morphism coupons原樣保留。
+
+這個 translation boundary不能回傳 scalar，也不能宣稱 Kirby invariance。
+
+* 7. Closed Graph Evaluation
+
+建好的 \(\Gamma(D,\ell,a)\) 只能經過：
 
 \[
-  Z_{\mathrm{RT},\mathcal C}
-  \bigl(\Gamma(P,\ell,a)\bigr)\in K.
+  \text{typed ribbon syntax}
+  \longrightarrow
+  \operatorname{End}_{\mathcal C}(\mathbf1)
+  \longrightarrow K.
 \]
 
-Presentation 必須固定把 primal \(0\)-handle boundary 辨識成最終
-dual \(4\)-handle boundary 時的 orientation／mirror convention。
-Evaluator 不得暗中選另一個 mirror。
-
-* 7. Raw Finite Sum
+不存在任意的
 
 \[
-\operatorname{TY}^{\mathrm{raw}}_{\mathcal C,\eta}(P,a)
-=
-\sum_{
-  \ell:\{\text{ordinary 2-handles}\}\to\operatorname{Irr}(\mathcal C)
-}
-\left(\prod_{j=1}^{h_2}d_{\ell_j}\right)
-Z_{\mathrm{RT},\mathcal C}
-\bigl(\Gamma(P,\ell,a)\bigr).
+  \text{expanded term}\longrightarrow K
 \]
 
-只有 ordinary \(2\)-handles 出現在 simple-label denominator 中。
-Dotted \(1\)-handles 不進入 ordinary Kirby-colour sum。
+黑箱。
 
-* 8. Dual-Handle Normalization
-
-在 dual decomposition 中：
-
-- 每個 primal \(4\)-handle 是一個 dual index-\(0\) map，貢獻 \(D\)；
-- 每個 primal \(3\)-handle 是一個 dual index-\(1\) map，貢獻 \(D^{-1}\)。
-
-因此
+* 8. Raw Sum
 
 \[
-  N_{\mathcal C}(P)
-  =
-  D_{\mathcal C}^{h_4-h_3}.
+ \operatorname{TY}^{\mathrm{raw}}_{\mathcal C,\eta}(D,a)
+ =
+ \sum_{\ell:\{1,\ldots,h_2\}\to\operatorname{Irr}(\mathcal C)}
+ \left(
+   \prod_{j=1}^{h_2}d_{\ell_j}
+ \right)
+ \operatorname{ev}_{\mathcal C}
+ \bigl(\Gamma(D,\ell,a)\bigr).
 \]
 
-對 special convention \(h_4=1\)，
+Denominator只有 ordinary \(2\)-handles。
+
+* 9. Tham Normalization
+
+用 dual handle decomposition讀 primal special Kirby diagram：
+
+- 唯一 primal \(4\)-handle變成 dual index \(0\)，貢獻 \(D\)；
+- 每個 primal \(3\)-handle變成 dual index \(1\)，貢獻 \(D^{-1}\)。
+
+所以：
 
 \[
-  N_{\mathcal C}(P)
-  =
-  D_{\mathcal C}^{1-h_3}.
+ N_{\mathcal C}(D)
+ =
+ D_{\mathcal C}^{1-h_3}
+ =
+ \frac{D_{\mathcal C}}
+ {D_{\mathcal C}^{h_3}}.
 \]
 
-Cycle-level evaluator 定義為
+Cycle-level formula：
 
 \[
-  \operatorname{TY}_{\mathcal C,\eta}(P,a)
-  :=
-  D_{\mathcal C}^{h_4-h_3}
-  \operatorname{TY}^{\mathrm{raw}}_{\mathcal C,\eta}(P,a).
+ \operatorname{TY}_{\mathcal C,\eta}(D,a)
+ =
+ D_{\mathcal C}^{1-h_3}
+ \operatorname{TY}^{\mathrm{raw}}_{\mathcal C,\eta}(D,a).
 \]
 
-這個 normalization 是逐項組合 Tham Definition 5.11 的 dual handle maps，
-不是從現有 code 或既有數值結果反推。
+* 10. 下降到 \((D,\alpha)\)
 
-* 9. 尚未包含在定義中的證明義務
-
-以下全部是 theorems／proof obligations，不是 evaluator definition：
-
-1. ribbon evaluation 不依賴 coupon 在同一 component 上的 regular position；
-2. dotted cut 不依賴 dual bases；
-3. simultaneous dotted cuts 不依賴執行順序；
-4. unit cut 吸收 character coupon；
-5. homologous cycles \(a\sim b\) 給出相同 evaluation；
-6. 八種 role-aware Kirby moves 保持 evaluation；
-7. 不同 presentations 經 Kirby--Cerf descent 給出同一數字。
-
-只有第 5 項完成後，cycle-level evaluator 才能下降成
+上述 formula 暫時依賴 auxiliary choice。真正 diagram-level evaluator存在前，
+必須證明：
 
 \[
-  \operatorname{TwistedYetter}_{\mathcal C,\eta}(X,\alpha).
+ \operatorname{TY}(D,a;\text{chart,directions})
+ =
+ \operatorname{TY}(D,b;\text{chart',directions'})
 \]
 
-* 10. 明確禁止的解讀
+只要：
 
-- dotted component \(\neq\) ordinary Kirby-coloured component；
-- dotted cut \(\neq\) transparent-sector projector；
-- premodular route 不使用 modular killing；
-- \(H_2(X;\mathbb Z)\) 不得固定成 \(\mathbb Z\)；
-- definition 不得直接假設 representative independence；
-- 本規格不宣稱等於 repo 既有 evaluator；
-- 本規格不宣稱等於原始 Crane--Yetter state sum。
+\[
+ [a]=[b]=\alpha.
+\]
+
+這一條同時包含：
+
+- cycle representative independence；
+- orientation-generator independence；
+- coordinate-extraction independence；
+- compatible puncture-direction independence。
+
+完成後才得到：
+
+\[
+ \operatorname{TY}_{\mathcal C,\eta}(D,\alpha)\in K.
+\]
+
+* 11. 明確 Non-Claims
+
+- 尚未證明 auxiliary-choice independence；
+- 尚未證明既有 evaluator符合本規格；
+- 尚未證明 topology-to-typed-graph assembler正確；
+- 尚未證明八種 moves保持 evaluation；
+- 尚未做 Kirby–Cerf descent；
+- 尚未比較 closed manifold singular \(H_2\)；
+- 尚未宣稱等於原始 Crane–Yetter state sum；
+- 尚未編譯；
+- 尚未跑 bridge。

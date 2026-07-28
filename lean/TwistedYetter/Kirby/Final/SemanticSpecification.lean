@@ -44,7 +44,8 @@ defines nothing; it points to thirteen reviewable layers in dependency order:
 15. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
     typed ribbon-diagram language, general coupons, and closed scalar semantics.
 16. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
-    role-aware finite-sum formula, written independently of the implementation.
+    role-aware finite-sum formula directly over `SpecialKirbyDiagram` and
+    `KirbyH₂`, with no duplicate handle complex or arbitrary scalar evaluator.
 17. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
     certified against the independent specification.
 18. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.

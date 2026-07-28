@@ -1,0 +1,67 @@
+{
+  "schema": "independent-evaluator-semantics-checkpoint-v2",
+  "recorded_at_utc": "2026-07-28T14:02:59Z",
+  "recorded_at_local": "2026-07-28T08:02:59-0600",
+  "git_base_commit": "c939d75bd47a0c303eab0cb87fb56190ba3d4591",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "independence_policy": {
+    "existing_evaluator_read": false,
+    "existing_sage_read": false,
+    "existing_bridge_read": false,
+    "numerical_artifacts_read": false,
+    "independent_algebraic_specification_read": true,
+    "independent_presentation_specification_read": true,
+    "independent_homology_specification_read": true,
+    "independent_graphical_specification_read": true
+  },
+  "removed_semantic_duplicates": [
+    "IntegralHandleChain",
+    "SpecialKirbyPresentationSemantics",
+    "arbitrary ExpandedRoleAwareRibbonTerm-to-K evaluator"
+  ],
+  "pinned_inputs": {
+    "topology": "SpecialKirbyDiagram",
+    "marking": "alpha in KirbyH2(diagram)",
+    "algebra": "premodular fusion category with tensor-identity character",
+    "graphical_target": "typed closed ribbon diagram followed by End(unit)-to-K scalar semantics"
+  },
+  "pinned_formula": {
+    "ordinary_label_denominator": "all simple labels on every ordinary two-handle",
+    "ordinary_weight": "product of graphical pivotal quantum dimensions",
+    "character_exponent": "integer coordinate of a cycle representative on each individual ordinary handle line",
+    "dotted_role": "tensor-unit-only cut",
+    "dotted_is_ordinary_kirby_colour": false,
+    "dotted_is_transparent_sector_projector": false,
+    "category_dimension": "sum of squared graphical pivotal quantum dimensions",
+    "normalization": "D divided by D^hThree"
+  },
+  "auxiliary_choices_to_eliminate": [
+    "cycle representative of alpha",
+    "generator of every handle orientation line",
+    "coordinate extraction realizing that chart",
+    "puncture directions compatible with the chart"
+  ],
+  "topology_to_graphical_audit_points": [
+    "ordinary components rendered exactly",
+    "character coupons rendered exactly",
+    "dotted components absent as ordinary circles",
+    "tensor-unit cuts rendered exactly",
+    "exterior ribbon data preserved",
+    "no extra projector or modular killing"
+  ],
+  "deferred_obligations": [
+    "Lean compilation of this specification",
+    "construction and audit of the topology-to-typed-graph assembler",
+    "auxiliary-choice independence",
+    "eight-move evaluation invariance",
+    "Kirby-Cerf descent",
+    "conformance bridge to the existing evaluator"
+  ],
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_run": false,
+    "axiom_audit_run": false,
+    "reason": "All independent semantic entrances are being pinned before any conformance check."
+  }
+}
