@@ -1,0 +1,89 @@
+{
+  "schema": "twisted-yetter.independent-algebraic-semantics-checkpoint.v1",
+  "recorded_at_utc": "2026-07-28T06:51:39Z",
+  "base_git_commit": "44bc14a3b9c45cc3caf1d6f9152cc2f0cbf3170c",
+  "git_dirty": true,
+  "status": {
+    "independent_human_specification": "ESTABLISHED",
+    "existing_data_conformance_bridge": "PASS",
+    "kernel_axiom_audit": "PASS",
+    "semantic_mismatch": "NONE_FOUND"
+  },
+  "references": [
+    {
+      "source": "Etingof--Gelaki--Nikshych--Ostrik, Tensor Categories",
+      "locator": "Definition 4.1.1, p. 65",
+      "used_for": "fusion category"
+    },
+    {
+      "source": "Etingof--Gelaki--Nikshych--Ostrik, Tensor Categories",
+      "locator": "Definition 8.10.1, p. 216",
+      "used_for": "ribbon structure"
+    },
+    {
+      "source": "Etingof--Gelaki--Nikshych--Ostrik, Tensor Categories",
+      "locator": "Proposition 8.10.12, p. 220; Definition 8.13.1, p. 225",
+      "used_for": "premodular category"
+    },
+    {
+      "source": "Etingof--Gelaki--Nikshych--Ostrik, Tensor Categories",
+      "locator": "Definition 2.4.8, p. 31",
+      "used_for": "monoidal natural automorphism of the identity"
+    }
+  ],
+  "visible_semantics": [
+    "algebraically closed characteristic-zero field",
+    "linear abelian rigid braided monoidal category with bilinear tensor product",
+    "finite explicitly indexed simple-object denominator",
+    "finite semisimple decomposition of every object",
+    "finite-dimensional hom spaces",
+    "End(tensor unit) equals the ground field",
+    "balancing equation",
+    "twist compatibility with right dual",
+    "character naturality through NatIso",
+    "character tensor law",
+    "character unit law"
+  ],
+  "bridge_detail": {
+    "previously_implicit_obligation": "End(tensor unit) equals the ground field",
+    "resolution": "Derived from simplicity of the tensor unit and finite-dimensional hom using Mathlib Schur's lemma.",
+    "new_custom_axioms": []
+  },
+  "kernel_dependencies": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "files": [
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentAlgebraicInput.lean",
+      "sha256": "3cb189458400f69f69a8446ddbccc4149e4a272b789d73b0fce6968ebb121237"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentAlgebraicBridge.lean",
+      "sha256": "5392f2b38bdf1440e80c19bfaa9de8c90ae38d274bb4f7ec554e6ff6175efedb"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentAlgebraicAxiomAudit.lean",
+      "sha256": "fade55efd15fa9a53bc169dfe96ea36e6c8dfee9d75232ee237a05f4f923be2e"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticSpecification.lean",
+      "sha256": "651370d3af8fbe6ddeda490b144dcf1ef8b6ac6a3fb3996a34c5c4a7690720cf"
+    }
+  ],
+  "verification": {
+    "independent_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicInput",
+    "bridge_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge",
+    "audit_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicAxiomAudit",
+    "unified_entry_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.SemanticSpecification",
+    "lean_version": "4.29.1",
+    "lean_process_limit": 1
+  },
+  "non_claims": [
+    "This checkpoint does not establish the role-aware evaluator semantics.",
+    "This checkpoint does not prove any Kirby move evaluation equality.",
+    "This checkpoint does not establish a premodular four-manifold invariant.",
+    "This checkpoint does not resolve the dependent-H2 implementation errors."
+  ]
+}

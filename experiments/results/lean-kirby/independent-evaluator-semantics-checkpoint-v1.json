@@ -1,0 +1,70 @@
+{
+  "schema": "independent-evaluator-semantics-checkpoint-v1",
+  "recorded_at_utc": "2026-07-28T12:20:47Z",
+  "recorded_at_local": "2026-07-28T06:20:47-0600",
+  "git_base_commit": "44bc14a3b9c45cc3caf1d6f9152cc2f0cbf3170c",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "normative_sources": [
+    {
+      "title": "On the Category of Boundary Values in the extended Crane-Yetter TQFT",
+      "author": "Ying Hong Tham",
+      "year": 2021,
+      "locator": "Definition 5.11, thesis page 52, PDF page 58",
+      "url": "https://www.math.stonybrook.edu/alumni/2021-Ying-Hong-Tham.pdf"
+    },
+    {
+      "title": "Tensor Categories",
+      "authors": [
+        "Pavel Etingof",
+        "Shlomo Gelaki",
+        "Dmitri Nikshych",
+        "Victor Ostrik"
+      ],
+      "locators": [
+        "Definition 4.1.1",
+        "Definition 8.10.1",
+        "Proposition 8.10.12",
+        "Definition 8.13.1",
+        "Definition 2.4.8"
+      ]
+    }
+  ],
+  "independence_policy": {
+    "existing_evaluator_read": false,
+    "sage_evaluator_read": false,
+    "numerical_artifacts_read": false,
+    "legacy_compatibility_code_read": false,
+    "allowed_inputs": [
+      "independent human formula approved in conversation",
+      "Tham Definition 5.11",
+      "IndependentAlgebraicInput.lean"
+    ]
+  },
+  "pinned_semantics": {
+    "category_dimension": "D = sum_i d_i^2",
+    "ordinary_two_handle": "regular-colour finite sum with weight d_i",
+    "character": "component j carries eta_(label_j)^(a_j)",
+    "dotted_one_handle": "tensor-unit-only cut across the oriented puncture word",
+    "dotted_is_not_ordinary_kirby_colour": true,
+    "dotted_is_not_transparent_sector_projector": true,
+    "cycle_space": "ker(boundary_2)",
+    "homology_relation": "cycles differ by image(boundary_3)",
+    "dual_handle_normalization": "D^(h4-h3)",
+    "special_normalization": "D^(1-h3)",
+    "final_graph": "closed ribbon graphical evaluation in S^3 with fixed mirror/orientation convention"
+  },
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_to_existing_evaluator_run": false,
+    "axiom_audit_run": false,
+    "reason": "User explicitly requested pinning and commit before any checking."
+  },
+  "non_claims": [
+    "The Lean file has not been compiled.",
+    "The existing evaluator has not been shown to implement this specification.",
+    "Representative independence has not been proved by this checkpoint.",
+    "Kirby-move invariance has not been proved by this checkpoint.",
+    "No equivalence with the original Crane-Yetter state sum is claimed."
+  ]
+}
