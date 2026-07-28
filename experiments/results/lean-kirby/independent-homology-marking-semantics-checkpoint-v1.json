@@ -1,0 +1,42 @@
+{
+  "schema": "independent-homology-marking-semantics-checkpoint-v1",
+  "recorded_at_utc": "2026-07-28T13:42:42Z",
+  "recorded_at_local": "2026-07-28T07:42:42-0600",
+  "git_base_commit": "7d92046e16b904b5fd54e45d6c51f4fcb2d82ded",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "independence_policy": {
+    "existing_h2_read": false,
+    "existing_handle_chain_read": false,
+    "existing_evaluator_read": false,
+    "existing_move_transport_read": false,
+    "sage_code_read": false,
+    "bridge_read": false
+  },
+  "pinned_semantics": {
+    "two_cycles": "kernel(boundaryTwo)",
+    "homology_relation": "b-a is boundaryThree(c) for some c",
+    "kirby_h2": "kernel(boundaryTwo) modulo image(boundaryThree)",
+    "marking": "alpha is an element of KirbyH2",
+    "cycle_representative_public": false,
+    "coordinate_chart_public": false,
+    "coordinate_chart": "one generator choice per handle-indexed orientation line",
+    "fixed_h2_equal_z": false,
+    "torsion_supported": true,
+    "arbitrary_rank_supported": true,
+    "simply_connected_assumed": false
+  },
+  "deferred_obligations": [
+    "coordinate extraction from a chosen chart",
+    "orientation-chart independence",
+    "representative independence for the evaluator",
+    "comparison with singular H2 of the closed completion",
+    "Kirby-move homology transport"
+  ],
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_run": false,
+    "axiom_audit_run": false,
+    "reason": "All semantic entrances are being pinned before any conformance check."
+  }
+}

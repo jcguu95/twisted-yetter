@@ -1,4 +1,5 @@
 import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 import Mathlib.Data.List.Defs
 
 /-!
@@ -246,40 +247,61 @@ axiom BoundaryThreeMatchesClosingSystem
     Prop
 
 /--
+A finite free abelian group split into rank-one orientation lines indexed by
+the actual handles.
+
+The decomposition is part of the coordinate-free chain group.  No generator
+of an individual line is chosen.  Consequently the only later coordinate
+ambiguity inside one handle line is sign; arbitrary `GL(n, ℤ)` mixing of
+different handles is not a coordinate choice for this structure.
+-/
+structure HandleIndexedOrientationModule (n : ℕ) where
+  line : Fin n → ModuleCat ℤ
+  line_is_rank_one :
+    (i : Fin n) →
+      Nonempty (line i ≅ ModuleCat.of ℤ ℤ)
+  carrier : ModuleCat ℤ
+  decomposes_by_handles :
+    (⨁ fun i => line i) ≅ carrier
+
+/--
 The coordinate-free integral handle-boundary package.
 
-`C₁`, `C₂`, and `C₃` are finite free abelian groups of ranks `hOne`,
-`hTwo`, and `hThree`.  The displayed equivalences assert only existence of
-coordinate charts; no chart and hence no component orientation is part of
-the diagram.
+`C₁`, `C₂`, and `C₃` are direct sums of the rank-one orientation lines of
+the individually indexed handles.  No line generator and hence no component
+orientation is part of the diagram.
 -/
 structure SpecialKirbyHandleBoundaryData
     {geometry : KirbyGeometrySemantics}
     (diagram : SpecialKirbyDiagramBase geometry) where
-  C₁ : ModuleCat ℤ
-  C₂ : ModuleCat ℤ
-  C₃ : ModuleCat ℤ
+  oneChains :
+    HandleIndexedOrientationModule diagram.hOne
+  twoChains :
+    HandleIndexedOrientationModule diagram.hTwo
+  threeChains :
+    HandleIndexedOrientationModule diagram.hThree
 
-  C₁_has_handle_rank :
-    Nonempty (C₁ ≅ ModuleCat.of ℤ (Fin diagram.hOne → ℤ))
-  C₂_has_handle_rank :
-    Nonempty (C₂ ≅ ModuleCat.of ℤ (Fin diagram.hTwo → ℤ))
-  C₃_has_handle_rank :
-    Nonempty (C₃ ≅ ModuleCat.of ℤ (Fin diagram.hThree → ℤ))
-
-  boundaryTwo : C₂ ⟶ C₁
-  boundaryThree : C₃ ⟶ C₂
+  boundaryTwo :
+    twoChains.carrier ⟶ oneChains.carrier
+  boundaryThree :
+    threeChains.carrier ⟶ twoChains.carrier
 
   boundary_squared_zero :
     boundaryThree ≫ boundaryTwo = 0
 
   boundaryTwo_is_geometric_incidence :
     BoundaryTwoMatchesDottedPunctures
-      diagram C₁ C₂ boundaryTwo
+      diagram
+      oneChains.carrier
+      twoChains.carrier
+      boundaryTwo
 
   boundaryThree_is_closing_boundary :
     BoundaryThreeMatchesClosingSystem
-      diagram C₂ C₃ boundaryThree
+      diagram
+      twoChains.carrier
+      threeChains.carrier
+      boundaryThree
 
 /--
 The complete project-local meaning of `SpecialKirbyDiagram`.

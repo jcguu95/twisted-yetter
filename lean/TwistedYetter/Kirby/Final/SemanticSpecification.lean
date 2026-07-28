@@ -9,6 +9,7 @@ import TwistedYetter.Kirby.Final.Semantics.MoveAssembly
 import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicInput
 import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge
 import TwistedYetter.Kirby.Final.Semantics.IndependentPresentationSpecification
+import TwistedYetter.Kirby.Final.Semantics.IndependentHomologyMarkingSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentEvaluatorSpecification
 import TwistedYetter.Kirby.Final.Semantics.TopologicalInput
@@ -34,13 +35,15 @@ defines nothing; it points to thirteen reviewable layers in dependency order:
 11. `Semantics/TopologicalInput.lean`: manifolds, realization, and Kirby--Cerf data.
 12. `Semantics/IndependentPresentationSpecification.lean`: the normative
     special-Kirby-diagram input, independent of the implementation.
-13. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
+13. `Semantics/IndependentHomologyMarkingSpecification.lean`: the normative
+    `ker(∂₂)/im(∂₃)` marking and auxiliary representative/chart semantics.
+14. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
     typed ribbon-diagram language, general coupons, and closed scalar semantics.
-14. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
+15. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
     role-aware finite-sum formula, written independently of the implementation.
-15. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
+16. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
     certified against the independent specification.
-16. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
+17. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
 
 The compatibility facades `SemanticHandleChain.lean` and
 `SemanticEightMoves.lean`, together with `Semantics/Moves.lean` and

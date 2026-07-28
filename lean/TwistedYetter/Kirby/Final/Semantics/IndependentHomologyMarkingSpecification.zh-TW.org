@@ -1,0 +1,197 @@
+#+title: H₂ Marking：獨立人類語意規格
+#+date: 2026-07-28T07:42:42-0600
+#+options: toc:2
+
+* 0. 文件地位
+
+這份文件不看repo既有 \(H_2\)、handle-chain、evaluator、move transport、
+Sage code或bridge。
+
+它只釘死：
+
+\[
+  Z_2(D),\qquad
+  H_2^{\mathrm{Kirby}}(D),\qquad
+  \alpha,\qquad
+  \text{cycle representative},\qquad
+  \text{auxiliary coordinate chart}.
+\]
+
+* 1. Handle-Indexed Orientation Lines
+
+對每個index-\(k\) handle \(h\)，有自己的rank-one free abelian
+orientation line \(o(h)\)。
+
+\[
+  C_k(D)
+  =
+  \bigoplus_{h\in H_k(D)}o(h).
+\]
+
+這比只要求 \(C_k\cong\mathbb Z^{h_k}\) 更強：individual summands與
+individual handles綁定，不能用任意 \(GL(h_k,\mathbb Z)\) 混合不同handles。
+
+Diagram沒有替 \(o(h)\) 選generator，所以diagram仍然沒有component
+orientation。
+
+* 2. Two-Cycles
+
+\[
+  Z_2(D)
+  =
+  \ker\left(
+    \partial_2:C_2(D)\to C_1(D)
+  \right).
+\]
+
+一個element \(a\in C_2(D)\) 加上一份proof
+
+\[
+  \partial_2a=0
+\]
+
+才是一個 =TwoCycle=。
+
+Two-cycle不是homology class。
+
+* 3. Homology Relation
+
+對 \(a,b\in Z_2(D)\)，定義：
+
+\[
+  a\sim b
+  \quad\Longleftrightarrow\quad
+  \exists c\in C_3(D),\
+  b-a=\partial_3c.
+\]
+
+因此：
+
+\[
+  H_2^{\mathrm{Kirby}}(D)
+  :=
+  Z_2(D)/{\sim}
+  =
+  \ker\partial_2/\operatorname{im}\partial_3.
+\]
+
+這個quotient保留任意rank及torsion。
+
+* 4. Marking
+
+真正的marking是：
+
+\[
+  \alpha\in H_2^{\mathrm{Kirby}}(D).
+\]
+
+所以diagram-level公開輸入是dependent pair：
+
+\[
+  (D,\alpha),
+  \qquad
+  \alpha\in H_2^{\mathrm{Kirby}}(D).
+\]
+
+不另外定義一個包裝 =H₂Marking= structure。
+
+禁止：
+
+\[
+  H_2:=\mathbb Z.
+\]
+
+也不假設torsion-free、rank one或simply connected。
+
+* 5. Cycle Representative
+
+為了實際evaluation，可以暫時選：
+
+\[
+  a\in Z_2(D)
+\]
+
+以及proof：
+
+\[
+  [a]=\alpha.
+\]
+
+這組資料叫做 =CycleRepresentative α=。
+
+公開invariant最後不能依賴這個選擇。對任何cycle-level quantity \(F\)，
+它下降到 \(H_2\) 的義務exactly是：
+
+\[
+  a\sim b
+  \Longrightarrow
+  F(a)=F(b).
+\]
+
+這是theorem obligation，不是definition。
+
+* 6. Auxiliary Coordinate Chart
+
+為了把cycle寫成integer exponents，計算時替每個orientation line選generator：
+
+\[
+  o(h)\cong\mathbb Z.
+\]
+
+對ordinary component \(L_j\)，得到：
+
+\[
+  a=\sum_j a_je_j,
+  \qquad
+  a_j\in\mathbb Z.
+\]
+
+之後character coupon才使用：
+
+\[
+  \eta_{\ell_j}^{a_j}.
+\]
+
+每條handle line各自選generator；這不是任意 \(GL(n,\mathbb Z)\) basis
+change，不能混合不同components。
+
+反轉某一generator只會：
+
+\[
+  e_j\mapsto-e_j,
+  \qquad
+  a_j\mapsto-a_j.
+\]
+
+Evaluator對此不變是後續theorem。
+
+* 7. 真正 Manifold H₂
+
+這一層只定義
+
+\[
+  H_2^{\mathrm{Kirby}}(D).
+\]
+
+標準handle-homology theorem應提供：
+
+\[
+  H_2^{\mathrm{Kirby}}(D)
+  \cong
+  H_2(X_D;\mathbb Z),
+\]
+
+其中 \(X_D\) 是由closing certificate得到的closed completion。
+
+這個comparison屬於topology boundary，將另行釘死；不能直接把兩個types
+定義成相同。
+
+* 8. 明確 Non-Claims
+
+- 尚未證明existing handle-chain implementation符合本規格；
+- 尚未定義coordinate extraction algorithm；
+- 尚未加入category、character或evaluator；
+- 尚未證明representative independence；
+- 尚未定義Kirby-move transport；
+- 尚未建立與singular \(H_2\) 的formal comparison；
+- 尚未證明four-manifold invariance。
