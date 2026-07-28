@@ -1,60 +1,11 @@
-import TwistedYetter.Kirby.Final.Semantics.HandleChain
-import TwistedYetter.Kirby.Final.Semantics.Presentation
-import TwistedYetter.Kirby.Final.Semantics.BandSlide
-import TwistedYetter.Kirby.Final.Semantics.Cancellation
-import TwistedYetter.Kirby.Final.Semantics.FramedIsotopy
-import TwistedYetter.Kirby.Final.Semantics.SlideMoves
-import TwistedYetter.Kirby.Final.Semantics.CancellationMoves
-import TwistedYetter.Kirby.Final.Semantics.MoveAssembly
-import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicInput
-import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge
-import TwistedYetter.Kirby.Final.Semantics.IndependentPresentationSpecification
-import TwistedYetter.Kirby.Final.Semantics.IndependentHomologyMarkingSpecification
-import TwistedYetter.Kirby.Final.Semantics.IndependentMoveHomologyTransportSpecification
-import TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification
-import TwistedYetter.Kirby.Final.Semantics.IndependentEvaluatorSpecification
-import TwistedYetter.Kirby.Final.Semantics.IndependentPublicInvariantSpecification
-import TwistedYetter.Kirby.Final.Semantics.TopologicalInput
-import TwistedYetter.Kirby.Final.Semantics.Evaluator
-import TwistedYetter.Kirby.Final.Semantics.Descent
+import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
 
 /-!
-# Unified semantic specification entry
+# Compatibility facade for the independent semantic specification
 
-This is the only public entry for auditing the intended mathematics. It
-defines nothing; it points to thirteen reviewable layers in dependency order:
+New audits should import
+`TwistedYetter.Kirby.Final.Semantics.Independent.Entry` directly.
 
-1. `Semantics/HandleChain.lean`: integral handle counts, complexes, and H₂.
-2. `Semantics/Presentation.lean`: exact diagram roles and local replacement.
-3. `Semantics/BandSlide.lean`: clean attach--transport--detach geometry.
-4. `Semantics/Cancellation.lean`: exact 1--2 and 2--3 cancellation windows.
-5. `Semantics/FramedIsotopy.lean`: finite primitive isotopy grammar.
-6. `Semantics/SlideMoves.lean`: exact 1/1, 2/1, and 2/2 constructors.
-7. `Semantics/CancellationMoves.lean`: exact 1--2 and 2--3 birth/death constructors.
-8. `Semantics/MoveAssembly.lean`: exhaustive eight cases and induced H₂ transport.
-9. `Semantics/IndependentAlgebraicInput.lean`: EGNO premodular category and character.
-10. `Semantics/IndependentAlgebraicBridge.lean`: one-way conformance of existing data.
-11. `Semantics/TopologicalInput.lean`: manifolds, realization, and Kirby--Cerf data.
-12. `Semantics/IndependentPresentationSpecification.lean`: the normative
-    special-Kirby-diagram input, independent of the implementation.
-13. `Semantics/IndependentHomologyMarkingSpecification.lean`: the normative
-    `ker(∂₂)/im(∂₃)` marking and auxiliary representative/chart semantics.
-14. `Semantics/IndependentMoveHomologyTransportSpecification.lean`: the
-    normative source-to-target chain maps and induced H₂ transport for all
-    eight directed Kirby moves.
-15. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
-    typed ribbon-diagram language, general coupons, and closed scalar semantics.
-16. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
-    role-aware finite-sum formula directly over `SpecialKirbyDiagram` and
-    `KirbyH₂`, with no duplicate handle complex or arbitrary scalar evaluator.
-17. `Semantics/IndependentPublicInvariantSpecification.lean`: the normative
-    three-stage descent from the explicit cycle formula to `(D, α)` and then
-    to the public manifold invariant on `(X, α)`.
-18. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
-    certified against the independent specification.
-19. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
-
-The compatibility facades `SemanticHandleChain.lean` and
-`SemanticEightMoves.lean`, together with `Semantics/Moves.lean` and
-`Semantics/PublicInvariant.lean`, remain import-only and contain no definitions.
+This facade exists only to preserve the historical public module name.  It
+imports no implementation, bridge, legacy evaluator, or conformance proof.
 -/
