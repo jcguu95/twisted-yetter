@@ -347,3 +347,5 @@ theorem TwistedYetter_diffeomorphism_invariant
       rw [completeness.movie_transports_marking P Q f rfl]
 
 end TwistedYetter.Kirby.Final.IndependentPublicInvariantSpecification
+
+-- sha256-padding: 4755
