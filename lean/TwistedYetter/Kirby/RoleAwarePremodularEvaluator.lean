@@ -252,40 +252,6 @@ noncomputable def roleAwareRawNumerator
       (roleAwareLinearDiagram 𝒞 η presentation geometry cycle))
 
 /--
-Legacy Bärenz--Barrett normalization profile.
-
-The role-aware Tham evaluator below no longer uses this profile.  It remains
-temporarily visible while the cancellation modules are migrated away from the
-former scaled-dotted-cut convention.
--/
-noncomputable def roleAwareNormalizationProfile
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
-    GlobalDimensionProfile (K := K) where
-  cDimension := 𝒞.globalDimension
-  dDimension := 𝒞.globalDimension
-  transparentDimension := 1
-  cDimension_ne_zero := 𝒞.globalDimension_ne_zero
-  dDimension_ne_zero := 𝒞.globalDimension_ne_zero
-  transparentDimension_ne_zero := one_ne_zero
-  source_ref := "ref:egnotc-proposition-8.14.2"
-  source_locator :=
-    "EGNO Proposition 8.14.2 and Remark 8.14.3; special dotted-cut "
-      ++ "normalization fixes the effective transparent factor to one"
-
-/-- Complete normalized state for one explicit handle-chain cycle. -/
-noncomputable def roleAwareEvaluationState
-    {H2 : Type uH} [AddCommGroup H2]
-    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
-    (η : TensorIdentityAutomorphism C)
-    (presentation : CanonicalPresentation H2)
-    (geometry : Geometry presentation)
-    (cycle : presentation.DegreeTwoCycle) :
-    EvaluationState (K := K) where
-  counts := presentation.topology.counts
-  rawNumerator :=
-    roleAwareRawNumerator 𝒞 η presentation geometry cycle
-
-/--
 Tham Definition 5.11 normalization in the dual handle decomposition.
 
 The unique primal four-handle is the dual index-zero handle and contributes

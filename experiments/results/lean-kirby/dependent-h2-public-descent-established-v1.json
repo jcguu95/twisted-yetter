@@ -1,0 +1,139 @@
+{
+  "schema": "dependent-h2-public-descent-established-v1",
+  "recorded_at_utc": "2026-07-28T19:23:46Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "base_git_commit": "996fe73b9b717a9192d411b452fd7161d64c08d0",
+  "git_dirty_while_recorded": true,
+  "purpose": "Close the fixed-global-H2 semantic blocker by indexing every presentation and evaluation by the actual group H2(X) of its manifold.",
+  "execution_environment": {
+    "os": "macOS 15.7.2 (24G325)",
+    "architecture": "arm64",
+    "lean": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "lean_jobs": 1
+  },
+  "implementation": [
+    {
+      "name": "presentation_reindexing",
+      "source": "lean/TwistedYetter/Kirby/RoleAwarePresentationReindexing.lean",
+      "result": "A presentation over H2 can be reindexed along any additive equivalence H2 ~= H2'. The evaluator is proved unchanged after the corresponding marking transport."
+    },
+    {
+      "name": "dependent_movie_descent",
+      "source": "lean/TwistedYetter/Kirby/DependentRoleAwareFourManifoldInvariant.lean",
+      "result": "Finite movies are explicit inductive objects. Their marking transport is recursively composed, and evaluation invariance is proved by induction from the eight local move theorems."
+    },
+    {
+      "name": "public_dependent_interface",
+      "source": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean",
+      "result": "The public input is the dependent pair (X, alpha) with alpha in H2(X). The diffeomorphism theorem compares alpha with the induced H2 map."
+    },
+    {
+      "name": "stale_fixed_h2_bridge",
+      "source": "lean/TwistedYetter/Kirby/Final/SemanticImplementationBridge.lean",
+      "result": "REMOVED. It was unimported, duplicated obsolete fixed-H2 semantics, and was not part of the successful build."
+    }
+  ],
+  "topology_boundary": {
+    "status": "EXPLICIT_CATEGORY_NEUTRAL_AXIOMS",
+    "axioms": [
+      "SpecialKirbyHandleTheory.Axioms.Realizes",
+      "SpecialKirbyHandleTheory.Axioms.presentationExists",
+      "SpecialKirbyHandleTheory.Axioms.kirbyCerfMovie",
+      "SpecialKirbyHandleTheory.Axioms.kirbyCerfMovie_transports_marking"
+    ],
+    "non_content": "These axioms do not mention a premodular category, tensor automorphism, evaluator, or scalar equality."
+  },
+  "checks": [
+    {
+      "name": "semantic_and_public_targets",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.Independent.Entry +TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge +TwistedYetter.Kirby.Final.FixedH2LocalSemanticConformance +TwistedYetter.Kirby.Final.TwistedYetterAxiomAudit",
+      "status": "PASS",
+      "job_count": 2341
+    },
+    {
+      "name": "full_build",
+      "command": "lake -Kjobs=1 build",
+      "status": "PASS",
+      "job_count": 2323,
+      "captured_log": "/tmp/twisted-yetter-full-build-dependent-h2-final.log",
+      "captured_log_sha256": "beea2327c7de7157a36bdb20d83a5586fa42fc0188aa5b40352e162124e91fe4"
+    },
+    {
+      "name": "proof_hole_scan",
+      "scope": "All changed and newly added Lean sources",
+      "patterns": [
+        "sorry",
+        "admit"
+      ],
+      "status": "PASS_NONE_FOUND"
+    },
+    {
+      "name": "stale_semantic_name_scan",
+      "scope": "lean/",
+      "patterns": [
+        "AuxiliaryH2 := Z",
+        "SemanticImplementationBridge",
+        "roleAwareNormalizationProfile",
+        "roleAwareEvaluationState"
+      ],
+      "status": "PASS_NONE_FOUND"
+    }
+  ],
+  "final_theorem_axiom_closure": {
+    "theorem": "TwistedYetter_diffeomorphism_invariant",
+    "kernel_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "smooth_manifold_and_homology_boundary": [
+      "ClosedOrientedSmoothFourManifold",
+      "H2",
+      "orientedDiffeomorphism",
+      "inducedH2",
+      "inducedH2_identity",
+      "inducedH2_compose"
+    ],
+    "category_and_local_graphical_boundary": [
+      "SourceBackedHandleChainNaturality.standardHandleChainNaturality",
+      "PremodularCategory.globalDimension_ne_zero",
+      "LiteratureBackedModularGraphicalEnvironment.ribbonFramedKinkEvaluation",
+      "DirectTwoOverTwo.finiteCouponTransportEvents",
+      "DirectTwoOverTwo.pivotalInsertion"
+    ],
+    "special_kirby_topology_boundary": [
+      "SpecialKirbyHandleTheory.Axioms.Realizes",
+      "SpecialKirbyHandleTheory.Axioms.presentationExists",
+      "SpecialKirbyHandleTheory.Axioms.kirbyCerfMovie",
+      "SpecialKirbyHandleTheory.Axioms.kirbyCerfMovie_transports_marking"
+    ]
+  },
+  "formal_assessment": {
+    "status": "DEPENDENT_H2_PUBLIC_DESCENT_ESTABLISHED_WITH_EXPLICIT_TOPOLOGY_BOUNDARY",
+    "established": [
+      "There is no global auxiliary H2 in the public invariant route.",
+      "For every manifold X, the internal presentation is indexed by H2(X).",
+      "Evaluation is invariant under reindexing by an additive equivalence.",
+      "Evaluation is invariant along explicit finite movies by induction on the eight local move theorems.",
+      "The public premodular TwistedYetter value is invariant under oriented diffeomorphism with alpha transported by the induced H2 map.",
+      "The modular theorem is a specialization of the premodular theorem."
+    ],
+    "not_established": [
+      "Equality with the original Crane-Yetter state-sum definition.",
+      "Re-certification of legacy modular numerical artifacts under the corrected role-aware evaluator.",
+      "A single monolithic structure-equivalence theorem matching every field of every independent semantic specification file to the implementation."
+    ]
+  },
+  "closed_blocker": {
+    "previous_status": "MANIFOLD_DEPENDENT_H2_NOT_YET_IMPLEMENTED",
+    "current_status": "CLOSED",
+    "evidence": [
+      "RoleAwarePresentationReindexing.roleAwareEvalH2_reindex",
+      "DependentRoleAwareFourManifoldInvariant.Movie.preserves_evaluation",
+      "DependentRoleAwareFourManifoldInvariant.evaluate_diffeomorphism_invariant",
+      "Final.TwistedYetter_diffeomorphism_invariant"
+    ]
+  }
+}

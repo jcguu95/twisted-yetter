@@ -44,7 +44,13 @@ axioms.
   TwistedYetter.Kirby.PremodularRoleAwareLocalInvariance.elementaryMove_invariant
 
 #print axioms
-  TwistedYetter.Kirby.PremodularRoleAwareFourManifoldInvariant.presentationEvaluation_localInvariant
+  TwistedYetter.Kirby.RoleAwarePresentationReindexing.roleAwareEvalH2_reindex
+
+#print axioms
+  TwistedYetter.Kirby.DependentRoleAwareFourManifoldInvariant.Movie.preserves_evaluation
+
+#print axioms
+  TwistedYetter.Kirby.DependentRoleAwareFourManifoldInvariant.TopologyBoundary.evaluate_diffeomorphism_invariant
 
 #print axioms
   TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant
