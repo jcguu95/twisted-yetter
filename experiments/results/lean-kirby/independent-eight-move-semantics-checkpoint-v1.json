@@ -1,0 +1,90 @@
+{
+  "schema": "twisted-yetter.independent-eight-move-semantics-checkpoint.v1",
+  "recorded_at_utc": "2026-07-28T06:09:31Z",
+  "git_commit": "890330fd891c59e80bce79fcd3611ee9293186b5",
+  "git_dirty": true,
+  "status": {
+    "independent_semantic_specification": "ESTABLISHED",
+    "targeted_lean_build": "PASS",
+    "fail_closed_axiom_import_audit": "PASS",
+    "old_implementation_conformance": "BLOCKED"
+  },
+  "scope": {
+    "move_kinds": [
+      "framed-isotopy",
+      "one-over-one",
+      "two-over-one",
+      "two-over-two",
+      "one-two-birth",
+      "one-two-death",
+      "two-three-birth",
+      "two-three-death"
+    ],
+    "move_kind_count": 8,
+    "semantic_level": [
+      "admitted sliced framed-link presentation",
+      "exact component roles and handle indexing",
+      "common exterior and local source-target replacement",
+      "clean oriented band-sum topology",
+      "explicit integral handle-chain complex",
+      "chain-derived H2 transport"
+    ]
+  },
+  "trusted_custom_topology_boundaries": [
+    {
+      "name": "IsHandleChainOfPresentation",
+      "meaning": "The explicit based integral chain complex is the handle-chain complex of the exact admitted presentation."
+    },
+    {
+      "name": "IsCleanOrientedBandSum",
+      "meaning": "The target presentation is a planar representative of the specified clean oriented framed band sum of the source."
+    },
+    {
+      "name": "IsInducedHandleChainTransport",
+      "meaning": "The explicit chain homotopy equivalence is the one induced by the exact geometric move."
+    }
+  ],
+  "files": [
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticHandleChain.lean",
+      "sha256": "ce89da65cb1eda5ee259f3893fea1540adefeda4c609a1cf2f52a51dd1e9acd6"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticEightMoves.lean",
+      "sha256": "9aef22ddddc758e46e8e6de91f5d98d2d35d12b1329f8d2e06b99f70e8cbdd31"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticSpecification.lean",
+      "sha256": "d0e7704626d530543bb2e1d5254af6cf29678d75a9f390e78b6153c4697e2917"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticEightMovesAxiomAudit.lean",
+      "sha256": "9f755665ea9dce6677869125793d544153361678d48317ead46c730073ffed78"
+    },
+    {
+      "path": "scripts/lean_semantic_eight_moves_axiom_audit.sh",
+      "sha256": "0cc26d031f4ca8abef37cd7c77da7e42c8d9d9ff7facbaa380490902698a2aef"
+    }
+  ],
+  "verification": {
+    "command": "scripts/lean_semantic_eight_moves_axiom_audit.sh",
+    "lean_version": "4.29.1",
+    "lake_version": "5.0.0-src+f72c35b",
+    "os": "macOS 15.7.2 arm64",
+    "lean_process_limit": 1,
+    "semantic_specification_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.SemanticSpecification"
+  },
+  "blocker": {
+    "code": "OLD_IMPLEMENTATION_BRIDGE_BLOCKED_BEFORE_CONFORMANCE_CHECK",
+    "log": "/private/tmp/semantic-implementation-bridge-failure.log",
+    "immediate_cause": "The pre-existing public route still assumes one global auxiliary H2 and fails at 14 dependent-H2 type mismatches before the old move implementation can be checked against the independent move semantics.",
+    "required_result": "A one-way bridge must reconstruct every independent semantic field and each of the three topology certifications from the old implementation; no cast, arbitrary equality, or replacement evaluator-equality axiom is permitted."
+  },
+  "non_claims": [
+    "This checkpoint does not claim that the old eight-move implementation is correct.",
+    "This checkpoint does not claim local evaluator invariance for any move.",
+    "This checkpoint does not claim a premodular four-manifold invariant.",
+    "This checkpoint does not claim Kirby-Cerf completeness.",
+    "This checkpoint does not admit a CTL theorem or final claim."
+  ]
+}

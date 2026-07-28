@@ -1,0 +1,116 @@
+{
+  "schema": "twisted-yetter.independent-eight-move-semantics-checkpoint.v2",
+  "recorded_at_utc": "2026-07-28T06:39:12Z",
+  "git_commit": "890330fd891c59e80bce79fcd3611ee9293186b5",
+  "git_dirty": true,
+  "status": {
+    "unified_semantic_entry": "ESTABLISHED",
+    "reviewable_module_split": "ESTABLISHED",
+    "targeted_lean_build": "PASS",
+    "fail_closed_axiom_import_audit": "PASS",
+    "old_implementation_conformance": "BLOCKED"
+  },
+  "unified_entry": {
+    "path": "lean/TwistedYetter/Kirby/Final/SemanticSpecification.lean",
+    "defines_new_declarations": false,
+    "audit_order": [
+      "Semantics/HandleChain.lean",
+      "Semantics/Presentation.lean",
+      "Semantics/BandSlide.lean",
+      "Semantics/Cancellation.lean",
+      "Semantics/FramedIsotopy.lean",
+      "Semantics/SlideMoves.lean",
+      "Semantics/CancellationMoves.lean",
+      "Semantics/MoveAssembly.lean",
+      "Semantics/AlgebraicInput.lean",
+      "Semantics/TopologicalInput.lean",
+      "Semantics/Evaluator.lean",
+      "Semantics/Descent.lean"
+    ]
+  },
+  "trusted_custom_topology_boundaries": [
+    "IsHandleChainOfPresentation",
+    "IsCleanOrientedBandSum",
+    "IsInducedHandleChainTransport"
+  ],
+  "files": [
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/HandleChain.lean",
+      "sha256": "ce89da65cb1eda5ee259f3893fea1540adefeda4c609a1cf2f52a51dd1e9acd6"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/Presentation.lean",
+      "sha256": "ff29d481e1e50b762ac71cd8757b66ad0343f2684e7a7102d5c0ed61d4b15f0f"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/BandSlide.lean",
+      "sha256": "cd86c343c9996879d2c8f553498621800c5cfc15988d74687ad5dc417a4323f9"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/Cancellation.lean",
+      "sha256": "8ca081e9f873e351fee122631e4b46148c4bffd721fd4dc7fa5784ea8ab62475"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/FramedIsotopy.lean",
+      "sha256": "69653e498bf177d784582c6f85aa5e468d613e322a18d0aa2c50f6e00a6a55e7"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/SlideMoves.lean",
+      "sha256": "e13f2ec6d26ea46d8264baf0fb3988e4f4d50801081c96c3f43b9c566400adfa"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/CancellationMoves.lean",
+      "sha256": "583df0c61ceb015e6d37cfc9d33a97e26171a7db273725bb373d42286efb1929"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/MoveAssembly.lean",
+      "sha256": "1f9cbd4da39163ace3ab131be228b57e46c965996cdecbcb3c6cfd4e2daa40fc"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/AlgebraicInput.lean",
+      "sha256": "b7b563ff22385f6aaa39af65a02788bd3718a3cadfbb70cdcbbb9064d372f09d"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/TopologicalInput.lean",
+      "sha256": "1e45c3f286e42213ea3c69792a2deac9b2a6fc104a9265d7f1add49e53e1ce81"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/Evaluator.lean",
+      "sha256": "4da1a3ca5fd5f113a217d6d360e939fad5b31e1ee27a4870a8510e0bc431a737"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/Semantics/Descent.lean",
+      "sha256": "fdfcf587b1b9e0041eb160b22ccb05e068c7d3868abbca20e7daca65edb0fb02"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticSpecification.lean",
+      "sha256": "4286b7d0f75e16c79aaeacb6e0a17ca7e5dbcdff896988470e9bc56220a3710d"
+    },
+    {
+      "path": "lean/TwistedYetter/Kirby/Final/SemanticEightMovesAxiomAudit.lean",
+      "sha256": "9f755665ea9dce6677869125793d544153361678d48317ead46c730073ffed78"
+    },
+    {
+      "path": "scripts/lean_semantic_eight_moves_axiom_audit.sh",
+      "sha256": "9995f7d4d82594b3aed001142ce680c92e3027fa4575b106a870c5e8d3a71303"
+    }
+  ],
+  "verification": {
+    "command": "scripts/lean_semantic_eight_moves_axiom_audit.sh",
+    "semantic_entry_build": "LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.SemanticSpecification",
+    "lean_version": "4.29.1",
+    "lake_version": "5.0.0-src+f72c35b",
+    "os": "macOS 15.7.2 arm64",
+    "lean_process_limit": 1
+  },
+  "blocker": {
+    "code": "OLD_IMPLEMENTATION_BRIDGE_BLOCKED_BEFORE_CONFORMANCE_CHECK",
+    "immediate_cause": "The pre-existing public route still has 14 dependent-H2 type mismatches."
+  },
+  "non_claims": [
+    "This refactor does not prove that the old implementation conforms to the independent semantics.",
+    "This refactor does not prove local evaluator invariance for the eight moves.",
+    "This refactor does not establish a premodular four-manifold invariant.",
+    "This refactor changes audit structure, not mathematical content."
+  ]
+}

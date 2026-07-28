@@ -101,8 +101,16 @@ abbrev HomologicalFourManifold :=
 
 namespace SpecialKirbyHandleTheory
 
-/-- Integral auxiliary coordinates used by the canonical presentation type. -/
-abbrev AuxiliaryH₂ := ℤ
+/--
+The presentation coordinate group must be the actual integral second
+homology of the manifold being presented.
+
+This deliberately makes the former global-`ℤ` route fail: every downstream
+construction must now state which manifold its presentation belongs to.
+-/
+abbrev AuxiliaryH₂
+    (X : ClosedOrientedSmoothFourManifold) :=
+  H₂ X
 
 namespace Axioms
 
