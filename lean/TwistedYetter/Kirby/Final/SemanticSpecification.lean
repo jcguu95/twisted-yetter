@@ -10,6 +10,7 @@ import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicInput
 import TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge
 import TwistedYetter.Kirby.Final.Semantics.IndependentPresentationSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentHomologyMarkingSpecification
+import TwistedYetter.Kirby.Final.Semantics.IndependentMoveHomologyTransportSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentEvaluatorSpecification
 import TwistedYetter.Kirby.Final.Semantics.TopologicalInput
@@ -37,13 +38,16 @@ defines nothing; it points to thirteen reviewable layers in dependency order:
     special-Kirby-diagram input, independent of the implementation.
 13. `Semantics/IndependentHomologyMarkingSpecification.lean`: the normative
     `ker(∂₂)/im(∂₃)` marking and auxiliary representative/chart semantics.
-14. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
+14. `Semantics/IndependentMoveHomologyTransportSpecification.lean`: the
+    normative source-to-target chain maps and induced H₂ transport for all
+    eight directed Kirby moves.
+15. `Semantics/IndependentGraphicalCalculusSpecification.lean`: the normative
     typed ribbon-diagram language, general coupons, and closed scalar semantics.
-15. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
+16. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
     role-aware finite-sum formula, written independently of the implementation.
-16. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
+17. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
     certified against the independent specification.
-17. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
+18. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
 
 The compatibility facades `SemanticHandleChain.lean` and
 `SemanticEightMoves.lean`, together with `Semantics/Moves.lean` and

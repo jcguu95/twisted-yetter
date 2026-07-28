@@ -1,0 +1,224 @@
+#+title: Kirby Move 的 H₂ Transport：獨立人類語意規格
+#+date: 2026-07-28T07:49:15-0600
+#+options: toc:2
+
+* 0. 文件地位
+
+這份文件不看 repo 既有 move compiler、move transport、evaluator、
+descent、Sage code 或 bridge。
+
+它只回答：
+
+#+begin_quote
+一個 Kirby move 從 diagram \(D\) 走到 \(D'\) 時，
+\(\alpha\in H_2^{\mathrm{Kirby}}(D)\) exactly 怎麼變成
+\(\alpha'\in H_2^{\mathrm{Kirby}}(D')\)？
+#+end_quote
+
+答案不能是另一條「\(\alpha\) 被正確搬運」的 axiom。答案必須是一份
+source-to-target chain map，而 \(\alpha'\) 是它在
+\(\ker\partial_2/\operatorname{im}\partial_3\) 上誘導的 map。
+
+這裡沒有 category、character、coupon、evaluation 或 scalar equality。
+
+* 1. 共通 Chain Map
+
+給 source \(D\) 與 target \(D'\)，一份 transport 包含：
+
+\[
+ T_1:C_1(D)\to C_1(D'),\qquad
+ T_2:C_2(D)\to C_2(D'),\qquad
+ T_3:C_3(D)\to C_3(D').
+\]
+
+它們必須滿足：
+
+\[
+ \partial'_2T_2=T_1\partial_2,
+ \qquad
+ \partial'_3T_3=T_2\partial_3.
+\]
+
+第一式保證 \(2\)-cycle 仍被送到 \(2\)-cycle。第二式保證兩個相差
+\(\partial_3\)-boundary 的 cycles，搬運後仍相差
+\(\partial'_3\)-boundary。
+
+因此 \(T_2\) 自動誘導：
+
+\[
+ T_{H_2}:
+ H_2^{\mathrm{Kirby}}(D)
+ \longrightarrow
+ H_2^{\mathrm{Kirby}}(D').
+\]
+
+這就是 \(\alpha\) 唯一合法的 transport。沒有第二份獨立選擇。
+
+* 2. 為什麼使用 H₂ Equivalence
+
+一般 slide 或 isotopy 會給 chain isomorphism。
+
+但是 \(1\)-\(2\) birth 會多出一個 \(C_1\) generator 與一個 \(C_2\)
+generator；\(2\)-\(3\) birth 會多出一個 \(C_2\) generator 與一個
+\(C_3\) generator。因此 birth 前後的 chain groups 不同 rank，不應假裝
+它們是 chain isomorphic。
+
+正確要求是給明確 forward 與 backward chain maps，並證明它們在 \(H_2\)
+上互為反函數。
+
+* 3. Temporary Orientation Charts
+
+Diagram 本身仍沒有 component orientation。
+
+只有為了審查每一個 move 的 integer matrix 時，暫時替每條 handle
+orientation line 選 generator。這時：
+
+- =identityFormula= 表示每個 source handle generator 去同 index 的 target
+  generator；
+- =shearFormula moving stationary ε= 表示
+
+\[
+ e_{\mathrm{moving}}
+ \longmapsto
+ e'_{\mathrm{moving}}+\varepsilon e'_{\mathrm{stationary}},
+ \qquad
+ \varepsilon\in\{+1,-1\},
+\]
+
+其他 generators 固定。
+
+這些 charts 只容許各 handle line 自己換 sign，不能任意
+\(GL(n,\mathbb Z)\) 混合 handles。
+
+* 4. 八種 Moves
+
+** 4.1 Framed Isotopy
+
+沒有新增或刪除 handle，也沒有 handle slide。
+
+\(T_1,T_2,T_3\) 都只是同一批 handles 的 signed reindexing。換句話說，
+它只追蹤哪一個 component 在 isotopy 後叫什麼名字，以及暫時 orientation
+generator 是否反號。
+
+** 4.2 One Over One
+
+moving dotted \(1\)-handle 滑過 stationary dotted \(1\)-handle。
+
+在 \(C_1\) 做 elementary shear：
+
+\[
+ e_m\longmapsto e'_m+\varepsilon e'_s.
+\]
+
+其他 \(1\)-handle generator 固定。\(2\)-handles 與 \(3\)-handles 依個別
+component correspondence 搬運。兩個 chain-map equations負責驗證新的
+\(\partial_2,\partial_3\) 與這個 degree-one shear 相容。
+
+** 4.3 Two Over One
+
+moving ordinary \(2\)-handle 的 attaching geometry 穿過指定 dotted
+\(1\)-handle，但沒有建立、刪除或重新命名 handle generator。
+
+本規格把 \(T_1,T_2,T_3\) 釘成個別 handle components 的 identity
+correspondence。非平凡的 topology obligation 是：改變前後由 punctures
+計出的 incidence maps，確實使這三個 identity maps 成為 chain map。
+
+這是本文件最需要人類再次審查的一條。如果所採用的 \(2/1\) move
+convention 在 handle chain complex 上不是 identity correspondence，
+之後 conformance check 必須在這裡爆紅；不能偷偷修 bridge。
+
+** 4.4 Two Over Two
+
+moving ordinary \(2\)-handle 滑過 stationary ordinary \(2\)-handle。
+
+在 \(C_2\) 做 elementary shear：
+
+\[
+ e_m\longmapsto e'_m+\varepsilon e'_s.
+\]
+
+\(C_1\) 與 \(C_3\) 依個別 handle correspondence 搬運。chain-map
+equations負責驗證 \(\partial_2,\partial_3\) 的相應變化。
+
+source-to-target 與 target-to-source 的 shear sign 必須相反。這是第二個
+需要嚴格檢查的 convention。
+
+** 4.5 One–Two Birth
+
+加入一個新的 \(1\)-handle \(u\) 與新的 \(2\)-handle \(v\)，形成 acyclic
+block：
+
+\[
+ \partial'_2v=\varepsilon u.
+\]
+
+這個 boundary 不含任何 old-handle term。舊 generators 原樣 include；
+backward map 把新 pair projection 掉。因此：
+
+\[
+ H_2(D)\cong H_2(D').
+\]
+
+** 4.6 One–Two Death
+
+它不是另一套獨立公式。它必須是某個已指定 \(1\)-\(2\) birth 的反向：
+
+- death forward = birth backward；
+- death backward = birth forward。
+
+** 4.7 Two–Three Birth
+
+加入新的 \(2\)-handle \(v\) 與新的 \(3\)-handle \(w\)，形成 acyclic
+block：
+
+\[
+ \partial'_3w=\varepsilon v,
+ \qquad
+ \partial'_2v=0.
+\]
+
+同樣不得混入 old-handle terms。舊 generators include，backward map
+projection 掉新 pair，因此 \(H_2\) 不變。
+
+** 4.8 Two–Three Death
+
+它必須是某個已指定 \(2\)-\(3\) birth 的反向，不重新猜 transport。
+
+* 5. Finite Kirby Movie
+
+一串有限 moves：
+
+\[
+ D_0\to D_1\to\cdots\to D_n
+\]
+
+在 \(H_2\) 上的 transport 就是：
+
+\[
+ T_{n,H_2}\circ\cdots\circ T_{1,H_2}.
+\]
+
+這裡沒有新的 axiom，也沒有「整串 movie transport 正確」的第二個黑箱。
+
+* 6. 最需要審查的地方
+
+1. =2/1= 在本 move convention 下是否真的對 handle generators 採 identity
+   correspondence；
+2. =1/1= 與 =2/2= 的 source-to-target shear 方向及 \(\varepsilon\) convention；
+3. \(1\)-\(2\) birth 的新 \(2\)-handle boundary 是否完全沒有 old
+   \(1\)-handle term；
+4. \(2\)-\(3\) birth 的新 \(3\)-handle boundary 是否完全沒有 old
+   \(2\)-handle term。
+
+如果任一項與真正 topology 不同，之後 bridge 應該 fail。這不是壞事。
+
+* 7. 明確 Non-Claims
+
+- 尚未證明既有 move implementation 符合這份規格；
+- 尚未證明 topology 中的每個 concrete move 產生上述 chain maps；
+- 尚未接 evaluator；
+- 尚未證明任何 local evaluation equality；
+- 尚未證明 Kirby–Cerf completeness；
+- 尚未建立與 closed manifold singular \(H_2\) 的 comparison；
+- 尚未編譯本檔；
+- 尚未跑 bridge。

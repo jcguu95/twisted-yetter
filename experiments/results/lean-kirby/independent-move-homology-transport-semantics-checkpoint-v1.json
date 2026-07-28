@@ -1,0 +1,54 @@
+{
+  "schema": "independent-move-homology-transport-semantics-checkpoint-v1",
+  "recorded_at_utc": "2026-07-28T13:49:15Z",
+  "recorded_at_local": "2026-07-28T07:49:15-0600",
+  "git_base_commit": "96ca82f8e2ed0da842b60ac1ae385362c5efb5ad",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "independence_policy": {
+    "existing_move_compiler_read": false,
+    "existing_move_transport_read": false,
+    "existing_evaluator_read": false,
+    "existing_descent_read": false,
+    "sage_code_read": false,
+    "bridge_read": false,
+    "independent_presentation_specification_read": true,
+    "independent_homology_marking_specification_read": true
+  },
+  "pinned_semantics": {
+    "map_direction": "source_to_target",
+    "alpha_transport": "quotient map induced by an explicit degree-3/2/1 chain map",
+    "separate_correct_alpha_axiom_allowed": false,
+    "birth_death_model": "explicit forward/backward chain maps inducing inverse H2 maps",
+    "framed_isotopy": "signed handle reindexing",
+    "one_over_one": "elementary shear in degree one",
+    "two_over_one": "identity handle-generator correspondence; geometry must prove chain-map compatibility",
+    "two_over_two": "elementary shear in degree two",
+    "one_two_birth": "add acyclic C2-to-C1 pair",
+    "one_two_death": "reverse of specified one-two birth",
+    "two_three_birth": "add acyclic C3-to-C2 pair",
+    "two_three_death": "reverse of specified two-three birth",
+    "finite_movie": "ordered composition of induced H2 maps"
+  },
+  "high_risk_review_points": [
+    "two-over-one identity correspondence convention",
+    "source-to-target shear direction and sign for one-over-one",
+    "source-to-target shear direction and sign for two-over-two",
+    "absence of old-handle terms in cancellation blocks"
+  ],
+  "deferred_obligations": [
+    "Lean compilation of this specification",
+    "bridge from concrete move geometry to each explicit chain formula",
+    "orientation-chart independence",
+    "comparison with singular H2 transport",
+    "evaluator representative independence",
+    "local evaluation invariance",
+    "Kirby-Cerf descent"
+  ],
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_run": false,
+    "axiom_audit_run": false,
+    "reason": "All independent semantic entrances are being pinned before any conformance check."
+  }
+}
