@@ -1,0 +1,186 @@
+#+title: Special Kirby Diagram：獨立人類語意規格
+#+date: 2026-07-28T06:48:49-0600
+#+options: toc:2
+
+* 0. 文件地位
+
+這份文件釘死本project中 =SpecialKirbyDiagram= 的意思。
+
+它不是從repo既有presentation、moves、evaluator、Sage code或bridge反推而來。
+本輪不檢查既有實作是否符合本文件。
+
+=SpecialKirbyDiagram= 不是完整handle presentation。尤其，它不保存
+\(3\)-handle attaching spheres。
+
+* 1. 為什麼叫 Special Kirby Diagram
+
+本project中的special表示：
+
+1. 有一個隱含的primal \(0\)-handle；
+2. dotted components表示primal \(1\)-handles；
+3. framed components表示primal \(2\)-handles；
+4. 保存 \(h_3\)，但不保存individual \(3\)-handle attaching spheres；
+5. 有certificate證明 \(0/1/2\)-handlebody的boundary是
+   \(\#^{h_3}(S^1\times S^2)\)；
+6. 因此前述body可用 \(h_3\) 個 \(3\)-handles和一個 \(4\)-handle封閉；
+7. 有chosen dotted spanning disks與完整puncture/bunching資料。
+
+它不是一份一般smooth handle decomposition。
+
+* 2. 不包含 Component Orientation
+
+Kirby diagram中的dotted與framed link components在這份semantic input中
+都沒有orientation。
+
+Orientation只在後面的handle-chain／\(H_2\) coordinate semantics中選擇。
+屆時orientation用來決定：
+
+- chain basis的正負；
+- disk intersection signs；
+- character exponent的正負；
+- oriented ribbon label何時取dual。
+
+所以orientation不是 =SpecialKirbyDiagram= 的field。
+
+* 3. Dotted Unlink
+
+令
+
+\[
+  U=U_1\sqcup\cdots\sqcup U_{h_1}\subset S^3
+\]
+
+為一組pairwise disjoint dotted knots。
+
+要求 \(U\) 是unlink。每個 \(U_i\) 表示一個primal \(1\)-handle。
+
+Dotted component：
+
+- 沒有framing；
+- 不是ordinary \(2\)-handle；
+- 不是Kirby-coloured component；
+- 不帶category label；
+- 不帶character coupon。
+
+* 4. Ordinary Framed Link
+
+令
+
+\[
+  L=L_1\sqcup\cdots\sqcup L_{h_2}\subset S^3\setminus U
+\]
+
+為pairwise disjoint framed knots。每個 \(L_j\) 表示一個primal
+\(2\)-handle attaching circle及其framing。
+
+這一層不包含simple labels、Kirby colour、\(\eta\)、\(\alpha\)或evaluation。
+
+* 5. Chosen Dotted Spanning Disks
+
+每個dotted component \(U_i\) 都保存一個chosen embedded spanning disk
+
+\[
+  \Delta_i\subset S^3,
+  \qquad
+  \partial\Delta_i=U_i.
+\]
+
+要求 \(\Delta_i\) 彼此不相交。
+
+Ordinary strands可以穿過這些disks，但所有intersection都必須transverse。
+
+* 6. 完整有限 Puncture Data
+
+對每個 \(\Delta_i\)，保存一個有限ordered list
+
+\[
+  \mathsf{punctures}(\Delta_i)
+  =
+  (p_1,\ldots,p_m).
+\]
+
+每個 \(p_r\) 保存：
+
+- 幾何intersection point；
+- 它屬於哪一個ordinary component \(L_j\)。
+
+這份list必須同時滿足：
+
+1. soundness：list裡每個point都真的是
+   \(\Delta_i\cap L_j\) 的transverse intersection；
+2. completeness：每個真正的intersection都出現在list裡；
+3. no duplication：同一puncture不能重複出現。
+
+這裡暫時沒有intersection sign，因為diagram沒有選orientation。
+
+* 7. Bunching Data
+
+每個dotted disk保存一份bunching datum。它把有限punctures整理成之後
+graphical calculus可以讀取的tensor word。
+
+Bunching datum必須exactly使用該disk的完整puncture list，不能漏掉、
+加入或交換成其他disk的punctures。
+
+換bunching後evaluation不變，將來是graphical-calculus theorem；
+不是這份presentation definition中的假設。
+
+* 8. Closing Topology Certificate
+
+由一個 \(0\)-handle、上述dotted \(1\)-handles與framed \(2\)-handles
+得到compact four-manifold
+
+\[
+  W_{0,1,2}.
+\]
+
+=SpecialKirbyDiagram= 必須保存certificate：
+
+\[
+  \partial W_{0,1,2}
+  \cong_{\mathrm{or}}
+  \#^{h_3}(S^1\times S^2).
+\]
+
+因此它可以使用 \(h_3\) 個 \(3\)-handles和一個 \(4\)-handle封閉。
+
+Certificate只陳述oriented \(3\)-manifold diffeomorphism。它不得包含：
+
+- category；
+- character；
+- homology class；
+- graphical evaluation；
+- scalar equality；
+- final invariant。
+
+* 9. 精確輸入摘要
+
+\[
+\boxed{
+\begin{aligned}
+\mathsf{SpecialKirbyDiagram}
+=\;&
+\text{dotted unlink }U\\
+&+\text{ordinary framed link }L\\
+&+\text{chosen pairwise-disjoint spanning disks }\Delta_i\\
+&+\text{exact finite puncture lists}\\
+&+\text{bunching data}\\
+&+\left(
+  \partial W_{0,1,2}
+  \cong
+  \#^{h_3}(S^1\times S^2)
+\right).
+\end{aligned}
+}
+\]
+
+沒有complete handle presentation，也沒有 \(3\)-handle attaching spheres。
+
+* 10. 明確 Non-Claims
+
+- 尚未證明既有repo presentation符合本規格；
+- 尚未建立planar parser；
+- 尚未建立handle-chain boundary maps；
+- 尚未加入component orientations；
+- 尚未定義\(\alpha\)或character coupons；
+- 尚未定義evaluator；
+- 尚未證明Kirby moves或four-manifold invariance。
