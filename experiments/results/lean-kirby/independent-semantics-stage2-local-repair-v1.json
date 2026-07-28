@@ -1,0 +1,130 @@
+{
+  "schema": "independent-semantics-stage2-local-repair-v1",
+  "recorded_at_utc": "2026-07-28T19:04:20Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "base_git_commit": "5deeb54937aaa560602fce4caca151d35a8cf803",
+  "git_dirty_while_recorded": true,
+  "purpose": "Record the fixed-but-arbitrary-H2 semantic repairs completed before the manifold-dependent H2 refactor.",
+  "execution_environment": {
+    "os": "macOS 15.7.2 (24G325)",
+    "architecture": "arm64",
+    "lean": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lean_jobs": 1
+  },
+  "reference": {
+    "work": "Ying Hong Tham, On the Category of Boundary Values in the Extended Crane-Yetter TQFT",
+    "locator": "Definition 5.11, PDF page 58",
+    "url": "https://www.math.stonybrook.edu/alumni/2021-Ying-Hong-Tham.pdf",
+    "interpretation_used": [
+      "A primal 4-handle contributes one factor D.",
+      "Each primal 3-handle contributes one factor D^-1.",
+      "A special dotted 1-handle uses the plain tensor-unit projector and carries no additional D factor."
+    ]
+  },
+  "semantic_repairs": [
+    {
+      "name": "special_dotted_cut",
+      "before": "globalDimension multiplied by the tensor-unit projector",
+      "after": "the plain tensor-unit projector",
+      "status": "PASS"
+    },
+    {
+      "name": "dual_handle_normalization",
+      "before": "legacy Bärenz-Barrett-style handle-count profile",
+      "after": "globalDimension / globalDimension ^ h3",
+      "status": "PASS"
+    },
+    {
+      "name": "one_two_cancellation",
+      "before": "the special cut pair was treated as contributing globalDimension",
+      "after": "the special cut pair contributes one; h3 is unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "two_three_cancellation",
+      "before": "the raw globalDimension factor was cancelled through the legacy profile",
+      "after": "the raw globalDimension factor cancels the added h3 denominator directly",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy_modular_calibration",
+      "before": "claimed the special dotted operator equals modular Kirby encircling",
+      "after": "deleted from the premodular mainline because modular encircling is D times the unit projector",
+      "status": "REMOVED_LEGACY_ROUTE"
+    }
+  ],
+  "checks": [
+    {
+      "name": "fixed_h2_local_semantic_conformance",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.FixedH2LocalSemanticConformance",
+      "status": "PASS",
+      "covers": [
+        "plain tensor-unit dotted cut",
+        "D / D^h3 normalization",
+        "representative independence for one arbitrary fixed additive commutative group H2",
+        "all eight role-aware local moves"
+      ]
+    },
+    {
+      "name": "independent_semantic_entry",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+      "status": "PASS"
+    },
+    {
+      "name": "independent_algebraic_bridge",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge",
+      "status": "PASS"
+    },
+    {
+      "name": "full_build_before_dependent_h2_refactor",
+      "command": "lake -Kjobs=1 build",
+      "status": "EXPECTED_FAIL",
+      "failed_target": "TwistedYetter.Kirby.Final.TwistedYetter",
+      "error_count_excluding_final_process_status": 14,
+      "all_compile_errors": "Application type mismatches caused by passing the family AuxiliaryH2 : X -> AddCommGrpCat to APIs that still require one fixed Type H2.",
+      "pre_existing_sorry_warnings": [
+        "TwistedYetter_on_specialKirbyPresentation",
+        "TwistedYetter_diffeomorphism_invariant"
+      ],
+      "captured_log": "/tmp/twisted-yetter-full-build-before-dependent-h2.log",
+      "captured_log_sha256": "c976a2093f81775e049271d734430f95bd985f1886a6837004c94a219eddd16e"
+    }
+  ],
+  "axiom_audit": {
+    "representative_independence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "eight_local_moves": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "SourceBackedHandleChainNaturality.standardHandleChainNaturality",
+      "PremodularCategory.globalDimension_ne_zero",
+      "EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment.ribbonFramedKinkEvaluation",
+      "RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.finiteCouponTransportEvents",
+      "RoleAwareTwoOverTwoBandMovie.DirectTwoOverTwo.pivotalInsertion"
+    ]
+  },
+  "formal_assessment": {
+    "status": "FIXED_H2_LOCAL_SEMANTICS_ESTABLISHED_DEPENDENT_H2_BLOCKED",
+    "established": [
+      "For one arbitrary fixed additive commutative group H2, the corrected role-aware evaluator has the independently specified dotted-cut and normalization formulas.",
+      "Representative independence compiles for that fixed H2.",
+      "All eight role-aware local move equalities compile with the corrected evaluator."
+    ],
+    "not_established": [
+      "A public family specialized to each manifold X with its actual group H2(X).",
+      "The full implementation bridge to the independently pinned manifold-dependent semantics.",
+      "A four-manifold invariant theorem for all closed oriented smooth four-manifolds.",
+      "Compatibility of legacy modular numerical artifacts with the corrected role-aware evaluator."
+    ]
+  },
+  "remaining_root_blocker": {
+    "status": "MANIFOLD_DEPENDENT_H2_NOT_YET_IMPLEMENTED",
+    "required": "Replace the one-global-H2 presentation/evaluation API by a family specialized at each X and H2(X).",
+    "forbidden_shortcut": "Do not identify every H2(X) with Z and do not weaken the independent semantic specification."
+  }
+}

@@ -315,25 +315,16 @@ theorem roleAwareCycleEval_birth
         𝒞 η target topology.targetGeometry targetCycle =
       CanonicalPresentation.roleAwareCycleEval
         𝒞 η source topology.sourceGeometry sourceCycle := by
-  let calculation :
-      TwoThreeLocalCalculation
-        (CanonicalPresentation.roleAwareNormalizationProfile 𝒞) := {
-    unknotValue := 𝒞.globalDimension
-    before :=
-      CanonicalPresentation.roleAwareEvaluationState
-        𝒞 η target topology.targetGeometry targetCycle
-    after :=
-      CanonicalPresentation.roleAwareEvaluationState
-        𝒞 η source topology.sourceGeometry sourceCycle
-    counts_sound := countsSound
-    unlinked_unknotted_zero_framed := True
-    unlink_witness := True.intro
-    disjoint_union_sound := fun _ =>
-      topology.rawNumerator_birth_factor
-        𝒞 η sourceCycle targetCycle transport addedExponentZero
-    pivotal_dimension_preserved := rfl
-  }
-  exact calculation.normalized_sound
+  rw [
+    CanonicalPresentation.roleAwareCycleEval,
+    CanonicalPresentation.roleAwareCycleEval,
+    topology.rawNumerator_birth_factor
+      𝒞 η sourceCycle targetCycle transport addedExponentZero,
+    CanonicalPresentation.roleAwareNormalizationFactor,
+    CanonicalPresentation.roleAwareNormalizationFactor,
+    countsSound]
+  simp only [KirbyCancellation.HandleCounts.addTwoThree, pow_succ]
+  field_simp [𝒞.globalDimension_ne_zero]
 
 /-- Death is the same theorem read in the reverse direction. -/
 theorem roleAwareCycleEval_death

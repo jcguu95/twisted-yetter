@@ -5,8 +5,8 @@ import TwistedYetter.Fusion.EGNOPremodularModular
 # Premodular special-dotted cutting
 
 The special dotted component is not replaced by an ordinary Kirby-coloured
-component.  Its local operator is the global-dimension-scaled projector onto
-the complete tensor-unit isotypic summand.
+component.  Its local operator is the projector onto the complete tensor-unit
+isotypic summand.
 
 The proofs in this file use only fusion, ribbon, and monoidal-natural
 automorphism data.  In particular, no modularity or transparent-sector
@@ -32,15 +32,14 @@ variable {S : Type} [Fintype S] [DecidableEq S]
 /--
 The operator represented by cutting a special dotted component.
 
-The global-dimension factor is the normalization already used by the link
-evaluator.  The projector retains every copy of the tensor unit and no
-transparent non-unit summand.
+This is Tham's index-three map from Definition 5.11: it retains every copy of
+the tensor unit and no transparent non-unit summand.  It carries no additional
+global-dimension scalar.
 -/
 noncomputable def specialDottedCutOperator
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (X : C) : X ⟶ X :=
-  𝒞.globalDimension •
-    unitSummandProjector 𝒞.toFusionCategoryData X
+  unitSummandProjector 𝒞.toFusionCategoryData X
 
 /-- On a simple puncture, the special cut keeps exactly the tensor unit. -/
 theorem specialDottedCutOperator_simple
@@ -48,12 +47,11 @@ theorem specialDottedCutOperator_simple
     (s : S) :
     specialDottedCutOperator 𝒞 (𝒞.simple s) =
       if s = 𝒞.toFusionCategoryData.unitIndex then
-        𝒞.globalDimension • 𝟙 (𝒞.simple s)
+        𝟙 (𝒞.simple s)
       else
         0 := by
   rw [specialDottedCutOperator,
     unitSummandProjector_simple 𝒞.toFusionCategoryData s]
-  split <;> simp
 
 /-- A character coupon is invisible immediately before a special cut. -/
 theorem automorphism_power_specialDottedCut_left
@@ -65,8 +63,8 @@ theorem automorphism_power_specialDottedCut_left
         specialDottedCutOperator 𝒞 X =
       specialDottedCutOperator 𝒞 X := by
   unfold specialDottedCutOperator
-  rw [CategoryTheory.Linear.comp_smul]
-  rw [automorphism_power_projector_left]
+  exact automorphism_power_projector_left
+    𝒞.toFusionCategoryData η X exponent
 
 /-- A character coupon is invisible immediately after a special cut. -/
 theorem automorphism_power_specialDottedCut_right
@@ -78,8 +76,8 @@ theorem automorphism_power_specialDottedCut_right
         automorphismObjectPower η X exponent =
       specialDottedCutOperator 𝒞 X := by
   unfold specialDottedCutOperator
-  rw [CategoryTheory.Linear.smul_comp]
-  rw [automorphism_power_projector_right]
+  exact automorphism_power_projector_right
+    𝒞.toFusionCategoryData η X exponent
 
 /--
 A positive crossing carries the special cut from one side of the crossing to
@@ -124,7 +122,7 @@ theorem disjoint_specialDottedCuts_interchange
     (specialDottedCutOperator 𝒞 Y)).symm
 
 /--
-The modular specialization uses exactly the same normalized operator.
+The modular specialization uses exactly the same unit-summand projector.
 
 This theorem is deliberately definitional: modularity changes which ordinary
 Kirby encircling calculations are available, not the special-cut operator.
@@ -133,9 +131,8 @@ theorem modular_specialization
     (𝒞 : ModularFusionCategory (K := K) (C := C) (S := S))
     (X : C) :
     specialDottedCutOperator 𝒞.premodular X =
-      𝒞.premodular.globalDimension •
-        unitSummandProjector
-          𝒞.premodular.toFusionCategoryData X :=
+      unitSummandProjector
+        𝒞.premodular.toFusionCategoryData X :=
   rfl
 
 /-- Machine-visible status of the category-side special-cut calculation. -/

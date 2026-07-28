@@ -343,8 +343,7 @@ theorem roleAwareCycleEval_add_integralGenerator
       roleAwareCycleEval 𝒞 η presentation.canonicalPresentation
         presentation.simultaneousGeometry cycle := by
   classical
-  unfold roleAwareCycleEval roleAwareEvaluationState
-  unfold KirbyCancellation.EvaluationState.normalized
+  unfold roleAwareCycleEval
   congr 1
   unfold roleAwareRawNumerator roleAwareLinearDiagram
   apply congrArg 𝒞.toFusionCategoryData.closedScalar

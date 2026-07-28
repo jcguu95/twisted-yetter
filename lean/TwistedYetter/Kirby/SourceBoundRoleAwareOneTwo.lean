@@ -235,10 +235,7 @@ theorem localWeight_eq_quantumDimension
     addedExponentZero,
     FusionCategoryData.automorphismScalarPower_zero, mul_one]
 
-/--
-The complete role-aware numerator gains exactly one global-dimension factor
-under a source-bound 1--2 birth.
--/
+/-- The complete role-aware numerator is unchanged under a 1--2 birth. -/
 theorem rawNumerator_birth_factor
     {H2 : Type uH} [AddCommGroup H2]
     {source target : CanonicalPresentation H2}
@@ -252,9 +249,8 @@ theorem rawNumerator_birth_factor
     (addedExponentZero : transport.addedExponent 0 = 0) :
     CanonicalPresentation.roleAwareRawNumerator
         𝒞 η target topology.targetGeometry targetCycle =
-      𝒞.globalDimension *
-        CanonicalPresentation.roleAwareRawNumerator
-          𝒞 η source topology.sourceGeometry sourceCycle := by
+      CanonicalPresentation.roleAwareRawNumerator
+        𝒞 η source topology.sourceGeometry sourceCycle := by
   classical
   rw [roleAwareRawNumerator_eq_sum]
   rw [roleAwareRawNumerator_eq_sum]
@@ -264,13 +260,13 @@ theorem rawNumerator_birth_factor
       (∑ addedLabeling : Fin 1 → S,
         𝒞.quantumDimension (addedLabeling 0) *
           specialCutMeridianClosedValue 𝒞 (addedLabeling 0)) =
-        𝒞.globalDimension := by
+        1 := by
     simpa only [Subsingleton.elim (default : Fin 1) 0] using
       Equiv.sum_comp (Equiv.funUnique (Fin 1) S)
         (fun simple =>
           𝒞.quantumDimension simple *
             specialCutMeridianClosedValue 𝒞 simple)
-        |>.trans (specialCutMeridianSum_eq_globalDimension 𝒞)
+        |>.trans (specialCutMeridianSum_eq_one 𝒞)
   change
     (∑ sourceLabeling, ∑ addedLabeling,
       CanonicalPresentation.roleAwareGlobalWeight
@@ -283,18 +279,17 @@ theorem rawNumerator_birth_factor
               𝒞 η target topology.targetGeometry
               ((topology.ordinaryChange.labelingEquiv S).symm
                 (sourceLabeling, addedLabeling))))) =
-      𝒞.globalDimension *
-        ∑ sourceLabeling,
-          CanonicalPresentation.roleAwareGlobalWeight
-              𝒞 η source sourceCycle sourceLabeling *
-            𝒞.toFusionCategoryData.closedScalar
-              (Diagram.eval C
-                (CanonicalPresentation.roleAwareTermDiagram
-                  𝒞 η source topology.sourceGeometry sourceLabeling))
+      ∑ sourceLabeling,
+        CanonicalPresentation.roleAwareGlobalWeight
+            𝒞 η source sourceCycle sourceLabeling *
+          𝒞.toFusionCategoryData.closedScalar
+            (Diagram.eval C
+              (CanonicalPresentation.roleAwareTermDiagram
+                𝒞 η source topology.sourceGeometry sourceLabeling))
   calc
     _ =
       ∑ sourceLabeling,
-        𝒞.globalDimension *
+        1 *
           (CanonicalPresentation.roleAwareGlobalWeight
               𝒞 η source sourceCycle sourceLabeling *
             𝒞.toFusionCategoryData.closedScalar
@@ -334,7 +329,7 @@ theorem rawNumerator_birth_factor
                 𝒞 η sourceLabeling addedLabeling]
               ring
           _ =
-            𝒞.globalDimension *
+            1 *
               (CanonicalPresentation.roleAwareGlobalWeight
                   𝒞 η source sourceCycle sourceLabeling *
                 𝒞.toFusionCategoryData.closedScalar
@@ -342,8 +337,7 @@ theorem rawNumerator_birth_factor
                     (CanonicalPresentation.roleAwareTermDiagram
                       𝒞 η source topology.sourceGeometry sourceLabeling))) := by
               rw [← Finset.sum_mul, addedSum]
-    _ = _ := by
-      rw [Finset.mul_sum]
+    _ = _ := by simp
 
 /-- Source-bound normalized invariance under a role-aware 1--2 birth. -/
 theorem roleAwareCycleEval_birth
@@ -363,16 +357,19 @@ theorem roleAwareCycleEval_birth
         𝒞 η target topology.targetGeometry targetCycle =
       CanonicalPresentation.roleAwareCycleEval
         𝒞 η source topology.sourceGeometry sourceCycle := by
-  unfold CanonicalPresentation.roleAwareCycleEval
-  exact normalized_eq_of_birth_raw_factor
-    𝒞
-    (CanonicalPresentation.roleAwareEvaluationState
-      𝒞 η source topology.sourceGeometry sourceCycle)
-    (CanonicalPresentation.roleAwareEvaluationState
-      𝒞 η target topology.targetGeometry targetCycle)
-    countsSound
-    (topology.rawNumerator_birth_factor
-      𝒞 η sourceCycle targetCycle transport addedExponentZero)
+  have normalizationSound :
+      CanonicalPresentation.roleAwareNormalizationFactor 𝒞 target =
+        CanonicalPresentation.roleAwareNormalizationFactor 𝒞 source := by
+    simp only [
+      CanonicalPresentation.roleAwareNormalizationFactor,
+      countsSound,
+      KirbyCancellation.HandleCounts.addOneTwo]
+  rw [
+    CanonicalPresentation.roleAwareCycleEval,
+    CanonicalPresentation.roleAwareCycleEval,
+    normalizationSound,
+    topology.rawNumerator_birth_factor
+      𝒞 η sourceCycle targetCycle transport addedExponentZero]
 
 /--
 Death is the same source-bound theorem read backwards; no second graphical or

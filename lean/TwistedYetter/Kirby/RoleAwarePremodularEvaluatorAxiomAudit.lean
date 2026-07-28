@@ -1,4 +1,3 @@
-import TwistedYetter.Kirby.RoleAwareModularCalibration
 import TwistedYetter.Kirby.PremodularUnitCutSlides
 import TwistedYetter.Kirby.PremodularOneTwoCutCancellation
 import TwistedYetter.Kirby.RoleAwareUnitCutSlideDiagrams
@@ -19,12 +18,6 @@ the eight legacy ordinary-window slide axioms.
 
 #print axioms
   TwistedYetter.Kirby.RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareModularCalibration.RoleAwareDiagram.interpret_eval_eq_legacy
-
-#print axioms
-  TwistedYetter.Kirby.RoleAwareModularCalibration.CanonicalPresentation.roleAwareLinearDiagram_eval_eq_legacyCollapsed
 
 #print axioms
   TwistedYetter.Kirby.PremodularUnitCutSlides.twoOverOne_positive
@@ -66,16 +59,13 @@ the eight legacy ordinary-window slide axioms.
   TwistedYetter.Kirby.SourceBoundUnitCutGeometry.oneOverOne_roleAwareCycleEval_eq
 
 #print axioms
-  TwistedYetter.Kirby.PremodularOneTwoCutCancellation.specialOneTwoPairValue_eq_normalizationFactor
+  TwistedYetter.Kirby.PremodularOneTwoCutCancellation.specialOneTwoPairValue_eq_one
 
 #print axioms
   TwistedYetter.Kirby.PremodularOneTwoCutCancellation.specialCutMeridianClosedValue_eq
 
 #print axioms
-  TwistedYetter.Kirby.PremodularOneTwoCutCancellation.specialCutMeridianSum_eq_globalDimension
-
-#print axioms
-  TwistedYetter.Kirby.PremodularOneTwoCutCancellation.normalized_eq_of_birth_raw_factor
+  TwistedYetter.Kirby.PremodularOneTwoCutCancellation.specialCutMeridianSum_eq_one
 
 #print axioms
   TwistedYetter.Kirby.SourceBoundRoleAwareOneTwo.BirthTopology.rawNumerator_birth_factor

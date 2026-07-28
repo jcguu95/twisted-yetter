@@ -380,13 +380,20 @@ theorem roleAwareCycleEval_transport
         𝒞 η source sourceGeometry sourceCycle =
       RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
         𝒞 η target targetGeometry targetCycle := by
-  unfold
-    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
-  apply
-    TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw
-  · exact countsSound
-  · exact roleAwareRawNumerator_transport
-      𝒞 η sourceGeometry targetGeometry change transport term_sound
+  have normalizationSound :
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
+          𝒞 source =
+        RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
+          𝒞 target := by
+    simp only [
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor,
+      countsSound]
+  rw [
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval,
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval,
+    normalizationSound,
+    roleAwareRawNumerator_transport
+      𝒞 η sourceGeometry targetGeometry change transport term_sound]
 
 /--
 Equal complete role-aware finite sums give equal normalized evaluations.
@@ -419,13 +426,24 @@ theorem roleAwareCycleEval_eq_of_linearDiagram_eval_eq
         𝒞 η source sourceGeometry sourceCycle =
       RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
         𝒞 η target targetGeometry targetCycle := by
+  have normalizationSound :
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
+          𝒞 source =
+        RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
+          𝒞 target := by
+    simp only [
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor,
+      countsSound]
+  rw [
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval,
+    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval,
+    normalizationSound]
+  apply congrArg
+    (fun raw =>
+      RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
+          𝒞 target * raw)
   unfold
-    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
-    RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareEvaluationState
     RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareRawNumerator
-  apply
-    TwistedYetter.Kirby.HomologicallyTwistedInvariant.EvaluatedTableTwoStep.normalized_eq_of_counts_and_raw
-  · exact countsSound
-  · exact congrArg 𝒞.toFusionCategoryData.closedScalar sum_sound
+  exact congrArg 𝒞.toFusionCategoryData.closedScalar sum_sound
 
 end TwistedYetter.Kirby.RoleAwareSameComponentTransport

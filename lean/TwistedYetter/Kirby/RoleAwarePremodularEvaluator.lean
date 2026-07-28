@@ -252,11 +252,11 @@ noncomputable def roleAwareRawNumerator
       (roleAwareLinearDiagram 𝒞 η presentation geometry cycle))
 
 /--
-Normalization for the special-cut evaluator.
+Legacy Bärenz--Barrett normalization profile.
 
-The dotted cut itself supplies one global-dimension factor.  Consequently
-the effective transparent factor is exactly one, even when the Müger centre
-is nontrivial.
+The role-aware Tham evaluator below no longer uses this profile.  It remains
+temporarily visible while the cancellation modules are migrated away from the
+former scaled-dotted-cut convention.
 -/
 noncomputable def roleAwareNormalizationProfile
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
@@ -285,6 +285,21 @@ noncomputable def roleAwareEvaluationState
   rawNumerator :=
     roleAwareRawNumerator 𝒞 η presentation geometry cycle
 
+/--
+Tham Definition 5.11 normalization in the dual handle decomposition.
+
+The unique primal four-handle is the dual index-zero handle and contributes
+`D`.  Each primal three-handle is a dual index-one handle and contributes
+`D⁻¹`.  Primal dotted one-handles are dual index-three cuts and carry no
+additional scalar.
+-/
+noncomputable def roleAwareNormalizationFactor
+    {H2 : Type uH} [AddCommGroup H2]
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (presentation : CanonicalPresentation H2) : K :=
+  𝒞.globalDimension /
+    𝒞.globalDimension ^ presentation.topology.counts.h3
+
 /-- Normalized role-aware value on an explicit degree-two cycle. -/
 noncomputable def roleAwareCycleEval
     {H2 : Type uH} [AddCommGroup H2]
@@ -293,8 +308,8 @@ noncomputable def roleAwareCycleEval
     (presentation : CanonicalPresentation H2)
     (geometry : Geometry presentation)
     (cycle : presentation.DegreeTwoCycle) : K :=
-  (roleAwareEvaluationState 𝒞 η presentation geometry cycle).normalized
-    (roleAwareNormalizationProfile 𝒞)
+  roleAwareNormalizationFactor 𝒞 presentation *
+    roleAwareRawNumerator 𝒞 η presentation geometry cycle
 
 end CanonicalPresentation
 
