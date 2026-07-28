@@ -237,3 +237,5 @@ structure KirbyMovie
       ElementaryMove (stages i.castSucc) (stages i.succ)
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 13489

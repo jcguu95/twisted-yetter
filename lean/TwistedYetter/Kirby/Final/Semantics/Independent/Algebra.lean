@@ -103,3 +103,5 @@ structure TwistedPremodularCategory
   character : TensorIdentityCharacter.{uK, uC, v} category
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 1060

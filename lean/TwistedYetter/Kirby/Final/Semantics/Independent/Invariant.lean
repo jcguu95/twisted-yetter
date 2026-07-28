@@ -130,3 +130,5 @@ def TwistedYetterDiffeomorphismInvarianceTarget
         right.markedDiagram
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 1545

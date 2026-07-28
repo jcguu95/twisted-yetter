@@ -94,3 +94,5 @@ structure RibbonGraphicalEvaluation
   tensorUnitProjectorLaw_holds : tensorUnitProjectorLaw
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 2344

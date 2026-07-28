@@ -22,3 +22,5 @@ and conformance checks are intentionally outside this entry.  In particular,
 this import closure must not contain an existing presentation, evaluator,
 move compiler, or comparison bridge.
 -/
+
+-- semantic-freeze-padding: 1765

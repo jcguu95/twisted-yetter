@@ -181,3 +181,5 @@ axiom dottedCutWords_topologicallyRealizable
     DottedCutWordsTopologicallyRealizable diagram
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 11144

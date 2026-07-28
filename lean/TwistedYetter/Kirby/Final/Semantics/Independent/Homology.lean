@@ -108,3 +108,5 @@ structure HomologicallyMarkedDiagram where
   alpha : KirbyH₂ degreeThree
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 562
