@@ -1,0 +1,90 @@
+{
+  "schema": "independent-semantics-stage2-conformance-v1",
+  "recorded_at_utc": "2026-07-28T18:35:57Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "git_commit": "f3e449d5a9d7a39937def70626f847b70ed45d96",
+  "git_dirty_before_stage2_record": false,
+  "semantic_hash_manifest": "experiments/results/lean-kirby/independent-semantics-resealed-hash-manifest-v1.json",
+  "purpose": "Pressure-test the existing implementation against the independently pinned human semantic specification without repairing a detected mismatch.",
+  "execution_policy": {
+    "lean_jobs": 1,
+    "semantic_source_edits": false,
+    "bridge_repairs_attempted": false,
+    "failure_is_evidence": true
+  },
+  "checks": [
+    {
+      "name": "independent_semantic_entry",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+      "status": "PASS",
+      "meaning": "The independently pinned semantic specification is internally well-typed."
+    },
+    {
+      "name": "algebraic_conformance_bridge",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.IndependentAlgebraicBridge",
+      "status": "PASS",
+      "meaning": "The existing premodular-category and tensor-identity-character data construct the independently pinned algebraic semantics."
+    },
+    {
+      "name": "full_implementation_conformance_bridge",
+      "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.SemanticImplementationBridge",
+      "status": "FAIL",
+      "failure_phase": "dependency_compile",
+      "failed_dependency": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean",
+      "bridge_body_reached": false,
+      "meaning": "The existing mainline cannot yet be checked against the full independent semantics."
+    }
+  ],
+  "root_blocker": {
+    "status": "MANIFOLD_DEPENDENT_H2_NOT_ACCEPTED_BY_EXISTING_PRESENTATION_IMPLEMENTATION",
+    "independent_semantics_requires": "A family X ↦ H₂(X), so each closed oriented smooth four-manifold has its own second-homology group.",
+    "existing_api_requires": "One fixed type H2 : Type u with one AddCommGroup H2 instance for the entire presentation/evaluator construction.",
+    "actual_argument": "SpecialKirbyHandleTheory.AuxiliaryH₂ : ClosedOrientedSmoothFourManifold → AddCommGrpCat",
+    "rejected_at": [
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:128",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:141",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:156",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:167",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:262",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:277",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:281",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:298",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:303",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:307",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:323",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean:327"
+    ],
+    "eli5": "The specification asks for the correct H₂ group separately for each manifold. The old API asks for one group once and reuses it everywhere. It is like a form asking for one address but receiving an address book indexed by person."
+  },
+  "coverage": {
+    "algebraic_premodular_category_and_character": "PASS",
+    "manifold_dependent_h2_and_presentation_layer": "FAIL",
+    "special_kirby_diagram_conformance": "NOT_REACHED",
+    "graphical_calculus_conformance": "NOT_REACHED",
+    "role_aware_evaluator_conformance": "NOT_REACHED",
+    "eight_move_semantics_conformance": "NOT_REACHED",
+    "public_invariant_conformance": "NOT_REACHED"
+  },
+  "additional_observations": [
+    {
+      "status": "PRE_EXISTING_GAP",
+      "description": "The failed dependency build also reports declarations using sorry in the public TwistedYetter presentation-agreement and diffeomorphism-invariance route, near lines 292 and 319.",
+      "interpretation": "These warnings were not created or repaired by Stage 2 and must not be hidden by the H₂ blocker."
+    }
+  ],
+  "formal_assessment": {
+    "status": "STAGE2_TERMINAL_BLOCKED_AT_DEPENDENT_H2_BOUNDARY",
+    "established": [
+      "The independent semantic entry compiles.",
+      "The existing algebraic input conforms to the independent algebraic semantics."
+    ],
+    "not_established": [
+      "The existing presentation implementation supports arbitrary manifold-dependent H₂.",
+      "The existing role-aware evaluator conforms to the independent evaluator semantics.",
+      "The existing eight-move implementation conforms to the independently pinned move semantics.",
+      "The public TwistedYetter definition is a certified invariant for all closed oriented smooth four-manifolds."
+    ],
+    "non_claim": "This result does not show that the evaluator or Kirby-move mathematics is wrong; compilation stopped before those bridges were checked."
+  },
+  "next_repair_obligation": "Refactor the presentation/evaluation boundary to specialize at each manifold X and use H₂(X), or make the presentation APIs genuinely dependent on X. It is forbidden to repair conformance by collapsing H₂(X) back to a single global group such as ℤ."
+}
