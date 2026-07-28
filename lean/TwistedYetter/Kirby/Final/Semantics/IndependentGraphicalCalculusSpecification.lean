@@ -60,10 +60,15 @@ The list order is the left-to-right order seen by the graphical reader.
 -/
 abbrev TensorWord := List (DirectedObject (C := C))
 
-/-- Parenthesization convention: right-associated, with the empty word `𝟙`. -/
+/--
+Parenthesization convention: right-associated, with the empty word `𝟙` and
+a singleton word interpreted as its unique object (without a trailing tensor
+unit).
+-/
 def TensorWord.value : TensorWord (C := C) → C
   | [] => 𝟙_ C
-  | X :: tail => X.value ⊗ TensorWord.value tail
+  | [X] => X.value
+  | X :: Y :: tail => X.value ⊗ TensorWord.value (Y :: tail)
 
 /--
 A completely general coupon.
@@ -131,11 +136,16 @@ The interpretation of every generator as a category morphism.
 This is the only semantic target.  There is no independent arbitrary
 function from diagrams to scalars.
 -/
-structure RibbonDiagramInterpretation where
+structure RibbonDiagramInterpretation
+    (ribbon : IndependentAlgebraicInput.RibbonStructureSemantics (C := C)) where
   interpret :
     {source target : TensorWord (C := C)} →
       RibbonDiagram source target →
-      source.value ⟶ target.value
+      (source.value ⟶ target.value)
+
+  appendIso :
+    (left right : TensorWord (C := C)) →
+      (left ++ right).value ≅ left.value ⊗ right.value
 
   identity :
     (word : TensorWord (C := C)) →
@@ -153,29 +163,52 @@ structure RibbonDiagramInterpretation where
       interpret (.compose first second) =
         interpret first ≫ interpret second
 
-  positiveCrossing_forward :
-    (X Y : C) →
-      interpret
-        (.positiveCrossing
-          ⟨X, .forward⟩
-          ⟨Y, .forward⟩) =
-        (β_ X Y).hom
+  tensor :
+    {source₁ target₁ source₂ target₂ : TensorWord (C := C)} →
+      (left : RibbonDiagram source₁ target₁) →
+      (right : RibbonDiagram source₂ target₂) →
+      interpret (.tensor left right) =
+        (appendIso source₁ source₂).hom ≫
+          (interpret left ⊗ₘ interpret right) ≫
+            (appendIso target₁ target₂).inv
 
-  negativeCrossing_forward :
-    (X Y : C) →
-      interpret
-        (.negativeCrossing
-          ⟨X, .forward⟩
-          ⟨Y, .forward⟩) =
-        (β_ X Y).inv
+  positiveCrossing :
+    (X Y : DirectedObject (C := C)) →
+      interpret (.positiveCrossing X Y) =
+        (β_ X.value Y.value).hom
+
+  negativeCrossing :
+    (X Y : DirectedObject (C := C)) →
+      interpret (.negativeCrossing X Y) =
+        (β_ Y.value X.value).inv
 
   leftEvaluation :
     (X : C) →
-      interpret (.leftEvaluation X) = eval X
+      interpret (.leftEvaluation X) = ε_ X Xᘁ
 
   leftCoevaluation :
     (X : C) →
-      interpret (.leftCoevaluation X) = coevaluation X
+      interpret (.leftCoevaluation X) = η_ X Xᘁ
+
+  rightEvaluation :
+    (X : C) →
+      interpret (.rightEvaluation X) =
+        (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
+
+  rightCoevaluation :
+    (X : C) →
+      interpret (.rightCoevaluation X) =
+        η_ X Xᘁ ≫ (β_ X Xᘁ).hom
+
+  positiveTwist :
+    (X : DirectedObject (C := C)) →
+      interpret (.positiveTwist X) =
+        ribbon.twist.hom.app X.value
+
+  negativeTwist :
+    (X : DirectedObject (C := C)) →
+      interpret (.negativeTwist X) =
+        ribbon.twist.inv.app X.value
 
 /--
 An exact, finite list of the local relations admitted by the graphical
@@ -223,7 +256,8 @@ Every listed local relation has equal categorical interpretations.  This says
 nothing about Kirby moves or four-manifolds.
 -/
 structure GraphicalRelationSoundness
-    (semantics : RibbonDiagramInterpretation (C := C)) where
+    {ribbon : IndependentAlgebraicInput.RibbonStructureSemantics (C := C)}
+    (semantics : RibbonDiagramInterpretation ribbon) where
   sound :
     {source target : TensorWord (C := C)} →
       (relation : GraphicalRelationInstance source target) →
@@ -270,13 +304,13 @@ structure FusionResolutionSemantics
     (V : C) →
       (s : S) →
       Fin (fusion.multiplicity V s) →
-      fusion.simple s ⟶ V
+      (fusion.simple s ⟶ V)
 
   projection :
     (V : C) →
       (s : S) →
       Fin (fusion.multiplicity V s) →
-      V ⟶ fusion.simple s
+      (V ⟶ fusion.simple s)
 
   orthogonality :
     (V : C) →
@@ -285,7 +319,7 @@ structure FusionResolutionSemantics
       (ν : Fin (fusion.multiplicity V t)) →
       inclusion V s μ ≫ projection V t ν =
         if h : s = t ∧ μ.val = ν.val
-        then eqToHom (by subst h.1; simp_all)
+        then eqToHom (congrArg fusion.simple h.1)
         else 0
 
   completeness :
@@ -319,7 +353,8 @@ structure ClosedRibbonScalarSemantics
     (fusion :
       IndependentAlgebraicInput.FusionCategorySemantics
         (K := K) (C := C) (S := S))
-    (interpretation : RibbonDiagramInterpretation (C := C)) where
+    {ribbon : IndependentAlgebraicInput.RibbonStructureSemantics (C := C)}
+    (interpretation : RibbonDiagramInterpretation ribbon) where
   scalar :
     RibbonDiagram ([] : TensorWord (C := C)) [] → K
 

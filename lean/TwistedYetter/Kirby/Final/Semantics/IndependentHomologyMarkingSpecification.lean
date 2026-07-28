@@ -24,20 +24,83 @@ open IndependentPresentationSpecification
 universe uKnot uFramed uDisk uPoint uBunching uThreeManifold
 
 variable
-  {geometry :
-    KirbyGeometrySemantics
-      (uKnot := uKnot)
-      (uFramed := uFramed)
-      (uDisk := uDisk)
-      (uPoint := uPoint)
-      (uBunching := uBunching)
-      (uThreeManifold := uThreeManifold)}
+  {geometry : KirbyGeometrySemantics}
 
 /-- A handle 2-chain whose `∂₂` is zero. -/
 structure TwoCycle (diagram : SpecialKirbyDiagram geometry) where
   chain : diagram.handleBoundary.twoChains.carrier
   boundaryTwo_zero :
     diagram.handleBoundary.boundaryTwo chain = 0
+
+@[ext]
+theorem TwoCycle.ext
+    {diagram : SpecialKirbyDiagram geometry}
+    {a b : TwoCycle diagram}
+    (h : a.chain = b.chain) :
+    a = b := by
+  cases a
+  cases b
+  simp_all
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    Zero (TwoCycle diagram) where
+  zero :=
+    { chain := 0
+      boundaryTwo_zero := by simp }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    Add (TwoCycle diagram) where
+  add a b :=
+    { chain := a.chain + b.chain
+      boundaryTwo_zero := by
+        rw [map_add, a.boundaryTwo_zero, b.boundaryTwo_zero]
+        simp }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    Neg (TwoCycle diagram) where
+  neg a :=
+    { chain := -a.chain
+      boundaryTwo_zero := by
+        rw [map_neg, a.boundaryTwo_zero]
+        simp }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    Sub (TwoCycle diagram) where
+  sub a b :=
+    { chain := a.chain - b.chain
+      boundaryTwo_zero := by
+        rw [map_sub, a.boundaryTwo_zero, b.boundaryTwo_zero]
+        simp }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    SMul ℕ (TwoCycle diagram) where
+  smul n a :=
+    { chain := n • a.chain
+      boundaryTwo_zero := by
+        rw [map_nsmul, a.boundaryTwo_zero]
+        simp }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    SMul ℤ (TwoCycle diagram) where
+  smul n a :=
+    { chain := n • a.chain
+      boundaryTwo_zero := by
+        rw [map_zsmul, a.boundaryTwo_zero]
+        change
+          n • (0 : diagram.handleBoundary.oneChains.carrier) = 0
+        exact zsmul_zero n }
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    AddCommGroup (TwoCycle diagram) :=
+  Function.Injective.addCommGroup
+    TwoCycle.chain
+    (fun _ _ h => TwoCycle.ext h)
+    rfl
+    (fun _ _ => rfl)
+    (fun _ => rfl)
+    (fun _ _ => rfl)
+    (fun _ _ => rfl)
+    (fun _ _ => rfl)
 
 /--
 Two cycles represent the same class exactly when their difference is the
@@ -50,28 +113,46 @@ def Homologous
     b.chain - a.chain =
       diagram.handleBoundary.boundaryThree c
 
-/-- The handle-homology relation is an equivalence relation. -/
-def homologousSetoid
+/-- The handle-homology relation respects addition of cycles. -/
+def homologousAddCon
     (diagram : SpecialKirbyDiagram geometry) :
-    Setoid (TwoCycle diagram) where
-  r := Homologous
-  iseqv := {
-    refl := by
-      intro a
-      refine ⟨0, ?_⟩
-      simp
-    symm := by
-      intro a b hab
-      rcases hab with ⟨c, hc⟩
-      refine ⟨-c, ?_⟩
-      simpa using congrArg Neg.neg hc
-    trans := by
-      intro a b c hab hbc
-      rcases hab with ⟨x, hx⟩
-      rcases hbc with ⟨y, hy⟩
-      refine ⟨x + y, ?_⟩
-      simpa [map_add] using congrArg₂ (· + ·) hx hy
-  }
+    AddCon (TwoCycle diagram) where
+  toSetoid :=
+    { r := Homologous
+      iseqv := {
+        refl := by
+          intro a
+          refine ⟨0, ?_⟩
+          simp
+        symm := by
+          intro a b hab
+          rcases hab with ⟨c, hc⟩
+          refine ⟨-c, ?_⟩
+          simpa using congrArg Neg.neg hc
+        trans := by
+          intro a b c hab hbc
+          rcases hab with ⟨x, hx⟩
+          rcases hbc with ⟨y, hy⟩
+          refine ⟨x + y, ?_⟩
+          simpa [map_add] using congrArg₂ (· + ·) hx hy
+      } }
+  add' := by
+    intro w x y z hw hy
+    rcases hw with ⟨a, ha⟩
+    rcases hy with ⟨b, hb⟩
+    refine ⟨a + b, ?_⟩
+    change
+      (x.chain + z.chain) - (w.chain + y.chain) =
+        diagram.handleBoundary.boundaryThree (a + b)
+    calc
+      (x.chain + z.chain) - (w.chain + y.chain) =
+          (x.chain - w.chain) + (z.chain - y.chain) := by
+            abel
+      _ = diagram.handleBoundary.boundaryThree a +
+          diagram.handleBoundary.boundaryThree b := by
+            rw [ha, hb]
+      _ = diagram.handleBoundary.boundaryThree (a + b) := by
+            rw [map_add]
 
 /--
 The marking group at diagram level.
@@ -79,14 +160,19 @@ The marking group at diagram level.
 This type is not abbreviated to `ℤ` and retains arbitrary rank and torsion.
 -/
 def KirbyH₂ (diagram : SpecialKirbyDiagram geometry) :=
-  Quotient (homologousSetoid diagram)
+  (homologousAddCon diagram).Quotient
+
+instance {diagram : SpecialKirbyDiagram geometry} :
+    AddCommGroup (KirbyH₂ diagram) :=
+  inferInstanceAs
+    (AddCommGroup ((homologousAddCon diagram).Quotient))
 
 /-- The quotient class of a handle 2-cycle. -/
 def classOfCycle
     {diagram : SpecialKirbyDiagram geometry}
     (cycle : TwoCycle diagram) :
     KirbyH₂ diagram :=
-  Quotient.mk _ cycle
+  (cycle : (homologousAddCon diagram).Quotient)
 
 /--
 A temporary representative used to run a cycle-level formula.

@@ -29,14 +29,7 @@ open IndependentHomologyMarkingSpecification
 universe uKnot uFramed uDisk uPoint uBunching uThreeManifold
 
 variable
-  {geometry :
-    KirbyGeometrySemantics
-      (uKnot := uKnot)
-      (uFramed := uFramed)
-      (uDisk := uDisk)
-      (uPoint := uPoint)
-      (uBunching := uBunching)
-      (uThreeManifold := uThreeManifold)}
+  {geometry : KirbyGeometrySemantics}
 
 /-- The local sign fixed by the oriented band or canceling pair. -/
 inductive LocalSign where

@@ -30,6 +30,8 @@ Graphical boundary是一個由左至右排列的有限tensor word：
 
 正向strand解讀為 \(X\)，反向strand解讀為chosen dual \(X^*\)。
 空word解讀為tensor unit \(\mathbf1\)。
+singleton word \([X]\) 直接解讀為 \(X\)，不在尾端偷偷補上一個
+tensor unit。
 
 這是expanded ribbon graph的局部方向，不是 =SpecialKirbyDiagram=
 component orientation。
@@ -117,9 +119,15 @@ Input/output ports的順序是coupon型別的一部分。
 \llbracket\text{positive crossing}\rrbracket
   &=c_{X,Y},\\
 \llbracket\text{negative crossing}\rrbracket
-  &=c_{X,Y}^{-1},\\
-\llbracket\text{evaluation/coevaluation}\rrbracket
-  &=\operatorname{ev}/\operatorname{coev},\\
+  &=c_{Y,X}^{-1}:X\otimes Y\longrightarrow Y\otimes X,\\
+\llbracket\text{left evaluation}\rrbracket
+  &=\operatorname{ev}_X,\\
+\llbracket\text{left coevaluation}\rrbracket
+  &=\operatorname{coev}_X,\\
+\llbracket\text{right evaluation}\rrbracket
+  &=\operatorname{ev}_X\circ c_{X,X^*},\\
+\llbracket\text{right coevaluation}\rrbracket
+  &=c_{X,X^*}\circ\operatorname{coev}_X,\\
 \llbracket\text{positive/negative twist}\rrbracket
   &=\theta_X^{\pm1},\\
 \llbracket\text{coupon }f\rrbracket

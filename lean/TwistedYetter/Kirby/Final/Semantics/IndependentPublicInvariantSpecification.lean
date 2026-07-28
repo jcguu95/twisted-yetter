@@ -33,25 +33,18 @@ open IndependentGraphicalCalculusSpecification
 open IndependentEvaluatorSpecification
 
 universe
-  uK uC vC uS
+  uK uC vC
   uKnot uFramed uDisk uPoint uBunching uThreeManifold
-  uManifold uDiffeomorphism
+  uManifold uH uDiffeomorphism
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 variable {C : Type uC} [Category.{vC} C] [Abelian C] [Linear K C]
 variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
-variable {S : Type uS} [Fintype S] [DecidableEq S]
+variable {S : Type} [Fintype S] [DecidableEq S]
 
 variable
-  {geometry :
-    KirbyGeometrySemantics
-      (uKnot := uKnot)
-      (uFramed := uFramed)
-      (uDisk := uDisk)
-      (uPoint := uPoint)
-      (uBunching := uBunching)
-      (uThreeManifold := uThreeManifold)}
+  {geometry : KirbyGeometrySemantics}
 
 /--
 The classical manifold-level objects deliberately not reconstructed here.
@@ -63,7 +56,7 @@ boundary.
 -/
 structure ClosedOrientedSmoothFourManifoldSemantics where
   Manifold : Type uManifold
-  H₂ : Manifold → ModuleCat ℤ
+  H₂ : Manifold → ModuleCat.{uH} ℤ
 
   OrientedDiffeomorphism :
     Manifold → Manifold → Type uDiffeomorphism
@@ -82,18 +75,18 @@ structure ClosedOrientedSmoothFourManifoldSemantics where
   inducedH₂ :
     {X Y : Manifold} →
       OrientedDiffeomorphism X Y →
-      H₂ X ≅ H₂ Y
+      (H₂ X ≅ H₂ Y)
   inducedH₂_identity :
     (X : Manifold) →
       inducedH₂ (identity X) = Iso.refl (H₂ X)
   inducedH₂_compose :
-    {X Y Z : Manifold}
-    (f : OrientedDiffeomorphism X Y)
+    {X Y Z : Manifold} →
+    (f : OrientedDiffeomorphism X Y) →
     (g : OrientedDiffeomorphism Y Z) →
       inducedH₂ (compose f g) =
         inducedH₂ f ≪≫ inducedH₂ g
   inducedH₂_inverse :
-    {X Y : Manifold}
+    {X Y : Manifold} →
     (f : OrientedDiffeomorphism X Y) →
       inducedH₂ (inverse f) =
         (inducedH₂ f).symm
@@ -119,6 +112,7 @@ identification and not an abbreviation to `ℤ`.
 -/
 structure SpecialKirbyRealization
     (topology : ClosedOrientedSmoothFourManifoldSemantics)
+    (geometry : KirbyGeometrySemantics)
     (X : topology.Manifold) where
   diagram : SpecialKirbyDiagram geometry
   realizes :
@@ -135,9 +129,10 @@ The displayed equation is the only legal bridge to the manifold class
 -/
 structure MarkedSpecialKirbyRealization
     (topology : ClosedOrientedSmoothFourManifoldSemantics)
+    (geometry : KirbyGeometrySemantics)
     (X : topology.Manifold)
     (α : topology.H₂ X) where
-  realization : SpecialKirbyRealization topology X
+  realization : SpecialKirbyRealization topology geometry X
   diagramMarking : KirbyH₂ realization.diagram
   marking_matches :
     realization.h₂Comparison diagramMarking = α
@@ -150,11 +145,12 @@ This is existence only.  It does not choose a preferred diagram and does not
 state evaluator equality.
 -/
 structure MarkedSpecialKirbyExistence
-    (topology : ClosedOrientedSmoothFourManifoldSemantics) where
-  exists :
+    (topology : ClosedOrientedSmoothFourManifoldSemantics)
+    (geometry : KirbyGeometrySemantics) where
+  realization_exists :
     (X : topology.Manifold) →
       (α : topology.H₂ X) →
-      Nonempty (MarkedSpecialKirbyRealization topology X α)
+      Nonempty (MarkedSpecialKirbyRealization topology geometry X α)
 
 /--
 The complete diagram-level evaluation theory.
@@ -167,7 +163,8 @@ quotient `KirbyH₂ diagram`.
 structure DiagramEvaluationTheory
     (𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S))
-    (graphical : EvaluatorGraphicalData 𝒞η.1) where
+    (graphical : EvaluatorGraphicalData 𝒞η.1)
+    (geometry : KirbyGeometrySemantics) where
   assembly :
     (diagram : SpecialKirbyDiagram geometry) →
       RoleAwareClosedDiagramAssembly 𝒞η graphical diagram
@@ -181,7 +178,7 @@ noncomputable def DiagramEvaluationTheory.evaluate
     {𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S)}
     {graphical : EvaluatorGraphicalData 𝒞η.1}
-    (theory : DiagramEvaluationTheory 𝒞η graphical)
+    (theory : DiagramEvaluationTheory 𝒞η graphical geometry)
     (diagram : SpecialKirbyDiagram geometry)
     (α : KirbyH₂ diagram) : K :=
   (theory.diagramEvaluator diagram).evaluate α
@@ -196,7 +193,7 @@ def ElementaryMoveEvaluationInvariant
     {𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S)}
     {graphical : EvaluatorGraphicalData 𝒞η.1}
-    (theory : DiagramEvaluationTheory 𝒞η graphical) :
+    (theory : DiagramEvaluationTheory 𝒞η graphical geometry) :
     Prop :=
   ∀ {source target : SpecialKirbyDiagram geometry}
     (move : ElementaryMoveTransport source target)
@@ -211,7 +208,7 @@ theorem kirbyMovie_preserves_evaluation
     {𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S)}
     {graphical : EvaluatorGraphicalData 𝒞η.1}
-    (theory : DiagramEvaluationTheory 𝒞η graphical)
+    (theory : DiagramEvaluationTheory 𝒞η graphical geometry)
     (localInvariant : ElementaryMoveEvaluationInvariant theory) :
     ∀ {source target : SpecialKirbyDiagram geometry}
       (movie : KirbyMovieTransport source target)
@@ -239,13 +236,14 @@ This statement contains no category, character, evaluator, or scalar
 equality.
 -/
 structure MarkedKirbyCerfCompleteness
-    (topology : ClosedOrientedSmoothFourManifoldSemantics) where
+    (topology : ClosedOrientedSmoothFourManifoldSemantics)
+    (geometry : KirbyGeometrySemantics) where
   movie :
     {X Y : topology.Manifold} →
       {α : topology.H₂ X} →
       {β : topology.H₂ Y} →
-      (P : MarkedSpecialKirbyRealization topology X α) →
-      (Q : MarkedSpecialKirbyRealization topology Y β) →
+      (P : MarkedSpecialKirbyRealization topology geometry X α) →
+      (Q : MarkedSpecialKirbyRealization topology geometry Y β) →
       (f : topology.OrientedDiffeomorphism X Y) →
       (topology.inducedH₂ f).hom α = β →
       KirbyMovieTransport
@@ -256,8 +254,8 @@ structure MarkedKirbyCerfCompleteness
     {X Y : topology.Manifold} →
       {α : topology.H₂ X} →
       {β : topology.H₂ Y} →
-      (P : MarkedSpecialKirbyRealization topology X α) →
-      (Q : MarkedSpecialKirbyRealization topology Y β) →
+      (P : MarkedSpecialKirbyRealization topology geometry X α) →
+      (Q : MarkedSpecialKirbyRealization topology geometry Y β) →
       (f : topology.OrientedDiffeomorphism X Y) →
       (h : (topology.inducedH₂ f).hom α = β) →
       (movie P Q f h).transportH₂ P.diagramMarking =
@@ -270,11 +268,11 @@ this choice.
 -/
 noncomputable def chosenMarkedRealization
     (topology : ClosedOrientedSmoothFourManifoldSemantics)
-    (existence : MarkedSpecialKirbyExistence topology)
+    (existence : MarkedSpecialKirbyExistence topology geometry)
     (X : topology.Manifold)
     (α : topology.H₂ X) :
-    MarkedSpecialKirbyRealization topology X α :=
-  Classical.choice (existence.exists X α)
+    MarkedSpecialKirbyRealization topology geometry X α :=
+  Classical.choice (existence.realization_exists X α)
 
 /--
 The public invariant has exactly the mathematical input
@@ -287,9 +285,9 @@ noncomputable def TwistedYetter
     (𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S))
     (graphical : EvaluatorGraphicalData 𝒞η.1)
-    (theory : DiagramEvaluationTheory 𝒞η graphical)
+    (theory : DiagramEvaluationTheory 𝒞η graphical geometry)
     (topology : ClosedOrientedSmoothFourManifoldSemantics)
-    (existence : MarkedSpecialKirbyExistence topology)
+    (existence : MarkedSpecialKirbyExistence topology geometry)
     (Xα : Σ X : topology.Manifold, topology.H₂ X) : K :=
   let presentation :=
     chosenMarkedRealization
@@ -312,11 +310,11 @@ theorem TwistedYetter_diffeomorphism_invariant
     (𝒞η : TwistedPremodularCategorySemantics
       (K := K) (C := C) (S := S))
     (graphical : EvaluatorGraphicalData 𝒞η.1)
-    (theory : DiagramEvaluationTheory 𝒞η graphical)
+    (theory : DiagramEvaluationTheory 𝒞η graphical geometry)
     (localInvariant : ElementaryMoveEvaluationInvariant theory)
     (topology : ClosedOrientedSmoothFourManifoldSemantics)
-    (existence : MarkedSpecialKirbyExistence topology)
-    (completeness : MarkedKirbyCerfCompleteness topology)
+    (existence : MarkedSpecialKirbyExistence topology geometry)
+    (completeness : MarkedKirbyCerfCompleteness topology geometry)
     {X Y : topology.Manifold}
     (f : topology.OrientedDiffeomorphism X Y)
     (α : topology.H₂ X) :

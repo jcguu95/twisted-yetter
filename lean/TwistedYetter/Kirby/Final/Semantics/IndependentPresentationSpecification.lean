@@ -1,4 +1,5 @@
 import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 import Mathlib.Data.List.Defs
 

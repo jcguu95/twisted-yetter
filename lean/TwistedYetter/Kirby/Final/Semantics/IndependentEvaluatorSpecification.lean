@@ -44,24 +44,17 @@ open IndependentHomologyMarkingSpecification
 open IndependentGraphicalCalculusSpecification
 
 universe
-  uK uC vC uS
+  uK uC vC
   uKnot uFramed uDisk uPoint uBunching uThreeManifold
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 variable {C : Type uC} [Category.{vC} C] [Abelian C] [Linear K C]
 variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
-variable {S : Type uS} [Fintype S] [DecidableEq S]
+variable {S : Type} [Fintype S] [DecidableEq S]
 
 variable
-  {geometry :
-    KirbyGeometrySemantics
-      (uKnot := uKnot)
-      (uFramed := uFramed)
-      (uDisk := uDisk)
-      (uPoint := uPoint)
-      (uBunching := uBunching)
-      (uThreeManifold := uThreeManifold)}
+  {geometry : KirbyGeometrySemantics}
 
 /--
 The categorical graphical data needed to interpret the formula.
@@ -73,7 +66,7 @@ endomorphism of the tensor unit.  There is no arbitrary
 structure EvaluatorGraphicalData
     (𝒞 : PremodularCategorySemantics (K := K) (C := C) (S := S)) where
   interpretation :
-    RibbonDiagramInterpretation (C := C)
+    RibbonDiagramInterpretation 𝒞.ribbon
   graphicalRelations :
     GraphicalRelationSoundness interpretation
   fusionResolution :
@@ -117,17 +110,24 @@ structure NormalizationData
   categoryDimension_ne_zero :
     categoryDimension graphical ≠ 0
 
+/-- The natural-number power of an endomorphism, using categorical composition. -/
+def endomorphismNatPower
+    {X : C}
+    (f : X ⟶ X) : ℕ → (X ⟶ X)
+  | 0 => 𝟙 X
+  | n + 1 => endomorphismNatPower f n ≫ f
+
 /--
 The integer power of the character coupon.
 
 Positive powers use the forward natural isomorphism; negative powers use its
 inverse.  Exponent zero is the identity endomorphism.
 -/
-noncomputable def characterPower
+def characterPower
     (η : TensorIdentityCharacterSemantics (C := C))
     (X : C) : ℤ → (X ⟶ X)
-  | .ofNat n => (η.iso.hom.app X) ^ n
-  | .negSucc n => (η.iso.inv.app X) ^ (n + 1)
+  | .ofNat n => endomorphismNatPower (η.iso.hom.app X) n
+  | .negSucc n => endomorphismNatPower (η.iso.inv.app X) (n + 1)
 
 /--
 An auxiliary coordinate extraction associated with one handle coordinate
