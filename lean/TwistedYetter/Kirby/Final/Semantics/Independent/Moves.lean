@@ -291,4 +291,4 @@ structure KirbyMovie
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 13489
+-- semantic-freeze-padding: 3756

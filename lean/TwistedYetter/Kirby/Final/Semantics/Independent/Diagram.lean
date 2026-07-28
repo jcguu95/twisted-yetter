@@ -220,4 +220,4 @@ axiom dottedCutWords_topologicallyRealizable
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 11144
+-- semantic-freeze-padding: 1881
