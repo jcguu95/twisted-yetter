@@ -1,0 +1,88 @@
+{
+  "schema": "independent-semantics-stage1-build-v1",
+  "recorded_at_utc": "2026-07-28T14:27:52Z",
+  "recorded_at_local": "2026-07-28T08:27:52-0600",
+  "git_commit_under_test": "917a635276974bae3cd3ba013cf745e5786e6778",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "stage": "STAGE_1_INDEPENDENT_SPECIFICATION_BUILD_ONLY",
+  "status": "BLOCKED_LEAN_ENCODING_ERRORS",
+  "command": "lake -Kjobs=1 build +TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "exit_code": 1,
+  "elapsed_seconds": 14.9644375,
+  "environment": {
+    "lake": "5.0.0-src+f72c35b",
+    "lean": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "architecture": "arm64",
+    "os": "macOS 15.7.2",
+    "os_build": "24G325"
+  },
+  "preflight": {
+    "git_clean": true,
+    "other_lean_or_lake_processes_observed": 0,
+    "requested_logical_jobs": 1
+  },
+  "successful_independent_modules_observed": [
+    "TwistedYetter.Kirby.Final.Semantics.Independent.Algebra"
+  ],
+  "root_blockers": [
+    {
+      "module": "TwistedYetter.Kirby.Final.Semantics.IndependentPresentationSpecification",
+      "line": 265,
+      "lean_error": "failed to synthesize Limits.HasBiproduct fun i => line i",
+      "classification": "LEAN_ENCODING_OR_INSTANCE_GAP",
+      "human_summary": "The coordinate-free direct sum of handle orientation lines lacks the finite biproduct instance required by the notation."
+    },
+    {
+      "module": "TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification",
+      "lines": [
+        138,
+        273,
+        279
+      ],
+      "lean_error": "type expected for category-morphism source/target expressions",
+      "classification": "LEAN_ENCODING_GAP",
+      "human_summary": "The intended object-to-object morphism types are not accepted in their current Lean encoding."
+    },
+    {
+      "module": "TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification",
+      "lines": [
+        174,
+        178
+      ],
+      "lean_error": "unknown identifiers eval and coevaluation",
+      "classification": "MATHLIB_API_NAME_GAP",
+      "human_summary": "The pivotal evaluation and coevaluation operations use names not provided by the current Mathlib API."
+    },
+    {
+      "module": "TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification",
+      "line": 288,
+      "lean_error": "unexpected dependent substitution term h.left",
+      "classification": "LEAN_PROOF_ENCODING_GAP",
+      "human_summary": "The orthogonality branch uses an invalid dependent substitution proof."
+    }
+  ],
+  "cascade_errors": [
+    "RibbonDiagramInterpretation unknown after its failed declaration",
+    "FusionResolutionSemantics unknown after its failed declaration",
+    "ClosedRibbonScalarSemantics cannot elaborate after prior failures"
+  ],
+  "not_yet_tested": [
+    "IndependentHomologyMarkingSpecification",
+    "IndependentMoveHomologyTransportSpecification",
+    "IndependentEvaluatorSpecification",
+    "IndependentPublicInvariantSpecification",
+    "Independent.Entry"
+  ],
+  "semantic_assessment": {
+    "semantic_contradiction_established": false,
+    "reason": "The build stopped at foundational Lean encodings before downstream semantic obligations could be elaborated.",
+    "stage_2_conformance_started": false
+  },
+  "non_actions": [
+    "No hash-frozen semantic file was edited.",
+    "No bridge was imported or built.",
+    "No existing evaluator or descent implementation was inspected.",
+    "No second-stage conformance check was run."
+  ]
+}
