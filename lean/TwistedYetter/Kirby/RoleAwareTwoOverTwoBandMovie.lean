@@ -23,7 +23,7 @@ open TwistedYetter.Kirby.CanonicalSourceBoundSlideMovie
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentRibbonIsotopy
 open TwistedYetter.Kirby.ComponentRibbonDiagram
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.LinearContext
 open TwistedYetter.Kirby.RoleAwareComponentDiagram
 open TwistedYetter.Kirby.RoleAwarePremodularEvaluator
@@ -1954,9 +1954,9 @@ pointwise Lemma 3.3 fibers and the two Lemma 3.4 naturality inputs.
 -/
 noncomputable def labelIndexedMovies
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S)) :
-    LabelIndexedSlidingMovies 𝒞
+    LabelIndexedEncirclingMovies 𝒞
       (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞) :=
-  TwistedYetter.Kirby.EGNOCategoryBoundSliding.labelIndexedSlidingMovies
+  TwistedYetter.Kirby.EGNOKirbyColorEncircling.labelIndexedEncirclingMovies
     𝒞 (sphericalInsertion 𝒞) (sphericalMateTrace 𝒞)
 
 end StandardPremodularBandLaws
@@ -2055,13 +2055,13 @@ theorem RoleAwareFiniteSumBlocks.internalChannelWeight_transport
     LinearDiagram.eval
         (((StandardPremodularBandLaws.labelIndexedMovies 𝒞).family
             movingLabel).fiber strand
-          |>.channelWeightedStage314
+          |>.channelWeightedInsertedSum
             (RoleAwareFiniteSumBlocks.internalChannelWeight
               window 𝒞 η sourceCycle)) =
       LinearDiagram.eval
         (((StandardPremodularBandLaws.labelIndexedMovies 𝒞).family
             movingLabel).fiber strand
-          |>.channelWeightedStage318
+          |>.channelWeightedTargetSum
             (RoleAwareFiniteSumBlocks.internalChannelWeight
               window 𝒞 η sourceCycle)) :=
   TwoOverTwoFusionChannel.internalCharacterWeight_transport
@@ -2148,7 +2148,7 @@ def recipeBinding
   window.recipeStructuralBinding
 
 /--
-The explicit endpoint binding and generalized sliding prove equality of the
+The explicit endpoint binding and Kirby-colour encircling transport prove equality of the
 two complete role-aware finite sums.
 -/
 theorem linear_eval_eq

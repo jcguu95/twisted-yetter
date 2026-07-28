@@ -135,7 +135,7 @@ noncomputable def mateCollapseMovie
       (mateExpanded X Y Y' Z Z' f)
       (mateCoupon (R := R) X Y Y' Z Z' f) :=
   Movie.one
-    { label := "BB-3.1.10-forward-mate-collapse"
+    { label := "kirby-encircling-forward-mate-collapse"
       sound := mateExpanded_sound (R := R) X Y Y' Z Z' f }
 
 /-- The opposite mate replacement as one certified local movie. -/
@@ -147,7 +147,7 @@ noncomputable def dualMateCollapseMovie
       (dualMateExpanded X Y Y' Z Z' g)
       (dualMateCoupon (R := R) X Y Y' Z Z' g) :=
   Movie.one
-    { label := "BB-3.1.10-opposite-mate-collapse"
+    { label := "kirby-encircling-opposite-mate-collapse"
       sound := dualMateExpanded_sound (R := R) X Y Y' Z Z' g }
 
 end TwistedYetter.Kirby.MateDiagram

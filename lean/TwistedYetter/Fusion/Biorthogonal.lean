@@ -5,7 +5,7 @@ import TwistedYetter.Fusion.PairingTransport
 
 A pivotal functor need not be full.  Therefore the image of a basis in the
 source category need not be a basis of the entire target Hom space.  The
-generalized sliding proof only needs the weaker and correct statement that
+Kirby-colour encircling proof only needs the weaker and correct statement that
 the two finite image families remain biorthogonal.
 -/
 

@@ -22,8 +22,8 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalPresentationCompiler
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.FramedSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.FramedEncirclingTransport
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleSlide
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCancellation
@@ -360,15 +360,15 @@ def ordinarySlideLaw
   | .twoOverOne _ _ _ law _ _ => law
 
 /-- Extract the generalized family retained by a 2-over-2 proof object. -/
-def twoOverTwoSlidingFamily
+def twoOverTwoEncirclingTransportFamily
     {source target : Boundary C}
     {before after : Diagram C source target}
     {categoryData :
       AdmissibleKirbyCategory
         (K := K) (C := C) (S := S) (I := I)} :
     TwoHandleOverTwoSlide
-      (data := categoryData.slidingData) before after →
-      SlidingFamily categoryData.slidingData
+      (data := categoryData.encirclingData) before after →
+      EncirclingTransportFamily categoryData.encirclingData
   | .twoOverTwo _ _ _ family _ _ => family
 
 def oneOverOneOrientation : HandleEdit .oneOverOne → BandOrientation
@@ -477,9 +477,9 @@ structure TwoOverTwoRealization
     (before after : Diagram C .unit .unit) where
   slide :
     TwoHandleOverTwoSlide
-      (data := categoryData.slidingData) before after
+      (data := categoryData.encirclingData) before after
   family_sound :
-    twoOverTwoSlidingFamily slide = algebra.generalizedSliding
+    twoOverTwoEncirclingTransportFamily slide = algebra.kirbyColorEncirclingTransport
   orientation_sound :
     (twoOverTwoSlideMetadata slide).orientation = orientation
   move_id_sound :

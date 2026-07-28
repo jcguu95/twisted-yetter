@@ -7,7 +7,7 @@
     "modular_specialization": "BLOCKED_BY_PREMODULAR_MAINLINE",
     "legacy_modular_compatibility": "LEGACY_MODULAR_COMPATIBILITY_BLOCKED"
   },
-  "active_blocker": "experiments/results/lean-kirby/generalized-sliding-fiber-breakdown-blocker-v1.json",
+  "active_blocker": "experiments/results/lean-kirby/kirby-color-encircling-fiber-breakdown-blocker-v1.json",
   "logic_safety_correction": {
     "unsafe_commit": "ca9cb63b2573f76bd176c85d7bc918133633601c",
     "unsafe_encoding": "StandardOrientedBandTransport was accidentally declared as an inductive proposition with no constructors.",
@@ -21,7 +21,7 @@
     "issue": "A true naturality theorem for a character coupon on the external input strand of tensorLeft was initially named as though it transported the internal fusion-channel coupon.",
     "why_it_matters": "The required twisted two-over-two calculation places eta_z^b between the projection to z and inclusion from z. A coupon on the external object of the functor-valued window has a different typed position, even though both statements can be made to compile.",
     "correction": "The theorem is now named externalCharacterCoupon_bandTransport, its documentation explicitly states the non-claim, and no mainline endpoint obligation is discharged by it.",
-    "remaining_obligation": "The former generalizedSlidingFiber axiom has been removed. Its attempted constructor deliberately leaves five explicit graphical obligations unsolved. generalizedSlidingBeforeNaturality is now a theorem; generalizedSlidingAfterNaturality remains the sole endpoint-naturality axiom in this module."
+    "remaining_obligation": "The former oversized encircling-fiber axiom has been removed. kirbyColorEncirclingFiber deliberately leaves five explicit graphical obligations unsolved. sourceEncircling_natural is now a theorem; targetEncircling_natural remains the sole endpoint-naturality axiom in this module."
   },
   "scope": {
     "ground_field": "algebraically closed characteristic-zero field",
@@ -45,12 +45,12 @@
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter",
       "status": "BLOCKED_NOT_CURRENTLY_COMPILABLE",
-      "meaning": "The public candidate is not currently buildable because the generalized-sliding fiber constructor has five exposed graphical obligations."
+      "meaning": "The public candidate is not currently buildable because the Kirby-colour encircling fiber constructor has five exposed graphical obligations."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
       "status": "BLOCKED_NOT_CURRENTLY_COMPILABLE",
-      "meaning": "No current axiom closure is available while the generalized-sliding dependency fails to compile."
+      "meaning": "No current axiom closure is available while the Kirby-colour encircling dependency fails to compile."
     },
     {
       "name": "TwistedYetter.Kirby.Final.TwistedYetterModular_diffeomorphism_invariant",
@@ -121,7 +121,7 @@
     },
     {
       "id": "INTERNAL_CHARACTER_WEIGHTED_GENERALIZED_SLIDING",
-      "evidence": "GeneralizedSliding.SlidingFiber.channelWeighted_transport; TwoOverTwoFusionChannel.internalCharacterWeight_transport; internalCharacterWeight_transport_inContext; RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.internalChannelWeight_transport",
+      "evidence": "KirbyColorEncirclingTransport.EncirclingTransportFiber.channelWeighted_transport; TwoOverTwoFusionChannel.internalCharacterWeight_transport; internalCharacterWeight_transport_inContext; RoleAwareTwoOverTwoBandMovie.Window.RoleAwareFiniteSumBlocks.internalChannelWeight_transport",
       "meaning": "Lean proves term by term that an arbitrary scalar weight on the internal simple fusion channel survives the Bärenz--Barrett braiding and mate movies and remains on the surviving target channel. It then specializes that weight to the actual character scalar eta_z^n and derives n=-b for the positive role-aware endpoint and n=b for the negative endpoint. This is not the still-missing identification of the complete source and target presentation blocks with these stages."
     },
     {
@@ -155,7 +155,7 @@
       "shum_ribbonFramedKink",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalInsertion",
       "RoleAwareTwoOverTwoBandMovie.Window.StandardPremodularBandLaws.sphericalMateTrace",
-      "EGNOCategoryBoundSliding.LiteratureInput.generalizedSlidingAfterNaturality"
+      "EGNOKirbyColorEncircling.LiteratureInput.targetEncircling_natural"
     ],
     "accepted_explicit_interpretation_and_naturality_axioms": [
       "standardHandleChainNaturality",
@@ -208,10 +208,10 @@
     "safety": "The eleven retired declarations are recorded together as commented archaeology and are absent from both public root exports and the current theorem dependency closure. Some historical source modules still contain compile-only declarations so old imports remain reproducible; these declarations are not current evidence and cannot support a claim that old computation artifacts were re-certified."
   },
   "verification": {
-    "timestamp": "2026-07-27T13:41:11-06:00",
-    "base_checkpoint_commit": "5cc0525e39448f3c37cb9a347455003388677861",
+    "timestamp": "2026-07-27T19:01:21-06:00",
+    "base_checkpoint_commit": "9ff5573813be04c4fe59cca4f6c37280c97bab6e",
     "git_dirty": true,
-    "dirty_path_count_at_capture": 4,
+    "dirty_path_count_at_capture": 63,
     "lean_version": "4.29.1",
     "lake_version": "5.0.0-src+f72c35b",
     "os": "Darwin 24.6.0 arm64",
@@ -237,7 +237,8 @@
     "mainline_axiom_audit": "UNAVAILABLE_INTENTIONAL_COMPILE_FAILURE_2026-07-27T13:40:57-06:00",
     "final_public_axiom_audit": "UNAVAILABLE_INTENTIONAL_COMPILE_FAILURE",
     "full_repository_build": "NOT_RUN_TARGETED_DEPENDENCY_ALREADY_FAILS",
-    "generalized_sliding_targeted_build": "FAIL_EXPECTED_FIVE_EXPOSED_CONSTRUCTION_GOALS_2026-07-27T13:40:57-06:00",
+    "kirby_color_encircling_targeted_build": "FAIL_EXPECTED_FIVE_EXPOSED_CONSTRUCTION_GOALS_2026-07-27T19:00:32-06:00",
+    "identity_specialization_full_build_with_temporary_sorry": "PASS_2323_JOBS_TEMPORARY_SORRY_REMOVED_BEFORE_CHECKPOINT",
     "unsupported_legacy_aggregate_imports_removed": true,
     "new_route_sorry_or_admit": false
   },

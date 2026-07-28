@@ -36,7 +36,7 @@ open TwistedYetter.Kirby.CanonicalCycleMoveGeometry
 open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator.CanonicalPresentation
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.EGNOModularFourManifoldInvariant
 open TwistedYetter.Kirby.EGNOModularKirbyMoves
 open TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment
@@ -1111,7 +1111,7 @@ end CanonicalSlideBlocks
 /-
 RETIRED LEGACY ROUTE (2026-07-27)
 
-The remaining ordinary/generalized slide wrappers belonged to the replaced
+The remaining ordinary/label-indexed slide wrappers belonged to the replaced
 modular evaluator route.  The role-aware main line closes 1/1 and 2/1 through
 unit cutting and 2/2 through the explicit channel-weighted band movie.
 
@@ -1331,7 +1331,7 @@ label-indexed sliding windows.
 The two decomposition equalities live in the free module of diagrams.  They
 cannot be replaced by an equality of evaluations or by a scalar equality.
 -/
-structure GeneralizedSlideBlockDecomposition
+structure LabelIndexedSlideBlockDecomposition
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     (orientation : BandOrientation)
@@ -1355,7 +1355,7 @@ structure GeneralizedSlideBlockDecomposition
   source_decomposition : sourceDiagram = ∑ block, before block
   target_decomposition : targetDiagram = ∑ block, after block
 
-namespace GeneralizedSlideBlockDecomposition
+namespace LabelIndexedSlideBlockDecomposition
 
 /-- Every exact block decomposition preserves the complete evaluation. -/
 theorem eval_eq
@@ -1367,7 +1367,7 @@ theorem eval_eq
     {sourceDiagram targetDiagram :
       LinearDiagram (R := K) (C := C) .unit .unit}
     (decomposition :
-      GeneralizedSlideBlockDecomposition 𝒞 automorphism orientation
+      LabelIndexedSlideBlockDecomposition 𝒞 automorphism orientation
         moveId sourceHash targetHash
         slidingComponentId stationaryComponentId
         sourceDiagram targetDiagram) :
@@ -1386,13 +1386,13 @@ theorem eval_eq
       congrArg LinearDiagram.eval
         decomposition.target_decomposition.symm
 
-end GeneralizedSlideBlockDecomposition
+end LabelIndexedSlideBlockDecomposition
 
 /--
 The remaining local input for a generalized 2-over-2 slide: one restricted
 label-indexed sliding derivation for each canonical block.
 -/
-structure CanonicalGeneralizedSlideBlockProof
+structure CanonicalLabelIndexedSlideBlockProof
     (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
     (automorphism : TensorIdentityAutomorphism C)
     {H2 : Type uH} [AddCommGroup H2]
@@ -1420,7 +1420,7 @@ structure CanonicalGeneralizedSlideBlockProof
         (CanonicalSlideBlocks.targetBlock
           𝒞 automorphism same components targetCycle remaining)
 
-namespace CanonicalGeneralizedSlideBlockProof
+namespace CanonicalLabelIndexedSlideBlockProof
 
 /-- Reassemble a complete 2-over-2 slide from canonical finite-sum blocks. -/
 noncomputable def toDecomposition
@@ -1441,11 +1441,11 @@ noncomputable def toDecomposition
     {orientation : BandOrientation}
     {moveId sourceHash targetHash : String}
     (proof :
-      CanonicalGeneralizedSlideBlockProof
+      CanonicalLabelIndexedSlideBlockProof
         𝒞 automorphism source target same components
         sourceCycle targetCycle orientation
         moveId sourceHash targetHash) :
-    GeneralizedSlideBlockDecomposition 𝒞 automorphism orientation
+    LabelIndexedSlideBlockDecomposition 𝒞 automorphism orientation
       moveId sourceHash targetHash
       slidingComponentId stationaryComponentId
       (source.cycleLinearDiagram 𝒞 automorphism sourceCycle)
@@ -1466,7 +1466,7 @@ noncomputable def toDecomposition
     CanonicalSlideBlocks.target_decomposition
       𝒞 automorphism same components targetCycle
 
-end CanonicalGeneralizedSlideBlockProof
+end CanonicalLabelIndexedSlideBlockProof
 
 /--
 Exact whole-sum geometry for a generalized 2-over-2 slide.
@@ -1485,7 +1485,7 @@ structure GeneralizedCycleSlideGeometry
     (slidingComponentId stationaryComponentId : String) where
   blockDecomposition :
     (sourceCycle : source.DegreeTwoCycle) →
-      GeneralizedSlideBlockDecomposition 𝒞 automorphism orientation
+      LabelIndexedSlideBlockDecomposition 𝒞 automorphism orientation
         moveId sourceHash targetHash
         slidingComponentId stationaryComponentId
         (source.cycleLinearDiagram 𝒞 automorphism sourceCycle)

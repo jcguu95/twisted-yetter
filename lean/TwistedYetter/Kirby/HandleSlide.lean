@@ -1,17 +1,19 @@
 import TwistedYetter.Kirby.CategoricalMovie
 
 /-!
-# Coupon-aware handle-slide interface
+# Coupon-aware local transport interfaces
 
-The fusion-category sliding lemma is isolated as equality between two natural
-endomorphisms of the identity functor. This module does not assert that such a
-law exists. Given a proved law, transport of arbitrary coupons through the
-handle-slide window follows from naturality and is not an additional axiom.
+The Kirby-colour encircling calculation is isolated as equality between two
+natural endomorphisms of the concrete functor `fixed ⊗ -`.  There is no
+general pivotal functor parameter.  Given a proved identity, transport of an
+arbitrary coupon through the local window follows from naturality and is not
+an additional axiom.
 -/
 
 namespace TwistedYetter.Kirby.HandleSlide
 
 open CategoryTheory
+open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.CategoricalMovie
@@ -22,88 +24,85 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [BraidedCategory C]
 
 /--
-A diagram-backed sliding law for an arbitrary endofunctor.
+A diagram-backed Kirby-colour encircling identity for one fixed object.
 
-Lemma 3.3 acts on `F(X) ⊗ A`, so its natural transformations belong to the
-functor `F(X) ⊗ -`, not generally to the identity functor.  The older
-`SourcedSlidingLaw` below is the identity-functor specialization used by the
-initial bootstrap.
+Our application has no pivotal functor `F : C ⥤ D`: source and target are the
+same premodular category and the relevant functor is exactly `fixed ⊗ -`.
 -/
-structure SourcedFunctorSlidingLaw
-    (G : C ⥤ C) where
-  before_diagram : (X : C) →
-    Diagram C (.atom (G.obj X)) (.atom (G.obj X))
-  after_diagram : (X : C) →
-    Diagram C (.atom (G.obj X)) (.atom (G.obj X))
-  before : G ⟶ G
-  after : G ⟶ G
-  before_eval : (X : C) →
-    Diagram.eval C (before_diagram X) = before.app X
-  after_eval : (X : C) →
-    Diagram.eval C (after_diagram X) = after.app X
-  core_sound : before = after
+structure SourcedTensorLeftEncirclingLaw
+    (fixed : C) where
+  sourceDiagram : (X : C) →
+    Diagram C (.atom (fixed ⊗ X)) (.atom (fixed ⊗ X))
+  targetDiagram : (X : C) →
+    Diagram C (.atom (fixed ⊗ X)) (.atom (fixed ⊗ X))
+  sourceOperator : tensorLeft fixed ⟶ tensorLeft fixed
+  targetOperator : tensorLeft fixed ⟶ tensorLeft fixed
+  source_eval : (X : C) →
+    Diagram.eval C (sourceDiagram X) = sourceOperator.app X
+  target_eval : (X : C) →
+    Diagram.eval C (targetDiagram X) = targetOperator.app X
+  source_eq_target : sourceOperator = targetOperator
   diagram_schema : String
   diagram_content_hash : String
   source_ref : String
   source_locator : String
 
-namespace SourcedFunctorSlidingLaw
+namespace SourcedTensorLeftEncirclingLaw
 
-variable {G : C ⥤ C}
+variable {fixed : C}
 
-/-- The functorial slide window immediately before an arbitrary coupon. -/
-def beforeCoupon (law : SourcedFunctorSlidingLaw G) {X Y : C}
+/-- The source encircling window immediately before an arbitrary coupon. -/
+def sourceWithCoupon (law : SourcedTensorLeftEncirclingLaw fixed) {X Y : C}
     (name : String) (f : X ⟶ Y) :
-    Diagram C (.atom (G.obj X)) (.atom (G.obj Y)) :=
-  law.before_diagram X ≫ᵈ
-    atomicCoupon name (G.map f)
+    Diagram C (.atom (fixed ⊗ X)) (.atom (fixed ⊗ Y)) :=
+  law.sourceDiagram X ≫ᵈ
+    atomicCoupon name ((tensorLeft fixed).map f)
 
-/-- The functorial slide window after an arbitrary coupon. -/
-def afterCoupon (law : SourcedFunctorSlidingLaw G) {X Y : C}
+/-- The target encircling window after an arbitrary coupon. -/
+def targetWithCoupon (law : SourcedTensorLeftEncirclingLaw fixed) {X Y : C}
     (name : String) (f : X ⟶ Y) :
-    Diagram C (.atom (G.obj X)) (.atom (G.obj Y)) :=
-  atomicCoupon name (G.map f) ≫ᵈ
-    law.after_diagram Y
+    Diagram C (.atom (fixed ⊗ X)) (.atom (fixed ⊗ Y)) :=
+  atomicCoupon name ((tensorLeft fixed).map f) ≫ᵈ
+    law.targetDiagram Y
 
 /--
-An arbitrary coupon crosses a functor-valued slide window.  This uses the
-proved core equality and naturality of the resulting natural transformation.
+An arbitrary coupon crosses the fixed-object encircling window.  This uses
+the proved core equality and naturality in the exposed strand.
 -/
 theorem coupon_transport_sound
-    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (law : SourcedTensorLeftEncirclingLaw fixed) {X Y : C}
     (name : String) (f : X ⟶ Y) :
-    Diagram.eval C (law.beforeCoupon name f) =
-      Diagram.eval C (law.afterCoupon name f) := by
-  change Diagram.eval C (law.before_diagram X) ≫ G.map f =
-    G.map f ≫ Diagram.eval C (law.after_diagram Y)
-  rw [law.before_eval, law.after_eval]
-  rw [law.core_sound]
-  exact (law.after.naturality f).symm
+    Diagram.eval C (law.sourceWithCoupon name f) =
+      Diagram.eval C (law.targetWithCoupon name f) := by
+  change Diagram.eval C (law.sourceDiagram X) ≫
+      (tensorLeft fixed).map f =
+    (tensorLeft fixed).map f ≫ Diagram.eval C (law.targetDiagram Y)
+  rw [law.source_eval, law.target_eval]
+  rw [law.source_eq_target]
+  exact (law.targetOperator.naturality f).symm
 
-/-- The functorial coupon transport as one certified movie step. -/
+/-- Coupon transport through the encircling window as one certified step. -/
 def couponTransportMove
-    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (law : SourcedTensorLeftEncirclingLaw fixed) {X Y : C}
     (name : String) (f : X ⟶ Y) :
-    CertifiedMove (law.beforeCoupon name f) (law.afterCoupon name f) where
-  label := "coupon-through-functor-handle-slide-window:" ++ name
+    CertifiedMove (law.sourceWithCoupon name f) (law.targetWithCoupon name f) where
+  label := "coupon-through-kirby-encircling-window:" ++ name
   sound := law.coupon_transport_sound name f
 
-/-- The functorial coupon transport as a one-frame movie. -/
+/-- Coupon transport through the encircling window as a one-frame movie. -/
 def couponTransportMovie
-    (law : SourcedFunctorSlidingLaw G) {X Y : C}
+    (law : SourcedTensorLeftEncirclingLaw fixed) {X Y : C}
     (name : String) (f : X ⟶ Y) :
-    Movie (law.beforeCoupon name f) (law.afterCoupon name f) :=
+    Movie (law.sourceWithCoupon name f) (law.targetWithCoupon name f) :=
   Movie.one (law.couponTransportMove name f)
 
-end SourcedFunctorSlidingLaw
+end SourcedTensorLeftEncirclingLaw
 
 /--
 Evaluator-side interface to a proved handle-slide lemma.
 
-For the generalized dichromatic invariant, a future category module should
-construct this datum from the generalized sliding property rather than postulate
-it globally. The source fields make the provenance visible in generated audit
-artifacts but carry no mathematical force.
+This separate identity-functor interface is retained for ordinary uncollected
+handle-slide inputs.  It is not the Kirby-colour encircling API above.
 -/
 structure SourcedSlidingLaw (C : Type u) [Category.{v} C] [MonoidalCategory C]
     [BraidedCategory C] where

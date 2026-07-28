@@ -1,28 +1,27 @@
 import TwistedYetter.Kirby.FramingNaturality
-import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 /-!
-# Generalized sliding in arbitrary framed contexts
+# Kirby-colour encircling transport in arbitrary framed contexts
 
-Bärenz--Barrett Lemma 3.4 extends Lemma 3.3 from one strand and a
-standard encircling circle to an arbitrary tensor product of strands and an
-arbitrarily framed, linked encircling knot.  The proof is locality plus
-naturality: the external crossings, extrema, coupons, and twists form a typed
-diagram, and tensoring that diagram on the left by the fixed object commutes
-with the natural sliding transformation.
+The pointwise encircling identity extends from one exposed strand to an
+arbitrary tensor product of strands and an arbitrarily framed, linked
+encircling knot.  The proof is locality plus naturality: external crossings,
+extrema, coupons, and twists form a typed diagram, and tensoring that diagram
+on the left by the fixed object commutes with the encircling operator.
 
 This file keeps the external diagram visible.  It is not replaced by an
 untyped "arbitrary knot" token.
 -/
 
-namespace TwistedYetter.Kirby.FramedSliding
+namespace TwistedYetter.Kirby.FramedEncirclingTransport
 
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.CategoricalMovie
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleSlide
 
 universe u v
@@ -74,85 +73,83 @@ theorem liftExterior_eval
     Boundary.denote, MonoidalCategory.id_tensorHom]
 
 /--
-The framed exterior immediately after the left endpoint of the Lemma 3.3
-window.
+The framed exterior immediately after the source encircling endpoint.
 -/
 def beforeExterior
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target : Boundary C}
     (exterior : Diagram C source target) :
     Diagram C
       (.atom (fixed ⊗ source.denote))
       (.atom (fixed ⊗ target.denote)) :=
-  law.before_diagram source.denote ≫ᵈ liftExterior fixed exterior
+  law.sourceDiagram source.denote ≫ᵈ liftExterior fixed exterior
 
 /--
-The same framed exterior immediately before the right endpoint of the
-Lemma 3.3 window.
+The same framed exterior immediately before the target encircling endpoint.
 -/
 def afterExterior
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target : Boundary C}
     (exterior : Diagram C source target) :
     Diagram C
       (.atom (fixed ⊗ source.denote))
       (.atom (fixed ⊗ target.denote)) :=
-  liftExterior fixed exterior ≫ᵈ law.after_diagram target.denote
+  liftExterior fixed exterior ≫ᵈ law.targetDiagram target.denote
 
 /--
-Lemma 3.4 before closure: every typed external tangle passes through the
-sliding window.  The proof uses the derived Lemma 3.3 equality and naturality
-of its endpoint transformation.
+Before closure, every typed external tangle passes through the encircling
+window.  The proof uses the derived pointwise equality and target-endpoint
+naturality.
 -/
 theorem exterior_transport_sound
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target : Boundary C}
     (exterior : Diagram C source target) :
     Diagram.eval C (beforeExterior law exterior) =
       Diagram.eval C (afterExterior law exterior) := by
-  change Diagram.eval C (law.before_diagram source.denote) ≫
+  change Diagram.eval C (law.sourceDiagram source.denote) ≫
       Diagram.eval C (liftExterior fixed exterior) =
     Diagram.eval C (liftExterior fixed exterior) ≫
-      Diagram.eval C (law.after_diagram target.denote)
+      Diagram.eval C (law.targetDiagram target.denote)
   calc
-    _ = law.before.app source.denote ≫
+    _ = law.sourceOperator.app source.denote ≫
         (tensorLeft fixed).map (Diagram.eval C exterior) := by
-      rw [law.before_eval]
+      rw [law.source_eval]
       exact congrArg
-        (fun morphism => law.before.app source.denote ≫ morphism)
+        (fun morphism => law.sourceOperator.app source.denote ≫ morphism)
         (liftExterior_eval fixed exterior)
-    _ = law.after.app source.denote ≫
+    _ = law.targetOperator.app source.denote ≫
         (tensorLeft fixed).map (Diagram.eval C exterior) := by
-      rw [law.core_sound]
+      rw [law.source_eq_target]
     _ = (tensorLeft fixed).map (Diagram.eval C exterior) ≫
-        law.after.app target.denote :=
-      (law.after.naturality (Diagram.eval C exterior)).symm
+        law.targetOperator.app target.denote :=
+      (law.targetOperator.naturality (Diagram.eval C exterior)).symm
     _ = _ := by
       rw [liftExterior_eval]
       exact congrArg
         (fun morphism =>
           (tensorLeft fixed).map (Diagram.eval C exterior) ≫ morphism)
-        (law.after_eval target.denote).symm
+        (law.target_eval target.denote).symm
 
-/-- Lemma 3.4 packaged as one certified local movie. -/
+/-- Framed encircling transport packaged as one certified local movie. -/
 def exteriorTransportMove
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target : Boundary C}
     (exterior : Diagram C source target) :
     CertifiedMove
       (beforeExterior law exterior)
       (afterExterior law exterior) where
-  label := "BB-Lemma-3.4-arbitrary-framed-exterior"
+  label := "kirby-encircling-arbitrary-framed-exterior"
   sound := exterior_transport_sound law exterior
 
-/-- Lemma 3.4 as a one-frame movie. -/
+/-- Framed encircling transport as a one-frame movie. -/
 def exteriorTransportMovie
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target : Boundary C}
     (exterior : Diagram C source target) :
     Movie
@@ -166,7 +163,7 @@ context.  Nested contexts are already represented by `Context.compose`.
 -/
 def exteriorTransportInContext
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target wholeSource wholeTarget : Boundary C}
     (exterior : Diagram C source target)
     (context :
@@ -182,7 +179,7 @@ def exteriorTransportInContext
 /-- Soundness of the complete outer-context movie. -/
 theorem exterior_transport_in_context_sound
     {fixed : C}
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     {source target wholeSource wholeTarget : Boundary C}
     (exterior : Diagram C source target)
     (context :
@@ -212,36 +209,36 @@ structure ClosedFramedContext
 
 namespace ClosedFramedContext
 
-/-- The closed diagram before generalized sliding. -/
+/-- The closed source encircling diagram. -/
 def before
     {fixed : C}
     {source target : Boundary C}
     (closed : ClosedFramedContext fixed source target)
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     (exterior : Diagram C source target) :
     Diagram C .unit .unit :=
   Context.plug C closed.context (beforeExterior law exterior)
 
-/-- The closed diagram after generalized sliding. -/
+/-- The closed target encircling diagram. -/
 def after
     {fixed : C}
     {source target : Boundary C}
     (closed : ClosedFramedContext fixed source target)
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     (exterior : Diagram C source target) :
     Diagram C .unit .unit :=
   Context.plug C closed.context (afterExterior law exterior)
 
 /--
-Bärenz--Barrett Lemma 3.4 for a closed link evaluation.  Multiple strands are
-represented by the parenthesized `source` and `target` boundaries; arbitrary
-linking, framing, coupons, and extrema remain in `exterior` and `context`.
+Closed-link encircling transport.  Multiple strands are represented by the
+parenthesized `source` and `target` boundaries; arbitrary linking, framing,
+coupons, and extrema remain in `exterior` and `context`.
 -/
-theorem lemma_3_4
+theorem closed_transport_sound
     {fixed : C}
     {source target : Boundary C}
     (closed : ClosedFramedContext fixed source target)
-    (law : SourcedFunctorSlidingLaw (tensorLeft fixed))
+    (law : SourcedTensorLeftEncirclingLaw fixed)
     (exterior : Diagram C source target) :
     Diagram.eval C (closed.before law exterior) =
       Diagram.eval C (closed.after law exterior) :=
@@ -249,7 +246,7 @@ theorem lemma_3_4
 
 end ClosedFramedContext
 
-namespace SlidingFamily
+namespace EncirclingTransportFamily
 
 open scoped BigOperators
 
@@ -263,14 +260,14 @@ variable {I : S → S → Type uI}
 variable [∀ y z, Fintype (I y z)]
 variable [∀ y z, DecidableEq (I y z)]
 variable {data :
-  SlidingCategoryData (R := R) (D := C) (S := S) (I := I)}
+  EncirclingTransportData (R := R) (D := C) (S := S) (I := I)}
 
 /--
-The public Lemma 3.4 constructor starts from the actual Lemma 3.3 family;
-there is no independent arbitrary-knot sliding equality input.
+The public framed constructor starts from the pointwise encircling family;
+there is no independent arbitrary-knot equality input.
 -/
-noncomputable def lemma34Movie
-    (family : SlidingFamily data)
+noncomputable def framedTransportMovie
+    (family : EncirclingTransportFamily data)
     {source target wholeSource wholeTarget : Boundary C}
     (exterior : Diagram C source target)
     (context :
@@ -280,14 +277,14 @@ noncomputable def lemma34Movie
         wholeSource wholeTarget) :
     Movie
       (Context.plug C context
-        (beforeExterior family.sourcedFunctorSlidingLaw exterior))
+        (beforeExterior family.sourcedEncirclingLaw exterior))
       (Context.plug C context
-        (afterExterior family.sourcedFunctorSlidingLaw exterior)) :=
-  exteriorTransportInContext family.sourcedFunctorSlidingLaw exterior context
+        (afterExterior family.sourcedEncirclingLaw exterior)) :=
+  exteriorTransportInContext family.sourcedEncirclingLaw exterior context
 
-/-- Kernel-checked soundness of the public Lemma 3.4 constructor. -/
-theorem lemma34Movie_sound
-    (family : SlidingFamily data)
+/-- Kernel-checked soundness of the public framed constructor. -/
+theorem framedEncirclingTransport_sound
+    (family : EncirclingTransportFamily data)
     {source target wholeSource wholeTarget : Boundary C}
     (exterior : Diagram C source target)
     (context :
@@ -297,12 +294,12 @@ theorem lemma34Movie_sound
         wholeSource wholeTarget) :
     Diagram.eval C
         (Context.plug C context
-          (beforeExterior family.sourcedFunctorSlidingLaw exterior)) =
+          (beforeExterior family.sourcedEncirclingLaw exterior)) =
       Diagram.eval C
         (Context.plug C context
-          (afterExterior family.sourcedFunctorSlidingLaw exterior)) :=
-  Movie.sound (lemma34Movie family exterior context)
+          (afterExterior family.sourcedEncirclingLaw exterior)) :=
+  Movie.sound (framedTransportMovie family exterior context)
 
-end SlidingFamily
+end EncirclingTransportFamily
 
-end TwistedYetter.Kirby.FramedSliding
+end TwistedYetter.Kirby.FramedEncirclingTransport

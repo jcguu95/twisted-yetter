@@ -26,7 +26,7 @@ axioms.
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.externalCharacterCoupon_bandTransport_inContext
 
 #print axioms
-  TwistedYetter.Kirby.GeneralizedSliding.SlidingFiber.channelWeighted_transport
+  TwistedYetter.Kirby.KirbyColorEncirclingTransport.EncirclingTransportFiber.channelWeighted_transport
 
 #print axioms
   TwistedYetter.Kirby.TwoOverTwoFusionChannel.internalCharacterWeight_transport

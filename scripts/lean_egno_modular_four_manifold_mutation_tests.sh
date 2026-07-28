@@ -10,8 +10,8 @@ lake build TwistedYetter.Kirby.EGNOModularFourManifoldInvariant >/dev/null
 mutations=(
   "lean/Mutations/GenericTaggedMoveInEGNOAssembly.lean"
   "lean/Mutations/ReboundPackageInEGNOAssembly.lean"
-  "lean/Mutations/GeneralizedSlideAsOrdinary.lean"
-  "lean/Mutations/OrdinarySlideAsGeneralized.lean"
+  "lean/Mutations/LabelIndexedSlideAsOrdinary.lean"
+  "lean/Mutations/OrdinarySlideAsLabelIndexed.lean"
   "lean/Mutations/FreeComponentWeightInEGNOAssembly.lean"
   "lean/Mutations/EventwiseLabelWithoutGlobalResolver.lean"
   "lean/Mutations/NormalizedEqualityAsLocalMoveCompiler.lean"

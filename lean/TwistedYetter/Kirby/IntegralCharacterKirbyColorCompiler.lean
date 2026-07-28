@@ -29,7 +29,7 @@ open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalPresentationCompiler
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoryBoundKirbyColorCompiler
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleChainHomology
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
@@ -301,9 +301,9 @@ structure TensorAutomorphismGenerator
   simpleScalar : S → Kˣ
   simple_scalar_sound :
     (simple : S) →
-      automorphism.hom.app (categoryData.slidingData.simple simple) =
+      automorphism.hom.app (categoryData.encirclingData.simple simple) =
         (simpleScalar simple : K) •
-          𝟙 (categoryData.slidingData.simple simple)
+          𝟙 (categoryData.encirclingData.simple simple)
   categorySnapshotHash : String
   category_snapshot_hash_sound :
     categorySnapshotHash = categoryData.categorySnapshotHash
@@ -449,7 +449,7 @@ noncomputable def integralCharacterWeights
     (generator : TensorAutomorphismGenerator categoryData) :
     HomologicalKirbyColorWeights categoryData H2 where
   coefficient := fun topology alpha component simple =>
-    categoryData.slidingData.weight simple *
+    categoryData.encirclingData.weight simple *
       generator.scalarPower simple
         ((cycleSystem.model topology).componentExponent alpha component)
   zero_class_sound := by
@@ -485,7 +485,7 @@ theorem integral_character_coefficient_formula
     (simple : S) :
     (integralCharacterWeights cycleSystem generator).coefficient
         topology alpha component simple =
-          categoryData.slidingData.weight simple *
+          categoryData.encirclingData.weight simple *
         generator.scalarPower simple
           ((cycleSystem.model topology).componentExponent alpha component) := by
   rfl
@@ -510,7 +510,7 @@ theorem trivial_generator_coefficient_is_ordinary
     (integralCharacterWeights cycleSystem
         (TensorAutomorphismGenerator.trivial categoryData)).coefficient
           topology alpha component simple =
-      categoryData.slidingData.weight simple := by
+      categoryData.encirclingData.weight simple := by
   simp [integralCharacterWeights,
     TensorAutomorphismGenerator.trivial_scalarPower]
 

@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 namespace TwistedYetter.Mutations.MissingMateMovie
 
@@ -6,7 +6,7 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalMovie
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 universe uR uD vD uS uI
 
@@ -23,7 +23,7 @@ variable [∀ y z, DecidableEq (I y z)]
 -- Expected failure: a braided channel cannot be renamed a mated channel
 -- without a certified cup/cap movie.
 def forgedFiber
-    (data : SlidingCategoryData (R := R) (D := D) (S := S) (I := I))
+    (data : EncirclingTransportData (R := R) (D := D) (S := S) (I := I))
     (strand : D)
     (forwardContext : (y : S) →
       Context D
@@ -44,10 +44,10 @@ def forgedFiber
     (braidingMovie : (y z : S) → (i : I y z) →
       Movie
         (Context.plug D (forwardContext y)
-          (Diagram.coupon "BB-3.1.4-forward-channel"
+          (Diagram.coupon "kirby-encircling-forward-channel"
             (data.forwardProjection y z i ≫ data.forwardInclusion y z i)))
         (braidedChannel y z i)) :
-    SlidingFiber data strand where
+    EncirclingTransportFiber data strand where
   forwardContext := forwardContext
   backwardContext := backwardContext
   braidedChannel := braidedChannel

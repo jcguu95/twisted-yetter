@@ -23,7 +23,7 @@ namespace TwistedYetter.Kirby.EvaluatorCompiler
 
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves

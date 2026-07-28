@@ -52,7 +52,7 @@ SOURCE_FILES = [
     ),
     (
         "lean/TwistedYetter/Kirby/"
-        "EGNOCategoryBoundSliding.lean"
+        "EGNOKirbyColorEncircling.lean"
     ),
     (
         "lean/TwistedYetter/Kirby/"
@@ -243,7 +243,7 @@ def source_guards() -> dict[str, Any]:
     slide_text = (
         ROOT
         / "lean/TwistedYetter/Kirby/"
-        "EGNOCategoryBoundSliding.lean"
+        "EGNOKirbyColorEncircling.lean"
     ).read_text()
     require(
         "structure OrdinaryLabelIndexedSlidingWindow" in slide_text,
@@ -285,12 +285,12 @@ def main() -> None:
     )
     fixed_label = (
         "TwistedYetter.Kirby."
-        "EGNOCategoryBoundSliding."
+        "EGNOKirbyColorEncircling."
         "OrdinaryLabelIndexedSlidingWindow.open_term_sound"
     )
     fixed_sum = (
         "TwistedYetter.Kirby."
-        "EGNOCategoryBoundSliding."
+        "EGNOKirbyColorEncircling."
         "OrdinaryLabelIndexedSlidingWindow.linear_eval_sound"
     )
     canonical_sum = (
@@ -450,7 +450,7 @@ def main() -> None:
                 fixed_label,
                 (
                     "TwistedYetter.Kirby."
-                    "EGNOCategoryBoundSliding."
+                    "EGNOKirbyColorEncircling."
                     "OrdinaryLabelIndexedSlidingWindow.term_sound"
                 ),
                 fixed_sum,

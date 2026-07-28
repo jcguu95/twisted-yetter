@@ -1,15 +1,15 @@
-import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.EGNOKirbyColorEncircling
 
 /-!
 # Character-weighted endpoints for a premodular 2/2 band slide
 
 For one fixed moving simple label `x`, the two endpoints are the
-channel-weighted Bärenz--Barrett stages (3.1.4) and (3.1.8).  The stationary
+channel-weighted inserted and target encircling sums. The stationary
 Kirby colour and every intermediate fusion channel remain explicit inside
-the `SlidingFamily` calculation.
+the `EncirclingTransportFamily` calculation.
 
 This module contains no axiom and no field asserting endpoint equality.
-Equality is inherited from the kernel-checked generalized-sliding
+Equality is inherited from the kernel-checked encircling-transport
 calculation and is then lifted to the complete outer sum over `x`.
 -/
 
@@ -20,8 +20,8 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.LinearDiagram
 
 universe uK uC vC
@@ -43,7 +43,7 @@ structure ChannelWeightedClosedWindow
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data}
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
-    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw) where
+    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw) where
   strand : C
   closure :
     (movingLabel : S) →
@@ -57,7 +57,7 @@ variable
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data}
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
-    {movies : LabelIndexedSlidingMovies data insertionLaw mateLaw}
+    {movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw}
     (window : ChannelWeightedClosedWindow movies)
 
 /-- Evaluation of one moving-label sector at the weighted source stage. -/
@@ -68,7 +68,7 @@ noncomputable def beforeEval
   window.closure movingLabel
     (LinearDiagram.eval
       ((movies.family movingLabel).fiber window.strand
-        |>.channelWeightedStage314 channelWeight))
+        |>.channelWeightedInsertedSum channelWeight))
 
 /-- Evaluation of one moving-label sector at the weighted target stage. -/
 noncomputable def afterEval
@@ -78,7 +78,7 @@ noncomputable def afterEval
   window.closure movingLabel
     (LinearDiagram.eval
       ((movies.family movingLabel).fiber window.strand
-        |>.channelWeightedStage318 channelWeight))
+        |>.channelWeightedTargetSum channelWeight))
 
 /-- The internal channel weight survives in every closed moving-label sector. -/
 theorem fixedMovingLabel_eval_eq

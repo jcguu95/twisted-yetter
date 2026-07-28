@@ -1,18 +1,18 @@
 import TwistedYetter.Fusion.EGNOSphericalInsertion
 import TwistedYetter.Kirby.EGNOKirbyColorExpansion
-import TwistedYetter.Kirby.FramedSliding
-import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.FramedEncirclingTransport
+import TwistedYetter.Kirby.KirbyColorEncirclingTransport
 import TwistedYetter.Kirby.LinearContext
 import TwistedYetter.Kirby.Presentation
 
 /-!
-# Label-indexed generalized sliding from ribbon fusion data
+# Label-indexed Kirby-colour encircling transport
 
-The generalized slide of Bärenz--Barrett Lemma 3.3 fixes an actual object
-`X`.  After a Kirby colour is expanded, `X` is one simple label at a time; it
-is not a single category object representing the whole formal colour.
+The identity-functor encircling calculation fixes an actual object `X`.
+After a Kirby colour is expanded, `X` is one simple label at a time; it is not
+a single category object representing the whole formal colour.
 
-This module therefore constructs one `SlidingCategoryData` for every simple
+This module therefore constructs one `EncirclingTransportData` for every simple
 label.  The forward insertion, mate transport, and inverse insertion are
 derived from:
 
@@ -24,7 +24,7 @@ Only the framed graphical movies remain a separate all-label input.  No field
 below states the desired endpoint equality.
 -/
 
-namespace TwistedYetter.Kirby.EGNOCategoryBoundSliding
+namespace TwistedYetter.Kirby.EGNOKirbyColorEncircling
 
 open scoped BigOperators
 open CategoryTheory
@@ -34,8 +34,8 @@ open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Fusion.FiniteResolution
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.EGNOKirbyColorExpansion
-open TwistedYetter.Kirby.FramedSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.FramedEncirclingTransport
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleSlide
 open TwistedYetter.Kirby.LinearDiagram
 
@@ -56,16 +56,16 @@ namespace CategoryData
 variable (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
 
 /--
-The channel index for a fixed sliding label `x`, the Kirby-colour label `y`,
-and the inserted simple channel `z`.
+The channel index for a fixed simple label `x`, the source encircling label
+`y`, and the inserted simple channel `z`.
 -/
-abbrev SlidingIndex (x y z : S) :=
+abbrev EncirclingChannelIndex (x y z : S) :=
   data.InsertionIndex
     (data.simple x ⊗ (data.simple y)ᘁ) z
 
 /-- The source trace-dual basis before the mate change. -/
-noncomputable def slidingForwardBasis (x y z : S) :
-    DualBasisData (ι := SlidingIndex data x y z)
+noncomputable def encirclingForwardBasis (x y z : S) :
+    DualBasisData (ι := EncirclingChannelIndex data x y z)
       (data.toFusionCategoryData.pivotalTracePerfectPairing
         data.pivotal
         (data.simple x ⊗ (data.simple y)ᘁ)
@@ -74,7 +74,7 @@ noncomputable def slidingForwardBasis (x y z : S) :
     (data.simple x ⊗ (data.simple y)ᘁ) z
 
 /-- Cyclicity reverses the insertion pairing before the mate operation. -/
-theorem slidingSourcePairingCyclic
+theorem encirclingSourcePairingCyclic
     (x y z : S)
     (projection :
       data.simple x ⊗ (data.simple y)ᘁ ⟶ data.simple z)
@@ -95,17 +95,17 @@ theorem slidingSourcePairingCyclic
     (pivotalTrace_cyclic data.pivotal projection inclusion).symm
 
 /-- The insertion basis in the orientation consumed by the mate maps. -/
-noncomputable def slidingMateSourceBasis (x y z : S) :
-    DualBasisData (ι := SlidingIndex data x y z)
+noncomputable def encirclingMateSourceBasis (x y z : S) :
+    DualBasisData (ι := EncirclingChannelIndex data x y z)
       (data.toFusionCategoryData.pivotalTracePerfectPairing
         data.pivotal
         (data.simple z)
         (data.simple x ⊗ (data.simple y)ᘁ)) :=
-  (slidingForwardBasis data x y z).reversed
-    (slidingSourcePairingCyclic data x y z)
+  (encirclingForwardBasis data x y z).reversed
+    (encirclingSourcePairingCyclic data x y z)
 
 /-- The canonical pairing-preserving mate transport for one channel. -/
-noncomputable def slidingMateTransport
+noncomputable def encirclingMateTransport
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x y z : S) :
     PairingTransport
@@ -122,21 +122,21 @@ noncomputable def slidingMateTransport
     (data.simple x) (data.simple y) (data.simple z)
 
 /-- The full dual basis after the mate change of variables. -/
-noncomputable def slidingMatedBasis
+noncomputable def encirclingMatedBasis
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x y z : S) :
-    DualBasisData (ι := SlidingIndex data x y z)
+    DualBasisData (ι := EncirclingChannelIndex data x y z)
       (data.toFusionCategoryData.pivotalTracePerfectPairing
         data.pivotal
         (data.simple y)
         ((data.simple z)ᘁ ⊗ data.simple x)) :=
-  (slidingMateTransport data mateLaw x y z).dualBasisData
-    (slidingMateSourceBasis data x y z)
+  (encirclingMateTransport data mateLaw x y z).dualBasisData
+    (encirclingMateSourceBasis data x y z)
 
 /--
 Cyclicity identifies the target pairing with the reversed mated pairing.
 -/
-theorem slidingPairingCyclic
+theorem encirclingPairingCyclic
     (x y z : S)
     (forward :
       data.simple y ⟶ (data.simple z)ᘁ ⊗ data.simple x)
@@ -156,61 +156,61 @@ theorem slidingPairingCyclic
     (pivotalTrace_cyclic data.pivotal forward backward).symm
 
 /-- The mated basis, reversed into insertion orientation on the target object. -/
-noncomputable def slidingBackwardBasis
+noncomputable def encirclingBackwardBasis
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x y z : S) :
-    DualBasisData (ι := SlidingIndex data x y z)
+    DualBasisData (ι := EncirclingChannelIndex data x y z)
       (data.toFusionCategoryData.pivotalTracePerfectPairing
         data.pivotal
         ((data.simple z)ᘁ ⊗ data.simple x)
         (data.simple y)) :=
-  (slidingMatedBasis data mateLaw x y z).reversed
-    (slidingPairingCyclic data x y z)
+  (encirclingMatedBasis data mateLaw x y z).reversed
+    (encirclingPairingCyclic data x y z)
 
 /-- Forward dimension-weighted insertion is an instance of the global law. -/
-theorem slidingForwardSound
+theorem encirclingForwardSound
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (x y : S) :
-    ∑ z, ∑ i : SlidingIndex data x y z,
+    ∑ z, ∑ i : EncirclingChannelIndex data x y z,
       data.quantumDimension z •
-        ((slidingForwardBasis data x y z).primal i ≫
-          (slidingForwardBasis data x y z).dual i) =
+        ((encirclingForwardBasis data x y z).primal i ≫
+          (encirclingForwardBasis data x y z).dual i) =
       𝟙 (data.simple x ⊗ (data.simple y)ᘁ) :=
   insertionLaw.resolves
     (data.simple x ⊗ (data.simple y)ᘁ)
-    (slidingForwardBasis data x y)
+    (encirclingForwardBasis data x y)
 
 /-- Inverse insertion after the mate change is derived from the same law. -/
-theorem slidingBackwardSound
+theorem encirclingBackwardSound
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x z : S) :
-    ∑ y, ∑ i : SlidingIndex data x y z,
+    ∑ y, ∑ i : EncirclingChannelIndex data x y z,
       data.quantumDimension y •
-        ((slidingMatedBasis data mateLaw x y z).dual i ≫
-          (slidingMatedBasis data mateLaw x y z).primal i) =
+        ((encirclingMatedBasis data mateLaw x y z).dual i ≫
+          (encirclingMatedBasis data mateLaw x y z).primal i) =
       𝟙 ((data.simple z)ᘁ ⊗ data.simple x) := by
   have resolved :=
     insertionLaw.resolves
       ((data.simple z)ᘁ ⊗ data.simple x)
-      (fun y => slidingBackwardBasis data mateLaw x y z)
+      (fun y => encirclingBackwardBasis data mateLaw x y z)
   simpa only [
-    slidingBackwardBasis,
+    encirclingBackwardBasis,
     DualBasisData.reverse_primal,
     DualBasisData.reverse_dual
   ] using resolved
 
 /--
-The generalized-sliding algebra for one actual simple label `x`.
+The Kirby-colour encircling algebra for one actual simple label `x`.
 
 Every algebraic equality is now derived from the two global standard laws.
 -/
-noncomputable def slidingCategoryData
+noncomputable def encirclingTransportData
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S) :
-    SlidingCategoryData
-      (R := K) (D := C) (S := S) (I := SlidingIndex data x) where
+    EncirclingTransportData
+      (R := K) (D := C) (S := S) (I := EncirclingChannelIndex data x) where
   fixed := data.simple x
   weight := data.quantumDimension
   simple := data.simple
@@ -221,16 +221,16 @@ noncomputable def slidingCategoryData
       ((data.simple z)ᘁ ⊗ data.simple x)
   matedFamily y z :=
     BiorthogonalFamily.ofDualBasisData
-      (slidingMatedBasis data mateLaw x y z)
+      (encirclingMatedBasis data mateLaw x y z)
   forwardProjection y z i :=
-    (slidingForwardBasis data x y z).primal i
+    (encirclingForwardBasis data x y z).primal i
   forwardInclusion y z i :=
-    (slidingForwardBasis data x y z).dual i
+    (encirclingForwardBasis data x y z).dual i
   forwardSound y :=
-    slidingForwardSound data insertionLaw x y
+    encirclingForwardSound data insertionLaw x y
   backwardSound z := by
     simpa only [BiorthogonalFamily.ofDualBasisData] using
-      slidingBackwardSound data insertionLaw mateLaw x z
+      encirclingBackwardSound data insertionLaw mateLaw x z
   pivotal_source_ref := "ref:baerenz-barrett-dichromatic-2018"
   pivotal_source_locator :=
     "Lemmas 2.37 and 3.3, equations (2.2.5) and (3.1.3)-(3.1.11)"
@@ -238,37 +238,36 @@ noncomputable def slidingCategoryData
 end CategoryData
 
 /--
-The framed graphical part of Lemmas 3.3--3.4, quantified over every simple
-label that can occur in the formal Kirby-colour expansion.
+The framed graphical transport, quantified over every simple label that can
+occur in the formal Kirby-colour expansion.
 
-`SlidingFamily` contains contexts and certified local movies.  Its core
-endpoint equality is still derived by `GeneralizedSliding`; it is not a field
-of this structure.
+`EncirclingTransportFamily` contains contexts and certified local movies. Its
+core endpoint equality is derived by `KirbyColorEncirclingTransport`; it is
+not a field of this structure.
 -/
-structure LabelIndexedSlidingMovies
+structure LabelIndexedEncirclingMovies
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical) where
   family :
     (x : S) →
-      SlidingFamily
-        (CategoryData.slidingCategoryData data insertionLaw mateLaw x)
+      EncirclingTransportFamily
+        (CategoryData.encirclingTransportData data insertionLaw mateLaw x)
   source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
   source_locator : String :=
     "Lemmas 3.3-3.4, equations (3.1.3)-(3.1.11), journal pages 681-684"
 
 /-
-This namespace follows the proof boundary in Bärenz--Barrett literally.
-Unlike the former `labelIndexedMovies` axiom, it does not assume the completed
-all-label family.
+This namespace contains the one remaining literature input.  The mathematical
+API is specialized to the identity functor on one ribbon fusion category.
+There is no source category, target category, or pivotal functor parameter.
 
-* `generalizedSlidingFiber` is now an intentionally unfinished construction
-  for one fixed pair `(X, A)` in Lemma 3.3.  Its constructor exposes the
-  precise graphical data still to be built.
-* `generalizedSlidingAfterNaturality` is the one remaining endpoint
-  naturality input from Lemma 3.4.
-* `generalizedSlidingBeforeNaturality` is a theorem derived from pointwise
-  generalized sliding and after-endpoint naturality.
+* `kirbyColorEncirclingFiber` is an intentionally unfinished construction for
+  one fixed pair `(x, A)`.  Its constructor exposes the precise graphical data
+  still to be built.
+* `targetEncircling_natural` is the one remaining endpoint-naturality input.
+* `sourceEncircling_natural` is derived from the pointwise source-to-target
+  equality and target-endpoint naturality.
 
 The insertion and mate/trace equalities inside this calculation are supplied
 separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
@@ -276,10 +275,9 @@ separately by `SphericalInsertionLaw` and `SphericalMateTraceLaw`.
 namespace LiteratureInput
 
 /--
-Assembly target for the pointwise graphical calculation in Bärenz--Barrett
-Lemma 3.3.
+Assembly target for the identity-functor Kirby-colour encircling calculation.
 
-The former declaration was one axiom returning the entire `SlidingFiber`.
+The former declaration was one axiom returning the entire `EncirclingTransportFiber`.
 That hid five independent obligations.  It is now deliberately an unfinished
 definition whose constructor exposes them separately:
 
@@ -293,14 +291,14 @@ This definition intentionally does not compile until those five graphical
 constructions are implemented.  No `sorry`, replacement equality axiom, or
 arbitrary context witness is admitted.
 -/
-noncomputable def generalizedSlidingFiber
+noncomputable def kirbyColorEncirclingFiber
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     (strand : C) :
-    SlidingFiber
-      (CategoryData.slidingCategoryData data insertionLaw mateLaw x)
+    EncirclingTransportFiber
+      (CategoryData.encirclingTransportData data insertionLaw mateLaw x)
       strand := by
   constructor
   case insertion_source_ref =>
@@ -311,13 +309,13 @@ noncomputable def generalizedSlidingFiber
 /--
 Naturality of the right endpoint in the exposed object `A`.
 
-This is the after-slide half of Bärenz--Barrett Lemma 3.4, with the same
-arbitrary morphism `f : A ⟶ B`.
+The target encircling is natural in the exposed strand: an arbitrary morphism
+`f : A ⟶ B` can be placed before or after that encircling operator.
 
 Reference: Bärenz--Barrett, Lemma 3.4 and its proof immediately following
 equation (3.1.11), journal page 684.
 -/
-axiom generalizedSlidingAfterNaturality
+axiom targetEncircling_natural
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
@@ -326,19 +324,18 @@ axiom generalizedSlidingAfterNaturality
     (f : A ⟶ B) :
     (tensorLeft (data.simple x)).map f ≫
         LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage318 =
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x B).targetEncirclingSum =
       LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage318 ≫
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x A).targetEncirclingSum ≫
         (tensorLeft (data.simple x)).map f
 
 /--
 Naturality of the left endpoint is derived rather than assumed.
 
-Pointwise generalized sliding identifies each before endpoint with its after
-endpoint.  Naturality of the after endpoint therefore transports the before
-endpoint across the same arbitrary morphism.
+The pointwise calculation identifies each source endpoint with its target
+endpoint.  Target naturality therefore implies source naturality.
 -/
-theorem generalizedSlidingBeforeNaturality
+theorem sourceEncircling_natural
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical)
@@ -347,48 +344,48 @@ theorem generalizedSlidingBeforeNaturality
     (f : A ⟶ B) :
     (tensorLeft (data.simple x)).map f ≫
         LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage313 =
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x B).sourceEncirclingSum =
       LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage313 ≫
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x A).sourceEncirclingSum ≫
         (tensorLeft (data.simple x)).map f := by
   calc
     _ = (tensorLeft (data.simple x)).map f ≫
         LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x B).stage318 := by
-      rw [(generalizedSlidingFiber
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x B).targetEncirclingSum := by
+      rw [(kirbyColorEncirclingFiber
         data insertionLaw mateLaw x B).core_sound]
     _ = LinearDiagram.eval
-          (generalizedSlidingFiber data insertionLaw mateLaw x A).stage318 ≫
+          (kirbyColorEncirclingFiber data insertionLaw mateLaw x A).targetEncirclingSum ≫
         (tensorLeft (data.simple x)).map f :=
-      generalizedSlidingAfterNaturality
+      targetEncircling_natural
         data insertionLaw mateLaw x f
     _ = _ := by
-      rw [(generalizedSlidingFiber
+      rw [(kirbyColorEncirclingFiber
         data insertionLaw mateLaw x A).core_sound]
 
 end LiteratureInput
 
 /--
-Assemble the label-indexed family from the pointwise Lemma 3.3 calculation and
-the two endpoint naturality statements of Lemma 3.4.
+Assemble the label-indexed family from the pointwise source-to-target
+calculation and the two endpoint naturality statements.
 
 This is a definition, not a literature axiom.  Lean performs the all-simple
 indexing and supplies the provenance fields.
 -/
-noncomputable def labelIndexedSlidingMovies
+noncomputable def labelIndexedEncirclingMovies
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertionLaw : SphericalInsertionLaw.{uK, uC, vC, vC} data)
     (mateLaw : SphericalMateTraceLaw (K := K) data.spherical) :
-    LabelIndexedSlidingMovies data insertionLaw mateLaw where
+    LabelIndexedEncirclingMovies data insertionLaw mateLaw where
   family x :=
     { fiber := fun strand =>
-        LiteratureInput.generalizedSlidingFiber
+        LiteratureInput.kirbyColorEncirclingFiber
           data insertionLaw mateLaw x strand
-      before_naturality := fun f =>
-        LiteratureInput.generalizedSlidingBeforeNaturality
+      source_naturality := fun f =>
+        LiteratureInput.sourceEncircling_natural
           data insertionLaw mateLaw x f
-      after_naturality := fun f =>
-        LiteratureInput.generalizedSlidingAfterNaturality
+      target_naturality := fun f =>
+        LiteratureInput.targetEncircling_natural
           data insertionLaw mateLaw x f
       diagram_content_hash :=
         "source:baerenz-barrett-lemma-3.3-3.4-label-indexed" }
@@ -396,7 +393,7 @@ noncomputable def labelIndexedSlidingMovies
   source_locator :=
     "Lemmas 3.3-3.4, equations (3.1.2)-(3.1.11), journal pages 681-684"
 
-namespace LabelIndexedSlidingMovies
+namespace LabelIndexedEncirclingMovies
 
 variable
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
@@ -404,11 +401,11 @@ variable
     {mateLaw : SphericalMateTraceLaw (K := K) data.spherical}
 
 /--
-One closed generalized-slide window for every possible simple label on the
-sliding two-handle.
+One closed encircling-transport window for every possible simple label on the
+moving two-handle.
 -/
 structure ClosedWindow
-    (movies : LabelIndexedSlidingMovies data insertionLaw mateLaw) where
+    (movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw) where
   source : Boundary C
   target : Boundary C
   exterior : Diagram C source target
@@ -422,42 +419,42 @@ structure ClosedWindow
 namespace ClosedWindow
 
 variable
-    {movies : LabelIndexedSlidingMovies data insertionLaw mateLaw}
+    {movies : LabelIndexedEncirclingMovies data insertionLaw mateLaw}
     (window : ClosedWindow movies)
 
-/-- The complete closed diagram before sliding one fixed simple label. -/
+/-- The complete closed source diagram for one fixed simple label. -/
 noncomputable def before (x : S) : Diagram C .unit .unit :=
   Context.plug C (window.context x)
     (beforeExterior
-      (movies.family x).sourcedFunctorSlidingLaw
+      (movies.family x).sourcedEncirclingLaw
       window.exterior)
 
-/-- The complete closed diagram after sliding the same fixed simple label. -/
+/-- The complete closed target diagram for the same fixed simple label. -/
 noncomputable def after (x : S) : Diagram C .unit .unit :=
   Context.plug C (window.context x)
     (afterExterior
-      (movies.family x).sourcedFunctorSlidingLaw
+      (movies.family x).sourcedEncirclingLaw
       window.exterior)
 
-/-- Every fixed-label term is proved by the derived Lemma 3.4 movie. -/
+/-- Every fixed-label term follows from framed encircling transport. -/
 theorem term_sound (x : S) :
     Diagram.eval C (window.before x) =
       Diagram.eval C (window.after x) :=
-  SlidingFamily.lemma34Movie_sound
+  EncirclingTransportFamily.framedEncirclingTransport_sound
     (movies.family x) window.exterior (window.context x)
 
-/-- Formal weighted sum of all fixed-label diagrams before the slide. -/
+/-- Formal weighted sum of all fixed-label source diagrams. -/
 noncomputable def linearBefore (coefficient : S → K) :
     LinearDiagram (R := K) (C := C) .unit .unit :=
   weightedSum (R := K) coefficient window.before
 
-/-- Formal weighted sum of all fixed-label diagrams after the slide. -/
+/-- Formal weighted sum of all fixed-label target diagrams. -/
 noncomputable def linearAfter (coefficient : S → K) :
     LinearDiagram (R := K) (C := C) .unit .unit :=
   weightedSum (R := K) coefficient window.after
 
 /--
-Termwise generalized sliding lifts to any unchanged outer coefficient.
+Termwise encircling transport lifts to any unchanged outer coefficient.
 
 This is the finite-sum theorem needed for ordinary or homologically twisted
 Kirby-colour coefficients.  No collapsed sum is treated as one fixed object.
@@ -474,16 +471,16 @@ theorem linear_eval_sound (coefficient : S → K) :
 /-- Collapse only after the formal weighted-sum equality has been proved. -/
 theorem collapsed_eval_sound (coefficient : S → K) :
     Diagram.eval C
-        (collapse (R := K) "BB-label-indexed-slide-before"
+        (collapse (R := K) "kirby-encircling-label-sum-source"
           (window.linearBefore coefficient)) =
       Diagram.eval C
-        (collapse (R := K) "BB-label-indexed-slide-after"
+        (collapse (R := K) "kirby-encircling-label-sum-target"
           (window.linearAfter coefficient)) :=
   window.linear_eval_sound coefficient
 
 end ClosedWindow
 
-end LabelIndexedSlidingMovies
+end LabelIndexedEncirclingMovies
 
 /--
 The ordinary Kirby-colour slide of Bärenz--Barrett Lemma 3.1, bound to the
@@ -572,11 +569,10 @@ end OrdinaryKirbySlidingLaw
 One closed fixed-label slide window derived from the ordinary Kirby-colour
 sliding law.
 
-For the identity ribbon functor used by the modular invariant, the object
-called `F(X)` in Bärenz--Barrett is just the actual object `X`.  Hence, after
-expanding the possibly twisted colour on the sliding component into simple
-labels, every fixed label `x` is an ordinary Kirby-colour slide with
-`X = simple x ⊗ exterior`.  This is the formal content of Remark 3.5.
+Because source and target are the same ribbon category, expanding the
+possibly twisted colour on the moving component into simple labels reduces
+each fixed label `x` to an ordinary Kirby-colour slide with exposed object
+`simple x ⊗ exterior`.
 
 No equality is stored in this structure.
 -/
@@ -878,4 +874,4 @@ theorem linear_eval_sound (coefficient : S → K) :
 
 end OrdinaryLabelIndexedSlidingWindow
 
-end TwistedYetter.Kirby.EGNOCategoryBoundSliding
+end TwistedYetter.Kirby.EGNOKirbyColorEncircling

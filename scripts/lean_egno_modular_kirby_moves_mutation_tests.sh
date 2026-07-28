@@ -9,7 +9,7 @@ lake build TwistedYetter.Kirby.EGNOModularKirbyMoves >/dev/null
 
 mutations=(
   "lean/Mutations/SingletonFormalKirbyColorSliding.lean"
-  "lean/Mutations/MissingLabelIndexedSlidingFamily.lean"
+  "lean/Mutations/MissingLabelIndexedEncirclingFamily.lean"
   "lean/Mutations/FreeModularGlobalDimension.lean"
   "lean/Mutations/WrongModularTransparentDimension.lean"
   "lean/Mutations/MissingUnitQuantumDimensionCertificate.lean"

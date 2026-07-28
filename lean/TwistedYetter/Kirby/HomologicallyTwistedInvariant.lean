@@ -27,7 +27,7 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves
@@ -77,8 +77,8 @@ structure AdmissibleKirbyCategory where
   category_snapshot_hash_shape :
     RawPresentation.sha256Shape categorySnapshotHash = true
   dimensionProfile : GlobalDimensionProfile (K := K)
-  slidingData :
-    SlidingCategoryData (R := K) (D := C) (S := S) (I := I)
+  encirclingData :
+    EncirclingTransportData (R := K) (D := C) (S := S) (I := I)
   closedScalar : (𝟙_ C ⟶ 𝟙_ C) → K
   closed_scalar_identity :
     closedScalar (𝟙 (𝟙_ C)) = 1
@@ -179,7 +179,7 @@ def twoOverTwoSlideMetadata
     {source target : Boundary C}
     {before after : Diagram C source target}
     {data :
-      SlidingCategoryData (R := K) (D := C) (S := S) (I := I)}
+      EncirclingTransportData (R := K) (D := C) (S := S) (I := I)}
     (slide : TwoHandleOverTwoSlide (data := data) before after) :
     SlideMetadata :=
   match slide with
@@ -321,7 +321,7 @@ inductive EvaluatedTableTwoStep
             metadata counts_sound transport))
       (slide :
         TwoHandleOverTwoSlide
-          (data := categoryData.slidingData)
+          (data := categoryData.encirclingData)
           (sourceEvaluation.diagram alpha)
           (targetEvaluation.diagram (transport.targetClass alpha)))
       (graphical_orientation_sound :

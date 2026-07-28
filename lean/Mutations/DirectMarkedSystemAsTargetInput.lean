@@ -5,7 +5,7 @@ namespace TwistedYetter.Kirby.FourManifoldInvariantTarget.Mutations
 open CategoryTheory
 open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
 open TwistedYetter.Kirby.EvaluatorCompiler
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 

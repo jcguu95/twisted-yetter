@@ -51,7 +51,7 @@ The coefficient of each simple summand for every component and marked class.
 
 The zero-class law is mathematical data, not metadata: it forces the
 untwisted specialization to use the exact weight stored in
-`categoryData.slidingData`. The behavior at nonzero classes is intentionally
+`categoryData.encirclingData`. The behavior at nonzero classes is intentionally
 left open for a source-backed character or universal-grading construction.
 -/
 structure HomologicalKirbyColorWeights
@@ -69,7 +69,7 @@ structure HomologicalKirbyColorWeights
     (component : ComponentSpec) →
     (simple : S) →
       coefficient topology 0 component simple =
-        categoryData.slidingData.weight simple
+        categoryData.encirclingData.weight simple
   categorySnapshotHash : String
   category_snapshot_hash_sound :
     categorySnapshotHash = categoryData.categorySnapshotHash
@@ -151,7 +151,7 @@ theorem zero_component_weight_eq_category_weight
     (simple : S) :
     weights.toComponentExpansion.componentWeight
         topology 0 component simple =
-      categoryData.slidingData.weight simple :=
+      categoryData.encirclingData.weight simple :=
   weights.zero_class_sound topology component simple
 
 end HomologicalKirbyColorWeights
@@ -197,10 +197,10 @@ def strandObject
     (strand : StrandState) : C :=
   match strand.orientation with
   | .positive =>
-      categoryData.slidingData.simple
+      categoryData.encirclingData.simple
         (resolver.labelOf strand.componentId)
   | .negative =>
-      categoryData.slidingData.dualSimple
+      categoryData.encirclingData.dualSimple
         (resolver.labelOf strand.componentId)
 
 /-- A deterministic right-associated boundary for one labelled slice. -/

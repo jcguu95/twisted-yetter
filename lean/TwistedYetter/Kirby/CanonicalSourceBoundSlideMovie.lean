@@ -26,7 +26,7 @@ open TwistedYetter.Kirby.CanonicalModularKirbyEvaluator
 open TwistedYetter.Kirby.CanonicalMoveGeometry
 open TwistedYetter.Kirby.CanonicalSourceBackedMove
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.EGNOModularKirbyMoves
 open TwistedYetter.Kirby.EGNOModularKirbyMoves.LiteratureBackedModularGraphicalEnvironment
 open TwistedYetter.Kirby.KirbyCompleteness

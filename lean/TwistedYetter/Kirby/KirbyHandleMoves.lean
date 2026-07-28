@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.FramedSliding
+import TwistedYetter.Kirby.FramedEncirclingTransport
 import TwistedYetter.Kirby.Presentation
 
 /-!
@@ -8,7 +8,7 @@ This module separates two logically different certificates.
 
 * The graphical certificate is a closed whitelist.  Slides over a one-handle
   use the original sliding property (Bärenz--Barrett Lemma 3.1); a two-handle
-  over a two-handle uses the `SlidingFamily` calculation behind Lemmas 3.3 and
+  over a two-handle uses the `EncirclingTransportFamily` calculation behind Lemmas 3.3 and
   3.4.  No constructor accepts an arbitrary `CertifiedMove`.
 * Framing, component lineage, and homological marking transport are explicit
   bookkeeping data.  Matrix congruence is not used as a substitute for the
@@ -16,7 +16,7 @@ This module separates two logically different certificates.
 
 The original sliding property remains a visible, source-backed standard input.
 The generalized two-over-two slide is derived from the finite calculation in
-`GeneralizedSliding`.
+`KirbyColorEncirclingTransport`.
 -/
 
 namespace TwistedYetter.Kirby.KirbyHandleMoves
@@ -26,8 +26,8 @@ open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
 open TwistedYetter.Kirby.CategoricalMovie
-open TwistedYetter.Kirby.FramedSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.FramedEncirclingTransport
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleSlide
 open TwistedYetter.Kirby.Presentation
 
@@ -297,7 +297,7 @@ end OrdinaryHandleSlide
 
 end OrdinarySliding
 
-section GeneralizedSliding
+section KirbyColorEncirclingTransport
 
 variable {R : Type uR} [CommSemiring R]
 variable {D : Type u} [Category.{v} D] [Preadditive D]
@@ -309,11 +309,11 @@ variable {I : S → S → Type uI}
 variable [∀ y z, Fintype (I y z)]
 variable [∀ y z, DecidableEq (I y z)]
 variable {data :
-  SlidingCategoryData (R := R) (D := D) (S := S) (I := I)}
+  EncirclingTransportData (R := R) (D := D) (S := S) (I := I)}
 
 /--
 Closed whitelist for a two-handle sliding over a two-handle.  The only
-constructor requires the actual Lemma 3.3 `SlidingFamily`.
+constructor requires the actual Lemma 3.3 `EncirclingTransportFamily`.
 -/
 inductive TwoHandleOverTwoSlide :
     {source target : Boundary D} →
@@ -323,7 +323,7 @@ inductive TwoHandleOverTwoSlide :
       (metadata : SlideMetadata)
       (kind_sound : metadata.kind = .twoOverTwo)
       (lineage : ComponentLineage metadata)
-      (family : SlidingFamily data)
+      (family : EncirclingTransportFamily data)
       {source target wholeSource wholeTarget : Boundary D}
       (exterior : Diagram D source target)
       (context :
@@ -333,9 +333,9 @@ inductive TwoHandleOverTwoSlide :
           wholeSource wholeTarget) :
       TwoHandleOverTwoSlide
         (Context.plug D context
-          (beforeExterior family.sourcedFunctorSlidingLaw exterior))
+          (beforeExterior family.sourcedEncirclingLaw exterior))
         (Context.plug D context
-          (afterExterior family.sourcedFunctorSlidingLaw exterior))
+          (afterExterior family.sourcedEncirclingLaw exterior))
 
 namespace TwoHandleOverTwoSlide
 
@@ -347,10 +347,10 @@ theorem sound
     Diagram.eval D before = Diagram.eval D after := by
   cases slide with
   | twoOverTwo metadata kind_sound lineage family exterior context =>
-      exact SlidingFamily.lemma34Movie_sound family exterior context
+      exact EncirclingTransportFamily.framedEncirclingTransport_sound family exterior context
 
 end TwoHandleOverTwoSlide
 
-end GeneralizedSliding
+end KirbyColorEncirclingTransport
 
 end TwistedYetter.Kirby.KirbyHandleMoves

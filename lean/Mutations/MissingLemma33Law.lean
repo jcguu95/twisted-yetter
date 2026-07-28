@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.FramedSliding
+import TwistedYetter.Kirby.FramedEncirclingTransport
 
 /-!
 This mutation must not compile.  Lemma 3.4 cannot be constructed from an
@@ -10,7 +10,7 @@ namespace TwistedYetter.Mutations.MissingLemma33Law
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.FramedSliding
+open TwistedYetter.Kirby.FramedEncirclingTransport
 
 universe u v
 

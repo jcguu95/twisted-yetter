@@ -44,7 +44,7 @@ LEAN_BUILD_ORDER = [
     "lean/TwistedYetter/Kirby/LinearContext.lean",
     "lean/TwistedYetter/Kirby/MateDiagram.lean",
     "lean/TwistedYetter/Kirby/HandleSlide.lean",
-    "lean/TwistedYetter/Kirby/GeneralizedSliding.lean",
+    "lean/TwistedYetter/Kirby/KirbyColorEncirclingTransport.lean",
     "lean/TwistedYetter.lean",
 ]
 
@@ -427,7 +427,7 @@ def build() -> dict[str, Any]:
                 "endomorphisms of the functor fixed_tensor_minus."
             ),
             (
-                "A real SourcedFunctorSlidingLaw is constructed; the final "
+                "A real SourcedTensorLeftEncirclingLaw is constructed; the final "
                 "core equality is not supplied as a field."
             ),
         ],

@@ -34,10 +34,10 @@ open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalPresentationCompiler
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ConcreteMarkedPairAssembly
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.EGNOModularKirbyMoves
 open TwistedYetter.Kirby.FramingNaturality
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.IntegralCharacterKirbyColorCompiler
 open TwistedYetter.Kirby.KirbyCancellation
@@ -710,7 +710,7 @@ identity-functor case.
 Every fixed-label term is derived from ordinary Kirby-colour sliding and
 naturality.  No independent generalized-sliding equality is assumed.
 -/
-inductive BoundGeneralizedSlide
+inductive BoundLabelIndexedSlide
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     (law : OrdinaryKirbySlidingLaw data) :
     LinearDiagram (R := K) (C := C) .unit .unit →
@@ -720,31 +720,31 @@ inductive BoundGeneralizedSlide
       (closedWindow :
         OrdinaryLabelIndexedSlidingWindow data law)
       (coefficient : S → K) :
-      BoundGeneralizedSlide law
+      BoundLabelIndexedSlide law
         (closedWindow.linearBefore coefficient)
         (closedWindow.linearAfter coefficient)
   | add
       {leftBefore leftAfter rightBefore rightAfter :
         LinearDiagram (R := K) (C := C) .unit .unit} :
-      BoundGeneralizedSlide law leftBefore leftAfter →
-      BoundGeneralizedSlide law rightBefore rightAfter →
-      BoundGeneralizedSlide law
+      BoundLabelIndexedSlide law leftBefore leftAfter →
+      BoundLabelIndexedSlide law rightBefore rightAfter →
+      BoundLabelIndexedSlide law
         (leftBefore + rightBefore) (leftAfter + rightAfter)
   | smul
       (scalar : K)
       {before after : LinearDiagram (R := K) (C := C) .unit .unit} :
-      BoundGeneralizedSlide law before after →
-      BoundGeneralizedSlide law
+      BoundLabelIndexedSlide law before after →
+      BoundLabelIndexedSlide law
         (scalar • before) (scalar • after)
 
-namespace BoundGeneralizedSlide
+namespace BoundLabelIndexedSlide
 
-/-- The generalized-slide finite sum preserves categorical evaluation. -/
+/-- The fixed-label encircling finite sum preserves categorical evaluation. -/
 theorem eval_eq
     {data : RibbonFusionCategoryData (K := K) (C := C) (S := S)}
     {law : OrdinaryKirbySlidingLaw data}
     {before after : LinearDiagram (R := K) (C := C) .unit .unit}
-    (slide : BoundGeneralizedSlide law before after) :
+    (slide : BoundLabelIndexedSlide law before after) :
     LinearDiagram.eval before = LinearDiagram.eval after := by
   induction slide with
   | window closedWindow coefficient =>
@@ -755,7 +755,7 @@ theorem eval_eq
       simpa only [map_smul] using
         congrArg (fun value => scalar • value) ih
 
-end BoundGeneralizedSlide
+end BoundLabelIndexedSlide
 
 /--
 Hash binding for one exact topology move and one graphical proof object.
@@ -969,7 +969,7 @@ structure LocalMoveCompiler
     (counts_sound : source.counts = target.counts) →
     (transport : MarkedH2Transport source target) →
     (alpha : H2) →
-      BoundGeneralizedSlide graphical.ordinaryKirbySlidingLaw
+      BoundLabelIndexedSlide graphical.ordinaryKirbySlidingLaw
         (presentation.linearDiagram source alpha)
         (presentation.linearDiagram target
           (transport.targetClass alpha))
@@ -1091,7 +1091,7 @@ theorem move_invariant
   | twoOverTwo metadata counts transport =>
       exact normalized_eq_of_linear_eval alpha
         (transport.targetClass alpha) counts
-        (BoundGeneralizedSlide.eval_eq
+        (BoundLabelIndexedSlide.eval_eq
           (compiler.twoOverTwo metadata counts transport alpha))
   | oneTwoBirth metadata counts transport =>
       let calculation :=

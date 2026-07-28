@@ -1,11 +1,11 @@
 import TwistedYetter.Kirby.EGNOModularKirbyMoves
 
-namespace TwistedYetter.Mutations.MissingLabelIndexedSlidingFamily
+namespace TwistedYetter.Mutations.MissingLabelIndexedEncirclingFamily
 
 open CategoryTheory
 open TwistedYetter.Fusion.EGNO
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 universe uK uC vC
 
@@ -22,15 +22,15 @@ noncomputable def rejected
     (mate : SphericalMateTraceLaw (K := K) data.spherical)
     (x : S)
     (oneLabel :
-      SlidingFamily
-        (CategoryData.slidingCategoryData data insertion mate x))
+      EncirclingTransportFamily
+        (CategoryData.encirclingTransportData data insertion mate x))
     (hash : String)
     (hashShape :
       TwistedYetter.Kirby.Presentation.RawPresentation.sha256Shape hash =
         true) :
-    LabelIndexedSlidingMovies data insertion mate where
+    LabelIndexedEncirclingMovies data insertion mate where
   family := oneLabel
   graphicalCertificateHash := hash
   graphical_certificate_hash_shape := hashShape
 
-end TwistedYetter.Mutations.MissingLabelIndexedSlidingFamily
+end TwistedYetter.Mutations.MissingLabelIndexedEncirclingFamily

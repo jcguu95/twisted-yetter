@@ -37,7 +37,7 @@ CORE_ARTIFACT = (
 )
 
 LEAN_BUILD_ORDER = [
-    "lean/TwistedYetter/Kirby/FramedSliding.lean",
+    "lean/TwistedYetter/Kirby/FramedEncirclingTransport.lean",
     "lean/TwistedYetter.lean",
 ]
 MUTATIONS = [
@@ -316,7 +316,7 @@ def build() -> dict[str, Any]:
             "The visible exterior lift is proved equal to tensorLeft.map of its evaluation.",
             "Naturality and the actual Lemma 3.3 core equality derive framed exterior transport.",
             "The transport is valid in arbitrary nested typed contexts and closed unit-to-unit contexts.",
-            "The public constructor starts from SlidingFamily.sourcedFunctorSlidingLaw; no arbitrary-knot endpoint equality is assumed."
+            "The public constructor starts from EncirclingTransportFamily.sourcedEncirclingLaw; no arbitrary-knot endpoint equality is assumed."
         ],
         "explicit_non_claims": obligations["explicit_non_claims"],
         "inherited_trusted_input_boundary": core["trusted_input_boundary"],

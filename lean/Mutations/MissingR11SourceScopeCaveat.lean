@@ -3,7 +3,7 @@ import TwistedYetter.Kirby.HomologicallyTwistedInvariant
 namespace TwistedYetter.Kirby.HomologicallyTwistedInvariant.Mutations
 
 open CategoryTheory
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.KirbyCompleteness
 
 universe uK uC vC uS uI uH

@@ -49,14 +49,14 @@ SOURCE_FILES = [
     "lean/TwistedYetter/Fusion/EGNOSphericalInsertion.lean",
     "lean/TwistedYetter/Kirby/FramingNaturality.lean",
     "lean/TwistedYetter/Kirby/PresentationIsotopy.lean",
-    "lean/TwistedYetter/Kirby/GeneralizedSliding.lean",
+    "lean/TwistedYetter/Kirby/KirbyColorEncirclingTransport.lean",
     "lean/TwistedYetter/Kirby/KirbyCancellation.lean",
     "lean/TwistedYetter/Kirby/RibbonKirbyGraphicalAlgebra.lean",
-    "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean",
+    "lean/TwistedYetter/Kirby/EGNOKirbyColorEncircling.lean",
     "lean/TwistedYetter/Kirby/EGNOModularKirbyMoves.lean",
     "lean/TwistedYetter/Kirby/EGNOModularKirbyMovesAxiomAudit.lean",
     "lean/Mutations/SingletonFormalKirbyColorSliding.lean",
-    "lean/Mutations/MissingLabelIndexedSlidingFamily.lean",
+    "lean/Mutations/MissingLabelIndexedEncirclingFamily.lean",
     "lean/Mutations/FreeModularGlobalDimension.lean",
     "lean/Mutations/WrongModularTransparentDimension.lean",
     "lean/Mutations/MissingUnitQuantumDimensionCertificate.lean",
@@ -203,7 +203,7 @@ def check_contracts() -> None:
     ).read_text()
     sliding = (
         REPO_ROOT
-        / "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean"
+        / "lean/TwistedYetter/Kirby/EGNOKirbyColorEncircling.lean"
     ).read_text()
     modular = (
         REPO_ROOT
@@ -220,7 +220,7 @@ def check_contracts() -> None:
     ]
     required_sliding = [
         "noncomputable def slidingCategoryData",
-        "structure LabelIndexedSlidingMovies",
+        "structure LabelIndexedEncirclingMovies",
         "(x : S) →",
         "theorem term_sound",
         "theorem linear_eval_sound",

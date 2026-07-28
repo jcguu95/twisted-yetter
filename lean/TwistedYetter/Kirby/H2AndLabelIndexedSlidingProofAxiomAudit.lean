@@ -23,7 +23,7 @@ upside-down dual complex.
 #print axioms TwistedYetter.Kirby.CancellationSafeH2Representative.eval_sound
 #print axioms TwistedYetter.Kirby.CancellationSafeH2Representative.CancellationSafeMovie.value_sound
 
-#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.open_term_sound
-#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.term_sound
-#print axioms TwistedYetter.Kirby.EGNOCategoryBoundSliding.OrdinaryLabelIndexedSlidingWindow.linear_eval_sound
+#print axioms TwistedYetter.Kirby.EGNOKirbyColorEncircling.OrdinaryLabelIndexedSlidingWindow.open_term_sound
+#print axioms TwistedYetter.Kirby.EGNOKirbyColorEncircling.OrdinaryLabelIndexedSlidingWindow.term_sound
+#print axioms TwistedYetter.Kirby.EGNOKirbyColorEncircling.OrdinaryLabelIndexedSlidingWindow.linear_eval_sound
 #print axioms TwistedYetter.Kirby.CanonicalCycleSlideGeometry.BoundKirbyColourLinearSlide.eval_eq

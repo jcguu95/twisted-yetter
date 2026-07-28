@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.EGNOCategoryBoundSliding
+import TwistedYetter.Kirby.EGNOKirbyColorEncircling
 import TwistedYetter.Kirby.ComponentRibbonDiagram
 import TwistedYetter.Kirby.KirbyCancellation
 import TwistedYetter.Kirby.ModularOpenKilling
@@ -13,7 +13,7 @@ import TwistedYetter.Fusion.EGNOPremodularModular
 This module binds every category-side ingredient of the identity-functor
 Kirby route to one `RibbonFusionCategoryData` value.
 
-* the ordinary and generalized slides use the exact formal Kirby colour;
+* the ordinary and label-indexed slides use the exact formal Kirby colour;
 * the global dimension is the sum of squared derived quantum dimensions;
 * modularity means that a listed simple is transparent exactly at the unit;
 * the transparent dimension is therefore fixed to one;
@@ -32,7 +32,7 @@ open CategoryTheory.MonoidalCategory
 open TwistedYetter.Fusion.EGNO
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.ComponentRibbonDiagram
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.FramingNaturality
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.ModularOpenKilling

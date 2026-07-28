@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.GeneralizedSliding
+import TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 namespace TwistedYetter.Mutations.MissingBackwardInsertion
 
@@ -6,7 +6,7 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Fusion
 open TwistedYetter.Fusion.FiniteResolution
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 universe uR uD vD uS uI
 
@@ -41,7 +41,7 @@ def forgedSlidingData
         weight z •
           (forwardProjection y z i ≫ forwardInclusion y z i) =
         𝟙 (fixed ⊗ dualSimple y)) :
-    SlidingCategoryData (R := R) (D := D) (S := S) (I := I) where
+    EncirclingTransportData (R := R) (D := D) (S := S) (I := I) where
   fixed := fixed
   weight := weight
   simple := simple

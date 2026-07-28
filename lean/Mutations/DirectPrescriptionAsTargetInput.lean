@@ -3,7 +3,7 @@ import TwistedYetter.Kirby.FourManifoldInvariantTarget
 namespace TwistedYetter.Kirby.FourManifoldInvariantTarget.Mutations
 
 open CategoryTheory
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 

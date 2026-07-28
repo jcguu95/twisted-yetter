@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.FramedSliding
+import TwistedYetter.Kirby.FramedEncirclingTransport
 import TwistedYetter.Kirby.Presentation
 import TwistedYetter.Fusion.EGNOTraceCyclicity
 import TwistedYetter.Fusion.EGNOTracePairing

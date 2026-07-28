@@ -15,8 +15,8 @@ graphical compiler. It deliberately does not contain:
 Coupon transport through crossings and extrema is proved directly from
 braiding and rigidity. Coupon transport through a framing twist follows from
 naturality of the recorded twist. The two sliding inputs remain visible: the
-ordinary sliding law and the `SlidingFamily` whose core equality is derived
-from the finite Bärenz--Barrett calculation.
+ordinary sliding law and the `EncirclingTransportFamily` whose core equality is derived
+from the finite identity-functor encircling calculation.
 -/
 
 namespace TwistedYetter.Kirby.RibbonKirbyGraphicalAlgebra
@@ -25,8 +25,8 @@ open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
 open TwistedYetter.Kirby.CategoricalTangle.Diagram
-open TwistedYetter.Kirby.FramedSliding
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.FramedEncirclingTransport
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HandleSlide
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCancellation
@@ -101,7 +101,7 @@ end CancellationInput
 Exactly the standard graphical algebra accepted by the local compiler.
 
 The package is indexed by the same `categoryData` used by normalization and
-generalized sliding, so a sliding family from another snapshot cannot be
+Kirby-colour encircling transport, so a family from another snapshot cannot be
 substituted by type alone.
 -/
 structure Input
@@ -111,7 +111,7 @@ structure Input
   framedKink : FramedKinkCompatibility (C := C)
   sphericalCut : SphericalCutTrace (C := C)
   ordinarySliding : SourcedSlidingLaw C
-  generalizedSliding : SlidingFamily categoryData.slidingData
+  kirbyColorEncirclingTransport : EncirclingTransportFamily categoryData.encirclingData
   cancellation : CancellationInput categoryData.dimensionProfile
   categorySnapshotHash : String
   category_snapshot_hash_sound :
@@ -229,8 +229,8 @@ theorem ordinary_exterior
   ordinary_exterior_transport_sound input.ordinarySliding exterior
 
 /--
-Generalized sliding in an arbitrary framed context is derived from the
-recorded `SlidingFamily`; no whole-knot equality is an input field.
+Kirby-colour encircling transport in an arbitrary framed context is derived from the
+recorded `EncirclingTransportFamily`; no whole-knot equality is an input field.
 -/
 theorem generalized_framed_exterior
     (input : Input categoryData)
@@ -238,19 +238,19 @@ theorem generalized_framed_exterior
     (exterior : Diagram C source target)
     (context :
       Context C
-        (.atom (categoryData.slidingData.fixed ⊗ source.denote))
-        (.atom (categoryData.slidingData.fixed ⊗ target.denote))
+        (.atom (categoryData.encirclingData.fixed ⊗ source.denote))
+        (.atom (categoryData.encirclingData.fixed ⊗ target.denote))
         wholeSource wholeTarget) :
     Diagram.eval C
         (Context.plug C context
           (beforeExterior
-            input.generalizedSliding.sourcedFunctorSlidingLaw exterior)) =
+            input.kirbyColorEncirclingTransport.sourcedEncirclingLaw exterior)) =
       Diagram.eval C
         (Context.plug C context
           (afterExterior
-            input.generalizedSliding.sourcedFunctorSlidingLaw exterior)) :=
-  SlidingFamily.lemma34Movie_sound
-    input.generalizedSliding exterior context
+            input.kirbyColorEncirclingTransport.sourcedEncirclingLaw exterior)) :=
+  EncirclingTransportFamily.framedEncirclingTransport_sound
+    input.kirbyColorEncirclingTransport exterior context
 
 end Input
 

@@ -196,7 +196,7 @@ def whitelist_check() -> dict[str, Any]:
         "constructors": constructors,
         "arbitrary_certified_move_constructor": False,
         "ordinary_standard_input": "SourcedSlidingLaw",
-        "two_over_two_derived_input": "SlidingFamily",
+        "two_over_two_derived_input": "EncirclingTransportFamily",
     }
 
 
@@ -392,7 +392,7 @@ def build() -> dict[str, Any]:
         },
         "established_scope": [
             "One-over-one and two-over-one graphical evaluation invariance follows in arbitrary typed context from the explicit source-backed original sliding law.",
-            "Two-over-two graphical evaluation invariance follows in arbitrary framed context from the actual R4 SlidingFamily and R5 Lemma 3.4 construction.",
+            "Two-over-two graphical evaluation invariance follows in arbitrary framed context from the actual R4 EncirclingTransportFamily and R5 Lemma 3.4 construction.",
             "Both band orientations are explicit and have independently validated bookkeeping fixtures.",
             "Component roles and stable-ID lineage are mandatory.",
             "Handle-chain coordinates satisfy d2_target = P1^-1 d2_source P2.",

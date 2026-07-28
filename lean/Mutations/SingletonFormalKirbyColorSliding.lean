@@ -4,7 +4,7 @@ namespace TwistedYetter.Mutations.SingletonFormalKirbyColorSliding
 
 open CategoryTheory
 open TwistedYetter.Fusion.EGNO
-open TwistedYetter.Kirby.EGNOCategoryBoundSliding
+open TwistedYetter.Kirby.EGNOKirbyColorEncircling
 open TwistedYetter.Kirby.EGNOKirbyColorExpansion
 
 universe uK uC vC
@@ -20,6 +20,6 @@ variable {S : Type} [Fintype S] [DecidableEq S]
     (data : RibbonFusionCategoryData (K := K) (C := C) (S := S))
     (insertion : SphericalInsertionLaw data)
     (mate : SphericalMateTraceLaw (K := K) data.spherical) =>
-  CategoryData.slidingCategoryData data insertion mate (ordinary data)
+  CategoryData.encirclingTransportData data insertion mate (ordinary data)
 
 end TwistedYetter.Mutations.SingletonFormalKirbyColorSliding

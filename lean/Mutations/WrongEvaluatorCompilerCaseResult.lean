@@ -3,7 +3,7 @@ import TwistedYetter.Kirby.TableTwoEvaluatorCompiler
 namespace TwistedYetter.Kirby.EvaluatorCompiler.Mutations
 
 open CategoryTheory
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.HomologicallyTwistedInvariant
 open TwistedYetter.Kirby.KirbyCompleteness
 open TwistedYetter.Kirby.KirbyHandleMoves

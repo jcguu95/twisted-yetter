@@ -1,7 +1,7 @@
 import Mathlib.LinearAlgebra.Dual.Basis
 
 /-!
-# Finite linear resolutions for the generalized sliding calculation
+# Finite linear resolutions for Kirby-colour encircling transport
 
 This module makes the finite sums and dual-basis data used by graphical
 insertion arguments explicit. It does not define a fusion category.

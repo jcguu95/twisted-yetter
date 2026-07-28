@@ -1,30 +1,30 @@
 {
-  "artifact_type": "generalized-sliding-fiber-breakdown-blocker-v1",
-  "generated_at": "2026-07-27T13:41:11-06:00",
+  "artifact_type": "kirby-color-encircling-fiber-breakdown-blocker-v1",
+  "generated_at": "2026-07-27T19:01:21-06:00",
   "status": "BLOCKED_INTENTIONAL_LEAN_COMPILE_FAILURE",
   "decision": {
-    "timestamp": "2026-07-27T13:41:11-06:00",
-    "reason": "Expose the mathematical content hidden by two oversized generalized-sliding assumptions, even though the resulting checkpoint does not compile.",
+    "timestamp": "2026-07-27T19:01:21-06:00",
+    "reason": "Remove the unused cross-category pivotal-functor generalization, specialize the API to Kirby-colour encircling inside one premodular category, and keep the five genuine graphical obligations exposed.",
     "requested_terminal_state": "CLEAN_GIT_COMMIT_WITH_KNOWN_COMPILE_FAILURE"
   },
-  "base_commit": "5cc0525e39448f3c37cb9a347455003388677861",
-  "target_module": "TwistedYetter.Kirby.EGNOCategoryBoundSliding",
-  "source_file": "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean",
+  "base_commit": "9ff5573813be04c4fe59cca4f6c37280c97bab6e",
+  "target_module": "TwistedYetter.Kirby.EGNOKirbyColorEncircling",
+  "source_file": "lean/TwistedYetter/Kirby/EGNOKirbyColorEncircling.lean",
   "declaration_changes": [
     {
-      "name": "LiteratureInput.generalizedSlidingFiber",
-      "before": "AXIOM_RETURNING_COMPLETE_SLIDING_FIBER",
+      "name": "LiteratureInput.kirbyColorEncirclingFiber",
+      "before": "AXIOM_RETURNING_COMPLETE_ENCIRCLING_FIBER",
       "after": "UNFINISHED_NONCOMPUTABLE_DEFINITION_WITH_FIVE_EXPLICIT_GOALS",
       "status": "OLD_AXIOM_REMOVED"
     },
     {
-      "name": "LiteratureInput.generalizedSlidingBeforeNaturality",
+      "name": "LiteratureInput.sourceEncircling_natural",
       "before": "AXIOM",
       "after": "THEOREM_DERIVED_FROM_CORE_SOUND_AND_AFTER_NATURALITY",
       "status": "PROVED_BEFORE_FIBER_WAS_OPENED"
     },
     {
-      "name": "LiteratureInput.generalizedSlidingAfterNaturality",
+      "name": "LiteratureInput.targetEncircling_natural",
       "before": "AXIOM",
       "after": "AXIOM",
       "status": "REMAINS_EXPLICIT"
@@ -44,7 +44,7 @@
     {
       "constructor_field": "braidedChannel",
       "meaning": "Construct the explicit intermediate ribbon diagram after the braiding step for every fusion channel.",
-      "lean_target_summary": "(y z : S) -> SlidingIndex data x y z -> Diagram C (fixed tensor strand) (fixed tensor strand)"
+      "lean_target_summary": "(y z : S) -> EncirclingChannelIndex data x y z -> Diagram C (fixed tensor strand) (fixed tensor strand)"
     },
     {
       "constructor_field": "braidingMovie",
@@ -59,18 +59,20 @@
   ],
   "remaining_relevant_axioms_in_target_module": [
     {
-      "name": "LiteratureInput.generalizedSlidingAfterNaturality",
-      "meaning": "For every morphism f : A -> B, the after-slide endpoint is natural in the exposed strand."
+      "name": "LiteratureInput.targetEncircling_natural",
+      "meaning": "For every morphism f : A -> B, the target encircling operator is natural in the exposed strand."
     }
   ],
   "verification": {
-    "command": "lake -Kjobs=1 build TwistedYetter.Kirby.EGNOCategoryBoundSliding",
+    "command": "lake -Kjobs=1 build TwistedYetter.Kirby.EGNOKirbyColorEncircling",
     "exit_code": 1,
-    "failure_location": "lean/TwistedYetter/Kirby/EGNOCategoryBoundSliding.lean:302:16",
+    "failure_location": "lean/TwistedYetter/Kirby/EGNOKirbyColorEncircling.lean:302:16",
     "unsolved_goal_count": 5,
     "actual_sorry_or_admit": false,
-    "full_build_run": false,
-    "full_build_reason": "The targeted dependency already fails at the intended construction site."
+    "identity_specialized_dependency_build": "PASS_THROUGH_2158_OF_2159_TARGETS",
+    "temporary_sorry_full_build": "PASS_2323_JOBS_THEN_TEMPORARY_SORRY_REMOVED",
+    "full_build_run_in_final_state": false,
+    "full_build_reason": "The final state deliberately exposes the same five constructor goals, so the targeted dependency is the earliest honest failure."
   },
   "nonclaims": [
     "The current premodular four-manifold invariant theorem is not buildable.",

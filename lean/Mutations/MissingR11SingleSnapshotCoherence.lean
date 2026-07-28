@@ -5,7 +5,7 @@ namespace TwistedYetter.Kirby.HomologicallyTwistedInvariant.Mutations
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 open TwistedYetter.Kirby.CategoricalTangle
-open TwistedYetter.Kirby.GeneralizedSliding
+open TwistedYetter.Kirby.KirbyColorEncirclingTransport
 open TwistedYetter.Kirby.KirbyCancellation
 open TwistedYetter.Kirby.Presentation
 
@@ -26,8 +26,8 @@ example
     (category_hash_shape :
       RawPresentation.sha256Shape categorySnapshotHash = true)
     (profile : GlobalDimensionProfile (K := K))
-    (slidingData :
-      SlidingCategoryData (R := K) (D := C) (S := S) (I := I))
+    (encirclingData :
+      EncirclingTransportData (R := K) (D := C) (S := S) (I := I))
     (closedScalar : (𝟙_ C ⟶ 𝟙_ C) → K)
     (scalarizationMatchesGroundField : Prop)
     (scalarization_witness : scalarizationMatchesGroundField)
@@ -42,7 +42,7 @@ example
   categorySnapshotHash := categorySnapshotHash
   category_snapshot_hash_shape := category_hash_shape
   dimensionProfile := profile
-  slidingData := slidingData
+  encirclingData := encirclingData
   closedScalar := closedScalar
   scalarizationMatchesGroundField := scalarizationMatchesGroundField
   scalarization_witness := scalarization_witness

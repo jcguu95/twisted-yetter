@@ -8,7 +8,7 @@ Bärenz--Barrett Lemma 2.37 states one global theorem: for every object of a
 spherical fusion category and every finite trace-dual basis, the
 dimension-weighted simple channels resolve the identity.  This module records
 that standard theorem at its natural all-objects boundary and derives the
-concrete finite resolutions used by generalized sliding.
+concrete finite resolutions used by Kirby-colour encircling transport.
 
 The law is not attached to one diagram or one convenient basis.  In
 particular, it can be applied after a pairing-preserving mate transport, where

@@ -13,7 +13,7 @@ The eight constructors below cannot contain a final equality of evaluator
 values.  They contain only:
 
 * generated framed-isotopy geometry;
-* whole-linear-sum ordinary or generalized slide programs; or
+* whole-linear-sum ordinary or label-indexed slide programs; or
 * exact isolated 1--2 or 2--3 factorization geometry.
 
 Lean proves the finite sums, scalarization, normalization, reverse-move

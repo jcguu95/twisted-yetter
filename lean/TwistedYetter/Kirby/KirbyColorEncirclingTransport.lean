@@ -5,17 +5,17 @@ import TwistedYetter.Kirby.LinearContext
 import TwistedYetter.Kirby.LinearDiagram
 
 /-!
-# Bärenz--Barrett generalized sliding calculation
+# Kirby-colour encircling transport
 
 This module records equations (3.1.2)--(3.1.11) as a typed finite calculation.
 The two insertion equalities are explicit source-backed inputs corresponding
 to Lemma 3.2.  Braiding and mate changes are supplied as certified categorical
 movies.  Lean performs all weighting, finite-sum interchange, channel
-transport, inverse insertion, and construction of the resulting functor-valued
-sliding law.
+transport, inverse insertion, and construction of the resulting family of
+encircling operators on `fixed ⊗ -`.
 -/
 
-namespace TwistedYetter.Kirby.GeneralizedSliding
+namespace TwistedYetter.Kirby.KirbyColorEncirclingTransport
 
 open scoped BigOperators
 open CategoryTheory
@@ -47,7 +47,7 @@ Category-level data shared by every strand `A` in Lemma 3.3.
 The finite mated family is only required to be biorthogonal.  This deliberately
 does not assert that the image of a source basis spans a target Hom space.
 -/
-structure SlidingCategoryData where
+structure EncirclingTransportData where
   fixed : D
   weight : S → R
   simple : S → D
@@ -77,12 +77,12 @@ structure SlidingCategoryData where
   pivotal_source_locator : String :=
     "Lemma 2.23 and Lemma 3.3, equations (3.1.9)-(3.1.11)"
 
-namespace SlidingCategoryData
+namespace EncirclingTransportData
 
-variable (data : SlidingCategoryData (R := R) (D := D) (S := S) (I := I))
+variable (data : EncirclingTransportData (R := R) (D := D) (S := S) (I := I))
 
 /-- The exact Kronecker equation used to authorize inverse insertion. -/
-theorem equation_3_1_9_to_3_1_11 (y z : S) (i j : I y z) :
+theorem matePairing_sound (y z : S) (i j : I y z) :
     (data.matedPairing y z).pair
         ((data.matedFamily y z).primal i)
         ((data.matedFamily y z).dual j) =
@@ -114,7 +114,7 @@ def backwardResolution (z : S) :
   inclusion y i := (data.matedFamily y z).primal i
   sound := data.backwardSound z
 
-end SlidingCategoryData
+end EncirclingTransportData
 
 /--
 One pointwise instance of the graphical calculation, with endpoint object
@@ -124,8 +124,8 @@ No field states the desired endpoint equality.  The only equality inputs are
 the two insertion resolutions and the soundness already carried by the local
 movies.
 -/
-structure SlidingFiber
-    (data : SlidingCategoryData (R := R) (D := D) (S := S) (I := I))
+structure EncirclingTransportFiber
+    (data : EncirclingTransportData (R := R) (D := D) (S := S) (I := I))
     (strand : D) where
   forwardContext : (y : S) →
     Context D
@@ -144,13 +144,13 @@ structure SlidingFiber
   braidingMovie : (y z : S) → (i : I y z) →
     Movie
       (Context.plug D (forwardContext y)
-        (Diagram.coupon "BB-3.1.4-forward-channel"
+        (Diagram.coupon "kirby-encircling-forward-channel"
           (data.forwardProjection y z i ≫ data.forwardInclusion y z i)))
       (braidedChannel y z i)
   mateMovie : (y z : S) → (i : I y z) →
     Movie (braidedChannel y z i)
       (Context.plug D (backwardContext z)
-        (Diagram.coupon "BB-3.1.6-mated-channel"
+        (Diagram.coupon "kirby-encircling-mated-channel"
           ((data.matedFamily y z).dual i ≫
             (data.matedFamily y z).primal i)))
   insertion_source_ref : String :=
@@ -158,12 +158,12 @@ structure SlidingFiber
   insertion_source_locator : String :=
     "Lemma 3.2 from Lemma 2.37; equations (3.1.4) and (3.1.7)"
 
-namespace SlidingFiber
+namespace EncirclingTransportFiber
 
 variable {data :
-  SlidingCategoryData (R := R) (D := D) (S := S) (I := I)}
+  EncirclingTransportData (R := R) (D := D) (S := S) (I := I)}
 variable {strand : D}
-variable (fiber : SlidingFiber data strand)
+variable (fiber : EncirclingTransportFiber data strand)
 
 /-- The left simple-labelled term in equation (3.1.3). -/
 def leftTerm (y : S) :
@@ -181,25 +181,25 @@ def rightTerm (z : S) :
 def insertedChannel (y z : S) (i : I y z) :
     Diagram D (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   Context.plug D (fiber.forwardContext y)
-    (Diagram.coupon "BB-3.1.4-forward-channel"
+    (Diagram.coupon "kirby-encircling-forward-channel"
       (data.forwardProjection y z i ≫ data.forwardInclusion y z i))
 
 /-- The mated channel used in equations (3.1.6) and (3.1.7). -/
 def matedChannel (y z : S) (i : I y z) :
     Diagram D (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   Context.plug D (fiber.backwardContext z)
-    (Diagram.coupon "BB-3.1.6-mated-channel"
+    (Diagram.coupon "kirby-encircling-mated-channel"
       ((data.matedFamily y z).dual i ≫
         (data.matedFamily y z).primal i))
 
 /-- Equation (3.1.3), kept as a formal Kirby-colour sum. -/
-noncomputable def stage313 :
+noncomputable def sourceEncirclingSum :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   weightedSum (R := R) data.weight fiber.leftTerm
 
 /-- Equation (3.1.4), after insertion of the second Kirby colour. -/
-noncomputable def stage314 :
+noncomputable def insertedChannelSum :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   ∑ y, ∑ z, ∑ i : I y z,
@@ -207,7 +207,7 @@ noncomputable def stage314 :
       atom (R := R) (fiber.insertedChannel y z i)
 
 /-- Equation (3.1.5), after braiding naturality. -/
-noncomputable def stage315 :
+noncomputable def braidedChannelSum :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   ∑ y, ∑ z, ∑ i : I y z,
@@ -215,7 +215,7 @@ noncomputable def stage315 :
       atom (R := R) (fiber.braidedChannel y z i)
 
 /-- Equation (3.1.6), after the pivotal mate change of variables. -/
-noncomputable def stage316 :
+noncomputable def matedChannelSum :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   ∑ y, ∑ z, ∑ i : I y z,
@@ -223,7 +223,7 @@ noncomputable def stage316 :
       atom (R := R) (fiber.matedChannel y z i)
 
 /-- Equations (3.1.7)--(3.1.8), after inverse insertion and collapse. -/
-noncomputable def stage318 :
+noncomputable def targetEncirclingSum :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
   weightedSum (R := R) data.weight fiber.rightTerm
@@ -235,7 +235,7 @@ simple channel `z`.
 For the homologically twisted application this weight will be the scalar by
 which the tensor-identity automorphism acts on `z`.
 -/
-noncomputable def channelWeightedStage314
+noncomputable def channelWeightedInsertedSum
     (channelWeight : S → R) :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
@@ -244,7 +244,7 @@ noncomputable def channelWeightedStage314
       atom (R := R) (fiber.insertedChannel y z i)
 
 /-- The channel-weighted stage after the braiding movie. -/
-noncomputable def channelWeightedStage315
+noncomputable def channelWeightedBraidedSum
     (channelWeight : S → R) :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
@@ -253,7 +253,7 @@ noncomputable def channelWeightedStage315
       atom (R := R) (fiber.braidedChannel y z i)
 
 /-- The channel-weighted stage after the pivotal mate movie. -/
-noncomputable def channelWeightedStage316
+noncomputable def channelWeightedMatedSum
     (channelWeight : S → R) :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
@@ -265,7 +265,7 @@ noncomputable def channelWeightedStage316
 The weighted target endpoint.  The internal weight remains attached to the
 surviving `z`-label after inverse insertion.
 -/
-noncomputable def channelWeightedStage318
+noncomputable def channelWeightedTargetSum
     (channelWeight : S → R) :
     LinearDiagram (R := R)
       (.atom (data.fixed ⊗ strand)) (.atom (data.fixed ⊗ strand)) :=
@@ -273,11 +273,11 @@ noncomputable def channelWeightedStage318
     (fun z => data.weight z * channelWeight z) fiber.rightTerm
 
 /-- Every channel weight survives the braiding movie term by term. -/
-theorem channelWeighted_equation_3_1_5
+theorem channelWeighted_inserted_to_braided
     (channelWeight : S → R) :
-    eval (R := R) (fiber.channelWeightedStage314 channelWeight) =
-      eval (R := R) (fiber.channelWeightedStage315 channelWeight) := by
-  simp only [channelWeightedStage314, channelWeightedStage315,
+    eval (R := R) (fiber.channelWeightedInsertedSum channelWeight) =
+      eval (R := R) (fiber.channelWeightedBraidedSum channelWeight) := by
+  simp only [channelWeightedInsertedSum, channelWeightedBraidedSum,
     map_sum, map_smul, eval_atom]
   apply Finset.sum_congr rfl
   intro y _
@@ -293,11 +293,11 @@ theorem channelWeighted_equation_3_1_5
         (fiber.braidingMovie y z i).sound)
 
 /-- Every channel weight survives the mate movie term by term. -/
-theorem channelWeighted_equation_3_1_6
+theorem channelWeighted_braided_to_mated
     (channelWeight : S → R) :
-    eval (R := R) (fiber.channelWeightedStage315 channelWeight) =
-      eval (R := R) (fiber.channelWeightedStage316 channelWeight) := by
-  simp only [channelWeightedStage315, channelWeightedStage316,
+    eval (R := R) (fiber.channelWeightedBraidedSum channelWeight) =
+      eval (R := R) (fiber.channelWeightedMatedSum channelWeight) := by
+  simp only [channelWeightedBraidedSum, channelWeightedMatedSum,
     map_sum, map_smul, eval_atom]
   apply Finset.sum_congr rfl
   intro y _
@@ -316,11 +316,11 @@ theorem channelWeighted_equation_3_1_6
 Inverse insertion removes only the `y`-resolution.  An arbitrary scalar
 depending on `z` remains visible on the target endpoint.
 -/
-theorem channelWeighted_equation_3_1_7_to_3_1_8
+theorem channelWeighted_mated_to_target
     (channelWeight : S → R) :
-    eval (R := R) (fiber.channelWeightedStage316 channelWeight) =
-      eval (R := R) (fiber.channelWeightedStage318 channelWeight) := by
-  simp only [channelWeightedStage316, channelWeightedStage318,
+    eval (R := R) (fiber.channelWeightedMatedSum channelWeight) =
+      eval (R := R) (fiber.channelWeightedTargetSum channelWeight) := by
+  simp only [channelWeightedMatedSum, channelWeightedTargetSum,
     map_sum, map_smul, eval_atom, eval_weightedSum]
   calc
     (∑ y, ∑ z, ∑ i : I y z,
@@ -349,22 +349,22 @@ theorem channelWeighted_equation_3_1_7_to_3_1_8
       exact congrArg
         (fun value => (data.weight z * channelWeight z) • value)
         (insertIdentity (data.backwardResolution z)
-          (fiber.backwardContext z) "BB-3.1.6-mated-channel")
+          (fiber.backwardContext z) "kirby-encircling-mated-channel")
 
 /-- The complete channel-weighted transport from insertion to target. -/
 theorem channelWeighted_transport
     (channelWeight : S → R) :
-    eval (R := R) (fiber.channelWeightedStage314 channelWeight) =
-      eval (R := R) (fiber.channelWeightedStage318 channelWeight) :=
-  fiber.channelWeighted_equation_3_1_5 channelWeight |>.trans <|
-    fiber.channelWeighted_equation_3_1_6 channelWeight |>.trans <|
-      fiber.channelWeighted_equation_3_1_7_to_3_1_8 channelWeight
+    eval (R := R) (fiber.channelWeightedInsertedSum channelWeight) =
+      eval (R := R) (fiber.channelWeightedTargetSum channelWeight) :=
+  fiber.channelWeighted_inserted_to_braided channelWeight |>.trans <|
+    fiber.channelWeighted_braided_to_mated channelWeight |>.trans <|
+      fiber.channelWeighted_mated_to_target channelWeight
 
 /-- Equation (3.1.4): forward insertion, including both dimension weights. -/
-theorem equation_3_1_4 :
-    eval (R := R) fiber.stage313 =
-      eval (R := R) fiber.stage314 := by
-  simp only [stage313, eval_weightedSum, stage314, map_sum, map_smul,
+theorem source_to_inserted :
+    eval (R := R) fiber.sourceEncirclingSum =
+      eval (R := R) fiber.insertedChannelSum := by
+  simp only [sourceEncirclingSum, eval_weightedSum, insertedChannelSum, map_sum, map_smul,
     eval_atom]
   calc
     ∑ y, data.weight y • Diagram.eval D (fiber.leftTerm y) =
@@ -375,17 +375,17 @@ theorem equation_3_1_4 :
       intro y _
       exact congrArg (fun value => data.weight y • value)
         (insertIdentity (data.forwardResolution y)
-          (fiber.forwardContext y) "BB-3.1.4-forward-channel").symm
+          (fiber.forwardContext y) "kirby-encircling-forward-channel").symm
     _ = ∑ y, ∑ z, ∑ i : I y z,
           (data.weight y * data.weight z) •
             Diagram.eval D (fiber.insertedChannel y z i) := by
       simp only [Finset.smul_sum, smul_smul]
 
 /-- Equation (3.1.5): every channel follows its certified braiding movie. -/
-theorem equation_3_1_5 :
-    eval (R := R) fiber.stage314 =
-      eval (R := R) fiber.stage315 := by
-  simp only [stage314, stage315, map_sum, map_smul, eval_atom]
+theorem inserted_to_braided :
+    eval (R := R) fiber.insertedChannelSum =
+      eval (R := R) fiber.braidedChannelSum := by
+  simp only [insertedChannelSum, braidedChannelSum, map_sum, map_smul, eval_atom]
   apply Finset.sum_congr rfl
   intro y _
   apply Finset.sum_congr rfl
@@ -402,10 +402,10 @@ theorem equation_3_1_5 :
 Equation (3.1.6): every channel follows its certified cup/cap mate movie.
 The target coupons are the exact biorthogonal family recorded in `data`.
 -/
-theorem equation_3_1_6 :
-    eval (R := R) fiber.stage315 =
-      eval (R := R) fiber.stage316 := by
-  simp only [stage315, stage316, map_sum, map_smul, eval_atom]
+theorem braided_to_mated :
+    eval (R := R) fiber.braidedChannelSum =
+      eval (R := R) fiber.matedChannelSum := by
+  simp only [braidedChannelSum, matedChannelSum, map_sum, map_smul, eval_atom]
   apply Finset.sum_congr rfl
   intro y _
   apply Finset.sum_congr rfl
@@ -422,10 +422,10 @@ theorem equation_3_1_6 :
 Equations (3.1.7)--(3.1.8): commute the finite `Y,Z` sums, use commutativity
 of the two dimension weights, and perform inverse insertion for each `Z`.
 -/
-theorem equation_3_1_7_to_3_1_8 :
-    eval (R := R) fiber.stage316 =
-      eval (R := R) fiber.stage318 := by
-  simp only [stage316, stage318, map_sum, map_smul, eval_atom,
+theorem mated_to_target :
+    eval (R := R) fiber.matedChannelSum =
+      eval (R := R) fiber.targetEncirclingSum := by
+  simp only [matedChannelSum, targetEncirclingSum, map_sum, map_smul, eval_atom,
     eval_weightedSum]
   calc
     ∑ y, ∑ z, ∑ i : I y z,
@@ -451,64 +451,65 @@ theorem equation_3_1_7_to_3_1_8 :
       intro z _
       exact congrArg (fun value => data.weight z • value)
         (insertIdentity (data.backwardResolution z)
-          (fiber.backwardContext z) "BB-3.1.6-mated-channel")
+          (fiber.backwardContext z) "kirby-encircling-mated-channel")
 
 /-- The complete pointwise calculation from (3.1.3) through (3.1.8). -/
 theorem core_sound :
-    eval (R := R) fiber.stage313 =
-      eval (R := R) fiber.stage318 :=
-  fiber.equation_3_1_4.trans <|
-    fiber.equation_3_1_5.trans <|
-      fiber.equation_3_1_6.trans fiber.equation_3_1_7_to_3_1_8
+    eval (R := R) fiber.sourceEncirclingSum =
+      eval (R := R) fiber.targetEncirclingSum :=
+  fiber.source_to_inserted.trans <|
+    fiber.inserted_to_braided.trans <|
+      fiber.braided_to_mated.trans fiber.mated_to_target
 
-end SlidingFiber
+end EncirclingTransportFiber
 
 /--
 All pointwise fibers and the two endpoint naturality proofs.
 
 The endpoint naturality statements are local ribbon-graph facts; the central
-sliding equality is not a field and is derived from every fiber's finite
-calculation.
+source-to-target equality is not a field and is derived from every fiber's
+finite calculation.
 -/
-structure SlidingFamily
-    (data : SlidingCategoryData (R := R) (D := D) (S := S) (I := I)) where
-  fiber : (strand : D) → SlidingFiber data strand
-  before_naturality : {X Y : D} → (f : X ⟶ Y) →
+structure EncirclingTransportFamily
+    (data : EncirclingTransportData (R := R) (D := D) (S := S) (I := I)) where
+  fiber : (strand : D) → EncirclingTransportFiber data strand
+  source_naturality : {X Y : D} → (f : X ⟶ Y) →
     (tensorLeft data.fixed).map f ≫
-        eval (R := R) (fiber Y).stage313 =
-      eval (R := R) (fiber X).stage313 ≫
+        eval (R := R) (fiber Y).sourceEncirclingSum =
+      eval (R := R) (fiber X).sourceEncirclingSum ≫
         (tensorLeft data.fixed).map f
-  after_naturality : {X Y : D} → (f : X ⟶ Y) →
+  target_naturality : {X Y : D} → (f : X ⟶ Y) →
     (tensorLeft data.fixed).map f ≫
-        eval (R := R) (fiber Y).stage318 =
-      eval (R := R) (fiber X).stage318 ≫
+        eval (R := R) (fiber Y).targetEncirclingSum =
+      eval (R := R) (fiber X).targetEncirclingSum ≫
         (tensorLeft data.fixed).map f
-  diagram_schema : String := "twisted-yetter.linear-generalized-sliding.v1"
+  diagram_schema : String := "twisted-yetter.kirby-color-encircling-transport.v1"
   diagram_content_hash : String
   source_ref : String := "ref:baerenz-barrett-dichromatic-2018"
   source_locator : String :=
     "Lemma 3.3, equations (3.1.2)-(3.1.11), journal pages 681-684"
 
-namespace SlidingFamily
+namespace EncirclingTransportFamily
 
 variable {data :
-  SlidingCategoryData (R := R) (D := D) (S := S) (I := I)}
-variable (family : SlidingFamily data)
+  EncirclingTransportData (R := R) (D := D) (S := S) (I := I)}
+variable (family : EncirclingTransportFamily data)
 
 /-- Natural transformation represented by the left side of (3.1.2). -/
-noncomputable def before :
+noncomputable def sourceOperator :
     tensorLeft data.fixed ⟶ tensorLeft data.fixed where
-  app strand := eval (R := R) (family.fiber strand).stage313
-  naturality _ _ f := family.before_naturality f
+  app strand := eval (R := R) (family.fiber strand).sourceEncirclingSum
+  naturality _ _ f := family.source_naturality f
 
 /-- Natural transformation represented by the right side of (3.1.2). -/
-noncomputable def after :
+noncomputable def targetOperator :
     tensorLeft data.fixed ⟶ tensorLeft data.fixed where
-  app strand := eval (R := R) (family.fiber strand).stage318
-  naturality _ _ f := family.after_naturality f
+  app strand := eval (R := R) (family.fiber strand).targetEncirclingSum
+  naturality _ _ f := family.target_naturality f
 
 /-- Equation (3.1.2) as equality of natural transformations. -/
-theorem equation_3_1_2 : family.before = family.after := by
+theorem source_eval_eq_target_eval :
+    family.sourceOperator = family.targetOperator := by
   ext strand
   exact (family.fiber strand).core_sound
 
@@ -516,24 +517,24 @@ theorem equation_3_1_2 : family.before = family.after := by
 The completed diagram-backed Lemma 3.3 law.  Ordinary endpoint diagrams are
 created only by collapsing the retained formal linear diagrams.
 -/
-noncomputable def sourcedFunctorSlidingLaw :
-    SourcedFunctorSlidingLaw (tensorLeft data.fixed) where
-  before_diagram strand :=
-    collapse (R := R) "BB-3.3-before-linear-sum"
-      (family.fiber strand).stage313
-  after_diagram strand :=
-    collapse (R := R) "BB-3.3-after-linear-sum"
-      (family.fiber strand).stage318
-  before := family.before
-  after := family.after
-  before_eval _ := rfl
-  after_eval _ := rfl
-  core_sound := family.equation_3_1_2
+noncomputable def sourcedEncirclingLaw :
+    SourcedTensorLeftEncirclingLaw data.fixed where
+  sourceDiagram strand :=
+    collapse (R := R) "kirby-encircling-source-sum"
+      (family.fiber strand).sourceEncirclingSum
+  targetDiagram strand :=
+    collapse (R := R) "kirby-encircling-target-sum"
+      (family.fiber strand).targetEncirclingSum
+  sourceOperator := family.sourceOperator
+  targetOperator := family.targetOperator
+  source_eval _ := rfl
+  target_eval _ := rfl
+  source_eq_target := family.source_eval_eq_target_eval
   diagram_schema := family.diagram_schema
   diagram_content_hash := family.diagram_content_hash
   source_ref := family.source_ref
   source_locator := family.source_locator
 
-end SlidingFamily
+end EncirclingTransportFamily
 
-end TwistedYetter.Kirby.GeneralizedSliding
+end TwistedYetter.Kirby.KirbyColorEncirclingTransport

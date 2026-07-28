@@ -16,7 +16,7 @@ the conditional shared-coordinate presentation-independence theorem.
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.KirbyProofIsotopy.eval_eq
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LinearIsotopy.eval_eq
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.BoundOrdinarySlide.eval_eq
-#print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.BoundGeneralizedSlide.eval_eq
+#print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.BoundLabelIndexedSlide.eval_eq
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.OneTwoFactorization.toCalculation
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.TwoThreeFactorization.toCalculation
 #print axioms TwistedYetter.Kirby.EGNOModularFourManifoldInvariant.LocalMoveCompiler.normalized_eq_of_linear_eval

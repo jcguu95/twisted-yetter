@@ -1,6 +1,6 @@
 import TwistedYetter.Kirby.EGNOModularFourManifoldInvariant
 
-namespace TwistedYetter.Mutations.GeneralizedSlideAsOrdinary
+namespace TwistedYetter.Mutations.OrdinarySlideAsLabelIndexed
 
 open CategoryTheory
 open TwistedYetter.Fusion.EGNO
@@ -22,9 +22,9 @@ def rejected
     {package : Package data}
     {before after :
       TwistedYetter.Kirby.LinearDiagram (R := K) (C := C) .unit .unit}
-    (slide : BoundGeneralizedSlide package before after) :
-    BoundOrdinarySlide package .twoOverTwo .positive
-      "move" "source" "target" before after :=
+    (slide : BoundOrdinarySlide package .oneOverOne .positive
+      "move" "source" "target" before after) :
+    BoundLabelIndexedSlide package before after :=
   slide
 
-end TwistedYetter.Mutations.GeneralizedSlideAsOrdinary
+end TwistedYetter.Mutations.OrdinarySlideAsLabelIndexed
