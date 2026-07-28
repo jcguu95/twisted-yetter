@@ -1,0 +1,79 @@
+{
+  "schema": "independent-combinatorial-semantic-comparison-blocker-v1",
+  "recorded_at_utc": "2026-07-28T22:23:09Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "frozen_semantic_commit": "07ec2c8",
+  "git_dirty_while_recorded": true,
+  "frozen_entry": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "comparison_status": "BLOCKED_WITH_EXPLICIT_DATA_GAPS",
+  "passing_layers": [
+    {
+      "layer": "Independent standalone entry",
+      "status": "PASS",
+      "evidence": "lake build TwistedYetter.Kirby.Final.Semantics.Independent.Entry"
+    },
+    {
+      "layer": "Component table",
+      "status": "PASS_TOTAL_CONVERSION",
+      "details": [
+        "ordinary/dotted/speciallyDotted roles map exactly",
+        "orientation maps exactly",
+        "integer framing maps exactly"
+      ],
+      "evidence": "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "COUPON_INPUT_OUTPUT_WORDS_MISSING",
+      "semantic_requirement": "A general coupon records separate finite input and output strand words.",
+      "implementation_supply": "SliceEvent.coupon stores one undirected strands list.",
+      "severity": "SEMANTIC_DATA_MISSING"
+    },
+    {
+      "id": "DOTTED_PUNCTURE_WORDS_MISSING",
+      "semantic_requirement": "Every dotted one-handle has a complete ordered signed puncture word through its chosen combinatorial cut.",
+      "implementation_supply": "FormalPresentation stores components, slice events, and declared active slices, but no dotted cut or puncture words.",
+      "severity": "SEMANTIC_DATA_MISSING"
+    },
+    {
+      "id": "CLOSING_THREE_HANDLE_DATA_MISSING",
+      "semantic_requirement": "The special diagram records hThree and a closing-boundary certificate.",
+      "implementation_supply": "FormalPresentation contains no hThree or closing certificate. The higher semantic Presentation supplies counts and a handle-chain soundness boundary, but not the frozen closing datum.",
+      "severity": "SEMANTIC_DATA_MISSING"
+    },
+    {
+      "id": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
+      "semantic_requirement": "KirbyH2 is ker(partial2 on primal C2 to primal C1) modulo im(partial3 from primal closing C3).",
+      "implementation_supply": "The current semantic Presentation stores HandleChainModel counts.turnedOver.",
+      "severity": "NONTRIVIAL_SEMANTIC_CONFLICT",
+      "forbidden_resolution": "Do not identify the two groups without an explicit comparison natural under all eight moves."
+    }
+  ],
+  "exact_locators": {
+    "frozen_diagram": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Diagram.lean",
+    "frozen_homology": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean",
+    "implementation_raw_presentation": "lean/TwistedYetter/Kirby/Presentation.lean",
+    "implementation_turned_over_chain": "lean/TwistedYetter/Kirby/Final/Semantics/Presentation.lean"
+  },
+  "verification": {
+    "partial_bridge_build": {
+      "command": "lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.CombinatorialSemanticComparison",
+      "status": "PASS"
+    },
+    "mutation_audit_build": {
+      "command": "lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.CombinatorialSemanticMutationAudit",
+      "status": "PASS"
+    },
+    "total_bridge": {
+      "status": "NOT_CONSTRUCTIBLE_FROM_CURRENT_FORMAL_PRESENTATION",
+      "required_type": "RequiredTotalBridge"
+    }
+  },
+  "non_claims": [
+    "No total ExistingPresentation to CombinatorialSpecialKirbyDiagram bridge exists.",
+    "The frozen semantics were not changed to fit the implementation.",
+    "No evaluator or four-manifold invariance comparison has been admitted.",
+    "No primal-dual H2 identification has been asserted."
+  ]
+}
