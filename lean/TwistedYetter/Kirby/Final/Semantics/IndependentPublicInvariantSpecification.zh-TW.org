@@ -1,0 +1,299 @@
+#+title: Twisted Yetter Public Invariant：獨立人類語意規格
+#+date: 2026-07-28T08:07:27-0600
+#+options: toc:2
+
+* 0. 文件地位
+
+這份文件不讀 repo 既有 =TopologicalInput=、=Descent=、
+=PublicInvariant=、final theorem、bridge、evaluator implementation 或
+computation code。
+
+它只釘死：
+
+\[
+ (D,a)
+ \longrightarrow
+ (D,\alpha)
+ \longrightarrow
+ (X,\alpha).
+\]
+
+三層不能混在一起。
+
+* 1. Manifold-Level 基礎資料
+
+我們接受 classical topology 提供：
+
+- closed connected oriented smooth \(4\)-manifolds \(X\)；
+- oriented diffeomorphisms \(f:X\to Y\)；
+- integral homology groups \(H_2(X;\mathbb Z)\)；
+- induced additive isomorphisms
+
+\[
+ f_*:H_2(X;\mathbb Z)\xrightarrow{\cong}H_2(Y;\mathbb Z);
+\]
+
+- \(f_*\) 對 identity、composition及inverse的標準 functoriality。
+
+這一層不重建 smooth manifolds 或 singular homology。
+
+重要的是：
+
+\[
+ H_2(X;\mathbb Z)
+\]
+
+可以有任意 rank 及 torsion，絕不固定成 \(\mathbb Z\)。
+
+* 2. Diagram Realization
+
+一份 =SpecialKirbyRealization X= 包含：
+
+1. 一張 =SpecialKirbyDiagram= \(D\)；
+2. topology certificate：\(D\) 確實閉合成 \(X\)；
+3. additive group isomorphism：
+
+\[
+ \rho_D:
+ H_2^{\mathrm{Kirby}}(D)
+ \xrightarrow{\cong}
+ H_2(X;\mathbb Z).
+\]
+
+兩個 \(H_2\) 不能定義成相同 type。它們只能由 \(\rho_D\) 比較。
+
+* 3. Marked Realization
+
+對：
+
+\[
+ \alpha\in H_2(X;\mathbb Z),
+\]
+
+一份 marked realization另外選：
+
+\[
+ \widetilde\alpha_D
+ \in H_2^{\mathrm{Kirby}}(D)
+\]
+
+並要求：
+
+\[
+ \rho_D(\widetilde\alpha_D)=\alpha.
+\]
+
+Diagram evaluator真正吃的是 \(\widetilde\alpha_D\)，不是 manifold-side
+\(\alpha\) 的假冒 copy。
+
+* 4. 第一層下降：Cycle 到 Diagram H₂
+
+獨立 evaluator先給：
+
+\[
+ \operatorname{TY}(D,a;\text{auxiliary choices}).
+\]
+
+必須證明它不依賴：
+
+- cycle representative \(a\)；
+- handle-line generators；
+- coordinate extraction；
+- compatible puncture directions。
+
+完成後才得到：
+
+\[
+ \operatorname{TY}(D,\widetilde\alpha_D).
+\]
+
+這是 evaluator theorem，不是 manifold topology axiom。
+
+* 5. 八種 Elementary Moves
+
+對每個 source-to-target elementary move：
+
+\[
+ m:D\to D',
+\]
+
+上一層獨立規格已給出 chain map誘導的：
+
+\[
+ m_*:
+ H_2^{\mathrm{Kirby}}(D)
+ \longrightarrow
+ H_2^{\mathrm{Kirby}}(D').
+\]
+
+八種 local evaluation proofs必須證明：
+
+\[
+ \operatorname{TY}(D,\gamma)
+ =
+ \operatorname{TY}(D',m_*\gamma).
+\]
+
+Target marking不能另行選擇，也不能由 topology axiom直接宣布「正確」。
+
+* 6. Finite Movie
+
+對有限序列：
+
+\[
+ D_0\xrightarrow{m_1}D_1
+ \xrightarrow{m_2}\cdots
+ \xrightarrow{m_n}D_n,
+\]
+
+用數學歸納法從八種 local theorems得到：
+
+\[
+ \operatorname{TY}(D_0,\gamma)
+ =
+ \operatorname{TY}
+ \left(
+   D_n,
+   (m_n)_*\cdots(m_1)_*\gamma
+ \right).
+\]
+
+「整串 movie保持 evaluation」不是新 axiom。
+
+* 7. Marked Kirby–Cerf Completeness
+
+假設：
+
+- \(P=(D,\widetilde\alpha_D)\) realizes \((X,\alpha)\)；
+- \(Q=(D',\widetilde\beta_{D'})\) realizes \((Y,\beta)\)；
+- \(f:X\to Y\) 是 oriented diffeomorphism；
+- \(f_*(\alpha)=\beta\)。
+
+Classical marked Kirby–Cerf topology應提供一串有限 moves：
+
+\[
+ M:D\leadsto D'
+\]
+
+而且它的 chain-map transport滿足：
+
+\[
+ M_*(\widetilde\alpha_D)
+ =
+ \widetilde\beta_{D'}.
+\]
+
+這個 axiom只說 movie存在及marking transport對上。它禁止出現：
+
+- premodular category；
+- character；
+- ribbon graph；
+- evaluator；
+- scalar equality。
+
+* 8. Presentation Existence
+
+每個：
+
+\[
+ (X,\alpha),
+\qquad
+\alpha\in H_2(X;\mathbb Z)
+\]
+
+至少有一份 marked special Kirby realization。
+
+它只保證存在，不指定 canonical diagram，也不宣稱兩份 diagrams 的 evaluation
+相等。
+
+* 9. Public Definition
+
+非計算性地選一份 realization：
+
+\[
+ P(X,\alpha)
+ =
+ (D,\widetilde\alpha_D).
+\]
+
+定義：
+
+\[
+ \operatorname{TwistedYetter}_{\mathcal C,\eta}(X,\alpha)
+ :=
+ \operatorname{TY}_{\mathcal C,\eta}
+ (D,\widetilde\alpha_D).
+\]
+
+Marked Kirby–Cerf completeness與finite-movie theorem保證這個值不依賴所選
+realization。
+
+公開數學輸入只有：
+
+\[
+ ((\mathcal C,\eta),(X,\alpha)).
+\]
+
+以下全部不在 public parameters：
+
+- Kirby diagram；
+- cycle；
+- chart；
+- puncture directions；
+- assembler；
+- presentation choice。
+
+* 10. Final Theorem
+
+對任意 oriented diffeomorphism：
+
+\[
+ f:X\longrightarrow Y
+\]
+
+及任意：
+
+\[
+ \alpha\in H_2(X;\mathbb Z),
+\]
+
+有：
+
+\[
+ \boxed{
+ \operatorname{TwistedYetter}_{\mathcal C,\eta}(X,\alpha)
+ =
+ \operatorname{TwistedYetter}_{\mathcal C,\eta}
+ (Y,f_*\alpha)
+ }.
+\]
+
+這是真正要證明的 premodular closed four-manifold invariant statement。
+
+* 11. Final Theorem真正依賴什麼
+
+除了基礎 category與classical manifold資料外，只依賴：
+
+1. explicit evaluator 的 auxiliary-choice independence；
+2. 八種 source-bound、character-aware local move equalities；
+3. marked Kirby–Cerf completeness；
+4. marked special Kirby realization existence。
+
+它不依賴：
+
+- modularity；
+- modular killing；
+- legacy evaluator；
+- \(H_2=\mathbb Z\)；
+- simply connected；
+- 與原始 Crane–Yetter state sum相同。
+
+* 12. 明確 Non-Claims
+
+- 尚未證明既有實作符合這份規格；
+- 尚未編譯本檔；
+- 尚未證明 =KirbyH₂= 目前真的已有所需 additive-group instance；
+- 尚未證明八種 local equalities；
+- 尚未提供 marked Kirby–Cerf reference的exact formal bridge；
+- 尚未跑 conformance check；
+- 尚未宣稱 final theorem established。

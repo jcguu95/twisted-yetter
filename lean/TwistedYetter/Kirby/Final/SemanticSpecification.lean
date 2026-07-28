@@ -13,6 +13,7 @@ import TwistedYetter.Kirby.Final.Semantics.IndependentHomologyMarkingSpecificati
 import TwistedYetter.Kirby.Final.Semantics.IndependentMoveHomologyTransportSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentGraphicalCalculusSpecification
 import TwistedYetter.Kirby.Final.Semantics.IndependentEvaluatorSpecification
+import TwistedYetter.Kirby.Final.Semantics.IndependentPublicInvariantSpecification
 import TwistedYetter.Kirby.Final.Semantics.TopologicalInput
 import TwistedYetter.Kirby.Final.Semantics.Evaluator
 import TwistedYetter.Kirby.Final.Semantics.Descent
@@ -46,9 +47,12 @@ defines nothing; it points to thirteen reviewable layers in dependency order:
 16. `Semantics/IndependentEvaluatorSpecification.lean`: the normative
     role-aware finite-sum formula directly over `SpecialKirbyDiagram` and
     `KirbyH₂`, with no duplicate handle complex or arbitrary scalar evaluator.
-17. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
+17. `Semantics/IndependentPublicInvariantSpecification.lean`: the normative
+    three-stage descent from the explicit cycle formula to `(D, α)` and then
+    to the public manifold invariant on `(X, α)`.
+18. `Semantics/Evaluator.lean`: the existing evaluator implementation, not yet
     certified against the independent specification.
-18. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
+19. `Semantics/Descent.lean`: finite-movie induction and final invariant theorem.
 
 The compatibility facades `SemanticHandleChain.lean` and
 `SemanticEightMoves.lean`, together with `Semantics/Moves.lean` and
