@@ -53,7 +53,7 @@ semisimple, that the displayed simple skeleton is complete, that the tensor
 unit is simple, and that the braided rigid structure carries the spherical
 ribbon compatibility used by the graphical calculus.
 -/
-structure PremodularFusionCategory
+structure PremodularFusionCategoryCore
     (K : Type uK) [Field K] [IsAlgClosed K] [CharZero K] where
   C : Type uC
   category : Category.{v} C
@@ -63,21 +63,40 @@ structure PremodularFusionCategory
   preadditive : @Preadditive C category
   linear : @Linear K _ C category preadditive
   simples : FusionSimpleSkeleton.{uK, uC} K
-  finiteSemisimple : Prop
-  simpleSkeletonComplete : Prop
-  tensorUnitSimple : Prop
-  sphericalRibbonCompatible : Prop
-  finiteSemisimple_holds : finiteSemisimple
-  simpleSkeletonComplete_holds : simpleSkeletonComplete
-  tensorUnitSimple_holds : tensorUnitSimple
-  sphericalRibbonCompatible_holds : sphericalRibbonCompatible
 
-attribute [instance] PremodularFusionCategory.category
-attribute [instance] PremodularFusionCategory.monoidal
-attribute [instance] PremodularFusionCategory.braided
-attribute [instance] PremodularFusionCategory.rigid
-attribute [instance] PremodularFusionCategory.preadditive
-attribute [instance] PremodularFusionCategory.linear
+opaque IsFiniteSemisimple
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
+    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+
+opaque SimpleSkeletonIsComplete
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
+    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+
+opaque TensorUnitIsSimple
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
+    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+
+opaque HasSphericalRibbonCompatibility
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
+    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+
+structure PremodularFusionCategory
+    (K : Type uK) [Field K] [IsAlgClosed K] [CharZero K] where
+  core : PremodularFusionCategoryCore.{uK, uC, v} K
+  finiteSemisimple : IsFiniteSemisimple core
+  simpleSkeletonComplete : SimpleSkeletonIsComplete core
+  tensorUnitSimple : TensorUnitIsSimple core
+  sphericalRibbonCompatible : HasSphericalRibbonCompatibility core
+
+abbrev PremodularFusionCategory.C
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :=
+  𝒞.core.C
+
+abbrev PremodularFusionCategory.simples
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :=
+  𝒞.core.simples
 
 /--
 The scalar by which a monoidal natural automorphism of the tensor identity

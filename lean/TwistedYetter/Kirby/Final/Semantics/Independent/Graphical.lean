@@ -65,6 +65,51 @@ inductive RibbonExpression
   | tensor (left right : RibbonExpression 𝒞)
   | finiteSum (terms : List (K × RibbonExpression 𝒞))
 
+opaque CompositionRespectsEvaluation
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque TensorRespectsEvaluation
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque FiniteSumRespectsEvaluation
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque BraidingNaturalityLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque CupCapNaturalityLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque TwistNaturalityLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque CouponNaturalityLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque FusionCompletenessLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
+opaque TensorUnitProjectorLaw
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (evaluate : RibbonExpression 𝒞 → K) : Prop
+
 /--
 An interpretation of the independent graphical syntax.  The listed laws are
 the exact theorem obligations expected from a premodular ribbon calculus;
@@ -74,24 +119,24 @@ structure RibbonGraphicalEvaluation
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K) where
   evaluate : RibbonExpression 𝒞 → K
-  compositionRespectsEvaluation : Prop
-  tensorRespectsEvaluation : Prop
-  finiteSumRespectsEvaluation : Prop
-  braidingNaturality : Prop
-  cupCapNaturality : Prop
-  twistNaturality : Prop
-  couponNaturality : Prop
-  fusionCompleteness : Prop
-  tensorUnitProjectorLaw : Prop
-  compositionRespectsEvaluation_holds : compositionRespectsEvaluation
-  tensorRespectsEvaluation_holds : tensorRespectsEvaluation
-  finiteSumRespectsEvaluation_holds : finiteSumRespectsEvaluation
-  braidingNaturality_holds : braidingNaturality
-  cupCapNaturality_holds : cupCapNaturality
-  twistNaturality_holds : twistNaturality
-  couponNaturality_holds : couponNaturality
-  fusionCompleteness_holds : fusionCompleteness
-  tensorUnitProjectorLaw_holds : tensorUnitProjectorLaw
+  compositionRespectsEvaluation :
+    CompositionRespectsEvaluation evaluate
+  tensorRespectsEvaluation :
+    TensorRespectsEvaluation evaluate
+  finiteSumRespectsEvaluation :
+    FiniteSumRespectsEvaluation evaluate
+  braidingNaturality :
+    BraidingNaturalityLaw evaluate
+  cupCapNaturality :
+    CupCapNaturalityLaw evaluate
+  twistNaturality :
+    TwistNaturalityLaw evaluate
+  couponNaturality :
+    CouponNaturalityLaw evaluate
+  fusionCompleteness :
+    FusionCompletenessLaw evaluate
+  tensorUnitProjectorLaw :
+    TensorUnitProjectorLaw evaluate
 
 end TwistedYetter.Semantics.Independent
 

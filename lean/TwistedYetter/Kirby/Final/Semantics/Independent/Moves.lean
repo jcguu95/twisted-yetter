@@ -33,6 +33,36 @@ inductive CouponTransportEvent
   | coupon (name : String)
   deriving DecidableEq, Repr
 
+opaque CleanAttachSite
+    (source : CombinatorialSpecialKirbyDiagram)
+    (moving stationary : source.trace.ComponentId) :
+    Prop
+
+opaque CompleteCouponTransport
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (events : List CouponTransportEvent) :
+    Prop
+
+opaque CleanDetachSite
+    (target : CombinatorialSpecialKirbyDiagram)
+    (moving stationary : target.trace.ComponentId) :
+    Prop
+
+opaque SlideCommonExteriorUnchanged
+    (source target : CombinatorialSpecialKirbyDiagram) :
+    Prop
+
+opaque SlideComponentBinding
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (movingSource stationarySource : source.trace.ComponentId)
+    (movingTarget stationaryTarget : target.trace.ComponentId) :
+    Prop
+
+opaque SlideFramingPushOffCompatible
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (orientation : BandOrientation) :
+    Prop
+
 /--
 A slide is normalized into clean attach, a finite transport list, and clean
 detach.  The source and target factorizations are explicit propositions about
@@ -45,38 +75,62 @@ structure CleanBandSlideScript
   movingTarget : target.trace.ComponentId
   stationaryTarget : target.trace.ComponentId
   orientation : BandOrientation
-  attachPortsAdjacent : Prop
-  attachCollarContainsOnlySpecifiedStrands : Prop
   transportEvents : List CouponTransportEvent
-  transportListIsComplete : Prop
-  detachPortsAdjacent : Prop
-  detachCollarContainsOnlySpecifiedStrands : Prop
-  commonExteriorUnchanged : Prop
-  sourceTargetComponentBinding : Prop
-  framingPushOffCompatible : Prop
-  attachPortsAdjacent_holds : attachPortsAdjacent
-  attachCollarContainsOnlySpecifiedStrands_holds :
-    attachCollarContainsOnlySpecifiedStrands
-  transportListIsComplete_holds : transportListIsComplete
-  detachPortsAdjacent_holds : detachPortsAdjacent
-  detachCollarContainsOnlySpecifiedStrands_holds :
-    detachCollarContainsOnlySpecifiedStrands
-  commonExteriorUnchanged_holds : commonExteriorUnchanged
-  sourceTargetComponentBinding_holds : sourceTargetComponentBinding
-  framingPushOffCompatible_holds : framingPushOffCompatible
+  attachIsClean :
+    CleanAttachSite source movingSource stationarySource
+  transportListIsComplete :
+    CompleteCouponTransport source target transportEvents
+  detachIsClean :
+    CleanDetachSite target movingTarget stationaryTarget
+  commonExteriorUnchanged :
+    SlideCommonExteriorUnchanged source target
+  sourceTargetComponentBinding :
+    SlideComponentBinding source target
+      movingSource stationarySource movingTarget stationaryTarget
+  framingPushOffCompatible :
+    SlideFramingPushOffCompatible source target orientation
+
+opaque IsotopyPreservesRolesOrientationsFramings
+    (source target : CombinatorialSpecialKirbyDiagram) :
+    Prop
+
+opaque EventTracesAreRelatedByPlanarIsotopy
+    (source target : CombinatorialSpecialKirbyDiagram) :
+    Prop
+
+opaque IsotopyTransportsDottedCutWords
+    (source target : CombinatorialSpecialKirbyDiagram) :
+    Prop
 
 structure FramedIsotopyScript
     (source target : CombinatorialSpecialKirbyDiagram) where
   componentReindexing : source.trace.ComponentId ≃ target.trace.ComponentId
   strandReindexing : source.trace.StrandId ≃ target.trace.StrandId
-  rolesOrientationsFramingsPreserved : Prop
-  eventTraceRelatedByPlanarIsotopy : Prop
-  dottedCutWordsTransported : Prop
-  rolesOrientationsFramingsPreserved_holds :
-    rolesOrientationsFramingsPreserved
-  eventTraceRelatedByPlanarIsotopy_holds :
-    eventTraceRelatedByPlanarIsotopy
-  dottedCutWordsTransported_holds : dottedCutWordsTransported
+  rolesOrientationsFramingsPreserved :
+    IsotopyPreservesRolesOrientationsFramings source target
+  eventTraceRelatedByPlanarIsotopy :
+    EventTracesAreRelatedByPlanarIsotopy source target
+  dottedCutWordsTransported :
+    IsotopyTransportsDottedCutWords source target
+
+opaque IsStandardLocalCancelingPair
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (kind : ElementaryMoveKind) :
+    Prop
+
+opaque CancellationCommonExteriorUnchanged
+    (source target : CombinatorialSpecialKirbyDiagram) :
+    Prop
+
+opaque CancellationHandleCountChangeIsStandard
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (kind : ElementaryMoveKind) :
+    Prop
+
+opaque CancellationMarkingCoordinateChangeIsStandard
+    (source target : CombinatorialSpecialKirbyDiagram)
+    (kind : ElementaryMoveKind) :
+    Prop
 
 structure CancellationScript
     (source target : CombinatorialSpecialKirbyDiagram) where
@@ -85,15 +139,14 @@ structure CancellationScript
   kind_is_cancellation :
     kind = .oneTwoBirth ∨ kind = .oneTwoDeath ∨
     kind = .twoThreeBirth ∨ kind = .twoThreeDeath
-  localCancelingPair : Prop
-  commonExteriorUnchanged : Prop
-  handleCountChangeIsStandard : Prop
-  markingCoordinateChangeIsStandard : Prop
-  localCancelingPair_holds : localCancelingPair
-  commonExteriorUnchanged_holds : commonExteriorUnchanged
-  handleCountChangeIsStandard_holds : handleCountChangeIsStandard
-  markingCoordinateChangeIsStandard_holds :
-    markingCoordinateChangeIsStandard
+  localCancelingPair :
+    IsStandardLocalCancelingPair source target kind
+  commonExteriorUnchanged :
+    CancellationCommonExteriorUnchanged source target
+  handleCountChangeIsStandard :
+    CancellationHandleCountChangeIsStandard source target kind
+  markingCoordinateChangeIsStandard :
+    CancellationMarkingCoordinateChangeIsStandard source target kind
 
 /--
 An exact chain-level transport.  The induced map on quotient homology is

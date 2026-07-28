@@ -84,6 +84,21 @@ def EventTransition {strandCount : ℕ}
     before = leftContext ++ event.beforeWord ++ rightContext ∧
     after = leftContext ++ event.afterWord ++ rightContext
 
+opaque ComponentsFormClosedCircles
+    {componentCount strandCount eventCount : ℕ}
+    (components : Fin componentCount → Component)
+    (strands : Fin strandCount → Strand componentCount)
+    (events : Fin eventCount → DiagramEvent strandCount)
+    (activeOrder : Fin (eventCount + 1) → List (Fin strandCount)) :
+    Prop
+
+opaque FramingEventsMatchIntegerFramings
+    {componentCount strandCount eventCount : ℕ}
+    (components : Fin componentCount → Component)
+    (strands : Fin strandCount → Strand componentCount)
+    (events : Fin eventCount → DiagramEvent strandCount) :
+    Prop
+
 structure CombinatorialLinkTrace where
   componentCount : ℕ
   strandCount : ℕ
@@ -101,10 +116,10 @@ structure CombinatorialLinkTrace where
         (activeOrder i.succ)
   activeWordsNoDuplicates :
     ∀ i, (activeOrder i).Nodup
-  eachComponentIsClosed : Prop
-  eachComponentIsClosed_holds : eachComponentIsClosed
-  framingEventsMatchIntegerFraming : Prop
-  framingEventsMatchIntegerFraming_holds : framingEventsMatchIntegerFraming
+  eachComponentIsClosed :
+    ComponentsFormClosedCircles components strands events activeOrder
+  framingEventsMatchIntegerFraming :
+    FramingEventsMatchIntegerFramings components strands events
 
 def CombinatorialLinkTrace.ComponentId
     (trace : CombinatorialLinkTrace) := Fin trace.componentCount
@@ -128,18 +143,41 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
   exponent_is_orientation_sign :
     characterExponentSign = 1 ∨ characterExponentSign = -1
 
+opaque PunctureWordsHaveNoRepeatedOccurrences
+    (trace : CombinatorialLinkTrace)
+    (punctureWord :
+      (dotted : trace.ComponentId) →
+        (trace.components dotted).role = .dotted →
+        List (DottedPuncture trace)) :
+    Prop
+
+opaque CutOpenWordsAreCompatible
+    (trace : CombinatorialLinkTrace)
+    (punctureWord :
+      (dotted : trace.ComponentId) →
+        (trace.components dotted).role = .dotted →
+        List (DottedPuncture trace)) :
+    Prop
+
+opaque RegluingReturnsOriginalTrace
+    (trace : CombinatorialLinkTrace)
+    (punctureWord :
+      (dotted : trace.ComponentId) →
+        (trace.components dotted).role = .dotted →
+        List (DottedPuncture trace)) :
+    Prop
+
 structure DottedCutData (trace : CombinatorialLinkTrace) where
   punctureWord :
     (dotted : trace.ComponentId) →
       (trace.components dotted).role = .dotted →
       List (DottedPuncture trace)
-  puncturesHaveNoRepeatedOccurrences : Prop
-  puncturesHaveNoRepeatedOccurrences_holds :
-    puncturesHaveNoRepeatedOccurrences
-  cutOpenWordsAreCompatible : Prop
-  cutOpenWordsAreCompatible_holds : cutOpenWordsAreCompatible
-  reglueReturnsOriginalTrace : Prop
-  reglueReturnsOriginalTrace_holds : reglueReturnsOriginalTrace
+  puncturesHaveNoRepeatedOccurrences :
+    PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
+  cutOpenWordsAreCompatible :
+    CutOpenWordsAreCompatible trace punctureWord
+  reglueReturnsOriginalTrace :
+    RegluingReturnsOriginalTrace trace punctureWord
 
 /--
 The handle information deliberately stops before encoding three-handle

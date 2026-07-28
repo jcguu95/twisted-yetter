@@ -52,7 +52,7 @@ A compiled term retains all finite auxiliary fusion-channel choices.  This
 prevents an evaluator from silently replacing a multiplicity sum by one
 preferred channel.
 -/
-structure RoleAwareCompiledTerm
+structure RoleAwareCompiledTermCore
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
@@ -62,23 +62,101 @@ structure RoleAwareCompiledTerm
   channelChoiceFintype : Fintype ChannelChoice
   graph : ChannelChoice → RibbonExpression 𝒞η.category
   coefficient : ChannelChoice → K
-  ordinaryComponentsUseAssignedSimpleLabels : Prop
-  dottedComponentsUseNormalizedTensorUnitProjector : Prop
-  characterCouponsUseCycleCoordinates : Prop
-  punctureDirectionsDetermineExponentSigns : Prop
-  everyFusionMultiplicityIsSummed : Prop
-  ordinaryComponentsUseAssignedSimpleLabels_holds :
-    ordinaryComponentsUseAssignedSimpleLabels
-  dottedComponentsUseNormalizedTensorUnitProjector_holds :
-    dottedComponentsUseNormalizedTensorUnitProjector
-  characterCouponsUseCycleCoordinates_holds :
-    characterCouponsUseCycleCoordinates
-  punctureDirectionsDetermineExponentSigns_holds :
-    punctureDirectionsDetermineExponentSigns
-  everyFusionMultiplicityIsSummed_holds :
-    everyFusionMultiplicityIsSummed
 
-attribute [instance] RoleAwareCompiledTerm.channelChoiceFintype
+opaque OrdinaryComponentsUseAssignedSimpleLabels
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram} :
+    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+
+opaque DottedComponentsUseNormalizedTensorUnitProjector
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram} :
+    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+
+opaque CharacterCouponsUseCycleCoordinates
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram} :
+    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+
+opaque PunctureDirectionsDetermineExponentSigns
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram} :
+    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+
+opaque EveryFusionMultiplicityIsSummed
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram} :
+    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+
+structure RoleAwareCompiledTerm
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (cycle : TwoCycles diagram) where
+  core : RoleAwareCompiledTermCore 𝒞η diagram labeling cycle
+  ordinaryComponentsUseAssignedSimpleLabels :
+    OrdinaryComponentsUseAssignedSimpleLabels core
+  dottedComponentsUseNormalizedTensorUnitProjector :
+    DottedComponentsUseNormalizedTensorUnitProjector core
+  characterCouponsUseCycleCoordinates :
+    CharacterCouponsUseCycleCoordinates core
+  punctureDirectionsDetermineExponentSigns :
+    PunctureDirectionsDetermineExponentSigns core
+  everyFusionMultiplicityIsSummed :
+    EveryFusionMultiplicityIsSummed core
+
+abbrev RoleAwareCompiledTerm.ChannelChoice
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram}
+    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+  term.core.ChannelChoice
+
+instance
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram}
+    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :
+    Fintype term.ChannelChoice :=
+  term.core.channelChoiceFintype
+
+abbrev RoleAwareCompiledTerm.graph
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram}
+    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+  term.core.graph
+
+abbrev RoleAwareCompiledTerm.coefficient
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    {labeling : TwoHandleLabeling 𝒞η.category diagram}
+    {cycle : TwoCycles diagram}
+    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+  term.core.coefficient
 
 /--
 The independent compiler contract.  It is intentionally a theorem obligation
@@ -98,18 +176,33 @@ The handle normalization is isolated because its exact power is a convention
 from Tham, Definition 5.11.  It is a function of the special handle counts
 only and cannot inspect labels, characters, or the compiled graph.
 -/
-structure ThamDefinition511Normalization
+structure ThamDefinition511NormalizationCore
     (K : Type uK) [Field K] where
   value :
     (globalDimension : K) →
     (hOne hTwo hThree : ℕ) →
     K
-  dependsOnlyOnDisplayedArguments : Prop
-  followsDefinition511DualHandleConvention : Prop
-  dependsOnlyOnDisplayedArguments_holds :
-    dependsOnlyOnDisplayedArguments
-  followsDefinition511DualHandleConvention_holds :
-    followsDefinition511DualHandleConvention
+
+opaque DependsOnlyOnDisplayedHandleArguments
+    {K : Type uK} [Field K] :
+    ThamDefinition511NormalizationCore K → Prop
+
+opaque FollowsThamDefinition511DualHandleConvention
+    {K : Type uK} [Field K] :
+    ThamDefinition511NormalizationCore K → Prop
+
+structure ThamDefinition511Normalization
+    (K : Type uK) [Field K] where
+  core : ThamDefinition511NormalizationCore K
+  dependsOnlyOnDisplayedArguments :
+    DependsOnlyOnDisplayedHandleArguments core
+  followsDefinition511DualHandleConvention :
+    FollowsThamDefinition511DualHandleConvention core
+
+abbrev ThamDefinition511Normalization.value
+    {K : Type uK} [Field K]
+    (normalization : ThamDefinition511Normalization K) :=
+  normalization.core.value
 
 def evaluateCycle
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
