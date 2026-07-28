@@ -1,0 +1,74 @@
+{
+  "schema": "independent-semantic-comparison-chain-blocker-v1",
+  "recorded_at_utc": "2026-07-28T20:06:02Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "base_git_commit": "d5eb505",
+  "git_dirty_while_recorded": true,
+  "purpose": "Record the first fail-closed mismatch found while connecting the frozen independent semantic specification to the current implementation.",
+  "comparison_layers": [
+    {
+      "layer": "Algebra",
+      "status": "PASS_ONE_WAY_CONFORMANCE",
+      "evidence": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentAlgebraicBridge.lean"
+    },
+    {
+      "layer": "Diagram",
+      "status": "BLOCKED_TOPOLOGICAL_REALIZATION_NOT_CONSTRUCTED",
+      "independent_requirement": "Actual knots in S3, framed knots, embedded dotted spanning disks, complete puncture data, closing-boundary certificate, and geometric boundary maps.",
+      "implementation_supply": "Serialized planar components/events plus category-neutral geometry certificates, but no constructor into the independently declared KnotInS3/EmbeddedDiskInS3 primitives.",
+      "forbidden_shortcut": "Do not interpret strings or component records as literal knots/disks merely to inhabit the independent structure."
+    },
+    {
+      "layer": "Homology",
+      "status": "BLOCKED_PRIMAL_DUAL_HANDLE_COMPLEX_MISMATCH",
+      "independent_requirement": "KirbyH2 is ker(boundaryTwo from primal C2 to primal C1) modulo im(boundaryThree from primal closing C3 to primal C2).",
+      "implementation_supply": "The evaluator uses the handle complex of counts.turnedOver; its degree-three generators are primal dotted one-handles, not primal closing three-handles.",
+      "missing_theorem": "An explicit Poincare-duality comparison, natural under all eight moves, between the independent primal KirbyH2 and the implementation's dual handle-chain second homology."
+    },
+    {
+      "layer": "Moves",
+      "status": "NOT_ADMITTED_BEFORE_HOMOLOGY_COMPARISON"
+    },
+    {
+      "layer": "Graphical",
+      "status": "NOT_ADMITTED_BEFORE_DIAGRAM_COMPARISON"
+    },
+    {
+      "layer": "Evaluator",
+      "status": "NOT_ADMITTED_BEFORE_DIAGRAM_HOMOLOGY_GRAPHICAL_COMPARISONS"
+    },
+    {
+      "layer": "Invariant",
+      "status": "NOT_ADMITTED_BEFORE_ALL_LOWER_COMPARISONS"
+    }
+  ],
+  "exact_locators": {
+    "independent_primal_chain_groups": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentPresentationSpecification.lean:275",
+    "independent_kirby_h2_quotient": "lean/TwistedYetter/Kirby/Final/Semantics/IndependentHomologyMarkingSpecification.lean:109",
+    "implementation_dual_handle_chain": "lean/TwistedYetter/Kirby/KirbyCompleteness.lean:360",
+    "turned_over_degree_three_equals_primal_h1": "lean/TwistedYetter/Kirby/KirbyCancellation.lean:58",
+    "non_independent_semantic_route_also_uses_dual_chain": "lean/TwistedYetter/Kirby/Final/Semantics/Presentation.lean:81"
+  },
+  "semantic_assessment": {
+    "status": "BLOCKED_REQUIRES_HUMAN_SEMANTIC_DECISION",
+    "not_claimed": [
+      "The independent semantic specification and implementation are fully connected.",
+      "The two marking groups are definitionally equal.",
+      "Poincare duality alone fixes the intended character-exponent convention without an explicit comparison map."
+    ],
+    "legal_resolution_options": [
+      {
+        "option": "A",
+        "description": "Keep the independent primal H2 semantics and refactor the evaluator to use the primal handle complex."
+      },
+      {
+        "option": "B",
+        "description": "Change the frozen independent semantics to state the dual handle complex explicitly, then re-review and re-pin every affected semantic hash."
+      },
+      {
+        "option": "C",
+        "description": "Keep both conventions and prove an explicit, move-natural Poincare-duality comparison; define exactly how alpha enters the dual evaluator through that comparison."
+      }
+    ]
+  }
+}
