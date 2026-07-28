@@ -1,0 +1,57 @@
+{
+  "schema": "independent-presentation-semantics-checkpoint-v2",
+  "recorded_at_utc": "2026-07-28T13:24:49Z",
+  "recorded_at_local": "2026-07-28T07:24:49-0600",
+  "git_base_commit": "1cedb04dde1aa01532b4650f65803b50fb8c77a0",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "status": "SPECIFICATION_PINNED_UNCHECKED",
+  "supersedes": "independent-presentation-semantics-checkpoint-v1",
+  "reason_for_revision": "A closed H2 marking requires the third handle-boundary map even though full 3-handle attaching spheres are intentionally omitted.",
+  "pinned_semantics": {
+    "component_orientations_present": false,
+    "complete_handle_presentation": false,
+    "three_handle_attaching_spheres_present": false,
+    "coordinate_free_chain_groups": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "chain_group_ranks": {
+      "C1": "hOne",
+      "C2": "hTwo",
+      "C3": "hThree"
+    },
+    "boundary_two": "coordinate-free incidence map induced by ordinary framed components and complete dotted-disk puncture geometry",
+    "boundary_three": "coordinate-free handle boundary map induced by the standard closing 3-handle system under the closing-boundary certificate",
+    "chain_condition": "boundaryTwo composed with boundaryThree is zero",
+    "orientation_charts_chosen": false,
+    "orientation_reversal_effect": "only a signed coordinate change; the coordinate-free complex is unchanged"
+  },
+  "topology_boundaries": [
+    {
+      "name": "BoundaryTwoMatchesDottedPunctures",
+      "meaning": "After choosing temporary handle orientations, matrix entry (i,j) equals the signed intersection of ordinary component j with dotted spanning disk i."
+    },
+    {
+      "name": "BoundaryThreeMatchesClosingSystem",
+      "meaning": "The supplied boundaryThree map is induced by the hThree standard closing 3-handles under the boundary identification, and is not arbitrary."
+    }
+  ],
+  "deferred_to_next_semantic_entrance": [
+    "definition of H2 as kernel(boundaryTwo) modulo image(boundaryThree)",
+    "comparison with singular H2 of the closed completion",
+    "alpha marking and representative witnesses",
+    "Kirby-move chain transport"
+  ],
+  "verification": {
+    "lean_compile_run": false,
+    "bridge_run": false,
+    "axiom_audit_run": false,
+    "reason": "All semantic entrances are being pinned before any conformance check."
+  },
+  "known_pending_inconsistency": {
+    "file": "IndependentEvaluatorSpecification.lean",
+    "issue": "Its independent IntegralHandleChain is not yet wired to this SpecialKirbyDiagram handleBoundary package.",
+    "planned_resolution": "Replace it after the independent H2 marking semantics is pinned."
+  }
+}

@@ -1,3 +1,4 @@
+import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.Data.List.Defs
 
 /-!
@@ -17,6 +18,8 @@ contains:
 * the complete finite puncture and bunching data at those disks;
 * a certificate that the boundary after the 0-, 1-, and 2-handles is
   `#^hThree (S¹ × S²)`.
+* the coordinate-free integral handle boundary maps
+  `C₃ → C₂ → C₁`, including their geometric realization certificates.
 
 The last certificate is exactly what permits closure by `hThree` 3-handles
 and one 4-handle without storing their attaching spheres.
@@ -26,6 +29,8 @@ coupon, projector, evaluation, or scalar normalization occurs here.
 -/
 
 namespace TwistedYetter.Kirby.Final.IndependentPresentationSpecification
+
+open CategoryTheory
 
 universe uKnot uFramed uDisk uPoint uBunching uThreeManifold
 
@@ -145,7 +150,7 @@ The unique primal 0-handle and unique primal 4-handle are part of the word
 "special" and therefore are not mutable fields.  The actual 3-handle
 attaching spheres are intentionally absent.
 -/
-structure SpecialKirbyDiagram
+structure SpecialKirbyDiagramBase
     (geometry : KirbyGeometrySemantics) where
   hOne : ℕ
   hTwo : ℕ
@@ -178,15 +183,14 @@ structure SpecialKirbyDiagram
       (geometry.connectedSumS1TimesS2 hThree)
 
 /--
-The mathematical meaning of the boundary certificate, kept explicit as a
-named proposition for later audits.
+The mathematical meaning of the boundary certificate on the geometric base.
 
 It says only that the 0/1/2-handlebody can be closed by `hThree` 3-handles and
 one 4-handle.  It contains no evaluator equality.
 -/
 def HasStandardClosedCompletion
     {geometry : KirbyGeometrySemantics}
-    (diagram : SpecialKirbyDiagram geometry) : Prop :=
+    (diagram : SpecialKirbyDiagramBase geometry) : Prop :=
   geometry.orientationPreservingDiffeomorphic
     (geometry.boundaryAfterZeroOneTwoHandles
       diagram.dotted
@@ -195,8 +199,106 @@ def HasStandardClosedCompletion
 
 theorem hasStandardClosedCompletion
     {geometry : KirbyGeometrySemantics}
-    (diagram : SpecialKirbyDiagram geometry) :
+    (diagram : SpecialKirbyDiagramBase geometry) :
     HasStandardClosedCompletion diagram :=
   diagram.closing_boundary_certificate
+
+/--
+Topology boundary T-H₂.
+
+The map `boundaryTwo` is the coordinate-free incidence homomorphism obtained
+from the framed 2-handle components and the complete transverse puncture data
+on the chosen dotted spanning disks.
+
+After choosing orientations of the relevant rank-one handle orientation
+lines, its `(i,j)` matrix entry is the signed intersection number
+`ordinary j · dottedDisk i`.  Reversing a chosen orientation changes the
+corresponding row or column sign and does not change this coordinate-free
+map.
+
+This proposition contains no category or evaluator equality.
+-/
+axiom BoundaryTwoMatchesDottedPunctures
+    {geometry : KirbyGeometrySemantics}
+    (diagram : SpecialKirbyDiagramBase geometry)
+    (C₁ C₂ : ModuleCat ℤ)
+    (boundaryTwo : C₂ ⟶ C₁) :
+    Prop
+
+/--
+Topology boundary T-H₃.
+
+The map `boundaryThree` is the coordinate-free handle boundary homomorphism
+induced by the standard system of `diagram.hThree` closing 3-handles under
+`diagram.closing_boundary_certificate`.
+
+It is not an arbitrary homomorphism supplied independently of the closing
+topology.  Full attaching-sphere embeddings are intentionally not public
+fields.
+
+This proposition contains no category or evaluator equality.
+-/
+axiom BoundaryThreeMatchesClosingSystem
+    {geometry : KirbyGeometrySemantics}
+    (diagram : SpecialKirbyDiagramBase geometry)
+    (C₂ C₃ : ModuleCat ℤ)
+    (boundaryThree : C₃ ⟶ C₂) :
+    Prop
+
+/--
+The coordinate-free integral handle-boundary package.
+
+`C₁`, `C₂`, and `C₃` are finite free abelian groups of ranks `hOne`,
+`hTwo`, and `hThree`.  The displayed equivalences assert only existence of
+coordinate charts; no chart and hence no component orientation is part of
+the diagram.
+-/
+structure SpecialKirbyHandleBoundaryData
+    {geometry : KirbyGeometrySemantics}
+    (diagram : SpecialKirbyDiagramBase geometry) where
+  C₁ : ModuleCat ℤ
+  C₂ : ModuleCat ℤ
+  C₃ : ModuleCat ℤ
+
+  C₁_has_handle_rank :
+    Nonempty (C₁ ≅ ModuleCat.of ℤ (Fin diagram.hOne → ℤ))
+  C₂_has_handle_rank :
+    Nonempty (C₂ ≅ ModuleCat.of ℤ (Fin diagram.hTwo → ℤ))
+  C₃_has_handle_rank :
+    Nonempty (C₃ ≅ ModuleCat.of ℤ (Fin diagram.hThree → ℤ))
+
+  boundaryTwo : C₂ ⟶ C₁
+  boundaryThree : C₃ ⟶ C₂
+
+  boundary_squared_zero :
+    boundaryThree ≫ boundaryTwo = 0
+
+  boundaryTwo_is_geometric_incidence :
+    BoundaryTwoMatchesDottedPunctures
+      diagram C₁ C₂ boundaryTwo
+
+  boundaryThree_is_closing_boundary :
+    BoundaryThreeMatchesClosingSystem
+      diagram C₂ C₃ boundaryThree
+
+/--
+The complete project-local meaning of `SpecialKirbyDiagram`.
+
+It consists of the geometric dotted/framed diagram and its chosen dotted
+disks, together with the coordinate-free `∂₃` and `∂₂` package certified to
+come from that same geometry and closing system.
+-/
+structure SpecialKirbyDiagram
+    (geometry : KirbyGeometrySemantics) where
+  geometric : SpecialKirbyDiagramBase geometry
+  handleBoundary : SpecialKirbyHandleBoundaryData geometric
+
+/-- The chain condition, exposed under its mathematical name for audits. -/
+theorem boundary_of_boundary_is_zero
+    {geometry : KirbyGeometrySemantics}
+    (diagram : SpecialKirbyDiagram geometry) :
+    diagram.handleBoundary.boundaryThree ≫
+      diagram.handleBoundary.boundaryTwo = 0 :=
+  diagram.handleBoundary.boundary_squared_zero
 
 end TwistedYetter.Kirby.Final.IndependentPresentationSpecification

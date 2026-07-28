@@ -24,6 +24,9 @@
    \(\#^{h_3}(S^1\times S^2)\)；
 6. 因此前述body可用 \(h_3\) 個 \(3\)-handles和一個 \(4\)-handle封閉；
 7. 有chosen dotted spanning disks與完整puncture/bunching資料。
+8. 保存coordinate-free
+   \(C_3\xrightarrow{\partial_3}C_2\xrightarrow{\partial_2}C_1\)，
+   但不保存individual \(3\)-handle attaching spheres。
 
 它不是一份一般smooth handle decomposition。
 
@@ -153,7 +156,68 @@ Certificate只陳述oriented \(3\)-manifold diffeomorphism。它不得包含：
 - scalar equality；
 - final invariant。
 
-* 9. 精確輸入摘要
+* 9. Coordinate-Free Handle Boundary
+
+雖然diagram不保存component orientations，但它必須保存真正的handle
+boundary maps：
+
+\[
+  C_3(D)
+  \xrightarrow{\partial_3}
+  C_2(D)
+  \xrightarrow{\partial_2}
+  C_1(D).
+\]
+
+每個handle \(h\) 貢獻一個rank-one integral orientation line \(o(h)\)，
+所以
+
+\[
+  C_k(D)=\bigoplus_{h\in H_k(D)}o(h).
+\]
+
+沒有選orientation時，每個 \(o(h)\) 沒有指定哪一個generator叫 \(+1\)。
+所以這是coordinate-free chain data，不是在diagram中加入component orientation。
+
+存在coordinate charts：
+
+\[
+\begin{aligned}
+C_1(D)&\cong\mathbb Z^{h_1},\\
+C_2(D)&\cong\mathbb Z^{h_2},\\
+C_3(D)&\cong\mathbb Z^{h_3},
+\end{aligned}
+\]
+
+但這些charts不是diagram的chosen fields。
+
+**\(\partial_2\) coherence：** 任選orientations後，
+
+\[
+  (\partial_2)_{ij}
+  =
+  L_j\cdot\Delta_i.
+\]
+
+所以 \(\partial_2\) 必須exactly由ordinary framed components與chosen
+dotted disks的完整puncture incidence產生，不能任意填入。
+
+**\(\partial_3\) coherence：** \(\partial_3\) 必須是closing certificate
+所指定的standard \(h_3\)-handle system誘導的handle boundary map。它不能是
+一個與closing topology無關的任意homomorphism。
+
+**Chain condition：**
+
+\[
+  \partial_2\partial_3=0.
+\]
+
+也就是boundary of a boundary is zero。
+
+反轉任何暫時選擇的handle orientation，只會使相應matrix row或column
+乘上 \(-1\)；coordinate-free chain complex本身不變。
+
+* 10. 精確輸入摘要
 
 \[
 \boxed{
@@ -169,18 +233,21 @@ Certificate只陳述oriented \(3\)-manifold diffeomorphism。它不得包含：
   \partial W_{0,1,2}
   \cong
   \#^{h_3}(S^1\times S^2)
-\right).
+\right)\\
+&+\left(
+  C_3\xrightarrow{\partial_3}C_2\xrightarrow{\partial_2}C_1
+\right)_{\mathrm{geometrically\ certified}}.
 \end{aligned}
 }
 \]
 
 沒有complete handle presentation，也沒有 \(3\)-handle attaching spheres。
 
-* 10. 明確 Non-Claims
+* 11. 明確 Non-Claims
 
 - 尚未證明既有repo presentation符合本規格；
 - 尚未建立planar parser；
-- 尚未建立handle-chain boundary maps；
+- 尚未證明既有repo handle-chain maps符合這份coordinate-free規格；
 - 尚未加入component orientations；
 - 尚未定義\(\alpha\)或character coupons；
 - 尚未定義evaluator；
