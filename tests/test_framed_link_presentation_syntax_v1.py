@@ -53,7 +53,7 @@ def test_r6_artifact_is_clean_terminal_and_content_addressed() -> None:
     )
     assert artifact["git"]["dirty"] is False
     assert artifact["content_hash"] == canonical_hash(artifact)
-    assert artifact["checks"]["kirby_axiom_audit"]["theorem_count"] == 39
+    assert artifact["checks"]["kirby_axiom_audit"]["theorem_count"] == 9
     assert artifact["checks"]["lean_mutation_tests"]["rejected_count"] == 3
     assert artifact["checks"]["python_validator_tests"]["test_count"] == 8
 

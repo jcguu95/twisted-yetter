@@ -48,6 +48,9 @@ REFERENCES = (
     / "experiments/inputs/references/"
     "generalized-sliding-framed-context-primary-sources-v1.json"
 )
+PRESENTATION_AXIOM_AUDIT = (
+    "lean/TwistedYetter/Kirby/PresentationSchemaRegressionAxiomAudit.lean"
+)
 
 LEAN_BUILD_ORDER = [
     "lean/TwistedYetter/Kirby/Presentation.lean",
@@ -61,7 +64,7 @@ MUTATIONS = [
 ]
 AUDITED_FILES = [
     *LEAN_BUILD_ORDER,
-    "lean/TwistedYetter/Kirby/AxiomAudit.lean",
+    PRESENTATION_AXIOM_AUDIT,
     *MUTATIONS,
     "src/twisted_yetter/kirby_presentation_v1.py",
     "scripts/lean_presentation_mutation_tests.sh",
@@ -184,7 +187,9 @@ def build() -> tuple[dict[str, Any], bytes]:
         raise AssertionError("canonical JSON round trip changed the fixture")
 
     build_result = run(["./scripts/lean_local_build.sh", *LEAN_BUILD_ORDER])
-    axiom_result = run(["./scripts/lean_axiom_audit.sh"])
+    axiom_result = run(
+        ["./scripts/lean_local_check.sh", PRESENTATION_AXIOM_AUDIT]
+    )
     axiom_output = clean_output(axiom_result.stdout + axiom_result.stderr)
     forbidden_axioms = ("sorryAx", "native_decide.ax")
     if any(item in axiom_output for item in forbidden_axioms):
@@ -192,9 +197,9 @@ def build() -> tuple[dict[str, Any], bytes]:
     theorem_count = len(
         re.findall(r"^'TwistedYetter\.", axiom_output, flags=re.MULTILINE)
     )
-    if theorem_count != 39:
+    if theorem_count != 9:
         raise AssertionError(
-            f"expected 39 audited Kirby declarations, got {theorem_count}"
+            f"expected 9 audited presentation declarations, got {theorem_count}"
         )
 
     mutation_result = run(["./scripts/lean_presentation_mutation_tests.sh"])
@@ -293,7 +298,7 @@ def build() -> tuple[dict[str, Any], bytes]:
             "kirby_axiom_audit": {
                 "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE",
                 "theorem_count": theorem_count,
-                "new_r6_theorem_count": 2,
+                "presentation_regression_theorem_count": theorem_count,
                 "observed_standard_axioms": [
                     "propext",
                     "Classical.choice",
