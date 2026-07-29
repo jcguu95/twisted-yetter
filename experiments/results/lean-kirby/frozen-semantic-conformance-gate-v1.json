@@ -1,0 +1,68 @@
+{
+  "schema": "frozen-semantic-conformance-gate-v1",
+  "recorded_at_utc": "2026-07-29T05:08:56Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "base_git_commit": "dc6827fb376e126b6dde44bb7b00cf062c15ebfd",
+  "status": "BLOCKED_CURRENT_IMPLEMENTATION_NOT_YET_ADMITTED",
+  "frozen_semantic_entry": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "gate": {
+    "source": "lean/TwistedYetter/Kirby/Final/Semantics/CompleteSemanticConformance.lean",
+    "certificate_type": "TwistedYetter.Kirby.Final.CompleteSemanticConformance.FrozenConformanceCertificate",
+    "admission_type": "TwistedYetter.Kirby.Final.CompleteSemanticConformance.FrozenConformanceCertificate.FormalAdmission",
+    "soundness_theorem": "TwistedYetter.Kirby.Final.CompleteSemanticConformance.FrozenConformanceCertificate.sound",
+    "final_evaluator_equality_is_certificate_field": false,
+    "boolean_or_hash_can_create_admission": false
+  },
+  "derived_proofs": {
+    "current_raw_numerator_is_explicit_complete_sum": true,
+    "weight_conformance_is_derived_from_primitive_bindings": true,
+    "final_current_equals_frozen_evaluator_is_derived": true,
+    "new_project_axioms_or_sorries": 0,
+    "axiom_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "required_primitive_bindings": [
+    "exact proof-bearing source presentation",
+    "frozen primal H2 marking and comparison with the same external H2",
+    "simple-object, fusion, dimension, and character agreement",
+    "exact two-handle reindexing and component identity",
+    "per-handle character exponent agreement",
+    "normalization agreement",
+    "complete graphical and fusion-channel term agreement"
+  ],
+  "root_blocker": {
+    "id": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
+    "severity": "MATHEMATICAL_SEMANTIC_CONFLICT",
+    "frozen_requirement": "Character exponents are coordinates of a cycle in the primal complex C3 -> C2 -> C1.",
+    "current_implementation": "Character exponents are coordinates of a cycle in the turned-over dual complex C1 -> C2 -> C3.",
+    "why_not_cast": "The repo contains a cancelling 2-3 pair regression where two primal representatives define the same primal H2 class but give different naive twisted sums.",
+    "regression_source": "lean/TwistedYetter/Kirby/CycleRepresentativeCounterexample.lean",
+    "required_resolution": "Either prove an exact move-natural comparison that also proves every exponent coordinate equation, or obtain explicit human approval to revise the frozen semantics. No cast, arbitrary equivalence, hash, or final evaluator equality may close this blocker."
+  },
+  "admission": {
+    "current_implementation_formally_conforms": false,
+    "current_premodular_four_manifold_claim_admitted_under_frozen_semantics": false,
+    "current_modular_specialization_claim_admitted_under_frozen_semantics": false,
+    "reason": "No concrete FrozenConformanceCertificate exists for the current implementation."
+  },
+  "frozen_semantics_sha256": {
+    "Algebra.lean": "00016a4c7e001403745d7977bb6d430bbb601732c69681e2bbef68488bc53959",
+    "Diagram.lean": "00010bb741c9660e60ecde8f673ce3b7b257a52da7dfe2212ba7de202b0c9c16",
+    "Entry.lean": "000ec4a1dc6428a453dbdd949ef0922dee0e2d63657469477c409bffd50bbda8",
+    "Evaluator.lean": "000b5204ae925b864c8a8641a502f33e98293be45070fd86bf18835a5e5238b3",
+    "Graphical.lean": "000fe54f3532524313901518f169db2fdc45b594911d5ddb18b2fa1b9ed5f70c",
+    "Homology.lean": "0005b73b9229f8fe99bd943a17fcf0812ee0439cfa63b28bd033b7efbf283697",
+    "Invariant.lean": "000b0cb95782c5fa91086df9d97431aa950eee74801fcc6839ade620e3421117",
+    "Moves.lean": "0002c475b0e615b838d0d7d1befa5d02077bcc7df9ce428b1d3694073851c0ff"
+  },
+  "non_claims": [
+    "This artifact does not claim that the current evaluator conforms to the frozen semantics.",
+    "This artifact does not identify primal and dual H2 by notation or by an arbitrary group equivalence.",
+    "This artifact does not modify any frozen semantic file.",
+    "This artifact does not admit a four-manifold theorem claim into CTL."
+  ],
+  "content_hash": "sha256:509fd86eca7984975ac6f979c486a1de76505f12ba596d997364a9fe751dddaf"
+}

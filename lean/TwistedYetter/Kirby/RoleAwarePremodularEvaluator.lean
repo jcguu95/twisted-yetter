@@ -252,6 +252,66 @@ noncomputable def roleAwareRawNumerator
       (roleAwareLinearDiagram 𝒞 η presentation geometry cycle))
 
 /--
+One explicit ordinary-label summand of the current evaluator.
+
+This name exists so the frozen semantic comparison can inspect the finite sum
+term by term.  It does not change the evaluator and does not hide an auxiliary
+fusion-channel sum.
+-/
+noncomputable def roleAwareSummand
+    {H2 : Type uH} [AddCommGroup H2]
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (presentation : CanonicalPresentation H2)
+    (geometry : Geometry presentation)
+    (cycle : presentation.DegreeTwoCycle)
+    (labeling : OrdinaryLabeling (S := S) presentation) : K :=
+  roleAwareGlobalWeight 𝒞 η presentation cycle labeling *
+    𝒞.toFusionCategoryData.closedScalar
+      (Diagram.eval C
+        (roleAwareTermDiagram 𝒞 η presentation geometry labeling))
+
+/--
+The current raw numerator is exactly the complete finite sum of its displayed
+ordinary-label summands.
+-/
+theorem roleAwareRawNumerator_eq_sum_roleAwareSummand
+    {H2 : Type uH} [AddCommGroup H2]
+    (𝒞 : PremodularCategory (K := K) (C := C) (S := S))
+    (η : TensorIdentityAutomorphism C)
+    (presentation : CanonicalPresentation H2)
+    (geometry : Geometry presentation)
+    (cycle : presentation.DegreeTwoCycle) :
+    roleAwareRawNumerator 𝒞 η presentation geometry cycle =
+      ∑ labeling : OrdinaryLabeling (S := S) presentation,
+        roleAwareSummand 𝒞 η presentation geometry cycle labeling := by
+  classical
+  unfold roleAwareRawNumerator roleAwareLinearDiagram roleAwareSummand
+  rw [LinearDiagram.eval_weightedSum]
+  change
+    𝒞.toFusionCategoryData.closedScalar
+        (∑ labeling : OrdinaryLabeling (S := S) presentation,
+          roleAwareGlobalWeight 𝒞 η presentation cycle labeling •
+            Diagram.eval C
+              (roleAwareTermDiagram
+                𝒞 η presentation geometry labeling)) =
+      ∑ labeling : OrdinaryLabeling (S := S) presentation,
+        roleAwareGlobalWeight 𝒞 η presentation cycle labeling *
+          𝒞.toFusionCategoryData.closedScalar
+            (Diagram.eval C
+              (roleAwareTermDiagram
+                𝒞 η presentation geometry labeling))
+  unfold FusionCategoryData.closedScalar
+  rw [map_sum]
+  apply Finset.sum_congr rfl
+  intro labeling _
+  exact
+    𝒞.toFusionCategoryData.unitEndLinearEquiv.symm.map_smul
+      (roleAwareGlobalWeight 𝒞 η presentation cycle labeling)
+      (Diagram.eval C
+        (roleAwareTermDiagram 𝒞 η presentation geometry labeling))
+
+/--
 Tham Definition 5.11 normalization in the dual handle decomposition.
 
 The unique primal four-handle is the dual index-zero handle and contributes
