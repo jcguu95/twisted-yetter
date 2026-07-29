@@ -1,0 +1,52 @@
+{
+  "schema": "frozen-frontend-backend-reconnect-blocker-v1",
+  "recorded_at_utc": "2026-07-29T17:20:42Z",
+  "frozen_semantics_commit": "8a85baf",
+  "frozen_semantics_version": "independent-semantic-freeze-combinatorial-v6",
+  "build_command": "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.TwistedYetter",
+  "build_status": "EXPECTED_RED",
+  "resolved_bookkeeping": [
+    {
+      "id": "NONEMPTY_CHOICE_API",
+      "change": "Use Classical.choice rather than Classical.choose for markedRealization_exists.",
+      "semantic_change": false
+    }
+  ],
+  "remaining_obligations": [
+    {
+      "id": "FROZEN_FRONTEND_REPRESENTATIVE_INDEPENDENCE",
+      "lean_name": "frozenFrontendRepresentativeIndependence",
+      "status": "UNPROVED",
+      "first_error": "Unknown identifier",
+      "semantic_blocker_confirmed": false,
+      "note": "Not pursued after the local-move route triggered the mandatory semantic-stop condition."
+    },
+    {
+      "id": "FROZEN_FRONTEND_LOCAL_MOVE_INVARIANCE",
+      "lean_name": "frozenFrontendLocalMoveInvariance",
+      "status": "BLOCKED_ENDPOINT_BINDING_NOT_STRUCTURAL",
+      "first_error": "Unknown identifier",
+      "semantic_blocker_confirmed": true,
+      "missing_semantics": [
+        "CleanAttach does not structurally identify the source evaluator expression with the initial typed transport expression.",
+        "CleanDetach does not structurally identify the final typed transport expression with the target evaluator expression.",
+        "The finite topology event list is not yet bound to a constructed CharacterCouponTransport witness."
+      ],
+      "forbidden_workarounds": [
+        "Add an attach/detach evaluation-equality axiom.",
+        "Add sorry or admit.",
+        "Treat arbitrary source and target expressions as one transport step.",
+        "Modify frozen semantics v6 without user review."
+      ]
+    }
+  ],
+  "frozen_files_modified_after_commit": false,
+  "new_axioms_added": 0,
+  "new_sorries_added": 0,
+  "claims": {
+    "typed_character_coupon_transport": "KERNEL_CHECKED",
+    "local_move_invariance": "NOT_ESTABLISHED",
+    "representative_independence": "NOT_ESTABLISHED",
+    "four_manifold_invariant": "NOT_ESTABLISHED"
+  }
+}

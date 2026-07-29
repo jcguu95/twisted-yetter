@@ -198,8 +198,8 @@ theorem TwistedYetter_diffeomorphism_invariant
       (frozenFrontendRepresentativeIndependence 𝒞η)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
-      (Classical.choose (markedRealization_exists X alpha))
-      (Classical.choose
+      (Classical.choice (markedRealization_exists X alpha))
+      (Classical.choice
         (markedRealization_exists Y (inducedH₂ f alpha)))
 
 end
