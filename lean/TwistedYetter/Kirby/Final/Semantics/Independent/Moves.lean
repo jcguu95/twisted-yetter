@@ -35,18 +35,35 @@ inductive CouponTransportEvent
   | coupon (name : String)
   deriving DecidableEq, Repr
 
-opaque CleanAttachSite
-    (source : CombinatorialSpecialKirbyDiagram)
+opaque CleanAttach
+    (source attached : CombinatorialSpecialKirbyDiagram)
     (moving stationary : source.trace.ComponentId) :
     Prop
 
-opaque CompleteCouponTransport
+opaque OneCouponTransportStep
     (source target : CombinatorialSpecialKirbyDiagram)
-    (events : List CouponTransportEvent) :
+    (event : CouponTransportEvent) :
     Prop
 
-opaque CleanDetachSite
-    (target : CombinatorialSpecialKirbyDiagram)
+/--
+A finite sequence of coupon transports.  Its proof term records only that
+there are finitely many standard events; no public input supplies their count
+or an execution algorithm.
+-/
+inductive FiniteCouponTransport :
+    CombinatorialSpecialKirbyDiagram →
+      CombinatorialSpecialKirbyDiagram → Type
+  | refl (diagram : CombinatorialSpecialKirbyDiagram) :
+      FiniteCouponTransport diagram diagram
+  | step
+      {source middle target : CombinatorialSpecialKirbyDiagram}
+      (event : CouponTransportEvent)
+      (oneStep : OneCouponTransportStep source middle event)
+      (rest : FiniteCouponTransport middle target) :
+      FiniteCouponTransport source target
+
+opaque CleanDetach
+    (detachable target : CombinatorialSpecialKirbyDiagram)
     (moving stationary : target.trace.ComponentId) :
     Prop
 
@@ -65,11 +82,7 @@ opaque SlideFramingPushOffCompatible
     (orientation : BandOrientation) :
     Prop
 
-/--
-A slide is normalized into clean attach, a finite transport list, and clean
-detach.  The source and target factorizations are explicit propositions about
-the combinatorial event traces, not scalar equalities.
--/
+/-- The visible component data of one oriented band slide. -/
 structure CleanBandSlideScript
     (source target : CombinatorialSpecialKirbyDiagram) where
   movingSource : source.trace.ComponentId
@@ -77,20 +90,46 @@ structure CleanBandSlideScript
   movingTarget : target.trace.ComponentId
   stationaryTarget : target.trace.ComponentId
   orientation : BandOrientation
-  transportEvents : List CouponTransportEvent
-  attachIsClean :
-    CleanAttachSite source movingSource stationarySource
-  transportListIsComplete :
-    CompleteCouponTransport source target transportEvents
-  detachIsClean :
-    CleanDetachSite target movingTarget stationaryTarget
+
+/--
+The category-neutral topology content of a band slide:
+
+`clean attach → finitely many coupon transports → clean detach`.
+
+The intermediate diagrams and finite proof are existential topology data.
+This structure contains no category, character, projector, graphical
+evaluation, or scalar equality.
+-/
+structure CleanBandSlideDecomposition
+    {source target : CombinatorialSpecialKirbyDiagram}
+    (script : CleanBandSlideScript source target) where
+  attached : CombinatorialSpecialKirbyDiagram
+  detachable : CombinatorialSpecialKirbyDiagram
+  attach :
+    CleanAttach source attached
+      script.movingSource script.stationarySource
+  transport :
+    FiniteCouponTransport attached detachable
+  detach :
+    CleanDetach detachable target
+      script.movingTarget script.stationaryTarget
   commonExteriorUnchanged :
     SlideCommonExteriorUnchanged source target
   sourceTargetComponentBinding :
     SlideComponentBinding source target
-      movingSource stationarySource movingTarget stationaryTarget
+      script.movingSource script.stationarySource
+      script.movingTarget script.stationaryTarget
   framingPushOffCompatible :
-    SlideFramingPushOffCompatible source target orientation
+    SlideFramingPushOffCompatible source target script.orientation
+
+/--
+Classical handle-topology boundary: every clean oriented band slide admits
+the finite decomposition above.
+-/
+axiom cleanBandSlide_decomposes
+    {source target : CombinatorialSpecialKirbyDiagram}
+    (script : CleanBandSlideScript source target) :
+    Nonempty (CleanBandSlideDecomposition script)
 
 opaque IsotopyPreservesRolesOrientationsFramings
     (source target : CombinatorialSpecialKirbyDiagram) :
@@ -392,4 +431,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 3825
+-- semantic-freeze-padding: 847

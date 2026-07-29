@@ -1,0 +1,62 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v5",
+  "recorded_at_utc": "2026-07-29T16:46:01Z",
+  "semantic_content_parent_commit": "d8eb6b17d2ffd08d3ad5b90a7322f94ea0921f07",
+  "supersedes": "semantic-freeze-combinatorial-v4.json",
+  "historical_v1_v2_v3_v4_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "FINITE_CLEAN_BAND_SLIDE_DECOMPOSITION",
+    "before": "Six independent opaque predicates asserted clean attach, complete transport, clean detach, common exterior, component binding, and framing compatibility.",
+    "after": "A clean band slide has two existential intermediate diagrams and a proof-relevant finite chain: clean attach, finitely many one-coupon transport steps, and clean detach.",
+    "reason": "Human handle topology only needs to guarantee that coupon transport crosses finitely many standard local events. Lean induction needs finiteness and endpoints, but neither the user nor an execution algorithm must enumerate a count.",
+    "category_neutral": true,
+    "mentions_character": false,
+    "mentions_projector": false,
+    "mentions_evaluator_equality": false,
+    "adds_category_axiom": false,
+    "topology_axiom": "cleanBandSlide_decomposes"
+  },
+  "proof_status": {
+    "moves_standalone_build": "PASS",
+    "independent_entry_build": "PASS",
+    "typed_evaluator_build": "PASS",
+    "finite_transport_backend_induction": "NOT_YET_RUN_AFTER_FREEZE",
+    "unconditional_premodular_invariance": "NOT_CLAIMED"
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "0003050a3ba042139e3c1fa37c7e2d711bb004ce74f21a65e04a9788135c04fd",
+    "Diagram.lean": "000969afefd2d7bb5178b67954f5ba3ee469c5ee03e451e8fad9d5c8ee30565d",
+    "Entry.lean": "0007ccfb3fd93494863ee8ff8ea0f1fc0a044ecf13872826d367687647e78d9a",
+    "Evaluator.lean": "0008d1353023e7506acdc2c396acfcaae6e56656e49c952702b4e6678fd67782",
+    "Graphical.lean": "000c7502c58c8a2b2d861139bb9f52586204986584e27be64541f9ee1ad41d0e",
+    "Homology.lean": "0001547c6e465f44de74b7d07caf8c4d08c9b23a7297b54d1d76f7e3dc76059c",
+    "Invariant.lean": "000fbf0138ec88d8c8b505a2670568e3da7099696557929ab6b20b7278730b80",
+    "Moves.lean": "00053b7933e7c5168e44963de1a7d0b362e72a45bcc60ea0304933d64a183a32"
+  },
+  "build": {
+    "command": "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.Independent.Moves TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+    "status": "PASS",
+    "lean": "4.29.1",
+    "lake": "5.0.0-src+f72c35b",
+    "platform": "arm64-apple-darwin24.6.0",
+    "macos": "15.7.2"
+  },
+  "change_budget": {
+    "frozen_semantics_edits_consumed": true,
+    "further_semantic_edits_before_user_review": "FORBIDDEN",
+    "backend_must_stop_on_next_semantic_gap": true
+  },
+  "non_claims": [
+    "No number or explicit list of coupon transport events is a public input.",
+    "No coupon-transport evaluation equality is assumed.",
+    "No local-move invariance theorem is established by this manifest.",
+    "No four-manifold invariant theorem is claimed.",
+    "No legacy numerical artifact is recertified."
+  ]
+}
