@@ -190,6 +190,229 @@ def characterCoupon
     RibbonExpression 𝒞 X X :=
   .morphism (isoIntPowerHom (character.iso.app X) exponent)
 
+private theorem characterCoupon_natPower_naturality
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    {X Y : 𝒞.C}
+    (f : X ⟶ Y)
+    (power : ℕ) :
+    isoNatPowerHom (character.iso.app X) power ≫ f =
+      f ≫ isoNatPowerHom (character.iso.app Y) power := by
+  have naturality :
+      (character.iso.app X).hom ≫ f =
+        f ≫ (character.iso.app Y).hom := by
+    simpa using (character.iso.hom.naturality f).symm
+  induction power with
+  | zero =>
+      simp [isoNatPowerHom]
+  | succ power inductionHypothesis =>
+      simp only [isoNatPowerHom, Category.assoc]
+      rw [naturality]
+      calc
+        isoNatPowerHom (character.iso.app X) power ≫
+              (f ≫ (character.iso.app Y).hom) =
+            (isoNatPowerHom (character.iso.app X) power ≫ f) ≫
+              (character.iso.app Y).hom := (Category.assoc _ _ _).symm
+        _ =
+            (f ≫ isoNatPowerHom (character.iso.app Y) power) ≫
+              (character.iso.app Y).hom :=
+          congrArg
+            (fun map => map ≫ (character.iso.app Y).hom)
+            inductionHypothesis
+        _ =
+            f ≫ (isoNatPowerHom (character.iso.app Y) power ≫
+              (character.iso.app Y).hom) := Category.assoc _ _ _
+
+private theorem characterCoupon_invNatPower_naturality
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    {X Y : 𝒞.C}
+    (f : X ⟶ Y)
+    (power : ℕ) :
+    isoNatPowerHom (character.iso.app X).symm power ≫ f =
+      f ≫ isoNatPowerHom (character.iso.app Y).symm power := by
+  have naturality :
+      (character.iso.app X).symm.hom ≫ f =
+        f ≫ (character.iso.app Y).symm.hom := by
+    simpa using (character.iso.inv.naturality f).symm
+  induction power with
+  | zero =>
+      simp [isoNatPowerHom]
+  | succ power inductionHypothesis =>
+      simp only [isoNatPowerHom, Category.assoc]
+      rw [naturality]
+      calc
+        isoNatPowerHom (character.iso.app X).symm power ≫
+              (f ≫ (character.iso.app Y).symm.hom) =
+            (isoNatPowerHom (character.iso.app X).symm power ≫ f) ≫
+              (character.iso.app Y).symm.hom := (Category.assoc _ _ _).symm
+        _ =
+            (f ≫ isoNatPowerHom (character.iso.app Y).symm power) ≫
+              (character.iso.app Y).symm.hom :=
+          congrArg
+            (fun map => map ≫ (character.iso.app Y).symm.hom)
+            inductionHypothesis
+        _ =
+            f ≫ (isoNatPowerHom (character.iso.app Y).symm power ≫
+              (character.iso.app Y).symm.hom) := Category.assoc _ _ _
+
+/--
+Naturality of every integral power of the character automorphism.
+
+This is the single categorical calculation behind transporting a character
+coupon across a crossing, cup, cap, twist, or general morphism coupon: after
+interpretation, every such local event is simply a morphism `f : X ⟶ Y`.
+-/
+theorem characterCoupon_naturality
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    {X Y : 𝒞.C}
+    (f : X ⟶ Y)
+    (exponent : ℤ) :
+    isoIntPowerHom (character.iso.app X) exponent ≫ f =
+      f ≫ isoIntPowerHom (character.iso.app Y) exponent := by
+  cases exponent with
+  | ofNat power =>
+      exact characterCoupon_natPower_naturality character f power
+  | negSucc power =>
+      exact
+        characterCoupon_invNatPower_naturality
+          character f (power + 1)
+
+/--
+Proof-relevant typed transport of a character coupon.
+
+The base constructor is naturality across an arbitrary actual morphism.  The
+remaining constructors place that local rewrite inside composition, tensor,
+linear combination, and scalar contexts.  Thus no topology axiom states an
+evaluation equality, and no caller may label two unrelated expressions as one
+transport step.
+-/
+inductive CharacterCouponTransport
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    (character : TensorIdentityCharacter 𝒞) :
+    {X Y : 𝒞.C} →
+      RibbonExpression 𝒞 X Y →
+      RibbonExpression 𝒞 X Y → Type (max uK uC uS v)
+  | naturality
+      {X Y : 𝒞.C}
+      (f : X ⟶ Y)
+      (exponent : ℤ) :
+      CharacterCouponTransport character
+        (.compose
+          (characterCoupon character X exponent)
+          (.morphism f))
+        (.compose
+          (.morphism f)
+          (characterCoupon character Y exponent))
+  | refl
+      {X Y : 𝒞.C}
+      (term : RibbonExpression 𝒞 X Y) :
+      CharacterCouponTransport character term term
+  | trans
+      {X Y : 𝒞.C}
+      {first middle last : RibbonExpression 𝒞 X Y}
+      (left : CharacterCouponTransport character first middle)
+      (right : CharacterCouponTransport character middle last) :
+      CharacterCouponTransport character first last
+  | composeLeft
+      {W X Y : 𝒞.C}
+      (prefixTerm : RibbonExpression 𝒞 W X)
+      {before after : RibbonExpression 𝒞 X Y}
+      (step : CharacterCouponTransport character before after) :
+      CharacterCouponTransport character
+        (.compose prefixTerm before)
+        (.compose prefixTerm after)
+  | composeRight
+      {X Y Z : 𝒞.C}
+      {before after : RibbonExpression 𝒞 X Y}
+      (step : CharacterCouponTransport character before after)
+      (suffix : RibbonExpression 𝒞 Y Z) :
+      CharacterCouponTransport character
+        (.compose before suffix)
+        (.compose after suffix)
+  | tensorLeft
+      {X₁ Y₁ X₂ Y₂ : 𝒞.C}
+      (left : RibbonExpression 𝒞 X₁ Y₁)
+      {before after : RibbonExpression 𝒞 X₂ Y₂}
+      (step : CharacterCouponTransport character before after) :
+      CharacterCouponTransport character
+        (.tensor left before)
+        (.tensor left after)
+  | tensorRight
+      {X₁ Y₁ X₂ Y₂ : 𝒞.C}
+      {before after : RibbonExpression 𝒞 X₁ Y₁}
+      (step : CharacterCouponTransport character before after)
+      (right : RibbonExpression 𝒞 X₂ Y₂) :
+      CharacterCouponTransport character
+        (.tensor before right)
+        (.tensor after right)
+  | addLeft
+      {X Y : 𝒞.C}
+      (left : RibbonExpression 𝒞 X Y)
+      {before after : RibbonExpression 𝒞 X Y}
+      (step : CharacterCouponTransport character before after) :
+      CharacterCouponTransport character
+        (.add left before)
+        (.add left after)
+  | addRight
+      {X Y : 𝒞.C}
+      {before after : RibbonExpression 𝒞 X Y}
+      (step : CharacterCouponTransport character before after)
+      (right : RibbonExpression 𝒞 X Y) :
+      CharacterCouponTransport character
+        (.add before right)
+        (.add after right)
+  | smul
+      {X Y : 𝒞.C}
+      (scalar : K)
+      {before after : RibbonExpression 𝒞 X Y}
+      (step : CharacterCouponTransport character before after) :
+      CharacterCouponTransport character
+        (.smul scalar before)
+        (.smul scalar after)
+
+theorem CharacterCouponTransport.interpret_eq
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {character : TensorIdentityCharacter 𝒞}
+    {X Y : 𝒞.C}
+    {before after : RibbonExpression 𝒞 X Y}
+    (transport : CharacterCouponTransport character before after) :
+    before.interpret = after.interpret := by
+  induction transport with
+  | naturality f exponent =>
+      exact characterCoupon_naturality character f exponent
+  | refl term =>
+      rfl
+  | trans left right leftHypothesis rightHypothesis =>
+      exact leftHypothesis.trans rightHypothesis
+  | composeLeft prefixTerm step inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | composeRight step suffix inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | tensorLeft left step inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | tensorRight step right inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | addLeft left step inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | addRight step right inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | smul scalar step inductionHypothesis =>
+      simp only [RibbonExpression.interpret]
+      rw [inductionHypothesis]
+
 def fusionInclusionExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -269,4 +492,4 @@ axiom shum_framedRibbonCoherence
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 4974
+-- semantic-freeze-padding: 93

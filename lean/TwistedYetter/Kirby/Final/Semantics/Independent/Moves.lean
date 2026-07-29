@@ -40,27 +40,16 @@ opaque CleanAttach
     (moving stationary : source.trace.ComponentId) :
     Prop
 
-opaque OneCouponTransportStep
-    (source target : CombinatorialSpecialKirbyDiagram)
-    (event : CouponTransportEvent) :
-    Prop
-
 /--
-A finite sequence of coupon transports.  Its proof term records only that
-there are finitely many standard events; no public input supplies their count
-or an execution algorithm.
+A finite topology-side route for coupon transport.
+
+The list records only the finitely many kinds of local events met along the
+stationary component.  It does not pretend that the transported character
+coupon is part of a Kirby diagram.  The actual before/after expressions and
+their naturality proof live in the typed graphical semantics.
 -/
-inductive FiniteCouponTransport :
-    CombinatorialSpecialKirbyDiagram →
-      CombinatorialSpecialKirbyDiagram → Type
-  | refl (diagram : CombinatorialSpecialKirbyDiagram) :
-      FiniteCouponTransport diagram diagram
-  | step
-      {source middle target : CombinatorialSpecialKirbyDiagram}
-      (event : CouponTransportEvent)
-      (oneStep : OneCouponTransportStep source middle event)
-      (rest : FiniteCouponTransport middle target) :
-      FiniteCouponTransport source target
+structure FiniteCouponTransport where
+  events : List CouponTransportEvent
 
 opaque CleanDetach
     (detachable target : CombinatorialSpecialKirbyDiagram)
@@ -109,7 +98,7 @@ structure CleanBandSlideDecomposition
     CleanAttach source attached
       script.movingSource script.stationarySource
   transport :
-    FiniteCouponTransport attached detachable
+    FiniteCouponTransport
   detach :
     CleanDetach detachable target
       script.movingTarget script.stationaryTarget
@@ -431,4 +420,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 847
+-- semantic-freeze-padding: 1604
