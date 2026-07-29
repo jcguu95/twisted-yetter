@@ -122,19 +122,14 @@ def test_every_move_carries_both_transports_and_turnover_naturality() -> None:
 def test_v3_completeness_is_diffeomorphism_aware() -> None:
     invariant = INVARIANT.read_text()
     completeness = re.search(
-        r"markedKirbyCerfCompleteness\s*:=(.*?)\n\n/--",
+        r"axiom markedKirbyCerf_complete(.*?)(?=\n\n/--)",
         invariant,
         flags=re.S,
     )
-    if completeness is None:
-        completeness = re.search(
-            r"markedKirbyCerfCompleteness\s*:(.*)$",
-            invariant,
-            flags=re.S,
-        )
     assert completeness is not None
     statement = completeness.group(1)
-    assert "(f : diffeomorphismTransport X Y)" in statement
+    assert "(f : OrientedDiffeomorphism X Y)" in statement
+    assert "(alpha : ManifoldH₂ X)" in statement
     assert "MarkedRealization X alpha" in statement
     assert "MarkedRealization Y (inducedH₂ f alpha)" in statement
     assert "KirbyMovie left.markedDiagram right.markedDiagram" in statement
@@ -147,7 +142,7 @@ def test_conditional_frontend_route_is_honestly_named() -> None:
         in public
     )
     assert "abbrev evaluateMarkedDiagram" in public
-    assert "evaluateMarking 𝒞η graphical compiler normalization marked" in public
+    assert "evaluateMarking 𝒞η graphical marked" in public
     assert "TwistedYetterDiffeomorphismInvarianceTarget" in public
     assert "namespace ConditionalDescent" in public
     assert "theorem diffeomorphism_invariant_of_descent_data" in public

@@ -22,10 +22,13 @@ open CategoryTheory
 universe uK uC uS v
 
 /-- A finite simple-object skeleton for a fusion category. -/
-structure FusionSimpleSkeleton (K : Type uK) [Field K] where
+structure FusionSimpleSkeleton
+    (K : Type uK) [Field K]
+    (C : Type uC) where
   Simple : Type uS
   simpleFintype : Fintype Simple
   simpleDecidableEq : DecidableEq Simple
+  simpleObject : Simple → C
   tensorUnit : Simple
   dual : Simple → Simple
   fusionMultiplicity : Simple → Simple → Simple → ℕ
@@ -62,27 +65,27 @@ structure PremodularFusionCategoryCore
   rigid : @RigidCategory C category monoidal
   preadditive : @Preadditive C category
   linear : @Linear K _ C category preadditive
-  simples : FusionSimpleSkeleton.{uK, uC} K
+  simples : FusionSimpleSkeleton.{uK, uC, uS} K C
 
 opaque IsFiniteSemisimple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
-    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+    PremodularFusionCategoryCore.{uK, uC, v, uS} K → Prop
 
 opaque SimpleSkeletonIsComplete
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
-    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+    PremodularFusionCategoryCore.{uK, uC, v, uS} K → Prop
 
 opaque TensorUnitIsSimple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
-    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+    PremodularFusionCategoryCore.{uK, uC, v, uS} K → Prop
 
 opaque HasSphericalRibbonCompatibility
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K] :
-    PremodularFusionCategoryCore.{uK, uC, v} K → Prop
+    PremodularFusionCategoryCore.{uK, uC, v, uS} K → Prop
 
 structure PremodularFusionCategory
     (K : Type uK) [Field K] [IsAlgClosed K] [CharZero K] where
-  core : PremodularFusionCategoryCore.{uK, uC, v} K
+  core : PremodularFusionCategoryCore.{uK, uC, v, uS} K
   finiteSemisimple : IsFiniteSemisimple core
   simpleSkeletonComplete : SimpleSkeletonIsComplete core
   tensorUnitSimple : TensorUnitIsSimple core
@@ -97,6 +100,42 @@ abbrev PremodularFusionCategory.simples
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K) :=
   𝒞.core.simples
+
+instance PremodularFusionCategory.instCategory
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    Category.{v} 𝒞.C :=
+  𝒞.core.category
+
+instance PremodularFusionCategory.instMonoidal
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    MonoidalCategory 𝒞.C :=
+  𝒞.core.monoidal
+
+instance PremodularFusionCategory.instBraided
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    BraidedCategory 𝒞.C :=
+  𝒞.core.braided
+
+instance PremodularFusionCategory.instRigid
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    RigidCategory 𝒞.C :=
+  𝒞.core.rigid
+
+instance PremodularFusionCategory.instPreadditive
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    Preadditive 𝒞.C :=
+  𝒞.core.preadditive
+
+instance PremodularFusionCategory.instLinear
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    Linear K 𝒞.C :=
+  𝒞.core.linear
 
 /--
 The scalar by which a monoidal natural automorphism of the tensor identity
@@ -118,8 +157,8 @@ structure TensorIdentityCharacter
 /-- A premodular category together with its twisting character. -/
 structure TwistedPremodularCategory
     (K : Type uK) [Field K] [IsAlgClosed K] [CharZero K] where
-  category : PremodularFusionCategory.{uK, uC, v} K
-  character : TensorIdentityCharacter.{uK, uC, v} category
+  category : PremodularFusionCategory.{uK, uC, v, uS} K
+  character : TensorIdentityCharacter.{uK, uC, v, uS} category
 
 end TwistedYetter.Semantics.Independent
 

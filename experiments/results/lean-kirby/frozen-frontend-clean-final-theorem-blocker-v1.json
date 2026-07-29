@@ -1,6 +1,6 @@
 {
   "schema": "frozen-frontend-clean-final-theorem-blocker-v1",
-  "content_hash": "sha256:23ab4c238ccb8c708f0077f8b0a2b9692645dfdf6f5e0640afbe8ba68c4deb6a",
+  "content_hash": "sha256:9deec072d90045ef27036b459a9311acd7538f3c5b905fd7ee388b566df6e03d",
   "recorded_at_utc": "2026-07-29T12:47:20Z",
   "status": "BLOCKED_CANONICAL_FRONTEND_EVALUATOR_NOT_CONSTRUCTED",
   "supersedes_artifact": "experiments/results/lean-kirby/frozen-frontend-final-theorem-direct-connection-resolution-v1.json",
@@ -39,14 +39,6 @@
       "detail": "CompositionRespectsEvaluation, naturality, fusion completeness, and tensor-unit projector laws are opaque Prop names. Their current types expose no equations from which local invariance can be proved."
     },
     {
-      "id": "CANONICAL_ROLE_AWARE_COMPILER_MISSING",
-      "detail": "RoleAwareGraphCompiler is caller-supplied. The frozen semantics does not define a compiler from CombinatorialSpecialKirbyDiagram and its THAM-side cycle."
-    },
-    {
-      "id": "THAM_NORMALIZATION_FORMULA_MISSING",
-      "detail": "ThamDefinition511Normalization contains an arbitrary function constrained only by opaque Prop names; Definition 5.11's scalar formula is not encoded as executable semantic data."
-    },
-    {
       "id": "REPRESENTATIVE_INDEPENDENCE_NOT_DERIVED",
       "detail": "RepresentativeIndependenceStatement is only a proposition. No frozen-frontend theorem proves it."
     },
@@ -63,7 +55,14 @@
     "Renamed the diagram-level evaluator to evaluateMarkedDiagram.",
     "Renamed the former final theorem to ConditionalDescent.diffeomorphism_invariant_of_descent_data.",
     "Removed the misleading public TwistedYetter and TwistedYetter_diffeomorphism_invariant names.",
-    "Retained the kernel-checked elementary-move assembly and finite-movie induction."
+    "Retained the kernel-checked elementary-move assembly and finite-movie induction.",
+    "Replaced caller-supplied ThamDefinition511Normalization by the explicit Definition 5.11 factor globalDimension / globalDimension ^ hOne, where hOne is the turned-over index.",
+    "Split the classical topology boundary into individually named axioms and derived the internal ClassicalKirbyTopologyBoundary record instead of accepting it as a theorem parameter.",
+    "Added a complete category-neutral cut-open exterior event trace with one exact projector hole per dotted disk.",
+    "Constructed the role-aware graph compiler from the frozen cut-open trace and removed RoleAwareGraphCompiler from all evaluator and descent signatures.",
+    "Removed the duplicate requirement that the compiled final graph contain character coupons; the formal evaluator stores the character once in characterWeight, while coupons remain proof-language intermediates.",
+    "Changed the tensor-unit projector syntax from a single simple label to the entire ordered puncture word.",
+    "Required cut-open planar isotopy events to preserve the active boundary word; strand reordering must be represented by explicit crossings."
   ],
   "prohibited_shortcuts": [
     "No new blanket axiom for local invariance.",
@@ -72,7 +71,7 @@
     "No constant-zero or otherwise fake invariant.",
     "No sorry, admit, arbitrary equality, backend conformance certificate, or legacy evaluator."
   ],
-  "next_mathematical_obligation": "Replace the opaque graphical-law predicates with explicit typed equations and construct the canonical graphical evaluator before attempting frozen semantics v4.",
+  "next_mathematical_obligation": "Replace the untyped RibbonExpression and opaque graphical-law predicates by typed categorical morphisms and explicit equations; then prove representative independence and the eight local moves for the canonical compiler.",
   "claims": {
     "clean_final_theorem_established": false,
     "premodular_four_manifold_invariant_established": false,
@@ -80,9 +79,9 @@
     "frozen_v4_established": false
   },
   "verification": {
-    "narrow_lean_file": "PASS",
-    "full_lake_build": "PASS",
-    "focused_tests": "11_PASS",
+    "narrow_lean_file": "PASS_AFTER_NORMALIZATION_AND_TOPOLOGY_CLEANUP",
+    "full_lake_build": "PASS_AFTER_NORMALIZATION_AND_TOPOLOGY_CLEANUP",
+    "focused_tests": "EXPECTED_FAIL_FROZEN_V3_HASH_AND_V3_SHAPE_DURING_V4_WORK",
     "semantic_firewall": "PASS",
     "frozen_v3_hashes_unchanged": true,
     "sorry_or_admit_added": false,

@@ -149,6 +149,81 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
   exponent_is_orientation_sign :
     characterExponentSign = 1 ∨ characterExponentSign = -1
 
+/--
+The category-neutral event language of the tangle obtained after cutting all
+dotted spanning disks simultaneously.
+
+A `projectorHole` is not a category morphism.  It only marks the exact ordered
+strand word where the evaluator must later insert the normalized tensor-unit
+projector.  In particular, this syntax contains neither a Kirby colour nor an
+evaluation equality.
+-/
+inductive CutOpenEvent (trace : CombinatorialLinkTrace)
+  | birth (left right : trace.StrandId)
+  | death (left right : trace.StrandId)
+  | crossing
+      (overStrand underStrand : trace.StrandId)
+      (sign : CrossingSign)
+  | framingTwist (strand : trace.StrandId) (sign : CrossingSign)
+  | planarIsotopy
+      (word : List trace.StrandId)
+  | projectorHole
+      (dottedComponent : trace.ComponentId)
+      (punctures : List (DottedPuncture trace))
+
+def CutOpenEvent.beforeWord
+    {trace : CombinatorialLinkTrace} :
+    CutOpenEvent trace → List trace.StrandId
+  | .birth _ _ => []
+  | .death left right => [left, right]
+  | .crossing overStrand underStrand _ => [overStrand, underStrand]
+  | .framingTwist strand _ => [strand]
+  | .planarIsotopy word => word
+  | .projectorHole _ punctures => punctures.map DottedPuncture.strand
+
+def CutOpenEvent.afterWord
+    {trace : CombinatorialLinkTrace} :
+    CutOpenEvent trace → List trace.StrandId
+  | .birth left right => [left, right]
+  | .death _ _ => []
+  | .crossing overStrand underStrand _ => [underStrand, overStrand]
+  | .framingTwist strand _ => [strand]
+  | .planarIsotopy word => word
+  | .projectorHole _ punctures => punctures.map DottedPuncture.strand
+
+def CutOpenEventTransition
+    {trace : CombinatorialLinkTrace}
+    (event : CutOpenEvent trace)
+    (before after : List trace.StrandId) : Prop :=
+  ∃ (leftContext rightContext : List trace.StrandId),
+    before = leftContext ++ event.beforeWord ++ rightContext ∧
+    after = leftContext ++ event.afterWord ++ rightContext
+
+/--
+The complete exterior ribbon tangle after all dotted disks have been cut.
+
+This is the data that was absent from frozen v3.  Puncture words alone say
+which strands meet a disk, but do not determine how the rest of the tangle
+connects those strands.  The event trace records that missing exterior.
+-/
+structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
+  eventCount : ℕ
+  events : Fin eventCount → CutOpenEvent trace
+  activeOrder : Fin (eventCount + 1) → List trace.StrandId
+  initialBoundaryEmpty : activeOrder 0 = []
+  finalBoundaryEmpty : activeOrder (Fin.last eventCount) = []
+  transitionValid :
+    ∀ i : Fin eventCount,
+      CutOpenEventTransition (events i)
+        (activeOrder i.castSucc)
+        (activeOrder i.succ)
+  activeWordsNoDuplicates :
+    ∀ i, (activeOrder i).Nodup
+  activeStrandsAreTwoHandles :
+    ∀ (i : Fin (eventCount + 1)) (strand : trace.StrandId),
+      strand ∈ activeOrder i →
+      (trace.components (trace.strands strand).component).role ≠ .dotted
+
 opaque PunctureWordsHaveNoRepeatedOccurrences
     (trace : CombinatorialLinkTrace)
     (punctureWord :
@@ -167,6 +242,7 @@ opaque CutOpenWordsAreCompatible
 
 opaque RegluingReturnsOriginalTrace
     (trace : CombinatorialLinkTrace)
+    (exterior : CutOpenExteriorTrace trace)
     (punctureWord :
       (dotted : trace.ComponentId) →
         (trace.components dotted).role = .dotted →
@@ -178,12 +254,22 @@ structure DottedCutData (trace : CombinatorialLinkTrace) where
     (dotted : trace.ComponentId) →
       (trace.components dotted).role = .dotted →
       List (DottedPuncture trace)
+  exterior : CutOpenExteriorTrace trace
+  projectorSite :
+    (dotted : trace.ComponentId) →
+      (role : (trace.components dotted).role = .dotted) →
+      Fin exterior.eventCount
+  projectorSite_exact :
+    ∀ (dotted : trace.ComponentId)
+      (role : (trace.components dotted).role = .dotted),
+      exterior.events (projectorSite dotted role) =
+        .projectorHole dotted (punctureWord dotted role)
   puncturesHaveNoRepeatedOccurrences :
     PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
   cutOpenWordsAreCompatible :
     CutOpenWordsAreCompatible trace punctureWord
   reglueReturnsOriginalTrace :
-    RegluingReturnsOriginalTrace trace punctureWord
+    RegluingReturnsOriginalTrace trace exterior punctureWord
 
 /--
 The handle information deliberately stops before encoding three-handle

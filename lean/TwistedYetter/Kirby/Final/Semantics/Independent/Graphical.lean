@@ -38,8 +38,8 @@ inductive RibbonGenerator
   | crossing
       (overStrand underStrand : OrientedSimple 𝒞)
       (sign : RibbonCrossingSign)
-  | cup (label : 𝒞.simples.Simple)
-  | cap (label : 𝒞.simples.Simple)
+  | cup (left right : OrientedSimple 𝒞)
+  | cap (left right : OrientedSimple 𝒞)
   | twist (strand : OrientedSimple 𝒞) (sign : RibbonCrossingSign)
   | coupon
       (name : String)
@@ -55,7 +55,13 @@ inductive RibbonGenerator
       (left right output : 𝒞.simples.Simple)
       (multiplicityIndex :
         Fin (𝒞.simples.fusionMultiplicity left right output))
-  | tensorUnitProjector (label : 𝒞.simples.Simple)
+  /--
+  Project onto the tensor-unit summand of the entire puncture word.
+
+  A dotted disk can be crossed by several differently oriented strands, so a
+  projector on one simple label would have the wrong type.
+  -/
+  | tensorUnitProjector (word : RibbonWord 𝒞)
 
 inductive RibbonExpression
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]

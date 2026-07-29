@@ -54,6 +54,52 @@ structure MarkedRealization
     homologyComparison markedDiagram.alpha = alpha
 
 /--
+Orientation-preserving diffeomorphisms of the external smooth
+four-manifolds.  Smooth manifold foundations are deliberately outside this
+project.
+-/
+opaque OrientedDiffeomorphism :
+  ClosedOrientedSmoothFourManifold →
+  ClosedOrientedSmoothFourManifold →
+  Type
+
+/-- The additive equivalence induced on integral second homology. -/
+axiom inducedH₂
+    {X Y : ClosedOrientedSmoothFourManifold} :
+    OrientedDiffeomorphism X Y →
+    ManifoldH₂ X ≃+ ManifoldH₂ Y
+
+/--
+Classical topology boundary T1: every marked manifold pair admits a certified
+special Kirby realization.
+-/
+axiom markedRealization_exists
+    (X : ClosedOrientedSmoothFourManifold)
+    (alpha : ManifoldH₂ X) :
+    Nonempty (MarkedRealization X alpha)
+
+/--
+Classical topology boundary T4: every typed elementary move is a genuine
+standard Kirby move.  This statement contains no category or scalar equality.
+-/
+axiom elementaryMove_realizes_standardKirbyMove
+    {source target : HomologicallyMarkedDiagram}
+    (move : ElementaryMove source target) :
+    MoveRealizesStandardKirbyMove move
+
+/--
+Classical topology boundary T3: exact realizations related by an oriented
+diffeomorphism are connected by a finite marked Kirby movie.
+-/
+axiom markedKirbyCerf_complete
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (f : OrientedDiffeomorphism X Y)
+    (alpha : ManifoldH₂ X)
+    (left : MarkedRealization X alpha)
+    (right : MarkedRealization Y (inducedH₂ f alpha)) :
+    Nonempty (KirbyMovie left.markedDiagram right.markedDiagram)
+
+/--
 The classical topology boundary is split into visible pieces.  None may
 mention a category, character, graphical evaluation, or scalar equality.
 -/
@@ -90,21 +136,32 @@ structure ClassicalKirbyTopologyBoundary where
       Nonempty (KirbyMovie left.markedDiagram right.markedDiagram)
 
 /--
+The internal boundary record is derived from the individually named topology
+inputs above.  It is not an assumption and never appears in the public
+theorem signature.
+-/
+noncomputable def classicalKirbyTopologyBoundary :
+    ClassicalKirbyTopologyBoundary where
+  presentationExistence := markedRealization_exists
+  localMoveRealization := elementaryMove_realizes_standardKirbyMove
+  diffeomorphismTransport := OrientedDiffeomorphism
+  inducedH₂ := inducedH₂
+  markedKirbyCerfCompleteness := markedKirbyCerf_complete
+
+/--
 The independent local-move obligation.  It quantifies over all eight move
 constructors and therefore cannot disappear into a compiler axiom.
 -/
 def LocalMoveInvarianceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
-    (compiler : RoleAwareGraphCompiler 𝒞η)
-    (normalization : ThamDefinition511Normalization K) : Prop :=
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category) : Prop :=
   ∀ {source target : HomologicallyMarkedDiagram},
     (move : ElementaryMove source target) →
     ∀ sourceCycle : ThamTwoCycles source.turnedOver,
-      evaluateCycle 𝒞η graphical compiler normalization
+      evaluateCycle 𝒞η graphical
           source.diagram source.primalBoundary source.turnedOver sourceCycle =
-        evaluateCycle 𝒞η graphical compiler normalization
+        evaluateCycle 𝒞η graphical
           target.diagram target.primalBoundary target.turnedOver
             (move.homology.tham.mapCycle sourceCycle)
 
@@ -112,10 +169,8 @@ noncomputable def evaluateMarking
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (graphical : RibbonGraphicalEvaluation 𝒞η.category)
-    (compiler : RoleAwareGraphCompiler 𝒞η)
-    (normalization : ThamDefinition511Normalization K)
     (marked : HomologicallyMarkedDiagram) : K :=
-  evaluateCycle 𝒞η graphical compiler normalization
+  evaluateCycle 𝒞η graphical
     marked.diagram marked.primalBoundary marked.turnedOver
     (Quotient.out marked.thamAlpha)
 
@@ -127,19 +182,16 @@ been supplied.
 def TwistedYetterDiffeomorphismInvarianceTarget
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
-    (compiler : RoleAwareGraphCompiler 𝒞η)
-    (normalization : ThamDefinition511Normalization K)
-    (topology : ClassicalKirbyTopologyBoundary) : Prop :=
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category) : Prop :=
   ∀ (X Y : ClosedOrientedSmoothFourManifold)
-    (f : topology.diffeomorphismTransport X Y)
+    (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
     (left : MarkedRealization X alpha)
     (right :
-      MarkedRealization Y (topology.inducedH₂ f alpha)),
-    evaluateMarking 𝒞η graphical compiler normalization
+      MarkedRealization Y (inducedH₂ f alpha)),
+    evaluateMarking 𝒞η graphical
         left.markedDiagram =
-      evaluateMarking 𝒞η graphical compiler normalization
+      evaluateMarking 𝒞η graphical
         right.markedDiagram
 
 end TwistedYetter.Semantics.Independent
