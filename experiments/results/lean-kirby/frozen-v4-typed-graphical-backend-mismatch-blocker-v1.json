@@ -1,0 +1,39 @@
+{
+  "schema": "frozen-v4-typed-graphical-backend-mismatch-blocker-v1",
+  "recorded_at_utc": "2026-07-29T14:57:21Z",
+  "parent_commit": "a95f1576980ad9535e8ef1e895ba26a3634dbb4e",
+  "status": "BLOCKED_FRONTEND_BACKEND_GRAPHICAL_TYPE_MISMATCH",
+  "frontend_checkpoint": {
+    "claim": "Algebra.lean and Graphical.lean independently typecheck",
+    "algebra_sha256": "977edf9e9a80d2ea7aadb053d6e4b7d2336b6ea8c94e2361cbad279a504d2ba0",
+    "graphical_sha256": "be2a4651a05a666529ee97e3eeb72fa1c9d8d1aee64c9986670e9c26af3b9d44",
+    "build_command": "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.Independent.Graphical",
+    "build_status": "PASS"
+  },
+  "first_backend_check": {
+    "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+    "command": "env LEAN_NUM_THREADS=1 lake -Kjobs=1 env lean lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+    "status": "FAIL",
+    "first_error_line": 150,
+    "first_error": "The backend expects an unindexed RibbonExpression, but frozen-v4 graphical semantics requires source and target objects.",
+    "dependent_errors": [
+      "Existing cut-open event compilation does not provide typed source and target objects.",
+      "Existing RoleAwareCompiledTerm stores an untyped graph.",
+      "Existing evaluator accepts a caller-supplied RibbonGraphicalEvaluation.",
+      "Existing normalization reads globalDimension from the former numerical skeleton instead of the derived category value."
+    ]
+  },
+  "semantic_decision": {
+    "frontend_modified_to_fit_backend": false,
+    "new_axiom_added_to_bridge_mismatch": false,
+    "v4_frozen": false,
+    "final_theorem_established": false,
+    "required_next_obligation": "Define a source/target-typed cut-open trace compiler and prove that each event transition produces a composable categorical morphism. This must be done in the backend without weakening the frozen frontend."
+  },
+  "non_claims": [
+    "This checkpoint is not frozen semantics v4.",
+    "The role-aware evaluator is not yet connected to the typed graphical semantics.",
+    "Representative independence and the eight local moves are not established.",
+    "The clean final theorem remains intentionally unproved."
+  ]
+}
