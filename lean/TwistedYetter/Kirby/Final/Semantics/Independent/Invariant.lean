@@ -65,11 +65,6 @@ structure ClassicalKirbyTopologyBoundary where
     ∀ {source target : HomologicallyMarkedDiagram},
       (move : ElementaryMove source target) →
       MoveRealizesStandardKirbyMove move
-  markedKirbyCerfCompleteness :
-    ∀ (X : ClosedOrientedSmoothFourManifold)
-      (alpha : ManifoldH₂ X)
-      (left right : MarkedRealization X alpha),
-      Nonempty (KirbyMovie left.markedDiagram right.markedDiagram)
   diffeomorphismTransport :
     (X Y : ClosedOrientedSmoothFourManifold) →
     Type
@@ -77,6 +72,22 @@ structure ClassicalKirbyTopologyBoundary where
     ∀ {X Y : ClosedOrientedSmoothFourManifold},
       diffeomorphismTransport X Y →
       ManifoldH₂ X ≃+ ManifoldH₂ Y
+  /--
+  Diffeomorphism-aware marked Kirby--Cerf completeness.
+
+  For a specified oriented diffeomorphism `f : X → Y`, the exact realization
+  of `(X, alpha)` and the exact realization of `(Y, f₀ alpha)` are connected by
+  a finite movie of the eight marked elementary moves.  This is a
+  category-neutral topology boundary: it contains no character, graphical
+  evaluator, or scalar equality.
+  -/
+  markedKirbyCerfCompleteness :
+    ∀ {X Y : ClosedOrientedSmoothFourManifold}
+      (f : diffeomorphismTransport X Y)
+      (alpha : ManifoldH₂ X)
+      (left : MarkedRealization X alpha)
+      (right : MarkedRealization Y (inducedH₂ f alpha)),
+      Nonempty (KirbyMovie left.markedDiagram right.markedDiagram)
 
 /--
 The independent local-move obligation.  It quantifies over all eight move
@@ -133,4 +144,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 6645
+-- semantic-freeze-padding: 655

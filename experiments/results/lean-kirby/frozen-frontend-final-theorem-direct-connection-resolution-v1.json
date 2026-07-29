@@ -1,0 +1,49 @@
+{
+  "schema": "frozen-frontend-final-theorem-direct-connection-resolution-v1",
+  "recorded_at_utc": "2026-07-29T06:39:08Z",
+  "content_hash": "sha256:8faf727e079f47c04a8b503fcef3a2dab0fa75bfde3b2afcd1f21e1dbf928873",
+  "resolves": "frozen-frontend-final-theorem-direct-connection-blocker-v1.json",
+  "status": "PASS_FROZEN_FRONTEND_FINAL_THEOREM_CONDITIONAL",
+  "frozen_manifest": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/semantic-freeze-combinatorial-v3.json",
+  "semantic_revision": {
+    "id": "DIFFEOMORPHISM_AWARE_MARKED_KIRBY_CERF_COMPLETENESS",
+    "frozen_file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean",
+    "topology_only": true,
+    "adds_evaluator_equality": false
+  },
+  "public_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "direct_frontend_evaluator": "TwistedYetter.Semantics.Independent.evaluateMarking",
+    "direct_frontend_target": "TwistedYetter.Semantics.Independent.TwistedYetterDiffeomorphismInvarianceTarget",
+    "backend_dependency": false,
+    "conformance_certificate_dependency": false,
+    "legacy_dependency": false
+  },
+  "verification": {
+    "full_build_command": "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build",
+    "full_build_status": "PASS",
+    "axiom_audit_status": "PASS_NO_SORRYAX_IN_FINAL_CLOSURE",
+    "final_axiom_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "TwistedYetter.Semantics.Independent.manifoldH₂_addCommGroup"
+    ],
+    "proof_hole_scan": "PASS_NO_SORRY_OR_ADMIT_IN_FROZEN_OR_PUBLIC_ROUTE"
+  },
+  "explicit_conditional_inputs": [
+    "RepresentativeIndependenceStatement for every marked diagram",
+    "LocalMoveInvarianceStatement for all frozen elementary moves",
+    "ClassicalKirbyTopologyBoundary, including diffeomorphism-aware marked Kirby-Cerf completeness"
+  ],
+  "admission": {
+    "ctl_admitted": false,
+    "reason": "CTL_VERIFICATION_BLOCKED_MISSING_SIBLING_PROVIDER"
+  },
+  "non_claims": [
+    "The explicit conditional inputs are not proved by this final theorem.",
+    "The removed legacy kirbyCerfMovie_transports_marking sorry was not independently proved.",
+    "No backend compute_correct theorem is established.",
+    "No numerical artifacts are recertified."
+  ]
+}

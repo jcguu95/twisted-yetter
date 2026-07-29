@@ -1,288 +1,161 @@
-import Mathlib.Algebra.Category.Grp.Basic
-import TwistedYetter.Kirby.DependentRoleAwareFourManifoldInvariant
+import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
 
 /-!
 # Public homologically twisted Yetter invariant
 
-The public inputs are exactly `⟨𝒞, η⟩` and `⟨X, α⟩`, with
-`α : H₂(X; ℤ)`.  Every internal presentation is indexed by the actual group
-`H₂(X)` of its manifold; there is no global auxiliary homology group.
+This public file has no second evaluator and no conformance detour.  Its final
+theorem speaks directly about the frozen independent frontend semantics.
 -/
 
 namespace TwistedYetter.Kirby.Final
 
-open CategoryTheory
-open TwistedYetter.Fusion.EGNO
-open TwistedYetter.Kirby.BoundaryStandardization
-open TwistedYetter.Kirby.DependentRoleAwareFourManifoldInvariant
-open TwistedYetter.Kirby.HomologicalFourManifoldInvariantFinalTarget
-open TwistedYetter.Kirby.RoleAwarePresentationEvaluation
-open TwistedYetter.Kirby.RoleAwareSpecialKirbyPresentation
+open TwistedYetter.Semantics.Independent
 
-universe uK uC vC uX
+universe uK
 
 noncomputable section
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-variable {C : Type uC} [Category.{vC} C] [Abelian C] [Linear K C]
-variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
-variable [MonoidalPreadditive C] [MonoidalLinear K C]
-variable {S : Type} [Fintype S] [DecidableEq S]
-
-/-! ## Classical smooth-manifold and homology boundary -/
-
-/-- The externally supplied type of closed oriented smooth four-manifolds. -/
-axiom ClosedOrientedSmoothFourManifold : Type uX
-
-/-- Integral second homology, separately for every manifold. -/
-axiom H₂ :
-  ClosedOrientedSmoothFourManifold → AddCommGrpCat.{uX}
-
-/-- Orientation-preserving diffeomorphisms form a groupoid. -/
-axiom orientedDiffeomorphism :
-  OrientedDiffeomorphismGroupoid.{uX, uX}
-    ClosedOrientedSmoothFourManifold
-
-/-- The induced additive equivalence on integral second homology. -/
-axiom inducedH₂
-    {X Y : ClosedOrientedSmoothFourManifold} :
-    orientedDiffeomorphism.Hom X Y →
-      H₂ X ≃+ H₂ Y
-
-/-- The identity diffeomorphism induces the identity map on `H₂`. -/
-axiom inducedH₂_identity
-    (X : ClosedOrientedSmoothFourManifold) :
-    inducedH₂ (orientedDiffeomorphism.identity X) =
-      AddEquiv.refl (H₂ X)
-
-/-- Induced maps on `H₂` respect composition. -/
-axiom inducedH₂_compose
-    {X Y Z : ClosedOrientedSmoothFourManifold}
-    (first : orientedDiffeomorphism.Hom X Y)
-    (second : orientedDiffeomorphism.Hom Y Z) :
-    inducedH₂ (orientedDiffeomorphism.compose first second) =
-      (inducedH₂ (X := X) (Y := Y) first).trans
-        (inducedH₂ (X := Y) (Y := Z) second)
-
-/-- The manifold/homology data used by the dependent descent theorem. -/
-abbrev fourManifoldGeometry :
-    HomologicalFourManifoldTheory.{uX, uX, uX} where
-  FourManifold := ClosedOrientedSmoothFourManifold
-  SecondHomology := fun X => H₂ X
-  secondHomologyAddCommGroup := fun _ => inferInstance
-  orientedDiffeomorphism := orientedDiffeomorphism
-  homologyMap := inducedH₂
-  homologyMap_identity := inducedH₂_identity
-  homologyMap_compose := inducedH₂_compose
-
-/-- The intrinsic pair `⟨X, α⟩`. -/
-abbrev HomologicalFourManifold :=
-  Σ X : ClosedOrientedSmoothFourManifold, H₂ X
-
-/-! ## Dependent special-Kirby topology boundary -/
-
-namespace SpecialKirbyHandleTheory
-
-namespace Axioms
 
 /--
-The category-neutral assertion that a certified role-aware diagram realizes
-the named manifold.  It contains no evaluator or scalar equality.
--/
-axiom Realizes
-    (X : ClosedOrientedSmoothFourManifold)
-    (presentation : Presentation (H₂ X)) :
-    Prop
+The public evaluator on one frozen-frontend marked diagram.
 
-/-- Every closed oriented smooth four-manifold has such a presentation. -/
-axiom presentationExists
-    (X : ClosedOrientedSmoothFourManifold) :
-    Nonempty
-      {presentation : Presentation (H₂ X) //
-        Realizes X presentation}
+This is exactly `Independent.evaluateMarking`; it is not a wrapper around the
+previous repository evaluator.
+-/
+abbrev TwistedYetter
+    (𝒞η : TwistedPremodularCategory K)
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
+    (compiler : RoleAwareGraphCompiler 𝒞η)
+    (normalization : ThamDefinition511Normalization K)
+    (marked : HomologicallyMarkedDiagram) : K :=
+  evaluateMarking 𝒞η graphical compiler normalization marked
 
 /--
-Marked Kirby--Cerf completeness after reindexing by the induced map on `H₂`.
+One frozen-frontend elementary move preserves evaluation.
 
-The result is an explicit finite movie of the eight certified local moves.
+The source representative is transported by the move's THAM-side chain map.
+Representative independence then identifies it with the representative chosen
+for the target marking.
 -/
-axiom kirbyCerfMovie
-    {X Y : ClosedOrientedSmoothFourManifold}
-    (f : orientedDiffeomorphism.Hom X Y)
-    (source : {presentation : Presentation (H₂ X) //
-      Realizes X presentation})
-    (target : {presentation : Presentation (H₂ Y) //
-      Realizes Y presentation}) :
-    Movie
-      (RoleAwarePresentationReindexing.reindex (inducedH₂ f) source.1)
-      target.1
+theorem elementaryMove_preserves_frontend_evaluation
+    (𝒞η : TwistedPremodularCategory K)
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
+    (compiler : RoleAwareGraphCompiler 𝒞η)
+    (normalization : ThamDefinition511Normalization K)
+    (representativeIndependent :
+      ∀ (marked : HomologicallyMarkedDiagram),
+        RepresentativeIndependenceStatement
+          𝒞η graphical compiler normalization
+          marked.diagram marked.primalBoundary marked.turnedOver)
+    (localInvariant :
+      LocalMoveInvarianceStatement 𝒞η graphical compiler normalization)
+    {source target : HomologicallyMarkedDiagram}
+    (move : ElementaryMove source target) :
+    TwistedYetter 𝒞η graphical compiler normalization source =
+      TwistedYetter 𝒞η graphical compiler normalization target := by
+  let sourceCycle : ThamTwoCycles source.turnedOver :=
+    Quotient.out source.thamAlpha
+  let transportedCycle : ThamTwoCycles target.turnedOver :=
+    move.homology.tham.mapCycle sourceCycle
+  let targetCycle : ThamTwoCycles target.turnedOver :=
+    Quotient.out target.thamAlpha
+  apply (localInvariant move sourceCycle).trans
+  apply representativeIndependent target transportedCycle targetCycle
+  change
+    move.homology.tham.inducedH₂
+        (thamCycleClass source.turnedOver sourceCycle) =
+      thamCycleClass target.turnedOver targetCycle
+  rw [show thamCycleClass source.turnedOver sourceCycle = source.thamAlpha by
+    exact Quotient.out_eq source.thamAlpha]
+  rw [show thamCycleClass target.turnedOver targetCycle = target.thamAlpha by
+    exact Quotient.out_eq target.thamAlpha]
+  exact move.thamMarkingTransport.symm
 
 /--
-The explicit movie transports the source marking to the target marking.
+A finite frozen-frontend Kirby movie preserves evaluation.
 
-This is a topology/homology statement only.  It cannot assert equality of
-category evaluations.
-
-This is deliberately a theorem-shaped proof obligation rather than an axiom.
-It should follow by combining:
-
-* Gompf--Stipsicz, Theorem 4.2.12, for the finite Cerf sequence;
-* Durst--Geiges--Kegel, Section 4, for the chain maps induced by handle slides
-  and cancelling-pair births/deaths; and
-* naturality of the handle-chain comparison with singular homology.
-
-We have not yet written that integration proof.  If the cited results do not
-support the exact marked statement for a prescribed diffeomorphism, this may
-have to be promoted back to an explicit topology axiom.  Until that decision
-is made, `sorry` keeps the unresolved proof boundary visible to `#print
-axioms`.
+This is derived by induction over the finite list of elementary stages; it is
+not an additional topology or evaluator axiom.
 -/
-theorem kirbyCerfMovie_transports_marking
-    {X Y : ClosedOrientedSmoothFourManifold}
-    (f : orientedDiffeomorphism.Hom X Y)
-    (source : {presentation : Presentation (H₂ X) //
-      Realizes X presentation})
-    (target : {presentation : Presentation (H₂ Y) //
-      Realizes Y presentation})
-    (alpha : H₂ X) :
-    (kirbyCerfMovie f source target).transport
-        (source.1.canonicalPresentation.topology.h2ModelEquiv.symm alpha) =
-      target.1.canonicalPresentation.topology.h2ModelEquiv.symm
-        (inducedH₂ f alpha) := by
-  sorry
+theorem kirbyMovie_preserves_frontend_evaluation
+    (𝒞η : TwistedPremodularCategory K)
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
+    (compiler : RoleAwareGraphCompiler 𝒞η)
+    (normalization : ThamDefinition511Normalization K)
+    (representativeIndependent :
+      ∀ (marked : HomologicallyMarkedDiagram),
+        RepresentativeIndependenceStatement
+          𝒞η graphical compiler normalization
+          marked.diagram marked.primalBoundary marked.turnedOver)
+    (localInvariant :
+      LocalMoveInvarianceStatement 𝒞η graphical compiler normalization)
+    {source target : HomologicallyMarkedDiagram}
+    (movie : KirbyMovie source target) :
+    TwistedYetter 𝒞η graphical compiler normalization source =
+      TwistedYetter 𝒞η graphical compiler normalization target := by
+  have step :
+      ∀ i : Fin movie.stageCount,
+        TwistedYetter 𝒞η graphical compiler normalization
+            (movie.stages i.castSucc) =
+          TwistedYetter 𝒞η graphical compiler normalization
+            (movie.stages i.succ) := by
+    intro i
+    exact elementaryMove_preserves_frontend_evaluation
+      𝒞η graphical compiler normalization
+      representativeIndependent localInvariant (movie.elementary i)
+  have fromStart :
+      ∀ i : Fin (movie.stageCount + 1),
+        TwistedYetter 𝒞η graphical compiler normalization
+            (movie.stages 0) =
+          TwistedYetter 𝒞η graphical compiler normalization
+            (movie.stages i) := by
+    intro i
+    induction i using Fin.induction with
+    | zero => rfl
+    | succ i inductionHypothesis =>
+        exact inductionHypothesis.trans (step i)
+  calc
+    TwistedYetter 𝒞η graphical compiler normalization source =
+        TwistedYetter 𝒞η graphical compiler normalization
+          (movie.stages 0) := by
+      rw [movie.startsAtSource]
+    _ = TwistedYetter 𝒞η graphical compiler normalization
+          (movie.stages (Fin.last movie.stageCount)) :=
+      fromStart (Fin.last movie.stageCount)
+    _ = TwistedYetter 𝒞η graphical compiler normalization target := by
+      rw [movie.endsAtTarget]
 
-end Axioms
+/--
+The final theorem is exactly the diffeomorphism-invariance target stated by the
+frozen frontend.
 
-/-- Assemble the four visible topology inputs into the dependent boundary. -/
-noncomputable def topologyBoundary :
-    TopologyBoundary fourManifoldGeometry where
-  Realizes := Axioms.Realizes
-  presentationExists := Axioms.presentationExists
-  movie := Axioms.kirbyCerfMovie
-  movie_transports_marking :=
-    Axioms.kirbyCerfMovie_transports_marking
-
-end SpecialKirbyHandleTheory
-
-/-! ## Public algebraic and manifold inputs -/
-
-/-- The intrinsic pair `⟨𝒞, η⟩` for a premodular fusion category. -/
-abbrev TwistedPremodularCategory :=
-  Σ 𝒞 : PremodularFusionCategory (K := K) (C := C) (S := S),
-    TensorIdentityAutomorphism C
-
-/-- The modular subcase, retained only for specialization. -/
-abbrev TwistedModularCategory :=
-  Σ 𝒞 : ModularFusionCategory (K := K) (C := C) (S := S),
-    TensorIdentityAutomorphism C
-
-namespace TwistedModularCategory
-
-/-- Forget S-matrix nondegeneracy and retain all ribbon-fusion data. -/
-def toPremodular
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S)) :
-    TwistedPremodularCategory (K := K) (C := C) (S := S) :=
-  ⟨𝒞η.1.premodular, 𝒞η.2⟩
-
-end TwistedModularCategory
-
-/-- One certified special Kirby presentation of the manifold in `Xα`. -/
-abbrev SpecialKirbyPresentation
-    (Xα : HomologicalFourManifold.{uX}) :=
-  SpecialKirbyHandleTheory.topologyBoundary.AdmissiblePresentation Xα.1
-
-/-- Every intrinsic pair has at least one certified special presentation. -/
-theorem specialKirbyPresentationExists
-    (Xα : HomologicalFourManifold.{uX}) :
-    Nonempty (SpecialKirbyPresentation Xα) :=
-  SpecialKirbyHandleTheory.Axioms.presentationExists Xα.1
-
-/-- Evaluate one accepted presentation with the displayed class `α`. -/
-noncomputable def specialKirbyEvaluation
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    {Xα : HomologicalFourManifold.{uX}}
-    (presentation : SpecialKirbyPresentation Xα) : K :=
-  roleAwareEvalH2 𝒞η.1 𝒞η.2 presentation.1
-    (presentation.1.canonicalPresentation.topology.h2ModelEquiv.symm Xα.2)
-
-/-- The homologically twisted Yetter invariant. -/
-noncomputable def TwistedYetter
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    (Xα : HomologicalFourManifold.{uX}) : K :=
-  SpecialKirbyHandleTheory.topologyBoundary.evaluate
-    𝒞η.1 𝒞η.2 Xα.1 Xα.2
-
-/-- The invariant agrees with every accepted special presentation. -/
-theorem TwistedYetter_on_specialKirbyPresentation
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    {Xα : HomologicalFourManifold.{uX}}
-    (presentation : SpecialKirbyPresentation Xα) :
-    TwistedYetter 𝒞η Xα =
-      specialKirbyEvaluation 𝒞η presentation := by
-  exact
-    SpecialKirbyHandleTheory.topologyBoundary
-      |>.evaluate_eq_admissiblePresentation
-        𝒞η.1 𝒞η.2 Xα.1 Xα.2 presentation
-
-/-- Diffeomorphism invariance with the class transported on actual `H₂`. -/
+There is deliberately no current-evaluator certificate in either the statement
+or the proof.
+-/
 theorem TwistedYetter_diffeomorphism_invariant
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    {X Y : ClosedOrientedSmoothFourManifold.{uX}}
-    (f : orientedDiffeomorphism.Hom X Y)
-    (alpha : H₂ X) :
-    TwistedYetter 𝒞η ⟨X, alpha⟩ =
-      TwistedYetter 𝒞η ⟨Y, inducedH₂ f alpha⟩ :=
-  SpecialKirbyHandleTheory.topologyBoundary
-    |>.evaluate_diffeomorphism_invariant 𝒞η.1 𝒞η.2 f alpha
-
-/-- Modular evaluation is the premodular invariant after specialization. -/
-noncomputable def TwistedYetterModular
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    (Xα : HomologicalFourManifold.{uX}) : K :=
-  TwistedYetter 𝒞η.toPremodular Xα
-
-/-- Modular invariance uses no proof beyond premodular specialization. -/
-theorem TwistedYetterModular_diffeomorphism_invariant
-    (𝒞η : TwistedModularCategory (K := K) (C := C) (S := S))
-    {X Y : ClosedOrientedSmoothFourManifold.{uX}}
-    (f : orientedDiffeomorphism.Hom X Y)
-    (alpha : H₂ X) :
-    TwistedYetterModular 𝒞η ⟨X, alpha⟩ =
-      TwistedYetterModular 𝒞η ⟨Y, inducedH₂ f alpha⟩ :=
-  TwistedYetter_diffeomorphism_invariant 𝒞η.toPremodular f alpha
-
-namespace TwistedYetter
-
-/-- An optional executable presentation-level implementation. -/
-class Computable
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S)) where
-  compute :
-    {Xα : HomologicalFourManifold.{uX}} →
-      SpecialKirbyPresentation Xα → K
-  correct :
-    {Xα : HomologicalFourManifold.{uX}} →
-      (presentation : SpecialKirbyPresentation Xα) →
-        TwistedYetter 𝒞η Xα = compute presentation
-
-/-- Execute the installed implementation on one certified presentation. -/
-def compute
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    [implementation : Computable 𝒞η]
-    {Xα : HomologicalFourManifold.{uX}}
-    (presentation : SpecialKirbyPresentation Xα) : K :=
-  implementation.compute presentation
-
-/-- The correctness theorem supplied by the executable implementation. -/
-theorem compute_correct
-    (𝒞η : TwistedPremodularCategory (K := K) (C := C) (S := S))
-    [implementation : Computable 𝒞η]
-    {Xα : HomologicalFourManifold.{uX}}
-    (presentation : SpecialKirbyPresentation Xα) :
-    TwistedYetter 𝒞η Xα =
-      compute 𝒞η presentation :=
-  implementation.correct presentation
-
-end TwistedYetter
+    (𝒞η : TwistedPremodularCategory K)
+    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
+    (compiler : RoleAwareGraphCompiler 𝒞η)
+    (normalization : ThamDefinition511Normalization K)
+    (representativeIndependent :
+      ∀ (marked : HomologicallyMarkedDiagram),
+        RepresentativeIndependenceStatement
+          𝒞η graphical compiler normalization
+          marked.diagram marked.primalBoundary marked.turnedOver)
+    (localInvariant :
+      LocalMoveInvarianceStatement 𝒞η graphical compiler normalization)
+    (topology : ClassicalKirbyTopologyBoundary) :
+    TwistedYetterDiffeomorphismInvarianceTarget
+      𝒞η graphical compiler normalization topology := by
+  intro X Y f alpha left right
+  obtain ⟨movie⟩ :=
+    ClassicalKirbyTopologyBoundary.markedKirbyCerfCompleteness
+      topology f alpha left right
+  exact
+    kirbyMovie_preserves_frontend_evaluation
+      𝒞η graphical compiler normalization
+      representativeIndependent localInvariant movie
 
 end
 
