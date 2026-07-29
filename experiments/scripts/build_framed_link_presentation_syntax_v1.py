@@ -63,7 +63,6 @@ LEAN_BUILD_ORDER = [
         "lean/TwistedYetter/Kirby/Final/Semantics/"
         "CombinatorialSemanticComparison.lean"
     ),
-    "lean/TwistedYetter.lean",
 ]
 MUTATIONS = [
     "lean/Mutations/MissingPresentationAdmission.lean",

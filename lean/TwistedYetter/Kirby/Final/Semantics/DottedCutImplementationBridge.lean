@@ -108,7 +108,7 @@ structure DottedCutTopologyCertificate
   every_raw_cut_represented :
     ∀ cut ∈ formal.raw.dottedCuts,
       ∃ (dotted : trace.ComponentId)
-          (dottedRole : (trace.components dotted).role = .dotted),
+          (_dottedRole : (trace.components dotted).role = .dotted),
         indexing.componentName dotted = cut.dottedComponentId
   punctures_complete_without_duplicate_occurrences :
     PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
