@@ -37,6 +37,10 @@ inductive PunctureDirection
   | againstDiskOrientation
   deriving DecidableEq, Repr
 
+def PunctureDirection.characterExponentSign : PunctureDirection → ℤ
+  | .withDiskOrientation => 1
+  | .againstDiskOrientation => -1
+
 structure Component where
   role : ComponentRole
   orientation : StrandOrientation
@@ -146,8 +150,8 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
     (trace.components twoHandleComponent).role ≠ .dotted
   strand_on_two_handle :
     (trace.strands strand).component = twoHandleComponent
-  exponent_is_orientation_sign :
-    characterExponentSign = 1 ∨ characterExponentSign = -1
+  exponent_matches_direction :
+    characterExponentSign = direction.characterExponentSign
 
 /--
 The category-neutral event language of the tangle obtained after cutting all
@@ -340,4 +344,4 @@ axiom dottedCutWords_topologicallyRealizable
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1617
+-- semantic-freeze-padding: 1595

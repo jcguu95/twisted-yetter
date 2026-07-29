@@ -268,3 +268,5 @@ axiom shum_framedRibbonCoherence
     left.interpret = right.interpret
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 4974

@@ -38,12 +38,20 @@ theorem puncture_two_handle_cannot_be_dotted
       ComponentRole.dotted :=
   puncture.two_handle_role
 
+theorem puncture_exponent_matches_direction
+    {trace : CombinatorialLinkTrace}
+    (puncture : DottedPuncture trace) :
+    puncture.characterExponentSign =
+      puncture.direction.characterExponentSign :=
+  puncture.exponent_matches_direction
+
 theorem puncture_exponent_is_signed
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
     puncture.characterExponentSign = 1 ∨
-      puncture.characterExponentSign = -1 :=
-  puncture.exponent_is_orientation_sign
+      puncture.characterExponentSign = -1 := by
+  rw [puncture.exponent_matches_direction]
+  cases puncture.direction <;> simp [PunctureDirection.characterExponentSign]
 
 theorem handle_counts_are_exact_equivalences
     (diagram : CombinatorialSpecialKirbyDiagram) :
