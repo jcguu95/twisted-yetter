@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.Presentation
+import TwistedYetter.Kirby.Final.Semantics.DottedCutImplementationBridge
 
 /-!
 # Kernel regressions for the shared presentation schema
@@ -99,6 +100,89 @@ def unknownFieldJson : Json :=
 theorem unknown_json_field_rejected :
     RawPresentation.fromJson unknownFieldJson =
       Except.error "presentation keys mismatch" := by
+  rfl
+
+def dottedComponent : ComponentSpec :=
+  {
+    componentId := "D0"
+    role := .dotted
+    orientation := .positive
+    integerFraming := 0
+    blackboardWrithe := 0
+    framingCorrection := 0
+    kirbyLabel := "dotted-one-handle"
+  }
+
+def rawPositivePuncture : RawDottedPuncture :=
+  {
+    twoHandleComponentId := "K0"
+    strandId := "K0+"
+    direction := .withDiskOrientation
+    characterExponentSign := 1
+    cutPosition := 0
+  }
+
+def rawNegativePuncture : RawDottedPuncture :=
+  {
+    twoHandleComponentId := "K0"
+    strandId := "K0+"
+    direction := .againstDiskOrientation
+    characterExponentSign := -1
+    cutPosition := 1
+  }
+
+def rawDottedCut : RawDottedCut :=
+  {
+    dottedComponentId := "D0"
+    punctures := [rawPositivePuncture, rawNegativePuncture]
+    topologyCertificateHash :=
+      "sha256:4ee9e951cf4b86d35e81c4bf32ddd9b27733faeb82a273466fe38f1a73461670"
+    sourceRefs := ["ref:synthetic-dotted-cut"]
+    sourceLocator := "D0 puncture positions 0-1"
+  }
+
+def dottedCutFixture : RawPresentation :=
+  {
+    roundTripFixture with
+    components := roundTripFixture.components ++ [dottedComponent]
+    dottedCuts := [rawDottedCut]
+  }
+
+def wrongSignFixture : RawPresentation :=
+  {
+    dottedCutFixture with
+    dottedCuts := [
+      {
+        rawDottedCut with
+        punctures := [
+          { rawPositivePuncture with characterExponentSign := -1 }
+        ]
+      }
+    ]
+  }
+
+def wrongOrderFixture : RawPresentation :=
+  {
+    dottedCutFixture with
+    dottedCuts := [
+      {
+        rawDottedCut with
+        punctures := [
+          { rawPositivePuncture with cutPosition := 1 }
+        ]
+      }
+    ]
+  }
+
+theorem repeated_strand_occurrences_are_counted_separately :
+    TwistedYetter.Kirby.Final.DottedCutImplementationBridge.signedMultiplicity
+        [rawPositivePuncture, rawNegativePuncture] = 0 := by
+  rfl
+
+theorem puncture_direction_conversion_is_exact :
+    TwistedYetter.Kirby.Final.DottedCutImplementationBridge.punctureDirection
+        rawNegativePuncture.direction =
+      TwistedYetter.Semantics.Independent.PunctureDirection.againstDiskOrientation := by
   rfl
 
 end TwistedYetter.Kirby.PresentationSchemaRegression

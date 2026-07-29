@@ -9,12 +9,16 @@ from typing import Any
 
 
 # The module path remains stable for existing callers; formal payloads use the
-# fail-closed v2 schema with explicit coupon input and output words.
-SCHEMA = "twisted-yetter.kirby-presentation.v2"
+# fail-closed v3 schema with coupon words and exact dotted puncture words.
+SCHEMA = "twisted-yetter.kirby-presentation.v3"
 SHA256_PREFIX = "sha256:"
 ROLES = {"ordinary", "dotted", "specially_dotted"}
 ORIENTATIONS = {"positive", "negative"}
 SIGNS = {-1, 1}
+PUNCTURE_DIRECTIONS = {
+    "with_disk_orientation": 1,
+    "against_disk_orientation": -1,
+}
 
 TOP_LEVEL_KEYS = {
     "schema",
@@ -25,6 +29,7 @@ TOP_LEVEL_KEYS = {
     "components",
     "events",
     "declared_slices",
+    "dotted_cuts",
     "content_hash",
 }
 COMPONENT_KEYS = {
@@ -38,6 +43,20 @@ COMPONENT_KEYS = {
 }
 SLICE_KEYS = {"index", "active_strands"}
 STRAND_KEYS = {"strand_id", "component_id", "orientation"}
+DOTTED_CUT_KEYS = {
+    "dotted_component_id",
+    "punctures",
+    "topology_certificate_hash",
+    "source_refs",
+    "source_locator",
+}
+DOTTED_PUNCTURE_KEYS = {
+    "two_handle_component_id",
+    "strand_id",
+    "direction",
+    "character_exponent_sign",
+    "cut_position",
+}
 EVENT_KEYS = {
     "birth": {
         "event_id",
@@ -444,12 +463,15 @@ def validate_presentation(payload: dict[str, Any]) -> None:
     components = payload["components"]
     events = payload["events"]
     declared_slices = payload["declared_slices"]
+    dotted_cuts = payload["dotted_cuts"]
     if not isinstance(components, list) or not components:
         raise PresentationValidationError("component registry must be nonempty")
     if not isinstance(events, list) or not events:
         raise PresentationValidationError("event list must be nonempty")
     if not isinstance(declared_slices, list):
         raise PresentationValidationError("declared slices must be a list")
+    if not isinstance(dotted_cuts, list):
+        raise PresentationValidationError("dotted_cuts must be a list")
 
     component_ids: list[str] = []
     for index, component in enumerate(components):
@@ -541,6 +563,144 @@ def validate_presentation(payload: dict[str, Any]) -> None:
     if declared_slices != slices:
         raise PresentationValidationError(
             "declared Morse slices do not match event execution"
+        )
+
+    strand_registry: dict[str, dict[str, str]] = {}
+    for event in events:
+        if event["kind"] == "birth":
+            for strand_id, orientation in (
+                (event["positive_strand"], "positive"),
+                (event["negative_strand"], "negative"),
+            ):
+                strand_registry[strand_id] = {
+                    "strand_id": strand_id,
+                    "component_id": event["component_id"],
+                    "orientation": orientation,
+                }
+        elif event["kind"] == "coupon":
+            for strand in event["output_strands"]:
+                strand_registry[strand["strand_id"]] = strand
+
+    dotted_component_ids = {
+        component["component_id"]
+        for component in components
+        if component["role"] == "dotted"
+    }
+    cut_component_ids: list[str] = []
+    for cut_index, cut in enumerate(dotted_cuts):
+        if not isinstance(cut, dict):
+            raise PresentationValidationError(
+                f"dotted cut {cut_index} is not an object"
+            )
+        _require_exact_keys(cut, DOTTED_CUT_KEYS, f"dotted cut {cut_index}")
+        dotted_component_id = _require_nonempty_string(
+            cut["dotted_component_id"],
+            f"dotted cut {cut_index} component ID",
+        )
+        cut_component_ids.append(dotted_component_id)
+        component = next(
+            (
+                item
+                for item in components
+                if item["component_id"] == dotted_component_id
+            ),
+            None,
+        )
+        if component is None:
+            raise PresentationValidationError(
+                f"dotted cut references unknown component {dotted_component_id}"
+            )
+        if component["role"] != "dotted":
+            raise PresentationValidationError(
+                "only a literal dotted component may own a dotted cut"
+            )
+        punctures = cut["punctures"]
+        if not isinstance(punctures, list):
+            raise PresentationValidationError(
+                f"dotted cut {dotted_component_id} punctures must be a list"
+            )
+        _require_sha256(
+            cut["topology_certificate_hash"],
+            f"dotted cut {dotted_component_id} topology certificate",
+        )
+        source_refs = cut["source_refs"]
+        if (
+            not isinstance(source_refs, list)
+            or not source_refs
+            or not all(isinstance(ref, str) and ref for ref in source_refs)
+        ):
+            raise PresentationValidationError(
+                "dotted cut certificate source_refs must be nonempty"
+            )
+        _require_nonempty_string(
+            cut["source_locator"],
+            f"dotted cut {dotted_component_id} source locator",
+        )
+        for position, puncture in enumerate(punctures):
+            if not isinstance(puncture, dict):
+                raise PresentationValidationError(
+                    f"dotted puncture {position} is not an object"
+                )
+            _require_exact_keys(
+                puncture,
+                DOTTED_PUNCTURE_KEYS,
+                f"dotted puncture {position}",
+            )
+            if puncture["cut_position"] != position:
+                raise PresentationValidationError(
+                    "dotted puncture cut_position must equal its list index"
+                )
+            two_handle_id = _require_nonempty_string(
+                puncture["two_handle_component_id"],
+                f"dotted puncture {position} two-handle component ID",
+            )
+            two_handle = next(
+                (
+                    item
+                    for item in components
+                    if item["component_id"] == two_handle_id
+                ),
+                None,
+            )
+            if two_handle is None:
+                raise PresentationValidationError(
+                    f"dotted puncture references unknown component {two_handle_id}"
+                )
+            if two_handle["role"] == "dotted":
+                raise PresentationValidationError(
+                    "dotted puncture must belong to a non-dotted two-handle"
+                )
+            strand_id = _require_nonempty_string(
+                puncture["strand_id"],
+                f"dotted puncture {position} strand ID",
+            )
+            strand = strand_registry.get(strand_id)
+            if strand is None:
+                raise PresentationValidationError(
+                    f"dotted puncture references unknown strand {strand_id}"
+                )
+            if strand["component_id"] != two_handle_id:
+                raise PresentationValidationError(
+                    "dotted puncture strand/component ownership mismatch"
+                )
+            direction = puncture["direction"]
+            if direction not in PUNCTURE_DIRECTIONS:
+                raise PresentationValidationError(
+                    f"dotted puncture {position} has unknown direction"
+                )
+            sign = puncture["character_exponent_sign"]
+            if (
+                not isinstance(sign, int)
+                or isinstance(sign, bool)
+                or sign != PUNCTURE_DIRECTIONS[direction]
+            ):
+                raise PresentationValidationError(
+                    "dotted puncture direction/exponent sign convention mismatch"
+                )
+    _require_unique(cut_component_ids, "dotted cut registry")
+    if set(cut_component_ids) != dotted_component_ids:
+        raise PresentationValidationError(
+            "every literal dotted component must have exactly one cut record"
         )
 
     observed_hash = _require_sha256(payload["content_hash"], "content hash")
@@ -704,6 +864,38 @@ def build_reference_fixture() -> dict[str, Any]:
                 "first_strand": "K0-",
                 "second_strand": "K0+",
             },
+        ],
+        "dotted_cuts": [
+            {
+                "dotted_component_id": "D0",
+                "punctures": [
+                    {
+                        "two_handle_component_id": "K0",
+                        "strand_id": "K0+",
+                        "direction": "with_disk_orientation",
+                        "character_exponent_sign": 1,
+                        "cut_position": 0,
+                    },
+                    {
+                        "two_handle_component_id": "S0",
+                        "strand_id": "S0+",
+                        "direction": "against_disk_orientation",
+                        "character_exponent_sign": -1,
+                        "cut_position": 1,
+                    },
+                ],
+                "topology_certificate_hash": (
+                    "sha256:"
+                    "4ee9e951cf4b86d35e81c4bf32ddd9b27733faeb82a273"
+                    "466fe38f1a73461670"
+                ),
+                "source_refs": [
+                    "ref:synthetic-dotted-cut-topology-certificate"
+                ],
+                "source_locator": (
+                    "fixture D0 ordered puncture word, positions 0-1"
+                ),
+            }
         ],
     }
     body["declared_slices"] = materialize_declared_slices(body)

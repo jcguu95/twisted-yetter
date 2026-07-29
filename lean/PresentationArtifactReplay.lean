@@ -17,7 +17,7 @@ open TwistedYetter.Kirby.Presentation
 open TwistedYetter.Kirby.PresentationExecutionTrace
 
 def expectedFixtureContentHash : String :=
-  "sha256:42eef430c68ffdc02d687958e0e1d702c3cee7ba3638cc15b664985c8e6779aa"
+  "sha256:1362a4b9836f2eb127f91e8ce795ecc48825ef714494f341a55733c915458038"
 
 def fail (message : String) : IO α :=
   throw (IO.userError message)
@@ -51,6 +51,14 @@ def main (args : List String) : IO Unit := do
     fail "unexpected fixture event count"
   unless formal.raw.declaredSlices.length == 13 do
     fail "unexpected fixture slice count"
+  unless formal.raw.dottedCuts.length == 1 do
+    fail "unexpected dotted cut count"
+  let cut ←
+    match formal.raw.dottedCuts with
+    | [cut] => pure cut
+    | _ => fail "fixture does not contain exactly one dotted cut"
+  unless cut.punctures.length == 2 do
+    fail "unexpected dotted puncture count"
   unless execution.trace.stepCount == 12 do
     fail "typed execution trace did not execute all 12 events"
   unless execution.trace.states.length == 13 do
@@ -75,8 +83,56 @@ def main (args : List String) : IO Unit := do
   | .error message =>
       fail ("unknown-field mutation failed for the wrong reason: " ++ message)
   | .ok _ => fail "unknown presentation field was silently admitted"
+  let staleV2 :=
+    (json.setObjVal! "schema" "twisted-yetter.kirby-presentation.v2")
+  match FormalPresentation.fromJson staleV2 with
+  | .error "unsupported presentation schema" => pure ()
+  | .error message =>
+      fail ("v2 mutation failed for the wrong reason: " ++ message)
+  | .ok _ => fail "v2 payload was silently migrated"
+  let puncture ←
+    match cut.punctures with
+    | puncture :: _ => pure puncture
+    | [] => fail "fixture dotted cut has no puncture"
+  let wrongSign : RawPresentation :=
+    {
+      formal.raw with
+      dottedCuts := [
+        {
+          cut with
+          punctures := [
+            { puncture with characterExponentSign := -1 }
+          ]
+        }
+      ]
+    }
+  match wrongSign.validateDottedCuts with
+  | .error
+      "dotted puncture direction/exponent sign convention mismatch" =>
+      pure ()
+  | .error message =>
+      fail ("wrong-sign mutation failed for the wrong reason: " ++ message)
+  | .ok () => fail "wrong dotted puncture sign was silently admitted"
+  let wrongPosition : RawPresentation :=
+    {
+      formal.raw with
+      dottedCuts := [
+        {
+          cut with
+          punctures := [
+            { puncture with cutPosition := 1 }
+          ]
+        }
+      ]
+    }
+  match wrongPosition.validateDottedCuts with
+  | .error "dotted puncture cut_position must equal its list index" =>
+      pure ()
+  | .error message =>
+      fail ("wrong-position mutation failed for the wrong reason: " ++ message)
+  | .ok () => fail "wrong dotted puncture position was silently admitted"
   IO.println
-    ("PASS Lean replay + closed typed trace + 2 fail-closed mutations: " ++
+    ("PASS Lean replay + closed typed trace + 5 fail-closed mutations: " ++
       "events=12 slices=13 trace_steps=12 content_hash=" ++
       formal.pinnedSourceHash)
 

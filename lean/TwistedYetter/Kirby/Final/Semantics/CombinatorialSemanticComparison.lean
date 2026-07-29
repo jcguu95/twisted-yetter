@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
+import TwistedYetter.Kirby.Final.Semantics.DottedCutImplementationBridge
 import TwistedYetter.Kirby.Presentation
 
 /-!
@@ -58,14 +59,14 @@ abbrev RequiredTotalBridge :=
     TwistedYetter.Semantics.Independent.CombinatorialSpecialKirbyDiagram
 
 inductive CurrentBridgeBlocker
-  | dottedPunctureWordsMissing
+  | punctureDirectionSignRelationNotNormative
   | closingThreeHandleDataMissing
   | primalDualHomologyConventionMismatch
   deriving DecidableEq, Repr
 
 def currentBridgeBlockers : List CurrentBridgeBlocker :=
   [
-    .dottedPunctureWordsMissing,
+    .punctureDirectionSignRelationNotNormative,
     .closingThreeHandleDataMissing,
     .primalDualHomologyConventionMismatch
   ]
@@ -73,6 +74,19 @@ def currentBridgeBlockers : List CurrentBridgeBlocker :=
 theorem currentBridgeBlockers_completeList :
     currentBridgeBlockers.length = 3 :=
   rfl
+
+/--
+The v3 implementation supplies the exact ordered words.  The remaining sign
+blocker is narrower: the frozen semantics only requires `±1`, whereas the v3
+validator fixes which sign belongs to each disk orientation.
+-/
+abbrev CertifiedDottedPresentation :=
+  DottedCutImplementationBridge.CertifiedDottedPresentation
+
+def dottedCutData
+    (certified : CertifiedDottedPresentation) :
+    TwistedYetter.Semantics.Independent.DottedCutData certified.trace :=
+  certified.toDottedCutData
 
 /--
 The first comparison gap is closed by the v2 raw syntax itself: every coupon

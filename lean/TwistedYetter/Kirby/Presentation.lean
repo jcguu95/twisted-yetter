@@ -34,6 +34,12 @@ inductive CrossingSign
   | negative
   deriving Repr, BEq, DecidableEq
 
+/-- Direction in which a two-handle strand punctures an oriented dotted disk. -/
+inductive PunctureDirection
+  | withDiskOrientation
+  | againstDiskOrientation
+  deriving Repr, BEq, DecidableEq
+
 /-- Immutable metadata for one closed component. -/
 structure ComponentSpec where
   componentId : String
@@ -111,6 +117,27 @@ structure DeclaredSlice where
   activeStrands : List StrandState
   deriving Repr, BEq, DecidableEq
 
+/-- One exact occurrence in the ordered puncture word of a dotted disk. -/
+structure RawDottedPuncture where
+  twoHandleComponentId : String
+  strandId : String
+  direction : PunctureDirection
+  characterExponentSign : Int
+  cutPosition : Nat
+  deriving Repr, BEq, DecidableEq
+
+/--
+Serialized dotted-disk data.  Provenance identifies the external topology
+certificate, but does not itself prove the certificate's propositions.
+-/
+structure RawDottedCut where
+  dottedComponentId : String
+  punctures : List RawDottedPuncture
+  topologyCertificateHash : String
+  sourceRefs : List String
+  sourceLocator : String
+  deriving Repr, BEq, DecidableEq
+
 /--
 Raw presentation matching the repository's canonical Python schema.
 
@@ -126,12 +153,13 @@ structure RawPresentation where
   components : List ComponentSpec
   events : List SliceEvent
   declaredSlices : List DeclaredSlice
+  dottedCuts : List RawDottedCut
   contentHash : String
   deriving Repr, BEq, DecidableEq
 
 namespace RawPresentation
 
-def expectedSchema : String := "twisted-yetter.kirby-presentation.v2"
+def expectedSchema : String := "twisted-yetter.kirby-presentation.v3"
 
 def stringIdsUnique (ids : List String) : Bool :=
   ids.eraseDups.length == ids.length
@@ -288,6 +316,10 @@ def SliceEvent.definedStrands : SliceEvent → List StrandState
 def strandDefinitions (raw : RawPresentation) : List StrandState :=
   raw.events.flatMap SliceEvent.definedStrands
 
+def strandDefinition? (raw : RawPresentation) (strandId : String) :
+    Option StrandState :=
+  raw.strandDefinitions.find? (fun strand => strand.strandId == strandId)
+
 /--
 A strand ID is a global lineage name. Every event that defines the same name
 must therefore give it exactly the same component and orientation metadata.
@@ -304,6 +336,63 @@ def everyComponentBornAndClosed (raw : RawPresentation) : Bool :=
       event.bornComponent? == some component.componentId) &&
     raw.events.any (fun event =>
       event.deadComponent? == some component.componentId))
+
+def expectedExponentSign : PunctureDirection → Int
+  | .withDiskOrientation => 1
+  | .againstDiskOrientation => -1
+
+/--
+Validate the exact ordered puncture words.  Occurrences, not strand IDs, are
+the units of the word, so one strand may legitimately appear more than once.
+-/
+def validateDottedCuts (raw : RawPresentation) : Except String Unit := do
+  let dottedIds :=
+    (raw.components.filter (fun component => component.role == .dotted)).map
+      ComponentSpec.componentId
+  let cutIds := raw.dottedCuts.map RawDottedCut.dottedComponentId
+  if !stringIdsUnique cutIds then
+    throw "dotted cut registry contains duplicate component IDs"
+  if cutIds.length != dottedIds.length then
+    throw "every literal dotted component must have exactly one cut record"
+  for dottedId in dottedIds do
+    if !(cutIds.contains dottedId) then
+      throw "a literal dotted component is missing its cut record"
+  for cut in raw.dottedCuts do
+    let dottedComponent ←
+      requireSome
+        ("dotted cut references unknown component: " ++
+          cut.dottedComponentId)
+        (raw.component? cut.dottedComponentId)
+    if dottedComponent.role != .dotted then
+      throw "only a literal dotted component may own a dotted cut"
+    if !sha256Shape cut.topologyCertificateHash then
+      throw "dotted cut topology certificate must be a sha256 content hash"
+    if cut.sourceRefs.isEmpty ||
+        cut.sourceRefs.any String.isEmpty ||
+        cut.sourceLocator.isEmpty then
+      throw "dotted cut certificate provenance must be complete"
+    for entry in cut.punctures.zipIdx do
+      let puncture := entry.1
+      let index := entry.2
+      if puncture.cutPosition != index then
+        throw "dotted puncture cut_position must equal its list index"
+      let twoHandle ←
+        requireSome
+          ("dotted puncture references unknown component: " ++
+            puncture.twoHandleComponentId)
+          (raw.component? puncture.twoHandleComponentId)
+      if twoHandle.role == .dotted then
+        throw "dotted puncture must belong to a non-dotted two-handle"
+      let strand ←
+        requireSome
+          ("dotted puncture references unknown strand: " ++
+            puncture.strandId)
+          (raw.strandDefinition? puncture.strandId)
+      if strand.componentId != puncture.twoHandleComponentId then
+        throw "dotted puncture strand/component ownership mismatch"
+      if puncture.characterExponentSign !=
+          expectedExponentSign puncture.direction then
+        throw "dotted puncture direction/exponent sign convention mismatch"
 
 /-- Validate coupon metadata without computing its boundary transition. -/
 def validateCouponMetadata
@@ -585,6 +674,7 @@ def validate (raw : RawPresentation) : Except String Unit := do
     throw "a strand ID has conflicting component or orientation metadata"
   if !raw.everyComponentBornAndClosed then
     throw "every component must have recorded birth and death lineage"
+  raw.validateDottedCuts
   let slices ← raw.runEvents
   if raw.declaredSlices != declareSlicesFrom 0 slices then
     throw "declared Morse slices do not match event execution"
@@ -637,6 +727,11 @@ def parseSign : Int → Except String CrossingSign
   | -1 => return .negative
   | _ => throw "crossing or twist sign must be exactly -1 or 1"
 
+def parsePunctureDirection : String → Except String PunctureDirection
+  | "with_disk_orientation" => return .withDiskOrientation
+  | "against_disk_orientation" => return .againstDiskOrientation
+  | _ => throw "unknown dotted puncture direction"
+
 def parseComponent (json : Json) : Except String ComponentSpec := do
   requireExactKeys json [
     "component_id",
@@ -675,6 +770,42 @@ def parseDeclaredSlice (json : Json) : Except String DeclaredSlice := do
   return {
     index := ← getNat json "index"
     activeStrands := ← strandJsons.toList.mapM parseStrand
+  }
+
+def parseDottedPuncture (json : Json) :
+    Except String RawDottedPuncture := do
+  requireExactKeys json [
+    "two_handle_component_id",
+    "strand_id",
+    "direction",
+    "character_exponent_sign",
+    "cut_position"
+  ] "dotted puncture"
+  return {
+    twoHandleComponentId := ← getString json "two_handle_component_id"
+    strandId := ← getString json "strand_id"
+    direction :=
+      ← parsePunctureDirection (← getString json "direction")
+    characterExponentSign := ← getInt json "character_exponent_sign"
+    cutPosition := ← getNat json "cut_position"
+  }
+
+def parseDottedCut (json : Json) : Except String RawDottedCut := do
+  requireExactKeys json [
+    "dotted_component_id",
+    "punctures",
+    "topology_certificate_hash",
+    "source_refs",
+    "source_locator"
+  ] "dotted cut"
+  let punctureJsons ← (← json.getObjVal? "punctures").getArr?
+  return {
+    dottedComponentId := ← getString json "dotted_component_id"
+    punctures := ← punctureJsons.toList.mapM parseDottedPuncture
+    topologyCertificateHash :=
+      ← getString json "topology_certificate_hash"
+    sourceRefs := ← getStringList json "source_refs"
+    sourceLocator := ← getString json "source_locator"
   }
 
 def parseEvent (json : Json) : Except String SliceEvent := do
@@ -775,11 +906,13 @@ def fromJson (json : Json) : Except String RawPresentation := do
     "components",
     "events",
     "declared_slices",
+    "dotted_cuts",
     "content_hash"
   ] "presentation"
   let componentJsons ← (← json.getObjVal? "components").getArr?
   let eventJsons ← (← json.getObjVal? "events").getArr?
   let sliceJsons ← (← json.getObjVal? "declared_slices").getArr?
+  let cutJsons ← (← json.getObjVal? "dotted_cuts").getArr?
   return {
     schema := ← getString json "schema"
     presentationId := ← getString json "presentation_id"
@@ -789,6 +922,7 @@ def fromJson (json : Json) : Except String RawPresentation := do
     components := ← componentJsons.toList.mapM parseComponent
     events := ← eventJsons.toList.mapM parseEvent
     declaredSlices := ← sliceJsons.toList.mapM parseDeclaredSlice
+    dottedCuts := ← cutJsons.toList.mapM parseDottedCut
     contentHash := ← getString json "content_hash"
   }
 
@@ -804,6 +938,10 @@ def orientationJson : Orientation → Json
 def signJson : CrossingSign → Json
   | .positive => (1 : Int)
   | .negative => (-1 : Int)
+
+def punctureDirectionJson : PunctureDirection → Json
+  | .withDiskOrientation => "with_disk_orientation"
+  | .againstDiskOrientation => "against_disk_orientation"
 
 def componentJson (component : ComponentSpec) : Json :=
   Json.mkObj [
@@ -828,6 +966,25 @@ def declaredSliceJson (slice : DeclaredSlice) : Json :=
     ("index", slice.index),
     ("active_strands",
       Json.arr (slice.activeStrands.map strandJson).toArray)
+  ]
+
+def dottedPunctureJson (puncture : RawDottedPuncture) : Json :=
+  Json.mkObj [
+    ("two_handle_component_id", puncture.twoHandleComponentId),
+    ("strand_id", puncture.strandId),
+    ("direction", punctureDirectionJson puncture.direction),
+    ("character_exponent_sign", puncture.characterExponentSign),
+    ("cut_position", puncture.cutPosition)
+  ]
+
+def dottedCutJson (cut : RawDottedCut) : Json :=
+  Json.mkObj [
+    ("dotted_component_id", cut.dottedComponentId),
+    ("punctures",
+      Json.arr (cut.punctures.map dottedPunctureJson).toArray),
+    ("topology_certificate_hash", cut.topologyCertificateHash),
+    ("source_refs", Lean.toJson cut.sourceRefs),
+    ("source_locator", cut.sourceLocator)
   ]
 
 def eventJson : SliceEvent → Json
@@ -893,6 +1050,7 @@ def toJson (raw : RawPresentation) : Json :=
     ("events", Json.arr (raw.events.map eventJson).toArray),
     ("declared_slices",
       Json.arr (raw.declaredSlices.map declaredSliceJson).toArray),
+    ("dotted_cuts", Json.arr (raw.dottedCuts.map dottedCutJson).toArray),
     ("content_hash", raw.contentHash)
   ]
 
@@ -905,14 +1063,23 @@ the underlying raw schema has no mutable alias.
 structure FormalPresentation where
   raw : RawPresentation
   admitted : raw.validate = Except.ok ()
+  dottedCutsAdmitted : raw.validateDottedCuts = Except.ok ()
 
 namespace FormalPresentation
 
 /-- Accept a parsed payload only when the executable validator succeeds. -/
 def accept (raw : RawPresentation) : Except String FormalPresentation :=
-  match h : raw.validate with
-  | .ok () => .ok { raw := raw, admitted := h }
+  match cutWitness : raw.validateDottedCuts with
   | .error message => .error message
+  | .ok () =>
+      match witness : raw.validate with
+      | .ok () =>
+          .ok {
+            raw := raw
+            admitted := witness
+            dottedCutsAdmitted := cutWitness
+          }
+      | .error message => .error message
 
 /-- JSON parsing and formal admission are deliberately one fail-closed step. -/
 def fromJson (json : Json) : Except String FormalPresentation := do
@@ -931,6 +1098,11 @@ def provenanceSourceHash (formal : FormalPresentation) : String :=
 theorem validation_witness (formal : FormalPresentation) :
     formal.raw.validate = Except.ok () :=
   formal.admitted
+
+/-- Formal inputs also expose the exact dotted-cut validator witness. -/
+theorem dotted_cut_validation_witness (formal : FormalPresentation) :
+    formal.raw.validateDottedCuts = Except.ok () :=
+  formal.dottedCutsAdmitted
 
 /-- The only source selector available on a formal presentation is its hash. -/
 theorem pinned_source_hash_eq (formal : FormalPresentation) :
@@ -1004,6 +1176,7 @@ def roundTripFixture : RawPresentation where
     },
     { index := 3, activeStrands := [] }
   ]
+  dottedCuts := []
   contentHash :=
     "sha256:0000000000000000000000000000000000000000000000000000000000000000"
 
