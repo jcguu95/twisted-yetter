@@ -314,7 +314,7 @@ def build() -> tuple[dict[str, Any], bytes]:
             },
             "python_validator_tests": {
                 "status": "PASS",
-                "test_count": 8,
+                "test_count": 16,
                 "output_sha256": sha256_bytes(pytest_output.encode()),
             },
             "json_round_trip": {
