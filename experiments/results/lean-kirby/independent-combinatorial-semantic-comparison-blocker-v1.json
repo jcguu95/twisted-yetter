@@ -1,26 +1,17 @@
 {
   "blockers": [
     {
-      "details": "v3 enforces direction/sign correspondence; frozen DottedPuncture only requires the sign to be plus or minus one.",
-      "id": "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
-      "severity": "NORMATIVE_SEMANTICS_WEAKER_THAN_IMPLEMENTATION"
-    },
-    {
-      "id": "CLOSING_THREE_HANDLE_DATA_MISSING",
-      "severity": "SEMANTIC_DATA_MISSING"
-    },
-    {
       "id": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
       "severity": "NONTRIVIAL_SEMANTIC_CONFLICT"
     }
   ],
   "branch": "codex/lean-kirby-coupon-bootstrap",
   "bridge_artifact": {
-    "content_hash": "sha256:e09259235a41232100faf2e28891a8fb1e2d95424c3eef1a7de533f2d8cfafcb",
+    "content_hash": "sha256:faefc49c4f1bd032296aff9647c1067fec3b52d0f726b2f36f0bb2a43d7f78fc",
     "path": "experiments/results/lean-kirby/dotted-puncture-words-implementation-bridge-v1.json"
   },
   "comparison_status": "BLOCKED_WITH_EXPLICIT_DATA_GAPS",
-  "content_hash": "sha256:8ba3da109ee6f00e94ab5af9df5fbcc07434da1b2b6821b18438cd6648361c68",
+  "content_hash": "sha256:5e9955ef29a8b0750f0524fce70788bc2a783488e76cba685b3c99953a872cd9",
   "frozen_entry": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
   "frozen_semantic_commit": "8fbbf30",
   "frozen_semantics_sha256": {
@@ -34,12 +25,13 @@
     "Moves.lean": "0002c475b0e615b838d0d7d1befa5d02077bcc7df9ce428b1d3694073851c0ff"
   },
   "git_dirty_while_recorded": false,
-  "implementation_commit": "545c613b0f0f0378d396cc59c00cafcd5d2bd96e",
+  "implementation_commit": "037deaa446123b691d41aaf012b06ef2c726d036",
   "non_claims": [
     "No byte under Independent semantics was modified.",
     "No topology proposition is inferred from a JSON hash.",
-    "No total CombinatorialSpecialKirbyDiagram bridge is claimed.",
-    "No closing three-handle or primal/dual H2 conflict is resolved.",
+    "No bare FormalPresentation is claimed to determine a closed four-manifold.",
+    "The total CombinatorialSpecialKirbyDiagram bridge requires a proof-bearing CertifiedClosedDottedPresentation.",
+    "The primal/dual H2 convention conflict is not resolved.",
     "The frozen semantics still does not require direction/sign correspondence."
   ],
   "passing_layers": [
@@ -47,13 +39,24 @@
     "Component table",
     "Coupon boundary words",
     "Dotted ordered signed puncture words",
-    "Proof-bearing dotted-cut topology boundary"
+    "Proof-bearing dotted-cut topology boundary",
+    "Source-bound boundary-standardization movie",
+    "Three-handle count derived from certified boundary genus",
+    "Total frozen diagram bridge from certified closed dotted input"
   ],
-  "recorded_at_utc": "2026-07-29T03:49:56Z",
+  "recorded_at_utc": "2026-07-29T04:17:05Z",
   "resolved_blockers": [
     "COUPON_INPUT_OUTPUT_WORDS_MISSING",
-    "DOTTED_PUNCTURE_WORDS_MISSING"
+    "DOTTED_PUNCTURE_WORDS_MISSING",
+    "CLOSING_THREE_HANDLE_DATA_MISSING"
   ],
   "schema": "independent-combinatorial-semantic-comparison-blocker-v1",
-  "semantic_content_commit": "1cfd7e2"
+  "semantic_content_commit": "1cfd7e2",
+  "semantic_warnings": [
+    {
+      "details": "v3 enforces direction/sign correspondence; frozen DottedPuncture only requires the sign to be plus or minus one.",
+      "id": "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
+      "severity": "NORMATIVE_SEMANTICS_WEAKER_THAN_IMPLEMENTATION"
+    }
+  ]
 }

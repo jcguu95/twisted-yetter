@@ -1,6 +1,9 @@
 {
   "checks": {
     "aggregated_incidence_used_to_infer_words": false,
+    "bare_formal_presentation_is_accepted_as_closed": false,
+    "closing_boundary_movie_is_proof_bearing": true,
+    "closing_boundary_movie_source_is_exactly_bound": true,
     "combined_python_tests": 33,
     "direction_sign_convention": {
       "against_disk_orientation": -1,
@@ -18,52 +21,61 @@
       "Moves.lean": "0002c475b0e615b838d0d7d1befa5d02077bcc7df9ce428b1d3694073851c0ff"
     },
     "lean_runtime_fail_closed_mutations": 5,
+    "new_axioms_added_for_closing_bridge": 0,
     "ordered_positions": [
       0,
       1
     ],
     "python_and_lean_accept_same_canonical_json": "PASS",
     "python_validator_tests": 28,
+    "three_handle_count_is_derived_from_boundary_genus": true,
     "topology_certificate_is_proof_bearing": true
   },
-  "content_hash": "sha256:e09259235a41232100faf2e28891a8fb1e2d95424c3eef1a7de533f2d8cfafcb",
-  "elapsed_milliseconds": 40513,
+  "content_hash": "sha256:faefc49c4f1bd032296aff9647c1067fec3b52d0f726b2f36f0bb2a43d7f78fc",
+  "elapsed_milliseconds": 49527,
   "explicit_non_claims": [
     "No byte under Independent semantics was modified.",
     "No topology proposition is inferred from a JSON hash.",
-    "No total CombinatorialSpecialKirbyDiagram bridge is claimed.",
-    "No closing three-handle or primal/dual H2 conflict is resolved.",
+    "No bare FormalPresentation is claimed to determine a closed four-manifold.",
+    "The total CombinatorialSpecialKirbyDiagram bridge requires a proof-bearing CertifiedClosedDottedPresentation.",
+    "The primal/dual H2 convention conflict is not resolved.",
     "The frozen semantics still does not require direction/sign correspondence."
   ],
-  "finished_at_utc": "2026-07-29T03:49:56Z",
+  "finished_at_utc": "2026-07-29T04:17:05Z",
   "fixture_content_hash": "sha256:1362a4b9836f2eb127f91e8ce795ecc48825ef714494f341a55733c915458038",
   "git": {
     "branch": "codex/lean-kirby-coupon-bootstrap",
-    "commit": "545c613b0f0f0378d396cc59c00cafcd5d2bd96e",
+    "commit": "037deaa446123b691d41aaf012b06ef2c726d036",
     "dirty": false
   },
-  "lean_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "lean_output_sha256": "2fe7416c1ad7aef267237e3880269d77ed81452b807314954992908ed3c3d5d3",
   "presentation_schema": "twisted-yetter.kirby-presentation.v3",
-  "pytest_output_sha256": "3b382da6feaad215b9081b667d74a8f28ddd66ed3836ca37249c63a905cc077d",
+  "pytest_output_sha256": "8c7e6beddb6d831ddde19d2d00b67b9acaf0bee2cdbe8ed3c0fd7f5c52253004",
   "remaining_blockers": [
-    "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
-    "CLOSING_THREE_HANDLE_DATA_MISSING",
     "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH"
   ],
   "replay_output_sha256": "f68fa8678c310bd583819c68f901c6afe9a06a246abc32b6c80a937402a1d6a6",
   "reproduce_command": "PYTHONPATH=src UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_dotted_puncture_words_bridge_v1.py",
-  "resolved_blocker": "DOTTED_PUNCTURE_WORDS_MISSING",
+  "resolved_blockers": [
+    "DOTTED_PUNCTURE_WORDS_MISSING",
+    "CLOSING_THREE_HANDLE_DATA_MISSING"
+  ],
   "schema": "twisted-yetter.dotted-puncture-words-bridge.v1",
+  "semantic_warnings": [
+    "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE"
+  ],
   "source_sha256": {
     "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json": "64755b7a600f194167d21717c44ad4b764140a1ce5ec01049282004fd8842842",
     "lean/PresentationArtifactReplay.lean": "3685c33cd7a5cdb9a1a8d8b1d778a8ad510b57ac3fe1dd93fc768e7cf255b5ba",
-    "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean": "689909d74873f04ad05ce78020ea9e5e82815afa0c50fc2b3aab17709bd48d50",
+    "lean/TwistedYetter/Kirby/Final/Semantics/ClosingHandleImplementationBridge.lean": "10242a2ad6ceb3f3de8a09a8b48bac238eebf7ea07fb192d0ec1a8b66908cbc3",
+    "lean/TwistedYetter/Kirby/Final/Semantics/ClosingHandleImplementationBridgeAxiomAudit.lean": "3dddbb8f5de702d827f49948c24e6cefe5faf067cae821e8c753a6e23f063a3c",
+    "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean": "1892dd2cc511db3cc6c4aeb4a3c1810343d7d34017d130e86838d9971b1c8749",
     "lean/TwistedYetter/Kirby/Final/Semantics/DottedCutImplementationBridge.lean": "85c7ce94eac6e620d485ea13724a9c9186525e91e6070a82e750cac4b9e8108e",
     "lean/TwistedYetter/Kirby/Presentation.lean": "049190e020e51ec4c35a6dfb521e3f3749b7c1fa4b04acf7bffd2aa1896fc92c",
     "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean": "37629b1b313ec5bc35f3eb8588196f804c9e28e4abb2f1f14c28a96f22d4a621",
     "src/twisted_yetter/kirby_presentation_v1.py": "b84b39b21f071a9231398abe9aa3feb00371dd1ef9c9449c1baa726219c460e3"
   },
-  "started_at_utc": "2026-07-29T03:49:15Z",
-  "status": "PASS_DOTTED_PUNCTURE_WORDS_IMPLEMENTATION_BRIDGE",
+  "started_at_utc": "2026-07-29T04:16:16Z",
+  "status": "PASS_DOTTED_PUNCTURE_AND_CLOSING_HANDLE_IMPLEMENTATION_BRIDGE",
   "syntax_artifact_content_hash": "sha256:3e2907eb816a142488442029ab117bf605c17ae9c7bdfcfa23ea77dbd309bc64"
 }
