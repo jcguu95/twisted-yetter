@@ -4,19 +4,19 @@
   ],
   "checks": {
     "json_round_trip": {
-      "fixture_sha256": "412692b0c3d795b41fa264cfcf837770f25446bed24947334ce0a8b6cb46b1ee",
+      "fixture_sha256": "ec58718e192b7ef6b1260f22833e8b67a88f6c8039f7ff51a7e460eb389bdd6f",
       "status": "PASS_BYTE_STABLE_CANONICAL_ROUND_TRIP"
     },
     "kirby_axiom_audit": {
-      "new_r6_theorem_count": 2,
       "observed_standard_axioms": [
         "propext",
         "Classical.choice",
         "Quot.sound"
       ],
-      "output_sha256": "316802fc399e10c9bbe34e0979ae680bf63abfc1eba64051fe614928debea93a",
+      "output_sha256": "0d291536430ce04dc346c8561372b9d17a6c39d34ad2cec1b354cddf7bf70bfd",
+      "presentation_regression_theorem_count": 9,
       "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE",
-      "theorem_count": 39
+      "theorem_count": 9
     },
     "lean_mutation_tests": {
       "output_sha256": "674dba5fa68ee153d2a4407fb7565f7e5a8f1a00101f02b7fa6f201bf90c969e",
@@ -29,9 +29,9 @@
       "status": "PASS_ALL_BAD_INPUTS_REJECTED"
     },
     "python_validator_tests": {
-      "output_sha256": "8bed72fa6ff16ded567da73512bf0d69172bc59a9a8955a95cf846fce9b6b2c8",
+      "output_sha256": "e5aa01c8b6e37ce6f67171e75d5bc8e3084a165ba089bd646e621d05857b011e",
       "status": "PASS",
-      "test_count": 8
+      "test_count": 16
     },
     "resource_guards": {
       "default_threads": 1,
@@ -42,22 +42,24 @@
     "sequential_build": {
       "build_order": [
         "lean/TwistedYetter/Kirby/Presentation.lean",
+        "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
         "lean/TwistedYetter.lean"
       ],
-      "module_count": 2,
+      "module_count": 3,
       "status": "PASS",
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "source_proof_hole_scan": {
       "checked_files": [
         "lean/TwistedYetter/Kirby/Presentation.lean",
+        "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
         "lean/TwistedYetter.lean"
       ],
       "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
     }
   },
-  "content_hash": "sha256:c84d7ef62a82fadaf2c0a798773c23aef81d195a43c84520683fc56ddc25bc7c",
-  "elapsed_milliseconds": 32495,
+  "content_hash": "sha256:a19c3e47e5ad822b778780af710a38eabe6dd507647f9cedc45ead36e60f919e",
+  "elapsed_milliseconds": 21925,
   "established_scope": [
     "Typed component IDs, orientations, integer framings, roles, labels, coupons, and Morse events.",
     "Executable active-strand lineage validation from empty initial boundary to empty terminal boundary.",
@@ -74,11 +76,11 @@
     "This does not prove Kirby handle-slide or cancellation invariance.",
     "This does not prove four-manifold invariance."
   ],
-  "finished_at_utc": "2026-07-17T21:46:45Z",
+  "finished_at_utc": "2026-07-29T00:13:21Z",
   "generator_script": "experiments/scripts/build_framed_link_presentation_syntax_v1.py",
   "git": {
     "branch": "codex/lean-kirby-coupon-bootstrap",
-    "commit": "db8dd374000747cd25e8957d3b8eaad290c21ac4",
+    "commit": "0028f31571cad6bddc9ec7098d875affd7ab1ff1",
     "dirty": false
   },
   "inputs": {
@@ -101,8 +103,8 @@
         "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
       },
       "experiments/scripts/build_framed_link_presentation_syntax_v1.py": {
-        "bytes": 11991,
-        "sha256": "571b0fae66fe5cf499cd1f44ca569a8651002a62b8669f7da63667bb353d5628"
+        "bytes": 12221,
+        "sha256": "e3fbb0b186b3d4f690e226fd7762c6df6deb06e2c03424906f7bd5eb5ddc728a"
       },
       "lake-manifest.json": {
         "bytes": 3149,
@@ -117,8 +119,8 @@
         "sha256": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
       },
       "lean/Mutations/InvalidPresentationLineage.lean": {
-        "bytes": 549,
-        "sha256": "d5e17569d059a6780216846f530e8189e1d97f336d7199d0422e04a34e3868f1"
+        "bytes": 551,
+        "sha256": "cccc21aaf5978870982495caa9e1a625af67483db24cccf84772e03f9111d117"
       },
       "lean/Mutations/MissingPresentationAdmission.lean": {
         "bytes": 421,
@@ -129,32 +131,36 @@
         "sha256": "0865f057be5b885219d14e6ee2091fcd21cb430728ba502c2aa3db1082bba867"
       },
       "lean/TwistedYetter.lean": {
-        "bytes": 758,
-        "sha256": "9ecc04f4231c7106ceed96f27153952e0033d4804aac742fe5a0b4374128e73e"
-      },
-      "lean/TwistedYetter/Kirby/AxiomAudit.lean": {
-        "bytes": 3229,
-        "sha256": "c46c00471e42838614a4261fcd4f3e624ed842f40c77ad2b0fd772bf1aa5ce1e"
+        "bytes": 443,
+        "sha256": "9a3d247d7e9494d8326be2f7a6e5eda42dfbc11d68adeb3085475d943efc3eef"
       },
       "lean/TwistedYetter/Kirby/Presentation.lean": {
-        "bytes": 11872,
-        "sha256": "90a32dd2fa589c662760b2b6144d4d5237d51245bf7173645890c49677b111f1"
+        "bytes": 34249,
+        "sha256": "f93c1cb05b5d2f925c7c481300d09baf791eae96d891f76089a5b9e0e299f8ec"
+      },
+      "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean": {
+        "bytes": 3185,
+        "sha256": "9fe3d42ede6c617b4b56d1dc8a1b6ae15828dceea5ce6a3546ac5665f24c0eb0"
+      },
+      "lean/TwistedYetter/Kirby/PresentationSchemaRegressionAxiomAudit.lean": {
+        "bytes": 1011,
+        "sha256": "c4e2c5be2d022385df2afc56781befe669a4195790a71817f4788f4a4422bd75"
       },
       "scripts/lean_presentation_mutation_tests.sh": {
         "bytes": 1338,
         "sha256": "6dc144d1ae2bb6061013e13aeafddbac766f139030f87a5c88a79fd694427918"
       },
       "src/twisted_yetter/kirby_presentation_v1.py": {
-        "bytes": 20332,
-        "sha256": "ed818e96a447867a98fa6422ae4c3d8b262ba537753a80c37e1079a0beed40ba"
+        "bytes": 25393,
+        "sha256": "fa293a659f829124c5aaebeed3079d4a65e5148f9616ebfa622db430af0f8576"
       },
       "tests/test_framed_link_presentation_syntax_v1.py": {
         "bytes": 3753,
-        "sha256": "f82029786b74e576737f47b5f689623a6662f462992c61131fa0831bd011d11d"
+        "sha256": "ada943317f93a9ac45b46b09c191718c6a569a41b50c04ad373d57e38d17b52a"
       },
       "tests/test_kirby_presentation_v1.py": {
-        "bytes": 3013,
-        "sha256": "c1a6264c8ab65fabb9cc82f2fc9b9713224c8de1b01d89425670e99b8333cca7"
+        "bytes": 8477,
+        "sha256": "9fa49fb5d18496c6e16dfc85b5d326eeadc6a00f86c2e7f1d7242ab1a24007ea"
       }
     }
   },
@@ -162,9 +168,9 @@
   "outputs": {
     "fixture": {
       "component_count": 3,
-      "content_hash": "sha256:42eef430c68ffdc02d687958e0e1d702c3cee7ba3638cc15b664985c8e6779aa",
+      "content_hash": "sha256:60b7864cf98f707afab79d132507a3c72c42560d3ebe5ac9d869f7411581d3f0",
       "event_count": 12,
-      "file_sha256": "412692b0c3d795b41fa264cfcf837770f25446bed24947334ce0a8b6cb46b1ee",
+      "file_sha256": "ec58718e192b7ef6b1260f22833e8b67a88f6c8039f7ff51a7e460eb389bdd6f",
       "path": "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json",
       "slice_count": 13
     }
@@ -172,7 +178,7 @@
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_framed_link_presentation_syntax_v1.py",
   "schema": "twisted-yetter.framed-link-presentation-syntax.v1",
-  "started_at_utc": "2026-07-17T21:46:12Z",
+  "started_at_utc": "2026-07-29T00:12:59Z",
   "status": "PASS_FRAMED_LINK_PRESENTATION_SYNTAX",
   "tool_versions": {
     "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",

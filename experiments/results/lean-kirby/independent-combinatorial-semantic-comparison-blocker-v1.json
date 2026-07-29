@@ -1,10 +1,11 @@
 {
   "schema": "independent-combinatorial-semantic-comparison-blocker-v1",
-  "recorded_at_utc": "2026-07-28T22:23:09Z",
+  "recorded_at_utc": "2026-07-29T00:13:30Z",
   "branch": "codex/lean-kirby-coupon-bootstrap",
   "frozen_semantic_commit": "8fbbf30",
   "semantic_content_commit": "1cfd7e2",
-  "git_dirty_while_recorded": true,
+  "implementation_commit": "0028f31571cad6bddc9ec7098d875affd7ab1ff1",
+  "git_dirty_while_recorded": false,
   "frozen_entry": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
   "comparison_status": "BLOCKED_WITH_EXPLICIT_DATA_GAPS",
   "passing_layers": [
@@ -22,15 +23,33 @@
         "integer framing maps exactly"
       ],
       "evidence": "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean"
+    },
+    {
+      "layer": "Coupon boundary words",
+      "status": "PASS_TOTAL_DATA_SUPPLY",
+      "details": [
+        "every coupon stores a separate ordered input strand word",
+        "every coupon stores a typed ordered output strand word",
+        "replace_at pins the exact contiguous source window",
+        "the executable transition replaces that window rather than treating a coupon as an identity event",
+        "global strand IDs cannot silently change component or orientation metadata"
+      ],
+      "evidence": [
+        "lean/TwistedYetter/Kirby/Presentation.lean",
+        "lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean",
+        "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
+        "experiments/results/lean-kirby/framed-link-presentation-syntax-v1.json"
+      ]
+    }
+  ],
+  "resolved_blockers": [
+    {
+      "id": "COUPON_INPUT_OUTPUT_WORDS_MISSING",
+      "resolution": "The v2 raw schema, Python validator, Lean validator, categorical compiler, and comparison projection all carry exact input/output boundary words and replacement position.",
+      "formal_evidence_hash": "sha256:a19c3e47e5ad822b778780af710a38eabe6dd507647f9cedc45ead36e60f919e"
     }
   ],
   "blockers": [
-    {
-      "id": "COUPON_INPUT_OUTPUT_WORDS_MISSING",
-      "semantic_requirement": "A general coupon records separate finite input and output strand words.",
-      "implementation_supply": "SliceEvent.coupon stores one undirected strands list.",
-      "severity": "SEMANTIC_DATA_MISSING"
-    },
     {
       "id": "DOTTED_PUNCTURE_WORDS_MISSING",
       "semantic_requirement": "Every dotted one-handle has a complete ordered signed puncture word through its chosen combinatorial cut.",
@@ -55,16 +74,26 @@
     "frozen_diagram": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Diagram.lean",
     "frozen_homology": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean",
     "implementation_raw_presentation": "lean/TwistedYetter/Kirby/Presentation.lean",
+    "implementation_categorical_compiler": "lean/TwistedYetter/Kirby/CategoricalPresentationCompiler.lean",
+    "presentation_validation_artifact": "experiments/results/lean-kirby/framed-link-presentation-syntax-v1.json",
     "implementation_turned_over_chain": "lean/TwistedYetter/Kirby/Final/Semantics/Presentation.lean"
   },
   "verification": {
     "partial_bridge_build": {
-      "command": "lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.CombinatorialSemanticComparison",
+      "command": "./scripts/lean_local_build.sh lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean",
       "status": "PASS"
     },
     "mutation_audit_build": {
-      "command": "lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.CombinatorialSemanticMutationAudit",
+      "command": "./scripts/lean_local_build.sh lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticMutationAudit.lean",
       "status": "PASS"
+    },
+    "coupon_schema_validation": {
+      "command": "env UV_CACHE_DIR=tmp/uv-cache uv run pytest -q tests/test_kirby_presentation_v1.py",
+      "status": "PASS_16_TESTS"
+    },
+    "coupon_kernel_regressions": {
+      "command": "./scripts/lean_local_build.sh lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
+      "status": "PASS_NO_PROJECT_AXIOMS_FOR_TRANSITION"
     },
     "total_bridge": {
       "status": "NOT_CONSTRUCTIBLE_FROM_CURRENT_FORMAL_PRESENTATION",
