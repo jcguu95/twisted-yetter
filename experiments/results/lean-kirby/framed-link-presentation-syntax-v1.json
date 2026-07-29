@@ -4,7 +4,7 @@
   ],
   "checks": {
     "json_round_trip": {
-      "fixture_sha256": "ec58718e192b7ef6b1260f22833e8b67a88f6c8039f7ff51a7e460eb389bdd6f",
+      "fixture_sha256": "64755b7a600f194167d21717c44ad4b764140a1ce5ec01049282004fd8842842",
       "status": "PASS_BYTE_STABLE_CANONICAL_ROUND_TRIP"
     },
     "kirby_axiom_audit": {
@@ -13,10 +13,10 @@
         "Classical.choice",
         "Quot.sound"
       ],
-      "output_sha256": "0d291536430ce04dc346c8561372b9d17a6c39d34ad2cec1b354cddf7bf70bfd",
-      "presentation_regression_theorem_count": 9,
+      "output_sha256": "098686845b0415c23f6bd569d543d0d0d91e1a075f6296e5fcee1a3885079944",
+      "presentation_regression_theorem_count": 11,
       "status": "PASS_NO_SORRY_AX_OR_NATIVE_ORACLE",
-      "theorem_count": 9
+      "theorem_count": 11
     },
     "lean_mutation_tests": {
       "output_sha256": "674dba5fa68ee153d2a4407fb7565f7e5a8f1a00101f02b7fa6f201bf90c969e",
@@ -29,9 +29,9 @@
       "status": "PASS_ALL_BAD_INPUTS_REJECTED"
     },
     "python_validator_tests": {
-      "output_sha256": "e5aa01c8b6e37ce6f67171e75d5bc8e3084a165ba089bd646e621d05857b011e",
+      "output_sha256": "b13013dd7e232f33c0982e847df8523290cbcd1275632d3fe411e85192f4a630",
       "status": "PASS",
-      "test_count": 16
+      "test_count": 28
     },
     "resource_guards": {
       "default_threads": 1,
@@ -42,24 +42,26 @@
     "sequential_build": {
       "build_order": [
         "lean/TwistedYetter/Kirby/Presentation.lean",
+        "lean/TwistedYetter/Kirby/Final/Semantics/DottedCutImplementationBridge.lean",
         "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
-        "lean/TwistedYetter.lean"
+        "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean"
       ],
-      "module_count": 3,
+      "module_count": 4,
       "status": "PASS",
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "source_proof_hole_scan": {
       "checked_files": [
         "lean/TwistedYetter/Kirby/Presentation.lean",
+        "lean/TwistedYetter/Kirby/Final/Semantics/DottedCutImplementationBridge.lean",
         "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
-        "lean/TwistedYetter.lean"
+        "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean"
       ],
       "status": "PASS_NO_SORRY_ADMIT_AXIOM_OR_NATIVE_DECIDE"
     }
   },
-  "content_hash": "sha256:a19c3e47e5ad822b778780af710a38eabe6dd507647f9cedc45ead36e60f919e",
-  "elapsed_milliseconds": 21925,
+  "content_hash": "sha256:3e2907eb816a142488442029ab117bf605c17ae9c7bdfcfa23ea77dbd309bc64",
+  "elapsed_milliseconds": 60088,
   "established_scope": [
     "Typed component IDs, orientations, integer framings, roles, labels, coupons, and Morse events.",
     "Executable active-strand lineage validation from empty initial boundary to empty terminal boundary.",
@@ -67,6 +69,8 @@
     "Declared slices are checked against a fresh event replay.",
     "Canonical JSON round trip and SHA-256 content identity are enforced.",
     "FormalPresentation requires a Lean proof that the executable validator returned success.",
+    "Every literal dotted component carries exactly one ordered signed puncture word; repeated strand occurrences remain distinct by cut position.",
+    "Dotted-cut topology validity remains a separate proof-bearing certificate and is never inferred from a provenance hash.",
     "Mutable aliases and unknown JSON fields are unrepresentable or rejected."
   ],
   "explicit_non_claims": [
@@ -76,11 +80,11 @@
     "This does not prove Kirby handle-slide or cancellation invariance.",
     "This does not prove four-manifold invariance."
   ],
-  "finished_at_utc": "2026-07-29T00:13:21Z",
+  "finished_at_utc": "2026-07-29T03:47:17Z",
   "generator_script": "experiments/scripts/build_framed_link_presentation_syntax_v1.py",
   "git": {
     "branch": "codex/lean-kirby-coupon-bootstrap",
-    "commit": "0028f31571cad6bddc9ec7098d875affd7ab1ff1",
+    "commit": "67dffc46be0d3cccbf173b489c56329fa6ee6a2c",
     "dirty": false
   },
   "inputs": {
@@ -103,8 +107,8 @@
         "sha256": "bcaac3b51bcccde5acce97a5bf62c556398506ff20beabbfff339dd5039cb052"
       },
       "experiments/scripts/build_framed_link_presentation_syntax_v1.py": {
-        "bytes": 12221,
-        "sha256": "e3fbb0b186b3d4f690e226fd7762c6df6deb06e2c03424906f7bd5eb5ddc728a"
+        "bytes": 12706,
+        "sha256": "665f9cf1357b89229a0f38bf2c680919cb206b73bc6048702d94a7b0fd510e72"
       },
       "lake-manifest.json": {
         "bytes": 3149,
@@ -130,37 +134,41 @@
         "bytes": 418,
         "sha256": "0865f057be5b885219d14e6ee2091fcd21cb430728ba502c2aa3db1082bba867"
       },
-      "lean/TwistedYetter.lean": {
-        "bytes": 443,
-        "sha256": "9a3d247d7e9494d8326be2f7a6e5eda42dfbc11d68adeb3085475d943efc3eef"
+      "lean/TwistedYetter/Kirby/Final/Semantics/CombinatorialSemanticComparison.lean": {
+        "bytes": 4052,
+        "sha256": "689909d74873f04ad05ce78020ea9e5e82815afa0c50fc2b3aab17709bd48d50"
+      },
+      "lean/TwistedYetter/Kirby/Final/Semantics/DottedCutImplementationBridge.lean": {
+        "bytes": 5744,
+        "sha256": "85c7ce94eac6e620d485ea13724a9c9186525e91e6070a82e750cac4b9e8108e"
       },
       "lean/TwistedYetter/Kirby/Presentation.lean": {
-        "bytes": 34249,
-        "sha256": "f93c1cb05b5d2f925c7c481300d09baf791eae96d891f76089a5b9e0e299f8ec"
+        "bytes": 40962,
+        "sha256": "049190e020e51ec4c35a6dfb521e3f3749b7c1fa4b04acf7bffd2aa1896fc92c"
       },
       "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean": {
-        "bytes": 3185,
-        "sha256": "9fe3d42ede6c617b4b56d1dc8a1b6ae15828dceea5ce6a3546ac5665f24c0eb0"
+        "bytes": 5369,
+        "sha256": "37629b1b313ec5bc35f3eb8588196f804c9e28e4abb2f1f14c28a96f22d4a621"
       },
       "lean/TwistedYetter/Kirby/PresentationSchemaRegressionAxiomAudit.lean": {
-        "bytes": 1011,
-        "sha256": "c4e2c5be2d022385df2afc56781befe669a4195790a71817f4788f4a4422bd75"
+        "bytes": 1227,
+        "sha256": "b04d37cf5abd1d25b76093f78a3c7ce204166259594d9dfc8df4d48d400cb008"
       },
       "scripts/lean_presentation_mutation_tests.sh": {
         "bytes": 1338,
         "sha256": "6dc144d1ae2bb6061013e13aeafddbac766f139030f87a5c88a79fd694427918"
       },
       "src/twisted_yetter/kirby_presentation_v1.py": {
-        "bytes": 25393,
-        "sha256": "fa293a659f829124c5aaebeed3079d4a65e5148f9616ebfa622db430af0f8576"
+        "bytes": 32783,
+        "sha256": "b84b39b21f071a9231398abe9aa3feb00371dd1ef9c9449c1baa726219c460e3"
       },
       "tests/test_framed_link_presentation_syntax_v1.py": {
-        "bytes": 3753,
-        "sha256": "ada943317f93a9ac45b46b09c191718c6a569a41b50c04ad373d57e38d17b52a"
+        "bytes": 3923,
+        "sha256": "be45a0b4bd1340e196c06e647d63213bce0a97a453fd3ecdf0415b2ef5eeea3e"
       },
       "tests/test_kirby_presentation_v1.py": {
-        "bytes": 8477,
-        "sha256": "9fa49fb5d18496c6e16dfc85b5d326eeadc6a00f86c2e7f1d7242ab1a24007ea"
+        "bytes": 12378,
+        "sha256": "cde4a29d94ff379ad50fe4f660749fbfd1d399a1b5eeb09de7670ba32a9619f5"
       }
     }
   },
@@ -168,9 +176,9 @@
   "outputs": {
     "fixture": {
       "component_count": 3,
-      "content_hash": "sha256:60b7864cf98f707afab79d132507a3c72c42560d3ebe5ac9d869f7411581d3f0",
+      "content_hash": "sha256:1362a4b9836f2eb127f91e8ce795ecc48825ef714494f341a55733c915458038",
       "event_count": 12,
-      "file_sha256": "ec58718e192b7ef6b1260f22833e8b67a88f6c8039f7ff51a7e460eb389bdd6f",
+      "file_sha256": "64755b7a600f194167d21717c44ad4b764140a1ce5ec01049282004fd8842842",
       "path": "experiments/inputs/lean-kirby/framed-link-presentation-fixture-v1.json",
       "slice_count": 13
     }
@@ -178,7 +186,7 @@
   "repo_root": "/Users/jin/.codex/worktrees/4e82/twisted-yetter",
   "reproduce_command": "UV_CACHE_DIR=.uv-cache LEAN_NUM_THREADS=1 uv run python experiments/scripts/build_framed_link_presentation_syntax_v1.py",
   "schema": "twisted-yetter.framed-link-presentation-syntax.v1",
-  "started_at_utc": "2026-07-29T00:12:59Z",
+  "started_at_utc": "2026-07-29T03:46:16Z",
   "status": "PASS_FRAMED_LINK_PRESENTATION_SYNTAX",
   "tool_versions": {
     "lake": "Lake version 5.0.0-src+f72c35b (Lean version 4.29.1)",
