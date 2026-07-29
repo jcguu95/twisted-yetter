@@ -1,10 +1,18 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
 
 /-!
-# Public homologically twisted Yetter invariant
+# Frozen-frontend conditional descent
 
-This public file has no second evaluator and no conformance detour.  Its final
-theorem speaks directly about the frozen independent frontend semantics.
+This file has no second evaluator and no conformance detour.  It proves the
+finite-movie descent that follows once the frozen frontend's evaluator data
+and local calculations have been supplied.
+
+It deliberately does not export a manifold-level `TwistedYetter` or a theorem
+named `TwistedYetter_diffeomorphism_invariant`.  The frozen frontend currently
+does not construct its graphical evaluation, graph compiler, normalization,
+representative-independence proof, or eight local-move proofs from
+`TwistedPremodularCategory`.  Calling the conditional result a final theorem
+would hide exactly those missing obligations.
 -/
 
 namespace TwistedYetter.Kirby.Final
@@ -18,12 +26,12 @@ noncomputable section
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /--
-The public evaluator on one frozen-frontend marked diagram.
+The conditional evaluator on one frozen-frontend marked diagram.
 
 This is exactly `Independent.evaluateMarking`; it is not a wrapper around the
 previous repository evaluator.
 -/
-abbrev TwistedYetter
+abbrev evaluateMarkedDiagram
     (𝒞η : TwistedPremodularCategory K)
     (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (compiler : RoleAwareGraphCompiler 𝒞η)
@@ -52,8 +60,8 @@ theorem elementaryMove_preserves_frontend_evaluation
       LocalMoveInvarianceStatement 𝒞η graphical compiler normalization)
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
-    TwistedYetter 𝒞η graphical compiler normalization source =
-      TwistedYetter 𝒞η graphical compiler normalization target := by
+    evaluateMarkedDiagram 𝒞η graphical compiler normalization source =
+      evaluateMarkedDiagram 𝒞η graphical compiler normalization target := by
   let sourceCycle : ThamTwoCycles source.turnedOver :=
     Quotient.out source.thamAlpha
   let transportedCycle : ThamTwoCycles target.turnedOver :=
@@ -92,13 +100,13 @@ theorem kirbyMovie_preserves_frontend_evaluation
       LocalMoveInvarianceStatement 𝒞η graphical compiler normalization)
     {source target : HomologicallyMarkedDiagram}
     (movie : KirbyMovie source target) :
-    TwistedYetter 𝒞η graphical compiler normalization source =
-      TwistedYetter 𝒞η graphical compiler normalization target := by
+    evaluateMarkedDiagram 𝒞η graphical compiler normalization source =
+      evaluateMarkedDiagram 𝒞η graphical compiler normalization target := by
   have step :
       ∀ i : Fin movie.stageCount,
-        TwistedYetter 𝒞η graphical compiler normalization
+        evaluateMarkedDiagram 𝒞η graphical compiler normalization
             (movie.stages i.castSucc) =
-          TwistedYetter 𝒞η graphical compiler normalization
+          evaluateMarkedDiagram 𝒞η graphical compiler normalization
             (movie.stages i.succ) := by
     intro i
     exact elementaryMove_preserves_frontend_evaluation
@@ -106,9 +114,9 @@ theorem kirbyMovie_preserves_frontend_evaluation
       representativeIndependent localInvariant (movie.elementary i)
   have fromStart :
       ∀ i : Fin (movie.stageCount + 1),
-        TwistedYetter 𝒞η graphical compiler normalization
+        evaluateMarkedDiagram 𝒞η graphical compiler normalization
             (movie.stages 0) =
-          TwistedYetter 𝒞η graphical compiler normalization
+          evaluateMarkedDiagram 𝒞η graphical compiler normalization
             (movie.stages i) := by
     intro i
     induction i using Fin.induction with
@@ -116,24 +124,25 @@ theorem kirbyMovie_preserves_frontend_evaluation
     | succ i inductionHypothesis =>
         exact inductionHypothesis.trans (step i)
   calc
-    TwistedYetter 𝒞η graphical compiler normalization source =
-        TwistedYetter 𝒞η graphical compiler normalization
+    evaluateMarkedDiagram 𝒞η graphical compiler normalization source =
+        evaluateMarkedDiagram 𝒞η graphical compiler normalization
           (movie.stages 0) := by
       rw [movie.startsAtSource]
-    _ = TwistedYetter 𝒞η graphical compiler normalization
+    _ = evaluateMarkedDiagram 𝒞η graphical compiler normalization
           (movie.stages (Fin.last movie.stageCount)) :=
       fromStart (Fin.last movie.stageCount)
-    _ = TwistedYetter 𝒞η graphical compiler normalization target := by
+    _ = evaluateMarkedDiagram 𝒞η graphical compiler normalization target := by
       rw [movie.endsAtTarget]
 
-/--
-The final theorem is exactly the diffeomorphism-invariance target stated by the
-frozen frontend.
+namespace ConditionalDescent
 
-There is deliberately no current-evaluator certificate in either the statement
-or the proof.
+/--
+Conditional diffeomorphism descent after all evaluator and topology data have
+been supplied.
+
+This is an internal assembly lemma, not the final manifold invariant theorem.
 -/
-theorem TwistedYetter_diffeomorphism_invariant
+theorem diffeomorphism_invariant_of_descent_data
     (𝒞η : TwistedPremodularCategory K)
     (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (compiler : RoleAwareGraphCompiler 𝒞η)
@@ -156,6 +165,8 @@ theorem TwistedYetter_diffeomorphism_invariant
     kirbyMovie_preserves_frontend_evaluation
       𝒞η graphical compiler normalization
       representativeIndependent localInvariant movie
+
+end ConditionalDescent
 
 end
 

@@ -1,11 +1,11 @@
 import TwistedYetter.Kirby.Final.TwistedYetter
 
 /-!
-# Axiom audit for the frozen-frontend premodular main line
+# Axiom audit for the frozen-frontend conditional line
 
-The final theorem now speaks directly about the frozen premodular evaluator.
-The former implementation-side local calculations are intentionally outside
-this public audit until a separate backend-correctness theorem is established.
+This audit no longer calls the conditional descent lemma a final theorem.
+The frozen frontend still lacks canonical evaluator data and the derived
+representative-independence and local-move proofs.
 -/
 
 #print axioms
@@ -15,4 +15,4 @@ this public audit until a separate backend-correctness theorem is established.
   TwistedYetter.Kirby.Final.kirbyMovie_preserves_frontend_evaluation
 
 #print axioms
-  TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant
+  TwistedYetter.Kirby.Final.ConditionalDescent.diffeomorphism_invariant_of_descent_data

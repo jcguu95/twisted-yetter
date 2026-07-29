@@ -39,6 +39,11 @@ V3_RESOLUTION = (
     / "experiments/results/lean-kirby/"
     "frozen-frontend-final-theorem-direct-connection-resolution-v1.json"
 )
+FINAL_BLOCKER = (
+    ROOT
+    / "experiments/results/lean-kirby/"
+    "frozen-frontend-clean-final-theorem-blocker-v1.json"
+)
 
 
 def canonical_hash(payload: dict) -> str:
@@ -135,15 +140,19 @@ def test_v3_completeness_is_diffeomorphism_aware() -> None:
     assert "KirbyMovie left.markedDiagram right.markedDiagram" in statement
 
 
-def test_public_final_route_is_frontend_only() -> None:
+def test_conditional_frontend_route_is_honestly_named() -> None:
     public = PUBLIC_FINAL.read_text()
     assert (
         "import TwistedYetter.Kirby.Final.Semantics.Independent.Entry"
         in public
     )
-    assert "abbrev TwistedYetter" in public
+    assert "abbrev evaluateMarkedDiagram" in public
     assert "evaluateMarking 𝒞η graphical compiler normalization marked" in public
     assert "TwistedYetterDiffeomorphismInvarianceTarget" in public
+    assert "namespace ConditionalDescent" in public
+    assert "theorem diffeomorphism_invariant_of_descent_data" in public
+    assert "theorem TwistedYetter_diffeomorphism_invariant" not in public
+    assert "abbrev TwistedYetter" not in public
     for forbidden in (
         "DependentRoleAwareFourManifoldInvariant",
         "FrozenConformanceCertificate",
@@ -153,6 +162,18 @@ def test_public_final_route_is_frontend_only() -> None:
     ):
         assert forbidden not in public
     assert re.search(r"\b(sorry|admit)\b", public) is None
+
+
+def test_clean_final_theorem_blocker_is_hash_bound_and_fail_closed() -> None:
+    blocker = json.loads(FINAL_BLOCKER.read_text())
+    assert blocker["content_hash"] == canonical_hash(blocker)
+    assert blocker["status"] == (
+        "BLOCKED_CANONICAL_FRONTEND_EVALUATOR_NOT_CONSTRUCTED"
+    )
+    assert blocker["claims"]["clean_final_theorem_established"] is False
+    assert blocker["claims"]["premodular_four_manifold_invariant_established"] is False
+    assert blocker["claims"]["conditional_descent_lemma_kernel_checked"] is True
+    assert blocker["frozen_semantics"]["modified_by_this_checkpoint"] is False
 
 
 def test_bridge_forces_primal_marking_through_turnover() -> None:

@@ -1,0 +1,91 @@
+{
+  "schema": "frozen-frontend-clean-final-theorem-blocker-v1",
+  "content_hash": "sha256:23ab4c238ccb8c708f0077f8b0a2b9692645dfdf6f5e0640afbe8ba68c4deb6a",
+  "recorded_at_utc": "2026-07-29T12:47:20Z",
+  "status": "BLOCKED_CANONICAL_FRONTEND_EVALUATOR_NOT_CONSTRUCTED",
+  "supersedes_artifact": "experiments/results/lean-kirby/frozen-frontend-final-theorem-direct-connection-resolution-v1.json",
+  "frozen_semantics": {
+    "current_version": "v3",
+    "manifest": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/semantic-freeze-combinatorial-v3.json",
+    "modified_by_this_checkpoint": false,
+    "v4_created": false
+  },
+  "requested_public_interface": {
+    "evaluator_arguments": [
+      "twisted_premodular_category",
+      "closed_four_manifold_with_h2_class"
+    ],
+    "theorem_arguments": [
+      "twisted_premodular_category",
+      "oriented_diffeomorphism",
+      "h2_class"
+    ],
+    "forbidden_arguments": [
+      "graphical",
+      "compiler",
+      "normalization",
+      "representativeIndependent",
+      "localInvariant",
+      "topology"
+    ]
+  },
+  "blocking_obligations": [
+    {
+      "id": "CANONICAL_RIBBON_GRAPHICAL_EVALUATION_MISSING",
+      "detail": "Frozen Algebra and Graphical semantics do not construct a RibbonGraphicalEvaluation from a TwistedPremodularCategory. The current structure is caller-supplied data."
+    },
+    {
+      "id": "GRAPHICAL_LAWS_HAVE_NO_EQUATIONAL_CONTENT",
+      "detail": "CompositionRespectsEvaluation, naturality, fusion completeness, and tensor-unit projector laws are opaque Prop names. Their current types expose no equations from which local invariance can be proved."
+    },
+    {
+      "id": "CANONICAL_ROLE_AWARE_COMPILER_MISSING",
+      "detail": "RoleAwareGraphCompiler is caller-supplied. The frozen semantics does not define a compiler from CombinatorialSpecialKirbyDiagram and its THAM-side cycle."
+    },
+    {
+      "id": "THAM_NORMALIZATION_FORMULA_MISSING",
+      "detail": "ThamDefinition511Normalization contains an arbitrary function constrained only by opaque Prop names; Definition 5.11's scalar formula is not encoded as executable semantic data."
+    },
+    {
+      "id": "REPRESENTATIVE_INDEPENDENCE_NOT_DERIVED",
+      "detail": "RepresentativeIndependenceStatement is only a proposition. No frozen-frontend theorem proves it."
+    },
+    {
+      "id": "EIGHT_LOCAL_MOVES_NOT_DERIVED",
+      "detail": "LocalMoveInvarianceStatement is only a proposition. No frozen-frontend theorem proves all eight cases."
+    },
+    {
+      "id": "INTRINSIC_MANIFOLD_EVALUATOR_NOT_DEFINED",
+      "detail": "The existing evaluateMarking acts on one HomologicallyMarkedDiagram. Without canonical evaluator data and proven choice independence it cannot define TwistedYetter((C,eta),(X,alpha))."
+    }
+  ],
+  "completed_in_this_checkpoint": [
+    "Renamed the diagram-level evaluator to evaluateMarkedDiagram.",
+    "Renamed the former final theorem to ConditionalDescent.diffeomorphism_invariant_of_descent_data.",
+    "Removed the misleading public TwistedYetter and TwistedYetter_diffeomorphism_invariant names.",
+    "Retained the kernel-checked elementary-move assembly and finite-movie induction."
+  ],
+  "prohibited_shortcuts": [
+    "No new blanket axiom for local invariance.",
+    "No new blanket axiom for representative independence.",
+    "No hidden FoundationalPackage or implicit assumptions structure.",
+    "No constant-zero or otherwise fake invariant.",
+    "No sorry, admit, arbitrary equality, backend conformance certificate, or legacy evaluator."
+  ],
+  "next_mathematical_obligation": "Replace the opaque graphical-law predicates with explicit typed equations and construct the canonical graphical evaluator before attempting frozen semantics v4.",
+  "claims": {
+    "clean_final_theorem_established": false,
+    "premodular_four_manifold_invariant_established": false,
+    "conditional_descent_lemma_kernel_checked": true,
+    "frozen_v4_established": false
+  },
+  "verification": {
+    "narrow_lean_file": "PASS",
+    "full_lake_build": "PASS",
+    "focused_tests": "11_PASS",
+    "semantic_firewall": "PASS",
+    "frozen_v3_hashes_unchanged": true,
+    "sorry_or_admit_added": false,
+    "ctl_verification": "BLOCKED_MISSING_SIBLING_PROVIDER"
+  }
+}
