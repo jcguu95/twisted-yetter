@@ -28,23 +28,42 @@ def canonical_hash(payload: dict) -> str:
 def test_bridge_artifact_is_content_addressed_and_scoped() -> None:
     artifact = json.loads(ARTIFACT.read_text())
     assert artifact["status"] == (
-        "PASS_DOTTED_PUNCTURE_WORDS_IMPLEMENTATION_BRIDGE"
+        "PASS_DOTTED_PUNCTURE_AND_CLOSING_HANDLE_IMPLEMENTATION_BRIDGE"
     )
     assert artifact["content_hash"] == canonical_hash(artifact)
-    assert artifact["resolved_blocker"] == "DOTTED_PUNCTURE_WORDS_MISSING"
+    assert set(artifact["resolved_blockers"]) == {
+        "DOTTED_PUNCTURE_WORDS_MISSING",
+        "CLOSING_THREE_HANDLE_DATA_MISSING",
+    }
     assert artifact["checks"]["topology_certificate_is_proof_bearing"] is True
     assert artifact["checks"]["aggregated_incidence_used_to_infer_words"] is False
+    assert artifact["checks"]["closing_boundary_movie_is_proof_bearing"] is True
+    assert (
+        artifact["checks"]["closing_boundary_movie_source_is_exactly_bound"]
+        is True
+    )
+    assert (
+        artifact["checks"]["three_handle_count_is_derived_from_boundary_genus"]
+        is True
+    )
+    assert (
+        artifact["checks"]["bare_formal_presentation_is_accepted_as_closed"]
+        is False
+    )
+    assert artifact["checks"]["new_axioms_added_for_closing_bridge"] == 0
 
 
 def test_ledger_keeps_all_remaining_semantic_blockers_visible() -> None:
     ledger = json.loads(LEDGER.read_text())
     assert ledger["content_hash"] == canonical_hash(ledger)
     assert {item["id"] for item in ledger["blockers"]} == {
-        "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
-        "CLOSING_THREE_HANDLE_DATA_MISSING",
         "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
     }
+    assert {item["id"] for item in ledger["semantic_warnings"]} == {
+        "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
+    }
     assert "DOTTED_PUNCTURE_WORDS_MISSING" in ledger["resolved_blockers"]
+    assert "CLOSING_THREE_HANDLE_DATA_MISSING" in ledger["resolved_blockers"]
 
 
 def test_frozen_semantic_hashes_still_match_disk() -> None:

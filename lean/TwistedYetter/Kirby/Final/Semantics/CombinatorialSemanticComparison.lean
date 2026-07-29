@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
 import TwistedYetter.Kirby.Final.Semantics.DottedCutImplementationBridge
+import TwistedYetter.Kirby.Final.Semantics.ClosingHandleImplementationBridge
 import TwistedYetter.Kirby.Presentation
 
 /-!
@@ -50,29 +51,28 @@ def componentTable
       TwistedYetter.Semantics.Independent.Component :=
   fun index => component (formal.raw.components.get index)
 
-/--
-The type of the bridge required by the frozen specification.  No inhabitant
-is declared here: the current implementation does not contain enough data.
--/
-abbrev RequiredTotalBridge :=
-  TwistedYetter.Kirby.Presentation.FormalPresentation →
-    TwistedYetter.Semantics.Independent.CombinatorialSpecialKirbyDiagram
-
 inductive CurrentBridgeBlocker
-  | punctureDirectionSignRelationNotNormative
-  | closingThreeHandleDataMissing
   | primalDualHomologyConventionMismatch
   deriving DecidableEq, Repr
 
 def currentBridgeBlockers : List CurrentBridgeBlocker :=
   [
-    .punctureDirectionSignRelationNotNormative,
-    .closingThreeHandleDataMissing,
     .primalDualHomologyConventionMismatch
   ]
 
 theorem currentBridgeBlockers_completeList :
-    currentBridgeBlockers.length = 3 :=
+    currentBridgeBlockers.length = 1 :=
+  rfl
+
+inductive CurrentSemanticWarning
+  | punctureDirectionSignRelationNotNormative
+  deriving DecidableEq, Repr
+
+def currentSemanticWarnings : List CurrentSemanticWarning :=
+  [.punctureDirectionSignRelationNotNormative]
+
+theorem currentSemanticWarnings_completeList :
+    currentSemanticWarnings.length = 1 :=
   rfl
 
 /--
@@ -87,6 +87,47 @@ def dottedCutData
     (certified : CertifiedDottedPresentation) :
     TwistedYetter.Semantics.Independent.DottedCutData certified.trace :=
   certified.toDottedCutData
+
+/--
+The total diagram bridge has a proof-bearing closed domain.  A bare
+`FormalPresentation` is intentionally insufficient: it has no evidence that
+its lower boundary can be capped by three- and four-handles.
+-/
+abbrev CertifiedClosedDottedPresentation
+    {calculus :
+      BoundaryStandardization.FramedSurgeryDiagramTheory}
+    {lowerTheory :
+      BoundaryStandardization.LowerHandlebodyTheory calculus}
+    (semantics :
+      BoundaryCertifiedKirbyPresentation.LowerKirbyDiagramSemantics
+        lowerTheory) :=
+  ClosingHandleImplementationBridge.CertifiedClosedDottedPresentation
+    semantics
+
+abbrev RequiredTotalBridge
+    {calculus :
+      BoundaryStandardization.FramedSurgeryDiagramTheory}
+    {lowerTheory :
+      BoundaryStandardization.LowerHandlebodyTheory calculus}
+    (semantics :
+      BoundaryCertifiedKirbyPresentation.LowerKirbyDiagramSemantics
+        lowerTheory) :=
+  CertifiedClosedDottedPresentation semantics →
+    TwistedYetter.Semantics.Independent.CombinatorialSpecialKirbyDiagram
+
+/-- The required bridge is now an explicit construction, not an assumption. -/
+noncomputable def certifiedClosedDottedBridge
+    {calculus :
+      BoundaryStandardization.FramedSurgeryDiagramTheory}
+    {lowerTheory :
+      BoundaryStandardization.LowerHandlebodyTheory calculus}
+    (semantics :
+      BoundaryCertifiedKirbyPresentation.LowerKirbyDiagramSemantics
+        lowerTheory) :
+    RequiredTotalBridge semantics :=
+  fun certified =>
+    ClosingHandleImplementationBridge.CertifiedClosedDottedPresentation.toCombinatorialSpecialKirbyDiagram
+      certified
 
 /--
 The first comparison gap is closed by the v2 raw syntax itself: every coupon

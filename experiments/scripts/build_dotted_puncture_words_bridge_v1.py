@@ -162,6 +162,14 @@ def main() -> None:
         ),
         (
             "lean/TwistedYetter/Kirby/Final/Semantics/"
+            "ClosingHandleImplementationBridge.lean"
+        ),
+        (
+            "lean/TwistedYetter/Kirby/Final/Semantics/"
+            "ClosingHandleImplementationBridgeAxiomAudit.lean"
+        ),
+        (
+            "lean/TwistedYetter/Kirby/Final/Semantics/"
             "CombinatorialSemanticComparison.lean"
         ),
     ]
@@ -191,7 +199,9 @@ def main() -> None:
     }
     payload: dict[str, Any] = {
         "schema": "twisted-yetter.dotted-puncture-words-bridge.v1",
-        "status": "PASS_DOTTED_PUNCTURE_WORDS_IMPLEMENTATION_BRIDGE",
+        "status": (
+            "PASS_DOTTED_PUNCTURE_AND_CLOSING_HANDLE_IMPLEMENTATION_BRIDGE"
+        ),
         "started_at_utc": started_at,
         "finished_at_utc": utc_now(),
         "elapsed_milliseconds": round((time.perf_counter() - started) * 1000),
@@ -216,20 +226,36 @@ def main() -> None:
             },
             "topology_certificate_is_proof_bearing": True,
             "aggregated_incidence_used_to_infer_words": False,
+            "closing_boundary_movie_is_proof_bearing": True,
+            "closing_boundary_movie_source_is_exactly_bound": True,
+            "three_handle_count_is_derived_from_boundary_genus": True,
+            "bare_formal_presentation_is_accepted_as_closed": False,
+            "new_axioms_added_for_closing_bridge": 0,
             "frozen_semantics_hashes": observed_frozen,
         },
         "source_sha256": source_hashes,
-        "resolved_blocker": "DOTTED_PUNCTURE_WORDS_MISSING",
-        "remaining_blockers": [
-            "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
+        "resolved_blockers": [
+            "DOTTED_PUNCTURE_WORDS_MISSING",
             "CLOSING_THREE_HANDLE_DATA_MISSING",
+        ],
+        "remaining_blockers": [
             "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
+        ],
+        "semantic_warnings": [
+            "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
         ],
         "explicit_non_claims": [
             "No byte under Independent semantics was modified.",
             "No topology proposition is inferred from a JSON hash.",
-            "No total CombinatorialSpecialKirbyDiagram bridge is claimed.",
-            "No closing three-handle or primal/dual H2 conflict is resolved.",
+            (
+                "No bare FormalPresentation is claimed to determine a closed "
+                "four-manifold."
+            ),
+            (
+                "The total CombinatorialSpecialKirbyDiagram bridge requires "
+                "a proof-bearing CertifiedClosedDottedPresentation."
+            ),
+            "The primal/dual H2 convention conflict is not resolved.",
             "The frozen semantics still does not require direction/sign correspondence.",
         ],
         "reproduce_command": (
@@ -261,12 +287,22 @@ def main() -> None:
             "Coupon boundary words",
             "Dotted ordered signed puncture words",
             "Proof-bearing dotted-cut topology boundary",
+            "Source-bound boundary-standardization movie",
+            "Three-handle count derived from certified boundary genus",
+            "Total frozen diagram bridge from certified closed dotted input",
         ],
         "resolved_blockers": [
             "COUPON_INPUT_OUTPUT_WORDS_MISSING",
             "DOTTED_PUNCTURE_WORDS_MISSING",
+            "CLOSING_THREE_HANDLE_DATA_MISSING",
         ],
         "blockers": [
+            {
+                "id": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
+                "severity": "NONTRIVIAL_SEMANTIC_CONFLICT",
+            },
+        ],
+        "semantic_warnings": [
             {
                 "id": "PUNCTURE_DIRECTION_SIGN_RELATION_NOT_NORMATIVE",
                 "severity": "NORMATIVE_SEMANTICS_WEAKER_THAN_IMPLEMENTATION",
@@ -274,14 +310,6 @@ def main() -> None:
                     "v3 enforces direction/sign correspondence; frozen "
                     "DottedPuncture only requires the sign to be plus or minus one."
                 ),
-            },
-            {
-                "id": "CLOSING_THREE_HANDLE_DATA_MISSING",
-                "severity": "SEMANTIC_DATA_MISSING",
-            },
-            {
-                "id": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
-                "severity": "NONTRIVIAL_SEMANTIC_CONFLICT",
             },
         ],
         "bridge_artifact": {
