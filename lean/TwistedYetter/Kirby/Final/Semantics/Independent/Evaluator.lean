@@ -2,7 +2,7 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 
 /-!
-# Independent semantics: role-aware evaluator
+# Independent semantics: role-aware THAM-side evaluator
 
 The definition below starts from a finite combinatorial special Kirby
 diagram.  It does not start from a knot in `S³`, and it does not reuse an
@@ -12,6 +12,13 @@ Ordinary and specially-dotted two-handle components are summed over the
 simple labels.  Literal dotted one-handle components are never assigned an
 ordinary Kirby-colour label: every dotted puncture is compiled using the
 normalized tensor-unit projector.
+
+The displayed diagram keeps ordinary Kirby-calculus names.  Before evaluating,
+the handle decomposition is read upside down as in Tham, Definition 5.11:
+primal one-handles are THAM three-handles, primal two-handles remain
+two-handles, and primal three-handles are THAM one-handles.  Character
+exponents therefore come only from `ThamTwoCycles`, never directly from a
+primal representative.
 -/
 
 namespace TwistedYetter.Semantics.Independent
@@ -42,8 +49,10 @@ def characterWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : TwoCycles diagram) : K :=
+    (cycle : ThamTwoCycles turnedOver) : K :=
   ((∏ handle,
       (𝒞η.character.value (labeling handle)) ^ (cycle.1 handle)) : Kˣ)
 
@@ -56,8 +65,10 @@ structure RoleAwareCompiledTermCore
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : TwoCycles diagram) where
+    (cycle : ThamTwoCycles turnedOver) where
   ChannelChoice : Type
   channelChoiceFintype : Fintype ChannelChoice
   graph : ChannelChoice → RibbonExpression 𝒞η.category
@@ -67,49 +78,61 @@ opaque OrdinaryComponentsUseAssignedSimpleLabels
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram} :
-    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+    {cycle : ThamTwoCycles turnedOver} :
+    RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle → Prop
 
 opaque DottedComponentsUseNormalizedTensorUnitProjector
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram} :
-    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+    {cycle : ThamTwoCycles turnedOver} :
+    RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle → Prop
 
 opaque CharacterCouponsUseCycleCoordinates
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram} :
-    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+    {cycle : ThamTwoCycles turnedOver} :
+    RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle → Prop
 
 opaque PunctureDirectionsDetermineExponentSigns
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram} :
-    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+    {cycle : ThamTwoCycles turnedOver} :
+    RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle → Prop
 
 opaque EveryFusionMultiplicityIsSummed
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram} :
-    RoleAwareCompiledTermCore 𝒞η diagram labeling cycle → Prop
+    {cycle : ThamTwoCycles turnedOver} :
+    RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle → Prop
 
 structure RoleAwareCompiledTerm
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : TwoCycles diagram) where
-  core : RoleAwareCompiledTermCore 𝒞η diagram labeling cycle
+    (cycle : ThamTwoCycles turnedOver) where
+  core : RoleAwareCompiledTermCore 𝒞η diagram primal turnedOver labeling cycle
   ordinaryComponentsUseAssignedSimpleLabels :
     OrdinaryComponentsUseAssignedSimpleLabels core
   dottedComponentsUseNormalizedTensorUnitProjector :
@@ -125,18 +148,24 @@ abbrev RoleAwareCompiledTerm.ChannelChoice
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram}
-    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+    {cycle : ThamTwoCycles turnedOver}
+    (term :
+      RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle) :=
   term.core.ChannelChoice
 
 instance
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram}
-    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :
+    {cycle : ThamTwoCycles turnedOver}
+    (term :
+      RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle) :
     Fintype term.ChannelChoice :=
   term.core.channelChoiceFintype
 
@@ -144,18 +173,24 @@ abbrev RoleAwareCompiledTerm.graph
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram}
-    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+    {cycle : ThamTwoCycles turnedOver}
+    (term :
+      RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle) :=
   term.core.graph
 
 abbrev RoleAwareCompiledTerm.coefficient
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     {𝒞η : TwistedPremodularCategory K}
     {diagram : CombinatorialSpecialKirbyDiagram}
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    {turnedOver : TurnedOverBoundaryCertificate primal}
     {labeling : TwoHandleLabeling 𝒞η.category diagram}
-    {cycle : TwoCycles diagram}
-    (term : RoleAwareCompiledTerm 𝒞η diagram labeling cycle) :=
+    {cycle : ThamTwoCycles turnedOver}
+    (term :
+      RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle) :=
   term.core.coefficient
 
 /--
@@ -167,9 +202,11 @@ structure RoleAwareGraphCompiler
     (𝒞η : TwistedPremodularCategory K) where
   compile :
     (diagram : CombinatorialSpecialKirbyDiagram) →
+    (primal : PrimalDegreeThreeBoundaryData diagram) →
+    (turnedOver : TurnedOverBoundaryCertificate primal) →
     (labeling : TwoHandleLabeling 𝒞η.category diagram) →
-    (cycle : TwoCycles diagram) →
-      RoleAwareCompiledTerm 𝒞η diagram labeling cycle
+    (cycle : ThamTwoCycles turnedOver) →
+      RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle
 
 /--
 The handle normalization is isolated because its exact power is a convention
@@ -211,22 +248,24 @@ def evaluateCycle
     (compiler : RoleAwareGraphCompiler 𝒞η)
     (normalization : ThamDefinition511Normalization K)
     (diagram : CombinatorialSpecialKirbyDiagram)
-    (cycle : TwoCycles diagram) : K :=
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (cycle : ThamTwoCycles turnedOver) : K :=
   normalization.value
       𝒞η.category.simples.globalDimension
-      diagram.handles.hOne
+      diagram.handles.hThree
       diagram.handles.hTwo
-      diagram.handles.hThree *
+      diagram.handles.hOne *
     ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
       ordinaryKirbyWeight 𝒞η.category labeling *
-      characterWeight 𝒞η labeling cycle *
-      let term := compiler.compile diagram labeling cycle
+      characterWeight 𝒞η turnedOver labeling cycle *
+      let term := compiler.compile diagram primal turnedOver labeling cycle
       ∑ channel : term.ChannelChoice,
         term.coefficient channel * graphical.evaluate (term.graph channel)
 
 /--
 Representative independence is not baked into the definition.  It is the
-precise obligation required before `evaluateCycle` descends to `KirbyH₂`.
+precise obligation required before `evaluateCycle` descends to `ThamKirbyH₂`.
 -/
 def RepresentativeIndependenceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -235,12 +274,15 @@ def RepresentativeIndependenceStatement
     (compiler : RoleAwareGraphCompiler 𝒞η)
     (normalization : ThamDefinition511Normalization K)
     (diagram : CombinatorialSpecialKirbyDiagram)
-    (degreeThree : DegreeThreeBoundaryData diagram) : Prop :=
-  ∀ left right : TwoCycles diagram,
-    cycleClass degreeThree left = cycleClass degreeThree right →
-    evaluateCycle 𝒞η graphical compiler normalization diagram left =
-      evaluateCycle 𝒞η graphical compiler normalization diagram right
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal) : Prop :=
+  ∀ left right : ThamTwoCycles turnedOver,
+    thamCycleClass turnedOver left = thamCycleClass turnedOver right →
+    evaluateCycle 𝒞η graphical compiler normalization
+        diagram primal turnedOver left =
+      evaluateCycle 𝒞η graphical compiler normalization
+        diagram primal turnedOver right
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 21258
+-- semantic-freeze-padding: 354

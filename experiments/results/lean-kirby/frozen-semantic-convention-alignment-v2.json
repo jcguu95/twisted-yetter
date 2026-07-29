@@ -1,0 +1,62 @@
+{
+  "schema": "twisted-yetter.frozen-semantic-convention-alignment.v2",
+  "recorded_at_utc": "2026-07-29T05:55:26Z",
+  "branch": "codex/lean-kirby-coupon-bootstrap",
+  "base_git_commit": "e15776fd2e56594d70991e85746c48263e78dfd5",
+  "status": "FROZEN_SEMANTICS_V2_CONVENTION_ALIGNED",
+  "frozen_manifest": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/semantic-freeze-combinatorial-v2.json",
+  "historical_manifest": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/semantic-freeze-combinatorial-v1.json",
+  "resolved_semantic_blocker": "PRIMAL_DUAL_HOMOLOGY_CONVENTION_MISMATCH",
+  "resolution": {
+    "primal_h2_retained": true,
+    "turned_over_maps_computed_by_finite_basis_transpose": true,
+    "turned_over_chain_condition_kernel_proved": true,
+    "turnover_h2_identification_is_explicit_topology_boundary": true,
+    "evaluator_reads_only_tham_cycles": true,
+    "normalization_uses_reversed_counts": true,
+    "move_naturality_square_is_explicit": true,
+    "raw_coordinate_cast_used": false,
+    "new_evaluator_equality_axiom": false
+  },
+  "bridge": {
+    "source": "lean/TwistedYetter/Kirby/Final/Semantics/CompleteSemanticConformance.lean",
+    "marking_route": "primal alpha -> turnover H2 equivalence -> frozen THAM H2 -> current certified dual H2",
+    "final_equality_is_derived": true,
+    "concrete_case_admission_requires_complete_certificate": true
+  },
+  "verification": {
+    "firewall": "PASS",
+    "independent_entry_build": "PASS",
+    "conformance_gate_build": "PASS",
+    "axiom_audit": "PASS_STANDARD_LEAN_AXIOMS_ONLY",
+    "full_lake_build": "PASS",
+    "python_regressions": "PASS_14_TESTS"
+  },
+  "reproducibility": {
+    "timestamp_utc": "2026-07-29T05:57:56Z",
+    "os": "Darwin 24.6.0 arm64",
+    "lean": "4.29.1 arm64-apple-darwin24.6.0",
+    "lake": "5.0.0-src+f72c35b",
+    "lean_processes_launched_concurrently": 1,
+    "commands": [
+      "python3 lean/TwistedYetter/Kirby/Final/Semantics/Independent/check_firewall.py",
+      "lake build TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+      "lake build TwistedYetter.Kirby.Final.Semantics.CompleteSemanticConformance TwistedYetter.Kirby.Final.Semantics.CompleteSemanticConformanceAxiomAudit",
+      "lake build TwistedYetter.Kirby.Final.Semantics.ThamConventionAlignmentAxiomAudit",
+      "lake build",
+      "PYTHONPATH=src pytest -q tests/test_dotted_puncture_words_bridge_v1.py tests/test_frozen_semantic_conformance_gate_v1.py tests/test_tham_convention_alignment_v2.py"
+    ]
+  },
+  "admission": {
+    "ctl_admitted": false,
+    "reason": "CTL_VERIFICATION_BLOCKED_MISSING_SIBLING_PROVIDER",
+    "missing_provider": "/Users/jin/.codex/worktrees/4e82/ctl-meta/meta/ctl-dogfood/scripts/ctl_store.py"
+  },
+  "claims": {
+    "new_four_manifold_theorem": false,
+    "legacy_numerics_recertified": false,
+    "primal_and_tham_coordinates_identical": false,
+    "current_evaluator_cases_automatically_admitted": false
+  },
+  "content_hash": "sha256:5222d82efbdae28d70f47a85157ebe19f40bed59d58af651b4fcf7363dcd620f"
+}

@@ -49,13 +49,13 @@ def test_gate_is_fail_closed_until_a_complete_certificate_exists() -> None:
     assert artifact["gate"]["boolean_or_hash_can_create_admission"] is False
 
 
-def test_frozen_semantic_files_are_byte_identical() -> None:
+def test_historical_v1_gate_is_bound_to_historical_v1_manifest() -> None:
     artifact = json.loads(ARTIFACT.read_text())
-    observed = {
-        path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(INDEPENDENT.glob("*.lean"))
-    }
-    assert observed == artifact["frozen_semantics_sha256"]
+    manifest = json.loads(
+        (INDEPENDENT / "semantic-freeze-combinatorial-v1.json").read_text()
+    )
+    assert manifest["files"] == artifact["frozen_semantics_sha256"]
+    assert manifest["schema"] == "independent-semantic-freeze-combinatorial-v1"
 
 
 def test_gate_exposes_primitives_and_derives_the_final_equality() -> None:

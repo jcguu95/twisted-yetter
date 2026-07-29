@@ -63,6 +63,20 @@ structure ExactSourceBinding
   formal_eq :
     certifiedClosed.dotted.formal =
       current.canonicalPresentation.topology.formal
+  primalBoundary :
+    PrimalDegreeThreeBoundaryData certifiedClosed.toCombinatorialSpecialKirbyDiagram
+  turnedOver :
+    TurnedOverBoundaryCertificate primalBoundary
+  turnover :
+    TurnoverH₂Identification turnedOver
+  /--
+  The frozen THAM-side quotient and the current certified dual handle complex
+  compute the same turned-over second homology.  This is topology data, not an
+  evaluator equality.
+  -/
+  thamToCurrentH₂ :
+    ThamKirbyH₂ turnedOver ≃+
+      current.canonicalPresentation.topology.handleChain.SecondHomology
 
 namespace ExactSourceBinding
 
@@ -79,11 +93,9 @@ noncomputable def frozenDiagram
 end ExactSourceBinding
 
 /--
-The primal frozen marking and the current evaluator marking meet in the same
-external group `H2`.
-
-No direct primal/dual equality is supplied.  The current class is derived by
-transporting the frozen class through the two displayed comparison maps.
+The only freely chosen marking is the primal frozen class.  Its evaluator-side
+class is forced through the source's turnover identification and the exact
+comparison with the current certified dual complex.
 -/
 structure MarkingBinding
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
@@ -92,9 +104,7 @@ structure MarkingBinding
     {semantics : LowerKirbyDiagramSemantics lowerTheory}
     {current : Presentation H2}
     (source : ExactSourceBinding semantics current) where
-  degreeThree : DegreeThreeBoundaryData source.frozenDiagram
-  primalToMarkedH2 : KirbyH₂ degreeThree ≃+ H2
-  frozenAlpha : KirbyH₂ degreeThree
+  frozenAlpha : PrimalKirbyH₂ source.primalBoundary
 
 namespace MarkingBinding
 
@@ -107,10 +117,10 @@ noncomputable def currentAlpha
     {source : ExactSourceBinding semantics current}
     (marking : MarkingBinding source) :
     current.canonicalPresentation.topology.handleChain.SecondHomology :=
-  current.canonicalPresentation.topology.h2ModelEquiv.symm
-    (marking.primalToMarkedH2 marking.frozenAlpha)
+  source.thamToCurrentH₂
+    (source.turnover.equiv marking.frozenAlpha)
 
-noncomputable def frozenCycle
+noncomputable def frozenThamCycle
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
@@ -118,8 +128,8 @@ noncomputable def frozenCycle
     {current : Presentation H2}
     {source : ExactSourceBinding semantics current}
     (marking : MarkingBinding source) :
-    TwoCycles source.frozenDiagram :=
-  Quotient.out marking.frozenAlpha
+    ThamTwoCycles source.turnedOver :=
+  Quotient.out (source.turnover.equiv marking.frozenAlpha)
 
 noncomputable def currentCycle
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
@@ -132,7 +142,7 @@ noncomputable def currentCycle
     current.canonicalPresentation.DegreeTwoCycle :=
   current.canonicalPresentation.chosenCycle marking.currentAlpha
 
-theorem currentAlpha_maps_to_frozen_marking
+theorem currentAlpha_is_exact_turnedOver_marking
     {calculus : FramedSurgeryDiagramTheory.{uD, uIso, uSlide}}
     {lowerTheory :
       LowerHandlebodyTheory.{uD, uIso, uSlide, uP} calculus}
@@ -140,12 +150,10 @@ theorem currentAlpha_maps_to_frozen_marking
     {current : Presentation H2}
     {source : ExactSourceBinding semantics current}
     (marking : MarkingBinding source) :
-    current.canonicalPresentation.topology.h2ModelEquiv
-        marking.currentAlpha =
-      marking.primalToMarkedH2 marking.frozenAlpha := by
-  exact
-    current.canonicalPresentation.topology.h2ModelEquiv.apply_symm_apply
-      (marking.primalToMarkedH2 marking.frozenAlpha)
+    marking.currentAlpha =
+      source.thamToCurrentH₂
+        (source.turnover.equiv marking.frozenAlpha) :=
+  rfl
 
 end MarkingBinding
 
@@ -194,11 +202,13 @@ def frozenSummand
     (graphical : RibbonGraphicalEvaluation frozen.category)
     (compiler : RoleAwareGraphCompiler frozen)
     {diagram : CombinatorialSpecialKirbyDiagram}
-    (cycle : TwoCycles diagram)
+    {primal : PrimalDegreeThreeBoundaryData diagram}
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (cycle : ThamTwoCycles turnedOver)
     (labeling : TwoHandleLabeling frozen.category diagram) : K :=
   ordinaryKirbyWeight frozen.category labeling *
-    characterWeight frozen labeling cycle *
-    let term := compiler.compile diagram labeling cycle
+    characterWeight frozen turnedOver labeling cycle *
+    let term := compiler.compile diagram primal turnedOver labeling cycle
     ∑ channel : term.ChannelChoice,
       term.coefficient channel * graphical.evaluate (term.graph channel)
 
@@ -241,7 +251,7 @@ structure EvaluatorBinding
           (handleEquiv handle).1).componentId
   cycle_coordinate_sound :
     ∀ handle,
-      marking.frozenCycle.1 handle =
+      marking.frozenThamCycle.1 handle =
         current.canonicalPresentation.cycleComponentExponent
           marking.currentCycle
           (current.canonicalPresentation.topology.formal.raw.components.get
@@ -249,9 +259,9 @@ structure EvaluatorBinding
   normalization_sound :
     normalization.value
         frozen.category.simples.globalDimension
-        source.frozenDiagram.handles.hOne
+        source.frozenDiagram.handles.hThree
         source.frozenDiagram.handles.hTwo
-        source.frozenDiagram.handles.hThree =
+        source.frozenDiagram.handles.hOne =
       RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareNormalizationFactor
         currentCategory current.canonicalPresentation
   graphicalTerm_sound :
@@ -262,7 +272,8 @@ structure EvaluatorBinding
         fun currentHandle =>
           algebra.simpleEquiv (labeling (handleEquiv.symm currentHandle))
       let term :=
-        compiler.compile source.frozenDiagram labeling marking.frozenCycle
+        compiler.compile source.frozenDiagram source.primalBoundary
+          source.turnedOver labeling marking.frozenThamCycle
       (∑ channel : term.ChannelChoice,
           term.coefficient channel *
             graphical.evaluate (term.graph channel)) =
@@ -341,7 +352,8 @@ def WeightConformance
         currentCategory currentCharacter) : Prop :=
   ∀ labeling : TwoHandleLabeling frozen.category source.frozenDiagram,
     ordinaryKirbyWeight frozen.category labeling *
-        characterWeight frozen labeling marking.frozenCycle =
+        characterWeight frozen source.turnedOver labeling
+          marking.frozenThamCycle =
       RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareGlobalWeight
         currentCategory currentCharacter current.canonicalPresentation
         marking.currentCycle (binding.labelingEquiv labeling)
@@ -381,7 +393,7 @@ theorem weightConformance_of_primitive_bindings
         frozen.category.simples.quantumDimension (labeling handle)) *
         (∏ handle,
           (((frozen.character.value (labeling handle)) ^
-            (marking.frozenCycle.1 handle) : Kˣ) : K)) =
+            (marking.frozenThamCycle.1 handle) : Kˣ) : K)) =
       ∏ currentHandle,
         current.canonicalPresentation.cycleComponentWeight
           currentCategory currentCharacter marking.currentCycle
@@ -399,7 +411,7 @@ theorem weightConformance_of_primitive_bindings
   change
     frozen.category.simples.quantumDimension (labeling handle) *
         (((frozen.character.value (labeling handle)) ^
-          (marking.frozenCycle.1 handle) : Kˣ) : K) =
+          (marking.frozenThamCycle.1 handle) : Kˣ) : K) =
       currentCategory.quantumDimension
           (binding.algebra.simpleEquiv (labeling handle)) *
         (((currentCategory.toFusionCategoryData.automorphismSimpleUnit
@@ -442,7 +454,8 @@ theorem roleAwareCycleEval_eq_frozenEvaluateCycle
         currentCategory currentCharacter current.canonicalPresentation
         current.simultaneousGeometry marking.currentCycle =
       evaluateCycle frozen graphical compiler normalization
-        source.frozenDiagram marking.frozenCycle := by
+        source.frozenDiagram source.primalBoundary source.turnedOver
+          marking.frozenThamCycle := by
   classical
   unfold
     RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
@@ -455,7 +468,9 @@ theorem roleAwareCycleEval_eq_frozenEvaluateCycle
   symm
   apply Fintype.sum_equiv binding.labelingEquiv
   intro labeling
-  rw [binding.weightConformance_of_primitive_bindings labeling]
+  conv_lhs =>
+    congr
+    · exact binding.weightConformance_of_primitive_bindings labeling
   rw [binding.graphicalTerm_sound labeling]
   unfold
     RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareSummand
@@ -590,7 +605,8 @@ noncomputable def frozenValue
       FrozenConformanceCertificate semantics current frozen graphical compiler
         normalization currentCategory currentCharacter) : K :=
   evaluateCycle frozen graphical compiler normalization
-    certificate.source.frozenDiagram certificate.marking.frozenCycle
+    certificate.source.frozenDiagram certificate.source.primalBoundary
+      certificate.source.turnedOver certificate.marking.frozenThamCycle
 
 /--
 Kernel-checked semantic soundness of every admitted evaluator case.

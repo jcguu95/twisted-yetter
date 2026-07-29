@@ -9,6 +9,8 @@ chain map.  No constructor contains an evaluator equality.
 
 namespace TwistedYetter.Semantics.Independent
 
+noncomputable section
+
 inductive ElementaryMoveKind
   | framedIsotopy
   | oneOverOne
@@ -149,13 +151,13 @@ structure CancellationScript
     CancellationMarkingCoordinateChangeIsStandard source target kind
 
 /--
-An exact chain-level transport.  The induced map on quotient homology is
-derived later; it is not supplied as an unrelated function on `H₂`.
+An exact chain-level transport for the primal handle complexes, using ordinary
+Kirby-calculus indices.  The induced map on quotient homology is derived.
 -/
-structure HandleChainTransport
+structure PrimalHandleChainTransport
     (source target : CombinatorialSpecialKirbyDiagram)
-    (sourceBoundary : DegreeThreeBoundaryData source)
-    (targetBoundary : DegreeThreeBoundaryData target) where
+    (sourceBoundary : PrimalDegreeThreeBoundaryData source)
+    (targetBoundary : PrimalDegreeThreeBoundaryData target) where
   degreeThree :
     HandleChainGroup source.handles.hThree →+
       HandleChainGroup target.handles.hThree
@@ -169,21 +171,23 @@ structure HandleChainTransport
     degreeTwo.comp sourceBoundary.boundaryThree =
       targetBoundary.boundaryThree.comp degreeThree
   commutesWithBoundaryTwo :
-    degreeOne.comp (boundaryTwo source) =
-      (boundaryTwo target).comp degreeTwo
+    degreeOne.comp (primalBoundaryTwo source) =
+      (primalBoundaryTwo target).comp degreeTwo
 
-def HandleChainTransport.mapCycle
+def PrimalHandleChainTransport.mapCycle
     {source target : CombinatorialSpecialKirbyDiagram}
-    {sourceBoundary : DegreeThreeBoundaryData source}
-    {targetBoundary : DegreeThreeBoundaryData target}
+    {sourceBoundary : PrimalDegreeThreeBoundaryData source}
+    {targetBoundary : PrimalDegreeThreeBoundaryData target}
     (transport :
-      HandleChainTransport source target sourceBoundary targetBoundary) :
-    TwoCycles source →+ TwoCycles target where
+      PrimalHandleChainTransport source target
+        sourceBoundary targetBoundary) :
+    PrimalTwoCycles source →+ PrimalTwoCycles target where
   toFun cycle :=
     ⟨transport.degreeTwo cycle.1, by
-      change ((boundaryTwo target).comp transport.degreeTwo) cycle.1 = 0
+      change
+        ((primalBoundaryTwo target).comp transport.degreeTwo) cycle.1 = 0
       rw [← transport.commutesWithBoundaryTwo]
-      change transport.degreeOne (boundaryTwo source cycle.1) = 0
+      change transport.degreeOne (primalBoundaryTwo source cycle.1) = 0
       rw [cycle.2]
       simp⟩
   map_zero' := by
@@ -193,16 +197,17 @@ def HandleChainTransport.mapCycle
     ext
     simp
 
-def HandleChainTransport.inducedH₂
+def PrimalHandleChainTransport.inducedH₂
     {source target : CombinatorialSpecialKirbyDiagram}
-    {sourceBoundary : DegreeThreeBoundaryData source}
-    {targetBoundary : DegreeThreeBoundaryData target}
+    {sourceBoundary : PrimalDegreeThreeBoundaryData source}
+    {targetBoundary : PrimalDegreeThreeBoundaryData target}
     (transport :
-      HandleChainTransport source target sourceBoundary targetBoundary) :
-    KirbyH₂ sourceBoundary →+ KirbyH₂ targetBoundary :=
+      PrimalHandleChainTransport source target
+        sourceBoundary targetBoundary) :
+    PrimalKirbyH₂ sourceBoundary →+ PrimalKirbyH₂ targetBoundary :=
   QuotientAddGroup.map
-    (boundaryAsCycle sourceBoundary).range
-    (boundaryAsCycle targetBoundary).range
+    (primalBoundaryAsCycle sourceBoundary).range
+    (primalBoundaryAsCycle targetBoundary).range
     transport.mapCycle
     (by
       intro sourceBoundaryCycle sourceMembership
@@ -217,67 +222,161 @@ def HandleChainTransport.inducedH₂
       exact (DFunLike.congr_fun
         transport.commutesWithBoundaryThree degreeThreeChain).symm)
 
+/--
+An exact chain-level transport for the THAM-side turned-over complexes.
+The handle degrees are `primal 1,2,3 = THAM 3,2,1`.
+-/
+structure ThamHandleChainTransport
+    (source target : HomologicallyMarkedDiagram) where
+  degreeThree :
+    HandleChainGroup source.diagram.handles.hOne →+
+      HandleChainGroup target.diagram.handles.hOne
+  degreeTwo :
+    HandleChainGroup source.diagram.handles.hTwo →+
+      HandleChainGroup target.diagram.handles.hTwo
+  degreeOne :
+    HandleChainGroup source.diagram.handles.hThree →+
+      HandleChainGroup target.diagram.handles.hThree
+  commutesWithBoundaryThree :
+    degreeTwo.comp source.turnedOver.thamBoundaryThree =
+      target.turnedOver.thamBoundaryThree.comp degreeThree
+  commutesWithBoundaryTwo :
+    degreeOne.comp source.turnedOver.thamBoundaryTwo =
+      target.turnedOver.thamBoundaryTwo.comp degreeTwo
+
+def ThamHandleChainTransport.mapCycle
+    {source target : HomologicallyMarkedDiagram}
+    (transport : ThamHandleChainTransport source target) :
+    ThamTwoCycles source.turnedOver →+
+      ThamTwoCycles target.turnedOver where
+  toFun cycle :=
+    ⟨transport.degreeTwo cycle.1, by
+      change
+        (target.turnedOver.thamBoundaryTwo.comp
+          transport.degreeTwo) cycle.1 = 0
+      rw [← transport.commutesWithBoundaryTwo]
+      change
+        transport.degreeOne
+          (source.turnedOver.thamBoundaryTwo cycle.1) = 0
+      rw [cycle.2]
+      simp⟩
+  map_zero' := by
+    ext
+    simp
+  map_add' left right := by
+    ext
+    simp
+
+def ThamHandleChainTransport.inducedH₂
+    {source target : HomologicallyMarkedDiagram}
+    (transport : ThamHandleChainTransport source target) :
+    ThamKirbyH₂ source.turnedOver →+
+      ThamKirbyH₂ target.turnedOver :=
+  QuotientAddGroup.map
+    (thamBoundaryAsCycle source.turnedOver).range
+    (thamBoundaryAsCycle target.turnedOver).range
+    transport.mapCycle
+    (by
+      intro sourceBoundaryCycle sourceMembership
+      rcases sourceMembership with ⟨degreeThreeChain, rfl⟩
+      refine ⟨transport.degreeThree degreeThreeChain, ?_⟩
+      apply Subtype.ext
+      change
+        target.turnedOver.thamBoundaryThree
+            (transport.degreeThree degreeThreeChain) =
+          transport.degreeTwo
+            (source.turnedOver.thamBoundaryThree degreeThreeChain)
+      exact (DFunLike.congr_fun
+        transport.commutesWithBoundaryThree degreeThreeChain).symm)
+
+/--
+The complete category-neutral marking transport for one move.
+
+The final equation is the explicit naturality square between ordinary
+Kirby-side `H₂` and THAM-side turned-over `H₂`.  It prevents either side from
+silently reusing the other's raw degree-two coordinates.
+-/
+structure MoveHomologyTransport
+    (source target : HomologicallyMarkedDiagram) where
+  primal :
+    PrimalHandleChainTransport source.diagram target.diagram
+      source.primalBoundary target.primalBoundary
+  tham : ThamHandleChainTransport source target
+  turnover_natural :
+    ∀ alpha : PrimalKirbyH₂ source.primalBoundary,
+      target.turnover.equiv (primal.inducedH₂ alpha) =
+        tham.inducedH₂ (source.turnover.equiv alpha)
+
 inductive ElementaryMove
     (source target : HomologicallyMarkedDiagram) : Type
   | framedIsotopy
       (script : FramedIsotopyScript source.diagram target.diagram)
-      (chain :
-        HandleChainTransport source.diagram target.diagram
-          source.degreeThree target.degreeThree)
+      (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = chain.inducedH₂ source.alpha)
+        target.alpha = homology.primal.inducedH₂ source.alpha)
   | oneOverOne
       (script : CleanBandSlideScript source.diagram target.diagram)
       (moving_is_dotted :
         (source.diagram.trace.components script.movingSource).role = .dotted)
       (stationary_is_dotted :
         (source.diagram.trace.components script.stationarySource).role = .dotted)
-      (chain :
-        HandleChainTransport source.diagram target.diagram
-          source.degreeThree target.degreeThree)
+      (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = chain.inducedH₂ source.alpha)
+        target.alpha = homology.primal.inducedH₂ source.alpha)
   | twoOverOne
       (script : CleanBandSlideScript source.diagram target.diagram)
       (moving_is_two_handle :
         (source.diagram.trace.components script.movingSource).role ≠ .dotted)
       (stationary_is_dotted :
         (source.diagram.trace.components script.stationarySource).role = .dotted)
-      (chain :
-        HandleChainTransport source.diagram target.diagram
-          source.degreeThree target.degreeThree)
+      (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = chain.inducedH₂ source.alpha)
+        target.alpha = homology.primal.inducedH₂ source.alpha)
   | twoOverTwo
       (script : CleanBandSlideScript source.diagram target.diagram)
       (moving_is_two_handle :
         (source.diagram.trace.components script.movingSource).role ≠ .dotted)
       (stationary_is_two_handle :
         (source.diagram.trace.components script.stationarySource).role ≠ .dotted)
-      (chain :
-        HandleChainTransport source.diagram target.diagram
-          source.degreeThree target.degreeThree)
+      (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = chain.inducedH₂ source.alpha)
+        target.alpha = homology.primal.inducedH₂ source.alpha)
   | cancellation
       (script : CancellationScript source.diagram target.diagram)
-      (chain :
-        HandleChainTransport source.diagram target.diagram
-          source.degreeThree target.degreeThree)
+      (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = chain.inducedH₂ source.alpha)
+        target.alpha = homology.primal.inducedH₂ source.alpha)
 
-def ElementaryMove.chain
+def ElementaryMove.homology
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
-    HandleChainTransport source.diagram target.diagram
-      source.degreeThree target.degreeThree :=
+    MoveHomologyTransport source target :=
   match move with
-  | .framedIsotopy _ chain _ => chain
-  | .oneOverOne _ _ _ chain _ => chain
-  | .twoOverOne _ _ _ chain _ => chain
-  | .twoOverTwo _ _ _ chain _ => chain
-  | .cancellation _ chain _ => chain
+  | .framedIsotopy _ homology _ => homology
+  | .oneOverOne _ _ _ homology _ => homology
+  | .twoOverOne _ _ _ homology _ => homology
+  | .twoOverTwo _ _ _ homology _ => homology
+  | .cancellation _ homology _ => homology
+
+def ElementaryMove.primalMarkingTransport
+    {source target : HomologicallyMarkedDiagram}
+    (move : ElementaryMove source target) :
+    target.alpha = move.homology.primal.inducedH₂ source.alpha :=
+  match move with
+  | .framedIsotopy _ _ markingTransport => markingTransport
+  | .oneOverOne _ _ _ _ markingTransport => markingTransport
+  | .twoOverOne _ _ _ _ markingTransport => markingTransport
+  | .twoOverTwo _ _ _ _ markingTransport => markingTransport
+  | .cancellation _ _ markingTransport => markingTransport
+
+theorem ElementaryMove.thamMarkingTransport
+    {source target : HomologicallyMarkedDiagram}
+    (move : ElementaryMove source target) :
+    target.thamAlpha =
+      move.homology.tham.inducedH₂ source.thamAlpha := by
+  unfold HomologicallyMarkedDiagram.thamAlpha
+  rw [move.primalMarkingTransport]
+  exact move.homology.turnover_natural source.alpha
 
 structure KirbyMovie
     (source target : HomologicallyMarkedDiagram) where
@@ -289,6 +388,8 @@ structure KirbyMovie
     ∀ i : Fin stageCount,
       ElementaryMove (stages i.castSucc) (stages i.succ)
 
+end
+
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 3756
+-- semantic-freeze-padding: 3825

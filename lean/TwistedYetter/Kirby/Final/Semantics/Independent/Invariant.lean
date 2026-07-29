@@ -49,7 +49,7 @@ structure MarkedRealization
   markedDiagram : HomologicallyMarkedDiagram
   realizes : DiagramRealizes markedDiagram.diagram X
   homologyComparison :
-    KirbyH₂ markedDiagram.degreeThree ≃+ ManifoldH₂ X
+    PrimalKirbyH₂ markedDiagram.primalBoundary ≃+ ManifoldH₂ X
   markingMatches :
     homologyComparison markedDiagram.alpha = alpha
 
@@ -90,11 +90,12 @@ def LocalMoveInvarianceStatement
     (normalization : ThamDefinition511Normalization K) : Prop :=
   ∀ {source target : HomologicallyMarkedDiagram},
     (move : ElementaryMove source target) →
-    ∀ sourceCycle : TwoCycles source.diagram,
+    ∀ sourceCycle : ThamTwoCycles source.turnedOver,
       evaluateCycle 𝒞η graphical compiler normalization
-          source.diagram sourceCycle =
+          source.diagram source.primalBoundary source.turnedOver sourceCycle =
         evaluateCycle 𝒞η graphical compiler normalization
-          target.diagram (move.chain.mapCycle sourceCycle)
+          target.diagram target.primalBoundary target.turnedOver
+            (move.homology.tham.mapCycle sourceCycle)
 
 noncomputable def evaluateMarking
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -103,8 +104,9 @@ noncomputable def evaluateMarking
     (compiler : RoleAwareGraphCompiler 𝒞η)
     (normalization : ThamDefinition511Normalization K)
     (marked : HomologicallyMarkedDiagram) : K :=
-  evaluateCycle 𝒞η graphical compiler normalization marked.diagram
-    (Quotient.out marked.alpha)
+  evaluateCycle 𝒞η graphical compiler normalization
+    marked.diagram marked.primalBoundary marked.turnedOver
+    (Quotient.out marked.thamAlpha)
 
 /--
 The final public mathematical target.  It is a proposition to prove after
@@ -131,4 +133,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1545
+-- semantic-freeze-padding: 6645

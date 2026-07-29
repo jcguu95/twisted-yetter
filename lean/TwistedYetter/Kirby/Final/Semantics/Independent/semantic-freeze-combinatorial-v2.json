@@ -1,0 +1,87 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v2",
+  "recorded_at_utc": "2026-07-29T05:55:26Z",
+  "semantic_content_base_commit": "e15776fd2e56594d70991e85746c48263e78dfd5",
+  "supersedes": "semantic-freeze-combinatorial-v1.json",
+  "historical_v1_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "normative_input": "CombinatorialSpecialKirbyDiagram",
+  "convention": {
+    "outer_kirby_names": {
+      "literal_dotted_component": "primal 1-handle",
+      "ordinary_framed_component": "primal 2-handle",
+      "closing_data": "primal 3-handles"
+    },
+    "tham_evaluator_indices": {
+      "primal_1_handle": "THAM index 3",
+      "primal_2_handle": "THAM index 2",
+      "primal_3_handle": "THAM index 1"
+    },
+    "rationale": "Simultaneously follow ordinary Kirby-calculus handle names and THAM Definition 5.11 applied to the turned-over handle decomposition. Neither convention is asserted to be intrinsically preferable, and the intended invariant is not changed."
+  },
+  "reference": {
+    "title": "On the Category of Boundary Values in the extended Crane-Yetter TQFT",
+    "author": "Ying Hong Tham",
+    "url": "https://www.math.stonybrook.edu/alumni/2021-Ying-Hong-Tham.pdf",
+    "locators": [
+      "Definition 5.11, PDF p. 58",
+      "dual-handle application, PDF pp. 99-101"
+    ]
+  },
+  "semantic_diff_from_v1": [
+    "Primal Kirby H2 remains ker(primal d2) modulo im(primal d3).",
+    "THAM boundary maps are computed as finite-basis transposes of the primal maps.",
+    "The THAM chain condition is proved from the primal chain condition.",
+    "A single primal alpha is transported through a proof-bearing TurnoverH2Identification.",
+    "Character weights, graph compilation, representative independence, and local move invariance read only THAM-side cycles.",
+    "Normalization receives primal handle counts in reversed THAM order h3, h2, h1.",
+    "Every elementary move carries primal transport, THAM transport, and the commuting turnover H2 square."
+  ],
+  "quarantine": {
+    "allowed_imports": [
+      "Mathlib",
+      "TwistedYetter.Kirby.Final.Semantics.Independent.*"
+    ],
+    "firewall_command": "python3 lean/TwistedYetter/Kirby/Final/Semantics/Independent/check_firewall.py",
+    "firewall_status": "PASS"
+  },
+  "standalone_build": {
+    "command": "lake build TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+    "status": "PASS",
+    "lean": "4.29.1",
+    "lake": "5.0.0-src+f72c35b",
+    "platform": "arm64-apple-darwin24.6.0"
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "historical_v1_files": {
+    "Algebra.lean": "00016a4c7e001403745d7977bb6d430bbb601732c69681e2bbef68488bc53959",
+    "Diagram.lean": "00010bb741c9660e60ecde8f673ce3b7b257a52da7dfe2212ba7de202b0c9c16",
+    "Entry.lean": "000ec4a1dc6428a453dbdd949ef0922dee0e2d63657469477c409bffd50bbda8",
+    "Evaluator.lean": "000b5204ae925b864c8a8641a502f33e98293be45070fd86bf18835a5e5238b3",
+    "Graphical.lean": "000fe54f3532524313901518f169db2fdc45b594911d5ddb18b2fa1b9ed5f70c",
+    "Homology.lean": "0005b73b9229f8fe99bd943a17fcf0812ee0439cfa63b28bd033b7efbf283697",
+    "Invariant.lean": "000b0cb95782c5fa91086df9d97431aa950eee74801fcc6839ade620e3421117",
+    "Moves.lean": "0002c475b0e615b838d0d7d1befa5d02077bcc7df9ce428b1d3694073851c0ff"
+  },
+  "files": {
+    "Algebra.lean": "00016a4c7e001403745d7977bb6d430bbb601732c69681e2bbef68488bc53959",
+    "Diagram.lean": "0008ae0f3c265a36ad96f09dc209069f4334aa96fc2c006411d2e05b114979e3",
+    "Entry.lean": "0007ccfb3fd93494863ee8ff8ea0f1fc0a044ecf13872826d367687647e78d9a",
+    "Evaluator.lean": "0008effa2e54afdb513b28c937232150549f8efec6fe2ef792a0ee756728b97e",
+    "Graphical.lean": "000fe54f3532524313901518f169db2fdc45b594911d5ddb18b2fa1b9ed5f70c",
+    "Homology.lean": "0001547c6e465f44de74b7d07caf8c4d08c9b23a7297b54d1d76f7e3dc76059c",
+    "Invariant.lean": "0006f207504b074a5c18a9c90baee8f9889435644dd047106f9eca74f0a84e13",
+    "Moves.lean": "000f6191c25eb9bb0372db9a67591026d2838178741a12294147e7478cfb4a06"
+  },
+  "non_claims": [
+    "No new four-manifold theorem is claimed by this convention migration.",
+    "No legacy numerical artifact is recertified.",
+    "Primal and THAM degree-two coordinate vectors are not claimed to be identical.",
+    "The topology realization proof carried by TurnoverH2Identification is not derived from combinatorial matrices alone.",
+    "No concrete current evaluator case is admitted without a complete FrozenConformanceCertificate."
+  ]
+}

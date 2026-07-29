@@ -11,7 +11,7 @@ must not contain `sorryAx` or a project axiom asserting evaluator equality.
 open TwistedYetter.Kirby.Final.CompleteSemanticConformance
 
 #print axioms
-  MarkingBinding.currentAlpha_maps_to_frozen_marking
+  MarkingBinding.currentAlpha_is_exact_turnedOver_marking
 
 #print axioms
   EvaluatorBinding.weightConformance_of_primitive_bindings

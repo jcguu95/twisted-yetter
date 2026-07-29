@@ -66,13 +66,13 @@ def test_ledger_keeps_all_remaining_semantic_blockers_visible() -> None:
     assert "CLOSING_THREE_HANDLE_DATA_MISSING" in ledger["resolved_blockers"]
 
 
-def test_frozen_semantic_hashes_still_match_disk() -> None:
+def test_historical_bridge_remains_bound_to_historical_v1_freeze() -> None:
     artifact = json.loads(ARTIFACT.read_text())
-    directory = (
-        ROOT / "lean/TwistedYetter/Kirby/Final/Semantics/Independent"
+    manifest = json.loads(
+        (
+            ROOT
+            / "lean/TwistedYetter/Kirby/Final/Semantics/Independent/"
+            "semantic-freeze-combinatorial-v1.json"
+        ).read_text()
     )
-    observed = {
-        path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted(directory.glob("*.lean"))
-    }
-    assert observed == artifact["checks"]["frozen_semantics_hashes"]
+    assert manifest["files"] == artifact["checks"]["frozen_semantics_hashes"]

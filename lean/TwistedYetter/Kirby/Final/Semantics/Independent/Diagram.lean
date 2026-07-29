@@ -6,6 +6,12 @@ import Mathlib
 This is the normative topology-side input for the evaluator.  It is finite
 combinatorial data.  It is not a smooth knot, an embedded disk, or a parser
 certificate borrowed from an existing implementation.
+
+Handle names follow ordinary Kirby calculus throughout this file: dotted
+components represent primal one-handles and ordinary framed components
+represent primal two-handles.  THAM's turned-over evaluator indexing is a
+separate semantic layer in `Homology` and `Evaluator`; it does not rename the
+components stored here.
 -/
 
 namespace TwistedYetter.Semantics.Independent
@@ -182,7 +188,8 @@ structure DottedCutData (trace : CombinatorialLinkTrace) where
 /--
 The handle information deliberately stops before encoding three-handle
 attaching spheres.  `hThree` and `closingBoundaryCertificate` are exactly the
-finite closing data retained by this special presentation.
+finite primal closing data retained by this special presentation.  Thus
+`hOne`, `hTwo`, and `hThree` use ordinary Kirby-calculus indices.
 -/
 structure SpecialHandleData (trace : CombinatorialLinkTrace) where
   hOne : ℕ
@@ -220,4 +227,4 @@ axiom dottedCutWords_topologicallyRealizable
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1881
+-- semantic-freeze-padding: 1617
