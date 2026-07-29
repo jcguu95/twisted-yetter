@@ -4,8 +4,8 @@ import TwistedYetter.Kirby.Presentation
 # Kernel regressions for the shared presentation schema
 
 These small closed calculations pin the semantics that previously differed
-between the Python artifact validator and Lean. They use reduction only:
-there is no `sorry`, native decision oracle, or project axiom.
+between the Python artifact validator and Lean. They use reduction only,
+without proof placeholders, native decision oracles, or project axioms.
 -/
 
 namespace TwistedYetter.Kirby.PresentationSchemaRegression
