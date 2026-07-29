@@ -154,23 +154,21 @@ constructors and therefore cannot disappear into a compiler axiom.
 -/
 def LocalMoveInvarianceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category) : Prop :=
+    (𝒞η : TwistedPremodularCategory K) : Prop :=
   ∀ {source target : HomologicallyMarkedDiagram},
     (move : ElementaryMove source target) →
     ∀ sourceCycle : ThamTwoCycles source.turnedOver,
-      evaluateCycle 𝒞η graphical
+      evaluateCycle 𝒞η
           source.diagram source.primalBoundary source.turnedOver sourceCycle =
-        evaluateCycle 𝒞η graphical
+        evaluateCycle 𝒞η
           target.diagram target.primalBoundary target.turnedOver
             (move.homology.tham.mapCycle sourceCycle)
 
 noncomputable def evaluateMarking
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (marked : HomologicallyMarkedDiagram) : K :=
-  evaluateCycle 𝒞η graphical
+  evaluateCycle 𝒞η
     marked.diagram marked.primalBoundary marked.turnedOver
     (Quotient.out marked.thamAlpha)
 
@@ -181,17 +179,16 @@ been supplied.
 -/
 def TwistedYetterDiffeomorphismInvarianceTarget
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category) : Prop :=
+    (𝒞η : TwistedPremodularCategory K) : Prop :=
   ∀ (X Y : ClosedOrientedSmoothFourManifold)
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
     (left : MarkedRealization X alpha)
     (right :
       MarkedRealization Y (inducedH₂ f alpha)),
-    evaluateMarking 𝒞η graphical
+    evaluateMarking 𝒞η
         left.markedDiagram =
-      evaluateMarking 𝒞η graphical
+      evaluateMarking 𝒞η
         right.markedDiagram
 
 end TwistedYetter.Semantics.Independent

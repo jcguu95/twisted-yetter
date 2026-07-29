@@ -35,9 +35,8 @@ previous repository evaluator.
 -/
 abbrev evaluateMarkedDiagram
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (marked : HomologicallyMarkedDiagram) : K :=
-  evaluateMarking 𝒞η graphical marked
+  evaluateMarking 𝒞η marked
 
 /--
 One frozen-frontend elementary move preserves evaluation.
@@ -48,18 +47,17 @@ for the target marking.
 -/
 theorem elementaryMove_preserves_frontend_evaluation
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (representativeIndependent :
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
-          𝒞η graphical
+          𝒞η
           marked.diagram marked.primalBoundary marked.turnedOver)
     (localInvariant :
-      LocalMoveInvarianceStatement 𝒞η graphical)
+      LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
-    evaluateMarkedDiagram 𝒞η graphical source =
-      evaluateMarkedDiagram 𝒞η graphical target := by
+    evaluateMarkedDiagram 𝒞η source =
+      evaluateMarkedDiagram 𝒞η target := by
   let sourceCycle : ThamTwoCycles source.turnedOver :=
     Quotient.out source.thamAlpha
   let transportedCycle : ThamTwoCycles target.turnedOver :=
@@ -86,33 +84,32 @@ not an additional topology or evaluator axiom.
 -/
 theorem kirbyMovie_preserves_frontend_evaluation
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (representativeIndependent :
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
-          𝒞η graphical
+          𝒞η
           marked.diagram marked.primalBoundary marked.turnedOver)
     (localInvariant :
-      LocalMoveInvarianceStatement 𝒞η graphical)
+      LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
     (movie : KirbyMovie source target) :
-    evaluateMarkedDiagram 𝒞η graphical source =
-      evaluateMarkedDiagram 𝒞η graphical target := by
+    evaluateMarkedDiagram 𝒞η source =
+      evaluateMarkedDiagram 𝒞η target := by
   have step :
       ∀ i : Fin movie.stageCount,
-        evaluateMarkedDiagram 𝒞η graphical
+        evaluateMarkedDiagram 𝒞η
             (movie.stages i.castSucc) =
-          evaluateMarkedDiagram 𝒞η graphical
+          evaluateMarkedDiagram 𝒞η
             (movie.stages i.succ) := by
     intro i
     exact elementaryMove_preserves_frontend_evaluation
-      𝒞η graphical
+      𝒞η
       representativeIndependent localInvariant (movie.elementary i)
   have fromStart :
       ∀ i : Fin (movie.stageCount + 1),
-        evaluateMarkedDiagram 𝒞η graphical
+        evaluateMarkedDiagram 𝒞η
             (movie.stages 0) =
-          evaluateMarkedDiagram 𝒞η graphical
+          evaluateMarkedDiagram 𝒞η
             (movie.stages i) := by
     intro i
     induction i using Fin.induction with
@@ -120,14 +117,14 @@ theorem kirbyMovie_preserves_frontend_evaluation
     | succ i inductionHypothesis =>
         exact inductionHypothesis.trans (step i)
   calc
-    evaluateMarkedDiagram 𝒞η graphical source =
-        evaluateMarkedDiagram 𝒞η graphical
+    evaluateMarkedDiagram 𝒞η source =
+        evaluateMarkedDiagram 𝒞η
           (movie.stages 0) := by
       rw [movie.startsAtSource]
-    _ = evaluateMarkedDiagram 𝒞η graphical
+    _ = evaluateMarkedDiagram 𝒞η
           (movie.stages (Fin.last movie.stageCount)) :=
       fromStart (Fin.last movie.stageCount)
-    _ = evaluateMarkedDiagram 𝒞η graphical target := by
+    _ = evaluateMarkedDiagram 𝒞η target := by
       rw [movie.endsAtTarget]
 
 namespace ConditionalDescent
@@ -140,22 +137,21 @@ This is an internal assembly lemma, not the final manifold invariant theorem.
 -/
 theorem diffeomorphism_invariant_of_descent_data
     (𝒞η : TwistedPremodularCategory K)
-    (graphical : RibbonGraphicalEvaluation 𝒞η.category)
     (representativeIndependent :
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
-          𝒞η graphical
+          𝒞η
           marked.diagram marked.primalBoundary marked.turnedOver)
     (localInvariant :
-      LocalMoveInvarianceStatement 𝒞η graphical) :
+      LocalMoveInvarianceStatement 𝒞η) :
     TwistedYetterDiffeomorphismInvarianceTarget
-      𝒞η graphical := by
+      𝒞η := by
   intro X Y f alpha left right
   obtain ⟨movie⟩ :=
     markedKirbyCerf_complete f alpha left right
   exact
     kirbyMovie_preserves_frontend_evaluation
-      𝒞η graphical
+      𝒞η
       representativeIndependent localInvariant movie
 
 end ConditionalDescent
@@ -179,10 +175,7 @@ noncomputable def TwistedYetter
         ManifoldH₂ X) : K :=
   let realization :=
     Classical.choice (markedRealization_exists Xα.1 Xα.2)
-  evaluateMarkedDiagram
-    𝒞η
-    (canonicalRibbonGraphicalEvaluation 𝒞η.category)
-    realization.markedDiagram
+  evaluateMarkedDiagram 𝒞η realization.markedDiagram
 
 /--
 Clean final theorem target.
@@ -202,7 +195,6 @@ theorem TwistedYetter_diffeomorphism_invariant
   exact
     ConditionalDescent.diffeomorphism_invariant_of_descent_data
       𝒞η
-      (canonicalRibbonGraphicalEvaluation 𝒞η.category)
       (frozenFrontendRepresentativeIndependence 𝒞η)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
