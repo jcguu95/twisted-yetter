@@ -501,36 +501,44 @@ theorem birth_step_fresh
                 (strand?_eq_none_iff_not_mem_activeIds
                   before negativeId).mp negativeNone⟩
 
-/-- A successfully validated coupon always names at least one strand. -/
-theorem coupon_step_strands_nonempty
+/-- A successfully validated coupon has a nonempty input or output word. -/
+theorem coupon_step_words_not_both_empty
     (raw : RawPresentation)
     (before after : List StrandState)
     (eventId couponId label : String)
-    (strands : List String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
+    (replaceAt : Nat)
     (step :
       raw.applyEvent before
-        (.coupon eventId couponId label strands) =
+        (.coupon eventId couponId label
+          inputStrands outputStrands replaceAt) =
           Except.ok after) :
-    strands ≠ [] := by
-  intro empty
-  subst strands
-  have impossible :
-      raw.applyEvent before
-          (.coupon eventId couponId label []) =
-        Except.error
-          "coupon ID, label, and strand list must be nonempty" := by
-    simp only [RawPresentation.applyEvent]
-    change
-      (if (couponId.isEmpty || label.isEmpty || [].isEmpty) = true then
-        Except.error
-          "coupon ID, label, and strand list must be nonempty"
-      else
-        _) =
-        Except.error
-          "coupon ID, label, and strand list must be nonempty"
-    rw [if_pos (by simp)]
-  rw [impossible] at step
-  contradiction
+    inputStrands ≠ [] ∨ outputStrands ≠ [] := by
+  by_contra bothEmpty
+  push Not at bothEmpty
+  rcases bothEmpty with ⟨inputEmpty, outputEmpty⟩
+  subst inputStrands
+  subst outputStrands
+  by_cases headerEmpty : couponId.isEmpty || label.isEmpty
+  · have metadataError :
+        raw.validateCouponMetadata before couponId label [] [] =
+          Except.error "coupon ID and label must be nonempty" := by
+      simp only [RawPresentation.validateCouponMetadata]
+      rw [if_pos headerEmpty]
+      rfl
+    rw [RawPresentation.applyEvent, metadataError] at step
+    contradiction
+  · have metadataError :
+        raw.validateCouponMetadata before couponId label [] [] =
+          Except.error
+            "coupon input and output words cannot both be empty" := by
+      simp only [RawPresentation.validateCouponMetadata]
+      rw [if_neg headerEmpty]
+      simp
+      rfl
+    rw [RawPresentation.applyEvent, metadataError] at step
+    contradiction
 
 /--
 A successfully validated planar marker has exactly the current ordered
@@ -669,9 +677,24 @@ theorem applyEvent_ok_target_eq
   | crossing eventId overId underId sign =>
       simpa only [RawPresentation.applyEvent] using
         Except.ok.inj (leftStep.symm.trans rightStep)
-  | coupon eventId couponId label strands =>
-      simpa only [RawPresentation.applyEvent] using
-        Except.ok.inj (leftStep.symm.trans rightStep)
+  | coupon eventId couponId label inputStrands outputStrands replaceAt =>
+      cases leftMetadata :
+          leftRaw.validateCouponMetadata before
+            couponId label inputStrands outputStrands with
+      | error message =>
+          rw [RawPresentation.applyEvent, leftMetadata] at leftStep
+          contradiction
+      | ok _metadataUnit =>
+          cases rightMetadata :
+              rightRaw.validateCouponMetadata before
+                couponId label inputStrands outputStrands with
+          | error message =>
+              rw [RawPresentation.applyEvent, rightMetadata] at rightStep
+              contradiction
+          | ok _metadataUnit =>
+              rw [RawPresentation.applyEvent, leftMetadata] at leftStep
+              rw [RawPresentation.applyEvent, rightMetadata] at rightStep
+              exact Except.ok.inj (leftStep.symm.trans rightStep)
   | framingTwist eventId strandId sign =>
       simpa only [RawPresentation.applyEvent] using
         Except.ok.inj (leftStep.symm.trans rightStep)

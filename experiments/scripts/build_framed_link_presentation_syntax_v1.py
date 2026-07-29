@@ -51,6 +51,7 @@ REFERENCES = (
 
 LEAN_BUILD_ORDER = [
     "lean/TwistedYetter/Kirby/Presentation.lean",
+    "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
     "lean/TwistedYetter.lean",
 ]
 MUTATIONS = [
@@ -212,7 +213,7 @@ def build() -> tuple[dict[str, Any], bytes]:
         ["uv", "run", "pytest", "-q", "tests/test_kirby_presentation_v1.py"]
     )
     pytest_output = clean_output(pytest_result.stdout + pytest_result.stderr)
-    if "8 passed" not in pytest_output:
+    if "16 passed" not in pytest_output:
         raise AssertionError("R6 Python validator tests did not all pass")
 
     source_files = {

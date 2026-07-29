@@ -35,6 +35,9 @@ def bPositive : StrandState :=
 def bNegative : StrandState :=
   { strandId := "B-", componentId := "K0", orientation := .negative }
 
+def zPositive : StrandState :=
+  { strandId := "Z+", componentId := "K0", orientation := .positive }
+
 theorem adjacent_crossing_swaps_boundary_order :
     roundTripFixture.applyEvent [aPositive, aNegative]
       (.crossing "cross" "A+" "A-" .positive) =
@@ -59,6 +62,34 @@ theorem planar_reordering_rejected :
     roundTripFixture.applyEvent [aPositive, aNegative]
       (.planarIsotopy "isotopy" ["A-", "A+"]) =
         Except.error "planar isotopy has the wrong active boundary" := by
+  rfl
+
+theorem two_to_one_coupon_replaces_exact_boundary_word :
+    RawPresentation.applyCouponTransition
+        [aPositive, aNegative]
+        ["A+", "A-"]
+        [zPositive]
+        0 =
+      Except.ok [zPositive] := by
+  rfl
+
+def conflictingStrandMetadata : RawPresentation :=
+  { roundTripFixture with
+    events := [
+      .birth "e0" "K0" "K0+" "K0-" 0,
+      .coupon "e1" "coupon-0" "identity"
+        ["K0+"]
+        [{
+          strandId := "K0+"
+          componentId := "K0"
+          orientation := .negative
+        }]
+        0,
+      .death "e2" "K0" "K0+" "K0-"
+    ] }
+
+theorem conflicting_strand_metadata_rejected :
+    conflictingStrandMetadata.strandDefinitionsConsistent = false := by
   rfl
 
 def unknownFieldJson : Json :=

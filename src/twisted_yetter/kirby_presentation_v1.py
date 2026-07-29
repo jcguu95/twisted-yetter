@@ -8,7 +8,9 @@ import json
 from typing import Any
 
 
-SCHEMA = "twisted-yetter.kirby-presentation.v1"
+# The module path remains stable for existing callers; formal payloads use the
+# fail-closed v2 schema with explicit coupon input and output words.
+SCHEMA = "twisted-yetter.kirby-presentation.v2"
 SHA256_PREFIX = "sha256:"
 ROLES = {"ordinary", "dotted", "specially_dotted"}
 ORIENTATIONS = {"positive", "negative"}
@@ -64,7 +66,9 @@ EVENT_KEYS = {
         "kind",
         "coupon_id",
         "label",
-        "strands",
+        "input_strands",
+        "output_strands",
+        "replace_at",
     },
     "framing_twist": {
         "event_id",
@@ -197,6 +201,16 @@ def _simulate(
     writhe = {component_id: 0 for component_id in components}
     born: set[str] = set()
     closed: set[str] = set()
+    strand_registry: dict[str, dict[str, str]] = {}
+
+    def register_strand(strand: dict[str, str]) -> None:
+        strand_id = strand["strand_id"]
+        previous = strand_registry.get(strand_id)
+        if previous is not None and previous != strand:
+            raise PresentationValidationError(
+                "a strand ID has conflicting component or orientation metadata"
+            )
+        strand_registry[strand_id] = deepcopy(strand)
 
     for index, event in enumerate(payload["events"], start=1):
         kind = event["kind"]
@@ -228,16 +242,20 @@ def _simulate(
                 raise PresentationValidationError(
                     "birth insert_at is outside the active boundary"
                 )
-            active[strand_ids[0]] = {
+            positive_state = {
                 "strand_id": strand_ids[0],
                 "component_id": component_id,
                 "orientation": "positive",
             }
-            active[strand_ids[1]] = {
+            negative_state = {
                 "strand_id": strand_ids[1],
                 "component_id": component_id,
                 "orientation": "negative",
             }
+            register_strand(positive_state)
+            register_strand(negative_state)
+            active[strand_ids[0]] = positive_state
+            active[strand_ids[1]] = negative_state
             order[insert_at:insert_at] = strand_ids
             born.add(component_id)
 
@@ -293,17 +311,81 @@ def _simulate(
         elif kind == "coupon":
             _require_nonempty_string(event["coupon_id"], "coupon ID")
             _require_nonempty_string(event["label"], "coupon label")
-            strands = event["strands"]
-            if not isinstance(strands, list) or not strands:
+            inputs = event["input_strands"]
+            outputs = event["output_strands"]
+            replace_at = event["replace_at"]
+            if not isinstance(inputs, list):
                 raise PresentationValidationError(
-                    "coupon strands must be a nonempty list"
+                    "coupon input_strands must be a list"
                 )
-            if not all(isinstance(item, str) and item for item in strands):
+            if not isinstance(outputs, list):
                 raise PresentationValidationError(
-                    "coupon strand IDs must be nonempty strings"
+                    "coupon output_strands must be a list"
                 )
-            _require_unique(strands, "coupon")
-            _require_adjacent(order, strands, "coupon")
+            if not inputs and not outputs:
+                raise PresentationValidationError(
+                    "coupon input and output words cannot both be empty"
+                )
+            if not all(isinstance(item, str) and item for item in inputs):
+                raise PresentationValidationError(
+                    "coupon input strand IDs must be nonempty strings"
+                )
+            _require_unique(inputs, "coupon input word")
+            if (
+                not isinstance(replace_at, int)
+                or isinstance(replace_at, bool)
+                or replace_at < 0
+                or replace_at + len(inputs) > len(order)
+            ):
+                raise PresentationValidationError(
+                    "coupon replace_at is outside the active boundary"
+                )
+            if order[replace_at : replace_at + len(inputs)] != inputs:
+                raise PresentationValidationError(
+                    "coupon input word is not the exact declared boundary window"
+                )
+            output_ids: list[str] = []
+            normalized_outputs: list[dict[str, str]] = []
+            for output_index, output in enumerate(outputs):
+                if not isinstance(output, dict):
+                    raise PresentationValidationError(
+                        f"coupon output {output_index} is not an object"
+                    )
+                _require_exact_keys(
+                    output, STRAND_KEYS, f"coupon output {output_index}"
+                )
+                strand_id = _require_nonempty_string(
+                    output["strand_id"], f"coupon output {output_index} strand ID"
+                )
+                component_id = _require_nonempty_string(
+                    output["component_id"],
+                    f"coupon output {output_index} component ID",
+                )
+                if component_id not in components:
+                    raise PresentationValidationError(
+                        f"coupon output references unknown component {component_id}"
+                    )
+                if output["orientation"] not in ORIENTATIONS:
+                    raise PresentationValidationError(
+                        f"coupon output {strand_id} has unknown orientation"
+                    )
+                output_ids.append(strand_id)
+                normalized_outputs.append(deepcopy(output))
+                register_strand(output)
+            _require_unique(output_ids, "coupon output word")
+
+            outside_ids = (
+                order[:replace_at] + order[replace_at + len(inputs) :]
+            )
+            if set(outside_ids).intersection(output_ids):
+                raise PresentationValidationError(
+                    "coupon output reuses a strand active outside its input window"
+                )
+            for strand_id in inputs:
+                del active[strand_id]
+            for output in normalized_outputs:
+                active[output["strand_id"]] = output
+            order[replace_at : replace_at + len(inputs)] = output_ids
 
         elif kind == "framing_twist":
             strand_id = event["strand_id"]
@@ -531,7 +613,20 @@ def build_reference_fixture() -> dict[str, Any]:
                 "kind": "coupon",
                 "coupon_id": "coupon-K0",
                 "label": "identity-K0",
-                "strands": ["K0-", "K0+"],
+                "input_strands": ["K0-", "K0+"],
+                "output_strands": [
+                    {
+                        "strand_id": "K0-",
+                        "component_id": "K0",
+                        "orientation": "negative",
+                    },
+                    {
+                        "strand_id": "K0+",
+                        "component_id": "K0",
+                        "orientation": "positive",
+                    },
+                ],
+                "replace_at": 0,
             },
             {
                 "event_id": "e03",
@@ -561,7 +656,20 @@ def build_reference_fixture() -> dict[str, Any]:
                 "kind": "coupon",
                 "coupon_id": "coupon-S0",
                 "label": "special-morphism",
-                "strands": ["S0+", "S0-"],
+                "input_strands": ["S0+", "S0-"],
+                "output_strands": [
+                    {
+                        "strand_id": "S0+",
+                        "component_id": "S0",
+                        "orientation": "positive",
+                    },
+                    {
+                        "strand_id": "S0-",
+                        "component_id": "S0",
+                        "orientation": "negative",
+                    },
+                ],
+                "replace_at": 4,
             },
             {
                 "event_id": "e07",

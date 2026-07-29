@@ -56,7 +56,9 @@ structure StrandState where
 Primitive events in a vertically sliced regular diagram.
 
 Birth and death carry both strand IDs, so lineage is not reconstructed from
-positions.  Crossings, coupons, and twists may only reference active strands.
+positions. Crossings and twists may only reference active strands. A coupon
+replaces one exact contiguous input word by an explicitly typed output word;
+`replaceAt` makes nullary inputs unambiguous.
 -/
 inductive SliceEvent
   | birth
@@ -69,7 +71,9 @@ inductive SliceEvent
       (sign : CrossingSign)
   | coupon
       (eventId couponId label : String)
-      (strands : List String)
+      (inputStrands : List String)
+      (outputStrands : List StrandState)
+      (replaceAt : Nat)
   | framingTwist
       (eventId strandId : String)
       (sign : CrossingSign)
@@ -85,7 +89,7 @@ def eventId : SliceEvent → String
   | .birth id _ _ _ _ => id
   | .death id _ _ _ => id
   | .crossing id _ _ _ => id
-  | .coupon id _ _ _ => id
+  | .coupon id _ _ _ _ _ => id
   | .framingTwist id _ _ => id
   | .planarIsotopy id _ => id
 
@@ -108,7 +112,7 @@ structure DeclaredSlice where
   deriving Repr, BEq, DecidableEq
 
 /--
-Raw presentation matching the repository's canonical Python v1 schema.
+Raw presentation matching the repository's canonical Python schema.
 
 There is intentionally no alias field.  `contentHash`, rather than the
 provenance-only `sourceSnapshotHash`, is the immutable presentation identity.
@@ -127,7 +131,7 @@ structure RawPresentation where
 
 namespace RawPresentation
 
-def expectedSchema : String := "twisted-yetter.kirby-presentation.v1"
+def expectedSchema : String := "twisted-yetter.kirby-presentation.v2"
 
 def stringIdsUnique (ids : List String) : Bool :=
   ids.eraseDups.length == ids.length
@@ -168,6 +172,20 @@ def insertAt?
   | _ + 1, [] => none
   | index + 1, head :: tail =>
       (insertAt? values index tail).map (fun result => head :: result)
+
+/-- Replace an exact list window at a fixed boundary position. -/
+def replaceAt?
+    {α : Type}
+    (expected replacement : List α)
+    [BEq α] :
+    Nat → List α → Option (List α)
+  | index, state =>
+      if index + expected.length ≤ state.length &&
+          ((state.drop index).take expected.length == expected)
+      then
+        some (state.take index ++ replacement ++ state.drop (index + expected.length))
+      else
+        none
 
 /-- Two strand orientations may close only when they are opposite. -/
 def orientationsOpposite (left right : Orientation) : Bool :=
@@ -250,12 +268,88 @@ def eventsValid (raw : RawPresentation) : Bool :=
     ids.all (fun id => !id.isEmpty) &&
     stringIdsUnique ids
 
+def SliceEvent.definedStrands : SliceEvent → List StrandState
+  | .birth _ componentId positiveStrand negativeStrand _ =>
+      [
+        {
+          strandId := positiveStrand
+          componentId := componentId
+          orientation := .positive
+        },
+        {
+          strandId := negativeStrand
+          componentId := componentId
+          orientation := .negative
+        }
+      ]
+  | .coupon _ _ _ _ outputStrands _ => outputStrands
+  | _ => []
+
+def strandDefinitions (raw : RawPresentation) : List StrandState :=
+  raw.events.flatMap SliceEvent.definedStrands
+
+/--
+A strand ID is a global lineage name. Every event that defines the same name
+must therefore give it exactly the same component and orientation metadata.
+-/
+def strandDefinitionsConsistent (raw : RawPresentation) : Bool :=
+  let definitions := raw.strandDefinitions
+  definitions.all fun left =>
+    definitions.all fun right =>
+      left.strandId != right.strandId || left == right
+
 def everyComponentBornAndClosed (raw : RawPresentation) : Bool :=
   raw.components.all (fun component =>
     raw.events.any (fun event =>
       event.bornComponent? == some component.componentId) &&
     raw.events.any (fun event =>
       event.deadComponent? == some component.componentId))
+
+/-- Validate coupon metadata without computing its boundary transition. -/
+def validateCouponMetadata
+    (raw : RawPresentation)
+    (state : List StrandState)
+    (couponId label : String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState) :
+    Except String Unit := do
+  if couponId.isEmpty || label.isEmpty then
+    throw "coupon ID and label must be nonempty"
+  if inputStrands.isEmpty && outputStrands.isEmpty then
+    throw "coupon input and output words cannot both be empty"
+  if inputStrands.any String.isEmpty then
+    throw "coupon input strand IDs must be nonempty"
+  if !stringIdsUnique inputStrands then
+    throw "coupon repeats an input strand ID"
+  if !(allActive state inputStrands) then
+    throw "coupon references an inactive input strand"
+  let outputIds := outputStrands.map StrandState.strandId
+  if outputStrands.any (fun strand =>
+      strand.strandId.isEmpty || strand.componentId.isEmpty) then
+    throw "coupon output strands must have nonempty IDs and components"
+  if !stringIdsUnique outputIds then
+    throw "coupon repeats an output strand ID"
+  for output in outputStrands do
+    if (raw.component? output.componentId).isNone then
+      throw ("coupon output references unknown component: " ++ output.componentId)
+
+/-- Execute the exact, metadata-independent coupon boundary replacement. -/
+def applyCouponTransition
+    (state : List StrandState)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
+    (replaceAt : Nat) :
+    Except String (List StrandState) := do
+  let inputWindow := state.drop replaceAt |>.take inputStrands.length
+  if inputWindow.map StrandState.strandId != inputStrands then
+    throw "coupon input word is not the exact declared boundary window"
+  let next ←
+    requireSome
+      "coupon replace_at is outside the active boundary"
+      (replaceAt? inputWindow outputStrands replaceAt state)
+  if !stringIdsUnique (activeIds next) then
+    throw "coupon output reuses a strand ID active outside its input window"
+  return next
 
 /-- Execute one event, rejecting every broken lineage or boundary reference. -/
 def applyEvent
@@ -319,16 +413,10 @@ def applyEvent
         requireSome
           "crossing strands are not adjacent in the Morse slice"
           (swapAdjacentPair? overStrand underStrand state)
-  | .coupon _ couponId label strands => do
-      if couponId.isEmpty || label.isEmpty || strands.isEmpty then
-        throw "coupon ID, label, and strand list must be nonempty"
-      if !stringIdsUnique strands then
-        throw "coupon repeats a strand ID"
-      if !(allActive state strands) then
-        throw "coupon references an inactive strand"
-      if !hasContiguousWindow state strands then
-        throw "coupon strands are not adjacent in the Morse slice"
-      return state
+  | .coupon _ couponId label inputStrands outputStrands replaceAt => do
+      raw.validateCouponMetadata state
+        couponId label inputStrands outputStrands
+      applyCouponTransition state inputStrands outputStrands replaceAt
   | .framingTwist _ strandId _ => do
       if (strand? state strandId).isNone then
         throw "framing twist references an inactive strand"
@@ -493,6 +581,8 @@ def validate (raw : RawPresentation) : Except String Unit := do
     throw "invalid component registry or framing relation"
   if !raw.eventsValid then
     throw "invalid or duplicate event IDs"
+  if !raw.strandDefinitionsConsistent then
+    throw "a strand ID has conflicting component or orientation metadata"
   if !raw.everyComponentBornAndClosed then
     throw "every component must have recorded birth and death lineage"
   let slices ← raw.runEvents
@@ -637,13 +727,18 @@ def parseEvent (json : Json) : Except String SliceEvent := do
         "kind",
         "coupon_id",
         "label",
-        "strands"
+        "input_strands",
+        "output_strands",
+        "replace_at"
       ] "coupon event"
+      let outputJsons ← (← json.getObjVal? "output_strands").getArr?
       return .coupon
         (← getString json "event_id")
         (← getString json "coupon_id")
         (← getString json "label")
-        (← getStringList json "strands")
+        (← getStringList json "input_strands")
+        (← outputJsons.toList.mapM parseStrand)
+        (← getNat json "replace_at")
   | "framing_twist" =>
       requireExactKeys json [
         "event_id",
@@ -761,13 +856,16 @@ def eventJson : SliceEvent → Json
         ("under_strand", underStrand),
         ("sign", signJson sign)
       ]
-  | .coupon eventId couponId label strands =>
+  | .coupon eventId couponId label inputStrands outputStrands replaceAt =>
       Json.mkObj [
         ("event_id", eventId),
         ("kind", "coupon"),
         ("coupon_id", couponId),
         ("label", label),
-        ("strands", Lean.toJson strands)
+        ("input_strands", Lean.toJson inputStrands),
+        ("output_strands",
+          Json.arr (outputStrands.map strandJson).toArray),
+        ("replace_at", replaceAt)
       ]
   | .framingTwist eventId strandId sign =>
       Json.mkObj [
@@ -862,7 +960,14 @@ def roundTripFixture : RawPresentation where
   ]
   events := [
     .birth "e0" "K0" "K0+" "K0-" 0,
-    .coupon "e1" "coupon-0" "identity" ["K0+"],
+    .coupon "e1" "coupon-0" "identity"
+      ["K0+"]
+      [{
+        strandId := "K0+"
+        componentId := "K0"
+        orientation := .positive
+      }]
+      0,
     .death "e2" "K0" "K0+" "K0-"
   ]
   declaredSlices := [

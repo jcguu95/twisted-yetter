@@ -12,7 +12,8 @@ The constructors below are deliberately restrictive:
 
 * births and deaths expose the two oppositely oriented strands;
 * crossings expose the ordered over/under pair;
-* a coupon in an ordinary serialized Kirby input is an identity coupon;
+* the canonical free-diagram route accepts only explicitly serialized identity
+  coupons; general v2 coupons are interpreted by the categorical compiler;
 * a framing twist exposes exactly one strand; and
 * a planar-isotopy marker covers the complete active boundary.
 
@@ -123,7 +124,9 @@ inductive EventWindow :
       (localWindow leading suffix : List StrandState) :
       EventWindow
         (.coupon eventId couponId "identity"
-          (localWindow.map StrandState.strandId))
+          (localWindow.map StrandState.strandId)
+          localWindow
+          leading.length)
         (leading ++ (localWindow ++ suffix))
         (leading ++ (localWindow ++ suffix))
   | framingTwist

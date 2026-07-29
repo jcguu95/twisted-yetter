@@ -9,6 +9,7 @@ from twisted_yetter.kirby_presentation_v1 import (
     add_content_hash,
     build_reference_fixture,
     deserialize_presentation,
+    materialize_declared_slices,
     serialize_presentation,
     stable_content_hash,
     validate_presentation,
@@ -17,6 +18,67 @@ from twisted_yetter.kirby_presentation_v1 import (
 
 def repaired(payload: dict) -> dict:
     return add_content_hash(payload)
+
+
+def fusion_coupon_fixture() -> dict:
+    fixture = build_reference_fixture()
+    fixture["components"] = [deepcopy(fixture["components"][0])]
+    fixture["components"][0]["blackboard_writhe"] = 0
+    fixture["components"][0]["integer_framing"] = 0
+    fixture["events"] = [
+        {
+            "event_id": "e0",
+            "kind": "birth",
+            "component_id": "K0",
+            "positive_strand": "A+",
+            "negative_strand": "A-",
+            "insert_at": 0,
+        },
+        {
+            "event_id": "e1",
+            "kind": "coupon",
+            "coupon_id": "fusion-projection",
+            "label": "x-tensor-y-to-z",
+            "input_strands": ["A+", "A-"],
+            "output_strands": [
+                {
+                    "strand_id": "Z+",
+                    "component_id": "K0",
+                    "orientation": "positive",
+                }
+            ],
+            "replace_at": 0,
+        },
+        {
+            "event_id": "e2",
+            "kind": "coupon",
+            "coupon_id": "fusion-inclusion",
+            "label": "z-to-x-tensor-y",
+            "input_strands": ["Z+"],
+            "output_strands": [
+                {
+                    "strand_id": "A+",
+                    "component_id": "K0",
+                    "orientation": "positive",
+                },
+                {
+                    "strand_id": "A-",
+                    "component_id": "K0",
+                    "orientation": "negative",
+                },
+            ],
+            "replace_at": 0,
+        },
+        {
+            "event_id": "e3",
+            "kind": "death",
+            "component_id": "K0",
+            "first_strand": "A+",
+            "second_strand": "A-",
+        },
+    ]
+    fixture["declared_slices"] = materialize_declared_slices(fixture)
+    return repaired(fixture)
 
 
 def test_reference_fixture_is_content_addressed_and_round_trips() -> None:
@@ -137,4 +199,58 @@ def test_death_requires_opposite_orientations() -> None:
     fixture["declared_slices"] = []
     fixture = repaired(fixture)
     with pytest.raises(PresentationValidationError, match="opposite"):
+        validate_presentation(fixture)
+
+
+def test_general_coupon_replaces_an_exact_input_word() -> None:
+    fixture = fusion_coupon_fixture()
+    validate_presentation(fixture)
+    assert [
+        strand["strand_id"]
+        for strand in fixture["declared_slices"][2]["active_strands"]
+    ] == ["Z+"]
+
+
+def test_coupon_input_order_is_not_treated_as_an_unordered_set() -> None:
+    fixture = fusion_coupon_fixture()
+    fixture["events"][1]["input_strands"] = ["A-", "A+"]
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="exact declared"):
+        validate_presentation(fixture)
+
+
+def test_coupon_rejects_duplicate_output_strands() -> None:
+    fixture = fusion_coupon_fixture()
+    fixture["events"][1]["output_strands"].append(
+        deepcopy(fixture["events"][1]["output_strands"][0])
+    )
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="duplicate"):
+        validate_presentation(fixture)
+
+
+def test_coupon_rejects_unknown_output_component() -> None:
+    fixture = fusion_coupon_fixture()
+    fixture["events"][1]["output_strands"][0]["component_id"] = "unknown"
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="unknown component"):
+        validate_presentation(fixture)
+
+
+def test_coupon_cannot_silently_change_existing_strand_metadata() -> None:
+    fixture = fusion_coupon_fixture()
+    fixture["events"][2]["output_strands"][0]["orientation"] = "negative"
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="conflicting"):
+        validate_presentation(fixture)
+
+
+def test_v1_coupon_shape_is_rejected_instead_of_guessed() -> None:
+    fixture = build_reference_fixture()
+    coupon = fixture["events"][2]
+    coupon["strands"] = coupon.pop("input_strands")
+    coupon.pop("output_strands")
+    coupon.pop("replace_at")
+    fixture = repaired(fixture)
+    with pytest.raises(PresentationValidationError, match="keys mismatch"):
         validate_presentation(fixture)

@@ -58,7 +58,6 @@ abbrev RequiredTotalBridge :=
     TwistedYetter.Semantics.Independent.CombinatorialSpecialKirbyDiagram
 
 inductive CurrentBridgeBlocker
-  | couponInputOutputWordsMissing
   | dottedPunctureWordsMissing
   | closingThreeHandleDataMissing
   | primalDualHomologyConventionMismatch
@@ -66,14 +65,37 @@ inductive CurrentBridgeBlocker
 
 def currentBridgeBlockers : List CurrentBridgeBlocker :=
   [
-    .couponInputOutputWordsMissing,
     .dottedPunctureWordsMissing,
     .closingThreeHandleDataMissing,
     .primalDualHomologyConventionMismatch
   ]
 
 theorem currentBridgeBlockers_completeList :
-    currentBridgeBlockers.length = 4 :=
+    currentBridgeBlockers.length = 3 :=
+  rfl
+
+/--
+The first comparison gap is closed by the v2 raw syntax itself: every coupon
+stores separate ordered input and typed output words plus the exact
+replacement index. No semantic assumption is needed to recover these fields.
+-/
+def couponBoundaryWords :
+    TwistedYetter.Kirby.Presentation.SliceEvent →
+      Option
+        (List String ×
+          List TwistedYetter.Kirby.Presentation.StrandState × Nat)
+  | .coupon _ _ _ inputs outputs replaceAt =>
+      some (inputs, outputs, replaceAt)
+  | _ => none
+
+theorem couponBoundaryWords_of_coupon
+    (eventId couponId label : String)
+    (inputs : List String)
+    (outputs : List TwistedYetter.Kirby.Presentation.StrandState)
+    (replaceAt : Nat) :
+    couponBoundaryWords
+        (.coupon eventId couponId label inputs outputs replaceAt) =
+      some (inputs, outputs, replaceAt) :=
   rfl
 
 end TwistedYetter.Kirby.Final.CombinatorialSemanticComparison

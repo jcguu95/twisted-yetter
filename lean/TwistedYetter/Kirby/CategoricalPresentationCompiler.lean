@@ -582,11 +582,14 @@ structure CategoricalEventCompiler
         (boundary before) (boundary after)
   coupon :
     (eventId couponId label : String) →
-    (strands : List String) →
+    (inputStrands : List String) →
+    (outputStrands : List StrandState) →
+    (replaceAt : Nat) →
     {before after : List StrandState} →
     (step_sound :
       raw.applyEvent before
-          (.coupon eventId couponId label strands) =
+          (.coupon eventId couponId label
+            inputStrands outputStrands replaceAt) =
         Except.ok after) →
       CompiledCategoricalEvent C .coupon
         (boundary before) (boundary after)
@@ -638,8 +641,9 @@ def compileEvent
   | .crossing eventId overStrand underStrand sign =>
       (compiler.crossing
         eventId overStrand underStrand sign step_sound).diagram
-  | .coupon eventId couponId label strands =>
-      (compiler.coupon eventId couponId label strands step_sound).diagram
+  | .coupon eventId couponId label inputStrands outputStrands replaceAt =>
+      (compiler.coupon eventId couponId label
+        inputStrands outputStrands replaceAt step_sound).diagram
   | .framingTwist eventId strandId sign =>
       (compiler.framingTwist eventId strandId sign step_sound).diagram
   | .planarIsotopy eventId activeOrder =>
@@ -798,7 +802,8 @@ structure BoundCrossingEvent
       [overStrand, underStrand]
 
 /--
-A coupon window bound to its exact ordered strand list, coupon ID, and label.
+A coupon window bound to its exact ordered input and output words, coupon ID,
+and label.
 
 The morphism remains genuine category input. Its source and target, however,
 must be the requested contiguous boundary window, and its serialized identity
@@ -807,17 +812,21 @@ cannot be silently renamed.
 structure BoundCouponEvent
     (objectOf : StrandState → C)
     (couponId label : String)
-    (strands : List String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
     (before after : List StrandState) where
   window :
     WindowedCategoricalEvent objectOf .coupon before after
-  localWindow : List StrandState
+  localInput : List StrandState
+  localOutput : List StrandState
   local_source_sound :
-    window.localSource = localWindow
+    window.localSource = localInput
   local_target_sound :
-    window.localTarget = localWindow
-  ordered_ids_sound :
-    localWindow.map (fun strand => strand.strandId) = strands
+    window.localTarget = localOutput
+  ordered_input_ids_sound :
+    localInput.map (fun strand => strand.strandId) = inputStrands
+  output_word_sound :
+    localOutput = outputStrands
   coupon_id_sound :
     window.primitive.couponId? = some couponId
   coupon_label_sound :
@@ -935,13 +944,17 @@ structure WindowedCategoricalEventSemantics
         overStrand underStrand before after
   coupon :
     (eventId couponId label : String) →
-    (strands : List String) →
+    (inputStrands : List String) →
+    (outputStrands : List StrandState) →
+    (replaceAt : Nat) →
     {before after : List StrandState} →
     (step_sound :
       raw.applyEvent before
-          (.coupon eventId couponId label strands) =
+          (.coupon eventId couponId label
+            inputStrands outputStrands replaceAt) =
         Except.ok after) →
-      BoundCouponEvent objectOf couponId label strands before after
+      BoundCouponEvent objectOf couponId label
+        inputStrands outputStrands before after
   framingTwist :
     (eventId strandId : String) →
     (sign : Presentation.CrossingSign) →
@@ -1002,8 +1015,10 @@ def toCategoricalEventCompiler
     (semantics.crossing eventId overStrand underStrand sign
       (before := before) (after := after) step_sound)
       |>.window.toCompiled
-  coupon := fun eventId couponId label strands before after step_sound =>
-    (semantics.coupon eventId couponId label strands
+  coupon := fun eventId couponId label inputStrands outputStrands replaceAt
+      before after step_sound =>
+    (semantics.coupon eventId couponId label
+      inputStrands outputStrands replaceAt
       (before := before) (after := after) step_sound)
       |>.window.toCompiled
   framingTwist := fun eventId strandId sign before after step_sound =>

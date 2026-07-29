@@ -19,7 +19,8 @@ def eventStrands : SliceEvent → List String
   | .birth _ _ positive negative _ => [positive, negative]
   | .death _ _ first second => [first, second]
   | .crossing _ over under _ => [over, under]
-  | .coupon _ _ _ strands => strands
+  | .coupon _ _ _ inputs outputs _ =>
+      inputs ++ outputs.map StrandState.strandId
   | .framingTwist _ strand _ => [strand]
   | .planarIsotopy _ order => order
 

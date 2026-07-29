@@ -533,11 +533,15 @@ structure CouponCut
 /-- Forget the proof term while retaining the concrete coupon cut. -/
 def couponCut
     (eventId couponId label : String)
-    (strands : List String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
+    (replaceAt : Nat)
     {before after : List StrandState}
     (window :
-      EventWindow (.coupon eventId couponId label strands) before after) :
-    CouponCut before strands :=
+      EventWindow
+        (.coupon eventId couponId label
+          inputStrands outputStrands replaceAt) before after) :
+    CouponCut before inputStrands :=
   match window with
   | .identityCoupon _ _ localWindow leading suffix =>
       ⟨leading, localWindow, suffix, rfl, rfl⟩
@@ -604,42 +608,56 @@ def CouponCut.primitive
 /-- A coupon window compiles to the primitive reconstructed from its cut. -/
 theorem coupon_window_primitive_cut_heq
     (eventId couponId label : String)
-    (strands : List String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
+    (replaceAt : Nat)
     {before after : List StrandState}
     (window :
-      EventWindow (.coupon eventId couponId label strands) before after) :
+      EventWindow
+        (.coupon eventId couponId label
+          inputStrands outputStrands replaceAt) before after) :
     HEq (EventWindow.componentPrimitive window)
-      ((couponCut eventId couponId label strands window).primitive
+      ((couponCut eventId couponId label
+        inputStrands outputStrands replaceAt window).primitive
         couponId) := by
   cases window
-  rfl
+  simp [couponCut, CouponCut.primitive, EventWindow.componentPrimitive]
 
 /-- Two witnesses for the same accepted coupon compile to the same diagram. -/
 theorem coupon_window_primitive_eq
     (eventId couponId label : String)
-    (strands : List String)
+    (inputStrands : List String)
+    (outputStrands : List StrandState)
+    (replaceAt : Nat)
     {before after : List StrandState}
     (left :
-      EventWindow (.coupon eventId couponId label strands) before after)
+      EventWindow
+        (.coupon eventId couponId label
+          inputStrands outputStrands replaceAt) before after)
     (right :
-      EventWindow (.coupon eventId couponId label strands) before after)
+      EventWindow
+        (.coupon eventId couponId label
+          inputStrands outputStrands replaceAt) before after)
     (unique :
       CanonicalTraceLocality.ActiveIdsUnique before)
-    (strandsNonempty : strands ≠ []) :
+    (strandsNonempty : inputStrands ≠ []) :
     EventWindow.componentPrimitive left =
       EventWindow.componentPrimitive right := by
   have cutEq :
-      couponCut eventId couponId label strands left =
-        couponCut eventId couponId label strands right :=
+      couponCut eventId couponId label
+          inputStrands outputStrands replaceAt left =
+        couponCut eventId couponId label
+          inputStrands outputStrands replaceAt right :=
     couponCut_unique unique strandsNonempty _ _
   have leftHeq :=
     coupon_window_primitive_cut_heq
-      eventId couponId label strands left
+      eventId couponId label inputStrands outputStrands replaceAt left
   rw [cutEq] at leftHeq
   exact eq_of_heq
     (leftHeq.trans
       (coupon_window_primitive_cut_heq
-        eventId couponId label strands right).symm)
+        eventId couponId label
+          inputStrands outputStrands replaceAt right).symm)
 
 /--
 Every pair of accepted witnesses for one serialized event compiles to the
@@ -669,12 +687,20 @@ theorem EventWindow.componentPrimitive_eq
       exact
         crossing_window_primitive_eq
           eventId overId underId sign left right unique
-  | coupon eventId couponId label strands =>
+  | coupon eventId couponId label inputStrands outputStrands replaceAt =>
       exact
         coupon_window_primitive_eq
-          eventId couponId label strands left right unique
-          (CanonicalTraceLocality.coupon_step_strands_nonempty
-            raw before after eventId couponId label strands step)
+          eventId couponId label inputStrands outputStrands replaceAt
+          left right unique
+          (by
+            rcases
+                CanonicalTraceLocality.coupon_step_words_not_both_empty
+                  raw before after eventId couponId label
+                    inputStrands outputStrands replaceAt step with
+              inputNonempty | outputNonempty
+            · exact inputNonempty
+            · cases left
+              simpa using outputNonempty)
   | framingTwist eventId strandId sign =>
       exact
         framing_window_primitive_eq
