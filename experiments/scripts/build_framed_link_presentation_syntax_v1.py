@@ -54,7 +54,15 @@ PRESENTATION_AXIOM_AUDIT = (
 
 LEAN_BUILD_ORDER = [
     "lean/TwistedYetter/Kirby/Presentation.lean",
+    (
+        "lean/TwistedYetter/Kirby/Final/Semantics/"
+        "DottedCutImplementationBridge.lean"
+    ),
     "lean/TwistedYetter/Kirby/PresentationSchemaRegression.lean",
+    (
+        "lean/TwistedYetter/Kirby/Final/Semantics/"
+        "CombinatorialSemanticComparison.lean"
+    ),
     "lean/TwistedYetter.lean",
 ]
 MUTATIONS = [
@@ -197,9 +205,9 @@ def build() -> tuple[dict[str, Any], bytes]:
     theorem_count = len(
         re.findall(r"^'TwistedYetter\.", axiom_output, flags=re.MULTILINE)
     )
-    if theorem_count != 9:
+    if theorem_count != 11:
         raise AssertionError(
-            f"expected 9 audited presentation declarations, got {theorem_count}"
+            f"expected 11 audited presentation declarations, got {theorem_count}"
         )
 
     mutation_result = run(["./scripts/lean_presentation_mutation_tests.sh"])
@@ -218,7 +226,7 @@ def build() -> tuple[dict[str, Any], bytes]:
         ["uv", "run", "pytest", "-q", "tests/test_kirby_presentation_v1.py"]
     )
     pytest_output = clean_output(pytest_result.stdout + pytest_result.stderr)
-    if "16 passed" not in pytest_output:
+    if "28 passed" not in pytest_output:
         raise AssertionError("R6 Python validator tests did not all pass")
 
     source_files = {
@@ -314,7 +322,7 @@ def build() -> tuple[dict[str, Any], bytes]:
             },
             "python_validator_tests": {
                 "status": "PASS",
-                "test_count": 16,
+                "test_count": 28,
                 "output_sha256": sha256_bytes(pytest_output.encode()),
             },
             "json_round_trip": {
@@ -335,6 +343,8 @@ def build() -> tuple[dict[str, Any], bytes]:
             "Declared slices are checked against a fresh event replay.",
             "Canonical JSON round trip and SHA-256 content identity are enforced.",
             "FormalPresentation requires a Lean proof that the executable validator returned success.",
+            "Every literal dotted component carries exactly one ordered signed puncture word; repeated strand occurrences remain distinct by cut position.",
+            "Dotted-cut topology validity remains a separate proof-bearing certificate and is never inferred from a provenance hash.",
             "Mutable aliases and unknown JSON fields are unrepresentable or rejected."
         ],
         "explicit_non_claims": obligations["explicit_non_claims"],

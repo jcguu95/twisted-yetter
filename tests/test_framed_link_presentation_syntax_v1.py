@@ -53,9 +53,9 @@ def test_r6_artifact_is_clean_terminal_and_content_addressed() -> None:
     )
     assert artifact["git"]["dirty"] is False
     assert artifact["content_hash"] == canonical_hash(artifact)
-    assert artifact["checks"]["kirby_axiom_audit"]["theorem_count"] == 9
+    assert artifact["checks"]["kirby_axiom_audit"]["theorem_count"] == 11
     assert artifact["checks"]["lean_mutation_tests"]["rejected_count"] == 3
-    assert artifact["checks"]["python_validator_tests"]["test_count"] == 16
+    assert artifact["checks"]["python_validator_tests"]["test_count"] == 28
 
 
 def test_generated_fixture_matches_both_hash_layers_and_round_trips() -> None:
@@ -69,6 +69,11 @@ def test_generated_fixture_matches_both_hash_layers_and_round_trips() -> None:
     assert record["slice_count"] == record["event_count"] + 1
     assert fixture["declared_slices"][0]["active_strands"] == []
     assert fixture["declared_slices"][-1]["active_strands"] == []
+    assert len(fixture["dotted_cuts"]) == 1
+    assert [
+        puncture["cut_position"]
+        for puncture in fixture["dotted_cuts"][0]["punctures"]
+    ] == [0, 1]
 
 
 def test_all_roles_and_framing_relations_are_materialized() -> None:
