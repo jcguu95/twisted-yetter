@@ -1,0 +1,31 @@
+{
+  "schema": "frozen-v4-cut-pairing-semantic-amendment-v1",
+  "recorded_at_utc": "2026-07-29T15:02:58Z",
+  "parent_commit": "78bcc06803a6abfbfe81a0f4a1196d933b3069c9",
+  "status": "SEMANTIC_AMENDMENT_TYPECHECKED_NOT_YET_FROZEN",
+  "changed_file": {
+    "path": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Diagram.lean",
+    "sha256": "ce5b2338be8a1406c7fc17010cc5bbcda06f2c1b7e2796cf0e284b301bfc2d42"
+  },
+  "mathematical_change": {
+    "name": "CutOpenEvent.PairingCompatible",
+    "statement": "Every cut-open birth or death pairs two strands on the same framed component with opposite orientations.",
+    "reason": "Without same-component and opposite-orientation data, a later categorical compiler cannot type the event as coevaluation or evaluation for one object and its chosen dual.",
+    "category_neutral": true,
+    "mentions_evaluator_equality": false,
+    "adds_axiom": false
+  },
+  "build": {
+    "command": "env LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.Independent.Diagram",
+    "status": "PASS"
+  },
+  "change_budget": {
+    "additional_frozen_semantic_edits_allowed_before_user_review": 0,
+    "instruction": "If backend repair exposes another semantic deficiency, stop and report it without changing Independent semantics again."
+  },
+  "non_claims": [
+    "Frozen semantics v4 is not yet sealed.",
+    "No typed cut-open compiler has yet been constructed.",
+    "No evaluator or invariance theorem is established by this amendment."
+  ]
+}

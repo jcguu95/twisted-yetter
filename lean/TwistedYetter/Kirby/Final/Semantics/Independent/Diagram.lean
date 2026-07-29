@@ -191,6 +191,30 @@ def CutOpenEvent.afterWord
   | .planarIsotopy word => word
   | .projectorHole _ punctures => punctures.map DottedPuncture.strand
 
+/--
+The category-neutral dual-pairing condition at a cup or cap.
+
+Both strands belong to the same framed component, so every component labeling
+assigns them the same simple object.  Their opposite orientations then make
+one strand the chosen dual of the other.  This is exactly the information
+needed later to interpret a birth or death as coevaluation or evaluation.
+-/
+def CutOpenEvent.PairingCompatible
+    {trace : CombinatorialLinkTrace} :
+    CutOpenEvent trace → Prop
+  | .birth left right =>
+      (trace.strands left).component = (trace.strands right).component ∧
+        (trace.strands left).orientation ≠
+          (trace.strands right).orientation
+  | .death left right =>
+      (trace.strands left).component = (trace.strands right).component ∧
+        (trace.strands left).orientation ≠
+          (trace.strands right).orientation
+  | .crossing _ _ _ => True
+  | .framingTwist _ _ => True
+  | .planarIsotopy _ => True
+  | .projectorHole _ _ => True
+
 def CutOpenEventTransition
     {trace : CombinatorialLinkTrace}
     (event : CutOpenEvent trace)
@@ -217,6 +241,9 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
       CutOpenEventTransition (events i)
         (activeOrder i.castSucc)
         (activeOrder i.succ)
+  pairingCompatible :
+    ∀ i : Fin eventCount,
+      (events i).PairingCompatible
   activeWordsNoDuplicates :
     ∀ i, (activeOrder i).Nodup
   activeStrandsAreTwoHandles :
