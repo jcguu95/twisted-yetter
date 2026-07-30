@@ -145,6 +145,80 @@ theorem exteriorStrandLabel_eq_of_component_eq
   unfold exteriorStrandLabel
   rw [component_eq]
 
+theorem orientedExteriorStrand_eq_of_component_and_orientation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    {input output : diagram.trace.StrandId}
+    (component_eq :
+      (diagram.trace.strands input).component =
+        (diagram.trace.strands output).component)
+    (orientation_eq :
+      (diagram.trace.strands input).orientation =
+        (diagram.trace.strands output).orientation) :
+    orientedExteriorStrand 𝒞 diagram labeling input =
+      orientedExteriorStrand 𝒞 diagram labeling output := by
+  exact congrArg₂
+    (fun label direction =>
+      ({ label := label, direction := direction } : OrientedSimple 𝒞))
+    (exteriorStrandLabel_eq_of_component_eq
+      𝒞 diagram labeling component_eq)
+    (congrArg ribbonDirectionOfStrandOrientation orientation_eq)
+
+theorem exteriorWord_of_continuations_eq
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (continuations :
+      List (diagram.trace.StrandId × diagram.trace.StrandId))
+    (compatible :
+      ∀ pair ∈ continuations,
+        (diagram.trace.strands pair.1).component =
+            (diagram.trace.strands pair.2).component ∧
+          (diagram.trace.strands pair.1).orientation =
+            (diagram.trace.strands pair.2).orientation) :
+    exteriorWord 𝒞 diagram labeling (continuations.map Prod.fst) =
+      exteriorWord 𝒞 diagram labeling (continuations.map Prod.snd) := by
+  induction continuations with
+  | nil => rfl
+  | cons pair rest ih =>
+      have head_compatible := compatible pair (by simp)
+      have tail_compatible :
+          ∀ p ∈ rest,
+            (diagram.trace.strands p.1).component =
+                (diagram.trace.strands p.2).component ∧
+              (diagram.trace.strands p.1).orientation =
+                (diagram.trace.strands p.2).orientation := by
+        intro p hp
+        exact compatible p (by simp [hp])
+      exact congrArg₂ List.cons
+        (orientedExteriorStrand_eq_of_component_and_orientation
+          𝒞 diagram labeling head_compatible.1 head_compatible.2)
+        (ih tail_compatible)
+
+theorem exteriorWord_of_punctures_eq
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    exteriorWord 𝒞 diagram labeling
+        (punctures.map DottedPuncture.inputStrand) =
+      exteriorWord 𝒞 diagram labeling
+        (punctures.map DottedPuncture.outputStrand) := by
+  induction punctures with
+  | nil => rfl
+  | cons puncture rest ih =>
+      exact congrArg₂ List.cons
+        (orientedExteriorStrand_eq_of_component_and_orientation
+          𝒞 diagram labeling
+          (puncture.input_on_two_handle.trans
+            puncture.output_on_two_handle.symm)
+          puncture.orientation_preserved)
+        ih
+
 def pairedBirthMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -264,9 +338,16 @@ def compileCutOpenEventMorphism
       exact pairedBirthMorphism 𝒞 diagram labeling left right pairing.1 pairing.2
   | death left right =>
       exact pairedDeathMorphism 𝒞 diagram labeling left right pairing.1 pairing.2
-  | crossing overStrand underStrand sign =>
+  | crossing overInput underInput overOutput underOutput sign =>
+      have over_eq :=
+        orientedExteriorStrand_eq_of_component_and_orientation
+          𝒞 diagram labeling pairing.1 pairing.2.1
+      have under_eq :=
+        orientedExteriorStrand_eq_of_component_and_orientation
+          𝒞 diagram labeling pairing.2.2.1 pairing.2.2.2
       simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord,
         exteriorWord, List.map_cons, List.map_nil, ribbonWordObject]
+      rw [← over_eq, ← under_eq]
       cases sign with
       | positive =>
           exact
@@ -278,21 +359,33 @@ def compileCutOpenEventMorphism
             (α_ _ _ _).inv ≫
               ((β_ _ _).inv ⊗ₘ 𝟙 _) ≫
               (α_ _ _ _).hom
-  | framingTwist strand sign =>
+  | framingTwist input output sign =>
+      have output_eq :=
+        orientedExteriorStrand_eq_of_component_and_orientation
+          𝒞 diagram labeling pairing.1 pairing.2
       simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord,
         exteriorWord, List.map_cons, List.map_nil, ribbonWordObject]
+      rw [← output_eq]
       cases sign with
       | positive => exact 𝒞.ribbon.twist.hom.app _ ⊗ₘ 𝟙 _
       | negative => exact 𝒞.ribbon.twist.inv.app _ ⊗ₘ 𝟙 _
-  | planarIsotopy word =>
+  | planarIsotopy continuations =>
+      have word_eq :=
+        exteriorWord_of_continuations_eq
+          𝒞 diagram labeling continuations pairing
+      simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
+      rw [← word_eq]
       exact 𝟙 _
   | projectorHole _ punctures =>
+      have word_eq :=
+        exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures
       simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
+      rw [← word_eq]
       exact
         tensorUnitProjector 𝒞
           (ribbonWordObject 𝒞
             (exteriorWord 𝒞 diagram labeling
-              (punctures.map DottedPuncture.strand)))
+              (punctures.map DottedPuncture.inputStrand)))
 
 /-- The chosen left exterior context of one certified event transition. -/
 noncomputable def eventLeftContext

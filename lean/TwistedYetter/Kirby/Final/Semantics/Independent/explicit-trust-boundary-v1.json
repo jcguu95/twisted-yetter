@@ -212,6 +212,58 @@
           "reviewed_at_utc": "2026-07-30T00:43:16Z"
         }
       ]
+    },
+    {
+      "module_id": "DIAGRAM_SEMANTICS",
+      "reviewed_source": "Diagram.lean",
+      "reviewed_source_sha256": "07004b5ab3dff3efd300d3dc8e93b1dafa7bf0678498019b7065875a414783c1",
+      "registered_at_utc": "2026-07-30T00:59:45Z",
+      "module_status": "HUMAN_REVIEW_IN_PROGRESS",
+      "review_progress": {
+        "implemented_pending_human_review": 1,
+        "human_approved": 1,
+        "remaining_unreviewed": 1
+      },
+      "obligations": [
+        {
+          "id": "DIA-01",
+          "lean_name": "CombinatorialLinkTrace.componentIncidenceSatisfiesFiniteCycleConditions",
+          "kind": "DERIVED_COMBINATORIAL_CLOSURE_THEOREM",
+          "risk": "MEDIUM",
+          "status": "HUMAN_APPROVED_COMBINATORIAL_CYCLE_SEMANTICS",
+          "human_meaning": "Each strand is one edge segment between event ports. Every crossing stores four distinct incident edges and pairs over-input with over-output and under-input with under-output. Every strand has exactly one input occurrence and one output occurrence; all local continuation pairs preserve component and the appropriate orientation convention; all strands with one component ID are connected through event continuations.",
+          "derived_from": [
+            "CombinatorialLinkTrace.eventPortsAreDistinct",
+            "CombinatorialLinkTrace.eventContinuationsPreserveComponentsAndOrientations",
+            "CombinatorialLinkTrace.everyStrandHasUniqueInputAndOutput",
+            "CombinatorialLinkTrace.everyComponentIsConnected"
+          ],
+          "semantic_change": "General morphism coupons were removed from DiagramEvent and remain typed morphisms in Graphical.lean. Crossing events now carry four distinct edge segments. The rejected unique-cup/cap-per-strand model has been replaced by unique input/output incidence at arbitrary event ports.",
+          "implemented_at_utc": "2026-07-30T01:18:09Z",
+          "reviewed_at_utc": "2026-07-30T01:40:25Z"
+        },
+        {
+          "id": "DIA-02",
+          "lean_name": "compileCutOpenEventMorphism",
+          "kind": "DERIVED_CUT_OPEN_EVENT_INTERPRETATION",
+          "risk": "HIGH",
+          "status": "IMPLEMENTED_PENDING_HUMAN_REVIEW",
+          "human_meaning": "The cut-open tangle uses the same edge-segment convention as the original trace. A crossing has four incident edges; a twist has separate input and output edges; planar isotopy explicitly pairs every input edge with an output edge; and every dotted puncture records the edge immediately before and after the projector hole. Component and orientation equalities force the evaluator to carry the same oriented simple object along each continuation.",
+          "derived_from": [
+            "CutOpenExteriorTrace.eventPortsAreDistinct",
+            "CutOpenExteriorTrace.everyStrandHasUniqueInputAndOutput",
+            "CutOpenEvent.PairingCompatible",
+            "DottedPuncture.input_on_two_handle",
+            "DottedPuncture.output_on_two_handle",
+            "DottedPuncture.orientation_preserved",
+            "orientedExteriorStrand_eq_of_component_and_orientation",
+            "exteriorWord_of_continuations_eq",
+            "exteriorWord_of_punctures_eq"
+          ],
+          "non_claim": "This does not yet prove that each projector input/output pair is the exact subdivision of one original link edge at a geometrically realized dotted-disk cut site. That source-to-cut-open binding remains a separate topology obligation.",
+          "implemented_at_utc": "2026-07-30T01:40:25Z"
+        }
+      ]
     }
   ],
   "explicit_axioms": [
@@ -440,16 +492,23 @@
         "CombinatorialLinkTrace.finalBoundaryEmpty",
         "CombinatorialLinkTrace.transitionValid",
         "CombinatorialLinkTrace.activeWordsNoDuplicates",
-        "CombinatorialLinkTrace.eachComponentIsClosed",
+        "CombinatorialLinkTrace.eventPortsAreDistinct",
+        "CombinatorialLinkTrace.eventContinuationsPreserveComponentsAndOrientations",
+        "CombinatorialLinkTrace.everyStrandHasUniqueInputAndOutput",
+        "CombinatorialLinkTrace.everyComponentIsConnected",
         "CombinatorialLinkTrace.framingEventsMatchIntegerFraming",
         "DottedPuncture.dotted_role",
         "DottedPuncture.two_handle_role",
-        "DottedPuncture.strand_on_two_handle",
+        "DottedPuncture.input_on_two_handle",
+        "DottedPuncture.output_on_two_handle",
+        "DottedPuncture.orientation_preserved",
         "DottedPuncture.exponent_matches_direction",
         "CutOpenExteriorTrace.initialBoundaryEmpty",
         "CutOpenExteriorTrace.finalBoundaryEmpty",
         "CutOpenExteriorTrace.transitionValid",
         "CutOpenExteriorTrace.pairingCompatible",
+        "CutOpenExteriorTrace.eventPortsAreDistinct",
+        "CutOpenExteriorTrace.everyStrandHasUniqueInputAndOutput",
         "CutOpenExteriorTrace.activeWordsNoDuplicates",
         "CutOpenExteriorTrace.activeStrandsAreTwoHandles",
         "DottedCutData.projectorSite_exact",
@@ -477,6 +536,13 @@
         "PrimalDegreeThreeBoundaryData.boundaryThree",
         "HomologicallyMarkedDiagram.primalBoundary",
         "RoleAwareCompiledTerm.graph"
+      ],
+      "derived_theorems": [
+        "CombinatorialLinkTrace.componentIncidenceSatisfiesFiniteCycleConditions",
+        "orientedExteriorStrand_eq_of_component_and_orientation",
+        "exteriorWord_of_continuations_eq",
+        "exteriorWord_of_punctures_eq",
+        "compileCutOpenEventMorphism"
       ],
       "transparent_predicates_requiring_semantic_review": [
         "CutOpenEvent.PairingCompatible",

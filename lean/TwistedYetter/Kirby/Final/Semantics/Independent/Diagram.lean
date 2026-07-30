@@ -53,35 +53,60 @@ structure Strand (componentCount : ℕ) where
   deriving DecidableEq, Repr
 
 /--
-The complete finite event grammar for a vertical sweep of a closed ribbon
-diagram.  A general coupon has an arbitrary finite input and output word.
+The finite event grammar for a vertical sweep of a Kirby link diagram.
+
+General categorical coupons do not belong here: they are typed morphisms in
+`Graphical`.  A link trace has only cups, caps, crossings, framing twists, and
+planar isotopies, so its declared components can genuinely be circles.
 -/
 inductive DiagramEvent (strandCount : ℕ)
-  | birth (left right : Fin strandCount)
-  | death (left right : Fin strandCount)
-  | crossing (overStrand underStrand : Fin strandCount) (sign : CrossingSign)
-  | coupon (name : String) (inputs outputs : List (Fin strandCount))
-  | framingTwist (strand : Fin strandCount) (sign : CrossingSign)
-  | planarIsotopy (before after : List (Fin strandCount))
+  | birth (leftOutput rightOutput : Fin strandCount)
+  | death (leftInput rightInput : Fin strandCount)
+  | crossing
+      (overInput underInput overOutput underOutput : Fin strandCount)
+      (sign : CrossingSign)
+  | framingTwist
+      (input output : Fin strandCount)
+      (sign : CrossingSign)
+  | planarIsotopy
+      (continuations : List (Fin strandCount × Fin strandCount))
   deriving DecidableEq, Repr
 
 def DiagramEvent.beforeWord {strandCount : ℕ} :
     DiagramEvent strandCount → List (Fin strandCount)
   | .birth _ _ => []
   | .death left right => [left, right]
-  | .crossing overStrand underStrand _ => [overStrand, underStrand]
-  | .coupon _ inputs _ => inputs
-  | .framingTwist strand _ => [strand]
-  | .planarIsotopy before _ => before
+  | .crossing overInput underInput _ _ _ => [overInput, underInput]
+  | .framingTwist input _ _ => [input]
+  | .planarIsotopy continuations => continuations.map Prod.fst
 
 def DiagramEvent.afterWord {strandCount : ℕ} :
     DiagramEvent strandCount → List (Fin strandCount)
   | .birth left right => [left, right]
   | .death _ _ => []
-  | .crossing overStrand underStrand _ => [underStrand, overStrand]
-  | .coupon _ _ outputs => outputs
-  | .framingTwist strand _ => [strand]
-  | .planarIsotopy _ after => after
+  | .crossing _ _ overOutput underOutput _ => [underOutput, overOutput]
+  | .framingTwist _ output _ => [output]
+  | .planarIsotopy continuations => continuations.map Prod.snd
+
+/--
+The local continuation pairing through one event.
+
+At a crossing all four incident edges are explicit.  The over edge continues
+only to the over edge, and the under edge only to the under edge.
+-/
+def DiagramEvent.continuationPairs {strandCount : ℕ} :
+    DiagramEvent strandCount →
+      List (Fin strandCount × Fin strandCount)
+  | .birth leftOutput rightOutput =>
+      [(leftOutput, rightOutput)]
+  | .death leftInput rightInput =>
+      [(leftInput, rightInput)]
+  | .crossing overInput underInput overOutput underOutput _ =>
+      [(overInput, overOutput), (underInput, underOutput)]
+  | .framingTwist input output _ =>
+      [(input, output)]
+  | .planarIsotopy continuations =>
+      continuations
 
 /--
 One event replaces one exact contiguous local word and leaves the common
@@ -94,33 +119,92 @@ def EventTransition {strandCount : ℕ}
     before = leftContext ++ event.beforeWord ++ rightContext ∧
     after = leftContext ++ event.afterWord ++ rightContext
 
-def StrandIsBorn
+def StrandOccursAsInput
     {strandCount eventCount : ℕ}
     (events : Fin eventCount → DiagramEvent strandCount)
-    (strand : Fin strandCount) : Prop :=
-  ∃ i : Fin eventCount, strand ∈ (events i).afterWord
+    (strand : Fin strandCount)
+    (i : Fin eventCount) : Prop :=
+  strand ∈ (events i).beforeWord
 
-def StrandIsKilled
+def StrandOccursAsOutput
     {strandCount eventCount : ℕ}
     (events : Fin eventCount → DiagramEvent strandCount)
-    (strand : Fin strandCount) : Prop :=
-  ∃ i : Fin eventCount, strand ∈ (events i).beforeWord
+    (strand : Fin strandCount)
+    (i : Fin eventCount) : Prop :=
+  strand ∈ (events i).afterWord
 
 /--
-The finite trace has no hidden closure certificate.  Every strand is created
-and removed by the event trace, and every declared component owns at least one
-strand.  Together with the empty endpoint words and exact event transitions
-stored below, this is the combinatorial closed-circle condition.
+Two strand segments are adjacent when one event explicitly continues one into
+the other.  This is an undirected relation by construction.
+-/
+def StrandsContinueAtEvent
+    {strandCount eventCount : ℕ}
+    (events : Fin eventCount → DiagramEvent strandCount)
+    (first second : Fin strandCount) :
+    Prop :=
+  ∃ i : Fin eventCount,
+    (first, second) ∈ (events i).continuationPairs ∨
+      (second, first) ∈ (events i).continuationPairs
+
+def EventPortsAreDistinct
+    {strandCount eventCount : ℕ}
+    (events : Fin eventCount → DiagramEvent strandCount) :
+    Prop :=
+  ∀ i, ((events i).beforeWord ++ (events i).afterWord).Nodup
+
+def EventContinuationsPreserveComponentsAndOrientations
+    {componentCount strandCount eventCount : ℕ}
+    (strands : Fin strandCount → Strand componentCount)
+    (events : Fin eventCount → DiagramEvent strandCount) :
+    Prop :=
+  ∀ i first second,
+    (first, second) ∈ (events i).continuationPairs →
+      (strands first).component = (strands second).component ∧
+        match events i with
+        | .birth _ _ | .death _ _ =>
+            (strands first).orientation ≠ (strands second).orientation
+        | .crossing _ _ _ _ _
+        | .framingTwist _ _ _
+        | .planarIsotopy _ =>
+            (strands first).orientation = (strands second).orientation
+
+def EveryStrandHasUniqueInputAndOutput
+    {strandCount eventCount : ℕ}
+    (events : Fin eventCount → DiagramEvent strandCount) :
+    Prop :=
+  ∀ strand,
+    (∃! i, StrandOccursAsInput events strand i) ∧
+      (∃! i, StrandOccursAsOutput events strand i)
+
+def EveryComponentIsConnected
+    {componentCount strandCount eventCount : ℕ}
+    (strands : Fin strandCount → Strand componentCount)
+    (events : Fin eventCount → DiagramEvent strandCount) :
+    Prop :=
+  ∀ component,
+    ∃ base,
+      (strands base).component = component ∧
+        ∀ strand,
+          (strands strand).component = component →
+            Relation.ReflTransGen
+              (StrandsContinueAtEvent events)
+              base strand
+
+/--
+The exact finite incidence conditions saying that every declared component is
+one closed circle.  Unique input/output incidence makes every strand segment
+two-valent; explicit event continuations pair all local ports, and
+connectedness prevents one component ID from naming several disjoint circles.
 -/
 def ComponentsFormClosedCircles
     {componentCount strandCount eventCount : ℕ}
-    (_components : Fin componentCount → Component)
     (strands : Fin strandCount → Strand componentCount)
-    (events : Fin eventCount → DiagramEvent strandCount)
-    (_activeOrder : Fin (eventCount + 1) → List (Fin strandCount)) :
+    (events : Fin eventCount → DiagramEvent strandCount) :
     Prop :=
-  (∀ strand, StrandIsBorn events strand ∧ StrandIsKilled events strand) ∧
-    (∀ component, ∃ strand, (strands strand).component = component)
+  EventPortsAreDistinct events ∧
+    EventContinuationsPreserveComponentsAndOrientations strands events ∧
+    EveryStrandHasUniqueInputAndOutput events ∧
+    EveryComponentIsConnected strands events
 
 def CrossingSign.toInteger : CrossingSign → ℤ
   | .positive => 1
@@ -132,8 +216,8 @@ def DiagramEvent.framingContribution
     (strands : Fin strandCount → Strand componentCount)
     (event : DiagramEvent strandCount) : ℤ :=
   match event with
-  | .framingTwist strand sign =>
-      if (strands strand).component = component then sign.toInteger else 0
+  | .framingTwist input _ sign =>
+      if (strands input).component = component then sign.toInteger else 0
   | _ => 0
 
 /--
@@ -168,10 +252,24 @@ structure CombinatorialLinkTrace where
         (activeOrder i.succ)
   activeWordsNoDuplicates :
     ∀ i, (activeOrder i).Nodup
-  eachComponentIsClosed :
-    ComponentsFormClosedCircles components strands events activeOrder
+  eventPortsAreDistinct :
+    EventPortsAreDistinct events
+  eventContinuationsPreserveComponentsAndOrientations :
+    EventContinuationsPreserveComponentsAndOrientations strands events
+  everyStrandHasUniqueInputAndOutput :
+    EveryStrandHasUniqueInputAndOutput events
+  everyComponentIsConnected :
+    EveryComponentIsConnected strands events
   framingEventsMatchIntegerFraming :
     FramingEventsMatchIntegerFramings components strands events
+
+theorem CombinatorialLinkTrace.componentIncidenceSatisfiesFiniteCycleConditions
+    (trace : CombinatorialLinkTrace) :
+    ComponentsFormClosedCircles trace.strands trace.events :=
+  ⟨trace.eventPortsAreDistinct,
+    trace.eventContinuationsPreserveComponentsAndOrientations,
+    trace.everyStrandHasUniqueInputAndOutput,
+    trace.everyComponentIsConnected⟩
 
 def CombinatorialLinkTrace.ComponentId
     (trace : CombinatorialLinkTrace) := Fin trace.componentCount
@@ -182,7 +280,8 @@ def CombinatorialLinkTrace.StrandId
 structure DottedPuncture (trace : CombinatorialLinkTrace) where
   dottedComponent : trace.ComponentId
   twoHandleComponent : trace.ComponentId
-  strand : trace.StrandId
+  inputStrand : trace.StrandId
+  outputStrand : trace.StrandId
   direction : PunctureDirection
   characterExponentSign : ℤ
   cutPosition : ℕ
@@ -190,8 +289,13 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
     (trace.components dottedComponent).role = .dotted
   two_handle_role :
     (trace.components twoHandleComponent).role ≠ .dotted
-  strand_on_two_handle :
-    (trace.strands strand).component = twoHandleComponent
+  input_on_two_handle :
+    (trace.strands inputStrand).component = twoHandleComponent
+  output_on_two_handle :
+    (trace.strands outputStrand).component = twoHandleComponent
+  orientation_preserved :
+    (trace.strands inputStrand).orientation =
+      (trace.strands outputStrand).orientation
   exponent_matches_direction :
     characterExponentSign = direction.characterExponentSign
 
@@ -205,14 +309,16 @@ projector.  In particular, this syntax contains neither a Kirby colour nor an
 evaluation equality.
 -/
 inductive CutOpenEvent (trace : CombinatorialLinkTrace)
-  | birth (left right : trace.StrandId)
-  | death (left right : trace.StrandId)
+  | birth (leftOutput rightOutput : trace.StrandId)
+  | death (leftInput rightInput : trace.StrandId)
   | crossing
-      (overStrand underStrand : trace.StrandId)
+      (overInput underInput overOutput underOutput : trace.StrandId)
       (sign : CrossingSign)
-  | framingTwist (strand : trace.StrandId) (sign : CrossingSign)
+  | framingTwist
+      (input output : trace.StrandId)
+      (sign : CrossingSign)
   | planarIsotopy
-      (word : List trace.StrandId)
+      (continuations : List (trace.StrandId × trace.StrandId))
   | projectorHole
       (dottedComponent : trace.ComponentId)
       (punctures : List (DottedPuncture trace))
@@ -222,20 +328,37 @@ def CutOpenEvent.beforeWord
     CutOpenEvent trace → List trace.StrandId
   | .birth _ _ => []
   | .death left right => [left, right]
-  | .crossing overStrand underStrand _ => [overStrand, underStrand]
-  | .framingTwist strand _ => [strand]
-  | .planarIsotopy word => word
-  | .projectorHole _ punctures => punctures.map DottedPuncture.strand
+  | .crossing overInput underInput _ _ _ => [overInput, underInput]
+  | .framingTwist input _ _ => [input]
+  | .planarIsotopy continuations => continuations.map Prod.fst
+  | .projectorHole _ punctures => punctures.map DottedPuncture.inputStrand
 
 def CutOpenEvent.afterWord
     {trace : CombinatorialLinkTrace} :
     CutOpenEvent trace → List trace.StrandId
   | .birth left right => [left, right]
   | .death _ _ => []
-  | .crossing overStrand underStrand _ => [underStrand, overStrand]
-  | .framingTwist strand _ => [strand]
-  | .planarIsotopy word => word
-  | .projectorHole _ punctures => punctures.map DottedPuncture.strand
+  | .crossing _ _ overOutput underOutput _ => [underOutput, overOutput]
+  | .framingTwist _ output _ => [output]
+  | .planarIsotopy continuations => continuations.map Prod.snd
+  | .projectorHole _ punctures => punctures.map DottedPuncture.outputStrand
+
+def CutOpenEvent.continuationPairs
+    {trace : CombinatorialLinkTrace} :
+    CutOpenEvent trace → List (trace.StrandId × trace.StrandId)
+  | .birth leftOutput rightOutput =>
+      [(leftOutput, rightOutput)]
+  | .death leftInput rightInput =>
+      [(leftInput, rightInput)]
+  | .crossing overInput underInput overOutput underOutput _ =>
+      [(overInput, overOutput), (underInput, underOutput)]
+  | .framingTwist input output _ =>
+      [(input, output)]
+  | .planarIsotopy continuations =>
+      continuations
+  | .projectorHole _ punctures =>
+      punctures.map fun puncture =>
+        (puncture.inputStrand, puncture.outputStrand)
 
 /--
 The category-neutral dual-pairing condition at a cup or cap.
@@ -256,10 +379,32 @@ def CutOpenEvent.PairingCompatible
       (trace.strands left).component = (trace.strands right).component ∧
         (trace.strands left).orientation ≠
           (trace.strands right).orientation
-  | .crossing _ _ _ => True
-  | .framingTwist _ _ => True
-  | .planarIsotopy _ => True
-  | .projectorHole _ _ => True
+  | .crossing overInput underInput overOutput underOutput _ =>
+      (trace.strands overInput).component =
+          (trace.strands overOutput).component ∧
+        (trace.strands overInput).orientation =
+          (trace.strands overOutput).orientation ∧
+        (trace.strands underInput).component =
+          (trace.strands underOutput).component ∧
+        (trace.strands underInput).orientation =
+          (trace.strands underOutput).orientation
+  | .framingTwist input output _ =>
+      (trace.strands input).component =
+          (trace.strands output).component ∧
+        (trace.strands input).orientation =
+          (trace.strands output).orientation
+  | .planarIsotopy continuations =>
+      ∀ pair ∈ continuations,
+        (trace.strands pair.1).component =
+            (trace.strands pair.2).component ∧
+          (trace.strands pair.1).orientation =
+            (trace.strands pair.2).orientation
+  | .projectorHole _ punctures =>
+      ∀ puncture ∈ punctures,
+        (trace.strands puncture.inputStrand).component =
+            (trace.strands puncture.outputStrand).component ∧
+          (trace.strands puncture.inputStrand).orientation =
+            (trace.strands puncture.outputStrand).orientation
 
 def CutOpenEventTransition
     {trace : CombinatorialLinkTrace}
@@ -290,6 +435,12 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
   pairingCompatible :
     ∀ i : Fin eventCount,
       (events i).PairingCompatible
+  eventPortsAreDistinct :
+    ∀ i, ((events i).beforeWord ++ (events i).afterWord).Nodup
+  everyStrandHasUniqueInputAndOutput :
+    ∀ strand,
+      (∃! i : Fin eventCount, strand ∈ (events i).beforeWord) ∧
+        (∃! i : Fin eventCount, strand ∈ (events i).afterWord)
   activeWordsNoDuplicates :
     ∀ i, (activeOrder i).Nodup
   activeStrandsAreTwoHandles :
@@ -321,7 +472,7 @@ def CutOpenWordsAreCompatible
   ∀ (dotted : trace.ComponentId)
     (role : (trace.components dotted).role = .dotted)
     (puncture : DottedPuncture trace),
-      puncture ∈ punctureWord dotted role →
+        puncture ∈ punctureWord dotted role →
         puncture.dottedComponent = dotted
 
 structure DottedCutData (trace : CombinatorialLinkTrace) where
