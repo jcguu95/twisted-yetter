@@ -399,6 +399,27 @@ theorem closedScalar_identity :
   simp [closedScalar, unitEndLinearEquiv, simpleEndLinearEquiv,
     scalarEndLinearMap]
 
+theorem closedScalar_smul_identity (scalar : K) :
+    𝒞.closedScalar (scalar • 𝟙 (𝟙_ 𝒞.C)) = scalar := by
+  exact 𝒞.unitEndLinearEquiv.symm_apply_apply scalar
+
+theorem closedScalar_comp
+    (left right : 𝟙_ 𝒞.C ⟶ 𝟙_ 𝒞.C) :
+    𝒞.closedScalar (left ≫ right) =
+      𝒞.closedScalar left * 𝒞.closedScalar right := by
+  let leftScalar := 𝒞.closedScalar left
+  let rightScalar := 𝒞.closedScalar right
+  have left_eq : left = leftScalar • 𝟙 (𝟙_ 𝒞.C) := by
+    exact (𝒞.unitEndLinearEquiv.apply_symm_apply left).symm
+  have right_eq : right = rightScalar • 𝟙 (𝟙_ 𝒞.C) := by
+    exact (𝒞.unitEndLinearEquiv.apply_symm_apply right).symm
+  rw [left_eq, right_eq]
+  simp only [Category.comp_id, CategoryTheory.Linear.comp_smul, smul_smul]
+  rw [𝒞.closedScalar_smul_identity,
+    𝒞.closedScalar_smul_identity,
+    𝒞.closedScalar_smul_identity]
+  exact mul_comm _ _
+
 end PremodularFusionCategory
 
 /-- A genuine monoidal natural automorphism of the tensor identity. -/
@@ -667,4 +688,4 @@ structure TwistedPremodularCategory
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 5768
+-- semantic-freeze-padding: 3885

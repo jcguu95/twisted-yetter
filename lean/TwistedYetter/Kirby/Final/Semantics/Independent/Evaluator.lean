@@ -608,6 +608,21 @@ def thamDefinition511Normalization
     (hOne _hTwo _hThree : ℕ) : K :=
   globalDimension / globalDimension ^ hOne
 
+noncomputable def rawCycleSum
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (cycle : ThamTwoCycles turnedOver) : K :=
+  ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
+    ordinaryKirbyWeight 𝒞η.category labeling *
+    characterWeight 𝒞η turnedOver labeling cycle *
+    let term :=
+      canonicalRoleAwareGraphCompiler
+        𝒞η diagram primal turnedOver labeling cycle
+    canonicalRibbonGraphicalEvaluation 𝒞η.category term.graph
+
 noncomputable def evaluateCycle
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
@@ -620,13 +635,7 @@ noncomputable def evaluateCycle
       diagram.handles.hThree
       diagram.handles.hTwo
       diagram.handles.hOne *
-    ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
-      ordinaryKirbyWeight 𝒞η.category labeling *
-      characterWeight 𝒞η turnedOver labeling cycle *
-      let term :=
-        canonicalRoleAwareGraphCompiler
-          𝒞η diagram primal turnedOver labeling cycle
-      canonicalRibbonGraphicalEvaluation 𝒞η.category term.graph
+    rawCycleSum 𝒞η diagram primal turnedOver cycle
 
 /--
 Representative independence is not baked into the definition.  It is the
@@ -647,4 +656,4 @@ def RepresentativeIndependenceStatement
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 18113
+-- semantic-freeze-padding: 3308

@@ -751,6 +751,222 @@ def tensorUnitProjector
     𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
       𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩
 
+/--
+On a chosen simple representative, the tensor-unit projector is the identity
+exactly for the tensor-unit label and zero for every other label.
+-/
+theorem tensorUnitProjector_simple
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    tensorUnitProjector 𝒞 (𝒞.simples.simpleObject simple) =
+      if simple = 𝒞.simples.tensorUnit then
+        𝟙 (𝒞.simples.simpleObject simple)
+      else
+        0 := by
+  classical
+  letI : CategoryTheory.Simple
+      (𝒞.simples.simpleObject simple) :=
+    𝒞.simples.simple_isSimple simple
+  by_cases unitCase : simple = 𝒞.simples.tensorUnit
+  · subst simple
+    simp only [if_pos]
+    unfold tensorUnitProjector
+    rw [← 𝒞.simples.resolution_identity
+      (𝒞.simples.simpleObject 𝒞.simples.tensorUnit)]
+    symm
+    apply Finset.sum_eq_single 𝒞.simples.tensorUnit
+    · intro other _ different
+      letI : CategoryTheory.Simple
+          (𝒞.simples.simpleObject other) :=
+        𝒞.simples.simple_isSimple other
+      letI : FiniteDimensional K
+          (𝒞.simples.simpleObject 𝒞.simples.tensorUnit ⟶
+            𝒞.simples.simpleObject other) :=
+        𝒞.simples.hom_finite _ _
+      apply Finset.sum_eq_zero
+      intro i _
+      have noIso :
+          (𝒞.simples.simpleObject 𝒞.simples.tensorUnit ≅
+            𝒞.simples.simpleObject other) → False := by
+        intro iso
+        exact different
+          (𝒞.simples.simple_pairwise ⟨iso.symm⟩)
+      have projectionZero :
+          𝒞.simples.summandProjection
+              (𝒞.simples.simpleObject 𝒞.simples.tensorUnit)
+              ⟨other, i⟩ =
+            0 := by
+        apply
+          (finrank_zero_iff_forall_zero.mp
+            (CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso
+              K noIso))
+      simp [projectionZero]
+    · simp
+  · simp only [unitCase, if_false]
+    letI : CategoryTheory.Simple
+        (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) :=
+      𝒞.simples.simple_isSimple 𝒞.simples.tensorUnit
+    letI : FiniteDimensional K
+        (𝒞.simples.simpleObject simple ⟶
+          𝒞.simples.simpleObject 𝒞.simples.tensorUnit) :=
+      𝒞.simples.hom_finite _ _
+    unfold tensorUnitProjector
+    apply Finset.sum_eq_zero
+    intro i _
+    have noIso :
+        (𝒞.simples.simpleObject simple ≅
+          𝒞.simples.simpleObject 𝒞.simples.tensorUnit) → False := by
+      intro iso
+      exact unitCase
+        (𝒞.simples.simple_pairwise ⟨iso⟩)
+    have projectionZero :
+        𝒞.simples.summandProjection
+            (𝒞.simples.simpleObject simple)
+            ⟨𝒞.simples.tensorUnit, i⟩ =
+          0 := by
+      apply
+        (finrank_zero_iff_forall_zero.mp
+          (CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso
+            K noIso))
+    simp [projectionZero]
+
+/--
+Close one endomorphism by the ribbon trace convention frozen in
+`quantumDimension_eq_ribbonTrace`.
+-/
+def ribbonTraceMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple)
+    (endomorphism :
+      𝒞.simples.simpleObject simple ⟶
+        𝒞.simples.simpleObject simple) :
+    𝟙_ 𝒞.C ⟶ 𝟙_ 𝒞.C :=
+  let X := 𝒞.simples.simpleObject simple
+  η_ X (Xᘁ) ≫
+    (endomorphism ⊗ₘ 𝟙 (Xᘁ)) ≫
+    (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
+    (β_ X (Xᘁ)).hom ≫
+    ε_ X (Xᘁ)
+
+theorem ribbonTraceMorphism_identity
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    ribbonTraceMorphism 𝒞 simple
+        (𝟙 (𝒞.simples.simpleObject simple)) =
+      𝒞.simples.quantumDimension simple • 𝟙 (𝟙_ 𝒞.C) := by
+  simpa [ribbonTraceMorphism] using
+    (𝒞.quantumDimension_eq_ribbonTrace simple).symm
+
+theorem ribbonTraceMorphism_zero
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    ribbonTraceMorphism 𝒞 simple 0 = 0 := by
+  simp [ribbonTraceMorphism]
+
+/-- The closed local value of one dotted cut around a simple meridian. -/
+noncomputable def specialCutMeridianClosedValue
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) : K :=
+  𝒞.closedScalar
+    (ribbonTraceMorphism 𝒞 simple
+      (tensorUnitProjector 𝒞
+        (𝒞.simples.simpleObject simple)))
+
+theorem specialCutMeridianClosedValue_eq
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    specialCutMeridianClosedValue 𝒞 simple =
+      if simple = 𝒞.simples.tensorUnit then
+        𝒞.simples.quantumDimension 𝒞.simples.tensorUnit
+      else 0 := by
+  classical
+  rw [specialCutMeridianClosedValue, tensorUnitProjector_simple]
+  by_cases unitCase : simple = 𝒞.simples.tensorUnit
+  · subst simple
+    simp only [if_pos]
+    rw [ribbonTraceMorphism_identity]
+    exact 𝒞.closedScalar_smul_identity _
+  · simp only [unitCase, if_false]
+    rw [ribbonTraceMorphism_zero]
+    exact map_zero 𝒞.unitEndLinearEquiv.symm
+
+theorem specialCutMeridianSum_eq_one
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (unitQuantumDimension :
+      𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1) :
+    (∑ simple : 𝒞.simples.Simple,
+      𝒞.simples.quantumDimension simple *
+        specialCutMeridianClosedValue 𝒞 simple) = 1 := by
+  classical
+  simp [specialCutMeridianClosedValue_eq, unitQuantumDimension]
+
+theorem ordinaryKirbyLoopSum_eq_globalDimension
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    (∑ simple : 𝒞.simples.Simple,
+      𝒞.simples.quantumDimension simple *
+        𝒞.closedScalar
+          (ribbonTraceMorphism 𝒞 simple
+            (𝟙 (𝒞.simples.simpleObject simple)))) =
+      𝒞.globalDimension := by
+  classical
+  apply Finset.sum_congr rfl
+  intro simple _
+  rw [ribbonTraceMorphism_identity]
+  rw [𝒞.closedScalar_smul_identity]
+
+/-- The local closed graph for a canceling dotted-one/two-handle pair. -/
+def specialCutMeridianExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
+  .morphism
+    (ribbonTraceMorphism 𝒞 simple
+      (tensorUnitProjector 𝒞
+        (𝒞.simples.simpleObject simple)))
+
+/-- The local closed graph for an ordinary zero-framed Kirby-coloured loop. -/
+def ordinaryKirbyLoopExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (simple : 𝒞.simples.Simple) :
+    RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
+  .morphism
+    (ribbonTraceMorphism 𝒞 simple
+      (𝟙 (𝒞.simples.simpleObject simple)))
+
+/--
+Compose two closed graphical expressions.  This is the typed closed-diagram
+operation used for a local cancellation factor followed by its unchanged
+exterior.
+-/
+def closedComposeExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (localTerm exterior :
+      RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) :
+    RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
+  .compose localTerm exterior
+
+theorem closedComposeExpression_scalar
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (localTerm exterior :
+      RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) :
+    𝒞.closedScalar
+        (closedComposeExpression localTerm exterior).interpret =
+      𝒞.closedScalar localTerm.interpret *
+        𝒞.closedScalar exterior.interpret := by
+  exact 𝒞.closedScalar_comp localTerm.interpret exterior.interpret
+
 /-- A forward character coupon disappears immediately before the unit projector. -/
 theorem character_hom_tensorUnitProjector_left
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -914,4 +1130,4 @@ noncomputable def canonicalRibbonGraphicalEvaluation
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 25715
+-- semantic-freeze-padding: 142

@@ -35,6 +35,7 @@ theorem normalizedCycleExpression_evaluation
   unfold normalizedCycleExpression
   unfold canonicalRibbonGraphicalEvaluation
   unfold evaluateCycle
+  unfold rawCycleSum
   unfold PremodularFusionCategory.closedScalar
   simp only [RibbonExpression.interpret]
   simp only [map_smul, map_sum]

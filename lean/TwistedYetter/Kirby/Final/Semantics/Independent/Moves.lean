@@ -11,6 +11,8 @@ namespace TwistedYetter.Semantics.Independent
 
 noncomputable section
 
+universe uL
+
 inductive ElementaryMoveKind
   | framedIsotopy
   | oneOverOne
@@ -165,18 +167,6 @@ structure CancellationScript
     kind = .twoThreeBirth ∨ kind = .twoThreeDeath
   handleCountChangeIsStandard :
     CancellationHandleCountChangeIsStandard source target kind
-
-/--
-External handle-topology boundary: the exact source and target contain the
-same common exterior and differ only by the standard local canceling
-one--two or two--three handle pair specified by `script.kind`.
-
-This predicate does not contain the normalization or evaluation equality
-which must later be proved categorically.
--/
-axiom CancellationScriptRealizesStandardCancellation
-    {source target : CombinatorialSpecialKirbyDiagram} :
-    CancellationScript source target → Prop
 
 /--
 An exact chain-level transport for the primal handle complexes, using ordinary
@@ -335,6 +325,191 @@ structure MoveHomologyTransport
       target.turnover.equiv (primal.inducedH₂ alpha) =
         tham.inducedH₂ (source.turnover.equiv alpha)
 
+/--
+Explicit coordinate normal form for adding one primal two-handle.
+
+The equivalence says exactly which target coordinate is the new handle.
+The two equations prove that the THAM-side cycle transport preserves every
+old coefficient and assigns coefficient zero to the new handle.
+-/
+structure AddedTwoHandleCoordinates
+    (lower higher : HomologicallyMarkedDiagram)
+    (transport : ThamHandleChainTransport lower higher) where
+  indexEquiv :
+    (Fin lower.diagram.handles.hTwo ⊕ Unit) ≃
+      Fin higher.diagram.handles.hTwo
+  oldCoefficient :
+    ∀ (cycle : ThamTwoCycles lower.turnedOver)
+      (i : Fin lower.diagram.handles.hTwo),
+      (transport.mapCycle cycle).1 (indexEquiv (Sum.inl i)) =
+        cycle.1 i
+  newCoefficientZero :
+    ∀ cycle : ThamTwoCycles lower.turnedOver,
+      (transport.mapCycle cycle).1 (indexEquiv (Sum.inr ())) = 0
+
+def AddedTwoHandleCoordinates.mergeLabeling
+    {lower higher : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport lower higher}
+    (coordinates :
+      AddedTwoHandleCoordinates lower higher transport)
+    {Label : Type uL}
+    (lowerLabeling : Fin lower.diagram.handles.hTwo → Label)
+    (newLabel : Label) :
+    Fin higher.diagram.handles.hTwo → Label :=
+  fun i =>
+    match coordinates.indexEquiv.symm i with
+    | .inl old => lowerLabeling old
+    | .inr _ => newLabel
+
+def AddedTwoHandleCoordinates.labelingEquiv
+    {lower higher : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport lower higher}
+    (coordinates :
+      AddedTwoHandleCoordinates lower higher transport)
+    (Label : Type uL) :
+    ((Fin lower.diagram.handles.hTwo → Label) × Label) ≃
+      (Fin higher.diagram.handles.hTwo → Label) where
+  toFun pair :=
+    coordinates.mergeLabeling pair.1 pair.2
+  invFun higherLabeling :=
+    (fun i => higherLabeling (coordinates.indexEquiv (Sum.inl i)),
+      higherLabeling (coordinates.indexEquiv (Sum.inr ())))
+  left_inv pair := by
+    rcases pair with ⟨lowerLabeling, newLabel⟩
+    apply Prod.ext
+    · funext i
+      simp [AddedTwoHandleCoordinates.mergeLabeling]
+    · simp [AddedTwoHandleCoordinates.mergeLabeling]
+  right_inv higherLabeling := by
+    funext i
+    cases equality : coordinates.indexEquiv.symm i with
+    | inl old =>
+        have back := coordinates.indexEquiv.apply_symm_apply i
+        rw [equality] at back
+        simp [AddedTwoHandleCoordinates.mergeLabeling, equality, back]
+    | inr new =>
+        obtain rfl : new = () := Subsingleton.elim _ _
+        have back := coordinates.indexEquiv.apply_symm_apply i
+        rw [equality] at back
+        simp [AddedTwoHandleCoordinates.mergeLabeling, equality, back]
+
+/--
+Explicit coordinate normal form for removing one primal two-handle.
+
+An arbitrary high-side cycle is first replaced by a homologous representative
+whose canceling coordinate is zero.  This is the precise chain-contraction
+content needed for a death move; evaluation independence of that replacement
+is proved separately.
+-/
+structure RemovedTwoHandleCoordinates
+    (higher lower : HomologicallyMarkedDiagram)
+    (transport : ThamHandleChainTransport higher lower) where
+  indexEquiv :
+    (Fin lower.diagram.handles.hTwo ⊕ Unit) ≃
+      Fin higher.diagram.handles.hTwo
+  safeCycle :
+    ThamTwoCycles higher.turnedOver →
+      ThamTwoCycles higher.turnedOver
+  safeCycle_sameClass :
+    ∀ cycle,
+      thamCycleClass higher.turnedOver (safeCycle cycle) =
+        thamCycleClass higher.turnedOver cycle
+  safe_newCoefficientZero :
+    ∀ cycle,
+      (safeCycle cycle).1 (indexEquiv (Sum.inr ())) = 0
+  transportedOldCoefficient :
+    ∀ (cycle : ThamTwoCycles higher.turnedOver)
+      (i : Fin lower.diagram.handles.hTwo),
+      (transport.mapCycle (safeCycle cycle)).1 i =
+        (safeCycle cycle).1 (indexEquiv (Sum.inl i))
+
+def RemovedTwoHandleCoordinates.splitSafeLabeling
+    {higher lower : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport higher lower}
+    (coordinates :
+      RemovedTwoHandleCoordinates higher lower transport)
+    {Label : Type uL}
+    (higherLabeling : Fin higher.diagram.handles.hTwo → Label) :
+    (Fin lower.diagram.handles.hTwo → Label) × Label :=
+  (fun i => higherLabeling (coordinates.indexEquiv (Sum.inl i)),
+    higherLabeling (coordinates.indexEquiv (Sum.inr ())))
+
+def RemovedTwoHandleCoordinates.mergeLabeling
+    {higher lower : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport higher lower}
+    (coordinates :
+      RemovedTwoHandleCoordinates higher lower transport)
+    {Label : Type uL}
+    (lowerLabeling : Fin lower.diagram.handles.hTwo → Label)
+    (removedLabel : Label) :
+    Fin higher.diagram.handles.hTwo → Label :=
+  fun i =>
+    match coordinates.indexEquiv.symm i with
+    | .inl old => lowerLabeling old
+    | .inr _ => removedLabel
+
+def RemovedTwoHandleCoordinates.labelingEquiv
+    {higher lower : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport higher lower}
+    (coordinates :
+      RemovedTwoHandleCoordinates higher lower transport)
+    (Label : Type uL) :
+    ((Fin lower.diagram.handles.hTwo → Label) × Label) ≃
+      (Fin higher.diagram.handles.hTwo → Label) where
+  toFun pair :=
+    coordinates.mergeLabeling pair.1 pair.2
+  invFun := coordinates.splitSafeLabeling
+  left_inv pair := by
+    rcases pair with ⟨lowerLabeling, removedLabel⟩
+    apply Prod.ext
+    · funext i
+      simp [RemovedTwoHandleCoordinates.mergeLabeling,
+        RemovedTwoHandleCoordinates.splitSafeLabeling]
+    · simp [RemovedTwoHandleCoordinates.mergeLabeling,
+        RemovedTwoHandleCoordinates.splitSafeLabeling]
+  right_inv higherLabeling := by
+    funext i
+    cases equality : coordinates.indexEquiv.symm i with
+    | inl old =>
+        have back := coordinates.indexEquiv.apply_symm_apply i
+        rw [equality] at back
+        simp [RemovedTwoHandleCoordinates.mergeLabeling,
+          RemovedTwoHandleCoordinates.splitSafeLabeling, equality, back]
+    | inr new =>
+        obtain rfl : new = () := Subsingleton.elim _ _
+        have back := coordinates.indexEquiv.apply_symm_apply i
+        rw [equality] at back
+        simp [RemovedTwoHandleCoordinates.mergeLabeling,
+          RemovedTwoHandleCoordinates.splitSafeLabeling, equality, back]
+
+/--
+The four explicit local normal forms accepted for cancellation events.
+
+This is data carried by the move, not an axiom saying that evaluations are
+equal.  Its handle-count equation comes from `CancellationScript`; its
+coordinate equations are visible above.
+-/
+inductive CancellationLocalNormalForm
+    {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (homology : MoveHomologyTransport source target) : Type
+  | oneTwoBirth
+      (kind : script.kind = .oneTwoBirth)
+      (coordinates :
+        AddedTwoHandleCoordinates source target homology.tham)
+  | oneTwoDeath
+      (kind : script.kind = .oneTwoDeath)
+      (coordinates :
+        RemovedTwoHandleCoordinates source target homology.tham)
+  | twoThreeBirth
+      (kind : script.kind = .twoThreeBirth)
+      (coordinates :
+        AddedTwoHandleCoordinates source target homology.tham)
+  | twoThreeDeath
+      (kind : script.kind = .twoThreeDeath)
+      (coordinates :
+        RemovedTwoHandleCoordinates source target homology.tham)
+
 inductive ElementaryMove
     (source target : HomologicallyMarkedDiagram) : Type
   | framedIsotopy
@@ -394,9 +569,9 @@ inductive ElementaryMove
         target.alpha = homology.primal.inducedH₂ source.alpha)
   | cancellation
       (script : CancellationScript source.diagram target.diagram)
-      (scriptRealizes :
-        CancellationScriptRealizesStandardCancellation script)
       (homology : MoveHomologyTransport source target)
+      (normalForm :
+        CancellationLocalNormalForm script homology)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
 
@@ -409,7 +584,7 @@ def ElementaryMove.homology
   | .oneOverOne _ _ _ _ _ homology _ => homology
   | .twoOverOne _ _ _ _ _ homology _ => homology
   | .twoOverTwo _ _ _ _ _ homology _ => homology
-  | .cancellation _ _ homology _ => homology
+  | .cancellation _ homology _ _ => homology
 
 def ElementaryMove.primalMarkingTransport
     {source target : HomologicallyMarkedDiagram}
@@ -445,4 +620,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 5012
+-- semantic-freeze-padding: 7408

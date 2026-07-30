@@ -91,6 +91,27 @@ axiom shum_framedRibbonCoherence
     FramedRibbonIsotopic left right →
     left.interpret = right.interpret
 
+/--
+EGNO, canonical pivotal structure of a ribbon category: the tensor unit has
+quantum dimension one.
+
+This is a basic category-literature input.  It mentions no Kirby diagram,
+character, evaluator, or manifold.
+-/
+axiom egno_tensorUnitQuantumDimension
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1
+
+/--
+EGNO, nonvanishing of the global dimension of a fusion category over an
+algebraically closed field of characteristic zero.
+-/
+axiom egno_globalDimension_ne_zero
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    𝒞.globalDimension ≠ 0
+
 /-! ## Clean band-slide graphical interpretation -/
 
 /--
@@ -238,6 +259,133 @@ axiom finiteCouponTransport_hasTypedGraphicalDerivation
     CharacterCouponTransport 𝒞η.character
       attachNormalForm.resolvedStage detachNormalForm.resolvedStage
 
+/-! ## Framed-isotopy graphical interpretation -/
+
+/--
+An exact certified framed isotopy compiles to a framed-ribbon isotopy between
+the frozen source expression and the expression at the uniquely transported
+THAM-side cycle.
+
+This is the narrow topology-to-graphical boundary used by the framed-isotopy
+case.  It returns an isotopy witness, not an evaluator equality.  In
+particular, neither the target cycle nor a scalar result can be chosen by the
+caller.
+-/
+axiom framedIsotopy_hasTypedGraphicalInterpretation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (script : FramedIsotopyScript source.diagram target.diagram)
+    (scriptRealizes :
+      FramedIsotopyScriptRealizesFramedIsotopy script)
+    (transport : ThamHandleChainTransport source target)
+    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    FramedRibbonIsotopic
+      (normalizedCycleExpression 𝒞η source sourceCycle)
+      (normalizedCycleExpression 𝒞η target
+        (transport.mapCycle sourceCycle))
+
+/-! ## Cancellation local graphical normal forms -/
+
+/--
+The exact graph for a one--two birth is the unchanged source exterior with
+one standard special-cut meridian factor.  This boundary says only framed
+graphical isotopy for one fixed labeling; weights, character exponents,
+finite sums, and normalization are absent.
+-/
+axiom oneTwoBirth_hasTypedGraphicalNormalForm
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceLabeling :
+      TwoHandleLabeling 𝒞η.category source.diagram)
+    (newLabel : 𝒞η.category.simples.Simple) :
+    FramedRibbonIsotopic
+      (canonicalRoleAwareGraphCompiler
+        𝒞η target.diagram target.primalBoundary target.turnedOver
+        (coordinates.mergeLabeling sourceLabeling newLabel)
+        (transport.mapCycle sourceCycle)).graph
+      (closedComposeExpression
+        (specialCutMeridianExpression 𝒞η.category newLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η source.diagram source.primalBoundary source.turnedOver
+          sourceLabeling sourceCycle).graph)
+
+/-- The reverse one--two normal form, applied to a cancellation-safe cycle. -/
+axiom oneTwoDeath_hasTypedGraphicalNormalForm
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (targetLabeling :
+      TwoHandleLabeling 𝒞η.category target.diagram)
+    (removedLabel : 𝒞η.category.simples.Simple) :
+    FramedRibbonIsotopic
+      (canonicalRoleAwareGraphCompiler
+        𝒞η source.diagram source.primalBoundary source.turnedOver
+        (coordinates.mergeLabeling targetLabeling removedLabel)
+        (coordinates.safeCycle sourceCycle)).graph
+      (closedComposeExpression
+        (specialCutMeridianExpression 𝒞η.category removedLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η target.diagram target.primalBoundary target.turnedOver
+          targetLabeling
+          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph)
+
+/-- The exact fixed-label graphical normal form for a two--three birth. -/
+axiom twoThreeBirth_hasTypedGraphicalNormalForm
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceLabeling :
+      TwoHandleLabeling 𝒞η.category source.diagram)
+    (newLabel : 𝒞η.category.simples.Simple) :
+    FramedRibbonIsotopic
+      (canonicalRoleAwareGraphCompiler
+        𝒞η target.diagram target.primalBoundary target.turnedOver
+        (coordinates.mergeLabeling sourceLabeling newLabel)
+        (transport.mapCycle sourceCycle)).graph
+      (closedComposeExpression
+        (ordinaryKirbyLoopExpression 𝒞η.category newLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η source.diagram source.primalBoundary source.turnedOver
+          sourceLabeling sourceCycle).graph)
+
+/-- The reverse two--three normal form, again on a safe representative. -/
+axiom twoThreeDeath_hasTypedGraphicalNormalForm
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (targetLabeling :
+      TwoHandleLabeling 𝒞η.category target.diagram)
+    (removedLabel : 𝒞η.category.simples.Simple) :
+    FramedRibbonIsotopic
+      (canonicalRoleAwareGraphCompiler
+        𝒞η source.diagram source.primalBoundary source.turnedOver
+        (coordinates.mergeLabeling targetLabeling removedLabel)
+        (coordinates.safeCycle sourceCycle)).graph
+      (closedComposeExpression
+        (ordinaryKirbyLoopExpression 𝒞η.category removedLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η target.diagram target.primalBoundary target.turnedOver
+          targetLabeling
+          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph)
+
 /-! ## Smooth four-manifold and Kirby--Cerf topology
 
 The following three declarations are the explicit foundational vocabulary.
@@ -329,4 +477,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 2378
+-- semantic-freeze-padding: 1592

@@ -1,0 +1,89 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v10",
+  "recorded_at_utc": "2026-07-30T06:55:58Z",
+  "semantic_content_parent_commit": "6d9f168d25ded622d8a360c6b0eb37a243847066",
+  "supersedes": "semantic-freeze-combinatorial-v9.json",
+  "historical_v1_through_v9_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXHAUSTIVE_ROLE_AWARE_LOCAL_MOVE_INVARIANCE",
+    "reason": "Version 9 established the three clean band-slide calculations but did not connect framed isotopy or the four cancellation moves to the frozen evaluator.",
+    "changes": [
+      "Replaced the broad cancellation realization predicate by explicit added/removed two-handle coordinate normal forms.",
+      "Added one narrow framed-isotopy topology-to-graphical interpretation boundary.",
+      "Added four fixed-label cancellation topology-to-graphical normal-form boundaries.",
+      "Defined the special-cut and ordinary-loop local factors inside the frozen graphical calculus.",
+      "Proved character-weight transport, finite-label reindexing, raw-sum factorization, and normalization cancellation in Lean.",
+      "Completed the exhaustive eight-constructor local-move case split.",
+      "Connected the clean public four-manifold theorem to the frozen frontend local-move theorem."
+    ],
+    "explicit_frozen_axiom_count": 27,
+    "final_theorem_project_axiom_count": 23,
+    "adds_evaluator_equality_axiom": false,
+    "adds_local_invariance_axiom": false,
+    "adds_representative_independence_axiom": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "full_lake_build": "PASS",
+    "representative_independence": "KERNEL_CHECKED",
+    "exhaustive_eight_move_local_invariance": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "human_semantic_review": "REQUIRED"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "public_parameters": [
+      "TwistedPremodularCategory K",
+      "OrientedDiffeomorphism X Y",
+      "ManifoldH₂ X"
+    ],
+    "forbidden_public_parameters_absent": [
+      "graphical evaluator",
+      "compiler",
+      "normalization",
+      "representative-independence proof",
+      "local-invariance proof",
+      "presentation theory",
+      "topology package"
+    ]
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "000a5470e0f98515423061a3356827b47ac2e746a4afb1d8147c0ada61045e55",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0005122bd6e17f0105c6c1a731ecd66796bb506ec60c1909cecbd0ec37910589",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "Moves.lean": "00056936decc9e2642da886c1e0353288ab32b173b6c96e6f24eb0aa1555abb2"
+  },
+  "supporting_files": {
+    "CleanBandSlides.lean": "aecc201328dd616125c197601331a87fdcc30c2068df830aff7e0450f2f1964d",
+    "CancellationMoves.lean": "84fd0aab0010f44c087a62ba841c5a4e7d7207f723f3fb277f720dcbe672c6eb",
+    "FrozenFrontendLocalMoves.lean": "79be13fbea044d16b0896048623e43fd384e3b10f1d661faa2f43ce5c29d43b9",
+    "TwistedYetter.lean": "cb2bc847a4f57a1113bb68b6b7f2cbb3a9a385047ae49c49e835399351f70c96",
+    "FinalAxiomAudit.lean": "4fcc5c4240f1331094c11a40d77af02635d9803f6e990f1d6a59434410c37309"
+  },
+  "red_team": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "scope": "entire Final source tree, including archived and historical modules",
+    "source_tree_sha256": "1c27d8401396ca0c82a28ff86e90bd460cd5fe9145d2df685b522b7b087d4c98",
+    "json": "/private/tmp/lean-red-team-audit-final-v10.json",
+    "markdown": "/private/tmp/lean-red-team-audit-final-v10.zh-TW.md",
+    "warning": "The source scanner's 43 axiom declarations are not the final theorem closure. The exact kernel closure is recorded separately in explicit-trust-boundary-v2.json."
+  },
+  "non_claims": [
+    "The four cancellation graphical normal-form boundaries remain external inputs requiring human mathematical review.",
+    "The clean attach, finite transport, clean detach, and framed-isotopy interpretation boundaries remain external inputs.",
+    "Kernel checking does not by itself certify that these external statements match the intended Kirby geometry.",
+    "This does not identify the invariant with the original Crane-Yetter state sum.",
+    "This does not recertify legacy numerical artifacts."
+  ]
+}

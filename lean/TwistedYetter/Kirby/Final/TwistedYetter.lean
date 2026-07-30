@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Proofs.RepresentativeIndependence
+import TwistedYetter.Kirby.Final.Proofs.FrozenFrontendLocalMoves
 
 /-!
 # Frozen-frontend conditional descent

@@ -1,0 +1,93 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/2",
+  "recorded_at_utc": "2026-07-30T06:55:58Z",
+  "supersedes": "explicit-trust-boundary-v1.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 27,
+  "final_theorem_project_axiom_count": 23,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "DiagramRealizationWitness",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH₂",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH₂",
+    "manifoldH₂_addCommGroup",
+    "markedKirbyCerf_complete",
+    "markedRealization_exists",
+    "oneTwoBirth_hasTypedGraphicalNormalForm",
+    "oneTwoDeath_hasTypedGraphicalNormalForm",
+    "shum_framedRibbonCoherence",
+    "twoThreeBirth_hasTypedGraphicalNormalForm",
+    "twoThreeDeath_hasTypedGraphicalNormalForm"
+  ],
+  "main_human_review_boundaries": [
+    {
+      "name": "cleanAttach_hasStandardGraphicalInterpretation",
+      "meaning": "A certified clean band attachment is interpreted by the exact typed fusion-resolution graph."
+    },
+    {
+      "name": "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "meaning": "The complete finite coupon route is interpreted by the corresponding typed graphical transport."
+    },
+    {
+      "name": "cleanDetach_hasStandardGraphicalInterpretation",
+      "meaning": "A certified clean band detachment is interpreted by the exact reverse typed graph."
+    },
+    {
+      "name": "framedIsotopy_hasTypedGraphicalInterpretation",
+      "meaning": "A certified framed isotopy induces a framed-ribbon isotopy between the exact normalized source and transported target expressions."
+    },
+    {
+      "name": "oneTwoBirth_hasTypedGraphicalNormalForm",
+      "meaning": "For each fixed labeling, a one-two birth is the unchanged exterior composed with one special-cut meridian factor."
+    },
+    {
+      "name": "oneTwoDeath_hasTypedGraphicalNormalForm",
+      "meaning": "For each fixed labeling and safe representative, a one-two death is the reverse special-cut meridian factorization."
+    },
+    {
+      "name": "twoThreeBirth_hasTypedGraphicalNormalForm",
+      "meaning": "For each fixed labeling, a two-three birth is the unchanged exterior composed with one ordinary Kirby-loop factor."
+    },
+    {
+      "name": "twoThreeDeath_hasTypedGraphicalNormalForm",
+      "meaning": "For each fixed labeling and safe representative, a two-three death is the reverse ordinary Kirby-loop factorization."
+    }
+  ],
+  "proved_not_axiomatized": [
+    "character-weight transport for added and removed handles",
+    "zero exponent on the new or removed cancellation handle",
+    "finite-labeling sum reindexing",
+    "special-cut meridian finite sum",
+    "ordinary Kirby-loop finite sum",
+    "one-two normalization cancellation",
+    "two-three normalization cancellation",
+    "representative independence",
+    "exhaustive eight-constructor local-move case split",
+    "finite Kirby-movie induction",
+    "public diffeomorphism invariance conditional on this explicit closure"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom",
+    "legacy backend conformance certificate"
+  ]
+}
