@@ -413,6 +413,178 @@ namespace TensorIdentityCharacter
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 variable {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
 
+/-- Monoidality determines the component on a tensor product. -/
+theorem tensor_hom
+    (character : TensorIdentityCharacter 𝒞)
+    (X Y : 𝒞.C) :
+    character.iso.hom.app (X ⊗ Y) =
+      character.iso.hom.app X ⊗ₘ character.iso.hom.app Y := by
+  letI : NatTrans.IsMonoidal character.iso.hom := character.monoidal
+  simpa using
+    (NatTrans.IsMonoidal.tensor (τ := character.iso.hom) X Y)
+
+/-- Monoidality determines the component on the tensor unit. -/
+theorem unit_hom
+    (character : TensorIdentityCharacter 𝒞) :
+    character.iso.hom.app (𝟙_ 𝒞.C) = 𝟙 (𝟙_ 𝒞.C) := by
+  letI : NatTrans.IsMonoidal character.iso.hom := character.monoidal
+  simpa using (NatTrans.IsMonoidal.unit (τ := character.iso.hom))
+
+/-- The character is identity on the chosen simple representative of the unit. -/
+theorem tensorUnitSimple_hom
+    (character : TensorIdentityCharacter 𝒞) :
+    character.iso.hom.app
+        (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) =
+      𝟙 (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
+  apply (cancel_mono 𝒞.simples.unitIso.hom).1
+  simpa [unit_hom character] using
+    (character.iso.hom.naturality 𝒞.simples.unitIso.hom).symm
+
+/-- The inverse character is likewise identity on the unit representative. -/
+theorem tensorUnitSimple_inv
+    (character : TensorIdentityCharacter 𝒞) :
+    character.iso.inv.app
+        (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) =
+      𝟙 (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
+  rw [← cancel_epi
+    (character.iso.hom.app
+      (𝒞.simples.simpleObject 𝒞.simples.tensorUnit))]
+  rw [character.iso.hom_inv_id_app]
+  simp [character.tensorUnitSimple_hom]
+
+/--
+The character component on a selected right dual is forced by rigidity: it
+is the right mate of the inverse component on the original object.
+-/
+theorem hom_app_rightDual
+    (character : TensorIdentityCharacter 𝒞)
+    (X : 𝒞.C) :
+    character.iso.hom.app Xᘁ =
+      (character.iso.inv.app X)ᘁ := by
+  letI : NatTrans.IsMonoidal character.iso.hom := character.monoidal
+  have unitLaw :
+      character.iso.hom.app (𝟙_ 𝒞.C) = 𝟙 (𝟙_ 𝒞.C) := by
+    simpa using
+      (NatTrans.IsMonoidal.unit
+        (τ := character.iso.hom))
+  have tensorLaw :
+      character.iso.hom.app (Xᘁ ⊗ X) =
+        character.iso.hom.app Xᘁ ⊗ₘ
+          character.iso.hom.app X := by
+    simpa using
+      (NatTrans.IsMonoidal.tensor
+        (τ := character.iso.hom) Xᘁ X)
+  have evaluationNaturality :
+      character.iso.hom.app (Xᘁ ⊗ X) ≫ ε_ X Xᘁ =
+        ε_ X Xᘁ := by
+    simpa [unitLaw] using
+      (character.iso.hom.naturality (ε_ X Xᘁ)).symm
+  have expandedNaturality :
+      (character.iso.hom.app Xᘁ ▷ X) ≫
+          (Xᘁ ◁ character.iso.hom.app X) ≫
+          ε_ X Xᘁ =
+        ε_ X Xᘁ := by
+    have tensorEvaluation :
+        (character.iso.hom.app Xᘁ ⊗ₘ
+            character.iso.hom.app X) ≫ ε_ X Xᘁ =
+          ε_ X Xᘁ := by
+      rw [← tensorLaw]
+      exact evaluationNaturality
+    rw [MonoidalCategory.tensorHom_def] at tensorEvaluation
+    simpa only [Category.assoc] using tensorEvaluation
+  have dualEvaluation :
+      (character.iso.hom.app Xᘁ ▷ X) ≫ ε_ X Xᘁ =
+        (Xᘁ ◁ character.iso.inv.app X) ≫ ε_ X Xᘁ := by
+    symm
+    calc
+      (Xᘁ ◁ character.iso.inv.app X) ≫ ε_ X Xᘁ =
+          (Xᘁ ◁ character.iso.inv.app X) ≫
+            ((character.iso.hom.app Xᘁ ▷ X) ≫
+              (Xᘁ ◁ character.iso.hom.app X) ≫
+                ε_ X Xᘁ) := by
+        simpa [Category.assoc] using
+          congrArg
+            (fun f => (Xᘁ ◁ character.iso.inv.app X) ≫ f)
+            expandedNaturality.symm
+      _ = (Xᘁ ◁ character.iso.inv.app X) ≫
+            (character.iso.hom.app Xᘁ ▷ X) ≫
+            (Xᘁ ◁ character.iso.hom.app X) ≫
+            ε_ X Xᘁ := by
+        simp only [Category.assoc]
+      _ = (character.iso.hom.app Xᘁ ▷ X) ≫
+            (Xᘁ ◁ character.iso.inv.app X) ≫
+            (Xᘁ ◁ character.iso.hom.app X) ≫
+            ε_ X Xᘁ := by
+        simpa [Category.assoc] using
+          congrArg
+            (fun f => f ≫
+              (Xᘁ ◁ character.iso.hom.app X) ≫
+                ε_ X Xᘁ)
+            (whisker_exchange
+              (character.iso.hom.app Xᘁ)
+              (character.iso.inv.app X))
+      _ = (character.iso.hom.app Xᘁ ▷ X) ≫
+            (Xᘁ ◁
+              (character.iso.inv.app X ≫
+                character.iso.hom.app X)) ≫
+            ε_ X Xᘁ := by
+        simpa [Category.assoc] using
+          congrArg
+            (fun f =>
+              (character.iso.hom.app Xᘁ ▷ X) ≫
+                f ≫ ε_ X Xᘁ)
+            (MonoidalCategory.whiskerLeft_comp Xᘁ
+              (character.iso.inv.app X)
+              (character.iso.hom.app X)).symm
+      _ = (character.iso.hom.app Xᘁ ▷ X) ≫
+            ε_ X Xᘁ := by
+        have cancelWhisker :
+            Xᘁ ◁
+                (character.iso.inv.app X ≫
+                  character.iso.hom.app X) =
+              𝟙 (Xᘁ ⊗ X) := by
+          rw [character.iso.inv_hom_id_app]
+          simp
+        simpa [Category.assoc] using
+          congrArg
+            (fun f =>
+              (character.iso.hom.app Xᘁ ▷ X) ≫
+                f ≫ ε_ X Xᘁ)
+            cancelWhisker
+  let inverseMate : Xᘁ ⟶ Xᘁ :=
+    rightAdjointMate (character.iso.inv.app X)
+  have mateEvaluation :
+      (inverseMate ▷ X) ≫ ε_ X Xᘁ =
+        (Xᘁ ◁ character.iso.inv.app X) ≫ ε_ X Xᘁ :=
+    rightAdjointMate_comp_evaluation (character.iso.inv.app X)
+  have comparison :
+      (character.iso.hom.app Xᘁ ▷ X) ≫ ε_ X Xᘁ =
+        (inverseMate ▷ X) ≫ ε_ X Xᘁ :=
+    dualEvaluation.trans mateEvaluation.symm
+  let e := tensorRightHomEquiv Xᘁ X Xᘁ (𝟙_ 𝒞.C)
+  have composed :
+      character.iso.hom.app Xᘁ ≫ (λ_ Xᘁ).inv =
+        inverseMate ≫ (λ_ Xᘁ).inv := by
+    have leftRule :
+        e ((character.iso.hom.app Xᘁ ▷ X) ≫ ε_ X Xᘁ) =
+          character.iso.hom.app Xᘁ ≫ (λ_ Xᘁ).inv :=
+      tensorRightHomEquiv_whiskerRight_comp_evaluation
+        (character.iso.hom.app Xᘁ)
+    have rightRule :
+        e ((inverseMate ▷ X) ≫ ε_ X Xᘁ) =
+          inverseMate ≫ (λ_ Xᘁ).inv :=
+      tensorRightHomEquiv_whiskerRight_comp_evaluation
+        inverseMate
+    exact leftRule.symm.trans ((congrArg e comparison).trans rightRule)
+  exact (cancel_mono (λ_ Xᘁ).inv).mp composed
+
+/-- Right adjoint mates preserve scalar multiples of an identity. -/
+theorem rightAdjointMate_smul_identity
+    (scalar : K)
+    (X : 𝒞.C) :
+    (scalar • 𝟙 X)ᘁ = scalar • 𝟙 (Xᘁ) := by
+  simp [rightAdjointMate]
+
 /--
 The scalar by which the character acts on a simple object.  This is derived
 from the actual natural-automorphism component through Schur's lemma; it is

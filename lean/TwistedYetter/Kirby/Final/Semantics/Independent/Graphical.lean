@@ -182,6 +182,44 @@ def isoIntPowerHom
   | .ofNat n => isoNatPowerHom iso n
   | .negSucc n => isoNatPowerHom iso.symm (n + 1)
 
+private theorem isoNatPowerHom_eq_unit_smul_identity
+    {K : Type uK} [Field K]
+    {C : Type uC} [Category.{v} C] [Preadditive C] [Linear K C]
+    {X : C}
+    (iso : X ≅ X)
+    (unit : Kˣ)
+    (hom_eq : iso.hom = (unit : K) • 𝟙 X)
+    (power : ℕ) :
+    isoNatPowerHom iso power =
+      ((unit ^ power : Kˣ) : K) • 𝟙 X := by
+  induction power with
+  | zero => simp [isoNatPowerHom]
+  | succ power inductionHypothesis =>
+      simp only [isoNatPowerHom]
+      rw [inductionHypothesis, hom_eq]
+      simp [← mul_smul, pow_succ]
+      rw [mul_comm]
+
+private theorem isoIntPowerHom_eq_unit_zpow_smul_identity
+    {K : Type uK} [Field K]
+    {C : Type uC} [Category.{v} C] [Preadditive C] [Linear K C]
+    {X : C}
+    (iso : X ≅ X)
+    (unit : Kˣ)
+    (hom_eq : iso.hom = (unit : K) • 𝟙 X)
+    (inv_eq : iso.inv = ((unit⁻¹ : Kˣ) : K) • 𝟙 X)
+    (exponent : ℤ) :
+    isoIntPowerHom iso exponent =
+      ((unit ^ exponent : Kˣ) : K) • 𝟙 X := by
+  cases exponent with
+  | ofNat power =>
+      exact isoNatPowerHom_eq_unit_smul_identity
+        iso unit hom_eq power
+  | negSucc power =>
+      simpa [zpow_negSucc] using
+        isoNatPowerHom_eq_unit_smul_identity
+          iso.symm unit⁻¹ inv_eq (power + 1)
+
 /-- The actual character morphism on an arbitrary object. -/
 def characterCoupon
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -283,6 +321,132 @@ theorem characterCoupon_naturality
       exact
         characterCoupon_invNatPower_naturality
           character f (power + 1)
+
+theorem character_inv_on_simple_eq_value_inv_smul_identity
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (simple : 𝒞.simples.Simple) :
+    character.iso.inv.app (𝒞.simples.simpleObject simple) =
+      (((character.value simple)⁻¹ : Kˣ) : K) •
+        𝟙 (𝒞.simples.simpleObject simple) := by
+  apply (cancel_epi
+    (character.iso.hom.app
+      (𝒞.simples.simpleObject simple))).1
+  rw [character.iso.hom_inv_id_app]
+  rw [character.component_on_simple_eq_value_smul_identity]
+  change
+    𝟙 (𝒞.simples.simpleObject simple) =
+      ((character.value simple : K) •
+          𝟙 (𝒞.simples.simpleObject simple)) ≫
+        ((((character.value simple)⁻¹ : Kˣ) : K) •
+          𝟙 (𝒞.simples.simpleObject simple))
+  rw [Linear.smul_comp]
+  simp only [Category.id_comp]
+  rw [← mul_smul]
+  have scalar_cancel :
+      (character.value simple : K) *
+          (((character.value simple)⁻¹ : Kˣ) : K) =
+        1 := by
+    exact Units.mul_inv (character.value simple)
+  rw [scalar_cancel, one_smul]
+
+theorem character_hom_on_rightDual_eq_value_inv_smul_identity
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (simple : 𝒞.simples.Simple) :
+    character.iso.hom.app
+        ((𝒞.simples.simpleObject simple)ᘁ) =
+      (((character.value simple)⁻¹ : Kˣ) : K) •
+        𝟙 ((𝒞.simples.simpleObject simple)ᘁ) := by
+  rw [character.hom_app_rightDual]
+  rw [character_inv_on_simple_eq_value_inv_smul_identity]
+  exact TensorIdentityCharacter.rightAdjointMate_smul_identity
+    (𝒞 := 𝒞)
+    (((character.value simple)⁻¹ : Kˣ) : K)
+    (𝒞.simples.simpleObject simple)
+
+theorem character_inv_on_rightDual_eq_value_smul_identity
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (simple : 𝒞.simples.Simple) :
+    character.iso.inv.app
+        ((𝒞.simples.simpleObject simple)ᘁ) =
+      (character.value simple : K) •
+        𝟙 ((𝒞.simples.simpleObject simple)ᘁ) := by
+  apply (cancel_epi
+    (character.iso.hom.app
+      ((𝒞.simples.simpleObject simple)ᘁ))).1
+  rw [character.iso.hom_inv_id_app]
+  rw [character_hom_on_rightDual_eq_value_inv_smul_identity]
+  let X : 𝒞.C := (𝒞.simples.simpleObject simple)ᘁ
+  change
+    𝟙 X =
+      ((((character.value simple)⁻¹ : Kˣ) : K) •
+          𝟙 X) ≫
+        ((character.value simple : K) • 𝟙 X)
+  rw [Linear.smul_comp]
+  simp only [Category.id_comp]
+  rw [← mul_smul]
+  have scalar_cancel :
+      (((character.value simple)⁻¹ : Kˣ) : K) *
+          (character.value simple : K) =
+        1 := by
+    exact Units.inv_mul (character.value simple)
+  rw [scalar_cancel, one_smul]
+
+/--
+On a positively oriented simple strand, an integral character coupon is the
+corresponding integral power of the derived simple scalar.
+-/
+theorem characterCoupon_on_forwardSimple
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (simple : 𝒞.simples.Simple)
+    (exponent : ℤ) :
+    isoIntPowerHom
+        (character.iso.app (𝒞.simples.simpleObject simple))
+        exponent =
+      (((character.value simple) ^ exponent : Kˣ) : K) •
+        𝟙 (𝒞.simples.simpleObject simple) := by
+  exact isoIntPowerHom_eq_unit_zpow_smul_identity
+    (character.iso.app (𝒞.simples.simpleObject simple))
+    (character.value simple)
+    (character.component_on_simple_eq_value_smul_identity simple)
+    (character_inv_on_simple_eq_value_inv_smul_identity character simple)
+    exponent
+
+/--
+On the right dual strand, the same coupon carries the inverse scalar power.
+This is derived from rigidity, not supplied as an orientation convention.
+-/
+theorem characterCoupon_on_dualSimple
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (simple : 𝒞.simples.Simple)
+    (exponent : ℤ) :
+    isoIntPowerHom
+        (character.iso.app
+          ((𝒞.simples.simpleObject simple)ᘁ))
+        exponent =
+      (((character.value simple) ^ (-exponent) : Kˣ) : K) •
+        𝟙 ((𝒞.simples.simpleObject simple)ᘁ) := by
+  simpa [zpow_neg] using
+    isoIntPowerHom_eq_unit_zpow_smul_identity
+      (character.iso.app
+        ((𝒞.simples.simpleObject simple)ᘁ))
+      (character.value simple)⁻¹
+      (character_hom_on_rightDual_eq_value_inv_smul_identity
+        character simple)
+      (by
+        simpa using
+          character_inv_on_rightDual_eq_value_smul_identity
+            character simple)
+      exponent
 
 /--
 Proof-relevant typed transport of a character coupon.
@@ -446,6 +610,146 @@ def tensorUnitProjector
   ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
     𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
       𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩
+
+/-- A forward character coupon disappears immediately before the unit projector. -/
+theorem character_hom_tensorUnitProjector_left
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (X : 𝒞.C) :
+    character.iso.hom.app X ≫ tensorUnitProjector 𝒞 X =
+      tensorUnitProjector 𝒞 X := by
+  classical
+  unfold tensorUnitProjector
+  calc
+    character.iso.hom.app X ≫
+        (∑ i : Fin
+          (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+          𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
+            𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩) =
+      ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+        character.iso.hom.app X ≫
+          (𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
+            𝒞.simples.summandInclusion X
+              ⟨𝒞.simples.tensorUnit, i⟩) := by
+        simpa using
+          Preadditive.comp_sum (Finset.univ)
+            (character.iso.hom.app X)
+            (fun i : Fin
+              (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit) =>
+              𝒞.simples.summandProjection X
+                  ⟨𝒞.simples.tensorUnit, i⟩ ≫
+                𝒞.simples.summandInclusion X
+                  ⟨𝒞.simples.tensorUnit, i⟩)
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro i _
+      have naturality :
+          character.iso.hom.app X ≫
+              𝒞.simples.summandProjection X
+                ⟨𝒞.simples.tensorUnit, i⟩ =
+            𝒞.simples.summandProjection X
+                ⟨𝒞.simples.tensorUnit, i⟩ ≫
+              character.iso.hom.app
+                (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
+        simpa using
+          (character.iso.hom.naturality
+            (𝒞.simples.summandProjection X
+              ⟨𝒞.simples.tensorUnit, i⟩)).symm
+      rw [← Category.assoc]
+      rw [naturality]
+      rw [character.tensorUnitSimple_hom]
+      simp
+
+/-- An inverse character coupon disappears immediately before the unit projector. -/
+theorem character_inv_tensorUnitProjector_left
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (X : 𝒞.C) :
+    character.iso.inv.app X ≫ tensorUnitProjector 𝒞 X =
+      tensorUnitProjector 𝒞 X := by
+  classical
+  unfold tensorUnitProjector
+  calc
+    character.iso.inv.app X ≫
+        (∑ i : Fin
+          (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+          𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
+            𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩) =
+      ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+        character.iso.inv.app X ≫
+          (𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
+            𝒞.simples.summandInclusion X
+              ⟨𝒞.simples.tensorUnit, i⟩) := by
+        simpa using
+          Preadditive.comp_sum (Finset.univ)
+            (character.iso.inv.app X)
+            (fun i : Fin
+              (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit) =>
+              𝒞.simples.summandProjection X
+                  ⟨𝒞.simples.tensorUnit, i⟩ ≫
+                𝒞.simples.summandInclusion X
+                  ⟨𝒞.simples.tensorUnit, i⟩)
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro i _
+      have naturality :
+          character.iso.inv.app X ≫
+              𝒞.simples.summandProjection X
+                ⟨𝒞.simples.tensorUnit, i⟩ =
+            𝒞.simples.summandProjection X
+                ⟨𝒞.simples.tensorUnit, i⟩ ≫
+              character.iso.inv.app
+                (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
+        simpa using
+          (character.iso.inv.naturality
+            (𝒞.simples.summandProjection X
+              ⟨𝒞.simples.tensorUnit, i⟩)).symm
+      rw [← Category.assoc]
+      rw [naturality]
+      rw [character.tensorUnitSimple_inv]
+      simp
+
+/-- A finite power remains invisible whenever one copy is absorbed. -/
+private theorem isoNatPowerHom_absorbed
+    {C : Type uC} [Category.{v} C]
+    {X : C}
+    (iso : X ≅ X)
+    (projector : X ⟶ X)
+    (absorbed : iso.hom ≫ projector = projector)
+    (power : ℕ) :
+    isoNatPowerHom iso power ≫ projector = projector := by
+  induction power with
+  | zero => simp [isoNatPowerHom]
+  | succ power ih =>
+      simp only [isoNatPowerHom]
+      rw [Category.assoc, absorbed]
+      exact ih
+
+/-- Every integral character power disappears before the unit projector. -/
+theorem characterCoupon_tensorUnitProjector_left
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory K}
+    (character : TensorIdentityCharacter 𝒞)
+    (X : 𝒞.C)
+    (exponent : ℤ) :
+    isoIntPowerHom (character.iso.app X) exponent ≫
+        tensorUnitProjector 𝒞 X =
+      tensorUnitProjector 𝒞 X := by
+  cases exponent with
+  | ofNat n =>
+      exact isoNatPowerHom_absorbed
+        (character.iso.app X)
+        (tensorUnitProjector 𝒞 X)
+        (character_hom_tensorUnitProjector_left character X)
+        n
+  | negSucc n =>
+      exact isoNatPowerHom_absorbed
+        (character.iso.app X).symm
+        (tensorUnitProjector 𝒞 X)
+        (character_inv_tensorUnitProjector_left character X)
+        (n + 1)
 
 def tensorUnitProjectorExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
