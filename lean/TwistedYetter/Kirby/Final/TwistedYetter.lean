@@ -146,9 +146,9 @@ theorem diffeomorphism_invariant_of_descent_data
       LocalMoveInvarianceStatement 𝒞η) :
     TwistedYetterDiffeomorphismInvarianceTarget
       𝒞η := by
-  intro X Y f alpha left right
+  intro X Y f alpha left leftCorrect right rightCorrect
   obtain ⟨movie⟩ :=
-    markedKirbyCerf_complete f alpha left right
+    markedKirbyCerf_complete f alpha left leftCorrect right rightCorrect
   exact
     kirbyMovie_preserves_frontend_evaluation
       𝒞η
@@ -174,7 +174,7 @@ noncomputable def TwistedYetter
       Σ X : ClosedOrientedSmoothFourManifold,
         ManifoldH₂ X) : K :=
   let realization :=
-    Classical.choice (markedRealization_exists Xα.1 Xα.2)
+    (markedRealization_exists Xα.1 Xα.2).choose
   evaluateMarkedDiagram 𝒞η realization.markedDiagram
 
 /--
@@ -192,15 +192,17 @@ theorem TwistedYetter_diffeomorphism_invariant
     TwistedYetter 𝒞η ⟨X, alpha⟩ =
       TwistedYetter 𝒞η ⟨Y, inducedH₂ f alpha⟩ := by
   unfold TwistedYetter
+  let leftExistence := markedRealization_exists X alpha
+  let rightExistence :=
+    markedRealization_exists Y (inducedH₂ f alpha)
   exact
     ConditionalDescent.diffeomorphism_invariant_of_descent_data
       𝒞η
       (frozenFrontendRepresentativeIndependence 𝒞η)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
-      (Classical.choice (markedRealization_exists X alpha))
-      (Classical.choice
-        (markedRealization_exists Y (inducedH₂ f alpha)))
+      leftExistence.choose leftExistence.choose_spec
+      rightExistence.choose rightExistence.choose_spec
 
 end
 

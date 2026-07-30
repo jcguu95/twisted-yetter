@@ -5,6 +5,7 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Evaluator
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
+import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
 /-!
 # Independent semantics: unique entry
@@ -21,7 +22,20 @@ intrinsically preferred or change the intended invariant.
 
 Dependency order:
 
-`Algebra → Diagram → Homology → Moves → Graphical → Evaluator → Invariant`.
+`Algebra → Diagram → Homology → Moves → Graphical → Evaluator → Invariant
+→ EntranceAxioms`.
+
+`EntranceAxioms` contains the global manifold, dotted-disk, turnover, and
+category-literature boundaries.  Four move-local, category-neutral topology
+predicates are declared next to the move grammar in `Moves`, so their proof
+arguments remain visible in every `ElementaryMove` constructor.  The complete
+list of eighteen explicit axioms is recorded in
+`explicit-trust-boundary-v1.json`.
+
+Domain-defining category laws remain visible in `Algebra`; combinatorial
+certificates in the other semantic modules must use transparent propositions.
+Neither kind is allowed to hide evaluator equality, representative
+independence, or local-move invariance.
 
 Implementation bridges, legacy evaluators, computation code, axiom audits,
 and conformance checks are intentionally outside this entry.  In particular,

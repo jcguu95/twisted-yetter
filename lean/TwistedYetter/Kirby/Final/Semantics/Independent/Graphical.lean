@@ -9,8 +9,10 @@ their mathematical meaning.  Closed evaluation is derived by interpreting the
 expression as an endomorphism of the tensor unit and then applying Schur
 scalarization.
 
-The sole external graphical theorem is Shum's coherence theorem for ribbon
-categories:
+The sole external graphical theorem used later is Shum's coherence theorem
+for ribbon categories.  Its exact statement is deliberately located in
+`EntranceAxioms`; this file only defines typed syntax, interpretation, and
+canonical closed evaluation.
 
 M.-C. Shum, *Tortile tensor categories*, Journal of Pure and Applied Algebra
 93 (1994), Theorem 2.6.
@@ -465,30 +467,6 @@ noncomputable def canonicalRibbonGraphicalEvaluation
     (𝒞 : PremodularFusionCategory K)
     (expression : ClosedRibbonExpression 𝒞) : K :=
   𝒞.closedScalar expression.interpret
-
-/--
-Category-level relation saying that two typed expressions represent framed
-isotopic ribbon diagrams with the same boundary.
-
-This relation is category-neutral and does not mention scalar evaluation.
--/
-opaque FramedRibbonIsotopic
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    {X Y : 𝒞.C} :
-    RibbonExpression 𝒞 X Y → RibbonExpression 𝒞 X Y → Prop
-
-/--
-Shum 1994, Theorem 2.6: framed-isotopic typed ribbon diagrams determine the
-same morphism in a ribbon category.
--/
-axiom shum_framedRibbonCoherence
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    {X Y : 𝒞.C}
-    {left right : RibbonExpression 𝒞 X Y} :
-    FramedRibbonIsotopic left right →
-    left.interpret = right.interpret
 
 end TwistedYetter.Semantics.Independent
 

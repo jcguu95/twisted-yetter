@@ -94,20 +94,62 @@ def EventTransition {strandCount : ℕ}
     before = leftContext ++ event.beforeWord ++ rightContext ∧
     after = leftContext ++ event.afterWord ++ rightContext
 
-opaque ComponentsFormClosedCircles
+def StrandIsBorn
+    {strandCount eventCount : ℕ}
+    (events : Fin eventCount → DiagramEvent strandCount)
+    (strand : Fin strandCount) : Prop :=
+  ∃ i : Fin eventCount, strand ∈ (events i).afterWord
+
+def StrandIsKilled
+    {strandCount eventCount : ℕ}
+    (events : Fin eventCount → DiagramEvent strandCount)
+    (strand : Fin strandCount) : Prop :=
+  ∃ i : Fin eventCount, strand ∈ (events i).beforeWord
+
+/--
+The finite trace has no hidden closure certificate.  Every strand is created
+and removed by the event trace, and every declared component owns at least one
+strand.  Together with the empty endpoint words and exact event transitions
+stored below, this is the combinatorial closed-circle condition.
+-/
+def ComponentsFormClosedCircles
     {componentCount strandCount eventCount : ℕ}
-    (components : Fin componentCount → Component)
+    (_components : Fin componentCount → Component)
     (strands : Fin strandCount → Strand componentCount)
     (events : Fin eventCount → DiagramEvent strandCount)
-    (activeOrder : Fin (eventCount + 1) → List (Fin strandCount)) :
-    Prop
+    (_activeOrder : Fin (eventCount + 1) → List (Fin strandCount)) :
+    Prop :=
+  (∀ strand, StrandIsBorn events strand ∧ StrandIsKilled events strand) ∧
+    (∀ component, ∃ strand, (strands strand).component = component)
 
-opaque FramingEventsMatchIntegerFramings
+def CrossingSign.toInteger : CrossingSign → ℤ
+  | .positive => 1
+  | .negative => -1
+
+def DiagramEvent.framingContribution
+    {componentCount strandCount : ℕ}
+    (component : Fin componentCount)
+    (strands : Fin strandCount → Strand componentCount)
+    (event : DiagramEvent strandCount) : ℤ :=
+  match event with
+  | .framingTwist strand sign =>
+      if (strands strand).component = component then sign.toInteger else 0
+  | _ => 0
+
+/--
+The integer framing is exactly the signed number of recorded framing twists on
+the component.  This is a transparent finite equation, not a certificate name.
+-/
+def FramingEventsMatchIntegerFramings
     {componentCount strandCount eventCount : ℕ}
     (components : Fin componentCount → Component)
     (strands : Fin strandCount → Strand componentCount)
     (events : Fin eventCount → DiagramEvent strandCount) :
-    Prop
+    Prop :=
+  ∀ component,
+    (components component).integerFraming =
+      ∑ i : Fin eventCount,
+        (events i).framingContribution component strands
 
 structure CombinatorialLinkTrace where
   componentCount : ℕ
@@ -255,30 +297,32 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
       strand ∈ activeOrder i →
       (trace.components (trace.strands strand).component).role ≠ .dotted
 
-opaque PunctureWordsHaveNoRepeatedOccurrences
+def PunctureWordsHaveNoRepeatedOccurrences
     (trace : CombinatorialLinkTrace)
     (punctureWord :
       (dotted : trace.ComponentId) →
         (trace.components dotted).role = .dotted →
         List (DottedPuncture trace)) :
-    Prop
+    Prop :=
+  ∀ (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted)
+    (index : Fin (punctureWord dotted role).length),
+      let puncture := (punctureWord dotted role).get index
+      puncture.dottedComponent = dotted ∧
+        puncture.cutPosition = index.1
 
-opaque CutOpenWordsAreCompatible
+def CutOpenWordsAreCompatible
     (trace : CombinatorialLinkTrace)
     (punctureWord :
       (dotted : trace.ComponentId) →
         (trace.components dotted).role = .dotted →
         List (DottedPuncture trace)) :
-    Prop
-
-opaque RegluingReturnsOriginalTrace
-    (trace : CombinatorialLinkTrace)
-    (exterior : CutOpenExteriorTrace trace)
-    (punctureWord :
-      (dotted : trace.ComponentId) →
-        (trace.components dotted).role = .dotted →
-        List (DottedPuncture trace)) :
-    Prop
+    Prop :=
+  ∀ (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted)
+    (puncture : DottedPuncture trace),
+      puncture ∈ punctureWord dotted role →
+        puncture.dottedComponent = dotted
 
 structure DottedCutData (trace : CombinatorialLinkTrace) where
   punctureWord :
@@ -299,14 +343,14 @@ structure DottedCutData (trace : CombinatorialLinkTrace) where
     PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
   cutOpenWordsAreCompatible :
     CutOpenWordsAreCompatible trace punctureWord
-  reglueReturnsOriginalTrace :
-    RegluingReturnsOriginalTrace trace exterior punctureWord
 
 /--
 The handle information deliberately stops before encoding three-handle
-attaching spheres.  `hThree` and `closingBoundaryCertificate` are exactly the
-finite primal closing data retained by this special presentation.  Thus
-`hOne`, `hTwo`, and `hThree` use ordinary Kirby-calculus indices.
+attaching spheres.  Only the number `hThree` is retained.  The external claim
+that these handles close the presented boundary belongs to the manifold
+realization axiom; it is not represented by an arbitrary certificate type and
+inhabitant.  Thus `hOne`, `hTwo`, and `hThree` use ordinary Kirby-calculus
+indices.
 -/
 structure SpecialHandleData (trace : CombinatorialLinkTrace) where
   hOne : ℕ
@@ -318,8 +362,6 @@ structure SpecialHandleData (trace : CombinatorialLinkTrace) where
   twoHandleIndex :
     Fin hTwo ≃ {component : trace.ComponentId //
       (trace.components component).role ≠ .dotted}
-  closingBoundaryCertificate : Type
-  closingBoundaryWitness : closingBoundaryCertificate
 
 /--
 The independent input object.  "Special" means exactly one zero-handle and
@@ -329,18 +371,6 @@ structure CombinatorialSpecialKirbyDiagram where
   trace : CombinatorialLinkTrace
   dottedCuts : DottedCutData trace
   handles : SpecialHandleData trace
-
-/--
-Narrow category-neutral topology predicate: the finite cut words are realized
-by pairwise compatible spanning disks for the dotted unlink.  It says nothing
-about labels, characters, graphical evaluation, or scalar equality.
--/
-opaque DottedCutWordsTopologicallyRealizable :
-  CombinatorialSpecialKirbyDiagram → Prop
-
-axiom dottedCutWords_topologicallyRealizable
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    DottedCutWordsTopologicallyRealizable diagram
 
 end TwistedYetter.Semantics.Independent
 

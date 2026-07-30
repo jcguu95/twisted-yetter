@@ -183,7 +183,7 @@ structure AlgebraBinding
       frozen.category.simples.fusionMultiplicity left right output =
         currentCategory.toFusionCategoryData.fusionMultiplicity
           (simpleEquiv left) (simpleEquiv right) (simpleEquiv output)
-  quantumDimension_sound :
+  quantumDimension_eq_ribbonTrace :
     ∀ simple,
       frozen.category.simples.quantumDimension simple =
         currentCategory.quantumDimension (simpleEquiv simple)
@@ -422,7 +422,7 @@ theorem weightConformance_of_primitive_bindings
             (current.canonicalPresentation.topology.formal.raw.components.get
               (binding.handleEquiv handle).1)) : Kˣ) : K)
   rw [
-    binding.algebra.quantumDimension_sound,
+    binding.algebra.quantumDimension_eq_ribbonTrace,
     binding.algebra.character_sound,
     binding.cycle_coordinate_sound
   ]

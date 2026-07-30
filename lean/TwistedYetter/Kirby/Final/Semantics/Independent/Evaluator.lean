@@ -48,7 +48,7 @@ def ordinaryKirbyWeight
     (labeling : TwoHandleLabeling 𝒞 diagram) : K :=
   ∏ handle, 𝒞.simples.quantumDimension (labeling handle)
 
-def characterWeight
+noncomputable def characterWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     {diagram : CombinatorialSpecialKirbyDiagram}

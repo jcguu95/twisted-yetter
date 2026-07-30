@@ -15,6 +15,11 @@ Finite semisimplicity is represented by actual simple objects and actual
 biproduct decompositions.  Ribbon compatibility is represented by a natural
 twist and its equations.  Neither condition is hidden in an opaque
 proposition.
+
+The law fields in this file are domain-defining assumptions carried by the
+input category itself.  They say what qualifies as a premodular fusion
+category; they are not external topology or evaluator axioms.  All external
+literature and topology inputs live in `EntranceAxioms`.
 -/
 
 namespace TwistedYetter.Semantics.Independent
@@ -135,7 +140,6 @@ structure FusionSemisimpleData
       let _ := ambient.rigid
       (simpleObject s)ᘁ ≅ simpleObject (dual s)
   quantumDimension : Simple → K
-  dual_involutive : Function.Involutive dual
 
 attribute [instance] FusionSemisimpleData.simpleFintype
 attribute [instance] FusionSemisimpleData.simpleDecidableEq
@@ -158,7 +162,7 @@ structure RibbonStructureData
       twist.hom.app (X ⊗ Y) =
         (β_ X Y).hom ≫ (β_ Y X).hom ≫
           (twist.hom.app X ⊗ₘ twist.hom.app Y)
-  dual :
+  twist_dual_compatibility :
     (X : ambient.C) →
       let _ := ambient.category
       let _ := ambient.monoidal
@@ -175,7 +179,12 @@ structure PremodularFusionCategory
   semisimple :
     FusionSemisimpleData.{uK, uC, uS, v} K ambient
   ribbon : RibbonStructureData.{uK, uC, v} K ambient
-  quantumDimension_sound :
+  /--
+  EGNO, Proposition 8.10.14, equation (8.41), printed p. 220:
+  the categorical dimension is the scalar obtained by closing the
+  twist-braiding ribbon trace.
+  -/
+  quantumDimension_eq_ribbonTrace :
     (s : semisimple.Simple) →
       let _ := ambient.category
       let _ := ambient.abelian
@@ -189,9 +198,6 @@ structure PremodularFusionCategory
           (ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
           (β_ X (Xᘁ)).hom ≫
           ε_ X (Xᘁ)
-  globalDimension_nonzero :
-    (∑ s : semisimple.Simple,
-      semisimple.quantumDimension s * semisimple.quantumDimension s) ≠ 0
 
 abbrev PremodularFusionCategory.C
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -292,13 +298,46 @@ def fusionProjection
     (𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right)
     ⟨output, i⟩
 
+/--
+The chosen simple-label duality is involutive.  This is derived from the
+stored dual representatives, braided rigidity, uniqueness of right duals,
+and uniqueness of the chosen simple representatives.
+-/
+theorem dual_involutive : Function.Involutive 𝒞.simples.dual := by
+  letI : Category 𝒞.C := 𝒞.ambient.category
+  letI : MonoidalCategory 𝒞.C := 𝒞.ambient.monoidal
+  letI : RightRigidCategory 𝒞.C := 𝒞.ambient.rigid.toRightRigidCategory
+  letI : BraidedCategory 𝒞.C := 𝒞.ambient.braided
+  intro s
+  apply 𝒞.simples.simple_pairwise
+  letI : ExactPairing
+      (𝒞.simples.simpleObject s)
+      (𝒞.simples.simpleObject (𝒞.simples.dual s)) :=
+    exactPairingCongrRight (𝒞.simples.dualIso s).symm
+  let swapped : ExactPairing
+      (𝒞.simples.simpleObject (𝒞.simples.dual s))
+      (𝒞.simples.simpleObject s) :=
+    BraidedCategory.exactPairing_swap
+      (𝒞.simples.simpleObject s)
+      (𝒞.simples.simpleObject (𝒞.simples.dual s))
+  let comparison :
+      𝒞.simples.simpleObject s ≅
+        (𝒞.simples.simpleObject (𝒞.simples.dual s))ᘁ :=
+    rightDualIso swapped
+      (inferInstance :
+        ExactPairing
+          (𝒞.simples.simpleObject (𝒞.simples.dual s))
+          ((𝒞.simples.simpleObject (𝒞.simples.dual s))ᘁ))
+  let secondDualIso :
+      (𝒞.simples.simpleObject (𝒞.simples.dual s))ᘁ ≅
+        𝒞.simples.simpleObject (𝒞.simples.dual (𝒞.simples.dual s)) := by
+    simpa only using 𝒞.simples.dualIso (𝒞.simples.dual s)
+  exact
+    ⟨(comparison ≪≫ secondDualIso).symm⟩
+
 def globalDimension : K :=
   ∑ s : 𝒞.simples.Simple,
     𝒞.simples.quantumDimension s * 𝒞.simples.quantumDimension s
-
-theorem globalDimension_ne_zero :
-    𝒞.globalDimension ≠ 0 :=
-  𝒞.globalDimension_nonzero
 
 local instance simpleObject_isSimple (s : 𝒞.simples.Simple) :
     CategoryTheory.Simple (𝒞.simples.simpleObject s) :=
@@ -362,22 +401,91 @@ theorem closedScalar_identity :
 
 end PremodularFusionCategory
 
-/--
-A genuine monoidal natural automorphism of the tensor identity.
-
-The stored simple scalars are not a substitute for naturality: `simple_action`
-identifies them with the actual components of the automorphism.
--/
+/-- A genuine monoidal natural automorphism of the tensor identity. -/
 structure TensorIdentityCharacter
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K) where
   iso : 𝟭 𝒞.C ≅ 𝟭 𝒞.C
   monoidal : NatTrans.IsMonoidal iso.hom
-  value : 𝒞.simples.Simple → Kˣ
-  simple_action :
-    ∀ s,
-      iso.hom.app (𝒞.simples.simpleObject s) =
-        (value s : K) • 𝟙 (𝒞.simples.simpleObject s)
+
+namespace TensorIdentityCharacter
+
+variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+variable {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+
+/--
+The scalar by which the character acts on a simple object.  This is derived
+from the actual natural-automorphism component through Schur's lemma; it is
+not separately supplied data.
+-/
+noncomputable def simpleScalar
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) : K := by
+  letI : CategoryTheory.Simple (𝒞.simples.simpleObject s) :=
+    𝒞.simples.simple_isSimple s
+  exact
+    (𝒞.simpleEndLinearEquiv (𝒞.simples.simpleObject s)).symm
+      (character.iso.hom.app (𝒞.simples.simpleObject s))
+
+theorem component_on_simple_eq_scalar_smul_identity
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) :
+    character.iso.hom.app (𝒞.simples.simpleObject s) =
+      character.simpleScalar s • 𝟙 (𝒞.simples.simpleObject s) := by
+  letI : CategoryTheory.Simple (𝒞.simples.simpleObject s) :=
+    𝒞.simples.simple_isSimple s
+  exact
+    (𝒞.simpleEndLinearEquiv (𝒞.simples.simpleObject s)).apply_symm_apply
+      (character.iso.hom.app (𝒞.simples.simpleObject s)) |>.symm
+
+theorem simpleScalar_ne_zero
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) :
+    character.simpleScalar s ≠ 0 := by
+  letI : CategoryTheory.Simple (𝒞.simples.simpleObject s) :=
+    𝒞.simples.simple_isSimple s
+  intro scalar_zero
+  have component_zero :
+      character.iso.hom.app (𝒞.simples.simpleObject s) = 0 := by
+    rw [character.component_on_simple_eq_scalar_smul_identity s, scalar_zero,
+      zero_smul]
+    rfl
+  have identity_zero :
+      𝟙 (𝒞.simples.simpleObject s) = 0 := by
+    calc
+      𝟙 (𝒞.simples.simpleObject s) =
+          character.iso.inv.app (𝒞.simples.simpleObject s) ≫
+            character.iso.hom.app (𝒞.simples.simpleObject s) :=
+        (character.iso.inv_hom_id_app
+          (𝒞.simples.simpleObject s)).symm
+      _ =
+          character.iso.inv.app (𝒞.simples.simpleObject s) ≫ 0 := by
+        rw [component_zero]
+      _ = 0 := CategoryTheory.Limits.comp_zero
+  exact
+    CategoryTheory.id_nonzero (𝒞.simples.simpleObject s) identity_zero
+
+/-- The derived nonzero simple scalar, packaged as a unit of `K`. -/
+noncomputable def value
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) : Kˣ :=
+  Units.mk0 (character.simpleScalar s) (character.simpleScalar_ne_zero s)
+
+@[simp]
+theorem value_val
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) :
+    (character.value s : K) = character.simpleScalar s :=
+  rfl
+
+theorem component_on_simple_eq_value_smul_identity
+    (character : TensorIdentityCharacter 𝒞)
+    (s : 𝒞.simples.Simple) :
+    character.iso.hom.app (𝒞.simples.simpleObject s) =
+      (character.value s : K) • 𝟙 (𝒞.simples.simpleObject s) :=
+  character.component_on_simple_eq_scalar_smul_identity s
+
+end TensorIdentityCharacter
 
 /-- A premodular category together with its twisting automorphism. -/
 structure TwistedPremodularCategory

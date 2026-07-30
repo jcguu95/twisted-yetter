@@ -351,23 +351,16 @@ def thamCycleClass
   QuotientAddGroup.mk cycle
 
 /--
-Category-neutral topology predicate saying that an additive equivalence is the
-Poincaré-duality/dual-handle identification for this realized decomposition.
-It contains no category, character, evaluator, or scalar equality.
+The algebraic part of the turnover identification.  Whether this equivalence
+is the geometric Poincaré-duality/dual-handle map is deliberately not hidden
+as a proof field here; that external topology responsibility is stated
+separately in `EntranceAxioms`.
 -/
-opaque RealizesTurnedOverPoincareDuality
-    {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    {turnedOver : TurnedOverBoundaryCertificate primal}
-    (equiv : PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ turnedOver) :
-    Prop
-
 structure TurnoverH₂Identification
     {diagram : CombinatorialSpecialKirbyDiagram}
     {primal : PrimalDegreeThreeBoundaryData diagram}
     (turnedOver : TurnedOverBoundaryCertificate primal) where
   equiv : PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ turnedOver
-  realizesPoincareDuality : RealizesTurnedOverPoincareDuality equiv
 
 /--
 A marked diagram stores exactly one marking, on the ordinary Kirby/primal

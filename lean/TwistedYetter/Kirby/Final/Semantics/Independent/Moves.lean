@@ -35,11 +35,6 @@ inductive CouponTransportEvent
   | coupon (name : String)
   deriving DecidableEq, Repr
 
-opaque CleanAttach
-    (source attached : CombinatorialSpecialKirbyDiagram)
-    (moving stationary : source.trace.ComponentId) :
-    Prop
-
 /--
 A finite topology-side route for coupon transport.
 
@@ -48,28 +43,25 @@ stationary component.  It does not pretend that the transported character
 coupon is part of a Kirby diagram.  The actual before/after expressions and
 their naturality proof live in the typed graphical semantics.
 -/
-structure FiniteCouponTransport where
+structure FiniteCouponTransport
+    (attached detachable : CombinatorialSpecialKirbyDiagram) where
   events : List CouponTransportEvent
+  stages :
+    Fin (events.length + 1) → CombinatorialSpecialKirbyDiagram
+  startsAtAttached : stages 0 = attached
+  endsAtDetachable : stages (Fin.last events.length) = detachable
 
-opaque CleanDetach
-    (detachable target : CombinatorialSpecialKirbyDiagram)
-    (moving stationary : target.trace.ComponentId) :
-    Prop
+/--
+External handle-topology boundary: the listed finite stages are the complete
+route followed by the attaching coupon along the stationary component.  In
+particular, no unlisted crossing, cup, cap, twist, or coupon is skipped.
 
-opaque SlideCommonExteriorUnchanged
-    (source target : CombinatorialSpecialKirbyDiagram) :
-    Prop
-
-opaque SlideComponentBinding
-    (source target : CombinatorialSpecialKirbyDiagram)
-    (movingSource stationarySource : source.trace.ComponentId)
-    (movingTarget stationaryTarget : target.trace.ComponentId) :
-    Prop
-
-opaque SlideFramingPushOffCompatible
-    (source target : CombinatorialSpecialKirbyDiagram)
-    (orientation : BandOrientation) :
-    Prop
+This predicate is category-neutral.  It says nothing about evaluation or
+about the character coupon's categorical naturality.
+-/
+axiom FiniteCouponTransportRealizesCompletePath
+    {attached detachable : CombinatorialSpecialKirbyDiagram} :
+    FiniteCouponTransport attached detachable → Prop
 
 /-- The visible component data of one oriented band slide. -/
 structure CleanBandSlideScript
@@ -94,73 +86,75 @@ structure CleanBandSlideDecomposition
     (script : CleanBandSlideScript source target) where
   attached : CombinatorialSpecialKirbyDiagram
   detachable : CombinatorialSpecialKirbyDiagram
-  attach :
-    CleanAttach source attached
-      script.movingSource script.stationarySource
   transport :
-    FiniteCouponTransport
-  detach :
-    CleanDetach detachable target
-      script.movingTarget script.stationaryTarget
-  commonExteriorUnchanged :
-    SlideCommonExteriorUnchanged source target
-  sourceTargetComponentBinding :
-    SlideComponentBinding source target
-      script.movingSource script.stationarySource
-      script.movingTarget script.stationaryTarget
-  framingPushOffCompatible :
-    SlideFramingPushOffCompatible source target script.orientation
+    FiniteCouponTransport attached detachable
 
 /--
-Classical handle-topology boundary: every clean oriented band slide admits
-the finite decomposition above.
+The complete combinatorial input for one band slide.  Kirby--Cerf
+completeness must supply this data as part of the elementary move; it is not
+selected later by a separate topology axiom.
+
+Red-team note: this structure is intentionally data-only.  Its exact endpoint,
+common-exterior, and framing validity conditions must remain visible in the
+move grammar rather than being hidden in an existential witness axiom.
 -/
-axiom cleanBandSlide_decomposes
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (script : CleanBandSlideScript source target) :
-    Nonempty (CleanBandSlideDecomposition script)
+structure CleanBandSlide
+    (source target : CombinatorialSpecialKirbyDiagram) where
+  script : CleanBandSlideScript source target
+  decomposition : CleanBandSlideDecomposition script
 
-opaque IsotopyPreservesRolesOrientationsFramings
-    (source target : CombinatorialSpecialKirbyDiagram) :
-    Prop
+/--
+External handle-topology boundary: the source and target diagrams, component
+roles, orientation, framing push-off, clean attaching site, common exterior,
+transport window, and clean detaching site in this record realize one
+standard oriented Kirby band slide.
 
-opaque EventTracesAreRelatedByPlanarIsotopy
-    (source target : CombinatorialSpecialKirbyDiagram) :
-    Prop
-
-opaque IsotopyTransportsDottedCutWords
-    (source target : CombinatorialSpecialKirbyDiagram) :
-    Prop
+This predicate contains no category, character, projector, or evaluation
+equality.
+-/
+axiom CleanBandSlideRealizesStandardKirbySlide
+    {source target : CombinatorialSpecialKirbyDiagram} :
+    CleanBandSlide source target → Prop
 
 structure FramedIsotopyScript
     (source target : CombinatorialSpecialKirbyDiagram) where
   componentReindexing : source.trace.ComponentId ≃ target.trace.ComponentId
   strandReindexing : source.trace.StrandId ≃ target.trace.StrandId
-  rolesOrientationsFramingsPreserved :
-    IsotopyPreservesRolesOrientationsFramings source target
-  eventTraceRelatedByPlanarIsotopy :
-    EventTracesAreRelatedByPlanarIsotopy source target
-  dottedCutWordsTransported :
-    IsotopyTransportsDottedCutWords source target
 
-opaque IsStandardLocalCancelingPair
+/--
+External handle-topology boundary: the two exact combinatorial diagrams and
+the displayed reindexings are related by a framed ambient isotopy preserving
+component roles, orientations, framings, dotted cut words, and the common
+exterior.
+
+This is a topology statement only; it does not assert graphical evaluation
+equality.
+-/
+axiom FramedIsotopyScriptRealizesFramedIsotopy
+    {source target : CombinatorialSpecialKirbyDiagram} :
+    FramedIsotopyScript source target → Prop
+
+def CancellationHandleCountChangeIsStandard
     (source target : CombinatorialSpecialKirbyDiagram)
-    (kind : ElementaryMoveKind) :
-    Prop
-
-opaque CancellationCommonExteriorUnchanged
-    (source target : CombinatorialSpecialKirbyDiagram) :
-    Prop
-
-opaque CancellationHandleCountChangeIsStandard
-    (source target : CombinatorialSpecialKirbyDiagram)
-    (kind : ElementaryMoveKind) :
-    Prop
-
-opaque CancellationMarkingCoordinateChangeIsStandard
-    (source target : CombinatorialSpecialKirbyDiagram)
-    (kind : ElementaryMoveKind) :
-    Prop
+    (kind : ElementaryMoveKind) : Prop :=
+  match kind with
+  | .oneTwoBirth =>
+      target.handles.hOne = source.handles.hOne + 1 ∧
+        target.handles.hTwo = source.handles.hTwo + 1 ∧
+        target.handles.hThree = source.handles.hThree
+  | .oneTwoDeath =>
+      source.handles.hOne = target.handles.hOne + 1 ∧
+        source.handles.hTwo = target.handles.hTwo + 1 ∧
+        source.handles.hThree = target.handles.hThree
+  | .twoThreeBirth =>
+      target.handles.hOne = source.handles.hOne ∧
+        target.handles.hTwo = source.handles.hTwo + 1 ∧
+        target.handles.hThree = source.handles.hThree + 1
+  | .twoThreeDeath =>
+      source.handles.hOne = target.handles.hOne ∧
+        source.handles.hTwo = target.handles.hTwo + 1 ∧
+        source.handles.hThree = target.handles.hThree + 1
+  | _ => False
 
 structure CancellationScript
     (source target : CombinatorialSpecialKirbyDiagram) where
@@ -169,14 +163,20 @@ structure CancellationScript
   kind_is_cancellation :
     kind = .oneTwoBirth ∨ kind = .oneTwoDeath ∨
     kind = .twoThreeBirth ∨ kind = .twoThreeDeath
-  localCancelingPair :
-    IsStandardLocalCancelingPair source target kind
-  commonExteriorUnchanged :
-    CancellationCommonExteriorUnchanged source target
   handleCountChangeIsStandard :
     CancellationHandleCountChangeIsStandard source target kind
-  markingCoordinateChangeIsStandard :
-    CancellationMarkingCoordinateChangeIsStandard source target kind
+
+/--
+External handle-topology boundary: the exact source and target contain the
+same common exterior and differ only by the standard local canceling
+one--two or two--three handle pair specified by `script.kind`.
+
+This predicate does not contain the normalization or evaluation equality
+which must later be proved categorically.
+-/
+axiom CancellationScriptRealizesStandardCancellation
+    {source target : CombinatorialSpecialKirbyDiagram} :
+    CancellationScript source target → Prop
 
 /--
 An exact chain-level transport for the primal handle complexes, using ordinary
@@ -339,38 +339,63 @@ inductive ElementaryMove
     (source target : HomologicallyMarkedDiagram) : Type
   | framedIsotopy
       (script : FramedIsotopyScript source.diagram target.diagram)
+      (scriptRealizes :
+        FramedIsotopyScriptRealizesFramedIsotopy script)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
   | oneOverOne
-      (script : CleanBandSlideScript source.diagram target.diagram)
+      (slide : CleanBandSlide source.diagram target.diagram)
+      (slideRealizes :
+        CleanBandSlideRealizesStandardKirbySlide slide)
+      (transportComplete :
+        FiniteCouponTransportRealizesCompletePath
+          slide.decomposition.transport)
       (moving_is_dotted :
-        (source.diagram.trace.components script.movingSource).role = .dotted)
+        (source.diagram.trace.components
+          slide.script.movingSource).role = .dotted)
       (stationary_is_dotted :
-        (source.diagram.trace.components script.stationarySource).role = .dotted)
+        (source.diagram.trace.components
+          slide.script.stationarySource).role = .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
   | twoOverOne
-      (script : CleanBandSlideScript source.diagram target.diagram)
+      (slide : CleanBandSlide source.diagram target.diagram)
+      (slideRealizes :
+        CleanBandSlideRealizesStandardKirbySlide slide)
+      (transportComplete :
+        FiniteCouponTransportRealizesCompletePath
+          slide.decomposition.transport)
       (moving_is_two_handle :
-        (source.diagram.trace.components script.movingSource).role ≠ .dotted)
+        (source.diagram.trace.components
+          slide.script.movingSource).role ≠ .dotted)
       (stationary_is_dotted :
-        (source.diagram.trace.components script.stationarySource).role = .dotted)
+        (source.diagram.trace.components
+          slide.script.stationarySource).role = .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
   | twoOverTwo
-      (script : CleanBandSlideScript source.diagram target.diagram)
+      (slide : CleanBandSlide source.diagram target.diagram)
+      (slideRealizes :
+        CleanBandSlideRealizesStandardKirbySlide slide)
+      (transportComplete :
+        FiniteCouponTransportRealizesCompletePath
+          slide.decomposition.transport)
       (moving_is_two_handle :
-        (source.diagram.trace.components script.movingSource).role ≠ .dotted)
+        (source.diagram.trace.components
+          slide.script.movingSource).role ≠ .dotted)
       (stationary_is_two_handle :
-        (source.diagram.trace.components script.stationarySource).role ≠ .dotted)
+        (source.diagram.trace.components
+          slide.script.stationarySource).role ≠ .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
   | cancellation
       (script : CancellationScript source.diagram target.diagram)
+      (scriptRealizes :
+        CancellationScriptRealizesStandardCancellation script)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
         target.alpha = homology.primal.inducedH₂ source.alpha)
@@ -380,22 +405,22 @@ def ElementaryMove.homology
     (move : ElementaryMove source target) :
     MoveHomologyTransport source target :=
   match move with
-  | .framedIsotopy _ homology _ => homology
-  | .oneOverOne _ _ _ homology _ => homology
-  | .twoOverOne _ _ _ homology _ => homology
-  | .twoOverTwo _ _ _ homology _ => homology
-  | .cancellation _ homology _ => homology
+  | .framedIsotopy _ _ homology _ => homology
+  | .oneOverOne _ _ _ _ _ homology _ => homology
+  | .twoOverOne _ _ _ _ _ homology _ => homology
+  | .twoOverTwo _ _ _ _ _ homology _ => homology
+  | .cancellation _ _ homology _ => homology
 
 def ElementaryMove.primalMarkingTransport
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
     target.alpha = move.homology.primal.inducedH₂ source.alpha :=
   match move with
-  | .framedIsotopy _ _ markingTransport => markingTransport
-  | .oneOverOne _ _ _ _ markingTransport => markingTransport
-  | .twoOverOne _ _ _ _ markingTransport => markingTransport
-  | .twoOverTwo _ _ _ _ markingTransport => markingTransport
-  | .cancellation _ _ markingTransport => markingTransport
+  | .framedIsotopy _ _ _ markingTransport => markingTransport
+  | .oneOverOne _ _ _ _ _ _ markingTransport => markingTransport
+  | .twoOverOne _ _ _ _ _ _ markingTransport => markingTransport
+  | .twoOverTwo _ _ _ _ _ _ markingTransport => markingTransport
+  | .cancellation _ _ _ markingTransport => markingTransport
 
 theorem ElementaryMove.thamMarkingTransport
     {source target : HomologicallyMarkedDiagram}

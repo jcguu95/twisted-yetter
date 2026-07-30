@@ -1,0 +1,505 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/1",
+  "status": "HUMAN_REVIEW_REQUIRED_NOT_YET_KERNEL_AUDITED",
+  "final_theorem_public_parameters": [
+    "TwistedPremodularCategory K",
+    "OrientedDiffeomorphism X Y",
+    "ManifoldH2 X"
+  ],
+  "lean_implicit_scalar_context": [
+    "K : Type",
+    "Field K",
+    "IsAlgClosed K",
+    "CharZero K"
+  ],
+  "lean_implicit_scalar_context_judgment": "These are the coefficient-field domain of TwistedPremodularCategory K, not proof escape hatches. They remain visible in the flattened ledger. Whether K should later be bundled into the category is an API decision and must not be changed silently.",
+  "forbidden_final_theorem_parameters": [
+    "graphical evaluator",
+    "compiler",
+    "normalization",
+    "representative-independence proof",
+    "local-invariance proof",
+    "presentation theory",
+    "topology package"
+  ],
+  "explicit_axiom_count": 18,
+  "closure_warning": "This is the complete source declaration ledger, not yet the kernel dependency closure of the final theorem. A05-A10 are intended inputs for the unresolved representative-independence and local-move proofs and are not yet connected to those proofs.",
+  "obligation_modules": [
+    {
+      "module_id": "CATEGORY_SEMANTICS",
+      "reviewed_source": "Algebra.lean",
+      "reviewed_source_sha256": "b25f052b84c5acdb70fb681de654c113851371300662c892e2261f1f49315d33",
+      "registered_at_utc": "2026-07-30T00:06:26Z",
+      "module_status": "HUMAN_REVIEW_COMPLETE",
+      "review_progress": {
+        "human_approved": 11,
+        "scanner_false_positive_confirmed": 5,
+        "kernel_proved_from_domain_data": 2,
+        "remaining_unreviewed": 0
+      },
+      "obligations": [
+        {
+          "id": "CAT-01",
+          "lean_name": "FusionSemisimpleData.simple_isSimple",
+          "kind": "DOMAIN_DEFINITION_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_DOMAIN_DEFINITION",
+          "human_meaning": "Every chosen simple representative is genuinely simple.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-02",
+          "lean_name": "FusionSemisimpleData.simple_pairwise",
+          "kind": "DOMAIN_DEFINITION_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_DOMAIN_DEFINITION",
+          "human_meaning": "Two chosen representatives can be isomorphic only when their indices agree.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-03",
+          "lean_name": "FusionSemisimpleData.simple_complete",
+          "kind": "DOMAIN_DEFINITION_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_DOMAIN_DEFINITION",
+          "human_meaning": "Every simple object is isomorphic to one chosen representative.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-04",
+          "lean_name": "FusionSemisimpleData.hom_finite",
+          "kind": "DOMAIN_DEFINITION_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_DOMAIN_DEFINITION",
+          "human_meaning": "Every Hom space is finite-dimensional over the coefficient field.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-05",
+          "lean_name": "FusionSemisimpleData.summandInclusion",
+          "kind": "DATA_NOT_PROOF",
+          "risk": "LOW",
+          "status": "SCANNER_FALSE_POSITIVE_CONFIRMED",
+          "human_meaning": "A chosen inclusion morphism for each simple summand."
+        },
+        {
+          "id": "CAT-06",
+          "lean_name": "FusionSemisimpleData.summandProjection",
+          "kind": "DATA_NOT_PROOF",
+          "risk": "LOW",
+          "status": "SCANNER_FALSE_POSITIVE_CONFIRMED",
+          "human_meaning": "A chosen projection morphism for each simple summand."
+        },
+        {
+          "id": "CAT-07",
+          "lean_name": "FusionSemisimpleData.summand_pairing_same",
+          "kind": "BIPRODUCT_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_BIPRODUCT_LAW",
+          "human_meaning": "Projection after inclusion is the identity on the same summand.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-08",
+          "lean_name": "FusionSemisimpleData.summand_pairing_distinct_copy",
+          "kind": "BIPRODUCT_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_BIPRODUCT_LAW",
+          "human_meaning": "Different copies of the same simple summand pair to zero.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-09",
+          "lean_name": "FusionSemisimpleData.summand_pairing_distinct_simple",
+          "kind": "BIPRODUCT_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_BIPRODUCT_LAW",
+          "human_meaning": "Summands with different simple labels pair to zero.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-10",
+          "lean_name": "FusionSemisimpleData.resolution_identity",
+          "kind": "BIPRODUCT_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_BIPRODUCT_LAW",
+          "human_meaning": "The sum of all projection-inclusion pairs resolves the identity of the object.",
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        },
+        {
+          "id": "CAT-11",
+          "lean_name": "FusionSemisimpleData.unitIso",
+          "kind": "DATA_NOT_PROOF",
+          "risk": "LOW",
+          "status": "SCANNER_FALSE_POSITIVE_CONFIRMED",
+          "human_meaning": "A chosen isomorphism from the simple unit representative to the tensor unit."
+        },
+        {
+          "id": "CAT-12",
+          "lean_name": "FusionSemisimpleData.dualIso",
+          "kind": "DATA_NOT_PROOF",
+          "risk": "LOW",
+          "status": "SCANNER_FALSE_POSITIVE_CONFIRMED",
+          "human_meaning": "A chosen isomorphism between the categorical dual and its simple representative."
+        },
+        {
+          "id": "CAT-13",
+          "lean_name": "RibbonStructureData.twist",
+          "kind": "DATA_NOT_PROOF",
+          "risk": "LOW",
+          "status": "SCANNER_FALSE_POSITIVE_CONFIRMED",
+          "human_meaning": "The twist natural isomorphism itself."
+        },
+        {
+          "id": "CAT-14",
+          "lean_name": "RibbonStructureData.balancing",
+          "kind": "CATEGORY_COHERENCE_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_LITERATURE_MATCH",
+          "human_meaning": "The twist on a tensor product equals the double braiding followed by the two individual twists.",
+          "reference": "EGNO, Definition 8.10.1, equation (8.32), printed p. 216",
+          "reviewed_at_utc": "2026-07-30T00:16:08Z"
+        },
+        {
+          "id": "CAT-15",
+          "lean_name": "RibbonStructureData.twist_dual_compatibility",
+          "kind": "CATEGORY_COHERENCE_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_LITERATURE_MATCH",
+          "human_meaning": "The twist is compatible with categorical duality.",
+          "reference": "EGNO, Definition 8.10.1, printed p. 216",
+          "reviewed_at_utc": "2026-07-30T00:21:35Z"
+        },
+        {
+          "id": "CAT-16",
+          "lean_name": "PremodularFusionCategory.quantumDimension_eq_ribbonTrace",
+          "kind": "CONVENTION_SENSITIVE_COMPATIBILITY_LAW",
+          "risk": "LOW",
+          "status": "HUMAN_APPROVED_LITERATURE_MATCH",
+          "human_meaning": "The stored quantum dimension equals the categorical closed trace built from the chosen twist, braiding, evaluation, and coevaluation conventions.",
+          "reference": "EGNO, Proposition 8.10.14, equation (8.41), printed p. 220",
+          "reviewed_at_utc": "2026-07-30T00:12:43Z"
+        },
+        {
+          "id": "CAT-17",
+          "lean_name": "TensorIdentityCharacter.component_on_simple_eq_value_smul_identity",
+          "kind": "DERIVED_CHARACTER_THEOREM",
+          "risk": "LOW",
+          "status": "KERNEL_PROVED_FROM_SCHUR_LEMMA",
+          "human_meaning": "On every simple object, the monoidal natural automorphism is multiplication by the uniquely derived nonzero Schur scalar.",
+          "derived_from": [
+            "TensorIdentityCharacter.iso",
+            "FusionSemisimpleData.simple_isSimple",
+            "PremodularFusionCategory.simpleEndLinearEquiv",
+            "TensorIdentityCharacter.iso.inv_hom_id_app"
+          ],
+          "reviewed_at_utc": "2026-07-30T00:30:59Z"
+        },
+        {
+          "id": "CAT-18",
+          "lean_name": "PremodularFusionCategory.dual_involutive",
+          "kind": "DERIVED_DUALITY_THEOREM",
+          "risk": "LOW",
+          "status": "KERNEL_PROVED_FROM_BRAIDED_RIGIDITY",
+          "human_meaning": "Applying the chosen simple-label duality twice returns the original simple label.",
+          "derived_from": [
+            "FusionSemisimpleData.dualIso",
+            "FusionSemisimpleData.simple_pairwise",
+            "CategoryTheory.exactPairingCongrRight",
+            "CategoryTheory.BraidedCategory.exactPairing_swap",
+            "CategoryTheory.rightDualIso"
+          ],
+          "reviewed_at_utc": "2026-07-30T00:43:16Z"
+        }
+      ]
+    }
+  ],
+  "explicit_axioms": [
+    {
+      "id": "A01",
+      "name": "FiniteCouponTransportRealizesCompletePath",
+      "group": "HANDLE_TOPOLOGY",
+      "human_meaning": "The listed finite stages are the complete coupon route along the stationary component; no local event is silently skipped.",
+      "source_usage": "REQUIRED_BY_ELEMENTARY_MOVE_CONSTRUCTORS",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A02",
+      "name": "CleanBandSlideRealizesStandardKirbySlide",
+      "group": "HANDLE_TOPOLOGY",
+      "human_meaning": "The exact attach, transport, detach, component roles, orientation, framing push-off, and common exterior realize one standard oriented Kirby band slide.",
+      "source_usage": "REQUIRED_BY_ELEMENTARY_MOVE_CONSTRUCTORS",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A03",
+      "name": "FramedIsotopyScriptRealizesFramedIsotopy",
+      "group": "HANDLE_TOPOLOGY",
+      "human_meaning": "The exact source and target diagrams with the displayed reindexings are related by a framed ambient isotopy preserving all diagram roles and cut data.",
+      "source_usage": "REQUIRED_BY_ELEMENTARY_MOVE_CONSTRUCTORS",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A04",
+      "name": "CancellationScriptRealizesStandardCancellation",
+      "group": "HANDLE_TOPOLOGY",
+      "human_meaning": "The exact source and target differ only by the stated standard local canceling 1-2 or 2-3 handle pair.",
+      "source_usage": "REQUIRED_BY_ELEMENTARY_MOVE_CONSTRUCTORS",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A05",
+      "name": "DottedCutTopologyWitness",
+      "group": "DOTTED_DISK_TOPOLOGY",
+      "human_meaning": "Vocabulary for a topology witness realizing all ordered dotted puncture words by compatible spanning disks.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A06",
+      "name": "dottedCutWords_topologicallyRealizable",
+      "group": "DOTTED_DISK_TOPOLOGY",
+      "human_meaning": "Every admitted combinatorial special Kirby diagram has such a compatible dotted-cut realization.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A07",
+      "name": "TurnoverPoincareDualityWitness",
+      "group": "HANDLE_DUALITY_TOPOLOGY",
+      "human_meaning": "Vocabulary for the geometric Poincare-duality witness identifying primal and turned-over handle H2.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A08",
+      "name": "turnoverH2Identification_realizesPoincareDuality",
+      "group": "HANDLE_DUALITY_TOPOLOGY",
+      "human_meaning": "The stored primal-to-THAM H2 equivalence is geometrically the one induced by turning over the handle decomposition.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A09",
+      "name": "FramedRibbonIsotopyWitness",
+      "group": "CATEGORY_LITERATURE",
+      "human_meaning": "Vocabulary for a framed-ribbon isotopy between two typed ribbon expressions with the same boundary.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A10",
+      "name": "shum_framedRibbonCoherence",
+      "group": "CATEGORY_LITERATURE",
+      "human_meaning": "A framed-ribbon isotopy gives equal interpreted morphisms in a ribbon category.",
+      "source_usage": "DECLARED_BUT_NOT_YET_CONNECTED_TO_CORE_PROOF",
+      "reference": "Shum (1994), Theorem 2.6",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A11",
+      "name": "ClosedOrientedSmoothFourManifold",
+      "group": "FOUNDATIONAL_VOCABULARY",
+      "human_meaning": "The ambient type of closed oriented smooth four-manifolds.",
+      "source_usage": "USED_BY_FINAL_PUBLIC_SIGNATURE",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A12",
+      "name": "ManifoldH2",
+      "group": "FOUNDATIONAL_VOCABULARY",
+      "human_meaning": "Integral second homology assigned to a closed oriented smooth four-manifold.",
+      "source_usage": "USED_BY_FINAL_PUBLIC_SIGNATURE",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A13",
+      "name": "OrientedDiffeomorphism",
+      "group": "FOUNDATIONAL_VOCABULARY",
+      "human_meaning": "The type of orientation-preserving diffeomorphisms between two such manifolds.",
+      "source_usage": "USED_BY_FINAL_PUBLIC_SIGNATURE",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A14",
+      "name": "manifoldH2_addCommGroup",
+      "group": "FOUNDATIONAL_VOCABULARY",
+      "human_meaning": "Integral second homology is an additive commutative group.",
+      "source_usage": "USED_BY_REALIZATION_AND_FINAL_DESCENT",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A15",
+      "name": "DiagramRealizationWitness",
+      "group": "PRESENTATION_TOPOLOGY",
+      "human_meaning": "Vocabulary for a special Kirby diagram realizing a specified closed oriented smooth four-manifold.",
+      "source_usage": "USED_BY_MARKED_REALIZATION_CORRECTNESS",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A16",
+      "name": "markedRealization_exists",
+      "group": "PRESENTATION_TOPOLOGY",
+      "human_meaning": "Every marked pair (X, alpha) has a special Kirby diagram whose handle-chain H2 is identified with manifold H2 and carries alpha.",
+      "source_usage": "USED_BY_TWISTED_YETTER_DEFINITION_AND_FINAL_PROOF",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A17",
+      "name": "inducedH2",
+      "group": "PRESENTATION_TOPOLOGY",
+      "human_meaning": "An oriented diffeomorphism induces an additive equivalence on integral H2.",
+      "source_usage": "USED_BY_FINAL_PUBLIC_SIGNATURE_AND_DESCENT",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A18",
+      "name": "markedKirbyCerf_complete",
+      "group": "PRESENTATION_TOPOLOGY",
+      "human_meaning": "Any two correct special Kirby realizations of the same marked pair are connected by a finite movie of the exact eight allowed marked moves.",
+      "source_usage": "USED_BY_FINAL_DESCENT",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    }
+  ],
+  "flattened_non_axiom_assumption_surfaces": [
+    {
+      "group": "CATEGORY_DOMAIN_DEFINITION",
+      "structures": [
+        "PremodularAmbient",
+        "FusionSemisimpleData",
+        "RibbonStructureData",
+        "PremodularFusionCategory",
+        "TensorIdentityCharacter"
+      ],
+      "law_fields_requiring_human_review": [
+        "PremodularAmbient.category",
+        "PremodularAmbient.abelian",
+        "PremodularAmbient.linear",
+        "PremodularAmbient.monoidal",
+        "PremodularAmbient.rigid",
+        "PremodularAmbient.braided",
+        "PremodularAmbient.monoidalPreadditive",
+        "PremodularAmbient.monoidalLinear",
+        "FusionSemisimpleData.simple_isSimple",
+        "FusionSemisimpleData.simple_pairwise",
+        "FusionSemisimpleData.simple_complete",
+        "FusionSemisimpleData.hom_finite",
+        "FusionSemisimpleData.summand_pairing_same",
+        "FusionSemisimpleData.summand_pairing_distinct_copy",
+        "FusionSemisimpleData.summand_pairing_distinct_simple",
+        "FusionSemisimpleData.resolution_identity",
+        "RibbonStructureData.balancing",
+        "RibbonStructureData.twist_dual_compatibility",
+        "PremodularFusionCategory.quantumDimension_eq_ribbonTrace",
+        "TensorIdentityCharacter.monoidal"
+      ],
+      "data_fields_not_propositions": [
+        "FusionSemisimpleData.simpleObject",
+        "FusionSemisimpleData.multiplicity",
+        "FusionSemisimpleData.summandInclusion",
+        "FusionSemisimpleData.summandProjection",
+        "FusionSemisimpleData.unitIso",
+        "FusionSemisimpleData.dual",
+        "FusionSemisimpleData.dualIso",
+        "FusionSemisimpleData.quantumDimension",
+        "RibbonStructureData.twist",
+        "TensorIdentityCharacter.iso"
+      ],
+      "derived_definitions_and_theorems": [
+        "PremodularFusionCategory.dual_involutive",
+        "TensorIdentityCharacter.simpleScalar",
+        "TensorIdentityCharacter.simpleScalar_ne_zero",
+        "TensorIdentityCharacter.value",
+        "TensorIdentityCharacter.component_on_simple_eq_scalar_smul_identity",
+        "TensorIdentityCharacter.component_on_simple_eq_value_smul_identity"
+      ],
+      "policy": "Every data and law field, including inherited Mathlib parents, must be audited against EGNO or a named theorem. These are assumptions on the category input even though they are not global Lean axioms.",
+      "removed_hidden_theorem_fields": [
+        {
+          "name": "PremodularFusionCategory.globalDimension_nonzero",
+          "reason": "Nonvanishing is a literature theorem, not part of the definition of a premodular fusion category. It was unused and has been removed; if a later proof needs it, it must return as a separately named, referenced theorem or explicit axiom."
+        }
+      ],
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "group": "TRANSPARENT_COMBINATORIAL_VALIDITY",
+      "structures": [
+        "CombinatorialLinkTrace",
+        "DottedPuncture",
+        "CutOpenExteriorTrace",
+        "DottedCutData",
+        "PrimalDegreeThreeBoundaryData",
+        "PrimalHandleChainTransport",
+        "ThamHandleChainTransport",
+        "MoveHomologyTransport",
+        "KirbyMovie"
+      ],
+      "proof_fields_requiring_human_review": [
+        "CombinatorialLinkTrace.initialBoundaryEmpty",
+        "CombinatorialLinkTrace.finalBoundaryEmpty",
+        "CombinatorialLinkTrace.transitionValid",
+        "CombinatorialLinkTrace.activeWordsNoDuplicates",
+        "CombinatorialLinkTrace.eachComponentIsClosed",
+        "CombinatorialLinkTrace.framingEventsMatchIntegerFraming",
+        "DottedPuncture.dotted_role",
+        "DottedPuncture.two_handle_role",
+        "DottedPuncture.strand_on_two_handle",
+        "DottedPuncture.exponent_matches_direction",
+        "CutOpenExteriorTrace.initialBoundaryEmpty",
+        "CutOpenExteriorTrace.finalBoundaryEmpty",
+        "CutOpenExteriorTrace.transitionValid",
+        "CutOpenExteriorTrace.pairingCompatible",
+        "CutOpenExteriorTrace.activeWordsNoDuplicates",
+        "CutOpenExteriorTrace.activeStrandsAreTwoHandles",
+        "DottedCutData.projectorSite_exact",
+        "DottedCutData.puncturesHaveNoRepeatedOccurrences",
+        "DottedCutData.cutOpenWordsAreCompatible",
+        "PrimalDegreeThreeBoundaryData.boundary_squared_zero",
+        "FiniteCouponTransport.startsAtAttached",
+        "FiniteCouponTransport.endsAtDetachable",
+        "CancellationScript.kind_is_cancellation",
+        "CancellationScript.handleCountChangeIsStandard",
+        "PrimalHandleChainTransport.commutesWithBoundaryThree",
+        "PrimalHandleChainTransport.commutesWithBoundaryTwo",
+        "ThamHandleChainTransport.commutesWithBoundaryThree",
+        "ThamHandleChainTransport.commutesWithBoundaryTwo",
+        "MoveHomologyTransport.turnover_natural",
+        "KirbyMovie.startsAtSource",
+        "KirbyMovie.endsAtTarget",
+        "KirbyMovie.elementary"
+      ],
+      "data_fields_misidentified_by_conservative_scanner": [
+        "DottedCutData.punctureWord",
+        "DottedCutData.projectorSite",
+        "SpecialHandleData.oneHandleIndex",
+        "SpecialHandleData.twoHandleIndex",
+        "PrimalDegreeThreeBoundaryData.boundaryThree",
+        "HomologicallyMarkedDiagram.primalBoundary",
+        "RoleAwareCompiledTerm.graph"
+      ],
+      "transparent_predicates_requiring_semantic_review": [
+        "CutOpenEvent.PairingCompatible",
+        "CutOpenWordsAreCompatible",
+        "DiagramRealizes",
+        "MarkedRealizationIsCorrect"
+      ],
+      "data_declarations_with_suspicious_names_but_no_hidden_proposition": [
+        "MarkedRealizationData",
+        "TurnedOverBoundaryCertificate"
+      ],
+      "policy": "These fields may remain only when their propositions are transparent finite equations or exact source-target bookkeeping. They are not counted as external axioms, but the red-team report must still list them.",
+      "review_status": "HUMAN_REVIEW_REQUIRED"
+    }
+  ],
+  "prohibited_trust_hiding": [
+    "opaque declarations",
+    "admit",
+    "unlisted sorry or sorryAx",
+    "evaluator equality stored in a structure",
+    "local invariance stored in a structure",
+    "representative independence stored in a structure",
+    "compiler soundness hidden behind a certificate",
+    "large assumptions package in the final theorem"
+  ]
+}
