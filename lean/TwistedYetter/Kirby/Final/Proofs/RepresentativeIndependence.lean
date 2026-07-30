@@ -694,6 +694,189 @@ theorem projectorSite_contextualTraceEdge_absorbs
     (diagram.dottedCuts.projectorSite_exact dotted role)
     exponent
 
+/--
+If one edge of a finite composable trace absorbs a scalar, then every prefix
+ending strictly after that edge absorbs the same scalar.  The proof does not
+inspect any other event in the trace.
+-/
+theorem FiniteMorphismTrace.composePrefix_absorbs_of_edge
+    {C : Type*} [Category C] [Preadditive C] [Linear K C]
+    {eventCount : ℕ}
+    (trace : FiniteMorphismTrace C eventCount)
+    (scalar : K)
+    (site : Fin eventCount)
+    (edge_absorbed : scalar • trace.edge site = trace.edge site) :
+    ∀ (k : ℕ) (bound : k ≤ eventCount),
+      site.val < k →
+      scalar • trace.composePrefix k bound =
+        trace.composePrefix k bound := by
+  intro k
+  induction k with
+  | zero =>
+      intro bound site_before
+      omega
+  | succ k ih =>
+      intro bound site_before
+      rw [FiniteMorphismTrace.composePrefix]
+      by_cases site_is_last : site.val = k
+      · have site_eq :
+            site = (⟨k, Nat.lt_of_succ_le bound⟩ : Fin eventCount) :=
+          Fin.ext site_is_last
+        subst site
+        calc
+          scalar •
+              (trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound) ≫
+                trace.edge ⟨k, Nat.lt_of_succ_le bound⟩) =
+                trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound) ≫
+                (scalar •
+                  trace.edge ⟨k, Nat.lt_of_succ_le bound⟩) := by
+                    symm
+                    apply Linear.comp_smul
+          _ = trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound) ≫
+                trace.edge ⟨k, Nat.lt_of_succ_le bound⟩ := by
+                  rw [edge_absorbed]
+      · have site_before_prefix : site.val < k := by omega
+        have prefix_absorbed :=
+          ih
+            (Nat.le_trans (Nat.le_succ k) bound)
+            site_before_prefix
+        calc
+          scalar •
+              (trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound) ≫
+                trace.edge ⟨k, Nat.lt_of_succ_le bound⟩) =
+              (scalar •
+                trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound)) ≫
+                trace.edge ⟨k, Nat.lt_of_succ_le bound⟩ := by
+                  symm
+                  apply Linear.smul_comp
+          _ = trace.composePrefix k
+                  (Nat.le_trans (Nat.le_succ k) bound) ≫
+                trace.edge ⟨k, Nat.lt_of_succ_le bound⟩ := by
+                  rw [prefix_absorbed]
+
+/-- A scalar absorbed by one edge is absorbed by the complete finite trace. -/
+theorem FiniteMorphismTrace.composeAll_absorbs_of_edge
+    {C : Type*} [Category C] [Preadditive C] [Linear K C]
+    {eventCount : ℕ}
+    (trace : FiniteMorphismTrace C eventCount)
+    (scalar : K)
+    (site : Fin eventCount)
+    (edge_absorbed : scalar • trace.edge site = trace.edge site) :
+    scalar • trace.composeAll = trace.composeAll := by
+  unfold FiniteMorphismTrace.composeAll
+  exact
+    TwistedYetter.Kirby.Final.Proofs.FiniteMorphismTrace.composePrefix_absorbs_of_edge
+      trace scalar site edge_absorbed
+      eventCount (Nat.le_refl eventCount) site.isLt
+
+/--
+The signed character scalar associated with one dotted puncture word is
+absorbed by the complete closed cut-open diagram compiled by the frozen
+evaluator.
+-/
+theorem projectorSite_compileCutOpenExteriorMorphism_absorbs
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (exponent : ℤ) :
+    let punctures := diagram.dottedCuts.punctureWord dotted role
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        compileCutOpenExteriorMorphism 𝒞η.category diagram labeling =
+      compileCutOpenExteriorMorphism 𝒞η.category diagram labeling := by
+  dsimp only
+  let trace : FiniteMorphismTrace 𝒞η.category.C
+      diagram.dottedCuts.exterior.eventCount :=
+    {
+      object := fun i =>
+        ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling
+            (diagram.dottedCuts.exterior.activeOrder i))
+      edge := fun i =>
+        compileContextualCutOpenEventMorphism
+          𝒞η.category diagram labeling i
+    }
+  have initial_object_eq :
+      trace.object 0 = 𝟙_ 𝒞η.category.C :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling word))
+      diagram.dottedCuts.exterior.initialBoundaryEmpty
+  have final_object_eq :
+      trace.object (Fin.last diagram.dottedCuts.exterior.eventCount) =
+        𝟙_ 𝒞η.category.C :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling word))
+      diagram.dottedCuts.exterior.finalBoundaryEmpty
+  let site := diagram.dottedCuts.projectorSite dotted role
+  have edge_absorbed :
+      punctureWordCharacterUnit 𝒞η diagram labeling
+            (diagram.dottedCuts.punctureWord dotted role) exponent •
+          trace.edge site =
+        trace.edge site := by
+    exact projectorSite_contextualTraceEdge_absorbs
+      𝒞η diagram labeling dotted role exponent
+  have trace_absorbed :
+      punctureWordCharacterUnit 𝒞η diagram labeling
+            (diagram.dottedCuts.punctureWord dotted role) exponent •
+          trace.composeAll =
+        trace.composeAll :=
+    TwistedYetter.Kirby.Final.Proofs.FiniteMorphismTrace.composeAll_absorbs_of_edge
+      trace
+      (punctureWordCharacterUnit 𝒞η diagram labeling
+        (diagram.dottedCuts.punctureWord dotted role) exponent)
+      site edge_absorbed
+  have closed_absorbed :=
+    comp_middle_absorbs
+      (eqToHom initial_object_eq.symm)
+      trace.composeAll
+      (eqToHom final_object_eq)
+      (punctureWordCharacterUnit 𝒞η diagram labeling
+        (diagram.dottedCuts.punctureWord dotted role) exponent)
+      trace_absorbed
+  unfold compileCutOpenExteriorMorphism
+  simpa only [trace, initial_object_eq, final_object_eq, Category.assoc] using
+    closed_absorbed
+
+/--
+After applying the canonical closed-diagram evaluation, the same signed
+puncture-word scalar still acts trivially.
+-/
+theorem projectorSite_canonicalEvaluation_absorbs
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (exponent : ℤ) :
+    let punctures := diagram.dottedCuts.punctureWord dotted role
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent *
+        canonicalRibbonGraphicalEvaluation 𝒞η.category
+          (.morphism
+            (compileCutOpenExteriorMorphism
+              𝒞η.category diagram labeling)) =
+      canonicalRibbonGraphicalEvaluation 𝒞η.category
+        (.morphism
+          (compileCutOpenExteriorMorphism
+            𝒞η.category diagram labeling)) := by
+  dsimp only [canonicalRibbonGraphicalEvaluation,
+    RibbonExpression.interpret]
+  have morphism_absorbed :=
+    projectorSite_compileCutOpenExteriorMorphism_absorbs
+      𝒞η diagram labeling dotted role exponent
+  have scalar_absorbed :=
+    congrArg 𝒞η.category.closedScalar morphism_absorbed
+  simpa [PremodularFusionCategory.closedScalar] using scalar_absorbed
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
