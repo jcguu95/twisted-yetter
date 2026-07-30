@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Entry
+import TwistedYetter.Kirby.Final.Proofs.RepresentativeIndependence
 
 /-!
 # Frozen-frontend conditional descent
@@ -20,6 +20,7 @@ mathematical obligations.
 namespace TwistedYetter.Kirby.Final
 
 open TwistedYetter.Semantics.Independent
+open TwistedYetter.Kirby.Final.Proofs
 
 universe uK
 
@@ -198,7 +199,9 @@ theorem TwistedYetter_diffeomorphism_invariant
   exact
     ConditionalDescent.diffeomorphism_invariant_of_descent_data
       𝒞η
-      (frozenFrontendRepresentativeIndependence 𝒞η)
+      (fun marked =>
+        frozenFrontendRepresentativeIndependence
+          𝒞η marked.diagram marked.primalBoundary marked.turnedOver)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
       leftExistence.choose leftExistence.choose_spec
