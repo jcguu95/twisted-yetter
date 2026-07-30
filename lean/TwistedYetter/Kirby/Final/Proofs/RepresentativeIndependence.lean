@@ -449,6 +449,96 @@ theorem punctureWordCharacterUnit_smul_projectorHole
             𝒞η.category diagram labeling punctures)))
     projector_eq
 
+/--
+Adding a fixed left and right exterior context is linear in the local
+morphism.  This is the bookkeeping bridge from a literal projector edge to
+the same edge inside the complete cut-open trace.
+-/
+theorem contextualizeRibbonMorphism_smul
+    (𝒞 : PremodularFusionCategory K)
+    (left before after right : RibbonWord 𝒞)
+    (map :
+      ribbonWordObject 𝒞 before ⟶
+        ribbonWordObject 𝒞 after)
+    (scalar : K) :
+    contextualizeRibbonMorphism 𝒞 left before after right (scalar • map) =
+      scalar •
+        contextualizeRibbonMorphism 𝒞 left before after right map := by
+  simp [contextualizeRibbonMorphism]
+
+/-- A scalar absorbed by a local edge remains absorbed after adding context. -/
+theorem contextualizeRibbonMorphism_absorbs
+    (𝒞 : PremodularFusionCategory K)
+    (left before after right : RibbonWord 𝒞)
+    (map :
+      ribbonWordObject 𝒞 before ⟶
+        ribbonWordObject 𝒞 after)
+    (scalar : K)
+    (absorbed : scalar • map = map) :
+    scalar • contextualizeRibbonMorphism 𝒞 left before after right map =
+      contextualizeRibbonMorphism 𝒞 left before after right map := by
+  rw [← contextualizeRibbonMorphism_smul]
+  rw [absorbed]
+
+/--
+The puncture character scalar is absorbed by a dotted projector in every
+fixed exterior context.
+-/
+theorem punctureWordCharacterUnit_smul_contextualProjectorHole
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (punctures : List (DottedPuncture diagram.trace))
+    (pairing :
+      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible)
+    (left right : List diagram.trace.StrandId)
+    (exponent : ℤ) :
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        contextualizeRibbonMorphism 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling left)
+          (exteriorWord 𝒞η.category diagram labeling
+            (CutOpenEvent.projectorHole dotted punctures).beforeWord)
+          (exteriorWord 𝒞η.category diagram labeling
+            (CutOpenEvent.projectorHole dotted punctures).afterWord)
+          (exteriorWord 𝒞η.category diagram labeling right)
+          (compileCutOpenEventMorphism
+            𝒞η.category diagram labeling
+            (.projectorHole dotted punctures) pairing) =
+      contextualizeRibbonMorphism 𝒞η.category
+        (exteriorWord 𝒞η.category diagram labeling left)
+        (exteriorWord 𝒞η.category diagram labeling
+          (CutOpenEvent.projectorHole dotted punctures).beforeWord)
+        (exteriorWord 𝒞η.category diagram labeling
+          (CutOpenEvent.projectorHole dotted punctures).afterWord)
+        (exteriorWord 𝒞η.category diagram labeling right)
+        (compileCutOpenEventMorphism
+          𝒞η.category diagram labeling
+          (.projectorHole dotted punctures) pairing) := by
+  apply contextualizeRibbonMorphism_absorbs
+  exact punctureWordCharacterUnit_smul_projectorHole
+    𝒞η diagram labeling dotted punctures pairing exponent
+
+/--
+Absorption by one middle morphism survives arbitrary morphisms before and
+after it.  This lemma will be applied first to the equality transports around
+one contextual edge and then to the prefix and suffix of the finite trace.
+-/
+theorem comp_middle_absorbs
+    {𝒞 : PremodularFusionCategory K}
+    {W X Y Z : 𝒞.C}
+    (beforeMap : W ⟶ X)
+    (middle : X ⟶ Y)
+    (afterMap : Y ⟶ Z)
+    (scalar : K)
+    (absorbed : scalar • middle = middle) :
+    scalar • (beforeMap ≫ middle ≫ afterMap) =
+      beforeMap ≫ middle ≫ afterMap := by
+  calc
+    scalar • (beforeMap ≫ middle ≫ afterMap) =
+        beforeMap ≫ (scalar • middle) ≫ afterMap := by simp
+    _ = beforeMap ≫ middle ≫ afterMap := by rw [absorbed]
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
