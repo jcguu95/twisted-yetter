@@ -877,6 +877,280 @@ theorem projectorSite_canonicalEvaluation_absorbs
     congrArg 𝒞η.category.closedScalar morphism_absorbed
   simpa [PremodularFusionCategory.closedScalar] using scalar_absorbed
 
+/--
+A signed accumulator over a finite list is its initial value plus the finite
+sum of the selected occurrence weights.
+-/
+private theorem foldl_add_if_eq_add_sum_get
+    {α : Type*}
+    (items : List α)
+    (selected : α → Prop)
+    [DecidablePred selected]
+    (weight : α → ℤ)
+    (initial : ℤ) :
+    items.foldl
+        (fun total item =>
+          if selected item then total + weight item else total)
+        initial =
+      initial +
+        ∑ index : Fin items.length,
+          if selected (items.get index) then
+            weight (items.get index)
+          else
+            0 := by
+  induction items generalizing initial with
+  | nil =>
+      simp
+  | cons head tail ih =>
+      simp only [List.foldl]
+      rw [ih]
+      change
+        (if selected head then initial + weight head else initial) +
+            (∑ index : Fin tail.length,
+              if selected (tail.get index) then
+                weight (tail.get index)
+              else
+                0) =
+          initial +
+            ∑ index : Fin (tail.length + 1),
+              if selected ((head :: tail).get index) then
+                weight ((head :: tail).get index)
+              else
+                0
+      rw [Fin.sum_univ_succ]
+      by_cases head_selected : selected head
+      · simp [head_selected, add_assoc]
+      · simp [head_selected]
+
+/-- Signed contribution of one puncture to one fixed two-handle incidence. -/
+private noncomputable def punctureIncidenceContribution
+    {trace : CombinatorialLinkTrace}
+    (twoHandle : trace.ComponentId)
+    (puncture : DottedPuncture trace) : ℤ := by
+  classical
+  exact
+    if puncture.twoHandleComponent = twoHandle then
+      puncture.characterExponentSign
+    else
+      0
+
+/--
+The frozen primal `2 → 1` incidence coefficient is exactly the signed sum of
+the corresponding puncture occurrences.  This unfolds, rather than assumes,
+the incidence convention used by the turnover complex.
+-/
+theorem twoOneIncidence_eq_sum_punctureOccurrences
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (one : Fin diagram.handles.hOne)
+    (two : Fin diagram.handles.hTwo) :
+    let dotted := diagram.handles.oneHandleIndex one
+    let twoHandle := diagram.handles.twoHandleIndex two
+    let punctures :=
+      diagram.dottedCuts.punctureWord dotted.1 dotted.2
+    twoOneIncidence diagram one two =
+      ∑ index : Fin punctures.length,
+        punctureIncidenceContribution twoHandle.1
+          (punctures.get index) := by
+  classical
+  dsimp only
+  unfold twoOneIncidence
+  simpa only [zero_add, punctureIncidenceContribution] using
+    foldl_add_if_eq_add_sum_get
+      (diagram.dottedCuts.punctureWord
+        (diagram.handles.oneHandleIndex one).1
+        (diagram.handles.oneHandleIndex one).2)
+      (fun puncture =>
+        puncture.twoHandleComponent =
+          (diagram.handles.twoHandleIndex two).1)
+      DottedPuncture.characterExponentSign
+      0
+
+/-- The unique primal two-handle index carried by one puncture occurrence. -/
+private def punctureTwoHandleIndex
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (puncture : DottedPuncture diagram.trace) :
+    Fin diagram.handles.hTwo :=
+  diagram.handles.twoHandleIndex.symm
+    ⟨puncture.twoHandleComponent, puncture.two_handle_role⟩
+
+/-- The exterior compiler reads the same two-handle label as the puncture. -/
+theorem exteriorStrandLabel_puncture_eq_labeling
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    exteriorStrandLabel 𝒞 diagram labeling puncture.inputStrand =
+      labeling (punctureTwoHandleIndex diagram puncture) := by
+  unfold exteriorStrandLabel punctureTwoHandleIndex
+  simp only [puncture.input_on_two_handle]
+  split
+  · congr
+  · rename_i role_is_dotted
+    exact False.elim (role_is_dotted puncture.two_handle_role)
+
+/-- Component equality and the corresponding two-handle index equality agree. -/
+private theorem punctureTwoHandleIndex_eq_iff
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (puncture : DottedPuncture diagram.trace)
+    (two : Fin diagram.handles.hTwo) :
+    punctureTwoHandleIndex diagram puncture = two ↔
+      puncture.twoHandleComponent =
+        (diagram.handles.twoHandleIndex two).1 := by
+  constructor
+  · intro index_eq
+    have component_eq := congrArg
+      (fun index => (diagram.handles.twoHandleIndex index).1)
+      index_eq
+    simpa [punctureTwoHandleIndex] using component_eq
+  · intro component_eq
+    apply diagram.handles.twoHandleIndex.injective
+    apply Subtype.ext
+    simpa [punctureTwoHandleIndex] using component_eq
+
+/-- A finite product of powers with common base is the power of the sum. -/
+private theorem finset_prod_zpow_eq_zpow_sum
+    {G : Type*} [CommGroup G]
+    {ι : Type*}
+    (items : Finset ι)
+    (base : G)
+    (exponent : ι → ℤ) :
+    (∏ item ∈ items, base ^ exponent item) =
+      base ^ (∑ item ∈ items, exponent item) := by
+  classical
+  induction items using Finset.induction_on with
+  | empty =>
+      simp
+  | @insert item items not_mem ih =>
+      simp [not_mem, ih, zpow_add]
+
+/-- A list product is the corresponding product over its finite positions. -/
+private theorem list_map_prod_eq_fin_prod_get
+    {α M : Type*} [CommMonoid M]
+    (items : List α)
+    (map : α → M) :
+    (items.map map).prod =
+      ∏ index : Fin items.length, map (items.get index) := by
+  simpa using (Fin.prod_univ_fun_getElem items map).symm
+
+/--
+For one dotted handle, the puncture-word character factor is the product over
+two-handle labels with exponents given by the frozen incidence row.
+-/
+theorem punctureWordCharacterUnit_eq_incidenceProduct
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (one : Fin diagram.handles.hOne)
+    (exponent : ℤ) :
+    let dotted := diagram.handles.oneHandleIndex one
+    let punctures :=
+      diagram.dottedCuts.punctureWord dotted.1 dotted.2
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent =
+      ((∏ two,
+        𝒞η.character.value (labeling two) ^
+          (twoOneIncidence diagram one two * exponent) : Kˣ) : K) := by
+  classical
+  dsimp only
+  let punctures :=
+    diagram.dottedCuts.punctureWord
+      (diagram.handles.oneHandleIndex one).1
+      (diagram.handles.oneHandleIndex one).2
+  have occurrence_label :
+      ∀ index : Fin punctures.length,
+        exteriorStrandLabel 𝒞η.category diagram labeling
+            (punctures.get index).inputStrand =
+          labeling (punctureTwoHandleIndex diagram
+            (punctures.get index)) := by
+    intro index
+    exact exteriorStrandLabel_puncture_eq_labeling
+      𝒞η.category diagram labeling (punctures.get index)
+  have fiber_product :
+      (∏ two : Fin diagram.handles.hTwo,
+          ∏ index : Fin punctures.length with
+            punctureTwoHandleIndex diagram (punctures.get index) = two,
+            𝒞η.character.value (labeling two) ^
+              ((punctures.get index).characterExponentSign * exponent)) =
+        ∏ index : Fin punctures.length,
+          𝒞η.character.value
+              (labeling
+                (punctureTwoHandleIndex diagram (punctures.get index))) ^
+            ((punctures.get index).characterExponentSign * exponent) := by
+    calc
+      _ = ∏ two : Fin diagram.handles.hTwo,
+          ∏ index : Fin punctures.length with
+            punctureTwoHandleIndex diagram (punctures.get index) = two,
+            𝒞η.character.value
+                (labeling
+                  (punctureTwoHandleIndex diagram (punctures.get index))) ^
+              ((punctures.get index).characterExponentSign * exponent) := by
+            apply Finset.prod_congr rfl
+            intro two _
+            apply Finset.prod_congr rfl
+            intro index index_mem
+            rw [(Finset.mem_filter.mp index_mem).2]
+      _ = _ :=
+        Finset.prod_fiberwise
+          (Finset.univ : Finset (Fin punctures.length))
+          (fun index =>
+            punctureTwoHandleIndex diagram (punctures.get index))
+          (fun index =>
+            𝒞η.character.value
+                (labeling
+                  (punctureTwoHandleIndex diagram (punctures.get index))) ^
+              ((punctures.get index).characterExponentSign * exponent))
+  rw [show
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent =
+      ((∏ index : Fin punctures.length,
+        𝒞η.character.value
+            (exteriorStrandLabel 𝒞η.category diagram labeling
+              (punctures.get index).inputStrand) ^
+          ((punctures.get index).characterExponentSign * exponent) :
+        Kˣ) : K) by
+      unfold punctureWordCharacterUnit
+      rw [list_map_prod_eq_fin_prod_get]
+      simp]
+  apply congrArg Units.val
+  change
+    (∏ index : Fin punctures.length,
+      𝒞η.character.value
+          (exteriorStrandLabel 𝒞η.category diagram labeling
+            (punctures.get index).inputStrand) ^
+        ((punctures.get index).characterExponentSign * exponent)) =
+      ∏ two,
+        𝒞η.character.value (labeling two) ^
+          (twoOneIncidence diagram one two * exponent)
+  rw [show
+    (∏ index : Fin punctures.length,
+      𝒞η.character.value
+          (exteriorStrandLabel 𝒞η.category diagram labeling
+            (punctures.get index).inputStrand) ^
+        ((punctures.get index).characterExponentSign * exponent)) =
+      ∏ index : Fin punctures.length,
+        𝒞η.character.value
+            (labeling
+              (punctureTwoHandleIndex diagram (punctures.get index))) ^
+          ((punctures.get index).characterExponentSign * exponent) by
+      apply Finset.prod_congr rfl
+      intro index _
+      rw [occurrence_label index]]
+  rw [← fiber_product]
+  apply Finset.prod_congr rfl
+  intro two _
+  rw [finset_prod_zpow_eq_zpow_sum]
+  congr 1
+  rw [← Finset.sum_mul]
+  rw [twoOneIncidence_eq_sum_punctureOccurrences]
+  congr 1
+  unfold punctureIncidenceContribution
+  rw [← Finset.sum_filter]
+  apply Finset.sum_congr
+  · ext index
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+    exact punctureTwoHandleIndex_eq_iff
+      diagram (punctures.get index) two
+  · intro index _
+    rfl
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
