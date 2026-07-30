@@ -539,6 +539,161 @@ theorem comp_middle_absorbs
         beforeMap ≫ (scalar • middle) ≫ afterMap := by simp
     _ = beforeMap ≫ middle ≫ afterMap := by rw [absorbed]
 
+/--
+An event identified with a projector hole inherits the projector-hole
+absorption theorem.  Keeping the event as an explicit variable lets Lean
+transport its pairing proof and its source/target words together.
+-/
+theorem compileEvent_absorbs_of_eq_projectorHole
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (event : CutOpenEvent diagram.trace)
+    (dotted : diagram.trace.ComponentId)
+    (punctures : List (DottedPuncture diagram.trace))
+    (event_eq : event = .projectorHole dotted punctures)
+    (pairing : event.PairingCompatible)
+    (exponent : ℤ) :
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        compileCutOpenEventMorphism
+          𝒞η.category diagram labeling event pairing =
+      compileCutOpenEventMorphism
+        𝒞η.category diagram labeling event pairing := by
+  subst event
+  exact punctureWordCharacterUnit_smul_projectorHole
+    𝒞η diagram labeling dotted punctures pairing exponent
+
+/--
+If an exact event of the frozen trace is the recorded projector hole, then
+the corresponding fully contextualized compiled edge absorbs the signed
+puncture-word character scalar.
+-/
+theorem contextualTraceEdge_absorbs_of_projectorSite
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (site : Fin diagram.dottedCuts.exterior.eventCount)
+    (dotted : diagram.trace.ComponentId)
+    (punctures : List (DottedPuncture diagram.trace))
+    (site_exact :
+      diagram.dottedCuts.exterior.events site =
+        .projectorHole dotted punctures)
+    (exponent : ℤ) :
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        compileContextualCutOpenEventMorphism
+          𝒞η.category diagram labeling site =
+      compileContextualCutOpenEventMorphism
+        𝒞η.category diagram labeling site := by
+  let event := diagram.dottedCuts.exterior.events site
+  let left := eventLeftContext diagram site
+  let right := eventRightContext diagram site
+  have before_object_eq :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling word))
+      (eventTransitionEquations diagram site).1
+  have after_object_eq :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling word))
+      (eventTransitionEquations diagram site).2
+  have before_context_object_eq :
+      ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling
+            (left ++ event.beforeWord ++ right)) =
+        ribbonWordObject 𝒞η.category
+          (List.append
+            (List.append
+              (exteriorWord 𝒞η.category diagram labeling left)
+              (exteriorWord 𝒞η.category diagram labeling event.beforeWord))
+            (exteriorWord 𝒞η.category diagram labeling right)) := by
+    simp [exteriorWord, List.map_append]
+  have after_context_object_eq :
+      ribbonWordObject 𝒞η.category
+          (exteriorWord 𝒞η.category diagram labeling
+            (left ++ event.afterWord ++ right)) =
+        ribbonWordObject 𝒞η.category
+          (List.append
+            (List.append
+              (exteriorWord 𝒞η.category diagram labeling left)
+              (exteriorWord 𝒞η.category diagram labeling event.afterWord))
+            (exteriorWord 𝒞η.category diagram labeling right)) := by
+    simp [exteriorWord, List.map_append]
+  have event_absorbed :
+      punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+          compileCutOpenEventMorphism
+            𝒞η.category diagram labeling event
+            (diagram.dottedCuts.exterior.pairingCompatible site) =
+        compileCutOpenEventMorphism
+          𝒞η.category diagram labeling event
+          (diagram.dottedCuts.exterior.pairingCompatible site) := by
+    exact compileEvent_absorbs_of_eq_projectorHole
+      𝒞η diagram labeling event dotted punctures
+      (by simpa only [event] using site_exact)
+      (diagram.dottedCuts.exterior.pairingCompatible site)
+      exponent
+  have middle_absorbed :=
+    contextualizeRibbonMorphism_absorbs
+      𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling left)
+      (exteriorWord 𝒞η.category diagram labeling event.beforeWord)
+      (exteriorWord 𝒞η.category diagram labeling event.afterWord)
+      (exteriorWord 𝒞η.category diagram labeling right)
+      (compileCutOpenEventMorphism
+        𝒞η.category diagram labeling event
+        (diagram.dottedCuts.exterior.pairingCompatible site))
+      (punctureWordCharacterUnit
+        𝒞η diagram labeling punctures exponent)
+      event_absorbed
+  have whole_absorbed :=
+    comp_middle_absorbs
+      (eqToHom before_object_eq ≫
+        eqToHom before_context_object_eq)
+      (contextualizeRibbonMorphism 𝒞η.category
+        (exteriorWord 𝒞η.category diagram labeling left)
+        (exteriorWord 𝒞η.category diagram labeling event.beforeWord)
+        (exteriorWord 𝒞η.category diagram labeling event.afterWord)
+        (exteriorWord 𝒞η.category diagram labeling right)
+        (compileCutOpenEventMorphism
+          𝒞η.category diagram labeling event
+          (diagram.dottedCuts.exterior.pairingCompatible site)))
+      (eqToHom after_context_object_eq.symm ≫
+        eqToHom after_object_eq.symm)
+      (punctureWordCharacterUnit
+        𝒞η diagram labeling punctures exponent)
+      middle_absorbed
+  unfold compileContextualCutOpenEventMorphism
+  simpa only [event, left, right, Category.assoc] using whole_absorbed
+
+/--
+The projector site selected by `DottedCutData` is therefore an absorbing edge
+of the actual frozen evaluator trace.
+-/
+theorem projectorSite_contextualTraceEdge_absorbs
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (exponent : ℤ) :
+    let punctures := diagram.dottedCuts.punctureWord dotted role
+    let site := diagram.dottedCuts.projectorSite dotted role
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        compileContextualCutOpenEventMorphism
+          𝒞η.category diagram labeling site =
+      compileContextualCutOpenEventMorphism
+        𝒞η.category diagram labeling site := by
+  dsimp only
+  exact contextualTraceEdge_absorbs_of_projectorSite
+    𝒞η diagram labeling
+    (diagram.dottedCuts.projectorSite dotted role)
+    dotted
+    (diagram.dottedCuts.punctureWord dotted role)
+    (diagram.dottedCuts.projectorSite_exact dotted role)
+    exponent
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
