@@ -395,6 +395,60 @@ theorem characterCoupon_projectorHole_left
   rw [characterCoupon_tensorUnitProjector_left]
   congr 1
 
+/--
+The signed puncture-word scalar is invisible on the literal dotted projector
+edge.  This is the scalar form used by the finite labeling sum.
+-/
+theorem punctureWordCharacterUnit_smul_projectorHole
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (punctures : List (DottedPuncture diagram.trace))
+    (pairing :
+      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible)
+    (exponent : ℤ) :
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        compileCutOpenEventMorphism
+          𝒞η.category diagram labeling
+          (.projectorHole dotted punctures) pairing =
+      compileCutOpenEventMorphism
+        𝒞η.category diagram labeling
+        (.projectorHole dotted punctures) pairing := by
+  let X :=
+    ribbonWordObject 𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling
+        (punctures.map DottedPuncture.inputStrand))
+  have coupon_eq :
+      isoIntPowerHom (𝒞η.character.iso.app X) exponent =
+        punctureWordCharacterUnit
+            𝒞η diagram labeling punctures exponent • 𝟙 X := by
+    simpa [X] using
+      characterCoupon_on_punctureWord
+        𝒞η diagram labeling punctures exponent
+  have projector_eq :
+    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+        tensorUnitProjector 𝒞η.category X =
+      tensorUnitProjector 𝒞η.category X := by
+    rw [show
+      punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+          tensorUnitProjector 𝒞η.category X =
+        (punctureWordCharacterUnit
+            𝒞η diagram labeling punctures exponent • 𝟙 X) ≫
+          tensorUnitProjector 𝒞η.category X by simp]
+    rw [← coupon_eq]
+    exact characterCoupon_tensorUnitProjector_left
+      𝒞η.character X exponent
+  rw [compile_projectorHole_eq_explicit]
+  unfold explicitProjectorHoleMorphism
+  simpa [X] using congrArg
+    (fun map => map ≫
+      eqToHom
+        (congrArg (ribbonWordObject 𝒞η.category)
+          (exteriorWord_of_punctures_eq
+            𝒞η.category diagram labeling punctures)))
+    projector_eq
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
