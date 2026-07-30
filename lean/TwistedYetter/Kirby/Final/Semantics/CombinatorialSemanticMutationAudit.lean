@@ -45,6 +45,20 @@ theorem puncture_exponent_matches_direction
       puncture.direction.characterExponentSign :=
   puncture.exponent_matches_direction
 
+theorem puncture_input_orientation_matches_direction
+    {trace : CombinatorialLinkTrace}
+    (puncture : DottedPuncture trace) :
+    (trace.strands puncture.inputStrand).orientation =
+      puncture.direction.strandOrientation :=
+  puncture.input_orientation_matches_direction
+
+theorem puncture_output_orientation_matches_direction
+    {trace : CombinatorialLinkTrace}
+    (puncture : DottedPuncture trace) :
+    (trace.strands puncture.outputStrand).orientation =
+      puncture.direction.strandOrientation :=
+  puncture.output_orientation_matches_direction
+
 theorem puncture_exponent_is_signed
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
@@ -68,9 +82,10 @@ theorem handle_counts_are_exact_equivalences
 
 theorem kirbyH₂_is_primal_kernel_modulo_image
     {diagram : CombinatorialSpecialKirbyDiagram}
-    (degreeThree : DegreeThreeBoundaryData diagram) :
-    KirbyH₂ degreeThree =
-      (TwoCycles diagram ⧸ (boundaryAsCycle degreeThree).range) :=
+    (degreeThree : PrimalDegreeThreeBoundaryData diagram) :
+    PrimalKirbyH₂ degreeThree =
+      (PrimalTwoCycles diagram ⧸
+        (primalBoundaryAsCycle degreeThree).range) :=
   rfl
 
 theorem event_transition_has_one_common_exterior

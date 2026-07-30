@@ -43,4 +43,4 @@ this import closure must not contain an existing presentation, evaluator,
 move compiler, or comparison bridge.
 -/
 
--- semantic-freeze-padding: 3397
+-- semantic-freeze-padding: 603

@@ -41,6 +41,18 @@ def PunctureDirection.characterExponentSign : PunctureDirection → ℤ
   | .withDiskOrientation => 1
   | .againstDiskOrientation => -1
 
+/--
+The local ribbon direction induced on a cut boundary by the oriented dotted
+disk.  This restores the compatibility used by the original independent
+evaluator specification: disk intersection direction and ribbon orientation
+are distinct notions, but a valid puncture must make them agree through this
+fixed convention.
+-/
+def PunctureDirection.strandOrientation :
+    PunctureDirection → StrandOrientation
+  | .withDiskOrientation => .positive
+  | .againstDiskOrientation => .negative
+
 structure Component where
   role : ComponentRole
   orientation : StrandOrientation
@@ -298,6 +310,17 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
       (trace.strands outputStrand).orientation
   exponent_matches_direction :
     characterExponentSign = direction.characterExponentSign
+  input_orientation_matches_direction :
+    (trace.strands inputStrand).orientation =
+      direction.strandOrientation
+
+theorem DottedPuncture.output_orientation_matches_direction
+    {trace : CombinatorialLinkTrace}
+    (puncture : DottedPuncture trace) :
+    (trace.strands puncture.outputStrand).orientation =
+      puncture.direction.strandOrientation :=
+  puncture.orientation_preserved.symm.trans
+    puncture.input_orientation_matches_direction
 
 /--
 The category-neutral event language of the tangle obtained after cutting all
@@ -525,4 +548,4 @@ structure CombinatorialSpecialKirbyDiagram where
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1595
+-- semantic-freeze-padding: 13583

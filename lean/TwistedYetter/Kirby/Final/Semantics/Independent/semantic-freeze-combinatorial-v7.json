@@ -1,0 +1,70 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v7",
+  "recorded_at_utc": "2026-07-30T02:32:50Z",
+  "semantic_content_parent_commit": "4b1e3f5719252449bf9272bff635b81dd68f5fb5",
+  "supersedes": "semantic-freeze-combinatorial-v6.json",
+  "historical_v1_v2_v3_v4_v5_v6_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "RESTORE_PUNCTURE_DIRECTION_RIBBON_ORIENTATION_COMPATIBILITY",
+    "before": "PunctureDirection fixed only the character exponent sign. StrandOrientation was independent, so a puncture could assign the signed character exponent for one disk-intersection direction while exposing the opposite ribbon object orientation.",
+    "after": "PunctureDirection and StrandOrientation remain distinct notions, but every valid DottedPuncture must satisfy the fixed compatibility withDiskOrientation -> positive and againstDiskOrientation -> negative. Output compatibility is derived from strand-orientation preservation.",
+    "reason": "The representative-independence calculation must apply one character coupon to the exact forward/dual puncture word. Its scalar action has the signed exponent prescribed by disk intersection only when the cut-boundary ribbon orientation is compatibly fixed.",
+    "historical_independent_spec_commit": "957dba2",
+    "regression_recognized": true,
+    "adds_axiom": false,
+    "adds_topology_certificate": false,
+    "mentions_evaluator_equality": false,
+    "explicit_frozen_axiom_count": 8
+  },
+  "included_kernel_checked_category_results": {
+    "source_commit": "4b1e3f5719252449bf9272bff635b81dd68f5fb5",
+    "character_on_dual_objects": "KERNEL_CHECKED",
+    "integer_character_power_as_scalar_morphism": "KERNEL_CHECKED",
+    "tensor_unit_projector_absorbs_character_powers": "KERNEL_CHECKED",
+    "adds_axiom": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "combinatorial_semantic_mutation_audit_build": "PASS",
+    "puncture_input_orientation_compatibility": "TYPE_LEVEL_FIELD",
+    "puncture_output_orientation_compatibility": "KERNEL_DERIVED",
+    "backend_representative_independence": "NOT_YET_ESTABLISHED_AFTER_FREEZE",
+    "unconditional_premodular_invariance": "NOT_CLAIMED"
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "0003dccf77bd2fe517c4e2184894b244eb1bde00937221eae3bcc1823f833a40",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "Entry.lean": "000ae8c244f0054000e1bf82cec59e3d263cee042c9c6ed49da5d78767c5168b",
+    "Evaluator.lean": "000fa21a95c123a110036b578f18d186979d91ab7aaa261f4a1ea238b3f602a3",
+    "Graphical.lean": "0003ba6c411217495316a67dc695c50769f898eaa85da06ba9d0fc0c248df5a2",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "Moves.lean": "000c55068206f267976580abf9730e6b266e8d2cf68bacdc86f5de24fad84446"
+  },
+  "build": {
+    "command": "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.CombinatorialSemanticMutationAudit TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+    "status": "PASS",
+    "lean": "4.29.1",
+    "lake": "5.0.0-src+f72c35b",
+    "platform": "arm64-apple-darwin24.6.0",
+    "macos": "15.7.2"
+  },
+  "change_budget": {
+    "frozen_semantics_edits_consumed": true,
+    "further_semantic_edits_before_user_review": "FORBIDDEN",
+    "backend_must_stop_on_next_semantic_gap": true
+  },
+  "non_claims": [
+    "PunctureDirection and StrandOrientation have not been identified as the same mathematical notion.",
+    "This manifest does not prove representative independence.",
+    "This manifest does not prove any elementary Kirby-move invariance.",
+    "This manifest does not prove a four-manifold invariant theorem.",
+    "No backend or legacy numerical artifact is recertified."
+  ]
+}

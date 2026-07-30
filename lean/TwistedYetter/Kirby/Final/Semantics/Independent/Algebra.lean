@@ -667,4 +667,4 @@ structure TwistedPremodularCategory
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 6044
+-- semantic-freeze-padding: 5768

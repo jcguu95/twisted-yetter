@@ -40,4 +40,4 @@ noncomputable def evaluateMarking
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1740
+-- semantic-freeze-padding: 618
