@@ -28,8 +28,10 @@ Dependency order:
 `EntranceAxioms` contains the global manifold, dotted-disk, turnover, and
 category-literature boundaries.  Four move-local, category-neutral topology
 predicates are declared next to the move grammar in `Moves`, so their proof
-arguments remain visible in every `ElementaryMove` constructor.  The complete
-list of eighteen explicit axioms is recorded in
+arguments remain visible in every `ElementaryMove` constructor.  Three
+additional clean attach/finite transport/detach interpretation boundaries are
+declared individually in `EntranceAxioms`.  The complete list of twenty-one
+explicit axioms is recorded in
 `explicit-trust-boundary-v1.json`.
 
 Domain-defining category laws remain visible in `Algebra`; combinatorial
@@ -43,4 +45,4 @@ this import closure must not contain an existing presentation, evaluator,
 move compiler, or comparison bridge.
 -/
 
--- semantic-freeze-padding: 603
+-- semantic-freeze-padding: 878

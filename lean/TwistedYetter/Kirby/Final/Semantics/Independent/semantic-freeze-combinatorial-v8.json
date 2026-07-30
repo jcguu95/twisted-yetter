@@ -1,0 +1,69 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v8",
+  "recorded_at_utc": "2026-07-30T05:10:19Z",
+  "semantic_content_parent_commit": "7d00bbd4909dad0d741d1c0015debae3011aa799",
+  "supersedes": "semantic-freeze-combinatorial-v7.json",
+  "historical_v1_through_v7_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXPLICIT_CLEAN_BAND_GRAPHICAL_INTERPRETATION_BOUNDARIES",
+    "reason": "The frozen clean-band topology data did not itself identify the exact typed ribbon expressions used at clean attachment, finite coupon transport, and clean detachment. Rebuilding embedded-band topology and the complete graphical interpreter is outside the project scope.",
+    "approved_external_boundaries": [
+      "cleanAttach_hasStandardGraphicalInterpretation",
+      "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "cleanDetach_hasStandardGraphicalInterpretation"
+    ],
+    "explicit_frozen_axiom_count": 21,
+    "adds_evaluator_equality_axiom": false,
+    "adds_local_invariance_axiom": false,
+    "adds_representative_independence_axiom": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "clean_band_slide_theorem_build": "PASS",
+    "clean_band_slide_scalar_equality": "KERNEL_DERIVED",
+    "representative_independence": "KERNEL_DERIVED",
+    "exhaustive_eight_move_local_invariance": "BLOCKED_OUTSIDE_THIS_CHANGE",
+    "four_manifold_invariant": "NOT_YET_ESTABLISHED"
+  },
+  "clean_band_slide_axiom_closure": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedRibbonIsotopyWitness",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "shum_framedRibbonCoherence"
+  ],
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "0003dccf77bd2fe517c4e2184894b244eb1bde00937221eae3bcc1823f833a40",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "0001214f2476ff917243a2f00ab6e39f6d1dfc9254fc2844f43a43ef0d3d4385",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "000fa21a95c123a110036b578f18d186979d91ab7aaa261f4a1ea238b3f602a3",
+    "Graphical.lean": "0003ba6c411217495316a67dc695c50769f898eaa85da06ba9d0fc0c248df5a2",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "Moves.lean": "000c55068206f267976580abf9730e6b266e8d2cf68bacdc86f5de24fad84446"
+  },
+  "supporting_artifacts": {
+    "explicit_trust_boundary_sha256": "cd80207299cf1e625a2d5206de6e0b2ab90d9210c8d06d32c689a6b2e591ef8f",
+    "clean_band_slide_proof_sha256": "2ae9797c126771b30b10799d70fab9a80a9ab3efd34502668ea2c8419f9882eb",
+    "source_audit_json": "/private/tmp/lean-red-team-clean-band.json",
+    "source_audit_markdown": "/private/tmp/lean-red-team-clean-band.zh-TW.md"
+  },
+  "non_claims": [
+    "The three approved boundaries have not been proved from embedded-band topology.",
+    "This does not establish framed-isotopy or cancellation invariance.",
+    "This does not establish the exhaustive eight-move theorem.",
+    "This does not establish the final four-manifold invariant."
+  ]
+}

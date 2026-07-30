@@ -1,0 +1,53 @@
+{
+  "schema": "twisted-yetter/frozen-clean-band-slide-status/1",
+  "recorded_at_utc": "2026-07-30T05:10:19Z",
+  "git_parent_commit": "7d00bbd4909dad0d741d1c0015debae3011aa799",
+  "status": "CLEAN_BAND_SLIDE_INVARIANCE_ESTABLISHED_FINAL_ROUTE_STILL_BLOCKED",
+  "frozen_semantics": {
+    "version": "semantic-freeze-combinatorial-v8",
+    "explicit_axiom_count": 21,
+    "new_human_approved_boundaries": [
+      "cleanAttach_hasStandardGraphicalInterpretation",
+      "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "cleanDetach_hasStandardGraphicalInterpretation"
+    ]
+  },
+  "kernel_checked_theorem": {
+    "name": "TwistedYetter.Kirby.Final.Proofs.cleanBandSlide_preserves_evaluation",
+    "scope": [
+      "one-over-one clean band slides",
+      "two-over-one clean band slides",
+      "two-over-two clean band slides"
+    ],
+    "proof_file": "lean/TwistedYetter/Kirby/Final/Proofs/CleanBandSlides.lean",
+    "build_status": "PASS"
+  },
+  "axiom_closure": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedRibbonIsotopyWitness",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "shum_framedRibbonCoherence"
+  ],
+  "verification": {
+    "firewall": "PASS",
+    "independent_entry": "PASS",
+    "clean_band_slide_proof": "PASS",
+    "final_theorem": "FAIL_EXPECTED_UNKNOWN_frozenFrontendLocalMoveInvariance"
+  },
+  "remaining_local_move_obligations": [
+    "framed isotopy: connect the frozen framed-isotopy script to a typed ribbon-isotopy witness",
+    "one-two birth/death: prove the role-aware normalization and zero-character cancellation",
+    "two-three birth/death: prove the turned-over normalization cancellation"
+  ],
+  "non_claims": [
+    "The exhaustive eight-move local invariance theorem is not established.",
+    "The final four-manifold invariant theorem is not established.",
+    "No legacy backend theorem was imported."
+  ]
+}

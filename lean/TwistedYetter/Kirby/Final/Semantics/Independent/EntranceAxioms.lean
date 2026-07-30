@@ -91,6 +91,116 @@ axiom shum_framedRibbonCoherence
     FramedRibbonIsotopic left right →
     left.interpret = right.interpret
 
+/-! ## Clean band-slide graphical interpretation -/
+
+/--
+The two typed graphical stages between clean attachment and clean detachment.
+
+This structure is data-only.  In particular, it contains no proof that either
+stage is the interpretation of a Kirby diagram and no evaluation equality.
+Those three external responsibilities are stated separately below.
+-/
+structure CleanBandGraphicalStages
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (_slide : CleanBandSlide source.diagram target.diagram)
+    (_sourceCycle : ThamTwoCycles source.turnedOver) where
+  attached : ClosedRibbonExpression 𝒞η.category
+  detachable : ClosedRibbonExpression 𝒞η.category
+
+/--
+The exact normalized closed graphical expression compiled from one marked
+diagram and one THAM-side cycle.
+
+Unlike `evaluateCycle`, this retains the endomorphism of the tensor unit.  It
+therefore permits attach, transport, and detach to be compared at the
+graphical-morphism level before scalarization.
+-/
+noncomputable def normalizedCycleExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    (marked : HomologicallyMarkedDiagram)
+    (cycle : ThamTwoCycles marked.turnedOver) :
+    ClosedRibbonExpression 𝒞η.category :=
+  .morphism
+    (thamDefinition511Normalization
+          𝒞η.category.globalDimension
+          marked.diagram.handles.hThree
+          marked.diagram.handles.hTwo
+          marked.diagram.handles.hOne •
+      ∑ labeling : TwoHandleLabeling 𝒞η.category marked.diagram,
+        (ordinaryKirbyWeight 𝒞η.category labeling *
+            characterWeight 𝒞η marked.turnedOver labeling cycle) •
+          (canonicalRoleAwareGraphCompiler
+            𝒞η marked.diagram marked.primalBoundary marked.turnedOver
+              labeling cycle).graph.interpret)
+
+/--
+Clean attachment has the standard typed graphical interpretation.
+
+The axiom supplies the two intermediate expressions as visible data and says
+only that the exact normalized source expression is framed-ribbon isotopic to
+the attached expression.  It does not assert scalar evaluation equality or
+the final slide result.
+-/
+axiom cleanAttach_hasStandardGraphicalInterpretation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (slide : CleanBandSlide source.diagram target.diagram)
+    (slideRealizes :
+      CleanBandSlideRealizesStandardKirbySlide slide)
+    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    ∃ stages : CleanBandGraphicalStages 𝒞η slide sourceCycle,
+      FramedRibbonIsotopic
+        (normalizedCycleExpression 𝒞η source sourceCycle)
+        stages.attached
+
+/--
+The finite coupon route gives a typed naturality derivation between the exact
+attached and detachable expressions selected by the clean-attach boundary.
+
+This is the formal stopping point for the compactness/generic-position
+argument.  The returned object is proof-relevant graphical transport, not an
+evaluation equality.
+-/
+axiom finiteCouponTransport_hasTypedGraphicalDerivation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (slide : CleanBandSlide source.diagram target.diagram)
+    (slideRealizes :
+      CleanBandSlideRealizesStandardKirbySlide slide)
+    (transportComplete :
+      FiniteCouponTransportRealizesCompletePath
+        slide.decomposition.transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (stages : CleanBandGraphicalStages 𝒞η slide sourceCycle) :
+    CharacterCouponTransport 𝒞η.character
+      stages.attached stages.detachable
+
+/--
+Clean detachment has the standard typed graphical interpretation.
+
+The target cycle is forced to be the cycle transported by the move's exact
+THAM chain map.  No caller may provide an unrelated target marking.
+-/
+axiom cleanDetach_hasStandardGraphicalInterpretation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (slide : CleanBandSlide source.diagram target.diagram)
+    (slideRealizes :
+      CleanBandSlideRealizesStandardKirbySlide slide)
+    (transport : ThamHandleChainTransport source target)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (stages : CleanBandGraphicalStages 𝒞η slide sourceCycle) :
+    FramedRibbonIsotopic
+      stages.detachable
+      (normalizedCycleExpression 𝒞η target
+        (transport.mapCycle sourceCycle))
+
 /-! ## Smooth four-manifold and Kirby--Cerf topology
 
 The following three declarations are the explicit foundational vocabulary.
@@ -181,3 +291,5 @@ def TwistedYetterDiffeomorphismInvarianceTarget
       evaluateMarking 𝒞η right.markedDiagram
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 289

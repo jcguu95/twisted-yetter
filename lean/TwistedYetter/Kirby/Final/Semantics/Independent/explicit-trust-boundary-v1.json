@@ -22,8 +22,8 @@
     "presentation theory",
     "topology package"
   ],
-  "explicit_axiom_count": 18,
-  "closure_warning": "This is the complete source declaration ledger, not yet the kernel dependency closure of the final theorem. A05-A10 are intended inputs for the unresolved representative-independence and local-move proofs and are not yet connected to those proofs.",
+  "explicit_axiom_count": 21,
+  "closure_warning": "This is the complete source declaration ledger, not yet the kernel dependency closure of the final theorem. A19-A21 are connected only to the kernel-checked clean-band-slide theorem; the exhaustive eight-move theorem remains unresolved.",
   "obligation_modules": [
     {
       "module_id": "CATEGORY_SEMANTICS",
@@ -411,6 +411,30 @@
       "human_meaning": "Any two correct special Kirby realizations of the same marked pair are connected by a finite movie of the exact eight allowed marked moves.",
       "source_usage": "USED_BY_FINAL_DESCENT",
       "review_status": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": "A19",
+      "name": "cleanAttach_hasStandardGraphicalInterpretation",
+      "group": "KIRBY_TO_GRAPHICAL_INTERPRETATION",
+      "human_meaning": "For a topology-certified clean band slide, the exact normalized frozen source expression is framed-ribbon isotopic to an explicit attached typed graphical stage.",
+      "source_usage": "USED_BY_CLEAN_BAND_SLIDE_THEOREM",
+      "review_status": "HUMAN_APPROVED_EXTERNAL_INTERPRETATION_BOUNDARY"
+    },
+    {
+      "id": "A20",
+      "name": "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "group": "KIRBY_TO_GRAPHICAL_INTERPRETATION",
+      "human_meaning": "A topology-certified complete finite coupon route gives a proof-relevant sequence of character-naturality rewrites from the attached typed expression to the detachable typed expression.",
+      "source_usage": "USED_BY_CLEAN_BAND_SLIDE_THEOREM",
+      "review_status": "HUMAN_APPROVED_EXTERNAL_INTERPRETATION_BOUNDARY"
+    },
+    {
+      "id": "A21",
+      "name": "cleanDetach_hasStandardGraphicalInterpretation",
+      "group": "KIRBY_TO_GRAPHICAL_INTERPRETATION",
+      "human_meaning": "For the same topology-certified clean band slide, the detachable typed stage is framed-ribbon isotopic to the exact normalized target expression with the source cycle transported by the THAM chain map.",
+      "source_usage": "USED_BY_CLEAN_BAND_SLIDE_THEOREM",
+      "review_status": "HUMAN_APPROVED_EXTERNAL_INTERPRETATION_BOUNDARY"
     }
   ],
   "flattened_non_axiom_assumption_surfaces": [
@@ -535,7 +559,9 @@
         "SpecialHandleData.twoHandleIndex",
         "PrimalDegreeThreeBoundaryData.boundaryThree",
         "HomologicallyMarkedDiagram.primalBoundary",
-        "RoleAwareCompiledTerm.graph"
+        "RoleAwareCompiledTerm.graph",
+        "CleanBandGraphicalStages.attached",
+        "CleanBandGraphicalStages.detachable"
       ],
       "derived_theorems": [
         "CombinatorialLinkTrace.componentIncidenceSatisfiesFiniteCycleConditions",
