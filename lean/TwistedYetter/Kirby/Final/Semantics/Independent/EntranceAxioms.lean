@@ -94,20 +94,53 @@ axiom shum_framedRibbonCoherence
 /-! ## Clean band-slide graphical interpretation -/
 
 /--
-The two typed graphical stages between clean attachment and clean detachment.
+The explicit standard local normal form at one endpoint of a clean band slide.
 
-This structure is data-only.  In particular, it contains no proof that either
-stage is the interpretation of a Kirby diagram and no evaluation equality.
-Those three external responsibilities are stated separately below.
+The hole object is the tensor product of the displayed moving and stationary
+simple labels.  `identityStage` and `resolvedStage` below are therefore
+definitions, not arbitrary expressions supplied by an axiom.
 -/
-structure CleanBandGraphicalStages
+structure CleanBandEndpointNormalForm
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (_slide : CleanBandSlide source.diagram target.diagram)
     (_sourceCycle : ThamTwoCycles source.turnedOver) where
-  attached : ClosedRibbonExpression 𝒞η.category
-  detachable : ClosedRibbonExpression 𝒞η.category
+  movingLabel : 𝒞η.category.simples.Simple
+  stationaryLabel : 𝒞η.category.simples.Simple
+  context :
+    RibbonExpressionContext 𝒞η.category
+      (fusionPairObject 𝒞η.category movingLabel stationaryLabel)
+      (fusionPairObject 𝒞η.category movingLabel stationaryLabel)
+      (categoryUnitObject 𝒞η.category)
+      (categoryUnitObject 𝒞η.category)
+
+def CleanBandEndpointNormalForm.identityStage
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {source target : HomologicallyMarkedDiagram}
+    {slide : CleanBandSlide source.diagram target.diagram}
+    {sourceCycle : ThamTwoCycles source.turnedOver}
+    (normalForm :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+    ClosedRibbonExpression 𝒞η.category :=
+  normalForm.context.plug
+    (identityExpression 𝒞η.category
+      (fusionPairObject 𝒞η.category
+        normalForm.movingLabel normalForm.stationaryLabel))
+
+def CleanBandEndpointNormalForm.resolvedStage
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞η : TwistedPremodularCategory K}
+    {source target : HomologicallyMarkedDiagram}
+    {slide : CleanBandSlide source.diagram target.diagram}
+    {sourceCycle : ThamTwoCycles source.turnedOver}
+    (normalForm :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+    ClosedRibbonExpression 𝒞η.category :=
+  normalForm.context.plug
+    (fusionResolutionExpression 𝒞η.category
+      normalForm.movingLabel normalForm.stationaryLabel)
 
 /--
 The exact normalized closed graphical expression compiled from one marked
@@ -152,33 +185,10 @@ axiom cleanAttach_hasStandardGraphicalInterpretation
     (slideRealizes :
       CleanBandSlideRealizesStandardKirbySlide slide)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
-    ∃ stages : CleanBandGraphicalStages 𝒞η slide sourceCycle,
+    ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
       FramedRibbonIsotopic
         (normalizedCycleExpression 𝒞η source sourceCycle)
-        stages.attached
-
-/--
-The finite coupon route gives a typed naturality derivation between the exact
-attached and detachable expressions selected by the clean-attach boundary.
-
-This is the formal stopping point for the compactness/generic-position
-argument.  The returned object is proof-relevant graphical transport, not an
-evaluation equality.
--/
-axiom finiteCouponTransport_hasTypedGraphicalDerivation
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    {source target : HomologicallyMarkedDiagram}
-    (slide : CleanBandSlide source.diagram target.diagram)
-    (slideRealizes :
-      CleanBandSlideRealizesStandardKirbySlide slide)
-    (transportComplete :
-      FiniteCouponTransportRealizesCompletePath
-        slide.decomposition.transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
-    (stages : CleanBandGraphicalStages 𝒞η slide sourceCycle) :
-    CharacterCouponTransport 𝒞η.character
-      stages.attached stages.detachable
+        normalForm.identityStage
 
 /--
 Clean detachment has the standard typed graphical interpretation.
@@ -195,11 +205,38 @@ axiom cleanDetach_hasStandardGraphicalInterpretation
       CleanBandSlideRealizesStandardKirbySlide slide)
     (transport : ThamHandleChainTransport source target)
     (sourceCycle : ThamTwoCycles source.turnedOver)
-    (stages : CleanBandGraphicalStages 𝒞η slide sourceCycle) :
-    FramedRibbonIsotopic
-      stages.detachable
-      (normalizedCycleExpression 𝒞η target
-        (transport.mapCycle sourceCycle))
+    :
+    ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
+      FramedRibbonIsotopic
+        normalForm.identityStage
+        (normalizedCycleExpression 𝒞η target
+          (transport.mapCycle sourceCycle))
+
+/--
+The finite coupon route gives a typed naturality derivation between the exact
+fusion-resolved attach and detach normal forms.
+
+This is the formal stopping point for the compactness/generic-position
+argument.  The returned object is proof-relevant graphical transport, not an
+evaluation equality.
+-/
+axiom finiteCouponTransport_hasTypedGraphicalDerivation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (slide : CleanBandSlide source.diagram target.diagram)
+    (slideRealizes :
+      CleanBandSlideRealizesStandardKirbySlide slide)
+    (transportComplete :
+      FiniteCouponTransportRealizesCompletePath
+        slide.decomposition.transport)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (attachNormalForm :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCycle)
+    (detachNormalForm :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+    CharacterCouponTransport 𝒞η.character
+      attachNormalForm.resolvedStage detachNormalForm.resolvedStage
 
 /-! ## Smooth four-manifold and Kirby--Cerf topology
 
@@ -292,4 +329,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 289
+-- semantic-freeze-padding: 2378

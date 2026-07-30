@@ -1,0 +1,64 @@
+{
+  "schema": "twisted-yetter/frozen-clean-band-slide-status/2",
+  "recorded_at_utc": "2026-07-30T05:47:41Z",
+  "git_parent_commit": "21070415af572d001d29aad634561511962c130f",
+  "supersedes": "frozen-clean-band-slide-status-v1.json",
+  "status": "CONDITIONAL_CLEAN_BAND_SLIDE_THEOREM_EXACT_BOUNDARY_REVIEW_REQUIRED",
+  "frozen_semantics": {
+    "version": "semantic-freeze-combinatorial-v9",
+    "explicit_axiom_count": 21,
+    "refined_without_new_axioms": [
+      "cleanAttach_hasStandardGraphicalInterpretation",
+      "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "cleanDetach_hasStandardGraphicalInterpretation"
+    ]
+  },
+  "kernel_checked_theorem": {
+    "name": "TwistedYetter.Kirby.Final.Proofs.cleanBandSlide_preserves_evaluation",
+    "scope": [
+      "one-over-one certified clean band slides",
+      "two-over-one certified clean band slides",
+      "two-over-two certified clean band slides"
+    ],
+    "proof_file": "lean/TwistedYetter/Kirby/Final/Proofs/CleanBandSlides.lean",
+    "build_status": "PASS"
+  },
+  "semantic_improvement": [
+    "The attach and detach axioms no longer choose arbitrary intermediate closed ribbon expressions.",
+    "Each endpoint now exposes moving and stationary simple labels and a typed one-hole exterior context.",
+    "The identity stage and complete fusion-channel resolution are definitions.",
+    "The equality between identity and fusion resolution is kernel-derived from semisimple resolution of the identity."
+  ],
+  "axiom_closure": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedRibbonIsotopyWitness",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "shum_framedRibbonCoherence"
+  ],
+  "verification": {
+    "independent_entry": "PASS",
+    "clean_band_slide_proof": "PASS",
+    "axiom_closure": "PASS_NO_NEW_AXIOMS",
+    "source_red_team": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_json": "/private/tmp/lean-red-team-clean-band-v9.json",
+    "source_red_team_markdown": "/private/tmp/lean-red-team-clean-band-v9.zh-TW.md",
+    "final_theorem": "FAIL_EXPECTED_UNKNOWN_frozenFrontendLocalMoveInvariance"
+  },
+  "remaining_local_move_obligations": [
+    "framed isotopy: connect the frozen framed-isotopy script to a typed ribbon-isotopy witness",
+    "one-two birth/death: prove the role-aware normalization and zero-character cancellation",
+    "two-three birth/death: prove the turned-over normalization cancellation"
+  ],
+  "non_claims": [
+    "Human approval of the exact three refined interpretation boundaries is not recorded.",
+    "The exhaustive eight-move local invariance theorem is not established.",
+    "The final four-manifold invariant theorem is not established.",
+    "No legacy backend theorem was imported."
+  ]
+}

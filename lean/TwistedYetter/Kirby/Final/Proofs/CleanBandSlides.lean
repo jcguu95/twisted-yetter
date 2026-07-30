@@ -65,29 +65,53 @@ theorem cleanBandSlide_preserves_evaluation
       evaluateCycle 𝒞η
         target.diagram target.primalBoundary target.turnedOver
           (transport.mapCycle sourceCycle) := by
-  obtain ⟨stages, attach⟩ :=
+  obtain ⟨attachNormalForm, attach⟩ :=
     cleanAttach_hasStandardGraphicalInterpretation
       𝒞η slide slideRealizes sourceCycle
+  obtain ⟨detachNormalForm, detach⟩ :=
+    cleanDetach_hasStandardGraphicalInterpretation
+      𝒞η slide slideRealizes transport sourceCycle
   have attachInterpretation :
       (normalizedCycleExpression 𝒞η source sourceCycle).interpret =
-        stages.attached.interpret :=
+        attachNormalForm.identityStage.interpret :=
     shum_framedRibbonCoherence attach
+  have attachResolution :
+      attachNormalForm.identityStage.interpret =
+        attachNormalForm.resolvedStage.interpret := by
+    apply
+      RibbonExpressionContext.plug_interpret_eq_of_interpret_eq
+        attachNormalForm.context
+    exact
+      (fusionResolutionExpression_interpret
+        𝒞η.category attachNormalForm.movingLabel
+          attachNormalForm.stationaryLabel).symm
   have finiteTransport :
-      stages.attached.interpret = stages.detachable.interpret :=
+      attachNormalForm.resolvedStage.interpret =
+        detachNormalForm.resolvedStage.interpret :=
     (finiteCouponTransport_hasTypedGraphicalDerivation
-      𝒞η slide slideRealizes transportComplete sourceCycle stages).interpret_eq
+      𝒞η slide slideRealizes transportComplete sourceCycle
+        attachNormalForm detachNormalForm).interpret_eq
+  have detachResolution :
+      detachNormalForm.resolvedStage.interpret =
+        detachNormalForm.identityStage.interpret := by
+    apply
+      RibbonExpressionContext.plug_interpret_eq_of_interpret_eq
+        detachNormalForm.context
+    exact
+      fusionResolutionExpression_interpret
+        𝒞η.category detachNormalForm.movingLabel
+          detachNormalForm.stationaryLabel
   have detachInterpretation :
-      stages.detachable.interpret =
+      detachNormalForm.identityStage.interpret =
         (normalizedCycleExpression 𝒞η target
           (transport.mapCycle sourceCycle)).interpret :=
-    shum_framedRibbonCoherence
-      (cleanDetach_hasStandardGraphicalInterpretation
-        𝒞η slide slideRealizes transport sourceCycle stages)
+    shum_framedRibbonCoherence detach
   rw [← normalizedCycleExpression_evaluation 𝒞η source sourceCycle]
   rw [← normalizedCycleExpression_evaluation
     𝒞η target (transport.mapCycle sourceCycle)]
   unfold canonicalRibbonGraphicalEvaluation
-  rw [attachInterpretation, finiteTransport, detachInterpretation]
+  rw [attachInterpretation, attachResolution, finiteTransport,
+    detachResolution, detachInterpretation]
 
 end
 

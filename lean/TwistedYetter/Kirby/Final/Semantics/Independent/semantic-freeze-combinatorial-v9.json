@@ -1,0 +1,71 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v9",
+  "recorded_at_utc": "2026-07-30T05:47:41Z",
+  "semantic_content_parent_commit": "21070415af572d001d29aad634561511962c130f",
+  "supersedes": "semantic-freeze-combinatorial-v8.json",
+  "historical_v1_through_v8_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXPLICIT_FUSION_RESOLUTION_CLEAN_BAND_NORMAL_FORMS",
+    "reason": "Version 8 allowed the three clean-band interpretation boundaries to choose arbitrary attached and detachable closed ribbon expressions. Version 9 removes those arbitrary stages.",
+    "changes": [
+      "Added a typed one-hole ribbon-expression context generated only by graphical syntax.",
+      "Defined the endpoint identity stage by plugging the identity into that context.",
+      "Defined the resolved stage by plugging the complete sum of fusion projection-inclusion pairs into the same context.",
+      "Derived identity-versus-resolution equality from FusionSemisimpleData.resolution_identity.",
+      "Refined the existing three clean-band boundaries without adding an axiom."
+    ],
+    "explicit_frozen_axiom_count": 21,
+    "adds_axiom": false,
+    "adds_evaluator_equality_axiom": false,
+    "adds_local_invariance_axiom": false,
+    "adds_representative_independence_axiom": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "clean_band_slide_theorem_build": "PASS",
+    "clean_band_slide_scalar_equality": "KERNEL_DERIVED_CONDITIONAL_ON_EXACT_BOUNDARY_REVIEW",
+    "exhaustive_eight_move_local_invariance": "BLOCKED_OUTSIDE_THIS_CHANGE",
+    "four_manifold_invariant": "NOT_YET_ESTABLISHED"
+  },
+  "clean_band_slide_axiom_closure": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound",
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedRibbonIsotopyWitness",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "shum_framedRibbonCoherence"
+  ],
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "0003dccf77bd2fe517c4e2184894b244eb1bde00937221eae3bcc1823f833a40",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "00018de49c08a48a8ede8929324d1fcd45149315e16e6fda73614d63e3977e8b",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "000fa21a95c123a110036b578f18d186979d91ab7aaa261f4a1ea238b3f602a3",
+    "Graphical.lean": "0000ab873b96996933e2c0240ed608b42a4e43980c2b67513a33f083b2ccb5c3",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "Moves.lean": "000c55068206f267976580abf9730e6b266e8d2cf68bacdc86f5de24fad84446"
+  },
+  "supporting_artifacts": {
+    "explicit_trust_boundary_sha256": "a327e3ccaea89132ba2964093356927e4f5d8df4ca223f50de48306592d28251",
+    "clean_band_slide_proof_sha256": "db812e62e64243e90b83e21f52170d041898729cf8eddc222bc08abddec9dec8",
+    "source_audit_json": "/private/tmp/lean-red-team-clean-band-v9.json",
+    "source_audit_markdown": "/private/tmp/lean-red-team-clean-band-v9.zh-TW.md"
+  },
+  "non_claims": [
+    "The three clean-band interpretation boundaries remain external topology-to-graphical inputs requiring exact human statement review.",
+    "This does not establish framed-isotopy or cancellation invariance.",
+    "This does not establish the exhaustive eight-move theorem.",
+    "This does not establish the final four-manifold invariant."
+  ]
+}

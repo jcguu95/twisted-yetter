@@ -579,6 +579,105 @@ theorem CharacterCouponTransport.interpret_eq
       simp only [RibbonExpression.interpret]
       rw [inductionHypothesis]
 
+/--
+A typed one-hole ribbon-expression context.
+
+`RibbonExpressionContext 𝒞 X Y A B` takes an expression `X ⟶ Y` and places it
+inside a larger expression `A ⟶ B`.  Every constructor is genuine graphical
+syntax; there is no arbitrary function field and no correctness proposition.
+-/
+inductive RibbonExpressionContext
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K)
+    (X Y : 𝒞.C) :
+    𝒞.C → 𝒞.C → Type (max uK uC uS v)
+  | hole :
+      RibbonExpressionContext 𝒞 X Y X Y
+  | composeLeft {A P Q : 𝒞.C}
+      (before : RibbonExpression 𝒞 A P)
+      (context : RibbonExpressionContext 𝒞 X Y P Q) :
+      RibbonExpressionContext 𝒞 X Y A Q
+  | composeRight {P Q B : 𝒞.C}
+      (context : RibbonExpressionContext 𝒞 X Y P Q)
+      (suffix : RibbonExpression 𝒞 Q B) :
+      RibbonExpressionContext 𝒞 X Y P B
+  | tensorLeft {A B P Q : 𝒞.C}
+      (left : RibbonExpression 𝒞 A B)
+      (context : RibbonExpressionContext 𝒞 X Y P Q) :
+      RibbonExpressionContext 𝒞 X Y (A ⊗ P) (B ⊗ Q)
+  | tensorRight {A B P Q : 𝒞.C}
+      (context : RibbonExpressionContext 𝒞 X Y A B)
+      (right : RibbonExpression 𝒞 P Q) :
+      RibbonExpressionContext 𝒞 X Y (A ⊗ P) (B ⊗ Q)
+  | addLeft {A B : 𝒞.C}
+      (left : RibbonExpression 𝒞 A B)
+      (context : RibbonExpressionContext 𝒞 X Y A B) :
+      RibbonExpressionContext 𝒞 X Y A B
+  | addRight {A B : 𝒞.C}
+      (context : RibbonExpressionContext 𝒞 X Y A B)
+      (right : RibbonExpression 𝒞 A B) :
+      RibbonExpressionContext 𝒞 X Y A B
+  | smul {A B : 𝒞.C}
+      (scalar : K)
+      (context : RibbonExpressionContext 𝒞 X Y A B) :
+      RibbonExpressionContext 𝒞 X Y A B
+
+def RibbonExpressionContext.plug
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {X Y A B : 𝒞.C}
+    (context : RibbonExpressionContext 𝒞 X Y A B)
+    (term : RibbonExpression 𝒞 X Y) :
+    RibbonExpression 𝒞 A B :=
+  match context with
+  | .hole => term
+  | .composeLeft before rest =>
+      .compose before (rest.plug term)
+  | .composeRight rest suffix =>
+      .compose (rest.plug term) suffix
+  | .tensorLeft left rest =>
+      .tensor left (rest.plug term)
+  | .tensorRight rest right =>
+      .tensor (rest.plug term) right
+  | .addLeft left rest =>
+      .add left (rest.plug term)
+  | .addRight rest right =>
+      .add (rest.plug term) right
+  | .smul scalar rest =>
+      .smul scalar (rest.plug term)
+
+theorem RibbonExpressionContext.plug_interpret_eq_of_interpret_eq
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {X Y A B : 𝒞.C}
+    (context : RibbonExpressionContext 𝒞 X Y A B)
+    {left right : RibbonExpression 𝒞 X Y}
+    (equality : left.interpret = right.interpret) :
+    (context.plug left).interpret = (context.plug right).interpret := by
+  induction context with
+  | hole => exact equality
+  | composeLeft before context inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | composeRight context suffix inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | tensorLeft left context inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | tensorRight context right inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | addLeft left context inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | addRight context right inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+  | smul scalar context inductionHypothesis =>
+      simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
+      rw [inductionHypothesis]
+
 def fusionInclusionExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -598,6 +697,47 @@ def fusionProjectionExpression
       (𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right)
       (𝒞.simples.simpleObject output) :=
   .morphism (𝒞.fusionProjection left right output i)
+
+/-- The tensor-product object resolved by one standard fusion expansion. -/
+def fusionPairObject
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (left right : 𝒞.simples.Simple) : 𝒞.C :=
+  𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right
+
+/-- The tensor unit, exposed without notation for dependent signatures. -/
+def categoryUnitObject
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) : 𝒞.C :=
+  𝟙_ 𝒞.C
+
+/--
+The explicit complete fusion-channel resolution of the identity on
+`left ⊗ right`.
+-/
+def fusionResolutionExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (left right : 𝒞.simples.Simple) :
+    RibbonExpression 𝒞
+      (fusionPairObject 𝒞 left right)
+      (fusionPairObject 𝒞 left right) :=
+  .morphism
+    (∑ output : 𝒞.simples.Simple,
+      ∑ i : Fin (𝒞.fusionMultiplicity left right output),
+        𝒞.fusionProjection left right output i ≫
+          𝒞.fusionInclusion left right output i)
+
+theorem fusionResolutionExpression_interpret
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (left right : 𝒞.simples.Simple) :
+    (fusionResolutionExpression 𝒞 left right).interpret =
+      (identityExpression 𝒞
+        (fusionPairObject 𝒞 left right)).interpret := by
+  exact 𝒞.simples.resolution_identity
+    (𝒞.simples.simpleObject left ⊗
+      𝒞.simples.simpleObject right)
 
 /--
 The tensor-unit summand projector of an object, derived from the chosen
@@ -774,4 +914,4 @@ noncomputable def canonicalRibbonGraphicalEvaluation
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 4962
+-- semantic-freeze-padding: 25715
