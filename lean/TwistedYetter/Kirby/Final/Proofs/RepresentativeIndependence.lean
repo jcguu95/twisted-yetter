@@ -1151,6 +1151,297 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
   · intro index _
     rfl
 
+/--
+The coordinate of a THAM degree-three boundary is the corresponding
+incidence-column pairing with the one-handle chain.
+-/
+theorem thamBoundaryThree_apply_eq_sum_incidence
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (oneChain : HandleChainGroup diagram.handles.hOne)
+    (two : Fin diagram.handles.hTwo) :
+    turnedOver.thamBoundaryThree oneChain two =
+      ∑ one : Fin diagram.handles.hOne,
+        twoOneIncidence diagram one two * oneChain one := by
+  classical
+  unfold TurnedOverBoundaryCertificate.thamBoundaryThree
+    transposeAddHom coordinatePairing primalBoundaryTwo
+  simp [coordinateUnit, eq_comm]
+
+/--
+Adding one THAM degree-three boundary multiplies the character weight by the
+character product evaluated on that boundary.
+-/
+theorem characterWeight_add_thamBoundaryAsCycle
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (cycle : ThamTwoCycles turnedOver)
+    (oneChain : HandleChainGroup diagram.handles.hOne) :
+    characterWeight 𝒞η turnedOver labeling
+        (cycle + thamBoundaryAsCycle turnedOver oneChain) =
+      characterWeight 𝒞η turnedOver labeling cycle *
+        ((∏ two : Fin diagram.handles.hTwo,
+          𝒞η.character.value (labeling two) ^
+            (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K) := by
+  unfold characterWeight
+  change
+    ((∏ two : Fin diagram.handles.hTwo,
+      𝒞η.character.value (labeling two) ^
+        (cycle.1 two + turnedOver.thamBoundaryThree oneChain two) :
+      Kˣ) : K) =
+      ((∏ two : Fin diagram.handles.hTwo,
+        𝒞η.character.value (labeling two) ^ cycle.1 two : Kˣ) : K) *
+        ((∏ two : Fin diagram.handles.hTwo,
+          𝒞η.character.value (labeling two) ^
+            turnedOver.thamBoundaryThree oneChain two : Kˣ) : K)
+  simp only [zpow_add, Finset.prod_mul_distrib, Units.val_mul]
+
+/--
+The character factor of one THAM degree-three boundary is exactly the product
+of the signed puncture-word factors over all dotted one-handles.
+-/
+theorem thamBoundaryCharacterProduct_eq_punctureWordProduct
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (oneChain : HandleChainGroup diagram.handles.hOne) :
+    ((∏ two : Fin diagram.handles.hTwo,
+      𝒞η.character.value (labeling two) ^
+        (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K) =
+      ∏ one : Fin diagram.handles.hOne,
+        let dotted := diagram.handles.oneHandleIndex one
+        punctureWordCharacterUnit 𝒞η diagram labeling
+          (diagram.dottedCuts.punctureWord dotted.1 dotted.2)
+          (oneChain one) := by
+  classical
+  have boundary_expansion :
+      (∏ two : Fin diagram.handles.hTwo,
+        𝒞η.character.value (labeling two) ^
+          (turnedOver.thamBoundaryThree oneChain two)) =
+        ∏ two : Fin diagram.handles.hTwo,
+          ∏ one : Fin diagram.handles.hOne,
+            𝒞η.character.value (labeling two) ^
+              (twoOneIncidence diagram one two * oneChain one) := by
+    apply Finset.prod_congr rfl
+    intro two _
+    rw [thamBoundaryThree_apply_eq_sum_incidence
+      diagram primal turnedOver oneChain two]
+    exact
+      (finset_prod_zpow_eq_zpow_sum
+        (Finset.univ : Finset (Fin diagram.handles.hOne))
+        (𝒞η.character.value (labeling two))
+        (fun one =>
+          twoOneIncidence diagram one two * oneChain one)).symm
+  rw [boundary_expansion]
+  rw [Finset.prod_comm]
+  rw [show
+    ((∏ one : Fin diagram.handles.hOne,
+      ∏ two : Fin diagram.handles.hTwo,
+        𝒞η.character.value (labeling two) ^
+          (twoOneIncidence diagram one two * oneChain one) : Kˣ) : K) =
+      ∏ one : Fin diagram.handles.hOne,
+        ((∏ two : Fin diagram.handles.hTwo,
+          𝒞η.character.value (labeling two) ^
+            (twoOneIncidence diagram one two * oneChain one) : Kˣ) : K) by
+      simpa using
+        Units.coe_prod
+          (fun one : Fin diagram.handles.hOne =>
+            ∏ two : Fin diagram.handles.hTwo,
+              𝒞η.character.value (labeling two) ^
+                (twoOneIncidence diagram one two * oneChain one))
+          Finset.univ]
+  apply Finset.prod_congr rfl
+  intro one _
+  exact
+    (punctureWordCharacterUnit_eq_incidenceProduct
+      𝒞η diagram labeling one (oneChain one)).symm
+
+/--
+If every member of a finite family acts trivially on one scalar, then their
+product acts trivially as well.
+-/
+private theorem finset_prod_mul_eq_of_each_mul_eq
+    {ι M : Type*} [CommMonoid M]
+    (items : Finset ι)
+    (factor : ι → M)
+    (value : M)
+    (absorbs : ∀ item ∈ items, factor item * value = value) :
+    (∏ item ∈ items, factor item) * value = value := by
+  classical
+  induction items using Finset.induction_on with
+  | empty =>
+      simp
+  | @insert item items not_mem ih =>
+      rw [Finset.prod_insert not_mem]
+      rw [mul_assoc, ih]
+      exact absorbs item (Finset.mem_insert_self item items)
+      intro other other_mem
+      exact absorbs other (Finset.mem_insert_of_mem other_mem)
+
+/--
+The product of all dotted puncture-word factors acts trivially on the
+canonical closed graphical evaluation.
+-/
+theorem punctureWordProduct_canonicalEvaluation_absorbs
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (oneChain : HandleChainGroup diagram.handles.hOne) :
+    (∏ one : Fin diagram.handles.hOne,
+      let dotted := diagram.handles.oneHandleIndex one
+      punctureWordCharacterUnit 𝒞η diagram labeling
+        (diagram.dottedCuts.punctureWord dotted.1 dotted.2)
+        (oneChain one)) *
+        canonicalRibbonGraphicalEvaluation 𝒞η.category
+          (.morphism
+            (compileCutOpenExteriorMorphism
+              𝒞η.category diagram labeling)) =
+      canonicalRibbonGraphicalEvaluation 𝒞η.category
+        (.morphism
+          (compileCutOpenExteriorMorphism
+            𝒞η.category diagram labeling)) := by
+  apply finset_prod_mul_eq_of_each_mul_eq
+    (Finset.univ : Finset (Fin diagram.handles.hOne))
+  intro one _
+  let dotted := diagram.handles.oneHandleIndex one
+  exact projectorSite_canonicalEvaluation_absorbs
+    𝒞η diagram labeling dotted.1 dotted.2 (oneChain one)
+
+/--
+For one fixed two-handle labeling, adding a THAM degree-three boundary does
+not change the character-weighted canonical graphical evaluation.
+-/
+theorem characterWeight_mul_canonicalEvaluation_add_boundary
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (cycle : ThamTwoCycles turnedOver)
+    (oneChain : HandleChainGroup diagram.handles.hOne) :
+    characterWeight 𝒞η turnedOver labeling
+          (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+        canonicalRibbonGraphicalEvaluation 𝒞η.category
+          (.morphism
+            (compileCutOpenExteriorMorphism
+              𝒞η.category diagram labeling)) =
+      characterWeight 𝒞η turnedOver labeling cycle *
+        canonicalRibbonGraphicalEvaluation 𝒞η.category
+          (.morphism
+            (compileCutOpenExteriorMorphism
+              𝒞η.category diagram labeling)) := by
+  let graphicalValue :=
+    canonicalRibbonGraphicalEvaluation 𝒞η.category
+      (.morphism
+        (compileCutOpenExteriorMorphism
+          𝒞η.category diagram labeling))
+  let boundaryFactor :=
+    ((∏ two : Fin diagram.handles.hTwo,
+      𝒞η.character.value (labeling two) ^
+        (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K)
+  calc
+    _ =
+        (characterWeight 𝒞η turnedOver labeling cycle *
+          boundaryFactor) * graphicalValue := by
+      rw [characterWeight_add_thamBoundaryAsCycle
+        𝒞η diagram primal turnedOver labeling cycle oneChain]
+    _ =
+        characterWeight 𝒞η turnedOver labeling cycle *
+          (boundaryFactor * graphicalValue) := by
+      rw [mul_assoc]
+    _ =
+        characterWeight 𝒞η turnedOver labeling cycle *
+          ((∏ one : Fin diagram.handles.hOne,
+            let dotted := diagram.handles.oneHandleIndex one
+            punctureWordCharacterUnit 𝒞η diagram labeling
+              (diagram.dottedCuts.punctureWord dotted.1 dotted.2)
+              (oneChain one)) * graphicalValue) := by
+      dsimp only [boundaryFactor]
+      rw [thamBoundaryCharacterProduct_eq_punctureWordProduct
+        𝒞η diagram primal turnedOver labeling oneChain]
+    _ = _ := by
+      dsimp only [graphicalValue]
+      rw [punctureWordProduct_canonicalEvaluation_absorbs
+        𝒞η diagram labeling oneChain]
+
+/--
+The complete frozen cycle evaluator is invariant under adding one THAM
+degree-three boundary.
+-/
+theorem evaluateCycle_add_thamBoundaryAsCycle
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal)
+    (cycle : ThamTwoCycles turnedOver)
+    (oneChain : HandleChainGroup diagram.handles.hOne) :
+    evaluateCycle 𝒞η diagram primal turnedOver
+        (cycle + thamBoundaryAsCycle turnedOver oneChain) =
+      evaluateCycle 𝒞η diagram primal turnedOver cycle := by
+  unfold evaluateCycle
+  apply congrArg
+  apply Finset.sum_congr rfl
+  intro labeling _
+  dsimp only [canonicalRoleAwareGraphCompiler]
+  let graphicalValue :=
+    canonicalRibbonGraphicalEvaluation 𝒞η.category
+      (.morphism
+        (compileCutOpenExteriorMorphism
+          𝒞η.category diagram labeling))
+  calc
+    ordinaryKirbyWeight 𝒞η.category labeling *
+          characterWeight 𝒞η turnedOver labeling
+            (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+        graphicalValue =
+      ordinaryKirbyWeight 𝒞η.category labeling *
+        (characterWeight 𝒞η turnedOver labeling
+            (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+          graphicalValue) := by
+      rw [mul_assoc]
+    _ =
+      ordinaryKirbyWeight 𝒞η.category labeling *
+        (characterWeight 𝒞η turnedOver labeling cycle *
+          graphicalValue) := by
+      rw [characterWeight_mul_canonicalEvaluation_add_boundary
+        𝒞η diagram primal turnedOver labeling cycle oneChain]
+    _ =
+      ordinaryKirbyWeight 𝒞η.category labeling *
+          characterWeight 𝒞η turnedOver labeling cycle *
+        graphicalValue := by
+      rw [mul_assoc]
+
+/--
+The frozen role-aware evaluator depends only on the THAM-side second homology
+class, not on the chosen cycle representative.
+-/
+theorem frozenFrontendRepresentativeIndependence
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (turnedOver : TurnedOverBoundaryCertificate primal) :
+    RepresentativeIndependenceStatement
+      𝒞η diagram primal turnedOver := by
+  intro left right same_class
+  change
+    (QuotientAddGroup.mk'
+      (thamBoundaryAsCycle turnedOver).range) left =
+      (QuotientAddGroup.mk'
+        (thamBoundaryAsCycle turnedOver).range) right at same_class
+  obtain ⟨boundary, boundary_mem, left_add_boundary_eq⟩ :=
+    (QuotientAddGroup.mk'_eq_mk'
+      (thamBoundaryAsCycle turnedOver).range).mp same_class
+  obtain ⟨oneChain, oneChain_eq⟩ := boundary_mem
+  subst boundary
+  rw [← left_add_boundary_eq]
+  exact (evaluateCycle_add_thamBoundaryAsCycle
+    𝒞η diagram primal turnedOver left oneChain).symm
+
 end
 
 end TwistedYetter.Kirby.Final.Proofs
