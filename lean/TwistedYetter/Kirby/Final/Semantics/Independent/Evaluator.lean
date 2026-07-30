@@ -219,6 +219,144 @@ theorem exteriorWord_of_punctures_eq
           puncture.orientation_preserved)
         ih
 
+/-!
+## Canonical dual pairs and diagram bindings
+
+Rigidity creates a canonical dual pair before any diagram is consulted.
+Separate word-identification theorems then attach that canonical pair to the
+two concrete strands recorded by the combinatorial trace.
+-/
+
+def positiveNegativeDualPairWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) : RibbonWord 𝒞 :=
+  [{ label := label, direction := .forward },
+    { label := label, direction := .dual }]
+
+def negativePositiveDualPairWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) : RibbonWord 𝒞 :=
+  [{ label := label, direction := .dual },
+    { label := label, direction := .forward }]
+
+def canonicalPositiveNegativeBirth
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) :
+    ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) ⟶
+      ribbonWordObject 𝒞 (positiveNegativeDualPairWord 𝒞 label) := by
+  simp only [positiveNegativeDualPairWord, ribbonWordObject,
+    orientedSimpleObject]
+  exact
+    (η_ (𝒞.simples.simpleObject label)
+      ((𝒞.simples.simpleObject label)ᘁ)) ≫
+      (𝟙 _ ⊗ₘ (ρ_ _).inv)
+
+def canonicalNegativePositiveBirth
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) :
+    ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) ⟶
+      ribbonWordObject 𝒞 (negativePositiveDualPairWord 𝒞 label) := by
+  simp only [negativePositiveDualPairWord, ribbonWordObject,
+    orientedSimpleObject]
+  exact
+    (η_ (𝒞.simples.simpleObject label)
+      ((𝒞.simples.simpleObject label)ᘁ)) ≫
+      (β_ _ _).hom ≫
+      (𝟙 _ ⊗ₘ (ρ_ _).inv)
+
+def canonicalPositiveNegativeDeath
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) :
+    ribbonWordObject 𝒞 (positiveNegativeDualPairWord 𝒞 label) ⟶
+      ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) := by
+  simp only [positiveNegativeDualPairWord, ribbonWordObject,
+    orientedSimpleObject]
+  exact
+    (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
+      (β_ _ _).hom ≫
+      (ε_ (𝒞.simples.simpleObject label)
+        ((𝒞.simples.simpleObject label)ᘁ))
+
+def canonicalNegativePositiveDeath
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (label : 𝒞.simples.Simple) :
+    ribbonWordObject 𝒞 (negativePositiveDualPairWord 𝒞 label) ⟶
+      ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) := by
+  simp only [negativePositiveDualPairWord, ribbonWordObject,
+    orientedSimpleObject]
+  exact
+    (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
+      (ε_ (𝒞.simples.simpleObject label)
+        ((𝒞.simples.simpleObject label)ᘁ))
+
+theorem right_negative_of_left_positive_of_ne
+    (left right : StrandOrientation)
+    (opposite : left ≠ right)
+    (left_eq : left = .positive) :
+    right = .negative := by
+  cases left <;> cases right <;> simp_all
+
+theorem left_negative_of_not_positive
+    (orientation : StrandOrientation)
+    (not_positive : orientation ≠ .positive) :
+    orientation = .negative := by
+  cases orientation <;> simp_all
+
+theorem right_positive_of_left_negative_of_ne
+    (left right : StrandOrientation)
+    (opposite : left ≠ right)
+    (left_eq : left = .negative) :
+    right = .positive := by
+  cases left <;> cases right <;> simp_all
+
+def positiveNegativeDualPairWord_eq_exteriorWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (left right : diagram.trace.StrandId)
+    (component_eq :
+      (diagram.trace.strands left).component =
+        (diagram.trace.strands right).component)
+    (left_positive :
+      (diagram.trace.strands left).orientation = .positive)
+    (right_negative :
+      (diagram.trace.strands right).orientation = .negative) :
+    positiveNegativeDualPairWord 𝒞
+        (exteriorStrandLabel 𝒞 diagram labeling right) =
+      exteriorWord 𝒞 diagram labeling [left, right] := by
+  have label_eq :=
+    exteriorStrandLabel_eq_of_component_eq 𝒞 diagram labeling component_eq
+  simp [positiveNegativeDualPairWord, exteriorWord, orientedExteriorStrand,
+    ribbonDirectionOfStrandOrientation, left_positive, right_negative, label_eq]
+
+def negativePositiveDualPairWord_eq_exteriorWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (left right : diagram.trace.StrandId)
+    (component_eq :
+      (diagram.trace.strands left).component =
+        (diagram.trace.strands right).component)
+    (left_negative :
+      (diagram.trace.strands left).orientation = .negative)
+    (right_positive :
+      (diagram.trace.strands right).orientation = .positive) :
+    negativePositiveDualPairWord 𝒞
+        (exteriorStrandLabel 𝒞 diagram labeling right) =
+      exteriorWord 𝒞 diagram labeling [left, right] := by
+  have label_eq :=
+    exteriorStrandLabel_eq_of_component_eq 𝒞 diagram labeling component_eq
+  simp [negativePositiveDualPairWord, exteriorWord, orientedExteriorStrand,
+    ribbonDirectionOfStrandOrientation, left_negative, right_positive, label_eq]
+
 def pairedBirthMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -234,41 +372,28 @@ def pairedBirthMorphism
     ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) ⟶
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling [left, right]) := by
-  have label_eq :=
-    exteriorStrandLabel_eq_of_component_eq 𝒞 diagram labeling component_eq
-  unfold exteriorWord
-  simp only [List.map_cons, List.map_nil, ribbonWordObject]
-  cases left_orientation : (diagram.trace.strands left).orientation <;>
-    cases right_orientation : (diagram.trace.strands right).orientation
-  · exact False.elim (orientation_ne (left_orientation.trans right_orientation.symm))
-  ·
-    simp only [orientedSimpleObject, orientedExteriorStrand,
-      ribbonDirectionOfStrandOrientation, left_orientation, right_orientation]
-    have object_eq := congrArg 𝒞.simples.simpleObject label_eq
-    have dual_eq := congrArg (fun X : 𝒞.C => Xᘁ) object_eq
+  by_cases left_positive :
+      (diagram.trace.strands left).orientation = .positive
+  · have right_negative :=
+      right_negative_of_left_positive_of_ne _ _ orientation_ne left_positive
     exact
-      (η_
-        (𝒞.simples.simpleObject
-          (exteriorStrandLabel 𝒞 diagram labeling left))
-        ((𝒞.simples.simpleObject
-          (exteriorStrandLabel 𝒞 diagram labeling left))ᘁ)) ≫
-        (𝟙 _ ⊗ₘ eqToHom dual_eq) ≫
-        (𝟙 _ ⊗ₘ (ρ_ _).inv)
-  ·
-    simp only [orientedSimpleObject, orientedExteriorStrand,
-      ribbonDirectionOfStrandOrientation, left_orientation, right_orientation]
-    have object_eq := congrArg 𝒞.simples.simpleObject label_eq
-    have dual_eq := congrArg (fun X : 𝒞.C => Xᘁ) object_eq
+      canonicalPositiveNegativeBirth 𝒞
+          (exteriorStrandLabel 𝒞 diagram labeling right) ≫
+        eqToHom (congrArg (ribbonWordObject 𝒞)
+          (positiveNegativeDualPairWord_eq_exteriorWord
+            𝒞 diagram labeling left right component_eq
+            left_positive right_negative))
+  · have left_negative :=
+      left_negative_of_not_positive _ left_positive
+    have right_positive :=
+      right_positive_of_left_negative_of_ne _ _ orientation_ne left_negative
     exact
-      (η_
-        (𝒞.simples.simpleObject
-          (exteriorStrandLabel 𝒞 diagram labeling right))
-        ((𝒞.simples.simpleObject
-          (exteriorStrandLabel 𝒞 diagram labeling right))ᘁ)) ≫
-        (β_ _ _).hom ≫
-        (eqToHom dual_eq.symm ⊗ₘ 𝟙 _) ≫
-        (𝟙 _ ⊗ₘ (ρ_ _).inv)
-  · exact False.elim (orientation_ne (left_orientation.trans right_orientation.symm))
+      canonicalNegativePositiveBirth 𝒞
+          (exteriorStrandLabel 𝒞 diagram labeling right) ≫
+        eqToHom (congrArg (ribbonWordObject 𝒞)
+          (negativePositiveDualPairWord_eq_exteriorWord
+            𝒞 diagram labeling left right component_eq
+            left_negative right_positive))
 
 def pairedDeathMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -285,41 +410,28 @@ def pairedDeathMorphism
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling [left, right]) ⟶
       ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) := by
-  have label_eq :=
-    exteriorStrandLabel_eq_of_component_eq 𝒞 diagram labeling component_eq
-  unfold exteriorWord
-  simp only [List.map_cons, List.map_nil, ribbonWordObject]
-  cases left_orientation : (diagram.trace.strands left).orientation <;>
-    cases right_orientation : (diagram.trace.strands right).orientation
-  · exact False.elim (orientation_ne (left_orientation.trans right_orientation.symm))
-  ·
-    simp only [orientedSimpleObject, orientedExteriorStrand,
-      ribbonDirectionOfStrandOrientation, left_orientation, right_orientation]
-    have object_eq := congrArg 𝒞.simples.simpleObject label_eq
-    have dual_eq := congrArg (fun X : 𝒞.C => Xᘁ) object_eq
+  by_cases left_positive :
+      (diagram.trace.strands left).orientation = .positive
+  · have right_negative :=
+      right_negative_of_left_positive_of_ne _ _ orientation_ne left_positive
     exact
-      (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
-        (𝟙 _ ⊗ₘ eqToHom dual_eq.symm) ≫
-        (β_ _ _).hom ≫
-        (ε_
-          (𝒞.simples.simpleObject
-            (exteriorStrandLabel 𝒞 diagram labeling left))
-          ((𝒞.simples.simpleObject
-            (exteriorStrandLabel 𝒞 diagram labeling left))ᘁ))
-  ·
-    simp only [orientedSimpleObject, orientedExteriorStrand,
-      ribbonDirectionOfStrandOrientation, left_orientation, right_orientation]
-    have object_eq := congrArg 𝒞.simples.simpleObject label_eq
-    have dual_eq := congrArg (fun X : 𝒞.C => Xᘁ) object_eq
+      eqToHom (congrArg (ribbonWordObject 𝒞)
+          (positiveNegativeDualPairWord_eq_exteriorWord
+            𝒞 diagram labeling left right component_eq
+            left_positive right_negative)).symm ≫
+        canonicalPositiveNegativeDeath 𝒞
+          (exteriorStrandLabel 𝒞 diagram labeling right)
+  · have left_negative :=
+      left_negative_of_not_positive _ left_positive
+    have right_positive :=
+      right_positive_of_left_negative_of_ne _ _ orientation_ne left_negative
     exact
-      (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
-        (eqToHom dual_eq ⊗ₘ 𝟙 _) ≫
-        (ε_
-          (𝒞.simples.simpleObject
-            (exteriorStrandLabel 𝒞 diagram labeling right))
-          ((𝒞.simples.simpleObject
-            (exteriorStrandLabel 𝒞 diagram labeling right))ᘁ))
-  · exact False.elim (orientation_ne (left_orientation.trans right_orientation.symm))
+      eqToHom (congrArg (ribbonWordObject 𝒞)
+          (negativePositiveDualPairWord_eq_exteriorWord
+            𝒞 diagram labeling left right component_eq
+            left_negative right_positive)).symm ≫
+        canonicalNegativePositiveDeath 𝒞
+          (exteriorStrandLabel 𝒞 diagram labeling right)
 
 /-- Compile one exact cut-open event before adding its common exterior. -/
 def compileCutOpenEventMorphism
@@ -380,12 +492,12 @@ def compileCutOpenEventMorphism
       have word_eq :=
         exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures
       simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
-      rw [← word_eq]
       exact
         tensorUnitProjector 𝒞
           (ribbonWordObject 𝒞
             (exteriorWord 𝒞 diagram labeling
-              (punctures.map DottedPuncture.inputStrand)))
+              (punctures.map DottedPuncture.inputStrand))) ≫
+          eqToHom (congrArg (ribbonWordObject 𝒞) word_eq)
 
 /-- The chosen left exterior context of one certified event transition. -/
 noncomputable def eventLeftContext

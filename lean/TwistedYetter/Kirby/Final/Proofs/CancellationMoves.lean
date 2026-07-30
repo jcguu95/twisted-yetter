@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Proofs.CleanBandSlides
 import TwistedYetter.Kirby.Final.Proofs.RepresentativeIndependence
+import TwistedYetter.Kirby.Final.Proofs.SpecialCutMeridian
 
 /-!
 # Frozen-frontend cancellation moves
@@ -118,12 +119,53 @@ theorem addedTwoHandle_characterWeight
           simp
   exact congrArg (fun unit : Kˣ => (unit : K)) unitEquality
 
-theorem oneTwoBirth_graphicalFactor
+/--
+Compiler-locality obligation for a standard one--two birth.
+
+The topology hypothesis is now obtained from the exact category-neutral
+serialized normal form.  What remains to prove is that the finite-event
+compiler sends its three-event prefix to the special-cut meridian and sends
+the unchanged suffix to the source expression.
+-/
+theorem oneTwoBirth_hasTypedGraphicalNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoBirth)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoBirthMeridian)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceLabeling :
+      TwoHandleLabeling 𝒞η.category source.diagram)
+    (newLabel : 𝒞η.category.simples.Simple) :
+    (canonicalRoleAwareGraphCompiler
+        𝒞η target.diagram target.primalBoundary target.turnedOver
+        (coordinates.mergeLabeling sourceLabeling newLabel)
+        (transport.mapCycle sourceCycle)).graph.interpret =
+      (closedComposeExpression
+        (specialCutMeridianExpression 𝒞η.category newLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η source.diagram source.primalBoundary source.turnedOver
+          sourceLabeling sourceCycle).graph).interpret := by
+  have _geometry :=
+    standardOneTwoCancellation_hasLocalNormalForm
+      script (Or.inl kind)
+  have _coordinateBinding := coordinateBinding
+  sorry
+
+theorem oneTwoBirth_graphicalFactor
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoBirth)
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoBirthMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
@@ -139,9 +181,9 @@ theorem oneTwoBirth_graphicalFactor
             𝒞η source.diagram source.primalBoundary source.turnedOver
             sourceLabeling sourceCycle).graph := by
   have interpreted :=
-    shum_framedRibbonCoherence
-      (oneTwoBirth_hasTypedGraphicalNormalForm
-        𝒞η coordinates sourceCycle sourceLabeling newLabel)
+    oneTwoBirth_hasTypedGraphicalNormalForm
+      𝒞η script kind coordinates coordinateBinding
+        sourceCycle sourceLabeling newLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted]
   exact closedComposeExpression_scalar _ _
@@ -186,9 +228,13 @@ theorem twoThreeBirth_graphicalFactor
 theorem oneTwoBirth_rawCycleSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoBirth)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoBirthMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η target.diagram target.primalBoundary target.turnedOver
         (transport.mapCycle sourceCycle) =
@@ -241,7 +287,8 @@ theorem oneTwoBirth_rawCycleSum
         intro newLabel _
         rw [addedTwoHandle_ordinaryKirbyWeight,
           addedTwoHandle_characterWeight,
-          oneTwoBirth_graphicalFactor]
+          oneTwoBirth_graphicalFactor
+            𝒞η script kind coordinates coordinateBinding]
         ring
     _ =
       ∑ sourceLabeling,
@@ -352,6 +399,8 @@ theorem oneTwoBirth_preserves_evaluation
     (homology : MoveHomologyTransport source target)
     (coordinates :
       AddedTwoHandleCoordinates source target homology.tham)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoBirthMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -361,7 +410,8 @@ theorem oneTwoBirth_preserves_evaluation
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
   unfold evaluateCycle
-  rw [oneTwoBirth_rawCycleSum 𝒞η coordinates sourceCycle]
+  rw [oneTwoBirth_rawCycleSum
+    𝒞η script kind coordinates coordinateBinding sourceCycle]
   unfold thamDefinition511Normalization
   rw [counts.2.2]
 
@@ -500,12 +550,51 @@ theorem removedTwoHandle_characterWeight
           simp
   exact congrArg (fun unit : Kˣ => (unit : K)) unitEquality
 
-theorem oneTwoDeath_graphicalFactor
+/--
+The reverse compiler-locality obligation.  Its topology input is definitionally
+the birth normal form with source and target exchanged.
+-/
+theorem oneTwoDeath_hasTypedGraphicalNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoDeath)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoDeathMeridian)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (targetLabeling :
+      TwoHandleLabeling 𝒞η.category target.diagram)
+    (removedLabel : 𝒞η.category.simples.Simple) :
+    (canonicalRoleAwareGraphCompiler
+        𝒞η source.diagram source.primalBoundary source.turnedOver
+        (coordinates.mergeLabeling targetLabeling removedLabel)
+        (coordinates.safeCycle sourceCycle)).graph.interpret =
+      (closedComposeExpression
+        (specialCutMeridianExpression 𝒞η.category removedLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η target.diagram target.primalBoundary target.turnedOver
+          targetLabeling
+          (transport.mapCycle
+            (coordinates.safeCycle sourceCycle))).graph).interpret := by
+  have _geometry :=
+    standardOneTwoCancellation_hasLocalNormalForm
+      script (Or.inr kind)
+  have _coordinateBinding := coordinateBinding
+  sorry
+
+theorem oneTwoDeath_graphicalFactor
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoDeath)
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoDeathMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
@@ -522,9 +611,9 @@ theorem oneTwoDeath_graphicalFactor
             targetLabeling
             (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
   have interpreted :=
-    shum_framedRibbonCoherence
-      (oneTwoDeath_hasTypedGraphicalNormalForm
-        𝒞η coordinates sourceCycle targetLabeling removedLabel)
+    oneTwoDeath_hasTypedGraphicalNormalForm
+      𝒞η script kind coordinates coordinateBinding
+        sourceCycle targetLabeling removedLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted]
   exact closedComposeExpression_scalar _ _
@@ -570,9 +659,13 @@ theorem twoThreeDeath_graphicalFactor
 theorem oneTwoDeath_rawCycleSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .oneTwoDeath)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoDeathMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η source.diagram source.primalBoundary source.turnedOver
         (coordinates.safeCycle sourceCycle) =
@@ -628,7 +721,8 @@ theorem oneTwoDeath_rawCycleSum
         intro removedLabel _
         rw [removedTwoHandle_ordinaryKirbyWeight,
           removedTwoHandle_characterWeight,
-          oneTwoDeath_graphicalFactor]
+          oneTwoDeath_graphicalFactor
+            𝒞η script kind coordinates coordinateBinding]
         ring
     _ =
       ∑ targetLabeling,
@@ -766,6 +860,8 @@ theorem oneTwoDeath_preserves_evaluation
     (homology : MoveHomologyTransport source target)
     (coordinates :
       RemovedTwoHandleCoordinates source target homology.tham)
+    (coordinateBinding :
+      coordinates.MatchesOneTwoDeathMeridian)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -788,7 +884,8 @@ theorem oneTwoDeath_preserves_evaluation
         target.turnedOver
         (homology.tham.mapCycle (coordinates.safeCycle sourceCycle)) := by
       unfold evaluateCycle thamDefinition511Normalization
-      rw [oneTwoDeath_rawCycleSum 𝒞η coordinates sourceCycle]
+      rw [oneTwoDeath_rawCycleSum
+        𝒞η script kind coordinates coordinateBinding sourceCycle]
       rw [counts.2.2]
     _ =
       evaluateCycle 𝒞η target.diagram target.primalBoundary

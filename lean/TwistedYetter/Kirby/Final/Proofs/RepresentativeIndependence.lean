@@ -322,29 +322,8 @@ private theorem compile_projectorHole_eq_explicit
     compileCutOpenEventMorphism
         𝒞 diagram labeling (.projectorHole dotted punctures) pairing =
       explicitProjectorHoleMorphism 𝒞 diagram labeling punctures := by
-  let X :=
-    ribbonWordObject 𝒞
-      (exteriorWord 𝒞 diagram labeling
-        (punctures.map DottedPuncture.inputStrand))
-  let Y :=
-    ribbonWordObject 𝒞
-      (exteriorWord 𝒞 diagram labeling
-        (punctures.map DottedPuncture.outputStrand))
-  have object_eq : X = Y :=
-    congrArg (ribbonWordObject 𝒞)
-      (exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures)
-  simp only [compileCutOpenEventMorphism, id_eq]
-  change Eq.mpr _ (tensorUnitProjector 𝒞 X) =
-    tensorUnitProjector 𝒞 X ≫ eqToHom object_eq
-  calc
-    Eq.mpr _ (tensorUnitProjector 𝒞 X) =
-        Eq.mpr
-          (congrArg (fun W => X ⟶ W) object_eq.symm)
-          (tensorUnitProjector 𝒞 X) := by
-            congr 1
-    _ = tensorUnitProjector 𝒞 X ≫ eqToHom object_eq :=
-      congrArg_mpr_hom_right
-        (tensorUnitProjector 𝒞 X) object_eq.symm
+  unfold compileCutOpenEventMorphism explicitProjectorHoleMorphism
+  simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord, id_eq]
 
 /--
 A uniform character coupon immediately before a literal dotted projector

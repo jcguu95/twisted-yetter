@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
+import TwistedYetter.Kirby.Final.Semantics.Independent.OneTwoLocalReplacement
 
 /-!
 # Independent semantics: explicit entrance axioms
@@ -285,59 +286,13 @@ axiom framedIsotopy_hasTypedGraphicalInterpretation
       (normalizedCycleExpression 𝒞η target
         (transport.mapCycle sourceCycle))
 
-/-! ## Cancellation local graphical normal forms -/
+/-! ## Cancellation local graphical normal forms
 
-/--
-The exact graph for a one--two birth is the unchanged source exterior with
-one standard special-cut meridian factor.  This boundary says only framed
-graphical isotopy for one fixed labeling; weights, character exponents,
-finite sums, and normalization are absent.
+The former one--two birth/death graphical axioms were removed. Their exact
+graphical conclusions are theorem obligations in `Proofs/CancellationMoves`.
+The sole external one--two input is now the category-neutral local replacement
+specified in `OneTwoLocalReplacement`.
 -/
-axiom oneTwoBirth_hasTypedGraphicalNormalForm
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    {source target : HomologicallyMarkedDiagram}
-    {transport : ThamHandleChainTransport source target}
-    (coordinates :
-      AddedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
-    (sourceLabeling :
-      TwoHandleLabeling 𝒞η.category source.diagram)
-    (newLabel : 𝒞η.category.simples.Simple) :
-    FramedRibbonIsotopic
-      (canonicalRoleAwareGraphCompiler
-        𝒞η target.diagram target.primalBoundary target.turnedOver
-        (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).graph
-      (closedComposeExpression
-        (specialCutMeridianExpression 𝒞η.category newLabel)
-        (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.primalBoundary source.turnedOver
-          sourceLabeling sourceCycle).graph)
-
-/-- The reverse one--two normal form, applied to a cancellation-safe cycle. -/
-axiom oneTwoDeath_hasTypedGraphicalNormalForm
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    {source target : HomologicallyMarkedDiagram}
-    {transport : ThamHandleChainTransport source target}
-    (coordinates :
-      RemovedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
-    (targetLabeling :
-      TwoHandleLabeling 𝒞η.category target.diagram)
-    (removedLabel : 𝒞η.category.simples.Simple) :
-    FramedRibbonIsotopic
-      (canonicalRoleAwareGraphCompiler
-        𝒞η source.diagram source.primalBoundary source.turnedOver
-        (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).graph
-      (closedComposeExpression
-        (specialCutMeridianExpression 𝒞η.category removedLabel)
-        (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.primalBoundary target.turnedOver
-          targetLabeling
-          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph)
 
 /-- The exact fixed-label graphical normal form for a two--three birth. -/
 axiom twoThreeBirth_hasTypedGraphicalNormalForm

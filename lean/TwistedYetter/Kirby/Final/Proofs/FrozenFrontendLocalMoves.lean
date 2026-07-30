@@ -115,12 +115,12 @@ theorem frozenFrontendLocalMoveInvariance
         𝒞η slide slideRealizes transportComplete homology.tham sourceCycle
   | cancellation script homology normalForm _ =>
       cases normalForm with
-      | oneTwoBirth kind coordinates =>
+      | oneTwoBirth kind coordinates coordinateBinding =>
           exact oneTwoBirth_preserves_evaluation
-            𝒞η script kind homology coordinates sourceCycle
-      | oneTwoDeath kind coordinates =>
+            𝒞η script kind homology coordinates coordinateBinding sourceCycle
+      | oneTwoDeath kind coordinates coordinateBinding =>
           exact oneTwoDeath_preserves_evaluation
-            𝒞η script kind homology coordinates sourceCycle
+            𝒞η script kind homology coordinates coordinateBinding sourceCycle
       | twoThreeBirth kind coordinates =>
           exact twoThreeBirth_preserves_evaluation
             𝒞η script kind homology coordinates sourceCycle

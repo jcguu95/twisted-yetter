@@ -483,6 +483,48 @@ def RemovedTwoHandleCoordinates.labelingEquiv
           RemovedTwoHandleCoordinates.splitSafeLabeling, equality, back]
 
 /--
+The coordinate equivalence for a one--two birth agrees with the literal
+component ordering of the canonical local replacement.
+
+Every old two-handle coordinate still names the same raw link component, and
+the unique new coordinate names the newly appended ordinary meridian.  This
+is finite combinatorial coherence data, not an evaluator equality or an
+external topology theorem.
+-/
+def AddedTwoHandleCoordinates.MatchesOneTwoBirthMeridian
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport) : Prop :=
+  (∀ i : Fin source.diagram.handles.hTwo,
+    (target.diagram.handles.twoHandleIndex
+      (coordinates.indexEquiv (Sum.inl i))).1.1 =
+        (source.diagram.handles.twoHandleIndex i).1.1) ∧
+  (target.diagram.handles.twoHandleIndex
+    (coordinates.indexEquiv (Sum.inr ()))).1.1 =
+      source.diagram.trace.componentCount + 1
+
+/--
+The reverse coordinate coherence for a one--two death.
+
+The high-side old coordinates agree with the surviving target components,
+and the removed coordinate is exactly the ordinary meridian which follows
+the target exterior in the canonical birth normal form.
+-/
+def RemovedTwoHandleCoordinates.MatchesOneTwoDeathMeridian
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport) : Prop :=
+  (∀ i : Fin target.diagram.handles.hTwo,
+    (source.diagram.handles.twoHandleIndex
+      (coordinates.indexEquiv (Sum.inl i))).1.1 =
+        (target.diagram.handles.twoHandleIndex i).1.1) ∧
+  (source.diagram.handles.twoHandleIndex
+    (coordinates.indexEquiv (Sum.inr ()))).1.1 =
+      target.diagram.trace.componentCount + 1
+
+/--
 The four explicit local normal forms accepted for cancellation events.
 
 This is data carried by the move, not an axiom saying that evaluations are
@@ -497,10 +539,14 @@ inductive CancellationLocalNormalForm
       (kind : script.kind = .oneTwoBirth)
       (coordinates :
         AddedTwoHandleCoordinates source target homology.tham)
+      (coordinateBinding :
+        coordinates.MatchesOneTwoBirthMeridian)
   | oneTwoDeath
       (kind : script.kind = .oneTwoDeath)
       (coordinates :
         RemovedTwoHandleCoordinates source target homology.tham)
+      (coordinateBinding :
+        coordinates.MatchesOneTwoDeathMeridian)
   | twoThreeBirth
       (kind : script.kind = .twoThreeBirth)
       (coordinates :
