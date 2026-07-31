@@ -102,6 +102,89 @@ def serializedActiveOrders
     (fun i =>
       (diagram.dottedCuts.exterior.activeOrder i).map Fin.val)
 
+def oneTwoLocalComponents :
+    List Component :=
+  [
+    {
+      role := .dotted
+      orientation := .positive
+      integerFraming := 0
+    },
+    {
+      role := .ordinary
+      orientation := .positive
+      integerFraming := 0
+    }
+  ]
+
+def oneTwoLocalStrands
+    (source : CombinatorialSpecialKirbyDiagram) :
+    List SerializedStrand :=
+  let twoHandle := source.trace.componentCount + 1
+  [
+    { component := twoHandle, orientation := .positive },
+    { component := twoHandle, orientation := .negative },
+    { component := twoHandle, orientation := .positive }
+  ]
+
+def oneTwoLocalPuncture
+    (source : CombinatorialSpecialKirbyDiagram) :
+    SerializedPuncture :=
+  {
+    dottedComponent := source.trace.componentCount
+    twoHandleComponent := source.trace.componentCount + 1
+    inputStrand := source.trace.strandCount
+    outputStrand := source.trace.strandCount + 2
+    direction := .withDiskOrientation
+    characterExponentSign := 1
+    cutPosition := 0
+  }
+
+def oneTwoLocalEvents
+    (source : CombinatorialSpecialKirbyDiagram) :
+    List SerializedCutOpenEvent :=
+  let first := source.trace.strandCount
+  let second := source.trace.strandCount + 1
+  let third := source.trace.strandCount + 2
+  let dotted := source.trace.componentCount
+  [
+    .birth first second,
+    .projectorHole dotted [oneTwoLocalPuncture source],
+    .death third second
+  ]
+
+def oneTwoLocalActiveOrders
+    (source : CombinatorialSpecialKirbyDiagram) :
+    List (List ℕ) :=
+  let first := source.trace.strandCount
+  let second := source.trace.strandCount + 1
+  let third := source.trace.strandCount + 2
+  [[], [first, second], [third, second]]
+
+/--
+The exact serialized normal form for a one--two birth.  It is finite,
+category-neutral data: the source exterior is retained literally and the
+target appends one dotted component, one zero-framed ordinary meridian, and
+the three-event birth--projector--death window.
+-/
+def IsStandardOneTwoBirth
+    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
+  serializedComponents target =
+      serializedComponents source ++ oneTwoLocalComponents ∧
+    serializedStrands target =
+      serializedStrands source ++ oneTwoLocalStrands source ∧
+    serializedExteriorEvents target =
+      oneTwoLocalEvents source ++ serializedExteriorEvents source ∧
+    serializedActiveOrders target =
+      oneTwoLocalActiveOrders source ++ serializedActiveOrders source ∧
+    target.handles.hOne = source.handles.hOne + 1 ∧
+    target.handles.hTwo = source.handles.hTwo + 1 ∧
+    target.handles.hThree = source.handles.hThree
+
+def IsStandardOneTwoDeath
+    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
+  IsStandardOneTwoBirth target source
+
 def twoThreeLocalComponents :
     List Component :=
   [
@@ -171,4 +254,4 @@ def IsStandardTwoThreeDeath
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 3300
+-- semantic-freeze-padding: 1879

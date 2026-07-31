@@ -165,9 +165,9 @@ oriented smooth four-manifold together with an integral second-homology
 class.  No graphical evaluator, compiler, normalization, local-invariance
 proof, or topology package is a public argument.
 
-This definition is intentionally connected to the three constructions that
-the frozen frontend must supply.  During the red-first phase those names are
-left unresolved rather than replaced by parameters or `sorry`.
+This definition is connected directly to the constructions supplied by the
+frozen frontend.  None of those constructions is replaced by a public
+parameter or `sorry`.
 -/
 noncomputable def TwistedYetter
     (𝒞η : TwistedPremodularCategory K)

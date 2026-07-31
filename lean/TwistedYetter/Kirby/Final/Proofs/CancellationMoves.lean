@@ -138,6 +138,8 @@ theorem oneTwoBirth_hasTypedGraphicalNormalForm
       AddedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
+    (normalForm :
+      IsStandardOneTwoBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
@@ -151,16 +153,12 @@ theorem oneTwoBirth_hasTypedGraphicalNormalForm
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary source.turnedOver
           sourceLabeling sourceCycle).graph).interpret := by
-  have geometry :=
-    standardOneTwoCancellation_hasLocalNormalForm
-      script (Or.inl kind)
-  rw [kind] at geometry
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
     (OneTwoGraphCoordinates.ofAdded coordinates)
     (OneTwoGraphCoordinates.ofAdded_matchesCanonicalMeridian
       coordinates coordinateBinding)
-    geometry
+    normalForm
     sourceLabeling newLabel
 
 theorem oneTwoBirth_graphicalFactor
@@ -173,6 +171,8 @@ theorem oneTwoBirth_graphicalFactor
       AddedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
+    (normalForm :
+      IsStandardOneTwoBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
@@ -189,7 +189,7 @@ theorem oneTwoBirth_graphicalFactor
             sourceLabeling sourceCycle).graph := by
   have interpreted :=
     oneTwoBirth_hasTypedGraphicalNormalForm
-      𝒞η script kind coordinates coordinateBinding
+      𝒞η script kind coordinates coordinateBinding normalForm
         sourceCycle sourceLabeling newLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted]
@@ -281,6 +281,8 @@ theorem oneTwoBirth_rawCycleSum
       AddedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
+    (normalForm :
+      IsStandardOneTwoBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η target.diagram target.primalBoundary target.turnedOver
         (transport.mapCycle sourceCycle) =
@@ -334,7 +336,7 @@ theorem oneTwoBirth_rawCycleSum
         rw [addedTwoHandle_ordinaryKirbyWeight,
           addedTwoHandle_characterWeight,
           oneTwoBirth_graphicalFactor
-            𝒞η script kind coordinates coordinateBinding]
+            𝒞η script kind coordinates coordinateBinding normalForm]
         ring
     _ =
       ∑ sourceLabeling,
@@ -455,6 +457,8 @@ theorem oneTwoBirth_preserves_evaluation
       AddedTwoHandleCoordinates source target homology.tham)
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
+    (normalForm :
+      IsStandardOneTwoBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -465,7 +469,7 @@ theorem oneTwoBirth_preserves_evaluation
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
   unfold evaluateCycle
   rw [oneTwoBirth_rawCycleSum
-    𝒞η script kind coordinates coordinateBinding sourceCycle]
+    𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
   unfold thamDefinition511Normalization
   rw [counts.2.2]
 
@@ -623,6 +627,8 @@ theorem oneTwoDeath_hasTypedGraphicalNormalForm
       RemovedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
+    (normalForm :
+      IsStandardOneTwoDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
@@ -638,16 +644,12 @@ theorem oneTwoDeath_hasTypedGraphicalNormalForm
           targetLabeling
           (transport.mapCycle
             (coordinates.safeCycle sourceCycle))).graph).interpret := by
-  have geometry :=
-    standardOneTwoCancellation_hasLocalNormalForm
-      script (Or.inr kind)
-  rw [kind] at geometry
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
     (OneTwoGraphCoordinates.ofRemoved coordinates)
     (OneTwoGraphCoordinates.ofRemoved_matchesCanonicalMeridian
       coordinates coordinateBinding)
-    geometry
+    normalForm
     targetLabeling removedLabel
 
 theorem oneTwoDeath_graphicalFactor
@@ -660,6 +662,8 @@ theorem oneTwoDeath_graphicalFactor
       RemovedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
+    (normalForm :
+      IsStandardOneTwoDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
@@ -677,7 +681,7 @@ theorem oneTwoDeath_graphicalFactor
             (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
   have interpreted :=
     oneTwoDeath_hasTypedGraphicalNormalForm
-      𝒞η script kind coordinates coordinateBinding
+      𝒞η script kind coordinates coordinateBinding normalForm
         sourceCycle targetLabeling removedLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted]
@@ -772,6 +776,8 @@ theorem oneTwoDeath_rawCycleSum
       RemovedTwoHandleCoordinates source target transport)
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
+    (normalForm :
+      IsStandardOneTwoDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η source.diagram source.primalBoundary source.turnedOver
         (coordinates.safeCycle sourceCycle) =
@@ -828,7 +834,7 @@ theorem oneTwoDeath_rawCycleSum
         rw [removedTwoHandle_ordinaryKirbyWeight,
           removedTwoHandle_characterWeight,
           oneTwoDeath_graphicalFactor
-            𝒞η script kind coordinates coordinateBinding]
+            𝒞η script kind coordinates coordinateBinding normalForm]
         ring
     _ =
       ∑ targetLabeling,
@@ -976,6 +982,8 @@ theorem oneTwoDeath_preserves_evaluation
       RemovedTwoHandleCoordinates source target homology.tham)
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
+    (normalForm :
+      IsStandardOneTwoDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -999,7 +1007,7 @@ theorem oneTwoDeath_preserves_evaluation
         (homology.tham.mapCycle (coordinates.safeCycle sourceCycle)) := by
       unfold evaluateCycle thamDefinition511Normalization
       rw [oneTwoDeath_rawCycleSum
-        𝒞η script kind coordinates coordinateBinding sourceCycle]
+        𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
       rw [counts.2.2]
     _ =
       evaluateCycle 𝒞η target.diagram target.primalBoundary

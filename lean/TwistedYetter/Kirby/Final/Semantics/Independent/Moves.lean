@@ -573,12 +573,16 @@ inductive CancellationLocalNormalForm
         AddedTwoHandleCoordinates source target homology.tham)
       (coordinateBinding :
         coordinates.MatchesOneTwoBirthMeridian)
+      (normalForm :
+        IsStandardOneTwoBirth source.diagram target.diagram)
   | oneTwoDeath
       (kind : script.kind = .oneTwoDeath)
       (coordinates :
         RemovedTwoHandleCoordinates source target homology.tham)
       (coordinateBinding :
         coordinates.MatchesOneTwoDeathMeridian)
+      (normalForm :
+        IsStandardOneTwoDeath source.diagram target.diagram)
   | twoThreeBirth
       (kind : script.kind = .twoThreeBirth)
       (coordinates :
@@ -706,4 +710,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 227
+-- semantic-freeze-padding: 4111
