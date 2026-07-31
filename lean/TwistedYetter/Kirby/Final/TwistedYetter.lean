@@ -174,9 +174,9 @@ noncomputable def TwistedYetter
     (Xα :
       Σ X : ClosedOrientedSmoothFourManifold,
         ManifoldH₂ X) : K :=
-  let realization :=
-    (markedRealization_exists Xα.1 Xα.2).choose
-  evaluateMarkedDiagram 𝒞η realization.markedDiagram
+  let representative :=
+    (specialKirbyRepresentative_exists Xα.1 Xα.2).choose
+  evaluateMarkedDiagram 𝒞η representative.toHomologicallyMarkedDiagram
 
 /--
 Clean final theorem target.
@@ -193,9 +193,9 @@ theorem TwistedYetter_diffeomorphism_invariant
     TwistedYetter 𝒞η ⟨X, alpha⟩ =
       TwistedYetter 𝒞η ⟨Y, inducedH₂ f alpha⟩ := by
   unfold TwistedYetter
-  let leftExistence := markedRealization_exists X alpha
+  let leftExistence := specialKirbyRepresentative_exists X alpha
   let rightExistence :=
-    markedRealization_exists Y (inducedH₂ f alpha)
+    specialKirbyRepresentative_exists Y (inducedH₂ f alpha)
   exact
     ConditionalDescent.diffeomorphism_invariant_of_descent_data
       𝒞η

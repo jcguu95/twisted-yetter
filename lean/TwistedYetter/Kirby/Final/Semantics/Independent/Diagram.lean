@@ -485,19 +485,6 @@ def PunctureWordsHaveNoRepeatedOccurrences
       puncture.dottedComponent = dotted ∧
         puncture.cutPosition = index.1
 
-def CutOpenWordsAreCompatible
-    (trace : CombinatorialLinkTrace)
-    (punctureWord :
-      (dotted : trace.ComponentId) →
-        (trace.components dotted).role = .dotted →
-        List (DottedPuncture trace)) :
-    Prop :=
-  ∀ (dotted : trace.ComponentId)
-    (role : (trace.components dotted).role = .dotted)
-    (puncture : DottedPuncture trace),
-        puncture ∈ punctureWord dotted role →
-        puncture.dottedComponent = dotted
-
 structure DottedCutData (trace : CombinatorialLinkTrace) where
   punctureWord :
     (dotted : trace.ComponentId) →
@@ -515,8 +502,18 @@ structure DottedCutData (trace : CombinatorialLinkTrace) where
         .projectorHole dotted (punctureWord dotted role)
   puncturesHaveNoRepeatedOccurrences :
     PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
-  cutOpenWordsAreCompatible :
-    CutOpenWordsAreCompatible trace punctureWord
+
+theorem DottedCutData.puncture_dottedComponent_eq
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace)
+    (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted)
+    (puncture : DottedPuncture trace)
+    (puncture_mem : puncture ∈ cut.punctureWord dotted role) :
+    puncture.dottedComponent = dotted := by
+  obtain ⟨index, index_eq⟩ := List.mem_iff_get.mp puncture_mem
+  rw [← index_eq]
+  exact (cut.puncturesHaveNoRepeatedOccurrences dotted role index).1
 
 /--
 The handle information deliberately stops before encoding three-handle

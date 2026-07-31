@@ -358,7 +358,7 @@ axiom specialKirbyDiagram_computesH₂
     Σ primal : PrimalDegreeThreeBoundaryData diagram,
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
 
-structure MarkedRealizationData
+structure SpecialKirbyRepresentativeOf
     (X : ClosedOrientedSmoothFourManifold) where
   diagram : CombinatorialSpecialKirbyDiagram
   primalBoundary : PrimalDegreeThreeBoundaryData diagram
@@ -369,72 +369,73 @@ structure MarkedRealizationData
       ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
   alpha : PrimalKirbyH₂ primalBoundary
 
-noncomputable def MarkedRealizationData.turnover
+noncomputable def SpecialKirbyRepresentativeOf.thamHomologyIdentification
     {X : ClosedOrientedSmoothFourManifold}
-    (realization : MarkedRealizationData X) :
-    TurnoverH₂Identification realization.primalBoundary :=
+    (representative : SpecialKirbyRepresentativeOf X) :
+    TurnoverH₂Identification representative.primalBoundary :=
   { equiv := turnoverPoincareDualityEquiv
-      realization.diagram
-      realization.primalBoundary
-      realization.diagramHomologyComparison }
+      representative.diagram
+      representative.primalBoundary
+      representative.diagramHomologyComparison }
 
-noncomputable def MarkedRealizationData.markedDiagram
+noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     {X : ClosedOrientedSmoothFourManifold}
-    (realization : MarkedRealizationData X) :
+    (representative : SpecialKirbyRepresentativeOf X) :
     HomologicallyMarkedDiagram :=
-  { diagram := realization.diagram
-    primalBoundary := realization.primalBoundary
-    turnover := realization.turnover
-    alpha := realization.alpha }
+  { diagram := representative.diagram
+    primalBoundary := representative.primalBoundary
+    turnover := representative.thamHomologyIdentification
+    alpha := representative.alpha }
 
-noncomputable def MarkedRealizationData.homologyComparison
+noncomputable def SpecialKirbyRepresentativeOf.diagramH₂EquivManifoldH₂
     {X : ClosedOrientedSmoothFourManifold}
-    (realization : MarkedRealizationData X) :
-    PrimalKirbyH₂ realization.primalBoundary ≃+ ManifoldH₂ X :=
-  realization.diagramHomologyComparison.trans
-    (inducedH₂ realization.realizationDiffeomorphism)
+    (representative : SpecialKirbyRepresentativeOf X) :
+    PrimalKirbyH₂ representative.primalBoundary ≃+ ManifoldH₂ X :=
+  representative.diagramHomologyComparison.trans
+    (inducedH₂ representative.realizationDiffeomorphism)
 
-def MarkedRealizationIsCorrect
+def SpecialKirbyRepresentativeOf.representsHomologyClass
     {X : ClosedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X)
-    (realization : MarkedRealizationData X) : Prop :=
-  realization.homologyComparison realization.alpha = alpha
+    (representative : SpecialKirbyRepresentativeOf X) : Prop :=
+  representative.diagramH₂EquivManifoldH₂ representative.alpha = alpha
 
 /--
-The marked realization used by the evaluator is assembled from the explicit
+The special Kirby representative used by the evaluator is assembled from the explicit
 topology axioms above.  The selected combinatorial diagram already carries the
 cut-and-reglue plans required at all dotted components; no separate puncture
 word realization axiom is needed.
 -/
-theorem markedRealization_exists
+theorem specialKirbyRepresentative_exists
     (X : ClosedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) :
-    ∃ realization : MarkedRealizationData X,
-      MarkedRealizationIsCorrect alpha realization := by
+    ∃ representative : SpecialKirbyRepresentativeOf X,
+      representative.representsHomologyClass alpha := by
   obtain ⟨diagram, realizationDiffeomorphism⟩ := specialKirbyDiagram_exists X
   obtain ⟨primal, diagramHomologyComparison⟩ :=
     specialKirbyDiagram_computesH₂ diagram
   let homologyComparison : PrimalKirbyH₂ primal ≃+ ManifoldH₂ X :=
     diagramHomologyComparison.trans (inducedH₂ realizationDiffeomorphism)
-  let realization : MarkedRealizationData X :=
+  let representative : SpecialKirbyRepresentativeOf X :=
     { diagram := diagram
       primalBoundary := primal
       realizationDiffeomorphism := realizationDiffeomorphism
       diagramHomologyComparison := diagramHomologyComparison
       alpha := homologyComparison.symm alpha }
-  refine ⟨realization, ?_⟩
+  refine ⟨representative, ?_⟩
   exact homologyComparison.apply_symm_apply alpha
 
 axiom markedKirbyCerf_complete
     {X Y : ClosedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
-    (left : MarkedRealizationData X)
-    (leftCorrect : MarkedRealizationIsCorrect alpha left)
-    (right : MarkedRealizationData Y)
+    (left : SpecialKirbyRepresentativeOf X)
+    (leftCorrect : left.representsHomologyClass alpha)
+    (right : SpecialKirbyRepresentativeOf Y)
     (rightCorrect :
-      MarkedRealizationIsCorrect (inducedH₂ f alpha) right) :
-    Nonempty (KirbyMovie left.markedDiagram right.markedDiagram)
+      right.representsHomologyClass (inducedH₂ f alpha)) :
+    Nonempty (KirbyMovie left.toHomologicallyMarkedDiagram
+      right.toHomologicallyMarkedDiagram)
 
 /--
 The clean final target after all algebraic and local-move obligations have
@@ -446,13 +447,13 @@ def TwistedYetterDiffeomorphismInvarianceTarget
   ∀ (X Y : ClosedOrientedSmoothFourManifold)
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
-    (left : MarkedRealizationData X)
-    (leftCorrect : MarkedRealizationIsCorrect alpha left)
-    (right : MarkedRealizationData Y)
+    (left : SpecialKirbyRepresentativeOf X)
+    (leftCorrect : left.representsHomologyClass alpha)
+    (right : SpecialKirbyRepresentativeOf Y)
     (rightCorrect :
-      MarkedRealizationIsCorrect (inducedH₂ f alpha) right),
-    evaluateMarking 𝒞η left.markedDiagram =
-      evaluateMarking 𝒞η right.markedDiagram
+      right.representsHomologyClass (inducedH₂ f alpha)),
+    evaluateMarking 𝒞η left.toHomologicallyMarkedDiagram =
+      evaluateMarking 𝒞η right.toHomologicallyMarkedDiagram
 
 end TwistedYetter.Semantics.Independent
 
