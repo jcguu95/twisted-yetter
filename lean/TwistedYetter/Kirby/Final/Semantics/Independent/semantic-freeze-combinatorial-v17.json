@@ -1,0 +1,60 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v17",
+  "recorded_at_utc": "2026-07-31T14:48:33Z",
+  "recorded_at_local": "2026-07-31T08:48:33-0600",
+  "semantic_content_parent_commit": "71f24e1",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v16.json",
+  "historical_v1_through_v16_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "REMOVE_CALCULATOR_LEVEL_PUNCTURE_REALIZATION_TRUST",
+    "reason": "The invariant proof needs a cut-and-reglue plan at each dotted component, not a separately certified equality between recorded puncture words and an ambient geometric intersection computation. The complete diagram already contains DottedCutData and is selected by specialKirbyDiagram_exists.",
+    "removed_axioms": [
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections"
+    ],
+    "replacement_axiom_added": false,
+    "unit_projector_remains_derived": true,
+    "character_neutrality_remains_derived": true,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "full_lake_build_after_comment_only_reseal": "PASS",
+    "final_axiom_audit": "PASS",
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "human_semantic_review": "REQUIRED_FOR_REMAINING_PROOF_FIELDS_AND_TOPOLOGY_BOUNDARIES"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 22,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 25
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "00020bdc8f45b081150ed2f565b3329151c990217efdc6d6f212cfa70fed29e0",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0008fb96ea3cc60f8ba3c53c95b453cc2c644f3023ad70c2354db289f370010b",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "LocalReplacementSyntax.lean": "000094f7099d578e9c9dd22229baf3100f38a83d513678c164ad0fd1fc2eb283",
+    "Moves.lean": "000066f142165275ba9af97bbacbf6334c273288690be8557e85b298162a7e63",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "The project does not reconstruct ambient smooth topology or an executable puncture-word extractor.",
+    "DottedCutData is internal proof data selected noncomputably with the diagram; it is not a public calculator input.",
+    "The remaining red-team proof-field findings are not resolved by this change."
+  ]
+}

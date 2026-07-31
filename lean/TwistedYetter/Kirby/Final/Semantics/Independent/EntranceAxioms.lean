@@ -308,14 +308,6 @@ axiom realizeSpecialKirbyDiagram :
   CombinatorialSpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
 
 /--
-Primitive topology vocabulary: the exact ordered signed puncture words stored
-in the diagram are the intersections of the framed two-handle attaching link
-with a simultaneous compatible system of dotted one-handle co-core disks.
--/
-axiom DottedPunctureWordsRealizeCocoreIntersections
-    (diagram : CombinatorialSpecialKirbyDiagram) : Prop
-
-/--
 Primitive topology vocabulary: the displayed equivalence is the geometric
 identification induced by turning over the handle decomposition and applying
 Poincare duality, rather than an arbitrary isomorphism of additive groups.
@@ -329,7 +321,7 @@ axiom TurnoverIdentificationRealizesPoincareDuality
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
     Prop
 
-/-! ## Four explicit classical topology axioms -/
+/-! ## Explicit classical topology axioms -/
 
 /--
 T1. Every closed oriented smooth four-manifold admits at least one special
@@ -350,15 +342,7 @@ axiom specialKirbyDiagram_computesH₂
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
 
 /--
-T3. The puncture words of a presenting diagram have their standard co-core
-intersection interpretation.
--/
-axiom specialKirbyDiagram_punctures_realizeCocoreIntersections
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    DottedPunctureWordsRealizeCocoreIntersections diagram
-
-/--
-T4. The algebraic primal-to-THAM equivalence can be chosen to be the geometric
+T3. The algebraic primal-to-THAM equivalence can be chosen to be the geometric
 turnover/Poincare-duality identification.
 -/
 axiom specialKirbyDiagram_turnover_realizesPoincareDuality
@@ -391,9 +375,7 @@ def MarkedRealizationIsCorrect
     {X : ClosedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X)
     (realization : MarkedRealizationData X) : Prop :=
-  DottedPunctureWordsRealizeCocoreIntersections
-      realization.markedDiagram.diagram ∧
-    TurnoverIdentificationRealizesPoincareDuality
+  TurnoverIdentificationRealizesPoincareDuality
       realization.markedDiagram.diagram
       realization.markedDiagram.primalBoundary
       realization.markedDiagram.turnedOver
@@ -402,8 +384,10 @@ def MarkedRealizationIsCorrect
     realization.homologyComparison realization.markedDiagram.alpha = alpha
 
 /--
-The marked realization used by the evaluator is assembled from T1--T4.  It is
-not a fifth topology axiom and carries no opaque certificate fields.
+The marked realization used by the evaluator is assembled from the explicit
+topology axioms above.  The selected combinatorial diagram already carries the
+cut-and-reglue plans required at all dotted components; no separate puncture
+word realization axiom is needed.
 -/
 theorem markedRealization_exists
     (X : ClosedOrientedSmoothFourManifold)
@@ -429,8 +413,7 @@ theorem markedRealization_exists
       realizationDiffeomorphism := realizationDiffeomorphism
       diagramHomologyComparison := diagramHomologyComparison }
   refine ⟨realization, ?_⟩
-  refine ⟨specialKirbyDiagram_punctures_realizeCocoreIntersections diagram,
-    turnoverIsPoincareDuality, ?_⟩
+  refine ⟨turnoverIsPoincareDuality, ?_⟩
   exact homologyComparison.apply_symm_apply alpha
 
 axiom markedKirbyCerf_complete
@@ -464,4 +447,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 7600
+-- semantic-freeze-padding: 839

@@ -1,0 +1,64 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/9",
+  "recorded_at_utc": "2026-07-31T14:48:33Z",
+  "supersedes": "explicit-trust-boundary-v8.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 22,
+  "final_theorem_project_axiom_count": 22,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 25,
+  "dotted_cut_refactor": {
+    "removed": [
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections"
+    ],
+    "replacement_axiom_added": false,
+    "reason": "A CombinatorialSpecialKirbyDiagram already carries category-neutral DottedCutData for every dotted component. The existence axiom selects a complete diagram with these cut-and-reglue plans; the unit-projector and character-neutrality consequences remain Lean theorems.",
+    "remaining_primitive_topology_relation": "TurnoverIdentificationRealizesPoincareDuality"
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH2",
+    "OrientedDiffeomorphism",
+    "TurnoverIdentificationRealizesPoincareDuality",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH2",
+    "manifoldH2_addCommGroup",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH₂",
+    "specialKirbyDiagram_exists",
+    "specialKirbyDiagram_turnover_realizesPoincareDuality"
+  ],
+  "mandatory_human_review": [
+    "Does DottedCutData state exactly the cut-and-reglue plan required for the proof, without imposing calculator-only geometry?",
+    "Does TurnoverIdentificationRealizesPoincareDuality have the intended geometric meaning?",
+    "Is markedKirbyCerf_complete compatible with the selected marked diagrams and H2 transport?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "DottedPunctureWordsRealizeCocoreIntersections",
+    "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+    "DottedCutTopologyWitness",
+    "TurnoverPoincareDualityWitness",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom"
+  ]
+}
