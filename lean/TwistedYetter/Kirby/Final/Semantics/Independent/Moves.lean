@@ -256,26 +256,26 @@ structure ThamHandleChainTransport
     HandleChainGroup source.diagram.handles.hThree →+
       HandleChainGroup target.diagram.handles.hThree
   commutesWithBoundaryThree :
-    degreeTwo.comp source.turnedOver.thamBoundaryThree =
-      target.turnedOver.thamBoundaryThree.comp degreeThree
+    degreeTwo.comp source.primalBoundary.thamBoundaryThree =
+      target.primalBoundary.thamBoundaryThree.comp degreeThree
   commutesWithBoundaryTwo :
-    degreeOne.comp source.turnedOver.thamBoundaryTwo =
-      target.turnedOver.thamBoundaryTwo.comp degreeTwo
+    degreeOne.comp source.primalBoundary.thamBoundaryTwo =
+      target.primalBoundary.thamBoundaryTwo.comp degreeTwo
 
 def ThamHandleChainTransport.mapCycle
     {source target : HomologicallyMarkedDiagram}
     (transport : ThamHandleChainTransport source target) :
-    ThamTwoCycles source.turnedOver →+
-      ThamTwoCycles target.turnedOver where
+    ThamTwoCycles source.primalBoundary →+
+      ThamTwoCycles target.primalBoundary where
   toFun cycle :=
     ⟨transport.degreeTwo cycle.1, by
       change
-        (target.turnedOver.thamBoundaryTwo.comp
+        (target.primalBoundary.thamBoundaryTwo.comp
           transport.degreeTwo) cycle.1 = 0
       rw [← transport.commutesWithBoundaryTwo]
       change
         transport.degreeOne
-          (source.turnedOver.thamBoundaryTwo cycle.1) = 0
+          (source.primalBoundary.thamBoundaryTwo cycle.1) = 0
       rw [cycle.2]
       simp⟩
   map_zero' := by
@@ -288,11 +288,11 @@ def ThamHandleChainTransport.mapCycle
 def ThamHandleChainTransport.inducedH₂
     {source target : HomologicallyMarkedDiagram}
     (transport : ThamHandleChainTransport source target) :
-    ThamKirbyH₂ source.turnedOver →+
-      ThamKirbyH₂ target.turnedOver :=
+    ThamKirbyH₂ source.primalBoundary →+
+      ThamKirbyH₂ target.primalBoundary :=
   QuotientAddGroup.map
-    (thamBoundaryAsCycle source.turnedOver).range
-    (thamBoundaryAsCycle target.turnedOver).range
+    (thamBoundaryAsCycle source.primalBoundary).range
+    (thamBoundaryAsCycle target.primalBoundary).range
     transport.mapCycle
     (by
       intro sourceBoundaryCycle sourceMembership
@@ -300,10 +300,10 @@ def ThamHandleChainTransport.inducedH₂
       refine ⟨transport.degreeThree degreeThreeChain, ?_⟩
       apply Subtype.ext
       change
-        target.turnedOver.thamBoundaryThree
+        target.primalBoundary.thamBoundaryThree
             (transport.degreeThree degreeThreeChain) =
           transport.degreeTwo
-            (source.turnedOver.thamBoundaryThree degreeThreeChain)
+            (source.primalBoundary.thamBoundaryThree degreeThreeChain)
       exact (DFunLike.congr_fun
         transport.commutesWithBoundaryThree degreeThreeChain).symm)
 
@@ -339,12 +339,12 @@ structure AddedTwoHandleCoordinates
     (Fin lower.diagram.handles.hTwo ⊕ Unit) ≃
       Fin higher.diagram.handles.hTwo
   oldCoefficient :
-    ∀ (cycle : ThamTwoCycles lower.turnedOver)
+    ∀ (cycle : ThamTwoCycles lower.primalBoundary)
       (i : Fin lower.diagram.handles.hTwo),
       (transport.mapCycle cycle).1 (indexEquiv (Sum.inl i)) =
         cycle.1 i
   newCoefficientZero :
-    ∀ cycle : ThamTwoCycles lower.turnedOver,
+    ∀ cycle : ThamTwoCycles lower.primalBoundary,
       (transport.mapCycle cycle).1 (indexEquiv (Sum.inr ())) = 0
 
 def AddedTwoHandleCoordinates.mergeLabeling
@@ -408,17 +408,17 @@ structure RemovedTwoHandleCoordinates
     (Fin lower.diagram.handles.hTwo ⊕ Unit) ≃
       Fin higher.diagram.handles.hTwo
   safeCycle :
-    ThamTwoCycles higher.turnedOver →
-      ThamTwoCycles higher.turnedOver
+    ThamTwoCycles higher.primalBoundary →
+      ThamTwoCycles higher.primalBoundary
   safeCycle_sameClass :
     ∀ cycle,
-      thamCycleClass higher.turnedOver (safeCycle cycle) =
-        thamCycleClass higher.turnedOver cycle
+      thamCycleClass higher.primalBoundary (safeCycle cycle) =
+        thamCycleClass higher.primalBoundary cycle
   safe_newCoefficientZero :
     ∀ cycle,
       (safeCycle cycle).1 (indexEquiv (Sum.inr ())) = 0
   transportedOldCoefficient :
-    ∀ (cycle : ThamTwoCycles higher.turnedOver)
+    ∀ (cycle : ThamTwoCycles higher.primalBoundary)
       (i : Fin lower.diagram.handles.hTwo),
       (transport.mapCycle (safeCycle cycle)).1 i =
         (safeCycle cycle).1 (indexEquiv (Sum.inl i))
@@ -710,4 +710,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 4111
+-- semantic-freeze-padding: 6760

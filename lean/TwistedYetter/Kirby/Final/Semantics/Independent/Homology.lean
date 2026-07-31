@@ -141,29 +141,12 @@ def transposeAddHom {sourceCount targetCount : ℕ}
     funext sourceIndex
     simp [coordinatePairing, mul_add, Finset.sum_add_distrib]
 
-/--
-There is no data field here: the turned-over maps are computed below from the
-primal maps.  The wrapper keeps the primal source visible in dependent types.
--/
-structure TurnedOverBoundaryCertificate
-    {diagram : CombinatorialSpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) : Type where
-  private mk ::
-
-namespace TurnedOverBoundaryCertificate
-
-/-- The canonical and unique finite-basis turnover certificate. -/
-def canonical
-    {diagram : CombinatorialSpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
-    TurnedOverBoundaryCertificate primal :=
-  .mk
+namespace PrimalDegreeThreeBoundaryData
 
 /-- THAM `∂₂ : C₂ → C₁`, computed as the transpose of primal `∂₃`. -/
 def thamBoundaryTwo
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (_ : TurnedOverBoundaryCertificate primal) :
+    (primal : PrimalDegreeThreeBoundaryData diagram) :
     HandleChainGroup diagram.handles.hTwo →+
       HandleChainGroup diagram.handles.hThree :=
   transposeAddHom primal.boundaryThree
@@ -171,8 +154,7 @@ def thamBoundaryTwo
 /-- THAM `∂₃ : C₃ → C₂`, computed as the transpose of primal `∂₂`. -/
 def thamBoundaryThree
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (_ : TurnedOverBoundaryCertificate primal) :
+    (primal : PrimalDegreeThreeBoundaryData diagram) :
     HandleChainGroup diagram.handles.hOne →+
       HandleChainGroup diagram.handles.hTwo :=
   transposeAddHom (primalBoundaryTwo diagram)
@@ -248,54 +230,49 @@ theorem transpose_adjoint
 
 theorem boundaryTwo_is_transpose
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (certificate : TurnedOverBoundaryCertificate primal)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
     (threeChain : HandleChainGroup diagram.handles.hThree)
     (twoChain : HandleChainGroup diagram.handles.hTwo) :
     coordinatePairing (primal.boundaryThree threeChain) twoChain =
-      coordinatePairing threeChain (certificate.thamBoundaryTwo twoChain) :=
+      coordinatePairing threeChain (primal.thamBoundaryTwo twoChain) :=
   transpose_adjoint primal.boundaryThree threeChain twoChain
 
 theorem boundaryThree_is_transpose
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (certificate : TurnedOverBoundaryCertificate primal)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
     (twoChain : HandleChainGroup diagram.handles.hTwo)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     coordinatePairing (primalBoundaryTwo diagram twoChain) oneChain =
-      coordinatePairing twoChain (certificate.thamBoundaryThree oneChain) :=
+      coordinatePairing twoChain (primal.thamBoundaryThree oneChain) :=
   transpose_adjoint (primalBoundaryTwo diagram) twoChain oneChain
 
 /-- The THAM-side transposed maps square to zero, proved from primal `∂²=0`. -/
-theorem boundary_squared_zero
+theorem tham_boundary_squared_zero
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (certificate : TurnedOverBoundaryCertificate primal)
+    (primal : PrimalDegreeThreeBoundaryData diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    certificate.thamBoundaryTwo
-        (certificate.thamBoundaryThree oneChain) = 0 := by
+    primal.thamBoundaryTwo (primal.thamBoundaryThree oneChain) = 0 := by
   funext index
   calc
-    certificate.thamBoundaryTwo
-          (certificate.thamBoundaryThree oneChain) index =
+    primal.thamBoundaryTwo (primal.thamBoundaryThree oneChain) index =
         coordinatePairing
           (coordinateUnit diagram.handles.hThree index)
-          (certificate.thamBoundaryTwo
-            (certificate.thamBoundaryThree oneChain)) :=
+          (primal.thamBoundaryTwo
+            (primal.thamBoundaryThree oneChain)) :=
       (coordinatePairing_unit_left diagram.handles.hThree index _).symm
     _ = coordinatePairing
           (primal.boundaryThree
             (coordinateUnit diagram.handles.hThree index))
-          (certificate.thamBoundaryThree oneChain) :=
-      (certificate.boundaryTwo_is_transpose
+          (primal.thamBoundaryThree oneChain) :=
+      (primal.boundaryTwo_is_transpose
         (coordinateUnit diagram.handles.hThree index)
-        (certificate.thamBoundaryThree oneChain)).symm
+        (primal.thamBoundaryThree oneChain)).symm
     _ = coordinatePairing
           (primalBoundaryTwo diagram
             (primal.boundaryThree
               (coordinateUnit diagram.handles.hThree index)))
           oneChain :=
-      (certificate.boundaryThree_is_transpose
+      (primal.boundaryThree_is_transpose
         (primal.boundaryThree
           (coordinateUnit diagram.handles.hThree index))
         oneChain).symm
@@ -312,22 +289,20 @@ theorem boundary_squared_zero
       simp [coordinatePairing]
     _ = (0 : HandleChainGroup diagram.handles.hThree) index := rfl
 
-end TurnedOverBoundaryCertificate
+end PrimalDegreeThreeBoundaryData
 
 def ThamTwoCycles
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal) :=
-  turnedOver.thamBoundaryTwo.ker
+    (primal : PrimalDegreeThreeBoundaryData diagram) :=
+  primal.thamBoundaryTwo.ker
 
 def thamBoundaryAsCycle
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal) :
-    HandleChainGroup diagram.handles.hOne →+ ThamTwoCycles turnedOver where
+    (primal : PrimalDegreeThreeBoundaryData diagram) :
+    HandleChainGroup diagram.handles.hOne →+ ThamTwoCycles primal where
   toFun chain :=
-    ⟨turnedOver.thamBoundaryThree chain,
-      turnedOver.boundary_squared_zero chain⟩
+    ⟨primal.thamBoundaryThree chain,
+      primal.tham_boundary_squared_zero chain⟩
   map_zero' := by
     ext
     simp
@@ -338,16 +313,14 @@ def thamBoundaryAsCycle
 /-- The evaluator-side second homology of the turned-over handle complex. -/
 abbrev ThamKirbyH₂
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal) :=
-  ThamTwoCycles turnedOver ⧸ (thamBoundaryAsCycle turnedOver).range
+    (primal : PrimalDegreeThreeBoundaryData diagram) :=
+  ThamTwoCycles primal ⧸ (thamBoundaryAsCycle primal).range
 
 def thamCycleClass
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (cycle : ThamTwoCycles turnedOver) :
-    ThamKirbyH₂ turnedOver :=
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (cycle : ThamTwoCycles primal) :
+    ThamKirbyH₂ primal :=
   QuotientAddGroup.mk cycle
 
 /--
@@ -358,9 +331,8 @@ separately in `EntranceAxioms`.
 -/
 structure TurnoverH₂Identification
     {diagram : CombinatorialSpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal) where
-  equiv : PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ turnedOver
+    (primal : PrimalDegreeThreeBoundaryData diagram) where
+  equiv : PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal
 
 /--
 A marked diagram stores exactly one marking, on the ordinary Kirby/primal
@@ -369,16 +341,15 @@ side.  The THAM-side marking is derived from the turnover identification.
 structure HomologicallyMarkedDiagram where
   diagram : CombinatorialSpecialKirbyDiagram
   primalBoundary : PrimalDegreeThreeBoundaryData diagram
-  turnedOver : TurnedOverBoundaryCertificate primalBoundary
-  turnover : TurnoverH₂Identification turnedOver
+  turnover : TurnoverH₂Identification primalBoundary
   alpha : PrimalKirbyH₂ primalBoundary
 
 def HomologicallyMarkedDiagram.thamAlpha
     (marked : HomologicallyMarkedDiagram) :
-    ThamKirbyH₂ marked.turnedOver :=
+    ThamKirbyH₂ marked.primalBoundary :=
   marked.turnover.equiv marked.alpha
 
 end
 
 end TwistedYetter.Semantics.Independent
--- semantic-freeze-padding: 3956
+-- semantic-freeze-padding: 1596

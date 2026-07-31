@@ -65,17 +65,15 @@ structure ExactSourceBinding
       current.canonicalPresentation.topology.formal
   primalBoundary :
     PrimalDegreeThreeBoundaryData certifiedClosed.toCombinatorialSpecialKirbyDiagram
-  turnedOver :
-    TurnedOverBoundaryCertificate primalBoundary
   turnover :
-    TurnoverH₂Identification turnedOver
+    TurnoverH₂Identification primalBoundary
   /--
   The frozen THAM-side quotient and the current certified dual handle complex
   compute the same turned-over second homology.  This is topology data, not an
   evaluator equality.
   -/
   thamToCurrentH₂ :
-    ThamKirbyH₂ turnedOver ≃+
+    ThamKirbyH₂ primalBoundary ≃+
       current.canonicalPresentation.topology.handleChain.SecondHomology
 
 namespace ExactSourceBinding
@@ -128,7 +126,7 @@ noncomputable def frozenThamCycle
     {current : Presentation H2}
     {source : ExactSourceBinding semantics current}
     (marking : MarkingBinding source) :
-    ThamTwoCycles source.turnedOver :=
+    ThamTwoCycles source.primalBoundary :=
   Quotient.out (source.turnover.equiv marking.frozenAlpha)
 
 noncomputable def currentCycle
@@ -203,12 +201,11 @@ def frozenSummand
     (compiler : RoleAwareGraphCompiler frozen)
     {diagram : CombinatorialSpecialKirbyDiagram}
     {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (cycle : ThamTwoCycles turnedOver)
+    (cycle : ThamTwoCycles primal)
     (labeling : TwoHandleLabeling frozen.category diagram) : K :=
   ordinaryKirbyWeight frozen.category labeling *
-    characterWeight frozen turnedOver labeling cycle *
-    let term := compiler.compile diagram primal turnedOver labeling cycle
+    characterWeight frozen labeling cycle *
+    let term := compiler.compile diagram primal labeling cycle
     ∑ channel : term.ChannelChoice,
       term.coefficient channel * graphical.evaluate (term.graph channel)
 
@@ -272,8 +269,7 @@ structure EvaluatorBinding
         fun currentHandle =>
           algebra.simpleEquiv (labeling (handleEquiv.symm currentHandle))
       let term :=
-        compiler.compile source.frozenDiagram source.primalBoundary
-          source.turnedOver labeling marking.frozenThamCycle
+        compiler.compile source.frozenDiagram source.primalBoundary labeling marking.frozenThamCycle
       (∑ channel : term.ChannelChoice,
           term.coefficient channel *
             graphical.evaluate (term.graph channel)) =
@@ -352,7 +348,7 @@ def WeightConformance
         currentCategory currentCharacter) : Prop :=
   ∀ labeling : TwoHandleLabeling frozen.category source.frozenDiagram,
     ordinaryKirbyWeight frozen.category labeling *
-        characterWeight frozen source.turnedOver labeling
+        characterWeight frozen source.primalBoundary labeling
           marking.frozenThamCycle =
       RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareGlobalWeight
         currentCategory currentCharacter current.canonicalPresentation
@@ -453,9 +449,8 @@ theorem roleAwareCycleEval_eq_frozenEvaluateCycle
     RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
         currentCategory currentCharacter current.canonicalPresentation
         current.simultaneousGeometry marking.currentCycle =
-      evaluateCycle frozen graphical compiler normalization
-        source.frozenDiagram source.primalBoundary source.turnedOver
-          marking.frozenThamCycle := by
+      evaluateCycle frozen source.frozenDiagram source.primalBoundary
+        marking.frozenThamCycle := by
   classical
   unfold
     RoleAwarePremodularEvaluator.CanonicalPresentation.roleAwareCycleEval
@@ -604,9 +599,8 @@ noncomputable def frozenValue
     (certificate :
       FrozenConformanceCertificate semantics current frozen graphical compiler
         normalization currentCategory currentCharacter) : K :=
-  evaluateCycle frozen graphical compiler normalization
-    certificate.source.frozenDiagram certificate.source.primalBoundary
-      certificate.source.turnedOver certificate.marking.frozenThamCycle
+  evaluateCycle frozen certificate.source.frozenDiagram
+    certificate.source.primalBoundary certificate.marking.frozenThamCycle
 
 /--
 Kernel-checked semantic soundness of every admitted evaluator case.

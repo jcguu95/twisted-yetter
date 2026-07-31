@@ -15,9 +15,9 @@ open TwistedYetter.Semantics.Independent
 open
   TwistedYetter.Kirby.Final.CompleteSemanticConformance
 
-#print axioms TurnedOverBoundaryCertificate.transpose_adjoint
+#print axioms PrimalDegreeThreeBoundaryData.transpose_adjoint
 
-#print axioms TurnedOverBoundaryCertificate.boundary_squared_zero
+#print axioms PrimalDegreeThreeBoundaryData.tham_boundary_squared_zero
 
 #print axioms ElementaryMove.thamMarkingTransport
 

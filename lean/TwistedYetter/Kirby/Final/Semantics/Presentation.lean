@@ -181,4 +181,3 @@ structure SameComponentLineage
 
 
 end TwistedYetter.Kirby.Final.SemanticEightMoves
-

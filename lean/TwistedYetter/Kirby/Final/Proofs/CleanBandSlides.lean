@@ -26,11 +26,11 @@ cycle-level evaluator.
 theorem normalizedCycleExpression_evaluation
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram)
-    (cycle : ThamTwoCycles marked.turnedOver) :
+    (cycle : ThamTwoCycles marked.primalBoundary) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (normalizedCycleExpression 𝒞η marked cycle) =
       evaluateCycle 𝒞η
-        marked.diagram marked.primalBoundary marked.turnedOver cycle := by
+        marked.diagram marked.primalBoundary cycle := by
   classical
   unfold normalizedCycleExpression
   unfold canonicalRibbonGraphicalEvaluation
@@ -60,11 +60,11 @@ theorem cleanBandSlide_preserves_evaluation
       FiniteCouponTransportRealizesCompletePath
         slide.decomposition.transport)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary source.turnedOver sourceCycle =
+        source.diagram source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary target.turnedOver
+        target.diagram target.primalBoundary
           (transport.mapCycle sourceCycle) := by
   obtain ⟨attachNormalForm, attach⟩ :=
     cleanAttach_hasStandardGraphicalInterpretation

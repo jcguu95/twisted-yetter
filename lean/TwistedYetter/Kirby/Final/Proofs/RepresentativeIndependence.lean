@@ -1137,14 +1137,13 @@ incidence-column pairing with the one-handle chain.
 theorem thamBoundaryThree_apply_eq_sum_incidence
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (oneChain : HandleChainGroup diagram.handles.hOne)
     (two : Fin diagram.handles.hTwo) :
-    turnedOver.thamBoundaryThree oneChain two =
+    primal.thamBoundaryThree oneChain two =
       ∑ one : Fin diagram.handles.hOne,
         twoOneIncidence diagram one two * oneChain one := by
   classical
-  unfold TurnedOverBoundaryCertificate.thamBoundaryThree
+  unfold PrimalDegreeThreeBoundaryData.thamBoundaryThree
     transposeAddHom coordinatePairing primalBoundaryTwo
   simp [coordinateUnit, eq_comm]
 
@@ -1156,27 +1155,26 @@ theorem characterWeight_add_thamBoundaryAsCycle
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles turnedOver)
+    (cycle : ThamTwoCycles primal)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    characterWeight 𝒞η turnedOver labeling
-        (cycle + thamBoundaryAsCycle turnedOver oneChain) =
-      characterWeight 𝒞η turnedOver labeling cycle *
+    characterWeight 𝒞η labeling
+        (cycle + thamBoundaryAsCycle primal oneChain) =
+      characterWeight 𝒞η labeling cycle *
         ((∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
-            (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K) := by
+            (primal.thamBoundaryThree oneChain two) : Kˣ) : K) := by
   unfold characterWeight
   change
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (cycle.1 two + turnedOver.thamBoundaryThree oneChain two) :
+        (cycle.1 two + primal.thamBoundaryThree oneChain two) :
       Kˣ) : K) =
       ((∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^ cycle.1 two : Kˣ) : K) *
         ((∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
-            turnedOver.thamBoundaryThree oneChain two : Kˣ) : K)
+            primal.thamBoundaryThree oneChain two : Kˣ) : K)
   simp only [zpow_add, Finset.prod_mul_distrib, Units.val_mul]
 
 /--
@@ -1187,12 +1185,11 @@ theorem thamBoundaryCharacterProduct_eq_punctureWordProduct
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K) =
+        (primal.thamBoundaryThree oneChain two) : Kˣ) : K) =
       ∏ one : Fin diagram.handles.hOne,
         let dotted := diagram.handles.oneHandleIndex one
         punctureWordCharacterUnit 𝒞η diagram labeling
@@ -1202,7 +1199,7 @@ theorem thamBoundaryCharacterProduct_eq_punctureWordProduct
   have boundary_expansion :
       (∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^
-          (turnedOver.thamBoundaryThree oneChain two)) =
+          (primal.thamBoundaryThree oneChain two)) =
         ∏ two : Fin diagram.handles.hTwo,
           ∏ one : Fin diagram.handles.hOne,
             𝒞η.character.value (labeling two) ^
@@ -1210,7 +1207,7 @@ theorem thamBoundaryCharacterProduct_eq_punctureWordProduct
     apply Finset.prod_congr rfl
     intro two _
     rw [thamBoundaryThree_apply_eq_sum_incidence
-      diagram primal turnedOver oneChain two]
+      diagram primal oneChain two]
     exact
       (finset_prod_zpow_eq_zpow_sum
         (Finset.univ : Finset (Fin diagram.handles.hOne))
@@ -1300,17 +1297,16 @@ theorem characterWeight_mul_canonicalEvaluation_add_boundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles turnedOver)
+    (cycle : ThamTwoCycles primal)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    characterWeight 𝒞η turnedOver labeling
-          (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+    characterWeight 𝒞η labeling
+          (cycle + thamBoundaryAsCycle primal oneChain) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
               𝒞η.category diagram labeling)) =
-      characterWeight 𝒞η turnedOver labeling cycle *
+      characterWeight 𝒞η labeling cycle *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
@@ -1323,19 +1319,19 @@ theorem characterWeight_mul_canonicalEvaluation_add_boundary
   let boundaryFactor :=
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (turnedOver.thamBoundaryThree oneChain two) : Kˣ) : K)
+        (primal.thamBoundaryThree oneChain two) : Kˣ) : K)
   calc
     _ =
-        (characterWeight 𝒞η turnedOver labeling cycle *
+        (characterWeight 𝒞η labeling cycle *
           boundaryFactor) * graphicalValue := by
       rw [characterWeight_add_thamBoundaryAsCycle
-        𝒞η diagram primal turnedOver labeling cycle oneChain]
+        𝒞η diagram primal labeling cycle oneChain]
     _ =
-        characterWeight 𝒞η turnedOver labeling cycle *
+        characterWeight 𝒞η labeling cycle *
           (boundaryFactor * graphicalValue) := by
       rw [mul_assoc]
     _ =
-        characterWeight 𝒞η turnedOver labeling cycle *
+        characterWeight 𝒞η labeling cycle *
           ((∏ one : Fin diagram.handles.hOne,
             let dotted := diagram.handles.oneHandleIndex one
             punctureWordCharacterUnit 𝒞η diagram labeling
@@ -1343,7 +1339,7 @@ theorem characterWeight_mul_canonicalEvaluation_add_boundary
               (oneChain one)) * graphicalValue) := by
       dsimp only [boundaryFactor]
       rw [thamBoundaryCharacterProduct_eq_punctureWordProduct
-        𝒞η diagram primal turnedOver labeling oneChain]
+        𝒞η diagram primal labeling oneChain]
     _ = _ := by
       dsimp only [graphicalValue]
       rw [punctureWordProduct_canonicalEvaluation_absorbs
@@ -1357,12 +1353,11 @@ theorem evaluateCycle_add_thamBoundaryAsCycle
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (cycle : ThamTwoCycles turnedOver)
+    (cycle : ThamTwoCycles primal)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    evaluateCycle 𝒞η diagram primal turnedOver
-        (cycle + thamBoundaryAsCycle turnedOver oneChain) =
-      evaluateCycle 𝒞η diagram primal turnedOver cycle := by
+    evaluateCycle 𝒞η diagram primal
+        (cycle + thamBoundaryAsCycle primal oneChain) =
+      evaluateCycle 𝒞η diagram primal cycle := by
   unfold evaluateCycle
   apply congrArg
   apply Finset.sum_congr rfl
@@ -1375,23 +1370,23 @@ theorem evaluateCycle_add_thamBoundaryAsCycle
           𝒞η.category diagram labeling))
   calc
     ordinaryKirbyWeight 𝒞η.category labeling *
-          characterWeight 𝒞η turnedOver labeling
-            (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+          characterWeight 𝒞η labeling
+            (cycle + thamBoundaryAsCycle primal oneChain) *
         graphicalValue =
       ordinaryKirbyWeight 𝒞η.category labeling *
-        (characterWeight 𝒞η turnedOver labeling
-            (cycle + thamBoundaryAsCycle turnedOver oneChain) *
+        (characterWeight 𝒞η labeling
+            (cycle + thamBoundaryAsCycle primal oneChain) *
           graphicalValue) := by
       rw [mul_assoc]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
-        (characterWeight 𝒞η turnedOver labeling cycle *
+        (characterWeight 𝒞η labeling cycle *
           graphicalValue) := by
       rw [characterWeight_mul_canonicalEvaluation_add_boundary
-        𝒞η diagram primal turnedOver labeling cycle oneChain]
+        𝒞η diagram primal labeling cycle oneChain]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
-          characterWeight 𝒞η turnedOver labeling cycle *
+          characterWeight 𝒞η labeling cycle *
         graphicalValue := by
       rw [mul_assoc]
 
@@ -1402,24 +1397,23 @@ class, not on the chosen cycle representative.
 theorem frozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal) :
+    (primal : PrimalDegreeThreeBoundaryData diagram) :
     RepresentativeIndependenceStatement
-      𝒞η diagram primal turnedOver := by
+      𝒞η diagram primal := by
   intro left right same_class
   change
     (QuotientAddGroup.mk'
-      (thamBoundaryAsCycle turnedOver).range) left =
+      (thamBoundaryAsCycle primal).range) left =
       (QuotientAddGroup.mk'
-        (thamBoundaryAsCycle turnedOver).range) right at same_class
+        (thamBoundaryAsCycle primal).range) right at same_class
   obtain ⟨boundary, boundary_mem, left_add_boundary_eq⟩ :=
     (QuotientAddGroup.mk'_eq_mk'
-      (thamBoundaryAsCycle turnedOver).range).mp same_class
+      (thamBoundaryAsCycle primal).range).mp same_class
   obtain ⟨oneChain, oneChain_eq⟩ := boundary_mem
   subst boundary
   rw [← left_add_boundary_eq]
   exact (evaluateCycle_add_thamBoundaryAsCycle
-    𝒞η diagram primal turnedOver left oneChain).symm
+    𝒞η diagram primal left oneChain).symm
 
 end
 

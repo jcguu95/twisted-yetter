@@ -53,9 +53,8 @@ noncomputable def characterWeight
     (𝒞η : TwistedPremodularCategory K)
     {diagram : CombinatorialSpecialKirbyDiagram}
     {primal : PrimalDegreeThreeBoundaryData diagram}
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles turnedOver) : K :=
+    (cycle : ThamTwoCycles primal) : K :=
   ((∏ handle,
       (𝒞η.character.value (labeling handle)) ^ (cycle.1 handle)) : Kˣ)
 
@@ -684,9 +683,8 @@ structure RoleAwareCompiledTerm
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (_primal : PrimalDegreeThreeBoundaryData diagram)
-    (_turnedOver : TurnedOverBoundaryCertificate _primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (_cycle : ThamTwoCycles _turnedOver) where
+    (_cycle : ThamTwoCycles _primal) where
   graph : ClosedRibbonExpression 𝒞η.category :=
     .morphism
       (compileCutOpenExteriorMorphism 𝒞η.category diagram labeling)
@@ -696,10 +694,9 @@ noncomputable def canonicalRoleAwareGraphCompiler
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles turnedOver) :
-    RoleAwareCompiledTerm 𝒞η diagram primal turnedOver labeling cycle :=
+    (cycle : ThamTwoCycles primal) :
+    RoleAwareCompiledTerm 𝒞η diagram primal labeling cycle :=
   {}
 
 /--
@@ -725,14 +722,13 @@ noncomputable def rawCycleSum
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (cycle : ThamTwoCycles turnedOver) : K :=
+    (cycle : ThamTwoCycles primal) : K :=
   ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
     ordinaryKirbyWeight 𝒞η.category labeling *
-    characterWeight 𝒞η turnedOver labeling cycle *
+    characterWeight 𝒞η labeling cycle *
     let term :=
       canonicalRoleAwareGraphCompiler
-        𝒞η diagram primal turnedOver labeling cycle
+        𝒞η diagram primal labeling cycle
     canonicalRibbonGraphicalEvaluation 𝒞η.category term.graph
 
 noncomputable def evaluateCycle
@@ -740,14 +736,13 @@ noncomputable def evaluateCycle
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (cycle : ThamTwoCycles turnedOver) : K :=
+    (cycle : ThamTwoCycles primal) : K :=
   thamDefinition511Normalization
       𝒞η.category.globalDimension
       diagram.handles.hThree
       diagram.handles.hTwo
       diagram.handles.hOne *
-    rawCycleSum 𝒞η diagram primal turnedOver cycle
+    rawCycleSum 𝒞η diagram primal cycle
 
 /--
 Representative independence is not baked into the definition.  It is the
@@ -757,15 +752,14 @@ def RepresentativeIndependenceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal) : Prop :=
-  ∀ left right : ThamTwoCycles turnedOver,
-    thamCycleClass turnedOver left = thamCycleClass turnedOver right →
+    (primal : PrimalDegreeThreeBoundaryData diagram) : Prop :=
+  ∀ left right : ThamTwoCycles primal,
+    thamCycleClass primal left = thamCycleClass primal right →
     evaluateCycle 𝒞η
-        diagram primal turnedOver left =
+        diagram primal left =
       evaluateCycle 𝒞η
-        diagram primal turnedOver right
+        diagram primal right
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 263
+-- semantic-freeze-padding: 934

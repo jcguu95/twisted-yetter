@@ -23,11 +23,11 @@ def LocalMoveInvarianceStatement
     (𝒞η : TwistedPremodularCategory K) : Prop :=
   ∀ {source target : HomologicallyMarkedDiagram},
     (move : ElementaryMove source target) →
-    ∀ sourceCycle : ThamTwoCycles source.turnedOver,
+    ∀ sourceCycle : ThamTwoCycles source.primalBoundary,
       evaluateCycle 𝒞η
-          source.diagram source.primalBoundary source.turnedOver sourceCycle =
+          source.diagram source.primalBoundary sourceCycle =
         evaluateCycle 𝒞η
-          target.diagram target.primalBoundary target.turnedOver
+          target.diagram target.primalBoundary
             (move.homology.tham.mapCycle sourceCycle)
 
 noncomputable def evaluateMarking
@@ -35,9 +35,9 @@ noncomputable def evaluateMarking
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram) : K :=
   evaluateCycle 𝒞η
-    marked.diagram marked.primalBoundary marked.turnedOver
+    marked.diagram marked.primalBoundary
     (Quotient.out marked.thamAlpha)
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 618
+-- semantic-freeze-padding: 263

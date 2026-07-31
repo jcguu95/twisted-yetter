@@ -1,0 +1,80 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v20",
+  "recorded_at_utc": "2026-07-31T17:32:39Z",
+  "semantic_content_parent_commit": "453318a9afb9351568216c25f3b3adb52422ad41",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v19.json",
+  "historical_v1_through_v19_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "REMOVE_EMPTY_TURNED_OVER_BOUNDARY_CERTIFICATE",
+    "reason": "The THAM-side boundary maps are canonical finite-basis transposes of the primal boundary maps. The removed certificate had no fields, no choices, and no topology realization content; retaining it made a definition look like external evidence.",
+    "removed_declarations": [
+      "TurnedOverBoundaryCertificate",
+      "TurnedOverBoundaryCertificate.canonical"
+    ],
+    "derived_directly_from_primal_data": [
+      "PrimalDegreeThreeBoundaryData.thamBoundaryTwo",
+      "PrimalDegreeThreeBoundaryData.thamBoundaryThree",
+      "PrimalDegreeThreeBoundaryData.tham_boundary_squared_zero",
+      "ThamTwoCycles",
+      "ThamKirbyH2"
+    ],
+    "external_topology_boundary_unchanged": "turnoverPoincareDualityEquiv",
+    "axiom_count_changed": false,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "full_final_route_build": "PASS",
+    "full_project_build": "BLOCKED_STALE_DOTTED_CUT_IMPLEMENTATION_BRIDGE",
+    "final_axiom_audit": "PASS",
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 20,
+    "red_team_likely_proof_field_count": 63,
+    "red_team_suspicious_declaration_count": 8,
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES"
+  },
+  "comparison_blocker": {
+    "module": "TwistedYetter.Kirby.Final.Semantics.DottedCutImplementationBridge",
+    "status": "BLOCKED_SEMANTIC_MISMATCH",
+    "implementation_has": "serialized ordered puncture words",
+    "frozen_semantics_requires": [
+      "cut-open exterior trace",
+      "projector-site index for every dotted component",
+      "exact projector-site event binding"
+    ],
+    "policy": "Frozen semantics was not weakened and no data was fabricated to make the comparison green."
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 20,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 23
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "00010fdb976af9de796855a20065d9003efbde9530d8d931d4e15a0bcc796410",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0006469490caf55a68fcd63ee773527a8b4f1131b1a6b2dca9cca3c7cc9c7b1e",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000c39641256f4f9ac4e2dade3e1ccc4d8961f15932f2ec5d6846264899a06c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000094f7099d578e9c9dd22229baf3100f38a83d513678c164ad0fd1fc2eb283",
+    "Moves.lean": "000e0c9882ec24afa92abf0b1f2538ab204d835dd541671007d43654f2dc6e5f",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "This freeze does not certify the stale implementation comparison bridge.",
+    "This freeze does not add a new four-manifold theorem or change the public theorem signature.",
+    "The red-team proof-field findings remain subject to human semantic review."
+  ]
+}

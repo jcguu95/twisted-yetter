@@ -104,7 +104,7 @@ structure CleanBandEndpointNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (_slide : CleanBandSlide source.diagram target.diagram)
-    (_sourceCycle : ThamTwoCycles source.turnedOver) where
+    (_sourceCycle : ThamTwoCycles source.primalBoundary) where
   movingLabel : 𝒞η.category.simples.Simple
   stationaryLabel : 𝒞η.category.simples.Simple
   context :
@@ -119,7 +119,7 @@ def CleanBandEndpointNormalForm.identityStage
     {𝒞η : TwistedPremodularCategory K}
     {source target : HomologicallyMarkedDiagram}
     {slide : CleanBandSlide source.diagram target.diagram}
-    {sourceCycle : ThamTwoCycles source.turnedOver}
+    {sourceCycle : ThamTwoCycles source.primalBoundary}
     (normalForm :
       CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
     ClosedRibbonExpression 𝒞η.category :=
@@ -133,7 +133,7 @@ def CleanBandEndpointNormalForm.resolvedStage
     {𝒞η : TwistedPremodularCategory K}
     {source target : HomologicallyMarkedDiagram}
     {slide : CleanBandSlide source.diagram target.diagram}
-    {sourceCycle : ThamTwoCycles source.turnedOver}
+    {sourceCycle : ThamTwoCycles source.primalBoundary}
     (normalForm :
       CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
     ClosedRibbonExpression 𝒞η.category :=
@@ -153,7 +153,7 @@ noncomputable def normalizedCycleExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram)
-    (cycle : ThamTwoCycles marked.turnedOver) :
+    (cycle : ThamTwoCycles marked.primalBoundary) :
     ClosedRibbonExpression 𝒞η.category :=
   .morphism
     (thamDefinition511Normalization
@@ -163,10 +163,9 @@ noncomputable def normalizedCycleExpression
           marked.diagram.handles.hOne •
       ∑ labeling : TwoHandleLabeling 𝒞η.category marked.diagram,
         (ordinaryKirbyWeight 𝒞η.category labeling *
-            characterWeight 𝒞η marked.turnedOver labeling cycle) •
+            characterWeight 𝒞η labeling cycle) •
           (canonicalRoleAwareGraphCompiler
-            𝒞η marked.diagram marked.primalBoundary marked.turnedOver
-              labeling cycle).graph.interpret)
+            𝒞η marked.diagram marked.primalBoundary labeling cycle).graph.interpret)
 
 /--
 Clean attachment has the standard typed graphical interpretation.
@@ -183,7 +182,7 @@ axiom cleanAttach_hasStandardGraphicalInterpretation
     (slide : CleanBandSlide source.diagram target.diagram)
     (slideRealizes :
       CleanBandSlideRealizesStandardKirbySlide slide)
-    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    (sourceCycle : ThamTwoCycles source.primalBoundary) :
     ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
       FramedRibbonIsotopic
         (normalizedCycleExpression 𝒞η source sourceCycle)
@@ -203,7 +202,7 @@ axiom cleanDetach_hasStandardGraphicalInterpretation
     (slideRealizes :
       CleanBandSlideRealizesStandardKirbySlide slide)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceCycle : ThamTwoCycles source.primalBoundary)
     :
     ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
       FramedRibbonIsotopic
@@ -229,7 +228,7 @@ axiom finiteCouponTransport_hasTypedGraphicalDerivation
     (transportComplete :
       FiniteCouponTransportRealizesCompletePath
         slide.decomposition.transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceCycle : ThamTwoCycles source.primalBoundary)
     (attachNormalForm :
       CleanBandEndpointNormalForm 𝒞η slide sourceCycle)
     (detachNormalForm :
@@ -257,7 +256,7 @@ axiom framedIsotopy_hasTypedGraphicalInterpretation
     (scriptRealizes :
       FramedIsotopyScriptRealizesFramedIsotopy script)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    (sourceCycle : ThamTwoCycles source.primalBoundary) :
     FramedRibbonIsotopic
       (normalizedCycleExpression 𝒞η source sourceCycle)
       (normalizedCycleExpression 𝒞η target
@@ -337,8 +336,7 @@ axiom turnoverPoincareDualityEquiv
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (homologyComparison :
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    PrimalKirbyH₂ primal ≃+
-      ThamKirbyH₂ (TurnedOverBoundaryCertificate.canonical primal)
+    PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal
 
 /-! ## Explicit classical topology axioms -/
 
@@ -371,16 +369,10 @@ structure MarkedRealizationData
       ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
   alpha : PrimalKirbyH₂ primalBoundary
 
-def MarkedRealizationData.turnedOver
-    {X : ClosedOrientedSmoothFourManifold}
-    (realization : MarkedRealizationData X) :
-    TurnedOverBoundaryCertificate realization.primalBoundary :=
-  TurnedOverBoundaryCertificate.canonical realization.primalBoundary
-
 noncomputable def MarkedRealizationData.turnover
     {X : ClosedOrientedSmoothFourManifold}
     (realization : MarkedRealizationData X) :
-    TurnoverH₂Identification realization.turnedOver :=
+    TurnoverH₂Identification realization.primalBoundary :=
   { equiv := turnoverPoincareDualityEquiv
       realization.diagram
       realization.primalBoundary
@@ -392,7 +384,6 @@ noncomputable def MarkedRealizationData.markedDiagram
     HomologicallyMarkedDiagram :=
   { diagram := realization.diagram
     primalBoundary := realization.primalBoundary
-    turnedOver := realization.turnedOver
     turnover := realization.turnover
     alpha := realization.alpha }
 
@@ -465,4 +456,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 2561
+-- semantic-freeze-padding: 21105

@@ -39,11 +39,11 @@ theorem cleanBandElementaryMove_preserves_evaluation
       elementaryMoveKind move = .oneOverOne ∨
         elementaryMoveKind move = .twoOverOne ∨
         elementaryMoveKind move = .twoOverTwo)
-    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary source.turnedOver sourceCycle =
+        source.diagram source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary target.turnedOver
+        target.diagram target.primalBoundary
           (move.homology.tham.mapCycle sourceCycle) := by
   cases move with
   | framedIsotopy =>
@@ -76,11 +76,11 @@ theorem framedIsotopy_preserves_evaluation
     (scriptRealizes :
       FramedIsotopyScriptRealizesFramedIsotopy script)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.turnedOver) :
+    (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary source.turnedOver sourceCycle =
+        source.diagram source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary target.turnedOver
+        target.diagram target.primalBoundary
           (transport.mapCycle sourceCycle) := by
   have interpretation :=
     shum_framedRibbonCoherence

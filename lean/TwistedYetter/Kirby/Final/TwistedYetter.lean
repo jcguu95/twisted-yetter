@@ -52,28 +52,28 @@ theorem elementaryMove_preserves_frontend_evaluation
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary marked.turnedOver)
+          marked.diagram marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
     evaluateMarkedDiagram 𝒞η source =
       evaluateMarkedDiagram 𝒞η target := by
-  let sourceCycle : ThamTwoCycles source.turnedOver :=
+  let sourceCycle : ThamTwoCycles source.primalBoundary :=
     Quotient.out source.thamAlpha
-  let transportedCycle : ThamTwoCycles target.turnedOver :=
+  let transportedCycle : ThamTwoCycles target.primalBoundary :=
     move.homology.tham.mapCycle sourceCycle
-  let targetCycle : ThamTwoCycles target.turnedOver :=
+  let targetCycle : ThamTwoCycles target.primalBoundary :=
     Quotient.out target.thamAlpha
   apply (localInvariant move sourceCycle).trans
   apply representativeIndependent target transportedCycle targetCycle
   change
     move.homology.tham.inducedH₂
-        (thamCycleClass source.turnedOver sourceCycle) =
-      thamCycleClass target.turnedOver targetCycle
-  rw [show thamCycleClass source.turnedOver sourceCycle = source.thamAlpha by
+        (thamCycleClass source.primalBoundary sourceCycle) =
+      thamCycleClass target.primalBoundary targetCycle
+  rw [show thamCycleClass source.primalBoundary sourceCycle = source.thamAlpha by
     exact Quotient.out_eq source.thamAlpha]
-  rw [show thamCycleClass target.turnedOver targetCycle = target.thamAlpha by
+  rw [show thamCycleClass target.primalBoundary targetCycle = target.thamAlpha by
     exact Quotient.out_eq target.thamAlpha]
   exact move.thamMarkingTransport.symm
 
@@ -89,7 +89,7 @@ theorem kirbyMovie_preserves_frontend_evaluation
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary marked.turnedOver)
+          marked.diagram marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
@@ -142,7 +142,7 @@ theorem diffeomorphism_invariant_of_descent_data
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary marked.turnedOver)
+          marked.diagram marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η) :
     TwistedYetterDiffeomorphismInvarianceTarget
@@ -201,7 +201,7 @@ theorem TwistedYetter_diffeomorphism_invariant
       𝒞η
       (fun marked =>
         frozenFrontendRepresentativeIndependence
-          𝒞η marked.diagram marked.primalBoundary marked.turnedOver)
+          𝒞η marked.diagram marked.primalBoundary)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
       leftExistence.choose leftExistence.choose_spec

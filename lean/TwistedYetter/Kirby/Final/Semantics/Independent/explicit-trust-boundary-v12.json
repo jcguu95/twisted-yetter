@@ -1,0 +1,62 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/12",
+  "recorded_at_utc": "2026-07-31T17:32:39Z",
+  "supersedes": "explicit-trust-boundary-v11.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 20,
+  "final_theorem_project_axiom_count": 20,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 23,
+  "turnover_refactor": {
+    "removed_empty_structure": "TurnedOverBoundaryCertificate",
+    "canonical_construction": "THAM boundary maps and homology are derived directly from PrimalDegreeThreeBoundaryData",
+    "external_topology_axiom_unchanged": "turnoverPoincareDualityEquiv",
+    "reason": "An empty wrapper is not evidence and should not obscure which turnover facts are algebraic definitions and which one is the genuine topology boundary."
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH2",
+    "specialKirbyDiagram_exists",
+    "turnoverPoincareDualityEquiv",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "mandatory_human_review": [
+    "Is turnoverPoincareDualityEquiv the intended geometric dual-handle/Poincare-duality identification?",
+    "Does underlyingTopologicalSpace assign the intended topology to each closed oriented smooth four-manifold?",
+    "Does underlyingHomeomorphism forget an oriented diffeomorphism to its actual underlying homeomorphism?",
+    "Is markedKirbyCerf_complete compatible with Mathlib singular-homology transport?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "TurnedOverBoundaryCertificate",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom"
+  ],
+  "known_nonfinal_blocker": {
+    "module": "DottedCutImplementationBridge",
+    "status": "BLOCKED_SEMANTIC_MISMATCH",
+    "not_in_final_theorem_dependency_closure": true
+  }
+}
