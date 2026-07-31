@@ -1,0 +1,69 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/11",
+  "recorded_at_utc": "2026-07-31T16:03:58Z",
+  "supersedes": "explicit-trust-boundary-v10.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 20,
+  "final_theorem_project_axiom_count": 20,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 23,
+  "homology_refactor": {
+    "removed": [
+      "ManifoldH2",
+      "manifoldH2_addCommGroup",
+      "inducedH2"
+    ],
+    "added": [
+      "underlyingTopologicalSpace",
+      "underlyingHomeomorphism"
+    ],
+    "derived": [
+      "integralSingularH2Functor",
+      "ManifoldH2",
+      "inducedH2"
+    ],
+    "reason": "H2 is now Mathlib integral singular homology valued in AddCommGrpCat. Its abelian-group structure and functorial map under an underlying homeomorphism are definitions rather than project axioms."
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH2",
+    "specialKirbyDiagram_exists",
+    "turnoverPoincareDualityEquiv",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "mandatory_human_review": [
+    "Does underlyingTopologicalSpace assign the intended topology to each closed oriented smooth four-manifold?",
+    "Does underlyingHomeomorphism forget an oriented diffeomorphism to its actual underlying homeomorphism?",
+    "Is markedKirbyCerf_complete compatible with Mathlib singular-homology transport?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "ManifoldH2 axiom",
+    "manifoldH2_addCommGroup",
+    "inducedH2 axiom",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom"
+  ]
+}

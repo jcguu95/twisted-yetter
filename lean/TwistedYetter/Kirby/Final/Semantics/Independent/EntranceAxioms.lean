@@ -1,6 +1,9 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
 import TwistedYetter.Kirby.Final.Semantics.Independent.OneTwoLocalReplacement
 import TwistedYetter.Kirby.Final.Semantics.Independent.TwoThreeLocalReplacement
+import Mathlib.AlgebraicTopology.SingularHomology.Basic
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Category.Grp.Colimits
 
 /-!
 # Independent semantics: explicit entrance axioms
@@ -16,6 +19,8 @@ certificates are assembled below as theorems from individually named inputs.
 -/
 
 namespace TwistedYetter.Semantics.Independent
+
+open CategoryTheory
 
 universe uK
 
@@ -279,24 +284,39 @@ parameters.
 
 axiom ClosedOrientedSmoothFourManifold : Type
 
-axiom ManifoldH₂ :
-  ClosedOrientedSmoothFourManifold → Type
+/-- The underlying topological space of a smooth oriented four-manifold. -/
+axiom underlyingTopologicalSpace :
+  ClosedOrientedSmoothFourManifold → TopCat
 
 axiom OrientedDiffeomorphism :
   ClosedOrientedSmoothFourManifold →
   ClosedOrientedSmoothFourManifold →
   Type
 
-axiom manifoldH₂_addCommGroup
-    (X : ClosedOrientedSmoothFourManifold) :
-    AddCommGroup (ManifoldH₂ X)
-
-attribute [instance] manifoldH₂_addCommGroup
-
-axiom inducedH₂
+/-- An oriented diffeomorphism supplies its underlying homeomorphism. -/
+axiom underlyingHomeomorphism
     {X Y : ClosedOrientedSmoothFourManifold} :
     OrientedDiffeomorphism X Y →
-    ManifoldH₂ X ≃+ ManifoldH₂ Y
+    (underlyingTopologicalSpace X ≅ underlyingTopologicalSpace Y)
+
+/-- Integral singular homology in degree two. -/
+noncomputable def integralSingularH₂Functor :
+    TopCat ⥤ AddCommGrpCat :=
+  (AlgebraicTopology.singularHomologyFunctor AddCommGrpCat 2).obj
+    (AddCommGrpCat.of ℤ)
+
+/-- The second integral singular homology group of a four-manifold. -/
+noncomputable def ManifoldH₂
+    (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
+  integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
+
+/-- Functoriality of integral singular homology under an oriented diffeomorphism. -/
+noncomputable def inducedH₂
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (f : OrientedDiffeomorphism X Y) :
+    ManifoldH₂ X ≃+ ManifoldH₂ Y :=
+  CategoryTheory.Iso.addCommGroupIsoToAddEquiv
+    (integralSingularH₂Functor.mapIso (underlyingHomeomorphism f))
 
 /--
 The closed oriented smooth four-manifold obtained from a combinatorial special
@@ -445,4 +465,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 10174
+-- semantic-freeze-padding: 2561

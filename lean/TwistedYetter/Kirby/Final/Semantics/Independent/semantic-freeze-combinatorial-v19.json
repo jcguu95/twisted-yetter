@@ -1,0 +1,70 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v19",
+  "recorded_at_utc": "2026-07-31T16:03:58Z",
+  "semantic_content_parent_commit": "4bb57e1",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v18.json",
+  "historical_v1_through_v18_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "MATHLIB_INTEGRAL_SINGULAR_HOMOLOGY_H2",
+    "reason": "The manifold marking should be the actual second integral singular homology group, not an arbitrary type equipped with a separately postulated additive commutative group structure and induced maps.",
+    "removed_axioms": [
+      "ManifoldH2",
+      "manifoldH2_addCommGroup",
+      "inducedH2"
+    ],
+    "added_foundational_constants": [
+      "underlyingTopologicalSpace",
+      "underlyingHomeomorphism"
+    ],
+    "derived_definitions": [
+      "integralSingularH2Functor",
+      "ManifoldH2",
+      "inducedH2"
+    ],
+    "mathlib_definition": "AlgebraicTopology.singularHomologyFunctor AddCommGrpCat 2 with coefficient object AddCommGrpCat.of Int",
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "full_final_route_build": "PASS",
+    "final_axiom_audit": "PASS",
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 20,
+    "red_team_likely_proof_field_count": 63,
+    "red_team_suspicious_declaration_count": 10,
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 20,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 23
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "000cbc5d8628913b1182545a56b4d48515cfe800486121a14cdd3161f9439257",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0008fb96ea3cc60f8ba3c53c95b453cc2c644f3023ad70c2354db289f370010b",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "LocalReplacementSyntax.lean": "000094f7099d578e9c9dd22229baf3100f38a83d513678c164ad0fd1fc2eb283",
+    "Moves.lean": "000066f142165275ba9af97bbacbf6334c273288690be8557e85b298162a7e63",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "The project does not formalize smooth manifolds or derive the underlying topological space from a smooth atlas.",
+    "The project does not formalize oriented diffeomorphisms; their underlying TopCat isomorphisms remain explicit foundational inputs.",
+    "The red-team proof-field findings remain subject to human semantic review."
+  ]
+}
