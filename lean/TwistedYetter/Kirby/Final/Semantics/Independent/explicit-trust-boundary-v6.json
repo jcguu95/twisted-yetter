@@ -1,0 +1,67 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/6",
+  "recorded_at_utc": "2026-07-31T13:10:27Z",
+  "supersedes": "explicit-trust-boundary-v5.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 21,
+  "final_theorem_project_axiom_count": 21,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 24,
+  "final_theorem_closure_changed_from_v5": true,
+  "newly_required_visible_certificate_types": [
+    "DottedCutTopologyWitness",
+    "TurnoverPoincareDualityWitness"
+  ],
+  "certificate_carrier": "MarkedRealizationData",
+  "certificate_supplier": "markedRealization_exists",
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "DiagramRealizationWitness",
+    "DottedCutTopologyWitness",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH2",
+    "OrientedDiffeomorphism",
+    "TurnoverPoincareDualityWitness",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH2",
+    "manifoldH2_addCommGroup",
+    "markedKirbyCerf_complete",
+    "markedRealization_exists",
+    "shum_framedRibbonCoherence"
+  ],
+  "mandatory_human_review": [
+    {
+      "name": "DottedCutTopologyWitness",
+      "question": "Does this certificate really mean that the evaluator's exact ordered puncture words come from compatible dotted spanning disks and reglue to the stored diagram?"
+    },
+    {
+      "name": "TurnoverPoincareDualityWitness",
+      "question": "Does this certificate really mean that the stored primal-to-THAM H2 equivalence is induced by turning over the handle decomposition and Poincare duality?"
+    },
+    {
+      "name": "markedRealization_exists",
+      "question": "Is it mathematically justified that every marked manifold input has a realization carrying both certificates?"
+    }
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom",
+    "legacy backend conformance certificate"
+  ]
+}

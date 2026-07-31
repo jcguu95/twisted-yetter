@@ -30,8 +30,8 @@ axiom DottedCutTopologyWitness :
   CombinatorialSpecialKirbyDiagram → Type
 
 /-!
-No global existence assertion is made here.  If a later theorem needs this
-geometric interpretation, it must request the witness explicitly.
+No global existence assertion is made here.  Every admitted marked
+realization must carry this witness explicitly.
 -/
 
 /-! ## Turned-over handle topology -/
@@ -46,8 +46,8 @@ axiom TurnoverPoincareDualityWitness
     Type
 
 /-!
-No global existence assertion is made here.  If a later theorem needs this
-geometric interpretation, it must request the witness explicitly.
+No global existence assertion is made here.  Every admitted marked
+realization must carry this witness explicitly.
 -/
 
 /-! ## Clean band-slide topology
@@ -337,6 +337,20 @@ abbrev DiagramRealizes
 structure MarkedRealizationData
     (X : ClosedOrientedSmoothFourManifold) where
   markedDiagram : HomologicallyMarkedDiagram
+  /--
+  Visible certificate that the exact ordered puncture words used by the
+  evaluator come from compatible dotted spanning disks and reglue to the
+  stored diagram.
+  -/
+  dottedCutTopologyCertificate :
+    DottedCutTopologyWitness markedDiagram.diagram
+  /--
+  Visible certificate that the stored primal-to-THAM homology equivalence is
+  the geometric Poincare-duality identification induced by turning over the
+  handle decomposition.
+  -/
+  turnoverPoincareDualityCertificate :
+    TurnoverPoincareDualityWitness markedDiagram
   homologyComparison :
     PrimalKirbyH₂ markedDiagram.primalBoundary ≃+ ManifoldH₂ X
 
@@ -391,4 +405,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 3211
+-- semantic-freeze-padding: 2771
