@@ -1,0 +1,56 @@
+{
+  "schema": "twisted-yetter/lean-legacy-final-semantics-removal/1",
+  "recorded_at_utc": "2026-07-31T18:12:13Z",
+  "source_commit": "e59ddd381cb15ac1b10dda3b4f4d96eb61529b2b",
+  "status": "PASS_LEGACY_ROUTES_REMOVED_CURRENT_MAINLINE_PRESERVED",
+  "removed_lean_module_count": 37,
+  "removed_families": [
+    "fixed-H2 semantic conformance",
+    "historical SemanticSpecification and SemanticEightMoves",
+    "legacy evaluator and presentation semantics",
+    "dotted-cut and closing-handle implementation bridges",
+    "combinatorial comparison and complete conformance",
+    "obsolete bridge and conformance axiom audits"
+  ],
+  "preserved_current_families": [
+    "Independent frozen semantics",
+    "source-bound local-move proofs",
+    "TwistedYetter_diffeomorphism_invariant",
+    "FinalAxiomAudit",
+    "CombinatorialSemanticMutationAudit"
+  ],
+  "verification": {
+    "library_target": "PASS",
+    "final_axiom_audit": "PASS",
+    "semantic_mutation_audit": "PASS",
+    "presentation_schema_regression_audit": "PASS",
+    "deleted_module_import_search": "PASS_NO_REFERENCES",
+    "final_theorem_project_axiom_count": 20,
+    "final_theorem_standard_lean_axiom_count": 3
+  },
+  "red_team_source_audit": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "report_json": "/private/tmp/lean-red-team-audit-post-legacy-removal-v21.json",
+    "report_markdown": "/private/tmp/lean-red-team-audit-post-legacy-removal-v21.zh-TW.md",
+    "explicit_axioms": 20,
+    "likely_proof_fields": 63,
+    "suspicious_declarations": 8,
+    "remaining_suspicious_declarations": [
+      "EventContinuationsPreserveComponentsAndOrientations",
+      "CutOpenEvent.PairingCompatible",
+      "CutOpenWordsAreCompatible",
+      "MarkedRealizationData",
+      "MarkedRealizationData.turnover",
+      "MarkedRealizationData.markedDiagram",
+      "MarkedRealizationData.homologyComparison",
+      "MarkedRealizationIsCorrect"
+    ]
+  },
+  "semantic_change": false,
+  "axiom_change": false,
+  "non_claims": [
+    "This cleanup does not discharge the eight remaining human semantic review items.",
+    "This cleanup does not alter the frozen normative Lean files or their hashes.",
+    "This cleanup does not certify removed computation artifacts against the frozen evaluator."
+  ]
+}

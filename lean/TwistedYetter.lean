@@ -1,11 +1,9 @@
-import TwistedYetter.Kirby.PremodularRoleAwareMainlineAxiomAudit
+import TwistedYetter.Kirby.Final.FinalAxiomAudit
 
 /-!
 # Twisted Yetter formal main line
 
-The default library target contains only the role-aware premodular invariant,
-its modular specialization, and the final axiom audit.  Historical evaluator,
-compiler, mutation, and compatibility routes are intentionally not imported
-here; their retirement is recorded in
-`legacy-archives/lean-kirby-retired-axioms-2026-07-27.lean.txt`.
+The default library target contains only the frozen-frontend premodular
+invariant and its final axiom audit. Historical evaluator, compiler, and
+compatibility routes have been removed from the Lean source tree.
 -/

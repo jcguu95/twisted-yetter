@@ -1,5 +1,4 @@
 import TwistedYetter.Kirby.Presentation
-import TwistedYetter.Kirby.Final.Semantics.DottedCutImplementationBridge
 
 /-!
 # Kernel regressions for the shared presentation schema
@@ -173,16 +172,5 @@ def wrongOrderFixture : RawPresentation :=
       }
     ]
   }
-
-theorem repeated_strand_occurrences_are_counted_separately :
-    TwistedYetter.Kirby.Final.DottedCutImplementationBridge.signedMultiplicity
-        [rawPositivePuncture, rawNegativePuncture] = 0 := by
-  rfl
-
-theorem puncture_direction_conversion_is_exact :
-    TwistedYetter.Kirby.Final.DottedCutImplementationBridge.punctureDirection
-        rawNegativePuncture.direction =
-      TwistedYetter.Semantics.Independent.PunctureDirection.againstDiskOrientation := by
-  rfl
 
 end TwistedYetter.Kirby.PresentationSchemaRegression
