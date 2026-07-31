@@ -29,9 +29,10 @@ specified combinatorial trace.
 axiom DottedCutTopologyWitness :
   CombinatorialSpecialKirbyDiagram → Type
 
-axiom dottedCutWords_topologicallyRealizable
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    Nonempty (DottedCutTopologyWitness diagram)
+/-!
+No global existence assertion is made here.  If a later theorem needs this
+geometric interpretation, it must request the witness explicitly.
+-/
 
 /-! ## Turned-over handle topology -/
 
@@ -44,9 +45,10 @@ axiom TurnoverPoincareDualityWitness
     (marked : HomologicallyMarkedDiagram) :
     Type
 
-axiom turnoverH₂Identification_realizesPoincareDuality
-    (marked : HomologicallyMarkedDiagram) :
-    Nonempty (TurnoverPoincareDualityWitness marked)
+/-!
+No global existence assertion is made here.  If a later theorem needs this
+geometric interpretation, it must request the witness explicitly.
+-/
 
 /-! ## Clean band-slide topology
 
@@ -389,4 +391,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 316
+-- semantic-freeze-padding: 3211
