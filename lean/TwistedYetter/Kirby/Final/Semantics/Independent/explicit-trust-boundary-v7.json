@@ -1,0 +1,78 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/7",
+  "recorded_at_utc": "2026-07-31T13:43:45Z",
+  "supersedes": "explicit-trust-boundary-v6.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 24,
+  "final_theorem_project_axiom_count": 24,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 27,
+  "topology_refactor": {
+    "primitive_relation_symbols": [
+      "SpecialKirbyDiagramPresents",
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "TurnoverIdentificationRealizesPoincareDuality"
+    ],
+    "theorem_level_axioms": [
+      "specialKirbyDiagram_exists",
+      "specialKirbyDiagram_computesH₂",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+      "specialKirbyDiagram_turnover_realizesPoincareDuality"
+    ],
+    "derived_theorems": [
+      "markedRealization_exists"
+    ],
+    "removed_token_certificates": [
+      "DottedCutTopologyWitness",
+      "TurnoverPoincareDualityWitness"
+    ]
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "DottedPunctureWordsRealizeCocoreIntersections",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH2",
+    "OrientedDiffeomorphism",
+    "SpecialKirbyDiagramPresents",
+    "TurnoverIdentificationRealizesPoincareDuality",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH2",
+    "manifoldH2_addCommGroup",
+    "markedKirbyCerf_complete",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH₂",
+    "specialKirbyDiagram_exists",
+    "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+    "specialKirbyDiagram_turnover_realizesPoincareDuality"
+  ],
+  "mandatory_human_review": [
+    "Does SpecialKirbyDiagramPresents have exactly the intended one-zero/one-four-handle and closing-three-handle meaning?",
+    "Does the puncture-word axiom exactly express simultaneous co-core intersections, including order and signs?",
+    "Does the turnover axiom identify the stored equivalence with geometric handle turnover and Poincare duality?",
+    "Are the H2 comparison and marked Kirby-Cerf completeness statements valid and mutually compatible?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "DottedCutTopologyWitness",
+    "TurnoverPoincareDualityWitness",
+    "axiom markedRealization_exists",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom",
+    "legacy backend conformance certificate"
+  ]
+}

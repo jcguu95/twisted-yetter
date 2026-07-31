@@ -1,0 +1,104 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v15",
+  "recorded_at_utc": "2026-07-31T13:43:45Z",
+  "recorded_at_local": "2026-07-31T07:43:45-0600",
+  "semantic_content_parent_commit": "d1cc911b868fc6487e2dbdaa4f4ae9a421b63c02",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v14.json",
+  "historical_v1_through_v14_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "REPLACE_TOKEN_CERTIFICATES_WITH_FOUR_EXPLICIT_TOPOLOGY_AXIOMS",
+    "reason": "The v14 Type-valued certificates made trust visible but had no inspectable mathematical content. V15 removes them and decomposes realization into primitive topology vocabulary plus four individually reviewable theorem-level axioms.",
+    "removed_axiom_types": [
+      "DiagramRealizationWitness",
+      "DottedCutTopologyWitness",
+      "TurnoverPoincareDualityWitness"
+    ],
+    "removed_large_axiom": "markedRealization_exists",
+    "primitive_topology_vocabulary": [
+      "SpecialKirbyDiagramPresents",
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "TurnoverIdentificationRealizesPoincareDuality"
+    ],
+    "four_topology_axioms": [
+      "specialKirbyDiagram_exists",
+      "specialKirbyDiagram_computesH₂",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+      "specialKirbyDiagram_turnover_realizesPoincareDuality"
+    ],
+    "derived_theorem": "markedRealization_exists",
+    "derived_realization_has_certificate_fields": false,
+    "explicit_frozen_axiom_declaration_count": 24,
+    "final_theorem_project_axiom_count": 24,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entrance_build": "PASS",
+    "final_axiom_audit_build": "PASS",
+    "import_firewall": "PASS",
+    "full_lake_build_after_comment_only_reseal": "PASS",
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "human_semantic_review": "REQUIRED_FOR_PRIMITIVE_VOCABULARY_AND_T1_THROUGH_T4"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 24,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 27,
+    "removed_dependencies": [
+      "DiagramRealizationWitness",
+      "DottedCutTopologyWitness",
+      "TurnoverPoincareDualityWitness",
+      "markedRealization_exists"
+    ],
+    "new_explicit_dependencies": [
+      "SpecialKirbyDiagramPresents",
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "TurnoverIdentificationRealizesPoincareDuality",
+      "specialKirbyDiagram_exists",
+      "specialKirbyDiagram_computesH₂",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+      "specialKirbyDiagram_turnover_realizesPoincareDuality"
+    ]
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "00051e0682fd857e4104c0a840d59ff38c0c600bf539e07238e8bd452aa394e6",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0008fb96ea3cc60f8ba3c53c95b453cc2c644f3023ad70c2354db289f370010b",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "LocalReplacementSyntax.lean": "000094f7099d578e9c9dd22229baf3100f38a83d513678c164ad0fd1fc2eb283",
+    "Moves.lean": "000066f142165275ba9af97bbacbf6334c273288690be8557e85b298162a7e63",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "red_team": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "scope": "entire Final source tree, including archived and historical modules",
+    "source_axiom_declaration_count": 40,
+    "likely_proof_field_count": 276,
+    "json": "/private/tmp/lean-red-team-audit-final-v15.json",
+    "markdown": "/private/tmp/lean-red-team-audit-final-v15.zh-TW.md",
+    "human_review_focus": [
+      "the exact meaning of the three primitive topology relations",
+      "the four theorem-level topology axioms",
+      "markedKirbyCerf_complete"
+    ]
+  },
+  "non_claims": [
+    "The primitive topology relations are not definitions of smooth manifolds, embedded disks, or Poincare duality from first principles.",
+    "Kernel checking does not establish the intended human meaning of the primitive relations.",
+    "The project intentionally stops at a small explicit classical-topology boundary.",
+    "This dirty-worktree manifest becomes a committed frozen checkpoint only when committed with the recorded source."
+  ]
+}
