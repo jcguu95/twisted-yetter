@@ -38,34 +38,27 @@ theorem puncture_two_handle_cannot_be_dotted
       ComponentRole.dotted :=
   puncture.two_handle_role
 
-theorem puncture_exponent_matches_direction
+theorem puncture_intersection_sign_is_signed
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
-    puncture.characterExponentSign =
-      puncture.direction.characterExponentSign :=
-  puncture.exponent_matches_direction
+    puncture.direction.intersectionSign = 1 ∨
+      puncture.direction.intersectionSign = -1 := by
+  cases puncture.direction <;> simp [PunctureDirection.intersectionSign]
 
-theorem puncture_input_orientation_matches_direction
+theorem puncture_input_meets_cut_boundary_with_correct_polarity
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
     (trace.strands puncture.inputStrand).orientation =
-      puncture.direction.strandOrientation :=
-  puncture.input_orientation_matches_direction
+      puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
+  puncture.input_meets_cut_boundary_with_correct_polarity
 
-theorem puncture_output_orientation_matches_direction
+theorem puncture_output_meets_cut_boundary_with_correct_polarity
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
     (trace.strands puncture.outputStrand).orientation =
-      puncture.direction.strandOrientation :=
-  puncture.output_orientation_matches_direction
-
-theorem puncture_exponent_is_signed
-    {trace : CombinatorialLinkTrace}
-    (puncture : DottedPuncture trace) :
-    puncture.characterExponentSign = 1 ∨
-      puncture.characterExponentSign = -1 := by
-  rw [puncture.exponent_matches_direction]
-  cases puncture.direction <;> simp [PunctureDirection.characterExponentSign]
+      puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
+  puncture.orientation_preserved.symm.trans
+    puncture.input_meets_cut_boundary_with_correct_polarity
 
 theorem handle_counts_are_exact_equivalences
     (diagram : CombinatorialSpecialKirbyDiagram) :

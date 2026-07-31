@@ -865,7 +865,6 @@ def standardOneTwoBirthOldPuncture
   outputStrand :=
     standardOneTwoBirthOldStrand normalForm puncture.outputStrand
   direction := puncture.direction
-  characterExponentSign := puncture.characterExponentSign
   cutPosition := puncture.cutPosition
   dotted_role := by
     simpa [standardOneTwoBirth_oldComponentData normalForm] using
@@ -899,10 +898,9 @@ def standardOneTwoBirthOldPuncture
     rw [standardOneTwoBirth_oldStrandOrientation normalForm,
       standardOneTwoBirth_oldStrandOrientation normalForm]
     exact puncture.orientation_preserved
-  exponent_matches_direction := puncture.exponent_matches_direction
-  input_orientation_matches_direction := by
+  input_meets_cut_boundary_with_correct_polarity := by
     rw [standardOneTwoBirth_oldStrandOrientation normalForm]
-    exact puncture.input_orientation_matches_direction
+    exact puncture.input_meets_cut_boundary_with_correct_polarity
 
 def standardOneTwoBirthOldEvent
     {source target : CombinatorialSpecialKirbyDiagram}
@@ -968,12 +966,12 @@ theorem standardOneTwoBirth_oldEvent
   exact
     (standardOneTwoBirth_oldEventSerialization normalForm _).symm
 
-theorem standardOneTwoBirth_oldEventPairingCompatible
+theorem standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
     {source target : CombinatorialSpecialKirbyDiagram}
     (normalForm : IsStandardOneTwoBirth source target)
     (event : CutOpenEvent source.trace)
-    (pairing : event.PairingCompatible) :
-    (standardOneTwoBirthOldEvent normalForm event).PairingCompatible := by
+    (pairing : event.StrandContinuationsAreWellFormed) :
+    (standardOneTwoBirthOldEvent normalForm event).StrandContinuationsAreWellFormed := by
   cases event with
   | birth left right =>
       exact
@@ -1233,7 +1231,7 @@ theorem compileCrossingMorphism_heq_canonical
     (sign : CrossingSign)
     (pairing :
       (CutOpenEvent.crossing overInput underInput
-        overOutput underOutput sign).PairingCompatible) :
+        overOutput underOutput sign).StrandContinuationsAreWellFormed) :
     HEq
       (compileCutOpenEventMorphism 𝒞 diagram labeling
         (.crossing overInput underInput overOutput underOutput sign)
@@ -1268,7 +1266,7 @@ theorem compileFramingTwistMorphism_heq_canonical
     (input output : diagram.trace.StrandId)
     (sign : CrossingSign)
     (pairing :
-      (CutOpenEvent.framingTwist input output sign).PairingCompatible) :
+      (CutOpenEvent.framingTwist input output sign).StrandContinuationsAreWellFormed) :
     HEq
       (compileCutOpenEventMorphism 𝒞 diagram labeling
         (.framingTwist input output sign) pairing)
@@ -1318,7 +1316,7 @@ theorem compilePlanarIsotopyMorphism_heq_canonical
     (diagram : CombinatorialSpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (continuations : List (diagram.trace.StrandId × diagram.trace.StrandId))
-    (pairing : (CutOpenEvent.planarIsotopy continuations).PairingCompatible) :
+    (pairing : (CutOpenEvent.planarIsotopy continuations).StrandContinuationsAreWellFormed) :
     HEq
       (compileCutOpenEventMorphism 𝒞 diagram labeling
         (.planarIsotopy continuations) pairing)
@@ -1347,6 +1345,21 @@ noncomputable def canonicalProjectorHoleMorphism
   tensorUnitProjector 𝒞 (ribbonWordObject 𝒞 before) ≫
     eqToHom (congrArg (ribbonWordObject 𝒞) wordEq)
 
+theorem transportedProjectorHoleMorphism_eq_canonical
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    {before middle after : RibbonWord 𝒞}
+    (inputEq : before = middle)
+    (outputEq : after = middle)
+    (wordEq : before = after) :
+    eqToHom (congrArg (ribbonWordObject 𝒞) inputEq) ≫
+        tensorUnitProjector 𝒞 (ribbonWordObject 𝒞 middle) ≫
+        eqToHom (congrArg (ribbonWordObject 𝒞) outputEq.symm) =
+      canonicalProjectorHoleMorphism 𝒞 before after wordEq := by
+  subst middle
+  subst after
+  simp [canonicalProjectorHoleMorphism]
+
 theorem canonicalProjectorHoleMorphism_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -1371,7 +1384,7 @@ theorem compileProjectorHoleMorphism_heq_canonical
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
-    (pairing : (CutOpenEvent.projectorHole dotted punctures).PairingCompatible) :
+    (pairing : (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed) :
     HEq
       (compileCutOpenEventMorphism 𝒞 diagram labeling
         (.projectorHole dotted punctures) pairing)
@@ -1382,14 +1395,16 @@ theorem compileProjectorHoleMorphism_heq_canonical
           (punctures.map DottedPuncture.outputStrand))
         (exteriorWord_of_punctures_eq
           𝒞 diagram labeling punctures)) := by
-  have wordEq :=
-    exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures
-  have proofEq :
-      wordEq =
-        exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures :=
-    Subsingleton.elim _ _
-  cases proofEq
-  rfl
+  have inputEq :=
+    exteriorInputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
+  have outputEq :=
+    exteriorOutputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
+  unfold compileCutOpenEventMorphism
+  simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
+  apply heq_of_eq
+  exact transportedProjectorHoleMorphism_eq_canonical
+    𝒞 inputEq outputEq
+      (exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures)
 
 theorem standardOneTwoBirth_oldEventMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
@@ -1402,12 +1417,12 @@ theorem standardOneTwoBirth_oldEventMorphism
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
     (event : CutOpenEvent source.diagram.trace)
-    (pairing : event.PairingCompatible) :
+    (pairing : event.StrandContinuationsAreWellFormed) :
     HEq
       (compileCutOpenEventMorphism 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEvent normalForm event)
-        (standardOneTwoBirth_oldEventPairingCompatible
+        (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
           normalForm event pairing))
       (compileCutOpenEventMorphism 𝒞 source.diagram
         sourceLabeling event pairing) := by
@@ -1506,7 +1521,7 @@ theorem standardOneTwoBirth_oldEventMorphism
           (standardOneTwoBirthOldStrand normalForm overOutput)
           (standardOneTwoBirthOldStrand normalForm underOutput)
           sign
-          (standardOneTwoBirth_oldEventPairingCompatible
+          (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
             normalForm
             (.crossing overInput underInput
               overOutput underOutput sign)
@@ -1534,7 +1549,7 @@ theorem standardOneTwoBirth_oldEventMorphism
           (standardOneTwoBirthOldStrand normalForm input)
           (standardOneTwoBirthOldStrand normalForm output)
           sign
-          (standardOneTwoBirth_oldEventPairingCompatible
+          (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
             normalForm
             (.framingTwist input output sign)
             pairing)).trans
@@ -1574,7 +1589,7 @@ theorem standardOneTwoBirth_oldEventMorphism
                   source.diagram.trace.StrandId) =>
             (standardOneTwoBirthOldStrand normalForm continuation.1,
               standardOneTwoBirthOldStrand normalForm continuation.2))
-          (standardOneTwoBirth_oldEventPairingCompatible
+          (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
             normalForm (.planarIsotopy continuations) pairing)).trans
           ((canonicalPlanarIsotopyMorphism_heq
             𝒞 beforeEq afterEq _ _).trans
@@ -1608,7 +1623,7 @@ theorem standardOneTwoBirth_oldEventMorphism
           (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldComponent normalForm dotted)
           (punctures.map (standardOneTwoBirthOldPuncture normalForm))
-          (standardOneTwoBirth_oldEventPairingCompatible
+          (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
             normalForm (.projectorHole dotted punctures) pairing)).trans
           ((canonicalProjectorHoleMorphism_heq
             𝒞 beforeEq afterEq _ _).trans
@@ -1794,7 +1809,7 @@ theorem compileContextualCutOpenEventMorphism_heq_core
           (eventRightContext diagram event))
         (compileCutOpenEventMorphism 𝒞 diagram labeling
           (diagram.dottedCuts.exterior.events event)
-          (diagram.dottedCuts.exterior.pairingCompatible event))) := by
+          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))) := by
   unfold compileContextualCutOpenEventMorphism
   simp only
   simp only [CategoryTheory.eqToHom_comp_heq_iff]
@@ -1894,28 +1909,28 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
           (target.diagram.dottedCuts.exterior.events targetEvent)
-          (target.diagram.dottedCuts.exterior.pairingCompatible targetEvent))
+          (target.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed targetEvent))
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldEvent normalForm sourceEvent)
-          (standardOneTwoBirth_oldEventPairingCompatible normalForm
+          (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed normalForm
             sourceEvent
-            (source.diagram.dottedCuts.exterior.pairingCompatible event))) := by
+            (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))) := by
     congr!
   have mapEq :
       HEq
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
           (target.diagram.dottedCuts.exterior.events targetEvent)
-          (target.diagram.dottedCuts.exterior.pairingCompatible targetEvent))
+          (target.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed targetEvent))
         (compileCutOpenEventMorphism 𝒞 source.diagram sourceLabeling
           sourceEvent
-          (source.diagram.dottedCuts.exterior.pairingCompatible event)) :=
+          (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)) :=
     targetMapEq.trans
       (standardOneTwoBirth_oldEventMorphism
         𝒞 coordinates coordinateBinding normalForm
         sourceLabeling newLabel sourceEvent
-        (source.diagram.dottedCuts.exterior.pairingCompatible event))
+        (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
   exact
     (compileContextualCutOpenEventMorphism_heq_core
       𝒞 target.diagram
@@ -2069,7 +2084,7 @@ theorem compileContextual_planarNil_heq_identity
             (eventRightContext diagram event))
           (compileCutOpenEventMorphism 𝒞 diagram labeling
             (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.pairingCompatible event)))
+            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)))
         (𝟙 (ribbonWordObject 𝒞
           (List.append
             (List.append
@@ -2091,19 +2106,19 @@ theorem compileContextual_planarNil_heq_identity
       rfl
     have standardPair :
         (CutOpenEvent.planarIsotopy
-          ([] : List (diagram.trace.StrandId × diagram.trace.StrandId))).PairingCompatible := by
-      simp [CutOpenEvent.PairingCompatible]
+          ([] : List (diagram.trace.StrandId × diagram.trace.StrandId))).StrandContinuationsAreWellFormed := by
+      simp [CutOpenEvent.StrandContinuationsAreWellFormed]
     have eventMapEq :
         HEq
           (compileCutOpenEventMorphism 𝒞 diagram labeling
             (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.pairingCompatible event))
+            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
           (𝟙 (𝟙_ 𝒞.C)) := by
       have toStandard :
           HEq
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (diagram.dottedCuts.exterior.events event)
-              (diagram.dottedCuts.exterior.pairingCompatible event))
+              (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (.planarIsotopy []) standardPair) := by
         congr!
@@ -2165,7 +2180,7 @@ theorem compileContextual_projectorNil_heq_identity
             (eventRightContext diagram event))
           (compileCutOpenEventMorphism 𝒞 diagram labeling
             (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.pairingCompatible event)))
+            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)))
         (𝟙 (ribbonWordObject 𝒞
           (List.append
             (List.append
@@ -2186,19 +2201,19 @@ theorem compileContextual_projectorNil_heq_identity
       rw [eventEq]
       rfl
     have standardPair :
-        (CutOpenEvent.projectorHole dotted []).PairingCompatible := by
-      simp [CutOpenEvent.PairingCompatible]
+        (CutOpenEvent.projectorHole dotted []).StrandContinuationsAreWellFormed := by
+      simp [CutOpenEvent.StrandContinuationsAreWellFormed]
     have eventMapEq :
         HEq
           (compileCutOpenEventMorphism 𝒞 diagram labeling
             (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.pairingCompatible event))
+            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
           (𝟙 (𝟙_ 𝒞.C)) := by
       have toStandard :
           HEq
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (diagram.dottedCuts.exterior.events event)
-              (diagram.dottedCuts.exterior.pairingCompatible event))
+              (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (.projectorHole dotted []) standardPair) := by
         congr!
@@ -2448,7 +2463,7 @@ theorem standardOneTwoBirth_prefixThreeMorphism
     standardOneTwoBirth_localThreeEventMorphism
       𝒞 normalForm labeling dotted puncture serialized
       (eventEq ▸
-        target.dottedCuts.exterior.pairingCompatible
+        target.dottedCuts.exterior.strandContinuationsAreWellFormed
           (oneTwoEventIndexOne normalForm))
   have first :=
     standardOneTwoBirth_firstContextualEdge

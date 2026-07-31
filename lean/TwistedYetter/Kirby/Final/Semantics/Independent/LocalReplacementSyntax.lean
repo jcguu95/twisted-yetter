@@ -21,7 +21,6 @@ structure SerializedPuncture where
   inputStrand : ℕ
   outputStrand : ℕ
   direction : PunctureDirection
-  characterExponentSign : ℤ
   cutPosition : ℕ
   deriving DecidableEq, Repr
 
@@ -57,7 +56,6 @@ def serializePuncture
     inputStrand := puncture.inputStrand.1
     outputStrand := puncture.outputStrand.1
     direction := puncture.direction
-    characterExponentSign := puncture.characterExponentSign
     cutPosition := puncture.cutPosition
   }
 
@@ -136,7 +134,6 @@ def oneTwoLocalPuncture
     inputStrand := source.trace.strandCount
     outputStrand := source.trace.strandCount + 2
     direction := .withDiskOrientation
-    characterExponentSign := 1
     cutPosition := 0
   }
 
@@ -254,4 +251,4 @@ def IsStandardTwoThreeDeath
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1879
+-- semantic-freeze-padding: 2393

@@ -1,0 +1,72 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v21",
+  "recorded_at_utc": "2026-07-31T20:22:38Z",
+  "semantic_content_parent_commit": "36cf0ba7b9c37eaff69c36b94e4e868d5fed55aa",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v20.json",
+  "historical_v1_through_v20_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "DISTINGUISH_LOCAL_CUT_BOUNDARY_POLARITY",
+    "reason": "The previous puncture schema directly identified disk-intersection direction with a strand-orientation field and duplicated the character sign as stored data. The revised schema records the oriented-intersection direction once, derives its signed incidence, and names the induced endpoint polarity as local cut-boundary data rather than global component orientation.",
+    "removed_fields": [
+      "DottedPuncture.characterExponentSign",
+      "DottedPuncture.exponent_matches_direction",
+      "DottedPuncture.input_orientation_matches_direction"
+    ],
+    "added_or_renamed_semantics": [
+      "PunctureDirection.intersectionSign",
+      "CutBoundaryPolarity",
+      "PunctureDirection.cutBoundaryPolarity",
+      "DottedPuncture.input_meets_cut_boundary_with_correct_polarity",
+      "cutBoundaryWord"
+    ],
+    "evaluator_change": "The tensor-unit projector is typed on the local cut-boundary word, with explicit equality transports from and back to the exact exterior words.",
+    "proof_change": "Representative independence and both cancellation trace factorizations were reproved against the revised typed projector boundary.",
+    "axiom_count_changed": false,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS",
+    "full_final_route_build": "PASS",
+    "full_project_build": "PASS",
+    "final_axiom_audit": "PASS",
+    "representative_independence_project_axioms": 0,
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 20,
+    "red_team_likely_proof_field_count": 60,
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 20,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 23
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000444e2e013c43de6d4a5f8cb534e2d5c9aaea93ce754e3ff515fc10a901ce9",
+    "EntranceAxioms.lean": "0000407fe65490edb0177e172aae8bdb2d57af0bd9b8e0e92b20bace2be8a130",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "00002e2d84cf0925b3a55178833a3ee88318f62ee107a2eed71902b3e8341a3e",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000ef10d6f38082b4c2f55ba116159910f7b7c2058b2353b1a0cf8158ca875ca",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "000e0c9882ec24afa92abf0b1f2538ab204d835dd541671007d43654f2dc6e5f",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "This freeze does not claim that local cut-boundary polarity is the global orientation of a Kirby-link component.",
+    "This freeze does not certify a removed legacy or raw-JSON implementation bridge.",
+    "Kernel compilation does not replace human review of the 60 conservatively flagged structure proof fields.",
+    "This freeze does not claim equality with the original Crane-Yetter state sum."
+  ]
+}

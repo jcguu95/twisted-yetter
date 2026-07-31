@@ -37,21 +37,29 @@ inductive PunctureDirection
   | againstDiskOrientation
   deriving DecidableEq, Repr
 
-def PunctureDirection.characterExponentSign : PunctureDirection → ℤ
+def PunctureDirection.intersectionSign : PunctureDirection → ℤ
   | .withDiskOrientation => 1
   | .againstDiskOrientation => -1
 
-/--
-The local ribbon direction induced on a cut boundary by the oriented dotted
-disk.  This restores the compatibility used by the original independent
-evaluator specification: disk intersection direction and ribbon orientation
-are distinct notions, but a valid puncture must make them agree through this
-fixed convention.
+/-
+The polarity of an endpoint on the boundary created by cutting an oriented
+dotted disk.  This is local boundary data, not the global orientation of the
+link component.
 -/
-def PunctureDirection.strandOrientation :
-    PunctureDirection → StrandOrientation
-  | .withDiskOrientation => .positive
-  | .againstDiskOrientation => .negative
+inductive CutBoundaryPolarity
+  | outgoing
+  | incoming
+  deriving DecidableEq, Repr
+
+def PunctureDirection.cutBoundaryPolarity :
+    PunctureDirection → CutBoundaryPolarity
+  | .withDiskOrientation => .outgoing
+  | .againstDiskOrientation => .incoming
+
+def CutBoundaryPolarity.localStrandOrientation :
+    CutBoundaryPolarity → StrandOrientation
+  | .outgoing => .positive
+  | .incoming => .negative
 
 structure Component where
   role : ComponentRole
@@ -164,7 +172,7 @@ def EventPortsAreDistinct
     Prop :=
   ∀ i, ((events i).beforeWord ++ (events i).afterWord).Nodup
 
-def EventContinuationsPreserveComponentsAndOrientations
+def DiagramEventContinuationsAreWellFormed
     {componentCount strandCount eventCount : ℕ}
     (strands : Fin strandCount → Strand componentCount)
     (events : Fin eventCount → DiagramEvent strandCount) :
@@ -214,7 +222,7 @@ def ComponentsFormClosedCircles
     (events : Fin eventCount → DiagramEvent strandCount) :
     Prop :=
   EventPortsAreDistinct events ∧
-    EventContinuationsPreserveComponentsAndOrientations strands events ∧
+    DiagramEventContinuationsAreWellFormed strands events ∧
     EveryStrandHasUniqueInputAndOutput events ∧
     EveryComponentIsConnected strands events
 
@@ -266,8 +274,8 @@ structure CombinatorialLinkTrace where
     ∀ i, (activeOrder i).Nodup
   eventPortsAreDistinct :
     EventPortsAreDistinct events
-  eventContinuationsPreserveComponentsAndOrientations :
-    EventContinuationsPreserveComponentsAndOrientations strands events
+  eventContinuationsAreWellFormed :
+    DiagramEventContinuationsAreWellFormed strands events
   everyStrandHasUniqueInputAndOutput :
     EveryStrandHasUniqueInputAndOutput events
   everyComponentIsConnected :
@@ -279,7 +287,7 @@ theorem CombinatorialLinkTrace.componentIncidenceSatisfiesFiniteCycleConditions
     (trace : CombinatorialLinkTrace) :
     ComponentsFormClosedCircles trace.strands trace.events :=
   ⟨trace.eventPortsAreDistinct,
-    trace.eventContinuationsPreserveComponentsAndOrientations,
+    trace.eventContinuationsAreWellFormed,
     trace.everyStrandHasUniqueInputAndOutput,
     trace.everyComponentIsConnected⟩
 
@@ -295,7 +303,6 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
   inputStrand : trace.StrandId
   outputStrand : trace.StrandId
   direction : PunctureDirection
-  characterExponentSign : ℤ
   cutPosition : ℕ
   dotted_role :
     (trace.components dottedComponent).role = .dotted
@@ -308,19 +315,14 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
   orientation_preserved :
     (trace.strands inputStrand).orientation =
       (trace.strands outputStrand).orientation
-  exponent_matches_direction :
-    characterExponentSign = direction.characterExponentSign
-  input_orientation_matches_direction :
+  /--
+  The local strand segment meeting the cut boundary has the polarity induced
+  by the oriented intersection.  This does not identify the global component
+  orientation with the disk orientation.
+  -/
+  input_meets_cut_boundary_with_correct_polarity :
     (trace.strands inputStrand).orientation =
-      direction.strandOrientation
-
-theorem DottedPuncture.output_orientation_matches_direction
-    {trace : CombinatorialLinkTrace}
-    (puncture : DottedPuncture trace) :
-    (trace.strands puncture.outputStrand).orientation =
-      puncture.direction.strandOrientation :=
-  puncture.orientation_preserved.symm.trans
-    puncture.input_orientation_matches_direction
+      direction.cutBoundaryPolarity.localStrandOrientation
 
 /--
 The category-neutral event language of the tangle obtained after cutting all
@@ -391,7 +393,7 @@ assigns them the same simple object.  Their opposite orientations then make
 one strand the chosen dual of the other.  This is exactly the information
 needed later to interpret a birth or death as coevaluation or evaluation.
 -/
-def CutOpenEvent.PairingCompatible
+def CutOpenEvent.StrandContinuationsAreWellFormed
     {trace : CombinatorialLinkTrace} :
     CutOpenEvent trace → Prop
   | .birth left right =>
@@ -455,9 +457,9 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
       CutOpenEventTransition (events i)
         (activeOrder i.castSucc)
         (activeOrder i.succ)
-  pairingCompatible :
+  strandContinuationsAreWellFormed :
     ∀ i : Fin eventCount,
-      (events i).PairingCompatible
+      (events i).StrandContinuationsAreWellFormed
   eventPortsAreDistinct :
     ∀ i, ((events i).beforeWord ++ (events i).afterWord).Nodup
   everyStrandHasUniqueInputAndOutput :
@@ -545,4 +547,4 @@ structure CombinatorialSpecialKirbyDiagram where
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 13583
+-- semantic-freeze-padding: 1350

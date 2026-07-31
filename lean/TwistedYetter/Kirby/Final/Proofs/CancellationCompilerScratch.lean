@@ -473,7 +473,7 @@ noncomputable def compileContextualCutOpenEventMorphismFromWitness
     (before after left right : List diagram.trace.StrandId)
     (beforeEq : before = left ++ event.beforeWord ++ right)
     (afterEq : after = left ++ event.afterWord ++ right)
-    (pairing : event.PairingCompatible) :
+    (pairing : event.StrandContinuationsAreWellFormed) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling before) ⟶
       ribbonWordObject 𝒞
@@ -538,7 +538,7 @@ theorem compileContextualCutOpenEventMorphism_eq_fromWitness
         (eventRightContext diagram i)
         (eventTransitionEquations diagram i).1
         (eventTransitionEquations diagram i).2
-        (diagram.dottedCuts.exterior.pairingCompatible i) := by
+        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i) := by
   rfl
 
 theorem compileContextualFromWitness_birth
@@ -558,7 +558,7 @@ theorem compileContextualFromWitness_birth
           (CutOpenEvent.birth leftOutput rightOutput).afterWord ++
           right)
     (pairing :
-      (CutOpenEvent.birth leftOutput rightOutput).PairingCompatible)
+      (CutOpenEvent.birth leftOutput rightOutput).StrandContinuationsAreWellFormed)
     (beforeEmpty : before = [])
     (afterCanonical : after = [leftOutput, rightOutput])
     (leftEmpty : left = [])
@@ -614,7 +614,7 @@ theorem compileContextualFromWitness_eq_birth
     (before after left right : List diagram.trace.StrandId)
     (beforeEq : before = left ++ event.beforeWord ++ right)
     (afterEq : after = left ++ event.afterWord ++ right)
-    (pairing : event.PairingCompatible)
+    (pairing : event.StrandContinuationsAreWellFormed)
     (eventCanonical : event = .birth leftOutput rightOutput)
     (beforeEmpty : before = [])
     (afterCanonical : after = [leftOutput, rightOutput])
@@ -702,7 +702,7 @@ theorem standardOneTwoBirth_firstContextualEdge
       (eventRightContext target i)
       (eventTransitionEquations target i).1
       (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.pairingCompatible i)
+      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
       eventEq beforeEq afterEq contexts.1 contexts.2)
 
 theorem compileContextualFromWitness_death
@@ -722,7 +722,7 @@ theorem compileContextualFromWitness_death
           (CutOpenEvent.death leftInput rightInput).afterWord ++
           right)
     (pairing :
-      (CutOpenEvent.death leftInput rightInput).PairingCompatible)
+      (CutOpenEvent.death leftInput rightInput).StrandContinuationsAreWellFormed)
     (beforeCanonical : before = [leftInput, rightInput])
     (afterEmpty : after = [])
     (leftEmpty : left = [])
@@ -778,7 +778,7 @@ theorem compileContextualFromWitness_eq_death
     (before after left right : List diagram.trace.StrandId)
     (beforeEq : before = left ++ event.beforeWord ++ right)
     (afterEq : after = left ++ event.afterWord ++ right)
-    (pairing : event.PairingCompatible)
+    (pairing : event.StrandContinuationsAreWellFormed)
     (eventCanonical : event = .death leftInput rightInput)
     (beforeCanonical : before = [leftInput, rightInput])
     (afterEmpty : after = [])
@@ -1013,7 +1013,7 @@ theorem standardOneTwoBirth_thirdContextualEdge
       (eventRightContext target i)
       (eventTransitionEquations target i).1
       (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.pairingCompatible i)
+      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
       eventEq beforeEq afterEq contexts.1 contexts.2)
 
 theorem compileContextualFromWitness_projector
@@ -1035,7 +1035,7 @@ theorem compileContextualFromWitness_projector
           (CutOpenEvent.projectorHole dotted [puncture]).afterWord ++
           right)
     (pairing :
-      (CutOpenEvent.projectorHole dotted [puncture]).PairingCompatible)
+      (CutOpenEvent.projectorHole dotted [puncture]).StrandContinuationsAreWellFormed)
     (beforeCanonical : before = [first, second])
     (afterCanonical : after = [third, second])
     (leftEmpty : left = [])
@@ -1107,7 +1107,7 @@ theorem compileContextualFromWitness_eq_projector
     (before after left right : List diagram.trace.StrandId)
     (beforeEq : before = left ++ event.beforeWord ++ right)
     (afterEq : after = left ++ event.afterWord ++ right)
-    (pairing : event.PairingCompatible)
+    (pairing : event.StrandContinuationsAreWellFormed)
     (eventCanonical : event = .projectorHole dotted [puncture])
     (beforeCanonical : before = [first, second])
     (afterCanonical : after = [third, second])
@@ -1213,7 +1213,7 @@ theorem standardOneTwoBirth_secondContextualEdge
             𝒞 target labeling
             (.projectorHole dotted [puncture])
             (eventEq ▸
-              target.dottedCuts.exterior.pairingCompatible
+              target.dottedCuts.exterior.strandContinuationsAreWellFormed
                 (oneTwoEventIndexOne normalForm))) ≫
         eqToHom
           (congrArg
@@ -1244,7 +1244,7 @@ theorem standardOneTwoBirth_secondContextualEdge
       (eventRightContext target i)
       (eventTransitionEquations target i).1
       (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.pairingCompatible i)
+      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
       eventEq
       (standardOneTwoBirth_activeOrderOne normalForm)
       (standardOneTwoBirth_activeOrderTwo normalForm)
@@ -1264,15 +1264,17 @@ def projectorHoleMorphism
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
           (CutOpenEvent.projectorHole dotted punctures).afterWord) := by
-  have word_eq :=
-    exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures
+  have input_eq :=
+    exteriorInputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
+  have output_eq :=
+    exteriorOutputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
   simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
   exact
-    tensorUnitProjector 𝒞
-      (ribbonWordObject 𝒞
-        (exteriorWord 𝒞 diagram labeling
-          (punctures.map DottedPuncture.inputStrand))) ≫
-      eqToHom (congrArg (ribbonWordObject 𝒞) word_eq)
+    eqToHom (congrArg (ribbonWordObject 𝒞) input_eq) ≫
+      tensorUnitProjector 𝒞
+        (ribbonWordObject 𝒞
+          (cutBoundaryWord 𝒞 diagram labeling punctures)) ≫
+      eqToHom (congrArg (ribbonWordObject 𝒞) output_eq.symm)
 
 theorem compileCutOpenEventMorphism_projectorHole
     (𝒞 : PremodularFusionCategory K)
@@ -1281,12 +1283,12 @@ theorem compileCutOpenEventMorphism_projectorHole
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (pairing :
-      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible) :
+      (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed) :
     compileCutOpenEventMorphism 𝒞 diagram labeling
         (.projectorHole dotted punctures) pairing =
       projectorHoleMorphism 𝒞 diagram labeling dotted punctures := by
   unfold compileCutOpenEventMorphism projectorHoleMorphism
-  simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
+  simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord, id_eq]
 
 theorem canonicalBirthProjectorDeathMorphism
     (𝒞 : PremodularFusionCategory K)
@@ -1520,7 +1522,7 @@ theorem localBirthProjectorDeathMorphism
     (inputCanonical : puncture.inputStrand = first)
     (outputCanonical : puncture.outputStrand = third)
     (pairing :
-      (CutOpenEvent.projectorHole dotted [puncture]).PairingCompatible) :
+      (CutOpenEvent.projectorHole dotted [puncture]).StrandContinuationsAreWellFormed) :
     pairedBirthMorphism 𝒞 diagram labeling
           first second firstSecondComponent firstSecondOrientation ≫
         eqToHom
@@ -1588,6 +1590,12 @@ theorem localBirthProjectorDeathMorphism
            direction := .dual }] := by
     simp [exteriorWord, orientedExteriorStrand,
       secondNegative, ribbonDirectionOfStrandOrientation]
+  have cutWordCanonical :
+      cutBoundaryWord 𝒞 diagram labeling [puncture] =
+        [{ label := exteriorStrandLabel 𝒞 diagram labeling second,
+           direction := .forward }] :=
+    (exteriorInputWord_eq_cutBoundaryWord
+        𝒞 diagram labeling [puncture]).symm.trans inputWordCanonical
   have beforeAfter :
       exteriorWord 𝒞 diagram labeling [puncture.inputStrand] =
         exteriorWord 𝒞 diagram labeling [puncture.outputStrand] :=
@@ -1639,7 +1647,8 @@ theorem localBirthProjectorDeathMorphism
   simpa [pairedBirthMorphism, pairedDeathMorphism, projectorHoleMorphism,
     firstPositive, secondNegative, thirdPositive,
     firstSecondLabel, outputSecondLabel, inputOutputOriented,
-    inputWordCanonical, outputWordCanonical, secondWordCanonical] using
+    inputWordCanonical, outputWordCanonical, secondWordCanonical,
+    cutWordCanonical] using
     transportedEq
 
 theorem standardOneTwoBirth_localThreeEventMorphism
@@ -1652,7 +1661,7 @@ theorem standardOneTwoBirth_localThreeEventMorphism
     (serialized :
       serializePuncture puncture = oneTwoLocalPuncture source)
     (pairing :
-      (CutOpenEvent.projectorHole dotted [puncture]).PairingCompatible) :
+      (CutOpenEvent.projectorHole dotted [puncture]).StrandContinuationsAreWellFormed) :
     pairedBirthMorphism 𝒞 target labeling
           (oneTwoFirstStrand normalForm)
           (oneTwoSecondStrand normalForm)

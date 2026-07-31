@@ -39,7 +39,7 @@ def twoOneIncidence
     (diagram.dottedCuts.punctureWord dotted.1 dotted.2).foldl
       (fun total puncture =>
         if puncture.twoHandleComponent = twoHandle.1 then
-          total + puncture.characterExponentSign
+          total + puncture.direction.intersectionSign
         else
           total)
       0
@@ -352,4 +352,4 @@ def HomologicallyMarkedDiagram.thamAlpha
 end
 
 end TwistedYetter.Semantics.Independent
--- semantic-freeze-padding: 1596
+-- semantic-freeze-padding: 1580

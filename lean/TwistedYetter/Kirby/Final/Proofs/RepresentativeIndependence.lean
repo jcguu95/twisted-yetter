@@ -21,8 +21,9 @@ noncomputable section
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /--
-The character coupon on one puncture carries precisely the signed scalar
-prescribed by the puncture direction.
+At a cut-boundary endpoint, one uniform character coupon has the scalar
+prescribed by the oriented intersection.  The proof uses the local boundary
+polarity, not the global orientation of the link component.
 -/
 theorem characterCoupon_on_puncture
     (𝒞η : TwistedPremodularCategory K)
@@ -39,27 +40,24 @@ theorem characterCoupon_on_puncture
       (((𝒞η.character.value
           (exteriorStrandLabel
             𝒞η.category diagram labeling puncture.inputStrand)) ^
-          (puncture.characterExponentSign * exponent) : Kˣ) : K) •
+          (puncture.direction.intersectionSign * exponent) : Kˣ) : K) •
         𝟙
           (orientedSimpleObject 𝒞η.category
             (orientedExteriorStrand
               𝒞η.category diagram labeling puncture.inputStrand)) := by
   have orientation :=
-    puncture.input_orientation_matches_direction
+    puncture.input_meets_cut_boundary_with_correct_polarity
   cases direction : puncture.direction with
   | withDiskOrientation =>
       have strandPositive :
           (diagram.trace.strands puncture.inputStrand).orientation =
             .positive := by
-        simpa [PunctureDirection.strandOrientation, direction] using orientation
-      have signPositive :
-          puncture.characterExponentSign = 1 := by
-        simpa [PunctureDirection.characterExponentSign, direction] using
-          puncture.exponent_matches_direction
+        simpa [PunctureDirection.cutBoundaryPolarity,
+          CutBoundaryPolarity.localStrandOrientation, direction] using orientation
       unfold orientedSimpleObject orientedExteriorStrand
       rw [strandPositive]
       simp only [ribbonDirectionOfStrandOrientation]
-      simpa [signPositive] using
+      simpa [PunctureDirection.intersectionSign, direction] using
         characterCoupon_on_forwardSimple
           𝒞η.character
           (exteriorStrandLabel
@@ -69,15 +67,12 @@ theorem characterCoupon_on_puncture
       have strandNegative :
           (diagram.trace.strands puncture.inputStrand).orientation =
             .negative := by
-        simpa [PunctureDirection.strandOrientation, direction] using orientation
-      have signNegative :
-          puncture.characterExponentSign = -1 := by
-        simpa [PunctureDirection.characterExponentSign, direction] using
-          puncture.exponent_matches_direction
+        simpa [PunctureDirection.cutBoundaryPolarity,
+          CutBoundaryPolarity.localStrandOrientation, direction] using orientation
       unfold orientedSimpleObject orientedExteriorStrand
       rw [strandNegative]
       simp only [ribbonDirectionOfStrandOrientation]
-      simpa [signNegative] using
+      simpa [PunctureDirection.intersectionSign, direction] using
         characterCoupon_on_dualSimple
           𝒞η.character
           (exteriorStrandLabel
@@ -216,7 +211,7 @@ def punctureWordCharacterUnit
     ((𝒞η.character.value
           (exteriorStrandLabel
             𝒞η.category diagram labeling puncture.inputStrand) ^
-        (puncture.characterExponentSign * exponent) : Kˣ) : K)).prod
+        (puncture.direction.intersectionSign * exponent) : Kˣ) : K)).prod
 
 /--
 One uniform character coupon on the puncture boundary word is the product of
@@ -278,14 +273,14 @@ theorem characterCoupon_on_punctureWord
                 ((𝒞η.character.value
                     (exteriorStrandLabel
                       𝒞η.category diagram labeling puncture.inputStrand) ^
-                  (puncture.characterExponentSign * exponent) : Kˣ) : K))
+                  (puncture.direction.intersectionSign * exponent) : Kˣ) : K))
               rest).prod =
             (List.map
               (fun puncture =>
                 𝒞η.character.simpleScalar
                     (exteriorStrandLabel
                       𝒞η.category diagram labeling puncture.inputStrand) ^
-                  (puncture.characterExponentSign * exponent))
+                  (puncture.direction.intersectionSign * exponent))
               rest).prod := by
         simp only [Units.val_zpow_eq_zpow_val,
           TensorIdentityCharacter.value_val]
@@ -303,13 +298,17 @@ private def explicitProjectorHoleMorphism
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
           (punctures.map DottedPuncture.outputStrand)) :=
-  tensorUnitProjector 𝒞
+  eqToHom
+      (congrArg (ribbonWordObject 𝒞)
+        (exteriorInputWord_eq_cutBoundaryWord
+          𝒞 diagram labeling punctures)) ≫
+    tensorUnitProjector 𝒞
       (ribbonWordObject 𝒞
-        (exteriorWord 𝒞 diagram labeling
-          (punctures.map DottedPuncture.inputStrand))) ≫
+        (cutBoundaryWord 𝒞 diagram labeling punctures)) ≫
     eqToHom
       (congrArg (ribbonWordObject 𝒞)
-        (exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures))
+        (exteriorOutputWord_eq_cutBoundaryWord
+          𝒞 diagram labeling punctures).symm)
 
 private theorem compile_projectorHole_eq_explicit
     (𝒞 : PremodularFusionCategory K)
@@ -318,7 +317,7 @@ private theorem compile_projectorHole_eq_explicit
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (pairing :
-      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible) :
+      (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed) :
     compileCutOpenEventMorphism
         𝒞 diagram labeling (.projectorHole dotted punctures) pairing =
       explicitProjectorHoleMorphism 𝒞 diagram labeling punctures := by
@@ -337,7 +336,7 @@ theorem characterCoupon_projectorHole_left
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (pairing :
-      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible)
+      (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed)
     (exponent : ℤ) :
     isoIntPowerHom
         (𝒞η.character.iso.app
@@ -353,26 +352,68 @@ theorem characterCoupon_projectorHole_left
         (.projectorHole dotted punctures) pairing := by
   rw [compile_projectorHole_eq_explicit]
   unfold explicitProjectorHoleMorphism
+  simp only [CutOpenEvent.beforeWord]
+  let X :=
+    ribbonWordObject 𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling
+        (punctures.map DottedPuncture.inputStrand))
+  let W :=
+    ribbonWordObject 𝒞η.category
+      (cutBoundaryWord 𝒞η.category diagram labeling punctures)
+  let Y :=
+    ribbonWordObject 𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling
+        (punctures.map DottedPuncture.outputStrand))
+  let inputMap : X ⟶ W :=
+    eqToHom
+      (congrArg (ribbonWordObject 𝒞η.category)
+        (exteriorInputWord_eq_cutBoundaryWord
+          𝒞η.category diagram labeling punctures))
+  let outputMap : W ⟶ Y :=
+    eqToHom
+      (congrArg (ribbonWordObject 𝒞η.category)
+        (exteriorOutputWord_eq_cutBoundaryWord
+          𝒞η.category diagram labeling punctures).symm)
+  have move_coupon :
+      isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫ inputMap =
+        inputMap ≫
+          isoIntPowerHom (𝒞η.character.iso.app W) exponent :=
+    characterCoupon_naturality 𝒞η.character inputMap exponent
+  have absorbed :
+      isoIntPowerHom (𝒞η.character.iso.app W) exponent ≫
+          tensorUnitProjector 𝒞η.category W =
+        tensorUnitProjector 𝒞η.category W :=
+    characterCoupon_tensorUnitProjector_left
+      𝒞η.character W exponent
   change
-    isoIntPowerHom
-          (𝒞η.character.iso.app
-            (ribbonWordObject 𝒞η.category
-              (exteriorWord 𝒞η.category diagram labeling
-                (punctures.map DottedPuncture.inputStrand))))
-          exponent ≫
-        (tensorUnitProjector 𝒞η.category
-            (ribbonWordObject 𝒞η.category
-              (exteriorWord 𝒞η.category diagram labeling
-                (punctures.map DottedPuncture.inputStrand))) ≫
-          eqToHom _) =
-      tensorUnitProjector 𝒞η.category
-          (ribbonWordObject 𝒞η.category
-            (exteriorWord 𝒞η.category diagram labeling
-              (punctures.map DottedPuncture.inputStrand))) ≫
-        eqToHom _
-  rw [← Category.assoc]
-  rw [characterCoupon_tensorUnitProjector_left]
-  congr 1
+    isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫
+          inputMap ≫ tensorUnitProjector 𝒞η.category W ≫ outputMap =
+      inputMap ≫ tensorUnitProjector 𝒞η.category W ≫ outputMap
+  calc
+    isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫
+          (inputMap ≫
+            (tensorUnitProjector 𝒞η.category W ≫ outputMap)) =
+        (isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫
+          inputMap) ≫
+            (tensorUnitProjector 𝒞η.category W ≫ outputMap) := by
+              rw [Category.assoc]
+    _ = (inputMap ≫
+          isoIntPowerHom (𝒞η.character.iso.app W) exponent) ≫
+            (tensorUnitProjector 𝒞η.category W ≫ outputMap) := by
+              rw [move_coupon]
+              rfl
+    _ = inputMap ≫
+          (isoIntPowerHom (𝒞η.character.iso.app W) exponent ≫
+            (tensorUnitProjector 𝒞η.category W ≫ outputMap)) := by
+              rw [Category.assoc]
+    _ = inputMap ≫
+          ((isoIntPowerHom (𝒞η.character.iso.app W) exponent ≫
+            tensorUnitProjector 𝒞η.category W) ≫ outputMap) := by
+              rw [Category.assoc]
+    _ = inputMap ≫
+          (tensorUnitProjector 𝒞η.category W ≫ outputMap) := by
+              exact congrArg
+                (fun middle => inputMap ≫ (middle ≫ outputMap)) absorbed
 
 /--
 The signed puncture-word scalar is invisible on the literal dotted projector
@@ -385,7 +426,7 @@ theorem punctureWordCharacterUnit_smul_projectorHole
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (pairing :
-      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible)
+      (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed)
     (exponent : ℤ) :
     punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
         compileCutOpenEventMorphism
@@ -405,28 +446,42 @@ theorem punctureWordCharacterUnit_smul_projectorHole
     simpa [X] using
       characterCoupon_on_punctureWord
         𝒞η diagram labeling punctures exponent
-  have projector_eq :
-    punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
-        tensorUnitProjector 𝒞η.category X =
-      tensorUnitProjector 𝒞η.category X := by
-    rw [show
+  let compiled :=
+    compileCutOpenEventMorphism
+      𝒞η.category diagram labeling
+      (.projectorHole dotted punctures) pairing
+  have scalar_identity_comp :
       punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
-          tensorUnitProjector 𝒞η.category X =
+          compiled =
         (punctureWordCharacterUnit
-            𝒞η diagram labeling punctures exponent • 𝟙 X) ≫
-          tensorUnitProjector 𝒞η.category X by simp]
-    rw [← coupon_eq]
-    exact characterCoupon_tensorUnitProjector_left
-      𝒞η.character X exponent
-  rw [compile_projectorHole_eq_explicit]
-  unfold explicitProjectorHoleMorphism
-  simpa [X] using congrArg
-    (fun map => map ≫
-      eqToHom
-        (congrArg (ribbonWordObject 𝒞η.category)
-          (exteriorWord_of_punctures_eq
-            𝒞η.category diagram labeling punctures)))
-    projector_eq
+          𝒞η diagram labeling punctures exponent • CategoryStruct.id X) ≫
+          compiled := by
+    simpa only [Category.id_comp] using
+      (Linear.smul_comp X X _
+        (punctureWordCharacterUnit
+          𝒞η diagram labeling punctures exponent)
+        (CategoryStruct.id X) compiled).symm
+  have scalar_as_coupon :
+      punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+          compileCutOpenEventMorphism
+            𝒞η.category diagram labeling
+            (.projectorHole dotted punctures) pairing =
+        isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫
+          compileCutOpenEventMorphism
+            𝒞η.category diagram labeling
+            (.projectorHole dotted punctures) pairing := by
+    change
+      punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
+          compiled =
+        isoIntPowerHom (𝒞η.character.iso.app X) exponent ≫ compiled
+    calc
+      _ = (punctureWordCharacterUnit
+          𝒞η diagram labeling punctures exponent • CategoryStruct.id X) ≫
+            compiled := scalar_identity_comp
+      _ = _ := congrArg (fun map => map ≫ compiled) coupon_eq.symm
+  exact scalar_as_coupon.trans
+    (characterCoupon_projectorHole_left
+      𝒞η diagram labeling dotted punctures pairing exponent)
 
 /--
 Adding a fixed left and right exterior context is linear in the local
@@ -470,7 +525,7 @@ theorem punctureWordCharacterUnit_smul_contextualProjectorHole
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (pairing :
-      (CutOpenEvent.projectorHole dotted punctures).PairingCompatible)
+      (CutOpenEvent.projectorHole dotted punctures).StrandContinuationsAreWellFormed)
     (left right : List diagram.trace.StrandId)
     (exponent : ℤ) :
     punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
@@ -531,7 +586,7 @@ theorem compileEvent_absorbs_of_eq_projectorHole
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
     (event_eq : event = .projectorHole dotted punctures)
-    (pairing : event.PairingCompatible)
+    (pairing : event.StrandContinuationsAreWellFormed)
     (exponent : ℤ) :
     punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
         compileCutOpenEventMorphism
@@ -604,14 +659,14 @@ theorem contextualTraceEdge_absorbs_of_projectorSite
       punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent •
           compileCutOpenEventMorphism
             𝒞η.category diagram labeling event
-            (diagram.dottedCuts.exterior.pairingCompatible site) =
+            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed site) =
         compileCutOpenEventMorphism
           𝒞η.category diagram labeling event
-          (diagram.dottedCuts.exterior.pairingCompatible site) := by
+          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed site) := by
     exact compileEvent_absorbs_of_eq_projectorHole
       𝒞η diagram labeling event dotted punctures
       (by simpa only [event] using site_exact)
-      (diagram.dottedCuts.exterior.pairingCompatible site)
+      (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed site)
       exponent
   have middle_absorbed :=
     contextualizeRibbonMorphism_absorbs
@@ -622,7 +677,7 @@ theorem contextualTraceEdge_absorbs_of_projectorSite
       (exteriorWord 𝒞η.category diagram labeling right)
       (compileCutOpenEventMorphism
         𝒞η.category diagram labeling event
-        (diagram.dottedCuts.exterior.pairingCompatible site))
+        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed site))
       (punctureWordCharacterUnit
         𝒞η diagram labeling punctures exponent)
       event_absorbed
@@ -637,7 +692,7 @@ theorem contextualTraceEdge_absorbs_of_projectorSite
         (exteriorWord 𝒞η.category diagram labeling right)
         (compileCutOpenEventMorphism
           𝒞η.category diagram labeling event
-          (diagram.dottedCuts.exterior.pairingCompatible site)))
+          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed site)))
       (eqToHom after_context_object_eq.symm ≫
         eqToHom after_object_eq.symm)
       (punctureWordCharacterUnit
@@ -909,7 +964,7 @@ private noncomputable def punctureIncidenceContribution
   classical
   exact
     if puncture.twoHandleComponent = twoHandle then
-      puncture.characterExponentSign
+      puncture.direction.intersectionSign
     else
       0
 
@@ -941,7 +996,7 @@ theorem twoOneIncidence_eq_sum_punctureOccurrences
       (fun puncture =>
         puncture.twoHandleComponent =
           (diagram.handles.twoHandleIndex two).1)
-      DottedPuncture.characterExponentSign
+      (fun puncture => puncture.direction.intersectionSign)
       0
 
 /-- The unique primal two-handle index carried by one puncture occurrence. -/
@@ -1048,12 +1103,12 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
           ∏ index : Fin punctures.length with
             punctureTwoHandleIndex diagram (punctures.get index) = two,
             𝒞η.character.value (labeling two) ^
-              ((punctures.get index).characterExponentSign * exponent)) =
+              ((punctures.get index).direction.intersectionSign * exponent)) =
         ∏ index : Fin punctures.length,
           𝒞η.character.value
               (labeling
                 (punctureTwoHandleIndex diagram (punctures.get index))) ^
-            ((punctures.get index).characterExponentSign * exponent) := by
+            ((punctures.get index).direction.intersectionSign * exponent) := by
     calc
       _ = ∏ two : Fin diagram.handles.hTwo,
           ∏ index : Fin punctures.length with
@@ -1061,7 +1116,7 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
             𝒞η.character.value
                 (labeling
                   (punctureTwoHandleIndex diagram (punctures.get index))) ^
-              ((punctures.get index).characterExponentSign * exponent) := by
+              ((punctures.get index).direction.intersectionSign * exponent) := by
             apply Finset.prod_congr rfl
             intro two _
             apply Finset.prod_congr rfl
@@ -1076,14 +1131,14 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
             𝒞η.character.value
                 (labeling
                   (punctureTwoHandleIndex diagram (punctures.get index))) ^
-              ((punctures.get index).characterExponentSign * exponent))
+              ((punctures.get index).direction.intersectionSign * exponent))
   rw [show
     punctureWordCharacterUnit 𝒞η diagram labeling punctures exponent =
       ((∏ index : Fin punctures.length,
         𝒞η.character.value
             (exteriorStrandLabel 𝒞η.category diagram labeling
               (punctures.get index).inputStrand) ^
-          ((punctures.get index).characterExponentSign * exponent) :
+          ((punctures.get index).direction.intersectionSign * exponent) :
         Kˣ) : K) by
       unfold punctureWordCharacterUnit
       rw [list_map_prod_eq_fin_prod_get]
@@ -1094,7 +1149,7 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
       𝒞η.character.value
           (exteriorStrandLabel 𝒞η.category diagram labeling
             (punctures.get index).inputStrand) ^
-        ((punctures.get index).characterExponentSign * exponent)) =
+        ((punctures.get index).direction.intersectionSign * exponent)) =
       ∏ two,
         𝒞η.character.value (labeling two) ^
           (twoOneIncidence diagram one two * exponent)
@@ -1103,12 +1158,12 @@ theorem punctureWordCharacterUnit_eq_incidenceProduct
       𝒞η.character.value
           (exteriorStrandLabel 𝒞η.category diagram labeling
             (punctures.get index).inputStrand) ^
-        ((punctures.get index).characterExponentSign * exponent)) =
+        ((punctures.get index).direction.intersectionSign * exponent)) =
       ∏ index : Fin punctures.length,
         𝒞η.character.value
             (labeling
               (punctureTwoHandleIndex diagram (punctures.get index))) ^
-          ((punctures.get index).characterExponentSign * exponent) by
+          ((punctures.get index).direction.intersectionSign * exponent) by
       apply Finset.prod_congr rfl
       intro index _
       rw [occurrence_label index]]

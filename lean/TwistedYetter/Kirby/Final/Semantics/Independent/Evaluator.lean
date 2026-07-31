@@ -116,6 +116,125 @@ def exteriorWord
     RibbonWord 𝒞 :=
   strands.map (orientedExteriorStrand 𝒞 diagram labeling)
 
+def ribbonDirectionOfCutBoundaryPolarity :
+    CutBoundaryPolarity → RibbonDirection
+  | .outgoing => .forward
+  | .incoming => .dual
+
+/--
+The object seen by the boundary created by cutting one oriented dotted disk.
+Its label comes from the original two-handle component, while its direction
+comes from the local cut-boundary polarity.
+-/
+def orientedCutBoundaryPuncture
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    OrientedSimple 𝒞 where
+  label :=
+    exteriorStrandLabel 𝒞 diagram labeling puncture.inputStrand
+  direction :=
+    ribbonDirectionOfCutBoundaryPolarity
+      puncture.direction.cutBoundaryPolarity
+
+def cutBoundaryWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    RibbonWord 𝒞 :=
+  punctures.map (orientedCutBoundaryPuncture 𝒞 diagram labeling)
+
+theorem orientedExteriorInput_eq_cutBoundaryPuncture
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    orientedExteriorStrand 𝒞 diagram labeling puncture.inputStrand =
+      orientedCutBoundaryPuncture 𝒞 diagram labeling puncture := by
+  apply congrArg₂
+    (fun label direction =>
+      ({ label := label, direction := direction } : OrientedSimple 𝒞))
+  · rfl
+  · calc
+      ribbonDirectionOfStrandOrientation
+          (diagram.trace.strands puncture.inputStrand).orientation =
+        ribbonDirectionOfStrandOrientation
+          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
+            congrArg ribbonDirectionOfStrandOrientation
+              puncture.input_meets_cut_boundary_with_correct_polarity
+      _ = ribbonDirectionOfCutBoundaryPolarity
+          puncture.direction.cutBoundaryPolarity := by
+            cases puncture.direction <;> rfl
+
+theorem orientedExteriorOutput_eq_cutBoundaryPuncture
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    orientedExteriorStrand 𝒞 diagram labeling puncture.outputStrand =
+      orientedCutBoundaryPuncture 𝒞 diagram labeling puncture := by
+  have component_eq :
+      (diagram.trace.strands puncture.outputStrand).component =
+        (diagram.trace.strands puncture.inputStrand).component :=
+    puncture.output_on_two_handle.trans puncture.input_on_two_handle.symm
+  apply congrArg₂
+    (fun label direction =>
+      ({ label := label, direction := direction } : OrientedSimple 𝒞))
+  · unfold exteriorStrandLabel
+    rw [component_eq]
+  · have output_polarity :
+        (diagram.trace.strands puncture.outputStrand).orientation =
+          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
+      puncture.orientation_preserved.symm.trans
+        puncture.input_meets_cut_boundary_with_correct_polarity
+    calc
+      ribbonDirectionOfStrandOrientation
+          (diagram.trace.strands puncture.outputStrand).orientation =
+        ribbonDirectionOfStrandOrientation
+          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
+            congrArg ribbonDirectionOfStrandOrientation output_polarity
+      _ = ribbonDirectionOfCutBoundaryPolarity
+          puncture.direction.cutBoundaryPolarity := by
+            cases puncture.direction <;> rfl
+
+theorem exteriorInputWord_eq_cutBoundaryWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    exteriorWord 𝒞 diagram labeling
+        (punctures.map DottedPuncture.inputStrand) =
+      cutBoundaryWord 𝒞 diagram labeling punctures := by
+  induction punctures with
+  | nil => rfl
+  | cons puncture rest ih =>
+      simp only [List.map_cons, exteriorWord, cutBoundaryWord]
+      rw [orientedExteriorInput_eq_cutBoundaryPuncture]
+      congr 1
+
+theorem exteriorOutputWord_eq_cutBoundaryWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    exteriorWord 𝒞 diagram labeling
+        (punctures.map DottedPuncture.outputStrand) =
+      cutBoundaryWord 𝒞 diagram labeling punctures := by
+  induction punctures with
+  | nil => rfl
+  | cons puncture rest ih =>
+      simp only [List.map_cons, exteriorWord, cutBoundaryWord]
+      rw [orientedExteriorOutput_eq_cutBoundaryPuncture]
+      congr 1
+
 def ribbonWordAppendIso
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K) :
@@ -439,7 +558,7 @@ def compileCutOpenEventMorphism
     (diagram : CombinatorialSpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
-    (pairing : event.PairingCompatible) :
+    (pairing : event.StrandContinuationsAreWellFormed) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling event.beforeWord) ⟶
       ribbonWordObject 𝒞
@@ -488,15 +607,17 @@ def compileCutOpenEventMorphism
       rw [← word_eq]
       exact 𝟙 _
   | projectorHole _ punctures =>
-      have word_eq :=
-        exteriorWord_of_punctures_eq 𝒞 diagram labeling punctures
+      have input_eq :=
+        exteriorInputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
+      have output_eq :=
+        exteriorOutputWord_eq_cutBoundaryWord 𝒞 diagram labeling punctures
       simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord]
       exact
-        tensorUnitProjector 𝒞
-          (ribbonWordObject 𝒞
-            (exteriorWord 𝒞 diagram labeling
-              (punctures.map DottedPuncture.inputStrand))) ≫
-          eqToHom (congrArg (ribbonWordObject 𝒞) word_eq)
+        eqToHom (congrArg (ribbonWordObject 𝒞) input_eq) ≫
+          tensorUnitProjector 𝒞
+            (ribbonWordObject 𝒞
+              (cutBoundaryWord 𝒞 diagram labeling punctures)) ≫
+          eqToHom (congrArg (ribbonWordObject 𝒞) output_eq.symm)
 
 /-- The chosen left exterior context of one certified event transition. -/
 noncomputable def eventLeftContext
@@ -608,7 +729,7 @@ noncomputable def compileContextualCutOpenEventMorphism
         (exteriorWord 𝒞 diagram labeling event.afterWord)
         (exteriorWord 𝒞 diagram labeling right)
         (compileCutOpenEventMorphism 𝒞 diagram labeling event
-          (diagram.dottedCuts.exterior.pairingCompatible i)) ≫
+          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)) ≫
       eqToHom after_context_object_eq.symm ≫
       eqToHom after_object_eq.symm
 
@@ -762,4 +883,4 @@ def RepresentativeIndependenceStatement
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 934
+-- semantic-freeze-padding: 2880
