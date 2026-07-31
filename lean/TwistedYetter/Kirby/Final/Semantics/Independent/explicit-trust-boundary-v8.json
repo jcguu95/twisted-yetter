@@ -1,0 +1,82 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/8",
+  "recorded_at_utc": "2026-07-31T14:02:38Z",
+  "supersedes": "explicit-trust-boundary-v7.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 24,
+  "final_theorem_project_axiom_count": 24,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 27,
+  "topology_refactor": {
+    "removed_primitive_relation": "SpecialKirbyDiagramPresents",
+    "realization_function": "realizeSpecialKirbyDiagram",
+    "existence_statement": "For every closed oriented smooth four-manifold X, there is a combinatorial special Kirby diagram whose realized manifold is oriented-diffeomorphic to X.",
+    "remaining_primitive_relation_symbols": [
+      "DottedPunctureWordsRealizeCocoreIntersections",
+      "TurnoverIdentificationRealizesPoincareDuality"
+    ],
+    "theorem_level_axioms": [
+      "specialKirbyDiagram_exists",
+      "specialKirbyDiagram_computesH₂",
+      "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+      "specialKirbyDiagram_turnover_realizesPoincareDuality"
+    ],
+    "derived_theorems": [
+      "markedRealization_exists"
+    ],
+    "removed_token_certificates": [
+      "DottedCutTopologyWitness",
+      "TurnoverPoincareDualityWitness"
+    ]
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "DottedPunctureWordsRealizeCocoreIntersections",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH2",
+    "OrientedDiffeomorphism",
+    "TurnoverIdentificationRealizesPoincareDuality",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH2",
+    "manifoldH2_addCommGroup",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH₂",
+    "specialKirbyDiagram_exists",
+    "specialKirbyDiagram_punctures_realizeCocoreIntersections",
+    "specialKirbyDiagram_turnover_realizesPoincareDuality"
+  ],
+  "mandatory_human_review": [
+    "Does realizeSpecialKirbyDiagram have exactly the usual handle-attachment meaning?",
+    "Does specialKirbyDiagram_exists state the standard existence theorem up to oriented diffeomorphism?",
+    "Does the puncture-word axiom exactly express simultaneous co-core intersections, including order and signs?",
+    "Does the turnover axiom identify the stored equivalence with geometric handle turnover and Poincare duality?",
+    "Are the H2 comparison and marked Kirby-Cerf completeness statements valid and mutually compatible?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "SpecialKirbyDiagramPresents",
+    "DottedCutTopologyWitness",
+    "TurnoverPoincareDualityWitness",
+    "axiom markedRealization_exists",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom",
+    "legacy backend conformance certificate"
+  ]
+}

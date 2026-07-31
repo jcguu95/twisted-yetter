@@ -1,0 +1,73 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v16",
+  "recorded_at_utc": "2026-07-31T14:02:38Z",
+  "recorded_at_local": "2026-07-31T08:02:38-0600",
+  "semantic_content_parent_commit": "91e0c00c2d79b62567877f8e736c345eaf39c51f",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v15.json",
+  "historical_v1_through_v15_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "REPLACE_UNINTERPRETED_PRESENTS_RELATION_WITH_REALIZATION_AND_DIFFEO_EXISTENCE",
+    "reason": "The binary SpecialKirbyDiagramPresents predicate left the relation between a diagram and a manifold uninterpreted. V16 assigns each valid combinatorial special Kirby diagram its handle-attachment realization and states presentation existence as an oriented diffeomorphism from that realization to X.",
+    "removed": [
+      "SpecialKirbyDiagramPresents"
+    ],
+    "added": [
+      "realizeSpecialKirbyDiagram"
+    ],
+    "existence_axiom": "specialKirbyDiagram_exists",
+    "homology_path": "PrimalKirbyH₂ ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram) ≃+ ManifoldH₂ X",
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "proof_status": {
+    "independent_entrance_build": "PASS",
+    "final_axiom_audit_build": "PASS",
+    "full_lake_build_after_comment_only_reseal": "PASS",
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "human_semantic_review": "REQUIRED_FOR_REALIZATION_FUNCTION_AND_REMAINING_TOPOLOGY_BOUNDARIES"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 24,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 27,
+    "removed_dependency": "SpecialKirbyDiagramPresents",
+    "new_explicit_dependency": "realizeSpecialKirbyDiagram"
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "000fdfaaa401df9ab37f147897be9ce13738701bf49d438b882bf6fe4078c2ee",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0008fb96ea3cc60f8ba3c53c95b453cc2c644f3023ad70c2354db289f370010b",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "LocalReplacementSyntax.lean": "000094f7099d578e9c9dd22229baf3100f38a83d513678c164ad0fd1fc2eb283",
+    "Moves.lean": "000066f142165275ba9af97bbacbf6334c273288690be8557e85b298162a7e63",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "red_team": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "scope": "The presents-relation issue is resolved; other proof fields and topology boundaries are intentionally deferred.",
+    "human_review_focus": [
+      "the handle-attachment meaning of realizeSpecialKirbyDiagram",
+      "the four theorem-level topology axioms",
+      "markedKirbyCerf_complete"
+    ]
+  },
+  "non_claims": [
+    "The project does not construct smooth handle attachment from first principles.",
+    "The realization function remains an explicit foundational topology boundary.",
+    "Kernel checking does not establish the intended human meaning of the realization function.",
+    "This dirty-worktree manifest becomes a committed frozen checkpoint only when committed with the recorded source."
+  ]
+}
