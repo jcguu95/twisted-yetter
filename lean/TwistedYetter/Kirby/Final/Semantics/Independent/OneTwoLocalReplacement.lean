@@ -12,98 +12,6 @@ unchanged source exterior.
 
 namespace TwistedYetter.Semantics.Independent
 
-structure SerializedStrand where
-  component : ℕ
-  orientation : StrandOrientation
-  deriving DecidableEq, Repr
-
-structure SerializedPuncture where
-  dottedComponent : ℕ
-  twoHandleComponent : ℕ
-  inputStrand : ℕ
-  outputStrand : ℕ
-  direction : PunctureDirection
-  characterExponentSign : ℤ
-  cutPosition : ℕ
-  deriving DecidableEq, Repr
-
-inductive SerializedCutOpenEvent
-  | birth (leftOutput rightOutput : ℕ)
-  | death (leftInput rightInput : ℕ)
-  | crossing
-      (overInput underInput overOutput underOutput : ℕ)
-      (sign : CrossingSign)
-  | framingTwist (input output : ℕ) (sign : CrossingSign)
-  | planarIsotopy (continuations : List (ℕ × ℕ))
-  | projectorHole
-      (dottedComponent : ℕ)
-      (punctures : List SerializedPuncture)
-  deriving DecidableEq, Repr
-
-def serializeStrand
-    {componentCount : ℕ}
-    (strand : Strand componentCount) :
-    SerializedStrand :=
-  {
-    component := strand.component.1
-    orientation := strand.orientation
-  }
-
-def serializePuncture
-    {trace : CombinatorialLinkTrace}
-    (puncture : DottedPuncture trace) :
-    SerializedPuncture :=
-  {
-    dottedComponent := puncture.dottedComponent.1
-    twoHandleComponent := puncture.twoHandleComponent.1
-    inputStrand := puncture.inputStrand.1
-    outputStrand := puncture.outputStrand.1
-    direction := puncture.direction
-    characterExponentSign := puncture.characterExponentSign
-    cutPosition := puncture.cutPosition
-  }
-
-def serializeCutOpenEvent
-    {trace : CombinatorialLinkTrace} :
-    CutOpenEvent trace → SerializedCutOpenEvent
-  | .birth left right =>
-      .birth left.1 right.1
-  | .death left right =>
-      .death left.1 right.1
-  | .crossing overInput underInput overOutput underOutput sign =>
-      .crossing overInput.1 underInput.1 overOutput.1 underOutput.1 sign
-  | .framingTwist input output sign =>
-      .framingTwist input.1 output.1 sign
-  | .planarIsotopy continuations =>
-      .planarIsotopy
-        (continuations.map fun pair => (pair.1.1, pair.2.1))
-  | .projectorHole dotted punctures =>
-      .projectorHole dotted.1 (punctures.map serializePuncture)
-
-def serializedComponents
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    List Component :=
-  List.ofFn diagram.trace.components
-
-def serializedStrands
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    List SerializedStrand :=
-  List.ofFn (fun i => serializeStrand (diagram.trace.strands i))
-
-def serializedExteriorEvents
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    List SerializedCutOpenEvent :=
-  List.ofFn
-    (fun i =>
-      serializeCutOpenEvent (diagram.dottedCuts.exterior.events i))
-
-def serializedActiveOrders
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    List (List ℕ) :=
-  List.ofFn
-    (fun i =>
-      (diagram.dottedCuts.exterior.activeOrder i).map Fin.val)
-
 def oneTwoLocalComponents :
     List Component :=
   [
@@ -207,3 +115,5 @@ axiom standardOneTwoCancellation_hasLocalNormalForm
     | _ => False
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 18305

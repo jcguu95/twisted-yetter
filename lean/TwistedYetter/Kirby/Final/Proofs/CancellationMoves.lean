@@ -1,6 +1,7 @@
 import TwistedYetter.Kirby.Final.Proofs.CleanBandSlides
 import TwistedYetter.Kirby.Final.Proofs.RepresentativeIndependence
-import TwistedYetter.Kirby.Final.Proofs.SpecialCutMeridian
+import TwistedYetter.Kirby.Final.Proofs.CancellationTraceFactorization
+import TwistedYetter.Kirby.Final.Proofs.TwoThreeTraceFactorization
 
 /-!
 # Frozen-frontend cancellation moves
@@ -150,11 +151,17 @@ theorem oneTwoBirth_hasTypedGraphicalNormalForm
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary source.turnedOver
           sourceLabeling sourceCycle).graph).interpret := by
-  have _geometry :=
+  have geometry :=
     standardOneTwoCancellation_hasLocalNormalForm
       script (Or.inl kind)
-  have _coordinateBinding := coordinateBinding
-  sorry
+  rw [kind] at geometry
+  exact standardOneTwoBirth_compiledExteriorMorphism
+    𝒞η.category
+    (OneTwoGraphCoordinates.ofAdded coordinates)
+    (OneTwoGraphCoordinates.ofAdded_matchesCanonicalMeridian
+      coordinates coordinateBinding)
+    geometry
+    sourceLabeling newLabel
 
 theorem oneTwoBirth_graphicalFactor
     (𝒞η : TwistedPremodularCategory K)
@@ -188,12 +195,51 @@ theorem oneTwoBirth_graphicalFactor
   rw [interpreted]
   exact closedComposeExpression_scalar _ _
 
-theorem twoThreeBirth_graphicalFactor
+theorem twoThreeBirth_hasTypedGraphicalNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeBirth)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeBirthComponent)
+    (normalForm :
+      IsStandardTwoThreeBirth source.diagram target.diagram)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (sourceLabeling :
+      TwoHandleLabeling 𝒞η.category source.diagram)
+    (newLabel : 𝒞η.category.simples.Simple) :
+    (canonicalRoleAwareGraphCompiler
+        𝒞η target.diagram target.primalBoundary target.turnedOver
+        (coordinates.mergeLabeling sourceLabeling newLabel)
+        (transport.mapCycle sourceCycle)).graph.interpret =
+      (closedComposeExpression
+        (ordinaryKirbyLoopExpression 𝒞η.category newLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η source.diagram source.primalBoundary source.turnedOver
+          sourceLabeling sourceCycle).graph).interpret := by
+  exact standardTwoThreeBirth_compiledExteriorMorphism
+    𝒞η.category
+    (TwoThreeGraphCoordinates.ofAdded coordinates)
+    (TwoThreeGraphCoordinates.ofAdded_matches
+      coordinates coordinateBinding)
+    normalForm
+    sourceLabeling newLabel
+
+theorem twoThreeBirth_graphicalFactor
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeBirth)
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeBirthComponent)
+    (normalForm :
+      IsStandardTwoThreeBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
@@ -209,9 +255,9 @@ theorem twoThreeBirth_graphicalFactor
             𝒞η source.diagram source.primalBoundary source.turnedOver
             sourceLabeling sourceCycle).graph := by
   have interpreted :=
-    shum_framedRibbonCoherence
-      (twoThreeBirth_hasTypedGraphicalNormalForm
-        𝒞η coordinates sourceCycle sourceLabeling newLabel)
+    twoThreeBirth_hasTypedGraphicalNormalForm
+      𝒞η script kind coordinates coordinateBinding normalForm
+      sourceCycle sourceLabeling newLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted, closedComposeExpression_scalar]
   have localValue :
@@ -308,9 +354,15 @@ theorem oneTwoBirth_rawCycleSum
 theorem twoThreeBirth_rawCycleSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeBirth)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       AddedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeBirthComponent)
+    (normalForm :
+      IsStandardTwoThreeBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η target.diagram target.primalBoundary target.turnedOver
         (transport.mapCycle sourceCycle) =
@@ -364,7 +416,9 @@ theorem twoThreeBirth_rawCycleSum
         intro newLabel _
         rw [addedTwoHandle_ordinaryKirbyWeight,
           addedTwoHandle_characterWeight,
-          twoThreeBirth_graphicalFactor]
+          twoThreeBirth_graphicalFactor
+            𝒞η script kind coordinates coordinateBinding normalForm
+            sourceCycle sourceLabeling newLabel]
         ring
     _ =
       𝒞η.category.globalDimension *
@@ -434,6 +488,10 @@ theorem twoThreeBirth_preserves_evaluation
     (homology : MoveHomologyTransport source target)
     (coordinates :
       AddedTwoHandleCoordinates source target homology.tham)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeBirthComponent)
+    (normalForm :
+      IsStandardTwoThreeBirth source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -443,7 +501,8 @@ theorem twoThreeBirth_preserves_evaluation
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
   unfold evaluateCycle
-  rw [twoThreeBirth_rawCycleSum 𝒞η coordinates sourceCycle]
+  rw [twoThreeBirth_rawCycleSum
+    𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
   rw [counts.1, counts.2.1, counts.2.2]
   exact
     (twoThree_normalization_cancels
@@ -579,11 +638,17 @@ theorem oneTwoDeath_hasTypedGraphicalNormalForm
           targetLabeling
           (transport.mapCycle
             (coordinates.safeCycle sourceCycle))).graph).interpret := by
-  have _geometry :=
+  have geometry :=
     standardOneTwoCancellation_hasLocalNormalForm
       script (Or.inr kind)
-  have _coordinateBinding := coordinateBinding
-  sorry
+  rw [kind] at geometry
+  exact standardOneTwoBirth_compiledExteriorMorphism
+    𝒞η.category
+    (OneTwoGraphCoordinates.ofRemoved coordinates)
+    (OneTwoGraphCoordinates.ofRemoved_matchesCanonicalMeridian
+      coordinates coordinateBinding)
+    geometry
+    targetLabeling removedLabel
 
 theorem oneTwoDeath_graphicalFactor
     (𝒞η : TwistedPremodularCategory K)
@@ -618,12 +683,53 @@ theorem oneTwoDeath_graphicalFactor
   rw [interpreted]
   exact closedComposeExpression_scalar _ _
 
-theorem twoThreeDeath_graphicalFactor
+theorem twoThreeDeath_hasTypedGraphicalNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeDeath)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeDeathComponent)
+    (normalForm :
+      IsStandardTwoThreeDeath source.diagram target.diagram)
+    (sourceCycle : ThamTwoCycles source.turnedOver)
+    (targetLabeling :
+      TwoHandleLabeling 𝒞η.category target.diagram)
+    (removedLabel : 𝒞η.category.simples.Simple) :
+    (canonicalRoleAwareGraphCompiler
+        𝒞η source.diagram source.primalBoundary source.turnedOver
+        (coordinates.mergeLabeling targetLabeling removedLabel)
+        (coordinates.safeCycle sourceCycle)).graph.interpret =
+      (closedComposeExpression
+        (ordinaryKirbyLoopExpression 𝒞η.category removedLabel)
+        (canonicalRoleAwareGraphCompiler
+          𝒞η target.diagram target.primalBoundary target.turnedOver
+          targetLabeling
+          (transport.mapCycle
+            (coordinates.safeCycle sourceCycle))).graph).interpret := by
+  exact standardTwoThreeBirth_compiledExteriorMorphism
+    𝒞η.category
+    (TwoThreeGraphCoordinates.ofRemoved coordinates)
+    (TwoThreeGraphCoordinates.ofRemoved_matches
+      coordinates coordinateBinding)
+    normalForm
+    targetLabeling removedLabel
+
+theorem twoThreeDeath_graphicalFactor
+    (𝒞η : TwistedPremodularCategory K)
+    {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeDeath)
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeDeathComponent)
+    (normalForm :
+      IsStandardTwoThreeDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
@@ -637,12 +743,12 @@ theorem twoThreeDeath_graphicalFactor
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η target.diagram target.primalBoundary target.turnedOver
-            targetLabeling
-            (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
+          targetLabeling
+          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
   have interpreted :=
-    shum_framedRibbonCoherence
-      (twoThreeDeath_hasTypedGraphicalNormalForm
-        𝒞η coordinates sourceCycle targetLabeling removedLabel)
+    twoThreeDeath_hasTypedGraphicalNormalForm
+      𝒞η script kind coordinates coordinateBinding normalForm
+      sourceCycle targetLabeling removedLabel
   unfold canonicalRibbonGraphicalEvaluation
   rw [interpreted, closedComposeExpression_scalar]
   have localValue :
@@ -745,9 +851,15 @@ theorem oneTwoDeath_rawCycleSum
 theorem twoThreeDeath_rawCycleSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
+    (script : CancellationScript source.diagram target.diagram)
+    (kind : script.kind = .twoThreeDeath)
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeDeathComponent)
+    (normalForm :
+      IsStandardTwoThreeDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     rawCycleSum 𝒞η source.diagram source.primalBoundary source.turnedOver
         (coordinates.safeCycle sourceCycle) =
@@ -804,7 +916,9 @@ theorem twoThreeDeath_rawCycleSum
         intro removedLabel _
         rw [removedTwoHandle_ordinaryKirbyWeight,
           removedTwoHandle_characterWeight,
-          twoThreeDeath_graphicalFactor]
+          twoThreeDeath_graphicalFactor
+            𝒞η script kind coordinates coordinateBinding normalForm
+            sourceCycle targetLabeling removedLabel]
         ring
     _ =
       𝒞η.category.globalDimension *
@@ -904,6 +1018,10 @@ theorem twoThreeDeath_preserves_evaluation
     (homology : MoveHomologyTransport source target)
     (coordinates :
       RemovedTwoHandleCoordinates source target homology.tham)
+    (coordinateBinding :
+      coordinates.MatchesTwoThreeDeathComponent)
+    (normalForm :
+      IsStandardTwoThreeDeath source.diagram target.diagram)
     (sourceCycle : ThamTwoCycles source.turnedOver) :
     evaluateCycle 𝒞η
         source.diagram source.primalBoundary source.turnedOver sourceCycle =
@@ -926,7 +1044,8 @@ theorem twoThreeDeath_preserves_evaluation
         target.turnedOver
         (homology.tham.mapCycle (coordinates.safeCycle sourceCycle)) := by
       unfold evaluateCycle
-      rw [twoThreeDeath_rawCycleSum 𝒞η coordinates sourceCycle]
+      rw [twoThreeDeath_rawCycleSum
+        𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
       unfold thamDefinition511Normalization
       rw [counts.2.2, pow_succ]
       field_simp

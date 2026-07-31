@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
+import TwistedYetter.Kirby.Final.Semantics.Independent.LocalReplacementSyntax
 
 /-!
 # Independent semantics: Kirby moves and H₂ transport
@@ -525,6 +525,38 @@ def RemovedTwoHandleCoordinates.MatchesOneTwoDeathMeridian
       target.diagram.trace.componentCount + 1
 
 /--
+Coordinate coherence for a two--three birth.  Old ordinary components retain
+their literal component indices, while the unique new 2-handle coordinate is
+the isolated ordinary component appended immediately after the source
+exterior.
+-/
+def AddedTwoHandleCoordinates.MatchesTwoThreeBirthComponent
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      AddedTwoHandleCoordinates source target transport) : Prop :=
+  (∀ i : Fin source.diagram.handles.hTwo,
+    (target.diagram.handles.twoHandleIndex
+      (coordinates.indexEquiv (Sum.inl i))).1.1 =
+        (source.diagram.handles.twoHandleIndex i).1.1) ∧
+  (target.diagram.handles.twoHandleIndex
+    (coordinates.indexEquiv (Sum.inr ()))).1.1 =
+      source.diagram.trace.componentCount
+
+def RemovedTwoHandleCoordinates.MatchesTwoThreeDeathComponent
+    {source target : HomologicallyMarkedDiagram}
+    {transport : ThamHandleChainTransport source target}
+    (coordinates :
+      RemovedTwoHandleCoordinates source target transport) : Prop :=
+  (∀ i : Fin target.diagram.handles.hTwo,
+    (source.diagram.handles.twoHandleIndex
+      (coordinates.indexEquiv (Sum.inl i))).1.1 =
+        (target.diagram.handles.twoHandleIndex i).1.1) ∧
+  (source.diagram.handles.twoHandleIndex
+    (coordinates.indexEquiv (Sum.inr ()))).1.1 =
+      target.diagram.trace.componentCount
+
+/--
 The four explicit local normal forms accepted for cancellation events.
 
 This is data carried by the move, not an axiom saying that evaluations are
@@ -551,10 +583,18 @@ inductive CancellationLocalNormalForm
       (kind : script.kind = .twoThreeBirth)
       (coordinates :
         AddedTwoHandleCoordinates source target homology.tham)
+      (coordinateBinding :
+        coordinates.MatchesTwoThreeBirthComponent)
+      (normalForm :
+        IsStandardTwoThreeBirth source.diagram target.diagram)
   | twoThreeDeath
       (kind : script.kind = .twoThreeDeath)
       (coordinates :
         RemovedTwoHandleCoordinates source target homology.tham)
+      (coordinateBinding :
+        coordinates.MatchesTwoThreeDeathComponent)
+      (normalForm :
+        IsStandardTwoThreeDeath source.diagram target.diagram)
 
 inductive ElementaryMove
     (source target : HomologicallyMarkedDiagram) : Type
@@ -666,4 +706,4 @@ end
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 7408
+-- semantic-freeze-padding: 227

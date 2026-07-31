@@ -121,12 +121,14 @@ theorem frozenFrontendLocalMoveInvariance
       | oneTwoDeath kind coordinates coordinateBinding =>
           exact oneTwoDeath_preserves_evaluation
             𝒞η script kind homology coordinates coordinateBinding sourceCycle
-      | twoThreeBirth kind coordinates =>
+      | twoThreeBirth kind coordinates coordinateBinding normalForm =>
           exact twoThreeBirth_preserves_evaluation
-            𝒞η script kind homology coordinates sourceCycle
-      | twoThreeDeath kind coordinates =>
+            𝒞η script kind homology coordinates coordinateBinding
+              normalForm sourceCycle
+      | twoThreeDeath kind coordinates coordinateBinding normalForm =>
           exact twoThreeDeath_preserves_evaluation
-            𝒞η script kind homology coordinates sourceCycle
+            𝒞η script kind homology coordinates coordinateBinding
+              normalForm sourceCycle
 
 end
 

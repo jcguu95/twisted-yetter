@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
 import TwistedYetter.Kirby.Final.Semantics.Independent.OneTwoLocalReplacement
+import TwistedYetter.Kirby.Final.Semantics.Independent.TwoThreeLocalReplacement
 
 /-!
 # Independent semantics: explicit entrance axioms
@@ -290,56 +291,12 @@ axiom framedIsotopy_hasTypedGraphicalInterpretation
 
 The former one--two birth/death graphical axioms were removed. Their exact
 graphical conclusions are theorem obligations in `Proofs/CancellationMoves`.
-The sole external one--two input is now the category-neutral local replacement
-specified in `OneTwoLocalReplacement`.
+The former two--three graphical axioms have now also been removed.
+Its exact transparent normal form is carried explicitly by the move
+constructor; no two--three local-normal-form axiom remains.  The one--two
+normal form is still the external category-neutral input specified in
+`OneTwoLocalReplacement`.
 -/
-
-/-- The exact fixed-label graphical normal form for a two--three birth. -/
-axiom twoThreeBirth_hasTypedGraphicalNormalForm
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    {source target : HomologicallyMarkedDiagram}
-    {transport : ThamHandleChainTransport source target}
-    (coordinates :
-      AddedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
-    (sourceLabeling :
-      TwoHandleLabeling 𝒞η.category source.diagram)
-    (newLabel : 𝒞η.category.simples.Simple) :
-    FramedRibbonIsotopic
-      (canonicalRoleAwareGraphCompiler
-        𝒞η target.diagram target.primalBoundary target.turnedOver
-        (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).graph
-      (closedComposeExpression
-        (ordinaryKirbyLoopExpression 𝒞η.category newLabel)
-        (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.primalBoundary source.turnedOver
-          sourceLabeling sourceCycle).graph)
-
-/-- The reverse two--three normal form, again on a safe representative. -/
-axiom twoThreeDeath_hasTypedGraphicalNormalForm
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    {source target : HomologicallyMarkedDiagram}
-    {transport : ThamHandleChainTransport source target}
-    (coordinates :
-      RemovedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.turnedOver)
-    (targetLabeling :
-      TwoHandleLabeling 𝒞η.category target.diagram)
-    (removedLabel : 𝒞η.category.simples.Simple) :
-    FramedRibbonIsotopic
-      (canonicalRoleAwareGraphCompiler
-        𝒞η source.diagram source.primalBoundary source.turnedOver
-        (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).graph
-      (closedComposeExpression
-        (ordinaryKirbyLoopExpression 𝒞η.category removedLabel)
-        (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.primalBoundary target.turnedOver
-          targetLabeling
-          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph)
 
 /-! ## Smooth four-manifold and Kirby--Cerf topology
 
@@ -432,4 +389,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1592
+-- semantic-freeze-padding: 316

@@ -1,0 +1,104 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v11",
+  "recorded_at_utc": "2026-07-31T06:11:16Z",
+  "recorded_at_local": "2026-07-31T00:11:16-0600",
+  "semantic_content_parent_commit": "a98c45cf082170155743f74053c2df6ddb489016",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v10.json",
+  "historical_v1_through_v10_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXPLICIT_TWO_THREE_CANCELLATION_NORMAL_FORM",
+    "reason": "The former two-three cancellation boundary directly returned the evaluator-facing graphical conclusion. Version 11 instead makes the exact finite local replacement visible in the move constructor and derives the graphical factorization in Lean.",
+    "changes": [
+      "Factored shared finite serialized replacement syntax into LocalReplacementSyntax.lean.",
+      "Added exact two-three birth and death local replacement predicates without category, character, evaluator, or scalar equality.",
+      "Required each two-three cancellation move to carry its exact coordinate binding and transparent local-normal-form proof.",
+      "Removed standardTwoThreeCancellation_hasLocalNormalForm and the two evaluator-facing two-three graphical axioms.",
+      "Derived source-bound two-three birth and death graphical factorizations from the explicit move data.",
+      "Proved the ordinary Kirby-loop trace, finite-label sum, character transport, and normalization cancellation in Lean.",
+      "Kept the one-two local-normal-form boundary explicit and unchanged."
+    ],
+    "explicit_frozen_axiom_declaration_count": 24,
+    "final_theorem_project_axiom_count": 20,
+    "two_three_normal_form_is_axiom": false,
+    "two_three_normal_form_is_visible_proof_field": true,
+    "adds_evaluator_equality_axiom": false,
+    "adds_local_invariance_axiom": false,
+    "adds_representative_independence_axiom": false
+  },
+  "proof_status": {
+    "import_firewall": "PASS",
+    "final_axiom_audit_build": "PASS",
+    "full_lake_build_after_comment_only_reseal": "PASS",
+    "representative_independence": "KERNEL_CHECKED",
+    "exhaustive_eight_move_local_invariance": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "two_three_birth_and_death": "KERNEL_CHECKED_FROM_VISIBLE_LOCAL_NORMAL_FORM",
+    "four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_EXPLICIT_BOUNDARIES",
+    "human_semantic_review": "REQUIRED"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "public_parameters": [
+      "TwistedPremodularCategory K",
+      "OrientedDiffeomorphism X Y",
+      "ManifoldH₂ X"
+    ],
+    "forbidden_public_parameters_absent": [
+      "graphical evaluator",
+      "compiler",
+      "normalization",
+      "representative-independence proof",
+      "local-invariance proof",
+      "presentation theory",
+      "topology package"
+    ]
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true,
+    "scope": "all Lean files directly imported or transitively used under the Independent semantic frontend"
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000b2fe29ef123954beb2c2dd3b945646160f80bfbdb6a1cd0502428ffa8687c",
+    "EntranceAxioms.lean": "0000e82c44e754d1a7200a2553d68390acbd63222f0d3acf78796712d661dfda",
+    "Entry.lean": "0008cfee53ec3be5b34b4e1cd6d372f6c0e1c2ec527e68b54ef6af5724a59943",
+    "Evaluator.lean": "0008fb96ea3cc60f8ba3c53c95b453cc2c644f3023ad70c2354db289f370010b",
+    "Graphical.lean": "0008a762a6dc824f90e1a7dd40213545298695291e624911f759831152e16b99",
+    "Homology.lean": "000e9a392834da07255ece21ca740d1777af6175a03693df88883a55247ef35d",
+    "Invariant.lean": "000bfcbc137158216fe770d491568080656858551ba688d1852864ad9ec2c890",
+    "LocalReplacementSyntax.lean": "000b589a8ec5337e14fa1cba7ebf5f3e71fa3ec168b23f849e4e1971fa7ca537",
+    "Moves.lean": "000e6df0c8e406c412965c1621e0fa3cde3823ffddd33fdd88bc5fc2a3d6521c",
+    "OneTwoLocalReplacement.lean": "00037dc4255c736a0604fd9fb58695057d74efa252368166910952b9231dc6f6",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "supporting_files": {
+    "CancellationMoves.lean": "d8ac373824d4e8bd31fd0a0d151f39761e651fdae536e6423d2510aa4499be97",
+    "CancellationTraceFactorization.lean": "f9bd245aac84b2ac42cbe17bc0408d792c9628c485d45b85185421c5e63d8641",
+    "TwoThreeTraceFactorization.lean": "d92fde221ebc4d5f4ec0cc53f7b51638e5ca602d23041786ba362967053c29f6",
+    "FrozenFrontendLocalMoves.lean": "65932a3a6ed197ac0eac6f04edb1d02112ad3d097682c4dbb322d1849a2863fc",
+    "TwistedYetter.lean": "cb2bc847a4f57a1113bb68b6b7f2cbb3a9a385047ae49c49e835399351f70c96",
+    "FinalAxiomAudit.lean": "4fcc5c4240f1331094c11a40d77af02635d9803f6e990f1d6a59434410c37309"
+  },
+  "red_team": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "scope": "entire Final source tree, including archived and historical modules",
+    "source_tree_sha256": "ea34c019468f23b74cc7dafbcc07ab134ded5fb7f0b42f1e6dff3585e90b8fcb",
+    "source_axiom_declaration_count": 40,
+    "likely_proof_field_count": 276,
+    "json": "/private/tmp/lean-red-team-audit-final-v11.json",
+    "markdown": "/private/tmp/lean-red-team-audit-final-v11.zh-TW.md",
+    "warning": "The conservative source scanner covers historical and archived files. Its source counts are not the final theorem closure; the exact kernel closure is recorded separately in explicit-trust-boundary-v3.json."
+  },
+  "non_claims": [
+    "The two-three local-normal-form proof field still requires human review of its mathematical meaning.",
+    "The one-two cancellation local-normal-form boundary remains an external category-neutral axiom.",
+    "The clean attach, finite transport, clean detach, and framed-isotopy interpretation boundaries remain external inputs.",
+    "Kernel checking does not by itself certify that these external statements match the intended Kirby geometry.",
+    "This does not identify the invariant with the original Crane-Yetter state sum.",
+    "This does not recertify legacy numerical artifacts.",
+    "This dirty-worktree manifest becomes a committed frozen checkpoint only when committed together with the exact recorded sources."
+  ]
+}

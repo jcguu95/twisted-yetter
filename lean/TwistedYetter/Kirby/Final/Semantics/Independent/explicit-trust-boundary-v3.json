@@ -1,0 +1,98 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/3",
+  "recorded_at_utc": "2026-07-31T06:11:16Z",
+  "supersedes": "explicit-trust-boundary-v2.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 24,
+  "final_theorem_project_axiom_count": 20,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "DiagramRealizationWitness",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH₂",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH₂",
+    "manifoldH₂_addCommGroup",
+    "markedKirbyCerf_complete",
+    "markedRealization_exists",
+    "shum_framedRibbonCoherence",
+    "standardOneTwoCancellation_hasLocalNormalForm"
+  ],
+  "main_human_review_boundaries": [
+    {
+      "name": "cleanAttach_hasStandardGraphicalInterpretation",
+      "meaning": "A certified clean band attachment is interpreted by the exact typed fusion-resolution graph."
+    },
+    {
+      "name": "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "meaning": "The complete finite coupon route is interpreted by the corresponding typed graphical transport."
+    },
+    {
+      "name": "cleanDetach_hasStandardGraphicalInterpretation",
+      "meaning": "A certified clean band detachment is interpreted by the exact reverse typed graph."
+    },
+    {
+      "name": "framedIsotopy_hasTypedGraphicalInterpretation",
+      "meaning": "A certified framed isotopy induces a framed-ribbon isotopy between the exact normalized source and transported target expressions."
+    },
+    {
+      "name": "standardOneTwoCancellation_hasLocalNormalForm",
+      "meaning": "A one-two cancellation is represented by the exact finite birth-projector-death replacement before the unchanged exterior."
+    },
+    {
+      "name": "CancellationLocalNormalForm.twoThreeBirth.normalForm",
+      "kind": "visible proof field, not an axiom",
+      "meaning": "The concrete source and target of a two-three birth satisfy the exact finite ordinary-loop local replacement predicate."
+    },
+    {
+      "name": "CancellationLocalNormalForm.twoThreeDeath.normalForm",
+      "kind": "visible proof field, not an axiom",
+      "meaning": "The concrete source and target of a two-three death satisfy the reverse exact finite ordinary-loop local replacement predicate."
+    }
+  ],
+  "removed_from_final_closure": [
+    "twoThreeBirth_hasTypedGraphicalNormalForm",
+    "twoThreeDeath_hasTypedGraphicalNormalForm",
+    "standardTwoThreeCancellation_hasLocalNormalForm",
+    "oneTwoBirth_hasTypedGraphicalNormalForm",
+    "oneTwoDeath_hasTypedGraphicalNormalForm"
+  ],
+  "proved_not_axiomatized": [
+    "two-three birth and death typed graphical normal forms from the visible finite replacement",
+    "two-three source and target coordinate bindings",
+    "ordinary Kirby-loop ribbon trace",
+    "character-weight transport for added and removed handles",
+    "zero exponent on the new or removed cancellation handle",
+    "finite-labeling sum reindexing",
+    "special-cut meridian finite sum",
+    "ordinary Kirby-loop finite sum",
+    "one-two normalization cancellation",
+    "two-three normalization cancellation",
+    "representative independence",
+    "exhaustive eight-constructor local-move case split",
+    "finite Kirby-movie induction",
+    "public diffeomorphism invariance conditional on this explicit closure"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom",
+    "legacy backend conformance certificate"
+  ]
+}
