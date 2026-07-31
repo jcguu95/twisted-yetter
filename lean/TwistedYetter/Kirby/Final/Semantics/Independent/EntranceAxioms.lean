@@ -308,18 +308,17 @@ axiom realizeSpecialKirbyDiagram :
   CombinatorialSpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
 
 /--
-Primitive topology vocabulary: the displayed equivalence is the geometric
-identification induced by turning over the handle decomposition and applying
-Poincare duality, rather than an arbitrary isomorphism of additive groups.
+The Poincare-duality identification obtained by turning the handle
+decomposition upside down.  The codomain is the homology of the canonical
+transposed THAM complex; callers cannot supply an arbitrary group equivalence.
 -/
-axiom TurnoverIdentificationRealizesPoincareDuality
+axiom turnoverPoincareDualityEquiv
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
-    (turnedOver : TurnedOverBoundaryCertificate primal)
-    (turnover : TurnoverH₂Identification turnedOver)
     (homologyComparison :
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    Prop
+    PrimalKirbyH₂ primal ≃+
+      ThamKirbyH₂ (TurnedOverBoundaryCertificate.canonical primal)
 
 /-! ## Explicit classical topology axioms -/
 
@@ -341,33 +340,46 @@ axiom specialKirbyDiagram_computesH₂
     Σ primal : PrimalDegreeThreeBoundaryData diagram,
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
 
-/--
-T3. The algebraic primal-to-THAM equivalence can be chosen to be the geometric
-turnover/Poincare-duality identification.
--/
-axiom specialKirbyDiagram_turnover_realizesPoincareDuality
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (homologyComparison :
-      PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    ∃ turnedOver : TurnedOverBoundaryCertificate primal,
-      ∃ turnover : TurnoverH₂Identification turnedOver,
-        TurnoverIdentificationRealizesPoincareDuality
-          diagram primal turnedOver turnover homologyComparison
-
 structure MarkedRealizationData
     (X : ClosedOrientedSmoothFourManifold) where
-  markedDiagram : HomologicallyMarkedDiagram
+  diagram : CombinatorialSpecialKirbyDiagram
+  primalBoundary : PrimalDegreeThreeBoundaryData diagram
   realizationDiffeomorphism :
-    OrientedDiffeomorphism (realizeSpecialKirbyDiagram markedDiagram.diagram) X
+    OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
   diagramHomologyComparison :
-    PrimalKirbyH₂ markedDiagram.primalBoundary ≃+
-      ManifoldH₂ (realizeSpecialKirbyDiagram markedDiagram.diagram)
+    PrimalKirbyH₂ primalBoundary ≃+
+      ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
+  alpha : PrimalKirbyH₂ primalBoundary
+
+def MarkedRealizationData.turnedOver
+    {X : ClosedOrientedSmoothFourManifold}
+    (realization : MarkedRealizationData X) :
+    TurnedOverBoundaryCertificate realization.primalBoundary :=
+  TurnedOverBoundaryCertificate.canonical realization.primalBoundary
+
+noncomputable def MarkedRealizationData.turnover
+    {X : ClosedOrientedSmoothFourManifold}
+    (realization : MarkedRealizationData X) :
+    TurnoverH₂Identification realization.turnedOver :=
+  { equiv := turnoverPoincareDualityEquiv
+      realization.diagram
+      realization.primalBoundary
+      realization.diagramHomologyComparison }
+
+noncomputable def MarkedRealizationData.markedDiagram
+    {X : ClosedOrientedSmoothFourManifold}
+    (realization : MarkedRealizationData X) :
+    HomologicallyMarkedDiagram :=
+  { diagram := realization.diagram
+    primalBoundary := realization.primalBoundary
+    turnedOver := realization.turnedOver
+    turnover := realization.turnover
+    alpha := realization.alpha }
 
 noncomputable def MarkedRealizationData.homologyComparison
     {X : ClosedOrientedSmoothFourManifold}
     (realization : MarkedRealizationData X) :
-    PrimalKirbyH₂ realization.markedDiagram.primalBoundary ≃+ ManifoldH₂ X :=
+    PrimalKirbyH₂ realization.primalBoundary ≃+ ManifoldH₂ X :=
   realization.diagramHomologyComparison.trans
     (inducedH₂ realization.realizationDiffeomorphism)
 
@@ -375,13 +387,7 @@ def MarkedRealizationIsCorrect
     {X : ClosedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X)
     (realization : MarkedRealizationData X) : Prop :=
-  TurnoverIdentificationRealizesPoincareDuality
-      realization.markedDiagram.diagram
-      realization.markedDiagram.primalBoundary
-      realization.markedDiagram.turnedOver
-      realization.markedDiagram.turnover
-      realization.diagramHomologyComparison ∧
-    realization.homologyComparison realization.markedDiagram.alpha = alpha
+  realization.homologyComparison realization.alpha = alpha
 
 /--
 The marked realization used by the evaluator is assembled from the explicit
@@ -397,23 +403,15 @@ theorem markedRealization_exists
   obtain ⟨diagram, realizationDiffeomorphism⟩ := specialKirbyDiagram_exists X
   obtain ⟨primal, diagramHomologyComparison⟩ :=
     specialKirbyDiagram_computesH₂ diagram
-  obtain ⟨turnedOver, turnover, turnoverIsPoincareDuality⟩ :=
-    specialKirbyDiagram_turnover_realizesPoincareDuality
-      diagram primal diagramHomologyComparison
   let homologyComparison : PrimalKirbyH₂ primal ≃+ ManifoldH₂ X :=
     diagramHomologyComparison.trans (inducedH₂ realizationDiffeomorphism)
-  let markedDiagram : HomologicallyMarkedDiagram :=
+  let realization : MarkedRealizationData X :=
     { diagram := diagram
       primalBoundary := primal
-      turnedOver := turnedOver
-      turnover := turnover
-      alpha := homologyComparison.symm alpha }
-  let realization : MarkedRealizationData X :=
-    { markedDiagram := markedDiagram
       realizationDiffeomorphism := realizationDiffeomorphism
-      diagramHomologyComparison := diagramHomologyComparison }
+      diagramHomologyComparison := diagramHomologyComparison
+      alpha := homologyComparison.symm alpha }
   refine ⟨realization, ?_⟩
-  refine ⟨turnoverIsPoincareDuality, ?_⟩
   exact homologyComparison.apply_symm_apply alpha
 
 axiom markedKirbyCerf_complete
@@ -447,4 +445,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 839
+-- semantic-freeze-padding: 10174

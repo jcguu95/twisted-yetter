@@ -1,0 +1,60 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/10",
+  "recorded_at_utc": "2026-07-31T15:00:08Z",
+  "supersedes": "explicit-trust-boundary-v9.json",
+  "status": "KERNEL_CLOSURE_EXTRACTED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "source_axiom_declaration_count": 21,
+  "final_theorem_project_axiom_count": 21,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 24,
+  "turnover_refactor": {
+    "removed": [
+      "TurnoverIdentificationRealizesPoincareDuality",
+      "specialKirbyDiagram_turnover_realizesPoincareDuality"
+    ],
+    "replacement": "turnoverPoincareDualityEquiv",
+    "reason": "The topology boundary now supplies the actual primal-to-THAM homology equivalence. MarkedRealizationData derives its turnover data from this map and does not accept a caller-selected equivalence."
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "ManifoldH2",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "inducedH2",
+    "manifoldH2_addCommGroup",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH2",
+    "specialKirbyDiagram_exists",
+    "turnoverPoincareDualityEquiv"
+  ],
+  "mandatory_human_review": [
+    "Does turnoverPoincareDualityEquiv express exactly the geometric identification induced by dual handle decomposition and Poincare duality?",
+    "Is markedKirbyCerf_complete compatible with the selected marked diagrams and H2 transport?",
+    "Do the clean attach, transport and detach boundaries state only the intended category-neutral graphical interpretation facts?"
+  ],
+  "forbidden_dependencies_absent": [
+    "sorryAx",
+    "TurnoverIdentificationRealizesPoincareDuality",
+    "specialKirbyDiagram_turnover_realizesPoincareDuality",
+    "graphical evaluator axiom",
+    "representative-independence axiom",
+    "local-move invariance axiom",
+    "evaluator-equality axiom"
+  ]
+}
