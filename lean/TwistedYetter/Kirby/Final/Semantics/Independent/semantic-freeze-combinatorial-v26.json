@@ -1,0 +1,73 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v26",
+  "recorded_at_utc": "2026-08-01T19:50:57Z",
+  "semantic_content_parent_commit": "d503d4c",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v25.json",
+  "historical_v1_through_v25_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "change": {
+    "id": "ACCEPT_PRIMAL_DEGREE_THREE_TOPOLOGY_BOUNDARY",
+    "kind": "DOCUMENTATION_ONLY",
+    "declaration": "specialKirbyDiagram_computesH2",
+    "lean_type_changed": false,
+    "axiom_count_changed": false,
+    "reason": "The project intentionally does not formalize closing three-handle attaching two-spheres. The external classical topology boundary must therefore provide the genuine degree-three boundary map and identify its handle homology with singular H2 of the realized four-manifold."
+  },
+  "accepted_scope": {
+    "provides": [
+      "the genuine degree-three handle boundary map",
+      "the chain identity boundaryTwo composed with boundaryThree equals zero",
+      "an additive equivalence from primal Kirby H2 to manifold singular H2"
+    ],
+    "does_not_provide": [
+      "category data",
+      "character data",
+      "graphical evaluation equality",
+      "local move invariance",
+      "the final diffeomorphism-invariance conclusion"
+    ],
+    "why_boundary_squared_zero_is_insufficient": "Different degree-three maps may satisfy the chain identity while producing different quotients ker(boundaryTwo)/im(boundaryThree)."
+  },
+  "verification": {
+    "independent_entry_build": "PASS_8262_JOBS",
+    "proof_holes_added": false,
+    "axioms_added": false
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "full_hashes_recorded": true,
+    "required_prefix": "000",
+    "padding_is_comment_only": true,
+    "seal_status": "PENDING_PREFIX_RESEAL",
+    "pending_files": [
+      "EntranceAxioms.lean",
+      "Evaluator.lean",
+      "Homology.lean",
+      "Moves.lean"
+    ],
+    "reason": "The execution environment rejected automated prefix-search padding as an integrity-boundary risk. No workaround was attempted."
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000a863f2be8be75278cc6f8f56f04c72a963b646d1b097dbf826e1bea1e6d1e",
+    "DottedTopologyAxioms.lean": "0003fffcc385de385e34011b5abc792ae1f363cf4b9fa95f3d2ea93b34456085",
+    "EntranceAxioms.lean": "5e1988de2ec244662548b0c11ced8fc3d66ae0a49fbe7da0231e2aaf61197c00",
+    "Entry.lean": "0001e53fde274e1b3468ab61f58fbfde32feb9f8e314260861bc11c539b0a626",
+    "Evaluator.lean": "23b13bb504b75844ea0caf138930ce11a31594f866564edc100a882993bd4861",
+    "Graphical.lean": "00069dbf609e756921678e5b93e10c46622d575c37f4758af773a6279339f8ad",
+    "Homology.lean": "595ab02b6abe108bbdef5c3cc1a7a4f6ddbf190ea8672b5d41041b2f197252d8",
+    "IntrinsicDottedCut.lean": "00003d0e3b696130b27c1c31ac04559c88e2cdf101a1b02f75e37d0e0a5942bf",
+    "IntrinsicDottedCutGraphical.lean": "000d5572d1b14ccf7b770313a13e4bdf5baa3031cf5f617629e74200de4f89c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "31b99bf0a8204d473c627e77bc80c2b890b70ccba405bff7babf42a6af88654d",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "This acceptance does not internally formalize three-handle attaching spheres.",
+    "This acceptance does not prove the classical handle-homology comparison from first principles.",
+    "Version 26 remains pending comment-prefix resealing."
+  ]
+}

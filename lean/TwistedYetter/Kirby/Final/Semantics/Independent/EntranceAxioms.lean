@@ -391,6 +391,24 @@ axiom specialKirbyDiagram_exists
 /--
 T2. The integral handle chain complex of a presenting diagram computes the
 manifold's second homology.
+
+We deliberately retain this as an external classical handle-topology axiom.
+`CombinatorialSpecialKirbyDiagram` records the number of closing three-handles,
+but it does not formalize their attaching two-spheres in the boundary of the
+zero-, one-, and two-handlebody.  Consequently, the combinatorial data in this
+project cannot by itself construct the genuine degree-three boundary map
+
+  `∂₃ : C₃ → C₂`
+
+or prove that `ker ∂₂ / im ∂₃` is the singular homology group `H₂` of the
+realized four-manifold.  Proving those facts internally would require the
+smooth handle-attachment, cellular-homology, and comparison theory that this
+formalization intentionally leaves at its topology boundary.
+
+The axiom therefore supplies the missing genuine `∂₃` together with the exact
+homology comparison.  It does not mention a category, character, graphical
+evaluation, scalar equality, or invariance conclusion, and it cannot be
+replaced merely by the weaker chain identity `∂₂ ∘ ∂₃ = 0`.
 -/
 axiom specialKirbyDiagram_computesH₂
     (diagram : CombinatorialSpecialKirbyDiagram) :
