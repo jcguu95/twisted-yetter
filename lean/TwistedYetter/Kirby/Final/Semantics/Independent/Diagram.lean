@@ -41,6 +41,26 @@ def PunctureDirection.intersectionSign : PunctureDirection → ℤ
   | .withDiskOrientation => 1
   | .againstDiskOrientation => -1
 
+/--
+Which side of the local dotted-handle morphism contains one incidence.
+
+This is domain/codomain variance only.  It does not choose `X` versus `X*`
+and it does not create a character exponent.
+-/
+inductive DottedIncidenceSide
+  | inbound
+  | outbound
+  deriving DecidableEq, Repr
+
+/--
+The fixed oriented-boundary convention.  A single positive-incidence model
+calibrates `withDiskOrientation` as an outgoing local boundary occurrence.
+-/
+def PunctureDirection.incidenceSide :
+    PunctureDirection → DottedIncidenceSide
+  | .withDiskOrientation => .outbound
+  | .againstDiskOrientation => .inbound
+
 structure Component where
   role : ComponentRole
   orientation : StrandOrientation
@@ -277,6 +297,13 @@ def CombinatorialLinkTrace.ComponentId
 def CombinatorialLinkTrace.StrandId
     (trace : CombinatorialLinkTrace) := Fin trace.strandCount
 
+/--
+One recorded incidence of an ordinary two-handle with a dotted disk.
+
+`direction` only determines whether this occurrence belongs to the domain or
+codomain of the local dotted-handle morphism.  The ordinary component label,
+its ribbon orientation, and its character exponent are independent data.
+-/
 structure DottedPuncture (trace : CombinatorialLinkTrace) where
   dottedComponent : trace.ComponentId
   twoHandleComponent : trace.ComponentId
@@ -296,14 +323,67 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
     (trace.strands inputStrand).orientation =
       (trace.strands outputStrand).orientation
 
+/-- Preserve the recorded order while selecting inbound incidences. -/
+def dottedInboundPunctures
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List (DottedPuncture trace) :=
+  punctures.filter fun puncture =>
+    puncture.direction.incidenceSide = .inbound
+
+/-- Preserve the recorded order while selecting outbound incidences. -/
+def dottedOutboundPunctures
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List (DottedPuncture trace) :=
+  punctures.filter fun puncture =>
+    puncture.direction.incidenceSide = .outbound
+
+/-- Exact local source ports for the dotted-handle incidence morphism. -/
+def dottedInboundStrandWord
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List trace.StrandId :=
+  (dottedInboundPunctures punctures).map DottedPuncture.inputStrand
+
+/-- Exact local target ports for the dotted-handle incidence morphism. -/
+def dottedOutboundStrandWord
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List trace.StrandId :=
+  (dottedOutboundPunctures punctures).map DottedPuncture.outputStrand
+
+/--
+The ordinary-component word underlying the local source.  It deliberately
+forgets strand orientation: component labels are assigned before cutting and
+are not changed by the dotted disk.
+-/
+def dottedInboundComponentWord
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List trace.ComponentId :=
+  (dottedInboundPunctures punctures).map DottedPuncture.twoHandleComponent
+
+/--
+The ordinary-component word underlying the local target.  As on the source,
+no `X`/`X*` choice is read from the dotted-disk direction.
+-/
+def dottedOutboundComponentWord
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace)) :
+    List trace.ComponentId :=
+  (dottedOutboundPunctures punctures).map DottedPuncture.twoHandleComponent
+
 /--
 The category-neutral event language of the tangle obtained after cutting all
 dotted spanning disks simultaneously.
 
-A `projectorHole` is not a category morphism.  It only marks the exact ordered
-strand word where the evaluator must later insert the normalized tensor-unit
-projector.  In particular, this syntax contains neither a Kirby colour nor an
-evaluation equality.
+A `projectorHole` is not a category morphism.  It marks the all-strand
+projector waist inside a larger local movie.  It is not itself the
+inbound/outbound boundary used by homology representative independence; that
+boundary is defined separately by `dottedInboundStrandWord` and
+`dottedOutboundStrandWord`.  This syntax contains neither a Kirby colour nor
+an evaluation equality.
 -/
 inductive CutOpenEvent (trace : CombinatorialLinkTrace)
   | birth (leftOutput rightOutput : trace.StrandId)
@@ -453,33 +533,47 @@ def DottedCollarBendingPath.FollowsExactBendingTransitions
       (path.events i).IsDottedCollarBending)
 
 /--
-The category-neutral clean-collar normal form around one dotted disk.
+A finite, category-neutral local movie for one dotted-handle incidence.
 
-The input and output words are the literal exterior strands recorded by the
-punctures.  `waistWord` is reached by genuine finite cup/cap/braiding/isotopy
-paths.  Object dualization is not stored here and will later be read only from
-the orientations of the strands occurring in these words.
+Its source contains exactly the inbound occurrences and its target contains
+exactly the outbound occurrences.  Cups, caps, crossings, twists and isotopy
+may move between those boundaries, and exactly one event is the recorded
+all-strand projector waist.  No category object, character, morphism, or
+evaluation equality is stored here.
 -/
-structure DottedCollarScript
+structure DottedIncidenceMovie
     (trace : CombinatorialLinkTrace)
+    (dotted : trace.ComponentId)
     (punctures : List (DottedPuncture trace)) where
-  waistWord : List trace.StrandId
-  bendIn :
-    DottedCollarBendingPath trace
-      (punctures.map DottedPuncture.inputStrand)
-      waistWord
-  bendOut :
-    DottedCollarBendingPath trace
-      waistWord
-      (punctures.map DottedPuncture.outputStrand)
+  eventCount : ℕ
+  events : Fin eventCount → CutOpenEvent trace
+  activeOrder : Fin (eventCount + 1) → List trace.StrandId
 
-/-- The two finite paths of a collar script satisfy their explicit rules. -/
-def DottedCollarScript.HasExactBendingPaths
+/--
+The transparent combinatorial conditions for a local incidence movie.
+
+Disk direction occurs only in the two endpoint words.  In particular, this
+predicate contains no equation selecting a dual object or a character power.
+-/
+def DottedIncidenceMovie.HasExactIncidenceBoundary
     {trace : CombinatorialLinkTrace}
+    {dotted : trace.ComponentId}
     {punctures : List (DottedPuncture trace)}
-    (script : DottedCollarScript trace punctures) : Prop :=
-  script.bendIn.FollowsExactBendingTransitions ∧
-    script.bendOut.FollowsExactBendingTransitions
+    (movie : DottedIncidenceMovie trace dotted punctures) : Prop :=
+  movie.activeOrder 0 = dottedInboundStrandWord punctures ∧
+    movie.activeOrder (Fin.last movie.eventCount) =
+      dottedOutboundStrandWord punctures ∧
+    (∀ i : Fin movie.eventCount,
+      CutOpenEventTransition (movie.events i)
+        (movie.activeOrder i.castSucc)
+        (movie.activeOrder i.succ)) ∧
+    (∀ i : Fin movie.eventCount,
+      (movie.events i).StrandContinuationsAreWellFormed) ∧
+    (∃! i : Fin movie.eventCount,
+      movie.events i = .projectorHole dotted punctures) ∧
+    (∀ i : Fin movie.eventCount,
+      movie.events i = .projectorHole dotted punctures ∨
+        (movie.events i).IsDottedCollarBending)
 
 /--
 The complete exterior ribbon tangle after all dotted disks have been cut.

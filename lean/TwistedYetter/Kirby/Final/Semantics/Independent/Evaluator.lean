@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
+import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 
 /-!
 # Independent semantics: role-aware THAM-side evaluator
@@ -116,11 +117,82 @@ def exteriorWord
     RibbonWord 𝒞 :=
   strands.map (orientedExteriorStrand 𝒞 diagram labeling)
 
+/-!
+## Dotted-handle incidence words
+
+These words are the domain and codomain of the local morphism used in the
+homology representative-independence argument.  They are intentionally not
+the oriented strand word at the projector waist.
+
+Each factor reads the simple label assigned once to its ordinary two-handle
+component.  Puncture direction only decides whether the occurrence belongs
+to the domain or codomain; it never chooses a dual object and never creates a
+character exponent.
+-/
+
+def dottedIncidenceLabel
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    𝒞.simples.Simple :=
+  labeling
+    (diagram.handles.twoHandleIndex.symm
+      ⟨puncture.twoHandleComponent, puncture.two_handle_role⟩)
+
+def dottedInboundLabelWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    List 𝒞.simples.Simple :=
+  (dottedInboundPunctures punctures).map
+    (dottedIncidenceLabel 𝒞 diagram labeling)
+
+def dottedOutboundLabelWord
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    List 𝒞.simples.Simple :=
+  (dottedOutboundPunctures punctures).map
+    (dottedIncidenceLabel 𝒞 diagram labeling)
+
+/-- Tensor product of component labels without reading strand orientation. -/
+def simpleLabelWordObject
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    List 𝒞.simples.Simple → 𝒞.C
+  | [] => 𝟙_ 𝒞.C
+  | label :: rest =>
+      𝒞.simples.simpleObject label ⊗ simpleLabelWordObject 𝒞 rest
+
 /--
-The object seen by the boundary created by cutting one oriented dotted disk.
-Both its label and its ribbon direction come from the original exterior
-strand.  The oriented intersection with the dotted disk is independent
-homological data and never decides whether this object is `X` or `Xᘁ`.
+The exact type of the local dotted-handle morphism required by the corrected
+representative-independence proof.  This is only a type, not an assumed
+morphism and not an evaluation equality.  Constructing its canonical term
+from `standardDottedIncidenceNormalForm` is the next proof obligation.
+-/
+def DottedIncidenceMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (punctures : List (DottedPuncture diagram.trace)) : Type _ :=
+  simpleLabelWordObject 𝒞
+      (dottedInboundLabelWord 𝒞 diagram labeling punctures) ⟶
+    simpleLabelWordObject 𝒞
+      (dottedOutboundLabelWord 𝒞 diagram labeling punctures)
+
+/--
+The object at one all-strand projector-waist port.  Both its label and its
+ribbon direction come from the original exterior strand.  This is not the
+inbound/outbound incidence factor used for representative independence.
+The oriented intersection with the dotted disk never decides whether this
+waist object is `X` or `Xᘁ`.
 -/
 def orientedCutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -143,6 +215,12 @@ def cutBoundaryWord
     (punctures : List (DottedPuncture diagram.trace)) :
     RibbonWord 𝒞 :=
   punctures.map (orientedCutBoundaryPuncture 𝒞 diagram labeling)
+
+/-!
+`cutBoundaryWord` is retained as the historical name of the all-strand
+projector-waist word.  It must not be used as a substitute for
+`dottedInboundLabelWord` or `dottedOutboundLabelWord`.
+-/
 
 theorem orientedExteriorInput_eq_cutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -875,6 +953,131 @@ noncomputable def compileDottedCollarMorphism
     compileDottedCollarBendingPathMorphism
       𝒞 diagram labeling script.bendOut exactPaths.2
 
+/--
+Compile one event at its certified position in the global cut-open trace.
+Ordinary ribbon events use the elementary compiler.  A projector marker can
+only be compiled after projector-event completeness identifies its literal
+dotted component and the dotted-collar normal-form axiom supplies the exact
+bending script.
+-/
+noncomputable def compileRoleAwareCutOpenEventAt
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.events i).beforeWord) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.events i).afterWord) := by
+  generalize event_eq : diagram.dottedCuts.exterior.events i = event
+  cases event with
+  | projectorHole dotted punctures =>
+      let exactWitness :=
+        diagram.dottedCuts.projectorEvent_hasExactPunctureWord
+          (standardDottedProjectorEventCompleteness diagram)
+          i dotted punctures event_eq
+      let role := Classical.choose exactWitness
+      have exactData := Classical.choose_spec exactWitness
+      have punctures_eq := exactData.2
+      rw [punctures_eq]
+      let normalForm :=
+        standardDottedCollarNormalForm diagram dotted role
+      let script := Classical.choose normalForm
+      have exactPaths := Classical.choose_spec normalForm
+      simpa only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord] using
+        compileDottedCollarMorphism
+          𝒞 diagram labeling dotted role script exactPaths
+  | birth left right =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.birth left right) (by
+          simpa only [event_eq] using
+            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+  | death left right =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.death left right) (by
+          simpa only [event_eq] using
+            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+  | crossing overInput underInput overOutput underOutput sign =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.crossing overInput underInput overOutput underOutput sign) (by
+          simpa only [event_eq] using
+            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+  | framingTwist input output sign =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.framingTwist input output sign) (by
+          simpa only [event_eq] using
+            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+  | planarIsotopy continuations =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.planarIsotopy continuations) (by
+          simpa only [event_eq] using
+            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+
+/-- Add the exact common exterior context to one role-aware event. -/
+noncomputable def compileRoleAwareContextualCutOpenEventMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.activeOrder i.castSucc)) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.activeOrder i.succ)) := by
+  let event := diagram.dottedCuts.exterior.events i
+  let left := eventLeftContext diagram i
+  let right := eventRightContext diagram i
+  have before_eq := (eventTransitionEquations diagram i).1
+  have after_eq := (eventTransitionEquations diagram i).2
+  have before_object_eq :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+      before_eq
+  have after_object_eq :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+      after_eq
+  have before_context_object_eq :
+      ribbonWordObject 𝒞
+          (exteriorWord 𝒞 diagram labeling
+            (left ++ event.beforeWord ++ right)) =
+        ribbonWordObject 𝒞
+          (List.append
+            (List.append
+              (exteriorWord 𝒞 diagram labeling left)
+              (exteriorWord 𝒞 diagram labeling event.beforeWord))
+            (exteriorWord 𝒞 diagram labeling right)) := by
+    simp [exteriorWord, List.map_append]
+  have after_context_object_eq :
+      ribbonWordObject 𝒞
+          (exteriorWord 𝒞 diagram labeling
+            (left ++ event.afterWord ++ right)) =
+        ribbonWordObject 𝒞
+          (List.append
+            (List.append
+              (exteriorWord 𝒞 diagram labeling left)
+              (exteriorWord 𝒞 diagram labeling event.afterWord))
+            (exteriorWord 𝒞 diagram labeling right)) := by
+    simp [exteriorWord, List.map_append]
+  exact
+    eqToHom before_object_eq ≫
+      eqToHom before_context_object_eq ≫
+      contextualizeRibbonMorphism 𝒞
+        (exteriorWord 𝒞 diagram labeling left)
+        (exteriorWord 𝒞 diagram labeling event.beforeWord)
+        (exteriorWord 𝒞 diagram labeling event.afterWord)
+        (exteriorWord 𝒞 diagram labeling right)
+        (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i) ≫
+      eqToHom after_context_object_eq.symm ≫
+      eqToHom after_object_eq.symm
+
 /-- Compile the complete finite cut-open exterior trace in sweep order. -/
 noncomputable def compileCutOpenExteriorMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -890,7 +1093,7 @@ noncomputable def compileCutOpenExteriorMorphism
           (exteriorWord 𝒞 diagram labeling
             (diagram.dottedCuts.exterior.activeOrder i))
       edge := fun i =>
-        compileContextualCutOpenEventMorphism 𝒞 diagram labeling i
+        compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram labeling i
     }
   have initial_object_eq :
       trace.object 0 = 𝟙_ 𝒞.C :=

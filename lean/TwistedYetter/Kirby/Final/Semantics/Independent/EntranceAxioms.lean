@@ -41,41 +41,6 @@ Kirby--Cerf completeness axiom below must return a finite movie built from
 those exact constructors.
 -/
 
-/-! ## Dotted-collar normal form -/
-
-/--
-Every oriented dotted collar admits a finite standard normal form consisting
-of an exact bending path to one projector waist and an exact bending path
-back to the recorded output strands.
-
-This is the category-neutral compactness/isotopy boundary for dotted cutting.
-The witness contains only finite strand words and standard cut-open events;
-it contains no category, `X`/`X*` choice, character, projector, morphism, or
-evaluation equality.  In particular, puncture direction does not determine
-an object label.
--/
-axiom standardDottedCollarNormalForm
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted) :
-    ∃ script : DottedCollarScript diagram.trace
-        (diagram.dottedCuts.punctureWord dotted role),
-      script.HasExactBendingPaths
-
-/--
-In the simultaneous cut-open diagram, projector markers are exactly the
-markers produced by literal dotted components.  Thus every dotted component
-has its one distinguished marker and there are no extra projector markers.
-
-This is the category-neutral bridge from Kirby dotted components to the
-graphical locations where the evaluator will later insert a projector.  It
-does not mention a category, projector morphism, character, or evaluation
-equality.
--/
-axiom standardDottedProjectorEventCompleteness
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    diagram.dottedCuts.ProjectorEventsExactlyMatchDottedComponents
-
 /-! ## Ribbon graphical coherence -/
 
 axiom FramedRibbonIsotopyWitness

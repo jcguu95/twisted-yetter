@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
 import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
@@ -30,10 +31,15 @@ category-literature boundaries.  Four move-local, category-neutral topology
 predicates are declared next to the move grammar in `Moves`, so their proof
 arguments remain visible in every `ElementaryMove` constructor.  Three
 additional clean attach/finite transport/detach interpretation boundaries are
-declared individually in `EntranceAxioms`.  The current source declares
-twenty-two explicit axioms.  `explicit-trust-boundary-v1.json` predates the
-two dotted-collar boundaries and must be refreshed before it is used as the
-current curated trust ledger.
+declared individually in `EntranceAxioms`.  The dotted-handle boundary is an
+inbound-to-outbound incidence movie: puncture direction selects only the side
+of that morphism, never `X` versus `X*` and never a character exponent.
+
+The current source declares twenty-two explicit axioms.
+`explicit-trust-boundary-v1.json` predates the corrected dotted-incidence
+boundary and must be refreshed before it is used as the current curated trust
+ledger.  This semantic edit is not hash-sealed until its downstream compiler
+has been rebuilt and audited.
 
 Domain-defining category laws remain visible in `Algebra`; combinatorial
 certificates in the other semantic modules must use transparent propositions.

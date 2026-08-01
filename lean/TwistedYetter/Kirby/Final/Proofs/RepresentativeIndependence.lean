@@ -357,6 +357,81 @@ private theorem compile_projectorHole_eq_explicit
   simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord, id_eq]
 
 /--
+A uniform character coupon on the exact input word of a certified dotted
+collar is absorbed by the collar morphism.  Naturality transports the coupon
+through `bendIn`; the tensor-unit projector then absorbs it at the waist.
+-/
+theorem characterCoupon_dottedCollar_left
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (script : DottedCollarScript diagram.trace
+      (diagram.dottedCuts.punctureWord dotted role))
+    (exactPaths : script.HasExactBendingPaths)
+    (exponent : ℤ) :
+    isoIntPowerHom
+        (𝒞η.character.iso.app
+          (ribbonWordObject 𝒞η.category
+            (exteriorWord 𝒞η.category diagram labeling
+              ((diagram.dottedCuts.punctureWord dotted role).map
+                DottedPuncture.inputStrand))))
+        exponent ≫
+      compileDottedCollarMorphism
+        𝒞η.category diagram labeling dotted role script exactPaths =
+      compileDottedCollarMorphism
+        𝒞η.category diagram labeling dotted role script exactPaths := by
+  let inputObject :=
+    ribbonWordObject 𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling
+        ((diagram.dottedCuts.punctureWord dotted role).map
+          DottedPuncture.inputStrand))
+  let waistObject :=
+    ribbonWordObject 𝒞η.category
+      (exteriorWord 𝒞η.category diagram labeling script.waistWord)
+  let bendIn : inputObject ⟶ waistObject :=
+    compileDottedCollarBendingPathMorphism
+      𝒞η.category diagram labeling script.bendIn exactPaths.1
+  let bendOut :=
+    compileDottedCollarBendingPathMorphism
+      𝒞η.category diagram labeling script.bendOut exactPaths.2
+  have move_coupon :
+      isoIntPowerHom (𝒞η.character.iso.app inputObject) exponent ≫ bendIn =
+        bendIn ≫
+          isoIntPowerHom (𝒞η.character.iso.app waistObject) exponent :=
+    characterCoupon_naturality 𝒞η.character bendIn exponent
+  have absorbed :
+      isoIntPowerHom (𝒞η.character.iso.app waistObject) exponent ≫
+          tensorUnitProjector 𝒞η.category waistObject =
+        tensorUnitProjector 𝒞η.category waistObject :=
+    characterCoupon_tensorUnitProjector_left
+      𝒞η.character waistObject exponent
+  change
+    isoIntPowerHom (𝒞η.character.iso.app inputObject) exponent ≫
+          bendIn ≫ tensorUnitProjector 𝒞η.category waistObject ≫ bendOut =
+      bendIn ≫ tensorUnitProjector 𝒞η.category waistObject ≫ bendOut
+  calc
+    _ = (isoIntPowerHom
+          (𝒞η.character.iso.app inputObject) exponent ≫ bendIn) ≫
+          tensorUnitProjector 𝒞η.category waistObject ≫ bendOut := by
+        simp only [Category.assoc]
+    _ = (bendIn ≫
+          isoIntPowerHom (𝒞η.character.iso.app waistObject) exponent) ≫
+          tensorUnitProjector 𝒞η.category waistObject ≫ bendOut := by
+        exact congrArg
+          (fun first => first ≫
+            tensorUnitProjector 𝒞η.category waistObject ≫ bendOut)
+          move_coupon
+    _ = bendIn ≫
+          (isoIntPowerHom (𝒞η.character.iso.app waistObject) exponent ≫
+            tensorUnitProjector 𝒞η.category waistObject) ≫ bendOut := by
+        simp only [Category.assoc]
+    _ = _ := by
+      exact congrArg
+        (fun middle => bendIn ≫ middle ≫ bendOut) absorbed
+
+/--
 A uniform character coupon immediately before a literal dotted projector
 hole is absorbed.  This is the local graphical calculation; no closed-link
 evaluation or homology quotient is used here.
