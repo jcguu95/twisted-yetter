@@ -41,26 +41,6 @@ def PunctureDirection.intersectionSign : PunctureDirection → ℤ
   | .withDiskOrientation => 1
   | .againstDiskOrientation => -1
 
-/-
-The polarity of an endpoint on the boundary created by cutting an oriented
-dotted disk.  This is local boundary data, not the global orientation of the
-link component.
--/
-inductive CutBoundaryPolarity
-  | outgoing
-  | incoming
-  deriving DecidableEq, Repr
-
-def PunctureDirection.cutBoundaryPolarity :
-    PunctureDirection → CutBoundaryPolarity
-  | .withDiskOrientation => .outgoing
-  | .againstDiskOrientation => .incoming
-
-def CutBoundaryPolarity.localStrandOrientation :
-    CutBoundaryPolarity → StrandOrientation
-  | .outgoing => .positive
-  | .incoming => .negative
-
 structure Component where
   role : ComponentRole
   orientation : StrandOrientation
@@ -315,14 +295,6 @@ structure DottedPuncture (trace : CombinatorialLinkTrace) where
   orientation_preserved :
     (trace.strands inputStrand).orientation =
       (trace.strands outputStrand).orientation
-  /--
-  The local strand segment meeting the cut boundary has the polarity induced
-  by the oriented intersection.  This does not identify the global component
-  orientation with the disk orientation.
-  -/
-  input_meets_cut_boundary_with_correct_polarity :
-    (trace.strands inputStrand).orientation =
-      direction.cutBoundaryPolarity.localStrandOrientation
 
 /--
 The category-neutral event language of the tangle obtained after cutting all
@@ -440,6 +412,76 @@ def CutOpenEventTransition
     after = leftContext ++ event.afterWord ++ rightContext
 
 /--
+The events allowed while putting a punctured dotted collar into standard
+normal form.  The projector itself is deliberately excluded: these events
+only bend and transport the original strands to and from the projector waist.
+-/
+def CutOpenEvent.IsDottedCollarBending
+    {trace : CombinatorialLinkTrace} :
+    CutOpenEvent trace → Prop
+  | .projectorHole _ _ => False
+  | _ => True
+
+/--
+A finite, category-neutral bending path between two exact strand words.
+
+All correctness fields are transparent combinatorial propositions.  In
+particular, this structure contains no category, object label, character,
+projector, morphism, or evaluation equality.
+-/
+structure DottedCollarBendingPath
+    (trace : CombinatorialLinkTrace)
+    (source target : List trace.StrandId) where
+  eventCount : ℕ
+  events : Fin eventCount → CutOpenEvent trace
+  activeOrder : Fin (eventCount + 1) → List trace.StrandId
+
+/-- All combinatorial correctness conditions for one collar bending path. -/
+def DottedCollarBendingPath.FollowsExactBendingTransitions
+    {trace : CombinatorialLinkTrace}
+    {source target : List trace.StrandId}
+    (path : DottedCollarBendingPath trace source target) : Prop :=
+  path.activeOrder 0 = source ∧
+    path.activeOrder (Fin.last path.eventCount) = target ∧
+    (∀ i : Fin path.eventCount,
+      CutOpenEventTransition (path.events i)
+        (path.activeOrder i.castSucc)
+        (path.activeOrder i.succ)) ∧
+    (∀ i : Fin path.eventCount,
+      (path.events i).StrandContinuationsAreWellFormed) ∧
+    (∀ i : Fin path.eventCount,
+      (path.events i).IsDottedCollarBending)
+
+/--
+The category-neutral clean-collar normal form around one dotted disk.
+
+The input and output words are the literal exterior strands recorded by the
+punctures.  `waistWord` is reached by genuine finite cup/cap/braiding/isotopy
+paths.  Object dualization is not stored here and will later be read only from
+the orientations of the strands occurring in these words.
+-/
+structure DottedCollarScript
+    (trace : CombinatorialLinkTrace)
+    (punctures : List (DottedPuncture trace)) where
+  waistWord : List trace.StrandId
+  bendIn :
+    DottedCollarBendingPath trace
+      (punctures.map DottedPuncture.inputStrand)
+      waistWord
+  bendOut :
+    DottedCollarBendingPath trace
+      waistWord
+      (punctures.map DottedPuncture.outputStrand)
+
+/-- The two finite paths of a collar script satisfy their explicit rules. -/
+def DottedCollarScript.HasExactBendingPaths
+    {trace : CombinatorialLinkTrace}
+    {punctures : List (DottedPuncture trace)}
+    (script : DottedCollarScript trace punctures) : Prop :=
+  script.bendIn.FollowsExactBendingTransitions ∧
+    script.bendOut.FollowsExactBendingTransitions
+
+/--
 The complete exterior ribbon tangle after all dotted disks have been cut.
 
 This is the data that was absent from frozen v3.  Puncture words alone say
@@ -504,6 +546,50 @@ structure DottedCutData (trace : CombinatorialLinkTrace) where
         .projectorHole dotted (punctureWord dotted role)
   puncturesHaveNoRepeatedOccurrences :
     PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
+
+/--
+Every projector marker in the cut-open trace is exactly the distinguished
+marker of one literal dotted component.  Together with `projectorSite_exact`,
+this says that dotted components and projector markers are in bijection: no
+ordinary component creates a marker, and no additional marker is present.
+
+This is a transparent combinatorial proposition.  It contains no category,
+projector morphism, character, or evaluation equality.
+-/
+def DottedCutData.ProjectorEventsExactlyMatchDottedComponents
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  ∀ (i : Fin cut.exterior.eventCount)
+    (dotted : trace.ComponentId)
+    (punctures : List (DottedPuncture trace)),
+      cut.exterior.events i = .projectorHole dotted punctures →
+        ∃ role : (trace.components dotted).role = .dotted,
+          i = cut.projectorSite dotted role
+
+/--
+The exact puncture word at any projector marker, derived from projector-event
+completeness and the already-recorded distinguished site equation.
+-/
+theorem DottedCutData.projectorEvent_hasExactPunctureWord
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace)
+    (complete : cut.ProjectorEventsExactlyMatchDottedComponents)
+    (i : Fin cut.exterior.eventCount)
+    (dotted : trace.ComponentId)
+    (punctures : List (DottedPuncture trace))
+    (event_eq : cut.exterior.events i = .projectorHole dotted punctures) :
+    ∃ role : (trace.components dotted).role = .dotted,
+      i = cut.projectorSite dotted role ∧
+        punctures = cut.punctureWord dotted role := by
+  obtain ⟨role, index_eq⟩ := complete i dotted punctures event_eq
+  refine ⟨role, index_eq, ?_⟩
+  have distinguished_eq :
+      cut.exterior.events i =
+        .projectorHole dotted (cut.punctureWord dotted role) := by
+    rw [index_eq]
+    exact cut.projectorSite_exact dotted role
+  rw [event_eq] at distinguished_eq
+  exact (CutOpenEvent.projectorHole.inj distinguished_eq).2
 
 theorem DottedCutData.puncture_dottedComponent_eq
     {trace : CombinatorialLinkTrace}

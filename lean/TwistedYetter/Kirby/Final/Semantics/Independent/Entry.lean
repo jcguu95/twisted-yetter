@@ -30,9 +30,10 @@ category-literature boundaries.  Four move-local, category-neutral topology
 predicates are declared next to the move grammar in `Moves`, so their proof
 arguments remain visible in every `ElementaryMove` constructor.  Three
 additional clean attach/finite transport/detach interpretation boundaries are
-declared individually in `EntranceAxioms`.  The complete list of twenty-one
-explicit axioms is recorded in
-`explicit-trust-boundary-v1.json`.
+declared individually in `EntranceAxioms`.  The current source declares
+twenty-two explicit axioms.  `explicit-trust-boundary-v1.json` predates the
+two dotted-collar boundaries and must be refreshed before it is used as the
+current curated trust ledger.
 
 Domain-defining category laws remain visible in `Algebra`; combinatorial
 certificates in the other semantic modules must use transparent propositions.

@@ -45,20 +45,16 @@ theorem puncture_intersection_sign_is_signed
       puncture.direction.intersectionSign = -1 := by
   cases puncture.direction <;> simp [PunctureDirection.intersectionSign]
 
-theorem puncture_input_meets_cut_boundary_with_correct_polarity
-    {trace : CombinatorialLinkTrace}
-    (puncture : DottedPuncture trace) :
-    (trace.strands puncture.inputStrand).orientation =
-      puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
-  puncture.input_meets_cut_boundary_with_correct_polarity
-
-theorem puncture_output_meets_cut_boundary_with_correct_polarity
-    {trace : CombinatorialLinkTrace}
-    (puncture : DottedPuncture trace) :
-    (trace.strands puncture.outputStrand).orientation =
-      puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
-  puncture.orientation_preserved.symm.trans
-    puncture.input_meets_cut_boundary_with_correct_polarity
+theorem cut_boundary_ribbon_direction_comes_from_the_strand
+    {K : Type} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (puncture : DottedPuncture diagram.trace) :
+    (orientedCutBoundaryPuncture 𝒞 diagram labeling puncture).direction =
+      ribbonDirectionOfStrandOrientation
+        (diagram.trace.strands puncture.inputStrand).orientation :=
+  rfl
 
 theorem handle_counts_are_exact_equivalences
     (diagram : CombinatorialSpecialKirbyDiagram) :

@@ -898,9 +898,6 @@ def standardOneTwoBirthOldPuncture
     rw [standardOneTwoBirth_oldStrandOrientation normalForm,
       standardOneTwoBirth_oldStrandOrientation normalForm]
     exact puncture.orientation_preserved
-  input_meets_cut_boundary_with_correct_polarity := by
-    rw [standardOneTwoBirth_oldStrandOrientation normalForm]
-    exact puncture.input_meets_cut_boundary_with_correct_polarity
 
 def standardOneTwoBirthOldEvent
     {source target : CombinatorialSpecialKirbyDiagram}

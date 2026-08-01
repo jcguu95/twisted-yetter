@@ -116,15 +116,11 @@ def exteriorWord
     RibbonWord 𝒞 :=
   strands.map (orientedExteriorStrand 𝒞 diagram labeling)
 
-def ribbonDirectionOfCutBoundaryPolarity :
-    CutBoundaryPolarity → RibbonDirection
-  | .outgoing => .forward
-  | .incoming => .dual
-
 /--
 The object seen by the boundary created by cutting one oriented dotted disk.
-Its label comes from the original two-handle component, while its direction
-comes from the local cut-boundary polarity.
+Both its label and its ribbon direction come from the original exterior
+strand.  The oriented intersection with the dotted disk is independent
+homological data and never decides whether this object is `X` or `Xᘁ`.
 -/
 def orientedCutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -136,8 +132,8 @@ def orientedCutBoundaryPuncture
   label :=
     exteriorStrandLabel 𝒞 diagram labeling puncture.inputStrand
   direction :=
-    ribbonDirectionOfCutBoundaryPolarity
-      puncture.direction.cutBoundaryPolarity
+    ribbonDirectionOfStrandOrientation
+      (diagram.trace.strands puncture.inputStrand).orientation
 
 def cutBoundaryWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -160,16 +156,7 @@ theorem orientedExteriorInput_eq_cutBoundaryPuncture
     (fun label direction =>
       ({ label := label, direction := direction } : OrientedSimple 𝒞))
   · rfl
-  · calc
-      ribbonDirectionOfStrandOrientation
-          (diagram.trace.strands puncture.inputStrand).orientation =
-        ribbonDirectionOfStrandOrientation
-          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
-            congrArg ribbonDirectionOfStrandOrientation
-              puncture.input_meets_cut_boundary_with_correct_polarity
-      _ = ribbonDirectionOfCutBoundaryPolarity
-          puncture.direction.cutBoundaryPolarity := by
-            cases puncture.direction <;> rfl
+  · rfl
 
 theorem orientedExteriorOutput_eq_cutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -188,20 +175,13 @@ theorem orientedExteriorOutput_eq_cutBoundaryPuncture
       ({ label := label, direction := direction } : OrientedSimple 𝒞))
   · unfold exteriorStrandLabel
     rw [component_eq]
-  · have output_polarity :
-        (diagram.trace.strands puncture.outputStrand).orientation =
-          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
-      puncture.orientation_preserved.symm.trans
-        puncture.input_meets_cut_boundary_with_correct_polarity
-    calc
+  · calc
       ribbonDirectionOfStrandOrientation
           (diagram.trace.strands puncture.outputStrand).orientation =
         ribbonDirectionOfStrandOrientation
-          puncture.direction.cutBoundaryPolarity.localStrandOrientation :=
-            congrArg ribbonDirectionOfStrandOrientation output_polarity
-      _ = ribbonDirectionOfCutBoundaryPolarity
-          puncture.direction.cutBoundaryPolarity := by
-            cases puncture.direction <;> rfl
+          (diagram.trace.strands puncture.inputStrand).orientation :=
+            congrArg ribbonDirectionOfStrandOrientation
+              puncture.orientation_preserved.symm
 
 theorem exteriorInputWord_eq_cutBoundaryWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -758,6 +738,142 @@ def FiniteMorphismTrace.composeAll
     (trace : FiniteMorphismTrace C eventCount) :
     trace.object 0 ⟶ trace.object (Fin.last eventCount) :=
   trace.composePrefix eventCount (Nat.le_refl eventCount)
+
+/--
+Compile one finite category-neutral dotted-collar bending path.  The path
+contains no projector event; this definition only interprets its explicit
+cup/cap/braiding/isotopy events and composes them in order.
+-/
+noncomputable def compileDottedCollarBendingPathMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    {source target : List diagram.trace.StrandId}
+    (path : DottedCollarBendingPath diagram.trace source target)
+    (follows : path.FollowsExactBendingTransitions) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling source) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling target) := by
+  let trace : FiniteMorphismTrace 𝒞.C path.eventCount :=
+    {
+      object := fun i =>
+        ribbonWordObject 𝒞
+          (exteriorWord 𝒞 diagram labeling (path.activeOrder i))
+      edge := fun i => by
+        let event := path.events i
+        have transition := follows.2.2.1 i
+        let left : List diagram.trace.StrandId := Classical.choose transition
+        let right : List diagram.trace.StrandId :=
+          Classical.choose (Classical.choose_spec transition)
+        have equations :=
+          Classical.choose_spec
+            (Classical.choose_spec transition)
+        have before_eq := equations.1
+        have after_eq := equations.2
+        have before_object_eq :=
+          congrArg
+            (fun word =>
+              ribbonWordObject 𝒞
+                (exteriorWord 𝒞 diagram labeling word))
+            before_eq
+        have after_object_eq :=
+          congrArg
+            (fun word =>
+              ribbonWordObject 𝒞
+                (exteriorWord 𝒞 diagram labeling word))
+            after_eq
+        have before_context_object_eq :
+            ribbonWordObject 𝒞
+                (exteriorWord 𝒞 diagram labeling
+                  (left ++ event.beforeWord ++ right)) =
+              ribbonWordObject 𝒞
+                (List.append
+                  (List.append
+                    (exteriorWord 𝒞 diagram labeling left)
+                    (exteriorWord 𝒞 diagram labeling event.beforeWord))
+                  (exteriorWord 𝒞 diagram labeling right)) := by
+          simp [exteriorWord, List.map_append]
+        have after_context_object_eq :
+            ribbonWordObject 𝒞
+                (exteriorWord 𝒞 diagram labeling
+                  (left ++ event.afterWord ++ right)) =
+              ribbonWordObject 𝒞
+                (List.append
+                  (List.append
+                    (exteriorWord 𝒞 diagram labeling left)
+                    (exteriorWord 𝒞 diagram labeling event.afterWord))
+                  (exteriorWord 𝒞 diagram labeling right)) := by
+          simp [exteriorWord, List.map_append]
+        exact
+          eqToHom before_object_eq ≫
+            eqToHom before_context_object_eq ≫
+            contextualizeRibbonMorphism 𝒞
+              (exteriorWord 𝒞 diagram labeling left)
+              (exteriorWord 𝒞 diagram labeling event.beforeWord)
+              (exteriorWord 𝒞 diagram labeling event.afterWord)
+              (exteriorWord 𝒞 diagram labeling right)
+              (compileCutOpenEventMorphism 𝒞 diagram labeling event
+                (follows.2.2.2.1 i)) ≫
+            eqToHom after_context_object_eq.symm ≫
+            eqToHom after_object_eq.symm
+    }
+  have initial_object_eq :
+      trace.object 0 =
+        ribbonWordObject 𝒞
+          (exteriorWord 𝒞 diagram labeling source) :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+      follows.1
+  have final_object_eq :
+      trace.object (Fin.last path.eventCount) =
+        ribbonWordObject 𝒞
+          (exteriorWord 𝒞 diagram labeling target) :=
+    congrArg
+      (fun word =>
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+      follows.2.1
+  exact
+    eqToHom initial_object_eq.symm ≫
+      trace.composeAll ≫
+      eqToHom final_object_eq
+
+/--
+Interpret one certified dotted collar as the actual role-aware local
+morphism: bend the recorded exterior strands to the collar waist, apply the
+tensor-unit projector there, and bend back to the recorded output strands.
+
+The ribbon direction of every object in all three words is read exclusively
+from the corresponding strand orientation.  The puncture direction does not
+participate in that choice.
+-/
+noncomputable def compileDottedCollarMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (script : DottedCollarScript diagram.trace
+      (diagram.dottedCuts.punctureWord dotted role))
+    (exactPaths : script.HasExactBendingPaths) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          ((diagram.dottedCuts.punctureWord dotted role).map
+            DottedPuncture.inputStrand)) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          ((diagram.dottedCuts.punctureWord dotted role).map
+            DottedPuncture.outputStrand)) :=
+  compileDottedCollarBendingPathMorphism
+      𝒞 diagram labeling script.bendIn exactPaths.1 ≫
+    tensorUnitProjector 𝒞
+      (ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling script.waistWord)) ≫
+    compileDottedCollarBendingPathMorphism
+      𝒞 diagram labeling script.bendOut exactPaths.2
 
 /-- Compile the complete finite cut-open exterior trace in sweep order. -/
 noncomputable def compileCutOpenExteriorMorphism

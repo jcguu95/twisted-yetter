@@ -20,10 +20,43 @@ noncomputable section
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
+private def strandCharacterExponentSign : StrandOrientation → ℤ
+  | .positive => 1
+  | .negative => -1
+
+/--
+Bending a negatively powered character coupon on a fixed simple-labelled
+strand produces the positively powered coupon on the right-dual boundary
+object.  This is a rigidity statement: it does not change the component label
+and does not mention a dotted-disk intersection sign.
+-/
+theorem characterCoupon_negativeExponent_rightMate
+    (𝒞η : TwistedPremodularCategory K)
+    (simple : 𝒞η.category.simples.Simple)
+    (exponent : ℤ) :
+    (isoIntPowerHom
+        (𝒞η.character.iso.app
+          (𝒞η.category.simples.simpleObject simple))
+        (-exponent))ᘁ =
+      isoIntPowerHom
+        (𝒞η.character.iso.app
+          ((𝒞η.category.simples.simpleObject simple)ᘁ))
+        exponent := by
+  calc
+    _ = (((𝒞η.character.value simple) ^ (-exponent) : Kˣ) : K) •
+          𝟙 ((𝒞η.category.simples.simpleObject simple)ᘁ) := by
+      rw [characterCoupon_on_forwardSimple]
+      exact TensorIdentityCharacter.rightAdjointMate_smul_identity
+        (((𝒞η.character.value simple) ^ (-exponent) : Kˣ) : K)
+        (𝒞η.category.simples.simpleObject simple)
+    _ = _ :=
+      (characterCoupon_on_dualSimple
+        𝒞η.character simple exponent).symm
+
 /--
 At a cut-boundary endpoint, one uniform character coupon has the scalar
-prescribed by the oriented intersection.  The proof uses the local boundary
-polarity, not the global orientation of the link component.
+prescribed by the orientation of that ribbon strand.  The independent
+intersection sign with the dotted disk plays no role in choosing `X` or `Xᘁ`.
 -/
 theorem characterCoupon_on_puncture
     (𝒞η : TwistedPremodularCategory K)
@@ -40,39 +73,30 @@ theorem characterCoupon_on_puncture
       (((𝒞η.character.value
           (exteriorStrandLabel
             𝒞η.category diagram labeling puncture.inputStrand)) ^
-          (puncture.direction.intersectionSign * exponent) : Kˣ) : K) •
+          (strandCharacterExponentSign
+              (diagram.trace.strands puncture.inputStrand).orientation *
+            exponent) : Kˣ) : K) •
         𝟙
           (orientedSimpleObject 𝒞η.category
             (orientedExteriorStrand
               𝒞η.category diagram labeling puncture.inputStrand)) := by
-  have orientation :=
-    puncture.input_meets_cut_boundary_with_correct_polarity
-  cases direction : puncture.direction with
-  | withDiskOrientation =>
-      have strandPositive :
-          (diagram.trace.strands puncture.inputStrand).orientation =
-            .positive := by
-        simpa [PunctureDirection.cutBoundaryPolarity,
-          CutBoundaryPolarity.localStrandOrientation, direction] using orientation
+  cases orientation :
+      (diagram.trace.strands puncture.inputStrand).orientation with
+  | positive =>
       unfold orientedSimpleObject orientedExteriorStrand
-      rw [strandPositive]
+      rw [orientation]
       simp only [ribbonDirectionOfStrandOrientation]
-      simpa [PunctureDirection.intersectionSign, direction] using
+      simpa [strandCharacterExponentSign, orientation] using
         characterCoupon_on_forwardSimple
           𝒞η.character
           (exteriorStrandLabel
             𝒞η.category diagram labeling puncture.inputStrand)
           exponent
-  | againstDiskOrientation =>
-      have strandNegative :
-          (diagram.trace.strands puncture.inputStrand).orientation =
-            .negative := by
-        simpa [PunctureDirection.cutBoundaryPolarity,
-          CutBoundaryPolarity.localStrandOrientation, direction] using orientation
+  | negative =>
       unfold orientedSimpleObject orientedExteriorStrand
-      rw [strandNegative]
+      rw [orientation]
       simp only [ribbonDirectionOfStrandOrientation]
-      simpa [PunctureDirection.intersectionSign, direction] using
+      simpa [strandCharacterExponentSign, orientation] using
         characterCoupon_on_dualSimple
           𝒞η.character
           (exteriorStrandLabel
@@ -211,7 +235,9 @@ def punctureWordCharacterUnit
     ((𝒞η.character.value
           (exteriorStrandLabel
             𝒞η.category diagram labeling puncture.inputStrand) ^
-        (puncture.direction.intersectionSign * exponent) : Kˣ) : K)).prod
+        (strandCharacterExponentSign
+            (diagram.trace.strands puncture.inputStrand).orientation *
+          exponent) : Kˣ) : K)).prod
 
 /--
 One uniform character coupon on the puncture boundary word is the product of
@@ -273,14 +299,20 @@ theorem characterCoupon_on_punctureWord
                 ((𝒞η.character.value
                     (exteriorStrandLabel
                       𝒞η.category diagram labeling puncture.inputStrand) ^
-                  (puncture.direction.intersectionSign * exponent) : Kˣ) : K))
+                  (strandCharacterExponentSign
+                      (diagram.trace.strands
+                        puncture.inputStrand).orientation *
+                    exponent) : Kˣ) : K))
               rest).prod =
             (List.map
               (fun puncture =>
                 𝒞η.character.simpleScalar
                     (exteriorStrandLabel
                       𝒞η.category diagram labeling puncture.inputStrand) ^
-                  (puncture.direction.intersectionSign * exponent))
+                  (strandCharacterExponentSign
+                      (diagram.trace.strands
+                        puncture.inputStrand).orientation *
+                    exponent))
               rest).prod := by
         simp only [Units.val_zpow_eq_zpow_val,
           TensorIdentityCharacter.value_val]
