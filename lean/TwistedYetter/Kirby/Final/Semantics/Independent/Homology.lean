@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 
 /-!
 # Independent semantics: primal and THAM-side handle homology
@@ -28,6 +28,21 @@ noncomputable section
 
 abbrev HandleChainGroup (count : ℕ) := Fin count → ℤ
 
+/-- Signed intersection count of one puncture word with one component. -/
+def punctureIntersectionCoefficient
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace))
+    (twoHandle : trace.ComponentId) : ℤ := by
+  classical
+  exact
+    punctures.foldl
+      (fun (total : ℤ) (puncture : DottedPuncture trace) =>
+        if puncture.twoHandleComponent = twoHandle then
+          total + puncture.direction.intersectionSign
+        else
+          total)
+      (0 : ℤ)
+
 def twoOneIncidence
     (diagram : CombinatorialSpecialKirbyDiagram)
     (one : Fin diagram.handles.hOne)
@@ -35,14 +50,71 @@ def twoOneIncidence
   classical
   let dotted := diagram.handles.oneHandleIndex one
   let twoHandle := diagram.handles.twoHandleIndex two
+  exact punctureIntersectionCoefficient
+    (diagram.dottedCuts.punctureWord dotted.1 dotted.2)
+    twoHandle.1
+
+/-- Signed incidence count written using intrinsic input/output variance. -/
+def intrinsicDottedCutBoundaryCoefficient
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace))
+    (twoHandle : trace.ComponentId) : ℤ := by
+  classical
   exact
-    (diagram.dottedCuts.punctureWord dotted.1 dotted.2).foldl
-      (fun total puncture =>
-        if puncture.twoHandleComponent = twoHandle.1 then
-          total + puncture.direction.intersectionSign
+    punctures.foldl
+      (fun (total : ℤ) (puncture : DottedPuncture trace) =>
+        if puncture.twoHandleComponent = twoHandle then
+          match puncture.direction.incidenceSide with
+          | .inbound => total - 1
+          | .outbound => total + 1
         else
           total)
-      0
+      (0 : ℤ)
+
+theorem punctureIntersectionSign_eq_incidenceContribution
+    (direction : PunctureDirection) :
+    direction.intersectionSign =
+      match direction.incidenceSide with
+      | .inbound => -1
+      | .outbound => 1 := by
+  cases direction <;> rfl
+
+private theorem foldl_intersectionSign_eq_intrinsicBoundaryCoefficient
+    {trace : CombinatorialLinkTrace}
+    (punctures : List (DottedPuncture trace))
+    (twoHandle : trace.ComponentId) :
+    punctureIntersectionCoefficient punctures twoHandle =
+      intrinsicDottedCutBoundaryCoefficient punctures twoHandle := by
+  classical
+  unfold punctureIntersectionCoefficient
+    intrinsicDottedCutBoundaryCoefficient
+  apply congrArg (fun step => punctures.foldl step (0 : ℤ))
+  funext total puncture
+  by_cases component_eq : puncture.twoHandleComponent = twoHandle
+  · simp only [component_eq, ↓reduceIte]
+    cases puncture.direction <;> rfl
+  · simp only [component_eq, ↓reduceIte]
+
+/--
+The old signed puncture count and the intrinsic output-minus-input convention
+are definitionally the same finite incidence calculation.
+-/
+theorem twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (one : Fin diagram.handles.hOne)
+    (two : Fin diagram.handles.hTwo) :
+    twoOneIncidence diagram one two =
+      intrinsicDottedCutBoundaryCoefficient
+        (diagram.dottedCuts.punctureWord
+          (diagram.handles.oneHandleIndex one).1
+          (diagram.handles.oneHandleIndex one).2)
+        (diagram.handles.twoHandleIndex two).1 := by
+  simpa only [twoOneIncidence] using
+    foldl_intersectionSign_eq_intrinsicBoundaryCoefficient
+      (diagram.dottedCuts.punctureWord
+        (diagram.handles.oneHandleIndex one).1
+        (diagram.handles.oneHandleIndex one).2)
+      (diagram.handles.twoHandleIndex two).1
 
 /-- The primal cellular boundary `C₂ → C₁` in ordinary Kirby terminology. -/
 def primalBoundaryTwo
@@ -120,6 +192,14 @@ theorem coordinatePairing_unit_left
     coordinatePairing (coordinateUnit count index) vector = vector index := by
   classical
   simp [coordinatePairing, coordinateUnit, eq_comm]
+
+theorem coordinatePairing_unit_right
+    (count : ℕ)
+    (vector : HandleChainGroup count)
+    (index : Fin count) :
+    coordinatePairing vector (coordinateUnit count index) = vector index := by
+  classical
+  simp [coordinatePairing, coordinateUnit]
 
 /--
 The transpose of an integral map between the finite handle-coordinate groups.
@@ -245,6 +325,38 @@ theorem boundaryThree_is_transpose
     coordinatePairing (primalBoundaryTwo diagram twoChain) oneChain =
       coordinatePairing twoChain (primal.thamBoundaryThree oneChain) :=
   transpose_adjoint (primalBoundaryTwo diagram) twoChain oneChain
+
+/--
+For one dotted handle generator, the corresponding THAM degree-three
+boundary coordinate is the intrinsic output count minus the input count.
+This is finite-basis algebra plus the proved puncture-count identity; it is
+not an external topology axiom.
+-/
+theorem thamBoundaryThree_coordinateUnit_eq_intrinsicDottedCutCoefficient
+    {diagram : CombinatorialSpecialKirbyDiagram}
+    (primal : PrimalDegreeThreeBoundaryData diagram)
+    (one : Fin diagram.handles.hOne)
+    (two : Fin diagram.handles.hTwo) :
+    primal.thamBoundaryThree
+          (coordinateUnit diagram.handles.hOne one) two =
+      intrinsicDottedCutBoundaryCoefficient
+        (diagram.dottedCuts.punctureWord
+          (diagram.handles.oneHandleIndex one).1
+          (diagram.handles.oneHandleIndex one).2)
+        (diagram.handles.twoHandleIndex two).1 := by
+  change
+    coordinatePairing
+        (primalBoundaryTwo diagram
+          (coordinateUnit diagram.handles.hTwo two))
+        (coordinateUnit diagram.handles.hOne one) = _
+  rw [coordinatePairing_unit_right]
+  change
+    (∑ twoHandle,
+      twoOneIncidence diagram one twoHandle *
+        coordinateUnit diagram.handles.hTwo two twoHandle) = _
+  classical
+  simp [coordinateUnit,
+    twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient]
 
 /-- The THAM-side transposed maps square to zero, proved from primal `∂²=0`. -/
 theorem tham_boundary_squared_zero

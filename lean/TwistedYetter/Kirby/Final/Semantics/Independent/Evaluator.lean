@@ -919,46 +919,14 @@ noncomputable def compileDottedCollarBendingPathMorphism
       eqToHom final_object_eq
 
 /--
-Interpret one certified dotted collar as the actual role-aware local
-morphism: bend the recorded exterior strands to the collar waist, apply the
-tensor-unit projector there, and bend back to the recorded output strands.
-
-The ribbon direction of every object in all three words is read exclusively
-from the corresponding strand orientation.  The puncture direction does not
-participate in that choice.
--/
-noncomputable def compileDottedCollarMorphism
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞 diagram)
-    (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted)
-    (script : DottedCollarScript diagram.trace
-      (diagram.dottedCuts.punctureWord dotted role))
-    (exactPaths : script.HasExactBendingPaths) :
-    ribbonWordObject 𝒞
-        (exteriorWord 𝒞 diagram labeling
-          ((diagram.dottedCuts.punctureWord dotted role).map
-            DottedPuncture.inputStrand)) ⟶
-      ribbonWordObject 𝒞
-        (exteriorWord 𝒞 diagram labeling
-          ((diagram.dottedCuts.punctureWord dotted role).map
-            DottedPuncture.outputStrand)) :=
-  compileDottedCollarBendingPathMorphism
-      𝒞 diagram labeling script.bendIn exactPaths.1 ≫
-    tensorUnitProjector 𝒞
-      (ribbonWordObject 𝒞
-        (exteriorWord 𝒞 diagram labeling script.waistWord)) ≫
-    compileDottedCollarBendingPathMorphism
-      𝒞 diagram labeling script.bendOut exactPaths.2
-
-/--
 Compile one event at its certified position in the global cut-open trace.
-Ordinary ribbon events use the elementary compiler.  A projector marker can
-only be compiled after projector-event completeness identifies its literal
-dotted component and the dotted-collar normal-form axiom supplies the exact
-bending script.
+Ordinary ribbon events use the elementary compiler.  Projector-event
+completeness first identifies every projector marker with one literal dotted
+component; the marker is then compiled as its all-strand waist endomorphism.
+
+The inbound/outbound incidence movie is deliberately not used here.  Its
+purpose is to construct the mate morphism used by representative independence,
+not to redefine the presentation evaluator.
 -/
 noncomputable def compileRoleAwareCutOpenEventAt
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -983,13 +951,11 @@ noncomputable def compileRoleAwareCutOpenEventAt
       have exactData := Classical.choose_spec exactWitness
       have punctures_eq := exactData.2
       rw [punctures_eq]
-      let normalForm :=
-        standardDottedCollarNormalForm diagram dotted role
-      let script := Classical.choose normalForm
-      have exactPaths := Classical.choose_spec normalForm
-      simpa only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord] using
-        compileDottedCollarMorphism
-          𝒞 diagram labeling dotted role script exactPaths
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.projectorHole dotted
+          (diagram.dottedCuts.punctureWord dotted role)) (by
+            simpa only [event_eq, punctures_eq] using
+              diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
   | birth left right =>
       exact compileCutOpenEventMorphism 𝒞 diagram labeling
         (.birth left right) (by

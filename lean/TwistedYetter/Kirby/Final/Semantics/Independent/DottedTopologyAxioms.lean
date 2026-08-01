@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 
 /-!
 # Independent semantics: dotted-incidence topology boundaries
@@ -10,6 +10,46 @@ cycle; the unique public semantic entry still re-exports them transitively.
 -/
 
 namespace TwistedYetter.Semantics.Independent
+
+/-!
+## Intrinsic cut realization
+
+The witness below is primitive topology vocabulary: it means that regluing
+the displayed intrinsic oriented ribbon tangle along its input/output
+boundary recovers the exact original Kirby ribbon graph at the selected
+dotted handle.  It carries no category, colouring, character, exponent,
+morphism, or evaluation equality.
+-/
+
+axiom IntrinsicDottedCutRegluingWitness
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (cut : IntrinsicDottedCutTangle diagram
+      (diagram.dottedCuts.punctureWord dotted role)) : Type
+
+abbrev IntrinsicDottedCutRegluesToDiagram
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (cut : IntrinsicDottedCutTangle diagram
+      (diagram.dottedCuts.punctureWord dotted role)) : Prop :=
+  Nonempty (IntrinsicDottedCutRegluingWitness diagram dotted role cut)
+
+/--
+Every literal dotted handle admits an intrinsic oriented cut-tangle
+realization whose regluing is the original Kirby diagram.
+
+This is the sole new external topology assertion for the intrinsic route.
+It does not assert any categorical or numerical equality.
+-/
+axiom standardIntrinsicDottedCutRealization
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted) :
+    ∃ cut : IntrinsicDottedCutTangle diagram
+        (diagram.dottedCuts.punctureWord dotted role),
+      IntrinsicDottedCutRegluesToDiagram diagram dotted role cut
 
 /--
 Every oriented dotted handle admits a finite local movie whose source is

@@ -1,5 +1,6 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
 import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
@@ -35,7 +36,11 @@ declared individually in `EntranceAxioms`.  The dotted-handle boundary is an
 inbound-to-outbound incidence movie: puncture direction selects only the side
 of that morphism, never `X` versus `X*` and never a character exponent.
 
-The current source declares twenty-two explicit axioms.
+The current source declares twenty-four explicit axioms.  Two declarations
+make the intrinsic dotted-cut topology boundary explicit: the primitive
+regluing-witness type and the existence of a standard intrinsic cut
+realization.  The signed incidence/handle-boundary identification is proved
+in `Homology`; it is not an axiom.
 `explicit-trust-boundary-v1.json` predates the corrected dotted-incidence
 boundary and must be refreshed before it is used as the current curated trust
 ledger.  This semantic edit is not hash-sealed until its downstream compiler
