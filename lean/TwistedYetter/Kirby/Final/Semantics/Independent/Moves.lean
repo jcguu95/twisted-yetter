@@ -307,23 +307,13 @@ def ThamHandleChainTransport.inducedH₂
       exact (DFunLike.congr_fun
         transport.commutesWithBoundaryThree degreeThreeChain).symm)
 
-/--
-The complete category-neutral marking transport for one move.
-
-The final equation is the explicit naturality square between ordinary
-Kirby-side `H₂` and THAM-side turned-over `H₂`.  It prevents either side from
-silently reusing the other's raw degree-two coordinates.
--/
+/-- The category-neutral primal and THAM handle-chain transports for one move. -/
 structure MoveHomologyTransport
     (source target : HomologicallyMarkedDiagram) where
   primal :
     PrimalHandleChainTransport source.diagram target.diagram
       source.primalBoundary target.primalBoundary
   tham : ThamHandleChainTransport source target
-  turnover_natural :
-    ∀ alpha : PrimalKirbyH₂ source.primalBoundary,
-      target.turnover.equiv (primal.inducedH₂ alpha) =
-        tham.inducedH₂ (source.turnover.equiv alpha)
 
 /--
 Explicit coordinate normal form for adding one primal two-handle.
@@ -608,7 +598,7 @@ inductive ElementaryMove
         FramedIsotopyScriptRealizesFramedIsotopy script)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = homology.primal.inducedH₂ source.alpha)
+        target.thamAlpha = homology.tham.inducedH₂ source.thamAlpha)
   | oneOverOne
       (slide : CleanBandSlide source.diagram target.diagram)
       (slideRealizes :
@@ -624,7 +614,7 @@ inductive ElementaryMove
           slide.script.stationarySource).role = .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = homology.primal.inducedH₂ source.alpha)
+        target.thamAlpha = homology.tham.inducedH₂ source.thamAlpha)
   | twoOverOne
       (slide : CleanBandSlide source.diagram target.diagram)
       (slideRealizes :
@@ -640,7 +630,7 @@ inductive ElementaryMove
           slide.script.stationarySource).role = .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = homology.primal.inducedH₂ source.alpha)
+        target.thamAlpha = homology.tham.inducedH₂ source.thamAlpha)
   | twoOverTwo
       (slide : CleanBandSlide source.diagram target.diagram)
       (slideRealizes :
@@ -656,14 +646,14 @@ inductive ElementaryMove
           slide.script.stationarySource).role ≠ .dotted)
       (homology : MoveHomologyTransport source target)
       (markingTransport :
-        target.alpha = homology.primal.inducedH₂ source.alpha)
+        target.thamAlpha = homology.tham.inducedH₂ source.thamAlpha)
   | cancellation
       (script : CancellationScript source.diagram target.diagram)
       (homology : MoveHomologyTransport source target)
       (normalForm :
         CancellationLocalNormalForm script homology)
       (markingTransport :
-        target.alpha = homology.primal.inducedH₂ source.alpha)
+        target.thamAlpha = homology.tham.inducedH₂ source.thamAlpha)
 
 def ElementaryMove.homology
     {source target : HomologicallyMarkedDiagram}
@@ -676,25 +666,17 @@ def ElementaryMove.homology
   | .twoOverTwo _ _ _ _ _ homology _ => homology
   | .cancellation _ homology _ _ => homology
 
-def ElementaryMove.primalMarkingTransport
+def ElementaryMove.thamMarkingTransport
     {source target : HomologicallyMarkedDiagram}
     (move : ElementaryMove source target) :
-    target.alpha = move.homology.primal.inducedH₂ source.alpha :=
+    target.thamAlpha =
+      move.homology.tham.inducedH₂ source.thamAlpha :=
   match move with
   | .framedIsotopy _ _ _ markingTransport => markingTransport
   | .oneOverOne _ _ _ _ _ _ markingTransport => markingTransport
   | .twoOverOne _ _ _ _ _ _ markingTransport => markingTransport
   | .twoOverTwo _ _ _ _ _ _ markingTransport => markingTransport
   | .cancellation _ _ _ markingTransport => markingTransport
-
-theorem ElementaryMove.thamMarkingTransport
-    {source target : HomologicallyMarkedDiagram}
-    (move : ElementaryMove source target) :
-    target.thamAlpha =
-      move.homology.tham.inducedH₂ source.thamAlpha := by
-  unfold HomologicallyMarkedDiagram.thamAlpha
-  rw [move.primalMarkingTransport]
-  exact move.homology.turnover_natural source.alpha
 
 structure KirbyMovie
     (source target : HomologicallyMarkedDiagram) where

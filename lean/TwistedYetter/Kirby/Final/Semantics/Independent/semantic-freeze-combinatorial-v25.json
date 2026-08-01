@@ -1,0 +1,87 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v25",
+  "recorded_at_utc": "2026-08-01T19:43:22Z",
+  "semantic_content_parent_commit": "86ce7e1",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v24.json",
+  "historical_v1_through_v24_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "CANONICAL_MANIFOLD_TO_THAM_MARKING",
+    "reason": "TurnoverH2Identification exposed an arbitrary equivalence from primal Kirby H2 to THAM-side H2. Version 25 removes that input. A manifold-level representative now derives its unique THAM-side marking from the explicit turnover Poincare-duality boundary, while local graphical evaluation receives only that derived THAM-side class.",
+    "removed_declarations": [
+      "TurnoverH2Identification",
+      "MoveHomologyTransport.turnover_natural"
+    ],
+    "canonical_definition": "SpecialKirbyRepresentativeOf.thamAlpha",
+    "caller_can_supply_turnover_equivalence": false,
+    "local_move_transport": "Each elementary move directly transports the THAM-side H2 class through its THAM chain map.",
+    "axiom_count_changed": false,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "mathematical_meaning": {
+    "manifold_marking": "The public marking alpha lies in manifold H2 and is compared with primal Kirby H2 by the classical presentation boundary.",
+    "tham_marking": "The evaluator marking is the image of that primal class under the named turnover Poincare-duality equivalence; callers cannot independently choose it.",
+    "local_evaluation": "A marked local diagram stores only the THAM-side class actually consumed by the THAM-indexed evaluator.",
+    "move_naturality": "A local move must carry the source THAM class to the target THAM class by its explicit THAM chain transport."
+  },
+  "proof_status": {
+    "dependency_firewall": "PASS",
+    "independent_entry_build": "PASS_8262_JOBS",
+    "full_final_route_build": "PASS_8275_JOBS",
+    "final_axiom_audit": "PASS",
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 24,
+    "red_team_likely_proof_field_count": 55,
+    "red_team_json": "/private/tmp/canonical-turnover-red-team-v7.json",
+    "red_team_markdown": "/private/tmp/canonical-turnover-red-team-v7.zh-TW.md"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 24,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 27,
+    "contains_sorryAx": false,
+    "contains_representative_independence_axiom": false,
+    "contains_local_invariance_axiom": false,
+    "contains_evaluator_equality_axiom": false
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "full_hashes_recorded": true,
+    "required_prefix": "000",
+    "padding_is_comment_only": true,
+    "seal_status": "PENDING_PREFIX_RESEAL",
+    "pending_files": [
+      "EntranceAxioms.lean",
+      "Evaluator.lean",
+      "Homology.lean",
+      "Moves.lean"
+    ],
+    "reason": "The execution environment rejected automated prefix-search padding as an integrity-boundary risk. No workaround was attempted."
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000a863f2be8be75278cc6f8f56f04c72a963b646d1b097dbf826e1bea1e6d1e",
+    "DottedTopologyAxioms.lean": "0003fffcc385de385e34011b5abc792ae1f363cf4b9fa95f3d2ea93b34456085",
+    "EntranceAxioms.lean": "817294ae9963a2da6d95bcc8b3c15860711a39dceccf0a44b492639629eb516a",
+    "Entry.lean": "0001e53fde274e1b3468ab61f58fbfde32feb9f8e314260861bc11c539b0a626",
+    "Evaluator.lean": "23b13bb504b75844ea0caf138930ce11a31594f866564edc100a882993bd4861",
+    "Graphical.lean": "00069dbf609e756921678e5b93e10c46622d575c37f4758af773a6279339f8ad",
+    "Homology.lean": "595ab02b6abe108bbdef5c3cc1a7a4f6ddbf190ea8672b5d41041b2f197252d8",
+    "IntrinsicDottedCut.lean": "00003d0e3b696130b27c1c31ac04559c88e2cdf101a1b02f75e37d0e0a5942bf",
+    "IntrinsicDottedCutGraphical.lean": "000d5572d1b14ccf7b770313a13e4bdf5baa3031cf5f617629e74200de4f89c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "31b99bf0a8204d473c627e77bc80c2b890b70ccba405bff7babf42a6af88654d",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "Version 25 is not prefix-sealed until the four pending files are deliberately repadded.",
+    "The source red-team audit remains INCONCLUSIVE_HUMAN_REVIEW_REQUIRED.",
+    "The turnover Poincare-duality equivalence remains an explicit category-neutral topology axiom in the final closure.",
+    "This revision does not identify the invariant with the original Crane-Yetter state sum."
+  ]
+}

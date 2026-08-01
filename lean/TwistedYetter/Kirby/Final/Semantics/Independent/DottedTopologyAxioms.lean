@@ -52,9 +52,16 @@ axiom standardIntrinsicDottedCutRealization
       IntrinsicDottedCutRegluesToDiagram diagram dotted role cut
 
 /--
-In the simultaneous cut-open diagram, projector markers are exactly the
-markers produced by literal dotted components.  Thus every dotted component
-has its one distinguished marker and there are no extra projector markers.
+In the simultaneous cut-open diagram:
+
+* every dotted component has exactly one projector marker carrying its exact
+  ordered puncture word;
+* every projector marker comes from such a dotted component; and
+* every puncture occurrence agrees with its recorded position in that word.
+
+The complete left-to-right placement and unchanged exterior context are then
+theorems derived from the cut-open trace's transparent transition law; they
+are not additional assumptions.
 
 This axiom mentions no category, projector morphism, character, or evaluation
 equality.
@@ -65,4 +72,4 @@ axiom standardDottedProjectorEventCompleteness
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 3180
+-- semantic-freeze-padding: 703

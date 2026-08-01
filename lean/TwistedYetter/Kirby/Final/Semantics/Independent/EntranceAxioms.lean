@@ -204,7 +204,7 @@ noncomputable def normalizedCycleExpression
         (ordinaryKirbyWeight 𝒞η.category labeling *
             characterWeight 𝒞η labeling cycle) •
           (canonicalRoleAwareGraphCompiler
-            𝒞η marked.diagram marked.primalBoundary labeling cycle).graph.interpret)
+            𝒞η marked.diagram marked.primalBoundary labeling cycle).interpret)
 
 /--
 Clean attachment has the standard typed graphical interpretation.
@@ -408,14 +408,14 @@ structure SpecialKirbyRepresentativeOf
       ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
   alpha : PrimalKirbyH₂ primalBoundary
 
-noncomputable def SpecialKirbyRepresentativeOf.thamHomologyIdentification
+noncomputable def SpecialKirbyRepresentativeOf.thamAlpha
     {X : ClosedOrientedSmoothFourManifold}
     (representative : SpecialKirbyRepresentativeOf X) :
-    TurnoverH₂Identification representative.primalBoundary :=
-  { equiv := turnoverPoincareDualityEquiv
+    ThamKirbyH₂ representative.primalBoundary :=
+  (turnoverPoincareDualityEquiv
       representative.diagram
       representative.primalBoundary
-      representative.diagramHomologyComparison }
+      representative.diagramHomologyComparison) representative.alpha
 
 noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     {X : ClosedOrientedSmoothFourManifold}
@@ -423,8 +423,7 @@ noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     HomologicallyMarkedDiagram :=
   { diagram := representative.diagram
     primalBoundary := representative.primalBoundary
-    turnover := representative.thamHomologyIdentification
-    alpha := representative.alpha }
+    thamAlpha := representative.thamAlpha }
 
 noncomputable def SpecialKirbyRepresentativeOf.diagramH₂EquivManifoldH₂
     {X : ClosedOrientedSmoothFourManifold}

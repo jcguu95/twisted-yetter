@@ -942,7 +942,7 @@ theorem DottedCutData.exteriorEvent_usesExactDottedPunctureWord
   generalize eventEq : cut.exterior.events i = event
   cases event with
   | projectorHole dotted punctures =>
-      obtain ⟨role, _indexEq, puncturesEq⟩ :=
+      obtain ⟨role, puncturesEq⟩ :=
         cut.projectorEvent_hasExactPunctureWord
           complete i dotted punctures eventEq
       exact ⟨role, puncturesEq⟩
@@ -1153,29 +1153,21 @@ noncomputable def compileCutOpenExteriorMorphism
 
 /--
 Fusion-channel resolutions belong to local graphical proofs, not to the
-definition of the original closed link.  Therefore the canonical compiled
-term is exactly one closed graph, with no auxiliary channel denominator.
+definition of the original closed link.  The canonical compiler therefore
+returns the unique closed ribbon expression obtained by composing the
+diagram's complete ordered cut-open event trace.  There is no wrapper field
+through which a caller could replace this expression by an unrelated graph.
 -/
-structure RoleAwareCompiledTerm
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (_primal : PrimalDegreeThreeBoundaryData diagram)
-    (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (_cycle : ThamTwoCycles _primal) where
-  graph : ClosedRibbonExpression 𝒞η.category :=
-    .morphism
-      (compileCutOpenExteriorMorphism 𝒞η.category diagram labeling)
-
 noncomputable def canonicalRoleAwareGraphCompiler
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles primal) :
-    RoleAwareCompiledTerm 𝒞η diagram primal labeling cycle :=
-  {}
+    (_cycle : ThamTwoCycles primal) :
+    ClosedRibbonExpression 𝒞η.category :=
+  .morphism
+    (compileCutOpenExteriorMorphism 𝒞η.category diagram labeling)
 
 /--
 Tham Definition 5.11 normalization on the turned-over handle decomposition.
@@ -1207,7 +1199,7 @@ noncomputable def rawCycleSum
     let term :=
       canonicalRoleAwareGraphCompiler
         𝒞η diagram primal labeling cycle
-    canonicalRibbonGraphicalEvaluation 𝒞η.category term.graph
+    canonicalRibbonGraphicalEvaluation 𝒞η.category term
 
 noncomputable def evaluateCycle
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -1240,4 +1232,4 @@ def RepresentativeIndependenceStatement
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 5238
+-- semantic-freeze-padding: 3422

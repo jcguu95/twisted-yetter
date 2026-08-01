@@ -1,0 +1,81 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v24",
+  "recorded_at_utc": "2026-08-01T19:16:38Z",
+  "semantic_content_parent_commit": "86ce7e1",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v23.json",
+  "historical_v1_through_v23_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "CANONICAL_GRAPH_COMPILER_IS_A_DEFINITION",
+    "reason": "RoleAwareCompiledTerm exposed the canonical closed ribbon graph as an overridable structure field. Version 24 removes that wrapper and makes canonicalRoleAwareGraphCompiler return the uniquely compiled ClosedRibbonExpression directly.",
+    "removed_declaration": "RoleAwareCompiledTerm",
+    "removed_field": "RoleAwareCompiledTerm.graph",
+    "canonical_definition": "canonicalRoleAwareGraphCompiler",
+    "caller_can_supply_graph": false,
+    "axiom_count_changed": false,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "mathematical_meaning": {
+    "input": "A twisted premodular category, combinatorial special Kirby diagram, primal handle boundary data, ordinary two-handle labeling, and THAM-side two-cycle.",
+    "output": "The closed ribbon expression obtained by composing the complete ordered cut-open event trace.",
+    "closedness": "The initial and final active words are empty, so the interpreted morphism lies in End(1).",
+    "noncomputable": "Lean does not promise executable code; the mathematical output is nevertheless uniquely defined."
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS_8262_JOBS",
+    "full_final_route_build": "PASS_8275_JOBS",
+    "final_axiom_audit": "PASS",
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 24,
+    "red_team_likely_proof_field_count": 56,
+    "red_team_json": "/private/tmp/canonical-graph-red-team-v6.json",
+    "red_team_markdown": "/private/tmp/canonical-graph-red-team-v6.zh-TW.md"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 24,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 27,
+    "contains_sorryAx": false,
+    "contains_representative_independence_axiom": false,
+    "contains_local_invariance_axiom": false,
+    "contains_evaluator_equality_axiom": false
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "full_hashes_recorded": true,
+    "required_prefix": "000",
+    "padding_is_comment_only": true,
+    "seal_status": "PENDING_PREFIX_RESEAL",
+    "pending_files": [
+      "EntranceAxioms.lean",
+      "Evaluator.lean"
+    ],
+    "reason": "The execution environment rejected automated prefix-search padding as an integrity-boundary risk. No workaround was attempted."
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000a863f2be8be75278cc6f8f56f04c72a963b646d1b097dbf826e1bea1e6d1e",
+    "DottedTopologyAxioms.lean": "0003fffcc385de385e34011b5abc792ae1f363cf4b9fa95f3d2ea93b34456085",
+    "EntranceAxioms.lean": "0f3db818cc117fb6728ea3a07b3aaf005abaa8fde2e69ed13fd22c123d9c6198",
+    "Entry.lean": "0001e53fde274e1b3468ab61f58fbfde32feb9f8e314260861bc11c539b0a626",
+    "Evaluator.lean": "23b13bb504b75844ea0caf138930ce11a31594f866564edc100a882993bd4861",
+    "Graphical.lean": "00069dbf609e756921678e5b93e10c46622d575c37f4758af773a6279339f8ad",
+    "Homology.lean": "000105986fbdb1d037174c5f745a8bfd345beb48588f15a9cc3fbfd65a3fdc4c",
+    "IntrinsicDottedCut.lean": "00003d0e3b696130b27c1c31ac04559c88e2cdf101a1b02f75e37d0e0a5942bf",
+    "IntrinsicDottedCutGraphical.lean": "000d5572d1b14ccf7b770313a13e4bdf5baa3031cf5f617629e74200de4f89c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "000e0c9882ec24afa92abf0b1f2538ab204d835dd541671007d43654f2dc6e5f",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "Version 24 is not prefix-sealed until the two pending files are deliberately repadded.",
+    "A transparent compiler definition does not appear in #print axioms and still requires frozen-source semantic review.",
+    "The source red-team audit remains INCONCLUSIVE_HUMAN_REVIEW_REQUIRED.",
+    "This revision does not identify the invariant with the original Crane-Yetter state sum."
+  ]
+}

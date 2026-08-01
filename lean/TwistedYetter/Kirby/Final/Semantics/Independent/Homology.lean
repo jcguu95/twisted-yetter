@@ -395,30 +395,16 @@ def thamCycleClass
   QuotientAddGroup.mk cycle
 
 /--
-The algebraic part of the turnover identification.  Whether this equivalence
-is the geometric Poincaré-duality/dual-handle map is deliberately not hidden
-as a proof field here; that external topology responsibility is stated
-separately in `EntranceAxioms`.
--/
-structure TurnoverH₂Identification
-    {diagram : CombinatorialSpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) where
-  equiv : PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal
-
-/--
-A marked diagram stores exactly one marking, on the ordinary Kirby/primal
-side.  The THAM-side marking is derived from the turnover identification.
+A diagram used by the local graphical evaluator stores exactly the THAM-side
+homology class which the evaluator consumes.  It does not store a caller-
+supplied primal-to-THAM equivalence.  The manifold-level entrance constructs
+this class canonically from a primal class and the explicit Poincaré-duality
+topology boundary.
 -/
 structure HomologicallyMarkedDiagram where
   diagram : CombinatorialSpecialKirbyDiagram
   primalBoundary : PrimalDegreeThreeBoundaryData diagram
-  turnover : TurnoverH₂Identification primalBoundary
-  alpha : PrimalKirbyH₂ primalBoundary
-
-def HomologicallyMarkedDiagram.thamAlpha
-    (marked : HomologicallyMarkedDiagram) :
-    ThamKirbyH₂ marked.primalBoundary :=
-  marked.turnover.equiv marked.alpha
+  thamAlpha : ThamKirbyH₂ primalBoundary
 
 end
 

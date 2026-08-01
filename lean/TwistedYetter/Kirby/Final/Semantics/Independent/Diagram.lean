@@ -562,48 +562,40 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
       strand ∈ activeOrder i →
       (trace.components (trace.strands strand).component).role ≠ .dotted
 
-def PunctureWordsHaveNoRepeatedOccurrences
-    (trace : CombinatorialLinkTrace)
-    (punctureWord :
-      (dotted : trace.ComponentId) →
-        (trace.components dotted).role = .dotted →
-        List (DottedPuncture trace)) :
-    Prop :=
-  ∀ (dotted : trace.ComponentId)
-    (role : (trace.components dotted).role = .dotted)
-    (index : Fin (punctureWord dotted role).length),
-      let puncture := (punctureWord dotted role).get index
-      puncture.dottedComponent = dotted ∧
-        puncture.cutPosition = index.1
-
 structure DottedCutData (trace : CombinatorialLinkTrace) where
   punctureWord :
     (dotted : trace.ComponentId) →
       (trace.components dotted).role = .dotted →
       List (DottedPuncture trace)
   exterior : CutOpenExteriorTrace trace
-  projectorSite :
-    (dotted : trace.ComponentId) →
-      (role : (trace.components dotted).role = .dotted) →
-      Fin exterior.eventCount
-  projectorSite_exact :
-    ∀ (dotted : trace.ComponentId)
-      (role : (trace.components dotted).role = .dotted),
-      exterior.events (projectorSite dotted role) =
-        .projectorHole dotted (punctureWord dotted role)
-  puncturesHaveNoRepeatedOccurrences :
-    PunctureWordsHaveNoRepeatedOccurrences trace punctureWord
 
 /--
-Every projector marker in the cut-open trace is exactly the distinguished
-marker of one literal dotted component.  Together with `projectorSite_exact`,
-this says that dotted components and projector markers are in bijection: no
-ordinary component creates a marker, and no additional marker is present.
-
-This is a transparent combinatorial proposition.  It contains no category,
-projector morphism, character, or evaluation equality.
+The list order is the recorded left-to-right puncture order.  This predicate
+checks that every occurrence names the correct dotted component and that its
+redundant `cutPosition` agrees with its list index.
 -/
-def DottedCutData.ProjectorEventsExactlyMatchDottedComponents
+def DottedCutData.PunctureWordsRespectRecordedOrder
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  ∀ (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted)
+    (index : Fin (cut.punctureWord dotted role).length),
+      let puncture := (cut.punctureWord dotted role).get index
+      puncture.dottedComponent = dotted ∧
+        puncture.cutPosition = index.1
+
+/-- Every literal dotted component has exactly one event using its exact word. -/
+def DottedCutData.EveryDottedComponentHasUniqueProjectorEvent
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  ∀ (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted),
+      ∃! i : Fin cut.exterior.eventCount,
+        cut.exterior.events i =
+          .projectorHole dotted (cut.punctureWord dotted role)
+
+/-- Every projector event comes from a dotted component and its exact word. -/
+def DottedCutData.EveryProjectorEventUsesExactPunctureWord
     {trace : CombinatorialLinkTrace}
     (cut : DottedCutData trace) : Prop :=
   ∀ (i : Fin cut.exterior.eventCount)
@@ -611,11 +603,90 @@ def DottedCutData.ProjectorEventsExactlyMatchDottedComponents
     (punctures : List (DottedPuncture trace)),
       cut.exterior.events i = .projectorHole dotted punctures →
         ∃ role : (trace.components dotted).role = .dotted,
-          i = cut.projectorSite dotted role
+          punctures = cut.punctureWord dotted role
 
 /--
-The exact puncture word at any projector marker, derived from projector-event
-completeness and the already-recorded distinguished site equation.
+At a projector event, the puncture list occurs in its recorded order as one
+contiguous block in the complete left-to-right active order, both before and
+after the event.
+-/
+def DottedCutData.ProjectorPortsOccurInRecordedOrder
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  ∀ (i : Fin cut.exterior.eventCount)
+    (dotted : trace.ComponentId)
+    (punctures : List (DottedPuncture trace)),
+      cut.exterior.events i = .projectorHole dotted punctures →
+        ∃ (leftBefore rightBefore leftAfter rightAfter : List trace.StrandId),
+          cut.exterior.activeOrder i.castSucc =
+              leftBefore ++ punctures.map DottedPuncture.inputStrand ++
+                rightBefore ∧
+            cut.exterior.activeOrder i.succ =
+              leftAfter ++ punctures.map DottedPuncture.outputStrand ++
+                rightAfter
+
+/--
+At a projector event, the strands outside the ordered puncture block are the
+same on both sides.  Only the puncture block changes from input ports to output
+ports.
+-/
+def DottedCutData.ProjectorExteriorContextIsUnchanged
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  ∀ (i : Fin cut.exterior.eventCount)
+    (dotted : trace.ComponentId)
+    (punctures : List (DottedPuncture trace)),
+      cut.exterior.events i = .projectorHole dotted punctures →
+        ∃ (leftContext rightContext : List trace.StrandId),
+          cut.exterior.activeOrder i.castSucc =
+              leftContext ++ punctures.map DottedPuncture.inputStrand ++
+                rightContext ∧
+            cut.exterior.activeOrder i.succ =
+              leftContext ++ punctures.map DottedPuncture.outputStrand ++
+                rightContext
+
+/--
+Every projector marker in the cut-open trace is exactly the unique marker of
+one literal dotted component, and every puncture word follows its recorded
+order.  Thus no ordinary component creates a marker and no additional marker
+is present.
+
+This is a transparent combinatorial proposition.  It contains no category,
+projector morphism, character, or evaluation equality.
+-/
+def DottedCutData.ProjectorEventsExactlyMatchDottedComponents
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : Prop :=
+  cut.PunctureWordsRespectRecordedOrder ∧
+    cut.EveryDottedComponentHasUniqueProjectorEvent ∧
+      cut.EveryProjectorEventUsesExactPunctureWord
+
+/-- The complete active-order transition derives ordered projector ports. -/
+theorem DottedCutData.projectorPortsOccurInRecordedOrder
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.ProjectorPortsOccurInRecordedOrder := by
+  intro i dotted punctures event_eq
+  obtain ⟨leftContext, rightContext, before_eq, after_eq⟩ :=
+    cut.exterior.transitionValid i
+  rw [event_eq] at before_eq after_eq
+  exact ⟨leftContext, rightContext, leftContext, rightContext,
+    before_eq, after_eq⟩
+
+/-- The complete active-order transition keeps the exterior context fixed. -/
+theorem DottedCutData.projectorExteriorContextIsUnchanged
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.ProjectorExteriorContextIsUnchanged := by
+  intro i dotted punctures event_eq
+  obtain ⟨leftContext, rightContext, before_eq, after_eq⟩ :=
+    cut.exterior.transitionValid i
+  rw [event_eq] at before_eq after_eq
+  exact ⟨leftContext, rightContext, before_eq, after_eq⟩
+
+/--
+The exact puncture word at any projector marker, derived directly from the
+explicit projector-event completeness boundary.
 -/
 theorem DottedCutData.projectorEvent_hasExactPunctureWord
     {trace : CombinatorialLinkTrace}
@@ -626,21 +697,13 @@ theorem DottedCutData.projectorEvent_hasExactPunctureWord
     (punctures : List (DottedPuncture trace))
     (event_eq : cut.exterior.events i = .projectorHole dotted punctures) :
     ∃ role : (trace.components dotted).role = .dotted,
-      i = cut.projectorSite dotted role ∧
-        punctures = cut.punctureWord dotted role := by
-  obtain ⟨role, index_eq⟩ := complete i dotted punctures event_eq
-  refine ⟨role, index_eq, ?_⟩
-  have distinguished_eq :
-      cut.exterior.events i =
-        .projectorHole dotted (cut.punctureWord dotted role) := by
-    rw [index_eq]
-    exact cut.projectorSite_exact dotted role
-  rw [event_eq] at distinguished_eq
-  exact (CutOpenEvent.projectorHole.inj distinguished_eq).2
+      punctures = cut.punctureWord dotted role :=
+  complete.2.2 i dotted punctures event_eq
 
 theorem DottedCutData.puncture_dottedComponent_eq
     {trace : CombinatorialLinkTrace}
     (cut : DottedCutData trace)
+    (complete : cut.ProjectorEventsExactlyMatchDottedComponents)
     (dotted : trace.ComponentId)
     (role : (trace.components dotted).role = .dotted)
     (puncture : DottedPuncture trace)
@@ -648,7 +711,7 @@ theorem DottedCutData.puncture_dottedComponent_eq
     puncture.dottedComponent = dotted := by
   obtain ⟨index, index_eq⟩ := List.mem_iff_get.mp puncture_mem
   rw [← index_eq]
-  exact (cut.puncturesHaveNoRepeatedOccurrences dotted role index).1
+  exact (complete.1 dotted role index).1
 
 /--
 The handle information deliberately stops before encoding three-handle
@@ -680,4 +743,4 @@ structure CombinatorialSpecialKirbyDiagram where
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1981
+-- semantic-freeze-padding: 881

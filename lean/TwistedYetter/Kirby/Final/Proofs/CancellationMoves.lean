@@ -147,12 +147,12 @@ theorem oneTwoBirth_hasTypedGraphicalNormalForm
     (canonicalRoleAwareGraphCompiler
         𝒞η target.diagram target.primalBoundary
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).graph.interpret =
+        (transport.mapCycle sourceCycle)).interpret =
       (closedComposeExpression
         (specialCutMeridianExpression 𝒞η.category newLabel)
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary
-          sourceLabeling sourceCycle).graph).interpret := by
+          sourceLabeling sourceCycle)).interpret := by
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
     (OneTwoGraphCoordinates.ofAdded coordinates)
@@ -181,12 +181,12 @@ theorem oneTwoBirth_graphicalFactor
         (canonicalRoleAwareGraphCompiler
           𝒞η target.diagram target.primalBoundary
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (transport.mapCycle sourceCycle)).graph =
+          (transport.mapCycle sourceCycle)) =
       specialCutMeridianClosedValue 𝒞η.category newLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η source.diagram source.primalBoundary
-            sourceLabeling sourceCycle).graph := by
+            sourceLabeling sourceCycle) := by
   have interpreted :=
     oneTwoBirth_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -214,12 +214,12 @@ theorem twoThreeBirth_hasTypedGraphicalNormalForm
     (canonicalRoleAwareGraphCompiler
         𝒞η target.diagram target.primalBoundary
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).graph.interpret =
+        (transport.mapCycle sourceCycle)).interpret =
       (closedComposeExpression
         (ordinaryKirbyLoopExpression 𝒞η.category newLabel)
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary
-          sourceLabeling sourceCycle).graph).interpret := by
+          sourceLabeling sourceCycle)).interpret := by
   exact standardTwoThreeBirth_compiledExteriorMorphism
     𝒞η.category
     (TwoThreeGraphCoordinates.ofAdded coordinates)
@@ -248,12 +248,12 @@ theorem twoThreeBirth_graphicalFactor
         (canonicalRoleAwareGraphCompiler
           𝒞η target.diagram target.primalBoundary
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (transport.mapCycle sourceCycle)).graph =
+          (transport.mapCycle sourceCycle)) =
       𝒞η.category.simples.quantumDimension newLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η source.diagram source.primalBoundary
-            sourceLabeling sourceCycle).graph := by
+            sourceLabeling sourceCycle) := by
   have interpreted :=
     twoThreeBirth_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -298,7 +298,7 @@ theorem oneTwoBirth_rawCycleSum
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η target.diagram target.primalBoundary
-            targetLabeling (transport.mapCycle sourceCycle)).graph) =
+            targetLabeling (transport.mapCycle sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category source.diagram ×
             𝒞η.category.simples.Simple,
@@ -311,7 +311,7 @@ theorem oneTwoBirth_rawCycleSum
             (canonicalRoleAwareGraphCompiler
               𝒞η target.diagram target.primalBoundary
               (coordinates.mergeLabeling pair.1 pair.2)
-              (transport.mapCycle sourceCycle)).graph := by
+              (transport.mapCycle sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -327,7 +327,7 @@ theorem oneTwoBirth_rawCycleSum
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
                 𝒞η source.diagram source.primalBoundary
-                sourceLabeling sourceCycle).graph) := by
+                sourceLabeling sourceCycle)) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro sourceLabeling _
@@ -345,7 +345,7 @@ theorem oneTwoBirth_rawCycleSum
           canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
                 𝒞η source.diagram source.primalBoundary
-                sourceLabeling sourceCycle).graph := by
+                sourceLabeling sourceCycle) := by
         apply Finset.sum_congr rfl
         intro sourceLabeling _
         rw [← Finset.sum_mul]
@@ -381,7 +381,7 @@ theorem twoThreeBirth_rawCycleSum
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η target.diagram target.primalBoundary
-            targetLabeling (transport.mapCycle sourceCycle)).graph) =
+            targetLabeling (transport.mapCycle sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category source.diagram ×
             𝒞η.category.simples.Simple,
@@ -394,7 +394,7 @@ theorem twoThreeBirth_rawCycleSum
             (canonicalRoleAwareGraphCompiler
               𝒞η target.diagram target.primalBoundary
               (coordinates.mergeLabeling pair.1 pair.2)
-              (transport.mapCycle sourceCycle)).graph := by
+              (transport.mapCycle sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -410,7 +410,7 @@ theorem twoThreeBirth_rawCycleSum
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
                 𝒞η source.diagram source.primalBoundary
-                sourceLabeling sourceCycle).graph) := by
+                sourceLabeling sourceCycle)) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro sourceLabeling _
@@ -430,7 +430,7 @@ theorem twoThreeBirth_rawCycleSum
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
                 𝒞η source.diagram source.primalBoundary
-                sourceLabeling sourceCycle).graph := by
+                sourceLabeling sourceCycle) := by
         apply Eq.trans ?_ (Finset.mul_sum ..).symm
         apply Finset.sum_congr rfl
         intro sourceLabeling _
@@ -442,7 +442,7 @@ theorem twoThreeBirth_rawCycleSum
                   sourceLabeling sourceCycle *
                 canonicalRibbonGraphicalEvaluation 𝒞η.category
                   (canonicalRoleAwareGraphCompiler
-                    𝒞η source.diagram source.primalBoundary sourceLabeling sourceCycle).graph) =
+                    𝒞η source.diagram source.primalBoundary sourceLabeling sourceCycle)) =
             _
         rfl
 
@@ -634,14 +634,14 @@ theorem oneTwoDeath_hasTypedGraphicalNormalForm
     (canonicalRoleAwareGraphCompiler
         𝒞η source.diagram source.primalBoundary
         (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).graph.interpret =
+        (coordinates.safeCycle sourceCycle)).interpret =
       (closedComposeExpression
         (specialCutMeridianExpression 𝒞η.category removedLabel)
         (canonicalRoleAwareGraphCompiler
           𝒞η target.diagram target.primalBoundary
           targetLabeling
           (transport.mapCycle
-            (coordinates.safeCycle sourceCycle))).graph).interpret := by
+            (coordinates.safeCycle sourceCycle)))).interpret := by
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
     (OneTwoGraphCoordinates.ofRemoved coordinates)
@@ -670,13 +670,13 @@ theorem oneTwoDeath_graphicalFactor
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary
           (coordinates.mergeLabeling targetLabeling removedLabel)
-          (coordinates.safeCycle sourceCycle)).graph =
+          (coordinates.safeCycle sourceCycle)) =
       specialCutMeridianClosedValue 𝒞η.category removedLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η target.diagram target.primalBoundary
             targetLabeling
-            (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
+            (transport.mapCycle (coordinates.safeCycle sourceCycle))) := by
   have interpreted :=
     oneTwoDeath_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -704,14 +704,14 @@ theorem twoThreeDeath_hasTypedGraphicalNormalForm
     (canonicalRoleAwareGraphCompiler
         𝒞η source.diagram source.primalBoundary
         (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).graph.interpret =
+        (coordinates.safeCycle sourceCycle)).interpret =
       (closedComposeExpression
         (ordinaryKirbyLoopExpression 𝒞η.category removedLabel)
         (canonicalRoleAwareGraphCompiler
           𝒞η target.diagram target.primalBoundary
           targetLabeling
           (transport.mapCycle
-            (coordinates.safeCycle sourceCycle))).graph).interpret := by
+            (coordinates.safeCycle sourceCycle)))).interpret := by
   exact standardTwoThreeBirth_compiledExteriorMorphism
     𝒞η.category
     (TwoThreeGraphCoordinates.ofRemoved coordinates)
@@ -740,13 +740,13 @@ theorem twoThreeDeath_graphicalFactor
         (canonicalRoleAwareGraphCompiler
           𝒞η source.diagram source.primalBoundary
           (coordinates.mergeLabeling targetLabeling removedLabel)
-          (coordinates.safeCycle sourceCycle)).graph =
+          (coordinates.safeCycle sourceCycle)) =
       𝒞η.category.simples.quantumDimension removedLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η target.diagram target.primalBoundary
           targetLabeling
-          (transport.mapCycle (coordinates.safeCycle sourceCycle))).graph := by
+          (transport.mapCycle (coordinates.safeCycle sourceCycle))) := by
   have interpreted :=
     twoThreeDeath_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -791,7 +791,7 @@ theorem oneTwoDeath_rawCycleSum
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η source.diagram source.primalBoundary
-            sourceLabeling (coordinates.safeCycle sourceCycle)).graph) =
+            sourceLabeling (coordinates.safeCycle sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category target.diagram ×
             𝒞η.category.simples.Simple,
@@ -804,7 +804,7 @@ theorem oneTwoDeath_rawCycleSum
             (canonicalRoleAwareGraphCompiler
               𝒞η source.diagram source.primalBoundary
               (coordinates.mergeLabeling pair.1 pair.2)
-              (coordinates.safeCycle sourceCycle)).graph := by
+              (coordinates.safeCycle sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -823,7 +823,7 @@ theorem oneTwoDeath_rawCycleSum
                 𝒞η target.diagram target.primalBoundary
                 targetLabeling
                 (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle))).graph) := by
+                  (coordinates.safeCycle sourceCycle)))) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -844,7 +844,7 @@ theorem oneTwoDeath_rawCycleSum
               𝒞η target.diagram target.primalBoundary
               targetLabeling
               (transport.mapCycle
-                (coordinates.safeCycle sourceCycle))).graph := by
+                (coordinates.safeCycle sourceCycle))) := by
         apply Finset.sum_congr rfl
         intro targetLabeling _
         rw [← Finset.sum_mul]
@@ -880,7 +880,7 @@ theorem twoThreeDeath_rawCycleSum
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
             𝒞η source.diagram source.primalBoundary
-            sourceLabeling (coordinates.safeCycle sourceCycle)).graph) =
+            sourceLabeling (coordinates.safeCycle sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category target.diagram ×
             𝒞η.category.simples.Simple,
@@ -893,7 +893,7 @@ theorem twoThreeDeath_rawCycleSum
             (canonicalRoleAwareGraphCompiler
               𝒞η source.diagram source.primalBoundary
               (coordinates.mergeLabeling pair.1 pair.2)
-              (coordinates.safeCycle sourceCycle)).graph := by
+              (coordinates.safeCycle sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -912,7 +912,7 @@ theorem twoThreeDeath_rawCycleSum
                 𝒞η target.diagram target.primalBoundary
                 targetLabeling
                 (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle))).graph) := by
+                  (coordinates.safeCycle sourceCycle)))) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -935,7 +935,7 @@ theorem twoThreeDeath_rawCycleSum
                 𝒞η target.diagram target.primalBoundary
                 targetLabeling
                 (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle))).graph := by
+                  (coordinates.safeCycle sourceCycle))) := by
         apply Eq.trans ?_ (Finset.mul_sum ..).symm
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -950,7 +950,7 @@ theorem twoThreeDeath_rawCycleSum
                   (canonicalRoleAwareGraphCompiler
                     𝒞η target.diagram target.primalBoundary targetLabeling
                     (transport.mapCycle
-                      (coordinates.safeCycle sourceCycle))).graph) =
+                      (coordinates.safeCycle sourceCycle)))) =
             _
         rfl
 

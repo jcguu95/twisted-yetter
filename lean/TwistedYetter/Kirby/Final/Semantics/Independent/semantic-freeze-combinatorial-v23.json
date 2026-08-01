@@ -1,0 +1,87 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v23",
+  "recorded_at_utc": "2026-08-01T15:10:46Z",
+  "semantic_content_parent_commit": "86ce7e1",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v22.json",
+  "historical_v1_through_v22_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXPLICIT_ORDERED_PROJECTOR_SLICE_BOUNDARY",
+    "reason": "Version 22 stored projector-site existence, exact-word matching, and puncture-order correctness as proof fields inside DottedCutData. Version 23 leaves raw cut data in the structure, moves the external existence and completeness trust into the already-explicit topology axiom, and derives left-to-right placement and unchanged exterior context from the transparent event-transition relation.",
+    "removed_proof_fields": [
+      "DottedCutData.projectorSite_exact",
+      "DottedCutData.puncturesHaveNoRepeatedOccurrences"
+    ],
+    "removed_raw_field": "DottedCutData.projectorSite",
+    "named_transparent_predicates": [
+      "DottedCutData.PunctureWordsRespectRecordedOrder",
+      "DottedCutData.EveryDottedComponentHasUniqueProjectorEvent",
+      "DottedCutData.EveryProjectorEventUsesExactPunctureWord",
+      "DottedCutData.ProjectorPortsOccurInRecordedOrder",
+      "DottedCutData.ProjectorExteriorContextIsUnchanged"
+    ],
+    "derived_theorems": [
+      "DottedCutData.projectorPortsOccurInRecordedOrder",
+      "DottedCutData.projectorExteriorContextIsUnchanged"
+    ],
+    "explicit_trust_boundary": "standardDottedProjectorEventCompleteness",
+    "axiom_count_changed": false,
+    "final_theorem_signature_changed": false,
+    "adds_proof_hole": false
+  },
+  "ordering_semantics": {
+    "puncture_word": "A List whose order is the recorded left-to-right order at the projector slice.",
+    "global_active_order": "CutOpenExteriorTrace.activeOrder records every active strand from left to right at each event level.",
+    "contiguous_local_block": "CutOpenEventTransition expresses the projector ports as one contiguous block inside a full active order.",
+    "fixed_exterior": "The same left and right context occurs before and after the projector event."
+  },
+  "proof_status": {
+    "independent_entry_build": "PASS_8262_JOBS",
+    "full_final_route_build": "PASS_8275_JOBS",
+    "final_axiom_audit": "PASS",
+    "red_team_source_audit": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_source_axiom_count": 24,
+    "red_team_likely_proof_field_count": 57,
+    "red_team_json": "/private/tmp/projector-order-red-team-v5.json",
+    "red_team_markdown": "/private/tmp/projector-order-red-team-v5.zh-TW.md"
+  },
+  "final_theorem": {
+    "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+    "project_axiom_count": 24,
+    "standard_lean_axiom_count": 3,
+    "total_axiom_count": 27,
+    "contains_sorryAx": false,
+    "contains_representative_independence_axiom": false,
+    "contains_local_invariance_axiom": false,
+    "contains_evaluator_equality_axiom": false
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "required_prefix": "000",
+    "padding_is_comment_only": true
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000a863f2be8be75278cc6f8f56f04c72a963b646d1b097dbf826e1bea1e6d1e",
+    "DottedTopologyAxioms.lean": "0003fffcc385de385e34011b5abc792ae1f363cf4b9fa95f3d2ea93b34456085",
+    "EntranceAxioms.lean": "000303015506b3863553dbdc1f3e81542fc007dee2beac103ca75d58fcbcc4a0",
+    "Entry.lean": "0001e53fde274e1b3468ab61f58fbfde32feb9f8e314260861bc11c539b0a626",
+    "Evaluator.lean": "000a8b38c66f748444d2a290c18882c8368336d9f929ce45693ff4573c07ac91",
+    "Graphical.lean": "00069dbf609e756921678e5b93e10c46622d575c37f4758af773a6279339f8ad",
+    "Homology.lean": "000105986fbdb1d037174c5f745a8bfd345beb48588f15a9cc3fbfd65a3fdc4c",
+    "IntrinsicDottedCut.lean": "00003d0e3b696130b27c1c31ac04559c88e2cdf101a1b02f75e37d0e0a5942bf",
+    "IntrinsicDottedCutGraphical.lean": "000d5572d1b14ccf7b770313a13e4bdf5baa3031cf5f617629e74200de4f89c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "000e0c9882ec24afa92abf0b1f2538ab204d835dd541671007d43654f2dc6e5f",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "A transparent def does not appear in #print axioms; its human meaning still requires semantic source review.",
+    "The source red-team audit is not globally PASS; 57 conservative proof-field findings remain.",
+    "Kernel compilation does not certify that each topology boundary matches the intended human theorem.",
+    "This freeze does not identify X versus X* or a character exponent from dotted-disk direction."
+  ]
+}

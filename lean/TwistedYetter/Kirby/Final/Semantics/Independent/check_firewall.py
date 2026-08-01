@@ -35,8 +35,10 @@ def main() -> int:
         for line_number, line in enumerate(text.splitlines(), start=1):
             if line.startswith("import "):
                 module = line.removeprefix("import ").strip()
-                if module != "Mathlib" and not module.startswith(
-                    INDEPENDENT_PREFIX
+                if not (
+                    module == "Mathlib"
+                    or module.startswith("Mathlib.")
+                    or module.startswith(INDEPENDENT_PREFIX)
                 ):
                     failures.append(
                         f"{path.name}:{line_number}: forbidden import {module}"
