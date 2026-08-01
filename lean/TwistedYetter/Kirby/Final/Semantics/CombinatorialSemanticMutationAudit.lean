@@ -38,12 +38,12 @@ theorem puncture_two_handle_cannot_be_dotted
       ComponentRole.dotted :=
   puncture.two_handle_role
 
-theorem puncture_intersection_sign_is_signed
+theorem puncture_direction_has_an_incidence_side
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace) :
-    puncture.direction.intersectionSign = 1 ∨
-      puncture.direction.intersectionSign = -1 := by
-  cases puncture.direction <;> simp [PunctureDirection.intersectionSign]
+    puncture.direction.incidenceSide = .inbound ∨
+      puncture.direction.incidenceSide = .outbound := by
+  cases puncture.direction <;> simp [PunctureDirection.incidenceSide]
 
 theorem cut_boundary_ribbon_direction_comes_from_the_strand
     {K : Type} [Field K] [IsAlgClosed K] [CharZero K]

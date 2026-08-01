@@ -28,32 +28,6 @@ noncomputable section
 
 abbrev HandleChainGroup (count : ℕ) := Fin count → ℤ
 
-/-- Signed intersection count of one puncture word with one component. -/
-def punctureIntersectionCoefficient
-    {trace : CombinatorialLinkTrace}
-    (punctures : List (DottedPuncture trace))
-    (twoHandle : trace.ComponentId) : ℤ := by
-  classical
-  exact
-    punctures.foldl
-      (fun (total : ℤ) (puncture : DottedPuncture trace) =>
-        if puncture.twoHandleComponent = twoHandle then
-          total + puncture.direction.intersectionSign
-        else
-          total)
-      (0 : ℤ)
-
-def twoOneIncidence
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (one : Fin diagram.handles.hOne)
-    (two : Fin diagram.handles.hTwo) : ℤ := by
-  classical
-  let dotted := diagram.handles.oneHandleIndex one
-  let twoHandle := diagram.handles.twoHandleIndex two
-  exact punctureIntersectionCoefficient
-    (diagram.dottedCuts.punctureWord dotted.1 dotted.2)
-    twoHandle.1
-
 /-- Signed incidence count written using intrinsic input/output variance. -/
 def intrinsicDottedCutBoundaryCoefficient
     {trace : CombinatorialLinkTrace}
@@ -71,34 +45,25 @@ def intrinsicDottedCutBoundaryCoefficient
           total)
       (0 : ℤ)
 
-theorem punctureIntersectionSign_eq_incidenceContribution
-    (direction : PunctureDirection) :
-    direction.intersectionSign =
-      match direction.incidenceSide with
-      | .inbound => -1
-      | .outbound => 1 := by
-  cases direction <;> rfl
-
-private theorem foldl_intersectionSign_eq_intrinsicBoundaryCoefficient
-    {trace : CombinatorialLinkTrace}
-    (punctures : List (DottedPuncture trace))
-    (twoHandle : trace.ComponentId) :
-    punctureIntersectionCoefficient punctures twoHandle =
-      intrinsicDottedCutBoundaryCoefficient punctures twoHandle := by
-  classical
-  unfold punctureIntersectionCoefficient
-    intrinsicDottedCutBoundaryCoefficient
-  apply congrArg (fun step => punctures.foldl step (0 : ℤ))
-  funext total puncture
-  by_cases component_eq : puncture.twoHandleComponent = twoHandle
-  · simp only [component_eq, ↓reduceIte]
-    cases puncture.direction <;> rfl
-  · simp only [component_eq, ↓reduceIte]
-
-/--
-The old signed puncture count and the intrinsic output-minus-input convention
-are definitionally the same finite incidence calculation.
+/-!
+There is deliberately no separate map `PunctureDirection → ℤ`.  The only
+integer extracted from dotted-cut variance is this aggregate boundary
+coefficient: output occurrences minus input occurrences.  In particular it
+cannot be reused as a ribbon duality choice or as the evaluator's cycle
+exponent.
 -/
+
+def twoOneIncidence
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (one : Fin diagram.handles.hOne)
+    (two : Fin diagram.handles.hTwo) : ℤ :=
+  intrinsicDottedCutBoundaryCoefficient
+    (diagram.dottedCuts.punctureWord
+      (diagram.handles.oneHandleIndex one).1
+      (diagram.handles.oneHandleIndex one).2)
+    (diagram.handles.twoHandleIndex two).1
+
+/-- The public incidence entry is exactly the aggregate boundary coefficient. -/
 theorem twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
     (diagram : CombinatorialSpecialKirbyDiagram)
     (one : Fin diagram.handles.hOne)
@@ -108,13 +73,7 @@ theorem twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
         (diagram.dottedCuts.punctureWord
           (diagram.handles.oneHandleIndex one).1
           (diagram.handles.oneHandleIndex one).2)
-        (diagram.handles.twoHandleIndex two).1 := by
-  simpa only [twoOneIncidence] using
-    foldl_intersectionSign_eq_intrinsicBoundaryCoefficient
-      (diagram.dottedCuts.punctureWord
-        (diagram.handles.oneHandleIndex one).1
-        (diagram.handles.oneHandleIndex one).2)
-      (diagram.handles.twoHandleIndex two).1
+        (diagram.handles.twoHandleIndex two).1 := rfl
 
 /-- The primal cellular boundary `C₂ → C₁` in ordinary Kirby terminology. -/
 def primalBoundaryTwo
@@ -464,4 +423,5 @@ def HomologicallyMarkedDiagram.thamAlpha
 end
 
 end TwistedYetter.Semantics.Independent
--- semantic-freeze-padding: 1580
+
+-- semantic-freeze-padding: 1530

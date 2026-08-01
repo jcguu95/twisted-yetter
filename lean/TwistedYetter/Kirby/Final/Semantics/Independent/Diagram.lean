@@ -37,10 +37,6 @@ inductive PunctureDirection
   | againstDiskOrientation
   deriving DecidableEq, Repr
 
-def PunctureDirection.intersectionSign : PunctureDirection → ℤ
-  | .withDiskOrientation => 1
-  | .againstDiskOrientation => -1
-
 /--
 Which side of the local dotted-handle morphism contains one incidence.
 
@@ -533,49 +529,6 @@ def DottedCollarBendingPath.FollowsExactBendingTransitions
       (path.events i).IsDottedCollarBending)
 
 /--
-A finite, category-neutral local movie for one dotted-handle incidence.
-
-Its source contains exactly the inbound occurrences and its target contains
-exactly the outbound occurrences.  Cups, caps, crossings, twists and isotopy
-may move between those boundaries, and exactly one event is the recorded
-all-strand projector waist.  No category object, character, morphism, or
-evaluation equality is stored here.
--/
-structure DottedIncidenceMovie
-    (trace : CombinatorialLinkTrace)
-    (dotted : trace.ComponentId)
-    (punctures : List (DottedPuncture trace)) where
-  eventCount : ℕ
-  events : Fin eventCount → CutOpenEvent trace
-  activeOrder : Fin (eventCount + 1) → List trace.StrandId
-
-/--
-The transparent combinatorial conditions for a local incidence movie.
-
-Disk direction occurs only in the two endpoint words.  In particular, this
-predicate contains no equation selecting a dual object or a character power.
--/
-def DottedIncidenceMovie.HasExactIncidenceBoundary
-    {trace : CombinatorialLinkTrace}
-    {dotted : trace.ComponentId}
-    {punctures : List (DottedPuncture trace)}
-    (movie : DottedIncidenceMovie trace dotted punctures) : Prop :=
-  movie.activeOrder 0 = dottedInboundStrandWord punctures ∧
-    movie.activeOrder (Fin.last movie.eventCount) =
-      dottedOutboundStrandWord punctures ∧
-    (∀ i : Fin movie.eventCount,
-      CutOpenEventTransition (movie.events i)
-        (movie.activeOrder i.castSucc)
-        (movie.activeOrder i.succ)) ∧
-    (∀ i : Fin movie.eventCount,
-      (movie.events i).StrandContinuationsAreWellFormed) ∧
-    (∃! i : Fin movie.eventCount,
-      movie.events i = .projectorHole dotted punctures) ∧
-    (∀ i : Fin movie.eventCount,
-      movie.events i = .projectorHole dotted punctures ∨
-        (movie.events i).IsDottedCollarBending)
-
-/--
 The complete exterior ribbon tangle after all dotted disks have been cut.
 
 This is the data that was absent from frozen v3.  Puncture words alone say
@@ -727,4 +680,4 @@ structure CombinatorialSpecialKirbyDiagram where
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 1350
+-- semantic-freeze-padding: 1981

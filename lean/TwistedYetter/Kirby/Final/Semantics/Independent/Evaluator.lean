@@ -173,8 +173,8 @@ def simpleLabelWordObject
 /--
 The exact type of the local dotted-handle morphism required by the corrected
 representative-independence proof.  This is only a type, not an assumed
-morphism and not an evaluation equality.  Constructing its canonical term
-from `standardDottedIncidenceNormalForm` is the next proof obligation.
+morphism and not an evaluation equality.  `intrinsicDottedCutMorphism`
+constructs a term of this type from the independent intrinsic ribbon grammar.
 -/
 def DottedIncidenceMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -919,15 +919,105 @@ noncomputable def compileDottedCollarBendingPathMorphism
       eqToHom final_object_eq
 
 /--
-Compile one event at its certified position in the global cut-open trace.
-Ordinary ribbon events use the elementary compiler.  Projector-event
-completeness first identifies every projector marker with one literal dotted
-component; the marker is then compiled as its all-strand waist endomorphism.
+An event uses the exact puncture word recorded for its literal dotted
+component.  Non-projector events satisfy this predicate trivially.
 
-The inbound/outbound incidence movie is deliberately not used here.  Its
-purpose is to construct the mate morphism used by representative independence,
-not to redefine the presentation evaluator.
+This predicate is category-neutral.  In particular, it does not relate dotted
+direction to object duality or to a character exponent.
 -/
+def CutOpenEvent.UsesExactDottedPunctureWord
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) : CutOpenEvent trace → Prop
+  | .projectorHole dotted punctures =>
+      ∃ role : (trace.components dotted).role = .dotted,
+        punctures = cut.punctureWord dotted role
+  | _ => True
+
+theorem DottedCutData.exteriorEvent_usesExactDottedPunctureWord
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace)
+    (complete : cut.ProjectorEventsExactlyMatchDottedComponents)
+    (i : Fin cut.exterior.eventCount) :
+    (cut.exterior.events i).UsesExactDottedPunctureWord cut := by
+  generalize eventEq : cut.exterior.events i = event
+  cases event with
+  | projectorHole dotted punctures =>
+      obtain ⟨role, _indexEq, puncturesEq⟩ :=
+        cut.projectorEvent_hasExactPunctureWord
+          complete i dotted punctures eventEq
+      exact ⟨role, puncturesEq⟩
+  | birth => trivial
+  | death => trivial
+  | crossing => trivial
+  | framingTwist => trivial
+  | planarIsotopy => trivial
+
+/--
+Compile an explicit event from its exact role certificate.  Component labels
+and forward/dual choices still come solely from `exteriorWord`; the role
+certificate only ensures that a projector marker uses the puncture word of the
+literal dotted component that created it.
+-/
+noncomputable def compileRoleAwareCutOpenEventMorphism
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (exact : event.UsesExactDottedPunctureWord diagram.dottedCuts) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling event.beforeWord) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling event.afterWord) := by
+  cases event with
+  | projectorHole dotted punctures =>
+      let role := Classical.choose exact
+      have punctures_eq := Classical.choose_spec exact
+      rw [punctures_eq]
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.projectorHole dotted
+          (diagram.dottedCuts.punctureWord dotted role)) (by
+            simpa only [punctures_eq] using pairing)
+  | birth left right =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.birth left right) pairing
+  | death left right =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.death left right) pairing
+  | crossing overInput underInput overOutput underOutput sign =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.crossing overInput underInput overOutput underOutput sign) pairing
+  | framingTwist input output sign =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.framingTwist input output sign) pairing
+  | planarIsotopy continuations =>
+      exact compileCutOpenEventMorphism 𝒞 diagram labeling
+        (.planarIsotopy continuations) pairing
+
+theorem compileRoleAwareCutOpenEventMorphism_eq_elementary
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (exact : event.UsesExactDottedPunctureWord diagram.dottedCuts) :
+    compileRoleAwareCutOpenEventMorphism
+        𝒞 diagram labeling event pairing exact =
+      compileCutOpenEventMorphism 𝒞 diagram labeling event pairing := by
+  cases event with
+  | projectorHole =>
+      rcases exact with ⟨role, puncturesEq⟩
+      cases puncturesEq
+      rfl
+  | birth => rfl
+  | death => rfl
+  | crossing => rfl
+  | framingTwist => rfl
+  | planarIsotopy => rfl
+
+/-- Compile one event at its certified position in the global cut-open trace. -/
 noncomputable def compileRoleAwareCutOpenEventAt
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -939,48 +1029,30 @@ noncomputable def compileRoleAwareCutOpenEventAt
           (diagram.dottedCuts.exterior.events i).beforeWord) ⟶
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events i).afterWord) := by
-  generalize event_eq : diagram.dottedCuts.exterior.events i = event
-  cases event with
-  | projectorHole dotted punctures =>
-      let exactWitness :=
-        diagram.dottedCuts.projectorEvent_hasExactPunctureWord
-          (standardDottedProjectorEventCompleteness diagram)
-          i dotted punctures event_eq
-      let role := Classical.choose exactWitness
-      have exactData := Classical.choose_spec exactWitness
-      have punctures_eq := exactData.2
-      rw [punctures_eq]
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.projectorHole dotted
-          (diagram.dottedCuts.punctureWord dotted role)) (by
-            simpa only [event_eq, punctures_eq] using
-              diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-  | birth left right =>
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.birth left right) (by
-          simpa only [event_eq] using
-            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-  | death left right =>
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.death left right) (by
-          simpa only [event_eq] using
-            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-  | crossing overInput underInput overOutput underOutput sign =>
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.crossing overInput underInput overOutput underOutput sign) (by
-          simpa only [event_eq] using
-            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-  | framingTwist input output sign =>
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.framingTwist input output sign) (by
-          simpa only [event_eq] using
-            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-  | planarIsotopy continuations =>
-      exact compileCutOpenEventMorphism 𝒞 diagram labeling
-        (.planarIsotopy continuations) (by
-          simpa only [event_eq] using
-            diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+          (diagram.dottedCuts.exterior.events i).afterWord) :=
+  compileRoleAwareCutOpenEventMorphism 𝒞 diagram labeling
+    (diagram.dottedCuts.exterior.events i)
+    (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+    (diagram.dottedCuts.exteriorEvent_usesExactDottedPunctureWord
+      (standardDottedProjectorEventCompleteness diagram) i)
+
+theorem compileRoleAwareCutOpenEventAt_eq_elementary
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i =
+      compileCutOpenEventMorphism 𝒞 diagram labeling
+        (diagram.dottedCuts.exterior.events i)
+        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i) := by
+  unfold compileRoleAwareCutOpenEventAt
+  exact compileRoleAwareCutOpenEventMorphism_eq_elementary
+    𝒞 diagram labeling
+    (diagram.dottedCuts.exterior.events i)
+    (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+    (diagram.dottedCuts.exteriorEvent_usesExactDottedPunctureWord
+      (standardDottedProjectorEventCompleteness diagram) i)
 
 /-- Add the exact common exterior context to one role-aware event. -/
 noncomputable def compileRoleAwareContextualCutOpenEventMorphism
@@ -1168,4 +1240,4 @@ def RepresentativeIndependenceStatement
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 2880
+-- semantic-freeze-padding: 5238

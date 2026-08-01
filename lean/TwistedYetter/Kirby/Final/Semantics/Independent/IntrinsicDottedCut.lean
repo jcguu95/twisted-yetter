@@ -134,3 +134,5 @@ structure IntrinsicDottedCutTangle
       (intrinsicDottedCutOutputWord diagram punctures))
 
 end TwistedYetter.Semantics.Independent
+
+-- semantic-freeze-padding: 3615

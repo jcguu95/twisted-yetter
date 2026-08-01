@@ -186,6 +186,22 @@ theorem transport_sandwich_heq
     (CategoryTheory.comp_eqToHom_heq _ _).trans
       (CategoryTheory.eqToHom_comp_heq _ _)
 
+/-- The local role-aware compiler agrees with the elementary interpretation
+of the exact event stored at the same trace index. -/
+theorem compileRoleAwareCutOpenEventAt_heq_elementary
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    HEq (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i)
+      (compileCutOpenEventMorphism 𝒞 diagram labeling
+        (diagram.dottedCuts.exterior.events i)
+        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)) := by
+  exact heq_of_eq
+    (compileRoleAwareCutOpenEventAt_eq_elementary
+      𝒞 diagram labeling i)
+
 noncomputable def compiledExteriorTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -198,7 +214,7 @@ noncomputable def compiledExteriorTrace
       (exteriorWord 𝒞 diagram labeling
         (diagram.dottedCuts.exterior.activeOrder i))
   edge i :=
-    compileContextualCutOpenEventMorphism 𝒞 diagram labeling i
+    compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram labeling i
 
 noncomputable def compiledExteriorTraceFromUnit
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
@@ -812,7 +828,7 @@ theorem serializePuncture_injective
   simp [serializePuncture] at equality
   rcases equality with
     ⟨dottedEq, twoHandleEq, inputEq, outputEq,
-      directionEq, exponentEq, positionEq⟩
+      directionEq, positionEq⟩
   cases Fin.ext dottedEq
   cases Fin.ext inputEq
   cases Fin.ext outputEq
@@ -1815,6 +1831,71 @@ theorem compileContextualCutOpenEventMorphism_heq_core
     (CategoryTheory.comp_eqToHom_heq _ _).trans
       (CategoryTheory.comp_eqToHom_heq _ _)
 
+theorem compileRoleAwareContextualCutOpenEventMorphism_heq_core
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    HEq
+      (compileRoleAwareContextualCutOpenEventMorphism
+        𝒞 diagram labeling event)
+      (contextualizeRibbonMorphism 𝒞
+        (exteriorWord 𝒞 diagram labeling
+          (eventLeftContext diagram event))
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.events event).beforeWord)
+        (exteriorWord 𝒞 diagram labeling
+          (diagram.dottedCuts.exterior.events event).afterWord)
+        (exteriorWord 𝒞 diagram labeling
+          (eventRightContext diagram event))
+        (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling event)) := by
+  unfold compileRoleAwareContextualCutOpenEventMorphism
+  simp only
+  simp only [CategoryTheory.eqToHom_comp_heq_iff]
+  rw [← Category.assoc]
+  exact
+    (CategoryTheory.comp_eqToHom_heq _ _).trans
+      (CategoryTheory.comp_eqToHom_heq _ _)
+
+/--
+For one certified trace event, adding the same exact exterior context preserves
+the equality between the role-aware and elementary event interpretations.  The
+projector branch uses only the exact puncture-word completeness certificate;
+puncture direction does not select a dual or a character exponent.
+-/
+theorem compileRoleAwareContextualCutOpenEventMorphism_heq_elementary
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    HEq
+      (compileRoleAwareContextualCutOpenEventMorphism
+        𝒞 diagram labeling event)
+      (compileContextualCutOpenEventMorphism 𝒞 diagram labeling event) := by
+  exact
+    (compileRoleAwareContextualCutOpenEventMorphism_heq_core
+      𝒞 diagram labeling event).trans
+      ((contextualizeRibbonMorphism_heq 𝒞 rfl rfl rfl rfl
+        (compileRoleAwareCutOpenEventAt_heq_elementary
+          𝒞 diagram labeling event)).trans
+        (compileContextualCutOpenEventMorphism_heq_core
+          𝒞 diagram labeling event).symm)
+
+theorem compileRoleAwareContextualCutOpenEventMorphism_eq_elementary
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    compileRoleAwareContextualCutOpenEventMorphism
+        𝒞 diagram labeling event =
+      compileContextualCutOpenEventMorphism 𝒞 diagram labeling event :=
+  eq_of_heq
+    (compileRoleAwareContextualCutOpenEventMorphism_heq_elementary
+      𝒞 diagram labeling event)
+
 theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -2423,13 +2504,15 @@ theorem standardOneTwoBirth_dropThreeTrace_eq_source
         sourceLabeling newLabel state)
   · intro event
     change HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel)
         ⟨event.1 + 3, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩)
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 source.diagram
         sourceLabeling event)
+    rw [compileRoleAwareContextualCutOpenEventMorphism_eq_elementary,
+      compileRoleAwareContextualCutOpenEventMorphism_eq_elementary]
     simpa [standardOneTwoBirthOldEventIndex] using
       standardOneTwoBirth_oldContextualMorphism
         𝒞 coordinates coordinateBinding normalForm
@@ -2478,7 +2561,8 @@ theorem standardOneTwoBirth_prefixThreeMorphism
   have assembledValue := assembled.trans localMorphism
   apply castPrefix.trans
   simp only [FiniteMorphismTrace.composePrefix,
-    compiledExteriorTrace, Category.id_comp]
+    compiledExteriorTrace, Category.id_comp,
+    compileRoleAwareContextualCutOpenEventMorphism_eq_elementary]
   apply middle_heq_of_transport_sandwich_eq
   simpa [oneTwoEventIndexZero, oneTwoEventIndexOne,
     oneTwoEventIndexTwo, Category.assoc] using assembledValue

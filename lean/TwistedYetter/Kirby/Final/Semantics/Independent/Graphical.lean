@@ -678,6 +678,138 @@ theorem RibbonExpressionContext.plug_interpret_eq_of_interpret_eq
       simp only [RibbonExpressionContext.plug, RibbonExpression.interpret]
       rw [inductionHypothesis]
 
+/-!
+## Linear one-hole contexts
+
+Representative independence needs an exterior context which is genuinely
+linear in the local cut morphism.  The more general context above also has
+`addLeft` and `addRight` constructors, so it is affine in its hole.  The
+restricted grammar below contains only operations which preserve zero and
+addition in the distinguished hole.
+-/
+
+/--
+A typed one-hole ribbon-expression context that is linear in its hole.
+
+This is graphical syntax, not an arbitrary function and not a correctness
+certificate.  In particular, there are no constructors that add a fixed
+summand to the hole.
+-/
+inductive LinearRibbonExpressionContext
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K)
+    (X Y : 𝒞.C) :
+    𝒞.C → 𝒞.C → Type (max uK uC uS v)
+  | hole :
+      LinearRibbonExpressionContext 𝒞 X Y X Y
+  | composeLeft {A P Q : 𝒞.C}
+      (before : RibbonExpression 𝒞 A P)
+      (context : LinearRibbonExpressionContext 𝒞 X Y P Q) :
+      LinearRibbonExpressionContext 𝒞 X Y A Q
+  | composeRight {P Q B : 𝒞.C}
+      (context : LinearRibbonExpressionContext 𝒞 X Y P Q)
+      (suffix : RibbonExpression 𝒞 Q B) :
+      LinearRibbonExpressionContext 𝒞 X Y P B
+  | tensorLeft {A B P Q : 𝒞.C}
+      (left : RibbonExpression 𝒞 A B)
+      (context : LinearRibbonExpressionContext 𝒞 X Y P Q) :
+      LinearRibbonExpressionContext 𝒞 X Y (A ⊗ P) (B ⊗ Q)
+  | tensorRight {A B P Q : 𝒞.C}
+      (context : LinearRibbonExpressionContext 𝒞 X Y A B)
+      (right : RibbonExpression 𝒞 P Q) :
+      LinearRibbonExpressionContext 𝒞 X Y (A ⊗ P) (B ⊗ Q)
+
+def LinearRibbonExpressionContext.plug
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {X Y A B : 𝒞.C}
+    (context : LinearRibbonExpressionContext 𝒞 X Y A B)
+    (term : RibbonExpression 𝒞 X Y) :
+    RibbonExpression 𝒞 A B :=
+  match context with
+  | .hole => term
+  | .composeLeft before rest =>
+      .compose before (rest.plug term)
+  | .composeRight rest suffix =>
+      .compose (rest.plug term) suffix
+  | .tensorLeft left rest =>
+      .tensor left (rest.plug term)
+  | .tensorRight rest right =>
+      .tensor (rest.plug term) right
+
+/-- Interpretation of a linear graphical context as an actual linear map. -/
+noncomputable def LinearRibbonExpressionContext.interpretLinearMap
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {X Y A B : 𝒞.C}
+    (context : LinearRibbonExpressionContext 𝒞 X Y A B) :
+    (X ⟶ Y) →ₗ[K] (A ⟶ B) :=
+  match context with
+  | .hole => LinearMap.id
+  | .composeLeft before rest =>
+      { toFun := fun term => before.interpret ≫ rest.interpretLinearMap term
+        map_add' := by intro left right; simp
+        map_smul' := by intro scalar term; simp }
+  | .composeRight rest suffix =>
+      { toFun := fun term => rest.interpretLinearMap term ≫ suffix.interpret
+        map_add' := by intro left right; simp
+        map_smul' := by intro scalar term; simp }
+  | .tensorLeft left rest =>
+      { toFun := fun term => left.interpret ⊗ₘ rest.interpretLinearMap term
+        map_add' := by
+          intro first second
+          rw [map_add]
+          exact MonoidalPreadditive.tensor_add _ _ _
+        map_smul' := by
+          intro scalar term
+          rw [map_smul]
+          simp [MonoidalCategory.tensorHom_def] }
+  | .tensorRight rest right =>
+      { toFun := fun term => rest.interpretLinearMap term ⊗ₘ right.interpret
+        map_add' := by
+          intro first second
+          rw [map_add]
+          exact MonoidalPreadditive.add_tensor _ _ _
+        map_smul' := by
+          intro scalar term
+          rw [map_smul]
+          simp [MonoidalCategory.tensorHom_def] }
+
+theorem LinearRibbonExpressionContext.plug_interpret
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {X Y A B : 𝒞.C}
+    (context : LinearRibbonExpressionContext 𝒞 X Y A B)
+    (term : X ⟶ Y) :
+    (context.plug (.morphism term)).interpret =
+      context.interpretLinearMap term := by
+  induction context with
+  | hole => rfl
+  | composeLeft before context inductionHypothesis =>
+      simp only [LinearRibbonExpressionContext.plug,
+        RibbonExpression.interpret,
+        LinearRibbonExpressionContext.interpretLinearMap]
+      rw [inductionHypothesis]
+      rfl
+  | composeRight context suffix inductionHypothesis =>
+      simp only [LinearRibbonExpressionContext.plug,
+        RibbonExpression.interpret,
+        LinearRibbonExpressionContext.interpretLinearMap]
+      rw [inductionHypothesis]
+      rfl
+  | tensorLeft left context inductionHypothesis =>
+      simp only [LinearRibbonExpressionContext.plug,
+        RibbonExpression.interpret,
+        LinearRibbonExpressionContext.interpretLinearMap]
+      rw [inductionHypothesis]
+      rfl
+  | tensorRight context right inductionHypothesis =>
+      simp only [LinearRibbonExpressionContext.plug,
+        RibbonExpression.interpret,
+        LinearRibbonExpressionContext.interpretLinearMap]
+      rw [inductionHypothesis]
+      rfl
+
 def fusionInclusionExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
@@ -1130,4 +1262,4 @@ noncomputable def canonicalRibbonGraphicalEvaluation
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 142
+-- semantic-freeze-padding: 122

@@ -1,0 +1,77 @@
+{
+  "schema": "intrinsic-dotted-representative-independence-checkpoint-v1",
+  "recorded_at_utc": "2026-08-01T14:30:59Z",
+  "base_git_commit": "cb4b989a9da342952a79479071c13f62e2e39809",
+  "dirty_state_expected": true,
+  "status": "PASS_INTRINSIC_REPRESENTATIVE_INDEPENDENCE_ESTABLISHED",
+  "established": [
+    {
+      "lean_name": "intrinsicDottedCut_boundaryRatio_absorbs",
+      "meaning": "The output-to-input character ratio acts trivially on an intrinsic dotted-cut morphism."
+    },
+    {
+      "lean_name": "intrinsicBoundaryCharacterRatio_eq_incidenceProduct",
+      "meaning": "The output-to-input ratio equals the component-wise THAM boundary-row factor; puncture direction is used only for domain/codomain variance."
+    },
+    {
+      "lean_name": "twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation",
+      "meaning": "For one dotted handle, its THAM boundary-row factor is absorbed in the exact frozen canonical evaluation."
+    },
+    {
+      "lean_name": "intrinsicFrozenFrontendRepresentativeIndependence",
+      "meaning": "The frozen role-aware cycle evaluator depends only on the THAM-side H2 class."
+    },
+    {
+      "lean_name": "frozenFrontendRepresentativeIndependence",
+      "meaning": "The public frozen-frontend representative-independence theorem is discharged by the intrinsic route."
+    }
+  ],
+  "semantic_firewall": {
+    "component_colour_from_dotted_direction": false,
+    "dualization_from_dotted_direction": false,
+    "cycle_character_exponent_from_dotted_direction": false,
+    "puncture_direction_to_integer_api_exists": false,
+    "incidence_use": "Only intrinsic output-versus-input boundary bookkeeping; the THAM chain coefficient supplies the character exponent."
+  },
+  "explicit_trust_boundaries": [
+    "IntrinsicDottedCutRegluingWitness",
+    "standardIntrinsicDottedCutRealization",
+    "intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation",
+    "standardDottedProjectorEventCompleteness",
+    "shum_framedRibbonCoherence"
+  ],
+  "remaining_blocker": null,
+  "claims": {
+    "local_intrinsic_character_absorption": "ESTABLISHED",
+    "representative_independence": "ESTABLISHED_CONDITIONAL_ON_EXPLICIT_TOPOLOGY_AND_CATEGORY_BOUNDARIES",
+    "premodular_four_manifold_invariant": "KERNEL_CHECKED_CONDITIONAL_ON_FINAL_EXPLICIT_AXIOM_CLOSURE"
+  },
+  "verification": {
+    "narrow_build_command": "lake build TwistedYetter.Kirby.Final.Proofs.IntrinsicRepresentativeIndependence",
+    "final_build_command": "lake build TwistedYetter.Kirby.Final.TwistedYetter",
+    "full_build_command": "lake build",
+    "build_status": "PASS_AFTER_FINAL_FREEZE_PADDING",
+    "axiom_audit_command": "lake env lean lean/TwistedYetter/Kirby/Final/FinalAxiomAudit.lean",
+    "axiom_audit_status": "PASS_AFTER_FINAL_FREEZE_PADDING",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_axiom_count": 24,
+    "source_red_team_likely_proof_field_count": 59,
+    "source_red_team_json": "/private/tmp/dotted-disc-final-red-team-v4.json",
+    "source_red_team_markdown": "/private/tmp/dotted-disc-final-red-team-v4.zh-TW.md",
+    "ctl_admission_status": "BLOCKED_MISSING_SIBLING_CTL_PROVIDER"
+  },
+  "environment": {
+    "os": "macOS 15.7.2 (24G325)",
+    "architecture": "arm64",
+    "lean": "4.29.1 f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "maximum_concurrent_lean_processes_used": 1,
+    "lean_processes_left_running": 0
+  },
+  "non_claims": [
+    "The source red-team audit is not globally PASS; its conservative proof-field findings still require human review.",
+    "Puncture direction does not determine X versus X*.",
+    "Puncture direction does not supply the evaluator cycle exponent.",
+    "This checkpoint does not identify the invariant with the original Crane-Yetter state sum."
+  ]
+}

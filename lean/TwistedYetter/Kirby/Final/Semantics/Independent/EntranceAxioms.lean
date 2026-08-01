@@ -1,4 +1,5 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
+import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCutGraphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.OneTwoLocalReplacement
 import TwistedYetter.Kirby.Final.Semantics.Independent.TwoThreeLocalReplacement
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
@@ -21,6 +22,7 @@ certificates are assembled below as theorems from individually named inputs.
 namespace TwistedYetter.Semantics.Independent
 
 open CategoryTheory
+open CategoryTheory.MonoidalCategory
 
 universe uK
 
@@ -68,6 +70,43 @@ axiom shum_framedRibbonCoherence
     {left right : RibbonExpression 𝒞 X Y} :
     FramedRibbonIsotopic left right →
     left.interpret = right.interpret
+
+/-! ## Intrinsic dotted-cut graphical interpretation -/
+
+/--
+Regluing one topologically realized intrinsic dotted cut gives the exact
+compiled closed ribbon graph inside a linear one-hole exterior context.
+
+This is the narrow topology-to-graphical boundary for the intrinsic route.
+It mentions a category only in order to type and interpret the ribbon graph.
+It contains no twisting character, homology exponent, scalar evaluation, or
+representative-independence conclusion.  In particular, dotted direction
+does not choose `X` versus `X*` and does not create a character exponent.
+-/
+axiom intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K)
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (dotted : diagram.trace.ComponentId)
+    (role : (diagram.trace.components dotted).role = .dotted)
+    (cut : IntrinsicDottedCutTangle diagram
+      (diagram.dottedCuts.punctureWord dotted role))
+    (_regluing :
+      IntrinsicDottedCutRegluesToDiagram diagram dotted role cut) :
+    ∃ context : LinearRibbonExpressionContext 𝒞
+        (simpleLabelWordObject 𝒞
+          (dottedInboundLabelWord 𝒞 diagram labeling
+            (diagram.dottedCuts.punctureWord dotted role)))
+        (simpleLabelWordObject 𝒞
+          (dottedOutboundLabelWord 𝒞 diagram labeling
+            (diagram.dottedCuts.punctureWord dotted role)))
+        (𝟙_ 𝒞.C) (𝟙_ 𝒞.C),
+      FramedRibbonIsotopic
+        (context.plug (.morphism
+          (intrinsicDottedCutMorphism 𝒞 diagram labeling cut)))
+        (.morphism
+          (compileCutOpenExteriorMorphism 𝒞 diagram labeling))
 
 /--
 EGNO, canonical pivotal structure of a ribbon category: the tensor unit has
@@ -457,4 +496,4 @@ def TwistedYetterDiffeomorphismInvarianceTarget
 
 end TwistedYetter.Semantics.Independent
 
--- semantic-freeze-padding: 2216
+-- semantic-freeze-padding: 50

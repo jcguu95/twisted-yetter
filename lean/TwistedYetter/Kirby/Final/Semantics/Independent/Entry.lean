@@ -6,6 +6,7 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Evaluator
+import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCutGraphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
 import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
@@ -57,4 +58,4 @@ this import closure must not contain an existing presentation, evaluator,
 move compiler, or comparison bridge.
 -/
 
--- semantic-freeze-padding: 878
+-- semantic-freeze-padding: 14953

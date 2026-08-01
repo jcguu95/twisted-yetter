@@ -1690,13 +1690,15 @@ theorem standardTwoThreeBirth_dropThreeTrace_eq_source
         sourceLabeling newLabel state)
   · intro event
     change HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel)
         ⟨event.1 + 3, by
           rw [standardTwoThreeBirth_eventCount normalForm]
           omega⟩)
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 source.diagram
         sourceLabeling event)
+    rw [compileRoleAwareContextualCutOpenEventMorphism_eq_elementary,
+      compileRoleAwareContextualCutOpenEventMorphism_eq_elementary]
     simpa [standardTwoThreeBirthOldEventIndex] using
       standardTwoThreeBirth_oldContextualMorphism
         𝒞 coordinates coordinateBinding normalForm
@@ -2577,7 +2579,8 @@ theorem standardTwoThreeBirth_prefixThreeMorphism
   have assembledValue := assembled.trans localMorphism
   apply castPrefix.trans
   simp only [FiniteMorphismTrace.composePrefix,
-    compiledExteriorTrace, Category.id_comp]
+    compiledExteriorTrace, Category.id_comp,
+    compileRoleAwareContextualCutOpenEventMorphism_eq_elementary]
   apply middle_heq_of_transport_sandwich_eq
   simpa [twoThreeEventIndexZero, twoThreeEventIndexOne,
     twoThreeEventIndexTwo, Category.assoc] using assembledValue
