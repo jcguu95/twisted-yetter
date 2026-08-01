@@ -348,6 +348,25 @@ noncomputable def ManifoldH₂
     (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
   integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
 
+/--
+Integral second cohomology of a closed oriented smooth four-manifold.
+
+Mathlib supplies the singular-homology object used above but does not provide
+the singular-cohomology interface needed here.  We keep `H²` as explicit
+foundational algebraic-topology vocabulary rather than defining it to be `H₂`
+and thereby hiding Poincare duality in a definition.
+-/
+axiom ManifoldSecondCohomology :
+  ClosedOrientedSmoothFourManifold → AddCommGrpCat.{0}
+
+/--
+Integral Poincare duality for a closed oriented four-manifold:
+`H₂(X; Z) ≃ H²(X; Z)`.  This is an external foundational topology input.
+-/
+axiom manifoldPoincareDuality
+    (X : ClosedOrientedSmoothFourManifold) :
+    ManifoldH₂ X ≃+ ManifoldSecondCohomology X
+
 /-- Functoriality of integral singular homology under an oriented diffeomorphism. -/
 noncomputable def inducedH₂
     {X Y : ClosedOrientedSmoothFourManifold}
@@ -366,16 +385,35 @@ axiom realizeSpecialKirbyDiagram :
   CombinatorialSpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
 
 /--
-The Poincare-duality identification obtained by turning the handle
-decomposition upside down.  The codomain is the homology of the canonical
-transposed THAM complex; callers cannot supply an arbitrary group equivalence.
+The transposed THAM handle complex computes integral second cohomology of the
+realized four-manifold.  This is the cellular/handle comparison on the dual
+handle decomposition, not an evaluator or invariance statement.
 -/
-axiom turnoverPoincareDualityEquiv
+axiom turnedOverHandleComplexComputesSecondCohomology
+    (diagram : CombinatorialSpecialKirbyDiagram)
+    (primal : PrimalDegreeThreeBoundaryData diagram) :
+    ThamKirbyH₂ primal ≃+
+      ManifoldSecondCohomology (realizeSpecialKirbyDiagram diagram)
+
+/--
+The exact turnover identification used by the evaluator.  It is definitionally
+the composite
+
+  primal handle H₂ -> manifold H₂ -> manifold H² -> turned-over handle H₂.
+
+Thus no caller and no axiom may choose an unrelated abstract equivalence
+between the primal and THAM-side groups.
+-/
+noncomputable def turnoverPoincareDualityEquiv
     (diagram : CombinatorialSpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (homologyComparison :
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal
+    PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal :=
+  (homologyComparison.trans
+    (manifoldPoincareDuality
+      (realizeSpecialKirbyDiagram diagram))).trans
+        (turnedOverHandleComplexComputesSecondCohomology diagram primal).symm
 
 /-! ## Explicit classical topology axioms -/
 
@@ -481,6 +519,18 @@ theorem specialKirbyRepresentative_exists
   refine ⟨representative, ?_⟩
   exact homologyComparison.apply_symm_apply alpha
 
+/--
+T3. Marked Kirby--Cerf completeness, including the required naturality of the
+canonical turnover marking.
+
+If two representatives describe classes related by an oriented
+diffeomorphism, there is a finite Kirby movie whose endpoint markings are not
+chosen independently: they are the THAM-side images obtained from each
+representative's primal class through the exact handle-H₂, Poincare-duality,
+and turned-over-handle comparison defined above.  Thus this boundary asserts
+that the classical Kirby--Cerf movie transports that canonical marking; it
+does not permit an arbitrary automorphism of either endpoint H₂ group.
+-/
 axiom markedKirbyCerf_complete
     {X Y : ClosedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y)

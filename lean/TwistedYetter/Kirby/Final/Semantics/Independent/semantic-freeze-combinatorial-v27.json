@@ -1,0 +1,70 @@
+{
+  "schema": "independent-semantic-freeze-combinatorial-v27",
+  "recorded_at_utc": "2026-08-01T20:07:01Z",
+  "semantic_content_parent_commit": "4b0e44f",
+  "recorded_from_dirty_worktree": true,
+  "supersedes": "semantic-freeze-combinatorial-v26.json",
+  "historical_v1_through_v26_preserved": true,
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_change": {
+    "id": "EXPLICIT_POINCARE_DUALITY_TURNOVER_COMPOSITE",
+    "removed_axiom": "turnoverPoincareDualityEquiv",
+    "added_foundational_vocabulary": "ManifoldSecondCohomology",
+    "added_topology_axioms": [
+      "manifoldPoincareDuality",
+      "turnedOverHandleComplexComputesSecondCohomology"
+    ],
+    "derived_definition": "turnoverPoincareDualityEquiv",
+    "derived_composite": "primal handle H2 -> manifold H2 -> manifold H2 cohomology -> turned-over handle H2",
+    "caller_can_choose_abstract_equivalence": false,
+    "marked_naturality_boundary": "markedKirbyCerf_complete",
+    "final_theorem_signature_changed": false,
+    "proof_holes_added": false
+  },
+  "verification": {
+    "independent_entry_build": "PASS_8262_JOBS",
+    "full_final_route_build": "PASS_8275_JOBS",
+    "final_axiom_audit": "PASS",
+    "project_axiom_count": 26,
+    "standard_lean_axiom_count": 3,
+    "contains_old_turnover_axiom": false,
+    "red_team_source_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_likely_proof_field_count": 55,
+    "red_team_json": "/private/tmp/explicit-turnover-red-team-v8.json",
+    "red_team_markdown": "/private/tmp/explicit-turnover-red-team-v8.zh-TW.md"
+  },
+  "hash_policy": {
+    "algorithm": "SHA-256",
+    "full_hashes_recorded": true,
+    "required_prefix": "000",
+    "seal_status": "PENDING_PREFIX_RESEAL",
+    "pending_files": [
+      "EntranceAxioms.lean",
+      "Evaluator.lean",
+      "Homology.lean",
+      "Moves.lean"
+    ]
+  },
+  "files": {
+    "Algebra.lean": "00003f1cd09baed44f338a02b8a23c9d52e86bb23c21563f75df6d88fbc2e195",
+    "Diagram.lean": "000a863f2be8be75278cc6f8f56f04c72a963b646d1b097dbf826e1bea1e6d1e",
+    "DottedTopologyAxioms.lean": "0003fffcc385de385e34011b5abc792ae1f363cf4b9fa95f3d2ea93b34456085",
+    "EntranceAxioms.lean": "55c8be5502159894339f62c76aa7bcaf1f5358c4c374bf7cbc77c9f423f8e710",
+    "Entry.lean": "0001e53fde274e1b3468ab61f58fbfde32feb9f8e314260861bc11c539b0a626",
+    "Evaluator.lean": "23b13bb504b75844ea0caf138930ce11a31594f866564edc100a882993bd4861",
+    "Graphical.lean": "00069dbf609e756921678e5b93e10c46622d575c37f4758af773a6279339f8ad",
+    "Homology.lean": "595ab02b6abe108bbdef5c3cc1a7a4f6ddbf190ea8672b5d41041b2f197252d8",
+    "IntrinsicDottedCut.lean": "00003d0e3b696130b27c1c31ac04559c88e2cdf101a1b02f75e37d0e0a5942bf",
+    "IntrinsicDottedCutGraphical.lean": "000d5572d1b14ccf7b770313a13e4bdf5baa3031cf5f617629e74200de4f89c5",
+    "Invariant.lean": "00047dd5563b06b4812581e20bbc36729251b5f35b27738eaff3b767797151d1",
+    "LocalReplacementSyntax.lean": "000b432a0143ec45766e3bfd32b40bed340ab24e68bd0352e4a8374a874bfe9e",
+    "Moves.lean": "31b99bf0a8204d473c627e77bc80c2b890b70ccba405bff7babf42a6af88654d",
+    "OneTwoLocalReplacement.lean": "0003c27ae621d5785931c6cb6f2eed26e9be3f4bf26a7c21d72b62fd28937210",
+    "TwoThreeLocalReplacement.lean": "000f6917b473c011f621ed0cfea98783ca2ec58fb1f7e8789746dac1c81e7747"
+  },
+  "non_claims": [
+    "The project does not construct singular cohomology or Poincare duality from first principles.",
+    "The two new topology axioms remain explicit human-review obligations.",
+    "Version 27 remains pending comment-prefix resealing."
+  ]
+}
