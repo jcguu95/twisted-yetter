@@ -16,7 +16,7 @@ open CategoryTheory.MonoidalCategory
 universe v u
 
 variable (C : Type u) [Category.{v} C] [MonoidalCategory C]
-  [RigidCategory C] [BraidedCategory C]
+  [RightRigidCategory C] [BraidedCategory C]
 
 /--
 A twist, or balancing transformation, in the sense of EGNO, Definition 8.10.1.

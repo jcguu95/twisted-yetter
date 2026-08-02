@@ -1,5 +1,6 @@
 import TwistedYetter.CategoryTheory.Fusion.Basic
 import TwistedYetter.CategoryTheory.Premodular.Basic
+import TwistedYetter.CategoryTheory.Ribbon.CanonicalSpherical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
 
 /-!
@@ -112,6 +113,7 @@ variable (ambient : PremodularAmbient.{uK, uC, v} K)
 local instance : Category.{v} ambient.C := ambient.category
 local instance : MonoidalCategory ambient.C := ambient.monoidal
 local instance : RigidCategory ambient.C := ambient.rigid
+local instance : RightRigidCategory ambient.C := ambient.rigid.toRightRigidCategory
 local instance : BraidedCategory ambient.C := ambient.braided
 
 variable (data : RibbonStructureData.{uK, uC, v} K ambient)
@@ -140,6 +142,7 @@ local instance : Abelian 𝒞.C := 𝒞.ambient.abelian
 local instance : Linear K 𝒞.C := 𝒞.ambient.linear
 local instance : MonoidalCategory 𝒞.C := 𝒞.ambient.monoidal
 local instance : RigidCategory 𝒞.C := 𝒞.ambient.rigid
+local instance : RightRigidCategory 𝒞.C := 𝒞.ambient.rigid.toRightRigidCategory
 local instance : BraidedCategory 𝒞.C := 𝒞.ambient.braided
 local instance : MonoidalPreadditive 𝒞.C := 𝒞.ambient.monoidalPreadditive
 local instance : MonoidalLinear K 𝒞.C := 𝒞.ambient.monoidalLinear
@@ -155,6 +158,18 @@ Definition 8.13.1.
     CategoryTheory.PremodularCategory.{v, uK, uC, uS} K 𝒞.C where
   toFusionCategory := 𝒞.toFusionCategory
   toRibbonCategory := 𝒞.ribbon.toRibbonCategory 𝒞.ambient
+
+/-- The canonical pivotal structure induced by the frozen ribbon twist. -/
+noncomputable def PremodularFusionCategory.toCanonicalPivotalStructure :
+    CategoryTheory.PivotalStructure 𝒞.C :=
+  CategoryTheory.canonicalPivotalStructure
+    (𝒞.ribbon.toRibbonStructure 𝒞.ambient)
+
+/-- The canonical spherical structure induced by the frozen ribbon twist. -/
+noncomputable def PremodularFusionCategory.toCanonicalSphericalStructure :
+    CategoryTheory.SphericalStructure (C := 𝒞.C) :=
+  CategoryTheory.canonicalSphericalStructure
+    (𝒞.ribbon.toRibbonStructure 𝒞.ambient)
 
 end Premodular
 

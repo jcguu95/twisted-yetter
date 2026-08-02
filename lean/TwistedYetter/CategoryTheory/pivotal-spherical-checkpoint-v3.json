@@ -1,0 +1,110 @@
+{
+  "schema": "twisted-yetter-pivotal-spherical-checkpoint-v3",
+  "created_at_utc": "2026-08-02T05:42:22Z",
+  "base_git_commit": "f610d74623c9b501735e3f377ce66043952b21e1",
+  "supersedes": "twisted-yetter-premodular-category-checkpoint-v2",
+  "status": "CANONICAL_PIVOTAL_AND_RIBBON_TO_SPHERICAL_ESTABLISHED",
+  "scope": {
+    "definitions": [
+      "CategoryTheory.rightDoubleDualFunctor",
+      "CategoryTheory.PivotalStructure",
+      "CategoryTheory.pivotalTrace",
+      "CategoryTheory.pivotalDimension",
+      "CategoryTheory.SphericalStructure"
+    ],
+    "proved_constructions": [
+      "CategoryTheory.canonicalPivotalStructure",
+      "CategoryTheory.canonicalSphericalStructure",
+      "CategoryTheory.PremodularCategory.canonicalSphericalStructure"
+    ],
+    "frozen_bridge": [
+      "TwistedYetter.Semantics.Independent.PremodularFusionCategory.toCanonicalPivotalStructure",
+      "TwistedYetter.Semantics.Independent.PremodularFusionCategory.toCanonicalSphericalStructure"
+    ]
+  },
+  "egno_alignment": [
+    {
+      "locator": "Definition 4.7.7",
+      "implementation": "CategoryTheory.PivotalStructure"
+    },
+    {
+      "locator": "Definition 4.7.11",
+      "implementation": "CategoryTheory.pivotalDimension"
+    },
+    {
+      "locator": "Definition 4.7.14",
+      "implementation": "CategoryTheory.SphericalStructure"
+    },
+    {
+      "locator": "Equation (8.30)",
+      "implementation": "CategoryTheory.drinfeldExpandedHom"
+    },
+    {
+      "locator": "Equations (8.31) and (8.35)",
+      "implementation": "CategoryTheory.drinfeldDoubleDualMonoidal and CategoryTheory.canonicalPivotalStructure"
+    },
+    {
+      "locator": "Proposition 8.10.12, ribbon-to-spherical direction",
+      "implementation": "CategoryTheory.canonicalPivotal_isMonoidal and CategoryTheory.canonicalPivotal_dimension_dual"
+    },
+    {
+      "locator": "Equation (8.41)",
+      "implementation": "CategoryTheory.ribbonLoop and CategoryTheory.canonicalPivotalDimension_eq_ribbonLoop"
+    }
+  ],
+  "source_hashes_sha256": {
+    "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean": "6c79a936f94e4c6577875fa4981880c26f6c064a1aa033d6b35e2ba40babd6e8",
+    "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean": "dd90bba52ea558c5da9b7d4feb75c27d50ed8d0dccd4eb0c0fa09cc40bb3ea42",
+    "lean/TwistedYetter/CategoryTheory/Ribbon/CanonicalPivotal.lean": "a9dd1d1feb8480c72ccfd525fcd7d165e54c0c7b6931985d34c0e95e0b4dbd13",
+    "lean/TwistedYetter/CategoryTheory/Ribbon/CanonicalSpherical.lean": "3b31c5582b3f203921748aa0882921884ebd45d9bc2238412e2dd7de9ee992f6",
+    "lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean": "4eb979fdb655f00a812cd2648ecdb9a502ced4e4f6fef28d1d6bb072df95d6d5",
+    "lean/TwistedYetter/CategoryTheory/Premodular/CanonicalSpherical.lean": "46dec5a200b87ca0b8fdb3b1639602e6ef107249d750a9192230c9ab450eec54",
+    "lean/TwistedYetter/CategoryTheory/Fusion/FrozenBridge.lean": "590ca923f72f0082d3991b2db111e57c1d8caf155eebeb172f9b2bb1a2f85b96",
+    "lean/TwistedYetter/CategoryTheory/PivotalSphericalAxiomAudit.lean": "44522ba77c8a9bf064801114ab59f740b619acbec89e235764d20ceba1b9e586"
+  },
+  "dependency_firewall": {
+    "abstract_core_imports_only_mathlib_or_category_theory_core": true,
+    "frozen_project_import_isolated_to_frozen_bridge": true,
+    "abstract_core_mentions_kirby_evaluator_or_final_theorem": false
+  },
+  "red_team_review": {
+    "source_audit_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "explicit_axioms": 0,
+    "sorry_or_admit": 0,
+    "opaque": 0,
+    "domain_classes": 6,
+    "domain_proof_fields": 10,
+    "new_domain_fields": [
+      {
+        "name": "PivotalStructure.monoidal",
+        "classification": "EGNO_DEFINITION_4_7_7_MONOIDAL_NATURAL_ISOMORPHISM"
+      },
+      {
+        "name": "SphericalStructure.dimension_dual",
+        "classification": "EGNO_DEFINITION_4_7_14"
+      }
+    ],
+    "project_specific_invariance_or_evaluator_correctness_fields": 0,
+    "kernel_axiom_closure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "verified_commands": [
+    "lake build TwistedYetter.CategoryTheory.Ribbon.CanonicalPivotal",
+    "lake build TwistedYetter.CategoryTheory.Ribbon.CanonicalSpherical",
+    "lake build TwistedYetter.CategoryTheory.Premodular.CanonicalSpherical",
+    "lake build TwistedYetter.CategoryTheory.Fusion.FrozenBridge",
+    "lake build TwistedYetter.CategoryTheory.PivotalSphericalAxiomAudit",
+    "lake build TwistedYetter.Kirby.Final.TwistedYetter",
+    "lake build TwistedYetter.Kirby.Final.FinalAxiomAudit"
+  ],
+  "non_claims": [
+    "The spherical-to-ribbon converse of EGNO Proposition 8.10.12 is not formalized here.",
+    "The full equivalence in EGNO Proposition 8.10.12 is not claimed.",
+    "This API is not yet submitted to or accepted by Mathlib.",
+    "The existing final Twisted Yetter theorem has not been migrated to these abstract typeclasses.",
+    "No new four-manifold invariant theorem is claimed by this checkpoint."
+  ]
+}
