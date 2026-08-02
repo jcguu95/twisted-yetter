@@ -18,12 +18,17 @@ variable [MonoidalCategory C] [RigidCategory C] [BraidedCategory C]
 variable [MonoidalPreadditive C] [MonoidalLinear K C]
 variable [PremodularCategory.{v, uK, uC, uI} K C]
 
+local instance premodularCanonicalRightRigidCategory : RightRigidCategory C :=
+  RigidCategory.toRightRigidCategory
+
+local instance premodularCanonicalDoubleDualMonoidal :
+    (rightDoubleDualFunctor C).Monoidal :=
+  drinfeldDoubleDualMonoidal (C := C)
+
 /-- Every premodular category has the canonical spherical structure. -/
 noncomputable def PremodularCategory.canonicalSphericalStructure :
-    @SphericalStructure C _ _ RigidCategory.toRightRigidCategory :=
-  @CategoryTheory.canonicalSphericalStructure C _ _
-    (inferInstanceAs (BraidedCategory C))
-    RigidCategory.toRightRigidCategory
+    SphericalStructure (C := C) :=
+  CategoryTheory.canonicalSphericalStructure
     (PremodularCategory.toRibbonCategory (K := K) (C := C)).ribbonStructure
 
 end CategoryTheory

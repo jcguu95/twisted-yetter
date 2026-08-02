@@ -167,6 +167,8 @@ structure RibbonStructureData
       let _ := ambient.category
       let _ := ambient.monoidal
       let _ := ambient.rigid
+      let _ : RightRigidCategory ambient.C :=
+        ambient.rigid.toRightRigidCategory
       (twist.hom.app X)ᘁ = twist.hom.app (Xᘁ)
 
 /--
@@ -191,6 +193,8 @@ structure PremodularFusionCategory
       let _ := ambient.linear
       let _ := ambient.monoidal
       let _ := ambient.rigid
+      let _ : RightRigidCategory ambient.C :=
+        ambient.rigid.toRightRigidCategory
       let _ := ambient.braided
       let X := semisimple.simpleObject s
       semisimple.quantumDimension s • 𝟙 (𝟙_ ambient.C) =
@@ -238,6 +242,18 @@ instance PremodularFusionCategory.instRigid
     (𝒞 : PremodularFusionCategory K) :
     RigidCategory 𝒞.C :=
   𝒞.ambient.rigid
+
+/--
+All frozen semantics use the right dual chosen by the ambient rigid
+structure.  Declaring it directly prevents typeclass search from silently
+substituting the alternative right dual induced from braiding and left
+rigidity.
+-/
+instance PremodularFusionCategory.instRightRigid
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : PremodularFusionCategory K) :
+    RightRigidCategory 𝒞.C :=
+  𝒞.ambient.rigid.toRightRigidCategory
 
 instance PremodularFusionCategory.instBraided
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]

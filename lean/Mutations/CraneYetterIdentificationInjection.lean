@@ -1,3 +1,0 @@
-import TwistedYetter.Kirby.HomologicallyTwistedInvariant
-
-#check TwistedYetter.Kirby.HomologicallyTwistedInvariant.craneYetterIdentification

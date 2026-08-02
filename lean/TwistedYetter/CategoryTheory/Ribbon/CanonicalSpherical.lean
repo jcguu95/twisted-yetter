@@ -60,6 +60,9 @@ section Spherical
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [BraidedCategory C] [RightRigidCategory C]
 
+local instance : (rightDoubleDualFunctor C).Monoidal :=
+  drinfeldDoubleDualMonoidal (C := C)
+
 /--
 The evaluation compatibility of the Drinfeld comparison.
 
@@ -120,7 +123,7 @@ The canonical pivotal dimension is the ribbon loop of EGNO equation (8.41).
 -/
 theorem canonicalPivotalDimension_eq_ribbonLoop
     (ribbon : RibbonStructure C) (X : C) :
-    pivotalDimension (canonicalPivotalStructure ribbon) X =
+    pivotalDimension (canonicalPivotalStructure ribbon.toBalancing) X =
       ribbonLoop ribbon.toBalancing X := by
   simp only [pivotalDimension, leftCategoricalTrace,
     canonicalPivotalStructure, canonicalPivotalIso_hom_app,
@@ -251,8 +254,8 @@ The canonical pivotal dimension is invariant under the chosen right dual.
 -/
 theorem canonicalPivotal_dimension_dual
     (ribbon : RibbonStructure C) (X : C) :
-    pivotalDimension (canonicalPivotalStructure ribbon) X =
-      pivotalDimension (canonicalPivotalStructure ribbon) (Xᘁ) := by
+    pivotalDimension (canonicalPivotalStructure ribbon.toBalancing) X =
+      pivotalDimension (canonicalPivotalStructure ribbon.toBalancing) (Xᘁ) := by
   rw [canonicalPivotalDimension_eq_ribbonLoop,
     canonicalPivotalDimension_eq_ribbonLoop]
   exact ribbonLoop_dual ribbon X
@@ -264,14 +267,14 @@ This is the ribbon-to-spherical implication of EGNO Proposition 8.10.12.
 -/
 def canonicalSphericalStructure (ribbon : RibbonStructure C) :
     SphericalStructure (C := C) where
-  toPivotalStructure := canonicalPivotalStructure ribbon
+  toPivotalStructure := canonicalPivotalStructure ribbon.toBalancing
   dimension_dual := canonicalPivotal_dimension_dual ribbon
 
 /-- The underlying pivotal structure is the canonical pivotal structure. -/
 theorem canonicalSphericalStructure_toPivotal
     (ribbon : RibbonStructure C) :
     (canonicalSphericalStructure ribbon).toPivotalStructure =
-      canonicalPivotalStructure ribbon :=
+      canonicalPivotalStructure ribbon.toBalancing :=
   rfl
 
 end Spherical

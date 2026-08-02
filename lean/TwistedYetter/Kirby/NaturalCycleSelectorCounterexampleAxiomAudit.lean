@@ -1,8 +1,0 @@
-import TwistedYetter.Kirby.NaturalCycleSelectorCounterexample
-
-namespace TwistedYetter.Kirby.NaturalCycleSelectorCounterexampleAxiomAudit
-
-#print axioms TwistedYetter.Kirby.NaturalCycleSelectorCounterexample.boundaryShear_homologyClass
-#print axioms TwistedYetter.Kirby.NaturalCycleSelectorCounterexample.no_strictNaturalSelector
-
-end TwistedYetter.Kirby.NaturalCycleSelectorCounterexampleAxiomAudit

@@ -1,20 +1,20 @@
 import TwistedYetter.Kirby.Final.Proofs.FrozenFrontendLocalMoves
 
 /-!
-# Frozen-frontend conditional descent
+# Frozen-frontend Twisted Yetter invariant
 
 This file has no second evaluator and no conformance detour.  It proves the
-finite-movie descent that follows once the frozen frontend's evaluator data
-and local calculations have been supplied.
+finite-movie descent from the frozen frontend's canonical graphical evaluator,
+representative-independence theorem, and eight local-move calculations.  It
+then exports the manifold-level `TwistedYetter` and the clean public theorem
+`TwistedYetter_diffeomorphism_invariant`.
 
-It deliberately does not export a manifold-level `TwistedYetter` or a theorem
-named `TwistedYetter_diffeomorphism_invariant`.  The frozen frontend currently
-does not yet construct a typed categorical graphical interpretation or prove
-representative independence and the eight local moves from
-`TwistedPremodularCategory`.  The cut-open graph compiler and THAM
-normalization are now canonical frozen-frontend definitions.  Calling the
-conditional result a final theorem would still hide the remaining
-mathematical obligations.
+The category route is canonical: ribbon data determines the pivotal and
+spherical structures used by the graphical trace.  The cut-open graph compiler
+and THAM normalization are frozen-frontend definitions rather than caller
+supplied inputs.  The more general conditional descent lemma remains internal
+so that the public theorem exposes no evaluator, compiler, normalization, or
+proof-package parameter.
 -/
 
 namespace TwistedYetter.Kirby.Final

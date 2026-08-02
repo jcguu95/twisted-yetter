@@ -1,4 +1,0 @@
-import TwistedYetter.Kirby.ModularDottedBoundaryCalculation
-
-#print axioms
-  TwistedYetter.Kirby.ModularDottedBoundaryCalculation.DottedBoundaryLinearCalculation.eval_eq

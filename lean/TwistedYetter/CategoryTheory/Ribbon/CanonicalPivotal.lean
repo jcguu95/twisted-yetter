@@ -354,19 +354,19 @@ theorem drinfeld_tensor_defect (X Y : C) :
   simp
 
 /--
-The objectwise canonical pivotal candidate attached to a ribbon twist.
+The objectwise canonical pivotal candidate attached to a balancing.
 
 Composition in Lean is left-to-right, so this is the conventional
 `u_X ◦ theta_X` written as `theta_X ≫ u_X`.
 -/
-def canonicalPivotalHom (ribbon : RibbonStructure C) (X : C) :
+def canonicalPivotalHom (balancing : Balancing C) (X : C) :
     X ⟶ (Xᘁ)ᘁ :=
-  ribbon.toBalancing.twist.hom.app X ≫ drinfeldHom X
+  balancing.twist.hom.app X ≫ drinfeldHom X
 
 /-- The composition order is fixed and visible to downstream audits. -/
-theorem canonicalPivotalHom_eq (ribbon : RibbonStructure C) (X : C) :
-    canonicalPivotalHom ribbon X =
-      ribbon.toBalancing.twist.hom.app X ≫ drinfeldHom X :=
+theorem canonicalPivotalHom_eq (balancing : Balancing C) (X : C) :
+    canonicalPivotalHom balancing X =
+      balancing.twist.hom.app X ≫ drinfeldHom X :=
   rfl
 
 /--
@@ -375,15 +375,15 @@ The canonical pivotal candidate as a natural isomorphism.
 This establishes naturality and invertibility, but not yet compatibility with
 the monoidal structure on the double-dual functor.
 -/
-def canonicalPivotalIso (ribbon : RibbonStructure C) :
+def canonicalPivotalIso (balancing : Balancing C) :
     𝟭 C ≅ rightDoubleDualFunctor C :=
-  ribbon.toBalancing.twist ≪≫ drinfeldNatIso
+  balancing.twist ≪≫ drinfeldNatIso
 
 /-- The natural-isomorphism component is the objectwise EGNO formula. -/
 theorem canonicalPivotalIso_hom_app
-    (ribbon : RibbonStructure C) (X : C) :
-    (canonicalPivotalIso ribbon).hom.app X =
-      canonicalPivotalHom ribbon X :=
+    (balancing : Balancing C) (X : C) :
+    (canonicalPivotalIso balancing).hom.app X =
+      canonicalPivotalHom balancing X :=
   rfl
 
 /--
@@ -392,19 +392,19 @@ The canonical pivotal natural isomorphism is monoidal.
 The tensor proof combines four independently named facts: balancing,
 monodromy naturality, the Drinfeld tensor defect, and tensor functoriality.
 -/
-theorem canonicalPivotal_isMonoidal (ribbon : RibbonStructure C) :
+theorem canonicalPivotal_isMonoidal (balancing : Balancing C) :
     letI := drinfeldDoubleDualMonoidal (C := C)
-    NatTrans.IsMonoidal (canonicalPivotalIso ribbon).hom := by
+    NatTrans.IsMonoidal (canonicalPivotalIso balancing).hom := by
   letI := drinfeldDoubleDualMonoidal (C := C)
   refine { unit := ?_, tensor := ?_ }
   · rw [show Functor.LaxMonoidal.ε (𝟭 C) = 𝟙 (𝟙_ C) from rfl]
     rw [canonicalPivotalIso_hom_app, drinfeldDoubleDual_ε]
     calc
-      𝟙 (𝟙_ C) ≫ canonicalPivotalHom ribbon (𝟙_ C) =
-          canonicalPivotalHom ribbon (𝟙_ C) := Category.id_comp _
+      𝟙 (𝟙_ C) ≫ canonicalPivotalHom balancing (𝟙_ C) =
+          canonicalPivotalHom balancing (𝟙_ C) := Category.id_comp _
       _ = (drinfeldIso (𝟙_ C)).hom := by
         simp [canonicalPivotalHom, drinfeldHom,
-          balancedTwist_unit ribbon.toBalancing]
+          balancedTwist_unit balancing]
   · intro X Y
     rw [show Functor.LaxMonoidal.μ (𝟭 C) X Y = 𝟙 (X ⊗ Y) from rfl]
     simp only [canonicalPivotalIso_hom_app]
@@ -416,8 +416,8 @@ theorem canonicalPivotal_isMonoidal (ribbon : RibbonStructure C) :
     rw [← drinfeld_tensor_defect]
     exact
       (Category.assoc
-        (ribbon.toBalancing.twist.hom.app X ⊗ₘ
-          ribbon.toBalancing.twist.hom.app Y)
+        (balancing.twist.hom.app X ⊗ₘ
+          balancing.twist.hom.app Y)
         (drinfeldHom X ⊗ₘ drinfeldHom Y)
         (Functor.LaxMonoidal.μ (rightDoubleDualFunctor C) X Y)).symm
         |>.trans
@@ -425,19 +425,21 @@ theorem canonicalPivotal_isMonoidal (ribbon : RibbonStructure C) :
             (fun k => k ≫
               Functor.LaxMonoidal.μ (rightDoubleDualFunctor C) X Y)
             (MonoidalCategory.tensorHom_comp_tensorHom
-              (ribbon.toBalancing.twist.hom.app X)
-              (ribbon.toBalancing.twist.hom.app Y)
+              (balancing.twist.hom.app X)
+              (balancing.twist.hom.app Y)
               (drinfeldHom X) (drinfeldHom Y)))
 
 /--
-The canonical pivotal structure determined by a ribbon structure, using the
+The canonical pivotal structure determined by a balancing, using the
 equation-(8.31)-characterized double-dual monoidal structure above.
 -/
-def canonicalPivotalStructure (ribbon : RibbonStructure C) :
-    PivotalStructure C where
-  doubleDualMonoidal := drinfeldDoubleDualMonoidal (C := C)
-  iso := canonicalPivotalIso ribbon
-  monoidal := canonicalPivotal_isMonoidal ribbon
+def canonicalPivotalStructure (balancing : Balancing C) :
+    letI := drinfeldDoubleDualMonoidal (C := C)
+    PivotalStructure C := by
+  letI := drinfeldDoubleDualMonoidal (C := C)
+  exact
+    { iso := canonicalPivotalIso balancing
+      monoidal := canonicalPivotal_isMonoidal balancing }
 
 end Drinfeld
 

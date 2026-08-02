@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
+import TwistedYetter.CategoryTheory.Fusion.FrozenBridge
 
 /-!
 # Independent semantics: typed ribbon graphical calculus
@@ -964,10 +964,12 @@ theorem tensorUnitProjector_simple
     simp [projectionZero]
 
 /--
-Close one endomorphism by the ribbon trace convention frozen in
-`quantumDimension_eq_ribbonTrace`.
+Close one endomorphism using the pivotal trace of the canonical spherical
+structure induced by the input ribbon structure. Thus the evaluator uses the
+EGNO ribbon-to-spherical construction rather than maintaining a second trace
+convention.
 -/
-def ribbonTraceMorphism
+noncomputable def ribbonTraceMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
     (simple : 𝒞.simples.Simple)
@@ -975,12 +977,7 @@ def ribbonTraceMorphism
       𝒞.simples.simpleObject simple ⟶
         𝒞.simples.simpleObject simple) :
     𝟙_ 𝒞.C ⟶ 𝟙_ 𝒞.C :=
-  let X := 𝒞.simples.simpleObject simple
-  η_ X (Xᘁ) ≫
-    (endomorphism ⊗ₘ 𝟙 (Xᘁ)) ≫
-    (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
-    (β_ X (Xᘁ)).hom ≫
-    ε_ X (Xᘁ)
+  𝒞.canonicalRibbonTrace endomorphism
 
 theorem ribbonTraceMorphism_identity
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -989,15 +986,15 @@ theorem ribbonTraceMorphism_identity
     ribbonTraceMorphism 𝒞 simple
         (𝟙 (𝒞.simples.simpleObject simple)) =
       𝒞.simples.quantumDimension simple • 𝟙 (𝟙_ 𝒞.C) := by
-  simpa [ribbonTraceMorphism] using
-    (𝒞.quantumDimension_eq_ribbonTrace simple).symm
+  exact 𝒞.canonicalRibbonTrace_identity simple
 
 theorem ribbonTraceMorphism_zero
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
     (simple : 𝒞.simples.Simple) :
     ribbonTraceMorphism 𝒞 simple 0 = 0 := by
-  simp [ribbonTraceMorphism]
+  exact 𝒞.canonicalRibbonTrace_zero
+    (𝒞.simples.simpleObject simple)
 
 /-- The closed local value of one dotted cut around a simple meridian. -/
 noncomputable def specialCutMeridianClosedValue
@@ -1055,7 +1052,7 @@ theorem ordinaryKirbyLoopSum_eq_globalDimension
   rw [𝒞.closedScalar_smul_identity]
 
 /-- The local closed graph for a canceling dotted-one/two-handle pair. -/
-def specialCutMeridianExpression
+noncomputable def specialCutMeridianExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
     (simple : 𝒞.simples.Simple) :
@@ -1066,7 +1063,7 @@ def specialCutMeridianExpression
         (𝒞.simples.simpleObject simple)))
 
 /-- The local closed graph for an ordinary zero-framed Kirby-coloured loop. -/
-def ordinaryKirbyLoopExpression
+noncomputable def ordinaryKirbyLoopExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : PremodularFusionCategory K)
     (simple : 𝒞.simples.Simple) :

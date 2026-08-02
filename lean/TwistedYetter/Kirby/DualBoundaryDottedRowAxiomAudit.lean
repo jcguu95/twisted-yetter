@@ -1,6 +1,0 @@
-import TwistedYetter.Kirby.DualBoundaryDottedRow
-
-#print axioms
-  TwistedYetter.Kirby.DualBoundaryDottedRow.dualD3_integralGenerator_coordinate
-#print axioms
-  TwistedYetter.Kirby.DualBoundaryDottedRow.addDualBoundary_integralGenerator_coordinate

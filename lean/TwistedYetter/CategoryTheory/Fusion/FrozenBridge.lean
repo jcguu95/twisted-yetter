@@ -144,6 +144,8 @@ local instance : MonoidalCategory 𝒞.C := 𝒞.ambient.monoidal
 local instance : RigidCategory 𝒞.C := 𝒞.ambient.rigid
 local instance : RightRigidCategory 𝒞.C := 𝒞.ambient.rigid.toRightRigidCategory
 local instance : BraidedCategory 𝒞.C := 𝒞.ambient.braided
+local instance : (CategoryTheory.rightDoubleDualFunctor 𝒞.C).Monoidal :=
+  CategoryTheory.drinfeldDoubleDualMonoidal (C := 𝒞.C)
 local instance : MonoidalPreadditive 𝒞.C := 𝒞.ambient.monoidalPreadditive
 local instance : MonoidalLinear K 𝒞.C := 𝒞.ambient.monoidalLinear
 
@@ -163,13 +165,124 @@ Definition 8.13.1.
 noncomputable def PremodularFusionCategory.toCanonicalPivotalStructure :
     CategoryTheory.PivotalStructure 𝒞.C :=
   CategoryTheory.canonicalPivotalStructure
-    (𝒞.ribbon.toRibbonStructure 𝒞.ambient)
+    (𝒞.ribbon.toRibbonStructure 𝒞.ambient).toBalancing
 
 /-- The canonical spherical structure induced by the frozen ribbon twist. -/
 noncomputable def PremodularFusionCategory.toCanonicalSphericalStructure :
     CategoryTheory.SphericalStructure (C := 𝒞.C) :=
   CategoryTheory.canonicalSphericalStructure
     (𝒞.ribbon.toRibbonStructure 𝒞.ambient)
+
+/--
+The canonical trace used by the evaluator, formed from the spherical
+structure induced by the input ribbon structure.
+-/
+noncomputable def PremodularFusionCategory.canonicalRibbonTrace
+    {X : 𝒞.C} (f : X ⟶ X) : 𝟙_ 𝒞.C ⟶ 𝟙_ 𝒞.C :=
+  CategoryTheory.pivotalTrace
+    𝒞.toCanonicalSphericalStructure.toPivotalStructure f
+
+/--
+The canonical spherical trace is the usual twist-braiding closure of an
+endomorphism. This is EGNO equation (8.41), with the endomorphism inserted
+before the canonical pivotal cap.
+-/
+theorem PremodularFusionCategory.canonicalRibbonTrace_eq_ribbonClosure
+    {X : 𝒞.C} (f : X ⟶ X) :
+    𝒞.canonicalRibbonTrace f =
+      η_ X (Xᘁ) ≫
+        (f ⊗ₘ 𝟙 (Xᘁ)) ≫
+        (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
+        (β_ X (Xᘁ)).hom ≫
+        ε_ X (Xᘁ) := by
+  simp only [PremodularFusionCategory.canonicalRibbonTrace,
+    PremodularFusionCategory.toCanonicalSphericalStructure,
+    CategoryTheory.canonicalSphericalStructure,
+    CategoryTheory.pivotalTrace,
+    CategoryTheory.leftCategoricalTrace,
+    CategoryTheory.canonicalPivotalStructure,
+    CategoryTheory.canonicalPivotalIso_hom_app,
+    CategoryTheory.canonicalPivotalHom,
+    RibbonStructureData.toRibbonStructure]
+  simp only [Functor.id_obj]
+  have expandTensor :
+      ((f ≫ 𝒞.ribbon.twist.hom.app X ≫
+          CategoryTheory.drinfeldHom X) ⊗ₘ 𝟙 (Xᘁ)) =
+        (f ⊗ₘ 𝟙 (Xᘁ)) ≫
+          (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
+          (CategoryTheory.drinfeldHom X ⊗ₘ 𝟙 (Xᘁ)) := by
+    calc
+      ((f ≫ 𝒞.ribbon.twist.hom.app X ≫
+            CategoryTheory.drinfeldHom X) ⊗ₘ 𝟙 (Xᘁ)) =
+          ((f ≫ 𝒞.ribbon.twist.hom.app X) ⊗ₘ 𝟙 (Xᘁ)) ≫
+            (CategoryTheory.drinfeldHom X ⊗ₘ 𝟙 (Xᘁ)) := by
+              simpa only [Category.assoc, Category.comp_id] using
+                (MonoidalCategory.tensorHom_comp_tensorHom
+                  (f ≫ 𝒞.ribbon.twist.hom.app X) (𝟙 (Xᘁ))
+                  (CategoryTheory.drinfeldHom X) (𝟙 (Xᘁ))).symm
+      _ = ((f ⊗ₘ 𝟙 (Xᘁ)) ≫
+            (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ))) ≫
+            (CategoryTheory.drinfeldHom X ⊗ₘ 𝟙 (Xᘁ)) := by
+              have firstTwo :
+                  ((f ≫ 𝒞.ribbon.twist.hom.app X) ⊗ₘ 𝟙 (Xᘁ)) =
+                    (f ⊗ₘ 𝟙 (Xᘁ)) ≫
+                      (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) := by
+                simpa only [Category.comp_id] using
+                  (MonoidalCategory.tensorHom_comp_tensorHom
+                    f (𝟙 (Xᘁ))
+                    (𝒞.ribbon.twist.hom.app X) (𝟙 (Xᘁ))).symm
+              rw [firstTwo]
+      _ = _ := by simp only [Category.assoc]
+  calc
+    _ = η_ X (Xᘁ) ≫
+          ((f ⊗ₘ 𝟙 (Xᘁ)) ≫
+            (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫
+            (CategoryTheory.drinfeldHom X ⊗ₘ 𝟙 (Xᘁ))) ≫
+          ε_ (Xᘁ) ((Xᘁ)ᘁ) :=
+        congrArg
+          (fun q => η_ X (Xᘁ) ≫ q ≫ ε_ (Xᘁ) ((Xᘁ)ᘁ))
+          expandTensor
+    _ = _ := by
+      have closeDrinfeld :=
+        CategoryTheory.drinfeldHom_tensor_evaluation X
+      simpa only [Category.assoc] using
+        congrArg
+          (fun q =>
+            η_ X (Xᘁ) ≫
+              (f ⊗ₘ 𝟙 (Xᘁ)) ≫
+              (𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫ q)
+          closeDrinfeld
+
+/-- The frozen dimension table agrees with the canonical spherical trace. -/
+theorem PremodularFusionCategory.canonicalRibbonTrace_identity
+    (simple : 𝒞.simples.Simple) :
+    𝒞.canonicalRibbonTrace
+        (𝟙 (𝒞.simples.simpleObject simple)) =
+      𝒞.simples.quantumDimension simple • 𝟙 (𝟙_ 𝒞.C) := by
+  rw [show
+    𝒞.canonicalRibbonTrace
+        (𝟙 (𝒞.simples.simpleObject simple)) =
+      CategoryTheory.pivotalDimension
+        𝒞.toCanonicalSphericalStructure.toPivotalStructure
+        (𝒞.simples.simpleObject simple) by
+      simp [PremodularFusionCategory.canonicalRibbonTrace,
+        CategoryTheory.pivotalTrace, CategoryTheory.pivotalDimension]]
+  change
+    CategoryTheory.pivotalDimension
+        (CategoryTheory.canonicalPivotalStructure
+          (𝒞.ribbon.toRibbonStructure 𝒞.ambient).toBalancing)
+        (𝒞.simples.simpleObject simple) = _
+  rw [CategoryTheory.canonicalPivotalDimension_eq_ribbonLoop]
+  simpa [CategoryTheory.ribbonLoop,
+    RibbonStructureData.toRibbonStructure] using
+    (𝒞.quantumDimension_eq_ribbonTrace simple).symm
+
+/-- The canonical spherical trace sends the zero endomorphism to zero. -/
+theorem PremodularFusionCategory.canonicalRibbonTrace_zero
+    (X : 𝒞.C) :
+    𝒞.canonicalRibbonTrace (0 : X ⟶ X) = 0 := by
+  simp [PremodularFusionCategory.canonicalRibbonTrace,
+    CategoryTheory.pivotalTrace, CategoryTheory.leftCategoricalTrace]
 
 end Premodular
 

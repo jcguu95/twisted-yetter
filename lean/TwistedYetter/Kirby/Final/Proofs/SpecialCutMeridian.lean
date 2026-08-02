@@ -224,7 +224,8 @@ theorem specialCutMeridianMorphismWithoutExplicitTwist_eq
         (tensorUnitProjector 𝒞
           (𝒞.simples.simpleObject simple)) := by
   unfold specialCutMeridianMorphismWithoutExplicitTwist
-  unfold ribbonTraceMorphism
+  rw [ribbonTraceMorphism,
+    𝒞.canonicalRibbonTrace_eq_ribbonClosure]
   dsimp only
   have absorbTensor :
       (tensorUnitProjector 𝒞 (𝒞.simples.simpleObject simple) ⊗ₘ

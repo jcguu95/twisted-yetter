@@ -2235,7 +2235,9 @@ theorem canonicalPositiveFramedLoop_eq_ribbonTrace
         (BraidedCategory.braiding_naturality_left
           (𝒞.ribbon.twist.hom.app X) (Xᘁ))
     _ = _ := by
-      simp [X, ribbonTraceMorphism]
+      rw [ribbonTraceMorphism,
+        𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+      simp [X]
 
 theorem canonicalFramingTwistMorphism_heq_of_oriented_eq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]

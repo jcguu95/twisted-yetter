@@ -1,4 +1,5 @@
 import TwistedYetter.CategoryTheory.Premodular.CanonicalSpherical
+import TwistedYetter.CategoryTheory.Ribbon.SphericalToRibbon
 
 /-!
 # Axiom audit for the canonical pivotal and spherical constructions
@@ -12,4 +13,7 @@ pivotal/spherical layer.
 #print axioms CategoryTheory.canonicalPivotal_dimension_dual
 #print axioms CategoryTheory.canonicalPivotalStructure
 #print axioms CategoryTheory.canonicalSphericalStructure
-
+#print axioms CategoryTheory.drinfeldLoop_dual
+#print axioms CategoryTheory.balancing_duality_on_simple_of_canonicalPivotal_dimension_dual
+#print axioms CategoryTheory.ribbonStructureOfBalancing_of_canonicalPivotal_dimension_dual
+#print axioms CategoryTheory.ribbonStructureOfSpherical
