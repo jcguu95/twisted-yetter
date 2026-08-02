@@ -1,4 +1,5 @@
 import TwistedYetter.CategoryTheory.Fusion.Basic
+import TwistedYetter.CategoryTheory.Premodular.Basic
 import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
 
 /-!
@@ -102,5 +103,59 @@ local instance : MonoidalLinear K 𝒞.C := 𝒞.ambient.monoidalLinear
     exact Simple.of_iso 𝒞.semisimple.unitIso.symm
 
 end Fusion
+
+section Ribbon
+
+variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+variable (ambient : PremodularAmbient.{uK, uC, v} K)
+
+local instance : Category.{v} ambient.C := ambient.category
+local instance : MonoidalCategory ambient.C := ambient.monoidal
+local instance : RigidCategory ambient.C := ambient.rigid
+local instance : BraidedCategory ambient.C := ambient.braided
+
+variable (data : RibbonStructureData.{uK, uC, v} K ambient)
+
+/-- The frozen twist data is an EGNO ribbon structure. -/
+def RibbonStructureData.toRibbonStructure :
+    CategoryTheory.RibbonStructure ambient.C where
+  twist := data.twist
+  tensor := data.balancing
+  duality := data.twist_dual_compatibility
+
+/-- The frozen ribbon data supplies the abstract ribbon-category instance. -/
+@[reducible] def RibbonStructureData.toRibbonCategory :
+    CategoryTheory.RibbonCategory ambient.C where
+  ribbonStructure := data.toRibbonStructure ambient
+
+end Ribbon
+
+section Premodular
+
+variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+variable (𝒞 : PremodularFusionCategory.{uK, uC, uS, v} K)
+
+local instance : Category.{v} 𝒞.C := 𝒞.ambient.category
+local instance : Abelian 𝒞.C := 𝒞.ambient.abelian
+local instance : Linear K 𝒞.C := 𝒞.ambient.linear
+local instance : MonoidalCategory 𝒞.C := 𝒞.ambient.monoidal
+local instance : RigidCategory 𝒞.C := 𝒞.ambient.rigid
+local instance : BraidedCategory 𝒞.C := 𝒞.ambient.braided
+local instance : MonoidalPreadditive 𝒞.C := 𝒞.ambient.monoidalPreadditive
+local instance : MonoidalLinear K 𝒞.C := 𝒞.ambient.monoidalLinear
+
+/--
+The frozen premodular data satisfies the upstream-shaped EGNO definition.
+
+The frozen quantum-dimension table and its trace certificate are intentionally
+not part of this construction: they are evaluator data, not part of EGNO
+Definition 8.13.1.
+-/
+@[reducible] noncomputable def PremodularFusionCategory.toPremodularCategory :
+    CategoryTheory.PremodularCategory.{v, uK, uC, uS} K 𝒞.C where
+  toFusionCategory := 𝒞.toFusionCategory
+  toRibbonCategory := 𝒞.ribbon.toRibbonCategory 𝒞.ambient
+
+end Premodular
 
 end TwistedYetter.Semantics.Independent

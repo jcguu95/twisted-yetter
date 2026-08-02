@@ -1,0 +1,70 @@
+{
+  "schema": "twisted-yetter-premodular-category-checkpoint-v2",
+  "created_at_utc": "2026-08-02T04:01:47Z",
+  "base_git_commit": "13902e4ff58902ae17f5cbeffcb82b97e71bb276",
+  "supersedes": "twisted-yetter-fusion-category-checkpoint-v1",
+  "status": "EGNO_RIBBON_AND_PREMODULAR_API_CANDIDATE_COMPILES",
+  "egno_alignment": [
+    {
+      "locator": "Definition 4.1.1",
+      "implementation": "CategoryTheory.FusionCategory"
+    },
+    {
+      "locator": "Definition 8.10.1, equation (8.32)",
+      "implementation": "CategoryTheory.Balancing.tensor"
+    },
+    {
+      "locator": "Definition 8.10.1, ribbon duality condition",
+      "implementation": "CategoryTheory.RibbonStructure.duality"
+    },
+    {
+      "locator": "Definition 8.13.1",
+      "implementation": "CategoryTheory.PremodularCategory"
+    }
+  ],
+  "source_hashes_sha256": {
+    "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean": "edad1a4e5b42a7aff77d265ad417aac626ea7573bb4c583ce5113607e7066ab5",
+    "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean": "5e9053aba96228dc1e8428e78eaa434106166acfffb84aeabecc1b5abb29eae7",
+    "lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean": "2621055da7e411dc312bf4b5cab307c2b44b825abbaa9e27f96d1d0d45961736",
+    "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean": "26e60fce4ff892b44367092586c165cf9783219e43bbe9082177135eb77c658f",
+    "lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean": "4eb979fdb655f00a812cd2648ecdb9a502ced4e4f6fef28d1d6bb072df95d6d5",
+    "lean/TwistedYetter/CategoryTheory/Fusion/FrozenBridge.lean": "b73d1a48223c56a6f5e380462bec5fd4dcba47fc49c65222141a177e40a1043e"
+  },
+  "dependency_firewall": {
+    "abstract_core_imports_only_mathlib_or_category_theory_core": true,
+    "frozen_project_imports_are_isolated_to_frozen_bridge": true,
+    "abstract_core_mentions_kirby_evaluator_or_final_theorem": false
+  },
+  "red_team_review": {
+    "source_audit_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "explicit_axioms": 0,
+    "sorry_or_admit": 0,
+    "opaque": 0,
+    "domain_classes": 4,
+    "domain_proof_fields": 8,
+    "new_fields": [
+      {
+        "name": "Balancing.tensor",
+        "classification": "EGNO_DEFINITION_8_10_1_EQUATION_8_32"
+      },
+      {
+        "name": "RibbonStructure.duality",
+        "classification": "EGNO_DEFINITION_8_10_1_RIBBON_CONDITION"
+      }
+    ],
+    "project_specific_invariance_or_evaluator_correctness_fields": 0
+  },
+  "verified_commands": [
+    "lake build TwistedYetter.CategoryTheory.Ribbon.Basic",
+    "lake build TwistedYetter.CategoryTheory.Premodular.Basic",
+    "lake build TwistedYetter.CategoryTheory.Fusion.FrozenBridge",
+    "lake build TwistedYetter.CategoryTheory.Fusion.FrozenBridge TwistedYetter.Kirby.Final.TwistedYetter TwistedYetter.Kirby.Final.FinalAxiomAudit"
+  ],
+  "non_claims": [
+    "This is not yet a Mathlib-ready pull request.",
+    "The EGNO Proposition 8.10.12 equivalence with braided spherical fusion categories is not yet formalized.",
+    "A monoidal double-dual functor and pivotal/spherical API are not established in this checkpoint.",
+    "The frozen quantum-dimension table is intentionally not part of the abstract premodular definition.",
+    "The existing final theorem has not been migrated to use these typeclasses as its normative input."
+  ]
+}
