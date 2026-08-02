@@ -1,0 +1,77 @@
+{
+  "schema": "twisted-yetter-fusion-category-checkpoint-v1",
+  "created_at_utc": "2026-08-02T03:51:40Z",
+  "base_git_commit": "cc9b450c4fdfd1e4b9b569659db07e32af8460ad",
+  "status": "API_CANDIDATE_CORE_AND_FROZEN_BRIDGE_COMPILE",
+  "scope": {
+    "core": [
+      "CategoryTheory.FiniteSimpleSkeleton",
+      "CategoryTheory.FiniteSimpleDecomposition",
+      "CategoryTheory.FiniteSemisimpleCategory",
+      "CategoryTheory.FusionCategory"
+    ],
+    "bridge": [
+      "TwistedYetter.Semantics.Independent.FusionSemisimpleData.toFiniteSimpleSkeleton",
+      "TwistedYetter.Semantics.Independent.FusionSemisimpleData.toFiniteSimpleDecomposition",
+      "TwistedYetter.Semantics.Independent.FusionSemisimpleData.toFiniteSemisimpleCategory",
+      "TwistedYetter.Semantics.Independent.PremodularFusionCategory.toFusionCategory"
+    ]
+  },
+  "source_hashes_sha256": {
+    "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean": "edad1a4e5b42a7aff77d265ad417aac626ea7573bb4c583ce5113607e7066ab5",
+    "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean": "5e9053aba96228dc1e8428e78eaa434106166acfffb84aeabecc1b5abb29eae7",
+    "lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean": "2621055da7e411dc312bf4b5cab307c2b44b825abbaa9e27f96d1d0d45961736",
+    "lean/TwistedYetter/CategoryTheory/Fusion/FrozenBridge.lean": "d1ba3ca971eeba1db1a17c23fea832193b0eed8e82402c02b63ffaba3f6d7079"
+  },
+  "dependency_firewall": {
+    "core_imports_only_mathlib_or_category_theory_core": true,
+    "project_specific_import_isolated_to_frozen_bridge": true,
+    "core_mentions_kirby_evaluator_or_final_theorem": false
+  },
+  "red_team_review": {
+    "source_audit_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "explicit_axioms": 0,
+    "sorry_or_admit": 0,
+    "opaque": 0,
+    "classes_requiring_domain_review": 2,
+    "proof_fields_requiring_domain_review": [
+      {
+        "name": "FiniteSemisimpleCategory.finite_simple_skeleton",
+        "classification": "DOMAIN_DEFINITION_WITNESS"
+      },
+      {
+        "name": "FiniteSimpleSkeleton.simple_pairwise",
+        "classification": "CHOSEN_SKELETON_VALIDITY"
+      },
+      {
+        "name": "FiniteSimpleSkeleton.simple_complete",
+        "classification": "CHOSEN_SKELETON_VALIDITY"
+      },
+      {
+        "name": "FiniteSimpleDecomposition.pairing_same",
+        "classification": "BIPRODUCT_COORDINATE_LAW"
+      },
+      {
+        "name": "FiniteSimpleDecomposition.pairing_distinct",
+        "classification": "BIPRODUCT_COORDINATE_LAW"
+      },
+      {
+        "name": "FiniteSimpleDecomposition.resolution_identity",
+        "classification": "BIPRODUCT_COORDINATE_LAW"
+      }
+    ],
+    "project_specific_invariance_or_evaluator_correctness_fields": 0
+  },
+  "verified_commands": [
+    "lake build TwistedYetter.CategoryTheory.Fusion.Basic",
+    "lake build TwistedYetter.CategoryTheory.Fusion.FrozenBridge",
+    "lake build TwistedYetter.CategoryTheory.Fusion.FrozenBridge TwistedYetter.Kirby.Final.TwistedYetter TwistedYetter.Kirby.Final.FinalAxiomAudit"
+  ],
+  "non_claims": [
+    "This is not yet a Mathlib-ready pull request.",
+    "No upstream-shaped pivotal, spherical, ribbon, or premodular layer is established here.",
+    "The frozen final theorem has not yet been migrated to these abstract classes.",
+    "No reverse construction from an arbitrary FusionCategory to evaluator choices is claimed.",
+    "The source audit still requires human review of the accepted domain-definition fields."
+  ]
+}
