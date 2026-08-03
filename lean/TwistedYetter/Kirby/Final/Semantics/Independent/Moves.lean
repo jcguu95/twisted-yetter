@@ -45,13 +45,8 @@ stationary component.  It does not pretend that the transported character
 coupon is part of a Kirby diagram.  The actual before/after expressions and
 their naturality proof live in the typed graphical semantics.
 -/
-structure FiniteCouponTransport
-    (attached detachable : CombinatorialSpecialKirbyDiagram) where
+structure FiniteCouponTransport where
   events : List CouponTransportEvent
-  stages :
-    Fin (events.length + 1) → CombinatorialSpecialKirbyDiagram
-  startsAtAttached : stages 0 = attached
-  endsAtDetachable : stages (Fin.last events.length) = detachable
 
 /--
 External handle-topology boundary: the listed finite stages are the complete
@@ -62,12 +57,11 @@ This predicate is category-neutral.  It says nothing about evaluation or
 about the character coupon's categorical naturality.
 -/
 axiom FiniteCouponTransportRealizesCompletePath
-    {attached detachable : CombinatorialSpecialKirbyDiagram} :
-    FiniteCouponTransport attached detachable → Prop
+    (transport : FiniteCouponTransport) : Prop
 
 /-- The visible component data of one oriented band slide. -/
 structure CleanBandSlideScript
-    (source target : CombinatorialSpecialKirbyDiagram) where
+    (source target : SpecialKirbyDiagram) where
   movingSource : source.trace.ComponentId
   stationarySource : source.trace.ComponentId
   movingTarget : target.trace.ComponentId
@@ -84,12 +78,11 @@ This structure contains no category, character, projector, graphical
 evaluation, or scalar equality.
 -/
 structure CleanBandSlideDecomposition
-    {source target : CombinatorialSpecialKirbyDiagram}
+    {source target : SpecialKirbyDiagram}
     (script : CleanBandSlideScript source target) where
-  attached : CombinatorialSpecialKirbyDiagram
-  detachable : CombinatorialSpecialKirbyDiagram
-  transport :
-    FiniteCouponTransport attached detachable
+  sourceCut : DottedCutPresentation source
+  targetCut : DottedCutPresentation target
+  transport : FiniteCouponTransport
 
 /--
 The complete combinatorial input for one band slide.  Kirby--Cerf
@@ -101,7 +94,7 @@ common-exterior, and framing validity conditions must remain visible in the
 move grammar rather than being hidden in an existential witness axiom.
 -/
 structure CleanBandSlide
-    (source target : CombinatorialSpecialKirbyDiagram) where
+    (source target : SpecialKirbyDiagram) where
   script : CleanBandSlideScript source target
   decomposition : CleanBandSlideDecomposition script
 
@@ -115,11 +108,11 @@ This predicate contains no category, character, projector, or evaluation
 equality.
 -/
 axiom CleanBandSlideRealizesStandardKirbySlide
-    {source target : CombinatorialSpecialKirbyDiagram} :
+    {source target : SpecialKirbyDiagram} :
     CleanBandSlide source target → Prop
 
 structure FramedIsotopyScript
-    (source target : CombinatorialSpecialKirbyDiagram) where
+    (source target : SpecialKirbyDiagram) where
   componentReindexing : source.trace.ComponentId ≃ target.trace.ComponentId
   strandReindexing : source.trace.StrandId ≃ target.trace.StrandId
 
@@ -133,11 +126,11 @@ This is a topology statement only; it does not assert graphical evaluation
 equality.
 -/
 axiom FramedIsotopyScriptRealizesFramedIsotopy
-    {source target : CombinatorialSpecialKirbyDiagram} :
+    {source target : SpecialKirbyDiagram} :
     FramedIsotopyScript source target → Prop
 
 def CancellationHandleCountChangeIsStandard
-    (source target : CombinatorialSpecialKirbyDiagram)
+    (source target : SpecialKirbyDiagram)
     (kind : ElementaryMoveKind) : Prop :=
   match kind with
   | .oneTwoBirth =>
@@ -159,7 +152,7 @@ def CancellationHandleCountChangeIsStandard
   | _ => False
 
 structure CancellationScript
-    (source target : CombinatorialSpecialKirbyDiagram) where
+    (source target : SpecialKirbyDiagram) where
   kind :
     ElementaryMoveKind
   kind_is_cancellation :
@@ -173,7 +166,7 @@ An exact chain-level transport for the primal handle complexes, using ordinary
 Kirby-calculus indices.  The induced map on quotient homology is derived.
 -/
 structure PrimalHandleChainTransport
-    (source target : CombinatorialSpecialKirbyDiagram)
+    (source target : SpecialKirbyDiagram)
     (sourceBoundary : PrimalDegreeThreeBoundaryData source)
     (targetBoundary : PrimalDegreeThreeBoundaryData target) where
   degreeThree :
@@ -193,7 +186,7 @@ structure PrimalHandleChainTransport
       (primalBoundaryTwo target).comp degreeTwo
 
 def PrimalHandleChainTransport.mapCycle
-    {source target : CombinatorialSpecialKirbyDiagram}
+    {source target : SpecialKirbyDiagram}
     {sourceBoundary : PrimalDegreeThreeBoundaryData source}
     {targetBoundary : PrimalDegreeThreeBoundaryData target}
     (transport :
@@ -216,7 +209,7 @@ def PrimalHandleChainTransport.mapCycle
     simp
 
 def PrimalHandleChainTransport.inducedH₂
-    {source target : CombinatorialSpecialKirbyDiagram}
+    {source target : SpecialKirbyDiagram}
     {sourceBoundary : PrimalDegreeThreeBoundaryData source}
     {targetBoundary : PrimalDegreeThreeBoundaryData target}
     (transport :
@@ -564,7 +557,8 @@ inductive CancellationLocalNormalForm
       (coordinateBinding :
         coordinates.MatchesOneTwoBirthMeridian)
       (normalForm :
-        IsStandardOneTwoBirth source.diagram target.diagram)
+        IsStandardOneTwoBirth source.diagram target.diagram
+          source.cut target.cut)
   | oneTwoDeath
       (kind : script.kind = .oneTwoDeath)
       (coordinates :
@@ -572,7 +566,8 @@ inductive CancellationLocalNormalForm
       (coordinateBinding :
         coordinates.MatchesOneTwoDeathMeridian)
       (normalForm :
-        IsStandardOneTwoDeath source.diagram target.diagram)
+        IsStandardOneTwoDeath source.diagram target.diagram
+          source.cut target.cut)
   | twoThreeBirth
       (kind : script.kind = .twoThreeBirth)
       (coordinates :
@@ -580,7 +575,8 @@ inductive CancellationLocalNormalForm
       (coordinateBinding :
         coordinates.MatchesTwoThreeBirthComponent)
       (normalForm :
-        IsStandardTwoThreeBirth source.diagram target.diagram)
+        IsStandardTwoThreeBirth source.diagram target.diagram
+          source.cut target.cut)
   | twoThreeDeath
       (kind : script.kind = .twoThreeDeath)
       (coordinates :
@@ -588,7 +584,8 @@ inductive CancellationLocalNormalForm
       (coordinateBinding :
         coordinates.MatchesTwoThreeDeathComponent)
       (normalForm :
-        IsStandardTwoThreeDeath source.diagram target.diagram)
+        IsStandardTwoThreeDeath source.diagram target.diagram
+          source.cut target.cut)
 
 inductive ElementaryMove
     (source target : HomologicallyMarkedDiagram) : Type

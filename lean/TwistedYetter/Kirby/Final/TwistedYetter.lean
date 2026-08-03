@@ -19,6 +19,7 @@ proof-package parameter.
 
 namespace TwistedYetter.Kirby.Final
 
+open CategoryTheory
 open TwistedYetter.Semantics.Independent
 open TwistedYetter.Kirby.Final.Proofs
 
@@ -52,7 +53,7 @@ theorem elementaryMove_preserves_frontend_evaluation
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary)
+          marked.diagram marked.cut marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
@@ -89,7 +90,7 @@ theorem kirbyMovie_preserves_frontend_evaluation
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary)
+          marked.diagram marked.cut marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η)
     {source target : HomologicallyMarkedDiagram}
@@ -142,7 +143,7 @@ theorem diffeomorphism_invariant_of_descent_data
       ∀ (marked : HomologicallyMarkedDiagram),
         RepresentativeIndependenceStatement
           𝒞η
-          marked.diagram marked.primalBoundary)
+          marked.diagram marked.cut marked.primalBoundary)
     (localInvariant :
       LocalMoveInvarianceStatement 𝒞η) :
     TwistedYetterDiffeomorphismInvarianceTarget
@@ -201,7 +202,7 @@ theorem TwistedYetter_diffeomorphism_invariant
       𝒞η
       (fun marked =>
         frozenFrontendRepresentativeIndependence
-          𝒞η marked.diagram marked.primalBoundary)
+          𝒞η marked.diagram marked.cut marked.primalBoundary)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       X Y f alpha
       leftExistence.choose leftExistence.choose_spec

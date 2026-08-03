@@ -1,0 +1,144 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/13",
+  "recorded_at_utc": "2026-08-03T00:06:20Z",
+  "supersedes": "explicit-trust-boundary-v12.json",
+  "status": "KERNEL_CLOSURE_VERIFIED_RED_TEAM_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "scope": "Algebra mainline replacement and Kirby/CutOpen two-layer refactor",
+  "baseline_git_commit": "e7b4cbcbaad0be25d0cdcc15eb3884ff01153c95",
+  "source_axiom_declaration_count": 26,
+  "baseline_source_axiom_declaration_count": 26,
+  "axiom_declarations_added": [],
+  "final_theorem_project_axiom_count": 26,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 29,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "IntrinsicDottedCutRegluingWitness",
+    "ManifoldSecondCohomology",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "egno_globalDimension_ne_zero",
+    "egno_tensorUnitQuantumDimension",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation",
+    "manifoldPoincareDuality",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH2",
+    "specialKirbyDiagram_exists",
+    "standardDottedProjectorEventCompleteness",
+    "standardIntrinsicDottedCutRealization",
+    "turnedOverHandleComplexComputesSecondCohomology",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "red_team_source_scan": {
+    "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "scanner_timestamp_utc": "2026-08-03T00:10:52.297842+00:00",
+    "scanner_sha256": "85f7138951823dce136c3c3d1fb2f96f145849a5666bd8bd0f404999e5471adc",
+    "source_tree_sha256": "ff8a79ee269fd036892cae441586c0065bf441cf794f047f677094c276acdd26",
+    "likely_proof_field_count": 51,
+    "classification": {
+      "category_domain_laws_and_derived_choices": [
+        "FiniteSemisimpleCategory.finite_simple_skeleton",
+        "FiniteSimpleSkeleton.simple_pairwise",
+        "FiniteSimpleSkeleton.simple_complete",
+        "FiniteSimpleDecomposition.pairing_same",
+        "FiniteSimpleDecomposition.pairing_distinct",
+        "FiniteSimpleDecomposition.resolution_identity",
+        "SphericalStructure.dimension_dual",
+        "SphericalCategory.sphericalStructure",
+        "ChosenSimpleFamily.skeleton",
+        "TwistedPremodularCategory.character",
+        "Balancing.tensor",
+        "RibbonStructure.duality"
+      ],
+      "cut_open_transparent_combinatorial_predicates": [
+        "DottedPuncture.dotted_role",
+        "DottedPuncture.input_on_two_handle",
+        "DottedPuncture.output_on_two_handle",
+        "DottedPuncture.orientation_preserved",
+        "CutOpenExteriorTrace.initialBoundaryEmpty",
+        "CutOpenExteriorTrace.finalBoundaryEmpty",
+        "CutOpenExteriorTrace.transitionValid",
+        "CutOpenExteriorTrace.strandContinuationsAreWellFormed",
+        "CutOpenExteriorTrace.eventPortsAreDistinct",
+        "CutOpenExteriorTrace.everyStrandHasUniqueInputAndOutput",
+        "CutOpenExteriorTrace.activeWordsNoDuplicates",
+        "CutOpenExteriorTrace.activeStrandsAreTwoHandles",
+        "DottedCutData.punctureWord",
+        "DottedCutPresentation.incidence_agrees_with_handle_boundary"
+      ],
+      "kirby_diagram_transparent_combinatorial_predicates": [
+        "CombinatorialLinkTrace.initialBoundaryEmpty",
+        "CombinatorialLinkTrace.finalBoundaryEmpty",
+        "CombinatorialLinkTrace.transitionValid",
+        "CombinatorialLinkTrace.activeWordsNoDuplicates",
+        "CombinatorialLinkTrace.everyStrandHasUniqueInputAndOutput",
+        "SpecialHandleData.oneHandleIndex",
+        "SpecialHandleData.boundaryTwo",
+        "SpecialHandleData.boundaryThree",
+        "SpecialHandleData.boundary_squared_zero"
+      ],
+      "handle_chain_data_and_correctness": [
+        "PrimalDegreeThreeBoundaryData.boundaryThree",
+        "PrimalDegreeThreeBoundaryData.boundary_squared_zero"
+      ],
+      "move_transport_transparent_predicates": [
+        "CancellationScript.kind_is_cancellation",
+        "PrimalHandleChainTransport.commutesWithBoundaryThree",
+        "PrimalHandleChainTransport.commutesWithBoundaryTwo",
+        "ThamHandleChainTransport.commutesWithBoundaryThree",
+        "ThamHandleChainTransport.commutesWithBoundaryTwo",
+        "AddedTwoHandleCoordinates.oldCoefficient",
+        "AddedTwoHandleCoordinates.newCoefficientZero",
+        "RemovedTwoHandleCoordinates.safeCycle_sameClass",
+        "RemovedTwoHandleCoordinates.safe_newCoefficientZero",
+        "RemovedTwoHandleCoordinates.transportedOldCoefficient",
+        "KirbyMovie.startsAtSource",
+        "KirbyMovie.endsAtTarget",
+        "KirbyMovie.elementary"
+      ],
+      "topology_realization_witness_fields": [
+        "SpecialKirbyRepresentativeOf.realizationDiffeomorphism"
+      ]
+    }
+  },
+  "refactor_checks": {
+    "frozen_algebra_active_symbols_absent": true,
+    "frozen_bridge_active_symbol_absent": true,
+    "kirby_and_cut_open_layers_separate": true,
+    "full_lake_build_passed": true,
+    "final_theorem_kernel_axiom_audit_passed": true,
+    "sorryAx_absent_from_final_closure": true
+  },
+  "removed_active_modules": [
+    "TwistedYetter.CategoryTheory.Fusion.FrozenBridge",
+    "TwistedYetter.Kirby.Final.Semantics.Independent.Algebra",
+    "TwistedYetter.Kirby.Final.Semantics.Independent.Diagram",
+    "TwistedYetter.Kirby.Final.Proofs.CancellationCompilerScratch"
+  ],
+  "mandatory_human_review": [
+    "Review the 26 explicit project axioms as the external trust boundary.",
+    "Review the twelve category domain-law fields against the cited fusion, pivotal, spherical, ribbon, and premodular definitions.",
+    "Review the transparent Kirby and cut-open predicates for intended combinatorial semantics; they are not external axioms but malformed witnesses could inhabit the wrong intended notion.",
+    "Review SpecialKirbyRepresentativeOf.realizationDiffeomorphism together with the presentation-existence and realization axioms."
+  ],
+  "non_claims": [
+    "The source scanner does not certify that the human semantics are correct.",
+    "Kernel compilation does not validate the external topology axioms.",
+    "This ledger does not claim legacy numerical artifacts were re-certified."
+  ]
+}

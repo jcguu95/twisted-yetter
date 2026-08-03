@@ -10,6 +10,7 @@ invariance assumption.
 
 namespace TwistedYetter.Kirby.Final.Proofs
 
+open CategoryTheory
 open TwistedYetter.Semantics.Independent
 
 universe uK
@@ -41,9 +42,9 @@ theorem cleanBandElementaryMove_preserves_evaluation
         elementaryMoveKind move = .twoOverTwo)
     (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary sourceCycle =
+        source.diagram source.cut source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary
+        target.diagram target.cut target.primalBoundary
           (move.homology.tham.mapCycle sourceCycle) := by
   cases move with
   | framedIsotopy =>
@@ -78,9 +79,9 @@ theorem framedIsotopy_preserves_evaluation
     (transport : ThamHandleChainTransport source target)
     (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary sourceCycle =
+        source.diagram source.cut source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary
+        target.diagram target.cut target.primalBoundary
           (transport.mapCycle sourceCycle) := by
   have interpretation :=
     shum_framedRibbonCoherence

@@ -77,28 +77,30 @@ def serializeCutOpenEvent
       .projectorHole dotted.1 (punctures.map serializePuncture)
 
 def serializedComponents
-    (diagram : CombinatorialSpecialKirbyDiagram) :
+    (diagram : SpecialKirbyDiagram) :
     List Component :=
   List.ofFn diagram.trace.components
 
 def serializedStrands
-    (diagram : CombinatorialSpecialKirbyDiagram) :
+    (diagram : SpecialKirbyDiagram) :
     List SerializedStrand :=
   List.ofFn (fun i => serializeStrand (diagram.trace.strands i))
 
 def serializedExteriorEvents
-    (diagram : CombinatorialSpecialKirbyDiagram) :
+    {diagram : SpecialKirbyDiagram}
+    (presentation : DottedCutPresentation diagram) :
     List SerializedCutOpenEvent :=
   List.ofFn
     (fun i =>
-      serializeCutOpenEvent (diagram.dottedCuts.exterior.events i))
+      serializeCutOpenEvent (presentation.cut.exterior.events i))
 
 def serializedActiveOrders
-    (diagram : CombinatorialSpecialKirbyDiagram) :
+    {diagram : SpecialKirbyDiagram}
+    (presentation : DottedCutPresentation diagram) :
     List (List ℕ) :=
   List.ofFn
     (fun i =>
-      (diagram.dottedCuts.exterior.activeOrder i).map Fin.val)
+      (presentation.cut.exterior.activeOrder i).map Fin.val)
 
 def oneTwoLocalComponents :
     List Component :=
@@ -116,7 +118,7 @@ def oneTwoLocalComponents :
   ]
 
 def oneTwoLocalStrands
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List SerializedStrand :=
   let twoHandle := source.trace.componentCount + 1
   [
@@ -126,7 +128,7 @@ def oneTwoLocalStrands
   ]
 
 def oneTwoLocalPuncture
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     SerializedPuncture :=
   {
     dottedComponent := source.trace.componentCount
@@ -138,7 +140,7 @@ def oneTwoLocalPuncture
   }
 
 def oneTwoLocalEvents
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List SerializedCutOpenEvent :=
   let first := source.trace.strandCount
   let second := source.trace.strandCount + 1
@@ -151,7 +153,7 @@ def oneTwoLocalEvents
   ]
 
 def oneTwoLocalActiveOrders
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List (List ℕ) :=
   let first := source.trace.strandCount
   let second := source.trace.strandCount + 1
@@ -165,22 +167,26 @@ target appends one dotted component, one zero-framed ordinary meridian, and
 the three-event birth--projector--death window.
 -/
 def IsStandardOneTwoBirth
-    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
+    (source target : SpecialKirbyDiagram)
+    (sourceCut : DottedCutPresentation source)
+    (targetCut : DottedCutPresentation target) : Prop :=
   serializedComponents target =
       serializedComponents source ++ oneTwoLocalComponents ∧
     serializedStrands target =
       serializedStrands source ++ oneTwoLocalStrands source ∧
-    serializedExteriorEvents target =
-      oneTwoLocalEvents source ++ serializedExteriorEvents source ∧
-    serializedActiveOrders target =
-      oneTwoLocalActiveOrders source ++ serializedActiveOrders source ∧
+    serializedExteriorEvents targetCut =
+      oneTwoLocalEvents source ++ serializedExteriorEvents sourceCut ∧
+    serializedActiveOrders targetCut =
+      oneTwoLocalActiveOrders source ++ serializedActiveOrders sourceCut ∧
     target.handles.hOne = source.handles.hOne + 1 ∧
     target.handles.hTwo = source.handles.hTwo + 1 ∧
     target.handles.hThree = source.handles.hThree
 
 def IsStandardOneTwoDeath
-    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
-  IsStandardOneTwoBirth target source
+    (source target : SpecialKirbyDiagram)
+    (sourceCut : DottedCutPresentation source)
+    (targetCut : DottedCutPresentation target) : Prop :=
+  IsStandardOneTwoBirth target source targetCut sourceCut
 
 def twoThreeLocalComponents :
     List Component :=
@@ -193,7 +199,7 @@ def twoThreeLocalComponents :
   ]
 
 def twoThreeLocalStrands
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List SerializedStrand :=
   let component := source.trace.componentCount
   [
@@ -203,7 +209,7 @@ def twoThreeLocalStrands
   ]
 
 def twoThreeLocalEvents
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List SerializedCutOpenEvent :=
   let first := source.trace.strandCount
   let second := source.trace.strandCount + 1
@@ -215,7 +221,7 @@ def twoThreeLocalEvents
   ]
 
 def twoThreeLocalActiveOrders
-    (source : CombinatorialSpecialKirbyDiagram) :
+    (source : SpecialKirbyDiagram) :
     List (List ℕ) :=
   let first := source.trace.strandCount
   let second := source.trace.strandCount + 1
@@ -232,22 +238,26 @@ with the identity on a general simple object.  The final handle equations
 record the corresponding primal 2--3 cancellation pair.
 -/
 def IsStandardTwoThreeBirth
-    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
+    (source target : SpecialKirbyDiagram)
+    (sourceCut : DottedCutPresentation source)
+    (targetCut : DottedCutPresentation target) : Prop :=
   serializedComponents target =
       serializedComponents source ++ twoThreeLocalComponents ∧
     serializedStrands target =
       serializedStrands source ++ twoThreeLocalStrands source ∧
-    serializedExteriorEvents target =
-      twoThreeLocalEvents source ++ serializedExteriorEvents source ∧
-    serializedActiveOrders target =
-      twoThreeLocalActiveOrders source ++ serializedActiveOrders source ∧
+    serializedExteriorEvents targetCut =
+      twoThreeLocalEvents source ++ serializedExteriorEvents sourceCut ∧
+    serializedActiveOrders targetCut =
+      twoThreeLocalActiveOrders source ++ serializedActiveOrders sourceCut ∧
     target.handles.hOne = source.handles.hOne ∧
     target.handles.hTwo = source.handles.hTwo + 1 ∧
     target.handles.hThree = source.handles.hThree + 1
 
 def IsStandardTwoThreeDeath
-    (source target : CombinatorialSpecialKirbyDiagram) : Prop :=
-  IsStandardTwoThreeBirth target source
+    (source target : SpecialKirbyDiagram)
+    (sourceCut : DottedCutPresentation source)
+    (targetCut : DottedCutPresentation target) : Prop :=
+  IsStandardTwoThreeBirth target source targetCut sourceCut
 
 end TwistedYetter.Semantics.Independent
 

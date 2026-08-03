@@ -29,7 +29,7 @@ in the source and target words used by `DottedIncidenceMorphism`.
 -/
 theorem dottedIncidenceMorphism_character_naturality
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (T : DottedIncidenceMorphism
@@ -56,7 +56,7 @@ orientation or a puncture-dependent character exponent.
 -/
 theorem intrinsicDottedCut_character_naturality
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     {punctures : List (DottedPuncture diagram.trace)}
     (cut : IntrinsicDottedCutTangle diagram punctures)
@@ -84,8 +84,8 @@ theorem intrinsicDottedCut_character_naturality
       exponent
 
 private theorem character_tensor_inv
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X Y : 𝒞.C) :
     character.iso.inv.app (X ⊗ Y) =
       character.iso.inv.app X ⊗ₘ character.iso.inv.app Y := by
@@ -105,8 +105,8 @@ private theorem character_tensor_inv
       simp
 
 private theorem character_natPower_tensor
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X Y : 𝒞.C)
     (power : ℕ) :
     isoNatPowerHom (character.iso.app (X ⊗ Y)) power =
@@ -129,8 +129,8 @@ private theorem character_natPower_tensor
       simp
 
 private theorem character_invNatPower_tensor
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X Y : 𝒞.C)
     (power : ℕ) :
     isoNatPowerHom (character.iso.app (X ⊗ Y)).symm power =
@@ -153,8 +153,8 @@ private theorem character_invNatPower_tensor
       simp
 
 private theorem character_intPower_tensor
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X Y : 𝒞.C)
     (exponent : ℤ) :
     isoIntPowerHom (character.iso.app (X ⊗ Y)) exponent =
@@ -177,8 +177,8 @@ private theorem isoNatPowerHom_eq_id
   | succ power ih => simp [isoNatPowerHom, hom_eq, ih]
 
 private theorem character_intPower_unit
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (exponent : ℤ) :
     isoIntPowerHom (character.iso.app (𝟙_ 𝒞.C)) exponent =
       𝟙 (𝟙_ 𝒞.C) := by
@@ -240,7 +240,7 @@ of representative independence.
 -/
 theorem intrinsicDottedCut_boundaryRatio_absorbs
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     {punctures : List (DottedPuncture diagram.trace)}
     (cut : IntrinsicDottedCutTangle diagram punctures)

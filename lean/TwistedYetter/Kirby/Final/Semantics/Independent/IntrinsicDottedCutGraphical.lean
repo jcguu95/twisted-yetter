@@ -20,7 +20,7 @@ noncomputable section
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 def intrinsicRibbonAtomObject
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {Component : Type*}
     (colour : Component → 𝒞.simples.Simple) :
     IntrinsicRibbonAtom Component → 𝒞.C
@@ -28,7 +28,7 @@ def intrinsicRibbonAtomObject
   | ⟨component, .dual⟩ => (𝒞.simples.simpleObject (colour component))ᘁ
 
 def intrinsicRibbonWordObject
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {Component : Type*}
     (colour : Component → 𝒞.simples.Simple) :
     List (IntrinsicRibbonAtom Component) → 𝒞.C
@@ -38,7 +38,7 @@ def intrinsicRibbonWordObject
         intrinsicRibbonWordObject 𝒞 colour rest
 
 def intrinsicRibbonWordAppendIso
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {Component : Type*}
     (colour : Component → 𝒞.simples.Simple) :
     (left right : List (IntrinsicRibbonAtom Component)) →
@@ -55,7 +55,7 @@ def intrinsicRibbonWordAppendIso
 
 /-- Interpret the free intrinsic grammar in an arbitrary premodular category. -/
 noncomputable def interpretIntrinsicRibbonTangle
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {Component : Type*}
     (colour : Component → 𝒞.simples.Simple) :
     {source target : List (IntrinsicRibbonAtom Component)} →
@@ -97,13 +97,13 @@ noncomputable def interpretIntrinsicRibbonTangle
         (α_ Y X (𝟙_ 𝒞.C)).hom
   | _, _, .positiveTwist strand =>
       let X := intrinsicRibbonAtomObject 𝒞 colour strand
-      𝒞.ribbon.twist.hom.app X ⊗ₘ 𝟙 (𝟙_ 𝒞.C)
+      𝒞.twist.hom.app X ⊗ₘ 𝟙 (𝟙_ 𝒞.C)
   | _, _, .negativeTwist strand =>
       let X := intrinsicRibbonAtomObject 𝒞 colour strand
-      𝒞.ribbon.twist.inv.app X ⊗ₘ 𝟙 (𝟙_ 𝒞.C)
+      𝒞.twist.inv.app X ⊗ₘ 𝟙 (𝟙_ 𝒞.C)
 
 theorem intrinsicBoundaryWordObject_eq_simpleLabelWordObject
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {Component : Type*}
     (colour : Component → 𝒞.simples.Simple)
     (components : List Component) :
@@ -124,8 +124,8 @@ Interpret an intrinsic dotted cut syntax as a morphism between its two public
 component-colour boundary words.
 -/
 noncomputable def interpretIntrinsicDottedCutTangle
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     {punctures : List (DottedPuncture diagram.trace)}
     (cut : IntrinsicDottedCutTangle diagram punctures) :
@@ -142,8 +142,8 @@ noncomputable def interpretIntrinsicDottedCutTangle
         𝒞 labeling (intrinsicDottedCutOutputWord diagram punctures))
 
 theorem intrinsicDottedCutInputLabels_eq
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     (intrinsicDottedCutInputWord diagram punctures).map labeling =
@@ -153,8 +153,8 @@ theorem intrinsicDottedCutInputLabels_eq
   rfl
 
 theorem intrinsicDottedCutOutputLabels_eq
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     (intrinsicDottedCutOutputWord diagram punctures).map labeling =
@@ -169,8 +169,8 @@ representative-independence naturality theorem.  The endpoint casts only
 unfold component-index bookkeeping; they never compare `X` with `X*`.
 -/
 noncomputable def intrinsicDottedCutMorphism
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     {punctures : List (DottedPuncture diagram.trace)}
     (cut : IntrinsicDottedCutTangle diagram punctures) :

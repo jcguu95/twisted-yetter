@@ -21,6 +21,8 @@ certificates are assembled below as theorems from individually named inputs.
 
 namespace TwistedYetter.Semantics.Independent
 
+noncomputable section
+
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
 
@@ -47,13 +49,13 @@ those exact constructors.
 
 axiom FramedRibbonIsotopyWitness
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     {X Y : 𝒞.C} :
     RibbonExpression 𝒞 X Y → RibbonExpression 𝒞 X Y → Type
 
 abbrev FramedRibbonIsotopic
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     {X Y : 𝒞.C}
     (left right : RibbonExpression 𝒞 X Y) : Prop :=
   Nonempty (FramedRibbonIsotopyWitness left right)
@@ -65,7 +67,7 @@ Twisted-Yetter evaluation equality.
 -/
 axiom shum_framedRibbonCoherence
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     {X Y : 𝒞.C}
     {left right : RibbonExpression 𝒞 X Y} :
     FramedRibbonIsotopic left right →
@@ -85,28 +87,31 @@ does not choose `X` versus `X*` and does not create a character exponent.
 -/
 axiom intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (role : (diagram.trace.components dotted).role = .dotted)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord dotted role))
+      (presentation.cut.punctureWord dotted role))
     (_regluing :
-      IntrinsicDottedCutRegluesToDiagram diagram dotted role cut) :
+      IntrinsicDottedCutRegluesToDiagram
+        diagram presentation dotted role cut) :
     ∃ context : LinearRibbonExpressionContext 𝒞
         (simpleLabelWordObject 𝒞
           (dottedInboundLabelWord 𝒞 diagram labeling
-            (diagram.dottedCuts.punctureWord dotted role)))
+            (presentation.cut.punctureWord dotted role)))
         (simpleLabelWordObject 𝒞
           (dottedOutboundLabelWord 𝒞 diagram labeling
-            (diagram.dottedCuts.punctureWord dotted role)))
+            (presentation.cut.punctureWord dotted role)))
         (𝟙_ 𝒞.C) (𝟙_ 𝒞.C),
       FramedRibbonIsotopic
         (context.plug (.morphism
           (intrinsicDottedCutMorphism 𝒞 diagram labeling cut)))
         (.morphism
-          (compileCutOpenExteriorMorphism 𝒞 diagram labeling))
+          (compileCutOpenExteriorMorphism
+            𝒞 diagram presentation labeling))
 
 /--
 EGNO, canonical pivotal structure of a ribbon category: the tensor unit has
@@ -117,7 +122,7 @@ character, evaluator, or manifold.
 -/
 axiom egno_tensorUnitQuantumDimension
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1
 
 /--
@@ -126,7 +131,7 @@ algebraically closed field of characteristic zero.
 -/
 axiom egno_globalDimension_ne_zero
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     𝒞.globalDimension ≠ 0
 
 /-! ## Clean band-slide graphical interpretation -/
@@ -204,7 +209,8 @@ noncomputable def normalizedCycleExpression
         (ordinaryKirbyWeight 𝒞η.category labeling *
             characterWeight 𝒞η labeling cycle) •
           (canonicalRoleAwareGraphCompiler
-            𝒞η marked.diagram marked.primalBoundary labeling cycle).interpret)
+            𝒞η marked.diagram marked.cut
+              marked.primalBoundary labeling cycle).interpret)
 
 /--
 Clean attachment has the standard typed graphical interpretation.
@@ -382,7 +388,7 @@ already records one zero-handle, one four-handle, dotted one-handles, framed
 two-handles, and the closing three-handle data.
 -/
 axiom realizeSpecialKirbyDiagram :
-  CombinatorialSpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
+  SpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
 
 /--
 The transposed THAM handle complex computes integral second cohomology of the
@@ -390,7 +396,7 @@ realized four-manifold.  This is the cellular/handle comparison on the dual
 handle decomposition, not an evaluator or invariance statement.
 -/
 axiom turnedOverHandleComplexComputesSecondCohomology
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram) :
     ThamKirbyH₂ primal ≃+
       ManifoldSecondCohomology (realizeSpecialKirbyDiagram diagram)
@@ -405,7 +411,7 @@ Thus no caller and no axiom may choose an unrelated abstract equivalence
 between the primal and THAM-side groups.
 -/
 noncomputable def turnoverPoincareDualityEquiv
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (homologyComparison :
       PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
@@ -423,15 +429,16 @@ Kirby diagram in the stated sense.
 -/
 axiom specialKirbyDiagram_exists
     (X : ClosedOrientedSmoothFourManifold) :
-    Σ diagram : CombinatorialSpecialKirbyDiagram,
-      OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
+    Σ diagram : SpecialKirbyDiagram,
+      DottedCutPresentation diagram ×
+        OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
 
 /--
 T2. The integral handle chain complex of a presenting diagram computes the
 manifold's second homology.
 
 We deliberately retain this as an external classical handle-topology axiom.
-`CombinatorialSpecialKirbyDiagram` records the number of closing three-handles,
+`SpecialKirbyDiagram` records the number of closing three-handles,
 but it does not formalize their attaching two-spheres in the boundary of the
 zero-, one-, and two-handlebody.  Consequently, the combinatorial data in this
 project cannot by itself construct the genuine degree-three boundary map
@@ -449,20 +456,26 @@ evaluation, scalar equality, or invariance conclusion, and it cannot be
 replaced merely by the weaker chain identity `∂₂ ∘ ∂₃ = 0`.
 -/
 axiom specialKirbyDiagram_computesH₂
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    Σ primal : PrimalDegreeThreeBoundaryData diagram,
-      PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
+    (diagram : SpecialKirbyDiagram) :
+    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
+      ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
 
 structure SpecialKirbyRepresentativeOf
     (X : ClosedOrientedSmoothFourManifold) where
-  diagram : CombinatorialSpecialKirbyDiagram
-  primalBoundary : PrimalDegreeThreeBoundaryData diagram
+  diagram : SpecialKirbyDiagram
+  cut : DottedCutPresentation diagram
   realizationDiffeomorphism :
     OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
   diagramHomologyComparison :
-    PrimalKirbyH₂ primalBoundary ≃+
+    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
       ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
-  alpha : PrimalKirbyH₂ primalBoundary
+  alpha : PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData
+
+abbrev SpecialKirbyRepresentativeOf.primalBoundary
+    {X : ClosedOrientedSmoothFourManifold}
+    (representative : SpecialKirbyRepresentativeOf X) :
+    PrimalDegreeThreeBoundaryData representative.diagram :=
+  representative.diagram.primalDegreeThreeBoundaryData
 
 noncomputable def SpecialKirbyRepresentativeOf.thamAlpha
     {X : ClosedOrientedSmoothFourManifold}
@@ -478,7 +491,7 @@ noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     (representative : SpecialKirbyRepresentativeOf X) :
     HomologicallyMarkedDiagram :=
   { diagram := representative.diagram
-    primalBoundary := representative.primalBoundary
+    cut := representative.cut
     thamAlpha := representative.thamAlpha }
 
 noncomputable def SpecialKirbyRepresentativeOf.diagramH₂EquivManifoldH₂
@@ -505,14 +518,16 @@ theorem specialKirbyRepresentative_exists
     (alpha : ManifoldH₂ X) :
     ∃ representative : SpecialKirbyRepresentativeOf X,
       representative.representsHomologyClass alpha := by
-  obtain ⟨diagram, realizationDiffeomorphism⟩ := specialKirbyDiagram_exists X
-  obtain ⟨primal, diagramHomologyComparison⟩ :=
-    specialKirbyDiagram_computesH₂ diagram
-  let homologyComparison : PrimalKirbyH₂ primal ≃+ ManifoldH₂ X :=
+  obtain ⟨diagram, cut, realizationDiffeomorphism⟩ :=
+    specialKirbyDiagram_exists X
+  let diagramHomologyComparison := specialKirbyDiagram_computesH₂ diagram
+  let homologyComparison :
+      PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
+        ManifoldH₂ X :=
     diagramHomologyComparison.trans (inducedH₂ realizationDiffeomorphism)
   let representative : SpecialKirbyRepresentativeOf X :=
     { diagram := diagram
-      primalBoundary := primal
+      cut := cut
       realizationDiffeomorphism := realizationDiffeomorphism
       diagramHomologyComparison := diagramHomologyComparison
       alpha := homologyComparison.symm alpha }
@@ -560,6 +575,8 @@ def TwistedYetterDiffeomorphismInvarianceTarget
       right.representsHomologyClass (inducedH₂ f alpha)),
     evaluateMarking 𝒞η left.toHomologicallyMarkedDiagram =
       evaluateMarking 𝒞η right.toHomologicallyMarkedDiagram
+
+end
 
 end TwistedYetter.Semantics.Independent
 

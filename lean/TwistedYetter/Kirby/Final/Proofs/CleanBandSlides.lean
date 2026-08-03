@@ -12,6 +12,7 @@ ribbon-expression level.  Scalar evaluation equality is derived here.
 namespace TwistedYetter.Kirby.Final.Proofs
 
 open TwistedYetter.Semantics.Independent
+open CategoryTheory
 
 universe uK
 
@@ -30,17 +31,17 @@ theorem normalizedCycleExpression_evaluation
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (normalizedCycleExpression 𝒞η marked cycle) =
       evaluateCycle 𝒞η
-        marked.diagram marked.primalBoundary cycle := by
+        marked.diagram marked.cut marked.primalBoundary cycle := by
   classical
   unfold normalizedCycleExpression
   unfold canonicalRibbonGraphicalEvaluation
   unfold evaluateCycle
   unfold rawCycleSum
-  unfold PremodularFusionCategory.closedScalar
+  unfold BundledPremodularCategory.closedScalar
   simp only [RibbonExpression.interpret]
   simp only [map_smul, map_sum]
   simp only [canonicalRibbonGraphicalEvaluation,
-    PremodularFusionCategory.closedScalar]
+    BundledPremodularCategory.closedScalar]
   simp only [smul_eq_mul]
 
 /--
@@ -62,9 +63,9 @@ theorem cleanBandSlide_preserves_evaluation
     (transport : ThamHandleChainTransport source target)
     (sourceCycle : ThamTwoCycles source.primalBoundary) :
     evaluateCycle 𝒞η
-        source.diagram source.primalBoundary sourceCycle =
+        source.diagram source.cut source.primalBoundary sourceCycle =
       evaluateCycle 𝒞η
-        target.diagram target.primalBoundary
+        target.diagram target.cut target.primalBoundary
           (transport.mapCycle sourceCycle) := by
   obtain ⟨attachNormalForm, attach⟩ :=
     cleanAttach_hasStandardGraphicalInterpretation

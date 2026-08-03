@@ -29,30 +29,32 @@ open CategoryTheory.MonoidalCategory
 
 universe uK uC uS v
 
+noncomputable section
+
 abbrev TwoHandleLabeling
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram) :=
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram) :=
   Fin diagram.handles.hTwo → 𝒞.simples.Simple
 
 instance
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram) :
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram) :
     Fintype (TwoHandleLabeling 𝒞 diagram) :=
   inferInstance
 
 def ordinaryKirbyWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    {diagram : CombinatorialSpecialKirbyDiagram}
+    (𝒞 : BundledPremodularCategory K)
+    {diagram : SpecialKirbyDiagram}
     (labeling : TwoHandleLabeling 𝒞 diagram) : K :=
   ∏ handle, 𝒞.simples.quantumDimension (labeling handle)
 
 noncomputable def characterWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    {diagram : CombinatorialSpecialKirbyDiagram}
+    {diagram : SpecialKirbyDiagram}
     {primal : PrimalDegreeThreeBoundaryData diagram}
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (cycle : ThamTwoCycles primal) : K :=
@@ -85,8 +87,8 @@ every active exterior word by
 -/
 def exteriorStrandLabel
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (strand : diagram.trace.StrandId) :
     𝒞.simples.Simple :=
@@ -98,8 +100,8 @@ def exteriorStrandLabel
 
 def orientedExteriorStrand
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (strand : diagram.trace.StrandId) :
     OrientedSimple 𝒞 where
@@ -110,8 +112,8 @@ def orientedExteriorStrand
 
 def exteriorWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (strands : List diagram.trace.StrandId) :
     RibbonWord 𝒞 :=
@@ -132,8 +134,8 @@ character exponent.
 
 def dottedIncidenceLabel
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (puncture : DottedPuncture diagram.trace) :
     𝒞.simples.Simple :=
@@ -143,8 +145,8 @@ def dottedIncidenceLabel
 
 def dottedInboundLabelWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List 𝒞.simples.Simple :=
@@ -153,8 +155,8 @@ def dottedInboundLabelWord
 
 def dottedOutboundLabelWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List 𝒞.simples.Simple :=
@@ -164,7 +166,7 @@ def dottedOutboundLabelWord
 /-- Tensor product of component labels without reading strand orientation. -/
 def simpleLabelWordObject
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     List 𝒞.simples.Simple → 𝒞.C
   | [] => 𝟙_ 𝒞.C
   | label :: rest =>
@@ -178,8 +180,8 @@ constructs a term of this type from the independent intrinsic ribbon grammar.
 -/
 def DottedIncidenceMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) : Type _ :=
   simpleLabelWordObject 𝒞
@@ -196,8 +198,8 @@ waist object is `X` or `Xᘁ`.
 -/
 def orientedCutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (puncture : DottedPuncture diagram.trace) :
     OrientedSimple 𝒞 where
@@ -209,8 +211,8 @@ def orientedCutBoundaryPuncture
 
 def cutBoundaryWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     RibbonWord 𝒞 :=
@@ -224,8 +226,8 @@ projector-waist word.  It must not be used as a substitute for
 
 theorem orientedExteriorInput_eq_cutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (puncture : DottedPuncture diagram.trace) :
     orientedExteriorStrand 𝒞 diagram labeling puncture.inputStrand =
@@ -238,8 +240,8 @@ theorem orientedExteriorInput_eq_cutBoundaryPuncture
 
 theorem orientedExteriorOutput_eq_cutBoundaryPuncture
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (puncture : DottedPuncture diagram.trace) :
     orientedExteriorStrand 𝒞 diagram labeling puncture.outputStrand =
@@ -263,8 +265,8 @@ theorem orientedExteriorOutput_eq_cutBoundaryPuncture
 
 theorem exteriorInputWord_eq_cutBoundaryWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     exteriorWord 𝒞 diagram labeling
@@ -279,8 +281,8 @@ theorem exteriorInputWord_eq_cutBoundaryWord
 
 theorem exteriorOutputWord_eq_cutBoundaryWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     exteriorWord 𝒞 diagram labeling
@@ -295,7 +297,7 @@ theorem exteriorOutputWord_eq_cutBoundaryWord
 
 def ribbonWordAppendIso
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     (left right : RibbonWord 𝒞) →
       ribbonWordObject 𝒞 (List.append left right) ≅
         ribbonWordObject 𝒞 left ⊗ ribbonWordObject 𝒞 right
@@ -309,8 +311,8 @@ def ribbonWordAppendIso
 
 theorem exteriorStrandLabel_eq_of_component_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     {left right : diagram.trace.StrandId}
     (component_eq :
@@ -323,8 +325,8 @@ theorem exteriorStrandLabel_eq_of_component_eq
 
 theorem orientedExteriorStrand_eq_of_component_and_orientation
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     {input output : diagram.trace.StrandId}
     (component_eq :
@@ -344,8 +346,8 @@ theorem orientedExteriorStrand_eq_of_component_and_orientation
 
 theorem exteriorWord_of_continuations_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (continuations :
       List (diagram.trace.StrandId × diagram.trace.StrandId))
@@ -376,8 +378,8 @@ theorem exteriorWord_of_continuations_eq
 
 theorem exteriorWord_of_punctures_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     exteriorWord 𝒞 diagram labeling
@@ -405,21 +407,21 @@ two concrete strands recorded by the combinatorial trace.
 
 def positiveNegativeDualPairWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) : RibbonWord 𝒞 :=
   [{ label := label, direction := .forward },
     { label := label, direction := .dual }]
 
 def negativePositiveDualPairWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) : RibbonWord 𝒞 :=
   [{ label := label, direction := .dual },
     { label := label, direction := .forward }]
 
 def canonicalPositiveNegativeBirth
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) :
     ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) ⟶
       ribbonWordObject 𝒞 (positiveNegativeDualPairWord 𝒞 label) := by
@@ -432,7 +434,7 @@ def canonicalPositiveNegativeBirth
 
 def canonicalNegativePositiveBirth
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) :
     ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) ⟶
       ribbonWordObject 𝒞 (negativePositiveDualPairWord 𝒞 label) := by
@@ -446,7 +448,7 @@ def canonicalNegativePositiveBirth
 
 def canonicalPositiveNegativeDeath
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) :
     ribbonWordObject 𝒞 (positiveNegativeDualPairWord 𝒞 label) ⟶
       ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) := by
@@ -460,7 +462,7 @@ def canonicalPositiveNegativeDeath
 
 def canonicalNegativePositiveDeath
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (label : 𝒞.simples.Simple) :
     ribbonWordObject 𝒞 (negativePositiveDualPairWord 𝒞 label) ⟶
       ribbonWordObject 𝒞 ([] : RibbonWord 𝒞) := by
@@ -493,8 +495,8 @@ theorem right_positive_of_left_negative_of_ne
 
 def positiveNegativeDualPairWord_eq_exteriorWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (left right : diagram.trace.StrandId)
     (component_eq :
@@ -514,8 +516,8 @@ def positiveNegativeDualPairWord_eq_exteriorWord
 
 def negativePositiveDualPairWord_eq_exteriorWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (left right : diagram.trace.StrandId)
     (component_eq :
@@ -535,8 +537,8 @@ def negativePositiveDualPairWord_eq_exteriorWord
 
 def pairedBirthMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (left right : diagram.trace.StrandId)
     (component_eq :
@@ -573,8 +575,8 @@ def pairedBirthMorphism
 
 def pairedDeathMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (left right : diagram.trace.StrandId)
     (component_eq :
@@ -612,8 +614,8 @@ def pairedDeathMorphism
 /-- Compile one exact cut-open event before adding its common exterior. -/
 def compileCutOpenEventMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (pairing : event.StrandContinuationsAreWellFormed) :
@@ -655,8 +657,8 @@ def compileCutOpenEventMorphism
         exteriorWord, List.map_cons, List.map_nil, ribbonWordObject]
       rw [← output_eq]
       cases sign with
-      | positive => exact 𝒞.ribbon.twist.hom.app _ ⊗ₘ 𝟙 _
-      | negative => exact 𝒞.ribbon.twist.inv.app _ ⊗ₘ 𝟙 _
+      | positive => exact 𝒞.twist.hom.app _ ⊗ₘ 𝟙 _
+      | negative => exact 𝒞.twist.inv.app _ ⊗ₘ 𝟙 _
   | planarIsotopy continuations =>
       have word_eq :=
         exteriorWord_of_continuations_eq
@@ -679,39 +681,42 @@ def compileCutOpenEventMorphism
 
 /-- The chosen left exterior context of one certified event transition. -/
 noncomputable def eventLeftContext
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
+    (i : Fin presentation.cut.exterior.eventCount) :
     List diagram.trace.StrandId :=
   Classical.choose
-    (diagram.dottedCuts.exterior.transitionValid i)
+    (presentation.cut.exterior.transitionValid i)
 
 /-- The chosen right exterior context of one certified event transition. -/
 noncomputable def eventRightContext
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
+    (i : Fin presentation.cut.exterior.eventCount) :
     List diagram.trace.StrandId :=
   Classical.choose
     (Classical.choose_spec
-      (diagram.dottedCuts.exterior.transitionValid i))
+      (presentation.cut.exterior.transitionValid i))
 
 theorem eventTransitionEquations
-    (diagram : CombinatorialSpecialKirbyDiagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
-    diagram.dottedCuts.exterior.activeOrder i.castSucc =
-        eventLeftContext diagram i ++
-          (diagram.dottedCuts.exterior.events i).beforeWord ++
-          eventRightContext diagram i ∧
-      diagram.dottedCuts.exterior.activeOrder i.succ =
-        eventLeftContext diagram i ++
-          (diagram.dottedCuts.exterior.events i).afterWord ++
-          eventRightContext diagram i :=
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
+    (i : Fin presentation.cut.exterior.eventCount) :
+    presentation.cut.exterior.activeOrder i.castSucc =
+        eventLeftContext diagram presentation i ++
+          (presentation.cut.exterior.events i).beforeWord ++
+          eventRightContext diagram presentation i ∧
+      presentation.cut.exterior.activeOrder i.succ =
+        eventLeftContext diagram presentation i ++
+          (presentation.cut.exterior.events i).afterWord ++
+          eventRightContext diagram presentation i :=
   Classical.choose_spec
     (Classical.choose_spec
-      (diagram.dottedCuts.exterior.transitionValid i))
+      (presentation.cut.exterior.transitionValid i))
 
 def contextualizeRibbonMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (left before after right : RibbonWord 𝒞)
     (map :
       ribbonWordObject 𝒞 before ⟶
@@ -731,21 +736,22 @@ def contextualizeRibbonMorphism
 /-- Compile one event together with the exact common exterior context. -/
 noncomputable def compileContextualCutOpenEventMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    (i : Fin presentation.cut.exterior.eventCount) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder i.castSucc)) ⟶
+          (presentation.cut.exterior.activeOrder i.castSucc)) ⟶
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder i.succ)) := by
-  let event := diagram.dottedCuts.exterior.events i
-  let left := eventLeftContext diagram i
-  let right := eventRightContext diagram i
-  have before_eq := (eventTransitionEquations diagram i).1
-  have after_eq := (eventTransitionEquations diagram i).2
+          (presentation.cut.exterior.activeOrder i.succ)) := by
+  let event := presentation.cut.exterior.events i
+  let left := eventLeftContext diagram presentation i
+  let right := eventRightContext diagram presentation i
+  have before_eq := (eventTransitionEquations diagram presentation i).1
+  have after_eq := (eventTransitionEquations diagram presentation i).2
   have before_object_eq :=
     congrArg
       (fun word =>
@@ -787,7 +793,7 @@ noncomputable def compileContextualCutOpenEventMorphism
         (exteriorWord 𝒞 diagram labeling event.afterWord)
         (exteriorWord 𝒞 diagram labeling right)
         (compileCutOpenEventMorphism 𝒞 diagram labeling event
-          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)) ≫
+          (presentation.cut.exterior.strandContinuationsAreWellFormed i)) ≫
       eqToHom after_context_object_eq.symm ≫
       eqToHom after_object_eq.symm
 
@@ -824,8 +830,8 @@ cup/cap/braiding/isotopy events and composes them in order.
 -/
 noncomputable def compileDottedCollarBendingPathMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     {source target : List diagram.trace.StrandId}
     (path : DottedCollarBendingPath diagram.trace source target)
@@ -960,12 +966,13 @@ literal dotted component that created it.
 -/
 noncomputable def compileRoleAwareCutOpenEventMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (pairing : event.StrandContinuationsAreWellFormed)
-    (exact : event.UsesExactDottedPunctureWord diagram.dottedCuts) :
+    (exact : event.UsesExactDottedPunctureWord presentation.cut) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling event.beforeWord) ⟶
       ribbonWordObject 𝒞
@@ -977,7 +984,7 @@ noncomputable def compileRoleAwareCutOpenEventMorphism
       rw [punctures_eq]
       exact compileCutOpenEventMorphism 𝒞 diagram labeling
         (.projectorHole dotted
-          (diagram.dottedCuts.punctureWord dotted role)) (by
+          (presentation.cut.punctureWord dotted role)) (by
             simpa only [punctures_eq] using pairing)
   | birth left right =>
       exact compileCutOpenEventMorphism 𝒞 diagram labeling
@@ -997,14 +1004,15 @@ noncomputable def compileRoleAwareCutOpenEventMorphism
 
 theorem compileRoleAwareCutOpenEventMorphism_eq_elementary
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (pairing : event.StrandContinuationsAreWellFormed)
-    (exact : event.UsesExactDottedPunctureWord diagram.dottedCuts) :
+    (exact : event.UsesExactDottedPunctureWord presentation.cut) :
     compileRoleAwareCutOpenEventMorphism
-        𝒞 diagram labeling event pairing exact =
+        𝒞 diagram presentation labeling event pairing exact =
       compileCutOpenEventMorphism 𝒞 diagram labeling event pairing := by
   cases event with
   | projectorHole =>
@@ -1020,58 +1028,61 @@ theorem compileRoleAwareCutOpenEventMorphism_eq_elementary
 /-- Compile one event at its certified position in the global cut-open trace. -/
 noncomputable def compileRoleAwareCutOpenEventAt
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    (i : Fin presentation.cut.exterior.eventCount) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events i).beforeWord) ⟶
+          (presentation.cut.exterior.events i).beforeWord) ⟶
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events i).afterWord) :=
-  compileRoleAwareCutOpenEventMorphism 𝒞 diagram labeling
-    (diagram.dottedCuts.exterior.events i)
-    (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-    (diagram.dottedCuts.exteriorEvent_usesExactDottedPunctureWord
-      (standardDottedProjectorEventCompleteness diagram) i)
+          (presentation.cut.exterior.events i).afterWord) :=
+  compileRoleAwareCutOpenEventMorphism 𝒞 diagram presentation labeling
+    (presentation.cut.exterior.events i)
+    (presentation.cut.exterior.strandContinuationsAreWellFormed i)
+    (presentation.cut.exteriorEvent_usesExactDottedPunctureWord
+      (standardDottedProjectorEventCompleteness diagram presentation) i)
 
 theorem compileRoleAwareCutOpenEventAt_eq_elementary
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
-    compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i =
+    (i : Fin presentation.cut.exterior.eventCount) :
+    compileRoleAwareCutOpenEventAt 𝒞 diagram presentation labeling i =
       compileCutOpenEventMorphism 𝒞 diagram labeling
-        (diagram.dottedCuts.exterior.events i)
-        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i) := by
+        (presentation.cut.exterior.events i)
+        (presentation.cut.exterior.strandContinuationsAreWellFormed i) := by
   unfold compileRoleAwareCutOpenEventAt
   exact compileRoleAwareCutOpenEventMorphism_eq_elementary
-    𝒞 diagram labeling
-    (diagram.dottedCuts.exterior.events i)
-    (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)
-    (diagram.dottedCuts.exteriorEvent_usesExactDottedPunctureWord
-      (standardDottedProjectorEventCompleteness diagram) i)
+    𝒞 diagram presentation labeling
+    (presentation.cut.exterior.events i)
+    (presentation.cut.exterior.strandContinuationsAreWellFormed i)
+    (presentation.cut.exteriorEvent_usesExactDottedPunctureWord
+      (standardDottedProjectorEventCompleteness diagram presentation) i)
 
 /-- Add the exact common exterior context to one role-aware event. -/
 noncomputable def compileRoleAwareContextualCutOpenEventMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
+    (i : Fin presentation.cut.exterior.eventCount) :
     ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder i.castSucc)) ⟶
+          (presentation.cut.exterior.activeOrder i.castSucc)) ⟶
       ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder i.succ)) := by
-  let event := diagram.dottedCuts.exterior.events i
-  let left := eventLeftContext diagram i
-  let right := eventRightContext diagram i
-  have before_eq := (eventTransitionEquations diagram i).1
-  have after_eq := (eventTransitionEquations diagram i).2
+          (presentation.cut.exterior.activeOrder i.succ)) := by
+  let event := presentation.cut.exterior.events i
+  let left := eventLeftContext diagram presentation i
+  let right := eventRightContext diagram presentation i
+  have before_eq := (eventTransitionEquations diagram presentation i).1
+  have after_eq := (eventTransitionEquations diagram presentation i).2
   have before_object_eq :=
     congrArg
       (fun word =>
@@ -1112,40 +1123,42 @@ noncomputable def compileRoleAwareContextualCutOpenEventMorphism
         (exteriorWord 𝒞 diagram labeling event.beforeWord)
         (exteriorWord 𝒞 diagram labeling event.afterWord)
         (exteriorWord 𝒞 diagram labeling right)
-        (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i) ≫
+        (compileRoleAwareCutOpenEventAt 𝒞 diagram presentation labeling i) ≫
       eqToHom after_context_object_eq.symm ≫
       eqToHom after_object_eq.symm
 
 /-- Compile the complete finite cut-open exterior trace in sweep order. -/
 noncomputable def compileCutOpenExteriorMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
     𝟙_ 𝒞.C ⟶ 𝟙_ 𝒞.C := by
   let trace : FiniteMorphismTrace 𝒞.C
-      diagram.dottedCuts.exterior.eventCount :=
+      presentation.cut.exterior.eventCount :=
     {
       object := fun i =>
         ribbonWordObject 𝒞
           (exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.activeOrder i))
+            (presentation.cut.exterior.activeOrder i))
       edge := fun i =>
-        compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram labeling i
+        compileRoleAwareContextualCutOpenEventMorphism
+          𝒞 diagram presentation labeling i
     }
   have initial_object_eq :
       trace.object 0 = 𝟙_ 𝒞.C :=
     congrArg
       (fun word =>
         ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
-      diagram.dottedCuts.exterior.initialBoundaryEmpty
+      presentation.cut.exterior.initialBoundaryEmpty
   have final_object_eq :
-      trace.object (Fin.last diagram.dottedCuts.exterior.eventCount) =
+      trace.object (Fin.last presentation.cut.exterior.eventCount) =
         𝟙_ 𝒞.C :=
     congrArg
       (fun word =>
         ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
-      diagram.dottedCuts.exterior.finalBoundaryEmpty
+      presentation.cut.exterior.finalBoundaryEmpty
   exact
     eqToHom initial_object_eq.symm ≫
       trace.composeAll ≫
@@ -1161,13 +1174,15 @@ through which a caller could replace this expression by an unrelated graph.
 noncomputable def canonicalRoleAwareGraphCompiler
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (_cycle : ThamTwoCycles primal) :
     ClosedRibbonExpression 𝒞η.category :=
   .morphism
-    (compileCutOpenExteriorMorphism 𝒞η.category diagram labeling)
+    (compileCutOpenExteriorMorphism
+      𝒞η.category diagram presentation labeling)
 
 /--
 Tham Definition 5.11 normalization on the turned-over handle decomposition.
@@ -1190,7 +1205,8 @@ def thamDefinition511Normalization
 noncomputable def rawCycleSum
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (cycle : ThamTwoCycles primal) : K :=
   ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
@@ -1198,13 +1214,14 @@ noncomputable def rawCycleSum
     characterWeight 𝒞η labeling cycle *
     let term :=
       canonicalRoleAwareGraphCompiler
-        𝒞η diagram primal labeling cycle
+        𝒞η diagram presentation primal labeling cycle
     canonicalRibbonGraphicalEvaluation 𝒞η.category term
 
 noncomputable def evaluateCycle
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (cycle : ThamTwoCycles primal) : K :=
   thamDefinition511Normalization
@@ -1212,7 +1229,7 @@ noncomputable def evaluateCycle
       diagram.handles.hThree
       diagram.handles.hTwo
       diagram.handles.hOne *
-    rawCycleSum 𝒞η diagram primal cycle
+    rawCycleSum 𝒞η diagram presentation primal cycle
 
 /--
 Representative independence is not baked into the definition.  It is the
@@ -1221,14 +1238,17 @@ precise obligation required before `evaluateCycle` descends to `ThamKirbyH₂`.
 def RepresentativeIndependenceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram) : Prop :=
   ∀ left right : ThamTwoCycles primal,
     thamCycleClass primal left = thamCycleClass primal right →
     evaluateCycle 𝒞η
-        diagram primal left =
+        diagram presentation primal left =
       evaluateCycle 𝒞η
-        diagram primal right
+        diagram presentation primal right
+
+end
 
 end TwistedYetter.Semantics.Independent
 

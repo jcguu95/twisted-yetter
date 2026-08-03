@@ -27,36 +27,39 @@ One topologically realized intrinsic cut exhibits the actual compiled closed
 graph as a linear exterior context applied to the interpreted cut morphism.
 -/
 theorem canonicalEvaluation_factorizes_through_intrinsicDottedCut
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (role : (diagram.trace.components dotted).role = .dotted)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord dotted role))
+      (presentation.cut.punctureWord dotted role))
     (regluing :
-      IntrinsicDottedCutRegluesToDiagram diagram dotted role cut) :
+      IntrinsicDottedCutRegluesToDiagram
+        diagram presentation dotted role cut) :
     ∃ exterior :
         (simpleLabelWordObject 𝒞
               (dottedInboundLabelWord 𝒞 diagram labeling
-                (diagram.dottedCuts.punctureWord dotted role)) ⟶
+                (presentation.cut.punctureWord dotted role)) ⟶
           simpleLabelWordObject 𝒞
               (dottedOutboundLabelWord 𝒞 diagram labeling
-                (diagram.dottedCuts.punctureWord dotted role))) →ₗ[K] K,
+                (presentation.cut.punctureWord dotted role))) →ₗ[K] K,
       canonicalRibbonGraphicalEvaluation 𝒞
           (.morphism
-            (compileCutOpenExteriorMorphism 𝒞 diagram labeling)) =
+            (compileCutOpenExteriorMorphism
+              𝒞 diagram presentation labeling)) =
         exterior (intrinsicDottedCutMorphism 𝒞 diagram labeling cut) := by
   obtain ⟨context, isotopy⟩ :=
     intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
-      𝒞 diagram labeling dotted role cut regluing
+      𝒞 diagram presentation labeling dotted role cut regluing
   let exterior :
       (simpleLabelWordObject 𝒞
             (dottedInboundLabelWord 𝒞 diagram labeling
-              (diagram.dottedCuts.punctureWord dotted role)) ⟶
+              (presentation.cut.punctureWord dotted role)) ⟶
         simpleLabelWordObject 𝒞
             (dottedOutboundLabelWord 𝒞 diagram labeling
-              (diagram.dottedCuts.punctureWord dotted role))) →ₗ[K] K :=
+              (presentation.cut.punctureWord dotted role))) →ₗ[K] K :=
     𝒞.unitEndLinearEquiv.symm.toLinearMap.comp
       context.interpretLinearMap
   refine ⟨exterior, ?_⟩
@@ -64,13 +67,13 @@ theorem canonicalEvaluation_factorizes_through_intrinsicDottedCut
   have plugged := context.plug_interpret
     (intrinsicDottedCutMorphism 𝒞 diagram labeling cut)
   have graph_eq_context :
-      compileCutOpenExteriorMorphism 𝒞 diagram labeling =
+      compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling =
         context.interpretLinearMap
           (intrinsicDottedCutMorphism 𝒞 diagram labeling cut) :=
     interpreted.symm.trans plugged
   change
     𝒞.closedScalar
-        (compileCutOpenExteriorMorphism 𝒞 diagram labeling) =
+        (compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling) =
       𝒞.closedScalar
         (context.interpretLinearMap
           (intrinsicDottedCutMorphism 𝒞 diagram labeling cut))
@@ -82,7 +85,8 @@ trivially on the actual canonical closed evaluation.
 -/
 theorem twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (one : Fin diagram.handles.hOne)
     (exponent : ℤ) :
@@ -92,24 +96,26 @@ theorem twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
-              𝒞η.category diagram labeling))) =
+              𝒞η.category diagram presentation labeling))) =
       canonicalRibbonGraphicalEvaluation 𝒞η.category
         (.morphism
           (compileCutOpenExteriorMorphism
-            𝒞η.category diagram labeling)) := by
+            𝒞η.category diagram presentation labeling)) := by
   let dotted := diagram.handles.oneHandleIndex one
   obtain ⟨cut, regluing⟩ :=
-    standardIntrinsicDottedCutRealization diagram dotted.1 dotted.2
+    standardIntrinsicDottedCutRealization
+      diagram presentation dotted.1 dotted.2
   obtain ⟨exterior, factorization⟩ :=
     canonicalEvaluation_factorizes_through_intrinsicDottedCut
-      𝒞η.category diagram labeling dotted.1 dotted.2 cut regluing
+      𝒞η.category diagram presentation labeling
+        dotted.1 dotted.2 cut regluing
   rw [factorization]
   exact twoOneBoundaryCharacterFactor_absorbs_in_linearContext
-    𝒞η diagram labeling one exponent cut exterior
+    𝒞η diagram presentation labeling one exponent cut exterior
 
 /-- The THAM boundary coordinate is the incidence pairing with a one-chain. -/
 theorem intrinsic_thamBoundaryThree_apply_eq_sum_incidence
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne)
     (two : Fin diagram.handles.hTwo) :
@@ -119,12 +125,20 @@ theorem intrinsic_thamBoundaryThree_apply_eq_sum_incidence
   classical
   unfold PrimalDegreeThreeBoundaryData.thamBoundaryThree
     transposeAddHom coordinatePairing primalBoundaryTwo
-  simp [coordinateUnit, eq_comm]
+  change
+    (∑ one : Fin diagram.handles.hOne,
+      diagram.handles.boundaryTwo
+          (coordinateUnit diagram.handles.hTwo two) one * oneChain one) =
+      ∑ one : Fin diagram.handles.hOne,
+        twoOneIncidence diagram one two * oneChain one
+  apply Finset.sum_congr rfl
+  intro one _
+  rfl
 
 /-- Adding one THAM boundary multiplies the character weight by its factor. -/
 theorem intrinsic_characterWeight_add_thamBoundaryAsCycle
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (cycle : ThamTwoCycles primal)
@@ -167,7 +181,7 @@ one-handle boundary-row factors.  No puncture-level exponent occurs here.
 -/
 theorem thamBoundaryCharacterProduct_eq_twoOneProduct
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
@@ -227,7 +241,8 @@ private theorem intrinsic_finset_prod_mul_eq_of_each_mul_eq
 /-- The product of every dotted boundary-row factor is invisible. -/
 theorem twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     (∏ one : Fin diagram.handles.hOne,
@@ -237,21 +252,22 @@ theorem twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
-              𝒞η.category diagram labeling)) =
+              𝒞η.category diagram presentation labeling)) =
       canonicalRibbonGraphicalEvaluation 𝒞η.category
         (.morphism
           (compileCutOpenExteriorMorphism
-            𝒞η.category diagram labeling)) := by
+            𝒞η.category diagram presentation labeling)) := by
   apply intrinsic_finset_prod_mul_eq_of_each_mul_eq
     (Finset.univ : Finset (Fin diagram.handles.hOne))
   intro one _
   exact twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
-    𝒞η diagram labeling one (oneChain one)
+    𝒞η diagram presentation labeling one (oneChain one)
 
 /-- Fixed-label evaluation is unchanged after adding a THAM boundary. -/
 theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (cycle : ThamTwoCycles primal)
@@ -261,17 +277,17 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
-              𝒞η.category diagram labeling)) =
+              𝒞η.category diagram presentation labeling)) =
       characterWeight 𝒞η labeling cycle *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
-              𝒞η.category diagram labeling)) := by
+              𝒞η.category diagram presentation labeling)) := by
   let graphicalValue :=
     canonicalRibbonGraphicalEvaluation 𝒞η.category
       (.morphism
         (compileCutOpenExteriorMorphism
-          𝒞η.category diagram labeling))
+          𝒞η.category diagram presentation labeling))
   let boundaryFactor :=
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
@@ -299,18 +315,19 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
     _ = _ := by
       dsimp only [graphicalValue]
       rw [twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
-        𝒞η diagram labeling oneChain]
+        𝒞η diagram presentation labeling oneChain]
 
 /-- The complete frozen cycle evaluator is unchanged by one boundary. -/
 theorem intrinsic_evaluateCycle_add_thamBoundaryAsCycle
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram)
     (cycle : ThamTwoCycles primal)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    evaluateCycle 𝒞η diagram primal
+    evaluateCycle 𝒞η diagram presentation primal
         (cycle + thamBoundaryAsCycle primal oneChain) =
-      evaluateCycle 𝒞η diagram primal cycle := by
+      evaluateCycle 𝒞η diagram presentation primal cycle := by
   unfold evaluateCycle
   apply congrArg
   apply Finset.sum_congr rfl
@@ -319,8 +336,8 @@ theorem intrinsic_evaluateCycle_add_thamBoundaryAsCycle
   let graphicalValue :=
     canonicalRibbonGraphicalEvaluation 𝒞η.category
       (.morphism
-        (compileCutOpenExteriorMorphism
-          𝒞η.category diagram labeling))
+          (compileCutOpenExteriorMorphism
+          𝒞η.category diagram presentation labeling))
   calc
     ordinaryKirbyWeight 𝒞η.category labeling *
           characterWeight 𝒞η labeling
@@ -335,7 +352,7 @@ theorem intrinsic_evaluateCycle_add_thamBoundaryAsCycle
       ordinaryKirbyWeight 𝒞η.category labeling *
         (characterWeight 𝒞η labeling cycle * graphicalValue) := by
       rw [intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
-        𝒞η diagram primal labeling cycle oneChain]
+        𝒞η diagram presentation primal labeling cycle oneChain]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
           characterWeight 𝒞η labeling cycle * graphicalValue := by
@@ -347,9 +364,11 @@ second-homology class.
 -/
 theorem intrinsicFrozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram) :
-    RepresentativeIndependenceStatement 𝒞η diagram primal := by
+    RepresentativeIndependenceStatement
+      𝒞η diagram presentation primal := by
   intro left right same_class
   change
     (QuotientAddGroup.mk'
@@ -363,7 +382,7 @@ theorem intrinsicFrozenFrontendRepresentativeIndependence
   subst boundary
   rw [← left_add_boundary_eq]
   exact (intrinsic_evaluateCycle_add_thamBoundaryAsCycle
-    𝒞η diagram primal left oneChain).symm
+    𝒞η diagram presentation primal left oneChain).symm
 
 end
 

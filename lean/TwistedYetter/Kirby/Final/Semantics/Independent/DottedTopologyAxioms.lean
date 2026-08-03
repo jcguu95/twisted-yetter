@@ -22,19 +22,22 @@ morphism, or evaluation equality.
 -/
 
 axiom IntrinsicDottedCutRegluingWitness
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (dotted : diagram.trace.ComponentId)
     (role : (diagram.trace.components dotted).role = .dotted)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord dotted role)) : Type
+      (presentation.cut.punctureWord dotted role)) : Type
 
 abbrev IntrinsicDottedCutRegluesToDiagram
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (dotted : diagram.trace.ComponentId)
     (role : (diagram.trace.components dotted).role = .dotted)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord dotted role)) : Prop :=
-  Nonempty (IntrinsicDottedCutRegluingWitness diagram dotted role cut)
+      (presentation.cut.punctureWord dotted role)) : Prop :=
+  Nonempty (IntrinsicDottedCutRegluingWitness
+    diagram presentation dotted role cut)
 
 /--
 Every literal dotted handle admits an intrinsic oriented cut-tangle
@@ -44,12 +47,14 @@ This is the sole new external topology assertion for the intrinsic route.
 It does not assert any categorical or numerical equality.
 -/
 axiom standardIntrinsicDottedCutRealization
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (dotted : diagram.trace.ComponentId)
     (role : (diagram.trace.components dotted).role = .dotted) :
     ∃ cut : IntrinsicDottedCutTangle diagram
-        (diagram.dottedCuts.punctureWord dotted role),
-      IntrinsicDottedCutRegluesToDiagram diagram dotted role cut
+        (presentation.cut.punctureWord dotted role),
+      IntrinsicDottedCutRegluesToDiagram
+        diagram presentation dotted role cut
 
 /--
 In the simultaneous cut-open diagram:
@@ -67,8 +72,9 @@ This axiom mentions no category, projector morphism, character, or evaluation
 equality.
 -/
 axiom standardDottedProjectorEventCompleteness
-    (diagram : CombinatorialSpecialKirbyDiagram) :
-    diagram.dottedCuts.ProjectorEventsExactlyMatchDottedComponents
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram) :
+    presentation.cut.ProjectorEventsExactlyMatchDottedComponents
 
 end TwistedYetter.Semantics.Independent
 

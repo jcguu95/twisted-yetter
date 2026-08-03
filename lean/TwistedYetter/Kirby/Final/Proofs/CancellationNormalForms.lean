@@ -14,18 +14,22 @@ noncomputable section
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 theorem standardOneTwoBirth_eventCount
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.eventCount =
-      source.dottedCuts.exterior.eventCount + 3 := by
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.eventCount =
+      sourceCut.cut.exterior.eventCount + 3 := by
   have lengths :=
     congrArg List.length normalForm.2.2.1
   simp [serializedExteriorEvents, oneTwoLocalEvents] at lengths
   omega
 
 theorem standardOneTwoBirth_componentCount
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     target.trace.componentCount =
       source.trace.componentCount + 2 := by
   have lengths :=
@@ -34,8 +38,10 @@ theorem standardOneTwoBirth_componentCount
   omega
 
 theorem standardOneTwoBirth_strandCount
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     target.trace.strandCount =
       source.trace.strandCount + 3 := by
   have lengths :=
@@ -44,10 +50,12 @@ theorem standardOneTwoBirth_strandCount
   omega
 
 theorem standardOneTwoBirth_eventZero
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeCutOpenEvent
-        (target.dottedCuts.exterior.events
+        (targetCut.cut.exterior.events
           ⟨0, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -61,33 +69,41 @@ theorem standardOneTwoBirth_eventZero
   simpa using first
 
 def oneTwoFirstStrand
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     target.trace.StrandId :=
   ⟨source.trace.strandCount, by
     rw [standardOneTwoBirth_strandCount normalForm]
     omega⟩
 
 def oneTwoSecondStrand
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     target.trace.StrandId :=
   ⟨source.trace.strandCount + 1, by
     rw [standardOneTwoBirth_strandCount normalForm]
     omega⟩
 
 def oneTwoThirdStrand
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     target.trace.StrandId :=
   ⟨source.trace.strandCount + 2, by
     rw [standardOneTwoBirth_strandCount normalForm]
     omega⟩
 
 theorem standardOneTwoBirth_eventZero_eq
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.events
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.events
         ⟨0, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
@@ -96,7 +112,7 @@ theorem standardOneTwoBirth_eventZero_eq
         (oneTwoSecondStrand normalForm) := by
   have serialized := standardOneTwoBirth_eventZero normalForm
   generalize event_eq :
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
         ⟨0, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = event at serialized ⊢
@@ -118,10 +134,12 @@ theorem standardOneTwoBirth_eventZero_eq
       simp [serializeCutOpenEvent] at serialized
 
 theorem standardOneTwoBirth_eventOne
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeCutOpenEvent
-        (target.dottedCuts.exterior.events
+        (targetCut.cut.exterior.events
           ⟨1, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -135,11 +153,13 @@ theorem standardOneTwoBirth_eventOne
   simpa using second
 
 theorem standardOneTwoBirth_eventOne_exists
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     ∃ (dotted : target.trace.ComponentId)
       (puncture : DottedPuncture target.trace),
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
           ⟨1, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩ =
@@ -148,7 +168,7 @@ theorem standardOneTwoBirth_eventOne_exists
       serializePuncture puncture = oneTwoLocalPuncture source := by
   have serialized := standardOneTwoBirth_eventOne normalForm
   generalize event_eq :
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
         ⟨1, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = event at serialized
@@ -179,10 +199,12 @@ theorem standardOneTwoBirth_eventOne_exists
           exact puncture_eq
 
 theorem standardOneTwoBirth_eventTwo
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeCutOpenEvent
-        (target.dottedCuts.exterior.events
+        (targetCut.cut.exterior.events
           ⟨2, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -196,9 +218,11 @@ theorem standardOneTwoBirth_eventTwo
   simpa using third
 
 theorem standardOneTwoBirth_eventTwo_eq
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.events
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.events
         ⟨2, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
@@ -207,7 +231,7 @@ theorem standardOneTwoBirth_eventTwo_eq
         (oneTwoSecondStrand normalForm) := by
   have serialized := standardOneTwoBirth_eventTwo normalForm
   generalize event_eq :
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
         ⟨2, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = event at serialized ⊢
@@ -229,8 +253,10 @@ theorem standardOneTwoBirth_eventTwo_eq
       simp [serializeCutOpenEvent] at serialized
 
 theorem standardOneTwoBirth_firstStrandData
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeStrand
         (target.trace.strands (oneTwoFirstStrand normalForm)) =
       {
@@ -246,8 +272,10 @@ theorem standardOneTwoBirth_firstStrandData
   simpa using atIndex
 
 theorem standardOneTwoBirth_secondStrandData
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeStrand
         (target.trace.strands (oneTwoSecondStrand normalForm)) =
       {
@@ -263,8 +291,10 @@ theorem standardOneTwoBirth_secondStrandData
   simpa using atIndex
 
 theorem standardOneTwoBirth_thirdStrandData
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     serializeStrand
         (target.trace.strands (oneTwoThirdStrand normalForm)) =
       {
@@ -280,9 +310,11 @@ theorem standardOneTwoBirth_thirdStrandData
   simpa using atIndex
 
 theorem standardOneTwoBirth_activeOrderZero
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.activeOrder
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.activeOrder
         ⟨0, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = [] := by
@@ -293,9 +325,11 @@ theorem standardOneTwoBirth_activeOrderZero
   simpa using atIndex
 
 theorem standardOneTwoBirth_activeOrderOne
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.activeOrder
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.activeOrder
         ⟨1, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
@@ -308,7 +342,7 @@ theorem standardOneTwoBirth_activeOrderOne
   rcases atIndex with ⟨_positive, atIndex⟩
   change
     List.map Fin.val
-        (target.dottedCuts.exterior.activeOrder
+        (targetCut.cut.exterior.activeOrder
           ⟨1, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -318,9 +352,11 @@ theorem standardOneTwoBirth_activeOrderOne
   exact (List.map_injective_iff.mpr Fin.val_injective) atIndex
 
 theorem standardOneTwoBirth_activeOrderTwo
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.activeOrder
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.activeOrder
         ⟨2, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
@@ -333,7 +369,7 @@ theorem standardOneTwoBirth_activeOrderTwo
   rcases atIndex with ⟨_positive, atIndex⟩
   change
     List.map Fin.val
-        (target.dottedCuts.exterior.activeOrder
+        (targetCut.cut.exterior.activeOrder
           ⟨2, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -343,9 +379,11 @@ theorem standardOneTwoBirth_activeOrderTwo
   exact (List.map_injective_iff.mpr Fin.val_injective) atIndex
 
 theorem standardOneTwoBirth_activeOrderThree
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    target.dottedCuts.exterior.activeOrder
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    targetCut.cut.exterior.activeOrder
         ⟨3, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = [] := by
@@ -353,11 +391,11 @@ theorem standardOneTwoBirth_activeOrderThree
     congrArg (fun orders => orders[3]?)
       normalForm.2.2.2.1
   simp [serializedActiveOrders, oneTwoLocalActiveOrders,
-    source.dottedCuts.exterior.initialBoundaryEmpty] at atIndex
+    sourceCut.cut.exterior.initialBoundaryEmpty] at atIndex
   rcases atIndex with ⟨_positive, atIndex⟩
   change
     List.map Fin.val
-        (target.dottedCuts.exterior.activeOrder
+        (targetCut.cut.exterior.activeOrder
           ⟨3, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
@@ -365,8 +403,10 @@ theorem standardOneTwoBirth_activeOrderThree
   exact (List.map_injective_iff.mpr Fin.val_injective) atIndex
 
 theorem standardOneTwoBirth_first_second_component
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     (target.trace.strands
         (oneTwoFirstStrand normalForm)).component =
       (target.trace.strands
@@ -381,8 +421,10 @@ theorem standardOneTwoBirth_first_second_component
     simpa [serializeStrand] using first.trans second.symm)
 
 theorem standardOneTwoBirth_first_second_orientation
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     (target.trace.strands
         (oneTwoFirstStrand normalForm)).orientation ≠
       (target.trace.strands
@@ -398,8 +440,10 @@ theorem standardOneTwoBirth_first_second_orientation
   decide
 
 theorem standardOneTwoBirth_third_second_component
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     (target.trace.strands
         (oneTwoThirdStrand normalForm)).component =
       (target.trace.strands
@@ -414,8 +458,10 @@ theorem standardOneTwoBirth_third_second_component
     simpa [serializeStrand] using third.trans second.symm)
 
 theorem standardOneTwoBirth_third_second_orientation
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     (target.trace.strands
         (oneTwoThirdStrand normalForm)).orientation ≠
       (target.trace.strands
@@ -431,34 +477,38 @@ theorem standardOneTwoBirth_third_second_orientation
   decide
 
 def oneTwoEventIndexZero
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    Fin target.dottedCuts.exterior.eventCount :=
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    Fin targetCut.cut.exterior.eventCount :=
   ⟨0, by
     rw [standardOneTwoBirth_eventCount normalForm]
     omega⟩
 
 theorem standardOneTwoBirth_firstContextsEmpty
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    eventLeftContext target (oneTwoEventIndexZero normalForm) = [] ∧
-      eventRightContext target (oneTwoEventIndexZero normalForm) = [] := by
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    eventLeftContext target targetCut (oneTwoEventIndexZero normalForm) = [] ∧
+      eventRightContext target targetCut (oneTwoEventIndexZero normalForm) = [] := by
   let i := oneTwoEventIndexZero normalForm
   have eventEq :
-      target.dottedCuts.exterior.events i =
+      targetCut.cut.exterior.events i =
         .birth
           (oneTwoFirstStrand normalForm)
           (oneTwoSecondStrand normalForm) := by
     simpa [i, oneTwoEventIndexZero] using
       standardOneTwoBirth_eventZero_eq normalForm
   have beforeEq :
-      target.dottedCuts.exterior.activeOrder i.castSucc = [] := by
+      targetCut.cut.exterior.activeOrder i.castSucc = [] := by
     simpa [i, oneTwoEventIndexZero] using
       standardOneTwoBirth_activeOrderZero normalForm
-  have transition := (eventTransitionEquations target i).1
+  have transition := (eventTransitionEquations target targetCut i).1
   rw [beforeEq] at transition
   have eventBefore :
-      (target.dottedCuts.exterior.events i).beforeWord = [] := by
+      (targetCut.cut.exterior.events i).beforeWord = [] := by
     rw [eventEq]
     rfl
   rw [eventBefore] at transition
@@ -466,8 +516,8 @@ theorem standardOneTwoBirth_firstContextsEmpty
   exact transition
 
 noncomputable def compileContextualCutOpenEventMorphismFromWitness
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (before after left right : List diagram.trace.StrandId)
@@ -525,25 +575,27 @@ noncomputable def compileContextualCutOpenEventMorphismFromWitness
       eqToHom afterObjectEq.symm
 
 theorem compileContextualCutOpenEventMorphism_eq_fromWitness
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
-    compileContextualCutOpenEventMorphism 𝒞 diagram labeling i =
+    (i : Fin presentation.cut.exterior.eventCount) :
+    compileContextualCutOpenEventMorphism
+        𝒞 diagram presentation labeling i =
       compileContextualCutOpenEventMorphismFromWitness 𝒞 diagram labeling
-        (diagram.dottedCuts.exterior.events i)
-        (diagram.dottedCuts.exterior.activeOrder i.castSucc)
-        (diagram.dottedCuts.exterior.activeOrder i.succ)
-        (eventLeftContext diagram i)
-        (eventRightContext diagram i)
-        (eventTransitionEquations diagram i).1
-        (eventTransitionEquations diagram i).2
-        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i) := by
+        (presentation.cut.exterior.events i)
+        (presentation.cut.exterior.activeOrder i.castSucc)
+        (presentation.cut.exterior.activeOrder i.succ)
+        (eventLeftContext diagram presentation i)
+        (eventRightContext diagram presentation i)
+        (eventTransitionEquations diagram presentation i).1
+        (eventTransitionEquations diagram presentation i).2
+        (presentation.cut.exterior.strandContinuationsAreWellFormed i) := by
   rfl
 
 theorem compileContextualFromWitness_birth
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (leftOutput rightOutput : diagram.trace.StrandId)
     (before after left right : List diagram.trace.StrandId)
@@ -606,8 +658,8 @@ theorem compileContextualFromWitness_birth
   monoidal
 
 theorem compileContextualFromWitness_eq_birth
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (leftOutput rightOutput : diagram.trace.StrandId)
@@ -646,9 +698,11 @@ theorem compileContextualFromWitness_eq_birth
       beforeEmpty afterCanonical leftEmpty rightEmpty
 
 theorem standardOneTwoBirth_firstContextualEdge
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target) :
     eqToHom
         (congrArg
@@ -656,7 +710,7 @@ theorem standardOneTwoBirth_firstContextualEdge
             ribbonWordObject 𝒞
               (exteriorWord 𝒞 target labeling word))
           (standardOneTwoBirth_activeOrderZero normalForm)).symm ≫
-      compileContextualCutOpenEventMorphism 𝒞 target labeling
+      compileContextualCutOpenEventMorphism 𝒞 target targetCut labeling
         (oneTwoEventIndexZero normalForm) ≫
       eqToHom
         (congrArg
@@ -671,18 +725,18 @@ theorem standardOneTwoBirth_firstContextualEdge
         (standardOneTwoBirth_first_second_orientation normalForm) := by
   let i := oneTwoEventIndexZero normalForm
   have eventEq :
-      target.dottedCuts.exterior.events i =
+      targetCut.cut.exterior.events i =
         .birth
           (oneTwoFirstStrand normalForm)
           (oneTwoSecondStrand normalForm) := by
     simpa [i, oneTwoEventIndexZero] using
       standardOneTwoBirth_eventZero_eq normalForm
   have beforeEq :
-      target.dottedCuts.exterior.activeOrder i.castSucc = [] := by
+      targetCut.cut.exterior.activeOrder i.castSucc = [] := by
     simpa [i, oneTwoEventIndexZero] using
       standardOneTwoBirth_activeOrderZero normalForm
   have afterEq :
-      target.dottedCuts.exterior.activeOrder i.succ =
+      targetCut.cut.exterior.activeOrder i.succ =
         [oneTwoFirstStrand normalForm,
           oneTwoSecondStrand normalForm] := by
     simpa [i, oneTwoEventIndexZero] using
@@ -693,21 +747,21 @@ theorem standardOneTwoBirth_firstContextualEdge
   simpa using
     (compileContextualFromWitness_eq_birth
       𝒞 target labeling
-      (target.dottedCuts.exterior.events i)
+      (targetCut.cut.exterior.events i)
       (oneTwoFirstStrand normalForm)
       (oneTwoSecondStrand normalForm)
-      (target.dottedCuts.exterior.activeOrder i.castSucc)
-      (target.dottedCuts.exterior.activeOrder i.succ)
-      (eventLeftContext target i)
-      (eventRightContext target i)
-      (eventTransitionEquations target i).1
-      (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+      (targetCut.cut.exterior.activeOrder i.castSucc)
+      (targetCut.cut.exterior.activeOrder i.succ)
+      (eventLeftContext target targetCut i)
+      (eventRightContext target targetCut i)
+      (eventTransitionEquations target targetCut i).1
+      (eventTransitionEquations target targetCut i).2
+      (targetCut.cut.exterior.strandContinuationsAreWellFormed i)
       eventEq beforeEq afterEq contexts.1 contexts.2)
 
 theorem compileContextualFromWitness_death
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (leftInput rightInput : diagram.trace.StrandId)
     (before after left right : List diagram.trace.StrandId)
@@ -770,8 +824,8 @@ theorem compileContextualFromWitness_death
   monoidal
 
 theorem compileContextualFromWitness_eq_death
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (leftInput rightInput : diagram.trace.StrandId)
@@ -810,8 +864,10 @@ theorem compileContextualFromWitness_eq_death
     beforeCanonical afterEmpty leftEmpty rightEmpty
 
 theorem oneTwoPuncture_input_eq
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (puncture : DottedPuncture target.trace)
     (serialized :
       serializePuncture puncture = oneTwoLocalPuncture source) :
@@ -822,8 +878,10 @@ theorem oneTwoPuncture_input_eq
       congrArg SerializedPuncture.inputStrand serialized)
 
 theorem oneTwoPuncture_output_eq
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (puncture : DottedPuncture target.trace)
     (serialized :
       serializePuncture puncture = oneTwoLocalPuncture source) :
@@ -834,48 +892,50 @@ theorem oneTwoPuncture_output_eq
       congrArg SerializedPuncture.outputStrand serialized)
 
 theorem standardOneTwoBirth_secondContexts
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (dotted : target.trace.ComponentId)
     (puncture : DottedPuncture target.trace)
     (eventEq :
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
           ⟨1, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩ =
         .projectorHole dotted [puncture])
     (serialized :
       serializePuncture puncture = oneTwoLocalPuncture source) :
-    eventLeftContext target
+    eventLeftContext target targetCut
         ⟨1, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ = [] ∧
-      eventRightContext target
+      eventRightContext target targetCut
         ⟨1, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
         [oneTwoSecondStrand normalForm] := by
-  let i : Fin target.dottedCuts.exterior.eventCount :=
+  let i : Fin targetCut.cut.exterior.eventCount :=
     ⟨1, by
       rw [standardOneTwoBirth_eventCount normalForm]
       omega⟩
-  let left := eventLeftContext target i
-  let right := eventRightContext target i
+  let left := eventLeftContext target targetCut i
+  let right := eventRightContext target targetCut i
   have inputEq :=
     oneTwoPuncture_input_eq normalForm puncture serialized
-  have beforeTransition := (eventTransitionEquations target i).1
+  have beforeTransition := (eventTransitionEquations target targetCut i).1
   have activeBefore :
-      target.dottedCuts.exterior.activeOrder i.castSucc =
+      targetCut.cut.exterior.activeOrder i.castSucc =
         [oneTwoFirstStrand normalForm,
           oneTwoSecondStrand normalForm] := by
     simpa [i] using standardOneTwoBirth_activeOrderOne normalForm
   rw [activeBefore] at beforeTransition
   have eventAt :
-      target.dottedCuts.exterior.events i =
+      targetCut.cut.exterior.events i =
         .projectorHole dotted [puncture] := by
     simpa [i] using eventEq
   have eventBefore :
-      (target.dottedCuts.exterior.events i).beforeWord =
+      (targetCut.cut.exterior.events i).beforeWord =
         [oneTwoFirstStrand normalForm] := by
     rw [eventAt]
     exact congrArg (fun strand => [strand]) inputEq
@@ -919,47 +979,55 @@ theorem standardOneTwoBirth_secondContexts
     simp [oneTwoFirstStrand, oneTwoSecondStrand] at values
 
 def oneTwoEventIndexOne
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    Fin target.dottedCuts.exterior.eventCount :=
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    Fin targetCut.cut.exterior.eventCount :=
   ⟨1, by
     rw [standardOneTwoBirth_eventCount normalForm]
     omega⟩
 
 def oneTwoEventIndexTwo
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    Fin target.dottedCuts.exterior.eventCount :=
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    Fin targetCut.cut.exterior.eventCount :=
   ⟨2, by
     rw [standardOneTwoBirth_eventCount normalForm]
     omega⟩
 
 theorem standardOneTwoBirth_thirdContextsEmpty
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
-    eventLeftContext target (oneTwoEventIndexTwo normalForm) = [] ∧
-      eventRightContext target (oneTwoEventIndexTwo normalForm) = [] := by
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
+    eventLeftContext target targetCut (oneTwoEventIndexTwo normalForm) = [] ∧
+      eventRightContext target targetCut (oneTwoEventIndexTwo normalForm) = [] := by
   let i := oneTwoEventIndexTwo normalForm
   have eventEq :
-      target.dottedCuts.exterior.events i =
+      targetCut.cut.exterior.events i =
         .death
           (oneTwoThirdStrand normalForm)
           (oneTwoSecondStrand normalForm) := by
     simpa [i, oneTwoEventIndexTwo] using
       standardOneTwoBirth_eventTwo_eq normalForm
   have afterEq :
-      target.dottedCuts.exterior.activeOrder i.succ = [] := by
+      targetCut.cut.exterior.activeOrder i.succ = [] := by
     simpa [i, oneTwoEventIndexTwo] using
       standardOneTwoBirth_activeOrderThree normalForm
-  have transition := (eventTransitionEquations target i).2
+  have transition := (eventTransitionEquations target targetCut i).2
   rw [afterEq, eventEq] at transition
   simp [CutOpenEvent.afterWord] at transition
   exact transition
 
 theorem standardOneTwoBirth_thirdContextualEdge
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target) :
     eqToHom
         (congrArg
@@ -967,7 +1035,7 @@ theorem standardOneTwoBirth_thirdContextualEdge
             ribbonWordObject 𝒞
               (exteriorWord 𝒞 target labeling word))
           (standardOneTwoBirth_activeOrderTwo normalForm)).symm ≫
-      compileContextualCutOpenEventMorphism 𝒞 target labeling
+      compileContextualCutOpenEventMorphism 𝒞 target targetCut labeling
         (oneTwoEventIndexTwo normalForm) ≫
       eqToHom
         (congrArg
@@ -982,20 +1050,20 @@ theorem standardOneTwoBirth_thirdContextualEdge
         (standardOneTwoBirth_third_second_orientation normalForm) := by
   let i := oneTwoEventIndexTwo normalForm
   have eventEq :
-      target.dottedCuts.exterior.events i =
+      targetCut.cut.exterior.events i =
         .death
           (oneTwoThirdStrand normalForm)
           (oneTwoSecondStrand normalForm) := by
     simpa [i, oneTwoEventIndexTwo] using
       standardOneTwoBirth_eventTwo_eq normalForm
   have beforeEq :
-      target.dottedCuts.exterior.activeOrder i.castSucc =
+      targetCut.cut.exterior.activeOrder i.castSucc =
         [oneTwoThirdStrand normalForm,
           oneTwoSecondStrand normalForm] := by
     simpa [i, oneTwoEventIndexTwo] using
       standardOneTwoBirth_activeOrderTwo normalForm
   have afterEq :
-      target.dottedCuts.exterior.activeOrder i.succ = [] := by
+      targetCut.cut.exterior.activeOrder i.succ = [] := by
     simpa [i, oneTwoEventIndexTwo] using
       standardOneTwoBirth_activeOrderThree normalForm
   have contexts :=
@@ -1004,21 +1072,21 @@ theorem standardOneTwoBirth_thirdContextualEdge
   simpa using
     (compileContextualFromWitness_eq_death
       𝒞 target labeling
-      (target.dottedCuts.exterior.events i)
+      (targetCut.cut.exterior.events i)
       (oneTwoThirdStrand normalForm)
       (oneTwoSecondStrand normalForm)
-      (target.dottedCuts.exterior.activeOrder i.castSucc)
-      (target.dottedCuts.exterior.activeOrder i.succ)
-      (eventLeftContext target i)
-      (eventRightContext target i)
-      (eventTransitionEquations target i).1
-      (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+      (targetCut.cut.exterior.activeOrder i.castSucc)
+      (targetCut.cut.exterior.activeOrder i.succ)
+      (eventLeftContext target targetCut i)
+      (eventRightContext target targetCut i)
+      (eventTransitionEquations target targetCut i).1
+      (eventTransitionEquations target targetCut i).2
+      (targetCut.cut.exterior.strandContinuationsAreWellFormed i)
       eventEq beforeEq afterEq contexts.1 contexts.2)
 
 theorem compileContextualFromWitness_projector
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (puncture : DottedPuncture diagram.trace)
@@ -1097,8 +1165,8 @@ theorem compileContextualFromWitness_projector
     ribbonWordAppendIso]
 
 theorem compileContextualFromWitness_eq_projector
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (event : CutOpenEvent diagram.trace)
     (dotted : diagram.trace.ComponentId)
@@ -1165,14 +1233,16 @@ theorem compileContextualFromWitness_eq_projector
     inputCanonical outputCanonical
 
 theorem standardOneTwoBirth_secondContextualEdge
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target)
     (dotted : target.trace.ComponentId)
     (puncture : DottedPuncture target.trace)
     (eventEq :
-      target.dottedCuts.exterior.events
+      targetCut.cut.exterior.events
           (oneTwoEventIndexOne normalForm) =
         .projectorHole dotted [puncture])
     (serialized :
@@ -1183,7 +1253,7 @@ theorem standardOneTwoBirth_secondContextualEdge
             ribbonWordObject 𝒞
               (exteriorWord 𝒞 target labeling word))
           (standardOneTwoBirth_activeOrderOne normalForm)).symm ≫
-      compileContextualCutOpenEventMorphism 𝒞 target labeling
+      compileContextualCutOpenEventMorphism 𝒞 target targetCut labeling
         (oneTwoEventIndexOne normalForm) ≫
       eqToHom
         (congrArg
@@ -1213,7 +1283,7 @@ theorem standardOneTwoBirth_secondContextualEdge
             𝒞 target labeling
             (.projectorHole dotted [puncture])
             (eventEq ▸
-              target.dottedCuts.exterior.strandContinuationsAreWellFormed
+              targetCut.cut.exterior.strandContinuationsAreWellFormed
                 (oneTwoEventIndexOne normalForm))) ≫
         eqToHom
           (congrArg
@@ -1233,18 +1303,18 @@ theorem standardOneTwoBirth_secondContextualEdge
   simpa [i] using
     (compileContextualFromWitness_eq_projector
       𝒞 target labeling
-      (target.dottedCuts.exterior.events i)
+      (targetCut.cut.exterior.events i)
       dotted puncture
       (oneTwoFirstStrand normalForm)
       (oneTwoSecondStrand normalForm)
       (oneTwoThirdStrand normalForm)
-      (target.dottedCuts.exterior.activeOrder i.castSucc)
-      (target.dottedCuts.exterior.activeOrder i.succ)
-      (eventLeftContext target i)
-      (eventRightContext target i)
-      (eventTransitionEquations target i).1
-      (eventTransitionEquations target i).2
-      (target.dottedCuts.exterior.strandContinuationsAreWellFormed i)
+      (targetCut.cut.exterior.activeOrder i.castSucc)
+      (targetCut.cut.exterior.activeOrder i.succ)
+      (eventLeftContext target targetCut i)
+      (eventRightContext target targetCut i)
+      (eventTransitionEquations target targetCut i).1
+      (eventTransitionEquations target targetCut i).2
+      (targetCut.cut.exterior.strandContinuationsAreWellFormed i)
       eventEq
       (standardOneTwoBirth_activeOrderOne normalForm)
       (standardOneTwoBirth_activeOrderTwo normalForm)
@@ -1253,8 +1323,8 @@ theorem standardOneTwoBirth_secondContextualEdge
       (oneTwoPuncture_output_eq normalForm puncture serialized))
 
 def projectorHoleMorphism
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace)) :
@@ -1277,8 +1347,8 @@ def projectorHoleMorphism
       eqToHom (congrArg (ribbonWordObject 𝒞) output_eq.symm)
 
 theorem compileCutOpenEventMorphism_projectorHole
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
@@ -1291,7 +1361,7 @@ theorem compileCutOpenEventMorphism_projectorHole
   simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord, id_eq]
 
 theorem canonicalBirthProjectorDeathMorphism
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     canonicalPositiveNegativeBirth 𝒞 simple ≫
         contextualizeRibbonMorphism 𝒞
@@ -1312,7 +1382,7 @@ theorem canonicalBirthProjectorDeathMorphism
   monoidal
 
 theorem contextualizeRibbonMorphism_heq
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {left before after right left' before' after' right' : RibbonWord 𝒞}
     {map :
       ribbonWordObject 𝒞 before ⟶ ribbonWordObject 𝒞 after}
@@ -1334,7 +1404,7 @@ theorem contextualizeRibbonMorphism_heq
   rfl
 
 theorem transportedCanonicalBirthProjectorDeathMorphism
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple)
     (before after right : RibbonWord 𝒞)
     (beforeCanonical :
@@ -1495,8 +1565,8 @@ theorem transportedCanonicalBirthProjectorDeathMorphism
     (wholeHEq.trans (heq_of_eq canonicalValue))
 
 theorem localBirthProjectorDeathMorphism
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (puncture : DottedPuncture diagram.trace)
@@ -1652,9 +1722,11 @@ theorem localBirthProjectorDeathMorphism
     transportedEq
 
 theorem standardOneTwoBirth_localThreeEventMorphism
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target)
     (dotted : target.trace.ComponentId)
     (puncture : DottedPuncture target.trace)

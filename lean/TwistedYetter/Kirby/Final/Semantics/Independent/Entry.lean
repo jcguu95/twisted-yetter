@@ -1,5 +1,6 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Algebra
-import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.CategoryTheory.Premodular.Bundled
+import TwistedYetter.Kirby.Final.Semantics.Independent.KirbyDiagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
 import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
@@ -15,7 +16,7 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
 This is the only public import for the normative human semantic
 specification.  Its topology-side input starts at
-`CombinatorialSpecialKirbyDiagram`.
+`SpecialKirbyDiagram`.
 
 The external names use ordinary Kirby calculus (`dotted = primal 1-handle`,
 `framed = primal 2-handle`).  The evaluator follows Tham, Definition 5.11 on
@@ -25,8 +26,8 @@ intrinsically preferred or change the intended invariant.
 
 Dependency order:
 
-`Algebra → Diagram → Homology → Moves → Graphical → Evaluator → Invariant
-→ EntranceAxioms`.
+`Category → KirbyDiagram → CutOpen → Homology → Moves → Graphical →
+Evaluator → Invariant → EntranceAxioms`.
 
 `EntranceAxioms` contains the global manifold, dotted-disk, turnover, and
 category-literature boundaries.  Four move-local, category-neutral topology
@@ -37,7 +38,7 @@ declared individually in `EntranceAxioms`.  The dotted-handle boundary is an
 inbound-to-outbound incidence movie: puncture direction selects only the side
 of that morphism, never `X` versus `X*` and never a character exponent.
 
-The current source declares twenty-four explicit axioms.  Two declarations
+The current source declares twenty-six explicit axioms.  Two declarations
 make the intrinsic dotted-cut topology boundary explicit: the primitive
 regluing-witness type and the existence of a standard intrinsic cut
 realization.  The signed incidence/handle-boundary identification is proved
@@ -47,8 +48,8 @@ boundary and must be refreshed before it is used as the current curated trust
 ledger.  This semantic edit is not hash-sealed until its downstream compiler
 has been rebuilt and audited.
 
-Domain-defining category laws remain visible in `Algebra`; combinatorial
-certificates in the other semantic modules must use transparent propositions.
+Domain-defining category laws remain visible in the reusable category library;
+combinatorial certificates in the semantic modules use transparent propositions.
 Neither kind is allowed to hide evaluator equality, representative
 independence, or local-move invariance.
 

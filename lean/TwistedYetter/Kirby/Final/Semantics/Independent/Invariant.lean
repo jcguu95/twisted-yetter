@@ -12,6 +12,8 @@ opaque constants or proof-bearing packages.
 
 namespace TwistedYetter.Semantics.Independent
 
+open CategoryTheory
+
 universe uK
 
 /--
@@ -25,9 +27,9 @@ def LocalMoveInvarianceStatement
     (move : ElementaryMove source target) →
     ∀ sourceCycle : ThamTwoCycles source.primalBoundary,
       evaluateCycle 𝒞η
-          source.diagram source.primalBoundary sourceCycle =
+          source.diagram source.cut source.primalBoundary sourceCycle =
         evaluateCycle 𝒞η
-          target.diagram target.primalBoundary
+          target.diagram target.cut target.primalBoundary
             (move.homology.tham.mapCycle sourceCycle)
 
 noncomputable def evaluateMarking
@@ -35,7 +37,7 @@ noncomputable def evaluateMarking
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram) : K :=
   evaluateCycle 𝒞η
-    marked.diagram marked.primalBoundary
+    marked.diagram marked.cut marked.primalBoundary
     (Quotient.out marked.thamAlpha)
 
 end TwistedYetter.Semantics.Independent

@@ -11,6 +11,7 @@ Component colours, internal duality, and dotted incidence remain separate.
 namespace TwistedYetter.Kirby.Final.Proofs
 
 open TwistedYetter.Semantics.Independent
+open CategoryTheory
 
 universe uK
 
@@ -28,7 +29,7 @@ does not define a puncture-wise character exponent.
 -/
 def intrinsicBoundaryCharacterRatio
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) : Kˣ :=
@@ -45,7 +46,7 @@ component word divided by the product on the input component word.
 -/
 theorem intrinsicBoundaryCharacterRatio_eq_output_mul_input_inv
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
@@ -110,7 +111,7 @@ private theorem intrinsicBoundaryCoefficient_eq_listSum
   simpa using fold_from punctures 0
 
 private theorem intrinsicCutTwoHandle_eq_iff
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (puncture : DottedPuncture diagram.trace)
     (two : Fin diagram.handles.hTwo) :
     intrinsicCutTwoHandle diagram puncture = two ↔
@@ -159,7 +160,7 @@ private theorem list_map_sum_eq_fin_sum_get
 
 private theorem intrinsicBoundaryCharacterRatio_eq_occurrenceProduct
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
@@ -214,7 +215,7 @@ denominator.  They are not puncture data and are not evaluator exponents.
 -/
 theorem intrinsicBoundaryCharacterRatio_eq_incidenceProduct
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
@@ -282,15 +283,16 @@ acts trivially on any topologically realized intrinsic cut morphism.
 -/
 theorem twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (one : Fin diagram.handles.hOne)
     (exponent : ℤ)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord
+      (presentation.cut.punctureWord
         (diagram.handles.oneHandleIndex one).1
         (diagram.handles.oneHandleIndex one).2)) :
-    let punctures := diagram.dottedCuts.punctureWord
+    let punctures := presentation.cut.punctureWord
       (diagram.handles.oneHandleIndex one).1
       (diagram.handles.oneHandleIndex one).2
     let T :
@@ -307,7 +309,7 @@ theorem twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
           (twoOneIncidence diagram one two * exponent) : Kˣ) : K) •
         T) = T := by
   dsimp only
-  let punctures := diagram.dottedCuts.punctureWord
+  let punctures := presentation.cut.punctureWord
     (diagram.handles.oneHandleIndex one).1
     (diagram.handles.oneHandleIndex one).2
   have factor_eq :
@@ -327,7 +329,8 @@ theorem twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
               (diagram.handles.twoHandleIndex two).1 * exponent) := by
         apply Finset.prod_congr rfl
         intro two _
-        rw [twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient]
+        rw [twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
+          diagram presentation]
       _ = intrinsicBoundaryCharacterRatio
           𝒞η diagram labeling punctures exponent :=
         (intrinsicBoundaryCharacterRatio_eq_incidenceProduct
@@ -347,23 +350,24 @@ is only to exhibit the actual frozen evaluator as one such context.
 -/
 theorem twoOneBoundaryCharacterFactor_absorbs_in_linearContext
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (one : Fin diagram.handles.hOne)
     (exponent : ℤ)
     (cut : IntrinsicDottedCutTangle diagram
-      (diagram.dottedCuts.punctureWord
+      (presentation.cut.punctureWord
         (diagram.handles.oneHandleIndex one).1
         (diagram.handles.oneHandleIndex one).2))
     (exterior :
       (simpleLabelWordObject 𝒞η.category
             (dottedInboundLabelWord 𝒞η.category diagram labeling
-              (diagram.dottedCuts.punctureWord
+              (presentation.cut.punctureWord
                 (diagram.handles.oneHandleIndex one).1
                 (diagram.handles.oneHandleIndex one).2)) ⟶
         simpleLabelWordObject 𝒞η.category
             (dottedOutboundLabelWord 𝒞η.category diagram labeling
-              (diagram.dottedCuts.punctureWord
+              (presentation.cut.punctureWord
                 (diagram.handles.oneHandleIndex one).1
                 (diagram.handles.oneHandleIndex one).2))) →ₗ[K] K) :
     (((∏ two : Fin diagram.handles.hTwo,
@@ -375,7 +379,8 @@ theorem twoOneBoundaryCharacterFactor_absorbs_in_linearContext
         𝒞η.category diagram labeling cut) := by
   rw [← smul_eq_mul]
   rw [← exterior.map_smul]
-  rw [twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut]
+  rw [twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
+    𝒞η diagram presentation]
 
 end
 

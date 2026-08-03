@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Proofs.CancellationCompilerScratch
+import TwistedYetter.Kirby.Final.Proofs.CancellationNormalForms
 
 open CategoryTheory
 open CategoryTheory.MonoidalCategory
@@ -190,47 +190,50 @@ theorem transport_sandwich_heq
 of the exact event stored at the same trace index. -/
 theorem compileRoleAwareCutOpenEventAt_heq_elementary
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (i : Fin diagram.dottedCuts.exterior.eventCount) :
-    HEq (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling i)
+    (i : Fin presentation.cut.exterior.eventCount) :
+    HEq (compileRoleAwareCutOpenEventAt 𝒞 diagram presentation labeling i)
       (compileCutOpenEventMorphism 𝒞 diagram labeling
-        (diagram.dottedCuts.exterior.events i)
-        (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed i)) := by
+        (presentation.cut.exterior.events i)
+        (presentation.cut.exterior.strandContinuationsAreWellFormed i)) := by
   exact heq_of_eq
     (compileRoleAwareCutOpenEventAt_eq_elementary
-      𝒞 diagram labeling i)
+      𝒞 diagram presentation labeling i)
 
 noncomputable def compiledExteriorTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
     FiniteMorphismTrace 𝒞.C
-      diagram.dottedCuts.exterior.eventCount where
+      presentation.cut.exterior.eventCount where
   object i :=
     ribbonWordObject 𝒞
       (exteriorWord 𝒞 diagram labeling
-        (diagram.dottedCuts.exterior.activeOrder i))
+        (presentation.cut.exterior.activeOrder i))
   edge i :=
-    compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram labeling i
+    compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram presentation labeling i
 
 noncomputable def compiledExteriorTraceFromUnit
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
     𝟙_ 𝒞.C ⟶
-      (compiledExteriorTrace 𝒞 diagram labeling).object
-        (Fin.last diagram.dottedCuts.exterior.eventCount) :=
+      (compiledExteriorTrace 𝒞 diagram presentation labeling).object
+        (Fin.last presentation.cut.exterior.eventCount) :=
   eqToHom
       (congrArg
         (fun word =>
           ribbonWordObject 𝒞
             (exteriorWord 𝒞 diagram labeling word))
-        diagram.dottedCuts.exterior.initialBoundaryEmpty).symm ≫
-    (compiledExteriorTrace 𝒞 diagram labeling).composeAll
+        presentation.cut.exterior.initialBoundaryEmpty).symm ≫
+    (compiledExteriorTrace 𝒞 diagram presentation labeling).composeAll
 
 /--
 The proof-internal coordinate information used by the graphical compiler.
@@ -322,85 +325,91 @@ def OneTwoGraphCoordinates.mergeLabeling
 
 noncomputable def oneTwoBirthExpectedTraceMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple) :
     𝟙_ 𝒞.C ⟶
-      (compiledExteriorTrace 𝒞 source.diagram sourceLabeling).object
-        (Fin.last source.diagram.dottedCuts.exterior.eventCount) :=
+      (compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling).object
+        (Fin.last source.cut.cut.exterior.eventCount) :=
   specialCutMeridianMorphismWithoutExplicitTwist 𝒞
       (exteriorStrandLabel 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (oneTwoFirstStrand normalForm)) ≫
-    compiledExteriorTraceFromUnit 𝒞 source.diagram sourceLabeling
+    compiledExteriorTraceFromUnit 𝒞 source.diagram source.cut sourceLabeling
 
 noncomputable def standardOneTwoBirthTargetTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target) :
     FiniteMorphismTrace 𝒞.C
-      (source.dottedCuts.exterior.eventCount + 3) :=
+      (sourceCut.cut.exterior.eventCount + 3) :=
   FiniteMorphismTrace.castEventCount
     (standardOneTwoBirth_eventCount normalForm).symm
-    (compiledExteriorTrace 𝒞 target labeling)
+    (compiledExteriorTrace 𝒞 target targetCut labeling)
 
 theorem standardOneTwoBirthTargetTrace_composeAll
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target) :
     HEq
       (standardOneTwoBirthTargetTrace 𝒞 normalForm labeling).composeAll
-      (compiledExteriorTrace 𝒞 target labeling).composeAll := by
+      (compiledExteriorTrace 𝒞 target targetCut labeling).composeAll := by
   exact FiniteMorphismTrace.castEventCount_composeAll _ _
 
 theorem compileCutOpenExteriorMorphism_eq_compiledTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
-    compileCutOpenExteriorMorphism 𝒞 diagram labeling =
+    compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling =
       eqToHom
           (congrArg
             (fun word =>
               ribbonWordObject 𝒞
                 (exteriorWord 𝒞 diagram labeling word))
-            diagram.dottedCuts.exterior.initialBoundaryEmpty).symm ≫
-        (compiledExteriorTrace 𝒞 diagram labeling).composeAll ≫
+            presentation.cut.exterior.initialBoundaryEmpty).symm ≫
+        (compiledExteriorTrace 𝒞 diagram presentation labeling).composeAll ≫
           eqToHom
             (congrArg
               (fun word =>
                 ribbonWordObject 𝒞
                   (exteriorWord 𝒞 diagram labeling word))
-              diagram.dottedCuts.exterior.finalBoundaryEmpty) := by
+              presentation.cut.exterior.finalBoundaryEmpty) := by
   rfl
 
 theorem compileCutOpenExteriorMorphism_heq_compiledTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
     HEq
-      (compileCutOpenExteriorMorphism 𝒞 diagram labeling)
-      ((compiledExteriorTrace 𝒞 diagram labeling).composeAll) := by
+      (compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling)
+      ((compiledExteriorTrace 𝒞 diagram presentation labeling).composeAll) := by
   rw [compileCutOpenExteriorMorphism_eq_compiledTrace]
   exact transport_sandwich_heq _ _ _
 
 theorem compileCutOpenExteriorMorphism_heq_fromUnit
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram) :
     HEq
-      (compileCutOpenExteriorMorphism 𝒞 diagram labeling)
-      (compiledExteriorTraceFromUnit 𝒞 diagram labeling) := by
+      (compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling)
+      (compiledExteriorTraceFromUnit 𝒞 diagram presentation labeling) := by
   rw [compileCutOpenExteriorMorphism_eq_compiledTrace]
   unfold compiledExteriorTraceFromUnit
   rw [← Category.assoc]
@@ -456,8 +465,10 @@ theorem list_context_unique_of_nodup
     simpa [List.append_assoc] using tails)⟩
 
 def standardOneTwoBirthOldComponent
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (component : source.trace.ComponentId) :
     target.trace.ComponentId :=
   ⟨component.1, by
@@ -465,8 +476,10 @@ def standardOneTwoBirthOldComponent
     omega⟩
 
 def standardOneTwoBirthOldStrand
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strand : source.trace.StrandId) :
     target.trace.StrandId :=
   ⟨strand.1, by
@@ -474,8 +487,10 @@ def standardOneTwoBirthOldStrand
     omega⟩
 
 theorem standardOneTwoBirth_oldComponentData
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (component : source.trace.ComponentId) :
     target.trace.components
         (standardOneTwoBirthOldComponent normalForm component) =
@@ -493,8 +508,10 @@ theorem standardOneTwoBirth_oldComponentData
   exact atIndex
 
 theorem standardOneTwoBirth_oldStrandComponentValue
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strand : source.trace.StrandId) :
     (target.trace.strands
       (standardOneTwoBirthOldStrand normalForm strand)).component.1 =
@@ -513,8 +530,10 @@ theorem standardOneTwoBirth_oldStrandComponentValue
   exact atIndex.1
 
 theorem standardOneTwoBirth_oldStrandComponent
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strand : source.trace.StrandId) :
     (target.trace.strands
       (standardOneTwoBirthOldStrand normalForm strand)).component =
@@ -524,8 +543,10 @@ theorem standardOneTwoBirth_oldStrandComponent
     (standardOneTwoBirth_oldStrandComponentValue normalForm strand)
 
 theorem standardOneTwoBirth_oldStrandOrientation
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strand : source.trace.StrandId) :
     (target.trace.strands
       (standardOneTwoBirthOldStrand normalForm strand)).orientation =
@@ -545,12 +566,11 @@ theorem standardOneTwoBirth_oldStrandOrientation
 
 theorem standardOneTwoBirth_oldExteriorStrandLabel
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
     (strand : source.diagram.trace.StrandId) :
@@ -620,12 +640,11 @@ theorem standardOneTwoBirth_oldExteriorStrandLabel
 
 theorem standardOneTwoBirth_oldOrientedExteriorStrand
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
     (strand : source.diagram.trace.StrandId) :
@@ -644,12 +663,11 @@ theorem standardOneTwoBirth_oldOrientedExteriorStrand
 
 theorem standardOneTwoBirth_newMeridianLabel
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple) :
     exteriorStrandLabel 𝒞 target.diagram
@@ -706,15 +724,19 @@ theorem standardOneTwoBirth_newMeridianLabel
   simp [OneTwoGraphCoordinates.mergeLabeling]
 
 def standardOneTwoBirthOldStrands
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strands : List source.trace.StrandId) :
     List target.trace.StrandId :=
   strands.map (standardOneTwoBirthOldStrand normalForm)
 
 theorem standardOneTwoBirth_oldStrands_values
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (strands : List source.trace.StrandId) :
     List.map Fin.val
         (standardOneTwoBirthOldStrands normalForm strands) =
@@ -727,12 +749,11 @@ theorem standardOneTwoBirth_oldStrands_values
 
 theorem standardOneTwoBirth_oldExteriorWord
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
     (strands : List source.diagram.trace.StrandId) :
@@ -755,15 +776,17 @@ theorem standardOneTwoBirth_oldExteriorWord
         inductionHypothesis
 
 theorem standardOneTwoBirth_oldActiveOrder
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (state : Fin (source.dottedCuts.exterior.eventCount + 1)) :
-    target.dottedCuts.exterior.activeOrder
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (state : Fin (sourceCut.cut.exterior.eventCount + 1)) :
+    targetCut.cut.exterior.activeOrder
         ⟨state.1 + 3, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
       standardOneTwoBirthOldStrands normalForm
-        (source.dottedCuts.exterior.activeOrder state) := by
+        (sourceCut.cut.exterior.activeOrder state) := by
   apply List.map_injective_iff.mpr Fin.val_injective
   have atIndex :=
     congrArg (fun orders => orders[state.1 + 3]?)
@@ -771,7 +794,7 @@ theorem standardOneTwoBirth_oldActiveOrder
   rcases state with ⟨_ | state, stateBound⟩
   · calc
       _ = List.map (@Fin.val source.trace.strandCount)
-          (source.dottedCuts.exterior.activeOrder 0) := by
+          (sourceCut.cut.exterior.activeOrder 0) := by
             simp [serializedActiveOrders,
               oneTwoLocalActiveOrders] at atIndex
             rcases atIndex with ⟨_, atIndex⟩
@@ -779,38 +802,40 @@ theorem standardOneTwoBirth_oldActiveOrder
       _ = _ :=
         (standardOneTwoBirth_oldStrands_values normalForm _).symm
   · have sourceBound :
-        state < source.dottedCuts.exterior.eventCount := by omega
+        state < sourceCut.cut.exterior.eventCount := by omega
     have targetBound :
-        state + 3 < target.dottedCuts.exterior.eventCount := by
+        state + 3 < targetCut.cut.exterior.eventCount := by
       rw [standardOneTwoBirth_eventCount normalForm]
       omega
     simp [serializedActiveOrders, oneTwoLocalActiveOrders,
       sourceBound, targetBound] at atIndex
     calc
       _ = List.map (@Fin.val source.trace.strandCount)
-          (source.dottedCuts.exterior.activeOrder
+          (sourceCut.cut.exterior.activeOrder
             ⟨state + 1, stateBound⟩) := by
               convert atIndex using 1
       _ = _ :=
         (standardOneTwoBirth_oldStrands_values normalForm _).symm
 
 theorem standardOneTwoBirth_oldEventSerialized
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (event : Fin source.dottedCuts.exterior.eventCount) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (event : Fin sourceCut.cut.exterior.eventCount) :
     serializeCutOpenEvent
-        (target.dottedCuts.exterior.events
+        (targetCut.cut.exterior.events
           ⟨event.1 + 3, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
       serializeCutOpenEvent
-        (source.dottedCuts.exterior.events event) := by
+        (sourceCut.cut.exterior.events event) := by
   have atIndex :=
     congrArg (fun events => events[event.1 + 3]?)
       normalForm.2.2.1
   have targetBound :
       event.1 + 3 <
-        (serializedExteriorEvents target).length := by
+        (serializedExteriorEvents targetCut).length := by
     simp [serializedExteriorEvents,
       standardOneTwoBirth_eventCount normalForm]
   simp [serializedExteriorEvents, oneTwoLocalEvents,
@@ -868,8 +893,10 @@ theorem serializeCutOpenEvent_injective
         equality.2
 
 def standardOneTwoBirthOldPuncture
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (puncture : DottedPuncture source.trace) :
     DottedPuncture target.trace where
   dottedComponent :=
@@ -916,8 +943,10 @@ def standardOneTwoBirthOldPuncture
     exact puncture.orientation_preserved
 
 def standardOneTwoBirthOldEvent
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target) :
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut) :
     CutOpenEvent source.trace → CutOpenEvent target.trace
   | .birth left right =>
       .birth
@@ -951,8 +980,10 @@ def standardOneTwoBirthOldEvent
           (standardOneTwoBirthOldPuncture normalForm))
 
 theorem standardOneTwoBirth_oldEventSerialization
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (event : CutOpenEvent source.trace) :
     serializeCutOpenEvent
         (standardOneTwoBirthOldEvent normalForm event) =
@@ -965,23 +996,27 @@ theorem standardOneTwoBirth_oldEventSerialization
       serializeCutOpenEvent, serializePuncture]
 
 theorem standardOneTwoBirth_oldEvent
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (event : Fin source.dottedCuts.exterior.eventCount) :
-    target.dottedCuts.exterior.events
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (event : Fin sourceCut.cut.exterior.eventCount) :
+    targetCut.cut.exterior.events
         ⟨event.1 + 3, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩ =
       standardOneTwoBirthOldEvent normalForm
-        (source.dottedCuts.exterior.events event) := by
+        (sourceCut.cut.exterior.events event) := by
   apply serializeCutOpenEvent_injective
   rw [standardOneTwoBirth_oldEventSerialized normalForm event]
   exact
     (standardOneTwoBirth_oldEventSerialization normalForm _).symm
 
 theorem standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (event : CutOpenEvent source.trace)
     (pairing : event.StrandContinuationsAreWellFormed) :
     (standardOneTwoBirthOldEvent normalForm event).StrandContinuationsAreWellFormed := by
@@ -1066,8 +1101,10 @@ theorem standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
             exact sourcePairing.2⟩
 
 theorem standardOneTwoBirth_oldEventBeforeWord
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (event : CutOpenEvent source.trace) :
     (standardOneTwoBirthOldEvent normalForm event).beforeWord =
       standardOneTwoBirthOldStrands normalForm event.beforeWord := by
@@ -1078,8 +1115,10 @@ theorem standardOneTwoBirth_oldEventBeforeWord
       CutOpenEvent.beforeWord]
 
 theorem standardOneTwoBirth_oldEventAfterWord
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (event : CutOpenEvent source.trace) :
     (standardOneTwoBirthOldEvent normalForm event).afterWord =
       standardOneTwoBirthOldStrands normalForm event.afterWord := by
@@ -1091,7 +1130,7 @@ theorem standardOneTwoBirth_oldEventAfterWord
 
 theorem canonicalPositiveNegativeBirth_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {left right : 𝒞.simples.Simple}
     (labelEq : left = right) :
     HEq
@@ -1102,7 +1141,7 @@ theorem canonicalPositiveNegativeBirth_heq
 
 theorem canonicalNegativePositiveBirth_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {left right : 𝒞.simples.Simple}
     (labelEq : left = right) :
     HEq
@@ -1113,7 +1152,7 @@ theorem canonicalNegativePositiveBirth_heq
 
 theorem canonicalPositiveNegativeDeath_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {left right : 𝒞.simples.Simple}
     (labelEq : left = right) :
     HEq
@@ -1124,7 +1163,7 @@ theorem canonicalPositiveNegativeDeath_heq
 
 theorem canonicalNegativePositiveDeath_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {left right : 𝒞.simples.Simple}
     (labelEq : left = right) :
     HEq
@@ -1135,7 +1174,7 @@ theorem canonicalNegativePositiveDeath_heq
 
 noncomputable def canonicalCrossingMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (overInput underInput overOutput underOutput :
       OrientedSimple 𝒞)
     (sign : CrossingSign)
@@ -1158,7 +1197,7 @@ noncomputable def canonicalCrossingMorphism
 
 theorem canonicalCrossingMorphism_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {overInput₁ overInput₂ underInput₁ underInput₂
       overOutput₁ overOutput₂ underOutput₁ underOutput₂ :
         OrientedSimple 𝒞}
@@ -1190,7 +1229,7 @@ theorem canonicalCrossingMorphism_heq
 
 noncomputable def canonicalFramingTwistMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (input output : OrientedSimple 𝒞)
     (sign : CrossingSign)
     (strandEq : input = output) :
@@ -1204,19 +1243,19 @@ noncomputable def canonicalFramingTwistMorphism
   | positive =>
       exact
         (ρ_ _).hom ≫
-          𝒞.ribbon.twist.hom.app _ ≫
+          𝒞.twist.hom.app _ ≫
           eqToHom objectEq ≫
           (ρ_ _).inv
   | negative =>
       exact
         (ρ_ _).hom ≫
-          𝒞.ribbon.twist.inv.app _ ≫
+          𝒞.twist.inv.app _ ≫
           eqToHom objectEq ≫
           (ρ_ _).inv
 
 theorem canonicalFramingTwistMorphism_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {input₁ input₂ output₁ output₂ : OrientedSimple 𝒞}
     (inputEq : input₁ = input₂)
     (outputEq : output₁ = output₂)
@@ -1236,8 +1275,9 @@ theorem canonicalFramingTwistMorphism_heq
 
 theorem compileCrossingMorphism_heq_canonical
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (overInput underInput overOutput underOutput :
       diagram.trace.StrandId)
@@ -1273,8 +1313,9 @@ theorem compileCrossingMorphism_heq_canonical
 
 theorem compileFramingTwistMorphism_heq_canonical
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (input output : diagram.trace.StrandId)
     (sign : CrossingSign)
@@ -1299,7 +1340,7 @@ theorem compileFramingTwistMorphism_heq_canonical
 
 noncomputable def canonicalPlanarIsotopyMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (before after : RibbonWord 𝒞)
     (wordEq : before = after) :
     ribbonWordObject 𝒞 before ⟶ ribbonWordObject 𝒞 after := by
@@ -1308,7 +1349,7 @@ noncomputable def canonicalPlanarIsotopyMorphism
 
 theorem canonicalPlanarIsotopyMorphism_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {before₁ before₂ after₁ after₂ : RibbonWord 𝒞}
     (beforeEq : before₁ = before₂)
     (afterEq : after₁ = after₂)
@@ -1325,8 +1366,9 @@ theorem canonicalPlanarIsotopyMorphism_heq
 
 theorem compilePlanarIsotopyMorphism_heq_canonical
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (continuations : List (diagram.trace.StrandId × diagram.trace.StrandId))
     (pairing : (CutOpenEvent.planarIsotopy continuations).StrandContinuationsAreWellFormed) :
@@ -1351,7 +1393,7 @@ theorem compilePlanarIsotopyMorphism_heq_canonical
 
 noncomputable def canonicalProjectorHoleMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (before after : RibbonWord 𝒞)
     (wordEq : before = after) :
     ribbonWordObject 𝒞 before ⟶ ribbonWordObject 𝒞 after :=
@@ -1360,7 +1402,7 @@ noncomputable def canonicalProjectorHoleMorphism
 
 theorem transportedProjectorHoleMorphism_eq_canonical
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {before middle after : RibbonWord 𝒞}
     (inputEq : before = middle)
     (outputEq : after = middle)
@@ -1375,7 +1417,7 @@ theorem transportedProjectorHoleMorphism_eq_canonical
 
 theorem canonicalProjectorHoleMorphism_heq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {before₁ before₂ after₁ after₂ : RibbonWord 𝒞}
     (beforeEq : before₁ = before₂)
     (afterEq : after₁ = after₂)
@@ -1392,8 +1434,9 @@ theorem canonicalProjectorHoleMorphism_heq
 
 theorem compileProjectorHoleMorphism_heq_canonical
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
     (punctures : List (DottedPuncture diagram.trace))
@@ -1421,12 +1464,11 @@ theorem compileProjectorHoleMorphism_heq_canonical
 
 theorem standardOneTwoBirth_oldEventMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
     (event : CutOpenEvent source.diagram.trace)
@@ -1527,8 +1569,8 @@ theorem standardOneTwoBirth_oldEventMorphism
           sourceLabeling newLabel underOutput
       exact
         (compileCrossingMorphism_heq_canonical
-          𝒞 target.diagram
-          (coordinates.mergeLabeling sourceLabeling newLabel)
+        𝒞 target.diagram target.cut
+        (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldStrand normalForm overInput)
           (standardOneTwoBirthOldStrand normalForm underInput)
           (standardOneTwoBirthOldStrand normalForm overOutput)
@@ -1543,7 +1585,7 @@ theorem standardOneTwoBirth_oldEventMorphism
             𝒞 overInputEq underInputEq overOutputEq underOutputEq sign
             _ _ _ _).trans
               (compileCrossingMorphism_heq_canonical
-                𝒞 source.diagram sourceLabeling
+        𝒞 source.diagram source.cut sourceLabeling
                 overInput underInput overOutput underOutput
                 sign pairing).symm)
   | framingTwist input output sign =>
@@ -1557,8 +1599,8 @@ theorem standardOneTwoBirth_oldEventMorphism
           sourceLabeling newLabel output
       exact
         (compileFramingTwistMorphism_heq_canonical
-          𝒞 target.diagram
-          (coordinates.mergeLabeling sourceLabeling newLabel)
+        𝒞 target.diagram target.cut
+        (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldStrand normalForm input)
           (standardOneTwoBirthOldStrand normalForm output)
           sign
@@ -1569,7 +1611,7 @@ theorem standardOneTwoBirth_oldEventMorphism
           ((canonicalFramingTwistMorphism_heq
             𝒞 inputEq outputEq sign _ _).trans
               (compileFramingTwistMorphism_heq_canonical
-                𝒞 source.diagram sourceLabeling
+        𝒞 source.diagram source.cut sourceLabeling
                 input output sign pairing).symm)
   | planarIsotopy continuations =>
       have beforeEq :=
@@ -1594,8 +1636,8 @@ theorem standardOneTwoBirth_oldEventMorphism
             (continuations.map Prod.snd))
       exact
         (compilePlanarIsotopyMorphism_heq_canonical
-          𝒞 target.diagram
-          (coordinates.mergeLabeling sourceLabeling newLabel)
+        𝒞 target.diagram target.cut
+        (coordinates.mergeLabeling sourceLabeling newLabel)
           (continuations.map fun
               (continuation :
                 source.diagram.trace.StrandId ×
@@ -1607,7 +1649,7 @@ theorem standardOneTwoBirth_oldEventMorphism
           ((canonicalPlanarIsotopyMorphism_heq
             𝒞 beforeEq afterEq _ _).trans
               (compilePlanarIsotopyMorphism_heq_canonical
-                𝒞 source.diagram sourceLabeling
+        𝒞 source.diagram source.cut sourceLabeling
                 continuations pairing).symm)
   | projectorHole dotted punctures =>
       have beforeEq :=
@@ -1632,8 +1674,8 @@ theorem standardOneTwoBirth_oldEventMorphism
             (punctures.map DottedPuncture.outputStrand))
       exact
         (compileProjectorHoleMorphism_heq_canonical
-          𝒞 target.diagram
-          (coordinates.mergeLabeling sourceLabeling newLabel)
+        𝒞 target.diagram target.cut
+        (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldComponent normalForm dotted)
           (punctures.map (standardOneTwoBirthOldPuncture normalForm))
           (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed
@@ -1641,188 +1683,194 @@ theorem standardOneTwoBirth_oldEventMorphism
           ((canonicalProjectorHoleMorphism_heq
             𝒞 beforeEq afterEq _ _).trans
               (compileProjectorHoleMorphism_heq_canonical
-                𝒞 source.diagram sourceLabeling
+        𝒞 source.diagram source.cut sourceLabeling
                 dotted punctures pairing).symm)
 
 theorem standardOneTwoBirth_oldStateExteriorWord
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (state : Fin (source.diagram.dottedCuts.exterior.eventCount + 1)) :
+    (state : Fin (source.cut.cut.exterior.eventCount + 1)) :
     exteriorWord 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (target.diagram.dottedCuts.exterior.activeOrder
+        (target.cut.cut.exterior.activeOrder
           ⟨state.1 + 3, by
             rw [standardOneTwoBirth_eventCount normalForm]
             omega⟩) =
       exteriorWord 𝒞 source.diagram sourceLabeling
-        (source.diagram.dottedCuts.exterior.activeOrder state) := by
+        (source.cut.cut.exterior.activeOrder state) := by
   rw [standardOneTwoBirth_oldActiveOrder normalForm state]
   exact standardOneTwoBirth_oldExteriorWord
     𝒞 coordinates coordinateBinding normalForm
     sourceLabeling newLabel _
 
 def standardOneTwoBirthOldEventIndex
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (event : Fin source.dottedCuts.exterior.eventCount) :
-    Fin target.dottedCuts.exterior.eventCount :=
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (event : Fin sourceCut.cut.exterior.eventCount) :
+    Fin targetCut.cut.exterior.eventCount :=
   ⟨event.1 + 3, by
     rw [standardOneTwoBirth_eventCount normalForm]
     omega⟩
 
 theorem standardOneTwoBirth_oldContexts_of_before_nonempty
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (event : Fin source.dottedCuts.exterior.eventCount)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (event : Fin sourceCut.cut.exterior.eventCount)
     (beforeNonempty :
-      (source.dottedCuts.exterior.events event).beforeWord ≠ []) :
-    eventLeftContext target
+      (sourceCut.cut.exterior.events event).beforeWord ≠ []) :
+      eventLeftContext target targetCut
           (standardOneTwoBirthOldEventIndex normalForm event) =
         standardOneTwoBirthOldStrands normalForm
-          (eventLeftContext source event) ∧
-      eventRightContext target
+          (eventLeftContext source sourceCut event) ∧
+        eventRightContext target targetCut
           (standardOneTwoBirthOldEventIndex normalForm event) =
         standardOneTwoBirthOldStrands normalForm
-          (eventRightContext source event) := by
+          (eventRightContext source sourceCut event) := by
   let targetEvent :=
     standardOneTwoBirthOldEventIndex normalForm event
   have eventEq :
-      target.dottedCuts.exterior.events targetEvent =
+      targetCut.cut.exterior.events targetEvent =
         standardOneTwoBirthOldEvent normalForm
-          (source.dottedCuts.exterior.events event) := by
+          (sourceCut.cut.exterior.events event) := by
     simpa [targetEvent, standardOneTwoBirthOldEventIndex] using
       standardOneTwoBirth_oldEvent normalForm event
   have targetBefore :
-      target.dottedCuts.exterior.activeOrder targetEvent.castSucc =
+      targetCut.cut.exterior.activeOrder targetEvent.castSucc =
         standardOneTwoBirthOldStrands normalForm
-          (source.dottedCuts.exterior.activeOrder event.castSucc) := by
+          (sourceCut.cut.exterior.activeOrder event.castSucc) := by
     simpa [targetEvent, standardOneTwoBirthOldEventIndex] using
       standardOneTwoBirth_oldActiveOrder normalForm event.castSucc
   have mappedSourceTransition :
       standardOneTwoBirthOldStrands normalForm
-          (source.dottedCuts.exterior.activeOrder event.castSucc) =
+          (sourceCut.cut.exterior.activeOrder event.castSucc) =
         standardOneTwoBirthOldStrands normalForm
-            (eventLeftContext source event) ++
+            (eventLeftContext source sourceCut event) ++
           (standardOneTwoBirthOldEvent normalForm
-            (source.dottedCuts.exterior.events event)).beforeWord ++
+            (sourceCut.cut.exterior.events event)).beforeWord ++
           standardOneTwoBirthOldStrands normalForm
-            (eventRightContext source event) := by
+            (eventRightContext source sourceCut event) := by
     have mapped :=
       congrArg (standardOneTwoBirthOldStrands normalForm)
-        (eventTransitionEquations source event).1
+        (eventTransitionEquations source sourceCut event).1
     simpa [standardOneTwoBirthOldStrands, List.map_append,
       standardOneTwoBirth_oldEventBeforeWord] using mapped
   have secondDecomposition :
-      target.dottedCuts.exterior.activeOrder targetEvent.castSucc =
+      targetCut.cut.exterior.activeOrder targetEvent.castSucc =
         standardOneTwoBirthOldStrands normalForm
-            (eventLeftContext source event) ++
-          (target.dottedCuts.exterior.events targetEvent).beforeWord ++
+            (eventLeftContext source sourceCut event) ++
+          (targetCut.cut.exterior.events targetEvent).beforeWord ++
           standardOneTwoBirthOldStrands normalForm
-            (eventRightContext source event) := by
+            (eventRightContext source sourceCut event) := by
     rw [targetBefore, eventEq]
     exact mappedSourceTransition
   have middleNonempty :
-      (target.dottedCuts.exterior.events targetEvent).beforeWord ≠ [] := by
+      (targetCut.cut.exterior.events targetEvent).beforeWord ≠ [] := by
     rw [eventEq, standardOneTwoBirth_oldEventBeforeWord]
     simpa [standardOneTwoBirthOldStrands] using beforeNonempty
   exact
     list_context_unique_of_nodup
-      (target.dottedCuts.exterior.activeWordsNoDuplicates
+      (targetCut.cut.exterior.activeWordsNoDuplicates
         targetEvent.castSucc)
       middleNonempty
-      (eventTransitionEquations target targetEvent).1
+      (eventTransitionEquations target targetCut targetEvent).1
       secondDecomposition
 
 theorem standardOneTwoBirth_oldContexts_of_after_nonempty
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
-    (event : Fin source.dottedCuts.exterior.eventCount)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
+    (event : Fin sourceCut.cut.exterior.eventCount)
     (afterNonempty :
-      (source.dottedCuts.exterior.events event).afterWord ≠ []) :
-    eventLeftContext target
+      (sourceCut.cut.exterior.events event).afterWord ≠ []) :
+      eventLeftContext target targetCut
           (standardOneTwoBirthOldEventIndex normalForm event) =
         standardOneTwoBirthOldStrands normalForm
-          (eventLeftContext source event) ∧
-      eventRightContext target
+          (eventLeftContext source sourceCut event) ∧
+        eventRightContext target targetCut
           (standardOneTwoBirthOldEventIndex normalForm event) =
         standardOneTwoBirthOldStrands normalForm
-          (eventRightContext source event) := by
+          (eventRightContext source sourceCut event) := by
   let targetEvent :=
     standardOneTwoBirthOldEventIndex normalForm event
   have eventEq :
-      target.dottedCuts.exterior.events targetEvent =
+      targetCut.cut.exterior.events targetEvent =
         standardOneTwoBirthOldEvent normalForm
-          (source.dottedCuts.exterior.events event) := by
+          (sourceCut.cut.exterior.events event) := by
     simpa [targetEvent, standardOneTwoBirthOldEventIndex] using
       standardOneTwoBirth_oldEvent normalForm event
   have targetAfter :
-      target.dottedCuts.exterior.activeOrder targetEvent.succ =
+      targetCut.cut.exterior.activeOrder targetEvent.succ =
         standardOneTwoBirthOldStrands normalForm
-          (source.dottedCuts.exterior.activeOrder event.succ) := by
+          (sourceCut.cut.exterior.activeOrder event.succ) := by
     simpa [targetEvent, standardOneTwoBirthOldEventIndex] using
       standardOneTwoBirth_oldActiveOrder normalForm event.succ
   have mappedSourceTransition :
       standardOneTwoBirthOldStrands normalForm
-          (source.dottedCuts.exterior.activeOrder event.succ) =
+          (sourceCut.cut.exterior.activeOrder event.succ) =
         standardOneTwoBirthOldStrands normalForm
-            (eventLeftContext source event) ++
+            (eventLeftContext source sourceCut event) ++
           (standardOneTwoBirthOldEvent normalForm
-            (source.dottedCuts.exterior.events event)).afterWord ++
+            (sourceCut.cut.exterior.events event)).afterWord ++
           standardOneTwoBirthOldStrands normalForm
-            (eventRightContext source event) := by
+            (eventRightContext source sourceCut event) := by
     have mapped :=
       congrArg (standardOneTwoBirthOldStrands normalForm)
-        (eventTransitionEquations source event).2
+        (eventTransitionEquations source sourceCut event).2
     simpa [standardOneTwoBirthOldStrands, List.map_append,
       standardOneTwoBirth_oldEventAfterWord] using mapped
   have secondDecomposition :
-      target.dottedCuts.exterior.activeOrder targetEvent.succ =
+      targetCut.cut.exterior.activeOrder targetEvent.succ =
         standardOneTwoBirthOldStrands normalForm
-            (eventLeftContext source event) ++
-          (target.dottedCuts.exterior.events targetEvent).afterWord ++
+            (eventLeftContext source sourceCut event) ++
+          (targetCut.cut.exterior.events targetEvent).afterWord ++
           standardOneTwoBirthOldStrands normalForm
-            (eventRightContext source event) := by
+            (eventRightContext source sourceCut event) := by
     rw [targetAfter, eventEq]
     exact mappedSourceTransition
   have middleNonempty :
-      (target.dottedCuts.exterior.events targetEvent).afterWord ≠ [] := by
+      (targetCut.cut.exterior.events targetEvent).afterWord ≠ [] := by
     rw [eventEq, standardOneTwoBirth_oldEventAfterWord]
     simpa [standardOneTwoBirthOldStrands] using afterNonempty
   exact
     list_context_unique_of_nodup
-      (target.dottedCuts.exterior.activeWordsNoDuplicates
+      (targetCut.cut.exterior.activeWordsNoDuplicates
         targetEvent.succ)
       middleNonempty
-      (eventTransitionEquations target targetEvent).2
+      (eventTransitionEquations target targetCut targetEvent).2
       secondDecomposition
 
 theorem compileContextualCutOpenEventMorphism_heq_core
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    (event : Fin presentation.cut.exterior.eventCount) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 diagram labeling event)
+      (compileContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event)
       (contextualizeRibbonMorphism 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (eventLeftContext diagram event))
+          (eventLeftContext diagram presentation event))
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events event).beforeWord)
+          (presentation.cut.exterior.events event).beforeWord)
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events event).afterWord)
+          (presentation.cut.exterior.events event).afterWord)
         (exteriorWord 𝒞 diagram labeling
-          (eventRightContext diagram event))
+          (eventRightContext diagram presentation event))
         (compileCutOpenEventMorphism 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events event)
-          (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))) := by
+          (presentation.cut.exterior.events event)
+          (presentation.cut.exterior.strandContinuationsAreWellFormed event))) := by
   unfold compileContextualCutOpenEventMorphism
   simp only
   simp only [CategoryTheory.eqToHom_comp_heq_iff]
@@ -1833,23 +1881,23 @@ theorem compileContextualCutOpenEventMorphism_heq_core
 
 theorem compileRoleAwareContextualCutOpenEventMorphism_heq_core
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    (event : Fin presentation.cut.exterior.eventCount) :
     HEq
-      (compileRoleAwareContextualCutOpenEventMorphism
-        𝒞 diagram labeling event)
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event)
       (contextualizeRibbonMorphism 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (eventLeftContext diagram event))
+          (eventLeftContext diagram presentation event))
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events event).beforeWord)
+          (presentation.cut.exterior.events event).beforeWord)
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.events event).afterWord)
+          (presentation.cut.exterior.events event).afterWord)
         (exteriorWord 𝒞 diagram labeling
-          (eventRightContext diagram event))
-        (compileRoleAwareCutOpenEventAt 𝒞 diagram labeling event)) := by
+          (eventRightContext diagram presentation event))
+        (compileRoleAwareCutOpenEventAt 𝒞 diagram presentation labeling event)) := by
   unfold compileRoleAwareContextualCutOpenEventMorphism
   simp only
   simp only [CategoryTheory.eqToHom_comp_heq_iff]
@@ -1866,68 +1914,64 @@ puncture direction does not select a dual or a character exponent.
 -/
 theorem compileRoleAwareContextualCutOpenEventMorphism_heq_elementary
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount) :
+    (event : Fin presentation.cut.exterior.eventCount) :
     HEq
-      (compileRoleAwareContextualCutOpenEventMorphism
-        𝒞 diagram labeling event)
-      (compileContextualCutOpenEventMorphism 𝒞 diagram labeling event) := by
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event)
+      (compileContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event) := by
   exact
     (compileRoleAwareContextualCutOpenEventMorphism_heq_core
-      𝒞 diagram labeling event).trans
+      𝒞 diagram presentation labeling event).trans
       ((contextualizeRibbonMorphism_heq 𝒞 rfl rfl rfl rfl
         (compileRoleAwareCutOpenEventAt_heq_elementary
-          𝒞 diagram labeling event)).trans
+      𝒞 diagram presentation labeling event)).trans
         (compileContextualCutOpenEventMorphism_heq_core
-          𝒞 diagram labeling event).symm)
+      𝒞 diagram presentation labeling event).symm)
 
 theorem compileRoleAwareContextualCutOpenEventMorphism_eq_elementary
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount) :
-    compileRoleAwareContextualCutOpenEventMorphism
-        𝒞 diagram labeling event =
-      compileContextualCutOpenEventMorphism 𝒞 diagram labeling event :=
+    (event : Fin presentation.cut.exterior.eventCount) :
+    compileRoleAwareContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event =
+      compileContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event :=
   eq_of_heq
     (compileRoleAwareContextualCutOpenEventMorphism_heq_elementary
-      𝒞 diagram labeling event)
+      𝒞 diagram presentation labeling event)
 
 theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (event : Fin source.diagram.dottedCuts.exterior.eventCount)
+    (event : Fin source.cut.cut.exterior.eventCount)
     (contexts :
-      eventLeftContext target.diagram
-            (standardOneTwoBirthOldEventIndex normalForm event) =
+      eventLeftContext target.diagram target.cut (standardOneTwoBirthOldEventIndex normalForm event) =
           standardOneTwoBirthOldStrands normalForm
-            (eventLeftContext source.diagram event) ∧
-        eventRightContext target.diagram
-            (standardOneTwoBirthOldEventIndex normalForm event) =
+            (eventLeftContext source.diagram source.cut event) ∧
+        eventRightContext target.diagram target.cut (standardOneTwoBirthOldEventIndex normalForm event) =
           standardOneTwoBirthOldStrands normalForm
-            (eventRightContext source.diagram event)) :
+            (eventRightContext source.diagram source.cut event)) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEventIndex normalForm event))
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
-        sourceLabeling event) := by
+      (compileContextualCutOpenEventMorphism 𝒞 source.diagram source.cut sourceLabeling event) := by
   let targetEvent :=
     standardOneTwoBirthOldEventIndex normalForm event
   let sourceEvent :=
-    source.diagram.dottedCuts.exterior.events event
+    source.cut.cut.exterior.events event
   have targetEventEq :
-      target.diagram.dottedCuts.exterior.events targetEvent =
+      target.cut.cut.exterior.events targetEvent =
         standardOneTwoBirthOldEvent normalForm sourceEvent := by
     simpa [targetEvent, sourceEvent,
       standardOneTwoBirthOldEventIndex] using
@@ -1935,9 +1979,9 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
   have leftEq :
       exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (eventLeftContext target.diagram targetEvent) =
+          (eventLeftContext target.diagram target.cut targetEvent) =
         exteriorWord 𝒞 source.diagram sourceLabeling
-          (eventLeftContext source.diagram event) :=
+          (eventLeftContext source.diagram source.cut event) :=
     (congrArg
       (exteriorWord 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel))
@@ -1948,9 +1992,9 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
   have rightEq :
       exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (eventRightContext target.diagram targetEvent) =
+          (eventRightContext target.diagram target.cut targetEvent) =
         exteriorWord 𝒞 source.diagram sourceLabeling
-          (eventRightContext source.diagram event) :=
+          (eventRightContext source.diagram source.cut event) :=
     (congrArg
       (exteriorWord 𝒞 target.diagram
         (coordinates.mergeLabeling sourceLabeling newLabel))
@@ -1961,7 +2005,7 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
   have beforeEq :
       exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.events targetEvent).beforeWord =
+          (target.cut.cut.exterior.events targetEvent).beforeWord =
         exteriorWord 𝒞 source.diagram sourceLabeling
           sourceEvent.beforeWord := by
     rw [targetEventEq,
@@ -1973,7 +2017,7 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
   have afterEq :
       exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.events targetEvent).afterWord =
+          (target.cut.cut.exterior.events targetEvent).afterWord =
         exteriorWord 𝒞 source.diagram sourceLabeling
           sourceEvent.afterWord := by
     rw [targetEventEq,
@@ -1986,60 +2030,58 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_contexts
       HEq
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.events targetEvent)
-          (target.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed targetEvent))
+          (target.cut.cut.exterior.events targetEvent)
+          (target.cut.cut.exterior.strandContinuationsAreWellFormed targetEvent))
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
           (standardOneTwoBirthOldEvent normalForm sourceEvent)
           (standardOneTwoBirth_oldEventStrandContinuationsAreWellFormed normalForm
             sourceEvent
-            (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))) := by
+            (source.cut.cut.exterior.strandContinuationsAreWellFormed event))) := by
     congr!
   have mapEq :
       HEq
         (compileCutOpenEventMorphism 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.events targetEvent)
-          (target.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed targetEvent))
+          (target.cut.cut.exterior.events targetEvent)
+          (target.cut.cut.exterior.strandContinuationsAreWellFormed targetEvent))
         (compileCutOpenEventMorphism 𝒞 source.diagram sourceLabeling
           sourceEvent
-          (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)) :=
+          (source.cut.cut.exterior.strandContinuationsAreWellFormed event)) :=
     targetMapEq.trans
       (standardOneTwoBirth_oldEventMorphism
         𝒞 coordinates coordinateBinding normalForm
         sourceLabeling newLabel sourceEvent
-        (source.diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
+        (source.cut.cut.exterior.strandContinuationsAreWellFormed event))
   exact
     (compileContextualCutOpenEventMorphism_heq_core
-      𝒞 target.diagram
+      𝒞 target.diagram target.cut
       (coordinates.mergeLabeling sourceLabeling newLabel)
       targetEvent).trans
       ((contextualizeRibbonMorphism_heq
         𝒞 leftEq beforeEq afterEq rightEq mapEq).trans
         (compileContextualCutOpenEventMorphism_heq_core
-          𝒞 source.diagram sourceLabeling event).symm)
+          𝒞 source.diagram source.cut sourceLabeling event).symm)
 
 theorem standardOneTwoBirth_oldBirthContextualMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (event : Fin source.diagram.dottedCuts.exterior.eventCount)
+    (event : Fin source.cut.cut.exterior.eventCount)
     (left right : source.diagram.trace.StrandId)
     (eventEq :
-      source.diagram.dottedCuts.exterior.events event =
+      source.cut.cut.exterior.events event =
         .birth left right) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEventIndex normalForm event))
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
-        sourceLabeling event) := by
+      (compileContextualCutOpenEventMorphism 𝒞 source.diagram source.cut sourceLabeling event) := by
   have contexts :=
     standardOneTwoBirth_oldContexts_of_after_nonempty
       normalForm event (by
@@ -2052,23 +2094,21 @@ theorem standardOneTwoBirth_oldBirthContextualMorphism
 
 theorem standardOneTwoBirth_oldContextualMorphism_of_before_nonempty
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (event : Fin source.diagram.dottedCuts.exterior.eventCount)
+    (event : Fin source.cut.cut.exterior.eventCount)
     (beforeNonempty :
-      (source.diagram.dottedCuts.exterior.events event).beforeWord ≠ []) :
+      (source.cut.cut.exterior.events event).beforeWord ≠ []) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEventIndex normalForm event))
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
-        sourceLabeling event) := by
+      (compileContextualCutOpenEventMorphism 𝒞 source.diagram source.cut sourceLabeling event) := by
   have contexts :=
     standardOneTwoBirth_oldContexts_of_before_nonempty
       normalForm event beforeNonempty
@@ -2079,23 +2119,21 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_before_nonempty
 
 theorem standardOneTwoBirth_oldContextualMorphism_of_after_nonempty
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (event : Fin source.diagram.dottedCuts.exterior.eventCount)
+    (event : Fin source.cut.cut.exterior.eventCount)
     (afterNonempty :
-      (source.diagram.dottedCuts.exterior.events event).afterWord ≠ []) :
+      (source.cut.cut.exterior.events event).afterWord ≠ []) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEventIndex normalForm event))
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
-        sourceLabeling event) := by
+      (compileContextualCutOpenEventMorphism 𝒞 source.diagram source.cut sourceLabeling event) := by
   have contexts :=
     standardOneTwoBirth_oldContexts_of_after_nonempty
       normalForm event afterNonempty
@@ -2106,7 +2144,7 @@ theorem standardOneTwoBirth_oldContextualMorphism_of_after_nonempty
 
 theorem contextualizeRibbonMorphism_empty_identity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (left right : RibbonWord 𝒞) :
     contextualizeRibbonMorphism 𝒞 left [] [] right
       (𝟙 (𝟙_ 𝒞.C)) =
@@ -2122,11 +2160,12 @@ theorem contextualizeRibbonMorphism_empty_identity
 
 theorem tensorUnitProjector_on_empty_word
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     tensorUnitProjector 𝒞
         (ribbonWordObject 𝒞 ([] : RibbonWord 𝒞)) =
       𝟙 (𝟙_ 𝒞.C) := by
-  letI : CategoryTheory.Simple (𝟙_ 𝒞.C) := 𝒞.unit_isSimple
+  letI : CategoryTheory.Simple (𝟙_ 𝒞.C) :=
+    FusionCategory.tensorUnit_simple (K := K)
   change tensorUnitProjector 𝒞 (𝟙_ 𝒞.C) = 𝟙 (𝟙_ 𝒞.C)
   exact
     tensorUnitProjector_eq_identity_of_simple_unit
@@ -2134,51 +2173,52 @@ theorem tensorUnitProjector_on_empty_word
 
 theorem compileContextual_planarNil_heq_identity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount)
+    (event : Fin presentation.cut.exterior.eventCount)
     (eventEq :
-      diagram.dottedCuts.exterior.events event =
+      presentation.cut.exterior.events event =
         .planarIsotopy []) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 diagram labeling event)
+      (compileContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event)
       (𝟙 (ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder event.castSucc)))) := by
+          (presentation.cut.exterior.activeOrder event.castSucc)))) := by
   have core :=
     compileContextualCutOpenEventMorphism_heq_core
-      𝒞 diagram labeling event
+      𝒞 diagram presentation labeling event
   have coreIdentity :
       HEq
         (contextualizeRibbonMorphism 𝒞
           (exteriorWord 𝒞 diagram labeling
-            (eventLeftContext diagram event))
+            (eventLeftContext diagram presentation event))
           (exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).beforeWord)
+            (presentation.cut.exterior.events event).beforeWord)
           (exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).afterWord)
+            (presentation.cut.exterior.events event).afterWord)
           (exteriorWord 𝒞 diagram labeling
-            (eventRightContext diagram event))
+            (eventRightContext diagram presentation event))
           (compileCutOpenEventMorphism 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)))
+            (presentation.cut.exterior.events event)
+            (presentation.cut.exterior.strandContinuationsAreWellFormed event)))
         (𝟙 (ribbonWordObject 𝒞
           (List.append
             (List.append
               (exteriorWord 𝒞 diagram labeling
-                (eventLeftContext diagram event)) [])
+                (eventLeftContext diagram presentation event)) [])
             (exteriorWord 𝒞 diagram labeling
-              (eventRightContext diagram event))))) := by
+              (eventRightContext diagram presentation event))))) := by
     have beforeEmpty :
         exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).beforeWord =
+            (presentation.cut.exterior.events event).beforeWord =
           [] := by
       rw [eventEq]
       rfl
     have afterEmpty :
         exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).afterWord =
+            (presentation.cut.exterior.events event).afterWord =
           [] := by
       rw [eventEq]
       rfl
@@ -2189,14 +2229,14 @@ theorem compileContextual_planarNil_heq_identity
     have eventMapEq :
         HEq
           (compileCutOpenEventMorphism 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
+            (presentation.cut.exterior.events event)
+            (presentation.cut.exterior.strandContinuationsAreWellFormed event))
           (𝟙 (𝟙_ 𝒞.C)) := by
       have toStandard :
           HEq
             (compileCutOpenEventMorphism 𝒞 diagram labeling
-              (diagram.dottedCuts.exterior.events event)
-              (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
+              (presentation.cut.exterior.events event)
+              (presentation.cut.exterior.strandContinuationsAreWellFormed event))
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (.planarIsotopy []) standardPair) := by
         congr!
@@ -2207,19 +2247,19 @@ theorem compileContextual_planarNil_heq_identity
         (heq_of_eq
           (contextualizeRibbonMorphism_empty_identity 𝒞
             (exteriorWord 𝒞 diagram labeling
-              (eventLeftContext diagram event))
+              (eventLeftContext diagram presentation event))
             (exteriorWord 𝒞 diagram labeling
-              (eventRightContext diagram event))))
+              (eventRightContext diagram presentation event))))
   have boundaryEq :
       List.append
           (List.append
             (exteriorWord 𝒞 diagram labeling
-              (eventLeftContext diagram event)) [])
+              (eventLeftContext diagram presentation event)) [])
           (exteriorWord 𝒞 diagram labeling
-            (eventRightContext diagram event)) =
+            (eventRightContext diagram presentation event)) =
         exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder event.castSucc) := by
-    have transition := (eventTransitionEquations diagram event).1
+          (presentation.cut.exterior.activeOrder event.castSucc) := by
+    have transition := (eventTransitionEquations diagram presentation event).1
     rw [eventEq] at transition
     have mapped :=
       congrArg (exteriorWord 𝒞 diagram labeling) transition.symm
@@ -2229,52 +2269,53 @@ theorem compileContextual_planarNil_heq_identity
 
 theorem compileContextual_projectorNil_heq_identity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
-    (event : Fin diagram.dottedCuts.exterior.eventCount)
+    (event : Fin presentation.cut.exterior.eventCount)
     (dotted : diagram.trace.ComponentId)
     (eventEq :
-      diagram.dottedCuts.exterior.events event =
+      presentation.cut.exterior.events event =
         .projectorHole dotted []) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 diagram labeling event)
+      (compileContextualCutOpenEventMorphism 𝒞 diagram presentation labeling event)
       (𝟙 (ribbonWordObject 𝒞
         (exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder event.castSucc)))) := by
+          (presentation.cut.exterior.activeOrder event.castSucc)))) := by
   have core :=
     compileContextualCutOpenEventMorphism_heq_core
-      𝒞 diagram labeling event
+      𝒞 diagram presentation labeling event
   have coreIdentity :
       HEq
         (contextualizeRibbonMorphism 𝒞
           (exteriorWord 𝒞 diagram labeling
-            (eventLeftContext diagram event))
+            (eventLeftContext diagram presentation event))
           (exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).beforeWord)
+            (presentation.cut.exterior.events event).beforeWord)
           (exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).afterWord)
+            (presentation.cut.exterior.events event).afterWord)
           (exteriorWord 𝒞 diagram labeling
-            (eventRightContext diagram event))
+            (eventRightContext diagram presentation event))
           (compileCutOpenEventMorphism 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event)))
+            (presentation.cut.exterior.events event)
+            (presentation.cut.exterior.strandContinuationsAreWellFormed event)))
         (𝟙 (ribbonWordObject 𝒞
           (List.append
             (List.append
               (exteriorWord 𝒞 diagram labeling
-                (eventLeftContext diagram event)) [])
+                (eventLeftContext diagram presentation event)) [])
             (exteriorWord 𝒞 diagram labeling
-              (eventRightContext diagram event))))) := by
+              (eventRightContext diagram presentation event))))) := by
     have beforeEmpty :
         exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).beforeWord =
+            (presentation.cut.exterior.events event).beforeWord =
           [] := by
       rw [eventEq]
       rfl
     have afterEmpty :
         exteriorWord 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event).afterWord =
+            (presentation.cut.exterior.events event).afterWord =
           [] := by
       rw [eventEq]
       rfl
@@ -2284,20 +2325,20 @@ theorem compileContextual_projectorNil_heq_identity
     have eventMapEq :
         HEq
           (compileCutOpenEventMorphism 𝒞 diagram labeling
-            (diagram.dottedCuts.exterior.events event)
-            (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
+            (presentation.cut.exterior.events event)
+            (presentation.cut.exterior.strandContinuationsAreWellFormed event))
           (𝟙 (𝟙_ 𝒞.C)) := by
       have toStandard :
           HEq
             (compileCutOpenEventMorphism 𝒞 diagram labeling
-              (diagram.dottedCuts.exterior.events event)
-              (diagram.dottedCuts.exterior.strandContinuationsAreWellFormed event))
+              (presentation.cut.exterior.events event)
+              (presentation.cut.exterior.strandContinuationsAreWellFormed event))
             (compileCutOpenEventMorphism 𝒞 diagram labeling
               (.projectorHole dotted []) standardPair) := by
         congr!
       exact toStandard.trans
         ((compileProjectorHoleMorphism_heq_canonical
-          𝒞 diagram labeling dotted [] standardPair).trans
+          𝒞 diagram presentation labeling dotted [] standardPair).trans
           ((CategoryTheory.comp_eqToHom_heq _ _).trans
             (heq_of_eq (tensorUnitProjector_on_empty_word 𝒞))))
     exact
@@ -2306,19 +2347,19 @@ theorem compileContextual_projectorNil_heq_identity
         (heq_of_eq
           (contextualizeRibbonMorphism_empty_identity 𝒞
             (exteriorWord 𝒞 diagram labeling
-              (eventLeftContext diagram event))
+              (eventLeftContext diagram presentation event))
             (exteriorWord 𝒞 diagram labeling
-              (eventRightContext diagram event))))
+              (eventRightContext diagram presentation event))))
   have boundaryEq :
       List.append
           (List.append
             (exteriorWord 𝒞 diagram labeling
-              (eventLeftContext diagram event)) [])
+              (eventLeftContext diagram presentation event)) [])
           (exteriorWord 𝒞 diagram labeling
-            (eventRightContext diagram event)) =
+            (eventRightContext diagram presentation event)) =
         exteriorWord 𝒞 diagram labeling
-          (diagram.dottedCuts.exterior.activeOrder event.castSucc) := by
-    have transition := (eventTransitionEquations diagram event).1
+          (presentation.cut.exterior.activeOrder event.castSucc) := by
+    have transition := (eventTransitionEquations diagram presentation event).1
     rw [eventEq] at transition
     have mapped :=
       congrArg (exteriorWord 𝒞 diagram labeling) transition.symm
@@ -2328,23 +2369,21 @@ theorem compileContextual_projectorNil_heq_identity
 
 theorem standardOneTwoBirth_oldContextualMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple)
-    (event : Fin source.diagram.dottedCuts.exterior.eventCount) :
+    (event : Fin source.cut.cut.exterior.eventCount) :
     HEq
-      (compileContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         (standardOneTwoBirthOldEventIndex normalForm event))
-      (compileContextualCutOpenEventMorphism 𝒞 source.diagram
-        sourceLabeling event) := by
+      (compileContextualCutOpenEventMorphism 𝒞 source.diagram source.cut sourceLabeling event) := by
   generalize eventEq :
-    source.diagram.dottedCuts.exterior.events event = sourceEvent
+    source.cut.cut.exterior.events event = sourceEvent
   cases sourceEvent with
   | birth left right =>
       apply standardOneTwoBirth_oldContextualMorphism_of_after_nonempty
@@ -2384,22 +2423,22 @@ theorem standardOneTwoBirth_oldContextualMorphism
           rw [eventEq] at targetEventEq
           have targetIdentity :=
             compileContextual_planarNil_heq_identity
-              𝒞 target.diagram
+              𝒞 target.diagram target.cut
               (coordinates.mergeLabeling sourceLabeling newLabel)
               (standardOneTwoBirthOldEventIndex normalForm event)
               targetEventEq
           have sourceIdentity :=
             compileContextual_planarNil_heq_identity
-              𝒞 source.diagram sourceLabeling event eventEq
+              𝒞 source.diagram source.cut sourceLabeling event eventEq
           have objectEq :
               ribbonWordObject 𝒞
                   (exteriorWord 𝒞 target.diagram
                     (coordinates.mergeLabeling sourceLabeling newLabel)
-                    (target.diagram.dottedCuts.exterior.activeOrder
+                    (target.cut.cut.exterior.activeOrder
                       (standardOneTwoBirthOldEventIndex normalForm event).castSucc)) =
                 ribbonWordObject 𝒞
                   (exteriorWord 𝒞 source.diagram sourceLabeling
-                    (source.diagram.dottedCuts.exterior.activeOrder
+                    (source.cut.cut.exterior.activeOrder
                       event.castSucc)) := by
             simpa [standardOneTwoBirthOldEventIndex] using
               congrArg (ribbonWordObject 𝒞)
@@ -2412,11 +2451,11 @@ theorem standardOneTwoBirth_oldContextualMorphism
                 (𝟙 (ribbonWordObject 𝒞
                   (exteriorWord 𝒞 target.diagram
                     (coordinates.mergeLabeling sourceLabeling newLabel)
-                    (target.diagram.dottedCuts.exterior.activeOrder
+                    (target.cut.cut.exterior.activeOrder
                       (standardOneTwoBirthOldEventIndex normalForm event).castSucc))))
                 (𝟙 (ribbonWordObject 𝒞
                   (exteriorWord 𝒞 source.diagram sourceLabeling
-                    (source.diagram.dottedCuts.exterior.activeOrder
+                    (source.cut.cut.exterior.activeOrder
                       event.castSucc)))) := by
             exact identity_heq_of_object_eq objectEq
           exact targetIdentity.trans (identityEq.trans sourceIdentity.symm)
@@ -2434,23 +2473,23 @@ theorem standardOneTwoBirth_oldContextualMorphism
           rw [eventEq] at targetEventEq
           have targetIdentity :=
             compileContextual_projectorNil_heq_identity
-              𝒞 target.diagram
+              𝒞 target.diagram target.cut
               (coordinates.mergeLabeling sourceLabeling newLabel)
               (standardOneTwoBirthOldEventIndex normalForm event)
               (standardOneTwoBirthOldComponent normalForm dotted)
               targetEventEq
           have sourceIdentity :=
             compileContextual_projectorNil_heq_identity
-              𝒞 source.diagram sourceLabeling event dotted eventEq
+              𝒞 source.diagram source.cut sourceLabeling event dotted eventEq
           have objectEq :
               ribbonWordObject 𝒞
                   (exteriorWord 𝒞 target.diagram
                     (coordinates.mergeLabeling sourceLabeling newLabel)
-                    (target.diagram.dottedCuts.exterior.activeOrder
+                    (target.cut.cut.exterior.activeOrder
                       (standardOneTwoBirthOldEventIndex normalForm event).castSucc)) =
                 ribbonWordObject 𝒞
                   (exteriorWord 𝒞 source.diagram sourceLabeling
-                    (source.diagram.dottedCuts.exterior.activeOrder
+                    (source.cut.cut.exterior.activeOrder
                       event.castSucc)) := by
             simpa [standardOneTwoBirthOldEventIndex] using
               congrArg (ribbonWordObject 𝒞)
@@ -2463,53 +2502,52 @@ theorem standardOneTwoBirth_oldContextualMorphism
                 (𝟙 (ribbonWordObject 𝒞
                   (exteriorWord 𝒞 target.diagram
                     (coordinates.mergeLabeling sourceLabeling newLabel)
-                    (target.diagram.dottedCuts.exterior.activeOrder
+                    (target.cut.cut.exterior.activeOrder
                       (standardOneTwoBirthOldEventIndex normalForm event).castSucc))))
                 (𝟙 (ribbonWordObject 𝒞
                   (exteriorWord 𝒞 source.diagram sourceLabeling
-                    (source.diagram.dottedCuts.exterior.activeOrder
+                    (source.cut.cut.exterior.activeOrder
                       event.castSucc)))) := by
             exact identity_heq_of_object_eq objectEq
           exact targetIdentity.trans (identityEq.trans sourceIdentity.symm)
 
 theorem standardOneTwoBirth_dropThreeTrace_eq_source
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple) :
     (standardOneTwoBirthTargetTrace 𝒞 normalForm
         (coordinates.mergeLabeling sourceLabeling newLabel)).dropThree =
-      compiledExteriorTrace 𝒞 source.diagram sourceLabeling := by
+      compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling := by
   apply FiniteMorphismTrace.eq_of_object_edge
   · intro state
     change
       ribbonWordObject 𝒞
           (exteriorWord 𝒞 target.diagram
             (coordinates.mergeLabeling sourceLabeling newLabel)
-            (target.diagram.dottedCuts.exterior.activeOrder
+            (target.cut.cut.exterior.activeOrder
               ⟨state.1 + 3, by
                 rw [standardOneTwoBirth_eventCount normalForm]
                 omega⟩)) =
         ribbonWordObject 𝒞
           (exteriorWord 𝒞 source.diagram sourceLabeling
-            (source.diagram.dottedCuts.exterior.activeOrder state))
+            (source.cut.cut.exterior.activeOrder state))
     exact congrArg (ribbonWordObject 𝒞)
       (standardOneTwoBirth_oldStateExteriorWord
         𝒞 coordinates coordinateBinding normalForm
         sourceLabeling newLabel state)
   · intro event
     change HEq
-      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 target.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
         ⟨event.1 + 3, by
           rw [standardOneTwoBirth_eventCount normalForm]
           omega⟩)
-      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 source.diagram
+      (compileRoleAwareContextualCutOpenEventMorphism 𝒞 source.diagram source.cut
         sourceLabeling event)
     rw [compileRoleAwareContextualCutOpenEventMorphism_eq_elementary,
       compileRoleAwareContextualCutOpenEventMorphism_eq_elementary]
@@ -2520,9 +2558,11 @@ theorem standardOneTwoBirth_dropThreeTrace_eq_source
 
 theorem standardOneTwoBirth_prefixThreeMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    {source target : CombinatorialSpecialKirbyDiagram}
-    (normalForm : IsStandardOneTwoBirth source target)
+    (𝒞 : BundledPremodularCategory K)
+    {source target : SpecialKirbyDiagram}
+    {sourceCut : DottedCutPresentation source}
+    {targetCut : DottedCutPresentation target}
+    (normalForm : IsStandardOneTwoBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target) :
     HEq
       ((standardOneTwoBirthTargetTrace 𝒞 normalForm labeling).composePrefix
@@ -2533,7 +2573,7 @@ theorem standardOneTwoBirth_prefixThreeMorphism
   have castPrefix :=
     FiniteMorphismTrace.castEventCount_composePrefix
       (standardOneTwoBirth_eventCount normalForm).symm
-      (compiledExteriorTrace 𝒞 target labeling)
+      (compiledExteriorTrace 𝒞 target targetCut labeling)
       3 (by omega) (by
         rw [standardOneTwoBirth_eventCount normalForm]
         omega)
@@ -2543,7 +2583,7 @@ theorem standardOneTwoBirth_prefixThreeMorphism
     standardOneTwoBirth_localThreeEventMorphism
       𝒞 normalForm labeling dotted puncture serialized
       (eventEq ▸
-        target.dottedCuts.exterior.strandContinuationsAreWellFormed
+        targetCut.cut.exterior.strandContinuationsAreWellFormed
           (oneTwoEventIndexOne normalForm))
   have first :=
     standardOneTwoBirth_firstContextualEdge
@@ -2569,12 +2609,11 @@ theorem standardOneTwoBirth_prefixThreeMorphism
 
 theorem standardOneTwoBirth_targetTraceMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple) :
     HEq
@@ -2583,7 +2622,7 @@ theorem standardOneTwoBirth_targetTraceMorphism
       (oneTwoBirthExpectedTraceMorphism 𝒞 coordinates normalForm
         sourceLabeling newLabel) := by
   have threeBound :
-      3 ≤ source.diagram.dottedCuts.exterior.eventCount + 3 := by
+      3 ≤ source.cut.cut.exterior.eventCount + 3 := by
     omega
   have prefixMorphism :
       HEq
@@ -2599,7 +2638,7 @@ theorem standardOneTwoBirth_targetTraceMorphism
   have tracesEq :
       (standardOneTwoBirthTargetTrace 𝒞 normalForm
         (coordinates.mergeLabeling sourceLabeling newLabel)).dropThree =
-          compiledExteriorTrace 𝒞 source.diagram sourceLabeling :=
+          compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling :=
     standardOneTwoBirth_dropThreeTrace_eq_source
       𝒞 coordinates coordinateBinding normalForm
       sourceLabeling newLabel
@@ -2607,14 +2646,14 @@ theorem standardOneTwoBirth_targetTraceMorphism
       HEq
         ((standardOneTwoBirthTargetTrace 𝒞 normalForm
           (coordinates.mergeLabeling sourceLabeling newLabel)).dropThree.composeAll)
-        ((compiledExteriorTrace 𝒞 source.diagram sourceLabeling).composeAll) := by
+        ((compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling).composeAll) := by
     rw [tracesEq]
   have suffix :
       HEq
         ((standardOneTwoBirthTargetTrace 𝒞 normalForm
           (coordinates.mergeLabeling sourceLabeling newLabel)).dropThree.composeAll)
         (compiledExteriorTraceFromUnit
-          𝒞 source.diagram sourceLabeling) :=
+          𝒞 source.diagram source.cut sourceLabeling) :=
     suffixRaw.trans (CategoryTheory.eqToHom_comp_heq _ _).symm
   have sourceObjectEq :
       (standardOneTwoBirthTargetTrace 𝒞 normalForm
@@ -2623,9 +2662,9 @@ theorem standardOneTwoBirth_targetTraceMorphism
     change ribbonWordObject 𝒞
         (exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.activeOrder 0)) =
+          (target.cut.cut.exterior.activeOrder 0)) =
       𝟙_ 𝒞.C
-    rw [target.diagram.dottedCuts.exterior.initialBoundaryEmpty]
+    rw [target.cut.cut.exterior.initialBoundaryEmpty]
     rfl
   have middleObjectEq :
       (standardOneTwoBirthTargetTrace 𝒞 normalForm
@@ -2635,7 +2674,7 @@ theorem standardOneTwoBirth_targetTraceMorphism
     change ribbonWordObject 𝒞
         (exteriorWord 𝒞 target.diagram
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (target.diagram.dottedCuts.exterior.activeOrder
+          (target.cut.cut.exterior.activeOrder
             ⟨3, by
               rw [standardOneTwoBirth_eventCount normalForm]
               omega⟩)) =
@@ -2643,35 +2682,35 @@ theorem standardOneTwoBirth_targetTraceMorphism
     have middleWordEq :
         exteriorWord 𝒞 target.diagram
             (coordinates.mergeLabeling sourceLabeling newLabel)
-            (target.diagram.dottedCuts.exterior.activeOrder
+            (target.cut.cut.exterior.activeOrder
               ⟨3, by
                 rw [standardOneTwoBirth_eventCount normalForm]
                 omega⟩) =
           exteriorWord 𝒞 source.diagram sourceLabeling
-            (source.diagram.dottedCuts.exterior.activeOrder 0) := by
+            (source.cut.cut.exterior.activeOrder 0) := by
       simpa using
         (standardOneTwoBirth_oldStateExteriorWord
           𝒞 coordinates coordinateBinding normalForm
           sourceLabeling newLabel
           (0 : Fin
-            (source.diagram.dottedCuts.exterior.eventCount + 1)))
+            (source.cut.cut.exterior.eventCount + 1)))
     rw [middleWordEq]
-    rw [source.diagram.dottedCuts.exterior.initialBoundaryEmpty]
+    rw [source.cut.cut.exterior.initialBoundaryEmpty]
     rfl
   have targetObjectEq :
       (standardOneTwoBirthTargetTrace 𝒞 normalForm
         (coordinates.mergeLabeling sourceLabeling newLabel)).dropThree.object
-          (Fin.last source.diagram.dottedCuts.exterior.eventCount) =
-        (compiledExteriorTrace 𝒞 source.diagram sourceLabeling).object
-          (Fin.last source.diagram.dottedCuts.exterior.eventCount) :=
+          (Fin.last source.cut.cut.exterior.eventCount) =
+        (compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling).object
+          (Fin.last source.cut.cut.exterior.eventCount) :=
     congrArg
       (fun trace =>
-        trace.object (Fin.last source.diagram.dottedCuts.exterior.eventCount))
+        trace.object (Fin.last source.cut.cut.exterior.eventCount))
       tracesEq
   exact
     (heq_of_eq
       (FiniteMorphismTrace.composePrefix_add_three
-        (eventCount := source.diagram.dottedCuts.exterior.eventCount)
+        (eventCount := source.cut.cut.exterior.eventCount)
         (standardOneTwoBirthTargetTrace 𝒞 normalForm
           (coordinates.mergeLabeling sourceLabeling newLabel)))).trans
     (CategoryTheory.heq_comp
@@ -2679,22 +2718,21 @@ theorem standardOneTwoBirth_targetTraceMorphism
 
 theorem standardOneTwoBirth_compiledExteriorMorphism
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (coordinates : OneTwoGraphCoordinates source target)
     (coordinateBinding : coordinates.MatchesCanonicalMeridian)
-    (normalForm :
-      IsStandardOneTwoBirth source.diagram target.diagram)
+    (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
     (sourceLabeling : TwoHandleLabeling 𝒞 source.diagram)
     (newLabel : 𝒞.simples.Simple) :
-    compileCutOpenExteriorMorphism 𝒞 target.diagram
-        (coordinates.mergeLabeling sourceLabeling newLabel) =
+    compileCutOpenExteriorMorphism 𝒞 target.diagram target.cut
+      (coordinates.mergeLabeling sourceLabeling newLabel) =
       (specialCutMeridianExpression 𝒞 newLabel).interpret ≫
         compileCutOpenExteriorMorphism 𝒞 source.diagram
-          sourceLabeling := by
+          source.cut sourceLabeling := by
   have targetClosedToRaw :=
     compileCutOpenExteriorMorphism_heq_compiledTrace
-      𝒞 target.diagram
+      𝒞 target.diagram target.cut
       (coordinates.mergeLabeling sourceLabeling newLabel)
   have targetRawToStandard :=
     (standardOneTwoBirthTargetTrace_composeAll
@@ -2722,32 +2760,32 @@ theorem standardOneTwoBirth_compiledExteriorMorphism
           sourceLabeling newLabel)
         ((specialCutMeridianExpression 𝒞 newLabel).interpret ≫
           compiledExteriorTraceFromUnit 𝒞 source.diagram
-            sourceLabeling) := by
+            source.cut sourceLabeling) := by
     unfold oneTwoBirthExpectedTraceMorphism
     exact CategoryTheory.heq_comp rfl rfl rfl
       (heq_of_eq localMorphismEq) (heq_of_eq rfl)
   have sourceClosedToFromUnit :=
     compileCutOpenExteriorMorphism_heq_fromUnit
-      𝒞 source.diagram sourceLabeling
+      𝒞 source.diagram source.cut sourceLabeling
   have sourceFinalObjectEq :
-      (compiledExteriorTrace 𝒞 source.diagram sourceLabeling).object
-          (Fin.last source.diagram.dottedCuts.exterior.eventCount) =
+      (compiledExteriorTrace 𝒞 source.diagram source.cut sourceLabeling).object
+          (Fin.last source.cut.cut.exterior.eventCount) =
         𝟙_ 𝒞.C := by
     change ribbonWordObject 𝒞
         (exteriorWord 𝒞 source.diagram sourceLabeling
-          (source.diagram.dottedCuts.exterior.activeOrder
-            (Fin.last source.diagram.dottedCuts.exterior.eventCount))) =
+          (source.cut.cut.exterior.activeOrder
+            (Fin.last source.cut.cut.exterior.eventCount))) =
       𝟙_ 𝒞.C
-    rw [source.diagram.dottedCuts.exterior.finalBoundaryEmpty]
+    rw [source.cut.cut.exterior.finalBoundaryEmpty]
     rfl
   have publicFromUnitToClosed :
       HEq
         ((specialCutMeridianExpression 𝒞 newLabel).interpret ≫
           compiledExteriorTraceFromUnit 𝒞 source.diagram
-            sourceLabeling)
+            source.cut sourceLabeling)
         ((specialCutMeridianExpression 𝒞 newLabel).interpret ≫
           compileCutOpenExteriorMorphism 𝒞 source.diagram
-            sourceLabeling) :=
+            source.cut sourceLabeling) :=
     CategoryTheory.heq_comp rfl rfl sourceFinalObjectEq (heq_of_eq rfl)
       sourceClosedToFromUnit.symm
   exact eq_of_heq

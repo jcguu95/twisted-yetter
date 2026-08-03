@@ -12,6 +12,7 @@ name for the intrinsic dotted-cut proof.
 namespace TwistedYetter.Kirby.Final.Proofs
 
 open TwistedYetter.Semantics.Independent
+open CategoryTheory
 
 universe uK
 
@@ -26,10 +27,13 @@ chooses `X` versus `X*` and never supplies a character exponent.
 -/
 theorem frozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram)
     (primal : PrimalDegreeThreeBoundaryData diagram) :
-    RepresentativeIndependenceStatement 𝒞η diagram primal :=
-  intrinsicFrozenFrontendRepresentativeIndependence 𝒞η diagram primal
+    RepresentativeIndependenceStatement
+      𝒞η diagram presentation primal :=
+  intrinsicFrozenFrontendRepresentativeIndependence
+    𝒞η diagram presentation primal
 
 end
 

@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Diagram
+import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
 
 /-!
 # Independent semantics: intrinsic dotted cut tangles
@@ -93,7 +93,7 @@ def intrinsicBoundaryWord {Component : Type*} :
 
 /-- The ordinary two-handle component met by one intrinsic cut occurrence. -/
 def intrinsicCutTwoHandle
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (puncture : DottedPuncture diagram.trace) :
     Fin diagram.handles.hTwo :=
   diagram.handles.twoHandleIndex.symm
@@ -101,7 +101,7 @@ def intrinsicCutTwoHandle
 
 /-- Input component word of one intrinsic dotted cut. -/
 def intrinsicDottedCutInputWord
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List (Fin diagram.handles.hTwo) :=
   (dottedInboundPunctures punctures).map
@@ -109,7 +109,7 @@ def intrinsicDottedCutInputWord
 
 /-- Output component word of one intrinsic dotted cut. -/
 def intrinsicDottedCutOutputWord
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List (Fin diagram.handles.hTwo) :=
   (dottedOutboundPunctures punctures).map
@@ -125,7 +125,7 @@ particular Kirby diagram admits a term which reglues to that diagram is a
 separate obligation and is deliberately not hidden here as a proof field.
 -/
 structure IntrinsicDottedCutTangle
-    (diagram : CombinatorialSpecialKirbyDiagram)
+    (diagram : SpecialKirbyDiagram)
     (punctures : List (DottedPuncture diagram.trace)) where
   term : IntrinsicRibbonTangle (Fin diagram.handles.hTwo)
     (intrinsicBoundaryWord

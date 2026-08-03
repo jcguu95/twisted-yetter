@@ -1,4 +1,4 @@
-import TwistedYetter.CategoryTheory.Fusion.FrozenBridge
+import TwistedYetter.CategoryTheory.Premodular.Bundled
 
 /-!
 # Independent semantics: typed ribbon graphical calculus
@@ -25,6 +25,8 @@ open CategoryTheory.MonoidalCategory
 
 universe uK uC uS v
 
+noncomputable section
+
 inductive RibbonDirection
   | forward
   | dual
@@ -37,18 +39,18 @@ inductive RibbonCrossingSign
 
 structure OrientedSimple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) where
+    (𝒞 : BundledPremodularCategory K) where
   label : 𝒞.simples.Simple
   direction : RibbonDirection
 
 def RibbonWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :=
+    (𝒞 : BundledPremodularCategory K) :=
   List (OrientedSimple 𝒞)
 
 def orientedSimpleObject
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (strand : OrientedSimple 𝒞) : 𝒞.C :=
   match strand.direction with
   | .forward => 𝒞.simples.simpleObject strand.label
@@ -56,7 +58,7 @@ def orientedSimpleObject
 
 def ribbonWordObject
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     RibbonWord 𝒞 → 𝒞.C
   | [] => 𝟙_ 𝒞.C
   | strand :: rest =>
@@ -70,7 +72,7 @@ object to agree definitionally.
 -/
 inductive RibbonExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K) :
+    (𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K) :
     𝒞.C → 𝒞.C → Type (max uK uC uS v)
   | morphism {X Y : 𝒞.C} (map : X ⟶ Y) :
       RibbonExpression 𝒞 X Y
@@ -94,7 +96,7 @@ inductive RibbonExpression
 
 def RibbonExpression.interpret
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     {X Y : 𝒞.C} :
     RibbonExpression 𝒞 X Y → (X ⟶ Y)
   | .morphism map => map
@@ -110,57 +112,57 @@ def RibbonExpression.interpret
 
 def identityExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 X X :=
   .morphism (𝟙 X)
 
 def positiveCrossing
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X Y : 𝒞.C) :
     RibbonExpression 𝒞 (X ⊗ Y) (Y ⊗ X) :=
   .morphism (β_ X Y).hom
 
 def negativeCrossing
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X Y : 𝒞.C) :
     RibbonExpression 𝒞 (X ⊗ Y) (Y ⊗ X) :=
   .morphism (β_ Y X).inv
 
 def coevaluationExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 (𝟙_ 𝒞.C) (X ⊗ Xᘁ) :=
   .morphism (η_ X (Xᘁ))
 
 def evaluationExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 (Xᘁ ⊗ X) (𝟙_ 𝒞.C) :=
   .morphism (ε_ X (Xᘁ))
 
 def positiveTwist
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 X X :=
-  .morphism (𝒞.ribbon.twist.hom.app X)
+  .morphism (𝒞.twist.hom.app X)
 
 def negativeTwist
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 X X :=
-  .morphism (𝒞.ribbon.twist.inv.app X)
+  .morphism (𝒞.twist.inv.app X)
 
 /-- A general coupon is an actual categorical morphism. -/
 def morphismCoupon
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     {X Y : 𝒞.C}
     (map : X ⟶ Y) :
     RibbonExpression 𝒞 X Y :=
@@ -223,8 +225,8 @@ private theorem isoIntPowerHom_eq_unit_zpow_smul_identity
 /-- The actual character morphism on an arbitrary object. -/
 def characterCoupon
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X : 𝒞.C)
     (exponent : ℤ) :
     RibbonExpression 𝒞 X X :=
@@ -232,8 +234,8 @@ def characterCoupon
 
 private theorem characterCoupon_natPower_naturality
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     {X Y : 𝒞.C}
     (f : X ⟶ Y)
     (power : ℕ) :
@@ -266,8 +268,8 @@ private theorem characterCoupon_natPower_naturality
 
 private theorem characterCoupon_invNatPower_naturality
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     {X Y : 𝒞.C}
     (f : X ⟶ Y)
     (power : ℕ) :
@@ -307,8 +309,8 @@ interpretation, every such local event is simply a morphism `f : X ⟶ Y`.
 -/
 theorem characterCoupon_naturality
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     {X Y : 𝒞.C}
     (f : X ⟶ Y)
     (exponent : ℤ) :
@@ -324,8 +326,8 @@ theorem characterCoupon_naturality
 
 theorem character_inv_on_simple_eq_value_inv_smul_identity
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (simple : 𝒞.simples.Simple) :
     character.iso.inv.app (𝒞.simples.simpleObject simple) =
       (((character.value simple)⁻¹ : Kˣ) : K) •
@@ -353,8 +355,8 @@ theorem character_inv_on_simple_eq_value_inv_smul_identity
 
 theorem character_hom_on_rightDual_eq_value_inv_smul_identity
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (simple : 𝒞.simples.Simple) :
     character.iso.hom.app
         ((𝒞.simples.simpleObject simple)ᘁ) =
@@ -369,8 +371,8 @@ theorem character_hom_on_rightDual_eq_value_inv_smul_identity
 
 theorem character_inv_on_rightDual_eq_value_smul_identity
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (simple : 𝒞.simples.Simple) :
     character.iso.inv.app
         ((𝒞.simples.simpleObject simple)ᘁ) =
@@ -403,8 +405,8 @@ corresponding integral power of the derived simple scalar.
 -/
 theorem characterCoupon_on_forwardSimple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (simple : 𝒞.simples.Simple)
     (exponent : ℤ) :
     isoIntPowerHom
@@ -425,8 +427,8 @@ This is derived from rigidity, not supplied as an orientation convention.
 -/
 theorem characterCoupon_on_dualSimple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (simple : 𝒞.simples.Simple)
     (exponent : ℤ) :
     isoIntPowerHom
@@ -459,8 +461,8 @@ transport step.
 -/
 inductive CharacterCouponTransport
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
-    (character : TensorIdentityCharacter 𝒞) :
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
+    (character : TensorIdentityCharacter (C := 𝒞.C)) :
     {X Y : 𝒞.C} →
       RibbonExpression 𝒞 X Y →
       RibbonExpression 𝒞 X Y → Type (max uK uC uS v)
@@ -544,8 +546,8 @@ inductive CharacterCouponTransport
 
 theorem CharacterCouponTransport.interpret_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
-    {character : TensorIdentityCharacter 𝒞}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
+    {character : TensorIdentityCharacter (C := 𝒞.C)}
     {X Y : 𝒞.C}
     {before after : RibbonExpression 𝒞 X Y}
     (transport : CharacterCouponTransport character before after) :
@@ -588,7 +590,7 @@ syntax; there is no arbitrary function field and no correctness proposition.
 -/
 inductive RibbonExpressionContext
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K)
+    (𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K)
     (X Y : 𝒞.C) :
     𝒞.C → 𝒞.C → Type (max uK uC uS v)
   | hole :
@@ -624,7 +626,7 @@ inductive RibbonExpressionContext
 
 def RibbonExpressionContext.plug
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
     {X Y A B : 𝒞.C}
     (context : RibbonExpressionContext 𝒞 X Y A B)
     (term : RibbonExpression 𝒞 X Y) :
@@ -648,7 +650,7 @@ def RibbonExpressionContext.plug
 
 theorem RibbonExpressionContext.plug_interpret_eq_of_interpret_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
     {X Y A B : 𝒞.C}
     (context : RibbonExpressionContext 𝒞 X Y A B)
     {left right : RibbonExpression 𝒞 X Y}
@@ -697,7 +699,7 @@ summand to the hole.
 -/
 inductive LinearRibbonExpressionContext
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K)
+    (𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K)
     (X Y : 𝒞.C) :
     𝒞.C → 𝒞.C → Type (max uK uC uS v)
   | hole :
@@ -721,7 +723,7 @@ inductive LinearRibbonExpressionContext
 
 def LinearRibbonExpressionContext.plug
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
     {X Y A B : 𝒞.C}
     (context : LinearRibbonExpressionContext 𝒞 X Y A B)
     (term : RibbonExpression 𝒞 X Y) :
@@ -740,7 +742,7 @@ def LinearRibbonExpressionContext.plug
 /-- Interpretation of a linear graphical context as an actual linear map. -/
 noncomputable def LinearRibbonExpressionContext.interpretLinearMap
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
     {X Y A B : 𝒞.C}
     (context : LinearRibbonExpressionContext 𝒞 X Y A B) :
     (X ⟶ Y) →ₗ[K] (A ⟶ B) :=
@@ -777,7 +779,7 @@ noncomputable def LinearRibbonExpressionContext.interpretLinearMap
 
 theorem LinearRibbonExpressionContext.plug_interpret
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory.{uK, uC, v, uS} K}
+    {𝒞 : BundledPremodularCategory.{v, uK, uC, uS} K}
     {X Y A B : 𝒞.C}
     (context : LinearRibbonExpressionContext 𝒞 X Y A B)
     (term : X ⟶ Y) :
@@ -810,37 +812,51 @@ theorem LinearRibbonExpressionContext.plug_interpret
       rw [inductionHypothesis]
       rfl
 
-def fusionInclusionExpression
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (left right output : 𝒞.simples.Simple)
-    (i : Fin (𝒞.fusionMultiplicity left right output)) :
-    RibbonExpression 𝒞
-      (𝒞.simples.simpleObject output)
-      (𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right) :=
-  .morphism (𝒞.fusionInclusion left right output i)
-
-def fusionProjectionExpression
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (left right output : 𝒞.simples.Simple)
-    (i : Fin (𝒞.fusionMultiplicity left right output)) :
-    RibbonExpression 𝒞
-      (𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right)
-      (𝒞.simples.simpleObject output) :=
-  .morphism (𝒞.fusionProjection left right output i)
-
 /-- The tensor-product object resolved by one standard fusion expansion. -/
 def fusionPairObject
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (left right : 𝒞.simples.Simple) : 𝒞.C :=
   𝒞.simples.simpleObject left ⊗ 𝒞.simples.simpleObject right
+
+/-- The chosen finite simple decomposition of one tensor product. -/
+noncomputable def fusionDecomposition
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (left right : 𝒞.simples.Simple) :
+    FiniteSimpleDecomposition (fusionPairObject 𝒞 left right) :=
+  𝒞.decomposition (fusionPairObject 𝒞 left right)
+
+abbrev FusionChannel
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (left right : 𝒞.simples.Simple) :=
+  (fusionDecomposition 𝒞 left right).SummandIndex
+
+def fusionInclusionExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (left right : 𝒞.simples.Simple)
+    (channel : FusionChannel 𝒞 left right) :
+    RibbonExpression 𝒞
+      ((fusionDecomposition 𝒞 left right).summandObject channel)
+      (fusionPairObject 𝒞 left right) :=
+  .morphism ((fusionDecomposition 𝒞 left right).inclusion channel)
+
+def fusionProjectionExpression
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (left right : 𝒞.simples.Simple)
+    (channel : FusionChannel 𝒞 left right) :
+    RibbonExpression 𝒞
+      (fusionPairObject 𝒞 left right)
+      ((fusionDecomposition 𝒞 left right).summandObject channel) :=
+  .morphism ((fusionDecomposition 𝒞 left right).projection channel)
 
 /-- The tensor unit, exposed without notation for dependent signatures. -/
 def categoryUnitObject
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) : 𝒞.C :=
+    (𝒞 : BundledPremodularCategory K) : 𝒞.C :=
   𝟙_ 𝒞.C
 
 /--
@@ -849,39 +865,46 @@ The explicit complete fusion-channel resolution of the identity on
 -/
 def fusionResolutionExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (left right : 𝒞.simples.Simple) :
     RibbonExpression 𝒞
       (fusionPairObject 𝒞 left right)
       (fusionPairObject 𝒞 left right) :=
   .morphism
-    (∑ output : 𝒞.simples.Simple,
-      ∑ i : Fin (𝒞.fusionMultiplicity left right output),
-        𝒞.fusionProjection left right output i ≫
-          𝒞.fusionInclusion left right output i)
+    (∑ channel : FusionChannel 𝒞 left right,
+      (fusionDecomposition 𝒞 left right).projection channel ≫
+        (fusionDecomposition 𝒞 left right).inclusion channel)
 
 theorem fusionResolutionExpression_interpret
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (left right : 𝒞.simples.Simple) :
     (fusionResolutionExpression 𝒞 left right).interpret =
       (identityExpression 𝒞
         (fusionPairObject 𝒞 left right)).interpret := by
-  exact 𝒞.simples.resolution_identity
-    (𝒞.simples.simpleObject left ⊗
-      𝒞.simples.simpleObject right)
+  exact (fusionDecomposition 𝒞 left right).resolution_identity
 
 /--
 The tensor-unit summand projector of an object, derived from the chosen
 semisimple decomposition.
 -/
+def IsTensorUnitSummand
+    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (X : 𝒞.C) (i : (𝒞.decomposition X).SummandIndex) : Prop :=
+  Nonempty ((𝒞.decomposition X).summandObject i ≅ 𝟙_ 𝒞.C)
+
 def tensorUnitProjector
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
-    (X : 𝒞.C) : X ⟶ X :=
-  ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
-    𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
-      𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩
+    (𝒞 : BundledPremodularCategory K)
+    (X : 𝒞.C) : X ⟶ X := by
+  classical
+  exact
+    ∑ i : (𝒞.decomposition X).SummandIndex,
+      if IsTensorUnitSummand 𝒞 X i then
+        (𝒞.decomposition X).projection i ≫
+          (𝒞.decomposition X).inclusion i
+      else 0
 
 /--
 On a chosen simple representative, the tensor-unit projector is the identity
@@ -889,7 +912,7 @@ exactly for the tensor-unit label and zero for every other label.
 -/
 theorem tensorUnitProjector_simple
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     tensorUnitProjector 𝒞 (𝒞.simples.simpleObject simple) =
       if simple = 𝒞.simples.tensorUnit then
@@ -897,71 +920,61 @@ theorem tensorUnitProjector_simple
       else
         0 := by
   classical
-  letI : CategoryTheory.Simple
-      (𝒞.simples.simpleObject simple) :=
-    𝒞.simples.simple_isSimple simple
+  let X := 𝒞.simples.simpleObject simple
+  let decomposition := 𝒞.decomposition X
+  have summandIso (i : decomposition.SummandIndex) :
+      Nonempty (decomposition.summandObject i ≅ X) := by
+    letI : CategoryTheory.Simple (decomposition.summandObject i) :=
+      decomposition.summand_isSimple i
+    letI : CategoryTheory.Simple X := 𝒞.simples.simple_isSimple simple
+    have inclusion_ne_zero : decomposition.inclusion i ≠ 0 := by
+      intro inclusion_zero
+      have identity_zero : 𝟙 (decomposition.summandObject i) = 0 := by
+        rw [← decomposition.pairing_same i, inclusion_zero,
+          CategoryTheory.Limits.zero_comp]
+      exact CategoryTheory.id_nonzero _ identity_zero
+    letI : IsIso (decomposition.inclusion i) :=
+      CategoryTheory.isIso_of_hom_simple inclusion_ne_zero
+    exact ⟨asIso (decomposition.inclusion i)⟩
+  have unitSummand_iff (i : decomposition.SummandIndex) :
+      IsTensorUnitSummand 𝒞 X i ↔ simple = 𝒞.simples.tensorUnit := by
+    constructor
+    · rintro ⟨summandToUnit⟩
+      obtain ⟨summandToX⟩ := summandIso i
+      apply 𝒞.simples.simple_pairwise
+      exact ⟨summandToX.symm ≪≫ summandToUnit ≪≫ 𝒞.simples.unitIso.symm⟩
+    · intro unitCase
+      subst simple
+      obtain ⟨summandToX⟩ := summandIso i
+      exact ⟨summandToX ≪≫ 𝒞.simples.unitIso⟩
   by_cases unitCase : simple = 𝒞.simples.tensorUnit
-  · subst simple
-    simp only [if_pos]
+  · simp only [unitCase, if_pos]
     unfold tensorUnitProjector
-    rw [← 𝒞.simples.resolution_identity
-      (𝒞.simples.simpleObject 𝒞.simples.tensorUnit)]
-    symm
-    apply Finset.sum_eq_single 𝒞.simples.tensorUnit
-    · intro other _ different
-      letI : CategoryTheory.Simple
-          (𝒞.simples.simpleObject other) :=
-        𝒞.simples.simple_isSimple other
-      letI : FiniteDimensional K
-          (𝒞.simples.simpleObject 𝒞.simples.tensorUnit ⟶
-            𝒞.simples.simpleObject other) :=
-        𝒞.simples.hom_finite _ _
-      apply Finset.sum_eq_zero
+    change
+      (∑ i : decomposition.SummandIndex,
+        if IsTensorUnitSummand 𝒞 X i then
+          decomposition.projection i ≫ decomposition.inclusion i else 0) = 𝟙 X
+    rw [show
+      (∑ i : decomposition.SummandIndex,
+        if IsTensorUnitSummand 𝒞 X i then
+          decomposition.projection i ≫ decomposition.inclusion i else 0) =
+        ∑ i : decomposition.SummandIndex,
+          decomposition.projection i ≫ decomposition.inclusion i by
+      apply Finset.sum_congr rfl
       intro i _
-      have noIso :
-          (𝒞.simples.simpleObject 𝒞.simples.tensorUnit ≅
-            𝒞.simples.simpleObject other) → False := by
-        intro iso
-        exact different
-          (𝒞.simples.simple_pairwise ⟨iso.symm⟩)
-      have projectionZero :
-          𝒞.simples.summandProjection
-              (𝒞.simples.simpleObject 𝒞.simples.tensorUnit)
-              ⟨other, i⟩ =
-            0 := by
-        apply
-          (finrank_zero_iff_forall_zero.mp
-            (CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso
-              K noIso))
-      simp [projectionZero]
-    · simp
+      rw [if_pos ((unitSummand_iff i).2 unitCase)]]
+    exact decomposition.resolution_identity
   · simp only [unitCase, if_false]
-    letI : CategoryTheory.Simple
-        (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) :=
-      𝒞.simples.simple_isSimple 𝒞.simples.tensorUnit
-    letI : FiniteDimensional K
-        (𝒞.simples.simpleObject simple ⟶
-          𝒞.simples.simpleObject 𝒞.simples.tensorUnit) :=
-      𝒞.simples.hom_finite _ _
     unfold tensorUnitProjector
+    change
+      (∑ i : decomposition.SummandIndex,
+        if IsTensorUnitSummand 𝒞 X i then
+          decomposition.projection i ≫ decomposition.inclusion i else 0) = 0
     apply Finset.sum_eq_zero
     intro i _
-    have noIso :
-        (𝒞.simples.simpleObject simple ≅
-          𝒞.simples.simpleObject 𝒞.simples.tensorUnit) → False := by
-      intro iso
-      exact unitCase
-        (𝒞.simples.simple_pairwise ⟨iso⟩)
-    have projectionZero :
-        𝒞.simples.summandProjection
-            (𝒞.simples.simpleObject simple)
-            ⟨𝒞.simples.tensorUnit, i⟩ =
-          0 := by
-      apply
-        (finrank_zero_iff_forall_zero.mp
-          (CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso
-            K noIso))
-    simp [projectionZero]
+    have notUnitSummand : ¬ IsTensorUnitSummand 𝒞 X i :=
+      fun isUnit => unitCase ((unitSummand_iff i).1 isUnit)
+    rw [if_neg notUnitSummand]
 
 /--
 Close one endomorphism using the pivotal trace of the canonical spherical
@@ -971,7 +984,7 @@ convention.
 -/
 noncomputable def ribbonTraceMorphism
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple)
     (endomorphism :
       𝒞.simples.simpleObject simple ⟶
@@ -981,7 +994,7 @@ noncomputable def ribbonTraceMorphism
 
 theorem ribbonTraceMorphism_identity
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     ribbonTraceMorphism 𝒞 simple
         (𝟙 (𝒞.simples.simpleObject simple)) =
@@ -990,7 +1003,7 @@ theorem ribbonTraceMorphism_identity
 
 theorem ribbonTraceMorphism_zero
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     ribbonTraceMorphism 𝒞 simple 0 = 0 := by
   exact 𝒞.canonicalRibbonTrace_zero
@@ -999,7 +1012,7 @@ theorem ribbonTraceMorphism_zero
 /-- The closed local value of one dotted cut around a simple meridian. -/
 noncomputable def specialCutMeridianClosedValue
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) : K :=
   𝒞.closedScalar
     (ribbonTraceMorphism 𝒞 simple
@@ -1008,7 +1021,7 @@ noncomputable def specialCutMeridianClosedValue
 
 theorem specialCutMeridianClosedValue_eq
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     specialCutMeridianClosedValue 𝒞 simple =
       if simple = 𝒞.simples.tensorUnit then
@@ -1027,7 +1040,7 @@ theorem specialCutMeridianClosedValue_eq
 
 theorem specialCutMeridianSum_eq_one
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (unitQuantumDimension :
       𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1) :
     (∑ simple : 𝒞.simples.Simple,
@@ -1038,7 +1051,7 @@ theorem specialCutMeridianSum_eq_one
 
 theorem ordinaryKirbyLoopSum_eq_globalDimension
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :
+    (𝒞 : BundledPremodularCategory K) :
     (∑ simple : 𝒞.simples.Simple,
       𝒞.simples.quantumDimension simple *
         𝒞.closedScalar
@@ -1050,11 +1063,12 @@ theorem ordinaryKirbyLoopSum_eq_globalDimension
   intro simple _
   rw [ribbonTraceMorphism_identity]
   rw [𝒞.closedScalar_smul_identity]
+  rw [𝒞.simples_quantumDimension_eq simple]
 
 /-- The local closed graph for a canceling dotted-one/two-handle pair. -/
 noncomputable def specialCutMeridianExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
   .morphism
@@ -1065,7 +1079,7 @@ noncomputable def specialCutMeridianExpression
 /-- The local closed graph for an ordinary zero-framed Kirby-coloured loop. -/
 noncomputable def ordinaryKirbyLoopExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
     RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
   .morphism
@@ -1079,7 +1093,7 @@ exterior.
 -/
 def closedComposeExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     (localTerm exterior :
       RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) :
     RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) :=
@@ -1087,7 +1101,7 @@ def closedComposeExpression
 
 theorem closedComposeExpression_scalar
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
+    {𝒞 : BundledPremodularCategory K}
     (localTerm exterior :
       RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) :
     𝒞.closedScalar
@@ -1099,102 +1113,106 @@ theorem closedComposeExpression_scalar
 /-- A forward character coupon disappears immediately before the unit projector. -/
 theorem character_hom_tensorUnitProjector_left
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X : 𝒞.C) :
     character.iso.hom.app X ≫ tensorUnitProjector 𝒞 X =
       tensorUnitProjector 𝒞 X := by
   classical
   unfold tensorUnitProjector
-  calc
+  have distribute :
     character.iso.hom.app X ≫
-        (∑ i : Fin
-          (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
-          𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
-            𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩) =
-      ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+        (∑ i : (𝒞.decomposition X).SummandIndex,
+          if IsTensorUnitSummand 𝒞 X i then
+            (𝒞.decomposition X).projection i ≫
+              (𝒞.decomposition X).inclusion i else 0) =
+      ∑ i : (𝒞.decomposition X).SummandIndex,
         character.iso.hom.app X ≫
-          (𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
-            𝒞.simples.summandInclusion X
-              ⟨𝒞.simples.tensorUnit, i⟩) := by
-        simpa using
-          Preadditive.comp_sum (Finset.univ)
-            (character.iso.hom.app X)
-            (fun i : Fin
-              (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit) =>
-              𝒞.simples.summandProjection X
-                  ⟨𝒞.simples.tensorUnit, i⟩ ≫
-                𝒞.simples.summandInclusion X
-                  ⟨𝒞.simples.tensorUnit, i⟩)
-    _ = _ := by
-      apply Finset.sum_congr rfl
-      intro i _
-      have naturality :
-          character.iso.hom.app X ≫
-              𝒞.simples.summandProjection X
-                ⟨𝒞.simples.tensorUnit, i⟩ =
-            𝒞.simples.summandProjection X
-                ⟨𝒞.simples.tensorUnit, i⟩ ≫
-              character.iso.hom.app
-                (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
-        simpa using
-          (character.iso.hom.naturality
-            (𝒞.simples.summandProjection X
-              ⟨𝒞.simples.tensorUnit, i⟩)).symm
-      rw [← Category.assoc]
-      rw [naturality]
-      rw [character.tensorUnitSimple_hom]
-      simp
+          (if IsTensorUnitSummand 𝒞 X i then
+            (𝒞.decomposition X).projection i ≫
+              (𝒞.decomposition X).inclusion i else 0) := by
+    simpa using Preadditive.comp_sum (Finset.univ)
+      (character.iso.hom.app X)
+      (fun i : (𝒞.decomposition X).SummandIndex =>
+        if IsTensorUnitSummand 𝒞 X i then
+          (𝒞.decomposition X).projection i ≫
+            (𝒞.decomposition X).inclusion i else 0)
+  refine distribute.trans ?_
+  apply Finset.sum_congr rfl
+  intro i _
+  split_ifs with isUnit
+  · obtain ⟨unitIso⟩ := isUnit
+    have characterOnSummand :
+        character.iso.hom.app ((𝒞.decomposition X).summandObject i) =
+          𝟙 ((𝒞.decomposition X).summandObject i) := by
+      apply (cancel_mono unitIso.hom).1
+      simpa [CategoryTheory.TensorIdentityCharacter.unit_hom character] using
+        (character.iso.hom.naturality unitIso.hom).symm
+    have naturalityAtProjection :
+        character.iso.hom.app X ≫ (𝒞.decomposition X).projection i =
+          (𝒞.decomposition X).projection i ≫
+            character.iso.hom.app ((𝒞.decomposition X).summandObject i) := by
+      simpa using (character.iso.hom.naturality
+        ((𝒞.decomposition X).projection i)).symm
+    rw [← Category.assoc, naturalityAtProjection]
+    rw [characterOnSummand]
+    simp
+  · simp only [CategoryTheory.Limits.comp_zero]
+    rfl
 
 /-- An inverse character coupon disappears immediately before the unit projector. -/
 theorem character_inv_tensorUnitProjector_left
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X : 𝒞.C) :
     character.iso.inv.app X ≫ tensorUnitProjector 𝒞 X =
       tensorUnitProjector 𝒞 X := by
   classical
   unfold tensorUnitProjector
-  calc
+  have distribute :
     character.iso.inv.app X ≫
-        (∑ i : Fin
-          (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
-          𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
-            𝒞.simples.summandInclusion X ⟨𝒞.simples.tensorUnit, i⟩) =
-      ∑ i : Fin (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit),
+        (∑ i : (𝒞.decomposition X).SummandIndex,
+          if IsTensorUnitSummand 𝒞 X i then
+            (𝒞.decomposition X).projection i ≫
+              (𝒞.decomposition X).inclusion i else 0) =
+      ∑ i : (𝒞.decomposition X).SummandIndex,
         character.iso.inv.app X ≫
-          (𝒞.simples.summandProjection X ⟨𝒞.simples.tensorUnit, i⟩ ≫
-            𝒞.simples.summandInclusion X
-              ⟨𝒞.simples.tensorUnit, i⟩) := by
-        simpa using
-          Preadditive.comp_sum (Finset.univ)
-            (character.iso.inv.app X)
-            (fun i : Fin
-              (𝒞.simples.multiplicity X 𝒞.simples.tensorUnit) =>
-              𝒞.simples.summandProjection X
-                  ⟨𝒞.simples.tensorUnit, i⟩ ≫
-                𝒞.simples.summandInclusion X
-                  ⟨𝒞.simples.tensorUnit, i⟩)
-    _ = _ := by
-      apply Finset.sum_congr rfl
-      intro i _
-      have naturality :
-          character.iso.inv.app X ≫
-              𝒞.simples.summandProjection X
-                ⟨𝒞.simples.tensorUnit, i⟩ =
-            𝒞.simples.summandProjection X
-                ⟨𝒞.simples.tensorUnit, i⟩ ≫
-              character.iso.inv.app
-                (𝒞.simples.simpleObject 𝒞.simples.tensorUnit) := by
-        simpa using
-          (character.iso.inv.naturality
-            (𝒞.simples.summandProjection X
-              ⟨𝒞.simples.tensorUnit, i⟩)).symm
-      rw [← Category.assoc]
-      rw [naturality]
-      rw [character.tensorUnitSimple_inv]
-      simp
+          (if IsTensorUnitSummand 𝒞 X i then
+            (𝒞.decomposition X).projection i ≫
+              (𝒞.decomposition X).inclusion i else 0) := by
+    simpa using Preadditive.comp_sum (Finset.univ)
+      (character.iso.inv.app X)
+      (fun i : (𝒞.decomposition X).SummandIndex =>
+        if IsTensorUnitSummand 𝒞 X i then
+          (𝒞.decomposition X).projection i ≫
+            (𝒞.decomposition X).inclusion i else 0)
+  refine distribute.trans ?_
+  apply Finset.sum_congr rfl
+  intro i _
+  split_ifs with isUnit
+  · obtain ⟨unitIso⟩ := isUnit
+    have characterOnSummand :
+        character.iso.inv.app ((𝒞.decomposition X).summandObject i) =
+          𝟙 ((𝒞.decomposition X).summandObject i) := by
+      apply (cancel_mono unitIso.hom).1
+      have inverseUnit : character.iso.inv.app (𝟙_ 𝒞.C) = 𝟙 (𝟙_ 𝒞.C) := by
+        rw [← cancel_epi (character.iso.hom.app (𝟙_ 𝒞.C))]
+        rw [character.iso.hom_inv_id_app]
+        simp [CategoryTheory.TensorIdentityCharacter.unit_hom character]
+      simpa [inverseUnit] using
+        (character.iso.inv.naturality unitIso.hom).symm
+    have naturalityAtProjection :
+        character.iso.inv.app X ≫ (𝒞.decomposition X).projection i =
+          (𝒞.decomposition X).projection i ≫
+            character.iso.inv.app ((𝒞.decomposition X).summandObject i) := by
+      simpa using (character.iso.inv.naturality
+        ((𝒞.decomposition X).projection i)).symm
+    rw [← Category.assoc, naturalityAtProjection]
+    rw [characterOnSummand]
+    simp
+  · simp only [CategoryTheory.Limits.comp_zero]
+    rfl
 
 /-- A finite power remains invisible whenever one copy is absorbed. -/
 private theorem isoNatPowerHom_absorbed
@@ -1215,8 +1233,8 @@ private theorem isoNatPowerHom_absorbed
 /-- Every integral character power disappears before the unit projector. -/
 theorem characterCoupon_tensorUnitProjector_left
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    {𝒞 : PremodularFusionCategory K}
-    (character : TensorIdentityCharacter 𝒞)
+    {𝒞 : BundledPremodularCategory K}
+    (character : TensorIdentityCharacter (C := 𝒞.C))
     (X : 𝒞.C)
     (exponent : ℤ) :
     isoIntPowerHom (character.iso.app X) exponent ≫
@@ -1238,14 +1256,14 @@ theorem characterCoupon_tensorUnitProjector_left
 
 def tensorUnitProjectorExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (X : 𝒞.C) :
     RibbonExpression 𝒞 X X :=
   .morphism (tensorUnitProjector 𝒞 X)
 
 abbrev ClosedRibbonExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K) :=
+    (𝒞 : BundledPremodularCategory K) :=
   RibbonExpression 𝒞 (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)
 
 /--
@@ -1253,9 +1271,11 @@ Canonical evaluation of a closed expression.  No caller supplies an evaluator.
 -/
 noncomputable def canonicalRibbonGraphicalEvaluation
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : PremodularFusionCategory K)
+    (𝒞 : BundledPremodularCategory K)
     (expression : ClosedRibbonExpression 𝒞) : K :=
   𝒞.closedScalar expression.interpret
+
+end
 
 end TwistedYetter.Semantics.Independent
 
