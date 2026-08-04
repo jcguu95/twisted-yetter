@@ -1,0 +1,17 @@
+import TwistedYetter.StableNoGo.FinalTheorem
+
+namespace TwistedYetter.StableNoGo
+
+#print TwistedYetter_stable_calculation
+#print axioms TwistedYetter_stable_calculation
+
+#print TwistedYetter_eq_of_integralIntersectionFormIsometry
+#print axioms TwistedYetter_eq_of_integralIntersectionFormIsometry
+
+#print TwistedYetter_premodular_numerical_formula
+#print axioms TwistedYetter_premodular_numerical_formula
+
+#print TwistedYetter_modular_numerical_formula
+#print axioms TwistedYetter_modular_numerical_formula
+
+end TwistedYetter.StableNoGo

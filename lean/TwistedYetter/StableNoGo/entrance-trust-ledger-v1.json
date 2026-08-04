@@ -1,0 +1,96 @@
+{
+  "schema": "twisted-yetter/stable-no-go-entrance-trust-ledger/1",
+  "recorded_at": "2026-08-04T18:57:07Z",
+  "git_commit_before_changes": "be256d141daa35f4d2f6666bb4b21c07b65e952a",
+  "git_dirty": true,
+  "ctl_current_root_status": "BLOCKED_MISSING_SIBLING_CTL_META_PROVIDER",
+  "source_audit_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+  "new_layer_explicit_axiom_count": 22,
+  "axiom_groups": {
+    "foundational_vocabulary_and_basic_topology": [
+      "integralIntersectionPairing",
+      "connectedSum",
+      "sphereTwoProduct",
+      "connectedSumH2"
+    ],
+    "standard_topology_functoriality": [
+      "orientedDiffeomorphism_preservesIntersectionPairing",
+      "sphereTwoProduct_simplyConnected",
+      "connectedSum_simplyConnected",
+      "connectedSumH2_preservesIntersectionPairing",
+      "identityOrientedDiffeomorphism",
+      "inducedH2_identityOrientedDiffeomorphism",
+      "composeOrientedDiffeomorphism",
+      "inducedH2_composeOrientedDiffeomorphism",
+      "connectedSumOrientedDiffeomorphism",
+      "inducedH2_connectedSumOrientedDiffeomorphism"
+    ],
+    "presentation_and_standard_model_topology": [
+      "splitSpecialKirbyPresentation_exists",
+      "splitSpecialKirbyPresentation_marking_natural",
+      "positiveZeroFramedHopf_realizes_sphereTwoProduct"
+    ],
+    "external_literature": [
+      {
+        "name": "wall_stableClassification",
+        "locator": "C. T. C. Wall, On simply-connected 4-manifolds (1964), Theorems 2-3",
+        "non_claim": "The resulting diffeomorphism is not assumed to induce the requested intersection-form isometry."
+      },
+      {
+        "name": "rubermanStrle_oneStableRealization",
+        "locator": "D. Ruberman and S. Strle, arXiv:2210.16260v2, Theorem 2.1, PDF p. 2",
+        "scope": "The full homology action is A direct-sum identity on the hyperbolic summand."
+      },
+      {
+        "name": "premodularKirbyColourKilling",
+        "locator": "Barenz-Barrett, Lemma 2.46; originally Bruguières, Lemma 1.4.2",
+        "scope": "Positive Hopf-link ribbon-fusion identity only; no four-manifold or evaluator equality."
+      },
+      {
+        "name": "standardPositiveHopfClosure_eq_monodromyTrace",
+        "locator": "P. Shum, Tortile tensor categories (1994), Theorem 2.6, specialized to the standard positive Hopf closure",
+        "scope": "The standard cup-cross-cross-cap ribbon diagram equals the canonical trace of positive monodromy; no Kirby, homology, character, normalization, or four-manifold assertion."
+      },
+      {
+        "name": "egno_mugerCenterGlobalDimension_ne_zero",
+        "locator": "Etingof-Nikshych-Ostrik, On fusion categories, Theorem 2.3, applied to the Müger-center fusion subcategory",
+        "scope": "Nonvanishing of the Müger-center global dimension in characteristic zero."
+      }
+    ]
+  },
+  "inherited_literature_input": {
+    "name": "egno_globalDimension_ne_zero",
+    "locator": "Etingof-Nikshych-Ostrik, On fusion categories, Theorem 2.3",
+    "note": "Already belongs to the base Twisted Yetter trust boundary and is not counted again among the 22 StableNoGo declarations."
+  },
+  "must_be_kernel_checked_project_theorems": [
+    "transparent combinatorial split-special-Kirby-diagram construction",
+    "split presentation realizes the manifold connected sum with additive handle counts",
+    "connected-sum handle/Poincare/turnover comparison naturality",
+    "raw role-aware evaluator multiplicativity for split union",
+    "marked connected-sum formula",
+    "S4 and S2xS2 evaluations",
+    "Muger-center global-dimension nonvanishing from the inherited ENO input",
+    "marked stable realization derived from Wall and Ruberman-Strle",
+    "iterated stabilization and nonzero scalar cancellation"
+  ],
+  "forbidden_shortcuts": [
+    "MarkedConnectedSumFormula as an axiom",
+    "MarkedStableRealization as an axiom",
+    "stabilizationMultiplier_ne_zero as an axiom",
+    "raw evaluator multiplicativity as an axiom",
+    "final marked-intersection-form equality as an axiom",
+    "opaque isSplit or topology-certificate predicate that merely renames the desired conclusion"
+  ],
+  "kernel_phase": "PASS_FINAL_THEOREM_AUDIT_2026-08-04",
+  "kernel_verification": {
+    "command": "lake build TwistedYetter.StableNoGo.FinalTheoremAudit",
+    "result": "PASS",
+    "built_jobs": 8304,
+    "final_theorem": "TwistedYetter.StableNoGo.TwistedYetter_eq_of_integralIntersectionFormIsometry"
+  },
+  "non_claims": [
+    "The explicit Hopf-closure-to-monodromy calculation is a category-literature axiom, not an internally derived theorem.",
+    "No current CTL truth claim is made while current-root replay is blocked."
+  ]
+}

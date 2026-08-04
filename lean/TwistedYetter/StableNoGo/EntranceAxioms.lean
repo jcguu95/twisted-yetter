@@ -1,0 +1,393 @@
+import TwistedYetter.StableNoGo.ConnectedSum
+import TwistedYetter.Kirby.Final.Semantics.Independent.LocalReplacementSyntax
+
+/-!
+# Explicit entrance axioms for the stable no-go theorem
+
+This file fixes the external trust boundary of the new stable no-go argument.
+It was drafted on 2026-08-03 after comparing the Lean statement with the
+revised prose proof and the cited primary sources.
+
+The declarations below are deliberately separated from project obligations.
+In particular, this file does **not** assume any connected-sum formula for
+`TwistedYetter`, any evaluator equality, any stabilization scalar, or the final
+marked-intersection-form theorem.
+
+External topology inputs:
+
+* naturality of the intersection pairing under oriented diffeomorphism;
+* composition and connected sum of oriented diffeomorphisms, together with
+  their exact action on integral second homology;
+* Wall's stable classification theorem;
+* Ruberman--Strle's one-stable realization theorem.
+
+External category input:
+
+* the premodular Kirby-colour killing identity.
+
+The nonvanishing of fusion-category global dimension is already the separately
+named literature input `egno_globalDimension_ne_zero` in the frozen frontend.
+
+The split-special-Kirby-presentation boundary below is exposed through exact
+serialized component, strand, event, active-order, handle-index, and marking
+bindings.  It is not an opaque `isSplit` predicate and contains no category or
+evaluator equality.
+-/
+
+namespace TwistedYetter.StableNoGo
+
+open CategoryTheory
+open CategoryTheory.MonoidalCategory
+open scoped BigOperators
+open TwistedYetter.Semantics.Independent
+open TwistedYetter.Kirby.Final
+
+universe uK
+
+noncomputable section
+
+variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+
+/-! ## Transparent split-presentation syntax -/
+
+def shiftSerializedStrand (componentOffset : ℕ) :
+    SerializedStrand → SerializedStrand
+  | strand =>
+      { component := componentOffset + strand.component
+        orientation := strand.orientation }
+
+def shiftSerializedPuncture
+    (componentOffset strandOffset : ℕ) :
+    SerializedPuncture → SerializedPuncture
+  | puncture =>
+      { dottedComponent := componentOffset + puncture.dottedComponent
+        twoHandleComponent := componentOffset + puncture.twoHandleComponent
+        inputStrand := strandOffset + puncture.inputStrand
+        outputStrand := strandOffset + puncture.outputStrand
+        direction := puncture.direction
+        cutPosition := puncture.cutPosition }
+
+def shiftSerializedCutOpenEvent
+    (componentOffset strandOffset : ℕ) :
+    SerializedCutOpenEvent → SerializedCutOpenEvent
+  | .birth left right =>
+      .birth (strandOffset + left) (strandOffset + right)
+  | .death left right =>
+      .death (strandOffset + left) (strandOffset + right)
+  | .crossing overInput underInput overOutput underOutput sign =>
+      .crossing
+        (strandOffset + overInput) (strandOffset + underInput)
+        (strandOffset + overOutput) (strandOffset + underOutput) sign
+  | .framingTwist input output sign =>
+      .framingTwist (strandOffset + input) (strandOffset + output) sign
+  | .planarIsotopy continuations =>
+      .planarIsotopy
+        (continuations.map fun pair =>
+          (strandOffset + pair.1, strandOffset + pair.2))
+  | .projectorHole dotted punctures =>
+      .projectorHole (componentOffset + dotted)
+        (punctures.map
+          (shiftSerializedPuncture componentOffset strandOffset))
+
+def shiftSerializedActiveOrder (strandOffset : ℕ) :
+    List ℕ → List ℕ :=
+  List.map (strandOffset + ·)
+
+/--
+The exact category-neutral syntax saying that one certified presentation is the
+split union of two others in disjoint three-balls.
+-/
+structure SplitSpecialKirbyPresentation
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (left : SpecialKirbyRepresentativeOf X)
+    (right : SpecialKirbyRepresentativeOf Y) where
+  target : SpecialKirbyRepresentativeOf (connectedSum X Y)
+  twoHandleEquiv :
+    Fin target.diagram.handles.hTwo ≃
+      Fin left.diagram.handles.hTwo ⊕ Fin right.diagram.handles.hTwo
+  hOne_additive :
+    target.diagram.handles.hOne =
+      left.diagram.handles.hOne + right.diagram.handles.hOne
+  hThree_additive :
+    target.diagram.handles.hThree =
+      left.diagram.handles.hThree + right.diagram.handles.hThree
+  components_split :
+    serializedComponents target.diagram =
+      serializedComponents left.diagram ++
+        serializedComponents right.diagram
+  strands_split :
+    serializedStrands target.diagram =
+      serializedStrands left.diagram ++
+        (serializedStrands right.diagram).map
+          (shiftSerializedStrand left.diagram.trace.componentCount)
+  events_split :
+    serializedExteriorEvents target.cut =
+      serializedExteriorEvents left.cut ++
+        (serializedExteriorEvents right.cut).map
+          (shiftSerializedCutOpenEvent
+            left.diagram.trace.componentCount
+            left.diagram.trace.strandCount)
+  activeOrders_split :
+    serializedActiveOrders target.cut =
+      serializedActiveOrders left.cut ++
+        ((serializedActiveOrders right.cut).map
+          (shiftSerializedActiveOrder left.diagram.trace.strandCount)).tail
+  leftTwoHandleComponent :
+    ∀ handle : Fin left.diagram.handles.hTwo,
+      (target.diagram.handles.twoHandleIndex
+          (twoHandleEquiv.symm (Sum.inl handle))).1.1 =
+        (left.diagram.handles.twoHandleIndex handle).1.1
+  rightTwoHandleComponent :
+    ∀ handle : Fin right.diagram.handles.hTwo,
+      (target.diagram.handles.twoHandleIndex
+          (twoHandleEquiv.symm (Sum.inr handle))).1.1 =
+        left.diagram.trace.componentCount +
+          (right.diagram.handles.twoHandleIndex handle).1.1
+
+/--
+The chain-level form of connected-sum naturality needed by the character
+exponents.  Every coordinate equation is stated independently of any category.
+-/
+structure SplitMarkingNaturality
+    {X Y : ClosedOrientedSmoothFourManifold}
+    {left : SpecialKirbyRepresentativeOf X}
+    {right : SpecialKirbyRepresentativeOf Y}
+    (split : SplitSpecialKirbyPresentation left right) where
+  leftCycle : ThamTwoCycles left.primalBoundary
+  rightCycle : ThamTwoCycles right.primalBoundary
+  targetCycle : ThamTwoCycles split.target.primalBoundary
+  leftCycle_class :
+    thamCycleClass left.primalBoundary leftCycle = left.thamAlpha
+  rightCycle_class :
+    thamCycleClass right.primalBoundary rightCycle = right.thamAlpha
+  targetCycle_class :
+    thamCycleClass split.target.primalBoundary targetCycle =
+      split.target.thamAlpha
+  target_represents_connectedSum :
+    split.target.representsHomologyClass
+      (connectedSumMarking
+        (left.diagramH₂EquivManifoldH₂ left.alpha)
+        (right.diagramH₂EquivManifoldH₂ right.alpha))
+  left_coordinates :
+    ∀ handle : Fin left.diagram.handles.hTwo,
+      targetCycle.1 (split.twoHandleEquiv.symm (Sum.inl handle)) =
+        leftCycle.1 handle
+  right_coordinates :
+    ∀ handle : Fin right.diagram.handles.hTwo,
+      targetCycle.1 (split.twoHandleEquiv.symm (Sum.inr handle)) =
+        rightCycle.1 handle
+
+/--
+Standard split-union realization: two certified special presentations placed in
+disjoint three-balls give a certified presentation of the manifold connected
+sum, with the exact transparent syntax recorded above.
+-/
+axiom splitSpecialKirbyPresentation_exists
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (left : SpecialKirbyRepresentativeOf X)
+    (right : SpecialKirbyRepresentativeOf Y) :
+    Nonempty (SplitSpecialKirbyPresentation left right)
+
+/--
+Mayer--Vietoris, handle-homology comparison, Poincare duality, and turnover are
+natural for the standard split presentation, in the exact chain-level form
+needed to transport the two markings.
+-/
+axiom splitSpecialKirbyPresentation_marking_natural
+    {X Y : ClosedOrientedSmoothFourManifold}
+    {left : SpecialKirbyRepresentativeOf X}
+    {right : SpecialKirbyRepresentativeOf Y}
+    (split : SplitSpecialKirbyPresentation left right) :
+    Nonempty (SplitMarkingNaturality split)
+
+/-! ## Transparent connected-sum homology notation -/
+
+/--
+The direct-sum map on second homology, transported through the fixed
+Mayer--Vietoris identifications for connected sums.
+-/
+def connectedSumH₂Map
+    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    (f : ManifoldH₂ X ≃+ ManifoldH₂ X')
+    (g : ManifoldH₂ Y ≃+ ManifoldH₂ Y') :
+    ManifoldH₂ (connectedSum X Y) ≃+
+      ManifoldH₂ (connectedSum X' Y') :=
+  (connectedSumH₂ X Y).trans
+    ((f.prodCongr g).trans (connectedSumH₂ X' Y').symm)
+
+@[simp]
+theorem connectedSumH₂Map_apply
+    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    (f : ManifoldH₂ X ≃+ ManifoldH₂ X')
+    (g : ManifoldH₂ Y ≃+ ManifoldH₂ Y')
+    (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y) :
+    connectedSumH₂Map f g (connectedSumMarking alpha beta) =
+      connectedSumMarking (f alpha) (g beta) := by
+  simp [connectedSumH₂Map, connectedSumMarking]
+  rfl
+
+/-! ## Standard functorial topology boundaries -/
+
+/--
+An oriented diffeomorphism preserves the integral intersection pairing.
+-/
+axiom orientedDiffeomorphism_preservesIntersectionPairing
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X Y)
+    (a b : ManifoldH₂ X) :
+    integralIntersectionPairing Y (inducedH₂ g a) (inducedH₂ g b) =
+      integralIntersectionPairing X a b
+
+/-- `S² × S²` is simply connected. -/
+axiom sphereTwoProduct_simplyConnected :
+    IsSimplyConnected sphereTwoProduct
+
+/-- Connected sum preserves simple connectivity. -/
+axiom connectedSum_simplyConnected
+    {X Y : ClosedOrientedSmoothFourManifold} :
+    IsSimplyConnected X →
+      IsSimplyConnected Y →
+        IsSimplyConnected (connectedSum X Y)
+
+/--
+The Mayer--Vietoris splitting identifies the connected-sum intersection form
+with the orthogonal direct sum of the two original intersection forms.
+-/
+axiom connectedSumH₂_preservesIntersectionPairing
+    (X Y : ClosedOrientedSmoothFourManifold)
+    (a a' : ManifoldH₂ X) (b b' : ManifoldH₂ Y) :
+    integralIntersectionPairing (connectedSum X Y)
+        (connectedSumMarking a b) (connectedSumMarking a' b') =
+      integralIntersectionPairing X a a' +
+        integralIntersectionPairing Y b b'
+
+/-- Identity orientation-preserving diffeomorphism. -/
+axiom identityOrientedDiffeomorphism
+    (X : ClosedOrientedSmoothFourManifold) :
+    OrientedDiffeomorphism X X
+
+/-- The identity diffeomorphism induces the identity on integral `H₂`. -/
+axiom inducedH₂_identityOrientedDiffeomorphism
+    (X : ClosedOrientedSmoothFourManifold) :
+    inducedH₂ (identityOrientedDiffeomorphism X) =
+      AddEquiv.refl (ManifoldH₂ X)
+
+/-- The intersection-form isometry induced by an oriented diffeomorphism. -/
+def intersectionFormIsometryOfDiffeomorphism
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X Y) :
+    IntegralIntersectionFormIsometry X Y where
+  toAddEquiv := inducedH₂ g
+  preservesPairing :=
+    orientedDiffeomorphism_preservesIntersectionPairing g
+
+/-- Composition of orientation-preserving diffeomorphisms. -/
+axiom composeOrientedDiffeomorphism
+    {X Y Z : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X Y)
+    (h : OrientedDiffeomorphism Y Z) :
+    OrientedDiffeomorphism X Z
+
+/-- The homology action of a composite is the composite homology action. -/
+axiom inducedH₂_composeOrientedDiffeomorphism
+    {X Y Z : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X Y)
+    (h : OrientedDiffeomorphism Y Z) :
+    inducedH₂ (composeOrientedDiffeomorphism g h) =
+      (inducedH₂ g).trans (inducedH₂ h)
+
+/-- Connected sum of orientation-preserving diffeomorphisms. -/
+axiom connectedSumOrientedDiffeomorphism
+    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X X')
+    (h : OrientedDiffeomorphism Y Y') :
+    OrientedDiffeomorphism (connectedSum X Y) (connectedSum X' Y')
+
+/--
+Under the fixed Mayer--Vietoris splittings, the homology action of `g # h` is
+exactly `g_* ⊕ h_*`.
+-/
+axiom inducedH₂_connectedSumOrientedDiffeomorphism
+    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    (g : OrientedDiffeomorphism X X')
+    (h : OrientedDiffeomorphism Y Y') :
+    inducedH₂ (connectedSumOrientedDiffeomorphism g h) =
+      connectedSumH₂Map (inducedH₂ g) (inducedH₂ h)
+
+/-! ## Wall and Ruberman--Strle -/
+
+/--
+Wall stable classification (Wall 1964, *On simply-connected 4-manifolds*,
+Theorems 2--3): intersection-form-isometric closed simply connected oriented
+smooth four-manifolds become orientation-preservingly diffeomorphic after the
+same finite number of `S² × S²` stabilizations.
+
+No claim is made here about the induced homology action of the resulting
+diffeomorphism.
+-/
+axiom wall_stableClassification
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (simplyConnectedX : IsSimplyConnected X)
+    (simplyConnectedY : IsSimplyConnected Y)
+    (f : IntegralIntersectionFormIsometry X Y) :
+    Σ n : Nat, OrientedDiffeomorphism (stabilize X n) (stabilize Y n)
+
+/--
+Ruberman--Strle, Theorem 2.1 (arXiv:2210.16260v2, PDF p. 2): for every
+intersection-form automorphism `A` of a closed simply connected smooth
+four-manifold `Z`, the extension `A ⊕ id_H` is realized by an
+orientation-preserving self-diffeomorphism of `Z # (S² × S²)`.
+
+The displayed equality is the complete homology action under the fixed
+Mayer--Vietoris splitting, not merely its restriction to the old summand.
+-/
+axiom rubermanStrle_oneStableRealization
+    {Z : ClosedOrientedSmoothFourManifold}
+    (simplyConnectedZ : IsSimplyConnected Z)
+    (A : IntegralIntersectionFormIsometry Z Z) :
+    ∃ h : OrientedDiffeomorphism
+        (connectedSum Z sphereTwoProduct)
+        (connectedSum Z sphereTwoProduct),
+      inducedH₂ h =
+        connectedSumH₂Map A.toAddEquiv
+          (AddEquiv.refl (ManifoldH₂ sphereTwoProduct))
+
+/-! ## Premodular Kirby-colour killing -/
+
+/-- A simple object is transparent when its monodromy with every object is identity. -/
+def IsTransparentSimple
+    (𝒞 : CategoryTheory.BundledPremodularCategory K)
+    (j : 𝒞.Simple) : Prop :=
+  ∀ X : 𝒞.C,
+    monodromyHom (𝒞.simpleObject j) X =
+      𝟙 (𝒞.simpleObject j ⊗ X)
+
+/-- The scalar evaluation of the positively oriented Hopf link labelled `i,j`. -/
+noncomputable def positiveHopfLinkScalar
+    (𝒞 : CategoryTheory.BundledPremodularCategory K)
+    (i j : 𝒞.Simple) : K :=
+  𝒞.closedScalar
+    (𝒞.canonicalRibbonTrace
+      (monodromyHom (𝒞.simpleObject i) (𝒞.simpleObject j)))
+
+/--
+Premodular Kirby-colour killing (Bärenz--Barrett, Lemma 2.46; originally
+Bruguières, Lemma 1.4.2), in the positive Hopf-link convention fixed above.
+
+This is a local ribbon-fusion identity.  It does not mention a four-manifold,
+the Twisted Yetter evaluator, or an invariance conclusion.
+-/
+axiom premodularKirbyColourKilling
+    (𝒞 : CategoryTheory.BundledPremodularCategory K)
+    (j : 𝒞.Simple) :
+    (IsTransparentSimple 𝒞 j →
+      (∑ i : 𝒞.Simple,
+          𝒞.quantumDimension i * positiveHopfLinkScalar 𝒞 i j) =
+        𝒞.globalDimension * 𝒞.quantumDimension j) ∧
+    (¬IsTransparentSimple 𝒞 j →
+      (∑ i : 𝒞.Simple,
+          𝒞.quantumDimension i * positiveHopfLinkScalar 𝒞 i j) = 0)
+
+end
+
+end TwistedYetter.StableNoGo
