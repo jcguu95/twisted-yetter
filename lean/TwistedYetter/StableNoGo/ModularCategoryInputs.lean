@@ -1,4 +1,4 @@
-import TwistedYetter.StableNoGo.ModularCategory
+import TwistedYetter.StableNoGo.ModularCharacterCorrespondence
 
 /-!
 # Literature inputs for the modular numerical reduction
@@ -31,40 +31,34 @@ noncomputable section
 
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
-/-- An object has tensor inverse when tensoring it with its right dual gives the unit. -/
-def IsTensorInvertible
-    {C : Type*} [Category C] [MonoidalCategory C] [RightRigidCategory C]
-    (X : C) : Prop :=
-  Nonempty (X ⊗ Xᘁ ≅ 𝟙_ C)
+/-- A character object is an invertible simple object together with the exact
+EGNO (8.95) statement that it represents the prescribed character.  This
+dependent pair replaces the former structure containing an unproved open
+monodromy formula. -/
+abbrev ModularCharacterObject (𝒞η : TwistedModularCategory K) :=
+  { g : InvertibleSimpleObject 𝒞η.category //
+    RepresentsIdentityCharacter 𝒞η g }
 
-/--
-The invertible simple object `g_eta` corresponding to the monoidal identity
-character.  The displayed equality is the unclosed tensor form of EGNO
-equation (8.95): closing the `g_eta` strand gives the natural automorphism
-`alpha(g_eta) = eta` of Lemma 8.22.9.  Our monodromy starts on `g_eta tensor X`,
-so the character component occurs on the second tensor factor.
--/
-structure ModularCharacterObject (𝒞η : TwistedModularCategory K) where
-  simple : 𝒞η.category.Simple
-  tensorInvertible :
-    IsTensorInvertible (𝒞η.category.simpleObject simple)
-  monodromy_eq_tensor_character :
-    forall X : 𝒞η.category.C,
-      monodromyHom (𝒞η.category.simpleObject simple) X =
-        𝟙 (𝒞η.category.simpleObject simple) ⊗ₘ
-          𝒞η.character.iso.hom.app X
+namespace ModularCharacterObject
 
-/-- EGNO, Lemma 8.22.9, with the monodromy convention fixed above. -/
-axiom egno_characterObject_exists (𝒞η : TwistedModularCategory K) :
-    Nonempty (ModularCharacterObject 𝒞η)
+def simple
+    {𝒞η : TwistedModularCategory K} (g : ModularCharacterObject 𝒞η) :
+    𝒞η.category.Simple :=
+  g.1.simple
+
+end ModularCharacterObject
+
+/-- EGNO Lemma 8.22.9(iii), repackaged without strengthening its conclusion. -/
+theorem egno_characterObject_exists (𝒞η : TwistedModularCategory K) :
+    Nonempty (ModularCharacterObject 𝒞η) := by
+  exact ⟨⟨egnoCharacterObject 𝒞η,
+    egnoCharacterObject_represents 𝒞η⟩⟩
 
 /-- The ribbon twist of the character object, packaged as a unit of `K`. -/
 noncomputable def ModularCharacterObject.twistUnit
     {𝒞η : TwistedModularCategory K}
     (g : ModularCharacterObject 𝒞η) : Kˣ :=
-  Units.mk0
-    (simpleTwistScalar 𝒞η.toPremodular g.simple)
-    (simpleTwistScalar_ne_zero 𝒞η.toPremodular g.simple)
+  g.1.twistUnit
 
 /-- The unshifted positive Gauss sum `tau_plus`. -/
 noncomputable def positiveGaussSum
@@ -75,19 +69,6 @@ noncomputable def positiveGaussSum
 noncomputable def negativeGaussSum
     (𝒞η : TwistedPremodularCategory K) : K :=
   negativeShiftedGaussSum 𝒞η 0
-
-/--
-The unnormalized `S`-matrix entry `s_XY`, defined exactly as the canonical
-ribbon trace of positive monodromy.
--/
-noncomputable def sMatrixEntry
-    (𝒞η : TwistedPremodularCategory K)
-    (first second : 𝒞η.category.Simple) : K :=
-  𝒞η.category.closedScalar
-    (𝒞η.category.canonicalRibbonTrace
-      (monodromyHom
-        (𝒞η.category.simpleObject first)
-        (𝒞η.category.simpleObject second)))
 
 /--
 EGNO, Lemma 8.15.3, equation (8.58), printed page 229:
@@ -119,38 +100,28 @@ axiom egno_negativeGaussSum_sMatrixIdentity
         simpleTwistScalar 𝒞η.toPremodular second *
         negativeGaussSum 𝒞η.toPremodular
 
-/--
-The simple object `g^n` obtained from the invertible character object.  The
-first equation is EGNO's character pairing (8.95)--(8.96), traced on a simple
-object; the second is quadraticity of the ribbon twist on the pointed
-subcategory.  Keeping these equations separate prevents either convention
-from being hidden inside a shifted Gauss-sum axiom.
--/
-structure ModularCharacterPower
+/-- A genuine simple representative of the tensor power `g^n`.  It carries
+only the object and its power isomorphism, never an `S`-matrix or twist-value
+conclusion. -/
+abbrev ModularCharacterPower
     {𝒞η : TwistedModularCategory K}
-    (g : ModularCharacterObject 𝒞η) (n : ℤ) where
-  simple : 𝒞η.category.Simple
-  quantumDimension_ne_zero :
-    𝒞η.category.quantumDimension simple ≠ 0
-  sMatrixEntry_eq :
-    ∀ first : 𝒞η.category.Simple,
-      sMatrixEntry 𝒞η.toPremodular first simple =
-        𝒞η.category.quantumDimension first *
-          𝒞η.category.quantumDimension simple *
-          ((((𝒞η.character.value first) ^ n : Kˣ) : K))
-  twist_eq :
-    simpleTwistScalar 𝒞η.toPremodular simple =
-      (((g.twistUnit ^ (n * n) : Kˣ) : K))
+    (g : ModularCharacterObject 𝒞η) (n : ℤ) :=
+  CharacterPowerRepresentative g.1 n
 
-/--
-EGNO, equations (8.95)--(8.96) and Lemma 8.22.9, together with the balancing
-equation restricted to the pointed subcategory.  This is the precise
-character-power input; it contains no Gauss-sum conclusion.
--/
-axiom egno_characterPower_exists
+/-- Existence of the simple representative, with no numerical conclusions. -/
+theorem egno_characterPower_exists
     {𝒞η : TwistedModularCategory K}
     (g : ModularCharacterObject 𝒞η) (n : ℤ) :
-    Nonempty (ModularCharacterPower g n)
+    Nonempty (ModularCharacterPower g n) :=
+  egno_characterPowerRepresentative_exists g.1 n
+
+/-- EGNO Theorem 7.21.12, together with
+`|X|² = dim(X) dim(X*)` in the pivotal case: a simple object's pivotal
+dimension is nonzero. -/
+axiom egno_simpleQuantumDimension_ne_zero
+    (𝒞η : TwistedPremodularCategory K)
+    (simple : 𝒞η.category.Simple) :
+    𝒞η.category.quantumDimension simple ≠ 0
 
 /-- The positive shifted formula derived from EGNO (8.58). -/
 theorem egno_positiveShiftedGaussSum
@@ -160,27 +131,34 @@ theorem egno_positiveShiftedGaussSum
       (((g.twistUnit ^ (-(n * n)) : Kˣ) : K)) *
         positiveGaussSum 𝒞η.toPremodular := by
   let power := Classical.choice (egno_characterPower_exists g n)
-  have identity := egno_positiveGaussSum_sMatrixIdentity 𝒞η power.simple
+  have identity := egno_positiveGaussSum_sMatrixIdentity
+    𝒞η power.object.simple
   have expanded :
-      𝒞η.category.quantumDimension power.simple *
+      𝒞η.category.quantumDimension power.object.simple *
           positiveShiftedGaussSum 𝒞η.toPremodular n =
-        𝒞η.category.quantumDimension power.simple *
-          (simpleTwistScalar 𝒞η.toPremodular power.simple)⁻¹ *
+        𝒞η.category.quantumDimension power.object.simple *
+          (simpleTwistScalar 𝒞η.toPremodular power.object.simple)⁻¹ *
           positiveGaussSum 𝒞η.toPremodular := by
     rw [← identity]
     unfold positiveShiftedGaussSum
     rw [Finset.mul_sum]
     apply Finset.sum_congr rfl
     intro first _
-    rw [power.sMatrixEntry_eq]
+    rw [sMatrixEntry_characterPower_eq g.1 g.2 n power]
     dsimp [TwistedModularCategory.toPremodular]
     ring
   have inverseTwist :
-      ((((g.twistUnit ^ (n * n) : Kˣ) : K)))⁻¹ =
-        (((g.twistUnit ^ (-(n * n)) : Kˣ) : K)) := by
+      ((((g.1.twistUnit ^ (n * n) : Kˣ) : K)))⁻¹ =
+        (((g.1.twistUnit ^ (-(n * n)) : Kˣ) : K)) := by
     rw [zpow_neg, Units.val_inv_eq_inv_val]
-  exact mul_left_cancel₀ power.quantumDimension_ne_zero (by
-    rw [expanded, power.twist_eq, inverseTwist]
+  have powerDimensionNonzero :
+      𝒞η.category.quantumDimension power.object.simple ≠ 0 := by
+    simpa [TwistedModularCategory.toPremodular] using
+      egno_simpleQuantumDimension_ne_zero 𝒞η.toPremodular
+        power.object.simple
+  exact mul_left_cancel₀ powerDimensionNonzero (by
+    rw [expanded, simpleTwistScalar_characterPower_eq g.1 n power,
+      ModularCharacterObject.twistUnit, inverseTwist]
     ring)
 
 /-- The negative shifted formula derived from EGNO (8.61). -/
@@ -191,23 +169,30 @@ theorem egno_negativeShiftedGaussSum
       (((g.twistUnit ^ (n * n) : Kˣ) : K)) *
         negativeGaussSum 𝒞η.toPremodular := by
   let power := Classical.choice (egno_characterPower_exists g n)
-  have identity := egno_negativeGaussSum_sMatrixIdentity 𝒞η power.simple
+  have identity := egno_negativeGaussSum_sMatrixIdentity
+    𝒞η power.object.simple
   have expanded :
-      𝒞η.category.quantumDimension power.simple *
+      𝒞η.category.quantumDimension power.object.simple *
           negativeShiftedGaussSum 𝒞η.toPremodular n =
-        𝒞η.category.quantumDimension power.simple *
-          simpleTwistScalar 𝒞η.toPremodular power.simple *
+        𝒞η.category.quantumDimension power.object.simple *
+          simpleTwistScalar 𝒞η.toPremodular power.object.simple *
           negativeGaussSum 𝒞η.toPremodular := by
     rw [← identity]
     unfold negativeShiftedGaussSum
     rw [Finset.mul_sum]
     apply Finset.sum_congr rfl
     intro first _
-    rw [power.sMatrixEntry_eq]
+    rw [sMatrixEntry_characterPower_eq g.1 g.2 n power]
     dsimp [TwistedModularCategory.toPremodular]
     ring
-  exact mul_left_cancel₀ power.quantumDimension_ne_zero (by
-    rw [expanded, power.twist_eq]
+  have powerDimensionNonzero :
+      𝒞η.category.quantumDimension power.object.simple ≠ 0 := by
+    simpa [TwistedModularCategory.toPremodular] using
+      egno_simpleQuantumDimension_ne_zero 𝒞η.toPremodular
+        power.object.simple
+  exact mul_left_cancel₀ powerDimensionNonzero (by
+    rw [expanded, simpleTwistScalar_characterPower_eq g.1 n power,
+      ModularCharacterObject.twistUnit]
     ring)
 
 /-- EGNO, Proposition 8.15.4. -/
