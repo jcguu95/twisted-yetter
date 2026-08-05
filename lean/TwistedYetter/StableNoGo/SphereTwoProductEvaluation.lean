@@ -264,6 +264,16 @@ private def positiveHopfSecondHandle :
     ⟨(1 : Fin 2), by
       decide⟩
 
+/-- The explicit THAM cycle with coordinates `(a,b)` in the two Hopf-link
+components.  Since the diagram has no primal three-handles, every pair of
+integers is a THAM two-cycle. -/
+def positiveHopfCycle (a b : ℤ) :
+    ThamTwoCycles
+      positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData :=
+  ⟨fun handle => if positiveHopfTwoHandleEquiv handle = 0 then a else b, by
+    ext index
+    exact Fin.elim0 index⟩
+
 @[simp]
 private theorem positiveHopfTwoHandleEquiv_symm_zero :
     positiveHopfTwoHandleEquiv.symm 0 = positiveHopfFirstHandle := by
@@ -277,6 +287,24 @@ private theorem positiveHopfTwoHandleEquiv_symm_one :
   apply positiveHopfHandleData.twoHandleIndex.injective
   apply Subtype.ext
   rfl
+
+@[simp]
+private theorem positiveHopfCycle_first (a b : ℤ) :
+    (positiveHopfCycle a b).1 positiveHopfFirstHandle = a := by
+  have handle_eq :
+      positiveHopfTwoHandleEquiv positiveHopfFirstHandle = 0 := by
+    rw [← positiveHopfTwoHandleEquiv_symm_zero]
+    exact positiveHopfTwoHandleEquiv.apply_symm_apply 0
+  simp [positiveHopfCycle, handle_eq]
+
+@[simp]
+private theorem positiveHopfCycle_second (a b : ℤ) :
+    (positiveHopfCycle a b).1 positiveHopfSecondHandle = b := by
+  have handle_eq :
+      positiveHopfTwoHandleEquiv positiveHopfSecondHandle = 1 := by
+    rw [← positiveHopfTwoHandleEquiv_symm_one]
+    exact positiveHopfTwoHandleEquiv.apply_symm_apply 1
+  norm_num [positiveHopfCycle, handle_eq]
 
 @[simp]
 private theorem positiveHopf_twoHandleIndex_symm
@@ -1552,6 +1580,122 @@ theorem positiveHopf_compile_closedScalar
   rw [positiveHopf_compile_eq_componentwise,
     componentwisePositiveHopfMorphism_eq_trace]
 
+/-- The character factor of the Hopf cycle with coordinates `(a,b)`. -/
+theorem positiveHopf_characterWeight
+    (𝒞η : TwistedPremodularCategory K)
+    (labeling : TwoHandleLabeling 𝒞η.category positiveZeroFramedHopfDiagram)
+    (a b : ℤ) :
+    characterWeight
+        (primal :=
+          positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData)
+        𝒞η labeling (positiveHopfCycle a b) =
+      ((((𝒞η.character.value (labeling positiveHopfFirstHandle)) ^ a : Kˣ) : K)) *
+        ((((𝒞η.character.value (labeling positiveHopfSecondHandle)) ^ b : Kˣ) : K)) := by
+  unfold characterWeight
+  rw [Fintype.prod_equiv positiveHopfTwoHandleEquiv
+    (fun handle =>
+      (𝒞η.character.value (labeling handle)) ^
+        (positiveHopfCycle a b).1 handle)
+    (fun handle =>
+      (𝒞η.character.value
+          (labeling (positiveHopfTwoHandleEquiv.symm handle))) ^
+        (positiveHopfCycle a b).1
+          (positiveHopfTwoHandleEquiv.symm handle)) (by simp)]
+  rw [Fin.prod_univ_two]
+  simp only [positiveHopfTwoHandleEquiv_symm_zero,
+    positiveHopfTwoHandleEquiv_symm_one, positiveHopfCycle_first,
+    positiveHopfCycle_second, Units.val_mul]
+
+/-- The finite premodular Hopf-block sum for a marking with coordinates
+`(a,b)` in the hyperbolic basis. -/
+noncomputable def markedHyperbolicBlockSum
+    (𝒞η : TwistedPremodularCategory K) (a b : ℤ) : K :=
+  ∑ i : 𝒞η.category.Simple,
+    ∑ j : 𝒞η.category.Simple,
+      𝒞η.category.quantumDimension i *
+        𝒞η.category.quantumDimension j *
+          ((((𝒞η.character.value i) ^ a : Kˣ) : K)) *
+            ((((𝒞η.character.value j) ^ b : Kˣ) : K)) *
+              positiveHopfLinkScalar 𝒞η.category i j
+
+/-- One marked Hopf summand displays both character exponents explicitly. -/
+theorem positiveHopf_rawEvaluatorSummand
+    (𝒞η : TwistedPremodularCategory K)
+    (labeling : TwoHandleLabeling 𝒞η.category positiveZeroFramedHopfDiagram)
+    (a b : ℤ) :
+    rawEvaluatorSummand 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut
+        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+        (positiveHopfCycle a b) labeling =
+      𝒞η.category.quantumDimension (labeling positiveHopfFirstHandle) *
+        𝒞η.category.quantumDimension (labeling positiveHopfSecondHandle) *
+          ((((𝒞η.character.value
+            (labeling positiveHopfFirstHandle)) ^ a : Kˣ) : K)) *
+          ((((𝒞η.character.value
+            (labeling positiveHopfSecondHandle)) ^ b : Kˣ) : K)) *
+          positiveHopfLinkScalar 𝒞η.category
+            (labeling positiveHopfFirstHandle)
+            (labeling positiveHopfSecondHandle) := by
+  unfold rawEvaluatorSummand
+  simp only [canonicalRoleAwareGraphCompiler,
+    canonicalRibbonGraphicalEvaluation, RibbonExpression.interpret]
+  have kirbyWeight_eq :
+      ordinaryKirbyWeight 𝒞η.category labeling =
+        𝒞η.category.quantumDimension (labeling positiveHopfFirstHandle) *
+          𝒞η.category.quantumDimension
+            (labeling positiveHopfSecondHandle) := by
+    unfold ordinaryKirbyWeight
+    rw [Fintype.prod_equiv positiveHopfTwoHandleEquiv
+      (fun handle =>
+        𝒞η.category.simples.quantumDimension (labeling handle))
+      (fun handle =>
+        𝒞η.category.simples.quantumDimension
+          (labeling (positiveHopfTwoHandleEquiv.symm handle))) (by simp)]
+    rw [Fin.prod_univ_two]
+    rw [𝒞η.category.simples_quantumDimension_eq,
+      𝒞η.category.simples_quantumDimension_eq]
+    rw [positiveHopfTwoHandleEquiv_symm_zero,
+      positiveHopfTwoHandleEquiv_symm_one]
+  rw [kirbyWeight_eq, positiveHopf_characterWeight,
+    positiveHopf_compile_closedScalar]
+  ring
+
+/-- The marked raw Hopf evaluation is the finite two-label sum. -/
+theorem positiveHopf_rawCycleSum
+    (𝒞η : TwistedPremodularCategory K) (a b : ℤ) :
+    rawCycleSum 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut
+        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+        (positiveHopfCycle a b) =
+      markedHyperbolicBlockSum 𝒞η a b := by
+  classical
+  rw [rawCycleSum_eq_sum_rawEvaluatorSummand]
+  unfold markedHyperbolicBlockSum
+  calc
+    _ = ∑ labels : 𝒞η.category.Simple × 𝒞η.category.Simple,
+        𝒞η.category.quantumDimension labels.1 *
+          𝒞η.category.quantumDimension labels.2 *
+            ((((𝒞η.character.value labels.1) ^ a : Kˣ) : K)) *
+              ((((𝒞η.character.value labels.2) ^ b : Kˣ) : K)) *
+                positiveHopfLinkScalar 𝒞η.category labels.1 labels.2 := by
+      apply Fintype.sum_equiv
+        (finTwoArrowEquiv 𝒞η.category.Simple)
+      intro labeling
+      exact positiveHopf_rawEvaluatorSummand 𝒞η labeling a b
+    _ = _ := by rw [Fintype.sum_prod_type]
+
+/-- The fully normalized marked hyperbolic block. -/
+theorem positiveHopf_evaluateCycle
+    (𝒞η : TwistedPremodularCategory K) (a b : ℤ) :
+    evaluateCycle 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut
+        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+        (positiveHopfCycle a b) =
+      𝒞η.category.globalDimension * markedHyperbolicBlockSum 𝒞η a b := by
+  unfold evaluateCycle thamDefinition511Normalization
+  rw [positiveHopf_rawCycleSum]
+  simp [positiveZeroFramedHopfDiagram, positiveHopfHandleData]
+
 /-- Evaluate the zero marking using the literal zero THAM cycle. -/
 theorem positiveHopf_evaluateMarking_eq_zeroCycle
     (𝒞η : TwistedPremodularCategory K) :
@@ -1721,6 +1865,16 @@ theorem positiveHopf_rawCycleSum_eq
       apply Finset.sum_congr rfl
       intro j _
       split_ifs <;> ring
+
+/-- At the zero marking, the marked hyperbolic block sum is the global
+dimension times the global dimension of the transparent sector. -/
+theorem markedHyperbolicBlockSum_zero_eq
+    (𝒞η : TwistedPremodularCategory K) :
+    markedHyperbolicBlockSum 𝒞η 0 0 =
+      𝒞η.category.globalDimension *
+        transparentGlobalDimension 𝒞η.category := by
+  rw [← positiveHopf_rawCycleSum 𝒞η 0 0]
+  convert positiveHopf_rawCycleSum_eq 𝒞η using 1
 
 theorem positiveHopf_evaluateCycle_zero_eq
     (𝒞η : TwistedPremodularCategory K) :
