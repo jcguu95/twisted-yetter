@@ -1,0 +1,54 @@
+{
+  "artifact": "modular-explicit-formula-checkpoint-v1",
+  "timestamp": "2026-08-04T23:15:03-06:00",
+  "status": "KERNEL_CHECKED_WITH_EXPLICIT_TRUST_BOUNDARY",
+  "base_git_commit": "5cb4ab18523118307cbc2ea427767885e179099d",
+  "working_tree": "dirty_before_this_change; unrelated user changes were not staged or reverted",
+  "lean": "4.29.1 arm64-apple-darwin24.6.0 f72c35b3f637c8c6571d353742168ab66cc22c00",
+  "theorems": [
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_explicit_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_zero_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_quadratic_ratio"
+  ],
+  "mathematical_scope": {
+    "category": "twisted modular fusion category over an algebraically closed characteristic-zero field",
+    "manifold": "closed simply connected oriented smooth four-manifold",
+    "marking": "alpha in integral H_2",
+    "formula": "TY(X,alpha)=D*tauPlus^b2Plus*tauMinus^b2Minus*theta_g^(-Q_X(alpha,alpha))"
+  },
+  "verification_commands": [
+    "lake build TwistedYetter.StableNoGo.ModularExplicitFormula",
+    "lake env lean lean/TwistedYetter/StableNoGo/FinalTheoremAudit.lean",
+    "lake build"
+  ],
+  "verification_results": {
+    "narrow_build": "pass",
+    "full_build": "pass",
+    "new_route_sorry_admit_opaque_scan": "pass_no_matches",
+    "kernel_axiom_print": "pass_no_sorryAx",
+    "source_red_team": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED"
+  },
+  "new_explicit_inputs": [
+    "egno_characterObject_exists",
+    "egno_positiveShiftedGaussSum",
+    "egno_negativeShiftedGaussSum",
+    "egno_gaussSums_product",
+    "positiveSecondBettiNumber",
+    "negativeSecondBettiNumber",
+    "OddDiagonalization.positiveRank_eq_b2Plus",
+    "OddDiagonalization.negativeRank_eq_b2Minus",
+    "cp2Blowup_oddDiagonalization",
+    "positiveSecondBettiNumber_cp2Blowup",
+    "negativeSecondBettiNumber_cp2Blowup"
+  ],
+  "non_claims": [
+    "This checkpoint does not independently certify every inherited axiom or proof field in the existing invariant route.",
+    "This checkpoint does not establish a corresponding explicit formula for arbitrary premodular categories.",
+    "This checkpoint does not cover non-simply-connected four-manifolds.",
+    "This checkpoint does not identify the invariant with any legacy numerical artifact without a separate compatibility proof."
+  ],
+  "audit_artifacts": {
+    "json": "/tmp/twisted-yetter-modular-formula-red-team.json",
+    "markdown": "/tmp/twisted-yetter-modular-formula-red-team.zh-TW.md"
+  }
+}

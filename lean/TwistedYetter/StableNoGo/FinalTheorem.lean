@@ -4,6 +4,7 @@ import TwistedYetter.StableNoGo.NumericalStatement
 import TwistedYetter.StableNoGo.OddDiagonalEvaluation
 import TwistedYetter.StableNoGo.ProjectivePlaneEvaluation
 import TwistedYetter.StableNoGo.SphereTwoProductEvaluation
+import TwistedYetter.StableNoGo.ModularCategory
 
 /-!
 # Stable calculation and no-go corollary
@@ -293,48 +294,6 @@ theorem TwistedYetter_premodular_numerical_formula
     (∀ X, SatisfiesOddFormula 𝒞η X) ∧
     (∀ X, SatisfiesEvenFormula 𝒞η X) := by
   exact ⟨satisfiesOddFormula 𝒞η, satisfiesEvenFormula 𝒞η⟩
-
-/-- A twisted premodular category whose Müger centre is trivial. -/
-structure TwistedModularCategory (K : Type uK)
-    [Field K] [IsAlgClosed K] [CharZero K]
-    extends TwistedPremodularCategory K where
-  nondegenerate :
-    ∀ simple : category.Simple,
-      (∀ X : category.C,
-        monodromyHom (category.simpleObject simple) X =
-          𝟙 (category.simpleObject simple ⊗ X)) →
-      Nonempty (category.simpleObject simple ≅ 𝟙_ category.C)
-
-def TwistedModularCategory.toPremodular
-    (𝒞η : TwistedModularCategory K) : TwistedPremodularCategory K :=
-  𝒞η.toTwistedPremodularCategory
-
-/--
-The intrinsic Pontryagin-square correction associated to the invertible object
-representing the character.  This must be constructed from modularity; it is
-not caller-supplied data.
--/
-noncomputable def quadraticCorrection
-    (𝒞η : TwistedModularCategory K)
-    (X : ClosedOrientedSmoothFourManifold)
-    (alpha : ManifoldH₂ X) : K := by
-  sorry
-
-/--
-**Main Corollary (modular numerical formula).**
-
-For every simply connected closed four-manifold, the twisted value is the
-untwisted-marking value times the intrinsic quadratic correction.
--/
-theorem TwistedYetter_modular_numerical_formula
-    (𝒞η : TwistedModularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
-    (simplyConnectedX : IsSimplyConnected X)
-    (alpha : ManifoldH₂ X) :
-    TwistedYetter 𝒞η.toPremodular ⟨X, alpha⟩ =
-      TwistedYetter 𝒞η.toPremodular ⟨X, 0⟩ *
-        quadraticCorrection 𝒞η X alpha := by
-  sorry
 
 end
 

@@ -1,4 +1,4 @@
-import TwistedYetter.StableNoGo.FinalTheorem
+import TwistedYetter.StableNoGo.ModularExplicitFormula
 
 namespace TwistedYetter.StableNoGo
 
@@ -11,7 +11,9 @@ namespace TwistedYetter.StableNoGo
 #print TwistedYetter_premodular_numerical_formula
 #print axioms TwistedYetter_premodular_numerical_formula
 
-#print TwistedYetter_modular_numerical_formula
-#print axioms TwistedYetter_modular_numerical_formula
+#print TwistedYetter_modular_explicit_formula
+#print axioms TwistedYetter_modular_explicit_formula
+#print TwistedYetter_modular_quadratic_ratio
+#print axioms TwistedYetter_modular_quadratic_ratio
 
 end TwistedYetter.StableNoGo
