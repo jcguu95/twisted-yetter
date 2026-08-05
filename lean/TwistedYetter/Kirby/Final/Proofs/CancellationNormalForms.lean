@@ -590,8 +590,248 @@ theorem compileContextualCutOpenEventMorphism_eq_fromWitness
         (eventRightContext diagram presentation i)
         (eventTransitionEquations diagram presentation i).1
         (eventTransitionEquations diagram presentation i).2
-        (presentation.cut.exterior.strandContinuationsAreWellFormed i) := by
+      (presentation.cut.exterior.strandContinuationsAreWellFormed i) := by
   rfl
+
+/-- Insert a local ribbon morphism into strand-indexed exterior contexts,
+including the canonical `List.map_append` transports. -/
+noncomputable def contextualizeExteriorMorphism
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (left before after right : List diagram.trace.StrandId)
+    (map :
+      ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling before) ⟶
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling after)) :
+    ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling (left ++ before ++ right)) ⟶
+      ribbonWordObject 𝒞
+        (exteriorWord 𝒞 diagram labeling (left ++ after ++ right)) :=
+  eqToHom (by simp [exteriorWord, List.map_append]) ≫
+    contextualizeRibbonMorphism 𝒞
+      (exteriorWord 𝒞 diagram labeling left)
+      (exteriorWord 𝒞 diagram labeling before)
+      (exteriorWord 𝒞 diagram labeling after)
+      (exteriorWord 𝒞 diagram labeling right)
+      map ≫
+    eqToHom (by simp [exteriorWord, List.map_append])
+
+/-- The strand-indexed exterior wrapper differs from its ribbon-word core only
+by the canonical `List.map_append` transports at the two endpoints. -/
+theorem contextualizeExteriorMorphism_heq_core
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (left before after right : List diagram.trace.StrandId)
+    (map :
+      ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling before) ⟶
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling after)) :
+    HEq
+      (contextualizeExteriorMorphism 𝒞 diagram labeling
+        left before after right map)
+      (contextualizeRibbonMorphism 𝒞
+        (exteriorWord 𝒞 diagram labeling left)
+        (exteriorWord 𝒞 diagram labeling before)
+        (exteriorWord 𝒞 diagram labeling after)
+        (exteriorWord 𝒞 diagram labeling right)
+        map) := by
+  unfold contextualizeExteriorMorphism
+  rw [← Category.assoc]
+  exact
+    (CategoryTheory.comp_eqToHom_heq _ _).trans
+      (CategoryTheory.eqToHom_comp_heq _ _)
+
+theorem contextualizeExteriorMorphism_heq
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    {left before after right left' before' after' right' :
+      List diagram.trace.StrandId}
+    {map :
+      ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling before) ⟶
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling after)}
+    {map' :
+      ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling before') ⟶
+        ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling after')}
+    (leftEq : left = left')
+    (beforeEq : before = before')
+    (afterEq : after = after')
+    (rightEq : right = right')
+    (mapEq : HEq map map') :
+    HEq
+      (contextualizeExteriorMorphism 𝒞 diagram labeling
+        left before after right map)
+      (contextualizeExteriorMorphism 𝒞 diagram labeling
+        left' before' after' right' map') := by
+  subst left'
+  subst before'
+  subst after'
+  subst right'
+  cases mapEq
+  rfl
+
+theorem compileCutOpenEventMorphism_heq_birth
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (leftOutput rightOutput : diagram.trace.StrandId)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (eventCanonical : event = .birth leftOutput rightOutput) :
+    HEq
+      (compileCutOpenEventMorphism 𝒞 diagram labeling event pairing)
+      (pairedBirthMorphism 𝒞 diagram labeling leftOutput rightOutput
+        (eventCanonical ▸ pairing).1 (eventCanonical ▸ pairing).2) := by
+  subst event
+  rfl
+
+theorem compileCutOpenEventMorphism_heq_death
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (leftInput rightInput : diagram.trace.StrandId)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (eventCanonical : event = .death leftInput rightInput) :
+    HEq
+      (compileCutOpenEventMorphism 𝒞 diagram labeling event pairing)
+      (pairedDeathMorphism 𝒞 diagram labeling leftInput rightInput
+        (eventCanonical ▸ pairing).1 (eventCanonical ▸ pairing).2) := by
+  subst event
+  rfl
+
+/-- Positive braiding on a two-letter ribbon word. -/
+def positiveCrossingMorphism
+    (𝒞 : BundledPremodularCategory K)
+    (first second : OrientedSimple 𝒞) :
+    ribbonWordObject 𝒞 [first, second] ⟶
+      ribbonWordObject 𝒞 [second, first] :=
+  (α_ _ _ _).inv ≫
+    ((β_ _ _).hom ⊗ₘ 𝟙 _) ≫
+    (α_ _ _ _).hom
+
+theorem compileCutOpenEventMorphism_heq_positiveCrossing
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (overInput underInput overOutput underOutput : diagram.trace.StrandId)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (eventCanonical :
+      event = .crossing overInput underInput overOutput underOutput .positive) :
+    HEq
+      (compileCutOpenEventMorphism 𝒞 diagram labeling event pairing)
+      (positiveCrossingMorphism 𝒞
+        (orientedExteriorStrand 𝒞 diagram labeling overInput)
+        (orientedExteriorStrand 𝒞 diagram labeling underInput)) := by
+  subst event
+  unfold compileCutOpenEventMorphism positiveCrossingMorphism
+  dsimp only
+  simp [CutOpenEvent.beforeWord, CutOpenEvent.afterWord,
+    exteriorWord, ribbonWordObject]
+
+/-- Once the exact source, target, and exterior contexts are fixed, contextual
+compilation is precisely contextualization of the local event morphism. -/
+theorem compileContextualFromWitness_in_context
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (before after left right leftValue rightValue : List diagram.trace.StrandId)
+    (beforeEq : before = left ++ event.beforeWord ++ right)
+    (afterEq : after = left ++ event.afterWord ++ right)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (leftCanonical : left = leftValue)
+    (rightCanonical : right = rightValue)
+    (beforeCanonical : before = leftValue ++ event.beforeWord ++ rightValue)
+    (afterCanonical : after = leftValue ++ event.afterWord ++ rightValue) :
+    eqToHom
+        (congrArg
+          (fun word =>
+            ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+          beforeCanonical).symm ≫
+      compileContextualCutOpenEventMorphismFromWitness
+        𝒞 diagram labeling event
+        before after left right beforeEq afterEq pairing ≫
+      eqToHom
+        (congrArg
+          (fun word =>
+            ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+          afterCanonical) =
+      contextualizeExteriorMorphism 𝒞 diagram labeling
+        leftValue event.beforeWord event.afterWord rightValue
+        (compileCutOpenEventMorphism 𝒞 diagram labeling event pairing) := by
+  subst before
+  subst after
+  subst left
+  subst right
+  have beforeCanonicalProof :
+      beforeCanonical =
+        (rfl :
+          leftValue ++ event.beforeWord ++ rightValue =
+            leftValue ++ event.beforeWord ++ rightValue) :=
+    Subsingleton.elim _ _
+  have afterCanonicalProof :
+      afterCanonical =
+        (rfl :
+          leftValue ++ event.afterWord ++ rightValue =
+            leftValue ++ event.afterWord ++ rightValue) :=
+    Subsingleton.elim _ _
+  cases beforeCanonicalProof
+  cases afterCanonicalProof
+  unfold compileContextualCutOpenEventMorphismFromWitness
+  unfold contextualizeExteriorMorphism
+  dsimp only
+  simp [exteriorWord, List.map_append]
+
+theorem compileContextualFromWitness_heq_in_context
+    (𝒞 : BundledPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞 diagram)
+    (event : CutOpenEvent diagram.trace)
+    (before after left right leftValue rightValue : List diagram.trace.StrandId)
+    (beforeEq : before = left ++ event.beforeWord ++ right)
+    (afterEq : after = left ++ event.afterWord ++ right)
+    (pairing : event.StrandContinuationsAreWellFormed)
+    (leftCanonical : left = leftValue)
+    (rightCanonical : right = rightValue)
+    (beforeCanonical : before = leftValue ++ event.beforeWord ++ rightValue)
+    (afterCanonical : after = leftValue ++ event.afterWord ++ rightValue) :
+    HEq
+      (compileContextualCutOpenEventMorphismFromWitness
+        𝒞 diagram labeling event
+        before after left right beforeEq afterEq pairing)
+      (contextualizeExteriorMorphism 𝒞 diagram labeling
+        leftValue event.beforeWord event.afterWord rightValue
+        (compileCutOpenEventMorphism 𝒞 diagram labeling event pairing)) := by
+  have sandwich :=
+    compileContextualFromWitness_in_context
+      𝒞 diagram labeling event before after left right leftValue rightValue
+      beforeEq afterEq pairing leftCanonical rightCanonical
+      beforeCanonical afterCanonical
+  have strip :
+      HEq
+        (eqToHom
+            (congrArg
+              (fun word =>
+                ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+              beforeCanonical).symm ≫
+          compileContextualCutOpenEventMorphismFromWitness
+            𝒞 diagram labeling event
+            before after left right beforeEq afterEq pairing ≫
+          eqToHom
+            (congrArg
+              (fun word =>
+                ribbonWordObject 𝒞 (exteriorWord 𝒞 diagram labeling word))
+              afterCanonical))
+        (compileContextualCutOpenEventMorphismFromWitness
+          𝒞 diagram labeling event
+          before after left right beforeEq afterEq pairing) := by
+    rw [← Category.assoc]
+    exact
+      (CategoryTheory.comp_eqToHom_heq _ _).trans
+        (CategoryTheory.eqToHom_comp_heq _ _)
+  exact strip.symm.trans (heq_of_eq sandwich)
 
 theorem compileContextualFromWitness_birth
     (𝒞 : BundledPremodularCategory K)
@@ -1360,6 +1600,31 @@ theorem compileCutOpenEventMorphism_projectorHole
   unfold compileCutOpenEventMorphism projectorHoleMorphism
   simp only [CutOpenEvent.beforeWord, CutOpenEvent.afterWord, id_eq]
 
+/-- A closed component with no explicit framing event is the canonical
+spherical trace of the identity. -/
+theorem canonicalZeroFramedLoop_eq_ribbonTrace
+    (𝒞 : BundledPremodularCategory K)
+    (simple : 𝒞.simples.Simple) :
+    canonicalPositiveNegativeBirth 𝒞 simple ≫
+        canonicalPositiveNegativeDeath 𝒞 simple =
+      ribbonTraceMorphism 𝒞 simple
+        (𝟙 (𝒞.simples.simpleObject simple)) := by
+  rw [ribbonTraceMorphism,
+    𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+  simp [canonicalPositiveNegativeBirth,
+    canonicalPositiveNegativeDeath, ribbonWordObject,
+    orientedSimpleObject]
+  monoidal
+
+theorem contextualizeRibbonMorphism_zero
+    (𝒞 : BundledPremodularCategory K)
+    (left before after right : RibbonWord 𝒞) :
+    contextualizeRibbonMorphism 𝒞 left before after right
+        (0 : ribbonWordObject 𝒞 before ⟶ ribbonWordObject 𝒞 after) =
+      0 := by
+  unfold contextualizeRibbonMorphism
+  simp
+
 theorem canonicalBirthProjectorDeathMorphism
     (𝒞 : BundledPremodularCategory K)
     (simple : 𝒞.simples.Simple) :
@@ -1374,12 +1639,60 @@ theorem canonicalBirthProjectorDeathMorphism
             𝟙 (𝟙_ 𝒞.C)) ≫
         canonicalPositiveNegativeDeath 𝒞 simple =
       specialCutMeridianMorphismWithoutExplicitTwist 𝒞 simple := by
-  unfold canonicalPositiveNegativeBirth canonicalPositiveNegativeDeath
-  unfold contextualizeRibbonMorphism
-  unfold specialCutMeridianMorphismWithoutExplicitTwist
-  simp only [ribbonWordObject, orientedSimpleObject]
-  dsimp [ribbonWordAppendIso]
-  monoidal
+  classical
+  rw [specialCutMeridianMorphismWithoutExplicitTwist_eq]
+  rw [tensorUnitProjector_simple]
+  by_cases unitCase : simple = 𝒞.simples.tensorUnit
+  · rw [if_pos unitCase]
+    rw [ribbonTraceMorphism,
+      𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+    simp [canonicalPositiveNegativeBirth,
+      canonicalPositiveNegativeDeath, contextualizeRibbonMorphism,
+      ribbonWordObject, ribbonWordAppendIso, orientedSimpleObject] <;>
+      monoidal
+  · rw [if_neg unitCase]
+    rw [ribbonTraceMorphism_zero]
+    have zero_tensor_unit :
+        (0 : 𝒞.simples.simpleObject simple ⟶
+            𝒞.simples.simpleObject simple) ⊗ₘ
+            𝟙 (𝟙_ 𝒞.C) = 0 :=
+      CategoryTheory.MonoidalPreadditive.zero_tensor _
+    have contextualized_zero :
+        contextualizeRibbonMorphism 𝒞
+          []
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .dual }]
+          ((0 : 𝒞.simples.simpleObject simple ⟶
+              𝒞.simples.simpleObject simple) ⊗ₘ
+            𝟙 (𝟙_ 𝒞.C)) = 0 := by
+      calc
+        _ = contextualizeRibbonMorphism 𝒞
+              []
+              [{ label := simple, direction := .forward }]
+              [{ label := simple, direction := .forward }]
+              [{ label := simple, direction := .dual }]
+              0 := congrArg
+                (fun map =>
+                  contextualizeRibbonMorphism 𝒞
+                    []
+                    [{ label := simple, direction := .forward }]
+                    [{ label := simple, direction := .forward }]
+                    [{ label := simple, direction := .dual }]
+                    map)
+                zero_tensor_unit
+        _ = 0 := contextualizeRibbonMorphism_zero 𝒞 _ _ _ _
+    rw [← Category.assoc, contextualized_zero]
+    calc
+      _ = (0 : 𝟙_ 𝒞.C ⟶
+              ribbonWordObject 𝒞
+                ([{ label := simple, direction := .forward },
+                  { label := simple, direction := .dual }] : RibbonWord 𝒞)) ≫
+            canonicalPositiveNegativeDeath 𝒞 simple :=
+        congrArg
+          (fun map => map ≫ canonicalPositiveNegativeDeath 𝒞 simple)
+          Limits.comp_zero
+      _ = 0 := Limits.zero_comp
 
 theorem contextualizeRibbonMorphism_heq
     (𝒞 : BundledPremodularCategory K)
