@@ -1,5 +1,5 @@
 import TwistedYetter.StableNoGo.ModularCategoryInputs
-import TwistedYetter.StableNoGo.ModularTopologyInputs
+import TwistedYetter.StableNoGo.FinalTheorem
 
 /-!
 # Modular reduction of the odd-diagonal formula

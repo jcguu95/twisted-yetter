@@ -5,6 +5,7 @@ import TwistedYetter.StableNoGo.OddDiagonalEvaluation
 import TwistedYetter.StableNoGo.ProjectivePlaneEvaluation
 import TwistedYetter.StableNoGo.SphereTwoProductEvaluation
 import TwistedYetter.StableNoGo.ModularCategory
+import TwistedYetter.StableNoGo.ModularTopologyInputs
 
 /-!
 # Stable calculation and no-go corollary
@@ -97,56 +98,104 @@ theorem TwistedYetter_eq_of_integralIntersectionFormIsometry
 
 /-! ## Numerical statement -/
 
-/-- The three standard blocks used in the stable even formula. -/
-inductive K3HBlock
-  | positiveK3
-  | negativeK3
-  | hyperbolic
-
-def K3HBlock.manifold : K3HBlock → ClosedOrientedSmoothFourManifold
-  | .positiveK3 => k3Surface
-  | .negativeK3 => reversedK3Surface
-  | .hyperbolic => sphereTwoProduct
-
-/-- A standard block together with its transported homology marking. -/
-structure MarkedK3HBlock where
-  block : K3HBlock
-  marking : ManifoldH₂ block.manifold
-
-/-- The connected sum represented by a finite list of standard blocks. -/
-def connectedSumBlocks : List MarkedK3HBlock → ClosedOrientedSmoothFourManifold
-  | [] => fourSphere
-  | block :: blocks =>
-      connectedSum block.block.manifold (connectedSumBlocks blocks)
-
-/-- The corresponding direct-sum marking. -/
-def connectedSumBlockMarking :
-    (blocks : List MarkedK3HBlock) → ManifoldH₂ (connectedSumBlocks blocks)
-  | [] => 0
-  | block :: blocks =>
-      connectedSumMarking block.marking (connectedSumBlockMarking blocks)
-
-/--
-A marked stable `K3/H` decomposition.  It contains only a stabilization count,
-standard marked blocks, an intersection-form isometry, and the exact image of
-the marking.  It contains no category or evaluator equality.
--/
-structure EvenStableK3HDecomposition
-    (X : ClosedOrientedSmoothFourManifold) (alpha : ManifoldH₂ X) where
-  stabilizationCount : ℕ
-  blocks : List MarkedK3HBlock
-  isometry : IntegralIntersectionFormIsometry
-    (stabilize X stabilizationCount) (connectedSumBlocks blocks)
-  markingTransport :
-    isometry (stabilizedMarking X alpha stabilizationCount) =
-      connectedSumBlockMarking blocks
-
-/-- The product of the normalized numerical values of the marked blocks. -/
-noncomputable def standardK3HBlockProduct
+/-- The normalized arbitrary-marking hyperbolic block is the explicit finite
+Hopf sum in its canonical THAM coordinates. -/
+theorem normalizedTwistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum
     (𝒞η : TwistedPremodularCategory K)
-    (blocks : List MarkedK3HBlock) : K :=
-  (blocks.map fun block =>
-    NormalizedTwistedYetter 𝒞η ⟨block.block.manifold, block.marking⟩).prod
+    (alpha : ManifoldH₂ sphereTwoProduct) :
+    NormalizedTwistedYetter 𝒞η ⟨sphereTwoProduct, alpha⟩ =
+      markedHyperbolicBlockSum 𝒞η
+        (sphereTwoProductHopfCoordinates alpha).1
+        (sphereTwoProductHopfCoordinates alpha).2 := by
+  unfold NormalizedTwistedYetter
+  rw [twistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum]
+  rw [← mul_assoc,
+    inv_mul_cancel₀ (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+
+/-- At the zero marking the same normalized block is the literal `(0,0)`
+Hopf sum, independently of the noncomputable quotient representative used for
+the general coordinate function. -/
+theorem normalizedTwistedYetter_sphereTwoProduct_zero_eq_markedHyperbolicBlockSum
+    (𝒞η : TwistedPremodularCategory K) :
+    NormalizedTwistedYetter 𝒞η ⟨sphereTwoProduct, 0⟩ =
+      markedHyperbolicBlockSum 𝒞η 0 0 := by
+  unfold NormalizedTwistedYetter
+  rw [twistedYetter_sphereTwoProduct_zero_eq,
+    markedHyperbolicBlockSum_zero_eq]
+  calc
+    𝒞η.category.globalDimension⁻¹ *
+          (𝒞η.category.globalDimension ^ 2 *
+            transparentGlobalDimension 𝒞η.category) =
+        (𝒞η.category.globalDimension⁻¹ *
+            𝒞η.category.globalDimension) *
+          (𝒞η.category.globalDimension *
+            transparentGlobalDimension 𝒞η.category) := by ring
+    _ = _ := by
+      rw [inv_mul_cancel₀
+        (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+
+/-- The product of the normalized invariant values of a marked standard block
+list.  This is the proof bridge used by connected-sum multiplicativity. -/
+noncomputable def standardK3HBlockProduct
+    (𝒞η : TwistedPremodularCategory K) :
+    (blocks : List K3HBlock) → K3HBlockMarkings blocks → K
+  | [], _ => 1
+  | block :: blocks, markings =>
+      NormalizedTwistedYetter 𝒞η ⟨block.manifold, markings.1⟩ *
+        standardK3HBlockProduct 𝒞η blocks markings.2
+
+/-- The explicit normalized value assigned to one standard even block.  The
+two `K3` orientations remain basic marked values; the hyperbolic block is the
+finite Hopf sum proved above. -/
+noncomputable def explicitK3HBlockValue
+    (𝒞η : TwistedPremodularCategory K) :
+    (block : K3HBlock) → ManifoldH₂ block.manifold → K
+  | .positiveK3, marking =>
+      NormalizedTwistedYetter 𝒞η ⟨k3Surface, marking⟩
+  | .negativeK3, marking =>
+      NormalizedTwistedYetter 𝒞η ⟨reversedK3Surface, marking⟩
+  | .hyperbolic, marking =>
+      markedHyperbolicBlockSum 𝒞η
+        (sphereTwoProductHopfCoordinates marking).1
+        (sphereTwoProductHopfCoordinates marking).2
+
+theorem explicitK3HBlockValue_eq_normalizedTwistedYetter
+    (𝒞η : TwistedPremodularCategory K)
+    (block : K3HBlock) (marking : ManifoldH₂ block.manifold) :
+    explicitK3HBlockValue 𝒞η block marking =
+      NormalizedTwistedYetter 𝒞η ⟨block.manifold, marking⟩ := by
+  cases block with
+  | positiveK3 => rfl
+  | negativeK3 => rfl
+  | hyperbolic =>
+      exact
+        (normalizedTwistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum
+          𝒞η marking).symm
+
+/-- The explicit product appearing in the even formula. -/
+noncomputable def explicitK3HBlockProduct
+    (𝒞η : TwistedPremodularCategory K) :
+    (blocks : List K3HBlock) → K3HBlockMarkings blocks → K
+  | [], _ => 1
+  | block :: blocks, markings =>
+      explicitK3HBlockValue 𝒞η block markings.1 *
+        explicitK3HBlockProduct 𝒞η blocks markings.2
+
+theorem explicitK3HBlockProduct_eq_standardK3HBlockProduct
+    (𝒞η : TwistedPremodularCategory K)
+    (blocks : List K3HBlock) (markings : K3HBlockMarkings blocks) :
+    explicitK3HBlockProduct 𝒞η blocks markings =
+      standardK3HBlockProduct 𝒞η blocks markings := by
+  induction blocks with
+  | nil => rfl
+  | cons block blocks inductionHypothesis =>
+      change
+        explicitK3HBlockValue 𝒞η block markings.1 *
+            explicitK3HBlockProduct 𝒞η blocks markings.2 =
+          NormalizedTwistedYetter 𝒞η ⟨block.manifold, markings.1⟩ *
+            standardK3HBlockProduct 𝒞η blocks markings.2
+      rw [explicitK3HBlockValue_eq_normalizedTwistedYetter,
+        inductionHypothesis markings.2]
 
 /-- The explicit shifted-Gauss-sum expression for an odd diagonalization. -/
 noncomputable def oddFormula
@@ -159,14 +208,24 @@ noncomputable def oddFormula
     (∏ i, positiveShiftedGaussSum 𝒞η (coordinates.1 i)) *
     (∏ j, negativeShiftedGaussSum 𝒞η (coordinates.2 j))
 
+/-- The connected-sum-normalized odd expression. -/
+noncomputable def normalizedOddFormula
+    (𝒞η : TwistedPremodularCategory K)
+    {X : ClosedOrientedSmoothFourManifold}
+    (diagonalization : OddDiagonalization X)
+    (alpha : ManifoldH₂ X) : K :=
+  let coordinates := diagonalization.coordinates alpha
+  (∏ i, positiveShiftedGaussSum 𝒞η (coordinates.1 i)) *
+    (∏ j, negativeShiftedGaussSum 𝒞η (coordinates.2 j))
+
 /-- The stabilized `K3/H` block expression for a marked even decomposition. -/
 noncomputable def evenFormula
     (𝒞η : TwistedPremodularCategory K)
     {X : ClosedOrientedSmoothFourManifold}
     {alpha : ManifoldH₂ X}
     (decomposition : EvenStableK3HDecomposition X alpha) : K :=
-  standardK3HBlockProduct 𝒞η decomposition.blocks /
-    NormalizedTwistedYetter 𝒞η ⟨sphereTwoProduct, 0⟩ ^
+  explicitK3HBlockProduct 𝒞η decomposition.blocks decomposition.markings /
+    markedHyperbolicBlockSum 𝒞η 0 0 ^
       decomposition.stabilizationCount
 
 /-- The odd numerical formula for one simply connected four-manifold. -/
@@ -188,19 +247,24 @@ def SatisfiesEvenFormula
 
 theorem normalizedTwistedYetter_connectedSumBlocks
     (𝒞η : TwistedPremodularCategory K)
-    (blocks : List MarkedK3HBlock) :
+    (blocks : List K3HBlock) (markings : K3HBlockMarkings blocks) :
     NormalizedTwistedYetter 𝒞η
-        ⟨connectedSumBlocks blocks, connectedSumBlockMarking blocks⟩ =
-      standardK3HBlockProduct 𝒞η blocks := by
+        ⟨connectedSumK3HBlocks blocks,
+          connectedSumK3HMarking blocks markings⟩ =
+      standardK3HBlockProduct 𝒞η blocks markings := by
   induction blocks with
   | nil =>
       exact normalizedTwistedYetter_fourSphere_zero 𝒞η
   | cons block blocks inductionHypothesis =>
-      unfold standardK3HBlockProduct at inductionHypothesis ⊢
-      simp only [connectedSumBlocks, connectedSumBlockMarking,
-        List.map_cons, List.prod_cons]
+      change
+        NormalizedTwistedYetter 𝒞η
+            ⟨connectedSum block.manifold (connectedSumK3HBlocks blocks),
+              connectedSumMarking markings.1
+                (connectedSumK3HMarking blocks markings.2)⟩ =
+          NormalizedTwistedYetter 𝒞η ⟨block.manifold, markings.1⟩ *
+            standardK3HBlockProduct 𝒞η blocks markings.2
       rw [normalizedTwistedYetter_connectedSum,
-        inductionHypothesis]
+        inductionHypothesis markings.2]
 
 theorem k3HBlock_simplyConnected (block : K3HBlock) :
     IsSimplyConnected block.manifold := by
@@ -210,13 +274,13 @@ theorem k3HBlock_simplyConnected (block : K3HBlock) :
   | hyperbolic => exact sphereTwoProduct_simplyConnected
 
 theorem connectedSumBlocks_simplyConnected
-    (blocks : List MarkedK3HBlock) :
-    IsSimplyConnected (connectedSumBlocks blocks) := by
+    (blocks : List K3HBlock) :
+    IsSimplyConnected (connectedSumK3HBlocks blocks) := by
   induction blocks with
   | nil => exact fourSphere_simplyConnected
   | cons block blocks inductionHypothesis =>
       exact connectedSum_simplyConnected
-        (k3HBlock_simplyConnected block.block) inductionHypothesis
+        (k3HBlock_simplyConnected block) inductionHypothesis
 
 theorem normalizedTwistedYetter_stabilize
     (𝒞η : TwistedPremodularCategory K)
@@ -251,14 +315,17 @@ theorem satisfiesEvenFormula
       NormalizedTwistedYetter 𝒞η
           ⟨stabilize X decomposition.stabilizationCount,
             stabilizedMarking X alpha decomposition.stabilizationCount⟩ =
-        NormalizedTwistedYetter 𝒞η
-          ⟨connectedSumBlocks decomposition.blocks,
-            connectedSumBlockMarking decomposition.blocks⟩ := by
+      NormalizedTwistedYetter 𝒞η
+          ⟨connectedSumK3HBlocks decomposition.blocks,
+            connectedSumK3HMarking decomposition.blocks
+              decomposition.markings⟩ := by
     unfold NormalizedTwistedYetter
     rw [invariantEquality]
   rw [normalizedTwistedYetter_stabilize,
     normalizedTwistedYetter_connectedSumBlocks] at normalizedEquality
   unfold evenFormula
+  rw [explicitK3HBlockProduct_eq_standardK3HBlockProduct,
+    ← normalizedTwistedYetter_sphereTwoProduct_zero_eq_markedHyperbolicBlockSum]
   apply (eq_div_iff ?_).2
   · simpa [mul_comm] using normalizedEquality
   · change
@@ -282,18 +349,72 @@ theorem satisfiesOddFormula
   simpa [oddFormula, standardIsometry,
     oddDiagonalIntersectionFormIsometry] using invariantEquality
 
+/-- The normalized form of the odd numerical formula. -/
+theorem normalizedTwistedYetter_eq_normalizedOddFormula
+    (𝒞η : TwistedPremodularCategory K)
+    {X : ClosedOrientedSmoothFourManifold}
+    (simplyConnectedX : IsSimplyConnected X)
+    (diagonalization : OddDiagonalization X)
+    (alpha : ManifoldH₂ X) :
+    NormalizedTwistedYetter 𝒞η ⟨X, alpha⟩ =
+      normalizedOddFormula 𝒞η diagonalization alpha := by
+  unfold NormalizedTwistedYetter
+  rw [(satisfiesOddFormula 𝒞η X) simplyConnectedX diagonalization alpha]
+  unfold oddFormula normalizedOddFormula
+  dsimp only
+  calc
+    𝒞η.category.globalDimension⁻¹ *
+          ((𝒞η.category.globalDimension *
+              ∏ i, positiveShiftedGaussSum 𝒞η
+                ((diagonalization.coordinates alpha).1 i)) *
+            ∏ j, negativeShiftedGaussSum 𝒞η
+              ((diagonalization.coordinates alpha).2 j)) =
+        (𝒞η.category.globalDimension⁻¹ *
+            𝒞η.category.globalDimension) *
+          ((∏ i, positiveShiftedGaussSum 𝒞η
+              ((diagonalization.coordinates alpha).1 i)) *
+            ∏ j, negativeShiftedGaussSum 𝒞η
+              ((diagonalization.coordinates alpha).2 j)) := by ring
+    _ = _ := by
+      rw [inv_mul_cancel₀
+        (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+
 /--
 **Final Theorem (premodular numerical formula).**
 
-The first conjunct is the explicit shifted-Gauss-sum formula for every odd
-diagonalization.  The second is the exact stable `K3/H` block formula for every
-marked even decomposition.
+For every marked simply connected closed oriented smooth four-manifold, its
+integral intersection form is odd or even.  In the odd case an actual integral
+diagonalization is supplied and the normalized invariant is the corresponding
+product of shifted Gauss sums.  In the even case an actual marked stable
+`K3/\bar K3/H` decomposition is supplied and the normalized invariant is the
+explicit stabilized block quotient.
 -/
 theorem TwistedYetter_premodular_numerical_formula
-    (𝒞η : TwistedPremodularCategory K) :
-    (∀ X, SatisfiesOddFormula 𝒞η X) ∧
-    (∀ X, SatisfiesEvenFormula 𝒞η X) := by
-  exact ⟨satisfiesOddFormula 𝒞η, satisfiesEvenFormula 𝒞η⟩
+    (𝒞η : TwistedPremodularCategory K)
+    {X : ClosedOrientedSmoothFourManifold}
+    (simplyConnectedX : IsSimplyConnected X)
+    (alpha : ManifoldH₂ X) :
+    (HasOddIntersectionForm X ∧
+      ∃ diagonalization : OddDiagonalization X,
+        NormalizedTwistedYetter 𝒞η ⟨X, alpha⟩ =
+          normalizedOddFormula 𝒞η diagonalization alpha) ∨
+    (HasEvenIntersectionForm X ∧
+      ∃ decomposition : EvenStableK3HDecomposition X alpha,
+        NormalizedTwistedYetter 𝒞η ⟨X, alpha⟩ =
+          evenFormula 𝒞η decomposition) := by
+  rcases odd_or_even_intersectionForm X with odd | even
+  · obtain ⟨diagonalization⟩ :=
+      oddIntersectionForm_diagonalization X simplyConnectedX odd
+    exact Or.inl
+      ⟨odd, diagonalization,
+        normalizedTwistedYetter_eq_normalizedOddFormula
+          𝒞η simplyConnectedX diagonalization alpha⟩
+  · obtain ⟨decomposition⟩ :=
+      evenStableK3HDecomposition_exists X simplyConnectedX even alpha
+    exact Or.inr
+      ⟨even, decomposition,
+        (satisfiesEvenFormula 𝒞η X)
+          simplyConnectedX alpha decomposition⟩
 
 end
 

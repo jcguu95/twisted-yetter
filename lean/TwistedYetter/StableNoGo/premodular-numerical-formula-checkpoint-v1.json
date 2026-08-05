@@ -1,0 +1,110 @@
+{
+  "artifact": "premodular-numerical-formula-checkpoint-v1",
+  "timestamp": "2026-08-05T13:38:22-06:00",
+  "status": "KERNEL_CHECKED_RELATIVE_TO_EXPLICIT_TRUST_BOUNDARY",
+  "base_git_commit": "5230304ed893264b7ac946f8c504d0510b041598",
+  "working_tree_before_checkpoint": "dirty_only_for_the_five_intended_lean_source_changes",
+  "scope": {
+    "manifolds": "closed connected oriented smooth simply-connected four-manifolds",
+    "marking": "an arbitrary class alpha in integral H_2",
+    "category": "a twisted premodular category over an algebraically closed characteristic-zero field",
+    "equivalence_sense": "oriented diffeomorphism and marked integral intersection-form transport"
+  },
+  "kernel_checked_theorems": [
+    "TwistedYetter.StableNoGo.positiveHopf_thamDefinition511Normalization",
+    "TwistedYetter.StableNoGo.twistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum",
+    "TwistedYetter.StableNoGo.evenStableK3HDecomposition_exists",
+    "TwistedYetter.StableNoGo.TwistedYetter_premodular_numerical_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_explicit_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_quadratic_ratio"
+  ],
+  "semantic_results": [
+    "The standard zero-framed positive Hopf presentation has exactly the single global-dimension factor prescribed by Tham Definition 5.11.",
+    "Every marking on S2 x S2 is evaluated by the full two-label Hopf sum in its derived THAM-side coordinates.",
+    "For an odd intersection form, the normalized premodular invariant is a product of positive and negative shifted Gauss sums in an actual integral diagonalization.",
+    "For an even intersection form, the normalized premodular invariant is the product of marked K3, reversed-K3, and explicit hyperbolic block values divided by the zero-marked hyperbolic value for each stabilization.",
+    "The public premodular theorem produces the applicable odd diagonalization or even stable K3/H decomposition; it is not a vacuous conditional on caller-supplied decomposition data.",
+    "In the modular specialization, the value is D times tauPlus to b2Plus times tauMinus to b2Minus times theta_g to minus alpha squared."
+  ],
+  "new_explicit_external_input": {
+    "name": "evenIntersectionForm_stableK3H_isometry",
+    "kind": "category-neutral unmarked lattice/topology axiom",
+    "statement": "A simply-connected closed oriented smooth four-manifold with even integral intersection form becomes intersection-form isometric, after finitely many S2 x S2 stabilizations, to a finite connected sum of K3, reversed K3, and S2 x S2 blocks.",
+    "does_not_assert": [
+      "a diffeomorphism",
+      "a marked decomposition",
+      "an evaluator equality",
+      "a category-theoretic conclusion"
+    ],
+    "reference": "David Reutter, Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure, Corollary 3.9 and proof, arXiv PDF pp. 14-15",
+    "url": "https://arxiv.org/pdf/2001.02288"
+  },
+  "derived_without_new_axioms": [
+    "The marking on the even stable model is transported through the supplied isometry and split through the existing connected-sum H2 equivalences.",
+    "The marked S2 x S2 coordinates are obtained from the exact handle-homology and turnover equivalences; no coordinatewise primal/THAM identity is assumed.",
+    "The modular explicit formula is proved through the CP2 blow-up odd route and does not depend on evenIntersectionForm_stableK3H_isometry."
+  ],
+  "references": [
+    {
+      "work": "Ying Hong Tham dissertation",
+      "locator": "Definition 5.11, PDF p. 58",
+      "url": "https://www.math.stonybrook.edu/alumni/2021-Ying-Hong-Tham.pdf"
+    },
+    {
+      "work": "David Reutter, Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure",
+      "locator": "Corollary 3.9 and proof, PDF pp. 14-15",
+      "url": "https://arxiv.org/pdf/2001.02288"
+    },
+    {
+      "work": "Daniel Ruberman and Sa\u0161a Strle, Wall's stable realization for diffeomorphisms of definite 4-manifolds",
+      "locator": "Theorem 2.1",
+      "url": "https://arxiv.org/pdf/2210.16260"
+    }
+  ],
+  "verification": {
+    "narrow_module_builds": "pass",
+    "kernel_axiom_print": "pass_no_sorryAx",
+    "full_build": "pass_8319_jobs",
+    "source_red_team": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_counts": {
+      "Classical.choice": 15,
+      "axiom": 88,
+      "class": 6,
+      "likely_proof_field": 71,
+      "suspicious_declaration": 1
+    },
+    "source_red_team_interpretation": "These are conservative whole-repository findings, not the final theorem's kernel dependency count. The sole suspicious declaration is the previously reviewed derived definition MarkedStableRealization."
+  },
+  "reproduce_commands": [
+    "LEAN_NUM_THREADS=1 lake build",
+    "lake env lean lean/TwistedYetter/StableNoGo/FinalTheoremAudit.lean",
+    "python3 /Users/jin/.codex/skills/lean-red-team-audit/scripts/source_audit.py /Users/jin/.codex/worktrees/4e82/twisted-yetter --output-json /tmp/twisted-yetter-five-connections-red-team.json --output-markdown /tmp/twisted-yetter-five-connections-red-team.zh-TW.md",
+    "pdflatex -interaction=nonstopmode -halt-on-error twisted-yetter-odd-even-fermion-conjectures-2026-08-05.tex"
+  ],
+  "environment": {
+    "os": "macOS 15.7.2 build 24G325 arm64",
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.6",
+    "sage": "10.8",
+    "julia": "not_installed_and_not_used"
+  },
+  "sha256": {
+    "FinalTheorem.lean": "60cd23770ad396021c34e4a153658c1c56765ad4b911191742fa45d05cb05b23",
+    "ModularOddFormula.lean": "08972c528e7e79356739a1233ca1ec1be4828794d2accf06ce1e081d20d7af3e",
+    "ModularTopologyInputs.lean": "2d2279279111a2ccca384119afe846472f5ac3406cc38cb4c584f5da1a2cee93",
+    "NumericalStatement.lean": "3f7a132a6ff5d6b9067ab7f19c141d5647a80a0bf7f994e2c69bc7cc3f26c60d",
+    "SphereTwoProductEvaluation.lean": "572ca9b66f64c79d3ce5f8824b94005d708e2b314af1a85c208a6f8bf8cdcdfd",
+    "prose_tex": "a4999f8eceb4fb06cb9c1046a08afbcc9cb2907d93332efeb70f5ee8eb21523b",
+    "prose_pdf": "816fc0398c42990b23bd81c46f58d2024def4382ccf1c323d8807e39cd9db204",
+    "kernel_axiom_output": "502307f43b337190d1b9b04eb1d6c9ea420b4b45b1511bde97e537bc4eb4cf33",
+    "source_red_team_json": "517effabeebfe8b6fdcbee8ed47fa0226a60014b8e1632e16c82630ac14733ac"
+  },
+  "non_claims": [
+    "No theorem is claimed for non-simply-connected four-manifolds.",
+    "The even premodular formula treats arbitrary marked K3 and reversed-K3 values as basic block values; it does not give a further closed expression for them.",
+    "The fermionic K3 selection discussion in the prose document is not formalized as a Lean theorem here.",
+    "No equality with a legacy numerical evaluator or previous computation artifact is claimed without a separate compatibility proof.",
+    "No identification with the original Crane-Yetter state sum is claimed."
+  ]
+}

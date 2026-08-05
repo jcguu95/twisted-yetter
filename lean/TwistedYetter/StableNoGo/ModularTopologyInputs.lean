@@ -1,7 +1,7 @@
-import TwistedYetter.StableNoGo.FinalTheorem
+import TwistedYetter.StableNoGo.NumericalStatement
 
 /-!
-# Topology inputs for the explicit modular formula
+# Topology inputs for the simply-connected numerical formulas
 
 Mathlib does not currently provide the signature of the integral intersection
 form of an abstract smooth four-manifold.  We therefore expose `b2Plus` and
@@ -64,6 +64,25 @@ def HasOddIntersectionForm
   ∃ alpha : ManifoldH₂ X,
     Odd (integralIntersectionPairing X alpha alpha)
 
+/-- A symmetric integral form is even when every vector has even square. -/
+def HasEvenIntersectionForm
+    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+  ∀ alpha : ManifoldH₂ X,
+    Even (integralIntersectionPairing X alpha alpha)
+
+/-- Every integral intersection form is either odd or even, in the literal
+parity sense fixed by the two preceding definitions. -/
+theorem odd_or_even_intersectionForm
+    (X : ClosedOrientedSmoothFourManifold) :
+    HasOddIntersectionForm X ∨ HasEvenIntersectionForm X := by
+  by_cases odd : HasOddIntersectionForm X
+  · exact Or.inl odd
+  · right
+    intro alpha
+    rw [← Int.not_odd_iff_even]
+    intro alphaOdd
+    exact odd ⟨alpha, alphaOdd⟩
+
 /-- The definite/indefinite dichotomy, expressed through the two indices. -/
 theorem not_definite_iff_indefinite
     (X : ClosedOrientedSmoothFourManifold) :
@@ -106,6 +125,107 @@ axiom oddIndefiniteUnimodularForm_diagonalization
     (odd : HasOddIntersectionForm X)
     (indefinite : HasIndefiniteIntersectionForm X) :
     Nonempty (OddDiagonalization X)
+
+/-- Every odd simply-connected smooth intersection form admits the standard
+integral diagonalization: Donaldson handles the definite branch and the
+arithmetic classification of odd unimodular lattices handles the indefinite
+branch. -/
+theorem oddIntersectionForm_diagonalization
+    (X : ClosedOrientedSmoothFourManifold)
+    (simplyConnectedX : IsSimplyConnected X)
+    (odd : HasOddIntersectionForm X) :
+    Nonempty (OddDiagonalization X) := by
+  by_cases definite : HasDefiniteIntersectionForm X
+  · exact donaldson_definiteIntersectionForm_diagonalization
+      X simplyConnectedX definite
+  · exact oddIndefiniteUnimodularForm_diagonalization
+      X simplyConnectedX odd ((not_definite_iff_indefinite X).mp definite)
+
+/-! ## Stable even `K3/H` models -/
+
+/-- Split a marking on a connected sum of standard blocks into one marking per
+block by the fixed Mayer--Vietoris equivalences.  This is a noncomputable
+choice of coordinates derived from existing homology data, not a topology
+axiom. -/
+noncomputable def splitK3HBlockMarkings :
+    (blocks : List K3HBlock) →
+      ManifoldH₂ (connectedSumK3HBlocks blocks) → K3HBlockMarkings blocks
+  | [], _ => PUnit.unit
+  | block :: blocks, alpha =>
+      let parts :=
+        connectedSumH₂ block.manifold (connectedSumK3HBlocks blocks) alpha
+      (parts.1, splitK3HBlockMarkings blocks parts.2)
+
+/-- Reassembling the recursively split block markings recovers the original
+homology class exactly. -/
+theorem connectedSumK3HMarking_splitK3HBlockMarkings
+    (blocks : List K3HBlock)
+    (alpha : ManifoldH₂ (connectedSumK3HBlocks blocks)) :
+    connectedSumK3HMarking blocks (splitK3HBlockMarkings blocks alpha) =
+      alpha := by
+  induction blocks with
+  | nil =>
+      exact (fourSphere_H₂_eq_zero alpha).symm
+  | cons block blocks inductionHypothesis =>
+      let parts :=
+        connectedSumH₂ block.manifold (connectedSumK3HBlocks blocks) alpha
+      change
+        connectedSumMarking parts.1
+            (connectedSumK3HMarking blocks
+              (splitK3HBlockMarkings blocks parts.2)) = alpha
+      rw [inductionHypothesis parts.2]
+      exact
+        (connectedSumH₂ block.manifold
+          (connectedSumK3HBlocks blocks)).symm_apply_apply alpha
+
+/--
+Stable `K3/\bar K3/H` form of the even-unimodular classification used in
+Reutter's proof of Corollary 3.9: a closed simply connected smooth
+four-manifold with even intersection form becomes integrally
+intersection-form isometric, after finitely many hyperbolic stabilizations,
+to a finite connected sum of `K3`, orientation-reversed `K3`, and
+`S² × S²` blocks.
+
+This is an unmarked, category-neutral lattice/topology input.  It does not
+assert a diffeomorphism or any equality of invariants.  Stable realization of
+the resulting isometry is supplied separately by Wall and Ruberman--Strle.
+
+Reference: D. Reutter, *Semisimple 4-dimensional topological field theories
+cannot detect exotic smooth structure*, Corollary 3.9 and its proof, arXiv
+PDF pp. 14--15, using the classification of even unimodular forms and
+Rokhlin's theorem.
+-/
+axiom evenIntersectionForm_stableK3H_isometry
+    (X : ClosedOrientedSmoothFourManifold)
+    (simplyConnectedX : IsSimplyConnected X)
+    (even : HasEvenIntersectionForm X) :
+    Σ stabilizationCount : ℕ, Σ blocks : List K3HBlock,
+      IntegralIntersectionFormIsometry
+        (stabilize X stabilizationCount) (connectedSumK3HBlocks blocks)
+
+/-- The marked stable decomposition is derived from the preceding unmarked
+isometry by transporting `alpha` and splitting its image across the standard
+blocks.  No marked-realization axiom is added. -/
+theorem evenStableK3HDecomposition_exists
+    (X : ClosedOrientedSmoothFourManifold)
+    (simplyConnectedX : IsSimplyConnected X)
+    (even : HasEvenIntersectionForm X)
+    (alpha : ManifoldH₂ X) :
+    Nonempty (EvenStableK3HDecomposition X alpha) := by
+  obtain ⟨stabilizationCount, blocks, isometry⟩ :=
+    evenIntersectionForm_stableK3H_isometry X simplyConnectedX even
+  let targetMarking :=
+    isometry (stabilizedMarking X alpha stabilizationCount)
+  let markings := splitK3HBlockMarkings blocks targetMarking
+  refine ⟨
+    { stabilizationCount := stabilizationCount
+      blocks := blocks
+      markings := markings
+      isometry := isometry
+      markingTransport := ?_ }⟩
+  exact
+    (connectedSumK3HMarking_splitK3HBlockMarkings
+      blocks targetMarking).symm
 
 /-- Positive index under one positive blow-up. -/
 axiom positiveSecondBettiNumber_cp2Blowup
