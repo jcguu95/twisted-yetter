@@ -1,4 +1,5 @@
 import TwistedYetter.StableNoGo.ModularCharacterCorrespondence
+import TwistedYetter.CategoryTheory.Fusion.TraceNonzero
 
 /-!
 # Literature inputs for the modular numerical reduction
@@ -115,13 +116,30 @@ theorem egno_characterPower_exists
     Nonempty (ModularCharacterPower g n) :=
   egno_characterPowerRepresentative_exists g.1 n
 
-/-- EGNO Theorem 7.21.12, together with
-`|X|² = dim(X) dim(X*)` in the pivotal case: a simple object's pivotal
-dimension is nonzero. -/
-axiom egno_simpleQuantumDimension_ne_zero
+/-- EGNO Proposition 4.8.4, already proved in the fusion-category library:
+a simple object's pivotal dimension, hence its scalar quantum dimension, is
+nonzero. -/
+theorem egno_simpleQuantumDimension_ne_zero
     (𝒞η : TwistedPremodularCategory K)
     (simple : 𝒞η.category.Simple) :
-    𝒞η.category.quantumDimension simple ≠ 0
+    𝒞η.category.quantumDimension simple ≠ 0 := by
+  intro dimension_zero
+  have pivotalDimensionNonzero :=
+    pivotalDimension_ne_zero_of_simple K
+      𝒞η.category.canonicalSpherical.toPivotalStructure
+      (𝒞η.category.simpleObject simple)
+  have trace_zero :
+      𝒞η.category.canonicalRibbonTrace
+          (𝟙 (𝒞η.category.simpleObject simple)) = 0 := by
+    rw [𝒞η.category.closedMorphism_eq_scalar_smul_identity
+      (𝒞η.category.canonicalRibbonTrace
+        (𝟙 (𝒞η.category.simpleObject simple)))]
+    change
+      𝒞η.category.quantumDimension simple • 𝟙 (𝟙_ 𝒞η.category.C) = 0
+    simp [dimension_zero]
+  apply pivotalDimensionNonzero
+  simpa [BundledPremodularCategory.canonicalRibbonTrace,
+    pivotalTrace, pivotalDimension] using trace_zero
 
 /-- The positive shifted formula derived from EGNO (8.58). -/
 theorem egno_positiveShiftedGaussSum
