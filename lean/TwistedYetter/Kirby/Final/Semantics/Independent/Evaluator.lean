@@ -456,6 +456,7 @@ def canonicalPositiveNegativeDeath
     orientedSimpleObject]
   exact
     (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
+      (𝒞.twist.hom.app (𝒞.simples.simpleObject label) ⊗ₘ 𝟙 _) ≫
       (β_ _ _).hom ≫
       (ε_ (𝒞.simples.simpleObject label)
         ((𝒞.simples.simpleObject label)ᘁ))
@@ -470,6 +471,7 @@ def canonicalNegativePositiveDeath
     orientedSimpleObject]
   exact
     (𝟙 _ ⊗ₘ (ρ_ _).hom) ≫
+      (𝟙 _ ⊗ₘ 𝒞.twist.hom.app (𝒞.simples.simpleObject label)) ≫
       (ε_ (𝒞.simples.simpleObject label)
         ((𝒞.simples.simpleObject label)ᘁ))
 

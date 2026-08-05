@@ -216,7 +216,7 @@ def twoThreeLocalEvents
   let third := source.trace.strandCount + 2
   [
     .birth first second,
-    .framingTwist first third .positive,
+    .planarIsotopy [(first, third)],
     .death third second
   ]
 

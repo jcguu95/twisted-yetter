@@ -1,4 +1,8 @@
 import TwistedYetter.StableNoGo.Main
+import TwistedYetter.StableNoGo.NumericalDefinitions
+import TwistedYetter.StableNoGo.NumericalStatement
+import TwistedYetter.StableNoGo.OddDiagonalEvaluation
+import TwistedYetter.StableNoGo.ProjectivePlaneEvaluation
 import TwistedYetter.StableNoGo.SphereTwoProductEvaluation
 
 /-!
@@ -92,63 +96,6 @@ theorem TwistedYetter_eq_of_integralIntersectionFormIsometry
 
 /-! ## Numerical statement -/
 
-/-- The normalization for which connected sum is exactly multiplicative. -/
-noncomputable def NormalizedTwistedYetter
-    (𝒞η : TwistedPremodularCategory K)
-    (Xα : Σ X : ClosedOrientedSmoothFourManifold, ManifoldH₂ X) : K :=
-  𝒞η.category.globalDimension⁻¹ * TwistedYetter 𝒞η Xα
-
-/-- The scalar by which the ribbon twist acts on a chosen simple object. -/
-noncomputable def simpleTwistScalar
-    (𝒞η : TwistedPremodularCategory K)
-    (simple : 𝒞η.category.Simple) : K :=
-  (simpleEndLinearEquiv K (𝒞η.category.simpleObject simple)).symm
-    (𝒞η.category.twist.hom.app (𝒞η.category.simpleObject simple))
-
-/-- `Σᵢ dᵢ² θᵢ ηᵢⁿ`. -/
-noncomputable def positiveShiftedGaussSum
-    (𝒞η : TwistedPremodularCategory K) (n : ℤ) : K :=
-  ∑ simple : 𝒞η.category.Simple,
-    𝒞η.category.quantumDimension simple ^ 2 *
-      simpleTwistScalar 𝒞η simple *
-      ((((𝒞η.character.value simple) ^ n : Kˣ) : K))
-
-/-- `Σᵢ dᵢ² θᵢ⁻¹ ηᵢⁿ`. -/
-noncomputable def negativeShiftedGaussSum
-    (𝒞η : TwistedPremodularCategory K) (n : ℤ) : K :=
-  ∑ simple : 𝒞η.category.Simple,
-    𝒞η.category.quantumDimension simple ^ 2 *
-      (simpleTwistScalar 𝒞η simple)⁻¹ *
-      ((((𝒞η.character.value simple) ^ n : Kˣ) : K))
-
-/-- The diagonal pairing with `p` positive and `q` negative generators. -/
-def standardOddPairing (p q : ℕ)
-    (a b : (Fin p → ℤ) × (Fin q → ℤ)) : ℤ :=
-  (∑ i, a.1 i * b.1 i) - ∑ j, a.2 j * b.2 j
-
-/-- A coordinate choice identifying an odd intersection form with `p⟨1⟩ ⊕ q⟨-1⟩`. -/
-structure OddDiagonalization
-    (X : ClosedOrientedSmoothFourManifold) where
-  positiveRank : ℕ
-  negativeRank : ℕ
-  coordinates :
-    ManifoldH₂ X ≃+
-      ((Fin positiveRank → ℤ) × (Fin negativeRank → ℤ))
-  preservesPairing :
-    ∀ a b : ManifoldH₂ X,
-      standardOddPairing positiveRank negativeRank
-          (coordinates a) (coordinates b) =
-        integralIntersectionPairing X a b
-
-/-
-These are foundational names for the standard even blocks.  Their handle and
-intersection-form realizations belong to the topology proof, not to the
-numerical theorem's parameters.
--/
-axiom fourSphere : ClosedOrientedSmoothFourManifold
-axiom k3Surface : ClosedOrientedSmoothFourManifold
-axiom reversedK3Surface : ClosedOrientedSmoothFourManifold
-
 /-- The three standard blocks used in the stable even formula. -/
 inductive K3HBlock
   | positiveK3
@@ -238,6 +185,102 @@ def SatisfiesEvenFormula
       (decomposition : EvenStableK3HDecomposition X alpha),
       NormalizedTwistedYetter 𝒞η ⟨X, alpha⟩ = evenFormula 𝒞η decomposition
 
+theorem normalizedTwistedYetter_connectedSumBlocks
+    (𝒞η : TwistedPremodularCategory K)
+    (blocks : List MarkedK3HBlock) :
+    NormalizedTwistedYetter 𝒞η
+        ⟨connectedSumBlocks blocks, connectedSumBlockMarking blocks⟩ =
+      standardK3HBlockProduct 𝒞η blocks := by
+  induction blocks with
+  | nil =>
+      exact normalizedTwistedYetter_fourSphere_zero 𝒞η
+  | cons block blocks inductionHypothesis =>
+      unfold standardK3HBlockProduct at inductionHypothesis ⊢
+      simp only [connectedSumBlocks, connectedSumBlockMarking,
+        List.map_cons, List.prod_cons]
+      rw [normalizedTwistedYetter_connectedSum,
+        inductionHypothesis]
+
+theorem k3HBlock_simplyConnected (block : K3HBlock) :
+    IsSimplyConnected block.manifold := by
+  cases block with
+  | positiveK3 => exact k3Surface_simplyConnected
+  | negativeK3 => exact reversedK3Surface_simplyConnected
+  | hyperbolic => exact sphereTwoProduct_simplyConnected
+
+theorem connectedSumBlocks_simplyConnected
+    (blocks : List MarkedK3HBlock) :
+    IsSimplyConnected (connectedSumBlocks blocks) := by
+  induction blocks with
+  | nil => exact fourSphere_simplyConnected
+  | cons block blocks inductionHypothesis =>
+      exact connectedSum_simplyConnected
+        (k3HBlock_simplyConnected block.block) inductionHypothesis
+
+theorem normalizedTwistedYetter_stabilize
+    (𝒞η : TwistedPremodularCategory K)
+    (X : ClosedOrientedSmoothFourManifold)
+    (alpha : ManifoldH₂ X) (n : ℕ) :
+    NormalizedTwistedYetter 𝒞η
+        ⟨stabilize X n, stabilizedMarking X alpha n⟩ =
+      NormalizedTwistedYetter 𝒞η ⟨sphereTwoProduct, 0⟩ ^ n *
+        NormalizedTwistedYetter 𝒞η ⟨X, alpha⟩ := by
+  unfold NormalizedTwistedYetter
+  rw [markedStabilizationFormula_of_connectedSum
+    𝒞η 𝒞η.category.globalDimension (markedConnectedSumFormula 𝒞η)
+    X alpha n]
+  unfold stabilizationMultiplier
+  ring
+
+theorem satisfiesEvenFormula
+    (𝒞η : TwistedPremodularCategory K)
+    (X : ClosedOrientedSmoothFourManifold) :
+    SatisfiesEvenFormula 𝒞η X := by
+  intro simplyConnectedX alpha decomposition
+  have invariantEquality :=
+    TwistedYetter_eq_of_integralIntersectionFormIsometry
+      𝒞η
+      (stabilize_simplyConnected X simplyConnectedX
+        decomposition.stabilizationCount)
+      (connectedSumBlocks_simplyConnected decomposition.blocks)
+      decomposition.isometry
+      (stabilizedMarking X alpha decomposition.stabilizationCount)
+  rw [decomposition.markingTransport] at invariantEquality
+  have normalizedEquality :
+      NormalizedTwistedYetter 𝒞η
+          ⟨stabilize X decomposition.stabilizationCount,
+            stabilizedMarking X alpha decomposition.stabilizationCount⟩ =
+        NormalizedTwistedYetter 𝒞η
+          ⟨connectedSumBlocks decomposition.blocks,
+            connectedSumBlockMarking decomposition.blocks⟩ := by
+    unfold NormalizedTwistedYetter
+    rw [invariantEquality]
+  rw [normalizedTwistedYetter_stabilize,
+    normalizedTwistedYetter_connectedSumBlocks] at normalizedEquality
+  unfold evenFormula
+  apply (eq_div_iff ?_).2
+  · simpa [mul_comm] using normalizedEquality
+  · change
+      stabilizationMultiplier 𝒞η 𝒞η.category.globalDimension ^
+        decomposition.stabilizationCount ≠ 0
+    exact pow_ne_zero _ (stabilizationMultiplier_ne_zero 𝒞η)
+
+theorem satisfiesOddFormula
+    (𝒞η : TwistedPremodularCategory K)
+    (X : ClosedOrientedSmoothFourManifold) :
+    SatisfiesOddFormula 𝒞η X := by
+  intro simplyConnectedX diagonalization alpha
+  let standardIsometry := oddDiagonalIntersectionFormIsometry diagonalization
+  have invariantEquality :=
+    TwistedYetter_eq_of_integralIntersectionFormIsometry
+      𝒞η simplyConnectedX
+      (oddDiagonal_simplyConnected diagonalization.positiveRank
+        diagonalization.negativeRank)
+      standardIsometry alpha
+  rw [twistedYetter_oddDiagonal] at invariantEquality
+  simpa [oddFormula, standardIsometry,
+    oddDiagonalIntersectionFormIsometry] using invariantEquality
+
 /--
 **Final Theorem (premodular numerical formula).**
 
@@ -249,7 +292,7 @@ theorem TwistedYetter_premodular_numerical_formula
     (𝒞η : TwistedPremodularCategory K) :
     (∀ X, SatisfiesOddFormula 𝒞η X) ∧
     (∀ X, SatisfiesEvenFormula 𝒞η X) := by
-  sorry
+  exact ⟨satisfiesOddFormula 𝒞η, satisfiesEvenFormula 𝒞η⟩
 
 /-- A twisted premodular category whose Müger centre is trivial. -/
 structure TwistedModularCategory (K : Type uK)

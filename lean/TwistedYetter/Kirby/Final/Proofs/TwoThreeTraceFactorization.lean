@@ -118,13 +118,12 @@ theorem standardTwoThreeBirth_eventOne_eq
     {targetCut : DottedCutPresentation target}
     (normalForm : IsStandardTwoThreeBirth source target sourceCut targetCut) :
     targetCut.cut.exterior.events
-        ⟨1, by
+      ⟨1, by
           rw [standardTwoThreeBirth_eventCount normalForm]
           omega⟩ =
-      .framingTwist
-        (twoThreeFirstStrand normalForm)
-        (twoThreeThirdStrand normalForm)
-        .positive := by
+      .planarIsotopy
+        [(twoThreeFirstStrand normalForm,
+          twoThreeThirdStrand normalForm)] := by
   have atIndex :=
     congrArg (fun events => events[1]?) normalForm.2.2.1
   simp [serializedExteriorEvents, twoThreeLocalEvents] at atIndex
@@ -2083,10 +2082,9 @@ theorem standardTwoThreeBirth_secondContexts
   rw [activeBefore] at beforeTransition
   have eventAt :
       targetCut.cut.exterior.events i =
-        .framingTwist
-          (twoThreeFirstStrand normalForm)
-          (twoThreeThirdStrand normalForm)
-          .positive := by
+        .planarIsotopy
+          [(twoThreeFirstStrand normalForm,
+            twoThreeThirdStrand normalForm)] := by
     simpa [i, twoThreeEventIndexOne] using
       standardTwoThreeBirth_eventOne_eq normalForm
   have eventBefore :
@@ -2177,20 +2175,18 @@ theorem standardTwoThreeBirth_secondContextualEdge
         (exteriorWord 𝒞 target labeling
           [twoThreeSecondStrand normalForm])
         (compileCutOpenEventMorphism 𝒞 target labeling
-          (.framingTwist
-            (twoThreeFirstStrand normalForm)
-            (twoThreeThirdStrand normalForm)
-            .positive)
+          (.planarIsotopy
+            [(twoThreeFirstStrand normalForm,
+              twoThreeThirdStrand normalForm)])
           ((standardTwoThreeBirth_eventOne_eq normalForm) ▸
             targetCut.cut.exterior.strandContinuationsAreWellFormed
               (twoThreeEventIndexOne normalForm))) := by
   let i := twoThreeEventIndexOne normalForm
   have eventEq :
       targetCut.cut.exterior.events i =
-        .framingTwist
-          (twoThreeFirstStrand normalForm)
-          (twoThreeThirdStrand normalForm)
-          .positive := by
+        .planarIsotopy
+          [(twoThreeFirstStrand normalForm,
+            twoThreeThirdStrand normalForm)] := by
     simpa [i, twoThreeEventIndexOne] using
       standardTwoThreeBirth_eventOne_eq normalForm
   have beforeEq :
@@ -2235,10 +2231,9 @@ theorem standardTwoThreeBirth_secondContextualEdge
           (targetCut.cut.exterior.events i)
           (targetCut.cut.exterior.strandContinuationsAreWellFormed i))
         (compileCutOpenEventMorphism 𝒞 target labeling
-          (.framingTwist
-            (twoThreeFirstStrand normalForm)
-            (twoThreeThirdStrand normalForm)
-            .positive)
+          (.planarIsotopy
+            [(twoThreeFirstStrand normalForm,
+              twoThreeThirdStrand normalForm)])
           (eventEq ▸
             targetCut.cut.exterior.strandContinuationsAreWellFormed i)) := by
     exact
@@ -2257,10 +2252,9 @@ theorem standardTwoThreeBirth_secondContextualEdge
           (exteriorWord 𝒞 target labeling
             [twoThreeSecondStrand normalForm])
           (compileCutOpenEventMorphism 𝒞 target labeling
-            (.framingTwist
-              (twoThreeFirstStrand normalForm)
-              (twoThreeThirdStrand normalForm)
-              .positive)
+            (.planarIsotopy
+              [(twoThreeFirstStrand normalForm,
+                twoThreeThirdStrand normalForm)])
             (eventEq ▸
               targetCut.cut.exterior.strandContinuationsAreWellFormed i))) :=
     (compileContextualCutOpenEventMorphism_heq_core
@@ -2282,6 +2276,34 @@ theorem standardTwoThreeBirth_secondContextualEdge
       (compileContextualCutOpenEventMorphism 𝒞 target targetCut labeling i)
   exact eq_of_heq (strip.trans compiledContext)
 
+/-- Inserting the identity continuation used by the finite trace syntax does
+not change the zero-framed loop. -/
+theorem canonicalPlanarZeroFramedLoop_eq_ribbonTrace
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (simple : 𝒞.simples.Simple) :
+    canonicalPositiveNegativeBirth 𝒞 simple ≫
+        contextualizeRibbonMorphism 𝒞
+          []
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .dual }]
+          (canonicalPlanarIsotopyMorphism 𝒞
+            [{ label := simple, direction := .forward }]
+            [{ label := simple, direction := .forward }] rfl) ≫
+        canonicalPositiveNegativeDeath 𝒞 simple =
+      ribbonTraceMorphism 𝒞 simple
+        (𝟙 (𝒞.simples.simpleObject simple)) := by
+  rw [ribbonTraceMorphism,
+    𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+  simp [canonicalPositiveNegativeBirth,
+    canonicalPositiveNegativeDeath, contextualizeRibbonMorphism,
+    canonicalPlanarIsotopyMorphism, ribbonWordObject,
+    ribbonWordAppendIso, orientedSimpleObject]
+  monoidal
+
+/-- One explicit positive framing event inserts one ribbon twist inside the
+canonical spherical trace. -/
 theorem canonicalPositiveFramedLoop_eq_ribbonTrace
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K)
@@ -2298,36 +2320,51 @@ theorem canonicalPositiveFramedLoop_eq_ribbonTrace
             .positive rfl) ≫
         canonicalPositiveNegativeDeath 𝒞 simple =
       ribbonTraceMorphism 𝒞 simple
-        (𝟙 (𝒞.simples.simpleObject simple)) := by
+        (𝒞.twist.hom.app (𝒞.simples.simpleObject simple)) := by
   let X := 𝒞.simples.simpleObject simple
-  calc
-    _ =
-        (η_ X (Xᘁ)) ≫
-          ((𝒞.twist.hom.app X ▷ Xᘁ) ≫
-            (β_ X (Xᘁ)).hom) ≫
-          (ε_ X (Xᘁ)) := by
-      simp [X, canonicalPositiveNegativeBirth,
-        canonicalPositiveNegativeDeath, contextualizeRibbonMorphism,
-        canonicalFramingTwistMorphism, ribbonWordObject,
-        ribbonWordAppendIso, orientedSimpleObject,
-        -BraidedCategory.braiding_naturality,
-        -BraidedCategory.braiding_naturality_assoc,
-        -BraidedCategory.braiding_naturality_left,
-        -BraidedCategory.braiding_naturality_left_assoc]
-      monoidal
-    _ =
-        (η_ X (Xᘁ)) ≫
-          ((β_ X (Xᘁ)).hom ≫
-            (Xᘁ ◁ 𝒞.twist.hom.app X)) ≫
-          (ε_ X (Xᘁ)) := by
-      exact congrArg
-        (fun middle => (η_ X (Xᘁ)) ≫ middle ≫ (ε_ X (Xᘁ)))
-        (BraidedCategory.braiding_naturality_left
-          (𝒞.twist.hom.app X) (Xᘁ))
-    _ = _ := by
-      rw [ribbonTraceMorphism,
-        𝒞.canonicalRibbonTrace_eq_ribbonClosure]
-      simp [X]
+  rw [ribbonTraceMorphism,
+    𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+  simp [X, canonicalPositiveNegativeBirth,
+    canonicalPositiveNegativeDeath, contextualizeRibbonMorphism,
+    canonicalFramingTwistMorphism, ribbonWordObject,
+    ribbonWordAppendIso, orientedSimpleObject,
+    -BraidedCategory.braiding_naturality,
+    -BraidedCategory.braiding_naturality_assoc,
+    -BraidedCategory.braiding_naturality_left,
+    -BraidedCategory.braiding_naturality_left_assoc]
+  monoidal
+
+/-- One explicit negative framing event inserts the inverse ribbon twist
+inside the canonical spherical trace. -/
+theorem canonicalNegativeFramedLoop_eq_ribbonTrace
+    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
+    (𝒞 : BundledPremodularCategory K)
+    (simple : 𝒞.simples.Simple) :
+    canonicalPositiveNegativeBirth 𝒞 simple ≫
+        contextualizeRibbonMorphism 𝒞
+          []
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .forward }]
+          [{ label := simple, direction := .dual }]
+          (canonicalFramingTwistMorphism 𝒞
+            { label := simple, direction := .forward }
+            { label := simple, direction := .forward }
+            .negative rfl) ≫
+        canonicalPositiveNegativeDeath 𝒞 simple =
+      ribbonTraceMorphism 𝒞 simple
+        (𝒞.twist.inv.app (𝒞.simples.simpleObject simple)) := by
+  let X := 𝒞.simples.simpleObject simple
+  rw [ribbonTraceMorphism,
+    𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+  simp [X, canonicalPositiveNegativeBirth,
+    canonicalPositiveNegativeDeath, contextualizeRibbonMorphism,
+    canonicalFramingTwistMorphism, ribbonWordObject,
+    ribbonWordAppendIso, orientedSimpleObject,
+    -BraidedCategory.braiding_naturality,
+    -BraidedCategory.braiding_naturality_assoc,
+    -BraidedCategory.braiding_naturality_left,
+    -BraidedCategory.braiding_naturality_left_assoc]
+  monoidal
 
 theorem canonicalFramingTwistMorphism_heq_of_oriented_eq
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K]
@@ -2356,10 +2393,9 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
     (normalForm : IsStandardTwoThreeBirth source target sourceCut targetCut)
     (labeling : TwoHandleLabeling 𝒞 target)
     (pairing :
-      (CutOpenEvent.framingTwist
-        (twoThreeFirstStrand normalForm)
-        (twoThreeThirdStrand normalForm)
-        .positive).StrandContinuationsAreWellFormed) :
+      (CutOpenEvent.planarIsotopy
+        [(twoThreeFirstStrand normalForm,
+          twoThreeThirdStrand normalForm)]).StrandContinuationsAreWellFormed) :
     pairedBirthMorphism 𝒞 target labeling
           (twoThreeFirstStrand normalForm)
           (twoThreeSecondStrand normalForm)
@@ -2374,10 +2410,9 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
           (exteriorWord 𝒞 target labeling
             [twoThreeSecondStrand normalForm])
           (compileCutOpenEventMorphism 𝒞 target labeling
-            (.framingTwist
-              (twoThreeFirstStrand normalForm)
-              (twoThreeThirdStrand normalForm)
-              .positive)
+            (.planarIsotopy
+              [(twoThreeFirstStrand normalForm,
+                twoThreeThirdStrand normalForm)])
             pairing) ≫
         pairedDeathMorphism 𝒞 target labeling
           (twoThreeThirdStrand normalForm)
@@ -2514,25 +2549,23 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
     simp [canonicalForward, orientedExteriorStrand,
       ribbonDirectionOfStrandOrientation, thirdPositive,
       thirdSecondLabel]
-  have framingHEq :
+  have planarHEq :
       HEq
         (compileCutOpenEventMorphism 𝒞 target labeling
-          (.framingTwist
-            (twoThreeFirstStrand normalForm)
-            (twoThreeThirdStrand normalForm)
-            .positive)
+          (.planarIsotopy
+            [(twoThreeFirstStrand normalForm,
+              twoThreeThirdStrand normalForm)])
           pairing)
-        (canonicalFramingTwistMorphism 𝒞
-          canonicalForward canonicalForward .positive rfl) := by
+        (canonicalPlanarIsotopyMorphism 𝒞
+          canonicalBefore canonicalBefore rfl) := by
     have compiled :=
-      compileFramingTwistMorphism_heq_canonical
+      compilePlanarIsotopyMorphism_heq_canonical
         𝒞 target targetCut labeling
-        (twoThreeFirstStrand normalForm)
-        (twoThreeThirdStrand normalForm)
-        .positive pairing
+        [(twoThreeFirstStrand normalForm,
+          twoThreeThirdStrand normalForm)] pairing
     exact compiled.trans
-      (canonicalFramingTwistMorphism_heq_of_oriented_eq
-        𝒞 firstCanonical thirdCanonical .positive _ rfl)
+      (canonicalPlanarIsotopyMorphism_heq
+        𝒞 beforeCanonical afterCanonical _ rfl)
   have contextHEq :
       HEq
         (contextualizeRibbonMorphism 𝒞
@@ -2544,17 +2577,16 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
           (exteriorWord 𝒞 target labeling
             [twoThreeSecondStrand normalForm])
           (compileCutOpenEventMorphism 𝒞 target labeling
-            (.framingTwist
-              (twoThreeFirstStrand normalForm)
-              (twoThreeThirdStrand normalForm)
-              .positive)
+            (.planarIsotopy
+              [(twoThreeFirstStrand normalForm,
+                twoThreeThirdStrand normalForm)])
             pairing))
         (contextualizeRibbonMorphism 𝒞
           [] canonicalBefore canonicalBefore canonicalRight
-          (canonicalFramingTwistMorphism 𝒞
-            canonicalForward canonicalForward .positive rfl)) :=
+          (canonicalPlanarIsotopyMorphism 𝒞
+            canonicalBefore canonicalBefore rfl)) :=
     contextualizeRibbonMorphism_heq 𝒞
-      rfl beforeCanonical afterCanonical rightCanonical framingHEq
+      rfl beforeCanonical afterCanonical rightCanonical planarHEq
   have birthHEq :
       HEq
         (pairedBirthMorphism 𝒞 target labeling
@@ -2590,7 +2622,7 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
       rfl
       birthContextHEq deathHEq
   have canonicalValue :=
-    canonicalPositiveFramedLoop_eq_ribbonTrace 𝒞
+    canonicalPlanarZeroFramedLoop_eq_ribbonTrace 𝒞
       (exteriorStrandLabel 𝒞 target labeling
         (twoThreeSecondStrand normalForm))
   have traceEq :
@@ -2613,8 +2645,8 @@ theorem standardTwoThreeBirth_localThreeEventMorphism
               (twoThreeSecondStrand normalForm)) ≫
           contextualizeRibbonMorphism 𝒞
             [] canonicalBefore canonicalBefore canonicalRight
-            (canonicalFramingTwistMorphism 𝒞
-              canonicalForward canonicalForward .positive rfl)) ≫
+            (canonicalPlanarIsotopyMorphism 𝒞
+              canonicalBefore canonicalBefore rfl)) ≫
         canonicalPositiveNegativeDeath 𝒞
           (exteriorStrandLabel 𝒞 target labeling
             (twoThreeSecondStrand normalForm)) =

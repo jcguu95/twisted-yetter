@@ -228,6 +228,82 @@ theorem connectedSumH₂Map_apply
 
 /-! ## Standard functorial topology boundaries -/
 
+/-! ### Standard simply connected four-manifolds -/
+
+/-- The standard oriented complex projective plane. -/
+axiom complexProjectivePlane : ClosedOrientedSmoothFourManifold
+
+/-- The complex projective plane with reversed orientation. -/
+axiom reversedComplexProjectivePlane : ClosedOrientedSmoothFourManifold
+
+/-- The oriented four-sphere. -/
+axiom fourSphere : ClosedOrientedSmoothFourManifold
+
+/-- The standard oriented `K3` surface. -/
+axiom k3Surface : ClosedOrientedSmoothFourManifold
+
+/-- The `K3` surface with reversed orientation. -/
+axiom reversedK3Surface : ClosedOrientedSmoothFourManifold
+
+/-- `CP²` is simply connected. -/
+axiom complexProjectivePlane_simplyConnected :
+    IsSimplyConnected complexProjectivePlane
+
+/-- Reversing the orientation of `CP²` does not change its fundamental group. -/
+axiom reversedComplexProjectivePlane_simplyConnected :
+    IsSimplyConnected reversedComplexProjectivePlane
+
+/-- `S⁴` is simply connected. -/
+axiom fourSphere_simplyConnected : IsSimplyConnected fourSphere
+
+/-- `K3` is simply connected. -/
+axiom k3Surface_simplyConnected : IsSimplyConnected k3Surface
+
+/-- Reversing the orientation of `K3` does not change its fundamental group. -/
+axiom reversedK3Surface_simplyConnected :
+    IsSimplyConnected reversedK3Surface
+
+/-! ### Standard rank-one and zero intersection forms -/
+
+/-- The standard generator coordinate on `H₂(CP²; Z)`. -/
+axiom complexProjectivePlaneH₂ :
+    ManifoldH₂ complexProjectivePlane ≃+ ℤ
+
+/-- In the standard coordinate, the intersection form of `CP²` is `⟨1⟩`. -/
+axiom complexProjectivePlane_intersectionForm
+    (a b : ManifoldH₂ complexProjectivePlane) :
+    integralIntersectionPairing complexProjectivePlane a b =
+      complexProjectivePlaneH₂ a * complexProjectivePlaneH₂ b
+
+/-- The positive generator of `H₂(CP²; Z)`. -/
+def positiveProjectivePlaneGenerator :
+    ManifoldH₂ complexProjectivePlane :=
+  complexProjectivePlaneH₂.symm 1
+
+/-- The standard generator coordinate on `H₂(CPbar²; Z)`. -/
+axiom reversedComplexProjectivePlaneH₂ :
+    ManifoldH₂ reversedComplexProjectivePlane ≃+ ℤ
+
+/-- In the standard coordinate, the intersection form of `CPbar²` is `⟨-1⟩`. -/
+axiom reversedComplexProjectivePlane_intersectionForm
+    (a b : ManifoldH₂ reversedComplexProjectivePlane) :
+    integralIntersectionPairing reversedComplexProjectivePlane a b =
+      -(reversedComplexProjectivePlaneH₂ a *
+        reversedComplexProjectivePlaneH₂ b)
+
+/-- The negative generator of `H₂(CPbar²; Z)`. -/
+def negativeProjectivePlaneGenerator :
+    ManifoldH₂ reversedComplexProjectivePlane :=
+  reversedComplexProjectivePlaneH₂.symm 1
+
+/-- Integral second homology of `S⁴` is trivial. -/
+axiom fourSphere_H₂_eq_zero (alpha : ManifoldH₂ fourSphere) : alpha = 0
+
+/-- The integral intersection form of `S⁴` is zero. -/
+axiom fourSphere_intersectionForm_eq_zero
+    (alpha beta : ManifoldH₂ fourSphere) :
+    integralIntersectionPairing fourSphere alpha beta = 0
+
 /--
 An oriented diffeomorphism preserves the integral intersection pairing.
 -/
