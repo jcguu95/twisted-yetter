@@ -194,6 +194,11 @@ Reference: D. Reutter, *Semisimple 4-dimensional topological field theories
 cannot detect exotic smooth structure*, Corollary 3.9 and its proof, arXiv
 PDF pp. 14--15, using the classification of even unimodular forms and
 Rokhlin's theorem.
+
+No form of the `11/8` conjecture is used here: the source is allowed an
+arbitrary finite number of hyperbolic stabilizations.  Reutter notes that
+forcing this source stabilization count to be zero is the stronger statement
+equivalent to `11/8`.
 -/
 axiom evenIntersectionForm_stableK3H_isometry
     (X : ClosedOrientedSmoothFourManifold)

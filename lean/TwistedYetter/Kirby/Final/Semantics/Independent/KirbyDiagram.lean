@@ -16,10 +16,14 @@ components stored here.
 
 namespace TwistedYetter.Semantics.Independent
 
+/--
+The two component roles of a special Kirby diagram.  Dotted components are
+primal one-handles; ordinary framed components are primal two-handles.  There
+is no third role whose handle index or evaluator meaning is left unspecified.
+-/
 inductive ComponentRole
   | ordinary
   | dotted
-  | speciallyDotted
   deriving DecidableEq, Repr
 
 inductive StrandOrientation

@@ -1,0 +1,45 @@
+{
+  "artifact": "semantic-correction-component-roles-v1",
+  "recorded_at_utc": "2026-08-07T03:42:22Z",
+  "status": "KERNEL_CHECKED_PENDING_PREFIX_RESEAL",
+  "base_git_commit": "9053a43785735aa0da5b3e48433e403d957be754",
+  "normative_root": "TwistedYetter.Kirby.Final.Semantics.Independent.Entry",
+  "semantic_correction": {
+    "removed_constructor": "TwistedYetter.Semantics.Independent.ComponentRole.speciallyDotted",
+    "reason": "The constructor had no separately specified handle index or evaluator semantics and was silently classified as a two-handle by the complement of the dotted role.",
+    "remaining_roles": {
+      "dotted": "primal one-handle represented by a dotted component",
+      "ordinary": "primal two-handle represented by an ordinary framed component"
+    },
+    "axioms_added": [],
+    "proof_holes_added": false,
+    "final_theorem_signature_changed": false
+  },
+  "verification": {
+    "narrow_module_build": "PASS",
+    "full_build": "PASS_8319_JOBS",
+    "final_theorem_axiom_audit": "PASS_NO_SORRYAX",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_json": "/tmp/twisted-yetter-proactive-red-team-2026-08-06-v2.json",
+    "source_red_team_markdown": "/tmp/twisted-yetter-proactive-red-team-2026-08-06-v2.zh-TW.md",
+    "removed_symbol_search": "PASS_NO_MATCH_IN_LEAN_SOURCES"
+  },
+  "source_hashes_sha256": {
+    "KirbyDiagram.lean": "29ec910846a7c216235641cdcc4c1921e73a5150a4738b9e4c218fe809efb438"
+  },
+  "hash_policy": {
+    "historical_freeze_manifests_preserved": true,
+    "current_prefix_reseal": "PENDING",
+    "claim_of_000_prefix": false
+  },
+  "environment": {
+    "lean": "4.29.1",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 (24G325)"
+  },
+  "non_claims": [
+    "This artifact does not alter or rewrite any historical semantic-freeze manifest.",
+    "This artifact does not claim that all existing topology or category trust boundaries have completed human review.",
+    "This artifact does not change the final theorem statement or add a new axiom."
+  ]
+}

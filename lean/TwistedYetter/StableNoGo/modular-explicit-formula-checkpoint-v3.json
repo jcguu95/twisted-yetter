@@ -1,0 +1,52 @@
+{
+  "artifact": "modular-explicit-formula-checkpoint-v3",
+  "recorded_at_utc": "2026-08-07T03:42:22Z",
+  "status": "KERNEL_CHECKED_WITH_CORRECTED_REFERENCE_BOUNDARY",
+  "supersedes": "modular-explicit-formula-checkpoint-v2",
+  "base_git_commit": "9053a43785735aa0da5b3e48433e403d957be754",
+  "theorems": [
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_explicit_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_zero_formula",
+    "TwistedYetter.StableNoGo.TwistedYetter_modular_quadratic_ratio"
+  ],
+  "reference_correction": {
+    "removed_name": "egno_sMatrix_characterPairing",
+    "replacement_name": "standard_sMatrix_alphaPairing",
+    "mathematical_statement_changed": false,
+    "incorrect_old_attribution": "EGNO equation (8.96) directly states the normalized S-matrix identity.",
+    "correct_locators": {
+      "EGNO_equation_8_46": "defines the S-matrix entry as the trace of the double braiding",
+      "EGNO_equation_8_95": "defines the closed positive-monodromy automorphism alpha associated to an invertible object",
+      "EGNO_equation_8_96": "packages alpha as the pairing between invertible objects and the universal grading group; it is not the S-matrix identity"
+    },
+    "actual_input": "The standard ribbon partial-trace identity s_{X,g} = d_X d_g alpha_g(X).",
+    "formal_status": "This identity remains one explicit narrow category-literature axiom until the category library contains a general partial-trace Fubini theorem."
+  },
+  "topology_reference_clarification": {
+    "file": "ModularTopologyInputs.lean",
+    "statement_changed": false,
+    "clarification": "The even stable K3/H decomposition permits arbitrary finite source hyperbolic stabilization and therefore does not use the 11/8 conjecture."
+  },
+  "verification": {
+    "full_build": "PASS_8319_JOBS",
+    "final_theorem_axiom_audit": "PASS_RENAMED_AXIOM_VISIBLE_NO_SORRYAX",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_json": "/tmp/twisted-yetter-proactive-red-team-2026-08-06-v2.json",
+    "source_red_team_markdown": "/tmp/twisted-yetter-proactive-red-team-2026-08-06-v2.zh-TW.md",
+    "old_axiom_name_search": "PASS_NO_MATCH_IN_LEAN_SOURCES"
+  },
+  "source_hashes_sha256": {
+    "ModularCharacterCorrespondence.lean": "f10e46dddbe85e523c6c4f00a27062b96415cd274bfa173234c8666868220c1f",
+    "ModularTopologyInputs.lean": "f8a473d597de33cb102633e74f745a83e84beaa459fd98a53554e7231a497149"
+  },
+  "environment": {
+    "lean": "4.29.1",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 (24G325)"
+  },
+  "non_claims": [
+    "The corrected S-matrix identity has not yet been derived internally from a general partial-trace Fubini theorem.",
+    "This checkpoint does not convert the source red-team result into a semantic PASS.",
+    "This checkpoint does not extend the theorem beyond its existing simply-connected scope."
+  ]
+}

@@ -2,11 +2,12 @@ import TwistedYetter.StableNoGo.ModularCategory
 import TwistedYetter.CategoryTheory.Rigid.TensorExactPairing
 
 /-!
-# The EGNO character-object correspondence
+# The EGNO character-object correspondence and its trace consequence
 
-This module states only the character-object correspondence supplied by EGNO
-(8.95)--(8.96) and Lemma 8.22.9.  It deliberately contains no `S`-matrix,
-Gauss-sum, or twist-value conclusion.
+The character-object correspondence is supplied by EGNO (8.95), (8.96), and
+Lemma 8.22.9.  The module also isolates the standard ribbon partial-trace
+identity relating that character to the `S`-matrix.  It contains no shifted
+Gauss-sum conclusion.
 -/
 
 namespace TwistedYetter.StableNoGo
@@ -157,6 +158,7 @@ private theorem automorphismNatPowerHom_eq_unit_smul_identity
       simp [← mul_smul, pow_succ]
       rw [mul_comm]
 
+omit [IsAlgClosed K] [CharZero K] in
 private theorem automorphismIntPowerHom_eq_unit_zpow_smul_identity
     {C : Type*} [Category C] [Preadditive C] [Linear K C]
     {X : C} (iso : X ≅ X) (unit : Kˣ)
@@ -247,12 +249,23 @@ noncomputable def sMatrixEntry
         (categoryCharacter.category.simples.simpleObject second)))
 
 /--
-EGNO equation (8.96), printed page 249: under the character--invertible-object
-pairing defined by (8.95), the normalized `S`-matrix entry is the Schur scalar
-of `alpha(g)`.  This is the literature input; it does not mention powers of a
-chosen character or any shifted Gauss sum.
+The standard ribbon partial-trace identity for the character represented by
+an invertible simple object:
+
+`s_{X,g} = d_X d_g alpha_g(X)`.
+
+Here `s_{X,g}` is EGNO Definition 8.13.2, equation (8.46), and `alpha_g` is the
+closed positive monodromy of equation (8.95).  Closing the remaining `X`
+strand and using the spherical trace gives the displayed equality.  This is
+*not* equation (8.96): that equation packages `alpha` as the perfect pairing
+between invertible objects and the universal grading group.
+
+The present category API does not yet provide the general partial-trace
+Fubini theorem needed to derive this graphical identity mechanically, so the
+identity remains one narrow category-literature input.  It does not mention
+character powers, shifted Gauss sums, four-manifolds, or the Yetter evaluator.
 -/
-axiom egno_sMatrix_characterPairing
+axiom standard_sMatrix_alphaPairing
     {categoryCharacter : TwistedModularCategory K}
     (g : InvertibleSimpleObject categoryCharacter.category)
     (first : categoryCharacter.category.simples.Simple) :
@@ -280,9 +293,8 @@ private theorem alphaScalar_eq_of_alphaComponent_eq_smul_identity
     (categoryCharacter.category.simples.simpleObject first)).symm_apply_apply
       scalar
 
-/-- EGNO (8.96), after substituting the theorem
-`alpha(g^n) = eta^n`: the former `sMatrixEntry_eq` proof field is a derived
-theorem. -/
+/-- The standard `S`-matrix/`alpha` trace identity, after substituting the
+theorem `alpha(g^n) = eta^n`; the former scalar proof field is derived. -/
 theorem sMatrixEntry_characterPower_eq
     {categoryCharacter : TwistedModularCategory K}
     (g : InvertibleSimpleObject categoryCharacter.category)
@@ -293,7 +305,7 @@ theorem sMatrixEntry_characterPower_eq
       categoryCharacter.category.quantumDimension first *
         categoryCharacter.category.quantumDimension power.object.simple *
     ((((categoryCharacter.character.value first) ^ n : Kˣ) : K)) := by
-  rw [egno_sMatrix_characterPairing power.object first]
+  rw [standard_sMatrix_alphaPairing power.object first]
   rw [alphaScalar_eq_of_alphaComponent_eq_smul_identity power.object first
     ((((categoryCharacter.character.value first) ^ n : Kˣ) : K))
     (egno_alpha_characterPower_on_simple g represents n power first)]
