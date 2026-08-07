@@ -1993,7 +1993,7 @@ it mentions no Kirby diagram, evaluator, manifold, or invariance conclusion.
 Reference: Etingof--Nikshych--Ostrik, *On fusion categories*, Theorem 2.3,
 applied to the full fusion subcategory of transparent objects.
 -/
-axiom egno_mugerCenterGlobalDimension_ne_zero
+axiom eno_muegerCenterGlobalDimension_ne_zero
     (𝒞 : BundledPremodularCategory K) :
     transparentGlobalDimension 𝒞 ≠ 0
 
@@ -2085,15 +2085,15 @@ theorem stabilizationMultiplier_eq
         transparentGlobalDimension 𝒞η.category := by
   unfold stabilizationMultiplier
   rw [twistedYetter_sphereTwoProduct_zero_eq]
-  field_simp [egno_globalDimension_ne_zero 𝒞η.category]
+  field_simp [eno_globalDimension_ne_zero 𝒞η.category]
 
 theorem stabilizationMultiplier_ne_zero
     (𝒞η : TwistedPremodularCategory K) :
     stabilizationMultiplier 𝒞η 𝒞η.category.globalDimension ≠ 0 := by
   rw [stabilizationMultiplier_eq]
   exact mul_ne_zero
-    (egno_globalDimension_ne_zero 𝒞η.category)
-    (egno_mugerCenterGlobalDimension_ne_zero 𝒞η.category)
+    (eno_globalDimension_ne_zero 𝒞η.category)
+    (eno_muegerCenterGlobalDimension_ne_zero 𝒞η.category)
 
 end
 

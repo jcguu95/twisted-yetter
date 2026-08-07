@@ -1813,7 +1813,7 @@ theorem split_evaluateCycle
   unfold evaluateCycle
   rw [split_rawCycleSum split marking 𝒞η]
   exact split_thamNormalization 𝒞η.category.globalDimension
-    (egno_globalDimension_ne_zero 𝒞η.category)
+    (eno_globalDimension_ne_zero 𝒞η.category)
     left.diagram.handles.hThree right.diagram.handles.hThree
     split.target.diagram.handles.hThree split.hThree_additive
     (rawCycleSum 𝒞η left.diagram left.cut left.primalBoundary

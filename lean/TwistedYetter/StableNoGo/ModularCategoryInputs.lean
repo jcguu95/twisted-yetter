@@ -110,11 +110,11 @@ abbrev ModularCharacterPower
   CharacterPowerRepresentative g.1 n
 
 /-- Existence of the simple representative, with no numerical conclusions. -/
-theorem egno_characterPower_exists
+theorem characterPowerRepresentative_exists
     {𝒞η : TwistedModularCategory K}
     (g : ModularCharacterObject 𝒞η) (n : ℤ) :
     Nonempty (ModularCharacterPower g n) :=
-  egno_characterPowerRepresentative_exists g.1 n
+  standard_characterPowerRepresentative_exists g.1 n
 
 /-- EGNO Proposition 4.8.4, already proved in the fusion-category library:
 a simple object's pivotal dimension, hence its scalar quantum dimension, is
@@ -148,7 +148,7 @@ theorem egno_positiveShiftedGaussSum
     positiveShiftedGaussSum 𝒞η.toPremodular n =
       (((g.twistUnit ^ (-(n * n)) : Kˣ) : K)) *
         positiveGaussSum 𝒞η.toPremodular := by
-  let power := Classical.choice (egno_characterPower_exists g n)
+  let power := Classical.choice (characterPowerRepresentative_exists g n)
   have identity := egno_positiveGaussSum_sMatrixIdentity
     𝒞η power.object.simple
   have expanded :
@@ -186,7 +186,7 @@ theorem egno_negativeShiftedGaussSum
     negativeShiftedGaussSum 𝒞η.toPremodular n =
       (((g.twistUnit ^ (n * n) : Kˣ) : K)) *
         negativeGaussSum 𝒞η.toPremodular := by
-  let power := Classical.choice (egno_characterPower_exists g n)
+  let power := Classical.choice (characterPowerRepresentative_exists g n)
   have identity := egno_negativeGaussSum_sMatrixIdentity
     𝒞η power.object.simple
   have expanded :
@@ -226,7 +226,7 @@ theorem positiveGaussSum_ne_zero (𝒞η : TwistedModularCategory K) :
       positiveGaussSum 𝒞η.toPremodular *
           negativeGaussSum 𝒞η.toPremodular = 0 := by
     rw [positiveZero, zero_mul]
-  exact egno_globalDimension_ne_zero 𝒞η.category
+  exact eno_globalDimension_ne_zero 𝒞η.category
     ((egno_gaussSums_product 𝒞η).symm.trans productZero)
 
 theorem negativeGaussSum_ne_zero (𝒞η : TwistedModularCategory K) :
@@ -236,7 +236,7 @@ theorem negativeGaussSum_ne_zero (𝒞η : TwistedModularCategory K) :
       positiveGaussSum 𝒞η.toPremodular *
           negativeGaussSum 𝒞η.toPremodular = 0 := by
     rw [negativeZero, mul_zero]
-  exact egno_globalDimension_ne_zero 𝒞η.category
+  exact eno_globalDimension_ne_zero 𝒞η.category
     ((egno_gaussSums_product 𝒞η).symm.trans productZero)
 
 end

@@ -87,7 +87,7 @@ theorem TwistedYetter_modular_explicit_formula
             (TwistedYetter 𝒞η.toPremodular ⟨X, alpha⟩ *
               positiveGaussSum 𝒞η.toPremodular) := by ring
       _ = _ := by
-        rw [inv_mul_cancel₀ (egno_globalDimension_ne_zero 𝒞η.category),
+        rw [inv_mul_cancel₀ (eno_globalDimension_ne_zero 𝒞η.category),
           one_mul]
   apply mul_right_cancel₀ (positiveGaussSum_ne_zero 𝒞η)
   rw [← connectedSumValue, oddValue]

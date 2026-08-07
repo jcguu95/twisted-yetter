@@ -110,7 +110,7 @@ theorem normalizedTwistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum
   unfold NormalizedTwistedYetter
   rw [twistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum]
   rw [← mul_assoc,
-    inv_mul_cancel₀ (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+    inv_mul_cancel₀ (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
 
 /-- At the zero marking the same normalized block is the literal `(0,0)`
 Hopf sum, independently of the noncomputable quotient representative used for
@@ -132,7 +132,7 @@ theorem normalizedTwistedYetter_sphereTwoProduct_zero_eq_markedHyperbolicBlockSu
             transparentGlobalDimension 𝒞η.category) := by ring
     _ = _ := by
       rw [inv_mul_cancel₀
-        (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+        (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
 
 /-- The product of the normalized invariant values of a marked standard block
 list.  This is the proof bridge used by connected-sum multiplicativity. -/
@@ -377,7 +377,7 @@ theorem normalizedTwistedYetter_eq_normalizedOddFormula
               ((diagonalization.coordinates alpha).2 j)) := by ring
     _ = _ := by
       rw [inv_mul_cancel₀
-        (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+        (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
 
 /--
 **Final Theorem (premodular numerical formula).**

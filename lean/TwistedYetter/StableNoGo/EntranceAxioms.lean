@@ -26,7 +26,7 @@ External category input:
 * the premodular Kirby-colour killing identity.
 
 The nonvanishing of fusion-category global dimension is already the separately
-named literature input `egno_globalDimension_ne_zero` in the frozen frontend.
+named literature input `eno_globalDimension_ne_zero` in the frozen frontend.
 
 The split-special-Kirby-presentation boundary below is exposed through exact
 serialized component, strand, event, active-order, handle-index, and marking

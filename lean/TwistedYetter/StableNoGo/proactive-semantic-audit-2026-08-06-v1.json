@@ -1,0 +1,164 @@
+{
+  "schema": "twisted-yetter/proactive-semantic-audit/1",
+  "recorded_at": "2026-08-06T22:55:33-06:00",
+  "base_git_commit": "987bc6afd8193fa4fe2cb14b3f1ca9b0e227e3dc",
+  "status": "KERNEL_CHECKED_WITH_HUMAN_REVIEW_REMAINING",
+  "objective": "Before human review, proactively correct confirmed errors, incompleteness, and semantic or reference mismatches in the simply-connected premodular numerical theorem and its modular specialization.",
+  "ctl_current_root": {
+    "status": "PASS",
+    "command": "CTL_META_ROOT=/Users/jin/data/local/projects/ctl-meta python3 ctl-dogfood/scripts/ctl_store.py verify"
+  },
+  "confirmed_corrections": [
+    {
+      "old_name": "egno_characterPowerRepresentative_exists",
+      "new_name": "standard_characterPowerRepresentative_exists",
+      "statement_changed": false,
+      "reason": "EGNO Lemma 8.22.9(ii) states that alpha is a group homomorphism; it does not itself choose a finite-simple-skeleton representative of each integral tensor power. The retained input is standard Picard-group closure plus simple-skeleton representability."
+    },
+    {
+      "old_name": "egno_characterPower_exists",
+      "new_name": "characterPowerRepresentative_exists",
+      "statement_changed": false,
+      "reason": "The wrapper theorem is derived from the preceding standard representability input and therefore should not carry an EGNO attribution."
+    },
+    {
+      "old_name": "egno_picardTwist_quadratic",
+      "new_name": "standard_picardTwist_quadratic",
+      "statement_changed": false,
+      "reason": "The identity q(g^n)=q(g)^(n^2) is a standard consequence of ribbon balancing, duality, and the quadratic-form definition; EGNO Definition 8.4.1 does not state this Lean theorem verbatim."
+    },
+    {
+      "old_name": "egno_mugerCenterGlobalDimension_ne_zero",
+      "new_name": "eno_muegerCenterGlobalDimension_ne_zero",
+      "statement_changed": false,
+      "reason": "The cited source is Etingof--Nikshych--Ostrik, On fusion categories, Theorem 2.3, applied to the Mueger-center fusion subcategory."
+    },
+    {
+      "old_name": "egno_globalDimension_ne_zero",
+      "new_name": "eno_globalDimension_ne_zero",
+      "statement_changed": false,
+      "reason": "The exact cited source is Etingof--Nikshych--Ostrik, On fusion categories, Theorem 2.3."
+    },
+    {
+      "old_name": "egno_tensorUnitQuantumDimension",
+      "new_name": "standard_tensorUnitQuantumDimension",
+      "statement_changed": false,
+      "reason": "The equation dim(1)=1 is a standard consequence of pivotal-trace normalization and unit coherence, not a verbatim numbered EGNO theorem in the form formerly suggested by the name."
+    }
+  ],
+  "semantic_checks": {
+    "premodular_formula": "PASS_NO_CHANGE",
+    "modular_formula": "PASS_NO_CHANGE",
+    "modular_character_exponent_sign": "PASS",
+    "odd_even_scope": "PASS_SIMPLY_CONNECTED_ONLY",
+    "h2_is_not_fixed_to_Z": "PASS",
+    "dotted_disk_does_not_choose_X_or_X_dual": "PASS",
+    "dotted_component_not_replaced_by_ordinary_kirby_colour": "PASS",
+    "b2_plus_minus_bound_to_intersection_form": "PASS_VIA_DIAGONALIZATION_RANK_AND_BLOWUP_INPUTS"
+  },
+  "references_checked": [
+    {
+      "work": "Etingof--Gelaki--Nikshych--Ostrik, Tensor Categories",
+      "locators": [
+        "Lemma 8.22.9(i)-(iii)",
+        "Definition 8.13.2 and equation (8.46)",
+        "equations (8.95)-(8.96)",
+        "Definition 8.10.1 and equation (8.32)",
+        "Lemma 8.15.3, equation (8.58)",
+        "Corollary 8.15.5, equation (8.61)",
+        "Proposition 8.15.4, equation (8.59)",
+        "Proposition 4.8.4"
+      ]
+    },
+    {
+      "work": "Etingof--Nikshych--Ostrik, On fusion categories",
+      "locator": "Theorem 2.3"
+    },
+    {
+      "work": "C. T. C. Wall, On simply-connected 4-manifolds",
+      "locator": "Theorems 2-3"
+    },
+    {
+      "work": "D. Ruberman and S. Strle, Wall's stable realization for diffeomorphisms of definite 4-manifolds",
+      "locator": "Theorem 2.1"
+    },
+    {
+      "work": "D. Reutter, Semisimple 4-dimensional topological field theories cannot detect exotic smooth structure",
+      "locator": "Corollary 3.9 and proof"
+    }
+  ],
+  "remaining_explicit_human_review": [
+    {
+      "name": "standardPositiveHopfClosure_eq_monodromyTrace",
+      "status": "NARROW_CATEGORY_COHERENCE_INPUT",
+      "note": "A direct simplifier attempt leaves a genuine cup/cap, braiding, twist, and associator coherence goal; no shortcut or new axiom was introduced."
+    },
+    {
+      "name": "premodularKirbyColourKilling",
+      "status": "LITERATURE_INPUT",
+      "note": "Used only for the two ordinary 2-handle Hopf components in the S2 x S2 block, not for dotted projector semantics."
+    },
+    {
+      "name": "standard_sMatrix_alphaPairing",
+      "status": "NARROW_PARTIAL_TRACE_INPUT",
+      "note": "The exact identity is s_(X,g)=d_X d_g alpha_g(X); it is not falsely attributed to EGNO equation (8.96)."
+    },
+    {
+      "name": "standard_characterPowerRepresentative_exists",
+      "status": "STANDARD_PICARD_REPRESENTABILITY_INPUT",
+      "note": "No numerical, S-matrix, twist, evaluator, or four-manifold conclusion is included."
+    },
+    {
+      "name": "standard_picardTwist_quadratic",
+      "status": "STANDARD_RIBBON_PICARD_INPUT",
+      "note": "Retained explicitly because deriving the morphism-level equation requires substantial coherence infrastructure."
+    },
+    {
+      "name": "eno_globalDimension_ne_zero and eno_muegerCenterGlobalDimension_ne_zero",
+      "status": "ENO_NONVANISHING_INPUTS",
+      "note": "The second applies the same characteristic-zero fusion-category theorem to the transparent fusion subcategory."
+    },
+    {
+      "name": "Wall, Ruberman--Strle, Donaldson, odd-unimodular classification, and stable even K3/H inputs",
+      "status": "EXPLICIT_TOPOLOGY_LITERATURE_INPUTS",
+      "note": "Their Lean types remain category-neutral and assert no evaluator equality."
+    }
+  ],
+  "verification": {
+    "default_public_root": "PASS_SINGLE_LEAN_PROCESS",
+    "kernel_axiom_print": "PASS_NO_SORRYAX",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_counts": {
+      "Classical.choice": 15,
+      "axiom": 88,
+      "class": 6,
+      "likely_proof_field": 71,
+      "suspicious_declaration": 1
+    },
+    "source_red_team_note": "The report is a conservative whole-repository scanner. Its single suspicious declaration is the previously reviewed derived definition MarkedStableRealization; this artifact does not promote the source audit to PASS."
+  },
+  "reproduce_commands": [
+    "scripts/lean_local_check.sh lean/TwistedYetter.lean",
+    "scripts/lean_local_check.sh /tmp/TwistedYetterFinalAxioms.lean",
+    "python3 /Users/jin/.codex/skills/lean-red-team-audit/scripts/source_audit.py . --output-json /tmp/twisted-yetter-proactive-red-team-2026-08-06-v3.json --output-markdown /tmp/twisted-yetter-proactive-red-team-2026-08-06-v3.zh-TW.md"
+  ],
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "os": "macOS arm64-apple-darwin24.6.0",
+    "lean_process_policy": "single process used for all checks"
+  },
+  "sha256": {
+    "Independent/EntranceAxioms.lean": "09fcf11452f6130cca98894290c03cab9ca631183717932b3f1753f50c2096de",
+    "ModularCharacterCorrespondence.lean": "4c741f75dab6ae9ac11b40c253006d0cd0cad2a4e6595e5e5d8aa58d582c57d3",
+    "ModularCategoryInputs.lean": "9764f8a2ca9ce672dc1af9fe4f70ed928cb6a242c922e458feb899e49f0ff74d",
+    "SphereTwoProductEvaluation.lean": "ec092d548a7727ede3d8718240bc8d1fd7e2a61c64ce91096473362568c4fd23",
+    "FinalTheorem.lean": "818b48865325e77f33bacc3cfbebef20f6e4d40985b4965900aeb44640053150",
+    "source_red_team_json": "3ce865b1fbd6d37d3ce0db0064f5446e11447298179955d0608ef8ca62edbda8"
+  },
+  "non_claims": [
+    "This audit does not claim that every whole-repository red-team warning has been human-approved.",
+    "This audit does not extend the numerical theorem beyond simply-connected four-manifolds.",
+    "This audit does not identify the invariant with the original Crane--Yetter state sum.",
+    "This audit does not internally derive the remaining explicitly listed category or topology literature inputs."
+  ]
+}

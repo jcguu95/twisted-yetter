@@ -114,22 +114,25 @@ axiom intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
             𝒞 diagram presentation labeling))
 
 /--
-EGNO, canonical pivotal structure of a ribbon category: the tensor unit has
-quantum dimension one.
+Standard pivotal-trace normalization: the tensor unit has quantum dimension
+one.  This follows directly from the pivotal dimension definition and the
+unit coherence laws; it is recorded here as a narrow category-literature input
+rather than attributed to a nonexistent verbatim EGNO theorem.
 
 This is a basic category-literature input.  It mentions no Kirby diagram,
 character, evaluator, or manifold.
 -/
-axiom egno_tensorUnitQuantumDimension
+axiom standard_tensorUnitQuantumDimension
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K) :
     𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1
 
 /--
-EGNO, nonvanishing of the global dimension of a fusion category over an
-algebraically closed field of characteristic zero.
+Etingof--Nikshych--Ostrik, *On fusion categories*, Theorem 2.3:
+the global dimension of a fusion category over an algebraically closed field
+of characteristic zero is nonzero.
 -/
-axiom egno_globalDimension_ne_zero
+axiom eno_globalDimension_ne_zero
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K) :
     𝒞.globalDimension ≠ 0

@@ -346,7 +346,7 @@ theorem oneTwoBirth_rawCycleSum
         intro sourceLabeling _
         rw [← Finset.sum_mul]
         rw [specialCutMeridianSum_eq_one
-          𝒞η.category (egno_tensorUnitQuantumDimension 𝒞η.category)]
+          𝒞η.category (standard_tensorUnitQuantumDimension 𝒞η.category)]
         simp
 
 theorem twoThreeBirth_rawCycleSum
@@ -503,7 +503,7 @@ theorem twoThreeBirth_preserves_evaluation
   exact
     (twoThree_normalization_cancels
       𝒞η.category.globalDimension
-      (egno_globalDimension_ne_zero 𝒞η.category)
+      (eno_globalDimension_ne_zero 𝒞η.category)
       source.diagram.handles.hThree
       source.diagram.handles.hTwo
       source.diagram.handles.hOne
@@ -837,7 +837,7 @@ theorem oneTwoDeath_rawCycleSum
         intro targetLabeling _
         rw [← Finset.sum_mul]
         rw [specialCutMeridianSum_eq_one
-          𝒞η.category (egno_tensorUnitQuantumDimension 𝒞η.category)]
+          𝒞η.category (standard_tensorUnitQuantumDimension 𝒞η.category)]
         simp
 
 theorem twoThreeDeath_rawCycleSum

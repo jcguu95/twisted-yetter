@@ -285,7 +285,7 @@ theorem normalizedTwistedYetter_fourSphere_zero
     NormalizedTwistedYetter 𝒞η ⟨fourSphere, 0⟩ = 1 := by
   unfold NormalizedTwistedYetter
   rw [twistedYetter_fourSphere_zero]
-  exact inv_mul_cancel₀ (egno_globalDimension_ne_zero 𝒞η.category)
+  exact inv_mul_cancel₀ (eno_globalDimension_ne_zero 𝒞η.category)
 
 theorem normalizedTwistedYetter_complexProjectivePlane
     (𝒞η : TwistedPremodularCategory K)
@@ -301,7 +301,7 @@ theorem normalizedTwistedYetter_complexProjectivePlane
   rw [twistedYetter_complexProjectivePlane]
   rw [← alpha_eq]
   rw [← mul_assoc, inv_mul_cancel₀
-    (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+    (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
 
 theorem normalizedTwistedYetter_reversedComplexProjectivePlane
     (𝒞η : TwistedPremodularCategory K)
@@ -319,7 +319,7 @@ theorem normalizedTwistedYetter_reversedComplexProjectivePlane
   rw [twistedYetter_reversedComplexProjectivePlane]
   rw [← alpha_eq]
   rw [← mul_assoc, inv_mul_cancel₀
-    (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+    (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
 
 theorem positiveDiagonal_simplyConnected (p : ℕ) :
     IsSimplyConnected (positiveDiagonalManifold p) := by
@@ -438,7 +438,7 @@ theorem twistedYetter_oddDiagonal
           (𝒞η.category.globalDimension⁻¹ *
             TwistedYetter 𝒞η ⟨oddDiagonalManifold p q, alpha⟩) := by
       rw [← mul_assoc, mul_inv_cancel₀
-        (egno_globalDimension_ne_zero 𝒞η.category), one_mul]
+        (eno_globalDimension_ne_zero 𝒞η.category), one_mul]
     _ = _ := by rw [normalized, mul_assoc]
 
 /-- The intersection-form isometry canonically induced by odd coordinates. -/

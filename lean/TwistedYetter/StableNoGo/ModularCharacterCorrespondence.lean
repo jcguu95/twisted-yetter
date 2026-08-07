@@ -110,10 +110,12 @@ structure CharacterPowerRepresentative
       integralTensorPowerObject
         (categoryCharacter.category.simples.simpleObject g.simple) n
 
-/-- EGNO, Lemma 8.22.9(ii), together with finite-simple-skeleton
-representability: the group power of an invertible object has a chosen simple
-representative.  No scalar evaluation is asserted here. -/
-axiom egno_characterPowerRepresentative_exists
+/-- Standard Picard-group closure together with finite-simple-skeleton
+representability: every integral tensor power of an invertible simple object
+has a chosen invertible simple representative.  This is not the content of
+EGNO Lemma 8.22.9(ii); that lemma is used separately below for the map
+`alpha : Inv(C) -> Aut_tensor(id_C)`.  No scalar evaluation is asserted here. -/
+axiom standard_characterPowerRepresentative_exists
     {categoryCharacter : TwistedModularCategory K}
     (g : InvertibleSimpleObject categoryCharacter.category) (n : ℤ) :
     Nonempty (CharacterPowerRepresentative g n)
@@ -320,12 +322,16 @@ noncomputable def InvertibleSimpleObject.twistUnit
     (simpleTwistScalar_ne_zero categoryCharacter.toPremodular g.simple)
 
 /--
-The ribbon twist restricted to the Picard group is a quadratic form.  In the
-notation of EGNO Definition 8.4.1, this is `q(n g) = q(g)^(n^2)`; the ribbon
-interpretation follows from the balancing and duality conditions in EGNO
-Definition 8.10.1.  The statement is deliberately at the morphism level.
+The ribbon twist restricted to the Picard group is a quadratic form.  More
+precisely, EGNO Definition 8.10.1, equation (8.32), gives the associated
+bicharacter through monodromy, while ribbon duality gives `q(g⁻¹) = q(g)`.
+Thus the restriction satisfies the quadratic-form definition immediately
+preceding EGNO Definition 8.4.1, and hence `q(g^n) = q(g)^(n^2)` for every
+integer `n`.  This is a standard consequence of those definitions, not a
+theorem stated verbatim as EGNO Definition 8.4.1.  The statement below is
+deliberately at the morphism level.
 -/
-axiom egno_picardTwist_quadratic
+axiom standard_picardTwist_quadratic
     {categoryCharacter : TwistedModularCategory K}
     (g : InvertibleSimpleObject categoryCharacter.category)
     (n : ℤ) (power : CharacterPowerRepresentative g n) :
@@ -350,7 +356,7 @@ theorem simpleTwistScalar_characterPower_eq
         (categoryCharacter.category.twist.hom.app
           (categoryCharacter.category.simples.simpleObject
             power.object.simple)) = _
-  rw [egno_picardTwist_quadratic g n power]
+  rw [standard_picardTwist_quadratic g n power]
   exact (simpleEndLinearEquiv K
     (categoryCharacter.category.simples.simpleObject
       power.object.simple)).symm_apply_apply _
