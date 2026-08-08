@@ -18,8 +18,8 @@ The displayed diagram keeps ordinary Kirby-calculus names.  Before evaluating,
 the handle decomposition is read upside down as in Tham, Definition 5.11:
 primal one-handles are THAM three-handles, primal two-handles remain
 two-handles, and primal three-handles are THAM one-handles.  Character
-exponents therefore come only from `ThamTwoCycles`, never directly from a
-primal representative.
+exponents therefore come only from explicit two-handle coefficients.  The
+unrecorded primal three-handle attachments are not evaluator inputs.
 -/
 
 namespace TwistedYetter.Semantics.Independent
@@ -55,11 +55,11 @@ noncomputable def characterWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     {diagram : SpecialKirbyDiagram}
-    {primal : PrimalDegreeThreeBoundaryData diagram}
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles primal) : K :=
+    (coefficients : ThamTwoHandleCoefficients diagram) : K :=
   ((∏ handle,
-      (𝒞η.character.value (labeling handle)) ^ (cycle.1 handle)) : Kˣ)
+      (𝒞η.character.value (labeling handle)) ^
+        coefficients handle) : Kˣ)
 
 /-!
 The displayed formula stores the homological character exactly once, in
@@ -1178,9 +1178,8 @@ noncomputable def canonicalRoleAwareGraphCompiler
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (_cycle : ThamTwoCycles primal) :
+    (_coefficients : ThamTwoHandleCoefficients diagram) :
     ClosedRibbonExpression 𝒞η.category :=
   .morphism
     (compileCutOpenExteriorMorphism
@@ -1204,51 +1203,47 @@ def thamDefinition511Normalization
     (hOne _hTwo _hThree : ℕ) : K :=
   globalDimension / globalDimension ^ hOne
 
-noncomputable def rawCycleSum
+noncomputable def rawCoefficientSum
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal) : K :=
+    (coefficients : ThamTwoHandleCoefficients diagram) : K :=
   ∑ labeling : TwoHandleLabeling 𝒞η.category diagram,
     ordinaryKirbyWeight 𝒞η.category labeling *
-    characterWeight 𝒞η labeling cycle *
+    characterWeight 𝒞η labeling coefficients *
     let term :=
       canonicalRoleAwareGraphCompiler
-        𝒞η diagram presentation primal labeling cycle
+        𝒞η diagram presentation labeling coefficients
     canonicalRibbonGraphicalEvaluation 𝒞η.category term
 
-noncomputable def evaluateCycle
+noncomputable def evaluateCoefficients
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal) : K :=
+    (coefficients : ThamTwoHandleCoefficients diagram) : K :=
   thamDefinition511Normalization
       𝒞η.category.globalDimension
       diagram.handles.hThree
       diagram.handles.hTwo
       diagram.handles.hOne *
-    rawCycleSum 𝒞η diagram presentation primal cycle
+    rawCoefficientSum 𝒞η diagram presentation coefficients
 
 /--
 Representative independence is not baked into the definition.  It is the
-precise obligation required before `evaluateCycle` descends to `ThamKirbyH₂`.
+precise obligation required before `evaluateCoefficients` descends to the
+visible ambient `ThamMarkingClass`.
 -/
 def RepresentativeIndependenceStatement
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram) : Prop :=
-  ∀ left right : ThamTwoCycles primal,
-    thamCycleClass primal left = thamCycleClass primal right →
-    evaluateCycle 𝒞η
-        diagram presentation primal left =
-      evaluateCycle 𝒞η
-        diagram presentation primal right
+    (presentation : DottedCutPresentation diagram) : Prop :=
+  ∀ left right : ThamTwoHandleCoefficients diagram,
+    thamMarkingClass left = thamMarkingClass right →
+    evaluateCoefficients 𝒞η diagram presentation left =
+      evaluateCoefficients 𝒞η diagram presentation right
 
 end
 

@@ -163,42 +163,37 @@ noncomputable def rawEvaluatorSummand
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal)
+    (coefficients : ThamTwoHandleCoefficients diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram) : K :=
   ordinaryKirbyWeight 𝒞η.category labeling *
-    characterWeight 𝒞η labeling cycle *
+    characterWeight 𝒞η labeling coefficients *
     canonicalRibbonGraphicalEvaluation 𝒞η.category
       (canonicalRoleAwareGraphCompiler
-        𝒞η diagram presentation primal labeling cycle)
+        𝒞η diagram presentation labeling coefficients)
 
-theorem rawCycleSum_eq_sum_rawEvaluatorSummand
+theorem rawCoefficientSum_eq_sum_rawEvaluatorSummand
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal) :
-    rawCycleSum 𝒞η diagram presentation primal cycle =
+    (coefficients : ThamTwoHandleCoefficients diagram) :
+    rawCoefficientSum 𝒞η diagram presentation coefficients =
       ∑ labeling, rawEvaluatorSummand
-        𝒞η diagram presentation primal cycle labeling := by
+        𝒞η diagram presentation coefficients labeling := by
   rfl
 
 /--
 The raw finite sum is multiplicative once the split-labeling equivalence and
 the pointwise factorization of every summand have been established.
 -/
-theorem rawCycleSum_mul_of_labelingEquiv
+theorem rawCoefficientSum_mul_of_labelingEquiv
     (𝒞η : TwistedPremodularCategory K)
     (leftDiagram rightDiagram targetDiagram : SpecialKirbyDiagram)
     (leftPresentation : DottedCutPresentation leftDiagram)
     (rightPresentation : DottedCutPresentation rightDiagram)
     (targetPresentation : DottedCutPresentation targetDiagram)
-    (leftPrimal : PrimalDegreeThreeBoundaryData leftDiagram)
-    (rightPrimal : PrimalDegreeThreeBoundaryData rightDiagram)
-    (targetPrimal : PrimalDegreeThreeBoundaryData targetDiagram)
-    (leftCycle : ThamTwoCycles leftPrimal)
-    (rightCycle : ThamTwoCycles rightPrimal)
-    (targetCycle : ThamTwoCycles targetPrimal)
+    (leftCoefficients : ThamTwoHandleCoefficients leftDiagram)
+    (rightCoefficients : ThamTwoHandleCoefficients rightDiagram)
+    (targetCoefficients : ThamTwoHandleCoefficients targetDiagram)
     (labelingEquiv :
       TwoHandleLabeling 𝒞η.category targetDiagram ≃
         TwoHandleLabeling 𝒞η.category leftDiagram ×
@@ -206,23 +201,23 @@ theorem rawCycleSum_mul_of_labelingEquiv
     (summandFactors :
       ∀ targetLabeling,
         rawEvaluatorSummand 𝒞η targetDiagram targetPresentation
-            targetPrimal targetCycle targetLabeling =
+            targetCoefficients targetLabeling =
           rawEvaluatorSummand 𝒞η leftDiagram leftPresentation
-              leftPrimal leftCycle (labelingEquiv targetLabeling).1 *
+              leftCoefficients (labelingEquiv targetLabeling).1 *
             rawEvaluatorSummand 𝒞η rightDiagram rightPresentation
-              rightPrimal rightCycle (labelingEquiv targetLabeling).2) :
-    rawCycleSum 𝒞η targetDiagram targetPresentation targetPrimal targetCycle =
-      rawCycleSum 𝒞η leftDiagram leftPresentation leftPrimal leftCycle *
-        rawCycleSum 𝒞η rightDiagram rightPresentation rightPrimal rightCycle := by
-  rw [rawCycleSum_eq_sum_rawEvaluatorSummand]
+              rightCoefficients (labelingEquiv targetLabeling).2) :
+    rawCoefficientSum 𝒞η targetDiagram targetPresentation targetCoefficients =
+      rawCoefficientSum 𝒞η leftDiagram leftPresentation leftCoefficients *
+        rawCoefficientSum 𝒞η rightDiagram rightPresentation rightCoefficients := by
+  rw [rawCoefficientSum_eq_sum_rawEvaluatorSummand]
   rw [Fintype.sum_equiv labelingEquiv
     (rawEvaluatorSummand 𝒞η targetDiagram targetPresentation
-      targetPrimal targetCycle)
+      targetCoefficients)
     (fun labelings =>
       rawEvaluatorSummand 𝒞η leftDiagram leftPresentation
-          leftPrimal leftCycle labelings.1 *
+          leftCoefficients labelings.1 *
         rawEvaluatorSummand 𝒞η rightDiagram rightPresentation
-          rightPrimal rightCycle labelings.2)
+          rightCoefficients labelings.2)
     summandFactors]
   rw [Fintype.sum_prod_type]
   rw [← Fintype.sum_mul_sum]

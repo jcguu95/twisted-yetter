@@ -148,7 +148,7 @@ structure CleanBandEndpointNormalForm
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (_slide : CleanBandSlide source.diagram target.diagram)
-    (_sourceCycle : ThamTwoCycles source.primalBoundary) where
+    (_sourceCoefficients : ThamTwoHandleCoefficients source.diagram) where
   movingLabel : 𝒞η.category.simples.Simple
   stationaryLabel : 𝒞η.category.simples.Simple
   context :
@@ -163,9 +163,9 @@ def CleanBandEndpointNormalForm.identityStage
     {𝒞η : TwistedPremodularCategory K}
     {source target : HomologicallyMarkedDiagram}
     {slide : CleanBandSlide source.diagram target.diagram}
-    {sourceCycle : ThamTwoCycles source.primalBoundary}
+    {sourceCoefficients : ThamTwoHandleCoefficients source.diagram}
     (normalForm :
-      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients) :
     ClosedRibbonExpression 𝒞η.category :=
   normalForm.context.plug
     (identityExpression 𝒞η.category
@@ -177,9 +177,9 @@ def CleanBandEndpointNormalForm.resolvedStage
     {𝒞η : TwistedPremodularCategory K}
     {source target : HomologicallyMarkedDiagram}
     {slide : CleanBandSlide source.diagram target.diagram}
-    {sourceCycle : ThamTwoCycles source.primalBoundary}
+    {sourceCoefficients : ThamTwoHandleCoefficients source.diagram}
     (normalForm :
-      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients) :
     ClosedRibbonExpression 𝒞η.category :=
   normalForm.context.plug
     (fusionResolutionExpression 𝒞η.category
@@ -189,7 +189,7 @@ def CleanBandEndpointNormalForm.resolvedStage
 The exact normalized closed graphical expression compiled from one marked
 diagram and one THAM-side cycle.
 
-Unlike `evaluateCycle`, this retains the endomorphism of the tensor unit.  It
+Unlike `evaluateCoefficients`, this retains the endomorphism of the tensor unit.  It
 therefore permits attach, transport, and detach to be compared at the
 graphical-morphism level before scalarization.
 -/
@@ -197,7 +197,7 @@ noncomputable def normalizedCycleExpression
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram)
-    (cycle : ThamTwoCycles marked.primalBoundary) :
+    (coefficients : ThamTwoHandleCoefficients marked.diagram) :
     ClosedRibbonExpression 𝒞η.category :=
   .morphism
     (thamDefinition511Normalization
@@ -207,10 +207,10 @@ noncomputable def normalizedCycleExpression
           marked.diagram.handles.hOne •
       ∑ labeling : TwoHandleLabeling 𝒞η.category marked.diagram,
         (ordinaryKirbyWeight 𝒞η.category labeling *
-            characterWeight 𝒞η labeling cycle) •
+            characterWeight 𝒞η labeling coefficients) •
           (canonicalRoleAwareGraphCompiler
             𝒞η marked.diagram marked.cut
-              marked.primalBoundary labeling cycle).interpret)
+              labeling coefficients).interpret)
 
 /--
 Clean attachment has the standard typed graphical interpretation.
@@ -227,10 +227,11 @@ axiom cleanAttach_hasStandardGraphicalInterpretation
     (slide : CleanBandSlide source.diagram target.diagram)
     (slideRealizes :
       CleanBandSlideRealizesStandardKirbySlide slide)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
+    (sourceCoefficients : ThamTwoHandleCoefficients source.diagram) :
+    ∃ normalForm :
+        CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients,
       FramedRibbonIsotopic
-        (normalizedCycleExpression 𝒞η source sourceCycle)
+        (normalizedCycleExpression 𝒞η source sourceCoefficients)
         normalForm.identityStage
 
 /--
@@ -247,13 +248,14 @@ axiom cleanDetach_hasStandardGraphicalInterpretation
     (slideRealizes :
       CleanBandSlideRealizesStandardKirbySlide slide)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCoefficients : ThamTwoHandleCoefficients source.diagram)
     :
-    ∃ normalForm : CleanBandEndpointNormalForm 𝒞η slide sourceCycle,
+    ∃ normalForm :
+        CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients,
       FramedRibbonIsotopic
         normalForm.identityStage
         (normalizedCycleExpression 𝒞η target
-          (transport.mapCycle sourceCycle))
+          (transport.mapCoefficients sourceCoefficients))
 
 /--
 The finite coupon route gives a typed naturality derivation between the exact
@@ -273,11 +275,11 @@ axiom finiteCouponTransport_hasTypedGraphicalDerivation
     (transportComplete :
       FiniteCouponTransportRealizesCompletePath
         slide.decomposition.transport)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCoefficients : ThamTwoHandleCoefficients source.diagram)
     (attachNormalForm :
-      CleanBandEndpointNormalForm 𝒞η slide sourceCycle)
+      CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients)
     (detachNormalForm :
-      CleanBandEndpointNormalForm 𝒞η slide sourceCycle) :
+      CleanBandEndpointNormalForm 𝒞η slide sourceCoefficients) :
     CharacterCouponTransport 𝒞η.character
       attachNormalForm.resolvedStage detachNormalForm.resolvedStage
 
@@ -301,11 +303,11 @@ axiom framedIsotopy_hasTypedGraphicalInterpretation
     (scriptRealizes :
       FramedIsotopyScriptRealizesFramedIsotopy script)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
+    (sourceCoefficients : ThamTwoHandleCoefficients source.diagram) :
     FramedRibbonIsotopic
-      (normalizedCycleExpression 𝒞η source sourceCycle)
+      (normalizedCycleExpression 𝒞η source sourceCoefficients)
       (normalizedCycleExpression 𝒞η target
-        (transport.mapCycle sourceCycle))
+        (transport.mapCoefficients sourceCoefficients))
 
 /-! ## Cancellation local graphical normal forms
 
@@ -354,25 +356,6 @@ noncomputable def ManifoldH₂
     (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
   integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
 
-/--
-Integral second cohomology of a closed oriented smooth four-manifold.
-
-Mathlib supplies the singular-homology object used above but does not provide
-the singular-cohomology interface needed here.  We keep `H²` as explicit
-foundational algebraic-topology vocabulary rather than defining it to be `H₂`
-and thereby hiding Poincare duality in a definition.
--/
-axiom ManifoldSecondCohomology :
-  ClosedOrientedSmoothFourManifold → AddCommGrpCat.{0}
-
-/--
-Integral Poincare duality for a closed oriented four-manifold:
-`H₂(X; Z) ≃ H²(X; Z)`.  This is an external foundational topology input.
--/
-axiom manifoldPoincareDuality
-    (X : ClosedOrientedSmoothFourManifold) :
-    ManifoldH₂ X ≃+ ManifoldSecondCohomology X
-
 /-- Functoriality of integral singular homology under an oriented diffeomorphism. -/
 noncomputable def inducedH₂
     {X Y : ClosedOrientedSmoothFourManifold}
@@ -381,107 +364,45 @@ noncomputable def inducedH₂
   CategoryTheory.Iso.addCommGroupIsoToAddEquiv
     (integralSingularH₂Functor.mapIso (underlyingHomeomorphism f))
 
-/--
-The closed oriented smooth four-manifold obtained from a combinatorial special
-Kirby diagram by the usual handle-attachment construction.  The diagram type
-already records one zero-handle, one four-handle, dotted one-handles, framed
-two-handles, and the closing three-handle data.
--/
-axiom realizeSpecialKirbyDiagram :
-  SpecialKirbyDiagram → ClosedOrientedSmoothFourManifold
+/-! ## Explicit classical topology relations -/
 
 /--
-The transposed THAM handle complex computes integral second cohomology of the
-realized four-manifold.  This is the cellular/handle comparison on the dual
-handle decomposition, not an evaluator or invariance statement.
+`PresentsClosedFourManifold D X` means that the displayed zero-, one-, and
+two-handle data of `D` can be completed by exactly `D.handles.hThree`
+unrecorded three-handles and the unique four-handle to a closed oriented
+smooth four-manifold oriented-diffeomorphic to `X`.
+
+This is deliberately a relation, not a realization algorithm and not a
+certificate containing attaching spheres.  It mentions no category,
+character, evaluator, scalar, homology comparison, or invariance conclusion.
 -/
-axiom turnedOverHandleComplexComputesSecondCohomology
-    (diagram : SpecialKirbyDiagram) :
-    ThamKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-      ManifoldSecondCohomology (realizeSpecialKirbyDiagram diagram)
+axiom PresentsClosedFourManifold :
+  SpecialKirbyDiagram → ClosedOrientedSmoothFourManifold → Prop
 
 /--
-The exact turnover identification used by the evaluator.  It is definitionally
-the composite
+`RepresentsPoincareDualClass presentation beta alpha` means that the ambient
+THAM marking `beta`, represented by integral primal-two-handle coefficients
+modulo the visible coboundaries `im(∂₂ᵀ)`, is the coordinate class of
+`PD(alpha)` in the turned-over handle decomposition underlying
+`presentation`.
 
-  primal handle H₂ -> manifold H₂ -> manifold H² -> turned-over handle H₂.
-
-Thus no caller and no axiom may choose an unrelated abstract equivalence
-between the primal and THAM-side groups.
+The relation does not expose or reconstruct the unrecorded three-handle
+attaching spheres.  In particular, it does not assert that every element of
+`ThamMarkingClass D` is a genuine cohomology class; it selects only the classes
+which arise from the stated manifold homology class.
 -/
-noncomputable def turnoverPoincareDualityEquiv
-    (diagram : SpecialKirbyDiagram)
-    (homologyComparison :
-      PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-        ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-      ThamKirbyH₂ diagram.primalDegreeThreeBoundaryData :=
-  (homologyComparison.trans
-    (manifoldPoincareDuality
-      (realizeSpecialKirbyDiagram diagram))).trans
-        (turnedOverHandleComplexComputesSecondCohomology diagram).symm
-
-/-! ## Explicit classical topology axioms -/
-
-/--
-T1. Every closed oriented smooth four-manifold admits at least one special
-Kirby diagram in the stated sense.
--/
-axiom specialKirbyDiagram_exists
-    (X : ClosedOrientedSmoothFourManifold) :
-    Σ diagram : SpecialKirbyDiagram,
-      DottedCutPresentation diagram ×
-        OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
-
-/--
-T2. The integral handle chain complex of a presenting diagram computes the
-manifold's second homology.
-
-We deliberately retain this as an external classical handle-topology axiom.
-`SpecialKirbyDiagram` records the number of closing three-handles,
-but it does not formalize their attaching two-spheres in the boundary of the
-zero-, one-, and two-handlebody.  Consequently, the combinatorial data in this
-project cannot by itself construct the genuine degree-three boundary map
-
-  `∂₃ : C₃ → C₂`
-
-or prove that `ker ∂₂ / im ∂₃` is the singular homology group `H₂` of the
-realized four-manifold.  Proving those facts internally would require the
-smooth handle-attachment, cellular-homology, and comparison theory that this
-formalization intentionally leaves at its topology boundary.
-
-The axiom therefore supplies the missing genuine `∂₃` together with the exact
-homology comparison.  It does not mention a category, character, graphical
-evaluation, scalar equality, or invariance conclusion, and it cannot be
-replaced merely by the weaker chain identity `∂₂ ∘ ∂₃ = 0`.
--/
-axiom specialKirbyDiagram_computesH₂
-    (diagram : SpecialKirbyDiagram) :
-    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-      ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
+axiom RepresentsPoincareDualClass
+    {diagram : SpecialKirbyDiagram}
+    {X : ClosedOrientedSmoothFourManifold}
+    (_presentation : PresentsClosedFourManifold diagram X) :
+    ThamMarkingClass diagram → ManifoldH₂ X → Prop
 
 structure SpecialKirbyRepresentativeOf
     (X : ClosedOrientedSmoothFourManifold) where
   diagram : SpecialKirbyDiagram
   cut : DottedCutPresentation diagram
-  realizationDiffeomorphism :
-    OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
-  alpha : PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData
-
-abbrev SpecialKirbyRepresentativeOf.primalBoundary
-    {X : ClosedOrientedSmoothFourManifold}
-    (representative : SpecialKirbyRepresentativeOf X) :
-    PrimalDegreeThreeBoundaryData representative.diagram :=
-  representative.diagram.primalDegreeThreeBoundaryData
-
-noncomputable def SpecialKirbyRepresentativeOf.thamAlpha
-    {X : ClosedOrientedSmoothFourManifold}
-    (representative : SpecialKirbyRepresentativeOf X) :
-    ThamKirbyH₂ representative.primalBoundary :=
-  (turnoverPoincareDualityEquiv
-      representative.diagram
-      (specialKirbyDiagram_computesH₂ representative.diagram))
-    representative.alpha
+  presents : PresentsClosedFourManifold diagram X
+  thamAlpha : ThamMarkingClass diagram
 
 noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     {X : ClosedOrientedSmoothFourManifold}
@@ -491,56 +412,35 @@ noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     cut := representative.cut
     thamAlpha := representative.thamAlpha }
 
-noncomputable def SpecialKirbyRepresentativeOf.diagramH₂EquivManifoldH₂
-    {X : ClosedOrientedSmoothFourManifold}
-    (representative : SpecialKirbyRepresentativeOf X) :
-    PrimalKirbyH₂ representative.primalBoundary ≃+ ManifoldH₂ X :=
-  (specialKirbyDiagram_computesH₂ representative.diagram).trans
-    (inducedH₂ representative.realizationDiffeomorphism)
-
 def SpecialKirbyRepresentativeOf.representsHomologyClass
     {X : ClosedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X)
     (representative : SpecialKirbyRepresentativeOf X) : Prop :=
-  representative.diagramH₂EquivManifoldH₂ representative.alpha = alpha
+  RepresentsPoincareDualClass
+    representative.presents representative.thamAlpha alpha
 
 /--
-The special Kirby representative used by the evaluator is assembled from the explicit
-topology axioms above.  The selected combinatorial diagram already carries the
-cut-and-reglue plans required at all dotted components; no separate puncture
-word realization axiom is needed.
+T1/T2. Every marked closed oriented smooth four-manifold `(X, alpha)` admits
+at least one special Kirby representative with a cut-open presentation and an
+ambient THAM marking representing `PD(alpha)`.
+
+This is an external handle-topology existence statement.  It does not compute
+a diagram, a three-handle attachment, or a coefficient vector, and it does not
+assert an evaluator equality.
 -/
-theorem specialKirbyRepresentative_exists
+axiom specialKirbyRepresentative_exists
     (X : ClosedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) :
     ∃ representative : SpecialKirbyRepresentativeOf X,
-      representative.representsHomologyClass alpha := by
-  obtain ⟨diagram, cut, realizationDiffeomorphism⟩ :=
-    specialKirbyDiagram_exists X
-  let diagramHomologyComparison := specialKirbyDiagram_computesH₂ diagram
-  let homologyComparison :
-      PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-        ManifoldH₂ X :=
-    diagramHomologyComparison.trans (inducedH₂ realizationDiffeomorphism)
-  let representative : SpecialKirbyRepresentativeOf X :=
-    { diagram := diagram
-      cut := cut
-      realizationDiffeomorphism := realizationDiffeomorphism
-      alpha := homologyComparison.symm alpha }
-  refine ⟨representative, ?_⟩
-  exact homologyComparison.apply_symm_apply alpha
+      representative.representsHomologyClass alpha
 
 /--
-T3. Marked Kirby--Cerf completeness, including the required naturality of the
-canonical turnover marking.
+T3. Marked Kirby--Cerf completeness for the two explicit topology relations.
 
 If two representatives describe classes related by an oriented
-diffeomorphism, there is a finite Kirby movie whose endpoint markings are not
-chosen independently: they are the THAM-side images obtained from each
-representative's primal class through the exact handle-H₂, Poincare-duality,
-and turned-over-handle comparison defined above.  Thus this boundary asserts
-that the classical Kirby--Cerf movie transports that canonical marking; it
-does not permit an arbitrary automorphism of either endpoint H₂ group.
+diffeomorphism, there is a finite Kirby movie between their exact ambient
+THAM markings.  The endpoints are constrained by
+`RepresentsPoincareDualClass`; no caller may choose unrelated markings.
 -/
 axiom markedKirbyCerf_complete
     {X Y : ClosedOrientedSmoothFourManifold}

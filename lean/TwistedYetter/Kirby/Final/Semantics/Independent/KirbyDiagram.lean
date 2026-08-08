@@ -273,12 +273,16 @@ def CombinatorialLinkTrace.StrandId
     (trace : CombinatorialLinkTrace) := Fin trace.strandCount
 
 /--
-The handle information deliberately stops before encoding three-handle
-attaching spheres.  Only the number `hThree` is retained.  The external claim
-that these handles close the presented boundary belongs to the manifold
-realization axiom; it is not represented by an arbitrary certificate type and
-inhabitant.  Thus `hOne`, `hTwo`, and `hThree` use ordinary Kirby-calculus
-indices.
+The visible handle information of a special Kirby diagram.
+
+The diagram records only the number of closing three-handles.  It deliberately
+does not store either their attaching spheres or an arbitrary algebraic
+surrogate for the degree-three cellular boundary.  Whether these unrecorded
+handles close the displayed zero-, one-, and two-handlebody to a specified
+closed four-manifold is an external topology relation.
+
+Thus `hOne`, `hTwo`, and `hThree` use ordinary Kirby-calculus indices, while
+the evaluator itself sees `hThree` only through the THAM normalization.
 -/
 abbrev HandleChainGroup (count : ℕ) := Fin count → ℤ
 
@@ -294,10 +298,6 @@ structure SpecialHandleData (trace : CombinatorialLinkTrace) where
       (trace.components component).role ≠ .dotted}
   boundaryTwo :
     HandleChainGroup hTwo →+ HandleChainGroup hOne
-  boundaryThree :
-    HandleChainGroup hThree →+ HandleChainGroup hTwo
-  boundary_squared_zero :
-    boundaryTwo.comp boundaryThree = 0
 
 /--
 The independent input object.  "Special" means exactly one zero-handle and

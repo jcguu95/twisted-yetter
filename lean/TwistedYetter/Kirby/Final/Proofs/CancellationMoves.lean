@@ -73,13 +73,13 @@ theorem addedTwoHandle_characterWeight
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       AddedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
     (newLabel : 𝒞η.category.simples.Simple) :
     characterWeight 𝒞η
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle) =
+        (transport.mapCoefficients sourceCycle) =
       characterWeight 𝒞η
         sourceLabeling sourceCycle := by
   classical
@@ -88,20 +88,20 @@ theorem addedTwoHandle_characterWeight
       (∏ i,
         (𝒞η.character.value
           (coordinates.mergeLabeling sourceLabeling newLabel i)) ^
-            ((transport.mapCycle sourceCycle).1 i)) =
+            (transport.mapCoefficients sourceCycle i)) =
         ∏ i,
           (𝒞η.character.value (sourceLabeling i)) ^
-            (sourceCycle.1 i) := by
+            (sourceCycle i) := by
     calc
       (∏ i,
         (𝒞η.character.value
           (coordinates.mergeLabeling sourceLabeling newLabel i)) ^
-            ((transport.mapCycle sourceCycle).1 i)) =
+            (transport.mapCoefficients sourceCycle i)) =
         ∏ i : Fin source.diagram.handles.hTwo ⊕ Unit,
           match i with
           | .inl old =>
               (𝒞η.character.value (sourceLabeling old)) ^
-                (sourceCycle.1 old)
+                (sourceCycle old)
           | .inr _ => 1 := by
             symm
             apply Fintype.prod_equiv coordinates.indexEquiv
@@ -117,7 +117,7 @@ theorem addedTwoHandle_characterWeight
       _ =
         ∏ i,
           (𝒞η.character.value (sourceLabeling i)) ^
-            (sourceCycle.1 i) := by
+            (sourceCycle i) := by
           simp
   exact congrArg (fun unit : Kˣ => (unit : K)) unitEquality
 
@@ -140,18 +140,18 @@ theorem oneTwoBirth_hasTypedGraphicalNormalForm
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
     (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
     (newLabel : 𝒞η.category.simples.Simple) :
     (canonicalRoleAwareGraphCompiler
-        𝒞η target.diagram target.cut target.primalBoundary
+        𝒞η target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).interpret =
+        (transport.mapCoefficients sourceCycle)).interpret =
       (closedComposeExpression
         (specialCutMeridianExpression 𝒞η.category newLabel)
         (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.cut source.primalBoundary
+          𝒞η source.diagram source.cut
           sourceLabeling sourceCycle)).interpret := by
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
@@ -172,19 +172,19 @@ theorem oneTwoBirth_graphicalFactor
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
     (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
     (newLabel : 𝒞η.category.simples.Simple) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.cut target.primalBoundary
+          𝒞η target.diagram target.cut
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (transport.mapCycle sourceCycle)) =
+          (transport.mapCoefficients sourceCycle)) =
       specialCutMeridianClosedValue 𝒞η.category newLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η source.diagram source.cut source.primalBoundary
+            𝒞η source.diagram source.cut
             sourceLabeling sourceCycle) := by
   have interpreted :=
     oneTwoBirth_hasTypedGraphicalNormalForm
@@ -205,18 +205,18 @@ theorem twoThreeBirth_hasTypedGraphicalNormalForm
     (coordinateBinding :
       coordinates.MatchesTwoThreeBirthComponent)
     (normalForm : IsStandardTwoThreeBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
     (newLabel : 𝒞η.category.simples.Simple) :
     (canonicalRoleAwareGraphCompiler
-        𝒞η target.diagram target.cut target.primalBoundary
+        𝒞η target.diagram target.cut
         (coordinates.mergeLabeling sourceLabeling newLabel)
-        (transport.mapCycle sourceCycle)).interpret =
+        (transport.mapCoefficients sourceCycle)).interpret =
       (closedComposeExpression
         (ordinaryKirbyLoopExpression 𝒞η.category newLabel)
         (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.cut source.primalBoundary
+          𝒞η source.diagram source.cut
           sourceLabeling sourceCycle)).interpret := by
   exact standardTwoThreeBirth_compiledExteriorMorphism
     𝒞η.category
@@ -237,19 +237,19 @@ theorem twoThreeBirth_graphicalFactor
     (coordinateBinding :
       coordinates.MatchesTwoThreeBirthComponent)
     (normalForm : IsStandardTwoThreeBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (sourceLabeling :
       TwoHandleLabeling 𝒞η.category source.diagram)
     (newLabel : 𝒞η.category.simples.Simple) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.cut target.primalBoundary
+          𝒞η target.diagram target.cut
           (coordinates.mergeLabeling sourceLabeling newLabel)
-          (transport.mapCycle sourceCycle)) =
+          (transport.mapCoefficients sourceCycle)) =
       𝒞η.category.simples.quantumDimension newLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η source.diagram source.cut source.primalBoundary
+            𝒞η source.diagram source.cut
             sourceLabeling sourceCycle) := by
   have interpreted :=
     twoThreeBirth_hasTypedGraphicalNormalForm
@@ -268,7 +268,7 @@ theorem twoThreeBirth_graphicalFactor
       𝒞η.category.closedScalar_smul_identity]
   rw [localValue]
 
-theorem oneTwoBirth_rawCycleSum
+theorem oneTwoBirth_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (script : CancellationScript source.diagram target.diagram)
@@ -279,22 +279,22 @@ theorem oneTwoBirth_rawCycleSum
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
     (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    rawCycleSum 𝒞η target.diagram target.cut target.primalBoundary
-        (transport.mapCycle sourceCycle) =
-      rawCycleSum 𝒞η source.diagram source.cut source.primalBoundary
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    rawCoefficientSum 𝒞η target.diagram target.cut
+        (transport.mapCoefficients sourceCycle) =
+      rawCoefficientSum 𝒞η source.diagram source.cut
         sourceCycle := by
   classical
-  unfold rawCycleSum
+  unfold rawCoefficientSum
   calc
     (∑ targetLabeling,
       ordinaryKirbyWeight 𝒞η.category targetLabeling *
         characterWeight 𝒞η targetLabeling
-          (transport.mapCycle sourceCycle) *
+          (transport.mapCoefficients sourceCycle) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η target.diagram target.cut target.primalBoundary
-            targetLabeling (transport.mapCycle sourceCycle))) =
+            𝒞η target.diagram target.cut
+            targetLabeling (transport.mapCoefficients sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category source.diagram ×
             𝒞η.category.simples.Simple,
@@ -302,12 +302,12 @@ theorem oneTwoBirth_rawCycleSum
             (coordinates.mergeLabeling pair.1 pair.2) *
           characterWeight 𝒞η
             (coordinates.mergeLabeling pair.1 pair.2)
-            (transport.mapCycle sourceCycle) *
+            (transport.mapCoefficients sourceCycle) *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
             (canonicalRoleAwareGraphCompiler
-              𝒞η target.diagram target.cut target.primalBoundary
+              𝒞η target.diagram target.cut
               (coordinates.mergeLabeling pair.1 pair.2)
-              (transport.mapCycle sourceCycle)) := by
+              (transport.mapCoefficients sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -322,7 +322,7 @@ theorem oneTwoBirth_rawCycleSum
             characterWeight 𝒞η sourceLabeling sourceCycle *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η source.diagram source.cut source.primalBoundary
+                𝒞η source.diagram source.cut
                 sourceLabeling sourceCycle)) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
@@ -340,7 +340,7 @@ theorem oneTwoBirth_rawCycleSum
           characterWeight 𝒞η sourceLabeling sourceCycle *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η source.diagram source.cut source.primalBoundary
+                𝒞η source.diagram source.cut
                 sourceLabeling sourceCycle) := by
         apply Finset.sum_congr rfl
         intro sourceLabeling _
@@ -349,7 +349,7 @@ theorem oneTwoBirth_rawCycleSum
           𝒞η.category (standard_tensorUnitQuantumDimension 𝒞η.category)]
         simp
 
-theorem twoThreeBirth_rawCycleSum
+theorem twoThreeBirth_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (script : CancellationScript source.diagram target.diagram)
@@ -360,23 +360,23 @@ theorem twoThreeBirth_rawCycleSum
     (coordinateBinding :
       coordinates.MatchesTwoThreeBirthComponent)
     (normalForm : IsStandardTwoThreeBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    rawCycleSum 𝒞η target.diagram target.cut target.primalBoundary
-        (transport.mapCycle sourceCycle) =
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    rawCoefficientSum 𝒞η target.diagram target.cut
+        (transport.mapCoefficients sourceCycle) =
       𝒞η.category.globalDimension *
-        rawCycleSum 𝒞η source.diagram source.cut source.primalBoundary
+        rawCoefficientSum 𝒞η source.diagram source.cut
           sourceCycle := by
   classical
-  unfold rawCycleSum
+  unfold rawCoefficientSum
   calc
     (∑ targetLabeling,
       ordinaryKirbyWeight 𝒞η.category targetLabeling *
         characterWeight 𝒞η targetLabeling
-          (transport.mapCycle sourceCycle) *
+          (transport.mapCoefficients sourceCycle) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η target.diagram target.cut target.primalBoundary
-            targetLabeling (transport.mapCycle sourceCycle))) =
+            𝒞η target.diagram target.cut
+            targetLabeling (transport.mapCoefficients sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category source.diagram ×
             𝒞η.category.simples.Simple,
@@ -384,12 +384,12 @@ theorem twoThreeBirth_rawCycleSum
             (coordinates.mergeLabeling pair.1 pair.2) *
           characterWeight 𝒞η
             (coordinates.mergeLabeling pair.1 pair.2)
-            (transport.mapCycle sourceCycle) *
+            (transport.mapCoefficients sourceCycle) *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
             (canonicalRoleAwareGraphCompiler
-              𝒞η target.diagram target.cut target.primalBoundary
+              𝒞η target.diagram target.cut
               (coordinates.mergeLabeling pair.1 pair.2)
-              (transport.mapCycle sourceCycle)) := by
+              (transport.mapCoefficients sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -404,7 +404,7 @@ theorem twoThreeBirth_rawCycleSum
             characterWeight 𝒞η sourceLabeling sourceCycle *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η source.diagram source.cut source.primalBoundary
+                𝒞η source.diagram source.cut
                 sourceLabeling sourceCycle)) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
@@ -424,7 +424,7 @@ theorem twoThreeBirth_rawCycleSum
             characterWeight 𝒞η sourceLabeling sourceCycle *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η source.diagram source.cut source.primalBoundary
+                𝒞η source.diagram source.cut
                 sourceLabeling sourceCycle) := by
         apply Eq.trans ?_ (Finset.mul_sum ..).symm
         apply Finset.sum_congr rfl
@@ -437,7 +437,7 @@ theorem twoThreeBirth_rawCycleSum
                   sourceLabeling sourceCycle *
                 canonicalRibbonGraphicalEvaluation 𝒞η.category
                   (canonicalRoleAwareGraphCompiler
-                    𝒞η source.diagram source.cut source.primalBoundary sourceLabeling sourceCycle)) =
+                    𝒞η source.diagram source.cut sourceLabeling sourceCycle)) =
             _
         rfl
 
@@ -452,16 +452,16 @@ theorem oneTwoBirth_preserves_evaluation
     (coordinateBinding :
       coordinates.MatchesOneTwoBirthMeridian)
     (normalForm : IsStandardOneTwoBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (homology.tham.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (homology.tham.mapCoefficients sourceCycle) := by
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
-  unfold evaluateCycle
-  rw [oneTwoBirth_rawCycleSum
+  unfold evaluateCoefficients
+  rw [oneTwoBirth_rawCoefficientSum
     𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
   unfold thamDefinition511Normalization
   rw [counts.2.2]
@@ -488,16 +488,16 @@ theorem twoThreeBirth_preserves_evaluation
     (coordinateBinding :
       coordinates.MatchesTwoThreeBirthComponent)
     (normalForm : IsStandardTwoThreeBirth source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (homology.tham.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (homology.tham.mapCoefficients sourceCycle) := by
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
-  unfold evaluateCycle
-  rw [twoThreeBirth_rawCycleSum
+  unfold evaluateCoefficients
+  rw [twoThreeBirth_rawCoefficientSum
     𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
   rw [counts.1, counts.2.1, counts.2.2]
   exact
@@ -507,7 +507,7 @@ theorem twoThreeBirth_preserves_evaluation
       source.diagram.handles.hThree
       source.diagram.handles.hTwo
       source.diagram.handles.hOne
-      (rawCycleSum 𝒞η source.diagram source.cut source.primalBoundary sourceCycle)).symm
+      (rawCoefficientSum 𝒞η source.diagram source.cut sourceCycle)).symm
 
 theorem removedTwoHandle_ordinaryKirbyWeight
     (𝒞 : BundledPremodularCategory K)
@@ -553,37 +553,37 @@ theorem removedTwoHandle_characterWeight
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
     (removedLabel : 𝒞η.category.simples.Simple) :
     characterWeight 𝒞η
         (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle) =
+        (coordinates.safeCoefficients sourceCycle) =
       characterWeight 𝒞η targetLabeling
-        (transport.mapCycle (coordinates.safeCycle sourceCycle)) := by
+        (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) := by
   classical
   unfold characterWeight
   have unitEquality :
       (∏ i,
         (𝒞η.character.value
           (coordinates.mergeLabeling targetLabeling removedLabel i)) ^
-            ((coordinates.safeCycle sourceCycle).1 i)) =
+            (coordinates.safeCoefficients sourceCycle i)) =
         ∏ i,
           (𝒞η.character.value (targetLabeling i)) ^
-            ((transport.mapCycle
-              (coordinates.safeCycle sourceCycle)).1 i) := by
+            (transport.mapCoefficients
+              (coordinates.safeCoefficients sourceCycle) i) := by
     calc
       (∏ i,
         (𝒞η.character.value
           (coordinates.mergeLabeling targetLabeling removedLabel i)) ^
-            ((coordinates.safeCycle sourceCycle).1 i)) =
+            (coordinates.safeCoefficients sourceCycle i)) =
         ∏ i : Fin target.diagram.handles.hTwo ⊕ Unit,
           match i with
           | .inl old =>
               (𝒞η.character.value (targetLabeling old)) ^
-                ((transport.mapCycle
-                  (coordinates.safeCycle sourceCycle)).1 old)
+                (transport.mapCoefficients
+                  (coordinates.safeCoefficients sourceCycle) old)
           | .inr _ => 1 := by
             symm
             apply Fintype.prod_equiv coordinates.indexEquiv
@@ -599,8 +599,8 @@ theorem removedTwoHandle_characterWeight
       _ =
         ∏ i,
           (𝒞η.character.value (targetLabeling i)) ^
-            ((transport.mapCycle
-              (coordinates.safeCycle sourceCycle)).1 i) := by
+            (transport.mapCoefficients
+              (coordinates.safeCoefficients sourceCycle) i) := by
           simp
   exact congrArg (fun unit : Kˣ => (unit : K)) unitEquality
 
@@ -619,21 +619,21 @@ theorem oneTwoDeath_hasTypedGraphicalNormalForm
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
     (normalForm : IsStandardOneTwoDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
     (removedLabel : 𝒞η.category.simples.Simple) :
     (canonicalRoleAwareGraphCompiler
-        𝒞η source.diagram source.cut source.primalBoundary
+        𝒞η source.diagram source.cut
         (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).interpret =
+        (coordinates.safeCoefficients sourceCycle)).interpret =
       (closedComposeExpression
         (specialCutMeridianExpression 𝒞η.category removedLabel)
         (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.cut target.primalBoundary
+          𝒞η target.diagram target.cut
           targetLabeling
-          (transport.mapCycle
-            (coordinates.safeCycle sourceCycle)))).interpret := by
+          (transport.mapCoefficients
+            (coordinates.safeCoefficients sourceCycle)))).interpret := by
   exact standardOneTwoBirth_compiledExteriorMorphism
     𝒞η.category
     (OneTwoGraphCoordinates.ofRemoved coordinates)
@@ -653,21 +653,21 @@ theorem oneTwoDeath_graphicalFactor
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
     (normalForm : IsStandardOneTwoDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
     (removedLabel : 𝒞η.category.simples.Simple) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.cut source.primalBoundary
+          𝒞η source.diagram source.cut
           (coordinates.mergeLabeling targetLabeling removedLabel)
-          (coordinates.safeCycle sourceCycle)) =
+          (coordinates.safeCoefficients sourceCycle)) =
       specialCutMeridianClosedValue 𝒞η.category removedLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η target.diagram target.cut target.primalBoundary
+            𝒞η target.diagram target.cut
             targetLabeling
-            (transport.mapCycle (coordinates.safeCycle sourceCycle))) := by
+            (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle))) := by
   have interpreted :=
     oneTwoDeath_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -687,21 +687,21 @@ theorem twoThreeDeath_hasTypedGraphicalNormalForm
     (coordinateBinding :
       coordinates.MatchesTwoThreeDeathComponent)
     (normalForm : IsStandardTwoThreeDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
     (removedLabel : 𝒞η.category.simples.Simple) :
     (canonicalRoleAwareGraphCompiler
-        𝒞η source.diagram source.cut source.primalBoundary
+        𝒞η source.diagram source.cut
         (coordinates.mergeLabeling targetLabeling removedLabel)
-        (coordinates.safeCycle sourceCycle)).interpret =
+        (coordinates.safeCoefficients sourceCycle)).interpret =
       (closedComposeExpression
         (ordinaryKirbyLoopExpression 𝒞η.category removedLabel)
         (canonicalRoleAwareGraphCompiler
-          𝒞η target.diagram target.cut target.primalBoundary
+          𝒞η target.diagram target.cut
           targetLabeling
-          (transport.mapCycle
-            (coordinates.safeCycle sourceCycle)))).interpret := by
+          (transport.mapCoefficients
+            (coordinates.safeCoefficients sourceCycle)))).interpret := by
   exact standardTwoThreeBirth_compiledExteriorMorphism
     𝒞η.category
     (TwoThreeGraphCoordinates.ofRemoved coordinates)
@@ -721,21 +721,21 @@ theorem twoThreeDeath_graphicalFactor
     (coordinateBinding :
       coordinates.MatchesTwoThreeDeathComponent)
     (normalForm : IsStandardTwoThreeDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary)
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram)
     (targetLabeling :
       TwoHandleLabeling 𝒞η.category target.diagram)
     (removedLabel : 𝒞η.category.simples.Simple) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (canonicalRoleAwareGraphCompiler
-          𝒞η source.diagram source.cut source.primalBoundary
+          𝒞η source.diagram source.cut
           (coordinates.mergeLabeling targetLabeling removedLabel)
-          (coordinates.safeCycle sourceCycle)) =
+          (coordinates.safeCoefficients sourceCycle)) =
       𝒞η.category.simples.quantumDimension removedLabel *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η target.diagram target.cut target.primalBoundary
+            𝒞η target.diagram target.cut
           targetLabeling
-          (transport.mapCycle (coordinates.safeCycle sourceCycle))) := by
+          (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle))) := by
   have interpreted :=
     twoThreeDeath_hasTypedGraphicalNormalForm
       𝒞η script kind coordinates coordinateBinding normalForm
@@ -753,7 +753,7 @@ theorem twoThreeDeath_graphicalFactor
       𝒞η.category.closedScalar_smul_identity]
   rw [localValue]
 
-theorem oneTwoDeath_rawCycleSum
+theorem oneTwoDeath_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (script : CancellationScript source.diagram target.diagram)
@@ -764,22 +764,22 @@ theorem oneTwoDeath_rawCycleSum
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
     (normalForm : IsStandardOneTwoDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    rawCycleSum 𝒞η source.diagram source.cut source.primalBoundary
-        (coordinates.safeCycle sourceCycle) =
-      rawCycleSum 𝒞η target.diagram target.cut target.primalBoundary
-        (transport.mapCycle (coordinates.safeCycle sourceCycle)) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    rawCoefficientSum 𝒞η source.diagram source.cut
+        (coordinates.safeCoefficients sourceCycle) =
+      rawCoefficientSum 𝒞η target.diagram target.cut
+        (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) := by
   classical
-  unfold rawCycleSum
+  unfold rawCoefficientSum
   calc
     (∑ sourceLabeling,
       ordinaryKirbyWeight 𝒞η.category sourceLabeling *
         characterWeight 𝒞η sourceLabeling
-          (coordinates.safeCycle sourceCycle) *
+          (coordinates.safeCoefficients sourceCycle) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η source.diagram source.cut source.primalBoundary
-            sourceLabeling (coordinates.safeCycle sourceCycle))) =
+            𝒞η source.diagram source.cut
+            sourceLabeling (coordinates.safeCoefficients sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category target.diagram ×
             𝒞η.category.simples.Simple,
@@ -787,12 +787,12 @@ theorem oneTwoDeath_rawCycleSum
             (coordinates.mergeLabeling pair.1 pair.2) *
           characterWeight 𝒞η
             (coordinates.mergeLabeling pair.1 pair.2)
-            (coordinates.safeCycle sourceCycle) *
+            (coordinates.safeCoefficients sourceCycle) *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
             (canonicalRoleAwareGraphCompiler
-              𝒞η source.diagram source.cut source.primalBoundary
+              𝒞η source.diagram source.cut
               (coordinates.mergeLabeling pair.1 pair.2)
-              (coordinates.safeCycle sourceCycle)) := by
+              (coordinates.safeCoefficients sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -805,13 +805,13 @@ theorem oneTwoDeath_rawCycleSum
             specialCutMeridianClosedValue 𝒞η.category removedLabel) *
           (ordinaryKirbyWeight 𝒞η.category targetLabeling *
             characterWeight 𝒞η targetLabeling
-              (transport.mapCycle (coordinates.safeCycle sourceCycle)) *
+              (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η target.diagram target.cut target.primalBoundary
+                𝒞η target.diagram target.cut
                 targetLabeling
-                (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle)))) := by
+                (transport.mapCoefficients
+                  (coordinates.safeCoefficients sourceCycle)))) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -826,13 +826,13 @@ theorem oneTwoDeath_rawCycleSum
       ∑ targetLabeling,
         ordinaryKirbyWeight 𝒞η.category targetLabeling *
           characterWeight 𝒞η targetLabeling
-            (transport.mapCycle (coordinates.safeCycle sourceCycle)) *
+            (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
             (canonicalRoleAwareGraphCompiler
-              𝒞η target.diagram target.cut target.primalBoundary
+              𝒞η target.diagram target.cut
               targetLabeling
-              (transport.mapCycle
-                (coordinates.safeCycle sourceCycle))) := by
+              (transport.mapCoefficients
+                (coordinates.safeCoefficients sourceCycle))) := by
         apply Finset.sum_congr rfl
         intro targetLabeling _
         rw [← Finset.sum_mul]
@@ -840,7 +840,7 @@ theorem oneTwoDeath_rawCycleSum
           𝒞η.category (standard_tensorUnitQuantumDimension 𝒞η.category)]
         simp
 
-theorem twoThreeDeath_rawCycleSum
+theorem twoThreeDeath_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K)
     {source target : HomologicallyMarkedDiagram}
     (script : CancellationScript source.diagram target.diagram)
@@ -851,23 +851,23 @@ theorem twoThreeDeath_rawCycleSum
     (coordinateBinding :
       coordinates.MatchesTwoThreeDeathComponent)
     (normalForm : IsStandardTwoThreeDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    rawCycleSum 𝒞η source.diagram source.cut source.primalBoundary
-        (coordinates.safeCycle sourceCycle) =
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    rawCoefficientSum 𝒞η source.diagram source.cut
+        (coordinates.safeCoefficients sourceCycle) =
       𝒞η.category.globalDimension *
-        rawCycleSum 𝒞η target.diagram target.cut target.primalBoundary
-          (transport.mapCycle (coordinates.safeCycle sourceCycle)) := by
+        rawCoefficientSum 𝒞η target.diagram target.cut
+          (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) := by
   classical
-  unfold rawCycleSum
+  unfold rawCoefficientSum
   calc
     (∑ sourceLabeling,
       ordinaryKirbyWeight 𝒞η.category sourceLabeling *
         characterWeight 𝒞η sourceLabeling
-          (coordinates.safeCycle sourceCycle) *
+          (coordinates.safeCoefficients sourceCycle) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler
-            𝒞η source.diagram source.cut source.primalBoundary
-            sourceLabeling (coordinates.safeCycle sourceCycle))) =
+            𝒞η source.diagram source.cut
+            sourceLabeling (coordinates.safeCoefficients sourceCycle))) =
       ∑ pair :
           TwoHandleLabeling 𝒞η.category target.diagram ×
             𝒞η.category.simples.Simple,
@@ -875,12 +875,12 @@ theorem twoThreeDeath_rawCycleSum
             (coordinates.mergeLabeling pair.1 pair.2) *
           characterWeight 𝒞η
             (coordinates.mergeLabeling pair.1 pair.2)
-            (coordinates.safeCycle sourceCycle) *
+            (coordinates.safeCoefficients sourceCycle) *
           canonicalRibbonGraphicalEvaluation 𝒞η.category
             (canonicalRoleAwareGraphCompiler
-              𝒞η source.diagram source.cut source.primalBoundary
+              𝒞η source.diagram source.cut
               (coordinates.mergeLabeling pair.1 pair.2)
-              (coordinates.safeCycle sourceCycle)) := by
+              (coordinates.safeCoefficients sourceCycle)) := by
         symm
         apply Fintype.sum_equiv
           (coordinates.labelingEquiv 𝒞η.category.simples.Simple)
@@ -893,13 +893,13 @@ theorem twoThreeDeath_rawCycleSum
             𝒞η.category.simples.quantumDimension removedLabel) *
           (ordinaryKirbyWeight 𝒞η.category targetLabeling *
             characterWeight 𝒞η targetLabeling
-              (transport.mapCycle (coordinates.safeCycle sourceCycle)) *
+              (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η target.diagram target.cut target.primalBoundary
+                𝒞η target.diagram target.cut
                 targetLabeling
-                (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle)))) := by
+                (transport.mapCoefficients
+                  (coordinates.safeCoefficients sourceCycle)))) := by
         rw [Fintype.sum_prod_type]
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -916,13 +916,13 @@ theorem twoThreeDeath_rawCycleSum
         ∑ targetLabeling,
           ordinaryKirbyWeight 𝒞η.category targetLabeling *
             characterWeight 𝒞η targetLabeling
-              (transport.mapCycle (coordinates.safeCycle sourceCycle)) *
+              (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) *
             canonicalRibbonGraphicalEvaluation 𝒞η.category
               (canonicalRoleAwareGraphCompiler
-                𝒞η target.diagram target.cut target.primalBoundary
+                𝒞η target.diagram target.cut
                 targetLabeling
-                (transport.mapCycle
-                  (coordinates.safeCycle sourceCycle))) := by
+                (transport.mapCoefficients
+                  (coordinates.safeCoefficients sourceCycle))) := by
         apply Eq.trans ?_ (Finset.mul_sum ..).symm
         apply Finset.sum_congr rfl
         intro targetLabeling _
@@ -931,13 +931,13 @@ theorem twoThreeDeath_rawCycleSum
           𝒞η.category.globalDimension *
               (ordinaryKirbyWeight 𝒞η.category targetLabeling *
                 characterWeight 𝒞η targetLabeling
-                  (transport.mapCycle
-                    (coordinates.safeCycle sourceCycle)) *
+                  (transport.mapCoefficients
+                    (coordinates.safeCoefficients sourceCycle)) *
                 canonicalRibbonGraphicalEvaluation 𝒞η.category
                   (canonicalRoleAwareGraphCompiler
-                    𝒞η target.diagram target.cut target.primalBoundary targetLabeling
-                    (transport.mapCycle
-                      (coordinates.safeCycle sourceCycle)))) =
+                    𝒞η target.diagram target.cut targetLabeling
+                    (transport.mapCoefficients
+                      (coordinates.safeCoefficients sourceCycle)))) =
             _
         rfl
 
@@ -946,14 +946,13 @@ theorem removedTwoHandle_mappedSafe_sameClass
     {transport : ThamHandleChainTransport source target}
     (coordinates :
       RemovedTwoHandleCoordinates source target transport)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    thamCycleClass target.primalBoundary
-        (transport.mapCycle (coordinates.safeCycle sourceCycle)) =
-      thamCycleClass target.primalBoundary
-        (transport.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    thamMarkingClass
+        (transport.mapCoefficients (coordinates.safeCoefficients sourceCycle)) =
+      thamMarkingClass (transport.mapCoefficients sourceCycle) := by
   have mapped :=
-    congrArg transport.inducedH₂
-      (coordinates.safeCycle_sameClass sourceCycle)
+    congrArg transport.inducedMarking
+      (coordinates.safeCoefficients_sameClass sourceCycle)
   exact mapped
 
 theorem oneTwoDeath_preserves_evaluation
@@ -967,34 +966,34 @@ theorem oneTwoDeath_preserves_evaluation
     (coordinateBinding :
       coordinates.MatchesOneTwoDeathMeridian)
     (normalForm : IsStandardOneTwoDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (homology.tham.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (homology.tham.mapCoefficients sourceCycle) := by
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
   calc
-    evaluateCycle 𝒞η source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η source.diagram source.cut source.primalBoundary (coordinates.safeCycle sourceCycle) :=
+    evaluateCoefficients 𝒞η source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η source.diagram source.cut (coordinates.safeCoefficients sourceCycle) :=
       frozenFrontendRepresentativeIndependence
-        𝒞η source.diagram source.cut source.primalBoundary
-        sourceCycle (coordinates.safeCycle sourceCycle)
-        (coordinates.safeCycle_sameClass sourceCycle).symm
+        𝒞η source.diagram source.cut
+        sourceCycle (coordinates.safeCoefficients sourceCycle)
+        (coordinates.safeCoefficients_sameClass sourceCycle).symm
     _ =
-      evaluateCycle 𝒞η target.diagram target.cut target.primalBoundary
-        (homology.tham.mapCycle (coordinates.safeCycle sourceCycle)) := by
-      unfold evaluateCycle thamDefinition511Normalization
-      rw [oneTwoDeath_rawCycleSum
+      evaluateCoefficients 𝒞η target.diagram target.cut
+        (homology.tham.mapCoefficients (coordinates.safeCoefficients sourceCycle)) := by
+      unfold evaluateCoefficients thamDefinition511Normalization
+      rw [oneTwoDeath_rawCoefficientSum
         𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
       rw [counts.2.2]
     _ =
-      evaluateCycle 𝒞η target.diagram target.cut target.primalBoundary (homology.tham.mapCycle sourceCycle) :=
+      evaluateCoefficients 𝒞η target.diagram target.cut (homology.tham.mapCoefficients sourceCycle) :=
       frozenFrontendRepresentativeIndependence
-        𝒞η target.diagram target.cut target.primalBoundary
-        (homology.tham.mapCycle (coordinates.safeCycle sourceCycle))
-        (homology.tham.mapCycle sourceCycle)
+        𝒞η target.diagram target.cut
+        (homology.tham.mapCoefficients (coordinates.safeCoefficients sourceCycle))
+        (homology.tham.mapCoefficients sourceCycle)
         (removedTwoHandle_mappedSafe_sameClass coordinates sourceCycle)
 
 theorem twoThreeDeath_preserves_evaluation
@@ -1008,36 +1007,36 @@ theorem twoThreeDeath_preserves_evaluation
     (coordinateBinding :
       coordinates.MatchesTwoThreeDeathComponent)
     (normalForm : IsStandardTwoThreeDeath source.diagram target.diagram source.cut target.cut)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (homology.tham.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (homology.tham.mapCoefficients sourceCycle) := by
   have counts := script.handleCountChangeIsStandard
   simp [CancellationHandleCountChangeIsStandard, kind] at counts
   calc
-    evaluateCycle 𝒞η source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η source.diagram source.cut source.primalBoundary (coordinates.safeCycle sourceCycle) :=
+    evaluateCoefficients 𝒞η source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η source.diagram source.cut (coordinates.safeCoefficients sourceCycle) :=
       frozenFrontendRepresentativeIndependence
-        𝒞η source.diagram source.cut source.primalBoundary
-        sourceCycle (coordinates.safeCycle sourceCycle)
-        (coordinates.safeCycle_sameClass sourceCycle).symm
+        𝒞η source.diagram source.cut
+        sourceCycle (coordinates.safeCoefficients sourceCycle)
+        (coordinates.safeCoefficients_sameClass sourceCycle).symm
     _ =
-      evaluateCycle 𝒞η target.diagram target.cut target.primalBoundary
-        (homology.tham.mapCycle (coordinates.safeCycle sourceCycle)) := by
-      unfold evaluateCycle
-      rw [twoThreeDeath_rawCycleSum
+      evaluateCoefficients 𝒞η target.diagram target.cut
+        (homology.tham.mapCoefficients (coordinates.safeCoefficients sourceCycle)) := by
+      unfold evaluateCoefficients
+      rw [twoThreeDeath_rawCoefficientSum
         𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
       unfold thamDefinition511Normalization
       rw [counts.2.2, pow_succ]
       field_simp
     _ =
-      evaluateCycle 𝒞η target.diagram target.cut target.primalBoundary (homology.tham.mapCycle sourceCycle) :=
+      evaluateCoefficients 𝒞η target.diagram target.cut (homology.tham.mapCoefficients sourceCycle) :=
       frozenFrontendRepresentativeIndependence
-        𝒞η target.diagram target.cut target.primalBoundary
-        (homology.tham.mapCycle (coordinates.safeCycle sourceCycle))
-        (homology.tham.mapCycle sourceCycle)
+        𝒞η target.diagram target.cut
+        (homology.tham.mapCoefficients (coordinates.safeCoefficients sourceCycle))
+        (homology.tham.mapCoefficients sourceCycle)
         (removedTwoHandle_mappedSafe_sameClass coordinates sourceCycle)
 
 end

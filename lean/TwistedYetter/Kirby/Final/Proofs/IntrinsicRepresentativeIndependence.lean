@@ -6,9 +6,9 @@ import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
 This is the corrected route.  Component colours, internal graphical
 forward/dual polarity, and dotted-cut input/output incidence are never
-identified.  The THAM degree-three-chain coefficient supplies the character
-exponent once; dotted direction supplies only the boundary partition used to
-form an output-to-input ratio.
+identified.  A visible primal one-handle cochain supplies one integer
+coefficient; dotted direction supplies only the boundary partition used to
+prove that the corresponding `∂₂ᵀ` coboundary factor is invisible.
 -/
 
 namespace TwistedYetter.Kirby.Final.Proofs
@@ -113,18 +113,17 @@ theorem twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
   exact twoOneBoundaryCharacterFactor_absorbs_in_linearContext
     𝒞η diagram presentation labeling one exponent cut exterior
 
-/-- The THAM boundary coordinate is the incidence pairing with a one-chain. -/
-theorem intrinsic_thamBoundaryThree_apply_eq_sum_incidence
+/-- The visible THAM coboundary is the incidence pairing with a one-cochain. -/
+theorem intrinsic_thamVisibleCoboundary_apply_eq_sum_incidence
     (diagram : SpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne)
     (two : Fin diagram.handles.hTwo) :
-    primal.thamBoundaryThree oneChain two =
+    thamVisibleCoboundary diagram oneChain two =
       ∑ one : Fin diagram.handles.hOne,
         twoOneIncidence diagram one two * oneChain one := by
   classical
-  unfold PrimalDegreeThreeBoundaryData.thamBoundaryThree
-    transposeAddHom coordinatePairing primalBoundaryTwo
+  unfold thamVisibleCoboundary transposeAddHom coordinatePairing
+    primalBoundaryTwo
   change
     (∑ one : Fin diagram.handles.hOne,
       diagram.handles.boundaryTwo
@@ -135,30 +134,29 @@ theorem intrinsic_thamBoundaryThree_apply_eq_sum_incidence
   intro one _
   rfl
 
-/-- Adding one THAM boundary multiplies the character weight by its factor. -/
-theorem intrinsic_characterWeight_add_thamBoundaryAsCycle
+/-- Adding one visible THAM coboundary multiplies the character weight by its factor. -/
+theorem intrinsic_characterWeight_add_thamVisibleCoboundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles primal)
+    (coefficients : ThamTwoHandleCoefficients diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     characterWeight 𝒞η labeling
-        (cycle + thamBoundaryAsCycle primal oneChain) =
-      characterWeight 𝒞η labeling cycle *
+        (coefficients + thamVisibleCoboundary diagram oneChain) =
+      characterWeight 𝒞η labeling coefficients *
         ((∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
-            (primal.thamBoundaryThree oneChain two) : Kˣ) : K) := by
+            (thamVisibleCoboundary diagram oneChain two) : Kˣ) : K) := by
   unfold characterWeight
   change
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (cycle.1 two + primal.thamBoundaryThree oneChain two) : Kˣ) : K) =
+        (coefficients two + thamVisibleCoboundary diagram oneChain two) : Kˣ) : K) =
       ((∏ two : Fin diagram.handles.hTwo,
-        𝒞η.character.value (labeling two) ^ cycle.1 two : Kˣ) : K) *
+        𝒞η.character.value (labeling two) ^ coefficients two : Kˣ) : K) *
         ((∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
-            primal.thamBoundaryThree oneChain two : Kˣ) : K)
+            thamVisibleCoboundary diagram oneChain two : Kˣ) : K)
   simp only [zpow_add, Finset.prod_mul_distrib, Units.val_mul]
 
 private theorem intrinsic_finset_prod_zpow_eq_zpow_sum
@@ -182,12 +180,11 @@ one-handle boundary-row factors.  No puncture-level exponent occurs here.
 theorem thamBoundaryCharacterProduct_eq_twoOneProduct
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (primal.thamBoundaryThree oneChain two) : Kˣ) : K) =
+        (thamVisibleCoboundary diagram oneChain two) : Kˣ) : K) =
       ∏ one : Fin diagram.handles.hOne,
         (((∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
@@ -196,15 +193,15 @@ theorem thamBoundaryCharacterProduct_eq_twoOneProduct
   have boundary_expansion :
       (∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^
-          (primal.thamBoundaryThree oneChain two)) =
+          (thamVisibleCoboundary diagram oneChain two)) =
         ∏ two : Fin diagram.handles.hTwo,
           ∏ one : Fin diagram.handles.hOne,
             𝒞η.character.value (labeling two) ^
               (twoOneIncidence diagram one two * oneChain one) := by
     apply Finset.prod_congr rfl
     intro two _
-    rw [intrinsic_thamBoundaryThree_apply_eq_sum_incidence
-      diagram primal oneChain two]
+    rw [intrinsic_thamVisibleCoboundary_apply_eq_sum_incidence
+      diagram oneChain two]
     exact
       (intrinsic_finset_prod_zpow_eq_zpow_sum
         (Finset.univ : Finset (Fin diagram.handles.hOne))
@@ -263,22 +260,21 @@ theorem twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
   exact twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
     𝒞η diagram presentation labeling one (oneChain one)
 
-/-- Fixed-label evaluation is unchanged after adding a THAM boundary. -/
+/-- Fixed-label evaluation is unchanged after adding a visible coboundary. -/
 theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    (cycle : ThamTwoCycles primal)
+    (coefficients : ThamTwoHandleCoefficients diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
     characterWeight 𝒞η labeling
-          (cycle + thamBoundaryAsCycle primal oneChain) *
+          (coefficients + thamVisibleCoboundary diagram oneChain) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
               𝒞η.category diagram presentation labeling)) =
-      characterWeight 𝒞η labeling cycle *
+      characterWeight 𝒞η labeling coefficients *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (.morphism
             (compileCutOpenExteriorMorphism
@@ -291,19 +287,19 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
   let boundaryFactor :=
     ((∏ two : Fin diagram.handles.hTwo,
       𝒞η.character.value (labeling two) ^
-        (primal.thamBoundaryThree oneChain two) : Kˣ) : K)
+        (thamVisibleCoboundary diagram oneChain two) : Kˣ) : K)
   calc
     _ =
-        (characterWeight 𝒞η labeling cycle *
+        (characterWeight 𝒞η labeling coefficients *
           boundaryFactor) * graphicalValue := by
-      rw [intrinsic_characterWeight_add_thamBoundaryAsCycle
-        𝒞η diagram primal labeling cycle oneChain]
+      rw [intrinsic_characterWeight_add_thamVisibleCoboundary
+        𝒞η diagram labeling coefficients oneChain]
     _ =
-        characterWeight 𝒞η labeling cycle *
+        characterWeight 𝒞η labeling coefficients *
           (boundaryFactor * graphicalValue) := by
       rw [mul_assoc]
     _ =
-        characterWeight 𝒞η labeling cycle *
+        characterWeight 𝒞η labeling coefficients *
           ((∏ one : Fin diagram.handles.hOne,
             (((∏ two : Fin diagram.handles.hTwo,
               𝒞η.character.value (labeling two) ^
@@ -311,24 +307,23 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
             graphicalValue) := by
       dsimp only [boundaryFactor]
       rw [thamBoundaryCharacterProduct_eq_twoOneProduct
-        𝒞η diagram primal labeling oneChain]
+        𝒞η diagram labeling oneChain]
     _ = _ := by
       dsimp only [graphicalValue]
       rw [twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
         𝒞η diagram presentation labeling oneChain]
 
-/-- The complete frozen cycle evaluator is unchanged by one boundary. -/
-theorem intrinsic_evaluateCycle_add_thamBoundaryAsCycle
+/-- The complete evaluator is unchanged by one visible coboundary. -/
+theorem intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal)
+    (coefficients : ThamTwoHandleCoefficients diagram)
     (oneChain : HandleChainGroup diagram.handles.hOne) :
-    evaluateCycle 𝒞η diagram presentation primal
-        (cycle + thamBoundaryAsCycle primal oneChain) =
-      evaluateCycle 𝒞η diagram presentation primal cycle := by
-  unfold evaluateCycle
+    evaluateCoefficients 𝒞η diagram presentation
+        (coefficients + thamVisibleCoboundary diagram oneChain) =
+      evaluateCoefficients 𝒞η diagram presentation coefficients := by
+  unfold evaluateCoefficients
   apply congrArg
   apply Finset.sum_congr rfl
   intro labeling _
@@ -341,48 +336,47 @@ theorem intrinsic_evaluateCycle_add_thamBoundaryAsCycle
   calc
     ordinaryKirbyWeight 𝒞η.category labeling *
           characterWeight 𝒞η labeling
-            (cycle + thamBoundaryAsCycle primal oneChain) *
+            (coefficients + thamVisibleCoboundary diagram oneChain) *
         graphicalValue =
       ordinaryKirbyWeight 𝒞η.category labeling *
         (characterWeight 𝒞η labeling
-            (cycle + thamBoundaryAsCycle primal oneChain) *
+            (coefficients + thamVisibleCoboundary diagram oneChain) *
           graphicalValue) := by
       rw [mul_assoc]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
-        (characterWeight 𝒞η labeling cycle * graphicalValue) := by
+        (characterWeight 𝒞η labeling coefficients * graphicalValue) := by
       rw [intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
-        𝒞η diagram presentation primal labeling cycle oneChain]
+        𝒞η diagram presentation labeling coefficients oneChain]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
-          characterWeight 𝒞η labeling cycle * graphicalValue := by
+          characterWeight 𝒞η labeling coefficients * graphicalValue := by
       rw [mul_assoc]
 
 /--
-The corrected frozen role-aware evaluator depends only on the THAM-side
-second-homology class.
+The corrected frozen role-aware evaluator depends only on the visible ambient
+THAM marking class.
 -/
 theorem intrinsicFrozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
+    (presentation : DottedCutPresentation diagram) :
     RepresentativeIndependenceStatement
-      𝒞η diagram presentation primal := by
+      𝒞η diagram presentation := by
   intro left right same_class
   change
     (QuotientAddGroup.mk'
-      (thamBoundaryAsCycle primal).range) left =
+      (thamVisibleCoboundary diagram).range) left =
       (QuotientAddGroup.mk'
-        (thamBoundaryAsCycle primal).range) right at same_class
+        (thamVisibleCoboundary diagram).range) right at same_class
   obtain ⟨boundary, boundary_mem, left_add_boundary_eq⟩ :=
     (QuotientAddGroup.mk'_eq_mk'
-      (thamBoundaryAsCycle primal).range).mp same_class
+      (thamVisibleCoboundary diagram).range).mp same_class
   obtain ⟨oneChain, oneChain_eq⟩ := boundary_mem
   subst boundary
   rw [← left_add_boundary_eq]
-  exact (intrinsic_evaluateCycle_add_thamBoundaryAsCycle
-    𝒞η diagram presentation primal left oneChain).symm
+  exact (intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
+    𝒞η diagram presentation left oneChain).symm
 
 end
 

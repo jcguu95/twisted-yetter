@@ -235,8 +235,6 @@ private def positiveHopfHandleData :
       left_inv := by intro component; rfl
       right_inv := by intro component; cases component; rfl }
   boundaryTwo := 0
-  boundaryThree := 0
-  boundary_squared_zero := rfl
 
 /-- The standard Kirby diagram for `S^2 \times S^2`. -/
 def positiveZeroFramedHopfDiagram : SpecialKirbyDiagram where
@@ -264,15 +262,10 @@ private def positiveHopfSecondHandle :
     ⟨(1 : Fin 2), by
       decide⟩
 
-/-- The explicit THAM cycle with coordinates `(a,b)` in the two Hopf-link
-components.  Since the diagram has no primal three-handles, every pair of
-integers is a THAM two-cycle. -/
-def positiveHopfCycle (a b : ℤ) :
-    ThamTwoCycles
-      positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData :=
-  ⟨fun handle => if positiveHopfTwoHandleEquiv handle = 0 then a else b, by
-    ext index
-    exact Fin.elim0 index⟩
+/-- The explicit THAM coefficients `(a,b)` on the two Hopf-link components. -/
+def positiveHopfCoefficients (a b : ℤ) :
+    ThamTwoHandleCoefficients positiveZeroFramedHopfDiagram :=
+  fun handle => if positiveHopfTwoHandleEquiv handle = 0 then a else b
 
 @[simp]
 private theorem positiveHopfTwoHandleEquiv_symm_zero :
@@ -289,33 +282,30 @@ private theorem positiveHopfTwoHandleEquiv_symm_one :
   rfl
 
 @[simp]
-private theorem positiveHopfCycle_first (a b : ℤ) :
-    (positiveHopfCycle a b).1 positiveHopfFirstHandle = a := by
+private theorem positiveHopfCoefficients_first (a b : ℤ) :
+    positiveHopfCoefficients a b positiveHopfFirstHandle = a := by
   have handle_eq :
       positiveHopfTwoHandleEquiv positiveHopfFirstHandle = 0 := by
     rw [← positiveHopfTwoHandleEquiv_symm_zero]
     exact positiveHopfTwoHandleEquiv.apply_symm_apply 0
-  simp [positiveHopfCycle, handle_eq]
+  simp [positiveHopfCoefficients, handle_eq]
 
 @[simp]
-private theorem positiveHopfCycle_second (a b : ℤ) :
-    (positiveHopfCycle a b).1 positiveHopfSecondHandle = b := by
+private theorem positiveHopfCoefficients_second (a b : ℤ) :
+    positiveHopfCoefficients a b positiveHopfSecondHandle = b := by
   have handle_eq :
       positiveHopfTwoHandleEquiv positiveHopfSecondHandle = 1 := by
     rw [← positiveHopfTwoHandleEquiv_symm_one]
     exact positiveHopfTwoHandleEquiv.apply_symm_apply 1
-  norm_num [positiveHopfCycle, handle_eq]
+  norm_num [positiveHopfCoefficients, handle_eq]
 
-/-- Every THAM two-cycle on the standard Hopf diagram is recovered from its
-two handle coefficients.  This is a statement about the explicit two-handle
-complex; it does not identify primal and turned-over coordinates. -/
-theorem positiveHopfCycle_of_coefficients
-    (cycle : ThamTwoCycles
-      positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData) :
-    positiveHopfCycle
-        (cycle.1 positiveHopfFirstHandle)
-        (cycle.1 positiveHopfSecondHandle) = cycle := by
-  apply Subtype.ext
+/-- Every coefficient vector is recovered from its two ordered coordinates. -/
+theorem positiveHopfCoefficients_of_coefficients
+    (coefficients :
+      ThamTwoHandleCoefficients positiveZeroFramedHopfDiagram) :
+    positiveHopfCoefficients
+        (coefficients positiveHopfFirstHandle)
+        (coefficients positiveHopfSecondHandle) = coefficients := by
   funext handle
   by_cases first : positiveHopfTwoHandleEquiv handle = 0
   · have handle_eq : handle = positiveHopfFirstHandle := by
@@ -324,7 +314,7 @@ theorem positiveHopfCycle_of_coefficients
       rw [← positiveHopfTwoHandleEquiv_symm_zero]
       exact positiveHopfTwoHandleEquiv.apply_symm_apply 0
     subst handle
-    exact positiveHopfCycle_first _ _
+    exact positiveHopfCoefficients_first _ _
   · have second : positiveHopfTwoHandleEquiv handle = 1 := by
       omega
     have handle_eq : handle = positiveHopfSecondHandle := by
@@ -333,7 +323,7 @@ theorem positiveHopfCycle_of_coefficients
       rw [← positiveHopfTwoHandleEquiv_symm_one]
       exact positiveHopfTwoHandleEquiv.apply_symm_apply 1
     subst handle
-    exact positiveHopfCycle_second _ _
+    exact positiveHopfCoefficients_second _ _
 
 @[simp]
 private theorem positiveHopf_twoHandleIndex_symm
@@ -1099,81 +1089,82 @@ The only topology input in this file.  It identifies one explicit finite
 Kirby diagram with the familiar manifold `S^2 x S^2`; it contains no category,
 character, graphical evaluation, or scalar equality.
 -/
-axiom positiveZeroFramedHopf_realizes_sphereTwoProduct :
-  OrientedDiffeomorphism
-    (realizeSpecialKirbyDiagram positiveZeroFramedHopfDiagram)
-    sphereTwoProduct
+axiom positiveZeroFramedHopf_presents_sphereTwoProduct :
+  PresentsClosedFourManifold
+    positiveZeroFramedHopfDiagram sphereTwoProduct
+
+/-- Every manifold class has a THAM marking on the standard Hopf diagram. -/
+axiom positiveZeroFramedHopf_marking_exists
+    (alpha : ManifoldH₂ sphereTwoProduct) :
+    ∃ thamAlpha : ThamMarkingClass positiveZeroFramedHopfDiagram,
+      RepresentsPoincareDualClass
+        positiveZeroFramedHopf_presents_sphereTwoProduct thamAlpha alpha
+
+/-- The literal zero THAM marking represents `PD(0)`. -/
+axiom positiveZeroFramedHopf_zero_represents_zero :
+  RepresentsPoincareDualClass
+    positiveZeroFramedHopf_presents_sphereTwoProduct
+    (0 : ThamMarkingClass positiveZeroFramedHopfDiagram)
+    (0 : ManifoldH₂ sphereTwoProduct)
 
 /-- The canonical zero-marked representative supplied by the standard Hopf diagram. -/
 noncomputable def positiveZeroFramedHopfRepresentative :
     SpecialKirbyRepresentativeOf sphereTwoProduct where
   diagram := positiveZeroFramedHopfDiagram
   cut := positiveZeroFramedHopfCut
-  realizationDiffeomorphism :=
-    positiveZeroFramedHopf_realizes_sphereTwoProduct
-  alpha := 0
+  presents := positiveZeroFramedHopf_presents_sphereTwoProduct
+  thamAlpha := 0
 
 theorem positiveZeroFramedHopfRepresentative_represents_zero :
     positiveZeroFramedHopfRepresentative.representsHomologyClass 0 := by
-  unfold SpecialKirbyRepresentativeOf.representsHomologyClass
-  exact map_zero _
+  exact positiveZeroFramedHopf_zero_represents_zero
 
 /-- The canonical representative of an arbitrary manifold marking on the
-standard Hopf diagram.  Its primal handle class is obtained by applying the
-inverse of the exact handle-homology comparison; the THAM-side class is then
-derived through the already fixed turnover/Poincare-duality equivalence. -/
+standard Hopf diagram.  The standard-model topology relation supplies an
+ambient THAM class representing the Poincare dual of that marking. -/
 noncomputable def positiveZeroFramedHopfRepresentativeOf
     (alpha : ManifoldH₂ sphereTwoProduct) :
     SpecialKirbyRepresentativeOf sphereTwoProduct where
   diagram := positiveZeroFramedHopfDiagram
   cut := positiveZeroFramedHopfCut
-  realizationDiffeomorphism :=
-    positiveZeroFramedHopf_realizes_sphereTwoProduct
-  alpha :=
-    ((specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram).trans
-      (inducedH₂ positiveZeroFramedHopf_realizes_sphereTwoProduct)).symm alpha
+  presents := positiveZeroFramedHopf_presents_sphereTwoProduct
+  thamAlpha := (positiveZeroFramedHopf_marking_exists alpha).choose
 
 theorem positiveZeroFramedHopfRepresentativeOf_represents
     (alpha : ManifoldH₂ sphereTwoProduct) :
     (positiveZeroFramedHopfRepresentativeOf alpha).representsHomologyClass
       alpha := by
-  unfold SpecialKirbyRepresentativeOf.representsHomologyClass
-  exact
-    (((specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram).trans
-      (inducedH₂ positiveZeroFramedHopf_realizes_sphereTwoProduct)).apply_symm_apply
-        alpha)
+  exact (positiveZeroFramedHopf_marking_exists alpha).choose_spec
 
-/-- A canonical cycle representative of the THAM-side class associated to a
+/-- A canonical coefficient representative of the THAM-side class associated to a
 manifold marking on `S² × S²`.  Choosing a quotient representative is
 noncomputable, but the evaluator is already proved independent of this choice. -/
-noncomputable def sphereTwoProductHopfCycle
+noncomputable def sphereTwoProductHopfCoefficients
     (alpha : ManifoldH₂ sphereTwoProduct) :
-    ThamTwoCycles
-      positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData :=
+    ThamTwoHandleCoefficients positiveZeroFramedHopfDiagram :=
   Quotient.out (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha
 
-/-- The two coefficients of the canonical THAM cycle in the ordered Hopf-link
-components.  These are evaluator-side Hopf coordinates, not an asserted
-coordinatewise identity with a primal handle basis. -/
+/-- The two coefficients of the chosen THAM representative in the ordered
+Hopf-link components.  These are evaluator-side Hopf coordinates, not an
+asserted coordinatewise identity with a primal handle basis. -/
 noncomputable def sphereTwoProductHopfCoordinates
     (alpha : ManifoldH₂ sphereTwoProduct) : ℤ × ℤ :=
-  ((sphereTwoProductHopfCycle alpha).1 positiveHopfFirstHandle,
-    (sphereTwoProductHopfCycle alpha).1 positiveHopfSecondHandle)
+  (sphereTwoProductHopfCoefficients alpha positiveHopfFirstHandle,
+    sphereTwoProductHopfCoefficients alpha positiveHopfSecondHandle)
 
-theorem positiveHopfCycle_sphereTwoProductHopfCoordinates_class
+theorem positiveHopfCoefficients_sphereTwoProductHopfCoordinates_class
     (alpha : ManifoldH₂ sphereTwoProduct) :
-    thamCycleClass
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle
+    thamMarkingClass
+        (positiveHopfCoefficients
           (sphereTwoProductHopfCoordinates alpha).1
           (sphereTwoProductHopfCoordinates alpha).2) =
       (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha := by
   change
-    thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle
-          ((sphereTwoProductHopfCycle alpha).1 positiveHopfFirstHandle)
-          ((sphereTwoProductHopfCycle alpha).1 positiveHopfSecondHandle)) = _
-  rw [positiveHopfCycle_of_coefficients (sphereTwoProductHopfCycle alpha)]
+    thamMarkingClass
+        (positiveHopfCoefficients
+          (sphereTwoProductHopfCoefficients alpha positiveHopfFirstHandle)
+          (sphereTwoProductHopfCoefficients alpha positiveHopfSecondHandle)) = _
+  rw [positiveHopfCoefficients_of_coefficients (sphereTwoProductHopfCoefficients alpha)]
   exact Quotient.out_eq
     (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha
 
@@ -1198,7 +1189,7 @@ theorem twistedYetter_sphereTwoProduct_eq_hopfRepresentative
       𝒞η
       (fun marked =>
         frozenFrontendRepresentativeIndependence
-          𝒞η marked.diagram marked.cut marked.primalBoundary)
+          𝒞η marked.diagram marked.cut)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       sphereTwoProduct sphereTwoProduct
       (identityOrientedDiffeomorphism sphereTwoProduct) alpha
@@ -1224,7 +1215,7 @@ theorem twistedYetter_sphereTwoProduct_zero_eq_hopfRepresentative
       𝒞η
       (fun marked =>
         frozenFrontendRepresentativeIndependence
-          𝒞η marked.diagram marked.cut marked.primalBoundary)
+          𝒞η marked.diagram marked.cut)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       sphereTwoProduct sphereTwoProduct
       (identityOrientedDiffeomorphism sphereTwoProduct) 0
@@ -1694,31 +1685,29 @@ theorem positiveHopf_compile_closedScalar
   rw [positiveHopf_compile_eq_componentwise,
     componentwisePositiveHopfMorphism_eq_trace]
 
-/-- The character factor of the Hopf cycle with coordinates `(a,b)`. -/
+/-- The character factor of the Hopf marking with coefficients `(a,b)`. -/
 theorem positiveHopf_characterWeight
     (𝒞η : TwistedPremodularCategory K)
     (labeling : TwoHandleLabeling 𝒞η.category positiveZeroFramedHopfDiagram)
     (a b : ℤ) :
     characterWeight
-        (primal :=
-          positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData)
-        𝒞η labeling (positiveHopfCycle a b) =
+        𝒞η labeling (positiveHopfCoefficients a b) =
       ((((𝒞η.character.value (labeling positiveHopfFirstHandle)) ^ a : Kˣ) : K)) *
         ((((𝒞η.character.value (labeling positiveHopfSecondHandle)) ^ b : Kˣ) : K)) := by
   unfold characterWeight
   rw [Fintype.prod_equiv positiveHopfTwoHandleEquiv
     (fun handle =>
       (𝒞η.character.value (labeling handle)) ^
-        (positiveHopfCycle a b).1 handle)
+        (positiveHopfCoefficients a b handle))
     (fun handle =>
       (𝒞η.character.value
           (labeling (positiveHopfTwoHandleEquiv.symm handle))) ^
-        (positiveHopfCycle a b).1
+        (positiveHopfCoefficients a b)
           (positiveHopfTwoHandleEquiv.symm handle)) (by simp)]
   rw [Fin.prod_univ_two]
   simp only [positiveHopfTwoHandleEquiv_symm_zero,
-    positiveHopfTwoHandleEquiv_symm_one, positiveHopfCycle_first,
-    positiveHopfCycle_second, Units.val_mul]
+    positiveHopfTwoHandleEquiv_symm_one, positiveHopfCoefficients_first,
+    positiveHopfCoefficients_second, Units.val_mul]
 
 /-- The finite premodular Hopf-block sum for a marking with coordinates
 `(a,b)` in the hyperbolic basis. -/
@@ -1739,8 +1728,7 @@ theorem positiveHopf_rawEvaluatorSummand
     (a b : ℤ) :
     rawEvaluatorSummand 𝒞η positiveZeroFramedHopfDiagram
         positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle a b) labeling =
+        (positiveHopfCoefficients a b) labeling =
       𝒞η.category.quantumDimension (labeling positiveHopfFirstHandle) *
         𝒞η.category.quantumDimension (labeling positiveHopfSecondHandle) *
           ((((𝒞η.character.value
@@ -1775,15 +1763,14 @@ theorem positiveHopf_rawEvaluatorSummand
   ring
 
 /-- The marked raw Hopf evaluation is the finite two-label sum. -/
-theorem positiveHopf_rawCycleSum
+theorem positiveHopf_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K) (a b : ℤ) :
-    rawCycleSum 𝒞η positiveZeroFramedHopfDiagram
+    rawCoefficientSum 𝒞η positiveZeroFramedHopfDiagram
         positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle a b) =
+        (positiveHopfCoefficients a b) =
       markedHyperbolicBlockSum 𝒞η a b := by
   classical
-  rw [rawCycleSum_eq_sum_rawEvaluatorSummand]
+  rw [rawCoefficientSum_eq_sum_rawEvaluatorSummand]
   unfold markedHyperbolicBlockSum
   calc
     _ = ∑ labels : 𝒞η.category.Simple × 𝒞η.category.Simple,
@@ -1817,48 +1804,46 @@ theorem positiveHopf_thamDefinition511Normalization
     positiveHopfHandleData]
 
 /-- The fully normalized marked hyperbolic block. -/
-theorem positiveHopf_evaluateCycle
+theorem positiveHopf_evaluateCoefficients
     (𝒞η : TwistedPremodularCategory K) (a b : ℤ) :
-    evaluateCycle 𝒞η positiveZeroFramedHopfDiagram
+    evaluateCoefficients 𝒞η positiveZeroFramedHopfDiagram
         positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle a b) =
+        (positiveHopfCoefficients a b) =
       𝒞η.category.globalDimension * markedHyperbolicBlockSum 𝒞η a b := by
-  unfold evaluateCycle
-  rw [positiveHopf_rawCycleSum]
+  unfold evaluateCoefficients
+  rw [positiveHopf_rawCoefficientSum]
   rw [positiveHopf_thamDefinition511Normalization]
 
 /-- The evaluator of the arbitrary-marked Hopf representative may be computed
-using the explicit two-coordinate THAM cycle. -/
-theorem positiveHopf_evaluateMarking_eq_coordinateCycle
+using the explicit two-coordinate THAM coefficient vector. -/
+theorem positiveHopf_evaluateMarking_eq_coordinateCoefficients
     (𝒞η : TwistedPremodularCategory K)
     (alpha : ManifoldH₂ sphereTwoProduct) :
     evaluateMarkedDiagram 𝒞η
         (positiveZeroFramedHopfRepresentativeOf alpha).toHomologicallyMarkedDiagram =
-      evaluateCycle 𝒞η positiveZeroFramedHopfDiagram
+      evaluateCoefficients 𝒞η positiveZeroFramedHopfDiagram
         positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle
+        (positiveHopfCoefficients
           (sphereTwoProductHopfCoordinates alpha).1
           (sphereTwoProductHopfCoordinates alpha).2) := by
   apply frozenFrontendRepresentativeIndependence
   change
-    thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+    thamMarkingClass
         (Quotient.out
           (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha) =
-      thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
-        (positiveHopfCycle
+      thamMarkingClass
+        (positiveHopfCoefficients
           (sphereTwoProductHopfCoordinates alpha).1
           (sphereTwoProductHopfCoordinates alpha).2)
   have outClass :
-      thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+      thamMarkingClass
           (Quotient.out
             (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha) =
         (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha := by
     exact Quotient.out_eq
       (positiveZeroFramedHopfRepresentativeOf alpha).thamAlpha
   exact outClass.trans
-    (positiveHopfCycle_sphereTwoProductHopfCoordinates_class alpha).symm
+    (positiveHopfCoefficients_sphereTwoProductHopfCoordinates_class alpha).symm
 
 /-- The unnormalized arbitrary-marking value on `S² × S²`. -/
 theorem twistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum
@@ -1870,34 +1855,28 @@ theorem twistedYetter_sphereTwoProduct_eq_markedHyperbolicBlockSum
           (sphereTwoProductHopfCoordinates alpha).1
           (sphereTwoProductHopfCoordinates alpha).2 := by
   rw [twistedYetter_sphereTwoProduct_eq_hopfRepresentative,
-    positiveHopf_evaluateMarking_eq_coordinateCycle,
-    positiveHopf_evaluateCycle]
+    positiveHopf_evaluateMarking_eq_coordinateCoefficients,
+    positiveHopf_evaluateCoefficients]
 
-/-- Evaluate the zero marking using the literal zero THAM cycle. -/
-theorem positiveHopf_evaluateMarking_eq_zeroCycle
+/-- Evaluate the zero marking using the literal zero THAM coefficient vector. -/
+theorem positiveHopf_evaluateMarking_eq_zeroCoefficients
     (𝒞η : TwistedPremodularCategory K) :
     evaluateMarkedDiagram 𝒞η
         positiveZeroFramedHopfRepresentative.toHomologicallyMarkedDiagram =
-      evaluateCycle 𝒞η positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0 := by
+      evaluateCoefficients 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut 0 := by
   apply frozenFrontendRepresentativeIndependence
   change
-    thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+    thamMarkingClass
         (Quotient.out positiveZeroFramedHopfRepresentative.thamAlpha) =
-      thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0
+      thamMarkingClass 0
   rw [show
-    thamCycleClass positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData
+    thamMarkingClass
         (Quotient.out positiveZeroFramedHopfRepresentative.thamAlpha) =
       positiveZeroFramedHopfRepresentative.thamAlpha by
     exact Quotient.out_eq positiveZeroFramedHopfRepresentative.thamAlpha]
   rw [show positiveZeroFramedHopfRepresentative.thamAlpha = 0 by
-    change
-      (turnoverPoincareDualityEquiv positiveZeroFramedHopfDiagram
-        (specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram)) 0 = 0
-    exact
-      (turnoverPoincareDualityEquiv positiveZeroFramedHopfDiagram
-        (specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram)).map_zero]
+    rfl]
   rfl
 
 /-- One zero-marking Hopf summand is the product of its two Kirby weights and
@@ -1906,8 +1885,7 @@ theorem positiveHopf_rawEvaluatorSummand_zero
     (𝒞η : TwistedPremodularCategory K)
     (labeling : TwoHandleLabeling 𝒞η.category positiveZeroFramedHopfDiagram) :
     rawEvaluatorSummand 𝒞η positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0 labeling =
+        positiveZeroFramedHopfCut 0 labeling =
       𝒞η.category.quantumDimension (labeling positiveHopfFirstHandle) *
         𝒞η.category.quantumDimension (labeling positiveHopfSecondHandle) *
           positiveHopfLinkScalar 𝒞η.category
@@ -1935,28 +1913,25 @@ theorem positiveHopf_rawEvaluatorSummand_zero
       positiveHopfTwoHandleEquiv_symm_one]
   have characterWeight_eq :
       characterWeight
-          (primal :=
-            positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData)
           𝒞η labeling
-          (0 : ThamTwoCycles
-            positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData) = 1 := by
+          (0 : ThamTwoHandleCoefficients
+            positiveZeroFramedHopfDiagram) = 1 := by
     simp [characterWeight]
   rw [kirbyWeight_eq, characterWeight_eq, mul_one]
   rw [positiveHopf_compile_closedScalar]
 
 /-- The raw zero-marking value is the full two-label positive Hopf sum. -/
-theorem positiveHopf_rawCycleSum_zero
+theorem positiveHopf_rawCoefficientSum_zero
     (𝒞η : TwistedPremodularCategory K) :
-    rawCycleSum 𝒞η positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0 =
+    rawCoefficientSum 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut 0 =
       ∑ i : 𝒞η.category.Simple,
         ∑ j : 𝒞η.category.Simple,
           𝒞η.category.quantumDimension i *
             𝒞η.category.quantumDimension j *
               positiveHopfLinkScalar 𝒞η.category i j := by
   classical
-  rw [rawCycleSum_eq_sum_rawEvaluatorSummand]
+  rw [rawCoefficientSum_eq_sum_rawEvaluatorSummand]
   calc
     _ = ∑ labels : 𝒞η.category.Simple × 𝒞η.category.Simple,
         𝒞η.category.quantumDimension labels.1 *
@@ -1992,14 +1967,13 @@ axiom eno_muegerCenterGlobalDimension_ne_zero
     transparentGlobalDimension 𝒞 ≠ 0
 
 /-- Kirby-colour killing evaluates the full positive Hopf sum. -/
-theorem positiveHopf_rawCycleSum_eq
+theorem positiveHopf_rawCoefficientSum_eq
     (𝒞η : TwistedPremodularCategory K) :
-    rawCycleSum 𝒞η positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0 =
+    rawCoefficientSum 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut 0 =
       𝒞η.category.globalDimension *
         transparentGlobalDimension 𝒞η.category := by
-  rw [positiveHopf_rawCycleSum_zero]
+  rw [positiveHopf_rawCoefficientSum_zero]
   classical
   rw [Finset.sum_comm]
   calc
@@ -2048,18 +2022,17 @@ theorem markedHyperbolicBlockSum_zero_eq
     markedHyperbolicBlockSum 𝒞η 0 0 =
       𝒞η.category.globalDimension *
         transparentGlobalDimension 𝒞η.category := by
-  rw [← positiveHopf_rawCycleSum 𝒞η 0 0]
-  convert positiveHopf_rawCycleSum_eq 𝒞η using 1
+  rw [← positiveHopf_rawCoefficientSum 𝒞η 0 0]
+  convert positiveHopf_rawCoefficientSum_eq 𝒞η using 1
 
-theorem positiveHopf_evaluateCycle_zero_eq
+theorem positiveHopf_evaluateCoefficients_zero_eq
     (𝒞η : TwistedPremodularCategory K) :
-    evaluateCycle 𝒞η positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfCut
-        positiveZeroFramedHopfDiagram.primalDegreeThreeBoundaryData 0 =
+    evaluateCoefficients 𝒞η positiveZeroFramedHopfDiagram
+        positiveZeroFramedHopfCut 0 =
       𝒞η.category.globalDimension ^ 2 *
         transparentGlobalDimension 𝒞η.category := by
-  unfold evaluateCycle thamDefinition511Normalization
-  rw [positiveHopf_rawCycleSum_eq]
+  unfold evaluateCoefficients thamDefinition511Normalization
+  rw [positiveHopf_rawCoefficientSum_eq]
   simp [positiveZeroFramedHopfDiagram, positiveHopfHandleData]
   ring
 
@@ -2069,8 +2042,8 @@ theorem twistedYetter_sphereTwoProduct_zero_eq
       𝒞η.category.globalDimension ^ 2 *
         transparentGlobalDimension 𝒞η.category := by
   rw [twistedYetter_sphereTwoProduct_zero_eq_hopfRepresentative]
-  rw [positiveHopf_evaluateMarking_eq_zeroCycle]
-  exact positiveHopf_evaluateCycle_zero_eq 𝒞η
+  rw [positiveHopf_evaluateMarking_eq_zeroCoefficients]
+  exact positiveHopf_evaluateCoefficients_zero_eq 𝒞η
 
 theorem stabilizationMultiplier_eq
     (𝒞η : TwistedPremodularCategory K) :

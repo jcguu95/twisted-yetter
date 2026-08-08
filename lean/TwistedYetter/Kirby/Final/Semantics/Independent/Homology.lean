@@ -1,19 +1,28 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 
 /-!
-# Independent semantics: primal and THAM-side handle homology
+# Independent semantics: visible THAM-side marking coordinates
 
-The public Kirby terminology in this file is the usual one:
-
-* literal dotted components are primal one-handles;
-* ordinary framed components are primal two-handles; and
-* the closing data records primal three-handles.
+The public Kirby terminology is the ordinary one: dotted components are
+primal one-handles, ordinary framed components are primal two-handles, and
+`hThree` is only the number of unrecorded closing primal three-handles.
 
 Tham, Definition 5.11 is applied to the handle decomposition turned upside
-down.  Thus the evaluator sees primal indices `1, 2, 3` as THAM indices
-`3, 2, 1`.  Neither convention is intrinsically preferred.  This file makes
-their conversion explicit so that primal cycle coordinates can never be used
-silently as THAM-side character exponents.
+down.  The evaluator therefore attaches integral exponents to primal
+two-handles.  It does not need the attaching spheres of the closing
+three-handles, nor an arbitrary matrix pretending to encode them.
+
+For a visible special Kirby diagram `D`, the only canonical identification
+between coefficient vectors is addition of a transposed visible
+one--two-handle boundary.  We therefore form the ambient quotient
+
+  `C₂(D) / im(∂₂(D)ᵀ)`.
+
+This quotient is deliberately not named `H²`: for a genuine closed handle
+realization, actual second cohomology is the subgroup represented by cocycles.
+The external topology relation in `EntranceAxioms` says which ambient marking
+represents `PD(alpha)`.  This separation prevents an arbitrary, unrecorded
+degree-three boundary from becoming part of the raw diagram semantics.
 
 Reference: Ying Hong Tham, *On the Category of Boundary Values in the extended
 Crane-Yetter TQFT* (2021), Definition 5.11 (PDF p. 58) and the dual-handle
@@ -31,9 +40,9 @@ abbrev intrinsicDottedCutBoundaryCoefficient :=
 
 /-!
 There is deliberately no separate map `PunctureDirection → ℤ`.  The only
-integer extracted from dotted-cut variance is this aggregate boundary
+integer extracted from dotted-cut variance is the aggregate boundary
 coefficient: output occurrences minus input occurrences.  In particular it
-cannot be reused as a ribbon duality choice or as the evaluator's cycle
+cannot be reused as a ribbon duality choice or as the evaluator's character
 exponent.
 -/
 
@@ -58,72 +67,19 @@ theorem twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
         (diagram.handles.twoHandleIndex two).1 :=
   presentation.incidence_agrees_with_handle_boundary one two
 
-/-- The primal cellular boundary `C₂ → C₁` in ordinary Kirby terminology. -/
+/-- The visible primal cellular boundary `C₂ → C₁`. -/
 def primalBoundaryTwo
     (diagram : SpecialKirbyDiagram) :
     HandleChainGroup diagram.handles.hTwo →+
       HandleChainGroup diagram.handles.hOne :=
   diagram.handles.boundaryTwo
 
-/--
-The primal degree-three boundary belongs to the special closing data.  Its
-algebraic coherence is the ordinary handle-chain identity `∂₂ ∂₃ = 0`.
--/
-structure PrimalDegreeThreeBoundaryData
-    (diagram : SpecialKirbyDiagram) where
-  boundaryThree :
-    HandleChainGroup diagram.handles.hThree →+
-      HandleChainGroup diagram.handles.hTwo
-  boundary_squared_zero :
-    (primalBoundaryTwo diagram).comp boundaryThree = 0
-
-/-- The degree-three boundary already stored in the closed diagram. -/
-def SpecialKirbyDiagram.primalDegreeThreeBoundaryData
-    (diagram : SpecialKirbyDiagram) :
-    PrimalDegreeThreeBoundaryData diagram where
-  boundaryThree := diagram.handles.boundaryThree
-  boundary_squared_zero := diagram.handles.boundary_squared_zero
-
-def PrimalTwoCycles
-    (diagram : SpecialKirbyDiagram) :=
-  (primalBoundaryTwo diagram).ker
-
-def primalBoundaryAsCycle
-    {diagram : SpecialKirbyDiagram}
-    (degreeThree : PrimalDegreeThreeBoundaryData diagram) :
-    HandleChainGroup diagram.handles.hThree →+ PrimalTwoCycles diagram where
-  toFun chain :=
-    ⟨degreeThree.boundaryThree chain, by
-      change
-        ((primalBoundaryTwo diagram).comp degreeThree.boundaryThree) chain = 0
-      rw [degreeThree.boundary_squared_zero]
-      rfl⟩
-  map_zero' := by
-    ext
-    simp
-  map_add' left right := by
-    ext
-    simp
-
-/-- The ordinary Kirby-side group `ker(∂₂) / im(∂₃)`. -/
-abbrev PrimalKirbyH₂
-    {diagram : SpecialKirbyDiagram}
-    (degreeThree : PrimalDegreeThreeBoundaryData diagram) :=
-  PrimalTwoCycles diagram ⧸ (primalBoundaryAsCycle degreeThree).range
-
-def primalCycleClass
-    {diagram : SpecialKirbyDiagram}
-    (degreeThree : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : PrimalTwoCycles diagram) :
-    PrimalKirbyH₂ degreeThree :=
-  QuotientAddGroup.mk cycle
-
 /-- Integral coordinate pairing in a fixed finite handle basis. -/
 def coordinatePairing {count : ℕ}
     (left right : HandleChainGroup count) : ℤ :=
   ∑ index, left index * right index
 
-/-- Integral unit vector in a fixed handle basis. -/
+/-- Integral unit vector in a fixed finite handle basis. -/
 def coordinateUnit (count : ℕ) (index coordinate : Fin count) : ℤ :=
   if coordinate = index then 1 else 0
 
@@ -144,8 +100,8 @@ theorem coordinatePairing_unit_right
   simp [coordinatePairing, coordinateUnit]
 
 /--
-The transpose of an integral map between the finite handle-coordinate groups.
-This is executable finite-basis algebra; no caller supplies the transpose.
+The transpose of an integral map between finite coordinate groups.  This is
+ordinary finite-basis algebra and does not encode a three-handle attachment.
 -/
 def transposeAddHom {sourceCount targetCount : ℕ}
     (map : HandleChainGroup sourceCount →+
@@ -163,29 +119,8 @@ def transposeAddHom {sourceCount targetCount : ℕ}
     funext sourceIndex
     simp [coordinatePairing, mul_add, Finset.sum_add_distrib]
 
-namespace PrimalDegreeThreeBoundaryData
-
-/-- THAM `∂₂ : C₂ → C₁`, computed as the transpose of primal `∂₃`. -/
-def thamBoundaryTwo
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
-    HandleChainGroup diagram.handles.hTwo →+
-      HandleChainGroup diagram.handles.hThree :=
-  transposeAddHom primal.boundaryThree
-
-/-- THAM `∂₃ : C₃ → C₂`, computed as the transpose of primal `∂₂`. -/
-def thamBoundaryThree
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
-    HandleChainGroup diagram.handles.hOne →+
-      HandleChainGroup diagram.handles.hTwo :=
-  transposeAddHom (primalBoundaryTwo diagram)
-
-/--
-Finite-basis adjointness for the computed transpose.  This elementary
-identity is the only fact needed below to turn primal `∂² = 0` upside down.
--/
-theorem transpose_adjoint
+/-- Finite-basis adjointness for the computed transpose. -/
+theorem transposeAddHom_adjoint
     {sourceCount targetCount : ℕ}
     (map : HandleChainGroup sourceCount →+
       HandleChainGroup targetCount)
@@ -250,146 +185,39 @@ theorem transpose_adjoint
       intro targetIndex _
       ring
 
-theorem boundaryTwo_is_transpose
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (threeChain : HandleChainGroup diagram.handles.hThree)
-    (twoChain : HandleChainGroup diagram.handles.hTwo) :
-    coordinatePairing (primal.boundaryThree threeChain) twoChain =
-      coordinatePairing threeChain (primal.thamBoundaryTwo twoChain) :=
-  transpose_adjoint primal.boundaryThree threeChain twoChain
+/-- The THAM-side visible coboundary `C¹ → C²`, namely `∂₂ᵀ`. -/
+def thamVisibleCoboundary
+    (diagram : SpecialKirbyDiagram) :
+    HandleChainGroup diagram.handles.hOne →+
+      HandleChainGroup diagram.handles.hTwo :=
+  transposeAddHom (primalBoundaryTwo diagram)
 
-theorem boundaryThree_is_transpose
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (twoChain : HandleChainGroup diagram.handles.hTwo)
-    (oneChain : HandleChainGroup diagram.handles.hOne) :
-    coordinatePairing (primalBoundaryTwo diagram twoChain) oneChain =
-      coordinatePairing twoChain (primal.thamBoundaryThree oneChain) :=
-  transpose_adjoint (primalBoundaryTwo diagram) twoChain oneChain
+/-- Integral coefficients attached by the evaluator to primal two-handles. -/
+abbrev ThamTwoHandleCoefficients
+    (diagram : SpecialKirbyDiagram) :=
+  HandleChainGroup diagram.handles.hTwo
 
 /--
-For one dotted handle generator, the corresponding THAM degree-three
-boundary coordinate is the intrinsic output count minus the input count.
-This is finite-basis algebra plus the proved puncture-count identity; it is
-not an external topology axiom.
+The ambient marking quotient visible without three-handle attaching data.
+Actual Poincare-dual classes are selected inside this quotient by an explicit
+external topology relation.
 -/
-theorem thamBoundaryThree_coordinateUnit_eq_intrinsicDottedCutCoefficient
+abbrev ThamMarkingClass
+    (diagram : SpecialKirbyDiagram) :=
+  ThamTwoHandleCoefficients diagram ⧸
+    (thamVisibleCoboundary diagram).range
+
+def thamMarkingClass
     {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (presentation : DottedCutPresentation diagram)
-    (one : Fin diagram.handles.hOne)
-    (two : Fin diagram.handles.hTwo) :
-    primal.thamBoundaryThree
-          (coordinateUnit diagram.handles.hOne one) two =
-      intrinsicDottedCutBoundaryCoefficient
-        (presentation.cut.punctureWord
-          (diagram.handles.oneHandleIndex one).1
-          (diagram.handles.oneHandleIndex one).2)
-        (diagram.handles.twoHandleIndex two).1 := by
-  change
-    coordinatePairing
-        (primalBoundaryTwo diagram
-          (coordinateUnit diagram.handles.hTwo two))
-        (coordinateUnit diagram.handles.hOne one) = _
-  rw [coordinatePairing_unit_right]
-  change twoOneIncidence diagram one two = _
-  exact presentation.incidence_agrees_with_handle_boundary one two
+    (coefficients : ThamTwoHandleCoefficients diagram) :
+    ThamMarkingClass diagram :=
+  QuotientAddGroup.mk coefficients
 
-/-- The THAM-side transposed maps square to zero, proved from primal `∂²=0`. -/
-theorem tham_boundary_squared_zero
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (oneChain : HandleChainGroup diagram.handles.hOne) :
-    primal.thamBoundaryTwo (primal.thamBoundaryThree oneChain) = 0 := by
-  funext index
-  calc
-    primal.thamBoundaryTwo (primal.thamBoundaryThree oneChain) index =
-        coordinatePairing
-          (coordinateUnit diagram.handles.hThree index)
-          (primal.thamBoundaryTwo
-            (primal.thamBoundaryThree oneChain)) :=
-      (coordinatePairing_unit_left diagram.handles.hThree index _).symm
-    _ = coordinatePairing
-          (primal.boundaryThree
-            (coordinateUnit diagram.handles.hThree index))
-          (primal.thamBoundaryThree oneChain) :=
-      (primal.boundaryTwo_is_transpose
-        (coordinateUnit diagram.handles.hThree index)
-        (primal.thamBoundaryThree oneChain)).symm
-    _ = coordinatePairing
-          (primalBoundaryTwo diagram
-            (primal.boundaryThree
-              (coordinateUnit diagram.handles.hThree index)))
-          oneChain :=
-      (primal.boundaryThree_is_transpose
-        (primal.boundaryThree
-          (coordinateUnit diagram.handles.hThree index))
-        oneChain).symm
-    _ = 0 := by
-      have chainZero :=
-        DFunLike.congr_fun primal.boundary_squared_zero
-          (coordinateUnit diagram.handles.hThree index)
-      change
-        primalBoundaryTwo diagram
-            (primal.boundaryThree
-              (coordinateUnit diagram.handles.hThree index)) =
-          0 at chainZero
-      rw [chainZero]
-      simp [coordinatePairing]
-    _ = (0 : HandleChainGroup diagram.handles.hThree) index := rfl
-
-end PrimalDegreeThreeBoundaryData
-
-def ThamTwoCycles
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :=
-  primal.thamBoundaryTwo.ker
-
-def thamBoundaryAsCycle
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
-    HandleChainGroup diagram.handles.hOne →+ ThamTwoCycles primal where
-  toFun chain :=
-    ⟨primal.thamBoundaryThree chain,
-      primal.tham_boundary_squared_zero chain⟩
-  map_zero' := by
-    ext
-    simp
-  map_add' left right := by
-    ext
-    simp
-
-/-- The evaluator-side second homology of the turned-over handle complex. -/
-abbrev ThamKirbyH₂
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram) :=
-  ThamTwoCycles primal ⧸ (thamBoundaryAsCycle primal).range
-
-def thamCycleClass
-    {diagram : SpecialKirbyDiagram}
-    (primal : PrimalDegreeThreeBoundaryData diagram)
-    (cycle : ThamTwoCycles primal) :
-    ThamKirbyH₂ primal :=
-  QuotientAddGroup.mk cycle
-
-/--
-A diagram used by the local graphical evaluator stores exactly the THAM-side
-homology class which the evaluator consumes.  It does not store a caller-
-supplied primal-to-THAM equivalence.  The manifold-level entrance constructs
-this class canonically from a primal class and the explicit Poincaré-duality
-topology boundary.
--/
+/-- A cut-open diagram together with the ambient THAM marking it evaluates. -/
 structure HomologicallyMarkedDiagram where
   diagram : SpecialKirbyDiagram
   cut : DottedCutPresentation diagram
-  thamAlpha : ThamKirbyH₂ diagram.primalDegreeThreeBoundaryData
-
-/-- The marked diagram has exactly the chain boundary stored in its diagram. -/
-abbrev HomologicallyMarkedDiagram.primalBoundary
-    (marked : HomologicallyMarkedDiagram) :
-    PrimalDegreeThreeBoundaryData marked.diagram :=
-  marked.diagram.primalDegreeThreeBoundaryData
+  thamAlpha : ThamMarkingClass diagram
 
 end
 

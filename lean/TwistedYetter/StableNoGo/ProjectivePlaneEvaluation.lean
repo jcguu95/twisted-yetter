@@ -12,10 +12,9 @@ only these diagrams and their exact homology coordinates with `CP²`,
 `CPbar²`, and `S⁴`.  All category and evaluator equalities are theorem
 obligations below that boundary.
 
-For the negative block we choose the manifold generator opposite to the
-oriented two-handle core.  Consequently a manifold marking `n h₋` has primal
-coordinate `-n` and THAM evaluator coordinate `n`.  This is the convention
-used by `negativeShiftedGaussSum`; no dotted-disk sign enters here.
+For the negative block we choose the manifold generator so that the explicit
+THAM coefficient `n` represents `PD(n h₋)`.  This is the convention used by
+`negativeShiftedGaussSum`; no dotted-disk sign enters here.
 -/
 
 namespace TwistedYetter.StableNoGo
@@ -179,8 +178,6 @@ private def oneFramedUnknotHandleData (sign : CrossingSign) :
       left_inv := by intro component; rfl
       right_inv := by intro component; cases component; rfl }
   boundaryTwo := 0
-  boundaryThree := 0
-  boundary_squared_zero := rfl
 
 /-- The special Kirby diagram of a `±1`-framed unknot. -/
 def oneFramedUnknotDiagram (sign : CrossingSign) : SpecialKirbyDiagram where
@@ -431,25 +428,15 @@ private theorem oneFramedUnknot_two_one_orientations_differ
   simp [oneFramedUnknotDiagram, oneFramedUnknotTrace,
     oneFramedUnknotStrands]
 
-private def oneFramedUnknotPrimalCycle
+private def oneFramedUnknotCoefficients
     (sign : CrossingSign) (n : ℤ) :
-    PrimalTwoCycles (oneFramedUnknotDiagram sign) :=
-  ⟨fun _ => n, by ext one; exact Fin.elim0 one⟩
-
-private def oneFramedUnknotPrimalClass
-    (sign : CrossingSign) (n : ℤ) :
-    PrimalKirbyH₂ (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData :=
-  primalCycleClass _ (oneFramedUnknotPrimalCycle sign n)
-
-private def oneFramedUnknotThamCycle
-    (sign : CrossingSign) (n : ℤ) :
-    ThamTwoCycles (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData :=
-  ⟨fun _ => n, by ext three; exact Fin.elim0 three⟩
+    ThamTwoHandleCoefficients (oneFramedUnknotDiagram sign) :=
+  fun _ => n
 
 private def oneFramedUnknotThamClass
     (sign : CrossingSign) (n : ℤ) :
-    ThamKirbyH₂ (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData :=
-  thamCycleClass _ (oneFramedUnknotThamCycle sign n)
+    ThamMarkingClass (oneFramedUnknotDiagram sign) :=
+  thamMarkingClass (oneFramedUnknotCoefficients sign n)
 
 private theorem oneFramedUnknot_eventZeroContextualEdge
     (𝒞 : BundledPremodularCategory K)
@@ -775,9 +762,8 @@ theorem oneFramedUnknot_compiledScalar
         (canonicalRoleAwareGraphCompiler 𝒞η
           (oneFramedUnknotDiagram sign)
           (oneFramedUnknotCut sign)
-          (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData
           (oneFramedUnknotLabeling 𝒞η.category sign simple)
-          (oneFramedUnknotThamCycle sign n)) =
+          (oneFramedUnknotCoefficients sign n)) =
       𝒞η.category.quantumDimension simple *
         match sign with
         | .positive => simpleTwistScalar 𝒞η simple
@@ -803,8 +789,7 @@ theorem oneFramedUnknot_rawEvaluatorSummand
     rawEvaluatorSummand 𝒞η
         (oneFramedUnknotDiagram sign)
         (oneFramedUnknotCut sign)
-        (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData
-        (oneFramedUnknotThamCycle sign n)
+        (oneFramedUnknotCoefficients sign n)
         (oneFramedUnknotLabeling 𝒞η.category sign simple) =
       𝒞η.category.quantumDimension simple ^ 2 *
         (match sign with
@@ -820,105 +805,79 @@ theorem oneFramedUnknot_rawEvaluatorSummand
       𝒞η.category.simples_quantumDimension_eq]]
   rw [show characterWeight 𝒞η
       (oneFramedUnknotLabeling 𝒞η.category sign simple)
-      (oneFramedUnknotThamCycle sign n) =
+      (oneFramedUnknotCoefficients sign n) =
         ((((𝒞η.character.value simple) ^ n : Kˣ) : K)) by
     simp [characterWeight, oneFramedUnknotDiagram,
       oneFramedUnknotHandleData, oneFramedUnknotLabeling,
-      oneFramedUnknotThamCycle]]
+      oneFramedUnknotCoefficients]]
   rw [oneFramedUnknot_compiledScalar 𝒞η sign n simple]
   ring
 
 /-! ## Exact topology and coordinate bindings -/
 
-axiom positiveOneFramedUnknot_realizes_complexProjectivePlane :
-  OrientedDiffeomorphism
-    (realizeSpecialKirbyDiagram (oneFramedUnknotDiagram .positive))
-    complexProjectivePlane
+axiom positiveOneFramedUnknot_presents_complexProjectivePlane :
+  PresentsClosedFourManifold
+    (oneFramedUnknotDiagram .positive) complexProjectivePlane
 
-axiom negativeOneFramedUnknot_realizes_reversedComplexProjectivePlane :
-  OrientedDiffeomorphism
-    (realizeSpecialKirbyDiagram (oneFramedUnknotDiagram .negative))
-    reversedComplexProjectivePlane
+axiom negativeOneFramedUnknot_presents_reversedComplexProjectivePlane :
+  PresentsClosedFourManifold
+    (oneFramedUnknotDiagram .negative) reversedComplexProjectivePlane
 
-/-- Positive block: primal coordinate `n` is the manifold class `n h₊`. -/
-axiom positiveOneFramedUnknot_primalCoordinate
+/-- The THAM coefficient `n` on the positive block represents `PD(n h₊)`. -/
+axiom positiveOneFramedUnknot_represents
     (n : ℤ) :
-    inducedH₂ positiveOneFramedUnknot_realizes_complexProjectivePlane
-        (specialKirbyDiagram_computesH₂
-          (oneFramedUnknotDiagram .positive)
-          (oneFramedUnknotPrimalClass .positive n)) =
-      n • positiveProjectivePlaneGenerator
+    RepresentsPoincareDualClass
+        positiveOneFramedUnknot_presents_complexProjectivePlane
+        (oneFramedUnknotThamClass .positive n)
+        (n • positiveProjectivePlaneGenerator)
 
-/-- Negative block: by convention primal coordinate `-n` is `n h₋`. -/
-axiom negativeOneFramedUnknot_primalCoordinate
+/-- The THAM coefficient `n` on the negative block represents `PD(n h₋)`. -/
+axiom negativeOneFramedUnknot_represents
     (n : ℤ) :
-    inducedH₂ negativeOneFramedUnknot_realizes_reversedComplexProjectivePlane
-        (specialKirbyDiagram_computesH₂
-          (oneFramedUnknotDiagram .negative)
-          (oneFramedUnknotPrimalClass .negative (-n))) =
-      n • negativeProjectivePlaneGenerator
-
-/-- Positive block: the corresponding THAM evaluator coordinate is `n`. -/
-axiom positiveOneFramedUnknot_turnoverCoordinate
-    (n : ℤ) :
-    turnoverPoincareDualityEquiv
-        (oneFramedUnknotDiagram .positive)
-        (specialKirbyDiagram_computesH₂
-          (oneFramedUnknotDiagram .positive))
-        (oneFramedUnknotPrimalClass .positive n) =
-      oneFramedUnknotThamClass .positive n
-
-/-- Negative block: primal coordinate `-n` has THAM evaluator coordinate `n`. -/
-axiom negativeOneFramedUnknot_turnoverCoordinate
-    (n : ℤ) :
-    turnoverPoincareDualityEquiv
-        (oneFramedUnknotDiagram .negative)
-        (specialKirbyDiagram_computesH₂
-          (oneFramedUnknotDiagram .negative))
-        (oneFramedUnknotPrimalClass .negative (-n)) =
-      oneFramedUnknotThamClass .negative n
+    RepresentsPoincareDualClass
+        negativeOneFramedUnknot_presents_reversedComplexProjectivePlane
+        (oneFramedUnknotThamClass .negative n)
+        (n • negativeProjectivePlaneGenerator)
 
 /-- The canonical marked positive projective-plane representative. -/
 noncomputable def positiveProjectivePlaneRepresentative (n : ℤ) :
     SpecialKirbyRepresentativeOf complexProjectivePlane where
   diagram := oneFramedUnknotDiagram .positive
   cut := oneFramedUnknotCut .positive
-  realizationDiffeomorphism :=
-    positiveOneFramedUnknot_realizes_complexProjectivePlane
-  alpha := oneFramedUnknotPrimalClass .positive n
+  presents := positiveOneFramedUnknot_presents_complexProjectivePlane
+  thamAlpha := oneFramedUnknotThamClass .positive n
 
 theorem positiveProjectivePlaneRepresentative_represents
     (n : ℤ) :
     (positiveProjectivePlaneRepresentative n).representsHomologyClass
       (n • positiveProjectivePlaneGenerator) := by
-  exact positiveOneFramedUnknot_primalCoordinate n
+  exact positiveOneFramedUnknot_represents n
 
 theorem positiveProjectivePlaneRepresentative_thamAlpha
     (n : ℤ) :
     (positiveProjectivePlaneRepresentative n).thamAlpha =
       oneFramedUnknotThamClass .positive n := by
-  exact positiveOneFramedUnknot_turnoverCoordinate n
+  rfl
 
 /-- The canonical marked reverse projective-plane representative. -/
 noncomputable def negativeProjectivePlaneRepresentative (n : ℤ) :
     SpecialKirbyRepresentativeOf reversedComplexProjectivePlane where
   diagram := oneFramedUnknotDiagram .negative
   cut := oneFramedUnknotCut .negative
-  realizationDiffeomorphism :=
-    negativeOneFramedUnknot_realizes_reversedComplexProjectivePlane
-  alpha := oneFramedUnknotPrimalClass .negative (-n)
+  presents := negativeOneFramedUnknot_presents_reversedComplexProjectivePlane
+  thamAlpha := oneFramedUnknotThamClass .negative n
 
 theorem negativeProjectivePlaneRepresentative_represents
     (n : ℤ) :
     (negativeProjectivePlaneRepresentative n).representsHomologyClass
       (n • negativeProjectivePlaneGenerator) := by
-  exact negativeOneFramedUnknot_primalCoordinate n
+  exact negativeOneFramedUnknot_represents n
 
 theorem negativeProjectivePlaneRepresentative_thamAlpha
     (n : ℤ) :
     (negativeProjectivePlaneRepresentative n).thamAlpha =
       oneFramedUnknotThamClass .negative n := by
-  exact negativeOneFramedUnknot_turnoverCoordinate n
+  rfl
 
 private theorem twistedYetter_eq_projectivePlaneRepresentative
     (𝒞η : TwistedPremodularCategory K)
@@ -946,7 +905,7 @@ private theorem twistedYetter_eq_projectivePlaneRepresentative
           𝒞η
           (fun marked =>
             frozenFrontendRepresentativeIndependence
-              𝒞η marked.diagram marked.cut marked.primalBoundary)
+              𝒞η marked.diagram marked.cut)
           (frozenFrontendLocalMoveInvariance 𝒞η)
           complexProjectivePlane complexProjectivePlane
           (identityOrientedDiffeomorphism complexProjectivePlane)
@@ -966,7 +925,7 @@ private theorem twistedYetter_eq_projectivePlaneRepresentative
           𝒞η
           (fun marked =>
             frozenFrontendRepresentativeIndependence
-              𝒞η marked.diagram marked.cut marked.primalBoundary)
+              𝒞η marked.diagram marked.cut)
           (frozenFrontendLocalMoveInvariance 𝒞η)
           reversedComplexProjectivePlane reversedComplexProjectivePlane
           (identityOrientedDiffeomorphism reversedComplexProjectivePlane)
@@ -977,7 +936,7 @@ private theorem twistedYetter_eq_projectivePlaneRepresentative
             rw [inducedH₂_identityOrientedDiffeomorphism]
             exact negativeProjectivePlaneRepresentative_represents n)
 
-private theorem projectivePlane_evaluateMarking_eq_explicitCycle
+private theorem projectivePlane_evaluateMarking_eq_explicitCoefficients
     (𝒞η : TwistedPremodularCategory K)
     (sign : CrossingSign) (n : ℤ) :
     evaluateMarkedDiagram 𝒞η
@@ -986,18 +945,17 @@ private theorem projectivePlane_evaluateMarking_eq_explicitCycle
             (positiveProjectivePlaneRepresentative n).toHomologicallyMarkedDiagram
         | .negative =>
             (negativeProjectivePlaneRepresentative n).toHomologicallyMarkedDiagram) =
-      evaluateCycle 𝒞η (oneFramedUnknotDiagram sign)
+      evaluateCoefficients 𝒞η (oneFramedUnknotDiagram sign)
         (oneFramedUnknotCut sign)
-        (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData
-        (oneFramedUnknotThamCycle sign n) := by
+        (oneFramedUnknotCoefficients sign n) := by
   cases sign with
   | positive =>
       apply frozenFrontendRepresentativeIndependence
       change
-        thamCycleClass _
+        thamMarkingClass
             (Quotient.out (positiveProjectivePlaneRepresentative n).thamAlpha) =
-          thamCycleClass _ (oneFramedUnknotThamCycle .positive n)
-      rw [show thamCycleClass _
+          thamMarkingClass (oneFramedUnknotCoefficients .positive n)
+      rw [show thamMarkingClass
           (Quotient.out (positiveProjectivePlaneRepresentative n).thamAlpha) =
           (positiveProjectivePlaneRepresentative n).thamAlpha by
         exact Quotient.out_eq _]
@@ -1006,28 +964,27 @@ private theorem projectivePlane_evaluateMarking_eq_explicitCycle
   | negative =>
       apply frozenFrontendRepresentativeIndependence
       change
-        thamCycleClass _
+        thamMarkingClass
             (Quotient.out (negativeProjectivePlaneRepresentative n).thamAlpha) =
-          thamCycleClass _ (oneFramedUnknotThamCycle .negative n)
-      rw [show thamCycleClass _
+          thamMarkingClass (oneFramedUnknotCoefficients .negative n)
+      rw [show thamMarkingClass
           (Quotient.out (negativeProjectivePlaneRepresentative n).thamAlpha) =
           (negativeProjectivePlaneRepresentative n).thamAlpha by
         exact Quotient.out_eq _]
       rw [negativeProjectivePlaneRepresentative_thamAlpha]
       rfl
 
-theorem oneFramedUnknot_rawCycleSum
+theorem oneFramedUnknot_rawCoefficientSum
     (𝒞η : TwistedPremodularCategory K)
     (sign : CrossingSign) (n : ℤ) :
-    rawCycleSum 𝒞η (oneFramedUnknotDiagram sign)
+    rawCoefficientSum 𝒞η (oneFramedUnknotDiagram sign)
         (oneFramedUnknotCut sign)
-        (oneFramedUnknotDiagram sign).primalDegreeThreeBoundaryData
-        (oneFramedUnknotThamCycle sign n) =
+        (oneFramedUnknotCoefficients sign n) =
       match sign with
       | .positive => positiveShiftedGaussSum 𝒞η n
       | .negative => negativeShiftedGaussSum 𝒞η n := by
   classical
-  rw [rawCycleSum_eq_sum_rawEvaluatorSummand]
+  rw [rawCoefficientSum_eq_sum_rawEvaluatorSummand]
   cases sign with
   | positive =>
       unfold positiveShiftedGaussSum
@@ -1064,9 +1021,9 @@ theorem twistedYetter_complexProjectivePlane
         ⟨complexProjectivePlane, n • positiveProjectivePlaneGenerator⟩ =
       𝒞η.category.globalDimension * positiveShiftedGaussSum 𝒞η n := by
   rw [twistedYetter_eq_projectivePlaneRepresentative 𝒞η .positive n]
-  rw [projectivePlane_evaluateMarking_eq_explicitCycle 𝒞η .positive n]
-  unfold evaluateCycle thamDefinition511Normalization
-  rw [oneFramedUnknot_rawCycleSum]
+  rw [projectivePlane_evaluateMarking_eq_explicitCoefficients 𝒞η .positive n]
+  unfold evaluateCoefficients thamDefinition511Normalization
+  rw [oneFramedUnknot_rawCoefficientSum]
   simp [oneFramedUnknotDiagram, oneFramedUnknotHandleData]
 
 theorem twistedYetter_reversedComplexProjectivePlane
@@ -1075,9 +1032,9 @@ theorem twistedYetter_reversedComplexProjectivePlane
         ⟨reversedComplexProjectivePlane, n • negativeProjectivePlaneGenerator⟩ =
       𝒞η.category.globalDimension * negativeShiftedGaussSum 𝒞η n := by
   rw [twistedYetter_eq_projectivePlaneRepresentative 𝒞η .negative n]
-  rw [projectivePlane_evaluateMarking_eq_explicitCycle 𝒞η .negative n]
-  unfold evaluateCycle thamDefinition511Normalization
-  rw [oneFramedUnknot_rawCycleSum]
+  rw [projectivePlane_evaluateMarking_eq_explicitCoefficients 𝒞η .negative n]
+  unfold evaluateCoefficients thamDefinition511Normalization
+  rw [oneFramedUnknot_rawCoefficientSum]
   simp [oneFramedUnknotDiagram, oneFramedUnknotHandleData]
 
 /-! ## Empty diagram for `S⁴` -/
@@ -1116,8 +1073,6 @@ private def emptyKirbyHandleData : SpecialHandleData emptyKirbyTrace where
       left_inv := fun index => Fin.elim0 index
       right_inv := fun component => Fin.elim0 component.1 }
   boundaryTwo := 0
-  boundaryThree := 0
-  boundary_squared_zero := rfl
 
 /-- The special Kirby diagram with no one-, two-, or three-handles. -/
 def emptyKirbyDiagram : SpecialKirbyDiagram where
@@ -1146,21 +1101,26 @@ def emptyKirbyCut : DottedCutPresentation emptyKirbyDiagram where
   cut := emptyDottedCutData
   incidence_agrees_with_handle_boundary := fun one => Fin.elim0 one
 
-axiom emptyKirbyDiagram_realizes_fourSphere :
-  OrientedDiffeomorphism
-    (realizeSpecialKirbyDiagram emptyKirbyDiagram) fourSphere
+axiom emptyKirbyDiagram_presents_fourSphere :
+  PresentsClosedFourManifold emptyKirbyDiagram fourSphere
+
+axiom emptyKirbyDiagram_zero_represents_zero :
+  RepresentsPoincareDualClass
+    emptyKirbyDiagram_presents_fourSphere
+    (0 : ThamMarkingClass emptyKirbyDiagram)
+    (0 : ManifoldH₂ fourSphere)
 
 /-- The zero-marked empty representative of `S⁴`. -/
 noncomputable def emptyFourSphereRepresentative :
     SpecialKirbyRepresentativeOf fourSphere where
   diagram := emptyKirbyDiagram
   cut := emptyKirbyCut
-  realizationDiffeomorphism := emptyKirbyDiagram_realizes_fourSphere
-  alpha := 0
+  presents := emptyKirbyDiagram_presents_fourSphere
+  thamAlpha := 0
 
 theorem emptyFourSphereRepresentative_represents_zero :
     emptyFourSphereRepresentative.representsHomologyClass 0 := by
-  exact map_zero _
+  exact emptyKirbyDiagram_zero_represents_zero
 
 private theorem emptyKirby_compile_eq_identity
     (𝒞 : BundledPremodularCategory K)
@@ -1185,7 +1145,7 @@ theorem twistedYetter_fourSphere_zero
       𝒞η
       (fun marked =>
         frozenFrontendRepresentativeIndependence
-          𝒞η marked.diagram marked.cut marked.primalBoundary)
+          𝒞η marked.diagram marked.cut)
       (frozenFrontendLocalMoveInvariance 𝒞η)
       fourSphere fourSphere (identityOrientedDiffeomorphism fourSphere) 0
       chosenExistence.choose chosenExistence.choose_spec
@@ -1195,18 +1155,16 @@ theorem twistedYetter_fourSphere_zero
         exact emptyFourSphereRepresentative_represents_zero)]
   unfold evaluateMarkedDiagram evaluateMarking
   change
-    evaluateCycle 𝒞η emptyKirbyDiagram emptyKirbyCut
-        emptyKirbyDiagram.primalDegreeThreeBoundaryData
+    evaluateCoefficients 𝒞η emptyKirbyDiagram emptyKirbyCut
         (Quotient.out emptyFourSphereRepresentative.thamAlpha) =
       𝒞η.category.globalDimension
   rw [frozenFrontendRepresentativeIndependence 𝒞η
     emptyKirbyDiagram emptyKirbyCut
-    emptyKirbyDiagram.primalDegreeThreeBoundaryData
     (Quotient.out emptyFourSphereRepresentative.thamAlpha) 0]
-  · unfold evaluateCycle thamDefinition511Normalization
-    rw [show rawCycleSum 𝒞η emptyKirbyDiagram emptyKirbyCut
-        emptyKirbyDiagram.primalDegreeThreeBoundaryData 0 = 1 by
-      unfold rawCycleSum
+  · unfold evaluateCoefficients thamDefinition511Normalization
+    rw [show rawCoefficientSum 𝒞η emptyKirbyDiagram emptyKirbyCut
+        0 = 1 by
+      unfold rawCoefficientSum
       change
         (∑ labeling : Fin 0 → 𝒞η.category.Simple,
           (∏ handle : Fin 0,
@@ -1218,19 +1176,19 @@ theorem twistedYetter_fourSphere_zero
       simp [emptyKirby_compile_eq_identity,
         𝒞η.category.closedScalar_identity]]
     simp [emptyKirbyDiagram, emptyKirbyHandleData]
-  · have outEq :
-        thamCycleClass emptyKirbyDiagram.primalDegreeThreeBoundaryData
-            (Quotient.out emptyFourSphereRepresentative.thamAlpha) =
-          emptyFourSphereRepresentative.thamAlpha := by
-        exact Quotient.out_eq _
-    rw [outEq]
-    change emptyFourSphereRepresentative.thamAlpha = 0
-    change
-      (turnoverPoincareDualityEquiv emptyKirbyDiagram
-        (specialKirbyDiagram_computesH₂ emptyKirbyDiagram)) 0 = 0
-    exact
-      (turnoverPoincareDualityEquiv emptyKirbyDiagram
-        (specialKirbyDiagram_computesH₂ emptyKirbyDiagram)).map_zero
+  · change
+      thamMarkingClass
+          (Quotient.out
+            (0 : ThamMarkingClass emptyKirbyDiagram)) =
+        thamMarkingClass
+          (0 : ThamTwoHandleCoefficients emptyKirbyDiagram)
+    calc
+      thamMarkingClass
+          (Quotient.out
+            (0 : ThamMarkingClass emptyKirbyDiagram)) = 0 :=
+        Quotient.out_eq _
+      _ = thamMarkingClass
+          (0 : ThamTwoHandleCoefficients emptyKirbyDiagram) := rfl
 
 end
 

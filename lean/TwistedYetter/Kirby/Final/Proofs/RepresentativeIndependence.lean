@@ -28,12 +28,11 @@ chooses `X` versus `X*` and never supplies a character exponent.
 theorem frozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
+    (presentation : DottedCutPresentation diagram) :
     RepresentativeIndependenceStatement
-      𝒞η diagram presentation primal :=
+      𝒞η diagram presentation :=
   intrinsicFrozenFrontendRepresentativeIndependence
-    𝒞η diagram presentation primal
+    𝒞η diagram presentation
 
 end
 

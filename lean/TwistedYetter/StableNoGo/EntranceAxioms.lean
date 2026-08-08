@@ -152,30 +152,31 @@ structure SplitMarkingNaturality
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    (alpha : ManifoldH₂ X)
+    (beta : ManifoldH₂ Y)
+    (_leftRepresents : left.representsHomologyClass alpha)
+    (_rightRepresents : right.representsHomologyClass beta)
     (split : SplitSpecialKirbyPresentation left right) where
-  leftCycle : ThamTwoCycles left.primalBoundary
-  rightCycle : ThamTwoCycles right.primalBoundary
-  targetCycle : ThamTwoCycles split.target.primalBoundary
-  leftCycle_class :
-    thamCycleClass left.primalBoundary leftCycle = left.thamAlpha
-  rightCycle_class :
-    thamCycleClass right.primalBoundary rightCycle = right.thamAlpha
-  targetCycle_class :
-    thamCycleClass split.target.primalBoundary targetCycle =
-      split.target.thamAlpha
+  leftCoefficients : ThamTwoHandleCoefficients left.diagram
+  rightCoefficients : ThamTwoHandleCoefficients right.diagram
+  targetCoefficients : ThamTwoHandleCoefficients split.target.diagram
+  leftCoefficients_class :
+    thamMarkingClass leftCoefficients = left.thamAlpha
+  rightCoefficients_class :
+    thamMarkingClass rightCoefficients = right.thamAlpha
+  targetCoefficients_class :
+    thamMarkingClass targetCoefficients = split.target.thamAlpha
   target_represents_connectedSum :
     split.target.representsHomologyClass
-      (connectedSumMarking
-        (left.diagramH₂EquivManifoldH₂ left.alpha)
-        (right.diagramH₂EquivManifoldH₂ right.alpha))
+      (connectedSumMarking alpha beta)
   left_coordinates :
     ∀ handle : Fin left.diagram.handles.hTwo,
-      targetCycle.1 (split.twoHandleEquiv.symm (Sum.inl handle)) =
-        leftCycle.1 handle
+      targetCoefficients (split.twoHandleEquiv.symm (Sum.inl handle)) =
+        leftCoefficients handle
   right_coordinates :
     ∀ handle : Fin right.diagram.handles.hTwo,
-      targetCycle.1 (split.twoHandleEquiv.symm (Sum.inr handle)) =
-        rightCycle.1 handle
+      targetCoefficients (split.twoHandleEquiv.symm (Sum.inr handle)) =
+        rightCoefficients handle
 
 /--
 Standard split-union realization: two certified special presentations placed in
@@ -189,16 +190,22 @@ axiom splitSpecialKirbyPresentation_exists
     Nonempty (SplitSpecialKirbyPresentation left right)
 
 /--
-Mayer--Vietoris, handle-homology comparison, Poincare duality, and turnover are
-natural for the standard split presentation, in the exact chain-level form
-needed to transport the two markings.
+For the standard split presentation, the two Poincare-dual marking relations
+admit coefficient representatives whose restrictions are the two original
+representatives and whose target class represents the connected-sum marking.
 -/
 axiom splitSpecialKirbyPresentation_marking_natural
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    (alpha : ManifoldH₂ X)
+    (beta : ManifoldH₂ Y)
+    (leftRepresents : left.representsHomologyClass alpha)
+    (rightRepresents : right.representsHomologyClass beta)
     (split : SplitSpecialKirbyPresentation left right) :
-    Nonempty (SplitMarkingNaturality split)
+    Nonempty
+      (SplitMarkingNaturality
+        alpha beta leftRepresents rightRepresents split)
 
 /-! ## Transparent connected-sum homology notation -/
 

@@ -1660,22 +1660,20 @@ theorem split_canonicalRibbonGraphicalEvaluation
     (split : SplitSpecialKirbyPresentation left right)
     (𝒞η : TwistedPremodularCategory K)
     (labeling : TwoHandleLabeling 𝒞η.category split.target.diagram)
-    (targetCycle : ThamTwoCycles split.target.primalBoundary)
-    (leftCycle : ThamTwoCycles left.primalBoundary)
-    (rightCycle : ThamTwoCycles right.primalBoundary) :
+    (targetCoefficients : ThamTwoHandleCoefficients split.target.diagram)
+    (leftCoefficients : ThamTwoHandleCoefficients left.diagram)
+    (rightCoefficients : ThamTwoHandleCoefficients right.diagram) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (canonicalRoleAwareGraphCompiler 𝒞η split.target.diagram
-          split.target.cut split.target.primalBoundary labeling targetCycle) =
+          split.target.cut labeling targetCoefficients) =
       canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler 𝒞η left.diagram left.cut
-            left.primalBoundary
             (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).1
-            leftCycle) *
+            leftCoefficients) *
         canonicalRibbonGraphicalEvaluation 𝒞η.category
           (canonicalRoleAwareGraphCompiler 𝒞η right.diagram right.cut
-            right.primalBoundary
             (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).2
-            rightCycle) := by
+            rightCoefficients) := by
   unfold canonicalRoleAwareGraphCompiler
   rw [split_compileCutOpenExteriorMorphism]
   exact canonicalRibbonGraphicalEvaluation_comp 𝒞η.category _ _
@@ -1707,26 +1705,32 @@ theorem split_characterWeight
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    {alpha : ManifoldH₂ X}
+    {beta : ManifoldH₂ Y}
+    {leftCorrect : left.representsHomologyClass alpha}
+    {rightCorrect : right.representsHomologyClass beta}
     (split : SplitSpecialKirbyPresentation left right)
-    (marking : SplitMarkingNaturality split)
+    (marking :
+      SplitMarkingNaturality
+        alpha beta leftCorrect rightCorrect split)
     (𝒞η : TwistedPremodularCategory K)
     (labeling : TwoHandleLabeling 𝒞η.category split.target.diagram) :
-    characterWeight 𝒞η labeling marking.targetCycle =
+    characterWeight 𝒞η labeling marking.targetCoefficients =
       characterWeight 𝒞η
           (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).1
-          marking.leftCycle *
+          marking.leftCoefficients *
         characterWeight 𝒞η
           (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).2
-          marking.rightCycle := by
+          marking.rightCoefficients := by
   unfold characterWeight
   rw [Fintype.prod_equiv split.twoHandleEquiv
     (fun handle =>
       (𝒞η.character.value (labeling handle)) ^
-        (marking.targetCycle.1 handle))
+        (marking.targetCoefficients handle))
     (fun handle =>
-      (𝒞η.character.value
+        (𝒞η.character.value
           (labeling (split.twoHandleEquiv.symm handle))) ^
-        (marking.targetCycle.1
+        (marking.targetCoefficients
           (split.twoHandleEquiv.symm handle))) (by simp)]
   rw [Fintype.prod_sum_type]
   simp only [splitTwoHandleLabelingEquiv_left,
@@ -1757,86 +1761,106 @@ theorem split_rawEvaluatorSummand
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    {alpha : ManifoldH₂ X}
+    {beta : ManifoldH₂ Y}
+    {leftCorrect : left.representsHomologyClass alpha}
+    {rightCorrect : right.representsHomologyClass beta}
     (split : SplitSpecialKirbyPresentation left right)
-    (marking : SplitMarkingNaturality split)
+    (marking :
+      SplitMarkingNaturality
+        alpha beta leftCorrect rightCorrect split)
     (𝒞η : TwistedPremodularCategory K)
     (labeling : TwoHandleLabeling 𝒞η.category split.target.diagram) :
     rawEvaluatorSummand 𝒞η split.target.diagram split.target.cut
-        split.target.primalBoundary marking.targetCycle labeling =
-      rawEvaluatorSummand 𝒞η left.diagram left.cut left.primalBoundary
-          marking.leftCycle
+        marking.targetCoefficients labeling =
+      rawEvaluatorSummand 𝒞η left.diagram left.cut
+          marking.leftCoefficients
           (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).1 *
-        rawEvaluatorSummand 𝒞η right.diagram right.cut right.primalBoundary
-          marking.rightCycle
+        rawEvaluatorSummand 𝒞η right.diagram right.cut
+          marking.rightCoefficients
           (splitTwoHandleLabelingEquiv split 𝒞η.category labeling).2 := by
   unfold rawEvaluatorSummand
   rw [split_ordinaryKirbyWeight, split_characterWeight]
   rw [split_canonicalRibbonGraphicalEvaluation split 𝒞η labeling
-    marking.targetCycle marking.leftCycle marking.rightCycle]
+    marking.targetCoefficients marking.leftCoefficients
+      marking.rightCoefficients]
   ring
 
-theorem split_rawCycleSum
+theorem split_rawCoefficientSum
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    {alpha : ManifoldH₂ X}
+    {beta : ManifoldH₂ Y}
+    {leftCorrect : left.representsHomologyClass alpha}
+    {rightCorrect : right.representsHomologyClass beta}
     (split : SplitSpecialKirbyPresentation left right)
-    (marking : SplitMarkingNaturality split)
+    (marking :
+      SplitMarkingNaturality
+        alpha beta leftCorrect rightCorrect split)
     (𝒞η : TwistedPremodularCategory K) :
-    rawCycleSum 𝒞η split.target.diagram split.target.cut
-        split.target.primalBoundary marking.targetCycle =
-      rawCycleSum 𝒞η left.diagram left.cut left.primalBoundary
-          marking.leftCycle *
-        rawCycleSum 𝒞η right.diagram right.cut right.primalBoundary
-          marking.rightCycle := by
-  exact rawCycleSum_mul_of_labelingEquiv 𝒞η
+    rawCoefficientSum 𝒞η split.target.diagram split.target.cut
+        marking.targetCoefficients =
+      rawCoefficientSum 𝒞η left.diagram left.cut
+          marking.leftCoefficients *
+        rawCoefficientSum 𝒞η right.diagram right.cut
+          marking.rightCoefficients := by
+  exact rawCoefficientSum_mul_of_labelingEquiv 𝒞η
     left.diagram right.diagram split.target.diagram
     left.cut right.cut split.target.cut
-    left.primalBoundary right.primalBoundary split.target.primalBoundary
-    marking.leftCycle marking.rightCycle marking.targetCycle
+    marking.leftCoefficients marking.rightCoefficients
+      marking.targetCoefficients
     (splitTwoHandleLabelingEquiv split 𝒞η.category)
     (split_rawEvaluatorSummand split marking 𝒞η)
 
-theorem split_evaluateCycle
+theorem split_evaluateCoefficients
     {X Y : ClosedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
+    {alpha : ManifoldH₂ X}
+    {beta : ManifoldH₂ Y}
+    {leftCorrect : left.representsHomologyClass alpha}
+    {rightCorrect : right.representsHomologyClass beta}
     (split : SplitSpecialKirbyPresentation left right)
-    (marking : SplitMarkingNaturality split)
+    (marking :
+      SplitMarkingNaturality
+        alpha beta leftCorrect rightCorrect split)
     (𝒞η : TwistedPremodularCategory K) :
-    evaluateCycle 𝒞η split.target.diagram split.target.cut
-        split.target.primalBoundary marking.targetCycle =
+    evaluateCoefficients 𝒞η split.target.diagram split.target.cut
+        marking.targetCoefficients =
       𝒞η.category.globalDimension⁻¹ *
-        evaluateCycle 𝒞η left.diagram left.cut left.primalBoundary
-          marking.leftCycle *
-        evaluateCycle 𝒞η right.diagram right.cut right.primalBoundary
-          marking.rightCycle := by
-  unfold evaluateCycle
-  rw [split_rawCycleSum split marking 𝒞η]
+        evaluateCoefficients 𝒞η left.diagram left.cut
+          marking.leftCoefficients *
+        evaluateCoefficients 𝒞η right.diagram right.cut
+          marking.rightCoefficients := by
+  unfold evaluateCoefficients
+  rw [split_rawCoefficientSum split marking 𝒞η]
   exact split_thamNormalization 𝒞η.category.globalDimension
     (eno_globalDimension_ne_zero 𝒞η.category)
     left.diagram.handles.hThree right.diagram.handles.hThree
     split.target.diagram.handles.hThree split.hThree_additive
-    (rawCycleSum 𝒞η left.diagram left.cut left.primalBoundary
-      marking.leftCycle)
-    (rawCycleSum 𝒞η right.diagram right.cut right.primalBoundary
-      marking.rightCycle)
+    (rawCoefficientSum 𝒞η left.diagram left.cut
+      marking.leftCoefficients)
+    (rawCoefficientSum 𝒞η right.diagram right.cut
+      marking.rightCoefficients)
 
-theorem evaluateRepresentative_eq_cycle
+theorem evaluateRepresentative_eq_coefficients
     {X : ClosedOrientedSmoothFourManifold}
     (𝒞η : TwistedPremodularCategory K)
     (representative : SpecialKirbyRepresentativeOf X)
-    (cycle : ThamTwoCycles representative.primalBoundary)
-    (cycleClass :
-      thamCycleClass representative.primalBoundary cycle =
+    (coefficients : ThamTwoHandleCoefficients representative.diagram)
+    (coefficientsClass :
+      thamMarkingClass coefficients =
         representative.thamAlpha) :
     evaluateMarkedDiagram 𝒞η representative.toHomologicallyMarkedDiagram =
-      evaluateCycle 𝒞η representative.diagram representative.cut
-        representative.primalBoundary cycle := by
+      evaluateCoefficients 𝒞η representative.diagram representative.cut
+        coefficients := by
   unfold evaluateMarkedDiagram evaluateMarking
   exact frozenFrontendRepresentativeIndependence 𝒞η
-    representative.diagram representative.cut representative.primalBoundary
-    (Quotient.out representative.thamAlpha) cycle
-    ((Quotient.out_eq representative.thamAlpha).trans cycleClass.symm)
+    representative.diagram representative.cut
+    (Quotient.out representative.thamAlpha) coefficients
+    ((Quotient.out_eq representative.thamAlpha).trans
+      coefficientsClass.symm)
 
 theorem TwistedYetter_eq_evaluateRepresentative
     {X : ClosedOrientedSmoothFourManifold}
@@ -1856,7 +1880,7 @@ theorem TwistedYetter_eq_evaluateRepresentative
   exact ConditionalDescent.diffeomorphism_invariant_of_descent_data
     𝒞η
     (fun marked => frozenFrontendRepresentativeIndependence 𝒞η
-      marked.diagram marked.cut marked.primalBoundary)
+      marked.diagram marked.cut)
     (frozenFrontendLocalMoveInvariance 𝒞η)
     X X (identityOrientedDiffeomorphism X) alpha
     existence.choose existence.choose_spec
@@ -1873,40 +1897,35 @@ theorem markedConnectedSumFormula
   let right := rightExistence.choose
   let split := Classical.choice
     (splitSpecialKirbyPresentation_exists left right)
+  let leftCorrect := leftExistence.choose_spec
+  let rightCorrect := rightExistence.choose_spec
   let marking := Classical.choice
-    (splitSpecialKirbyPresentation_marking_natural split)
-  have leftRepresents :
-      left.diagramH₂EquivManifoldH₂ left.alpha = alpha :=
-    leftExistence.choose_spec
-  have rightRepresents :
-      right.diagramH₂EquivManifoldH₂ right.alpha = beta :=
-    rightExistence.choose_spec
+    (splitSpecialKirbyPresentation_marking_natural
+      alpha beta leftCorrect rightCorrect split)
   calc
     TwistedYetter 𝒞η
         ⟨connectedSum X Y, connectedSumMarking alpha beta⟩ =
         evaluateMarkedDiagram 𝒞η
           split.target.toHomologicallyMarkedDiagram :=
       TwistedYetter_eq_evaluateRepresentative 𝒞η _ split.target
-        (by
-          simpa [leftRepresents, rightRepresents] using
-            marking.target_represents_connectedSum)
-    _ = evaluateCycle 𝒞η split.target.diagram split.target.cut
-          split.target.primalBoundary marking.targetCycle :=
-      evaluateRepresentative_eq_cycle 𝒞η split.target marking.targetCycle
-        marking.targetCycle_class
+        marking.target_represents_connectedSum
+    _ = evaluateCoefficients 𝒞η split.target.diagram split.target.cut
+          marking.targetCoefficients :=
+      evaluateRepresentative_eq_coefficients 𝒞η split.target
+        marking.targetCoefficients marking.targetCoefficients_class
     _ = 𝒞η.category.globalDimension⁻¹ *
-          evaluateCycle 𝒞η left.diagram left.cut left.primalBoundary
-            marking.leftCycle *
-          evaluateCycle 𝒞η right.diagram right.cut right.primalBoundary
-            marking.rightCycle :=
-      split_evaluateCycle split marking 𝒞η
+          evaluateCoefficients 𝒞η left.diagram left.cut
+            marking.leftCoefficients *
+          evaluateCoefficients 𝒞η right.diagram right.cut
+            marking.rightCoefficients :=
+      split_evaluateCoefficients split marking 𝒞η
     _ = 𝒞η.category.globalDimension⁻¹ *
           evaluateMarkedDiagram 𝒞η left.toHomologicallyMarkedDiagram *
           evaluateMarkedDiagram 𝒞η right.toHomologicallyMarkedDiagram := by
-      rw [evaluateRepresentative_eq_cycle 𝒞η left marking.leftCycle
-          marking.leftCycle_class,
-        evaluateRepresentative_eq_cycle 𝒞η right marking.rightCycle
-          marking.rightCycle_class]
+      rw [evaluateRepresentative_eq_coefficients 𝒞η left
+          marking.leftCoefficients marking.leftCoefficients_class,
+        evaluateRepresentative_eq_coefficients 𝒞η right
+          marking.rightCoefficients marking.rightCoefficients_class]
     _ = 𝒞η.category.globalDimension⁻¹ *
           TwistedYetter 𝒞η ⟨X, alpha⟩ *
           TwistedYetter 𝒞η ⟨Y, beta⟩ := by

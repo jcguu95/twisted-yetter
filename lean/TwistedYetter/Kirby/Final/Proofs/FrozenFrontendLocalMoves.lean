@@ -40,12 +40,12 @@ theorem cleanBandElementaryMove_preserves_evaluation
       elementaryMoveKind move = .oneOverOne ∨
         elementaryMoveKind move = .twoOverOne ∨
         elementaryMoveKind move = .twoOverTwo)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (move.homology.tham.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (move.homology.tham.mapCoefficients sourceCycle) := by
   cases move with
   | framedIsotopy =>
       simp [elementaryMoveKind] at isCleanBand
@@ -77,19 +77,19 @@ theorem framedIsotopy_preserves_evaluation
     (scriptRealizes :
       FramedIsotopyScriptRealizesFramedIsotopy script)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (transport.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (transport.mapCoefficients sourceCycle) := by
   have interpretation :=
     shum_framedRibbonCoherence
       (framedIsotopy_hasTypedGraphicalInterpretation
         𝒞η script scriptRealizes transport sourceCycle)
   rw [← normalizedCycleExpression_evaluation 𝒞η source sourceCycle]
   rw [← normalizedCycleExpression_evaluation
-    𝒞η target (transport.mapCycle sourceCycle)]
+    𝒞η target (transport.mapCoefficients sourceCycle)]
   unfold canonicalRibbonGraphicalEvaluation
   exact congrArg 𝒞η.category.closedScalar interpretation
 

@@ -27,16 +27,16 @@ cycle-level evaluator.
 theorem normalizedCycleExpression_evaluation
     (𝒞η : TwistedPremodularCategory K)
     (marked : HomologicallyMarkedDiagram)
-    (cycle : ThamTwoCycles marked.primalBoundary) :
+    (cycle : ThamTwoHandleCoefficients marked.diagram) :
     canonicalRibbonGraphicalEvaluation 𝒞η.category
         (normalizedCycleExpression 𝒞η marked cycle) =
-      evaluateCycle 𝒞η
-        marked.diagram marked.cut marked.primalBoundary cycle := by
+      evaluateCoefficients 𝒞η
+        marked.diagram marked.cut cycle := by
   classical
   unfold normalizedCycleExpression
   unfold canonicalRibbonGraphicalEvaluation
-  unfold evaluateCycle
-  unfold rawCycleSum
+  unfold evaluateCoefficients
+  unfold rawCoefficientSum
   unfold BundledPremodularCategory.closedScalar
   simp only [RibbonExpression.interpret]
   simp only [map_smul, map_sum]
@@ -61,12 +61,12 @@ theorem cleanBandSlide_preserves_evaluation
       FiniteCouponTransportRealizesCompletePath
         slide.decomposition.transport)
     (transport : ThamHandleChainTransport source target)
-    (sourceCycle : ThamTwoCycles source.primalBoundary) :
-    evaluateCycle 𝒞η
-        source.diagram source.cut source.primalBoundary sourceCycle =
-      evaluateCycle 𝒞η
-        target.diagram target.cut target.primalBoundary
-          (transport.mapCycle sourceCycle) := by
+    (sourceCycle : ThamTwoHandleCoefficients source.diagram) :
+    evaluateCoefficients 𝒞η
+        source.diagram source.cut sourceCycle =
+      evaluateCoefficients 𝒞η
+        target.diagram target.cut
+          (transport.mapCoefficients sourceCycle) := by
   obtain ⟨attachNormalForm, attach⟩ :=
     cleanAttach_hasStandardGraphicalInterpretation
       𝒞η slide slideRealizes sourceCycle
@@ -106,11 +106,11 @@ theorem cleanBandSlide_preserves_evaluation
   have detachInterpretation :
       detachNormalForm.identityStage.interpret =
         (normalizedCycleExpression 𝒞η target
-          (transport.mapCycle sourceCycle)).interpret :=
+          (transport.mapCoefficients sourceCycle)).interpret :=
     shum_framedRibbonCoherence detach
   rw [← normalizedCycleExpression_evaluation 𝒞η source sourceCycle]
   rw [← normalizedCycleExpression_evaluation
-    𝒞η target (transport.mapCycle sourceCycle)]
+    𝒞η target (transport.mapCoefficients sourceCycle)]
   unfold canonicalRibbonGraphicalEvaluation
   rw [attachInterpretation, attachResolution, finiteTransport,
     detachResolution, detachInterpretation]
