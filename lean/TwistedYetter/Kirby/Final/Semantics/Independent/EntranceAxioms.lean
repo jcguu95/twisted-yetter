@@ -399,9 +399,8 @@ realized four-manifold.  This is the cellular/handle comparison on the dual
 handle decomposition, not an evaluator or invariance statement.
 -/
 axiom turnedOverHandleComplexComputesSecondCohomology
-    (diagram : SpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram) :
-    ThamKirbyH₂ primal ≃+
+    (diagram : SpecialKirbyDiagram) :
+    ThamKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
       ManifoldSecondCohomology (realizeSpecialKirbyDiagram diagram)
 
 /--
@@ -415,14 +414,15 @@ between the primal and THAM-side groups.
 -/
 noncomputable def turnoverPoincareDualityEquiv
     (diagram : SpecialKirbyDiagram)
-    (primal : PrimalDegreeThreeBoundaryData diagram)
     (homologyComparison :
-      PrimalKirbyH₂ primal ≃+ ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
-    PrimalKirbyH₂ primal ≃+ ThamKirbyH₂ primal :=
+      PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
+        ManifoldH₂ (realizeSpecialKirbyDiagram diagram)) :
+    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
+      ThamKirbyH₂ diagram.primalDegreeThreeBoundaryData :=
   (homologyComparison.trans
     (manifoldPoincareDuality
       (realizeSpecialKirbyDiagram diagram))).trans
-        (turnedOverHandleComplexComputesSecondCohomology diagram primal).symm
+        (turnedOverHandleComplexComputesSecondCohomology diagram).symm
 
 /-! ## Explicit classical topology axioms -/
 
@@ -469,9 +469,6 @@ structure SpecialKirbyRepresentativeOf
   cut : DottedCutPresentation diagram
   realizationDiffeomorphism :
     OrientedDiffeomorphism (realizeSpecialKirbyDiagram diagram) X
-  diagramHomologyComparison :
-    PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData ≃+
-      ManifoldH₂ (realizeSpecialKirbyDiagram diagram)
   alpha : PrimalKirbyH₂ diagram.primalDegreeThreeBoundaryData
 
 abbrev SpecialKirbyRepresentativeOf.primalBoundary
@@ -486,8 +483,8 @@ noncomputable def SpecialKirbyRepresentativeOf.thamAlpha
     ThamKirbyH₂ representative.primalBoundary :=
   (turnoverPoincareDualityEquiv
       representative.diagram
-      representative.primalBoundary
-      representative.diagramHomologyComparison) representative.alpha
+      (specialKirbyDiagram_computesH₂ representative.diagram))
+    representative.alpha
 
 noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     {X : ClosedOrientedSmoothFourManifold}
@@ -501,7 +498,7 @@ noncomputable def SpecialKirbyRepresentativeOf.diagramH₂EquivManifoldH₂
     {X : ClosedOrientedSmoothFourManifold}
     (representative : SpecialKirbyRepresentativeOf X) :
     PrimalKirbyH₂ representative.primalBoundary ≃+ ManifoldH₂ X :=
-  representative.diagramHomologyComparison.trans
+  (specialKirbyDiagram_computesH₂ representative.diagram).trans
     (inducedH₂ representative.realizationDiffeomorphism)
 
 def SpecialKirbyRepresentativeOf.representsHomologyClass
@@ -532,7 +529,6 @@ theorem specialKirbyRepresentative_exists
     { diagram := diagram
       cut := cut
       realizationDiffeomorphism := realizationDiffeomorphism
-      diagramHomologyComparison := diagramHomologyComparison
       alpha := homologyComparison.symm alpha }
   refine ⟨representative, ?_⟩
   exact homologyComparison.apply_symm_apply alpha

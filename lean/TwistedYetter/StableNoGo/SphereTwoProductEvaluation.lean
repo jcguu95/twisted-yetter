@@ -1111,8 +1111,6 @@ noncomputable def positiveZeroFramedHopfRepresentative :
   cut := positiveZeroFramedHopfCut
   realizationDiffeomorphism :=
     positiveZeroFramedHopf_realizes_sphereTwoProduct
-  diagramHomologyComparison :=
-    specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram
   alpha := 0
 
 theorem positiveZeroFramedHopfRepresentative_represents_zero :
@@ -1131,8 +1129,6 @@ noncomputable def positiveZeroFramedHopfRepresentativeOf
   cut := positiveZeroFramedHopfCut
   realizationDiffeomorphism :=
     positiveZeroFramedHopf_realizes_sphereTwoProduct
-  diagramHomologyComparison :=
-    specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram
   alpha :=
     ((specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram).trans
       (inducedH₂ positiveZeroFramedHopf_realizes_sphereTwoProduct)).symm alpha
@@ -1898,11 +1894,9 @@ theorem positiveHopf_evaluateMarking_eq_zeroCycle
   rw [show positiveZeroFramedHopfRepresentative.thamAlpha = 0 by
     change
       (turnoverPoincareDualityEquiv positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfRepresentative.primalBoundary
         (specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram)) 0 = 0
     exact
       (turnoverPoincareDualityEquiv positiveZeroFramedHopfDiagram
-        positiveZeroFramedHopfRepresentative.primalBoundary
         (specialKirbyDiagram_computesH₂ positiveZeroFramedHopfDiagram)).map_zero]
   rfl
 

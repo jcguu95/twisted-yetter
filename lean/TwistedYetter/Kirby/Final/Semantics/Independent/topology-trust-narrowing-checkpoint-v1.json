@@ -1,0 +1,69 @@
+{
+  "schema": "topology-trust-narrowing-checkpoint-v1",
+  "recorded_at_utc": "2026-08-08T12:38:46Z",
+  "base_commit": "8596728d353623971c981fca3742a326ab0e1c3e",
+  "recorded_from_dirty_worktree": true,
+  "status": "KERNEL_VERIFIED_TRUST_BOUNDARY_NARROWED_HUMAN_SEMANTIC_REVIEW_REMAINS",
+  "changes": [
+    {
+      "declaration": "turnedOverHandleComplexComputesSecondCohomology",
+      "before": "accepted an arbitrary PrimalDegreeThreeBoundaryData for a fixed diagram",
+      "after": "accepts only diagram.primalDegreeThreeBoundaryData",
+      "reason": "the realized diagram determines the handle boundary data to be compared with manifold cohomology"
+    },
+    {
+      "declaration": "SpecialKirbyRepresentativeOf.diagramHomologyComparison",
+      "action": "removed",
+      "replacement": "specialKirbyDiagram_computesH2 representative.diagram",
+      "reason": "a representative must not accept a second caller-selected homology comparison"
+    },
+    {
+      "declaration": "fourSphere_intersectionForm_eq_zero",
+      "before": "axiom",
+      "after": "theorem derived from fourSphere_H2_eq_zero",
+      "reason": "a biadditive pairing vanishes when both input classes are zero"
+    }
+  ],
+  "verification": {
+    "narrow_builds": "PASS",
+    "full_build": "PASS_8319_JOBS",
+    "full_build_command": "LEAN_NUM_THREADS=1 lake -Kjobs=1 build",
+    "stable_final_theorem_audit": "PASS_8317_JOBS",
+    "stable_final_theorem_audit_command": "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.StableNoGo.FinalTheoremAudit",
+    "source_axiom_count_before": 88,
+    "source_axiom_count_after": 87,
+    "likely_proof_field_count_after": 71,
+    "forbidden_tokens_added": [],
+    "final_invariant_project_axiom_count": 26,
+    "final_invariant_standard_lean_axiom_count": 3,
+    "premodular_numerical_formula_uses_fourSphere_intersectionForm_eq_zero_as_axiom": false,
+    "red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "red_team_json": "/tmp/twisted-yetter-red-team-safe-fixes-2026-08-08.json",
+    "red_team_markdown": "/tmp/twisted-yetter-red-team-safe-fixes-2026-08-08.zh-TW.md"
+  },
+  "environment": {
+    "os": "arm64-apple-darwin24.6.0",
+    "lean": "4.29.1",
+    "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "lean_num_threads": 1,
+    "lake_jobs": 1
+  },
+  "files": {
+    "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean": "4704812eeae8d49f977c0255dba63f60f24b03a0ddb992caa23883b15e2e0098",
+    "lean/TwistedYetter/StableNoGo/EntranceAxioms.lean": "50e39c459aead7c5c56d172fa5afdeae8511aca4d7590461fa5b17195c21319f",
+    "lean/TwistedYetter/StableNoGo/ProjectivePlaneEvaluation.lean": "38788606059ed0f88c4f84e2b11f1c9ba1087c8005f2bef9e93074998907eacc",
+    "lean/TwistedYetter/StableNoGo/SphereTwoProductEvaluation.lean": "03fbd9efedaad9a0cbb67ffd2addd390b0f243b88ce0dea0ad6e7a46584940c6"
+  },
+  "deferred_safe_candidate": {
+    "declaration": "standard_tensorUnitQuantumDimension",
+    "status": "NOT_CHANGED",
+    "reason": "a clean proof first needs reusable pivotal-trace invariance under isomorphism and the tensor-unit trace theorem; it should not be forced into this topology patch"
+  },
+  "non_claims": [
+    "This checkpoint does not assert that all 26 project axioms in the final invariant closure are semantically approved.",
+    "This checkpoint does not resolve the independent dotted-cut semantic blockers found by human review.",
+    "This checkpoint is not a new SHA-256 prefix reseal of the frozen frontend.",
+    "Compilation is not being identified with correctness of the intended human mathematics."
+  ]
+}

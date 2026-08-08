@@ -863,7 +863,6 @@ axiom positiveOneFramedUnknot_turnoverCoordinate
     (n : ℤ) :
     turnoverPoincareDualityEquiv
         (oneFramedUnknotDiagram .positive)
-        (oneFramedUnknotDiagram .positive).primalDegreeThreeBoundaryData
         (specialKirbyDiagram_computesH₂
           (oneFramedUnknotDiagram .positive))
         (oneFramedUnknotPrimalClass .positive n) =
@@ -874,7 +873,6 @@ axiom negativeOneFramedUnknot_turnoverCoordinate
     (n : ℤ) :
     turnoverPoincareDualityEquiv
         (oneFramedUnknotDiagram .negative)
-        (oneFramedUnknotDiagram .negative).primalDegreeThreeBoundaryData
         (specialKirbyDiagram_computesH₂
           (oneFramedUnknotDiagram .negative))
         (oneFramedUnknotPrimalClass .negative (-n)) =
@@ -887,8 +885,6 @@ noncomputable def positiveProjectivePlaneRepresentative (n : ℤ) :
   cut := oneFramedUnknotCut .positive
   realizationDiffeomorphism :=
     positiveOneFramedUnknot_realizes_complexProjectivePlane
-  diagramHomologyComparison :=
-    specialKirbyDiagram_computesH₂ (oneFramedUnknotDiagram .positive)
   alpha := oneFramedUnknotPrimalClass .positive n
 
 theorem positiveProjectivePlaneRepresentative_represents
@@ -910,8 +906,6 @@ noncomputable def negativeProjectivePlaneRepresentative (n : ℤ) :
   cut := oneFramedUnknotCut .negative
   realizationDiffeomorphism :=
     negativeOneFramedUnknot_realizes_reversedComplexProjectivePlane
-  diagramHomologyComparison :=
-    specialKirbyDiagram_computesH₂ (oneFramedUnknotDiagram .negative)
   alpha := oneFramedUnknotPrimalClass .negative (-n)
 
 theorem negativeProjectivePlaneRepresentative_represents
@@ -1162,7 +1156,6 @@ noncomputable def emptyFourSphereRepresentative :
   diagram := emptyKirbyDiagram
   cut := emptyKirbyCut
   realizationDiffeomorphism := emptyKirbyDiagram_realizes_fourSphere
-  diagramHomologyComparison := specialKirbyDiagram_computesH₂ emptyKirbyDiagram
   alpha := 0
 
 theorem emptyFourSphereRepresentative_represents_zero :
@@ -1234,11 +1227,9 @@ theorem twistedYetter_fourSphere_zero
     change emptyFourSphereRepresentative.thamAlpha = 0
     change
       (turnoverPoincareDualityEquiv emptyKirbyDiagram
-        emptyFourSphereRepresentative.primalBoundary
         (specialKirbyDiagram_computesH₂ emptyKirbyDiagram)) 0 = 0
     exact
       (turnoverPoincareDualityEquiv emptyKirbyDiagram
-        emptyFourSphereRepresentative.primalBoundary
         (specialKirbyDiagram_computesH₂ emptyKirbyDiagram)).map_zero
 
 end

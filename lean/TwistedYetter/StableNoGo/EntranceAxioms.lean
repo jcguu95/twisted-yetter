@@ -300,9 +300,11 @@ def negativeProjectivePlaneGenerator :
 axiom fourSphere_H₂_eq_zero (alpha : ManifoldH₂ fourSphere) : alpha = 0
 
 /-- The integral intersection form of `S⁴` is zero. -/
-axiom fourSphere_intersectionForm_eq_zero
+theorem fourSphere_intersectionForm_eq_zero
     (alpha beta : ManifoldH₂ fourSphere) :
-    integralIntersectionPairing fourSphere alpha beta = 0
+    integralIntersectionPairing fourSphere alpha beta = 0 := by
+  rw [fourSphere_H₂_eq_zero alpha, fourSphere_H₂_eq_zero beta]
+  simp
 
 /--
 An oriented diffeomorphism preserves the integral intersection pairing.
