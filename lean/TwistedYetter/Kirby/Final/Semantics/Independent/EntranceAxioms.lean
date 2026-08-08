@@ -115,17 +115,14 @@ axiom intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
 
 /--
 Standard pivotal-trace normalization: the tensor unit has quantum dimension
-one.  This follows directly from the pivotal dimension definition and the
-unit coherence laws; it is recorded here as a narrow category-literature input
-rather than attributed to a nonexistent verbatim EGNO theorem.
-
-This is a basic category-literature input.  It mentions no Kirby diagram,
-character, evaluator, or manifold.
+one.  This is derived from pivotal-trace cyclicity, canonical comparison of
+right duals, and the unit coherence laws.
 -/
-axiom standard_tensorUnitQuantumDimension
+theorem standard_tensorUnitQuantumDimension
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K) :
-    𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1
+    𝒞.simples.quantumDimension 𝒞.simples.tensorUnit = 1 :=
+  𝒞.simples.tensorUnit_quantumDimension
 
 /--
 Etingof--Nikshych--Ostrik, *On fusion categories*, Theorem 2.3:

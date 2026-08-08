@@ -1,0 +1,107 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/14",
+  "recorded_at_utc": "2026-08-08T14:38:43Z",
+  "supersedes": "explicit-trust-boundary-v13.json",
+  "status": "KERNEL_CLOSURE_VERIFIED_RED_TEAM_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "scope": "Tensor-unit quantum-dimension theoremization without semantic-interface changes",
+  "baseline_git_commit": "de59841eb4169c54351e95cd5d51e1978aa6fc4e",
+  "whole_repository_explicit_axiom_count": 86,
+  "independent_mainline_explicit_axiom_count": 25,
+  "previous_independent_mainline_explicit_axiom_count": 26,
+  "removed_explicit_axioms": [
+    "standard_tensorUnitQuantumDimension"
+  ],
+  "axiom_declarations_added": [],
+  "derived_theorem_chain": [
+    "CategoryTheory.pivotalTrace_comp_comm",
+    "CategoryTheory.BundledPremodularCategory.canonicalRibbonTrace_tensorUnit",
+    "CategoryTheory.ChosenSimpleFamily.tensorUnit_quantumDimension",
+    "Semantics.Independent.standard_tensorUnitQuantumDimension"
+  ],
+  "final_theorem": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+  "final_theorem_project_axiom_count": 25,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 28,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "IntrinsicDottedCutRegluingWitness",
+    "ManifoldSecondCohomology",
+    "OrientedDiffeomorphism",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "eno_globalDimension_ne_zero",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation",
+    "manifoldPoincareDuality",
+    "markedKirbyCerf_complete",
+    "realizeSpecialKirbyDiagram",
+    "shum_framedRibbonCoherence",
+    "specialKirbyDiagram_computesH₂",
+    "specialKirbyDiagram_exists",
+    "standardDottedProjectorEventCompleteness",
+    "standardIntrinsicDottedCutRealization",
+    "turnedOverHandleComplexComputesSecondCohomology",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "retained_explicit_category_boundary": {
+    "name": "standardPositiveHopfClosure_eq_monodromyTrace",
+    "status": "RETAINED_OUTSIDE_MAIN_INVARIANT_CLOSURE",
+    "reason": "The current category frontend does not construct the explicit framed-ribbon isotopy witness needed to derive the standard Hopf closure from Shum coherence. Replacing it safely requires additional graphical-coherence infrastructure, so it was not disguised as a theorem or structure field."
+  },
+  "verification": {
+    "narrow_builds": "PASS",
+    "full_build": "PASS_8319_JOBS_SINGLE_WORKER",
+    "derived_tensor_unit_theorem_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "final_theorem_kernel_axiom_audit": "PASS_NO_SORRYAX",
+    "forbidden_declarations": {
+      "sorry": 0,
+      "admit": 0,
+      "opaque": 0,
+      "sorryAx": 0
+    },
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_timestamp_utc": "2026-08-08T14:34:31.329178Z",
+    "source_tree_sha256": "4d7d4b50e9b5f24ac16bbcb996efc2162b89c6faf5716ccc20438540ed97f78c",
+    "source_red_team_counts": {
+      "Classical.choice": 15,
+      "axiom": 86,
+      "class": 6,
+      "likely_proof_field": 71,
+      "suspicious_declaration": 1
+    },
+    "sole_suspicious_declaration": "TwistedYetter.StableNoGo.MarkedStableRealization"
+  },
+  "ctl_current_root_status": "BLOCKED_MISSING_SIBLING_CTL_META_PROVIDER",
+  "source_hashes_sha256": {
+    "CategoryTheory/Pivotal/Basic.lean": "0fe555bf9756851a474c0179ff1e75df145733b73041e4cf7c397203e829ab7f",
+    "CategoryTheory/Premodular/Bundled.lean": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79",
+    "Kirby/Final/Semantics/Independent/EntranceAxioms.lean": "16fd5eb7af0215a68d8d45183e3b9c1db07bf4f103362ffd2e5dac1ba8d2fa53",
+    "red_team_json": "9eeb27a3787a0079ba69e15959f45d02f71d24dd30a13301ab9b7d2895b8645c"
+  },
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 build 24G325 arm64"
+  },
+  "non_claims": [
+    "The source red-team scan is conservative and does not certify intended human semantics.",
+    "The retained topology and graphical-coherence axioms have not been proved internally.",
+    "No StableNoGo or numerical-formula axiom was removed by this mainline checkpoint."
+  ]
+}

@@ -81,6 +81,94 @@ def pivotalTrace [(rightDoubleDualFunctor C).Monoidal]
     {X : C} (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   leftCategoricalTrace (f ≫ pivotal.iso.hom.app X)
 
+/-- The pivotal trace is cyclic: `tr(fg) = tr(gf)`. -/
+theorem pivotalTrace_comp_comm [(rightDoubleDualFunctor C).Monoidal]
+    (pivotal : PivotalStructure C)
+    {X Y : C} (f : X ⟶ Y) (g : Y ⟶ X) :
+    pivotalTrace pivotal (f ≫ g) = pivotalTrace pivotal (g ≫ f) := by
+  simp only [pivotalTrace, leftCategoricalTrace, tensorHom_id,
+    comp_whiskerRight, Category.assoc]
+  have pivotalNaturality :
+      g ≫ pivotal.iso.hom.app X =
+        pivotal.iso.hom.app Y ≫ (gᘁ)ᘁ := by
+    simpa only [Functor.id_map] using pivotal.iso.hom.naturality g
+  have pivotalNaturalityWhisker :
+      (g ▷ Xᘁ) ≫ (pivotal.iso.hom.app X ▷ Xᘁ) =
+        (pivotal.iso.hom.app Y ▷ Xᘁ) ≫ ((gᘁ)ᘁ ▷ Xᘁ) := by
+    calc
+      _ = (g ≫ pivotal.iso.hom.app X) ▷ Xᘁ :=
+        (comp_whiskerRight _ _ _).symm
+      _ = (pivotal.iso.hom.app Y ≫ (gᘁ)ᘁ) ▷ Xᘁ :=
+        congrArg (fun q => q ▷ Xᘁ) pivotalNaturality
+      _ = _ := comp_whiskerRight _ _ _
+  have interchangeF :
+      (Y ◁ (fᘁ)) ≫ (pivotal.iso.hom.app Y ▷ Xᘁ) =
+        (pivotal.iso.hom.app Y ▷ Yᘁ) ≫ ((Yᘁ)ᘁ ◁ (fᘁ)) := by
+    exact whisker_exchange (pivotal.iso.hom.app Y) (fᘁ)
+  have evaluationG :
+      ((gᘁ)ᘁ ▷ Xᘁ) ≫ ε_ Xᘁ Xᘁᘁ =
+        ((Yᘁ)ᘁ ◁ (gᘁ)) ≫ ε_ Yᘁ Yᘁᘁ :=
+    rightAdjointMate_comp_evaluation (gᘁ)
+  have rearrangeComposite :
+      (pivotal.iso.hom.app Y ▷ Yᘁ) ≫
+          ((Yᘁ)ᘁ ◁ (fᘁ)) ≫ ((Yᘁ)ᘁ ◁ (gᘁ)) =
+        (Y ◁ ((g ≫ f)ᘁ)) ≫
+          (pivotal.iso.hom.app Y ▷ Yᘁ) := by
+    calc
+      _ = (pivotal.iso.hom.app Y ▷ Yᘁ) ≫
+            ((Yᘁ)ᘁ ◁ ((fᘁ) ≫ (gᘁ))) := by
+        rw [whiskerLeft_comp]
+      _ = (pivotal.iso.hom.app Y ▷ Yᘁ) ≫
+            ((Yᘁ)ᘁ ◁ ((g ≫ f)ᘁ)) := by
+        rw [comp_rightAdjointMate]
+      _ = _ := (whisker_exchange
+        (pivotal.iso.hom.app Y) ((g ≫ f)ᘁ)).symm
+  have coevaluationComposite :
+      η_ Y Yᘁ ≫ Y ◁ ((g ≫ f)ᘁ) =
+        η_ Y Yᘁ ≫ g ▷ Yᘁ ≫ f ▷ Yᘁ := by
+    rw [coevaluation_comp_rightAdjointMate, comp_whiskerRight]
+  calc
+    _ = η_ X Xᘁ ≫ f ▷ Xᘁ ≫
+          ((pivotal.iso.hom.app Y ▷ Xᘁ) ≫
+            ((gᘁ)ᘁ ▷ Xᘁ)) ≫ ε_ Xᘁ Xᘁᘁ := by
+      slice_lhs 3 4 => exact pivotalNaturalityWhisker
+      rfl
+    _ = η_ X Xᘁ ≫ f ▷ Xᘁ ≫
+          pivotal.iso.hom.app Y ▷ Xᘁ ≫
+          (gᘁ)ᘁ ▷ Xᘁ ≫ ε_ Xᘁ Xᘁᘁ := by
+      simp only [Category.assoc]
+    _ = η_ Y Yᘁ ≫ Y ◁ (fᘁ) ≫
+          pivotal.iso.hom.app Y ▷ Xᘁ ≫
+          (gᘁ)ᘁ ▷ Xᘁ ≫ ε_ Xᘁ Xᘁᘁ := by
+      simpa only [← Category.assoc] using congrArg
+        (fun q => q ≫ pivotal.iso.hom.app Y ▷ Xᘁ ≫
+          (gᘁ)ᘁ ▷ Xᘁ ≫ ε_ Xᘁ Xᘁᘁ)
+        (coevaluation_comp_rightAdjointMate f).symm
+    _ = η_ Y Yᘁ ≫
+          (((pivotal.iso.hom.app Y ▷ Yᘁ) ≫
+            ((Yᘁ)ᘁ ◁ (fᘁ))) ≫
+            ((gᘁ)ᘁ ▷ Xᘁ)) ≫ ε_ Xᘁ Xᘁᘁ := by
+      slice_lhs 2 3 => exact interchangeF
+      rfl
+    _ = η_ Y Yᘁ ≫ pivotal.iso.hom.app Y ▷ Yᘁ ≫
+          (Yᘁ)ᘁ ◁ (fᘁ) ≫
+          (gᘁ)ᘁ ▷ Xᘁ ≫ ε_ Xᘁ Xᘁᘁ := by
+      simp only [Category.assoc]
+    _ = η_ Y Yᘁ ≫ pivotal.iso.hom.app Y ▷ Yᘁ ≫
+          (Yᘁ)ᘁ ◁ (fᘁ) ≫
+          (Yᘁ)ᘁ ◁ (gᘁ) ≫ ε_ Yᘁ Yᘁᘁ := by
+      simpa only [← Category.assoc] using congrArg
+        (fun q => η_ Y Yᘁ ≫ pivotal.iso.hom.app Y ▷ Yᘁ ≫
+          (Yᘁ)ᘁ ◁ (fᘁ) ≫ q) evaluationG
+    _ = η_ Y Yᘁ ≫ Y ◁ ((g ≫ f)ᘁ) ≫
+          pivotal.iso.hom.app Y ▷ Yᘁ ≫ ε_ Yᘁ Yᘁᘁ := by
+      slice_lhs 2 4 => exact rearrangeComposite
+      simp only [Category.assoc]
+    _ = _ := by
+      simpa only [← Category.assoc] using congrArg
+        (fun q => q ≫ pivotal.iso.hom.app Y ▷ Yᘁ ≫ ε_ Yᘁ Yᘁᘁ)
+        coevaluationComposite
+
 /-- EGNO, Definition 4.7.11: pivotal dimension. -/
 def pivotalDimension [(rightDoubleDualFunctor C).Monoidal]
     (pivotal : PivotalStructure C) (X : C) :

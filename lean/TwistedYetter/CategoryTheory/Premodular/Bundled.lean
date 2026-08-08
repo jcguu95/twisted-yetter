@@ -185,6 +185,79 @@ theorem canonicalRibbonTrace_eq_ribbonClosure
               (𝒞.twist.hom.app X ⊗ₘ 𝟙 (Xᘁ)) ≫ q)
           closeDrinfeld
 
+/-- The canonical ribbon trace of the identity of the tensor unit is one. -/
+theorem canonicalRibbonTrace_tensorUnit
+    (𝒞 : CategoryTheory.BundledPremodularCategory.{v, uK, uC, uI} K) :
+    𝒞.canonicalRibbonTrace (𝟙 (𝟙_ 𝒞.C)) = 𝟙 (𝟙_ 𝒞.C) := by
+  letI : HasRightDual (𝟙_ 𝒞.C) :=
+    RightRigidCategory.rightDual (𝟙_ 𝒞.C)
+  rw [𝒞.canonicalRibbonTrace_eq_ribbonClosure]
+  rw [show 𝒞.twist.hom.app (𝟙_ 𝒞.C) = 𝟙 (𝟙_ 𝒞.C) from
+    balancedTwist_unit 𝒞.balancing]
+  simp only [tensorHom_id, id_whiskerRight, Functor.id_obj,
+    braiding_tensorUnit_left, Category.assoc, Category.id_comp]
+  let e : (𝟙_ 𝒞.C)ᘁ ≅ 𝟙_ 𝒞.C :=
+    rightDualIso
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ))
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) (𝟙_ 𝒞.C))
+  have hEvaluation :
+      (e.hom ▷ (𝟙_ 𝒞.C)) ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) =
+        ε_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) := by
+    simpa only [e] using rightDualIso_hom_evaluation
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ))
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) (𝟙_ 𝒞.C))
+  have hCoevaluation :
+      η_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) ≫ (𝟙_ 𝒞.C) ◁ e.hom =
+        η_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) := by
+    simpa only [e] using rightDualIso_coevaluation_hom
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ))
+      (inferInstance : ExactPairing (𝟙_ 𝒞.C) (𝟙_ 𝒞.C))
+  have hMiddle :
+      (λ_ ((𝟙_ 𝒞.C)ᘁ)).hom ≫ (ρ_ ((𝟙_ 𝒞.C)ᘁ)).inv ≫
+          (e.hom ▷ (𝟙_ 𝒞.C)) =
+        ((𝟙_ 𝒞.C) ◁ e.hom) ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv := by
+    calc
+      _ = (λ_ ((𝟙_ 𝒞.C)ᘁ)).hom ≫ e.hom ≫
+            (ρ_ (𝟙_ 𝒞.C)).inv := by
+        simpa only [Category.assoc] using congrArg
+          (fun q => (λ_ ((𝟙_ 𝒞.C)ᘁ)).hom ≫ q)
+          (rightUnitor_inv_naturality e.hom).symm
+      _ = _ := by
+        simpa only [Category.assoc] using congrArg
+          (fun q => q ≫ (ρ_ (𝟙_ 𝒞.C)).inv)
+          (leftUnitor_naturality e.hom).symm
+  have standardLoop :
+      η_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) =
+        𝟙 (𝟙_ 𝒞.C) := by
+    change
+      (ρ_ (𝟙_ 𝒞.C)).inv ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv ≫ (ρ_ (𝟙_ 𝒞.C)).hom =
+        𝟙 (𝟙_ 𝒞.C)
+    rw [unitors_equal]
+    simp
+  calc
+    _ = η_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) ≫
+          (λ_ ((𝟙_ 𝒞.C)ᘁ)).hom ≫ (ρ_ ((𝟙_ 𝒞.C)ᘁ)).inv ≫
+          (e.hom ▷ (𝟙_ 𝒞.C)) ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) := by
+      simpa only [Category.assoc] using congrArg
+        (fun q => η_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) ≫
+          (λ_ ((𝟙_ 𝒞.C)ᘁ)).hom ≫ (ρ_ ((𝟙_ 𝒞.C)ᘁ)).inv ≫ q)
+        hEvaluation.symm
+    _ = η_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) ≫
+          ((𝟙_ 𝒞.C) ◁ e.hom) ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) := by
+      simpa only [Category.assoc] using congrArg
+        (fun q => η_ (𝟙_ 𝒞.C) ((𝟙_ 𝒞.C)ᘁ) ≫ q ≫
+          ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) hMiddle
+    _ = η_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C) := by
+      simpa only [Category.assoc] using congrArg
+        (fun q => q ≫ (λ_ (𝟙_ 𝒞.C)).hom ≫
+          (ρ_ (𝟙_ 𝒞.C)).inv ≫ ε_ (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)) hCoevaluation
+    _ = _ := standardLoop
+
 noncomputable def quantumDimension
     (𝒞 : CategoryTheory.BundledPremodularCategory.{v, uK, uC, uI} K) (s : 𝒞.Simple) : K :=
   𝒞.closedScalar (𝒞.canonicalRibbonTrace (𝟙 (𝒞.simpleObject s)))
@@ -293,6 +366,31 @@ theorem closedScalar_identity
     simp
   rw [← unit_image]
   exact 𝒞.unitEndLinearEquiv.symm_apply_apply 1
+
+/-- The chosen simple representative of the tensor unit has quantum dimension one. -/
+theorem ChosenSimpleFamily.tensorUnit_quantumDimension
+    {𝒞 : CategoryTheory.BundledPremodularCategory.{v, uK, uC, uI} K}
+    (family : ChosenSimpleFamily 𝒞) :
+    family.quantumDimension family.tensorUnit = 1 := by
+  let unitIso := family.unitIso
+  let pivotal := 𝒞.canonicalSpherical.toPivotalStructure
+  have traceIso :
+      𝒞.canonicalRibbonTrace
+          (𝟙 (family.simpleObject family.tensorUnit)) =
+        𝒞.canonicalRibbonTrace (𝟙 (𝟙_ 𝒞.C)) := by
+    change
+      pivotalTrace pivotal
+          (𝟙 (family.skeleton.simpleObject family.tensorUnit)) =
+        pivotalTrace pivotal (𝟙 (𝟙_ 𝒞.C))
+    calc
+      _ = pivotalTrace pivotal (unitIso.hom ≫ unitIso.inv) := by
+        rw [unitIso.hom_inv_id]
+      _ = pivotalTrace pivotal (unitIso.inv ≫ unitIso.hom) :=
+        pivotalTrace_comp_comm pivotal unitIso.hom unitIso.inv
+      _ = _ := by rw [unitIso.inv_hom_id]
+  unfold ChosenSimpleFamily.quantumDimension
+  rw [traceIso, 𝒞.canonicalRibbonTrace_tensorUnit,
+    𝒞.closedScalar_identity]
 
 theorem closedScalar_smul_identity
     (𝒞 : CategoryTheory.BundledPremodularCategory.{v, uK, uC, uI} K)

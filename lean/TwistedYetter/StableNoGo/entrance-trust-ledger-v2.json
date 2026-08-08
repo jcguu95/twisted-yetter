@@ -1,0 +1,96 @@
+{
+  "schema": "twisted-yetter/stable-no-go-entrance-trust-ledger/2",
+  "recorded_at_utc": "2026-08-08T14:38:43Z",
+  "supersedes": "entrance-trust-ledger-v1.json",
+  "baseline_git_commit": "de59841eb4169c54351e95cd5d51e1978aa6fc4e",
+  "status": "KERNEL_CLOSURES_VERIFIED_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "stable_no_go_source_explicit_axiom_count": 61,
+  "inherited_independent_mainline_explicit_axiom_count": 25,
+  "whole_repository_explicit_axiom_count": 86,
+  "axiom_declarations_added": [],
+  "inherited_axiom_removed": "Semantics.Independent.standard_tensorUnitQuantumDimension",
+  "kernel_closure_counts": {
+    "TwistedYetter_stable_calculation": {
+      "project_axioms": 47,
+      "standard_lean_axioms": 3,
+      "total": 50
+    },
+    "TwistedYetter_eq_of_integralIntersectionFormIsometry": {
+      "project_axioms": 47,
+      "standard_lean_axioms": 3,
+      "total": 50
+    },
+    "TwistedYetter_premodular_numerical_formula": {
+      "project_axioms": 74,
+      "standard_lean_axioms": 3,
+      "total": 77
+    },
+    "TwistedYetter_modular_explicit_formula": {
+      "project_axioms": 81,
+      "standard_lean_axioms": 3,
+      "total": 84
+    },
+    "TwistedYetter_modular_quadratic_ratio": {
+      "project_axioms": 81,
+      "standard_lean_axioms": 3,
+      "total": 84
+    }
+  },
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "retained_explicit_category_boundary": {
+    "name": "standardPositiveHopfClosure_eq_monodromyTrace",
+    "locator": "P. Shum, Tortile tensor categories (1994), Theorem 2.6, specialized to the standard positive Hopf closure",
+    "scope": "The standard cup-cross-cross-cap ribbon diagram equals the canonical trace of positive monodromy; no Kirby, homology, character, normalization, or four-manifold assertion.",
+    "reason_retained": "The current typed graphical library does not construct the required explicit framed-ribbon isotopy witness. This is not safely eliminable by a short algebraic proof."
+  },
+  "verification": {
+    "narrow_builds": "PASS",
+    "full_build": "PASS_8319_JOBS_SINGLE_WORKER",
+    "derived_tensor_unit_theorem_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "kernel_audit_command": "LEAN_NUM_THREADS=1 lake env lean lean/TwistedYetter/StableNoGo/FinalTheoremAudit.lean",
+    "kernel_axiom_audits": "PASS_NO_SORRYAX",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_counts": {
+      "Classical.choice": 15,
+      "axiom": 86,
+      "class": 6,
+      "likely_proof_field": 71,
+      "suspicious_declaration": 1
+    },
+    "forbidden_declarations": {
+      "sorry": 0,
+      "admit": 0,
+      "opaque": 0,
+      "sorryAx": 0
+    }
+  },
+  "ctl_current_root_status": "BLOCKED_MISSING_SIBLING_CTL_META_PROVIDER",
+  "reproduce_commands": [
+    "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.CategoryTheory.Pivotal.Basic",
+    "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.CategoryTheory.Premodular.Bundled",
+    "LEAN_NUM_THREADS=1 lake -Kjobs=1 build TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms",
+    "LEAN_NUM_THREADS=1 lake -Kjobs=1 build",
+    "LEAN_NUM_THREADS=1 lake env lean lean/TwistedYetter/StableNoGo/FinalTheoremAudit.lean",
+    "python3 /Users/jin/.codex/skills/lean-red-team-audit/scripts/source_audit.py /Users/jin/.codex/worktrees/4e82/twisted-yetter --output-json /tmp/lean-red-team-audit.json --output-markdown /tmp/lean-red-team-audit.zh-TW.md"
+  ],
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 build 24G325 arm64"
+  },
+  "non_claims": [
+    "Kernel closure counts do not certify the human correctness of retained category or topology boundaries.",
+    "The source red-team result remains INCONCLUSIVE_HUMAN_REVIEW_REQUIRED.",
+    "This cleanup does not extend any theorem beyond the existing simply-connected scope.",
+    "No legacy numerical artifact or original Crane-Yetter state sum is re-certified here."
+  ]
+}
