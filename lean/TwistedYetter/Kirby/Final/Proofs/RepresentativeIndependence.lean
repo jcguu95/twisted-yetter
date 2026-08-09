@@ -1,12 +1,12 @@
-import TwistedYetter.Kirby.Final.Proofs.IntrinsicRepresentativeIndependence
+import TwistedYetter.Kirby.Final.Proofs.DottedRepresentativeIndependence
 
 /-!
 # Representative independence
 
 The former projector-site proof in this module conflated physical strand
 orientation with dotted-disk incidence when forming character powers.  That
-route has been removed.  The public theorem below is now only a compatibility
-name for the intrinsic dotted-cut proof.
+route has been removed.  The public theorem below is a thin exported name for
+the dotted-collar incidence proof.
 -/
 
 namespace TwistedYetter.Kirby.Final.Proofs
@@ -22,7 +22,7 @@ variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /--
 The frozen evaluator depends only on the THAM-side second-homology class.
-This theorem is proved through intrinsic dotted cuts; dotted direction never
+This theorem is proved through dotted-collar incidence morphisms; dotted direction never
 chooses `X` versus `X*` and never supplies a character exponent.
 -/
 theorem frozenFrontendRepresentativeIndependence
@@ -31,7 +31,7 @@ theorem frozenFrontendRepresentativeIndependence
     (presentation : DottedCutPresentation diagram) :
     RepresentativeIndependenceStatement
       𝒞η diagram presentation :=
-  intrinsicFrozenFrontendRepresentativeIndependence
+  dottedFrozenFrontendRepresentativeIndependence
     𝒞η diagram presentation
 
 end

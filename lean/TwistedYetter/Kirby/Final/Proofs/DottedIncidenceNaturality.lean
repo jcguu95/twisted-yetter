@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Proofs.IntrinsicDottedCutInterpretation
+import TwistedYetter.Kirby.Final.Semantics.Independent.DiagramLabeling
 
 /-!
 # Character naturality at a dotted incidence boundary
@@ -53,40 +53,6 @@ theorem dottedIncidenceMorphism_character_naturality
                 𝒞η.category diagram labeling punctures)))
           exponent := by
   exact characterCoupon_naturality 𝒞η.character T exponent
-
-/--
-Character naturality for the morphism interpreted from an intrinsic dotted
-cut tangle.  Neither the statement nor the construction reads a planar strand
-orientation or a puncture-dependent character exponent.
--/
-theorem intrinsicDottedCut_character_naturality
-    (𝒞η : TwistedPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    {punctures : List (DottedPuncture diagram.trace)}
-    (cut : IntrinsicDottedCutTangle diagram punctures)
-    (exponent : ℤ) :
-    isoIntPowerHom
-          (𝒞η.character.iso.app
-            (simpleLabelWordObject 𝒞η.category
-              (dottedInboundLabelWord
-                𝒞η.category diagram labeling punctures)))
-          exponent ≫
-        intrinsicDottedCutMorphism
-          𝒞η.category diagram labeling cut =
-      intrinsicDottedCutMorphism
-          𝒞η.category diagram labeling cut ≫
-        isoIntPowerHom
-          (𝒞η.character.iso.app
-            (simpleLabelWordObject 𝒞η.category
-              (dottedOutboundLabelWord
-                𝒞η.category diagram labeling punctures)))
-          exponent := by
-  exact dottedIncidenceMorphism_character_naturality
-    𝒞η diagram labeling punctures
-      (intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut)
-      exponent
 
 private theorem character_tensor_inv
     {𝒞 : BundledPremodularCategory K}
@@ -328,39 +294,6 @@ theorem dottedIncidenceMorphism_boundaryRatio_absorbs
   rw [← scalarNaturality]
   rw [← mul_smul]
   simp
-
-/--
-The preceding syntax-free theorem specializes to the morphism interpreted
-from an intrinsic dotted cut tangle.
--/
-theorem intrinsicDottedCut_boundaryRatio_absorbs
-    (𝒞η : TwistedPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    {punctures : List (DottedPuncture diagram.trace)}
-    (cut : IntrinsicDottedCutTangle diagram punctures)
-    (exponent : ℤ) :
-    let inputFactor := componentWordCharacterUnit 𝒞η
-      (dottedInboundLabelWord 𝒞η.category diagram labeling punctures)
-      exponent
-    let outputFactor := componentWordCharacterUnit 𝒞η
-      (dottedOutboundLabelWord 𝒞η.category diagram labeling punctures)
-      exponent
-    let T :
-        simpleLabelWordObject 𝒞η.category
-              (dottedInboundLabelWord
-                𝒞η.category diagram labeling punctures) ⟶
-          simpleLabelWordObject 𝒞η.category
-              (dottedOutboundLabelWord
-                𝒞η.category diagram labeling punctures) :=
-      intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut
-    (((outputFactor * inputFactor⁻¹ : Kˣ) : K) • T) = T := by
-  exact dottedIncidenceMorphism_boundaryRatio_absorbs
-    𝒞η diagram labeling punctures
-      (intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut)
-      exponent
 
 end
 

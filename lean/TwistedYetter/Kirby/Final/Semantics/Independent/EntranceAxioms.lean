@@ -1,5 +1,4 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
-import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCutGraphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.OneTwoLocalReplacement
 import TwistedYetter.Kirby.Final.Semantics.Independent.TwoThreeLocalReplacement
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
@@ -73,42 +72,44 @@ axiom shum_framedRibbonCoherence
     FramedRibbonIsotopic left right →
     left.interpret = right.interpret
 
-/-! ## Intrinsic dotted-cut graphical interpretation -/
+/-! ## Dotted-collar graphical interpretation -/
 
 /--
-Regluing one topologically realized intrinsic dotted cut gives the exact
-compiled closed ribbon graph inside a linear one-hole exterior context.
+Every selected dotted component admits the standard finite collar normal
+form.  More precisely, after cutting its spanning disk, finitely many local
+cup/cap, crossing, twist, and planar-isotopy moves expose exactly one local
+morphism whose domain consists of the inbound incidences and whose codomain
+consists of the outbound incidences.  Plugging that morphism back into the
+unchanged exterior gives the exact compiled closed ribbon graph.
 
-This is the narrow topology-to-graphical boundary for the intrinsic route.
-It mentions a category only in order to type and interpret the ribbon graph.
-It contains no twisting character, homology exponent, scalar evaluation, or
-representative-independence conclusion.  In particular, dotted direction
-does not choose `X` versus `X*` and does not create a character exponent.
+This is the sole topology-to-graphical boundary needed by the new route.
+The category and labeling occur only to type the boundary objects and the
+resulting ribbon expressions.  The assertion contains no twisting character,
+homology exponent, projector formula, graphical evaluation, scalar equality,
+or representative-independence conclusion.  In particular, puncture
+direction chooses only domain versus codomain; physical strand orientation
+continues to choose `X` versus `X*` inside the finite collar movie.
 -/
-axiom intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
+axiom standardDottedCollarIncidenceNormalForm
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord dotted role))
-    (_regluing :
-      IntrinsicDottedCutRegluesToDiagram
-        diagram presentation dotted role cut) :
-    ∃ context : LinearRibbonExpressionContext 𝒞
+    (role : (diagram.trace.components dotted).role = .dotted) :
+    ∃ (incidenceMorphism : DottedIncidenceMorphism 𝒞 diagram labeling
+          (presentation.cut.punctureWord dotted role))
+      (context : LinearRibbonExpressionContext 𝒞
         (simpleLabelWordObject 𝒞
           (dottedInboundLabelWord 𝒞 diagram labeling
             (presentation.cut.punctureWord dotted role)))
         (simpleLabelWordObject 𝒞
           (dottedOutboundLabelWord 𝒞 diagram labeling
             (presentation.cut.punctureWord dotted role)))
-        (𝟙_ 𝒞.C) (𝟙_ 𝒞.C),
+        (𝟙_ 𝒞.C) (𝟙_ 𝒞.C)),
       FramedRibbonIsotopic
-        (context.plug (.morphism
-          (intrinsicDottedCutMorphism 𝒞 diagram labeling cut)))
+        (context.plug (.morphism incidenceMorphism))
         (.morphism
           (compileCutOpenExteriorMorphism
             𝒞 diagram presentation labeling))

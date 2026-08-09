@@ -1,10 +1,10 @@
 import TwistedYetter.Kirby.Final.Proofs.DottedIncidenceNaturality
 
 /-!
-# Intrinsic dotted-cut boundary factors
+# Dotted-collar boundary factors
 
 This file identifies the character factor of one THAM degree-three boundary
-with the output-to-input ratio on the corresponding intrinsic dotted cut.
+with the output-to-input ratio on the corresponding dotted collar.
 Component colours, internal duality, and dotted incidence remain separate.
 -/
 
@@ -21,45 +21,45 @@ variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /--
 The character ratio between the public output and input component words of
-one intrinsic cut.
+one dotted collar.
 
 The exponent is supplied once by the THAM-side degree-three chain.  Puncture
 direction only partitions occurrences into the numerator or denominator; it
 does not define a puncture-wise character exponent.
 -/
-def intrinsicBoundaryCharacterRatio
+def dottedBoundaryCharacterRatio
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) : Kˣ :=
   componentWordCharacterUnit 𝒞η
-      ((intrinsicDottedCutOutputWord diagram punctures).map labeling)
+      ((dottedOutboundTwoHandleWord diagram punctures).map labeling)
       exponent *
     (componentWordCharacterUnit 𝒞η
-      ((intrinsicDottedCutInputWord diagram punctures).map labeling)
+      ((dottedInboundTwoHandleWord diagram punctures).map labeling)
       exponent)⁻¹
 
 /--
 The boundary ratio is definitionally the character product on the output
 component word divided by the product on the input component word.
 -/
-theorem intrinsicBoundaryCharacterRatio_eq_output_mul_input_inv
+theorem dottedBoundaryCharacterRatio_eq_output_mul_input_inv
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
-    intrinsicBoundaryCharacterRatio
+    dottedBoundaryCharacterRatio
         𝒞η diagram labeling punctures exponent =
       componentWordCharacterUnit 𝒞η
-          ((intrinsicDottedCutOutputWord diagram punctures).map labeling)
+          ((dottedOutboundTwoHandleWord diagram punctures).map labeling)
           exponent *
         (componentWordCharacterUnit 𝒞η
-          ((intrinsicDottedCutInputWord diagram punctures).map labeling)
+          ((dottedInboundTwoHandleWord diagram punctures).map labeling)
           exponent)⁻¹ := rfl
 
-private def intrinsicOccurrenceCoefficient
+private def dottedOccurrenceCoefficient
     {trace : CombinatorialLinkTrace}
     (puncture : DottedPuncture trace)
     (twoHandle : trace.ComponentId) : ℤ := by
@@ -72,15 +72,15 @@ private def intrinsicOccurrenceCoefficient
     else
       0
 
-private theorem intrinsicBoundaryCoefficient_eq_listSum
+private theorem dottedBoundaryCoefficient_eq_listSum
     {trace : CombinatorialLinkTrace}
     (punctures : List (DottedPuncture trace))
     (twoHandle : trace.ComponentId) :
-    intrinsicDottedCutBoundaryCoefficient punctures twoHandle =
+    dottedBoundaryCoefficient punctures twoHandle =
       (punctures.map fun puncture =>
-        intrinsicOccurrenceCoefficient puncture twoHandle).sum := by
+        dottedOccurrenceCoefficient puncture twoHandle).sum := by
   classical
-  unfold intrinsicDottedCutBoundaryCoefficient
+  unfold dottedBoundaryCoefficient
   have fold_from :
       ∀ (items : List (DottedPuncture trace)) (total : ℤ),
         items.foldl
@@ -94,7 +94,7 @@ private theorem intrinsicBoundaryCoefficient_eq_listSum
             total =
           total +
             (items.map fun puncture =>
-              intrinsicOccurrenceCoefficient puncture twoHandle).sum := by
+              dottedOccurrenceCoefficient puncture twoHandle).sum := by
     intro items
     induction items with
     | nil => simp
@@ -105,16 +105,16 @@ private theorem intrinsicBoundaryCoefficient_eq_listSum
         by_cases component_eq :
             puncture.twoHandleComponent = twoHandle
         · cases side : puncture.direction.incidenceSide <;>
-            simp [intrinsicOccurrenceCoefficient, component_eq, side,
+            simp [dottedOccurrenceCoefficient, component_eq, side,
               add_assoc] <;> omega
-        · simp [intrinsicOccurrenceCoefficient, component_eq]
+        · simp [dottedOccurrenceCoefficient, component_eq]
   simpa using fold_from punctures 0
 
-private theorem intrinsicCutTwoHandle_eq_iff
+private theorem dottedPunctureTwoHandleIndex_eq_iff
     (diagram : SpecialKirbyDiagram)
     (puncture : DottedPuncture diagram.trace)
     (two : Fin diagram.handles.hTwo) :
-    intrinsicCutTwoHandle diagram puncture = two ↔
+    dottedPunctureTwoHandleIndex diagram puncture = two ↔
       puncture.twoHandleComponent =
         (diagram.handles.twoHandleIndex two).1 := by
   constructor
@@ -122,11 +122,11 @@ private theorem intrinsicCutTwoHandle_eq_iff
     have component_eq := congrArg
       (fun index => (diagram.handles.twoHandleIndex index).1)
       index_eq
-    simpa [intrinsicCutTwoHandle] using component_eq
+    simpa [dottedPunctureTwoHandleIndex] using component_eq
   · intro component_eq
     apply diagram.handles.twoHandleIndex.injective
     apply Subtype.ext
-    simpa [intrinsicCutTwoHandle] using component_eq
+    simpa [dottedPunctureTwoHandleIndex] using component_eq
 
 private theorem finset_prod_zpow_eq_zpow_sum
     {G : Type*} [CommGroup G]
@@ -158,24 +158,24 @@ private theorem list_map_sum_eq_fin_sum_get
       ∑ index : Fin items.length, map (items.get index) := by
   exact (Fin.sum_univ_fun_getElem items map).symm
 
-private theorem intrinsicBoundaryCharacterRatio_eq_occurrenceProduct
+private theorem dottedBoundaryCharacterRatio_eq_occurrenceProduct
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
-    intrinsicBoundaryCharacterRatio
+    dottedBoundaryCharacterRatio
         𝒞η diagram labeling punctures exponent =
       (punctures.map fun puncture =>
         𝒞η.character.value
-            (labeling (intrinsicCutTwoHandle diagram puncture)) ^
+            (labeling (dottedPunctureTwoHandleIndex diagram puncture)) ^
           ((match puncture.direction.incidenceSide with
             | .inbound => -1
             | .outbound => 1) * exponent)).prod := by
   induction punctures with
   | nil =>
-      simp [intrinsicBoundaryCharacterRatio,
-        intrinsicDottedCutInputWord, intrinsicDottedCutOutputWord,
+      simp [dottedBoundaryCharacterRatio,
+        dottedInboundTwoHandleWord, dottedOutboundTwoHandleWord,
         dottedInboundPunctures, dottedOutboundPunctures,
         componentWordCharacterUnit]
   | cons puncture rest ih =>
@@ -184,11 +184,11 @@ private theorem intrinsicBoundaryCharacterRatio_eq_occurrenceProduct
           have step := congrArg
             (fun ratio : Kˣ =>
               𝒞η.character.value
-                  (labeling (intrinsicCutTwoHandle diagram puncture)) ^
+                  (labeling (dottedPunctureTwoHandleIndex diagram puncture)) ^
                   exponent * ratio)
             ih
-          simpa [intrinsicBoundaryCharacterRatio,
-            intrinsicDottedCutInputWord, intrinsicDottedCutOutputWord,
+          simpa [dottedBoundaryCharacterRatio,
+            dottedInboundTwoHandleWord, dottedOutboundTwoHandleWord,
             dottedInboundPunctures, dottedOutboundPunctures,
             componentWordCharacterUnit, direction,
             PunctureDirection.incidenceSide, mul_assoc] using step
@@ -196,11 +196,11 @@ private theorem intrinsicBoundaryCharacterRatio_eq_occurrenceProduct
           have step := congrArg
             (fun ratio : Kˣ =>
               (𝒞η.character.value
-                  (labeling (intrinsicCutTwoHandle diagram puncture)) ^
+                  (labeling (dottedPunctureTwoHandleIndex diagram puncture)) ^
                   exponent)⁻¹ * ratio)
             ih
-          simpa [intrinsicBoundaryCharacterRatio,
-            intrinsicDottedCutInputWord, intrinsicDottedCutOutputWord,
+          simpa [dottedBoundaryCharacterRatio,
+            dottedInboundTwoHandleWord, dottedOutboundTwoHandleWord,
             dottedInboundPunctures, dottedOutboundPunctures,
             componentWordCharacterUnit, direction,
             PunctureDirection.incidenceSide, zpow_neg,
@@ -208,43 +208,43 @@ private theorem intrinsicBoundaryCharacterRatio_eq_occurrenceProduct
 
 /--
 The output-to-input boundary ratio is the product over two-handle colours
-with exponents given by the intrinsic output-minus-input incidence row.
+with exponents given by the dotted output-minus-input incidence row.
 
 The signed powers on the right are derived here from numerator versus
 denominator.  They are not puncture data and are not evaluator exponents.
 -/
-theorem intrinsicBoundaryCharacterRatio_eq_incidenceProduct
+theorem dottedBoundaryCharacterRatio_eq_incidenceProduct
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
     (exponent : ℤ) :
-    intrinsicBoundaryCharacterRatio
+    dottedBoundaryCharacterRatio
         𝒞η diagram labeling punctures exponent =
       ∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^
-          (intrinsicDottedCutBoundaryCoefficient punctures
+          (dottedBoundaryCoefficient punctures
             (diagram.handles.twoHandleIndex two).1 * exponent) := by
   classical
   rw [show
-    intrinsicBoundaryCharacterRatio
+    dottedBoundaryCharacterRatio
         𝒞η diagram labeling punctures exponent =
       ∏ index : Fin punctures.length,
         𝒞η.character.value
             (labeling
-              (intrinsicCutTwoHandle diagram (punctures.get index))) ^
+              (dottedPunctureTwoHandleIndex diagram (punctures.get index))) ^
           ((match (punctures.get index).direction.incidenceSide with
             | .inbound => -1
             | .outbound => 1) * exponent) by
-      rw [intrinsicBoundaryCharacterRatio_eq_occurrenceProduct]
+      rw [dottedBoundaryCharacterRatio_eq_occurrenceProduct]
       exact list_map_prod_eq_fin_prod_get _ _]
   rw [← Finset.prod_fiberwise
     (Finset.univ : Finset (Fin punctures.length))
-    (fun index => intrinsicCutTwoHandle diagram (punctures.get index))
+    (fun index => dottedPunctureTwoHandleIndex diagram (punctures.get index))
     (fun index =>
       𝒞η.character.value
           (labeling
-            (intrinsicCutTwoHandle diagram (punctures.get index))) ^
+            (dottedPunctureTwoHandleIndex diagram (punctures.get index))) ^
         ((match (punctures.get index).direction.incidenceSide with
           | .inbound => -1
           | .outbound => 1) * exponent))]
@@ -252,14 +252,14 @@ theorem intrinsicBoundaryCharacterRatio_eq_incidenceProduct
   intro two _
   rw [show
     (∏ index : Fin punctures.length with
-      intrinsicCutTwoHandle diagram (punctures.get index) = two,
+      dottedPunctureTwoHandleIndex diagram (punctures.get index) = two,
       𝒞η.character.value
-          (labeling (intrinsicCutTwoHandle diagram (punctures.get index))) ^
+          (labeling (dottedPunctureTwoHandleIndex diagram (punctures.get index))) ^
         ((match (punctures.get index).direction.incidenceSide with
           | .inbound => -1
           | .outbound => 1) * exponent)) =
       ∏ index : Fin punctures.length with
-        intrinsicCutTwoHandle diagram (punctures.get index) = two,
+        dottedPunctureTwoHandleIndex diagram (punctures.get index) = two,
         𝒞η.character.value (labeling two) ^
           ((match (punctures.get index).direction.incidenceSide with
             | .inbound => -1
@@ -270,45 +270,39 @@ theorem intrinsicBoundaryCharacterRatio_eq_incidenceProduct
   rw [finset_prod_zpow_eq_zpow_sum]
   congr 1
   rw [← Finset.sum_mul]
-  rw [intrinsicBoundaryCoefficient_eq_listSum]
+  rw [dottedBoundaryCoefficient_eq_listSum]
   rw [list_map_sum_eq_fin_sum_get]
   congr 1
-  unfold intrinsicOccurrenceCoefficient
-  simp_rw [← intrinsicCutTwoHandle_eq_iff]
+  unfold dottedOccurrenceCoefficient
+  simp_rw [← dottedPunctureTwoHandleIndex_eq_iff]
   rw [← Finset.sum_filter]
 
 /--
 For one dotted handle, the corresponding THAM boundary-row character factor
-acts trivially on any topologically realized intrinsic cut morphism.
+acts trivially on every morphism with the exact incidence boundary.
 -/
-theorem twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
+theorem twoOneBoundaryCharacterFactor_absorbs_incidenceMorphism
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (one : Fin diagram.handles.hOne)
     (exponent : ℤ)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord
-        (diagram.handles.oneHandleIndex one).1
-        (diagram.handles.oneHandleIndex one).2)) :
-    let punctures := presentation.cut.punctureWord
-      (diagram.handles.oneHandleIndex one).1
-      (diagram.handles.oneHandleIndex one).2
-    let T :
+    (T :
+      simpleLabelWordObject 𝒞η.category
+            (dottedInboundLabelWord 𝒞η.category diagram labeling
+              (presentation.cut.punctureWord
+                (diagram.handles.oneHandleIndex one).1
+                (diagram.handles.oneHandleIndex one).2)) ⟶
         simpleLabelWordObject 𝒞η.category
-              (dottedInboundLabelWord
-                𝒞η.category diagram labeling punctures) ⟶
-          simpleLabelWordObject 𝒞η.category
-              (dottedOutboundLabelWord
-                𝒞η.category diagram labeling punctures) :=
-      intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut
+            (dottedOutboundLabelWord 𝒞η.category diagram labeling
+              (presentation.cut.punctureWord
+                (diagram.handles.oneHandleIndex one).1
+                (diagram.handles.oneHandleIndex one).2))) :
     (((∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^
           (twoOneIncidence diagram one two * exponent) : Kˣ) : K) •
         T) = T := by
-  dsimp only
   let punctures := presentation.cut.punctureWord
     (diagram.handles.oneHandleIndex one).1
     (diagram.handles.oneHandleIndex one).2
@@ -325,28 +319,27 @@ theorem twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
     calc
       _ = ∏ two : Fin diagram.handles.hTwo,
           𝒞η.character.value (labeling two) ^
-            (intrinsicDottedCutBoundaryCoefficient punctures
+            (dottedBoundaryCoefficient punctures
               (diagram.handles.twoHandleIndex two).1 * exponent) := by
         apply Finset.prod_congr rfl
         intro two _
-        rw [twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
+        rw [twoOneIncidence_eq_dottedBoundaryCoefficient
           diagram presentation]
-      _ = intrinsicBoundaryCharacterRatio
+      _ = dottedBoundaryCharacterRatio
           𝒞η diagram labeling punctures exponent :=
-        (intrinsicBoundaryCharacterRatio_eq_incidenceProduct
+        (dottedBoundaryCharacterRatio_eq_incidenceProduct
           𝒞η diagram labeling punctures exponent).symm
       _ = _ := by
-        rw [intrinsicBoundaryCharacterRatio_eq_output_mul_input_inv]
-        rw [intrinsicDottedCutInputLabels_eq,
-          intrinsicDottedCutOutputLabels_eq]
+        rw [dottedBoundaryCharacterRatio_eq_output_mul_input_inv]
+        rfl
   rw [factor_eq]
-  exact intrinsicDottedCut_boundaryRatio_absorbs
-    𝒞η diagram labeling cut exponent
+  exact dottedIncidenceMorphism_boundaryRatio_absorbs
+    𝒞η diagram labeling punctures T exponent
 
 /--
-The same boundary factor is invisible after placing the intrinsic cut
-morphism in any linear exterior context.  The remaining topology obligation
-is only to exhibit the actual frozen evaluator as one such context.
+The same boundary factor is invisible after placing an incidence morphism in
+any linear exterior context.  The remaining topology obligation is only to
+exhibit the actual frozen evaluator as one such context.
 -/
 theorem twoOneBoundaryCharacterFactor_absorbs_in_linearContext
     (𝒞η : TwistedPremodularCategory K)
@@ -355,10 +348,17 @@ theorem twoOneBoundaryCharacterFactor_absorbs_in_linearContext
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (one : Fin diagram.handles.hOne)
     (exponent : ℤ)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord
-        (diagram.handles.oneHandleIndex one).1
-        (diagram.handles.oneHandleIndex one).2))
+    (T :
+      simpleLabelWordObject 𝒞η.category
+            (dottedInboundLabelWord 𝒞η.category diagram labeling
+              (presentation.cut.punctureWord
+                (diagram.handles.oneHandleIndex one).1
+                (diagram.handles.oneHandleIndex one).2)) ⟶
+        simpleLabelWordObject 𝒞η.category
+            (dottedOutboundLabelWord 𝒞η.category diagram labeling
+              (presentation.cut.punctureWord
+                (diagram.handles.oneHandleIndex one).1
+                (diagram.handles.oneHandleIndex one).2)))
     (exterior :
       (simpleLabelWordObject 𝒞η.category
             (dottedInboundLabelWord 𝒞η.category diagram labeling
@@ -373,13 +373,11 @@ theorem twoOneBoundaryCharacterFactor_absorbs_in_linearContext
     (((∏ two : Fin diagram.handles.hTwo,
         𝒞η.character.value (labeling two) ^
           (twoOneIncidence diagram one two * exponent) : Kˣ) : K) *
-        exterior (intrinsicDottedCutMorphism
-          𝒞η.category diagram labeling cut)) =
-      exterior (intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut) := by
+        exterior T) =
+      exterior T := by
   rw [← smul_eq_mul]
   rw [← exterior.map_smul]
-  rw [twoOneBoundaryCharacterFactor_absorbs_intrinsicDottedCut
+  rw [twoOneBoundaryCharacterFactor_absorbs_incidenceMorphism
     𝒞η diagram presentation]
 
 end

@@ -1,13 +1,11 @@
 import TwistedYetter.CategoryTheory.Premodular.Bundled
 import TwistedYetter.Kirby.Final.Semantics.Independent.KirbyDiagram
 import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
-import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
 import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Evaluator
-import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCutGraphical
 import TwistedYetter.Kirby.Final.Semantics.Independent.Invariant
 import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
@@ -38,15 +36,15 @@ declared individually in `EntranceAxioms`.  The dotted-handle boundary is an
 inbound-to-outbound incidence movie: puncture direction selects only the side
 of that morphism, never `X` versus `X*` and never a character exponent.
 
-The current source declares twenty-six explicit axioms.  Two declarations
-make the intrinsic dotted-cut topology boundary explicit: the primitive
-regluing-witness type and the existence of a standard intrinsic cut
-realization.  The signed incidence/handle-boundary identification is proved
-in `Homology`; it is not an axiom.
+The dotted-collar topology-to-graphical boundary is the single explicit
+normal-form axiom `standardDottedCollarIncidenceNormalForm`; the former
+intrinsic cut/regluing witness route is not part of this import closure.  The
+signed incidence/handle-boundary identification is proved in `Homology`; it
+is not an axiom.
 `explicit-trust-boundary-v1.json` predates the corrected dotted-incidence
-boundary and must be refreshed before it is used as the current curated trust
-ledger.  This semantic edit is not hash-sealed until its downstream compiler
-has been rebuilt and audited.
+boundary and is historical only.  The rebuilt downstream compiler, final
+route, kernel axiom closure, and source red-team result are recorded in
+`explicit-trust-boundary-v15.json`.
 
 Domain-defining category laws remain visible in the reusable category library;
 combinatorial certificates in the semantic modules use transparent propositions.

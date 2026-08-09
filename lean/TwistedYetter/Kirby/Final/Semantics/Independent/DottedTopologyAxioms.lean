@@ -1,60 +1,15 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
+import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
 
 /-!
 # Independent semantics: dotted-incidence topology boundaries
 
-These are the explicit, category-neutral topology inputs needed before the
-role-aware evaluator can interpret a dotted component.  They are separated
-from the higher-level entrance axioms only to avoid an import cycle; the unique
-public semantic entry still re-exports them transitively.
+This is the explicit, category-neutral completeness input needed before the
+role-aware evaluator can compile the projector events of a dotted cut.  It is
+separated from the higher-level entrance axioms only to avoid an import cycle;
+the unique public semantic entry still re-exports it transitively.
 -/
 
 namespace TwistedYetter.Semantics.Independent
-
-/-!
-## Intrinsic cut realization
-
-The witness below is primitive topology vocabulary: it means that regluing
-the displayed intrinsic oriented ribbon tangle along its input/output
-boundary recovers the exact original Kirby ribbon graph at the selected
-dotted handle.  It carries no category, colouring, character, exponent,
-morphism, or evaluation equality.
--/
-
-axiom IntrinsicDottedCutRegluingWitness
-    (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord dotted role)) : Type
-
-abbrev IntrinsicDottedCutRegluesToDiagram
-    (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord dotted role)) : Prop :=
-  Nonempty (IntrinsicDottedCutRegluingWitness
-    diagram presentation dotted role cut)
-
-/--
-Every literal dotted handle admits an intrinsic oriented cut-tangle
-realization whose regluing is the original Kirby diagram.
-
-This is the sole new external topology assertion for the intrinsic route.
-It does not assert any categorical or numerical equality.
--/
-axiom standardIntrinsicDottedCutRealization
-    (diagram : SpecialKirbyDiagram)
-    (presentation : DottedCutPresentation diagram)
-    (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted) :
-    ∃ cut : IntrinsicDottedCutTangle diagram
-        (presentation.cut.punctureWord dotted role),
-      IntrinsicDottedCutRegluesToDiagram
-        diagram presentation dotted role cut
 
 /--
 In the simultaneous cut-open diagram:

@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.IntrinsicDottedCut
+import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
 
 /-!
 # Independent semantics: visible THAM-side marking coordinates
@@ -35,7 +35,7 @@ open scoped BigOperators
 
 noncomputable section
 
-abbrev intrinsicDottedCutBoundaryCoefficient :=
+abbrev dottedBoundaryCoefficient :=
   @dottedCutBoundaryCoefficient
 
 /-!
@@ -54,13 +54,13 @@ def twoOneIncidence
     (fun coordinate => if coordinate = two then 1 else 0) one
 
 /-- The public incidence entry is exactly the aggregate boundary coefficient. -/
-theorem twoOneIncidence_eq_intrinsicDottedCutBoundaryCoefficient
+theorem twoOneIncidence_eq_dottedBoundaryCoefficient
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
     (one : Fin diagram.handles.hOne)
     (two : Fin diagram.handles.hTwo) :
     twoOneIncidence diagram one two =
-      intrinsicDottedCutBoundaryCoefficient
+      dottedBoundaryCoefficient
         (presentation.cut.punctureWord
           (diagram.handles.oneHandleIndex one).1
           (diagram.handles.oneHandleIndex one).2)

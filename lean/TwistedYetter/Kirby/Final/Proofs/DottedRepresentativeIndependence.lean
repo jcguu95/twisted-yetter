@@ -1,8 +1,8 @@
-import TwistedYetter.Kirby.Final.Proofs.IntrinsicDottedBoundaryFactor
+import TwistedYetter.Kirby.Final.Proofs.DottedBoundaryFactor
 import TwistedYetter.Kirby.Final.Semantics.Independent.EntranceAxioms
 
 /-!
-# Representative independence through intrinsic dotted cuts
+# Representative independence through dotted-collar normal forms
 
 This is the corrected route.  Component colours, internal graphical
 forward/dual polarity, and dotted-cut input/output incidence are never
@@ -23,36 +23,33 @@ noncomputable section
 variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /--
-One topologically realized intrinsic cut exhibits the actual compiled closed
-graph as a linear exterior context applied to the interpreted cut morphism.
+The standard dotted-collar normal form exhibits the actual compiled closed
+graph as a linear exterior context applied to an exact incidence morphism.
 -/
-theorem canonicalEvaluation_factorizes_through_intrinsicDottedCut
+theorem canonicalEvaluation_factorizes_through_dottedCollarNormalForm
     (𝒞 : BundledPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (dotted : diagram.trace.ComponentId)
-    (role : (diagram.trace.components dotted).role = .dotted)
-    (cut : IntrinsicDottedCutTangle diagram
-      (presentation.cut.punctureWord dotted role))
-    (regluing :
-      IntrinsicDottedCutRegluesToDiagram
-        diagram presentation dotted role cut) :
-    ∃ exterior :
+    (role : (diagram.trace.components dotted).role = .dotted) :
+    ∃ (incidenceMorphism : DottedIncidenceMorphism 𝒞 diagram labeling
+          (presentation.cut.punctureWord dotted role))
+      (exterior :
         (simpleLabelWordObject 𝒞
               (dottedInboundLabelWord 𝒞 diagram labeling
                 (presentation.cut.punctureWord dotted role)) ⟶
           simpleLabelWordObject 𝒞
               (dottedOutboundLabelWord 𝒞 diagram labeling
-                (presentation.cut.punctureWord dotted role))) →ₗ[K] K,
+                (presentation.cut.punctureWord dotted role))) →ₗ[K] K),
       canonicalRibbonGraphicalEvaluation 𝒞
           (.morphism
             (compileCutOpenExteriorMorphism
               𝒞 diagram presentation labeling)) =
-        exterior (intrinsicDottedCutMorphism 𝒞 diagram labeling cut) := by
-  obtain ⟨context, isotopy⟩ :=
-    intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation
-      𝒞 diagram presentation labeling dotted role cut regluing
+        exterior incidenceMorphism := by
+  obtain ⟨incidenceMorphism, context, isotopy⟩ :=
+    standardDottedCollarIncidenceNormalForm
+      𝒞 diagram presentation labeling dotted role
   let exterior :
       (simpleLabelWordObject 𝒞
             (dottedInboundLabelWord 𝒞 diagram labeling
@@ -62,21 +59,21 @@ theorem canonicalEvaluation_factorizes_through_intrinsicDottedCut
               (presentation.cut.punctureWord dotted role))) →ₗ[K] K :=
     𝒞.unitEndLinearEquiv.symm.toLinearMap.comp
       context.interpretLinearMap
-  refine ⟨exterior, ?_⟩
+  refine ⟨incidenceMorphism, exterior, ?_⟩
   have interpreted := shum_framedRibbonCoherence isotopy
   have plugged := context.plug_interpret
-    (intrinsicDottedCutMorphism 𝒞 diagram labeling cut)
+    incidenceMorphism
   have graph_eq_context :
       compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling =
         context.interpretLinearMap
-          (intrinsicDottedCutMorphism 𝒞 diagram labeling cut) :=
+          incidenceMorphism :=
     interpreted.symm.trans plugged
   change
     𝒞.closedScalar
         (compileCutOpenExteriorMorphism 𝒞 diagram presentation labeling) =
       𝒞.closedScalar
         (context.interpretLinearMap
-          (intrinsicDottedCutMorphism 𝒞 diagram labeling cut))
+          incidenceMorphism)
   exact congrArg 𝒞.closedScalar graph_eq_context
 
 /--
@@ -102,19 +99,16 @@ theorem twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
           (compileCutOpenExteriorMorphism
             𝒞η.category diagram presentation labeling)) := by
   let dotted := diagram.handles.oneHandleIndex one
-  obtain ⟨cut, regluing⟩ :=
-    standardIntrinsicDottedCutRealization
-      diagram presentation dotted.1 dotted.2
-  obtain ⟨exterior, factorization⟩ :=
-    canonicalEvaluation_factorizes_through_intrinsicDottedCut
+  obtain ⟨incidenceMorphism, exterior, factorization⟩ :=
+    canonicalEvaluation_factorizes_through_dottedCollarNormalForm
       𝒞η.category diagram presentation labeling
-        dotted.1 dotted.2 cut regluing
+        dotted.1 dotted.2
   rw [factorization]
   exact twoOneBoundaryCharacterFactor_absorbs_in_linearContext
-    𝒞η diagram presentation labeling one exponent cut exterior
+    𝒞η diagram presentation labeling one exponent incidenceMorphism exterior
 
 /-- The visible THAM coboundary is the incidence pairing with a one-cochain. -/
-theorem intrinsic_thamVisibleCoboundary_apply_eq_sum_incidence
+theorem thamVisibleCoboundary_apply_eq_sum_incidence
     (diagram : SpecialKirbyDiagram)
     (oneChain : HandleChainGroup diagram.handles.hOne)
     (two : Fin diagram.handles.hTwo) :
@@ -135,7 +129,7 @@ theorem intrinsic_thamVisibleCoboundary_apply_eq_sum_incidence
   rfl
 
 /-- Adding one visible THAM coboundary multiplies the character weight by its factor. -/
-theorem intrinsic_characterWeight_add_thamVisibleCoboundary
+theorem dotted_characterWeight_add_thamVisibleCoboundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
@@ -159,7 +153,7 @@ theorem intrinsic_characterWeight_add_thamVisibleCoboundary
             thamVisibleCoboundary diagram oneChain two : Kˣ) : K)
   simp only [zpow_add, Finset.prod_mul_distrib, Units.val_mul]
 
-private theorem intrinsic_finset_prod_zpow_eq_zpow_sum
+private theorem dotted_finset_prod_zpow_eq_zpow_sum
     {G : Type*} [CommGroup G]
     {ι : Type*}
     (items : Finset ι)
@@ -200,10 +194,10 @@ theorem thamBoundaryCharacterProduct_eq_twoOneProduct
               (twoOneIncidence diagram one two * oneChain one) := by
     apply Finset.prod_congr rfl
     intro two _
-    rw [intrinsic_thamVisibleCoboundary_apply_eq_sum_incidence
+    rw [thamVisibleCoboundary_apply_eq_sum_incidence
       diagram oneChain two]
     exact
-      (intrinsic_finset_prod_zpow_eq_zpow_sum
+      (dotted_finset_prod_zpow_eq_zpow_sum
         (Finset.univ : Finset (Fin diagram.handles.hOne))
         (𝒞η.character.value (labeling two))
         (fun one =>
@@ -218,7 +212,7 @@ theorem thamBoundaryCharacterProduct_eq_twoOneProduct
             (twoOneIncidence diagram one two * oneChain one))
       Finset.univ
 
-private theorem intrinsic_finset_prod_mul_eq_of_each_mul_eq
+private theorem dotted_finset_prod_mul_eq_of_each_mul_eq
     {ι M : Type*} [CommMonoid M]
     (items : Finset ι)
     (factor : ι → M)
@@ -254,14 +248,14 @@ theorem twoOneBoundaryCharacterProduct_absorbs_canonicalEvaluation
         (.morphism
           (compileCutOpenExteriorMorphism
             𝒞η.category diagram presentation labeling)) := by
-  apply intrinsic_finset_prod_mul_eq_of_each_mul_eq
+  apply dotted_finset_prod_mul_eq_of_each_mul_eq
     (Finset.univ : Finset (Fin diagram.handles.hOne))
   intro one _
   exact twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation
     𝒞η diagram presentation labeling one (oneChain one)
 
 /-- Fixed-label evaluation is unchanged after adding a visible coboundary. -/
-theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
+theorem dotted_characterWeight_mul_canonicalEvaluation_add_boundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
@@ -292,7 +286,7 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
     _ =
         (characterWeight 𝒞η labeling coefficients *
           boundaryFactor) * graphicalValue := by
-      rw [intrinsic_characterWeight_add_thamVisibleCoboundary
+      rw [dotted_characterWeight_add_thamVisibleCoboundary
         𝒞η diagram labeling coefficients oneChain]
     _ =
         characterWeight 𝒞η labeling coefficients *
@@ -314,7 +308,7 @@ theorem intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
         𝒞η diagram presentation labeling oneChain]
 
 /-- The complete evaluator is unchanged by one visible coboundary. -/
-theorem intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
+theorem dotted_evaluateCoefficients_add_thamVisibleCoboundary
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram)
@@ -346,7 +340,7 @@ theorem intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
         (characterWeight 𝒞η labeling coefficients * graphicalValue) := by
-      rw [intrinsic_characterWeight_mul_canonicalEvaluation_add_boundary
+      rw [dotted_characterWeight_mul_canonicalEvaluation_add_boundary
         𝒞η diagram presentation labeling coefficients oneChain]
     _ =
       ordinaryKirbyWeight 𝒞η.category labeling *
@@ -357,7 +351,7 @@ theorem intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
 The corrected frozen role-aware evaluator depends only on the visible ambient
 THAM marking class.
 -/
-theorem intrinsicFrozenFrontendRepresentativeIndependence
+theorem dottedFrozenFrontendRepresentativeIndependence
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (presentation : DottedCutPresentation diagram) :
@@ -375,7 +369,7 @@ theorem intrinsicFrozenFrontendRepresentativeIndependence
   obtain ⟨oneChain, oneChain_eq⟩ := boundary_mem
   subst boundary
   rw [← left_add_boundary_eq]
-  exact (intrinsic_evaluateCoefficients_add_thamVisibleCoboundary
+  exact (dotted_evaluateCoefficients_add_thamVisibleCoboundary
     𝒞η diagram presentation left oneChain).symm
 
 end

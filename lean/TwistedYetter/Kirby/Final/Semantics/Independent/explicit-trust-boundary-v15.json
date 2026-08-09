@@ -1,0 +1,125 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/15",
+  "recorded_at_utc": "2026-08-09T04:01:23Z",
+  "supersedes": "explicit-trust-boundary-v14.json",
+  "status": "KERNEL_CLOSURE_VERIFIED_RED_TEAM_HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "scope": "Replace the intrinsic dotted-cut witness route by one explicit dotted-collar incidence normal-form boundary and rebuild representative independence",
+  "baseline_git_commit": "dba73d53c11559cdfd276b024e9618a93602c1e4",
+  "recorded_from_dirty_worktree": true,
+  "whole_repository_explicit_axiom_count": 82,
+  "independent_mainline_explicit_axiom_count": 20,
+  "previous_independent_mainline_explicit_axiom_count": 22,
+  "removed_explicit_axioms": [
+    "IntrinsicDottedCutRegluingWitness",
+    "standardIntrinsicDottedCutRealization",
+    "intrinsicDottedCutRegluing_hasTypedGraphicalInterpretation"
+  ],
+  "added_explicit_axioms": [
+    "standardDottedCollarIncidenceNormalForm"
+  ],
+  "added_axiom_human_statement": "For each selected dotted component, cutting a standard collar exposes a finite inbound-to-outbound incidence morphism inside one unchanged linear exterior context, and plugging that morphism back is framed-ribbon isotopic to the exact compiled closed graph.",
+  "axiom_exclusions": [
+    "No character or homology exponent occurs in the dotted-collar normal-form axiom.",
+    "No projector formula, scalar evaluation equality, or representative-independence conclusion occurs in the axiom.",
+    "Puncture direction chooses only the input or output side of the incidence morphism.",
+    "Physical strand orientation alone chooses X versus X-star."
+  ],
+  "removed_active_modules": [
+    "Semantics/Independent/IntrinsicDottedCut.lean",
+    "Semantics/Independent/IntrinsicDottedCutGraphical.lean",
+    "Proofs/IntrinsicDottedCutInterpretation.lean",
+    "Proofs/IntrinsicDottedBoundaryFactor.lean",
+    "Proofs/IntrinsicRepresentativeIndependence.lean"
+  ],
+  "replacement_theorem_chain": [
+    "dottedBoundaryCharacterRatio_eq_incidenceProduct",
+    "twoOneBoundaryCharacterFactor_absorbs_incidenceMorphism",
+    "canonicalEvaluation_factorizes_through_dottedCollarNormalForm",
+    "twoOneBoundaryCharacterFactor_absorbs_canonicalEvaluation",
+    "thamBoundaryCharacterProduct_eq_twoOneProduct",
+    "dotted_evaluateCoefficients_add_thamVisibleCoboundary",
+    "dottedFrozenFrontendRepresentativeIndependence",
+    "frozenFrontendRepresentativeIndependence"
+  ],
+  "final_theorem": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+  "final_theorem_project_axiom_count": 20,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 23,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "OrientedDiffeomorphism",
+    "PresentsClosedFourManifold",
+    "RepresentsPoincareDualClass",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "eno_globalDimension_ne_zero",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "markedKirbyCerf_complete",
+    "shum_framedRibbonCoherence",
+    "specialKirbyRepresentative_exists",
+    "standardDottedCollarIncidenceNormalForm",
+    "standardDottedProjectorEventCompleteness",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "verification": {
+    "full_build_command": "env LAKE_JOBS=1 lake build",
+    "full_build_started_at": "2026-08-09T04:02:45Z",
+    "full_build_finished_at": "2026-08-09T04:40:07Z",
+    "full_build": "PASS_8317_JOBS_SINGLE_WORKER",
+    "final_axiom_audit_command": "env LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.FinalAxiomAudit",
+    "final_theorem_kernel_axiom_audit": "PASS_NO_SORRYAX",
+    "forbidden_declarations": {
+      "sorry": 0,
+      "admit": 0,
+      "opaque": 0,
+      "sorryAx": 0
+    },
+    "source_red_team_command": "python3 /Users/jin/.codex/skills/lean-red-team-audit/scripts/source_audit.py /Users/jin/.codex/worktrees/4e82/twisted-yetter --output-json /tmp/twisted-yetter-red-team.json --output-markdown /tmp/twisted-yetter-red-team.zh-TW.md",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_timestamp_utc": "2026-08-09T04:01:23.336026Z",
+    "source_tree_sha256": "43554153cdb1442974fbd3a8f49921cf055a54c2c341f8d15d6a52acb8aab10c",
+    "source_red_team_counts": {
+      "Classical.choice": 16,
+      "axiom": 82,
+      "class": 6,
+      "likely_proof_field": 63,
+      "suspicious_declaration": 1
+    },
+    "sole_suspicious_declaration": "TwistedYetter.StableNoGo.MarkedStableRealization",
+    "red_team_json_sha256": "9c2119775b6dfc9ec54014bde90a9ca6247439d6c4dfeb6326609f7f2e5f55ba"
+  },
+  "source_hashes_sha256": {
+    "Semantics/Independent/Entry.lean": "2c6cc015ec8ddfa7ff5494068373feccbd1730771888f98a7c58d00ad0f3b124",
+    "Semantics/Independent/EntranceAxioms.lean": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb",
+    "Semantics/Independent/DottedTopologyAxioms.lean": "fd379e70c10c6ed8b804ae4a8a7fb684716d6e55acd9cb8754a1d8d4981bccac",
+    "Semantics/Independent/DiagramLabeling.lean": "40acb940a662746b0fadf9d59b53ed2a32a9e83ec2ffc4641212dbfdacdf604f",
+    "Semantics/Independent/Homology.lean": "f97de68ef268abff0e375033926ac9f275b063dc6c20c385c3bfaddb9d28f446",
+    "Proofs/DottedIncidenceNaturality.lean": "e9f7ea78f6df850a2a84d8c73db15751228fddad3e39860e542428c56cea278c",
+    "Proofs/DottedBoundaryFactor.lean": "42c3d19ff82063980cf48d68c3bb0fc98117232123dd6ddc54852d80c8a3c0df",
+    "Proofs/DottedRepresentativeIndependence.lean": "6475b1585e77ad7b3eca3e98250b2db79ce783681cd341f7c02de2f241eed6b8",
+    "Proofs/RepresentativeIndependence.lean": "aea923b36a3bc4c2a641059303f61c8a6c35e5b01b0caac5ef5dd08fa2c9cbf9"
+  },
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 build 24G325 arm64"
+  },
+  "non_claims": [
+    "Kernel compilation does not by itself certify that the human semantics of every retained axiom or proof field is correct.",
+    "The source red-team scan remains conservative and requires human review.",
+    "The new dotted-collar normal-form topology axiom is retained and has not been proved from embedded-disk topology inside Lean.",
+    "Historical intrinsic checkpoint JSON files remain historical records and are not current source dependencies."
+  ]
+}

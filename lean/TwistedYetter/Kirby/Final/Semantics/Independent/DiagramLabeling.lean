@@ -41,6 +41,30 @@ direction only partitions occurrences into domain and codomain; it never
 chooses a dual object and never creates a character exponent.
 -/
 
+/-- The ordinary two-handle index named by one dotted puncture. -/
+def dottedPunctureTwoHandleIndex
+    (diagram : SpecialKirbyDiagram)
+    (puncture : DottedPuncture diagram.trace) :
+    Fin diagram.handles.hTwo :=
+  diagram.handles.twoHandleIndex.symm
+    ⟨puncture.twoHandleComponent, puncture.two_handle_role⟩
+
+/-- Inbound punctures, expressed in the ordinary two-handle basis. -/
+def dottedInboundTwoHandleWord
+    (diagram : SpecialKirbyDiagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    List (Fin diagram.handles.hTwo) :=
+  (dottedInboundPunctures punctures).map
+    (dottedPunctureTwoHandleIndex diagram)
+
+/-- Outbound punctures, expressed in the ordinary two-handle basis. -/
+def dottedOutboundTwoHandleWord
+    (diagram : SpecialKirbyDiagram)
+    (punctures : List (DottedPuncture diagram.trace)) :
+    List (Fin diagram.handles.hTwo) :=
+  (dottedOutboundPunctures punctures).map
+    (dottedPunctureTwoHandleIndex diagram)
+
 def dottedIncidenceLabel
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞 : BundledPremodularCategory K)
@@ -48,9 +72,7 @@ def dottedIncidenceLabel
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (puncture : DottedPuncture diagram.trace) :
     𝒞.simples.Simple :=
-  labeling
-    (diagram.handles.twoHandleIndex.symm
-      ⟨puncture.twoHandleComponent, puncture.two_handle_role⟩)
+  labeling (dottedPunctureTwoHandleIndex diagram puncture)
 
 def dottedInboundLabelWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -59,8 +81,7 @@ def dottedInboundLabelWord
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List 𝒞.simples.Simple :=
-  (dottedInboundPunctures punctures).map
-    (dottedIncidenceLabel 𝒞 diagram labeling)
+  (dottedInboundTwoHandleWord diagram punctures).map labeling
 
 def dottedOutboundLabelWord
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -69,8 +90,7 @@ def dottedOutboundLabelWord
     (labeling : TwoHandleLabeling 𝒞 diagram)
     (punctures : List (DottedPuncture diagram.trace)) :
     List 𝒞.simples.Simple :=
-  (dottedOutboundPunctures punctures).map
-    (dottedIncidenceLabel 𝒞 diagram labeling)
+  (dottedOutboundTwoHandleWord diagram punctures).map labeling
 
 /-- Tensor product of component labels without reading strand orientation. -/
 def simpleLabelWordObject
