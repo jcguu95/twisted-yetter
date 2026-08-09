@@ -1,4 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Evaluator
+import TwistedYetter.Kirby.Final.Semantics.Independent.DiagramLabeling
 
 /-!
 # Independent semantics: graphical interpretation of intrinsic dotted cuts

@@ -1,5 +1,4 @@
-import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical
-import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
+import TwistedYetter.Kirby.Final.Semantics.Independent.DiagramLabeling
 import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 
 /-!
@@ -30,19 +29,6 @@ open CategoryTheory.MonoidalCategory
 universe uK uC uS v
 
 noncomputable section
-
-abbrev TwoHandleLabeling
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram) :=
-  Fin diagram.handles.hTwo → 𝒞.simples.Simple
-
-instance
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram) :
-    Fintype (TwoHandleLabeling 𝒞 diagram) :=
-  inferInstance
 
 def ordinaryKirbyWeight
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
@@ -118,76 +104,6 @@ def exteriorWord
     (strands : List diagram.trace.StrandId) :
     RibbonWord 𝒞 :=
   strands.map (orientedExteriorStrand 𝒞 diagram labeling)
-
-/-!
-## Dotted-handle incidence words
-
-These words are the domain and codomain of the local morphism used in the
-homology representative-independence argument.  They are intentionally not
-the oriented strand word at the projector waist.
-
-Each factor reads the simple label assigned once to its ordinary two-handle
-component.  Puncture direction only decides whether the occurrence belongs
-to the domain or codomain; it never chooses a dual object and never creates a
-character exponent.
--/
-
-def dottedIncidenceLabel
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞 diagram)
-    (puncture : DottedPuncture diagram.trace) :
-    𝒞.simples.Simple :=
-  labeling
-    (diagram.handles.twoHandleIndex.symm
-      ⟨puncture.twoHandleComponent, puncture.two_handle_role⟩)
-
-def dottedInboundLabelWord
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞 diagram)
-    (punctures : List (DottedPuncture diagram.trace)) :
-    List 𝒞.simples.Simple :=
-  (dottedInboundPunctures punctures).map
-    (dottedIncidenceLabel 𝒞 diagram labeling)
-
-def dottedOutboundLabelWord
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞 diagram)
-    (punctures : List (DottedPuncture diagram.trace)) :
-    List 𝒞.simples.Simple :=
-  (dottedOutboundPunctures punctures).map
-    (dottedIncidenceLabel 𝒞 diagram labeling)
-
-/-- Tensor product of component labels without reading strand orientation. -/
-def simpleLabelWordObject
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K) :
-    List 𝒞.simples.Simple → 𝒞.C
-  | [] => 𝟙_ 𝒞.C
-  | label :: rest =>
-      𝒞.simples.simpleObject label ⊗ simpleLabelWordObject 𝒞 rest
-
-/--
-The exact type of the local dotted-handle morphism required by the corrected
-representative-independence proof.  This is only a type, not an assumed
-morphism and not an evaluation equality.  `intrinsicDottedCutMorphism`
-constructs a term of this type from the independent intrinsic ribbon grammar.
--/
-def DottedIncidenceMorphism
-    {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
-    (𝒞 : BundledPremodularCategory K)
-    (diagram : SpecialKirbyDiagram)
-    (labeling : TwoHandleLabeling 𝒞 diagram)
-    (punctures : List (DottedPuncture diagram.trace)) : Type _ :=
-  simpleLabelWordObject 𝒞
-      (dottedInboundLabelWord 𝒞 diagram labeling punctures) ⟶
-    simpleLabelWordObject 𝒞
-      (dottedOutboundLabelWord 𝒞 diagram labeling punctures)
 
 /--
 The object at one all-strand projector-waist port.  Both its label and its
