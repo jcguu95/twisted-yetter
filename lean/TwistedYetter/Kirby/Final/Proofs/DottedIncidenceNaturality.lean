@@ -32,8 +32,13 @@ theorem dottedIncidenceMorphism_character_naturality
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
     (punctures : List (DottedPuncture diagram.trace))
-    (T : DottedIncidenceMorphism
-      𝒞η.category diagram labeling punctures)
+    (T :
+      simpleLabelWordObject 𝒞η.category
+            (dottedInboundLabelWord
+              𝒞η.category diagram labeling punctures) ⟶
+        simpleLabelWordObject 𝒞η.category
+            (dottedOutboundLabelWord
+              𝒞η.category diagram labeling punctures))
     (exponent : ℤ) :
     isoIntPowerHom
           (𝒞η.character.iso.app
@@ -234,16 +239,23 @@ theorem characterCoupon_on_componentWord
       rfl
 
 /--
-The output-to-input character ratio of one intrinsic dotted cut acts
-trivially on its interpreted morphism.  This is the local categorical core
-of representative independence.
+The output-to-input character ratio of one dotted incidence boundary acts
+trivially on every morphism with that exact boundary.  This is the local
+categorical core of representative independence; no particular graphical
+syntax is used.
 -/
-theorem intrinsicDottedCut_boundaryRatio_absorbs
+theorem dottedIncidenceMorphism_boundaryRatio_absorbs
     (𝒞η : TwistedPremodularCategory K)
     (diagram : SpecialKirbyDiagram)
     (labeling : TwoHandleLabeling 𝒞η.category diagram)
-    {punctures : List (DottedPuncture diagram.trace)}
-    (cut : IntrinsicDottedCutTangle diagram punctures)
+    (punctures : List (DottedPuncture diagram.trace))
+    (T :
+      simpleLabelWordObject 𝒞η.category
+            (dottedInboundLabelWord
+              𝒞η.category diagram labeling punctures) ⟶
+        simpleLabelWordObject 𝒞η.category
+            (dottedOutboundLabelWord
+              𝒞η.category diagram labeling punctures))
     (exponent : ℤ) :
     let inputFactor := componentWordCharacterUnit 𝒞η
       (dottedInboundLabelWord 𝒞η.category diagram labeling punctures)
@@ -251,33 +263,8 @@ theorem intrinsicDottedCut_boundaryRatio_absorbs
     let outputFactor := componentWordCharacterUnit 𝒞η
       (dottedOutboundLabelWord 𝒞η.category diagram labeling punctures)
       exponent
-    let T :
-        simpleLabelWordObject 𝒞η.category
-              (dottedInboundLabelWord
-                𝒞η.category diagram labeling punctures) ⟶
-          simpleLabelWordObject 𝒞η.category
-              (dottedOutboundLabelWord
-                𝒞η.category diagram labeling punctures) :=
-      intrinsicDottedCutMorphism
-        𝒞η.category diagram labeling cut
     (((outputFactor * inputFactor⁻¹ : Kˣ) : K) • T) = T := by
   dsimp only
-  let T :
-      simpleLabelWordObject 𝒞η.category
-            (dottedInboundLabelWord
-              𝒞η.category diagram labeling punctures) ⟶
-        simpleLabelWordObject 𝒞η.category
-            (dottedOutboundLabelWord
-              𝒞η.category diagram labeling punctures) :=
-    intrinsicDottedCutMorphism
-      𝒞η.category diagram labeling cut
-  change
-    ((↑(componentWordCharacterUnit 𝒞η
-        (dottedOutboundLabelWord
-          𝒞η.category diagram labeling punctures) exponent *
-      (componentWordCharacterUnit 𝒞η
-        (dottedInboundLabelWord
-          𝒞η.category diagram labeling punctures) exponent)⁻¹) : K) • T) = T
   have naturality :
       isoIntPowerHom
             (𝒞η.character.iso.app
@@ -291,8 +278,8 @@ theorem intrinsicDottedCut_boundaryRatio_absorbs
               (dottedOutboundLabelWord
                 𝒞η.category diagram labeling punctures)))
           exponent :=
-    intrinsicDottedCut_character_naturality
-      𝒞η diagram labeling cut exponent
+    dottedIncidenceMorphism_character_naturality
+      𝒞η diagram labeling punctures T exponent
   have scalarNaturality :
       ((componentWordCharacterUnit 𝒞η
           (dottedInboundLabelWord
@@ -341,6 +328,39 @@ theorem intrinsicDottedCut_boundaryRatio_absorbs
   rw [← scalarNaturality]
   rw [← mul_smul]
   simp
+
+/--
+The preceding syntax-free theorem specializes to the morphism interpreted
+from an intrinsic dotted cut tangle.
+-/
+theorem intrinsicDottedCut_boundaryRatio_absorbs
+    (𝒞η : TwistedPremodularCategory K)
+    (diagram : SpecialKirbyDiagram)
+    (labeling : TwoHandleLabeling 𝒞η.category diagram)
+    {punctures : List (DottedPuncture diagram.trace)}
+    (cut : IntrinsicDottedCutTangle diagram punctures)
+    (exponent : ℤ) :
+    let inputFactor := componentWordCharacterUnit 𝒞η
+      (dottedInboundLabelWord 𝒞η.category diagram labeling punctures)
+      exponent
+    let outputFactor := componentWordCharacterUnit 𝒞η
+      (dottedOutboundLabelWord 𝒞η.category diagram labeling punctures)
+      exponent
+    let T :
+        simpleLabelWordObject 𝒞η.category
+              (dottedInboundLabelWord
+                𝒞η.category diagram labeling punctures) ⟶
+          simpleLabelWordObject 𝒞η.category
+              (dottedOutboundLabelWord
+                𝒞η.category diagram labeling punctures) :=
+      intrinsicDottedCutMorphism
+        𝒞η.category diagram labeling cut
+    (((outputFactor * inputFactor⁻¹ : Kˣ) : K) • T) = T := by
+  exact dottedIncidenceMorphism_boundaryRatio_absorbs
+    𝒞η diagram labeling punctures
+      (intrinsicDottedCutMorphism
+        𝒞η.category diagram labeling cut)
+      exponent
 
 end
 
