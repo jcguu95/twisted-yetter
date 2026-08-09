@@ -25,6 +25,20 @@ inductive ElementaryMoveKind
   | twoThreeDeath
   deriving DecidableEq, Repr
 
+/-- The four cancellation events, excluding slides and framed isotopy by type. -/
+inductive CancellationKind
+  | oneTwoBirth
+  | oneTwoDeath
+  | twoThreeBirth
+  | twoThreeDeath
+  deriving DecidableEq, Repr
+
+def CancellationKind.toElementaryMoveKind : CancellationKind → ElementaryMoveKind
+  | .oneTwoBirth => .oneTwoBirth
+  | .oneTwoDeath => .oneTwoDeath
+  | .twoThreeBirth => .twoThreeBirth
+  | .twoThreeDeath => .twoThreeDeath
+
 inductive BandOrientation
   | positive
   | negative
@@ -154,13 +168,23 @@ def CancellationHandleCountChangeIsStandard
 
 structure CancellationScript
     (source target : SpecialKirbyDiagram) where
-  kind :
-    ElementaryMoveKind
-  kind_is_cancellation :
-    kind = .oneTwoBirth ∨ kind = .oneTwoDeath ∨
-    kind = .twoThreeBirth ∨ kind = .twoThreeDeath
+  cancellationKind : CancellationKind
   handleCountChangeIsStandard :
-    CancellationHandleCountChangeIsStandard source target kind
+    CancellationHandleCountChangeIsStandard source target
+      cancellationKind.toElementaryMoveKind
+
+def CancellationScript.kind
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target) : ElementaryMoveKind :=
+  script.cancellationKind.toElementaryMoveKind
+
+theorem CancellationScript.kind_is_cancellation
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target) :
+    script.kind = .oneTwoBirth ∨ script.kind = .oneTwoDeath ∨
+      script.kind = .twoThreeBirth ∨ script.kind = .twoThreeDeath := by
+  cases script.cancellationKind <;> simp [CancellationScript.kind,
+    CancellationKind.toElementaryMoveKind]
 
 /--
 The exact transport visible to the evaluator.
