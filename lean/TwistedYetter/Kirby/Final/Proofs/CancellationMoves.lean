@@ -458,8 +458,7 @@ theorem oneTwoBirth_preserves_evaluation
       evaluateCoefficients 𝒞η
         target.diagram target.cut
           (homology.tham.mapCoefficients sourceCycle) := by
-  have counts := script.handleCountChangeIsStandard
-  simp [CancellationHandleCountChangeIsStandard, kind] at counts
+  have counts := script.oneTwoBirth_handleCountChange kind
   unfold evaluateCoefficients
   rw [oneTwoBirth_rawCoefficientSum
     𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
@@ -494,8 +493,7 @@ theorem twoThreeBirth_preserves_evaluation
       evaluateCoefficients 𝒞η
         target.diagram target.cut
           (homology.tham.mapCoefficients sourceCycle) := by
-  have counts := script.handleCountChangeIsStandard
-  simp [CancellationHandleCountChangeIsStandard, kind] at counts
+  have counts := script.twoThreeBirth_handleCountChange kind
   unfold evaluateCoefficients
   rw [twoThreeBirth_rawCoefficientSum
     𝒞η script kind coordinates coordinateBinding normalForm sourceCycle]
@@ -972,8 +970,7 @@ theorem oneTwoDeath_preserves_evaluation
       evaluateCoefficients 𝒞η
         target.diagram target.cut
           (homology.tham.mapCoefficients sourceCycle) := by
-  have counts := script.handleCountChangeIsStandard
-  simp [CancellationHandleCountChangeIsStandard, kind] at counts
+  have counts := script.oneTwoDeath_handleCountChange kind
   calc
     evaluateCoefficients 𝒞η source.diagram source.cut sourceCycle =
       evaluateCoefficients 𝒞η source.diagram source.cut (coordinates.safeCoefficients sourceCycle) :=
@@ -1013,8 +1010,7 @@ theorem twoThreeDeath_preserves_evaluation
       evaluateCoefficients 𝒞η
         target.diagram target.cut
           (homology.tham.mapCoefficients sourceCycle) := by
-  have counts := script.handleCountChangeIsStandard
-  simp [CancellationHandleCountChangeIsStandard, kind] at counts
+  have counts := script.twoThreeDeath_handleCountChange kind
   calc
     evaluateCoefficients 𝒞η source.diagram source.cut sourceCycle =
       evaluateCoefficients 𝒞η source.diagram source.cut (coordinates.safeCoefficients sourceCycle) :=

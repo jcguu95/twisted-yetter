@@ -1,0 +1,82 @@
+{
+  "schema": "twisted-yetter/lean-redundancy-cleanup-checkpoint/1",
+  "recorded_at_utc": "2026-08-09T15:55:02Z",
+  "status": "FIRST_REDUNDANCY_REMOVED_BLOCKED_AT_SECOND_SEMANTIC_BOUNDARY",
+  "scope": "Remove the duplicated dotted puncture-word/projector-event completeness assumption without changing evaluator mathematics",
+  "baseline_git_commit": "437205c4bd79aef892d8d1ea926331efe2c01a85",
+  "baseline_worktree": "clean",
+  "recorded_from_dirty_worktree": true,
+  "completed_obligation": {
+    "former_axiom": "standardDottedProjectorEventCompleteness",
+    "current_declaration_kind": "theorem",
+    "construction": "The puncture word is read from the unique distinguished projector event instead of being supplied as a second independent table.",
+    "kernel_result": "PASS",
+    "final_theorem_axiom_closure": "former axiom absent"
+  },
+  "transparent_combinatorial_fields_introduced": [
+    "DottedCutData.projectorEventIndex",
+    "DottedCutData.projectorEvent_is_for",
+    "DottedCutData.everyProjectorEvent_is_indexed",
+    "DottedCutData.projectorPunctures_are_indexed"
+  ],
+  "field_scope": "Finite source-trace well-formedness only; no topology realization, category, character, evaluator, or scalar equality.",
+  "next_blocker": {
+    "name": "standardDottedCollarIncidenceNormalForm",
+    "classification": "BLOCKED_SEMANTIC_MISMATCH",
+    "reason": "The compiled cut boundary uses physical strand orientation to choose X versus X-star, while the incidence expression uses component labels. A collar-normalization topology witness using cups and caps is required; it is not derivable from the current arbitrary combinatorial presentation.",
+    "forbidden_shortcut": "Do not identify X with X-star, and do not let dotted-disk direction choose dualization."
+  },
+  "remaining_requested_declarations_unchanged": [
+    "standardDottedCollarIncidenceNormalForm",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation"
+  ],
+  "verification": {
+    "commands": [
+      "env LEAN_NUM_THREADS=1 lake build +TwistedYetter.StableNoGo.ProjectivePlaneEvaluation:olean",
+      "env LEAN_NUM_THREADS=1 lake build +TwistedYetter.StableNoGo.SphereTwoProductEvaluation:olean",
+      "env LEAN_NUM_THREADS=1 lake build +TwistedYetter.Kirby.Final.FinalAxiomAudit:olean",
+      "python3 scripts/source_audit.py /Users/jin/.codex/worktrees/4e82/twisted-yetter --output-json /tmp/twisted-yetter-redundancy-audit.json --output-markdown /tmp/twisted-yetter-redundancy-audit.zh-TW.md"
+    ],
+    "projective_plane_target": "PASS_8299_JOBS",
+    "sphere_two_product_target": "PASS_8295_JOBS",
+    "final_axiom_audit_target": "PASS_8289_JOBS",
+    "final_theorem_project_axiom_count": 19,
+    "final_theorem_standard_lean_axiom_count": 3,
+    "final_theorem_total_axiom_count": 22,
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_tree_sha256": "76e004ce748a5e587d804378beb31ca49ef96d784516e582eeb9aa173417a34b",
+    "source_red_team_counts": {
+      "Classical.choice": 16,
+      "axiom": 81,
+      "class": 6,
+      "likely_proof_field": 65,
+      "suspicious_declaration": 1
+    },
+    "red_team_json_sha256": "0de72b19f28de59b0c8db9c95387345ecd25e4da443e538b9f9bb324e82240b0",
+    "full_repository_build": "NOT_RUN"
+  },
+  "source_hashes_sha256": {
+    "Semantics/Independent/CutOpen.lean": "e73fd5ffd7a7b3fdf00fd6120ee8b37c4e07389350f715a2a3906f5f8f44cca0",
+    "Semantics/Independent/Entry.lean": "dfb5d9eb962edd8dfd150e72abb251184e8692065ccdf6f3a52f49e5d771985c",
+    "Semantics/Independent/Evaluator.lean": "995f359b7fc485162448bafd678a22d0ac3db50bc7cdee33a2e26ee3be9e7141",
+    "Semantics/Independent/Moves.lean": "6df0f24e7f631dd5acaf0cf58d31d29dd52b15574e2c5cccb5d13e570b472ce9",
+    "Proofs/CancellationMoves.lean": "fbea2133fecef2679c39319337626bd1f98eec2f1eae0f1cc44d2ab4f3dcf312",
+    "StableNoGo/ProjectivePlaneEvaluation.lean": "73bff633378acd59b6ccb6b3dea5281dd494f901f56946ec1612c901fb7a0d73",
+    "StableNoGo/SphereTwoProductEvaluation.lean": "e21e05ccd1b6182bf5b94de0d5df24506a18c947b94ae8af99a40ed6169f9bd1"
+  },
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.6",
+    "os": "macOS 15.7.2 build 24G325 arm64"
+  },
+  "non_claims": [
+    "The remaining five requested declarations have not been removed.",
+    "The source audit does not certify the human semantics of structure proof fields.",
+    "No full repository build was run for this checkpoint.",
+    "This artifact is repo-local and has not been admitted through CTL because the upstream CTL provider is unavailable."
+  ]
+}

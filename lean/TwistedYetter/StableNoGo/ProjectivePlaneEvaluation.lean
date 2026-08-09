@@ -249,11 +249,25 @@ private def oneFramedUnknotCutOpenExterior (sign : CrossingSign) :
 
 private def oneFramedUnknotDottedCutData (sign : CrossingSign) :
     DottedCutData (oneFramedUnknotTrace sign) where
-  punctureWord := by
+  exterior := oneFramedUnknotCutOpenExterior sign
+  projectorEventIndex := by
     intro dotted dottedRole
     exact False.elim
       (oneFramedUnknot_component_not_dotted sign dotted dottedRole)
-  exterior := oneFramedUnknotCutOpenExterior sign
+  projectorEvent_is_for := by
+    intro dotted dottedRole
+    exact False.elim
+      (oneFramedUnknot_component_not_dotted sign dotted dottedRole)
+  everyProjectorEvent_is_indexed := by
+    intro i dotted punctures event_eq
+    fin_cases i <;>
+      simp [oneFramedUnknotCutOpenExterior, oneFramedUnknotTrace,
+        oneFramedUnknotEvents,
+        oneFramedUnknotToCutOpenEvent] at event_eq
+  projectorPunctures_are_indexed := by
+    intro dotted dottedRole
+    exact False.elim
+      (oneFramedUnknot_component_not_dotted sign dotted dottedRole)
 
 /-- The unknot has no dotted component, so its cut-open trace is the same trace. -/
 def oneFramedUnknotCut (sign : CrossingSign) :
@@ -1093,8 +1107,11 @@ private def emptyCutOpenExterior : CutOpenExteriorTrace emptyKirbyTrace where
   activeStrandsAreTwoHandles := fun _ strand => Fin.elim0 strand
 
 private def emptyDottedCutData : DottedCutData emptyKirbyTrace where
-  punctureWord := fun dotted => Fin.elim0 dotted
   exterior := emptyCutOpenExterior
+  projectorEventIndex := fun dotted => Fin.elim0 dotted
+  projectorEvent_is_for := fun dotted => Fin.elim0 dotted
+  everyProjectorEvent_is_indexed := fun i => Fin.elim0 i
+  projectorPunctures_are_indexed := fun dotted => Fin.elim0 dotted
 
 /-- The empty diagram has the unique empty dotted-cut presentation. -/
 def emptyKirbyCut : DottedCutPresentation emptyKirbyDiagram where

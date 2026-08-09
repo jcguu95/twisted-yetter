@@ -403,10 +403,22 @@ private def positiveHopfCutOpenExterior :
 
 private def positiveHopfDottedCutData :
     DottedCutData positiveZeroFramedHopfTrace where
-  punctureWord := by
+  exterior := positiveHopfCutOpenExterior
+  projectorEventIndex := by
     intro dotted dottedRole
     exact False.elim (positiveHopf_component_not_dotted dotted dottedRole)
-  exterior := positiveHopfCutOpenExterior
+  projectorEvent_is_for := by
+    intro dotted dottedRole
+    exact False.elim (positiveHopf_component_not_dotted dotted dottedRole)
+  everyProjectorEvent_is_indexed := by
+    intro i dotted punctures event_eq
+    fin_cases i <;>
+      simp [positiveHopfCutOpenExterior, positiveZeroFramedHopfTrace,
+        positiveHopfEvents,
+        positiveHopfToCutOpenEvent] at event_eq
+  projectorPunctures_are_indexed := by
+    intro dotted dottedRole
+    exact False.elim (positiveHopf_component_not_dotted dotted dottedRole)
 
 /-- The standard Hopf diagram has no dotted components, so cutting changes nothing. -/
 def positiveZeroFramedHopfCut :

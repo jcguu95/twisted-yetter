@@ -1,7 +1,6 @@
 import TwistedYetter.CategoryTheory.Premodular.Bundled
 import TwistedYetter.Kirby.Final.Semantics.Independent.KirbyDiagram
 import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
-import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
 import TwistedYetter.Kirby.Final.Semantics.Independent.Homology
 import TwistedYetter.Kirby.Final.Semantics.Independent.Moves
 import TwistedYetter.Kirby.Final.Semantics.Independent.Graphical

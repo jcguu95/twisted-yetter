@@ -1,5 +1,5 @@
 import TwistedYetter.Kirby.Final.Semantics.Independent.DiagramLabeling
-import TwistedYetter.Kirby.Final.Semantics.Independent.DottedTopologyAxioms
+import TwistedYetter.Kirby.Final.Semantics.Independent.CutOpen
 
 /-!
 # Independent semantics: role-aware THAM-side evaluator

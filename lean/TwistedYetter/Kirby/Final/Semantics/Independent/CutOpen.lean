@@ -297,12 +297,73 @@ structure CutOpenExteriorTrace (trace : CombinatorialLinkTrace) where
       strand ∈ activeOrder i →
       (trace.components (trace.strands strand).component).role ≠ .dotted
 
+/-
+The cut-open trace is the unique source of puncture words.  In particular,
+`DottedCutData` does not store a second puncture-word table that could drift
+away from the projector events compiled by the evaluator.
+
+The remaining fields are transparent finite correctness conditions on that
+single trace.  They certify that every dotted component has one distinguished
+projector event, that no extra projector event exists, and that the punctures
+inside the distinguished event carry the expected dotted component and list
+position.  They contain no topology realization, category, character, or
+evaluation equality.
+-/
 structure DottedCutData (trace : CombinatorialLinkTrace) where
-  punctureWord :
+  exterior : CutOpenExteriorTrace trace
+  projectorEventIndex :
     (dotted : trace.ComponentId) →
       (trace.components dotted).role = .dotted →
-      List (DottedPuncture trace)
-  exterior : CutOpenExteriorTrace trace
+      Fin exterior.eventCount
+  projectorEvent_is_for :
+    ∀ (dotted : trace.ComponentId)
+      (role : (trace.components dotted).role = .dotted),
+      ∃ punctures : List (DottedPuncture trace),
+        exterior.events (projectorEventIndex dotted role) =
+          .projectorHole dotted punctures
+  everyProjectorEvent_is_indexed :
+    ∀ (i : Fin exterior.eventCount)
+      (dotted : trace.ComponentId)
+      (punctures : List (DottedPuncture trace)),
+      exterior.events i = .projectorHole dotted punctures →
+        ∃ role : (trace.components dotted).role = .dotted,
+          i = projectorEventIndex dotted role
+  projectorPunctures_are_indexed :
+    ∀ (dotted : trace.ComponentId)
+      (role : (trace.components dotted).role = .dotted)
+      (punctures : List (DottedPuncture trace)),
+      exterior.events (projectorEventIndex dotted role) =
+          .projectorHole dotted punctures →
+        ∀ index : Fin punctures.length,
+          let puncture := punctures.get index
+          puncture.dottedComponent = dotted ∧
+            puncture.cutPosition = index.1
+
+/--
+The ordered puncture word of a dotted component, read from its distinguished
+projector event.  This is a definition from the unique cut-open trace, not a
+second caller-supplied table.
+-/
+noncomputable def DottedCutData.punctureWord
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace)
+    (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted) :
+    List (DottedPuncture trace) :=
+  match cut.exterior.events (cut.projectorEventIndex dotted role) with
+  | .projectorHole _ punctures => punctures
+  | _ => []
+
+/-- The distinguished event contains the puncture word derived from it. -/
+theorem DottedCutData.projectorEvent_eq
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace)
+    (dotted : trace.ComponentId)
+    (role : (trace.components dotted).role = .dotted) :
+    cut.exterior.events (cut.projectorEventIndex dotted role) =
+      .projectorHole dotted (cut.punctureWord dotted role) := by
+  obtain ⟨punctures, event_eq⟩ := cut.projectorEvent_is_for dotted role
+  simpa [DottedCutData.punctureWord, event_eq] using event_eq
 
 /--
 The signed output-minus-input incidence of one ordinary component in one
@@ -416,6 +477,63 @@ def DottedCutData.ProjectorEventsExactlyMatchDottedComponents
     cut.EveryDottedComponentHasUniqueProjectorEvent ∧
       cut.EveryProjectorEventUsesExactPunctureWord
 
+/-- The derived puncture words carry their intrinsic dotted component and list order. -/
+theorem DottedCutData.punctureWordsRespectRecordedOrder
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.PunctureWordsRespectRecordedOrder := by
+  intro dotted role index
+  obtain ⟨punctures, event_eq⟩ := cut.projectorEvent_is_for dotted role
+  simpa [DottedCutData.punctureWord, event_eq] using
+    cut.projectorPunctures_are_indexed dotted role punctures event_eq
+      (Fin.cast (by simp [DottedCutData.punctureWord, event_eq]) index)
+
+/-- Every dotted component has exactly its distinguished projector event. -/
+theorem DottedCutData.everyDottedComponentHasUniqueProjectorEvent
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.EveryDottedComponentHasUniqueProjectorEvent := by
+  intro dotted role
+  refine ⟨cut.projectorEventIndex dotted role,
+    cut.projectorEvent_eq dotted role, ?_⟩
+  intro index event_eq
+  obtain ⟨otherRole, index_eq⟩ :=
+    cut.everyProjectorEvent_is_indexed index dotted
+      (cut.punctureWord dotted role) event_eq
+  calc
+    index = cut.projectorEventIndex dotted otherRole := index_eq
+    _ = cut.projectorEventIndex dotted role := by
+      rw [Subsingleton.elim otherRole role]
+
+/-- Every projector event is the distinguished event of its dotted component. -/
+theorem DottedCutData.everyProjectorEventUsesExactPunctureWord
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.EveryProjectorEventUsesExactPunctureWord := by
+  intro index dotted punctures event_eq
+  obtain ⟨role, index_eq⟩ :=
+    cut.everyProjectorEvent_is_indexed index dotted punctures event_eq
+  refine ⟨role, ?_⟩
+  have canonical := cut.projectorEvent_eq dotted role
+  rw [← index_eq] at canonical
+  have constructors_eq :
+      (.projectorHole dotted punctures : CutOpenEvent trace) =
+        .projectorHole dotted (cut.punctureWord dotted role) :=
+    event_eq.symm.trans canonical
+  injection constructors_eq
+
+/--
+Projector completeness is now a theorem of the single-source cut-open data;
+no external axiom synchronizes two independently supplied puncture tables.
+-/
+theorem DottedCutData.projectorEventsExactlyMatchDottedComponents
+    {trace : CombinatorialLinkTrace}
+    (cut : DottedCutData trace) :
+    cut.ProjectorEventsExactlyMatchDottedComponents :=
+  ⟨cut.punctureWordsRespectRecordedOrder,
+    cut.everyDottedComponentHasUniqueProjectorEvent,
+    cut.everyProjectorEventUsesExactPunctureWord⟩
+
 /-- The complete active-order transition derives ordered projector ports. -/
 theorem DottedCutData.projectorPortsOccurInRecordedOrder
     {trace : CombinatorialLinkTrace}
@@ -484,6 +602,13 @@ structure DottedCutPresentation (diagram : SpecialKirbyDiagram) where
             (diagram.handles.oneHandleIndex one).1
             (diagram.handles.oneHandleIndex one).2)
           (diagram.handles.twoHandleIndex two).1
+
+/-- Backwards-facing theorem name for the former external completeness axiom. -/
+theorem standardDottedProjectorEventCompleteness
+    (diagram : SpecialKirbyDiagram)
+    (presentation : DottedCutPresentation diagram) :
+    presentation.cut.ProjectorEventsExactlyMatchDottedComponents :=
+  presentation.cut.projectorEventsExactlyMatchDottedComponents
 
 end TwistedYetter.Semantics.Independent
 

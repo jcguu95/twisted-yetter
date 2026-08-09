@@ -183,8 +183,58 @@ theorem CancellationScript.kind_is_cancellation
     (script : CancellationScript source target) :
     script.kind = .oneTwoBirth ∨ script.kind = .oneTwoDeath ∨
       script.kind = .twoThreeBirth ∨ script.kind = .twoThreeDeath := by
-  cases script.cancellationKind <;> simp [CancellationScript.kind,
+  rcases script with ⟨kind, handleCountChangeIsStandard⟩
+  cases kind <;> simp [CancellationScript.kind,
     CancellationKind.toElementaryMoveKind]
+
+theorem CancellationScript.handleCountChange_of_kind
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target)
+    (moveKind : ElementaryMoveKind)
+    (kind : script.kind = moveKind) :
+    CancellationHandleCountChangeIsStandard source target moveKind := by
+  rw [← kind]
+  exact script.handleCountChangeIsStandard
+
+theorem CancellationScript.oneTwoBirth_handleCountChange
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target)
+    (kind : script.kind = .oneTwoBirth) :
+    target.handles.hOne = source.handles.hOne + 1 ∧
+      target.handles.hTwo = source.handles.hTwo + 1 ∧
+        target.handles.hThree = source.handles.hThree := by
+  simpa [CancellationHandleCountChangeIsStandard] using
+    script.handleCountChange_of_kind .oneTwoBirth kind
+
+theorem CancellationScript.oneTwoDeath_handleCountChange
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target)
+    (kind : script.kind = .oneTwoDeath) :
+    source.handles.hOne = target.handles.hOne + 1 ∧
+      source.handles.hTwo = target.handles.hTwo + 1 ∧
+        source.handles.hThree = target.handles.hThree := by
+  simpa [CancellationHandleCountChangeIsStandard] using
+    script.handleCountChange_of_kind .oneTwoDeath kind
+
+theorem CancellationScript.twoThreeBirth_handleCountChange
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target)
+    (kind : script.kind = .twoThreeBirth) :
+    target.handles.hOne = source.handles.hOne ∧
+      target.handles.hTwo = source.handles.hTwo + 1 ∧
+        target.handles.hThree = source.handles.hThree + 1 := by
+  simpa [CancellationHandleCountChangeIsStandard] using
+    script.handleCountChange_of_kind .twoThreeBirth kind
+
+theorem CancellationScript.twoThreeDeath_handleCountChange
+    {source target : SpecialKirbyDiagram}
+    (script : CancellationScript source target)
+    (kind : script.kind = .twoThreeDeath) :
+    source.handles.hOne = target.handles.hOne ∧
+      source.handles.hTwo = target.handles.hTwo + 1 ∧
+        source.handles.hThree = target.handles.hThree + 1 := by
+  simpa [CancellationHandleCountChangeIsStandard] using
+    script.handleCountChange_of_kind .twoThreeDeath kind
 
 /--
 The exact transport visible to the evaluator.
